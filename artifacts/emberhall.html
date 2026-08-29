@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Emberhall</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #1b1612;
+    --parchment: #efe4cf;
+    --gold: #c9a36a;
+    --rust: #b45a3c;
+    --moss: #4d5c38;
+    --muted: #9a8f7c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #120f0c; color: var(--parchment); font-family: "Source Serif 4", serif; overflow: hidden; }
+  canvas { display: block; width: 100%; height: 100%; cursor: crosshair; }
+  #hud { position: fixed; inset: 0; pointer-events: none; }
+  #hud .hit { pointer-events: auto; }
+  .panel {
+    background: rgba(22, 18, 14, 0.86);
+    border: 1px solid rgba(201, 163, 106, 0.28);
+    border-radius: 10px;
+    padding: 10px 12px;
+    backdrop-filter: blur(8px);
+  }
+  #you { position: absolute; top: 14px; left: 14px; width: 280px; }
+  #you h1 { font-family: Cinzel, serif; font-size: 17px; letter-spacing: .14em; color: var(--gold); }
+  #you .who { color: var(--muted); font-size: 12px; margin: 2px 0 8px; }
+  .bar { height: 8px; background: #2a241c; border-radius: 99px; overflow: hidden; margin: 3px 0 6px; }
+  .bar > i { display: block; height: 100%; }
+  .hp i { background: #a94a3a; width: 100%; }
+  .st i { background: #c9a36a; width: 100%; }
+  .hu i { background: #6a8a4a; width: 100%; }
+  .statrow { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+  #skills { margin-top: 8px; font-size: 12px; color: #d8cdb8; }
+  #skills div { display: flex; justify-content: space-between; }
+  #inv { position: absolute; top: 14px; right: 14px; width: 230px; }
+  #inv h2, #obj h2 { font-family: Cinzel, serif; font-size: 12px; letter-spacing: .12em; color: var(--gold); margin-bottom: 6px; }
+  .slot { font-size: 12px; color: #d8cdb8; padding: 2px 0; display: flex; justify-content: space-between; }
+  .slot.on { color: var(--gold); }
+  #obj { position: absolute; top: 270px; right: 14px; width: 230px; }
+  #obj li { list-style: none; font-size: 13px; color: var(--muted); margin: 4px 0; }
+  #obj li.done { color: #9aaa7a; text-decoration: line-through; }
+  #log {
+    position: absolute; bottom: 72px; left: 14px; width: min(380px, 46vw);
+    max-height: 150px; overflow: hidden; font-size: 12px; line-height: 1.45; color: var(--muted);
+  }
+  #dock { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
+  button {
+    font-family: Cinzel, serif; letter-spacing: .08em; pointer-events: auto;
+    background: #2c241c; color: var(--parchment); border: 1px solid #6a5644;
+    border-radius: 8px; padding: 9px 14px; cursor: pointer;
+  }
+  button:hover { border-color: var(--gold); background: #3a2e24; }
+  button.accent { background: var(--rust); border-color: #d07a5e; color: #fff8ee; }
+  #clock { position: absolute; bottom: 14px; right: 14px; font-variant-numeric: tabular-nums; font-size: 13px; color: var(--gold); }
+  #title {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    background: radial-gradient(ellipse at 50% 40%, #3a2a1c 0%, #120f0c 72%);
+    pointer-events: auto;
+  }
+  #title .card { width: min(560px, 92vw); text-align: center; padding: 40px 32px 30px; }
+  #title h1 { font-family: Cinzel, serif; font-size: 44px; letter-spacing: .18em; color: var(--gold); }
+  #title p { color: var(--muted); margin: 16px 0 24px; line-height: 1.6; }
+  #help {
+    display: none; position: absolute; inset: 0; place-items: center;
+    background: rgba(10,8,6,.72); pointer-events: auto;
+  }
+  #help.show { display: grid; }
+  #help .card { width: min(520px, 92vw); padding: 24px; }
+  #help h2 { font-family: Cinzel, serif; color: var(--gold); margin-bottom: 10px; }
+  #help p, #help li { color: #d8cdb8; font-size: 14px; line-height: 1.5; }
+  #help ul { margin: 8px 0 16px 18px; }
+  kbd { font-family: ui-monospace, monospace; font-size: 11px; border: 1px solid #6a5644; padding: 1px 5px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hud" hidden>
+  <div id="you" class="panel">
+    <h1>EMBERHALL</h1>
+    <div class="who"><span id="pname">Fen Moss</span> · <span id="noto">Innocent</span></div>
+    <div class="statrow"><span>Health</span><span id="hpv">40/40</span></div>
+    <div class="bar hp"><i id="hpi"></i></div>
+    <div class="statrow"><span>Stamina</span><span id="stv">40/40</span></div>
+    <div class="bar st"><i id="sti"></i></div>
+    <div class="statrow"><span>Hunger</span><span id="huv">full</span></div>
+    <div class="bar hu"><i id="hui"></i></div>
+    <div class="statrow"><span>Gold</span><b id="gold" style="color:var(--gold)">12</b></div>
+    <div id="skills"></div>
+  </div>
+  <div id="inv" class="panel">
+    <h2>Pack · click to wield</h2>
+    <div id="slots"></div>
+  </div>
+  <div id="obj" class="panel">
+    <h2>The vale</h2>
+    <ul>
+      <li id="g1">Take a tool from the hall chest</li>
+      <li id="g2">Cut timber in the north woods</li>
+      <li id="g3">Sell a load to Brann</li>
+      <li id="g4">Eat, or hunt a hare</li>
+      <li id="g5">Come home before the wolves</li>
+    </ul>
+  </div>
+  <div id="log" class="panel"></div>
+  <div id="dock">
+    <button id="btnBank" class="hit">Bank chest</button>
+    <button id="btnEat" class="hit">Eat</button>
+    <button id="btnHelp" class="hit">Guide</button>
+    <button id="btnSave" class="hit">Rest / save</button>
+  </div>
+  <div id="clock" class="panel">Day <b id="dayn">1</b> · <span id="tod">Morning</span></div>
+</div>
+<div id="title">
+  <div class="card panel">
+    <h1>EMBERHALL</h1>
+    <p>
+      You are a body in a vale that does not wait.
+      The old hall still stands. Timber, red cloth, a chest, a road into the woods.
+      Chop. Hunt. Sell. Steal if you must. Other people have errands of their own.
+    </p>
+    <button id="btnNew" class="accent hit" style="padding:12px 28px">New hall</button>
+    <button id="btnContinue" class="hit" style="margin-left:8px;padding:12px 20px">Continue</button>
+  </div>
+</div>
+<div id="help">
+  <div class="card panel">
+    <h2>How the vale works</h2>
+    <ul>
+      <li><b>Click ground</b> to walk. The camera follows you.</li>
+      <li><b>Click a tree, rock, animal, or person</b> when you are next to it.</li>
+      <li>Wield a hatchet to chop, a pick to mine, a blade to fight.</li>
+      <li>Skills rise by using them. Nothing is purchased.</li>
+      <li>The chest at the hall is a bank. Death leaves your pack on the road.</li>
+      <li>Hurt a person and the guard will remember. Night belongs to wolves.</li>
+      <li>The vale has height. Hall sits on a terrace. Steps drop to the road. The north woods climb to a ridge. Cliffs turn you around; stairs do not.</li>
+    </ul>
+    <p style="margin-bottom:14px">You are not the guildmaster of a spreadsheet. You are Fen Moss, and the hall is only home if you return to it.</p>
+    <button id="btnCloseHelp" class="accent">Close</button>
+  </div>
+</div>
+<script>
+(() => {
+  const SAVE = "emberhall.uo.v2";
+  const TW = 64, TH = 32, EH = 11;
+  const COLS = 36, ROWS = 36;
+  const DIRS = [[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,-1],[1,-1],[-1,1]];
+
+  const SKILLS = ["lumberjacking","mining","swordsmanship","animal lore","tactics","stealing"];
+  const ITEMS = {
+    hatchet: { name: "Hatchet", w: 4, tag: "tool" },
+    pick: { name: "Pickaxe", w: 5, tag: "tool" },
+    blade: { name: "Short sword", w: 4, tag: "weapon" },
+    log: { name: "Log", w: 2, tag: "good" },
+    ore: { name: "Iron ore", w: 3, tag: "good" },
+    hide: { name: "Hide", w: 2, tag: "good" },
+    meat: { name: "Raw meat", w: 1, tag: "food" },
+    bread: { name: "Waybread", w: 1, tag: "food" },
+    robe: { name: "Worn robe", w: 1, tag: "cloth" },
+    gold: { name: "Gold", w: 0.01, tag: "coin" },
+  };
+
+  const canvas = document.getElementById("c");
+  const ctx = canvas.getContext("2d");
+  let W = 0, H = 0, dpr = 1;
+  function resize() {
+    dpr = devicePixelRatio || 1;
+    W = canvas.width = innerWidth * dpr;
+    H = canvas.height = innerHeight * dpr;
+    canvas.style.width = innerWidth + "px";
+    canvas.style.height = innerHeight + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  addEventListener("resize", resize);
+  resize();
+
+  let world, player, people, fauna, corpses, log, time, cam, running;
+
+  function iso(q, r, h = 0) {
+    return { x: (q - r) * (TW / 2), y: (q + r) * (TH / 2) - h * EH };
+  }
+  function elev(q, r) {
+    const t = tile(q, r);
+    return t ? t.h : 0;
+  }
+  function inb(q, r) { return q >= 0 && r >= 0 && q < COLS && r < ROWS; }
+  function key(q, r) { return q + "," + r; }
+  function tile(q, r) { return inb(q, r) ? world.tiles[r * COLS + q] : null; }
+  function neighbors(q, r) {
+    return DIRS.map(([dq, dr]) => [q + dq, r + dr]).filter(([a, b]) => inb(a, b));
+  }
+  function dist(a, b) { return Math.max(Math.abs(a.q - b.q), Math.abs(a.r - b.r)); }
+  function manhattan(a, b) { return Math.abs(a.q - b.q) + Math.abs(a.r - b.r); }
+
+  function sculpt(q, r) {
+    let h = 0;
+    let step = false;
+    if (r <= 6) h = 4;
+    else if (r <= 9) h = 3;
+    else if (r <= 12) h = 2;
+    else if (r <= 15) h = 1;
+    if (q >= 25) h = Math.max(h, Math.min(4, q - 24));
+    if (q <= 7 && r >= 16 && r <= 28) h = Math.max(h, 2);
+    if (q >= 16 && q <= 20 && r >= 20 && r <= 25) h = 2;
+    if (q >= 17 && q <= 19 && r === 19) { h = 1; step = true; }
+    if (q >= 17 && q <= 19 && r === 18) { h = 0; step = true; }
+    if (Math.abs(q - 18) <= 1 && r >= 13 && r <= 17) h = r <= 14 ? 1 : 0;
+    if (Math.abs(q - 18) <= 1 && r >= 13 && r <= 15) step = true;
+    if (q >= 24 && q <= 27 && r >= 18 && r <= 22) step = true;
+    const river = Math.abs((q + r) - 40);
+    if (river < 1.4 && q > 8 && q < 28) { h = 0; step = false; }
+    return { h, step };
+  }
+
+  function makeMap() {
+    const tiles = [];
+    const hallQ = 18, hallR = 22;
+    for (let r = 0; r < ROWS; r++) {
+      for (let q = 0; q < COLS; q++) {
+        let kind = "grass";
+        const dq = q - hallQ, dr = r - hallR;
+        const dHall = Math.hypot(dq, dr);
+        const { h, step } = sculpt(q, r);
+        if (dHall < 4.2) kind = "cobble";
+        if (q >= 16 && q <= 20 && r >= 20 && r <= 24) kind = "cobble";
+        if (Math.abs(q - 18) <= 1 && r >= 10 && r <= 22) kind = "road";
+        if (r < 12 && Math.hypot(q - 18, r - 6) < 9) kind = Math.random() < 0.55 ? "tree" : "grass";
+        if (q > 26 && r > 14 && r < 26 && Math.random() < 0.18) kind = "ore";
+        if (q < 8 && r > 16 && r < 28 && Math.random() < 0.12) kind = "ruin";
+        if (Math.abs((q + r) - 40) < 1.2 && q > 8 && q < 28) kind = "water";
+        if (q >= 17 && q <= 19 && r >= 21 && r <= 23) kind = "hall";
+        if (q === 16 && r === 22) kind = "chest";
+        if (q === 20 && r === 21) kind = "stall";
+        if (q === 18 && r === 19) kind = "well";
+        if (step && kind === "grass") kind = "steps";
+        if (step && kind === "road") kind = "steps";
+        tiles.push({
+          q, r, kind, h, step,
+          wood: kind === "tree" ? 4 + (Math.random() * 3 | 0) : 0,
+          ore: kind === "ore" ? 3 : 0,
+        });
+      }
+    }
+    return { tiles, hallQ, hallR };
+  }
+
+  function freshPlayer() {
+    return {
+      name: "Fen Moss",
+      q: 18, r: 22, fq: 18, fr: 22, fh: 2,
+      path: [], facing: 0,
+      hp: 40, hpMax: 40, stam: 40, stamMax: 40, hunger: 80,
+      gold: 12,
+      karma: 0,
+      wield: "hatchet",
+      pack: [
+        { id: "hatchet", n: 1 },
+        { id: "blade", n: 1 },
+        { id: "bread", n: 2 },
+      ],
+      bank: [{ id: "pick", n: 1 }, { id: "bread", n: 4 }],
+      skills: { lumberjacking: 12, mining: 8, swordsmanship: 15, "animal lore": 10, tactics: 10, stealing: 0 },
+      flags: { took: false, chopped: false, sold: false, ate: false, home: false },
+      dead: false,
+    };
+  }
+
+  function seedPeople() {
+    return [
+      { name: "Ione Hale", role: "ranger", q: 18, r: 16, fq: 18, fr: 16, fh: 1, path: [], hue: "#6b8f4a", hp: 36, schedule: "woods", talk: [
+        "The north stand still has good oak. Take the stepped path — the ridge is a cliff if you cut across.",
+        "Wolves come off the ridge after last light.",
+        "If you cut, cut clean. Leave a stump and the grove remembers.",
+      ]},
+      { name: "Brann", role: "merchant", q: 20, r: 21, fq: 20, fr: 21, fh: 2, path: [], hue: "#b07a3a", hp: 28, schedule: "stall", talk: [
+        "Logs, ore, hides. Coin on the barrel.",
+        "I don't buy blood. Sell meat to the pot, not to me.",
+        "Night tax is your own hide.",
+      ]},
+      { name: "Cap. Wren", role: "guard", q: 17, r: 20, fq: 17, fr: 20, fh: 2, path: [], hue: "#6a6e88", hp: 55, schedule: "guard", talk: [
+        "Keep the peace on hall ground.",
+        "Grey once. Red, and I come walking.",
+        "The chest is for the living.",
+      ]},
+      { name: "Old Pell", role: "elder", q: 18, r: 19, fq: 18, fr: 19, fh: 1, path: [], hue: "#a09070", hp: 22, schedule: "well", talk: [
+        "This hall outlived three masters. Don't be the joke that ends it.",
+        "The river is shallow at the stepping stones.",
+        "Ione knows the woods. Brann knows the prices. Wren knows your name if you make him.",
+      ]},
+    ];
+  }
+
+  function seedFauna() {
+    const list = [];
+    for (let i = 0; i < 8; i++) list.push({ kind: "hare", q: 10 + (Math.random()*16|0), r: 4 + (Math.random()*10|0), hp: 4, hpMax: 4, tame: 0 });
+    for (let i = 0; i < 3; i++) list.push({ kind: "hart", q: 8 + (Math.random()*12|0), r: 3 + (Math.random()*8|0), hp: 14, hpMax: 14, tame: 0 });
+    for (let i = 0; i < 2; i++) list.push({ kind: "wolf", q: 12 + (Math.random()*10|0), r: 2 + (Math.random()*6|0), hp: 18, hpMax: 18, tame: 0, hostile: false });
+    return list.filter(f => {
+      const t = tile(f.q, f.r);
+      return t && t.kind !== "water" && t.kind !== "hall";
+    });
+  }
+
+  function say(msg) {
+    log.unshift({ t: time.tick, msg });
+    if (log.length > 10) log.pop();
+    const el = document.getElementById("log");
+    el.innerHTML = log.map(l => `<div>${l.msg}</div>`).join("");
+  }
+
+  function notoName() {
+    if (player.karma <= -60) return "Murderer";
+    if (player.karma <= -20) return "Criminal";
+    if (player.karma < 0) return "Gray";
+    if (player.karma >= 40) return "Virtuous";
+    return "Innocent";
+  }
+  function notoColor() {
+    const n = notoName();
+    if (n === "Murderer") return "#c44";
+    if (n === "Criminal") return "#d88";
+    if (n === "Gray") return "#bbb";
+    if (n === "Virtuous") return "#8c8";
+    return "#9cf";
+  }
+
+  function countItem(list, id) {
+    return list.filter(x => x.id === id).reduce((s, x) => s + x.n, 0);
+  }
+  function addItem(list, id, n = 1) {
+    const f = list.find(x => x.id === id);
+    if (f) f.n += n; else list.push({ id, n });
+  }
+  function takeItem(list, id, n = 1) {
+    const f = list.find(x => x.id === id);
+    if (!f || f.n < n) return false;
+    f.n -= n;
+    if (f.n <= 0) {
+      const i = list.indexOf(f);
+      list.splice(i, 1);
+    }
+    return true;
+  }
+
+  function skillCheck(id, difficulty) {
+    const v = player.skills[id] || 0;
+    const chance = 0.15 + v / 140 + Math.max(0, (v - difficulty) / 80);
+    const ok = Math.random() < Math.min(0.92, chance);
+    if (Math.random() < Math.max(0.08, 0.45 - v / 180)) {
+      const gain = 0.3 + Math.random() * 0.7;
+      player.skills[id] = Math.min(100, +(v + gain).toFixed(1));
+      if ((player.skills[id] | 0) > (v | 0)) say(`${id} rises to ${player.skills[id] | 0}.`);
+    }
+    return ok;
+  }
+
+  function blocked(q, r) {
+    const t = tile(q, r);
+    if (!t) return true;
+    if (t.kind === "water" || t.kind === "tree" || t.kind === "hall") return true;
+    return false;
+  }
+
+  function climbOk(fq, fr, tq, tr) {
+    const a = tile(fq, fr), b = tile(tq, tr);
+    if (!a || !b) return false;
+    const dh = Math.abs(b.h - a.h);
+    if (dh <= 1) return true;
+    if (dh <= 2 && (a.step || b.step || a.kind === "steps" || b.kind === "steps")) return true;
+    return false;
+  }
+
+  function astar(sq, sr, tq, tr) {
+    if (!inb(tq, tr)) return [];
+    const destBlocked = blocked(tq, tr);
+    const goalQ = tq, goalR = tr;
+    const open = [[0, sq, sr]];
+    const came = new Map();
+    const g = new Map([[key(sq, sr), 0]]);
+    let guard = 0;
+    while (open.length && guard++ < 900) {
+      open.sort((a, b) => a[0] - b[0]);
+      const [, q, r] = open.shift();
+      if (q === goalQ && r === goalR) {
+        const path = [{ q, r }];
+        let k = key(q, r);
+        while (came.has(k)) {
+          const p = came.get(k);
+          path.push(p);
+          k = key(p.q, p.r);
+        }
+        return path.reverse();
+      }
+      for (const [nq, nr] of neighbors(q, r)) {
+        const isGoal = nq === goalQ && nr === goalR;
+        if (!isGoal && blocked(nq, nr)) continue;
+        if (!climbOk(q, r, nq, nr)) continue;
+        const rise = Math.abs(elev(nq, nr) - elev(q, r));
+        const ng = (g.get(key(q, r)) || 0) + 1 + rise * 0.35;
+        const nk = key(nq, nr);
+        if (ng < (g.get(nk) ?? 1e9)) {
+          g.set(nk, ng);
+          came.set(nk, { q, r });
+          open.push([ng + Math.hypot(nq - goalQ, nr - goalR), nq, nr]);
+        }
+      }
+    }
+    return [];
+  }
+
+  function walkTo(q, r) {
+    const path = astar(player.q, player.r, q, r);
+    if (!path.length) {
+      say("That face is a cliff. Find the steps.");
+      player.path = [];
+      return;
+    }
+    if (path.length > 1) path.shift();
+    player.path = path;
+  }
+
+  function hour() {
+    return Math.floor((time.tick % 1440) / 60);
+  }
+  function isNight() {
+    const h = hour();
+    return h >= 20 || h < 5;
+  }
+  function todName() {
+    const h = hour();
+    if (h < 5) return "Night";
+    if (h < 11) return "Morning";
+    if (h < 16) return "Afternoon";
+    if (h < 20) return "Dusk";
+    return "Night";
+  }
+
+  function tryUseTile(q, r) {
+    const t = tile(q, r);
+    if (!t) return;
+    if (dist(player, { q, r }) > 1) {
+      walkTo(q, r);
+      player.pending = { type: "tile", q, r };
+      return;
+    }
+    if (t.kind === "chest") { bankToggle(); return; }
+    if (t.kind === "stall") { talkTo(people.find(p => p.role === "merchant")); return; }
+    if (t.kind === "well") { say("Cold water. Hunger does not drink itself away."); return; }
+    if (t.kind === "tree" && t.wood > 0) {
+      if (player.wield !== "hatchet") { say("You need a hatchet in hand."); return; }
+      if (player.stam < 4) { say("Too winded to cut."); return; }
+      player.stam -= 4;
+      if (skillCheck("lumberjacking", 20)) {
+        t.wood -= 1;
+        addItem(player.pack, "log", 1);
+        player.flags.chopped = true;
+        if (t.wood <= 0) t.kind = "stump";
+        say("The oak gives a log.");
+      } else say("The axe glances. The tree holds.");
+      return;
+    }
+    if (t.kind === "ore" && t.ore > 0) {
+      if (player.wield !== "pick") { say("A pick would bite this rock."); return; }
+      if (player.stam < 5) { say("Arms like rope."); return; }
+      player.stam -= 5;
+      if (skillCheck("mining", 25)) {
+        t.ore -= 1;
+        addItem(player.pack, "ore", 1);
+        if (t.ore <= 0) t.kind = "grass";
+        say("A lump of iron comes free.");
+      } else say("Sparks. No ore.");
+      return;
+    }
+    if (t.kind === "stump") say("A stump. It will not grow back this season.");
+  }
+
+  function creatureAt(q, r) {
+    return fauna.find(f => f.hp > 0 && f.q === q && f.r === r)
+      || people.find(p => p.hp > 0 && p.q === q && p.r === r)
+      || null;
+  }
+
+  function tryUseThing(thing) {
+    if (!thing) return;
+    if (dist(player, thing) > 1) {
+      walkTo(thing.q, thing.r);
+      player.pending = { type: "thing", thing };
+      return;
+    }
+    if (thing.role) { talkTo(thing); return; }
+    hunt(thing);
+  }
+
+  function talkTo(p) {
+    if (!p) return;
+    if (p.role === "merchant") {
+      sellToBrann();
+      return;
+    }
+    const line = p.talk[(Math.random() * p.talk.length) | 0];
+    say(`${p.name}: “${line}”`);
+  }
+
+  function sellToBrann() {
+    const prices = { log: 3, ore: 5, hide: 4 };
+    let earned = 0, sold = 0;
+    for (const id of Object.keys(prices)) {
+      const n = countItem(player.pack, id);
+      if (!n) continue;
+      takeItem(player.pack, id, n);
+      earned += n * prices[id];
+      sold += n;
+    }
+    if (!sold) {
+      say("Brann: “Bring logs, ore, or hides. I don't gossip for free.”");
+      return;
+    }
+    player.gold += earned;
+    player.flags.sold = true;
+    if (player.karma < 0) player.karma += 1;
+    say(`Brann weighs the load. ${earned} gold across the barrel.`);
+  }
+
+  function hunt(f) {
+    if (player.stam < 3) { say("No wind left for a swing."); return; }
+    player.stam -= 3;
+    const skill = player.wield === "blade" ? "swordsmanship" : "tactics";
+    const hit = skillCheck(skill, f.kind === "wolf" ? 35 : 15);
+    skillCheck("animal lore", 10);
+    if (!hit) { say(`You miss the ${f.kind}.`); return; }
+    const dmg = 3 + ((player.skills.swordsmanship || 0) / 20 | 0) + (player.wield === "blade" ? 2 : 0);
+    f.hp -= dmg;
+    if (f.kind === "wolf") f.hostile = true;
+    if (f.hp <= 0) {
+      if (f.kind === "hare") { addItem(player.pack, "meat", 1); addItem(player.pack, "hide", 1); player.karma -= 1; }
+      if (f.kind === "hart") { addItem(player.pack, "meat", 2); addItem(player.pack, "hide", 2); player.karma -= 2; }
+      if (f.kind === "wolf") { addItem(player.pack, "hide", 2); addItem(player.pack, "meat", 1); player.karma += 2; }
+      player.flags.ate = player.flags.ate || countItem(player.pack, "meat") > 0;
+      say(`The ${f.kind} falls.`);
+    } else say(`The ${f.kind} bleeds (${f.hp}).`);
+  }
+
+  function attackPerson(p) {
+    if (dist(player, p) > 1) { walkTo(p.q, p.r); player.pending = { type: "murder", thing: p }; return; }
+    player.stam = Math.max(0, player.stam - 4);
+    const hit = skillCheck("swordsmanship", 30);
+    if (!hit) { say(`${p.name} steps off the blade.`); return; }
+    p.hp -= 6 + ((player.skills.swordsmanship || 0) / 15 | 0);
+    player.karma -= p.role === "guard" ? 25 : 15;
+    say(`You strike ${p.name}. The vale goes quieter.`);
+    if (p.hp <= 0) {
+      player.karma -= 40;
+      say(`${p.name} dies. Wren will hear of this, if Wren still stands.`);
+    }
+    const wren = people.find(x => x.role === "guard" && x.hp > 0);
+    if (wren && player.karma <= -20) wren.hunt = true;
+  }
+
+  function bankToggle() {
+    if (dist(player, { q: 16, r: 22 }) > 2) {
+      say("The chest lives in the hall.");
+      walkTo(16, 22);
+      player.pending = { type: "bank" };
+      return;
+    }
+    // deposit goods, withdraw pick if needed
+    const moved = [];
+    for (const id of ["log", "ore", "hide"]) {
+      const n = countItem(player.pack, id);
+      if (n) { takeItem(player.pack, id, n); addItem(player.bank, id, n); moved.push(`${n} ${id}`); }
+    }
+    if (!countItem(player.pack, "pick") && countItem(player.bank, "pick")) {
+      takeItem(player.bank, "pick", 1);
+      addItem(player.pack, "pick", 1);
+      moved.push("pickaxe");
+      player.wield = "pick";
+    }
+    if (!countItem(player.pack, "hatchet") && countItem(player.bank, "hatchet")) {
+      takeItem(player.bank, "hatchet", 1);
+      addItem(player.pack, "hatchet", 1);
+      player.wield = "hatchet";
+      moved.push("hatchet");
+    }
+    player.flags.took = true;
+    say(moved.length ? `Chest opens. You move ${moved.join(", ")}.` : "The chest is quiet. Goods go in; tools come out.");
+  }
+
+  function eat() {
+    if (takeItem(player.pack, "bread", 1) || takeItem(player.pack, "meat", 1)) {
+      player.hunger = Math.min(100, player.hunger + 35);
+      player.hp = Math.min(player.hpMax, player.hp + 4);
+      player.flags.ate = true;
+      say("You eat. The shake leaves your hands.");
+    } else say("Nothing to eat. Hunt, or buy bread with gold at the stall — if Brann still likes you.");
+  }
+
+  function die(reason) {
+    if (player.dead) return;
+    player.dead = true;
+    corpses.push({
+      q: player.q, r: player.r, name: player.name,
+      pack: player.pack.map(x => ({ ...x })),
+    });
+    player.pack = [{ id: "robe", n: 1 }];
+    player.wield = null;
+    player.hp = player.hpMax;
+    player.stam = player.stamMax;
+    player.q = 18; player.r = 22; player.fq = 18; player.fr = 22; player.fh = 2;
+    player.path = [];
+    player.pending = null;
+    player.dead = false;
+    say(`${reason} You wake on the hall stones. Your pack lies where you fell.`);
+  }
+
+  function lootCorpse(c) {
+    if (dist(player, c) > 1) { walkTo(c.q, c.r); player.pending = { type: "corpse", thing: c }; return; }
+    for (const it of c.pack) addItem(player.pack, it.id, it.n);
+    say("You take back what the road held.");
+    corpses.splice(corpses.indexOf(c), 1);
+  }
+
+  // ── AI ────────────────────────────────────────────────────
+  function stepPeople() {
+    for (const p of people) {
+      if (p.hp <= 0) continue;
+      if (p.hunt && player.karma <= -20) {
+        if (dist(p, player) <= 1) {
+          player.hp -= 5;
+          say(`${p.name} puts steel in you.`);
+          if (player.hp <= 0) die(`${p.name} keeps the hall's law.`);
+          continue;
+        }
+        p.path = astar(p.q, p.r, player.q, player.r);
+        if (p.path.length > 1) p.path.shift();
+      } else if (p.schedule === "woods" && time.tick % 8 === 0) {
+        const tq = 12 + ((time.tick / 20 | 0) % 12);
+        const tr = 6 + ((time.tick / 30 | 0) % 8);
+        if (dist(p, { q: tq, r: tr }) > 1) p.path = astar(p.q, p.r, tq, tr).slice(1);
+      } else if (p.schedule === "guard" && time.tick % 20 === 0) {
+        const spots = [[17,20],[19,20],[18,18],[16,21]];
+        const s = spots[(hour() + 1) % spots.length];
+        p.path = astar(p.q, p.r, s[0], s[1]).slice(1);
+      }
+      if (p.path && p.path.length) {
+        const n = p.path.shift();
+        if (n && !blocked(n.q, n.r) && climbOk(p.q, p.r, n.q, n.r)) { p.q = n.q; p.r = n.r; }
+      }
+      p.fq += (p.q - p.fq) * 0.25;
+      p.fr += (p.r - p.fr) * 0.25;
+      p.fh = (p.fh ?? elev(p.q, p.r)) + (elev(p.q, p.r) - (p.fh ?? 0)) * 0.25;
+    }
+  }
+
+  function stepFauna() {
+    const night = isNight();
+    for (const f of fauna) {
+      if (f.hp <= 0) continue;
+      if (f.kind === "wolf" && (night || f.hostile) && dist(f, player) < 8) {
+        if (dist(f, player) <= 1) {
+          player.hp -= night ? 6 : 3;
+          say("A wolf finds your throat-line.");
+          if (player.hp <= 0) die("The pack does not leave witnesses.");
+        } else if (time.tick % 2 === 0) {
+          const path = astar(f.q, f.r, player.q, player.r);
+          if (path.length > 1) { f.q = path[1].q; f.r = path[1].r; }
+        }
+        continue;
+      }
+      if (time.tick % 5 === 0 && Math.random() < 0.5) {
+        const opts = neighbors(f.q, f.r).filter(([q, r]) => !blocked(q, r) && climbOk(f.q, f.r, q, r));
+        if (opts.length) {
+          const [q, r] = opts[(Math.random() * opts.length) | 0];
+          f.q = q; f.r = r;
+        }
+      }
+    }
+    if (night && time.tick % 180 === 10) {
+      const liveWolves = fauna.filter(f => f.kind === "wolf" && f.hp > 0).length;
+      if (liveWolves < 3) {
+        fauna.push({ kind: "wolf", q: 14, r: 3, hp: 18, hpMax: 18, hostile: true });
+        say("A howl off the north ridge.");
+      }
+    }
+  }
+
+  function stepPlayer() {
+    if (player.path.length) {
+      const n = player.path.shift();
+      if (n) {
+        if (blocked(n.q, n.r) && !(player.pending && player.pending.q === n.q && player.pending.r === n.r)) {
+          player.path = [];
+        } else if (!blocked(n.q, n.r) && climbOk(player.q, player.r, n.q, n.r)) {
+          const rise = Math.abs(elev(n.q, n.r) - elev(player.q, player.r));
+          player.q = n.q; player.r = n.r;
+          player.stam = Math.max(0, player.stam - 0.15 - rise * 0.6);
+        } else {
+          player.path = [];
+        }
+      }
+    } else if (player.pending) {
+      const p = player.pending;
+      player.pending = null;
+      if (p.type === "tile") tryUseTile(p.q, p.r);
+      else if (p.type === "thing") tryUseThing(p.thing);
+      else if (p.type === "bank") bankToggle();
+      else if (p.type === "corpse") lootCorpse(p.thing);
+      else if (p.type === "murder") attackPerson(p.thing);
+    }
+    player.fq += (player.q - player.fq) * 0.28;
+    player.fr += (player.r - player.fr) * 0.28;
+    player.fh += (elev(player.q, player.r) - (player.fh || 0)) * 0.28;
+    if (time.tick % 12 === 0) {
+      player.stam = Math.min(player.stamMax, player.stam + (player.hunger > 30 ? 2 : 0.4));
+      player.hunger = Math.max(0, player.hunger - 0.35);
+      if (player.hunger < 15 && time.tick % 36 === 0) {
+        player.hp -= 1;
+        say("Hunger takes a bite of you.");
+        if (player.hp <= 0) die("You fold in the grass.");
+      }
+      if (player.hunger > 60 && player.hp < player.hpMax && time.tick % 24 === 0) player.hp += 1;
+    }
+    if (dist(player, { q: 18, r: 22 }) <= 3 && isNight()) player.flags.home = true;
+  }
+
+  // ── Render ────────────────────────────────────────────────
+  function screenOf(q, r, h = 0) {
+    const p = iso(q, r, h);
+    return { x: p.x - cam.x + innerWidth / 2, y: p.y - cam.y + innerHeight * 0.42 };
+  }
+
+  function diamond(x, y, col, stroke) {
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + TW / 2, y + TH / 2);
+    ctx.lineTo(x, y + TH);
+    ctx.lineTo(x - TW / 2, y + TH / 2);
+    ctx.closePath();
+    ctx.fillStyle = col;
+    ctx.fill();
+    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 1; ctx.stroke(); }
+  }
+
+  function shadeRgb(rgb, k) {
+    const m = rgb.match(/\d+/g);
+    if (!m) return rgb;
+    const r = Math.max(0, Math.min(255, (m[0] * k) | 0));
+    const g = Math.max(0, Math.min(255, (m[1] * k) | 0));
+    const b = Math.max(0, Math.min(255, (m[2] * k) | 0));
+    return `rgb(${r},${g},${b})`;
+  }
+
+  function drawPrism(x, y, h, top, step) {
+    const lift = Math.max(3, h * EH);
+    const topY = y - (h * EH);
+    const left = shadeRgb(top, 0.62);
+    const right = shadeRgb(top, 0.48);
+    const baseY = topY + lift;
+    ctx.beginPath();
+    ctx.moveTo(x - TW / 2, topY + TH / 2);
+    ctx.lineTo(x, topY + TH);
+    ctx.lineTo(x, topY + TH + lift);
+    ctx.lineTo(x - TW / 2, topY + TH / 2 + lift);
+    ctx.closePath();
+    ctx.fillStyle = left;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(x + TW / 2, topY + TH / 2);
+    ctx.lineTo(x, topY + TH);
+    ctx.lineTo(x, topY + TH + lift);
+    ctx.lineTo(x + TW / 2, topY + TH / 2 + lift);
+    ctx.closePath();
+    ctx.fillStyle = right;
+    ctx.fill();
+    diamond(x, topY, top, "rgba(0,0,0,.16)");
+    if (step) {
+      ctx.strokeStyle = "rgba(255,230,180,.28)";
+      ctx.lineWidth = 1.2;
+      for (let i = 1; i <= 3; i++) {
+        const yy = topY + TH * (i / 4);
+        ctx.beginPath();
+        ctx.moveTo(x - TW / 2 + 8, yy);
+        ctx.lineTo(x + TW / 2 - 8, yy + 0);
+        ctx.stroke();
+      }
+    }
+  }
+
+  function drawTree(x, y, stump) {
+    ctx.fillStyle = "rgba(0,0,0,.22)";
+    ctx.beginPath(); ctx.ellipse(x, y + 18, 14, 6, 0, 0, 7); ctx.fill();
+    ctx.fillStyle = "#5a4030";
+    ctx.fillRect(x - 4, y - 6, 8, 20);
+    if (stump) {
+      ctx.fillStyle = "#6a5040";
+      ctx.beginPath(); ctx.ellipse(x, y - 6, 8, 4, 0, 0, 7); ctx.fill();
+      return;
+    }
+    const layers = ["#2f4a28", "#3c5c32", "#4a6e3c"];
+    layers.forEach((c, i) => {
+      ctx.fillStyle = c;
+      ctx.beginPath();
+      ctx.moveTo(x, y - 38 + i * 7);
+      ctx.lineTo(x + 16 - i * 2, y - 10 + i * 6);
+      ctx.lineTo(x - 16 + i * 2, y - 10 + i * 6);
+      ctx.closePath();
+      ctx.fill();
+    });
+  }
+
+  function drawHall(x, y) {
+    ctx.fillStyle = "rgba(0,0,0,.25)";
+    ctx.beginPath(); ctx.ellipse(x, y + 22, 28, 10, 0, 0, 7); ctx.fill();
+    ctx.fillStyle = "#6b4a32";
+    ctx.beginPath();
+    ctx.moveTo(x - 26, y + 8);
+    ctx.lineTo(x, y + 20);
+    ctx.lineTo(x + 26, y + 8);
+    ctx.lineTo(x + 26, y - 10);
+    ctx.lineTo(x, y - 22);
+    ctx.lineTo(x - 26, y - 10);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = "#8a3a2a";
+    ctx.beginPath();
+    ctx.moveTo(x - 28, y - 8);
+    ctx.lineTo(x, y - 28);
+    ctx.lineTo(x + 28, y - 8);
+    ctx.lineTo(x, y + 4);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = "#c9a36a";
+    ctx.fillRect(x - 3, y - 2, 6, 12);
+  }
+
+  function drawPerson(x, y, hue, you, bob) {
+    ctx.fillStyle = "rgba(0,0,0,.25)";
+    ctx.beginPath(); ctx.ellipse(x, y + 10, 9, 4, 0, 0, 7); ctx.fill();
+    ctx.fillStyle = hue;
+    ctx.beginPath();
+    ctx.moveTo(x, y - 10 + bob);
+    ctx.lineTo(x + 8, y + 8 + bob);
+    ctx.lineTo(x - 8, y + 8 + bob);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = "#e8d2b0";
+    ctx.beginPath(); ctx.arc(x, y - 14 + bob, 5, 0, 7); ctx.fill();
+    if (you) {
+      ctx.strokeStyle = "#f0d080";
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(x, y - 14 + bob, 7, 0, 7); ctx.stroke();
+    }
+  }
+
+  function drawBeast(x, y, kind) {
+    ctx.fillStyle = "rgba(0,0,0,.2)";
+    ctx.beginPath(); ctx.ellipse(x, y + 6, 8, 3, 0, 0, 7); ctx.fill();
+    if (kind === "hare") {
+      ctx.fillStyle = "#c4b49a";
+      ctx.beginPath(); ctx.ellipse(x, y, 6, 4, 0, 0, 7); ctx.fill();
+      ctx.fillRect(x + 2, y - 10, 2, 8);
+      ctx.fillRect(x - 1, y - 9, 2, 7);
+    } else if (kind === "hart") {
+      ctx.fillStyle = "#8a6a40";
+      ctx.beginPath(); ctx.ellipse(x, y, 10, 6, 0, 0, 7); ctx.fill();
+      ctx.strokeStyle = "#d8c8a8"; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(x + 4, y - 6); ctx.lineTo(x + 8, y - 14); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x + 2, y - 6); ctx.lineTo(x - 2, y - 13); ctx.stroke();
+    } else {
+      ctx.fillStyle = "#4a4a52";
+      ctx.beginPath(); ctx.ellipse(x, y, 11, 6, 0, 0, 7); ctx.fill();
+      ctx.fillStyle = "#eee";
+      ctx.fillRect(x + 6, y - 2, 2, 2);
+    }
+  }
+
+  function tileColor(t, night) {
+    const shade = night ? 0.55 : 1;
+    const mix = (hex) => {
+      const n = parseInt(hex.slice(1), 16);
+      let r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+      r = (r * shade) | 0; g = (g * shade) | 0; b = (b * shade) | 0;
+      return `rgb(${r},${g},${b})`;
+    };
+    const table = {
+      grass: "#4d6a38", road: "#7a6a4e", cobble: "#6e675c", hall: "#5a4636",
+      tree: "#3d5a32", stump: "#5a4a3a", ore: "#5a5e68", ruin: "#6a5e55",
+      water: "#3a5a68", chest: "#6b4a28", stall: "#7a5030", well: "#5a5a58",
+      steps: "#8a7a62",
+    };
+    return mix(table[t.kind] || "#4d6a38");
+  }
+
+  function draw() {
+    const night = isNight();
+    const sky = night
+      ? ctx.createLinearGradient(0, 0, 0, innerHeight)
+      : ctx.createLinearGradient(0, 0, 0, innerHeight);
+    if (night) { sky.addColorStop(0, "#1a1c2a"); sky.addColorStop(1, "#12100e"); }
+    else if (todName() === "Dusk") { sky.addColorStop(0, "#c47a4a"); sky.addColorStop(1, "#6a4030"); }
+    else { sky.addColorStop(0, "#8bb7d4"); sky.addColorStop(1, "#c8b48a"); }
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, innerWidth, innerHeight);
+
+    const focus = iso(player.fq, player.fr, player.fh || 0);
+    cam.x += (focus.x - cam.x) * 0.12;
+    cam.y += (focus.y - cam.y) * 0.12;
+
+    const drawList = [];
+    for (const t of world.tiles) {
+      const s = screenOf(t.q, t.r, t.h || 0);
+      if (s.x < -80 || s.x > innerWidth + 80 || s.y < -90 || s.y > innerHeight + 90) continue;
+      drawList.push({ z: t.q + t.r + (t.h || 0) * 0.01, t, s });
+    }
+    drawList.sort((a, b) => a.z - b.z);
+    for (const { t, s } of drawList) {
+      drawPrism(s.x, s.y + (t.h || 0) * EH, t.h || 0, tileColor(t, night), t.step || t.kind === "steps");
+      if (t.kind === "tree") drawTree(s.x, s.y + 6, false);
+      if (t.kind === "stump") drawTree(s.x, s.y + 6, true);
+      if (t.kind === "hall") drawHall(s.x, s.y);
+      if (t.kind === "ore") {
+        ctx.fillStyle = "#8a909a";
+        ctx.beginPath(); ctx.moveTo(s.x - 8, s.y + 16); ctx.lineTo(s.x, s.y + 4); ctx.lineTo(s.x + 10, s.y + 16); ctx.fill();
+      }
+      if (t.kind === "chest") {
+        ctx.fillStyle = "#8a5a28";
+        ctx.fillRect(s.x - 8, s.y + 8, 16, 10);
+        ctx.fillStyle = "#c9a36a";
+        ctx.fillRect(s.x - 1, s.y + 11, 3, 4);
+      }
+      if (t.kind === "stall") {
+        ctx.fillStyle = "#8a3a2a";
+        ctx.fillRect(s.x - 14, s.y - 4, 28, 6);
+        ctx.fillStyle = "#6b4a32";
+        ctx.fillRect(s.x - 12, s.y + 2, 24, 12);
+      }
+      if (t.kind === "well") {
+        ctx.fillStyle = "#6a6a6e";
+        ctx.beginPath(); ctx.ellipse(s.x, s.y + 12, 8, 5, 0, 0, 7); ctx.fill();
+        ctx.fillStyle = "#2a3a40";
+        ctx.beginPath(); ctx.ellipse(s.x, s.y + 12, 4, 2, 0, 0, 7); ctx.fill();
+      }
+      if (t.kind === "water") {
+        ctx.fillStyle = "rgba(180,220,230,.15)";
+        ctx.fillRect(s.x - 8, s.y + 10, 16, 4);
+      }
+    }
+
+    for (const c of corpses) {
+      const s = screenOf(c.q, c.r, elev(c.q, c.r));
+      ctx.fillStyle = "#6a3030";
+      ctx.beginPath(); ctx.ellipse(s.x, s.y + 12, 10, 5, 0.4, 0, 7); ctx.fill();
+    }
+    for (const f of fauna) {
+      if (f.hp <= 0) continue;
+      const s = screenOf(f.q, f.r, elev(f.q, f.r));
+      drawBeast(s.x, s.y + 8, f.kind);
+    }
+    const actors = [...people.filter(p => p.hp > 0), { ...player, you: true, hue: "#b45a3c" }];
+    actors.sort((a, b) => (a.fr + a.fq) - (b.fr + b.fq));
+    for (const a of actors) {
+      const s = screenOf(a.fq ?? a.q, a.fr ?? a.r, a.fh ?? elev(a.q, a.r));
+      const bob = Math.sin(time.tick * 0.2 + (a.q || 0)) * ((a.path && a.path.length) ? 1.4 : 0.2);
+      drawPerson(s.x, s.y + 4, a.hue, a.you, bob);
+      if (!a.you) {
+        ctx.fillStyle = "#efe4cf";
+        ctx.font = "11px 'Source Serif 4', serif";
+        ctx.textAlign = "center";
+        ctx.fillText(a.name, s.x, s.y - 22);
+      }
+    }
+
+    if (night) {
+      ctx.fillStyle = "rgba(8,10,20,.28)";
+      ctx.fillRect(0, 0, innerWidth, innerHeight);
+    }
+  }
+
+  function paintHud() {
+    document.getElementById("pname").textContent = player.name;
+    const n = document.getElementById("noto");
+    n.textContent = notoName();
+    n.style.color = notoColor();
+    document.getElementById("hpv").textContent = `${Math.ceil(player.hp)}/${player.hpMax}`;
+    document.getElementById("hpi").style.width = `${100 * player.hp / player.hpMax}%`;
+    document.getElementById("stv").textContent = `${Math.ceil(player.stam)}/${player.stamMax}`;
+    document.getElementById("sti").style.width = `${100 * player.stam / player.stamMax}%`;
+    document.getElementById("huv").textContent = player.hunger > 70 ? "full" : player.hunger > 30 ? "peckish" : "starving";
+    document.getElementById("hui").style.width = `${player.hunger}%`;
+    document.getElementById("gold").textContent = player.gold | 0;
+    document.getElementById("skills").innerHTML = SKILLS.map(s =>
+      `<div><span>${s}</span><span>${(player.skills[s] || 0).toFixed(1)}</span></div>`
+    ).join("");
+    document.getElementById("slots").innerHTML = player.pack.map(it => {
+      const meta = ITEMS[it.id] || { name: it.id };
+      const on = player.wield === it.id ? " on" : "";
+      return `<div class="slot${on}" data-id="${it.id}">${meta.name}<span>×${it.n}</span></div>`;
+    }).join("") || `<div class="slot">empty pack</div>`;
+    document.getElementById("dayn").textContent = 1 + Math.floor(time.tick / 1440);
+    document.getElementById("tod").textContent = todName();
+    document.getElementById("g1").className = player.flags.took ? "done" : "";
+    document.getElementById("g2").className = player.flags.chopped ? "done" : "";
+    document.getElementById("g3").className = player.flags.sold ? "done" : "";
+    document.getElementById("g4").className = player.flags.ate ? "done" : "";
+    document.getElementById("g5").className = player.flags.home ? "done" : "";
+  }
+
+  function pickTile(mx, my) {
+    // invert iso roughly by testing nearby tiles
+    let best = null, bestD = 1e9;
+    for (const t of world.tiles) {
+      const s = screenOf(t.q, t.r, t.h || 0);
+      const cx = s.x, cy = s.y + TH / 2;
+      const d = Math.hypot(mx - cx, (my - cy) * 2);
+      if (d < bestD) { bestD = d; best = t; }
+    }
+    return bestD < 40 ? best : null;
+  }
+
+  canvas.addEventListener("click", (e) => {
+    if (!running) return;
+    const t = pickTile(e.clientX, e.clientY);
+    if (!t) return;
+    const corpse = corpses.find(c => c.q === t.q && c.r === t.r);
+    if (corpse) { lootCorpse(corpse); return; }
+    const who = people.find(p => p.hp > 0 && p.q === t.q && p.r === t.r);
+    if (who) {
+      if (e.shiftKey) attackPerson(who);
+      else tryUseThing(who);
+      return;
+    }
+    const beast = fauna.find(f => f.hp > 0 && f.q === t.q && f.r === t.r);
+    if (beast) { tryUseThing(beast); return; }
+    if (t.kind === "tree" || t.kind === "ore" || t.kind === "chest" || t.kind === "stall" || t.kind === "well" || t.kind === "stump") {
+      tryUseTile(t.q, t.r);
+      return;
+    }
+    walkTo(t.q, t.r);
+  });
+
+  document.getElementById("slots").addEventListener("click", (e) => {
+    const row = e.target.closest("[data-id]");
+    if (!row) return;
+    const id = row.dataset.id;
+    if (ITEMS[id] && (ITEMS[id].tag === "tool" || ITEMS[id].tag === "weapon")) {
+      player.wield = id;
+      say(`You take the ${ITEMS[id].name} in hand.`);
+      paintHud();
+    } else if (ITEMS[id] && ITEMS[id].tag === "food") eat();
+  });
+
+  document.getElementById("btnBank").onclick = () => bankToggle();
+  document.getElementById("btnEat").onclick = () => eat();
+  document.getElementById("btnHelp").onclick = () => document.getElementById("help").classList.add("show");
+  document.getElementById("btnCloseHelp").onclick = () => document.getElementById("help").classList.remove("show");
+  document.getElementById("btnSave").onclick = () => { persist(); say("You rest. The hall keeps the book."); };
+
+  addEventListener("keydown", (e) => {
+    if (!running) return;
+    if (e.key === "b" || e.key === "B") bankToggle();
+    if (e.key === "e" || e.key === "E") eat();
+    if (e.key === "1") player.wield = countItem(player.pack, "hatchet") ? "hatchet" : player.wield;
+    if (e.key === "2") player.wield = countItem(player.pack, "pick") ? "pick" : player.wield;
+    if (e.key === "3") player.wield = countItem(player.pack, "blade") ? "blade" : player.wield;
+  });
+
+  function persist() {
+    localStorage.setItem(SAVE, JSON.stringify({ player, time, tiles: world.tiles.map(t => ({ q: t.q, r: t.r, kind: t.kind, wood: t.wood, ore: t.ore, h: t.h, step: t.step })), people: people.map(p => ({ name: p.name, q: p.q, r: p.r, hp: p.hp, hunt: p.hunt, fh: p.fh })), fauna, corpses, log: log.slice(0, 6) }));
+  }
+  function loadSave() {
+    try { return JSON.parse(localStorage.getItem(SAVE) || "null"); } catch { return null; }
+  }
+
+  function boot(fromSave) {
+    world = { tiles: [], hallQ: 18, hallR: 22 };
+    const fresh = makeMap();
+    world.tiles = fresh.tiles;
+    people = seedPeople();
+    fauna = seedFauna();
+    corpses = [];
+    log = [];
+    time = { tick: 8 * 60 };
+    cam = { x: 0, y: 0 };
+    player = freshPlayer();
+    if (fromSave && fromSave.player) {
+      player = fromSave.player;
+      time = fromSave.time || time;
+      corpses = fromSave.corpses || [];
+      if (fromSave.tiles) {
+        for (const s of fromSave.tiles) {
+          const t = tile(s.q, s.r);
+          if (t) {
+            t.kind = s.kind; t.wood = s.wood; t.ore = s.ore;
+            if (s.h != null) t.h = s.h;
+            if (s.step != null) t.step = s.step;
+          }
+        }
+      }
+      if (fromSave.people) {
+        for (const s of fromSave.people) {
+          const p = people.find(x => x.name === s.name);
+          if (p) { p.q = s.q; p.r = s.r; p.fq = s.q; p.fr = s.r; p.fh = s.fh ?? elev(s.q, s.r); p.hp = s.hp; p.hunt = s.hunt; }
+        }
+      }
+      if (fromSave.fauna) fauna = fromSave.fauna;
+    }
+    player.fh = player.fh ?? elev(player.q, player.r);
+    const focus = iso(player.q, player.r, player.fh);
+    cam.x = focus.x; cam.y = focus.y;
+    running = true;
+    document.getElementById("title").style.display = "none";
+    document.getElementById("hud").hidden = false;
+    say("Morning on the cobbles. The hall still smells of cold ash.");
+    paintHud();
+  }
+
+  document.getElementById("btnNew").addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    localStorage.removeItem(SAVE);
+    boot(null);
+  });
+  document.getElementById("btnNew").addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+    localStorage.removeItem(SAVE);
+    boot(null);
+  });
+  document.getElementById("btnContinue").onclick = () => {
+    const s = loadSave();
+    boot(s);
+  };
+
+  let acc = 0, last = performance.now();
+  function loop(now) {
+    requestAnimationFrame(loop);
+    const dt = Math.min(40, now - last); last = now;
+    if (!running) {
+      // idle title drift
+      ctx.fillStyle = "#120f0c";
+      ctx.fillRect(0, 0, innerWidth, innerHeight);
+      return;
+    }
+    acc += dt;
+    while (acc >= 140) {
+      acc -= 140;
+      time.tick += 1;
+      stepPlayer();
+      stepPeople();
+      stepFauna();
+      if (time.tick % 80 === 0) persist();
+    }
+    draw();
+    if (time.tick % 4 === 0) paintHud();
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

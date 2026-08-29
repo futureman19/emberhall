@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Emberhall</title>
+    <meta name="theme-color" content="#141210" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html, body { height: 100%; margin: 0; background: #141210; color: #ece6d8; overflow: hidden; font-family: "Source Serif 4", Georgia, serif; }
+      canvas { display: block; width: 100%; height: 100%; }
+      #hud { position: absolute; inset: 0; pointer-events: none; }
+      #title { position: absolute; top: 1.1rem; left: 50%; transform: translateX(-50%); font-family: Cinzel, Georgia, serif; letter-spacing: 0.28em; font-size: 0.72rem; color: #c9a36a; text-transform: uppercase; }
+      #note { position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%); width: min(28rem, calc(100% - 2rem)); text-align: center; font-size: 0.85rem; color: #9a9286; }
+      #go { pointer-events: auto; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: #a85a42; color: #ece6d8; border: 0; font-family: Cinzel, Georgia, serif; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.85rem 1.6rem; font-size: 0.85rem; cursor: pointer; }
+      #go:hover { filter: brightness(1.08); }
+    </style>
+  </head>
+  <body>
+    <div id="hud">
+      <p id="title">Emberhall</p>
+      <button id="go" type="button">New Hall</button>
+      <p id="note">Click the dirt to walk. The vale is live.</p>
+    </div>
+    <script type="importmap">
+      { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
+      const go = document.getElementById("go");
+      const note = document.getElementById("note");
+      go.onclick = () => { go.remove(); start(); };
+
+      function start() {
+        note.textContent = "Click the dirt. The hall already stands.";
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color("#9a9488");
+        scene.fog = new THREE.Fog("#9a9488", 28, 72);
+        const camera = new THREE.PerspectiveCamera(46, innerWidth / innerHeight, 0.2, 180);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+        renderer.setSize(innerWidth, innerHeight);
+        renderer.shadowMap.enabled = true;
+        document.body.prepend(renderer.domElement);
+
+        const sun = new THREE.DirectionalLight("#fff4e0", 2.1);
+        sun.position.set(-18, 32, -16);
+        sun.castShadow = true;
+        scene.add(sun, new THREE.AmbientLight("#c9c3b6", 0.55));
+
+        const ground = new THREE.Mesh(
+          new THREE.PlaneGeometry(80, 80),
+          new THREE.MeshStandardMaterial({ color: "#4a5a32", roughness: 0.95 }),
+        );
+        ground.rotation.x = -Math.PI / 2;
+        ground.receiveShadow = true;
+        scene.add(ground);
+
+        function mesh(w, h, d, color) {
+          const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), new THREE.MeshStandardMaterial({ color, roughness: 0.86 }));
+          m.castShadow = true;
+          m.receiveShadow = true;
+          return m;
+        }
+        function box(x, y, z, w, h, d, color) {
+          const m = mesh(w, h, d, color);
+          m.position.set(x, y, z);
+          scene.add(m);
+          return m;
+        }
+        // hall
+        box(0, 0.15, -2, 7.2, 0.3, 5.6, "#7a746c");
+        box(0, 1.4, -2, 6.2, 2.4, 4.6, "#6a4a32");
+        box(0, 2.9, -2, 6.8, 0.7, 5.2, "#3a2818");
+        box(0, 1.1, 0.35, 1.4, 1.8, 0.2, "#a85a42");
+        box(-2.2, 2.1, 0.4, 0.18, 1.4, 0.08, "#a85a42");
+        box(2.2, 2.1, 0.4, 0.18, 1.4, 0.08, "#a85a42");
+        // trees
+        for (const [tx, tz] of [[-8, 4], [9, 3], [-6, 8], [7, 9], [-11, -3], [12, -6], [4, 12], [-3, 11]]) {
+          box(tx, 1.05, tz, 0.28, 2.1, 0.28, "#5a3e28");
+          const leaf = new THREE.Mesh(new THREE.ConeGeometry(1.15, 2.5, 5), new THREE.MeshStandardMaterial({ color: "#3d4e2c", roughness: 0.95 }));
+          leaf.position.set(tx, 3.2, tz);
+          leaf.castShadow = true;
+          scene.add(leaf);
+        }
+
+        const you = new THREE.Group();
+        const body = mesh(0.42, 0.55, 0.28, "#a85a42"); body.position.set(0, 0.58, 0); you.add(body);
+        const cloakM = mesh(0.52, 0.72, 0.12, "#a85a42"); cloakM.position.set(0, 0.62, 0.16); you.add(cloakM);
+        const head = mesh(0.28, 0.28, 0.26, "#c9a36a"); head.position.set(0, 0.98, 0); you.add(head);
+        const hood = mesh(0.34, 0.2, 0.34, "#6a3a32"); hood.position.set(0, 1.12, -0.02); you.add(hood);
+        you.position.set(0, 0, 4);
+        scene.add(you);
+
+        let target = new THREE.Vector3(0, 0, 4);
+        const ray = new THREE.Raycaster();
+        const ndc = new THREE.Vector2();
+        addEventListener("pointerdown", (e) => {
+          ndc.x = (e.clientX / innerWidth) * 2 - 1;
+          ndc.y = -(e.clientY / innerHeight) * 2 + 1;
+          ray.setFromCamera(ndc, camera);
+          const hit = ray.intersectObject(ground)[0];
+          if (hit) target.set(hit.point.x, 0, hit.point.z);
+        });
+        addEventListener("resize", () => {
+          camera.aspect = innerWidth / innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(innerWidth, innerHeight);
+        });
+
+        function tick() {
+          const dx = target.x - you.position.x;
+          const dz = target.z - you.position.z;
+          const dist = Math.hypot(dx, dz);
+          if (dist > 0.08) {
+            you.position.x += (dx / dist) * 0.085;
+            you.position.z += (dz / dist) * 0.085;
+            you.rotation.y = Math.atan2(dx, dz);
+          }
+          camera.position.set(you.position.x + 10, 14, you.position.z + 13);
+          camera.lookAt(you.position.x, 0.6, you.position.z);
+          renderer.render(scene, camera);
+          requestAnimationFrame(tick);
+        }
+        tick();
+      }
+    </script>
+  </body>
+</html>
