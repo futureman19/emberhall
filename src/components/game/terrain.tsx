@@ -97,6 +97,12 @@ function treeGrow(tx: number, ty: number) {
   return 0.86 + ((tx * 13 + ty * 7) % 11) * 0.038;
 }
 
+function smooth01(a: number, b: number, x: number) {
+  if (b === a) return x >= b ? 1 : 0;
+  const t = Math.max(0, Math.min(1, (x - a) / (b - a)));
+  return t * t * (3 - 2 * t);
+}
+
 function hideRest(mesh: THREE.InstancedMesh | null, from: number, total: number) {
   if (!mesh) return;
   for (let i = from; i < total; i++) {
@@ -326,11 +332,14 @@ export function Terrain() {
         if (tx < 0 || ty < 0 || tx >= MAP || ty >= MAP) continue;
         const t = w.tiles[ty]![tx]!;
         if (t.kind === "tree") {
+          const dTree = Math.hypot(tx - px, ty - pz);
+          const nearFade = 1 - smooth01(half - 12, half - 0.4, dTree);
+          if (nearFade >= 0.05) {
           const grow = treeGrow(tx, ty);
           const gy = groundY(w, tx, ty);
           const climate = biomeAt(tx, ty);
-          const gx = climate === "taiga" ? grow * 0.58 : climate === "jungle" ? grow * 1.28 : grow;
-          const gsy = climate === "taiga" ? grow * 1.48 : climate === "jungle" ? grow * 0.92 : grow;
+          const gx = (climate === "taiga" ? grow * 0.58 : climate === "jungle" ? grow * 1.28 : grow) * nearFade;
+          const gsy = (climate === "taiga" ? grow * 1.48 : climate === "jungle" ? grow * 0.92 : grow) * nearFade;
           const trunkH = TRUNK_H * gsy;
           const under =
             Math.hypot(tx - px, ty - pz) < UNDER * (climate === "jungle" ? 1.25 : 1) * Math.min(1.15, grow);
@@ -378,6 +387,7 @@ export function Terrain() {
             paint(cn, si, leafCol);
             solidAt.current[si] = { tx, ty };
             si++;
+          }
           }
         }
         if (t.kind === "rock" && rk) {
@@ -617,13 +627,21 @@ const HVERTS = HSEGS + 1;
 const HCOUNT = HVERTS * HVERTS;
 const HSTEP = HORIZON / HSEGS;
 const INNER = VIEW / 2 - 2;
-const FAR_TREES = 1600;
+const FAR_TREES = 2200;
 const FAR_STEP = 3;
+const MID_BAND = 76;
 const COL_FAR = new THREE.Color("#2a3828");
+
+type FarStock = { tx: number; ty: number; grow: number };
+
+function align(v: number, step: number) {
+  return Math.ceil(v / step) * step;
+}
 
 export function Horizon() {
   const far = useRef<THREE.InstancedMesh>(null);
   const origin = useRef({ x: COURT.tx, z: COURT.ty, rev: -1 });
+  const stock = useRef<FarStock[]>([]);
   const geo = useMemo(() => {
     const g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(HCOUNT * 3), 3));
@@ -648,63 +666,90 @@ export function Horizon() {
     const you = w.people.find((p) => p.isPlayer);
     const ox = Math.round(you?.x ?? COURT.tx);
     const oz = Math.round(you?.z ?? COURT.ty);
+    const px = you?.x ?? ox;
+    const pz = you?.z ?? oz;
     const rev = w.landRev ?? 0;
-    if (origin.current.x === ox && origin.current.z === oz && origin.current.rev === rev) return;
-    origin.current = { x: ox, z: oz, rev };
-    const pos = geo.attributes.position as THREE.BufferAttribute;
-    const col = geo.attributes.color as THREE.BufferAttribute;
-    const arr = pos.array as Float32Array;
-    const car = col.array as Float32Array;
     const half = HORIZON / 2;
-    for (let iz = 0; iz < HVERTS; iz++) {
-      for (let ix = 0; ix < HVERTS; ix++) {
-        const wx = ox - half + ix * HSTEP;
-        const wz = oz - half + iz * HSTEP;
-        const i = (iz * HVERTS + ix) * 3;
-        const hole = Math.abs(wx - ox) < INNER && Math.abs(wz - oz) < INNER;
-        const off = wx < 0 || wz < 0 || wx >= MAP || wz >= MAP;
-        const dist = Math.hypot(wx - ox, wz - oz);
-        const lift = 1 + Math.max(0, dist - 50) / 320 * 0.5;
-        arr[i] = wx;
-        arr[i + 1] = hole || off ? -8 : groundY(w, wx, wz) * lift - 0.08;
-        arr[i + 2] = wz;
-        if (off) pal.set("#1a1c18");
-        else {
-          colorAt(w, wx, wz, pal);
-          pal.multiplyScalar(0.88);
+    const halfV = VIEW / 2;
+    if (origin.current.x !== ox || origin.current.z !== oz || origin.current.rev !== rev) {
+      origin.current = { x: ox, z: oz, rev };
+      const pos = geo.attributes.position as THREE.BufferAttribute;
+      const col = geo.attributes.color as THREE.BufferAttribute;
+      const arr = pos.array as Float32Array;
+      const car = col.array as Float32Array;
+      for (let iz = 0; iz < HVERTS; iz++) {
+        for (let ix = 0; ix < HVERTS; ix++) {
+          const wx = ox - half + ix * HSTEP;
+          const wz = oz - half + iz * HSTEP;
+          const i = (iz * HVERTS + ix) * 3;
+          const hole = Math.abs(wx - ox) < INNER && Math.abs(wz - oz) < INNER;
+          const off = wx < 0 || wz < 0 || wx >= MAP || wz >= MAP;
+          const dist = Math.hypot(wx - ox, wz - oz);
+          const lift = 1 + Math.max(0, dist - 50) / 320 * 0.5;
+          arr[i] = wx;
+          arr[i + 1] = hole || off ? -8 : groundY(w, wx, wz) * lift - 0.08;
+          arr[i + 2] = wz;
+          if (off) pal.set("#1a1c18");
+          else {
+            colorAt(w, wx, wz, pal);
+            pal.multiplyScalar(0.88);
+          }
+          car[i] = pal.r;
+          car[i + 1] = pal.g;
+          car[i + 2] = pal.b;
         }
-        car[i] = pal.r;
-        car[i + 1] = pal.g;
-        car[i + 2] = pal.b;
       }
+      pos.needsUpdate = true;
+      col.needsUpdate = true;
+      geo.computeVertexNormals();
+      geo.computeBoundingSphere();
+
+      const next: FarStock[] = [];
+      const pushTree = (tx: number, ty: number) => {
+        if (next.length >= FAR_TREES) return;
+        if (tx < 0 || ty < 0 || tx >= MAP || ty >= MAP) return;
+        if (w.tiles[ty]?.[tx]?.kind !== "tree") return;
+        next.push({ tx, ty, grow: 0.7 + hash2(tx, ty, w.seed + 5) * 0.55 });
+      };
+      for (let ty = oz - MID_BAND; ty <= oz + MID_BAND && next.length < FAR_TREES; ty++) {
+        for (let tx = ox - MID_BAND; tx <= ox + MID_BAND && next.length < FAR_TREES; tx++) {
+          const d = Math.hypot(tx - ox, ty - oz);
+          if (d < halfV - 14 || d > MID_BAND) continue;
+          pushTree(tx, ty);
+        }
+      }
+      const x0 = align(ox - half, FAR_STEP);
+      const z0 = align(oz - half, FAR_STEP);
+      for (let ty = z0; ty <= oz + half && next.length < FAR_TREES; ty += FAR_STEP) {
+        for (let tx = x0; tx <= ox + half && next.length < FAR_TREES; tx += FAR_STEP) {
+          const d = Math.hypot(tx - ox, ty - oz);
+          if (d <= MID_BAND || d > half - 2) continue;
+          pushTree(tx, ty);
+        }
+      }
+      stock.current = next;
     }
-    pos.needsUpdate = true;
-    col.needsUpdate = true;
-    geo.computeVertexNormals();
-    geo.computeBoundingSphere();
 
     const mesh = far.current;
     ensureColor(mesh, FAR_TREES);
     let fi = 0;
     if (mesh) {
-      for (let ty = oz - half; ty <= oz + half && fi < FAR_TREES; ty += FAR_STEP) {
-        for (let tx = ox - half; tx <= ox + half && fi < FAR_TREES; tx += FAR_STEP) {
-          if (tx < 0 || ty < 0 || tx >= MAP || ty >= MAP) continue;
-          const d = Math.hypot(tx - ox, ty - oz);
-          if (d < INNER + 4) continue;
-          if (w.tiles[ty]?.[tx]?.kind !== "tree") continue;
-          const grow = 0.7 + hash2(tx, ty, w.seed + 5) * 0.55;
-          dummy.position.set(
-            tx,
-            groundY(w, tx, ty) * (1 + Math.max(0, d - 50) / 320 * 0.5) + CANOPY_H * grow * 0.42,
-            ty,
-          );
-          dummy.scale.set(grow * 1.05, grow * 1.15, grow * 1.05);
-          dummy.updateMatrix();
-          mesh.setMatrixAt(fi, dummy.matrix);
-          paint(mesh, fi, COL_FAR);
-          fi++;
-        }
+      for (const t of stock.current) {
+        if (fi >= FAR_TREES) break;
+        const d = Math.hypot(t.tx - px, t.ty - pz);
+        const lod = smooth01(halfV - 12, halfV + 8, d);
+        const rim = 1 - smooth01(half - 55, half - 6, d);
+        const fade = lod * rim;
+        if (fade < 0.04) continue;
+        const lift = 1 + Math.max(0, d - 50) / 320 * 0.5;
+        const gy = groundY(w, t.tx, t.ty) * lift;
+        dummy.position.set(t.tx, gy + CANOPY_H * t.grow * 0.42 * fade, t.ty);
+        dummy.scale.set(t.grow * 1.05 * fade, t.grow * 1.15 * fade, t.grow * 1.05 * fade);
+        dummy.updateMatrix();
+        mesh.setMatrixAt(fi, dummy.matrix);
+        pal.copy(COL_FAR).lerp(COL_CANOPY, 1 - smooth01(halfV + 6, 110, d));
+        paint(mesh, fi, pal);
+        fi++;
       }
     }
     hideRest(mesh, fi, FAR_TREES);
