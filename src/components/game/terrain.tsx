@@ -81,6 +81,11 @@ const COL_FLOWER_PALE = new THREE.Color("#ece6d8");
 const COL_SAPLING = new THREE.Color("#4d6234");
 const COL_TUFT = new THREE.Color("#5a6a38");
 const FLORA = 400;
+const GROUND_FADE = {
+  uOrigin: { value: new THREE.Vector2(COURT.tx, COURT.ty) },
+  uNear: { value: VIEW / 2 - 16 },
+  uFar: { value: VIEW / 2 - 0.35 },
+};
 
 function blocked(world: World, tx: number, ty: number) {
   if (world.plots) {
@@ -180,9 +185,12 @@ function GroundMaterial() {
       map={maps.grass}
       roughness={0.96}
       metalness={0.02}
-      customProgramCacheKey={() => "vale-ground-v2"}
+      customProgramCacheKey={() => "vale-ground-v3"}
       onBeforeCompile={(shader) => {
         shader.uniforms.uDirt = { value: maps.dirt };
+        shader.uniforms.uOrigin = GROUND_FADE.uOrigin;
+        shader.uniforms.uNear = GROUND_FADE.uNear;
+        shader.uniforms.uFar = GROUND_FADE.uFar;
         shader.vertexShader = shader.vertexShader
           .replace(
             "#include <common>",
@@ -212,6 +220,9 @@ nature *= 0.78 + n * 0.34 + n2 * 0.12;
 float living = clamp(vCover.x + vCover.y, 0.0, 1.0);
 sampledDiffuseColor.rgb = mix(sampledDiffuseColor.rgb * 0.35 + diffuseColor.rgb * 0.7, nature, living);
 diffuseColor *= sampledDiffuseColor;
+float dist = length(vWp.xz - uOrigin);
+float fade = 1.0 - smoothstep(uNear, uFar, dist);
+if (fade < 0.02 || fade < bayer4(gl_FragCoord.xy) * 0.9 + 0.05) discard;
 `,
         );
       }}
@@ -325,6 +336,7 @@ export function Terrain() {
     let tui = 0;
     const px = you?.x ?? ox;
     const pz = you?.z ?? oz;
+    GROUND_FADE.uOrigin.value.set(px, pz);
     for (let iz = 0; iz < VIEW; iz++) {
       for (let ix = 0; ix < VIEW; ix++) {
         const tx = ox - half + ix;
@@ -390,7 +402,7 @@ export function Terrain() {
           }
           }
         }
-        if (t.kind === "rock" && rk) {
+        if (t.kind === "rock" && rk && Math.hypot(tx - px, ty - pz) < half - 2) {
           const marked = w.player.intent.kind === "mine" && w.player.intent.tx === tx && w.player.intent.ty === ty;
           const strike = marked && !you?.path.length;
           const szRoll = hash2(tx, ty, w.seed + 23);
@@ -427,7 +439,7 @@ export function Terrain() {
         }
         const wooded = t.kind === "tree";
         const open = t.kind === "grass" || t.kind === "sand" || t.kind === "snow" || t.kind === "marsh";
-        if ((wooded || open) && !blocked(w, tx, ty)) {
+        if ((wooded || open) && !blocked(w, tx, ty) && Math.hypot(tx - px, ty - pz) < half - 3) {
           const climate = biomeAt(tx, ty);
           const roll = hash2(tx, ty, w.seed + 41);
           let flora = -1;
@@ -626,7 +638,6 @@ const HSEGS = 50;
 const HVERTS = HSEGS + 1;
 const HCOUNT = HVERTS * HVERTS;
 const HSTEP = HORIZON / HSEGS;
-const INNER = VIEW / 2 - 2;
 const FAR_TREES = 2200;
 const FAR_STEP = 3;
 const MID_BAND = 76;
@@ -682,9 +693,9 @@ export function Horizon() {
           const wx = ox - half + ix * HSTEP;
           const wz = oz - half + iz * HSTEP;
           const i = (iz * HVERTS + ix) * 3;
-          const hole = Math.abs(wx - ox) < INNER && Math.abs(wz - oz) < INNER;
-          const off = wx < 0 || wz < 0 || wx >= MAP || wz >= MAP;
           const dist = Math.hypot(wx - ox, wz - oz);
+          const hole = dist < VIEW / 2 - 18;
+          const off = wx < 0 || wz < 0 || wx >= MAP || wz >= MAP;
           const lift = 1 + Math.max(0, dist - 50) / 320 * 0.5;
           arr[i] = wx;
           arr[i + 1] = hole || off ? -8 : groundY(w, wx, wz) * lift - 0.08;
