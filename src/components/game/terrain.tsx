@@ -80,12 +80,12 @@ const COL_FLOWER_GOLD = new THREE.Color("#c9a36a");
 const COL_FLOWER_PALE = new THREE.Color("#ece6d8");
 const COL_SAPLING = new THREE.Color("#4d6234");
 const COL_TUFT = new THREE.Color("#5a6a38");
-const FLORA = 400;
+const FLORA = 520;
 const GROUND_FADE = {
   uOrigin: { value: new THREE.Vector2(COURT.tx, COURT.ty) },
   uNear: { value: VIEW / 2 - 22 },
   uFar: { value: VIEW / 2 - 0.2 },
-  uFog: { value: new THREE.Color("#8b9e95") },
+  uFog: { value: new THREE.Color("#1c1c1a") },
 };
 
 function blocked(world: World, tx: number, ty: number) {

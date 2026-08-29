@@ -18,6 +18,7 @@ const SKY_DESERT = "#c4a878";
 const SKY_DUSK = "#8a6848";
 const SKY_NIGHT = "#141210";
 const SKY_PIT = "#0c0a08";
+const HAZE = "#1c1c1a";
 
 export function Lighting() {
   const dir = useRef<THREE.DirectionalLight>(null);
@@ -106,8 +107,8 @@ export function Lighting() {
                     : SKY_DAY;
     if (bg.current) bg.current.set(sky);
     if (fog.current) {
-      fog.current.color.set(sky);
-      fog.current.density = pit ? 0.14 : 0.0056;
+      fog.current.color.set(pit ? SKY_PIT : HAZE);
+      fog.current.density = pit ? 0.14 : 0.0062;
     }
     scene.background = bg.current;
   });
@@ -115,7 +116,7 @@ export function Lighting() {
   return (
     <>
       <color ref={bg} attach="background" args={[SKY_DAY]} />
-      <fogExp2 ref={fog} attach="fog" args={[SKY_DAY, 0.0056]} />
+      <fogExp2 ref={fog} attach="fog" args={[HAZE, 0.0062]} />
       <ambientLight ref={amb} intensity={0.58} color="#ece6d8" />
       <directionalLight
         ref={dir}
