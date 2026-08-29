@@ -157,7 +157,7 @@ export function MiniVale() {
   return (
     <div
       data-vale-map="mini"
-      className="relative size-40 cursor-pointer overflow-hidden rounded-[var(--radius-md)] border border-border bg-bg/80"
+      className="relative size-28 cursor-pointer overflow-hidden rounded-[var(--radius-md)] border border-border bg-bg/80"
       title="Tap the land to walk"
       onClick={onChartClick}
     >
