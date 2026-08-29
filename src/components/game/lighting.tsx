@@ -8,7 +8,7 @@ import { getWorld } from "@/game/live";
 import { useGame } from "@/game/store";
 
 const SUN_DIR = new THREE.Vector3(-0.52, 0.78, -0.36).normalize();
-const SKY_DAY = "#9aa3a0";
+const SKY_DAY = "#cdd2cc";
 const SKY_DUSK = "#c4a078";
 const SKY_NIGHT = "#141210";
 const SKY_PIT = "#0c0a08";
@@ -44,17 +44,17 @@ export function Lighting() {
     const night = !DEV_DAYLIGHT && useGame.getState().snap.isNight && !sight;
     const dusk = !DEV_DAYLIGHT && useGame.getState().snap.isDusk && !sight;
 
-    const ambI = pit ? 0.1 : night ? 0.18 : dusk ? 0.32 : 0.38;
-    const dirI = pit ? 0.12 : night ? 0.28 : dusk ? 1.35 : 2.45;
+    const ambI = pit ? 0.1 : night ? 0.18 : dusk ? 0.4 : 0.62;
+    const dirI = pit ? 0.12 : night ? 0.28 : dusk ? 1.5 : 3.4;
     if (amb.current) amb.current.intensity = ambI;
-    if (hemi.current) hemi.current.intensity = pit ? 0.04 : night ? 0.08 : 0.16;
+    if (hemi.current) hemi.current.intensity = pit ? 0.04 : night ? 0.08 : dusk ? 0.22 : 0.32;
 
     const lx = px + SUN_DIR.x * 48;
     const ly = py + SUN_DIR.y * 48;
     const lz = pz + SUN_DIR.z * 48;
     if (dir.current) {
       dir.current.intensity = dirI;
-      dir.current.color.set(night ? "#9aa8c4" : dusk ? "#e0a060" : "#fff1c8");
+      dir.current.color.set(night ? "#9aa8c4" : dusk ? "#e0a060" : "#fff8e4");
       dir.current.position.set(lx, ly, lz);
       dir.current.target.position.set(px, py, pz);
       dir.current.target.updateMatrixWorld();
@@ -79,8 +79,8 @@ export function Lighting() {
     if (bg.current) bg.current.set(sky);
     if (fog.current) {
       fog.current.color.set(sky);
-      fog.current.near = pit ? 8 : 52;
-      fog.current.far = pit ? 22 : 145;
+      fog.current.near = pit ? 8 : 68;
+      fog.current.far = pit ? 22 : 175;
     }
     scene.background = bg.current;
   });
@@ -88,22 +88,22 @@ export function Lighting() {
   return (
     <>
       <color ref={bg} attach="background" args={[SKY_DAY]} />
-      <fog ref={fog} attach="fog" args={[SKY_DAY, 52, 145]} />
-      <ambientLight ref={amb} intensity={0.38} color="#ece6d8" />
+      <fog ref={fog} attach="fog" args={[SKY_DAY, 68, 175]} />
+      <ambientLight ref={amb} intensity={0.62} color="#ece6d8" />
       <directionalLight
         ref={dir}
         castShadow
         position={[COURT.tx + 22, 40, COURT.ty + 14]}
-        intensity={2.45}
-        color="#fff1c8"
+        intensity={3.4}
+        color="#fff8e4"
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
       />
-      <hemisphereLight ref={hemi} args={["#d8d2c4", "#3a3228", 0.16]} />
+      <hemisphereLight ref={hemi} args={["#efe8d8", "#3a3228", 0.32]} />
       <group ref={sun} frustumCulled={false}>
         <mesh frustumCulled={false} renderOrder={-1}>
           <sphereGeometry args={[5.4, 24, 16]} />
-          <meshBasicMaterial color="#fff6d2" toneMapped={false} fog={false} depthWrite={false} />
+          <meshBasicMaterial color="#fffce8" toneMapped={false} fog={false} depthWrite={false} />
         </mesh>
         <mesh frustumCulled={false} renderOrder={-2}>
           <sphereGeometry args={[11, 24, 16]} />
