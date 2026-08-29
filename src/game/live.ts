@@ -1,4 +1,5 @@
 import { COURT, regionAt } from "./atlas";
+import { paintBiomes } from "./biome";
 import { hourOfDay, isDusk, isNight, settleGear } from "./catalog";
 import { seedBarrow, seedFauna } from "./ecology";
 import { seedFarmPlots } from "./farm";
@@ -18,6 +19,7 @@ function withFauna(w: World) {
   if (w.scars == null) w.scars = {};
   if (w.landRev == null) w.landRev = 1;
   if (w.tiles.length) seedFieldStones(w);
+  if (w.tiles.length) paintBiomes(w);
   if (w.tiles.length && w.fauna.length === 0) seedFauna(w, mulberry32(w.seed));
   if (w.tiles.length) seedBarrow(w, mulberry32(w.seed + 17));
   if (w.fauna) {

@@ -10,7 +10,9 @@ export type TileKind =
   | "floor"
   | "wall"
   | "step"
-  | "pit";
+  | "pit"
+  | "snow"
+  | "marsh";
 
 export type SkillId =
   | "swords"

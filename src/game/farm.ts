@@ -66,6 +66,8 @@ export function canTill(world: World, tx: number, ty: number): string | null {
   if (tile.kind === "tree") return "The tree stands.";
   if (tile.kind === "rock") return "Stone will not take a seed.";
   if (tile.kind === "wall" || tile.kind === "floor" || tile.kind === "cobble" || tile.kind === "step") return "Not this stone.";
+  if (tile.kind === "snow") return "The frost will not take a seed.";
+  if (tile.kind === "marsh") return "The peat is too wet.";
   if (tile.kind !== "grass" && tile.kind !== "dirt" && tile.kind !== "sand" && tile.kind !== "road") return "Not this dirt.";
   return null;
 }

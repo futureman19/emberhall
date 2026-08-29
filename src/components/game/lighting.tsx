@@ -2,6 +2,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useLayoutEffect, useRef } from "react";
 import * as THREE from "three";
 import { COURT, inGreybarrow } from "@/game/atlas";
+import { biomeAt } from "@/game/biome";
 import { DEV_DAYLIGHT } from "@/game/debug";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
@@ -9,6 +10,9 @@ import { useGame } from "@/game/store";
 
 const SUN_DIR = new THREE.Vector3(-0.52, 0.78, -0.36).normalize();
 const SKY_DAY = "#8b9e95";
+const SKY_TUNDRA = "#8a9690";
+const SKY_FEN = "#5e6c58";
+const SKY_DESERT = "#c4a878";
 const SKY_DUSK = "#8a6848";
 const SKY_NIGHT = "#141210";
 const SKY_PIT = "#0c0a08";
@@ -78,7 +82,20 @@ export function Lighting() {
       sun.current.position.set(px + SUN_DIR.x * 92, py + SUN_DIR.y * 92, pz + SUN_DIR.z * 92);
     }
 
-    const sky = pit ? SKY_PIT : night ? SKY_NIGHT : dusk ? SKY_DUSK : SKY_DAY;
+    const climate = biomeAt(Math.round(px), Math.round(pz));
+    const sky = pit
+      ? SKY_PIT
+      : night
+        ? SKY_NIGHT
+        : dusk
+          ? SKY_DUSK
+          : climate === "tundra"
+            ? SKY_TUNDRA
+            : climate === "fen"
+              ? SKY_FEN
+              : climate === "desert"
+                ? SKY_DESERT
+                : SKY_DAY;
     if (bg.current) bg.current.set(sky);
     if (fog.current) {
       fog.current.color.set(sky);

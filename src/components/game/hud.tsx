@@ -351,7 +351,8 @@ function HelpPanel() {
         Hold and Till a plot on grass. Walk a bed. Click it to sow a seed — cabbage, wheat, garlic. Wait. Click ripe
         green to take the crop and more seed. Farming is a skill. Eat cabbage from You.
         Eight stone rings hold the moons. Walk into the
-        swirl east of the steps.
+        swirl east of the steps. North of Oakstand the height goes to snow. Hearthfen is peat marsh. Brinegate is salt
+        and sand. The hall stays green.
       </p>
       <p className="mt-3 text-pretty text-xs leading-relaxed text-muted">
         A lute in the air — RandomMind, given to the dirt. The note stills the lute. The lines still the chop, the mine, the spell.

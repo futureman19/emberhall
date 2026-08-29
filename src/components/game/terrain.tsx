@@ -4,6 +4,7 @@ import { useMemo, useRef } from "react";
 import type { MutableRefObject } from "react";
 import * as THREE from "three";
 import { COURT, MAP, VIEW } from "@/game/atlas";
+import { biomeAt } from "@/game/biome";
 import { buildingBox } from "@/game/building-size";
 import { GROUND_SHADER, makeDirtTex, makeGrassTex } from "@/game/ground-tex";
 import { groundY } from "@/game/height";
@@ -26,6 +27,8 @@ const KIND_COLOR: Record<TileKind, string> = {
   wall: "#4a4640",
   step: "#7a6a58",
   pit: "#1a1612",
+  snow: "#d8d2c6",
+  marsh: "#3a4a36",
 };
 
 const COVER: Record<TileKind, [number, number, number]> = {
@@ -41,6 +44,8 @@ const COVER: Record<TileKind, [number, number, number]> = {
   sand: [0.12, 0.7, 0.18],
   water: [0, 0, 0],
   pit: [0, 0, 0],
+  snow: [0.08, 0.06, 0.04],
+  marsh: [0.55, 0.5, 0.08],
 };
 
 const SEGS = VIEW * 2;
@@ -55,6 +60,9 @@ const dummy = new THREE.Object3D();
 const pal = new THREE.Color();
 const COL_TRUNK = new THREE.Color("#5a3e28");
 const COL_CANOPY = new THREE.Color("#3d4e2c");
+const COL_CANOPY_COLD = new THREE.Color("#5a6458");
+const COL_CANOPY_FEN = new THREE.Color("#2c3a26");
+const COL_CANOPY_DRY = new THREE.Color("#6a6a40");
 const COL_ROCK = new THREE.Color("#7a7268");
 const COL_ROCK_2 = new THREE.Color("#5c574e");
 const COL_ROCK_3 = new THREE.Color("#8a8478");
@@ -62,6 +70,7 @@ const COL_MARK = new THREE.Color("#e0b56a");
 const COL_MARK_WOOD = new THREE.Color("#c48a4a");
 const COL_SHRUB = new THREE.Color("#354626");
 const COL_SHRUB_2 = new THREE.Color("#4a5a32");
+const COL_THORN = new THREE.Color("#6a5a38");
 const COL_FLOWER_RUST = new THREE.Color("#a85a42");
 const COL_FLOWER_GOLD = new THREE.Color("#c9a36a");
 const COL_FLOWER_PALE = new THREE.Color("#ece6d8");
@@ -321,7 +330,16 @@ export function Terrain() {
           dummy.scale.set(grow, grow, grow);
           dummy.updateMatrix();
           const trunkCol = marked ? COL_MARK_WOOD : COL_TRUNK;
-          const leafCol = marked ? COL_MARK : COL_CANOPY;
+          const climate = biomeAt(tx, ty);
+          const leafCol = marked
+            ? COL_MARK
+            : climate === "tundra"
+              ? COL_CANOPY_COLD
+              : climate === "fen"
+                ? COL_CANOPY_FEN
+                : climate === "desert"
+                  ? COL_CANOPY_DRY
+                  : COL_CANOPY;
           if (under) {
             tkg?.setMatrixAt(gi, dummy.matrix);
             paint(tkg, gi, trunkCol);
@@ -381,13 +399,15 @@ export function Terrain() {
           ri++;
         }
         const wooded = t.kind === "tree";
-        const open = t.kind === "grass" || t.kind === "sand";
+        const open = t.kind === "grass" || t.kind === "sand" || t.kind === "snow" || t.kind === "marsh";
         if ((wooded || open) && !blocked(w, tx, ty)) {
-          const seed = w.seed + 41;
-          const roll = hash2(tx, ty, seed);
+          const climate = biomeAt(tx, ty);
+          const roll = hash2(tx, ty, w.seed + 41);
           let flora = -1;
-          if (wooded) flora = hash2(tx, ty, w.seed + 51) < 0.14 ? 0 : -1;
-          else if (t.kind === "sand") flora = roll < 0.012 ? 1 : roll < 0.018 ? 3 : -1;
+          if (wooded) flora = hash2(tx, ty, w.seed + 51) < (climate === "tundra" ? 0.08 : 0.14) ? 0 : -1;
+          else if (climate === "tundra") flora = roll < 0.012 ? 3 : -1;
+          else if (climate === "fen") flora = roll < 0.028 ? 3 : roll < 0.034 ? 0 : -1;
+          else if (climate === "desert" || t.kind === "sand") flora = roll < 0.01 ? 0 : -1;
           else if (roll < 0.011) flora = 0;
           else if (roll < 0.019) flora = 1;
           else if (roll < 0.025) flora = 2;
@@ -403,7 +423,7 @@ export function Terrain() {
               dummy.scale.set(grow, grow, grow);
               dummy.updateMatrix();
               shb.setMatrixAt(shi, dummy.matrix);
-              paint(shb, shi, hash2(tx, ty, w.seed + 3) > 0.5 ? COL_SHRUB_2 : COL_SHRUB);
+              paint(shb, shi, climate === "desert" ? COL_THORN : hash2(tx, ty, w.seed + 3) > 0.5 ? COL_SHRUB_2 : COL_SHRUB);
               shi++;
             } else if (flora === 1 && fli < FLORA && flw) {
               dummy.position.set(tx + jx, gy + 0.14, ty + jz);
