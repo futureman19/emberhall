@@ -1,5 +1,6 @@
 import { EH, inGreybarrow } from "./atlas";
 import { FAUNA_META, ITEM_META, armorOf } from "./catalog";
+import { harvestNow, plantNow } from "./farm";
 import { ARROW_RANGE, FIREBALL_RANGE, burstDeath, castNow, maxMana, tickMana } from "./magery";
 import { astar, nearestWalkable, tileOf } from "./pathfinding";
 import { addToPile, takeFromPile } from "./piles";
@@ -41,6 +42,7 @@ function hands(world: World) {
 const SPILL: ItemId[] = [
   "log", "board", "ore", "meat", "hide", "ingot", "club", "shield",
   "garlic", "ginseng", "silk", "pearl", "moss", "mandrake", "ash", "nightshade",
+  "cabbage", "wheat",
 ];
 
 export function resurrect(world: World, at?: { x: number; z: number }) {
@@ -267,10 +269,23 @@ export function commandHeal(world: World) {
 export function commandCook(world: World) {
   const dead = hands(world);
   if (dead) return dead;
-  if ((world.player.pack.meat ?? 0) < 1) return "Need meat.";
-  world.player.pack.meat -= 1;
   const p = you(world);
-  if (p) p.hunger = Math.min(100, p.hunger + 28);
+  if (!p) return "You are not in the vale.";
+  if ((world.player.pack.cabbage ?? 0) > 0) {
+    world.player.pack.cabbage -= 1;
+    p.hunger = Math.min(100, p.hunger + 34);
+    tryGain(world, "cooking", true, true);
+    return "The cabbage holds.";
+  }
+  if ((world.player.pack.wheat ?? 0) > 0) {
+    world.player.pack.wheat -= 1;
+    p.hunger = Math.min(100, p.hunger + 22);
+    tryGain(world, "cooking", true, true);
+    return "The wheat fills.";
+  }
+  if ((world.player.pack.meat ?? 0) < 1) return "Need meat, cabbage, or wheat.";
+  world.player.pack.meat -= 1;
+  p.hunger = Math.min(100, p.hunger + 28);
   tryGain(world, "cooking", true, true);
   return "You eat.";
 }
@@ -485,12 +500,20 @@ export function tickPlayer(world: World, dt: number): string | null {
     intent.kind = "none";
     return null;
   }
-  if (intent.kind === "chop" || intent.kind === "mine") {
+  if (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest") {
     p.facing = Math.atan2(intent.tx - p.x, intent.ty - p.z);
     const prev = world.player.workT;
     world.player.workT += dt;
     const hit = prev % WORK_BEAT < 0.52 && world.player.workT % WORK_BEAT >= 0.52;
     if (!hit) return null;
+    if (intent.kind === "plant") {
+      burstChips(world, intent.tx, intent.ty, "chop");
+      return plantNow(world);
+    }
+    if (intent.kind === "harvest") {
+      burstChips(world, intent.tx, intent.ty, "chop");
+      return harvestNow(world);
+    }
     playSfx(intent.kind === "chop" ? "chop" : "mine", 0.55);
     burstChips(world, intent.tx, intent.ty, intent.kind);
     if (intent.kind === "chop") return chopNow(world, p);

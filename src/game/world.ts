@@ -14,6 +14,7 @@ import { emptyChest, emptyLastGain, emptyPack, emptySkills } from "./catalog";
 import { personName } from "./names";
 import { hash2, irange, mulberry32, pick } from "./rng";
 import { siteError } from "./building-size";
+import { seedFarmPlots } from "./farm";
 import type { BuildingKind, ClassId, Person, Tile, TileKind, World } from "./types";
 
 let nidAcc = 1;
@@ -239,6 +240,10 @@ export function placeBuilding(world: World, kind: BuildingKind, tx: number, ty: 
   });
   world.gold -= cost;
   if (kind === "dormitory") completeObjective(world, "dorm");
+  if (kind === "farm") {
+    seedFarmPlots(world, tx, ty);
+    completeObjective(world, "farm");
+  }
   log(world, `The ${kind} is raised.`);
   return null;
 }
@@ -255,6 +260,7 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
     fauna: [],
     piles: [],
     buildings: [],
+    plots: [],
     player: {
       id: "",
       skills: emptySkills(),
@@ -304,6 +310,9 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
       { id: "recover", text: "Take back what your corpse kept", done: false },
       { id: "recruit", text: "Recruit a traveler", done: false },
       { id: "dorm", text: "Raise a dormitory", done: false },
+      { id: "farm", text: "Raise a farm", done: false },
+      { id: "plant", text: "Sow a bed", done: false },
+      { id: "harvest", text: "Take a crop from the dirt", done: false },
     ],
     quests: [],
     rep: {},

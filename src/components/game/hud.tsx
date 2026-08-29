@@ -316,7 +316,9 @@ function HelpPanel() {
         a banker, a healer, a stall. Die and you walk pale — Ione at the hall can return you. Your corpse keeps what it
         took until you come back living. Open Hold to raise timber on the dirt — dorm, kitchen, forge, tavern. Walk
         through a door and the roof goes thin so you can see the room. The yard saws logs into boards. Raise a forge —
-        Hold, then the dirt — to smelt ore and beat iron. Eight stone rings hold the moons. Walk into the
+        Hold, then the dirt — to smelt ore and beat iron. Raise a farm the same way. Walk the beds. Click empty dirt to
+        sow cabbage, wheat, or garlic. Wait. Click ripe green to take it. Farming is a skill. Eat cabbage from You.
+        Eight stone rings hold the moons. Walk into the
         swirl east of the steps.
       </p>
       <p className="mt-3 text-pretty text-xs leading-relaxed text-muted">
@@ -387,7 +389,8 @@ function HoldPanel() {
       <h2 className="font-display text-sm text-fg">The hold</h2>
       <p className="mt-1 text-pretty text-xs leading-relaxed text-muted">
         Timber cubes, red cloth, gold lintels. Pick a building, then drag the shade on the dirt. Gold if it sits, rust
-        if the ground is taken. Lift to raise. One of each. The forge is the fire for ore.
+        if the ground is taken. Lift to raise. One of each. The forge is the fire for ore. The farm is eight beds and a
+        fence — sow, wait, take.
       </p>
       <ul className="mt-3 space-y-1">
         {BUILD_ORDER.map((kind) => {

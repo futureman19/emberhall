@@ -22,12 +22,14 @@ export type SkillId =
   | "smithing"
   | "carpentry"
   | "taming"
-  | "magery";
+  | "magery"
+  | "farming";
 
 export type ItemId =
   | "hatchet"
   | "knife"
   | "pick"
+  | "hoe"
   | "log"
   | "board"
   | "ore"
@@ -70,7 +72,9 @@ export type ItemId =
   | "pearl"
   | "moss"
   | "mandrake"
-  | "ash";
+  | "ash"
+  | "cabbage"
+  | "wheat";
 
 export type WearSlot =
   | "head"
@@ -94,10 +98,10 @@ export type SpellId =
 export type ClassId = "ranger" | "warrior" | "mage" | "rogue" | "merchant";
 export type NpcRole = "banker" | "provisioner" | "healer";
 export type FaunaKind = "hare" | "hart" | "wolf" | "wight";
-export type BuildingKind = "hall" | "dormitory" | "kitchen" | "yard" | "board" | "market" | "forge" | "tavern" | "notice";
+export type BuildingKind = "hall" | "dormitory" | "kitchen" | "yard" | "board" | "market" | "forge" | "tavern" | "notice" | "farm";
 export type VocationId = "cook" | "armourer" | "trader" | "recruiter" | "guard";
 export type Notoriety = "innocent" | "criminal" | "murderer";
-export type IntentKind = "walk" | "chop" | "mine" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "none";
+export type IntentKind = "walk" | "chop" | "mine" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "none";
 export type Speed = 0 | 1 | 2 | 3;
 export type PanelId = "none" | "help" | "you" | "journal" | "vale" | "roster" | "build";
 
@@ -191,6 +195,17 @@ export interface Building {
   beds: { occupantId: string | null }[];
 }
 
+export type CropId = "cabbage" | "wheat" | "garlic";
+
+export interface CropPlot {
+  id: string;
+  tx: number;
+  ty: number;
+  crop: CropId | null;
+  plantedHour: number;
+  stage: 0 | 1 | 2 | 3;
+}
+
 export interface Objective {
   id: string;
   text: string;
@@ -234,6 +249,7 @@ export interface World {
   fauna: Creature[];
   piles: GroundPile[];
   buildings: Building[];
+  plots: CropPlot[];
   player: PlayerState;
   log: LogLine[];
   objectives: Objective[];
@@ -260,6 +276,7 @@ export interface Snapshot {
   visitorCount: number;
   people: Person[];
   buildings: Building[];
+  plots: CropPlot[];
   quests: { id: string; title: string }[];
   log: LogLine[];
   rep: Record<string, number>;
@@ -280,7 +297,7 @@ export interface Snapshot {
   seenRev: number;
 }
 
-export type CtxKind = "tile" | "person" | "fauna" | "pile" | "pack" | "gate" | "building";
+export type CtxKind = "tile" | "person" | "fauna" | "pile" | "pack" | "gate" | "building" | "plot";
 export type CtxVerb =
   | "walk"
   | "chop"
@@ -300,7 +317,11 @@ export type CtxVerb =
   | "enter"
   | "drop"
   | "take"
-  | "use";
+  | "use"
+  | "harvest"
+  | "sowCabbage"
+  | "sowWheat"
+  | "sowGarlic";
 
 export interface CtxTarget {
   kind: CtxKind;

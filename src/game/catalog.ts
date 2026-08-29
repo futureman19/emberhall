@@ -25,6 +25,7 @@ export const SKILL_META: Record<SkillId, { label: string }> = {
   carpentry: { label: "Carpentry" },
   taming: { label: "Animal Taming" },
   magery: { label: "Magery" },
+  farming: { label: "Farming" },
 };
 
 export const ITEM_META: Record<
@@ -34,6 +35,7 @@ export const ITEM_META: Record<
   hatchet: { label: "Hatchet", tool: true, slot: null, fill: "var(--color-muted)", armor: 0, buy: 12, sell: 4 },
   knife: { label: "Skinning knife", tool: true, slot: null, fill: "var(--color-muted)", armor: 0, buy: 8, sell: 3 },
   pick: { label: "Pick", tool: true, slot: null, fill: "var(--color-muted)", armor: 0, buy: 14, sell: 5 },
+  hoe: { label: "Hoe", tool: true, slot: null, fill: "var(--color-muted)", armor: 0, buy: 12, sell: 4 },
   log: { label: "Log", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 2 },
   board: { label: "Board", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 3 },
   ore: { label: "Iron ore", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 0, sell: 3 },
@@ -77,6 +79,8 @@ export const ITEM_META: Record<
   moss: { label: "Blood moss", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 5, sell: 2 },
   mandrake: { label: "Mandrake", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 6, sell: 2 },
   ash: { label: "Sulfurous ash", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 4, sell: 1 },
+  cabbage: { label: "Cabbage", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 4, sell: 2 },
+  wheat: { label: "Wheat", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 3, sell: 1 },
 };
 
 export const CLASS_META: Record<ClassId, { label: string; color: string }> = {
@@ -110,9 +114,10 @@ export const BUILDING_META: Record<BuildingKind, { label: string }> = {
   forge: { label: "Forge" },
   tavern: { label: "Tavern" },
   notice: { label: "Notice" },
+  farm: { label: "Farm" },
 };
 
-export const BUILD_ORDER: BuildingKind[] = ["dormitory", "kitchen", "market", "forge", "tavern"];
+export const BUILD_ORDER: BuildingKind[] = ["dormitory", "kitchen", "farm", "market", "forge", "tavern"];
 
 export const NOTORIETY_META: Record<Notoriety, { label: string }> = {
   innocent: { label: "Innocent" },
@@ -121,8 +126,8 @@ export const NOTORIETY_META: Record<Notoriety, { label: string }> = {
 };
 
 export const SHOP_STOCK: ItemId[] = [
-  "hatchet", "pick", "knife", "bandage", "tunic", "hood", "cloak", "boots",
-  "rune", "garlic", "ginseng", "silk", "pearl", "moss", "mandrake", "ash",
+  "hatchet", "pick", "hoe", "knife", "bandage", "tunic", "hood", "cloak", "boots",
+  "rune", "garlic", "ginseng", "silk", "pearl", "moss", "mandrake", "ash", "cabbage", "wheat",
 ];
 
 export function emptySkills(): Record<SkillId, number> {
@@ -137,24 +142,25 @@ export function emptySkills(): Record<SkillId, number> {
     carpentry: 12,
     taming: 14,
     magery: 8,
+    farming: 10,
   };
 }
 
 export function emptyLastGain(): Record<SkillId, number> {
   return {
     swords: 0, lumberjack: 0, mining: 0, anatomy: 0, healing: 0,
-    cooking: 0, smithing: 0, carpentry: 0, taming: 0, magery: 0,
+    cooking: 0, smithing: 0, carpentry: 0, taming: 0, magery: 0, farming: 0,
   };
 }
 
 export function emptyPack(): Record<ItemId, number> {
   return {
-    hatchet: 1, knife: 1, pick: 1, log: 0, board: 0, ore: 0, ingot: 0, club: 0, shield: 0,
+    hatchet: 1, knife: 1, pick: 1, hoe: 1, log: 0, board: 0, ore: 0, ingot: 0, club: 0, shield: 0,
     staff: 0, bow: 0, torch: 0, crate: 0, cap: 0, cuirass: 0, sword: 0, mace: 0, gauntlets: 0, gorget: 0, heater: 0,
     meat: 1, hide: 0, bandage: 3,
     tunic: 0, leather: 0, mail: 0, hood: 1, helm: 0, cloak: 0, gloves: 1, hose: 0, greaves: 0,
     boots: 0, pendant: 1, ring: 1, relic: 0, spellbook: 1, rune: 4, garlic: 12, ginseng: 12,
-    silk: 16, nightshade: 4, pearl: 14, moss: 10, mandrake: 10, ash: 12,
+    silk: 16, nightshade: 4, pearl: 14, moss: 10, mandrake: 10, ash: 12, cabbage: 5, wheat: 4,
   };
 }
 

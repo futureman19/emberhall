@@ -1,7 +1,7 @@
-import { ITEM_META } from "@/game/catalog";
+import { ITEM_META, SKILL_META } from "@/game/catalog";
 import { maxMana } from "@/game/magery";
 import { useGame } from "@/game/store";
-import type { ItemId, WearSlot } from "@/game/types";
+import type { ItemId, SkillId, WearSlot } from "@/game/types";
 import { cn } from "@/lib/utils";
 
 const SLOTS: { id: WearSlot; label: string }[] = [
@@ -67,6 +67,15 @@ export function YouDressing() {
           );
         })}
       </div>
+      <p className="mt-4 font-display text-xs tracking-wider text-muted uppercase">Skills</p>
+      <ul className="mt-1 grid grid-cols-2 gap-1">
+        {(Object.keys(SKILL_META) as SkillId[]).map((id) => (
+          <li key={id} className="flex items-baseline justify-between rounded-[var(--radius-xs)] border border-border bg-surface-2 px-2 py-1">
+            <span className="truncate text-xs text-muted">{SKILL_META[id].label}</span>
+            <span className="text-xs text-fg">{(skills?.[id] ?? 0).toFixed(1)}</span>
+          </li>
+        ))}
+      </ul>
       <p className="mt-4 font-display text-xs tracking-wider text-muted uppercase">Pack</p>
       <ul className="mt-1 max-h-48 space-y-1 overflow-auto">
         {held.map((id) => (

@@ -10,6 +10,7 @@ import { getChips } from "@/game/player";
 import { useGame } from "@/game/store";
 import { hoverAt, leftAt, liftAt } from "@/game/world-pointer";
 import { Buildings } from "./building-meshes";
+import { Crops } from "./crop-meshes";
 import { Fauna } from "./fauna-meshes";
 import { Gates } from "./gate-meshes";
 import { Lighting } from "./lighting";
@@ -165,7 +166,7 @@ function WalkMarker() {
   if (!intent || intent.kind === "none") return null;
   const y = groundY(intent.tx, intent.ty);
   const ember = intent.kind === "cast";
-  const mark = intent.kind === "chop" || intent.kind === "mine";
+  const mark = intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest";
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[intent.tx, y + 0.1, intent.ty]}>
       <ringGeometry args={[0.22, 0.32, 18]} />
@@ -326,6 +327,7 @@ export function WorldScene() {
       <Lighting />
       <Terrain />
       <Buildings />
+      <Crops />
       <People />
       <Fauna />
       <Piles />

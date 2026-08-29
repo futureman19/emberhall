@@ -1,5 +1,6 @@
 import { VIEW } from "./atlas";
 import { buildingAt } from "./craft";
+import { CROP_META, plotAt } from "./farm";
 import { getWorld } from "./live";
 import { markBuildHold, takeBuildHold, useGame } from "./store";
 import type { CtxTarget } from "./types";
@@ -20,6 +21,12 @@ export function hitAt(tx: number, ty: number, sx: number, sy: number) {
   const person = w.people.find((p) => !p.isPlayer && Math.round(p.x) === tx && Math.round(p.z) === ty);
   if (person) {
     g.openCtx(sx, sy, { kind: "person", id: person.id, tx, ty, label: person.name });
+    return;
+  }
+  const bed = plotAt(w, tx, ty);
+  if (bed) {
+    const crop = bed.crop ? CROP_META[bed.crop].label : "bed";
+    g.openCtx(sx, sy, { kind: "plot", id: bed.id, tx, ty, label: crop });
     return;
   }
   const b = buildingAt(w, tx, ty, 2.6);

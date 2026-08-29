@@ -53,6 +53,21 @@ function Hatchet({ ghost }: { ghost: boolean }) {
   );
 }
 
+function Hoe({ ghost }: { ghost: boolean }) {
+  return (
+    <group position={[0.02, -0.44, 0.04]} rotation={[0.15, 0, 0.35]}>
+      <mesh position={[0, 0.16, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.04, 0.44, 0.04]} />
+        <Mat color="#5a3e28" ghost={ghost} />
+      </mesh>
+      <mesh position={[0.1, 0.38, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.22, 0.05, 0.12]} />
+        <meshStandardMaterial color="#8a8680" metalness={0.45} roughness={0.4} />
+      </mesh>
+    </group>
+  );
+}
+
 function Pick({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.44, 0.04]} rotation={[0.15, 0, 0.35]}>
@@ -112,7 +127,11 @@ function PalmFlame() {
 function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Partial<Record<WearSlot, ItemId>> }) {
   const ghost = Boolean(p.ghost);
   const intent = useGame((s) => s.snap.player.intent);
-  const working = p.isPlayer && !ghost && !p.path.length && (intent.kind === "chop" || intent.kind === "mine");
+  const working =
+    p.isPlayer &&
+    !ghost &&
+    !p.path.length &&
+    (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest");
   const bob = Math.sin(p.bob) * (ghost ? 0.08 : 0.04);
   const walkSwing = p.path.length ? Math.sin(p.bob) * 0.35 : 0;
   const left = useRef<Group>(null);
@@ -123,7 +142,7 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
     const you = w.people.find((x) => x.isPlayer);
     const it = w.player.intent;
     const idle = Boolean(you && !you.ghost && !you.path.length);
-    const chopping = idle && (it.kind === "chop" || it.kind === "mine");
+    const chopping = idle && (it.kind === "chop" || it.kind === "mine" || it.kind === "plant" || it.kind === "harvest");
     const casting = idle && it.kind === "cast";
     if (left.current) {
       if (casting) {
@@ -217,6 +236,7 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
         </mesh>
         {working && intent.kind === "chop" && <Hatchet ghost={ghost} />}
         {working && intent.kind === "mine" && <Pick ghost={ghost} />}
+        {working && (intent.kind === "plant" || intent.kind === "harvest") && <Hoe ghost={ghost} />}
         {p.isPlayer && !ghost && <PalmFlame />}
       </group>
       <mesh position={[0, 0.98 + bob, 0]} castShadow={!ghost}>

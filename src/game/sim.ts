@@ -1,6 +1,7 @@
 import { COURT, GATE, placeById } from "./atlas";
 import { SECONDS_PER_HOUR } from "./catalog";
 import { tickEcology } from "./ecology";
+import { tickCrops } from "./farm";
 import { astar, nearestWalkable, tileOf } from "./pathfinding";
 import { tickPiles } from "./piles";
 import { tickPlayer, you } from "./player";
@@ -73,6 +74,7 @@ export function tickWorld(world: World, realDt: number) {
 
   const note = tickPlayer(world, dt);
   if (note) log(world, note);
+  tickCrops(world);
   tickEcology(world, dt);
   tickPiles(world);
   void COURT;

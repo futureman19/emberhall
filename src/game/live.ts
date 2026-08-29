@@ -1,6 +1,7 @@
 import { COURT, regionAt } from "./atlas";
 import { hourOfDay, isDusk, isNight, settleGear } from "./catalog";
 import { seedBarrow, seedFauna } from "./ecology";
+import { seedFarmPlots } from "./farm";
 import { maxMana } from "./magery";
 import { you } from "./player";
 import { mulberry32 } from "./rng";
@@ -10,7 +11,11 @@ import type { Snapshot, World } from "./types";
 function withFauna(w: World) {
   if (!w.fauna) w.fauna = [];
   if (!w.piles) w.piles = [];
-  if (!w.scars) w.scars = {};
+  if (!w.plots) w.plots = [];
+  if (w.buildings) {
+    for (const b of w.buildings) if (b.kind === "farm") seedFarmPlots(w, b.tx, b.ty);
+  }
+  if (w.scars == null) w.scars = {};
   if (w.landRev == null) w.landRev = 1;
   if (w.tiles.length && w.fauna.length === 0) seedFauna(w, mulberry32(w.seed));
   if (w.tiles.length) seedBarrow(w, mulberry32(w.seed + 17));
@@ -28,6 +33,9 @@ function withFauna(w: World) {
       { id: "plank", text: "Saw a log into boards at the yard", done: false },
       { id: "smelt", text: "Smelt ore at a forge", done: false },
       { id: "smith", text: "Beat ingot into a tool at the fire", done: false },
+      { id: "farm", text: "Raise a farm", done: false },
+      { id: "plant", text: "Sow a bed", done: false },
+      { id: "harvest", text: "Take a crop from the dirt", done: false },
     ];
     for (const e of extra) {
       if (!w.objectives.some((o) => o.id === e.id)) w.objectives.push(e);
@@ -78,6 +86,7 @@ export function snapshot(w: World = world): Snapshot {
     visitorCount: w.people.filter((p) => !p.member && !p.role && p.task !== "away").length,
     people: visible,
     buildings: w.buildings,
+    plots: w.plots ?? [],
     quests: w.quests,
     log: w.log.slice(0, 12),
     rep: { ...w.rep },

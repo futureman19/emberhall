@@ -1,3 +1,4 @@
+import { CROP_META, plotAt } from "./farm";
 import { hasBook } from "./magery";
 import { getWorld } from "./live";
 import type { CtxTarget, CtxVerb } from "./types";
@@ -22,7 +23,26 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
     const tile = w.tiles[t.ty]?.[t.tx];
     if (tile?.kind === "tree") out.push({ verb: "chop", label: "Chop" });
     if (tile?.kind === "rock") out.push({ verb: "mine", label: "Mine" });
+    const bed = plotAt(w, t.tx, t.ty);
+    if (bed) {
+      if (bed.crop && bed.stage >= 3) out.push({ verb: "harvest", label: "Harvest" });
+      if (!bed.crop) {
+        if ((w.player.pack.cabbage ?? 0) > 0) out.push({ verb: "sowCabbage", label: "Sow cabbage" });
+        if ((w.player.pack.wheat ?? 0) > 0) out.push({ verb: "sowWheat", label: "Sow wheat" });
+        if ((w.player.pack.garlic ?? 0) > 0) out.push({ verb: "sowGarlic", label: "Sow garlic" });
+      }
+    }
     if (hasBook(w)) out.push({ verb: "teleport", label: "Teleport here" });
+  }
+  if (t.kind === "plot") {
+    out.push({ verb: "walk", label: "Walk here" });
+    const bed = plotAt(w, t.tx, t.ty);
+    if (bed?.crop && bed.stage >= 3) out.push({ verb: "harvest", label: `Take the ${CROP_META[bed.crop].label.toLowerCase()}` });
+    if (bed && !bed.crop) {
+      if ((w.player.pack.cabbage ?? 0) > 0) out.push({ verb: "sowCabbage", label: "Sow cabbage" });
+      if ((w.player.pack.wheat ?? 0) > 0) out.push({ verb: "sowWheat", label: "Sow wheat" });
+      if ((w.player.pack.garlic ?? 0) > 0) out.push({ verb: "sowGarlic", label: "Sow garlic" });
+    }
   }
   if (t.kind === "fauna") {
     const c = w.fauna.find((x) => x.id === t.id);

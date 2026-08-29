@@ -12,7 +12,7 @@ import type { Building, BuildingKind } from "@/game/types";
 const B = 0.5;
 const GAP = 0.96;
 
-type Block = "timber" | "dark" | "cobble" | "wool" | "gold" | "glass" | "thatch" | "stone" | "coal";
+type Block = "timber" | "dark" | "cobble" | "wool" | "gold" | "glass" | "thatch" | "stone" | "coal" | "soil" | "leaf";
 
 interface Vox {
   x: number;
@@ -41,6 +41,8 @@ const PALETTE: Record<Block, { color: string; roughness: number; metalness: numb
   thatch: { color: "#8a7048", roughness: 0.94, metalness: 0, opacity: 1 },
   stone: { color: "#9a9286", roughness: 0.9, metalness: 0, opacity: 1 },
   coal: { color: "#141210", roughness: 0.95, metalness: 0, opacity: 1 },
+  soil: { color: "#4a3424", roughness: 0.96, metalness: 0, opacity: 1 },
+  leaf: { color: "#5a7040", roughness: 0.88, metalness: 0, opacity: 1 },
 };
 
 const KINDS = Object.keys(PALETTE) as Block[];
@@ -287,6 +289,45 @@ function makeNotice(): Spec {
   return { voxels: out, x0: -1, x1: 1, z0: 0, z1: 2, enterable: false };
 }
 
+function makeFarm(): Spec {
+  const out: Vox[] = [];
+  for (let x = -5; x <= 5; x++) {
+    for (let z = -5; z <= 5; z++) {
+      const edge = x === -5 || x === 5 || z === -5 || z === 5;
+      const gate = z === 5 && x >= -1 && x <= 1;
+      if (!edge || gate) continue;
+      const post = x % 2 === 0 && z % 2 === 0;
+      const corner = (x === -5 || x === 5) && (z === -5 || z === 5);
+      put(out, x, 0, z, "cobble");
+      put(out, x, 1, z, post ? "timber" : "dark");
+      if (post) put(out, x, 2, z, corner ? "wool" : "timber");
+      if (corner) put(out, x, 3, z, "gold");
+    }
+  }
+  put(out, -2, 1, 5, "timber");
+  put(out, 2, 1, 5, "timber");
+  put(out, -2, 2, 5, "gold");
+  put(out, 2, 2, 5, "gold");
+  const beds = [
+    [-4, -4],
+    [0, -4],
+    [4, -4],
+    [-4, 0],
+    [4, 0],
+    [-4, 4],
+    [0, 4],
+    [4, 4],
+  ];
+  for (const [bx, bz] of beds) {
+    fill(out, bx - 1, 0, bz - 1, bx, 0, bz, "soil");
+  }
+  fill(out, -2, 0, -5, 2, 0, -5, "cobble");
+  fill(out, -2, 1, -5, 2, 2, -5, "timber", (x, y, z) => y === 1 && x === 0 && z === -5);
+  fill(out, -3, 3, -5, 3, 3, -4, "thatch");
+  put(out, 0, 1, -5, "wool");
+  return { voxels: out, x0: -5, x1: 5, z0: -5, z1: 5, enterable: true };
+}
+
 function makeBoard(): Spec {
   const out: Vox[] = [];
   fill(out, -3, 0, 0, -3, 3, 0, "timber");
@@ -307,6 +348,7 @@ const SPECS: Record<BuildingKind, Spec> = {
   tavern: makeTavern(),
   notice: makeNotice(),
   board: makeBoard(),
+  farm: makeFarm(),
 };
 
 function occupant(buildings: Building[], x: number, z: number) {
@@ -393,6 +435,8 @@ function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
       thatch: [],
       stone: [],
       coal: [],
+      soil: [],
+      leaf: [],
     };
     const cut: Record<Block, THREE.Vector3[]> = {
       timber: [],
@@ -404,6 +448,8 @@ function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
       thatch: [],
       stone: [],
       coal: [],
+      soil: [],
+      leaf: [],
     };
     for (const v of spec.voxels) {
       const p = new THREE.Vector3(b.tx + (v.x + 0.5) * B, y0 + (v.y + 0.5) * B, b.ty + (v.z + 0.5) * B);

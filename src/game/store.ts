@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { commandTravel } from "./gates";
 import { commandCraft, craftReach, stationOf } from "./craft";
+import { commandHarvest, commandPlant, commandWorkPlot, plotAt } from "./farm";
 import { getWorld, resetWorld, setWorld, snapshot } from "./live";
 import { commandCast, forgetMark, SPELL_META, hasBook } from "./magery";
 import type { CastTarget } from "./magery";
@@ -292,7 +293,8 @@ export const useGame = create<GameUI>((set, get) => ({
     }
     const t = w.tiles[ty]?.[tx];
     let err: string | null = null;
-    if (t?.kind === "tree") err = commandChop(w, tx, ty);
+    if (plotAt(w, tx, ty)) err = commandWorkPlot(w, tx, ty);
+    else if (t?.kind === "tree") err = commandChop(w, tx, ty);
     else if (t?.kind === "rock") err = commandMine(w, tx, ty);
     else err = commandWalk(w, tx, ty);
     if (err) get().flash(err);
@@ -353,6 +355,10 @@ export const useGame = create<GameUI>((set, get) => ({
       const st = stationNear(t.tx, t.ty, 1.2);
       if (st) set({ openGateId: st.id, ctx: null });
     } else if (verb === "use") get().useStation(t.id);
+    else if (verb === "harvest") err = commandHarvest(w, t.tx, t.ty);
+    else if (verb === "sowCabbage") err = commandPlant(w, t.tx, t.ty, "cabbage");
+    else if (verb === "sowWheat") err = commandPlant(w, t.tx, t.ty, "wheat");
+    else if (verb === "sowGarlic") err = commandPlant(w, t.tx, t.ty, "garlic");
     if (err) get().flash(err);
     set({ ctx: null, snap: snapshot() });
   },

@@ -34,6 +34,7 @@ export const RECIPES: Recipe[] = [
   { id: "knife", station: "forge", skill: "smithing", diff: 6, label: "Skinning knife", hint: "Three ingots.", need: { ingot: 3 }, give: { knife: 1 }, sfx: "smith" },
   { id: "hatchet", station: "forge", skill: "smithing", diff: 8, label: "Hatchet", hint: "Four ingots.", need: { ingot: 4 }, give: { hatchet: 1 }, sfx: "smith" },
   { id: "pick", station: "forge", skill: "smithing", diff: 10, label: "Pick", hint: "Four ingots.", need: { ingot: 4 }, give: { pick: 1 }, sfx: "smith" },
+  { id: "hoe", station: "forge", skill: "smithing", diff: 8, label: "Hoe", hint: "Four ingots, a blade.", need: { ingot: 4 }, give: { hoe: 1 }, sfx: "smith" },
   { id: "gorget", station: "forge", skill: "smithing", diff: 12, label: "Gorget", hint: "Four ingots, a collar.", need: { ingot: 4 }, give: { gorget: 1 }, sfx: "smith" },
   { id: "boots", station: "forge", skill: "smithing", diff: 14, label: "Iron-shod boots", hint: "Five ingots.", need: { ingot: 5 }, give: { boots: 1 }, sfx: "smith" },
   { id: "gauntlets", station: "forge", skill: "smithing", diff: 16, label: "Gauntlets", hint: "Five ingots.", need: { ingot: 5 }, give: { gauntlets: 1 }, sfx: "smith" },
