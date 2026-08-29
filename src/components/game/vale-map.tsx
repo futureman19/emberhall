@@ -1,6 +1,6 @@
 import { useEffect, useRef, type MouseEvent } from "react";
 import { MAP, PLACES } from "@/game/atlas";
-import { biomeAt } from "@/game/biome";
+import { biomeWeights } from "@/game/biome";
 import { getWorld } from "@/game/live";
 import { commandWalk } from "@/game/player";
 import { useGame } from "@/game/store";
@@ -37,10 +37,13 @@ function colorAt(tx: number, ty: number): [number, number, number] {
   const t = w.tiles[ty]?.[tx];
   if (!t) return [20, 16, 14];
   let c = KIND_RGB[t.kind] ?? KIND_RGB.grass;
-  const b = biomeAt(tx, ty);
-  if (t.kind === "grass" || t.kind === "tree") {
-    if (b === "jungle") c = mix(c, JUNGLE, 0.42);
-    else if (b === "taiga") c = mix(c, TAIGA, 0.38);
+  const wgt = biomeWeights(tx, ty);
+  if (t.kind === "grass" || t.kind === "tree" || t.kind === "dirt") {
+    c = mix(c, JUNGLE, wgt.jungle * 0.45);
+    c = mix(c, TAIGA, wgt.taiga * 0.4);
+    c = mix(c, [216, 210, 198], wgt.tundra * 0.55);
+    c = mix(c, [196, 180, 138], wgt.desert * 0.5);
+    c = mix(c, [58, 74, 54], wgt.fen * 0.5);
   }
   return c;
 }

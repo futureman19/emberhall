@@ -4,7 +4,7 @@ import { useMemo, useRef } from "react";
 import type { MutableRefObject } from "react";
 import * as THREE from "three";
 import { COURT, MAP, VIEW } from "@/game/atlas";
-import { biomeAt } from "@/game/biome";
+import { biomeAt, biomeWeights } from "@/game/biome";
 import { buildingBox } from "@/game/building-size";
 import { GROUND_SHADER, makeDirtTex, makeGrassTex } from "@/game/ground-tex";
 import { groundY } from "@/game/height";
@@ -67,6 +67,9 @@ const COL_CANOPY_PINE = new THREE.Color("#2f3e2c");
 const COL_CANOPY_JUNGLE = new THREE.Color("#244028");
 const COL_GROUND_TAIGA = new THREE.Color("#3a4634");
 const COL_GROUND_JUNGLE = new THREE.Color("#2a4228");
+const COL_GROUND_SNOW = new THREE.Color("#d8d2c6");
+const COL_GROUND_MARSH = new THREE.Color("#3a4a36");
+const COL_GROUND_SAND = new THREE.Color("#c4b48a");
 const COL_ROCK = new THREE.Color("#7a7268");
 const COL_ROCK_2 = new THREE.Color("#5c574e");
 const COL_ROCK_3 = new THREE.Color("#8a8478");
@@ -153,9 +156,12 @@ function colorAt(world: World, x: number, z: number, out: THREE.Color) {
   out.copy(c00).lerp(c10, fx);
   tmp.copy(c01).lerp(c11, fx);
   out.lerp(tmp, fz);
-  const climate = biomeAt(x, z);
-  if (climate === "jungle") out.lerp(COL_GROUND_JUNGLE, 0.42);
-  else if (climate === "taiga") out.lerp(COL_GROUND_TAIGA, 0.38);
+  const w = biomeWeights(x, z);
+  if (w.tundra > 0.04) out.lerp(COL_GROUND_SNOW, w.tundra * 0.62);
+  if (w.taiga > 0.04) out.lerp(COL_GROUND_TAIGA, w.taiga * 0.4);
+  if (w.fen > 0.04) out.lerp(COL_GROUND_MARSH, w.fen * 0.5);
+  if (w.jungle > 0.04) out.lerp(COL_GROUND_JUNGLE, w.jungle * 0.45);
+  if (w.desert > 0.04) out.lerp(COL_GROUND_SAND, w.desert * 0.55);
 }
 
 function coverAt(world: World, x: number, z: number, dest: Float32Array, i: number) {
@@ -176,9 +182,23 @@ function coverAt(world: World, x: number, z: number, dest: Float32Array, i: numb
   dest[i] = sx0 + (sx1 - sx0) * fz;
   dest[i + 1] = sy0 + (sy1 - sy0) * fz;
   dest[i + 2] = sz0 + (sz1 - sz0) * fz;
+  const w = biomeWeights(x, z);
+  if (w.tundra > 0.05) {
+    dest[i] += (0.08 - dest[i]) * w.tundra * 0.7;
+    dest[i + 1] += (0.06 - dest[i + 1]) * w.tundra * 0.7;
+    dest[i + 2] += (0.04 - dest[i + 2]) * w.tundra * 0.5;
+  }
+  if (w.desert > 0.05) {
+    dest[i] += (0.12 - dest[i]) * w.desert * 0.55;
+    dest[i + 1] += (0.7 - dest[i + 1]) * w.desert * 0.55;
+  }
+  if (w.fen > 0.05) {
+    dest[i] += (0.55 - dest[i]) * w.fen * 0.45;
+    dest[i + 1] += (0.5 - dest[i + 1]) * w.fen * 0.4;
+  }
 }
 
-function GroundMaterial() {
+function GroundMaterial({ far = false }: { far?: boolean }) {
   const maps = useMemo(() => ({ grass: makeGrassTex(), dirt: makeDirtTex() }), []);
   return (
     <meshStandardMaterial
@@ -186,13 +206,14 @@ function GroundMaterial() {
       map={maps.grass}
       roughness={0.96}
       metalness={0.02}
-      customProgramCacheKey={() => "vale-ground-v5"}
+      customProgramCacheKey={() => (far ? "vale-ground-far-v1" : "vale-ground-v6")}
       onBeforeCompile={(shader) => {
         shader.uniforms.uDirt = { value: maps.dirt };
         shader.uniforms.uOrigin = GROUND_FADE.uOrigin;
         shader.uniforms.uNear = GROUND_FADE.uNear;
         shader.uniforms.uFar = GROUND_FADE.uFar;
         shader.uniforms.uFog = GROUND_FADE.uFog;
+        shader.uniforms.uLod = { value: far ? 1 : 0 };
         shader.vertexShader = shader.vertexShader
           .replace(
             "#include <common>",
@@ -220,12 +241,14 @@ vec3 nature = mix(sampledDiffuseColor.rgb, dirt, clamp(vCover.y, 0.0, 1.0) * 0.8
 nature = mix(nature, vec3(0.42, 0.40, 0.36), clamp(vCover.z, 0.0, 1.0) * 0.7);
 nature *= 0.78 + n * 0.34 + n2 * 0.12;
 float living = clamp(vCover.x + vCover.y, 0.0, 1.0);
-sampledDiffuseColor.rgb = mix(sampledDiffuseColor.rgb * 0.35 + diffuseColor.rgb * 0.7, nature, living);
-diffuseColor *= sampledDiffuseColor;
+vec3 close = mix(sampledDiffuseColor.rgb * 0.35 + diffuseColor.rgb * 0.7, nature, living);
+vec3 farCol = diffuseColor.rgb;
 float dist = length(vWp.xz - uOrigin) + (fbm(vWp.xz * 0.05) - 0.4) * 8.0;
-float fade = 1.0 - smoothstep(uNear, uFar, dist);
-diffuseColor.rgb = mix(uFog, diffuseColor.rgb, fade);
-if (fade < 0.05) discard;
+float splat = mix(smoothstep(uNear * 0.35, uFar * 0.85, dist), 1.0, uLod);
+sampledDiffuseColor.rgb = mix(close, farCol, splat);
+diffuseColor.rgb = sampledDiffuseColor.rgb;
+float fade = mix(1.0 - smoothstep(uNear, uFar, dist), 1.0, uLod);
+if (uLod < 0.5 && fade < 0.05) discard;
 `,
         );
       }}
@@ -679,6 +702,7 @@ export function Horizon() {
     const g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(HCOUNT * 3), 3));
     g.setAttribute("color", new THREE.BufferAttribute(new Float32Array(HCOUNT * 3), 3));
+    g.setAttribute("cover", new THREE.BufferAttribute(new Float32Array(HCOUNT * 3), 3));
     g.setAttribute("normal", new THREE.BufferAttribute(new Float32Array(HCOUNT * 3), 3));
     const index: number[] = [];
     for (let j = 0; j < HSEGS; j++) {
@@ -708,8 +732,10 @@ export function Horizon() {
       origin.current = { x: ox, z: oz, rev };
       const pos = geo.attributes.position as THREE.BufferAttribute;
       const col = geo.attributes.color as THREE.BufferAttribute;
+      const cov = geo.attributes.cover as THREE.BufferAttribute;
       const arr = pos.array as Float32Array;
       const car = col.array as Float32Array;
+      const karr = cov.array as Float32Array;
       for (let iz = 0; iz < HVERTS; iz++) {
         for (let ix = 0; ix < HVERTS; ix++) {
           const wx = ox - half + ix * HSTEP;
@@ -722,9 +748,14 @@ export function Horizon() {
           arr[i] = wx;
           arr[i + 1] = hole || off ? -8 : groundY(w, wx, wz) * lift - 0.08;
           arr[i + 2] = wz;
-          if (off) pal.set("#1a1c18");
-          else {
+          if (off) {
+            pal.set("#1a1c18");
+            karr[i] = 0;
+            karr[i + 1] = 0;
+            karr[i + 2] = 0;
+          } else {
             colorAt(w, wx, wz, pal);
+            coverAt(w, wx, wz, karr, i);
           }
           car[i] = pal.r;
           car[i + 1] = pal.g;
@@ -733,6 +764,7 @@ export function Horizon() {
       }
       pos.needsUpdate = true;
       col.needsUpdate = true;
+      cov.needsUpdate = true;
       geo.computeVertexNormals();
       geo.computeBoundingSphere();
 
@@ -791,7 +823,7 @@ export function Horizon() {
   return (
     <group>
       <mesh geometry={geo} frustumCulled={false} raycast={() => {}}>
-        <meshStandardMaterial vertexColors roughness={0.98} metalness={0.02} />
+        <GroundMaterial far />
       </mesh>
       <instancedMesh ref={far} args={[undefined, undefined, FAR_TREES]} frustumCulled={false} raycast={() => {}}>
         <coneGeometry args={[1.05, 2.4, 4]} />
