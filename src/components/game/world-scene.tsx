@@ -324,7 +324,7 @@ export function WorldScene() {
       onCreated={({ gl }) => {
         gl.setClearColor("#1a1c18", 1);
         gl.toneMapping = THREE.ACESFilmicToneMapping;
-        gl.toneMappingExposure = 1.05;
+        gl.toneMappingExposure = 1.18;
         gl.shadowMap.enabled = true;
         gl.shadowMap.type = THREE.PCFShadowMap;
       }}
