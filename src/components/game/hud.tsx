@@ -1,4 +1,5 @@
 import {
+  AudioLines,
   Backpack,
   CircleHelp,
   ClipboardList,
@@ -6,12 +7,11 @@ import {
   Hammer,
   Anvil,
   Map as MapIcon,
+  Music2,
   Pause,
   Play,
   ScrollText,
   Users,
-  Volume2,
-  VolumeX,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ContextMenu, PileGump } from "@/components/game/context-menu";
@@ -30,7 +30,7 @@ import { maxMana } from "@/game/magery";
 import { nearestHealer } from "@/game/player";
 import { hasSave as hallHasSave } from "@/game/save";
 import { startValeMusic, musicMuted, toggleValeMusic } from "@/game/vale-music";
-import { warmSfx } from "@/game/vale-sfx";
+import { sfxMuted, toggleSfx, warmSfx } from "@/game/vale-sfx";
 import { useGame } from "@/game/store";
 import type { PanelId, Speed } from "@/game/types";
 import { cn } from "@/lib/utils";
@@ -156,6 +156,7 @@ function TitleOverlay() {
           >
             {busy ? "Raising…" : "New hall"}
           </button>
+          <SoundToggles className="mt-3 justify-center" />
         </div>
       </div>
     </div>
@@ -271,6 +272,16 @@ function BottomDock() {
         <FastForward className="size-4" />
       </button>
       <MusicToggle />
+      <SfxToggle />
+    </div>
+  );
+}
+
+function SoundToggles({ className }: { className?: string }) {
+  return (
+    <div className={cn("flex items-center gap-1", className)}>
+      <MusicToggle />
+      <SfxToggle />
     </div>
   );
 }
@@ -281,10 +292,28 @@ function MusicToggle() {
     <button
       type="button"
       onClick={() => setMute(toggleValeMusic())}
-      className="grid size-11 place-items-center text-muted"
+      className={cn("grid size-11 place-items-center text-muted", mute && "opacity-40")}
       aria-label={mute ? "Music off" : "Music on"}
+      aria-pressed={!mute}
+      title={mute ? "Music is still" : "Still the lute"}
     >
-      {mute ? <VolumeX className="size-4" /> : <Volume2 className="size-4" />}
+      <Music2 className="size-4" />
+    </button>
+  );
+}
+
+function SfxToggle() {
+  const [mute, setMute] = useState(sfxMuted);
+  return (
+    <button
+      type="button"
+      onClick={() => setMute(toggleSfx())}
+      className={cn("grid size-11 place-items-center text-muted", mute && "opacity-40")}
+      aria-label={mute ? "Sounds off" : "Sounds on"}
+      aria-pressed={!mute}
+      title={mute ? "Work sounds are still" : "Still the chop and the spell"}
+    >
+      <AudioLines className="size-4" />
     </button>
   );
 }
@@ -325,7 +354,7 @@ function HelpPanel() {
         swirl east of the steps.
       </p>
       <p className="mt-3 text-pretty text-xs leading-relaxed text-muted">
-        A lute in the air — RandomMind, given to the dirt. The speaker on the dock stills the lute and the work.
+        A lute in the air — RandomMind, given to the dirt. The note stills the lute. The lines still the chop, the mine, the spell.
       </p>
       <ul className="mt-4 space-y-2">
         {objectives.map((o) => (

@@ -1,10 +1,31 @@
-function muted() {
+const KEY = "emberhall-mute-sfx";
+const LEGACY = "emberhall-mute";
+
+function flag(key: string) {
   try {
-    return localStorage.getItem("emberhall-mute") === "1";
+    const v = localStorage.getItem(key);
+    if (v === "1") return true;
+    if (v === "0") return false;
   } catch {
-    return false;
+    /* ignore */
   }
+  return null;
 }
+
+export function sfxMuted() {
+  return flag(KEY) ?? flag(LEGACY) === true;
+}
+
+export function toggleSfx() {
+  const mute = !sfxMuted();
+  try {
+    localStorage.setItem(KEY, mute ? "1" : "0");
+  } catch {
+    /* ignore */
+  }
+  return mute;
+}
+
 export type SfxId =
   | "chop"
   | "mine"
@@ -56,7 +77,7 @@ export function warmSfx() {
 
 export function playSfx(id: SfxId, vol = 0.5) {
   if (typeof Audio === "undefined") return;
-  if (muted()) return;
+  if (sfxMuted()) return;
   const b = bag(id);
   const i = cursor.get(id) ?? 0;
   cursor.set(id, (i + 1) % b.length);

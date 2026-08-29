@@ -8,7 +8,7 @@ import { getWorld } from "@/game/live";
 import { useGame } from "@/game/store";
 
 const SUN_DIR = new THREE.Vector3(-0.52, 0.78, -0.36).normalize();
-const SKY_DAY = "#81928a";
+const SKY_DAY = "#8b9e95";
 const SKY_DUSK = "#8a6848";
 const SKY_NIGHT = "#141210";
 const SKY_PIT = "#0c0a08";
@@ -26,7 +26,7 @@ export function Lighting() {
     gl.shadowMap.enabled = true;
     gl.shadowMap.type = THREE.PCFShadowMap;
     gl.toneMapping = THREE.ACESFilmicToneMapping;
-    gl.toneMappingExposure = 1.18;
+    gl.toneMappingExposure = 1.36;
     gl.setClearColor("#1a1c18", 1);
     const light = dir.current;
     if (!light) return;
@@ -47,10 +47,10 @@ export function Lighting() {
     const night = !DEV_DAYLIGHT && useGame.getState().snap.isNight && !sight;
     const dusk = !DEV_DAYLIGHT && useGame.getState().snap.isDusk && !sight;
 
-    const ambI = pit ? 0.1 : night ? 0.16 : dusk ? 0.4 : 0.5;
-    const dirI = pit ? 0.12 : night ? 0.22 : dusk ? 1.05 : 1.69;
+    const ambI = pit ? 0.1 : night ? 0.16 : dusk ? 0.46 : 0.58;
+    const dirI = pit ? 0.12 : night ? 0.22 : dusk ? 1.21 : 1.94;
     if (amb.current) amb.current.intensity = ambI;
-    if (hemi.current) hemi.current.intensity = pit ? 0.04 : night ? 0.08 : dusk ? 0.2 : 0.25;
+    if (hemi.current) hemi.current.intensity = pit ? 0.04 : night ? 0.08 : dusk ? 0.23 : 0.29;
 
     const lx = px + SUN_DIR.x * 48;
     const ly = py + SUN_DIR.y * 48;
@@ -92,17 +92,17 @@ export function Lighting() {
     <>
       <color ref={bg} attach="background" args={[SKY_DAY]} />
       <fog ref={fog} attach="fog" args={[SKY_DAY, 90, 210]} />
-      <ambientLight ref={amb} intensity={0.5} color="#ece6d8" />
+      <ambientLight ref={amb} intensity={0.58} color="#ece6d8" />
       <directionalLight
         ref={dir}
         castShadow
         position={[COURT.tx + 22, 40, COURT.ty + 14]}
-        intensity={1.69}
+        intensity={1.94}
         color="#fff1c8"
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
       />
-      <hemisphereLight ref={hemi} args={["#c5d0c4", "#3a3228", 0.25]} />
+      <hemisphereLight ref={hemi} args={["#c5d0c4", "#3a3228", 0.29]} />
       <group ref={sun} frustumCulled={false}>
         <mesh frustumCulled={false} renderOrder={-1}>
           <sphereGeometry args={[2.4, 20, 14]} />

@@ -1,4 +1,5 @@
-const KEY = "emberhall-mute";
+const KEY = "emberhall-mute-music";
+const LEGACY = "emberhall-mute";
 const TRACKS = ["/audio/vale-air.mp3", "/audio/vale-market.mp3"];
 const VOL = 0.18;
 
@@ -6,12 +7,19 @@ let el: HTMLAudioElement | null = null;
 let idx = 0;
 let wanted = true;
 
-export function musicMuted() {
+function flag(key: string) {
   try {
-    return localStorage.getItem(KEY) === "1";
+    const v = localStorage.getItem(key);
+    if (v === "1") return true;
+    if (v === "0") return false;
   } catch {
-    return false;
+    /* ignore */
   }
+  return null;
+}
+
+export function musicMuted() {
+  return flag(KEY) ?? flag(LEGACY) === true;
 }
 
 function getEl() {
