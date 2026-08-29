@@ -20,7 +20,7 @@ import { NpcGump } from "@/components/game/npc-gump";
 import { YouDressing } from "@/components/game/paperdoll";
 import { SpellbookGump } from "@/components/game/spell-gump";
 import { CraftGump } from "@/components/game/craft-gump";
-import { ValeChart } from "@/components/game/vale-map";
+import { ValeChart, MiniVale } from "@/components/game/vale-map";
 import { insideLabel } from "@/components/game/building-meshes";
 import { PLACES, regionAt } from "@/game/atlas";
 import { BUILD_ORDER, BUILDING_META, CLASS_META, NOTORIETY_META } from "@/game/catalog";
@@ -352,7 +352,8 @@ function HelpPanel() {
         green to take the crop and more seed. Farming is a skill. Eat cabbage from You.
         Eight stone rings hold the moons. Walk into the
         swirl east of the steps. North of Oakstand the height goes to snow. Wolfhollow is pine and wolf. Hearthfen is peat
-        marsh. Southmere is warm thick green. Brinegate is salt and sand. The hall stays green.
+        marsh. Southmere is warm thick green. Brinegate is salt and sand. The hall stays green. Tap the map — or a town —
+        and you walk there.
       </p>
       <p className="mt-3 text-pretty text-xs leading-relaxed text-muted">
         A lute in the air — RandomMind, given to the dirt. The note stills the lute. The lines still the chop, the mine, the spell.
@@ -600,31 +601,10 @@ function Minimap() {
   const panel = useGame((s) => s.panel);
   const openBook = useGame((s) => s.openBook);
   const openCraft = useGame((s) => s.openCraft);
-  const x = useGame((s) => s.snap.youX);
-  const z = useGame((s) => s.snap.youZ);
-  const corpse = useGame((s) => s.snap.player?.corpseAt ?? null);
-  if (panel !== "none" || openBook || openCraft) return null;
+  if (panel === "vale" || openBook || openCraft) return null;
   return (
-    <div className="pointer-events-none absolute right-3 bottom-20 size-24 overflow-hidden rounded-[var(--radius-md)] border border-border bg-bg/70">
-      <div className="relative size-full">
-        {PLACES.map((p) => (
-          <span
-            key={p.id}
-            className="absolute size-1 rounded-full bg-gold"
-            style={{ left: `${(p.tx / 512) * 100}%`, top: `${(p.ty / 512) * 100}%` }}
-          />
-        ))}
-        {corpse && (
-          <span
-            className="absolute size-2 rounded-full border border-accent"
-            style={{ left: `${(corpse.tx / 512) * 100}%`, top: `${(corpse.ty / 512) * 100}%` }}
-          />
-        )}
-        <span
-          className="absolute size-1.5 rounded-full bg-accent"
-          style={{ left: `${(x / 512) * 100}%`, top: `${(z / 512) * 100}%` }}
-        />
-      </div>
+    <div className="pointer-events-auto absolute right-3 bottom-20">
+      <MiniVale />
     </div>
   );
 }

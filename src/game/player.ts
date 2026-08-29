@@ -103,14 +103,14 @@ function pathBeside(world: World, p: Person, tx: number, ty: number) {
   return true;
 }
 
-export function commandWalk(world: World, tx: number, ty: number): string | null {
+export function commandWalk(world: World, tx: number, ty: number, cap = 9000): string | null {
   const p = you(world);
   if (!p) return "You are not in the vale.";
   world.player.armedSpell = null;
   const dest = nearestWalkable(world, tx, ty);
   if (!dest) return "No footing.";
   const from = tileOf(p.x, p.z);
-  const path = astar(world, from.tx, from.ty, dest.x, dest.y);
+  const path = astar(world, from.tx, from.ty, dest.x, dest.y, cap);
   if (!path) return "The way is closed.";
   p.path = path.map((n) => ({ tx: n.x, ty: n.y }));
   world.player.intent = { kind: "walk", tx: dest.x, ty: dest.y, targetId: null, spell: null };
