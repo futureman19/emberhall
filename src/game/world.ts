@@ -13,7 +13,7 @@ import {
 import { emptyChest, emptyLastGain, emptyPack, emptySkills } from "./catalog";
 import { personName } from "./names";
 import { hash2, irange, mulberry32, pick } from "./rng";
-import { siteError } from "./building-size";
+import { buildingBox, siteError } from "./building-size";
 import { seedFarmPlots } from "./farm";
 import type { BuildingKind, ClassId, Person, Tile, TileKind, World } from "./types";
 
@@ -188,6 +188,29 @@ export function generateTiles(seed: number): Tile[][] {
   flatten(tiles, 261, 304, 2, 1, "cobble");
 
   return tiles;
+}
+
+export function seedFieldStones(world: World) {
+  const { tiles, seed } = world;
+  for (let y = 0; y < MAP; y++) {
+    for (let x = 0; x < MAP; x++) {
+      const t = tiles[y]![x]!;
+      if (t.kind !== "grass") continue;
+      if (Math.hypot(x - COURT.tx, y - COURT.ty) < 10) continue;
+      if (hash2(x, y, seed + 19) < 0.95) continue;
+      if (world.plots?.some((p) => p.tx === x && p.ty === y)) continue;
+      let taken = false;
+      for (const b of world.buildings) {
+        const box = buildingBox(b.kind, b.tx, b.ty);
+        if (x + 0.5 > box.x0 && x + 0.5 < box.x1 && y + 0.5 > box.z0 && y + 0.5 < box.z1) {
+          taken = true;
+          break;
+        }
+      }
+      if (taken) continue;
+      t.kind = "rock";
+    }
+  }
 }
 
 export function createPerson(

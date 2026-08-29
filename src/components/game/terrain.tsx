@@ -56,6 +56,8 @@ const pal = new THREE.Color();
 const COL_TRUNK = new THREE.Color("#5a3e28");
 const COL_CANOPY = new THREE.Color("#3d4e2c");
 const COL_ROCK = new THREE.Color("#7a7268");
+const COL_ROCK_2 = new THREE.Color("#5c574e");
+const COL_ROCK_3 = new THREE.Color("#8a8478");
 const COL_MARK = new THREE.Color("#e0b56a");
 const COL_MARK_WOOD = new THREE.Color("#c48a4a");
 const COL_SHRUB = new THREE.Color("#354626");
@@ -346,13 +348,35 @@ export function Terrain() {
         if (t.kind === "rock" && rk) {
           const marked = w.player.intent.kind === "mine" && w.player.intent.tx === tx && w.player.intent.ty === ty;
           const strike = marked && !you?.path.length;
-          dummy.rotation.set(strike ? Math.sin(w.player.workT * 32) * 0.08 : 0, 0, 0);
-          dummy.position.set(tx, groundY(w, tx, ty) + 0.28, ty);
-          dummy.scale.set(0.7, 0.5, 0.65);
+          const szRoll = hash2(tx, ty, w.seed + 23);
+          const yaw = hash2(tx, ty, w.seed + 29) * Math.PI * 2;
+          let sx: number;
+          let sy: number;
+          let sz: number;
+          if (szRoll < 0.4) {
+            const k = szRoll / 0.4;
+            sx = 0.22 + k * 0.28;
+            sy = 0.14 + k * 0.18;
+            sz = 0.2 + k * 0.26;
+          } else if (szRoll < 0.82) {
+            const k = (szRoll - 0.4) / 0.42;
+            sx = 0.52 + k * 0.38;
+            sy = 0.34 + k * 0.28;
+            sz = 0.48 + k * 0.32;
+          } else {
+            const k = (szRoll - 0.82) / 0.18;
+            sx = 0.95 + k * 0.75;
+            sy = 0.72 + k * 0.58;
+            sz = 0.88 + k * 0.62;
+          }
+          dummy.rotation.set(strike ? Math.sin(w.player.workT * 32) * 0.08 : 0, yaw, strike ? 0.05 : 0);
+          dummy.position.set(tx, groundY(w, tx, ty) + 0.42 * sy * 0.55, ty);
+          dummy.scale.set(sx, sy, sz);
           dummy.updateMatrix();
           dummy.rotation.set(0, 0, 0);
           rk.setMatrixAt(ri, dummy.matrix);
-          paint(rk, ri, marked ? COL_MARK : COL_ROCK);
+          const tint = hash2(tx, ty, w.seed + 31);
+          paint(rk, ri, marked ? COL_MARK : tint < 0.33 ? COL_ROCK : tint < 0.66 ? COL_ROCK_2 : COL_ROCK_3);
           rockAt.current[ri] = { tx, ty };
           ri++;
         }

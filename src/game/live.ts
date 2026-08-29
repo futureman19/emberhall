@@ -5,7 +5,7 @@ import { seedFarmPlots } from "./farm";
 import { maxMana } from "./magery";
 import { you } from "./player";
 import { mulberry32 } from "./rng";
-import { createStubWorld, createWorld, seedTownNpcs } from "./world";
+import { createStubWorld, createWorld, seedFieldStones, seedTownNpcs } from "./world";
 import type { Snapshot, World } from "./types";
 
 function withFauna(w: World) {
@@ -17,6 +17,7 @@ function withFauna(w: World) {
   }
   if (w.scars == null) w.scars = {};
   if (w.landRev == null) w.landRev = 1;
+  if (w.tiles.length) seedFieldStones(w);
   if (w.tiles.length && w.fauna.length === 0) seedFauna(w, mulberry32(w.seed));
   if (w.tiles.length) seedBarrow(w, mulberry32(w.seed + 17));
   if (w.fauna) {
