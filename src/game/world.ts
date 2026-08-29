@@ -192,12 +192,21 @@ export function generateTiles(seed: number): Tile[][] {
 
 export function seedFieldStones(world: World) {
   const { tiles, seed } = world;
+  const iron = placeById("ironfold");
   for (let y = 0; y < MAP; y++) {
     for (let x = 0; x < MAP; x++) {
       const t = tiles[y]![x]!;
+      const field = hash2(x, y, seed + 19) >= 0.99;
+      const named =
+        Math.hypot(x - iron.tx, y - iron.ty) <= iron.radius ||
+        (Math.abs(x - BARROW.cx) <= 5 && Math.abs(y - BARROW.cy) <= 9);
+      if (t.kind === "rock" && !named && !field) {
+        t.kind = "grass";
+        continue;
+      }
       if (t.kind !== "grass") continue;
       if (Math.hypot(x - COURT.tx, y - COURT.ty) < 10) continue;
-      if (hash2(x, y, seed + 19) < 0.95) continue;
+      if (!field) continue;
       if (world.plots?.some((p) => p.tx === x && p.ty === y)) continue;
       let taken = false;
       for (const b of world.buildings) {
