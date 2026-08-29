@@ -26,20 +26,44 @@ function spawn(world: World, kind: FaunaKind, x: number, z: number): Creature {
 
 export function seedFauna(world: World, rng: () => number) {
   if (world.fauna.length) return;
-  const oak = PLACES.find((p) => p.id === "oakstand")!;
-  world.fauna.push(spawn(world, "hare", oak.tx + 2, oak.ty + 4));
   for (const p of PLACES) {
     if (p.kind === "woods") {
-      const n = p.id === "oakstand" ? 6 : 4;
+      const taiga = p.id === "wolfhollow";
+      const n = taiga ? 7 : 6;
       for (let i = 0; i < n; i++) {
         const x = p.tx + Math.floor((rng() - 0.5) * p.radius);
         const z = p.ty + Math.floor((rng() - 0.5) * p.radius);
         const dest = nearestWalkable(world, x, z);
         if (!dest) continue;
-        const kind: FaunaKind = rng() < 0.45 ? "hare" : rng() < 0.7 ? "hart" : "wolf";
+        const kind: FaunaKind = taiga
+          ? rng() < 0.72
+            ? "wolf"
+            : "hare"
+          : rng() < 0.55
+            ? "hare"
+            : rng() < 0.78
+              ? "hart"
+              : "wolf";
         world.fauna.push(spawn(world, kind, dest.x, dest.y));
       }
     }
+  }
+  const extra: { id: string; kind: FaunaKind; dx: number; dz: number }[] = [
+    { id: "ridgewatch", kind: "hare", dx: 3, dz: 8 },
+    { id: "ridgewatch", kind: "hare", dx: -4, dz: 6 },
+    { id: "hearthfen", kind: "hare", dx: 6, dz: 2 },
+    { id: "hearthfen", kind: "hare", dx: -5, dz: 4 },
+    { id: "southmere", kind: "hart", dx: 4, dz: -3 },
+    { id: "southmere", kind: "hart", dx: -5, dz: 2 },
+    { id: "southmere", kind: "hare", dx: 2, dz: 5 },
+    { id: "southmere", kind: "hare", dx: -3, dz: -6 },
+    { id: "brinegate", kind: "hare", dx: -8, dz: -4 },
+  ];
+  for (const e of extra) {
+    const p = PLACES.find((x) => x.id === e.id);
+    if (!p) continue;
+    const dest = nearestWalkable(world, p.tx + e.dx, p.ty + e.dz);
+    if (dest) world.fauna.push(spawn(world, e.kind, dest.x, dest.y));
   }
 }
 

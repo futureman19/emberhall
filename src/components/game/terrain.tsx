@@ -63,6 +63,10 @@ const COL_CANOPY = new THREE.Color("#3d4e2c");
 const COL_CANOPY_COLD = new THREE.Color("#5a6458");
 const COL_CANOPY_FEN = new THREE.Color("#2c3a26");
 const COL_CANOPY_DRY = new THREE.Color("#6a6a40");
+const COL_CANOPY_PINE = new THREE.Color("#2f3e2c");
+const COL_CANOPY_JUNGLE = new THREE.Color("#244028");
+const COL_GROUND_TAIGA = new THREE.Color("#3a4634");
+const COL_GROUND_JUNGLE = new THREE.Color("#2a4228");
 const COL_ROCK = new THREE.Color("#7a7268");
 const COL_ROCK_2 = new THREE.Color("#5c574e");
 const COL_ROCK_3 = new THREE.Color("#8a8478");
@@ -137,6 +141,9 @@ function colorAt(world: World, x: number, z: number, out: THREE.Color) {
   out.copy(c00).lerp(c10, fx);
   tmp.copy(c01).lerp(c11, fx);
   out.lerp(tmp, fz);
+  const climate = biomeAt(x, z);
+  if (climate === "jungle") out.lerp(COL_GROUND_JUNGLE, 0.42);
+  else if (climate === "taiga") out.lerp(COL_GROUND_TAIGA, 0.38);
 }
 
 function coverAt(world: World, x: number, z: number, dest: Float32Array, i: number) {
@@ -321,25 +328,33 @@ export function Terrain() {
         if (t.kind === "tree") {
           const grow = treeGrow(tx, ty);
           const gy = groundY(w, tx, ty);
-          const under = Math.hypot(tx - px, ty - pz) < UNDER * Math.min(1.15, grow);
+          const climate = biomeAt(tx, ty);
+          const gx = climate === "taiga" ? grow * 0.58 : climate === "jungle" ? grow * 1.28 : grow;
+          const gsy = climate === "taiga" ? grow * 1.48 : climate === "jungle" ? grow * 0.92 : grow;
+          const trunkH = TRUNK_H * gsy;
+          const under =
+            Math.hypot(tx - px, ty - pz) < UNDER * (climate === "jungle" ? 1.25 : 1) * Math.min(1.15, grow);
           const marked = w.player.intent.kind === "chop" && w.player.intent.tx === tx && w.player.intent.ty === ty;
           const strike = marked && !you?.path.length;
           const wobble = strike ? Math.sin(w.player.workT * 28) * 0.1 : 0;
           dummy.rotation.set(0, 0, wobble);
-          dummy.position.set(tx, gy + (TRUNK_H * grow) * 0.5, ty);
-          dummy.scale.set(grow, grow, grow);
+          dummy.position.set(tx, gy + trunkH * 0.5, ty);
+          dummy.scale.set(gx, gsy, gx);
           dummy.updateMatrix();
           const trunkCol = marked ? COL_MARK_WOOD : COL_TRUNK;
-          const climate = biomeAt(tx, ty);
           const leafCol = marked
             ? COL_MARK
             : climate === "tundra"
               ? COL_CANOPY_COLD
-              : climate === "fen"
-                ? COL_CANOPY_FEN
-                : climate === "desert"
-                  ? COL_CANOPY_DRY
-                  : COL_CANOPY;
+              : climate === "taiga"
+                ? COL_CANOPY_PINE
+                : climate === "fen"
+                  ? COL_CANOPY_FEN
+                  : climate === "desert"
+                    ? COL_CANOPY_DRY
+                    : climate === "jungle"
+                      ? COL_CANOPY_JUNGLE
+                      : COL_CANOPY;
           if (under) {
             tkg?.setMatrixAt(gi, dummy.matrix);
             paint(tkg, gi, trunkCol);
@@ -347,10 +362,12 @@ export function Terrain() {
             tk?.setMatrixAt(si, dummy.matrix);
             paint(tk, si, trunkCol);
           }
-          dummy.position.set(tx, gy + TRUNK_H * grow + CANOPY_H * grow * 0.38, ty);
+          dummy.position.set(tx, gy + trunkH + CANOPY_H * gsy * (climate === "jungle" ? 0.28 : 0.38), ty);
+          dummy.scale.set(climate === "jungle" ? gx * 1.12 : gx, gsy, climate === "jungle" ? gx * 1.12 : gx);
           dummy.rotation.set(wobble * 0.6, 0, wobble);
           dummy.updateMatrix();
           dummy.rotation.set(0, 0, 0);
+          dummy.scale.set(1, 1, 1);
           if (under) {
             gh?.setMatrixAt(gi, dummy.matrix);
             paint(gh, gi, leafCol);
@@ -404,9 +421,11 @@ export function Terrain() {
           const climate = biomeAt(tx, ty);
           const roll = hash2(tx, ty, w.seed + 41);
           let flora = -1;
-          if (wooded) flora = hash2(tx, ty, w.seed + 51) < (climate === "tundra" ? 0.08 : 0.14) ? 0 : -1;
+          if (wooded) flora = hash2(tx, ty, w.seed + 51) < (climate === "tundra" ? 0.08 : climate === "taiga" ? 0.1 : 0.14) ? 0 : -1;
           else if (climate === "tundra") flora = roll < 0.012 ? 3 : -1;
+          else if (climate === "taiga") flora = roll < 0.016 ? 0 : roll < 0.022 ? 3 : -1;
           else if (climate === "fen") flora = roll < 0.028 ? 3 : roll < 0.034 ? 0 : -1;
+          else if (climate === "jungle") flora = roll < 0.018 ? 0 : roll < 0.03 ? 2 : roll < 0.04 ? 1 : roll < 0.05 ? 3 : -1;
           else if (climate === "desert" || t.kind === "sand") flora = roll < 0.01 ? 0 : -1;
           else if (roll < 0.011) flora = 0;
           else if (roll < 0.019) flora = 1;

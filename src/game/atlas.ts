@@ -24,7 +24,7 @@ export interface Place {
 export const PLACES: Place[] = [
   { id: "emberhall", name: "Emberhall", tx: 256, ty: 292, radius: 8, kind: "town", blurb: "Your hall. The only bed that is yours." },
   { id: "oakstand", name: "Oakstand", tx: 248, ty: 148, radius: 28, kind: "woods", blurb: "Old oaks. Wolves own the night." },
-  { id: "wolfhollow", name: "Wolfhollow", tx: 188, ty: 88, radius: 18, kind: "woods", blurb: "A dark stand under the ridge." },
+  { id: "wolfhollow", name: "Wolfhollow", tx: 188, ty: 88, radius: 18, kind: "woods", blurb: "Pine and shadow. Wolves own the stand." },
   { id: "ridgewatch", name: "Ridgewatch", tx: 250, ty: 48, radius: 16, kind: "ridge", blurb: "The north wall. Snow on the height." },
   { id: "hearthfen", name: "Hearthfen", tx: 400, ty: 168, radius: 8, kind: "town", blurb: "Peat smoke and wet marsh." },
   { id: "ironfold", name: "Ironfold", tx: 420, ty: 268, radius: 18, kind: "mine", blurb: "The east slope. Iron in the bone of the hill." },
@@ -32,7 +32,7 @@ export const PLACES: Place[] = [
   { id: "cairnash", name: "Cairn of Ash", tx: 64, ty: 96, radius: 14, kind: "ruins", blurb: "A ring of burnt stone. Do not sleep here." },
   { id: "ford", name: "The Ford", tx: 256, ty: 384, radius: 7, kind: "ford", blurb: "The river is shallow here. Nowhere else." },
   { id: "greybarrow", name: "Greybarrow", tx: 110, ty: 440, radius: 14, kind: "ruins", blurb: "A sunken tomb. Stairs under the stones." },
-  { id: "southmere", name: "Southmere", tx: 360, ty: 460, radius: 9, kind: "town", blurb: "Fish, reeds, and gossip." },
+  { id: "southmere", name: "Southmere", tx: 360, ty: 460, radius: 9, kind: "town", blurb: "Warm reeds and a thick green." },
   { id: "brinegate", name: "Brinegate", tx: 470, ty: 420, radius: 8, kind: "town", blurb: "Salt air. Sand takes the east." },
 ];
 

@@ -11,7 +11,9 @@ import { useGame } from "@/game/store";
 const SUN_DIR = new THREE.Vector3(-0.52, 0.78, -0.36).normalize();
 const SKY_DAY = "#8b9e95";
 const SKY_TUNDRA = "#8a9690";
+const SKY_TAIGA = "#4a5a4c";
 const SKY_FEN = "#5e6c58";
+const SKY_JUNGLE = "#4e6350";
 const SKY_DESERT = "#c4a878";
 const SKY_DUSK = "#8a6848";
 const SKY_NIGHT = "#141210";
@@ -50,11 +52,14 @@ export function Lighting() {
     const sight = (w.player.nightSightUntil ?? 0) > w.hour;
     const night = !DEV_DAYLIGHT && useGame.getState().snap.isNight && !sight;
     const dusk = !DEV_DAYLIGHT && useGame.getState().snap.isDusk && !sight;
+    const climate = biomeAt(Math.round(px), Math.round(pz));
 
-    const ambI = pit ? 0.1 : night ? 0.16 : dusk ? 0.46 : 0.58;
-    const dirI = pit ? 0.12 : night ? 0.22 : dusk ? 1.21 : 1.94;
+    const ambI =
+      pit ? 0.1 : night ? 0.16 : dusk ? 0.46 : climate === "taiga" ? 0.42 : climate === "jungle" ? 0.52 : 0.58;
+    const dirI =
+      pit ? 0.12 : night ? 0.22 : dusk ? 1.21 : climate === "taiga" ? 1.35 : climate === "jungle" ? 1.7 : 1.94;
     if (amb.current) amb.current.intensity = ambI;
-    if (hemi.current) hemi.current.intensity = pit ? 0.04 : night ? 0.08 : dusk ? 0.23 : 0.29;
+    if (hemi.current) hemi.current.intensity = pit ? 0.04 : night ? 0.08 : dusk ? 0.23 : climate === "taiga" ? 0.16 : 0.29;
 
     const lx = px + SUN_DIR.x * 48;
     const ly = py + SUN_DIR.y * 48;
@@ -82,7 +87,6 @@ export function Lighting() {
       sun.current.position.set(px + SUN_DIR.x * 92, py + SUN_DIR.y * 92, pz + SUN_DIR.z * 92);
     }
 
-    const climate = biomeAt(Math.round(px), Math.round(pz));
     const sky = pit
       ? SKY_PIT
       : night
@@ -91,11 +95,15 @@ export function Lighting() {
           ? SKY_DUSK
           : climate === "tundra"
             ? SKY_TUNDRA
-            : climate === "fen"
-              ? SKY_FEN
-              : climate === "desert"
-                ? SKY_DESERT
-                : SKY_DAY;
+            : climate === "taiga"
+              ? SKY_TAIGA
+              : climate === "fen"
+                ? SKY_FEN
+                : climate === "jungle"
+                  ? SKY_JUNGLE
+                  : climate === "desert"
+                    ? SKY_DESERT
+                    : SKY_DAY;
     if (bg.current) bg.current.set(sky);
     if (fog.current) {
       fog.current.color.set(sky);
