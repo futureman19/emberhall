@@ -99,6 +99,7 @@ uniform sampler2D uDirt;
 uniform vec2 uOrigin;
 uniform float uNear;
 uniform float uFar;
+uniform vec3 uFog;
 
 float hash(vec2 p){
   return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
@@ -122,15 +123,5 @@ float fbm(vec2 p){
     a *= 0.5;
   }
   return v;
-}
-float bayer4(vec2 frag) {
-  ivec2 p = ivec2(mod(frag, 4.0));
-  mat4 b = mat4(
-    0.0, 12.0, 3.0, 15.0,
-    8.0, 4.0, 11.0, 7.0,
-    2.0, 14.0, 1.0, 13.0,
-    10.0, 6.0, 9.0, 5.0
-  );
-  return b[p.x][p.y] / 16.0;
 }
 `;

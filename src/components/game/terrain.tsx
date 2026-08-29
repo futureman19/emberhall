@@ -83,8 +83,9 @@ const COL_TUFT = new THREE.Color("#5a6a38");
 const FLORA = 400;
 const GROUND_FADE = {
   uOrigin: { value: new THREE.Vector2(COURT.tx, COURT.ty) },
-  uNear: { value: VIEW / 2 - 16 },
-  uFar: { value: VIEW / 2 - 0.35 },
+  uNear: { value: VIEW / 2 - 22 },
+  uFar: { value: VIEW / 2 - 0.2 },
+  uFog: { value: new THREE.Color("#8b9e95") },
 };
 
 function blocked(world: World, tx: number, ty: number) {
@@ -185,12 +186,15 @@ function GroundMaterial() {
       map={maps.grass}
       roughness={0.96}
       metalness={0.02}
-      customProgramCacheKey={() => "vale-ground-v3"}
+      transparent
+      depthWrite
+      customProgramCacheKey={() => "vale-ground-v4"}
       onBeforeCompile={(shader) => {
         shader.uniforms.uDirt = { value: maps.dirt };
         shader.uniforms.uOrigin = GROUND_FADE.uOrigin;
         shader.uniforms.uNear = GROUND_FADE.uNear;
         shader.uniforms.uFar = GROUND_FADE.uFar;
+        shader.uniforms.uFog = GROUND_FADE.uFog;
         shader.vertexShader = shader.vertexShader
           .replace(
             "#include <common>",
@@ -220,9 +224,11 @@ nature *= 0.78 + n * 0.34 + n2 * 0.12;
 float living = clamp(vCover.x + vCover.y, 0.0, 1.0);
 sampledDiffuseColor.rgb = mix(sampledDiffuseColor.rgb * 0.35 + diffuseColor.rgb * 0.7, nature, living);
 diffuseColor *= sampledDiffuseColor;
-float dist = length(vWp.xz - uOrigin);
+float dist = length(vWp.xz - uOrigin) + (fbm(vWp.xz * 0.05) - 0.4) * 8.0;
 float fade = 1.0 - smoothstep(uNear, uFar, dist);
-if (fade < 0.02 || fade < bayer4(gl_FragCoord.xy) * 0.9 + 0.05) discard;
+diffuseColor.rgb = mix(uFog, diffuseColor.rgb, fade);
+diffuseColor.a *= fade;
+if (fade < 0.035) discard;
 `,
         );
       }}
@@ -345,7 +351,7 @@ export function Terrain() {
         const t = w.tiles[ty]![tx]!;
         if (t.kind === "tree") {
           const dTree = Math.hypot(tx - px, ty - pz);
-          const nearFade = 1 - smooth01(half - 12, half - 0.4, dTree);
+          const nearFade = 1 - smooth01(half - 20, half - 1.2, dTree);
           if (nearFade >= 0.05) {
           const grow = treeGrow(tx, ty);
           const gy = groundY(w, tx, ty);
@@ -694,7 +700,7 @@ export function Horizon() {
           const wz = oz - half + iz * HSTEP;
           const i = (iz * HVERTS + ix) * 3;
           const dist = Math.hypot(wx - ox, wz - oz);
-          const hole = dist < VIEW / 2 - 18;
+          const hole = dist < VIEW / 2 - 26;
           const off = wx < 0 || wz < 0 || wx >= MAP || wz >= MAP;
           const lift = 1 + Math.max(0, dist - 50) / 320 * 0.5;
           arr[i] = wx;
@@ -703,7 +709,6 @@ export function Horizon() {
           if (off) pal.set("#1a1c18");
           else {
             colorAt(w, wx, wz, pal);
-            pal.multiplyScalar(0.88);
           }
           car[i] = pal.r;
           car[i + 1] = pal.g;
@@ -748,7 +753,7 @@ export function Horizon() {
       for (const t of stock.current) {
         if (fi >= FAR_TREES) break;
         const d = Math.hypot(t.tx - px, t.ty - pz);
-        const lod = smooth01(halfV - 12, halfV + 8, d);
+        const lod = smooth01(halfV - 20, halfV + 10, d);
         const rim = 1 - smooth01(half - 55, half - 6, d);
         const fade = lod * rim;
         if (fade < 0.04) continue;
