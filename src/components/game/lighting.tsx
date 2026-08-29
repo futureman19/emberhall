@@ -107,7 +107,7 @@ export function Lighting() {
     if (bg.current) bg.current.set(sky);
     if (fog.current) {
       fog.current.color.set(sky);
-      fog.current.density = pit ? 0.14 : 0.01;
+      fog.current.density = pit ? 0.14 : 0.0056;
     }
     scene.background = bg.current;
   });
@@ -115,7 +115,7 @@ export function Lighting() {
   return (
     <>
       <color ref={bg} attach="background" args={[SKY_DAY]} />
-      <fogExp2 ref={fog} attach="fog" args={[SKY_DAY, 0.01]} />
+      <fogExp2 ref={fog} attach="fog" args={[SKY_DAY, 0.0056]} />
       <ambientLight ref={amb} intensity={0.58} color="#ece6d8" />
       <directionalLight
         ref={dir}

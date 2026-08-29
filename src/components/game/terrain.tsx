@@ -80,7 +80,7 @@ const COL_FLOWER_GOLD = new THREE.Color("#c9a36a");
 const COL_FLOWER_PALE = new THREE.Color("#ece6d8");
 const COL_SAPLING = new THREE.Color("#4d6234");
 const COL_TUFT = new THREE.Color("#5a6a38");
-const FLORA = 240;
+const FLORA = 400;
 
 function blocked(world: World, tx: number, ty: number) {
   if (world.plots) {
@@ -611,14 +611,18 @@ export function Terrain() {
   );
 }
 
-const HORIZON = 200;
-const HSEGS = 40;
+const HORIZON = 400;
+const HSEGS = 50;
 const HVERTS = HSEGS + 1;
 const HCOUNT = HVERTS * HVERTS;
 const HSTEP = HORIZON / HSEGS;
 const INNER = VIEW / 2 - 2;
+const FAR_TREES = 1600;
+const FAR_STEP = 3;
+const COL_FAR = new THREE.Color("#2a3828");
 
 export function Horizon() {
+  const far = useRef<THREE.InstancedMesh>(null);
   const origin = useRef({ x: COURT.tx, z: COURT.ty, rev: -1 });
   const geo = useMemo(() => {
     const g = new THREE.BufferGeometry();
@@ -659,13 +663,15 @@ export function Horizon() {
         const i = (iz * HVERTS + ix) * 3;
         const hole = Math.abs(wx - ox) < INNER && Math.abs(wz - oz) < INNER;
         const off = wx < 0 || wz < 0 || wx >= MAP || wz >= MAP;
+        const dist = Math.hypot(wx - ox, wz - oz);
+        const lift = 1 + Math.max(0, dist - 50) / 320 * 0.5;
         arr[i] = wx;
-        arr[i + 1] = hole || off ? -8 : groundY(w, wx, wz) - 0.08;
+        arr[i + 1] = hole || off ? -8 : groundY(w, wx, wz) * lift - 0.08;
         arr[i + 2] = wz;
         if (off) pal.set("#1a1c18");
         else {
           colorAt(w, wx, wz, pal);
-          pal.multiplyScalar(0.86);
+          pal.multiplyScalar(0.88);
         }
         car[i] = pal.r;
         car[i + 1] = pal.g;
@@ -676,11 +682,44 @@ export function Horizon() {
     col.needsUpdate = true;
     geo.computeVertexNormals();
     geo.computeBoundingSphere();
+
+    const mesh = far.current;
+    ensureColor(mesh, FAR_TREES);
+    let fi = 0;
+    if (mesh) {
+      for (let ty = oz - half; ty <= oz + half && fi < FAR_TREES; ty += FAR_STEP) {
+        for (let tx = ox - half; tx <= ox + half && fi < FAR_TREES; tx += FAR_STEP) {
+          if (tx < 0 || ty < 0 || tx >= MAP || ty >= MAP) continue;
+          const d = Math.hypot(tx - ox, ty - oz);
+          if (d < INNER + 4) continue;
+          if (w.tiles[ty]?.[tx]?.kind !== "tree") continue;
+          const grow = 0.7 + hash2(tx, ty, w.seed + 5) * 0.55;
+          dummy.position.set(
+            tx,
+            groundY(w, tx, ty) * (1 + Math.max(0, d - 50) / 320 * 0.5) + CANOPY_H * grow * 0.42,
+            ty,
+          );
+          dummy.scale.set(grow * 1.05, grow * 1.15, grow * 1.05);
+          dummy.updateMatrix();
+          mesh.setMatrixAt(fi, dummy.matrix);
+          paint(mesh, fi, COL_FAR);
+          fi++;
+        }
+      }
+    }
+    hideRest(mesh, fi, FAR_TREES);
+    if (mesh?.instanceColor) mesh.instanceColor.needsUpdate = true;
   });
 
   return (
-    <mesh geometry={geo} frustumCulled={false} raycast={() => {}}>
-      <meshStandardMaterial vertexColors roughness={0.98} metalness={0.02} />
-    </mesh>
+    <group>
+      <mesh geometry={geo} frustumCulled={false} raycast={() => {}}>
+        <meshStandardMaterial vertexColors roughness={0.98} metalness={0.02} />
+      </mesh>
+      <instancedMesh ref={far} args={[undefined, undefined, FAR_TREES]} frustumCulled={false} raycast={() => {}}>
+        <coneGeometry args={[1.05, 2.4, 4]} />
+        <meshStandardMaterial color="#ffffff" roughness={0.96} />
+      </instancedMesh>
+    </group>
   );
 }

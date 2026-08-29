@@ -125,7 +125,7 @@ function Rig() {
       enableZoom={phase === "playing"}
       autoRotate={false}
       minDistance={8}
-      maxDistance={88}
+      maxDistance={150}
       zoomSpeed={1.35}
       maxPolarAngle={Math.PI / 2.15}
       minPolarAngle={Math.PI / 12}
@@ -318,7 +318,7 @@ export function WorldScene() {
       className="h-full w-full touch-none"
       shadows
       dpr={[1, 1.5]}
-      camera={{ position: [COURT.tx + 14, 20, COURT.ty + 18], fov: 46, near: 0.2, far: 260 }}
+      camera={{ position: [COURT.tx + 16, 23, COURT.ty + 20], fov: 48, near: 0.2, far: 480 }}
       gl={{ antialias: true, alpha: false }}
       onContextMenu={(e) => e.preventDefault()}
       onCreated={({ gl }) => {

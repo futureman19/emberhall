@@ -3,7 +3,7 @@ import type { Tile } from "./types";
 export const MAP = 512;
 export const TILE = 1;
 export const EH = 0.2;
-export const VIEW = 56;
+export const VIEW = 80;
 export const CHUNK = 8;
 
 export const COURT = { tx: 256, ty: 292 };
