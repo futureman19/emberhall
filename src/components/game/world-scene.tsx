@@ -16,7 +16,7 @@ import { Gates } from "./gate-meshes";
 import { Lighting } from "./lighting";
 import { People } from "./people-meshes";
 import { Piles } from "./pile-meshes";
-import { Terrain } from "./terrain";
+import { Horizon, Terrain } from "./terrain";
 
 function SimClock() {
   useFrame((_, dt) => {
@@ -318,7 +318,7 @@ export function WorldScene() {
       className="h-full w-full touch-none"
       shadows
       dpr={[1, 1.5]}
-      camera={{ position: [COURT.tx + 14, 20, COURT.ty + 18], fov: 46, near: 0.2, far: 180 }}
+      camera={{ position: [COURT.tx + 14, 20, COURT.ty + 18], fov: 46, near: 0.2, far: 260 }}
       gl={{ antialias: true, alpha: false }}
       onContextMenu={(e) => e.preventDefault()}
       onCreated={({ gl }) => {
@@ -330,6 +330,7 @@ export function WorldScene() {
       }}
     >
       <Lighting />
+      <Horizon />
       <Terrain />
       <Buildings />
       <Crops />

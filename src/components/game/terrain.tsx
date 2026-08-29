@@ -610,3 +610,77 @@ export function Terrain() {
     </group>
   );
 }
+
+const HORIZON = 200;
+const HSEGS = 40;
+const HVERTS = HSEGS + 1;
+const HCOUNT = HVERTS * HVERTS;
+const HSTEP = HORIZON / HSEGS;
+const INNER = VIEW / 2 - 2;
+
+export function Horizon() {
+  const origin = useRef({ x: COURT.tx, z: COURT.ty, rev: -1 });
+  const geo = useMemo(() => {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(HCOUNT * 3), 3));
+    g.setAttribute("color", new THREE.BufferAttribute(new Float32Array(HCOUNT * 3), 3));
+    g.setAttribute("normal", new THREE.BufferAttribute(new Float32Array(HCOUNT * 3), 3));
+    const index: number[] = [];
+    for (let j = 0; j < HSEGS; j++) {
+      for (let i = 0; i < HSEGS; i++) {
+        const a = j * HVERTS + i;
+        const b = a + 1;
+        const c = a + HVERTS;
+        const d = c + 1;
+        index.push(a, c, b, b, c, d);
+      }
+    }
+    g.setIndex(index);
+    return g;
+  }, []);
+
+  useFrame(() => {
+    const w = getWorld();
+    const you = w.people.find((p) => p.isPlayer);
+    const ox = Math.round(you?.x ?? COURT.tx);
+    const oz = Math.round(you?.z ?? COURT.ty);
+    const rev = w.landRev ?? 0;
+    if (origin.current.x === ox && origin.current.z === oz && origin.current.rev === rev) return;
+    origin.current = { x: ox, z: oz, rev };
+    const pos = geo.attributes.position as THREE.BufferAttribute;
+    const col = geo.attributes.color as THREE.BufferAttribute;
+    const arr = pos.array as Float32Array;
+    const car = col.array as Float32Array;
+    const half = HORIZON / 2;
+    for (let iz = 0; iz < HVERTS; iz++) {
+      for (let ix = 0; ix < HVERTS; ix++) {
+        const wx = ox - half + ix * HSTEP;
+        const wz = oz - half + iz * HSTEP;
+        const i = (iz * HVERTS + ix) * 3;
+        const hole = Math.abs(wx - ox) < INNER && Math.abs(wz - oz) < INNER;
+        const off = wx < 0 || wz < 0 || wx >= MAP || wz >= MAP;
+        arr[i] = wx;
+        arr[i + 1] = hole || off ? -8 : groundY(w, wx, wz) - 0.08;
+        arr[i + 2] = wz;
+        if (off) pal.set("#1a1c18");
+        else {
+          colorAt(w, wx, wz, pal);
+          pal.multiplyScalar(0.86);
+        }
+        car[i] = pal.r;
+        car[i + 1] = pal.g;
+        car[i + 2] = pal.b;
+      }
+    }
+    pos.needsUpdate = true;
+    col.needsUpdate = true;
+    geo.computeVertexNormals();
+    geo.computeBoundingSphere();
+  });
+
+  return (
+    <mesh geometry={geo} frustumCulled={false} raycast={() => {}}>
+      <meshStandardMaterial vertexColors roughness={0.98} metalness={0.02} />
+    </mesh>
+  );
+}

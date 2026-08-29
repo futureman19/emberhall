@@ -24,7 +24,7 @@ export function Lighting() {
   const amb = useRef<THREE.AmbientLight>(null);
   const hemi = useRef<THREE.HemisphereLight>(null);
   const sun = useRef<THREE.Group>(null);
-  const fog = useRef<THREE.Fog>(null);
+  const fog = useRef<THREE.FogExp2>(null);
   const bg = useRef<THREE.Color>(null);
   const { scene, gl } = useThree();
 
@@ -107,8 +107,7 @@ export function Lighting() {
     if (bg.current) bg.current.set(sky);
     if (fog.current) {
       fog.current.color.set(sky);
-      fog.current.near = pit ? 8 : 90;
-      fog.current.far = pit ? 22 : 210;
+      fog.current.density = pit ? 0.14 : 0.01;
     }
     scene.background = bg.current;
   });
@@ -116,7 +115,7 @@ export function Lighting() {
   return (
     <>
       <color ref={bg} attach="background" args={[SKY_DAY]} />
-      <fog ref={fog} attach="fog" args={[SKY_DAY, 90, 210]} />
+      <fogExp2 ref={fog} attach="fog" args={[SKY_DAY, 0.01]} />
       <ambientLight ref={amb} intensity={0.58} color="#ece6d8" />
       <directionalLight
         ref={dir}
