@@ -395,12 +395,12 @@ export const useGame = create<GameUI>((set, get) => ({
     }
     const err = commandEquip(getWorld(), item);
     if (err) get().flash(err);
-    else set({ snap: snapshot() });
+    set({ snap: snapshot() });
   },
   unequip: (slot) => {
     const err = commandUnequip(getWorld(), slot);
     if (err) get().flash(err);
-    else set({ snap: snapshot() });
+    set({ snap: snapshot() });
   },
   heal: () => {
     const err = commandHeal(getWorld());
@@ -580,8 +580,8 @@ export const useGame = create<GameUI>((set, get) => ({
       get().flash("A ghost cannot.");
       return;
     }
-    if ((w.player.pack.hoe ?? 0) < 1) {
-      get().flash("Need a hoe.");
+    if (w.player.wear.main !== "hoe") {
+      get().flash("Hold a hoe — tap it in You.");
       return;
     }
     const p = you(w);

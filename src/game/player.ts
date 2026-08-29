@@ -117,12 +117,22 @@ export function commandWalk(world: World, tx: number, ty: number): string | null
   return null;
 }
 
+export function inHand(world: World) {
+  return world.player.wear.main ?? null;
+}
+
+export function needHeld(world: World, item: ItemId) {
+  if (world.player.wear.main === item) return null;
+  return `Hold the ${ITEM_META[item].label.toLowerCase()} — tap it in You.`;
+}
+
 export function commandChop(world: World, tx: number, ty: number) {
   const p = you(world);
   if (!p) return "You are not in the vale.";
   const dead = hands(world);
   if (dead) return dead;
-  if ((world.player.pack.hatchet ?? 0) < 1) return "Need a hatchet.";
+  const held = needHeld(world, "hatchet");
+  if (held) return held;
   world.player.intent = { kind: "chop", tx, ty, targetId: null, spell: null };
   pathBeside(world, p, tx, ty);
   return null;
@@ -133,7 +143,8 @@ export function commandMine(world: World, tx: number, ty: number) {
   if (!p) return "You are not in the vale.";
   const dead = hands(world);
   if (dead) return dead;
-  if ((world.player.pack.pick ?? 0) < 1) return "Need a pick.";
+  const held = needHeld(world, "pick");
+  if (held) return held;
   world.player.intent = { kind: "mine", tx, ty, targetId: null, spell: null };
   pathBeside(world, p, tx, ty);
   return null;
@@ -206,7 +217,7 @@ export function commandSkin(world: World, id: string) {
   const p = you(world);
   const c = world.fauna.find((x) => x.id === id);
   if (!p || !c) return "Nothing to dress.";
-  if ((world.player.pack.knife ?? 0) < 1) return "Need a knife.";
+  if ((world.player.wear.main ?? null) !== "knife") return "Hold the skinning knife — tap it in You.";
   world.player.intent = { kind: "skin", tx: Math.round(c.x), ty: Math.round(c.z), targetId: c.id, spell: null };
   pathBeside(world, p, Math.round(c.x), Math.round(c.z));
   return null;
@@ -234,13 +245,15 @@ export function commandEquip(world: World, item: ItemId) {
   const dead = hands(world);
   if (dead) return dead;
   const meta = ITEM_META[item];
-  if (!meta.slot) return "You cannot wear that.";
+  if (!meta.slot) return "You cannot hold or wear that.";
   if ((world.player.pack[item] ?? 0) < 1) return "You do not carry that.";
   const prev = world.player.wear[meta.slot];
   if (prev) world.player.pack[prev] = (world.player.pack[prev] ?? 0) + 1;
   world.player.pack[item] -= 1;
   world.player.wear[meta.slot] = item;
   completeObjective(world, "dress");
+  if (meta.slot === "main") return `You take the ${meta.label.toLowerCase()}.`;
+  if (meta.slot === "off") return `You raise the ${meta.label.toLowerCase()}.`;
   return `You wear the ${meta.label.toLowerCase()}.`;
 }
 
@@ -251,7 +264,7 @@ export function commandUnequip(world: World, slot: WearSlot) {
   if (!id) return "Nothing there.";
   world.player.wear[slot] = undefined;
   world.player.pack[id] = (world.player.pack[id] ?? 0) + 1;
-  return "Off.";
+  return slot === "main" || slot === "off" ? "You put it away." : "Off.";
 }
 
 export function commandHeal(world: World) {
@@ -344,9 +357,12 @@ function huntNow(world: World, p: Person) {
     return "It fled.";
   }
   playSfx("hunt", 0.52);
+  const held = world.player.wear.main;
+  const blade =
+    held === "sword" ? 10 : held === "mace" ? 9 : held === "club" ? 7 : held === "hatchet" ? 6 : held === "staff" ? 5 : held === "knife" ? 4 : 2;
   const chance = successChance(world.player.skills.swords, 10 + FAUNA_META[c.kind].hp / 2);
   const ok = Math.random() < chance + 0.2;
-  const dmg = ok ? 6 + Math.floor(world.player.skills.swords / 12) : 2;
+  const dmg = ok ? blade + Math.floor(world.player.skills.swords / 12) : Math.max(1, Math.floor(blade / 3));
   const arm = armorOf(world.player.wear);
   c.hp -= dmg;
   if (c.kind === "wolf" || c.kind === "wight") p.hp = Math.max(0, p.hp - Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2)));

@@ -19,6 +19,11 @@ function bedId(world: World) {
   return `bed-${world.tickCount}-${world.plots.length}-${world.seed}`;
 }
 
+function heldHoe(world: World) {
+  if (world.player.wear.main === "hoe") return null;
+  return "Hold a hoe — tap it in You.";
+}
+
 export const CROP_ORDER: CropId[] = ["cabbage", "wheat", "garlic"];
 
 export const CROP_META: Record<
@@ -120,7 +125,8 @@ export function commandTill(world: World, tx: number, ty: number) {
   const p = you(world);
   if (!p) return "You are not in the vale.";
   if (world.player.ghost) return "A ghost cannot.";
-  if ((world.player.pack.hoe ?? 0) < 1) return "Need a hoe.";
+  const hoe = heldHoe(world);
+  if (hoe) return hoe;
   const err = canTill(world, tx, ty);
   if (err) return err;
   world.player.intent = { kind: "till", tx, ty, targetId: null, spell: null };
@@ -131,7 +137,8 @@ export function commandPlant(world: World, tx: number, ty: number, crop: CropId)
   const p = you(world);
   if (!p) return "You are not in the vale.";
   if (world.player.ghost) return "A ghost cannot.";
-  if ((world.player.pack.hoe ?? 0) < 1) return "Need a hoe.";
+  const hoe = heldHoe(world);
+  if (hoe) return hoe;
   const bed = plotAt(world, tx, ty);
   if (!bed) return "Till a plot first.";
   if (bed.crop) return bed.stage >= 3 ? "It is ripe. Take it." : "Something already grows.";
@@ -145,7 +152,8 @@ export function commandHarvest(world: World, tx: number, ty: number) {
   const p = you(world);
   if (!p) return "You are not in the vale.";
   if (world.player.ghost) return "A ghost cannot.";
-  if ((world.player.pack.hoe ?? 0) < 1) return "Need a hoe.";
+  const hoe = heldHoe(world);
+  if (hoe) return hoe;
   const bed = plotAt(world, tx, ty);
   if (!bed || !bed.crop) return "Nothing grows.";
   if (bed.stage < 3) return "Not yet.";

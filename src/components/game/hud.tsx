@@ -311,7 +311,9 @@ function HelpPanel() {
       <h2 className="font-display text-sm text-fg">The vale is a country</h2>
       <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">
         Click the ground to walk. Click a tree to chop, stone to mine, a beast to hunt. Right-click a live beast and Tame
-        — hares yield, wolves rarely do. Open You for the paperdoll and pack. The book in the pack is magery. Open it.
+        — hares yield, wolves rarely do. Open You for the paperdoll. Tap a hatchet, pick, hoe, or sword in the pack — it
+        sits in your Hand. Tap the Hand to put it away. Chop needs the hatchet held. Mine needs the pick. Farm needs the
+        hoe. The book in the pack is magery. Open it.
         Mark writes this dirt on a rune. Walk off. Tap the mark — Recall folds you back. The moons still hold. Towns keep
         a banker, a healer, a stall. Die and you walk pale — Ione at the hall can return you. Your corpse keeps what it
         took until you come back living. Open Hold to raise timber on the dirt — dorm, kitchen, forge, tavern. Walk

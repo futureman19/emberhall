@@ -87,7 +87,9 @@ export type WearSlot =
   | "legs"
   | "feet"
   | "neck"
-  | "finger";
+  | "finger"
+  | "main"
+  | "off";
 
 export type SpellId =
   | "nightsight"

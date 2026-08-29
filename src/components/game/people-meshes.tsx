@@ -53,6 +53,146 @@ function Hatchet({ ghost }: { ghost: boolean }) {
   );
 }
 
+function Knife({ ghost }: { ghost: boolean }) {
+  return (
+    <group position={[0.02, -0.42, 0.04]} rotation={[0.2, 0, 0.2]}>
+      <mesh position={[0, 0.08, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.04, 0.16, 0.04]} />
+        <Mat color="#5a3e28" ghost={ghost} />
+      </mesh>
+      <mesh position={[0, 0.24, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.05, 0.22, 0.02]} />
+        <meshStandardMaterial color="#9a9286" metalness={0.55} roughness={0.32} />
+      </mesh>
+    </group>
+  );
+}
+
+function Sword({ ghost }: { ghost: boolean }) {
+  return (
+    <group position={[0.02, -0.44, 0.04]} rotation={[0.12, 0, 0.28]}>
+      <mesh position={[0, 0.1, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.045, 0.22, 0.045]} />
+        <Mat color="#5a3e28" ghost={ghost} />
+      </mesh>
+      <mesh position={[0, 0.22, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.16, 0.04, 0.04]} />
+        <meshStandardMaterial color="#8a8680" metalness={0.5} roughness={0.4} />
+      </mesh>
+      <mesh position={[0, 0.44, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.055, 0.46, 0.02]} />
+        <meshStandardMaterial color="#c9c3b6" metalness={0.65} roughness={0.28} />
+      </mesh>
+    </group>
+  );
+}
+
+function Club({ ghost }: { ghost: boolean }) {
+  return (
+    <group position={[0.02, -0.44, 0.04]} rotation={[0.15, 0, 0.3]}>
+      <mesh position={[0, 0.22, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.055, 0.5, 0.055]} />
+        <Mat color="#5a3e28" ghost={ghost} />
+      </mesh>
+      <mesh position={[0, 0.48, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.12, 0.16, 0.12]} />
+        <Mat color="#6a4a32" ghost={ghost} />
+      </mesh>
+    </group>
+  );
+}
+
+function Mace({ ghost }: { ghost: boolean }) {
+  return (
+    <group position={[0.02, -0.44, 0.04]} rotation={[0.15, 0, 0.3]}>
+      <mesh position={[0, 0.2, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.045, 0.42, 0.045]} />
+        <Mat color="#5a3e28" ghost={ghost} />
+      </mesh>
+      <mesh position={[0, 0.46, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.16, 0.16, 0.16]} />
+        <meshStandardMaterial color="#8a8680" metalness={0.5} roughness={0.38} />
+      </mesh>
+    </group>
+  );
+}
+
+function Staff({ ghost }: { ghost: boolean }) {
+  return (
+    <group position={[0.02, -0.5, 0.04]} rotation={[0.08, 0, 0.22]}>
+      <mesh position={[0, 0.38, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.04, 0.9, 0.04]} />
+        <Mat color="#5a3e28" ghost={ghost} />
+      </mesh>
+      <mesh position={[0, 0.86, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.1, 0.1, 0.1]} />
+        <meshStandardMaterial color="#c9a36a" roughness={0.45} />
+      </mesh>
+    </group>
+  );
+}
+
+function Bow({ ghost }: { ghost: boolean }) {
+  return (
+    <group position={[0.04, -0.4, 0.02]} rotation={[0.1, 0.4, 0.15]}>
+      <mesh position={[0, 0.28, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.04, 0.62, 0.04]} />
+        <Mat color="#6a4a32" ghost={ghost} />
+      </mesh>
+      <mesh position={[0.08, 0.28, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.02, 0.56, 0.02]} />
+        <meshStandardMaterial color="#ece6d8" roughness={0.6} />
+      </mesh>
+    </group>
+  );
+}
+
+function Torch({ ghost }: { ghost: boolean }) {
+  return (
+    <group position={[0.02, -0.44, 0.04]} rotation={[0.18, 0, 0.25]}>
+      <mesh position={[0, 0.18, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.045, 0.36, 0.045]} />
+        <Mat color="#5a3e28" ghost={ghost} />
+      </mesh>
+      <mesh position={[0, 0.4, 0]}>
+        <boxGeometry args={[0.08, 0.1, 0.08]} />
+        <meshStandardMaterial color="#a85a42" emissive="#a85a42" emissiveIntensity={ghost ? 0.2 : 0.8} />
+      </mesh>
+      {!ghost && <pointLight color="#e0b56a" intensity={1.6} distance={5.2} />}
+    </group>
+  );
+}
+
+function Shield({ id, ghost }: { id: ItemId; ghost: boolean }) {
+  const iron = id === "heater";
+  return (
+    <group position={[-0.02, -0.28, 0.08]} rotation={[0.2, 0.15, -0.35]}>
+      <mesh castShadow={!ghost}>
+        <boxGeometry args={[0.28, 0.38, 0.06]} />
+        <meshStandardMaterial color={iron ? "#8a8680" : "#6a4a32"} metalness={iron ? 0.5 : 0.05} roughness={iron ? 0.4 : 0.85} />
+      </mesh>
+      <mesh position={[0, 0.02, 0.04]}>
+        <boxGeometry args={[0.1, 0.1, 0.04]} />
+        <meshStandardMaterial color="#c9a36a" roughness={0.5} />
+      </mesh>
+    </group>
+  );
+}
+
+function Held({ id, ghost }: { id: ItemId; ghost: boolean }) {
+  if (id === "hatchet") return <Hatchet ghost={ghost} />;
+  if (id === "pick") return <Pick ghost={ghost} />;
+  if (id === "hoe") return <Hoe ghost={ghost} />;
+  if (id === "knife") return <Knife ghost={ghost} />;
+  if (id === "sword") return <Sword ghost={ghost} />;
+  if (id === "club") return <Club ghost={ghost} />;
+  if (id === "mace") return <Mace ghost={ghost} />;
+  if (id === "staff") return <Staff ghost={ghost} />;
+  if (id === "bow") return <Bow ghost={ghost} />;
+  if (id === "torch") return <Torch ghost={ghost} />;
+  return null;
+}
+
 function Hoe({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.44, 0.04]} rotation={[0.15, 0, 0.35]}>
@@ -224,6 +364,7 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
           <Mat color={hands} ghost={ghost} />
         </mesh>
         {p.isPlayer && !ghost && <PalmFlame />}
+        {p.isPlayer && wear.off && <Shield id={wear.off} ghost={ghost} />}
       </group>
       <group ref={right} position={[0.28, 0.62 + bob, 0]} rotation={[-walkSwing, 0, -0.12]}>
         <mesh position={[0, -0.16, 0]} castShadow={!ghost}>
@@ -234,9 +375,7 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
           <boxGeometry args={[0.12, 0.1, 0.12]} />
           <Mat color={hands} ghost={ghost} />
         </mesh>
-        {working && intent.kind === "chop" && <Hatchet ghost={ghost} />}
-        {working && intent.kind === "mine" && <Pick ghost={ghost} />}
-        {working && (intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till") && <Hoe ghost={ghost} />}
+        {p.isPlayer && wear.main && intent.kind !== "cast" && <Held id={wear.main} ghost={ghost} />}
         {p.isPlayer && !ghost && <PalmFlame />}
       </group>
       <mesh position={[0, 0.98 + bob, 0]} castShadow={!ghost}>
