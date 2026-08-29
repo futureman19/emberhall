@@ -9,9 +9,7 @@ import { getWorld } from "@/game/live";
 import { hash2 } from "@/game/rng";
 import { useGame } from "@/game/store";
 
-const N_CLOUD = 64;
-const PUFFS = 5;
-const N_PUFF = N_CLOUD * PUFFS;
+const N_CARD = 12;
 const N_BIRD = 16;
 const dummy = new THREE.Object3D();
 
@@ -25,19 +23,82 @@ function chevron() {
   return g;
 }
 
+function fade3(t: number) {
+  return t * t * (3 - 2 * t);
+}
+
+function vnoise(x: number, y: number, seed: number) {
+  const x0 = Math.floor(x);
+  const y0 = Math.floor(y);
+  const fx = fade3(x - x0);
+  const fy = fade3(y - y0);
+  const a = hash2(x0, y0, seed);
+  const b = hash2(x0 + 1, y0, seed);
+  const c = hash2(x0, y0 + 1, seed);
+  const d = hash2(x0 + 1, y0 + 1, seed);
+  return a + (b - a) * fx + (c - a) * fy + (a - b - c + d) * fx * fy;
+}
+
+function fbm2(x: number, y: number, seed: number) {
+  let v = 0;
+  let a = 0.5;
+  let f = 1;
+  for (let i = 0; i < 5; i++) {
+    v += a * vnoise(x * f, y * f, seed + i * 19);
+    a *= 0.5;
+    f *= 2.03;
+  }
+  return v;
+}
+
+function makeCloudCard() {
+  const s = 256;
+  const c = document.createElement("canvas");
+  c.width = s;
+  c.height = s;
+  const ctx = c.getContext("2d");
+  if (!ctx) return new THREE.Texture();
+  const img = ctx.createImageData(s, s);
+  const data = img.data;
+  for (let y = 0; y < s; y++) {
+    for (let x = 0; x < s; x++) {
+      const u = x / s;
+      const v = y / s;
+      const d = Math.hypot((u - 0.5) * 1.15, (v - 0.52) * 1.45);
+      const n = fbm2(u * 4.2, v * 3.1, 11);
+      const n2 = fbm2(u * 8.4 + 3, v * 6.2, 23);
+      let a = (n * 0.68 + n2 * 0.32) * (1 - d * d);
+      a = Math.max(0, Math.min(1, (a - 0.16) * 1.9));
+      const i = (y * s + x) * 4;
+      const w = 0.88 + n * 0.12;
+      data[i] = Math.floor(242 * w);
+      data[i + 1] = Math.floor(236 * w);
+      data[i + 2] = Math.floor(226 * w);
+      data[i + 3] = Math.floor(a * 255);
+    }
+  }
+  ctx.putImageData(img, 0, 0);
+  const tex = new THREE.CanvasTexture(c);
+  tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping;
+  tex.needsUpdate = true;
+  return tex;
+}
+
 function SkyDome() {
-  const mat = useRef<THREE.ShaderMaterial>(null);
   const mesh = useRef<THREE.Mesh>(null);
   const uniforms = useMemo(
     () => ({
       uZenith: { value: new THREE.Color("#c5d0c4") },
       uMid: { value: new THREE.Color("#8b9e95") },
       uHorizon: { value: new THREE.Color("#6a7a5c") },
+      uCloud: { value: new THREE.Color("#f0ebe3") },
+      uCover: { value: 1 },
+      uTime: { value: 0 },
     }),
     [],
   );
 
-  useFrame(() => {
+  useFrame(({ clock }) => {
     const w = getWorld();
     const p = w.people.find((x) => x.isPlayer);
     const px = p?.x ?? COURT.tx;
@@ -50,6 +111,8 @@ function SkyDome() {
     const dusk = !DEV_DAYLIGHT && useGame.getState().snap.isDusk && !sight;
     const climate = biomeAt(Math.round(px), Math.round(pz));
     const u = uniforms;
+    u.uTime.value = clock.getElapsedTime();
+    u.uCover.value = pit ? 0 : night ? 0.12 : dusk ? 0.55 : 1;
     if (pit) {
       u.uZenith.value.set("#0c0a08");
       u.uMid.value.set("#0c0a08");
@@ -91,9 +154,8 @@ function SkyDome() {
 
   return (
     <mesh ref={mesh} frustumCulled={false} renderOrder={-20} raycast={() => {}}>
-      <sphereGeometry args={[400, 28, 18]} />
+      <sphereGeometry args={[400, 32, 20]} />
       <shaderMaterial
-        ref={mat}
         uniforms={uniforms}
         side={THREE.BackSide}
         depthWrite={false}
@@ -109,11 +171,48 @@ void main() {
 uniform vec3 uZenith;
 uniform vec3 uMid;
 uniform vec3 uHorizon;
+uniform vec3 uCloud;
+uniform float uCover;
+uniform float uTime;
 varying vec3 vN;
+
+float hash(vec2 p){
+  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+float noise(vec2 p){
+  vec2 i = floor(p);
+  vec2 f = fract(p);
+  float a = hash(i);
+  float b = hash(i + vec2(1.0, 0.0));
+  float c = hash(i + vec2(0.0, 1.0));
+  float d = hash(i + vec2(1.0, 1.0));
+  vec2 u = f * f * (3.0 - 2.0 * f);
+  return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+}
+float fbm(vec2 p){
+  float v = 0.0;
+  float a = 0.5;
+  for (int i = 0; i < 5; i++) {
+    v += a * noise(p);
+    p *= 2.03;
+    a *= 0.5;
+  }
+  return v;
+}
+
 void main() {
   float h = clamp(vN.y * 0.5 + 0.5, 0.0, 1.0);
   vec3 c = mix(uHorizon, uMid, smoothstep(0.42, 0.62, h));
   c = mix(c, uZenith, smoothstep(0.62, 0.92, h));
+  float az = atan(vN.z, vN.x);
+  vec2 uv = vec2(az * 0.42, h * 2.2) + vec2(uTime * 0.007, 0.0);
+  float banks = fbm(uv * 1.05);
+  float wisp = fbm(uv * 2.6 + 9.0);
+  float band = smoothstep(0.5, 0.6, h) * (1.0 - smoothstep(0.8, 0.97, h));
+  float cloud = smoothstep(0.4, 0.64, banks) * 0.72 + smoothstep(0.52, 0.74, wisp) * 0.38;
+  cloud *= band * uCover;
+  vec3 puff = mix(uCloud * 0.78, uCloud, smoothstep(0.42, 0.78, banks));
+  c = mix(c, puff, clamp(cloud, 0.0, 0.82));
   gl_FragColor = vec4(c, 1.0);
 }
 `}
@@ -122,31 +221,24 @@ void main() {
   );
 }
 
-function Clouds() {
+function CloudCards() {
   const mesh = useRef<THREE.InstancedMesh>(null);
-  const stock = useMemo(() => {
-    return Array.from({ length: N_CLOUD }, (_, i) => {
-      const a = hash2(i, 2, 11) * Math.PI * 2;
-      const far = hash2(i, 5, 13);
-      const r = 220 + far * 85;
-      const y = 188 + hash2(i, 8, 17) * 38 + far * 14;
-      const s = 4.2 + hash2(i, 3, 19) * 5.2 + far * 2.4;
-      const puffs = Array.from({ length: PUFFS }, (_, k) => ({
-        dx: (hash2(i, k, 31) - 0.5) * 2.1,
-        dy: (hash2(i, k, 37) - 0.4) * 0.85,
-        dz: (hash2(i, k, 41) - 0.5) * 1.5,
-        sc: 0.48 + hash2(i, k, 43) * 0.62,
-      }));
-      return {
-        a,
-        r,
-        y,
-        s,
-        v: 0.04 + hash2(i, 7, 23) * 0.06,
-        puffs,
-      };
-    });
-  }, []);
+  const tex = useMemo(() => makeCloudCard(), []);
+  const stock = useMemo(
+    () =>
+      Array.from({ length: N_CARD }, (_, i) => {
+        const a = (i / N_CARD) * Math.PI * 2 + hash2(i, 2, 11) * 0.4;
+        return {
+          a,
+          r: 210 + hash2(i, 5, 13) * 70,
+          y: 52 + hash2(i, 8, 17) * 28,
+          sx: 38 + hash2(i, 3, 19) * 32,
+          sy: 16 + hash2(i, 4, 23) * 12,
+          v: 0.012 + hash2(i, 7, 29) * 0.02,
+        };
+      }),
+    [],
+  );
 
   useFrame(({ clock, camera }) => {
     const m = mesh.current;
@@ -161,37 +253,36 @@ function Clouds() {
     const night = !DEV_DAYLIGHT && useGame.getState().snap.isNight && !sight;
     m.visible = !pit;
     const mat = m.material as THREE.MeshBasicMaterial;
-    mat.opacity = night ? 0.18 : 0.42;
+    mat.opacity = night ? 0.16 : 0.88;
     const t = clock.getElapsedTime();
-    let n = 0;
-    for (let i = 0; i < N_CLOUD; i++) {
+    for (let i = 0; i < N_CARD; i++) {
       const c = stock[i]!;
-      const a = c.a + t * c.v * 0.028;
-      const cx = px + Math.cos(a) * c.r;
-      const cz = pz + Math.sin(a) * c.r;
-      const cy = py + c.y;
-      const near = Math.hypot(cx - camera.position.x, cy - camera.position.y, cz - camera.position.z);
-      const hide = near < 150 ? 0.01 : 1;
-      for (const puff of c.puffs) {
-        dummy.position.set(cx + puff.dx * c.s, cy + puff.dy * c.s, cz + puff.dz * c.s);
-        dummy.scale.set(c.s * puff.sc * 1.15 * hide, c.s * puff.sc * 0.86 * hide, c.s * puff.sc * 1.05 * hide);
-        dummy.updateMatrix();
-        m.setMatrixAt(n++, dummy.matrix);
-      }
+      const a = c.a + t * c.v;
+      const x = px + Math.cos(a) * c.r;
+      const z = pz + Math.sin(a) * c.r;
+      const y = py + c.y;
+      const near = Math.hypot(x - camera.position.x, y - camera.position.y, z - camera.position.z);
+      dummy.position.set(x, y, z);
+      dummy.lookAt(camera.position);
+      const hide = near < 140 ? 0.01 : 1;
+      dummy.scale.set(c.sx * hide, c.sy * hide, 1);
+      dummy.updateMatrix();
+      m.setMatrixAt(i, dummy.matrix);
     }
     m.instanceMatrix.needsUpdate = true;
   });
 
   return (
-    <instancedMesh ref={mesh} args={[undefined, undefined, N_PUFF]} frustumCulled={false} raycast={() => {}} renderOrder={-12}>
-      <sphereGeometry args={[1, 9, 7]} />
+    <instancedMesh ref={mesh} args={[undefined, undefined, N_CARD]} frustumCulled={false} raycast={() => {}} renderOrder={-12}>
+      <planeGeometry args={[1, 1]} />
       <meshBasicMaterial
-        color="#f4f1ea"
+        map={tex}
         transparent
-        opacity={0.42}
         depthWrite={false}
         fog={false}
         toneMapped={false}
+        opacity={0.88}
+        side={THREE.DoubleSide}
       />
     </instancedMesh>
   );
@@ -253,7 +344,7 @@ export function Sky() {
   return (
     <group>
       <SkyDome />
-      <Clouds />
+      <CloudCards />
       <Birds />
     </group>
   );
