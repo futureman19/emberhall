@@ -48,7 +48,7 @@ const COVER: Record<TileKind, [number, number, number]> = {
   marsh: [0.55, 0.5, 0.08],
 };
 
-const SEGS = VIEW * 2;
+const SEGS = Math.min(VIEW * 2, 160);
 const VERTS = SEGS + 1;
 const VERT_COUNT = VERTS * VERTS;
 const STEP = VIEW / SEGS;
@@ -80,12 +80,12 @@ const COL_FLOWER_GOLD = new THREE.Color("#c9a36a");
 const COL_FLOWER_PALE = new THREE.Color("#ece6d8");
 const COL_SAPLING = new THREE.Color("#4d6234");
 const COL_TUFT = new THREE.Color("#5a6a38");
-const FLORA = 520;
+const FLORA = 700;
 const GROUND_FADE = {
   uOrigin: { value: new THREE.Vector2(COURT.tx, COURT.ty) },
-  uNear: { value: VIEW / 2 - 22 },
-  uFar: { value: VIEW / 2 - 0.2 },
-  uFog: { value: new THREE.Color("#1c1c1a") },
+  uNear: { value: VIEW / 2 - 18 },
+  uFar: { value: VIEW / 2 - 0.15 },
+  uFog: { value: new THREE.Color("#6a6864") },
 };
 
 function blocked(world: World, tx: number, ty: number) {
@@ -297,7 +297,8 @@ export function Terrain() {
     ensureColor(flw, FLORA);
     ensureColor(sap, FLORA);
     ensureColor(tft, FLORA);
-    if (origin.current.x !== ox || origin.current.z !== oz || origin.current.rev !== rev) {
+    const landMoved = origin.current.x !== ox || origin.current.z !== oz || origin.current.rev !== rev;
+    if (landMoved) {
       origin.current = { x: ox, z: oz, rev };
       const pos = geo.attributes.position as THREE.BufferAttribute;
       const col = geo.attributes.color as THREE.BufferAttribute;
@@ -333,6 +334,12 @@ export function Terrain() {
       geo.computeVertexNormals();
       geo.computeBoundingSphere();
     }
+    const px = you?.x ?? ox;
+    const pz = you?.z ?? oz;
+    GROUND_FADE.uOrigin.value.set(px, pz);
+    const working =
+      (w.player.intent.kind === "chop" || w.player.intent.kind === "mine") && !you?.path.length;
+    if (landMoved || working) {
     let si = 0;
     let gi = 0;
     let ri = 0;
@@ -340,9 +347,6 @@ export function Terrain() {
     let fli = 0;
     let sai = 0;
     let tui = 0;
-    const px = you?.x ?? ox;
-    const pz = you?.z ?? oz;
-    GROUND_FADE.uOrigin.value.set(px, pz);
     for (let iz = 0; iz < VIEW; iz++) {
       for (let ix = 0; ix < VIEW; ix++) {
         const tx = ox - half + ix;
@@ -518,6 +522,7 @@ export function Terrain() {
     if (flw?.instanceColor) flw.instanceColor.needsUpdate = true;
     if (sap?.instanceColor) sap.instanceColor.needsUpdate = true;
     if (tft?.instanceColor) tft.instanceColor.needsUpdate = true;
+    }
   });
 
   function fromEvent(e: ThreeEvent<PointerEvent>) {
@@ -646,7 +651,7 @@ const HCOUNT = HVERTS * HVERTS;
 const HSTEP = HORIZON / HSEGS;
 const FAR_TREES = 2200;
 const FAR_STEP = 3;
-const MID_BAND = 76;
+const MID_BAND = 110;
 const COL_FAR = new THREE.Color("#2a3828");
 
 type FarStock = { tx: number; ty: number; grow: number };
