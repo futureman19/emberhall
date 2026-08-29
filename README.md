@@ -6,6 +6,8 @@ You are a body, not a guildmaster spreadsheet. Click the dirt and walk. Chop, hu
 
 ## Play
 
+Live: [emberhall-vale.vercel.app](https://emberhall-vale.vercel.app)
+
 ```
 npm install
 npm run dev
