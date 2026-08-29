@@ -68,10 +68,10 @@ export function Lighting() {
     const climate = biomeAt(Math.round(px), Math.round(pz));
     const cloud = pit ? 0 : (w.weather?.cloud ?? 0);
     const rain = pit ? 0 : rainRate(w);
-    // DEV_DAYLIGHT pins the sun to noon for dev visibility; the clock still runs.
-    const sunHour = DEV_DAYLIGHT ? 12 : w.hour;
-    const sunDir = sunDirFor(sunHour);
-    const sunH = sunHeight(sunHour);
+    // The sun rides the real clock so days visibly arc. DEV_DAYLIGHT only
+    // floors the brightness at half-day (dev visibility), never darkness.
+    const sunDir = sunDirFor(w.hour);
+    const sunH = DEV_DAYLIGHT ? Math.max(sunHeight(w.hour), 0.5) : sunHeight(w.hour);
 
     // Lightning: the storm picks its own moments; the sky dome and clouds
     // read skyFlash so the whole heavens answer the same strike.
@@ -103,7 +103,7 @@ export function Lighting() {
       dir.current.intensity = dirI * (night || pit ? 1 : cloudDim) * (night || dusk || pit ? 1 : 0.45 + 0.55 * sunH) + flash * 1.7;
       if (night) dir.current.color.set("#9aa8c4");
       else if (dusk) dir.current.color.set("#e0a060");
-      else sunColorFor(sunHour, dir.current.color);
+      else sunColorFor(w.hour, dir.current.color);
       dir.current.position.set(lx, ly, lz);
       dir.current.target.position.set(px, py, pz);
       dir.current.target.updateMatrixWorld();

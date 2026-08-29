@@ -1,7 +1,7 @@
 import { getWorld } from "./live";
 import { useGame } from "./store";
 
-/** Pin lighting to day so we can see. Clock, wolves, and the HUD still keep the hour. Flip false to restore night. */
+/** Floors lighting at half-day so dev stays visible — the sun still rides the real clock, and clock, wolves and HUD keep the hour. Flip false for true night. */
 export const DEV_DAYLIGHT = true;
 
 declare global {

@@ -54,7 +54,7 @@ function SkyDome() {
     const climate = biomeAt(Math.round(px), Math.round(pz));
     const cloud = pit ? 0 : (w.weather?.cloud ?? 0);
     const u = uniforms;
-    u.uSunDir.value.copy(sunDirFor(DEV_DAYLIGHT ? 12 : w.hour));
+    u.uSunDir.value.copy(sunDirFor(w.hour));
     u.uGlow.value = pit ? 0 : night ? 0.08 : dusk ? 0.7 : 1;
     u.uGlow.value *= 1 - cloud * 0.85;
     if (skyFlash.v > 0.01) u.uGlow.value += skyFlash.v * 1.6;

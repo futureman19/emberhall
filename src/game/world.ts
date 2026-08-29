@@ -356,7 +356,7 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
     landRev: 1,
     tickCount: 0,
     restored: false,
-    weather: initialWeather(8),
+    weather: initialWeather(seed, 8),
     boom: null,
     nightOffer: null,
   };

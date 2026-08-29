@@ -100,7 +100,7 @@ function CloudShadows() {
     const speed = 2.2 + wind * 9;
     drift.current.x += WIND_X * speed * dt;
     drift.current.z += WIND_Z * speed * dt;
-    const show = !s.pit && !s.night && s.cloud > 0.1;
+    const show = !s.pit && !s.night && s.cloud > 0.12;
     m.visible = show;
     if (!show) return;
 

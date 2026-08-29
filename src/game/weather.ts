@@ -80,15 +80,33 @@ function weatherLog(world: World, text: string) {
   if (world.log.length > 48) world.log.length = 48;
 }
 
-export function initialWeather(hour = 8): WeatherState {
-  return { kind: "clear", cloud: 0.06, wet: 0, wind: 0.12, untilHour: hour + 6, rolls: 0, douseHour: 0 };
+/**
+ * A world's opening sky, drawn from its seed: most lives open under open
+ * sky, some under grey, a few to rain on the roof. The first regime is
+ * short (1.5–3.5h) so the weather introduces itself within minutes.
+ */
+export function initialWeather(seed: number, hour = 8): WeatherState {
+  const rng = mulberry32(seed * 71 + 13);
+  const r = rng();
+  const kind: WeatherKind = r < 0.42 ? "clear" : r < 0.68 ? "fair" : r < 0.85 ? "cloudy" : r < 0.96 ? "rain" : "storm";
+  const meta = WEATHER_META[kind];
+  const rainy = kind === "rain" || kind === "storm";
+  return {
+    kind,
+    cloud: meta.cloud,
+    wet: rainy ? 0.5 : 0,
+    wind: meta.wind,
+    untilHour: hour + 1.5 + rng() * 2,
+    rolls: 1,
+    douseHour: 0,
+  };
 }
 
 /** Repair/default for saves that predate weather. */
 export function ensureWeather(world: World): WeatherState {
   const w = world.weather as WeatherState | undefined;
   if (!w || typeof w !== "object" || !(w.kind in WEATHER_META)) {
-    world.weather = initialWeather(world.hour);
+    world.weather = initialWeather(world.seed, world.hour);
     return world.weather;
   }
   if (typeof w.cloud !== "number" || Number.isNaN(w.cloud)) w.cloud = WEATHER_META[w.kind].cloud;

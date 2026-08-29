@@ -48,7 +48,7 @@ function bareWorld(seed = 7): World {
     landRev: 1,
     tickCount: 0,
     restored: false,
-    weather: initialWeather(8),
+    weather: initialWeather(seed, 8),
     boom: null,
     nightOffer: null,
   };
@@ -139,7 +139,7 @@ test("ensureWeather repairs old and broken saves", () => {
   // @ts-expect-error simulate a pre-weather save
   w.weather = undefined;
   const wx = ensureWeather(w);
-  assert.equal(wx.kind, "clear");
+  assert.ok(["clear", "fair", "cloudy", "rain", "storm"].includes(wx.kind), `valid opening kind: ${wx.kind}`);
   w.weather.kind = "storm";
   w.weather.cloud = Number.NaN;
   ensureWeather(w);
