@@ -9,11 +9,11 @@ import { getWorld } from "@/game/live";
 import { hash2 } from "@/game/rng";
 import { useGame } from "@/game/store";
 import { rainRate } from "@/game/weather";
-import { skyFlash, sunDirFor } from "./sky-math";
+import { skyFlash, skyTone, sunDirFor } from "./sky-math";
 
 const N_BIRD = 16;
 const dummy = new THREE.Object3D();
-const OVERCAST_SKY = new THREE.Color("#767e78");
+const OVERCAST_SKY = new THREE.Color("#7c837d");
 const FLASH_SKY = new THREE.Color("#e4e8ee");
 
 function chevron() {
@@ -30,9 +30,10 @@ function SkyDome() {
   const mesh = useRef<THREE.Mesh>(null);
   const uniforms = useMemo(
     () => ({
-      uZenith: { value: new THREE.Color("#b8c6c8") },
-      uMid: { value: new THREE.Color("#8fa89c") },
-      uHorizon: { value: new THREE.Color("#6a7a5c") },
+      uZenith: { value: new THREE.Color("#7ea9d4") },
+      uMid: { value: new THREE.Color("#a9c6dd") },
+      uHorizon: { value: new THREE.Color("#e6ebe3") },
+      uHaze: { value: new THREE.Color("#c2cbbd") },
       uSun: { value: new THREE.Color("#f2d48a") },
       uSunDir: { value: sunDirFor(12) },
       uGlow: { value: 1 },
@@ -62,46 +63,55 @@ function SkyDome() {
       u.uZenith.value.set("#0c0a08");
       u.uMid.value.set("#0c0a08");
       u.uHorizon.value.set("#0c0a08");
+      u.uHaze.value.set("#0c0a08");
       u.uSun.value.set("#0c0a08");
     } else if (night) {
-      u.uZenith.value.set("#1a2230");
-      u.uMid.value.set("#141820");
-      u.uHorizon.value.set("#1a1814");
+      u.uZenith.value.set("#16202e");
+      u.uMid.value.set("#10161f");
+      u.uHorizon.value.set("#1c2020");
+      u.uHaze.value.set("#14161a");
       u.uSun.value.set("#9aa8c4");
     } else if (dusk) {
-      u.uZenith.value.set("#c4a890");
-      u.uMid.value.set("#8a6848");
-      u.uHorizon.value.set("#6a4a32");
+      u.uZenith.value.set("#8a7a94");
+      u.uMid.value.set("#c09068");
+      u.uHorizon.value.set("#e0b078");
+      u.uHaze.value.set("#a8846a");
       u.uSun.value.set("#e0a060");
     } else if (climate === "desert") {
-      u.uZenith.value.set("#d8c8a8");
-      u.uMid.value.set("#c4a878");
-      u.uHorizon.value.set("#a89068");
+      u.uZenith.value.set("#9fbdd4");
+      u.uMid.value.set("#d8cbaa");
+      u.uHorizon.value.set("#f0e2ba");
+      u.uHaze.value.set("#ddcfa8");
       u.uSun.value.set("#f0d090");
     } else if (climate === "tundra") {
-      u.uZenith.value.set("#c8d0d4");
-      u.uMid.value.set("#8a9690");
-      u.uHorizon.value.set("#7a8278");
+      u.uZenith.value.set("#aec6d6");
+      u.uMid.value.set("#cdd9de");
+      u.uHorizon.value.set("#eef0ea");
+      u.uHaze.value.set("#d4d9d2");
       u.uSun.value.set("#e8e4d8");
     } else if (climate === "taiga") {
-      u.uZenith.value.set("#9aaca8");
-      u.uMid.value.set("#4a5a4c");
-      u.uHorizon.value.set("#3a4a3c");
+      u.uZenith.value.set("#86aec4");
+      u.uMid.value.set("#b4c8cc");
+      u.uHorizon.value.set("#dbe4d6");
+      u.uHaze.value.set("#b6c2b0");
       u.uSun.value.set("#e8d8a8");
     } else if (climate === "jungle") {
-      u.uZenith.value.set("#9ab4a8");
-      u.uMid.value.set("#4e6350");
-      u.uHorizon.value.set("#3a4a38");
+      u.uZenith.value.set("#8ab8c0");
+      u.uMid.value.set("#b6ccc2");
+      u.uHorizon.value.set("#dde6d2");
+      u.uHaze.value.set("#b9c6ac");
       u.uSun.value.set("#e8d090");
     } else if (climate === "fen") {
-      u.uZenith.value.set("#a8b8b0");
-      u.uMid.value.set("#5e6c58");
-      u.uHorizon.value.set("#4a5848");
+      u.uZenith.value.set("#9cb8c2");
+      u.uMid.value.set("#bccbc4");
+      u.uHorizon.value.set("#dfe4d4");
+      u.uHaze.value.set("#b7c0ae");
       u.uSun.value.set("#e8d8a0");
     } else {
-      u.uZenith.value.set("#b8c6c8");
-      u.uMid.value.set("#8fa89c");
-      u.uHorizon.value.set("#6a7a5c");
+      u.uZenith.value.set("#7ea9d4");
+      u.uMid.value.set("#a9c6dd");
+      u.uHorizon.value.set("#e6ebe3");
+      u.uHaze.value.set("#c2cbbd");
       u.uSun.value.set("#f2d48a");
     }
     if (!pit && !night && cloud > 0.01) {
@@ -109,13 +119,18 @@ function SkyDome() {
       u.uZenith.value.lerp(OVERCAST_SKY, dim);
       u.uMid.value.lerp(OVERCAST_SKY, dim * 0.9);
       u.uHorizon.value.lerp(OVERCAST_SKY, dim * 0.8);
+      u.uHaze.value.lerp(OVERCAST_SKY, dim * 0.8);
     }
     if (!pit && skyFlash.v > 0.01) {
       const f = skyFlash.v * 0.5;
       u.uZenith.value.lerp(FLASH_SKY, f);
       u.uMid.value.lerp(FLASH_SKY, f);
       u.uHorizon.value.lerp(FLASH_SKY, f);
+      u.uHaze.value.lerp(FLASH_SKY, f);
     }
+    // Publish what the heavens settled on so background and fog match exactly.
+    skyTone.horizon.copy(u.uHorizon.value);
+    skyTone.haze.copy(u.uHaze.value);
   });
 
   return (
@@ -137,22 +152,27 @@ void main() {
 uniform vec3 uZenith;
 uniform vec3 uMid;
 uniform vec3 uHorizon;
+uniform vec3 uHaze;
 uniform vec3 uSun;
 uniform vec3 uSunDir;
 uniform float uGlow;
 varying vec3 vN;
 
 void main() {
-  float h = clamp(vN.y * 0.5 + 0.5, 0.0, 1.0);
-  vec3 c = mix(uHorizon, uMid, smoothstep(0.4, 0.62, h));
-  c = mix(c, uZenith, smoothstep(0.58, 0.94, h));
+  // Anchored on the true horizon (y = 0): a down-tilted camera mostly sees
+  // the lower dome, so below the horizon melts into distance haze instead
+  // of a flat green wall.
+  float y = normalize(vN).y;
+  vec3 c = mix(uHorizon, uMid, smoothstep(0.03, 0.30, y));
+  c = mix(c, uZenith, smoothstep(0.26, 0.72, y));
   float mu = max(dot(normalize(vN), normalize(uSunDir)), 0.0);
   float core = pow(mu, 48.0);
   float halo = pow(mu, 6.0);
   float wash = pow(mu, 1.6);
   c += uSun * (core * 1.15 + halo * 0.28 + wash * 0.1) * uGlow;
-  float hz = 1.0 - smoothstep(0.38, 0.72, h);
+  float hz = 1.0 - smoothstep(0.0, 0.34, abs(y));
   c = mix(c, mix(uHorizon, uSun, wash * 0.45), hz * 0.32 * uGlow);
+  c = mix(c, uHaze, smoothstep(-0.05, -0.5, y));
   gl_FragColor = vec4(c, 1.0);
 }
 `}

@@ -41,3 +41,13 @@ const NOON = new THREE.Color("#fff1c8");
  * and cloud layer so the whole heavens answer the same strike.
  */
 export const skyFlash = { v: 0 };
+
+/**
+ * The dome's current horizon + haze colors, written by SkyDome each frame
+ * (after weather and flash lerps) so scene.background and fog can wear the
+ * exact same sky — no seams, no stray green void, whatever the angle.
+ */
+export const skyTone = {
+  horizon: new THREE.Color("#e6ebe3"),
+  haze: new THREE.Color("#c2cbbd"),
+};

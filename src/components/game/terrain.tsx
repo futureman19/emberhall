@@ -13,6 +13,7 @@ import { hash2 } from "@/game/rng";
 import { useGame } from "@/game/store";
 import { leftAt, hitAt, hoverAt, liftAt } from "@/game/world-pointer";
 import type { TileKind, World } from "@/game/types";
+import { skyTone } from "./sky-math";
 
 const KIND_COLOR: Record<TileKind, string> = {
   grass: "#4a5a32",
@@ -335,13 +336,22 @@ export function Terrain() {
           const i = (iz * VERTS + ix) * 3;
           const t = w.tiles[Math.round(wz)]?.[Math.round(wx)];
           arr[i] = wx;
-          arr[i + 1] = t ? groundY(w, wx, wz) : -2;
+          arr[i + 1] = t ? groundY(w, wx, wz) : -8.05;
           arr[i + 2] = wz;
-          colorAt(w, wx, wz, pal);
+          if (t) {
+            colorAt(w, wx, wz, pal);
+            coverAt(w, wx, wz, karr, i);
+          } else {
+            // Off the map: sink just beneath the horizon skirt and wear the
+            // sky's haze, so the world's rim melts into the distance.
+            pal.copy(skyTone.haze);
+            karr[i] = 0;
+            karr[i + 1] = 0;
+            karr[i + 2] = 0;
+          }
           car[i] = pal.r;
           car[i + 1] = pal.g;
           car[i + 2] = pal.b;
-          coverAt(w, wx, wz, karr, i);
           const ui = (iz * VERTS + ix) * 2;
           uarr[ui] = wx * 0.29;
           uarr[ui + 1] = wz * 0.29;
@@ -749,7 +759,9 @@ export function Horizon() {
           arr[i + 1] = hole || off ? -8 : groundY(w, wx, wz) * lift - 0.08;
           arr[i + 2] = wz;
           if (off) {
-            pal.set("#1a1c18");
+            // Past the map's edge the skirt wears the sky's own haze, so the
+            // world melts into the distance instead of a dark wall.
+            pal.copy(skyTone.haze);
             karr[i] = 0;
             karr[i + 1] = 0;
             karr[i + 2] = 0;

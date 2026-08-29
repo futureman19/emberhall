@@ -9,25 +9,12 @@ import { getWorld } from "@/game/live";
 import { useGame } from "@/game/store";
 import { playSfx } from "@/game/vale-sfx";
 import { rainRate } from "@/game/weather";
-import { skyFlash, sunColorFor, sunDirFor, sunHeight } from "./sky-math";
+import { skyFlash, skyTone, sunColorFor, sunDirFor, sunHeight } from "./sky-math";
 
-const SKY_DAY = "#8b9e95";
-const SKY_TUNDRA = "#8a9690";
-const SKY_TAIGA = "#4a5a4c";
-const SKY_FEN = "#5e6c58";
-const SKY_JUNGLE = "#4e6350";
-const SKY_DESERT = "#c4a878";
-const SKY_DUSK = "#8a6848";
-const SKY_NIGHT = "#141210";
-const SKY_PIT = "#0c0a08";
-const HAZE = "#3d4c2c";
-const HAZE_TUNDRA = "#8a8680";
-const HAZE_DESERT = "#7a6c50";
-const HAZE_FEN = "#2e3a2c";
-const HAZE_TAIGA = "#354232";
-const HAZE_JUNGLE = "#2a3a28";
-const OVERCAST = new THREE.Color("#6f7672");
-const OVERCAST_DUSK = new THREE.Color("#4a4038");
+// Distant land fades toward the sky's haze, tinted a touch groundward so
+// trees and hills keep their footing. The dome publishes skyTone each frame
+// (weather and lightning already folded in) — background and fog wear it.
+const GROUND_HAZE = new THREE.Color("#6f7a62");
 
 export function Lighting() {
   const dir = useRef<THREE.DirectionalLight>(null);
@@ -37,7 +24,6 @@ export function Lighting() {
   const fog = useRef<THREE.FogExp2>(null);
   const bg = useRef<THREE.Color>(null);
   const thunderIn = useRef(0);
-  const scratch = useRef(new THREE.Color());
   const { scene, gl } = useThree();
 
   useLayoutEffect(() => {
@@ -124,39 +110,9 @@ export function Lighting() {
       sun.current.position.set(px + sunDir.x * 92, py + sunDir.y * 92, pz + sunDir.z * 92);
     }
 
-    const sky = pit
-      ? SKY_PIT
-      : night
-        ? SKY_NIGHT
-        : dusk
-          ? SKY_DUSK
-          : climate === "tundra"
-            ? SKY_TUNDRA
-            : climate === "taiga"
-              ? SKY_TAIGA
-              : climate === "fen"
-                ? SKY_FEN
-                : climate === "jungle"
-                  ? SKY_JUNGLE
-                  : climate === "desert"
-                    ? SKY_DESERT
-                    : SKY_DAY;
-    if (bg.current) {
-      bg.current.set(sky);
-      if (!pit && !night) bg.current.lerp(dusk ? OVERCAST_DUSK : OVERCAST, cloud * 0.5);
-      if (flash > 0.01) bg.current.lerp(scratch.current.set("#dfe4ea"), flash * 0.55);
-    }
-    const haze =
-      pit ? SKY_PIT
-      : climate === "tundra" ? HAZE_TUNDRA
-      : climate === "desert" ? HAZE_DESERT
-      : climate === "fen" ? HAZE_FEN
-      : climate === "taiga" ? HAZE_TAIGA
-      : climate === "jungle" ? HAZE_JUNGLE
-      : HAZE;
+    if (bg.current) bg.current.copy(skyTone.horizon);
     if (fog.current) {
-      fog.current.color.set(haze);
-      if (!pit && !night) fog.current.color.lerp(OVERCAST, cloud * 0.45);
+      fog.current.color.copy(skyTone.haze).lerp(GROUND_HAZE, pit ? 0 : 0.22);
       fog.current.density = pit ? 0.14 : 0.007 + cloud * 0.005 + rain * 0.008;
     }
     scene.background = bg.current;
@@ -164,8 +120,8 @@ export function Lighting() {
 
   return (
     <>
-      <color ref={bg} attach="background" args={[SKY_DAY]} />
-      <fogExp2 ref={fog} attach="fog" args={[HAZE, 0.007]} />
+      <color ref={bg} attach="background" args={["#e6ebe3"]} />
+      <fogExp2 ref={fog} attach="fog" args={["#c2cbbd", 0.007]} />
       <ambientLight ref={amb} intensity={0.58} color="#ece6d8" />
       <directionalLight
         ref={dir}
