@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { commandTravel } from "./gates";
 import { commandCraft, craftReach, stationOf } from "./craft";
-import { commandHarvest, commandPlant, commandWorkPlot, plotAt } from "./farm";
+import { commandHarvest, commandPlant, commandTill, commandWorkPlot, plotAt } from "./farm";
 import { getWorld, resetWorld, setWorld, snapshot } from "./live";
 import { commandCast, forgetMark, SPELL_META, hasBook } from "./magery";
 import type { CastTarget } from "./magery";
@@ -58,6 +58,8 @@ interface GameUI {
   gateIgnoreId: string | null;
   buildKind: BuildingKind | null;
   buildAt: { tx: number; ty: number } | null;
+  tillArmed: boolean;
+  tillAt: { tx: number; ty: number } | null;
   loadNote: string;
   loadProgress: number;
   loadTitle: string;
@@ -104,6 +106,8 @@ interface GameUI {
   speed: (s: Speed) => void;
   armBuild: (kind: BuildingKind | null) => void;
   hoverBuild: (tx: number, ty: number) => void;
+  armTill: (on: boolean) => void;
+  hoverTill: (tx: number, ty: number) => void;
 }
 
 let uiAcc = 0;
@@ -139,6 +143,8 @@ export const useGame = create<GameUI>((set, get) => ({
   gateIgnoreId: null,
   buildKind: null,
   buildAt: null,
+  tillArmed: false,
+  tillAt: null,
   loadNote: "The dirt is listening.",
   loadProgress: 0,
   loadTitle: "Raising the vale",
@@ -280,6 +286,18 @@ export const useGame = create<GameUI>((set, get) => ({
       set({ buildKind: null, buildAt: null, snap: snapshot(), ctx: null, panel: "none" });
       return;
     }
+    if (get().tillArmed) {
+      if (plotAt(w, tx, ty)) {
+        const err = commandWorkPlot(w, tx, ty);
+        if (err) get().flash(err);
+        set({ snap: snapshot(), ctx: null, tillAt: { tx, ty } });
+        return;
+      }
+      const err = commandTill(w, tx, ty);
+      if (err) get().flash(err);
+      set({ snap: snapshot(), ctx: null, tillAt: { tx, ty } });
+      return;
+    }
     if (w.player.armedSpell === "teleport") {
       const err = commandCast(w, "teleport", { kind: "tile", tx, ty });
       if (err) get().flash(err);
@@ -356,6 +374,7 @@ export const useGame = create<GameUI>((set, get) => ({
       if (st) set({ openGateId: st.id, ctx: null });
     } else if (verb === "use") get().useStation(t.id);
     else if (verb === "harvest") err = commandHarvest(w, t.tx, t.ty);
+    else if (verb === "till") err = commandTill(w, t.tx, t.ty);
     else if (verb === "sowCabbage") err = commandPlant(w, t.tx, t.ty, "cabbage");
     else if (verb === "sowWheat") err = commandPlant(w, t.tx, t.ty, "wheat");
     else if (verb === "sowGarlic") err = commandPlant(w, t.tx, t.ty, "garlic");
@@ -542,13 +561,41 @@ export const useGame = create<GameUI>((set, get) => ({
       } else at = { tx: COURT.tx, ty: COURT.ty + 8 };
       get().flash("Drag the shade. Lift to raise.");
     }
-    set({ buildKind: kind, buildAt: at, panel: "none", ctx: null, openBook: false, openCraft: false });
+    set({ buildKind: kind, buildAt: at, tillArmed: false, tillAt: null, panel: "none", ctx: null, openBook: false, openCraft: false });
   },
   hoverBuild: (tx, ty) => {
     if (!get().buildKind) return;
     const at = get().buildAt;
     if (at && at.tx === tx && at.ty === ty) return;
     set({ buildAt: { tx, ty } });
+  },
+  armTill: (on) => {
+    dropBuildHold();
+    if (!on) {
+      set({ tillArmed: false, tillAt: null });
+      return;
+    }
+    const w = getWorld();
+    if (w.player.ghost) {
+      get().flash("A ghost cannot.");
+      return;
+    }
+    if ((w.player.pack.hoe ?? 0) < 1) {
+      get().flash("Need a hoe.");
+      return;
+    }
+    const p = you(w);
+    const at = p
+      ? { tx: Math.round(p.x + Math.sin(p.facing) * 3), ty: Math.round(p.z + Math.cos(p.facing) * 3) }
+      : { tx: COURT.tx, ty: COURT.ty + 6 };
+    get().flash("Click grass or dirt. The hoe makes a bed.");
+    set({ tillArmed: true, tillAt: at, buildKind: null, buildAt: null, panel: "none", ctx: null, openBook: false, openCraft: false });
+  },
+  hoverTill: (tx, ty) => {
+    if (!get().tillArmed) return;
+    const at = get().tillAt;
+    if (at && at.tx === tx && at.ty === ty) return;
+    set({ tillAt: { tx, ty } });
   },
 }));
 

@@ -34,7 +34,8 @@ function withFauna(w: World) {
       { id: "smelt", text: "Smelt ore at a forge", done: false },
       { id: "smith", text: "Beat ingot into a tool at the fire", done: false },
       { id: "farm", text: "Raise a farm", done: false },
-      { id: "plant", text: "Sow a bed", done: false },
+      { id: "till", text: "Till a plot of land", done: false },
+      { id: "plant", text: "Sow a seed in a bed", done: false },
       { id: "harvest", text: "Take a crop from the dirt", done: false },
     ];
     for (const e of extra) {

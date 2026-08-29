@@ -1,6 +1,6 @@
 import { EH, inGreybarrow } from "./atlas";
 import { FAUNA_META, ITEM_META, armorOf } from "./catalog";
-import { harvestNow, plantNow } from "./farm";
+import { harvestNow, plantNow, tillNow } from "./farm";
 import { ARROW_RANGE, FIREBALL_RANGE, burstDeath, castNow, maxMana, tickMana } from "./magery";
 import { astar, nearestWalkable, tileOf } from "./pathfinding";
 import { addToPile, takeFromPile } from "./piles";
@@ -42,7 +42,7 @@ function hands(world: World) {
 const SPILL: ItemId[] = [
   "log", "board", "ore", "meat", "hide", "ingot", "club", "shield",
   "garlic", "ginseng", "silk", "pearl", "moss", "mandrake", "ash", "nightshade",
-  "cabbage", "wheat",
+  "cabbage", "wheat", "cabbage_seed", "wheat_seed", "garlic_seed",
 ];
 
 export function resurrect(world: World, at?: { x: number; z: number }) {
@@ -500,12 +500,16 @@ export function tickPlayer(world: World, dt: number): string | null {
     intent.kind = "none";
     return null;
   }
-  if (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest") {
+  if (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till") {
     p.facing = Math.atan2(intent.tx - p.x, intent.ty - p.z);
     const prev = world.player.workT;
     world.player.workT += dt;
     const hit = prev % WORK_BEAT < 0.52 && world.player.workT % WORK_BEAT >= 0.52;
     if (!hit) return null;
+    if (intent.kind === "till") {
+      burstChips(world, intent.tx, intent.ty, "chop");
+      return tillNow(world);
+    }
     if (intent.kind === "plant") {
       burstChips(world, intent.tx, intent.ty, "chop");
       return plantNow(world);

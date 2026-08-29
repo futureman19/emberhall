@@ -4,6 +4,8 @@ import { successChance, tryGain } from "./skills";
 import { playSfx } from "./vale-sfx";
 import type { CropId, ItemId, World } from "./types";
 
+const MAX_PLOTS = 40;
+
 function you(world: World) {
   return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
 }
@@ -21,11 +23,11 @@ export const CROP_ORDER: CropId[] = ["cabbage", "wheat", "garlic"];
 
 export const CROP_META: Record<
   CropId,
-  { item: ItemId; label: string; hours: number; diff: number; color: string; ripe: string }
+  { seed: ItemId; crop: ItemId; label: string; hours: number; diff: number; color: string; ripe: string }
 > = {
-  cabbage: { item: "cabbage", label: "Cabbage", hours: 0.75, diff: 6, color: "#5a7040", ripe: "#6a8a48" },
-  wheat: { item: "wheat", label: "Wheat", hours: 1.1, diff: 12, color: "#8a7040", ripe: "#c9a36a" },
-  garlic: { item: "garlic", label: "Garlic", hours: 1.55, diff: 18, color: "#6a7a48", ripe: "#ece6d8" },
+  cabbage: { seed: "cabbage_seed", crop: "cabbage", label: "Cabbage", hours: 0.75, diff: 6, color: "#5a7040", ripe: "#6a8a48" },
+  wheat: { seed: "wheat_seed", crop: "wheat", label: "Wheat", hours: 1.1, diff: 12, color: "#8a7040", ripe: "#c9a36a" },
+  garlic: { seed: "garlic_seed", crop: "garlic", label: "Garlic", hours: 1.55, diff: 18, color: "#6a7a48", ripe: "#ece6d8" },
 };
 
 export const FARM_BEDS: { dx: number; dz: number }[] = [
@@ -45,9 +47,39 @@ export function plotAt(world: World, tx: number, ty: number) {
 
 export function firstSeed(world: World): CropId | null {
   for (const id of CROP_ORDER) {
-    if ((world.player.pack[CROP_META[id].item] ?? 0) > 0) return id;
+    if ((world.player.pack[CROP_META[id].seed] ?? 0) > 0) return id;
   }
   return null;
+}
+
+export function canTill(world: World, tx: number, ty: number): string | null {
+  if (world.plots.length >= MAX_PLOTS) return "Forty beds is enough.";
+  if (plotAt(world, tx, ty)) return "That dirt is already a bed.";
+  const tile = world.tiles[ty]?.[tx];
+  if (!tile) return "No footing.";
+  if (tile.kind === "water" || tile.kind === "pit") return "The water will not take a bed.";
+  if (tile.kind === "tree") return "The tree stands.";
+  if (tile.kind === "rock") return "Stone will not take a seed.";
+  if (tile.kind === "wall" || tile.kind === "floor" || tile.kind === "cobble" || tile.kind === "step") return "Not this stone.";
+  if (tile.kind !== "grass" && tile.kind !== "dirt" && tile.kind !== "sand" && tile.kind !== "road") return "Not this dirt.";
+  return null;
+}
+
+function makePlot(world: World, tx: number, ty: number) {
+  const tile = world.tiles[ty]?.[tx];
+  if (tile) {
+    tile.kind = "dirt";
+    world.scars[`${tx},${ty}`] = { kind: "dirt" };
+  }
+  world.plots.push({
+    id: bedId(world),
+    tx,
+    ty,
+    crop: null,
+    plantedHour: 0,
+    stage: 0,
+  });
+  world.landRev += 1;
 }
 
 export function seedFarmPlots(world: World, tx: number, ty: number) {
@@ -55,21 +87,9 @@ export function seedFarmPlots(world: World, tx: number, ty: number) {
   for (const bed of FARM_BEDS) {
     const x = tx + bed.dx;
     const z = ty + bed.dz;
-    const tile = world.tiles[z]?.[x];
-    if (tile && tile.kind !== "water" && tile.kind !== "pit" && tile.kind !== "wall") {
-      tile.kind = "dirt";
-      world.scars[`${x},${z}`] = { kind: "dirt" };
-    }
-    world.plots.push({
-      id: bedId(world),
-      tx: x,
-      ty: z,
-      crop: null,
-      plantedHour: 0,
-      stage: 0,
-    });
+    if (plotAt(world, x, z)) continue;
+    makePlot(world, x, z);
   }
-  world.landRev += 1;
 }
 
 export function tickCrops(world: World) {
@@ -96,16 +116,27 @@ function pathBesidePlot(world: World, tx: number, ty: number) {
   return null;
 }
 
+export function commandTill(world: World, tx: number, ty: number) {
+  const p = you(world);
+  if (!p) return "You are not in the vale.";
+  if (world.player.ghost) return "A ghost cannot.";
+  if ((world.player.pack.hoe ?? 0) < 1) return "Need a hoe.";
+  const err = canTill(world, tx, ty);
+  if (err) return err;
+  world.player.intent = { kind: "till", tx, ty, targetId: null, spell: null };
+  return pathBesidePlot(world, tx, ty);
+}
+
 export function commandPlant(world: World, tx: number, ty: number, crop: CropId) {
   const p = you(world);
   if (!p) return "You are not in the vale.";
   if (world.player.ghost) return "A ghost cannot.";
   if ((world.player.pack.hoe ?? 0) < 1) return "Need a hoe.";
   const bed = plotAt(world, tx, ty);
-  if (!bed) return "That dirt is not a bed.";
+  if (!bed) return "Till a plot first.";
   if (bed.crop) return bed.stage >= 3 ? "It is ripe. Take it." : "Something already grows.";
-  const item = CROP_META[crop].item;
-  if ((world.player.pack[item] ?? 0) < 1) return `Need ${ITEM_META[item].label.toLowerCase()}.`;
+  const seed = CROP_META[crop].seed;
+  if ((world.player.pack[seed] ?? 0) < 1) return `Need ${ITEM_META[seed].label.toLowerCase()}.`;
   world.player.intent = { kind: "plant", tx, ty, targetId: crop, spell: null };
   return pathBesidePlot(world, tx, ty);
 }
@@ -132,6 +163,18 @@ export function commandWorkPlot(world: World, tx: number, ty: number) {
   return commandPlant(world, tx, ty, crop);
 }
 
+export function tillNow(world: World) {
+  const { tx, ty } = world.player.intent;
+  world.player.intent.kind = "none";
+  const err = canTill(world, tx, ty);
+  if (err) return err;
+  makePlot(world, tx, ty);
+  playSfx("chop", 0.4);
+  const gain = tryGain(world, "farming", true, true);
+  noteDone(world, "till");
+  return gain ? `A bed. ${gain}.` : "The dirt is a bed.";
+}
+
 export function plantNow(world: World) {
   const crop = world.player.intent.targetId as CropId;
   const meta = CROP_META[crop];
@@ -139,15 +182,15 @@ export function plantNow(world: World) {
   world.player.intent.kind = "none";
   if (!meta || !bed) return "The bed is gone.";
   if (bed.crop) return "Something already grows.";
-  if ((world.player.pack[meta.item] ?? 0) < 1) return `Need ${ITEM_META[meta.item].label.toLowerCase()}.`;
-  world.player.pack[meta.item] -= 1;
+  if ((world.player.pack[meta.seed] ?? 0) < 1) return `Need ${ITEM_META[meta.seed].label.toLowerCase()}.`;
+  world.player.pack[meta.seed] -= 1;
   bed.crop = crop;
   bed.plantedHour = world.hour;
   bed.stage = 1;
   playSfx("chop", 0.38);
   const gain = tryGain(world, "farming", true, true);
   noteDone(world, "plant");
-  return gain ? `Sown. ${gain}.` : `The ${meta.label.toLowerCase()} takes the dirt.`;
+  return gain ? `The seed takes. ${gain}.` : `The ${meta.label.toLowerCase()} seed takes the dirt.`;
 }
 
 export function harvestNow(world: World) {
@@ -167,13 +210,14 @@ export function harvestNow(world: World) {
     bed.plantedHour = 0;
     return gain ? `The crop breaks. ${gain}.` : "The crop breaks.";
   }
-  const extra = Math.random() < 0.35 + world.player.skills.farming / 220 ? 1 : 0;
-  const n = 2 + extra;
-  world.player.pack[meta.item] = (world.player.pack[meta.item] ?? 0) + n;
+  const extra = Math.random() < 0.4 + world.player.skills.farming / 200 ? 1 : 0;
+  world.player.pack[meta.crop] = (world.player.pack[meta.crop] ?? 0) + 1;
+  world.player.pack[meta.seed] = (world.player.pack[meta.seed] ?? 0) + 1 + extra;
   bed.crop = null;
   bed.stage = 0;
   bed.plantedHour = 0;
   noteDone(world, "harvest");
-  const note = `${n} ${ITEM_META[meta.item].label.toLowerCase()}.`;
+  const seeds = 1 + extra;
+  const note = `1 ${ITEM_META[meta.crop].label.toLowerCase()}, ${seeds} seed${seeds === 1 ? "" : "s"}.`;
   return gain ? `${note} ${gain}.` : note;
 }

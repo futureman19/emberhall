@@ -316,8 +316,9 @@ function HelpPanel() {
         a banker, a healer, a stall. Die and you walk pale — Ione at the hall can return you. Your corpse keeps what it
         took until you come back living. Open Hold to raise timber on the dirt — dorm, kitchen, forge, tavern. Walk
         through a door and the roof goes thin so you can see the room. The yard saws logs into boards. Raise a forge —
-        Hold, then the dirt — to smelt ore and beat iron. Raise a farm the same way. Walk the beds. Click empty dirt to
-        sow cabbage, wheat, or garlic. Wait. Click ripe green to take it. Farming is a skill. Eat cabbage from You.
+        Hold, then the dirt — to smelt ore and beat iron. Raise a farm the same way — eight beds inside a fence. Or open
+        Hold and Till a plot on grass. Walk a bed. Click it to sow a seed — cabbage, wheat, garlic. Wait. Click ripe
+        green to take the crop and more seed. Farming is a skill. Eat cabbage from You.
         Eight stone rings hold the moons. Walk into the
         swirl east of the steps.
       </p>
@@ -383,15 +384,28 @@ function HoldPanel() {
   const gold = useGame((s) => s.snap.gold);
   const buildings = useGame((s) => s.snap.buildings);
   const armed = useGame((s) => s.buildKind);
+  const tillArmed = useGame((s) => s.tillArmed);
   const armBuild = useGame((s) => s.armBuild);
+  const armTill = useGame((s) => s.armTill);
   return (
     <div>
       <h2 className="font-display text-sm text-fg">The hold</h2>
       <p className="mt-1 text-pretty text-xs leading-relaxed text-muted">
         Timber cubes, red cloth, gold lintels. Pick a building, then drag the shade on the dirt. Gold if it sits, rust
         if the ground is taken. Lift to raise. One of each. The forge is the fire for ore. The farm is eight beds and a
-        fence — sow, wait, take.
+        fence. Till a plot on any grass — the hoe cuts a framed bed. Sow seed. Wait. Take.
       </p>
+      <button
+        type="button"
+        onClick={() => armTill(!tillArmed)}
+        className={cn(
+          "mt-3 flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border px-3 text-left",
+          tillArmed ? "border-border-strong bg-surface-2 text-fg" : "border-border bg-surface-2 text-fg",
+        )}
+      >
+        <span className="text-sm">Till a plot</span>
+        <span className="text-xs text-muted">{tillArmed ? "Armed" : "Hoe"}</span>
+      </button>
       <ul className="mt-3 space-y-1">
         {BUILD_ORDER.map((kind) => {
           const cost = kind === "dormitory" ? 40 : 28;
@@ -485,7 +499,19 @@ function Toast() {
 
 function BuildRibbon() {
   const kind = useGame((s) => s.buildKind);
+  const till = useGame((s) => s.tillArmed);
   const armBuild = useGame((s) => s.armBuild);
+  const armTill = useGame((s) => s.armTill);
+  if (till) {
+    return (
+      <div className="pointer-events-auto absolute top-20 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-[var(--radius-md)] border border-border bg-bg/90 px-3 py-1">
+        <p className="font-display text-xs tracking-wider text-fg uppercase">Till a plot · click grass or dirt</p>
+        <button type="button" className="text-xs text-muted" onClick={() => armTill(false)}>
+          Cancel
+        </button>
+      </div>
+    );
+  }
   if (!kind) return null;
   return (
     <div className="pointer-events-auto absolute top-20 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-[var(--radius-md)] border border-border bg-bg/90 px-3 py-1">

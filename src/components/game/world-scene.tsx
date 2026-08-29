@@ -32,20 +32,22 @@ function groundY(x: number, z: number) {
 function PlacePointer() {
   const { camera, gl } = useThree();
   const kind = useGame((s) => s.buildKind);
+  const till = useGame((s) => s.tillArmed);
   const ray = useMemo(() => new THREE.Raycaster(), []);
   const ndc = useMemo(() => new THREE.Vector2(), []);
   const hit = useMemo(() => new THREE.Vector3(), []);
   const plane = useMemo(() => new THREE.Plane(), []);
   const up = useMemo(() => new THREE.Vector3(0, 1, 0), []);
   useEffect(() => {
-    if (!kind) return;
+    if (!kind && !till) return;
     const el = gl.domElement;
     function xz(ev: PointerEvent) {
       const rect = el.getBoundingClientRect();
       ndc.x = ((ev.clientX - rect.left) / rect.width) * 2 - 1;
       ndc.y = -((ev.clientY - rect.top) / rect.height) * 2 + 1;
       ray.setFromCamera(ndc, camera);
-      const at = useGame.getState().buildAt;
+      const g = useGame.getState();
+      const at = g.buildAt ?? g.tillAt;
       const y = at ? heightAt(getWorld(), at.tx, at.ty) : 0;
       plane.set(up, -y);
       if (!ray.ray.intersectPlane(plane, hit)) return null;
@@ -77,7 +79,7 @@ function PlacePointer() {
       window.removeEventListener("pointerup", upEv);
       window.removeEventListener("pointercancel", upEv);
     };
-  }, [kind, camera, gl, ray, ndc, hit, plane, up]);
+  }, [kind, till, camera, gl, ray, ndc, hit, plane, up]);
   return null;
 }
 
@@ -166,7 +168,7 @@ function WalkMarker() {
   if (!intent || intent.kind === "none") return null;
   const y = groundY(intent.tx, intent.ty);
   const ember = intent.kind === "cast";
-  const mark = intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest";
+  const mark = intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till";
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[intent.tx, y + 0.1, intent.ty]}>
       <ringGeometry args={[0.22, 0.32, 18]} />

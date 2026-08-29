@@ -131,7 +131,7 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
     p.isPlayer &&
     !ghost &&
     !p.path.length &&
-    (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest");
+    (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till");
   const bob = Math.sin(p.bob) * (ghost ? 0.08 : 0.04);
   const walkSwing = p.path.length ? Math.sin(p.bob) * 0.35 : 0;
   const left = useRef<Group>(null);
@@ -142,7 +142,7 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
     const you = w.people.find((x) => x.isPlayer);
     const it = w.player.intent;
     const idle = Boolean(you && !you.ghost && !you.path.length);
-    const chopping = idle && (it.kind === "chop" || it.kind === "mine" || it.kind === "plant" || it.kind === "harvest");
+    const chopping = idle && (it.kind === "chop" || it.kind === "mine" || it.kind === "plant" || it.kind === "harvest" || it.kind === "till");
     const casting = idle && it.kind === "cast";
     if (left.current) {
       if (casting) {
@@ -236,7 +236,7 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
         </mesh>
         {working && intent.kind === "chop" && <Hatchet ghost={ghost} />}
         {working && intent.kind === "mine" && <Pick ghost={ghost} />}
-        {working && (intent.kind === "plant" || intent.kind === "harvest") && <Hoe ghost={ghost} />}
+        {working && (intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till") && <Hoe ghost={ghost} />}
         {p.isPlayer && !ghost && <PalmFlame />}
       </group>
       <mesh position={[0, 0.98 + bob, 0]} castShadow={!ghost}>

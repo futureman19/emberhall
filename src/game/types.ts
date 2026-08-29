@@ -74,7 +74,10 @@ export type ItemId =
   | "mandrake"
   | "ash"
   | "cabbage"
-  | "wheat";
+  | "wheat"
+  | "cabbage_seed"
+  | "wheat_seed"
+  | "garlic_seed";
 
 export type WearSlot =
   | "head"
@@ -101,7 +104,7 @@ export type FaunaKind = "hare" | "hart" | "wolf" | "wight";
 export type BuildingKind = "hall" | "dormitory" | "kitchen" | "yard" | "board" | "market" | "forge" | "tavern" | "notice" | "farm";
 export type VocationId = "cook" | "armourer" | "trader" | "recruiter" | "guard";
 export type Notoriety = "innocent" | "criminal" | "murderer";
-export type IntentKind = "walk" | "chop" | "mine" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "none";
+export type IntentKind = "walk" | "chop" | "mine" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "till" | "none";
 export type Speed = 0 | 1 | 2 | 3;
 export type PanelId = "none" | "help" | "you" | "journal" | "vale" | "roster" | "build";
 
@@ -319,6 +322,7 @@ export type CtxVerb =
   | "take"
   | "use"
   | "harvest"
+  | "till"
   | "sowCabbage"
   | "sowWheat"
   | "sowGarlic";

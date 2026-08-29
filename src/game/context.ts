@@ -27,10 +27,12 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
     if (bed) {
       if (bed.crop && bed.stage >= 3) out.push({ verb: "harvest", label: "Harvest" });
       if (!bed.crop) {
-        if ((w.player.pack.cabbage ?? 0) > 0) out.push({ verb: "sowCabbage", label: "Sow cabbage" });
-        if ((w.player.pack.wheat ?? 0) > 0) out.push({ verb: "sowWheat", label: "Sow wheat" });
-        if ((w.player.pack.garlic ?? 0) > 0) out.push({ verb: "sowGarlic", label: "Sow garlic" });
+        if ((w.player.pack.cabbage_seed ?? 0) > 0) out.push({ verb: "sowCabbage", label: "Sow cabbage seed" });
+        if ((w.player.pack.wheat_seed ?? 0) > 0) out.push({ verb: "sowWheat", label: "Sow wheat seed" });
+        if ((w.player.pack.garlic_seed ?? 0) > 0) out.push({ verb: "sowGarlic", label: "Sow garlic seed" });
       }
+    } else if (tile && (tile.kind === "grass" || tile.kind === "dirt" || tile.kind === "sand" || tile.kind === "road")) {
+      out.push({ verb: "till", label: "Till a plot" });
     }
     if (hasBook(w)) out.push({ verb: "teleport", label: "Teleport here" });
   }
@@ -39,9 +41,9 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
     const bed = plotAt(w, t.tx, t.ty);
     if (bed?.crop && bed.stage >= 3) out.push({ verb: "harvest", label: `Take the ${CROP_META[bed.crop].label.toLowerCase()}` });
     if (bed && !bed.crop) {
-      if ((w.player.pack.cabbage ?? 0) > 0) out.push({ verb: "sowCabbage", label: "Sow cabbage" });
-      if ((w.player.pack.wheat ?? 0) > 0) out.push({ verb: "sowWheat", label: "Sow wheat" });
-      if ((w.player.pack.garlic ?? 0) > 0) out.push({ verb: "sowGarlic", label: "Sow garlic" });
+      if ((w.player.pack.cabbage_seed ?? 0) > 0) out.push({ verb: "sowCabbage", label: "Sow cabbage seed" });
+      if ((w.player.pack.wheat_seed ?? 0) > 0) out.push({ verb: "sowWheat", label: "Sow wheat seed" });
+      if ((w.player.pack.garlic_seed ?? 0) > 0) out.push({ verb: "sowGarlic", label: "Sow garlic seed" });
     }
   }
   if (t.kind === "fauna") {

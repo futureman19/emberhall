@@ -81,6 +81,9 @@ export const ITEM_META: Record<
   ash: { label: "Sulfurous ash", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 4, sell: 1 },
   cabbage: { label: "Cabbage", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 4, sell: 2 },
   wheat: { label: "Wheat", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 3, sell: 1 },
+  cabbage_seed: { label: "Cabbage seed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 2, sell: 1 },
+  wheat_seed: { label: "Wheat seed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 2, sell: 1 },
+  garlic_seed: { label: "Garlic seed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 3, sell: 1 },
 };
 
 export const CLASS_META: Record<ClassId, { label: string; color: string }> = {
@@ -128,6 +131,7 @@ export const NOTORIETY_META: Record<Notoriety, { label: string }> = {
 export const SHOP_STOCK: ItemId[] = [
   "hatchet", "pick", "hoe", "knife", "bandage", "tunic", "hood", "cloak", "boots",
   "rune", "garlic", "ginseng", "silk", "pearl", "moss", "mandrake", "ash", "cabbage", "wheat",
+  "cabbage_seed", "wheat_seed", "garlic_seed",
 ];
 
 export function emptySkills(): Record<SkillId, number> {
@@ -160,7 +164,8 @@ export function emptyPack(): Record<ItemId, number> {
     meat: 1, hide: 0, bandage: 3,
     tunic: 0, leather: 0, mail: 0, hood: 1, helm: 0, cloak: 0, gloves: 1, hose: 0, greaves: 0,
     boots: 0, pendant: 1, ring: 1, relic: 0, spellbook: 1, rune: 4, garlic: 12, ginseng: 12,
-    silk: 16, nightshade: 4, pearl: 14, moss: 10, mandrake: 10, ash: 12, cabbage: 5, wheat: 4,
+    silk: 16, nightshade: 4, pearl: 14, moss: 10, mandrake: 10, ash: 12, cabbage: 2, wheat: 0,
+    cabbage_seed: 8, wheat_seed: 6, garlic_seed: 4,
   };
 }
 

@@ -42,6 +42,7 @@ export function hitAt(tx: number, ty: number, sx: number, sy: number) {
 export function hoverAt(tx: number, ty: number) {
   const g = useGame.getState();
   if (g.buildKind) g.hoverBuild(tx, ty);
+  if (g.tillArmed) g.hoverTill(tx, ty);
 }
 
 export function liftAt(tx: number, ty: number) {
