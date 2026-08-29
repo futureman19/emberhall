@@ -101,9 +101,12 @@ export function seedFarmPlots(world: World, tx: number, ty: number) {
 
 export function tickCrops(world: World) {
   if (!world.plots?.length) return;
+  // Rain-fed dirt hurries a crop along: while the ground is properly wet,
+  // beds need a quarter less time to finish.
+  const watered = Boolean(world.weather && world.weather.wet >= 0.35);
   for (const p of world.plots) {
     if (!p.crop || p.stage >= 3) continue;
-    const grow = CROP_META[p.crop].hours;
+    const grow = CROP_META[p.crop].hours * (watered ? 0.75 : 1);
     const age = world.hour - p.plantedHour;
     if (age >= grow) p.stage = 3;
     else if (age >= grow * 0.62) p.stage = 2;

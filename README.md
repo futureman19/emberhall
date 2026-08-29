@@ -21,7 +21,7 @@ Die and you walk pale. Chop, hunt, and the book are closed until a healer return
 
 ## Spine
 
-- Gameplay: UO sandbox — avatar, use-based skills, pack, bank, karma, corpse, day/night, fauna, magery.
+- Gameplay: UO sandbox — avatar, use-based skills, pack, bank, karma, corpse, day/night, weather, fauna, magery.
 - Look: warm timber, red cloth, gold type, faceted trees, chunky hall.
 - Not in scope: Fibonacci / Pisano / 60-clock physics.
 

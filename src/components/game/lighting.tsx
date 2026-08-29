@@ -7,8 +7,10 @@ import { DEV_DAYLIGHT } from "@/game/debug";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { useGame } from "@/game/store";
+import { playSfx } from "@/game/vale-sfx";
+import { rainRate } from "@/game/weather";
+import { skyFlash, sunColorFor, sunDirFor, sunHeight } from "./sky-math";
 
-const SUN_DIR = new THREE.Vector3(-0.52, 0.78, -0.36).normalize();
 const SKY_DAY = "#8b9e95";
 const SKY_TUNDRA = "#8a9690";
 const SKY_TAIGA = "#4a5a4c";
@@ -24,6 +26,8 @@ const HAZE_DESERT = "#7a6c50";
 const HAZE_FEN = "#2e3a2c";
 const HAZE_TAIGA = "#354232";
 const HAZE_JUNGLE = "#2a3a28";
+const OVERCAST = new THREE.Color("#6f7672");
+const OVERCAST_DUSK = new THREE.Color("#4a4038");
 
 export function Lighting() {
   const dir = useRef<THREE.DirectionalLight>(null);
@@ -32,6 +36,8 @@ export function Lighting() {
   const sun = useRef<THREE.Group>(null);
   const fog = useRef<THREE.FogExp2>(null);
   const bg = useRef<THREE.Color>(null);
+  const thunderIn = useRef(0);
+  const scratch = useRef(new THREE.Color());
   const { scene, gl } = useThree();
 
   useLayoutEffect(() => {
@@ -48,7 +54,8 @@ export function Lighting() {
     };
   }, [scene, gl]);
 
-  useFrame(() => {
+  useFrame((_, rawDt) => {
+    const dt = Math.min(rawDt, 0.1);
     const w = getWorld();
     const p = w.people.find((x) => x.isPlayer);
     const px = p?.x ?? COURT.tx;
@@ -59,20 +66,44 @@ export function Lighting() {
     const night = !DEV_DAYLIGHT && useGame.getState().snap.isNight && !sight;
     const dusk = !DEV_DAYLIGHT && useGame.getState().snap.isDusk && !sight;
     const climate = biomeAt(Math.round(px), Math.round(pz));
+    const cloud = pit ? 0 : (w.weather?.cloud ?? 0);
+    const rain = pit ? 0 : rainRate(w);
+    // DEV_DAYLIGHT pins the sun to noon for dev visibility; the clock still runs.
+    const sunHour = DEV_DAYLIGHT ? 12 : w.hour;
+    const sunDir = sunDirFor(sunHour);
+    const sunH = sunHeight(sunHour);
+
+    // Lightning: the storm picks its own moments; the sky dome and clouds
+    // read skyFlash so the whole heavens answer the same strike.
+    const storm = !pit && w.weather?.kind === "storm";
+    if (storm && Math.random() < dt * 0.32) {
+      skyFlash.v = 1;
+      thunderIn.current = 0.35 + Math.random() * 1.1;
+    }
+    if (thunderIn.current > 0) {
+      thunderIn.current -= dt;
+      if (thunderIn.current <= 0) playSfx("thunder", 0.4 + Math.random() * 0.3);
+    }
+    skyFlash.v = Math.max(0, skyFlash.v - dt * 4.2);
+    const flash = skyFlash.v * skyFlash.v;
 
     const ambI =
       pit ? 0.1 : night ? 0.16 : dusk ? 0.46 : climate === "taiga" ? 0.42 : climate === "jungle" ? 0.52 : 0.58;
     const dirI =
       pit ? 0.12 : night ? 0.22 : dusk ? 1.21 : climate === "taiga" ? 1.35 : climate === "jungle" ? 1.7 : 1.94;
-    if (amb.current) amb.current.intensity = ambI;
-    if (hemi.current) hemi.current.intensity = pit ? 0.04 : night ? 0.08 : dusk ? 0.23 : climate === "taiga" ? 0.16 : 0.29;
+    const cloudDim = 1 - cloud * 0.55;
+    if (amb.current) amb.current.intensity = ambI * (1 - cloud * 0.22) + flash * 0.9;
+    if (hemi.current)
+      hemi.current.intensity = pit ? 0.04 : night ? 0.08 : dusk ? 0.23 : climate === "taiga" ? 0.16 : 0.29;
 
-    const lx = px + SUN_DIR.x * 48;
-    const ly = py + SUN_DIR.y * 48;
-    const lz = pz + SUN_DIR.z * 48;
+    const lx = px + sunDir.x * 48;
+    const ly = py + sunDir.y * 48;
+    const lz = pz + sunDir.z * 48;
     if (dir.current) {
-      dir.current.intensity = dirI;
-      dir.current.color.set(night ? "#9aa8c4" : dusk ? "#e0a060" : "#fff1c8");
+      dir.current.intensity = dirI * (night || pit ? 1 : cloudDim) * (night || dusk || pit ? 1 : 0.45 + 0.55 * sunH) + flash * 1.7;
+      if (night) dir.current.color.set("#9aa8c4");
+      else if (dusk) dir.current.color.set("#e0a060");
+      else sunColorFor(sunHour, dir.current.color);
       dir.current.position.set(lx, ly, lz);
       dir.current.target.position.set(px, py, pz);
       dir.current.target.updateMatrixWorld();
@@ -89,8 +120,8 @@ export function Lighting() {
     }
 
     if (sun.current) {
-      sun.current.visible = !pit && !night;
-      sun.current.position.set(px + SUN_DIR.x * 92, py + SUN_DIR.y * 92, pz + SUN_DIR.z * 92);
+      sun.current.visible = !pit && !night && cloud < 0.8;
+      sun.current.position.set(px + sunDir.x * 92, py + sunDir.y * 92, pz + sunDir.z * 92);
     }
 
     const sky = pit
@@ -110,7 +141,11 @@ export function Lighting() {
                   : climate === "desert"
                     ? SKY_DESERT
                     : SKY_DAY;
-    if (bg.current) bg.current.set(sky);
+    if (bg.current) {
+      bg.current.set(sky);
+      if (!pit && !night) bg.current.lerp(dusk ? OVERCAST_DUSK : OVERCAST, cloud * 0.5);
+      if (flash > 0.01) bg.current.lerp(scratch.current.set("#dfe4ea"), flash * 0.55);
+    }
     const haze =
       pit ? SKY_PIT
       : climate === "tundra" ? HAZE_TUNDRA
@@ -121,7 +156,8 @@ export function Lighting() {
       : HAZE;
     if (fog.current) {
       fog.current.color.set(haze);
-      fog.current.density = pit ? 0.14 : 0.007;
+      if (!pit && !night) fog.current.color.lerp(OVERCAST, cloud * 0.45);
+      fog.current.density = pit ? 0.14 : 0.007 + cloud * 0.005 + rain * 0.008;
     }
     scene.background = bg.current;
   });

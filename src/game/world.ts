@@ -15,6 +15,7 @@ import { personName } from "./names";
 import { hash2, irange, mulberry32, pick } from "./rng";
 import { buildingBox, siteError } from "./building-size";
 import { seedFarmPlots } from "./farm";
+import { initialWeather } from "./weather";
 import type { BuildingKind, ClassId, Person, Tile, TileKind, World } from "./types";
 
 let nidAcc = 1;
@@ -355,6 +356,7 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
     landRev: 1,
     tickCount: 0,
     restored: false,
+    weather: initialWeather(8),
     boom: null,
     nightOffer: null,
   };

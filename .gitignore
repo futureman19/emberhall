@@ -16,3 +16,5 @@ attachments/
 .project_id
 .DS_Store
 *.local
+
+.vercel

@@ -8,10 +8,13 @@ import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { hash2 } from "@/game/rng";
 import { useGame } from "@/game/store";
+import { rainRate } from "@/game/weather";
+import { skyFlash, sunDirFor } from "./sky-math";
 
 const N_BIRD = 16;
 const dummy = new THREE.Object3D();
-const SUN_DIR = new THREE.Vector3(-0.52, 0.78, -0.36).normalize();
+const OVERCAST_SKY = new THREE.Color("#767e78");
+const FLASH_SKY = new THREE.Color("#e4e8ee");
 
 function chevron() {
   const g = new THREE.BufferGeometry();
@@ -31,7 +34,7 @@ function SkyDome() {
       uMid: { value: new THREE.Color("#8fa89c") },
       uHorizon: { value: new THREE.Color("#6a7a5c") },
       uSun: { value: new THREE.Color("#f2d48a") },
-      uSunDir: { value: SUN_DIR.clone() },
+      uSunDir: { value: sunDirFor(12) },
       uGlow: { value: 1 },
     }),
     [],
@@ -49,8 +52,12 @@ function SkyDome() {
     const night = !DEV_DAYLIGHT && useGame.getState().snap.isNight && !sight;
     const dusk = !DEV_DAYLIGHT && useGame.getState().snap.isDusk && !sight;
     const climate = biomeAt(Math.round(px), Math.round(pz));
+    const cloud = pit ? 0 : (w.weather?.cloud ?? 0);
     const u = uniforms;
+    u.uSunDir.value.copy(sunDirFor(DEV_DAYLIGHT ? 12 : w.hour));
     u.uGlow.value = pit ? 0 : night ? 0.08 : dusk ? 0.7 : 1;
+    u.uGlow.value *= 1 - cloud * 0.85;
+    if (skyFlash.v > 0.01) u.uGlow.value += skyFlash.v * 1.6;
     if (pit) {
       u.uZenith.value.set("#0c0a08");
       u.uMid.value.set("#0c0a08");
@@ -96,6 +103,18 @@ function SkyDome() {
       u.uMid.value.set("#8fa89c");
       u.uHorizon.value.set("#6a7a5c");
       u.uSun.value.set("#f2d48a");
+    }
+    if (!pit && !night && cloud > 0.01) {
+      const dim = cloud * 0.55;
+      u.uZenith.value.lerp(OVERCAST_SKY, dim);
+      u.uMid.value.lerp(OVERCAST_SKY, dim * 0.9);
+      u.uHorizon.value.lerp(OVERCAST_SKY, dim * 0.8);
+    }
+    if (!pit && skyFlash.v > 0.01) {
+      const f = skyFlash.v * 0.5;
+      u.uZenith.value.lerp(FLASH_SKY, f);
+      u.uMid.value.lerp(FLASH_SKY, f);
+      u.uHorizon.value.lerp(FLASH_SKY, f);
     }
   });
 
@@ -170,7 +189,7 @@ function Birds() {
     const pit = Boolean(p && inGreybarrow(Math.round(p.x), Math.round(p.z)));
     const sight = (w.player.nightSightUntil ?? 0) > w.hour;
     const night = !DEV_DAYLIGHT && useGame.getState().snap.isNight && !sight;
-    m.visible = !pit && !night;
+    m.visible = !pit && !night && rainRate(w) < 0.2;
     const t = clock.getElapsedTime();
     for (let i = 0; i < N_BIRD; i++) {
       const b = stock[i]!;

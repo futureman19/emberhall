@@ -1,6 +1,7 @@
 import { BARROW, MAP, PLACES, inGreybarrow } from "./atlas";
 import { FAUNA_META, isNight } from "./catalog";
 import { astar, nearestWalkable, tileOf } from "./pathfinding";
+import { sheltering } from "./weather";
 import { nid } from "./world";
 import type { Creature, FaunaKind, World } from "./types";
 
@@ -90,6 +91,7 @@ export function seedBarrow(world: World, rng: () => number) {
 
 export function tickEcology(world: World, dt: number) {
   const night = isNight(world.hour);
+  const shelter = sheltering(world);
   for (const c of world.fauna) {
     if (c.task === "dead") {
       if (world.hour > c.corpseUntil) {
@@ -120,6 +122,25 @@ export function tickEcology(world: World, dt: number) {
         }
         c.task = "follow";
       }
+    } else if (shelter && (c.kind === "hare" || c.kind === "hart") && c.task !== "fight") {
+      // Small game bolts for cover when the sky opens. Wolves don't mind the wet.
+      const home = c.home;
+      if (Math.hypot(c.x - home.tx, c.z - home.ty) > 1.5) {
+        if (!c.path.length) {
+          const dest = nearestWalkable(world, home.tx, home.ty);
+          if (dest) {
+            const path = astar(world, Math.round(c.x), Math.round(c.z), dest.x, dest.y, 1800);
+            if (path) c.path = path.map((n) => ({ tx: n.x, ty: n.y }));
+          }
+        }
+      } else {
+        c.task = "idle";
+        c.path = [];
+      }
+    } else if (c.task === "idle" && (c.kind === "hare" || c.kind === "hart")) {
+      // The sky cleared — back to grazing.
+      c.task = "wander";
+      c.taskUntil = world.hour + 0.2 + Math.random() * 0.6;
     } else if (c.task === "wander" && !c.path.length && world.hour > c.taskUntil) {
       const home = c.home;
       const dest = nearestWalkable(

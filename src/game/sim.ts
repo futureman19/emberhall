@@ -5,6 +5,7 @@ import { tickCrops } from "./farm";
 import { astar, nearestWalkable, tileOf } from "./pathfinding";
 import { tickPiles } from "./piles";
 import { tickPlayer, you } from "./player";
+import { tickWeather } from "./weather";
 import { completeObjective, log, revealAround } from "./world";
 import type { Person, Speed, World } from "./types";
 
@@ -74,6 +75,7 @@ export function tickWorld(world: World, realDt: number) {
 
   const note = tickPlayer(world, dt);
   if (note) log(world, note);
+  tickWeather(world, dt);
   tickCrops(world);
   tickEcology(world, dt);
   tickPiles(world);

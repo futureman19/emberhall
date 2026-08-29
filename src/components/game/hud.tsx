@@ -198,7 +198,7 @@ function TopBar() {
       <div className="min-w-0 rounded-[var(--radius-md)] border border-border bg-bg/80 px-3 py-2">
         <p className="font-display text-xs tracking-wider text-gold uppercase">{inside ? BUILDING_META[inside].label : snap.region}</p>
         <p className="text-xs text-muted tabular-nums">
-          {ghost ? "Ghost" : clockLabel(snap.clock, snap.day)} · {phaseName(snap.hour)}
+          {ghost ? "Ghost" : clockLabel(snap.clock, snap.day)} · {phaseName(snap.hour)} · {snap.weather.label}
         </p>
         <div className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2">
           <div className="h-full bg-accent" style={{ width: `${Math.max(0, Math.min(1, hp)) * 100}%` }} />

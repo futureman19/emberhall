@@ -37,7 +37,8 @@ export type SfxId =
   | "die"
   | "loot"
   | "gate"
-  | "smith";
+  | "smith"
+  | "thunder";
 
 const SRC: Record<SfxId, string> = {
   chop: "/audio/sfx/chop.mp3",
@@ -51,6 +52,7 @@ const SRC: Record<SfxId, string> = {
   loot: "/audio/sfx/loot.mp3",
   gate: "/audio/sfx/gate.mp3",
   smith: "/audio/sfx/smith.mp3",
+  thunder: "/audio/sfx/thunder.wav",
 };
 
 const POOL = 3;
@@ -89,4 +91,27 @@ export function playSfx(id: SfxId, vol = 0.5) {
     /* ignore */
   }
   a.play().catch(() => {});
+}
+
+/* --- Rain loop: one long buffer, volume rides the actual rainfall. --- */
+
+let rainEl: HTMLAudioElement | null = null;
+let rainVol = 0;
+
+export function setRainLevel(level: number) {
+  if (typeof Audio === "undefined") return;
+  const target = sfxMuted() ? 0 : Math.max(0, Math.min(1, level)) * 0.34;
+  if (!rainEl) {
+    if (target <= 0.01) return;
+    rainEl = new Audio("/audio/sfx/rain.wav");
+    rainEl.loop = true;
+    rainEl.volume = 0;
+  }
+  rainVol = target;
+  rainEl.volume = rainVol;
+  if (rainVol > 0.01) {
+    if (rainEl.paused) rainEl.play().catch(() => {});
+  } else if (!rainEl.paused) {
+    rainEl.pause();
+  }
 }

@@ -6,6 +6,7 @@ import { seedFarmPlots } from "./farm";
 import { maxMana } from "./magery";
 import { you } from "./player";
 import { mulberry32 } from "./rng";
+import { ensureWeather, weatherSnap } from "./weather";
 import { createStubWorld, createWorld, seedFieldStones, seedTownNpcs } from "./world";
 import type { Snapshot, World } from "./types";
 
@@ -59,6 +60,7 @@ function withFauna(w: World) {
     w.player.mana = Math.min(max, w.player.mana);
   }
   if (w.tiles.length) seedTownNpcs(w, mulberry32(w.seed + 91));
+  ensureWeather(w);
   return w;
 }
 
@@ -100,6 +102,7 @@ export function snapshot(w: World = world): Snapshot {
     restored: w.restored,
     isNight: isNight(w.hour),
     isDusk: isDusk(w.hour),
+    weather: weatherSnap(w),
     player: w.player,
     fauna: w.fauna,
     piles: w.piles ?? [],

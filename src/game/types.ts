@@ -111,6 +111,23 @@ export type Notoriety = "innocent" | "criminal" | "murderer";
 export type IntentKind = "walk" | "chop" | "mine" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "till" | "none";
 export type Speed = 0 | 1 | 2 | 3;
 export type PanelId = "none" | "help" | "you" | "journal" | "vale" | "roster" | "build";
+export type WeatherKind = "clear" | "fair" | "cloudy" | "rain" | "storm";
+
+export interface WeatherState {
+  kind: WeatherKind;
+  /** Actual cover 0..1, eased toward the kind's target. */
+  cloud: number;
+  /** Ground wetness 0..1 — rises in rain, dries in wind and sun. */
+  wet: number;
+  /** Wind strength 0..1, eased. */
+  wind: number;
+  /** World hour the current regime ends. */
+  untilHour: number;
+  /** Regime rolls so far — seeds the deterministic scheduler. */
+  rolls: number;
+  /** World hour the held torch hisses out, 0 when not dousing. */
+  douseHour: number;
+}
 
 export interface Tile {
   h: number;
@@ -268,6 +285,7 @@ export interface World {
   landRev: number;
   tickCount: number;
   restored: boolean;
+  weather: WeatherState;
   boom: { untilHour: number } | null;
   nightOffer: string | null;
 }
@@ -293,6 +311,7 @@ export interface Snapshot {
   restored: boolean;
   isNight: boolean;
   isDusk: boolean;
+  weather: { kind: WeatherKind; cloud: number; wet: number; label: string };
   player: PlayerState;
   fauna: Creature[];
   piles: GroundPile[];
