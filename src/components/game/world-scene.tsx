@@ -14,6 +14,7 @@ import { Crops } from "./crop-meshes";
 import { Fauna } from "./fauna-meshes";
 import { Gates } from "./gate-meshes";
 import { Lighting } from "./lighting";
+import { Sky } from "./sky";
 import { People } from "./people-meshes";
 import { Piles } from "./pile-meshes";
 import { Horizon, Terrain } from "./terrain";
@@ -330,6 +331,7 @@ export function WorldScene() {
       }}
     >
       <Lighting />
+      <Sky />
       <Horizon />
       <Terrain />
       <Buildings />
