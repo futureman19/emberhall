@@ -4,9 +4,11 @@ import { useMemo, useRef } from "react";
 import type { MutableRefObject } from "react";
 import * as THREE from "three";
 import { COURT, MAP, VIEW } from "@/game/atlas";
+import { buildingBox } from "@/game/building-size";
 import { GROUND_SHADER, makeDirtTex, makeGrassTex } from "@/game/ground-tex";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
+import { hash2 } from "@/game/rng";
 import { useGame } from "@/game/store";
 import { leftAt, hitAt, hoverAt, liftAt } from "@/game/world-pointer";
 import type { TileKind, World } from "@/game/types";
@@ -56,6 +58,25 @@ const COL_CANOPY = new THREE.Color("#3d4e2c");
 const COL_ROCK = new THREE.Color("#7a7268");
 const COL_MARK = new THREE.Color("#e0b56a");
 const COL_MARK_WOOD = new THREE.Color("#c48a4a");
+const COL_SHRUB = new THREE.Color("#354626");
+const COL_SHRUB_2 = new THREE.Color("#4a5a32");
+const COL_FLOWER_RUST = new THREE.Color("#a85a42");
+const COL_FLOWER_GOLD = new THREE.Color("#c9a36a");
+const COL_FLOWER_PALE = new THREE.Color("#ece6d8");
+const COL_SAPLING = new THREE.Color("#4d6234");
+const COL_TUFT = new THREE.Color("#5a6a38");
+const FLORA = 240;
+
+function blocked(world: World, tx: number, ty: number) {
+  if (world.plots) {
+    for (const p of world.plots) if (p.tx === tx && p.ty === ty) return true;
+  }
+  for (const b of world.buildings) {
+    const box = buildingBox(b.kind, b.tx, b.ty);
+    if (tx + 0.5 > box.x0 && tx + 0.5 < box.x1 && ty + 0.5 > box.z0 && ty + 0.5 < box.z1) return true;
+  }
+  return false;
+}
 
 function treeGrow(tx: number, ty: number) {
   return 0.86 + ((tx * 13 + ty * 7) % 11) * 0.038;
@@ -180,6 +201,10 @@ export function Terrain() {
   const canopy = useRef<THREE.InstancedMesh>(null);
   const canopyGhost = useRef<THREE.InstancedMesh>(null);
   const rocks = useRef<THREE.InstancedMesh>(null);
+  const shrubs = useRef<THREE.InstancedMesh>(null);
+  const flowers = useRef<THREE.InstancedMesh>(null);
+  const saplings = useRef<THREE.InstancedMesh>(null);
+  const tufts = useRef<THREE.InstancedMesh>(null);
   const solidAt = useRef<{ tx: number; ty: number }[]>([]);
   const ghostAt = useRef<{ tx: number; ty: number }[]>([]);
   const rockAt = useRef<{ tx: number; ty: number }[]>([]);
@@ -218,11 +243,19 @@ export function Terrain() {
     const cn = canopy.current;
     const gh = canopyGhost.current;
     const rk = rocks.current;
+    const shb = shrubs.current;
+    const flw = flowers.current;
+    const sap = saplings.current;
+    const tft = tufts.current;
     ensureColor(tk, count);
     ensureColor(tkg, count);
     ensureColor(cn, count);
     ensureColor(gh, count);
     ensureColor(rk, count);
+    ensureColor(shb, FLORA);
+    ensureColor(flw, FLORA);
+    ensureColor(sap, FLORA);
+    ensureColor(tft, FLORA);
     if (origin.current.x !== ox || origin.current.z !== oz || origin.current.rev !== rev) {
       origin.current = { x: ox, z: oz, rev };
       const pos = geo.attributes.position as THREE.BufferAttribute;
@@ -262,6 +295,10 @@ export function Terrain() {
     let si = 0;
     let gi = 0;
     let ri = 0;
+    let shi = 0;
+    let fli = 0;
+    let sai = 0;
+    let tui = 0;
     const px = you?.x ?? ox;
     const pz = you?.z ?? oz;
     for (let iz = 0; iz < VIEW; iz++) {
@@ -319,6 +356,57 @@ export function Terrain() {
           rockAt.current[ri] = { tx, ty };
           ri++;
         }
+        const wooded = t.kind === "tree";
+        const open = t.kind === "grass" || t.kind === "sand";
+        if ((wooded || open) && !blocked(w, tx, ty)) {
+          const seed = w.seed + 41;
+          const roll = hash2(tx, ty, seed);
+          let flora = -1;
+          if (wooded) flora = hash2(tx, ty, w.seed + 51) < 0.14 ? 0 : -1;
+          else if (t.kind === "sand") flora = roll < 0.012 ? 1 : roll < 0.018 ? 3 : -1;
+          else if (roll < 0.011) flora = 0;
+          else if (roll < 0.019) flora = 1;
+          else if (roll < 0.025) flora = 2;
+          else if (roll < 0.031) flora = 3;
+          if (flora >= 0) {
+            const gy = groundY(w, tx, ty);
+            const jx = (hash2(tx, ty, w.seed + 71) - 0.5) * (wooded ? 0.72 : 0.52);
+            const jz = (hash2(tx, ty, w.seed + 91) - 0.5) * (wooded ? 0.72 : 0.52);
+            const grow = 0.72 + hash2(tx, ty, w.seed + 5) * 0.5;
+            dummy.rotation.set(0, hash2(tx, ty, w.seed + 8) * Math.PI * 2, 0);
+            if (flora === 0 && shi < FLORA && shb) {
+              dummy.position.set(tx + jx, gy + 0.22 * grow, ty + jz);
+              dummy.scale.set(grow, grow, grow);
+              dummy.updateMatrix();
+              shb.setMatrixAt(shi, dummy.matrix);
+              paint(shb, shi, hash2(tx, ty, w.seed + 3) > 0.5 ? COL_SHRUB_2 : COL_SHRUB);
+              shi++;
+            } else if (flora === 1 && fli < FLORA && flw) {
+              dummy.position.set(tx + jx, gy + 0.14, ty + jz);
+              dummy.scale.set(grow * 0.9, grow * 0.9, grow * 0.9);
+              dummy.updateMatrix();
+              const hue = hash2(tx, ty, w.seed + 11);
+              paint(flw, fli, hue < 0.34 ? COL_FLOWER_RUST : hue < 0.67 ? COL_FLOWER_GOLD : COL_FLOWER_PALE);
+              flw.setMatrixAt(fli, dummy.matrix);
+              fli++;
+            } else if (flora === 2 && sai < FLORA && sap) {
+              dummy.position.set(tx + jx, gy + 0.52 * grow, ty + jz);
+              dummy.scale.set(grow, grow, grow);
+              dummy.updateMatrix();
+              sap.setMatrixAt(sai, dummy.matrix);
+              paint(sap, sai, COL_SAPLING);
+              sai++;
+            } else if (flora === 3 && tui < FLORA && tft) {
+              dummy.position.set(tx + jx, gy + 0.16 * grow, ty + jz);
+              dummy.scale.set(grow * 0.85, grow, grow * 0.85);
+              dummy.updateMatrix();
+              tft.setMatrixAt(tui, dummy.matrix);
+              paint(tft, tui, COL_TUFT);
+              tui++;
+            }
+            dummy.rotation.set(0, 0, 0);
+          }
+        }
       }
     }
     hideRest(tk, si, count);
@@ -326,11 +414,19 @@ export function Terrain() {
     hideRest(cn, si, count);
     hideRest(gh, gi, count);
     hideRest(rk, ri, count);
+    hideRest(shb, shi, FLORA);
+    hideRest(flw, fli, FLORA);
+    hideRest(sap, sai, FLORA);
+    hideRest(tft, tui, FLORA);
     if (tk?.instanceColor) tk.instanceColor.needsUpdate = true;
     if (tkg?.instanceColor) tkg.instanceColor.needsUpdate = true;
     if (cn?.instanceColor) cn.instanceColor.needsUpdate = true;
     if (gh?.instanceColor) gh.instanceColor.needsUpdate = true;
     if (rk?.instanceColor) rk.instanceColor.needsUpdate = true;
+    if (shb?.instanceColor) shb.instanceColor.needsUpdate = true;
+    if (flw?.instanceColor) flw.instanceColor.needsUpdate = true;
+    if (sap?.instanceColor) sap.instanceColor.needsUpdate = true;
+    if (tft?.instanceColor) tft.instanceColor.needsUpdate = true;
   });
 
   function fromEvent(e: ThreeEvent<PointerEvent>) {
@@ -431,6 +527,22 @@ export function Terrain() {
       >
         <dodecahedronGeometry args={[0.42, 0]} />
         <meshStandardMaterial color="#ffffff" roughness={0.9} />
+      </instancedMesh>
+      <instancedMesh ref={shrubs} args={[undefined, undefined, FLORA]} castShadow frustumCulled={false} raycast={() => {}}>
+        <boxGeometry args={[0.42, 0.4, 0.36]} />
+        <meshStandardMaterial color="#ffffff" roughness={0.96} />
+      </instancedMesh>
+      <instancedMesh ref={flowers} args={[undefined, undefined, FLORA]} frustumCulled={false} raycast={() => {}}>
+        <boxGeometry args={[0.14, 0.1, 0.14]} />
+        <meshStandardMaterial color="#ffffff" roughness={0.7} />
+      </instancedMesh>
+      <instancedMesh ref={saplings} args={[undefined, undefined, FLORA]} castShadow frustumCulled={false} raycast={() => {}}>
+        <coneGeometry args={[0.32, 1.05, 4]} />
+        <meshStandardMaterial color="#ffffff" roughness={0.95} />
+      </instancedMesh>
+      <instancedMesh ref={tufts} args={[undefined, undefined, FLORA]} frustumCulled={false} raycast={() => {}}>
+        <boxGeometry args={[0.1, 0.32, 0.1]} />
+        <meshStandardMaterial color="#ffffff" roughness={0.96} />
       </instancedMesh>
     </group>
   );
