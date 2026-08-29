@@ -85,7 +85,7 @@ const GROUND_FADE = {
   uOrigin: { value: new THREE.Vector2(COURT.tx, COURT.ty) },
   uNear: { value: VIEW / 2 - 18 },
   uFar: { value: VIEW / 2 - 0.15 },
-  uFog: { value: new THREE.Color("#6a6864") },
+  uFog: { value: new THREE.Color("#3d4c2c") },
 };
 
 function blocked(world: World, tx: number, ty: number) {
@@ -186,9 +186,7 @@ function GroundMaterial() {
       map={maps.grass}
       roughness={0.96}
       metalness={0.02}
-      transparent
-      depthWrite
-      customProgramCacheKey={() => "vale-ground-v4"}
+      customProgramCacheKey={() => "vale-ground-v5"}
       onBeforeCompile={(shader) => {
         shader.uniforms.uDirt = { value: maps.dirt };
         shader.uniforms.uOrigin = GROUND_FADE.uOrigin;
@@ -227,8 +225,7 @@ diffuseColor *= sampledDiffuseColor;
 float dist = length(vWp.xz - uOrigin) + (fbm(vWp.xz * 0.05) - 0.4) * 8.0;
 float fade = 1.0 - smoothstep(uNear, uFar, dist);
 diffuseColor.rgb = mix(uFog, diffuseColor.rgb, fade);
-diffuseColor.a *= fade;
-if (fade < 0.035) discard;
+if (fade < 0.05) discard;
 `,
         );
       }}
@@ -337,6 +334,20 @@ export function Terrain() {
     const px = you?.x ?? ox;
     const pz = you?.z ?? oz;
     GROUND_FADE.uOrigin.value.set(px, pz);
+    const climate = biomeAt(px, pz);
+    GROUND_FADE.uFog.value.set(
+      climate === "tundra"
+        ? "#8a8680"
+        : climate === "desert"
+          ? "#7a6c50"
+          : climate === "fen"
+            ? "#2e3a2c"
+            : climate === "taiga"
+              ? "#354232"
+              : climate === "jungle"
+                ? "#2a3a28"
+                : "#3d4c2c",
+    );
     const working =
       (w.player.intent.kind === "chop" || w.player.intent.kind === "mine") && !you?.path.length;
     if (landMoved || working) {

@@ -18,7 +18,12 @@ const SKY_DESERT = "#c4a878";
 const SKY_DUSK = "#8a6848";
 const SKY_NIGHT = "#141210";
 const SKY_PIT = "#0c0a08";
-const HAZE = "#6a6864";
+const HAZE = "#3d4c2c";
+const HAZE_TUNDRA = "#8a8680";
+const HAZE_DESERT = "#7a6c50";
+const HAZE_FEN = "#2e3a2c";
+const HAZE_TAIGA = "#354232";
+const HAZE_JUNGLE = "#2a3a28";
 
 export function Lighting() {
   const dir = useRef<THREE.DirectionalLight>(null);
@@ -106,8 +111,16 @@ export function Lighting() {
                     ? SKY_DESERT
                     : SKY_DAY;
     if (bg.current) bg.current.set(sky);
+    const haze =
+      pit ? SKY_PIT
+      : climate === "tundra" ? HAZE_TUNDRA
+      : climate === "desert" ? HAZE_DESERT
+      : climate === "fen" ? HAZE_FEN
+      : climate === "taiga" ? HAZE_TAIGA
+      : climate === "jungle" ? HAZE_JUNGLE
+      : HAZE;
     if (fog.current) {
-      fog.current.color.set(pit ? SKY_PIT : HAZE);
+      fog.current.color.set(haze);
       fog.current.density = pit ? 0.14 : 0.007;
     }
     scene.background = bg.current;
