@@ -322,8 +322,11 @@ export function WorldScene() {
       gl={{ antialias: true, alpha: false }}
       onContextMenu={(e) => e.preventDefault()}
       onCreated={({ gl }) => {
+        gl.setClearColor("#1a1c18", 1);
+        gl.toneMapping = THREE.ACESFilmicToneMapping;
+        gl.toneMappingExposure = 1.05;
         gl.shadowMap.enabled = true;
-        gl.shadowMap.type = THREE.PCFSoftShadowMap;
+        gl.shadowMap.type = THREE.PCFShadowMap;
       }}
     >
       <Lighting />

@@ -8,8 +8,8 @@ import { getWorld } from "@/game/live";
 import { useGame } from "@/game/store";
 
 const SUN_DIR = new THREE.Vector3(-0.52, 0.78, -0.36).normalize();
-const SKY_DAY = "#cdd2cc";
-const SKY_DUSK = "#c4a078";
+const SKY_DAY = "#6d7c72";
+const SKY_DUSK = "#8a6848";
 const SKY_NIGHT = "#141210";
 const SKY_PIT = "#0c0a08";
 
@@ -24,7 +24,10 @@ export function Lighting() {
 
   useLayoutEffect(() => {
     gl.shadowMap.enabled = true;
-    gl.shadowMap.type = THREE.PCFSoftShadowMap;
+    gl.shadowMap.type = THREE.PCFShadowMap;
+    gl.toneMapping = THREE.ACESFilmicToneMapping;
+    gl.toneMappingExposure = 1.05;
+    gl.setClearColor("#1a1c18", 1);
     const light = dir.current;
     if (!light) return;
     scene.add(light.target);
@@ -44,17 +47,17 @@ export function Lighting() {
     const night = !DEV_DAYLIGHT && useGame.getState().snap.isNight && !sight;
     const dusk = !DEV_DAYLIGHT && useGame.getState().snap.isDusk && !sight;
 
-    const ambI = pit ? 0.1 : night ? 0.18 : dusk ? 0.4 : 0.62;
-    const dirI = pit ? 0.12 : night ? 0.28 : dusk ? 1.5 : 3.4;
+    const ambI = pit ? 0.1 : night ? 0.16 : dusk ? 0.32 : 0.4;
+    const dirI = pit ? 0.12 : night ? 0.22 : dusk ? 0.85 : 1.35;
     if (amb.current) amb.current.intensity = ambI;
-    if (hemi.current) hemi.current.intensity = pit ? 0.04 : night ? 0.08 : dusk ? 0.22 : 0.32;
+    if (hemi.current) hemi.current.intensity = pit ? 0.04 : night ? 0.08 : dusk ? 0.16 : 0.2;
 
     const lx = px + SUN_DIR.x * 48;
     const ly = py + SUN_DIR.y * 48;
     const lz = pz + SUN_DIR.z * 48;
     if (dir.current) {
       dir.current.intensity = dirI;
-      dir.current.color.set(night ? "#9aa8c4" : dusk ? "#e0a060" : "#fff8e4");
+      dir.current.color.set(night ? "#9aa8c4" : dusk ? "#e0a060" : "#fff1c8");
       dir.current.position.set(lx, ly, lz);
       dir.current.target.position.set(px, py, pz);
       dir.current.target.updateMatrixWorld();
@@ -72,15 +75,15 @@ export function Lighting() {
 
     if (sun.current) {
       sun.current.visible = !pit && !night;
-      sun.current.position.set(px + SUN_DIR.x * 78, py + SUN_DIR.y * 78, pz + SUN_DIR.z * 78);
+      sun.current.position.set(px + SUN_DIR.x * 92, py + SUN_DIR.y * 92, pz + SUN_DIR.z * 92);
     }
 
     const sky = pit ? SKY_PIT : night ? SKY_NIGHT : dusk ? SKY_DUSK : SKY_DAY;
     if (bg.current) bg.current.set(sky);
     if (fog.current) {
       fog.current.color.set(sky);
-      fog.current.near = pit ? 8 : 68;
-      fog.current.far = pit ? 22 : 175;
+      fog.current.near = pit ? 8 : 90;
+      fog.current.far = pit ? 22 : 210;
     }
     scene.background = bg.current;
   });
@@ -88,30 +91,26 @@ export function Lighting() {
   return (
     <>
       <color ref={bg} attach="background" args={[SKY_DAY]} />
-      <fog ref={fog} attach="fog" args={[SKY_DAY, 68, 175]} />
-      <ambientLight ref={amb} intensity={0.62} color="#ece6d8" />
+      <fog ref={fog} attach="fog" args={[SKY_DAY, 90, 210]} />
+      <ambientLight ref={amb} intensity={0.4} color="#ece6d8" />
       <directionalLight
         ref={dir}
         castShadow
         position={[COURT.tx + 22, 40, COURT.ty + 14]}
-        intensity={3.4}
-        color="#fff8e4"
+        intensity={1.35}
+        color="#fff1c8"
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
       />
-      <hemisphereLight ref={hemi} args={["#efe8d8", "#3a3228", 0.32]} />
+      <hemisphereLight ref={hemi} args={["#c5d0c4", "#3a3228", 0.2]} />
       <group ref={sun} frustumCulled={false}>
         <mesh frustumCulled={false} renderOrder={-1}>
-          <sphereGeometry args={[5.4, 24, 16]} />
-          <meshBasicMaterial color="#fffce8" toneMapped={false} fog={false} depthWrite={false} />
+          <sphereGeometry args={[2.4, 20, 14]} />
+          <meshBasicMaterial color="#f2d48a" toneMapped={false} fog={false} depthWrite={false} />
         </mesh>
         <mesh frustumCulled={false} renderOrder={-2}>
-          <sphereGeometry args={[11, 24, 16]} />
-          <meshBasicMaterial color="#f0c070" toneMapped={false} fog={false} transparent opacity={0.28} depthWrite={false} />
-        </mesh>
-        <mesh frustumCulled={false} renderOrder={-3}>
-          <sphereGeometry args={[22, 24, 16]} />
-          <meshBasicMaterial color="#e8d8a8" toneMapped={false} fog={false} transparent opacity={0.1} depthWrite={false} />
+          <sphereGeometry args={[4.6, 20, 14]} />
+          <meshBasicMaterial color="#e0b56a" toneMapped={false} fog={false} transparent opacity={0.22} depthWrite={false} />
         </mesh>
       </group>
     </>
