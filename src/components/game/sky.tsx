@@ -9,7 +9,9 @@ import { getWorld } from "@/game/live";
 import { hash2 } from "@/game/rng";
 import { useGame } from "@/game/store";
 
-const N_CLOUD = 28;
+const N_CLOUD = 64;
+const PUFFS = 5;
+const N_PUFF = N_CLOUD * PUFFS;
 const N_BIRD = 16;
 const dummy = new THREE.Object3D();
 
@@ -89,7 +91,7 @@ function SkyDome() {
 
   return (
     <mesh ref={mesh} frustumCulled={false} renderOrder={-20} raycast={() => {}}>
-      <sphereGeometry args={[240, 24, 16]} />
+      <sphereGeometry args={[400, 28, 18]} />
       <shaderMaterial
         ref={mat}
         uniforms={uniforms}
@@ -122,24 +124,31 @@ void main() {
 
 function Clouds() {
   const mesh = useRef<THREE.InstancedMesh>(null);
-  const stock = useMemo(
-    () =>
-      Array.from({ length: N_CLOUD }, (_, i) => {
-        const a = hash2(i, 2, 11) * Math.PI * 2;
-        const r = 48 + hash2(i, 5, 13) * 100;
-        return {
-          a,
-          r,
-          y: 22 + hash2(i, 8, 17) * 26,
-          s: 7 + hash2(i, 3, 19) * 11,
-          v: 0.07 + hash2(i, 7, 23) * 0.1,
-          stretch: 1.3 + hash2(i, 4, 29) * 0.8,
-        };
-      }),
-    [],
-  );
+  const stock = useMemo(() => {
+    return Array.from({ length: N_CLOUD }, (_, i) => {
+      const a = hash2(i, 2, 11) * Math.PI * 2;
+      const far = hash2(i, 5, 13);
+      const r = 220 + far * 85;
+      const y = 188 + hash2(i, 8, 17) * 38 + far * 14;
+      const s = 4.2 + hash2(i, 3, 19) * 5.2 + far * 2.4;
+      const puffs = Array.from({ length: PUFFS }, (_, k) => ({
+        dx: (hash2(i, k, 31) - 0.5) * 2.1,
+        dy: (hash2(i, k, 37) - 0.4) * 0.85,
+        dz: (hash2(i, k, 41) - 0.5) * 1.5,
+        sc: 0.48 + hash2(i, k, 43) * 0.62,
+      }));
+      return {
+        a,
+        r,
+        y,
+        s,
+        v: 0.04 + hash2(i, 7, 23) * 0.06,
+        puffs,
+      };
+    });
+  }, []);
 
-  useFrame(({ clock }) => {
+  useFrame(({ clock, camera }) => {
     const m = mesh.current;
     if (!m) return;
     const w = getWorld();
@@ -152,27 +161,34 @@ function Clouds() {
     const night = !DEV_DAYLIGHT && useGame.getState().snap.isNight && !sight;
     m.visible = !pit;
     const mat = m.material as THREE.MeshBasicMaterial;
-    mat.opacity = night ? 0.16 : 0.55;
+    mat.opacity = night ? 0.18 : 0.42;
     const t = clock.getElapsedTime();
+    let n = 0;
     for (let i = 0; i < N_CLOUD; i++) {
       const c = stock[i]!;
-      const a = c.a + t * c.v * 0.035;
-      dummy.position.set(px + Math.cos(a) * c.r, py + c.y, pz + Math.sin(a) * c.r);
-      dummy.rotation.set(0, a, 0);
-      dummy.scale.set(c.s * c.stretch, c.s * 0.42, c.s);
-      dummy.updateMatrix();
-      m.setMatrixAt(i, dummy.matrix);
+      const a = c.a + t * c.v * 0.028;
+      const cx = px + Math.cos(a) * c.r;
+      const cz = pz + Math.sin(a) * c.r;
+      const cy = py + c.y;
+      const near = Math.hypot(cx - camera.position.x, cy - camera.position.y, cz - camera.position.z);
+      const hide = near < 150 ? 0.01 : 1;
+      for (const puff of c.puffs) {
+        dummy.position.set(cx + puff.dx * c.s, cy + puff.dy * c.s, cz + puff.dz * c.s);
+        dummy.scale.set(c.s * puff.sc * 1.15 * hide, c.s * puff.sc * 0.86 * hide, c.s * puff.sc * 1.05 * hide);
+        dummy.updateMatrix();
+        m.setMatrixAt(n++, dummy.matrix);
+      }
     }
     m.instanceMatrix.needsUpdate = true;
   });
 
   return (
-    <instancedMesh ref={mesh} args={[undefined, undefined, N_CLOUD]} frustumCulled={false} raycast={() => {}} renderOrder={-12}>
-      <sphereGeometry args={[1, 10, 8]} />
+    <instancedMesh ref={mesh} args={[undefined, undefined, N_PUFF]} frustumCulled={false} raycast={() => {}} renderOrder={-12}>
+      <sphereGeometry args={[1, 9, 7]} />
       <meshBasicMaterial
-        color="#e8e2d4"
+        color="#f4f1ea"
         transparent
-        opacity={0.55}
+        opacity={0.42}
         depthWrite={false}
         fog={false}
         toneMapped={false}
