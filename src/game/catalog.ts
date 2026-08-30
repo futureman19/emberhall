@@ -53,6 +53,7 @@ export const LIVE_SKILLS: SkillId[] = [
   "taming",
   "magery",
   "farming",
+  "archery",
 ];
 
 export const ITEM_META: Record<

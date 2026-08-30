@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { spawnCorpsePile, takeGoldFromPile } from "./piles.ts";
 import { verbsFor } from "./context.ts";
-import { LIVE_SKILLS, SKILL_META } from "./catalog.ts";
+import { FAUNA_META, LIVE_SKILLS, SKILL_META } from "./catalog.ts";
+import { weaponDmg } from "./rare.ts";
 import { setWorld } from "./live.ts";
 import { tickPlayer, you, commandLoot } from "./player.ts";
 import { createWorld } from "./world.ts";
@@ -198,8 +199,8 @@ test("care - your own beast offers the Companions page, a wild one does not", ()
 test("skills - the books hold every surviving skill, placeholders at zero", () => {
   const w = createWorld();
   const ids = Object.keys(SKILL_META) as SkillId[];
-  assert.equal(ids.length, 23, "11 live + 12 placeholders");
-  assert.equal(LIVE_SKILLS.length, 11);
+  assert.equal(ids.length, 23, "12 live + 11 placeholders");
+  assert.equal(LIVE_SKILLS.length, 12);
   for (const id of ids) {
     assert.equal(typeof w.player.skills[id], "number", `${id} on the books`);
     if (!LIVE_SKILLS.includes(id)) assert.equal(w.player.skills[id], 0, `${id} starts untaught`);
@@ -207,4 +208,28 @@ test("skills - the books hold every surviving skill, placeholders at zero", () =
   // Anatomy and Cooking stay — quiet Emberhall originals, still live.
   assert.ok(LIVE_SKILLS.includes("anatomy"));
   assert.ok(LIVE_SKILLS.includes("cooking"));
+});
+
+test("archery - a bow strikes from afar, the skill wakes, swords stays asleep", () => {
+  const w = createWorld();
+  const p = you(w)!;
+  w.player.wear.main = "bow";
+  w.player.skills.archery = 60; // a practiced arm — sure shots for a sure test
+  const hare = corpse("hare");
+  hare.task = "idle";
+  hare.hp = FAUNA_META.hare.hp;
+  hare.x = p.x + 6;
+  hare.z = p.z;
+  w.fauna.push(hare);
+  const hpBefore = p.hp;
+  w.player.intent = { kind: "hunt", tx: Math.round(hare.x), ty: Math.round(hare.z), targetId: hare.id, spell: null };
+  withRoll(0.5, () => {
+    for (let i = 0; i < 12 && hare.task !== "dead"; i++) tickPlayer(w, 0.6);
+  });
+  assert.ok(hare.hp < FAUNA_META.hare.hp, "arrows landed from six tiles out");
+  assert.ok(Math.hypot(p.x - hare.x, p.z - hare.z) > 2, "the hunter never closed to arm's reach");
+  assert.ok(w.player.skills.archery > 60, "archery woke with the shots");
+  assert.equal(w.player.skills.swords, 12, "swords stayed asleep");
+  assert.equal(p.hp, hpBefore, "no teeth answered an arrow from afar");
+  assert.equal(weaponDmg("bow"), 8, "a bow bites harder than a fist");
 });

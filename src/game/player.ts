@@ -463,20 +463,29 @@ function huntNow(world: World, p: Person) {
     world.player.intent.kind = "none";
     return "It fled.";
   }
+  const bow = effectiveMain(world) === "bow";
+  const dist = Math.hypot(p.x - c.x, p.z - c.z);
   playSfx("hunt", 0.52);
   const blade = weaponDmg(effectiveMain(world));
   const mods = rareMods(world);
-  const chance = successChance(world.player.skills.swords, 10 + FAUNA_META[c.kind].hp / 2);
+  const skill = bow ? world.player.skills.archery : world.player.skills.swords;
+  const chance = successChance(skill, 10 + FAUNA_META[c.kind].hp / 2);
   const ok = Math.random() < chance + 0.2 + mods.hit / 100;
-  let dmg = ok ? blade + Math.floor(world.player.skills.swords / 12) : Math.max(1, Math.floor(blade / 3));
+  let dmg = ok ? blade + Math.floor(skill / 12) : Math.max(1, Math.floor(blade / 3));
   dmg += mods.dmg;
   const slayerMul = mods.vs[c.kind];
   if (slayerMul) dmg = Math.floor(dmg * slayerMul);
   const arm = armorOf(world.player.wear) + mods.armor;
   c.hp -= dmg;
-  if (RETALIATE_KINDS.has(c.kind)) p.hp = Math.max(0, p.hp - Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2)));
-  tryGain(world, "swords", ok, true);
-  tryGain(world, "anatomy", ok, true);
+  // Teeth only answer when they can reach you — an arrow from afar draws none.
+  if (RETALIATE_KINDS.has(c.kind) && (!bow || dist < 1.8)) p.hp = Math.max(0, p.hp - Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2)));
+  if (bow) {
+    p.facing = Math.atan2(c.x - p.x, c.z - p.z);
+    tryGain(world, "archery", ok, true);
+  } else {
+    tryGain(world, "swords", ok, true);
+    tryGain(world, "anatomy", ok, true);
+  }
   if (c.hp <= 0) {
     c.hp = 0;
     c.task = "dead";
@@ -492,6 +501,7 @@ function huntNow(world: World, p: Person) {
     }
     return `The ${FAUNA_META[c.kind].label.toLowerCase()} falls.`;
   }
+  if (bow) return ok ? `Your arrow finds the ${FAUNA_META[c.kind].label.toLowerCase()}.` : `Your arrow grazes the ${FAUNA_META[c.kind].label.toLowerCase()}.`;
   return `You strike the ${FAUNA_META[c.kind].label.toLowerCase()}.`;
 }
 
@@ -544,6 +554,8 @@ function skinNow(world: World, p: Person) {
 }
 
 let swingAcc = 0;
+/** Arrow-shot for a hunting bow — shorter than a mage's reach, longer than a blade's. */
+const BOW_RANGE = 10;
 
 export const WORK_BEAT = 0.72;
 export const CAST_WINDUP = 0.92;
@@ -623,7 +635,11 @@ export function tickPlayer(world: World, dt: number): string | null {
   }
   if (intent.kind === "tame" || intent.kind === "hunt") {
     const c = world.fauna.find((x) => x.id === intent.targetId);
-    if (c && Math.hypot(p.x - c.x, p.z - c.z) < 1.8) p.path = [];
+    if (c) {
+      // A bow stops at arrow-shot; anything else must close to arm's reach.
+      const reach = intent.kind === "hunt" && effectiveMain(world) === "bow" ? BOW_RANGE : 1.8;
+      if (Math.hypot(p.x - c.x, p.z - c.z) < reach) p.path = [];
+    }
   }
   if (intent.kind === "cast") {
     if (intent.spell === "magicarrow" || intent.spell === "fireball") {

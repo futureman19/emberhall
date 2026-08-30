@@ -230,6 +230,7 @@ export function effectiveMain(world: World): ItemId | null {
 export function weaponDmg(id: ItemId | null): number {
   if (id === "sword") return 10;
   if (id === "mace") return 9;
+  if (id === "bow") return 8;
   if (id === "club") return 7;
   if (id === "hatchet") return 6;
   if (id === "staff") return 5;
