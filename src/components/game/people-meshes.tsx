@@ -267,11 +267,6 @@ function PalmFlame() {
 function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Partial<Record<WearSlot, ItemId>> }) {
   const ghost = Boolean(p.ghost);
   const intent = useGame((s) => s.snap.player.intent);
-  const working =
-    p.isPlayer &&
-    !ghost &&
-    !p.path.length &&
-    (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till");
   const bob = Math.sin(p.bob) * (ghost ? 0.08 : 0.04);
   const walkSwing = p.path.length ? Math.sin(p.bob) * 0.35 : 0;
   const left = useRef<Group>(null);

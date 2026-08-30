@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import {
@@ -277,11 +277,19 @@ test("baselineComparison fails closed on malformed or wrong-shape baselines", ()
 });
 
 test("parseSmokeArgs defaults", () => {
-  assert.deepEqual(parseSmokeArgs([], {}), {
+  assert.deepEqual(parseSmokeArgs([], {}, "/workspace"), {
     url: "http://127.0.0.1:8080/",
-    outPng: "/workspace/screenshots/app-builder-preview.png",
+    outPng: resolve("/workspace/screenshots/app-builder-preview.png"),
     baseline: "",
   });
+});
+
+test("parseSmokeArgs supports a configurable cross-platform output directory", () => {
+  const outputDir = resolve("qa-artifacts");
+  assert.equal(
+    parseSmokeArgs([], { BROWSER_SMOKE_OUTPUT_DIR: outputDir }, "/ignored").outPng,
+    resolve(outputDir, "app-builder-preview.png"),
+  );
 });
 
 test("parseSmokeArgs consumes --baseline without shifting positionals", () => {
@@ -377,10 +385,11 @@ test("browser-smoke wires the guard and verdict helpers", () => {
   assert.match(src, /from "\.\/browser-smoke-verdict\.mjs"/);
   assert.match(src, /const args = parseSmokeArgs\(process\.argv\.slice\(2\), process\.env\)/);
   assert.match(src, /const url = checkedUrl\(args\.url\)/);
-  assert.match(src, /const outPng = checkedOutputPath\(args\.outPng, \["\/workspace"\]\)/);
-  assert.match(src, /const mobilePng = checkedOutputPath\(derived\.mobilePng, \["\/workspace"\]\)/);
-  assert.match(src, /const outJson = checkedOutputPath\(derived\.verdictJson, \["\/workspace"\]/);
-  assert.match(src, /checkedOutputPath\(realpathSync\(args\.baseline\), \["\/workspace"\]/);
+  assert.match(src, /const outputRoot = resolve\(process\.env\.BROWSER_SMOKE_OUTPUT_DIR \|\| process\.cwd\(\)\)/);
+  assert.match(src, /const outPng = checkedOutputPath\(args\.outPng, allowedOutputDirs\)/);
+  assert.match(src, /const mobilePng = checkedOutputPath\(derived\.mobilePng, allowedOutputDirs\)/);
+  assert.match(src, /const outJson = checkedOutputPath\(derived\.verdictJson, allowedOutputDirs/);
+  assert.match(src, /checkedOutputPath\(realpathSync\(args\.baseline\), allowedOutputDirs/);
   assert.match(src, /baselinePath === outJson/);
   assert.match(src, /normalizedBodyTextHash\(/);
   assert.match(src, /bodyTextPrefix\(/);

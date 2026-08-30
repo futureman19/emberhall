@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { resolve } from "node:path";
 export function normalizeBodyText(text) {
   return String(text ?? "")
     .replace(/\s+/g, " ")
@@ -14,7 +15,7 @@ const IDENTITY_PREFIX_LEN = 64;
 export function bodyTextPrefix(text) {
   return normalizeBodyText(text).slice(0, IDENTITY_PREFIX_LEN);
 }
-export function parseSmokeArgs(argv, env = {}) {
+export function parseSmokeArgs(argv, env = {}, cwd = process.cwd()) {
   const positional = [];
   let baseline = env.BROWSER_SMOKE_BASELINE || "";
   for (let i = 0; i < argv.length; i++) {
@@ -33,9 +34,12 @@ export function parseSmokeArgs(argv, env = {}) {
       positional.push(arg);
     }
   }
+  const outputRoot = resolve(env.BROWSER_SMOKE_OUTPUT_DIR || cwd);
   return {
     url: positional[0] || "http://127.0.0.1:8080/",
-    outPng: positional[1] || "/workspace/screenshots/app-builder-preview.png",
+    outPng:
+      positional[1] ||
+      resolve(outputRoot, env.BROWSER_SMOKE_OUTPUT_DIR ? "app-builder-preview.png" : "screenshots/app-builder-preview.png"),
     baseline,
   };
 }

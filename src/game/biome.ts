@@ -73,7 +73,7 @@ export function biomeWeights(x: number, y: number): BiomeW {
   jungle *= damp;
   desert *= damp;
 
-  let vale = Math.max(0.12, 1 - (tundra + taiga + marsh + jungle + desert)) + hall * 0.55;
+  const vale = Math.max(0.12, 1 - (tundra + taiga + marsh + jungle + desert)) + hall * 0.55;
   const s = vale + tundra + taiga + marsh + jungle + desert;
   return {
     vale: vale / s,

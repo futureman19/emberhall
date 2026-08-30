@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { mkdirSync, readFileSync, realpathSync, statSync, writeFileSync } from "node:fs";
-import { dirname } from "node:path";
+import { dirname, resolve } from "node:path";
 import { chromium } from "playwright";
 import { checkedOutputPath, checkedUrl } from "./browser-guard.mjs";
 import { computeBrandWarnings } from "./brand-check.mjs";
@@ -27,10 +27,14 @@ if (args.error) {
 }
 
 const url = checkedUrl(args.url);
-const outPng = checkedOutputPath(args.outPng, ["/workspace"]);
+// Local runs default to <repo>/screenshots; sandboxes or CI can set an
+// absolute BROWSER_SMOKE_OUTPUT_DIR without weakening the path guard.
+const outputRoot = resolve(process.env.BROWSER_SMOKE_OUTPUT_DIR || process.cwd());
+const allowedOutputDirs = [outputRoot];
+const outPng = checkedOutputPath(args.outPng, allowedOutputDirs);
 const derived = derivedPaths(outPng);
-const mobilePng = checkedOutputPath(derived.mobilePng, ["/workspace"]);
-const outJson = checkedOutputPath(derived.verdictJson, ["/workspace"], "verdict JSON");
+const mobilePng = checkedOutputPath(derived.mobilePng, allowedOutputDirs);
+const outJson = checkedOutputPath(derived.verdictJson, allowedOutputDirs, "verdict JSON");
 
 const MAX_BASELINE_BYTES = 1024 * 1024;
 const baselineRequested = Boolean(args.baseline);
@@ -38,7 +42,7 @@ let baselinePath = null;
 let baselineResolveError = null;
 if (baselineRequested) {
   try {
-    baselinePath = checkedOutputPath(realpathSync(args.baseline), ["/workspace"], "baseline");
+    baselinePath = checkedOutputPath(realpathSync(args.baseline), allowedOutputDirs, "baseline");
   } catch (err) {
     baselineResolveError = err?.code ?? "unresolvable path";
   }

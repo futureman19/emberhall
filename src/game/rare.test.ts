@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { ITEM_META } from "./catalog.ts";
-import { commandCraft, recipeById } from "./craft.ts";
+import { commandCraft } from "./craft.ts";
 import {
   AFFIXES,
   affixesFor,

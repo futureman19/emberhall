@@ -11,7 +11,7 @@ import { successChance, tryGain } from "./skills.ts";
 import { playSfx } from "./vale-sfx.ts";
 import { completeObjective, log } from "./world.ts";
 import { effectiveMain, rareMods, rareName, rollKillRare, weaponDmg } from "./rare.ts";
-import type { ItemId, Person, RareItem, SkillId, WearSlot, World } from "./types.ts";
+import type { ItemId, Person, SkillId, WearSlot, World } from "./types.ts";
 
 export function you(world: World) {
   return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
@@ -418,7 +418,7 @@ function isAdjacent(ax: number, ay: number, bx: number, by: number) {
   return Math.max(Math.abs(ax - bx), Math.abs(ay - by)) <= 1;
 }
 
-function chopNow(world: World, p: Person) {
+function chopNow(world: World) {
   const { tx, ty } = world.player.intent;
   const t = world.tiles[ty]?.[tx];
   if (!t || t.kind !== "tree") {
@@ -438,7 +438,7 @@ function chopNow(world: World, p: Person) {
   return gain ? `A log. ${gain}.` : "A log.";
 }
 
-function mineNow(world: World, p: Person) {
+function mineNow(world: World) {
   const { tx, ty } = world.player.intent;
   const t = world.tiles[ty]?.[tx];
   if (!t || t.kind !== "rock") {
@@ -660,8 +660,8 @@ export function tickPlayer(world: World, dt: number): string | null {
     }
     playSfx(intent.kind === "chop" ? "chop" : "mine", 0.55);
     burstChips(world, intent.tx, intent.ty, intent.kind);
-    if (intent.kind === "chop") return chopNow(world, p);
-    return mineNow(world, p);
+    if (intent.kind === "chop") return chopNow(world);
+    return mineNow(world);
   }
   if (intent.kind === "cast") {
     const c = world.fauna.find((x) => x.id === intent.targetId);

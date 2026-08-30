@@ -593,6 +593,8 @@ function occupant(buildings: Building[], x: number, z: number) {
   return null;
 }
 
+// This geometry query intentionally shares the canonical private SPECS table.
+// eslint-disable-next-line react-refresh/only-export-components
 export function insideLabel(buildings: Building[], x: number, z: number) {
   const b = occupant(buildings, x, z);
   return b ? b.kind : null;
