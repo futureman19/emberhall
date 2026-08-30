@@ -5,7 +5,7 @@ import { ARROW_RANGE, FIREBALL_RANGE, burstDeath, castNow, maxMana, tickMana } f
 import { pickPetName } from "./names.ts";
 import { petLabel } from "./pets.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
-import { addToPile, takeFromPile } from "./piles.ts";
+import { addToPile, spawnCorpsePile, takeFromPile } from "./piles.ts";
 import { mulberry32 } from "./rng.ts";
 import { successChance, tryGain } from "./skills.ts";
 import { playSfx } from "./vale-sfx.ts";
@@ -469,6 +469,7 @@ function huntNow(world: World, p: Person) {
     c.corpseUntil = world.hour + 8;
     world.player.intent.kind = "none";
     completeObjective(world, "hunt");
+    spawnCorpsePile(world, c);
     const found = rollKillRare(world, c.kind, Math.random);
     if (found) {
       world.player.rares.push(found);

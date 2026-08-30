@@ -39,15 +39,37 @@ export function addToPile(
   return pile;
 }
 
+function randInt(min: number, max: number) {
+  return min + Math.floor(Math.random() * (max - min + 1));
+}
+
+/**
+ * What the fallen carried, spilled where they died — rolled from the
+ * loot table. The butcher's share (hide and meat) is NOT here: that
+ * belongs to skinning. A creature with nothing to leave makes no pile.
+ */
 export function spawnCorpsePile(world: World, c: Creature) {
   const meta = FAUNA_META[c.kind];
-  const items: Partial<Record<ItemId, number>> = meta.hasCorpse === false
-    ? {}
-    : {
-        hide: meta.hide ?? 1,
-        meat: meta.meat ?? (c.kind === "hare" ? 1 : 2),
-      };
-  addToPile(world, Math.round(c.x), Math.round(c.z), items, "corpse", world.hour + 8, `${c.kind} corpse`);
+  const items: Partial<Record<ItemId, number>> = {};
+  for (const d of meta.loot ?? []) {
+    if (Math.random() < d.chance) items[d.item] = (items[d.item] ?? 0) + randInt(d.min, d.max);
+  }
+  const g = meta.gold;
+  const gold = g && Math.random() < g.chance ? randInt(g.min, g.max) : 0;
+  if (Object.keys(items).length === 0 && gold === 0) return;
+  addToPile(world, Math.round(c.x), Math.round(c.z), items, "corpse", world.hour + 8, `${c.kind} corpse`, gold);
+}
+
+/** Lift just the coin from a pile, leaving the rest. */
+export function takeGoldFromPile(world: World, id: string) {
+  const pile = world.piles.find((p) => p.id === id);
+  if (!pile || pile.gold <= 0) return 0;
+  world.gold += pile.gold;
+  const taken = pile.gold;
+  pile.gold = 0;
+  const left = Object.values(pile.items).some((n) => (n ?? 0) > 0);
+  if (!left) world.piles = world.piles.filter((p) => p.id !== id);
+  return taken;
 }
 
 export function tickPiles(world: World) {

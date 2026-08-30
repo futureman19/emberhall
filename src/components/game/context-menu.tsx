@@ -36,6 +36,7 @@ export function PileGump() {
   const id = useGame((s) => s.openPileId);
   const piles = useGame((s) => s.snap.piles);
   const take = useGame((s) => s.takePile);
+  const takeGold = useGame((s) => s.takePileGold);
   const pile = piles.find((p) => p.id === id);
   if (!pile) return null;
   const items = (Object.keys(pile.items) as ItemId[]).filter((k) => (pile.items[k] ?? 0) > 0);
@@ -43,6 +44,18 @@ export function PileGump() {
     <div className="pointer-events-auto absolute top-16 left-3 w-[min(100%-1.5rem,18rem)] rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4">
       <p className="font-display text-sm text-fg">{pile.label}</p>
       <ul className="mt-2 space-y-1">
+        {pile.gold > 0 && (
+          <li>
+            <button
+              type="button"
+              onClick={() => takeGold(pile.id)}
+              className="flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border border-gold/40 bg-surface-2 px-3 text-sm text-gold"
+            >
+              <span>Gold</span>
+              <span>{pile.gold}g</span>
+            </button>
+          </li>
+        )}
         {items.map((item) => (
           <li key={item}>
             <button

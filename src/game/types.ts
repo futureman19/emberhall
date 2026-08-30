@@ -49,6 +49,8 @@ export type ItemId =
   | "gauntlets"
   | "gorget"
   | "heater"
+  | "rabbit_foot"
+  | "orc_tusk"
   | "meat"
   | "hide"
   | "bandage"
@@ -366,6 +368,21 @@ export interface RareItem {
 export interface LogLine {
   t: number;
   text: string;
+}
+
+/** One possible find in a corpse — chance to appear, min–max count. */
+export interface LootDrop {
+  item: ItemId;
+  chance: number;
+  min: number;
+  max: number;
+}
+
+/** A corpse's purse — chance to hold coin, min–max sats. */
+export interface LootGold {
+  chance: number;
+  min: number;
+  max: number;
 }
 
 export interface World {

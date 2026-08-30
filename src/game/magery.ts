@@ -2,6 +2,7 @@ import { PLACES, regionAt } from "./atlas.ts";
 import { FAUNA_META, ITEM_META, SECONDS_PER_HOUR } from "./catalog.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { spawnCorpsePile } from "./piles.ts";
+import { rareName, rollKillRare } from "./rare.ts";
 import { successChance, tryGain } from "./skills.ts";
 import { playSfx } from "./vale-sfx.ts";
 import { completeObjective, nid, revealAround } from "./world.ts";
@@ -359,6 +360,11 @@ export function castNow(world: World): string | null {
       spawnCorpsePile(world, c);
       completeObjective(world, "hunt");
       completeObjective(world, spell === "fireball" ? "fireball" : "arrow");
+      const found = rollKillRare(world, c.kind, Math.random);
+      if (found) {
+        world.player.rares.push(found);
+        return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()} falls. Something glints in the kill — ${rareName(found)}!`, gain);
+      }
       return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()} falls.`, gain);
     }
     return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()} is struck.`, gain);

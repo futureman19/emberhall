@@ -37,7 +37,7 @@ import {
   you,
 } from "./player.ts";
 import { commandNamePet } from "./pets.ts";
-import { takeFromPile } from "./piles.ts";
+import { takeFromPile, takeGoldFromPile } from "./piles.ts";
 import { clearSave, hasSave, loadSave, writeSave } from "./save.ts";
 import { recruitPerson, setSpeed, tickWorld } from "./sim.ts";
 import { completeObjective, placeBuilding } from "./world.ts";
@@ -100,6 +100,7 @@ interface GameUI {
   unbankItem: (item: ItemId) => void;
   openPile: (id: string) => void;
   takePile: (id: string, item?: ItemId) => void;
+  takePileGold: (id: string) => void;
   travel: (destId: string) => void;
   closeGate: () => void;
   openBookGump: () => void;
@@ -517,6 +518,12 @@ export const useGame = create<GameUI>((set, get) => ({
   takePile: (id, item) => {
     const err = takeFromPile(getWorld(), id, item);
     if (err) get().flash(err);
+    const pile = getWorld().piles.find((p) => p.id === id);
+    set({ snap: snapshot(), openPileId: pile ? id : null });
+  },
+  takePileGold: (id) => {
+    const taken = takeGoldFromPile(getWorld(), id);
+    if (taken > 0) get().flash(`${taken} gold.`);
     const pile = getWorld().piles.find((p) => p.id === id);
     set({ snap: snapshot(), openPileId: pile ? id : null });
   },

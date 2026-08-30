@@ -1,4 +1,4 @@
-import type { BuildingKind, ClassId, FaunaKind, ItemId, NpcRole, Notoriety, ResourceTag, SkillId, WearSlot } from "./types.ts";
+import type { BuildingKind, ClassId, FaunaKind, ItemId, LootDrop, LootGold, NpcRole, Notoriety, ResourceTag, SkillId, WearSlot } from "./types.ts";
 
 export const SECONDS_PER_HOUR = 36;
 
@@ -53,6 +53,8 @@ export const ITEM_META: Record<
   gauntlets: { label: "Gauntlets", tool: false, slot: "hands", fill: "var(--color-muted)", armor: 2, buy: 24, sell: 10, tags: ["metal", "armor"] },
   gorget: { label: "Gorget", tool: false, slot: "neck", fill: "var(--color-muted)", armor: 1, buy: 20, sell: 8, tags: ["metal", "armor"] },
   heater: { label: "Iron shield", tool: false, slot: "off", fill: "var(--color-muted)", armor: 4, buy: 32, sell: 14, tags: ["metal", "armor"] },
+  rabbit_foot: { label: "Rabbit's foot", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 10, sell: 5, tags: ["magic"] },
+  orc_tusk: { label: "Orc tusk", tool: false, slot: null, fill: "var(--color-fg)", armor: 0, buy: 8, sell: 4, tags: ["gem"] },
   meat: { label: "Raw meat", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 4, sell: 2, tags: ["meat", "food"] },
   hide: { label: "Hide", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 4, tags: ["hide"] },
   bandage: { label: "Bandage", tool: false, slot: null, fill: "var(--color-fg)", armor: 0, buy: 3, sell: 1, tags: ["cloth"] },
@@ -97,11 +99,11 @@ export const CLASS_META: Record<ClassId, { label: string; color: string }> = {
   merchant: { label: "Merchant", color: "#a88848" },
 };
 
-export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp: number; dmg: number; eats: ResourceTag[]; meat?: number; hide?: number; hasCorpse?: boolean }> = {
-  hare: { label: "Hare", tameDiff: 8, hp: 8, dmg: 1, eats: ["plant"], meat: 1, hide: 1 },
+export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp: number; dmg: number; eats: ResourceTag[]; meat?: number; hide?: number; hasCorpse?: boolean; loot?: LootDrop[]; gold?: LootGold }> = {
+  hare: { label: "Hare", tameDiff: 8, hp: 8, dmg: 1, eats: ["plant"], meat: 1, hide: 1, loot: [{ item: "rabbit_foot", chance: 0.35, min: 1, max: 1 }] },
   hart: { label: "Hart", tameDiff: 22, hp: 22, dmg: 4, eats: ["plant"], meat: 2, hide: 1 },
   wolf: { label: "Wolf", tameDiff: 40, hp: 28, dmg: 8, eats: ["meat"], meat: 2, hide: 1 },
-  wight: { label: "Wight", tameDiff: 99, hp: 36, dmg: 10, eats: ["meat"], hasCorpse: false },
+  wight: { label: "Wight", tameDiff: 99, hp: 36, dmg: 10, eats: ["meat"], hasCorpse: false, loot: [{ item: "nightshade", chance: 0.3, min: 1, max: 2 }, { item: "pearl", chance: 0.25, min: 1, max: 1 }, { item: "moss", chance: 0.2, min: 1, max: 1 }, { item: "relic", chance: 0.06, min: 1, max: 1 }], gold: { chance: 0.4, min: 4, max: 10 } },
 
   brambleback_stag: { label: "Brambleback Stag", tameDiff: 55, hp: 30, dmg: 6, eats: ["plant"], meat: 2, hide: 1 },
   ironwood_boar: { label: "Ironwood Boar", tameDiff: 50, hp: 24, dmg: 7, eats: ["meat"], meat: 2, hide: 1 },
@@ -119,17 +121,17 @@ export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp
   brine_hound: { label: "Brine Hound", tameDiff: 64, hp: 34, dmg: 9, eats: ["meat"], meat: 2, hide: 1 },
   dune_crawler: { label: "Dune Crawler", tameDiff: 70, hp: 30, dmg: 7, eats: ["meat"], meat: 2, hide: 2 },
   coal_salamander: { label: "Coal Salamander", tameDiff: 66, hp: 28, dmg: 7, eats: ["meat"], meat: 2, hide: 1 },
-  orebeetle: { label: "Orebeetle", tameDiff: 48, hp: 26, dmg: 5, eats: ["plant", "meat"], meat: 1, hide: 1 },
+  orebeetle: { label: "Orebeetle", tameDiff: 48, hp: 26, dmg: 5, eats: ["plant", "meat"], meat: 1, hide: 1, loot: [{ item: "ore", chance: 0.35, min: 1, max: 2 }] },
 
-  stonecrawl_spider: { label: "Stonecrawl Spider", tameDiff: 61, hp: 22, dmg: 8, eats: ["meat"], meat: 2, hide: 1 },
-  greybarrow_wightling: { label: "Greybarrow Wightling", tameDiff: 99, hp: 28, dmg: 9, eats: ["meat"], hasCorpse: false },
+  stonecrawl_spider: { label: "Stonecrawl Spider", tameDiff: 61, hp: 22, dmg: 8, eats: ["meat"], meat: 2, hide: 1, loot: [{ item: "silk", chance: 0.4, min: 1, max: 2 }] },
+  greybarrow_wightling: { label: "Greybarrow Wightling", tameDiff: 99, hp: 28, dmg: 9, eats: ["meat"], hasCorpse: false, loot: [{ item: "nightshade", chance: 0.25, min: 1, max: 1 }, { item: "pearl", chance: 0.15, min: 1, max: 1 }, { item: "relic", chance: 0.03, min: 1, max: 1 }], gold: { chance: 0.25, min: 2, max: 6 } },
   barrow_hound: { label: "Barrow Hound", tameDiff: 73, hp: 46, dmg: 11, eats: ["meat"], meat: 3, hide: 2 },
-  ashen_banshee: { label: "Ashen Banshee", tameDiff: 99, hp: 34, dmg: 10, eats: ["meat"], hasCorpse: false },
-  bonecrow: { label: "Bonecrow", tameDiff: 88, hp: 26, dmg: 8, eats: ["meat"], hasCorpse: false },
+  ashen_banshee: { label: "Ashen Banshee", tameDiff: 99, hp: 34, dmg: 10, eats: ["meat"], hasCorpse: false, loot: [{ item: "pearl", chance: 0.3, min: 1, max: 1 }, { item: "nightshade", chance: 0.25, min: 1, max: 1 }, { item: "relic", chance: 0.08, min: 1, max: 1 }], gold: { chance: 0.35, min: 3, max: 8 } },
+  bonecrow: { label: "Bonecrow", tameDiff: 88, hp: 26, dmg: 8, eats: ["meat"], hasCorpse: false, loot: [{ item: "nightshade", chance: 0.22, min: 1, max: 1 }, { item: "relic", chance: 0.02, min: 1, max: 1 }] },
 
-  brine_troll: { label: "Brine Troll", tameDiff: 99, hp: 78, dmg: 16, eats: ["meat"], meat: 4, hide: 3 },
-  stonefang_ogre: { label: "Stonefang Ogre", tameDiff: 99, hp: 90, dmg: 18, eats: ["meat"], meat: 4, hide: 3 },
-  orc_marauder: { label: "Orc Marauder", tameDiff: 95, hp: 66, dmg: 15, eats: ["meat"], meat: 3, hide: 2 },
+  brine_troll: { label: "Brine Troll", tameDiff: 99, hp: 78, dmg: 16, eats: ["meat"], meat: 4, hide: 3, loot: [{ item: "mace", chance: 0.15, min: 1, max: 1 }, { item: "staff", chance: 0.12, min: 1, max: 1 }, { item: "ring", chance: 0.12, min: 1, max: 1 }, { item: "pendant", chance: 0.1, min: 1, max: 1 }, { item: "moss", chance: 0.25, min: 1, max: 2 }], gold: { chance: 0.6, min: 5, max: 12 } },
+  stonefang_ogre: { label: "Stonefang Ogre", tameDiff: 99, hp: 90, dmg: 18, eats: ["meat"], meat: 4, hide: 3, loot: [{ item: "mace", chance: 0.2, min: 1, max: 1 }, { item: "club", chance: 0.15, min: 1, max: 1 }, { item: "sword", chance: 0.12, min: 1, max: 1 }, { item: "helm", chance: 0.15, min: 1, max: 1 }, { item: "mail", chance: 0.08, min: 1, max: 1 }, { item: "greaves", chance: 0.1, min: 1, max: 1 }], gold: { chance: 0.7, min: 6, max: 15 } },
+  orc_marauder: { label: "Orc Marauder", tameDiff: 95, hp: 66, dmg: 15, eats: ["meat"], meat: 3, hide: 2, loot: [{ item: "club", chance: 0.18, min: 1, max: 1 }, { item: "knife", chance: 0.12, min: 1, max: 1 }, { item: "hatchet", chance: 0.1, min: 1, max: 1 }, { item: "mace", chance: 0.1, min: 1, max: 1 }, { item: "hood", chance: 0.1, min: 1, max: 1 }, { item: "gloves", chance: 0.08, min: 1, max: 1 }, { item: "boots", chance: 0.08, min: 1, max: 1 }, { item: "orc_tusk", chance: 0.3, min: 1, max: 1 }, { item: "nightshade", chance: 0.15, min: 1, max: 2 }], gold: { chance: 0.6, min: 3, max: 9 } },
 };
 
 /** Tag lookup on the catalog — the single place items declare what they ARE. */
@@ -232,6 +234,7 @@ export function emptyPack(): Record<ItemId, number> {
   return {
     hatchet: 1, knife: 1, pick: 1, hoe: 1, log: 0, board: 0, ore: 0, ingot: 0, club: 0, shield: 0,
     staff: 0, bow: 0, torch: 0, crate: 0, cap: 0, cuirass: 0, sword: 0, mace: 0, gauntlets: 0, gorget: 0, heater: 0,
+    rabbit_foot: 0, orc_tusk: 0,
     meat: 1, hide: 0, bandage: 3,
     tunic: 0, leather: 0, mail: 0, hood: 1, helm: 0, cloak: 0, gloves: 1, hose: 0, greaves: 0,
     boots: 0, pendant: 1, ring: 1, relic: 0, spellbook: 1, rune: 4, garlic: 12, ginseng: 12,
