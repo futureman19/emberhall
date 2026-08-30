@@ -41,6 +41,37 @@ function rareBonus(rare: RareItem, key: "dmg" | "armor"): number {
   return rare.affixes.reduce((sum, a) => sum + (AFFIXES[a]?.[key] ?? 0), 0);
 }
 
+const ALL_SLOTS = ["main", "off", "head", "neck", "chest", "cloak", "hands", "finger", "legs", "feet"] as const;
+
+export interface DressedStats {
+  /** Main-hand damage, affixes included (bare hands = 2). */
+  dmg: number;
+  /** Total armor across every slot, affixes included. */
+  armor: number;
+  /** What the hand holds, readable ("a sword", a rare's name, "bare hands"). */
+  mainLabel: string;
+}
+
+/** One glance at how the body is dressed — the paperdoll's battle line. */
+export function dressedStats(world: World): DressedStats {
+  const { wear, wearRare, rares } = world.player;
+  const wornMainRare = wearRare.main ? (rares.find((r) => r.uid === wearRare.main) ?? null) : null;
+  const mainId = wornMainRare ? wornMainRare.base : (wear.main ?? null);
+  const dmg = weaponDmg(mainId) + (wornMainRare ? rareBonus(wornMainRare, "dmg") : 0);
+  const mainLabel = wornMainRare ? rareName(wornMainRare) : mainId ? ITEM_META[mainId].label : "bare hands";
+  let armor = 0;
+  for (const slot of ALL_SLOTS) {
+    const uid = wearRare[slot];
+    const rare = uid ? (rares.find((r) => r.uid === uid) ?? null) : null;
+    if (rare) armor += (ITEM_META[rare.base].armor ?? 0) + rareBonus(rare, "armor");
+    else {
+      const id = wear[slot];
+      if (id) armor += ITEM_META[id].armor ?? 0;
+    }
+  }
+  return { dmg, armor, mainLabel };
+}
+
 export interface GearCmp {
   stat: "damage" | "armor";
   delta: number;

@@ -17,7 +17,7 @@ import {
   weaponDmg,
 } from "./rare.ts";
 import { mulberry32 } from "./rng.ts";
-import { gearCompare, statLines, tagLine, worthLine } from "./iteminfo.ts";
+import { gearCompare, statLines, tagLine, worthLine, dressedStats } from "./iteminfo.ts";
 import { describeAffix } from "./rare.ts";
 import { commandEquip, commandEquipRare, commandUnequip, you } from "./player.ts";
 import { applyMintRare, applyRedeem, decodeBase64Json, decodeItemInscription, encodeRareInscription, inscriptionBase64 } from "./vault.ts";
@@ -269,4 +269,29 @@ test("compare - warded armor rares tip the armor line", () => {
   const w = createWorld();
   const bulwark: RareItem = { uid: "r2", base: "cuirass", affixes: ["of fortification"], seed: 1, hour: 0 };
   assert.deepEqual(gearCompare(w, "cuirass", bulwark), { stat: "armor", delta: 6, vsLabel: "nothing" });
+});
+
+test("doll - dressed stats read the whole body at a glance", () => {
+  const w = createWorld();
+  // Fresh: hatchet in hand (6), hood 1 + gloves 1 armor.
+  assert.deepEqual(dressedStats(w), { dmg: 6, armor: 2, mainLabel: "Hatchet" });
+  // Mail on the chest, sword in hand.
+  w.player.wear.chest = "mail";
+  w.player.wear.main = "sword";
+  assert.deepEqual(dressedStats(w), { dmg: 10, armor: 7, mainLabel: "Sword" });
+  // Bare hands count two damage and read honest.
+  w.player.wear.main = undefined;
+  assert.equal(dressedStats(w).dmg, 2);
+  assert.equal(dressedStats(w).mainLabel, "bare hands");
+});
+
+test("doll - worn wonders count their affixes on the battle line", () => {
+  const w = createWorld();
+  const rare = makeRare(w, "sword", ["of power"]);
+  w.player.rares.push(rare);
+  w.player.wear.main = undefined;
+  w.player.wearRare.main = rare.uid;
+  const s = dressedStats(w);
+  assert.equal(s.dmg, 10 + (AFFIXES["of power"].dmg ?? 0));
+  assert.equal(s.mainLabel, rareName(rare));
 });
