@@ -93,6 +93,31 @@ export type WearSlot =
   | "main"
   | "off";
 
+/**
+ * UO-style resource tags — items carry descriptive labels (WOOD, METAL,
+ * CLOTH...) and crafting/tool logic queries the tag, not the item id, so a
+ * new material slots into every existing recipe with no script changes.
+ * Material tags say what a thing IS; property tags say what it can DO.
+ */
+export type ResourceTag =
+  | "wood"
+  | "metal"
+  | "cloth"
+  | "leather"
+  | "hide"
+  | "meat"
+  | "plant"
+  | "reagent"
+  | "gem"
+  | "magic"
+  | "food"
+  | "seed"
+  | "fuel"
+  | "blade"
+  | "weapon"
+  | "armor"
+  | "tool";
+
 export type SpellId =
   | "nightsight"
   | "heal"

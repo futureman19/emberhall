@@ -1,4 +1,4 @@
-import type { BuildingKind, ClassId, FaunaKind, ItemId, NpcRole, Notoriety, SkillId, WearSlot } from "./types.ts";
+import type { BuildingKind, ClassId, FaunaKind, ItemId, NpcRole, Notoriety, ResourceTag, SkillId, WearSlot } from "./types.ts";
 
 export const SECONDS_PER_HOUR = 36;
 
@@ -30,60 +30,60 @@ export const SKILL_META: Record<SkillId, { label: string }> = {
 
 export const ITEM_META: Record<
   ItemId,
-  { label: string; tool: boolean; slot: WearSlot | null; fill: string; armor: number; buy: number; sell: number }
+  { label: string; tool: boolean; slot: WearSlot | null; fill: string; armor: number; buy: number; sell: number; tags: ResourceTag[] }
 > = {
-  hatchet: { label: "Hatchet", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 12, sell: 4 },
-  knife: { label: "Skinning knife", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 8, sell: 3 },
-  pick: { label: "Pick", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 14, sell: 5 },
-  hoe: { label: "Hoe", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 12, sell: 4 },
-  log: { label: "Log", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 2 },
-  board: { label: "Board", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 3 },
-  ore: { label: "Iron ore", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 0, sell: 3 },
-  ingot: { label: "Ingot", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 8, sell: 5 },
-  club: { label: "Club", tool: true, slot: "main", fill: "var(--color-gold)", armor: 0, buy: 10, sell: 6 },
-  shield: { label: "Wooden shield", tool: false, slot: "off", fill: "var(--color-gold)", armor: 2, buy: 18, sell: 10 },
-  staff: { label: "Staff", tool: true, slot: "main", fill: "var(--color-gold)", armor: 0, buy: 16, sell: 8 },
-  bow: { label: "Bow", tool: true, slot: "main", fill: "var(--color-gold)", armor: 0, buy: 22, sell: 10 },
-  torch: { label: "Torch", tool: false, slot: "main", fill: "var(--color-accent)", armor: 0, buy: 4, sell: 2 },
-  crate: { label: "Crate", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 12, sell: 7 },
-  cap: { label: "Wooden cap", tool: false, slot: "head", fill: "var(--color-gold)", armor: 1, buy: 14, sell: 6 },
-  cuirass: { label: "Wooden cuirass", tool: false, slot: "chest", fill: "var(--color-gold)", armor: 2, buy: 28, sell: 12 },
-  sword: { label: "Sword", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 36, sell: 16 },
-  mace: { label: "Mace", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 28, sell: 12 },
-  gauntlets: { label: "Gauntlets", tool: false, slot: "hands", fill: "var(--color-muted)", armor: 2, buy: 24, sell: 10 },
-  gorget: { label: "Gorget", tool: false, slot: "neck", fill: "var(--color-muted)", armor: 1, buy: 20, sell: 8 },
-  heater: { label: "Iron shield", tool: false, slot: "off", fill: "var(--color-muted)", armor: 4, buy: 32, sell: 14 },
-  meat: { label: "Raw meat", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 4, sell: 2 },
-  hide: { label: "Hide", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 4 },
-  bandage: { label: "Bandage", tool: false, slot: null, fill: "var(--color-fg)", armor: 0, buy: 3, sell: 1 },
-  tunic: { label: "Tunic", tool: false, slot: "chest", fill: "var(--color-gold)", armor: 1, buy: 18, sell: 6 },
-  leather: { label: "Leather tunic", tool: false, slot: "chest", fill: "var(--color-accent)", armor: 3, buy: 40, sell: 14 },
-  mail: { label: "Mail", tool: false, slot: "chest", fill: "var(--color-muted)", armor: 5, buy: 80, sell: 28 },
-  hood: { label: "Hood", tool: false, slot: "head", fill: "var(--color-accent)", armor: 1, buy: 10, sell: 3 },
-  helm: { label: "Helm", tool: false, slot: "head", fill: "var(--color-muted)", armor: 3, buy: 36, sell: 12 },
-  cloak: { label: "Travel cloak", tool: false, slot: "cloak", fill: "var(--color-accent)", armor: 1, buy: 32, sell: 12 },
-  gloves: { label: "Gloves", tool: false, slot: "hands", fill: "var(--color-gold)", armor: 1, buy: 12, sell: 4 },
-  hose: { label: "Hose", tool: false, slot: "legs", fill: "var(--color-muted)", armor: 1, buy: 14, sell: 5 },
-  greaves: { label: "Greaves", tool: false, slot: "legs", fill: "var(--color-muted)", armor: 3, buy: 40, sell: 14 },
-  boots: { label: "Boots", tool: false, slot: "feet", fill: "var(--color-accent)", armor: 1, buy: 16, sell: 6 },
-  pendant: { label: "Pendant", tool: false, slot: "neck", fill: "var(--color-gold)", armor: 0, buy: 22, sell: 8 },
-  ring: { label: "Ring", tool: false, slot: "finger", fill: "var(--color-gold)", armor: 0, buy: 18, sell: 7 },
-  relic: { label: "Barrow relic", tool: false, slot: "neck", fill: "var(--color-fg)", armor: 0, buy: 0, sell: 40 },
-  spellbook: { label: "Spellbook", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 60, sell: 20 },
-  rune: { label: "Blank rune", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 18, sell: 6 },
-  garlic: { label: "Garlic", tool: false, slot: null, fill: "var(--color-fg)", armor: 0, buy: 3, sell: 1 },
-  ginseng: { label: "Ginseng", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 3, sell: 1 },
-  silk: { label: "Spider silk", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 4, sell: 1 },
-  nightshade: { label: "Nightshade", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 5, sell: 2 },
-  pearl: { label: "Black pearl", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 5, sell: 2 },
-  moss: { label: "Blood moss", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 5, sell: 2 },
-  mandrake: { label: "Mandrake", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 6, sell: 2 },
-  ash: { label: "Sulfurous ash", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 4, sell: 1 },
-  cabbage: { label: "Cabbage", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 4, sell: 2 },
-  wheat: { label: "Wheat", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 3, sell: 1 },
-  cabbage_seed: { label: "Cabbage seed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 2, sell: 1 },
-  wheat_seed: { label: "Wheat seed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 2, sell: 1 },
-  garlic_seed: { label: "Garlic seed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 3, sell: 1 },
+  hatchet: { label: "Hatchet", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 12, sell: 4, tags: ["tool", "blade"] },
+  knife: { label: "Skinning knife", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 8, sell: 3, tags: ["tool", "blade"] },
+  pick: { label: "Pick", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 14, sell: 5, tags: ["tool"] },
+  hoe: { label: "Hoe", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 12, sell: 4, tags: ["tool"] },
+  log: { label: "Log", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 2, tags: ["wood", "fuel"] },
+  board: { label: "Board", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 3, tags: ["wood", "fuel"] },
+  ore: { label: "Iron ore", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 0, sell: 3, tags: ["metal"] },
+  ingot: { label: "Ingot", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 8, sell: 5, tags: ["metal"] },
+  club: { label: "Club", tool: true, slot: "main", fill: "var(--color-gold)", armor: 0, buy: 10, sell: 6, tags: ["wood", "weapon"] },
+  shield: { label: "Wooden shield", tool: false, slot: "off", fill: "var(--color-gold)", armor: 2, buy: 18, sell: 10, tags: ["wood", "armor"] },
+  staff: { label: "Staff", tool: true, slot: "main", fill: "var(--color-gold)", armor: 0, buy: 16, sell: 8, tags: ["wood", "weapon"] },
+  bow: { label: "Bow", tool: true, slot: "main", fill: "var(--color-gold)", armor: 0, buy: 22, sell: 10, tags: ["wood", "weapon"] },
+  torch: { label: "Torch", tool: false, slot: "main", fill: "var(--color-accent)", armor: 0, buy: 4, sell: 2, tags: ["wood", "fuel"] },
+  crate: { label: "Crate", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 12, sell: 7, tags: ["wood"] },
+  cap: { label: "Wooden cap", tool: false, slot: "head", fill: "var(--color-gold)", armor: 1, buy: 14, sell: 6, tags: ["wood", "armor"] },
+  cuirass: { label: "Wooden cuirass", tool: false, slot: "chest", fill: "var(--color-gold)", armor: 2, buy: 28, sell: 12, tags: ["wood", "armor"] },
+  sword: { label: "Sword", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 36, sell: 16, tags: ["metal", "blade", "weapon"] },
+  mace: { label: "Mace", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 28, sell: 12, tags: ["metal", "weapon"] },
+  gauntlets: { label: "Gauntlets", tool: false, slot: "hands", fill: "var(--color-muted)", armor: 2, buy: 24, sell: 10, tags: ["metal", "armor"] },
+  gorget: { label: "Gorget", tool: false, slot: "neck", fill: "var(--color-muted)", armor: 1, buy: 20, sell: 8, tags: ["metal", "armor"] },
+  heater: { label: "Iron shield", tool: false, slot: "off", fill: "var(--color-muted)", armor: 4, buy: 32, sell: 14, tags: ["metal", "armor"] },
+  meat: { label: "Raw meat", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 4, sell: 2, tags: ["meat", "food"] },
+  hide: { label: "Hide", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 4, tags: ["hide"] },
+  bandage: { label: "Bandage", tool: false, slot: null, fill: "var(--color-fg)", armor: 0, buy: 3, sell: 1, tags: ["cloth"] },
+  tunic: { label: "Tunic", tool: false, slot: "chest", fill: "var(--color-gold)", armor: 1, buy: 18, sell: 6, tags: ["cloth", "armor"] },
+  leather: { label: "Leather tunic", tool: false, slot: "chest", fill: "var(--color-accent)", armor: 3, buy: 40, sell: 14, tags: ["leather", "armor"] },
+  mail: { label: "Mail", tool: false, slot: "chest", fill: "var(--color-muted)", armor: 5, buy: 80, sell: 28, tags: ["metal", "armor"] },
+  hood: { label: "Hood", tool: false, slot: "head", fill: "var(--color-accent)", armor: 1, buy: 10, sell: 3, tags: ["cloth", "armor"] },
+  helm: { label: "Helm", tool: false, slot: "head", fill: "var(--color-muted)", armor: 3, buy: 36, sell: 12, tags: ["metal", "armor"] },
+  cloak: { label: "Travel cloak", tool: false, slot: "cloak", fill: "var(--color-accent)", armor: 1, buy: 32, sell: 12, tags: ["cloth", "armor"] },
+  gloves: { label: "Gloves", tool: false, slot: "hands", fill: "var(--color-gold)", armor: 1, buy: 12, sell: 4, tags: ["cloth", "armor"] },
+  hose: { label: "Hose", tool: false, slot: "legs", fill: "var(--color-muted)", armor: 1, buy: 14, sell: 5, tags: ["cloth", "armor"] },
+  greaves: { label: "Greaves", tool: false, slot: "legs", fill: "var(--color-muted)", armor: 3, buy: 40, sell: 14, tags: ["metal", "armor"] },
+  boots: { label: "Boots", tool: false, slot: "feet", fill: "var(--color-accent)", armor: 1, buy: 16, sell: 6, tags: ["leather", "armor"] },
+  pendant: { label: "Pendant", tool: false, slot: "neck", fill: "var(--color-gold)", armor: 0, buy: 22, sell: 8, tags: ["gem"] },
+  ring: { label: "Ring", tool: false, slot: "finger", fill: "var(--color-gold)", armor: 0, buy: 18, sell: 7, tags: ["metal", "gem"] },
+  relic: { label: "Barrow relic", tool: false, slot: "neck", fill: "var(--color-fg)", armor: 0, buy: 0, sell: 40, tags: ["magic", "gem"] },
+  spellbook: { label: "Spellbook", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 60, sell: 20, tags: ["magic"] },
+  rune: { label: "Blank rune", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 18, sell: 6, tags: ["magic"] },
+  garlic: { label: "Garlic", tool: false, slot: null, fill: "var(--color-fg)", armor: 0, buy: 3, sell: 1, tags: ["reagent", "plant", "food"] },
+  ginseng: { label: "Ginseng", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 3, sell: 1, tags: ["reagent", "plant"] },
+  silk: { label: "Spider silk", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 4, sell: 1, tags: ["reagent", "cloth"] },
+  nightshade: { label: "Nightshade", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 5, sell: 2, tags: ["reagent", "plant"] },
+  pearl: { label: "Black pearl", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 5, sell: 2, tags: ["reagent", "gem"] },
+  moss: { label: "Blood moss", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 5, sell: 2, tags: ["reagent", "plant"] },
+  mandrake: { label: "Mandrake", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 6, sell: 2, tags: ["reagent", "plant"] },
+  ash: { label: "Sulfurous ash", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 4, sell: 1, tags: ["reagent"] },
+  cabbage: { label: "Cabbage", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 4, sell: 2, tags: ["plant", "food"] },
+  wheat: { label: "Wheat", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 3, sell: 1, tags: ["plant", "food"] },
+  cabbage_seed: { label: "Cabbage seed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 2, sell: 1, tags: ["seed", "plant"] },
+  wheat_seed: { label: "Wheat seed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 2, sell: 1, tags: ["seed", "plant"] },
+  garlic_seed: { label: "Garlic seed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 3, sell: 1, tags: ["seed", "plant"] },
 };
 
 export const CLASS_META: Record<ClassId, { label: string; color: string }> = {
@@ -94,12 +94,42 @@ export const CLASS_META: Record<ClassId, { label: string; color: string }> = {
   merchant: { label: "Merchant", color: "#a88848" },
 };
 
-export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp: number; dmg: number }> = {
-  hare: { label: "Hare", tameDiff: 8, hp: 8, dmg: 1 },
-  hart: { label: "Hart", tameDiff: 22, hp: 22, dmg: 4 },
-  wolf: { label: "Wolf", tameDiff: 40, hp: 28, dmg: 8 },
-  wight: { label: "Wight", tameDiff: 99, hp: 36, dmg: 10 },
+export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp: number; dmg: number; eats: ResourceTag[] }> = {
+  hare: { label: "Hare", tameDiff: 8, hp: 8, dmg: 1, eats: ["plant"] },
+  hart: { label: "Hart", tameDiff: 22, hp: 22, dmg: 4, eats: ["plant"] },
+  wolf: { label: "Wolf", tameDiff: 40, hp: 28, dmg: 8, eats: ["meat"] },
+  wight: { label: "Wight", tameDiff: 99, hp: 36, dmg: 10, eats: ["meat"] },
 };
+
+/** Tag lookup on the catalog — the single place items declare what they ARE. */
+export function itemTags(id: ItemId): ResourceTag[] {
+  return ITEM_META[id].tags;
+}
+
+export function hasTag(id: ItemId, tag: ResourceTag): boolean {
+  return ITEM_META[id].tags.includes(tag);
+}
+
+/** How many tag-matching items a pack holds (sum across all matching ids). */
+export function countTag(pack: Partial<Record<ItemId, number>> | undefined, tag: ResourceTag): number {
+  if (!pack) return 0;
+  let n = 0;
+  for (const [k, v] of Object.entries(pack)) {
+    if (v && hasTag(k as ItemId, tag)) n += v;
+  }
+  return n;
+}
+
+/**
+ * Deterministic consumption order for a tag: cheapest sell value first,
+ * ties broken by item id. Raw materials (log) get consumed before refined
+ * ones (board) because they sell for less — and tests/saves stay reproducible.
+ */
+export function tagConsumeOrder(tag: ResourceTag): ItemId[] {
+  return (Object.keys(ITEM_META) as ItemId[])
+    .filter((id) => hasTag(id, tag))
+    .sort((a, b) => ITEM_META[a].sell - ITEM_META[b].sell || a.localeCompare(b));
+}
 
 export const NPC_META: Record<NpcRole, { label: string }> = {
   banker: { label: "Banker" },

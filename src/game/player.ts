@@ -1,5 +1,5 @@
 import { EH, inGreybarrow } from "./atlas.ts";
-import { FAUNA_META, ITEM_META, armorOf } from "./catalog.ts";
+import { FAUNA_META, hasTag, ITEM_META, armorOf, tagConsumeOrder } from "./catalog.ts";
 import { harvestNow, plantNow, tillNow } from "./farm.ts";
 import { ARROW_RANGE, FIREBALL_RANGE, burstDeath, castNow, maxMana, tickMana } from "./magery.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
@@ -131,8 +131,8 @@ export function commandChop(world: World, tx: number, ty: number) {
   if (!p) return "You are not in the vale.";
   const dead = hands(world);
   if (dead) return dead;
-  const held = needHeld(world, "hatchet");
-  if (held) return held;
+  const held = inHand(world);
+  if (!held || !hasTag(held, "blade")) return "Hold a blade — hatchet, knife, or sword.";
   world.player.intent = { kind: "chop", tx, ty, targetId: null, spell: null };
   pathBeside(world, p, tx, ty);
   return null;
@@ -205,8 +205,11 @@ export function commandFeed(world: World, id: string) {
   if (dead) return dead;
   const c = world.fauna.find((x) => x.id === id);
   if (!c || c.ownerId !== world.player.id) return "It is not yours.";
-  if ((world.player.pack.meat ?? 0) < 1) return "Need meat.";
-  world.player.pack.meat -= 1;
+  const eats = FAUNA_META[c.kind].eats;
+  const cands = [...new Set(eats.flatMap((t) => tagConsumeOrder(t)))];
+  const give = cands.find((it) => (world.player.pack[it] ?? 0) > 0);
+  if (!give) return eats.includes("plant") ? "It wants greens." : "It wants meat.";
+  world.player.pack[give] = (world.player.pack[give] ?? 0) - 1;
   c.loyalty = Math.min(100, c.loyalty + 12);
   return "It eats.";
 }
@@ -217,7 +220,8 @@ export function commandSkin(world: World, id: string) {
   const p = you(world);
   const c = world.fauna.find((x) => x.id === id);
   if (!p || !c) return "Nothing to dress.";
-  if ((world.player.wear.main ?? null) !== "knife") return "Hold the skinning knife — tap it in You.";
+  const held = inHand(world);
+  if (!held || !hasTag(held, "blade")) return "Hold a blade — hatchet, knife, or sword.";
   world.player.intent = { kind: "skin", tx: Math.round(c.x), ty: Math.round(c.z), targetId: c.id, spell: null };
   pathBeside(world, p, Math.round(c.x), Math.round(c.z));
   return null;
