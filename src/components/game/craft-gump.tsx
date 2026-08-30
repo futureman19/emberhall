@@ -13,8 +13,9 @@ type Group = Station | "field";
 
 const TITLE: Record<Group, { title: string; blurb: string }> = {
   bench: { title: "The bench", blurb: "Logs to boards. Then torch, club, crate, staff, cap, shield, bow, cuirass — any wood serves." },
-  forge: { title: "The fire", blurb: "Ore to ingot. Then ring, knife, tools, gorget, boots, gauntlets, mace, sword, helm, iron shield, greaves, mail." },
-  field: { title: "In the field", blurb: "A blade in hand. Any cloth to bandages, two hides to a leather shirt." },
+  forge: { title: "The forge", blurb: "Ore to ingot. Then ring, knife, tools, gorget, boots, gauntlets, mace, sword, helm, iron shield, greaves, mail." },
+  fire: { title: "The fire", blurb: "Roast meat, bake bread, simmer stew — a campfire of three wood, or a kitchen hearth." },
+  field: { title: "In the field", blurb: "A blade in hand. Any cloth to bandages, two hides to a leather shirt, three wood to a campfire." },
 };
 
 export function CraftGump() {
@@ -32,7 +33,7 @@ export function CraftGump() {
   void x;
   void z;
   const bladeOk = Boolean(held && hasTag(held, "blade"));
-  const groups: Group[] = ["bench", "forge", "field"];
+  const groups: Group[] = ["bench", "forge", "fire", "field"];
   return (
     <div className="pointer-events-auto absolute top-16 right-3 max-h-[min(70vh,36rem)] w-[min(100%-1.5rem,22rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 sm:right-4">
       <p className="font-display text-sm text-fg">Work</p>

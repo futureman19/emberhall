@@ -16,6 +16,7 @@ function bareWorld(seed = 7): World {
     people: [],
     fauna: [],
     piles: [],
+    campfires: [],
     buildings: [],
     plots: [],
     player: {

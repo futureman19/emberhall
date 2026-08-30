@@ -18,6 +18,7 @@ import { Sky } from "./sky";
 import { WeatherFx } from "./weather-fx";
 import { People } from "./people-meshes";
 import { Piles } from "./pile-meshes";
+import { Campfires } from "./campfire-meshes";
 import { Horizon, Terrain } from "./terrain";
 
 function SimClock() {
@@ -341,6 +342,7 @@ export function WorldScene() {
       <People />
       <Fauna />
       <Piles />
+      <Campfires />
       <Gates />
       <WalkMarker />
       <MarkStones />

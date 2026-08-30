@@ -50,6 +50,7 @@ export function loadSave(): World | null {
     if (data.player && data.player.corpseAt === undefined) data.player.corpseAt = null;
     if (data.player && data.player.workT == null) data.player.workT = 0;
     if (!Array.isArray(data.plots)) data.plots = [];
+    if (!Array.isArray(data.campfires)) data.campfires = [];
     if (Array.isArray(data.people)) {
       for (const p of data.people) if (p.ghost == null) p.ghost = Boolean(p.isPlayer && data.player.ghost);
     }

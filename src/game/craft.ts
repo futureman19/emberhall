@@ -1,4 +1,5 @@
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "./catalog.ts";
+import { litFireNear, placeCampfire } from "./campfire.ts";
 import { effSkill, you } from "./player.ts";
 import { rareName, rollExceptional } from "./rare.ts";
 import { successChance, tryGain } from "./skills.ts";
@@ -8,7 +9,7 @@ import type { BuildingKind, ItemId, RareItem, ResourceTag, SkillId, World } from
 
 export { countTag, hasTag, itemTags, tagConsumeOrder } from "./catalog.ts";
 
-export type Station = "bench" | "forge";
+export type Station = "bench" | "forge" | "fire";
 
 export interface Recipe {
   id: string;
@@ -24,6 +25,8 @@ export interface Recipe {
   needTags?: { tag: ResourceTag; n: number }[];
   /** Requires a blade-tagged item in hand (the UO "bladed" script). */
   needsBlade?: boolean;
+  /** Success places a campfire at your feet instead of giving an item. */
+  placesFire?: boolean;
   give: Partial<Record<ItemId, number>>;
   sfx: SfxId;
 }
@@ -62,6 +65,12 @@ export const RECIPES: Recipe[] = [
   // Field work — the "bladed" script: a sharp edge in hand, no station.
   { id: "cut_bandage", station: null, skill: "healing", diff: -20, label: "Cut bandages", hint: "Any cloth, a blade. Two dressings.", need: {}, needTags: [{ tag: "cloth", n: 1 }], needsBlade: true, give: { bandage: 2 }, sfx: "chop" },
   { id: "cut_leather", station: null, skill: "carpentry", diff: 10, label: "Stitch a hide shirt", hint: "Two hides, a blade. Leather armor.", need: {}, needTags: [{ tag: "hide", n: 2 }], needsBlade: true, give: { leather: 1 }, sfx: "chop" },
+  // Camping — three wood buys a fire that burns three hours.
+  { id: "campfire", station: null, skill: "cooking", diff: -25, label: "Build a campfire", hint: "Any three wood. Cooks like a hearth, dies in three hours.", need: {}, needTags: [{ tag: "wood", n: 3 }], placesFire: true, give: {}, sfx: "fire" },
+  // The fire — roast, bake, stew. A campfire or the kitchen hearth both serve.
+  { id: "roast_meat", station: "fire", skill: "cooking", diff: -15, label: "Roast meat", hint: "Raw meat to a proper meal.", need: { meat: 1 }, give: { cooked_meat: 1 }, sfx: "fire" },
+  { id: "bake_bread", station: "fire", skill: "cooking", diff: 8, label: "Bake bread", hint: "Two wheat, one loaf.", need: { wheat: 2 }, give: { bread: 1 }, sfx: "fire" },
+  { id: "stew_pot", station: "fire", skill: "cooking", diff: 22, label: "Venison stew", hint: "A cabbage and a cut of meat, simmered.", need: { cabbage: 1, meat: 1 }, give: { stew: 1 }, sfx: "fire" },
 ];
 
 function dist(world: World, tx: number, ty: number) {
@@ -71,13 +80,14 @@ function dist(world: World, tx: number, ty: number) {
 }
 
 export function craftReach(kind: BuildingKind) {
-  if (kind === "forge") return 4.6;
+  if (kind === "forge" || kind === "kitchen") return 4.6;
   if (kind === "yard" || kind === "hall") return 6.2;
   return 0;
 }
 
 export function stationOf(kind: BuildingKind): Station | null {
   if (kind === "forge") return "forge";
+  if (kind === "kitchen") return "fire";
   if (kind === "yard" || kind === "hall") return "bench";
   return null;
 }
@@ -105,6 +115,7 @@ export function stationsHere(world: World): Station[] {
     if (!st) continue;
     if (dist(world, b.tx, b.ty) <= craftReach(b.kind)) out.add(st);
   }
+  if (litFireNear(world)) out.add("fire");
   return [...out];
 }
 
@@ -175,12 +186,15 @@ export function commandCraft(world: World, recipeId: string): string | null {
   if (rec.station !== null) {
     const here = stationsHere(world);
     if (!here.includes(rec.station)) {
-      return rec.station === "forge" ? "The ore wants a fire. Raise a forge." : "The wood wants a bench. The yard, or the hall.";
+      if (rec.station === "forge") return "The ore wants a fire. Raise a forge.";
+      if (rec.station === "fire") return "The pot wants a fire — build a campfire, or find a hearth.";
+      return "The wood wants a bench. The yard, or the hall.";
     }
   }
   if (rec.needsBlade && !bladeInHand(world)) {
     return "The work wants an edge. Hold a blade — hatchet, knife, or sword.";
   }
+  if (rec.placesFire && litFireNear(world)) return "A fire already crackles here.";
   const miss = missingNeed(world, rec);
   if (miss) return miss;
   playSfx(rec.sfx, rec.sfx === "fire" ? 0.48 : 0.52);
@@ -190,7 +204,7 @@ export function commandCraft(world: World, recipeId: string): string | null {
     log(world, note);
     return note;
   }
-  const made = madeList(rec, 1);
+  const made = rec.placesFire ? "A fire crackles to life" : madeList(rec, 1);
   const maker = you(world)?.name ?? "an unknown hand";
   const wonderNote = wonder ? ` The work sings — ${rareName(wonder)}, crafted by ${maker}!` : "";
   const note = gain ? `${made}.${wonderNote} ${gain}.` : `${made}.${wonderNote}`;
@@ -230,6 +244,7 @@ function craftOnce(world: World, rec: Recipe): { ok: boolean; gain: string | nul
     const id = k as ItemId;
     world.player.pack[id] = (world.player.pack[id] ?? 0) + (n ?? 0);
   }
+  if (rec.placesFire) placeCampfire(world);
   // The maker's mark — a hand far above the work can leave a piece beyond the ordinary.
   const maker = you(world)?.name ?? "an unknown hand";
   const wonder = Object.keys(rec.give)
@@ -273,13 +288,17 @@ export function commandCraftBatch(world: World, recipeId: string, times: number)
   if (rec.station !== null) {
     const here = stationsHere(world);
     if (!here.includes(rec.station)) {
-      return rec.station === "forge" ? "The ore wants a fire. Raise a forge." : "The wood wants a bench. The yard, or the hall.";
+      if (rec.station === "forge") return "The ore wants a fire. Raise a forge.";
+      if (rec.station === "fire") return "The pot wants a fire — build a campfire, or find a hearth.";
+      return "The wood wants a bench. The yard, or the hall.";
     }
   }
   if (rec.needsBlade && !bladeInHand(world)) {
     return "The work wants an edge. Hold a blade — hatchet, knife, or sword.";
   }
-  const want = Math.max(1, Math.min(Math.floor(times), maxCraftable(world, rec)));
+  if (rec.placesFire && litFireNear(world)) return "A fire already crackles here.";
+  // One fire is plenty — a batch of campfires makes no sense.
+  const want = rec.placesFire ? 1 : Math.max(1, Math.min(Math.floor(times), maxCraftable(world, rec)));
   if (want < 1) return missingNeed(world, rec);
   playSfx(rec.sfx, rec.sfx === "fire" ? 0.48 : 0.52);
   let made = 0;
@@ -295,7 +314,7 @@ export function commandCraftBatch(world: World, recipeId: string, times: number)
     if (wonder) wonders.push(wonder);
   }
   const bits: string[] = [];
-  if (made > 0) bits.push(madeList(rec, made) + ".");
+  if (made > 0) bits.push(rec.placesFire ? "A fire crackles to life." : madeList(rec, made) + ".");
   if (failed > 0) bits.push(`${failed} split.`);
   if (made === 0 && failed === 0) bits.push("Nothing to work with.");
   const maker = you(world)?.name ?? "an unknown hand";

@@ -80,6 +80,9 @@ export const ITEM_META: Record<
   mandrake: { label: "Mandrake", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 6, sell: 2, tags: ["reagent", "plant"] },
   ash: { label: "Sulfurous ash", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 4, sell: 1, tags: ["reagent"] },
   cabbage: { label: "Cabbage", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 4, sell: 2, tags: ["plant", "food"] },
+  cooked_meat: { label: "Cooked meat", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 8, sell: 4, tags: ["meat", "food"] },
+  bread: { label: "Bread", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 6, sell: 3, tags: ["food", "plant"] },
+  stew: { label: "Bowl of stew", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 14, sell: 7, tags: ["food"] },
   wheat: { label: "Wheat", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 3, sell: 1, tags: ["plant", "food"] },
   cabbage_seed: { label: "Cabbage seed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 2, sell: 1, tags: ["seed", "plant"] },
   wheat_seed: { label: "Wheat seed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 2, sell: 1, tags: ["seed", "plant"] },
@@ -233,6 +236,7 @@ export function emptyPack(): Record<ItemId, number> {
     tunic: 0, leather: 0, mail: 0, hood: 1, helm: 0, cloak: 0, gloves: 1, hose: 0, greaves: 0,
     boots: 0, pendant: 1, ring: 1, relic: 0, spellbook: 1, rune: 4, garlic: 12, ginseng: 12,
     silk: 16, nightshade: 4, pearl: 14, moss: 10, mandrake: 10, ash: 12, cabbage: 2, wheat: 0,
+    cooked_meat: 0, bread: 0, stew: 0,
     cabbage_seed: 8, wheat_seed: 6, garlic_seed: 4,
   };
 }

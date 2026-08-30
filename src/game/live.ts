@@ -14,6 +14,7 @@ import type { Snapshot, World } from "./types.ts";
 function withFauna(w: World) {
   if (!w.fauna) w.fauna = [];
   if (!w.piles) w.piles = [];
+  if (!w.campfires) w.campfires = [];
   if (!w.plots) w.plots = [];
   if (w.buildings) {
     for (const b of w.buildings) if (b.kind === "farm") seedFarmPlots(w, b.tx, b.ty);
@@ -108,6 +109,7 @@ export function snapshot(w: World = world): Snapshot {
     player: w.player,
     fauna: w.fauna,
     piles: w.piles ?? [],
+    campfires: w.campfires ?? [],
     landKey: String(w.landRev),
     region: region.name,
     youX: self?.x ?? COURT.tx,

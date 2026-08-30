@@ -77,6 +77,9 @@ export type ItemId =
   | "ash"
   | "cabbage"
   | "wheat"
+  | "cooked_meat"
+  | "bread"
+  | "stew"
   | "cabbage_seed"
   | "wheat_seed"
   | "garlic_seed";
@@ -283,6 +286,15 @@ export interface GroundPile {
   label: string;
 }
 
+/** A campfire built in the field — a cooking station that burns out. */
+export interface Campfire {
+  id: string;
+  tx: number;
+  ty: number;
+  /** World hour the fire dies to embers. */
+  until: number;
+}
+
 export interface Building {
   id: string;
   kind: BuildingKind;
@@ -362,6 +374,7 @@ export interface World {
   people: Person[];
   fauna: Creature[];
   piles: GroundPile[];
+  campfires: Campfire[];
   buildings: Building[];
   plots: CropPlot[];
   player: PlayerState;
@@ -405,6 +418,7 @@ export interface Snapshot {
   player: PlayerState;
   fauna: Creature[];
   piles: GroundPile[];
+  campfires: Campfire[];
   landKey: string;
   region: string;
   youX: number;

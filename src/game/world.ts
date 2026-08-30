@@ -294,6 +294,7 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
     people: [],
     fauna: [],
     piles: [],
+    campfires: [],
     buildings: [],
     plots: [],
     player: {

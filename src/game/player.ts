@@ -363,23 +363,23 @@ export function commandCook(world: World) {
   if (dead) return dead;
   const p = you(world);
   if (!p) return "You are not in the vale.";
-  if ((world.player.pack.cabbage ?? 0) > 0) {
-    world.player.pack.cabbage -= 1;
-    p.hunger = Math.min(100, p.hunger + 34);
-    tryGain(world, "cooking", true, true);
-    return "The cabbage holds.";
+  // A good meal first — cooked food fills far more than raw.
+  const meals: [ItemId, number, string][] = [
+    ["stew", 52, "The stew warms you through."],
+    ["cooked_meat", 40, "Hot meat. Proper food."],
+    ["bread", 32, "Fresh bread."],
+    ["cabbage", 34, "The cabbage holds."],
+    ["wheat", 22, "The wheat fills."],
+    ["meat", 14, "You force the raw meat down."],
+  ];
+  for (const [id, fill, note] of meals) {
+    if ((world.player.pack[id] ?? 0) > 0) {
+      world.player.pack[id] -= 1;
+      p.hunger = Math.min(100, p.hunger + fill);
+      return note;
+    }
   }
-  if ((world.player.pack.wheat ?? 0) > 0) {
-    world.player.pack.wheat -= 1;
-    p.hunger = Math.min(100, p.hunger + 22);
-    tryGain(world, "cooking", true, true);
-    return "The wheat fills.";
-  }
-  if ((world.player.pack.meat ?? 0) < 1) return "Need meat, cabbage, or wheat.";
-  world.player.pack.meat -= 1;
-  p.hunger = Math.min(100, p.hunger + 28);
-  tryGain(world, "cooking", true, true);
-  return "You eat.";
+  return "Need meat, cabbage, or wheat.";
 }
 
 export function commandEat(world: World) {
