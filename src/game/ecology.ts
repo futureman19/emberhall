@@ -5,6 +5,15 @@ import { sheltering } from "./weather.ts";
 import { nid } from "./world.ts";
 import type { Creature, FaunaKind, World } from "./types.ts";
 
+type SpawnEntry = { kind: FaunaKind; weight: number };
+
+type SpawnZone = {
+  placeId: string;
+  count: number;
+  pool: SpawnEntry[];
+  radiusBias?: number;
+};
+
 function spawn(world: World, kind: FaunaKind, x: number, z: number): Creature {
   const meta = FAUNA_META[kind];
   return {
@@ -25,47 +34,167 @@ function spawn(world: World, kind: FaunaKind, x: number, z: number): Creature {
   };
 }
 
-export function seedFauna(world: World, rng: () => number) {
-  if (world.fauna.length) return;
-  for (const p of PLACES) {
-    if (p.kind === "woods") {
-      const taiga = p.id === "wolfhollow";
-      const n = taiga ? 7 : 6;
-      for (let i = 0; i < n; i++) {
-        const x = p.tx + Math.floor((rng() - 0.5) * p.radius);
-        const z = p.ty + Math.floor((rng() - 0.5) * p.radius);
-        const dest = nearestWalkable(world, x, z);
-        if (!dest) continue;
-        const kind: FaunaKind = taiga
-          ? rng() < 0.72
-            ? "wolf"
-            : "hare"
-          : rng() < 0.55
-            ? "hare"
-            : rng() < 0.78
-              ? "hart"
-              : "wolf";
-        world.fauna.push(spawn(world, kind, dest.x, dest.y));
-      }
-    }
+function pickFauna(rng: () => number, pool: readonly SpawnEntry[]): FaunaKind {
+  const total = pool.reduce((s, p) => s + p.weight, 0);
+  if (total <= 0) return pool[0]!.kind;
+  let roll = rng() * total;
+  for (const p of pool) {
+    roll -= p.weight;
+    if (roll <= 0) return p.kind;
   }
-  const extra: { id: string; kind: FaunaKind; dx: number; dz: number }[] = [
-    { id: "ridgewatch", kind: "hare", dx: 3, dz: 8 },
-    { id: "ridgewatch", kind: "hare", dx: -4, dz: 6 },
-    { id: "hearthfen", kind: "hare", dx: 6, dz: 2 },
-    { id: "hearthfen", kind: "hare", dx: -5, dz: 4 },
-    { id: "southmere", kind: "hart", dx: 4, dz: -3 },
-    { id: "southmere", kind: "hart", dx: -5, dz: 2 },
-    { id: "southmere", kind: "hare", dx: 2, dz: 5 },
-    { id: "southmere", kind: "hare", dx: -3, dz: -6 },
-    { id: "brinegate", kind: "hare", dx: -8, dz: -4 },
-  ];
-  for (const e of extra) {
+  return pool[0]!.kind;
+}
+
+function addZoneFauna(
+  world: World,
+  rng: () => number,
+  placeId: string,
+  count: number,
+  pool: readonly SpawnEntry[],
+  radiusBias = 1,
+) {
+  const p = PLACES.find((x) => x.id === placeId);
+  if (!p) return;
+  const radius = Math.max(2, Math.floor(p.radius * radiusBias));
+  for (let i = 0; i < count; i++) {
+    const x = p.tx + Math.floor((rng() - 0.5) * radius);
+    const z = p.ty + Math.floor((rng() - 0.5) * radius);
+    const dest = nearestWalkable(world, x, z);
+    if (!dest) continue;
+    world.fauna.push(spawn(world, pickFauna(rng, pool), dest.x, dest.y));
+  }
+}
+
+const SHELTER_SEEKERS: ReadonlySet<FaunaKind> = new Set([
+  "hare",
+  "hart",
+  "thornhide_doe",
+  "moss_badger",
+  "bog_toad",
+]);
+const WARDEN_KINDS: ReadonlySet<FaunaKind> = new Set(["wight", "greybarrow_wightling", "barrow_hound", "ashen_banshee", "bonecrow"]);
+const NIGHT_HUNTERS: ReadonlySet<FaunaKind> = new Set([
+  "wolf",
+  "pine_lynx",
+  "ridgeback_warg",
+  "brine_hound",
+  "brine_troll",
+  "barrow_hound",
+  "stonefang_ogre",
+  "orc_marauder",
+  "reedback_stalker",
+  "orebeetle",
+  "stonecrawl_spider",
+  "coal_salamander",
+  "brambleback_stag",
+  "ironwood_boar",
+  "thornhide_doe",
+]);
+
+const WOODLAND_POOL: SpawnEntry[] = [
+  { kind: "hare", weight: 20 },
+  { kind: "hart", weight: 12 },
+  { kind: "wolf", weight: 10 },
+  { kind: "pine_lynx", weight: 8 },
+  { kind: "brambleback_stag", weight: 7 },
+  { kind: "ironwood_boar", weight: 9 },
+  { kind: "thornhide_doe", weight: 6 },
+  { kind: "moss_badger", weight: 8 },
+  { kind: "ember_fox", weight: 4 },
+];
+
+const HIGHLAND_POOL: SpawnEntry[] = [
+  { kind: "ridgeback_warg", weight: 10 },
+  { kind: "thornhide_doe", weight: 9 },
+  { kind: "brambleback_stag", weight: 8 },
+  { kind: "ironwood_boar", weight: 5 },
+  { kind: "reedback_stalker", weight: 8 },
+  { kind: "orebeetle", weight: 4 },
+  { kind: "dune_crawler", weight: 2 },
+];
+
+const MARSH_POOL: SpawnEntry[] = [
+  { kind: "mire_croaker", weight: 12 },
+  { kind: "bog_toad", weight: 12 },
+  { kind: "moss_badger", weight: 7 },
+  { kind: "saltback_tortoise", weight: 4 },
+  { kind: "bog_toad", weight: 6 },
+  { kind: "brine_hound", weight: 5 },
+  { kind: "ironwood_boar", weight: 3 },
+];
+
+const COAST_POOL: SpawnEntry[] = [
+  { kind: "brine_hound", weight: 11 },
+  { kind: "saltback_tortoise", weight: 9 },
+  { kind: "dune_crawler", weight: 10 },
+  { kind: "brine_troll", weight: 2 },
+  { kind: "coal_salamander", weight: 6 },
+  { kind: "bog_toad", weight: 7 },
+];
+
+const RUIN_POOL: SpawnEntry[] = [
+  { kind: "wight", weight: 1 },
+  { kind: "greybarrow_wightling", weight: 7 },
+  { kind: "barrow_hound", weight: 8 },
+  { kind: "ashen_banshee", weight: 4 },
+  { kind: "bonecrow", weight: 6 },
+  { kind: "stonecrawl_spider", weight: 6 },
+  { kind: "orebeetle", weight: 4 },
+];
+
+const MINE_POOL: SpawnEntry[] = [
+  { kind: "orebeetle", weight: 16 },
+  { kind: "coal_salamander", weight: 8 },
+  { kind: "stonecrawl_spider", weight: 4 },
+  { kind: "mire_croaker", weight: 4 },
+  { kind: "reedback_stalker", weight: 3 },
+];
+
+const SPAWN_ZONES: SpawnZone[] = [
+  { placeId: "oakstand", count: 7, pool: WOODLAND_POOL },
+  { placeId: "wolfhollow", count: 8, pool: [...WOODLAND_POOL, { kind: "pine_lynx", weight: 4 }, { kind: "brambleback_stag", weight: 4 }, { kind: "ridgeback_warg", weight: 4 }] },
+  { placeId: "ridgewatch", count: 6, pool: HIGHLAND_POOL },
+  { placeId: "hearthfen", count: 6, pool: MARSH_POOL },
+  { placeId: "southmere", count: 7, pool: [...MARSH_POOL, { kind: "brine_hound", weight: 4 }, { kind: "bog_toad", weight: 6 }, { kind: "saltback_tortoise", weight: 4 }] },
+  { placeId: "brinegate", count: 7, pool: COAST_POOL },
+  { placeId: "ironfold", count: 5, pool: MINE_POOL },
+  { placeId: "cairnash", count: 4, pool: RUIN_POOL },
+  { placeId: "greybarrow", count: 5, pool: RUIN_POOL },
+];
+
+const EXTRA_SPAWNS: { id: string; kind: FaunaKind; dx: number; dz: number }[] = [
+  { id: "ridgewatch", kind: "ironwood_boar", dx: 3, dz: 8 },
+  { id: "ridgewatch", kind: "brambleback_stag", dx: -4, dz: 6 },
+  { id: "hearthfen", kind: "moss_badger", dx: 6, dz: 2 },
+  { id: "hearthfen", kind: "bog_toad", dx: -5, dz: 4 },
+  { id: "southmere", kind: "saltback_tortoise", dx: 4, dz: -3 },
+  { id: "southmere", kind: "orebeetle", dx: -5, dz: 2 },
+  { id: "southmere", kind: "mire_croaker", dx: 2, dz: 5 },
+  { id: "southmere", kind: "brine_hound", dx: -3, dz: -6 },
+  { id: "brinegate", kind: "dune_crawler", dx: -8, dz: -4 },
+  { id: "ironfold", kind: "coal_salamander", dx: 7, dz: 2 },
+  { id: "cairnash", kind: "barrow_hound", dx: 6, dz: 3 },
+  { id: "cairnash", kind: "bonecrow", dx: -6, dz: -1 },
+];
+
+function addExtraFauna(world: World, rng: () => number) {
+  for (const e of EXTRA_SPAWNS) {
     const p = PLACES.find((x) => x.id === e.id);
     if (!p) continue;
     const dest = nearestWalkable(world, p.tx + e.dx, p.ty + e.dz);
     if (dest) world.fauna.push(spawn(world, e.kind, dest.x, dest.y));
   }
+  void rng;
+}
+
+export function seedFauna(world: World, rng: () => number) {
+  if (world.fauna.length) return;
+  for (const zone of SPAWN_ZONES) {
+    const pool = zone.pool;
+    if (!pool.length || zone.count <= 0) continue;
+    addZoneFauna(world, rng, zone.placeId, zone.count, pool, zone.radiusBias);
+  }
+  addExtraFauna(world, rng);
 }
 
 export function seedBarrow(world: World, rng: () => number) {
@@ -99,7 +228,7 @@ export function tickEcology(world: World, dt: number) {
       }
       continue;
     }
-    if (c.kind === "wight" && !inGreybarrow(Math.round(c.x), Math.round(c.z))) {
+    if (WARDEN_KINDS.has(c.kind) && !inGreybarrow(Math.round(c.x), Math.round(c.z))) {
       const dest = nearestWalkable(world, BARROW.cx, BARROW.cy);
       if (dest) {
         c.x = dest.x;
@@ -122,7 +251,7 @@ export function tickEcology(world: World, dt: number) {
         }
         c.task = "follow";
       }
-    } else if (shelter && (c.kind === "hare" || c.kind === "hart") && c.task !== "fight") {
+    } else if (shelter && SHELTER_SEEKERS.has(c.kind) && c.task !== "fight") {
       // Small game bolts for cover when the sky opens. Wolves don't mind the wet.
       const home = c.home;
       if (Math.hypot(c.x - home.tx, c.z - home.ty) > 1.5) {
@@ -137,16 +266,17 @@ export function tickEcology(world: World, dt: number) {
         c.task = "idle";
         c.path = [];
       }
-    } else if (c.task === "idle" && (c.kind === "hare" || c.kind === "hart")) {
+    } else if (c.task === "idle" && SHELTER_SEEKERS.has(c.kind)) {
       // The sky cleared — back to grazing.
       c.task = "wander";
       c.taskUntil = world.hour + 0.2 + Math.random() * 0.6;
     } else if (c.task === "wander" && !c.path.length && world.hour > c.taskUntil) {
       const home = c.home;
+      const scale = NIGHT_HUNTERS.has(c.kind) ? 10 : 8;
       const dest = nearestWalkable(
         world,
-        home.tx + Math.floor((Math.random() - 0.5) * 8),
-        home.ty + Math.floor((Math.random() - 0.5) * 8),
+        home.tx + Math.floor((Math.random() - 0.5) * scale),
+        home.ty + Math.floor((Math.random() - 0.5) * scale),
       );
       if (dest) {
         const path = astar(world, Math.round(c.x), Math.round(c.z), dest.x, dest.y, 1800);
@@ -154,7 +284,7 @@ export function tickEcology(world: World, dt: number) {
       }
       c.taskUntil = world.hour + 0.6 + Math.random();
     }
-    if (you && c.kind === "wolf" && night && !c.ownerId && c.task !== "fight" && !you.ghost) {
+    if (you && NIGHT_HUNTERS.has(c.kind) && night && !c.ownerId && c.task !== "fight" && !you.ghost) {
       if (Math.hypot(c.x - you.x, c.z - you.z) < 10) {
         c.task = "fight";
         const path = astar(world, Math.round(c.x), Math.round(c.z), Math.round(you.x), Math.round(you.z), 2000);

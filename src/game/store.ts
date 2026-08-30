@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { commandTravel } from "./gates.ts";
-import { commandCraft, craftReach, stationOf } from "./craft.ts";
+import { commandCraft, commandCraftBatch, craftReach, stationOf } from "./craft.ts";
 import { commandHarvest, commandPlant, commandTill, commandWorkPlot, plotAt } from "./farm.ts";
 import { getWorld, resetWorld, setWorld, snapshot } from "./live.ts";
 import { commandCast, forgetMark, SPELL_META, hasBook } from "./magery.ts";
@@ -111,6 +111,7 @@ interface GameUI {
   /** Chain burn confirmed — return the item (or the rare, with its affixes) and re-snapshot. */
   redeemApplied: (item: ItemId, rare?: { name: string; affixes: string[]; maker?: string }) => void;
   makeRecipe: (id: string) => void;
+  makeRecipeBatch: (id: string, times: number) => void;
   useStation: (id: string) => void;
   cast: (spell: SpellId, target?: CastTarget) => void;
   forgetMark: (id: string) => void;
@@ -560,6 +561,11 @@ export const useGame = create<GameUI>((set, get) => ({
   },
   makeRecipe: (id) => {
     const err = commandCraft(getWorld(), id);
+    if (err) get().flash(err);
+    set({ snap: snapshot() });
+  },
+  makeRecipeBatch: (id, times) => {
+    const err = commandCraftBatch(getWorld(), id, times);
     if (err) get().flash(err);
     set({ snap: snapshot() });
   },

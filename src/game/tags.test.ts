@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { FAUNA_META, ITEM_META, countTag, hasTag, tagConsumeOrder } from "./catalog.ts";
-import { commandCraft, recipeById } from "./craft.ts";
+import { commandCraft, commandCraftBatch, maxCraftable, recipeById } from "./craft.ts";
 import { seedFauna } from "./ecology.ts";
 import { commandChop, commandFeed, commandSkin, you } from "./player.ts";
 import { mulberry32 } from "./rng.ts";
@@ -159,4 +159,111 @@ test("diets - beasts eat by tag: hares want greens, wolves want meat", () => {
   assert.equal(w.player.pack.meat, 0);
   assert.deepEqual(FAUNA_META.hare.eats, ["plant"]);
   assert.deepEqual(FAUNA_META.wolf.eats, ["meat"]);
+});
+
+/** Mid-roll stub: success passes, the exceptional gate fails — plain batch math. */
+function batchOk(w: World, id: string, times: number) {
+  const rec = recipeById(id);
+  if (rec) w.player.skills[rec.skill] = 100;
+  const old = Math.random;
+  Math.random = () => 0.5;
+  try {
+    return commandCraftBatch(w, id, times);
+  } finally {
+    Math.random = old;
+  }
+}
+
+test("craft batch - ×N produces N× the give and burns N× the material", () => {
+  const w = createWorld();
+  standAt(w, "yard");
+  givePack(w, { log: 5 });
+  const note = batchOk(w, "board", 5);
+  assert.ok(note?.includes("10 boards"), `made: ${note}`);
+  assert.equal(w.player.pack.board, 10);
+  assert.equal(w.player.pack.log, 0);
+});
+
+test("craft batch - the stint ends when the pile runs short", () => {
+  const w = createWorld();
+  standAt(w, "yard");
+  givePack(w, { log: 3 });
+  const note = batchOk(w, "board", 10);
+  assert.ok(note?.includes("6 boards"), `made: ${note}`);
+  assert.equal(w.player.pack.board, 6);
+  assert.equal(w.player.pack.log, 0);
+});
+
+test("craft batch - every attempt rolls its own success; splits are counted", () => {
+  const w = createWorld();
+  standAt(w, "yard");
+  givePack(w, { log: 3 });
+  const old = Math.random;
+  Math.random = () => 0.99; // everything splits
+  let note: string | null = null;
+  try {
+    note = commandCraftBatch(w, "board", 3);
+  } finally {
+    Math.random = old;
+  }
+  assert.ok(note?.includes("3 split"), `split: ${note}`);
+  assert.equal(w.player.pack.board ?? 0, 0);
+  assert.equal(w.player.pack.log, 0, "split work still burns the wood");
+});
+
+test("craft batch - maxCraftable reads exact and tag needs", () => {
+  const w = createWorld();
+  givePack(w, { log: 3, board: 1 });
+  assert.equal(maxCraftable(w, recipeById("board")!), 3, "3 logs, 3 splits");
+  assert.equal(maxCraftable(w, recipeById("club")!), 2, "4 wood total, 2 per club");
+  givePack(w, {});
+  assert.equal(maxCraftable(w, recipeById("board")!), 0);
+});
+
+test("craft batch - field work batches too: six bandages from three silks", () => {
+  const w = createWorld();
+  givePack(w, { silk: 3 });
+  w.player.wear.main = "sword";
+  const note = batchOk(w, "cut_bandage", 3);
+  assert.ok(note?.includes("6 bandage"), `made: ${note}`);
+  assert.equal(w.player.pack.bandage, 6);
+  assert.equal(w.player.pack.silk, 0);
+});
+
+test("craft batch - the maker's mark can sing more than once in a stint", () => {
+  const w = createWorld();
+  standAt(w, "yard");
+  givePack(w, { log: 6 });
+  w.player.skills.carpentry = 100;
+  const old = Math.random;
+  Math.random = () => 0.01; // success AND the exceptional gate, every time
+  let note: string | null = null;
+  try {
+    note = commandCraftBatch(w, "club", 3);
+  } finally {
+    Math.random = old;
+  }
+  assert.equal(w.player.rares.length, 3, "three wonders from three stints");
+  assert.equal(w.player.pack.club ?? 0, 0, "each stack piece yielded to its wonder");
+  assert.ok((note?.match(/The work sings/g) ?? []).length === 3, `sang thrice: ${note}`);
+});
+
+test("craft batch - a recipe never eats its own product (cloth/wood regression)", () => {
+  const w = createWorld();
+  w.player.wear.main = "sword";
+  // Bandages are cloth — but a stack of bandages alone must NOT feed cut_bandage.
+  givePack(w, { bandage: 5 });
+  assert.equal(maxCraftable(w, recipeById("cut_bandage")!), 0);
+  assert.ok(commandCraft(w, "cut_bandage")?.includes("cloth"));
+  // A club is wood — crafting clubs must not consume clubs already held.
+  standAt(w, "yard");
+  w.player.skills.carpentry = 100;
+  givePack(w, { log: 2, club: 3 });
+  assert.equal(maxCraftable(w, recipeById("club")!), 1);
+  const old = Math.random;
+  Math.random = () => 0.5;
+  const note = commandCraftBatch(w, "club", 5);
+  Math.random = old;
+  assert.equal(w.player.pack.club, 4, "3 kept + 1 made");
+  assert.ok(note?.includes("1 club"), `note: ${note}`);
 });

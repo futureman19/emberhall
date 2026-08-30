@@ -4,7 +4,7 @@ import { rareName, rollExceptional } from "./rare.ts";
 import { successChance, tryGain } from "./skills.ts";
 import { playSfx, type SfxId } from "./vale-sfx.ts";
 import { completeObjective, log } from "./world.ts";
-import type { BuildingKind, ItemId, ResourceTag, SkillId, World } from "./types.ts";
+import type { BuildingKind, ItemId, RareItem, ResourceTag, SkillId, World } from "./types.ts";
 
 export { countTag, hasTag, itemTags, tagConsumeOrder } from "./catalog.ts";
 
@@ -112,12 +112,20 @@ export function recipeById(id: string) {
   return RECIPES.find((r) => r.id === id) ?? null;
 }
 
+/** A recipe's own products — they must never feed their own making
+ *  (bandages are cloth, clubs are wood: without this, a batch eats
+ *  what it just produced). */
+function selfIds(rec: Recipe): Set<string> {
+  return new Set(Object.keys(rec.give));
+}
+
 export function haveNeed(pack: Partial<Record<ItemId, number>> | undefined, rec: Recipe) {
   for (const [k, n] of Object.entries(rec.need)) {
     if ((pack?.[k as ItemId] ?? 0) < (n ?? 0)) return false;
   }
+  const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {
-    if (countTag(pack, nt.tag) < nt.n) return false;
+    if (countTag(pack, nt.tag, self) < nt.n) return false;
   }
   return true;
 }
@@ -133,8 +141,9 @@ export function missingNeed(world: World, rec: Recipe): string | null {
     const have = world.player.pack[id] ?? 0;
     if (have < (n ?? 0)) return `Need ${ITEM_META[id].label.toLowerCase()}.`;
   }
+  const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {
-    if (countTag(world.player.pack, nt.tag) < nt.n) return `Need ${nt.n} ${nt.tag} — anything ${nt.tag} will do.`;
+    if (countTag(world.player.pack, nt.tag, self) < nt.n) return `Need ${nt.n} ${nt.tag} — anything ${nt.tag} will do.`;
   }
   return null;
 }
@@ -142,9 +151,11 @@ export function missingNeed(world: World, rec: Recipe): string | null {
 /** Consume tag ingredients cheapest-first; returns a short "what was used" list. */
 function consumeTags(world: World, rec: Recipe): ItemId[] {
   const used: ItemId[] = [];
+  const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {
     let left = nt.n;
     for (const id of tagConsumeOrder(nt.tag)) {
+      if (self.has(id)) continue;
       if (left <= 0) break;
       const have = world.player.pack[id] ?? 0;
       if (have <= 0) continue;
@@ -172,6 +183,39 @@ export function commandCraft(world: World, recipeId: string): string | null {
   }
   const miss = missingNeed(world, rec);
   if (miss) return miss;
+  playSfx(rec.sfx, rec.sfx === "fire" ? 0.48 : 0.52);
+  const { ok, gain, wonder } = craftOnce(world, rec);
+  if (!ok) {
+    const note = gain ? `The work splits. ${gain}.` : "The work splits.";
+    log(world, note);
+    return note;
+  }
+  const made = madeList(rec, 1);
+  const maker = you(world)?.name ?? "an unknown hand";
+  const wonderNote = wonder ? ` The work sings — ${rareName(wonder)}, crafted by ${maker}!` : "";
+  const note = gain ? `${made}.${wonderNote} ${gain}.` : `${made}.${wonderNote}`;
+  log(world, note);
+  return note;
+}
+
+/** The give list rendered ("2 boards"), scaled by successes. */
+function madeList(rec: Recipe, times: number): string {
+  return Object.entries(rec.give)
+    .filter(([, n]) => (n ?? 0) > 0)
+    .map(([k, n]) => {
+      const total = (n ?? 0) * times;
+      const label = ITEM_META[k as ItemId].label.toLowerCase();
+      return `${total} ${total > 1 && !label.endsWith("s") ? `${label}s` : label}`;
+    })
+    .join(", ");
+}
+
+/**
+ * One attempt at the work: consume, roll, learn, produce. No sound, no
+ * log — callers own the telling. Every attempt rolls its own success and
+ * its own gain, so batches keep the skill sim honest.
+ */
+function craftOnce(world: World, rec: Recipe): { ok: boolean; gain: string | null; wonder: RareItem | null } {
   for (const [k, n] of Object.entries(rec.need)) {
     const id = k as ItemId;
     world.player.pack[id] = Math.max(0, (world.player.pack[id] ?? 0) - (n ?? 0));
@@ -180,13 +224,8 @@ export function commandCraft(world: World, recipeId: string): string | null {
   const skill = effSkill(world, rec.skill);
   const chance = successChance(skill, rec.diff);
   const ok = Math.random() < chance;
-  playSfx(rec.sfx, rec.sfx === "fire" ? 0.48 : 0.52);
   const gain = tryGain(world, rec.skill, true, chance >= 0.35 && chance <= 0.85);
-  if (!ok) {
-    const note = gain ? `The work splits. ${gain}.` : "The work splits.";
-    log(world, note);
-    return note;
-  }
+  if (!ok) return { ok: false, gain, wonder: null };
   for (const [k, n] of Object.entries(rec.give)) {
     const id = k as ItemId;
     world.player.pack[id] = (world.player.pack[id] ?? 0) + (n ?? 0);
@@ -195,7 +234,7 @@ export function commandCraft(world: World, recipeId: string): string | null {
   const maker = you(world)?.name ?? "an unknown hand";
   const wonder = Object.keys(rec.give)
     .map((k) => rollExceptional(world, k as ItemId, skill, rec.diff, maker, Math.random))
-    .find((r) => r !== null);
+    .find((r) => r !== null) ?? null;
   if (wonder) {
     // The stack loses one of the piece; the singular wonder takes its place.
     world.player.pack[wonder.base] = Math.max(0, (world.player.pack[wonder.base] ?? 1) - 1);
@@ -204,12 +243,65 @@ export function commandCraft(world: World, recipeId: string): string | null {
   if (rec.id === "board") completeObjective(world, "plank");
   if (rec.id === "smelt") completeObjective(world, "smelt");
   if (rec.station === "forge" && rec.id !== "smelt") completeObjective(world, "smith");
-  const made = Object.entries(rec.give)
-    .filter(([, n]) => (n ?? 0) > 0)
-    .map(([k, n]) => `${n} ${ITEM_META[k as ItemId].label.toLowerCase()}`)
-    .join(", ");
-  const wonderNote = wonder ? ` The work sings — ${rareName(wonder)}, crafted by ${maker}!` : "";
-  const note = gain ? `${made}.${wonderNote} ${gain}.` : `${made}.${wonderNote}`;
+  return { ok: true, gain, wonder };
+}
+
+/** How many attempts the carried materials allow right now (hard cap 25). */
+export function maxCraftable(world: World, rec: Recipe): number {
+  let max = 25;
+  for (const [k, n] of Object.entries(rec.need)) {
+    if (!n) continue;
+    max = Math.min(max, Math.floor((world.player.pack[k as ItemId] ?? 0) / n));
+  }
+  const self = selfIds(rec);
+  for (const nt of rec.needTags ?? []) {
+    max = Math.min(max, Math.floor(countTag(world.player.pack, nt.tag, self) / nt.n));
+  }
+  return Math.max(0, max);
+}
+
+/**
+ * Craft ×N — one long stint at the bench or fire. Materials are checked
+ * before every attempt (the stint ends when they run out); every attempt
+ * rolls success, gain, and the maker's mark on its own. One sound, one
+ * summary line: "6 boards. 1 split. The work sings — a club of ruin!"
+ */
+export function commandCraftBatch(world: World, recipeId: string, times: number): string | null {
+  if (world.player.ghost) return "A ghost cannot.";
+  const rec = recipeById(recipeId);
+  if (!rec) return "No such work.";
+  if (rec.station !== null) {
+    const here = stationsHere(world);
+    if (!here.includes(rec.station)) {
+      return rec.station === "forge" ? "The ore wants a fire. Raise a forge." : "The wood wants a bench. The yard, or the hall.";
+    }
+  }
+  if (rec.needsBlade && !bladeInHand(world)) {
+    return "The work wants an edge. Hold a blade — hatchet, knife, or sword.";
+  }
+  const want = Math.max(1, Math.min(Math.floor(times), maxCraftable(world, rec)));
+  if (want < 1) return missingNeed(world, rec);
+  playSfx(rec.sfx, rec.sfx === "fire" ? 0.48 : 0.52);
+  let made = 0;
+  let failed = 0;
+  const gains = new Set<string>();
+  const wonders: RareItem[] = [];
+  for (let i = 0; i < want; i++) {
+    if (missingNeed(world, rec)) break; // the pile ran short mid-stint
+    const { ok, gain, wonder } = craftOnce(world, rec);
+    if (gain) gains.add(gain);
+    if (ok) made++;
+    else failed++;
+    if (wonder) wonders.push(wonder);
+  }
+  const bits: string[] = [];
+  if (made > 0) bits.push(madeList(rec, made) + ".");
+  if (failed > 0) bits.push(`${failed} split.`);
+  if (made === 0 && failed === 0) bits.push("Nothing to work with.");
+  const maker = you(world)?.name ?? "an unknown hand";
+  for (const w of wonders) bits.push(`The work sings — ${rareName(w)}, crafted by ${maker}!`);
+  const gainText = [...gains].join(" ");
+  const note = gainText ? `${bits.join(" ")} ${gainText}.` : bits.join(" ");
   log(world, note);
   return note;
 }

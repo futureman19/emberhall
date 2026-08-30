@@ -64,6 +64,22 @@ export const AFFIXES: Record<string, AffixDef> = Object.fromEntries([
     "of wolf-slaying",
     { label: "of wolf-slaying", slot: "suf", group: "slayer", applies: "weapon", rank: 2, vsKind: "wolf", vsMul: 1.5 },
   ],
+  [
+    "of warg-slaying",
+    { label: "of warg-slaying", slot: "suf", group: "slayer", applies: "weapon", rank: 3, vsKind: "ridgeback_warg", vsMul: 1.45 },
+  ],
+  [
+    "of orc-slaying",
+    { label: "of orc-slaying", slot: "suf", group: "slayer", applies: "weapon", rank: 4, vsKind: "orc_marauder", vsMul: 1.45 },
+  ],
+  [
+    "of ogre-slaying",
+    { label: "of ogre-slaying", slot: "suf", group: "slayer", applies: "weapon", rank: 4, vsKind: "stonefang_ogre", vsMul: 1.45 },
+  ],
+  [
+    "of troll-slaying",
+    { label: "of troll-slaying", slot: "suf", group: "slayer", applies: "weapon", rank: 4, vsKind: "brine_troll", vsMul: 1.45 },
+  ],
   ward("of defense", 1, 1),
   ward("of guarding", 2, 2),
   ward("of hardening", 3, 3),
@@ -265,7 +281,12 @@ export function rollLootBase(rng: () => number): ItemId {
  * time; wolves drag rank II prizes from old camps one time in twelve.
  */
 export function rollKillRare(world: World, kind: FaunaKind, rng: () => number): RareItem | null {
-  const cfg = kind === "wight" ? { chance: 0.25, maxRank: 3, two: 0.2 } : kind === "wolf" ? { chance: 1 / 12, maxRank: 2, two: 0 } : null;
+  const cfg =
+    kind === "wight" ? { chance: 0.25, maxRank: 3, two: 0.2 } :
+    kind === "wolf" ? { chance: 1 / 12, maxRank: 2, two: 0 } :
+    kind === "ridgeback_warg" || kind === "barrow_hound" ? { chance: 0.14, maxRank: 2, two: 0.1 } :
+    kind === "brine_troll" || kind === "stonefang_ogre" || kind === "orc_marauder" ? { chance: 1 / 9, maxRank: 4, two: 0.25 } :
+    null;
   if (!cfg || rng() >= cfg.chance) return null;
   const base = rollLootBase(rng);
   const rare = rollRare(base, rng, { maxRank: cfg.maxRank, affixes: cfg.two > 0 && rng() < cfg.two ? 2 : 1 });

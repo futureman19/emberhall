@@ -94,11 +94,39 @@ export const CLASS_META: Record<ClassId, { label: string; color: string }> = {
   merchant: { label: "Merchant", color: "#a88848" },
 };
 
-export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp: number; dmg: number; eats: ResourceTag[] }> = {
-  hare: { label: "Hare", tameDiff: 8, hp: 8, dmg: 1, eats: ["plant"] },
-  hart: { label: "Hart", tameDiff: 22, hp: 22, dmg: 4, eats: ["plant"] },
-  wolf: { label: "Wolf", tameDiff: 40, hp: 28, dmg: 8, eats: ["meat"] },
-  wight: { label: "Wight", tameDiff: 99, hp: 36, dmg: 10, eats: ["meat"] },
+export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp: number; dmg: number; eats: ResourceTag[]; meat?: number; hide?: number; hasCorpse?: boolean }> = {
+  hare: { label: "Hare", tameDiff: 8, hp: 8, dmg: 1, eats: ["plant"], meat: 1, hide: 1 },
+  hart: { label: "Hart", tameDiff: 22, hp: 22, dmg: 4, eats: ["plant"], meat: 2, hide: 1 },
+  wolf: { label: "Wolf", tameDiff: 40, hp: 28, dmg: 8, eats: ["meat"], meat: 2, hide: 1 },
+  wight: { label: "Wight", tameDiff: 99, hp: 36, dmg: 10, eats: ["meat"], hasCorpse: false },
+
+  brambleback_stag: { label: "Brambleback Stag", tameDiff: 55, hp: 30, dmg: 6, eats: ["plant"], meat: 2, hide: 1 },
+  ironwood_boar: { label: "Ironwood Boar", tameDiff: 50, hp: 24, dmg: 7, eats: ["meat"], meat: 2, hide: 1 },
+  pine_lynx: { label: "Pine Lynx", tameDiff: 52, hp: 26, dmg: 7, eats: ["meat"], meat: 2, hide: 1 },
+  ember_fox: { label: "Ember Fox", tameDiff: 43, hp: 20, dmg: 5, eats: ["meat"], meat: 1, hide: 1 },
+  moss_badger: { label: "Moss Badger", tameDiff: 20, hp: 14, dmg: 3, eats: ["meat", "plant"], meat: 1, hide: 1 },
+
+  ridgeback_warg: { label: "Ridgeback Warg", tameDiff: 72, hp: 52, dmg: 12, eats: ["meat"], meat: 3, hide: 2 },
+  thornhide_doe: { label: "Thornhide Doe", tameDiff: 26, hp: 24, dmg: 4, eats: ["plant"], meat: 2, hide: 1 },
+  mire_croaker: { label: "Mire Croaker", tameDiff: 34, hp: 18, dmg: 3, eats: ["plant", "meat"], meat: 1, hide: 1 },
+  reedback_stalker: { label: "Reedback Stalker", tameDiff: 68, hp: 40, dmg: 10, eats: ["meat"], meat: 2, hide: 2 },
+  bog_toad: { label: "Bog Toad", tameDiff: 28, hp: 16, dmg: 3, eats: ["plant", "meat"], meat: 1, hide: 1 },
+
+  saltback_tortoise: { label: "Saltback Tortoise", tameDiff: 54, hp: 34, dmg: 6, eats: ["plant"], meat: 2, hide: 1 },
+  brine_hound: { label: "Brine Hound", tameDiff: 64, hp: 34, dmg: 9, eats: ["meat"], meat: 2, hide: 1 },
+  dune_crawler: { label: "Dune Crawler", tameDiff: 70, hp: 30, dmg: 7, eats: ["meat"], meat: 2, hide: 2 },
+  coal_salamander: { label: "Coal Salamander", tameDiff: 66, hp: 28, dmg: 7, eats: ["meat"], meat: 2, hide: 1 },
+  orebeetle: { label: "Orebeetle", tameDiff: 48, hp: 26, dmg: 5, eats: ["plant", "meat"], meat: 1, hide: 1 },
+
+  stonecrawl_spider: { label: "Stonecrawl Spider", tameDiff: 61, hp: 22, dmg: 8, eats: ["meat"], meat: 2, hide: 1 },
+  greybarrow_wightling: { label: "Greybarrow Wightling", tameDiff: 99, hp: 28, dmg: 9, eats: ["meat"], hasCorpse: false },
+  barrow_hound: { label: "Barrow Hound", tameDiff: 73, hp: 46, dmg: 11, eats: ["meat"], meat: 3, hide: 2 },
+  ashen_banshee: { label: "Ashen Banshee", tameDiff: 99, hp: 34, dmg: 10, eats: ["meat"], hasCorpse: false },
+  bonecrow: { label: "Bonecrow", tameDiff: 88, hp: 26, dmg: 8, eats: ["meat"], hasCorpse: false },
+
+  brine_troll: { label: "Brine Troll", tameDiff: 99, hp: 78, dmg: 16, eats: ["meat"], meat: 4, hide: 3 },
+  stonefang_ogre: { label: "Stonefang Ogre", tameDiff: 99, hp: 90, dmg: 18, eats: ["meat"], meat: 4, hide: 3 },
+  orc_marauder: { label: "Orc Marauder", tameDiff: 95, hp: 66, dmg: 15, eats: ["meat"], meat: 3, hide: 2 },
 };
 
 /** Tag lookup on the catalog — the single place items declare what they ARE. */
@@ -111,10 +139,11 @@ export function hasTag(id: ItemId, tag: ResourceTag): boolean {
 }
 
 /** How many tag-matching items a pack holds (sum across all matching ids). */
-export function countTag(pack: Partial<Record<ItemId, number>> | undefined, tag: ResourceTag): number {
+export function countTag(pack: Partial<Record<ItemId, number>> | undefined, tag: ResourceTag, except?: ReadonlySet<string>): number {
   if (!pack) return 0;
   let n = 0;
   for (const [k, v] of Object.entries(pack)) {
+    if (except?.has(k)) continue;
     if (v && hasTag(k as ItemId, tag)) n += v;
   }
   return n;

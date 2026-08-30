@@ -46,6 +46,35 @@ const SPILL: ItemId[] = [
   "cabbage", "wheat", "cabbage_seed", "wheat_seed", "garlic_seed",
 ];
 
+const TAME_RETALIATE: ReadonlySet<string> = new Set([
+  "wolf",
+  "wight",
+  "ridgeback_warg",
+  "barrow_hound",
+  "reedback_stalker",
+  "brine_hound",
+  "brine_troll",
+  "stonefang_ogre",
+  "orc_marauder",
+  "pine_lynx",
+]);
+
+const RETALIATE_KINDS: ReadonlySet<string> = new Set([
+  "wolf",
+  "wight",
+  "ridgeback_warg",
+  "barrow_hound",
+  "reedback_stalker",
+  "brine_hound",
+  "brine_troll",
+  "stonefang_ogre",
+  "orc_marauder",
+  "pine_lynx",
+  "greybarrow_wightling",
+  "ashen_banshee",
+  "bonecrow",
+]);
+
 export function resurrect(world: World, at?: { x: number; z: number }) {
   const p = you(world);
   if (!p) return "You are not in the vale.";
@@ -214,7 +243,12 @@ export function commandFeed(world: World, id: string) {
   const eats = FAUNA_META[c.kind].eats;
   const cands = [...new Set(eats.flatMap((t) => tagConsumeOrder(t)))];
   const give = cands.find((it) => (world.player.pack[it] ?? 0) > 0);
-  if (!give) return eats.includes("plant") ? "It wants greens." : "It wants meat.";
+  if (!give) {
+    const wants = new Set(eats);
+    if (wants.has("plant")) return "It wants greens.";
+    if (wants.has("meat")) return "It wants meat.";
+    return "It wants a proper feed.";
+  }
   world.player.pack[give] = (world.player.pack[give] ?? 0) - 1;
   c.loyalty = Math.min(100, c.loyalty + 12);
   return "It eats.";
@@ -412,7 +446,7 @@ function huntNow(world: World, p: Person) {
   if (slayerMul) dmg = Math.floor(dmg * slayerMul);
   const arm = armorOf(world.player.wear) + mods.armor;
   c.hp -= dmg;
-  if (c.kind === "wolf" || c.kind === "wight") p.hp = Math.max(0, p.hp - Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2)));
+  if (RETALIATE_KINDS.has(c.kind)) p.hp = Math.max(0, p.hp - Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2)));
   tryGain(world, "swords", ok, true);
   tryGain(world, "anatomy", ok, true);
   if (c.hp <= 0) {
@@ -444,7 +478,7 @@ function tameNow(world: World, p: Person) {
   tryGain(world, "taming", ok, chance > 0.3 && chance < 0.8);
   world.player.intent.kind = "none";
   if (!ok) {
-    if (c.kind === "wolf") p.hp = Math.max(0, p.hp - 4);
+    if (TAME_RETALIATE.has(c.kind)) p.hp = Math.max(0, p.hp - 4);
     c.task = "flee";
     return "It will not yield.";
   }
@@ -462,8 +496,14 @@ function skinNow(world: World, p: Person) {
     world.player.intent.kind = "none";
     return "Gone.";
   }
-  world.player.pack.hide = (world.player.pack.hide ?? 0) + 1;
-  world.player.pack.meat = (world.player.pack.meat ?? 0) + (c.kind === "hare" ? 1 : 2);
+  const meta = FAUNA_META[c.kind];
+  if (meta.hasCorpse === false) {
+    world.fauna = world.fauna.filter((x) => x.id !== c.id);
+    world.player.intent.kind = "none";
+    return `You dress the ${FAUNA_META[c.kind].label.toLowerCase()}, but nothing sticks to the knife.`;
+  }
+  world.player.pack.hide = (world.player.pack.hide ?? 0) + (meta.hide ?? 1);
+  world.player.pack.meat = (world.player.pack.meat ?? 0) + (meta.meat ?? 2);
   world.fauna = world.fauna.filter((x) => x.id !== c.id);
   completeObjective(world, "skin");
   world.player.intent.kind = "none";

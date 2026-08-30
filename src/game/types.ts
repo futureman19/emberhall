@@ -129,7 +129,34 @@ export type SpellId =
 
 export type ClassId = "ranger" | "warrior" | "mage" | "rogue" | "merchant";
 export type NpcRole = "banker" | "provisioner" | "healer";
-export type FaunaKind = "hare" | "hart" | "wolf" | "wight";
+export type FaunaKind =
+  | "hare"
+  | "hart"
+  | "wolf"
+  | "wight"
+  | "brambleback_stag"
+  | "ironwood_boar"
+  | "pine_lynx"
+  | "ember_fox"
+  | "moss_badger"
+  | "ridgeback_warg"
+  | "thornhide_doe"
+  | "mire_croaker"
+  | "reedback_stalker"
+  | "bog_toad"
+  | "saltback_tortoise"
+  | "brine_hound"
+  | "dune_crawler"
+  | "coal_salamander"
+  | "orebeetle"
+  | "stonecrawl_spider"
+  | "greybarrow_wightling"
+  | "barrow_hound"
+  | "ashen_banshee"
+  | "bonecrow"
+  | "brine_troll"
+  | "stonefang_ogre"
+  | "orc_marauder";
 export type BuildingKind =
   | "hall"
   | "dormitory"

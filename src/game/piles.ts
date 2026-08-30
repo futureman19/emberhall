@@ -1,5 +1,6 @@
 import { playSfx } from "./vale-sfx.ts";
 import { completeObjective, nid } from "./world.ts";
+import { FAUNA_META } from "./catalog.ts";
 import type { Creature, GroundPile, ItemId, World } from "./types.ts";
 
 export function addToPile(
@@ -39,7 +40,13 @@ export function addToPile(
 }
 
 export function spawnCorpsePile(world: World, c: Creature) {
-  const items: Partial<Record<ItemId, number>> = c.kind === "wight" ? {} : { hide: 1, meat: c.kind === "hare" ? 1 : 2 };
+  const meta = FAUNA_META[c.kind];
+  const items: Partial<Record<ItemId, number>> = meta.hasCorpse === false
+    ? {}
+    : {
+        hide: meta.hide ?? 1,
+        meat: meta.meat ?? (c.kind === "hare" ? 1 : 2),
+      };
   addToPile(world, Math.round(c.x), Math.round(c.z), items, "corpse", world.hour + 8, `${c.kind} corpse`);
 }
 
