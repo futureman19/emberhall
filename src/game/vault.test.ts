@@ -2,13 +2,21 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   VAULT_APP,
+  appendLedger,
   applyMint,
   applyRedeem,
   decodeBase64Json,
   decodeItemInscription,
   encodeItemInscription,
+  encodeRareInscription,
   inscriptionBase64,
+  suggestSats,
+  trackListing,
+  untrackListing,
+  type ItemInscription,
 } from "./vault.ts";
+import { AFFIXES } from "./rare.ts";
+import { ITEM_META } from "./catalog.ts";
 import { createWorld } from "./world.ts";
 import type { ItemId, World } from "./types.ts";
 
@@ -60,4 +68,45 @@ test("vault - a ghost cannot mint", () => {
   givePack(w, { sword: 1 });
   assert.equal(applyMint(w, "sword"), "A ghost cannot.");
   assert.equal(w.player.pack.sword, 1);
+});
+
+test("vault polish - the whisper: mundane sats follow the shop, wonders weigh rank", () => {
+  const w = createWorld();
+  const plain = encodeItemInscription(w, "sword")!;
+  // Half the shop's gold (floored at five), rounded to fives only at the end.
+  const prePlain = Math.max(5, Math.round(ITEM_META.sword.buy / 2));
+  const expectPlain = Math.max(5, Math.round(prePlain / 5) * 5);
+  assert.equal(suggestSats(plain), expectPlain);
+  // A wonder doubles the base, adds 15 per rank, and 10 for a maker's mark.
+  const affix = Object.keys(AFFIXES)[0];
+  const rare = encodeRareInscription(w, {
+    uid: "u1", base: "sword", affixes: [affix], maker: "Brunhilde", seed: 1, hour: 2,
+  })!;
+  const rank = AFFIXES[affix].rank;
+  const expectRare = Math.max(5, Math.round((prePlain * 2 + 15 * rank + 10) / 5) * 5);
+  assert.equal(suggestSats(rare), expectRare);
+  assert.ok(suggestSats(rare) > suggestSats(plain));
+  // Unknown item ids fall back to a token ten.
+  const bogus = { ...plain, item: "nonexistent" as ItemId } as ItemInscription;
+  assert.equal(suggestSats(bogus), 10);
+});
+
+test("vault polish - the ledger remembers its last rites", () => {
+  let book: ReturnType<typeof appendLedger> = [];
+  for (let i = 0; i < 30; i++) book = appendLedger(book, { at: i, kind: "mint", label: `item ${i}` });
+  assert.equal(book.length, 24);
+  assert.equal(book[book.length - 1].label, "item 29");
+  assert.equal(book[0].label, "item 6");
+});
+
+test("vault polish - listings track, retag, and untrack", () => {
+  let list: ReturnType<typeof trackListing> = [];
+  list = trackListing(list, { id: "a_0", label: "Sword", sats: 25, at: 1 });
+  list = trackListing(list, { id: "b_1", label: "Hatchet", sats: 5, at: 2 });
+  // Re-listing the same id replaces the note, never duplicates.
+  list = trackListing(list, { id: "a_0", label: "Sword", sats: 40, at: 3 });
+  assert.equal(list.length, 2);
+  assert.equal(list.find((t) => t.id === "a_0")!.sats, 40);
+  list = untrackListing(list, "a_0");
+  assert.deepEqual(list.map((t) => t.id), ["b_1"]);
 });

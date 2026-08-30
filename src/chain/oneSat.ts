@@ -1,4 +1,4 @@
-import { burnOrdinals, createContext, inscribe, listOrdinals, sellOrdinal, type OneSatContext } from "@1sat/actions";
+import { burnOrdinals, cancelOrdinalListing, createContext, inscribe, listOrdinals, sellOrdinal, type OneSatContext } from "@1sat/actions";
 import type { WalletInterface } from "@bsv/sdk";
 import {
   VAULT_APP,
@@ -135,7 +135,7 @@ export async function redeemItemNft(ctx: OneSatContext, id: string): Promise<str
 }
 
 /**
- * List an item ordinal for sale on the global 1Sat orderbook (OrdLock).
+/** List an item ordinal for sale on the global 1Sat orderbook (OrdLock).
  * Returns the listing txid; anyone can buy it from any 1Sat market —
  * the buyer pays real satoshis straight to the seller's wallet.
  */
@@ -143,4 +143,10 @@ export async function sellItemNft(ctx: OneSatContext, id: string, priceSats: num
   if (!Number.isSafeInteger(priceSats) || priceSats < 1) throw new Error("Name a price in whole satoshis.");
   const res = await sellOrdinal.execute(ctx, { id: toOneSatOutpoint(id), price: priceSats });
   return unwrap("The listing", res);
+}
+
+/** Take a listing back — the lock opens and the ordinal is yours again. */
+export async function cancelItemNft(ctx: OneSatContext, id: string): Promise<string> {
+  const res = await cancelOrdinalListing.execute(ctx, { id: toOneSatOutpoint(id) });
+  return unwrap("The cancel", res);
 }

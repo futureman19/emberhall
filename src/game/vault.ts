@@ -1,5 +1,5 @@
 import { ITEM_META } from "./catalog.ts";
-import { rareName, rareUid } from "./rare.ts";
+import { AFFIXES, rareName, rareUid } from "./rare.ts";
 import { log } from "./world.ts";
 import type { ItemId, RareItem, World } from "./types.ts";
 
@@ -164,4 +164,50 @@ export function decodeBase64Json(b64: string): unknown {
   } catch {
     return null;
   }
+}
+
+/**
+ * The vault's whisper of a price, in sats — half the shop's gold for the
+ * base, doubled for a wonder, more for rank and a maker's mark. A hint to
+ * start from, never an oracle: the chain pays what the chain pays.
+ */
+export function suggestSats(inscription: ItemInscription): number {
+  const meta = ITEM_META[inscription.item];
+  if (!meta) return 10;
+  let sats = Math.max(5, Math.round(meta.buy / 2));
+  if (inscription.rare) {
+    sats *= 2;
+    for (const a of inscription.rare.affixes) sats += 15 * (AFFIXES[a]?.rank ?? 1);
+    if (inscription.rare.maker) sats += 10;
+  }
+  return Math.max(5, Math.round(sats / 5) * 5);
+}
+
+/** A rite the vault remembers — mints, listings, burns (this browser only). */
+export interface LedgerEntry {
+  at: number;
+  kind: "mint" | "list" | "redeem" | "cancel";
+  label: string;
+  sats?: number;
+}
+export const LEDGER_MAX = 24;
+
+export function appendLedger(entries: LedgerEntry[], e: LedgerEntry): LedgerEntry[] {
+  return [...entries, e].slice(-LEDGER_MAX);
+}
+
+/** A listing made from this browser — the chain holds the lock, we hold the note. */
+export interface TrackedListing {
+  id: string;
+  label: string;
+  sats: number;
+  at: number;
+}
+
+export function trackListing(list: TrackedListing[], t: TrackedListing): TrackedListing[] {
+  return [...list.filter((x) => x.id !== t.id), t];
+}
+
+export function untrackListing(list: TrackedListing[], id: string): TrackedListing[] {
+  return list.filter((x) => x.id !== id);
 }
