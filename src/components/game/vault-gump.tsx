@@ -8,6 +8,8 @@ import { useGame } from "@/game/store";
 import type { ItemId } from "@/game/types";
 import { listVaultNfts, mintItemNft, mintRareNft, oneSatCtx, redeemItemNft, sellItemNft, type VaultNft } from "@/chain/oneSat";
 import { rareName } from "@/game/rare";
+import { ItemTipContent } from "@/components/game/item-tip";
+import { Tip } from "@/components/ui/tip";
 
 /**
  * The Vault — mint pack items into 1Sat ordinal NFTs, trade them for real
@@ -97,11 +99,13 @@ function VaultInner() {
               <ul className="mt-2 space-y-1">
                 {packItems.map(([id, n]) => (
                   <li key={id} className="flex items-center justify-between gap-2 rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 py-2">
-                    <span className="flex items-center gap-2 text-sm text-fg">
-                      <ItemGlyph id={id} className="size-4" />
-                      {ITEM_META[id].label}
-                      <span className="text-xs text-muted">×{n}</span>
-                    </span>
+                    <Tip content={<ItemTipContent id={id} />} className="min-w-0">
+                      <span className="flex items-center gap-2 text-sm text-fg">
+                        <ItemGlyph id={id} className="size-4" />
+                        {ITEM_META[id].label}
+                        <span className="text-xs text-muted">×{n}</span>
+                      </span>
+                    </Tip>
                     <Button
                       className="h-8 px-2 text-xs"
                       variant="secondary"
@@ -129,10 +133,12 @@ function VaultInner() {
               <ul className="mt-2 space-y-1">
                 {rares.map((r) => (
                   <li key={r.uid} className="flex items-center justify-between gap-2 rounded-[var(--radius-xs)] border border-gold/40 bg-surface-2 px-3 py-2">
-                    <span className="flex min-w-0 items-center gap-2 text-sm text-gold">
-                      <ItemGlyph id={r.base} className="size-4 shrink-0" />
-                      <span className="truncate">{rareName(r)}</span>
-                    </span>
+                    <Tip content={<ItemTipContent id={r.base} rare={r} />} className="min-w-0">
+                      <span className="flex min-w-0 items-center gap-2 text-sm text-gold">
+                        <ItemGlyph id={r.base} className="size-4 shrink-0" />
+                        <span className="truncate">{rareName(r)}</span>
+                      </span>
+                    </Tip>
                     <Button
                       className="h-8 shrink-0 px-2 text-xs"
                       variant="secondary"

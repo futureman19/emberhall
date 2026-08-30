@@ -125,6 +125,8 @@ interface GameUI {
 let uiAcc = 0;
 let saveAcc = 0;
 let toastTimer = 0;
+/** Identity of the world-log line the toast bridge has already seen. */
+let lastLogTop: string | null = null;
 let buildHeld = false;
 
 export function dropBuildHold() {
@@ -199,6 +201,7 @@ export const useGame = create<GameUI>((set, get) => ({
         set({ loadNote: "The door is open.", loadProgress: 1 });
         const left = 1100 - (performance.now() - started);
         if (left > 0) await wait(left);
+        lastLogTop = null; // a fresh world — its history must not toast
         set({
           phase: "playing",
           selectedId: null,
@@ -227,6 +230,27 @@ export const useGame = create<GameUI>((set, get) => ({
     if (!wasGhost && w.player.ghost) {
       toastTimer = 0;
       set({ toast: "You are a ghost." });
+    }
+    // The notice bridge — every result the sim writes to the log (the chop
+    // lands, the seed takes, the ore splits, the work sings) also surfaces
+    // as a toast. Immediate rejects already flash; this covers the outcomes.
+    const top = w.log[0];
+    if (top) {
+      const topKey = `${top.t}:${top.text}`;
+      if (lastLogTop === null) {
+        lastLogTop = topKey; // first tick after a load — history stays history
+      } else if (topKey !== lastLogTop) {
+        const fresh: string[] = [];
+        for (const line of w.log) {
+          if (`${line.t}:${line.text}` === lastLogTop) break;
+          fresh.push(line.text);
+          if (fresh.length >= 3) break;
+        }
+        fresh.reverse();
+        lastLogTop = topKey;
+        toastTimer = 0;
+        set({ toast: fresh.join(" · ") });
+      }
     }
     uiAcc += dt;
     saveAcc += dt;

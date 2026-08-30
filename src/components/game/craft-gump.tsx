@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ItemGlyph } from "@/components/game/paperdoll";
-import { countTag, hasTag, ITEM_META } from "@/game/catalog";
+import { ItemTipContent } from "@/components/game/item-tip";
+import { Tip } from "@/components/ui/tip";
+import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "@/game/catalog";
 import { RECIPES, haveNeed, stationsHere, type Recipe, type Station } from "@/game/craft";
 import { getWorld } from "@/game/live";
 import { useGame } from "@/game/store";
@@ -77,6 +79,7 @@ function RecipeRow({
   onMake: () => void;
 }) {
   const ready = at && haveNeed(pack, rec) && (!rec.needsBlade || bladeOk);
+  const product = (Object.keys(rec.give) as ItemId[]).find((k) => (rec.give[k] ?? 0) > 0);
   return (
     <button
       type="button"
@@ -87,22 +90,37 @@ function RecipeRow({
       )}
     >
       <span className="flex items-center justify-between gap-2">
-        <span className="text-sm text-fg">{rec.label}</span>
+        <Tip content={product ? <ItemTipContent id={product} /> : null} side="bottom">
+          <span className="text-sm text-fg underline decoration-dotted decoration-border-strong underline-offset-2">{rec.label}</span>
+        </Tip>
         <span className="font-display text-xs tracking-wider text-muted uppercase">{Math.round(skill)}</span>
       </span>
       <span className="mt-1 flex flex-wrap items-center gap-1">
         {Object.entries(rec.need).map(([k, n]) => (
-          <span key={k} className="flex items-center gap-0.5 text-xs text-muted">
-            <ItemGlyph id={k as ItemId} className="size-3.5" />
-            {n} {ITEM_META[k as ItemId].label}
-            <span className="text-muted">({pack?.[k as ItemId] ?? 0})</span>
-          </span>
+          <Tip key={k} content={<ItemTipContent id={k as ItemId} />} side="bottom">
+            <span className="flex items-center gap-0.5 text-xs text-muted">
+              <ItemGlyph id={k as ItemId} className="size-3.5" />
+              {n} {ITEM_META[k as ItemId].label}
+              <span className="text-muted">({pack?.[k as ItemId] ?? 0})</span>
+            </span>
+          </Tip>
         ))}
         {(rec.needTags ?? []).map((nt) => (
-          <span key={nt.tag} className="flex items-center gap-0.5 text-xs text-muted">
-            {nt.n} <span className="italic">{nt.tag}</span>
-            <span className="text-muted">({countTag(pack, nt.tag)})</span>
-          </span>
+          <Tip
+            key={nt.tag}
+            side="bottom"
+            content={
+              <span className="block text-[11px] text-muted">
+                anything tagged <span className="italic text-fg">{nt.tag}</span> — {tagConsumeOrder(nt.tag).slice(0, 5).map((id) => ITEM_META[id].label.toLowerCase()).join(", ")}
+                {tagConsumeOrder(nt.tag).length > 5 ? "…" : ""}
+              </span>
+            }
+          >
+            <span className="flex items-center gap-0.5 text-xs text-muted">
+              {nt.n} <span className="italic">{nt.tag}</span>
+              <span className="text-muted">({countTag(pack, nt.tag)})</span>
+            </span>
+          </Tip>
         ))}
         {rec.needsBlade ? <span className={cn("text-xs", bladeOk ? "text-muted" : "text-accent")}>+ a blade in hand</span> : null}
       </span>

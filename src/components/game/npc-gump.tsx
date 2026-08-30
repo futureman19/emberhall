@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { ItemTipContent } from "@/components/game/item-tip";
+import { Tip } from "@/components/ui/tip";
 import { ITEM_META, NPC_META, SHOP_STOCK } from "@/game/catalog";
 import { useGame } from "@/game/store";
 
@@ -36,14 +38,16 @@ export function NpcGump() {
         <ul className="mt-3 max-h-48 space-y-1 overflow-auto">
           {SHOP_STOCK.slice(0, 10).map((id) => (
             <li key={id}>
-              <button
-                type="button"
-                onClick={() => buy(id)}
-                className="flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left text-sm text-fg"
-              >
-                <span>{ITEM_META[id].label}</span>
-                <span className="text-muted">{ITEM_META[id].buy}g</span>
-              </button>
+              <Tip content={<ItemTipContent id={id} />} className="w-full min-w-0">
+                <button
+                  type="button"
+                  onClick={() => buy(id)}
+                  className="flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left text-sm text-fg"
+                >
+                  <span>{ITEM_META[id].label}</span>
+                  <span className="text-muted">{ITEM_META[id].buy}g</span>
+                </button>
+              </Tip>
             </li>
           ))}
         </ul>

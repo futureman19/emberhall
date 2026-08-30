@@ -17,6 +17,8 @@ import {
   weaponDmg,
 } from "./rare.ts";
 import { mulberry32 } from "./rng.ts";
+import { statLines, tagLine, worthLine } from "./iteminfo.ts";
+import { describeAffix } from "./rare.ts";
 import { commandEquip, commandEquipRare, commandUnequip, you } from "./player.ts";
 import { applyMintRare, applyRedeem, decodeBase64Json, decodeItemInscription, encodeRareInscription, inscriptionBase64 } from "./vault.ts";
 import { createWorld } from "./world.ts";
@@ -208,4 +210,24 @@ test("rare - every affix id in the table is well-formed", () => {
     assert.ok(["weapon", "armor", "jewelry"].includes(a.applies), `${id} applies somewhere`);
   }
   assert.ok(ITEM_META.sword, "catalog still sane");
+});
+
+test("tips - describeAffix spells every affix out in human lines", () => {
+  assert.equal(describeAffix("supremely accurate"), "+10% to hit");
+  assert.equal(describeAffix("of vanquishing"), "+5 damage");
+  assert.equal(describeAffix("of fortification"), "+4 armor");
+  assert.equal(describeAffix("of wight-slaying"), "half again the bite against wights");
+  assert.match(describeAffix("of the owl"), /^\+5 /);
+  assert.equal(describeAffix("nonsense"), "nonsense", "unknown text passes through");
+});
+
+test("tips - iteminfo: stats, tags, and shop worth lines", () => {
+  assert.deepEqual(statLines("sword"), ["10 damage", "a tool"]);
+  assert.deepEqual(statLines("cuirass"), ["2 armor"]);
+  assert.ok(statLines("hatchet").includes("6 damage"));
+  assert.ok(statLines("hatchet").includes("a tool"));
+  assert.deepEqual(statLines("cabbage"), [], "a cabbage has no combat stats");
+  assert.equal(tagLine("log"), "wood · fuel");
+  assert.equal(worthLine("relic"), "shops pay 40g");
+  assert.equal(worthLine("hide") !== null, true);
 });

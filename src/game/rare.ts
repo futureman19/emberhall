@@ -1,4 +1,4 @@
-import { hasTag, ITEM_META } from "./catalog.ts";
+import { hasTag, ITEM_META, SKILL_META } from "./catalog.ts";
 import type { FaunaKind, ItemId, RareItem, SkillId, WearSlot, World } from "./types.ts";
 
 /**
@@ -219,6 +219,18 @@ export function weaponDmg(id: ItemId | null): number {
   if (id === "staff") return 5;
   if (id === "knife") return 4;
   return 2;
+}
+
+/** One human line for an affix's effect — tooltips spell the magic out. */
+export function describeAffix(label: string): string {
+  const a = AFFIXES[label];
+  if (!a) return label;
+  if (a.hit) return `+${a.hit}% to hit`;
+  if (a.dmg) return `+${a.dmg} damage`;
+  if (a.armor) return `+${a.armor} armor`;
+  if (a.skill && a.skillAmt) return `+${a.skillAmt} ${SKILL_META[a.skill].label}`;
+  if (a.vsKind && a.vsMul) return `half again the bite against ${a.vsKind}s`;
+  return a.label;
 }
 
 /** Weighted loot table for creature drops — steel common, jewelry precious. */

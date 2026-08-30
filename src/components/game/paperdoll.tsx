@@ -3,6 +3,8 @@ import { maxMana } from "@/game/magery";
 import { rareName } from "@/game/rare";
 import { useGame } from "@/game/store";
 import type { ItemId, SkillId, WearSlot } from "@/game/types";
+import { ItemTipContent } from "@/components/game/item-tip";
+import { Tip } from "@/components/ui/tip";
 import { cn } from "@/lib/utils";
 
 const SLOTS: { id: WearSlot; label: string }[] = [
@@ -99,22 +101,24 @@ export function YouDressing() {
             const id = wear[s.id];
             const rare = rareByUid(wearRare[s.id]);
             const filled = Boolean(id) || Boolean(rare);
+            const tipId = rare ? rare.base : id;
             return (
-              <button
-                key={s.id}
-                type="button"
-                onClick={() => filled && unequip(s.id)}
-                className={cn(
-                  "flex min-h-11 items-center justify-between rounded-[var(--radius-xs)] border px-2 text-left",
-                  filled ? "border-border-strong bg-surface-2" : "border-border bg-surface-2",
-                  (s.id === "main" || s.id === "off") && "border-border-strong",
-                )}
-              >
-                <span className="text-xs text-muted">{s.label}</span>
-                <span className={cn("truncate pl-2 text-sm", rare ? "text-gold" : "text-fg")}>
-                  {rare ? rareName(rare) : id ? ITEM_META[id].label : "—"}
-                </span>
-              </button>
+              <Tip key={s.id} content={tipId ? <ItemTipContent id={tipId} rare={rare ?? undefined} /> : null} className="min-w-0">
+                <button
+                  type="button"
+                  onClick={() => filled && unequip(s.id)}
+                  className={cn(
+                    "flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border px-2 text-left",
+                    filled ? "border-border-strong bg-surface-2" : "border-border bg-surface-2",
+                    (s.id === "main" || s.id === "off") && "border-border-strong",
+                  )}
+                >
+                  <span className="text-xs text-muted">{s.label}</span>
+                  <span className={cn("truncate pl-2 text-sm", rare ? "text-gold" : "text-fg")}>
+                    {rare ? rareName(rare) : id ? ITEM_META[id].label : "—"}
+                  </span>
+                </button>
+              </Tip>
             );
           })}
         </div>
@@ -133,15 +137,17 @@ export function YouDressing() {
         <ul className="mt-1 space-y-1">
           {rares.map((r) => (
             <li key={r.uid}>
-              <button
-                type="button"
-                onClick={() => equipRare(r.uid)}
-                className="flex min-h-11 w-full min-w-0 items-center gap-2 rounded-[var(--radius-xs)] border border-gold/40 bg-surface-2 px-3 text-left"
-              >
-                <ItemGlyph id={r.base} />
-                <span className="truncate text-sm text-gold">{rareName(r)}</span>
-                <span className="ml-auto shrink-0 text-xs text-muted">{r.maker ? `by ${r.maker}` : "wonder"}</span>
-              </button>
+              <Tip content={<ItemTipContent id={r.base} rare={r} />} className="w-full min-w-0">
+                <button
+                  type="button"
+                  onClick={() => equipRare(r.uid)}
+                  className="flex min-h-11 w-full min-w-0 items-center gap-2 rounded-[var(--radius-xs)] border border-gold/40 bg-surface-2 px-3 text-left"
+                >
+                  <ItemGlyph id={r.base} />
+                  <span className="truncate text-sm text-gold">{rareName(r)}</span>
+                  <span className="ml-auto shrink-0 text-xs text-muted">{r.maker ? `by ${r.maker}` : "wonder"}</span>
+                </button>
+              </Tip>
             </li>
           ))}
         </ul>
@@ -151,18 +157,20 @@ export function YouDressing() {
           const hint = packHint(id);
           return (
             <li key={id} className="flex gap-1">
-              <button
-                type="button"
-                onClick={() => equip(id)}
-                className="flex min-h-11 min-w-0 flex-1 items-center gap-2 rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left"
-              >
-                <ItemGlyph id={id} />
-                <span className="truncate text-sm text-fg">{ITEM_META[id].label}</span>
-                <span className="ml-auto shrink-0 text-xs text-muted">
-                  {pack[id]}
-                  {hint ? ` · ${hint}` : ""}
-                </span>
-              </button>
+              <Tip content={<ItemTipContent id={id} />} className="min-w-0 flex-1">
+                <button
+                  type="button"
+                  onClick={() => equip(id)}
+                  className="flex min-h-11 w-full min-w-0 items-center gap-2 rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left"
+                >
+                  <ItemGlyph id={id} />
+                  <span className="truncate text-sm text-fg">{ITEM_META[id].label}</span>
+                  <span className="ml-auto shrink-0 text-xs text-muted">
+                    {pack[id]}
+                    {hint ? ` · ${hint}` : ""}
+                  </span>
+                </button>
+              </Tip>
               <button
                 type="button"
                 onClick={() => drop(id)}
