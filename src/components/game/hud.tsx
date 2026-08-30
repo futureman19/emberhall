@@ -4,6 +4,7 @@ import {
   CircleHelp,
   ClipboardList,
   FastForward,
+  Gem,
   Hammer,
   Anvil,
   Map as MapIcon,
@@ -20,6 +21,7 @@ import { NpcGump } from "@/components/game/npc-gump";
 import { YouDressing } from "@/components/game/paperdoll";
 import { SpellbookGump } from "@/components/game/spell-gump";
 import { CraftGump } from "@/components/game/craft-gump";
+import { VaultGump } from "@/components/game/vault-gump";
 import { ValeChart, MiniVale } from "@/components/game/vale-map";
 import { insideLabel } from "@/components/game/building-meshes";
 import { PLACES, regionAt } from "@/game/atlas";
@@ -73,6 +75,7 @@ function PlayingChrome() {
       <NpcGump />
       <SpellbookGump />
       <CraftGump />
+      <VaultGump />
       <Toast />
       <GhostBanner />
       <BuildRibbon />
@@ -222,6 +225,7 @@ function BottomDock() {
   const cur = useGame((s) => s.snap.speed);
   const openBook = useGame((s) => s.openBookGump);
   const openCraft = useGame((s) => s.openCraftGump);
+  const openVault = useGame((s) => s.openVaultGump);
   const items: { id: PanelId; icon: typeof CircleHelp; label: string }[] = [
     { id: "help", icon: CircleHelp, label: "Guide" },
     { id: "you", icon: Backpack, label: "You" },
@@ -254,6 +258,9 @@ function BottomDock() {
       </button>
       <button type="button" onClick={openCraft} className="grid size-11 place-items-center rounded-[var(--radius-md)] text-gold" aria-label="Work">
         <Anvil className="size-4" />
+      </button>
+      <button type="button" onClick={openVault} className="grid size-11 place-items-center rounded-[var(--radius-md)] text-accent" aria-label="The Vault — mint items as NFTs">
+        <Gem className="size-4" />
       </button>
       <button
         type="button"

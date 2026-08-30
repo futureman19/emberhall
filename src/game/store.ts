@@ -41,6 +41,7 @@ import { recruitPerson, setSpeed, tickWorld } from "./sim.ts";
 import { completeObjective, placeBuilding } from "./world.ts";
 import { COURT, stationNear } from "./atlas.ts";
 import type { BuildingKind, CtxTarget, CtxVerb, ItemId, PanelId, Speed, SpellId, Snapshot, WearSlot } from "./types.ts";
+import { applyMint, applyRedeem } from "./vault.ts";
 
 export type Phase = "title" | "raising" | "playing";
 
@@ -53,6 +54,7 @@ interface GameUI {
   toast: string | null;
   openBook: boolean;
   openCraft: boolean;
+  openVault: boolean;
   openPileId: string | null;
   openGateId: string | null;
   gateIgnoreId: string | null;
@@ -98,6 +100,12 @@ interface GameUI {
   closeBook: () => void;
   openCraftGump: () => void;
   closeCraft: () => void;
+  openVaultGump: () => void;
+  closeVault: () => void;
+  /** Chain mint confirmed — remove the item from the pack and re-snapshot. */
+  mintApplied: (item: ItemId) => void;
+  /** Chain burn confirmed — return the item to the pack and re-snapshot. */
+  redeemApplied: (item: ItemId) => void;
   makeRecipe: (id: string) => void;
   useStation: (id: string) => void;
   cast: (spell: SpellId, target?: CastTarget) => void;
@@ -138,6 +146,7 @@ export const useGame = create<GameUI>((set, get) => ({
   toast: null,
   openBook: false,
   openCraft: false,
+  openVault: false,
   openPileId: null,
   openGateId: null,
   gateIgnoreId: null,
@@ -198,6 +207,7 @@ export const useGame = create<GameUI>((set, get) => ({
           gateIgnoreId: null,
           openBook: false,
           openCraft: false,
+          openVault: false,
           snap: snapshot(),
         });
       } catch (err) {
@@ -479,7 +489,7 @@ export const useGame = create<GameUI>((set, get) => ({
       return;
     }
     completeObjective(w, "book");
-    set({ openBook: true, openCraft: false, panel: "none", ctx: null, selectedId: null, openPileId: null, snap: snapshot() });
+    set({ openBook: true, openCraft: false, openVault: false, panel: "none", ctx: null, selectedId: null, openPileId: null, snap: snapshot() });
   },
   closeBook: () => set({ openBook: false }),
   openCraftGump: () => {
@@ -488,9 +498,28 @@ export const useGame = create<GameUI>((set, get) => ({
       get().flash("A ghost cannot.");
       return;
     }
-    set({ openCraft: true, openBook: false, panel: "none", ctx: null, selectedId: null, openPileId: null, snap: snapshot() });
+    set({ openCraft: true, openBook: false, openVault: false, panel: "none", ctx: null, selectedId: null, openPileId: null, snap: snapshot() });
   },
   closeCraft: () => set({ openCraft: false }),
+  openVaultGump: () => {
+    const w = getWorld();
+    if (w.player.ghost) {
+      get().flash("A ghost cannot.");
+      return;
+    }
+    set({ openVault: true, openBook: false, openCraft: false, panel: "none", ctx: null, selectedId: null, openPileId: null, snap: snapshot() });
+  },
+  closeVault: () => set({ openVault: false }),
+  mintApplied: (item) => {
+    const note = applyMint(getWorld(), item);
+    if (note) get().flash(note);
+    set({ snap: snapshot() });
+  },
+  redeemApplied: (item) => {
+    const note = applyRedeem(getWorld(), item);
+    get().flash(note);
+    set({ snap: snapshot() });
+  },
   makeRecipe: (id) => {
     const err = commandCraft(getWorld(), id);
     if (err) get().flash(err);

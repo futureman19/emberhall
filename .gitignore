@@ -18,3 +18,4 @@ attachments/
 *.local
 
 .vercel
+tsconfig.tsbuildinfo
