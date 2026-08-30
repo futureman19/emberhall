@@ -430,6 +430,11 @@ export const useGame = create<GameUI>((set, get) => ({
       get().openPetRename(t.id);
       return;
     }
+    else if (verb === "care") {
+      get().openPetsGump();
+      set({ ctx: null });
+      return;
+    }
     else if (verb === "fireball" && t.kind === "fauna") err = commandCast(w, "fireball", { kind: "fauna", id: t.id });
     else if (verb === "cast" && t.kind === "fauna") err = commandCast(w, "magicarrow", { kind: "fauna", id: t.id });
     else if (verb === "teleport") err = commandCast(w, "teleport", { kind: "tile", tx: t.tx, ty: t.ty });

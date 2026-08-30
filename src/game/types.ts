@@ -468,6 +468,7 @@ export type CtxVerb =
   | "teleport"
   | "enter"
   | "roster"
+  | "care"
   | "drop"
   | "take"
   | "use"

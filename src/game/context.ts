@@ -51,6 +51,7 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
     if (c?.task === "dead") out.push({ verb: "skin", label: "Dress" }, { verb: "loot", label: "Loot" });
     else if (c?.ownerId === w.player.id) {
       out.push(
+        { verb: "care", label: "Care" },
         { verb: "stay", label: "Stay" },
         { verb: "follow", label: "Follow" },
         { verb: "feed", label: "Feed" },

@@ -2,12 +2,9 @@ import {
   AudioLines,
   Backpack,
   CircleHelp,
-  ClipboardList,
   FastForward,
-  Bone,
   Hammer,
   Anvil,
-  Map as MapIcon,
   Music2,
   Pause,
   Play,
@@ -208,7 +205,15 @@ function TopBar() {
     <div className="pointer-events-none absolute top-3 right-3 left-3 flex items-start justify-between gap-3">
       <div className="flex flex-col items-start gap-1.5">
         <div className="min-w-0 rounded-[var(--radius-md)] border border-border bg-bg/80 px-3 py-2">
-          <p className="font-display text-xs tracking-wider text-gold uppercase">{inside ? BUILDING_META[inside].label : snap.region}</p>
+          <button
+            type="button"
+            onClick={() => setPanel("vale")}
+            className="pointer-events-auto block max-w-48 truncate text-left font-display text-xs tracking-wider text-gold uppercase hover:text-fg"
+            aria-label="Open the vale map"
+            title="The chart of the vale"
+          >
+            {inside ? BUILDING_META[inside].label : snap.region}
+          </button>
           <p className="text-xs text-muted tabular-nums">
             {ghost ? "Ghost" : clockLabel(snap.clock, snap.day)} · {phaseName(snap.hour)} · {snap.weather.label}
           </p>
@@ -284,11 +289,8 @@ function BottomDock() {
   const setPanel = useGame((s) => s.setPanel);
   const openBook = useGame((s) => s.openBookGump);
   const openCraft = useGame((s) => s.openCraftGump);
-  const openPets = useGame((s) => s.openPetsGump);
   const items: { id: PanelId; icon: typeof CircleHelp; label: string }[] = [
     { id: "help", icon: CircleHelp, label: "Guide" },
-    { id: "journal", icon: ClipboardList, label: "Journal" },
-    { id: "vale", icon: MapIcon, label: "Vale" },
     { id: "build", icon: Hammer, label: "Hold" },
   ];
   return (
@@ -315,9 +317,6 @@ function BottomDock() {
       </button>
       <button type="button" onClick={openCraft} className="grid size-11 place-items-center rounded-[var(--radius-md)] text-gold" aria-label="Work">
         <Anvil className="size-4" />
-      </button>
-      <button type="button" onClick={openPets} className="grid size-11 place-items-center rounded-[var(--radius-md)] text-gold" aria-label="Companions — your tamed beasts">
-        <Bone className="size-4" />
       </button>
     </div>
   );
@@ -369,12 +368,48 @@ function SidePanel() {
   if (panel === "none") return null;
   return (
     <div className="pointer-events-auto absolute top-16 bottom-20 left-3 w-[min(100%-1.5rem,22rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4">
-      {panel === "help" && <HelpPanel />}
+      {panel === "help" && <GuideTabs />}
       {panel === "you" && <YouDressing />}
       {panel === "journal" && <JournalPanel />}
       {panel === "vale" && <ValeChart />}
       {panel === "roster" && <RosterPanel />}
       {panel === "build" && <HoldPanel />}
+    </div>
+  );
+}
+
+/** One reading lamp, three pages — the Guide, the Journal, and the Roster. */
+function GuideTabs() {
+  const [tab, setTab] = useState<"guide" | "journal" | "roster">("guide");
+  const tabs = [
+    { id: "guide" as const, label: "Guide" },
+    { id: "journal" as const, label: "Journal" },
+    { id: "roster" as const, label: "Roster" },
+  ];
+  return (
+    <div>
+      <div className="flex gap-1" role="tablist" aria-label="Reading pages">
+        {tabs.map((t) => (
+          <button
+            key={t.id}
+            type="button"
+            role="tab"
+            aria-selected={tab === t.id}
+            onClick={() => setTab(t.id)}
+            className={cn(
+              "min-h-9 flex-1 rounded-[var(--radius-xs)] border px-2 text-xs",
+              tab === t.id ? "border-border-strong bg-surface-2 text-fg" : "border-border bg-surface text-muted",
+            )}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+      <div className="mt-3">
+        {tab === "guide" && <HelpPanel />}
+        {tab === "journal" && <JournalPanel />}
+        {tab === "roster" && <RosterPanel />}
+      </div>
     </div>
   );
 }
@@ -388,7 +423,7 @@ function HelpPanel() {
         Click the ground to walk. Click a tree to chop, stone to mine, a beast to hunt. Right-click a live beast and Tame
         — hares yield, wolves rarely do. Open You for the paperdoll. Tap a hatchet, pick, hoe, or sword in the pack — it
         sits in your Hand. Tap the Hand to put it away. Chop needs the hatchet held. Mine needs the pick. Farm needs the
-        hoe. The book in the pack is magery. Open it.
+        hoe. The book in the pack is magery. Open it. Right-click a tamed beast and Care opens its loyalty and whereabouts.
         Mark writes this dirt on a rune. Walk off. Tap the mark — Recall folds you back. The moons still hold. Towns keep
         a banker, a healer, a stall. Die and you walk pale — Ione at the hall can return you. Your corpse keeps what it
         took until you come back living. Right-click the hall to read the roster — who has joined, who might. Open
@@ -399,8 +434,8 @@ function HelpPanel() {
         green to take the crop and more seed. Farming is a skill. Eat cabbage from You.
         Eight stone rings hold the moons. Walk into the
         swirl east of the steps. North of Oakstand the height goes to snow. Wolfhollow is pine and wolf. Hearthfen is peat
-        marsh. Southmere is warm thick green. Brinegate is salt and sand. The hall stays green. Tap the map — or a town —
-        and you walk there.
+        marsh. Southmere is warm thick green. Brinegate is salt and sand. The hall stays green. Tap your region's name up
+        top for the chart — or a town — and you walk there.
       </p>
       <p className="mt-3 text-pretty text-xs leading-relaxed text-muted">
         A lute in the air — RandomMind, given to the dirt. The note stills the lute. The lines still the chop, the mine, the spell.

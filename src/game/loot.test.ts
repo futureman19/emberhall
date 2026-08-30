@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { spawnCorpsePile, takeGoldFromPile } from "./piles.ts";
 import { verbsFor } from "./context.ts";
-import { tickPlayer, you } from "./player.ts";
+import { setWorld } from "./live.ts";
+import { tickPlayer, you, commandLoot } from "./player.ts";
 import { createWorld } from "./world.ts";
 import type { Creature, FaunaKind } from "./types.ts";
 
@@ -118,6 +119,40 @@ test("loot - the sword's kill spills too (melee, not just spells)", () => {
   assert.ok(pile, "the fallen orc spilled its carried loot");
 });
 
+
+test("loot - targeting a dead creature id uses its corpse pile", () => {
+  const w = createWorld();
+  const orc = corpse("orc_marauder");
+  orc.x = 11;
+  orc.z = 10;
+  w.fauna.push(orc);
+  withRoll(0.01, () => spawnCorpsePile(w, orc));
+  const before = {
+    club: w.player.pack.club,
+    knife: w.player.pack.knife,
+    hatchet: w.player.pack.hatchet,
+    mace: w.player.pack.mace,
+    hood: w.player.pack.hood,
+    gloves: w.player.pack.gloves,
+    boots: w.player.pack.boots,
+    orc_tusk: w.player.pack.orc_tusk,
+    nightshade: w.player.pack.nightshade,
+  };
+  const got = commandLoot(w, orc.id);
+  assert.equal(got, null);
+  const gained =
+    before.club < w.player.pack.club ||
+    before.knife < w.player.pack.knife ||
+    before.hatchet < w.player.pack.hatchet ||
+    before.mace < w.player.pack.mace ||
+    before.hood < w.player.pack.hood ||
+    before.gloves < w.player.pack.gloves ||
+    before.boots < w.player.pack.boots ||
+    before.orc_tusk < w.player.pack.orc_tusk ||
+    before.nightshade < w.player.pack.nightshade;
+  assert.ok(gained, "expected corpse loot by creature id");
+});
+
 test("roster - the hall keeps the roll of the hold", () => {
   const verbs = verbsFor({ kind: "building", id: "b1", tx: 0, ty: 0, label: "hall" });
   assert.equal(verbs[0].verb, "roster");
@@ -125,4 +160,36 @@ test("roster - the hall keeps the roll of the hold", () => {
   // A forge is a fire to work, not a roll to read.
   const forge = verbsFor({ kind: "building", id: "b2", tx: 0, ty: 0, label: "forge" });
   assert.ok(!forge.some((v) => v.verb === "roster"));
+});
+
+test("care - your own beast offers the Companions page, a wild one does not", () => {
+  const w = createWorld();
+  setWorld(w);
+  const p = you(w)!;
+  const pet = {
+    id: "pet1",
+    kind: "wolf" as const,
+    x: p.x + 1,
+    z: p.z,
+    hp: 10,
+    maxHp: 10,
+    task: "follow" as const,
+    targetId: null,
+    path: [],
+    taskUntil: 0,
+    corpseUntil: 0,
+    home: { tx: Math.round(p.x), ty: Math.round(p.z) },
+    ownerId: w.player.id,
+    loyalty: 40,
+    stay: false,
+    name: "Soot",
+    warnedLoyal: false,
+  };
+  w.fauna.push(pet);
+  const verbs = verbsFor({ kind: "fauna", id: pet.id, tx: 0, ty: 0, label: "wolf" });
+  assert.equal(verbs[0].verb, "care");
+  const wild = { ...pet, id: "wild1", ownerId: null, name: null };
+  w.fauna.push(wild);
+  const wildVerbs = verbsFor({ kind: "fauna", id: wild.id, tx: 0, ty: 0, label: "wolf" });
+  assert.ok(!wildVerbs.some((v) => v.verb === "care"));
 });

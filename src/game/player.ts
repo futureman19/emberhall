@@ -280,10 +280,25 @@ export function commandSkin(world: World, id: string) {
   return null;
 }
 
+function resolveLootTarget(world: World, id: string): string | null {
+  const byId = world.piles.find((p) => p.id === id);
+  if (byId) return byId.id;
+  const corpse = world.fauna.find((x) => x.id === id && x.task === "dead");
+  if (!corpse) return null;
+  const tx = Math.round(corpse.x);
+  const ty = Math.round(corpse.z);
+  const nearby = world.piles.filter((p) => p.tx === tx && p.ty === ty);
+  if (nearby.length === 0) return null;
+  const corpsePile = nearby.find((p) => p.source === "corpse" || p.source === "death");
+  return (corpsePile ?? nearby[0]).id;
+}
+
 export function commandLoot(world: World, id: string) {
   const dead = hands(world);
   if (dead) return dead;
-  return takeFromPile(world, id);
+  const pileId = resolveLootTarget(world, id);
+  if (!pileId) return "Nothing to loot.";
+  return takeFromPile(world, pileId);
 }
 
 export function commandDrop(world: World, item: ItemId) {
@@ -667,7 +682,7 @@ export function tickPlayer(world: World, dt: number): string | null {
   if (intent.kind === "tame") return tameNow(world, p);
   if (intent.kind === "skin") return skinNow(world, p);
   if (intent.kind === "loot") {
-    const err = takeFromPile(world, intent.targetId ?? "");
+    const err = commandLoot(world, intent.targetId ?? "");
     intent.kind = "none";
     return err;
   }
