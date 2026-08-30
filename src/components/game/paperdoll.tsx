@@ -1,4 +1,4 @@
-import { ITEM_META, SKILL_META } from "@/game/catalog";
+import { ITEM_META, NOTORIETY_META, SKILL_META } from "@/game/catalog";
 import { getWorld } from "@/game/live";
 import { maxMana } from "@/game/magery";
 import { dressedStats } from "@/game/iteminfo";
@@ -147,6 +147,9 @@ export function YouDressing() {
   return (
     <div>
       <h2 className="font-display text-sm text-fg">{self.name}</h2>
+      <p className="mt-0.5 text-xs text-muted tabular-nums">
+        <span className="text-gold">{snap.gold} gold</span> · {NOTORIETY_META[snap.player?.notoriety ?? "innocent"].label}
+      </p>
       {ghost ? (
         <p className="mt-1 text-pretty text-xs leading-relaxed text-accent">
           You are a ghost. A healer can return you. Ione stands at the hall. Your corpse still holds what it took.

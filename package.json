@@ -6,6 +6,7 @@
   ],
   "type": "module",
   "overrides": {
+    "@bsv/message-box-client": "2.2.6",
     "nf3": "0.3.17"
   },
   "scripts": {
@@ -21,9 +22,6 @@
     "test": "node --test 'scripts/**/*.test.mjs' && node --experimental-strip-types --test src/lib/app-data/app-data.test.ts src/lib/auth/gate-identity.test.ts src/lib/client/client.server.test.ts src/game/weather.test.ts src/game/city.test.ts src/game/tags.test.ts src/game/vault.test.ts src/game/rare.test.ts src/game/campfire.test.ts src/game/pets.test.ts src/game/loot.test.ts",
     "lint": "eslint .",
     "format": "prettier --write ."
-  },
-  "overrides": {
-    "@bsv/message-box-client": "2.2.6"
   },
   "dependencies": {
     "@1sat/actions": "^0.0.197",

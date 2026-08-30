@@ -16,6 +16,6 @@ export function pick<T>(rng: () => number, arr: T[]): T {
 }
 
 export function hash2(x: number, y: number, seed: number) {
-  let n = Math.sin(x * 127.1 + y * 311.7 + seed * 0.001) * 43758.5453;
+  const n = Math.sin(x * 127.1 + y * 311.7 + seed * 0.001) * 43758.5453;
   return n - Math.floor(n);
 }

@@ -24,7 +24,7 @@ import { PetsGump } from "@/components/game/pets-gump";
 import { ValeChart, MiniVale } from "@/components/game/vale-map";
 import { insideLabel } from "@/components/game/building-meshes";
 import { PLACES, regionAt } from "@/game/atlas";
-import { BUILD_ORDER, BUILDING_META, CLASS_META, NOTORIETY_META } from "@/game/catalog";
+import { BUILD_ORDER, BUILDING_META, CLASS_META } from "@/game/catalog";
 import { phaseName } from "@/game/gates";
 import { getWorld } from "@/game/live";
 import { maxMana } from "@/game/magery";
@@ -255,10 +255,6 @@ function TopBar() {
           >
             <FastForward className="size-4" />
           </button>
-        </div>
-        <div className="rounded-[var(--radius-md)] border border-border bg-bg/80 px-3 py-2 text-right">
-          <p className="font-display text-xs text-gold tabular-nums">{snap.gold}g</p>
-          <p className="text-xs text-muted">{NOTORIETY_META[snap.player?.notoriety ?? "innocent"].label}</p>
         </div>
       </div>
     </div>
