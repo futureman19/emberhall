@@ -2,8 +2,11 @@ import { EH, inGreybarrow } from "./atlas.ts";
 import { FAUNA_META, hasTag, ITEM_META, armorOf, tagConsumeOrder } from "./catalog.ts";
 import { harvestNow, plantNow, tillNow } from "./farm.ts";
 import { ARROW_RANGE, FIREBALL_RANGE, burstDeath, castNow, maxMana, tickMana } from "./magery.ts";
+import { pickPetName } from "./names.ts";
+import { petLabel } from "./pets.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { addToPile, takeFromPile } from "./piles.ts";
+import { mulberry32 } from "./rng.ts";
 import { successChance, tryGain } from "./skills.ts";
 import { playSfx } from "./vale-sfx.ts";
 import { completeObjective, log } from "./world.ts";
@@ -215,7 +218,9 @@ export function commandStay(world: World, id: string) {
   c.stay = true;
   c.task = "idle";
   c.path = [];
-  return "Stay.";
+  const note = `${petLabel(c)} stays.`;
+  log(world, note);
+  return note;
 }
 
 export function commandFollow(world: World, id: string) {
@@ -223,16 +228,21 @@ export function commandFollow(world: World, id: string) {
   if (!c || c.ownerId !== world.player.id) return "It is not yours.";
   c.stay = false;
   c.task = "follow";
-  return "It follows.";
+  const note = `${petLabel(c)} follows.`;
+  log(world, note);
+  return note;
 }
 
 export function commandRelease(world: World, id: string) {
   const c = world.fauna.find((x) => x.id === id);
   if (!c || c.ownerId !== world.player.id) return "It is not yours.";
+  const who = petLabel(c);
   c.ownerId = null;
   c.stay = false;
   c.task = "wander";
-  return "Gone.";
+  const note = `${who} is gone.`;
+  log(world, note);
+  return note;
 }
 
 export function commandFeed(world: World, id: string) {
@@ -251,7 +261,10 @@ export function commandFeed(world: World, id: string) {
   }
   world.player.pack[give] = (world.player.pack[give] ?? 0) - 1;
   c.loyalty = Math.min(100, c.loyalty + 12);
-  return "It eats.";
+  if (c.loyalty >= 15) c.warnedLoyal = false; // a fed friend forgives
+  const note = `${petLabel(c)} eats.`;
+  log(world, note);
+  return note;
 }
 
 export function commandSkin(world: World, id: string) {
@@ -486,8 +499,11 @@ function tameNow(world: World, p: Person) {
   c.loyalty = 40;
   c.stay = false;
   c.task = "follow";
+  c.warnedLoyal = false;
+  const taken = new Set(world.fauna.filter((x) => x.ownerId === world.player.id && x.id !== c.id && x.name).map((x) => x.name!));
+  c.name = pickPetName(mulberry32(world.seed + Math.floor(world.hour * 97) + c.id.length), taken);
   completeObjective(world, "tame");
-  return `The ${FAUNA_META[c.kind].label.toLowerCase()} is yours.`;
+  return `The ${FAUNA_META[c.kind].label.toLowerCase()} is yours. You name it ${c.name}.`;
 }
 
 function skinNow(world: World, p: Person) {

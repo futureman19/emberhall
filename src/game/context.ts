@@ -54,6 +54,7 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
         { verb: "stay", label: "Stay" },
         { verb: "follow", label: "Follow" },
         { verb: "feed", label: "Feed" },
+        { verb: "name", label: "Name" },
         { verb: "release", label: "Release" },
       );
     } else {

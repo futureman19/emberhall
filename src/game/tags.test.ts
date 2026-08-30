@@ -151,11 +151,11 @@ test("diets - beasts eat by tag: hares want greens, wolves want meat", () => {
   givePack(w, { meat: 1 });
   assert.equal(commandFeed(w, hare.id), "It wants greens.");
   givePack(w, { cabbage: 2 });
-  assert.equal(commandFeed(w, hare.id), "It eats.");
+  assert.equal(commandFeed(w, hare.id), "hare eats.");
   assert.equal(w.player.pack.cabbage, 1);
   assert.ok(hare.loyalty > 0);
   givePack(w, { meat: 1 });
-  assert.equal(commandFeed(w, wolf.id), "It eats.");
+  assert.equal(commandFeed(w, wolf.id), "wolf eats.");
   assert.equal(w.player.pack.meat, 0);
   assert.deepEqual(FAUNA_META.hare.eats, ["plant"]);
   assert.deepEqual(FAUNA_META.wolf.eats, ["meat"]);

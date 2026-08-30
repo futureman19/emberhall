@@ -5,6 +5,7 @@ import { tickCrops } from "./farm.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { tickPiles } from "./piles.ts";
 import { tickCampfires } from "./campfire.ts";
+import { tickPets } from "./pets.ts";
 import { tickPlayer, you } from "./player.ts";
 import { tickWeather } from "./weather.ts";
 import { completeObjective, log, revealAround } from "./world.ts";
@@ -81,6 +82,7 @@ export function tickWorld(world: World, realDt: number) {
   tickEcology(world, dt);
   tickPiles(world);
   tickCampfires(world);
+  tickPets(world, dt);
   void COURT;
   void GATE;
   void tileOf;

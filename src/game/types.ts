@@ -273,6 +273,10 @@ export interface Creature {
   ownerId: string | null;
   loyalty: number;
   stay: boolean;
+  /** Given name (auto-named at the bond; rename anytime). */
+  name?: string | null;
+  /** One-time "looks restless" warning latch — feeding re-arms it. */
+  warnedLoyal?: boolean;
 }
 
 export interface GroundPile {
@@ -441,6 +445,7 @@ export type CtxVerb =
   | "follow"
   | "release"
   | "feed"
+  | "name"
   | "cast"
   | "fireball"
   | "teleport"

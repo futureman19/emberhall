@@ -28,6 +28,8 @@ function withFauna(w: World) {
   if (w.fauna) {
     for (const c of w.fauna) {
       if (c.loyalty == null) c.loyalty = 0;
+      if (c.name === undefined) c.name = null;
+      if (c.warnedLoyal == null) c.warnedLoyal = false;
       if (c.stay == null) c.stay = false;
     }
   }

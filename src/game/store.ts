@@ -36,6 +36,7 @@ import {
   commandWalk,
   you,
 } from "./player.ts";
+import { commandNamePet } from "./pets.ts";
 import { takeFromPile } from "./piles.ts";
 import { clearSave, hasSave, loadSave, writeSave } from "./save.ts";
 import { recruitPerson, setSpeed, tickWorld } from "./sim.ts";
@@ -56,6 +57,9 @@ interface GameUI {
   openBook: boolean;
   openCraft: boolean;
   openVault: boolean;
+  openPets: boolean;
+  /** Pet id the companions panel should open in rename mode, if any. */
+  renamePetId: string | null;
   openPileId: string | null;
   openGateId: string | null;
   gateIgnoreId: string | null;
@@ -104,6 +108,11 @@ interface GameUI {
   closeCraft: () => void;
   openVaultGump: () => void;
   closeVault: () => void;
+  openPetsGump: () => void;
+  closePets: () => void;
+  /** Open the companions panel, optionally with one pet in rename mode. */
+  openPetRename: (id: string | null) => void;
+  namePet: (id: string, name: string) => void;
   /** Chain mint confirmed — remove the item from the pack and re-snapshot. */
   mintApplied: (item: ItemId) => void;
   /** Chain mint confirmed — remove the rare from the keeping and re-snapshot. */
@@ -154,6 +163,8 @@ export const useGame = create<GameUI>((set, get) => ({
   openBook: false,
   openCraft: false,
   openVault: false,
+  openPets: false,
+  renamePetId: null,
   openPileId: null,
   openGateId: null,
   gateIgnoreId: null,
@@ -216,6 +227,8 @@ export const useGame = create<GameUI>((set, get) => ({
           openBook: false,
           openCraft: false,
           openVault: false,
+          openPets: false,
+          renamePetId: null,
           snap: snapshot(),
         });
       } catch (err) {
@@ -405,6 +418,10 @@ export const useGame = create<GameUI>((set, get) => ({
     else if (verb === "follow" && t.kind === "fauna") err = commandFollow(w, t.id);
     else if (verb === "release" && t.kind === "fauna") err = commandRelease(w, t.id);
     else if (verb === "feed" && t.kind === "fauna") err = commandFeed(w, t.id);
+    else if (verb === "name" && t.kind === "fauna") {
+      get().openPetRename(t.id);
+      return;
+    }
     else if (verb === "fireball" && t.kind === "fauna") err = commandCast(w, "fireball", { kind: "fauna", id: t.id });
     else if (verb === "cast" && t.kind === "fauna") err = commandCast(w, "magicarrow", { kind: "fauna", id: t.id });
     else if (verb === "teleport") err = commandCast(w, "teleport", { kind: "tile", tx: t.tx, ty: t.ty });
@@ -544,6 +561,18 @@ export const useGame = create<GameUI>((set, get) => ({
     set({ openVault: true, openBook: false, openCraft: false, panel: "none", ctx: null, selectedId: null, openPileId: null, snap: snapshot() });
   },
   closeVault: () => set({ openVault: false }),
+  openPetsGump: () => {
+    set({ openPets: true, renamePetId: null, openBook: false, openCraft: false, openVault: false, panel: "none", ctx: null, snap: snapshot() });
+  },
+  closePets: () => set({ openPets: false, renamePetId: null }),
+  openPetRename: (id) => {
+    set({ openPets: true, renamePetId: id, openBook: false, openCraft: false, openVault: false, panel: "none", ctx: null, snap: snapshot() });
+  },
+  namePet: (id, name) => {
+    const err = commandNamePet(getWorld(), id, name);
+    if (err && err.startsWith("It is not")) get().flash(err);
+    set({ renamePetId: null, snap: snapshot() });
+  },
   mintApplied: (item) => {
     const note = applyMint(getWorld(), item);
     if (note) get().flash(note);

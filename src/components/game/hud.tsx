@@ -5,6 +5,7 @@ import {
   ClipboardList,
   FastForward,
   Gem,
+  Bone,
   Hammer,
   Anvil,
   Map as MapIcon,
@@ -22,6 +23,7 @@ import { YouDressing } from "@/components/game/paperdoll";
 import { SpellbookGump } from "@/components/game/spell-gump";
 import { CraftGump } from "@/components/game/craft-gump";
 import { VaultGump } from "@/components/game/vault-gump";
+import { PetsGump } from "@/components/game/pets-gump";
 import { ValeChart, MiniVale } from "@/components/game/vale-map";
 import { insideLabel } from "@/components/game/building-meshes";
 import { PLACES, regionAt } from "@/game/atlas";
@@ -76,6 +78,7 @@ function PlayingChrome() {
       <SpellbookGump />
       <CraftGump />
       <VaultGump />
+      <PetsGump />
       <Toast />
       <GhostBanner />
       <BuildRibbon />
@@ -226,6 +229,7 @@ function BottomDock() {
   const openBook = useGame((s) => s.openBookGump);
   const openCraft = useGame((s) => s.openCraftGump);
   const openVault = useGame((s) => s.openVaultGump);
+  const openPets = useGame((s) => s.openPetsGump);
   const items: { id: PanelId; icon: typeof CircleHelp; label: string }[] = [
     { id: "help", icon: CircleHelp, label: "Guide" },
     { id: "you", icon: Backpack, label: "You" },
@@ -261,6 +265,9 @@ function BottomDock() {
       </button>
       <button type="button" onClick={openVault} className="grid size-11 place-items-center rounded-[var(--radius-md)] text-accent" aria-label="The Vault — mint items as NFTs">
         <Gem className="size-4" />
+      </button>
+      <button type="button" onClick={openPets} className="grid size-11 place-items-center rounded-[var(--radius-md)] text-gold" aria-label="Companions — your tamed beasts">
+        <Bone className="size-4" />
       </button>
       <button
         type="button"
