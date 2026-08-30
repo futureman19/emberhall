@@ -58,6 +58,7 @@ interface GameUI {
   openBook: boolean;
   openCraft: boolean;
   openVault: boolean;
+  openSettings: boolean;
   openPets: boolean;
   /** Pet id the companions panel should open in rename mode, if any. */
   renamePetId: string | null;
@@ -110,6 +111,8 @@ interface GameUI {
   openCraftGump: () => void;
   closeCraft: () => void;
   openVaultGump: () => void;
+  toggleSettings: () => void;
+  closeSettings: () => void;
   closeVault: () => void;
   openPetsGump: () => void;
   closePets: () => void;
@@ -166,6 +169,7 @@ export const useGame = create<GameUI>((set, get) => ({
   openBook: false,
   openCraft: false,
   openVault: false,
+  openSettings: false,
   openPets: false,
   renamePetId: null,
   openPileId: null,
@@ -230,6 +234,7 @@ export const useGame = create<GameUI>((set, get) => ({
           openBook: false,
           openCraft: false,
           openVault: false,
+          openSettings: false,
           openPets: false,
           renamePetId: null,
           snap: snapshot(),
@@ -579,6 +584,8 @@ export const useGame = create<GameUI>((set, get) => ({
     set({ openVault: true, openBook: false, openCraft: false, panel: "none", ctx: null, selectedId: null, openPileId: null, snap: snapshot() });
   },
   closeVault: () => set({ openVault: false }),
+  toggleSettings: () => set({ openSettings: !get().openSettings }),
+  closeSettings: () => set({ openSettings: false }),
   openPetsGump: () => {
     set({ openPets: true, renamePetId: null, openBook: false, openCraft: false, openVault: false, panel: "none", ctx: null, snap: snapshot() });
   },

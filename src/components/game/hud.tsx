@@ -4,7 +4,6 @@ import {
   CircleHelp,
   ClipboardList,
   FastForward,
-  Gem,
   Bone,
   Hammer,
   Anvil,
@@ -13,6 +12,7 @@ import {
   Pause,
   Play,
   ScrollText,
+  Settings,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ContextMenu, PileGump } from "@/components/game/context-menu";
@@ -22,6 +22,7 @@ import { YouDressing } from "@/components/game/paperdoll";
 import { SpellbookGump } from "@/components/game/spell-gump";
 import { CraftGump } from "@/components/game/craft-gump";
 import { VaultGump } from "@/components/game/vault-gump";
+import { SettingsGump } from "@/components/game/settings-gump";
 import { PetsGump } from "@/components/game/pets-gump";
 import { ValeChart, MiniVale } from "@/components/game/vale-map";
 import { insideLabel } from "@/components/game/building-meshes";
@@ -77,6 +78,7 @@ function PlayingChrome() {
       <SpellbookGump />
       <CraftGump />
       <VaultGump />
+      <SettingsGump />
       <PetsGump />
       <Toast />
       <GhostBanner />
@@ -228,6 +230,7 @@ function TopBar() {
         >
           <Backpack className="size-4" />
         </button>
+        <SettingsButton />
       </div>
       <div className="flex items-start gap-1.5">
         <div className="pointer-events-auto flex items-center gap-0.5 rounded-[var(--radius-md)] border border-border bg-bg/80 p-1">
@@ -257,12 +260,30 @@ function TopBar() {
   );
 }
 
+function SettingsButton() {
+  const open = useGame((s) => s.openSettings);
+  const toggleSettings = useGame((s) => s.toggleSettings);
+  return (
+    <button
+      type="button"
+      onClick={toggleSettings}
+      className={cn(
+        "pointer-events-auto relative z-10 grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
+        open && "bg-surface-2 text-fg",
+      )}
+      aria-label="Settings — sounds and the Vault"
+      aria-expanded={open}
+    >
+      <Settings className="size-4" />
+    </button>
+  );
+}
+
 function BottomDock() {
   const panel = useGame((s) => s.panel);
   const setPanel = useGame((s) => s.setPanel);
   const openBook = useGame((s) => s.openBookGump);
   const openCraft = useGame((s) => s.openCraftGump);
-  const openVault = useGame((s) => s.openVaultGump);
   const openPets = useGame((s) => s.openPetsGump);
   const items: { id: PanelId; icon: typeof CircleHelp; label: string }[] = [
     { id: "help", icon: CircleHelp, label: "Guide" },
@@ -295,14 +316,9 @@ function BottomDock() {
       <button type="button" onClick={openCraft} className="grid size-11 place-items-center rounded-[var(--radius-md)] text-gold" aria-label="Work">
         <Anvil className="size-4" />
       </button>
-      <button type="button" onClick={openVault} className="grid size-11 place-items-center rounded-[var(--radius-md)] text-accent" aria-label="The Vault — mint items as NFTs">
-        <Gem className="size-4" />
-      </button>
       <button type="button" onClick={openPets} className="grid size-11 place-items-center rounded-[var(--radius-md)] text-gold" aria-label="Companions — your tamed beasts">
         <Bone className="size-4" />
       </button>
-      <MusicToggle />
-      <SfxToggle />
     </div>
   );
 }
