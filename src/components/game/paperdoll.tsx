@@ -45,7 +45,7 @@ function VitalBar({ label, value, max, color }: { label: string; value: number; 
   const pct = Math.max(0, Math.min(100, (value / Math.max(1, max)) * 100));
   return (
     <span className="flex min-w-0 flex-1 items-center gap-1.5" title={`${label} ${Math.round(value)}/${max}`}>
-      <span className="w-8 shrink-0 text-[10px] tracking-wide text-muted uppercase">{label}</span>
+      <span className="w-11 shrink-0 text-[10px] tracking-wide text-muted uppercase">{label}</span>
       <span className="h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-surface-2">
         <span className={cn("block h-full", color)} style={{ width: `${pct}%` }} />
       </span>
