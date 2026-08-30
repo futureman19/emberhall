@@ -1,6 +1,6 @@
 import { ITEM_META } from "./catalog.ts";
-import { weaponDmg } from "./rare.ts";
-import type { ItemId } from "./types.ts";
+import { AFFIXES, rareName, weaponDmg } from "./rare.ts";
+import type { ItemId, RareItem, World } from "./types.ts";
 
 /**
  * Item info lines — the tooltip backbone. Everything an item wants to
@@ -34,4 +34,51 @@ export function worthLine(id: ItemId): string | null {
   if (meta.buy > 0 && meta.sell > 0) return `shops: buy ${meta.buy}g · sell ${meta.sell}g`;
   if (meta.sell > 0) return `shops pay ${meta.sell}g`;
   return null;
+}
+
+/** How a worn rare (or hovered one) shifts a stat beyond its base. */
+function rareBonus(rare: RareItem, key: "dmg" | "armor"): number {
+  return rare.affixes.reduce((sum, a) => sum + (AFFIXES[a]?.[key] ?? 0), 0);
+}
+
+export interface GearCmp {
+  stat: "damage" | "armor";
+  delta: number;
+  /** What the slot holds now ("your sword", "bare hands", "nothing"). */
+  vsLabel: string;
+}
+
+/**
+ * Gear compare — hover an equippable and learn whether it's a step up
+ * or a step down from what the slot wears right now. Weapons compare
+ * damage, everything worn compares armor; rares count their affixes.
+ * Returns null when there is nothing meaningful to say.
+ */
+export function gearCompare(world: World, id: ItemId, rare?: RareItem | null): GearCmp | null {
+  const meta = ITEM_META[id];
+  const slot = meta.slot;
+  if (!slot) return null;
+
+  const wornRareUid = world.player.wearRare[slot];
+  const wornRare = wornRareUid ? (world.player.rares.find((r) => r.uid === wornRareUid) ?? null) : null;
+  if (rare && wornRare && wornRare.uid === rare.uid) return null; // already wearing this very wonder
+  const wornId = wornRare ? wornRare.base : (world.player.wear[slot] ?? null);
+  const vsLabel = wornRare ? rareName(wornRare) : wornId ? `your ${ITEM_META[wornId].label.toLowerCase()}` : null;
+
+  if (slot === "main") {
+    const mine = weaponDmg(id) + (rare ? rareBonus(rare, "dmg") : 0);
+    const theirs = wornRare
+      ? weaponDmg(wornRare.base) + rareBonus(wornRare, "dmg")
+      : weaponDmg(wornId); // null → bare hands, 2
+    return { stat: "damage", delta: mine - theirs, vsLabel: vsLabel ?? "bare hands" };
+  }
+
+  const mine = (meta.armor ?? 0) + (rare ? rareBonus(rare, "armor") : 0);
+  const theirs = wornRare
+    ? (ITEM_META[wornRare.base].armor ?? 0) + rareBonus(wornRare, "armor")
+    : wornId
+      ? (ITEM_META[wornId].armor ?? 0)
+      : 0;
+  if (mine === 0 && theirs === 0) return null; // jewelry & trinkets: no tale to tell
+  return { stat: "armor", delta: mine - theirs, vsLabel: vsLabel ?? "nothing" };
 }

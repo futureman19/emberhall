@@ -103,7 +103,7 @@ export function YouDressing() {
             const filled = Boolean(id) || Boolean(rare);
             const tipId = rare ? rare.base : id;
             return (
-              <Tip key={s.id} content={tipId ? <ItemTipContent id={tipId} rare={rare ?? undefined} /> : null} className="min-w-0">
+              <Tip key={s.id} content={tipId ? <ItemTipContent id={tipId} rare={rare ?? undefined} skipCompare /> : null} className="min-w-0">
                 <button
                   type="button"
                   onClick={() => filled && unequip(s.id)}

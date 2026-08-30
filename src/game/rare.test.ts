@@ -17,7 +17,7 @@ import {
   weaponDmg,
 } from "./rare.ts";
 import { mulberry32 } from "./rng.ts";
-import { statLines, tagLine, worthLine } from "./iteminfo.ts";
+import { gearCompare, statLines, tagLine, worthLine } from "./iteminfo.ts";
 import { describeAffix } from "./rare.ts";
 import { commandEquip, commandEquipRare, commandUnequip, you } from "./player.ts";
 import { applyMintRare, applyRedeem, decodeBase64Json, decodeItemInscription, encodeRareInscription, inscriptionBase64 } from "./vault.ts";
@@ -230,4 +230,43 @@ test("tips - iteminfo: stats, tags, and shop worth lines", () => {
   assert.equal(tagLine("log"), "wood · fuel");
   assert.equal(worthLine("relic"), "shops pay 40g");
   assert.equal(worthLine("hide") !== null, true);
+});
+
+test("compare - weapons measure damage against the hand you have", () => {
+  const w = createWorld();
+  // A new adventurer starts with a hatchet in hand (6 damage).
+  assert.deepEqual(gearCompare(w, "sword"), { stat: "damage", delta: 4, vsLabel: "your hatchet" });
+  w.player.wear.main = undefined;
+  assert.deepEqual(gearCompare(w, "sword"), { stat: "damage", delta: 8, vsLabel: "bare hands" });
+  w.player.wear.main = "sword";
+  assert.deepEqual(gearCompare(w, "club"), { stat: "damage", delta: -3, vsLabel: "your sword" });
+  assert.deepEqual(gearCompare(w, "sword"), { stat: "damage", delta: 0, vsLabel: "your sword" }, "a twin is an even trade");
+});
+
+test("compare - armor measures the slot it would fill", () => {
+  const w = createWorld();
+  assert.deepEqual(gearCompare(w, "cuirass"), { stat: "armor", delta: 2, vsLabel: "nothing" });
+  w.player.wear.chest = "cuirass";
+  assert.equal(gearCompare(w, "cuirass")?.delta, 0);
+  assert.equal(gearCompare(w, "ring"), null, "a bare ring against a bare ring is no story");
+});
+
+test("compare - rares count their affixes, worn or hovered", () => {
+  const w = createWorld();
+  const wonder: RareItem = { uid: "r1", base: "sword", affixes: ["of power"], seed: 1, hour: 0 };
+  // Hovered wonder vs bare hands: 10 + 4 - 2 = +12
+  w.player.wear.main = undefined;
+  assert.deepEqual(gearCompare(w, "sword", wonder), { stat: "damage", delta: 12, vsLabel: "bare hands" });
+  // Wear the wonder; a mundane sword now looks sad: 10 - 14 = -4
+  w.player.rares.push(wonder);
+  w.player.wearRare.main = "r1";
+  assert.deepEqual(gearCompare(w, "sword"), { stat: "damage", delta: -4, vsLabel: rareName(wonder) });
+  // Hovering the very wonder you wear says nothing
+  assert.equal(gearCompare(w, "sword", wonder), null);
+});
+
+test("compare - warded armor rares tip the armor line", () => {
+  const w = createWorld();
+  const bulwark: RareItem = { uid: "r2", base: "cuirass", affixes: ["of fortification"], seed: 1, hour: 0 };
+  assert.deepEqual(gearCompare(w, "cuirass", bulwark), { stat: "armor", delta: 6, vsLabel: "nothing" });
 });

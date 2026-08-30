@@ -111,6 +111,8 @@ const HIGHLAND_POOL: SpawnEntry[] = [
   { kind: "reedback_stalker", weight: 8 },
   { kind: "orebeetle", weight: 4 },
   { kind: "dune_crawler", weight: 2 },
+  { kind: "stonefang_ogre", weight: 1 },
+  { kind: "orc_marauder", weight: 1 },
 ];
 
 const MARSH_POOL: SpawnEntry[] = [
@@ -165,6 +167,8 @@ const SPAWN_ZONES: SpawnZone[] = [
 const EXTRA_SPAWNS: { id: string; kind: FaunaKind; dx: number; dz: number }[] = [
   { id: "ridgewatch", kind: "ironwood_boar", dx: 3, dz: 8 },
   { id: "ridgewatch", kind: "brambleback_stag", dx: -4, dz: 6 },
+  { id: "ridgewatch", kind: "stonefang_ogre", dx: 2, dz: -5 },
+  { id: "ridgewatch", kind: "orc_marauder", dx: -2, dz: 3 },
   { id: "hearthfen", kind: "moss_badger", dx: 6, dz: 2 },
   { id: "hearthfen", kind: "bog_toad", dx: -5, dz: 4 },
   { id: "southmere", kind: "saltback_tortoise", dx: 4, dz: -3 },
