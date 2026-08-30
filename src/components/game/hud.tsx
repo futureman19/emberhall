@@ -221,7 +221,7 @@ function TopBar() {
           type="button"
           onClick={() => setPanel("you")}
           className={cn(
-            "pointer-events-auto grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
+            "pointer-events-auto relative z-10 grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
             panel === "you" && "bg-surface-2 text-fg",
           )}
           aria-label="You — pack, paperdoll, skills"
