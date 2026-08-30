@@ -1,4 +1,4 @@
-import { ITEM_META, NOTORIETY_META, SKILL_META } from "@/game/catalog";
+import { ITEM_META, LIVE_SKILLS, NOTORIETY_META, SKILL_META } from "@/game/catalog";
 import { getWorld } from "@/game/live";
 import { maxMana } from "@/game/magery";
 import { dressedStats } from "@/game/iteminfo";
@@ -185,7 +185,7 @@ export function YouDressing() {
 
       <p className="mt-4 font-display text-xs tracking-wider text-muted uppercase">Skills</p>
       <ul className="mt-1 grid grid-cols-2 gap-1">
-        {(Object.keys(SKILL_META) as SkillId[]).map((id) => {
+        {LIVE_SKILLS.map((id) => {
           const v = skills?.[id] ?? 0;
           return (
             <li key={id} className="rounded-[var(--radius-xs)] border border-border bg-surface-2 px-2 py-1">
@@ -199,6 +199,21 @@ export function YouDressing() {
             </li>
           );
         })}
+      </ul>
+      <Tip content="On the books — the vale has not taught these yet. Their mechanics arrive one window at a time.">
+        <p className="mt-3 font-display text-xs tracking-wider text-muted/70 uppercase">Not yet taught</p>
+      </Tip>
+      <ul className="mt-1 flex flex-wrap gap-1">
+        {(Object.keys(SKILL_META) as SkillId[])
+          .filter((id) => !LIVE_SKILLS.includes(id))
+          .map((id) => (
+            <li
+              key={id}
+              className="rounded-[var(--radius-xs)] border border-border/60 bg-surface px-2 py-1 text-[11px] text-muted/70"
+            >
+              {SKILL_META[id].label}
+            </li>
+          ))}
       </ul>
 
       <p className="mt-4 font-display text-xs tracking-wider text-muted uppercase">Pack</p>

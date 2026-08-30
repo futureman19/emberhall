@@ -26,7 +26,38 @@ export const SKILL_META: Record<SkillId, { label: string }> = {
   taming: { label: "Animal Taming" },
   magery: { label: "Magery" },
   farming: { label: "Farming" },
+  alchemy: { label: "Alchemy" },
+  archery: { label: "Archery" },
+  armslore: { label: "Arms Lore" },
+  camping: { label: "Camping" },
+  cartography: { label: "Cartography" },
+  fencing: { label: "Fencing" },
+  lockpicking: { label: "Lockpicking" },
+  mace: { label: "Mace Fighting" },
+  music: { label: "Musicianship" },
+  poisoning: { label: "Poisoning" },
+  provocation: { label: "Provocation" },
+  resisting: { label: "Resisting Spells" },
+  stealing: { label: "Stealing" },
+  tailoring: { label: "Tailoring" },
+  tinkering: { label: "Tinkering" },
+  tracking: { label: "Tracking" },
 };
+
+/** The skills with real mechanics today — everything else is on the books but not yet taught. */
+export const LIVE_SKILLS: SkillId[] = [
+  "swords",
+  "lumberjack",
+  "mining",
+  "anatomy",
+  "healing",
+  "cooking",
+  "smithing",
+  "carpentry",
+  "taming",
+  "magery",
+  "farming",
+];
 
 export const ITEM_META: Record<
   ItemId,
@@ -220,6 +251,22 @@ export function emptySkills(): Record<SkillId, number> {
     taming: 14,
     magery: 8,
     farming: 10,
+    alchemy: 0,
+    archery: 0,
+    armslore: 0,
+    camping: 0,
+    cartography: 0,
+    fencing: 0,
+    lockpicking: 0,
+    mace: 0,
+    music: 0,
+    poisoning: 0,
+    provocation: 0,
+    resisting: 0,
+    stealing: 0,
+    tailoring: 0,
+    tinkering: 0,
+    tracking: 0,
   };
 }
 
@@ -227,6 +274,9 @@ export function emptyLastGain(): Record<SkillId, number> {
   return {
     swords: 0, lumberjack: 0, mining: 0, anatomy: 0, healing: 0,
     cooking: 0, smithing: 0, carpentry: 0, taming: 0, magery: 0, farming: 0,
+    alchemy: 0, archery: 0, armslore: 0, camping: 0, cartography: 0, fencing: 0,
+    lockpicking: 0, mace: 0, music: 0, poisoning: 0, provocation: 0, resisting: 0,
+    stealing: 0, tailoring: 0, tinkering: 0, tracking: 0,
   };
 }
 

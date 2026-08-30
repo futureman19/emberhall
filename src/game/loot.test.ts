@@ -2,10 +2,11 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { spawnCorpsePile, takeGoldFromPile } from "./piles.ts";
 import { verbsFor } from "./context.ts";
+import { LIVE_SKILLS, SKILL_META } from "./catalog.ts";
 import { setWorld } from "./live.ts";
 import { tickPlayer, you, commandLoot } from "./player.ts";
 import { createWorld } from "./world.ts";
-import type { Creature, FaunaKind } from "./types.ts";
+import type { Creature, FaunaKind, SkillId } from "./types.ts";
 
 function withRoll(v: number, fn: () => void) {
   const old = Math.random;
@@ -192,4 +193,18 @@ test("care - your own beast offers the Companions page, a wild one does not", ()
   w.fauna.push(wild);
   const wildVerbs = verbsFor({ kind: "fauna", id: wild.id, tx: 0, ty: 0, label: "wolf" });
   assert.ok(!wildVerbs.some((v) => v.verb === "care"));
+});
+
+test("skills - the books hold every surviving skill, placeholders at zero", () => {
+  const w = createWorld();
+  const ids = Object.keys(SKILL_META) as SkillId[];
+  assert.equal(ids.length, 27, "11 live + 16 placeholders");
+  assert.equal(LIVE_SKILLS.length, 11);
+  for (const id of ids) {
+    assert.equal(typeof w.player.skills[id], "number", `${id} on the books`);
+    if (!LIVE_SKILLS.includes(id)) assert.equal(w.player.skills[id], 0, `${id} starts untaught`);
+  }
+  // Anatomy and Cooking stay — quiet Emberhall originals, still live.
+  assert.ok(LIVE_SKILLS.includes("anatomy"));
+  assert.ok(LIVE_SKILLS.includes("cooking"));
 });

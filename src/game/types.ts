@@ -25,7 +25,25 @@ export type SkillId =
   | "carpentry"
   | "taming"
   | "magery"
-  | "farming";
+  | "farming"
+  // Placeholders — on the books, not yet taught. Mechanics arrive one
+  // window at a time; until then they sit at zero and gain nothing.
+  | "alchemy"
+  | "archery"
+  | "armslore"
+  | "camping"
+  | "cartography"
+  | "fencing"
+  | "lockpicking"
+  | "mace"
+  | "music"
+  | "poisoning"
+  | "provocation"
+  | "resisting"
+  | "stealing"
+  | "tailoring"
+  | "tinkering"
+  | "tracking";
 
 export type ItemId =
   | "hatchet"

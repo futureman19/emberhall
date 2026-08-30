@@ -1,6 +1,6 @@
 import { COURT, regionAt } from "./atlas.ts";
 import { paintBiomes } from "./biome.ts";
-import { hourOfDay, isDusk, isNight, settleGear } from "./catalog.ts";
+import { hourOfDay, isDusk, isNight, settleGear, SKILL_META } from "./catalog.ts";
 import { seedBarrow, seedFauna } from "./ecology.ts";
 import { seedFarmPlots } from "./farm.ts";
 import { maxMana } from "./magery.ts";
@@ -9,7 +9,7 @@ import { mulberry32 } from "./rng.ts";
 import { ensureWeather, weatherSnap } from "./weather.ts";
 import { ensureCity } from "./city.ts";
 import { createStubWorld, createWorld, seedFieldStones, seedTownNpcs } from "./world.ts";
-import type { Snapshot, World } from "./types.ts";
+import type { SkillId, Snapshot, World } from "./types.ts";
 
 function withFauna(w: World) {
   if (!w.fauna) w.fauna = [];
@@ -35,7 +35,14 @@ function withFauna(w: World) {
   }
   if (!w.seen) w.seen = {};
   if (w.seenRev == null) w.seenRev = 1;
-  if (w.player) settleGear(w.player);
+  if (w.player) {
+    settleGear(w.player);
+    // Older saves predate the placeholder skills — put them on the books at zero.
+    for (const id of Object.keys(SKILL_META) as SkillId[]) {
+      if (w.player.skills[id] == null) w.player.skills[id] = 0;
+      if (w.player.lastGain[id] == null) w.player.lastGain[id] = 0;
+    }
+  }
   if (w.objectives) {
     const extra = [
       { id: "plank", text: "Saw a log into boards at the yard", done: false },
