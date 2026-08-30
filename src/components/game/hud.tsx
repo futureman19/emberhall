@@ -13,7 +13,6 @@ import {
   Pause,
   Play,
   ScrollText,
-  Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ContextMenu, PileGump } from "@/components/game/context-menu";
@@ -199,23 +198,60 @@ function TopBar() {
   const hp = ghost ? 0 : self ? self.hp / self.maxHp : 0;
   const mana = (snap.player?.mana ?? 0) / max;
   const inside = insideLabel(snap.buildings, snap.youX, snap.youZ);
+  const panel = useGame((s) => s.panel);
+  const setPanel = useGame((s) => s.setPanel);
+  const speed = useGame((s) => s.speed);
+  const cur = useGame((s) => s.snap.speed);
   return (
     <div className="pointer-events-none absolute top-3 right-3 left-3 flex items-start justify-between gap-3">
-      <div className="min-w-0 rounded-[var(--radius-md)] border border-border bg-bg/80 px-3 py-2">
-        <p className="font-display text-xs tracking-wider text-gold uppercase">{inside ? BUILDING_META[inside].label : snap.region}</p>
-        <p className="text-xs text-muted tabular-nums">
-          {ghost ? "Ghost" : clockLabel(snap.clock, snap.day)} · {phaseName(snap.hour)} · {snap.weather.label}
-        </p>
-        <div className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2">
-          <div className="h-full bg-accent" style={{ width: `${Math.max(0, Math.min(1, hp)) * 100}%` }} />
+      <div className="flex flex-col items-start gap-1.5">
+        <div className="min-w-0 rounded-[var(--radius-md)] border border-border bg-bg/80 px-3 py-2">
+          <p className="font-display text-xs tracking-wider text-gold uppercase">{inside ? BUILDING_META[inside].label : snap.region}</p>
+          <p className="text-xs text-muted tabular-nums">
+            {ghost ? "Ghost" : clockLabel(snap.clock, snap.day)} · {phaseName(snap.hour)} · {snap.weather.label}
+          </p>
+          <div className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2">
+            <div className="h-full bg-accent" style={{ width: `${Math.max(0, Math.min(1, hp)) * 100}%` }} />
+          </div>
+          <div className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2">
+            <div className="h-full bg-gold" style={{ width: `${Math.max(0, Math.min(1, mana)) * 100}%` }} />
+          </div>
         </div>
-        <div className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2">
-          <div className="h-full bg-gold" style={{ width: `${Math.max(0, Math.min(1, mana)) * 100}%` }} />
-        </div>
+        <button
+          type="button"
+          onClick={() => setPanel("you")}
+          className={cn(
+            "pointer-events-auto grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
+            panel === "you" && "bg-surface-2 text-fg",
+          )}
+          aria-label="You — pack, paperdoll, skills"
+        >
+          <Backpack className="size-4" />
+        </button>
       </div>
-      <div className="rounded-[var(--radius-md)] border border-border bg-bg/80 px-3 py-2 text-right">
-        <p className="font-display text-xs text-gold tabular-nums">{snap.gold}g</p>
-        <p className="text-xs text-muted">{NOTORIETY_META[snap.player?.notoriety ?? "innocent"].label}</p>
+      <div className="flex items-start gap-1.5">
+        <div className="pointer-events-auto flex items-center gap-0.5 rounded-[var(--radius-md)] border border-border bg-bg/80 p-1">
+          <button
+            type="button"
+            onClick={() => speed((cur === 0 ? 1 : 0) as Speed)}
+            className="grid size-9 place-items-center rounded-[var(--radius-xs)] text-muted hover:text-fg"
+            aria-label={cur === 0 ? "Resume time" : "Pause time"}
+          >
+            {cur === 0 ? <Play className="size-4" /> : <Pause className="size-4" />}
+          </button>
+          <button
+            type="button"
+            onClick={() => speed(cur === 3 ? 1 : 3)}
+            className={cn("grid size-9 place-items-center rounded-[var(--radius-xs)] hover:text-fg", cur === 3 ? "text-accent" : "text-muted")}
+            aria-label={cur === 3 ? "Normal time" : "Faster time"}
+          >
+            <FastForward className="size-4" />
+          </button>
+        </div>
+        <div className="rounded-[var(--radius-md)] border border-border bg-bg/80 px-3 py-2 text-right">
+          <p className="font-display text-xs text-gold tabular-nums">{snap.gold}g</p>
+          <p className="text-xs text-muted">{NOTORIETY_META[snap.player?.notoriety ?? "innocent"].label}</p>
+        </div>
       </div>
     </div>
   );
@@ -224,18 +260,14 @@ function TopBar() {
 function BottomDock() {
   const panel = useGame((s) => s.panel);
   const setPanel = useGame((s) => s.setPanel);
-  const speed = useGame((s) => s.speed);
-  const cur = useGame((s) => s.snap.speed);
   const openBook = useGame((s) => s.openBookGump);
   const openCraft = useGame((s) => s.openCraftGump);
   const openVault = useGame((s) => s.openVaultGump);
   const openPets = useGame((s) => s.openPetsGump);
   const items: { id: PanelId; icon: typeof CircleHelp; label: string }[] = [
     { id: "help", icon: CircleHelp, label: "Guide" },
-    { id: "you", icon: Backpack, label: "You" },
     { id: "journal", icon: ClipboardList, label: "Journal" },
     { id: "vale", icon: MapIcon, label: "Vale" },
-    { id: "roster", icon: Users, label: "Roster" },
     { id: "build", icon: Hammer, label: "Hold" },
   ];
   return (
@@ -268,22 +300,6 @@ function BottomDock() {
       </button>
       <button type="button" onClick={openPets} className="grid size-11 place-items-center rounded-[var(--radius-md)] text-gold" aria-label="Companions — your tamed beasts">
         <Bone className="size-4" />
-      </button>
-      <button
-        type="button"
-        onClick={() => speed((cur === 0 ? 1 : 0) as Speed)}
-        className="grid size-11 place-items-center text-muted"
-        aria-label="Pause"
-      >
-        {cur === 0 ? <Play className="size-4" /> : <Pause className="size-4" />}
-      </button>
-      <button
-        type="button"
-        onClick={() => speed(cur === 3 ? 1 : 3)}
-        className="grid size-11 place-items-center text-muted"
-        aria-label="Faster"
-      >
-        <FastForward className="size-4" />
       </button>
       <MusicToggle />
       <SfxToggle />
@@ -359,7 +375,8 @@ function HelpPanel() {
         hoe. The book in the pack is magery. Open it.
         Mark writes this dirt on a rune. Walk off. Tap the mark — Recall folds you back. The moons still hold. Towns keep
         a banker, a healer, a stall. Die and you walk pale — Ione at the hall can return you. Your corpse keeps what it
-        took until you come back living. Open Hold to raise timber on the dirt — dorm, kitchen, forge, tavern. Walk
+        took until you come back living. Right-click the hall to read the roster — who has joined, who might. Open
+        Hold to raise timber on the dirt — dorm, kitchen, forge, tavern. Walk
         through a door and the roof goes thin so you can see the room. The yard saws logs into boards. Raise a forge —
         Hold, then the dirt — to smelt ore and beat iron. Raise a farm the same way — eight beds inside a fence. Or open
         Hold and Till a plot on grass. Walk a bed. Click it to sow a seed — cabbage, wheat, garlic. Wait. Click ripe
@@ -501,7 +518,7 @@ function GhostBanner() {
   const corpse = useGame((s) => s.snap.player?.corpseAt ?? null);
   const x = useGame((s) => s.snap.youX);
   const z = useGame((s) => s.snap.youZ);
-  const useTile = useGame((s) => s.useTile);
+  const walkTile = useGame((s) => s.useTile);
   if (!ghost) return null;
   const dist = corpse ? Math.round(Math.hypot(corpse.tx - x, corpse.ty - z)) : 0;
   const place = corpse ? regionAt(corpse.tx, corpse.ty).name : "";
@@ -519,13 +536,13 @@ function GhostBanner() {
           variant="secondary"
           onClick={() => {
             const h = nearestHealer(getWorld());
-            if (h) useTile(Math.round(h.x), Math.round(h.z));
+            if (h) walkTile(Math.round(h.x), Math.round(h.z));
           }}
         >
           Walk to healer
         </Button>
         {corpse && (
-          <Button className="flex-1" variant="secondary" onClick={() => useTile(corpse.tx, corpse.ty)}>
+          <Button className="flex-1" variant="secondary" onClick={() => walkTile(corpse.tx, corpse.ty)}>
             Walk to body
           </Button>
         )}

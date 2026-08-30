@@ -431,6 +431,10 @@ export const useGame = create<GameUI>((set, get) => ({
     else if (verb === "enter") {
       const st = stationNear(t.tx, t.ty, 1.2);
       if (st) set({ openGateId: st.id, ctx: null });
+    } else if (verb === "roster") {
+      get().setPanel("roster");
+      set({ ctx: null });
+      return;
     } else if (verb === "use") get().useStation(t.id);
     else if (verb === "harvest") err = commandHarvest(w, t.tx, t.ty);
     else if (verb === "till") err = commandTill(w, t.tx, t.ty);

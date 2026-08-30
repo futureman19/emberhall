@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { spawnCorpsePile, takeGoldFromPile } from "./piles.ts";
+import { verbsFor } from "./context.ts";
 import { tickPlayer, you } from "./player.ts";
 import { createWorld } from "./world.ts";
 import type { Creature, FaunaKind } from "./types.ts";
@@ -115,4 +116,13 @@ test("loot - the sword's kill spills too (melee, not just spells)", () => {
   assert.equal(orc.task, "dead");
   const pile = w.piles.find((x) => x.label === "orc_marauder corpse");
   assert.ok(pile, "the fallen orc spilled its carried loot");
+});
+
+test("roster - the hall keeps the roll of the hold", () => {
+  const verbs = verbsFor({ kind: "building", id: "b1", tx: 0, ty: 0, label: "hall" });
+  assert.equal(verbs[0].verb, "roster");
+  assert.equal(verbs[0].label, "Read the roster");
+  // A forge is a fire to work, not a roll to read.
+  const forge = verbsFor({ kind: "building", id: "b2", tx: 0, ty: 0, label: "forge" });
+  assert.ok(!forge.some((v) => v.verb === "roster"));
 });

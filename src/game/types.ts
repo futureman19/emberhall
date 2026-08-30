@@ -467,6 +467,7 @@ export type CtxVerb =
   | "fireball"
   | "teleport"
   | "enter"
+  | "roster"
   | "drop"
   | "take"
   | "use"
