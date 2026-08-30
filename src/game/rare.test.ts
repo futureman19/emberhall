@@ -18,7 +18,8 @@ import {
 } from "./rare.ts";
 import { mulberry32 } from "./rng.ts";
 import { gearCompare, statLines, tagLine, worthLine, dressedStats } from "./iteminfo.ts";
-import { describeAffix } from "./rare.ts";
+import { describeAffix, appraiseRare } from "./rare.ts";
+import { commandSellRare } from "./npcs.ts";
 import { commandEquip, commandEquipRare, commandUnequip, you } from "./player.ts";
 import { applyMintRare, applyRedeem, decodeBase64Json, decodeItemInscription, encodeRareInscription, inscriptionBase64 } from "./vault.ts";
 import { createWorld } from "./world.ts";
@@ -294,4 +295,35 @@ test("doll - worn wonders count their affixes on the battle line", () => {
   const s = dressedStats(w);
   assert.equal(s.dmg, 10 + (AFFIXES["of power"].dmg ?? 0));
   assert.equal(s.mainLabel, rareName(rare));
+});
+
+test("appraisal - the loupe prices base, magic, and a maker's hand", () => {
+  const w = createWorld();
+  const rare = makeRare(w, "sword", ["of power"]);
+  const quote = appraiseRare(rare);
+  const def = AFFIXES["of power"];
+  const expectAffix = def.rank * 6 + (def.dmg ?? 0) * 4 + (def.armor ?? 0) * 4 + (def.hit ?? 0) + (def.skillAmt ?? 0) * 2 + (def.vsKind ? 10 : 0);
+  assert.equal(quote.total, ITEM_META.sword.sell + expectAffix + 8); // Testhand made it
+  assert.equal(quote.lines[0].gold, ITEM_META.sword.sell);
+  assert.equal(quote.lines.at(-1)!.label, "a maker's mark — Testhand");
+  // A base the shop won't pay for still floors at two, and the offer at five.
+  const junk = makeRare(w, "ore", ["bogus affix"]);
+  junk.maker = undefined;
+  assert.equal(appraiseRare(junk).total, 5);
+});
+
+test("appraisal - taking the coin pays out and strips the wonder everywhere", () => {
+  const w = createWorld();
+  const rare = makeRare(w, "sword", ["of power"]);
+  w.player.rares.push(rare);
+  w.player.wear.main = undefined;
+  w.player.wearRare.main = rare.uid;
+  const before = w.gold;
+  const quote = appraiseRare(rare).total;
+  const note = commandSellRare(w, rare.uid)!;
+  assert.ok(note.includes(`${quote} gold`));
+  assert.equal(w.gold, before + quote);
+  assert.equal(w.player.rares.length, 0);
+  assert.equal(w.player.wearRare.main, undefined, "the hand lets go of what was sold");
+  assert.equal(commandSellRare(w, rare.uid), "No such wonder.");
 });

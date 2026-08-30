@@ -1,6 +1,7 @@
 import { ITEM_META, SHOP_STOCK } from "./catalog.ts";
 import { isGhost, resurrect, you } from "./player.ts";
-import { completeObjective } from "./world.ts";
+import { appraiseRare, rareName } from "./rare.ts";
+import { completeObjective, log } from "./world.ts";
 import type { ItemId, World } from "./types.ts";
 
 export function commandApproach(world: World, id: string) {
@@ -54,6 +55,27 @@ export function commandSell(world: World, item: ItemId) {
   world.player.pack[item] = n - 1;
   world.gold += meta.sell;
   return `Sold ${meta.label.toLowerCase()}.`;
+}
+
+/**
+ * The appraisal counter — the keeper studies a wonder, names a price
+ * from its base and its magic, and pays it. The wonder leaves the
+ * keeping (and any slot that wore it) forever.
+ */
+export function commandSellRare(world: World, uid: string) {
+  if (isGhost(world)) return "A ghost cannot.";
+  const rare = world.player.rares.find((r) => r.uid === uid);
+  if (!rare) return "No such wonder.";
+  const { total } = appraiseRare(rare);
+  const name = rareName(rare);
+  world.player.rares = world.player.rares.filter((r) => r.uid !== uid);
+  for (const [slot, link] of Object.entries(world.player.wearRare)) {
+    if (link === uid) world.player.wearRare[slot as keyof typeof world.player.wearRare] = undefined;
+  }
+  world.gold += total;
+  const note = `The keeper studies ${name}. "${total} gold — and lucky to have it."`;
+  log(world, note);
+  return note;
 }
 
 export function commandDeposit(world: World, n: number) {

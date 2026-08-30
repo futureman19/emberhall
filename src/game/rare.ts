@@ -314,3 +314,39 @@ export function rollExceptional(world: World, base: ItemId, skill: number, diff:
   const rare = rollRare(base, rng, { maxRank: exceptionalRank(skill), affixes: two, maker });
   return rare ? bornRare(rare, world, maker) : null;
 }
+
+/** The keeper's quote, line by line — an appraisal you can argue with. */
+export interface Appraisal {
+  total: number;
+  lines: { label: string; gold: number }[];
+}
+
+/**
+ * What a shopkeeper will pay for a wonder, itemized: the base's trade
+ * price, each affix by its rank and bite, and a little extra for a
+ * maker's mark. Never less than five gold — sentiment has a floor.
+ */
+export function appraiseRare(rare: RareItem): Appraisal {
+  const lines: Appraisal["lines"] = [];
+  const baseGold = Math.max(2, ITEM_META[rare.base].sell);
+  lines.push({ label: ITEM_META[rare.base].label, gold: baseGold });
+  let total = baseGold;
+  for (const a of rare.affixes) {
+    const def = AFFIXES[a];
+    if (!def) continue;
+    const gold =
+      def.rank * 6 +
+      (def.dmg ?? 0) * 4 +
+      (def.armor ?? 0) * 4 +
+      (def.hit ?? 0) +
+      (def.skillAmt ?? 0) * 2 +
+      (def.vsKind ? 10 : 0);
+    lines.push({ label: def.label, gold });
+    total += gold;
+  }
+  if (rare.maker) {
+    lines.push({ label: `a maker's mark — ${rare.maker}`, gold: 8 });
+    total += 8;
+  }
+  return { total: Math.max(5, total), lines };
+}

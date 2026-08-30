@@ -11,6 +11,7 @@ import {
   commandBuy,
   commandDeposit,
   commandSell,
+  commandSellRare,
   commandTalk,
   commandUnbankItem,
   commandWithdraw,
@@ -94,6 +95,7 @@ interface GameUI {
   talk: (id: string) => void;
   buy: (item: ItemId) => void;
   sell: (item: ItemId) => void;
+  sellRare: (uid: string) => void;
   deposit: (n: number) => void;
   withdraw: (n: number) => void;
   bankItem: (item: ItemId) => void;
@@ -491,6 +493,11 @@ export const useGame = create<GameUI>((set, get) => ({
   },
   sell: (item) => {
     const err = commandSell(getWorld(), item);
+    if (err) get().flash(err);
+    set({ snap: snapshot() });
+  },
+  sellRare: (uid) => {
+    const err = commandSellRare(getWorld(), uid);
     if (err) get().flash(err);
     set({ snap: snapshot() });
   },
