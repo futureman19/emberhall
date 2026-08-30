@@ -1,6 +1,7 @@
 import { ITEM_META } from "./catalog.ts";
+import { rareName, rareUid } from "./rare.ts";
 import { log } from "./world.ts";
-import type { ItemId, World } from "./types.ts";
+import type { ItemId, RareItem, World } from "./types.ts";
 
 /**
  * The Vault — Emberhall's bridge between in-game items and 1Sat ordinal
@@ -16,7 +17,14 @@ import type { ItemId, World } from "./types.ts";
  */
 
 export const VAULT_APP = "emberhall";
-export const VAULT_VERSION = 1;
+export const VAULT_VERSION = 2;
+
+/** A rare's identity, written into the chain — the affixes ARE the value. */
+export interface RareInscription {
+  name: string;
+  affixes: string[];
+  maker?: string;
+}
 
 export interface ItemInscription {
   app: typeof VAULT_APP;
@@ -28,6 +36,8 @@ export interface ItemInscription {
   world: number;
   /** World hour at mint. */
   hour: number;
+  /** Present only for rares (payload v2+). */
+  rare?: RareInscription;
 }
 
 const ITEM_IDS = new Set(Object.keys(ITEM_META));
@@ -45,6 +55,21 @@ export function encodeItemInscription(world: World, item: ItemId): ItemInscripti
   };
 }
 
+/** A rare mints with its full identity — name, affixes, maker's mark. */
+export function encodeRareInscription(world: World, rare: RareItem): ItemInscription | null {
+  if (!ITEM_META[rare.base]) return null;
+  return {
+    app: VAULT_APP,
+    v: VAULT_VERSION,
+    type: "item",
+    item: rare.base,
+    label: ITEM_META[rare.base].label,
+    world: world.seed,
+    hour: Math.floor(world.hour),
+    rare: { name: rareName(rare), affixes: [...rare.affixes], ...(rare.maker ? { maker: rare.maker } : {}) },
+  };
+}
+
 /** Parse an on-chain JSON payload back into an item inscription, or null. */
 export function decodeItemInscription(raw: unknown): ItemInscription | null {
   if (!raw || typeof raw !== "object") return null;
@@ -52,7 +77,7 @@ export function decodeItemInscription(raw: unknown): ItemInscription | null {
   if (o.app !== VAULT_APP || o.type !== "item") return null;
   if (typeof o.item !== "string" || !ITEM_IDS.has(o.item)) return null;
   const item = o.item as ItemId;
-  return {
+  const out: ItemInscription = {
     app: VAULT_APP,
     v: typeof o.v === "number" ? o.v : 0,
     type: "item",
@@ -61,6 +86,18 @@ export function decodeItemInscription(raw: unknown): ItemInscription | null {
     world: typeof o.world === "number" ? o.world : 0,
     hour: typeof o.hour === "number" ? o.hour : 0,
   };
+  // v2+: a rare block rides along — validate loosely, trust the affix list.
+  if (o.rare && typeof o.rare === "object") {
+    const r = o.rare as Record<string, unknown>;
+    if (Array.isArray(r.affixes) && r.affixes.every((a) => typeof a === "string")) {
+      out.rare = {
+        name: typeof r.name === "string" ? r.name : "",
+        affixes: r.affixes as string[],
+        ...(typeof r.maker === "string" ? { maker: r.maker } : {}),
+      };
+    }
+  }
+  return out;
 }
 
 /** Remove one of an item from the pack — call only after the mint confirms. */
@@ -74,8 +111,36 @@ export function applyMint(world: World, item: ItemId): string | null {
   return note;
 }
 
+/** Remove a rare from the keeping — call only after the mint confirms. */
+export function applyMintRare(world: World, uid: string): string | null {
+  if (world.player.ghost) return "A ghost cannot.";
+  const rare = world.player.rares.find((r) => r.uid === uid);
+  if (!rare) return "No such wonder.";
+  world.player.rares = world.player.rares.filter((r) => r.uid !== uid);
+  for (const [slot, link] of Object.entries(world.player.wearRare)) {
+    if (link === uid) world.player.wearRare[slot as keyof typeof world.player.wearRare] = undefined;
+  }
+  const note = `${rareName(rare)} passes into the chain. It is yours — truly.`;
+  log(world, note);
+  return note;
+}
+
 /** Grant an item back after its ordinal burns in the redeem rite. */
-export function applyRedeem(world: World, item: ItemId): string {
+export function applyRedeem(world: World, item: ItemId, rare?: { name: string; affixes: string[]; maker?: string }): string {
+  if (rare && rare.affixes.length > 0) {
+    const restored: RareItem = {
+      uid: rareUid(world.seed, world.hour),
+      base: item,
+      affixes: [...rare.affixes],
+      ...(rare.maker ? { maker: rare.maker } : {}),
+      seed: world.seed,
+      hour: Math.floor(world.hour),
+    };
+    world.player.rares.push(restored);
+    const note = `${rare.name || rareName(restored)} returns from the chain.`;
+    log(world, note);
+    return note;
+  }
   world.player.pack[item] = (world.player.pack[item] ?? 0) + 1;
   const note = `${ITEM_META[item].label} returns from the chain.`;
   log(world, note);
@@ -83,8 +148,8 @@ export function applyRedeem(world: World, item: ItemId): string {
 }
 
 /** Base64 JSON payload for the 1Sat inscribe action (browser + node). */
-export function inscriptionBase64(world: World, item: ItemId): string | null {
-  const payload = encodeItemInscription(world, item);
+export function inscriptionBase64(world: World, item: ItemId, rare?: RareItem): string | null {
+  const payload = rare ? encodeRareInscription(world, rare) : encodeItemInscription(world, item);
   if (!payload) return null;
   const json = JSON.stringify(payload);
   if (typeof btoa !== "undefined") return btoa(unescape(encodeURIComponent(json)));

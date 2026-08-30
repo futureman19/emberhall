@@ -1,5 +1,6 @@
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "./catalog.ts";
-import { you } from "./player.ts";
+import { effSkill, you } from "./player.ts";
+import { rareName, rollExceptional } from "./rare.ts";
 import { successChance, tryGain } from "./skills.ts";
 import { playSfx, type SfxId } from "./vale-sfx.ts";
 import { completeObjective, log } from "./world.ts";
@@ -176,7 +177,7 @@ export function commandCraft(world: World, recipeId: string): string | null {
     world.player.pack[id] = Math.max(0, (world.player.pack[id] ?? 0) - (n ?? 0));
   }
   consumeTags(world, rec);
-  const skill = world.player.skills[rec.skill] ?? 0;
+  const skill = effSkill(world, rec.skill);
   const chance = successChance(skill, rec.diff);
   const ok = Math.random() < chance;
   playSfx(rec.sfx, rec.sfx === "fire" ? 0.48 : 0.52);
@@ -190,6 +191,16 @@ export function commandCraft(world: World, recipeId: string): string | null {
     const id = k as ItemId;
     world.player.pack[id] = (world.player.pack[id] ?? 0) + (n ?? 0);
   }
+  // The maker's mark — a hand far above the work can leave a piece beyond the ordinary.
+  const maker = you(world)?.name ?? "an unknown hand";
+  const wonder = Object.keys(rec.give)
+    .map((k) => rollExceptional(world, k as ItemId, skill, rec.diff, maker, Math.random))
+    .find((r) => r !== null);
+  if (wonder) {
+    // The stack loses one of the piece; the singular wonder takes its place.
+    world.player.pack[wonder.base] = Math.max(0, (world.player.pack[wonder.base] ?? 1) - 1);
+    world.player.rares.push(wonder);
+  }
   if (rec.id === "board") completeObjective(world, "plank");
   if (rec.id === "smelt") completeObjective(world, "smelt");
   if (rec.station === "forge" && rec.id !== "smelt") completeObjective(world, "smith");
@@ -197,7 +208,8 @@ export function commandCraft(world: World, recipeId: string): string | null {
     .filter(([, n]) => (n ?? 0) > 0)
     .map(([k, n]) => `${n} ${ITEM_META[k as ItemId].label.toLowerCase()}`)
     .join(", ");
-  const note = gain ? `${made}. ${gain}.` : `${made}.`;
+  const wonderNote = wonder ? ` The work sings — ${rareName(wonder)}, crafted by ${maker}!` : "";
+  const note = gain ? `${made}.${wonderNote} ${gain}.` : `${made}.${wonderNote}`;
   log(world, note);
   return note;
 }

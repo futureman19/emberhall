@@ -7,7 +7,8 @@ import { addToPile, takeFromPile } from "./piles.ts";
 import { successChance, tryGain } from "./skills.ts";
 import { playSfx } from "./vale-sfx.ts";
 import { completeObjective, log } from "./world.ts";
-import type { ItemId, Person, WearSlot, World } from "./types.ts";
+import { effectiveMain, rareMods, rareName, rollKillRare, weaponDmg } from "./rare.ts";
+import type { ItemId, Person, RareItem, SkillId, WearSlot, World } from "./types.ts";
 
 export function you(world: World) {
   return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
@@ -118,7 +119,12 @@ export function commandWalk(world: World, tx: number, ty: number, cap = 9000): s
 }
 
 export function inHand(world: World) {
-  return world.player.wear.main ?? null;
+  return effectiveMain(world);
+}
+
+/** A worn charm lifts the skill it blesses. */
+export function effSkill(world: World, id: SkillId) {
+  return (world.player.skills[id] ?? 0) + (rareMods(world).skills[id] ?? 0);
 }
 
 export function needHeld(world: World, item: ItemId) {
@@ -251,6 +257,12 @@ export function commandEquip(world: World, item: ItemId) {
   const meta = ITEM_META[item];
   if (!meta.slot) return "You cannot hold or wear that.";
   if ((world.player.pack[item] ?? 0) < 1) return "You do not carry that.";
+  const rareUidThere = world.player.wearRare[meta.slot];
+  if (rareUidThere) {
+    // A rare already graces that slot — it comes back to the pack.
+    world.player.wearRare[meta.slot] = undefined;
+    void rareUidThere; // the rare itself stays in player.rares; only its wear-link clears
+  }
   const prev = world.player.wear[meta.slot];
   if (prev) world.player.pack[prev] = (world.player.pack[prev] ?? 0) + 1;
   world.player.pack[item] -= 1;
@@ -261,9 +273,38 @@ export function commandEquip(world: World, item: ItemId) {
   return `You wear the ${meta.label.toLowerCase()}.`;
 }
 
+export function commandEquipRare(world: World, uid: string) {
+  const dead = hands(world);
+  if (dead) return dead;
+  const rare = world.player.rares.find((r) => r.uid === uid);
+  if (!rare) return "No such wonder.";
+  const meta = ITEM_META[rare.base];
+  if (!meta.slot) return "You cannot hold or wear that.";
+  const slot = meta.slot;
+  const prevRare = world.player.wearRare[slot];
+  if (prevRare === uid) return "Already worn.";
+  world.player.wearRare[slot] = undefined;
+  const prev = world.player.wear[slot];
+  if (prev) {
+    world.player.pack[prev] = (world.player.pack[prev] ?? 0) + 1;
+    world.player.wear[slot] = undefined;
+  }
+  world.player.wearRare[slot] = uid;
+  void prevRare; // swapped-out rares stay in player.rares — wearRare is only a link
+  const name = rareName(rare);
+  if (slot === "main") return `You take ${name}.`;
+  if (slot === "off") return `You raise ${name}.`;
+  return `You wear ${name}.`;
+}
+
 export function commandUnequip(world: World, slot: WearSlot) {
   const dead = hands(world);
   if (dead) return dead;
+  const rareUidThere = world.player.wearRare[slot];
+  if (rareUidThere) {
+    world.player.wearRare[slot] = undefined;
+    return slot === "main" || slot === "off" ? "You put it away." : "Off.";
+  }
   const id = world.player.wear[slot];
   if (!id) return "Nothing there.";
   world.player.wear[slot] = undefined;
@@ -278,7 +319,7 @@ export function commandHeal(world: World) {
   if (!p) return "You are not in the vale.";
   if ((world.player.pack.bandage ?? 0) < 1) return "Need a bandage.";
   world.player.pack.bandage -= 1;
-  p.hp = Math.min(p.maxHp, p.hp + 8 + Math.floor(world.player.skills.healing / 10));
+  p.hp = Math.min(p.maxHp, p.hp + 8 + Math.floor(effSkill(world, "healing") / 10));
   tryGain(world, "healing", true, true);
   return "The cloth holds.";
 }
@@ -322,7 +363,7 @@ function chopNow(world: World, p: Person) {
     world.player.intent.kind = "none";
     return "No tree.";
   }
-  const chance = successChance(world.player.skills.lumberjack, 12);
+  const chance = successChance(effSkill(world, "lumberjack"), 12);
   const ok = Math.random() < chance;
   const gain = tryGain(world, "lumberjack", ok, true);
   if (!ok) return gain ? `The axe glances. ${gain}.` : "The axe glances.";
@@ -342,7 +383,7 @@ function mineNow(world: World, p: Person) {
     world.player.intent.kind = "none";
     return "No stone.";
   }
-  const chance = successChance(world.player.skills.mining, 14);
+  const chance = successChance(effSkill(world, "mining"), 14);
   const ok = Math.random() < chance;
   const gain = tryGain(world, "mining", ok, true);
   if (!ok) return gain ? `Dust. ${gain}.` : "Dust.";
@@ -361,13 +402,15 @@ function huntNow(world: World, p: Person) {
     return "It fled.";
   }
   playSfx("hunt", 0.52);
-  const held = world.player.wear.main;
-  const blade =
-    held === "sword" ? 10 : held === "mace" ? 9 : held === "club" ? 7 : held === "hatchet" ? 6 : held === "staff" ? 5 : held === "knife" ? 4 : 2;
+  const blade = weaponDmg(effectiveMain(world));
+  const mods = rareMods(world);
   const chance = successChance(world.player.skills.swords, 10 + FAUNA_META[c.kind].hp / 2);
-  const ok = Math.random() < chance + 0.2;
-  const dmg = ok ? blade + Math.floor(world.player.skills.swords / 12) : Math.max(1, Math.floor(blade / 3));
-  const arm = armorOf(world.player.wear);
+  const ok = Math.random() < chance + 0.2 + mods.hit / 100;
+  let dmg = ok ? blade + Math.floor(world.player.skills.swords / 12) : Math.max(1, Math.floor(blade / 3));
+  dmg += mods.dmg;
+  const slayerMul = mods.vs[c.kind];
+  if (slayerMul) dmg = Math.floor(dmg * slayerMul);
+  const arm = armorOf(world.player.wear) + mods.armor;
   c.hp -= dmg;
   if (c.kind === "wolf" || c.kind === "wight") p.hp = Math.max(0, p.hp - Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2)));
   tryGain(world, "swords", ok, true);
@@ -379,6 +422,11 @@ function huntNow(world: World, p: Person) {
     c.corpseUntil = world.hour + 8;
     world.player.intent.kind = "none";
     completeObjective(world, "hunt");
+    const found = rollKillRare(world, c.kind, Math.random);
+    if (found) {
+      world.player.rares.push(found);
+      return `The ${FAUNA_META[c.kind].label.toLowerCase()} falls. Something glints in the kill — ${rareName(found)}!`;
+    }
     return `The ${FAUNA_META[c.kind].label.toLowerCase()} falls.`;
   }
   return `You strike the ${FAUNA_META[c.kind].label.toLowerCase()}.`;
@@ -391,7 +439,7 @@ function tameNow(world: World, p: Person) {
     return "Gone.";
   }
   const diff = FAUNA_META[c.kind].tameDiff;
-  const chance = successChance(world.player.skills.taming, diff);
+  const chance = successChance(effSkill(world, "taming"), diff);
   const ok = Math.random() < chance;
   tryGain(world, "taming", ok, chance > 0.3 && chance < 0.8);
   world.player.intent.kind = "none";

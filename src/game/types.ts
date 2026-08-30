@@ -288,6 +288,8 @@ export interface PlayerState {
   pack: Record<ItemId, number>;
   chest: Record<ItemId, number>;
   wear: Partial<Record<WearSlot, ItemId>>;
+  rares: RareItem[];
+  wearRare: Partial<Record<WearSlot, string>>;
   vault: number;
   notoriety: Notoriety;
   criminalUntil: number;
@@ -300,6 +302,22 @@ export interface PlayerState {
   ghost: boolean;
   corpseAt: { tx: number; ty: number } | null;
   workT: number;
+}
+
+/**
+ * A rare item — an instance with magical attributes, in the pre-AOS UO
+ * mold. Mundane items are fungible stacks (pack: Record<ItemId, number>);
+ * rares are singular: each carries affixes ("eminently accurate", "of
+ * power"), an optional maker's mark, and the hour it was born. Rares are
+ * what the Vault mints into NFTs worth trading — the affixes ARE the value.
+ */
+export interface RareItem {
+  uid: string;
+  base: ItemId;
+  affixes: string[];
+  maker?: string;
+  seed: number;
+  hour: number;
 }
 
 export interface LogLine {

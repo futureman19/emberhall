@@ -1,5 +1,6 @@
 import { ITEM_META, SKILL_META } from "@/game/catalog";
 import { maxMana } from "@/game/magery";
+import { rareName } from "@/game/rare";
 import { useGame } from "@/game/store";
 import type { ItemId, SkillId, WearSlot } from "@/game/types";
 import { cn } from "@/lib/utils";
@@ -54,10 +55,14 @@ export function YouDressing() {
   const self = snap.people.find((p) => p.isPlayer);
   const pack = snap.player?.pack;
   const wear = snap.player?.wear ?? {};
+  const wearRare = snap.player?.wearRare ?? {};
+  const rares = snap.player?.rares ?? [];
+  const equipRare = useGame((s) => s.equipRare);
   const skills = snap.player?.skills;
   if (!self || !pack) return null;
   const ghost = Boolean(self.ghost);
   const held = (Object.keys(pack) as ItemId[]).filter((id) => (pack[id] ?? 0) > 0);
+  const rareByUid = (uid: string | undefined) => (uid ? (rares.find((r) => r.uid === uid) ?? null) : null);
   return (
     <div>
       <h2 className="font-display text-sm text-fg">{self.name}</h2>
@@ -82,9 +87,9 @@ export function YouDressing() {
             <span className="block h-3 w-5 rounded-[var(--radius-xs)] bg-surface-2" />
             <span className="block h-6 w-7 rounded-[var(--radius-xs)] bg-accent/80" />
             <div className="flex items-end gap-1">
-              <span className={cn("block h-5 w-2 rounded-[var(--radius-xs)]", wear.main ? "bg-muted" : "bg-surface-2")} />
+              <span className={cn("block h-5 w-2 rounded-[var(--radius-xs)]", wear.main || wearRare.main ? "bg-muted" : "bg-surface-2")} />
               <span className="block h-4 w-4 rounded-[var(--radius-xs)] bg-surface-2" />
-              <span className={cn("block h-5 w-2 rounded-[var(--radius-xs)]", wear.off ? "bg-muted" : "bg-surface-2")} />
+              <span className={cn("block h-5 w-2 rounded-[var(--radius-xs)]", wear.off || wearRare.off ? "bg-muted" : "bg-surface-2")} />
             </div>
             <span className="block h-5 w-5 rounded-[var(--radius-xs)] bg-surface-2" />
           </div>
@@ -92,19 +97,23 @@ export function YouDressing() {
         <div className="grid min-w-0 flex-1 grid-cols-2 gap-1">
           {SLOTS.map((s) => {
             const id = wear[s.id];
+            const rare = rareByUid(wearRare[s.id]);
+            const filled = Boolean(id) || Boolean(rare);
             return (
               <button
                 key={s.id}
                 type="button"
-                onClick={() => id && unequip(s.id)}
+                onClick={() => filled && unequip(s.id)}
                 className={cn(
                   "flex min-h-11 items-center justify-between rounded-[var(--radius-xs)] border px-2 text-left",
-                  id ? "border-border-strong bg-surface-2" : "border-border bg-surface-2",
+                  filled ? "border-border-strong bg-surface-2" : "border-border bg-surface-2",
                   (s.id === "main" || s.id === "off") && "border-border-strong",
                 )}
               >
                 <span className="text-xs text-muted">{s.label}</span>
-                <span className="truncate pl-2 text-sm text-fg">{id ? ITEM_META[id].label : "—"}</span>
+                <span className={cn("truncate pl-2 text-sm", rare ? "text-gold" : "text-fg")}>
+                  {rare ? rareName(rare) : id ? ITEM_META[id].label : "—"}
+                </span>
               </button>
             );
           })}
@@ -120,6 +129,23 @@ export function YouDressing() {
         ))}
       </ul>
       <p className="mt-4 font-display text-xs tracking-wider text-muted uppercase">Pack</p>
+      {rares.length > 0 ? (
+        <ul className="mt-1 space-y-1">
+          {rares.map((r) => (
+            <li key={r.uid}>
+              <button
+                type="button"
+                onClick={() => equipRare(r.uid)}
+                className="flex min-h-11 w-full min-w-0 items-center gap-2 rounded-[var(--radius-xs)] border border-gold/40 bg-surface-2 px-3 text-left"
+              >
+                <ItemGlyph id={r.base} />
+                <span className="truncate text-sm text-gold">{rareName(r)}</span>
+                <span className="ml-auto shrink-0 text-xs text-muted">{r.maker ? `by ${r.maker}` : "wonder"}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      ) : null}
       <ul className="mt-1 max-h-48 space-y-1 overflow-auto">
         {held.map((id) => {
           const hint = packHint(id);

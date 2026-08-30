@@ -4,10 +4,11 @@ import {
   VAULT_APP,
   decodeItemInscription,
   encodeItemInscription,
+  encodeRareInscription,
   inscriptionBase64,
   type ItemInscription,
 } from "@/game/vault";
-import type { ItemId, World } from "@/game/types";
+import type { ItemId, RareItem, World } from "@/game/types";
 
 /**
  * Browser glue between the Vault and the user's BRC-100 wallet via the
@@ -51,6 +52,24 @@ export async function mintItemNft(
     base64Content,
     contentType: "application/json",
     map: { app: VAULT_APP, type: "item", item: payload.item },
+  });
+  const txid = await unwrap("The mint", res);
+  return { txid, payload };
+}
+
+/** Mint a rare — its name, affixes, and maker's mark go onto the chain. */
+export async function mintRareNft(
+  ctx: OneSatContext,
+  world: World,
+  rare: RareItem,
+): Promise<{ txid: string; payload: ItemInscription }> {
+  const payload = encodeRareInscription(world, rare);
+  const base64Content = payload ? inscriptionBase64(world, rare.base, rare) : null;
+  if (!payload || !base64Content) throw new Error("That wonder cannot be inscribed.");
+  const res = await inscribe.execute(ctx, {
+    base64Content,
+    contentType: "application/json",
+    map: { app: VAULT_APP, type: "item", item: payload.item, rare: "1" },
   });
   const txid = await unwrap("The mint", res);
   return { txid, payload };

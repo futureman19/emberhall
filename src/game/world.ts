@@ -303,6 +303,8 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
       pack: { ...emptyPack(), hatchet: 0 },
       chest: emptyChest(),
       wear: { head: "hood", hands: "gloves", neck: "pendant", finger: "ring", main: "hatchet" },
+      rares: [],
+      wearRare: {},
       vault: 0,
       notoriety: "innocent",
       criminalUntil: 0,

@@ -21,6 +21,7 @@ import {
   commandDrop,
   commandEat,
   commandEquip,
+  commandEquipRare,
   commandFeed,
   commandFollow,
   commandHeal,
@@ -41,7 +42,7 @@ import { recruitPerson, setSpeed, tickWorld } from "./sim.ts";
 import { completeObjective, placeBuilding } from "./world.ts";
 import { COURT, stationNear } from "./atlas.ts";
 import type { BuildingKind, CtxTarget, CtxVerb, ItemId, PanelId, Speed, SpellId, Snapshot, WearSlot } from "./types.ts";
-import { applyMint, applyRedeem } from "./vault.ts";
+import { applyMint, applyMintRare, applyRedeem } from "./vault.ts";
 
 export type Phase = "title" | "raising" | "playing";
 
@@ -81,6 +82,7 @@ interface GameUI {
   closeCtx: () => void;
   drop: (item: ItemId) => void;
   equip: (item: ItemId) => void;
+  equipRare: (uid: string) => void;
   unequip: (slot: WearSlot) => void;
   heal: () => void;
   cook: () => void;
@@ -104,8 +106,10 @@ interface GameUI {
   closeVault: () => void;
   /** Chain mint confirmed — remove the item from the pack and re-snapshot. */
   mintApplied: (item: ItemId) => void;
-  /** Chain burn confirmed — return the item to the pack and re-snapshot. */
-  redeemApplied: (item: ItemId) => void;
+  /** Chain mint confirmed — remove the rare from the keeping and re-snapshot. */
+  mintRareApplied: (uid: string) => void;
+  /** Chain burn confirmed — return the item (or the rare, with its affixes) and re-snapshot. */
+  redeemApplied: (item: ItemId, rare?: { name: string; affixes: string[]; maker?: string }) => void;
   makeRecipe: (id: string) => void;
   useStation: (id: string) => void;
   cast: (spell: SpellId, target?: CastTarget) => void;
@@ -407,6 +411,11 @@ export const useGame = create<GameUI>((set, get) => ({
     if (err) get().flash(err);
     set({ snap: snapshot() });
   },
+  equipRare: (uid) => {
+    const err = commandEquipRare(getWorld(), uid);
+    if (err) get().flash(err);
+    set({ snap: snapshot() });
+  },
   unequip: (slot) => {
     const err = commandUnequip(getWorld(), slot);
     if (err) get().flash(err);
@@ -515,8 +524,13 @@ export const useGame = create<GameUI>((set, get) => ({
     if (note) get().flash(note);
     set({ snap: snapshot() });
   },
-  redeemApplied: (item) => {
-    const note = applyRedeem(getWorld(), item);
+  mintRareApplied: (uid) => {
+    const note = applyMintRare(getWorld(), uid);
+    if (note) get().flash(note);
+    set({ snap: snapshot() });
+  },
+  redeemApplied: (item, rare) => {
+    const note = applyRedeem(getWorld(), item, rare);
     get().flash(note);
     set({ snap: snapshot() });
   },

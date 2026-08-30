@@ -24,10 +24,14 @@ function standAt(w: World, kind: string) {
   p.path = [];
 }
 
-/** Land every success roll — consumption, not luck, is under test. */
+/** Land every success roll — consumption, not luck, is under test. Skill at
+ *  GM + a mid roll also keeps the exceptional-craft roll from converting
+ *  the product into a rare (covered separately in rare.test.ts). */
 function craftOk(w: World, id: string) {
+  const rec = recipeById(id);
+  if (rec) w.player.skills[rec.skill] = 100;
   const old = Math.random;
-  Math.random = () => 0.01;
+  Math.random = () => 0.5;
   try {
     return commandCraft(w, id);
   } finally {

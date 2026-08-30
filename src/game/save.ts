@@ -44,6 +44,8 @@ export function loadSave(): World | null {
     }
     data.restored = true;
     if (!Array.isArray(data.player?.marks)) data.player.marks = [];
+    if (data.player && !Array.isArray(data.player.rares)) data.player.rares = [];
+    if (data.player && data.player.wearRare == null) data.player.wearRare = {};
     if (data.player && data.player.ghost == null) data.player.ghost = false;
     if (data.player && data.player.corpseAt === undefined) data.player.corpseAt = null;
     if (data.player && data.player.workT == null) data.player.workT = 0;

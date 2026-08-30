@@ -25,6 +25,8 @@ function bareWorld(seed = 7): World {
       pack: emptyPack(),
       chest: emptyChest(),
       wear: {},
+      rares: [],
+      wearRare: {},
       vault: 0,
       notoriety: "innocent",
       criminalUntil: 0,

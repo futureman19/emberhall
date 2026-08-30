@@ -6,7 +6,8 @@ import { ITEM_META } from "@/game/catalog";
 import { getWorld } from "@/game/live";
 import { useGame } from "@/game/store";
 import type { ItemId } from "@/game/types";
-import { listVaultNfts, mintItemNft, oneSatCtx, redeemItemNft, sellItemNft, type VaultNft } from "@/chain/oneSat";
+import { listVaultNfts, mintItemNft, mintRareNft, oneSatCtx, redeemItemNft, sellItemNft, type VaultNft } from "@/chain/oneSat";
+import { rareName } from "@/game/rare";
 
 /**
  * The Vault — mint pack items into 1Sat ordinal NFTs, trade them for real
@@ -22,7 +23,9 @@ export function VaultGump() {
 function VaultInner() {
   const close = useGame((s) => s.closeVault);
   const pack = useGame((s) => s.snap.player?.pack);
+  const rares = useGame((s) => s.snap.player?.rares) ?? [];
   const mintApplied = useGame((s) => s.mintApplied);
+  const mintRareApplied = useGame((s) => s.mintRareApplied);
   const redeemApplied = useGame((s) => s.redeemApplied);
   const flash = useGame((s) => s.flash);
   const { wallet, status, connect, error: walletError } = useWallet();
@@ -120,6 +123,37 @@ function VaultInner() {
             )}
           </div>
 
+          {rares.length > 0 ? (
+            <div className="mt-4">
+              <p className="font-display text-xs tracking-wider text-gold uppercase">Rarities — mint a wonder</p>
+              <ul className="mt-2 space-y-1">
+                {rares.map((r) => (
+                  <li key={r.uid} className="flex items-center justify-between gap-2 rounded-[var(--radius-xs)] border border-gold/40 bg-surface-2 px-3 py-2">
+                    <span className="flex min-w-0 items-center gap-2 text-sm text-gold">
+                      <ItemGlyph id={r.base} className="size-4 shrink-0" />
+                      <span className="truncate">{rareName(r)}</span>
+                    </span>
+                    <Button
+                      className="h-8 shrink-0 px-2 text-xs"
+                      variant="secondary"
+                      disabled={busy !== null}
+                      onClick={() =>
+                        void run(`mint:${r.uid}`, async () => {
+                          const w = getWorld();
+                          await mintRareNft(oneSatCtx(wallet!), w, r);
+                          mintRareApplied(r.uid);
+                          await refresh();
+                        })
+                      }
+                    >
+                      {busy === `mint:${r.uid}` ? "Minting…" : "Mint"}
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
           <div className="mt-4">
             <div className="flex items-center justify-between">
               <p className="font-display text-xs tracking-wider text-muted uppercase">On the chain — yours</p>
@@ -136,18 +170,18 @@ function VaultInner() {
                 {nfts.map((nft) => (
                   <li key={nft.id} className="rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 py-2">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="flex items-center gap-2 text-sm text-fg">
-                        <ItemGlyph id={nft.inscription.item} className="size-4" />
-                        {nft.inscription.label}
+                      <span className={`flex min-w-0 items-center gap-2 text-sm ${nft.inscription.rare ? "text-gold" : "text-fg"}`}>
+                        <ItemGlyph id={nft.inscription.item} className="size-4 shrink-0" />
+                        <span className="truncate">{nft.inscription.rare?.name || nft.inscription.label}</span>
                       </span>
                       <Button
-                        className="h-8 px-2 text-xs"
+                        className="h-8 shrink-0 px-2 text-xs"
                         variant="secondary"
                         disabled={busy !== null}
                         onClick={() =>
                           void run(`redeem:${nft.id}`, async () => {
                             await redeemItemNft(oneSatCtx(wallet!), nft.id);
-                            redeemApplied(nft.inscription.item);
+                            redeemApplied(nft.inscription.item, nft.inscription.rare);
                             await refresh();
                           })
                         }
