@@ -1,13 +1,13 @@
-import { COURT, GATE, placeById } from "./atlas";
-import { SECONDS_PER_HOUR } from "./catalog";
-import { tickEcology } from "./ecology";
-import { tickCrops } from "./farm";
-import { astar, nearestWalkable, tileOf } from "./pathfinding";
-import { tickPiles } from "./piles";
-import { tickPlayer, you } from "./player";
-import { tickWeather } from "./weather";
-import { completeObjective, log, revealAround } from "./world";
-import type { Person, Speed, World } from "./types";
+import { COURT, GATE, placeById } from "./atlas.ts";
+import { SECONDS_PER_HOUR } from "./catalog.ts";
+import { tickEcology } from "./ecology.ts";
+import { tickCrops } from "./farm.ts";
+import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
+import { tickPiles } from "./piles.ts";
+import { tickPlayer, you } from "./player.ts";
+import { tickWeather } from "./weather.ts";
+import { completeObjective, log, revealAround } from "./world.ts";
+import type { Person, Speed, World } from "./types.ts";
 
 const WALK_SPEED = 2.6;
 

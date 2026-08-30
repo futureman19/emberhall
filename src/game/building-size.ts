@@ -1,4 +1,4 @@
-import type { BuildingKind, World } from "./types";
+import type { BuildingKind, World } from "./types.ts";
 
 export const VOX = 0.5;
 
@@ -13,6 +13,16 @@ export const BUILD_SIZE: Record<BuildingKind, { x0: number; x1: number; z0: numb
   notice: { x0: -1, x1: 1, z0: 0, z1: 2 },
   board: { x0: -3, x1: 3, z0: 0, z1: 2 },
   farm: { x0: -5, x1: 5, z0: -5, z1: 5 },
+  // Kingsford — the capital's structures.
+  keep: { x0: -11, x1: 11, z0: -9, z1: 9 },
+  rampart: { x0: -8, x1: 7, z0: -1, z1: 0 },
+  rampartV: { x0: -1, x1: 0, z0: -8, z1: 7 },
+  tower: { x0: -2, x1: 2, z0: -2, z1: 2 },
+  gatehouse: { x0: -2, x1: 2, z0: -4, z1: 4 },
+  shop: { x0: -4, x1: 4, z0: -3, z1: 3 },
+  townhome: { x0: -4, x1: 4, z0: -3, z1: 3 },
+  townhouse: { x0: -3, x1: 3, z0: -3, z1: 3 },
+  cottage: { x0: -3, x1: 3, z0: -2, z1: 2 },
 };
 
 export function buildingBox(kind: BuildingKind, tx: number, ty: number) {

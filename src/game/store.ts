@@ -1,10 +1,10 @@
 import { create } from "zustand";
-import { commandTravel } from "./gates";
-import { commandCraft, craftReach, stationOf } from "./craft";
-import { commandHarvest, commandPlant, commandTill, commandWorkPlot, plotAt } from "./farm";
-import { getWorld, resetWorld, setWorld, snapshot } from "./live";
-import { commandCast, forgetMark, SPELL_META, hasBook } from "./magery";
-import type { CastTarget } from "./magery";
+import { commandTravel } from "./gates.ts";
+import { commandCraft, craftReach, stationOf } from "./craft.ts";
+import { commandHarvest, commandPlant, commandTill, commandWorkPlot, plotAt } from "./farm.ts";
+import { getWorld, resetWorld, setWorld, snapshot } from "./live.ts";
+import { commandCast, forgetMark, SPELL_META, hasBook } from "./magery.ts";
+import type { CastTarget } from "./magery.ts";
 import {
   commandApproach,
   commandBankItem,
@@ -14,7 +14,7 @@ import {
   commandTalk,
   commandUnbankItem,
   commandWithdraw,
-} from "./npcs";
+} from "./npcs.ts";
 import {
   commandChop,
   commandCook,
@@ -34,13 +34,13 @@ import {
   commandUnequip,
   commandWalk,
   you,
-} from "./player";
-import { takeFromPile } from "./piles";
-import { clearSave, hasSave, loadSave, writeSave } from "./save";
-import { recruitPerson, setSpeed, tickWorld } from "./sim";
-import { completeObjective, placeBuilding } from "./world";
-import { COURT, stationNear } from "./atlas";
-import type { BuildingKind, CtxTarget, CtxVerb, ItemId, PanelId, Speed, SpellId, Snapshot, WearSlot } from "./types";
+} from "./player.ts";
+import { takeFromPile } from "./piles.ts";
+import { clearSave, hasSave, loadSave, writeSave } from "./save.ts";
+import { recruitPerson, setSpeed, tickWorld } from "./sim.ts";
+import { completeObjective, placeBuilding } from "./world.ts";
+import { COURT, stationNear } from "./atlas.ts";
+import type { BuildingKind, CtxTarget, CtxVerb, ItemId, PanelId, Speed, SpellId, Snapshot, WearSlot } from "./types.ts";
 
 export type Phase = "title" | "raising" | "playing";
 

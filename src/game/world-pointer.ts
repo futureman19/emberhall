@@ -1,9 +1,9 @@
-import { VIEW } from "./atlas";
-import { buildingAt } from "./craft";
-import { CROP_META, plotAt } from "./farm";
-import { getWorld } from "./live";
-import { markBuildHold, takeBuildHold, useGame } from "./store";
-import type { CtxTarget } from "./types";
+import { VIEW } from "./atlas.ts";
+import { buildingAt } from "./craft.ts";
+import { CROP_META, plotAt } from "./farm.ts";
+import { getWorld } from "./live.ts";
+import { markBuildHold, takeBuildHold, useGame } from "./store.ts";
+import type { CtxTarget } from "./types.ts";
 
 export function hitAt(tx: number, ty: number, sx: number, sy: number) {
   const w = getWorld();

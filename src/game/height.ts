@@ -1,5 +1,5 @@
-import { EH, MAP } from "./atlas";
-import type { World } from "./types";
+import { EH, MAP } from "./atlas.ts";
+import type { World } from "./types.ts";
 
 function rawH(world: World, tx: number, ty: number) {
   if (tx < 0 || ty < 0 || tx >= MAP || ty >= MAP) return 0;

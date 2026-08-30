@@ -1,4 +1,4 @@
-import { pick } from "./rng";
+import { pick } from "./rng.ts";
 
 const GIVEN = [
   "Neris", "Fen", "Ione", "Brann", "Wren", "Pell", "Odra", "Calder", "Mira", "Tamsin",

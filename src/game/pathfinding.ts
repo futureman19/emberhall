@@ -1,5 +1,5 @@
-import { MAP, inBounds } from "./atlas";
-import type { Tile, TileKind, World } from "./types";
+import { MAP, inBounds } from "./atlas.ts";
+import type { Tile, TileKind, World } from "./types.ts";
 
 export function tileOf(x: number, z: number) {
   return { tx: Math.round(x), ty: Math.round(z) };

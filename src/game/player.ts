@@ -1,13 +1,13 @@
-import { EH, inGreybarrow } from "./atlas";
-import { FAUNA_META, ITEM_META, armorOf } from "./catalog";
-import { harvestNow, plantNow, tillNow } from "./farm";
-import { ARROW_RANGE, FIREBALL_RANGE, burstDeath, castNow, maxMana, tickMana } from "./magery";
-import { astar, nearestWalkable, tileOf } from "./pathfinding";
-import { addToPile, takeFromPile } from "./piles";
-import { successChance, tryGain } from "./skills";
-import { playSfx } from "./vale-sfx";
-import { completeObjective, log } from "./world";
-import type { ItemId, Person, WearSlot, World } from "./types";
+import { EH, inGreybarrow } from "./atlas.ts";
+import { FAUNA_META, ITEM_META, armorOf } from "./catalog.ts";
+import { harvestNow, plantNow, tillNow } from "./farm.ts";
+import { ARROW_RANGE, FIREBALL_RANGE, burstDeath, castNow, maxMana, tickMana } from "./magery.ts";
+import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
+import { addToPile, takeFromPile } from "./piles.ts";
+import { successChance, tryGain } from "./skills.ts";
+import { playSfx } from "./vale-sfx.ts";
+import { completeObjective, log } from "./world.ts";
+import type { ItemId, Person, WearSlot, World } from "./types.ts";
 
 export function you(world: World) {
   return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;

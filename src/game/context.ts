@@ -1,7 +1,7 @@
-import { CROP_META, plotAt } from "./farm";
-import { hasBook } from "./magery";
-import { getWorld } from "./live";
-import type { CtxTarget, CtxVerb } from "./types";
+import { CROP_META, plotAt } from "./farm.ts";
+import { hasBook } from "./magery.ts";
+import { getWorld } from "./live.ts";
+import type { CtxTarget, CtxVerb } from "./types.ts";
 
 export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
   const w = getWorld();

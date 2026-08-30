@@ -1,7 +1,7 @@
-import { ITEM_META, SHOP_STOCK } from "./catalog";
-import { isGhost, resurrect, you } from "./player";
-import { completeObjective } from "./world";
-import type { ItemId, World } from "./types";
+import { ITEM_META, SHOP_STOCK } from "./catalog.ts";
+import { isGhost, resurrect, you } from "./player.ts";
+import { completeObjective } from "./world.ts";
+import type { ItemId, World } from "./types.ts";
 
 export function commandApproach(world: World, id: string) {
   const t = world.people.find((p) => p.id === id);

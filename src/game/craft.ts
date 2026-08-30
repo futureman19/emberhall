@@ -1,9 +1,9 @@
-import { ITEM_META } from "./catalog";
-import { you } from "./player";
-import { successChance, tryGain } from "./skills";
-import { playSfx, type SfxId } from "./vale-sfx";
-import { completeObjective, log } from "./world";
-import type { BuildingKind, ItemId, SkillId, World } from "./types";
+import { ITEM_META } from "./catalog.ts";
+import { you } from "./player.ts";
+import { successChance, tryGain } from "./skills.ts";
+import { playSfx, type SfxId } from "./vale-sfx.ts";
+import { completeObjective, log } from "./world.ts";
+import type { BuildingKind, ItemId, SkillId, World } from "./types.ts";
 
 export type Station = "bench" | "forge";
 

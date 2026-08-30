@@ -1,8 +1,8 @@
-import { ITEM_META } from "./catalog";
-import { astar, nearestWalkable, tileOf } from "./pathfinding";
-import { successChance, tryGain } from "./skills";
-import { playSfx } from "./vale-sfx";
-import type { CropId, ItemId, World } from "./types";
+import { ITEM_META } from "./catalog.ts";
+import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
+import { successChance, tryGain } from "./skills.ts";
+import { playSfx } from "./vale-sfx.ts";
+import type { CropId, ItemId, World } from "./types.ts";
 
 const MAX_PLOTS = 40;
 

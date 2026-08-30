@@ -1,4 +1,4 @@
-import type { BuildingKind, ClassId, FaunaKind, ItemId, NpcRole, Notoriety, SkillId, WearSlot } from "./types";
+import type { BuildingKind, ClassId, FaunaKind, ItemId, NpcRole, Notoriety, SkillId, WearSlot } from "./types.ts";
 
 export const SECONDS_PER_HOUR = 36;
 
@@ -118,6 +118,15 @@ export const BUILDING_META: Record<BuildingKind, { label: string }> = {
   tavern: { label: "Tavern" },
   notice: { label: "Notice" },
   farm: { label: "Farm" },
+  keep: { label: "Keep" },
+  rampart: { label: "Rampart" },
+  rampartV: { label: "Rampart" },
+  tower: { label: "Tower" },
+  gatehouse: { label: "Gatehouse" },
+  shop: { label: "Shop" },
+  townhome: { label: "Townhome" },
+  townhouse: { label: "Townhouse" },
+  cottage: { label: "Cottage" },
 };
 
 export const BUILD_ORDER: BuildingKind[] = ["dormitory", "kitchen", "farm", "market", "forge", "tavern"];

@@ -1,11 +1,11 @@
-import { PLACES, regionAt } from "./atlas";
-import { FAUNA_META, ITEM_META, SECONDS_PER_HOUR } from "./catalog";
-import { astar, nearestWalkable, tileOf } from "./pathfinding";
-import { spawnCorpsePile } from "./piles";
-import { successChance, tryGain } from "./skills";
-import { playSfx } from "./vale-sfx";
-import { completeObjective, nid, revealAround } from "./world";
-import type { ItemId, Person, RecallMark, SpellId, World } from "./types";
+import { PLACES, regionAt } from "./atlas.ts";
+import { FAUNA_META, ITEM_META, SECONDS_PER_HOUR } from "./catalog.ts";
+import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
+import { spawnCorpsePile } from "./piles.ts";
+import { successChance, tryGain } from "./skills.ts";
+import { playSfx } from "./vale-sfx.ts";
+import { completeObjective, nid, revealAround } from "./world.ts";
+import type { ItemId, Person, RecallMark, SpellId, World } from "./types.ts";
 
 export const SPELL_ORDER: SpellId[] = [
   "nightsight", "heal", "magicarrow", "teleport", "fireball", "mark", "recall",

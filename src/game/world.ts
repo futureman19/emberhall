@@ -9,14 +9,15 @@ import {
   inBounds,
   inGreybarrow,
   placeById,
-} from "./atlas";
-import { emptyChest, emptyLastGain, emptyPack, emptySkills } from "./catalog";
-import { personName } from "./names";
-import { hash2, irange, mulberry32, pick } from "./rng";
-import { buildingBox, siteError } from "./building-size";
-import { seedFarmPlots } from "./farm";
-import { initialWeather } from "./weather";
-import type { BuildingKind, ClassId, Person, Tile, TileKind, World } from "./types";
+} from "./atlas.ts";
+import { emptyChest, emptyLastGain, emptyPack, emptySkills } from "./catalog.ts";
+import { ensureCity, stampCityTiles } from "./city.ts";
+import { personName } from "./names.ts";
+import { hash2, irange, mulberry32, pick } from "./rng.ts";
+import { buildingBox, siteError } from "./building-size.ts";
+import { seedFarmPlots } from "./farm.ts";
+import { initialWeather } from "./weather.ts";
+import type { BuildingKind, ClassId, Person, Tile, TileKind, World } from "./types.ts";
 
 let nidAcc = 1;
 export function nid(world: World, prefix: string) {
@@ -188,6 +189,7 @@ export function generateTiles(seed: number): Tile[][] {
   }
   flatten(tiles, 261, 304, 2, 1, "cobble");
 
+  stampCityTiles(tiles);
   return tiles;
 }
 
@@ -404,6 +406,7 @@ export function createWorld(): World {
     { id: nid(world, "b"), kind: "yard", tx: COURT.tx - 8, ty: COURT.ty - 1, beds: [] },
   );
   seedTownNpcs(world, rng);
+  ensureCity(world);
   log(world, `You are ${you.name}. The vale is a country — Ridgewatch to Brinegate. Follow the dirt.`);
   revealAround(world, COURT.tx, COURT.ty, 28);
   return world;

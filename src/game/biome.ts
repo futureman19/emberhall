@@ -1,6 +1,6 @@
-import { COURT, MAP, placeById } from "./atlas";
-import { hash2 } from "./rng";
-import type { World } from "./types";
+import { COURT, MAP, placeById } from "./atlas.ts";
+import { hash2 } from "./rng.ts";
+import type { World } from "./types.ts";
 
 export type BiomeId = "vale" | "tundra" | "taiga" | "fen" | "jungle" | "desert";
 

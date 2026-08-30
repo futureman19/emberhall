@@ -1,6 +1,6 @@
-import { playSfx } from "./vale-sfx";
-import { completeObjective, nid } from "./world";
-import type { Creature, GroundPile, ItemId, World } from "./types";
+import { playSfx } from "./vale-sfx.ts";
+import { completeObjective, nid } from "./world.ts";
+import type { Creature, GroundPile, ItemId, World } from "./types.ts";
 
 export function addToPile(
   world: World,

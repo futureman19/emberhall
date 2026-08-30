@@ -1,4 +1,4 @@
-import type { Tile } from "./types";
+import type { Tile } from "./types.ts";
 
 export const MAP = 512;
 export const TILE = 1;
@@ -29,6 +29,7 @@ export const PLACES: Place[] = [
   { id: "hearthfen", name: "Hearthfen", tx: 400, ty: 168, radius: 8, kind: "town", blurb: "Peat smoke and wet marsh." },
   { id: "ironfold", name: "Ironfold", tx: 420, ty: 268, radius: 18, kind: "mine", blurb: "The east slope. Iron in the bone of the hill." },
   { id: "millcross", name: "Millcross", tx: 96, ty: 300, radius: 8, kind: "town", blurb: "A mill and a stall. Brann's cousins." },
+  { id: "kingsford", name: "Kingsford", tx: 176, ty: 336, radius: 30, kind: "town", blurb: "The capital. Stone walls, the King's keep, market row." },
   { id: "cairnash", name: "Cairn of Ash", tx: 64, ty: 96, radius: 14, kind: "ruins", blurb: "A ring of burnt stone. Do not sleep here." },
   { id: "ford", name: "The Ford", tx: 256, ty: 384, radius: 7, kind: "ford", blurb: "The river is shallow here. Nowhere else." },
   { id: "greybarrow", name: "Greybarrow", tx: 110, ty: 440, radius: 14, kind: "ruins", blurb: "A sunken tomb. Stairs under the stones." },
@@ -63,6 +64,7 @@ export interface Station {
 export const STATIONS: Station[] = [
   { id: "emberhall", name: "Emberhall", placeId: "emberhall", tx: 261, ty: 304, blurb: "The hall's own ring. East of the steps." },
   { id: "millcross", name: "Millcross", placeId: "millcross", tx: 102, ty: 306, blurb: "West mill and stall." },
+  { id: "kingsford", name: "Kingsford", placeId: "kingsford", tx: 176, ty: 339, blurb: "The capital's ring. By the market." },
   { id: "southmere", name: "Southmere", placeId: "southmere", tx: 366, ty: 454, blurb: "Reeds and the south water." },
   { id: "brinegate", name: "Brinegate", placeId: "brinegate", tx: 464, ty: 414, blurb: "Salt air." },
   { id: "hearthfen", name: "Hearthfen", placeId: "hearthfen", tx: 406, ty: 174, blurb: "Peat smoke." },

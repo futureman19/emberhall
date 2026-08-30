@@ -1,9 +1,9 @@
-import { BARROW, MAP, PLACES, inGreybarrow } from "./atlas";
-import { FAUNA_META, isNight } from "./catalog";
-import { astar, nearestWalkable, tileOf } from "./pathfinding";
-import { sheltering } from "./weather";
-import { nid } from "./world";
-import type { Creature, FaunaKind, World } from "./types";
+import { BARROW, MAP, PLACES, inGreybarrow } from "./atlas.ts";
+import { FAUNA_META, isNight } from "./catalog.ts";
+import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
+import { sheltering } from "./weather.ts";
+import { nid } from "./world.ts";
+import type { Creature, FaunaKind, World } from "./types.ts";
 
 function spawn(world: World, kind: FaunaKind, x: number, z: number): Creature {
   const meta = FAUNA_META[kind];

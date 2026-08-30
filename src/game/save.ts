@@ -1,5 +1,5 @@
-import { generateTiles } from "./world";
-import type { World } from "./types";
+import { generateTiles } from "./world.ts";
+import type { World } from "./types.ts";
 
 const KEY = "emberhall-save-v4";
 

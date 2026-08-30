@@ -1,14 +1,15 @@
-import { COURT, regionAt } from "./atlas";
-import { paintBiomes } from "./biome";
-import { hourOfDay, isDusk, isNight, settleGear } from "./catalog";
-import { seedBarrow, seedFauna } from "./ecology";
-import { seedFarmPlots } from "./farm";
-import { maxMana } from "./magery";
-import { you } from "./player";
-import { mulberry32 } from "./rng";
-import { ensureWeather, weatherSnap } from "./weather";
-import { createStubWorld, createWorld, seedFieldStones, seedTownNpcs } from "./world";
-import type { Snapshot, World } from "./types";
+import { COURT, regionAt } from "./atlas.ts";
+import { paintBiomes } from "./biome.ts";
+import { hourOfDay, isDusk, isNight, settleGear } from "./catalog.ts";
+import { seedBarrow, seedFauna } from "./ecology.ts";
+import { seedFarmPlots } from "./farm.ts";
+import { maxMana } from "./magery.ts";
+import { you } from "./player.ts";
+import { mulberry32 } from "./rng.ts";
+import { ensureWeather, weatherSnap } from "./weather.ts";
+import { ensureCity } from "./city.ts";
+import { createStubWorld, createWorld, seedFieldStones, seedTownNpcs } from "./world.ts";
+import type { Snapshot, World } from "./types.ts";
 
 function withFauna(w: World) {
   if (!w.fauna) w.fauna = [];
@@ -60,6 +61,7 @@ function withFauna(w: World) {
     w.player.mana = Math.min(max, w.player.mana);
   }
   if (w.tiles.length) seedTownNpcs(w, mulberry32(w.seed + 91));
+  ensureCity(w);
   ensureWeather(w);
   return w;
 }

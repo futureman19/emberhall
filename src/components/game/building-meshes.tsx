@@ -338,6 +338,226 @@ function makeBoard(): Spec {
   return { voxels: out, x0: -3, x1: 3, z0: 0, z1: 2, enterable: false };
 }
 
+/** The King's keep: a stone great hall with four turrets, banners, and a dais. */
+function makeKeep(): Spec {
+  const out: Vox[] = [];
+  const x0 = -11;
+  const x1 = 11;
+  const z0 = -9;
+  const z1 = 9;
+  const h = 6;
+  const holes = new Set<string>();
+  fill(out, x0 - 1, 0, z0 - 1, x1 + 1, 0, z1 + 1, "cobble", (x, _y, z) => x >= x0 && x <= x1 && z >= z0 && z <= z1);
+  fill(out, x0, 0, z0, x1, 0, z1, "stone");
+  for (let x = -1; x <= 1; x++) for (let y = 1; y <= 4; y++) holes.add(key(x, y, z1));
+  const wins = [
+    { x: -7, z: z1, w: 2, hh: 2 },
+    { x: 5, z: z1, w: 2, hh: 2 },
+    { x: -6, z: z0, w: 2, hh: 2 },
+    { x: 4, z: z0, w: 2, hh: 2 },
+  ];
+  for (const w of wins) {
+    for (let x = w.x; x < w.x + w.w; x++) {
+      for (let y = 2; y < 2 + w.hh; y++) {
+        holes.add(key(x, y, w.z));
+        put(out, x, y, w.z, "glass");
+      }
+    }
+    put(out, w.x, 1, w.z, "gold");
+  }
+  for (const sx of [x0, x1]) {
+    for (const wz of [-4, 2]) {
+      for (let y = 2; y <= 3; y++) {
+        holes.add(key(sx, y, wz));
+        put(out, sx, y, wz, "glass");
+      }
+      put(out, sx, 1, wz, "gold");
+    }
+  }
+  fill(out, x0, 1, z0, x1, h, z1, "stone", (x, y, z) => {
+    const edge = x === x0 || x === x1 || z === z0 || z === z1;
+    if (!edge) return true;
+    return holes.has(key(x, y, z));
+  });
+  for (let x = -1; x <= 1; x++) put(out, x, 5, z1, "gold");
+  put(out, -2, 1, z1, "wool");
+  put(out, 2, 1, z1, "wool");
+  for (const bx of [-4, 4]) {
+    for (let y = 2; y <= h; y++) put(out, bx, y, z1 + 1, "wool");
+    put(out, bx, h, z1 + 1, "gold");
+  }
+  for (const [cx, cz] of [
+    [x0, z0],
+    [x1 - 2, z0],
+    [x0, z1 - 2],
+    [x1 - 2, z1 - 2],
+  ] as const) {
+    fill(out, cx, 1, cz, cx + 2, h + 4, cz + 2, "stone", (x, _y, z) => x > cx && x < cx + 2 && z > cz && z < cz + 2);
+    fill(out, cx, h + 5, cz, cx + 2, h + 5, cz + 2, "dark", (x, _y, z) => x > cx && x < cx + 2 && z > cz && z < cz + 2);
+    put(out, cx + 1, h + 6, cz + 1, "gold");
+  }
+  for (let x = x0; x <= x1; x += 2) {
+    put(out, x, h + 1, z0, "stone");
+    put(out, x, h + 1, z1, "stone");
+  }
+  for (let z = z0; z <= z1; z += 2) {
+    put(out, x0, h + 1, z, "stone");
+    put(out, x1, h + 1, z, "stone");
+  }
+  fill(out, x0 + 1, h + 1, z0 + 1, x1 - 1, h + 1, z1 - 1, "dark");
+  // The great hall within: long table, hearth, and the dais at the north end.
+  fill(out, -6, 1, -2, -4, 1, 2, "dark");
+  put(out, -5, 2, 0, "gold");
+  fill(out, -1, 1, -1, 1, 1, 0, "coal");
+  for (const [px, pz] of [
+    [-7, -5],
+    [7, -5],
+    [-7, 5],
+    [7, 5],
+  ] as const) {
+    fill(out, px, 1, pz, px, h - 1, pz, "cobble");
+  }
+  fill(out, -2, 1, z0 + 1, 2, 2, z0 + 3, "cobble");
+  put(out, 0, 3, z0 + 1, "wool");
+  put(out, 0, 3, z0 + 2, "gold");
+  put(out, -1, 3, z0 + 3, "gold");
+  put(out, 1, 3, z0 + 3, "gold");
+  markRoof(out, h, x0, x1, z0, z1);
+  return { voxels: out, x0, x1, z0, z1, enterable: true };
+}
+
+/** Curtain wall, x-run: an eight-tile stretch with merlons on the outer face. */
+function makeRampart(): Spec {
+  const out: Vox[] = [];
+  fill(out, -8, 0, -1, 7, 0, 0, "cobble");
+  fill(out, -8, 1, -1, 7, 4, 0, "stone");
+  for (let x = -8; x <= 7; x += 2) put(out, x, 5, -1, "stone");
+  return { voxels: out, x0: -8, x1: 7, z0: -1, z1: 0, enterable: false };
+}
+
+/** Curtain wall, z-run. */
+function makeRampartV(): Spec {
+  const out: Vox[] = [];
+  fill(out, -1, 0, -8, 0, 0, 7, "cobble");
+  fill(out, -1, 1, -8, 0, 4, 7, "stone");
+  for (let z = -8; z <= 7; z += 2) put(out, -1, 5, z, "stone");
+  return { voxels: out, x0: -1, x1: 0, z0: -8, z1: 7, enterable: false };
+}
+
+/** Corner tower: squat stone drum with a brazier crown. */
+function makeTower(): Spec {
+  const out: Vox[] = [];
+  fill(out, -2, 0, -2, 2, 0, 2, "cobble");
+  fill(out, -2, 1, -2, 2, 8, 2, "stone", (x, _y, z) => x > -2 && x < 2 && z > -2 && z < 2);
+  for (let x = -2; x <= 2; x += 2) {
+    put(out, x, 9, -2, "stone");
+    put(out, x, 9, 2, "stone");
+  }
+  for (let z = -2; z <= 2; z += 2) {
+    put(out, -2, 9, z, "stone");
+    put(out, 2, 9, z, "stone");
+  }
+  put(out, 0, 9, 0, "coal");
+  put(out, 0, 10, 0, "gold");
+  return { voxels: out, x0: -2, x1: 2, z0: -2, z1: 2, enterable: false };
+}
+
+/** Gatehouse: twin drums flanking an x-run passage under a stone arch. */
+function makeGatehouse(): Spec {
+  const out: Vox[] = [];
+  fill(out, -2, 0, -4, 2, 0, 4, "cobble");
+  fill(out, -2, 1, -4, 2, 7, -2, "stone");
+  fill(out, -2, 1, 2, 2, 7, 4, "stone");
+  fill(out, -2, 4, -1, 2, 5, 0, "stone");
+  for (const x of [-2, 2]) {
+    put(out, x, 2, -1, "dark");
+    put(out, x, 3, -1, "dark");
+    put(out, x, 2, 0, "dark");
+    put(out, x, 3, 0, "dark");
+  }
+  for (const z of [-4, -3, -2, 2, 3, 4]) {
+    put(out, -2, 8, z, "stone");
+    put(out, 2, 8, z, "stone");
+  }
+  put(out, 0, 6, -1, "wool");
+  put(out, 0, 6, 0, "wool");
+  put(out, 0, 6, 1, "gold");
+  return { voxels: out, x0: -2, x1: 2, z0: -4, z1: 4, enterable: false };
+}
+
+/** A shopfront: wide windows, a wool awning, and a counter within. */
+function makeShop(): Spec {
+  const spec = house({
+    x0: -4,
+    x1: 4,
+    z0: -3,
+    z1: 3,
+    h: 3,
+    door: { x: -1, w: 2, h: 3 },
+    windows: [
+      { x: -4, z: 3, w: 2, h: 2 },
+      { x: 2, z: 3, w: 2, h: 2 },
+    ],
+    roof: "dark",
+    banners: [3],
+  });
+  fill(spec.voxels, -3, 3, 4, 1, 3, 5, "wool");
+  fill(spec.voxels, -2, 1, 1, 2, 1, 1, "dark");
+  put(spec.voxels, 0, 2, 1, "gold");
+  markRoof(spec.voxels, 3, -4, 4, -3, 3);
+  return spec;
+}
+
+function makeTownhome(): Spec {
+  return house({
+    x0: -4,
+    x1: 4,
+    z0: -3,
+    z1: 3,
+    h: 3,
+    door: { x: 0, w: 2, h: 2 },
+    windows: [
+      { x: -3, z: 3, w: 1, h: 1 },
+      { x: 2, z: 3, w: 1, h: 1 },
+    ],
+    chimney: { x: -3, z: -2 },
+    roof: "thatch",
+  });
+}
+
+function makeTownhouse(): Spec {
+  return house({
+    x0: -3,
+    x1: 3,
+    z0: -3,
+    z1: 3,
+    h: 5,
+    door: { x: -1, w: 2, h: 2 },
+    windows: [
+      { x: -2, z: 3, w: 1, h: 2 },
+      { x: 1, z: 3, w: 1, h: 2 },
+      { x: -2, z: -3, w: 1, h: 2 },
+      { x: 1, z: -3, w: 1, h: 2 },
+    ],
+    base: "stone",
+    roof: "dark",
+  });
+}
+
+function makeCottage(): Spec {
+  return house({
+    x0: -3,
+    x1: 3,
+    z0: -2,
+    z1: 2,
+    h: 2,
+    door: { x: 0, w: 1, h: 2 },
+    windows: [{ x: -2, z: 2, w: 1, h: 1 }],
+    chimney: { x: 2, z: -1 },
+    roof: "thatch",
+  });
+}
+
 const SPECS: Record<BuildingKind, Spec> = {
   hall: makeHall(),
   dormitory: makeDorm(),
@@ -349,6 +569,15 @@ const SPECS: Record<BuildingKind, Spec> = {
   notice: makeNotice(),
   board: makeBoard(),
   farm: makeFarm(),
+  keep: makeKeep(),
+  rampart: makeRampart(),
+  rampartV: makeRampartV(),
+  tower: makeTower(),
+  gatehouse: makeGatehouse(),
+  shop: makeShop(),
+  townhome: makeTownhome(),
+  townhouse: makeTownhouse(),
+  cottage: makeCottage(),
 };
 
 function occupant(buildings: Building[], x: number, z: number) {

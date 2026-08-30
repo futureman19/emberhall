@@ -1,6 +1,6 @@
-import { SKILL_META } from "./catalog";
-import { mulberry32 } from "./rng";
-import type { SkillId, World } from "./types";
+import { SKILL_META } from "./catalog.ts";
+import { mulberry32 } from "./rng.ts";
+import type { SkillId, World } from "./types.ts";
 
 function rngAt(world: World, salt: number) {
   return mulberry32((world.seed + world.tickCount * 31 + salt) >>> 0)();

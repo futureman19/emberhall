@@ -1,8 +1,8 @@
-import { STATIONS, stationById } from "./atlas";
-import { nearestWalkable } from "./pathfinding";
-import { playSfx } from "./vale-sfx";
-import { completeObjective, revealAround } from "./world";
-import type { World } from "./types";
+import { STATIONS, stationById } from "./atlas.ts";
+import { nearestWalkable } from "./pathfinding.ts";
+import { playSfx } from "./vale-sfx.ts";
+import { completeObjective, revealAround } from "./world.ts";
+import type { World } from "./types.ts";
 
 export function phaseName(hour: number) {
   const p = Math.floor((hour / 24) % 8);

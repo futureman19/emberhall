@@ -105,7 +105,27 @@ export type SpellId =
 export type ClassId = "ranger" | "warrior" | "mage" | "rogue" | "merchant";
 export type NpcRole = "banker" | "provisioner" | "healer";
 export type FaunaKind = "hare" | "hart" | "wolf" | "wight";
-export type BuildingKind = "hall" | "dormitory" | "kitchen" | "yard" | "board" | "market" | "forge" | "tavern" | "notice" | "farm";
+export type BuildingKind =
+  | "hall"
+  | "dormitory"
+  | "kitchen"
+  | "yard"
+  | "board"
+  | "market"
+  | "forge"
+  | "tavern"
+  | "notice"
+  | "farm"
+  // Kingsford — the capital stamps these at world-gen; not player-buildable.
+  | "keep"
+  | "rampart"
+  | "rampartV"
+  | "tower"
+  | "gatehouse"
+  | "shop"
+  | "townhome"
+  | "townhouse"
+  | "cottage";
 export type VocationId = "cook" | "armourer" | "trader" | "recruiter" | "guard";
 export type Notoriety = "innocent" | "criminal" | "murderer";
 export type IntentKind = "walk" | "chop" | "mine" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "till" | "none";
