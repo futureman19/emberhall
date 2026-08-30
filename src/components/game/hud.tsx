@@ -363,7 +363,7 @@ function SidePanel() {
   const panel = useGame((s) => s.panel);
   if (panel === "none") return null;
   return (
-    <div className="pointer-events-auto absolute top-16 bottom-20 left-3 w-[min(100%-1.5rem,22rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4">
+    <div className="pointer-events-auto absolute top-16 bottom-20 left-16 w-[min(100%-5rem,22rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4">
       {panel === "help" && <GuideTabs />}
       {panel === "you" && <YouDressing />}
       {panel === "journal" && <JournalPanel />}
