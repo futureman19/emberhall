@@ -54,6 +54,7 @@ export const ITEM_FORM_IDENTITY = Object.freeze({
 
 const FORM_FIELDS = [
   "id",
+  "recipeVersion",
   "baseItem",
   "label",
   "itemClass",
@@ -229,6 +230,9 @@ export function validateItemFormDefinition(value: unknown): asserts value is Ite
   if (!includes(ITEM_FORM_IDS, rawId)) throw new Error(`unknown item form id: ${String(rawId)}`);
   const formId = rawId;
   validateFields(value, FORM_FIELDS, FORM_FIELDS, `item form ${formId}`);
+  if (!Number.isSafeInteger(value.recipeVersion) || (value.recipeVersion as number) <= 0) {
+    throw new Error(`item form ${formId} recipeVersion must be a positive safe integer`);
+  }
   if (typeof value.baseItem !== "string" || !hasOwn(ITEM_META, value.baseItem)) {
     throw new Error(`item form ${formId} has invalid base item: ${String(value.baseItem)}`);
   }
@@ -287,6 +291,7 @@ export function buildItemFormCatalog(
 
 const BOW_FORM_DEFINITION = {
   id: "bow",
+  recipeVersion: 1,
   baseItem: "bow",
   label: "Bow",
   itemClass: "weapon",

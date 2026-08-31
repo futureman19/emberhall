@@ -1,7 +1,18 @@
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "./catalog.ts";
 import { litFireNear, placeCampfire } from "./campfire.ts";
 import { effSkill, you } from "./player.ts";
-import { rareName, rollExceptional } from "./rare.ts";
+import {
+  createCraftedItem,
+  rareName,
+  rollExceptional,
+  workmanshipForCraft,
+} from "./rare.ts";
+import { ITEM_FORM_CATALOG } from "./crafting/forms.ts";
+import { exactRecipeById, type ExactMaterialSelection, type ExactRecipeId } from "./crafting/recipes.ts";
+import {
+  executeExactCraftTransaction,
+  previewExactCraftTransaction,
+} from "./crafting/transaction.ts";
 import { successChance, tryGain } from "./skills.ts";
 import { playSfx, type SfxId } from "./vale-sfx.ts";
 import { completeObjective, log } from "./world.ts";
@@ -15,14 +26,17 @@ export {
   resolveExactRecipeSelection,
   resourceStackMatchesRole,
 } from "./crafting/recipes.ts";
-export { executeExactCraftTransaction } from "./crafting/transaction.ts";
+export { executeExactCraftTransaction, previewExactCraftTransaction } from "./crafting/transaction.ts";
 export type {
   ExactMaterialSelection,
   ExactRecipeDefinition,
   ExactRecipeId,
   ResolvedExactRecipeSelection,
 } from "./crafting/recipes.ts";
-export type { ExactCraftTransactionResult } from "./crafting/transaction.ts";
+export type {
+  ExactCraftTransactionPreview,
+  ExactCraftTransactionResult,
+} from "./crafting/transaction.ts";
 
 export type Station = "bench" | "forge" | "fire";
 
@@ -34,6 +48,8 @@ export interface Recipe {
   diff: number;
   label: string;
   hint: string;
+  /** Equipment recipes require an explicit typed-material selection. */
+  exactRecipeId?: ExactRecipeId;
   /** Item-specific ingredients (conversions like log→board stay exact). */
   need: Partial<Record<ItemId, number>>;
   /** Tag ingredients — any items carrying the tag fill the quota, cheapest first. */
@@ -60,7 +76,7 @@ export const RECIPES: Recipe[] = [
   { id: "staff", station: "bench", skill: "carpentry", diff: 10, label: "Staff", hint: "Any three wood, a ferrule.", need: {}, needTags: [{ tag: "wood", n: 3 }], give: { staff: 1 }, sfx: "chop" },
   { id: "cap", station: "bench", skill: "carpentry", diff: 12, label: "Wooden cap", hint: "Any three wood, a crown.", need: {}, needTags: [{ tag: "wood", n: 3 }], give: { cap: 1 }, sfx: "chop" },
   { id: "shield", station: "bench", skill: "carpentry", diff: 14, label: "Wooden shield", hint: "Any four wood, a boss.", need: {}, needTags: [{ tag: "wood", n: 4 }], give: { shield: 1 }, sfx: "chop" },
-  { id: "bow", station: "bench", skill: "carpentry", diff: 18, label: "Bow", hint: "Any five wood, a curve.", need: {}, needTags: [{ tag: "wood", n: 5 }], give: { bow: 1 }, sfx: "chop" },
+  { id: "bow", station: "bench", skill: "carpentry", diff: 18, label: "Bow", hint: "Choose five timber for the body and one cloth binding.", exactRecipeId: "bow", need: {}, give: { bow: 1 }, sfx: "chop" },
   { id: "cuirass", station: "bench", skill: "carpentry", diff: 22, label: "Wooden cuirass", hint: "Any eight wood, bound.", need: {}, needTags: [{ tag: "wood", n: 8 }], give: { cuirass: 1 }, sfx: "chop" },
   { id: "smelt", station: "forge", skill: "smithing", diff: -22, label: "Smelt ore", hint: "Ore to ingot — only raw ore will do.", need: { ore: 1 }, give: { ingot: 1 }, sfx: "fire" },
   { id: "ring", station: "forge", skill: "smithing", diff: 4, label: "Ring", hint: "Any two metal, a band.", need: {}, needTags: [{ tag: "metal", n: 2 }], give: { ring: 1 }, sfx: "smith" },
@@ -146,6 +162,7 @@ function selfIds(rec: Recipe): Set<string> {
 }
 
 export function haveNeed(pack: Partial<Record<ItemId, number>> | undefined, rec: Recipe) {
+  if (rec.exactRecipeId) return false;
   for (const [k, n] of Object.entries(rec.need)) {
     if ((pack?.[k as ItemId] ?? 0) < (n ?? 0)) return false;
   }
@@ -167,6 +184,7 @@ function exactNeedCount(world: World, id: ItemId): number {
 
 /** World-aware exact requirements; public pack-only haveNeed remains backward compatible. */
 function haveWorldNeed(world: World, rec: Recipe): boolean {
+  if (rec.exactRecipeId) return false;
   for (const [k, n] of Object.entries(rec.need)) {
     if (exactNeedCount(world, k as ItemId) < (n ?? 0)) return false;
   }
@@ -205,6 +223,7 @@ export function canMake(world: World, rec: Recipe) {
 }
 
 export function missingNeed(world: World, rec: Recipe): string | null {
+  if (rec.exactRecipeId) return "Choose exact body and binding materials for this bow.";
   for (const [k, n] of Object.entries(rec.need)) {
     const id = k as ItemId;
     const have = exactNeedCount(world, id);
@@ -241,6 +260,7 @@ export function commandCraft(world: World, recipeId: string): string | null {
   if (world.player.ghost) return "A ghost cannot.";
   const rec = recipeById(recipeId);
   if (!rec) return "No such work.";
+  if (rec.exactRecipeId) return "Choose exact body and binding materials for this bow.";
   if (rec.station !== null) {
     const here = stationsHere(world);
     if (!here.includes(rec.station)) {
@@ -266,6 +286,68 @@ export function commandCraft(world: World, recipeId: string): string | null {
   const maker = you(world)?.name ?? "an unknown hand";
   const wonderNote = wonder ? ` The work sings — ${rareName(wonder)}, crafted by ${maker}!` : "";
   const note = gain ? `${made}.${wonderNote} ${gain}.` : `${made}.${wonderNote}`;
+  log(world, note);
+  return note;
+}
+
+/** Task 10 exact bow path; the staged selector UI arrives in Task 13. */
+export function commandCraftExact(
+  world: World,
+  recipeId: string,
+  selections: readonly ExactMaterialSelection[],
+): string | null {
+  if (world.player.ghost) return "A ghost cannot.";
+  const exactRecipe = exactRecipeById(recipeId);
+  const rec = recipeById(recipeId);
+  if (!exactRecipe || !rec || rec.exactRecipeId !== exactRecipe.id) return "No such exact work.";
+  if (rec.station !== null && !stationsHere(world).includes(rec.station)) {
+    if (rec.station === "forge") return "The ore wants a fire. Raise a forge.";
+    if (rec.station === "fire") return "The pot wants a fire — build a campfire, or find a hearth.";
+    return "The wood wants a bench. The yard, or the hall.";
+  }
+
+  const preview = previewExactCraftTransaction(world.player, exactRecipe.id, selections);
+  if (preview.status === "blocked") return preview.message;
+  const skill = effSkill(world, rec.skill);
+  const chance = successChance(skill, rec.diff);
+  playSfx(rec.sfx, 0.52);
+  const ok = Math.random() < chance;
+  const gain = tryGain(world, rec.skill, ok, chance >= 0.35 && chance <= 0.85);
+  if (!ok) {
+    const note = gain ? `The work splits. ${gain}.` : "The work splits.";
+    log(world, note);
+    return note;
+  }
+
+  const workmanship = workmanshipForCraft(skill, rec.diff, Math.random());
+  const form = ITEM_FORM_CATALOG[exactRecipe.formId];
+  const maker = you(world)?.name ?? "an unknown hand";
+  const specialty = preview.components.some(
+    ({ resourceId }) => resourceId !== "oak" && resourceId !== "common_cloth",
+  );
+  const unique = specialty || workmanship !== "ordinary";
+  const crafted = unique
+    ? createCraftedItem(world, {
+        formId: form.id,
+        base: form.baseItem,
+        workmanship,
+        components: preview.components,
+        inlays: [],
+        maker,
+        recipeId: exactRecipe.id,
+        recipeVersion: exactRecipe.recipeVersion,
+      })
+    : null;
+
+  const transaction = executeExactCraftTransaction(world.player, exactRecipe.id, selections);
+  if (transaction.status !== "crafted") throw new Error("exact bow materials changed after successful preflight");
+  if (crafted) {
+    world.player.pack[crafted.base] -= transaction.output.quantity;
+    world.player.rares.push(crafted);
+  }
+
+  const made = crafted ? rareName(crafted) : "a bow";
+  const note = gain ? `Made ${made}, crafted by ${maker}. ${gain}.` : `Made ${made}, crafted by ${maker}.`;
   log(world, note);
   return note;
 }
@@ -318,6 +400,7 @@ function craftOnce(world: World, rec: Recipe): { ok: boolean; gain: string | nul
 
 /** How many attempts the carried materials allow right now (hard cap 25). */
 export function maxCraftable(world: World, rec: Recipe): number {
+  if (rec.exactRecipeId) return 0;
   let max = 25;
   for (const [k, n] of Object.entries(rec.need)) {
     if (!n) continue;
@@ -340,6 +423,7 @@ export function commandCraftBatch(world: World, recipeId: string, times: number)
   if (world.player.ghost) return "A ghost cannot.";
   const rec = recipeById(recipeId);
   if (!rec) return "No such work.";
+  if (rec.exactRecipeId) return "Exact-material equipment is made one piece at a time.";
   if (rec.station !== null) {
     const here = stationsHere(world);
     if (!here.includes(rec.station)) {

@@ -20,6 +20,7 @@ test("exact recipes - bow references the canonical form and immutable output con
   const recipe = exactRecipeById("bow");
   assert.equal(recipe, EXACT_RECIPE_CATALOG.bow);
   assert.equal(recipe.formId, BOW_FORM.id);
+  assert.equal(recipe.recipeVersion, BOW_FORM.recipeVersion);
   assert.deepEqual(recipe.output, { itemId: "bow", quantity: 1 });
   assert.equal(Object.isFrozen(EXACT_RECIPE_CATALOG), true);
   assert.equal(Object.isFrozen(recipe), true);

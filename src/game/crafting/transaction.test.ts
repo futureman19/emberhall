@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { commandCraft } from "../craft.ts";
+import { commandCraft, commandCraftExact } from "../craft.ts";
 import { addResource, makeResourceStackKey, resourceCount } from "../inventory/resources.ts";
 import { you } from "../player.ts";
 import type { ResourceStackKey, World } from "../types.ts";
@@ -137,4 +137,99 @@ test("exact transaction - existing utility recipes retain deterministic compatib
   assert.match(withRoll(0.5, () => commandCraft(world, "board")) ?? "", /2 boards/);
   assert.equal(resourceCount(world.player.resources, ROUGH_OAK), 0);
   assert.equal(resourceCount(world.player.resources, CHOICE_REDWOOD), 5);
+});
+
+test("exact bowcraft - five oak and one cloth produce one generic mundane bow", () => {
+  const world = createWorld();
+  standAtYard(world);
+  world.player.skills.carpentry = 100;
+  addResource(world.player.resources, ROUGH_OAK, 5);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+
+  const note = withRoll(0.5, () => commandCraftExact(world, "bow", bowSelections(ROUGH_OAK, SOUND_CLOTH)));
+
+  assert.match(note ?? "", /bow/i);
+  assert.equal(world.player.pack.bow, 1);
+  assert.equal(world.player.rares.length, 0);
+  assert.equal(resourceCount(world.player.resources, ROUGH_OAK), 0);
+  assert.equal(resourceCount(world.player.resources, SOUND_CLOTH), 0);
+});
+
+test("exact bowcraft - redwood always creates one material-specific item with deterministic physical stats", () => {
+  const world = createWorld();
+  standAtYard(world);
+  world.player.skills.carpentry = 100;
+  addResource(world.player.resources, CHOICE_REDWOOD, 5);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+
+  const note = withRoll(0.5, () => commandCraftExact(world, "bow", bowSelections()));
+
+  assert.match(note ?? "", /redwood bow/i);
+  assert.equal(world.player.pack.bow, 0, "the unique bow leaves no duplicate mundane stack output");
+  assert.equal(world.player.rares.length, 1);
+  const bow = world.player.rares[0]!;
+  assert.equal(bow.base, "bow");
+  assert.equal(bow.formId, "bow");
+  assert.equal(bow.recipeId, "bow");
+  assert.equal(bow.recipeVersion, 1);
+  assert.equal(bow.source, "crafted");
+  assert.equal(bow.workmanship, "ordinary");
+  assert.equal(bow.maker, you(world)!.name);
+  assert.deepEqual(bow.affixes, [], "materials and workmanship never invent gem magic");
+  assert.deepEqual(bow.inlays, []);
+  assert.equal(bow.resolvedStats?.damage, 8);
+  assert.equal(bow.resolvedStats?.hitBonus, 2, "choice redwood contributes its stable accuracy trait");
+  assert.deepEqual(bow.components, [
+    { role: "body", resourceId: "redwood", form: "log", grade: "choice", amount: 5 },
+    { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+  ]);
+});
+
+test("exact bowcraft - exceptional oak becomes one maker-marked physical item without magic", () => {
+  const world = createWorld();
+  standAtYard(world);
+  world.player.skills.carpentry = 100;
+  addResource(world.player.resources, ROUGH_OAK, 5);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+
+  withRoll(0.01, () => commandCraftExact(world, "bow", bowSelections(ROUGH_OAK, SOUND_CLOTH)));
+
+  assert.equal(world.player.pack.bow, 0);
+  assert.equal(world.player.rares.length, 1);
+  const bow = world.player.rares[0]!;
+  assert.equal(bow.workmanship, "exceptional");
+  assert.equal(bow.maker, you(world)!.name);
+  assert.deepEqual(bow.affixes, []);
+  assert.equal(bow.resolvedStats?.damage, 9);
+  assert.equal(bow.resolvedStats?.hitBonus, 2);
+});
+
+test("exact bowcraft - material rejection happens before chance and changes no carried value", () => {
+  const world = createWorld();
+  standAtYard(world);
+  addResource(world.player.resources, CHOICE_REDWOOD, 5);
+  const before = structuredClone(world.player);
+  const original = Math.random;
+  Math.random = () => {
+    throw new Error("invalid exact craft must not roll");
+  };
+  try {
+    assert.equal(
+      commandCraftExact(world, "bow", bowSelections()),
+      "Not enough Common Cloth · Sound cloth for binding.",
+    );
+  } finally {
+    Math.random = original;
+  }
+  assert.deepEqual(world.player, before);
+});
+
+test("exact bowcraft - legacy bow command cannot bypass explicit material selection", () => {
+  const world = createWorld();
+  standAtYard(world);
+  world.player.pack.log = 5;
+  const before = structuredClone(world.player);
+
+  assert.equal(commandCraft(world, "bow"), "Choose exact body and binding materials for this bow.");
+  assert.deepEqual(world.player, before);
 });

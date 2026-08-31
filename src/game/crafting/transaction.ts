@@ -15,18 +15,39 @@ import type { CraftedComponent } from "./types.ts";
 
 export type ExactCraftPlayer = Pick<PlayerState, "pack" | "resources">;
 
-export type ExactCraftTransactionResult =
+type BlockedExactCraftTransaction = Readonly<{
+  status: "blocked";
+  reason: "materials";
+  message: string;
+}>;
+
+export type ExactCraftTransactionPreview =
+  | BlockedExactCraftTransaction
   | Readonly<{
-      status: "blocked";
-      reason: "materials";
-      message: string;
-    }>
+      status: "ready";
+      recipeId: ExactRecipeId;
+      output: ExactRecipeOutput;
+      components: readonly CraftedComponent[];
+    }>;
+
+export type ExactCraftTransactionResult =
+  | BlockedExactCraftTransaction
   | Readonly<{
       status: "crafted";
       recipeId: ExactRecipeId;
       output: ExactRecipeOutput;
       components: readonly CraftedComponent[];
     }>;
+
+type PlannedExactCraftTransaction =
+  | BlockedExactCraftTransaction
+  | {
+      status: "ready";
+      recipeId: ExactRecipeId;
+      output: ExactRecipeOutput;
+      components: readonly CraftedComponent[];
+      planned: ExactCraftPlayer;
+    };
 
 function frozen<T extends object>(value: T): Readonly<T> {
   return Object.freeze(value);
@@ -40,16 +61,11 @@ function outputCount(player: ExactCraftPlayer, itemId: ExactRecipeOutput["itemId
   return count;
 }
 
-/**
- * Validate selection, complete inventory, aggregate availability, and output
- * capacity before committing either side of the craft. This transaction does
- * not roll skill/workmanship; Task 10 will place it behind the bow work roll.
- */
-export function executeExactCraftTransaction(
+function planExactCraftTransaction(
   player: ExactCraftPlayer,
   recipeId: string,
   selections: readonly ExactMaterialSelection[],
-): ExactCraftTransactionResult {
+): PlannedExactCraftTransaction {
   const resolved = resolveExactRecipeSelection(recipeId, selections);
   const currentOutput = outputCount(player, resolved.recipe.output.itemId);
   const nextOutput = currentOutput + resolved.recipe.output.quantity;
@@ -78,13 +94,50 @@ export function executeExactCraftTransaction(
     throw new Error("exact craft materials changed during atomic debit");
   }
   planned.pack[resolved.recipe.output.itemId] = nextOutput;
-
-  player.pack = planned.pack;
-  player.resources = planned.resources;
-  return frozen({
-    status: "crafted",
+  return {
+    status: "ready",
     recipeId: resolved.recipe.id,
     output: resolved.recipe.output,
     components: resolved.components,
+    planned,
+  };
+}
+
+/** Validate the complete exact transaction without mutating player state. */
+export function previewExactCraftTransaction(
+  player: ExactCraftPlayer,
+  recipeId: string,
+  selections: readonly ExactMaterialSelection[],
+): ExactCraftTransactionPreview {
+  const plan = planExactCraftTransaction(player, recipeId, selections);
+  if (plan.status === "blocked") return plan;
+  return frozen({
+    status: "ready",
+    recipeId: plan.recipeId,
+    output: plan.output,
+    components: plan.components,
+  });
+}
+
+/**
+ * Validate selection, complete inventory, aggregate availability, and output
+ * capacity before committing either side of the craft. Skill and workmanship
+ * stay outside this inventory transaction.
+ */
+export function executeExactCraftTransaction(
+  player: ExactCraftPlayer,
+  recipeId: string,
+  selections: readonly ExactMaterialSelection[],
+): ExactCraftTransactionResult {
+  const plan = planExactCraftTransaction(player, recipeId, selections);
+  if (plan.status === "blocked") return plan;
+
+  player.pack = plan.planned.pack;
+  player.resources = plan.planned.resources;
+  return frozen({
+    status: "crafted",
+    recipeId: plan.recipeId,
+    output: plan.output,
+    components: plan.components,
   });
 }

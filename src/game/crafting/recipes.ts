@@ -24,6 +24,7 @@ export interface ExactRecipeOutput {
 export interface ExactRecipeDefinition {
   readonly id: ExactRecipeId;
   readonly formId: ItemFormId;
+  readonly recipeVersion: number;
   readonly output: ExactRecipeOutput;
 }
 
@@ -85,6 +86,7 @@ const EXACT_RECIPE_DEFINITIONS = [
   {
     id: "bow",
     formId: "bow",
+    recipeVersion: 1,
     output: { itemId: "bow", quantity: 1 },
   },
 ] as const satisfies readonly ExactRecipeDefinition[];
@@ -98,6 +100,9 @@ function buildExactRecipeCatalog(
     if (catalog[definition.id]) throw new Error(`duplicate exact recipe id: ${definition.id}`);
     const form = ITEM_FORM_CATALOG[definition.formId];
     if (!form) throw new Error(`unknown item form for exact recipe ${definition.id}: ${definition.formId}`);
+    if (definition.recipeVersion !== form.recipeVersion) {
+      throw new Error(`exact recipe ${definition.id} version must match form version ${form.recipeVersion}`);
+    }
     if (definition.output.itemId !== form.baseItem) {
       throw new Error(`exact recipe ${definition.id} output must match form base item ${form.baseItem}`);
     }

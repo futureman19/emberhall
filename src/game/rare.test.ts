@@ -6,6 +6,7 @@ import {
   AFFIXES,
   affixesFor,
   bornRare,
+  createCraftedItem,
   equippedRares,
   exceptionalRank,
   rareClassOf,
@@ -15,6 +16,7 @@ import {
   rollKillRare,
   rollRare,
   weaponDmg,
+  workmanshipForCraft,
 } from "./rare.ts";
 import { mulberry32 } from "./rng.ts";
 import { gearCompare, statLines, tagLine, worthLine, dressedStats } from "./iteminfo.ts";
@@ -117,6 +119,35 @@ test("rare - exceptional respects class and rank ladders", () => {
   const gm = rollExceptional(w, "sword", 100, 10, "X", mulberry32(7));
   assert.ok(gm, "a GM roll lands");
   assert.ok(gm!.affixes.every((a) => AFFIXES[a]!.rank <= 5));
+});
+
+test("crafted bows - workmanship is a physical quality roll, never a magic-affix roll", () => {
+  assert.equal(workmanshipForCraft(100, 18, 0.01), "exceptional");
+  assert.equal(workmanshipForCraft(100, 18, 0.2), "fine");
+  assert.equal(workmanshipForCraft(100, 18, 0.99), "ordinary");
+  assert.equal(workmanshipForCraft(20, 18, 0), "ordinary");
+
+  const world = createWorld();
+  const maker = you(world)!.name;
+  const bow = createCraftedItem(world, {
+    formId: "bow",
+    base: "bow",
+    workmanship: "fine",
+    components: [
+      { role: "body", resourceId: "redwood", form: "log", grade: "choice", amount: 5 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+    maker,
+    recipeId: "bow",
+    recipeVersion: 1,
+  });
+
+  assert.equal(rareName(bow), "a fine redwood bow");
+  assert.equal(bow.workmanship, "fine");
+  assert.equal(bow.maker, maker);
+  assert.deepEqual(bow.affixes, []);
+  assert.deepEqual(bow.inlays, []);
 });
 
 test("rare - equipping a wonder swaps with the mundane; mods flow to combat", () => {

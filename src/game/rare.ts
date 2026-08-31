@@ -1,4 +1,13 @@
 import { hasTag, ITEM_META, SKILL_META } from "./catalog.ts";
+import { RESOURCE_CATALOG } from "./resources/catalog.ts";
+import { ITEM_FORM_CATALOG } from "./crafting/forms.ts";
+import { resolveItemStats } from "./crafting/resolve.ts";
+import type {
+  CraftedComponent,
+  GemInlay,
+  ItemFormId,
+  Workmanship,
+} from "./crafting/types.ts";
 import type { FaunaKind, ItemId, RareItem, SkillId, WearSlot, World } from "./types.ts";
 
 /**
@@ -167,9 +176,69 @@ export function bornRare(rare: RareItem, world: World, maker?: string): RareItem
   return rare;
 }
 
+/** A separate physical-quality roll for exact crafting; it never chooses magic. */
+export function workmanshipForCraft(skill: number, difficulty: number, roll: number): Workmanship {
+  if (!Number.isFinite(skill) || !Number.isFinite(difficulty)) throw new Error("craft skill and difficulty must be finite");
+  if (!Number.isFinite(roll) || roll < 0 || roll >= 1) throw new Error("workmanship roll must be within 0..<1");
+  const margin = skill - difficulty;
+  if (margin < 25) return "ordinary";
+  const exceptionalChance = margin >= 60 ? Math.min(0.2, margin / 500) : 0;
+  if (roll < exceptionalChance) return "exceptional";
+  const fineChance = Math.min(0.45, margin / 250);
+  return roll < fineChance ? "fine" : "ordinary";
+}
+
+export interface CraftedItemInput {
+  readonly formId: ItemFormId;
+  readonly base: ItemId;
+  readonly workmanship: Workmanship;
+  readonly components: readonly CraftedComponent[];
+  readonly inlays: readonly GemInlay[];
+  readonly maker: string;
+  readonly recipeId: string;
+  readonly recipeVersion: number;
+}
+
+/** Material/workmanship identity stored on the existing singular-item path. */
+export function createCraftedItem(world: World, input: CraftedItemInput): RareItem {
+  const form = ITEM_FORM_CATALOG[input.formId];
+  if (!form || input.base !== form.baseItem) throw new Error("crafted item base must match its canonical form");
+  if (input.recipeId !== form.id || input.recipeVersion !== form.recipeVersion) {
+    throw new Error("crafted item recipe identity must match its canonical form version");
+  }
+  if (typeof input.maker !== "string" || input.maker.trim().length === 0) throw new Error("crafted item maker is required");
+  if (!Number.isSafeInteger(input.recipeVersion) || input.recipeVersion <= 0) {
+    throw new Error("crafted item recipe version must be a positive safe integer");
+  }
+  const resolution = resolveItemStats(form, {
+    workmanship: input.workmanship,
+    components: input.components,
+    inlays: input.inlays,
+  });
+  return {
+    uid: rareUid(world.seed, world.hour),
+    base: input.base,
+    affixes: [],
+    maker: input.maker,
+    seed: world.seed,
+    hour: Math.floor(world.hour),
+    formId: input.formId,
+    workmanship: input.workmanship,
+    components: structuredClone([...input.components]),
+    inlays: structuredClone([...input.inlays]),
+    resolvedStats: structuredClone(resolution.stats),
+    recipeId: input.recipeId,
+    recipeVersion: input.recipeVersion,
+    source: "crafted",
+  };
+}
+
 /** "an eminently accurate sword of power" / "a ring of the owl". */
 export function rareName(rare: RareItem): string {
-  const base = ITEM_META[rare.base].label.toLowerCase();
+  const body = rare.components?.find(({ role }) => role === "body");
+  const material = body ? RESOURCE_CATALOG[body.resourceId].label.toLowerCase() : null;
+  const quality = rare.workmanship && rare.workmanship !== "ordinary" ? `${rare.workmanship} ` : "";
+  const base = `${quality}${material ? `${material} ` : ""}${ITEM_META[rare.base].label.toLowerCase()}`;
   const pre = rare.affixes.filter((a) => AFFIXES[a]?.slot === "pre");
   const suf = rare.affixes.filter((a) => AFFIXES[a]?.slot === "suf");
   const head = [...pre, base].join(" ");

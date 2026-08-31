@@ -54,6 +54,7 @@ export interface ItemStatCaps {
 
 export interface ItemFormDefinition {
   readonly id: ItemFormId;
+  readonly recipeVersion: number;
   readonly baseItem: ItemId;
   readonly label: string;
   readonly itemClass: ItemClass;

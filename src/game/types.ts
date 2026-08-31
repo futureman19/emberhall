@@ -1,5 +1,12 @@
 import type { LookRecipeV1 } from "./look/types.ts";
 import type {
+  CraftedComponent,
+  GemInlay,
+  ItemFormId,
+  ResolvedItemStats,
+  Workmanship,
+} from "./crafting/types.ts";
+import type {
   QualityForResource,
   ResourceFormFor,
   ResourceId,
@@ -401,11 +408,9 @@ export interface PlayerState {
 }
 
 /**
- * A rare item — an instance with magical attributes, in the pre-AOS UO
- * mold. Mundane items are fungible stacks (pack: Record<ItemId, number>);
- * rares are singular: each carries affixes ("eminently accurate", "of
- * power"), an optional maker's mark, and the hour it was born. Rares are
- * what the Vault mints into NFTs worth trading — the affixes ARE the value.
+ * A singular item: legacy/loot magic or an exact material-specific craft.
+ * Mundane items remain fungible pack stacks; meaningful workmanship,
+ * materials, provenance, and later gem inlays live on this instance path.
  */
 export interface RareItem {
   uid: string;
@@ -414,6 +419,15 @@ export interface RareItem {
   maker?: string;
   seed: number;
   hour: number;
+  /** Present on material-specific crafted instances; absent on legacy/loot rares. */
+  formId?: ItemFormId;
+  workmanship?: Workmanship;
+  components?: CraftedComponent[];
+  inlays?: GemInlay[];
+  resolvedStats?: ResolvedItemStats;
+  recipeId?: string;
+  recipeVersion?: number;
+  source?: "crafted" | "loot" | "legacy";
 }
 
 export interface LogLine {
