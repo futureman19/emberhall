@@ -14,4 +14,5 @@ export interface LookRecipeV1 {
   hairStyle?: HairStyleId;
   hairColor?: string;
   garb?: string;
+  parts?: string[]; // emberhall.part/1 ids — crafted voxel parts
 }

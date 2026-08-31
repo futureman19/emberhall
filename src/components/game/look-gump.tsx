@@ -5,11 +5,13 @@
 import { useMemo, useState } from "react";
 import { CLASS_META } from "@/game/catalog";
 import { GARB_TINTS, HAIR_COLORS, HAIR_STYLES, SKIN_TONES, type Swatch } from "@/game/look/catalog.ts";
+import { listParts, partsById, savePart } from "@/game/look/parts.ts";
 import { resolveLook } from "@/game/look/resolve.ts";
 import { LOOK_SCHEMA, type HairStyleId, type LookRecipeV1 } from "@/game/look/types.ts";
 import { personName } from "@/game/names";
 import type { ClassId } from "@/game/types";
 import { LookPreview } from "./look-preview";
+import { PartSculptor } from "./part-sculptor";
 
 export interface LookChoice {
   name: string;
@@ -75,11 +77,16 @@ export function LookGump({ onDone }: { onDone: (choice: LookChoice) => void }) {
   const [hairStyle, setHairStyle] = useState<HairStyleId>("crop");
   const [hairColor, setHairColor] = useState("#3a322c");
   const [garb, setGarb] = useState("#a85a42");
+  const [partIds, setPartIds] = useState<string[]>([]);
+  const [sculpting, setSculpting] = useState(false);
+  const [craftVersion, setCraftVersion] = useState(0);
 
   const preview = useMemo(
     () => resolveLook({ schema: LOOK_SCHEMA, skin, hairStyle, hairColor, garb }),
     [skin, hairStyle, hairColor, garb],
   );
+  const crafted = useMemo(() => listParts(), [craftVersion]);
+  const wornParts = useMemo(() => partsById(partIds), [partIds, craftVersion]);
   const trimmed = name.trim();
   const last = step === STEPS.length - 1;
 
@@ -87,7 +94,7 @@ export function LookGump({ onDone }: { onDone: (choice: LookChoice) => void }) {
     onDone({
       name: trimmed,
       cls,
-      look: { schema: LOOK_SCHEMA, cls, skin, hairStyle, hairColor, garb },
+      look: { schema: LOOK_SCHEMA, cls, skin, hairStyle, hairColor, garb, parts: partIds.length ? partIds : undefined },
     });
 
   return (
@@ -99,7 +106,7 @@ export function LookGump({ onDone }: { onDone: (choice: LookChoice) => void }) {
         {/* the mirror — always watching */}
         <div className="hidden w-56 shrink-0 flex-col sm:flex">
           <div className="flex-1 rounded-sm border" style={{ borderColor: "#2e241c", background: "#181410" }}>
-            <LookPreview look={preview} />
+            <LookPreview look={preview} parts={wornParts} />
           </div>
           <div className="mt-3 text-center">
             <div className="font-serif text-lg" style={{ color: "#ece6d8" }}>{trimmed || "…"}</div>
@@ -195,6 +202,36 @@ export function LookGump({ onDone }: { onDone: (choice: LookChoice) => void }) {
                 </div>
                 <SwatchRow title="Hair color" swatches={HAIR_COLORS} value={hairColor} onPick={setHairColor} testid="look-haircolor" />
                 <SwatchRow title="Garb" swatches={GARB_TINTS} value={garb} onPick={setGarb} testid="look-garb" />
+                <div>
+                  <div className="mb-1.5 text-xs tracking-[0.2em] uppercase" style={{ color: "#8a8680" }}>Crafted</div>
+                  <div className="flex flex-wrap gap-2">
+                    {crafted.map((p) => (
+                      <button
+                        key={p.id}
+                        type="button"
+                        data-testid={`look-part-${p.id}`}
+                        title={`${p.name} — ${p.slot}`}
+                        onClick={() => setPartIds(partIds.includes(p.id) ? partIds.filter((id) => id !== p.id) : [...partIds, p.id])}
+                        className="rounded-sm border px-2.5 py-1.5 text-xs hover:bg-white/5"
+                        style={{
+                          borderColor: partIds.includes(p.id) ? "#e8b96a" : "#3a322c",
+                          color: partIds.includes(p.id) ? "#ece6d8" : "#8a8680",
+                        }}
+                      >
+                        ✦ {p.name}
+                      </button>
+                    ))}
+                    <button
+                      type="button"
+                      data-testid="look-sculpt"
+                      onClick={() => setSculpting(true)}
+                      className="rounded-sm border border-dashed px-2.5 py-1.5 text-xs hover:bg-white/5"
+                      style={{ borderColor: "#c9a36a", color: "#c9a36a" }}
+                    >
+                      ⚒ Sculpt new
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -240,6 +277,17 @@ export function LookGump({ onDone }: { onDone: (choice: LookChoice) => void }) {
           </div>
         </div>
       </div>
+      {sculpting && (
+        <PartSculptor
+          onDone={(part) => {
+            savePart(part);
+            setPartIds((ids) => [...ids, part.id]);
+            setCraftVersion((v) => v + 1);
+            setSculpting(false);
+          }}
+          onCancel={() => setSculpting(false)}
+        />
+      )}
     </div>
   );
 }

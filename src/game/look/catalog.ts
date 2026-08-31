@@ -55,4 +55,4 @@ export const DEFAULT_LOOK = {
   hairStyle: "crop",
   hairColor: "#3a322c",
   garb: "#a85a42",
-} as const satisfies Required<Omit<LookRecipeV1, "schema" | "cls">>;
+} as const satisfies Required<Omit<LookRecipeV1, "schema" | "cls" | "parts">>;

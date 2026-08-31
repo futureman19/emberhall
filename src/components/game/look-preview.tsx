@@ -5,6 +5,7 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import type { Group } from "three";
+import { SLOT_ANCHOR, type VoxelPartV1 } from "@/game/look/parts.ts";
 import type { ResolvedLook } from "@/game/look/resolve.ts";
 
 const LEGS = "#3a342e";
@@ -53,7 +54,23 @@ function Hair({ look }: { look: ResolvedLook }) {
   );
 }
 
-function Figure({ look }: { look: ResolvedLook }) {
+function PartMeshes({ parts }: { parts: VoxelPartV1[] }) {
+  return (
+    <>
+      {parts.map((p) => {
+        const { at, voxel } = SLOT_ANCHOR[p.slot];
+        return p.voxels.map((v, i) => (
+          <mesh key={`${p.id}-${i}`} position={[at[0] + v.x * voxel, at[1] + v.y * voxel, at[2] + v.z * voxel]}>
+            <boxGeometry args={[voxel, voxel, voxel]} />
+            <Mat color={v.c} />
+          </mesh>
+        ));
+      })}
+    </>
+  );
+}
+
+function Figure({ look, parts = [] }: { look: ResolvedLook; parts?: VoxelPartV1[] }) {
   const g = useRef<Group>(null);
   useFrame(({ clock }, delta) => {
     if (!g.current) return;
@@ -75,11 +92,12 @@ function Figure({ look }: { look: ResolvedLook }) {
       ))}
       <mesh position={[0, 0.98, 0]}><boxGeometry args={[0.28, 0.28, 0.26]} /><Mat color={look.skin} /></mesh>
       <Hair look={look} />
+      <PartMeshes parts={parts} />
     </group>
   );
 }
 
-export function LookPreview({ look }: { look: ResolvedLook }) {
+export function LookPreview({ look, parts = [] }: { look: ResolvedLook; parts?: VoxelPartV1[] }) {
   // Canvas is client-only; wait for mount so SSR skips it cleanly.
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -88,7 +106,7 @@ export function LookPreview({ look }: { look: ResolvedLook }) {
     <Canvas camera={{ position: [1.5, 1.1, 2.7], fov: 38 }} onCreated={({ camera }) => camera.lookAt(0, 0.62, 0)}>
       <hemisphereLight args={["#efe3c4", "#3a342e", 0.9]} />
       <directionalLight position={[3, 5, 4]} intensity={1.1} color="#f2e4c8" />
-      <Figure look={look} />
+      <Figure look={look} parts={parts} />
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.005, 0]}>
         <circleGeometry args={[0.85, 24]} />
         <meshStandardMaterial color="#2a2620" roughness={0.9} />
