@@ -199,6 +199,41 @@ export interface CraftedItemInput {
   readonly recipeVersion: number;
 }
 
+/** Fine/exceptional legacy work uses the same singular path without magic. */
+export function createWorkmanshipItem(
+  world: World,
+  base: ItemId,
+  workmanship: Exclude<Workmanship, "ordinary">,
+  maker: string,
+  recipeId: string,
+): RareItem | null {
+  const itemClass = rareClassOf(base);
+  if (!itemClass) return null;
+  const exceptional = workmanship === "exceptional";
+  const weapon = itemClass === "weapon";
+  const armor = itemClass === "armor";
+  return {
+    uid: rareUid(world.seed, world.hour),
+    base,
+    affixes: [],
+    maker,
+    seed: world.seed,
+    hour: Math.floor(world.hour),
+    workmanship,
+    inlays: [],
+    resolvedStats: {
+      damage: weapon ? weaponDmg(base) + (exceptional ? 1 : 0) : 0,
+      hitBonus: weapon ? (exceptional ? 2 : 1) : 0,
+      armor: ITEM_META[base].armor + (armor && exceptional ? 1 : 0),
+      skillBonuses: {},
+      slayerMultipliers: {},
+    },
+    recipeId,
+    recipeVersion: 1,
+    source: "crafted",
+  };
+}
+
 /** Material/workmanship identity stored on the existing singular-item path. */
 export function createCraftedItem(world: World, input: CraftedItemInput): RareItem {
   const form = ITEM_FORM_CATALOG[input.formId];

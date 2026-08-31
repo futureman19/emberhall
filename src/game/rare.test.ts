@@ -90,25 +90,30 @@ test("rare - kill drops: wights hoard, hares never", () => {
   assert.equal(rollKillRare(w, "wight", () => 0.99), null, "unlucky dice, no hoard");
 });
 
-test("rare - exceptional crafting: the work sings, the maker is marked", () => {
+test("rare - exceptional crafting creates physical workmanship without magic", () => {
   const w = createWorld();
   standAt(w, "yard");
   givePack(w, { log: 2 });
   w.player.skills.carpentry = 100;
   const old = Math.random;
-  Math.random = () => 0.01; // success AND the exceptional gate
+  Math.random = () => 0.01; // success AND exceptional workmanship
   let note: string | null = null;
   try {
     note = commandCraft(w, "club");
   } finally {
     Math.random = old;
   }
-  assert.ok(note?.includes("The work sings"), `sang: ${note}`);
-  assert.equal(w.player.rares.length, 1, "a wonder was born");
+  assert.ok(note?.includes("The maker's mark holds"), `marked: ${note}`);
+  assert.equal(w.player.rares.length, 1, "a singular crafted item was born");
   const wonder = w.player.rares[0]!;
   assert.equal(wonder.base, "club");
   assert.equal(wonder.maker, you(w)!.name);
+  assert.equal(wonder.workmanship, "exceptional");
+  assert.deepEqual(wonder.affixes, []);
+  assert.equal(wonder.resolvedStats?.damage, weaponDmg("club") + 1);
   assert.equal(w.player.pack.club ?? 0, 0, "the stack yielded its piece to the wonder");
+  assert.ok(commandEquipRare(w, wonder.uid));
+  assert.equal(dressedStats(w).dmg, weaponDmg("club") + 1);
 });
 
 test("rare - exceptional respects class and rank ladders", () => {

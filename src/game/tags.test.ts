@@ -230,7 +230,7 @@ test("craft batch - field work batches too: six bandages from three silks", () =
   assert.equal(w.player.pack.silk, 0);
 });
 
-test("craft batch - the maker's mark can sing more than once in a stint", () => {
+test("craft batch - the maker's mark can hold more than once in a stint", () => {
   const w = createWorld();
   standAt(w, "yard");
   givePack(w, { log: 6 });
@@ -245,7 +245,8 @@ test("craft batch - the maker's mark can sing more than once in a stint", () => 
   }
   assert.equal(w.player.rares.length, 3, "three wonders from three stints");
   assert.equal(w.player.pack.club ?? 0, 0, "each stack piece yielded to its wonder");
-  assert.ok((note?.match(/The work sings/g) ?? []).length === 3, `sang thrice: ${note}`);
+  assert.ok((note?.match(/The maker's mark holds/g) ?? []).length === 3, `marked thrice: ${note}`);
+  assert.ok(w.player.rares.every((item) => item.affixes.length === 0));
 });
 
 test("craft batch - a recipe never eats its own product (cloth/wood regression)", () => {

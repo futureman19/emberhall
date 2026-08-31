@@ -3,8 +3,8 @@ import { litFireNear, placeCampfire } from "./campfire.ts";
 import { effSkill, you } from "./player.ts";
 import {
   createCraftedItem,
+  createWorkmanshipItem,
   rareName,
-  rollExceptional,
   workmanshipForCraft,
 } from "./rare.ts";
 import { ITEM_FORM_CATALOG } from "./crafting/forms.ts";
@@ -284,7 +284,7 @@ export function commandCraft(world: World, recipeId: string): string | null {
   }
   const made = rec.placesFire ? "A fire crackles to life" : madeList(rec, 1);
   const maker = you(world)?.name ?? "an unknown hand";
-  const wonderNote = wonder ? ` The work sings — ${rareName(wonder)}, crafted by ${maker}!` : "";
+  const wonderNote = wonder ? ` The maker's mark holds — ${rareName(wonder)}, crafted by ${maker}!` : "";
   const note = gain ? `${made}.${wonderNote} ${gain}.` : `${made}.${wonderNote}`;
   log(world, note);
   return note;
@@ -382,11 +382,14 @@ function craftOnce(world: World, rec: Recipe): { ok: boolean; gain: string | nul
     world.player.pack[id] = (world.player.pack[id] ?? 0) + (n ?? 0);
   }
   if (rec.placesFire) placeCampfire(world);
-  // The maker's mark — a hand far above the work can leave a piece beyond the ordinary.
+  // Fine/exceptional work may become singular, but ordinary materials never invent magic.
   const maker = you(world)?.name ?? "an unknown hand";
-  const wonder = Object.keys(rec.give)
-    .map((k) => rollExceptional(world, k as ItemId, skill, rec.diff, maker, Math.random))
-    .find((r) => r !== null) ?? null;
+  const workmanship = workmanshipForCraft(skill, rec.diff, Math.random());
+  const wonder = workmanship === "ordinary"
+    ? null
+    : Object.keys(rec.give)
+        .map((k) => createWorkmanshipItem(world, k as ItemId, workmanship, maker, rec.id))
+        .find((r) => r !== null) ?? null;
   if (wonder) {
     // The stack loses one of the piece; the singular wonder takes its place.
     world.player.pack[wonder.base] = Math.max(0, (world.player.pack[wonder.base] ?? 1) - 1);
@@ -417,7 +420,7 @@ export function maxCraftable(world: World, rec: Recipe): number {
  * Craft ×N — one long stint at the bench or fire. Materials are checked
  * before every attempt (the stint ends when they run out); every attempt
  * rolls success, gain, and the maker's mark on its own. One sound, one
- * summary line: "6 boards. 1 split. The work sings — a club of ruin!"
+ * summary line: "6 boards. 1 split. The maker's mark holds — an exceptional club!"
  */
 export function commandCraftBatch(world: World, recipeId: string, times: number): string | null {
   if (world.player.ghost) return "A ghost cannot.";
@@ -457,7 +460,7 @@ export function commandCraftBatch(world: World, recipeId: string, times: number)
   if (failed > 0) bits.push(`${failed} split.`);
   if (made === 0 && failed === 0) bits.push("Nothing to work with.");
   const maker = you(world)?.name ?? "an unknown hand";
-  for (const w of wonders) bits.push(`The work sings — ${rareName(w)}, crafted by ${maker}!`);
+  for (const w of wonders) bits.push(`The maker's mark holds — ${rareName(w)}, crafted by ${maker}!`);
   const gainText = [...gains].join(" ");
   const note = gainText ? `${bits.join(" ")} ${gainText}.` : bits.join(" ");
   log(world, note);
