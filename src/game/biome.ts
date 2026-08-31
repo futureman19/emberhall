@@ -4,6 +4,9 @@ import type { BiomeId, World } from "./types.ts";
 
 export type { BiomeId } from "./types.ts";
 
+/** Canonical biome order. The first entry keeps biomeAt's existing tie preference. */
+export const BIOME_IDS = Object.freeze(["vale", "tundra", "taiga", "fen", "jungle", "desert"] as const satisfies readonly BiomeId[]);
+
 export type BiomeW = {
   vale: number;
   tundra: number;
@@ -87,9 +90,9 @@ export function biomeWeights(x: number, y: number): BiomeW {
 
 export function biomeAt(x: number, y: number): BiomeId {
   const w = biomeWeights(x, y);
-  let best: BiomeId = "vale";
-  let n = w.vale;
-  (["tundra", "taiga", "fen", "jungle", "desert"] as const).forEach((id) => {
+  let best: BiomeId = BIOME_IDS[0];
+  let n = w[best];
+  BIOME_IDS.slice(1).forEach((id) => {
     if (w[id] > n) {
       n = w[id];
       best = id;
