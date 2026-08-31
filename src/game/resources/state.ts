@@ -14,6 +14,9 @@ const DISCOVERY_INPUT_FIELDS = ["seed", "tx", "ty", "nodeKind", "hour", "resourc
 const LOOKUP_INPUT_FIELDS = ["seed", "tx", "ty", "nodeKind", "resourceNodes"] as const;
 const STATE_FIELDS = ["nodeId", "tx", "ty", "nodeKind", "discoveredAtHour", "depletedAtHour"] as const;
 
+const ANY_RESOURCE_NODE_SEED = Symbol("any-resource-node-seed");
+const CANONICAL_RESOURCE_NODE_MAPS = new WeakMap<object, number | typeof ANY_RESOURCE_NODE_SEED>();
+
 type FieldSnapshot<Fields extends readonly string[]> = Readonly<Record<Fields[number], unknown>>;
 
 function fail(message = "resource node state input must contain exactly own data fields"): never {
@@ -56,18 +59,36 @@ function validateHour(name: "hour" | "discoveredAtHour" | "depletedAtHour", valu
   }
 }
 
-function cloneAndFreezeMap(resourceNodes: ResourceNodeStateMap): ResourceNodeStateMap {
-  const clone = Object.create(null) as ResourceNodeStateMap;
-  for (const [key, value] of Object.entries(resourceNodes)) clone[key] = Object.freeze({ ...value });
-  return Object.freeze(clone);
+function rememberCanonicalMap(
+  resourceNodes: ResourceNodeStateMap,
+  seed: number | typeof ANY_RESOURCE_NODE_SEED,
+): ResourceNodeStateMap {
+  CANONICAL_RESOURCE_NODE_MAPS.set(resourceNodes, seed);
+  return resourceNodes;
 }
 
-function parseMapFromSnapshot(seed: number, input: unknown, atHour?: number): ResourceNodeStateMap {
+function cloneAndFreezeMap(resourceNodes: ResourceNodeStateMap, seed: number): ResourceNodeStateMap {
+  const clone = Object.create(null) as ResourceNodeStateMap;
+  for (const [key, value] of Object.entries(resourceNodes)) clone[key] = Object.freeze({ ...value });
+  return rememberCanonicalMap(Object.freeze(clone), seed);
+}
+
+function parseMapFromSnapshot(
+  seed: number,
+  input: unknown,
+  atHour?: number,
+  trustCanonical = false,
+): ResourceNodeStateMap {
   if (typeof input !== "object" || input === null || Array.isArray(input)) return fail("resource node state map must be a plain record");
+  const knownSeed = CANONICAL_RESOURCE_NODE_MAPS.get(input);
+  if (trustCanonical && (knownSeed === seed || knownSeed === ANY_RESOURCE_NODE_SEED)) {
+    return input as ResourceNodeStateMap;
+  }
   const prototype = Object.getPrototypeOf(input);
   if (prototype !== Object.prototype && prototype !== null) return fail("resource node state map must be a plain record");
 
   const parsed = Object.create(null) as ResourceNodeStateMap;
+  const occupiedTiles = new Set<string>();
   for (const key of Reflect.ownKeys(input)) {
     if (typeof key !== "string") fail("resource node state map keys must be strings");
     const descriptor = Reflect.getOwnPropertyDescriptor(input, key);
@@ -77,6 +98,9 @@ function parseMapFromSnapshot(seed: number, input: unknown, atHour?: number): Re
     validateCoordinate("tx", record.tx);
     validateCoordinate("ty", record.ty);
     validateKind(record.nodeKind);
+    const tileKey = `${record.tx},${record.ty}`;
+    if (occupiedTiles.has(tileKey)) fail("resource node state cannot contain multiple nodes at one tile");
+    occupiedTiles.add(tileKey);
     validateHour("discoveredAtHour", record.discoveredAtHour);
     if (atHour !== undefined && record.discoveredAtHour > atHour) {
       fail("resource node state discovery cannot be in the future");
@@ -99,12 +123,15 @@ function parseMapFromSnapshot(seed: number, input: unknown, atHour?: number): Re
       depletedAtHour: record.depletedAtHour,
     });
   }
-  return Object.freeze(parsed);
+  return rememberCanonicalMap(Object.freeze(parsed), seed);
 }
 
 /** Empty sparse state; no tile receives an entry until it is identified. */
 export function createResourceNodeStateMap(): ResourceNodeStateMap {
-  return Object.freeze(Object.create(null) as ResourceNodeStateMap);
+  return rememberCanonicalMap(
+    Object.freeze(Object.create(null) as ResourceNodeStateMap),
+    ANY_RESOURCE_NODE_SEED,
+  );
 }
 
 /** Validate, canonicalize, deeply clone, and freeze persisted node metadata. */
@@ -142,7 +169,7 @@ function parsedLocation<Fields extends typeof DISCOVERY_INPUT_FIELDS | typeof LO
     tx: values.tx,
     ty: values.ty,
     nodeKind: values.nodeKind,
-    resourceNodes: parseMapFromSnapshot(values.seed, values.resourceNodes),
+    resourceNodes: parseMapFromSnapshot(values.seed, values.resourceNodes, undefined, true),
     ...(fields === DISCOVERY_INPUT_FIELDS ? { hour: values.hour as number } : {}),
   };
 }
@@ -180,6 +207,9 @@ export function discoverResourceNode(input: {
   const parsed = parsedLocation(input, DISCOVERY_INPUT_FIELDS);
   const id = nodeIdAt(parsed);
   if (Object.hasOwn(parsed.resourceNodes, id)) return parsed.resourceNodes;
+  if (Object.values(parsed.resourceNodes).some((state) => state.tx === parsed.tx && state.ty === parsed.ty)) {
+    fail("resource node state cannot contain multiple nodes at one tile");
+  }
   const next = Object.create(null) as ResourceNodeStateMap;
   Object.assign(next, parsed.resourceNodes);
   next[id] = {
@@ -190,7 +220,7 @@ export function discoverResourceNode(input: {
     discoveredAtHour: parsed.hour!,
     depletedAtHour: null,
   };
-  return cloneAndFreezeMap(next);
+  return cloneAndFreezeMap(next, parsed.seed);
 }
 
 /** Return an atomic replacement map with discovery and first depletion recorded. */
@@ -213,7 +243,7 @@ export function depleteResourceNode(input: {
   const next = Object.create(null) as ResourceNodeStateMap;
   Object.assign(next, discovered);
   next[id] = { ...discovered[id]!, depletedAtHour: parsed.hour! };
-  return cloneAndFreezeMap(next);
+  return cloneAndFreezeMap(next, parsed.seed);
 }
 
 function cloneScars(scars: World["scars"]): World["scars"] {
@@ -303,7 +333,7 @@ export function regrowResourceNodes(world: World): number {
     return 0;
   }
 
-  const current = parseResourceNodeStateMap({ seed: world.seed, resourceNodes: resourceNodesRef });
+  const current = parseMapFromSnapshot(world.seed, resourceNodesRef, undefined, true);
   const due: ResourceNodeState[] = [];
   let nextDueHour = Number.POSITIVE_INFINITY;
 
@@ -342,7 +372,7 @@ export function regrowResourceNodes(world: World): number {
     delete scarsAfter[`${state.tx},${state.ty}`];
     next[state.nodeId] = { ...state, depletedAtHour: null };
   }
-  const resourceNodesAfter = cloneAndFreezeMap(next);
+  const resourceNodesAfter = cloneAndFreezeMap(next, world.seed);
 
   for (const state of due) world.tiles[state.ty]![state.tx]!.kind = state.nodeKind;
   world.scars = scarsAfter;

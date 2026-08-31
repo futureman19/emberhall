@@ -646,6 +646,11 @@ const BOW_RANGE = 10;
 
 export const WORK_BEAT = 0.72;
 export const CAST_WINDUP = 0.92;
+const WORK_IMPACT_PHASE = 0.52;
+
+function workBeatLands(previous: number, next: number): boolean {
+  return previous % WORK_BEAT < WORK_IMPACT_PHASE && next % WORK_BEAT >= WORK_IMPACT_PHASE;
+}
 
 export type Chip = {
   x: number;
@@ -705,10 +710,13 @@ export function tickPlayer(world: World, dt: number): string | null {
   const p = you(world);
   if (!p) return null;
   const intent = world.player.intent;
-  // A working chop/mine frame validates and plans the complete typed inventory
-  // before facing, timers, effects, random, skills, logs, intent, or world state.
+  // Only an impact frame validates and plans the complete typed-inventory
+  // transaction. It still runs before facing, timers, effects, random, skills,
+  // logs, intent, or world state, while animation-only frames remain O(1).
   const preparedHarvest =
-    (intent.kind === "chop" || intent.kind === "mine") && p.path.length === 0
+    (intent.kind === "chop" || intent.kind === "mine")
+      && p.path.length === 0
+      && workBeatLands(world.player.workT, world.player.workT + dt)
       ? prepareResourceHarvest(world, intent.kind === "chop" ? "tree" : "rock")
       : null;
   if (inGreybarrow(Math.round(p.x), Math.round(p.z))) completeObjective(world, "barrow");
@@ -753,7 +761,7 @@ export function tickPlayer(world: World, dt: number): string | null {
     p.facing = Math.atan2(intent.tx - p.x, intent.ty - p.z);
     const prev = world.player.workT;
     world.player.workT += dt;
-    const hit = prev % WORK_BEAT < 0.52 && world.player.workT % WORK_BEAT >= 0.52;
+    const hit = workBeatLands(prev, world.player.workT);
     if (!hit) return null;
     if (intent.kind === "till") {
       burstChips(world, intent.tx, intent.ty, "chop");

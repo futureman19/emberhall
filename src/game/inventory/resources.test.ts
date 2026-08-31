@@ -181,6 +181,28 @@ test("resource inventory - parser accepts canonical positive entries only", () =
   );
 });
 
+test("resource inventory - stack records reject symbols and accessors without invoking getters", () => {
+  let getterCalls = 0;
+  const accessorStacks = {} as Record<string, unknown>;
+  Object.defineProperty(accessorStacks, OAK_LOG, {
+    enumerable: true,
+    get() {
+      getterCalls += 1;
+      return 1;
+    },
+  });
+  assert.throws(
+    () => parseResourceInventory({ stacks: accessorStacks }),
+    /resource stacks must use own data properties/,
+  );
+  assert.equal(getterCalls, 0);
+
+  assert.throws(
+    () => parseResourceInventory({ stacks: { [OAK_LOG]: 1, [Symbol("smuggled")]: 1 } }),
+    /resource stack keys must be strings/,
+  );
+});
+
 test("resource inventory - debits reject unknown own fields", () => {
   const inventory = createResourceInventory({ [OAK_LOG]: 2 });
   const before = JSON.stringify(inventory);

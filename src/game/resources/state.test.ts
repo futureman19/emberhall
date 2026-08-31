@@ -389,3 +389,39 @@ test("resource state - parser returns a canonical deep clone detached from writa
   assert.notEqual(parsed[id], source[id]);
   assertDeepFrozen(parsed);
 });
+
+test("resource state - parser rejects tree and rock ownership of the same world tile", () => {
+  const seed = 77;
+  const tx = 10;
+  const ty = 10;
+  const resourceNodes: Record<string, unknown> = {};
+  for (const nodeKind of ["tree", "rock"] as const) {
+    const id = resolveResourceNode({ seed, tx, ty, nodeKind }).identity.nodeId;
+    resourceNodes[id] = {
+      nodeId: id,
+      tx,
+      ty,
+      nodeKind,
+      discoveredAtHour: 0,
+      depletedAtHour: null,
+    };
+  }
+
+  assert.throws(
+    () => parseResourceNodeStateMap({ seed, resourceNodes }),
+    /resource node state cannot contain multiple nodes at one tile/,
+  );
+
+  const discoveredTree = discoverResourceNode({
+    seed,
+    tx,
+    ty,
+    nodeKind: "tree",
+    hour: 0,
+    resourceNodes: createResourceNodeStateMap(),
+  });
+  assert.throws(
+    () => discoverResourceNode({ seed, tx, ty, nodeKind: "rock", hour: 0, resourceNodes: discoveredTree }),
+    /resource node state cannot contain multiple nodes at one tile/,
+  );
+});

@@ -427,3 +427,35 @@ test("harvest - exact journal result is bridged unchanged to the toast", () => {
   assert.equal(world.log.filter(({ text }) => text === exact).length, 1);
   assert.equal(useGame.getState().toast, exact);
 });
+
+test("harvest - pre-impact animation frames do not scan or clone sparse node state", () => {
+  const { world, tx, ty } = harvestWorld("tree");
+  const id = resolveResourceNode({ seed: world.seed, tx, ty, nodeKind: "tree" }).identity.nodeId;
+  const state = {
+    [id]: Object.freeze({
+      nodeId: id,
+      tx,
+      ty,
+      nodeKind: "tree" as const,
+      discoveredAtHour: 0,
+      depletedAtHour: null,
+    }),
+  };
+  let ownKeyReads = 0;
+  world.resourceNodes = new Proxy(state, {
+    ownKeys(target) {
+      ownKeyReads += 1;
+      return Reflect.ownKeys(target);
+    },
+  });
+  world.player.skills.lumberjack = 100;
+  assert.equal(commandChop(world, tx, ty), null);
+  arrive(world);
+
+  for (let frame = 0; frame < 100; frame += 1) tickPlayer(world, 0.001);
+
+  assert.ok(Math.abs(world.player.workT - 0.1) < Number.EPSILON);
+  assert.equal(ownKeyReads, 0, "frames before the work beat must not traverse persistent node state");
+  withRandom(0, () => tickPlayer(world, 0.43));
+  assert.ok(ownKeyReads > 0, "the impact frame still validates the untrusted state boundary");
+});

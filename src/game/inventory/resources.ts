@@ -112,13 +112,23 @@ export function parseResourceInventory(value: unknown): ResourceInventory {
   if (Reflect.ownKeys(value).some((key) => key !== "stacks")) {
     throw new Error("resource inventory must contain only own stacks");
   }
-  if (!isPlainRecord(value.stacks)) throw new Error("resource stacks must be a plain object");
+  const stacksDescriptor = Reflect.getOwnPropertyDescriptor(value, "stacks");
+  if (!stacksDescriptor || !("value" in stacksDescriptor)) {
+    throw new Error("resource inventory stacks must be an own data property");
+  }
+  const rawStacks = stacksDescriptor.value;
+  if (!isPlainRecord(rawStacks)) throw new Error("resource stacks must be a plain object");
 
   const stacks: ResourceInventory["stacks"] = {};
-  for (const [rawKey, rawCount] of Object.entries(value.stacks)) {
+  for (const rawKey of Reflect.ownKeys(rawStacks)) {
+    if (typeof rawKey !== "string") throw new Error("resource stack keys must be strings");
+    const descriptor = Reflect.getOwnPropertyDescriptor(rawStacks, rawKey);
+    if (!descriptor || !("value" in descriptor)) {
+      throw new Error("resource stacks must use own data properties");
+    }
     const key = parseResourceStackKey(rawKey);
-    assertPositiveStackCount(rawCount);
-    stacks[key] = rawCount;
+    assertPositiveStackCount(descriptor.value);
+    stacks[key] = descriptor.value;
   }
   return { stacks };
 }
