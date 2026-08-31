@@ -11,7 +11,7 @@ import type {
 } from "../resources/types.ts";
 import type { CanonicalStatId } from "../resources/traits.ts";
 
-export type ItemFormId = "bow";
+export type ItemFormId = "bow" | "sword";
 export type ItemClass = "weapon" | "armor" | "jewelry" | "tool" | "placeable";
 export type MaterialRole =
   "body" | "binding" | "edge" | "hilt" | "plate" | "lining" | "frame" | "finish";

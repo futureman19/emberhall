@@ -12,6 +12,9 @@ const SOUND_OAK = makeResourceStackKey("oak", "log", "sound");
 const CHOICE_REDWOOD = makeResourceStackKey("redwood", "log", "choice");
 const SOUND_CLOTH = makeResourceStackKey("common_cloth", "cloth", "sound");
 const PRISTINE_LINEN = makeResourceStackKey("fine_linen", "cloth", "pristine");
+const IRON_INGOT = makeResourceStackKey("iron_ore", "ingot", "sound");
+const HIGHLAND_INGOT = makeResourceStackKey("highland_ore", "ingot", "choice");
+const OAK_BOARD = makeResourceStackKey("oak", "board", "sound");
 
 function bowSelections(body: ResourceStackKey = CHOICE_REDWOOD, binding: ResourceStackKey = SOUND_CLOTH) {
   return [
@@ -26,6 +29,22 @@ function standAtYard(world: World): void {
   const player = you(world)!;
   player.x = yard.tx;
   player.z = yard.ty;
+}
+
+function standAtForge(world: World): void {
+  const forge = world.buildings.find(({ kind }) => kind === "forge");
+  assert.ok(forge);
+  const player = you(world)!;
+  player.x = forge.tx;
+  player.z = forge.ty;
+}
+
+function swordSelections(edge: ResourceStackKey) {
+  return [
+    { role: "edge" as const, key: edge },
+    { role: "hilt" as const, key: OAK_BOARD },
+    { role: "binding" as const, key: SOUND_CLOTH },
+  ];
 }
 
 function withRoll<T>(value: number, action: () => T): T {
@@ -230,6 +249,31 @@ test("exact bowcraft - legacy bow command cannot bypass explicit material select
   world.player.pack.log = 5;
   const before = structuredClone(world.player);
 
-  assert.equal(commandCraft(world, "bow"), "Choose exact body and binding materials for this bow.");
+  assert.equal(commandCraft(world, "bow"), "Choose exact materials for this equipment recipe.");
   assert.deepEqual(world.player, before);
+});
+
+test("exact swordcraft - ordinary iron remains fungible while Highland steel becomes unique", () => {
+  const iron = createWorld();
+  standAtForge(iron);
+  iron.player.skills.smithing = 100;
+  addResource(iron.player.resources, IRON_INGOT, 5);
+  addResource(iron.player.resources, OAK_BOARD, 1);
+  addResource(iron.player.resources, SOUND_CLOTH, 1);
+  withRoll(0.5, () => commandCraftExact(iron, "sword", swordSelections(IRON_INGOT)));
+  assert.equal(iron.player.pack.sword, 1);
+  assert.equal(iron.player.rares.length, 0);
+
+  const highland = createWorld();
+  standAtForge(highland);
+  highland.player.skills.smithing = 100;
+  addResource(highland.player.resources, HIGHLAND_INGOT, 5);
+  addResource(highland.player.resources, OAK_BOARD, 1);
+  addResource(highland.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(highland, "sword", swordSelections(HIGHLAND_INGOT)));
+  assert.match(note ?? "", /highland ore sword/i);
+  assert.equal(highland.player.pack.sword, 0);
+  assert.equal(highland.player.rares.length, 1);
+  assert.equal(highland.player.rares[0]!.resolvedStats?.damage, 11.5);
+  assert.deepEqual(highland.player.rares[0]!.affixes, []);
 });

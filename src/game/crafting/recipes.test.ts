@@ -26,6 +26,7 @@ test("exact recipes - bow references the canonical form and immutable output con
   assert.equal(Object.isFrozen(recipe), true);
   assert.equal(Object.isFrozen(recipe.output), true);
   assert.equal(exactRecipeById("missing"), null);
+  assert.deepEqual(exactRecipeById("sword")?.output, { itemId: "sword", quantity: 1 });
 });
 
 test("exact recipes - role compatibility follows the canonical form selectors", () => {

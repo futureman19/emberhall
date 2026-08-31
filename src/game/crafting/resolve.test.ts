@@ -6,6 +6,7 @@ import {
   ITEM_FORM_CATALOG,
   ITEM_FORM_IDENTITY,
   MATERIAL_GRADES,
+  SWORD_FORM,
   buildItemFormCatalog,
 } from "./forms.ts";
 import { resolveItemStats } from "./resolve.ts";
@@ -372,7 +373,7 @@ test("null-prototype forms are accepted only when all required fields are own pr
     deepMutable(BOW_FORM),
   ) as unknown as ItemFormDefinition;
 
-  const catalog = buildItemFormCatalog([nullPrototypeForm]);
+  const catalog = buildItemFormCatalog([nullPrototypeForm, SWORD_FORM]);
   assert.deepEqual(catalog.bow, BOW_FORM);
   assert.deepEqual(resolveItemStats(nullPrototypeForm, bowBuild()), resolveItemStats(BOW_FORM, bowBuild()));
 
@@ -590,7 +591,10 @@ test("form selectors reject empty arrays and impossible grade-resource intersect
 });
 
 test("form identity contract binds bow to bow base item and weapon class", () => {
-  assert.deepEqual(ITEM_FORM_IDENTITY, { bow: { baseItem: "bow", itemClass: "weapon" } });
+  assert.deepEqual(ITEM_FORM_IDENTITY, {
+    bow: { baseItem: "bow", itemClass: "weapon" },
+    sword: { baseItem: "sword", itemClass: "weapon" },
+  });
   assert.throws(
     () => resolveItemStats({ ...deepMutable(BOW_FORM), baseItem: "sword" }, bowBuild()),
     /item form bow must use base item bow/,

@@ -14,7 +14,7 @@ import {
 } from "../inventory/resources.ts";
 import type { ItemId, ResourceStackKey } from "../types.ts";
 
-export type ExactRecipeId = "bow";
+export type ExactRecipeId = "bow" | "sword";
 
 export interface ExactRecipeOutput {
   readonly itemId: ItemId;
@@ -39,7 +39,7 @@ export interface ResolvedExactRecipeSelection {
   readonly debits: readonly ResourceDebit[];
 }
 
-const EXACT_RECIPE_IDS = ["bow"] as const satisfies readonly ExactRecipeId[];
+const EXACT_RECIPE_IDS = ["bow", "sword"] as const satisfies readonly ExactRecipeId[];
 const SELECTION_FIELDS = ["role", "key"] as const;
 
 type DeepReadonly<T> = T extends (...args: never[]) => unknown
@@ -88,6 +88,12 @@ const EXACT_RECIPE_DEFINITIONS = [
     formId: "bow",
     recipeVersion: 1,
     output: { itemId: "bow", quantity: 1 },
+  },
+  {
+    id: "sword",
+    formId: "sword",
+    recipeVersion: 1,
+    output: { itemId: "sword", quantity: 1 },
   },
 ] as const satisfies readonly ExactRecipeDefinition[];
 

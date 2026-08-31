@@ -280,8 +280,8 @@ export function createCraftedItem(world: World, input: CraftedItemInput): RareIt
 
 /** "an eminently accurate sword of power" / "a ring of the owl". */
 export function rareName(rare: RareItem): string {
-  const body = rare.components?.find(({ role }) => role === "body");
-  const material = body ? RESOURCE_CATALOG[body.resourceId].label.toLowerCase() : null;
+  const primary = rare.components?.find(({ role }) => role === "body" || role === "edge" || role === "plate");
+  const material = primary ? RESOURCE_CATALOG[primary.resourceId].label.toLowerCase() : null;
   const quality = rare.workmanship && rare.workmanship !== "ordinary" ? `${rare.workmanship} ` : "";
   const base = `${quality}${material ? `${material} ` : ""}${ITEM_META[rare.base].label.toLowerCase()}`;
   const pre = rare.affixes.filter((a) => AFFIXES[a]?.slot === "pre");

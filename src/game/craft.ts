@@ -17,7 +17,8 @@ import { successChance, tryGain } from "./skills.ts";
 import { playSfx, type SfxId } from "./vale-sfx.ts";
 import { completeObjective, log } from "./world.ts";
 import { countGenericCraftResource, debitGenericCraftResource, type GenericCraftResourceItem } from "./inventory/resources.ts";
-import type { BuildingKind, ItemId, RareItem, ResourceTag, SkillId, World } from "./types.ts";
+import { refineResource } from "./refining.ts";
+import type { BuildingKind, ItemId, RareItem, ResourceStackKey, ResourceTag, SkillId, World } from "./types.ts";
 
 export { countTag, hasTag, itemTags, tagConsumeOrder } from "./catalog.ts";
 export {
@@ -88,7 +89,7 @@ export const RECIPES: Recipe[] = [
   { id: "boots", station: "forge", skill: "smithing", diff: 14, label: "Iron-shod boots", hint: "Any five metal.", need: {}, needTags: [{ tag: "metal", n: 5 }], give: { boots: 1 }, sfx: "smith" },
   { id: "gauntlets", station: "forge", skill: "smithing", diff: 16, label: "Gauntlets", hint: "Any five metal.", need: {}, needTags: [{ tag: "metal", n: 5 }], give: { gauntlets: 1 }, sfx: "smith" },
   { id: "mace", station: "forge", skill: "smithing", diff: 18, label: "Mace", hint: "Any six metal, a head.", need: {}, needTags: [{ tag: "metal", n: 6 }], give: { mace: 1 }, sfx: "smith" },
-  { id: "sword", station: "forge", skill: "smithing", diff: 20, label: "Sword", hint: "Any eight metal, an edge.", need: {}, needTags: [{ tag: "metal", n: 8 }], give: { sword: 1 }, sfx: "smith" },
+  { id: "sword", station: "forge", skill: "smithing", diff: 20, label: "Sword", hint: "Choose five ingots, one timber hilt, and one cloth binding.", exactRecipeId: "sword", need: {}, give: { sword: 1 }, sfx: "smith" },
   { id: "helm", station: "forge", skill: "smithing", diff: 22, label: "Helm", hint: "Any eight metal.", need: {}, needTags: [{ tag: "metal", n: 8 }], give: { helm: 1 }, sfx: "smith" },
   { id: "heater", station: "forge", skill: "smithing", diff: 24, label: "Iron shield", hint: "Any eight metal, a face.", need: {}, needTags: [{ tag: "metal", n: 8 }], give: { heater: 1 }, sfx: "smith" },
   { id: "greaves", station: "forge", skill: "smithing", diff: 28, label: "Greaves", hint: "Any ten metal.", need: {}, needTags: [{ tag: "metal", n: 10 }], give: { greaves: 1 }, sfx: "smith" },
@@ -223,7 +224,7 @@ export function canMake(world: World, rec: Recipe) {
 }
 
 export function missingNeed(world: World, rec: Recipe): string | null {
-  if (rec.exactRecipeId) return "Choose exact body and binding materials for this bow.";
+  if (rec.exactRecipeId) return "Choose exact materials for this equipment recipe.";
   for (const [k, n] of Object.entries(rec.need)) {
     const id = k as ItemId;
     const have = exactNeedCount(world, id);
@@ -260,7 +261,7 @@ export function commandCraft(world: World, recipeId: string): string | null {
   if (world.player.ghost) return "A ghost cannot.";
   const rec = recipeById(recipeId);
   if (!rec) return "No such work.";
-  if (rec.exactRecipeId) return "Choose exact body and binding materials for this bow.";
+  if (rec.exactRecipeId) return "Choose exact materials for this equipment recipe.";
   if (rec.station !== null) {
     const here = stationsHere(world);
     if (!here.includes(rec.station)) {
@@ -323,7 +324,7 @@ export function commandCraftExact(
   const form = ITEM_FORM_CATALOG[exactRecipe.formId];
   const maker = you(world)?.name ?? "an unknown hand";
   const specialty = preview.components.some(
-    ({ resourceId }) => resourceId !== "oak" && resourceId !== "common_cloth",
+    ({ resourceId }) => !["oak", "common_cloth", "iron_ore"].includes(resourceId),
   );
   const unique = specialty || workmanship !== "ordinary";
   const crafted = unique
@@ -348,6 +349,17 @@ export function commandCraftExact(
 
   const made = crafted ? rareName(crafted) : "a bow";
   const note = gain ? `Made ${made}, crafted by ${maker}. ${gain}.` : `Made ${made}, crafted by ${maker}.`;
+  log(world, note);
+  return note;
+}
+
+export function commandRefineExact(world: World, key: ResourceStackKey): string {
+  if (world.player.ghost) return "A ghost cannot.";
+  if (!stationsHere(world).includes("forge")) return "The ore wants a fire. Raise a forge.";
+  const result = refineResource(world.player, key, "forge", effSkill(world, "smithing"));
+  if (result.status === "blocked") return result.message;
+  playSfx("fire", 0.48);
+  const note = `Refined ${result.quantity} ${result.output.replaceAll("_", " ")}.`;
   log(world, note);
   return note;
 }
