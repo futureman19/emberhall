@@ -14,6 +14,8 @@ export type TileKind =
   | "snow"
   | "marsh";
 
+export type BiomeId = "vale" | "tundra" | "taiga" | "fen" | "jungle" | "desert";
+
 export type SkillId =
   | "swords"
   | "lumberjack"

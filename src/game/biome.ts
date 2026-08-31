@@ -1,8 +1,8 @@
 import { COURT, MAP, placeById } from "./atlas.ts";
 import { hash2 } from "./rng.ts";
-import type { World } from "./types.ts";
+import type { BiomeId, World } from "./types.ts";
 
-export type BiomeId = "vale" | "tundra" | "taiga" | "fen" | "jungle" | "desert";
+export type { BiomeId } from "./types.ts";
 
 export type BiomeW = {
   vale: number;
