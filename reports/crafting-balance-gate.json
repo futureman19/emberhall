@@ -342,12 +342,12 @@
     }
   },
   "payloadSizes": {
-    "representativeSaveBytes": 18808,
-    "fiveItemBytes": 2670,
+    "representativeSaveBytes": 18792,
+    "fiveItemBytes": 2654,
     "vaultInscriptionBytes": {
-      "min": 593,
+      "min": 589,
       "max": 779,
-      "total": 3331
+      "total": 3315
     }
   },
   "browser": {

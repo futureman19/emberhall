@@ -171,6 +171,7 @@ function representativeItems() {
   return builds.map((build) => {
     const form = ITEM_FORM_CATALOG[build.formId];
     const item = createCraftedItem(world, { ...build, base: form.baseItem, maker: "Gatehand", recipeId: form.id, recipeVersion: form.recipeVersion });
+    item.uid = `gate-${build.label}`;
     return { label: build.label, name: rareName(item), stats: item.resolvedStats, components: item.components, inlays: item.inlays, item };
   });
 }
