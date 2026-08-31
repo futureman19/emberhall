@@ -9,6 +9,8 @@ import {
   VOCATION_META,
 } from "./catalog.ts";
 import { WEATHER_META } from "./weather.ts";
+import { ITEM_FORM_CATALOG } from "./crafting/forms.ts";
+import { resolveItemStats } from "./crafting/resolve.ts";
 import { generateTiles } from "./world.ts";
 import {
   createResourceInventory,
@@ -22,7 +24,7 @@ import {
 import type { World } from "./types.ts";
 
 export const SAVE_KEY = "emberhall-save-v4";
-export const CURRENT_SAVE_VERSION = 3;
+export const CURRENT_SAVE_VERSION = 4;
 
 type SaveRecord = Record<string, unknown>;
 
@@ -183,16 +185,51 @@ function isRecallMark(value: unknown): boolean {
   );
 }
 
+function normalizeRareRecord(value: unknown): unknown {
+  if (!isRecord(value)) return value;
+  const source = value.source ?? (value.formId ? "crafted" : "legacy");
+  return {
+    ...value,
+    workmanship: value.workmanship ?? "ordinary",
+    components: value.components ?? [],
+    inlays: value.inlays ?? [],
+    recipeId: value.recipeId ?? (source === "legacy" ? "legacy" : source === "loot" ? "loot" : value.formId),
+    recipeVersion: value.recipeVersion ?? 1,
+    source,
+  };
+}
+
 function isRareItem(value: unknown): boolean {
-  return (
-    isRecord(value) &&
-    isString(value.uid) &&
-    isRegistryKey(value.base, ITEM_META) &&
-    isArrayOf(value.affixes, isString) &&
-    (value.maker === undefined || isString(value.maker)) &&
-    isFiniteNumber(value.seed) &&
-    isFiniteNumber(value.hour)
-  );
+  if (!isRecord(value)
+    || !isString(value.uid)
+    || !isRegistryKey(value.base, ITEM_META)
+    || !isArrayOf(value.affixes, isString)
+    || (value.maker !== undefined && !isString(value.maker))
+    || !isFiniteNumber(value.seed)
+    || !isFiniteNumber(value.hour)
+    || !["ordinary", "fine", "exceptional"].includes(String(value.workmanship))
+    || !Array.isArray(value.components)
+    || !Array.isArray(value.inlays)
+    || !isString(value.recipeId)
+    || !Number.isSafeInteger(value.recipeVersion)
+    || (value.recipeVersion as number) <= 0
+    || !["crafted", "loot", "legacy"].includes(String(value.source))) return false;
+
+  if (value.source !== "crafted") return value.components.length === 0 && value.inlays.length === 0;
+  if (!isString(value.formId) || !Object.hasOwn(ITEM_FORM_CATALOG, value.formId) || !isRecord(value.resolvedStats)) return false;
+  if (!isString(value.maker) || value.maker.trim().length === 0) return false;
+  try {
+    const form = ITEM_FORM_CATALOG[value.formId as keyof typeof ITEM_FORM_CATALOG];
+    if (value.base !== form.baseItem || value.recipeId !== form.id || value.recipeVersion !== form.recipeVersion) return false;
+    const resolution = resolveItemStats(form, {
+      workmanship: value.workmanship as "ordinary" | "fine" | "exceptional",
+      components: value.components as never,
+      inlays: value.inlays as never,
+    });
+    return JSON.stringify(resolution.stats) === JSON.stringify(value.resolvedStats);
+  } catch {
+    return false;
+  }
 }
 
 function isResourceInventory(value: unknown): boolean {
@@ -441,7 +478,7 @@ function isCurrentSave(save: SaveRecord): boolean {
 function migrateSave(value: unknown): SaveRecord | null {
   if (!isRecord(value)) return null;
   if (value.saveVersion === CURRENT_SAVE_VERSION) return value;
-  if (value.saveVersion !== 1 && value.saveVersion !== 2) return null;
+  if (value.saveVersion !== 1 && value.saveVersion !== 2 && value.saveVersion !== 3) return null;
 
   // Clone once at the version boundary. Generic copies deliberately carry
   // every existing/optional nested field, including Person.look.
@@ -457,6 +494,14 @@ function migrateSave(value: unknown): SaveRecord | null {
   if (migrated.saveVersion === 2) {
     migrated.resourceNodes = createResourceNodeStateMap();
     migrated.saveVersion = 3;
+  }
+  if (migrated.saveVersion === 3) {
+    if (!isRecord(migrated.player) || !Array.isArray(migrated.player.rares)) return migrated;
+    migrated.player = {
+      ...migrated.player,
+      rares: migrated.player.rares.map(normalizeRareRecord),
+    };
+    migrated.saveVersion = 4;
   }
   return migrated;
 }
@@ -489,7 +534,7 @@ export function writeSave(world: World) {
     const payload = {
       ...rest,
       resourceNodes,
-      player: { ...player, resources },
+      player: { ...player, resources, rares: player.rares.map(normalizeRareRecord) },
       saveVersion: CURRENT_SAVE_VERSION,
       tiles: null,
     };

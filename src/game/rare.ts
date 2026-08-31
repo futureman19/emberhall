@@ -165,6 +165,12 @@ export function rollRare(base: ItemId, rng: () => number, opts: RollOpts): RareI
     maker: opts.maker,
     seed: 0,
     hour: 0,
+    workmanship: "ordinary",
+    components: [],
+    inlays: [],
+    recipeId: "loot",
+    recipeVersion: 1,
+    source: "loot",
   };
 }
 

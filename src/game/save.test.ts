@@ -6,6 +6,7 @@ import { addResource, makeResourceStackKey } from "./inventory/resources.ts";
 import { LOOK_SCHEMA } from "./look/types.ts";
 import { depleteResourceNode, discoverResourceNode } from "./resources/state.ts";
 import { resolveResourceNode } from "./resources/nodes.ts";
+import { createCraftedItem } from "./rare.ts";
 
 class MemoryStorage {
   #values = new Map<string, string>();
@@ -97,8 +98,8 @@ test("save - writes an explicit schema version without generated tiles", () => {
 
   assert.equal(hasSave(), true);
   const stored = JSON.parse(localStorage.getItem(SAVE_KEY)!);
-  assert.equal(CURRENT_SAVE_VERSION, 3);
-  assert.equal(stored.saveVersion, 3);
+  assert.equal(CURRENT_SAVE_VERSION, 4);
+  assert.equal(stored.saveVersion, 4);
   assert.equal(stored.tiles, null);
   assert.equal(stored.seed, world.seed);
   assert.deepEqual(stored.player.resources, { stacks: {} });
@@ -151,7 +152,9 @@ test("save - current-version write and load round-trip preserves representative 
   assert.equal(loaded.player.pack.log, 4);
   assert.deepEqual(loaded.player.resources, world.player.resources);
   assert.deepEqual(loaded.player.marks, world.player.marks);
-  assert.deepEqual(loaded.player.rares, world.player.rares);
+  assert.equal(loaded.player.rares[0]?.source, "legacy");
+  assert.equal(loaded.player.rares[0]?.workmanship, "ordinary");
+  assert.deepEqual(loaded.player.rares[0]?.affixes, world.player.rares[0]?.affixes);
   assert.deepEqual(loaded.campfires, world.campfires);
   assert.deepEqual(loaded.people[0]!.look, look);
   assert.deepEqual(loaded.resourceNodes, world.resourceNodes);
@@ -164,6 +167,33 @@ test("save - current-version write and load round-trip preserves representative 
   assert.equal(loaded.tiles[rock.ty]![rock.tx]!.kind, "dirt");
   assert.equal(loaded.restored, true);
   assert.ok(Array.isArray(loaded.tiles));
+});
+
+test("save - v4 crafted identity round-trips canonically and rejects forged resolved stats", () => {
+  const world = createWorld();
+  const crafted = createCraftedItem(world, {
+    formId: "bow",
+    base: "bow",
+    workmanship: "fine",
+    components: [
+      { role: "body", resourceId: "redwood", form: "log", grade: "choice", amount: 5 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [{ resourceId: "ruby", clarity: "flawed" }],
+    maker: "Ada",
+    recipeId: "bow",
+    recipeVersion: 1,
+  });
+  world.player.rares.push(crafted);
+  writeSave(world);
+  const loaded = loadSave();
+  assert.ok(loaded);
+  assert.deepEqual(loaded.player.rares[0], crafted);
+
+  const forged = JSON.parse(localStorage.getItem(SAVE_KEY)!);
+  forged.player.rares[0].resolvedStats.damage = 999;
+  localStorage.setItem(SAVE_KEY, JSON.stringify(forged));
+  assert.equal(loadSave(), null);
 });
 
 test("save - migrates valid v1 through v2 to v3 without rewriting a person's look", () => {
