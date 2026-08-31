@@ -13,6 +13,13 @@ import { hash2 } from "@/game/rng";
 import { useGame } from "@/game/store";
 import { leftAt, hitAt, hoverAt, liftAt } from "@/game/world-pointer";
 import type { TileKind, World } from "@/game/types";
+import {
+  TREE_WORLD_SILHOUETTE,
+  createResourceVisualCache,
+  getVisibleResourceVisual,
+  treeClimateShapeScale,
+  type VisibleResourceVisualLookup,
+} from "./resource-visuals";
 import { skyTone } from "./sky-math";
 
 const KIND_COLOR: Record<TileKind, string> = {
@@ -53,27 +60,18 @@ const SEGS = Math.min(VIEW * 2, 160);
 const VERTS = SEGS + 1;
 const VERT_COUNT = VERTS * VERTS;
 const STEP = VIEW / SEGS;
-const TRUNK_H = 2.1;
-const CANOPY_H = 2.5;
-const CANOPY_R = 1.15;
+const TRUNK_H = TREE_WORLD_SILHOUETTE.trunkHeight;
+const CANOPY_H = TREE_WORLD_SILHOUETTE.canopyHeight;
+const CANOPY_R = TREE_WORLD_SILHOUETTE.canopyRadius;
 const UNDER = 1.45;
 const dummy = new THREE.Object3D();
 const pal = new THREE.Color();
-const COL_TRUNK = new THREE.Color("#5a3e28");
 const COL_CANOPY = new THREE.Color("#3d4e2c");
-const COL_CANOPY_COLD = new THREE.Color("#5a6458");
-const COL_CANOPY_FEN = new THREE.Color("#2c3a26");
-const COL_CANOPY_DRY = new THREE.Color("#6a6a40");
-const COL_CANOPY_PINE = new THREE.Color("#2f3e2c");
-const COL_CANOPY_JUNGLE = new THREE.Color("#244028");
 const COL_GROUND_TAIGA = new THREE.Color("#3a4634");
 const COL_GROUND_JUNGLE = new THREE.Color("#2a4228");
 const COL_GROUND_SNOW = new THREE.Color("#d8d2c6");
 const COL_GROUND_MARSH = new THREE.Color("#3a4a36");
 const COL_GROUND_SAND = new THREE.Color("#c4b48a");
-const COL_ROCK = new THREE.Color("#7a7268");
-const COL_ROCK_2 = new THREE.Color("#5c574e");
-const COL_ROCK_3 = new THREE.Color("#8a8478");
 const COL_MARK = new THREE.Color("#e0b56a");
 const COL_MARK_WOOD = new THREE.Color("#c48a4a");
 const COL_SHRUB = new THREE.Color("#354626");
@@ -104,7 +102,8 @@ function blocked(world: World, tx: number, ty: number) {
 }
 
 function treeGrow(tx: number, ty: number) {
-  return 0.86 + ((tx * 13 + ty * 7) % 11) * 0.038;
+  return TREE_WORLD_SILHOUETTE.minimumGrow
+    + ((tx * 13 + ty * 7) % TREE_WORLD_SILHOUETTE.growVariants) * TREE_WORLD_SILHOUETTE.growStep;
 }
 
 function smooth01(a: number, b: number, x: number) {
@@ -271,6 +270,9 @@ export function Terrain() {
   const ghostAt = useRef<{ tx: number; ty: number }[]>([]);
   const rockAt = useRef<{ tx: number; ty: number }[]>([]);
   const origin = useRef({ x: COURT.tx, z: COURT.ty, rev: -1 });
+  const resourceSeed = useRef<number | null>(null);
+  const resourceVisuals = useMemo(() => createResourceVisualCache(), []);
+  const visibleResourceVisuals = useRef<VisibleResourceVisualLookup>(new Map());
   const count = VIEW * VIEW;
   const geo = useMemo(() => {
     const g = new THREE.BufferGeometry();
@@ -295,6 +297,8 @@ export function Terrain() {
 
   useFrame(() => {
     const w = getWorld();
+    const seedChanged = resourceSeed.current !== w.seed;
+    if (seedChanged) resourceVisuals.clear();
     const you = w.people.find((p) => p.isPlayer);
     const ox = Math.round(you?.x ?? COURT.tx);
     const oz = Math.round(you?.z ?? COURT.ty);
@@ -318,8 +322,9 @@ export function Terrain() {
     ensureColor(flw, FLORA);
     ensureColor(sap, FLORA);
     ensureColor(tft, FLORA);
-    const landMoved = origin.current.x !== ox || origin.current.z !== oz || origin.current.rev !== rev;
+    const landMoved = seedChanged || origin.current.x !== ox || origin.current.z !== oz || origin.current.rev !== rev;
     if (landMoved) {
+      resourceSeed.current = w.seed;
       origin.current = { x: ox, z: oz, rev };
       const pos = geo.attributes.position as THREE.BufferAttribute;
       const col = geo.attributes.color as THREE.BufferAttribute;
@@ -384,6 +389,7 @@ export function Terrain() {
     const working =
       (w.player.intent.kind === "chop" || w.player.intent.kind === "mine") && !you?.path.length;
     if (landMoved || working) {
+    if (landMoved) visibleResourceVisuals.current.clear();
     let si = 0;
     let gi = 0;
     let ri = 0;
@@ -401,35 +407,38 @@ export function Terrain() {
           const dTree = Math.hypot(tx - px, ty - pz);
           const nearFade = 1 - smooth01(half - 20, half - 1.2, dTree);
           if (nearFade >= 0.05) {
+          const resourceVisual = getVisibleResourceVisual(
+            visibleResourceVisuals.current,
+            resourceVisuals,
+            w.seed,
+            tx,
+            ty,
+            "tree",
+          );
+          if (resourceVisual.shape.kind !== "tree") throw new Error("tree tile resolved a non-tree visual");
+          if (resourceVisual.family !== "broadleaf" && resourceVisual.family !== "conifer") {
+            throw new Error("tree tile resolved a non-tree family");
+          }
+          const treeShape = resourceVisual.shape;
           const grow = treeGrow(tx, ty);
           const gy = groundY(w, tx, ty);
           const climate = biomeAt(tx, ty);
-          const gx = (climate === "taiga" ? grow * 0.58 : climate === "jungle" ? grow * 1.28 : grow) * nearFade;
-          const gsy = (climate === "taiga" ? grow * 1.48 : climate === "jungle" ? grow * 0.92 : grow) * nearFade;
-          const trunkH = TRUNK_H * gsy;
+          const climateShape = treeClimateShapeScale(resourceVisual.family, climate);
+          const trunkRadius = grow * climateShape.radius * treeShape.trunkRadius * nearFade;
+          const trunkScaleY = grow * climateShape.height * treeShape.trunkHeight * nearFade;
+          const crownRadius = grow * climateShape.crownRadius * treeShape.crownRadius * nearFade;
+          const crownScaleY = grow * climateShape.height * treeShape.crownHeight * nearFade;
+          const trunkH = TRUNK_H * trunkScaleY;
           const under =
             Math.hypot(tx - px, ty - pz) < UNDER * (climate === "jungle" ? 1.25 : 1) * Math.min(1.15, grow);
           const marked = w.player.intent.kind === "chop" && w.player.intent.tx === tx && w.player.intent.ty === ty;
           const strike = marked && !you?.path.length;
           const wobble = strike ? Math.sin(w.player.workT * 28) * 0.1 : 0;
-          dummy.rotation.set(0, 0, wobble);
+          dummy.rotation.set(0, treeShape.yaw, wobble);
           dummy.position.set(tx, gy + trunkH * 0.5, ty);
-          dummy.scale.set(gx, gsy, gx);
+          dummy.scale.set(trunkRadius, trunkScaleY, trunkRadius);
           dummy.updateMatrix();
-          const trunkCol = marked ? COL_MARK_WOOD : COL_TRUNK;
-          const leafCol = marked
-            ? COL_MARK
-            : climate === "tundra"
-              ? COL_CANOPY_COLD
-              : climate === "taiga"
-                ? COL_CANOPY_PINE
-                : climate === "fen"
-                  ? COL_CANOPY_FEN
-                  : climate === "desert"
-                    ? COL_CANOPY_DRY
-                    : climate === "jungle"
-                      ? COL_CANOPY_JUNGLE
-                      : COL_CANOPY;
+          const trunkCol = marked ? COL_MARK_WOOD : pal.set(resourceVisual.palette.primary);
           if (under) {
             tkg?.setMatrixAt(gi, dummy.matrix);
             paint(tkg, gi, trunkCol);
@@ -437,12 +446,13 @@ export function Terrain() {
             tk?.setMatrixAt(si, dummy.matrix);
             paint(tk, si, trunkCol);
           }
-          dummy.position.set(tx, gy + trunkH + CANOPY_H * gsy * (climate === "jungle" ? 0.28 : 0.38), ty);
-          dummy.scale.set(climate === "jungle" ? gx * 1.12 : gx, gsy, climate === "jungle" ? gx * 1.12 : gx);
-          dummy.rotation.set(wobble * 0.6, 0, wobble);
+          dummy.position.set(tx, gy + trunkH + CANOPY_H * crownScaleY * treeShape.crownLift, ty);
+          dummy.scale.set(crownRadius, crownScaleY, crownRadius);
+          dummy.rotation.set(wobble * 0.6, treeShape.yaw, wobble);
           dummy.updateMatrix();
           dummy.rotation.set(0, 0, 0);
           dummy.scale.set(1, 1, 1);
+          const leafCol = marked ? COL_MARK : pal.set(resourceVisual.palette.secondary);
           if (under) {
             gh?.setMatrixAt(gi, dummy.matrix);
             paint(gh, gi, leafCol);
@@ -457,37 +467,35 @@ export function Terrain() {
           }
         }
         if (t.kind === "rock" && rk && Math.hypot(tx - px, ty - pz) < half - 2) {
+          const resourceVisual = getVisibleResourceVisual(
+            visibleResourceVisuals.current,
+            resourceVisuals,
+            w.seed,
+            tx,
+            ty,
+            "rock",
+          );
+          if (resourceVisual.shape.kind !== "rock") throw new Error("rock tile resolved a non-rock visual");
+          const rockShape = resourceVisual.shape;
           const marked = w.player.intent.kind === "mine" && w.player.intent.tx === tx && w.player.intent.ty === ty;
           const strike = marked && !you?.path.length;
-          const szRoll = hash2(tx, ty, w.seed + 23);
-          const yaw = hash2(tx, ty, w.seed + 29) * Math.PI * 2;
-          let sx: number;
-          let sy: number;
-          let sz: number;
-          if (szRoll < 0.4) {
-            const k = szRoll / 0.4;
-            sx = 0.22 + k * 0.28;
-            sy = 0.14 + k * 0.18;
-            sz = 0.2 + k * 0.26;
-          } else if (szRoll < 0.82) {
-            const k = (szRoll - 0.4) / 0.42;
-            sx = 0.52 + k * 0.38;
-            sy = 0.34 + k * 0.28;
-            sz = 0.48 + k * 0.32;
-          } else {
-            const k = (szRoll - 0.82) / 0.18;
-            sx = 0.95 + k * 0.75;
-            sy = 0.72 + k * 0.58;
-            sz = 0.88 + k * 0.62;
-          }
-          dummy.rotation.set(strike ? Math.sin(w.player.workT * 32) * 0.08 : 0, yaw, strike ? 0.05 : 0);
-          dummy.position.set(tx, groundY(w, tx, ty) + 0.42 * sy * 0.55, ty);
-          dummy.scale.set(sx, sy, sz);
+          dummy.rotation.set(
+            rockShape.tiltX + (strike ? Math.sin(w.player.workT * 32) * 0.08 : 0),
+            rockShape.yaw,
+            rockShape.tiltZ + (strike ? 0.05 : 0),
+          );
+          dummy.position.set(tx, groundY(w, tx, ty) + 0.42 * rockShape.height * 0.55, ty);
+          dummy.scale.set(rockShape.width, rockShape.height, rockShape.depth);
           dummy.updateMatrix();
           dummy.rotation.set(0, 0, 0);
           rk.setMatrixAt(ri, dummy.matrix);
-          const tint = hash2(tx, ty, w.seed + 31);
-          paint(rk, ri, marked ? COL_MARK : tint < 0.33 ? COL_ROCK : tint < 0.66 ? COL_ROCK_2 : COL_ROCK_3);
+          paint(
+            rk,
+            ri,
+            marked
+              ? COL_MARK
+              : pal.set(rockShape.tiltX > 0 ? resourceVisual.palette.secondary : resourceVisual.palette.primary),
+          );
           rockAt.current[ri] = { tx, ty };
           ri++;
         }
