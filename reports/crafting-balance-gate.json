@@ -1,0 +1,553 @@
+{
+  "generatedBy": "scripts/crafting-balance-gate.ts",
+  "assumptions": {
+    "WORK_BEAT_SECONDS": 0.72,
+    "SURVEY_SECONDS_PER_NODE": 1.5,
+    "acquisitionExcludes": [
+      "player route distance",
+      "loading time",
+      "combat interruptions",
+      "cloth acquisition"
+    ]
+  },
+  "acquisitions": [
+    {
+      "label": "oak bow body",
+      "resourceId": "oak",
+      "required": 5,
+      "skill": 50,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 5,
+        "p90": 5,
+        "p99": 6,
+        "max": 6
+      },
+      "modeledSeconds": {
+        "p50": 11.1,
+        "p90": 11.1,
+        "p99": 12.6
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
+      "label": "redwood bow body",
+      "resourceId": "redwood",
+      "required": 5,
+      "skill": 50,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 758,
+        "p90": 1316,
+        "p99": 1729,
+        "max": 2786
+      },
+      "modeledSeconds": {
+        "p50": 1140.6,
+        "p90": 1977.6,
+        "p99": 2597.1
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
+      "label": "highland sword edge",
+      "resourceId": "highland_ore",
+      "required": 5,
+      "skill": 55,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 319,
+        "p90": 594,
+        "p99": 861,
+        "max": 1119
+      },
+      "modeledSeconds": {
+        "p50": 482.1,
+        "p90": 894.6,
+        "p99": 1295.1
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
+      "label": "ruby inlay",
+      "resourceId": "ruby",
+      "required": 1,
+      "skill": 60,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 567,
+        "p90": 1583,
+        "p99": 2590,
+        "max": 4202
+      },
+      "modeledSeconds": {
+        "p50": 851.22,
+        "p90": 2375.22,
+        "p99": 3885.72
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
+      "label": "sapphire inlay",
+      "resourceId": "sapphire",
+      "required": 1,
+      "skill": 65,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 265,
+        "p90": 1049,
+        "p99": 1888,
+        "max": 2081
+      },
+      "modeledSeconds": {
+        "p50": 398.22,
+        "p90": 1574.22,
+        "p99": 2832.72
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    }
+  ],
+  "skillCurves": [
+    {
+      "skill": 0,
+      "bowSuccess": 0.275,
+      "swordSuccess": 0.25,
+      "bowWorkmanship": {
+        "ordinary": 1,
+        "fine": 0,
+        "exceptional": 0
+      },
+      "swordWorkmanship": {
+        "ordinary": 1,
+        "fine": 0,
+        "exceptional": 0
+      }
+    },
+    {
+      "skill": 20,
+      "bowSuccess": 0.525,
+      "swordSuccess": 0.5,
+      "bowWorkmanship": {
+        "ordinary": 1,
+        "fine": 0,
+        "exceptional": 0
+      },
+      "swordWorkmanship": {
+        "ordinary": 1,
+        "fine": 0,
+        "exceptional": 0
+      }
+    },
+    {
+      "skill": 35,
+      "bowSuccess": 0.7125,
+      "swordSuccess": 0.6875,
+      "bowWorkmanship": {
+        "ordinary": 1,
+        "fine": 0,
+        "exceptional": 0
+      },
+      "swordWorkmanship": {
+        "ordinary": 1,
+        "fine": 0,
+        "exceptional": 0
+      }
+    },
+    {
+      "skill": 50,
+      "bowSuccess": 0.9,
+      "swordSuccess": 0.875,
+      "bowWorkmanship": {
+        "ordinary": 0.872,
+        "fine": 0.128,
+        "exceptional": 0
+      },
+      "swordWorkmanship": {
+        "ordinary": 0.88,
+        "fine": 0.12,
+        "exceptional": 0
+      }
+    },
+    {
+      "skill": 55,
+      "bowSuccess": 0.95,
+      "swordSuccess": 0.9375,
+      "bowWorkmanship": {
+        "ordinary": 0.852,
+        "fine": 0.148,
+        "exceptional": 0
+      },
+      "swordWorkmanship": {
+        "ordinary": 0.86,
+        "fine": 0.14,
+        "exceptional": 0
+      }
+    },
+    {
+      "skill": 60,
+      "bowSuccess": 0.95,
+      "swordSuccess": 0.95,
+      "bowWorkmanship": {
+        "ordinary": 0.832,
+        "fine": 0.168,
+        "exceptional": 0
+      },
+      "swordWorkmanship": {
+        "ordinary": 0.84,
+        "fine": 0.16,
+        "exceptional": 0
+      }
+    },
+    {
+      "skill": 75,
+      "bowSuccess": 0.95,
+      "swordSuccess": 0.95,
+      "bowWorkmanship": {
+        "ordinary": 0.772,
+        "fine": 0.228,
+        "exceptional": 0
+      },
+      "swordWorkmanship": {
+        "ordinary": 0.78,
+        "fine": 0.22,
+        "exceptional": 0
+      }
+    },
+    {
+      "skill": 100,
+      "bowSuccess": 0.95,
+      "swordSuccess": 0.95,
+      "bowWorkmanship": {
+        "ordinary": 0.6719999999999999,
+        "fine": 0.164,
+        "exceptional": 0.164
+      },
+      "swordWorkmanship": {
+        "ordinary": 0.6799999999999999,
+        "fine": 0.16,
+        "exceptional": 0.16
+      }
+    }
+  ],
+  "supplySinks": {
+    "harvestSupply": {
+      "belowSkill100": 1,
+      "atSkill100": 2
+    },
+    "refining": {
+      "oakLogToBoard": "1:2",
+      "redwoodLogToBoard": "1:2",
+      "ironOreToIngot": "1:1",
+      "highlandOreToIngot": "1:1"
+    },
+    "exactSinks": {
+      "bow": {
+        "timber": 5,
+        "cloth": 1,
+        "optionalGem": 1
+      },
+      "sword": {
+        "ingot": 5,
+        "timber": 1,
+        "cloth": 1,
+        "optionalGem": 1
+      }
+    }
+  },
+  "workmanshipAtMaxSkill": {
+    "bow": {
+      "ordinary": 0.6719999999999999,
+      "fine": 0.164,
+      "exceptional": 0.164
+    },
+    "sword": {
+      "ordinary": 0.6799999999999999,
+      "fine": 0.16,
+      "exceptional": 0.16
+    }
+  },
+  "statEnumeration": {
+    "legalCombinationCount": 22656,
+    "forms": {
+      "bow": {
+        "combinations": 4224,
+        "roleOptionCounts": [
+          16,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 14,
+          "hitBonus": 5.25,
+          "armor": 0,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 15,
+          "hitBonus": 10,
+          "armor": 0,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "sword": {
+        "combinations": 18432,
+        "roleOptionCounts": [
+          8,
+          16,
+          8
+        ],
+        "inlayOptions": 6,
+        "maxima": {
+          "damage": 18,
+          "hitBonus": 3,
+          "armor": 0,
+          "fortune": 0
+        },
+        "caps": {
+          "damage": 18,
+          "hitBonus": 8,
+          "armor": 0,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      }
+    }
+  },
+  "payloadSizes": {
+    "representativeSaveBytes": 18802,
+    "fiveItemBytes": 2670,
+    "vaultInscriptionBytes": {
+      "min": 593,
+      "max": 780,
+      "total": 3331
+    }
+  },
+  "browser": {
+    "available": true,
+    "ok": true,
+    "viewports": {
+      "desktop": {
+        "passed": true,
+        "overflow": false,
+        "errors": [],
+        "state": {
+          "itemName": "bow",
+          "resourceId": "redwood",
+          "gem": "ruby",
+          "damage": 11,
+          "saved": true
+        }
+      },
+      "mobile": {
+        "passed": true,
+        "overflow": false,
+        "errors": [],
+        "state": {
+          "itemName": "bow",
+          "resourceId": "redwood",
+          "gem": "ruby",
+          "damage": 11,
+          "saved": true
+        }
+      }
+    }
+  },
+  "sampleItems": [
+    {
+      "label": "common",
+      "name": "an oak bow",
+      "stats": {
+        "damage": 8,
+        "hitBonus": 0,
+        "armor": 0,
+        "skillBonuses": {},
+        "slayerMultipliers": {}
+      },
+      "components": [
+        {
+          "role": "body",
+          "resourceId": "oak",
+          "form": "log",
+          "grade": "rough",
+          "amount": 5
+        },
+        {
+          "role": "binding",
+          "resourceId": "common_cloth",
+          "form": "cloth",
+          "grade": "sound",
+          "amount": 1
+        }
+      ],
+      "inlays": []
+    },
+    {
+      "label": "skilled",
+      "name": "a fine oak bow",
+      "stats": {
+        "damage": 8,
+        "hitBonus": 1.1875,
+        "armor": 0,
+        "skillBonuses": {},
+        "slayerMultipliers": {}
+      },
+      "components": [
+        {
+          "role": "body",
+          "resourceId": "oak",
+          "form": "board",
+          "grade": "choice",
+          "amount": 5
+        },
+        {
+          "role": "binding",
+          "resourceId": "fine_linen",
+          "form": "cloth",
+          "grade": "choice",
+          "amount": 1
+        }
+      ],
+      "inlays": []
+    },
+    {
+      "label": "rare",
+      "name": "a redwood bow of Power II",
+      "stats": {
+        "damage": 10,
+        "hitBonus": 2,
+        "armor": 0,
+        "skillBonuses": {},
+        "slayerMultipliers": {}
+      },
+      "components": [
+        {
+          "role": "body",
+          "resourceId": "redwood",
+          "form": "log",
+          "grade": "choice",
+          "amount": 5
+        },
+        {
+          "role": "binding",
+          "resourceId": "common_cloth",
+          "form": "cloth",
+          "grade": "sound",
+          "amount": 1
+        }
+      ],
+      "inlays": [
+        {
+          "resourceId": "ruby",
+          "clarity": "flawed"
+        }
+      ]
+    },
+    {
+      "label": "highland",
+      "name": "a fine highland ore sword",
+      "stats": {
+        "damage": 11.5,
+        "hitBonus": 1,
+        "armor": 0,
+        "skillBonuses": {},
+        "slayerMultipliers": {}
+      },
+      "components": [
+        {
+          "role": "edge",
+          "resourceId": "highland_ore",
+          "form": "ingot",
+          "grade": "choice",
+          "amount": 5
+        },
+        {
+          "role": "hilt",
+          "resourceId": "oak",
+          "form": "board",
+          "grade": "sound",
+          "amount": 1
+        },
+        {
+          "role": "binding",
+          "resourceId": "common_cloth",
+          "form": "cloth",
+          "grade": "sound",
+          "amount": 1
+        }
+      ],
+      "inlays": []
+    },
+    {
+      "label": "masterwork",
+      "name": "an exceptional highland ore sword of Power V",
+      "stats": {
+        "damage": 18,
+        "hitBonus": 3,
+        "armor": 0,
+        "skillBonuses": {},
+        "slayerMultipliers": {}
+      },
+      "components": [
+        {
+          "role": "edge",
+          "resourceId": "highland_ore",
+          "form": "ingot",
+          "grade": "pristine",
+          "amount": 5
+        },
+        {
+          "role": "hilt",
+          "resourceId": "redwood",
+          "form": "board",
+          "grade": "pristine",
+          "amount": 1
+        },
+        {
+          "role": "binding",
+          "resourceId": "fine_linen",
+          "form": "cloth",
+          "grade": "pristine",
+          "amount": 1
+        }
+      ],
+      "inlays": [
+        {
+          "resourceId": "ruby",
+          "clarity": "perfect"
+        }
+      ]
+    }
+  ],
+  "decision": "HOLD",
+  "reasons": [
+    "Max-skill workmanship still yields ordinary quality more than 50% of the time on rare inputs; add skill-banded workmanship minimums before expanding the catalog."
+  ]
+}

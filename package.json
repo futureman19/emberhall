@@ -23,6 +23,7 @@
     "lint": "eslint . --max-warnings 0",
     "check": "npm run lint && npm test && npm run typecheck && npm run build && npm run check:auth",
     "smoke:crafting": "node scripts/crafting-smoke.mjs",
+    "gate:crafting": "node --experimental-strip-types scripts/crafting-balance-gate.ts",
     "format": "prettier --write ."
   },
   "dependencies": {
