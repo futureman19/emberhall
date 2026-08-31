@@ -75,7 +75,7 @@ export function PartSculptor({
   return (
     <div className="fixed inset-0 z-[95] flex items-center justify-center bg-black/70 p-4" data-testid="part-sculptor">
       <div
-        className="flex w-full max-w-2xl gap-5 rounded-md border p-5"
+        className="flex w-full max-w-2xl flex-col gap-5 rounded-md border p-5 sm:flex-row"
         style={{ background: "rgba(20,17,14,0.96)", borderColor: "#3a322c" }}
       >
         <div className="flex flex-1 flex-col gap-3">
@@ -248,8 +248,11 @@ export function PartSculptor({
           </div>
         </div>
 
-        {/* live mirror: the part on the figure */}
-        <div className="hidden w-48 shrink-0 rounded-sm border sm:block" style={{ borderColor: "#2e241c", background: "#181410" }}>
+        {/* live mirror: the part on the figure — drag to turn them */}
+        <div
+          className="order-first h-40 min-h-0 w-full shrink-0 rounded-sm border sm:order-none sm:h-auto sm:w-48"
+          style={{ borderColor: "#2e241c", background: "#181410" }}
+        >
           <LookPreview look={resolveLook({ schema: LOOK_SCHEMA })} parts={[part]} />
         </div>
       </div>

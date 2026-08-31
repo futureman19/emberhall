@@ -1,7 +1,9 @@
 // The looking-glass preview — the vale's own boxy figure, drawn live in 3D
 // from the same proportions as people-meshes.tsx (legs 0.14×0.4, torso
-// 0.42×0.5, head 0.28³). Standalone by contract: at merge, people-meshes
-// learns to read ResolvedLook and this preview keeps one shared vocabulary.
+// 0.42×0.5, head 0.28³). The mirror answers to fingers: drag to turn them,
+// and when left alone it slowly twirls on its own. Standalone by contract:
+// at merge, people-meshes shares this vocabulary.
+import { OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import type { Group } from "three";
@@ -72,9 +74,8 @@ function PartMeshes({ parts }: { parts: VoxelPartV1[] }) {
 
 function Figure({ look, parts = [] }: { look: ResolvedLook; parts?: VoxelPartV1[] }) {
   const g = useRef<Group>(null);
-  useFrame(({ clock }, delta) => {
+  useFrame(({ clock }) => {
     if (!g.current) return;
-    g.current.rotation.y += delta * 0.55;
     g.current.position.y = Math.sin(clock.elapsedTime * 3) * 0.02;
   });
   return (
@@ -97,6 +98,37 @@ function Figure({ look, parts = [] }: { look: ResolvedLook; parts?: VoxelPartV1[
   );
 }
 
+// Drag to orbit; idle for a breath and the mirror resumes its slow twirl.
+function MirrorControls() {
+  const [idle, setIdle] = useState(true);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(
+    () => () => {
+      if (timer.current) clearTimeout(timer.current);
+    },
+    [],
+  );
+  return (
+    <OrbitControls
+      makeDefault
+      target={[0, 0.62, 0]}
+      enableZoom={false}
+      enablePan={false}
+      autoRotate={idle}
+      autoRotateSpeed={-2.4}
+      minPolarAngle={0.85}
+      maxPolarAngle={1.65}
+      onStart={() => {
+        if (timer.current) clearTimeout(timer.current);
+        setIdle(false);
+      }}
+      onEnd={() => {
+        timer.current = setTimeout(() => setIdle(true), 2500);
+      }}
+    />
+  );
+}
+
 export function LookPreview({ look, parts = [] }: { look: ResolvedLook; parts?: VoxelPartV1[] }) {
   // Canvas is client-only; wait for mount so SSR skips it cleanly.
   const [mounted, setMounted] = useState(false);
@@ -111,6 +143,7 @@ export function LookPreview({ look, parts = [] }: { look: ResolvedLook; parts?: 
         <circleGeometry args={[0.85, 24]} />
         <meshStandardMaterial color="#2a2620" roughness={0.9} />
       </mesh>
+      <MirrorControls />
     </Canvas>
   );
 }

@@ -99,17 +99,21 @@ export function LookGump({ onDone }: { onDone: (choice: LookChoice) => void }) {
   return (
     <div className="fixed inset-0 z-[90] flex items-center justify-center bg-black/60 p-4" data-testid="look-gump">
       <div
-        className="flex w-full max-w-3xl gap-6 rounded-md border p-6"
+        className="flex w-full max-w-3xl flex-col gap-6 rounded-md border p-6 sm:flex-row"
         style={{ background: "rgba(20,17,14,0.94)", borderColor: "#3a322c" }}
       >
-        {/* the mirror — always watching */}
-        <div className="hidden w-56 shrink-0 flex-col sm:flex">
-          <div className="flex-1 rounded-sm border" style={{ borderColor: "#2e241c", background: "#181410" }}>
+        {/* the mirror — always watching, and it answers to fingers */}
+        <div className="order-first flex w-full shrink-0 flex-col sm:order-none sm:h-auto sm:w-56">
+          <div
+            className="h-48 min-h-0 rounded-sm border sm:h-auto sm:flex-1"
+            style={{ borderColor: "#2e241c", background: "#181410" }}
+          >
             <LookPreview look={preview} parts={wornParts} />
           </div>
-          <div className="mt-3 text-center">
+          <div className="mt-3 shrink-0 text-center">
             <div className="font-serif text-lg" style={{ color: "#ece6d8" }}>{trimmed || "…"}</div>
             <div className="text-xs" style={{ color: CLASS_META[cls].color }}>{CLASS_META[cls].label}</div>
+            <div className="mt-1 text-[10px] italic" style={{ color: "#8a8680" }}>Drag the mirror to turn them.</div>
           </div>
         </div>
 
