@@ -9,6 +9,20 @@ import { countGenericCraftResource, debitGenericCraftResource, type GenericCraft
 import type { BuildingKind, ItemId, RareItem, ResourceTag, SkillId, World } from "./types.ts";
 
 export { countTag, hasTag, itemTags, tagConsumeOrder } from "./catalog.ts";
+export {
+  EXACT_RECIPE_CATALOG,
+  exactRecipeById,
+  resolveExactRecipeSelection,
+  resourceStackMatchesRole,
+} from "./crafting/recipes.ts";
+export { executeExactCraftTransaction } from "./crafting/transaction.ts";
+export type {
+  ExactMaterialSelection,
+  ExactRecipeDefinition,
+  ExactRecipeId,
+  ResolvedExactRecipeSelection,
+} from "./crafting/recipes.ts";
+export type { ExactCraftTransactionResult } from "./crafting/transaction.ts";
 
 export type Station = "bench" | "forge" | "fire";
 
