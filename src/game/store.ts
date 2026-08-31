@@ -48,7 +48,7 @@ import {
 } from "./player.ts";
 import { commandNamePet } from "./pets.ts";
 import { takeFromPile, takeGoldFromPile } from "./piles.ts";
-import { clearSave, hasSave, loadSave, writeSave } from "./save.ts";
+import { clearSave, flushQueuedSave, hasSave, loadSave, queueSave, writeSave } from "./save.ts";
 import { recruitPerson, setSpeed, tickWorld } from "./sim.ts";
 import { completeObjective, placeBuilding } from "./world.ts";
 import { COURT, stationNear } from "./atlas.ts";
@@ -173,6 +173,13 @@ let toastTimer = 0;
 /** Identity of the world-log line the toast bridge has already seen. */
 let lastLogTop: string | null = null;
 let buildHeld = false;
+
+if (typeof window !== "undefined") {
+  window.addEventListener("pagehide", flushQueuedSave);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") flushQueuedSave();
+  });
+}
 
 export function dropBuildHold() {
   buildHeld = false;
@@ -355,7 +362,7 @@ export const useGame = create<GameUI>((set, get) => ({
     }
     if (saveAcc > 8) {
       saveAcc = 0;
-      if (get().phase === "playing") writeSave(w);
+      if (get().phase === "playing") queueSave(w);
     }
   },
   flash: (msg) => {

@@ -18,7 +18,6 @@ import { NpcGump } from "@/components/game/npc-gump";
 import { YouDressing } from "@/components/game/paperdoll";
 import { SpellbookGump } from "@/components/game/spell-gump";
 import { CraftGump } from "@/components/game/craft-gump";
-import { VaultGump } from "@/components/game/vault-gump";
 import { SettingsGump } from "@/components/game/settings-gump";
 import { PetsGump } from "@/components/game/pets-gump";
 import { ValeChart, MiniVale } from "@/components/game/vale-map";
@@ -37,7 +36,17 @@ import { sfxMuted, toggleSfx, warmSfx } from "@/game/vale-sfx";
 import { useGame } from "@/game/store";
 import type { PanelId, Speed } from "@/game/types";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
+
+const loadVault = () => import("@/components/game/vault-gump");
+const VaultGump = lazy(() => loadVault().then(({ VaultGump: component }) => ({ default: component })));
+
+function preloadVault() {
+  return Promise.all([
+    loadVault(),
+    import("@/chain/oneSat").then(({ preloadOneSatActions }) => preloadOneSatActions()),
+  ]);
+}
 
 function clockLabel(clock: number, day: number) {
   const h = Math.floor(clock) % 24;
@@ -52,6 +61,14 @@ export function Hud() {
   useEffect(() => {
     if (phase === "playing" || phase === "raising") startValeMusic();
   }, [phase]);
+  useEffect(() => {
+    if (typeof requestIdleCallback !== "function") {
+      void loadVault().catch(() => undefined);
+      return;
+    }
+    const id = requestIdleCallback(() => void loadVault().catch(() => undefined), { timeout: 1000 });
+    return () => cancelIdleCallback(id);
+  }, []);
   if (phase === "title") return <TitleOverlay />;
   if (phase === "raising") return <RaisingOverlay />;
   if (phase === "intro") return <IntroCinematic onDone={introDone} />;
@@ -80,7 +97,9 @@ function PlayingChrome() {
       <NpcGump />
       <SpellbookGump />
       <CraftGump />
-      <VaultGump />
+      <Suspense fallback={null}>
+        <VaultGump />
+      </Suspense>
       <SettingsGump />
       <PetsGump />
       <Toast />
@@ -98,6 +117,7 @@ function startHall(fresh: boolean) {
   const now = Date.now();
   if (now - startLock < 500) return;
   startLock = now;
+  void preloadVault().catch(() => undefined);
   startValeMusic();
   warmSfx();
   useGame.getState().begin(fresh);

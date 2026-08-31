@@ -515,6 +515,7 @@ export function hasSave() {
 }
 
 export function clearSave() {
+  discardQueuedSave();
   try {
     localStorage.removeItem(SAVE_KEY);
   } catch {
@@ -522,7 +523,7 @@ export function clearSave() {
   }
 }
 
-export function writeSave(world: World) {
+function prepareSavePayload(world: World) {
   try {
     const resources = parseResourceInventory(world.player.resources);
     const resourceNodes = parseResourceNodeStateMapAtHour({
@@ -538,11 +539,63 @@ export function writeSave(world: World) {
       saveVersion: CURRENT_SAVE_VERSION,
       tiles: null,
     };
-    if (!isCurrentSave(payload)) return;
+    if (!isCurrentSave(payload)) return null;
+    return payload;
+  } catch {
+    return null;
+  }
+}
+
+function writePreparedSave(payload: ReturnType<typeof prepareSavePayload>) {
+  if (!payload) return;
+  try {
     localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
   } catch {
-    /* invalid runtime state or quota */
+    /* quota or unavailable storage */
   }
+}
+
+export function writeSave(world: World) {
+  discardQueuedSave();
+  writePreparedSave(prepareSavePayload(world));
+}
+
+let pendingSave: ReturnType<typeof prepareSavePayload> = null;
+let pendingIdleId: number | null = null;
+
+export function discardQueuedSave() {
+  if (pendingIdleId !== null && typeof cancelIdleCallback === "function") cancelIdleCallback(pendingIdleId);
+  pendingIdleId = null;
+  pendingSave = null;
+}
+
+export function flushQueuedSave() {
+  if (pendingIdleId !== null && typeof cancelIdleCallback === "function") cancelIdleCallback(pendingIdleId);
+  pendingIdleId = null;
+  const payload = pendingSave;
+  pendingSave = null;
+  writePreparedSave(payload);
+}
+
+export function queueSave(world: World) {
+  const prepared = prepareSavePayload(world);
+  if (!prepared) return;
+  const snapshot = typeof structuredClone === "function" ? structuredClone(prepared) : prepared;
+  if (pendingSave) flushQueuedSave();
+  pendingSave = snapshot;
+  if (typeof requestIdleCallback !== "function") {
+    flushQueuedSave();
+    return;
+  }
+  pendingIdleId = requestIdleCallback(
+    () => {
+      pendingIdleId = null;
+      const payload = pendingSave;
+      pendingSave = null;
+      writePreparedSave(payload);
+    },
+    { timeout: 500 },
+  );
 }
 
 export function loadSave(): World | null {

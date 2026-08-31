@@ -26,6 +26,15 @@ import { contentPointer, walletOrdinalIdentity } from "./ordinal-identity";
 /** Browser glue between Emberhall artifacts and a BRC-100 wallet. */
 const CONTENT_URL = "https://api.1sat.app/content";
 let cached: { wallet: WalletInterface; ctx: OneSatContext } | null = null;
+let actionsPromise: Promise<typeof import("@1sat/actions")> | null = null;
+
+export function preloadOneSatActions() {
+  actionsPromise ??= import("@1sat/actions").catch((error) => {
+    actionsPromise = null;
+    throw error;
+  });
+  return actionsPromise;
+}
 
 export function oneSatCtx(wallet: WalletInterface): OneSatContext {
   if (cached && cached.wallet === wallet) return cached.ctx;
@@ -56,7 +65,7 @@ export async function mintItemNft(
   const payload = encodeItemInscription(world, item);
   const base64Content = payload ? inscriptionBase64(world, item) : null;
   if (!payload || !base64Content) throw new Error("That item cannot be inscribed.");
-  const { inscribe } = await import("@1sat/actions");
+  const { inscribe } = await preloadOneSatActions();
   const res = await inscribe.execute(ctx, {
     base64Content,
     contentType: "application/json",
@@ -73,7 +82,7 @@ export async function mintRareNft(
   const payload = encodeRareInscription(world, rare);
   const base64Content = payload ? inscriptionBase64(world, rare.base, rare) : null;
   if (!payload || !base64Content) throw new Error("That wonder cannot be inscribed.");
-  const { inscribe } = await import("@1sat/actions");
+  const { inscribe } = await preloadOneSatActions();
   const res = await inscribe.execute(ctx, {
     base64Content,
     contentType: "application/json",
@@ -125,7 +134,7 @@ export async function mintCharacterLookNft(
     previous ? { revision: previous.inscription.revision, outpoint: previous.origin } : undefined,
   );
   if (!payload) throw new Error("That person cannot be inscribed.");
-  const { inscribe } = await import("@1sat/actions");
+  const { inscribe } = await preloadOneSatActions();
   const res = await inscribe.execute(ctx, {
     base64Content: artifactBase64(payload),
     contentType: "application/json",
@@ -148,7 +157,7 @@ export async function mintPartNft(
 ): Promise<{ txid: string; payload: PartInscription }> {
   const payload = encodePartInscription(world, part);
   if (!payload) throw new Error("That sculpture cannot be inscribed.");
-  const { inscribe } = await import("@1sat/actions");
+  const { inscribe } = await preloadOneSatActions();
   const res = await inscribe.execute(ctx, {
     base64Content: artifactBase64(payload),
     contentType: "application/json",
@@ -190,7 +199,7 @@ export function artifactLabel(nft: EmberhallNft): string {
 
 /** One wallet query reads items, character looks, and sculpted parts. */
 export async function listEmberhallNfts(ctx: OneSatContext): Promise<EmberhallNft[]> {
-  const { listOrdinals } = await import("@1sat/actions");
+  const { listOrdinals } = await preloadOneSatActions();
   const outputs: WalletOutput[] = [];
   const limit = 200;
   let offset = 0;
@@ -237,20 +246,20 @@ export async function listVaultNfts(ctx: OneSatContext): Promise<VaultNft[]> {
 }
 
 export async function redeemItemNft(ctx: OneSatContext, id: string): Promise<string> {
-  const { burnOrdinals } = await import("@1sat/actions");
+  const { burnOrdinals } = await preloadOneSatActions();
   const res = await burnOrdinals.execute(ctx, { ids: [id], app: VAULT_APP });
   return unwrap("The redeem", res);
 }
 
 export async function sellItemNft(ctx: OneSatContext, id: string, priceSats: number): Promise<string> {
   if (!Number.isSafeInteger(priceSats) || priceSats < 1) throw new Error("Name a price in whole satoshis.");
-  const { sellOrdinal } = await import("@1sat/actions");
+  const { sellOrdinal } = await preloadOneSatActions();
   const res = await sellOrdinal.execute(ctx, { id, price: priceSats });
   return unwrap("The listing", res);
 }
 
 export async function cancelItemNft(ctx: OneSatContext, id: string): Promise<string> {
-  const { cancelOrdinalListing } = await import("@1sat/actions");
+  const { cancelOrdinalListing } = await preloadOneSatActions();
   const res = await cancelOrdinalListing.execute(ctx, { id });
   return unwrap("The cancel", res);
 }

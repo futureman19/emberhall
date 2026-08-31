@@ -1,7 +1,30 @@
+import { memo, useLayoutEffect, useMemo, useRef } from "react";
+import * as THREE from "three";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { useGame } from "@/game/store";
 import type { Creature, FaunaKind } from "@/game/types";
+import { sharedBlockGeometry, sharedBlockMaterial } from "./terrain-performance";
+
+const SharedBox = memo(
+  function SharedBox({ args }: { args: readonly [number, number, number] }) {
+    return <primitive object={sharedBlockGeometry(args[0], args[1], args[2])} attach="geometry" />;
+  },
+  (before, after) => before.args[0] === after.args[0] && before.args[1] === after.args[1] && before.args[2] === after.args[2],
+);
+
+const FaunaMat = memo(function FaunaMat({
+  color,
+  roughness = 0.9,
+  opacity = 1,
+}: {
+  color: string;
+  roughness?: number;
+  opacity?: number;
+}) {
+  const material = sharedBlockMaterial({ color, roughness, metalness: 0, opacity, kind: "standard" });
+  return <primitive object={material} attach="material" />;
+});
 
 const COLOR: Record<FaunaKind, string> = {
   hare: "#c4a882",
@@ -63,7 +86,7 @@ const SIZE: Record<FaunaKind, number> = {
   orc_marauder: 0.98,
 };
 
-function Body({ c }: { c: Creature }) {
+const Body = memo(function Body({ c }: { c: Creature }) {
   const s = SIZE[c.kind];
   const color = COLOR[c.kind];
 
@@ -79,20 +102,20 @@ function Body({ c }: { c: Creature }) {
     return (
       <>
         <mesh position={[0, s * 0.42, 0]} castShadow>
-          <boxGeometry args={[s * 0.9, s * 0.7, s * 1.15]} />
-          <meshStandardMaterial color={color} roughness={0.9} />
+          <SharedBox args={[s * 0.9, s * 0.7, s * 1.15]} />
+          <FaunaMat color={color} roughness={0.9} />
         </mesh>
         <mesh position={[0, s * 0.72, s * 0.42]} castShadow>
-          <boxGeometry args={[s * 0.55, s * 0.45, s * 0.5]} />
-          <meshStandardMaterial color={color} roughness={0.9} />
+          <SharedBox args={[s * 0.55, s * 0.45, s * 0.5]} />
+          <FaunaMat color={color} roughness={0.9} />
         </mesh>
         <mesh position={[-s * 0.12, s * 1.08, s * 0.36]} castShadow>
-          <boxGeometry args={[s * 0.12, s * 0.42, s * 0.08]} />
-          <meshStandardMaterial color={color} roughness={0.9} />
+          <SharedBox args={[s * 0.12, s * 0.42, s * 0.08]} />
+          <FaunaMat color={color} roughness={0.9} />
         </mesh>
         <mesh position={[s * 0.12, s * 1.08, s * 0.36]} castShadow>
-          <boxGeometry args={[s * 0.12, s * 0.42, s * 0.08]} />
-          <meshStandardMaterial color={color} roughness={0.9} />
+          <SharedBox args={[s * 0.12, s * 0.42, s * 0.08]} />
+          <FaunaMat color={color} roughness={0.9} />
         </mesh>
       </>
     );
@@ -102,23 +125,23 @@ function Body({ c }: { c: Creature }) {
     return (
       <>
         <mesh position={[0, s * 0.5, 0]} castShadow>
-          <boxGeometry args={[s * 0.7, s * 0.65, s * 1.35]} />
-          <meshStandardMaterial color={color} roughness={0.9} />
+          <SharedBox args={[s * 0.7, s * 0.65, s * 1.35]} />
+          <FaunaMat color={color} roughness={0.9} />
         </mesh>
         <mesh position={[0, s * 0.95, s * 0.55]} castShadow>
-          <boxGeometry args={[s * 0.28, s * 0.55, s * 0.28]} />
-          <meshStandardMaterial color={color} roughness={0.9} />
+          <SharedBox args={[s * 0.28, s * 0.55, s * 0.28]} />
+          <FaunaMat color={color} roughness={0.9} />
         </mesh>
         <mesh position={[0, s * 1.2, s * 0.72]} castShadow>
-          <boxGeometry args={[s * 0.38, s * 0.32, s * 0.42]} />
-          <meshStandardMaterial color={color} roughness={0.9} />
+          <SharedBox args={[s * 0.38, s * 0.32, s * 0.42]} />
+          <FaunaMat color={color} roughness={0.9} />
         </mesh>
         <mesh position={[-s * 0.12, s * 1.5, s * 0.62]} castShadow>
-          <boxGeometry args={[s * 0.08, s * 0.38, s * 0.08]} />
+          <SharedBox args={[s * 0.08, s * 0.38, s * 0.08]} />
           <meshStandardMaterial color="#d8c8a8" roughness={0.85} />
         </mesh>
         <mesh position={[s * 0.12, s * 1.5, s * 0.62]} castShadow>
-          <boxGeometry args={[s * 0.08, s * 0.38, s * 0.08]} />
+          <SharedBox args={[s * 0.08, s * 0.38, s * 0.08]} />
           <meshStandardMaterial color="#d8c8a8" roughness={0.85} />
         </mesh>
       </>
@@ -129,15 +152,15 @@ function Body({ c }: { c: Creature }) {
     return (
       <>
         <mesh position={[0, s * 0.48, 0]} castShadow>
-          <boxGeometry args={[s * 0.75, s * 0.55, s * 1.35]} />
-          <meshStandardMaterial color={color} roughness={0.9} />
+          <SharedBox args={[s * 0.75, s * 0.55, s * 1.35]} />
+          <FaunaMat color={color} roughness={0.9} />
         </mesh>
         <mesh position={[0, s * 0.72, s * 0.62]} castShadow>
-          <boxGeometry args={[s * 0.5, s * 0.42, s * 0.5]} />
-          <meshStandardMaterial color={color} roughness={0.9} />
+          <SharedBox args={[s * 0.5, s * 0.42, s * 0.5]} />
+          <FaunaMat color={color} roughness={0.9} />
         </mesh>
         <mesh position={[0, s * 0.55, -s * 0.8]} castShadow>
-          <boxGeometry args={[s * 0.16, s * 0.16, s * 0.5]} />
+          <SharedBox args={[s * 0.16, s * 0.16, s * 0.5]} />
           <meshStandardMaterial color="#4a4a48" roughness={0.9} />
         </mesh>
       </>
@@ -148,12 +171,12 @@ function Body({ c }: { c: Creature }) {
     return (
       <>
         <mesh position={[0, s * 0.5, 0]} castShadow>
-          <boxGeometry args={[s * 0.8, s * 0.6, s * 1.25]} />
-          <meshStandardMaterial color={color} roughness={0.9} />
+          <SharedBox args={[s * 0.8, s * 0.6, s * 1.25]} />
+          <FaunaMat color={color} roughness={0.9} />
         </mesh>
         <mesh position={[0, s * 0.72, -s * 0.58]} castShadow>
-          <boxGeometry args={[s * 0.55, s * 0.5, s * 0.45]} />
-          <meshStandardMaterial color={color} roughness={0.9} />
+          <SharedBox args={[s * 0.55, s * 0.5, s * 0.45]} />
+          <FaunaMat color={color} roughness={0.9} />
         </mesh>
       </>
     );
@@ -163,14 +186,14 @@ function Body({ c }: { c: Creature }) {
     return (
       <>
         <mesh position={[0, s * 0.35, 0]} castShadow>
-          <boxGeometry args={[s * 0.62, s * 0.25, s * 0.62]} />
-          <meshStandardMaterial color={color} roughness={1} />
+          <SharedBox args={[s * 0.62, s * 0.25, s * 0.62]} />
+          <FaunaMat color={color} roughness={1} />
         </mesh>
         {[0, 1, 2, 3].map((i) => {
           const a = (Math.PI / 2) * i;
           return <mesh key={i} position={[Math.cos(a) * s * 0.42, s * 0.18, Math.sin(a) * s * 0.42]} rotation={[0, a, 0]} castShadow>
-            <boxGeometry args={[s * 0.7, s * 0.08, s * 0.24]} />
-            <meshStandardMaterial color={color} roughness={1} />
+            <SharedBox args={[s * 0.7, s * 0.08, s * 0.24]} />
+            <FaunaMat color={color} roughness={1} />
           </mesh>;
         })}
       </>
@@ -181,12 +204,12 @@ function Body({ c }: { c: Creature }) {
     return (
       <>
         <mesh position={[0, s * 0.24, 0]} castShadow>
-          <boxGeometry args={[s * 0.7, s * 0.24, s * 1.2]} />
-          <meshStandardMaterial color={color} roughness={0.9} />
+          <SharedBox args={[s * 0.7, s * 0.24, s * 1.2]} />
+          <FaunaMat color={color} roughness={0.9} />
         </mesh>
         <mesh position={[0, s * 0.4, 0]} castShadow>
-          <boxGeometry args={[s * 0.45, s * 0.22, s * 0.45]} />
-          <meshStandardMaterial color={color} roughness={0.9} />
+          <SharedBox args={[s * 0.45, s * 0.22, s * 0.45]} />
+          <FaunaMat color={color} roughness={0.9} />
         </mesh>
       </>
     );
@@ -196,11 +219,11 @@ function Body({ c }: { c: Creature }) {
     return (
       <>
         <mesh position={[0, s * 0.45, 0]} castShadow>
-          <boxGeometry args={[s * 1.05, s * 0.55, s * 0.95]} />
-          <meshStandardMaterial color={color} roughness={0.9} />
+          <SharedBox args={[s * 1.05, s * 0.55, s * 0.95]} />
+          <FaunaMat color={color} roughness={0.9} />
         </mesh>
         <mesh position={[0, s * 0.82, 0]} castShadow>
-          <boxGeometry args={[s * 0.35, s * 0.2, s * 0.25]} />
+          <SharedBox args={[s * 0.35, s * 0.2, s * 0.25]} />
           <meshStandardMaterial color={color} roughness={0.6} />
         </mesh>
       </>
@@ -211,16 +234,16 @@ function Body({ c }: { c: Creature }) {
     return (
       <>
         <mesh position={[0, s * 0.5, 0]} castShadow>
-          <boxGeometry args={[s * 0.42, s * 0.34, s * 0.62]} />
-          <meshStandardMaterial color={color} roughness={0.8} />
+          <SharedBox args={[s * 0.42, s * 0.34, s * 0.62]} />
+          <FaunaMat color={color} roughness={0.8} />
         </mesh>
         <mesh position={[-s * 0.34, s * 0.28, s * 0.1]} rotation={[0, 0, 0.6]} castShadow>
-          <boxGeometry args={[s * 0.68, s * 0.06, s * 0.17]} />
-          <meshStandardMaterial color={color} roughness={0.8} />
+          <SharedBox args={[s * 0.68, s * 0.06, s * 0.17]} />
+          <FaunaMat color={color} roughness={0.8} />
         </mesh>
         <mesh position={[s * 0.34, s * 0.28, s * 0.1]} rotation={[0, 0, -0.6]} castShadow>
-          <boxGeometry args={[s * 0.68, s * 0.06, s * 0.17]} />
-          <meshStandardMaterial color={color} roughness={0.8} />
+          <SharedBox args={[s * 0.68, s * 0.06, s * 0.17]} />
+          <FaunaMat color={color} roughness={0.8} />
         </mesh>
       </>
     );
@@ -230,11 +253,11 @@ function Body({ c }: { c: Creature }) {
     return (
       <>
         <mesh position={[0, 0.7, 0]} castShadow>
-          <boxGeometry args={[0.32, 1.1, 0.22]} />
-          <meshStandardMaterial color={color} roughness={0.7} transparent opacity={0.85} />
+          <SharedBox args={[0.32, 1.1, 0.22]} />
+          <FaunaMat color={color} roughness={0.7} opacity={0.85} />
         </mesh>
         <mesh position={[0, 1.35, 0]} castShadow>
-          <boxGeometry args={[0.28, 0.28, 0.24]} />
+          <SharedBox args={[0.28, 0.28, 0.24]} />
           <meshStandardMaterial color="#ece6d8" roughness={0.6} />
         </mesh>
       </>
@@ -244,37 +267,72 @@ function Body({ c }: { c: Creature }) {
   return (
     <>
       <mesh position={[0, s * 0.5, 0]} castShadow>
-        <boxGeometry args={[s * 0.62, s * 0.55, s * 1.05]} />
-        <meshStandardMaterial color={color} roughness={0.9} />
+        <SharedBox args={[s * 0.62, s * 0.55, s * 1.05]} />
+        <FaunaMat color={color} roughness={0.9} />
       </mesh>
       <mesh position={[0, s * 0.76, s * 0.36]} castShadow>
-        <boxGeometry args={[s * 0.44, s * 0.48, s * 0.44]} />
-        <meshStandardMaterial color={color} roughness={0.9} />
+        <SharedBox args={[s * 0.44, s * 0.48, s * 0.44]} />
+        <FaunaMat color={color} roughness={0.9} />
       </mesh>
     </>
   );
-}
+}, (before, after) => before.c.kind === after.c.kind);
 
 function Beast({ c }: { c: Creature }) {
   const dead = c.task === "dead";
-  const color = COLOR[c.kind];
 
   return (
     <group position={[c.x, groundY(getWorld(), c.x, c.z), c.z]} rotation={dead ? [Math.PI / 2, 0, 0] : [0, 0, 0]}>
       <Body c={c} />
-      {c.ownerId && (
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.06, 0]}>
+    </group>
+  );
+}
+
+function FaunaAccents({ fauna }: { fauna: Creature[] }) {
+  const rings = useMemo(() => fauna.filter((creature) => Boolean(creature.ownerId)), [fauna]);
+  const wights = useMemo(() => fauna.filter((creature) => creature.kind === "wight"), [fauna]);
+  const ringMesh = useRef<THREE.InstancedMesh>(null);
+  const wightMesh = useRef<THREE.InstancedMesh>(null);
+  useLayoutEffect(() => {
+    const parent = new THREE.Object3D();
+    const child = new THREE.Object3D();
+    const matrix = new THREE.Matrix4();
+    const write = (mesh: THREE.InstancedMesh | null, creatures: Creature[], localY: number, ring: boolean) => {
+      if (!mesh) return;
+      creatures.forEach((creature, index) => {
+        parent.position.set(creature.x, groundY(getWorld(), creature.x, creature.z), creature.z);
+        parent.rotation.set(creature.task === "dead" ? Math.PI / 2 : 0, 0, 0);
+        parent.updateMatrix();
+        child.position.set(0, localY, 0);
+        child.rotation.set(ring ? -Math.PI / 2 : 0, 0, 0);
+        child.updateMatrix();
+        matrix.multiplyMatrices(parent.matrix, child.matrix);
+        mesh.setMatrixAt(index, matrix);
+      });
+      mesh.instanceMatrix.needsUpdate = true;
+      mesh.computeBoundingSphere();
+    };
+    write(ringMesh.current, rings, 0.06, true);
+    write(wightMesh.current, wights, 1.45, false);
+  }, [rings, wights]);
+  return (
+    <>
+      {rings.length > 0 && (
+        <instancedMesh ref={ringMesh} args={[undefined, undefined, rings.length]}>
           <ringGeometry args={[0.22, 0.3, 12]} />
           <meshBasicMaterial color="#c9a36a" transparent opacity={0.7} />
-        </mesh>
+        </instancedMesh>
       )}
-      {c.kind === "wight" && (
-        <mesh position={[0, 1.45, 0]}>
-          <boxGeometry args={[0.08, 0.02, 0.08]} />
-          <meshStandardMaterial color={color} roughness={0.8} />
-        </mesh>
+      {wights.length > 0 && (
+        <instancedMesh
+          ref={wightMesh}
+          geometry={sharedBlockGeometry(0.08, 0.02, 0.08)}
+          material={sharedBlockMaterial({ color: COLOR.wight, roughness: 0.8, metalness: 0, opacity: 1, kind: "standard" })}
+          args={[undefined, undefined, wights.length]}
+          dispose={null}
+        />
       )}
-    </group>
+    </>
   );
 }
 
@@ -285,6 +343,7 @@ export function Fauna() {
       {fauna.map((c) => (
         <Beast key={c.id} c={c} />
       ))}
+      <FaunaAccents fauna={fauna} />
     </group>
   );
 }

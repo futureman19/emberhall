@@ -4,6 +4,7 @@ import test from "node:test";
 import * as THREE from "three";
 import { biomeAt, biomeWeights } from "../../game/biome.ts";
 import { groundY } from "../../game/height.ts";
+import { you } from "../../game/player.ts";
 import { createWorld } from "../../game/world.ts";
 import {
   createHorizonFrameTracker,
@@ -110,6 +111,25 @@ test("shared block resources reuse only exactly equivalent immutable GPU resourc
     material,
   );
   assert.equal(material instanceof THREE.MeshStandardMaterial, true);
+  assert.notEqual(
+    sharedBlockMaterial({
+      color: "#6a4a32",
+      roughness: 0.9,
+      metalness: 0,
+      opacity: 1,
+      kind: "standard",
+      emissive: "#a85a42",
+    }),
+    material,
+    "emissive identity never aliases an otherwise matching material",
+  );
+});
+
+test("player lookup keeps one stable direct identity for repeated render and ecology reads", () => {
+  const world = createWorld();
+  const player = you(world);
+  assert.ok(player);
+  for (let i = 0; i < 10_000; i += 1) assert.equal(you(world), player);
 });
 
 test("production renderers use guarded horizon uploads, deterministic caches, and shared block resources", () => {
@@ -123,4 +143,37 @@ test("production renderers use guarded horizon uploads, deterministic caches, an
   assert.match(buildings, /geometry=\{sharedBlockGeometry\(/);
   assert.match(buildings, /const material = sharedBlockMaterial\(/);
   assert.match(buildings, /material=\{material\}/);
+});
+
+test("entity renderers reuse exact resources, memoize immutable leaves, and instance equivalent accents", () => {
+  const people = readFileSync(new URL("./people-meshes.tsx", import.meta.url), "utf8");
+  const fauna = readFileSync(new URL("./fauna-meshes.tsx", import.meta.url), "utf8");
+  assert.doesNotMatch(people, /<boxGeometry\b/);
+  assert.doesNotMatch(fauna, /<boxGeometry\b/);
+  assert.match(people, /const SharedBox = memo\(/);
+  assert.match(people, /const Mat = memo\(/);
+  assert.match(fauna, /const Body = memo\(/);
+  assert.match(fauna, /function FaunaAccents/);
+  assert.match(fauna, /<instancedMesh ref=\{ringMesh\}/);
+  assert.match(fauna, /ref=\{wightMesh\}/);
+});
+
+test("the non-core vault is a lazy chunk prefetched before play while immediate gameplay panels stay eager", () => {
+  const hud = readFileSync(new URL("./hud.tsx", import.meta.url), "utf8");
+  const oneSat = readFileSync(new URL("../../chain/oneSat.ts", import.meta.url), "utf8");
+  assert.match(hud, /const loadVault = \(\) => import\(/);
+  assert.match(hud, /const VaultGump = lazy\(/);
+  assert.match(hud, /void preloadVault\(\)\.catch\(\(\) => undefined\);[\s\S]*startValeMusic\(\);/);
+  assert.match(hud, /<Suspense fallback=\{null\}>/);
+  assert.match(hud, /import \{ CraftGump \} from/);
+  assert.match(hud, /import \{ SpellbookGump \} from/);
+  assert.match(oneSat, /actionsPromise \?\?= import\("@1sat\/actions"\)/);
+  assert.equal(oneSat.match(/await preloadOneSatActions\(\)/g)?.length, 8);
+});
+
+test("ecology resolves the player once outside the creature loop", () => {
+  const ecology = readFileSync(new URL("../../game/ecology.ts", import.meta.url), "utf8");
+  const tick = ecology.slice(ecology.indexOf("export function tickEcology"));
+  assert.ok(tick.indexOf("const player = you(world);") < tick.indexOf("for (const c of world.fauna)"));
+  assert.doesNotMatch(tick, /world\.people\.find/);
 });

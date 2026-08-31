@@ -3,6 +3,7 @@ import { FAUNA_META, isNight } from "./catalog.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { sheltering } from "./weather.ts";
 import { nid } from "./world.ts";
+import { you } from "./player.ts";
 import type { Creature, FaunaKind, World } from "./types.ts";
 
 type SpawnEntry = { kind: FaunaKind; weight: number };
@@ -225,6 +226,7 @@ export function seedBarrow(world: World, rng: () => number) {
 export function tickEcology(world: World, dt: number) {
   const night = isNight(world.hour);
   const shelter = sheltering(world);
+  const player = you(world);
   for (const c of world.fauna) {
     if (c.task === "dead") {
       if (world.hour > c.corpseUntil) {
@@ -240,15 +242,14 @@ export function tickEcology(world: World, dt: number) {
         c.path = [];
       }
     }
-    const you = world.people.find((p) => p.isPlayer);
     if (c.ownerId === world.player.id) {
       if (c.stay) {
         c.task = "idle";
         c.path = [];
         continue;
       }
-      if (you && Math.hypot(c.x - you.x, c.z - you.z) > 3.2) {
-        const dest = nearestWalkable(world, Math.round(you.x), Math.round(you.z));
+      if (player && Math.hypot(c.x - player.x, c.z - player.z) > 3.2) {
+        const dest = nearestWalkable(world, Math.round(player.x), Math.round(player.z));
         if (dest) {
           const path = astar(world, Math.round(c.x), Math.round(c.z), dest.x, dest.y, 2500);
           if (path) c.path = path.map((n) => ({ tx: n.x, ty: n.y }));
@@ -288,10 +289,10 @@ export function tickEcology(world: World, dt: number) {
       }
       c.taskUntil = world.hour + 0.6 + Math.random();
     }
-    if (you && NIGHT_HUNTERS.has(c.kind) && night && !c.ownerId && c.task !== "fight" && !you.ghost) {
-      if (Math.hypot(c.x - you.x, c.z - you.z) < 10) {
+    if (player && NIGHT_HUNTERS.has(c.kind) && night && !c.ownerId && c.task !== "fight" && !player.ghost) {
+      if (Math.hypot(c.x - player.x, c.z - player.z) < 10) {
         c.task = "fight";
-        const path = astar(world, Math.round(c.x), Math.round(c.z), Math.round(you.x), Math.round(you.z), 2000);
+        const path = astar(world, Math.round(c.x), Math.round(c.z), Math.round(player.x), Math.round(player.z), 2000);
         if (path) c.path = path.map((n) => ({ tx: n.x, ty: n.y }));
       }
     }

@@ -1,5 +1,5 @@
 import { useFrame } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { memo, useMemo, useRef } from "react";
 import { Quaternion, type Group } from "three";
 import { CLASS_META } from "@/game/catalog";
 import { groundY } from "@/game/height";
@@ -10,10 +10,18 @@ import type { ResolvedLook } from "@/game/look/resolve.ts";
 import { workPitch } from "@/game/player";
 import { useGame } from "@/game/store";
 import type { ItemId, Person, WearSlot } from "@/game/types";
+import { sharedBlockGeometry, sharedBlockMaterial } from "./terrain-performance";
 
 function groundAt(x: number, z: number) {
   return groundY(getWorld(), x, z);
 }
+
+const SharedBox = memo(
+  function SharedBox({ args }: { args: readonly [number, number, number] }) {
+    return <primitive object={sharedBlockGeometry(args[0], args[1], args[2])} attach="geometry" />;
+  },
+  (before, after) => before.args[0] === after.args[0] && before.args[1] === after.args[1] && before.args[2] === after.args[2],
+);
 
 const WEAR_HEX: Partial<Record<ItemId, string>> = {
   tunic: "#c9a36a",
@@ -40,32 +48,32 @@ function HairMeshes({ look, ghost }: { look: ResolvedLook; ghost: boolean }) {
   return (
     <group>
       <mesh position={[0, 1.14, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.3, 0.08, 0.28]} />
+        <SharedBox args={[0.3, 0.08, 0.28]} />
         <Mat color={c} ghost={ghost} />
       </mesh>
       {look.hairStyle === "shag" && (
         <>
           {[-0.17, 0.17].map((x) => (
             <mesh key={x} position={[x, 1.02, 0]} castShadow={!ghost}>
-              <boxGeometry args={[0.06, 0.2, 0.28]} />
+              <SharedBox args={[0.06, 0.2, 0.28]} />
               <Mat color={c} ghost={ghost} />
             </mesh>
           ))}
           <mesh position={[0, 1.02, 0.16]} castShadow={!ghost}>
-            <boxGeometry args={[0.3, 0.2, 0.06]} />
+            <SharedBox args={[0.3, 0.2, 0.06]} />
             <Mat color={c} ghost={ghost} />
           </mesh>
         </>
       )}
       {look.hairStyle === "tail" && (
         <mesh position={[0, 0.96, 0.18]} castShadow={!ghost}>
-          <boxGeometry args={[0.12, 0.34, 0.08]} />
+          <SharedBox args={[0.12, 0.34, 0.08]} />
           <Mat color={c} ghost={ghost} />
         </mesh>
       )}
       {look.hairStyle === "long" && (
         <mesh position={[0, 0.94, 0.17]} castShadow={!ghost}>
-          <boxGeometry args={[0.3, 0.4, 0.08]} />
+          <SharedBox args={[0.3, 0.4, 0.08]} />
           <Mat color={c} ghost={ghost} />
         </mesh>
       )}
@@ -73,22 +81,30 @@ function HairMeshes({ look, ghost }: { look: ResolvedLook; ghost: boolean }) {
   );
 }
 
-function Mat({ color, ghost }: { color: string; ghost: boolean }) {
-  if (ghost) {
-    return <meshStandardMaterial color="#ece6d8" emissive="#c9c3b6" emissiveIntensity={0.55} transparent opacity={0.58} roughness={0.4} depthWrite={false} />;
-  }
-  return <meshStandardMaterial color={color} roughness={0.82} />;
-}
+const Mat = memo(function Mat({ color, ghost }: { color: string; ghost: boolean }) {
+  const material = ghost
+    ? sharedBlockMaterial({
+        color: "#ece6d8",
+        roughness: 0.4,
+        metalness: 0,
+        opacity: 0.58,
+        kind: "standard",
+        emissive: "#c9c3b6",
+        emissiveIntensity: 0.55,
+      })
+    : sharedBlockMaterial({ color, roughness: 0.82, metalness: 0, opacity: 1, kind: "standard" });
+  return <primitive object={material} attach="material" />;
+});
 
 function Hatchet({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.44, 0.04]} rotation={[0.15, 0, 0.35]}>
       <mesh position={[0, 0.16, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.045, 0.42, 0.045]} />
+        <SharedBox args={[0.045, 0.42, 0.045]} />
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0.08, 0.36, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.2, 0.1, 0.07]} />
+        <SharedBox args={[0.2, 0.1, 0.07]} />
         <meshStandardMaterial color="#8a8680" metalness={0.45} roughness={0.4} />
       </mesh>
     </group>
@@ -99,11 +115,11 @@ function Knife({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.42, 0.04]} rotation={[0.2, 0, 0.2]}>
       <mesh position={[0, 0.08, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.04, 0.16, 0.04]} />
+        <SharedBox args={[0.04, 0.16, 0.04]} />
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0, 0.24, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.05, 0.22, 0.02]} />
+        <SharedBox args={[0.05, 0.22, 0.02]} />
         <meshStandardMaterial color="#9a9286" metalness={0.55} roughness={0.32} />
       </mesh>
     </group>
@@ -114,15 +130,15 @@ function Sword({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.44, 0.04]} rotation={[0.12, 0, 0.28]}>
       <mesh position={[0, 0.1, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.045, 0.22, 0.045]} />
+        <SharedBox args={[0.045, 0.22, 0.045]} />
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0, 0.22, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.16, 0.04, 0.04]} />
+        <SharedBox args={[0.16, 0.04, 0.04]} />
         <meshStandardMaterial color="#8a8680" metalness={0.5} roughness={0.4} />
       </mesh>
       <mesh position={[0, 0.44, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.055, 0.46, 0.02]} />
+        <SharedBox args={[0.055, 0.46, 0.02]} />
         <meshStandardMaterial color="#c9c3b6" metalness={0.65} roughness={0.28} />
       </mesh>
     </group>
@@ -133,11 +149,11 @@ function Club({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.44, 0.04]} rotation={[0.15, 0, 0.3]}>
       <mesh position={[0, 0.22, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.055, 0.5, 0.055]} />
+        <SharedBox args={[0.055, 0.5, 0.055]} />
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0, 0.48, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.12, 0.16, 0.12]} />
+        <SharedBox args={[0.12, 0.16, 0.12]} />
         <Mat color="#6a4a32" ghost={ghost} />
       </mesh>
     </group>
@@ -148,11 +164,11 @@ function Mace({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.44, 0.04]} rotation={[0.15, 0, 0.3]}>
       <mesh position={[0, 0.2, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.045, 0.42, 0.045]} />
+        <SharedBox args={[0.045, 0.42, 0.045]} />
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0, 0.46, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.16, 0.16, 0.16]} />
+        <SharedBox args={[0.16, 0.16, 0.16]} />
         <meshStandardMaterial color="#8a8680" metalness={0.5} roughness={0.38} />
       </mesh>
     </group>
@@ -163,11 +179,11 @@ function Staff({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.5, 0.04]} rotation={[0.08, 0, 0.22]}>
       <mesh position={[0, 0.38, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.04, 0.9, 0.04]} />
+        <SharedBox args={[0.04, 0.9, 0.04]} />
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0, 0.86, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.1, 0.1, 0.1]} />
+        <SharedBox args={[0.1, 0.1, 0.1]} />
         <meshStandardMaterial color="#c9a36a" roughness={0.45} />
       </mesh>
     </group>
@@ -178,11 +194,11 @@ function Bow({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.04, -0.4, 0.02]} rotation={[0.1, 0.4, 0.15]}>
       <mesh position={[0, 0.28, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.04, 0.62, 0.04]} />
+        <SharedBox args={[0.04, 0.62, 0.04]} />
         <Mat color="#6a4a32" ghost={ghost} />
       </mesh>
       <mesh position={[0.08, 0.28, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.02, 0.56, 0.02]} />
+        <SharedBox args={[0.02, 0.56, 0.02]} />
         <meshStandardMaterial color="#ece6d8" roughness={0.6} />
       </mesh>
     </group>
@@ -193,11 +209,11 @@ function Torch({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.44, 0.04]} rotation={[0.18, 0, 0.25]}>
       <mesh position={[0, 0.18, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.045, 0.36, 0.045]} />
+        <SharedBox args={[0.045, 0.36, 0.045]} />
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0, 0.4, 0]}>
-        <boxGeometry args={[0.08, 0.1, 0.08]} />
+        <SharedBox args={[0.08, 0.1, 0.08]} />
         <meshStandardMaterial color="#a85a42" emissive="#a85a42" emissiveIntensity={ghost ? 0.2 : 0.8} />
       </mesh>
       {!ghost && <pointLight color="#e0b56a" intensity={1.6} distance={5.2} />}
@@ -210,11 +226,11 @@ function Shield({ id, ghost }: { id: ItemId; ghost: boolean }) {
   return (
     <group position={[-0.02, -0.28, 0.08]} rotation={[0.2, 0.15, -0.35]}>
       <mesh castShadow={!ghost}>
-        <boxGeometry args={[0.28, 0.38, 0.06]} />
+        <SharedBox args={[0.28, 0.38, 0.06]} />
         <meshStandardMaterial color={iron ? "#8a8680" : "#6a4a32"} metalness={iron ? 0.5 : 0.05} roughness={iron ? 0.4 : 0.85} />
       </mesh>
       <mesh position={[0, 0.02, 0.04]}>
-        <boxGeometry args={[0.1, 0.1, 0.04]} />
+        <SharedBox args={[0.1, 0.1, 0.04]} />
         <meshStandardMaterial color="#c9a36a" roughness={0.5} />
       </mesh>
     </group>
@@ -239,11 +255,11 @@ function Hoe({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.44, 0.04]} rotation={[0.15, 0, 0.35]}>
       <mesh position={[0, 0.16, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.04, 0.44, 0.04]} />
+        <SharedBox args={[0.04, 0.44, 0.04]} />
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0.1, 0.38, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.22, 0.05, 0.12]} />
+        <SharedBox args={[0.22, 0.05, 0.12]} />
         <meshStandardMaterial color="#8a8680" metalness={0.45} roughness={0.4} />
       </mesh>
     </group>
@@ -254,11 +270,11 @@ function Pick({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.44, 0.04]} rotation={[0.15, 0, 0.35]}>
       <mesh position={[0, 0.16, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.04, 0.44, 0.04]} />
+        <SharedBox args={[0.04, 0.44, 0.04]} />
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0.02, 0.38, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.28, 0.07, 0.06]} />
+        <SharedBox args={[0.28, 0.07, 0.06]} />
         <meshStandardMaterial color="#9a9286" metalness={0.5} roughness={0.38} />
       </mesh>
     </group>
@@ -369,37 +385,37 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
     <group position={[p.x, groundAt(p.x, p.z) + hover, p.z]} rotation={[0, p.facing, 0]}>
       {cloak && (
         <mesh position={[0, 0.62 + bob, 0.16]} castShadow={!ghost}>
-          <boxGeometry args={[0.52, 0.72, 0.12]} />
+          <SharedBox args={[0.52, 0.72, 0.12]} />
           <Mat color={cloakColor} ghost={ghost} />
         </mesh>
       )}
       <mesh position={[-0.1, 0.22 + bob, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.14, 0.4, 0.16]} />
+        <SharedBox args={[0.14, 0.4, 0.16]} />
         <Mat color={legs} ghost={ghost} />
       </mesh>
       <mesh position={[0.1, 0.22 + bob, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.14, 0.4, 0.16]} />
+        <SharedBox args={[0.14, 0.4, 0.16]} />
         <Mat color={legs} ghost={ghost} />
       </mesh>
       <mesh position={[-0.1, 0.04 + bob, 0.02]} castShadow={!ghost}>
-        <boxGeometry args={[0.16, 0.08, 0.22]} />
+        <SharedBox args={[0.16, 0.08, 0.22]} />
         <Mat color={feet} ghost={ghost} />
       </mesh>
       <mesh position={[0.1, 0.04 + bob, 0.02]} castShadow={!ghost}>
-        <boxGeometry args={[0.16, 0.08, 0.22]} />
+        <SharedBox args={[0.16, 0.08, 0.22]} />
         <Mat color={feet} ghost={ghost} />
       </mesh>
       <mesh position={[0, 0.58 + bob, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.42, 0.5, 0.26]} />
+        <SharedBox args={[0.42, 0.5, 0.26]} />
         <Mat color={chest} ghost={ghost} />
       </mesh>
       <group ref={left} position={[-0.28, 0.62 + bob, 0]} rotation={[walkSwing, 0, 0.12]}>
         <mesh position={[0, -0.16, 0]} castShadow={!ghost}>
-          <boxGeometry args={[0.12, 0.42, 0.12]} />
+          <SharedBox args={[0.12, 0.42, 0.12]} />
           <Mat color={chest} ghost={ghost} />
         </mesh>
         <mesh position={[0, -0.38, 0]} castShadow={!ghost}>
-          <boxGeometry args={[0.12, 0.1, 0.12]} />
+          <SharedBox args={[0.12, 0.1, 0.12]} />
           <Mat color={hands} ghost={ghost} />
         </mesh>
         {p.isPlayer && !ghost && <PalmFlame />}
@@ -407,18 +423,18 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
       </group>
       <group ref={right} position={[0.28, 0.62 + bob, 0]} rotation={[-walkSwing, 0, -0.12]}>
         <mesh position={[0, -0.16, 0]} castShadow={!ghost}>
-          <boxGeometry args={[0.12, 0.42, 0.12]} />
+          <SharedBox args={[0.12, 0.42, 0.12]} />
           <Mat color={chest} ghost={ghost} />
         </mesh>
         <mesh position={[0, -0.38, 0]} castShadow={!ghost}>
-          <boxGeometry args={[0.12, 0.1, 0.12]} />
+          <SharedBox args={[0.12, 0.1, 0.12]} />
           <Mat color={hands} ghost={ghost} />
         </mesh>
         {p.isPlayer && wear.main && intent.kind !== "cast" && <Held id={wear.main} ghost={ghost} />}
         {p.isPlayer && !ghost && <PalmFlame />}
       </group>
       <mesh position={[0, 0.98 + bob, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.28, 0.28, 0.26]} />
+        <SharedBox args={[0.28, 0.28, 0.26]} />
         <Mat color={look.skin} ghost={ghost} />
       </mesh>
       {!hood && (
@@ -428,18 +444,18 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
       )}
       {hood === "helm" || hood === "cap" ? (
         <mesh position={[0, 1.12 + bob, 0]} castShadow={!ghost}>
-          <boxGeometry args={[0.34, 0.16, 0.32]} />
+          <SharedBox args={[0.34, 0.16, 0.32]} />
           <Mat color={hoodColor} ghost={ghost} />
         </mesh>
       ) : hood ? (
         <mesh position={[0, 1.12 + bob, -0.02]} castShadow={!ghost}>
-          <boxGeometry args={[0.34, 0.2, 0.34]} />
+          <SharedBox args={[0.34, 0.2, 0.34]} />
           <Mat color={hoodColor} ghost={ghost} />
         </mesh>
       ) : null}
       {p.isPlayer && !ghost && (
         <mesh position={[0, 0.62 + bob, -0.14]} castShadow>
-          <boxGeometry args={[0.22, 0.18, 0.06]} />
+          <SharedBox args={[0.22, 0.18, 0.06]} />
           <meshStandardMaterial color="#c9a36a" roughness={0.7} />
         </mesh>
       )}
@@ -451,7 +467,7 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
             position={[at[0] + v.x * voxel, at[1] + v.y * voxel + bob, at[2] + v.z * voxel]}
             castShadow
           >
-            <boxGeometry args={[voxel, voxel, voxel]} />
+            <SharedBox args={[voxel, voxel, voxel]} />
             <Mat color={v.c} ghost={false} />
           </mesh>
         ));

@@ -128,12 +128,18 @@ export interface SharedBlockMaterialOptions {
   metalness: number;
   opacity: number;
   kind: "standard" | "basic";
+  emissive?: string;
+  emissiveIntensity?: number;
+  toneMapped?: boolean;
 }
 
 const blockMaterials = new Map<string, THREE.MeshStandardMaterial | THREE.MeshBasicMaterial>();
 
 export function sharedBlockMaterial(options: SharedBlockMaterialOptions) {
-  const key = `${options.kind}|${options.color}|${options.roughness}|${options.metalness}|${options.opacity}`;
+  const emissive = options.emissive ?? "#000000";
+  const emissiveIntensity = options.emissiveIntensity ?? 1;
+  const toneMapped = options.toneMapped ?? true;
+  const key = `${options.kind}|${options.color}|${options.roughness}|${options.metalness}|${options.opacity}|${emissive}|${emissiveIntensity}|${toneMapped}`;
   let material = blockMaterials.get(key);
   if (material) return material;
   const transparent = options.opacity < 1;
@@ -144,14 +150,18 @@ export function sharedBlockMaterial(options: SharedBlockMaterialOptions) {
           transparent,
           opacity: options.opacity,
           depthWrite: !transparent,
+          toneMapped,
         })
       : new THREE.MeshStandardMaterial({
           color: options.color,
           roughness: options.roughness,
           metalness: options.metalness,
+          emissive,
+          emissiveIntensity,
           transparent,
           opacity: options.opacity,
           depthWrite: !transparent,
+          toneMapped,
         });
   blockMaterials.set(key, material);
   return material;

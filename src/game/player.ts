@@ -16,8 +16,14 @@ import { completeObjective, log } from "./world.ts";
 import { effectiveMain, rareMods, rareName, rollKillRare, weaponDmg } from "./rare.ts";
 import type { ItemId, Person, ResourceInventory, ResourceNodeStateMap, SkillId, WearSlot, World } from "./types.ts";
 
+const playerPersonCache = new WeakMap<World, Person>();
+
 export function you(world: World) {
-  return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
+  const cached = playerPersonCache.get(world);
+  if (cached && (cached.isPlayer || cached.id === world.player.id)) return cached;
+  const person = world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
+  if (person) playerPersonCache.set(world, person);
+  return person;
 }
 
 export function isGhost(world: World) {

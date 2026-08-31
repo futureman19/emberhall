@@ -1,6 +1,15 @@
 import assert from "node:assert/strict";
 import test, { afterEach, beforeEach } from "node:test";
-import { CURRENT_SAVE_VERSION, SAVE_KEY, clearSave, hasSave, loadSave, writeSave } from "./save.ts";
+import {
+  CURRENT_SAVE_VERSION,
+  SAVE_KEY,
+  clearSave,
+  flushQueuedSave,
+  hasSave,
+  loadSave,
+  queueSave,
+  writeSave,
+} from "./save.ts";
 import { createWorld } from "./world.ts";
 import { addResource, makeResourceStackKey } from "./inventory/resources.ts";
 import { LOOK_SCHEMA } from "./look/types.ts";
@@ -25,6 +34,8 @@ class MemoryStorage {
 }
 
 const originalStorageDescriptor = Object.getOwnPropertyDescriptor(globalThis, "localStorage");
+const originalIdleDescriptor = Object.getOwnPropertyDescriptor(globalThis, "requestIdleCallback");
+const originalCancelIdleDescriptor = Object.getOwnPropertyDescriptor(globalThis, "cancelIdleCallback");
 
 beforeEach(() => {
   Object.defineProperty(globalThis, "localStorage", {
@@ -34,11 +45,16 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  flushQueuedSave();
   if (originalStorageDescriptor) {
     Object.defineProperty(globalThis, "localStorage", originalStorageDescriptor);
   } else {
     delete (globalThis as { localStorage?: Storage }).localStorage;
   }
+  if (originalIdleDescriptor) Object.defineProperty(globalThis, "requestIdleCallback", originalIdleDescriptor);
+  else delete (globalThis as { requestIdleCallback?: typeof requestIdleCallback }).requestIdleCallback;
+  if (originalCancelIdleDescriptor) Object.defineProperty(globalThis, "cancelIdleCallback", originalCancelIdleDescriptor);
+  else delete (globalThis as { cancelIdleCallback?: typeof cancelIdleCallback }).cancelIdleCallback;
 });
 
 const persistedFixture = (() => {
@@ -107,6 +123,55 @@ test("save - writes an explicit schema version without generated tiles", () => {
 
   clearSave();
   assert.equal(hasSave(), false);
+});
+
+test("save - queued persistence snapshots the cadence state and serializes only during idle", () => {
+  let idle: IdleRequestCallback | null = null;
+  Object.defineProperty(globalThis, "requestIdleCallback", {
+    configurable: true,
+    value: (callback: IdleRequestCallback) => {
+      idle = callback;
+      return 41;
+    },
+  });
+  Object.defineProperty(globalThis, "cancelIdleCallback", { configurable: true, value: () => undefined });
+  const world = createWorld();
+  world.gold = 111;
+  queueSave(world);
+  world.gold = 222;
+  assert.equal(localStorage.getItem(SAVE_KEY), null, "active frame performs no stringify or storage write");
+  assert.ok(idle);
+  (idle as unknown as IdleRequestCallback)({ didTimeout: false, timeRemaining: () => 10 });
+  assert.equal(JSON.parse(localStorage.getItem(SAVE_KEY)!).gold, 111, "idle write keeps the exact queued snapshot");
+});
+
+test("save - lifecycle flush commits a queued snapshot before idle", () => {
+  Object.defineProperty(globalThis, "requestIdleCallback", { configurable: true, value: () => 42 });
+  Object.defineProperty(globalThis, "cancelIdleCallback", { configurable: true, value: () => undefined });
+  const world = createWorld();
+  world.gold = 333;
+  queueSave(world);
+  flushQueuedSave();
+  assert.equal(JSON.parse(localStorage.getItem(SAVE_KEY)!).gold, 333);
+});
+
+test("save - a newer immediate write cannot be overwritten by an older idle callback", () => {
+  let idle: IdleRequestCallback | null = null;
+  Object.defineProperty(globalThis, "requestIdleCallback", {
+    configurable: true,
+    value: (callback: IdleRequestCallback) => {
+      idle = callback;
+      return 43;
+    },
+  });
+  Object.defineProperty(globalThis, "cancelIdleCallback", { configurable: true, value: () => undefined });
+  const world = createWorld();
+  world.gold = 444;
+  queueSave(world);
+  world.gold = 555;
+  writeSave(world);
+  (idle as unknown as IdleRequestCallback)({ didTimeout: false, timeRemaining: () => 10 });
+  assert.equal(JSON.parse(localStorage.getItem(SAVE_KEY)!).gold, 555);
 });
 
 test("save - current-version write and load round-trip preserves representative state", () => {
