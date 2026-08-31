@@ -9,7 +9,7 @@
 - Legal combinations enumerated: **22,656**; cap violations: **0**.
 - Max-skill bow workmanship: ordinary 67.2%, fine 16.4%, exceptional 16.4%.
 - Max-skill sword workmanship: ordinary 68.0%, fine 16.0%, exceptional 16.0%.
-- Representative save payload: **18,802 bytes**; largest Vault inscription: **780 bytes**.
+- Representative save payload: **18,808 bytes**; largest Vault inscription: **779 bytes**.
 - Desktop/mobile browser journey: **PASS**.
 
 ## Acquisition model

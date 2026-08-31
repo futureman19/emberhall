@@ -26,6 +26,16 @@ class MemoryStorage {
   removeItem(key: string): void { this.#values.delete(key); }
 }
 
+function deterministicWorld() {
+  const original = Math.random;
+  Math.random = () => 0.424242;
+  try {
+    return createWorld();
+  } finally {
+    Math.random = original;
+  }
+}
+
 function percentile(values: number[], p: number): number {
   const sorted = [...values].sort((a, b) => a - b);
   return sorted[Math.min(sorted.length - 1, Math.floor((sorted.length - 1) * p))]!;
@@ -150,7 +160,7 @@ function skillCurves() {
 }
 
 function representativeItems() {
-  const world = createWorld();
+  const world = deterministicWorld();
   const builds: Array<{ label: string; formId: "bow" | "sword"; workmanship: Workmanship; components: CraftedComponent[]; inlays: GemInlay[] }> = [
     { label: "common", formId: "bow", workmanship: "ordinary", components: [{ role: "body", resourceId: "oak", form: "log", grade: "rough", amount: 5 }, { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 }], inlays: [] },
     { label: "skilled", formId: "bow", workmanship: "fine", components: [{ role: "body", resourceId: "oak", form: "board", grade: "choice", amount: 5 }, { role: "binding", resourceId: "fine_linen", form: "cloth", grade: "choice", amount: 1 }], inlays: [] },
@@ -166,7 +176,7 @@ function representativeItems() {
 }
 
 function payloadSizes(items: ReturnType<typeof representativeItems>) {
-  const world = createWorld();
+  const world = deterministicWorld();
   world.player.rares.push(...items.map(({ item }) => structuredClone(item)));
   const storage = new MemoryStorage();
   Object.defineProperty(globalThis, "localStorage", { configurable: true, value: storage });
