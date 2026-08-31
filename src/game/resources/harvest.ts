@@ -53,6 +53,7 @@ export interface HarvestIdentificationInput {
   readonly ty: number;
   readonly nodeKind: ResourceNodeKind;
   readonly effectiveSkill: number;
+  readonly discovered: boolean;
 }
 
 export interface HarvestAssessmentInput extends HarvestIdentificationInput {
@@ -113,7 +114,7 @@ export type HarvestAssessment =
       message: string;
     }>;
 
-const IDENTIFICATION_FIELDS = ["seed", "tx", "ty", "nodeKind", "effectiveSkill"] as const;
+const IDENTIFICATION_FIELDS = ["seed", "tx", "ty", "nodeKind", "effectiveSkill", "discovered"] as const;
 const ASSESSMENT_FIELDS = [...IDENTIFICATION_FIELDS, "toolTier"] as const;
 const TOOL_FIELDS = ["nodeKind", "tool"] as const;
 const TOOL_TIER_FIELDS = ["availableTier", "requiredTier"] as const;
@@ -160,6 +161,7 @@ function validateNodeKind(value: unknown): asserts value is ResourceNodeKind {
 
 interface ParsedIdentificationInput {
   readonly effectiveSkill: number;
+  readonly discovered: boolean;
   readonly identity: ResourceNodeIdentity;
 }
 
@@ -170,6 +172,7 @@ interface ParsedAssessmentInput extends ParsedIdentificationInput {
 function parseIdentificationInput(input: unknown): ParsedIdentificationInput {
   const snapshot = snapshotOwnDataFields(input, IDENTIFICATION_FIELDS);
   validateEffectiveSkill(snapshot.effectiveSkill);
+  if (typeof snapshot.discovered !== "boolean") throw new Error("discovered must be boolean");
   // Task 5 remains the sole validator/resolver for seed, coordinate, kind,
   // family, and node-owned quality. No harvest-local identity roll exists.
   const resolution = resolveResourceNode({
@@ -180,6 +183,7 @@ function parseIdentificationInput(input: unknown): ParsedIdentificationInput {
   });
   return Object.freeze({
     effectiveSkill: snapshot.effectiveSkill,
+    discovered: snapshot.discovered,
     identity: resolution.identity,
   });
 }
@@ -187,6 +191,7 @@ function parseIdentificationInput(input: unknown): ParsedIdentificationInput {
 function parseAssessmentInput(input: unknown): ParsedAssessmentInput {
   const snapshot = snapshotOwnDataFields(input, ASSESSMENT_FIELDS);
   validateEffectiveSkill(snapshot.effectiveSkill);
+  if (typeof snapshot.discovered !== "boolean") throw new Error("discovered must be boolean");
   validateTier("toolTier", snapshot.toolTier);
   const resolution = resolveResourceNode({
     seed: snapshot.seed as number,
@@ -196,6 +201,7 @@ function parseAssessmentInput(input: unknown): ParsedAssessmentInput {
   });
   return Object.freeze({
     effectiveSkill: snapshot.effectiveSkill,
+    discovered: snapshot.discovered,
     toolTier: snapshot.toolTier,
     identity: resolution.identity,
   });
@@ -212,7 +218,7 @@ function identifiedLabel(identity: ResourceNodeIdentity): string {
 function identifiedFromSnapshot(input: ParsedIdentificationInput): HarvestIdentification {
   const { identity } = input;
   const spawn = RESOURCE_CATALOG[identity.resourceId].spawn!;
-  if (input.effectiveSkill < spawn.identifySkill.minimum) {
+  if (!input.discovered && input.effectiveSkill < spawn.identifySkill.minimum) {
     return Object.freeze({ status: "unknown", message: UNKNOWN_RESOURCE_MESSAGE });
   }
   return Object.freeze({ status: "identified", identity, label: identifiedLabel(identity) });

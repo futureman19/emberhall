@@ -4,6 +4,7 @@ import { verbsFor } from "./context.ts";
 import { makeResourceStackKey, resourceCount } from "./inventory/resources.ts";
 import { setWorld } from "./live.ts";
 import { commandChop, commandMine, tickPlayer, you } from "./player.ts";
+import { resolveResourceNode } from "./resources/nodes.ts";
 import { loadSave, writeSave } from "./save.ts";
 import { useGame } from "./store.ts";
 import type { TileKind, World } from "./types.ts";
@@ -116,6 +117,7 @@ function harvestState(world: World) {
   return {
     pack: structuredClone(world.player.pack),
     resources: structuredClone(world.player.resources),
+    resourceNodes: structuredClone(world.resourceNodes),
     tiles: JSON.stringify(world.tiles),
     scars: structuredClone(world.scars),
     landRev: world.landRev,
@@ -184,6 +186,9 @@ test("harvest - a failed skill roll changes no terrain or inventory state", () =
   assert.equal(world.landRev, landRevBefore);
   assert.deepEqual(world.player.pack, packBefore);
   assert.deepEqual(world.player.resources, resourcesBefore);
+  const id = resolveResourceNode({ seed: world.seed, tx, ty, nodeKind: "tree" }).identity.nodeId;
+  assert.equal(world.resourceNodes[id]?.discoveredAtHour, world.hour);
+  assert.equal(world.resourceNodes[id]?.depletedAtHour, null);
 });
 
 test("harvest - invalid or missing targets clear intent without yielding", () => {
@@ -221,6 +226,9 @@ test("harvest - successful depletion scars once and later ticks do not duplicate
     resourceCount(world.player.resources, makeResourceStackKey("oak", "log", "rough")),
     1,
   );
+  const id = resolveResourceNode({ seed: world.seed, tx, ty, nodeKind: "tree" }).identity.nodeId;
+  assert.equal(world.resourceNodes[id]?.discoveredAtHour, world.hour);
+  assert.equal(world.resourceNodes[id]?.depletedAtHour, world.hour);
 
   withRandom(0, () => tickPlayer(world, 2));
   assert.deepEqual(world.scars, { [`${tx},${ty}`]: { kind: "dirt" } });
@@ -251,6 +259,9 @@ test("harvest - save reload preserves the depletion scar and typed result", () =
       resourceCount(loaded.player.resources, makeResourceStackKey("iron_ore", "ore", "rough")),
       1,
     );
+    const id = resolveResourceNode({ seed: world.seed, tx, ty, nodeKind: "rock" }).identity.nodeId;
+    assert.deepEqual(loaded.resourceNodes[id], world.resourceNodes[id]);
+    assert.equal(loaded.resourceNodes[id]?.depletedAtHour, world.hour);
   });
 });
 
@@ -283,7 +294,16 @@ test("harvest - unknown and identified gate rejects disclose exactly the allowed
     "You identify Pristine Redwood, but need 50 Lumberjacking to extract it.",
   );
   assert.equal(identified.world.player.intent.kind, "none");
-  assert.deepEqual(harvestState(identified.world), identifiedBefore);
+  const identifiedId = resolveResourceNode({
+    seed: identified.world.seed,
+    tx: identified.tx,
+    ty: identified.ty,
+    nodeKind: "tree",
+  }).identity.nodeId;
+  const identifiedAfter = harvestState(identified.world);
+  assert.deepEqual({ ...identifiedAfter, resourceNodes: identifiedBefore.resourceNodes }, identifiedBefore);
+  assert.equal(identified.world.resourceNodes[identifiedId]?.discoveredAtHour, identified.world.hour);
+  assert.equal(identified.world.resourceNodes[identifiedId]?.depletedAtHour, null);
 
   const wrongTool = harvestWorld("tree", 1_419, 188, 88);
   wrongTool.world.player.skills.lumberjack = 50;
@@ -296,7 +316,16 @@ test("harvest - unknown and identified gate rejects disclose exactly the allowed
     "You identify Pristine Redwood, but need a tier 2 tool to extract it.",
   );
   assert.equal(wrongTool.world.player.intent.kind, "none");
-  assert.deepEqual(harvestState(wrongTool.world), wrongToolBefore);
+  const wrongToolId = resolveResourceNode({
+    seed: wrongTool.world.seed,
+    tx: wrongTool.tx,
+    ty: wrongTool.ty,
+    nodeKind: "tree",
+  }).identity.nodeId;
+  const wrongToolAfter = harvestState(wrongTool.world);
+  assert.deepEqual({ ...wrongToolAfter, resourceNodes: wrongToolBefore.resourceNodes }, wrongToolBefore);
+  assert.equal(wrongTool.world.resourceNodes[wrongToolId]?.discoveredAtHour, wrongTool.world.hour);
+  assert.equal(wrongTool.world.resourceNodes[wrongToolId]?.depletedAtHour, null);
 });
 
 test("harvest - typed inventory guard errors leave the complete node and player state unchanged", () => {
@@ -336,8 +365,9 @@ test("harvest - typed inventory guard errors leave the complete node and player 
   assert.equal(you(unrelated.world)!.facing, unrelatedPersonBefore!.facing);
 });
 
-test("harvest - context labels reveal stable identity only at identification skill", () => {
+test("harvest - context discovery persists once and later reveals the same identity below skill", () => {
   const { world, tx, ty } = harvestWorld("tree", 1_419, 188, 88);
+  world.hour = 12;
   world.player.skills.lumberjack = 34;
   setWorld(world);
   assert.equal(
@@ -346,6 +376,7 @@ test("harvest - context labels reveal stable identity only at identification ski
     )?.label,
     "Chop",
   );
+  assert.deepEqual(world.resourceNodes, {});
   world.player.skills.lumberjack = 35;
   assert.equal(
     verbsFor({ kind: "tile", id: `${tx},${ty}`, tx, ty, label: "tree" }).find(
@@ -353,6 +384,25 @@ test("harvest - context labels reveal stable identity only at identification ski
     )?.label,
     "Chop Pristine Redwood",
   );
+  const id = resolveResourceNode({ seed: world.seed, tx, ty, nodeKind: "tree" }).identity.nodeId;
+  assert.deepEqual(world.resourceNodes[id], {
+    nodeId: id,
+    tx,
+    ty,
+    nodeKind: "tree",
+    discoveredAtHour: 12,
+    depletedAtHour: null,
+  });
+  world.hour = 19;
+  world.player.skills.lumberjack = 0;
+  assert.equal(
+    verbsFor({ kind: "tile", id: `${tx},${ty}`, tx, ty, label: "tree" }).find(
+      ({ verb }) => verb === "chop",
+    )?.label,
+    "Chop Pristine Redwood",
+  );
+  assert.equal(world.resourceNodes[id]?.discoveredAtHour, 12);
+  assert.equal(Object.keys(world.resourceNodes).length, 1);
 });
 
 test("harvest - exact journal result is bridged unchanged to the toast", () => {

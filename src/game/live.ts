@@ -9,6 +9,7 @@ import { mulberry32 } from "./rng.ts";
 import { ensureWeather, weatherSnap } from "./weather.ts";
 import { ensureCity } from "./city.ts";
 import { createStubWorld, createWorld, seedFieldStones, seedTownNpcs } from "./world.ts";
+import { createResourceNodeStateMap, regrowResourceNodes } from "./resources/state.ts";
 import type { SkillId, Snapshot, World } from "./types.ts";
 
 function withFauna(w: World) {
@@ -20,6 +21,7 @@ function withFauna(w: World) {
     for (const b of w.buildings) if (b.kind === "farm") seedFarmPlots(w, b.tx, b.ty);
   }
   if (w.scars == null) w.scars = {};
+  if (w.resourceNodes == null) w.resourceNodes = createResourceNodeStateMap();
   if (w.landRev == null) w.landRev = 1;
   if (w.tiles.length) seedFieldStones(w);
   if (w.tiles.length) paintBiomes(w);
@@ -73,6 +75,7 @@ function withFauna(w: World) {
   if (w.tiles.length) seedTownNpcs(w, mulberry32(w.seed + 91));
   ensureCity(w);
   ensureWeather(w);
+  regrowResourceNodes(w);
   return w;
 }
 
@@ -90,6 +93,7 @@ export function resetWorld() {
 }
 
 export function snapshot(w: World = world): Snapshot {
+  regrowResourceNodes(w);
   const visible = w.people.filter((p) => p.task !== "away");
   const self = you(w);
   const region = regionAt(Math.round(self?.x ?? COURT.tx), Math.round(self?.z ?? COURT.ty));

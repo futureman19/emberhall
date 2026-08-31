@@ -14,10 +14,15 @@ import {
   createResourceInventory,
   parseResourceInventory,
 } from "./inventory/resources.ts";
+import {
+  createResourceNodeStateMap,
+  parseResourceNodeStateMapAtHour,
+  regrowResourceNodes,
+} from "./resources/state.ts";
 import type { World } from "./types.ts";
 
 export const SAVE_KEY = "emberhall-save-v4";
-export const CURRENT_SAVE_VERSION = 2;
+export const CURRENT_SAVE_VERSION = 3;
 
 type SaveRecord = Record<string, unknown>;
 
@@ -193,6 +198,16 @@ function isRareItem(value: unknown): boolean {
 function isResourceInventory(value: unknown): boolean {
   try {
     parseResourceInventory(value);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function isResourceNodeState(value: unknown, seed: unknown, hour: unknown): boolean {
+  if (typeof seed !== "number" || !Number.isSafeInteger(seed) || typeof hour !== "number") return false;
+  try {
+    parseResourceNodeStateMapAtHour({ seed, hour, resourceNodes: value });
     return true;
   } catch {
     return false;
@@ -390,7 +405,8 @@ function isStoredTiles(value: unknown): boolean {
 function isCurrentSave(save: SaveRecord): boolean {
   return (
     save.saveVersion === CURRENT_SAVE_VERSION &&
-    isFiniteNumber(save.seed) &&
+    typeof save.seed === "number" &&
+    Number.isSafeInteger(save.seed) &&
     isFiniteNumber(save.hour) &&
     isFiniteNumber(save.speed) &&
     SPEEDS.has(save.speed) &&
@@ -408,6 +424,8 @@ function isCurrentSave(save: SaveRecord): boolean {
     isArrayOf(save.objectives, isObjective) &&
     isArrayOf(save.quests, isQuest) &&
     isNumberRecord(save.rep) &&
+    Object.hasOwn(save, "resourceNodes") &&
+    isResourceNodeState(save.resourceNodes, save.seed, save.hour) &&
     isScars(save.scars) &&
     isBooleanRecord(save.seen) &&
     isFiniteNumber(save.seenRev) &&
@@ -423,18 +441,23 @@ function isCurrentSave(save: SaveRecord): boolean {
 function migrateSave(value: unknown): SaveRecord | null {
   if (!isRecord(value)) return null;
   if (value.saveVersion === CURRENT_SAVE_VERSION) return value;
-  if (value.saveVersion !== 1) return null;
+  if (value.saveVersion !== 1 && value.saveVersion !== 2) return null;
 
-  // Clone at the version boundary, then add only the new field. This generic
-  // object copy deliberately carries every existing/optional nested field,
-  // including Person.look, without migration-specific rewriting.
+  // Clone once at the version boundary. Generic copies deliberately carry
+  // every existing/optional nested field, including Person.look.
   const migrated = structuredClone(value);
-  if (!isRecord(migrated.player)) return migrated;
-  migrated.player = {
-    ...migrated.player,
-    resources: createResourceInventory(),
-  };
-  migrated.saveVersion = CURRENT_SAVE_VERSION;
+  if (migrated.saveVersion === 1) {
+    if (!isRecord(migrated.player)) return migrated;
+    migrated.player = {
+      ...migrated.player,
+      resources: createResourceInventory(),
+    };
+    migrated.saveVersion = 2;
+  }
+  if (migrated.saveVersion === 2) {
+    migrated.resourceNodes = createResourceNodeStateMap();
+    migrated.saveVersion = 3;
+  }
   return migrated;
 }
 
@@ -456,19 +479,24 @@ export function clearSave() {
 
 export function writeSave(world: World) {
   try {
+    const resources = parseResourceInventory(world.player.resources);
+    const resourceNodes = parseResourceNodeStateMapAtHour({
+      seed: world.seed,
+      hour: world.hour,
+      resourceNodes: world.resourceNodes,
+    });
     const { tiles: _tiles, player, ...rest } = world;
-    const resources = parseResourceInventory(player.resources);
-    localStorage.setItem(
-      SAVE_KEY,
-      JSON.stringify({
-        ...rest,
-        player: { ...player, resources },
-        saveVersion: CURRENT_SAVE_VERSION,
-        tiles: null,
-      }),
-    );
+    const payload = {
+      ...rest,
+      resourceNodes,
+      player: { ...player, resources },
+      saveVersion: CURRENT_SAVE_VERSION,
+      tiles: null,
+    };
+    if (!isCurrentSave(payload)) return;
+    localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
   } catch {
-    /* quota */
+    /* invalid runtime state or quota */
   }
 }
 
@@ -484,6 +512,11 @@ export function loadSave(): World | null {
 
     const { saveVersion: _saveVersion, ...storedWorld } = migrated;
     const data = storedWorld as unknown as World;
+    data.resourceNodes = parseResourceNodeStateMapAtHour({
+      seed: data.seed,
+      hour: data.hour,
+      resourceNodes: data.resourceNodes,
+    });
     data.tiles = generateTiles(data.seed);
     if (data.scars) {
       for (const [key, scar] of Object.entries(data.scars)) {
@@ -493,6 +526,7 @@ export function loadSave(): World | null {
         if (tile && scar.h != null) tile.h = scar.h;
       }
     }
+    regrowResourceNodes(data);
     data.restored = true;
     return data;
   } catch {

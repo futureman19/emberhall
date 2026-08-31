@@ -7,6 +7,7 @@ import { tickPiles } from "./piles.ts";
 import { tickCampfires } from "./campfire.ts";
 import { tickPets } from "./pets.ts";
 import { tickPlayer, you } from "./player.ts";
+import { regrowResourceNodes } from "./resources/state.ts";
 import { tickWeather } from "./weather.ts";
 import { completeObjective, log, revealAround } from "./world.ts";
 import type { Person, Speed, World } from "./types.ts";
@@ -40,6 +41,8 @@ export function tickWorld(world: World, realDt: number) {
   const dt = Math.min(realDt, 0.1) * world.speed;
   world.hour += dt / SECONDS_PER_HOUR;
   world.tickCount += 1;
+  // Sparse node metadata is the clock index: no terrain-wide scan is needed.
+  regrowResourceNodes(world);
 
   for (const p of world.people) {
     p.bob += dt * (p.path.length ? 10 : 4);

@@ -47,6 +47,7 @@ function bareWorld(seed = 7): World {
     objectives: [],
     quests: [],
     rep: {},
+    resourceNodes: {},
     scars: {},
     seen: {},
     seenRev: 0,

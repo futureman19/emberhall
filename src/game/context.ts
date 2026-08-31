@@ -3,20 +3,38 @@ import { hasBook } from "./magery.ts";
 import { getWorld } from "./live.ts";
 import { effSkill } from "./player.ts";
 import { identifyHarvestNode } from "./resources/harvest.ts";
+import { discoverResourceNode, hasDiscoveredResourceNode } from "./resources/state.ts";
 import type { CtxTarget, CtxVerb } from "./types.ts";
 
 function harvestVerbLabel(tx: number, ty: number, nodeKind: "tree" | "rock"): string {
   const world = getWorld();
   const verb = nodeKind === "tree" ? "Chop" : "Mine";
   const skill = nodeKind === "tree" ? "lumberjack" : "mining";
+  const discovered = hasDiscoveredResourceNode({
+    seed: world.seed,
+    tx,
+    ty,
+    nodeKind,
+    resourceNodes: world.resourceNodes,
+  });
   const identification = identifyHarvestNode({
     seed: world.seed,
     tx,
     ty,
     nodeKind,
     effectiveSkill: effSkill(world, skill),
+    discovered,
   });
-  return identification.status === "identified" ? `${verb} ${identification.label}` : verb;
+  if (identification.status !== "identified") return verb;
+  world.resourceNodes = discoverResourceNode({
+    seed: world.seed,
+    tx,
+    ty,
+    nodeKind,
+    hour: world.hour,
+    resourceNodes: world.resourceNodes,
+  });
+  return `${verb} ${identification.label}`;
 }
 
 export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {

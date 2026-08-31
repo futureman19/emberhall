@@ -159,6 +159,19 @@ export interface ResourceInventory {
   stacks: Partial<Record<ResourceStackKey, number>>;
 }
 
+/** Persistent metadata only; family and quality always resolve from Task 5. */
+export interface ResourceNodeState {
+  nodeId: string;
+  tx: number;
+  ty: number;
+  nodeKind: "tree" | "rock";
+  discoveredAtHour: number;
+  depletedAtHour: number | null;
+}
+
+/** Sparse by canonical node id: undiscovered tiles have no entry. */
+export type ResourceNodeStateMap = Record<string, ResourceNodeState>;
+
 export type SpellId =
   | "nightsight"
   | "heal"
@@ -441,6 +454,7 @@ export interface World {
   objectives: Objective[];
   quests: { id: string; title: string }[];
   rep: Record<string, number>;
+  resourceNodes: ResourceNodeStateMap;
   scars: Record<string, { kind: TileKind; h?: number }>;
   seen: Record<string, boolean>;
   seenRev: number;

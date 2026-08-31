@@ -18,8 +18,8 @@ function assertDeepFrozen(value: unknown, path = "root"): void {
   for (const [key, nested] of Object.entries(value)) assertDeepFrozen(nested, `${path}.${key}`);
 }
 
-const pristineRedwood = { seed: 1_419, tx: 188, ty: 88, nodeKind: "tree" } as const;
-const perfectRuby = { seed: 532, tx: 470, ty: 420, nodeKind: "rock" } as const;
+const pristineRedwood = { seed: 1_419, tx: 188, ty: 88, nodeKind: "tree", discovered: false } as const;
+const perfectRuby = { seed: 532, tx: 470, ty: 420, nodeKind: "rock", discovered: false } as const;
 
 function assertCompileTimeHarvestYieldCorrelation(): void {
   // @ts-expect-error A gem cannot use the timber form even with a valid gem key and clarity.
@@ -68,6 +68,10 @@ test("identification hides family and ceiling below the threshold, then reveals 
   });
   assertDeepFrozen(unknown);
   assertDeepFrozen(identified);
+
+  const remembered = identifyHarvestNode({ ...pristineRedwood, effectiveSkill: 0, discovered: true });
+  assert.equal(remembered.status, "identified");
+  if (remembered.status === "identified") assert.deepEqual(remembered.identity, identified.identity);
 });
 
 test("extraction threshold is checked before tool tier and rejects with exact identified messages", () => {
@@ -113,7 +117,7 @@ test("recovered grade is capped by both node ceiling and the near-threshold harv
   if (atPristine.status !== "ready") return;
   assert.equal(atPristine.yield.quality, "pristine");
 
-  const soundNode = assessResourceHarvest({ seed: 1, tx: 188, ty: 88, nodeKind: "tree", effectiveSkill: 100, toolTier: 2 });
+  const soundNode = assessResourceHarvest({ seed: 1, tx: 188, ty: 88, nodeKind: "tree", effectiveSkill: 100, discovered: false, toolTier: 2 });
   assert.equal(soundNode.status, "ready");
   if (soundNode.status !== "ready") return;
   assert.equal(soundNode.identity.resourceId, "redwood");

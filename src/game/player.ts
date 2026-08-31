@@ -10,10 +10,11 @@ import { mulberry32 } from "./rng.ts";
 import { successChance, tryGain } from "./skills.ts";
 import { addResource, parseResourceInventory } from "./inventory/resources.ts";
 import { assessResourceHarvest, harvestToolTier, type HarvestAssessment } from "./resources/harvest.ts";
+import { depleteResourceNode, discoverResourceNode, hasDiscoveredResourceNode } from "./resources/state.ts";
 import { playSfx } from "./vale-sfx.ts";
 import { completeObjective, log } from "./world.ts";
 import { effectiveMain, rareMods, rareName, rollKillRare, weaponDmg } from "./rare.ts";
-import type { ItemId, Person, ResourceInventory, SkillId, WearSlot, World } from "./types.ts";
+import type { ItemId, Person, ResourceInventory, ResourceNodeStateMap, SkillId, WearSlot, World } from "./types.ts";
 
 export function you(world: World) {
   return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
@@ -423,26 +424,68 @@ function isAdjacent(ax: number, ay: number, bx: number, by: number) {
 interface PreparedResourceHarvest {
   readonly assessment: HarvestAssessment | null;
   readonly resourcesAfterSuccess: ResourceInventory;
+  readonly resourceNodesAfterIdentification: ResourceNodeStateMap;
+  readonly resourceNodesAfterSuccess: ResourceNodeStateMap;
 }
 
 function prepareResourceHarvest(world: World, nodeKind: "tree" | "rock"): PreparedResourceHarvest {
   const resourcesAfterSuccess = parseResourceInventory(world.player.resources);
   const { tx, ty } = world.player.intent;
   const t = world.tiles[ty]?.[tx];
-  if (!t || t.kind !== nodeKind) return { assessment: null, resourcesAfterSuccess };
+  if (!t || t.kind !== nodeKind) {
+    return {
+      assessment: null,
+      resourcesAfterSuccess,
+      resourceNodesAfterIdentification: world.resourceNodes,
+      resourceNodesAfterSuccess: world.resourceNodes,
+    };
+  }
   const skill = nodeKind === "tree" ? "lumberjack" : "mining";
+  const discovered = hasDiscoveredResourceNode({
+    seed: world.seed,
+    tx,
+    ty,
+    nodeKind,
+    resourceNodes: world.resourceNodes,
+  });
   const assessment = assessResourceHarvest({
     seed: world.seed,
     tx,
     ty,
     nodeKind,
     effectiveSkill: effSkill(world, skill),
+    discovered,
     toolTier: harvestToolTier({ nodeKind, tool: inHand(world) }),
   });
+  const resourceNodesAfterIdentification =
+    assessment.status === "unknown"
+      ? world.resourceNodes
+      : discoverResourceNode({
+          seed: world.seed,
+          tx,
+          ty,
+          nodeKind,
+          hour: world.hour,
+          resourceNodes: world.resourceNodes,
+        });
+  let resourceNodesAfterSuccess = resourceNodesAfterIdentification;
   if (assessment.status === "ready") {
     addResource(resourcesAfterSuccess, assessment.yield.key, assessment.yield.quantity);
+    resourceNodesAfterSuccess = depleteResourceNode({
+      seed: world.seed,
+      tx,
+      ty,
+      nodeKind,
+      hour: world.hour,
+      resourceNodes: resourceNodesAfterIdentification,
+    });
   }
-  return { assessment, resourcesAfterSuccess };
+  return {
+    assessment,
+    resourcesAfterSuccess,
+    resourceNodesAfterIdentification,
+    resourceNodesAfterSuccess,
+  };
 }
 
 function resourceHarvestNow(world: World, nodeKind: "tree" | "rock", prepared: PreparedResourceHarvest) {
@@ -455,12 +498,18 @@ function resourceHarvestNow(world: World, nodeKind: "tree" | "rock", prepared: P
 
   const skill = nodeKind === "tree" ? "lumberjack" : "mining";
   const effectiveSkill = effSkill(world, skill);
-  const { assessment, resourcesAfterSuccess } = prepared;
+  const {
+    assessment,
+    resourcesAfterSuccess,
+    resourceNodesAfterIdentification,
+    resourceNodesAfterSuccess,
+  } = prepared;
   if (!assessment) throw new Error("prepared harvest target changed before commit");
   if (assessment.status !== "ready") {
     // Permanent gates stop this work order once, instead of journaling the
-    // same rejection every beat. Node, scar, inventory, and revision remain
-    // untouched, and no chance or skill-gain roll has occurred.
+    // same rejection every beat. Identification persists independently; scar,
+    // inventory, depletion, and revision remain untouched, with no chance roll.
+    world.resourceNodes = resourceNodesAfterIdentification;
     world.player.intent.kind = "none";
     return assessment.message;
   }
@@ -470,12 +519,14 @@ function resourceHarvestNow(world: World, nodeKind: "tree" | "rock", prepared: P
   const chance = successChance(effectiveSkill, nodeKind === "tree" ? 12 : 14);
   const ok = Math.random() < chance;
   if (!ok) {
+    world.resourceNodes = resourceNodesAfterIdentification;
     const gain = tryGain(world, skill, false, true);
     const failure = nodeKind === "tree" ? "The axe glances." : "Dust.";
     return gain ? `${failure.slice(0, -1)}. ${gain}.` : failure;
   }
 
   world.player.resources = resourcesAfterSuccess;
+  world.resourceNodes = resourceNodesAfterSuccess;
   t.kind = "dirt";
   world.scars[`${tx},${ty}`] = { kind: "dirt" };
   world.landRev += 1;

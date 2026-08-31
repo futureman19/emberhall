@@ -18,6 +18,7 @@ import { buildingBox, siteError } from "./building-size.ts";
 import { seedFarmPlots } from "./farm.ts";
 import { initialWeather } from "./weather.ts";
 import { createResourceInventory } from "./inventory/resources.ts";
+import { createResourceNodeStateMap } from "./resources/state.ts";
 import type { BuildingKind, ClassId, Person, Tile, TileKind, World } from "./types.ts";
 
 let nidAcc = 1;
@@ -357,6 +358,7 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
     ],
     quests: [],
     rep: {},
+    resourceNodes: createResourceNodeStateMap(),
     scars: {},
     seen: {},
     seenRev: 0,
