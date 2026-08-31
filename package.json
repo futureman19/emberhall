@@ -19,7 +19,7 @@
     "preview:stop": "node scripts/preview.mjs stop",
     "typecheck": "tsc --noEmit",
     "check:auth": "node scripts/check-auth-invariant.mjs",
-    "test": "node --test 'scripts/**/*.test.mjs' && node --experimental-strip-types --test src/lib/app-data/app-data.test.ts src/lib/auth/gate-identity.test.ts src/lib/client/client.server.test.ts src/game/weather.test.ts src/game/city.test.ts src/game/tags.test.ts src/game/vault.test.ts src/game/rare.test.ts src/game/campfire.test.ts src/game/pets.test.ts src/game/loot.test.ts src/game/save.test.ts src/game/harvest.test.ts src/game/resources/catalog.test.ts src/game/crafting/resolve.test.ts src/game/intro/beats.test.ts src/game/look/look.test.ts src/game/look/parts.test.ts src/game/look/save-roundtrip.test.ts",
+    "test": "node --test 'scripts/**/*.test.mjs' && node --experimental-strip-types --test src/lib/app-data/app-data.test.ts src/lib/auth/gate-identity.test.ts src/lib/client/client.server.test.ts src/game/weather.test.ts src/game/city.test.ts src/game/tags.test.ts src/game/vault.test.ts src/game/rare.test.ts src/game/campfire.test.ts src/game/pets.test.ts src/game/loot.test.ts src/game/save.test.ts src/game/harvest.test.ts src/game/resources/catalog.test.ts src/game/crafting/resolve.test.ts src/game/intro/beats.test.ts src/game/look/look.test.ts src/game/look/parts.test.ts src/game/look/save-roundtrip.test.ts src/game/inventory/resources.test.ts",
     "lint": "eslint . --max-warnings 0",
     "check": "npm run lint && npm test && npm run typecheck && npm run build && npm run check:auth",
     "format": "prettier --write ."

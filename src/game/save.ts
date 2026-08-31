@@ -10,10 +10,14 @@ import {
 } from "./catalog.ts";
 import { WEATHER_META } from "./weather.ts";
 import { generateTiles } from "./world.ts";
+import {
+  createResourceInventory,
+  parseResourceInventory,
+} from "./inventory/resources.ts";
 import type { World } from "./types.ts";
 
 export const SAVE_KEY = "emberhall-save-v4";
-export const CURRENT_SAVE_VERSION = 1;
+export const CURRENT_SAVE_VERSION = 2;
 
 type SaveRecord = Record<string, unknown>;
 
@@ -186,6 +190,15 @@ function isRareItem(value: unknown): boolean {
   );
 }
 
+function isResourceInventory(value: unknown): boolean {
+  try {
+    parseResourceInventory(value);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 function isPlayer(value: unknown): boolean {
   return (
     isRecord(value) &&
@@ -193,6 +206,8 @@ function isPlayer(value: unknown): boolean {
     isClosedNumberRecord(value.skills, SKILL_META) &&
     isClosedNumberRecord(value.lastGain, SKILL_META) &&
     isItemRecord(value.pack) &&
+    Object.hasOwn(value, "resources") &&
+    isResourceInventory(value.resources) &&
     isItemRecord(value.chest) &&
     isWearRecord(value.wear) &&
     isArrayOf(value.rares, isRareItem) &&
@@ -406,8 +421,21 @@ function isCurrentSave(save: SaveRecord): boolean {
 }
 
 function migrateSave(value: unknown): SaveRecord | null {
-  if (!isRecord(value) || value.saveVersion !== CURRENT_SAVE_VERSION) return null;
-  return value;
+  if (!isRecord(value)) return null;
+  if (value.saveVersion === CURRENT_SAVE_VERSION) return value;
+  if (value.saveVersion !== 1) return null;
+
+  // Clone at the version boundary, then add only the new field. This generic
+  // object copy deliberately carries every existing/optional nested field,
+  // including Person.look, without migration-specific rewriting.
+  const migrated = structuredClone(value);
+  if (!isRecord(migrated.player)) return migrated;
+  migrated.player = {
+    ...migrated.player,
+    resources: createResourceInventory(),
+  };
+  migrated.saveVersion = CURRENT_SAVE_VERSION;
+  return migrated;
 }
 
 export function hasSave() {
@@ -428,10 +456,16 @@ export function clearSave() {
 
 export function writeSave(world: World) {
   try {
-    const { tiles: _tiles, ...rest } = world;
+    const { tiles: _tiles, player, ...rest } = world;
+    const resources = parseResourceInventory(player.resources);
     localStorage.setItem(
       SAVE_KEY,
-      JSON.stringify({ ...rest, saveVersion: CURRENT_SAVE_VERSION, tiles: null }),
+      JSON.stringify({
+        ...rest,
+        player: { ...player, resources },
+        saveVersion: CURRENT_SAVE_VERSION,
+        tiles: null,
+      }),
     );
   } catch {
     /* quota */

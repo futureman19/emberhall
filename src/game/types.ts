@@ -1,4 +1,9 @@
 import type { LookRecipeV1 } from "./look/types.ts";
+import type {
+  QualityForResource,
+  ResourceFormFor,
+  ResourceId,
+} from "./resources/types.ts";
 
 export type TileKind =
   | "grass"
@@ -140,6 +145,19 @@ export type ResourceTag =
   | "weapon"
   | "armor"
   | "tool";
+
+/**
+ * A catalog-correlated material stack. Mapping over ResourceId keeps each
+ * resource paired with only its own forms and quality vocabulary.
+ */
+export type ResourceStackKey = {
+  [I in ResourceId]: `${I}:${ResourceFormFor<I>}:${QualityForResource<I>}`;
+}[ResourceId];
+
+/** Sparse by design: absent and zero are the same, and zero is never stored. */
+export interface ResourceInventory {
+  stacks: Partial<Record<ResourceStackKey, number>>;
+}
 
 export type SpellId =
   | "nightsight"
@@ -350,6 +368,7 @@ export interface PlayerState {
   skills: Record<SkillId, number>;
   lastGain: Record<SkillId, number>;
   pack: Record<ItemId, number>;
+  resources: ResourceInventory;
   chest: Record<ItemId, number>;
   wear: Partial<Record<WearSlot, ItemId>>;
   rares: RareItem[];

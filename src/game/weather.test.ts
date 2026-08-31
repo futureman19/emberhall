@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { emptyChest, emptyLastGain, emptyPack, emptySkills } from "./catalog.ts";
+import { createResourceInventory } from "./inventory/resources.ts";
 import { ensureWeather, initialWeather, rainRate, tickWeather, weatherSnap } from "./weather.ts";
 import type { World } from "./types.ts";
 
@@ -24,6 +25,7 @@ function bareWorld(seed = 7): World {
       skills: emptySkills(),
       lastGain: emptyLastGain(),
       pack: emptyPack(),
+      resources: createResourceInventory(),
       chest: emptyChest(),
       wear: {},
       rares: [],

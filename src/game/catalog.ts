@@ -1,4 +1,5 @@
-import type { BuildingKind, ClassId, FaunaKind, ItemId, LootDrop, LootGold, NpcRole, Notoriety, ResourceTag, SkillId, WearSlot } from "./types.ts";
+import { createResourceInventory } from "./inventory/resources.ts";
+import type { BuildingKind, ClassId, FaunaKind, ItemId, LootDrop, LootGold, NpcRole, Notoriety, ResourceInventory, ResourceTag, SkillId, WearSlot } from "./types.ts";
 
 export const SECONDS_PER_HOUR = 36;
 
@@ -293,18 +294,23 @@ export function emptyChest(): Record<ItemId, number> {
   return p;
 }
 
-export function settleGear(player: {
+/** Structural input retained for normalizing legacy runtime players. */
+export interface GearSettlementInput {
   pack: Record<ItemId, number>;
   wear: Partial<Record<WearSlot, ItemId>>;
   chest: Record<ItemId, number>;
   skills: Record<SkillId, number>;
   lastGain?: Record<SkillId, number>;
-}) {
+  resources?: ResourceInventory;
+}
+
+export function settleGear(player: GearSettlementInput) {
   if (!player.pack) player.pack = emptyPack();
   if (!player.chest) player.chest = emptyChest();
   if (!player.wear) player.wear = {};
   if (!player.skills) player.skills = emptySkills();
   if (!player.lastGain) player.lastGain = emptyLastGain();
+  if (!player.resources) player.resources = createResourceInventory();
   const base = emptySkills();
   const last = emptyLastGain();
   for (const id of Object.keys(base) as SkillId[]) {

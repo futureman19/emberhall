@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import test, { afterEach, beforeEach } from "node:test";
 import { CURRENT_SAVE_VERSION, SAVE_KEY, clearSave, hasSave, loadSave, writeSave } from "./save.ts";
 import { createWorld } from "./world.ts";
+import { addResource, makeResourceStackKey } from "./inventory/resources.ts";
+import { LOOK_SCHEMA } from "./look/types.ts";
 
 class MemoryStorage {
   #values = new Map<string, string>();
@@ -53,6 +55,12 @@ function record(value: unknown): Record<string, unknown> {
   return value as Record<string, unknown>;
 }
 
+function v1Save(): Record<string, unknown> {
+  const save = persistedWorld();
+  delete record(save.player).resources;
+  return { ...save, saveVersion: 1 };
+}
+
 function hareFixture() {
   return {
     id: "legacy-hare",
@@ -80,9 +88,11 @@ test("save - writes an explicit schema version without generated tiles", () => {
 
   assert.equal(hasSave(), true);
   const stored = JSON.parse(localStorage.getItem(SAVE_KEY)!);
-  assert.equal(stored.saveVersion, CURRENT_SAVE_VERSION);
+  assert.equal(CURRENT_SAVE_VERSION, 2);
+  assert.equal(stored.saveVersion, 2);
   assert.equal(stored.tiles, null);
   assert.equal(stored.seed, world.seed);
+  assert.deepEqual(stored.player.resources, { stacks: {} });
 
   clearSave();
   assert.equal(hasSave(), false);
@@ -93,6 +103,7 @@ test("save - current-version write and load round-trip preserves representative 
   world.gold = 321;
   world.weather.wet = 0.75;
   world.player.pack.log = 4;
+  addResource(world.player.resources, makeResourceStackKey("redwood", "board", "choice"), 3);
   world.player.marks.push({ id: "mark-home", tx: 12, ty: 34, name: "Home" });
   world.player.rares.push({
     uid: "rare-1",
@@ -111,11 +122,68 @@ test("save - current-version write and load round-trip preserves representative 
   assert.equal(loaded.gold, 321);
   assert.equal(loaded.weather.wet, 0.75);
   assert.equal(loaded.player.pack.log, 4);
+  assert.deepEqual(loaded.player.resources, world.player.resources);
   assert.deepEqual(loaded.player.marks, world.player.marks);
   assert.deepEqual(loaded.player.rares, world.player.rares);
   assert.deepEqual(loaded.campfires, world.campfires);
   assert.equal(loaded.restored, true);
   assert.ok(Array.isArray(loaded.tiles));
+});
+
+test("save - migrates valid v1 to v2 without rewriting a person's look", () => {
+  const payload = v1Save();
+  const look = {
+    schema: LOOK_SCHEMA,
+    cls: "mage" as const,
+    skin: "#96795d",
+    hairStyle: "long" as const,
+    hairColor: "#a85a42",
+    garb: "#6a5a78",
+    parts: ["u_test_cap"],
+  };
+  record((payload.people as unknown[])[0]).look = look;
+  const raw = JSON.stringify(payload);
+  localStorage.setItem(SAVE_KEY, raw);
+
+  const loaded = loadSave();
+
+  assert.ok(loaded);
+  assert.deepEqual(loaded.player.resources, { stacks: {} });
+  assert.deepEqual(loaded.people[0]!.look, look);
+  assert.equal(localStorage.getItem(SAVE_KEY), raw, "loading must not mutate the stored v1 payload");
+});
+
+test("save - v1 migration keeps a lookless person lookless", () => {
+  const payload = v1Save();
+  delete record((payload.people as unknown[])[0]).look;
+  localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
+
+  const loaded = loadSave();
+
+  assert.ok(loaded);
+  assert.deepEqual(loaded.player.resources, { stacks: {} });
+  assert.equal(loaded.people[0]!.look, undefined);
+});
+
+test("save - rejects malformed v1 instead of blessing it during migration", () => {
+  const payload = v1Save();
+  record(payload.player).pack = { log: "many" };
+  localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
+  assert.equal(loadSave(), null);
+});
+
+test("save - native v2 resource stacks round-trip canonically", () => {
+  const world = createWorld();
+  const oak = makeResourceStackKey("oak", "log", "sound");
+  const ruby = makeResourceStackKey("ruby", "gem", "flawed");
+  addResource(world.player.resources, oak, 7);
+  addResource(world.player.resources, ruby, 2);
+
+  writeSave(world);
+  const loaded = loadSave();
+
+  assert.ok(loaded);
+  assert.deepEqual(loaded.player.resources, { stacks: { [oak]: 7, [ruby]: 2 } });
 });
 
 test("save - rejects unversioned payloads", () => {
@@ -188,6 +256,63 @@ test("save - rejects current-version saves missing required World fields", () =>
     localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
     assert.equal(loadSave(), null, `accepted save missing ${field}`);
   }
+});
+
+test("save - requires resources on native v2 players", () => {
+  const payload = currentSave();
+  delete record(payload.player).resources;
+  localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
+  assert.equal(loadSave(), null);
+});
+
+test("save - malformed canonical runtime resources do not overwrite existing storage", () => {
+  const world = createWorld();
+  const sentinel = "existing-save-must-survive";
+  localStorage.setItem(SAVE_KEY, sentinel);
+  delete (world.player as unknown as { resources?: unknown }).resources;
+
+  writeSave(world);
+
+  assert.equal(localStorage.getItem(SAVE_KEY), sentinel);
+});
+
+test("save - rejects native v2 resources with unknown own fields without rewriting storage", () => {
+  const payload = currentSave();
+  record(payload.player).resources = { stacks: {}, extra: { smuggled: true } };
+  const raw = JSON.stringify(payload);
+  localStorage.setItem(SAVE_KEY, raw);
+
+  assert.equal(loadSave(), null);
+  assert.equal(localStorage.getItem(SAVE_KEY), raw);
+});
+
+test("save - rejects malformed, impossible, and non-positive v2 resource stacks", () => {
+  const invalidStacks: Array<Record<string, unknown>> = [
+    { "ruby:log:rough": 1 },
+    { "oak:gem:flawless": 1 },
+    { "oak:log:flawless": 1 },
+    { "bogwood:log:sound": 1 },
+    { "__proto__:log:sound": 1 },
+    { "oak:log:sound": 0 },
+    { "oak:log:sound": -1 },
+    { "oak:log:sound": 1.5 },
+    { "oak:log:sound": "2" },
+    { "oak:log:sound": "NaN" },
+    { "oak:log:sound": null },
+    { "oak:log:sound": Number.MAX_SAFE_INTEGER + 1 },
+  ];
+
+  for (const stacks of invalidStacks) {
+    const payload = currentSave();
+    record(payload.player).resources = { stacks };
+    localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
+    assert.equal(loadSave(), null, `accepted resource stacks ${JSON.stringify(stacks)}`);
+  }
+
+  const missingOwnStacks = currentSave();
+  record(missingOwnStacks.player).resources = {};
+  localStorage.setItem(SAVE_KEY, JSON.stringify(missingOwnStacks));
+  assert.equal(loadSave(), null);
 });
 
 test("save - rejects malformed elements in critical nested collections", () => {

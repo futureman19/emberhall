@@ -17,6 +17,7 @@ import { hash2, irange, mulberry32, pick } from "./rng.ts";
 import { buildingBox, siteError } from "./building-size.ts";
 import { seedFarmPlots } from "./farm.ts";
 import { initialWeather } from "./weather.ts";
+import { createResourceInventory } from "./inventory/resources.ts";
 import type { BuildingKind, ClassId, Person, Tile, TileKind, World } from "./types.ts";
 
 let nidAcc = 1;
@@ -302,6 +303,7 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
       skills: emptySkills(),
       lastGain: emptyLastGain(),
       pack: { ...emptyPack(), hatchet: 0 },
+      resources: createResourceInventory(),
       chest: emptyChest(),
       wear: { head: "hood", hands: "gloves", neck: "pendant", finger: "ring", main: "hatchet" },
       rares: [],
