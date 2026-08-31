@@ -7,13 +7,19 @@ import { getWorld } from "@/game/live";
 import { useGame } from "@/game/store";
 import type { ItemId, RareItem } from "@/game/types";
 import {
-  listVaultNfts,
+  artifactLabel,
+  listEmberhallNfts,
+  mintCharacterLookNft,
   mintItemNft,
+  mintPartNft,
   mintRareNft,
   oneSatCtx,
   redeemItemNft,
   sellItemNft,
   cancelItemNft,
+  type EmberhallNft,
+  type LookNft,
+  type PartNft,
   type VaultNft,
 } from "@/chain/oneSat";
 import { rareName } from "@/game/rare";
@@ -28,6 +34,8 @@ import {
 } from "@/game/vault";
 import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
+import { latestCharacterLook, previewRedeemPart } from "@/game/chain-artifacts";
+import { listParts } from "@/game/look/parts";
 
 const LISTINGS_KEY = "emberhall-vault-listings";
 const LEDGER_KEY = "emberhall-vault-ledger";
@@ -52,7 +60,7 @@ function saveJson(key: string, value: unknown) {
 function rareFromInscription(nft: VaultNft): RareItem | undefined {
   const r = nft.inscription.rare;
   if (!r) return undefined;
-  return { uid: nft.id, base: nft.inscription.item, affixes: r.affixes, maker: r.maker, seed: nft.inscription.world, hour: nft.inscription.hour };
+  return { uid: nft.origin, base: nft.inscription.item, affixes: r.affixes, maker: r.maker, seed: nft.inscription.world, hour: nft.inscription.hour };
 }
 
 /**
@@ -69,14 +77,19 @@ export function VaultGump() {
 function VaultInner() {
   const close = useGame((s) => s.closeVault);
   const pack = useGame((s) => s.snap.player?.pack);
+  const self = useGame((s) => s.snap.people.find(({ isPlayer }) => isPlayer));
   const rares = useGame((s) => s.snap.player?.rares) ?? [];
   const mintApplied = useGame((s) => s.mintApplied);
   const mintRareApplied = useGame((s) => s.mintRareApplied);
   const redeemApplied = useGame((s) => s.redeemApplied);
+  const restoreLookApplied = useGame((s) => s.restoreLookApplied);
+  const mintPartApplied = useGame((s) => s.mintPartApplied);
+  const redeemPartApplied = useGame((s) => s.redeemPartApplied);
+  const togglePartWorn = useGame((s) => s.togglePartWorn);
   const flash = useGame((s) => s.flash);
   const { wallet, status, connect, error: walletError } = useWallet();
 
-  const [nfts, setNfts] = useState<VaultNft[] | null>(null);
+  const [artifacts, setArtifacts] = useState<EmberhallNft[] | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [prices, setPrices] = useState<Record<string, string>>({});
@@ -113,7 +126,7 @@ function VaultInner() {
     if (!wallet) return;
     setError(null);
     try {
-      setNfts(await listVaultNfts(oneSatCtx(wallet)));
+      setArtifacts(await listEmberhallNfts(oneSatCtx(wallet)));
     } catch (e) {
       setError(e instanceof Error ? e.message : "The chain did not answer.");
     }
@@ -137,13 +150,18 @@ function VaultInner() {
   }
 
   const packItems = (Object.entries(pack ?? {}) as [ItemId, number][]).filter(([, n]) => n > 0);
-  const walletIds = new Set((nfts ?? []).map((n) => n.id));
-  /** Listings we remember that the wallet no longer holds — locked on the orderbook. */
-  const awayListings = listings.filter((t) => !walletIds.has(t.id));
+  const nfts = (artifacts ?? []).filter((entry): entry is VaultNft => entry.inscription.type === "item");
+  const lookNfts = (artifacts ?? []).filter((entry): entry is LookNft => entry.inscription.type === "look");
+  const partNfts = (artifacts ?? []).filter((entry): entry is PartNft => entry.inscription.type === "part");
+  const latestLook = latestCharacterLook(lookNfts);
+  const localParts = listParts();
+  const walletOrigins = new Set((artifacts ?? []).map((n) => n.origin));
+  /** Listings we remember that the wallet no longer holds — location unknown, not presumed sold. */
+  const awayListings = listings.filter((t) => !walletOrigins.has(t.id));
   const suggestFor = (inscription: ItemInscription) => suggestSats(inscription);
 
   return (
-    <div className="pointer-events-auto absolute top-16 right-3 max-h-[min(70vh,36rem)] w-[min(100%-1.5rem,22rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 sm:right-4">
+    <div data-testid="vault-panel" className="pointer-events-auto absolute top-16 right-3 z-20 max-h-[calc(100dvh-5rem)] w-[min(100%-1.5rem,22rem)] touch-pan-y overflow-y-auto overscroll-contain rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 sm:right-4">
       <p className="font-display text-sm text-fg">The Vault</p>
       <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">
         Mint an item into the chain — an NFT in your wallet, tradable for true coin. Redeem it, and it returns to the vale.
@@ -165,6 +183,96 @@ function VaultInner() {
         </div>
       ) : (
         <>
+          {self ? (
+            <div className="mt-4" data-testid="vault-look-section">
+              <p className="font-display text-xs tracking-wider text-gold uppercase">Your person — the chain remembers</p>
+              <div className="mt-2 rounded-[var(--radius-xs)] border border-gold/40 bg-surface-2 px-3 py-2">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="min-w-0 text-sm leading-snug text-fg" title={`${self.name} · ${self.cls}${latestLook ? ` · revision ${latestLook.inscription.revision}` : ""}`}>
+                    {self.name} · {self.cls}{latestLook ? ` · revision ${latestLook.inscription.revision}` : ""}
+                  </span>
+                  <Button
+                    className="h-8 shrink-0 px-2 text-xs"
+                    variant="secondary"
+                    disabled={busy !== null}
+                    data-testid="vault-mint-look"
+                    onClick={() =>
+                      void run("mint:look", async () => {
+                        await mintCharacterLookNft(oneSatCtx(wallet!), getWorld(), latestLook ?? undefined);
+                        remember({ kind: "mint", label: `${self.name}'s look` });
+                        flash(latestLook ? "A new reflection succeeds the old on chain." : "Your reflection now rides the chain.");
+                        await refresh();
+                      })
+                    }
+                  >
+                    {busy === "mint:look" ? "Inscribing…" : latestLook ? "Inscribe new revision" : "Inscribe person"}
+                  </Button>
+                </div>
+                {latestLook ? (
+                  <div className="mt-2 flex items-center justify-between gap-2">
+                    <span className="text-xs text-muted">Wallet: {latestLook.inscription.name} · {latestLook.inscription.calling}</span>
+                    <Button
+                      className="h-8 px-2 text-xs"
+                      variant="secondary"
+                      disabled={busy !== null}
+                      data-testid="vault-restore-look"
+                      onClick={() => {
+                        restoreLookApplied(latestLook.inscription);
+                        remember({ kind: "redeem", label: `${latestLook.inscription.name}'s look` });
+                      }}
+                    >
+                      Restore from chain
+                    </Button>
+                  </div>
+                ) : (
+                  <p className="mt-2 text-xs text-muted">Your local face stays free. Inscribing gives this wallet a portable copy.</p>
+                )}
+              </div>
+            </div>
+          ) : null}
+
+          {localParts.length > 0 ? (
+            <div className="mt-4" data-testid="vault-local-parts">
+              <p className="font-display text-xs tracking-wider text-gold uppercase">Sculptor's bench — mint a part</p>
+              <ul className="mt-2 space-y-1">
+                {localParts.map((part) => (
+                  <li key={part.id} className="flex items-center justify-between gap-2 rounded-[var(--radius-xs)] border border-gold/30 bg-surface-2 px-3 py-2">
+                    <span className="min-w-0 text-sm leading-snug text-fg" title={`${part.name} · ${part.slot} · ${part.rarity ?? "common"}`}>
+                      {part.name} · {part.slot} · {part.rarity ?? "common"}
+                    </span>
+                    <span className="flex shrink-0 gap-1">
+                      <Button
+                        className="h-8 px-2 text-xs"
+                        variant="secondary"
+                        disabled={busy !== null}
+                        data-testid={`vault-wear-part-${part.id}`}
+                        onClick={() => togglePartWorn(part.id)}
+                      >
+                        {self?.look?.parts?.includes(part.id) ? "Remove" : "Wear"}
+                      </Button>
+                      <Button
+                        className="h-8 px-2 text-xs"
+                        variant="secondary"
+                        disabled={busy !== null}
+                        data-testid={`vault-mint-part-${part.id}`}
+                        onClick={() =>
+                          void run(`mint:part:${part.id}`, async () => {
+                            await mintPartNft(oneSatCtx(wallet!), getWorld(), part);
+                            mintPartApplied(part.id);
+                            remember({ kind: "mint", label: part.name });
+                            await refresh();
+                          })
+                        }
+                      >
+                        {busy === `mint:part:${part.id}` ? "Minting…" : "Mint part"}
+                      </Button>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
           <div className="mt-4">
             <p className="font-display text-xs tracking-wider text-muted uppercase">In your pack — mint</p>
             {packItems.length === 0 ? (
@@ -236,48 +344,40 @@ function VaultInner() {
             </div>
           ) : null}
 
-          <div className="mt-4">
-            <div className="flex items-center justify-between">
-              <p className="font-display text-xs tracking-wider text-muted uppercase">On the chain — yours</p>
-              <button type="button" className="text-xs text-muted underline" disabled={busy !== null} onClick={() => void refresh()}>
-                {nfts === null ? "Loading…" : "Refresh"}
-              </button>
-            </div>
-            {nfts === null ? (
-              <p className="mt-1 text-xs text-muted">Reading the chain…</p>
-            ) : nfts.length === 0 && awayListings.length === 0 ? (
-              <p className="mt-1 text-xs text-muted">No Emberhall items in this wallet yet. Mint one above.</p>
-            ) : (
+          {partNfts.length > 0 ? (
+            <div className="mt-4" data-testid="vault-chain-parts">
+              <p className="font-display text-xs tracking-wider text-gold uppercase">Sculpted parts — yours on chain</p>
               <ul className="mt-2 space-y-1">
-                {nfts.map((nft) => {
-                  const tracked = listings.find((t) => t.id === nft.id);
-                  const rare = rareFromInscription(nft);
-                  const suggest = suggestFor(nft.inscription);
+                {partNfts.map((nft) => {
+                  const label = artifactLabel(nft);
+                  const tracked = nft.listed ? { id: nft.origin, label, sats: nft.priceSats!, at: 0 } : undefined;
                   return (
-                    <li key={nft.id} className="rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 py-2">
+                    <li key={nft.origin} className="rounded-[var(--radius-xs)] border border-gold/30 bg-surface-2 px-3 py-2">
                       <div className="flex items-center justify-between gap-2">
-                        <Tip content={<ItemTipContent id={nft.inscription.item} rare={rare} />} className="min-w-0">
-                          <span className={`flex min-w-0 items-center gap-2 text-sm ${rare ? "text-gold" : "text-fg"}`}>
-                            <ItemGlyph id={nft.inscription.item} className="size-4 shrink-0" />
-                            <span className="truncate">{nft.inscription.rare?.name || nft.inscription.label}</span>
-                          </span>
-                        </Tip>
-                        <Button
-                          className="h-8 shrink-0 px-2 text-xs"
-                          variant="secondary"
-                          disabled={busy !== null}
-                          onClick={() =>
-                            void run(`redeem:${nft.id}`, async () => {
-                              await redeemItemNft(oneSatCtx(wallet!), nft.id);
-                              redeemApplied(nft.inscription.item, nft.inscription.rare);
-                              untrack(nft.id);
-                              remember({ kind: "redeem", label: nft.inscription.rare?.name || nft.inscription.label });
-                              await refresh();
-                            })
-                          }
-                        >
-                          {busy === `redeem:${nft.id}` ? "Burning…" : "Redeem"}
-                        </Button>
+                        <span className="min-w-0 truncate text-sm text-fg">
+                          {nft.inscription.part.name} · {nft.inscription.part.slot} · {nft.inscription.part.rarity}
+                        </span>
+                        {!nft.listed ? (
+                          <Button
+                            className="h-8 shrink-0 px-2 text-xs"
+                            variant="secondary"
+                            disabled={busy !== null}
+                            data-testid={`vault-redeem-part-${nft.inscription.part.id}`}
+                            onClick={() =>
+                              void run(`redeem:${nft.id}`, async () => {
+                                const blocked = previewRedeemPart(nft.inscription, nft.origin);
+                                if (blocked) throw new Error(blocked);
+                                await redeemItemNft(oneSatCtx(wallet!), nft.id);
+                                redeemPartApplied(nft.inscription, nft.origin);
+                                untrack(nft.origin);
+                                remember({ kind: "redeem", label });
+                                await refresh();
+                              })
+                            }
+                          >
+                            {busy === `redeem:${nft.id}` ? "Burning…" : "Redeem to bench"}
+                          </Button>
+                        ) : null}
                       </div>
                       {tracked ? (
                         <div className="mt-2 flex items-center justify-between gap-2">
@@ -289,7 +389,110 @@ function VaultInner() {
                             onClick={() =>
                               void run(`cancel:${nft.id}`, async () => {
                                 await cancelItemNft(oneSatCtx(wallet!), nft.id);
-                                untrack(nft.id);
+                                untrack(nft.origin);
+                                remember({ kind: "cancel", label, sats: tracked.sats });
+                                await refresh();
+                              })
+                            }
+                          >
+                            {busy === `cancel:${nft.id}` ? "Opening…" : "Cancel listing"}
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="mt-2 flex items-center gap-2">
+                          <input
+                            type="number"
+                            min={1}
+                            step={1}
+                            placeholder="sats"
+                            value={prices[nft.origin] ?? ""}
+                            onChange={(event) => setPrices((current) => ({ ...current, [nft.origin]: event.target.value }))}
+                            className="h-8 w-24 rounded-[var(--radius-xs)] border border-border bg-bg px-2 text-xs text-fg"
+                          />
+                          <Button
+                            className="h-8 px-2 text-xs"
+                            variant="secondary"
+                            disabled={busy !== null || !Number(prices[nft.origin])}
+                            data-testid={`vault-list-part-${nft.inscription.part.id}`}
+                            onClick={() =>
+                              void run(`sell:${nft.id}`, async () => {
+                                const price = Math.floor(Number(prices[nft.origin]));
+                                await sellItemNft(oneSatCtx(wallet!), nft.id, price);
+                                track({ id: nft.origin, label, sats: price, at: Date.now() });
+                                remember({ kind: "list", label, sats: price });
+                                flash(`${label} is listed for ${price} sats — any 1Sat market can sell it now.`);
+                                await refresh();
+                              })
+                            }
+                          >
+                            {busy === `sell:${nft.id}` ? "Listing…" : "List for sale"}
+                          </Button>
+                        </div>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ) : null}
+
+          <div className="mt-4">
+            <div className="flex items-center justify-between">
+              <p className="font-display text-xs tracking-wider text-muted uppercase">On the chain — yours</p>
+              <button type="button" className="text-xs text-muted underline" disabled={busy !== null} onClick={() => void refresh()}>
+                {artifacts === null ? "Loading…" : "Refresh"}
+              </button>
+            </div>
+            {artifacts === null ? (
+              <p className="mt-1 text-xs text-muted">Reading the chain…</p>
+            ) : nfts.length === 0 && awayListings.length === 0 ? (
+              <p className="mt-1 text-xs text-muted">No Emberhall items in this wallet yet. Mint one above.</p>
+            ) : (
+              <ul className="mt-2 space-y-1">
+                {nfts.map((nft) => {
+                  const label = nft.inscription.rare?.name || nft.inscription.label;
+                  const tracked = nft.listed ? { id: nft.origin, label, sats: nft.priceSats!, at: 0 } : undefined;
+                  const rare = rareFromInscription(nft);
+                  const suggest = suggestFor(nft.inscription);
+                  return (
+                    <li key={nft.origin} className="rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 py-2">
+                      <div className="flex items-center justify-between gap-2">
+                        <Tip content={<ItemTipContent id={nft.inscription.item} rare={rare} />} className="min-w-0">
+                          <span className={`flex min-w-0 items-center gap-2 text-sm ${rare ? "text-gold" : "text-fg"}`}>
+                            <ItemGlyph id={nft.inscription.item} className="size-4 shrink-0" />
+                            <span className="truncate">{nft.inscription.rare?.name || nft.inscription.label}</span>
+                          </span>
+                        </Tip>
+                        {!nft.listed ? (
+                          <Button
+                            className="h-8 shrink-0 px-2 text-xs"
+                            variant="secondary"
+                            disabled={busy !== null}
+                            onClick={() =>
+                              void run(`redeem:${nft.id}`, async () => {
+                                await redeemItemNft(oneSatCtx(wallet!), nft.id);
+                                redeemApplied(nft.inscription.item, nft.inscription.rare);
+                                untrack(nft.origin);
+                                remember({ kind: "redeem", label });
+                                await refresh();
+                              })
+                            }
+                          >
+                            {busy === `redeem:${nft.id}` ? "Burning…" : "Redeem"}
+                          </Button>
+                        ) : null}
+                      </div>
+                      {tracked ? (
+                        <div className="mt-2 flex items-center justify-between gap-2">
+                          <span className="text-xs text-gold">Listed · {tracked.sats} sats</span>
+                          <Button
+                            className="h-8 px-2 text-xs"
+                            variant="secondary"
+                            disabled={busy !== null}
+                            onClick={() =>
+                              void run(`cancel:${nft.id}`, async () => {
+                                await cancelItemNft(oneSatCtx(wallet!), nft.id);
+                                untrack(nft.origin);
                                 remember({ kind: "cancel", label: tracked.label, sats: tracked.sats });
                                 flash(`${tracked.label} is off the market.`);
                                 await refresh();
@@ -306,28 +509,27 @@ function VaultInner() {
                             min={1}
                             step={1}
                             placeholder={`≈ ${suggest} sats`}
-                            value={prices[nft.id] ?? ""}
-                            onChange={(e) => setPrices((p) => ({ ...p, [nft.id]: e.target.value }))}
+                            value={prices[nft.origin] ?? ""}
+                            onChange={(e) => setPrices((p) => ({ ...p, [nft.origin]: e.target.value }))}
                             className="h-8 w-24 rounded-[var(--radius-xs)] border border-border bg-bg px-2 text-xs text-fg"
                           />
                           <button
                             type="button"
                             className="text-xs text-muted underline"
                             title="The vault's whisper of a price"
-                            onClick={() => setPrices((p) => ({ ...p, [nft.id]: String(suggest) }))}
+                            onClick={() => setPrices((p) => ({ ...p, [nft.origin]: String(suggest) }))}
                           >
                             ≈{suggest}
                           </button>
                           <Button
                             className="h-8 px-2 text-xs"
                             variant="secondary"
-                            disabled={busy !== null || !Number(prices[nft.id])}
+                            disabled={busy !== null || !Number(prices[nft.origin])}
                             onClick={() =>
                               void run(`sell:${nft.id}`, async () => {
-                                const price = Math.floor(Number(prices[nft.id]));
-                                const label = nft.inscription.rare?.name || nft.inscription.label;
+                                const price = Math.floor(Number(prices[nft.origin]));
                                 await sellItemNft(oneSatCtx(wallet!), nft.id, price);
-                                track({ id: nft.id, label, sats: price, at: Date.now() });
+                                track({ id: nft.origin, label, sats: price, at: Date.now() });
                                 remember({ kind: "list", label, sats: price });
                                 flash(`${label} is listed for ${price} sats — any 1Sat market can sell it now.`);
                                 await refresh();
@@ -347,25 +549,7 @@ function VaultInner() {
                       <span className="min-w-0 truncate text-sm text-fg">{t.label}</span>
                       <span className="shrink-0 text-xs text-gold">Listed · {t.sats} sats</span>
                     </div>
-                    <div className="mt-2 flex items-center justify-between gap-2">
-                      <span className="text-xs text-muted">Locked on the orderbook</span>
-                      <Button
-                        className="h-8 px-2 text-xs"
-                        variant="secondary"
-                        disabled={busy !== null}
-                        onClick={() =>
-                          void run(`cancel:${t.id}`, async () => {
-                            await cancelItemNft(oneSatCtx(wallet!), t.id);
-                            untrack(t.id);
-                            remember({ kind: "cancel", label: t.label, sats: t.sats });
-                            flash(`${t.label} is off the market.`);
-                            await refresh();
-                          })
-                        }
-                      >
-                        {busy === `cancel:${t.id}` ? "Opening…" : "Cancel listing"}
-                      </Button>
-                    </div>
+                    <p className="mt-2 text-xs text-muted">No longer in this wallet. Refresh after any market or wallet transfer settles.</p>
                   </li>
                 ))}
               </ul>

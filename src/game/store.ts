@@ -54,6 +54,14 @@ import { completeObjective, placeBuilding } from "./world.ts";
 import { COURT, stationNear } from "./atlas.ts";
 import type { BuildingKind, CtxTarget, CtxVerb, ItemId, PanelId, ResourceStackKey, Speed, SpellId, Snapshot, WearSlot } from "./types.ts";
 import { applyMint, applyMintRare, applyRedeem, type RareInscription } from "./vault.ts";
+import {
+  applyCharacterLook,
+  applyMintPart,
+  applyRedeemPart,
+  applyTogglePart,
+  type CharacterLookInscription,
+  type PartInscription,
+} from "./chain-artifacts.ts";
 
 export type Phase = "title" | "raising" | "intro" | "looking" | "playing";
 
@@ -136,6 +144,14 @@ interface GameUI {
   mintRareApplied: (uid: string) => void;
   /** Chain burn confirmed — return the item (or the rare, with its affixes) and re-snapshot. */
   redeemApplied: (item: ItemId, rare?: RareInscription) => void;
+  /** Chain look read confirmed — restore through Person/look and save locally. */
+  restoreLookApplied: (inscription: CharacterLookInscription) => void;
+  /** Part inscription confirmed — remove it from the bench and any worn look. */
+  mintPartApplied: (id: string) => void;
+  /** Part burn confirmed — restore its exact sculpted identity to the bench. */
+  redeemPartApplied: (inscription: PartInscription, origin: string) => void;
+  /** Wear or remove one locally held sculpted part. */
+  togglePartWorn: (id: string) => void;
   makeRecipe: (id: string) => void;
   makeRecipeBatch: (id: string, times: number) => void;
   makeExactRecipe: (id: string, selections: readonly ExactMaterialSelection[]) => void;
@@ -652,6 +668,32 @@ export const useGame = create<GameUI>((set, get) => ({
   redeemApplied: (item, rare) => {
     const note = applyRedeem(getWorld(), item, rare);
     get().flash(note);
+    set({ snap: snapshot() });
+  },
+  restoreLookApplied: (inscription) => {
+    const w = getWorld();
+    const note = applyCharacterLook(w, inscription);
+    if (note) get().flash(note);
+    writeSave(w);
+    set({ snap: snapshot() });
+  },
+  mintPartApplied: (id) => {
+    const w = getWorld();
+    const note = applyMintPart(w, id);
+    if (note) get().flash(note);
+    writeSave(w);
+    set({ snap: snapshot() });
+  },
+  redeemPartApplied: (inscription, origin) => {
+    const note = applyRedeemPart(getWorld(), inscription, origin);
+    get().flash(note);
+    set({ snap: snapshot() });
+  },
+  togglePartWorn: (id) => {
+    const w = getWorld();
+    const note = applyTogglePart(w, id);
+    if (note) get().flash(note);
+    writeSave(w);
     set({ snap: snapshot() });
   },
   makeRecipe: (id) => {

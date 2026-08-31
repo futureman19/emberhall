@@ -12,6 +12,7 @@ export const PART_MAX_VOXELS = 160;
 export const PART_MAX_COLORS = 16;
 
 export type PartSlot = "hair" | "beard" | "back" | "trinket";
+export type PartRarity = "common" | "uncommon" | "rare" | "masterwork";
 export const PART_SLOTS: readonly PartSlot[] = ["hair", "beard", "back", "trinket"] as const;
 
 export interface Voxel {
@@ -28,6 +29,9 @@ export interface VoxelPartV1 {
   slot: PartSlot;
   voxels: Voxel[];
   createdAt: number;
+  /** Crafted identity; optional only for pre-Phase-5 local parts. */
+  author?: string;
+  rarity?: PartRarity;
 }
 
 const HEX = /^#[0-9a-fA-F]{6}$/;
@@ -52,7 +56,19 @@ export function validatePart(p: VoxelPartV1): string[] {
     colors.add(v.c.toLowerCase());
   }
   if (colors.size > PART_MAX_COLORS) errs.push(`at most ${PART_MAX_COLORS} colors`);
+  if (p.author !== undefined && (!p.author.trim() || p.author.length > 24)) errs.push("author must be 1–24 characters");
+  if (p.rarity !== undefined && !["common", "uncommon", "rare", "masterwork"].includes(p.rarity)) errs.push("unknown rarity");
   return errs;
+}
+
+/** Stable identity from sculptural complexity; never randomly rerolled. */
+export function partRarity(part: Pick<VoxelPartV1, "voxels">): PartRarity {
+  const colors = new Set(part.voxels.map(({ c }) => c.toLowerCase())).size;
+  const score = part.voxels.length + colors * 4;
+  if (score >= 112) return "masterwork";
+  if (score >= 64) return "rare";
+  if (score >= 28) return "uncommon";
+  return "common";
 }
 
 export function newPartId(): string {
@@ -80,8 +96,15 @@ export function listParts(): VoxelPartV1[] {
   try {
     const raw = store.getItem(KEY);
     if (!raw) return (cache = []);
-    const arr = JSON.parse(raw) as VoxelPartV1[];
-    return (cache = Array.isArray(arr) ? arr.filter((p) => validatePart(p).length === 0) : []);
+    const arr = JSON.parse(raw) as unknown;
+    if (!Array.isArray(arr)) return (cache = []);
+    return (cache = arr.filter((part): part is VoxelPartV1 => {
+      try {
+        return validatePart(part as VoxelPartV1).length === 0;
+      } catch {
+        return false;
+      }
+    }));
   } catch {
     return (cache = []);
   }

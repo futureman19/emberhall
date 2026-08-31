@@ -1,10 +1,22 @@
 import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
-import { WalletProvider } from "@1sat/react";
+import { WalletProvider, type WalletProviderConfig } from "@1sat/react";
+import type { WalletInterface } from "@bsv/sdk";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import appCss from "../styles.css?url";
 
 const APP_NAME = "Emberhall";
+
+function developmentWalletProviders(): WalletProviderConfig[] | undefined {
+  if (!import.meta.env.DEV || typeof window === "undefined") return undefined;
+  const wallet = (window as Window & { __EMBERHALL_SMOKE_WALLET__?: WalletInterface }).__EMBERHALL_SMOKE_WALLET__;
+  if (!wallet) return undefined;
+  return [{
+    type: "emberhall-smoke",
+    name: "Emberhall smoke wallet",
+    connect: async () => ({ wallet, provider: "emberhall-smoke", identityKey: `02${"1".repeat(64)}`, disconnect: () => {} }),
+  }];
+}
 
 export const Route = createRootRoute({
   head: () => ({
@@ -29,7 +41,7 @@ export const Route = createRootRoute({
       <body className="bg-bg text-fg">
         <PreviewHostBridge />
         <AuthProvider>
-          <WalletProvider autoDetect autoReconnect>
+          <WalletProvider autoDetect autoReconnect providers={developmentWalletProviders()}>
             <Outlet />
           </WalletProvider>
         </AuthProvider>

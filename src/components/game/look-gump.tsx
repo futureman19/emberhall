@@ -5,7 +5,7 @@
 import { useMemo, useState } from "react";
 import { CLASS_META } from "@/game/catalog";
 import { GARB_TINTS, HAIR_COLORS, HAIR_STYLES, SKIN_TONES, type Swatch } from "@/game/look/catalog.ts";
-import { listParts, partsById, savePart } from "@/game/look/parts.ts";
+import { listParts, partRarity, partsById, savePart } from "@/game/look/parts.ts";
 import { resolveLook } from "@/game/look/resolve.ts";
 import { LOOK_SCHEMA, type HairStyleId, type LookChoice } from "@/game/look/types.ts";
 import { personName } from "@/game/names";
@@ -283,7 +283,7 @@ export function LookGump({ onDone }: { onDone: (choice: LookChoice) => void }) {
       {sculpting && (
         <PartSculptor
           onDone={(part) => {
-            savePart(part);
+            savePart({ ...part, author: trimmed || "an unknown hand", rarity: partRarity(part) });
             setPartIds((ids) => [...ids, part.id]);
             setCraftVersion((v) => v + 1);
             setSculpting(false);
