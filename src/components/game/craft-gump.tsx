@@ -1,12 +1,19 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ItemGlyph } from "@/components/game/paperdoll";
 import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "@/game/catalog";
 import { RECIPES, haveNeed, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
+import { BOW_FORM } from "@/game/crafting/forms";
+import { listResourceInventory } from "@/game/inventory/resources";
 import { getWorld } from "@/game/live";
 import { useGame } from "@/game/store";
-import type { ItemId } from "@/game/types";
+import type { ItemId, ResourceStackKey } from "@/game/types";
+import { MaterialSelector } from "./crafting/material-selector";
+import { WorkmanshipPreview } from "./crafting/workmanship-preview";
+import { InlayPanel } from "./crafting/inlay-panel";
+import { ConfirmCraft } from "./crafting/confirm-craft";
 import { cn } from "@/lib/utils";
 
 type Group = Station | "field";
@@ -23,16 +30,33 @@ export function CraftGump() {
   const close = useGame((s) => s.closeCraft);
   const make = useGame((s) => s.makeRecipe);
   const makeBatch = useGame((s) => s.makeRecipeBatch);
+  const makeExact = useGame((s) => s.makeExactRecipe);
+  const inlayItem = useGame((s) => s.inlayItem);
   const pack = useGame((s) => s.snap.player?.pack);
   const skills = useGame((s) => s.snap.player?.skills);
   const held = useGame((s) => s.snap.player?.wear?.main);
   const x = useGame((s) => s.snap.youX);
   const z = useGame((s) => s.snap.youZ);
+  const resources = useGame((s) => s.snap.player?.resources);
+  const rares = useGame((s) => s.snap.player?.rares ?? []);
+  const [body, setBody] = useState<ResourceStackKey | null>(null);
+  const [binding, setBinding] = useState<ResourceStackKey | null>(null);
   if (!open) return null;
   const here = stationsHere(getWorld());
   void x;
   void z;
   const bladeOk = Boolean(held && hasTag(held, "blade"));
+  const resourceRows = listResourceInventory(resources ?? { stacks: {} });
+  const bodyRole = BOW_FORM.roles.find(({ role }) => role === "body")!;
+  const bindingRole = BOW_FORM.roles.find(({ role }) => role === "binding")!;
+  const selectedCount = (key: ResourceStackKey | null) => resourceRows.find((row) => row.key === key)?.count ?? 0;
+  const bowDisabled = !here.includes("bench")
+    ? "Stand at the yard or hall"
+    : !body || !binding
+      ? "Choose body and binding"
+      : selectedCount(body) < bodyRole.amount || selectedCount(binding) < bindingRole.amount
+        ? "Not enough selected material"
+        : null;
   const groups: Group[] = ["bench", "forge", "fire", "field"];
   return (
     <div className="pointer-events-auto absolute top-16 right-3 max-h-[min(70vh,36rem)] w-[min(100%-1.5rem,22rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 sm:right-4">
@@ -40,9 +64,27 @@ export function CraftGump() {
       <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">
         Wood at the yard. Iron at a forge. A blade anywhere. The work takes, or it splits.
       </p>
+      <div className="mt-4 space-y-2" aria-label="Advanced bow work">
+        <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Bow</p>
+        <MaterialSelector role={bodyRole} rows={resourceRows} selected={body} onSelect={setBody} />
+        <MaterialSelector role={bindingRole} rows={resourceRows} selected={binding} onSelect={setBinding} />
+        <WorkmanshipPreview skill={skills?.carpentry ?? 0} difficulty={18} />
+        <ConfirmCraft
+          selected={{ body, binding }}
+          rows={resourceRows}
+          disabledReason={bowDisabled}
+          onConfirm={() => body && binding && makeExact("bow", [
+            { role: "body", key: body },
+            { role: "binding", key: binding },
+          ])}
+        />
+        <InlayPanel items={rares} rows={resourceRows} onInlay={inlayItem} />
+      </div>
       {groups.map((st) => {
         const at = st === "field" ? true : here.includes(st);
-        const list = st === "field" ? RECIPES.filter((r) => r.station === null) : RECIPES.filter((r) => r.station === st);
+        const list = st === "field"
+          ? RECIPES.filter((r) => r.station === null && !r.exactRecipeId)
+          : RECIPES.filter((r) => r.station === st && !r.exactRecipeId);
         if (st === "field" && list.length === 0) return null;
         return (
           <div key={st} className="mt-4">

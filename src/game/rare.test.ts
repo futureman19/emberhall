@@ -16,6 +16,7 @@ import {
   rollKillRare,
   rollRare,
   weaponDmg,
+  workmanshipChances,
   workmanshipForCraft,
 } from "./rare.ts";
 import { mulberry32 } from "./rng.ts";
@@ -127,6 +128,9 @@ test("rare - exceptional respects class and rank ladders", () => {
 });
 
 test("crafted bows - workmanship is a physical quality roll, never a magic-affix roll", () => {
+  assert.deepEqual(workmanshipChances(20, 18), { ordinary: 1, fine: 0, exceptional: 0 });
+  const mastery = workmanshipChances(100, 18);
+  assert.equal(Number((mastery.ordinary + mastery.fine + mastery.exceptional).toFixed(8)), 1);
   assert.equal(workmanshipForCraft(100, 18, 0.01), "exceptional");
   assert.equal(workmanshipForCraft(100, 18, 0.2), "fine");
   assert.equal(workmanshipForCraft(100, 18, 0.99), "ordinary");

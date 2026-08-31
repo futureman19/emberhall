@@ -1,6 +1,14 @@
 import { create } from "zustand";
 import { commandTravel } from "./gates.ts";
-import { commandCraft, commandCraftBatch, craftReach, stationOf } from "./craft.ts";
+import {
+  commandCraft,
+  commandCraftBatch,
+  commandCraftExact,
+  craftReach,
+  stationOf,
+  type ExactMaterialSelection,
+} from "./craft.ts";
+import { applyItemInlay } from "./inlay.ts";
 import { commandHarvest, commandPlant, commandTill, commandWorkPlot, plotAt } from "./farm.ts";
 import { getWorld, resetWorld, setWorld, snapshot } from "./live.ts";
 import type { LookChoice } from "./look/types.ts";
@@ -44,7 +52,7 @@ import { clearSave, hasSave, loadSave, writeSave } from "./save.ts";
 import { recruitPerson, setSpeed, tickWorld } from "./sim.ts";
 import { completeObjective, placeBuilding } from "./world.ts";
 import { COURT, stationNear } from "./atlas.ts";
-import type { BuildingKind, CtxTarget, CtxVerb, ItemId, PanelId, Speed, SpellId, Snapshot, WearSlot } from "./types.ts";
+import type { BuildingKind, CtxTarget, CtxVerb, ItemId, PanelId, ResourceStackKey, Speed, SpellId, Snapshot, WearSlot } from "./types.ts";
 import { applyMint, applyMintRare, applyRedeem } from "./vault.ts";
 
 export type Phase = "title" | "raising" | "intro" | "looking" | "playing";
@@ -130,6 +138,8 @@ interface GameUI {
   redeemApplied: (item: ItemId, rare?: { name: string; affixes: string[]; maker?: string }) => void;
   makeRecipe: (id: string) => void;
   makeRecipeBatch: (id: string, times: number) => void;
+  makeExactRecipe: (id: string, selections: readonly ExactMaterialSelection[]) => void;
+  inlayItem: (uid: string, key: ResourceStackKey) => void;
   useStation: (id: string) => void;
   cast: (spell: SpellId, target?: CastTarget) => void;
   forgetMark: (id: string) => void;
@@ -652,6 +662,16 @@ export const useGame = create<GameUI>((set, get) => ({
   makeRecipeBatch: (id, times) => {
     const err = commandCraftBatch(getWorld(), id, times);
     if (err) get().flash(err);
+    set({ snap: snapshot() });
+  },
+  makeExactRecipe: (id, selections) => {
+    const note = commandCraftExact(getWorld(), id, selections);
+    if (note) get().flash(note);
+    set({ snap: snapshot() });
+  },
+  inlayItem: (uid, key) => {
+    const result = applyItemInlay(getWorld().player, uid, key);
+    get().flash(result.status === "inlaid" ? `${result.effect.label} settles into the work.` : result.message);
     set({ snap: snapshot() });
   },
   useStation: (id) => {
