@@ -8,6 +8,7 @@ import { siteError } from "@/game/building-size";
 import { useGame } from "@/game/store";
 import { hoverAt, leftAt, liftAt } from "@/game/world-pointer";
 import type { Building, BuildingKind } from "@/game/types";
+import { sharedBlockGeometry, sharedBlockMaterial } from "./terrain-performance";
 
 const B = 0.5;
 const GAP = 0.96;
@@ -631,24 +632,18 @@ function BlockLayer({
   }, [items, dummy]);
   if (items.length === 0) return null;
   const fade = ghost ? 0.11 : opacity;
+  const material = sharedBlockMaterial({ color, roughness, metalness, opacity: fade, kind: "standard" });
   return (
     <instancedMesh
       ref={ref}
+      geometry={sharedBlockGeometry(B * GAP)}
+      material={material}
       args={[undefined, undefined, items.length]}
       castShadow={!ghost}
       receiveShadow={!ghost}
       renderOrder={ghost ? 2 : 0}
-    >
-      <boxGeometry args={[B * GAP, B * GAP, B * GAP]} />
-      <meshStandardMaterial
-        color={color}
-        roughness={roughness}
-        metalness={metalness}
-        transparent={fade < 1}
-        opacity={fade}
-        depthWrite={fade >= 1}
-      />
-    </instancedMesh>
+      dispose={null}
+    />
   );
 }
 
@@ -766,11 +761,17 @@ function PreviewLayer({ items, color }: { items: THREE.Vector3[]; color: string 
     mesh.computeBoundingSphere();
   }, [items, dummy]);
   if (items.length === 0) return null;
+  const material = sharedBlockMaterial({ color, roughness: 1, metalness: 0, opacity: 0.34, kind: "basic" });
   return (
-    <instancedMesh ref={ref} args={[undefined, undefined, items.length]} frustumCulled={false} raycast={() => {}}>
-      <boxGeometry args={[B * GAP, B * GAP, B * GAP]} />
-      <meshBasicMaterial color={color} transparent opacity={0.34} depthWrite={false} />
-    </instancedMesh>
+    <instancedMesh
+      ref={ref}
+      geometry={sharedBlockGeometry(B * GAP)}
+      material={material}
+      args={[undefined, undefined, items.length]}
+      frustumCulled={false}
+      raycast={() => {}}
+      dispose={null}
+    />
   );
 }
 

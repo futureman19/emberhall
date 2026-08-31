@@ -4,10 +4,7 @@ import { useMemo, useRef } from "react";
 import type { MutableRefObject } from "react";
 import * as THREE from "three";
 import { COURT, MAP, VIEW } from "@/game/atlas";
-import { biomeAt, biomeWeights } from "@/game/biome";
-import { buildingBox } from "@/game/building-size";
 import { GROUND_SHADER, makeDirtTex, makeGrassTex } from "@/game/ground-tex";
-import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { hash2 } from "@/game/rng";
 import { useGame } from "@/game/store";
@@ -21,6 +18,12 @@ import {
   type VisibleResourceVisualLookup,
 } from "./resource-visuals";
 import { skyTone } from "./sky-math";
+import {
+  createHorizonFrameTracker,
+  createTerrainCalculationCache,
+  sharedBlockGeometry,
+  type TerrainCalculationCache,
+} from "./terrain-performance";
 
 const KIND_COLOR: Record<TileKind, string> = {
   grass: "#4a5a32",
@@ -90,16 +93,6 @@ const GROUND_FADE = {
   uFog: { value: new THREE.Color("#3d4c2c") },
 };
 
-function blocked(world: World, tx: number, ty: number) {
-  if (world.plots) {
-    for (const p of world.plots) if (p.tx === tx && p.ty === ty) return true;
-  }
-  for (const b of world.buildings) {
-    const box = buildingBox(b.kind, b.tx, b.ty);
-    if (tx + 0.5 > box.x0 && tx + 0.5 < box.x1 && ty + 0.5 > box.z0 && ty + 0.5 < box.z1) return true;
-  }
-  return false;
-}
 
 function treeGrow(tx: number, ty: number) {
   return TREE_WORLD_SILHOUETTE.minimumGrow
@@ -144,7 +137,7 @@ function kindAt(world: World, tx: number, ty: number): TileKind {
   return world.tiles[ty]?.[tx]?.kind ?? "grass";
 }
 
-function colorAt(world: World, x: number, z: number, out: THREE.Color) {
+function colorAt(world: World, x: number, z: number, out: THREE.Color, cache: TerrainCalculationCache) {
   const x0 = Math.floor(x);
   const z0 = Math.floor(z);
   const fx = x - x0;
@@ -156,7 +149,7 @@ function colorAt(world: World, x: number, z: number, out: THREE.Color) {
   out.copy(c00).lerp(c10, fx);
   tmp.copy(c01).lerp(c11, fx);
   out.lerp(tmp, fz);
-  const w = biomeWeights(x, z);
+  const w = cache.biomeWeights(x, z);
   if (w.tundra > 0.04) out.lerp(COL_GROUND_SNOW, w.tundra * 0.62);
   if (w.taiga > 0.04) out.lerp(COL_GROUND_TAIGA, w.taiga * 0.4);
   if (w.fen > 0.04) out.lerp(COL_GROUND_MARSH, w.fen * 0.5);
@@ -164,7 +157,7 @@ function colorAt(world: World, x: number, z: number, out: THREE.Color) {
   if (w.desert > 0.04) out.lerp(COL_GROUND_SAND, w.desert * 0.55);
 }
 
-function coverAt(world: World, x: number, z: number, dest: Float32Array, i: number) {
+function coverAt(world: World, x: number, z: number, dest: Float32Array, i: number, cache: TerrainCalculationCache) {
   const x0 = Math.floor(x);
   const z0 = Math.floor(z);
   const fx = x - x0;
@@ -182,7 +175,7 @@ function coverAt(world: World, x: number, z: number, dest: Float32Array, i: numb
   dest[i] = sx0 + (sx1 - sx0) * fz;
   dest[i + 1] = sy0 + (sy1 - sy0) * fz;
   dest[i + 2] = sz0 + (sz1 - sz0) * fz;
-  const w = biomeWeights(x, z);
+  const w = cache.biomeWeights(x, z);
   if (w.tundra > 0.05) {
     dest[i] += (0.08 - dest[i]) * w.tundra * 0.7;
     dest[i + 1] += (0.06 - dest[i + 1]) * w.tundra * 0.7;
@@ -272,6 +265,7 @@ export function Terrain() {
   const origin = useRef({ x: COURT.tx, z: COURT.ty, rev: -1 });
   const resourceSeed = useRef<number | null>(null);
   const resourceVisuals = useMemo(() => createResourceVisualCache(), []);
+  const cache = useMemo(() => createTerrainCalculationCache(), []);
   const visibleResourceVisuals = useRef<VisibleResourceVisualLookup>(new Map());
   const count = VIEW * VIEW;
   const geo = useMemo(() => {
@@ -341,11 +335,11 @@ export function Terrain() {
           const i = (iz * VERTS + ix) * 3;
           const t = w.tiles[Math.round(wz)]?.[Math.round(wx)];
           arr[i] = wx;
-          arr[i + 1] = t ? groundY(w, wx, wz) : -8.05;
+          arr[i + 1] = t ? cache.groundY(w, wx, wz) : -8.05;
           arr[i + 2] = wz;
           if (t) {
-            colorAt(w, wx, wz, pal);
-            coverAt(w, wx, wz, karr, i);
+            colorAt(w, wx, wz, pal, cache);
+            coverAt(w, wx, wz, karr, i, cache);
           } else {
             // Off the map: sink just beneath the horizon skirt and wear the
             // sky's haze, so the world's rim melts into the distance.
@@ -372,7 +366,7 @@ export function Terrain() {
     const px = you?.x ?? ox;
     const pz = you?.z ?? oz;
     GROUND_FADE.uOrigin.value.set(px, pz);
-    const climate = biomeAt(px, pz);
+    const climate = cache.biomeAt(px, pz);
     GROUND_FADE.uFog.value.set(
       climate === "tundra"
         ? "#8a8680"
@@ -421,8 +415,8 @@ export function Terrain() {
           }
           const treeShape = resourceVisual.shape;
           const grow = treeGrow(tx, ty);
-          const gy = groundY(w, tx, ty);
-          const climate = biomeAt(tx, ty);
+          const gy = cache.groundY(w, tx, ty);
+          const climate = cache.biomeAt(tx, ty);
           const climateShape = treeClimateShapeScale(resourceVisual.family, climate);
           const trunkRadius = grow * climateShape.radius * treeShape.trunkRadius * nearFade;
           const trunkScaleY = grow * climateShape.height * treeShape.trunkHeight * nearFade;
@@ -484,7 +478,7 @@ export function Terrain() {
             rockShape.yaw,
             rockShape.tiltZ + (strike ? 0.05 : 0),
           );
-          dummy.position.set(tx, groundY(w, tx, ty) + 0.42 * rockShape.height * 0.55, ty);
+          dummy.position.set(tx, cache.groundY(w, tx, ty) + 0.42 * rockShape.height * 0.55, ty);
           dummy.scale.set(rockShape.width, rockShape.height, rockShape.depth);
           dummy.updateMatrix();
           dummy.rotation.set(0, 0, 0);
@@ -501,8 +495,8 @@ export function Terrain() {
         }
         const wooded = t.kind === "tree";
         const open = t.kind === "grass" || t.kind === "sand" || t.kind === "snow" || t.kind === "marsh";
-        if ((wooded || open) && !blocked(w, tx, ty) && Math.hypot(tx - px, ty - pz) < half - 3) {
-          const climate = biomeAt(tx, ty);
+        if ((wooded || open) && !cache.blocked(w, tx, ty) && Math.hypot(tx - px, ty - pz) < half - 3) {
+          const climate = cache.biomeAt(tx, ty);
           const roll = hash2(tx, ty, w.seed + 41);
           let flora = -1;
           if (wooded) flora = hash2(tx, ty, w.seed + 51) < (climate === "tundra" ? 0.08 : climate === "taiga" ? 0.1 : 0.14) ? 0 : -1;
@@ -516,7 +510,7 @@ export function Terrain() {
           else if (roll < 0.025) flora = 2;
           else if (roll < 0.031) flora = 3;
           if (flora >= 0) {
-            const gy = groundY(w, tx, ty);
+            const gy = cache.groundY(w, tx, ty);
             const jx = (hash2(tx, ty, w.seed + 71) - 0.5) * (wooded ? 0.72 : 0.52);
             const jz = (hash2(tx, ty, w.seed + 91) - 0.5) * (wooded ? 0.72 : 0.52);
             const grow = 0.72 + hash2(tx, ty, w.seed + 5) * 0.5;
@@ -680,8 +674,14 @@ export function Terrain() {
         <boxGeometry args={[0.42, 0.4, 0.36]} />
         <meshStandardMaterial color="#ffffff" roughness={0.96} />
       </instancedMesh>
-      <instancedMesh ref={flowers} args={[undefined, undefined, FLORA]} frustumCulled={false} raycast={() => {}}>
-        <boxGeometry args={[0.14, 0.1, 0.14]} />
+      <instancedMesh
+        ref={flowers}
+        geometry={sharedBlockGeometry(0.14, 0.1, 0.14)}
+        args={[undefined, undefined, FLORA]}
+        frustumCulled={false}
+        raycast={() => {}}
+        dispose={null}
+      >
         <meshStandardMaterial color="#ffffff" roughness={0.7} />
       </instancedMesh>
       <instancedMesh ref={saplings} args={[undefined, undefined, FLORA]} castShadow frustumCulled={false} raycast={() => {}}>
@@ -714,6 +714,9 @@ function align(v: number, step: number) {
 
 export function Horizon() {
   const far = useRef<THREE.InstancedMesh>(null);
+  const cache = useMemo(() => createTerrainCalculationCache(), []);
+  const farFrame = useRef(createHorizonFrameTracker());
+  const stockVersion = useRef(0);
   const origin = useRef({ x: COURT.tx, z: COURT.ty, rev: -1 });
   const stock = useRef<FarStock[]>([]);
   const geo = useMemo(() => {
@@ -764,7 +767,7 @@ export function Horizon() {
           const off = wx < 0 || wz < 0 || wx >= MAP || wz >= MAP;
           const lift = 1 + Math.max(0, dist - 50) / 320 * 0.5;
           arr[i] = wx;
-          arr[i + 1] = hole || off ? -8 : groundY(w, wx, wz) * lift - 0.08;
+          arr[i + 1] = hole || off ? -8 : cache.groundY(w, wx, wz) * lift - 0.08;
           arr[i + 2] = wz;
           if (off) {
             // Past the map's edge the skirt wears the sky's own haze, so the
@@ -774,8 +777,8 @@ export function Horizon() {
             karr[i + 1] = 0;
             karr[i + 2] = 0;
           } else {
-            colorAt(w, wx, wz, pal);
-            coverAt(w, wx, wz, karr, i);
+            colorAt(w, wx, wz, pal, cache);
+            coverAt(w, wx, wz, karr, i, cache);
           }
           car[i] = pal.r;
           car[i + 1] = pal.g;
@@ -812,7 +815,17 @@ export function Horizon() {
         }
       }
       stock.current = next;
+      stockVersion.current += 1;
     }
+
+    const farChanged = farFrame.current.changed({
+      px,
+      pz,
+      seed: w.seed,
+      landRev: rev,
+      stockVersion: stockVersion.current,
+    });
+    if (!farChanged) return;
 
     const mesh = far.current;
     ensureColor(mesh, FAR_TREES);
@@ -826,7 +839,7 @@ export function Horizon() {
         const fade = lod * rim;
         if (fade < 0.04) continue;
         const lift = 1 + Math.max(0, d - 50) / 320 * 0.5;
-        const gy = groundY(w, t.tx, t.ty) * lift;
+        const gy = cache.groundY(w, t.tx, t.ty) * lift;
         dummy.position.set(t.tx, gy + CANOPY_H * t.grow * 0.42 * fade, t.ty);
         dummy.scale.set(t.grow * 1.05 * fade, t.grow * 1.15 * fade, t.grow * 1.05 * fade);
         dummy.updateMatrix();
