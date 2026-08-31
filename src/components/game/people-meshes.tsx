@@ -4,6 +4,9 @@ import { Quaternion, type Group } from "three";
 import { CLASS_META } from "@/game/catalog";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
+import { SLOT_ANCHOR, partsById } from "@/game/look/parts.ts";
+import { resolveLook } from "@/game/look/resolve.ts";
+import type { ResolvedLook } from "@/game/look/resolve.ts";
 import { workPitch } from "@/game/player";
 import { useGame } from "@/game/store";
 import type { ItemId, Person, WearSlot } from "@/game/types";
@@ -12,8 +15,6 @@ function groundAt(x: number, z: number) {
   return groundY(getWorld(), x, z);
 }
 
-const SKIN = "#c9c3b6";
-const HAIR = "#3a322c";
 const WEAR_HEX: Partial<Record<ItemId, string>> = {
   tunic: "#c9a36a",
   leather: "#a85a42",
@@ -30,6 +31,47 @@ const WEAR_HEX: Partial<Record<ItemId, string>> = {
   gauntlets: "#8a8680",
   gorget: "#9a9286",
 };
+
+// Hair vocabulary — crop alone is the vale's classic cap (bit-for-bit parity
+// when no look is stored); the rest are the looking glass's offerings.
+function HairMeshes({ look, ghost }: { look: ResolvedLook; ghost: boolean }) {
+  const c = look.hairColor;
+  if (look.hairStyle === "bald") return null;
+  return (
+    <group>
+      <mesh position={[0, 1.14, 0]} castShadow={!ghost}>
+        <boxGeometry args={[0.3, 0.08, 0.28]} />
+        <Mat color={c} ghost={ghost} />
+      </mesh>
+      {look.hairStyle === "shag" && (
+        <>
+          {[-0.17, 0.17].map((x) => (
+            <mesh key={x} position={[x, 1.02, 0]} castShadow={!ghost}>
+              <boxGeometry args={[0.06, 0.2, 0.28]} />
+              <Mat color={c} ghost={ghost} />
+            </mesh>
+          ))}
+          <mesh position={[0, 1.02, 0.16]} castShadow={!ghost}>
+            <boxGeometry args={[0.3, 0.2, 0.06]} />
+            <Mat color={c} ghost={ghost} />
+          </mesh>
+        </>
+      )}
+      {look.hairStyle === "tail" && (
+        <mesh position={[0, 0.96, 0.18]} castShadow={!ghost}>
+          <boxGeometry args={[0.12, 0.34, 0.08]} />
+          <Mat color={c} ghost={ghost} />
+        </mesh>
+      )}
+      {look.hairStyle === "long" && (
+        <mesh position={[0, 0.94, 0.17]} castShadow={!ghost}>
+          <boxGeometry args={[0.3, 0.4, 0.08]} />
+          <Mat color={c} ghost={ghost} />
+        </mesh>
+      )}
+    </group>
+  );
+}
 
 function Mat({ color, ghost }: { color: string; ghost: boolean }) {
   if (ghost) {
@@ -301,10 +343,12 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
       }
     }
   });
-  const chest = (p.isPlayer && wear.chest && WEAR_HEX[wear.chest]) || (p.isPlayer ? "#a85a42" : CLASS_META[p.cls].color);
+  const look = resolveLook(p.look);
+  const wornParts = ghost ? [] : partsById(p.look?.parts);
+  const chest = (p.isPlayer && wear.chest && WEAR_HEX[wear.chest]) || (p.isPlayer ? look.garb : CLASS_META[p.cls].color);
   const legs = (p.isPlayer && wear.legs && WEAR_HEX[wear.legs]) || "#3a342e";
   const feet = (p.isPlayer && wear.feet && WEAR_HEX[wear.feet]) || "#2e241c";
-  const hands = (p.isPlayer && wear.hands && WEAR_HEX[wear.hands]) || SKIN;
+  const hands = (p.isPlayer && wear.hands && WEAR_HEX[wear.hands]) || look.skin;
   const hood = p.isPlayer
     ? wear.head
     : p.cls === "mage" || p.role === "healer"
@@ -375,13 +419,12 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
       </group>
       <mesh position={[0, 0.98 + bob, 0]} castShadow={!ghost}>
         <boxGeometry args={[0.28, 0.28, 0.26]} />
-        <Mat color={SKIN} ghost={ghost} />
+        <Mat color={look.skin} ghost={ghost} />
       </mesh>
       {!hood && (
-        <mesh position={[0, 1.14 + bob, 0]} castShadow={!ghost}>
-          <boxGeometry args={[0.3, 0.08, 0.28]} />
-          <Mat color={HAIR} ghost={ghost} />
-        </mesh>
+        <group position={[0, bob, 0]}>
+          <HairMeshes look={look} ghost={ghost} />
+        </group>
       )}
       {hood === "helm" || hood === "cap" ? (
         <mesh position={[0, 1.12 + bob, 0]} castShadow={!ghost}>
@@ -400,6 +443,19 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
           <meshStandardMaterial color="#c9a36a" roughness={0.7} />
         </mesh>
       )}
+      {wornParts.map((part) => {
+        const { at, voxel } = SLOT_ANCHOR[part.slot];
+        return part.voxels.map((v, i) => (
+          <mesh
+            key={`${part.id}-${i}`}
+            position={[at[0] + v.x * voxel, at[1] + v.y * voxel + bob, at[2] + v.z * voxel]}
+            castShadow
+          >
+            <boxGeometry args={[voxel, voxel, voxel]} />
+            <Mat color={v.c} ghost={false} />
+          </mesh>
+        ));
+      })}
       {selected && (
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.04, 0]}>
           <ringGeometry args={[0.34, 0.46, 16]} />

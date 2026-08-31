@@ -3,6 +3,7 @@ import { commandTravel } from "./gates.ts";
 import { commandCraft, commandCraftBatch, craftReach, stationOf } from "./craft.ts";
 import { commandHarvest, commandPlant, commandTill, commandWorkPlot, plotAt } from "./farm.ts";
 import { getWorld, resetWorld, setWorld, snapshot } from "./live.ts";
+import type { LookChoice } from "./look/types.ts";
 import { commandCast, forgetMark, SPELL_META, hasBook } from "./magery.ts";
 import type { CastTarget } from "./magery.ts";
 import {
@@ -46,7 +47,7 @@ import { COURT, stationNear } from "./atlas.ts";
 import type { BuildingKind, CtxTarget, CtxVerb, ItemId, PanelId, Speed, SpellId, Snapshot, WearSlot } from "./types.ts";
 import { applyMint, applyMintRare, applyRedeem } from "./vault.ts";
 
-export type Phase = "title" | "raising" | "playing";
+export type Phase = "title" | "raising" | "intro" | "looking" | "playing";
 
 interface GameUI {
   phase: Phase;
@@ -73,6 +74,8 @@ interface GameUI {
   loadProgress: number;
   loadTitle: string;
   begin: (fresh?: boolean) => void;
+  introDone: () => void;
+  lookDone: (choice: LookChoice) => void;
   tick: (dt: number) => void;
   flash: (msg: string) => void;
   select: (id: string | null) => void;
@@ -222,7 +225,7 @@ export const useGame = create<GameUI>((set, get) => ({
         if (left > 0) await wait(left);
         lastLogTop = null; // a fresh world — its history must not toast
         set({
-          phase: "playing",
+          phase: fresh ? "intro" : "playing",
           selectedId: null,
           buildKind: null,
           buildAt: null,
@@ -244,6 +247,21 @@ export const useGame = create<GameUI>((set, get) => ({
         set({ phase: "title", toast: "Could not open the hall.", loadProgress: 0 });
       }
     })();
+  },
+  introDone: () => {
+    if (get().phase === "intro") set({ phase: "looking" });
+  },
+  lookDone: (choice) => {
+    if (get().phase !== "looking") return;
+    const w = getWorld();
+    const self = w.people.find((p) => p.isPlayer);
+    if (self) {
+      self.name = choice.name;
+      self.cls = choice.cls;
+      self.look = choice.look;
+    }
+    writeSave(w); // the face survives a refresh from the first minute
+    set({ phase: "playing", snap: snapshot() });
   },
   tick: (dt) => {
     const w = getWorld();

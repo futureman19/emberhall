@@ -16,3 +16,10 @@ export interface LookRecipeV1 {
   garb?: string;
   parts?: string[]; // emberhall.part/1 ids — crafted voxel parts
 }
+
+// What the looking glass hands back: who the vale should now see.
+export interface LookChoice {
+  name: string;
+  cls: ClassId;
+  look: LookRecipeV1;
+}

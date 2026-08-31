@@ -30,6 +30,8 @@ import { getWorld } from "@/game/live";
 import { maxMana } from "@/game/magery";
 import { nearestHealer } from "@/game/player";
 import { hasSave as hallHasSave } from "@/game/save";
+import { IntroCinematic } from "@/components/game/intro-cinematic";
+import { LookGump } from "@/components/game/look-gump";
 import { startValeMusic, musicMuted, toggleValeMusic } from "@/game/vale-music";
 import { sfxMuted, toggleSfx, warmSfx } from "@/game/vale-sfx";
 import { useGame } from "@/game/store";
@@ -45,11 +47,15 @@ function clockLabel(clock: number, day: number) {
 
 export function Hud() {
   const phase = useGame((s) => s.phase);
+  const introDone = useGame((s) => s.introDone);
+  const lookDone = useGame((s) => s.lookDone);
   useEffect(() => {
     if (phase === "playing" || phase === "raising") startValeMusic();
   }, [phase]);
   if (phase === "title") return <TitleOverlay />;
   if (phase === "raising") return <RaisingOverlay />;
+  if (phase === "intro") return <IntroCinematic onDone={introDone} />;
+  if (phase === "looking") return <LookGump onDone={lookDone} />;
   return (
     <div className="pointer-events-none absolute inset-0 z-50">
       <PlayingChrome />

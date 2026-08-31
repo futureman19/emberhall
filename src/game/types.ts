@@ -1,3 +1,5 @@
+import type { LookRecipeV1 } from "./look/types.ts";
+
 export type TileKind =
   | "grass"
   | "dirt"
@@ -253,6 +255,7 @@ export interface Person {
   cls: ClassId;
   isPlayer: boolean;
   member: boolean;
+  look?: LookRecipeV1;
   role: NpcRole | null;
   vocation: VocationId | null;
   x: number;

@@ -73,14 +73,17 @@ const store: Store =
     ? localStorage
     : { getItem: (k) => memory.get(k) ?? null, setItem: (k, v) => void memory.set(k, v) };
 
+let cache: VoxelPartV1[] | null = null; // renderers ask every frame; parse once
+
 export function listParts(): VoxelPartV1[] {
+  if (cache) return cache;
   try {
     const raw = store.getItem(KEY);
-    if (!raw) return [];
+    if (!raw) return (cache = []);
     const arr = JSON.parse(raw) as VoxelPartV1[];
-    return Array.isArray(arr) ? arr.filter((p) => validatePart(p).length === 0) : [];
+    return (cache = Array.isArray(arr) ? arr.filter((p) => validatePart(p).length === 0) : []);
   } catch {
-    return [];
+    return (cache = []);
   }
 }
 
@@ -89,12 +92,14 @@ export function savePart(p: VoxelPartV1): VoxelPartV1[] {
   if (errs.length) throw new Error(errs.join("; "));
   const all = [...listParts().filter((q) => q.id !== p.id), p];
   store.setItem(KEY, JSON.stringify(all));
+  cache = all;
   return all;
 }
 
 export function removePart(id: string): VoxelPartV1[] {
   const all = listParts().filter((p) => p.id !== id);
   store.setItem(KEY, JSON.stringify(all));
+  cache = all;
   return all;
 }
 

@@ -7,17 +7,13 @@ import { CLASS_META } from "@/game/catalog";
 import { GARB_TINTS, HAIR_COLORS, HAIR_STYLES, SKIN_TONES, type Swatch } from "@/game/look/catalog.ts";
 import { listParts, partsById, savePart } from "@/game/look/parts.ts";
 import { resolveLook } from "@/game/look/resolve.ts";
-import { LOOK_SCHEMA, type HairStyleId, type LookRecipeV1 } from "@/game/look/types.ts";
+import { LOOK_SCHEMA, type HairStyleId, type LookChoice } from "@/game/look/types.ts";
 import { personName } from "@/game/names";
 import type { ClassId } from "@/game/types";
 import { LookPreview } from "./look-preview";
 import { PartSculptor } from "./part-sculptor";
 
-export interface LookChoice {
-  name: string;
-  cls: ClassId;
-  look: LookRecipeV1;
-}
+export type { LookChoice };
 
 const ROLE_HINT: Record<ClassId, string> = {
   ranger: "Walks the treeline; reads the weather.",
@@ -85,8 +81,11 @@ export function LookGump({ onDone }: { onDone: (choice: LookChoice) => void }) {
     () => resolveLook({ schema: LOOK_SCHEMA, skin, hairStyle, hairColor, garb }),
     [skin, hairStyle, hairColor, garb],
   );
-  const crafted = useMemo(() => listParts(), [craftVersion]);
-  const wornParts = useMemo(() => partsById(partIds), [partIds, craftVersion]);
+  // craftVersion exists purely to re-render after the kiln fires; the part
+  // registry is cache-backed, so plain calls are cheap.
+  void craftVersion;
+  const crafted = listParts();
+  const wornParts = partsById(partIds);
   const trimmed = name.trim();
   const last = step === STEPS.length - 1;
 
