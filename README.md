@@ -28,3 +28,13 @@ Die and you walk pale. Chop, hunt, and the book are closed until a healer return
 ## Stack
 
 TanStack Start, React 19, Three.js / R3F, Zustand. Auth and a shared database are off; a hall lives in `localStorage`.
+
+## Repository health
+
+Run the complete post-change gate before merging:
+
+```sh
+npm run check
+```
+
+That command fails fast in this order: lint (with zero warnings), tests, typecheck, production build, then the auth invariant check. For UI or runtime changes, also run `node scripts/browser-smoke.mjs` against the dev server and inspect both generated screenshots.

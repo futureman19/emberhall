@@ -4,7 +4,7 @@ import { harvestNow, plantNow, tillNow } from "./farm.ts";
 import { ARROW_RANGE, FIREBALL_RANGE, burstDeath, castNow, maxMana, tickMana } from "./magery.ts";
 import { pickPetName } from "./names.ts";
 import { petLabel } from "./pets.ts";
-import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
+import { astar, astarToRange, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { addToPile, spawnCorpsePile, takeFromPile } from "./piles.ts";
 import { mulberry32 } from "./rng.ts";
 import { successChance, tryGain } from "./skills.ts";
@@ -129,14 +129,42 @@ function dieAsGhost(world: World, p: Person) {
   return "You die. The dirt keeps your body. Walk to a healer — Ione stands at the hall.";
 }
 
-function pathBeside(world: World, p: Person, tx: number, ty: number) {
-  const dest = nearestWalkable(world, tx, ty);
-  if (!dest) return false;
+function pathWithin(world: World, p: Person, tx: number, ty: number, range: number, cap = 9000) {
   const from = tileOf(p.x, p.z);
-  const path = astar(world, from.tx, from.ty, dest.x, dest.y);
+  const path = astarToRange(world, from.tx, from.ty, tx, ty, range, cap);
   if (!path) return false;
   p.path = path.map((n) => ({ tx: n.x, ty: n.y }));
   return true;
+}
+
+function pathBeside(world: World, p: Person, tx: number, ty: number) {
+  return pathWithin(world, p, tx, ty, 1.5);
+}
+
+/** Rebuild the player's active route after terrain invalidates a waypoint. */
+export function replanIntentPath(world: World, p: Person) {
+  const intent = world.player.intent;
+  if (intent.kind === "none") return false;
+  if (intent.kind === "walk") {
+    const from = tileOf(p.x, p.z);
+    const path = astar(world, from.tx, from.ty, intent.tx, intent.ty);
+    if (!path) return false;
+    p.path = path.map((node) => ({ tx: node.x, ty: node.y }));
+    return true;
+  }
+  if (intent.kind === "hunt" || intent.kind === "tame") {
+    const creature = world.fauna.find((candidate) => candidate.id === intent.targetId && candidate.task !== "dead");
+    if (!creature) return false;
+    const bow = intent.kind === "hunt" && effectiveMain(world) === "bow";
+    return pathWithin(world, p, creature.x, creature.z, bow ? BOW_RANGE - 0.75 : 1.5, 2500);
+  }
+  if (intent.kind === "cast" && (intent.spell === "magicarrow" || intent.spell === "fireball")) {
+    const creature = world.fauna.find((candidate) => candidate.id === intent.targetId && candidate.task !== "dead");
+    if (!creature) return false;
+    const range = intent.spell === "fireball" ? FIREBALL_RANGE : ARROW_RANGE;
+    return pathWithin(world, p, creature.x, creature.z, range - 0.75, 2500);
+  }
+  return pathBeside(world, p, intent.tx, intent.ty);
 }
 
 export function commandWalk(world: World, tx: number, ty: number, cap = 9000): string | null {
@@ -198,7 +226,7 @@ export function commandHunt(world: World, id: string) {
   const c = world.fauna.find((x) => x.id === id);
   if (!p || !c || c.task === "dead") return "Nothing to hunt.";
   world.player.intent = { kind: "hunt", tx: Math.round(c.x), ty: Math.round(c.z), targetId: c.id, spell: null };
-  pathBeside(world, p, Math.round(c.x), Math.round(c.z));
+  pathWithin(world, p, c.x, c.z, effectiveMain(world) === "bow" ? BOW_RANGE - 0.75 : 1.5);
   return null;
 }
 
@@ -211,7 +239,7 @@ export function commandTame(world: World, id: string) {
   if (FAUNA_META[c.kind].tameDiff >= 90) return "It will not be tamed.";
   if (world.fauna.filter((x) => x.ownerId === world.player.id).length >= 3) return "Three is enough.";
   world.player.intent = { kind: "tame", tx: Math.round(c.x), ty: Math.round(c.z), targetId: c.id, spell: null };
-  p.path = [];
+  pathWithin(world, p, c.x, c.z, 1.5);
   return null;
 }
 
@@ -643,6 +671,7 @@ function skinNow(world: World, p: Person) {
 let swingAcc = 0;
 /** Arrow-shot for a hunting bow — shorter than a mage's reach, longer than a blade's. */
 const BOW_RANGE = 10;
+const targetReplans = new WeakMap<World, { tick: number; targetId: string | null }>();
 
 export const WORK_BEAT = 0.72;
 export const CAST_WINDUP = 0.92;
@@ -736,17 +765,73 @@ export function tickPlayer(world: World, dt: number): string | null {
   }
   if (intent.kind === "tame" || intent.kind === "hunt") {
     const c = world.fauna.find((x) => x.id === intent.targetId);
-    if (c) {
-      // A bow stops at arrow-shot; anything else must close to arm's reach.
-      const reach = intent.kind === "hunt" && effectiveMain(world) === "bow" ? BOW_RANGE : 1.8;
-      if (Math.hypot(p.x - c.x, p.z - c.z) < reach) p.path = [];
+    if (!c || c.task === "dead") {
+      const wasHunting = intent.kind === "hunt";
+      intent.kind = "none";
+      p.path = [];
+      return wasHunting ? "It fled." : "Gone.";
+    }
+    // A bow stops at arrow-shot; anything else must close to arm's reach.
+    const reach = intent.kind === "hunt" && effectiveMain(world) === "bow" ? BOW_RANGE : 1.8;
+    const distance = Math.hypot(p.x - c.x, p.z - c.z);
+    if (distance < reach) {
+      p.path = [];
+    } else {
+      const targetTx = Math.round(c.x);
+      const targetTy = Math.round(c.z);
+      const targetMoved = targetTx !== intent.tx || targetTy !== intent.ty;
+      const previousReplan = targetReplans.get(world);
+      const canReplan =
+        !previousReplan
+        || previousReplan.targetId !== intent.targetId
+        || world.tickCount - previousReplan.tick >= 6;
+      // Moving and temporarily unreachable targets are both bounded to one
+      // path search per six simulation ticks.
+      if ((!p.path.length || targetMoved) && canReplan) {
+        intent.tx = targetTx;
+        intent.ty = targetTy;
+        targetReplans.set(world, { tick: world.tickCount, targetId: intent.targetId });
+        pathWithin(world, p, c.x, c.z, reach === BOW_RANGE ? BOW_RANGE - 0.75 : 1.5, 2500);
+      }
+      // A closed route must never turn into an out-of-range attack or tame.
+      if (p.path.length || distance >= reach) {
+        world.player.workT = 0;
+        return null;
+      }
     }
   }
   if (intent.kind === "cast") {
     if (intent.spell === "magicarrow" || intent.spell === "fireball") {
       const c = world.fauna.find((x) => x.id === intent.targetId);
+      if (!c || c.task === "dead") {
+        intent.kind = "none";
+        p.path = [];
+        return "The target is gone.";
+      }
       const range = intent.spell === "fireball" ? FIREBALL_RANGE : ARROW_RANGE;
-      if (c && Math.hypot(p.x - c.x, p.z - c.z) < range) p.path = [];
+      const distance = Math.hypot(p.x - c.x, p.z - c.z);
+      if (distance < range) {
+        p.path = [];
+      } else {
+        const targetTx = Math.round(c.x);
+        const targetTy = Math.round(c.z);
+        const targetMoved = targetTx !== intent.tx || targetTy !== intent.ty;
+        const previousReplan = targetReplans.get(world);
+        const canReplan =
+          !previousReplan
+          || previousReplan.targetId !== intent.targetId
+          || world.tickCount - previousReplan.tick >= 6;
+        if ((!p.path.length || targetMoved) && canReplan) {
+          intent.tx = targetTx;
+          intent.ty = targetTy;
+          targetReplans.set(world, { tick: world.tickCount, targetId: intent.targetId });
+          pathWithin(world, p, c.x, c.z, range - 0.75, 2500);
+        }
+        if (p.path.length || distance >= range) {
+          world.player.workT = 0;
+          return null;
+        }
+      }
     } else p.path = [];
   }
   if (p.path.length) {

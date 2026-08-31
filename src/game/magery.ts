@@ -1,6 +1,6 @@
 import { PLACES, regionAt } from "./atlas.ts";
 import { FAUNA_META, ITEM_META, SECONDS_PER_HOUR } from "./catalog.ts";
-import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
+import { astarToRange, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { spawnCorpsePile } from "./piles.ts";
 import { rareName, rollKillRare } from "./rare.ts";
 import { successChance, tryGain } from "./skills.ts";
@@ -102,13 +102,11 @@ export function tickMana(world: World, dt: number) {
   world.player.mana = Math.min(max, world.player.mana + rate * dtHours);
 }
 
-function pathToward(world: World, tx: number, ty: number) {
+function pathToward(world: World, tx: number, ty: number, range: number) {
   const p = self(world);
   if (!p) return false;
   const from = tileOf(p.x, p.z);
-  const dest = nearestWalkable(world, tx, ty);
-  if (!dest) return false;
-  const path = astar(world, from.tx, from.ty, dest.x, dest.y);
+  const path = astarToRange(world, from.tx, from.ty, tx, ty, range, 2500);
   if (!path) return false;
   p.path = path.map((n) => ({ tx: n.x, ty: n.y }));
   return true;
@@ -202,7 +200,7 @@ export function commandCast(world: World, spell: SpellId, target?: CastTarget): 
     world.player.armedSpell = null;
     world.player.intent = { kind: "cast", tx: Math.round(c.x), ty: Math.round(c.z), targetId: c.id, spell };
     const range = faunaRange(spell);
-    if (Math.hypot(p.x - c.x, p.z - c.z) > range) pathToward(world, Math.round(c.x), Math.round(c.z));
+    if (Math.hypot(p.x - c.x, p.z - c.z) > range) pathToward(world, c.x, c.z, range - 0.75);
     else p.path = [];
     return null;
   }
@@ -274,8 +272,9 @@ export function castNow(world: World): string | null {
       world.player.intent.kind = "none";
       return "It fled.";
     }
-    if (Math.hypot(p.x - c.x, p.z - c.z) > faunaRange(spell)) {
-      pathToward(world, Math.round(c.x), Math.round(c.z));
+    const range = faunaRange(spell);
+    if (Math.hypot(p.x - c.x, p.z - c.z) > range) {
+      pathToward(world, c.x, c.z, range - 0.75);
       return null;
     }
     p.path = [];
