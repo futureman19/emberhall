@@ -27,29 +27,43 @@ function followPath(world: World, p: Person, dt: number): "idle" | "moving" | "s
     motionWatches.delete(p);
     return "idle";
   }
-  const n = p.path[0]!;
-  const here = tileOf(p.x, p.z);
-  if (!lineWalkable(world, here.tx, here.ty, n.tx, n.ty)) {
-    p.path = [];
-    motionWatches.delete(p);
-    return "stuck";
+  const startX = p.x;
+  const startZ = p.z;
+  let remaining = WALK_SPEED * (p.ghost ? 1.4 : 1) * dt;
+
+  // Spend one continuous movement budget across as many short waypoint
+  // handoffs as it reaches. Returning at a waypoint used to insert a whole
+  // stationary frame at every turn, which read as a periodic walking pause.
+  while (p.path.length && remaining > 1e-9) {
+    const n = p.path[0]!;
+    const here = tileOf(p.x, p.z);
+    if (!lineWalkable(world, here.tx, here.ty, n.tx, n.ty)) {
+      p.path = [];
+      motionWatches.delete(p);
+      return "stuck";
+    }
+    const dx = n.tx - p.x;
+    const dz = n.ty - p.z;
+    const dist = Math.hypot(dx, dz);
+    if (dist <= 1e-9) {
+      p.path.shift();
+      continue;
+    }
+    p.facing = Math.atan2(dx, dz);
+    if (dist <= remaining) {
+      p.x = n.tx;
+      p.z = n.ty;
+      p.path.shift();
+      remaining -= dist;
+      continue;
+    }
+    p.x += (dx / dist) * remaining;
+    p.z += (dz / dist) * remaining;
+    remaining = 0;
   }
-  const dx = n.tx - p.x;
-  const dz = n.ty - p.z;
-  const dist = Math.hypot(dx, dz);
-  if (dist < 0.12) {
-    p.path.shift();
-    p.x = n.tx;
-    p.z = n.ty;
-    motionWatches.delete(p);
-    return "moving";
-  }
-  const step = Math.min(dist, WALK_SPEED * (p.ghost ? 1.4 : 1) * dt);
-  p.x += (dx / dist) * step;
-  p.z += (dz / dist) * step;
-  p.facing = Math.atan2(dx, dz);
+
   const previous = motionWatches.get(p);
-  const moved = previous ? Math.hypot(p.x - previous.x, p.z - previous.z) : step;
+  const moved = Math.hypot(p.x - startX, p.z - startZ);
   const stillFor = moved < 0.001 ? (previous?.stillFor ?? 0) + dt : 0;
   motionWatches.set(p, { x: p.x, z: p.z, stillFor });
   if (stillFor >= STUCK_AFTER) {

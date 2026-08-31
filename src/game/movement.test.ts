@@ -53,6 +53,22 @@ test("a newly blocked smoothed route is replanned instead of walking through it"
   assert.equal(player.z, 10);
 });
 
+test("waypoint handoff consumes the remaining frame distance without pausing", () => {
+  const { world, player } = playerWorld();
+  world.player.intent = { kind: "walk", tx: 11, ty: 10, targetId: null, spell: null };
+  player.x = 10.9;
+  player.path = [
+    { tx: 11, ty: 10 },
+    { tx: 12, ty: 10 },
+  ];
+
+  tickWorld(world, 0.1);
+
+  assert.ok(Math.abs(player.x - 11.16) < 1e-9);
+  assert.equal(player.z, 10);
+  assert.deepEqual(player.path, [{ tx: 12, ty: 10 }]);
+});
+
 test("hunting replans toward a moving target without striking out of range", () => {
   const { world, player } = playerWorld();
   const wolf = creature(20, 10);
