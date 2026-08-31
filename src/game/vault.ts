@@ -1,7 +1,10 @@
 import { ITEM_META } from "./catalog.ts";
 import { AFFIXES, rareName, rareUid } from "./rare.ts";
+import { ITEM_FORM_CATALOG } from "./crafting/forms.ts";
+import { resolveItemStats } from "./crafting/resolve.ts";
 import { log } from "./world.ts";
 import type { ItemId, RareItem, World } from "./types.ts";
+import type { CraftedComponent, GemInlay, ItemFormId, ResolvedItemStats, Workmanship } from "./crafting/types.ts";
 
 /**
  * The Vault — Emberhall's bridge between in-game items and 1Sat ordinal
@@ -17,13 +20,26 @@ import type { ItemId, RareItem, World } from "./types.ts";
  */
 
 export const VAULT_APP = "emberhall";
-export const VAULT_VERSION = 2;
+export const VAULT_VERSION = 3;
 
 /** A rare's identity, written into the chain — the affixes ARE the value. */
 export interface RareInscription {
   name: string;
   affixes: string[];
   maker?: string;
+  unique?: {
+    uid: string;
+    formId: ItemFormId;
+    workmanship: Workmanship;
+    components: CraftedComponent[];
+    inlays: GemInlay[];
+    resolvedStats: ResolvedItemStats;
+    recipeId: string;
+    recipeVersion: number;
+    source: "crafted" | "loot" | "legacy";
+    seed: number;
+    hour: number;
+  };
 }
 
 export interface ItemInscription {
@@ -66,8 +82,59 @@ export function encodeRareInscription(world: World, rare: RareItem): ItemInscrip
     label: ITEM_META[rare.base].label,
     world: world.seed,
     hour: Math.floor(world.hour),
-    rare: { name: rareName(rare), affixes: [...rare.affixes], ...(rare.maker ? { maker: rare.maker } : {}) },
+    rare: {
+      name: rareName(rare),
+      affixes: [...rare.affixes],
+      ...(rare.maker ? { maker: rare.maker } : {}),
+      ...(rare.formId && rare.workmanship && rare.components && rare.inlays && rare.resolvedStats && rare.recipeId && rare.recipeVersion && rare.source
+        ? {
+            unique: {
+              uid: rare.uid,
+              formId: rare.formId,
+              workmanship: rare.workmanship,
+              components: structuredClone(rare.components),
+              inlays: structuredClone(rare.inlays),
+              resolvedStats: structuredClone(rare.resolvedStats),
+              recipeId: rare.recipeId,
+              recipeVersion: rare.recipeVersion,
+              source: rare.source,
+              seed: rare.seed,
+              hour: rare.hour,
+            },
+          }
+        : {}),
+    },
   };
+}
+
+function decodeUnique(raw: unknown, item: ItemId): NonNullable<RareInscription["unique"]> | null {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return null;
+  const value = raw as Record<string, unknown>;
+  if (typeof value.uid !== "string"
+    || typeof value.formId !== "string"
+    || !Object.hasOwn(ITEM_FORM_CATALOG, value.formId)
+    || !["ordinary", "fine", "exceptional"].includes(String(value.workmanship))
+    || !Array.isArray(value.components)
+    || !Array.isArray(value.inlays)
+    || !value.resolvedStats || typeof value.resolvedStats !== "object"
+    || typeof value.recipeId !== "string"
+    || !Number.isSafeInteger(value.recipeVersion)
+    || !["crafted", "loot", "legacy"].includes(String(value.source))
+    || typeof value.seed !== "number" || !Number.isSafeInteger(value.seed)
+    || typeof value.hour !== "number" || !Number.isFinite(value.hour)) return null;
+  try {
+    const form = ITEM_FORM_CATALOG[value.formId as keyof typeof ITEM_FORM_CATALOG];
+    if (form.baseItem !== item || value.recipeId !== form.id || value.recipeVersion !== form.recipeVersion) return null;
+    const resolution = resolveItemStats(form, {
+      workmanship: value.workmanship as Workmanship,
+      components: value.components as CraftedComponent[],
+      inlays: value.inlays as GemInlay[],
+    });
+    if (JSON.stringify(resolution.stats) !== JSON.stringify(value.resolvedStats)) return null;
+    return structuredClone(value) as NonNullable<RareInscription["unique"]>;
+  } catch {
+    return null;
+  }
 }
 
 /** Parse an on-chain JSON payload back into an item inscription, or null. */
@@ -90,10 +157,13 @@ export function decodeItemInscription(raw: unknown): ItemInscription | null {
   if (o.rare && typeof o.rare === "object") {
     const r = o.rare as Record<string, unknown>;
     if (Array.isArray(r.affixes) && r.affixes.every((a) => typeof a === "string")) {
+      const unique = Object.hasOwn(r, "unique") ? decodeUnique(r.unique, item) : undefined;
+      if (Object.hasOwn(r, "unique") && !unique) return null;
       out.rare = {
         name: typeof r.name === "string" ? r.name : "",
         affixes: r.affixes as string[],
         ...(typeof r.maker === "string" ? { maker: r.maker } : {}),
+        ...(unique ? { unique } : {}),
       };
     }
   }
@@ -126,7 +196,30 @@ export function applyMintRare(world: World, uid: string): string | null {
 }
 
 /** Grant an item back after its ordinal burns in the redeem rite. */
-export function applyRedeem(world: World, item: ItemId, rare?: { name: string; affixes: string[]; maker?: string }): string {
+export function applyRedeem(world: World, item: ItemId, rare?: RareInscription): string {
+  if (rare?.unique) {
+    const unique = rare.unique;
+    const restored: RareItem = {
+      uid: unique.uid,
+      base: item,
+      affixes: [...rare.affixes],
+      ...(rare.maker ? { maker: rare.maker } : {}),
+      seed: unique.seed,
+      hour: unique.hour,
+      formId: unique.formId,
+      workmanship: unique.workmanship,
+      components: structuredClone(unique.components),
+      inlays: structuredClone(unique.inlays),
+      resolvedStats: structuredClone(unique.resolvedStats),
+      recipeId: unique.recipeId,
+      recipeVersion: unique.recipeVersion,
+      source: unique.source,
+    };
+    world.player.rares.push(restored);
+    const note = `${rare.name || rareName(restored)} returns from the chain.`;
+    log(world, note);
+    return note;
+  }
   if (rare && rare.affixes.length > 0) {
     const restored: RareItem = {
       uid: rareUid(world.seed, world.hour),
@@ -135,6 +228,12 @@ export function applyRedeem(world: World, item: ItemId, rare?: { name: string; a
       ...(rare.maker ? { maker: rare.maker } : {}),
       seed: world.seed,
       hour: Math.floor(world.hour),
+      workmanship: "ordinary",
+      components: [],
+      inlays: [],
+      recipeId: "legacy",
+      recipeVersion: 1,
+      source: "legacy",
     };
     world.player.rares.push(restored);
     const note = `${rare.name || rareName(restored)} returns from the chain.`;

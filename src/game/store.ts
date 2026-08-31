@@ -53,7 +53,7 @@ import { recruitPerson, setSpeed, tickWorld } from "./sim.ts";
 import { completeObjective, placeBuilding } from "./world.ts";
 import { COURT, stationNear } from "./atlas.ts";
 import type { BuildingKind, CtxTarget, CtxVerb, ItemId, PanelId, ResourceStackKey, Speed, SpellId, Snapshot, WearSlot } from "./types.ts";
-import { applyMint, applyMintRare, applyRedeem } from "./vault.ts";
+import { applyMint, applyMintRare, applyRedeem, type RareInscription } from "./vault.ts";
 
 export type Phase = "title" | "raising" | "intro" | "looking" | "playing";
 
@@ -135,7 +135,7 @@ interface GameUI {
   /** Chain mint confirmed — remove the rare from the keeping and re-snapshot. */
   mintRareApplied: (uid: string) => void;
   /** Chain burn confirmed — return the item (or the rare, with its affixes) and re-snapshot. */
-  redeemApplied: (item: ItemId, rare?: { name: string; affixes: string[]; maker?: string }) => void;
+  redeemApplied: (item: ItemId, rare?: RareInscription) => void;
   makeRecipe: (id: string) => void;
   makeRecipeBatch: (id: string, times: number) => void;
   makeExactRecipe: (id: string, selections: readonly ExactMaterialSelection[]) => void;

@@ -205,7 +205,7 @@ test("rare - vault v2: a wonder mints with its identity and returns whole", () =
   w.player.rares.push(wonder);
   const payload = encodeRareInscription(w, wonder);
   assert.ok(payload?.rare, "rare block rides the inscription");
-  assert.equal(payload!.v, 2);
+  assert.equal(payload!.v, 3);
   assert.equal(payload!.rare!.name, "a mace of force");
   assert.deepEqual(payload!.rare!.affixes, ["of force"]);
   assert.equal(payload!.rare!.maker, "Testhand");

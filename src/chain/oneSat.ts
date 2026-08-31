@@ -69,7 +69,7 @@ export async function mintRareNft(
   const res = await inscribe.execute(ctx, {
     base64Content,
     contentType: "application/json",
-    map: { app: VAULT_APP, type: "item", item: payload.item, rare: "1" },
+    map: { app: VAULT_APP, type: "item", item: payload.item, rare: "1", v: String(payload.v) },
   });
   const txid = await unwrap("The mint", res);
   return { txid, payload };

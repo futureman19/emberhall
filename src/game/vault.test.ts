@@ -4,6 +4,7 @@ import {
   VAULT_APP,
   appendLedger,
   applyMint,
+  applyMintRare,
   applyRedeem,
   decodeBase64Json,
   decodeItemInscription,
@@ -15,7 +16,7 @@ import {
   untrackListing,
   type ItemInscription,
 } from "./vault.ts";
-import { AFFIXES } from "./rare.ts";
+import { AFFIXES, createCraftedItem } from "./rare.ts";
 import { ITEM_META } from "./catalog.ts";
 import { createWorld } from "./world.ts";
 import type { ItemId, World } from "./types.ts";
@@ -43,6 +44,40 @@ test("vault - decode rejects foreign payloads and ghost items", () => {
   assert.equal(decodeItemInscription({ app: VAULT_APP, type: "pin", item: "sword" }), null);
   assert.equal(decodeItemInscription({ app: VAULT_APP, type: "item", item: "excalibur" }), null);
   assert.equal(decodeItemInscription("not json"), null);
+});
+
+test("vault - v3 unique crafted identity is lossless and forged stats fail closed", () => {
+  const world = createWorld();
+  const crafted = createCraftedItem(world, {
+    formId: "bow",
+    base: "bow",
+    workmanship: "exceptional",
+    components: [
+      { role: "body", resourceId: "redwood", form: "log", grade: "choice", amount: 5 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [{ resourceId: "ruby", clarity: "flawed" }],
+    maker: "Ada",
+    recipeId: "bow",
+    recipeVersion: 1,
+  });
+  world.player.rares.push(crafted);
+  const payload = encodeRareInscription(world, crafted)!;
+  assert.equal(payload.v, 3);
+  assert.deepEqual(payload.rare?.unique?.components, crafted.components);
+  assert.deepEqual(payload.rare?.unique?.inlays, crafted.inlays);
+  assert.deepEqual(payload.rare?.unique?.resolvedStats, crafted.resolvedStats);
+
+  const decoded = decodeItemInscription(decodeBase64Json(inscriptionBase64(world, crafted.base, crafted)!));
+  assert.ok(decoded?.rare?.unique);
+  applyMintRare(world, crafted.uid);
+  assert.equal(world.player.rares.length, 0);
+  applyRedeem(world, decoded!.item, decoded!.rare);
+  assert.deepEqual(world.player.rares[0], crafted);
+
+  const forged = structuredClone(payload) as any;
+  forged.rare.unique.resolvedStats.damage = 999;
+  assert.equal(decodeItemInscription(forged), null);
 });
 
 test("vault - mint removes exactly one from the pack and refuses an empty slot", () => {
