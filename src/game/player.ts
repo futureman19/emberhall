@@ -8,10 +8,12 @@ import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { addToPile, spawnCorpsePile, takeFromPile } from "./piles.ts";
 import { mulberry32 } from "./rng.ts";
 import { successChance, tryGain } from "./skills.ts";
+import { addResource, parseResourceInventory } from "./inventory/resources.ts";
+import { assessResourceHarvest, harvestToolTier, type HarvestAssessment } from "./resources/harvest.ts";
 import { playSfx } from "./vale-sfx.ts";
 import { completeObjective, log } from "./world.ts";
 import { effectiveMain, rareMods, rareName, rollKillRare, weaponDmg } from "./rare.ts";
-import type { ItemId, Person, SkillId, WearSlot, World } from "./types.ts";
+import type { ItemId, Person, ResourceInventory, SkillId, WearSlot, World } from "./types.ts";
 
 export function you(world: World) {
   return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
@@ -418,43 +420,77 @@ function isAdjacent(ax: number, ay: number, bx: number, by: number) {
   return Math.max(Math.abs(ax - bx), Math.abs(ay - by)) <= 1;
 }
 
-function chopNow(world: World) {
-  const { tx, ty } = world.player.intent;
-  const t = world.tiles[ty]?.[tx];
-  if (!t || t.kind !== "tree") {
-    world.player.intent.kind = "none";
-    return "No tree.";
-  }
-  const chance = successChance(effSkill(world, "lumberjack"), 12);
-  const ok = Math.random() < chance;
-  const gain = tryGain(world, "lumberjack", ok, true);
-  if (!ok) return gain ? `The axe glances. ${gain}.` : "The axe glances.";
-  t.kind = "dirt";
-  world.scars[`${tx},${ty}`] = { kind: "dirt" };
-  world.landRev += 1;
-  world.player.pack.log = (world.player.pack.log ?? 0) + 1;
-  completeObjective(world, "chop");
-  world.player.intent.kind = "none";
-  return gain ? `A log. ${gain}.` : "A log.";
+interface PreparedResourceHarvest {
+  readonly assessment: HarvestAssessment | null;
+  readonly resourcesAfterSuccess: ResourceInventory;
 }
 
-function mineNow(world: World) {
+function prepareResourceHarvest(world: World, nodeKind: "tree" | "rock"): PreparedResourceHarvest {
+  const resourcesAfterSuccess = parseResourceInventory(world.player.resources);
   const { tx, ty } = world.player.intent;
   const t = world.tiles[ty]?.[tx];
-  if (!t || t.kind !== "rock") {
-    world.player.intent.kind = "none";
-    return "No stone.";
+  if (!t || t.kind !== nodeKind) return { assessment: null, resourcesAfterSuccess };
+  const skill = nodeKind === "tree" ? "lumberjack" : "mining";
+  const assessment = assessResourceHarvest({
+    seed: world.seed,
+    tx,
+    ty,
+    nodeKind,
+    effectiveSkill: effSkill(world, skill),
+    toolTier: harvestToolTier({ nodeKind, tool: inHand(world) }),
+  });
+  if (assessment.status === "ready") {
+    addResource(resourcesAfterSuccess, assessment.yield.key, assessment.yield.quantity);
   }
-  const chance = successChance(effSkill(world, "mining"), 14);
+  return { assessment, resourcesAfterSuccess };
+}
+
+function resourceHarvestNow(world: World, nodeKind: "tree" | "rock", prepared: PreparedResourceHarvest) {
+  const { tx, ty } = world.player.intent;
+  const t = world.tiles[ty]?.[tx];
+  if (!t || t.kind !== nodeKind) {
+    world.player.intent.kind = "none";
+    return nodeKind === "tree" ? "No tree." : "No stone.";
+  }
+
+  const skill = nodeKind === "tree" ? "lumberjack" : "mining";
+  const effectiveSkill = effSkill(world, skill);
+  const { assessment, resourcesAfterSuccess } = prepared;
+  if (!assessment) throw new Error("prepared harvest target changed before commit");
+  if (assessment.status !== "ready") {
+    // Permanent gates stop this work order once, instead of journaling the
+    // same rejection every beat. Node, scar, inventory, and revision remain
+    // untouched, and no chance or skill-gain roll has occurred.
+    world.player.intent.kind = "none";
+    return assessment.message;
+  }
+
+  playSfx(nodeKind === "tree" ? "chop" : "mine", 0.55);
+  burstChips(world, tx, ty, nodeKind === "tree" ? "chop" : "mine");
+  const chance = successChance(effectiveSkill, nodeKind === "tree" ? 12 : 14);
   const ok = Math.random() < chance;
-  const gain = tryGain(world, "mining", ok, true);
-  if (!ok) return gain ? `Dust. ${gain}.` : "Dust.";
+  if (!ok) {
+    const gain = tryGain(world, skill, false, true);
+    const failure = nodeKind === "tree" ? "The axe glances." : "Dust.";
+    return gain ? `${failure.slice(0, -1)}. ${gain}.` : failure;
+  }
+
+  world.player.resources = resourcesAfterSuccess;
   t.kind = "dirt";
   world.scars[`${tx},${ty}`] = { kind: "dirt" };
   world.landRev += 1;
-  world.player.pack.ore = (world.player.pack.ore ?? 0) + 1;
+  if (nodeKind === "tree") completeObjective(world, "chop");
   world.player.intent.kind = "none";
-  return gain ? `Ore. ${gain}.` : "Ore.";
+  const gain = tryGain(world, skill, true, true);
+  return gain ? `${assessment.message} ${gain}.` : assessment.message;
+}
+
+function chopNow(world: World, prepared: PreparedResourceHarvest) {
+  return resourceHarvestNow(world, "tree", prepared);
+}
+
+function mineNow(world: World, prepared: PreparedResourceHarvest) {
+  return resourceHarvestNow(world, "rock", prepared);
 }
 
 function huntNow(world: World, p: Person) {
@@ -617,6 +653,13 @@ function tickChips(dt: number) {
 export function tickPlayer(world: World, dt: number): string | null {
   const p = you(world);
   if (!p) return null;
+  const intent = world.player.intent;
+  // A working chop/mine frame validates and plans the complete typed inventory
+  // before facing, timers, effects, random, skills, logs, intent, or world state.
+  const preparedHarvest =
+    (intent.kind === "chop" || intent.kind === "mine") && p.path.length === 0
+      ? prepareResourceHarvest(world, intent.kind === "chop" ? "tree" : "rock")
+      : null;
   if (inGreybarrow(Math.round(p.x), Math.round(p.z))) completeObjective(world, "barrow");
   if (world.player.notoriety === "criminal" && world.hour > world.player.criminalUntil) world.player.notoriety = "innocent";
   if (p.hp <= 0 && !p.ghost && !world.player.ghost) return dieAsGhost(world, p);
@@ -628,7 +671,6 @@ export function tickPlayer(world: World, dt: number): string | null {
   }
   tickMana(world, dt);
   tickChips(dt);
-  const intent = world.player.intent;
   if (intent.kind === "none" || intent.kind === "walk") {
     world.player.workT = 0;
     return null;
@@ -674,10 +716,9 @@ export function tickPlayer(world: World, dt: number): string | null {
       burstChips(world, intent.tx, intent.ty, "chop");
       return harvestNow(world);
     }
-    playSfx(intent.kind === "chop" ? "chop" : "mine", 0.55);
-    burstChips(world, intent.tx, intent.ty, intent.kind);
-    if (intent.kind === "chop") return chopNow(world);
-    return mineNow(world);
+    if (!preparedHarvest) throw new Error("harvest work reached commit without a validated inventory");
+    if (intent.kind === "chop") return chopNow(world, preparedHarvest);
+    return mineNow(world, preparedHarvest);
   }
   if (intent.kind === "cast") {
     const c = world.fauna.find((x) => x.id === intent.targetId);

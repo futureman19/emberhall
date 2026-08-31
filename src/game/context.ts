@@ -1,7 +1,23 @@
 import { CROP_META, plotAt } from "./farm.ts";
 import { hasBook } from "./magery.ts";
 import { getWorld } from "./live.ts";
+import { effSkill } from "./player.ts";
+import { identifyHarvestNode } from "./resources/harvest.ts";
 import type { CtxTarget, CtxVerb } from "./types.ts";
+
+function harvestVerbLabel(tx: number, ty: number, nodeKind: "tree" | "rock"): string {
+  const world = getWorld();
+  const verb = nodeKind === "tree" ? "Chop" : "Mine";
+  const skill = nodeKind === "tree" ? "lumberjack" : "mining";
+  const identification = identifyHarvestNode({
+    seed: world.seed,
+    tx,
+    ty,
+    nodeKind,
+    effectiveSkill: effSkill(world, skill),
+  });
+  return identification.status === "identified" ? `${verb} ${identification.label}` : verb;
+}
 
 export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
   const w = getWorld();
@@ -21,8 +37,8 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
   if (t.kind === "tile") {
     out.push({ verb: "walk", label: "Walk here" });
     const tile = w.tiles[t.ty]?.[t.tx];
-    if (tile?.kind === "tree") out.push({ verb: "chop", label: "Chop" });
-    if (tile?.kind === "rock") out.push({ verb: "mine", label: "Mine" });
+    if (tile?.kind === "tree") out.push({ verb: "chop", label: harvestVerbLabel(t.tx, t.ty, "tree") });
+    if (tile?.kind === "rock") out.push({ verb: "mine", label: harvestVerbLabel(t.tx, t.ty, "rock") });
     const bed = plotAt(w, t.tx, t.ty);
     if (bed) {
       if (bed.crop && bed.stage >= 3) out.push({ verb: "harvest", label: "Harvest" });

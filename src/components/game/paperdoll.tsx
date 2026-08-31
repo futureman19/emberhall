@@ -1,5 +1,6 @@
 import { ITEM_META, LIVE_SKILLS, NOTORIETY_META, SKILL_META } from "@/game/catalog";
 import { getWorld } from "@/game/live";
+import { listResourceInventory } from "@/game/inventory/resources";
 import { maxMana } from "@/game/magery";
 import { dressedStats } from "@/game/iteminfo";
 import { rareName } from "@/game/rare";
@@ -130,6 +131,7 @@ export function YouDressing() {
   const rares = snap.player?.rares ?? [];
   const skills = snap.player?.skills;
   if (!self || !pack) return null;
+  const resourceRows = listResourceInventory(snap.player?.resources ?? { stacks: {} });
   const ghost = Boolean(self.ghost);
   const held = (Object.keys(pack) as ItemId[]).filter((id) => (pack[id] ?? 0) > 0);
   // Dressed first, then food, then the rest — the pack answers "what can I use?" before "what do I carry?".
@@ -266,6 +268,20 @@ export function YouDressing() {
           );
         })}
       </ul>
+      {resourceRows.length > 0 ? (
+        <ul className="mt-1 max-h-48 space-y-1 overflow-auto" aria-label="Resources">
+          {resourceRows.map((resource) => (
+            <li
+              key={resource.key}
+              className="flex min-h-9 min-w-0 items-center gap-2 rounded-[var(--radius-xs)] border border-border bg-surface px-3"
+            >
+              <span className="inline-block size-3 shrink-0 rounded-full border border-border-strong bg-surface-2" />
+              <span className="min-w-0 flex-1 truncate text-sm text-fg">{resource.label}</span>
+              <span className="shrink-0 text-xs text-muted tabular-nums">{resource.count}</span>
+            </li>
+          ))}
+        </ul>
+      ) : null}
       <div className="mt-3 flex gap-2">
         <button type="button" onClick={heal} className="min-h-11 flex-1 rounded-[var(--radius-md)] border border-border bg-surface-2 text-sm text-fg">
           Bandage

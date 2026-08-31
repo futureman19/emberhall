@@ -1,4 +1,4 @@
-import { RESOURCE_CATALOG } from "../resources/catalog.ts";
+import { RESOURCE_CATALOG, RESOURCE_IDS } from "../resources/catalog.ts";
 import type {
   GemClarity,
   MaterialGrade,
@@ -18,8 +18,33 @@ export interface LegacyResourcePlayer {
   pack: Partial<Record<"log" | "ore", number>>;
 }
 
+export type GenericCraftResourceItem = "log" | "ore";
+
+export interface ResourceInventoryRow {
+  readonly key: ResourceStackKey;
+  readonly label: string;
+  readonly count: number;
+}
+
 const MATERIAL_GRADES = new Set<MaterialGrade>(["rough", "sound", "choice", "pristine"]);
 const GEM_CLARITIES = new Set<GemClarity>(["cracked", "flawed", "cut", "flawless", "perfect"]);
+const MATERIAL_GRADE_ORDER = Object.freeze(["rough", "sound", "choice", "pristine"] as const);
+const GEM_CLARITY_ORDER = Object.freeze([
+  "cracked",
+  "flawed",
+  "cut",
+  "flawless",
+  "perfect",
+] as const);
+
+const GENERIC_CRAFT_STACKS = Object.freeze({
+  log: Object.freeze(
+    MATERIAL_GRADE_ORDER.map((quality) => `oak:log:${quality}` as ResourceStackKey),
+  ),
+  ore: Object.freeze(
+    MATERIAL_GRADE_ORDER.map((quality) => `iron_ore:ore:${quality}` as ResourceStackKey),
+  ),
+} as const satisfies Readonly<Record<GenericCraftResourceItem, readonly ResourceStackKey[]>>);
 
 const LEGACY_ITEM_BY_STACK: Readonly<Partial<Record<ResourceStackKey, "log" | "ore">>> =
   Object.freeze({
@@ -104,6 +129,42 @@ export function createResourceInventory(
   return parseResourceInventory({ stacks });
 }
 
+function titleCase(value: string): string {
+  return value.length === 0 ? value : `${value[0]!.toUpperCase()}${value.slice(1)}`;
+}
+
+/** Canonical, read-only Pack presentation ordered by catalog, form, then quality ladder. */
+export function listResourceInventory(value: unknown): ResourceInventoryRow[] {
+  const inventory = parseResourceInventory(value);
+  const resourceOrder = new Map(RESOURCE_IDS.map((id, index) => [id, index]));
+  return Object.entries(inventory.stacks)
+    .map(([rawKey, count]) => {
+      const key = parseResourceStackKey(rawKey);
+      const [resourceId, form, quality] = key.split(":") as [ResourceId, string, string];
+      const definition = RESOURCE_CATALOG[resourceId];
+      return {
+        key,
+        label: `${definition.label} · ${titleCase(quality)} ${form}`,
+        count: count!,
+        resourceId,
+        form,
+        quality,
+      };
+    })
+    .sort((left, right) => {
+      const resource = resourceOrder.get(left.resourceId)! - resourceOrder.get(right.resourceId)!;
+      if (resource !== 0) return resource;
+      const definition = RESOURCE_CATALOG[left.resourceId];
+      const forms = definition.forms as readonly string[];
+      const form = forms.indexOf(left.form) - forms.indexOf(right.form);
+      if (form !== 0) return form;
+      const qualities: readonly string[] =
+        definition.qualityType === "clarity" ? GEM_CLARITY_ORDER : MATERIAL_GRADE_ORDER;
+      return qualities.indexOf(left.quality) - qualities.indexOf(right.quality);
+    })
+    .map(({ key, label, count }) => ({ key, label, count }));
+}
+
 function storedCount(inventory: ResourceInventory, key: ResourceStackKey): number {
   if (!Object.hasOwn(inventory.stacks, key)) return 0;
   const count = inventory.stacks[key];
@@ -124,7 +185,8 @@ export function addResource(
   const parsed = parseResourceStackKey(key);
   assertPositiveSafeInteger(amount);
   const next = storedCount(inventory, parsed) + amount;
-  if (!Number.isSafeInteger(next)) throw new Error("resource stack count exceeds safe integer range");
+  if (!Number.isSafeInteger(next))
+    throw new Error("resource stack count exceeds safe integer range");
   inventory.stacks[parsed] = next;
   return next;
 }
@@ -159,7 +221,8 @@ function aggregateDebits(debits: readonly ResourceDebit[]): Map<ResourceStackKey
     if (typeof amount !== "number") throw new Error("amount must be a positive safe integer");
     assertPositiveSafeInteger(amount);
     const total = (totals.get(key) ?? 0) + amount;
-    if (!Number.isSafeInteger(total)) throw new Error("resource debit total exceeds safe integer range");
+    if (!Number.isSafeInteger(total))
+      throw new Error("resource debit total exceeds safe integer range");
     totals.set(key, total);
   }
   return new Map([...totals].sort(([left], [right]) => left.localeCompare(right)));
@@ -187,16 +250,56 @@ function legacyCount(player: LegacyResourcePlayer, item: "log" | "ore"): number 
   return count;
 }
 
-export function countPlayerResource(
+/**
+ * Utility-recipe compatibility only: generic log means Oak log and generic ore
+ * means Iron Ore ore. Legacy entries go first, then typed grades low-to-high.
+ */
+export function countGenericCraftResource(
   player: LegacyResourcePlayer,
-  key: ResourceStackKey,
+  item: GenericCraftResourceItem,
 ): number {
+  const inventory = parseResourceInventory(player.resources);
+  let total = legacyCount(player, item);
+  for (const key of GENERIC_CRAFT_STACKS[item]) {
+    total += storedCount(inventory, key);
+    if (!Number.isSafeInteger(total))
+      throw new Error("combined resource count exceeds safe integer range");
+  }
+  return total;
+}
+
+/** Atomic generic debit using the same compatibility and priority as counting. */
+export function debitGenericCraftResource(
+  player: LegacyResourcePlayer,
+  item: GenericCraftResourceItem,
+  amount: number,
+): boolean {
+  assertPositiveSafeInteger(amount);
+  const resources = parseResourceInventory(player.resources);
+  const legacyAvailable = legacyCount(player, item);
+  const legacy = Math.min(legacyAvailable, amount);
+  let left = amount - legacy;
+  for (const key of GENERIC_CRAFT_STACKS[item]) {
+    if (left <= 0) break;
+    const take = Math.min(storedCount(resources, key), left);
+    if (take > 0) takeResource(resources, key, take);
+    left -= take;
+  }
+  if (left > 0) return false;
+  player.pack[item] = legacyAvailable - legacy;
+  player.resources = resources;
+  return true;
+}
+
+export function countPlayerResource(player: LegacyResourcePlayer, key: ResourceStackKey): number {
   const parsed = parseResourceStackKey(key);
-  const typed = storedCount(player.resources, parsed);
+  const resources = parseResourceInventory(player.resources);
+  const typed = storedCount(resources, parsed);
   const legacyItem = LEGACY_ITEM_BY_STACK[parsed];
   if (!legacyItem) return typed;
   const total = typed + legacyCount(player, legacyItem);
-  if (!Number.isSafeInteger(total)) throw new Error("combined resource count exceeds safe integer range");
+  if (!Number.isSafeInteger(total))
+    throw new Error("combined resource count exceeds safe integer range");
   return total;
 }
 
@@ -205,6 +308,7 @@ export function debitPlayerResources(
   debits: readonly ResourceDebit[],
 ): boolean {
   const totals = aggregateDebits(debits);
+  const resources = parseResourceInventory(player.resources);
   const plan: Array<{
     key: ResourceStackKey;
     typed: number;
@@ -213,19 +317,20 @@ export function debitPlayerResources(
   }> = [];
 
   for (const [key, amount] of totals) {
-    const typedAvailable = storedCount(player.resources, key);
-    const typed = Math.min(typedAvailable, amount);
     const legacyItem = LEGACY_ITEM_BY_STACK[key];
-    const legacy = amount - typed;
-    if (legacy > 0 && (!legacyItem || legacyCount(player, legacyItem) < legacy)) return false;
+    const legacyAvailable = legacyItem ? legacyCount(player, legacyItem) : 0;
+    const legacy = Math.min(legacyAvailable, amount);
+    const typed = amount - legacy;
+    if (storedCount(resources, key) < typed) return false;
     plan.push({ key, typed, legacyItem, legacy });
   }
 
   for (const debit of plan) {
-    if (debit.typed > 0) takeResource(player.resources, debit.key, debit.typed);
+    if (debit.typed > 0) takeResource(resources, debit.key, debit.typed);
     if (debit.legacy > 0 && debit.legacyItem) {
       player.pack[debit.legacyItem] = legacyCount(player, debit.legacyItem) - debit.legacy;
     }
   }
+  player.resources = resources;
   return true;
 }

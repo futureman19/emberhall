@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
 import test, { afterEach } from "node:test";
+import { verbsFor } from "./context.ts";
+import { makeResourceStackKey, resourceCount } from "./inventory/resources.ts";
+import { setWorld } from "./live.ts";
 import { commandChop, commandMine, tickPlayer, you } from "./player.ts";
 import { loadSave, writeSave } from "./save.ts";
+import { useGame } from "./store.ts";
 import type { TileKind, World } from "./types.ts";
 import { createPerson, createStubWorld } from "./world.ts";
 
@@ -26,6 +30,17 @@ class MemoryStorage {
 
 function withRandom<T>(value: number, fn: () => T): T {
   Math.random = () => value;
+  try {
+    return fn();
+  } finally {
+    Math.random = originalRandom;
+  }
+}
+
+function withForbiddenRandom<T>(fn: () => T): T {
+  Math.random = () => {
+    throw new Error("harvest gate must not invoke random");
+  };
   try {
     return fn();
   } finally {
@@ -63,19 +78,23 @@ const worldFixture = (() => {
   return world;
 })();
 
-function harvestWorld(kind: TileKind): { world: World; tx: number; ty: number } {
+function harvestWorld(
+  kind: TileKind,
+  seed = 1,
+  tx = 41,
+  ty = 40,
+): { world: World; tx: number; ty: number } {
   const world = structuredClone(worldFixture);
   const player = you(world)!;
-  const tx = 41;
-  const ty = 40;
 
+  world.seed = seed;
   player.x = tx - 1;
   player.z = ty;
   player.path = [];
   world.player.intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
   world.player.workT = 0;
-  world.player.skills.lumberjack = 100;
-  world.player.skills.mining = 100;
+  world.player.skills.lumberjack = 75;
+  world.player.skills.mining = 75;
   world.player.pack.log = 0;
   world.player.pack.ore = 0;
 
@@ -96,9 +115,14 @@ function arrive(world: World) {
 function harvestState(world: World) {
   return {
     pack: structuredClone(world.player.pack),
+    resources: structuredClone(world.player.resources),
     tiles: JSON.stringify(world.tiles),
     scars: structuredClone(world.scars),
     landRev: world.landRev,
+    skills: structuredClone(world.player.skills),
+    lastGain: structuredClone(world.player.lastGain),
+    objectives: structuredClone(world.objectives),
+    log: structuredClone(world.log),
   };
 }
 
@@ -111,7 +135,7 @@ afterEach(() => {
   }
 });
 
-test("harvest - an adjacent tree yields exactly one generic log", () => {
+test("harvest - an adjacent tree yields exactly one canonical typed log", () => {
   const { world, tx, ty } = harvestWorld("tree");
   const packBefore = structuredClone(world.player.pack);
 
@@ -119,10 +143,14 @@ test("harvest - an adjacent tree yields exactly one generic log", () => {
   arrive(world);
   withRandom(0, () => tickPlayer(world, 0.6));
 
-  assert.deepEqual(world.player.pack, { ...packBefore, log: packBefore.log + 1 });
+  assert.deepEqual(world.player.pack, packBefore);
+  assert.equal(
+    resourceCount(world.player.resources, makeResourceStackKey("oak", "log", "rough")),
+    1,
+  );
 });
 
-test("harvest - an adjacent rock yields exactly one generic ore", () => {
+test("harvest - an adjacent rock yields exactly one canonical typed ore", () => {
   const { world, tx, ty } = harvestWorld("rock");
   world.player.wear.main = "pick";
   const packBefore = structuredClone(world.player.pack);
@@ -131,7 +159,11 @@ test("harvest - an adjacent rock yields exactly one generic ore", () => {
   arrive(world);
   withRandom(0, () => tickPlayer(world, 0.6));
 
-  assert.deepEqual(world.player.pack, { ...packBefore, ore: packBefore.ore + 1 });
+  assert.deepEqual(world.player.pack, packBefore);
+  assert.equal(
+    resourceCount(world.player.resources, makeResourceStackKey("iron_ore", "ore", "rough")),
+    1,
+  );
 });
 
 test("harvest - a failed skill roll changes no terrain or inventory state", () => {
@@ -141,6 +173,7 @@ test("harvest - a failed skill roll changes no terrain or inventory state", () =
   const scarsBefore = structuredClone(world.scars);
   const landRevBefore = world.landRev;
   const packBefore = structuredClone(world.player.pack);
+  const resourcesBefore = structuredClone(world.player.resources);
 
   assert.equal(commandChop(world, tx, ty), null);
   arrive(world);
@@ -150,6 +183,7 @@ test("harvest - a failed skill roll changes no terrain or inventory state", () =
   assert.deepEqual(world.scars, scarsBefore);
   assert.equal(world.landRev, landRevBefore);
   assert.deepEqual(world.player.pack, packBefore);
+  assert.deepEqual(world.player.resources, resourcesBefore);
 });
 
 test("harvest - invalid or missing targets clear intent without yielding", () => {
@@ -182,15 +216,23 @@ test("harvest - successful depletion scars once and later ticks do not duplicate
   assert.equal(world.tiles[ty]![tx]!.kind, "dirt");
   assert.deepEqual(world.scars, { [`${tx},${ty}`]: { kind: "dirt" } });
   assert.equal(world.landRev, landRevBefore + 1);
-  assert.equal(world.player.pack.log, 1);
+  assert.equal(world.player.pack.log, 0);
+  assert.equal(
+    resourceCount(world.player.resources, makeResourceStackKey("oak", "log", "rough")),
+    1,
+  );
 
   withRandom(0, () => tickPlayer(world, 2));
   assert.deepEqual(world.scars, { [`${tx},${ty}`]: { kind: "dirt" } });
   assert.equal(world.landRev, landRevBefore + 1);
-  assert.equal(world.player.pack.log, 1);
+  assert.equal(world.player.pack.log, 0);
+  assert.equal(
+    resourceCount(world.player.resources, makeResourceStackKey("oak", "log", "rough")),
+    1,
+  );
 });
 
-test("harvest - save reload preserves the depletion scar and generic result", () => {
+test("harvest - save reload preserves the depletion scar and typed result", () => {
   withMemoryStorage(() => {
     const { world, tx, ty } = harvestWorld("rock");
     world.player.wear.main = "pick";
@@ -204,6 +246,134 @@ test("harvest - save reload preserves the depletion scar and generic result", ()
     assert.ok(loaded);
     assert.equal(loaded.tiles[ty]![tx]!.kind, "dirt");
     assert.deepEqual(loaded.scars[`${tx},${ty}`], { kind: "dirt" });
-    assert.equal(loaded.player.pack.ore, 1);
+    assert.equal(loaded.player.pack.ore, 0);
+    assert.equal(
+      resourceCount(loaded.player.resources, makeResourceStackKey("iron_ore", "ore", "rough")),
+      1,
+    );
   });
+});
+
+test("harvest - unknown and identified gate rejects disclose exactly the allowed node detail", () => {
+  const unknown = harvestWorld("tree", 1_419, 188, 88);
+  unknown.world.player.skills.lumberjack = 34;
+  assert.equal(commandChop(unknown.world, unknown.tx, unknown.ty), null);
+  arrive(unknown.world);
+  const unknownBefore = harvestState(unknown.world);
+  assert.equal(
+    withForbiddenRandom(() => tickPlayer(unknown.world, 0.6)),
+    "You cannot identify this resource node.",
+  );
+  assert.equal(unknown.world.player.intent.kind, "none");
+  assert.deepEqual(harvestState(unknown.world), unknownBefore);
+  assert.equal(
+    withForbiddenRandom(() => tickPlayer(unknown.world, 0.6)),
+    null,
+    "cleared rejection does not repeat",
+  );
+  assert.deepEqual(harvestState(unknown.world), unknownBefore);
+
+  const identified = harvestWorld("tree", 1_419, 188, 88);
+  identified.world.player.skills.lumberjack = 49;
+  assert.equal(commandChop(identified.world, identified.tx, identified.ty), null);
+  arrive(identified.world);
+  const identifiedBefore = harvestState(identified.world);
+  assert.equal(
+    withForbiddenRandom(() => tickPlayer(identified.world, 0.6)),
+    "You identify Pristine Redwood, but need 50 Lumberjacking to extract it.",
+  );
+  assert.equal(identified.world.player.intent.kind, "none");
+  assert.deepEqual(harvestState(identified.world), identifiedBefore);
+
+  const wrongTool = harvestWorld("tree", 1_419, 188, 88);
+  wrongTool.world.player.skills.lumberjack = 50;
+  wrongTool.world.player.wear.main = "knife";
+  assert.equal(commandChop(wrongTool.world, wrongTool.tx, wrongTool.ty), null);
+  arrive(wrongTool.world);
+  const wrongToolBefore = harvestState(wrongTool.world);
+  assert.equal(
+    withForbiddenRandom(() => tickPlayer(wrongTool.world, 0.6)),
+    "You identify Pristine Redwood, but need a tier 2 tool to extract it.",
+  );
+  assert.equal(wrongTool.world.player.intent.kind, "none");
+  assert.deepEqual(harvestState(wrongTool.world), wrongToolBefore);
+});
+
+test("harvest - typed inventory guard errors leave the complete node and player state unchanged", () => {
+  const overflow = harvestWorld("tree");
+  const key = makeResourceStackKey("oak", "log", "rough");
+  overflow.world.player.resources.stacks[key] = Number.MAX_SAFE_INTEGER;
+  overflow.world.player.skills.lumberjack = 100;
+  assert.equal(commandChop(overflow.world, overflow.tx, overflow.ty), null);
+  arrive(overflow.world);
+  const overflowBefore = structuredClone(overflow.world);
+  const overflowPersonBefore = structuredClone(you(overflow.world));
+  assert.throws(
+    () => withForbiddenRandom(() => tickPlayer(overflow.world, 0.6)),
+    /resource stack count exceeds safe integer range/,
+  );
+  assert.deepEqual(overflow.world, overflowBefore);
+  assert.deepEqual(you(overflow.world), overflowPersonBefore);
+  assert.equal(overflow.world.player.workT, 0);
+  assert.equal(you(overflow.world)!.facing, overflowPersonBefore!.facing);
+
+  const unrelated = harvestWorld("tree");
+  unrelated.world.player.skills.lumberjack = 100;
+  (unrelated.world.player.resources.stacks as Record<string, number>)["ruby:log:rough"] = 1;
+  assert.equal(commandChop(unrelated.world, unrelated.tx, unrelated.ty), null);
+  arrive(unrelated.world);
+  const unrelatedBefore = structuredClone(unrelated.world);
+  const unrelatedPersonBefore = structuredClone(you(unrelated.world));
+  assert.throws(
+    () => withForbiddenRandom(() => tickPlayer(unrelated.world, 0.6)),
+    /form log is incompatible with resource ruby/,
+  );
+  // The complete world snapshot covers the full tiles, resources, scars, log,
+  // objectives, player skills/intent/work timer, and every Person field.
+  assert.deepEqual(unrelated.world, unrelatedBefore);
+  assert.deepEqual(you(unrelated.world), unrelatedPersonBefore);
+  assert.equal(unrelated.world.player.workT, 0);
+  assert.equal(you(unrelated.world)!.facing, unrelatedPersonBefore!.facing);
+});
+
+test("harvest - context labels reveal stable identity only at identification skill", () => {
+  const { world, tx, ty } = harvestWorld("tree", 1_419, 188, 88);
+  world.player.skills.lumberjack = 34;
+  setWorld(world);
+  assert.equal(
+    verbsFor({ kind: "tile", id: `${tx},${ty}`, tx, ty, label: "tree" }).find(
+      ({ verb }) => verb === "chop",
+    )?.label,
+    "Chop",
+  );
+  world.player.skills.lumberjack = 35;
+  assert.equal(
+    verbsFor({ kind: "tile", id: `${tx},${ty}`, tx, ty, label: "tree" }).find(
+      ({ verb }) => verb === "chop",
+    )?.label,
+    "Chop Pristine Redwood",
+  );
+});
+
+test("harvest - exact journal result is bridged unchanged to the toast", () => {
+  const { world, tx, ty } = harvestWorld("tree");
+  world.player.skills.lumberjack = 100;
+  world.speed = 3;
+  world.log = [];
+  setWorld(world);
+  world.tiles[ty]![tx]!.kind = "tree";
+  useGame.setState({ toast: null });
+  assert.equal(commandChop(world, tx, ty), null);
+  arrive(world);
+  withRandom(0, () => {
+    useGame.getState().tick(0.2);
+    useGame.getState().tick(0.2);
+  });
+  const exact = "Recovered 2 rough oak logs.";
+  assert.equal(world.log[0]?.text, exact);
+  assert.equal(world.log.filter(({ text }) => text === exact).length, 1);
+  assert.equal(useGame.getState().toast, exact);
+  useGame.getState().tick(0.01);
+  assert.equal(world.log.filter(({ text }) => text === exact).length, 1);
+  assert.equal(useGame.getState().toast, exact);
 });

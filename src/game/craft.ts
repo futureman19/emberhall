@@ -5,6 +5,7 @@ import { rareName, rollExceptional } from "./rare.ts";
 import { successChance, tryGain } from "./skills.ts";
 import { playSfx, type SfxId } from "./vale-sfx.ts";
 import { completeObjective, log } from "./world.ts";
+import { countGenericCraftResource, debitGenericCraftResource, type GenericCraftResourceItem } from "./inventory/resources.ts";
 import type { BuildingKind, ItemId, RareItem, ResourceTag, SkillId, World } from "./types.ts";
 
 export { countTag, hasTag, itemTags, tagConsumeOrder } from "./catalog.ts";
@@ -141,15 +142,58 @@ export function haveNeed(pack: Partial<Record<ItemId, number>> | undefined, rec:
   return true;
 }
 
+function genericCraftItem(id: ItemId): GenericCraftResourceItem | null {
+  return id === "log" || id === "ore" ? id : null;
+}
+
+function exactNeedCount(world: World, id: ItemId): number {
+  const generic = genericCraftItem(id);
+  return generic ? countGenericCraftResource(world.player, generic) : (world.player.pack[id] ?? 0);
+}
+
+/** World-aware exact requirements; public pack-only haveNeed remains backward compatible. */
+function haveWorldNeed(world: World, rec: Recipe): boolean {
+  for (const [k, n] of Object.entries(rec.need)) {
+    if (exactNeedCount(world, k as ItemId) < (n ?? 0)) return false;
+  }
+  const self = selfIds(rec);
+  for (const nt of rec.needTags ?? []) {
+    if (countTag(world.player.pack, nt.tag, self) < nt.n) return false;
+  }
+  return true;
+}
+
+/** Clone-plan-commit exact ingredients so aggregate shortage never partially debits. */
+function debitExactNeeds(world: World, rec: Recipe): boolean {
+  const pack = structuredClone(world.player.pack);
+  const planned = { resources: structuredClone(world.player.resources), pack };
+  for (const [k, n] of Object.entries(rec.need)) {
+    const id = k as ItemId;
+    const amount = n ?? 0;
+    if (amount <= 0) continue;
+    const generic = genericCraftItem(id);
+    if (generic) {
+      if (!debitGenericCraftResource(planned, generic, amount)) return false;
+      continue;
+    }
+    const have = pack[id] ?? 0;
+    if (have < amount) return false;
+    pack[id] = have - amount;
+  }
+  world.player.pack = pack;
+  world.player.resources = planned.resources;
+  return true;
+}
+
 export function canMake(world: World, rec: Recipe) {
   if (rec.needsBlade && !bladeInHand(world)) return false;
-  return haveNeed(world.player.pack, rec);
+  return haveWorldNeed(world, rec);
 }
 
 export function missingNeed(world: World, rec: Recipe): string | null {
   for (const [k, n] of Object.entries(rec.need)) {
     const id = k as ItemId;
-    const have = world.player.pack[id] ?? 0;
+    const have = exactNeedCount(world, id);
     if (have < (n ?? 0)) return `Need ${ITEM_META[id].label.toLowerCase()}.`;
   }
   const self = selfIds(rec);
@@ -230,10 +274,7 @@ function madeList(rec: Recipe, times: number): string {
  * its own gain, so batches keep the skill sim honest.
  */
 function craftOnce(world: World, rec: Recipe): { ok: boolean; gain: string | null; wonder: RareItem | null } {
-  for (const [k, n] of Object.entries(rec.need)) {
-    const id = k as ItemId;
-    world.player.pack[id] = Math.max(0, (world.player.pack[id] ?? 0) - (n ?? 0));
-  }
+  if (!debitExactNeeds(world, rec)) throw new Error("craft ingredients changed during atomic debit");
   consumeTags(world, rec);
   const skill = effSkill(world, rec.skill);
   const chance = successChance(skill, rec.diff);
@@ -266,7 +307,7 @@ export function maxCraftable(world: World, rec: Recipe): number {
   let max = 25;
   for (const [k, n] of Object.entries(rec.need)) {
     if (!n) continue;
-    max = Math.min(max, Math.floor((world.player.pack[k as ItemId] ?? 0) / n));
+    max = Math.min(max, Math.floor(exactNeedCount(world, k as ItemId) / n));
   }
   const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {

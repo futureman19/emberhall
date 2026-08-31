@@ -9,6 +9,7 @@ import {
   createResourceInventory,
   debitPlayerResources,
   debitResources,
+  listResourceInventory,
   makeResourceStackKey,
   parseResourceInventory,
   parseResourceStackKey,
@@ -45,12 +46,24 @@ void compileTimeCorrelationTreaty;
 test("resource inventory - constructs and parses only correlated catalog keys", () => {
   assert.equal(OAK_LOG, "oak:log:sound");
   assert.equal(parseResourceStackKey("ruby:gem:flawless"), "ruby:gem:flawless");
-  assert.throws(() => parseResourceStackKey("ruby:log:rough"), /form log is incompatible with resource ruby/);
-  assert.throws(() => parseResourceStackKey("oak:gem:flawless"), /form gem is incompatible with resource oak/);
-  assert.throws(() => parseResourceStackKey("oak:log:flawless"), /quality flawless is incompatible with resource oak/);
+  assert.throws(
+    () => parseResourceStackKey("ruby:log:rough"),
+    /form log is incompatible with resource ruby/,
+  );
+  assert.throws(
+    () => parseResourceStackKey("oak:gem:flawless"),
+    /form gem is incompatible with resource oak/,
+  );
+  assert.throws(
+    () => parseResourceStackKey("oak:log:flawless"),
+    /quality flawless is incompatible with resource oak/,
+  );
   assert.throws(() => parseResourceStackKey("bogwood:log:sound"), /unknown resource id: bogwood/);
   assert.throws(() => parseResourceStackKey("oak:log"), /invalid resource stack key: oak:log/);
-  assert.throws(() => parseResourceStackKey(Object.create({ toString: () => OAK_LOG })), /resource stack key must be a string/);
+  assert.throws(
+    () => parseResourceStackKey(Object.create({ toString: () => OAK_LOG })),
+    /resource stack key must be a string/,
+  );
 });
 
 test("resource inventory - exact count, add, and take keep canonical sparse stacks", () => {
@@ -89,9 +102,15 @@ test("resource inventory - invalid amounts and insufficient takes never mutate",
   for (const amount of invalid) {
     const inventory = createResourceInventory({ [OAK_LOG]: 4 });
     const before = JSON.stringify(inventory);
-    assert.throws(() => addResource(inventory, OAK_LOG, amount), /amount must be a positive safe integer/);
+    assert.throws(
+      () => addResource(inventory, OAK_LOG, amount),
+      /amount must be a positive safe integer/,
+    );
     assert.equal(JSON.stringify(inventory), before);
-    assert.throws(() => takeResource(inventory, OAK_LOG, amount), /amount must be a positive safe integer/);
+    assert.throws(
+      () => takeResource(inventory, OAK_LOG, amount),
+      /amount must be a positive safe integer/,
+    );
     assert.equal(JSON.stringify(inventory), before);
   }
 
@@ -156,7 +175,10 @@ test("resource inventory - parser accepts canonical positive entries only", () =
   const nullPrototypeInventory = Object.create(null) as Record<string, unknown>;
   nullPrototypeInventory.stacks = { [OAK_LOG]: 1 };
   assert.deepEqual(parseResourceInventory(nullPrototypeInventory), { stacks: { [OAK_LOG]: 1 } });
-  assert.throws(() => parseResourceInventory({ stacks: [] }), /resource stacks must be a plain object/);
+  assert.throws(
+    () => parseResourceInventory({ stacks: [] }),
+    /resource stacks must be a plain object/,
+  );
 });
 
 test("resource inventory - debits reject unknown own fields", () => {
@@ -172,7 +194,12 @@ test("resource inventory - debits reject unknown own fields", () => {
 
 test("resource inventory - legacy adapters count exact typed plus only matching generic stacks", () => {
   const player = {
-    resources: createResourceInventory({ [OAK_LOG]: 2, [IRON_ORE]: 1, [REDWOOD_LOG]: 4, [RUBY]: 2 }),
+    resources: createResourceInventory({
+      [OAK_LOG]: 2,
+      [IRON_ORE]: 1,
+      [REDWOOD_LOG]: 4,
+      [RUBY]: 2,
+    }),
     pack: { log: 3, ore: 5 },
   };
 
@@ -183,7 +210,7 @@ test("resource inventory - legacy adapters count exact typed plus only matching 
   assert.equal(countPlayerResource(player, RUBY), 2);
 });
 
-test("resource inventory - legacy debit uses typed first, falls back atomically, and never leaks", () => {
+test("resource inventory - legacy debit spends legacy first, falls back atomically, and never leaks", () => {
   const player = {
     resources: createResourceInventory({ [OAK_LOG]: 2, [IRON_ORE]: 1, [REDWOOD_LOG]: 1 }),
     pack: { log: 3, ore: 4 },
@@ -195,8 +222,8 @@ test("resource inventory - legacy debit uses typed first, falls back atomically,
     ]),
     true,
   );
-  assert.deepEqual(player.resources.stacks, { [REDWOOD_LOG]: 1 });
-  assert.deepEqual(player.pack, { log: 1, ore: 2 });
+  assert.deepEqual(player.resources.stacks, { [OAK_LOG]: 1, [IRON_ORE]: 1, [REDWOOD_LOG]: 1 });
+  assert.deepEqual(player.pack, { log: 0, ore: 1 });
 
   const noLeak = {
     resources: createResourceInventory({ [REDWOOD_LOG]: 1 }),
@@ -221,4 +248,31 @@ test("resource inventory - legacy debit uses typed first, falls back atomically,
     false,
   );
   assert.equal(JSON.stringify(duplicateFailure), duplicateBefore);
+});
+
+test("resource inventory - Pack rows parse, label, and sort exact canonical stacks", () => {
+  const roughOak = makeResourceStackKey("oak", "log", "rough");
+  const pristineOakBoard = makeResourceStackKey("oak", "board", "pristine");
+  const soundIron = makeResourceStackKey("iron_ore", "ore", "sound");
+  const flawlessRuby = makeResourceStackKey("ruby", "gem", "flawless");
+  const inventory = createResourceInventory({
+    [flawlessRuby]: 1,
+    [soundIron]: 4,
+    [pristineOakBoard]: 2,
+    [roughOak]: 3,
+  });
+
+  assert.deepEqual(listResourceInventory(inventory), [
+    { key: roughOak, label: "Oak · Rough log", count: 3 },
+    { key: pristineOakBoard, label: "Oak · Pristine board", count: 2 },
+    { key: soundIron, label: "Iron Ore · Sound ore", count: 4 },
+    { key: flawlessRuby, label: "Ruby · Flawless gem", count: 1 },
+  ]);
+  assert.throws(
+    () =>
+      listResourceInventory({
+        stacks: { [roughOak]: 3, ["sapphire:ore:rough" as ResourceStackKey]: 1 },
+      }),
+    /form ore is incompatible with resource sapphire/,
+  );
 });

@@ -266,6 +266,8 @@ export const useGame = create<GameUI>((set, get) => ({
   tick: (dt) => {
     const w = getWorld();
     const wasGhost = Boolean(w.player.ghost);
+    const logTopBeforeTick = w.log[0];
+    const logTopKeyBeforeTick = logTopBeforeTick ? `${logTopBeforeTick.t}:${logTopBeforeTick.text}` : null;
     tickWorld(w, dt);
     if (!wasGhost && w.player.ghost) {
       toastTimer = 0;
@@ -277,8 +279,14 @@ export const useGame = create<GameUI>((set, get) => ({
     const top = w.log[0];
     if (top) {
       const topKey = `${top.t}:${top.text}`;
+      // On the first tick after a load, baseline only lines that existed
+      // before the tick. If that tick creates the world's first line, it is a
+      // live result and must toast rather than being mistaken for history.
+      if (lastLogTop === null && logTopKeyBeforeTick !== null) lastLogTop = logTopKeyBeforeTick;
       if (lastLogTop === null) {
-        lastLogTop = topKey; // first tick after a load — history stays history
+        lastLogTop = topKey;
+        toastTimer = 0;
+        set({ toast: top.text });
       } else if (topKey !== lastLogTop) {
         const fresh: string[] = [];
         for (const line of w.log) {
