@@ -1,5 +1,5 @@
 import { ITEM_META } from "@/game/catalog";
-import { gearCompare, statLines, tagLine, worthLine } from "@/game/iteminfo";
+import { craftedItemLines, gearCompare, statLines, tagLine, worthLine } from "@/game/iteminfo";
 import { describeAffix, rareName } from "@/game/rare";
 import { getWorld } from "@/game/live";
 import type { ItemId, RareItem } from "@/game/types";
@@ -16,6 +16,7 @@ export function ItemTipContent({ id, rare, skipCompare }: { id: ItemId; rare?: R
   const stats = statLines(id);
   const worth = worthLine(id);
   const cmp = skipCompare ? null : gearCompare(getWorld(), id, rare ?? null);
+  const crafted = rare ? craftedItemLines(rare) : [];
   return (
     <span className="block">
       <span className={`block font-display text-xs ${rare ? "text-gold" : "text-fg"}`}>
@@ -29,6 +30,9 @@ export function ItemTipContent({ id, rare, skipCompare }: { id: ItemId; rare?: R
             </span>
           ))
         : null}
+      {crafted.map((line) => (
+        <span key={line} className="block text-[11px] text-fg">{line}</span>
+      ))}
       {cmp ? (
         <span
           className={`mt-0.5 block text-[11px] font-semibold ${

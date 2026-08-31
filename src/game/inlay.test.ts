@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createCraftedItem } from "./rare.ts";
+import { appraiseRare, createCraftedItem, rareName } from "./rare.ts";
 import { addResource, makeResourceStackKey, resourceCount } from "./inventory/resources.ts";
 import { applyItemInlay, previewItemInlay } from "./inlay.ts";
 import { createWorld } from "./world.ts";
@@ -48,6 +48,8 @@ test("inlay - flawed Ruby debits exactly one gem and adds deterministic Power II
   assert.deepEqual(updated.inlays, [{ resourceId: "ruby", clarity: "flawed" }]);
   assert.equal(updated.resolvedStats?.damage, 10);
   assert.deepEqual(updated.affixes, [], "deterministic gem identity does not use the random affix pool");
+  assert.match(rareName(updated), /of Power II/);
+  assert.ok(appraiseRare(updated).lines.some(({ label }) => label === "Power II"));
 });
 
 test("inlay - duplicate family and exhausted slot reject without mutation", () => {
@@ -85,6 +87,7 @@ test("inlay - Sapphire Fortune remains local-only and capped at five", () => {
   assert.equal(applied.status, "inlaid");
   assert.deepEqual(flawless.world.player.rares[0]!.resolvedStats, canonicalBefore);
   assert.equal(JSON.stringify(flawless.world.player.rares[0]!.resolvedStats).includes("fortune"), false);
+  assert.equal(appraiseRare(flawless.world.player.rares[0]!).lines.some(({ label }) => label.includes("Fortune")), false);
 
   const perfect = craftedBow("oak");
   addResource(perfect.world.player.resources, PERFECT_SAPPHIRE, 1);

@@ -1,5 +1,7 @@
 import { ITEM_META } from "./catalog.ts";
 import { AFFIXES, rareName, weaponDmg } from "./rare.ts";
+import { RESOURCE_CATALOG } from "./resources/catalog.ts";
+import { gemEffect } from "./gems.ts";
 import type { ItemId, RareItem, World } from "./types.ts";
 
 /**
@@ -34,6 +36,22 @@ export function worthLine(id: ItemId): string | null {
   if (meta.buy > 0 && meta.sell > 0) return `shops: buy ${meta.buy}g · sell ${meta.sell}g`;
   if (meta.sell > 0) return `shops pay ${meta.sell}g`;
   return null;
+}
+
+/** Canonical physical identity and provenance lines for singular crafted work. */
+export function craftedItemLines(rare: RareItem): string[] {
+  if (!rare.formId || !rare.workmanship || !rare.components || !rare.resolvedStats) return [];
+  const lines = [
+    `${rare.workmanship[0]!.toUpperCase()}${rare.workmanship.slice(1)} workmanship`,
+    `${rare.resolvedStats.damage} damage · ${rare.resolvedStats.hitBonus} hit · ${rare.resolvedStats.armor} armor`,
+  ];
+  for (const component of rare.components) {
+    const resource = RESOURCE_CATALOG[component.resourceId];
+    lines.push(`${component.amount} ${component.grade} ${resource.label.toLowerCase()} ${component.form} · ${component.role}`);
+  }
+  for (const inlay of rare.inlays ?? []) lines.push(gemEffect(inlay.resourceId, inlay.clarity).label);
+  if (rare.recipeId && rare.recipeVersion) lines.push(`Recipe ${rare.recipeId} v${rare.recipeVersion} · ${rare.source ?? "crafted"}`);
+  return lines;
 }
 
 /** How a worn rare (or hovered one) shifts a stat beyond its base. */

@@ -231,7 +231,9 @@ export function YouDressing() {
                 >
                   <ItemGlyph id={r.base} />
                   <span className="truncate text-sm text-gold">{rareName(r)}</span>
-                  <span className="ml-auto shrink-0 text-xs text-muted">{r.maker ? `by ${r.maker}` : "wonder"}</span>
+                  <span className="ml-auto shrink-0 text-xs text-muted">
+                    {r.workmanship ? `${r.workmanship} · ` : ""}{r.maker ? `by ${r.maker}` : "wonder"}
+                  </span>
                 </button>
               </Tip>
             </li>

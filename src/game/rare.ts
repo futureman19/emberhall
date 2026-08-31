@@ -2,6 +2,7 @@ import { hasTag, ITEM_META, SKILL_META } from "./catalog.ts";
 import { RESOURCE_CATALOG } from "./resources/catalog.ts";
 import { ITEM_FORM_CATALOG } from "./crafting/forms.ts";
 import { resolveItemStats } from "./crafting/resolve.ts";
+import { gemEffect } from "./gems.ts";
 import type {
   CraftedComponent,
   GemInlay,
@@ -286,7 +287,9 @@ export function rareName(rare: RareItem): string {
   const pre = rare.affixes.filter((a) => AFFIXES[a]?.slot === "pre");
   const suf = rare.affixes.filter((a) => AFFIXES[a]?.slot === "suf");
   const head = [...pre, base].join(" ");
-  const name = suf.length > 0 ? `${head} ${suf.join(" ")}` : head;
+  const gems = (rare.inlays ?? []).map(({ resourceId, clarity }) => `of ${gemEffect(resourceId, clarity).label}`);
+  const suffixes = [...suf, ...gems];
+  const name = suffixes.length > 0 ? `${head} ${suffixes.join(" ")}` : head;
   const article = /^[aeiou]/.test(name) ? "an" : "a";
   return `${article} ${name}`;
 }
@@ -314,6 +317,21 @@ export interface RareMods {
 export function rareMods(world: World): RareMods {
   const mods: RareMods = { hit: 0, dmg: 0, armor: 0, skills: {}, vs: {} };
   for (const { slot, rare } of equippedRares(world)) {
+    if (rare.resolvedStats) {
+      if (slot === "main") {
+        mods.hit += rare.resolvedStats.hitBonus;
+        mods.dmg += rare.resolvedStats.damage - weaponDmg(rare.base);
+      }
+      mods.armor += rare.resolvedStats.armor;
+      for (const [skill, amount] of Object.entries(rare.resolvedStats.skillBonuses)) {
+        if (amount !== undefined) mods.skills[skill as SkillId] = (mods.skills[skill as SkillId] ?? 0) + amount;
+      }
+      for (const [kind, multiplier] of Object.entries(rare.resolvedStats.slayerMultipliers)) {
+        if (multiplier !== undefined) mods.vs[kind as FaunaKind] = Math.max(mods.vs[kind as FaunaKind] ?? 1, multiplier);
+      }
+    } else if (rareClassOf(rare.base) === "armor") {
+      mods.armor += ITEM_META[rare.base].armor;
+    }
     for (const id of rare.affixes) {
       const a = AFFIXES[id];
       if (!a) continue;
@@ -456,6 +474,26 @@ export function appraiseRare(rare: RareItem): Appraisal {
       (def.skillAmt ?? 0) * 2 +
       (def.vsKind ? 10 : 0);
     lines.push({ label: def.label, gold });
+    total += gold;
+  }
+  if (rare.workmanship && rare.workmanship !== "ordinary") {
+    const gold = rare.workmanship === "exceptional" ? 14 : 6;
+    lines.push({ label: `${rare.workmanship} workmanship`, gold });
+    total += gold;
+  }
+  const gradeOrder = ["rough", "sound", "choice", "pristine"] as const;
+  for (const component of rare.components ?? []) {
+    const definition = RESOURCE_CATALOG[component.resourceId];
+    const specialty = definition.traitIds.length > 0 ? 4 : 0;
+    const gold = Math.max(1, (gradeOrder.indexOf(component.grade) + 1) * component.amount + specialty);
+    lines.push({ label: `${definition.label} ${component.role}`, gold });
+    total += gold;
+  }
+  for (const inlay of rare.inlays ?? []) {
+    const effect = gemEffect(inlay.resourceId, inlay.clarity);
+    if (effect.family === "fortune") continue;
+    const gold = effect.rank * 8;
+    lines.push({ label: effect.label, gold });
     total += gold;
   }
   if (rare.maker) {

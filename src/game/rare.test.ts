@@ -20,7 +20,7 @@ import {
   workmanshipForCraft,
 } from "./rare.ts";
 import { mulberry32 } from "./rng.ts";
-import { gearCompare, statLines, tagLine, worthLine, dressedStats } from "./iteminfo.ts";
+import { craftedItemLines, gearCompare, statLines, tagLine, worthLine, dressedStats } from "./iteminfo.ts";
 import { describeAffix, appraiseRare } from "./rare.ts";
 import { commandSellRare } from "./npcs.ts";
 import { commandEquip, commandEquipRare, commandUnequip, you } from "./player.ts";
@@ -157,6 +157,11 @@ test("crafted bows - workmanship is a physical quality roll, never a magic-affix
   assert.equal(bow.maker, maker);
   assert.deepEqual(bow.affixes, []);
   assert.deepEqual(bow.inlays, []);
+  assert.ok(craftedItemLines(bow).some((line) => line.includes("choice redwood log")));
+  world.player.rares.push(bow);
+  world.player.wearRare.main = bow.uid;
+  assert.equal(rareMods(world).hit, 3);
+  assert.equal(rareMods(world).dmg, 0);
 });
 
 test("rare - equipping a wonder swaps with the mundane; mods flow to combat", () => {
@@ -190,7 +195,7 @@ test("rare - weapon affixes count only from the hand; wards count anywhere worn"
   // Sword unequipped (in the keeping) — its damage must not count.
   assert.equal(rareMods(w).dmg, 0);
   assert.ok(commandEquipRare(w, mail.uid));
-  assert.equal(rareMods(w).armor, 4, "the ward counts worn");
+  assert.equal(rareMods(w).armor, ITEM_META.mail.armor + 4, "base armor and ward both count worn");
   assert.equal(rareMods(w).dmg, 0, "the blade still sleeps in the keeping");
 });
 
