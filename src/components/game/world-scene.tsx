@@ -3,7 +3,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { COURT, VIEW } from "@/game/atlas";
-import { cameraFollowAlpha } from "@/game/camera-follow";
+import { cameraFollowAxis } from "@/game/camera-follow";
 import { groundY as heightAt } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { getCastFx, getDeathFx } from "@/game/magery";
@@ -27,6 +27,7 @@ declare global {
     __emberCamera?: {
       getCamera: () => { x: number; y: number; z: number };
       getTarget: () => { x: number; y: number; z: number } | null;
+      getAnchor: () => { x: number; y: number; z: number } | null;
     };
   }
 }
@@ -97,7 +98,9 @@ function PlacePointer() {
 }
 
 function Rig() {
-  const controls = useRef<{ target: THREE.Vector3; update: () => void } | null>(null);
+  const controls = useRef<{ target: THREE.Vector3 } | null>(null);
+  const followAnchor = useRef(new THREE.Vector3());
+  const followReady = useRef(false);
   const { camera } = useThree();
   const phase = useGame((s) => s.phase);
   const placing = useGame((s) => Boolean(s.buildKind));
@@ -111,6 +114,10 @@ function Rig() {
         const target = controls.current?.target;
         return target ? { x: target.x, y: target.y, z: target.z } : null;
       },
+      getAnchor: () =>
+        followReady.current
+          ? { x: followAnchor.current.x, y: followAnchor.current.y, z: followAnchor.current.z }
+          : null,
     };
     window.__emberCamera = probe;
     return () => {
@@ -122,26 +129,38 @@ function Rig() {
     const c = controls.current;
     if (!p || !c || phase !== "playing") return;
     const y = groundY(p.x, p.z);
-    const jump = Math.hypot(p.x - c.target.x, p.z - c.target.z);
-    if (jump > 10) {
-      const dx = p.x - c.target.x;
-      const dy = y + 0.3 - c.target.y;
-      const dz = p.z - c.target.z;
-      c.target.x += dx;
-      c.target.y += dy;
-      c.target.z += dz;
-      camera.position.x += dx;
-      camera.position.y += dy;
-      camera.position.z += dz;
-      return;
+    const anchor = followAnchor.current;
+    if (!followReady.current) {
+      anchor.copy(c.target);
+      followReady.current = true;
     }
-    const k = cameraFollowAlpha(dt);
-    camera.position.x += (p.x - c.target.x) * k;
-    camera.position.y += (y + 0.3 - c.target.y) * k;
-    camera.position.z += (p.z - c.target.z) * k;
-    c.target.x += (p.x - c.target.x) * k;
-    c.target.y += (y + 0.3 - c.target.y) * k;
-    c.target.z += (p.z - c.target.z) * k;
+    const desiredY = y + 0.3;
+    const jump = Math.hypot(p.x - anchor.x, p.z - anchor.z);
+    let dx: number;
+    let dy: number;
+    let dz: number;
+    if (jump > 10) {
+      dx = p.x - anchor.x;
+      dy = desiredY - anchor.y;
+      dz = p.z - anchor.z;
+      anchor.set(p.x, desiredY, p.z);
+    } else {
+      const x = cameraFollowAxis(anchor.x, p.x, dt);
+      const yy = cameraFollowAxis(anchor.y, desiredY, dt);
+      const z = cameraFollowAxis(anchor.z, p.z, dt);
+      dx = x.delta;
+      dy = yy.delta;
+      dz = z.delta;
+      anchor.set(x.next, yy.next, z.next);
+    }
+    // Translate camera and controls target by the same independent anchor
+    // delta. MapControls can orbit or pan without fighting the follow solver.
+    camera.position.x += dx;
+    camera.position.y += dy;
+    camera.position.z += dz;
+    c.target.x += dx;
+    c.target.y += dy;
+    c.target.z += dz;
   }, -1);
   return (
     <MapControls

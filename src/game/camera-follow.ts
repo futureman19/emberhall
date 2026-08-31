@@ -6,3 +6,9 @@ export function cameraFollowAlpha(dt: number, rate = CAMERA_FOLLOW_RATE) {
   if (!Number.isFinite(dt) || !Number.isFinite(rate) || dt <= 0 || rate <= 0) return 0;
   return -Math.expm1(-rate * Math.min(dt, CAMERA_MAX_DT));
 }
+
+/** Advance one independent follow-anchor axis and report its translation. */
+export function cameraFollowAxis(current: number, desired: number, dt: number) {
+  const next = current + (desired - current) * cameraFollowAlpha(dt);
+  return { next, delta: next - current };
+}
