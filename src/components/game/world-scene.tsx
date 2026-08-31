@@ -3,6 +3,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { COURT, VIEW } from "@/game/atlas";
+import { cameraFollowAlpha } from "@/game/camera-follow";
 import { groundY as heightAt } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { getCastFx, getDeathFx } from "@/game/magery";
@@ -21,10 +22,19 @@ import { Piles } from "./pile-meshes";
 import { Campfires } from "./campfire-meshes";
 import { Horizon, Terrain } from "./terrain";
 
+declare global {
+  interface Window {
+    __emberCamera?: {
+      getCamera: () => { x: number; y: number; z: number };
+      getTarget: () => { x: number; y: number; z: number } | null;
+    };
+  }
+}
+
 function SimClock() {
   useFrame((_, dt) => {
     useGame.getState().tick(Math.min(dt, 0.1));
-  });
+  }, -2);
   return null;
 }
 
@@ -91,6 +101,22 @@ function Rig() {
   const { camera } = useThree();
   const phase = useGame((s) => s.phase);
   const placing = useGame((s) => Boolean(s.buildKind));
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const enabled = import.meta.env.DEV || new URLSearchParams(window.location.search).has("qa");
+    if (!enabled) return;
+    const probe = {
+      getCamera: () => ({ x: camera.position.x, y: camera.position.y, z: camera.position.z }),
+      getTarget: () => {
+        const target = controls.current?.target;
+        return target ? { x: target.x, y: target.y, z: target.z } : null;
+      },
+    };
+    window.__emberCamera = probe;
+    return () => {
+      if (window.__emberCamera === probe) delete window.__emberCamera;
+    };
+  }, [camera]);
   useFrame((_, dt) => {
     const p = getWorld().people.find((x) => x.isPlayer);
     const c = controls.current;
@@ -109,14 +135,14 @@ function Rig() {
       camera.position.z += dz;
       return;
     }
-    const k = Math.min(1, dt * 2.6);
+    const k = cameraFollowAlpha(dt);
     camera.position.x += (p.x - c.target.x) * k;
     camera.position.y += (y + 0.3 - c.target.y) * k;
     camera.position.z += (p.z - c.target.z) * k;
     c.target.x += (p.x - c.target.x) * k;
     c.target.y += (y + 0.3 - c.target.y) * k;
     c.target.z += (p.z - c.target.z) * k;
-  });
+  }, -1);
   return (
     <MapControls
       ref={controls as never}

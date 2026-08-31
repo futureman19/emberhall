@@ -311,12 +311,17 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
   const intent = useGame((s) => s.snap.player.intent);
   const bob = Math.sin(p.bob) * (ghost ? 0.08 : 0.04);
   const walkSwing = p.path.length ? Math.sin(p.bob) * 0.35 : 0;
+  const root = useRef<Group>(null);
   const left = useRef<Group>(null);
   const right = useRef<Group>(null);
   useFrame(() => {
     if (!p.isPlayer) return;
     const w = getWorld();
     const you = w.people.find((x) => x.isPlayer);
+    if (you && root.current) {
+      root.current.position.set(you.x, groundAt(you.x, you.z) + (you.ghost ? 0.32 : 0), you.z);
+      root.current.rotation.y = you.facing;
+    }
     const it = w.player.intent;
     const idle = Boolean(you && !you.ghost && !you.path.length);
     const chopping = idle && (it.kind === "chop" || it.kind === "mine" || it.kind === "plant" || it.kind === "harvest" || it.kind === "till");
@@ -366,7 +371,7 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
   const hover = ghost ? 0.32 : 0;
 
   return (
-    <group position={[p.x, groundAt(p.x, p.z) + hover, p.z]} rotation={[0, p.facing, 0]}>
+    <group ref={root} position={[p.x, groundAt(p.x, p.z) + hover, p.z]} rotation={[0, p.facing, 0]}>
       {cloak && (
         <mesh position={[0, 0.62 + bob, 0.16]} castShadow={!ghost}>
           <boxGeometry args={[0.52, 0.72, 0.12]} />
