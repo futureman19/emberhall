@@ -1,6 +1,6 @@
 import { useFrame } from "@react-three/fiber";
 import type { ThreeEvent } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import type { MutableRefObject } from "react";
 import * as THREE from "three";
 import { COURT, MAP, VIEW } from "@/game/atlas";
@@ -11,6 +11,7 @@ import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { hash2 } from "@/game/rng";
 import { useGame } from "@/game/store";
+import { TERRAIN_STREAM_WINDOW, terrainStreamOrigin } from "@/game/terrain-stream";
 import { leftAt, hitAt, hoverAt, liftAt } from "@/game/world-pointer";
 import type { TileKind, World } from "@/game/types";
 import {
@@ -21,6 +22,15 @@ import {
   type VisibleResourceVisualLookup,
 } from "./resource-visuals";
 import { skyTone } from "./sky-math";
+
+declare global {
+  interface Window {
+    __emberTerrain?: {
+      getOrigin: () => { x: number; z: number; rev: number };
+      getRebuildCount: () => number;
+    };
+  }
+}
 
 const KIND_COLOR: Record<TileKind, string> = {
   grass: "#4a5a32",
@@ -56,10 +66,12 @@ const COVER: Record<TileKind, [number, number, number]> = {
   marsh: [0.55, 0.5, 0.08],
 };
 
-const SEGS = Math.min(VIEW * 2, 160);
+// Preserve the existing 0.8-unit ground vertex density while adding one
+// buffered chunk around the visible window.
+const SEGS = Math.min(TERRAIN_STREAM_WINDOW * 2, 170);
 const VERTS = SEGS + 1;
 const VERT_COUNT = VERTS * VERTS;
-const STEP = VIEW / SEGS;
+const STEP = TERRAIN_STREAM_WINDOW / SEGS;
 const TRUNK_H = TREE_WORLD_SILHOUETTE.trunkHeight;
 const CANOPY_H = TREE_WORLD_SILHOUETTE.canopyHeight;
 const CANOPY_R = TREE_WORLD_SILHOUETTE.canopyRadius;
@@ -270,10 +282,24 @@ export function Terrain() {
   const ghostAt = useRef<{ tx: number; ty: number }[]>([]);
   const rockAt = useRef<{ tx: number; ty: number }[]>([]);
   const origin = useRef({ x: COURT.tx, z: COURT.ty, rev: -1 });
+  const rebuildCount = useRef(0);
   const resourceSeed = useRef<number | null>(null);
   const resourceVisuals = useMemo(() => createResourceVisualCache(), []);
   const visibleResourceVisuals = useRef<VisibleResourceVisualLookup>(new Map());
   const count = VIEW * VIEW;
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const enabled = import.meta.env.DEV || new URLSearchParams(window.location.search).has("qa");
+    if (!enabled) return;
+    const probe = {
+      getOrigin: () => ({ ...origin.current }),
+      getRebuildCount: () => rebuildCount.current,
+    };
+    window.__emberTerrain = probe;
+    return () => {
+      if (window.__emberTerrain === probe) delete window.__emberTerrain;
+    };
+  }, []);
   const geo = useMemo(() => {
     const g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(VERT_COUNT * 3), 3));
@@ -300,10 +326,11 @@ export function Terrain() {
     const seedChanged = resourceSeed.current !== w.seed;
     if (seedChanged) resourceVisuals.clear();
     const you = w.people.find((p) => p.isPlayer);
-    const ox = Math.round(you?.x ?? COURT.tx);
-    const oz = Math.round(you?.z ?? COURT.ty);
+    const ox = terrainStreamOrigin(you?.x ?? COURT.tx);
+    const oz = terrainStreamOrigin(you?.z ?? COURT.ty);
     const rev = w.landRev ?? 0;
-    const half = Math.floor(VIEW / 2);
+    const half = Math.floor(TERRAIN_STREAM_WINDOW / 2);
+    const visibleHalf = VIEW / 2;
     const tk = trunks.current;
     const tkg = trunksGhost.current;
     const cn = canopy.current;
@@ -324,6 +351,7 @@ export function Terrain() {
     ensureColor(tft, FLORA);
     const landMoved = seedChanged || origin.current.x !== ox || origin.current.z !== oz || origin.current.rev !== rev;
     if (landMoved) {
+      rebuildCount.current += 1;
       resourceSeed.current = w.seed;
       origin.current = { x: ox, z: oz, rev };
       const pos = geo.attributes.position as THREE.BufferAttribute;
@@ -397,15 +425,15 @@ export function Terrain() {
     let fli = 0;
     let sai = 0;
     let tui = 0;
-    for (let iz = 0; iz < VIEW; iz++) {
-      for (let ix = 0; ix < VIEW; ix++) {
+    for (let iz = 0; iz < TERRAIN_STREAM_WINDOW; iz++) {
+      for (let ix = 0; ix < TERRAIN_STREAM_WINDOW; ix++) {
         const tx = ox - half + ix;
         const ty = oz - half + iz;
         if (tx < 0 || ty < 0 || tx >= MAP || ty >= MAP) continue;
         const t = w.tiles[ty]![tx]!;
         if (t.kind === "tree") {
           const dTree = Math.hypot(tx - px, ty - pz);
-          const nearFade = 1 - smooth01(half - 20, half - 1.2, dTree);
+          const nearFade = 1 - smooth01(visibleHalf - 20, visibleHalf - 1.2, dTree);
           if (nearFade >= 0.05) {
           const resourceVisual = getVisibleResourceVisual(
             visibleResourceVisuals.current,
@@ -466,7 +494,7 @@ export function Terrain() {
           }
           }
         }
-        if (t.kind === "rock" && rk && Math.hypot(tx - px, ty - pz) < half - 2) {
+        if (t.kind === "rock" && rk && Math.hypot(tx - px, ty - pz) < visibleHalf - 2) {
           const resourceVisual = getVisibleResourceVisual(
             visibleResourceVisuals.current,
             resourceVisuals,
@@ -501,7 +529,7 @@ export function Terrain() {
         }
         const wooded = t.kind === "tree";
         const open = t.kind === "grass" || t.kind === "sand" || t.kind === "snow" || t.kind === "marsh";
-        if ((wooded || open) && !blocked(w, tx, ty) && Math.hypot(tx - px, ty - pz) < half - 3) {
+        if ((wooded || open) && !blocked(w, tx, ty) && Math.hypot(tx - px, ty - pz) < visibleHalf - 3) {
           const climate = biomeAt(tx, ty);
           const roll = hash2(tx, ty, w.seed + 41);
           let flora = -1;
@@ -739,8 +767,8 @@ export function Horizon() {
   useFrame(() => {
     const w = getWorld();
     const you = w.people.find((p) => p.isPlayer);
-    const ox = Math.round(you?.x ?? COURT.tx);
-    const oz = Math.round(you?.z ?? COURT.ty);
+    const ox = terrainStreamOrigin(you?.x ?? COURT.tx);
+    const oz = terrainStreamOrigin(you?.z ?? COURT.ty);
     const px = you?.x ?? ox;
     const pz = you?.z ?? oz;
     const rev = w.landRev ?? 0;
