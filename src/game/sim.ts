@@ -36,18 +36,26 @@ function followPath(world: World, p: Person, dt: number): "idle" | "moving" | "s
   // stationary frame at every turn, which read as a periodic walking pause.
   while (p.path.length && remaining > 1e-9) {
     const n = p.path[0]!;
-    const here = tileOf(p.x, p.z);
-    if (!lineWalkable(world, here.tx, here.ty, n.tx, n.ty)) {
-      p.path = [];
-      motionWatches.delete(p);
-      return "stuck";
-    }
     const dx = n.tx - p.x;
     const dz = n.ty - p.z;
     const dist = Math.hypot(dx, dz);
     if (dist <= 1e-9) {
       p.path.shift();
       continue;
+    }
+    // Revalidate only the transition this frame will actually enter. Recasting
+    // the entire remaining smoothed segment from Math.round(current position)
+    // can choose a different grid raster mid-segment and falsely report a
+    // blocked corner, producing a one-frame stop/replan on a legal route.
+    const travel = Math.min(dist, remaining);
+    const nextX = p.x + (dx / dist) * travel;
+    const nextZ = p.z + (dz / dist) * travel;
+    const here = tileOf(p.x, p.z);
+    const nextTile = tileOf(nextX, nextZ);
+    if (!lineWalkable(world, here.tx, here.ty, nextTile.tx, nextTile.ty)) {
+      p.path = [];
+      motionWatches.delete(p);
+      return "stuck";
     }
     p.facing = Math.atan2(dx, dz);
     if (dist <= remaining) {

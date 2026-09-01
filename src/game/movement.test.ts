@@ -44,12 +44,12 @@ test("a newly blocked smoothed route is replanned instead of walking through it"
   assert.deepEqual(player.path, [{ tx: 14, ty: 10 }]);
 
   world.tiles[10]![12]!.kind = "wall";
-  tickWorld(world, 0.1);
+  for (let tick = 0; tick < 8 && player.path.length === 1; tick++) tickWorld(world, 0.1);
 
   assert.equal(world.player.intent.kind, "walk");
   assert.ok(player.path.length > 1);
   assert.deepEqual(player.path.at(-1), { tx: 14, ty: 10 });
-  assert.equal(player.x, 10);
+  assert.ok(player.x < 11.5);
   assert.equal(player.z, 10);
 });
 
@@ -67,6 +67,25 @@ test("waypoint handoff consumes the remaining frame distance without pausing", (
   assert.ok(Math.abs(player.x - 11.16) < 1e-9);
   assert.equal(player.z, 10);
   assert.deepEqual(player.path, [{ tx: 12, ty: 10 }]);
+});
+
+test("a valid smoothed segment does not pause when fractional tile rounding changes its raster", () => {
+  const { world, player } = playerWorld();
+  // The original legal segment approaches around the west side of this wall.
+  // Mid-segment rounding places the player in (11,10); rerasterizing the whole
+  // remaining diagonal from that tile would incorrectly require (12,10) as a
+  // clear corner shoulder and trigger a one-frame replan pause.
+  world.tiles[10]![12]!.kind = "wall";
+  player.x = 10.5408;
+  player.z = 10.3606;
+  player.path = [{ tx: 13, ty: 12 }];
+  world.player.intent = { kind: "walk", tx: 13, ty: 12, targetId: null, spell: null };
+  const before = { x: player.x, z: player.z };
+
+  tickWorld(world, 0.1);
+
+  assert.ok(Math.abs(Math.hypot(player.x - before.x, player.z - before.z) - 0.26) < 1e-9);
+  assert.deepEqual(player.path, [{ tx: 13, ty: 12 }]);
 });
 
 test("hunting replans toward a moving target without striking out of range", () => {
