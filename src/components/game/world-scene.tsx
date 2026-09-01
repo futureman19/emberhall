@@ -3,7 +3,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { COURT, VIEW } from "@/game/atlas";
-import { cameraFollowAxis } from "@/game/camera-follow";
+import { cameraLockedAxis, cameraVerticalAxis } from "@/game/camera-follow";
 import { groundY as heightAt } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { getCastFx, getDeathFx } from "@/game/magery";
@@ -136,25 +136,23 @@ function Rig() {
     }
     const desiredY = y + 0.3;
     const jump = Math.hypot(p.x - anchor.x, p.z - anchor.z);
-    let dx: number;
+    const x = cameraLockedAxis(anchor.x, p.x);
+    const z = cameraLockedAxis(anchor.z, p.z);
+    const dx = x.delta;
     let dy: number;
-    let dz: number;
+    const dz = z.delta;
     if (jump > 10) {
-      dx = p.x - anchor.x;
       dy = desiredY - anchor.y;
-      dz = p.z - anchor.z;
       anchor.set(p.x, desiredY, p.z);
     } else {
-      const x = cameraFollowAxis(anchor.x, p.x, dt);
-      const yy = cameraFollowAxis(anchor.y, desiredY, dt);
-      const z = cameraFollowAxis(anchor.z, p.z, dt);
-      dx = x.delta;
+      const yy = cameraVerticalAxis(anchor.y, desiredY, dt);
       dy = yy.delta;
-      dz = z.delta;
       anchor.set(x.next, yy.next, z.next);
     }
-    // Translate camera and controls target by the same independent anchor
-    // delta. MapControls can orbit or pan without fighting the follow solver.
+    // Lock X/Z to the player's exact rendered displacement so starts, stops,
+    // and turns cannot lag. Elevation alone uses a dead-zone follow to keep
+    // terrain triangle noise out of the camera. Equal translation preserves
+    // MapControls orbit, zoom, and pan offsets.
     camera.position.x += dx;
     camera.position.y += dy;
     camera.position.z += dz;
