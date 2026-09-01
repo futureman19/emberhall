@@ -31,7 +31,13 @@ declare global {
       getAnchor: () => { x: number; y: number; z: number } | null;
     };
     __emberGraphicsRuntime?: {
-      getState: () => { shadows: boolean; farTreeCount: number | null; farTreeStock: number | null; farTreeLimit: number | null };
+      getState: () => {
+        shadows: boolean;
+        farTreeCount: number | null;
+        farTreeStock: number | null;
+        farTreeCandidates: number | null;
+        farTreeLimit: number | null;
+      };
     };
   }
 }
@@ -49,6 +55,7 @@ function GraphicsProbe() {
           shadows: gl.shadowMap.enabled,
           farTreeCount: far?.count ?? null,
           farTreeStock: typeof far?.userData.stockCount === "number" ? far.userData.stockCount : null,
+          farTreeCandidates: typeof far?.userData.candidateCount === "number" ? far.userData.candidateCount : null,
           farTreeLimit: typeof far?.userData.limit === "number" ? far.userData.limit : null,
         };
       },

@@ -64,13 +64,20 @@ try {
     await page.getByRole("button", { name: "Distant trees: 15% fewer" }).click();
     await page.locator('[data-horizon-tree-reduction="15"]').waitFor();
     await page.waitForTimeout(250);
-    const reduced15 = await page.evaluate(() => window.__emberGraphicsRuntime.getState().farTreeCount);
+    const state15 = await page.evaluate(() => window.__emberGraphicsRuntime.getState());
+    const reduced15 = state15.farTreeCount;
 
     await page.getByRole("button", { name: "Distant trees: 30% fewer" }).click();
     await page.locator('[data-horizon-tree-reduction="30"]').waitFor();
     await page.waitForTimeout(250);
-    const reduced30 = await page.evaluate(() => window.__emberGraphicsRuntime.getState().farTreeCount);
+    const state30 = await page.evaluate(() => window.__emberGraphicsRuntime.getState());
+    const reduced30 = state30.farTreeCount;
     assert.ok(reduced15 !== null && reduced30 !== null, `${viewport.name}: tree counts should be observable`);
+    assert.equal(initial.farTreeCandidates, 2200, `${viewport.name}: full candidate horizon should be prepared`);
+    assert.equal(state15.farTreeCandidates, 2200, `${viewport.name}: 15% should thin the complete candidate horizon`);
+    assert.equal(state30.farTreeCandidates, 2200, `${viewport.name}: 30% should thin the complete candidate horizon`);
+    assert.equal(state15.farTreeStock, 1870, `${viewport.name}: 15% should select exactly 85% of candidates`);
+    assert.equal(state30.farTreeStock, 1540, `${viewport.name}: 30% should select exactly 70% of candidates`);
     assert.ok(reduced15 <= initial.farTreeCount, `${viewport.name}: 15% setting should not increase trees`);
     assert.ok(reduced30 < reduced15, `${viewport.name}: 30% setting should process fewer trees than 15%`);
 
@@ -129,7 +136,11 @@ try {
     results.push({
       viewport: viewport.name,
       shadows: { initial: initial.shadows, persisted: persisted.shadows },
-      farTrees: { full: initial.farTreeCount, reduced15, reduced30 },
+      farTrees: {
+        candidates: initial.farTreeCandidates,
+        selected: { full: initial.farTreeStock, reduced15: state15.farTreeStock, reduced30: state30.farTreeStock },
+        rendered: { full: initial.farTreeCount, reduced15, reduced30 },
+      },
       rainLayers: 2,
       persisted: true,
       consoleErrors: errors.length,

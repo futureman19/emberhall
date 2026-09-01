@@ -12,6 +12,7 @@ import { getWorld } from "@/game/live";
 import { hash2 } from "@/game/rng";
 import { useGame } from "@/game/store";
 import type { HorizonTreeReduction } from "@/game/graphics-settings";
+import { thinHorizonTrees } from "@/game/horizon-tree-density";
 import { TERRAIN_STREAM_WINDOW, terrainStreamOrigin } from "@/game/terrain-stream";
 import { leftAt, hitAt, hoverAt, liftAt } from "@/game/world-pointer";
 import type { TileKind, World } from "@/game/types";
@@ -828,13 +829,13 @@ export function Horizon({ treeReduction }: { treeReduction: HorizonTreeReduction
 
       const next: FarStock[] = [];
       const pushTree = (tx: number, ty: number) => {
-        if (next.length >= farTreeLimit) return;
+        if (next.length >= FAR_TREES) return;
         if (tx < 0 || ty < 0 || tx >= MAP || ty >= MAP) return;
         if (w.tiles[ty]?.[tx]?.kind !== "tree") return;
         next.push({ tx, ty, grow: 0.7 + hash2(tx, ty, w.seed + 5) * 0.55 });
       };
-      for (let ty = oz - MID_BAND; ty <= oz + MID_BAND && next.length < farTreeLimit; ty++) {
-        for (let tx = ox - MID_BAND; tx <= ox + MID_BAND && next.length < farTreeLimit; tx++) {
+      for (let ty = oz - MID_BAND; ty <= oz + MID_BAND && next.length < FAR_TREES; ty++) {
+        for (let tx = ox - MID_BAND; tx <= ox + MID_BAND && next.length < FAR_TREES; tx++) {
           const d = Math.hypot(tx - ox, ty - oz);
           if (d < halfV - 14 || d > MID_BAND) continue;
           pushTree(tx, ty);
@@ -842,16 +843,17 @@ export function Horizon({ treeReduction }: { treeReduction: HorizonTreeReduction
       }
       const x0 = align(ox - half, FAR_STEP);
       const z0 = align(oz - half, FAR_STEP);
-      for (let ty = z0; ty <= oz + half && next.length < farTreeLimit; ty += FAR_STEP) {
-        for (let tx = x0; tx <= ox + half && next.length < farTreeLimit; tx += FAR_STEP) {
+      for (let ty = z0; ty <= oz + half && next.length < FAR_TREES; ty += FAR_STEP) {
+        for (let tx = x0; tx <= ox + half && next.length < FAR_TREES; tx += FAR_STEP) {
           const d = Math.hypot(tx - ox, ty - oz);
           if (d <= MID_BAND || d > half - 2) continue;
           pushTree(tx, ty);
         }
       }
-      stock.current = next;
+      stock.current = thinHorizonTrees(next, treeReduction, (tree) => hash2(tree.tx, tree.ty, w.seed + 901));
       if (far.current) {
-        far.current.userData.stockCount = next.length;
+        far.current.userData.stockCount = stock.current.length;
+        far.current.userData.candidateCount = next.length;
         far.current.userData.limit = farTreeLimit;
       }
     }
