@@ -1,12 +1,10 @@
-import { GripHorizontal, Map, Minimize2, MoveDiagonal2 } from "lucide-react";
+import { Maximize2, Minimize2, MoveDiagonal2 } from "lucide-react";
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { MiniVale } from "@/components/game/vale-map";
 import {
   clampMinimapLayout,
   defaultMinimapLayout,
   loadMinimapLayout,
-  MINIMAP_HEADER_SIZE,
-  MINIMAP_ICON_SIZE,
   MINIMAP_STORAGE_KEY,
   saveMinimapLayout,
   type MinimapLayout,
@@ -33,6 +31,7 @@ export function MovableMinimap() {
   const [layout, setLayout] = useState<MinimapLayout>({ x: 12, y: 12, size: 160, minimized: false });
   const [ready, setReady] = useState(false);
   const gesture = useRef<Gesture | null>(null);
+  const suppressMapClick = useRef(false);
   const suppressRestore = useRef(false);
 
   useEffect(() => {
@@ -54,9 +53,7 @@ export function MovableMinimap() {
 
   const begin = (kind: Gesture["kind"]) => (event: ReactPointerEvent<HTMLElement>) => {
     if (event.button !== 0) return;
-    event.preventDefault();
     event.stopPropagation();
-    event.currentTarget.setPointerCapture(event.pointerId);
     gesture.current = {
       kind,
       pointerId: event.pointerId,
@@ -74,7 +71,10 @@ export function MovableMinimap() {
     event.stopPropagation();
     const dx = event.clientX - active.startX;
     const dy = event.clientY - active.startY;
-    if (Math.abs(dx) + Math.abs(dy) > 4) active.moved = true;
+    if (!active.moved && Math.abs(dx) + Math.abs(dy) > 4) {
+      active.moved = true;
+      event.currentTarget.setPointerCapture(event.pointerId);
+    }
 
     setLayout(
       clampMinimapLayout(
@@ -89,9 +89,11 @@ export function MovableMinimap() {
   const end = (event: ReactPointerEvent<HTMLElement>) => {
     const active = gesture.current;
     if (!active || active.pointerId !== event.pointerId) return;
-    event.preventDefault();
     event.stopPropagation();
-    suppressRestore.current = active.moved;
+    if (active.kind === "drag") {
+      if (active.layout.minimized) suppressRestore.current = active.moved;
+      else suppressMapClick.current = active.moved;
+    }
     gesture.current = null;
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
@@ -104,19 +106,26 @@ export function MovableMinimap() {
     onPointerCancel: end,
   };
 
+  const toggleVisual = (expanded: boolean) => (
+    <span
+      data-testid="minimap-toggle-visual"
+      className="flex size-6 items-center justify-center rounded-full border border-border-strong bg-bg/90 text-fg shadow-md backdrop-blur-sm transition-colors hover:text-gold"
+    >
+      {expanded ? <Minimize2 className="size-3" aria-hidden /> : <Maximize2 className="size-3" aria-hidden />}
+    </span>
+  );
+
   if (layout.minimized) {
     return (
       <button
         type="button"
-        aria-label="Restore mini-map"
-        title="Restore mini-map · drag to reposition"
+        aria-label="Maximize mini-map"
+        title="Maximize mini-map · drag to reposition"
         data-testid="minimap-restore"
-        className="pointer-events-auto absolute flex items-center justify-center rounded-[var(--radius-md)] border border-border-strong bg-bg/90 text-gold shadow-lg backdrop-blur-sm touch-none"
+        className="pointer-events-auto absolute flex size-11 touch-none items-center justify-center rounded-full bg-transparent"
         style={{
           left: layout.x,
           top: layout.y,
-          width: MINIMAP_ICON_SIZE,
-          height: MINIMAP_ICON_SIZE,
           visibility: ready ? "visible" : "hidden",
         }}
         onPointerDown={begin("drag")}
@@ -130,7 +139,7 @@ export function MovableMinimap() {
           setLayout((current) => clampMinimapLayout({ ...current, minimized: false }, viewport()));
         }}
       >
-        <Map className="size-5" aria-hidden />
+        {toggleVisual(false)}
       </button>
     );
   }
@@ -144,46 +153,46 @@ export function MovableMinimap() {
         left: layout.x,
         top: layout.y,
         width: layout.size,
-        height: layout.size + MINIMAP_HEADER_SIZE,
+        height: layout.size,
         visibility: ready ? "visible" : "hidden",
       }}
     >
       <div
-        data-testid="minimap-drag-handle"
-        className="flex h-11 touch-none items-center justify-between border-b border-border bg-surface/95 pl-3 text-muted select-none"
-        title="Drag to reposition mini-map"
+        data-testid="minimap-drag-surface"
+        className="size-full cursor-grab touch-none select-none active:cursor-grabbing"
+        title="Tap to walk · drag to reposition"
         onPointerDown={begin("drag")}
+        onClickCapture={(event) => {
+          if (!suppressMapClick.current) return;
+          suppressMapClick.current = false;
+          event.preventDefault();
+          event.stopPropagation();
+        }}
         {...gestureProps}
       >
-        <span className="flex items-center gap-2 font-display text-xs tracking-wider uppercase">
-          <GripHorizontal className="size-4" aria-hidden />
-          Vale
-        </span>
-        <button
-          type="button"
-          aria-label="Minimize mini-map"
-          title="Minimize mini-map"
-          className="flex size-11 items-center justify-center text-muted transition-colors hover:text-fg"
-          onPointerDown={(event) => event.stopPropagation()}
-          onClick={(event) => {
-            event.stopPropagation();
-            setLayout((current) => clampMinimapLayout({ ...current, minimized: true }, viewport()));
-          }}
-        >
-          <Minimize2 className="size-4" aria-hidden />
-        </button>
-      </div>
-
-      <div style={{ width: layout.size, height: layout.size }}>
         <MiniVale />
       </div>
+
+      <button
+        type="button"
+        aria-label="Minimize mini-map"
+        title="Minimize mini-map"
+        className="absolute top-0 right-0 z-30 flex size-11 items-center justify-center rounded-full bg-transparent"
+        onPointerDown={(event) => event.stopPropagation()}
+        onClick={(event) => {
+          event.stopPropagation();
+          setLayout((current) => clampMinimapLayout({ ...current, minimized: true }, viewport()));
+        }}
+      >
+        {toggleVisual(true)}
+      </button>
 
       <button
         type="button"
         aria-label="Resize mini-map"
         title="Drag to resize mini-map"
         data-testid="minimap-resize-handle"
-        className="absolute right-0 bottom-0 flex size-11 touch-none items-end justify-end bg-gradient-to-tl from-bg/80 to-transparent p-2 text-fg drop-shadow-md"
+        className="absolute right-0 bottom-0 z-30 flex size-11 touch-none items-end justify-end bg-gradient-to-tl from-bg/80 to-transparent p-2 text-fg drop-shadow-md"
         onPointerDown={begin("resize")}
         {...gestureProps}
       >

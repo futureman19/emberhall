@@ -2,7 +2,6 @@ export const MINIMAP_STORAGE_KEY = "emberhall-minimap-layout-v1";
 export const MIN_MINIMAP_SIZE = 128;
 export const MAX_MINIMAP_SIZE = 320;
 export const DEFAULT_MINIMAP_SIZE = 160;
-export const MINIMAP_HEADER_SIZE = 44;
 export const MINIMAP_ICON_SIZE = 44;
 export const MINIMAP_VIEWPORT_PADDING = 12;
 
@@ -41,7 +40,7 @@ function isLayout(value: unknown): value is MinimapLayout {
 export function clampMinimapLayout(layout: MinimapLayout, viewport: Viewport): MinimapLayout {
   const size = clamp(layout.size, MIN_MINIMAP_SIZE, MAX_MINIMAP_SIZE);
   const width = layout.minimized ? MINIMAP_ICON_SIZE : size;
-  const height = layout.minimized ? MINIMAP_ICON_SIZE : size + MINIMAP_HEADER_SIZE;
+  const height = layout.minimized ? MINIMAP_ICON_SIZE : size;
   return {
     ...layout,
     x: clamp(layout.x, MINIMAP_VIEWPORT_PADDING, viewport.width - width - MINIMAP_VIEWPORT_PADDING),
@@ -54,7 +53,7 @@ export function defaultMinimapLayout(viewport: Viewport): MinimapLayout {
   return clampMinimapLayout(
     {
       x: viewport.width - DEFAULT_MINIMAP_SIZE - MINIMAP_VIEWPORT_PADDING,
-      y: viewport.height - DEFAULT_MINIMAP_SIZE - MINIMAP_HEADER_SIZE - 80,
+      y: viewport.height - DEFAULT_MINIMAP_SIZE - 80,
       size: DEFAULT_MINIMAP_SIZE,
       minimized: false,
     },

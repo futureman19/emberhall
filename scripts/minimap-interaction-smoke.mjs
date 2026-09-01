@@ -39,13 +39,27 @@ try {
     const initial = await minimap.boundingBox();
     assert.ok(initial, `${viewport.name}: mini-map should render`);
 
-    const dragHandle = page.getByTestId("minimap-drag-handle");
-    const dragBox = await dragHandle.boundingBox();
-    assert.ok(dragBox, `${viewport.name}: drag handle should render`);
-    await page.mouse.move(dragBox.x + 20, dragBox.y + 20);
+    const dragSurface = page.getByTestId("minimap-drag-surface");
+    assert.equal(await page.getByTestId("minimap-drag-handle").count(), 0, `${viewport.name}: grey drag header should be removed`);
+    await page.evaluate(() => {
+      window.__minimapClickCount = 0;
+      document.querySelector('[data-vale-map="mini"]')?.addEventListener("click", () => {
+        window.__minimapClickCount += 1;
+      });
+    });
+    const dragBox = await dragSurface.boundingBox();
+    assert.ok(dragBox, `${viewport.name}: map drag surface should render`);
+    assert.equal(initial.height, initial.width, `${viewport.name}: mini-map should have no attached header`);
+    const dragX = dragBox.x + dragBox.width * 0.4;
+    const dragY = dragBox.y + dragBox.height * 0.4;
+    await page.mouse.click(dragX, dragY);
+    assert.equal(await page.evaluate(() => window.__minimapClickCount), 1, `${viewport.name}: tapping the map should still activate it`);
+    await page.mouse.move(dragX, dragY);
     await page.mouse.down();
+    await page.mouse.move(dragX + 8, dragY + 8, { steps: 1 });
     await page.mouse.move(48, 72, { steps: 1 });
     await page.mouse.up();
+    assert.equal(await page.evaluate(() => window.__minimapClickCount), 1, `${viewport.name}: dragging should not activate the map`);
 
     const moved = await minimap.boundingBox();
     assert.ok(moved, `${viewport.name}: moved mini-map should render`);
@@ -57,6 +71,7 @@ try {
     assert.ok(resizeBox, `${viewport.name}: resize handle should render`);
     await page.mouse.move(resizeBox.x + 30, resizeBox.y + 30);
     await page.mouse.down();
+    await page.mouse.move(resizeBox.x + 38, resizeBox.y + 38, { steps: 1 });
     await page.mouse.move(resizeBox.x + 500, resizeBox.y + 500, { steps: 1 });
     await page.mouse.up();
     const maximum = await minimap.boundingBox();
@@ -68,6 +83,7 @@ try {
     assert.ok(resizeBox, `${viewport.name}: resized handle should render`);
     await page.mouse.move(resizeBox.x + 30, resizeBox.y + 30);
     await page.mouse.down();
+    await page.mouse.move(resizeBox.x + 22, resizeBox.y + 22, { steps: 1 });
     await page.mouse.move(resizeBox.x - 500, resizeBox.y - 500, { steps: 1 });
     await page.mouse.up();
     const minimum = await minimap.boundingBox();
@@ -79,7 +95,14 @@ try {
     await restore.waitFor();
     assert.equal(await minimap.count(), 0, `${viewport.name}: expanded map should hide when minimized`);
     const icon = await restore.boundingBox();
-    assert.ok(icon && icon.width === 44 && icon.height === 44, `${viewport.name}: minimized map should be a 44px icon`);
+    assert.ok(icon && icon.width === 44 && icon.height === 44, `${viewport.name}: compact toggle should retain a usable 44px hit target`);
+    const toggleVisual = page.getByTestId("minimap-toggle-visual");
+    const toggleVisualBox = await toggleVisual.boundingBox();
+    assert.ok(toggleVisualBox && toggleVisualBox.width === 24 && toggleVisualBox.height === 24, `${viewport.name}: toggle should render as a tiny 24px circle`);
+    assert.ok(
+      Number.parseFloat(await toggleVisual.evaluate((element) => getComputedStyle(element).borderRadius)) >= 12,
+      `${viewport.name}: toggle should be circular`,
+    );
 
     await restore.click();
     await minimap.waitFor();

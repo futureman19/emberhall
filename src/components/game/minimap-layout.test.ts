@@ -17,7 +17,7 @@ test("clamps minimap size and position inside the viewport", () => {
     clampMinimapLayout({ x: 790, y: 590, size: 999, minimized: false }, viewport),
     {
       x: 800 - MAX_MINIMAP_SIZE - 12,
-      y: 600 - MAX_MINIMAP_SIZE - 44 - 12,
+      y: 600 - MAX_MINIMAP_SIZE - 12,
       size: MAX_MINIMAP_SIZE,
       minimized: false,
     },
