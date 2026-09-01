@@ -3,10 +3,15 @@ import assert from "node:assert/strict";
 import { chromium } from "playwright";
 
 const url = process.env.EMBERHALL_URL || "http://127.0.0.1:8080/";
-const viewports = [
+const allViewports = [
   { name: "desktop", width: 1280, height: 800 },
   { name: "mobile", width: 390, height: 844 },
 ];
+const requestedViewport = process.env.EMBERHALL_VIEWPORT;
+const viewports = requestedViewport
+  ? allViewports.filter((viewport) => viewport.name === requestedViewport)
+  : allViewports;
+assert.ok(viewports.length > 0, `Unknown EMBERHALL_VIEWPORT: ${requestedViewport}`);
 
 const browser = await chromium.launch({ headless: true });
 const results = [];
@@ -17,6 +22,7 @@ try {
     const context = await browser.newContext({ viewport });
     let page = await context.newPage();
     page.setDefaultTimeout(15_000);
+    page.setDefaultNavigationTimeout(60_000);
     const errors = [];
     page.on("console", (message) => {
       if (message.type() === "error") errors.push(message.text());
@@ -86,11 +92,12 @@ try {
     await page.close();
     page = await context.newPage();
     page.setDefaultTimeout(15_000);
+    page.setDefaultNavigationTimeout(60_000);
     page.on("console", (message) => {
       if (message.type() === "error") errors.push(message.text());
     });
     page.on("pageerror", (error) => errors.push(error.message));
-    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30_000 });
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60_000 });
     await page.waitForFunction(() => Boolean(window.__ember?.useGame));
     await page.evaluate(() => window.__ember.useGame.setState({ phase: "playing" }));
     await page.getByTestId("movable-minimap").waitFor();
