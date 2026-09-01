@@ -68,7 +68,7 @@ const COVER: Record<TileKind, [number, number, number]> = {
 
 // Preserve the existing 0.8-unit ground vertex density while adding one
 // buffered chunk around the visible window.
-const SEGS = Math.min(TERRAIN_STREAM_WINDOW * 2, 170);
+const SEGS = Math.min(TERRAIN_STREAM_WINDOW * 2, 180);
 const VERTS = SEGS + 1;
 const VERT_COUNT = VERTS * VERTS;
 const STEP = TERRAIN_STREAM_WINDOW / SEGS;
