@@ -11,6 +11,7 @@ import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { hash2 } from "@/game/rng";
 import { useGame } from "@/game/store";
+import type { HorizonTreeReduction } from "@/game/graphics-settings";
 import { TERRAIN_STREAM_WINDOW, terrainStreamOrigin } from "@/game/terrain-stream";
 import { leftAt, hitAt, hoverAt, liftAt } from "@/game/world-pointer";
 import type { TileKind, World } from "@/game/types";
@@ -740,9 +741,11 @@ function align(v: number, step: number) {
   return Math.ceil(v / step) * step;
 }
 
-export function Horizon() {
+export function Horizon({ treeReduction }: { treeReduction: HorizonTreeReduction }) {
   const far = useRef<THREE.InstancedMesh>(null);
-  const origin = useRef({ x: COURT.tx, z: COURT.ty, rev: -1 });
+  const origin = useRef({ x: COURT.tx, z: COURT.ty, rev: -1, treeReduction: -1 });
+  const horizonWorld = useRef<World | null>(null);
+  const farTreeLimit = Math.floor(FAR_TREES * (1 - treeReduction / 100));
   const stock = useRef<FarStock[]>([]);
   const geo = useMemo(() => {
     const g = new THREE.BufferGeometry();
@@ -774,8 +777,15 @@ export function Horizon() {
     const rev = w.landRev ?? 0;
     const half = HORIZON / 2;
     const halfV = VIEW / 2;
-    if (origin.current.x !== ox || origin.current.z !== oz || origin.current.rev !== rev) {
-      origin.current = { x: ox, z: oz, rev };
+    if (
+      horizonWorld.current !== w ||
+      origin.current.x !== ox ||
+      origin.current.z !== oz ||
+      origin.current.rev !== rev ||
+      origin.current.treeReduction !== treeReduction
+    ) {
+      horizonWorld.current = w;
+      origin.current = { x: ox, z: oz, rev, treeReduction };
       const pos = geo.attributes.position as THREE.BufferAttribute;
       const col = geo.attributes.color as THREE.BufferAttribute;
       const cov = geo.attributes.cover as THREE.BufferAttribute;
@@ -818,13 +828,13 @@ export function Horizon() {
 
       const next: FarStock[] = [];
       const pushTree = (tx: number, ty: number) => {
-        if (next.length >= FAR_TREES) return;
+        if (next.length >= farTreeLimit) return;
         if (tx < 0 || ty < 0 || tx >= MAP || ty >= MAP) return;
         if (w.tiles[ty]?.[tx]?.kind !== "tree") return;
         next.push({ tx, ty, grow: 0.7 + hash2(tx, ty, w.seed + 5) * 0.55 });
       };
-      for (let ty = oz - MID_BAND; ty <= oz + MID_BAND && next.length < FAR_TREES; ty++) {
-        for (let tx = ox - MID_BAND; tx <= ox + MID_BAND && next.length < FAR_TREES; tx++) {
+      for (let ty = oz - MID_BAND; ty <= oz + MID_BAND && next.length < farTreeLimit; ty++) {
+        for (let tx = ox - MID_BAND; tx <= ox + MID_BAND && next.length < farTreeLimit; tx++) {
           const d = Math.hypot(tx - ox, ty - oz);
           if (d < halfV - 14 || d > MID_BAND) continue;
           pushTree(tx, ty);
@@ -832,14 +842,18 @@ export function Horizon() {
       }
       const x0 = align(ox - half, FAR_STEP);
       const z0 = align(oz - half, FAR_STEP);
-      for (let ty = z0; ty <= oz + half && next.length < FAR_TREES; ty += FAR_STEP) {
-        for (let tx = x0; tx <= ox + half && next.length < FAR_TREES; tx += FAR_STEP) {
+      for (let ty = z0; ty <= oz + half && next.length < farTreeLimit; ty += FAR_STEP) {
+        for (let tx = x0; tx <= ox + half && next.length < farTreeLimit; tx += FAR_STEP) {
           const d = Math.hypot(tx - ox, ty - oz);
           if (d <= MID_BAND || d > half - 2) continue;
           pushTree(tx, ty);
         }
       }
       stock.current = next;
+      if (far.current) {
+        far.current.userData.stockCount = next.length;
+        far.current.userData.limit = farTreeLimit;
+      }
     }
 
     const mesh = far.current;
@@ -847,7 +861,7 @@ export function Horizon() {
     let fi = 0;
     if (mesh) {
       for (const t of stock.current) {
-        if (fi >= FAR_TREES) break;
+        if (fi >= farTreeLimit) break;
         const d = Math.hypot(t.tx - px, t.ty - pz);
         const lod = smooth01(halfV - 20, halfV + 10, d);
         const rim = 1 - smooth01(half - 55, half - 6, d);
@@ -864,7 +878,11 @@ export function Horizon() {
         fi++;
       }
     }
-    hideRest(mesh, fi, FAR_TREES);
+    if (mesh) {
+      mesh.count = fi;
+      mesh.userData.limit = farTreeLimit;
+      mesh.userData.stockCount = stock.current.length;
+    }
     if (mesh?.instanceColor) mesh.instanceColor.needsUpdate = true;
   });
 
@@ -873,7 +891,7 @@ export function Horizon() {
       <mesh geometry={geo} frustumCulled={false} raycast={() => {}}>
         <GroundMaterial far />
       </mesh>
-      <instancedMesh ref={far} args={[undefined, undefined, FAR_TREES]} frustumCulled={false} raycast={() => {}}>
+      <instancedMesh name="far-horizon-trees" ref={far} args={[undefined, undefined, FAR_TREES]} frustumCulled={false} raycast={() => {}}>
         <coneGeometry args={[1.05, 2.4, 4]} />
         <meshStandardMaterial color="#ffffff" roughness={0.96} />
       </instancedMesh>

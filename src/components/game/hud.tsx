@@ -279,7 +279,7 @@ function SettingsButton() {
         "pointer-events-auto relative z-10 grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
         open && "bg-surface-2 text-fg",
       )}
-      aria-label="Settings — sounds and the Vault"
+      aria-label="Settings — sound, graphics and the Vault"
       aria-expanded={open}
     >
       <Settings className="size-4" />

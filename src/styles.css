@@ -55,9 +55,56 @@ body,
   animation: ember-load 1.35s linear infinite;
 }
 
+@keyframes ember-rain-fall {
+  from {
+    background-position: 0 -96px;
+  }
+  to {
+    background-position: -32px 128px;
+  }
+}
+
+.ember-screen-rain {
+  contain: strict;
+  overflow: hidden;
+  transition: opacity 180ms linear;
+}
+
+.ember-screen-rain__far,
+.ember-screen-rain__near {
+  background-repeat: repeat;
+  will-change: background-position;
+}
+
+.ember-screen-rain__far {
+  background-image:
+    linear-gradient(108deg, transparent 0 45%, rgb(168 188 200 / 36%) 46% 49%, transparent 50% 100%),
+    linear-gradient(111deg, transparent 0 47%, rgb(168 188 200 / 24%) 48% 50%, transparent 51% 100%);
+  background-size: 29px 58px, 47px 86px;
+  animation: ember-rain-fall 780ms linear infinite;
+  opacity: 0.58;
+}
+
+.ember-screen-rain__near {
+  background-image:
+    linear-gradient(108deg, transparent 0 43%, rgb(196 211 220 / 48%) 44% 49%, transparent 50% 100%),
+    linear-gradient(105deg, transparent 0 46%, rgb(196 211 220 / 32%) 47% 50%, transparent 51% 100%);
+  background-size: 43px 92px, 67px 126px;
+  animation: ember-rain-fall 520ms linear infinite;
+}
+
+.ember-screen-rain[data-active="false"] > span {
+  visibility: hidden;
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ember-shimmer {
     animation: none;
     opacity: 0;
+  }
+
+  .ember-screen-rain > span {
+    animation-duration: 1.8s;
   }
 }

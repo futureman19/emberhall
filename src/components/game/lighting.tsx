@@ -1,5 +1,5 @@
 import { useFrame, useThree } from "@react-three/fiber";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import * as THREE from "three";
 import { COURT, inGreybarrow } from "@/game/atlas";
 import { biomeAt } from "@/game/biome";
@@ -16,7 +16,7 @@ import { skyFlash, skyTone, sunColorFor, sunDirFor, sunHeight } from "./sky-math
 // (weather and lightning already folded in) — background and fog wear it.
 const GROUND_HAZE = new THREE.Color("#6f7a62");
 
-export function Lighting() {
+export function Lighting({ shadows }: { shadows: boolean }) {
   const dir = useRef<THREE.DirectionalLight>(null);
   const amb = useRef<THREE.AmbientLight>(null);
   const hemi = useRef<THREE.HemisphereLight>(null);
@@ -27,7 +27,6 @@ export function Lighting() {
   const { scene, gl } = useThree();
 
   useLayoutEffect(() => {
-    gl.shadowMap.enabled = true;
     gl.shadowMap.type = THREE.PCFShadowMap;
     gl.toneMapping = THREE.ACESFilmicToneMapping;
     gl.toneMappingExposure = 1.36;
@@ -39,6 +38,11 @@ export function Lighting() {
       scene.remove(light.target);
     };
   }, [scene, gl]);
+
+  useEffect(() => {
+    gl.shadowMap.enabled = shadows;
+    gl.shadowMap.needsUpdate = true;
+  }, [gl, shadows]);
 
   useFrame((_, rawDt) => {
     const dt = Math.min(rawDt, 0.1);
@@ -125,7 +129,7 @@ export function Lighting() {
       <ambientLight ref={amb} intensity={0.58} color="#ece6d8" />
       <directionalLight
         ref={dir}
-        castShadow
+        castShadow={shadows}
         position={[COURT.tx + 22, 40, COURT.ty + 14]}
         intensity={1.94}
         color="#fff1c8"
@@ -137,10 +141,6 @@ export function Lighting() {
         <mesh frustumCulled={false} renderOrder={-1}>
           <sphereGeometry args={[2.4, 20, 14]} />
           <meshBasicMaterial color="#f2d48a" toneMapped={false} fog={false} depthWrite={false} />
-        </mesh>
-        <mesh frustumCulled={false} renderOrder={-2}>
-          <sphereGeometry args={[4.6, 20, 14]} />
-          <meshBasicMaterial color="#e0b56a" toneMapped={false} fog={false} transparent opacity={0.22} depthWrite={false} />
         </mesh>
       </group>
     </>

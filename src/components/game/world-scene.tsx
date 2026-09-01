@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { COURT, VIEW } from "@/game/atlas";
 import { cameraFixedHeight, cameraLockedAxis } from "@/game/camera-follow";
 import { groundY as heightAt } from "@/game/height";
+import { getGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
 import { getWorld } from "@/game/live";
 import { getCastFx, getDeathFx } from "@/game/magery";
 import { getChips } from "@/game/player";
@@ -29,7 +30,35 @@ declare global {
       getTarget: () => { x: number; y: number; z: number } | null;
       getAnchor: () => { x: number; y: number; z: number } | null;
     };
+    __emberGraphicsRuntime?: {
+      getState: () => { shadows: boolean; farTreeCount: number | null; farTreeStock: number | null; farTreeLimit: number | null };
+    };
   }
+}
+
+function GraphicsProbe() {
+  const { gl, scene } = useThree();
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const enabled = import.meta.env.DEV || new URLSearchParams(window.location.search).has("qa");
+    if (!enabled) return;
+    const probe = {
+      getState: () => {
+        const far = scene.getObjectByName("far-horizon-trees") as THREE.InstancedMesh | undefined;
+        return {
+          shadows: gl.shadowMap.enabled,
+          farTreeCount: far?.count ?? null,
+          farTreeStock: typeof far?.userData.stockCount === "number" ? far.userData.stockCount : null,
+          farTreeLimit: typeof far?.userData.limit === "number" ? far.userData.limit : null,
+        };
+      },
+    };
+    window.__emberGraphicsRuntime = probe;
+    return () => {
+      if (window.__emberGraphicsRuntime === probe) delete window.__emberGraphicsRuntime;
+    };
+  }, [gl, scene]);
+  return null;
 }
 
 function SimClock() {
@@ -353,10 +382,13 @@ function ChipBits() {
 }
 
 export function WorldScene() {
+  const graphics = useGraphicsSettings();
   return (
     <Canvas
       className="h-full w-full touch-none"
-      shadows
+      shadows={graphics.shadows}
+      data-graphics-shadows={graphics.shadows ? "on" : "off"}
+      data-horizon-tree-reduction={graphics.horizonTreeReduction}
       dpr={[1, 1.5]}
       camera={{ position: [COURT.tx + 16, 23, COURT.ty + 20], fov: 48, near: 0.2, far: 480 }}
       gl={{ antialias: true, alpha: false }}
@@ -365,14 +397,15 @@ export function WorldScene() {
         gl.setClearColor("#1a1c18", 1);
         gl.toneMapping = THREE.ACESFilmicToneMapping;
         gl.toneMappingExposure = 1.36;
-        gl.shadowMap.enabled = true;
+        gl.shadowMap.enabled = getGraphicsSettings().shadows;
         gl.shadowMap.type = THREE.PCFShadowMap;
       }}
     >
-      <Lighting />
+      <Lighting shadows={graphics.shadows} />
+      <GraphicsProbe />
       <Sky />
       <WeatherFx />
-      <Horizon />
+      <Horizon treeReduction={graphics.horizonTreeReduction} />
       <Terrain />
       <Buildings />
       <Crops />
