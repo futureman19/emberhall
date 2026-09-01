@@ -1,12 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
-  CAMERA_HEIGHT_DEAD_ZONE,
   CAMERA_MAX_DT,
   cameraFollowAlpha,
   cameraFollowAxis,
+  cameraFixedHeight,
   cameraLockedAxis,
-  cameraVerticalAxis,
 } from "./camera-follow.ts";
 
 function followForSecond(hz: number) {
@@ -56,24 +55,16 @@ test("horizontal follow consumes the player's exact rendered displacement", () =
   assert.equal(cameraLockedAxis(4, Number.NaN).delta, 0);
 });
 
-test("vertical follow ignores terrain noise inside its dead zone", () => {
-  const inside = cameraVerticalAxis(2, 2 + CAMERA_HEIGHT_DEAD_ZONE * 0.75, 1 / 60);
-  const edge = cameraVerticalAxis(2, 2 + CAMERA_HEIGHT_DEAD_ZONE, 1 / 60);
-
-  assert.deepEqual(inside, { next: 2, delta: 0 });
-  assert.deepEqual(edge, { next: 2, delta: 0 });
+test("walking over uneven terrain never changes camera height", () => {
+  let height = 2;
+  for (const terrainHeight of [2.05, 2.4, 1.7, 3.1, 1.2, 2.8]) {
+    const step = cameraFixedHeight(height, terrainHeight, false);
+    assert.deepEqual(step, { next: 2, delta: 0 });
+    height = step.next;
+  }
 });
 
-test("vertical follow eases only the elevation outside the dead zone", () => {
-  let current = 2;
-  for (let frame = 0; frame < 60; frame++) {
-    const step = cameraVerticalAxis(current, 3, 1 / 60);
-    assert.ok(step.next >= current);
-    assert.ok(step.next < 3);
-    current = step.next;
-  }
-
-  assert.ok(current > 2.8);
-  assert.ok(current <= 3 - CAMERA_HEIGHT_DEAD_ZONE + 1e-12);
-  assert.deepEqual(cameraVerticalAxis(current, 3, 0), { next: current, delta: 0 });
+test("a large teleport can still recenter camera height once", () => {
+  assert.deepEqual(cameraFixedHeight(2, 5.25, true), { next: 5.25, delta: 3.25 });
+  assert.deepEqual(cameraFixedHeight(2, Number.NaN, true), { next: 2, delta: 0 });
 });
