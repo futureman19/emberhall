@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { ARROW_RANGE } from "./magery.ts";
+import { lineWalkable } from "./pathfinding.ts";
 import { commandHunt, commandWalk, tickPlayer } from "./player.ts";
 import { tickWorld } from "./sim.ts";
 import type { Creature } from "./types.ts";
@@ -42,14 +43,17 @@ test("a newly blocked smoothed route is replanned instead of walking through it"
   const { world, player } = playerWorld();
   assert.equal(commandWalk(world, 14, 10), null);
   assert.deepEqual(player.path, [{ tx: 14, ty: 10 }]);
+  tickWorld(world, 0.1);
+  const beforeBlock = player.x;
 
   world.tiles[10]![12]!.kind = "wall";
-  for (let tick = 0; tick < 8 && player.path.length === 1; tick++) tickWorld(world, 0.1);
+  world.landRev += 1;
+  tickWorld(world, 0.1);
 
   assert.equal(world.player.intent.kind, "walk");
   assert.ok(player.path.length > 1);
   assert.deepEqual(player.path.at(-1), { tx: 14, ty: 10 });
-  assert.ok(player.x < 11.5);
+  assert.equal(player.x, beforeBlock);
   assert.equal(player.z, 10);
 });
 
@@ -86,6 +90,22 @@ test("a valid smoothed segment does not pause when fractional tile rounding chan
 
   assert.ok(Math.abs(Math.hypot(player.x - before.x, player.z - before.z) - 0.26) < 1e-9);
   assert.deepEqual(player.path, [{ tx: 13, ty: 12 }]);
+});
+
+test("a planned corner-safe line cannot get stuck when fractional movement rounds diagonally", () => {
+  const { world, player } = playerWorld();
+  world.tiles[12]![11]!.kind = "wall";
+  assert.equal(lineWalkable(world, 10, 10, 12, 21), true);
+  player.x = 10.4544;
+  player.z = 12.499;
+  player.path = [{ tx: 12, ty: 21 }];
+  world.player.intent = { kind: "walk", tx: 12, ty: 21, targetId: null, spell: null };
+  const before = { x: player.x, z: player.z };
+
+  tickWorld(world, 0.1);
+
+  assert.ok(Math.abs(Math.hypot(player.x - before.x, player.z - before.z) - 0.26) < 1e-9);
+  assert.deepEqual(player.path, [{ tx: 12, ty: 21 }]);
 });
 
 test("hunting replans toward a moving target without striking out of range", () => {

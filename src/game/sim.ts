@@ -15,7 +15,14 @@ import type { Person, Speed, World } from "./types.ts";
 const WALK_SPEED = 2.6;
 const STUCK_AFTER = 0.55;
 
-type MotionWatch = { x: number; z: number; stillFor: number };
+type MotionWatch = {
+  x: number;
+  z: number;
+  stillFor: number;
+  landRev: number;
+  nextTx: number | null;
+  nextTy: number | null;
+};
 const motionWatches = new WeakMap<Person, MotionWatch>();
 
 export function setSpeed(world: World, s: Speed) {
@@ -30,6 +37,25 @@ function followPath(world: World, p: Person, dt: number): "idle" | "moving" | "s
   const startX = p.x;
   const startZ = p.z;
   let remaining = WALK_SPEED * (p.ghost ? 1.4 : 1) * dt;
+  const previous = motionWatches.get(p);
+  const first = p.path[0]!;
+  // Planned segments are already corner/climb checked. Revalidate only when
+  // the terrain revision changes while this exact segment is active; checking
+  // again every frame from a rounded fractional position can invent a
+  // different diagonal raster and falsely stop a valid click route.
+  if (
+    previous
+    && previous.landRev !== world.landRev
+    && previous.nextTx === first.tx
+    && previous.nextTy === first.ty
+  ) {
+    const here = tileOf(p.x, p.z);
+    if (!lineWalkable(world, here.tx, here.ty, first.tx, first.ty)) {
+      p.path = [];
+      motionWatches.delete(p);
+      return "stuck";
+    }
+  }
 
   // Spend one continuous movement budget across as many short waypoint
   // handoffs as it reaches. Returning at a waypoint used to insert a whole
@@ -42,20 +68,6 @@ function followPath(world: World, p: Person, dt: number): "idle" | "moving" | "s
     if (dist <= 1e-9) {
       p.path.shift();
       continue;
-    }
-    // Revalidate only the transition this frame will actually enter. Recasting
-    // the entire remaining smoothed segment from Math.round(current position)
-    // can choose a different grid raster mid-segment and falsely report a
-    // blocked corner, producing a one-frame stop/replan on a legal route.
-    const travel = Math.min(dist, remaining);
-    const nextX = p.x + (dx / dist) * travel;
-    const nextZ = p.z + (dz / dist) * travel;
-    const here = tileOf(p.x, p.z);
-    const nextTile = tileOf(nextX, nextZ);
-    if (!lineWalkable(world, here.tx, here.ty, nextTile.tx, nextTile.ty)) {
-      p.path = [];
-      motionWatches.delete(p);
-      return "stuck";
     }
     p.facing = Math.atan2(dx, dz);
     if (dist <= remaining) {
@@ -70,10 +82,17 @@ function followPath(world: World, p: Person, dt: number): "idle" | "moving" | "s
     remaining = 0;
   }
 
-  const previous = motionWatches.get(p);
   const moved = Math.hypot(p.x - startX, p.z - startZ);
   const stillFor = moved < 0.001 ? (previous?.stillFor ?? 0) + dt : 0;
-  motionWatches.set(p, { x: p.x, z: p.z, stillFor });
+  const next = p.path[0];
+  motionWatches.set(p, {
+    x: p.x,
+    z: p.z,
+    stillFor,
+    landRev: world.landRev,
+    nextTx: next?.tx ?? null,
+    nextTy: next?.ty ?? null,
+  });
   if (stillFor >= STUCK_AFTER) {
     p.path = [];
     motionWatches.delete(p);
