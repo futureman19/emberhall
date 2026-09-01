@@ -21,7 +21,8 @@ import { CraftGump } from "@/components/game/craft-gump";
 import { VaultGump } from "@/components/game/vault-gump";
 import { SettingsGump } from "@/components/game/settings-gump";
 import { PetsGump } from "@/components/game/pets-gump";
-import { ValeChart, MiniVale } from "@/components/game/vale-map";
+import { ValeChart } from "@/components/game/vale-map";
+import { MovableMinimap } from "@/components/game/movable-minimap";
 import { insideLabel } from "@/components/game/building-meshes";
 import { PLACES, regionAt } from "@/game/atlas";
 import { BUILD_ORDER, BUILDING_META, CLASS_META } from "@/game/catalog";
@@ -87,7 +88,7 @@ function PlayingChrome() {
       <GhostBanner />
       <BuildRibbon />
       <TravelRibbon />
-      <Minimap />
+      <MovableMinimap />
       <ContextMenu />
     </>
   );
@@ -678,17 +679,5 @@ function TravelRibbon() {
     <p className="pointer-events-none absolute top-20 left-1/2 -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/80 px-3 py-1 font-display text-xs tracking-wider text-fg uppercase">
       {name} · {n} paces
     </p>
-  );
-}
-
-function Minimap() {
-  const panel = useGame((s) => s.panel);
-  const openBook = useGame((s) => s.openBook);
-  const openCraft = useGame((s) => s.openCraft);
-  if (panel === "vale" || openBook || openCraft) return null;
-  return (
-    <div className="pointer-events-auto absolute right-3 bottom-20">
-      <MiniVale />
-    </div>
   );
 }
