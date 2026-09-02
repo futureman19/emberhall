@@ -1,4 +1,5 @@
 import { ITEM_META, SHOP_STOCK } from "./catalog.ts";
+import { buildingBox } from "./building-size.ts";
 import { isGhost, resurrect, you } from "./player.ts";
 import { appraiseRare, rareName } from "./rare.ts";
 import { completeObjective, log } from "./world.ts";
@@ -15,6 +16,19 @@ export function nearNpcRole(world: World, role: NpcRole, range = BANK_RANGE) {
   return world.people.some((p) => p.role === role && Math.hypot(self.x - p.x, self.z - p.z) <= range);
 }
 
+export function nearBank(world: World) {
+  if (nearNpcRole(world, "banker")) return true;
+  const self = you(world);
+  if (!self) return false;
+  for (const b of world.buildings) {
+    if (b.kind !== "bank") continue;
+    if (Math.hypot(self.x - b.tx, self.z - b.ty) <= 3.2) return true;
+    const box = buildingBox("bank", b.tx, b.ty);
+    if (self.x >= box.x0 && self.x <= box.x1 && self.z >= box.z0 && self.z <= box.z1) return true;
+  }
+  return false;
+}
+
 export function chestSlots(chest: Partial<Record<string, number>> | undefined) {
   let n = 0;
   if (!chest) return 0;
@@ -24,7 +38,7 @@ export function chestSlots(chest: Partial<Record<string, number>> | undefined) {
 
 function bankHands(world: World) {
   if (isGhost(world)) return "The box is for the living.";
-  if (!nearNpcRole(world, "banker")) return "The banker is not here.";
+  if (!nearBank(world)) return "The banker is not here.";
   return null;
 }
 

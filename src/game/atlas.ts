@@ -8,6 +8,10 @@ export const CHUNK = 8;
 
 export const COURT = { tx: 256, ty: 292 };
 export const GATE = { tx: 256, ty: 312 };
+/** Stone bank on the spawn cobbles, east of the hall door. */
+export const EMBERHALL_BANK = { tx: COURT.tx + 5, ty: COURT.ty + 3 };
+/** Old Pell at the bank door — within talk range of a new hall. */
+export const EMBERHALL_BANKER = { x: COURT.tx + 2, z: COURT.ty + 1 };
 
 export type PlaceKind = "town" | "woods" | "mine" | "ford" | "ruins" | "ridge" | "water";
 
@@ -22,7 +26,7 @@ export interface Place {
 }
 
 export const PLACES: Place[] = [
-  { id: "emberhall", name: "Emberhall", tx: 256, ty: 292, radius: 8, kind: "town", blurb: "Your hall. The only bed that is yours." },
+  { id: "emberhall", name: "Emberhall", tx: 256, ty: 292, radius: 8, kind: "town", blurb: "Your hall. The bank stands on the cobbles." },
   { id: "oakstand", name: "Oakstand", tx: 248, ty: 148, radius: 28, kind: "woods", blurb: "Old oaks. Wolves own the night." },
   { id: "wolfhollow", name: "Wolfhollow", tx: 188, ty: 88, radius: 18, kind: "woods", blurb: "Pine and shadow. Wolves own the stand." },
   { id: "ridgewatch", name: "Ridgewatch", tx: 250, ty: 48, radius: 16, kind: "ridge", blurb: "The north wall. Snow on the height." },

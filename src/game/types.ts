@@ -229,6 +229,7 @@ export type BuildingKind =
   | "tavern"
   | "notice"
   | "farm"
+  | "bank"
   // Kingsford — the capital stamps these at world-gen; not player-buildable.
   | "keep"
   | "rampart"
@@ -534,6 +535,7 @@ export type CtxVerb =
   | "teleport"
   | "enter"
   | "roster"
+  | "bank"
   | "care"
   | "drop"
   | "take"

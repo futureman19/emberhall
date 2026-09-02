@@ -8,7 +8,7 @@ import { you } from "./player.ts";
 import { mulberry32 } from "./rng.ts";
 import { ensureWeather, weatherSnap } from "./weather.ts";
 import { ensureCity } from "./city.ts";
-import { createStubWorld, createWorld, seedFieldStones, seedTownNpcs } from "./world.ts";
+import { createStubWorld, createWorld, seedEmberhallBank, seedFieldStones, seedTownNpcs } from "./world.ts";
 import { createResourceNodeStateMap, regrowResourceNodes } from "./resources/state.ts";
 import type { SkillId, Snapshot, World } from "./types.ts";
 
@@ -73,6 +73,7 @@ function withFauna(w: World) {
     w.player.mana = Math.min(max, w.player.mana);
   }
   if (w.tiles.length) seedTownNpcs(w, mulberry32(w.seed + 91));
+  seedEmberhallBank(w);
   ensureCity(w);
   ensureWeather(w);
   regrowResourceNodes(w);

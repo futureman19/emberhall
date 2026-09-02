@@ -499,6 +499,15 @@ export const useGame = create<GameUI>((set, get) => ({
       get().setPanel("roster");
       set({ ctx: null });
       return;
+    } else if (verb === "bank") {
+      const pell = w.people.find((p) => p.role === "banker" && Math.hypot(p.x - t.tx, p.z - t.ty) < 10);
+      if (pell) {
+        set({ selectedId: pell.id, ctx: null, snap: snapshot() });
+        return;
+      }
+      get().flash("The banker is not here.");
+      set({ ctx: null });
+      return;
     } else if (verb === "use") get().useStation(t.id);
     else if (verb === "harvest") err = commandHarvest(w, t.tx, t.ty);
     else if (verb === "till") err = commandTill(w, t.tx, t.ty);

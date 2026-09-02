@@ -104,7 +104,8 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
   if (t.kind === "gate") out.push({ verb: "enter", label: "Enter" });
   if (t.kind === "building") {
     if (t.label === "hall") out.push({ verb: "roster", label: "Read the roster" });
-    out.push({ verb: "use", label: t.label === "forge" ? "Work the fire" : "Use the bench" });
+    if (t.label === "bank") out.push({ verb: "bank", label: "Open the box" });
+    else out.push({ verb: "use", label: t.label === "forge" ? "Work the fire" : "Use the bench" });
     out.push({ verb: "walk", label: "Walk" });
   }
   return out;

@@ -1,16 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import {
-  BANK_SLOTS,
-  commandBankGold,
-  commandBankItem,
-  commandDeposit,
-  commandTalk,
-  commandUnbankItem,
-  commandWithdraw,
-} from "./npcs.ts";
+import { BANK_RANGE, BANK_SLOTS, commandBankGold, commandBankItem, commandDeposit, commandTalk, commandUnbankItem, commandWithdraw } from "./npcs.ts";
 import { tickPlayer, you } from "./player.ts";
-import { createWorld } from "./world.ts";
+import { createWorld, seedEmberhallBank } from "./world.ts";
+import { COURT, EMBERHALL_BANK } from "./atlas.ts";
+import { verbsFor } from "./context.ts";
+import { setWorld } from "./live.ts";
 import type { World } from "./types.ts";
 
 function bankerOf(w: World) {
@@ -130,4 +125,30 @@ test("bank - empty purse still names the balance", () => {
   w.gold = 0;
   w.player.vault = 15;
   assert.equal(commandBankGold(w), "The box holds 15 gold.");
+});
+
+test("bank - Emberhall keeps a bank on the spawn cobbles", () => {
+  const w = createWorld();
+  const bank = w.buildings.find((b) => b.kind === "bank");
+  assert.ok(bank, "a bank stands by the hall");
+  assert.equal(bank.tx, EMBERHALL_BANK.tx);
+  assert.equal(bank.ty, EMBERHALL_BANK.ty);
+  const self = you(w)!;
+  const pell = bankerOf(w);
+  assert.ok(Math.hypot(self.x - pell.x, self.z - pell.z) <= BANK_RANGE, "Pell is in reach of a new hall");
+  w.gold = 40;
+  w.player.vault = 0;
+  assert.equal(commandBankGold(w), "The box holds 40 gold.");
+  assert.equal(w.gold, 0);
+  const n = w.buildings.filter((b) => b.kind === "bank").length;
+  seedEmberhallBank(w);
+  assert.equal(w.buildings.filter((b) => b.kind === "bank").length, n);
+});
+
+test("bank - the building opens the box, not a bench", () => {
+  const w = createWorld();
+  setWorld(w);
+  const verbs = verbsFor({ kind: "building", id: "bank-1", tx: COURT.tx, ty: COURT.ty, label: "bank" });
+  assert.ok(verbs.some((v) => v.verb === "bank" && v.label === "Open the box"));
+  assert.ok(!verbs.some((v) => v.verb === "use"));
 });

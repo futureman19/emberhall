@@ -558,6 +558,29 @@ function makeCottage(): Spec {
   });
 }
 
+function makeBank(): Spec {
+  const spec = house({
+    x0: -3,
+    x1: 3,
+    z0: -2,
+    z1: 2,
+    h: 3,
+    wall: "stone",
+    base: "stone",
+    roof: "dark",
+    door: { x: -1, w: 2, h: 2 },
+    windows: [
+      { x: -3, z: 2, w: 1, h: 1 },
+      { x: 2, z: 2, w: 1, h: 1 },
+    ],
+    banners: [2],
+  });
+  fill(spec.voxels, -1, 1, -1, 1, 1, 0, "dark");
+  put(spec.voxels, 0, 2, 0, "gold");
+  markRoof(spec.voxels, 3, -3, 3, -2, 2);
+  return spec;
+}
+
 const SPECS: Record<BuildingKind, Spec> = {
   hall: makeHall(),
   dormitory: makeDorm(),
@@ -578,6 +601,7 @@ const SPECS: Record<BuildingKind, Spec> = {
   townhome: makeTownhome(),
   townhouse: makeTownhouse(),
   cottage: makeCottage(),
+  bank: makeBank(),
 };
 
 function occupant(buildings: Building[], x: number, z: number) {
@@ -695,6 +719,23 @@ function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
         if (useGame.getState().buildKind) {
           e.stopPropagation();
           leftAt(Math.round(e.point.x), Math.round(e.point.z));
+          return;
+        }
+        if (b.kind === "bank") {
+          e.stopPropagation();
+          if (e.button === 2) {
+            useGame.getState().openCtx(e.clientX, e.clientY, {
+              kind: "building",
+              id: b.id,
+              tx: b.tx,
+              ty: b.ty,
+              label: b.kind,
+            });
+            return;
+          }
+          if (e.button !== 0) return;
+          const pell = getWorld().people.find((p) => p.role === "banker" && Math.hypot(p.x - b.tx, p.z - b.ty) < 10);
+          if (pell) useGame.getState().select(pell.id);
           return;
         }
         if (!stationOf(b.kind)) return;

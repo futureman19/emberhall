@@ -2,6 +2,8 @@ import {
   BARROW,
   CHUNK,
   COURT,
+  EMBERHALL_BANK,
+  EMBERHALL_BANKER,
   GATE,
   MAP,
   PLACES,
@@ -14,7 +16,7 @@ import { emptyChest, emptyLastGain, emptyPack, emptySkills } from "./catalog.ts"
 import { ensureCity, stampCityTiles } from "./city.ts";
 import { personName } from "./names.ts";
 import { hash2, irange, mulberry32, pick } from "./rng.ts";
-import { buildingBox, siteError } from "./building-size.ts";
+import { buildingBox, boxesOverlap, siteError } from "./building-size.ts";
 import { seedFarmPlots } from "./farm.ts";
 import { initialWeather } from "./weather.ts";
 import { createResourceInventory } from "./inventory/resources.ts";
@@ -413,6 +415,7 @@ export function createWorld(): World {
     { id: nid(world, "b"), kind: "yard", tx: COURT.tx - 8, ty: COURT.ty - 1, beds: [] },
   );
   seedTownNpcs(world, rng);
+  seedEmberhallBank(world);
   ensureCity(world);
   log(world, `You are ${you.name}. The vale is a country — Ridgewatch to Brinegate. Follow the dirt.`);
   revealAround(world, COURT.tx, COURT.ty, 28);
@@ -422,7 +425,7 @@ export function createWorld(): World {
 export function seedTownNpcs(world: World, rng: () => number) {
   if (world.people.some((p) => p.role)) return;
   const spots: { x: number; z: number; role: Person["role"]; name: string; cls: ClassId }[] = [
-    { x: COURT.tx + 3, z: COURT.ty - 1, role: "banker", name: "Old Pell", cls: "merchant" },
+    { x: EMBERHALL_BANKER.x, z: EMBERHALL_BANKER.z, role: "banker", name: "Old Pell", cls: "merchant" },
     { x: COURT.tx - 4, z: COURT.ty + 2, role: "provisioner", name: "Brann Wain", cls: "merchant" },
     { x: COURT.tx + 2, z: COURT.ty + 3, role: "healer", name: "Ione Hale", cls: "mage" },
     { x: 98, z: 302, role: "provisioner", name: "Kip Reed", cls: "merchant" },
@@ -434,4 +437,22 @@ export function seedTownNpcs(world: World, rng: () => number) {
     world.people.push(p);
   }
   void rng;
+}
+
+/** Raise the hall bank if a save predates it, and keep Pell on the door. */
+export function seedEmberhallBank(world: World) {
+  if (!world.buildings.some((b) => b.kind === "bank")) {
+    const { tx, ty } = EMBERHALL_BANK;
+    const box = buildingBox("bank", tx, ty);
+    const taken = world.buildings.some((b) => boxesOverlap(box, buildingBox(b.kind, b.tx, b.ty)));
+    if (!taken) {
+      world.buildings.push({ id: nid(world, "b"), kind: "bank", tx, ty, beds: [] });
+    }
+  }
+  const pell = world.people.find((p) => p.role === "banker" && p.name === "Old Pell");
+  if (!pell) return;
+  pell.x = EMBERHALL_BANKER.x;
+  pell.z = EMBERHALL_BANKER.z;
+  pell.path = [];
+  pell.home = { tx: Math.round(pell.x), ty: Math.round(pell.z) };
 }

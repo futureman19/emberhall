@@ -211,6 +211,7 @@ export const BUILDING_META: Record<BuildingKind, { label: string }> = {
   tavern: { label: "Tavern" },
   notice: { label: "Notice" },
   farm: { label: "Farm" },
+  bank: { label: "Bank" },
   keep: { label: "Keep" },
   rampart: { label: "Rampart" },
   rampartV: { label: "Rampart" },
