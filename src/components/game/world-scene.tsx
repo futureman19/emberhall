@@ -14,6 +14,7 @@ import { HEALING_DURATION, healingPulse } from "@/game/healing-animation";
 import { TAMING_DURATION, tamingPulse } from "@/game/taming-animation";
 import { CRAFTING_DURATION, craftingPose, craftingVisualProfile } from "@/game/crafting-animation";
 import { getCraftFx } from "@/game/craft";
+import { CORPSE_DURATION, corpseFxAge, corpsePose, getCorpseFx } from "@/game/corpse-animation";
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY as heightAt } from "@/game/height";
 import { getGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
@@ -816,6 +817,91 @@ function CraftFxMesh() {
   );
 }
 
+function CorpseFxMesh() {
+  const root = useRef<THREE.Group>(null);
+  const ring = useRef<THREE.Mesh>(null);
+  const ringMaterial = useRef<THREE.MeshBasicMaterial>(null);
+  const skin = useRef<THREE.Group>(null);
+  const loot = useRef<THREE.Group>(null);
+
+  useFrame(() => {
+    const group = root.current;
+    const fx = getCorpseFx();
+    if (!group || !fx) {
+      if (group) group.visible = false;
+      return;
+    }
+    const world = getWorld();
+    const age = corpseFxAge(world, fx);
+    const live = age >= 0 && age < CORPSE_DURATION;
+    group.visible = live;
+    if (!live) return;
+    const pose = corpsePose(fx.kind, age);
+    const phase = Math.max(0, Math.min(1, age / CORPSE_DURATION));
+    const pulse = Math.sin(phase * Math.PI);
+    group.position.set(fx.x, heightAt(world, fx.x, fx.z) + 0.12, fx.z);
+    if (ring.current) ring.current.scale.setScalar(0.9 + pulse * 0.8);
+    if (ringMaterial.current) {
+      ringMaterial.current.color.set(fx.kind === "skinning" ? "#d09a72" : "#ffd36a");
+      ringMaterial.current.opacity = 0.3 + pulse * 0.48;
+    }
+    if (skin.current) {
+      skin.current.visible = fx.kind === "skinning";
+      skin.current.rotation.y = pose.cut * 0.18;
+      skin.current.position.y = 0.34 + pulse * 0.22;
+    }
+    if (loot.current) {
+      loot.current.visible = fx.kind === "looting";
+      loot.current.position.y = 0.12 + pulse * 0.72;
+      loot.current.rotation.y = age * 4.5;
+      loot.current.scale.setScalar(0.88 + pulse * 0.32);
+    }
+  });
+
+  return (
+    <group ref={root} visible={false}>
+      <mesh ref={ring} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.9, 1.2, 24]} />
+        <meshBasicMaterial ref={ringMaterial} color="#d09a72" transparent opacity={0.5} depthWrite={false} />
+      </mesh>
+      <group ref={skin}>
+        {[-0.45, 0.45].map((x) => (
+          <mesh key={x} position={[x, 0, 0]} rotation={[-0.2, 0, x * 0.8]}>
+            <boxGeometry args={[0.72, 0.08, 1.15]} />
+            <meshStandardMaterial color="#d8aa78" emissive="#6a3a24" emissiveIntensity={0.24} roughness={0.9} />
+          </mesh>
+        ))}
+        {[-0.48, 0, 0.48].map((x) => (
+          <mesh key={x} position={[x, 0.08, 0]} rotation={[0, 0, -0.45]}>
+            <boxGeometry args={[0.11, 0.07, 1.18]} />
+            <meshBasicMaterial color="#f08a62" transparent opacity={0.9} />
+          </mesh>
+        ))}
+      </group>
+      <group ref={loot}>
+        <mesh position={[0, 0, 0]} scale={[1, 0.8, 0.75]}>
+          <sphereGeometry args={[0.68, 12, 9]} />
+          <meshStandardMaterial color="#8a633e" roughness={0.92} />
+        </mesh>
+        <mesh position={[0, 0.5, 0]}>
+          <coneGeometry args={[0.3, 0.42, 10]} />
+          <meshStandardMaterial color="#b08a58" roughness={0.9} />
+        </mesh>
+        <mesh position={[0, 0.43, 0]} rotation={[Math.PI / 2, 0, 0]}>
+          <torusGeometry args={[0.28, 0.055, 6, 14]} />
+          <meshStandardMaterial color="#d6b46d" roughness={0.8} />
+        </mesh>
+        {[-0.56, -0.28, 0, 0.28, 0.56].map((x, index) => (
+          <mesh key={x} position={[x, 0.42 + (index % 3) * 0.16, (index % 2 ? -1 : 1) * 0.18]} rotation={[Math.PI / 2, 0, index * 0.4]}>
+            <cylinderGeometry args={[0.17, 0.17, 0.07, 12]} />
+            <meshStandardMaterial color="#ffd36a" emissive="#c98a24" emissiveIntensity={0.65} metalness={0.58} roughness={0.28} />
+          </mesh>
+        ))}
+      </group>
+    </group>
+  );
+}
+
 function GatheringFxMesh() {
   const group = useRef<THREE.Group>(null);
   const ring = useRef<THREE.Mesh>(null);
@@ -1090,6 +1176,7 @@ export function WorldScene() {
       <TamingFxMesh />
       <CraftFxMesh />
       <GatheringFxMesh />
+      <CorpseFxMesh />
       <CombatFxMesh />
       <DeathFxMesh />
       <ChipBits />

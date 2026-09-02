@@ -7,6 +7,7 @@ import { HEALING_DURATION, healingPose } from "@/game/healing-animation";
 import { TAMING_DURATION, tamingPose } from "@/game/taming-animation";
 import { CRAFTING_DURATION, craftingPose } from "@/game/crafting-animation";
 import { getCraftFx } from "@/game/craft";
+import { CORPSE_DURATION, corpseFxAge, corpsePose, getCorpseFx } from "@/game/corpse-animation";
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
@@ -697,6 +698,27 @@ function GatheringBillboard() {
   );
 }
 
+function CorpseBillboard() {
+  const label = useRef<HTMLDivElement>(null);
+  useFrame(() => {
+    const element = label.current;
+    if (!element) return;
+    const world = getWorld();
+    const fx = getCorpseFx();
+    const age = fx ? corpseFxAge(world, fx) : Infinity;
+    const visible = Boolean(fx && age >= 0 && age < CORPSE_DURATION);
+    element.style.display = visible ? "grid" : "none";
+    if (!fx || !visible) return;
+    element.textContent = fx.kind === "skinning" ? "BLADE · SKINNING" : "SACK · LOOTING";
+    element.style.borderColor = fx.kind === "skinning" ? "#d09a72" : "#ffd36a";
+  });
+  return (
+    <Html position={[0, 3.2, 0]} center zIndexRange={[34, 0]} style={{ pointerEvents: "none" }}>
+      <div ref={label} style={{ display: "none", placeItems: "center", minWidth: 104, padding: "7px 10px", border: "1px solid", borderRadius: 8, background: "rgba(20, 18, 15, 0.92)", boxShadow: "0 0 16px rgba(0, 0, 0, 0.55)", color: "#fff8e7", fontFamily: "serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", whiteSpace: "nowrap" }} />
+    </Html>
+  );
+}
+
 function Figure({
   p,
   selected,
@@ -736,13 +758,17 @@ function Figure({
     const gatheringAge = gatheringFx ? (w.hour - gatheringFx.at) * SECONDS_PER_HOUR : Infinity;
     const gathering = Boolean(gatheringFx && gatheringAge >= 0 && gatheringAge < GATHERING_DURATION);
     const gatherPose = gatheringFx ? gatheringPose(gatheringFx.kind, gatheringAge) : { work: 0, strike: 0, scatter: 0, pull: 0, settle: 0 };
+    const corpseFx = getCorpseFx();
+    const corpseAge = corpseFx ? corpseFxAge(w, corpseFx) : Infinity;
+    const corpseWorking = Boolean(corpseFx && corpseAge >= 0 && corpseAge < CORPSE_DURATION);
+    const corpseWorkPose = corpseFx ? corpsePose(corpseFx.kind, corpseAge) : { crouch: 0, lean: 0, reach: 0, cut: 0 };
     if (you && root.current) {
       root.current.position.set(
         you.x,
-        groundAt(you.x, you.z) + (you.ghost ? 0.32 : 0) - healPose.crouch,
+        groundAt(you.x, you.z) + (you.ghost ? 0.32 : 0) - healPose.crouch - corpseWorkPose.crouch,
         you.z,
       );
-      root.current.rotation.x = healPose.lean + (taming ? tamePose.bow : 0) + (crafting ? craftPose.work * 0.14 : 0) + (gathering ? gatherPose.work * 0.2 : 0);
+      root.current.rotation.x = healPose.lean + corpseWorkPose.lean + (taming ? tamePose.bow : 0) + (crafting ? craftPose.work * 0.14 : 0) + (gathering ? gatherPose.work * 0.2 : 0);
       root.current.rotation.y = you.facing;
     }
     const it = w.player.intent;
@@ -758,7 +784,7 @@ function Figure({
     const hunting = idle && it.kind === "hunt";
     const bowing = hunting && w.player.wear.main === "bow";
     const draw = bowing ? bowDrawAmount(w.player.workT) : 0;
-    if (held.current) held.current.visible = !casting && !healing && !taming && !crafting && (!gathering || gatheringFx?.kind === "tilling");
+    if (held.current) held.current.visible = !casting && !healing && !taming && !crafting && (!gathering || gatheringFx?.kind === "tilling") && (!corpseWorking || corpseFx?.kind === "skinning");
     if (left.current) {
       if (healing) {
         left.current.rotation.set(0.98, 0.48, 1.02);
@@ -768,6 +794,8 @@ function Figure({
         left.current.rotation.set(craftFx.kind === "smithing" ? 0.72 : 0.9, 0.34, craftFx.kind === "cooking" ? 0.82 : 0.62);
       } else if (gathering && gatheringFx) {
         left.current.rotation.set(gatheringFx.kind === "tilling" ? 0.7 : 1.02, 0.38, gatheringFx.kind === "harvesting" ? 0.94 : 0.7);
+      } else if (corpseWorking) {
+        left.current.rotation.set(0.88 + corpseWorkPose.reach * 0.35, 0.4, 0.82 + corpseWorkPose.reach * 0.22);
       } else if (casting) {
         const u = Math.min(1, w.player.workT / 0.26);
         const e = u * u * (3 - 2 * u);
@@ -803,6 +831,9 @@ function Figure({
       } else if (gathering && gatheringFx) {
         const pitch = gatheringFx.kind === "tilling" ? -0.65 + gatherPose.strike * 1.8 : gatheringFx.kind === "sowing" ? 0.65 + gatherPose.scatter * 0.55 : gatheringFx.kind === "harvesting" ? 1.2 - gatherPose.pull * 0.55 : 0.95 + gatherPose.settle * 0.25;
         right.current.rotation.set(pitch, -0.35, gatheringFx.kind === "sowing" ? -1.05 : -0.72);
+      } else if (corpseWorking && corpseFx) {
+        const pitch = corpseFx.kind === "skinning" ? 0.7 + corpseWorkPose.cut * 0.55 : 0.92 - corpseWorkPose.reach * 0.42;
+        right.current.rotation.set(pitch, -0.38, -0.82 - corpseWorkPose.reach * 0.18);
       } else if (chopping) {
         const pitch = workPitch(w.player.workT);
         right.current.rotation.set(pitch, 0.18, -0.22);
@@ -949,6 +980,7 @@ function Figure({
       {p.isPlayer && !ghost && <BandageBillboard />}
       {p.isPlayer && !ghost && <CraftingBillboard />}
       {p.isPlayer && !ghost && <GatheringBillboard />}
+      {p.isPlayer && !ghost && <CorpseBillboard />}
       {p.isPlayer && !ghost && <MeleeSwingArc />}
       {selected && (
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.04, 0]}>

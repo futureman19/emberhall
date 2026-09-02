@@ -15,6 +15,7 @@ import { COMBAT_BEAT } from "./combat-animation.ts";
 import { assessPlantedTimberHarvest, assessResourceHarvest, harvestToolTier, type HarvestAssessment } from "./resources/harvest.ts";
 import { depleteResourceNode, discoverResourceNode, hasDiscoveredResourceNode } from "./resources/state.ts";
 import { playSfx } from "./vale-sfx.ts";
+import { emitCorpseFx } from "./corpse-animation.ts";
 import { completeObjective, log } from "./world.ts";
 import { effectiveMain, rareMods, rareName, rollKillRare, weaponDmg } from "./rare.ts";
 import type { ItemId, Person, ResourceInventory, ResourceNodeStateMap, SkillId, WearSlot, World } from "./types.ts";
@@ -712,12 +713,14 @@ function skinNow(world: World, p: Person) {
   }
   const meta = FAUNA_META[c.kind];
   if (meta.hasCorpse === false) {
+    emitCorpseFx(world, "skinning", c.id, c.x, c.z);
     world.fauna = world.fauna.filter((x) => x.id !== c.id);
     world.player.intent.kind = "none";
     return `You dress the ${FAUNA_META[c.kind].label.toLowerCase()}, but nothing sticks to the knife.`;
   }
   world.player.pack.hide = (world.player.pack.hide ?? 0) + (meta.hide ?? 1);
   world.player.pack.meat = (world.player.pack.meat ?? 0) + (meta.meat ?? 2);
+  emitCorpseFx(world, "skinning", c.id, c.x, c.z);
   world.fauna = world.fauna.filter((x) => x.id !== c.id);
   completeObjective(world, "skin");
   world.player.intent.kind = "none";

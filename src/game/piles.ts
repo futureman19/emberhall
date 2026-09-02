@@ -1,6 +1,7 @@
 import { playSfx } from "./vale-sfx.ts";
 import { completeObjective, nid } from "./world.ts";
 import { FAUNA_META } from "./catalog.ts";
+import { emitCorpseFx } from "./corpse-animation.ts";
 import type { Creature, GroundPile, ItemId, World } from "./types.ts";
 
 export function addToPile(
@@ -66,9 +67,12 @@ export function takeGoldFromPile(world: World, id: string) {
   if (!pile || pile.gold <= 0) return 0;
   world.gold += pile.gold;
   const taken = pile.gold;
+  const corpseSource = pile.source === "corpse" || pile.source === "death";
+  const { tx, ty } = pile;
   pile.gold = 0;
   const left = Object.values(pile.items).some((n) => (n ?? 0) > 0);
   if (!left) world.piles = world.piles.filter((p) => p.id !== id);
+  if (corpseSource) emitCorpseFx(world, "looting", id, tx, ty);
   return taken;
 }
 
@@ -86,6 +90,8 @@ export function takeFromPile(world: World, pileId: string, item?: ItemId) {
   if (world.player.ghost) return "A ghost cannot lift.";
   const pile = world.piles.find((p) => p.id === pileId);
   if (!pile) return "Nothing there.";
+  const corpseSource = pile.source === "corpse" || pile.source === "death";
+  const { tx, ty } = pile;
   if (item) {
     const n = pile.items[item] ?? 0;
     if (n < 1) return "Gone.";
@@ -112,5 +118,6 @@ export function takeFromPile(world: World, pileId: string, item?: ItemId) {
     world.piles = world.piles.filter((p) => p.id !== pileId);
   } else if (pile.source === "death") completeObjective(world, "recover");
   playSfx("loot", 0.38);
+  if (corpseSource) emitCorpseFx(world, "looting", pileId, tx, ty);
   return null;
 }
