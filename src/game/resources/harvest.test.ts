@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { resolveResourceNode } from "./nodes.ts";
 import {
   GEM_HARVEST_SKILL_BANDS,
   HARVEST_TOOL_POLICY,
@@ -18,7 +19,20 @@ function assertDeepFrozen(value: unknown, path = "root"): void {
   for (const [key, nested] of Object.entries(value)) assertDeepFrozen(nested, `${path}.${key}`);
 }
 
-const pristineRedwood = { seed: 1_419, tx: 188, ty: 88, nodeKind: "tree", discovered: false } as const;
+function locateTree(resourceId: "redwood", qualityCeiling: "pristine" | "sound") {
+  for (let ty = 0; ty < 512; ty += 1) {
+    for (let tx = 0; tx < 512; tx += 1) {
+      const identity = resolveResourceNode({ seed: 1_419, tx, ty, nodeKind: "tree" }).identity;
+      if (identity.resourceId === resourceId && identity.qualityCeiling === qualityCeiling) {
+        return { seed: 1_419, tx, ty, nodeKind: "tree" as const, discovered: false, identity };
+      }
+    }
+  }
+  throw new Error(`no ${qualityCeiling} ${resourceId} fixture`);
+}
+
+const redwoodFix = locateTree("redwood", "pristine");
+const pristineRedwood = { seed: redwoodFix.seed, tx: redwoodFix.tx, ty: redwoodFix.ty, nodeKind: "tree" as const, discovered: false };
 const perfectRuby = { seed: 532, tx: 470, ty: 420, nodeKind: "rock", discovered: false } as const;
 
 function assertCompileTimeHarvestYieldCorrelation(): void {
@@ -59,12 +73,8 @@ test("identification hides family and ceiling below the threshold, then reveals 
   const identified = identifyHarvestNode({ ...pristineRedwood, effectiveSkill: 35 });
   assert.deepEqual(identified, {
     status: "identified",
-    identity: {
-      nodeId: "resource-node:v1:1419:188:88:tree",
-      resourceId: "redwood",
-      qualityCeiling: "pristine",
-    },
-    label: "Pristine Redwood",
+    identity: redwoodFix.identity,
+    label: "Hardened Redwood",
   });
   assertDeepFrozen(unknown);
   assertDeepFrozen(identified);
@@ -79,12 +89,8 @@ test("extraction threshold is checked before tool tier and rejects with exact id
   assert.deepEqual(belowExtraction, {
     status: "blocked",
     reason: "skill",
-    identity: {
-      nodeId: "resource-node:v1:1419:188:88:tree",
-      resourceId: "redwood",
-      qualityCeiling: "pristine",
-    },
-    message: "You identify Pristine Redwood, but need 50 Lumberjacking to extract it.",
+    identity: redwoodFix.identity,
+    message: "You identify Hardened Redwood, but need 50 Lumberjacking to extract it.",
   });
 
   const belowTool = assessResourceHarvest({ ...pristineRedwood, effectiveSkill: 50, toolTier: 1 });
@@ -92,7 +98,7 @@ test("extraction threshold is checked before tool tier and rejects with exact id
     status: "blocked",
     reason: "tool",
     identity: belowExtraction.identity,
-    message: "You identify Pristine Redwood, but need a tier 2 tool to extract it.",
+    message: "You identify Hardened Redwood, but need a tier 2 tool to extract it.",
   });
   assertDeepFrozen(belowExtraction);
   assertDeepFrozen(belowTool);
@@ -116,8 +122,10 @@ test("recovered grade is capped by both node ceiling and the near-threshold harv
   assert.equal(atPristine.status, "ready");
   if (atPristine.status !== "ready") return;
   assert.equal(atPristine.yield.quality, "pristine");
+  assert.equal(atPristine.message, "Recovered a hardened redwood log.");
 
-  const soundNode = assessResourceHarvest({ seed: 1, tx: 188, ty: 88, nodeKind: "tree", effectiveSkill: 100, discovered: false, toolTier: 2 });
+  const soundFix = locateTree("redwood", "sound");
+  const soundNode = assessResourceHarvest({ seed: soundFix.seed, tx: soundFix.tx, ty: soundFix.ty, nodeKind: "tree", effectiveSkill: 100, discovered: false, toolTier: 2 });
   assert.equal(soundNode.status, "ready");
   if (soundNode.status !== "ready") return;
   assert.equal(soundNode.identity.resourceId, "redwood");

@@ -1,7 +1,7 @@
 import { ITEM_META, SKILL_META } from "../catalog.ts";
 import { makeResourceStackKey } from "../inventory/resources.ts";
 import type { ItemId, ResourceStackKey } from "../types.ts";
-import { RESOURCE_CATALOG } from "./catalog.ts";
+import { RESOURCE_CATALOG, timberGradeLabel } from "./catalog.ts";
 import { resolveResourceNode, type ResourceNodeKind } from "./nodes.ts";
 import {
   defineResourceNodeIdentity,
@@ -80,11 +80,11 @@ export type HarvestIdentification =
     }>;
 
 type HarvestResourceId = Exclude<ResourceId, "common_cloth" | "fine_linen">;
-type HarvestFormFor<I extends HarvestResourceId> = I extends "oak" | "redwood"
-  ? "log"
+type HarvestFormFor<I extends HarvestResourceId> = I extends GemResourceId
+  ? "gem"
   : I extends "iron_ore" | "highland_ore"
     ? "ore"
-    : "gem";
+    : "log";
 type HarvestYieldFor<I extends HarvestResourceId> = {
   [Q in QualityForResource<I>]: Readonly<{
     key: Extract<ResourceStackKey, `${I}:${HarvestFormFor<I>}:${Q}`>;
@@ -212,8 +212,13 @@ function titleCase(value: string): string {
   return value.length === 0 ? value : `${value[0]!.toUpperCase()}${value.slice(1)}`;
 }
 
+function displayQuality(identity: ResourceNodeIdentity, quality: string) {
+  const word = RESOURCE_CATALOG[identity.resourceId].kind === "timber" ? timberGradeLabel(quality) : quality;
+  return titleCase(word);
+}
+
 function identifiedLabel(identity: ResourceNodeIdentity): string {
-  return `${titleCase(identity.qualityCeiling)} ${RESOURCE_CATALOG[identity.resourceId].label}`;
+  return `${displayQuality(identity, identity.qualityCeiling)} ${RESOURCE_CATALOG[identity.resourceId].label}`;
 }
 
 function identifiedFromSnapshot(input: ParsedIdentificationInput): HarvestIdentification {
@@ -249,7 +254,7 @@ function yieldFor(identity: ResourceNodeIdentity, effectiveSkill: number): Harve
   const quality = qualityFromSkill(identity, effectiveSkill);
   const quantity = effectiveSkill >= 100 ? 2 : 1;
   if (definition.kind === "timber") {
-    const resourceId = identity.resourceId as "oak" | "redwood";
+    const resourceId = identity.resourceId as Exclude<HarvestResourceId, GemResourceId | "iron_ore" | "highland_ore">;
     const key = makeResourceStackKey(resourceId, "log", quality as MaterialGrade);
     return Object.freeze({ key, resourceId, form: "log", quality, quantity }) as HarvestYield;
   }
@@ -278,8 +283,9 @@ function singularResourceNoun(yielded: HarvestYield): string {
 }
 
 function formatHarvestSuccess(yielded: HarvestYield): string {
-  if (yielded.quantity === 1) return `Recovered a ${yielded.quality} ${singularResourceNoun(yielded)}.`;
-  return `Recovered ${yielded.quantity} ${yielded.quality} ${pluralResourceNoun(yielded)}.`;
+  const grade = RESOURCE_CATALOG[yielded.resourceId].kind === "timber" ? timberGradeLabel(yielded.quality) : yielded.quality;
+  if (yielded.quantity === 1) return `Recovered a ${grade} ${singularResourceNoun(yielded)}.`;
+  return `Recovered ${yielded.quantity} ${grade} ${pluralResourceNoun(yielded)}.`;
 }
 
 /** Pure numeric gate used independently of item/catalog integration. */

@@ -445,6 +445,9 @@ export function Terrain() {
             ty,
             "tree",
           );
+          const plantedId = w.plantedTimber?.[`${tx},${ty}`];
+          const woodId = plantedId ?? resourceVisual.resourceId;
+          if (woodId === "ghostwood" && !w.player.ghost) continue;
           if (resourceVisual.shape.kind !== "tree") throw new Error("tree tile resolved a non-tree visual");
           if (resourceVisual.family !== "broadleaf" && resourceVisual.family !== "conifer") {
             throw new Error("tree tile resolved a non-tree family");

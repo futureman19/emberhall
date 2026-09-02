@@ -1,4 +1,4 @@
-import { MAP } from "../atlas.ts";
+import { MAP, placeAffinity } from "../atlas.ts";
 import { BIOME_IDS, biomeAt, biomeWeights, type BiomeW } from "../biome.ts";
 import type { BiomeId } from "../types.ts";
 import { RESOURCE_CATALOG, RESOURCE_IDS } from "./catalog.ts";
@@ -151,10 +151,17 @@ function isOrdinaryResource(resourceId: ResourceId): boolean {
   return spawn !== undefined && spawn.identifySkill.minimum === 0 && spawn.extractSkill.minimum === 0 && spawn.toolTier === 1;
 }
 
-function affinityFor(resourceId: ResourceId, weights: BiomeW): number {
+function affinityFor(resourceId: ResourceId, weights: BiomeW, tx: number, ty: number): number {
   const spawn = RESOURCE_CATALOG[resourceId].spawn;
   if (!spawn) return 0;
-  return BIOME_IDS.reduce((sum, biomeId) => sum + weights[biomeId] * (spawn.regions[biomeId] ?? 0), 0);
+  const biome = BIOME_IDS.reduce((sum, biomeId) => sum + weights[biomeId] * (spawn.regions[biomeId] ?? 0), 0);
+  if (!spawn.places) return biome;
+  let place = 0;
+  for (const [placeId, weight] of Object.entries(spawn.places)) {
+    place += placeAffinity(tx, ty, placeId) * (weight ?? 0);
+  }
+  if (place <= 0) return 0;
+  return biome + place;
 }
 
 /**
@@ -170,7 +177,7 @@ function inspectResourceNodeProbabilitiesFromSnapshot(input: ResourceNodeLocatio
   const rawCandidates = RESOURCE_IDS.flatMap((resourceId) => {
     const spawn = RESOURCE_CATALOG[resourceId].spawn;
     if (!spawn || spawn.nodeKind !== input.nodeKind) return [];
-    const affinity = affinityFor(resourceId, weights);
+    const affinity = affinityFor(resourceId, weights, input.tx, input.ty);
     const rawWeight = spawn.weight * affinity;
     if (!Number.isFinite(rawWeight) || rawWeight <= 0) return [];
     return [{ resourceId, ordinary: isOrdinaryResource(resourceId), affinity, rawWeight }];

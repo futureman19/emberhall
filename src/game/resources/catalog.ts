@@ -11,10 +11,17 @@ import type {
   SkillRequirement,
 } from "./types.ts";
 import type { BiomeId, SkillId } from "../types.ts";
+import { PLACES } from "../atlas.ts";
 
 export const RESOURCE_IDS = Object.freeze([
   "oak",
+  "pine",
+  "willow",
+  "birch",
+  "ash",
   "redwood",
+  "yew",
+  "ghostwood",
   "iron_ore",
   "highland_ore",
   "common_cloth",
@@ -22,6 +29,12 @@ export const RESOURCE_IDS = Object.freeze([
   "ruby",
   "sapphire",
 ] as const satisfies readonly ResourceId[]);
+
+export const GHOSTWOOD_LUMBERJACK = 80;
+
+export function timberGradeLabel(quality: string) {
+  return quality === "pristine" ? "hardened" : quality;
+}
 
 const RESOURCE_DEFINITIONS = [
   {
@@ -33,8 +46,8 @@ const RESOURCE_DEFINITIONS = [
     traitIds: [],
     spawn: {
       nodeKind: "tree",
-      weight: 100,
-      regions: { vale: 1, tundra: 0.25, taiga: 1, fen: 0.5, jungle: 0.75, desert: 0.1 },
+      weight: 160,
+      regions: { vale: 1, tundra: 0.2, taiga: 0.35, fen: 0.4, jungle: 0.3, desert: 0.06 },
       identifySkill: { id: "lumberjack", minimum: 0 },
       extractSkill: { id: "lumberjack", minimum: 0 },
       toolTier: 1,
@@ -52,6 +65,118 @@ const RESOURCE_DEFINITIONS = [
     visual: { family: "broadleaf", primary: "#756044", secondary: "#8b733f" },
   },
   {
+    id: "pine",
+    label: "Pine",
+    kind: "timber",
+    forms: ["log", "board"],
+    qualityType: "grade",
+    traitIds: [],
+    spawn: {
+      nodeKind: "tree",
+      weight: 90,
+      regions: { taiga: 1 },
+      places: { wolfhollow: 1.4 },
+      identifySkill: { id: "lumberjack", minimum: 0 },
+      extractSkill: { id: "lumberjack", minimum: 0 },
+      toolTier: 1,
+    },
+    processing: [
+      {
+        id: "saw_pine",
+        operation: "saw",
+        station: "bench",
+        skill: { id: "carpentry", minimum: 0 },
+        input: { form: "log", quantity: 1 },
+        output: { form: "board", quantity: 2 },
+      },
+    ],
+    visual: { family: "conifer", primary: "#5a4a32", secondary: "#3f5a38" },
+  },
+  {
+    id: "willow",
+    label: "Willow",
+    kind: "timber",
+    forms: ["log", "board"],
+    qualityType: "grade",
+    traitIds: [],
+    spawn: {
+      nodeKind: "tree",
+      weight: 70,
+      regions: { fen: 1 },
+      places: { hearthfen: 1.4 },
+      identifySkill: { id: "lumberjack", minimum: 0 },
+      extractSkill: { id: "lumberjack", minimum: 0 },
+      toolTier: 1,
+    },
+    processing: [
+      {
+        id: "saw_willow",
+        operation: "saw",
+        station: "bench",
+        skill: { id: "carpentry", minimum: 5 },
+        input: { form: "log", quantity: 1 },
+        output: { form: "board", quantity: 2 },
+      },
+    ],
+    visual: { family: "broadleaf", primary: "#6a5a3a", secondary: "#7a8a48" },
+  },
+  {
+    id: "birch",
+    label: "Birch",
+    kind: "timber",
+    forms: ["log", "board"],
+    qualityType: "grade",
+    traitIds: [],
+    spawn: {
+      nodeKind: "tree",
+      weight: 28,
+      regions: { tundra: 1 },
+      places: { ridgewatch: 1.3 },
+      identifySkill: { id: "lumberjack", minimum: 15 },
+      extractSkill: { id: "lumberjack", minimum: 20 },
+      toolTier: 1,
+    },
+    processing: [
+      {
+        id: "saw_birch",
+        operation: "saw",
+        station: "bench",
+        skill: { id: "carpentry", minimum: 10 },
+        input: { form: "log", quantity: 1 },
+        output: { form: "board", quantity: 2 },
+      },
+    ],
+    visual: { family: "broadleaf", primary: "#c9c3b6", secondary: "#8aaa58" },
+  },
+  {
+    id: "ash",
+    label: "Ash",
+    kind: "timber",
+    forms: ["log", "board"],
+    qualityType: "grade",
+    traitIds: [],
+    spawn: {
+      nodeKind: "tree",
+      weight: 22,
+      regions: { tundra: 0.12 },
+      places: { cairnash: 1.6 },
+      identifySkill: { id: "lumberjack", minimum: 25 },
+      extractSkill: { id: "lumberjack", minimum: 30 },
+      toolTier: 1,
+    },
+    processing: [
+      {
+        id: "saw_ash",
+        operation: "saw",
+        station: "bench",
+        skill: { id: "carpentry", minimum: 15 },
+        input: { form: "log", quantity: 1 },
+        output: { form: "board", quantity: 2 },
+      },
+    ],
+    visual: { family: "broadleaf", primary: "#8a7048", secondary: "#5a7040" },
+  },
+  {
     id: "redwood",
     label: "Redwood",
     kind: "timber",
@@ -60,8 +185,9 @@ const RESOURCE_DEFINITIONS = [
     traitIds: ["accuracy"],
     spawn: {
       nodeKind: "tree",
-      weight: 8,
-      regions: { taiga: 1, jungle: 1 },
+      weight: 10,
+      regions: { jungle: 1 },
+      places: { southmere: 1.2 },
       identifySkill: { id: "lumberjack", minimum: 35 },
       extractSkill: { id: "lumberjack", minimum: 50 },
       toolTier: 2,
@@ -77,6 +203,62 @@ const RESOURCE_DEFINITIONS = [
       },
     ],
     visual: { family: "conifer", primary: "#6a3f32", secondary: "#984f3b" },
+  },
+  {
+    id: "yew",
+    label: "Yew",
+    kind: "timber",
+    forms: ["log", "board"],
+    qualityType: "grade",
+    traitIds: ["accuracy"],
+    spawn: {
+      nodeKind: "tree",
+      weight: 6,
+      regions: { jungle: 0.45 },
+      places: { greybarrow: 1.5, cairnash: 0.8 },
+      identifySkill: { id: "lumberjack", minimum: 55 },
+      extractSkill: { id: "lumberjack", minimum: 65 },
+      toolTier: 2,
+    },
+    processing: [
+      {
+        id: "saw_yew",
+        operation: "saw",
+        station: "bench",
+        skill: { id: "carpentry", minimum: 40 },
+        input: { form: "log", quantity: 1 },
+        output: { form: "board", quantity: 2 },
+      },
+    ],
+    visual: { family: "conifer", primary: "#3a322c", secondary: "#2a4a32" },
+  },
+  {
+    id: "ghostwood",
+    label: "Ghostwood",
+    kind: "timber",
+    forms: ["log", "board"],
+    qualityType: "grade",
+    traitIds: [],
+    spawn: {
+      nodeKind: "tree",
+      weight: 5,
+      regions: { fen: 0.15 },
+      places: { greybarrow: 1.8, cairnash: 1.1 },
+      identifySkill: { id: "lumberjack", minimum: 80 },
+      extractSkill: { id: "lumberjack", minimum: 80 },
+      toolTier: 1,
+    },
+    processing: [
+      {
+        id: "saw_ghostwood",
+        operation: "saw",
+        station: "bench",
+        skill: { id: "carpentry", minimum: 50 },
+        input: { form: "log", quantity: 1 },
+        output: { form: "board", quantity: 2 },
+      },
+    ],
+    visual: { family: "broadleaf", primary: "#b8c4c8", secondary: "#e8eef2" },
   },
   {
     id: "iron_ore",
@@ -192,7 +374,13 @@ const RESOURCE_DEFINITIONS = [
 
 const RESOURCE_KIND_BY_ID = {
   oak: "timber",
+  pine: "timber",
+  willow: "timber",
+  birch: "timber",
+  ash: "timber",
   redwood: "timber",
+  yew: "timber",
+  ghostwood: "timber",
   iron_ore: "ore",
   highland_ore: "ore",
   common_cloth: "fiber",
@@ -317,6 +505,15 @@ function validateSpawn(definition: ResourceDefinition): void {
   for (const [region, weight] of Object.entries(spawn.regions)) {
     if (!isBiomeId(region)) throw new Error(`${definition.id} has unknown region: ${region}`);
     if (!isPositiveFinite(weight)) throw new Error(`${definition.id} region ${region} weight must be finite and positive`);
+  }
+  if (spawn.places !== undefined) {
+    if (!isRecord(spawn.places) || Object.keys(spawn.places).length === 0) {
+      throw new Error(`${definition.id} places must be a non-empty record when set`);
+    }
+    for (const [placeId, weight] of Object.entries(spawn.places)) {
+      if (!PLACES.some((p) => p.id === placeId)) throw new Error(`${definition.id} has unknown place: ${placeId}`);
+      if (!isPositiveFinite(weight)) throw new Error(`${definition.id} place ${placeId} weight must be finite and positive`);
+    }
   }
   validateSkillRequirement(spawn.identifySkill);
   validateSkillRequirement(spawn.extractSkill);

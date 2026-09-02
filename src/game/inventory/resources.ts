@@ -1,4 +1,4 @@
-import { RESOURCE_CATALOG, RESOURCE_IDS } from "../resources/catalog.ts";
+import { RESOURCE_CATALOG, RESOURCE_IDS, timberGradeLabel } from "../resources/catalog.ts";
 import type {
   GemClarity,
   MaterialGrade,
@@ -154,7 +154,7 @@ export function listResourceInventory(value: unknown): ResourceInventoryRow[] {
       const definition = RESOURCE_CATALOG[resourceId];
       return {
         key,
-        label: `${definition.label} · ${titleCase(quality)} ${form}`,
+        label: `${definition.label} · ${titleCase(definition.kind === "timber" ? timberGradeLabel(quality) : quality)} ${form}`,
         count: count!,
         resourceId,
         form,

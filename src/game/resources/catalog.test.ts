@@ -15,7 +15,13 @@ import {
 
 const EXPECTED_IDS = [
   "oak",
+  "pine",
+  "willow",
+  "birch",
+  "ash",
   "redwood",
+  "yew",
+  "ghostwood",
   "iron_ore",
   "highland_ore",
   "common_cloth",
@@ -80,7 +86,7 @@ function assertCompileTimeContracts(): void {
 
 void assertCompileTimeContracts;
 
-test("catalog has exactly eight stable IDs whose keys equal definition IDs", () => {
+test("catalog has stable IDs whose keys equal definition IDs", () => {
   assert.deepEqual(RESOURCE_IDS, EXPECTED_IDS);
   assert.deepEqual(Object.keys(RESOURCE_CATALOG), EXPECTED_IDS);
   for (const [id, resource] of Object.entries(RESOURCE_CATALOG)) assert.equal(id, resource.id);
@@ -243,7 +249,13 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
     Object.fromEntries(Object.values(RESOURCE_CATALOG).map(({ id, traitIds }) => [id, traitIds])),
     {
       oak: [],
+      pine: [],
+      willow: [],
+      birch: [],
+      ash: [],
       redwood: ["accuracy"],
+      yew: ["accuracy"],
+      ghostwood: [],
       iron_ore: [],
       highland_ore: ["damage"],
       common_cloth: [],
@@ -278,12 +290,18 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       assert.equal(familyByForm[route.input.form], familyByForm[route.output.form]);
     }
   }
-  assert.deepEqual([...routeIds], ["saw_oak", "saw_redwood", "smelt_iron_ore", "smelt_highland_ore"]);
+  assert.deepEqual([...routeIds], ["saw_oak", "saw_pine", "saw_willow", "saw_birch", "saw_ash", "saw_redwood", "saw_yew", "saw_ghostwood", "smelt_iron_ore", "smelt_highland_ore"]);
   assert.deepEqual(
     Object.fromEntries(Object.values(RESOURCE_CATALOG).map(({ id, forms }) => [id, forms])),
     {
       oak: ["log", "board"],
+      pine: ["log", "board"],
+      willow: ["log", "board"],
+      birch: ["log", "board"],
+      ash: ["log", "board"],
       redwood: ["log", "board"],
+      yew: ["log", "board"],
+      ghostwood: ["log", "board"],
       iron_ore: ["ore", "ingot"],
       highland_ore: ["ore", "ingot"],
       common_cloth: ["cloth"],

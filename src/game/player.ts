@@ -1,7 +1,8 @@
 import { EH, inGreybarrow } from "./atlas.ts";
 import { FAUNA_META, hasTag, ITEM_META, armorOf, tagConsumeOrder } from "./catalog.ts";
 import { harvestNow, plantNow, tillNow } from "./farm.ts";
-import { isTimberId, plantTreeNow } from "./forestry.ts";
+import { GHOSTWOOD_LUMBERJACK } from "./resources/catalog.ts";
+import { isGhostwoodTree, isTimberId, plantTreeNow } from "./forestry.ts";
 import { ARROW_RANGE, FIREBALL_RANGE, burstDeath, castNow, maxMana, tickMana } from "./magery.ts";
 import { pickPetName } from "./names.ts";
 import { petLabel } from "./pets.ts";
@@ -200,8 +201,14 @@ export function needHeld(world: World, item: ItemId) {
 export function commandChop(world: World, tx: number, ty: number) {
   const p = you(world);
   if (!p) return "You are not in the vale.";
-  const dead = hands(world);
-  if (dead) return dead;
+  if (isGhost(world)) {
+    if (effSkill(world, "lumberjack") < GHOSTWOOD_LUMBERJACK) return "A ghost cannot.";
+    if (!isGhostwoodTree(world, tx, ty)) return "The axe passes through.";
+  } else {
+    const dead = hands(world);
+    if (dead) return dead;
+    if (isGhostwoodTree(world, tx, ty)) return "You see no tree.";
+  }
   const held = inHand(world);
   if (!held || !hasTag(held, "blade")) return "Hold a blade — hatchet, knife, or sword.";
   world.player.intent = { kind: "chop", tx, ty, targetId: null, spell: null };
@@ -821,9 +828,10 @@ export function tickPlayer(world: World, dt: number): string | null {
     p.ghost = true;
     world.player.ghost = true;
     p.hp = 0;
-    return null;
+    if (intent.kind !== "chop") return null;
+  } else {
+    tickMana(world, dt);
   }
-  tickMana(world, dt);
   tickChips(dt);
   if (intent.kind === "none" || intent.kind === "walk") {
     world.player.workT = 0;

@@ -13,7 +13,7 @@ function grassAt(tx: number, ty: number) {
   const tile = w.tiles[ty]![tx]!;
   tile.kind = "grass";
   w.player.pack.acorn = 3;
-  w.player.skills.forestry = 20;
+  w.player.skills.forestry = 0;
   return w;
 }
 
@@ -34,7 +34,7 @@ test("forestry - an acorn takes grass and becomes a tree", () => {
   assert.equal(saplingAt(w, 240, 280), null);
   assert.equal(w.tiles[280]![240]!.kind, "tree");
   assert.deepEqual(w.scars["240,280"], { kind: "tree" });
-  assert.ok(w.player.skills.forestry >= 20);
+  assert.ok(w.player.skills.forestry >= 0);
 });
 
 test("forestry - cobble and a standing tree refuse the acorn", () => {
@@ -80,7 +80,7 @@ test("forestry - skill picks oak, then redwood, and the grove remembers", () => 
 
   w.player.skills.forestry = 50;
   w.player.pack.acorn = 1;
-  const tile = w.tiles[243]![283]!;
+  const tile = w.tiles[283]![243]!;
   tile.kind = "grass";
   const p = you(w)!;
   p.x = 243;

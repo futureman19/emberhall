@@ -2,6 +2,7 @@ import { ITEM_META } from "./catalog.ts";
 import { plotAt } from "./farm.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { RESOURCE_CATALOG, RESOURCE_IDS } from "./resources/catalog.ts";
+import { resolveResourceNode } from "./resources/nodes.ts";
 import type { ResourceId } from "./resources/types.ts";
 import { tryGain } from "./skills.ts";
 import { playSfx } from "./vale-sfx.ts";
@@ -35,7 +36,9 @@ export function plantableTimber(forestry: number): ResourceId[] {
 
 export function bestPlantableTimber(forestry: number): ResourceId | null {
   const list = plantableTimber(forestry);
-  return list.at(-1) ?? null;
+  if (!list.length) return null;
+  const top = Math.max(...list.map(plantSkillFor));
+  return list.find((id) => plantSkillFor(id) === top) ?? null;
 }
 
 export function isTimberId(value: string | null | undefined): value is ResourceId {
@@ -147,4 +150,16 @@ export function plantVerbLabel(forestry: number) {
   const species = bestPlantableTimber(forestry);
   if (!species) return "Plant acorn";
   return `Plant ${RESOURCE_CATALOG[species].label.toLowerCase()}`;
+}
+
+export function treeResourceAt(world: World, tx: number, ty: number) {
+  const tile = world.tiles[ty]?.[tx];
+  if (!tile || tile.kind !== "tree") return null;
+  const planted = world.plantedTimber?.[`${tx},${ty}`];
+  if (planted && isTimberId(planted)) return planted;
+  return resolveResourceNode({ seed: world.seed, tx, ty, nodeKind: "tree" }).identity.resourceId;
+}
+
+export function isGhostwoodTree(world: World, tx: number, ty: number) {
+  return treeResourceAt(world, tx, ty) === "ghostwood";
 }

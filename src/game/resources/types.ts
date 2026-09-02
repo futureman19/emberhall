@@ -1,6 +1,18 @@
 import type { BiomeId, SkillId } from "../types.ts";
 
-export type GradeResourceId = "oak" | "redwood" | "iron_ore" | "highland_ore" | "common_cloth" | "fine_linen";
+export type GradeResourceId =
+  | "oak"
+  | "pine"
+  | "willow"
+  | "birch"
+  | "ash"
+  | "redwood"
+  | "yew"
+  | "ghostwood"
+  | "iron_ore"
+  | "highland_ore"
+  | "common_cloth"
+  | "fine_linen";
 export type GemResourceId = "ruby" | "sapphire";
 export type ResourceId = GradeResourceId | GemResourceId;
 
@@ -41,6 +53,8 @@ export interface ResourceSpawn {
   readonly nodeKind: "tree" | "rock";
   readonly weight: number;
   readonly regions: Readonly<Partial<Record<BiomeId, number>>>;
+  /** Named groves. When set, the wood also (or only) gathers at these places. */
+  readonly places?: Readonly<Partial<Record<string, number>>>;
   readonly identifySkill: SkillRequirement;
   readonly extractSkill: SkillRequirement;
   readonly toolTier: number;
@@ -59,13 +73,13 @@ interface ResourceDefinitionBase {
   readonly visual: ResourceVisual;
 }
 
-export type ResourceKindFor<I extends ResourceId> = I extends "oak" | "redwood"
-  ? "timber"
-  : I extends "iron_ore" | "highland_ore"
-    ? "ore"
-    : I extends "common_cloth" | "fine_linen"
-      ? "fiber"
-      : "gem";
+export type ResourceKindFor<I extends ResourceId> = I extends "iron_ore" | "highland_ore"
+  ? "ore"
+  : I extends "common_cloth" | "fine_linen"
+    ? "fiber"
+    : I extends GemResourceId
+      ? "gem"
+      : "timber";
 
 export type ResourceFormFor<I extends ResourceId> = ResourceKindFor<I> extends "timber"
   ? "log" | "board"
@@ -137,7 +151,13 @@ export type ResourceNodeIdentity<I extends ResourceId = ResourceId> = I extends 
 
 const GRADE_RESOURCE_IDS = [
   "oak",
+  "pine",
+  "willow",
+  "birch",
+  "ash",
   "redwood",
+  "yew",
+  "ghostwood",
   "iron_ore",
   "highland_ore",
   "common_cloth",
