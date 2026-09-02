@@ -286,6 +286,33 @@ async function finishTaming(page, targetId, success) {
   );
 }
 
+async function runCrafting(page, kind) {
+  return page.evaluate((craftKind) => {
+    const world = window.__ember.getWorld();
+    const store = window.__ember.useGame.getState();
+    const player = world.people.find((person) => person.isPlayer);
+    if (!player) throw new Error("crafting smoke needs a player");
+    world.hour += 2 / 36;
+    player.path = [];
+    if (craftKind === "carpentry") {
+      const yard = world.buildings.find((building) => building.kind === "yard");
+      if (!yard) throw new Error("crafting smoke needs a yard");
+      player.x = yard.tx; player.z = yard.ty; world.player.skills.carpentry = 100; world.player.pack.log = 1;
+      store.makeRecipe("board");
+    } else if (craftKind === "smithing") {
+      const forge = world.buildings.find((building) => building.kind === "forge");
+      if (!forge) throw new Error("crafting smoke needs a forge");
+      player.x = forge.tx; player.z = forge.ty; world.player.skills.smithing = 100; world.player.pack.ore = 1;
+      store.makeRecipe("smelt");
+    } else {
+      world.campfires = []; world.player.skills.cooking = 100; world.player.pack.log = 3;
+      store.makeRecipe("campfire");
+    }
+    world.hour += 0.45 / 36;
+    return window.__ember.useGame.getState().toast;
+  }, kind);
+}
+
 for (const viewport of [
   { name: "desktop", width: 1280, height: 800 },
   { name: "mobile", width: 390, height: 844 },
@@ -394,6 +421,24 @@ for (const viewport of [
   if (tameFailure.ownerId || tameFailure.task !== "flee")
     throw new Error(`${viewport.name}: taming refusal did not flee`);
 
+  const carpentryToast = await runCrafting(page, "carpentry");
+  await page.waitForTimeout(100);
+  const carpentry = path.join(outputDir, `animation-carpentry-${viewport.name}.png`);
+  await page.screenshot({ path: carpentry });
+  if (!String(carpentryToast).toLowerCase().includes("board")) throw new Error(`${viewport.name}: carpentry did not resolve`);
+
+  const smithingToast = await runCrafting(page, "smithing");
+  await page.waitForTimeout(100);
+  const smithing = path.join(outputDir, `animation-smithing-${viewport.name}.png`);
+  await page.screenshot({ path: smithing });
+  if (!String(smithingToast).toLowerCase().includes("ingot")) throw new Error(`${viewport.name}: smithing did not resolve`);
+
+  const cookingToast = await runCrafting(page, "cooking");
+  await page.waitForTimeout(100);
+  const cooking = path.join(outputDir, `animation-cooking-${viewport.name}.png`);
+  await page.screenshot({ path: cooking });
+  if (!String(cookingToast).toLowerCase().includes("fire crackles")) throw new Error(`${viewport.name}: cooking did not resolve`);
+
   if (consoleErrors.length || pageErrors.length) {
     throw new Error(
       `${viewport.name} browser errors: ${JSON.stringify({ consoleErrors, pageErrors })}`,
@@ -417,6 +462,9 @@ for (const viewport of [
       tamingAttempt,
       tamingSuccess,
       tamingFailure,
+      carpentry,
+      smithing,
+      cooking,
     },
     consoleErrors,
     pageErrors,

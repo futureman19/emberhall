@@ -12,6 +12,8 @@ import {
 } from "@/game/combat-animation";
 import { HEALING_DURATION, healingPulse } from "@/game/healing-animation";
 import { TAMING_DURATION, tamingPulse } from "@/game/taming-animation";
+import { CRAFTING_DURATION, craftingPose, craftingVisualProfile } from "@/game/crafting-animation";
+import { getCraftFx } from "@/game/craft";
 import { groundY as heightAt } from "@/game/height";
 import { getGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
 import { getWorld } from "@/game/live";
@@ -744,6 +746,75 @@ function TamingFxMesh() {
   );
 }
 
+function CraftFxMesh() {
+  const group = useRef<THREE.Group>(null);
+  const ring = useRef<THREE.Mesh>(null);
+  const hotMetal = useRef<THREE.Mesh>(null);
+  const workpiece = useRef<THREE.Mesh>(null);
+  const pot = useRef<THREE.Group>(null);
+  const particles = useRef<THREE.Group>(null);
+  useFrame(() => {
+    const fx = getCraftFx();
+    const g = group.current;
+    if (!g || !ring.current || !hotMetal.current || !workpiece.current || !pot.current || !particles.current) return;
+    const age = fx ? (getWorld().hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const visible = Boolean(fx && age >= 0 && age < CRAFTING_DURATION);
+    g.visible = visible;
+    if (!fx || !visible) return;
+    const t = projectileProgress(age, CRAFTING_DURATION);
+    const pose = craftingPose(fx.kind, age);
+    const profile = craftingVisualProfile(fx.kind);
+    const y = groundY(fx.x, fx.z);
+    g.position.set(fx.x, y, fx.z);
+    ring.current.scale.setScalar(0.7 + t * 2);
+    const ringMaterial = ring.current.material as THREE.MeshBasicMaterial;
+    ringMaterial.color.set(fx.success ? profile.primary : "#a85a42");
+    ringMaterial.opacity = pose.work * 0.78;
+    hotMetal.current.visible = fx.kind === "smithing";
+    hotMetal.current.position.set(0, 0.32 + pose.strike * 0.05, 0.35);
+    const metalMaterial = hotMetal.current.material as THREE.MeshStandardMaterial;
+    metalMaterial.emissiveIntensity = 1.2 + pose.strike * 2.4;
+    workpiece.current.visible = fx.kind === "carpentry";
+    workpiece.current.position.set(0, 0.2, 0.38);
+    workpiece.current.rotation.y = Math.sin(age * 12) * 0.08;
+    pot.current.visible = fx.kind === "cooking";
+    pot.current.position.set(0, 0.2, 0.34);
+    pot.current.rotation.y = age * 2.5;
+    particles.current.position.set(0, 0, 0.32);
+    for (let index = 0; index < particles.current.children.length; index += 1) {
+      const particle = particles.current.children[index] as THREE.Mesh;
+      const angle = (index / particles.current.children.length) * Math.PI * 2;
+      if (fx.kind === "smithing") {
+        const radius = 0.18 + t * (0.7 + index * 0.04);
+        particle.position.set(Math.cos(angle) * radius, 0.34 + Math.sin(t * Math.PI) * (0.6 + index * 0.04), Math.sin(angle) * radius);
+      } else if (fx.kind === "carpentry") {
+        const radius = 0.16 + t * (0.45 + index * 0.03);
+        particle.position.set(Math.cos(angle) * radius, 0.22 + t * 0.35, Math.sin(angle) * radius);
+      } else {
+        const radius = 0.12 + index * 0.025;
+        particle.position.set(Math.cos(angle + age * 2) * radius, 0.5 + t * (0.9 + index * 0.08), Math.sin(angle + age * 2) * radius);
+      }
+      if (fx.kind === "smithing") {
+        particle.rotation.y = angle;
+        particle.scale.set(0.4, 0.4, 2 + pose.strike * 0.9);
+      } else if (fx.kind === "carpentry") particle.scale.set(2.2 + pose.work, 0.45, 0.9);
+      else particle.scale.setScalar(1.5 + pose.work * 1.5);
+      const material = particle.material as THREE.MeshBasicMaterial;
+      material.color.set(fx.kind === "smithing" ? (index % 2 ? "#fff1a8" : "#ff7a2f") : fx.kind === "carpentry" ? (index % 2 ? "#fff0cf" : "#b57a3d") : "#f4f0e8");
+      material.opacity = pose.work * (1 - t * 0.55);
+    }
+  });
+  return (
+    <group ref={group} visible={false}>
+      <mesh ref={ring} renderOrder={7} position={[0, 0.06, 0]} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.3, 0.5, 24]} /><meshBasicMaterial transparent depthWrite={false} depthTest={false} toneMapped={false} /></mesh>
+      <mesh ref={hotMetal} visible={false}><boxGeometry args={[1.15, 0.24, 0.4]} /><meshStandardMaterial color="#ff8a38" emissive="#ff5a1f" emissiveIntensity={1.6} metalness={0.55} roughness={0.3} /><group position={[0, 0.62, 0]} rotation={[0, 0, -0.45]}><mesh><boxGeometry args={[0.1, 1.15, 0.1]} /><meshStandardMaterial color="#5a3e28" /></mesh><mesh position={[0, 0.58, 0]}><boxGeometry args={[0.65, 0.28, 0.28]} /><meshStandardMaterial color="#e8e1d4" metalness={0.7} roughness={0.25} /></mesh></group></mesh>
+      <mesh ref={workpiece} visible={false}><boxGeometry args={[2.1, 0.24, 0.58]} /><meshStandardMaterial color="#8b5f35" roughness={0.9} /><group position={[0, 0.58, 0]} rotation={[0.15, 0, 0.45]}><mesh><boxGeometry args={[1.15, 0.36, 0.06]} /><meshStandardMaterial color="#ece6d8" metalness={0.55} roughness={0.3} /></mesh><mesh position={[0, 0.3, 0]}><boxGeometry args={[0.28, 0.55, 0.13]} /><meshStandardMaterial color="#5a3e28" roughness={0.9} /></mesh></group></mesh>
+      <group ref={pot} visible={false}><mesh><cylinderGeometry args={[0.72, 0.58, 0.68, 14]} /><meshStandardMaterial color="#5a554d" metalness={0.35} roughness={0.55} /></mesh><mesh position={[0, 0.34, 0]}><torusGeometry args={[0.62, 0.065, 7, 20]} /><meshStandardMaterial color="#a09b91" metalness={0.45} roughness={0.4} /></mesh><group position={[0.18, 0.88, 0]} rotation={[0, 0, 0.45]}><mesh><cylinderGeometry args={[0.055, 0.055, 1.45, 7]} /><meshStandardMaterial color="#a87842" roughness={0.85} /></mesh><mesh position={[0, -0.76, 0]}><sphereGeometry args={[0.21, 9, 7]} /><meshStandardMaterial color="#a87842" roughness={0.85} /></mesh></group></group>
+      <group ref={particles}>{Array.from({ length: 10 }, (_, index) => <mesh key={index} renderOrder={8}><sphereGeometry args={[index % 2 ? 0.1 : 0.075, 7, 5]} /><meshBasicMaterial transparent depthWrite={false} depthTest={false} toneMapped={false} /></mesh>)}</group>
+    </group>
+  );
+}
+
 function CombatFxMesh() {
   const arrow = useRef<THREE.Group>(null);
   const impact = useRef<THREE.Mesh>(null);
@@ -962,6 +1033,7 @@ export function WorldScene() {
       <FizzleFxMesh />
       <HealingFxMesh />
       <TamingFxMesh />
+      <CraftFxMesh />
       <CombatFxMesh />
       <DeathFxMesh />
       <ChipBits />

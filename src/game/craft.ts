@@ -18,6 +18,7 @@ import { playSfx, type SfxId } from "./vale-sfx.ts";
 import { completeObjective, log } from "./world.ts";
 import { countGenericCraftResource, debitGenericCraftResource, type GenericCraftResourceItem } from "./inventory/resources.ts";
 import { refineResource } from "./refining.ts";
+import type { CraftAnimationKind } from "./crafting-animation.ts";
 import type { BuildingKind, ItemId, RareItem, ResourceStackKey, ResourceTag, SkillId, World } from "./types.ts";
 
 export { countTag, hasTag, itemTags, tagConsumeOrder } from "./catalog.ts";
@@ -61,6 +62,29 @@ export interface Recipe {
   placesFire?: boolean;
   give: Partial<Record<ItemId, number>>;
   sfx: SfxId;
+}
+
+export interface CraftFx {
+  kind: CraftAnimationKind;
+  recipeId: string;
+  success: boolean;
+  x: number;
+  z: number;
+  at: number;
+}
+
+let craftFx: CraftFx | null = null;
+
+export function getCraftFx() {
+  return craftFx;
+}
+
+function emitCraftFx(world: World, rec: Recipe, success: boolean) {
+  const kind: CraftAnimationKind | null =
+    rec.skill === "smithing" ? "smithing" : rec.skill === "carpentry" ? "carpentry" : rec.skill === "cooking" ? "cooking" : null;
+  const player = you(world);
+  if (!kind || !player) return;
+  craftFx = { kind, recipeId: rec.id, success, x: player.x, z: player.z, at: world.hour };
 }
 
 /** Held item carries the blade tag (the UO "bladed" script check). */
@@ -281,6 +305,7 @@ export function commandCraft(world: World, recipeId: string): string | null {
   if (miss) return miss;
   playSfx(rec.sfx, rec.sfx === "fire" ? 0.48 : 0.52);
   const { ok, gain, wonder } = craftOnce(world, rec);
+  emitCraftFx(world, rec, ok);
   if (!ok) {
     const note = gain ? `The work splits. ${gain}.` : "The work splits.";
     log(world, note);
@@ -317,6 +342,7 @@ export function commandCraftExact(
   playSfx(rec.sfx, 0.52);
   const ok = Math.random() < chance;
   const gain = tryGain(world, rec.skill, ok, chance >= 0.35 && chance <= 0.85);
+  emitCraftFx(world, rec, ok);
   if (!ok) {
     const note = gain ? `The work splits. ${gain}.` : "The work splits.";
     log(world, note);
@@ -362,6 +388,8 @@ export function commandRefineExact(world: World, key: ResourceStackKey): string 
   const result = refineResource(world.player, key, "forge", effSkill(world, "smithing"));
   if (result.status === "blocked") return result.message;
   playSfx("fire", 0.48);
+  const player = you(world);
+  if (player) craftFx = { kind: "smithing", recipeId: "refine", success: true, x: player.x, z: player.z, at: world.hour };
   const note = `Refined ${result.quantity} ${result.output.replaceAll("_", " ")}.`;
   log(world, note);
   return note;
@@ -470,6 +498,7 @@ export function commandCraftBatch(world: World, recipeId: string, times: number)
     else failed++;
     if (wonder) wonders.push(wonder);
   }
+  emitCraftFx(world, rec, made > 0);
   const bits: string[] = [];
   if (made > 0) bits.push(rec.placesFire ? "A fire crackles to life." : madeList(rec, made) + ".");
   if (failed > 0) bits.push(`${failed} split.`);

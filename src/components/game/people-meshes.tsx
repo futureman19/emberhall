@@ -5,6 +5,8 @@ import { Quaternion, type Group, type Mesh, type MeshBasicMaterial } from "three
 import { CLASS_META, SECONDS_PER_HOUR } from "@/game/catalog";
 import { HEALING_DURATION, healingPose } from "@/game/healing-animation";
 import { TAMING_DURATION, tamingPose } from "@/game/taming-animation";
+import { CRAFTING_DURATION, craftingPose } from "@/game/crafting-animation";
+import { getCraftFx } from "@/game/craft";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { SLOT_ANCHOR, partsById } from "@/game/look/parts.ts";
@@ -603,6 +605,51 @@ function BandageBillboard() {
   );
 }
 
+function CraftingTool() {
+  const hammer = useRef<Group>(null);
+  const saw = useRef<Group>(null);
+  const spoon = useRef<Group>(null);
+  useFrame(() => {
+    const fx = getCraftFx();
+    const age = fx ? (getWorld().hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const live = Boolean(fx && age >= 0 && age < CRAFTING_DURATION);
+    const pose = fx ? craftingPose(fx.kind, age) : { work: 0, strike: 0, stir: 0 };
+    if (hammer.current) { hammer.current.visible = live && fx?.kind === "smithing"; hammer.current.rotation.z = -0.25 - pose.strike * 0.75; }
+    if (saw.current) { saw.current.visible = live && fx?.kind === "carpentry"; saw.current.position.z = -0.18 + Math.sin(age * 26) * 0.18 * pose.work; }
+    if (spoon.current) { spoon.current.visible = live && fx?.kind === "cooking"; spoon.current.rotation.y = age * 8; spoon.current.rotation.z = 0.32 + pose.stir * 0.24; }
+  });
+  return (
+    <group>
+      <group ref={hammer} visible={false} position={[0.02, -0.48, 0.04]}><mesh position={[0, 0.2, 0]}><boxGeometry args={[0.05, 0.5, 0.05]} /><meshStandardMaterial color="#5a3e28" roughness={0.9} /></mesh><mesh position={[0, 0.48, 0]}><boxGeometry args={[0.28, 0.14, 0.14]} /><meshStandardMaterial color="#9a9286" metalness={0.65} roughness={0.3} /></mesh></group>
+      <group ref={saw} visible={false} position={[0, -0.34, 0]} rotation={[0.25, 0, 0.4]}><mesh><boxGeometry args={[0.08, 0.46, 0.04]} /><meshStandardMaterial color="#5a3e28" roughness={0.9} /></mesh><mesh position={[0, -0.28, 0]}><boxGeometry args={[0.42, 0.18, 0.025]} /><meshStandardMaterial color="#c9c3b6" metalness={0.55} roughness={0.3} /></mesh></group>
+      <group ref={spoon} visible={false} position={[0, -0.42, 0]}><mesh><cylinderGeometry args={[0.025, 0.025, 0.58, 6]} /><meshStandardMaterial color="#8a6a42" roughness={0.85} /></mesh><mesh position={[0, -0.32, 0]}><sphereGeometry args={[0.09, 8, 6]} /><meshStandardMaterial color="#8a6a42" roughness={0.85} /></mesh></group>
+    </group>
+  );
+}
+
+function CraftingBillboard() {
+  const label = useRef<HTMLDivElement>(null);
+  useFrame(() => {
+    const element = label.current;
+    if (!element) return;
+    const fx = getCraftFx();
+    const age = fx ? (getWorld().hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const visible = Boolean(fx && age >= 0 && age < CRAFTING_DURATION);
+    element.style.display = visible ? "grid" : "none";
+    if (!fx || !visible) return;
+    const labelText = fx.kind === "smithing" ? "Smithing" : fx.kind === "carpentry" ? "Carpentry" : "Cooking";
+    const icon = fx.kind === "smithing" ? "⚒" : fx.kind === "carpentry" ? "SAW" : "♨";
+    element.innerHTML = `<span style="font-size:18px;line-height:1">${icon}</span><span>${labelText}</span>`;
+    element.style.borderColor = fx.success ? "rgba(255, 211, 106, 0.88)" : "rgba(168, 90, 66, 0.9)";
+    element.style.color = fx.success ? "#fff8e7" : "#ece6d8";
+  });
+  return (
+    <Html position={[0, 3.2, 0]} center zIndexRange={[36, 0]} style={{ pointerEvents: "none" }}>
+      <div ref={label} style={{ display: "none", placeItems: "center", gap: 2, minWidth: 82, padding: "6px 9px", border: "1px solid rgba(255, 211, 106, 0.8)", borderRadius: 8, background: "rgba(20, 18, 15, 0.9)", boxShadow: "0 0 16px rgba(0, 0, 0, 0.5)", fontFamily: "serif", fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }} />
+    </Html>
+  );
+}
+
 function Figure({
   p,
   selected,
@@ -634,13 +681,17 @@ function Figure({
       w.player.intent.kind === "tame" &&
       w.player.workT < TAMING_DURATION,
     );
+    const craftFx = getCraftFx();
+    const craftAge = craftFx ? (w.hour - craftFx.at) * SECONDS_PER_HOUR : Infinity;
+    const crafting = Boolean(craftFx && craftAge >= 0 && craftAge < CRAFTING_DURATION);
+    const craftPose = craftFx ? craftingPose(craftFx.kind, craftAge) : { work: 0, strike: 0, stir: 0 };
     if (you && root.current) {
       root.current.position.set(
         you.x,
         groundAt(you.x, you.z) + (you.ghost ? 0.32 : 0) - healPose.crouch,
         you.z,
       );
-      root.current.rotation.x = healPose.lean + (taming ? tamePose.bow : 0);
+      root.current.rotation.x = healPose.lean + (taming ? tamePose.bow : 0) + (crafting ? craftPose.work * 0.14 : 0);
       root.current.rotation.y = you.facing;
     }
     const it = w.player.intent;
@@ -656,12 +707,14 @@ function Figure({
     const hunting = idle && it.kind === "hunt";
     const bowing = hunting && w.player.wear.main === "bow";
     const draw = bowing ? bowDrawAmount(w.player.workT) : 0;
-    if (held.current) held.current.visible = !casting && !healing && !taming;
+    if (held.current) held.current.visible = !casting && !healing && !taming && !crafting;
     if (left.current) {
       if (healing) {
         left.current.rotation.set(0.98, 0.48, 1.02);
       } else if (taming) {
         left.current.rotation.set(0.72 + tamePose.reach * 0.25, 0.36, 0.82 + tamePose.reach * 0.2);
+      } else if (crafting && craftFx) {
+        left.current.rotation.set(craftFx.kind === "smithing" ? 0.72 : 0.9, 0.34, craftFx.kind === "cooking" ? 0.82 : 0.62);
       } else if (casting) {
         const u = Math.min(1, w.player.workT / 0.26);
         const e = u * u * (3 - 2 * u);
@@ -687,6 +740,13 @@ function Figure({
           -0.36,
           -0.82 - tamePose.reach * 0.2,
         );
+      } else if (crafting && craftFx) {
+        const pitch = craftFx.kind === "smithing"
+          ? -0.55 + craftPose.strike * 1.75
+          : craftFx.kind === "carpentry"
+            ? 0.85 + Math.sin(craftAge * 26) * 0.28 * craftPose.work
+            : 0.9 + craftPose.stir * 0.2;
+        right.current.rotation.set(pitch, -0.3, craftFx.kind === "cooking" ? -0.92 : -0.58);
       } else if (chopping) {
         const pitch = workPitch(w.player.workT);
         right.current.rotation.set(pitch, 0.18, -0.22);
@@ -786,6 +846,7 @@ function Figure({
           <Mat color={hands} ghost={ghost} />
         </mesh>
         <group ref={held}>{p.isPlayer && wear.main && <Held id={wear.main} ghost={ghost} />}</group>
+        {p.isPlayer && !ghost && <CraftingTool />}
         {p.isPlayer && !ghost && <PalmFlame />}
       </group>
       <mesh position={[0, 0.98 + bob, 0]} castShadow={!ghost}>
@@ -829,6 +890,7 @@ function Figure({
       })}
       {p.isPlayer && !ghost && <BandageWrap />}
       {p.isPlayer && !ghost && <BandageBillboard />}
+      {p.isPlayer && !ghost && <CraftingBillboard />}
       {p.isPlayer && !ghost && <MeleeSwingArc />}
       {selected && (
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.04, 0]}>
