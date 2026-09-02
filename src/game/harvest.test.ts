@@ -109,6 +109,18 @@ function harvestWorld(
   return { world, tx, ty };
 }
 
+function redwoodWorld() {
+  const tx = 360;
+  const ty = 460;
+  for (let seed = 0; seed < 20_000; seed += 1) {
+    const identity = resolveResourceNode({ seed, tx, ty, nodeKind: "tree" }).identity;
+    if (identity.resourceId === "redwood" && identity.qualityCeiling === "pristine") {
+      return harvestWorld("tree", seed, tx, ty);
+    }
+  }
+  throw new Error("no deterministic pristine redwood fixture");
+}
+
 function arrive(world: World) {
   you(world)!.path = [];
 }
@@ -271,7 +283,7 @@ test("harvest - save reload preserves the depletion scar and typed result", () =
 });
 
 test("harvest - unknown and identified gate rejects disclose exactly the allowed node detail", () => {
-  const unknown = harvestWorld("tree", 1_419, 188, 88);
+  const unknown = redwoodWorld();
   unknown.world.player.skills.lumberjack = 34;
   assert.equal(commandChop(unknown.world, unknown.tx, unknown.ty), null);
   arrive(unknown.world);
@@ -289,14 +301,14 @@ test("harvest - unknown and identified gate rejects disclose exactly the allowed
   );
   assert.deepEqual(harvestState(unknown.world), unknownBefore);
 
-  const identified = harvestWorld("tree", 1_419, 188, 88);
+  const identified = redwoodWorld();
   identified.world.player.skills.lumberjack = 49;
   assert.equal(commandChop(identified.world, identified.tx, identified.ty), null);
   arrive(identified.world);
   const identifiedBefore = harvestState(identified.world);
   assert.equal(
     withForbiddenRandom(() => tickPlayer(identified.world, 0.6)),
-    "You identify Pristine Redwood, but need 50 Lumberjacking to extract it.",
+    "You identify Hardened Redwood, but need 50 Lumberjacking to extract it.",
   );
   assert.equal(identified.world.player.intent.kind, "none");
   const identifiedId = resolveResourceNode({
@@ -310,7 +322,7 @@ test("harvest - unknown and identified gate rejects disclose exactly the allowed
   assert.equal(identified.world.resourceNodes[identifiedId]?.discoveredAtHour, identified.world.hour);
   assert.equal(identified.world.resourceNodes[identifiedId]?.depletedAtHour, null);
 
-  const wrongTool = harvestWorld("tree", 1_419, 188, 88);
+  const wrongTool = redwoodWorld();
   wrongTool.world.player.skills.lumberjack = 50;
   wrongTool.world.player.wear.main = "knife";
   assert.equal(commandChop(wrongTool.world, wrongTool.tx, wrongTool.ty), null);
@@ -318,7 +330,7 @@ test("harvest - unknown and identified gate rejects disclose exactly the allowed
   const wrongToolBefore = harvestState(wrongTool.world);
   assert.equal(
     withForbiddenRandom(() => tickPlayer(wrongTool.world, 0.6)),
-    "You identify Pristine Redwood, but need a tier 2 tool to extract it.",
+    "You identify Hardened Redwood, but need a tier 2 tool to extract it.",
   );
   assert.equal(wrongTool.world.player.intent.kind, "none");
   const wrongToolId = resolveResourceNode({
@@ -371,7 +383,7 @@ test("harvest - typed inventory guard errors leave the complete node and player 
 });
 
 test("harvest - context discovery persists once and later reveals the same identity below skill", () => {
-  const { world, tx, ty } = harvestWorld("tree", 1_419, 188, 88);
+  const { world, tx, ty } = redwoodWorld();
   world.hour = 12;
   world.player.skills.lumberjack = 34;
   setWorld(world);
@@ -387,7 +399,7 @@ test("harvest - context discovery persists once and later reveals the same ident
     verbsFor({ kind: "tile", id: `${tx},${ty}`, tx, ty, label: "tree" }).find(
       ({ verb }) => verb === "chop",
     )?.label,
-    "Chop Pristine Redwood",
+    "Chop Hardened Redwood",
   );
   const id = resolveResourceNode({ seed: world.seed, tx, ty, nodeKind: "tree" }).identity.nodeId;
   assert.deepEqual(world.resourceNodes[id], {
@@ -404,7 +416,7 @@ test("harvest - context discovery persists once and later reveals the same ident
     verbsFor({ kind: "tile", id: `${tx},${ty}`, tx, ty, label: "tree" }).find(
       ({ verb }) => verb === "chop",
     )?.label,
-    "Chop Pristine Redwood",
+    "Chop Hardened Redwood",
   );
   assert.equal(world.resourceNodes[id]?.discoveredAtHour, 12);
   assert.equal(Object.keys(world.resourceNodes).length, 1);

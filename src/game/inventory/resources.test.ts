@@ -286,7 +286,7 @@ test("resource inventory - Pack rows parse, label, and sort exact canonical stac
 
   assert.deepEqual(listResourceInventory(inventory), [
     { key: roughOak, label: "Oak · Rough log", count: 3 },
-    { key: pristineOakBoard, label: "Oak · Pristine board", count: 2 },
+    { key: pristineOakBoard, label: "Oak · Hardened board", count: 2 },
     { key: soundIron, label: "Iron Ore · Sound ore", count: 4 },
     { key: flawlessRuby, label: "Ruby · Flawless gem", count: 1 },
   ]);
