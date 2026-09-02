@@ -368,7 +368,10 @@ function isBuilding(value: unknown): boolean {
     isRegistryKey(value.kind, BUILDING_META) &&
     isFiniteNumber(value.tx) &&
     isFiniteNumber(value.ty) &&
-    isArrayOf(value.beds, (bed) => isRecord(bed) && isNullableString(bed.occupantId))
+    isArrayOf(value.beds, (bed) => isRecord(bed) && isNullableString(bed.occupantId)) &&
+    (value.ownerId === undefined || isNullableString(value.ownerId)) &&
+    (value.chest === undefined || isItemRecord(value.chest)) &&
+    (value.chestGold === undefined || isFiniteNumber(value.chestGold))
   );
 }
 

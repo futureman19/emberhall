@@ -1,5 +1,6 @@
 import { VIEW } from "./atlas.ts";
 import { buildingAt } from "./craft.ts";
+import { houseAt } from "./house.ts";
 import { CROP_META, plotAt } from "./farm.ts";
 import { getWorld } from "./live.ts";
 import { markBuildHold, takeBuildHold, useGame } from "./store.ts";
@@ -27,6 +28,11 @@ export function hitAt(tx: number, ty: number, sx: number, sy: number) {
   if (bed) {
     const crop = bed.crop ? CROP_META[bed.crop].label : "bed";
     g.openCtx(sx, sy, { kind: "plot", id: bed.id, tx, ty, label: crop });
+    return;
+  }
+  const house = houseAt(w, tx, ty, 2.6);
+  if (house) {
+    g.openCtx(sx, sy, { kind: "building", id: house.id, tx: house.tx, ty: house.ty, label: house.kind });
     return;
   }
   const b = buildingAt(w, tx, ty, 2.6);

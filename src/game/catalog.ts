@@ -121,6 +121,9 @@ export const ITEM_META: Record<
   wheat_seed: { label: "Wheat seed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 2, sell: 1, tags: ["seed", "plant"] },
   garlic_seed: { label: "Garlic seed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 3, sell: 1, tags: ["seed", "plant"] },
   acorn: { label: "Acorn", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 3, sell: 1, tags: ["seed", "plant"] },
+  deed_porch: { label: "Porch deed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 0, tags: ["magic"] },
+  deed_hut: { label: "Hut deed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 0, tags: ["magic"] },
+  deed_homestead: { label: "Homestead deed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 0, tags: ["magic"] },
 };
 
 export const CLASS_META: Record<ClassId, { label: string; color: string }> = {
@@ -224,6 +227,9 @@ export const BUILDING_META: Record<BuildingKind, { label: string }> = {
   townhome: { label: "Townhome" },
   townhouse: { label: "Townhouse" },
   cottage: { label: "Cottage" },
+  porch: { label: "Porch" },
+  hut: { label: "Hut" },
+  homestead: { label: "Homestead" },
 };
 
 export const BUILD_ORDER: BuildingKind[] = ["dormitory", "kitchen", "farm", "market", "forge", "tavern"];
@@ -290,6 +296,7 @@ export function emptyPack(): Record<ItemId, number> {
     silk: 16, nightshade: 4, pearl: 14, moss: 10, mandrake: 10, ash: 12, cabbage: 2, wheat: 0,
     cooked_meat: 0, bread: 0, stew: 0,
     cabbage_seed: 8, wheat_seed: 6, garlic_seed: 4, acorn: 6,
+    deed_porch: 0, deed_hut: 0, deed_homestead: 0,
   };
 }
 

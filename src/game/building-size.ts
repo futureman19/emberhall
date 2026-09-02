@@ -24,6 +24,9 @@ export const BUILD_SIZE: Record<BuildingKind, { x0: number; x1: number; z0: numb
   townhome: { x0: -4, x1: 4, z0: -3, z1: 3 },
   townhouse: { x0: -3, x1: 3, z0: -3, z1: 3 },
   cottage: { x0: -3, x1: 3, z0: -2, z1: 2 },
+  porch: { x0: -2, x1: 2, z0: -1, z1: 1 },
+  hut: { x0: -3, x1: 3, z0: -2, z1: 2 },
+  homestead: { x0: -3, x1: 3, z0: -3, z1: 3 },
 };
 
 export function buildingBox(kind: BuildingKind, tx: number, ty: number) {
@@ -46,6 +49,7 @@ export function boxesOverlap(
 export function siteError(world: World, kind: BuildingKind, tx: number, ty: number): string | null {
   if (kind === "hall") return "The hall already stands.";
   if (kind === "bank") return "The bank already stands.";
+  if (kind === "porch" || kind === "hut" || kind === "homestead") return "Raise a house from a deed.";
   if (world.buildings.some((b) => b.kind === kind)) return `The ${kind} already stands.`;
   const cost = kind === "dormitory" ? 40 : 28;
   if (world.gold < cost) return `Need ${cost} gold.`;

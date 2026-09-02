@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { ContextMenu, PileGump } from "@/components/game/context-menu";
 import { GateGump } from "@/components/game/gate-gump";
 import { NpcGump } from "@/components/game/npc-gump";
+import { HouseGump } from "@/components/game/house-gump";
 import { YouDressing } from "@/components/game/paperdoll";
 import { SpellbookGump } from "@/components/game/spell-gump";
 import { CraftGump } from "@/components/game/craft-gump";
@@ -79,6 +80,7 @@ function PlayingChrome() {
       <PileGump />
       <GateGump />
       <NpcGump />
+      <HouseGump />
       <SpellbookGump />
       <CraftGump />
       <VaultGump />

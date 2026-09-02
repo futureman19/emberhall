@@ -53,6 +53,7 @@ import { takeFromPile, takeGoldFromPile } from "./piles.ts";
 import { clearSave, hasSave, loadSave, writeSave } from "./save.ts";
 import { recruitPerson, setSpeed, tickWorld } from "./sim.ts";
 import { completeObjective, placeBuilding } from "./world.ts";
+import { HOUSE_RANGE, commandHouseItem, commandHouseTake, houseKindForDeed, isHouseKind, placeHouse } from "./house.ts";
 import { COURT, stationNear } from "./atlas.ts";
 import type { BuildingKind, CtxTarget, CtxVerb, ItemId, PanelId, ResourceStackKey, Speed, SpellId, Snapshot, WearSlot } from "./types.ts";
 import { applyMint, applyMintRare, applyRedeem, type RareInscription } from "./vault.ts";
@@ -82,6 +83,7 @@ interface GameUI {
   /** Pet id the companions panel should open in rename mode, if any. */
   renamePetId: string | null;
   openPileId: string | null;
+  openHouseId: string | null;
   openGateId: string | null;
   gateIgnoreId: string | null;
   buildKind: BuildingKind | null;
@@ -124,6 +126,9 @@ interface GameUI {
   bankItem: (item: ItemId, n?: number) => void;
   unbankItem: (item: ItemId, n?: number) => void;
   openPile: (id: string) => void;
+  openHouse: (id: string) => void;
+  houseItem: (item: ItemId, n?: number) => void;
+  houseTake: (item: ItemId, n?: number) => void;
   takePile: (id: string, item?: ItemId) => void;
   takePileGold: (id: string) => void;
   travel: (destId: string) => void;
@@ -205,6 +210,7 @@ export const useGame = create<GameUI>((set, get) => ({
   openPets: false,
   renamePetId: null,
   openPileId: null,
+  openHouseId: null,
   openGateId: null,
   gateIgnoreId: null,
   buildKind: null,
@@ -261,6 +267,7 @@ export const useGame = create<GameUI>((set, get) => ({
           panel: "help",
           ctx: null,
           openPileId: null,
+          openHouseId: null,
           openGateId: null,
           gateIgnoreId: null,
           openBook: false,
@@ -391,13 +398,13 @@ export const useGame = create<GameUI>((set, get) => ({
     if (get().buildKind) {
       const kind = get().buildKind;
       if (!kind) return;
-      const err = placeBuilding(w, kind, tx, ty);
+      const err = isHouseKind(kind) ? placeHouse(w, kind, tx, ty) : placeBuilding(w, kind, tx, ty);
       if (err) {
         get().flash(err);
         set({ snap: snapshot(), ctx: null, buildAt: { tx, ty } });
         return;
       }
-      get().flash(`The ${kind} is raised.`);
+      get().flash(isHouseKind(kind) ? "The house is raised." : `The ${kind} is raised.`);
       set({ buildKind: null, buildAt: null, snap: snapshot(), ctx: null, panel: "none" });
       return;
     }
@@ -509,6 +516,9 @@ export const useGame = create<GameUI>((set, get) => ({
       get().flash("The banker is not here.");
       set({ ctx: null });
       return;
+    } else if (verb === "house") {
+      get().openHouse(t.id);
+      return;
     } else if (verb === "use") get().useStation(t.id);
     else if (verb === "harvest") err = commandHarvest(w, t.tx, t.ty);
     else if (verb === "till") err = commandTill(w, t.tx, t.ty);
@@ -529,6 +539,11 @@ export const useGame = create<GameUI>((set, get) => ({
   equip: (item) => {
     if (item === "spellbook") {
       get().openBookGump();
+      return;
+    }
+    const houseKind = houseKindForDeed(item);
+    if (houseKind) {
+      get().armBuild(houseKind);
       return;
     }
     const err = commandEquip(getWorld(), item);
@@ -606,6 +621,49 @@ export const useGame = create<GameUI>((set, get) => ({
     set({ snap: snapshot() });
   },
   openPile: (id) => set({ openPileId: id, selectedId: null, ctx: null, panel: "none", snap: snapshot() }),
+  openHouse: (id) => {
+    const w = getWorld();
+    const b = w.buildings.find((x) => x.id === id);
+    if (!b || !isHouseKind(b.kind)) {
+      get().flash("No house here.");
+      set({ ctx: null });
+      return;
+    }
+    const p = you(w);
+    if (!p) return;
+    if (Math.hypot(p.x - b.tx, p.z - b.ty) > HOUSE_RANGE) {
+      const err = commandWalk(w, b.tx, b.ty);
+      if (err) get().flash(err);
+      else get().flash("The house is that way.");
+      set({ ctx: null, snap: snapshot() });
+      return;
+    }
+    if (w.player.ghost) {
+      get().flash("A ghost cannot.");
+      set({ ctx: null });
+      return;
+    }
+    if (b.ownerId !== w.player.id) {
+      get().flash("That house is not yours.");
+      set({ ctx: null });
+      return;
+    }
+    set({ openHouseId: id, selectedId: null, ctx: null, panel: "none", snap: snapshot() });
+  },
+  houseItem: (item, n) => {
+    const id = get().openHouseId;
+    if (!id) return;
+    const err = commandHouseItem(getWorld(), id, item, n);
+    if (err) get().flash(err);
+    set({ snap: snapshot() });
+  },
+  houseTake: (item, n) => {
+    const id = get().openHouseId;
+    if (!id) return;
+    const err = commandHouseTake(getWorld(), id, item, n);
+    if (err) get().flash(err);
+    set({ snap: snapshot() });
+  },
   takePile: (id, item) => {
     const err = takeFromPile(getWorld(), id, item);
     if (err) get().flash(err);

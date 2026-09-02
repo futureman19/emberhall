@@ -581,6 +581,26 @@ function makeBank(): Spec {
   return spec;
 }
 
+function makePorch(): Spec {
+  return house({
+    x0: -2,
+    x1: 2,
+    z0: -1,
+    z1: 1,
+    h: 2,
+    door: { x: 0, w: 1, h: 2 },
+    roof: "thatch",
+  });
+}
+
+function makeHut(): Spec {
+  return makeCottage();
+}
+
+function makeHomestead(): Spec {
+  return makeTownhouse();
+}
+
 const SPECS: Record<BuildingKind, Spec> = {
   hall: makeHall(),
   dormitory: makeDorm(),
@@ -601,6 +621,9 @@ const SPECS: Record<BuildingKind, Spec> = {
   townhome: makeTownhome(),
   townhouse: makeTownhouse(),
   cottage: makeCottage(),
+  porch: makePorch(),
+  hut: makeHut(),
+  homestead: makeHomestead(),
   bank: makeBank(),
 };
 

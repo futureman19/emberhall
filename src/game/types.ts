@@ -116,7 +116,10 @@ export type ItemId =
   | "cabbage_seed"
   | "wheat_seed"
   | "garlic_seed"
-  | "acorn";
+  | "acorn"
+  | "deed_porch"
+  | "deed_hut"
+  | "deed_homestead";
 
 export type WearSlot =
   | "head"
@@ -241,7 +244,10 @@ export type BuildingKind =
   | "shop"
   | "townhome"
   | "townhouse"
-  | "cottage";
+  | "cottage"
+  | "porch"
+  | "hut"
+  | "homestead";
 export type VocationId = "cook" | "armourer" | "trader" | "recruiter" | "guard";
 export type Notoriety = "innocent" | "criminal" | "murderer";
 export type IntentKind = "walk" | "chop" | "mine" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "till" | "forest" | "none";
@@ -367,6 +373,9 @@ export interface Building {
   tx: number;
   ty: number;
   beds: { occupantId: string | null }[];
+  ownerId?: string | null;
+  chest?: Record<ItemId, number>;
+  chestGold?: number;
 }
 
 export type CropId = "cabbage" | "wheat" | "garlic";
@@ -557,7 +566,8 @@ export type CtxVerb =
   | "sowCabbage"
   | "sowWheat"
   | "sowGarlic"
-  | "sowAcorn";
+  | "sowAcorn"
+  | "house";
 
 export interface CtxTarget {
   kind: CtxKind;
