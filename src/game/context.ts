@@ -1,5 +1,6 @@
 import { CROP_META, plotAt } from "./farm.ts";
-import { plantVerbLabel } from "./forestry.ts";
+import { plantVerbLabel, isGhostwoodTree } from "./forestry.ts";
+import { GHOSTWOOD_LUMBERJACK } from "./resources/catalog.ts";
 import { hasBook } from "./magery.ts";
 import { getWorld } from "./live.ts";
 import { effSkill } from "./player.ts";
@@ -42,7 +43,13 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
   const w = getWorld();
   const out: { verb: CtxVerb; label: string }[] = [];
   if (w.player.ghost) {
-    if (t.kind === "tile") out.push({ verb: "walk", label: "Walk here" });
+    if (t.kind === "tile") {
+      out.push({ verb: "walk", label: "Walk here" });
+      const tile = w.tiles[t.ty]?.[t.tx];
+      if (tile?.kind === "tree" && isGhostwoodTree(w, t.tx, t.ty) && effSkill(w, "lumberjack") >= GHOSTWOOD_LUMBERJACK) {
+        out.push({ verb: "chop", label: harvestVerbLabel(t.tx, t.ty, "tree") });
+      }
+    }
     if (t.kind === "person") {
       const p = w.people.find((x) => x.id === t.id);
       out.push(
@@ -56,7 +63,7 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
   if (t.kind === "tile") {
     out.push({ verb: "walk", label: "Walk here" });
     const tile = w.tiles[t.ty]?.[t.tx];
-    if (tile?.kind === "tree") out.push({ verb: "chop", label: harvestVerbLabel(t.tx, t.ty, "tree") });
+    if (tile?.kind === "tree" && !isGhostwoodTree(w, t.tx, t.ty)) out.push({ verb: "chop", label: harvestVerbLabel(t.tx, t.ty, "tree") });
     if (tile?.kind === "rock") out.push({ verb: "mine", label: harvestVerbLabel(t.tx, t.ty, "rock") });
     const bed = plotAt(w, t.tx, t.ty);
     if (bed) {
