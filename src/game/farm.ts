@@ -2,6 +2,7 @@ import { ITEM_META } from "./catalog.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { successChance, tryGain } from "./skills.ts";
 import { playSfx } from "./vale-sfx.ts";
+import { emitGatheringFx } from "./gathering-animation.ts";
 import type { CropId, ItemId, World } from "./types.ts";
 
 const MAX_PLOTS = 40;
@@ -183,6 +184,7 @@ export function tillNow(world: World) {
   const err = canTill(world, tx, ty);
   if (err) return err;
   makePlot(world, tx, ty);
+  emitGatheringFx({ kind: "tilling", success: true, x: tx, z: ty, at: world.hour, subject: null });
   playSfx("chop", 0.4);
   const gain = tryGain(world, "farming", true, true);
   noteDone(world, "till");
@@ -201,6 +203,7 @@ export function plantNow(world: World) {
   bed.crop = crop;
   bed.plantedHour = world.hour;
   bed.stage = 1;
+  emitGatheringFx({ kind: "sowing", success: true, x: bed.tx, z: bed.ty, at: world.hour, subject: crop });
   playSfx("chop", 0.38);
   const gain = tryGain(world, "farming", true, true);
   noteDone(world, "plant");
@@ -214,11 +217,13 @@ export function harvestNow(world: World) {
   world.player.intent.kind = "none";
   if (!bed || !bed.crop || bed.stage < 3) return "Nothing ripe.";
   const meta = CROP_META[bed.crop];
+  const crop = bed.crop;
   const chance = successChance(world.player.skills.farming, meta.diff);
   const ok = Math.random() < chance;
   const gain = tryGain(world, "farming", ok, true);
   playSfx("chop", 0.5);
   if (!ok) {
+    emitGatheringFx({ kind: "harvesting", success: false, x: bed.tx, z: bed.ty, at: world.hour, subject: crop });
     bed.crop = null;
     bed.stage = 0;
     bed.plantedHour = 0;
@@ -227,6 +232,7 @@ export function harvestNow(world: World) {
   const extra = Math.random() < 0.4 + world.player.skills.farming / 200 ? 1 : 0;
   world.player.pack[meta.crop] = (world.player.pack[meta.crop] ?? 0) + 1;
   world.player.pack[meta.seed] = (world.player.pack[meta.seed] ?? 0) + 1 + extra;
+  emitGatheringFx({ kind: "harvesting", success: true, x: bed.tx, z: bed.ty, at: world.hour, subject: crop });
   bed.crop = null;
   bed.stage = 0;
   bed.plantedHour = 0;

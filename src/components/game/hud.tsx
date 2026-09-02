@@ -617,7 +617,7 @@ function Toast() {
   const toast = useGame((s) => s.toast);
   if (!toast) return null;
   return (
-    <p className="pointer-events-none absolute bottom-48 left-1/2 max-w-[calc(100vw-2rem)] -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/90 px-4 py-2 text-center font-display text-sm text-fg sm:top-24 sm:bottom-auto">
+    <p className="pointer-events-none absolute bottom-[17rem] left-1/2 max-w-[calc(100vw-2rem)] -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/90 px-4 py-2 text-center font-display text-sm text-fg sm:top-24 sm:bottom-auto">
       {toast}
     </p>
   );

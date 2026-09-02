@@ -14,6 +14,7 @@ import { HEALING_DURATION, healingPulse } from "@/game/healing-animation";
 import { TAMING_DURATION, tamingPulse } from "@/game/taming-animation";
 import { CRAFTING_DURATION, craftingPose, craftingVisualProfile } from "@/game/crafting-animation";
 import { getCraftFx } from "@/game/craft";
+import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY as heightAt } from "@/game/height";
 import { getGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
 import { getWorld } from "@/game/live";
@@ -815,6 +816,60 @@ function CraftFxMesh() {
   );
 }
 
+function GatheringFxMesh() {
+  const group = useRef<THREE.Group>(null);
+  const ring = useRef<THREE.Mesh>(null);
+  const bed = useRef<THREE.Mesh>(null);
+  const crop = useRef<THREE.Group>(null);
+  const sapling = useRef<THREE.Group>(null);
+  const particles = useRef<THREE.Group>(null);
+  useFrame(() => {
+    const fx = getGatheringFx();
+    const g = group.current;
+    if (!g || !ring.current || !bed.current || !crop.current || !sapling.current || !particles.current) return;
+    const age = fx ? (getWorld().hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const visible = Boolean(fx && age >= 0 && age < GATHERING_DURATION);
+    g.visible = visible;
+    if (!fx || !visible) return;
+    const t = projectileProgress(age, GATHERING_DURATION);
+    const pose = gatheringPose(fx.kind, age);
+    const profile = gatheringVisualProfile(fx.kind);
+    g.position.set(fx.x, groundY(fx.x, fx.z), fx.z);
+    ring.current.scale.setScalar(0.8 + t * 2.3);
+    const ringMaterial = ring.current.material as THREE.MeshBasicMaterial;
+    ringMaterial.color.set(fx.success ? profile.primary : "#a85a42");
+    ringMaterial.opacity = pose.work * 0.72;
+    bed.current.visible = fx.kind === "tilling";
+    bed.current.scale.set(1 + pose.strike * 0.35, 1, 1 + pose.strike * 0.35);
+    crop.current.visible = fx.kind === "harvesting";
+    crop.current.position.y = 0.18 + pose.pull * 0.85;
+    crop.current.rotation.y = age * 3;
+    sapling.current.visible = fx.kind === "forestry";
+    sapling.current.scale.setScalar(0.6 + pose.settle * 0.85);
+    sapling.current.position.y = 0.12 + pose.settle * 0.18;
+    for (let index = 0; index < particles.current.children.length; index += 1) {
+      const particle = particles.current.children[index] as THREE.Mesh;
+      const angle = (index / particles.current.children.length) * Math.PI * 2;
+      const radius = fx.kind === "sowing" ? 0.25 + t * (0.8 + index * 0.025) : 0.18 + t * (0.65 + index * 0.03);
+      const lift = fx.kind === "tilling" ? Math.sin(t * Math.PI) * (0.55 + index * 0.03) : fx.kind === "sowing" ? 0.75 + Math.sin(t * Math.PI) * 0.5 - t * 0.65 : 0.25 + Math.sin(t * Math.PI) * 0.7;
+      particle.position.set(Math.cos(angle) * radius, lift, Math.sin(angle) * radius);
+      particle.scale.setScalar(fx.kind === "sowing" ? 1.2 : fx.kind === "harvesting" ? 1.7 : 1.45);
+      const material = particle.material as THREE.MeshBasicMaterial;
+      material.color.set(fx.kind === "tilling" ? (index % 2 ? "#a96f3d" : "#5a3e28") : fx.kind === "sowing" ? "#f2d77e" : fx.kind === "harvesting" ? (index % 2 ? "#d9b65f" : "#6f914e") : "#80a958");
+      material.opacity = pose.work * (1 - t * 0.45);
+    }
+  });
+  return (
+    <group ref={group} visible={false}>
+      <mesh ref={ring} renderOrder={7} position={[0, 0.07, 0]} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.32, 0.52, 24]} /><meshBasicMaterial transparent depthWrite={false} depthTest={false} toneMapped={false} /></mesh>
+      <mesh ref={bed} visible={false} position={[0, 0.14, 0]}><boxGeometry args={[1.5, 0.2, 1.5]} /><meshStandardMaterial color="#5a3e28" roughness={0.98} /></mesh>
+      <group ref={crop} visible={false}>{[-0.3, 0, 0.3].map((x) => <group key={x} position={[x, 0, Math.abs(x) * 0.25]}><mesh position={[0, 0.38, 0]}><boxGeometry args={[0.08, 0.75, 0.08]} /><meshStandardMaterial color="#d9b65f" roughness={0.9} /></mesh><mesh position={[0, 0.8, 0]}><sphereGeometry args={[0.22, 8, 6]} /><meshStandardMaterial color="#6f914e" roughness={0.85} /></mesh></group>)}</group>
+      <group ref={sapling} visible={false}><mesh position={[0, 0.5, 0]}><boxGeometry args={[0.12, 1, 0.12]} /><meshStandardMaterial color="#6a4a32" roughness={0.9} /></mesh><mesh position={[0, 1.15, 0]}><coneGeometry args={[0.58, 1.1, 7]} /><meshStandardMaterial color="#80a958" roughness={0.86} /></mesh></group>
+      <group ref={particles}>{Array.from({ length: 12 }, (_, index) => <mesh key={index} renderOrder={8}><sphereGeometry args={[0.11, 7, 5]} /><meshBasicMaterial transparent depthWrite={false} depthTest={false} toneMapped={false} /></mesh>)}</group>
+    </group>
+  );
+}
+
 function CombatFxMesh() {
   const arrow = useRef<THREE.Group>(null);
   const impact = useRef<THREE.Mesh>(null);
@@ -1034,6 +1089,7 @@ export function WorldScene() {
       <HealingFxMesh />
       <TamingFxMesh />
       <CraftFxMesh />
+      <GatheringFxMesh />
       <CombatFxMesh />
       <DeathFxMesh />
       <ChipBits />

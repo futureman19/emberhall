@@ -6,6 +6,7 @@ import { resolveResourceNode } from "./resources/nodes.ts";
 import type { ResourceId } from "./resources/types.ts";
 import { tryGain } from "./skills.ts";
 import { playSfx } from "./vale-sfx.ts";
+import { emitGatheringFx } from "./gathering-animation.ts";
 import { completeObjective, log } from "./world.ts";
 import type { Sapling, World } from "./types.ts";
 
@@ -111,6 +112,7 @@ export function plantTreeNow(world: World) {
     resourceId: species,
   };
   world.saplings.push(sapling);
+  emitGatheringFx({ kind: "forestry", success: true, x: tx, z: ty, at: world.hour, subject: species });
   playSfx("chop", 0.36);
   completeObjective(world, "forest");
   const next = timberSpecies().find((id) => plantSkillFor(id) > forestry);
