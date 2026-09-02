@@ -17,9 +17,11 @@ async function startGame(page) {
   await page.getByRole("button", { name: "New hall" }).click();
   await page.waitForFunction(() => window.__ember.useGame.getState().phase === "intro");
   await page.evaluate(() => window.__ember.useGame.getState().introDone());
-  await page.getByRole("button", { name: "Next" }).click();
-  await page.getByRole("button", { name: "Next" }).click();
-  await page.getByRole("button", { name: "Step into the vale" }).click();
+  await page.locator('[data-testid="look-next"]').evaluate((element) => element.click());
+  await page.waitForFunction(() => document.body.innerText.includes("A calling"));
+  await page.locator('[data-testid="look-next"]').evaluate((element) => element.click());
+  await page.waitForSelector('[data-testid="look-done"]');
+  await page.locator('[data-testid="look-done"]').evaluate((element) => element.click());
   await page.waitForFunction(() => window.__ember.useGame.getState().phase === "playing");
   await page.evaluate(() => {
     const store = window.__ember.useGame.getState();
@@ -31,8 +33,13 @@ async function startGame(page) {
     let clearing = null;
     for (let y = 16; y < world.tiles.length - 16 && !clearing; y += 1) {
       for (let x = 16; x < world.tiles[y].length - 24; x += 1) {
-        const openRun = Array.from({ length: 12 }, (_, offset) => world.tiles[y]?.[x + offset]?.kind === "grass").every(Boolean);
-        const awayFromBuildings = world.buildings.every((building) => Math.hypot(building.tx - x, building.ty - y) > 18);
+        const openRun = Array.from(
+          { length: 12 },
+          (_, offset) => world.tiles[y]?.[x + offset]?.kind === "grass",
+        ).every(Boolean);
+        const awayFromBuildings = world.buildings.every(
+          (building) => Math.hypot(building.tx - x, building.ty - y) > 18,
+        );
         if (openRun && awayFromBuildings) {
           clearing = { x, y };
           break;
@@ -58,25 +65,28 @@ async function startGame(page) {
 }
 
 async function setCombat(page, weapon, range) {
-  return page.evaluate(({ weapon, range }) => {
-    const world = window.__ember.getWorld();
-    const store = window.__ember.useGame.getState();
-    const self = world.people.find((person) => person.isPlayer);
-    const target = world.fauna.find((creature) => !creature.ownerId);
-    if (!self || !target) throw new Error("combat smoke needs a player and a wild creature");
-    self.path = [];
-    self.hp = self.maxHp;
-    world.player.wear.main = weapon;
-    world.player.intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
-    world.player.workT = 0;
-    target.x = self.x + range;
-    target.z = self.z;
-    target.hp = Math.max(999, target.maxHp);
-    target.task = "idle";
-    target.path = [];
-    store.hunt(target.id);
-    return { targetId: target.id, hp: target.hp };
-  }, { weapon, range });
+  return page.evaluate(
+    ({ weapon, range }) => {
+      const world = window.__ember.getWorld();
+      const store = window.__ember.useGame.getState();
+      const self = world.people.find((person) => person.isPlayer);
+      const target = world.fauna.find((creature) => !creature.ownerId);
+      if (!self || !target) throw new Error("combat smoke needs a player and a wild creature");
+      self.path = [];
+      self.hp = self.maxHp;
+      world.player.wear.main = weapon;
+      world.player.intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
+      world.player.workT = 0;
+      target.x = self.x + range;
+      target.z = self.z;
+      target.hp = Math.max(999, target.maxHp);
+      target.task = "idle";
+      target.path = [];
+      store.hunt(target.id);
+      return { targetId: target.id, hp: target.hp };
+    },
+    { weapon, range },
+  );
 }
 
 async function tick(page, seconds) {
@@ -119,7 +129,8 @@ async function castProjectile(page, spell) {
     Math.random = () => 0;
     try {
       store.speed(1);
-      for (let elapsed = 0; elapsed < 0.93; elapsed += 0.05) store.tick(Math.min(0.05, 0.93 - elapsed));
+      for (let elapsed = 0; elapsed < 0.93; elapsed += 0.05)
+        store.tick(Math.min(0.05, 0.93 - elapsed));
       store.speed(0);
     } finally {
       Math.random = random;
@@ -147,7 +158,12 @@ async function castTravel(page, spell) {
     if (spellId === "teleport") {
       store.cast("teleport", { kind: "tile", tx: Math.round(self.x + 5), ty: Math.round(self.z) });
     } else {
-      const mark = { id: "animation-recall", tx: Math.round(self.x - 5), ty: Math.round(self.z), name: "Animation clearing" };
+      const mark = {
+        id: "animation-recall",
+        tx: Math.round(self.x - 5),
+        ty: Math.round(self.z),
+        name: "Animation clearing",
+      };
       world.player.marks = [mark];
       store.cast("recall", { kind: "mark", id: mark.id });
     }
@@ -155,7 +171,8 @@ async function castTravel(page, spell) {
     Math.random = () => 0;
     try {
       store.speed(1);
-      for (let elapsed = 0; elapsed < 0.93; elapsed += 0.05) store.tick(Math.min(0.05, 0.93 - elapsed));
+      for (let elapsed = 0; elapsed < 0.93; elapsed += 0.05)
+        store.tick(Math.min(0.05, 0.93 - elapsed));
       store.speed(0);
     } finally {
       Math.random = random;
@@ -181,7 +198,8 @@ async function castFizzle(page) {
     Math.random = () => 0.999;
     try {
       store.speed(1);
-      for (let elapsed = 0; elapsed < 0.93; elapsed += 0.05) store.tick(Math.min(0.05, 0.93 - elapsed));
+      for (let elapsed = 0; elapsed < 0.93; elapsed += 0.05)
+        store.tick(Math.min(0.05, 0.93 - elapsed));
       store.speed(0);
     } finally {
       Math.random = random;
@@ -212,6 +230,62 @@ async function runBandage(page) {
   });
 }
 
+async function startTaming(page, skill) {
+  return page.evaluate((skillValue) => {
+    const world = window.__ember.getWorld();
+    const store = window.__ember.useGame.getState();
+    const player = world.people.find((person) => person.isPlayer);
+    const target = world.fauna.find((creature) => creature.kind === "hare") ?? world.fauna[0];
+    if (!player || !target) throw new Error("taming smoke needs a player and animal");
+    world.hour += 1 / 36;
+    player.path = [];
+    target.x = player.x + 1;
+    target.z = player.z;
+    target.path = [];
+    target.task = "idle";
+    target.ownerId = null;
+    target.loyalty = 0;
+    world.player.skills.taming = skillValue;
+    world.player.intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
+    world.player.workT = 0;
+    store.doVerb("tame", {
+      kind: "fauna",
+      id: target.id,
+      tx: Math.round(target.x),
+      ty: Math.round(target.z),
+      label: "animal",
+    });
+    store.speed(1);
+    for (let elapsed = 0; elapsed < 0.28; elapsed += 0.04)
+      store.tick(Math.min(0.04, 0.28 - elapsed));
+    store.speed(0);
+    return { targetId: target.id };
+  }, skill);
+}
+
+async function finishTaming(page, targetId, success) {
+  return page.evaluate(
+    ({ id, shouldSucceed }) => {
+      const world = window.__ember.getWorld();
+      const store = window.__ember.useGame.getState();
+      const random = Math.random;
+      Math.random = () => (shouldSucceed ? 0 : 0.999);
+      try {
+        store.speed(1);
+        for (let elapsed = 0; elapsed < 0.3; elapsed += 0.04)
+          store.tick(Math.min(0.04, 0.3 - elapsed));
+        store.speed(0);
+      } finally {
+        Math.random = random;
+      }
+      world.hour += 0.24 / 36;
+      const target = world.fauna.find((creature) => creature.id === id);
+      return { ownerId: target?.ownerId ?? null, task: target?.task ?? null };
+    },
+    { id: targetId, shouldSucceed: success },
+  );
+}
+
 for (const viewport of [
   { name: "desktop", width: 1280, height: 800 },
   { name: "mobile", width: 390, height: 844 },
@@ -230,22 +304,32 @@ for (const viewport of [
   const meleeWindup = path.join(outputDir, `animation-melee-windup-${viewport.name}.png`);
   await page.screenshot({ path: meleeWindup });
   await tick(page, 0.3);
-  const meleeAfter = await page.evaluate((id) => window.__ember.getWorld().fauna.find((creature) => creature.id === id)?.hp, melee.targetId);
+  const meleeAfter = await page.evaluate(
+    (id) => window.__ember.getWorld().fauna.find((creature) => creature.id === id)?.hp,
+    melee.targetId,
+  );
   const meleeImpact = path.join(outputDir, `animation-melee-impact-${viewport.name}.png`);
   await page.screenshot({ path: meleeImpact });
-  if (!(typeof meleeAfter === "number" && meleeAfter < melee.hp)) throw new Error(`${viewport.name}: melee did not land`);
+  if (!(typeof meleeAfter === "number" && meleeAfter < melee.hp))
+    throw new Error(`${viewport.name}: melee did not land`);
 
   const bow = await setCombat(page, "bow", 7);
   await tick(page, 0.3);
   const bowDraw = path.join(outputDir, `animation-bow-draw-${viewport.name}.png`);
   await page.screenshot({ path: bowDraw });
   await tick(page, 0.3);
-  await page.evaluate(() => { window.__ember.getWorld().hour += 0.005; });
+  await page.evaluate(() => {
+    window.__ember.getWorld().hour += 0.005;
+  });
   await page.waitForTimeout(80);
   const arrowFlight = path.join(outputDir, `animation-arrow-flight-${viewport.name}.png`);
   await page.screenshot({ path: arrowFlight });
-  const bowAfter = await page.evaluate((id) => window.__ember.getWorld().fauna.find((creature) => creature.id === id)?.hp, bow.targetId);
-  if (!(typeof bowAfter === "number" && bowAfter < bow.hp)) throw new Error(`${viewport.name}: arrow did not land`);
+  const bowAfter = await page.evaluate(
+    (id) => window.__ember.getWorld().fauna.find((creature) => creature.id === id)?.hp,
+    bow.targetId,
+  );
+  if (!(typeof bowAfter === "number" && bowAfter < bow.hp))
+    throw new Error(`${viewport.name}: arrow did not land`);
 
   await castProjectile(page, "magicarrow");
   await page.waitForTimeout(80);
@@ -261,36 +345,79 @@ for (const viewport of [
   await page.waitForTimeout(80);
   const teleport = path.join(outputDir, `animation-teleport-${viewport.name}.png`);
   await page.screenshot({ path: teleport });
-  if (teleportResult.from.x === teleportResult.to.x && teleportResult.from.z === teleportResult.to.z) throw new Error(`${viewport.name}: teleport did not move`);
+  if (
+    teleportResult.from.x === teleportResult.to.x &&
+    teleportResult.from.z === teleportResult.to.z
+  )
+    throw new Error(`${viewport.name}: teleport did not move`);
 
   const recallResult = await castTravel(page, "recall");
   await page.waitForTimeout(80);
   const recall = path.join(outputDir, `animation-recall-${viewport.name}.png`);
   await page.screenshot({ path: recall });
-  if (recallResult.from.x === recallResult.to.x && recallResult.from.z === recallResult.to.z) throw new Error(`${viewport.name}: recall did not move`);
+  if (recallResult.from.x === recallResult.to.x && recallResult.from.z === recallResult.to.z)
+    throw new Error(`${viewport.name}: recall did not move`);
 
   const fizzleToast = await castFizzle(page);
   await page.waitForTimeout(80);
   const fizzle = path.join(outputDir, `animation-fizzle-${viewport.name}.png`);
   await page.screenshot({ path: fizzle });
-  if (!String(fizzleToast).includes("fizzles")) throw new Error(`${viewport.name}: fizzle did not resolve`);
+  if (!String(fizzleToast).includes("fizzles"))
+    throw new Error(`${viewport.name}: fizzle did not resolve`);
 
   const healingResult = await runBandage(page);
   await page.waitForTimeout(80);
   const healing = path.join(outputDir, `animation-healing-${viewport.name}.png`);
   await page.screenshot({ path: healing });
-  if (healingResult.after.bandages !== healingResult.before.bandages - 1) throw new Error(`${viewport.name}: bandage was not consumed`);
-  if (healingResult.after.hp <= healingResult.before.hp) throw new Error(`${viewport.name}: bandage did not restore health`);
-  if (!String(healingResult.toast).toLowerCase().includes("cloth holds")) throw new Error(`${viewport.name}: healing feedback was not surfaced`);
+  if (healingResult.after.bandages !== healingResult.before.bandages - 1)
+    throw new Error(`${viewport.name}: bandage was not consumed`);
+  if (healingResult.after.hp <= healingResult.before.hp)
+    throw new Error(`${viewport.name}: bandage did not restore health`);
+  if (!String(healingResult.toast).toLowerCase().includes("cloth holds"))
+    throw new Error(`${viewport.name}: healing feedback was not surfaced`);
+
+  const taming = await startTaming(page, 100);
+  await page.waitForTimeout(80);
+  const tamingAttempt = path.join(outputDir, `animation-taming-attempt-${viewport.name}.png`);
+  await page.screenshot({ path: tamingAttempt });
+  const tameSuccess = await finishTaming(page, taming.targetId, true);
+  await page.waitForTimeout(80);
+  const tamingSuccess = path.join(outputDir, `animation-taming-success-${viewport.name}.png`);
+  await page.screenshot({ path: tamingSuccess });
+  if (!tameSuccess.ownerId)
+    throw new Error(`${viewport.name}: taming success did not create a companion`);
+  const refusal = await startTaming(page, 0);
+  const tameFailure = await finishTaming(page, refusal.targetId, false);
+  await page.waitForTimeout(80);
+  const tamingFailure = path.join(outputDir, `animation-taming-failure-${viewport.name}.png`);
+  await page.screenshot({ path: tamingFailure });
+  if (tameFailure.ownerId || tameFailure.task !== "flee")
+    throw new Error(`${viewport.name}: taming refusal did not flee`);
 
   if (consoleErrors.length || pageErrors.length) {
-    throw new Error(`${viewport.name} browser errors: ${JSON.stringify({ consoleErrors, pageErrors })}`);
+    throw new Error(
+      `${viewport.name} browser errors: ${JSON.stringify({ consoleErrors, pageErrors })}`,
+    );
   }
   results.push({
     viewport: viewport.name,
     meleeDamage: melee.hp - meleeAfter,
     arrowDamage: bow.hp - bowAfter,
-    screenshots: { meleeWindup, meleeImpact, bowDraw, arrowFlight, magicArrow, fireball, teleport, recall, fizzle, healing },
+    screenshots: {
+      meleeWindup,
+      meleeImpact,
+      bowDraw,
+      arrowFlight,
+      magicArrow,
+      fireball,
+      teleport,
+      recall,
+      fizzle,
+      healing,
+      tamingAttempt,
+      tamingSuccess,
+      tamingFailure,
+    },
     consoleErrors,
     pageErrors,
   });

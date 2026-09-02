@@ -1,10 +1,12 @@
 import { useFrame } from "@react-three/fiber";
+import { Html } from "@react-three/drei";
 import { useRef } from "react";
 import type { Group } from "three";
 import { SECONDS_PER_HOUR } from "@/game/catalog";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
-import { getCombatFx } from "@/game/player";
+import { getCombatFx, getTamingFx } from "@/game/player";
+import { TAMING_DURATION, tamingPulse } from "@/game/taming-animation";
 import { useGame } from "@/game/store";
 import type { Creature, FaunaKind } from "@/game/types";
 
@@ -72,13 +74,21 @@ function Body({ c }: { c: Creature }) {
   const s = SIZE[c.kind];
   const color = COLOR[c.kind];
 
-  const isWolfBody = c.kind === "wolf" || c.kind === "ridgeback_warg" || c.kind === "brine_hound" || c.kind === "barrow_hound" || c.kind === "pine_lynx";
-  const isBoar = c.kind === "ironwood_boar" || c.kind === "moss_badger" || c.kind === "mire_croaker";
+  const isWolfBody =
+    c.kind === "wolf" ||
+    c.kind === "ridgeback_warg" ||
+    c.kind === "brine_hound" ||
+    c.kind === "barrow_hound" ||
+    c.kind === "pine_lynx";
+  const isBoar =
+    c.kind === "ironwood_boar" || c.kind === "moss_badger" || c.kind === "mire_croaker";
   const isSpider = c.kind === "orebeetle" || c.kind === "stonecrawl_spider";
-  const isCrawler = c.kind === "dune_crawler" || c.kind === "reedback_stalker" || c.kind === "bog_toad";
+  const isCrawler =
+    c.kind === "dune_crawler" || c.kind === "reedback_stalker" || c.kind === "bog_toad";
   const isTortoise = c.kind === "saltback_tortoise";
   const isBird = c.kind === "bonecrow";
-  const isGhost = c.kind === "wight" || c.kind === "greybarrow_wightling" || c.kind === "ashen_banshee";
+  const isGhost =
+    c.kind === "wight" || c.kind === "greybarrow_wightling" || c.kind === "ashen_banshee";
 
   if (c.kind === "hare") {
     return (
@@ -173,10 +183,17 @@ function Body({ c }: { c: Creature }) {
         </mesh>
         {[0, 1, 2, 3].map((i) => {
           const a = (Math.PI / 2) * i;
-          return <mesh key={i} position={[Math.cos(a) * s * 0.42, s * 0.18, Math.sin(a) * s * 0.42]} rotation={[0, a, 0]} castShadow>
-            <boxGeometry args={[s * 0.7, s * 0.08, s * 0.24]} />
-            <meshStandardMaterial color={color} roughness={1} />
-          </mesh>;
+          return (
+            <mesh
+              key={i}
+              position={[Math.cos(a) * s * 0.42, s * 0.18, Math.sin(a) * s * 0.42]}
+              rotation={[0, a, 0]}
+              castShadow
+            >
+              <boxGeometry args={[s * 0.7, s * 0.08, s * 0.24]} />
+              <meshStandardMaterial color={color} roughness={1} />
+            </mesh>
+          );
         })}
       </>
     );
@@ -268,17 +285,45 @@ function Beast({ c }: { c: Creature }) {
   useFrame(() => {
     const group = root.current;
     if (!group) return;
+    const world = getWorld();
     const fx = getCombatFx();
-    const age = fx ? (getWorld().hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const age = fx ? (world.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
     const reacting = Boolean(fx && fx.targetId === c.id && age >= 0 && age < 0.34);
     const pulse = reacting ? Math.sin((age / 0.34) * Math.PI) : 0;
-    group.position.set(c.x, groundY(getWorld(), c.x, c.z) + pulse * 0.08, c.z);
-    group.rotation.set(dead ? Math.PI / 2 : -pulse * (fx?.clean ? 0.28 : 0.13), 0, dead ? 0 : pulse * 0.2);
-    group.scale.setScalar(1 + pulse * (fx?.clean ? 0.1 : 0.04));
+    const taming = world.player.intent.kind === "tame" && world.player.intent.targetId === c.id;
+    const appeal = taming ? tamingPulse(world.player.workT) : 0;
+    const result = getTamingFx();
+    const resultAge = result ? (world.hour - result.at) * SECONDS_PER_HOUR : Infinity;
+    const resultLive = Boolean(
+      result && result.targetId === c.id && resultAge >= 0 && resultAge < 0.72,
+    );
+    const resultPulse = resultLive ? Math.sin((resultAge / 0.72) * Math.PI) : 0;
+    const success = Boolean(resultLive && result?.success);
+    const refusal = Boolean(resultLive && !result?.success);
+    group.position.set(
+      c.x,
+      groundY(world, c.x, c.z) + pulse * 0.08 + appeal * 0.06 + (success ? resultPulse * 0.14 : 0),
+      c.z,
+    );
+    group.rotation.set(
+      dead ? Math.PI / 2 : -pulse * (fx?.clean ? 0.28 : 0.13) + (refusal ? resultPulse * -0.34 : 0),
+      taming ? Math.sin(world.player.workT * 20) * 0.2 : 0,
+      dead ? 0 : pulse * 0.2 + appeal * 0.08 + (refusal ? resultPulse * 0.26 : 0),
+    );
+    group.scale.setScalar(
+      1 +
+        pulse * (fx?.clean ? 0.1 : 0.04) +
+        (success ? resultPulse * 0.12 : 0) -
+        (refusal ? resultPulse * 0.06 : 0),
+    );
   });
 
   return (
-    <group ref={root} position={[c.x, groundY(getWorld(), c.x, c.z), c.z]} rotation={dead ? [Math.PI / 2, 0, 0] : [0, 0, 0]}>
+    <group
+      ref={root}
+      position={[c.x, groundY(getWorld(), c.x, c.z), c.z]}
+      rotation={dead ? [Math.PI / 2, 0, 0] : [0, 0, 0]}
+    >
       <Body c={c} />
       {c.ownerId && (
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.06, 0]}>
@@ -292,7 +337,78 @@ function Beast({ c }: { c: Creature }) {
           <meshStandardMaterial color={color} roughness={0.8} />
         </mesh>
       )}
+      <TamingBillboard c={c} />
     </group>
+  );
+}
+
+function TamingBillboard({ c }: { c: Creature }) {
+  const label = useRef<HTMLDivElement>(null);
+  useFrame(() => {
+    const element = label.current;
+    if (!element) return;
+    const world = getWorld();
+    const attempting =
+      world.player.intent.kind === "tame" &&
+      world.player.intent.targetId === c.id &&
+      world.player.workT < TAMING_DURATION;
+    const result = getTamingFx();
+    const resultAge = result ? (world.hour - result.at) * SECONDS_PER_HOUR : Infinity;
+    const resultLive = Boolean(
+      result && result.targetId === c.id && resultAge >= 0 && resultAge < 0.78,
+    );
+    const mode = attempting
+      ? "Calming"
+      : resultLive
+        ? result!.success
+          ? "Bonded"
+          : "Refused"
+        : null;
+    element.style.display = mode ? "grid" : "none";
+    if (!mode) return;
+    element.textContent = mode;
+    const success = mode === "Bonded";
+    const failure = mode === "Refused";
+    element.style.color = success ? "#fff8e7" : failure ? "#ece6d8" : "#ffd36a";
+    element.style.borderColor = success
+      ? "rgba(255, 211, 106, 0.9)"
+      : failure
+        ? "rgba(168, 90, 66, 0.9)"
+        : "rgba(224, 181, 106, 0.75)";
+    element.style.background = success
+      ? "rgba(126, 88, 18, 0.92)"
+      : failure
+        ? "rgba(92, 38, 28, 0.94)"
+        : "rgba(20, 18, 15, 0.88)";
+    element.style.boxShadow = success
+      ? "0 0 18px rgba(255, 211, 106, 0.85)"
+      : failure
+        ? "0 0 16px rgba(168, 90, 66, 0.8)"
+        : "0 4px 16px rgba(0, 0, 0, 0.45)";
+    element.style.transform = `scale(${0.94 + (attempting ? tamingPulse(world.player.workT) : Math.sin((resultAge / 0.78) * Math.PI)) * 0.12})`;
+  });
+  return (
+    <Html position={[0, 2.8, 0]} center zIndexRange={[38, 0]} style={{ pointerEvents: "none" }}>
+      <div
+        ref={label}
+        style={{
+          display: "none",
+          placeItems: "center",
+          minWidth: 70,
+          padding: "6px 9px",
+          border: "1px solid rgba(224, 181, 106, 0.75)",
+          borderRadius: 8,
+          background: "rgba(20, 18, 15, 0.88)",
+          boxShadow: "0 4px 16px rgba(0, 0, 0, 0.45)",
+          fontFamily: "serif",
+          fontSize: 9,
+          fontWeight: 700,
+          letterSpacing: "0.12em",
+          textTransform: "uppercase",
+          transformOrigin: "center",
+        }}
+      />
+    </Html>
   );
 }
 

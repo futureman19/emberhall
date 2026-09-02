@@ -5,13 +5,18 @@ import * as THREE from "three";
 import { COURT, VIEW } from "@/game/atlas";
 import { cameraFixedHeight, cameraLockedAxis } from "@/game/camera-follow";
 import { SECONDS_PER_HOUR } from "@/game/catalog";
-import { projectileProgress, spellProjectileProfile, travelEffectProfile } from "@/game/combat-animation";
+import {
+  projectileProgress,
+  spellProjectileProfile,
+  travelEffectProfile,
+} from "@/game/combat-animation";
 import { HEALING_DURATION, healingPulse } from "@/game/healing-animation";
+import { TAMING_DURATION, tamingPulse } from "@/game/taming-animation";
 import { groundY as heightAt } from "@/game/height";
 import { getGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
 import { getWorld } from "@/game/live";
 import { getCastFx, getDeathFx, getFizzleFx } from "@/game/magery";
-import { getChips, getCombatFx, getHealingFx } from "@/game/player";
+import { getChips, getCombatFx, getHealingFx, getTamingFx } from "@/game/player";
 import { useGame } from "@/game/store";
 import { hoverAt, leftAt, liftAt } from "@/game/world-pointer";
 import { Buildings } from "./building-meshes";
@@ -57,8 +62,10 @@ function GraphicsProbe() {
         return {
           shadows: gl.shadowMap.enabled,
           farTreeCount: far?.count ?? null,
-          farTreeStock: typeof far?.userData.stockCount === "number" ? far.userData.stockCount : null,
-          farTreeCandidates: typeof far?.userData.candidateCount === "number" ? far.userData.candidateCount : null,
+          farTreeStock:
+            typeof far?.userData.stockCount === "number" ? far.userData.stockCount : null,
+          farTreeCandidates:
+            typeof far?.userData.candidateCount === "number" ? far.userData.candidateCount : null,
           farTreeLimit: typeof far?.userData.limit === "number" ? far.userData.limit : null,
         };
       },
@@ -247,11 +254,20 @@ function WalkMarker() {
   if (!intent || intent.kind === "none") return null;
   const y = groundY(intent.tx, intent.ty);
   const ember = intent.kind === "cast";
-  const mark = intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till";
+  const mark =
+    intent.kind === "chop" ||
+    intent.kind === "mine" ||
+    intent.kind === "plant" ||
+    intent.kind === "harvest" ||
+    intent.kind === "till";
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[intent.tx, y + 0.1, intent.ty]}>
       <ringGeometry args={[0.22, 0.32, 18]} />
-      <meshBasicMaterial color={mark ? "#e0b56a" : ember ? "#a85a42" : "#ece6d8"} transparent opacity={0.85} />
+      <meshBasicMaterial
+        color={mark ? "#e0b56a" : ember ? "#a85a42" : "#ece6d8"}
+        transparent
+        opacity={0.85}
+      />
     </mesh>
   );
 }
@@ -293,7 +309,11 @@ function CastFxMesh() {
       const profile = spellProjectileProfile(fx.spell);
       const fat = fx.spell === "fireball";
       boltMesh.visible = t < 0.72;
-      boltMesh.position.set(fx.x + (fx.tx - fx.x) * k, y0 + (y1 - y0) * k, fx.z + (fx.tz - fx.z) * k);
+      boltMesh.position.set(
+        fx.x + (fx.tx - fx.x) * k,
+        y0 + (y1 - y0) * k,
+        fx.z + (fx.tz - fx.z) * k,
+      );
       boltMesh.scale.setScalar(profile.coreScale);
       boltMat.color.set(profile.core);
       boltMat.opacity = 0.95 * (1 - t);
@@ -306,7 +326,11 @@ function CastFxMesh() {
       trailMesh.lookAt(boltMesh.position);
       const trailLength = Math.max(
         0.08,
-        Math.hypot(boltMesh.position.x - fx.x, boltMesh.position.y - y0, boltMesh.position.z - fx.z),
+        Math.hypot(
+          boltMesh.position.x - fx.x,
+          boltMesh.position.y - y0,
+          boltMesh.position.z - fx.z,
+        ),
       );
       trailMesh.scale.set(profile.trailScale, profile.trailScale, trailLength * 4.1);
       trailMat.color.set(profile.trail);
@@ -325,7 +349,11 @@ function CastFxMesh() {
       impactMesh.visible = false;
       boltMesh.visible = t < 0.45;
       const k = Math.min(1, t * 2.2);
-      boltMesh.position.set(fx.x + (fx.tx - fx.x) * k, y0 + (y1 - y0) * k, fx.z + (fx.tz - fx.z) * k);
+      boltMesh.position.set(
+        fx.x + (fx.tx - fx.x) * k,
+        y0 + (y1 - y0) * k,
+        fx.z + (fx.tz - fx.z) * k,
+      );
       puffMesh.position.set(fx.tx, y1, fx.tz);
       puffMesh.scale.setScalar(0.7 + t * 2.2);
       puffMat.color.set(fx.spell === "recall" ? "#a85a42" : "#ece6d8");
@@ -344,19 +372,47 @@ function CastFxMesh() {
     <group ref={group} visible={false}>
       <mesh ref={puff}>
         <sphereGeometry args={[0.32, 10, 8]} />
-        <meshBasicMaterial color="#ece6d8" transparent opacity={0.6} depthWrite={false} depthTest={false} toneMapped={false} />
+        <meshBasicMaterial
+          color="#ece6d8"
+          transparent
+          opacity={0.6}
+          depthWrite={false}
+          depthTest={false}
+          toneMapped={false}
+        />
       </mesh>
       <mesh ref={bolt}>
         <sphereGeometry args={[0.11, 8, 6]} />
-        <meshBasicMaterial color="#a85a42" transparent opacity={0.9} depthWrite={false} depthTest={false} toneMapped={false} />
+        <meshBasicMaterial
+          color="#a85a42"
+          transparent
+          opacity={0.9}
+          depthWrite={false}
+          depthTest={false}
+          toneMapped={false}
+        />
       </mesh>
       <mesh ref={trail} visible={false}>
         <sphereGeometry args={[0.12, 8, 6]} />
-        <meshBasicMaterial color="#4a8ee8" transparent opacity={0.4} depthWrite={false} depthTest={false} toneMapped={false} />
+        <meshBasicMaterial
+          color="#4a8ee8"
+          transparent
+          opacity={0.4}
+          depthWrite={false}
+          depthTest={false}
+          toneMapped={false}
+        />
       </mesh>
       <mesh ref={impact} visible={false} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.2, 0.34, 18]} />
-        <meshBasicMaterial color="#8ec8ff" transparent opacity={0.7} depthWrite={false} depthTest={false} toneMapped={false} />
+        <meshBasicMaterial
+          color="#8ec8ff"
+          transparent
+          opacity={0.7}
+          depthWrite={false}
+          depthTest={false}
+          toneMapped={false}
+        />
       </mesh>
     </group>
   );
@@ -369,7 +425,12 @@ function TravelFxMesh() {
   const destinationColumn = useRef<THREE.Mesh>(null);
   useFrame(() => {
     const fx = getCastFx();
-    const meshes = [sourceRing.current, destinationRing.current, sourceColumn.current, destinationColumn.current];
+    const meshes = [
+      sourceRing.current,
+      destinationRing.current,
+      sourceColumn.current,
+      destinationColumn.current,
+    ];
     if (meshes.some((mesh) => !mesh)) return;
     const travel = fx && (fx.spell === "teleport" || fx.spell === "recall") ? fx : null;
     const age = travel ? (getWorld().hour - travel.at) * SECONDS_PER_HOUR : Infinity;
@@ -389,7 +450,11 @@ function TravelFxMesh() {
     sourceColumn.current!.position.set(travel.x, sourceY + 0.8, travel.z);
     sourceColumn.current!.scale.set(0.7 + t * 0.5, 1 - t * 0.65, 0.7 + t * 0.5);
     destinationColumn.current!.position.set(travel.tx, destinationY + 0.8, travel.tz);
-    destinationColumn.current!.scale.set(0.65 + destinationPulse * 0.55, 0.35 + destinationPulse, 0.65 + destinationPulse * 0.55);
+    destinationColumn.current!.scale.set(
+      0.65 + destinationPulse * 0.55,
+      0.35 + destinationPulse,
+      0.65 + destinationPulse * 0.55,
+    );
     const style = (mesh: THREE.Mesh, color: string, opacity: number) => {
       const material = mesh.material as THREE.MeshBasicMaterial;
       material.color.set(color);
@@ -412,11 +477,23 @@ function TravelFxMesh() {
       </mesh>
       <mesh ref={sourceColumn} visible={false} renderOrder={6}>
         <cylinderGeometry args={[0.28, 0.55, 1.6, 12, 1, true]} />
-        <meshBasicMaterial transparent side={THREE.DoubleSide} depthWrite={false} depthTest={false} toneMapped={false} />
+        <meshBasicMaterial
+          transparent
+          side={THREE.DoubleSide}
+          depthWrite={false}
+          depthTest={false}
+          toneMapped={false}
+        />
       </mesh>
       <mesh ref={destinationColumn} visible={false} renderOrder={6}>
         <cylinderGeometry args={[0.5, 0.25, 1.6, 12, 1, true]} />
-        <meshBasicMaterial transparent side={THREE.DoubleSide} depthWrite={false} depthTest={false} toneMapped={false} />
+        <meshBasicMaterial
+          transparent
+          side={THREE.DoubleSide}
+          depthWrite={false}
+          depthTest={false}
+          toneMapped={false}
+        />
       </mesh>
     </group>
   );
@@ -452,16 +529,34 @@ function FizzleFxMesh() {
       ].map((position, index) => (
         <mesh key={index} position={position as [number, number, number]} renderOrder={8}>
           <dodecahedronGeometry args={[index % 2 ? 0.14 : 0.2, 0]} />
-          <meshBasicMaterial color={index % 2 ? "#aeb8c8" : "#ffffff"} transparent depthWrite={false} depthTest={false} toneMapped={false} />
+          <meshBasicMaterial
+            color={index % 2 ? "#aeb8c8" : "#ffffff"}
+            transparent
+            depthWrite={false}
+            depthTest={false}
+            toneMapped={false}
+          />
         </mesh>
       ))}
       <mesh rotation={[-Math.PI / 2, 0, 0]} renderOrder={7}>
         <ringGeometry args={[0.3, 0.55, 18]} />
-        <meshBasicMaterial color="#aeb8c8" transparent depthWrite={false} depthTest={false} toneMapped={false} />
+        <meshBasicMaterial
+          color="#aeb8c8"
+          transparent
+          depthWrite={false}
+          depthTest={false}
+          toneMapped={false}
+        />
       </mesh>
       <mesh renderOrder={8}>
         <sphereGeometry args={[0.22, 8, 6]} />
-        <meshBasicMaterial color="#d8d4cc" transparent depthWrite={false} depthTest={false} toneMapped={false} />
+        <meshBasicMaterial
+          color="#d8d4cc"
+          transparent
+          depthWrite={false}
+          depthTest={false}
+          toneMapped={false}
+        />
       </mesh>
     </group>
   );
@@ -490,7 +585,11 @@ function HealingFxMesh() {
       const mote = g.children[index] as THREE.Mesh;
       const angle = (index / 5) * Math.PI * 2 + age * 2.8;
       const radius = 0.32 + index * 0.055;
-      mote.position.set(Math.cos(angle) * radius, 0.34 + t * (1 + index * 0.12), Math.sin(angle) * radius);
+      mote.position.set(
+        Math.cos(angle) * radius,
+        0.34 + t * (1 + index * 0.12),
+        Math.sin(angle) * radius,
+      );
       mote.scale.setScalar(0.9 + pulse * 1.15);
       const material = mote.material as THREE.MeshBasicMaterial;
       material.opacity = pulse * (index % 2 ? 0.95 : 0.72);
@@ -500,15 +599,147 @@ function HealingFxMesh() {
     <group ref={group} visible={false}>
       <mesh ref={ring} renderOrder={7} position={[0, 0.08, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.28, 0.46, 24]} />
-        <meshBasicMaterial color="#ffd36a" transparent depthWrite={false} depthTest={false} toneMapped={false} />
+        <meshBasicMaterial
+          color="#ffd36a"
+          transparent
+          depthWrite={false}
+          depthTest={false}
+          toneMapped={false}
+        />
       </mesh>
       {[0, 1, 2, 3, 4].map((index) => (
         <mesh key={index} renderOrder={8}>
           <sphereGeometry args={[index % 2 ? 0.21 : 0.15, 8, 6]} />
-          <meshBasicMaterial color={index % 2 ? "#fff8e7" : "#ffd36a"} transparent depthWrite={false} depthTest={false} toneMapped={false} />
+          <meshBasicMaterial
+            color={index % 2 ? "#fff8e7" : "#ffd36a"}
+            transparent
+            depthWrite={false}
+            depthTest={false}
+            toneMapped={false}
+          />
         </mesh>
       ))}
       <pointLight color="#ffd36a" intensity={1.1} distance={2.4} />
+    </group>
+  );
+}
+
+function TamingFxMesh() {
+  const attemptRing = useRef<THREE.Mesh>(null);
+  const tether = useRef<THREE.Mesh>(null);
+  const resultRing = useRef<THREE.Mesh>(null);
+  const resultBurst = useRef<THREE.Mesh>(null);
+  const motes = useRef<THREE.Group>(null);
+  useFrame(() => {
+    const world = getWorld();
+    const player = world.people.find((person) => person.isPlayer);
+    const target =
+      world.player.intent.kind === "tame"
+        ? world.fauna.find((creature) => creature.id === world.player.intent.targetId)
+        : null;
+    const appeal = target && player ? tamingPulse(world.player.workT) : 0;
+    const attempting = Boolean(
+      target && player && world.player.workT >= 0 && world.player.workT < TAMING_DURATION,
+    );
+    if (attemptRing.current) attemptRing.current.visible = attempting;
+    if (tether.current) tether.current.visible = attempting;
+    if (attempting && target && player && attemptRing.current && tether.current) {
+      const targetY = groundY(target.x, target.z) + 0.08;
+      const sourceY = groundY(player.x, player.z) + 0.72;
+      attemptRing.current.position.set(target.x, targetY, target.z);
+      attemptRing.current.scale.setScalar(0.8 + appeal * 0.8);
+      (attemptRing.current.material as THREE.MeshBasicMaterial).opacity = 0.38 + appeal * 0.5;
+      tether.current.position.set(
+        (player.x + target.x) * 0.5,
+        (sourceY + targetY + 0.5) * 0.5,
+        (player.z + target.z) * 0.5,
+      );
+      tether.current.lookAt(target.x, targetY + 0.5, target.z);
+      const length = Math.max(0.2, Math.hypot(target.x - player.x, target.z - player.z));
+      tether.current.scale.set(0.7 + appeal * 0.35, 0.7 + appeal * 0.35, length * 4.1);
+      (tether.current.material as THREE.MeshBasicMaterial).opacity = appeal * 0.48;
+    }
+    const fx = getTamingFx();
+    const age = fx ? (world.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const resultLive = Boolean(fx && age >= 0 && age < 0.78);
+    if (resultRing.current) resultRing.current.visible = resultLive;
+    if (resultBurst.current) resultBurst.current.visible = resultLive;
+    if (motes.current) motes.current.visible = resultLive;
+    if (!fx || !resultLive || !resultRing.current || !resultBurst.current || !motes.current) return;
+    const t = projectileProgress(age, 0.78);
+    const pulse = Math.sin(t * Math.PI);
+    const color = fx.success ? "#fff1a8" : "#a85a42";
+    const pale = fx.success ? "#ffffff" : "#8a8d90";
+    const y = groundY(fx.x, fx.z);
+    resultRing.current.position.set(fx.x, y + 0.08, fx.z);
+    resultRing.current.scale.setScalar(0.9 + t * (fx.success ? 3.2 : 2.2));
+    const ringMaterial = resultRing.current.material as THREE.MeshBasicMaterial;
+    ringMaterial.color.set(color);
+    ringMaterial.opacity = pulse * (fx.success ? 1 : 0.9);
+    resultBurst.current.position.set(fx.x, y + 0.72, fx.z);
+    resultBurst.current.scale.setScalar(0.8 + pulse * (fx.success ? 2.4 : 1.15));
+    const burstMaterial = resultBurst.current.material as THREE.MeshBasicMaterial;
+    burstMaterial.color.set(pale);
+    burstMaterial.opacity = pulse * 0.82;
+    motes.current.position.set(fx.x, y, fx.z);
+    motes.current.rotation.y = age * (fx.success ? 3.8 : -5.2);
+    for (let index = 0; index < motes.current.children.length; index += 1) {
+      const mote = motes.current.children[index] as THREE.Mesh;
+      const angle = (index / motes.current.children.length) * Math.PI * 2;
+      const radius = 0.35 + index * 0.05;
+      mote.position.set(
+        Math.cos(angle) * radius,
+        0.35 + t * (0.8 + index * 0.1),
+        Math.sin(angle) * radius,
+      );
+      const material = mote.material as THREE.MeshBasicMaterial;
+      material.color.set(index % 2 ? pale : color);
+      material.opacity = pulse * 0.9;
+    }
+  });
+  return (
+    <group>
+      <mesh ref={attemptRing} visible={false} renderOrder={7} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.32, 0.48, 24]} />
+        <meshBasicMaterial
+          color="#e0b56a"
+          transparent
+          depthWrite={false}
+          depthTest={false}
+          toneMapped={false}
+        />
+      </mesh>
+      <mesh ref={tether} visible={false} renderOrder={6}>
+        <sphereGeometry args={[0.1, 8, 6]} />
+        <meshBasicMaterial
+          color="#ffd36a"
+          transparent
+          depthWrite={false}
+          depthTest={false}
+          toneMapped={false}
+        />
+      </mesh>
+      <mesh ref={resultRing} visible={false} renderOrder={8} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.2, 0.82, 32]} />
+        <meshBasicMaterial transparent depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      <mesh ref={resultBurst} visible={false} renderOrder={9}>
+        <dodecahedronGeometry args={[0.28, 0]} />
+        <meshBasicMaterial transparent depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      <group ref={motes} visible={false}>
+        {[0, 1, 2, 3, 4, 5].map((index) => (
+          <mesh key={index} renderOrder={9}>
+            <sphereGeometry args={[index % 2 ? 0.18 : 0.14, 8, 6]} />
+            <meshBasicMaterial
+              transparent
+              depthWrite={false}
+              depthTest={false}
+              toneMapped={false}
+            />
+          </mesh>
+        ))}
+      </group>
     </group>
   );
 }
@@ -550,7 +781,9 @@ function CombatFxMesh() {
     if (showImpact) {
       const color = fx.clean ? (fx.kind === "arrow" ? "#d8efff" : "#e0b56a") : "#9a9286";
       impactMesh.position.set(fx.tx, groundY(fx.tx, fx.tz) + 0.7, fx.tz);
-      impactMesh.scale.setScalar((fx.kind === "arrow" ? 0.65 : 0.8) + Math.sin(impactT * Math.PI) * 1.1);
+      impactMesh.scale.setScalar(
+        (fx.kind === "arrow" ? 0.65 : 0.8) + Math.sin(impactT * Math.PI) * 1.1,
+      );
       const impactMat = impactMesh.material as THREE.MeshBasicMaterial;
       impactMat.color.set(color);
       impactMat.opacity = 0.72 * (1 - impactT);
@@ -566,7 +799,14 @@ function CombatFxMesh() {
       <group ref={arrow} visible={false}>
         <mesh renderOrder={7} position={[0, 0, -0.24]} rotation={[Math.PI / 2, 0, 0]}>
           <cylinderGeometry args={[0.065, 0.016, 0.82, 6]} />
-          <meshBasicMaterial color="#ffffff" transparent opacity={0.9} depthWrite={false} depthTest={false} toneMapped={false} />
+          <meshBasicMaterial
+            color="#ffffff"
+            transparent
+            opacity={0.9}
+            depthWrite={false}
+            depthTest={false}
+            toneMapped={false}
+          />
         </mesh>
         <mesh rotation={[Math.PI / 2, 0, 0]}>
           <cylinderGeometry args={[0.011, 0.011, 0.54, 5]} />
@@ -574,17 +814,35 @@ function CombatFxMesh() {
         </mesh>
         <mesh renderOrder={8} position={[0, 0, 0.4]} rotation={[Math.PI / 2, 0, 0]}>
           <coneGeometry args={[0.1, 0.22, 6]} />
-          <meshStandardMaterial color="#d8efff" emissive="#8ec8ff" emissiveIntensity={0.5} metalness={0.3} roughness={0.35} />
+          <meshStandardMaterial
+            color="#d8efff"
+            emissive="#8ec8ff"
+            emissiveIntensity={0.5}
+            metalness={0.3}
+            roughness={0.35}
+          />
         </mesh>
         <pointLight color="#8ec8ff" intensity={0.8} distance={1.8} />
       </group>
       <mesh ref={impact} visible={false}>
         <sphereGeometry args={[0.22, 8, 6]} />
-        <meshBasicMaterial color="#e0b56a" transparent opacity={0.7} depthWrite={false} toneMapped={false} />
+        <meshBasicMaterial
+          color="#e0b56a"
+          transparent
+          opacity={0.7}
+          depthWrite={false}
+          toneMapped={false}
+        />
       </mesh>
       <mesh ref={ring} visible={false} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.18, 0.3, 16]} />
-        <meshBasicMaterial color="#e0b56a" transparent opacity={0.65} depthWrite={false} toneMapped={false} />
+        <meshBasicMaterial
+          color="#e0b56a"
+          transparent
+          opacity={0.65}
+          depthWrite={false}
+          toneMapped={false}
+        />
       </mesh>
     </group>
   );
@@ -652,7 +910,12 @@ function ChipBits() {
     m.instanceColor.needsUpdate = true;
   });
   return (
-    <instancedMesh ref={mesh} args={[undefined, undefined, 32]} frustumCulled={false} raycast={() => {}}>
+    <instancedMesh
+      ref={mesh}
+      args={[undefined, undefined, 32]}
+      frustumCulled={false}
+      raycast={() => {}}
+    >
       <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial roughness={0.9} />
     </instancedMesh>
@@ -698,6 +961,7 @@ export function WorldScene() {
       <TravelFxMesh />
       <FizzleFxMesh />
       <HealingFxMesh />
+      <TamingFxMesh />
       <CombatFxMesh />
       <DeathFxMesh />
       <ChipBits />
