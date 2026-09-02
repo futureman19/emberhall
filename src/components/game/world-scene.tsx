@@ -4,11 +4,13 @@ import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { COURT, VIEW } from "@/game/atlas";
 import { cameraFixedHeight, cameraLockedAxis } from "@/game/camera-follow";
+import { SECONDS_PER_HOUR } from "@/game/catalog";
+import { projectileProgress, spellProjectileProfile, travelEffectProfile } from "@/game/combat-animation";
 import { groundY as heightAt } from "@/game/height";
 import { getGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
 import { getWorld } from "@/game/live";
-import { getCastFx, getDeathFx } from "@/game/magery";
-import { getChips } from "@/game/player";
+import { getCastFx, getDeathFx, getFizzleFx } from "@/game/magery";
+import { getChips, getCombatFx } from "@/game/player";
 import { useGame } from "@/game/store";
 import { hoverAt, leftAt, liftAt } from "@/game/world-pointer";
 import { Buildings } from "./building-meshes";
@@ -257,39 +259,69 @@ function CastFxMesh() {
   const group = useRef<THREE.Group>(null);
   const puff = useRef<THREE.Mesh>(null);
   const bolt = useRef<THREE.Mesh>(null);
+  const trail = useRef<THREE.Mesh>(null);
+  const impact = useRef<THREE.Mesh>(null);
   useFrame(() => {
     const fx = getCastFx();
     const g = group.current;
     const puffMesh = puff.current;
     const boltMesh = bolt.current;
-    if (!g || !puffMesh || !boltMesh) return;
+    const trailMesh = trail.current;
+    const impactMesh = impact.current;
+    if (!g || !puffMesh || !boltMesh || !trailMesh || !impactMesh) return;
     if (!fx) {
       g.visible = false;
       return;
     }
-    const age = getWorld().hour - fx.at;
-    if (age < 0 || age > 0.28) {
+    const age = (getWorld().hour - fx.at) * SECONDS_PER_HOUR;
+    const duration = fx.spell === "magicarrow" || fx.spell === "fireball" ? 0.78 : 0.68;
+    if (age < 0 || age > duration) {
       g.visible = false;
       return;
     }
     g.visible = true;
-    const t = age / 0.28;
+    const t = age / duration;
     const y0 = groundY(fx.x, fx.z) + 0.9;
     const y1 = groundY(fx.tx, fx.tz) + 0.75;
     const puffMat = puffMesh.material as THREE.MeshBasicMaterial;
     const boltMat = boltMesh.material as THREE.MeshBasicMaterial;
+    const trailMat = trailMesh.material as THREE.MeshBasicMaterial;
+    const impactMat = impactMesh.material as THREE.MeshBasicMaterial;
     if (fx.spell === "magicarrow" || fx.spell === "fireball") {
       const k = Math.min(1, t * 1.55);
+      const profile = spellProjectileProfile(fx.spell);
       const fat = fx.spell === "fireball";
       boltMesh.visible = t < 0.72;
       boltMesh.position.set(fx.x + (fx.tx - fx.x) * k, y0 + (y1 - y0) * k, fx.z + (fx.tz - fx.z) * k);
-      boltMesh.scale.setScalar(fat ? 1.7 : 1);
+      boltMesh.scale.setScalar(profile.coreScale);
+      boltMat.color.set(profile.core);
       boltMat.opacity = 0.95 * (1 - t);
+      trailMesh.visible = t < 0.72;
+      trailMesh.position.set(
+        (fx.x + boltMesh.position.x) * 0.5,
+        (y0 + boltMesh.position.y) * 0.5,
+        (fx.z + boltMesh.position.z) * 0.5,
+      );
+      trailMesh.lookAt(boltMesh.position);
+      const trailLength = Math.max(
+        0.08,
+        Math.hypot(boltMesh.position.x - fx.x, boltMesh.position.y - y0, boltMesh.position.z - fx.z),
+      );
+      trailMesh.scale.set(profile.trailScale, profile.trailScale, trailLength * 4.1);
+      trailMat.color.set(profile.trail);
+      trailMat.opacity = (fat ? 0.68 : 0.72) * (1 - t);
       puffMesh.position.set(fx.tx, y1, fx.tz);
-      puffMesh.scale.setScalar((fat ? 0.7 : 0.35) + t * (fat ? 2.1 : 1.4));
-      puffMat.color.set("#a85a42");
-      puffMat.opacity = 0.55 * (1 - t);
+      puffMesh.scale.setScalar(profile.impactScale * (0.35 + t * 1.25));
+      puffMat.color.set(profile.impact);
+      puffMat.opacity = (fat ? 0.68 : 0.5) * (1 - t);
+      impactMesh.visible = t > 0.32;
+      impactMesh.position.set(fx.tx, groundY(fx.tx, fx.tz) + 0.08, fx.tz);
+      impactMesh.scale.setScalar(profile.impactScale * (0.45 + t * 1.2));
+      impactMat.color.set(profile.impact);
+      impactMat.opacity = 0.78 * (1 - t);
     } else if (fx.spell === "teleport" || fx.spell === "recall") {
+      trailMesh.visible = false;
+      impactMesh.visible = false;
       boltMesh.visible = t < 0.45;
       const k = Math.min(1, t * 2.2);
       boltMesh.position.set(fx.x + (fx.tx - fx.x) * k, y0 + (y1 - y0) * k, fx.z + (fx.tz - fx.z) * k);
@@ -298,6 +330,8 @@ function CastFxMesh() {
       puffMat.color.set(fx.spell === "recall" ? "#a85a42" : "#ece6d8");
       puffMat.opacity = 0.7 * (1 - t);
     } else {
+      trailMesh.visible = false;
+      impactMesh.visible = false;
       boltMesh.visible = false;
       puffMesh.position.set(fx.tx, y1, fx.tz);
       puffMesh.scale.setScalar(0.55 + t * 1.8);
@@ -309,11 +343,201 @@ function CastFxMesh() {
     <group ref={group} visible={false}>
       <mesh ref={puff}>
         <sphereGeometry args={[0.32, 10, 8]} />
-        <meshBasicMaterial color="#ece6d8" transparent opacity={0.6} depthWrite={false} />
+        <meshBasicMaterial color="#ece6d8" transparent opacity={0.6} depthWrite={false} depthTest={false} toneMapped={false} />
       </mesh>
       <mesh ref={bolt}>
         <sphereGeometry args={[0.11, 8, 6]} />
-        <meshBasicMaterial color="#a85a42" transparent opacity={0.9} depthWrite={false} />
+        <meshBasicMaterial color="#a85a42" transparent opacity={0.9} depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      <mesh ref={trail} visible={false}>
+        <sphereGeometry args={[0.12, 8, 6]} />
+        <meshBasicMaterial color="#4a8ee8" transparent opacity={0.4} depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      <mesh ref={impact} visible={false} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.2, 0.34, 18]} />
+        <meshBasicMaterial color="#8ec8ff" transparent opacity={0.7} depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+    </group>
+  );
+}
+
+function TravelFxMesh() {
+  const sourceRing = useRef<THREE.Mesh>(null);
+  const destinationRing = useRef<THREE.Mesh>(null);
+  const sourceColumn = useRef<THREE.Mesh>(null);
+  const destinationColumn = useRef<THREE.Mesh>(null);
+  useFrame(() => {
+    const fx = getCastFx();
+    const meshes = [sourceRing.current, destinationRing.current, sourceColumn.current, destinationColumn.current];
+    if (meshes.some((mesh) => !mesh)) return;
+    const travel = fx && (fx.spell === "teleport" || fx.spell === "recall") ? fx : null;
+    const age = travel ? (getWorld().hour - travel.at) * SECONDS_PER_HOUR : Infinity;
+    const visible = Boolean(travel && age >= 0 && age < 0.82);
+    for (const mesh of meshes) if (mesh) mesh.visible = visible;
+    if (!travel || !visible) return;
+    const t = projectileProgress(age, 0.82);
+    const profile = travelEffectProfile(travel.spell);
+    const sourcePulse = 1 - t;
+    const destinationPulse = Math.sin(Math.min(1, t * 1.35) * Math.PI);
+    const sourceY = groundY(travel.x, travel.z);
+    const destinationY = groundY(travel.tx, travel.tz);
+    sourceRing.current!.position.set(travel.x, sourceY + 0.08, travel.z);
+    sourceRing.current!.scale.setScalar(0.7 + t * 1.8);
+    destinationRing.current!.position.set(travel.tx, destinationY + 0.08, travel.tz);
+    destinationRing.current!.scale.setScalar(1.9 - Math.min(1, t * 1.45));
+    sourceColumn.current!.position.set(travel.x, sourceY + 0.8, travel.z);
+    sourceColumn.current!.scale.set(0.7 + t * 0.5, 1 - t * 0.65, 0.7 + t * 0.5);
+    destinationColumn.current!.position.set(travel.tx, destinationY + 0.8, travel.tz);
+    destinationColumn.current!.scale.set(0.65 + destinationPulse * 0.55, 0.35 + destinationPulse, 0.65 + destinationPulse * 0.55);
+    const style = (mesh: THREE.Mesh, color: string, opacity: number) => {
+      const material = mesh.material as THREE.MeshBasicMaterial;
+      material.color.set(color);
+      material.opacity = Math.max(0, opacity);
+    };
+    style(sourceRing.current!, profile.source, sourcePulse * 0.9);
+    style(destinationRing.current!, profile.destination, (1 - t) * 0.95);
+    style(sourceColumn.current!, profile.accent, sourcePulse * 0.42);
+    style(destinationColumn.current!, profile.destination, destinationPulse * 0.52);
+  });
+  return (
+    <group>
+      <mesh ref={sourceRing} visible={false} renderOrder={7} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.34, 0.52, 24]} />
+        <meshBasicMaterial transparent depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      <mesh ref={destinationRing} visible={false} renderOrder={7} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.42, 0.68, 28]} />
+        <meshBasicMaterial transparent depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      <mesh ref={sourceColumn} visible={false} renderOrder={6}>
+        <cylinderGeometry args={[0.28, 0.55, 1.6, 12, 1, true]} />
+        <meshBasicMaterial transparent side={THREE.DoubleSide} depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      <mesh ref={destinationColumn} visible={false} renderOrder={6}>
+        <cylinderGeometry args={[0.5, 0.25, 1.6, 12, 1, true]} />
+        <meshBasicMaterial transparent side={THREE.DoubleSide} depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+    </group>
+  );
+}
+
+function FizzleFxMesh() {
+  const group = useRef<THREE.Group>(null);
+  useFrame(() => {
+    const fx = getFizzleFx();
+    const g = group.current;
+    if (!g) return;
+    const age = fx ? (getWorld().hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const visible = Boolean(fx && age >= 0 && age < 0.58);
+    g.visible = visible;
+    if (!fx || !visible) return;
+    const t = projectileProgress(age, 0.58);
+    g.position.set(fx.x, groundY(fx.x, fx.z) + 0.78 - t * 0.34, fx.z);
+    g.rotation.y = t * Math.PI * 2.4;
+    g.scale.setScalar(0.9 + t * 2.1);
+    g.traverse((object) => {
+      if (!(object instanceof THREE.Mesh)) return;
+      const material = object.material as THREE.MeshBasicMaterial;
+      material.opacity = 0.92 * (1 - t);
+    });
+  });
+  return (
+    <group ref={group} visible={false}>
+      {[
+        [-0.28, 0.18, 0.04],
+        [0.26, 0.06, 0.16],
+        [-0.06, -0.12, -0.26],
+        [0.12, 0.3, -0.12],
+      ].map((position, index) => (
+        <mesh key={index} position={position as [number, number, number]} renderOrder={8}>
+          <dodecahedronGeometry args={[index % 2 ? 0.14 : 0.2, 0]} />
+          <meshBasicMaterial color={index % 2 ? "#aeb8c8" : "#ffffff"} transparent depthWrite={false} depthTest={false} toneMapped={false} />
+        </mesh>
+      ))}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} renderOrder={7}>
+        <ringGeometry args={[0.3, 0.55, 18]} />
+        <meshBasicMaterial color="#aeb8c8" transparent depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      <mesh renderOrder={8}>
+        <sphereGeometry args={[0.22, 8, 6]} />
+        <meshBasicMaterial color="#d8d4cc" transparent depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+    </group>
+  );
+}
+
+function CombatFxMesh() {
+  const arrow = useRef<THREE.Group>(null);
+  const impact = useRef<THREE.Mesh>(null);
+  const ring = useRef<THREE.Mesh>(null);
+  useFrame(() => {
+    const fx = getCombatFx();
+    const arrowGroup = arrow.current;
+    const impactMesh = impact.current;
+    const ringMesh = ring.current;
+    if (!arrowGroup || !impactMesh || !ringMesh) return;
+    if (!fx) {
+      arrowGroup.visible = false;
+      impactMesh.visible = false;
+      ringMesh.visible = false;
+      return;
+    }
+    const age = (getWorld().hour - fx.at) * SECONDS_PER_HOUR;
+    const flight = projectileProgress(age, 0.36);
+    const impactT = projectileProgress(age - (fx.kind === "arrow" ? 0.24 : 0), 0.34);
+    arrowGroup.visible = fx.kind === "arrow" && age >= 0 && age < 0.4;
+    if (arrowGroup.visible) {
+      const sourceY = groundY(fx.x, fx.z) + 0.92;
+      const targetY = groundY(fx.tx, fx.tz) + 0.68;
+      arrowGroup.position.set(
+        fx.x + (fx.tx - fx.x) * flight,
+        sourceY + (targetY - sourceY) * flight,
+        fx.z + (fx.tz - fx.z) * flight,
+      );
+      arrowGroup.lookAt(fx.tx, targetY, fx.tz);
+      arrowGroup.scale.setScalar(1.45);
+    }
+    const showImpact = age >= 0 && impactT > 0 && impactT < 1;
+    impactMesh.visible = showImpact;
+    ringMesh.visible = showImpact;
+    if (showImpact) {
+      const color = fx.clean ? (fx.kind === "arrow" ? "#d8efff" : "#e0b56a") : "#9a9286";
+      impactMesh.position.set(fx.tx, groundY(fx.tx, fx.tz) + 0.7, fx.tz);
+      impactMesh.scale.setScalar((fx.kind === "arrow" ? 0.65 : 0.8) + Math.sin(impactT * Math.PI) * 1.1);
+      const impactMat = impactMesh.material as THREE.MeshBasicMaterial;
+      impactMat.color.set(color);
+      impactMat.opacity = 0.72 * (1 - impactT);
+      ringMesh.position.set(fx.tx, groundY(fx.tx, fx.tz) + 0.06, fx.tz);
+      ringMesh.scale.setScalar(0.65 + impactT * 1.5);
+      const ringMat = ringMesh.material as THREE.MeshBasicMaterial;
+      ringMat.color.set(color);
+      ringMat.opacity = 0.68 * (1 - impactT);
+    }
+  });
+  return (
+    <group>
+      <group ref={arrow} visible={false}>
+        <mesh renderOrder={7} position={[0, 0, -0.24]} rotation={[Math.PI / 2, 0, 0]}>
+          <cylinderGeometry args={[0.065, 0.016, 0.82, 6]} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.9} depthWrite={false} depthTest={false} toneMapped={false} />
+        </mesh>
+        <mesh rotation={[Math.PI / 2, 0, 0]}>
+          <cylinderGeometry args={[0.011, 0.011, 0.54, 5]} />
+          <meshBasicMaterial color="#ffffff" depthTest={false} toneMapped={false} />
+        </mesh>
+        <mesh renderOrder={8} position={[0, 0, 0.4]} rotation={[Math.PI / 2, 0, 0]}>
+          <coneGeometry args={[0.1, 0.22, 6]} />
+          <meshStandardMaterial color="#d8efff" emissive="#8ec8ff" emissiveIntensity={0.5} metalness={0.3} roughness={0.35} />
+        </mesh>
+        <pointLight color="#8ec8ff" intensity={0.8} distance={1.8} />
+      </group>
+      <mesh ref={impact} visible={false}>
+        <sphereGeometry args={[0.22, 8, 6]} />
+        <meshBasicMaterial color="#e0b56a" transparent opacity={0.7} depthWrite={false} toneMapped={false} />
+      </mesh>
+      <mesh ref={ring} visible={false} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.18, 0.3, 16]} />
+        <meshBasicMaterial color="#e0b56a" transparent opacity={0.65} depthWrite={false} toneMapped={false} />
       </mesh>
     </group>
   );
@@ -424,6 +648,9 @@ export function WorldScene() {
       <WalkMarker />
       <MarkStones />
       <CastFxMesh />
+      <TravelFxMesh />
+      <FizzleFxMesh />
+      <CombatFxMesh />
       <DeathFxMesh />
       <ChipBits />
       <PlacePointer />

@@ -54,6 +54,19 @@ export function getCastFx() {
   return castFx;
 }
 
+export interface FizzleFx {
+  spell: SpellId;
+  x: number;
+  z: number;
+  at: number;
+}
+
+let fizzleFx: FizzleFx | null = null;
+
+export function getFizzleFx() {
+  return fizzleFx;
+}
+
 export interface DeathFx {
   x: number;
   z: number;
@@ -321,6 +334,7 @@ export function castNow(world: World): string | null {
   const withGain = (flavor: string, gain: string | null) => (gain ? `${flavor} ${gain}.` : flavor);
 
   if (!ok) {
+    fizzleFx = { spell, x: p.x, z: p.z, at: world.hour };
     playSfx("fizzle", 0.4);
     return `${meta.words}. The spell fizzles.`;
   }

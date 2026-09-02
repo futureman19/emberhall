@@ -1,6 +1,6 @@
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
-import { Quaternion, type Group } from "three";
+import { Quaternion, type Group, type Mesh, type MeshBasicMaterial } from "three";
 import { CLASS_META } from "@/game/catalog";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
@@ -8,6 +8,7 @@ import { SLOT_ANCHOR, partsById } from "@/game/look/parts.ts";
 import { resolveLook } from "@/game/look/resolve.ts";
 import type { ResolvedLook } from "@/game/look/resolve.ts";
 import { workPitch } from "@/game/player";
+import { attackPhase, bowDrawAmount, meleeSwingPitch } from "@/game/combat-animation";
 import { useGame } from "@/game/store";
 import type { ItemId, Person, WearSlot } from "@/game/types";
 
@@ -175,6 +176,15 @@ function Staff({ ghost }: { ghost: boolean }) {
 }
 
 function Bow({ ghost }: { ghost: boolean }) {
+  const arrow = useRef<Group>(null);
+  useFrame(() => {
+    const a = arrow.current;
+    if (!a) return;
+    const world = getWorld();
+    const draw = bowDrawAmount(world.player.workT);
+    a.visible = !ghost && world.player.intent.kind === "hunt" && draw > 0.04;
+    a.position.z = -0.05 - draw * 0.26;
+  });
   return (
     <group position={[0.04, -0.4, 0.02]} rotation={[0.1, 0.4, 0.15]}>
       <mesh position={[0, 0.28, 0]} castShadow={!ghost}>
@@ -185,6 +195,16 @@ function Bow({ ghost }: { ghost: boolean }) {
         <boxGeometry args={[0.02, 0.56, 0.02]} />
         <meshStandardMaterial color="#ece6d8" roughness={0.6} />
       </mesh>
+      <group ref={arrow} position={[0, 0.28, -0.05]} visible={false}>
+        <mesh rotation={[Math.PI / 2, 0, 0]}>
+          <cylinderGeometry args={[0.018, 0.018, 0.78, 5]} />
+          <meshBasicMaterial color="#d8efff" toneMapped={false} />
+        </mesh>
+        <mesh position={[0, 0, 0.36]} rotation={[Math.PI / 2, 0, 0]}>
+          <coneGeometry args={[0.035, 0.1, 5]} />
+          <meshStandardMaterial color="#9a9286" metalness={0.35} roughness={0.45} />
+        </mesh>
+      </group>
     </group>
   );
 }
@@ -265,6 +285,30 @@ function Pick({ ghost }: { ghost: boolean }) {
   );
 }
 
+function MeleeSwingArc() {
+  const arc = useRef<Mesh>(null);
+  useFrame(() => {
+    const mesh = arc.current;
+    if (!mesh) return;
+    const world = getWorld();
+    const phase = attackPhase(world.player.workT);
+    const live = world.player.intent.kind === "hunt" && world.player.wear.main !== "bow" && phase > 0.36 && phase < 0.82;
+    mesh.visible = live;
+    if (!live) return;
+    const strike = Math.sin(((phase - 0.36) / 0.46) * Math.PI);
+    mesh.rotation.z = -0.95 + phase * 1.9;
+    mesh.scale.setScalar(1 + strike * 0.5);
+    const material = mesh.material as MeshBasicMaterial;
+    material.opacity = 0.55 + strike * 0.4;
+  });
+  return (
+    <mesh ref={arc} visible={false} renderOrder={6} position={[0, 0.14, 0.14]} rotation={[-Math.PI / 2, 0, 0]}>
+      <ringGeometry args={[0.48, 0.76, 24, 1, -1.05, 2.1]} />
+      <meshBasicMaterial color="#ffd36a" transparent opacity={0.9} depthWrite={false} depthTest={false} toneMapped={false} />
+    </mesh>
+  );
+}
+
 function PalmFlame() {
   const wrap = useRef<Group>(null);
   const flame = useRef<Group>(null);
@@ -326,11 +370,18 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
     const idle = Boolean(you && !you.ghost && !you.path.length);
     const chopping = idle && (it.kind === "chop" || it.kind === "mine" || it.kind === "plant" || it.kind === "harvest" || it.kind === "till");
     const casting = idle && it.kind === "cast";
+    const hunting = idle && it.kind === "hunt";
+    const bowing = hunting && w.player.wear.main === "bow";
+    const draw = bowing ? bowDrawAmount(w.player.workT) : 0;
     if (left.current) {
       if (casting) {
         const u = Math.min(1, w.player.workT / 0.26);
         const e = u * u * (3 - 2 * u);
         left.current.rotation.set(walkSwing * (1 - e) + 1.1 * e, 0.28 * e, 0.12 * (1 - e) + 1.08 * e);
+      } else if (bowing) {
+        left.current.rotation.set(0.88 + draw * 0.32, 0.42, 0.72 + draw * 0.22);
+      } else if (hunting) {
+        left.current.rotation.set(-0.42, 0.18, 0.38);
       } else {
         left.current.rotation.set(walkSwing, 0, 0.12);
       }
@@ -343,6 +394,10 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
         const u = Math.min(1, w.player.workT / 0.26);
         const e = u * u * (3 - 2 * u);
         right.current.rotation.set(-walkSwing * (1 - e) + 1.1 * e, -0.28 * e, -0.12 * (1 - e) - 1.08 * e);
+      } else if (bowing) {
+        right.current.rotation.set(0.82 + draw * 0.5, -0.38 - draw * 0.22, -0.84 - draw * 0.32);
+      } else if (hunting) {
+        right.current.rotation.set(meleeSwingPitch(w.player.workT), 0.28, -0.42);
       } else {
         right.current.rotation.set(-walkSwing, 0, -0.12);
       }
@@ -461,6 +516,7 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
           </mesh>
         ));
       })}
+      {p.isPlayer && !ghost && <MeleeSwingArc />}
       {selected && (
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.04, 0]}>
           <ringGeometry args={[0.34, 0.46, 16]} />

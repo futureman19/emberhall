@@ -1,5 +1,10 @@
+import { useFrame } from "@react-three/fiber";
+import { useRef } from "react";
+import type { Group } from "three";
+import { SECONDS_PER_HOUR } from "@/game/catalog";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
+import { getCombatFx } from "@/game/player";
 import { useGame } from "@/game/store";
 import type { Creature, FaunaKind } from "@/game/types";
 
@@ -258,9 +263,22 @@ function Body({ c }: { c: Creature }) {
 function Beast({ c }: { c: Creature }) {
   const dead = c.task === "dead";
   const color = COLOR[c.kind];
+  const root = useRef<Group>(null);
+
+  useFrame(() => {
+    const group = root.current;
+    if (!group) return;
+    const fx = getCombatFx();
+    const age = fx ? (getWorld().hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const reacting = Boolean(fx && fx.targetId === c.id && age >= 0 && age < 0.34);
+    const pulse = reacting ? Math.sin((age / 0.34) * Math.PI) : 0;
+    group.position.set(c.x, groundY(getWorld(), c.x, c.z) + pulse * 0.08, c.z);
+    group.rotation.set(dead ? Math.PI / 2 : -pulse * (fx?.clean ? 0.28 : 0.13), 0, dead ? 0 : pulse * 0.2);
+    group.scale.setScalar(1 + pulse * (fx?.clean ? 0.1 : 0.04));
+  });
 
   return (
-    <group position={[c.x, groundY(getWorld(), c.x, c.z), c.z]} rotation={dead ? [Math.PI / 2, 0, 0] : [0, 0, 0]}>
+    <group ref={root} position={[c.x, groundY(getWorld(), c.x, c.z), c.z]} rotation={dead ? [Math.PI / 2, 0, 0] : [0, 0, 0]}>
       <Body c={c} />
       {c.ownerId && (
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.06, 0]}>

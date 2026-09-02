@@ -10,6 +10,7 @@ import { addToPile, spawnCorpsePile, takeFromPile } from "./piles.ts";
 import { mulberry32 } from "./rng.ts";
 import { successChance, tryGain } from "./skills.ts";
 import { addResource, parseResourceInventory } from "./inventory/resources.ts";
+import { COMBAT_BEAT } from "./combat-animation.ts";
 import { assessResourceHarvest, harvestToolTier, type HarvestAssessment } from "./resources/harvest.ts";
 import { depleteResourceNode, discoverResourceNode, hasDiscoveredResourceNode } from "./resources/state.ts";
 import { playSfx } from "./vale-sfx.ts";
@@ -590,6 +591,16 @@ function huntNow(world: World, p: Person) {
   const skill = bow ? world.player.skills.archery : world.player.skills.swords;
   const chance = successChance(skill, 10 + FAUNA_META[c.kind].hp / 2);
   const ok = Math.random() < chance + 0.2 + mods.hit / 100;
+  combatFx = {
+    kind: bow ? "arrow" : "melee",
+    x: p.x,
+    z: p.z,
+    tx: c.x,
+    tz: c.z,
+    targetId: c.id,
+    clean: ok,
+    at: world.hour,
+  };
   let dmg = ok ? blade + Math.floor(skill / 12) : Math.max(1, Math.floor(blade / 3));
   dmg += mods.dmg;
   const slayerMul = mods.vs[c.kind];
@@ -672,10 +683,26 @@ function skinNow(world: World, p: Person) {
   return `You dress the ${FAUNA_META[c.kind].label.toLowerCase()}.`;
 }
 
-let swingAcc = 0;
 /** Arrow-shot for a hunting bow — shorter than a mage's reach, longer than a blade's. */
 const BOW_RANGE = 10;
 const targetReplans = new WeakMap<World, { tick: number; targetId: string | null }>();
+
+export interface CombatFx {
+  kind: "melee" | "arrow";
+  x: number;
+  z: number;
+  tx: number;
+  tz: number;
+  targetId: string;
+  clean: boolean;
+  at: number;
+}
+
+let combatFx: CombatFx | null = null;
+
+export function getCombatFx() {
+  return combatFx;
+}
 
 export const WORK_BEAT = 0.72;
 export const CAST_WINDUP = 0.92;
@@ -883,10 +910,9 @@ export function tickPlayer(world: World, dt: number): string | null {
     world.player.workT = 0;
     return castNow(world);
   }
+  world.player.workT += dt;
+  if (world.player.workT < COMBAT_BEAT) return null;
   world.player.workT = 0;
-  swingAcc += dt;
-  if (swingAcc < 0.55) return null;
-  swingAcc = 0;
   if (intent.kind === "hunt") return huntNow(world, p);
   if (intent.kind === "tame") return tameNow(world, p);
   if (intent.kind === "skin") return skinNow(world, p);
