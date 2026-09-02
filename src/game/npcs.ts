@@ -1,6 +1,7 @@
 import { ITEM_META, SHOP_STOCK } from "./catalog.ts";
 import { buildingBox } from "./building-size.ts";
 import { isGhost, resurrect, you } from "./player.ts";
+import { astarToRange, tileOf } from "./pathfinding.ts";
 import { appraiseRare, rareName } from "./rare.ts";
 import { completeObjective, log } from "./world.ts";
 import type { ItemId, NpcRole, World } from "./types.ts";
@@ -44,8 +45,23 @@ function bankHands(world: World) {
 
 export function commandApproach(world: World, id: string) {
   const t = world.people.find((p) => p.id === id);
-  const you = world.people.find((p) => p.isPlayer);
-  if (!t || !you) return "They are gone.";
+  const self = you(world);
+  if (!t || !self) return "They are gone.";
+  if (Math.hypot(self.x - t.x, self.z - t.z) <= BANK_RANGE) return null;
+  const from = tileOf(self.x, self.z);
+  const path = astarToRange(world, from.tx, from.ty, t.x, t.z, BANK_RANGE);
+  if (!path) return "The way is closed.";
+  self.path = path.map((node) => ({ tx: node.x, ty: node.y }));
+  const destination = path.at(-1);
+  if (destination) {
+    world.player.intent = {
+      kind: "walk",
+      tx: destination.x,
+      ty: destination.y,
+      targetId: id,
+      spell: null,
+    };
+  }
   return null;
 }
 

@@ -219,9 +219,17 @@ export function NpcGump() {
     >
       <p className="font-display text-sm text-fg">{p.name}</p>
       <p className="text-xs text-muted">{NPC_META[p.role].label}</p>
-      <Button className="mt-3 w-full" variant="secondary" onClick={() => talk(p.id)}>
-        {ghost && p.role === "healer" ? "Return me" : "Talk"}
+      <Button
+        className="mt-3 w-full"
+        variant="secondary"
+        disabled={ghost && p.role === "healer" && !close}
+        onClick={() => talk(p.id)}
+      >
+        {ghost && p.role === "healer" ? (close ? "Return me" : "Walking closer…") : "Talk"}
       </Button>
+      {ghost && p.role === "healer" && !close && (
+        <p className="mt-2 text-pretty text-xs text-muted">Ione must be within reach to return you.</p>
+      )}
       {p.role === "banker" && (close ? <BankBox /> : <p className="mt-3 text-pretty text-xs text-muted">Walk closer to open the box.</p>)}
       {p.role === "provisioner" && <ProvisionerShop />}
       <Button className="mt-3 w-full" variant="ghost" onClick={() => select(null)}>

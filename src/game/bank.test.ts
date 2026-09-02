@@ -1,6 +1,16 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { BANK_RANGE, BANK_SLOTS, commandBankGold, commandBankItem, commandDeposit, commandTalk, commandUnbankItem, commandWithdraw } from "./npcs.ts";
+import {
+  BANK_RANGE,
+  BANK_SLOTS,
+  commandApproach,
+  commandBankGold,
+  commandBankItem,
+  commandDeposit,
+  commandTalk,
+  commandUnbankItem,
+  commandWithdraw,
+} from "./npcs.ts";
 import { tickPlayer, you } from "./player.ts";
 import { createWorld, seedEmberhallBank } from "./world.ts";
 import { COURT, EMBERHALL_BANK } from "./atlas.ts";
@@ -27,6 +37,37 @@ function walkOff(w: World) {
   self.x = b.x + 20;
   self.z = b.z + 20;
 }
+
+test("healer - selecting from outside talk range walks into reach before Return me", () => {
+  const w = createWorld();
+  const self = you(w)!;
+  const healer = w.people.find((p) => p.role === "healer");
+  assert.ok(healer, "Ione tends the hall");
+  self.x = healer.x + 8;
+  self.z = healer.z + 8;
+
+  assert.equal(commandApproach(w, healer.id), null);
+  assert.ok(self.path.length > 0, "approach creates a route instead of opening a dead button");
+  const endpoint = self.path.at(-1)!;
+  assert.ok(Math.hypot(endpoint.tx - healer.x, endpoint.ty - healer.z) <= BANK_RANGE);
+});
+
+test("healer - Return me restores a ghost once the healer is in reach", () => {
+  const w = createWorld();
+  const self = you(w)!;
+  const healer = w.people.find((p) => p.role === "healer");
+  assert.ok(healer, "Ione tends the hall");
+  self.x = healer.x;
+  self.z = healer.z;
+  self.hp = 0;
+  self.ghost = true;
+  w.player.ghost = true;
+
+  assert.match(commandTalk(w, healer.id), /Blood remembers/);
+  assert.equal(self.ghost, false);
+  assert.equal(w.player.ghost, false);
+  assert.equal(self.hp, Math.max(1, Math.floor(self.maxHp * 0.4)));
+});
 
 test("bank - gold and goods move at the banker, not across the vale", () => {
   const w = createWorld();
