@@ -395,6 +395,7 @@ export interface Sapling {
   ty: number;
   plantedHour: number;
   stage: 1 | 2 | 3;
+  resourceId?: string;
 }
 
 export interface Objective {
@@ -484,6 +485,7 @@ export interface World {
   buildings: Building[];
   plots: CropPlot[];
   saplings: Sapling[];
+  plantedTimber: Record<string, string>;
   player: PlayerState;
   log: LogLine[];
   objectives: Objective[];

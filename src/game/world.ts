@@ -302,6 +302,7 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
     buildings: [],
     plots: [],
     saplings: [],
+    plantedTimber: {},
     player: {
       id: "",
       skills: emptySkills(),

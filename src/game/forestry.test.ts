@@ -22,7 +22,7 @@ test("forestry - an acorn takes grass and becomes a tree", () => {
   const err = commandPlantTree(w, 240, 280);
   assert.equal(err, null);
   const note = plantTreeNow(w);
-  assert.match(String(note), /acorn takes/);
+  assert.match(String(note), /oak takes/);
   assert.equal(w.player.pack.acorn, 2);
   const sap = saplingAt(w, 240, 280);
   assert.ok(sap);
@@ -66,4 +66,30 @@ test("forestry - rain hurries a sapling", () => {
   w.hour += TREE_HOURS * 0.75 + 0.01;
   tickSaplings(w);
   assert.equal(w.tiles[281]![241]!.kind, "tree");
+});
+
+test("forestry - skill picks oak, then redwood, and the grove remembers", () => {
+  const w = grassAt(242, 282);
+  w.player.skills.forestry = 8;
+  commandPlantTree(w, 242, 282);
+  plantTreeNow(w);
+  assert.equal(saplingAt(w, 242, 282)?.resourceId, "oak");
+  w.hour += TREE_HOURS + 0.01;
+  tickSaplings(w);
+  assert.equal(w.plantedTimber["242,282"], "oak");
+
+  w.player.skills.forestry = 50;
+  w.player.pack.acorn = 1;
+  const tile = w.tiles[243]![283]!;
+  tile.kind = "grass";
+  const p = you(w)!;
+  p.x = 243;
+  p.z = 283;
+  commandPlantTree(w, 243, 283);
+  const note = plantTreeNow(w);
+  assert.match(String(note), /redwood/);
+  assert.equal(saplingAt(w, 243, 283)?.resourceId, "redwood");
+  w.hour += TREE_HOURS + 0.01;
+  tickSaplings(w);
+  assert.equal(w.plantedTimber["243,283"], "redwood");
 });

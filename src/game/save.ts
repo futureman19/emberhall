@@ -119,6 +119,10 @@ function isBooleanRecord(value: unknown): boolean {
   return isRecord(value) && Object.values(value).every(isBoolean);
 }
 
+function isStringRecord(value: unknown): boolean {
+  return isRecord(value) && Object.values(value).every(isString);
+}
+
 function isRegistryKey(value: unknown, registry: object): value is string {
   return isString(value) && Object.hasOwn(registry, value);
 }
@@ -383,7 +387,8 @@ function isSapling(value: unknown): boolean {
     isFiniteNumber(value.ty) &&
     isFiniteNumber(value.plantedHour) &&
     isFiniteNumber(value.stage) &&
-    (value.stage === 1 || value.stage === 2 || value.stage === 3)
+    (value.stage === 1 || value.stage === 2 || value.stage === 3) &&
+    (value.resourceId === undefined || isString(value.resourceId))
   );
 }
 
@@ -473,6 +478,7 @@ function isCurrentSave(save: SaveRecord): boolean {
     isArrayOf(save.buildings, isBuilding) &&
     isArrayOf(save.plots, isPlot) &&
     (save.saplings === undefined || isArrayOf(save.saplings, isSapling)) &&
+    (save.plantedTimber === undefined || isStringRecord(save.plantedTimber)) &&
     isPlayer(save.player) &&
     isArrayOf(save.log, isLogLine) &&
     isArrayOf(save.objectives, isObjective) &&
@@ -581,6 +587,7 @@ export function loadSave(): World | null {
     });
     data.tiles = generateTiles(data.seed);
     if (!data.saplings) data.saplings = [];
+    if (!data.plantedTimber) data.plantedTimber = {};
     if (data.scars) {
       for (const [key, scar] of Object.entries(data.scars)) {
         const [x, y] = key.split(",").map(Number);

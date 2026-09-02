@@ -1,6 +1,8 @@
 import { ITEM_META } from "./catalog.ts";
 import { plotAt } from "./farm.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
+import { RESOURCE_CATALOG, RESOURCE_IDS } from "./resources/catalog.ts";
+import type { ResourceId } from "./resources/types.ts";
 import { tryGain } from "./skills.ts";
 import { playSfx } from "./vale-sfx.ts";
 import { completeObjective, log } from "./world.ts";
@@ -12,6 +14,32 @@ export const TREE_HOURS = 1.6;
 
 function you(world: World) {
   return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
+}
+
+/** Plant gate is the catalog extract threshold — new timber joins this ladder automatically. */
+export function plantSkillFor(resourceId: ResourceId) {
+  const spawn = RESOURCE_CATALOG[resourceId].spawn;
+  if (!spawn || spawn.nodeKind !== "tree") return Infinity;
+  return spawn.extractSkill.minimum;
+}
+
+export function timberSpecies(): ResourceId[] {
+  return RESOURCE_IDS.filter((id) => RESOURCE_CATALOG[id].spawn?.nodeKind === "tree").sort(
+    (a, b) => plantSkillFor(a) - plantSkillFor(b),
+  );
+}
+
+export function plantableTimber(forestry: number): ResourceId[] {
+  return timberSpecies().filter((id) => forestry >= plantSkillFor(id));
+}
+
+export function bestPlantableTimber(forestry: number): ResourceId | null {
+  const list = plantableTimber(forestry);
+  return list.at(-1) ?? null;
+}
+
+export function isTimberId(value: string | null | undefined): value is ResourceId {
+  return Boolean(value && timberSpecies().includes(value as ResourceId));
 }
 
 export function saplingAt(world: World, tx: number, ty: number) {
@@ -52,16 +80,21 @@ export function commandPlantTree(world: World, tx: number, ty: number) {
   if (!p) return "You are not in the vale.";
   if (world.player.ghost) return "A ghost cannot.";
   if ((world.player.pack.acorn ?? 0) < 1) return `Need ${ITEM_META.acorn.label.toLowerCase()}.`;
+  const species = bestPlantableTimber(world.player.skills.forestry ?? 0);
+  if (!species) return "Forestry is not yet taught.";
   const err = canPlantTree(world, tx, ty);
   if (err) return err;
-  world.player.intent = { kind: "forest", tx, ty, targetId: null, spell: null };
+  world.player.intent = { kind: "forest", tx, ty, targetId: species, spell: null };
   return pathBeside(world, tx, ty);
 }
 
 export function plantTreeNow(world: World) {
-  const { tx, ty } = world.player.intent;
+  const { tx, ty, targetId } = world.player.intent;
   world.player.intent.kind = "none";
   if ((world.player.pack.acorn ?? 0) < 1) return `Need ${ITEM_META.acorn.label.toLowerCase()}.`;
+  const forestry = world.player.skills.forestry ?? 0;
+  const species = isTimberId(targetId) && forestry >= plantSkillFor(targetId) ? targetId : bestPlantableTimber(forestry);
+  if (!species) return "Forestry is not yet taught.";
   const err = canPlantTree(world, tx, ty);
   if (err) return err;
   world.player.pack.acorn -= 1;
@@ -72,23 +105,30 @@ export function plantTreeNow(world: World) {
     ty,
     plantedHour: world.hour,
     stage: 1,
+    resourceId: species,
   };
   world.saplings.push(sapling);
   playSfx("chop", 0.36);
   completeObjective(world, "forest");
-  const gain = tryGain(world, "forestry", true, true);
-  return gain ? `The acorn takes. ${gain}.` : "The acorn takes the dirt.";
+  const next = timberSpecies().find((id) => plantSkillFor(id) > forestry);
+  const inBand = !next || forestry + 20 >= plantSkillFor(next);
+  const gain = tryGain(world, "forestry", true, inBand);
+  const label = RESOURCE_CATALOG[species].label.toLowerCase();
+  return gain ? `The ${label} takes. ${gain}.` : `The ${label} takes the dirt.`;
 }
 
 function raiseTree(world: World, sapling: Sapling) {
   const tile = world.tiles[sapling.ty]?.[sapling.tx];
+  const species = isTimberId(sapling.resourceId) ? sapling.resourceId : "oak";
   if (tile) {
     tile.kind = "tree";
     world.scars[`${sapling.tx},${sapling.ty}`] = { kind: "tree" };
     world.landRev += 1;
   }
+  if (!world.plantedTimber) world.plantedTimber = {};
+  world.plantedTimber[`${sapling.tx},${sapling.ty}`] = species;
   world.saplings = (world.saplings ?? []).filter((s) => s.id !== sapling.id);
-  log(world, "A sapling stands as a tree.");
+  log(world, `A sapling stands as ${RESOURCE_CATALOG[species].label.toLowerCase()}.`);
 }
 
 export function tickSaplings(world: World) {
@@ -101,4 +141,10 @@ export function tickSaplings(world: World) {
     else if (age >= grow * 0.62) s.stage = 2;
     else s.stage = 1;
   }
+}
+
+export function plantVerbLabel(forestry: number) {
+  const species = bestPlantableTimber(forestry);
+  if (!species) return "Plant acorn";
+  return `Plant ${RESOURCE_CATALOG[species].label.toLowerCase()}`;
 }

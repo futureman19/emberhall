@@ -1,7 +1,7 @@
 import { EH, inGreybarrow } from "./atlas.ts";
 import { FAUNA_META, hasTag, ITEM_META, armorOf, tagConsumeOrder } from "./catalog.ts";
 import { harvestNow, plantNow, tillNow } from "./farm.ts";
-import { plantTreeNow } from "./forestry.ts";
+import { isTimberId, plantTreeNow } from "./forestry.ts";
 import { ARROW_RANGE, FIREBALL_RANGE, burstDeath, castNow, maxMana, tickMana } from "./magery.ts";
 import { pickPetName } from "./names.ts";
 import { petLabel } from "./pets.ts";
@@ -11,7 +11,7 @@ import { mulberry32 } from "./rng.ts";
 import { successChance, tryGain } from "./skills.ts";
 import { addResource, parseResourceInventory } from "./inventory/resources.ts";
 import { COMBAT_BEAT } from "./combat-animation.ts";
-import { assessResourceHarvest, harvestToolTier, type HarvestAssessment } from "./resources/harvest.ts";
+import { assessPlantedTimberHarvest, assessResourceHarvest, harvestToolTier, type HarvestAssessment } from "./resources/harvest.ts";
 import { depleteResourceNode, discoverResourceNode, hasDiscoveredResourceNode } from "./resources/state.ts";
 import { playSfx } from "./vale-sfx.ts";
 import { completeObjective, log } from "./world.ts";
@@ -493,7 +493,8 @@ function prepareResourceHarvest(world: World, nodeKind: "tree" | "rock"): Prepar
     nodeKind,
     resourceNodes: world.resourceNodes,
   });
-  const assessment = assessResourceHarvest({
+  const planted = nodeKind === "tree" ? world.plantedTimber?.[`${tx},${ty}`] : undefined;
+  const harvestInput = {
     seed: world.seed,
     tx,
     ty,
@@ -501,7 +502,11 @@ function prepareResourceHarvest(world: World, nodeKind: "tree" | "rock"): Prepar
     effectiveSkill: effSkill(world, skill),
     discovered,
     toolTier: harvestToolTier({ nodeKind, tool: inHand(world) }),
-  });
+  };
+  const assessment =
+    planted && isTimberId(planted)
+      ? assessPlantedTimberHarvest({ ...harvestInput, resourceId: planted })
+      : assessResourceHarvest(harvestInput);
   const resourceNodesAfterIdentification =
     assessment.status === "unknown"
       ? world.resourceNodes
@@ -650,6 +655,20 @@ function huntNow(world: World, p: Person) {
   return `You strike the ${FAUNA_META[c.kind].label.toLowerCase()}.`;
 }
 
+export interface TamingFx {
+  targetId: string;
+  x: number;
+  z: number;
+  at: number;
+  success: boolean;
+}
+
+let tamingFx: TamingFx | null = null;
+
+export function getTamingFx() {
+  return tamingFx;
+}
+
 function tameNow(world: World, p: Person) {
   const c = world.fauna.find((x) => x.id === world.player.intent.targetId);
   if (!c || c.task === "dead") {
@@ -659,6 +678,7 @@ function tameNow(world: World, p: Person) {
   const diff = FAUNA_META[c.kind].tameDiff;
   const chance = successChance(effSkill(world, "taming"), diff);
   const ok = Math.random() < chance;
+  tamingFx = { targetId: c.id, x: c.x, z: c.z, at: world.hour, success: ok };
   tryGain(world, "taming", ok, chance > 0.3 && chance < 0.8);
   world.player.intent.kind = "none";
   if (!ok) {

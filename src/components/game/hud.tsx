@@ -438,8 +438,8 @@ function HelpPanel() {
         Hold, then the dirt — to smelt ore and beat iron. Raise a farm the same way — eight beds inside a fence. Or open
         Hold and Till a plot on grass. Walk a bed. Click it to sow a seed — cabbage, wheat, garlic. Wait. Click ripe
         green to take the crop and more seed. Farming is a skill. Eat cabbage from You.
-        Acorns in the pack — right-click grass or dirt and Plant acorn. Forestry rises. Wait, and a tree stands. Chopping
-        a tree sometimes drops another acorn.
+        Acorns in the pack — right-click grass or dirt and plant. Forestry starts at oak. At 50 it plants redwood, the
+        rare wood. Chopping a tree sometimes drops another acorn. Chopping still uses lumberjacking.
         Eight stone rings hold the moons. Walk into the
         swirl east of the steps. North of Oakstand the height goes to snow. Wolfhollow is pine and wolf. Hearthfen is peat
         marsh. Southmere is warm thick green. Brinegate is salt and sand. The hall stays green. Tap your region's name up

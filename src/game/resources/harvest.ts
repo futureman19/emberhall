@@ -3,14 +3,15 @@ import { makeResourceStackKey } from "../inventory/resources.ts";
 import type { ItemId, ResourceStackKey } from "../types.ts";
 import { RESOURCE_CATALOG } from "./catalog.ts";
 import { resolveResourceNode, type ResourceNodeKind } from "./nodes.ts";
-import type {
-  GemClarity,
-  GemResourceId,
-  MaterialGrade,
-  MaterialQuality,
-  QualityForResource,
-  ResourceId,
-  ResourceNodeIdentity,
+import {
+  defineResourceNodeIdentity,
+  type GemClarity,
+  type GemResourceId,
+  type MaterialGrade,
+  type MaterialQuality,
+  type QualityForResource,
+  type ResourceId,
+  type ResourceNodeIdentity,
 } from "./types.ts";
 
 export interface HarvestSkillBand<Q extends MaterialQuality> {
@@ -307,7 +308,38 @@ export function harvestToolTier(input: HarvestToolInput): number {
  * two, and every lower skill yields one.
  */
 export function assessResourceHarvest(input: HarvestAssessmentInput): HarvestAssessment {
-  const parsed = parseAssessmentInput(input);
+  return finishAssessment(parseAssessmentInput(input));
+}
+
+/**
+ * A planted tree keeps the catalog family you grew, not the wild roll for that tile.
+ * Identification is skipped (you put it there); extraction skill and tool still apply.
+ */
+export function assessPlantedTimberHarvest(
+  input: HarvestAssessmentInput & { resourceId: ResourceId },
+): HarvestAssessment {
+  const parsed = parseAssessmentInput({
+    seed: input.seed,
+    tx: input.tx,
+    ty: input.ty,
+    nodeKind: input.nodeKind,
+    effectiveSkill: input.effectiveSkill,
+    discovered: true,
+    toolTier: input.toolTier,
+  });
+  const definition = RESOURCE_CATALOG[input.resourceId];
+  if (!definition || definition.kind !== "timber" || !definition.spawn) {
+    throw new Error("planted harvest requires a timber resource with spawn");
+  }
+  const identity = defineResourceNodeIdentity(
+    parsed.identity.nodeId,
+    input.resourceId,
+    parsed.identity.qualityCeiling as MaterialGrade,
+  );
+  return finishAssessment({ ...parsed, identity, discovered: true });
+}
+
+function finishAssessment(parsed: ParsedAssessmentInput): HarvestAssessment {
   const identification = identifiedFromSnapshot(parsed);
   if (identification.status === "unknown") return identification;
 

@@ -3,6 +3,7 @@ import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { useGame } from "@/game/store";
 import { hitAt, hoverAt, leftAt, liftAt } from "@/game/world-pointer";
+import { RESOURCE_CATALOG } from "@/game/resources/catalog";
 import type { CropPlot, Sapling } from "@/game/types";
 
 function Plant({ plot }: { plot: CropPlot }) {
@@ -132,6 +133,8 @@ function YoungTree({ sapling }: { sapling: Sapling }) {
   const marked = intent.kind === "forest" && intent.tx === sapling.tx && intent.ty === sapling.ty;
   const h = sapling.stage === 1 ? 0.28 : sapling.stage === 2 ? 0.55 : 0.9;
   const r = sapling.stage === 1 ? 0.12 : sapling.stage === 2 ? 0.22 : 0.34;
+  const visual = sapling.resourceId && sapling.resourceId in RESOURCE_CATALOG ? RESOURCE_CATALOG[sapling.resourceId as keyof typeof RESOURCE_CATALOG].visual : null;
+  const leaf = marked ? "#8aaa58" : visual?.primary ?? "#5a7040";
   return (
     <group
       position={[sapling.tx, y, sapling.ty]}
@@ -151,7 +154,7 @@ function YoungTree({ sapling }: { sapling: Sapling }) {
       </mesh>
       <mesh position={[0, h + r * 0.4, 0]} castShadow>
         <boxGeometry args={[r * 2, r, r * 2]} />
-        <meshStandardMaterial color={marked ? "#8aaa58" : "#5a7040"} roughness={0.82} />
+        <meshStandardMaterial color={leaf} roughness={0.82} />
       </mesh>
     </group>
   );
