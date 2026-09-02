@@ -1,13 +1,15 @@
+import { Html } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import { Quaternion, type Group, type Mesh, type MeshBasicMaterial } from "three";
-import { CLASS_META } from "@/game/catalog";
+import { CLASS_META, SECONDS_PER_HOUR } from "@/game/catalog";
+import { HEALING_DURATION, healingPose } from "@/game/healing-animation";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { SLOT_ANCHOR, partsById } from "@/game/look/parts.ts";
 import { resolveLook } from "@/game/look/resolve.ts";
 import type { ResolvedLook } from "@/game/look/resolve.ts";
-import { workPitch } from "@/game/player";
+import { getHealingFx, workPitch } from "@/game/player";
 import { attackPhase, bowDrawAmount, meleeSwingPitch } from "@/game/combat-animation";
 import { useGame } from "@/game/store";
 import type { ItemId, Person, WearSlot } from "@/game/types";
@@ -350,20 +352,133 @@ function PalmFlame() {
   );
 }
 
+function BandageWrap() {
+  const group = useRef<Group>(null);
+  useFrame(() => {
+    const wrap = group.current;
+    if (!wrap) return;
+    const fx = getHealingFx();
+    const age = fx ? (getWorld().hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const pose = healingPose(age);
+    wrap.visible = pose.wrap > 0;
+    if (!wrap.visible) return;
+    wrap.rotation.y = age * 5.5;
+    wrap.scale.setScalar(0.82 + pose.wrap * 0.22);
+  });
+  return (
+    <group ref={group} visible={false} renderOrder={7}>
+      <mesh position={[0, 0.5, 0]} rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[0.34, 0.065, 8, 24]} />
+        <meshBasicMaterial color="#fff8e7" transparent opacity={0.92} depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      <mesh position={[0, 0.72, 0]} rotation={[Math.PI / 2, 0.22, 0]}>
+        <torusGeometry args={[0.32, 0.06, 8, 24]} />
+        <meshBasicMaterial color="#ece6d8" transparent opacity={0.9} depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      <mesh position={[0.28, 0.48, 0.04]} rotation={[0.2, 0, -0.35]}>
+        <boxGeometry args={[0.12, 0.58, 0.055]} />
+        <meshBasicMaterial color="#fff8e7" transparent opacity={0.9} depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      <mesh position={[0, 0.82, -0.16]} rotation={[0, 0, 0.72]}>
+        <boxGeometry args={[0.52, 0.09, 0.045]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={0.92} depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      <mesh position={[0, 0.82, -0.15]} rotation={[0, 0, -0.72]}>
+        <boxGeometry args={[0.52, 0.09, 0.045]} />
+        <meshBasicMaterial color="#ece6d8" transparent opacity={0.9} depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      <mesh renderOrder={8} position={[0, 0.62, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.46, 0.59, 28, 1, 0.2, 4.8]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={0.88} depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      <mesh renderOrder={8} position={[0, 0.86, 0]} rotation={[-Math.PI / 2, 0, Math.PI]}>
+        <ringGeometry args={[0.4, 0.52, 24, 1, 0.35, 4.4]} />
+        <meshBasicMaterial color="#fff8e7" transparent opacity={0.82} depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      <group position={[0.72, 1.48, 0]} rotation={[0, 0, Math.PI / 2]}>
+        <mesh renderOrder={9}>
+          <cylinderGeometry args={[0.32, 0.32, 0.68, 16]} />
+          <meshBasicMaterial color="#ffffff" depthWrite={false} depthTest={false} toneMapped={false} />
+        </mesh>
+        <mesh renderOrder={10} position={[0, 0.345, 0]}>
+          <cylinderGeometry args={[0.13, 0.13, 0.02, 14]} />
+          <meshBasicMaterial color="#8a8d90" depthWrite={false} depthTest={false} toneMapped={false} />
+        </mesh>
+      </group>
+      <mesh renderOrder={9} position={[0.24, 1.26, 0]} rotation={[0, 0, -0.3]}>
+        <boxGeometry args={[1.05, 0.17, 0.07]} />
+        <meshBasicMaterial color="#fff8e7" depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+    </group>
+  );
+}
+
+function BandageBillboard() {
+  const label = useRef<HTMLDivElement>(null);
+  useFrame(() => {
+    const element = label.current;
+    if (!element) return;
+    const fx = getHealingFx();
+    const age = fx ? (getWorld().hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const pose = healingPose(age);
+    const visible = age >= 0 && age < HEALING_DURATION && pose.wrap > 0;
+    element.style.display = visible ? "grid" : "none";
+    if (!visible) return;
+    element.style.opacity = String(Math.min(1, pose.wrap * 1.35));
+    element.style.transform = `scale(${0.9 + pose.wrap * 0.12})`;
+  });
+  return (
+    <Html position={[0, 3.2, 0]} center zIndexRange={[40, 0]} style={{ pointerEvents: "none" }}>
+      <div
+        ref={label}
+        style={{
+          display: "none",
+          placeItems: "center",
+          gap: 3,
+          minWidth: 72,
+          padding: "5px 8px",
+          border: "1px solid rgba(255, 211, 106, 0.75)",
+          borderRadius: 8,
+          background: "rgba(20, 18, 15, 0.86)",
+          boxShadow: "0 4px 16px rgba(0, 0, 0, 0.45)",
+          color: "#fff8e7",
+          fontFamily: "serif",
+          fontSize: 9,
+          fontWeight: 700,
+          letterSpacing: "0.12em",
+          textTransform: "uppercase",
+          transformOrigin: "center",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", height: 16 }}>
+          <div style={{ width: 22, height: 14, borderRadius: 7, background: "#fff", border: "2px solid #d8d4cc", boxShadow: "inset 0 0 0 4px #8a8d90" }} />
+          <div style={{ width: 26, height: 7, marginLeft: -2, borderRadius: "0 4px 4px 0", background: "#fff8e7", transform: "rotate(-8deg)", transformOrigin: "left center" }} />
+        </div>
+        <span>Bandaging</span>
+      </div>
+    </Html>
+  );
+}
+
 function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Partial<Record<WearSlot, ItemId>> }) {
   const ghost = Boolean(p.ghost);
-  const intent = useGame((s) => s.snap.player.intent);
   const bob = Math.sin(p.bob) * (ghost ? 0.08 : 0.04);
   const walkSwing = p.path.length ? Math.sin(p.bob) * 0.35 : 0;
   const root = useRef<Group>(null);
   const left = useRef<Group>(null);
   const right = useRef<Group>(null);
+  const held = useRef<Group>(null);
   useFrame(() => {
     if (!p.isPlayer) return;
     const w = getWorld();
     const you = w.people.find((x) => x.isPlayer);
+    const healFx = getHealingFx();
+    const healAge = healFx ? (w.hour - healFx.at) * SECONDS_PER_HOUR : Infinity;
+    const healPose = healingPose(healAge);
+    const healing = healAge >= 0 && healAge < HEALING_DURATION && healPose.wrap > 0;
     if (you && root.current) {
-      root.current.position.set(you.x, groundAt(you.x, you.z) + (you.ghost ? 0.32 : 0), you.z);
+      root.current.position.set(you.x, groundAt(you.x, you.z) + (you.ghost ? 0.32 : 0) - healPose.crouch, you.z);
+      root.current.rotation.x = healPose.lean;
       root.current.rotation.y = you.facing;
     }
     const it = w.player.intent;
@@ -373,8 +488,11 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
     const hunting = idle && it.kind === "hunt";
     const bowing = hunting && w.player.wear.main === "bow";
     const draw = bowing ? bowDrawAmount(w.player.workT) : 0;
+    if (held.current) held.current.visible = !casting && !healing;
     if (left.current) {
-      if (casting) {
+      if (healing) {
+        left.current.rotation.set(0.98, 0.48, 1.02);
+      } else if (casting) {
         const u = Math.min(1, w.player.workT / 0.26);
         const e = u * u * (3 - 2 * u);
         left.current.rotation.set(walkSwing * (1 - e) + 1.1 * e, 0.28 * e, 0.12 * (1 - e) + 1.08 * e);
@@ -387,7 +505,9 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
       }
     }
     if (right.current) {
-      if (chopping) {
+      if (healing) {
+        right.current.rotation.set(1.08, -0.5, -1.02);
+      } else if (chopping) {
         const pitch = workPitch(w.player.workT);
         right.current.rotation.set(pitch, 0.18, -0.22);
       } else if (casting) {
@@ -474,7 +594,7 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
           <boxGeometry args={[0.12, 0.1, 0.12]} />
           <Mat color={hands} ghost={ghost} />
         </mesh>
-        {p.isPlayer && wear.main && intent.kind !== "cast" && <Held id={wear.main} ghost={ghost} />}
+        <group ref={held}>{p.isPlayer && wear.main && <Held id={wear.main} ghost={ghost} />}</group>
         {p.isPlayer && !ghost && <PalmFlame />}
       </group>
       <mesh position={[0, 0.98 + bob, 0]} castShadow={!ghost}>
@@ -516,6 +636,8 @@ function Figure({ p, selected, wear }: { p: Person; selected: boolean; wear: Par
           </mesh>
         ));
       })}
+      {p.isPlayer && !ghost && <BandageWrap />}
+      {p.isPlayer && !ghost && <BandageBillboard />}
       {p.isPlayer && !ghost && <MeleeSwingArc />}
       {selected && (
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.04, 0]}>

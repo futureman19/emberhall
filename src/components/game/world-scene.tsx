@@ -6,11 +6,12 @@ import { COURT, VIEW } from "@/game/atlas";
 import { cameraFixedHeight, cameraLockedAxis } from "@/game/camera-follow";
 import { SECONDS_PER_HOUR } from "@/game/catalog";
 import { projectileProgress, spellProjectileProfile, travelEffectProfile } from "@/game/combat-animation";
+import { HEALING_DURATION, healingPulse } from "@/game/healing-animation";
 import { groundY as heightAt } from "@/game/height";
 import { getGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
 import { getWorld } from "@/game/live";
 import { getCastFx, getDeathFx, getFizzleFx } from "@/game/magery";
-import { getChips, getCombatFx } from "@/game/player";
+import { getChips, getCombatFx, getHealingFx } from "@/game/player";
 import { useGame } from "@/game/store";
 import { hoverAt, leftAt, liftAt } from "@/game/world-pointer";
 import { Buildings } from "./building-meshes";
@@ -466,6 +467,52 @@ function FizzleFxMesh() {
   );
 }
 
+function HealingFxMesh() {
+  const group = useRef<THREE.Group>(null);
+  const ring = useRef<THREE.Mesh>(null);
+  useFrame(() => {
+    const fx = getHealingFx();
+    const g = group.current;
+    const ringMesh = ring.current;
+    if (!g || !ringMesh) return;
+    const age = fx ? (getWorld().hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const visible = Boolean(fx && age >= 0 && age < HEALING_DURATION);
+    g.visible = visible;
+    if (!fx || !visible) return;
+    const t = projectileProgress(age, HEALING_DURATION);
+    const pulse = healingPulse(age);
+    const y = groundY(fx.x, fx.z);
+    g.position.set(fx.x, y, fx.z);
+    ringMesh.scale.setScalar(0.75 + t * 2.1);
+    const ringMaterial = ringMesh.material as THREE.MeshBasicMaterial;
+    ringMaterial.opacity = pulse * 0.82;
+    for (let index = 1; index < Math.min(6, g.children.length); index += 1) {
+      const mote = g.children[index] as THREE.Mesh;
+      const angle = (index / 5) * Math.PI * 2 + age * 2.8;
+      const radius = 0.32 + index * 0.055;
+      mote.position.set(Math.cos(angle) * radius, 0.34 + t * (1 + index * 0.12), Math.sin(angle) * radius);
+      mote.scale.setScalar(0.9 + pulse * 1.15);
+      const material = mote.material as THREE.MeshBasicMaterial;
+      material.opacity = pulse * (index % 2 ? 0.95 : 0.72);
+    }
+  });
+  return (
+    <group ref={group} visible={false}>
+      <mesh ref={ring} renderOrder={7} position={[0, 0.08, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.28, 0.46, 24]} />
+        <meshBasicMaterial color="#ffd36a" transparent depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      {[0, 1, 2, 3, 4].map((index) => (
+        <mesh key={index} renderOrder={8}>
+          <sphereGeometry args={[index % 2 ? 0.21 : 0.15, 8, 6]} />
+          <meshBasicMaterial color={index % 2 ? "#fff8e7" : "#ffd36a"} transparent depthWrite={false} depthTest={false} toneMapped={false} />
+        </mesh>
+      ))}
+      <pointLight color="#ffd36a" intensity={1.1} distance={2.4} />
+    </group>
+  );
+}
+
 function CombatFxMesh() {
   const arrow = useRef<THREE.Group>(null);
   const impact = useRef<THREE.Mesh>(null);
@@ -650,6 +697,7 @@ export function WorldScene() {
       <CastFxMesh />
       <TravelFxMesh />
       <FizzleFxMesh />
+      <HealingFxMesh />
       <CombatFxMesh />
       <DeathFxMesh />
       <ChipBits />

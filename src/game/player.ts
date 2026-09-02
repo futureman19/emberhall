@@ -407,6 +407,19 @@ export function commandUnequip(world: World, slot: WearSlot) {
   return slot === "main" || slot === "off" ? "You put it away." : "Off.";
 }
 
+export interface HealingFx {
+  x: number;
+  z: number;
+  at: number;
+  amount: number;
+}
+
+let healingFx: HealingFx | null = null;
+
+export function getHealingFx() {
+  return healingFx;
+}
+
 export function commandHeal(world: World) {
   const dead = hands(world);
   if (dead) return dead;
@@ -414,7 +427,9 @@ export function commandHeal(world: World) {
   if (!p) return "You are not in the vale.";
   if ((world.player.pack.bandage ?? 0) < 1) return "Need a bandage.";
   world.player.pack.bandage -= 1;
+  const before = p.hp;
   p.hp = Math.min(p.maxHp, p.hp + 8 + Math.floor(effSkill(world, "healing") / 10));
+  healingFx = { x: p.x, z: p.z, at: world.hour, amount: p.hp - before };
   tryGain(world, "healing", true, true);
   return "The cloth holds.";
 }

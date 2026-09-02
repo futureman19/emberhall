@@ -191,6 +191,27 @@ async function castFizzle(page) {
   });
 }
 
+async function runBandage(page) {
+  return page.evaluate(() => {
+    const world = window.__ember.getWorld();
+    const store = window.__ember.useGame.getState();
+    const patient = world.people.find((person) => person.isPlayer);
+    if (!patient) throw new Error("healing smoke needs a patient");
+    world.hour += 0.7 / 36;
+    patient.hp = 8;
+    world.player.pack.bandage = 3;
+    world.player.skills.healing = 20;
+    const before = { hp: patient.hp, bandages: world.player.pack.bandage };
+    store.heal();
+    world.hour += 0.4 / 36;
+    return {
+      before,
+      after: { hp: patient.hp, bandages: world.player.pack.bandage },
+      toast: window.__ember.useGame.getState().toast,
+    };
+  });
+}
+
 for (const viewport of [
   { name: "desktop", width: 1280, height: 800 },
   { name: "mobile", width: 390, height: 844 },
@@ -254,6 +275,14 @@ for (const viewport of [
   await page.screenshot({ path: fizzle });
   if (!String(fizzleToast).includes("fizzles")) throw new Error(`${viewport.name}: fizzle did not resolve`);
 
+  const healingResult = await runBandage(page);
+  await page.waitForTimeout(80);
+  const healing = path.join(outputDir, `animation-healing-${viewport.name}.png`);
+  await page.screenshot({ path: healing });
+  if (healingResult.after.bandages !== healingResult.before.bandages - 1) throw new Error(`${viewport.name}: bandage was not consumed`);
+  if (healingResult.after.hp <= healingResult.before.hp) throw new Error(`${viewport.name}: bandage did not restore health`);
+  if (!String(healingResult.toast).toLowerCase().includes("cloth holds")) throw new Error(`${viewport.name}: healing feedback was not surfaced`);
+
   if (consoleErrors.length || pageErrors.length) {
     throw new Error(`${viewport.name} browser errors: ${JSON.stringify({ consoleErrors, pageErrors })}`);
   }
@@ -261,7 +290,7 @@ for (const viewport of [
     viewport: viewport.name,
     meleeDamage: melee.hp - meleeAfter,
     arrowDamage: bow.hp - bowAfter,
-    screenshots: { meleeWindup, meleeImpact, bowDraw, arrowFlight, magicArrow, fireball, teleport, recall, fizzle },
+    screenshots: { meleeWindup, meleeImpact, bowDraw, arrowFlight, magicArrow, fireball, teleport, recall, fizzle, healing },
     consoleErrors,
     pageErrors,
   });
