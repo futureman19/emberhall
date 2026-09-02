@@ -2,7 +2,31 @@ import { ITEM_META, SHOP_STOCK } from "./catalog.ts";
 import { isGhost, resurrect, you } from "./player.ts";
 import { appraiseRare, rareName } from "./rare.ts";
 import { completeObjective, log } from "./world.ts";
-import type { ItemId, World } from "./types.ts";
+import type { ItemId, NpcRole, World } from "./types.ts";
+
+/** Same reach as talk — UO bank is the tile under the banker, not the whole town. */
+export const BANK_RANGE = 2.4;
+/** Classic UO bank box: 125 items. A stack is one item. */
+export const BANK_SLOTS = 125;
+
+export function nearNpcRole(world: World, role: NpcRole, range = BANK_RANGE) {
+  const self = you(world);
+  if (!self) return false;
+  return world.people.some((p) => p.role === role && Math.hypot(self.x - p.x, self.z - p.z) <= range);
+}
+
+export function chestSlots(chest: Partial<Record<string, number>> | undefined) {
+  let n = 0;
+  if (!chest) return 0;
+  for (const v of Object.values(chest)) if ((v ?? 0) > 0) n += 1;
+  return n;
+}
+
+function bankHands(world: World) {
+  if (isGhost(world)) return "The box is for the living.";
+  if (!nearNpcRole(world, "banker")) return "The banker is not here.";
+  return null;
+}
 
 export function commandApproach(world: World, id: string) {
   const t = world.people.find((p) => p.id === id);
@@ -79,32 +103,49 @@ export function commandSellRare(world: World, uid: string) {
 }
 
 export function commandDeposit(world: World, n: number) {
-  if (isGhost(world)) return "A ghost cannot.";
+  const err = bankHands(world);
+  if (err) return err;
   if (n < 1 || world.gold < n) return "Not that much in the purse.";
   world.gold -= n;
   world.player.vault += n;
   return `The box holds ${world.player.vault} gold.`;
 }
 
+/** UO "bank": all carried gold goes in; empty purse still names the balance. */
+export function commandBankGold(world: World) {
+  const err = bankHands(world);
+  if (err) return err;
+  if (world.gold < 1) return `The box holds ${world.player.vault} gold.`;
+  return commandDeposit(world, world.gold);
+}
+
 export function commandWithdraw(world: World, n: number) {
+  const err = bankHands(world);
+  if (err) return err;
   if (n < 1 || world.player.vault < n) return "The box has not that much.";
   world.player.vault -= n;
   world.gold += n;
   return `Purse ${world.gold}.`;
 }
 
-export function commandBankItem(world: World, item: ItemId) {
-  const n = world.player.pack[item] ?? 0;
-  if (n < 1) return "You do not carry that.";
-  world.player.pack[item] = n - 1;
-  world.player.chest[item] = (world.player.chest[item] ?? 0) + 1;
+export function commandBankItem(world: World, item: ItemId, n = 1) {
+  const err = bankHands(world);
+  if (err) return err;
+  const have = world.player.pack[item] ?? 0;
+  if (n < 1 || have < n) return "You do not carry that.";
+  const had = world.player.chest[item] ?? 0;
+  if (had < 1 && chestSlots(world.player.chest) >= BANK_SLOTS) return "The box is full.";
+  world.player.pack[item] = have - n;
+  world.player.chest[item] = had + n;
   return "Into the box.";
 }
 
-export function commandUnbankItem(world: World, item: ItemId) {
-  const n = world.player.chest[item] ?? 0;
-  if (n < 1) return "The box has none.";
-  world.player.chest[item] = n - 1;
-  world.player.pack[item] = (world.player.pack[item] ?? 0) + 1;
+export function commandUnbankItem(world: World, item: ItemId, n = 1) {
+  const err = bankHands(world);
+  if (err) return err;
+  const have = world.player.chest[item] ?? 0;
+  if (n < 1 || have < n) return "The box has none.";
+  world.player.chest[item] = have - n;
+  world.player.pack[item] = (world.player.pack[item] ?? 0) + n;
   return "Out of the box.";
 }

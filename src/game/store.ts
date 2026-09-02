@@ -16,6 +16,7 @@ import { commandCast, forgetMark, SPELL_META, hasBook } from "./magery.ts";
 import type { CastTarget } from "./magery.ts";
 import {
   commandApproach,
+  commandBankGold,
   commandBankItem,
   commandBuy,
   commandDeposit,
@@ -118,8 +119,9 @@ interface GameUI {
   sellRare: (uid: string) => void;
   deposit: (n: number) => void;
   withdraw: (n: number) => void;
-  bankItem: (item: ItemId) => void;
-  unbankItem: (item: ItemId) => void;
+  bankGold: () => void;
+  bankItem: (item: ItemId, n?: number) => void;
+  unbankItem: (item: ItemId, n?: number) => void;
   openPile: (id: string) => void;
   takePile: (id: string, item?: ItemId) => void;
   takePileGold: (id: string) => void;
@@ -577,13 +579,18 @@ export const useGame = create<GameUI>((set, get) => ({
     if (err) get().flash(err);
     set({ snap: snapshot() });
   },
-  bankItem: (item) => {
-    const err = commandBankItem(getWorld(), item);
+  bankGold: () => {
+    const err = commandBankGold(getWorld());
     if (err) get().flash(err);
     set({ snap: snapshot() });
   },
-  unbankItem: (item) => {
-    const err = commandUnbankItem(getWorld(), item);
+  bankItem: (item, n) => {
+    const err = commandBankItem(getWorld(), item, n);
+    if (err) get().flash(err);
+    set({ snap: snapshot() });
+  },
+  unbankItem: (item, n) => {
+    const err = commandUnbankItem(getWorld(), item, n);
     if (err) get().flash(err);
     set({ snap: snapshot() });
   },

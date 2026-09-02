@@ -428,7 +428,8 @@ function HelpPanel() {
         sits in your Hand. Tap the Hand to put it away. Chop needs the hatchet held. Mine needs the pick. Farm needs the
         hoe. The book in the pack is magery. Open it. Right-click a tamed beast and Care opens its loyalty and whereabouts.
         Mark writes this dirt on a rune. Walk off. Tap the mark — Recall folds you back. The moons still hold. Towns keep
-        a banker, a healer, a stall. Die and you walk pale — Ione at the hall can return you. Your corpse keeps what it
+        a banker, a healer, a stall. Click Old Pell or Odo — the box is your bank. Gold and goods in the box stay when you
+        die. Die and you walk pale — Ione at the hall can return you. Your corpse keeps what it
         took until you come back living. Right-click the hall to read the roster — who has joined, who might. Open
         Hold to raise timber on the dirt — dorm, kitchen, forge, tavern. Walk
         through a door and the roof goes thin so you can see the room. The yard saws logs into boards. Raise a forge —
