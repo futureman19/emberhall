@@ -20,6 +20,7 @@ function bareWorld(seed = 7): World {
     campfires: [],
     buildings: [],
     plots: [],
+    saplings: [],
     player: {
       id: "p1",
       skills: emptySkills(),

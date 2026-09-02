@@ -42,6 +42,7 @@ export type SkillId =
   | "taming"
   | "magery"
   | "farming"
+  | "forestry"
   // Placeholders — on the books, not yet taught. Mechanics arrive one
   // window at a time; until then they sit at zero and gain nothing.
   | "alchemy"
@@ -114,7 +115,8 @@ export type ItemId =
   | "stew"
   | "cabbage_seed"
   | "wheat_seed"
-  | "garlic_seed";
+  | "garlic_seed"
+  | "acorn";
 
 export type WearSlot =
   | "head"
@@ -242,7 +244,7 @@ export type BuildingKind =
   | "cottage";
 export type VocationId = "cook" | "armourer" | "trader" | "recruiter" | "guard";
 export type Notoriety = "innocent" | "criminal" | "murderer";
-export type IntentKind = "walk" | "chop" | "mine" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "till" | "none";
+export type IntentKind = "walk" | "chop" | "mine" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "till" | "forest" | "none";
 export type Speed = 0 | 1 | 2 | 3;
 export type PanelId = "none" | "help" | "you" | "journal" | "vale" | "roster" | "build";
 export type WeatherKind = "clear" | "fair" | "cloudy" | "rain" | "storm";
@@ -378,6 +380,14 @@ export interface CropPlot {
   stage: 0 | 1 | 2 | 3;
 }
 
+export interface Sapling {
+  id: string;
+  tx: number;
+  ty: number;
+  plantedHour: number;
+  stage: 1 | 2 | 3;
+}
+
 export interface Objective {
   id: string;
   text: string;
@@ -464,6 +474,7 @@ export interface World {
   campfires: Campfire[];
   buildings: Building[];
   plots: CropPlot[];
+  saplings: Sapling[];
   player: PlayerState;
   log: LogLine[];
   objectives: Objective[];
@@ -493,6 +504,7 @@ export interface Snapshot {
   people: Person[];
   buildings: Building[];
   plots: CropPlot[];
+  saplings: Sapling[];
   quests: { id: string; title: string }[];
   log: LogLine[];
   rep: Record<string, number>;
@@ -544,7 +556,8 @@ export type CtxVerb =
   | "till"
   | "sowCabbage"
   | "sowWheat"
-  | "sowGarlic";
+  | "sowGarlic"
+  | "sowAcorn";
 
 export interface CtxTarget {
   kind: CtxKind;

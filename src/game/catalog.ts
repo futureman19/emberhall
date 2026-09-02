@@ -27,6 +27,7 @@ export const SKILL_META: Record<SkillId, { label: string }> = {
   taming: { label: "Animal Taming" },
   magery: { label: "Magery" },
   farming: { label: "Farming" },
+  forestry: { label: "Forestry" },
   alchemy: { label: "Alchemy" },
   archery: { label: "Archery" },
   cartography: { label: "Cartography" },
@@ -54,6 +55,7 @@ export const LIVE_SKILLS: SkillId[] = [
   "taming",
   "magery",
   "farming",
+  "forestry",
   "archery",
 ];
 
@@ -118,6 +120,7 @@ export const ITEM_META: Record<
   cabbage_seed: { label: "Cabbage seed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 2, sell: 1, tags: ["seed", "plant"] },
   wheat_seed: { label: "Wheat seed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 2, sell: 1, tags: ["seed", "plant"] },
   garlic_seed: { label: "Garlic seed", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 3, sell: 1, tags: ["seed", "plant"] },
+  acorn: { label: "Acorn", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 3, sell: 1, tags: ["seed", "plant"] },
 };
 
 export const CLASS_META: Record<ClassId, { label: string; color: string }> = {
@@ -234,7 +237,7 @@ export const NOTORIETY_META: Record<Notoriety, { label: string }> = {
 export const SHOP_STOCK: ItemId[] = [
   "hatchet", "pick", "hoe", "knife", "bandage", "tunic", "hood", "cloak", "boots",
   "rune", "garlic", "ginseng", "silk", "pearl", "moss", "mandrake", "ash", "cabbage", "wheat",
-  "cabbage_seed", "wheat_seed", "garlic_seed",
+  "cabbage_seed", "wheat_seed", "garlic_seed", "acorn",
 ];
 
 export function emptySkills(): Record<SkillId, number> {
@@ -250,6 +253,7 @@ export function emptySkills(): Record<SkillId, number> {
     taming: 14,
     magery: 8,
     farming: 10,
+    forestry: 8,
     alchemy: 0,
     archery: 0,
     cartography: 0,
@@ -268,7 +272,7 @@ export function emptySkills(): Record<SkillId, number> {
 export function emptyLastGain(): Record<SkillId, number> {
   return {
     swords: 0, lumberjack: 0, mining: 0, anatomy: 0, healing: 0,
-    cooking: 0, smithing: 0, carpentry: 0, taming: 0, magery: 0, farming: 0,
+    cooking: 0, smithing: 0, carpentry: 0, taming: 0, magery: 0, farming: 0, forestry: 0,
     alchemy: 0, archery: 0, cartography: 0, fencing: 0,
     lockpicking: 0, mace: 0, music: 0, poisoning: 0,
     stealing: 0, tailoring: 0, tinkering: 0, tracking: 0,
@@ -285,7 +289,7 @@ export function emptyPack(): Record<ItemId, number> {
     boots: 0, pendant: 1, ring: 1, relic: 0, spellbook: 1, rune: 4, garlic: 12, ginseng: 12,
     silk: 16, nightshade: 4, pearl: 14, moss: 10, mandrake: 10, ash: 12, cabbage: 2, wheat: 0,
     cooked_meat: 0, bread: 0, stew: 0,
-    cabbage_seed: 8, wheat_seed: 6, garlic_seed: 4,
+    cabbage_seed: 8, wheat_seed: 6, garlic_seed: 4, acorn: 6,
   };
 }
 

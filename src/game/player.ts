@@ -1,6 +1,7 @@
 import { EH, inGreybarrow } from "./atlas.ts";
 import { FAUNA_META, hasTag, ITEM_META, armorOf, tagConsumeOrder } from "./catalog.ts";
 import { harvestNow, plantNow, tillNow } from "./farm.ts";
+import { plantTreeNow } from "./forestry.ts";
 import { ARROW_RANGE, FIREBALL_RANGE, burstDeath, castNow, maxMana, tickMana } from "./magery.ts";
 import { pickPetName } from "./names.ts";
 import { petLabel } from "./pets.ts";
@@ -49,7 +50,7 @@ function hands(world: World) {
 const SPILL: ItemId[] = [
   "log", "board", "ore", "meat", "hide", "ingot", "club", "shield",
   "garlic", "ginseng", "silk", "pearl", "moss", "mandrake", "ash", "nightshade",
-  "cabbage", "wheat", "cabbage_seed", "wheat_seed", "garlic_seed",
+  "cabbage", "wheat", "cabbage_seed", "wheat_seed", "garlic_seed", "acorn",
 ];
 
 const TAME_RETALIATE: ReadonlySet<string> = new Set([
@@ -558,7 +559,10 @@ function resourceHarvestNow(world: World, nodeKind: "tree" | "rock", prepared: P
   t.kind = "dirt";
   world.scars[`${tx},${ty}`] = { kind: "dirt" };
   world.landRev += 1;
-  if (nodeKind === "tree") completeObjective(world, "chop");
+  if (nodeKind === "tree") {
+    completeObjective(world, "chop");
+    if (Math.random() < 0.28) world.player.pack.acorn = (world.player.pack.acorn ?? 0) + 1;
+  }
   world.player.intent.kind = "none";
   const gain = tryGain(world, skill, true, true);
   return gain ? `${assessment.message} ${gain}.` : assessment.message;
@@ -842,7 +846,7 @@ export function tickPlayer(world: World, dt: number): string | null {
     intent.kind = "none";
     return null;
   }
-  if (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till") {
+  if (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till" || intent.kind === "forest") {
     p.facing = Math.atan2(intent.tx - p.x, intent.ty - p.z);
     const prev = world.player.workT;
     world.player.workT += dt;
@@ -855,6 +859,10 @@ export function tickPlayer(world: World, dt: number): string | null {
     if (intent.kind === "plant") {
       burstChips(world, intent.tx, intent.ty, "chop");
       return plantNow(world);
+    }
+    if (intent.kind === "forest") {
+      burstChips(world, intent.tx, intent.ty, "chop");
+      return plantTreeNow(world);
     }
     if (intent.kind === "harvest") {
       burstChips(world, intent.tx, intent.ty, "chop");

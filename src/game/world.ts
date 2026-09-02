@@ -301,6 +301,7 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
     campfires: [],
     buildings: [],
     plots: [],
+    saplings: [],
     player: {
       id: "",
       skills: emptySkills(),
@@ -327,6 +328,7 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
     log: [],
     objectives: [
       { id: "chop", text: "Chop a tree with your hatchet", done: false },
+      { id: "forest", text: "Plant an acorn on grass or dirt", done: false },
       { id: "plank", text: "Saw a log into boards at the yard", done: false },
       { id: "smelt", text: "Smelt ore at a forge", done: false },
       { id: "smith", text: "Beat ingot into a tool at the fire", done: false },

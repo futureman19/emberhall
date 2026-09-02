@@ -17,6 +17,7 @@ function withFauna(w: World) {
   if (!w.piles) w.piles = [];
   if (!w.campfires) w.campfires = [];
   if (!w.plots) w.plots = [];
+  if (!w.saplings) w.saplings = [];
   if (w.buildings) {
     for (const b of w.buildings) if (b.kind === "farm") seedFarmPlots(w, b.tx, b.ty);
   }
@@ -54,6 +55,7 @@ function withFauna(w: World) {
       { id: "till", text: "Till a plot of land", done: false },
       { id: "plant", text: "Sow a seed in a bed", done: false },
       { id: "harvest", text: "Take a crop from the dirt", done: false },
+      { id: "forest", text: "Plant an acorn on grass or dirt", done: false },
     ];
     for (const e of extra) {
       if (!w.objectives.some((o) => o.id === e.id)) w.objectives.push(e);
@@ -110,6 +112,7 @@ export function snapshot(w: World = world): Snapshot {
     people: visible,
     buildings: w.buildings,
     plots: w.plots ?? [],
+    saplings: w.saplings ?? [],
     quests: w.quests,
     log: w.log.slice(0, 12),
     rep: { ...w.rep },

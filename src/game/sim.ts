@@ -2,6 +2,7 @@ import { COURT, GATE, placeById } from "./atlas.ts";
 import { SECONDS_PER_HOUR } from "./catalog.ts";
 import { tickEcology } from "./ecology.ts";
 import { tickCrops } from "./farm.ts";
+import { tickSaplings } from "./forestry.ts";
 import { astar, lineWalkable, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { tickPiles } from "./piles.ts";
 import { tickCampfires } from "./campfire.ts";
@@ -151,6 +152,7 @@ export function tickWorld(world: World, realDt: number) {
   if (note) log(world, note);
   tickWeather(world, dt);
   tickCrops(world);
+  tickSaplings(world);
   tickEcology(world, dt);
   tickPiles(world);
   tickCampfires(world);

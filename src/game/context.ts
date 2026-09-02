@@ -67,6 +67,9 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
       }
     } else if (tile && (tile.kind === "grass" || tile.kind === "dirt" || tile.kind === "sand" || tile.kind === "road")) {
       out.push({ verb: "till", label: "Till a plot" });
+      if ((tile.kind === "grass" || tile.kind === "dirt") && (w.player.pack.acorn ?? 0) > 0) {
+        out.push({ verb: "sowAcorn", label: "Plant acorn" });
+      }
     }
     if (hasBook(w)) out.push({ verb: "teleport", label: "Teleport here" });
   }

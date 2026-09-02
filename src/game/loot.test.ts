@@ -199,8 +199,8 @@ test("care - your own beast offers the Companions page, a wild one does not", ()
 test("skills - the books hold every surviving skill, placeholders at zero", () => {
   const w = createWorld();
   const ids = Object.keys(SKILL_META) as SkillId[];
-  assert.equal(ids.length, 23, "12 live + 11 placeholders");
-  assert.equal(LIVE_SKILLS.length, 12);
+  assert.equal(ids.length, 24, "13 live + 11 placeholders");
+  assert.equal(LIVE_SKILLS.length, 13);
   for (const id of ids) {
     assert.equal(typeof w.player.skills[id], "number", `${id} on the books`);
     if (!LIVE_SKILLS.includes(id)) assert.equal(w.player.skills[id], 0, `${id} starts untaught`);

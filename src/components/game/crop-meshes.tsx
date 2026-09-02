@@ -3,7 +3,7 @@ import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { useGame } from "@/game/store";
 import { hitAt, hoverAt, leftAt, liftAt } from "@/game/world-pointer";
-import type { CropPlot } from "@/game/types";
+import type { CropPlot, Sapling } from "@/game/types";
 
 function Plant({ plot }: { plot: CropPlot }) {
   const y = groundY(getWorld(), plot.tx, plot.ty);
@@ -126,14 +126,49 @@ function TillGhost() {
   );
 }
 
+function YoungTree({ sapling }: { sapling: Sapling }) {
+  const y = groundY(getWorld(), sapling.tx, sapling.ty);
+  const intent = useGame((s) => s.snap.player.intent);
+  const marked = intent.kind === "forest" && intent.tx === sapling.tx && intent.ty === sapling.ty;
+  const h = sapling.stage === 1 ? 0.28 : sapling.stage === 2 ? 0.55 : 0.9;
+  const r = sapling.stage === 1 ? 0.12 : sapling.stage === 2 ? 0.22 : 0.34;
+  return (
+    <group
+      position={[sapling.tx, y, sapling.ty]}
+      onPointerDown={(e) => {
+        e.stopPropagation();
+        if (e.button === 2) hitAt(sapling.tx, sapling.ty, e.clientX, e.clientY);
+        else if (e.button === 0) leftAt(sapling.tx, sapling.ty);
+      }}
+      onPointerMove={() => hoverAt(sapling.tx, sapling.ty)}
+      onPointerUp={(e) => {
+        if (e.button === 0) liftAt(sapling.tx, sapling.ty);
+      }}
+    >
+      <mesh position={[0, h * 0.45, 0]} castShadow>
+        <boxGeometry args={[0.08, h, 0.08]} />
+        <meshStandardMaterial color={marked ? "#c9a36a" : "#6a4a32"} roughness={0.9} />
+      </mesh>
+      <mesh position={[0, h + r * 0.4, 0]} castShadow>
+        <boxGeometry args={[r * 2, r, r * 2]} />
+        <meshStandardMaterial color={marked ? "#8aaa58" : "#5a7040"} roughness={0.82} />
+      </mesh>
+    </group>
+  );
+}
+
 export function Crops() {
   const plots = useGame((s) => s.snap.plots);
+  const saplings = useGame((s) => s.snap.saplings);
   const hour = useGame((s) => s.snap.hour);
   void hour;
   return (
     <group>
       {(plots ?? []).map((p) => (
         <Plant key={p.id} plot={p} />
+      ))}
+      {(saplings ?? []).map((s) => (
+        <YoungTree key={s.id} sapling={s} />
       ))}
       <TillGhost />
     </group>
