@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { BIOME_IDS, biomeAt } from "../biome.ts";
+import { placeAffinity } from "../atlas.ts";
 import { RESOURCE_CATALOG, RESOURCE_IDS } from "./catalog.ts";
 import {
   GEM_CLARITY_QUALITY_POLICY,
@@ -62,7 +63,11 @@ test("candidate families come only from matching catalog node kinds in canonical
       const inspection = inspectResourceNodeProbabilities({ tx, ty, nodeKind });
       const expected = RESOURCE_IDS.filter((id) => {
         const spawn = RESOURCE_CATALOG[id].spawn;
-        return spawn?.nodeKind === nodeKind && BIOME_IDS.some((biomeId) => (spawn.regions[biomeId] ?? 0) * inspection.biomeWeights[biomeId] > 0);
+        if (spawn?.nodeKind !== nodeKind) return false;
+        if (spawn.places) {
+          return Object.entries(spawn.places).some(([placeId, weight]) => placeAffinity(tx, ty, placeId) * (weight ?? 0) > 0);
+        }
+        return BIOME_IDS.some((biomeId) => (spawn.regions[biomeId] ?? 0) * inspection.biomeWeights[biomeId] > 0);
       });
       assert.deepEqual(inspection.candidates.map(({ resourceId }) => resourceId), expected);
       for (const candidate of inspection.candidates) assert.equal(RESOURCE_CATALOG[candidate.resourceId].spawn?.nodeKind, nodeKind);
@@ -104,8 +109,9 @@ test("family probabilities are finite, normalized, affinity-weighted, and policy
 });
 
 test("soft biome affinities make catalog preferences observable and omit zero affinity", () => {
-  assert.ok(rawWeightAt(188, 88, "tree", "redwood") > rawWeightAt(256, 292, "tree", "redwood"));
+  assert.ok(rawWeightAt(188, 88, "tree", "pine") > rawWeightAt(256, 292, "tree", "pine"));
   assert.equal(rawWeightAt(256, 292, "tree", "redwood"), 0);
+  assert.equal(rawWeightAt(256, 292, "tree", "pine"), 0);
   assert.ok(rawWeightAt(470, 420, "rock", "ruby") > rawWeightAt(250, 48, "rock", "ruby"));
   assert.ok(rawWeightAt(360, 460, "rock", "ruby") > 0);
   assert.ok(rawWeightAt(250, 48, "rock", "sapphire") > rawWeightAt(470, 420, "rock", "sapphire"));
@@ -252,6 +258,27 @@ test("public node APIs accept exact null-prototype data records and reject unsaf
     }
     assert.equal(getterCalls, 0, "accessor is rejected without invocation");
   }
+});
+
+test("wild woods keep to named groves; oak is everywhere; the hall is oak", () => {
+  const hallTx = 256;
+  const hallTy = 292;
+  assert.ok(rawWeightAt(hallTx, hallTy, "tree", "oak") > 0);
+  assert.equal(rawWeightAt(hallTx, hallTy, "tree", "willow"), 0);
+  assert.equal(rawWeightAt(hallTx, hallTy, "tree", "birch"), 0);
+  assert.equal(rawWeightAt(hallTx, hallTy, "tree", "ash"), 0);
+  assert.equal(rawWeightAt(hallTx, hallTy, "tree", "yew"), 0);
+  assert.equal(rawWeightAt(hallTx, hallTy, "tree", "ghostwood"), 0);
+
+  assert.ok(rawWeightAt(248, 148, "tree", "oak") > 0);
+  assert.ok(rawWeightAt(188, 88, "tree", "pine") > rawWeightAt(hallTx, hallTy, "tree", "pine"));
+  assert.ok(rawWeightAt(400, 168, "tree", "willow") > 0);
+  assert.ok(rawWeightAt(250, 48, "tree", "birch") > 0);
+  assert.ok(rawWeightAt(64, 96, "tree", "ash") > 0);
+  assert.ok(rawWeightAt(360, 460, "tree", "redwood") > 0);
+  assert.ok(rawWeightAt(110, 440, "tree", "yew") > 0);
+  assert.ok(rawWeightAt(110, 440, "tree", "ghostwood") > 0);
+  assert.equal(rawWeightAt(256, 292, "tree", "ghostwood"), 0);
 });
 
 test("biome ordering export preserves representative biomeAt behavior", () => {

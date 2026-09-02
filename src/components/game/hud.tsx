@@ -440,7 +440,9 @@ function HelpPanel() {
         green to take the crop and more seed. Farming is a skill. Eat cabbage from You.
         Acorns in the pack — right-click grass or dirt and plant. Forestry starts at oak, then pine, willow, birch, ash,
         redwood, yew, and at 80 ghostwood. Chopping grades the log from rough to hardened. Ghostwood is only for the
-        dead — a ghost with 80 lumberjacking can cut it. Living eyes do not see it.
+        dead — a ghost with 80 lumberjacking can cut it. Living eyes do not see it. Wild oak stands the whole map.
+        Pine is Wolfhollow. Willow is Hearthfen. Birch is Ridgewatch. Ash is the Cairn of Ash. Redwood is Southmere.
+        Yew and ghostwood keep to Greybarrow. Plant any of them with forestry and they grow where you set them.
         Eight stone rings hold the moons. Walk into the
         swirl east of the steps. North of Oakstand the height goes to snow. Wolfhollow is pine and wolf. Hearthfen is peat
         marsh. Southmere is warm thick green. Brinegate is salt and sand. The hall stays green. Tap your region's name up

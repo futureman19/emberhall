@@ -98,6 +98,17 @@ export function regionAt(tx: number, ty: number) {
   return best;
 }
 
+/** Smooth 0..1 inside a place, 0 outside. Spread stretches the grove past the name-radius. */
+export function placeAffinity(tx: number, ty: number, placeId: string, spread = 2.5) {
+  const place = PLACES.find((p) => p.id === placeId);
+  if (!place) return 0;
+  const r = Math.max(14, place.radius * spread);
+  const d = Math.hypot(tx - place.tx, ty - place.ty);
+  if (d >= r) return 0;
+  const t = 1 - d / r;
+  return t * t * (3 - 2 * t);
+}
+
 export const ROADS: [string, string][] = [
   ["emberhall", "oakstand"],
   ["oakstand", "ridgewatch"],

@@ -11,6 +11,7 @@ import type {
   SkillRequirement,
 } from "./types.ts";
 import type { BiomeId, SkillId } from "../types.ts";
+import { PLACES } from "../atlas.ts";
 
 export const RESOURCE_IDS = Object.freeze([
   "oak",
@@ -45,8 +46,8 @@ const RESOURCE_DEFINITIONS = [
     traitIds: [],
     spawn: {
       nodeKind: "tree",
-      weight: 100,
-      regions: { vale: 1, tundra: 0.25, taiga: 1, fen: 0.5, jungle: 0.75, desert: 0.1 },
+      weight: 160,
+      regions: { vale: 1, tundra: 0.2, taiga: 0.35, fen: 0.4, jungle: 0.3, desert: 0.06 },
       identifySkill: { id: "lumberjack", minimum: 0 },
       extractSkill: { id: "lumberjack", minimum: 0 },
       toolTier: 1,
@@ -72,8 +73,9 @@ const RESOURCE_DEFINITIONS = [
     traitIds: [],
     spawn: {
       nodeKind: "tree",
-      weight: 70,
-      regions: { vale: 0.35, tundra: 0.6, taiga: 1, fen: 0.2, jungle: 0.15, desert: 0.05 },
+      weight: 90,
+      regions: { taiga: 1 },
+      places: { wolfhollow: 1.4 },
       identifySkill: { id: "lumberjack", minimum: 0 },
       extractSkill: { id: "lumberjack", minimum: 0 },
       toolTier: 1,
@@ -99,8 +101,9 @@ const RESOURCE_DEFINITIONS = [
     traitIds: [],
     spawn: {
       nodeKind: "tree",
-      weight: 55,
-      regions: { vale: 0.45, fen: 1, jungle: 0.25 },
+      weight: 70,
+      regions: { fen: 1 },
+      places: { hearthfen: 1.4 },
       identifySkill: { id: "lumberjack", minimum: 0 },
       extractSkill: { id: "lumberjack", minimum: 0 },
       toolTier: 1,
@@ -126,8 +129,9 @@ const RESOURCE_DEFINITIONS = [
     traitIds: [],
     spawn: {
       nodeKind: "tree",
-      weight: 22,
-      regions: { vale: 0.2, tundra: 1, taiga: 0.7 },
+      weight: 28,
+      regions: { tundra: 1 },
+      places: { ridgewatch: 1.3 },
       identifySkill: { id: "lumberjack", minimum: 15 },
       extractSkill: { id: "lumberjack", minimum: 20 },
       toolTier: 1,
@@ -153,8 +157,9 @@ const RESOURCE_DEFINITIONS = [
     traitIds: [],
     spawn: {
       nodeKind: "tree",
-      weight: 16,
-      regions: { vale: 1, fen: 0.5, taiga: 0.25 },
+      weight: 22,
+      regions: { tundra: 0.12 },
+      places: { cairnash: 1.6 },
       identifySkill: { id: "lumberjack", minimum: 25 },
       extractSkill: { id: "lumberjack", minimum: 30 },
       toolTier: 1,
@@ -180,8 +185,9 @@ const RESOURCE_DEFINITIONS = [
     traitIds: ["accuracy"],
     spawn: {
       nodeKind: "tree",
-      weight: 8,
-      regions: { taiga: 1, jungle: 1 },
+      weight: 10,
+      regions: { jungle: 1 },
+      places: { southmere: 1.2 },
       identifySkill: { id: "lumberjack", minimum: 35 },
       extractSkill: { id: "lumberjack", minimum: 50 },
       toolTier: 2,
@@ -207,8 +213,9 @@ const RESOURCE_DEFINITIONS = [
     traitIds: ["accuracy"],
     spawn: {
       nodeKind: "tree",
-      weight: 5,
-      regions: { jungle: 1, taiga: 0.35, fen: 0.25 },
+      weight: 6,
+      regions: { jungle: 0.45 },
+      places: { greybarrow: 1.5, cairnash: 0.8 },
       identifySkill: { id: "lumberjack", minimum: 55 },
       extractSkill: { id: "lumberjack", minimum: 65 },
       toolTier: 2,
@@ -234,8 +241,9 @@ const RESOURCE_DEFINITIONS = [
     traitIds: [],
     spawn: {
       nodeKind: "tree",
-      weight: 4,
-      regions: { vale: 0.35, tundra: 0.4, taiga: 0.4, fen: 0.55, jungle: 0.25, desert: 0.08 },
+      weight: 5,
+      regions: { fen: 0.15 },
+      places: { greybarrow: 1.8, cairnash: 1.1 },
       identifySkill: { id: "lumberjack", minimum: 80 },
       extractSkill: { id: "lumberjack", minimum: 80 },
       toolTier: 1,
@@ -497,6 +505,15 @@ function validateSpawn(definition: ResourceDefinition): void {
   for (const [region, weight] of Object.entries(spawn.regions)) {
     if (!isBiomeId(region)) throw new Error(`${definition.id} has unknown region: ${region}`);
     if (!isPositiveFinite(weight)) throw new Error(`${definition.id} region ${region} weight must be finite and positive`);
+  }
+  if (spawn.places !== undefined) {
+    if (!isRecord(spawn.places) || Object.keys(spawn.places).length === 0) {
+      throw new Error(`${definition.id} places must be a non-empty record when set`);
+    }
+    for (const [placeId, weight] of Object.entries(spawn.places)) {
+      if (!PLACES.some((p) => p.id === placeId)) throw new Error(`${definition.id} has unknown place: ${placeId}`);
+      if (!isPositiveFinite(weight)) throw new Error(`${definition.id} place ${placeId} weight must be finite and positive`);
+    }
   }
   validateSkillRequirement(spawn.identifySkill);
   validateSkillRequirement(spawn.extractSkill);

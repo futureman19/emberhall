@@ -53,6 +53,8 @@ export interface ResourceSpawn {
   readonly nodeKind: "tree" | "rock";
   readonly weight: number;
   readonly regions: Readonly<Partial<Record<BiomeId, number>>>;
+  /** Named groves. When set, the wood also (or only) gathers at these places. */
+  readonly places?: Readonly<Partial<Record<string, number>>>;
   readonly identifySkill: SkillRequirement;
   readonly extractSkill: SkillRequirement;
   readonly toolTier: number;
