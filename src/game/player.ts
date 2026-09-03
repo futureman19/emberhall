@@ -17,6 +17,7 @@ import { depleteResourceNode, discoverResourceNode, hasDiscoveredResourceNode } 
 import { playSfx } from "./vale-sfx.ts";
 import { emitCorpseFx } from "./corpse-animation.ts";
 import { emitExtractionFx, EXTRACTION_BEAT, EXTRACTION_IMPACT } from "./extraction-animation.ts";
+import { emitCompanionFx } from "./companion-animation.ts";
 import { completeObjective, log } from "./world.ts";
 import { effectiveMain, rareMods, rareName, rollKillRare, weaponDmg } from "./rare.ts";
 import type { ItemId, Person, ResourceInventory, ResourceNodeStateMap, SkillId, WearSlot, World } from "./types.ts";
@@ -260,6 +261,7 @@ export function commandStay(world: World, id: string) {
   c.stay = true;
   c.task = "idle";
   c.path = [];
+  emitCompanionFx(world, { kind: "stay", targetId: c.id, x: c.x, z: c.z });
   const note = `${petLabel(c)} stays.`;
   log(world, note);
   return note;
@@ -270,6 +272,7 @@ export function commandFollow(world: World, id: string) {
   if (!c || c.ownerId !== world.player.id) return "It is not yours.";
   c.stay = false;
   c.task = "follow";
+  emitCompanionFx(world, { kind: "follow", targetId: c.id, x: c.x, z: c.z });
   const note = `${petLabel(c)} follows.`;
   log(world, note);
   return note;
@@ -282,6 +285,7 @@ export function commandRelease(world: World, id: string) {
   c.ownerId = null;
   c.stay = false;
   c.task = "wander";
+  emitCompanionFx(world, { kind: "release", targetId: c.id, x: c.x, z: c.z });
   const note = `${who} is gone.`;
   log(world, note);
   return note;
@@ -304,6 +308,7 @@ export function commandFeed(world: World, id: string) {
   world.player.pack[give] = (world.player.pack[give] ?? 0) - 1;
   c.loyalty = Math.min(100, c.loyalty + 12);
   if (c.loyalty >= 15) c.warnedLoyal = false; // a fed friend forgives
+  emitCompanionFx(world, { kind: "feed", targetId: c.id, x: c.x, z: c.z, item: give });
   const note = `${petLabel(c)} eats.`;
   log(world, note);
   return note;

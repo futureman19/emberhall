@@ -7,6 +7,7 @@ import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { getCombatFx, getTamingFx } from "@/game/player";
 import { TAMING_DURATION, tamingPulse } from "@/game/taming-animation";
+import { COMPANION_DURATION, companionLabel, companionPose, getCompanionFx } from "@/game/companion-animation";
 import { useGame } from "@/game/store";
 import type { Creature, FaunaKind } from "@/game/types";
 
@@ -300,21 +301,25 @@ function Beast({ c }: { c: Creature }) {
     const resultPulse = resultLive ? Math.sin((resultAge / 0.72) * Math.PI) : 0;
     const success = Boolean(resultLive && result?.success);
     const refusal = Boolean(resultLive && !result?.success);
+    const companion = getCompanionFx(world);
+    const companionAge = companion ? (world.hour - companion.at) * SECONDS_PER_HOUR : Infinity;
+    const companionLive = Boolean(companion && companion.targetId === c.id && companionAge >= 0 && companionAge < COMPANION_DURATION);
+    const companionMotion = companionLive && companion ? companionPose(companion.kind, companionAge) : { hop: 0, bow: 0, turn: 0, stretch: 0 };
     group.position.set(
       c.x,
-      groundY(world, c.x, c.z) + pulse * 0.08 + appeal * 0.06 + (success ? resultPulse * 0.14 : 0),
+      groundY(world, c.x, c.z) + pulse * 0.08 + appeal * 0.06 + (success ? resultPulse * 0.14 : 0) + companionMotion.hop,
       c.z,
     );
     group.rotation.set(
-      dead ? Math.PI / 2 : -pulse * (fx?.clean ? 0.28 : 0.13) + (refusal ? resultPulse * -0.34 : 0),
-      taming ? Math.sin(world.player.workT * 20) * 0.2 : 0,
+      dead ? Math.PI / 2 : -pulse * (fx?.clean ? 0.28 : 0.13) + (refusal ? resultPulse * -0.34 : 0) + companionMotion.bow,
+      (taming ? Math.sin(world.player.workT * 20) * 0.2 : 0) + companionMotion.turn,
       dead ? 0 : pulse * 0.2 + appeal * 0.08 + (refusal ? resultPulse * 0.26 : 0),
     );
     group.scale.setScalar(
       1 +
         pulse * (fx?.clean ? 0.1 : 0.04) +
         (success ? resultPulse * 0.12 : 0) -
-        (refusal ? resultPulse * 0.06 : 0),
+        (refusal ? resultPulse * 0.06 : 0) + companionMotion.stretch,
     );
   });
 
@@ -338,6 +343,7 @@ function Beast({ c }: { c: Creature }) {
         </mesh>
       )}
       <TamingBillboard c={c} />
+      <CompanionBillboard c={c} />
     </group>
   );
 }
@@ -408,6 +414,28 @@ function TamingBillboard({ c }: { c: Creature }) {
           transformOrigin: "center",
         }}
       />
+    </Html>
+  );
+}
+
+function CompanionBillboard({ c }: { c: Creature }) {
+  const label = useRef<HTMLDivElement>(null);
+  useFrame(() => {
+    const element = label.current;
+    if (!element) return;
+    const world = getWorld();
+    const fx = getCompanionFx(world);
+    const age = fx ? (world.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const visible = Boolean(fx && fx.targetId === c.id && age >= 0 && age < COMPANION_DURATION);
+    element.style.display = visible ? "grid" : "none";
+    if (!fx || !visible) return;
+    element.textContent = fx.kind === "name" ? `NAMED ${fx.name.toUpperCase()}` : companionLabel(fx.kind).toUpperCase();
+    element.style.borderColor = fx.kind === "release" ? "rgba(168, 90, 66, 0.92)" : fx.kind === "feed" ? "rgba(122, 170, 88, 0.92)" : "rgba(255, 211, 106, 0.9)";
+    element.style.color = fx.kind === "release" ? "#f0c0aa" : "#fff8e7";
+  });
+  return (
+    <Html position={[0, 3.8, 0]} center zIndexRange={[37, 0]} style={{ pointerEvents: "none" }}>
+      <div ref={label} style={{ display: "none", placeItems: "center", minWidth: 78, padding: "6px 9px", border: "1px solid", borderRadius: 8, background: "rgba(20, 18, 15, 0.92)", boxShadow: "0 0 16px rgba(0, 0, 0, 0.55)", fontFamily: "serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.11em", textTransform: "uppercase", whiteSpace: "nowrap" }} />
     </Html>
   );
 }

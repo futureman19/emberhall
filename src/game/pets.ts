@@ -1,6 +1,7 @@
 import { FAUNA_META, SECONDS_PER_HOUR } from "./catalog.ts";
 import type { Creature, World } from "./types.ts";
 import { log } from "./world.ts";
+import { emitCompanionFx } from "./companion-animation.ts";
 
 /**
  * Companions — the bond made visible. Pets carry names, loyalty ebbs
@@ -29,6 +30,7 @@ export function commandNamePet(world: World, id: string, raw: string): string {
   if (!/^[A-Za-z' -]+$/.test(name)) return "Plain letters for a name.";
   const old = petLabel(c);
   c.name = name;
+  emitCompanionFx(world, { kind: "name", targetId: c.id, x: c.x, z: c.z, name });
   const note = old === name ? `${name} already answers to it.` : `${old} is ${name} now.`;
   log(world, note);
   return note;

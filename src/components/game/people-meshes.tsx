@@ -9,6 +9,7 @@ import { CRAFTING_DURATION, craftingPose } from "@/game/crafting-animation";
 import { getCraftFx } from "@/game/craft";
 import { CORPSE_DURATION, corpseFxAge, corpsePose, getCorpseFx } from "@/game/corpse-animation";
 import { CONSTRUCTION_DURATION, constructionLabel, constructionPose, getConstructionFx } from "@/game/construction-animation";
+import { COMPANION_DURATION, companionPose, getCompanionFx } from "@/game/companion-animation";
 import { EXTRACTION_DURATION, extractionPose, extractionVisualProfile, getExtractionFx } from "@/game/extraction-animation";
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY } from "@/game/height";
@@ -839,6 +840,18 @@ function Figure({
     const constructionAge = constructionFx ? (w.hour - constructionFx.at) * SECONDS_PER_HOUR : Infinity;
     const constructing = Boolean(constructionFx && constructionAge >= 0 && constructionAge < CONSTRUCTION_DURATION);
     const buildPose = constructionPose(constructionAge);
+    const companionFx = getCompanionFx(w);
+    const companionAge = companionFx ? (w.hour - companionFx.at) * SECONDS_PER_HOUR : Infinity;
+    const companionTarget = companionFx ? w.fauna.find((creature) => creature.id === companionFx.targetId) : null;
+    const companionNear = Boolean(
+      companionFx &&
+      companionTarget &&
+      companionAge >= 0 &&
+      companionAge < COMPANION_DURATION &&
+      you &&
+      Math.hypot(you.x - companionTarget.x, you.z - companionTarget.z) <= 5,
+    );
+    const companionWorkPose = companionFx ? companionPose(companionFx.kind, companionAge) : { hop: 0, bow: 0, turn: 0, stretch: 0 };
     const activeExtractionKind = !you?.path.length
       ? w.player.intent.kind === "chop"
         ? "lumberjacking"
@@ -855,7 +868,7 @@ function Figure({
         groundAt(you.x, you.z) + (you.ghost ? 0.32 : 0) - healPose.crouch - corpseWorkPose.crouch - (constructing ? buildPose.crouch : 0) - (extracting ? extractPose.crouch : 0),
         you.z,
       );
-      root.current.rotation.x = healPose.lean + corpseWorkPose.lean + (constructing ? buildPose.lean : 0) + (extracting ? extractPose.swing * 0.12 : 0) + (taming ? tamePose.bow : 0) + (crafting ? craftPose.work * 0.14 : 0) + (gathering ? gatherPose.work * 0.2 : 0);
+      root.current.rotation.x = healPose.lean + corpseWorkPose.lean + (constructing ? buildPose.lean : 0) + (companionNear ? companionWorkPose.bow * 0.6 : 0) + (extracting ? extractPose.swing * 0.12 : 0) + (taming ? tamePose.bow : 0) + (crafting ? craftPose.work * 0.14 : 0) + (gathering ? gatherPose.work * 0.2 : 0);
       root.current.rotation.y = you.facing;
     }
     const it = w.player.intent;
@@ -871,7 +884,7 @@ function Figure({
     const hunting = idle && it.kind === "hunt";
     const bowing = hunting && w.player.wear.main === "bow";
     const draw = bowing ? bowDrawAmount(w.player.workT) : 0;
-    if (held.current) held.current.visible = !casting && !healing && !taming && !crafting && !constructing && (!gathering || gatheringFx?.kind === "tilling") && (!corpseWorking || corpseFx?.kind === "skinning");
+    if (held.current) held.current.visible = !casting && !healing && !taming && !crafting && !constructing && !companionNear && (!gathering || gatheringFx?.kind === "tilling") && (!corpseWorking || corpseFx?.kind === "skinning");
     if (left.current) {
       if (healing) {
         left.current.rotation.set(0.98, 0.48, 1.02);
@@ -885,6 +898,9 @@ function Figure({
         left.current.rotation.set(0.88 + corpseWorkPose.reach * 0.35, 0.4, 0.82 + corpseWorkPose.reach * 0.22);
       } else if (constructing) {
         left.current.rotation.set(0.82 + buildPose.lift * 0.34, 0.38, 0.72 + buildPose.lift * 0.28);
+      } else if (companionNear && companionFx) {
+        const reach = companionFx.kind === "feed" ? 1.08 : companionFx.kind === "release" ? 0.82 : 0.68;
+        left.current.rotation.set(reach + companionWorkPose.hop * 0.35, 0.42, 0.84 + companionWorkPose.turn * 0.25);
       } else if (extracting) {
         left.current.rotation.set(0.45 + extractPose.brace * 0.75, extractionKind === "lumberjacking" ? 0.42 : 0.16, extractionKind === "lumberjacking" ? 0.72 : 0.42);
       } else if (casting) {
@@ -927,6 +943,9 @@ function Figure({
         right.current.rotation.set(pitch, -0.38, -0.82 - corpseWorkPose.reach * 0.18);
       } else if (constructing) {
         right.current.rotation.set(0.4 + buildPose.hammer * 0.9, -0.28, -0.62);
+      } else if (companionNear && companionFx) {
+        const reach = companionFx.kind === "feed" ? 1.12 : companionFx.kind === "release" ? 0.6 + Math.sin(companionAge * 16) * 0.32 : 0.72;
+        right.current.rotation.set(reach, -0.42, -0.84 - companionWorkPose.turn * 0.3);
       } else if (extracting) {
         const pitch = extractionKind === "lumberjacking" ? 0.35 - extractPose.swing * 1.95 : 0.62 - extractPose.swing * 2.2;
         right.current.rotation.set(pitch, extractionKind === "lumberjacking" ? 0.3 : -0.12, extractionKind === "lumberjacking" ? -0.42 - extractPose.twist : -0.3);

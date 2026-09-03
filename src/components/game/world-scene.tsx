@@ -16,6 +16,7 @@ import { CRAFTING_DURATION, craftingPose, craftingVisualProfile } from "@/game/c
 import { getCraftFx } from "@/game/craft";
 import { CORPSE_DURATION, corpseFxAge, corpsePose, getCorpseFx } from "@/game/corpse-animation";
 import { CONSTRUCTION_DURATION, constructionPose, getConstructionFx } from "@/game/construction-animation";
+import { COMPANION_DURATION, companionPose, getCompanionFx } from "@/game/companion-animation";
 import { EXTRACTION_DURATION, extractionVisualProfile, getExtractionFx } from "@/game/extraction-animation";
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY as heightAt } from "@/game/height";
@@ -819,6 +820,72 @@ function CraftFxMesh() {
   );
 }
 
+function CompanionFxMesh() {
+  const root = useRef<THREE.Group>(null);
+  const feed = useRef<THREE.Group>(null);
+  const foodMaterial = useRef<THREE.MeshStandardMaterial>(null);
+  const stay = useRef<THREE.Group>(null);
+  const follow = useRef<THREE.Group>(null);
+  const release = useRef<THREE.Group>(null);
+  const name = useRef<THREE.Group>(null);
+
+  useFrame(() => {
+    const group = root.current;
+    const world = getWorld();
+    const fx = getCompanionFx(world);
+    const age = fx ? (world.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const live = Boolean(fx && age >= 0 && age < COMPANION_DURATION);
+    if (!group) return;
+    group.visible = live;
+    if (!fx || !live) return;
+    const target = world.fauna.find((creature) => creature.id === fx.targetId);
+    const player = world.people.find((person) => person.isPlayer);
+    const x = target?.x ?? fx.x;
+    const z = target?.z ?? fx.z;
+    const pose = companionPose(fx.kind, age);
+    const phase = Math.max(0, Math.min(1, age / COMPANION_DURATION));
+    const pulse = Math.sin(phase * Math.PI);
+    group.position.set(x, heightAt(world, x, z) + 0.12, z);
+    for (const [ref, kind] of [[feed, "feed"], [stay, "stay"], [follow, "follow"], [release, "release"], [name, "name"]] as const) {
+      if (ref.current) ref.current.visible = fx.kind === kind;
+    }
+    const towardPlayer = player ? Math.atan2(player.x - x, player.z - z) : 0;
+    if (feed.current) { feed.current.position.y = 0.12; feed.current.rotation.y = towardPlayer; feed.current.scale.setScalar(1.35 + pulse * 0.45); }
+    if (foodMaterial.current && fx.kind === "feed") foodMaterial.current.color.set(["meat", "cooked_meat", "stew"].includes(fx.item) ? "#c76b58" : "#86ad58");
+    if (stay.current) stay.current.scale.setScalar(0.82 + pulse * 0.42);
+    if (follow.current) { follow.current.position.y = 0.58 + pose.hop; follow.current.position.z = pulse * 0.62; follow.current.rotation.y = towardPlayer; follow.current.scale.setScalar(1.45 + pulse * 0.42); }
+    if (release.current) { release.current.scale.setScalar(0.72 + pulse * 1.25); release.current.rotation.y = age * 3.4; }
+    if (name.current) { name.current.position.y = 1.5 + pulse * 0.55; name.current.rotation.y = -age * 3.8; name.current.scale.setScalar(1.35 + pulse * 0.32); }
+  });
+
+  return (
+    <group ref={root} visible={false}>
+      <group ref={feed}>
+        <mesh position={[0, 0.04, 0]}><cylinderGeometry args={[0.62, 0.82, 0.3, 12]} /><meshStandardMaterial color="#384754" metalness={0.18} roughness={0.72} /></mesh>
+        <mesh position={[0, 0.2, 0]} rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[0.66, 0.08, 7, 18]} /><meshBasicMaterial color="#9fb5c2" /></mesh>
+        <mesh position={[0, 0.28, 0]}><sphereGeometry args={[0.42, 9, 7]} /><meshStandardMaterial ref={foodMaterial} color="#86ad58" emissive="#3e5a28" emissiveIntensity={0.42} roughness={0.8} /></mesh>
+
+        {[-0.72, 0, 0.72].map((x) => <mesh key={x} position={[x, 0.82 + Math.abs(x) * 0.18, 0]}><sphereGeometry args={[0.18, 8, 6]} /><meshBasicMaterial color="#ffd36a" /></mesh>)}
+      </group>
+      <group ref={stay}>
+        <mesh rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.72, 1.02, 24]} /><meshBasicMaterial color="#7fb6a1" transparent opacity={0.82} depthWrite={false} /></mesh>
+        <mesh position={[0, 0.18, 0]}><boxGeometry args={[0.82, 0.12, 0.82]} /><meshBasicMaterial color="#b8ddd1" transparent opacity={0.65} /></mesh>
+      </group>
+      <group ref={follow}>
+        {[0, 0.82, 1.64].map((z) => <group key={z} position={[0, 0, z]}>{[-1, 1].map((side) => <mesh key={side} position={[side * 0.3, 0, 0]} rotation={[0, side * 0.72, 0]}><boxGeometry args={[0.2, 0.16, 0.96]} /><meshBasicMaterial color={z === 0.82 ? "#ffd36a" : "#ff9f32"} transparent opacity={0.96} /></mesh>)}</group>)}
+      </group>
+      <group ref={release}>
+        <mesh rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.64, 0.9, 24]} /><meshBasicMaterial color="#d68162" transparent opacity={0.78} depthWrite={false} /></mesh>
+        {Array.from({ length: 8 }, (_, index) => { const angle = index * Math.PI / 4; return <mesh key={index} position={[Math.cos(angle) * 0.92, 0.36 + (index % 2) * 0.28, Math.sin(angle) * 0.92]} rotation={[angle, angle, angle]}><boxGeometry args={[0.16, 0.08, 0.42]} /><meshBasicMaterial color="#c47951" /></mesh>; })}
+      </group>
+      <group ref={name}>
+        <mesh rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[0.9, 0.14, 8, 22]} /><meshBasicMaterial color="#ffd36a" depthTest={false} /></mesh>
+        {Array.from({ length: 7 }, (_, index) => { const angle = index * Math.PI * 2 / 7; return <mesh key={index} position={[Math.cos(angle) * 1.32, 0.22 + (index % 2) * 0.56, Math.sin(angle) * 1.32]} rotation={[0, angle, Math.PI / 4]}><octahedronGeometry args={[0.5, 0]} /><meshBasicMaterial color={index % 2 ? "#fff3bd" : "#ffd36a"} depthTest={false} /></mesh>; })}
+      </group>
+    </group>
+  );
+}
+
 function ConstructionFxMesh() {
   const root = useRef<THREE.Group>(null);
   const scaffold = useRef<THREE.Group>(null);
@@ -1357,6 +1424,7 @@ export function WorldScene() {
       <TamingFxMesh />
       <CraftFxMesh />
       <GatheringFxMesh />
+      <CompanionFxMesh />
       <ConstructionFxMesh />
       <ExtractionFxMesh />
       <CorpseFxMesh />
