@@ -482,12 +482,11 @@ function MoongateTravelFxMesh() {
         <mesh position={[0, 1.1, 0]}><cylinderGeometry args={[0.5, 0.88, 2.2, 16, 1, true]} /><meshBasicMaterial color="#8f6bd8" transparent opacity={0.34} side={THREE.DoubleSide} depthWrite={false} /></mesh>
       </group>
       <group ref={destination} visible={false}>
-        {[0, 0.62].map((y) => <mesh key={y} position={[0, y, 0]} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[1.18 + y * 0.28, 1.36 + y * 0.28, 28]} /><meshBasicMaterial color={y === 0.62 ? "#fff0bd" : "#8fd5ff"} transparent opacity={0.46} depthWrite={false} depthTest={false} /></mesh>)}
-        <mesh position={[0, 1.25, 0]}><cylinderGeometry args={[0.82, 0.46, 2.5, 16, 1, true]} /><meshBasicMaterial color="#8fd5ff" transparent opacity={0.18} side={THREE.DoubleSide} depthWrite={false} /></mesh>
+        <mesh rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[1.2, 1.42, 28]} /><meshBasicMaterial color="#8fd5ff" transparent opacity={0.5} depthWrite={false} depthTest={false} /></mesh>
+        <mesh position={[0, 1.25, 0]}><cylinderGeometry args={[0.92, 0.58, 2.5, 16, 1, true]} /><meshBasicMaterial color="#8fd5ff" transparent opacity={0.09} side={THREE.DoubleSide} depthWrite={false} /></mesh>
       </group>
       <group ref={transit} visible={false}>
-        {[0, Math.PI / 3, Math.PI * 2 / 3].map((rotation) => <mesh key={rotation} rotation={[Math.PI / 2, rotation, rotation]}><torusGeometry args={[1.05, 0.08, 8, 24]} /><meshBasicMaterial color="#e7c5ff" transparent opacity={0.44} depthWrite={false} depthTest={false} /></mesh>)}
-        {Array.from({ length: 6 }, (_, index) => { const angle = index * Math.PI / 3; return <mesh key={index} position={[Math.cos(angle) * 1.32, (index % 2) * 0.5, Math.sin(angle) * 1.32]} rotation={[0, angle, Math.PI / 4]}><boxGeometry args={[0.1, 0.1, 0.68]} /><meshBasicMaterial color={index % 2 ? "#fff0bd" : "#8fd5ff"} transparent opacity={0.64} depthTest={false} /></mesh>; })}
+        {Array.from({ length: 4 }, (_, index) => { const angle = index * Math.PI / 2; return <mesh key={index} position={[Math.cos(angle) * 1.62, (index % 2) * 0.58, Math.sin(angle) * 1.62]} rotation={[0, angle, Math.PI / 4]}><boxGeometry args={[0.1, 0.1, 0.72]} /><meshBasicMaterial color={index % 2 ? "#fff0bd" : "#8fd5ff"} transparent opacity={0.72} depthTest={false} /></mesh>; })}
         <Html position={[0, 2.15, 0]} center zIndexRange={[29, 0]} style={{ pointerEvents: "none" }}><div ref={label} style={{ display: "none", placeItems: "center", minWidth: 132, padding: "7px 10px", border: "1px solid #b88cff", borderRadius: 8, background: "rgba(20,18,15,.92)", color: "#fff8e7", fontFamily: "serif", fontSize: 10, fontWeight: 700, letterSpacing: ".1em", whiteSpace: "nowrap" }} /></Html>
       </group>
       <mesh ref={petA} visible={false} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.5, 0.78, 18]} /><meshBasicMaterial color="#ffd36a" transparent opacity={0.9} depthWrite={false} depthTest={false} /></mesh>

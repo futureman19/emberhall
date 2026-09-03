@@ -37,7 +37,7 @@ async function travel(page) {
     following.ownerId = world.player.id; following.stay = false; following.task = "follow"; following.path = [];
     staying.ownerId = world.player.id; staying.stay = true; staying.task = "idle"; staying.path = [];
     const stayedAt = { x: staying.x, z: staying.z };
-    const random = Math.random; Math.random = () => 0.75;
+    const random = Math.random; Math.random = () => 0.99;
     try { store.travel(destination.id); } finally { Math.random = random; }
     const arrival = { x: player.x, z: player.z };
     const mechanics = {
