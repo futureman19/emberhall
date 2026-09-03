@@ -10,6 +10,7 @@ import { getCraftFx } from "@/game/craft";
 import { CORPSE_DURATION, corpseFxAge, corpsePose, getCorpseFx } from "@/game/corpse-animation";
 import { CONSTRUCTION_DURATION, constructionLabel, constructionPose, getConstructionFx } from "@/game/construction-animation";
 import { COMPANION_DURATION, companionPose, getCompanionFx } from "@/game/companion-animation";
+import { NPC_INTERACTION_DURATION, NPC_INTERACTION_LABEL, getNpcInteractionFx, npcInteractionPose } from "@/game/npc-interaction-animation";
 import { EXTRACTION_DURATION, extractionPose, extractionVisualProfile, getExtractionFx } from "@/game/extraction-animation";
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY } from "@/game/height";
@@ -793,6 +794,27 @@ function ConstructionBillboard() {
   );
 }
 
+function NpcInteractionBillboard({ p }: { p: Person }) {
+  const label = useRef<HTMLDivElement>(null);
+  useFrame(() => {
+    const element = label.current;
+    if (!element) return;
+    const world = getWorld();
+    const fx = getNpcInteractionFx(world);
+    const age = fx ? (world.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const visible = Boolean(fx && fx.targetId === p.id && age >= 0 && age < NPC_INTERACTION_DURATION);
+    element.style.display = visible ? "grid" : "none";
+    if (!fx || !visible) return;
+    element.textContent = NPC_INTERACTION_LABEL[fx.kind].toUpperCase();
+    element.style.borderColor = fx.kind === "heal" ? "#a9d7cf" : fx.kind === "trade" || fx.kind === "bank" ? "#ffd36a" : "#d7c9a5";
+  });
+  return (
+    <Html position={[0, 3.35, 0]} center zIndexRange={[31, 0]} style={{ pointerEvents: "none" }}>
+      <div ref={label} style={{ display: "none", placeItems: "center", minWidth: 86, padding: "6px 9px", border: "1px solid", borderRadius: 8, background: "rgba(20, 18, 15, 0.92)", boxShadow: "0 0 16px rgba(0, 0, 0, 0.55)", color: "#fff8e7", fontFamily: "serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.11em", textTransform: "uppercase", whiteSpace: "nowrap" }} />
+    </Html>
+  );
+}
+
 function Figure({
   p,
   selected,
@@ -810,8 +832,21 @@ function Figure({
   const right = useRef<Group>(null);
   const held = useRef<Group>(null);
   useFrame(() => {
-    if (!p.isPlayer) return;
     const w = getWorld();
+    if (!p.isPlayer) {
+      const live = w.people.find((person) => person.id === p.id) ?? p;
+      const fx = getNpcInteractionFx(w);
+      const age = fx ? (w.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+      const active = Boolean(fx && fx.targetId === p.id && age >= 0 && age < NPC_INTERACTION_DURATION);
+      const pose = active && fx ? npcInteractionPose(fx.kind, age) : { bow: 0, reach: 0, lift: 0, turn: 0 };
+      if (root.current) {
+        root.current.position.set(live.x, groundAt(live.x, live.z) + pose.lift, live.z);
+        root.current.rotation.set(pose.bow, live.facing + pose.turn, 0);
+      }
+      if (left.current) left.current.rotation.set(active ? 0.58 + pose.reach : walkSwing, active ? 0.28 : 0, active ? 0.72 : 0.12);
+      if (right.current) right.current.rotation.set(active ? 0.62 + pose.reach : -walkSwing, active ? -0.28 : 0, active ? -0.72 : -0.12);
+      return;
+    }
     const you = w.people.find((x) => x.isPlayer);
     const healFx = getHealingFx();
     const healAge = healFx ? (w.hour - healFx.at) * SECONDS_PER_HOUR : Infinity;
@@ -852,6 +887,11 @@ function Figure({
       Math.hypot(you.x - companionTarget.x, you.z - companionTarget.z) <= 5,
     );
     const companionWorkPose = companionFx ? companionPose(companionFx.kind, companionAge) : { hop: 0, bow: 0, turn: 0, stretch: 0 };
+    const npcFx = getNpcInteractionFx(w);
+    const npcAge = npcFx ? (w.hour - npcFx.at) * SECONDS_PER_HOUR : Infinity;
+    const npcTarget = npcFx?.targetId ? w.people.find((person) => person.id === npcFx.targetId) : null;
+    const npcNear = Boolean(npcFx && npcTarget && npcAge >= 0 && npcAge < NPC_INTERACTION_DURATION && you && Math.hypot(you.x - npcTarget.x, you.z - npcTarget.z) <= 5);
+    const npcPose = npcFx ? npcInteractionPose(npcFx.kind, npcAge) : { bow: 0, reach: 0, lift: 0, turn: 0 };
     const activeExtractionKind = !you?.path.length
       ? w.player.intent.kind === "chop"
         ? "lumberjacking"
@@ -868,7 +908,7 @@ function Figure({
         groundAt(you.x, you.z) + (you.ghost ? 0.32 : 0) - healPose.crouch - corpseWorkPose.crouch - (constructing ? buildPose.crouch : 0) - (extracting ? extractPose.crouch : 0),
         you.z,
       );
-      root.current.rotation.x = healPose.lean + corpseWorkPose.lean + (constructing ? buildPose.lean : 0) + (companionNear ? companionWorkPose.bow * 0.6 : 0) + (extracting ? extractPose.swing * 0.12 : 0) + (taming ? tamePose.bow : 0) + (crafting ? craftPose.work * 0.14 : 0) + (gathering ? gatherPose.work * 0.2 : 0);
+      root.current.rotation.x = healPose.lean + corpseWorkPose.lean + (constructing ? buildPose.lean : 0) + (companionNear ? companionWorkPose.bow * 0.6 : 0) + (npcNear ? npcPose.bow : 0) + (extracting ? extractPose.swing * 0.12 : 0) + (taming ? tamePose.bow : 0) + (crafting ? craftPose.work * 0.14 : 0) + (gathering ? gatherPose.work * 0.2 : 0);
       root.current.rotation.y = you.facing;
     }
     const it = w.player.intent;
@@ -884,7 +924,7 @@ function Figure({
     const hunting = idle && it.kind === "hunt";
     const bowing = hunting && w.player.wear.main === "bow";
     const draw = bowing ? bowDrawAmount(w.player.workT) : 0;
-    if (held.current) held.current.visible = !casting && !healing && !taming && !crafting && !constructing && !companionNear && (!gathering || gatheringFx?.kind === "tilling") && (!corpseWorking || corpseFx?.kind === "skinning");
+    if (held.current) held.current.visible = !casting && !healing && !taming && !crafting && !constructing && !companionNear && !npcNear && (!gathering || gatheringFx?.kind === "tilling") && (!corpseWorking || corpseFx?.kind === "skinning");
     if (left.current) {
       if (healing) {
         left.current.rotation.set(0.98, 0.48, 1.02);
@@ -901,6 +941,8 @@ function Figure({
       } else if (companionNear && companionFx) {
         const reach = companionFx.kind === "feed" ? 1.08 : companionFx.kind === "release" ? 0.82 : 0.68;
         left.current.rotation.set(reach + companionWorkPose.hop * 0.35, 0.42, 0.84 + companionWorkPose.turn * 0.25);
+      } else if (npcNear) {
+        left.current.rotation.set(0.62 + npcPose.reach * 0.72, 0.38, 0.68 + npcPose.reach * 0.38);
       } else if (extracting) {
         left.current.rotation.set(0.45 + extractPose.brace * 0.75, extractionKind === "lumberjacking" ? 0.42 : 0.16, extractionKind === "lumberjacking" ? 0.72 : 0.42);
       } else if (casting) {
@@ -946,6 +988,8 @@ function Figure({
       } else if (companionNear && companionFx) {
         const reach = companionFx.kind === "feed" ? 1.12 : companionFx.kind === "release" ? 0.6 + Math.sin(companionAge * 16) * 0.32 : 0.72;
         right.current.rotation.set(reach, -0.42, -0.84 - companionWorkPose.turn * 0.3);
+      } else if (npcNear) {
+        right.current.rotation.set(0.66 + npcPose.reach * 0.78, -0.38, -0.72 - npcPose.reach * 0.34);
       } else if (extracting) {
         const pitch = extractionKind === "lumberjacking" ? 0.35 - extractPose.swing * 1.95 : 0.62 - extractPose.swing * 2.2;
         right.current.rotation.set(pitch, extractionKind === "lumberjacking" ? 0.3 : -0.12, extractionKind === "lumberjacking" ? -0.42 - extractPose.twist : -0.3);
@@ -1099,6 +1143,7 @@ function Figure({
       {p.isPlayer && !ghost && <CorpseBillboard />}
       {p.isPlayer && !ghost && <ExtractionBillboard />}
       {p.isPlayer && !ghost && <ConstructionBillboard />}
+      {!p.isPlayer && <NpcInteractionBillboard p={p} />}
       {p.isPlayer && !ghost && <MeleeSwingArc />}
       {selected && (
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.04, 0]}>

@@ -1,4 +1,4 @@
-import { MapControls } from "@react-three/drei";
+import { Html, MapControls } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
@@ -17,6 +17,7 @@ import { getCraftFx } from "@/game/craft";
 import { CORPSE_DURATION, corpseFxAge, corpsePose, getCorpseFx } from "@/game/corpse-animation";
 import { CONSTRUCTION_DURATION, constructionPose, getConstructionFx } from "@/game/construction-animation";
 import { COMPANION_DURATION, companionPose, getCompanionFx } from "@/game/companion-animation";
+import { NPC_INTERACTION_DURATION, getNpcInteractionFx, npcInteractionPose } from "@/game/npc-interaction-animation";
 import { EXTRACTION_DURATION, extractionVisualProfile, getExtractionFx } from "@/game/extraction-animation";
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY as heightAt } from "@/game/height";
@@ -820,6 +821,75 @@ function CraftFxMesh() {
   );
 }
 
+function NpcInteractionFxMesh() {
+  const root = useRef<THREE.Group>(null);
+  const talk = useRef<THREE.Group>(null);
+  const heal = useRef<THREE.Group>(null);
+  const trade = useRef<THREE.Group>(null);
+  const bank = useRef<THREE.Group>(null);
+  const recruit = useRef<THREE.Group>(null);
+  const tradeGlyph = useRef<HTMLDivElement>(null);
+
+  useFrame(() => {
+    const group = root.current;
+    const world = getWorld();
+    const fx = getNpcInteractionFx(world);
+    const age = fx ? (world.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const live = Boolean(fx && age >= 0 && age < NPC_INTERACTION_DURATION);
+    if (tradeGlyph.current) tradeGlyph.current.style.display = live && fx?.kind === "trade" ? "grid" : "none";
+    if (!group) return;
+    group.visible = live;
+    if (!fx || !live) return;
+    const target = fx.targetId ? world.people.find((person) => person.id === fx.targetId) : null;
+    const player = world.people.find((person) => person.isPlayer);
+    const x = target?.x ?? fx.x;
+    const z = target?.z ?? fx.z;
+    const pose = npcInteractionPose(fx.kind, age);
+    const phase = Math.max(0, Math.min(1, age / NPC_INTERACTION_DURATION));
+    const pulse = Math.sin(phase * Math.PI);
+    group.position.set(x, heightAt(world, x, z) + 0.12, z);
+    for (const [ref, kind] of [[talk, "talk"], [heal, "heal"], [trade, "trade"], [bank, "bank"], [recruit, "recruit"]] as const) if (ref.current) ref.current.visible = fx.kind === kind;
+    if (talk.current) { talk.current.position.y = 1.65 + pulse * 0.65; talk.current.scale.setScalar(1.2 + pulse * 0.5); }
+    if (heal.current) { heal.current.position.y = pulse * 0.45; heal.current.rotation.y = age * 3.6; heal.current.scale.setScalar(1.1 + pulse * 0.65); }
+    if (trade.current) { trade.current.position.y = 0.48 + pose.lift; trade.current.rotation.y = player ? Math.atan2(player.x - x, player.z - z) : 0; trade.current.scale.setScalar(1 + pulse * 0.3); }
+    if (bank.current) { bank.current.position.y = 0.18 + pulse * 0.38; bank.current.scale.setScalar(0.9 + pulse * 0.3); }
+    if (recruit.current) { recruit.current.position.y = 1.35 + pulse * 0.65; recruit.current.rotation.y = -age * 3; recruit.current.scale.setScalar(1.3 + pulse * 0.5); }
+  });
+
+  return (
+    <group ref={root} visible={false}>
+      <group ref={talk}>{[-0.65, 0, 0.65].map((x, index) => <mesh key={x} position={[x, index * 0.36, 0]}><sphereGeometry args={[0.32 + index * 0.08, 8, 6]} /><meshBasicMaterial color="#fff0c8" depthTest={false} /></mesh>)}</group>
+      <group ref={heal}>
+        {[0, 0.48, 0.96].map((y) => <mesh key={y} position={[0, y, 0]} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[1.05 + y * 0.44, 1.2 + y * 0.44, 24]} /><meshBasicMaterial color="#a9e2cf" transparent opacity={0.48} depthWrite={false} /></mesh>)}
+        {Array.from({ length: 10 }, (_, index) => { const angle = index * Math.PI * 2 / 10; return <mesh key={index} position={[Math.cos(angle) * 1.45, 0.72 + (index % 3) * 0.42, Math.sin(angle) * 1.45]}><octahedronGeometry args={[0.3, 0]} /><meshBasicMaterial color="#e8fff5" depthTest={false} /></mesh>; })}
+      </group>
+      <group ref={trade}>
+        <group position={[2.2, 0, 0]}>
+          <mesh scale={[1, 0.82, 0.78]}><sphereGeometry args={[0.66, 10, 8]} /><meshStandardMaterial color="#8a633e" roughness={0.9} /></mesh>
+          <mesh position={[0, 0.56, 0]}><coneGeometry args={[0.32, 0.46, 10]} /><meshStandardMaterial color="#b58c58" roughness={0.86} /></mesh>
+          <mesh position={[0, 0.43, 0]} rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[0.3, 0.06, 7, 16]} /><meshBasicMaterial color="#e0b86d" /></mesh>
+          {[-0.48, 0, 0.48].map((x) => <mesh key={x} position={[x, 0.82 + Math.abs(x) * 0.28, 0]} rotation={[Math.PI / 2, 0, 0]}><cylinderGeometry args={[0.2, 0.2, 0.08, 12]} /><meshBasicMaterial color="#ffd36a" depthTest={false} /></mesh>)}
+        </group>
+        <mesh position={[0, 1.12, 1]}><boxGeometry args={[0.16, 0.16, 1.5]} /><meshBasicMaterial color="#ffd36a" depthTest={false} /></mesh>
+        <mesh position={[0, 1.12, 1.78]} rotation={[Math.PI / 2, 0, 0]}><coneGeometry args={[0.3, 0.48, 8]} /><meshBasicMaterial color="#ffd36a" depthTest={false} /></mesh>
+        <mesh position={[0, 1.12, 0.22]} rotation={[-Math.PI / 2, 0, 0]}><coneGeometry args={[0.3, 0.48, 8]} /><meshBasicMaterial color="#ffd36a" depthTest={false} /></mesh>
+      </group>
+      <Html position={[0, 2.15, 0]} center zIndexRange={[30, 0]} style={{ pointerEvents: "none" }}>
+        <div ref={tradeGlyph} style={{ display: "none", placeItems: "center", width: 54, height: 38, border: "1px solid #ffd36a", borderRadius: 10, background: "rgba(20,18,15,.9)", color: "#ffd36a", fontSize: 30, fontWeight: 800, lineHeight: 1 }}>↔</div>
+      </Html>
+      <group ref={bank}>
+        <mesh><boxGeometry args={[1.3, 0.72, 0.92]} /><meshStandardMaterial color="#5b4030" roughness={0.92} /></mesh>
+        <mesh position={[0, 0.42, 0]}><boxGeometry args={[1.38, 0.16, 1]} /><meshStandardMaterial color="#8a633e" roughness={0.86} /></mesh>
+        {[-0.48, 0, 0.48].map((x) => <mesh key={x} position={[x, 0.82, 0]} rotation={[Math.PI / 2, 0, 0]}><cylinderGeometry args={[0.17, 0.17, 0.07, 12]} /><meshBasicMaterial color="#ffd36a" /></mesh>)}
+      </group>
+      <group ref={recruit}>
+        <mesh rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[1.12, 0.16, 8, 24]} /><meshBasicMaterial color="#ffd36a" depthTest={false} /></mesh>
+        {Array.from({ length: 8 }, (_, index) => { const angle = index * Math.PI / 4; return <mesh key={index} position={[Math.cos(angle) * 1.52, (index % 2) * 0.62, Math.sin(angle) * 1.52]}><octahedronGeometry args={[0.46, 0]} /><meshBasicMaterial color="#fff0ae" depthTest={false} /></mesh>; })}
+      </group>
+    </group>
+  );
+}
+
 function CompanionFxMesh() {
   const root = useRef<THREE.Group>(null);
   const feed = useRef<THREE.Group>(null);
@@ -1424,6 +1494,7 @@ export function WorldScene() {
       <TamingFxMesh />
       <CraftFxMesh />
       <GatheringFxMesh />
+      <NpcInteractionFxMesh />
       <CompanionFxMesh />
       <ConstructionFxMesh />
       <ExtractionFxMesh />

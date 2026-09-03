@@ -11,6 +11,7 @@ import { replanIntentPath, tickPlayer, you } from "./player.ts";
 import { regrowResourceNodes } from "./resources/state.ts";
 import { tickWeather } from "./weather.ts";
 import { completeObjective, log, revealAround } from "./world.ts";
+import { emitNpcInteractionFx } from "./npc-interaction-animation.ts";
 import type { Person, Speed, World } from "./types.ts";
 
 const WALK_SPEED = 2.6;
@@ -171,6 +172,7 @@ export function recruitPerson(world: World, id: string) {
   world.gold -= 20;
   p.member = true;
   completeObjective(world, "recruit");
+  emitNpcInteractionFx(world, { kind: "recruit", targetId: p.id, x: p.x, z: p.z });
   return `${p.name} stands with the hall.`;
 }
 
