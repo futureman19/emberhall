@@ -2,15 +2,25 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 import { STATIONS } from "@/game/atlas";
+import { SECONDS_PER_HOUR } from "@/game/catalog";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
+import { MOONGATE_DURATION, getMoongateFx, moongatePhase } from "@/game/moongate-animation";
 
 export function Gates() {
   const group = useRef<THREE.Group>(null);
   useFrame((_, dt) => {
     if (!group.current) return;
-    group.current.children.forEach((c) => {
+    const world = getWorld();
+    const fx = getMoongateFx(world);
+    const age = fx ? (world.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const active = Boolean(fx && age >= 0 && age < MOONGATE_DURATION);
+    const phase = moongatePhase(age);
+    group.current.children.forEach((c, index) => {
       c.rotation.y += dt * 0.6;
+      const station = STATIONS[index];
+      const pulse = active && fx && station?.id === fx.destinationId ? phase.arrival * 0.72 : active && fx && station?.id === fx.sourceId ? phase.departure * 0.35 : 0;
+      c.scale.setScalar(1 + pulse);
     });
   });
   return (

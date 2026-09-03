@@ -18,6 +18,7 @@ import { CORPSE_DURATION, corpseFxAge, corpsePose, getCorpseFx } from "@/game/co
 import { CONSTRUCTION_DURATION, constructionPose, getConstructionFx } from "@/game/construction-animation";
 import { COMPANION_DURATION, companionPose, getCompanionFx } from "@/game/companion-animation";
 import { NPC_INTERACTION_DURATION, getNpcInteractionFx, npcInteractionPose } from "@/game/npc-interaction-animation";
+import { MOONGATE_DURATION, getMoongateFx, moongatePhase } from "@/game/moongate-animation";
 import { EXTRACTION_DURATION, extractionVisualProfile, getExtractionFx } from "@/game/extraction-animation";
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY as heightAt } from "@/game/height";
@@ -422,6 +423,76 @@ function CastFxMesh() {
           toneMapped={false}
         />
       </mesh>
+    </group>
+  );
+}
+
+function MoongateTravelFxMesh() {
+  const source = useRef<THREE.Group>(null);
+  const destination = useRef<THREE.Group>(null);
+  const transit = useRef<THREE.Group>(null);
+  const petA = useRef<THREE.Mesh>(null);
+  const petB = useRef<THREE.Mesh>(null);
+  const petC = useRef<THREE.Mesh>(null);
+  const label = useRef<HTMLDivElement>(null);
+
+  useFrame(() => {
+    const world = getWorld();
+    const fx = getMoongateFx(world);
+    const age = fx ? (world.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const live = Boolean(fx && age >= 0 && age < MOONGATE_DURATION);
+    if (label.current) label.current.style.display = live ? "grid" : "none";
+    for (const group of [source.current, destination.current, transit.current]) if (group) group.visible = live;
+    if (!fx || !live) return;
+    if (label.current) label.current.textContent = `MOONGATE · ${fx.destinationName.toUpperCase()}`;
+    const phase = moongatePhase(age);
+    const sourceY = groundY(fx.x, fx.z);
+    const destinationY = groundY(fx.tx, fx.tz);
+    if (source.current) {
+      source.current.position.set(fx.x, sourceY + 0.12, fx.z);
+      source.current.scale.setScalar(0.7 + phase.departure * 0.9);
+      source.current.rotation.y = age * 4;
+    }
+    if (destination.current) {
+      destination.current.position.set(fx.tx, destinationY + 0.12, fx.tz);
+      destination.current.scale.setScalar(0.85 + phase.arrival * 0.75);
+      destination.current.rotation.y = -age * 3.2;
+    }
+    if (transit.current) {
+      transit.current.position.set(fx.tx, destinationY + 1.1 + phase.transit * 0.65, fx.tz);
+      transit.current.rotation.y = age * 7;
+      transit.current.scale.setScalar(0.8 + phase.transit * 0.7);
+    }
+    const petRefs = [petA.current, petB.current, petC.current];
+    petRefs.forEach((mesh, index) => {
+      if (!mesh) return;
+      const arrival = fx.companions[index];
+      mesh.visible = Boolean(arrival);
+      if (!arrival) return;
+      mesh.position.set(arrival.x, groundY(arrival.x, arrival.z) + 0.12, arrival.z);
+      mesh.scale.setScalar(0.8 + phase.arrival * 0.65);
+      mesh.rotation.z = age * (index % 2 ? -3 : 3);
+    });
+  });
+
+  return (
+    <group>
+      <group ref={source} visible={false}>
+        <mesh rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.78, 1.12, 28]} /><meshBasicMaterial color="#b88cff" transparent opacity={0.78} depthWrite={false} /></mesh>
+        <mesh position={[0, 1.1, 0]}><cylinderGeometry args={[0.5, 0.88, 2.2, 16, 1, true]} /><meshBasicMaterial color="#8f6bd8" transparent opacity={0.34} side={THREE.DoubleSide} depthWrite={false} /></mesh>
+      </group>
+      <group ref={destination} visible={false}>
+        {[0, 0.5, 1].map((y) => <mesh key={y} position={[0, y, 0]} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.75 + y * 0.3, 1.02 + y * 0.3, 28]} /><meshBasicMaterial color={y === 0.5 ? "#fff0bd" : "#8fd5ff"} transparent opacity={0.82} depthWrite={false} depthTest={false} /></mesh>)}
+        <mesh position={[0, 1.25, 0]}><cylinderGeometry args={[0.8, 0.38, 2.5, 16, 1, true]} /><meshBasicMaterial color="#8fd5ff" transparent opacity={0.34} side={THREE.DoubleSide} depthWrite={false} /></mesh>
+      </group>
+      <group ref={transit} visible={false}>
+        {[0, Math.PI / 3, Math.PI * 2 / 3].map((rotation) => <mesh key={rotation} rotation={[Math.PI / 2, rotation, rotation]}><torusGeometry args={[1.05, 0.1, 8, 24]} /><meshBasicMaterial color="#e7c5ff" transparent opacity={0.8} depthWrite={false} depthTest={false} /></mesh>)}
+        {Array.from({ length: 8 }, (_, index) => { const angle = index * Math.PI / 4; return <mesh key={index} position={[Math.cos(angle) * 1.28, (index % 2) * 0.5, Math.sin(angle) * 1.28]} rotation={[0, angle, Math.PI / 4]}><boxGeometry args={[0.12, 0.12, 0.82]} /><meshBasicMaterial color={index % 2 ? "#fff0bd" : "#8fd5ff"} depthTest={false} /></mesh>; })}
+        <Html position={[0, 2.15, 0]} center zIndexRange={[29, 0]} style={{ pointerEvents: "none" }}><div ref={label} style={{ display: "none", placeItems: "center", minWidth: 132, padding: "7px 10px", border: "1px solid #b88cff", borderRadius: 8, background: "rgba(20,18,15,.92)", color: "#fff8e7", fontFamily: "serif", fontSize: 10, fontWeight: 700, letterSpacing: ".1em", whiteSpace: "nowrap" }} /></Html>
+      </group>
+      <mesh ref={petA} visible={false} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.42, 0.62, 18]} /><meshBasicMaterial color="#ffd36a" transparent opacity={0.8} depthWrite={false} /></mesh>
+      <mesh ref={petB} visible={false} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.42, 0.62, 18]} /><meshBasicMaterial color="#ffd36a" transparent opacity={0.8} depthWrite={false} /></mesh>
+      <mesh ref={petC} visible={false} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.42, 0.62, 18]} /><meshBasicMaterial color="#ffd36a" transparent opacity={0.8} depthWrite={false} /></mesh>
     </group>
   );
 }
@@ -1489,6 +1560,7 @@ export function WorldScene() {
       <MarkStones />
       <CastFxMesh />
       <TravelFxMesh />
+      <MoongateTravelFxMesh />
       <FizzleFxMesh />
       <HealingFxMesh />
       <TamingFxMesh />
