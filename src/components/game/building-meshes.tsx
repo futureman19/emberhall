@@ -10,7 +10,9 @@ import { hoverAt, leftAt, liftAt } from "@/game/world-pointer";
 import type { Building, BuildingKind } from "@/game/types";
 
 const B = 0.5;
+/** Default cube scale. 1.04 fuses faces — only the hut preview uses it. */
 const GAP = 0.96;
+const FUSE = 1.04;
 
 type Block = "timber" | "dark" | "cobble" | "wool" | "gold" | "glass" | "thatch" | "stone" | "coal" | "soil" | "leaf";
 
@@ -29,9 +31,13 @@ interface Spec {
   z0: number;
   z1: number;
   enterable: boolean;
+  fuse?: boolean;
 }
 
-const PALETTE: Record<Block, { color: string; roughness: number; metalness: number; opacity: number }> = {
+const PALETTE: Record<
+  Block,
+  { color: string; roughness: number; metalness: number; opacity: number; emissive?: string; emissiveIntensity?: number }
+> = {
   timber: { color: "#6a4a32", roughness: 0.9, metalness: 0, opacity: 1 },
   dark: { color: "#3a2818", roughness: 0.88, metalness: 0, opacity: 1 },
   cobble: { color: "#7a746c", roughness: 0.92, metalness: 0, opacity: 1 },
@@ -83,6 +89,54 @@ function markRoof(out: Vox[], h: number, x0: number, x1: number, z0: number, z1:
     else if (v.x >= x1) v.cut = true;
     void z0;
     void x0;
+  }
+}
+
+function bake(out: Vox[]): Vox[] {
+  const m = new Map<string, Vox>();
+  for (const v of out) m.set(key(v.x, v.y, v.z), v);
+  return [...m.values()];
+}
+
+/** Ridge along X, slope in Z — hall silhouette, not a Minecraft pyramid. */
+function gableRoof(out: Vox[], x0: number, x1: number, z0: number, z1: number, h: number, t: Block) {
+  const ox0 = x0 - 1;
+  const ox1 = x1 + 1;
+  const oz0 = z0 - 1;
+  const oz1 = z1 + 1;
+  const steps = Math.max(2, Math.floor((oz1 - oz0) / 2) + 1);
+  for (let i = 0; i < steps; i++) {
+    const za = oz0 + i;
+    const zb = oz1 - i;
+    if (za > zb) break;
+    fill(out, ox0, h + 1 + i, za, ox1, h + 1 + i, zb, t);
+  }
+}
+
+function halfTimber(out: Vox[], x0: number, x1: number, z0: number, z1: number, h: number, doorZ: number) {
+  const posts: [number, number][] = [
+    [x0, z0],
+    [x0, z1],
+    [x1, z0],
+    [x1, z1],
+  ];
+  if (x1 - x0 >= 6) {
+    posts.push([Math.round((x0 + x1) / 2), z0], [Math.round((x0 + x1) / 2), z1]);
+  }
+  for (const [x, z] of posts) {
+    for (let y = 1; y <= h; y++) put(out, x, y, z, "dark");
+  }
+  for (let x = x0; x <= x1; x++) {
+    put(out, x, h, z0, "dark");
+    put(out, x, h, z1, "dark");
+    put(out, x, 1, z0, "stone");
+    if (z1 !== doorZ || x === x0 || x === x1) put(out, x, 1, z1, "stone");
+  }
+  for (let z = z0; z <= z1; z++) {
+    put(out, x0, h, z, "dark");
+    put(out, x1, h, z, "dark");
+    put(out, x0, 1, z, "stone");
+    put(out, x1, 1, z, "stone");
   }
 }
 
@@ -149,7 +203,7 @@ function house(opts: {
   fill(out, -1, 1, -1, 1, 1, 0, "dark");
   put(out, 0, 2, -1, "gold");
   markRoof(out, h, x0, x1, z0, z1);
-  return { voxels: out, x0, x1, z0, z1, enterable: true };
+  return { voxels: bake(out), x0, x1, z0, z1, enterable: true };
 }
 
 function makeHall(): Spec {
@@ -206,6 +260,7 @@ function makeKitchen(): Spec {
   });
   fill(spec.voxels, -2, 3, 4, 2, 3, 5, "wool");
   markRoof(spec.voxels, 3, -3, 3, -3, 3);
+  spec.voxels = bake(spec.voxels);
   return spec;
 }
 
@@ -505,6 +560,7 @@ function makeShop(): Spec {
   fill(spec.voxels, -2, 1, 1, 2, 1, 1, "dark");
   put(spec.voxels, 0, 2, 1, "gold");
   markRoof(spec.voxels, 3, -4, 4, -3, 3);
+  spec.voxels = bake(spec.voxels);
   return spec;
 }
 
@@ -578,6 +634,7 @@ function makeBank(): Spec {
   fill(spec.voxels, -1, 1, -1, 1, 1, 0, "dark");
   put(spec.voxels, 0, 2, 0, "gold");
   markRoof(spec.voxels, 3, -3, 3, -2, 2);
+  spec.voxels = bake(spec.voxels);
   return spec;
 }
 
@@ -594,7 +651,50 @@ function makePorch(): Spec {
 }
 
 function makeHut(): Spec {
-  return makeCottage();
+  const x0 = -3;
+  const x1 = 3;
+  const z0 = -2;
+  const z1 = 2;
+  const h = 3;
+  const out: Vox[] = [];
+  fill(out, x0 - 1, 0, z0 - 1, x1 + 1, 0, z1 + 1, "cobble", (x, _y, z) => x >= x0 && x <= x1 && z >= z0 && z <= z1);
+  fill(out, x0, 0, z0, x1, 0, z1, "timber");
+  const holes = new Set<string>();
+  for (let y = 1; y <= 2; y++) holes.add(key(0, y, z1));
+  for (const w of [
+    { x: -2, z: z1, w: 1, hh: 2 },
+    { x: 2, z: z1, w: 1, hh: 2 },
+    { x: -2, z: z0, w: 1, hh: 1 },
+    { x: 1, z: z0, w: 1, hh: 1 },
+  ]) {
+    for (let x = w.x; x < w.x + w.w; x++) {
+      for (let y = 2; y < 2 + w.hh; y++) {
+        holes.add(key(x, y, w.z));
+        put(out, x, y, w.z, "glass");
+      }
+      put(out, x, 1, w.z, "gold");
+      put(out, x, 2 + w.hh, w.z, "dark");
+    }
+  }
+  fill(out, x0, 1, z0, x1, h, z1, "timber", (x, y, z) => {
+    const edge = x === x0 || x === x1 || z === z0 || z === z1;
+    if (!edge) return true;
+    return holes.has(key(x, y, z));
+  });
+  halfTimber(out, x0, x1, z0, z1, h, z1);
+  put(out, 0, 3, z1, "gold");
+  put(out, 0, 1, z1, "wool");
+  for (const bx of [-2, 2]) {
+    for (let y = 2; y <= h + 1; y++) put(out, bx, y, z1 + 1, "wool");
+    put(out, bx, h + 1, z1 + 1, "gold");
+  }
+  gableRoof(out, x0, x1, z0, z1, h, "dark");
+  for (let y = h + 1; y <= h + 4; y++) put(out, 2, y, -1, "dark");
+  put(out, 2, h + 5, -1, "coal");
+  fill(out, -1, 1, -1, 1, 1, 0, "dark");
+  put(out, 0, 2, -1, "gold");
+  markRoof(out, h, x0, x1, z0, z1);
+  return { voxels: bake(out), x0, x1, z0, z1, enterable: true, fuse: true };
 }
 
 function makeHomestead(): Spec {
@@ -653,14 +753,20 @@ function BlockLayer({
   roughness,
   metalness,
   opacity,
+  emissive,
+  emissiveIntensity,
   ghost,
+  scale,
 }: {
   items: THREE.Vector3[];
   color: string;
   roughness: number;
   metalness: number;
   opacity: number;
+  emissive?: string;
+  emissiveIntensity?: number;
   ghost?: boolean;
+  scale: number;
 }) {
   const ref = useRef<THREE.InstancedMesh>(null);
   const dummy = useMemo(() => new THREE.Object3D(), []);
@@ -686,11 +792,13 @@ function BlockLayer({
       receiveShadow={!ghost}
       renderOrder={ghost ? 2 : 0}
     >
-      <boxGeometry args={[B * GAP, B * GAP, B * GAP]} />
+      <boxGeometry args={[scale, scale, scale]} />
       <meshStandardMaterial
         color={color}
         roughness={roughness}
         metalness={metalness}
+        emissive={emissive ?? "#000000"}
+        emissiveIntensity={ghost ? 0 : (emissiveIntensity ?? 0)}
         transparent={fade < 1}
         opacity={fade}
         depthWrite={fade >= 1}
@@ -788,11 +896,31 @@ function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
       }}
     >
       {KINDS.map((k) => (
-        <BlockLayer key={`${k}-s`} items={layers.solid[k]} {...PALETTE[k]} />
+        <BlockLayer
+          key={`${k}-s`}
+          items={layers.solid[k]}
+          {...PALETTE[k]}
+          {...(spec.fuse && k === "glass"
+            ? { color: "#e8b96a", opacity: 0.92, emissive: "#e8b96a", emissiveIntensity: 0.62 }
+            : spec.fuse && k === "gold"
+              ? { emissive: "#a88848", emissiveIntensity: 0.18 }
+              : { emissiveIntensity: 0 })}
+          scale={B * (spec.fuse ? FUSE : GAP)}
+        />
       ))}
       {!inside &&
         KINDS.map((k) => (
-          <BlockLayer key={`${k}-c`} items={layers.cut[k]} {...PALETTE[k]} />
+          <BlockLayer
+            key={`${k}-c`}
+            items={layers.cut[k]}
+            {...PALETTE[k]}
+            {...(spec.fuse && k === "glass"
+              ? { color: "#e8b96a", opacity: 0.92, emissive: "#e8b96a", emissiveIntensity: 0.62 }
+              : spec.fuse && k === "gold"
+                ? { emissive: "#a88848", emissiveIntensity: 0.18 }
+                : { emissiveIntensity: 0 })}
+            scale={B * (spec.fuse ? FUSE : GAP)}
+          />
         ))}
     </group>
   );
@@ -814,7 +942,7 @@ export function Buildings() {
   );
 }
 
-function PreviewLayer({ items, color }: { items: THREE.Vector3[]; color: string }) {
+function PreviewLayer({ items, color, scale }: { items: THREE.Vector3[]; color: string; scale: number }) {
   const ref = useRef<THREE.InstancedMesh>(null);
   const dummy = useMemo(() => new THREE.Object3D(), []);
   useLayoutEffect(() => {
@@ -832,7 +960,7 @@ function PreviewLayer({ items, color }: { items: THREE.Vector3[]; color: string 
   if (items.length === 0) return null;
   return (
     <instancedMesh ref={ref} args={[undefined, undefined, items.length]} frustumCulled={false} raycast={() => {}}>
-      <boxGeometry args={[B * GAP, B * GAP, B * GAP]} />
+      <boxGeometry args={[scale, scale, scale]} />
       <meshBasicMaterial color={color} transparent opacity={0.34} depthWrite={false} />
     </instancedMesh>
   );
@@ -881,7 +1009,7 @@ function GhostAt({ kind, tx, ty }: { kind: BuildingKind; tx: number; ty: number 
         <planeGeometry args={[Math.min(box.w * 0.35, 1.4), 0.42]} />
         <meshBasicMaterial color={color} transparent opacity={0.7} depthWrite={false} />
       </mesh>
-      <PreviewLayer items={items} color={color} />
+      <PreviewLayer items={items} color={color} scale={B * (spec.fuse ? FUSE : GAP)} />
     </group>
   );
 }

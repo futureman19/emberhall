@@ -1,4 +1,4 @@
-import { EMBERHALL_BANK } from "./atlas.ts";
+import { COURT, EMBERHALL_BANK } from "./atlas.ts";
 import { buildingBox, boxesOverlap } from "./building-size.ts";
 import { emptyChest, ITEM_META } from "./catalog.ts";
 import { plotAt } from "./farm.ts";
@@ -140,4 +140,38 @@ export function commandHouseTake(world: World, buildingId: string, item: ItemId,
   chest[item] = have - n;
   world.player.pack[item] = (world.player.pack[item] ?? 0) + n;
   return "Out of the chest.";
+}
+
+/** Look-preview hut: no deed, no gold. Idempotent. Skip if you already keep a house. */
+export function ensureLookHut(world: World) {
+  if (!world.player?.id || !world.tiles?.length) return;
+  if (playerHouse(world)) return;
+  const spots = [
+    { tx: COURT.tx - 6, ty: COURT.ty + 6 },
+    { tx: COURT.tx + 10, ty: COURT.ty + 6 },
+    { tx: COURT.tx - 10, ty: COURT.ty - 8 },
+    { tx: COURT.tx + 2, ty: COURT.ty + 10 },
+  ];
+  for (const { tx, ty } of spots) {
+    const box = buildingBox("hut", tx, ty);
+    if (world.buildings.some((b) => boxesOverlap(box, buildingBox(b.kind, b.tx, b.ty)))) continue;
+    for (let z = Math.floor(box.z0); z <= Math.floor(box.z1 - 1e-4); z++) {
+      for (let x = Math.floor(box.x0); x <= Math.floor(box.x1 - 1e-4); x++) {
+        const tile = world.tiles[z]?.[x];
+        if (tile) tile.kind = "grass";
+      }
+    }
+    world.buildings.push({
+      id: nid(world, "b"),
+      kind: "hut",
+      tx,
+      ty,
+      beds: [],
+      ownerId: world.player.id,
+      chest: emptyChest(),
+      chestGold: 0,
+    });
+    log(world, "A hut stands for the looking — no deed asked.");
+    return;
+  }
 }
