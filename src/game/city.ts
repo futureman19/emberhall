@@ -21,7 +21,7 @@ export const WARD = { x0: 152, x1: 200, z0: 310, z1: 362 };
 export const CITY = { tx: 176, ty: 336 };
 const WARD_H = 3;
 const GATE_Z = [334, 335, 336, 337, 338];
-export const KEEP = { tx: 176, ty: 318, x0: 171, x1: 181, z0: 314, z1: 322 };
+export const KEEP = { tx: 176, ty: 320, x0: 166, x1: 186, z0: 312, z1: 327 };
 
 function paintRoad(tiles: Tile[][], ax: number, ay: number, bx: number, by: number, w = 1) {
   const n = Math.max(1, Math.hypot(bx - ax, by - ay));
@@ -168,7 +168,7 @@ interface CitySoul {
 const CITY_SOULS: CitySoul[] = [
   { x: 178, z: 339, cls: "merchant", role: "banker", name: "Odo Goldhand" },
   { x: 170, z: 342, cls: "merchant", role: "provisioner", name: "Wren Hall" },
-  { x: 181, z: 325, cls: "mage", role: "healer", name: "Sister Anselm" },
+  { x: 181, z: 333, cls: "mage", role: "healer", name: "Sister Anselm" },
   { x: 192, z: 343, cls: "warrior", name: "Baldric Smith" },
   { x: 160, z: 344, cls: "merchant", name: "Maeb Oakley" },
   { x: 166, z: 330, cls: "rogue", name: "Tam Crier" },
@@ -182,9 +182,26 @@ const CITY_SOULS: CitySoul[] = [
   { x: 195, z: 334, cls: "merchant", name: "Simm Vale" },
 ];
 
-/** Stamp the capital's buildings and townsfolk — once, and safe to re-run. */
+/** Snap the keep (and Anselm) onto the massive shell so old halls pick it up. */
+export function ensureKeepSite(world: World) {
+  const keep = world.buildings.find((b) => b.kind === "keep");
+  if (keep) {
+    keep.tx = KEEP.tx;
+    keep.ty = KEEP.ty;
+  }
+  const anselm = world.people.find((p) => p.name === "Sister Anselm");
+  if (anselm && anselm.z <= KEEP.z1) {
+    anselm.x = 181;
+    anselm.z = 333;
+    anselm.path = [];
+    anselm.home = { tx: 181, ty: 333 };
+  }
+}
 export function ensureCity(world: World): void {
-  if (world.buildings.some((b) => b.kind === "keep")) return;
+  if (world.buildings.some((b) => b.kind === "keep")) {
+    ensureKeepSite(world);
+    return;
+  }
   for (const b of cityBuildings()) {
     const rec: Building = { id: nid(world, "b"), kind: b.kind, tx: b.tx, ty: b.ty, beds: [] };
     world.buildings.push(rec);

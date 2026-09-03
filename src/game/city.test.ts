@@ -22,9 +22,10 @@ test("the capital's ground: wall ring, gates, streets, keep shell", () => {
   assert.equal(at(176, 336).h, 3);
   assert.notEqual(at(160, 350).kind, "tree");
   // The keep's shell: stone ring, floor within, a door off the bailey.
-  assert.equal(at(KEEP.x0, 318).kind, "wall");
+  assert.equal(at(KEEP.x0, KEEP.ty).kind, "wall");
   assert.equal(at(KEEP.tx, KEEP.ty).kind, "floor");
   assert.equal(at(KEEP.tx, KEEP.z1).kind, "cobble");
+  assert.ok(KEEP.x1 - KEEP.x0 >= 18, "keep shell is a castle, not a hut");
 });
 
 test("the ward truly encloses: you leave through a gate or not at all", () => {

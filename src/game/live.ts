@@ -7,7 +7,7 @@ import { maxMana } from "./magery.ts";
 import { you } from "./player.ts";
 import { mulberry32 } from "./rng.ts";
 import { ensureWeather, weatherSnap } from "./weather.ts";
-import { ensureCity } from "./city.ts";
+import { ensureCity, ensureKeepSite } from "./city.ts";
 import { createStubWorld, createWorld, seedEmberhallBank, seedFieldStones, seedTownNpcs } from "./world.ts";
 import { ensureLookHut } from "./house.ts";
 import { createResourceNodeStateMap, regrowResourceNodes } from "./resources/state.ts";
@@ -79,6 +79,7 @@ function withFauna(w: World) {
   if (w.tiles.length) seedTownNpcs(w, mulberry32(w.seed + 91));
   seedEmberhallBank(w);
   ensureCity(w);
+  ensureKeepSite(w);
   ensureLookHut(w);
   ensureWeather(w);
   regrowResourceNodes(w);
