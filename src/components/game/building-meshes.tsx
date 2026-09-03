@@ -449,92 +449,117 @@ function makeBoard(): Spec {
   return { voxels: out, x0: -3, x1: 3, z0: 0, z1: 2, enterable: false };
 }
 
-/** The King's keep: a stone great hall with four turrets, banners, and a dais. */
+/** The King's keep: a massive fused castle — four towers, south gate, inner hall. */
+function keepTower(out: Vox[], x0: number, z0: number) {
+  const x1 = x0 + 3;
+  const z1 = z0 + 3;
+  const top = 16;
+  fill(out, x0, 0, z0, x1, 0, z1, "cobble");
+  fill(out, x0, 1, z0, x1, top, z1, "stone", (x, _y, z) => x > x0 && x < x1 && z > z0 && z < z1);
+  for (let x = x0; x <= x1; x += 3) {
+    put(out, x, top + 1, z0, "stone");
+    put(out, x, top + 1, z1, "stone");
+  }
+  for (let z = z0; z <= z1; z += 3) {
+    put(out, x0, top + 1, z, "stone");
+    put(out, x1, top + 1, z, "stone");
+  }
+  fill(out, x0 + 1, top + 1, z0 + 1, x1 - 1, top + 1, z1 - 1, "dark");
+  put(out, x0 + 1, top + 2, z0 + 1, "dark");
+  put(out, x1 - 1, top + 2, z1 - 1, "gold");
+  put(out, x0 + 1, 4, z1, "glass");
+  put(out, x1 - 1, 4, z1, "glass");
+  put(out, x0 + 1, 8, z1, "glass");
+  put(out, x1 - 1, 8, z1, "glass");
+  const pole = x0 < 0 ? x0 : x1;
+  for (let y = 6; y <= 12; y++) put(out, pole, y, z1 + 1, "wool");
+  put(out, pole, 12, z1 + 1, "gold");
+}
+
 function makeKeep(): Spec {
+  const x0 = -20;
+  const x1 = 21;
+  const z0 = -16;
+  const z1 = 15;
+  const h = 9;
   const out: Vox[] = [];
-  const x0 = -11;
-  const x1 = 11;
-  const z0 = -9;
-  const z1 = 9;
-  const h = 6;
-  const holes = new Set<string>();
   fill(out, x0 - 1, 0, z0 - 1, x1 + 1, 0, z1 + 1, "cobble", (x, _y, z) => x >= x0 && x <= x1 && z >= z0 && z <= z1);
   fill(out, x0, 0, z0, x1, 0, z1, "stone");
-  for (let x = -1; x <= 1; x++) for (let y = 1; y <= 4; y++) holes.add(key(x, y, z1));
+  const holes = new Set<string>();
+  for (let x = -2; x <= 2; x++) {
+    for (let y = 1; y <= 5; y++) holes.add(key(x, y, z1));
+  }
   const wins = [
-    { x: -7, z: z1, w: 2, hh: 2 },
-    { x: 5, z: z1, w: 2, hh: 2 },
-    { x: -6, z: z0, w: 2, hh: 2 },
-    { x: 4, z: z0, w: 2, hh: 2 },
+    { x: -12, z: z1, w: 2, hh: 3 },
+    { x: 10, z: z1, w: 2, hh: 3 },
+    { x: -10, z: z0, w: 3, hh: 3 },
+    { x: 8, z: z0, w: 3, hh: 3 },
+    { x: x0, z: -4, w: 1, hh: 3 },
+    { x: x1, z: -4, w: 1, hh: 3 },
+    { x: x0, z: 4, w: 1, hh: 3 },
+    { x: x1, z: 4, w: 1, hh: 3 },
   ];
   for (const w of wins) {
     for (let x = w.x; x < w.x + w.w; x++) {
-      for (let y = 2; y < 2 + w.hh; y++) {
+      for (let y = 3; y < 3 + w.hh; y++) {
         holes.add(key(x, y, w.z));
         put(out, x, y, w.z, "glass");
       }
-    }
-    put(out, w.x, 1, w.z, "gold");
-  }
-  for (const sx of [x0, x1]) {
-    for (const wz of [-4, 2]) {
-      for (let y = 2; y <= 3; y++) {
-        holes.add(key(sx, y, wz));
-        put(out, sx, y, wz, "glass");
-      }
-      put(out, sx, 1, wz, "gold");
+      put(out, x, 2, w.z, "gold");
     }
   }
+  const inTower = (x: number, z: number) =>
+    (x <= x0 + 3 && z <= z0 + 3) ||
+    (x >= x1 - 3 && z <= z0 + 3) ||
+    (x <= x0 + 3 && z >= z1 - 3) ||
+    (x >= x1 - 3 && z >= z1 - 3);
   fill(out, x0, 1, z0, x1, h, z1, "stone", (x, y, z) => {
     const edge = x === x0 || x === x1 || z === z0 || z === z1;
     if (!edge) return true;
+    if (inTower(x, z)) return true;
     return holes.has(key(x, y, z));
   });
-  for (let x = -1; x <= 1; x++) put(out, x, 5, z1, "gold");
-  put(out, -2, 1, z1, "wool");
-  put(out, 2, 1, z1, "wool");
-  for (const bx of [-4, 4]) {
-    for (let y = 2; y <= h; y++) put(out, bx, y, z1 + 1, "wool");
-    put(out, bx, h, z1 + 1, "gold");
-  }
-  for (const [cx, cz] of [
-    [x0, z0],
-    [x1 - 2, z0],
-    [x0, z1 - 2],
-    [x1 - 2, z1 - 2],
-  ] as const) {
-    fill(out, cx, 1, cz, cx + 2, h + 4, cz + 2, "stone", (x, _y, z) => x > cx && x < cx + 2 && z > cz && z < cz + 2);
-    fill(out, cx, h + 5, cz, cx + 2, h + 5, cz + 2, "dark", (x, _y, z) => x > cx && x < cx + 2 && z > cz && z < cz + 2);
-    put(out, cx + 1, h + 6, cz + 1, "gold");
-  }
-  for (let x = x0; x <= x1; x += 2) {
+  keepTower(out, x0, z0);
+  keepTower(out, x1 - 3, z0);
+  keepTower(out, x0, z1 - 3);
+  keepTower(out, x1 - 3, z1 - 3);
+  for (let x = -2; x <= 2; x++) put(out, x, 6, z1, "gold");
+  put(out, -3, 1, z1, "wool");
+  put(out, 3, 1, z1, "wool");
+  for (let x = x0 + 4; x <= x1 - 4; x += 2) {
     put(out, x, h + 1, z0, "stone");
     put(out, x, h + 1, z1, "stone");
   }
-  for (let z = z0; z <= z1; z += 2) {
+  for (let z = z0 + 4; z <= z1 - 4; z += 2) {
     put(out, x0, h + 1, z, "stone");
     put(out, x1, h + 1, z, "stone");
   }
-  fill(out, x0 + 1, h + 1, z0 + 1, x1 - 1, h + 1, z1 - 1, "dark");
-  // The great hall within: long table, hearth, and the dais at the north end.
-  fill(out, -6, 1, -2, -4, 1, 2, "dark");
-  put(out, -5, 2, 0, "gold");
-  fill(out, -1, 1, -1, 1, 1, 0, "coal");
-  for (const [px, pz] of [
-    [-7, -5],
-    [7, -5],
-    [-7, 5],
-    [7, 5],
-  ] as const) {
-    fill(out, px, 1, pz, px, h - 1, pz, "cobble");
+  const ix0 = -8;
+  const ix1 = 8;
+  const iz0 = -14;
+  const iz1 = -1;
+  const ih = 12;
+  fill(out, ix0, 1, iz0, ix1, ih, iz1, "stone", (x, y, z) => {
+    const edge = x === ix0 || x === ix1 || z === iz0 || z === iz1;
+    if (!edge) return true;
+    if (z === iz1 && x >= -1 && x <= 1 && y <= 4) return true;
+    return false;
+  });
+  for (const x of [-5, 4]) {
+    for (let y = 4; y <= 6; y++) put(out, x, y, iz1, "glass");
+    put(out, x, 3, iz1, "gold");
   }
-  fill(out, -2, 1, z0 + 1, 2, 2, z0 + 3, "cobble");
-  put(out, 0, 3, z0 + 1, "wool");
-  put(out, 0, 3, z0 + 2, "gold");
-  put(out, -1, 3, z0 + 3, "gold");
-  put(out, 1, 3, z0 + 3, "gold");
+  gableRoof(out, ix0, ix1, iz0, iz1, ih, "dark");
+  fill(out, -2, 1, iz0 + 1, 2, 2, iz0 + 3, "cobble");
+  put(out, 0, 3, iz0 + 1, "wool");
+  put(out, 0, 3, iz0 + 2, "gold");
+  put(out, -1, 3, iz0 + 3, "gold");
+  put(out, 1, 3, iz0 + 3, "gold");
+  fill(out, -6, 1, 2, -4, 1, 6, "dark");
+  put(out, -5, 2, 4, "gold");
+  fill(out, -1, 1, 3, 1, 1, 4, "coal");
   markRoof(out, h, x0, x1, z0, z1);
-  return { voxels: out, x0, x1, z0, z1, enterable: true };
+  return { voxels: bake(out), x0, x1, z0, z1, enterable: true, fuse: true };
 }
 
 /** Curtain wall, x-run: an eight-tile stretch with merlons on the outer face. */

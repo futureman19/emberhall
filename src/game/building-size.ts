@@ -15,7 +15,7 @@ export const BUILD_SIZE: Record<BuildingKind, { x0: number; x1: number; z0: numb
   farm: { x0: -5, x1: 5, z0: -5, z1: 5 },
   bank: { x0: -3, x1: 3, z0: -2, z1: 2 },
   // Kingsford — the capital's structures.
-  keep: { x0: -11, x1: 11, z0: -9, z1: 9 },
+  keep: { x0: -20, x1: 21, z0: -16, z1: 15 },
   rampart: { x0: -8, x1: 7, z0: -1, z1: 0 },
   rampartV: { x0: -1, x1: 0, z0: -8, z1: 7 },
   tower: { x0: -2, x1: 2, z0: -2, z1: 2 },
