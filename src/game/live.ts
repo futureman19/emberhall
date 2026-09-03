@@ -72,6 +72,10 @@ function withFauna(w: World) {
     if (w.player.workT == null) w.player.workT = 0;
     const p = w.people.find((x) => x.isPlayer);
     if (p && p.ghost == null) p.ghost = Boolean(w.player.ghost);
+    if (p && (p.story == null || Number.isNaN(p.story))) p.story = 0;
+    for (const person of w.people) {
+      if (person.story == null || Number.isNaN(person.story)) person.story = 0;
+    }
     const max = maxMana(p?.int ?? 8, w.player.skills.magery ?? 0);
     if (w.player.mana == null || Number.isNaN(w.player.mana)) w.player.mana = max;
     w.player.mana = Math.min(max, w.player.mana);

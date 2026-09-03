@@ -12,6 +12,7 @@ import { regrowResourceNodes } from "./resources/state.ts";
 import { tickWeather } from "./weather.ts";
 import { completeObjective, log, revealAround } from "./world.ts";
 import { emitNpcInteractionFx } from "./npc-interaction-animation.ts";
+import { applyKeepStory } from "./keep-story.ts";
 import type { Person, Speed, World } from "./types.ts";
 
 const WALK_SPEED = 2.6;
@@ -83,6 +84,8 @@ function followPath(world: World, p: Person, dt: number): "idle" | "moving" | "s
     p.z += (dz / dist) * remaining;
     remaining = 0;
   }
+
+  applyKeepStory(p, startX, startZ);
 
   const moved = Math.hypot(p.x - startX, p.z - startZ);
   const stillFor = moved < 0.001 ? (previous?.stillFor ?? 0) + dt : 0;

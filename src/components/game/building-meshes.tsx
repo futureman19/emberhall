@@ -4,6 +4,7 @@ import { COURT } from "@/game/atlas";
 import { stationOf } from "@/game/craft";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
+import { KEEP_STORY_VOX } from "@/game/keep-story";
 import { siteError } from "@/game/building-size";
 import { useGame } from "@/game/store";
 import { hoverAt, leftAt, liftAt } from "@/game/world-pointer";
@@ -566,6 +567,16 @@ function makeKeep(): Spec {
   fill(out, -6, 1, 2, -4, 1, 6, "dark");
   put(out, -5, 2, 4, "gold");
   fill(out, -1, 1, 3, 1, 1, 4, "coal");
+  const well = (x: number, z: number) => x >= 15 && x <= 18 && z >= -9 && z <= 10;
+  for (const fy of [4, 8, 12, 16]) {
+    fill(out, x0 + 1, fy, z0 + 1, x1 - 1, fy, z1 - 1, "timber", (x, _y, z) => well(x, z));
+  }
+  for (let z = -9; z <= 10; z++) {
+    const t = (10 - z) / 19;
+    const y = Math.max(0, Math.round(t * 12));
+    fill(out, 15, y, z, 18, y, z, "stone");
+    if (y > 0) fill(out, 15, y - 1, z, 16, y - 1, z, "dark");
+  }
   markRoof(out, h, x0, x1, z0, z1);
   return { voxels: bake(out), x0, x1, z0, z1, enterable: true, fuse: true };
 }
@@ -899,6 +910,7 @@ function BlockLayer({
 function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
   const spec = SPECS[b.kind];
   const y0 = groundY(getWorld(), b.tx, b.ty);
+  const story = getWorld().people.find((p) => p.isPlayer)?.story ?? 0;
   const layers = useMemo(() => {
     const solid: Record<Block, THREE.Vector3[]> = {
       timber: [],
@@ -926,12 +938,14 @@ function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
       soil: [],
       leaf: [],
     };
+    const cap = inside && b.kind === "keep" ? Math.round(story) * KEEP_STORY_VOX + KEEP_STORY_VOX + 1 : Infinity;
     for (const v of spec.voxels) {
+      if (v.y > cap) continue;
       const p = new THREE.Vector3(b.tx + (v.x + 0.5) * B, y0 + (v.y + 0.5) * B, b.ty + (v.z + 0.5) * B);
       (v.cut ? cut : solid)[v.t].push(p);
     }
     return { solid, cut };
-  }, [spec, b.tx, b.ty, y0]);
+  }, [spec, b.tx, b.ty, b.kind, y0, inside, story]);
 
   return (
     <group

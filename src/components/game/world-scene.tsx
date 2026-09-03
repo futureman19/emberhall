@@ -23,6 +23,7 @@ import { PERSONAL_ACTION_DURATION, getPersonalActionFx, personalActionLabel, per
 import { EXTRACTION_DURATION, extractionVisualProfile, getExtractionFx } from "@/game/extraction-animation";
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY as heightAt } from "@/game/height";
+import { keepStoryY } from "@/game/keep-story";
 import { getGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
 import { getWorld } from "@/game/live";
 import { getCastFx, getDeathFx, getFizzleFx } from "@/game/magery";
@@ -184,7 +185,7 @@ function Rig() {
     const p = getWorld().people.find((x) => x.isPlayer);
     const c = controls.current;
     if (!p || !c || phase !== "playing") return;
-    const y = groundY(p.x, p.z);
+    const y = groundY(p.x, p.z) + keepStoryY(p.story ?? 0);
     const anchor = followAnchor.current;
     if (!followReady.current) {
       anchor.copy(c.target);

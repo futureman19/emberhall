@@ -263,6 +263,7 @@ export function createPerson(
     home: { tx: Math.round(opts.x), ty: Math.round(opts.z) },
     bob: 0,
     ghost: false,
+    story: 0,
   };
 }
 

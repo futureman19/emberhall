@@ -313,7 +313,8 @@ function isPerson(value: unknown): boolean {
     isFiniteNumber(value.awayUntil) &&
     isNullablePoint(value.home) &&
     isFiniteNumber(value.bob) &&
-    isBoolean(value.ghost)
+    isBoolean(value.ghost) &&
+    (value.story == null || isFiniteNumber(value.story))
   );
 }
 

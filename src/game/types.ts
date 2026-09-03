@@ -324,6 +324,8 @@ export interface Person {
   home: { tx: number; ty: number } | null;
   bob: number;
   ghost: boolean;
+  /** Keep storeys. 0 is the bailey floor. */
+  story: number;
 }
 
 export interface Creature {

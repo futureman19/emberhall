@@ -15,6 +15,7 @@ import { PERSONAL_ACTION_DURATION, getPersonalActionFx, personalActionPose } fro
 import { EXTRACTION_DURATION, extractionPose, extractionVisualProfile, getExtractionFx } from "@/game/extraction-animation";
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY } from "@/game/height";
+import { keepStoryY } from "@/game/keep-story";
 import { getWorld } from "@/game/live";
 import { SLOT_ANCHOR, partsById } from "@/game/look/parts.ts";
 import { resolveLook } from "@/game/look/resolve.ts";
@@ -24,8 +25,8 @@ import { attackPhase, bowDrawAmount, meleeSwingPitch } from "@/game/combat-anima
 import { useGame } from "@/game/store";
 import type { ItemId, Person, WearSlot } from "@/game/types";
 
-function groundAt(x: number, z: number) {
-  return groundY(getWorld(), x, z);
+function groundAt(x: number, z: number, story = 0) {
+  return groundY(getWorld(), x, z) + keepStoryY(story);
 }
 
 const WEAR_HEX: Partial<Record<ItemId, string>> = {
@@ -841,7 +842,7 @@ function Figure({
       const active = Boolean(fx && fx.targetId === p.id && age >= 0 && age < NPC_INTERACTION_DURATION);
       const pose = active && fx ? npcInteractionPose(fx.kind, age) : { bow: 0, reach: 0, lift: 0, turn: 0 };
       if (root.current) {
-        root.current.position.set(live.x, groundAt(live.x, live.z) + pose.lift, live.z);
+        root.current.position.set(live.x, groundAt(live.x, live.z, live.story) + pose.lift, live.z);
         root.current.rotation.set(pose.bow, live.facing + pose.turn, 0);
       }
       if (left.current) left.current.rotation.set(active ? 0.58 + pose.reach : walkSwing, active ? 0.28 : 0, active ? 0.72 : 0.12);
@@ -910,7 +911,7 @@ function Figure({
     if (you && root.current) {
       root.current.position.set(
         you.x,
-        groundAt(you.x, you.z) + (you.ghost ? 0.32 : 0) - healPose.crouch - corpseWorkPose.crouch - (constructing ? buildPose.crouch : 0) - (extracting ? extractPose.crouch : 0) - (personal ? personalPose.crouch : 0),
+        groundAt(you.x, you.z, you.story) + (you.ghost ? 0.32 : 0) - healPose.crouch - corpseWorkPose.crouch - (constructing ? buildPose.crouch : 0) - (extracting ? extractPose.crouch : 0) - (personal ? personalPose.crouch : 0),
         you.z,
       );
       root.current.rotation.x = healPose.lean + corpseWorkPose.lean + (constructing ? buildPose.lean : 0) + (companionNear ? companionWorkPose.bow * 0.6 : 0) + (npcNear ? npcPose.bow : 0) + (extracting ? extractPose.swing * 0.12 : 0) + (taming ? tamePose.bow : 0) + (crafting ? craftPose.work * 0.14 : 0) + (gathering ? gatherPose.work * 0.2 : 0) + (personal ? personalPose.lean : 0);
@@ -1056,7 +1057,7 @@ function Figure({
   const hover = ghost ? 0.32 : 0;
 
   return (
-    <group ref={root} position={[p.x, groundAt(p.x, p.z) + hover, p.z]} rotation={[0, p.facing, 0]}>
+    <group ref={root} position={[p.x, groundAt(p.x, p.z, p.story) + hover, p.z]} rotation={[0, p.facing, 0]}>
       {cloak && (
         <mesh position={[0, 0.62 + bob, 0.16]} castShadow={!ghost}>
           <boxGeometry args={[0.52, 0.72, 0.12]} />
