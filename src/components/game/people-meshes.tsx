@@ -11,6 +11,7 @@ import { CORPSE_DURATION, corpseFxAge, corpsePose, getCorpseFx } from "@/game/co
 import { CONSTRUCTION_DURATION, constructionLabel, constructionPose, getConstructionFx } from "@/game/construction-animation";
 import { COMPANION_DURATION, companionPose, getCompanionFx } from "@/game/companion-animation";
 import { NPC_INTERACTION_DURATION, NPC_INTERACTION_LABEL, getNpcInteractionFx, npcInteractionPose } from "@/game/npc-interaction-animation";
+import { PERSONAL_ACTION_DURATION, getPersonalActionFx, personalActionPose } from "@/game/personal-action-animation";
 import { EXTRACTION_DURATION, extractionPose, extractionVisualProfile, getExtractionFx } from "@/game/extraction-animation";
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY } from "@/game/height";
@@ -892,6 +893,10 @@ function Figure({
     const npcTarget = npcFx?.targetId ? w.people.find((person) => person.id === npcFx.targetId) : null;
     const npcNear = Boolean(npcFx && npcTarget && npcAge >= 0 && npcAge < NPC_INTERACTION_DURATION && you && Math.hypot(you.x - npcTarget.x, you.z - npcTarget.z) <= 5);
     const npcPose = npcFx ? npcInteractionPose(npcFx.kind, npcAge) : { bow: 0, reach: 0, lift: 0, turn: 0 };
+    const personalFx = getPersonalActionFx(w);
+    const personalAge = personalFx ? (w.hour - personalFx.at) * SECONDS_PER_HOUR : Infinity;
+    const personal = Boolean(personalFx && personalAge >= 0 && personalAge < PERSONAL_ACTION_DURATION);
+    const personalPose = personalFx ? personalActionPose(personalFx, personalAge) : { crouch: 0, lean: 0, reach: 0, lift: 0 };
     const activeExtractionKind = !you?.path.length
       ? w.player.intent.kind === "chop"
         ? "lumberjacking"
@@ -905,10 +910,10 @@ function Figure({
     if (you && root.current) {
       root.current.position.set(
         you.x,
-        groundAt(you.x, you.z) + (you.ghost ? 0.32 : 0) - healPose.crouch - corpseWorkPose.crouch - (constructing ? buildPose.crouch : 0) - (extracting ? extractPose.crouch : 0),
+        groundAt(you.x, you.z) + (you.ghost ? 0.32 : 0) - healPose.crouch - corpseWorkPose.crouch - (constructing ? buildPose.crouch : 0) - (extracting ? extractPose.crouch : 0) - (personal ? personalPose.crouch : 0),
         you.z,
       );
-      root.current.rotation.x = healPose.lean + corpseWorkPose.lean + (constructing ? buildPose.lean : 0) + (companionNear ? companionWorkPose.bow * 0.6 : 0) + (npcNear ? npcPose.bow : 0) + (extracting ? extractPose.swing * 0.12 : 0) + (taming ? tamePose.bow : 0) + (crafting ? craftPose.work * 0.14 : 0) + (gathering ? gatherPose.work * 0.2 : 0);
+      root.current.rotation.x = healPose.lean + corpseWorkPose.lean + (constructing ? buildPose.lean : 0) + (companionNear ? companionWorkPose.bow * 0.6 : 0) + (npcNear ? npcPose.bow : 0) + (extracting ? extractPose.swing * 0.12 : 0) + (taming ? tamePose.bow : 0) + (crafting ? craftPose.work * 0.14 : 0) + (gathering ? gatherPose.work * 0.2 : 0) + (personal ? personalPose.lean : 0);
       root.current.rotation.y = you.facing;
     }
     const it = w.player.intent;
@@ -924,9 +929,13 @@ function Figure({
     const hunting = idle && it.kind === "hunt";
     const bowing = hunting && w.player.wear.main === "bow";
     const draw = bowing ? bowDrawAmount(w.player.workT) : 0;
-    if (held.current) held.current.visible = !casting && !healing && !taming && !crafting && !constructing && !companionNear && !npcNear && (!gathering || gatheringFx?.kind === "tilling") && (!corpseWorking || corpseFx?.kind === "skinning");
+    if (held.current) held.current.visible = !casting && !healing && !taming && !crafting && !constructing && !companionNear && !npcNear && !personal && (!gathering || gatheringFx?.kind === "tilling") && (!corpseWorking || corpseFx?.kind === "skinning");
     if (left.current) {
-      if (healing) {
+      if (personal && personalFx) {
+        const eating = personalFx.kind === "eat";
+        const low = personalFx.kind === "ground" || personalFx.kind === "chest";
+        left.current.rotation.set(eating ? 1.16 : 0.72 + personalPose.reach * 0.55, 0.36, eating ? 0.9 : 0.68 + (low ? 0.2 : 0));
+      } else if (healing) {
         left.current.rotation.set(0.98, 0.48, 1.02);
       } else if (taming) {
         left.current.rotation.set(0.72 + tamePose.reach * 0.25, 0.36, 0.82 + tamePose.reach * 0.2);
@@ -962,7 +971,11 @@ function Figure({
       }
     }
     if (right.current) {
-      if (healing) {
+      if (personal && personalFx) {
+        const eating = personalFx.kind === "eat";
+        const low = personalFx.kind === "ground" || personalFx.kind === "chest";
+        right.current.rotation.set(eating ? 1.35 - personalPose.reach * 0.34 : 0.72 + personalPose.reach * 0.62, -0.36, eating ? -0.96 : -0.68 - (low ? 0.2 : 0));
+      } else if (healing) {
         right.current.rotation.set(1.08, -0.5, -1.02);
       } else if (taming) {
         right.current.rotation.set(

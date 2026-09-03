@@ -18,6 +18,7 @@ import { playSfx } from "./vale-sfx.ts";
 import { emitCorpseFx } from "./corpse-animation.ts";
 import { emitExtractionFx, EXTRACTION_BEAT, EXTRACTION_IMPACT } from "./extraction-animation.ts";
 import { emitCompanionFx } from "./companion-animation.ts";
+import { emitPersonalActionFx } from "./personal-action-animation.ts";
 import { completeObjective, log } from "./world.ts";
 import { effectiveMain, rareMods, rareName, rollKillRare, weaponDmg } from "./rare.ts";
 import type { ItemId, Person, ResourceInventory, ResourceNodeStateMap, SkillId, WearSlot, World } from "./types.ts";
@@ -355,8 +356,9 @@ export function commandDrop(world: World, item: ItemId) {
   const n = world.player.pack[item] ?? 0;
   if (!p || n < 1) return "You do not carry that.";
   world.player.pack[item] = n - 1;
-  addToPile(world, Math.round(p.x), Math.round(p.z), { [item]: 1 }, "drop", world.hour + 24, "sack");
+  const pile = addToPile(world, Math.round(p.x), Math.round(p.z), { [item]: 1 }, "drop", world.hour + 24, "sack");
   completeObjective(world, "pile");
+  emitPersonalActionFx(world, { kind: "ground", direction: "drop", item, count: 1, gold: 0, x: pile.tx, z: pile.ty });
   return `Dropped ${ITEM_META[item].label.toLowerCase()}.`;
 }
 
@@ -377,6 +379,8 @@ export function commandEquip(world: World, item: ItemId) {
   world.player.pack[item] -= 1;
   world.player.wear[meta.slot] = item;
   completeObjective(world, "dress");
+  const p = you(world);
+  if (prev !== item || Boolean(rareUidThere)) emitPersonalActionFx(world, { kind: "equipment", direction: "equip", item, slot: meta.slot, rare: false, uid: null, x: p?.x ?? null, z: p?.z ?? null });
   if (meta.slot === "main") return `You take the ${meta.label.toLowerCase()}.`;
   if (meta.slot === "off") return `You raise the ${meta.label.toLowerCase()}.`;
   return `You wear the ${meta.label.toLowerCase()}.`;
@@ -400,6 +404,8 @@ export function commandEquipRare(world: World, uid: string) {
   }
   world.player.wearRare[slot] = uid;
   void prevRare; // swapped-out rares stay in player.rares — wearRare is only a link
+  const p = you(world);
+  emitPersonalActionFx(world, { kind: "equipment", direction: "equip", item: rare.base, slot, rare: true, uid, x: p?.x ?? null, z: p?.z ?? null });
   const name = rareName(rare);
   if (slot === "main") return `You take ${name}.`;
   if (slot === "off") return `You raise ${name}.`;
@@ -411,13 +417,18 @@ export function commandUnequip(world: World, slot: WearSlot) {
   if (dead) return dead;
   const rareUidThere = world.player.wearRare[slot];
   if (rareUidThere) {
+    const rare = world.player.rares.find((candidate) => candidate.uid === rareUidThere);
     world.player.wearRare[slot] = undefined;
+    const p = you(world);
+    emitPersonalActionFx(world, { kind: "equipment", direction: "unequip", item: rare?.base ?? null, slot, rare: true, uid: rareUidThere, x: p?.x ?? null, z: p?.z ?? null });
     return slot === "main" || slot === "off" ? "You put it away." : "Off.";
   }
   const id = world.player.wear[slot];
   if (!id) return "Nothing there.";
   world.player.wear[slot] = undefined;
   world.player.pack[id] = (world.player.pack[id] ?? 0) + 1;
+  const p = you(world);
+  emitPersonalActionFx(world, { kind: "equipment", direction: "unequip", item: id, slot, rare: false, uid: null, x: p?.x ?? null, z: p?.z ?? null });
   return slot === "main" || slot === "off" ? "You put it away." : "Off.";
 }
 
@@ -464,8 +475,10 @@ export function commandCook(world: World) {
   ];
   for (const [id, fill, note] of meals) {
     if ((world.player.pack[id] ?? 0) > 0) {
+      const before = p.hunger;
       world.player.pack[id] -= 1;
       p.hunger = Math.min(100, p.hunger + fill);
+      emitPersonalActionFx(world, { kind: "eat", item: id, fill: p.hunger - before, x: p.x, z: p.z });
       return note;
     }
   }

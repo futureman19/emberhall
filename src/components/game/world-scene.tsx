@@ -19,6 +19,7 @@ import { CONSTRUCTION_DURATION, constructionPose, getConstructionFx } from "@/ga
 import { COMPANION_DURATION, companionPose, getCompanionFx } from "@/game/companion-animation";
 import { NPC_INTERACTION_DURATION, getNpcInteractionFx, npcInteractionPose } from "@/game/npc-interaction-animation";
 import { MOONGATE_DURATION, getMoongateFx, moongatePhase } from "@/game/moongate-animation";
+import { PERSONAL_ACTION_DURATION, getPersonalActionFx, personalActionLabel, personalActionPose } from "@/game/personal-action-animation";
 import { EXTRACTION_DURATION, extractionVisualProfile, getExtractionFx } from "@/game/extraction-animation";
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY as heightAt } from "@/game/height";
@@ -423,6 +424,104 @@ function CastFxMesh() {
           toneMapped={false}
         />
       </mesh>
+    </group>
+  );
+}
+
+function PersonalActionFxMesh() {
+  const root = useRef<THREE.Group>(null);
+  const eat = useRef<THREE.Group>(null);
+  const equipment = useRef<THREE.Group>(null);
+  const ground = useRef<THREE.Group>(null);
+  const groundArrow = useRef<THREE.Group>(null);
+  const chest = useRef<THREE.Group>(null);
+  const label = useRef<HTMLDivElement>(null);
+  const icon = useRef<HTMLDivElement>(null);
+
+  useFrame(() => {
+    const world = getWorld();
+    const fx = getPersonalActionFx(world);
+    const age = fx ? (world.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const live = Boolean(fx && age >= 0 && age < PERSONAL_ACTION_DURATION);
+    const screenCue = live && fx?.kind !== "chest";
+    if (root.current) root.current.visible = live;
+    if (label.current) label.current.style.display = screenCue ? "grid" : "none";
+    if (icon.current) icon.current.style.display = screenCue ? "block" : "none";
+    if (!fx || !live || !root.current) return;
+    const phase = Math.max(0, Math.min(1, age / PERSONAL_ACTION_DURATION));
+    const pose = personalActionPose(fx, age);
+    const actor = world.people.find((person) => person.id === world.player.id || person.isPlayer);
+    const x = fx.x ?? actor?.x;
+    const z = fx.z ?? actor?.z;
+    if (x == null || z == null) { root.current.visible = false; return; }
+    root.current.position.set(x, groundY(x, z) + 0.08, z);
+    if (label.current) label.current.textContent = personalActionLabel(fx);
+    if (icon.current) icon.current.textContent = fx.kind === "eat" ? "🍞 → 😋" : fx.kind === "equipment" ? "🗡️ ✦" : fx.kind === "ground" ? (fx.direction === "drop" ? "🥬 ↓ 🎒" : "🎒 ↑ 🥬") : (fx.direction === "in" ? "🎒 → 📦" : "📦 → 🎒");
+    if (eat.current) {
+      eat.current.visible = fx.kind === "eat";
+      eat.current.position.set(1.4 - pose.reach * 0.22, 1.02 + pose.reach * 0.18, -0.1);
+      eat.current.rotation.y = age * 4;
+    }
+    if (equipment.current) {
+      equipment.current.visible = fx.kind === "equipment";
+      equipment.current.position.x = 1.72;
+      equipment.current.rotation.y = age * (fx.kind === "equipment" && fx.direction === "unequip" ? -5 : 5);
+      equipment.current.scale.setScalar(0.9 + Math.sin(phase * Math.PI) * 0.42);
+    }
+    if (ground.current) {
+      ground.current.visible = fx.kind === "ground";
+      const pickup = fx.kind === "ground" && fx.direction === "pickup";
+      ground.current.position.set(1.48, pickup ? phase * 1.65 : (1 - phase) * 1.65, 0);
+      ground.current.scale.setScalar(0.8 + Math.sin(phase * Math.PI) * 0.35);
+      if (groundArrow.current) groundArrow.current.rotation.z = pickup ? Math.PI : 0;
+    }
+    if (chest.current) {
+      chest.current.visible = fx.kind === "chest";
+      chest.current.rotation.y = age * 0.8;
+      const direction = fx.kind === "chest" && fx.direction === "out" ? -1 : 1;
+      chest.current.position.x = direction * (0.75 - phase * 0.75);
+      chest.current.position.y = 0.2 + Math.sin(phase * Math.PI) * 0.72;
+    }
+  });
+
+  return (
+    <group ref={root} visible={false}>
+      <group ref={eat} visible={false}>
+        <mesh scale={[1.35, 0.62, 0.86]}><sphereGeometry args={[0.52, 12, 8]} /><meshStandardMaterial color="#d88b3d" emissive="#7a351f" emissiveIntensity={0.32} roughness={0.72} /></mesh>
+        {[-0.5, 0, 0.5].map((x) => <mesh key={x} position={[x, 0.28, -0.34]} rotation={[0.3, 0, 0]}><boxGeometry args={[0.12, 0.08, 0.36]} /><meshBasicMaterial color="#fff0bd" depthTest={false} /></mesh>)}
+        {[0.45, 0.82, 1.16].map((x, index) => <mesh key={x} position={[-x, 0.2 - index * 0.08, 0]}><sphereGeometry args={[0.13 - index * 0.02, 7, 5]} /><meshBasicMaterial color="#ffd36a" depthTest={false} /></mesh>)}
+        <mesh position={[-1.22, -0.02, 0]} rotation={[0, 0, Math.PI / 2]}><coneGeometry args={[0.24, 0.52, 7]} /><meshBasicMaterial color="#ffffff" depthTest={false} /></mesh>
+        <mesh position={[0, -0.42, 0]} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.62, 0.9, 20]} /><meshBasicMaterial color="#ffd36a" transparent opacity={0.82} depthWrite={false} depthTest={false} /></mesh>
+      </group>
+      <group ref={equipment} visible={false}>
+        <mesh position={[0, 1.58, 0]}><boxGeometry args={[0.32, 2.35, 0.16]} /><meshStandardMaterial color="#f2f4f6" emissive="#8fd5ff" emissiveIntensity={0.42} metalness={0.72} roughness={0.25} /></mesh>
+        <mesh position={[0, 0.34, 0]}><boxGeometry args={[1.38, 0.22, 0.28]} /><meshStandardMaterial color="#ffd36a" metalness={0.5} roughness={0.34} /></mesh>
+        <mesh position={[0, -0.22, 0]}><boxGeometry args={[0.3, 0.95, 0.3]} /><meshStandardMaterial color="#5a3e28" roughness={0.88} /></mesh>
+        <mesh rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[1.0, 1.22, 24]} /><meshBasicMaterial color="#b88cff" transparent opacity={0.64} depthWrite={false} depthTest={false} /></mesh>
+        {[-1, 1].flatMap((x) => [-1, 1].map((z) => <mesh key={`${x}:${z}`} position={[x * 0.68, 0.95, z * 0.28]} rotation={[0, 0, Math.PI / 4]}><boxGeometry args={[0.1, 0.1, 0.42]} /><meshBasicMaterial color="#fff0bd" depthTest={false} /></mesh>))}
+      </group>
+      <group ref={ground} visible={false}>
+        <mesh position={[0, 0.34, 0]}><sphereGeometry args={[0.72, 10, 7]} /><meshStandardMaterial color="#c9a36a" roughness={0.9} /></mesh>
+        <mesh position={[0, 0.96, 0]}><torusGeometry args={[0.26, 0.1, 6, 12]} /><meshStandardMaterial color="#5a3e28" roughness={0.88} /></mesh>
+        <mesh position={[0.34, 0.7, 0.2]}><sphereGeometry args={[0.34, 8, 6]} /><meshStandardMaterial color="#6f9d55" emissive="#284d2e" emissiveIntensity={0.35} roughness={0.8} /></mesh>
+        <group ref={groundArrow} position={[0, 1.48, 0]}>
+          <mesh position={[0, -0.42, 0]} rotation={[0, 0, Math.PI]}><coneGeometry args={[0.4, 0.72, 7]} /><meshBasicMaterial color="#ffffff" transparent opacity={0.96} depthTest={false} /></mesh>
+          <mesh position={[0, 0.18, 0]}><boxGeometry args={[0.16, 1.05, 0.16]} /><meshBasicMaterial color="#ffffff" transparent opacity={0.96} depthTest={false} /></mesh>
+        </group>
+        {[0.4, 0.86, 1.32].map((y) => <mesh key={y} position={[0.72, y, 0]}><sphereGeometry args={[0.15, 6, 5]} /><meshBasicMaterial color="#8fd5ff" depthTest={false} /></mesh>)}
+        <mesh rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.76, 1.08, 20]} /><meshBasicMaterial color="#8fd5ff" transparent opacity={0.78} depthWrite={false} depthTest={false} /></mesh>
+      </group>
+      <group ref={chest} visible={false}>
+        <mesh position={[0, 0.24, 0]}><boxGeometry args={[0.72, 0.46, 0.54]} /><meshStandardMaterial color="#8a5a32" roughness={0.84} /></mesh>
+        <mesh position={[0, 0.52, -0.06]} rotation={[0.38, 0, 0]}><boxGeometry args={[0.74, 0.14, 0.56]} /><meshStandardMaterial color="#c08a46" roughness={0.78} /></mesh>
+        {[-0.22, 0, 0.22].map((x, index) => <mesh key={x} position={[x, 0.92 + index * 0.08, 0]} rotation={[0.2, index * 0.5, 0.3]}><boxGeometry args={[0.2, 0.2, 0.2]} /><meshBasicMaterial color={index === 1 ? "#ffd36a" : "#8fd5ff"} depthTest={false} /></mesh>)}
+      </group>
+      <Html position={[0, 2.55, 0]} center zIndexRange={[28, 0]} style={{ pointerEvents: "none" }}>
+        <div style={{ display: "grid", justifyItems: "center", gap: 4 }}>
+          <div ref={icon} style={{ display: "none", padding: "3px 9px", borderRadius: 999, background: "rgba(20,18,15,.9)", fontSize: 22, lineHeight: 1.15, whiteSpace: "nowrap" }} />
+          <div ref={label} style={{ display: "none", placeItems: "center", minWidth: 132, padding: "7px 10px", border: "1px solid #e0b56a", borderRadius: 8, background: "rgba(20,18,15,.92)", color: "#fff8e7", fontFamily: "serif", fontSize: 10, fontWeight: 700, letterSpacing: ".1em", whiteSpace: "nowrap" }} />
+        </div>
+      </Html>
     </group>
   );
 }
@@ -1560,6 +1659,7 @@ export function WorldScene() {
       <CastFxMesh />
       <TravelFxMesh />
       <MoongateTravelFxMesh />
+      <PersonalActionFxMesh />
       <FizzleFxMesh />
       <HealingFxMesh />
       <TamingFxMesh />

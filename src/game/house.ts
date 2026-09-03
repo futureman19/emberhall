@@ -6,6 +6,7 @@ import { you } from "./player.ts";
 import type { Building, ItemId, World } from "./types.ts";
 import { log, nid } from "./world.ts";
 import { emitConstructionFx } from "./construction-animation.ts";
+import { emitPersonalActionFx } from "./personal-action-animation.ts";
 
 export const HOUSE_KINDS = ["porch", "hut", "homestead"] as const;
 export type HouseKind = (typeof HOUSE_KINDS)[number];
@@ -125,6 +126,7 @@ export function commandHouseItem(world: World, buildingId: string, item: ItemId,
   if (had < 1 && chestSlots(building.chest) >= HOUSE_SLOTS) return "The chest is full.";
   world.player.pack[item] = have - n;
   building.chest[item] = had + n;
+  emitPersonalActionFx(world, { kind: "chest", direction: "in", buildingId: building.id, item, count: n, x: building.tx, z: building.ty });
   return "Into the chest.";
 }
 
@@ -139,5 +141,6 @@ export function commandHouseTake(world: World, buildingId: string, item: ItemId,
   if (n < 1 || have < n) return "The chest has none.";
   chest[item] = have - n;
   world.player.pack[item] = (world.player.pack[item] ?? 0) + n;
+  emitPersonalActionFx(world, { kind: "chest", direction: "out", buildingId: building.id, item, count: n, x: building.tx, z: building.ty });
   return "Out of the chest.";
 }

@@ -2,6 +2,7 @@ import { playSfx } from "./vale-sfx.ts";
 import { completeObjective, nid } from "./world.ts";
 import { FAUNA_META } from "./catalog.ts";
 import { emitCorpseFx } from "./corpse-animation.ts";
+import { emitPersonalActionFx } from "./personal-action-animation.ts";
 import type { Creature, GroundPile, ItemId, World } from "./types.ts";
 
 export function addToPile(
@@ -67,12 +68,14 @@ export function takeGoldFromPile(world: World, id: string) {
   if (!pile || pile.gold <= 0) return 0;
   world.gold += pile.gold;
   const taken = pile.gold;
+  const ordinary = pile.source === "drop";
   const corpseSource = pile.source === "corpse" || pile.source === "death";
   const { tx, ty } = pile;
   pile.gold = 0;
   const left = Object.values(pile.items).some((n) => (n ?? 0) > 0);
   if (!left) world.piles = world.piles.filter((p) => p.id !== id);
   if (corpseSource) emitCorpseFx(world, "looting", id, tx, ty);
+  if (ordinary) emitPersonalActionFx(world, { kind: "ground", direction: "pickup", item: null, count: 0, gold: taken, x: tx, z: ty });
   return taken;
 }
 
@@ -91,14 +94,24 @@ export function takeFromPile(world: World, pileId: string, item?: ItemId) {
   const pile = world.piles.find((p) => p.id === pileId);
   if (!pile) return "Nothing there.";
   const corpseSource = pile.source === "corpse" || pile.source === "death";
+  const ordinary = pile.source === "drop";
   const { tx, ty } = pile;
+  let pickedItem: ItemId | null = null;
+  let pickedCount = 0;
+  let pickedGold = 0;
   if (item) {
     const n = pile.items[item] ?? 0;
     if (n < 1) return "Gone.";
     pile.items[item] = n - 1;
     world.player.pack[item] = (world.player.pack[item] ?? 0) + 1;
+    pickedItem = item;
+    pickedCount = 1;
     if (item === "relic") completeObjective(world, "relic");
   } else {
+    const entries = Object.entries(pile.items).filter((entry) => (entry[1] ?? 0) > 0) as [ItemId, number][];
+    pickedItem = entries.length === 1 ? entries[0]![0] : null;
+    pickedCount = entries.reduce((sum, entry) => sum + entry[1], 0);
+    pickedGold = pile.gold;
     for (const [k, v] of Object.entries(pile.items)) {
       if (!v) continue;
       const id = k as ItemId;
@@ -119,5 +132,6 @@ export function takeFromPile(world: World, pileId: string, item?: ItemId) {
   } else if (pile.source === "death") completeObjective(world, "recover");
   playSfx("loot", 0.38);
   if (corpseSource) emitCorpseFx(world, "looting", pileId, tx, ty);
+  if (ordinary && (pickedCount > 0 || pickedGold > 0)) emitPersonalActionFx(world, { kind: "ground", direction: "pickup", item: pickedItem, count: pickedCount, gold: pickedGold, x: tx, z: ty });
   return null;
 }

@@ -2,13 +2,23 @@ import { Button } from "@/components/ui/button";
 import { ItemTipContent } from "@/components/game/item-tip";
 import { ItemGlyph } from "@/components/game/paperdoll";
 import { Tip } from "@/components/ui/tip";
-import { BUILDING_META, ITEM_META } from "@/game/catalog";
+import { BUILDING_META, ITEM_META, SECONDS_PER_HOUR } from "@/game/catalog";
 import { isHouseKind } from "@/game/house";
 import { useGame } from "@/game/store";
+import { getWorld } from "@/game/live";
+import { PERSONAL_ACTION_DURATION, getPersonalActionFx } from "@/game/personal-action-animation";
 import type { ItemId } from "@/game/types";
 
 function heldItems(bag?: Partial<Record<ItemId, number>>) {
   return (Object.keys(bag ?? {}) as ItemId[]).filter((id) => (bag?.[id] ?? 0) > 0);
+}
+
+function BagTransferIcon() {
+  return <span aria-hidden className="relative h-8 w-8 rounded-b-xl border-2 border-white bg-sky-200"><span className="absolute -top-1 left-1/2 h-2 w-4 -translate-x-1/2 rounded-full border-2 border-white bg-sky-300" /></span>;
+}
+
+function ChestTransferIcon() {
+  return <span aria-hidden className="relative h-8 w-10 rounded-t-xl rounded-b-sm border-2 border-gold bg-amber-900"><span className="absolute top-3 left-0 h-0.5 w-full bg-gold" /><span className="absolute top-1/2 left-1/2 h-2.5 w-1.5 -translate-x-1/2 bg-gold" /></span>;
 }
 
 export function HouseGump() {
@@ -18,10 +28,14 @@ export function HouseGump() {
   const houseItem = useGame((s) => s.houseItem);
   const houseTake = useGame((s) => s.houseTake);
   const ghost = useGame((s) => Boolean(s.snap.player?.ghost));
+  const hour = useGame((s) => s.snap.hour);
   const house = buildings.find((b) => b.id === openHouseId);
   if (!house || !isHouseKind(house.kind) || !openHouseId) return null;
   const packHeld = heldItems(pack);
   const boxHeld = heldItems(house.chest);
+  const transfer = getPersonalActionFx(getWorld());
+  const transferAge = transfer ? (hour - transfer.at) * SECONDS_PER_HOUR : Infinity;
+  const chestTransfer = transfer?.kind === "chest" && transfer.buildingId === house.id && transferAge >= 0 && transferAge < PERSONAL_ACTION_DURATION ? transfer : null;
   return (
     <div
       data-testid="house-chest"
@@ -31,6 +45,26 @@ export function HouseGump() {
       <p className="text-pretty text-xs leading-relaxed text-muted">
         A locked chest. Not as safe as the bank. Yours while you hold the dirt.
       </p>
+      {chestTransfer ? (
+        <div key={`${chestTransfer.at}:${chestTransfer.direction}`} className="pointer-events-none mt-3 flex items-center justify-center gap-3 rounded-[var(--radius-md)] border-2 border-gold bg-amber-950 px-3 py-3 shadow-lg" data-testid="house-transfer-fx">
+          <span className="flex flex-col items-center gap-1 text-[9px] font-bold tracking-wider text-fg">
+            <BagTransferIcon />
+            PACK
+          </span>
+          <span className="flex items-center gap-1 text-xl font-bold text-gold">
+            {chestTransfer.direction === "in" ? "››" : "‹‹"}
+            <span className="flex flex-col items-center gap-1 text-[9px] tracking-wider text-fg">
+              <ItemGlyph id={chestTransfer.item} className="size-7 animate-pulse border-2 border-white" />
+              {ITEM_META[chestTransfer.item].label.toUpperCase()}
+            </span>
+            {chestTransfer.direction === "in" ? "››" : "‹‹"}
+          </span>
+          <span className="flex flex-col items-center gap-1 text-[9px] font-bold tracking-wider text-fg">
+            <ChestTransferIcon />
+            CHEST
+          </span>
+        </div>
+      ) : null}
       <div className="mt-3 grid grid-cols-2 gap-3">
         <div>
           <p className="font-display text-xs tracking-wider text-muted uppercase">Pack</p>
