@@ -117,6 +117,16 @@ test("house - a stranger cannot open the chest", () => {
   assert.equal(commandHouseItem(world, house.id, "log", 1), "That house is not yours.");
 });
 
+test("house - look hut is free on a live vale", () => {
+  const world = createWorld();
+  setWorld(world);
+  const hut = world.buildings.find((b) => b.kind === "hut");
+  assert.ok(hut);
+  assert.equal(hut.ownerId, world.player.id);
+  assert.equal(world.player.pack.deed_hut, 0);
+  assert.equal(world.buildings.filter((b) => b.kind === "hut").length, 1);
+});
+
 test("house - the building offers the chest, not the civic bench", () => {
   const world = createWorld();
   setWorld(world);
