@@ -36,7 +36,7 @@ export function personalActionPose(fx: Pick<PersonalActionFx, "kind">, age: numb
 
 export function personalActionLabel(fx: PersonalActionFx) {
   if (fx.kind === "eat") return `EAT · ${ITEM_META[fx.item].label.toUpperCase()}`;
-  if (fx.kind === "equipment") return `${fx.direction === "equip" ? "EQUIP" : "STOW"} · ${fx.item ? ITEM_META[fx.item].label.toUpperCase() : "UNKNOWN GEAR"}`;
+  if (fx.kind === "equipment") return `${fx.direction === "equip" ? "EQUIPPED" : "STOWED"} · ${fx.item ? ITEM_META[fx.item].label.toUpperCase() : "UNKNOWN GEAR"}`;
   if (fx.kind === "chest") return `${fx.direction === "in" ? "CHEST IN" : "CHEST OUT"} · ${ITEM_META[fx.item].label.toUpperCase()}`;
   if (fx.gold > 0 && !fx.item) return `PICKUP · ${fx.gold} GOLD`;
   const item = fx.item ? ITEM_META[fx.item].label.toUpperCase() : "BUNDLE";

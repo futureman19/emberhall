@@ -456,7 +456,7 @@ function PersonalActionFxMesh() {
     if (x == null || z == null) { root.current.visible = false; return; }
     root.current.position.set(x, groundY(x, z) + 0.08, z);
     if (label.current) label.current.textContent = personalActionLabel(fx);
-    if (icon.current) icon.current.textContent = fx.kind === "eat" ? "🍞 → 😋" : fx.kind === "equipment" ? "🗡️ ✦" : fx.kind === "ground" ? (fx.direction === "drop" ? "🥬 ↓ 🎒" : "🎒 ↑ 🥬") : (fx.direction === "in" ? "🎒 → 📦" : "📦 → 🎒");
+    if (icon.current) icon.current.textContent = fx.kind === "eat" ? "🍞 → 😋" : fx.kind === "equipment" ? (fx.direction === "equip" ? "🗡️ → 🧍" : "🧍 → 🎒") : fx.kind === "ground" ? (fx.direction === "drop" ? "🥬 ↓ 🎒" : "🎒 ↑ 🥬") : (fx.direction === "in" ? "🎒 → 📦" : "📦 → 🎒");
     if (eat.current) {
       eat.current.visible = fx.kind === "eat";
       eat.current.position.set(1.4 - pose.reach * 0.22, 1.02 + pose.reach * 0.18, -0.1);

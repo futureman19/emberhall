@@ -79,8 +79,8 @@ async function act(page, action) {
 
 const labels = {
   eat: "EAT · BREAD",
-  equip: "EQUIP · SWORD",
-  stow: "STOW · SWORD",
+  equip: "EQUIPPED · SWORD",
+  stow: "STOWED · SWORD",
   drop: "DROP · CABBAGE",
   pickup: "PICKUP · CABBAGE",
   chestIn: "CHEST IN · BOARD",
