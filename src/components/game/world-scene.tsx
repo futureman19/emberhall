@@ -15,6 +15,7 @@ import { TAMING_DURATION, tamingPulse } from "@/game/taming-animation";
 import { CRAFTING_DURATION, craftingPose, craftingVisualProfile } from "@/game/crafting-animation";
 import { getCraftFx } from "@/game/craft";
 import { CORPSE_DURATION, corpseFxAge, corpsePose, getCorpseFx } from "@/game/corpse-animation";
+import { EXTRACTION_DURATION, extractionVisualProfile, getExtractionFx } from "@/game/extraction-animation";
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY as heightAt } from "@/game/height";
 import { getGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
@@ -817,6 +818,102 @@ function CraftFxMesh() {
   );
 }
 
+function ExtractionFxMesh() {
+  const root = useRef<THREE.Group>(null);
+  const ring = useRef<THREE.Mesh>(null);
+  const ringMaterial = useRef<THREE.MeshBasicMaterial>(null);
+  const lumber = useRef<THREE.Group>(null);
+  const mining = useRef<THREE.Group>(null);
+
+  useFrame(() => {
+    const group = root.current;
+    const world = getWorld();
+    const fx = getExtractionFx(world);
+    if (!group || !fx) {
+      if (group) group.visible = false;
+      return;
+    }
+    const age = (world.hour - fx.at) * SECONDS_PER_HOUR;
+    const live = age >= 0 && age < EXTRACTION_DURATION;
+    group.visible = live;
+    if (!live) return;
+    const phase = Math.max(0, Math.min(1, age / EXTRACTION_DURATION));
+    const pulse = Math.sin(phase * Math.PI);
+    const profile = extractionVisualProfile(fx.kind);
+    group.position.set(fx.x, heightAt(world, fx.x, fx.z) + 0.1, fx.z);
+    if (ring.current) ring.current.scale.setScalar(0.85 + pulse * 0.9);
+    if (ringMaterial.current) {
+      ringMaterial.current.color.set(fx.success ? profile.primary : "#a85a42");
+      ringMaterial.current.opacity = 0.28 + pulse * 0.58;
+    }
+    if (lumber.current) {
+      lumber.current.visible = fx.kind === "lumberjacking";
+      lumber.current.position.y = 0.62 + pulse * 0.55;
+      lumber.current.rotation.y = age * 3.2;
+      lumber.current.scale.setScalar(0.82 + pulse * 0.42);
+    }
+    if (mining.current) {
+      mining.current.visible = fx.kind === "mining";
+      mining.current.position.y = 0.28 + pulse * 0.38;
+      mining.current.rotation.y = 0;
+      mining.current.scale.setScalar(1 + pulse * 0.3);
+    }
+  });
+
+  return (
+    <group ref={root} visible={false}>
+      <mesh ref={ring} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.78, 1.08, 24]} />
+        <meshBasicMaterial ref={ringMaterial} color="#e2b66f" transparent opacity={0.5} depthWrite={false} />
+      </mesh>
+      <group ref={lumber}>
+        {[-0.42, 0.42].map((x) => (
+          <mesh key={x} position={[x, 0, 0]} rotation={[0.12, x * 0.55, x * 0.7]}>
+            <boxGeometry args={[0.48, 0.3, 1.18]} />
+            <meshStandardMaterial color="#8a5e34" emissive="#4e2d18" emissiveIntensity={0.24} roughness={0.9} />
+          </mesh>
+        ))}
+        {Array.from({ length: 7 }, (_, index) => {
+          const angle = (index / 7) * Math.PI * 2;
+          return (
+            <mesh key={index} position={[Math.cos(angle) * 0.86, 0.18 + (index % 2) * 0.24, Math.sin(angle) * 0.86]} rotation={[angle, angle * 0.7, angle * 1.2]}>
+              <boxGeometry args={[0.14, 0.12, 0.48]} />
+              <meshStandardMaterial color="#f0c47c" emissive="#6a3e20" emissiveIntensity={0.35} roughness={0.82} />
+            </mesh>
+          );
+        })}
+      </group>
+      <group ref={mining}>
+        <group position={[1.25, 1.18, 0]} rotation={[0.1, 0, -0.62]}>
+          <mesh>
+            <boxGeometry args={[0.16, 1.55, 0.16]} />
+            <meshBasicMaterial color="#c87934" depthTest={false} />
+          </mesh>
+          <mesh position={[0, 0.77, 0]}>
+            <boxGeometry args={[1.16, 0.2, 0.2]} />
+            <meshBasicMaterial color="#263b4c" depthTest={false} />
+          </mesh>
+        </group>
+        {[-0.72, 0, 0.72].map((x, index) => (
+          <mesh key={x} position={[x, index === 1 ? 0.25 : 0, (index - 1) * 0.18]} rotation={[index * 0.6, index, index * 0.4]}>
+            <dodecahedronGeometry args={[index === 1 ? 0.56 : 0.4, 0]} />
+            <meshStandardMaterial color="#aaa69d" emissive="#58534c" emissiveIntensity={0.38} roughness={0.68} metalness={0.2} />
+          </mesh>
+        ))}
+        {Array.from({ length: 5 }, (_, index) => {
+          const angle = Math.PI * 0.72 + (index / 4) * Math.PI * 1.15;
+          return (
+            <mesh key={index} position={[Math.cos(angle) * 0.82, 0.78 + Math.sin(angle) * 0.58, 0.22]} rotation={[0, 0, angle - Math.PI / 2]}>
+              <boxGeometry args={[0.1, 0.72, 0.1]} />
+              <meshBasicMaterial color={index % 2 ? "#fff4c9" : "#ff8a24"} transparent opacity={0.98} depthTest={false} />
+            </mesh>
+          );
+        })}
+      </group>
+    </group>
+  );
+}
+
 function CorpseFxMesh() {
   const root = useRef<THREE.Group>(null);
   const ring = useRef<THREE.Mesh>(null);
@@ -1176,6 +1273,7 @@ export function WorldScene() {
       <TamingFxMesh />
       <CraftFxMesh />
       <GatheringFxMesh />
+      <ExtractionFxMesh />
       <CorpseFxMesh />
       <CombatFxMesh />
       <DeathFxMesh />

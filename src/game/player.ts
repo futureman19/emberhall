@@ -16,6 +16,7 @@ import { assessPlantedTimberHarvest, assessResourceHarvest, harvestToolTier, typ
 import { depleteResourceNode, discoverResourceNode, hasDiscoveredResourceNode } from "./resources/state.ts";
 import { playSfx } from "./vale-sfx.ts";
 import { emitCorpseFx } from "./corpse-animation.ts";
+import { emitExtractionFx, EXTRACTION_BEAT, EXTRACTION_IMPACT } from "./extraction-animation.ts";
 import { completeObjective, log } from "./world.ts";
 import { effectiveMain, rareMods, rareName, rollKillRare, weaponDmg } from "./rare.ts";
 import type { ItemId, Person, ResourceInventory, ResourceNodeStateMap, SkillId, WearSlot, World } from "./types.ts";
@@ -576,6 +577,7 @@ function resourceHarvestNow(world: World, nodeKind: "tree" | "rock", prepared: P
   burstChips(world, tx, ty, nodeKind === "tree" ? "chop" : "mine");
   const chance = successChance(effectiveSkill, nodeKind === "tree" ? 12 : 14);
   const ok = Math.random() < chance;
+  emitExtractionFx(world, nodeKind === "tree" ? "lumberjacking" : "mining", ok, tx, ty);
   if (!ok) {
     world.resourceNodes = resourceNodesAfterIdentification;
     const gain = tryGain(world, skill, false, true);
@@ -749,12 +751,11 @@ export function getCombatFx() {
   return combatFx;
 }
 
-export const WORK_BEAT = 0.72;
+export const WORK_BEAT = EXTRACTION_BEAT;
 export const CAST_WINDUP = 0.92;
-const WORK_IMPACT_PHASE = 0.52;
 
 function workBeatLands(previous: number, next: number): boolean {
-  return previous % WORK_BEAT < WORK_IMPACT_PHASE && next % WORK_BEAT >= WORK_IMPACT_PHASE;
+  return previous % WORK_BEAT < EXTRACTION_IMPACT && next % WORK_BEAT >= EXTRACTION_IMPACT;
 }
 
 export type Chip = {
