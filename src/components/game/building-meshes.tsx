@@ -206,25 +206,81 @@ function house(opts: {
   return { voxels: bake(out), x0, x1, z0, z1, enterable: true };
 }
 
+function hallTower(out: Vox[], x0: number, z0: number) {
+  const x1 = x0 + 1;
+  const z1 = z0 + 1;
+  const top = 8;
+  fill(out, x0, 0, z0, x1, 0, z1, "cobble");
+  fill(out, x0, 1, z0, x1, top, z1, "stone");
+  for (const [x, z] of [
+    [x0, z0],
+    [x1, z0],
+    [x0, z1],
+    [x1, z1],
+  ] as const) {
+    put(out, x, top + 1, z, "stone");
+  }
+  fill(out, x0, top + 2, z0, x1, top + 2, z1, "dark");
+  put(out, x0, top + 3, z0, "dark");
+  put(out, x1, top + 3, z1, "dark");
+  put(out, x0, 3, z1, "glass");
+  put(out, x1, 3, z1, "glass");
+  put(out, x0, 5, z1, "glass");
+  put(out, x1, 5, z1, "glass");
+  const pole = x0 < 0 ? x0 : x1;
+  for (let y = 3; y <= 7; y++) put(out, pole, y, z1 + 1, "wool");
+  put(out, pole, 7, z1 + 1, "gold");
+}
+
 function makeHall(): Spec {
-  return house({
-    x0: -5,
-    x1: 5,
-    z0: -4,
-    z1: 4,
-    h: 4,
-    door: { x: -1, w: 3, h: 3 },
-    windows: [
-      { x: -4, z: 4, w: 1, h: 2 },
-      { x: 4, z: 4, w: 1, h: 2 },
-      { x: -3, z: -4, w: 2, h: 2 },
-      { x: 2, z: -4, w: 2, h: 2 },
-      { x: -5, z: -1, w: 1, h: 2 },
-      { x: 5, z: -1, w: 1, h: 2 },
-    ],
-    chimney: { x: 4, z: -2 },
-    banners: [-3, 3],
+  const x0 = -5;
+  const x1 = 5;
+  const z0 = -4;
+  const z1 = 4;
+  const h = 4;
+  const out: Vox[] = [];
+  fill(out, x0 - 1, 0, z0 - 1, x1 + 1, 0, z1 + 1, "cobble", (x, _y, z) => x >= x0 && x <= x1 && z >= z0 && z <= z1);
+  fill(out, x0, 0, z0, x1, 0, z1, "timber");
+  const holes = new Set<string>();
+  for (let x = -1; x <= 1; x++) {
+    for (let y = 1; y <= 3; y++) holes.add(key(x, y, z1));
+  }
+  for (const w of [
+    { x: -3, z: z1, w: 1, hh: 2 },
+    { x: 3, z: z1, w: 1, hh: 2 },
+    { x: -3, z: z0, w: 2, hh: 2 },
+    { x: 2, z: z0, w: 2, hh: 2 },
+    { x: x0, z: -1, w: 1, hh: 2 },
+    { x: x1, z: -1, w: 1, hh: 2 },
+  ]) {
+    for (let x = w.x; x < w.x + w.w; x++) {
+      for (let y = 2; y < 2 + w.hh; y++) {
+        holes.add(key(x, y, w.z));
+        put(out, x, y, w.z, "glass");
+      }
+      put(out, x, 1, w.z, "gold");
+      put(out, x, 2 + w.hh, w.z, "dark");
+    }
+  }
+  fill(out, x0, 1, z0, x1, h, z1, "timber", (x, y, z) => {
+    const edge = x === x0 || x === x1 || z === z0 || z === z1;
+    if (!edge) return true;
+    if ((x <= x0 + 1 && z >= z1 - 1) || (x >= x1 - 1 && z >= z1 - 1)) return true;
+    return holes.has(key(x, y, z));
   });
+  halfTimber(out, x0, x1, z0, z1, h, z1);
+  for (let x = -1; x <= 1; x++) put(out, x, 4, z1, "gold");
+  put(out, -2, 1, z1, "wool");
+  put(out, 2, 1, z1, "wool");
+  hallTower(out, -5, 3);
+  hallTower(out, 4, 3);
+  gableRoof(out, -3, 3, z0, 2, h, "dark");
+  for (let y = h + 1; y <= h + 4; y++) put(out, 2, y, -2, "dark");
+  put(out, 2, h + 5, -2, "coal");
+  fill(out, -1, 1, -1, 1, 1, 0, "dark");
+  put(out, 0, 2, -1, "gold");
+  markRoof(out, h, x0, x1, z0, z1);
+  return { voxels: bake(out), x0, x1, z0, z1, enterable: true, fuse: true };
 }
 
 function makeDorm(): Spec {
