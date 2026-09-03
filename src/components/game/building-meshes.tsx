@@ -453,7 +453,7 @@ function makeBoard(): Spec {
 function keepTower(out: Vox[], x0: number, z0: number) {
   const x1 = x0 + 3;
   const z1 = z0 + 3;
-  const top = 16;
+  const top = 28;
   fill(out, x0, 0, z0, x1, 0, z1, "cobble");
   fill(out, x0, 1, z0, x1, top, z1, "stone", (x, _y, z) => x > x0 && x < x1 && z > z0 && z < z1);
   for (let x = x0; x <= x1; x += 3) {
@@ -467,13 +467,15 @@ function keepTower(out: Vox[], x0: number, z0: number) {
   fill(out, x0 + 1, top + 1, z0 + 1, x1 - 1, top + 1, z1 - 1, "dark");
   put(out, x0 + 1, top + 2, z0 + 1, "dark");
   put(out, x1 - 1, top + 2, z1 - 1, "gold");
-  put(out, x0 + 1, 4, z1, "glass");
-  put(out, x1 - 1, 4, z1, "glass");
-  put(out, x0 + 1, 8, z1, "glass");
-  put(out, x1 - 1, 8, z1, "glass");
+  for (const y of [4, 8, 12, 16, 20, 24]) {
+    put(out, x0 + 1, y, z1, "glass");
+    put(out, x1 - 1, y, z1, "glass");
+    put(out, x0, y, z0 + 1, "glass");
+    put(out, x1, y, z0 + 1, "glass");
+  }
   const pole = x0 < 0 ? x0 : x1;
-  for (let y = 6; y <= 12; y++) put(out, pole, y, z1 + 1, "wool");
-  put(out, pole, 12, z1 + 1, "gold");
+  for (let y = 10; y <= 22; y++) put(out, pole, y, z1 + 1, "wool");
+  put(out, pole, 22, z1 + 1, "gold");
 }
 
 function makeKeep(): Spec {
@@ -481,7 +483,7 @@ function makeKeep(): Spec {
   const x1 = 21;
   const z0 = -16;
   const z1 = 15;
-  const h = 9;
+  const h = 16;
   const out: Vox[] = [];
   fill(out, x0 - 1, 0, z0 - 1, x1 + 1, 0, z1 + 1, "cobble", (x, _y, z) => x >= x0 && x <= x1 && z >= z0 && z <= z1);
   fill(out, x0, 0, z0, x1, 0, z1, "stone");
@@ -489,23 +491,27 @@ function makeKeep(): Spec {
   for (let x = -2; x <= 2; x++) {
     for (let y = 1; y <= 5; y++) holes.add(key(x, y, z1));
   }
-  const wins = [
-    { x: -12, z: z1, w: 2, hh: 3 },
-    { x: 10, z: z1, w: 2, hh: 3 },
-    { x: -10, z: z0, w: 3, hh: 3 },
-    { x: 8, z: z0, w: 3, hh: 3 },
-    { x: x0, z: -4, w: 1, hh: 3 },
-    { x: x1, z: -4, w: 1, hh: 3 },
-    { x: x0, z: 4, w: 1, hh: 3 },
-    { x: x1, z: 4, w: 1, hh: 3 },
-  ];
-  for (const w of wins) {
-    for (let x = w.x; x < w.x + w.w; x++) {
-      for (let y = 3; y < 3 + w.hh; y++) {
-        holes.add(key(x, y, w.z));
-        put(out, x, y, w.z, "glass");
+  const bands = [3, 8, 13];
+  const wins: { x: number; z: number; w: number; hh: number }[] = [];
+  for (const y0 of bands) {
+    wins.push(
+      { x: -12, z: z1, w: 2, hh: 2 },
+      { x: 10, z: z1, w: 2, hh: 2 },
+      { x: -10, z: z0, w: 3, hh: 2 },
+      { x: 8, z: z0, w: 3, hh: 2 },
+      { x: x0, z: -4, w: 1, hh: 2 },
+      { x: x1, z: -4, w: 1, hh: 2 },
+      { x: x0, z: 4, w: 1, hh: 2 },
+      { x: x1, z: 4, w: 1, hh: 2 },
+    );
+    for (const w of wins.slice(-8)) {
+      for (let x = w.x; x < w.x + w.w; x++) {
+        for (let y = y0; y < y0 + w.hh; y++) {
+          holes.add(key(x, y, w.z));
+          put(out, x, y, w.z, "glass");
+        }
+        put(out, x, y0 - 1, w.z, "gold");
       }
-      put(out, x, 2, w.z, "gold");
     }
   }
   const inTower = (x: number, z: number) =>
@@ -538,7 +544,7 @@ function makeKeep(): Spec {
   const ix1 = 8;
   const iz0 = -14;
   const iz1 = -1;
-  const ih = 12;
+  const ih = 20;
   fill(out, ix0, 1, iz0, ix1, ih, iz1, "stone", (x, y, z) => {
     const edge = x === ix0 || x === ix1 || z === iz0 || z === iz1;
     if (!edge) return true;
@@ -546,8 +552,10 @@ function makeKeep(): Spec {
     return false;
   });
   for (const x of [-5, 4]) {
-    for (let y = 4; y <= 6; y++) put(out, x, y, iz1, "glass");
-    put(out, x, 3, iz1, "gold");
+    for (const y0 of [4, 9, 14]) {
+      for (let y = y0; y <= y0 + 2; y++) put(out, x, y, iz1, "glass");
+      put(out, x, y0 - 1, iz1, "gold");
+    }
   }
   gableRoof(out, ix0, ix1, iz0, iz1, ih, "dark");
   fill(out, -2, 1, iz0 + 1, 2, 2, iz0 + 3, "cobble");
