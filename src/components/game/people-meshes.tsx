@@ -8,6 +8,7 @@ import { TAMING_DURATION, tamingPose } from "@/game/taming-animation";
 import { CRAFTING_DURATION, craftingPose } from "@/game/crafting-animation";
 import { getCraftFx } from "@/game/craft";
 import { CORPSE_DURATION, corpseFxAge, corpsePose, getCorpseFx } from "@/game/corpse-animation";
+import { CONSTRUCTION_DURATION, constructionLabel, constructionPose, getConstructionFx } from "@/game/construction-animation";
 import { EXTRACTION_DURATION, extractionPose, extractionVisualProfile, getExtractionFx } from "@/game/extraction-animation";
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY } from "@/game/height";
@@ -752,6 +753,45 @@ function ExtractionBillboard() {
   );
 }
 
+function ConstructionTool() {
+  const hammer = useRef<Group>(null);
+  useFrame(() => {
+    const world = getWorld();
+    const fx = getConstructionFx(world);
+    const age = fx ? (world.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const live = Boolean(fx && age >= 0 && age < CONSTRUCTION_DURATION);
+    if (!hammer.current) return;
+    hammer.current.visible = live;
+    if (live) hammer.current.rotation.z = -0.25 - constructionPose(age).hammer * 0.68;
+  });
+  return (
+    <group ref={hammer} visible={false} position={[0.02, -0.48, 0.04]}>
+      <mesh position={[0, 0.24, 0]}><boxGeometry args={[0.065, 0.58, 0.065]} /><meshStandardMaterial color="#7a4e2b" roughness={0.88} /></mesh>
+      <mesh position={[0, 0.55, 0]}><boxGeometry args={[0.34, 0.16, 0.16]} /><meshStandardMaterial color="#8f9699" metalness={0.55} roughness={0.34} /></mesh>
+    </group>
+  );
+}
+
+function ConstructionBillboard() {
+  const label = useRef<HTMLDivElement>(null);
+  useFrame(() => {
+    const element = label.current;
+    if (!element) return;
+    const world = getWorld();
+    const fx = getConstructionFx(world);
+    const age = fx ? (world.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const visible = Boolean(fx && age >= 0 && age < CONSTRUCTION_DURATION);
+    element.style.display = visible ? "grid" : "none";
+    if (!fx || !visible) return;
+    element.textContent = `HAMMER · ${constructionLabel(fx.kind).toUpperCase()} RAISED`;
+  });
+  return (
+    <Html position={[0, 3.2, 0]} center zIndexRange={[32, 0]} style={{ pointerEvents: "none" }}>
+      <div ref={label} style={{ display: "none", placeItems: "center", minWidth: 126, padding: "7px 10px", border: "1px solid #e2b66f", borderRadius: 8, background: "rgba(20, 18, 15, 0.92)", boxShadow: "0 0 18px rgba(226, 182, 111, 0.32)", color: "#fff8e7", fontFamily: "serif", fontSize: 10, fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", whiteSpace: "nowrap" }} />
+    </Html>
+  );
+}
+
 function Figure({
   p,
   selected,
@@ -795,6 +835,10 @@ function Figure({
     const corpseAge = corpseFx ? corpseFxAge(w, corpseFx) : Infinity;
     const corpseWorking = Boolean(corpseFx && corpseAge >= 0 && corpseAge < CORPSE_DURATION);
     const corpseWorkPose = corpseFx ? corpsePose(corpseFx.kind, corpseAge) : { crouch: 0, lean: 0, reach: 0, cut: 0 };
+    const constructionFx = getConstructionFx(w);
+    const constructionAge = constructionFx ? (w.hour - constructionFx.at) * SECONDS_PER_HOUR : Infinity;
+    const constructing = Boolean(constructionFx && constructionAge >= 0 && constructionAge < CONSTRUCTION_DURATION);
+    const buildPose = constructionPose(constructionAge);
     const activeExtractionKind = !you?.path.length
       ? w.player.intent.kind === "chop"
         ? "lumberjacking"
@@ -808,10 +852,10 @@ function Figure({
     if (you && root.current) {
       root.current.position.set(
         you.x,
-        groundAt(you.x, you.z) + (you.ghost ? 0.32 : 0) - healPose.crouch - corpseWorkPose.crouch - (extracting ? extractPose.crouch : 0),
+        groundAt(you.x, you.z) + (you.ghost ? 0.32 : 0) - healPose.crouch - corpseWorkPose.crouch - (constructing ? buildPose.crouch : 0) - (extracting ? extractPose.crouch : 0),
         you.z,
       );
-      root.current.rotation.x = healPose.lean + corpseWorkPose.lean + (extracting ? extractPose.swing * 0.12 : 0) + (taming ? tamePose.bow : 0) + (crafting ? craftPose.work * 0.14 : 0) + (gathering ? gatherPose.work * 0.2 : 0);
+      root.current.rotation.x = healPose.lean + corpseWorkPose.lean + (constructing ? buildPose.lean : 0) + (extracting ? extractPose.swing * 0.12 : 0) + (taming ? tamePose.bow : 0) + (crafting ? craftPose.work * 0.14 : 0) + (gathering ? gatherPose.work * 0.2 : 0);
       root.current.rotation.y = you.facing;
     }
     const it = w.player.intent;
@@ -827,7 +871,7 @@ function Figure({
     const hunting = idle && it.kind === "hunt";
     const bowing = hunting && w.player.wear.main === "bow";
     const draw = bowing ? bowDrawAmount(w.player.workT) : 0;
-    if (held.current) held.current.visible = !casting && !healing && !taming && !crafting && (!gathering || gatheringFx?.kind === "tilling") && (!corpseWorking || corpseFx?.kind === "skinning");
+    if (held.current) held.current.visible = !casting && !healing && !taming && !crafting && !constructing && (!gathering || gatheringFx?.kind === "tilling") && (!corpseWorking || corpseFx?.kind === "skinning");
     if (left.current) {
       if (healing) {
         left.current.rotation.set(0.98, 0.48, 1.02);
@@ -839,6 +883,8 @@ function Figure({
         left.current.rotation.set(gatheringFx.kind === "tilling" ? 0.7 : 1.02, 0.38, gatheringFx.kind === "harvesting" ? 0.94 : 0.7);
       } else if (corpseWorking) {
         left.current.rotation.set(0.88 + corpseWorkPose.reach * 0.35, 0.4, 0.82 + corpseWorkPose.reach * 0.22);
+      } else if (constructing) {
+        left.current.rotation.set(0.82 + buildPose.lift * 0.34, 0.38, 0.72 + buildPose.lift * 0.28);
       } else if (extracting) {
         left.current.rotation.set(0.45 + extractPose.brace * 0.75, extractionKind === "lumberjacking" ? 0.42 : 0.16, extractionKind === "lumberjacking" ? 0.72 : 0.42);
       } else if (casting) {
@@ -879,6 +925,8 @@ function Figure({
       } else if (corpseWorking && corpseFx) {
         const pitch = corpseFx.kind === "skinning" ? 0.7 + corpseWorkPose.cut * 0.55 : 0.92 - corpseWorkPose.reach * 0.42;
         right.current.rotation.set(pitch, -0.38, -0.82 - corpseWorkPose.reach * 0.18);
+      } else if (constructing) {
+        right.current.rotation.set(0.4 + buildPose.hammer * 0.9, -0.28, -0.62);
       } else if (extracting) {
         const pitch = extractionKind === "lumberjacking" ? 0.35 - extractPose.swing * 1.95 : 0.62 - extractPose.swing * 2.2;
         right.current.rotation.set(pitch, extractionKind === "lumberjacking" ? 0.3 : -0.12, extractionKind === "lumberjacking" ? -0.42 - extractPose.twist : -0.3);
@@ -983,6 +1031,7 @@ function Figure({
         <group ref={held}>{p.isPlayer && wear.main && <Held id={wear.main} ghost={ghost} />}</group>
         {p.isPlayer && !ghost && <CraftingTool />}
         {p.isPlayer && !ghost && <GatheringTool />}
+        {p.isPlayer && !ghost && <ConstructionTool />}
         {p.isPlayer && !ghost && <PalmFlame />}
       </group>
       <mesh position={[0, 0.98 + bob, 0]} castShadow={!ghost}>
@@ -1030,6 +1079,7 @@ function Figure({
       {p.isPlayer && !ghost && <GatheringBillboard />}
       {p.isPlayer && !ghost && <CorpseBillboard />}
       {p.isPlayer && !ghost && <ExtractionBillboard />}
+      {p.isPlayer && !ghost && <ConstructionBillboard />}
       {p.isPlayer && !ghost && <MeleeSwingArc />}
       {selected && (
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.04, 0]}>

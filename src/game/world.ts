@@ -22,6 +22,7 @@ import { initialWeather } from "./weather.ts";
 import { createResourceInventory } from "./inventory/resources.ts";
 import { createResourceNodeStateMap } from "./resources/state.ts";
 import type { BuildingKind, ClassId, Person, Tile, TileKind, World } from "./types.ts";
+import { emitConstructionFx } from "./construction-animation.ts";
 
 let nidAcc = 1;
 export function nid(world: World, prefix: string) {
@@ -277,6 +278,7 @@ export function placeBuilding(world: World, kind: BuildingKind, tx: number, ty: 
     ty,
     beds: kind === "dormitory" ? [{ occupantId: null }, { occupantId: null }] : [],
   });
+  emitConstructionFx(world, id, kind, tx, ty, "gold");
   world.gold -= cost;
   if (kind === "dormitory") completeObjective(world, "dorm");
   if (kind === "farm") {

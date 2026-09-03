@@ -15,6 +15,7 @@ import { TAMING_DURATION, tamingPulse } from "@/game/taming-animation";
 import { CRAFTING_DURATION, craftingPose, craftingVisualProfile } from "@/game/crafting-animation";
 import { getCraftFx } from "@/game/craft";
 import { CORPSE_DURATION, corpseFxAge, corpsePose, getCorpseFx } from "@/game/corpse-animation";
+import { CONSTRUCTION_DURATION, constructionPose, getConstructionFx } from "@/game/construction-animation";
 import { EXTRACTION_DURATION, extractionVisualProfile, getExtractionFx } from "@/game/extraction-animation";
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY as heightAt } from "@/game/height";
@@ -818,6 +819,89 @@ function CraftFxMesh() {
   );
 }
 
+function ConstructionFxMesh() {
+  const root = useRef<THREE.Group>(null);
+  const scaffold = useRef<THREE.Group>(null);
+  const dust = useRef<THREE.Group>(null);
+  const hammer = useRef<THREE.Group>(null);
+  const ring = useRef<THREE.Mesh>(null);
+  const ringMaterial = useRef<THREE.MeshBasicMaterial>(null);
+
+  useFrame(() => {
+    const group = root.current;
+    const world = getWorld();
+    const fx = getConstructionFx(world);
+    const age = fx ? (world.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const live = Boolean(fx && age >= 0 && age < CONSTRUCTION_DURATION);
+    if (!group) return;
+    group.visible = live;
+    if (!fx || !live) return;
+    const pose = constructionPose(age);
+    const phase = Math.max(0, Math.min(1, age / CONSTRUCTION_DURATION));
+    const pulse = Math.sin(phase * Math.PI);
+    group.position.set(fx.x, heightAt(world, fx.x, fx.z) + 0.08, fx.z);
+    if (scaffold.current) {
+      scaffold.current.scale.y = Math.max(0.08, pose.lift);
+      scaffold.current.position.y = -1.9 * (1 - pose.lift);
+    }
+    if (dust.current) {
+      dust.current.position.y = 0.15 + pulse * 0.72;
+      dust.current.scale.setScalar(0.75 + pulse * 0.55);
+      dust.current.rotation.y = age * 2.8;
+    }
+    if (hammer.current) hammer.current.rotation.z = -0.48 + pose.hammer * 0.42;
+    if (ring.current) ring.current.scale.setScalar(1 + pulse * 0.34);
+    if (ringMaterial.current) {
+      ringMaterial.current.color.set(fx.source === "deed" ? "#a9d7cf" : "#ffd36a");
+      ringMaterial.current.opacity = 0.32 + pulse * 0.46;
+    }
+  });
+
+  return (
+    <group ref={root} visible={false}>
+      <mesh ref={ring} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[3.6, 4.05, 32]} />
+        <meshBasicMaterial ref={ringMaterial} color="#ffd36a" transparent opacity={0.62} depthWrite={false} depthTest={false} />
+      </mesh>
+      <group ref={scaffold}>
+        {[[-3.3, -3.3], [-3.3, 3.3], [3.3, -3.3], [3.3, 3.3]].map(([x, z]) => (
+          <mesh key={`${x},${z}`} position={[x, 2, z]}>
+            <boxGeometry args={[0.2, 4, 0.2]} />
+            <meshStandardMaterial color="#c58a4a" emissive="#5a3218" emissiveIntensity={0.3} roughness={0.86} />
+          </mesh>
+        ))}
+        {[0.9, 2.1, 3.3].flatMap((y) => [
+          <mesh key={`x-${y}-a`} position={[0, y, -3.3]}><boxGeometry args={[6.8, 0.18, 0.18]} /><meshStandardMaterial color="#e0ad68" roughness={0.84} /></mesh>,
+          <mesh key={`x-${y}-b`} position={[0, y, 3.3]}><boxGeometry args={[6.8, 0.18, 0.18]} /><meshStandardMaterial color="#e0ad68" roughness={0.84} /></mesh>,
+          <mesh key={`z-${y}-a`} position={[-3.3, y, 0]}><boxGeometry args={[0.18, 0.18, 6.8]} /><meshStandardMaterial color="#e0ad68" roughness={0.84} /></mesh>,
+          <mesh key={`z-${y}-b`} position={[3.3, y, 0]}><boxGeometry args={[0.18, 0.18, 6.8]} /><meshStandardMaterial color="#e0ad68" roughness={0.84} /></mesh>,
+        ])}
+      </group>
+      <group ref={hammer} position={[2.75, 1.55, 0]} rotation={[0.08, 0, -0.48]}>
+        <mesh>
+          <boxGeometry args={[0.18, 2.15, 0.18]} />
+          <meshBasicMaterial color="#a96732" depthTest={false} />
+        </mesh>
+        <mesh position={[0, 1.08, 0]}>
+          <boxGeometry args={[1.15, 0.42, 0.42]} />
+          <meshBasicMaterial color="#667078" depthTest={false} />
+        </mesh>
+      </group>
+      <group ref={dust}>
+        {Array.from({ length: 14 }, (_, index) => {
+          const angle = (index / 14) * Math.PI * 2;
+          return (
+            <mesh key={index} position={[Math.cos(angle) * (2.8 + (index % 2) * 0.7), 0.18 + (index % 4) * 0.22, Math.sin(angle) * (2.8 + (index % 2) * 0.7)]}>
+              <sphereGeometry args={[0.42 + (index % 3) * 0.1, 8, 6]} />
+              <meshBasicMaterial color={index % 2 ? "#e3c18c" : "#bd8e58"} transparent opacity={0.5} depthWrite={false} />
+            </mesh>
+          );
+        })}
+      </group>
+    </group>
+  );
+}
+
 function ExtractionFxMesh() {
   const root = useRef<THREE.Group>(null);
   const ring = useRef<THREE.Mesh>(null);
@@ -1273,6 +1357,7 @@ export function WorldScene() {
       <TamingFxMesh />
       <CraftFxMesh />
       <GatheringFxMesh />
+      <ConstructionFxMesh />
       <ExtractionFxMesh />
       <CorpseFxMesh />
       <CombatFxMesh />

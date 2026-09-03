@@ -5,6 +5,7 @@ import { plotAt } from "./farm.ts";
 import { you } from "./player.ts";
 import type { Building, ItemId, World } from "./types.ts";
 import { log, nid } from "./world.ts";
+import { emitConstructionFx } from "./construction-animation.ts";
 
 export const HOUSE_KINDS = ["porch", "hut", "homestead"] as const;
 export type HouseKind = (typeof HOUSE_KINDS)[number];
@@ -96,8 +97,9 @@ export function placeHouse(world: World, kind: HouseKind, tx: number, ty: number
   const deed = HOUSE_DEEDS[kind];
   world.player.pack[deed] = (world.player.pack[deed] ?? 0) - 1;
   const label = ITEM_META[deed].label.replace(/ deed$/i, "");
+  const id = nid(world, "b");
   world.buildings.push({
-    id: nid(world, "b"),
+    id,
     kind,
     tx,
     ty,
@@ -106,6 +108,7 @@ export function placeHouse(world: World, kind: HouseKind, tx: number, ty: number
     chest: emptyChest(),
     chestGold: 0,
   });
+  emitConstructionFx(world, id, kind, tx, ty, "deed");
   log(world, `The ${label.toLowerCase()} is raised.`);
   return null;
 }
