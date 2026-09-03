@@ -455,13 +455,13 @@ function MoongateTravelFxMesh() {
     }
     if (destination.current) {
       destination.current.position.set(fx.tx, destinationY + 0.12, fx.tz);
-      destination.current.scale.setScalar(0.85 + phase.arrival * 0.75);
+      destination.current.scale.setScalar(0.82 + phase.arrival * 0.45);
       destination.current.rotation.y = -age * 3.2;
     }
     if (transit.current) {
       transit.current.position.set(fx.tx, destinationY + 1.1 + phase.transit * 0.65, fx.tz);
       transit.current.rotation.y = age * 7;
-      transit.current.scale.setScalar(0.8 + phase.transit * 0.7);
+      transit.current.scale.setScalar(0.68 + phase.transit * 0.34);
     }
     const petRefs = [petA.current, petB.current, petC.current];
     petRefs.forEach((mesh, index) => {
@@ -470,7 +470,7 @@ function MoongateTravelFxMesh() {
       mesh.visible = Boolean(arrival);
       if (!arrival) return;
       mesh.position.set(arrival.x, groundY(arrival.x, arrival.z) + 0.12, arrival.z);
-      mesh.scale.setScalar(0.8 + phase.arrival * 0.65);
+      mesh.scale.setScalar(1.1 + phase.arrival * 0.45);
       mesh.rotation.z = age * (index % 2 ? -3 : 3);
     });
   });
@@ -482,17 +482,17 @@ function MoongateTravelFxMesh() {
         <mesh position={[0, 1.1, 0]}><cylinderGeometry args={[0.5, 0.88, 2.2, 16, 1, true]} /><meshBasicMaterial color="#8f6bd8" transparent opacity={0.34} side={THREE.DoubleSide} depthWrite={false} /></mesh>
       </group>
       <group ref={destination} visible={false}>
-        {[0, 0.5, 1].map((y) => <mesh key={y} position={[0, y, 0]} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.75 + y * 0.3, 1.02 + y * 0.3, 28]} /><meshBasicMaterial color={y === 0.5 ? "#fff0bd" : "#8fd5ff"} transparent opacity={0.82} depthWrite={false} depthTest={false} /></mesh>)}
-        <mesh position={[0, 1.25, 0]}><cylinderGeometry args={[0.8, 0.38, 2.5, 16, 1, true]} /><meshBasicMaterial color="#8fd5ff" transparent opacity={0.34} side={THREE.DoubleSide} depthWrite={false} /></mesh>
+        {[0, 0.62].map((y) => <mesh key={y} position={[0, y, 0]} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[1.18 + y * 0.28, 1.36 + y * 0.28, 28]} /><meshBasicMaterial color={y === 0.62 ? "#fff0bd" : "#8fd5ff"} transparent opacity={0.46} depthWrite={false} depthTest={false} /></mesh>)}
+        <mesh position={[0, 1.25, 0]}><cylinderGeometry args={[0.82, 0.46, 2.5, 16, 1, true]} /><meshBasicMaterial color="#8fd5ff" transparent opacity={0.18} side={THREE.DoubleSide} depthWrite={false} /></mesh>
       </group>
       <group ref={transit} visible={false}>
-        {[0, Math.PI / 3, Math.PI * 2 / 3].map((rotation) => <mesh key={rotation} rotation={[Math.PI / 2, rotation, rotation]}><torusGeometry args={[1.05, 0.1, 8, 24]} /><meshBasicMaterial color="#e7c5ff" transparent opacity={0.8} depthWrite={false} depthTest={false} /></mesh>)}
-        {Array.from({ length: 8 }, (_, index) => { const angle = index * Math.PI / 4; return <mesh key={index} position={[Math.cos(angle) * 1.28, (index % 2) * 0.5, Math.sin(angle) * 1.28]} rotation={[0, angle, Math.PI / 4]}><boxGeometry args={[0.12, 0.12, 0.82]} /><meshBasicMaterial color={index % 2 ? "#fff0bd" : "#8fd5ff"} depthTest={false} /></mesh>; })}
+        {[0, Math.PI / 3, Math.PI * 2 / 3].map((rotation) => <mesh key={rotation} rotation={[Math.PI / 2, rotation, rotation]}><torusGeometry args={[1.05, 0.08, 8, 24]} /><meshBasicMaterial color="#e7c5ff" transparent opacity={0.44} depthWrite={false} depthTest={false} /></mesh>)}
+        {Array.from({ length: 6 }, (_, index) => { const angle = index * Math.PI / 3; return <mesh key={index} position={[Math.cos(angle) * 1.32, (index % 2) * 0.5, Math.sin(angle) * 1.32]} rotation={[0, angle, Math.PI / 4]}><boxGeometry args={[0.1, 0.1, 0.68]} /><meshBasicMaterial color={index % 2 ? "#fff0bd" : "#8fd5ff"} transparent opacity={0.64} depthTest={false} /></mesh>; })}
         <Html position={[0, 2.15, 0]} center zIndexRange={[29, 0]} style={{ pointerEvents: "none" }}><div ref={label} style={{ display: "none", placeItems: "center", minWidth: 132, padding: "7px 10px", border: "1px solid #b88cff", borderRadius: 8, background: "rgba(20,18,15,.92)", color: "#fff8e7", fontFamily: "serif", fontSize: 10, fontWeight: 700, letterSpacing: ".1em", whiteSpace: "nowrap" }} /></Html>
       </group>
-      <mesh ref={petA} visible={false} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.42, 0.62, 18]} /><meshBasicMaterial color="#ffd36a" transparent opacity={0.8} depthWrite={false} /></mesh>
-      <mesh ref={petB} visible={false} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.42, 0.62, 18]} /><meshBasicMaterial color="#ffd36a" transparent opacity={0.8} depthWrite={false} /></mesh>
-      <mesh ref={petC} visible={false} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.42, 0.62, 18]} /><meshBasicMaterial color="#ffd36a" transparent opacity={0.8} depthWrite={false} /></mesh>
+      <mesh ref={petA} visible={false} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.5, 0.78, 18]} /><meshBasicMaterial color="#ffd36a" transparent opacity={0.9} depthWrite={false} depthTest={false} /></mesh>
+      <mesh ref={petB} visible={false} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.5, 0.78, 18]} /><meshBasicMaterial color="#ffd36a" transparent opacity={0.9} depthWrite={false} depthTest={false} /></mesh>
+      <mesh ref={petC} visible={false} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[0.5, 0.78, 18]} /><meshBasicMaterial color="#ffd36a" transparent opacity={0.9} depthWrite={false} depthTest={false} /></mesh>
     </group>
   );
 }
