@@ -793,8 +793,35 @@ function makeHut(): Spec {
   put(out, 2, h + 5, -1, "coal");
   fill(out, -1, 1, -1, 1, 1, 0, "dark");
   put(out, 0, 2, -1, "gold");
+  dressHutCute(out, z0, z1, h);
   markRoof(out, h, x0, x1, z0, z1);
   return { voxels: bake(out), x0, x1, z0, z1, enterable: true, fuse: true };
+}
+
+/** Lanterns, window boxes, extra bunting, roof cat — hut only. */
+function dressHutCute(out: Vox[], z0: number, z1: number, h: number) {
+  put(out, -1, 3, z1 + 1, "gold");
+  put(out, -1, 2, z1 + 1, "glass");
+  put(out, 1, 3, z1 + 1, "gold");
+  put(out, 1, 2, z1 + 1, "glass");
+  put(out, -2, 1, z1 + 1, "soil");
+  put(out, -3, 1, z1 + 1, "leaf");
+  put(out, -3, 2, z1, "wool");
+  put(out, 2, 1, z1 + 1, "soil");
+  put(out, 3, 1, z1 + 1, "leaf");
+  put(out, 3, 2, z1, "wool");
+  put(out, -3, 1, z0 - 1, "soil");
+  put(out, -3, 2, z0, "leaf");
+  put(out, 3, 1, z0 - 1, "soil");
+  put(out, 3, 2, z0, "leaf");
+  put(out, 0, h + 1, z1 + 1, "gold");
+  put(out, 0, h, z1 + 1, "wool");
+  put(out, -1, 8, 0, "dark");
+  put(out, -1, 8, 1, "dark");
+  put(out, -1, 9, 1, "dark");
+  put(out, 0, 8, 1, "dark");
+  put(out, -2, 8, 0, "dark");
+  put(out, -1, 8, -1, "wool");
 }
 
 function makeHomestead(): Spec {

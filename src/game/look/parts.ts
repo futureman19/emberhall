@@ -5,6 +5,7 @@
 // mint-ready for the launch flip (Phase 5). Local-first per the beta rule:
 // parts live in localStorage until the save wiring lands at merge.
 import type { LookRecipeV1 } from "./types.ts";
+export { SLOT_ANCHOR } from "./figure.ts";
 
 export const PART_SCHEMA = "emberhall.part/1" as const;
 export const PART_GRID = 8; // 8×8×8 voxels
@@ -131,14 +132,6 @@ export function partsById(ids: string[] | undefined): VoxelPartV1[] {
   const all = new Map(listParts().map((p) => [p.id, p]));
   return ids.map((id) => all.get(id)).filter((p): p is VoxelPartV1 => Boolean(p));
 }
-
-// Slot anchors in figure-local space (head top ≈ y1.12; see people-meshes.tsx).
-export const SLOT_ANCHOR: Record<PartSlot, { at: [number, number, number]; voxel: number }> = {
-  hair: { at: [-0.16, 1.12, -0.16], voxel: 0.04 },
-  beard: { at: [-0.16, 0.72, -0.3], voxel: 0.04 },
-  back: { at: [-0.16, 0.34, 0.15], voxel: 0.04 },
-  trinket: { at: [0.18, 0.86, -0.16], voxel: 0.032 },
-};
 
 // LookRecipeV1.parts carries part ids (optional — never bumps the save).
 export function partIdsOf(look: LookRecipeV1 | undefined | null): string[] {

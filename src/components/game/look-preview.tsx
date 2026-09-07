@@ -1,12 +1,13 @@
-// The looking-glass preview — the vale's own boxy figure, drawn live in 3D
-// from the same proportions as people-meshes.tsx (legs 0.14×0.4, torso
-// 0.42×0.5, head 0.28³). The mirror answers to fingers: drag to turn them,
-// and when left alone it slowly twirls on its own. Standalone by contract:
-// at merge, people-meshes shares this vocabulary.
+// The looking-glass preview — the vale's own chibi figure, drawn live in 3D
+// from the same proportions as people-meshes.tsx (FIGURE in look/figure.ts).
+// The mirror answers to fingers: drag to turn them, and when left alone it
+// slowly twirls on its own. Standalone by contract: people-meshes shares this
+// vocabulary.
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import type { Group } from "three";
+import { FIGURE, HAIR } from "@/game/look/figure.ts";
 import { SLOT_ANCHOR, type VoxelPartV1 } from "@/game/look/parts.ts";
 import type { ResolvedLook } from "@/game/look/resolve.ts";
 
@@ -22,33 +23,33 @@ function Hair({ look }: { look: ResolvedLook }) {
   if (look.hairStyle === "bald") return null;
   return (
     <group>
-      <mesh position={[0, 1.14, 0]}>
-        <boxGeometry args={[0.3, 0.08, 0.28]} />
+      <mesh position={[0, HAIR.cap.y, 0]}>
+        <boxGeometry args={[...HAIR.cap.size]} />
         <Mat color={c} />
       </mesh>
       {look.hairStyle === "shag" && (
         <>
-          {[-0.17, 0.17].map((x) => (
-            <mesh key={x} position={[x, 1.02, 0]}>
-              <boxGeometry args={[0.06, 0.2, 0.28]} />
+          {[-HAIR.shagSide.x, HAIR.shagSide.x].map((x) => (
+            <mesh key={x} position={[x, HAIR.shagSide.y, 0]}>
+              <boxGeometry args={[...HAIR.shagSide.size]} />
               <Mat color={c} />
             </mesh>
           ))}
-          <mesh position={[0, 1.02, 0.16]}>
-            <boxGeometry args={[0.3, 0.2, 0.06]} />
+          <mesh position={[0, HAIR.shagFront.y, HAIR.shagFront.z]}>
+            <boxGeometry args={[...HAIR.shagFront.size]} />
             <Mat color={c} />
           </mesh>
         </>
       )}
       {look.hairStyle === "tail" && (
-        <mesh position={[0, 0.96, 0.18]}>
-          <boxGeometry args={[0.12, 0.34, 0.08]} />
+        <mesh position={[0, HAIR.tail.y, HAIR.tail.z]}>
+          <boxGeometry args={[...HAIR.tail.size]} />
           <Mat color={c} />
         </mesh>
       )}
       {look.hairStyle === "long" && (
-        <mesh position={[0, 0.94, 0.17]}>
-          <boxGeometry args={[0.3, 0.4, 0.08]} />
+        <mesh position={[0, HAIR.long.y, HAIR.long.z]}>
+          <boxGeometry args={[...HAIR.long.size]} />
           <Mat color={c} />
         </mesh>
       )}
@@ -80,18 +81,42 @@ function Figure({ look, parts = [] }: { look: ResolvedLook; parts?: VoxelPartV1[
   });
   return (
     <group ref={g}>
-      <mesh position={[-0.1, 0.22, 0]}><boxGeometry args={[0.14, 0.4, 0.16]} /><Mat color={LEGS} /></mesh>
-      <mesh position={[0.1, 0.22, 0]}><boxGeometry args={[0.14, 0.4, 0.16]} /><Mat color={LEGS} /></mesh>
-      <mesh position={[-0.1, 0.04, 0.02]}><boxGeometry args={[0.16, 0.08, 0.22]} /><Mat color={FEET} /></mesh>
-      <mesh position={[0.1, 0.04, 0.02]}><boxGeometry args={[0.16, 0.08, 0.22]} /><Mat color={FEET} /></mesh>
-      <mesh position={[0, 0.58, 0]}><boxGeometry args={[0.42, 0.5, 0.26]} /><Mat color={look.garb} /></mesh>
-      {[-0.28, 0.28].map((x) => (
-        <group key={x} position={[x, 0.62, 0]} rotation={[0, 0, x < 0 ? 0.12 : -0.12]}>
-          <mesh position={[0, -0.16, 0]}><boxGeometry args={[0.12, 0.42, 0.12]} /><Mat color={look.garb} /></mesh>
-          <mesh position={[0, -0.38, 0]}><boxGeometry args={[0.12, 0.1, 0.12]} /><Mat color={look.skin} /></mesh>
+      <mesh position={[-FIGURE.leg.x, FIGURE.leg.y, 0]}>
+        <boxGeometry args={[...FIGURE.leg.size]} />
+        <Mat color={LEGS} />
+      </mesh>
+      <mesh position={[FIGURE.leg.x, FIGURE.leg.y, 0]}>
+        <boxGeometry args={[...FIGURE.leg.size]} />
+        <Mat color={LEGS} />
+      </mesh>
+      <mesh position={[-FIGURE.foot.x, FIGURE.foot.y, FIGURE.foot.z]}>
+        <boxGeometry args={[...FIGURE.foot.size]} />
+        <Mat color={FEET} />
+      </mesh>
+      <mesh position={[FIGURE.foot.x, FIGURE.foot.y, FIGURE.foot.z]}>
+        <boxGeometry args={[...FIGURE.foot.size]} />
+        <Mat color={FEET} />
+      </mesh>
+      <mesh position={[0, FIGURE.torso.y, 0]}>
+        <boxGeometry args={[...FIGURE.torso.size]} />
+        <Mat color={look.garb} />
+      </mesh>
+      {[-FIGURE.arm.x, FIGURE.arm.x].map((x) => (
+        <group key={x} position={[x, FIGURE.arm.y, 0]} rotation={[0, 0, x < 0 ? 0.12 : -0.12]}>
+          <mesh position={[0, FIGURE.armMesh.y, 0]}>
+            <boxGeometry args={[...FIGURE.arm.size]} />
+            <Mat color={look.garb} />
+          </mesh>
+          <mesh position={[0, FIGURE.hand.y, 0]}>
+            <boxGeometry args={[...FIGURE.hand.size]} />
+            <Mat color={look.skin} />
+          </mesh>
         </group>
       ))}
-      <mesh position={[0, 0.98, 0]}><boxGeometry args={[0.28, 0.28, 0.26]} /><Mat color={look.skin} /></mesh>
+      <mesh position={[0, FIGURE.head.y, 0]}>
+        <boxGeometry args={[...FIGURE.head.size]} />
+        <Mat color={look.skin} />
+      </mesh>
       <Hair look={look} />
       <PartMeshes parts={parts} />
     </group>
@@ -111,7 +136,7 @@ function MirrorControls() {
   return (
     <OrbitControls
       makeDefault
-      target={[0, 0.62, 0]}
+      target={[0, FIGURE.torso.y, 0]}
       enableZoom={false}
       enablePan={false}
       autoRotate={idle}
@@ -135,7 +160,7 @@ export function LookPreview({ look, parts = [] }: { look: ResolvedLook; parts?: 
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
   return (
-    <Canvas camera={{ position: [1.5, 1.1, 2.7], fov: 38 }} onCreated={({ camera }) => camera.lookAt(0, 0.62, 0)}>
+    <Canvas camera={{ position: [1.5, 1.1, 2.7], fov: 38 }} onCreated={({ camera }) => camera.lookAt(0, FIGURE.torso.y, 0)}>
       <hemisphereLight args={["#efe3c4", "#3a342e", 0.9]} />
       <directionalLight position={[3, 5, 4]} intensity={1.1} color="#f2e4c8" />
       <Figure look={look} parts={parts} />

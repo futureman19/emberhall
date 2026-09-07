@@ -17,6 +17,7 @@ import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGathering
 import { groundY } from "@/game/height";
 import { keepStoryY } from "@/game/keep-story";
 import { getWorld } from "@/game/live";
+import { FIGURE, HAIR } from "@/game/look/figure.ts";
 import { SLOT_ANCHOR, partsById } from "@/game/look/parts.ts";
 import { resolveLook } from "@/game/look/resolve.ts";
 import type { ResolvedLook } from "@/game/look/resolve.ts";
@@ -53,33 +54,33 @@ function HairMeshes({ look, ghost }: { look: ResolvedLook; ghost: boolean }) {
   if (look.hairStyle === "bald") return null;
   return (
     <group>
-      <mesh position={[0, 1.14, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.3, 0.08, 0.28]} />
+      <mesh position={[0, HAIR.cap.y, 0]} castShadow={!ghost}>
+        <boxGeometry args={[...HAIR.cap.size]} />
         <Mat color={c} ghost={ghost} />
       </mesh>
       {look.hairStyle === "shag" && (
         <>
-          {[-0.17, 0.17].map((x) => (
-            <mesh key={x} position={[x, 1.02, 0]} castShadow={!ghost}>
-              <boxGeometry args={[0.06, 0.2, 0.28]} />
+          {[-HAIR.shagSide.x, HAIR.shagSide.x].map((x) => (
+            <mesh key={x} position={[x, HAIR.shagSide.y, 0]} castShadow={!ghost}>
+              <boxGeometry args={[...HAIR.shagSide.size]} />
               <Mat color={c} ghost={ghost} />
             </mesh>
           ))}
-          <mesh position={[0, 1.02, 0.16]} castShadow={!ghost}>
-            <boxGeometry args={[0.3, 0.2, 0.06]} />
+          <mesh position={[0, HAIR.shagFront.y, HAIR.shagFront.z]} castShadow={!ghost}>
+            <boxGeometry args={[...HAIR.shagFront.size]} />
             <Mat color={c} ghost={ghost} />
           </mesh>
         </>
       )}
       {look.hairStyle === "tail" && (
-        <mesh position={[0, 0.96, 0.18]} castShadow={!ghost}>
-          <boxGeometry args={[0.12, 0.34, 0.08]} />
+        <mesh position={[0, HAIR.tail.y, HAIR.tail.z]} castShadow={!ghost}>
+          <boxGeometry args={[...HAIR.tail.size]} />
           <Mat color={c} ghost={ghost} />
         </mesh>
       )}
       {look.hairStyle === "long" && (
-        <mesh position={[0, 0.94, 0.17]} castShadow={!ghost}>
-          <boxGeometry args={[0.3, 0.4, 0.08]} />
+        <mesh position={[0, HAIR.long.y, HAIR.long.z]} castShadow={!ghost}>
+          <boxGeometry args={[...HAIR.long.size]} />
           <Mat color={c} ghost={ghost} />
         </mesh>
       )}
@@ -1059,50 +1060,50 @@ function Figure({
   return (
     <group ref={root} position={[p.x, groundAt(p.x, p.z, p.story) + hover, p.z]} rotation={[0, p.facing, 0]}>
       {cloak && (
-        <mesh position={[0, 0.62 + bob, 0.16]} castShadow={!ghost}>
-          <boxGeometry args={[0.52, 0.72, 0.12]} />
+        <mesh position={[0, FIGURE.cloak.y + bob, FIGURE.cloak.z]} castShadow={!ghost}>
+          <boxGeometry args={[...FIGURE.cloak.size]} />
           <Mat color={cloakColor} ghost={ghost} />
         </mesh>
       )}
-      <mesh position={[-0.1, 0.22 + bob, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.14, 0.4, 0.16]} />
+      <mesh position={[-FIGURE.leg.x, FIGURE.leg.y + bob, 0]} castShadow={!ghost}>
+        <boxGeometry args={[...FIGURE.leg.size]} />
         <Mat color={legs} ghost={ghost} />
       </mesh>
-      <mesh position={[0.1, 0.22 + bob, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.14, 0.4, 0.16]} />
+      <mesh position={[FIGURE.leg.x, FIGURE.leg.y + bob, 0]} castShadow={!ghost}>
+        <boxGeometry args={[...FIGURE.leg.size]} />
         <Mat color={legs} ghost={ghost} />
       </mesh>
-      <mesh position={[-0.1, 0.04 + bob, 0.02]} castShadow={!ghost}>
-        <boxGeometry args={[0.16, 0.08, 0.22]} />
+      <mesh position={[-FIGURE.foot.x, FIGURE.foot.y + bob, FIGURE.foot.z]} castShadow={!ghost}>
+        <boxGeometry args={[...FIGURE.foot.size]} />
         <Mat color={feet} ghost={ghost} />
       </mesh>
-      <mesh position={[0.1, 0.04 + bob, 0.02]} castShadow={!ghost}>
-        <boxGeometry args={[0.16, 0.08, 0.22]} />
+      <mesh position={[FIGURE.foot.x, FIGURE.foot.y + bob, FIGURE.foot.z]} castShadow={!ghost}>
+        <boxGeometry args={[...FIGURE.foot.size]} />
         <Mat color={feet} ghost={ghost} />
       </mesh>
-      <mesh position={[0, 0.58 + bob, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.42, 0.5, 0.26]} />
+      <mesh position={[0, FIGURE.torso.y + bob, 0]} castShadow={!ghost}>
+        <boxGeometry args={[...FIGURE.torso.size]} />
         <Mat color={chest} ghost={ghost} />
       </mesh>
-      <group ref={left} position={[-0.28, 0.62 + bob, 0]} rotation={[walkSwing, 0, 0.12]}>
-        <mesh position={[0, -0.16, 0]} castShadow={!ghost}>
-          <boxGeometry args={[0.12, 0.42, 0.12]} />
+      <group ref={left} position={[-FIGURE.arm.x, FIGURE.arm.y + bob, 0]} rotation={[walkSwing, 0, 0.12]}>
+        <mesh position={[0, FIGURE.armMesh.y, 0]} castShadow={!ghost}>
+          <boxGeometry args={[...FIGURE.arm.size]} />
           <Mat color={chest} ghost={ghost} />
         </mesh>
-        <mesh position={[0, -0.38, 0]} castShadow={!ghost}>
-          <boxGeometry args={[0.12, 0.1, 0.12]} />
+        <mesh position={[0, FIGURE.hand.y, 0]} castShadow={!ghost}>
+          <boxGeometry args={[...FIGURE.hand.size]} />
           <Mat color={hands} ghost={ghost} />
         </mesh>
         {p.isPlayer && !ghost && <PalmFlame />}
         {p.isPlayer && wear.off && <Shield id={wear.off} ghost={ghost} />}
       </group>
-      <group ref={right} position={[0.28, 0.62 + bob, 0]} rotation={[-walkSwing, 0, -0.12]}>
-        <mesh position={[0, -0.16, 0]} castShadow={!ghost}>
-          <boxGeometry args={[0.12, 0.42, 0.12]} />
+      <group ref={right} position={[FIGURE.arm.x, FIGURE.arm.y + bob, 0]} rotation={[-walkSwing, 0, -0.12]}>
+        <mesh position={[0, FIGURE.armMesh.y, 0]} castShadow={!ghost}>
+          <boxGeometry args={[...FIGURE.arm.size]} />
           <Mat color={chest} ghost={ghost} />
         </mesh>
-        <mesh position={[0, -0.38, 0]} castShadow={!ghost}>
-          <boxGeometry args={[0.12, 0.1, 0.12]} />
+        <mesh position={[0, FIGURE.hand.y, 0]} castShadow={!ghost}>
+          <boxGeometry args={[...FIGURE.hand.size]} />
           <Mat color={hands} ghost={ghost} />
         </mesh>
         <group ref={held}>{p.isPlayer && wear.main && <Held id={wear.main} ghost={ghost} />}</group>
@@ -1111,8 +1112,8 @@ function Figure({
         {p.isPlayer && !ghost && <ConstructionTool />}
         {p.isPlayer && !ghost && <PalmFlame />}
       </group>
-      <mesh position={[0, 0.98 + bob, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.28, 0.28, 0.26]} />
+      <mesh position={[0, FIGURE.head.y + bob, 0]} castShadow={!ghost}>
+        <boxGeometry args={[...FIGURE.head.size]} />
         <Mat color={look.skin} ghost={ghost} />
       </mesh>
       {!hood && (
@@ -1121,19 +1122,19 @@ function Figure({
         </group>
       )}
       {hood === "helm" || hood === "cap" ? (
-        <mesh position={[0, 1.12 + bob, 0]} castShadow={!ghost}>
-          <boxGeometry args={[0.34, 0.16, 0.32]} />
+        <mesh position={[0, FIGURE.helm.y + bob, 0]} castShadow={!ghost}>
+          <boxGeometry args={[...FIGURE.helm.size]} />
           <Mat color={hoodColor} ghost={ghost} />
         </mesh>
       ) : hood ? (
-        <mesh position={[0, 1.12 + bob, -0.02]} castShadow={!ghost}>
-          <boxGeometry args={[0.34, 0.2, 0.34]} />
+        <mesh position={[0, FIGURE.hood.y + bob, FIGURE.hood.z]} castShadow={!ghost}>
+          <boxGeometry args={[...FIGURE.hood.size]} />
           <Mat color={hoodColor} ghost={ghost} />
         </mesh>
       ) : null}
       {p.isPlayer && !ghost && (
-        <mesh position={[0, 0.62 + bob, -0.14]} castShadow>
-          <boxGeometry args={[0.22, 0.18, 0.06]} />
+        <mesh position={[0, FIGURE.belt.y + bob, FIGURE.belt.z]} castShadow>
+          <boxGeometry args={[...FIGURE.belt.size]} />
           <meshStandardMaterial color="#c9a36a" roughness={0.7} />
         </mesh>
       )}
