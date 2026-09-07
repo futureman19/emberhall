@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { commandTrack } from "./tracking.ts";
 import { commandTravel } from "./gates.ts";
 import {
   commandCraft,
@@ -529,6 +530,7 @@ export const useGame = create<GameUI>((set, get) => ({
     else if (verb === "sowWheat") err = commandPlant(w, t.tx, t.ty, "wheat");
     else if (verb === "sowGarlic") err = commandPlant(w, t.tx, t.ty, "garlic");
     else if (verb === "sowAcorn") err = commandPlantTree(w, t.tx, t.ty);
+    else if (verb === "track") err = commandTrack(w);
     if (err) get().flash(err);
     set({ ctx: null, snap: snapshot() });
   },

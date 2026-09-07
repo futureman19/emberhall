@@ -590,6 +590,7 @@ export type CtxVerb =
   | "sowGarlic"
   | "sowAcorn"
   | "pick"
+  | "track"
   | "house";
 
 export interface CtxTarget {

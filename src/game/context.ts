@@ -81,6 +81,7 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
       }
     }
     if (hasBook(w)) out.push({ verb: "teleport", label: "Teleport here" });
+    out.push({ verb: "track", label: "Track" });
   }
   if (t.kind === "plot") {
     out.push({ verb: "walk", label: "Walk here" });
