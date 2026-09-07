@@ -366,6 +366,20 @@ function isCampfire(value: unknown): boolean {
   );
 }
 
+const HERB_KINDS = new Set(["moss", "mandrake", "ginseng", "ash", "pearl"]);
+
+function isHerbPatch(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    isString(value.id) &&
+    isString(value.kind) &&
+    HERB_KINDS.has(value.kind) &&
+    isFiniteNumber(value.tx) &&
+    isFiniteNumber(value.ty) &&
+    isFiniteNumber(value.until)
+  );
+}
+
 function isBuilding(value: unknown): boolean {
   return (
     isRecord(value) &&
@@ -476,6 +490,7 @@ function isCurrentSave(save: SaveRecord): boolean {
     isArrayOf(save.fauna, isCreature) &&
     isArrayOf(save.piles, isGroundPile) &&
     isArrayOf(save.campfires, isCampfire) &&
+    (save.herbs === undefined || isArrayOf(save.herbs, isHerbPatch)) &&
     isArrayOf(save.buildings, isBuilding) &&
     isArrayOf(save.plots, isPlot) &&
     (save.saplings === undefined || isArrayOf(save.saplings, isSapling)) &&

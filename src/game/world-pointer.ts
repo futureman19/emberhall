@@ -1,5 +1,6 @@
 import { VIEW } from "./atlas.ts";
 import { buildingAt } from "./craft.ts";
+import { HERB_META, herbAt } from "./herbs.ts";
 import { houseAt } from "./house.ts";
 import { CROP_META, plotAt } from "./farm.ts";
 import { getWorld } from "./live.ts";
@@ -12,6 +13,11 @@ export function hitAt(tx: number, ty: number, sx: number, sy: number) {
   const pile = w.piles.find((p) => p.tx === tx && p.ty === ty);
   if (pile) {
     g.openCtx(sx, sy, { kind: "pile", id: pile.id, tx, ty, label: pile.label });
+    return;
+  }
+  const herb = herbAt(w, tx, ty);
+  if (herb) {
+    g.openCtx(sx, sy, { kind: "herb", id: herb.id, tx, ty, label: HERB_META[herb.kind].label });
     return;
   }
   const fauna = w.fauna.find((c) => Math.round(c.x) === tx && Math.round(c.z) === ty);
@@ -81,6 +87,11 @@ export function leftAt(tx: number, ty: number) {
   const pile = w.piles.find((p) => Math.hypot(p.tx - tx, p.ty - ty) < 0.8);
   if (pile) {
     g.openPile(pile.id);
+    return;
+  }
+  const herb = w.herbs?.find((h) => Math.hypot(h.tx - tx, h.ty - ty) < 0.8);
+  if (herb) {
+    g.doVerb("pick", { kind: "herb", id: herb.id, tx: herb.tx, ty: herb.ty, label: HERB_META[herb.kind].label });
     return;
   }
   g.useTile(tx, ty);

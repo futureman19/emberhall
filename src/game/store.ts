@@ -10,6 +10,7 @@ import {
 } from "./craft.ts";
 import { applyItemInlay } from "./inlay.ts";
 import { commandHarvest, commandPlant, commandTill, commandWorkPlot, plotAt } from "./farm.ts";
+import { commandPick } from "./herbs.ts";
 import { commandPlantTree } from "./forestry.ts";
 import { getWorld, resetWorld, setWorld, snapshot } from "./live.ts";
 import type { LookChoice } from "./look/types.ts";
@@ -523,6 +524,7 @@ export const useGame = create<GameUI>((set, get) => ({
     } else if (verb === "use") get().useStation(t.id);
     else if (verb === "harvest") err = commandHarvest(w, t.tx, t.ty);
     else if (verb === "till") err = commandTill(w, t.tx, t.ty);
+    else if (verb === "pick" && t.kind === "herb") err = commandPick(w, t.id);
     else if (verb === "sowCabbage") err = commandPlant(w, t.tx, t.ty, "cabbage");
     else if (verb === "sowWheat") err = commandPlant(w, t.tx, t.ty, "wheat");
     else if (verb === "sowGarlic") err = commandPlant(w, t.tx, t.ty, "garlic");

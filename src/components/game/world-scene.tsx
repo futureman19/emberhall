@@ -40,6 +40,7 @@ import { Sky } from "./sky";
 import { WeatherFx } from "./weather-fx";
 import { People } from "./people-meshes";
 import { Piles } from "./pile-meshes";
+import { Herbs } from "./herb-meshes";
 import { Campfires } from "./campfire-meshes";
 import { Horizon, Terrain } from "./terrain";
 
@@ -1822,6 +1823,7 @@ export function WorldScene() {
       <Fauna />
       <Piles />
       <Campfires />
+      <Herbs />
       <Gates />
       <WalkMarker />
       <MarkStones />

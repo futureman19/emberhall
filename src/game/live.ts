@@ -8,6 +8,7 @@ import { you } from "./player.ts";
 import { mulberry32 } from "./rng.ts";
 import { ensureWeather, weatherSnap } from "./weather.ts";
 import { ensureCity, ensureKeepSite } from "./city.ts";
+import { ensureHerbs } from "./herbs.ts";
 import { createStubWorld, createWorld, seedEmberhallBank, seedFieldStones, seedTownNpcs } from "./world.ts";
 import { ensureLookHut } from "./house.ts";
 import { createResourceNodeStateMap, regrowResourceNodes } from "./resources/state.ts";
@@ -17,6 +18,7 @@ function withFauna(w: World) {
   if (!w.fauna) w.fauna = [];
   if (!w.piles) w.piles = [];
   if (!w.campfires) w.campfires = [];
+  if (!w.herbs) w.herbs = [];
   if (!w.plots) w.plots = [];
   if (!w.saplings) w.saplings = [];
   if (!w.plantedTimber) w.plantedTimber = {};
@@ -86,6 +88,7 @@ function withFauna(w: World) {
   ensureKeepSite(w);
   ensureLookHut(w);
   ensureWeather(w);
+  ensureHerbs(w);
   regrowResourceNodes(w);
   return w;
 }
@@ -136,6 +139,7 @@ export function snapshot(w: World = world): Snapshot {
     fauna: w.fauna,
     piles: w.piles ?? [],
     campfires: w.campfires ?? [],
+    herbs: w.herbs ?? [],
     landKey: String(w.landRev),
     region: region.name,
     youX: self?.x ?? COURT.tx,

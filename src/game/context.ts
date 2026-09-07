@@ -2,6 +2,7 @@ import { CROP_META, plotAt } from "./farm.ts";
 import { plantVerbLabel, isGhostwoodTree } from "./forestry.ts";
 import { GHOSTWOOD_LUMBERJACK } from "./resources/catalog.ts";
 import { hasBook } from "./magery.ts";
+import { herbReady } from "./herbs.ts";
 import { getWorld } from "./live.ts";
 import { effSkill } from "./player.ts";
 import { identifyHarvestNode } from "./resources/harvest.ts";
@@ -112,6 +113,11 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
   }
   if (t.kind === "person") out.push({ verb: "talk", label: "Talk" }, { verb: "walk", label: "Walk" });
   if (t.kind === "pile") out.push({ verb: "loot", label: "Take" });
+  if (t.kind === "herb") {
+    const patch = w.herbs?.find((h) => h.id === t.id);
+    if (patch && herbReady(w, patch)) out.push({ verb: "pick", label: `Pick the ${t.label}` });
+    out.push({ verb: "walk", label: "Walk" });
+  }
   if (t.kind === "gate") out.push({ verb: "enter", label: "Enter" });
   if (t.kind === "building") {
     if (t.label === "hall") out.push({ verb: "roster", label: "Read the roster" });

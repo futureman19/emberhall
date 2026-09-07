@@ -25,7 +25,7 @@ function heldHoe(world: World) {
   return "Hold a hoe — tap it in You.";
 }
 
-export const CROP_ORDER: CropId[] = ["cabbage", "wheat", "garlic"];
+export const CROP_ORDER: CropId[] = ["cabbage", "wheat", "garlic", "ginseng", "mandrake", "moss"];
 
 export const CROP_META: Record<
   CropId,
@@ -34,6 +34,9 @@ export const CROP_META: Record<
   cabbage: { seed: "cabbage_seed", crop: "cabbage", label: "Cabbage", hours: 0.75, diff: 6, color: "#5a7040", ripe: "#6a8a48" },
   wheat: { seed: "wheat_seed", crop: "wheat", label: "Wheat", hours: 1.1, diff: 12, color: "#8a7040", ripe: "#c9a36a" },
   garlic: { seed: "garlic_seed", crop: "garlic", label: "Garlic", hours: 1.55, diff: 18, color: "#6a7a48", ripe: "#ece6d8" },
+  ginseng: { seed: "ginseng_seed", crop: "ginseng", label: "Ginseng", hours: 2.2, diff: 24, color: "#6a8a54", ripe: "#d8e0b0" },
+  mandrake: { seed: "mandrake_seed", crop: "mandrake", label: "Mandrake", hours: 2.8, diff: 30, color: "#4a4458", ripe: "#9a7ab8" },
+  moss: { seed: "moss_seed", crop: "moss", label: "Blood moss", hours: 1.8, diff: 26, color: "#3a5244", ripe: "#6aa87a" },
 };
 
 export const FARM_BEDS: { dx: number; dz: number }[] = [
@@ -174,7 +177,7 @@ export function commandWorkPlot(world: World, tx: number, ty: number) {
   if (bed.crop && bed.stage >= 3) return commandHarvest(world, tx, ty);
   if (bed.crop) return "Not yet.";
   const crop = firstSeed(world);
-  if (!crop) return "Need seed — cabbage, wheat, or garlic.";
+  if (!crop) return "Need seed — crop or herb.";
   return commandPlant(world, tx, ty, crop);
 }
 

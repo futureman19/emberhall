@@ -29,6 +29,9 @@ export function SpellbookGump() {
       <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">
         Dust from the pack. Mana {Math.floor(mana)}/{max}. The words take or they do not. The moons still hold.
       </p>
+      <p className="mt-1 text-pretty text-xs leading-relaxed text-muted">
+        The vale keeps its own dust: moss in the fen, mandrake in the pines, ginseng in the meadows, ash in the east sands, pearls where the water curls. Pluck them wild — a seed may follow home.
+      </p>
       {!book && <p className="mt-3 text-sm text-fg">The book is gone.</p>}
       <div className="mt-3">
         <p className="font-display text-xs tracking-wider text-muted uppercase">Travel</p>

@@ -118,6 +118,9 @@ export type ItemId =
   | "cabbage_seed"
   | "wheat_seed"
   | "garlic_seed"
+  | "ginseng_seed"
+  | "mandrake_seed"
+  | "moss_seed"
   | "acorn"
   | "deed_porch"
   | "deed_hut"
@@ -252,7 +255,7 @@ export type BuildingKind =
   | "homestead";
 export type VocationId = "cook" | "armourer" | "trader" | "recruiter" | "guard";
 export type Notoriety = "innocent" | "criminal" | "murderer";
-export type IntentKind = "walk" | "chop" | "mine" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "till" | "forest" | "none";
+export type IntentKind = "walk" | "chop" | "mine" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "till" | "forest" | "pick" | "none";
 export type Speed = 0 | 1 | 2 | 3;
 export type PanelId = "none" | "help" | "you" | "journal" | "vale" | "roster" | "build";
 export type WeatherKind = "clear" | "fair" | "cloudy" | "rain" | "storm";
@@ -382,7 +385,7 @@ export interface Building {
   chestGold?: number;
 }
 
-export type CropId = "cabbage" | "wheat" | "garlic";
+export type CropId = "cabbage" | "wheat" | "garlic" | "ginseng" | "mandrake" | "moss";
 
 export interface CropPlot {
   id: string;
@@ -391,6 +394,17 @@ export interface CropPlot {
   crop: CropId | null;
   plantedHour: number;
   stage: 0 | 1 | 2 | 3;
+}
+
+export type HerbKind = "moss" | "mandrake" | "ginseng" | "ash" | "pearl";
+
+/** A wild reagent patch. Ready to pick when world.hour >= until. */
+export interface HerbPatch {
+  id: string;
+  kind: HerbKind;
+  tx: number;
+  ty: number;
+  until: number;
 }
 
 export interface Sapling {
@@ -486,6 +500,7 @@ export interface World {
   fauna: Creature[];
   piles: GroundPile[];
   campfires: Campfire[];
+  herbs: HerbPatch[];
   buildings: Building[];
   plots: CropPlot[];
   saplings: Sapling[];
@@ -534,6 +549,7 @@ export interface Snapshot {
   fauna: Creature[];
   piles: GroundPile[];
   campfires: Campfire[];
+  herbs: HerbPatch[];
   landKey: string;
   region: string;
   youX: number;
@@ -542,7 +558,7 @@ export interface Snapshot {
   seenRev: number;
 }
 
-export type CtxKind = "tile" | "person" | "fauna" | "pile" | "pack" | "gate" | "building" | "plot";
+export type CtxKind = "tile" | "person" | "fauna" | "pile" | "pack" | "gate" | "building" | "plot" | "herb";
 export type CtxVerb =
   | "walk"
   | "chop"
@@ -573,6 +589,7 @@ export type CtxVerb =
   | "sowWheat"
   | "sowGarlic"
   | "sowAcorn"
+  | "pick"
   | "house";
 
 export interface CtxTarget {

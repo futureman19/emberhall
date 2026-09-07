@@ -4,6 +4,7 @@ import { harvestNow, plantNow, tillNow } from "./farm.ts";
 import { GHOSTWOOD_LUMBERJACK } from "./resources/catalog.ts";
 import { isGhostwoodTree, isTimberId, plantTreeNow } from "./forestry.ts";
 import { ARROW_RANGE, FIREBALL_RANGE, burstDeath, castNow, maxMana, tickMana } from "./magery.ts";
+import { pickNow } from "./herbs.ts";
 import { pickPetName } from "./names.ts";
 import { petLabel } from "./pets.ts";
 import { astar, astarToRange, nearestWalkable, tileOf } from "./pathfinding.ts";
@@ -1003,12 +1004,15 @@ export function tickPlayer(world: World, dt: number): string | null {
     intent.kind = "none";
     return null;
   }
-  if (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till" || intent.kind === "forest") {
+  if (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till" || intent.kind === "forest" || intent.kind === "pick") {
     p.facing = Math.atan2(intent.tx - p.x, intent.ty - p.z);
     const prev = world.player.workT;
     world.player.workT += dt;
     const hit = workBeatLands(prev, world.player.workT);
     if (!hit) return null;
+    if (intent.kind === "pick") {
+      return pickNow(world);
+    }
     if (intent.kind === "till") {
       burstChips(world, intent.tx, intent.ty, "chop");
       return tillNow(world);

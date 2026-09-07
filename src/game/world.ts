@@ -14,6 +14,7 @@ import {
 } from "./atlas.ts";
 import { emptyChest, emptyLastGain, emptyPack, emptySkills } from "./catalog.ts";
 import { ensureCity, stampCityTiles } from "./city.ts";
+import { ensureHerbs } from "./herbs.ts";
 import { personName } from "./names.ts";
 import { hash2, irange, mulberry32, pick } from "./rng.ts";
 import { buildingBox, boxesOverlap, siteError } from "./building-size.ts";
@@ -302,6 +303,7 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
     fauna: [],
     piles: [],
     campfires: [],
+    herbs: [],
     buildings: [],
     plots: [],
     saplings: [],
@@ -423,6 +425,7 @@ export function createWorld(): World {
   seedTownNpcs(world, rng);
   seedEmberhallBank(world);
   ensureCity(world);
+  ensureHerbs(world);
   log(world, `You are ${you.name}. The vale is a country — Ridgewatch to Brinegate. Follow the dirt.`);
   revealAround(world, COURT.tx, COURT.ty, 28);
   return world;
