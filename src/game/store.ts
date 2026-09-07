@@ -31,6 +31,7 @@ import {
   commandChop,
   commandCook,
   commandDrop,
+  commandDrink,
   commandEat,
   commandEquip,
   commandEquipRare,
@@ -539,6 +540,12 @@ export const useGame = create<GameUI>((set, get) => ({
   equip: (item) => {
     if (item === "spellbook") {
       get().openBookGump();
+      return;
+    }
+    if (item === "potion_heal" || item === "potion_night") {
+      const err = commandDrink(getWorld(), item);
+      if (err) get().flash(err);
+      set({ snap: snapshot() });
       return;
     }
     const houseKind = houseKindForDeed(item);

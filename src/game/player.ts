@@ -57,6 +57,7 @@ const SPILL: ItemId[] = [
   "log", "board", "ore", "meat", "hide", "ingot", "club", "shield",
   "garlic", "ginseng", "silk", "pearl", "moss", "mandrake", "ash", "nightshade",
   "cabbage", "wheat", "cabbage_seed", "wheat_seed", "garlic_seed", "acorn",
+  "potion_heal", "potion_night",
 ];
 
 const TAME_RETALIATE: ReadonlySet<string> = new Set([
@@ -209,6 +210,19 @@ export function anatomyCritChance(anatomy: number) {
 
 export function bandageHealAmount(healing: number, anatomy: number) {
   return 8 + Math.floor(Math.max(0, healing) / 10) + anatomyBonus(anatomy);
+}
+
+/** A red draught. 12 at 0 alchemy, 24 at 100. */
+export function potionHealAmount(alchemy: number) {
+  return 12 + Math.floor(Math.max(0, alchemy) / 8);
+}
+
+export function potionNightHours(alchemy: number) {
+  return 8 + Math.floor(Math.max(0, alchemy) / 25);
+}
+
+export function isPotion(item: ItemId) {
+  return item === "potion_heal" || item === "potion_night";
 }
 
 function anatomyCritRoll(world: World) {
@@ -477,6 +491,27 @@ export function commandHeal(world: World) {
   tryGain(world, "healing", true, true);
   tryGain(world, "anatomy", true, true);
   return "The cloth holds.";
+}
+
+export function commandDrink(world: World, item: ItemId) {
+  const dead = hands(world);
+  if (dead) return dead;
+  const p = you(world);
+  if (!p) return "You are not in the vale.";
+  if (!isPotion(item)) return "That is not a draught.";
+  if ((world.player.pack[item] ?? 0) < 1) return "You do not carry that.";
+  world.player.pack[item] -= 1;
+  const alchemy = effSkill(world, "alchemy");
+  tryGain(world, "alchemy", true, true);
+  if (item === "potion_heal") {
+    const before = p.hp;
+    const amount = potionHealAmount(alchemy);
+    p.hp = Math.min(p.maxHp, p.hp + amount);
+    healingFx = { x: p.x, z: p.z, at: world.hour, amount: p.hp - before };
+    return "The draught takes hold.";
+  }
+  world.player.nightSightUntil = world.hour + potionNightHours(alchemy);
+  return "The dark thins.";
 }
 
 export function commandCook(world: World) {

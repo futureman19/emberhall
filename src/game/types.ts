@@ -85,6 +85,8 @@ export type ItemId =
   | "meat"
   | "hide"
   | "bandage"
+  | "potion_heal"
+  | "potion_night"
   | "tunic"
   | "leather"
   | "mail"

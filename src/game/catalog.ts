@@ -57,6 +57,7 @@ export const LIVE_SKILLS: SkillId[] = [
   "farming",
   "forestry",
   "archery",
+  "alchemy",
 ];
 
 export const ITEM_META: Record<
@@ -89,6 +90,8 @@ export const ITEM_META: Record<
   meat: { label: "Raw meat", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 4, sell: 2, tags: ["meat", "food"] },
   hide: { label: "Hide", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 4, tags: ["hide"] },
   bandage: { label: "Bandage", tool: false, slot: null, fill: "var(--color-fg)", armor: 0, buy: 3, sell: 1, tags: ["cloth"] },
+  potion_heal: { label: "Heal potion", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 12, sell: 4, tags: ["magic"] },
+  potion_night: { label: "Night sight potion", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 14, sell: 5, tags: ["magic"] },
   tunic: { label: "Tunic", tool: false, slot: "chest", fill: "var(--color-gold)", armor: 1, buy: 18, sell: 6, tags: ["cloth", "armor"] },
   leather: { label: "Leather tunic", tool: false, slot: "chest", fill: "var(--color-accent)", armor: 3, buy: 40, sell: 14, tags: ["leather", "armor"] },
   mail: { label: "Mail", tool: false, slot: "chest", fill: "var(--color-muted)", armor: 5, buy: 80, sell: 28, tags: ["metal", "armor"] },
@@ -260,7 +263,7 @@ export function emptySkills(): Record<SkillId, number> {
     magery: 8,
     farming: 10,
     forestry: 8,
-    alchemy: 0,
+    alchemy: 8,
     archery: 0,
     cartography: 0,
     fencing: 0,
@@ -290,7 +293,7 @@ export function emptyPack(): Record<ItemId, number> {
     hatchet: 1, knife: 1, pick: 1, hoe: 1, log: 0, board: 0, ore: 0, ingot: 0, club: 0, shield: 0,
     staff: 0, bow: 0, torch: 0, crate: 0, cap: 0, cuirass: 0, sword: 0, mace: 0, gauntlets: 0, gorget: 0, heater: 0,
     rabbit_foot: 0, orc_tusk: 0,
-    meat: 1, hide: 0, bandage: 3,
+    meat: 1, hide: 0, bandage: 3, potion_heal: 0, potion_night: 0,
     tunic: 0, leather: 0, mail: 0, hood: 1, helm: 0, cloak: 0, gloves: 1, hose: 0, greaves: 0,
     boots: 0, pendant: 1, ring: 1, relic: 0, spellbook: 1, rune: 4, garlic: 12, ginseng: 12,
     silk: 16, nightshade: 4, pearl: 14, moss: 10, mandrake: 10, ash: 12, cabbage: 2, wheat: 0,

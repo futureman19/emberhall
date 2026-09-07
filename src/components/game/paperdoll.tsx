@@ -28,6 +28,7 @@ const RIGHT_SLOTS: { id: WearSlot; label: string }[] = [
 
 function packHint(id: ItemId) {
   if (id === "deed_porch" || id === "deed_hut" || id === "deed_homestead") return "Place";
+  if (id === "potion_heal" || id === "potion_night") return "Drink";
   const slot = ITEM_META[id].slot;
   if (slot === "main" || slot === "off") return "Hold";
   if (slot) return "Wear";
