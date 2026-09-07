@@ -197,6 +197,24 @@ export function effSkill(world: World, id: SkillId) {
   return (world.player.skills[id] ?? 0) + (rareMods(world).skills[id] ?? 0);
 }
 
+/** Extra strike dice from knowing the body. 0 at 0, 5 at 100. */
+export function anatomyBonus(anatomy: number) {
+  return Math.floor(Math.max(0, anatomy) / 20);
+}
+
+/** Clean hits can open a seam. 0% at 0, 20% at 100. */
+export function anatomyCritChance(anatomy: number) {
+  return Math.max(0, Math.min(0.2, Math.max(0, anatomy) / 500));
+}
+
+export function bandageHealAmount(healing: number, anatomy: number) {
+  return 8 + Math.floor(Math.max(0, healing) / 10) + anatomyBonus(anatomy);
+}
+
+function anatomyCritRoll(world: World) {
+  return mulberry32((world.seed + world.tickCount * 31 + 41) >>> 0)();
+}
+
 export function needHeld(world: World, item: ItemId) {
   if (world.player.wear.main === item) return null;
   return `Hold the ${ITEM_META[item].label.toLowerCase()} — tap it in You.`;
@@ -453,9 +471,11 @@ export function commandHeal(world: World) {
   if ((world.player.pack.bandage ?? 0) < 1) return "Need a bandage.";
   world.player.pack.bandage -= 1;
   const before = p.hp;
-  p.hp = Math.min(p.maxHp, p.hp + 8 + Math.floor(effSkill(world, "healing") / 10));
+  const amount = bandageHealAmount(effSkill(world, "healing"), effSkill(world, "anatomy"));
+  p.hp = Math.min(p.maxHp, p.hp + amount);
   healingFx = { x: p.x, z: p.z, at: world.hour, amount: p.hp - before };
   tryGain(world, "healing", true, true);
+  tryGain(world, "anatomy", true, true);
   return "The cloth holds.";
 }
 
@@ -637,6 +657,7 @@ function huntNow(world: World, p: Person) {
   const blade = weaponDmg(effectiveMain(world));
   const mods = rareMods(world);
   const skill = bow ? world.player.skills.archery : world.player.skills.swords;
+  const anatomy = effSkill(world, "anatomy");
   const chance = successChance(skill, 10 + FAUNA_META[c.kind].hp / 2);
   const ok = Math.random() < chance + 0.2 + mods.hit / 100;
   combatFx = {
@@ -649,8 +670,13 @@ function huntNow(world: World, p: Person) {
     clean: ok,
     at: world.hour,
   };
-  let dmg = ok ? blade + Math.floor(skill / 12) : Math.max(1, Math.floor(blade / 3));
+  let dmg = ok ? blade + Math.floor(skill / 12) + anatomyBonus(anatomy) : Math.max(1, Math.floor(blade / 3));
   dmg += mods.dmg;
+  let crit = false;
+  if (ok && anatomyCritRoll(world) < anatomyCritChance(anatomy)) {
+    dmg = Math.floor(dmg * 1.5);
+    crit = true;
+  }
   const slayerMul = mods.vs[c.kind];
   if (slayerMul) dmg = Math.floor(dmg * slayerMul);
   const arm = armorOf(world.player.wear) + mods.armor;
@@ -662,8 +688,8 @@ function huntNow(world: World, p: Person) {
     tryGain(world, "archery", ok, true);
   } else {
     tryGain(world, "swords", ok, true);
-    tryGain(world, "anatomy", ok, true);
   }
+  tryGain(world, "anatomy", ok, true);
   if (c.hp <= 0) {
     c.hp = 0;
     c.task = "dead";
@@ -679,8 +705,12 @@ function huntNow(world: World, p: Person) {
     }
     return `The ${FAUNA_META[c.kind].label.toLowerCase()} falls.`;
   }
-  if (bow) return ok ? `Your arrow finds the ${FAUNA_META[c.kind].label.toLowerCase()}.` : `Your arrow grazes the ${FAUNA_META[c.kind].label.toLowerCase()}.`;
-  return `You strike the ${FAUNA_META[c.kind].label.toLowerCase()}.`;
+  const prey = FAUNA_META[c.kind].label.toLowerCase();
+  if (bow) {
+    if (!ok) return `Your arrow grazes the ${prey}.`;
+    return crit ? `Your arrow finds the seam on the ${prey}.` : `Your arrow finds the ${prey}.`;
+  }
+  return crit ? `You find the seam on the ${prey}.` : `You strike the ${prey}.`;
 }
 
 export interface TamingFx {
