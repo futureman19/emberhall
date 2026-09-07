@@ -59,6 +59,7 @@ export const LIVE_SKILLS: SkillId[] = [
   "archery",
   "alchemy",
   "tracking",
+  "tailoring",
 ];
 
 export const ITEM_META: Record<
@@ -276,7 +277,7 @@ export function emptySkills(): Record<SkillId, number> {
     music: 0,
     poisoning: 0,
     stealing: 0,
-    tailoring: 0,
+    tailoring: 8,
     tinkering: 0,
     tracking: 8,
   };

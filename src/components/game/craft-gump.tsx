@@ -22,7 +22,7 @@ const TITLE: Record<Group, { title: string; blurb: string }> = {
   bench: { title: "The bench", blurb: "Logs to boards. Then torch, club, crate, staff, cap, shield, bow, cuirass — any wood serves." },
   forge: { title: "The forge", blurb: "Ore to ingot. Then ring, knife, tools, gorget, boots, gauntlets, mace, sword, helm, iron shield, greaves, mail." },
   fire: { title: "The fire", blurb: "Roast meat, bake bread, simmer stew — a campfire of three wood, or a kitchen hearth." },
-  field: { title: "In the field", blurb: "A blade in hand. Any cloth to bandages, two hides to a leather shirt, three wood to a campfire. Garlic and ginseng to a heal draught; silk and ash to night sight." },
+  field: { title: "In the field", blurb: "A blade in hand. Cloth to bandages, or to hood, gloves, hose, tunic, cloak. Two hides to a leather shirt. Three wood to a campfire. Garlic and ginseng to a heal draught; silk and ash to night sight." },
 };
 
 export function CraftGump() {

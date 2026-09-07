@@ -118,6 +118,7 @@ test("craft - the leather tunic finally has a source: two hides and a blade", ()
   assert.equal(w.player.pack.leather, 1);
   assert.equal(w.player.pack.hide, 0);
   assert.equal(recipeById("cut_leather")?.station, null, "field recipe needs no station");
+  assert.equal(recipeById("cut_leather")?.skill, "tailoring");
 });
 
 test("bladed script - chopping takes any sharp edge, not only the hatchet", () => {
