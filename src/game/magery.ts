@@ -4,7 +4,7 @@ import { astarToRange, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { spawnCorpsePile } from "./piles.ts";
 import { rareName, rollKillRare } from "./rare.ts";
 import { successChance, tryGain } from "./skills.ts";
-import { playSfx } from "./vale-sfx.ts";
+import { playSfx, type SfxId } from "./vale-sfx.ts";
 import { completeObjective, nid, revealAround } from "./world.ts";
 import type { ItemId, Person, RecallMark, SpellId, World } from "./types.ts";
 
@@ -34,6 +34,12 @@ export const ARROW_RANGE = 14;
 export const FIREBALL_RANGE = 16;
 export const TELEPORT_RANGE = 10;
 export const MARK_CAP = 8;
+
+/** Every spell has its own voice — the windup "cast" hum is shared, the
+ * release is not. Fizzle keeps its own sad sputter. */
+export function spellSfx(spell: SpellId): SfxId {
+  return `spell_${spell}`;
+}
 
 export type CastTarget =
   | { kind: "fauna" | "person" | "self"; id?: string }
@@ -345,7 +351,7 @@ export function castNow(world: World): string | null {
   if (spell === "nightsight") {
     world.player.nightSightUntil = world.hour + 8;
     castFx = { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour };
-    playSfx("spark", 0.48);
+    playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The dark thins.`, gain);
   }
   if (spell === "heal") {
@@ -353,7 +359,7 @@ export function castNow(world: World): string | null {
     p.hp = Math.min(p.maxHp, p.hp + amt);
     castFx = { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour };
     completeObjective(world, "healcast");
-    playSfx("spark", 0.48);
+    playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The wound closes.`, gain);
   }
   if (spell === "magicarrow" || spell === "fireball") {
@@ -364,7 +370,7 @@ export function castNow(world: World): string | null {
     c.task = "fight";
     c.taskUntil = world.hour + 0.25;
     castFx = { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour };
-    playSfx(spell === "fireball" ? "fire" : "spark", 0.52);
+    playSfx(spellSfx(spell), 0.54);
     if (c.hp <= 0) {
       c.hp = 0;
       c.task = "dead";
@@ -388,7 +394,7 @@ export function castNow(world: World): string | null {
     if (!landAt(world, p, savedTx, savedTy)) return "No footing.";
     castFx = { spell, x: fromX, z: fromZ, tx: p.x, tz: p.z, at: world.hour };
     completeObjective(world, "teleport");
-    playSfx("gate", 0.5);
+    playSfx(spellSfx(spell), 0.52);
     return withGain(`${meta.words}. The dirt folds.`, gain);
   }
   if (spell === "mark") {
@@ -399,7 +405,7 @@ export function castNow(world: World): string | null {
     world.player.marks = [...world.player.marks, mark];
     castFx = { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour };
     completeObjective(world, "mark");
-    playSfx("spark", 0.48);
+    playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. ${mark.name} is written.`, gain);
   }
   if (spell === "recall") {
@@ -410,7 +416,7 @@ export function castNow(world: World): string | null {
     if (!landAt(world, p, mark.tx, mark.ty)) return "No footing.";
     castFx = { spell, x: fromX, z: fromZ, tx: p.x, tz: p.z, at: world.hour };
     completeObjective(world, "recall");
-    playSfx("gate", 0.5);
+    playSfx(spellSfx(spell), 0.52);
     return withGain(`${meta.words}. ${mark.name}.`, gain);
   }
   return "The words fade.";

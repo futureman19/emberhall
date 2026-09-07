@@ -26,7 +26,8 @@ import { groundY as heightAt } from "@/game/height";
 import { keepStoryY } from "@/game/keep-story";
 import { getGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
 import { getWorld } from "@/game/live";
-import { getCastFx, getDeathFx, getFizzleFx } from "@/game/magery";
+import { getCastFx, getDeathFx, getFizzleFx, SPELL_META } from "@/game/magery";
+import { impactShard, moteState, ringBloom, spellFxProfile, windupGlow } from "@/game/magery-animation";
 import { getChips, getCombatFx, getHealingFx, getTamingFx } from "@/game/player";
 import { useGame } from "@/game/store";
 import { hoverAt, leftAt, liftAt } from "@/game/world-pointer";
@@ -283,12 +284,21 @@ function WalkMarker() {
   );
 }
 
+const MOTES_MAX = 12;
+const SHARDS_MAX = 10;
+
 function CastFxMesh() {
   const group = useRef<THREE.Group>(null);
   const puff = useRef<THREE.Mesh>(null);
   const bolt = useRef<THREE.Mesh>(null);
   const trail = useRef<THREE.Mesh>(null);
   const impact = useRef<THREE.Mesh>(null);
+  const ring = useRef<THREE.Mesh>(null);
+  const sigil = useRef<THREE.Group>(null);
+  const wordsAnchor = useRef<THREE.Group>(null);
+  const motes = useRef<(THREE.Mesh | null)[]>([]);
+  const shards = useRef<(THREE.Mesh | null)[]>([]);
+  const words = useRef<HTMLDivElement>(null);
   useFrame(() => {
     const fx = getCastFx();
     const g = group.current;
@@ -296,14 +306,46 @@ function CastFxMesh() {
     const boltMesh = bolt.current;
     const trailMesh = trail.current;
     const impactMesh = impact.current;
-    if (!g || !puffMesh || !boltMesh || !trailMesh || !impactMesh) return;
-    if (!fx) {
-      g.visible = false;
-      return;
+    const ringMesh = ring.current;
+    const sigilGroup = sigil.current;
+    const anchor = wordsAnchor.current;
+    if (!g || !puffMesh || !boltMesh || !trailMesh || !impactMesh || !ringMesh || !sigilGroup || !anchor) return;
+    const world = getWorld();
+    const profile = fx ? spellFxProfile(fx.spell) : null;
+    const age = fx ? (world.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const duration = profile?.duration ?? 0.68;
+    const live = Boolean(fx && profile && age >= 0 && age <= duration);
+
+    // The words of power: above the caster while they are spoken (windup),
+    // then riding the release flash.
+    let wordsText: string | null = null;
+    let wordsX = 0;
+    let wordsZ = 0;
+    let wordsColor = "#e0b56a";
+    if (live && fx && profile) {
+      wordsText = SPELL_META[fx.spell].words;
+      wordsX = fx.x;
+      wordsZ = fx.z;
+      wordsColor = profile.ring;
+    } else if (world.player.intent.kind === "cast" && world.player.intent.spell) {
+      const caster = world.people.find((person) => person.isPlayer);
+      if (caster && !caster.path.length) {
+        wordsText = SPELL_META[world.player.intent.spell].words;
+        wordsX = caster.x;
+        wordsZ = caster.z;
+        wordsColor = windupGlow(world.player.intent.spell);
+      }
     }
-    const age = (getWorld().hour - fx.at) * SECONDS_PER_HOUR;
-    const duration = fx.spell === "magicarrow" || fx.spell === "fireball" ? 0.78 : 0.68;
-    if (age < 0 || age > duration) {
+    if (words.current) {
+      words.current.style.display = wordsText ? "grid" : "none";
+      if (wordsText) {
+        words.current.textContent = wordsText;
+        words.current.style.borderColor = wordsColor;
+      }
+    }
+    anchor.position.set(wordsX, wordsX || wordsZ ? groundY(wordsX, wordsZ) + 2.15 : 0, wordsZ);
+
+    if (!fx || !profile || !live) {
       g.visible = false;
       return;
     }
@@ -315,18 +357,71 @@ function CastFxMesh() {
     const boltMat = boltMesh.material as THREE.MeshBasicMaterial;
     const trailMat = trailMesh.material as THREE.MeshBasicMaterial;
     const impactMat = impactMesh.material as THREE.MeshBasicMaterial;
-    if (fx.spell === "magicarrow" || fx.spell === "fireball") {
+    const ringMat = ringMesh.material as THREE.MeshBasicMaterial;
+    const projectile = profile.kind === "dart" || profile.kind === "burst";
+    const travel = profile.kind === "fold" || profile.kind === "surge";
+
+    // Impact shards: dart bursts into force-splinters, fireball into embers.
+    for (let i = 0; i < SHARDS_MAX; i++) {
+      const shard = shards.current[i];
+      if (!shard) continue;
+      const shardLive = projectile && t > 0.5;
+      shard.visible = shardLive;
+      if (!shardLive) continue;
+      const s = impactShard(fx.spell, i, (t - 0.5) / 0.5);
+      shard.position.set(fx.tx + s.dx, groundY(fx.tx, fx.tz) + s.dy, fx.tz + s.dz);
+      shard.scale.setScalar(s.scale * (profile.kind === "burst" ? 1.7 : 1.05));
+      shard.rotation.set(age * (3 + i * 0.4), i * 1.7 + age * 2.2, 0);
+      const mat = shard.material as THREE.MeshBasicMaterial;
+      mat.color.set(i % 3 === 0 ? profile.accent : profile.motes);
+      mat.opacity = s.opacity;
+    }
+
+    // Self-target releases: ground ring + drifting motes in the spell's palette.
+    const selfFx = !projectile && !travel;
+    for (let i = 0; i < MOTES_MAX; i++) {
+      const mote = motes.current[i];
+      if (!mote) continue;
+      const moteLive = selfFx && i < profile.motesCount;
+      mote.visible = moteLive;
+      if (!moteLive) continue;
+      const m = moteState(fx.spell, i, age);
+      mote.position.set(fx.x + m.dx, groundY(fx.x, fx.z) + m.dy, fx.z + m.dz);
+      mote.scale.setScalar(m.scale);
+      const mat = mote.material as THREE.MeshBasicMaterial;
+      mat.color.set(i % 3 === 0 ? profile.accent : profile.motes);
+      mat.opacity = m.opacity;
+    }
+    ringMesh.visible = selfFx;
+    sigilGroup.visible = selfFx && profile.kind === "sigil";
+    if (selfFx) {
+      const bloom = ringBloom(fx.spell, t);
+      ringMesh.position.set(fx.x, groundY(fx.x, fx.z) + 0.06, fx.z);
+      ringMesh.scale.setScalar(bloom.scale);
+      ringMat.color.set(profile.ring);
+      ringMat.opacity = bloom.opacity;
+      if (sigilGroup.visible) {
+        sigilGroup.position.set(fx.x, groundY(fx.x, fx.z) + 0.07, fx.z);
+        sigilGroup.rotation.y = age * 1.3;
+        sigilGroup.traverse((object) => {
+          if (!(object instanceof THREE.Mesh)) return;
+          (object.material as THREE.MeshBasicMaterial).opacity = 0.85 * (1 - t);
+        });
+      }
+    }
+
+    if (projectile) {
       const k = Math.min(1, t * 1.55);
-      const profile = spellProjectileProfile(fx.spell);
-      const fat = fx.spell === "fireball";
+      const shot = spellProjectileProfile(fx.spell);
+      const fat = profile.kind === "burst";
       boltMesh.visible = t < 0.72;
       boltMesh.position.set(
         fx.x + (fx.tx - fx.x) * k,
         y0 + (y1 - y0) * k,
         fx.z + (fx.tz - fx.z) * k,
       );
-      boltMesh.scale.setScalar(profile.coreScale);
-      boltMat.color.set(profile.core);
+      boltMesh.scale.setScalar(shot.coreScale);
+      boltMat.color.set(shot.core);
       boltMat.opacity = 0.95 * (1 - t);
       trailMesh.visible = t < 0.72;
       trailMesh.position.set(
@@ -343,19 +438,19 @@ function CastFxMesh() {
           boltMesh.position.z - fx.z,
         ),
       );
-      trailMesh.scale.set(profile.trailScale, profile.trailScale, trailLength * 4.1);
-      trailMat.color.set(profile.trail);
+      trailMesh.scale.set(shot.trailScale, shot.trailScale, trailLength * 4.1);
+      trailMat.color.set(shot.trail);
       trailMat.opacity = (fat ? 0.68 : 0.72) * (1 - t);
       puffMesh.position.set(fx.tx, y1, fx.tz);
-      puffMesh.scale.setScalar(profile.impactScale * (0.35 + t * 1.25));
-      puffMat.color.set(profile.impact);
+      puffMesh.scale.setScalar(shot.impactScale * (0.35 + t * 1.25));
+      puffMat.color.set(shot.impact);
       puffMat.opacity = (fat ? 0.68 : 0.5) * (1 - t);
       impactMesh.visible = t > 0.32;
       impactMesh.position.set(fx.tx, groundY(fx.tx, fx.tz) + 0.08, fx.tz);
-      impactMesh.scale.setScalar(profile.impactScale * (0.45 + t * 1.2));
-      impactMat.color.set(profile.impact);
+      impactMesh.scale.setScalar(shot.impactScale * (0.45 + t * 1.2));
+      impactMat.color.set(shot.impact);
       impactMat.opacity = 0.78 * (1 - t);
-    } else if (fx.spell === "teleport" || fx.spell === "recall") {
+    } else if (travel) {
       trailMesh.visible = false;
       impactMesh.visible = false;
       boltMesh.visible = t < 0.45;
@@ -365,18 +460,20 @@ function CastFxMesh() {
         y0 + (y1 - y0) * k,
         fx.z + (fx.tz - fx.z) * k,
       );
+      boltMat.color.set(profile.core);
+      boltMat.opacity = 0.9 * (1 - t);
       puffMesh.position.set(fx.tx, y1, fx.tz);
       puffMesh.scale.setScalar(0.7 + t * 2.2);
-      puffMat.color.set(fx.spell === "recall" ? "#a85a42" : "#ece6d8");
+      puffMat.color.set(profile.ring);
       puffMat.opacity = 0.7 * (1 - t);
     } else {
       trailMesh.visible = false;
       impactMesh.visible = false;
       boltMesh.visible = false;
-      puffMesh.position.set(fx.tx, y1, fx.tz);
+      puffMesh.position.set(fx.x, y0, fx.z);
       puffMesh.scale.setScalar(0.55 + t * 1.8);
-      puffMat.color.set(fx.spell === "heal" ? "#ece6d8" : "#c9c3b6");
-      puffMat.opacity = 0.72 * (1 - t);
+      puffMat.color.set(profile.core);
+      puffMat.opacity = 0.6 * (1 - t);
     }
   });
   return (
@@ -425,6 +522,77 @@ function CastFxMesh() {
           toneMapped={false}
         />
       </mesh>
+      <mesh ref={ring} visible={false} rotation={[-Math.PI / 2, 0, 0]} renderOrder={7}>
+        <ringGeometry args={[0.5, 0.62, 28]} />
+        <meshBasicMaterial transparent depthWrite={false} depthTest={false} toneMapped={false} />
+      </mesh>
+      <group ref={sigil} visible={false}>
+        <mesh rotation={[-Math.PI / 2, 0, 0]}>
+          <ringGeometry args={[0.62, 0.72, 6]} />
+          <meshBasicMaterial color="#ffd36a" transparent depthWrite={false} depthTest={false} toneMapped={false} />
+        </mesh>
+        <mesh rotation={[-Math.PI / 2, 0, Math.PI / 4]}>
+          <ringGeometry args={[0.4, 0.48, 4]} />
+          <meshBasicMaterial color="#ffe9ad" transparent depthWrite={false} depthTest={false} toneMapped={false} />
+        </mesh>
+        {[0, 1, 2, 3].map((i) => (
+          <mesh
+            key={i}
+            position={[Math.cos((i * Math.PI) / 2) * 0.55, 0.02, Math.sin((i * Math.PI) / 2) * 0.55]}
+            rotation={[0, (i * Math.PI) / 2, 0]}
+          >
+            <boxGeometry args={[0.3, 0.02, 0.07]} />
+            <meshBasicMaterial color="#fff8e0" transparent depthWrite={false} depthTest={false} toneMapped={false} />
+          </mesh>
+        ))}
+      </group>
+      {Array.from({ length: MOTES_MAX }, (_, i) => (
+        <mesh
+          key={`mote${i}`}
+          ref={(el) => {
+            motes.current[i] = el;
+          }}
+          visible={false}
+        >
+          <octahedronGeometry args={[0.07]} />
+          <meshBasicMaterial transparent depthWrite={false} depthTest={false} toneMapped={false} />
+        </mesh>
+      ))}
+      {Array.from({ length: SHARDS_MAX }, (_, i) => (
+        <mesh
+          key={`shard${i}`}
+          ref={(el) => {
+            shards.current[i] = el;
+          }}
+          visible={false}
+        >
+          <tetrahedronGeometry args={[0.09]} />
+          <meshBasicMaterial transparent depthWrite={false} depthTest={false} toneMapped={false} />
+        </mesh>
+      ))}
+      <group ref={wordsAnchor}>
+        <Html center zIndexRange={[27, 0]} style={{ pointerEvents: "none" }}>
+          <div
+            ref={words}
+            style={{
+              display: "none",
+              placeItems: "center",
+              minWidth: 96,
+              padding: "5px 10px",
+              border: "1px solid #e0b56a",
+              borderRadius: 8,
+              background: "rgba(20,18,15,.88)",
+              color: "#fff8e7",
+              fontFamily: "serif",
+              fontStyle: "italic",
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: ".12em",
+              whiteSpace: "nowrap",
+            }}
+          />
+        </Html>
+      </group>
     </group>
   );
 }

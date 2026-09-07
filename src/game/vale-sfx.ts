@@ -38,7 +38,14 @@ export type SfxId =
   | "loot"
   | "gate"
   | "smith"
-  | "thunder";
+  | "thunder"
+  | "spell_nightsight"
+  | "spell_heal"
+  | "spell_magicarrow"
+  | "spell_fireball"
+  | "spell_teleport"
+  | "spell_mark"
+  | "spell_recall";
 
 const SRC: Record<SfxId, string> = {
   chop: "/audio/sfx/chop.mp3",
@@ -53,6 +60,13 @@ const SRC: Record<SfxId, string> = {
   gate: "/audio/sfx/gate.mp3",
   smith: "/audio/sfx/smith.mp3",
   thunder: "/audio/sfx/thunder.wav",
+  spell_nightsight: "/audio/sfx/spell-nightsight.mp3",
+  spell_heal: "/audio/sfx/spell-heal.mp3",
+  spell_magicarrow: "/audio/sfx/spell-magicarrow.mp3",
+  spell_fireball: "/audio/sfx/spell-fireball.mp3",
+  spell_teleport: "/audio/sfx/spell-teleport.mp3",
+  spell_mark: "/audio/sfx/spell-mark.mp3",
+  spell_recall: "/audio/sfx/spell-recall.mp3",
 };
 
 const POOL = 3;

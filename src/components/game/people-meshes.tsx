@@ -1,7 +1,7 @@
 import { Html } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
-import { Quaternion, type Group, type Mesh, type MeshBasicMaterial } from "three";
+import { Quaternion, type Group, type Mesh, type MeshBasicMaterial, type PointLight } from "three";
 import { CLASS_META, SECONDS_PER_HOUR } from "@/game/catalog";
 import { HEALING_DURATION, healingPose } from "@/game/healing-animation";
 import { TAMING_DURATION, tamingPose } from "@/game/taming-animation";
@@ -23,6 +23,7 @@ import { resolveLook } from "@/game/look/resolve.ts";
 import type { ResolvedLook } from "@/game/look/resolve.ts";
 import { getHealingFx, workPitch } from "@/game/player";
 import { attackPhase, bowDrawAmount, meleeSwingPitch } from "@/game/combat-animation";
+import { windupGlow } from "@/game/magery-animation";
 import { useGame } from "@/game/store";
 import type { ItemId, Person, WearSlot } from "@/game/types";
 
@@ -361,6 +362,10 @@ function MeleeSwingArc() {
 function PalmFlame() {
   const wrap = useRef<Group>(null);
   const flame = useRef<Group>(null);
+  const core = useRef<Mesh>(null);
+  const cone = useRef<Mesh>(null);
+  const halo = useRef<Mesh>(null);
+  const light = useRef<PointLight>(null);
   const q = useMemo(() => new Quaternion(), []);
   useFrame((_, dt) => {
     const w = wrap.current;
@@ -383,11 +388,23 @@ function PalmFlame() {
       Math.sin(t * 2.4) * 0.08;
     f.scale.setScalar(s);
     f.rotation.y += dt * 5;
+    // The flame wears the spell's color while the words are spoken.
+    const glow = windupGlow(world.player.intent.spell);
+    if (core.current) (core.current.material as MeshBasicMaterial).color.set(glow);
+    if (cone.current) {
+      const mat = cone.current.material as MeshBasicMaterial;
+      mat.color.set(glow).multiplyScalar(0.55);
+    }
+    if (halo.current) {
+      const mat = halo.current.material as MeshBasicMaterial;
+      mat.color.set(glow).offsetHSL(0, -0.1, 0.08);
+    }
+    if (light.current) light.current.color.set(glow);
   });
   return (
     <group ref={wrap} position={[0, -0.44, 0.02]} visible={false}>
       <group ref={flame}>
-        <mesh position={[0, 0.05, 0]}>
+        <mesh ref={core} position={[0, 0.05, 0]}>
           <sphereGeometry args={[0.07, 8, 6]} />
           <meshBasicMaterial
             color="#e8f2ff"
@@ -397,7 +414,7 @@ function PalmFlame() {
             toneMapped={false}
           />
         </mesh>
-        <mesh position={[0, 0.16, 0]}>
+        <mesh ref={cone} position={[0, 0.16, 0]}>
           <coneGeometry args={[0.06, 0.22, 6]} />
           <meshBasicMaterial
             color="#4a7ec8"
@@ -407,7 +424,7 @@ function PalmFlame() {
             toneMapped={false}
           />
         </mesh>
-        <mesh position={[0, 0.1, 0]}>
+        <mesh ref={halo} position={[0, 0.1, 0]}>
           <sphereGeometry args={[0.15, 8, 6]} />
           <meshBasicMaterial
             color="#7aa8e8"
@@ -417,7 +434,7 @@ function PalmFlame() {
             toneMapped={false}
           />
         </mesh>
-        <pointLight color="#8eb8ff" intensity={1.7} distance={2.6} />
+        <pointLight ref={light} color="#8eb8ff" intensity={1.7} distance={2.6} />
       </group>
     </group>
   );

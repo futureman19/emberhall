@@ -8,5 +8,6 @@ SFX:
 - 80 CC0 RPG SFX — https://opengameart.org/content/80-cc0-rpg-sfx
 - Swishes Sound Pack (CC0, Summoning Wars) — https://opengameart.org/content/swishes-sound-pack
 - 100 CC0 metal and wood SFX (hammer) — https://opengameart.org/content/100-cc0-metal-and-wood-sfx
+- spell-*.mp3 (the seven spell voices) — synthesized in-house, see scripts/gen_spell_sfx.py (CC0)
 
 All may be used for any purpose, including commercial, with no attribution required.
