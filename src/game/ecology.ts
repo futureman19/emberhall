@@ -72,8 +72,9 @@ const SHELTER_SEEKERS: ReadonlySet<FaunaKind> = new Set([
   "thornhide_doe",
   "moss_badger",
   "bog_toad",
+  "frosthorn_ram",
 ]);
-const WARDEN_KINDS: ReadonlySet<FaunaKind> = new Set(["wight", "greybarrow_wightling", "barrow_hound", "ashen_banshee", "bonecrow"]);
+const WARDEN_KINDS: ReadonlySet<FaunaKind> = new Set(["wight", "greybarrow_wightling", "barrow_hound", "ashen_banshee", "bonecrow", "tomb_sentinel"]);
 const NIGHT_HUNTERS: ReadonlySet<FaunaKind> = new Set([
   "wolf",
   "pine_lynx",
@@ -90,6 +91,13 @@ const NIGHT_HUNTERS: ReadonlySet<FaunaKind> = new Set([
   "brambleback_stag",
   "ironwood_boar",
   "thornhide_doe",
+  "oak_bear",
+  "fen_leech",
+  "tideclaw_crab",
+  "cavern_bat",
+  "tomb_sentinel",
+  "cinder_drake",
+  "willow_wisp",
 ]);
 
 const WOODLAND_POOL: SpawnEntry[] = [
@@ -102,6 +110,8 @@ const WOODLAND_POOL: SpawnEntry[] = [
   { kind: "thornhide_doe", weight: 6 },
   { kind: "moss_badger", weight: 8 },
   { kind: "ember_fox", weight: 4 },
+  { kind: "oak_bear", weight: 3 },
+  { kind: "willow_wisp", weight: 2 },
 ];
 
 const HIGHLAND_POOL: SpawnEntry[] = [
@@ -114,6 +124,8 @@ const HIGHLAND_POOL: SpawnEntry[] = [
   { kind: "dune_crawler", weight: 2 },
   { kind: "stonefang_ogre", weight: 1 },
   { kind: "orc_marauder", weight: 1 },
+  { kind: "frosthorn_ram", weight: 8 },
+  { kind: "cinder_drake", weight: 1 },
 ];
 
 const MARSH_POOL: SpawnEntry[] = [
@@ -124,6 +136,8 @@ const MARSH_POOL: SpawnEntry[] = [
   { kind: "bog_toad", weight: 6 },
   { kind: "brine_hound", weight: 5 },
   { kind: "ironwood_boar", weight: 3 },
+  { kind: "fen_leech", weight: 5 },
+  { kind: "willow_wisp", weight: 2 },
 ];
 
 const COAST_POOL: SpawnEntry[] = [
@@ -133,6 +147,7 @@ const COAST_POOL: SpawnEntry[] = [
   { kind: "brine_troll", weight: 2 },
   { kind: "coal_salamander", weight: 6 },
   { kind: "bog_toad", weight: 7 },
+  { kind: "tideclaw_crab", weight: 8 },
 ];
 
 const RUIN_POOL: SpawnEntry[] = [
@@ -143,6 +158,8 @@ const RUIN_POOL: SpawnEntry[] = [
   { kind: "bonecrow", weight: 6 },
   { kind: "stonecrawl_spider", weight: 6 },
   { kind: "orebeetle", weight: 4 },
+  { kind: "tomb_sentinel", weight: 3 },
+  { kind: "willow_wisp", weight: 2 },
 ];
 
 const MINE_POOL: SpawnEntry[] = [
@@ -151,6 +168,8 @@ const MINE_POOL: SpawnEntry[] = [
   { kind: "stonecrawl_spider", weight: 4 },
   { kind: "mire_croaker", weight: 4 },
   { kind: "reedback_stalker", weight: 3 },
+  { kind: "cavern_bat", weight: 10 },
+  { kind: "cinder_drake", weight: 2 },
 ];
 
 const SPAWN_ZONES: SpawnZone[] = [
@@ -180,6 +199,14 @@ const EXTRA_SPAWNS: { id: string; kind: FaunaKind; dx: number; dz: number }[] = 
   { id: "ironfold", kind: "coal_salamander", dx: 7, dz: 2 },
   { id: "cairnash", kind: "barrow_hound", dx: 6, dz: 3 },
   { id: "cairnash", kind: "bonecrow", dx: -6, dz: -1 },
+  { id: "oakstand", kind: "oak_bear", dx: -7, dz: 5 },
+  { id: "ridgewatch", kind: "frosthorn_ram", dx: 7, dz: -2 },
+  { id: "hearthfen", kind: "fen_leech", dx: -6, dz: -3 },
+  { id: "brinegate", kind: "tideclaw_crab", dx: 6, dz: -6 },
+  { id: "ironfold", kind: "cavern_bat", dx: -5, dz: 4 },
+  { id: "greybarrow", kind: "tomb_sentinel", dx: 3, dz: 5 },
+  { id: "ironfold", kind: "cinder_drake", dx: 6, dz: -4 },
+  { id: "southmere", kind: "willow_wisp", dx: 5, dz: 5 },
 ];
 
 function addExtraFauna(world: World, rng: () => number) {

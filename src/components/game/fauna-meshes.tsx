@@ -39,6 +39,14 @@ const COLOR: Record<FaunaKind, string> = {
   brine_troll: "#5b6456",
   stonefang_ogre: "#6f6654",
   orc_marauder: "#7d5f47",
+  oak_bear: "#554331",
+  frosthorn_ram: "#a9a69b",
+  fen_leech: "#59413f",
+  tideclaw_crab: "#8b4f3d",
+  cavern_bat: "#403b4c",
+  tomb_sentinel: "#777269",
+  cinder_drake: "#6f3828",
+  willow_wisp: "#86c8a5",
 };
 
 const SIZE: Record<FaunaKind, number> = {
@@ -69,6 +77,14 @@ const SIZE: Record<FaunaKind, number> = {
   brine_troll: 1.15,
   stonefang_ogre: 1.05,
   orc_marauder: 0.98,
+  oak_bear: 0.92,
+  frosthorn_ram: 0.68,
+  fen_leech: 0.58,
+  tideclaw_crab: 0.62,
+  cavern_bat: 0.5,
+  tomb_sentinel: 0.92,
+  cinder_drake: 0.92,
+  willow_wisp: 0.48,
 };
 
 function Body({ c }: { c: Creature }) {
@@ -137,6 +153,187 @@ function Body({ c }: { c: Creature }) {
           <boxGeometry args={[s * 0.08, s * 0.38, s * 0.08]} />
           <meshStandardMaterial color="#d8c8a8" roughness={0.85} />
         </mesh>
+      </>
+    );
+  }
+
+  if (c.kind === "oak_bear") {
+    return (
+      <>
+        <mesh position={[0, s * 0.62, 0]} castShadow>
+          <boxGeometry args={[s * 0.95, s * 0.82, s * 1.25]} />
+          <meshStandardMaterial color={color} roughness={0.96} />
+        </mesh>
+        <mesh position={[0, s * 0.82, s * 0.62]} castShadow>
+          <boxGeometry args={[s * 0.72, s * 0.66, s * 0.6]} />
+          <meshStandardMaterial color={color} roughness={0.96} />
+        </mesh>
+        <mesh position={[0, s * 0.67, s * 0.98]} castShadow>
+          <boxGeometry args={[s * 0.42, s * 0.3, s * 0.38]} />
+          <meshStandardMaterial color="#332a23" roughness={1} />
+        </mesh>
+        {[-1, 1].map((side) => (
+          <mesh key={side} position={[side * s * 0.27, s * 1.15, s * 0.58]} castShadow>
+            <boxGeometry args={[s * 0.2, s * 0.2, s * 0.14]} />
+            <meshStandardMaterial color={color} roughness={0.96} />
+          </mesh>
+        ))}
+      </>
+    );
+  }
+
+  if (c.kind === "frosthorn_ram") {
+    return (
+      <>
+        <mesh position={[0, s * 0.56, 0]} castShadow>
+          <boxGeometry args={[s * 0.78, s * 0.68, s * 1.2]} />
+          <meshStandardMaterial color={color} roughness={1} />
+        </mesh>
+        <mesh position={[0, s * 0.78, s * 0.58]} castShadow>
+          <boxGeometry args={[s * 0.52, s * 0.5, s * 0.5]} />
+          <meshStandardMaterial color="#77766f" roughness={0.92} />
+        </mesh>
+        {[-1, 1].map((side) => (
+          <mesh key={side} position={[side * s * 0.34, s * 0.9, s * 0.56]} rotation={[Math.PI / 2, 0, 0]} castShadow>
+            <torusGeometry args={[s * 0.22, s * 0.065, 5, 8, Math.PI * 1.45]} />
+            <meshStandardMaterial color="#d8d3c4" roughness={0.78} />
+          </mesh>
+        ))}
+      </>
+    );
+  }
+
+  if (c.kind === "fen_leech") {
+    return (
+      <>
+        {[0, 1, 2, 3].map((i) => (
+          <mesh key={i} position={[0, s * (0.2 + i * 0.035), s * (i * 0.34 - 0.5)]} castShadow>
+            <sphereGeometry args={[s * (0.34 - i * 0.025), 7, 5]} />
+            <meshStandardMaterial color={i === 3 ? "#312b2a" : color} roughness={0.9} />
+          </mesh>
+        ))}
+        <mesh position={[0, s * 0.24, s * 0.62]} rotation={[Math.PI / 2, 0, 0]}>
+          <torusGeometry args={[s * 0.2, s * 0.065, 6, 10]} />
+          <meshStandardMaterial color="#a06a60" roughness={0.72} />
+        </mesh>
+      </>
+    );
+  }
+
+  if (c.kind === "tideclaw_crab") {
+    return (
+      <>
+        <mesh position={[0, s * 0.34, 0]} castShadow>
+          <boxGeometry args={[s * 1.15, s * 0.42, s * 0.78]} />
+          <meshStandardMaterial color={color} roughness={0.82} />
+        </mesh>
+        {[-1, 1].map((side) => (
+          <group key={side} position={[side * s * 0.82, s * 0.38, s * 0.22]}>
+            <mesh rotation={[0, 0, side * 0.45]} castShadow>
+              <boxGeometry args={[s * 0.58, s * 0.13, s * 0.16]} />
+              <meshStandardMaterial color={color} roughness={0.86} />
+            </mesh>
+            <mesh position={[side * s * 0.3, s * 0.08, s * 0.12]} castShadow>
+              <boxGeometry args={[s * 0.36, s * 0.3, s * 0.32]} />
+              <meshStandardMaterial color="#a9664e" roughness={0.8} />
+            </mesh>
+          </group>
+        ))}
+      </>
+    );
+  }
+
+  if (c.kind === "cavern_bat") {
+    return (
+      <>
+        <mesh position={[0, s * 0.9, 0]} castShadow>
+          <boxGeometry args={[s * 0.34, s * 0.48, s * 0.42]} />
+          <meshStandardMaterial color={color} roughness={0.88} />
+        </mesh>
+        {[-1, 1].map((side) => (
+          <mesh key={side} position={[side * s * 0.52, s * 0.9, 0]} rotation={[0, 0, side * 0.34]} castShadow>
+            <boxGeometry args={[s * 0.9, s * 0.08, s * 0.58]} />
+            <meshStandardMaterial color="#302c39" roughness={0.76} side={2} />
+          </mesh>
+        ))}
+        <mesh position={[-s * 0.12, s * 1.22, s * 0.02]} rotation={[0, 0, 0.25]}>
+          <coneGeometry args={[s * 0.09, s * 0.3, 4]} />
+          <meshStandardMaterial color={color} roughness={0.9} />
+        </mesh>
+        <mesh position={[s * 0.12, s * 1.22, s * 0.02]} rotation={[0, 0, -0.25]}>
+          <coneGeometry args={[s * 0.09, s * 0.3, 4]} />
+          <meshStandardMaterial color={color} roughness={0.9} />
+        </mesh>
+      </>
+    );
+  }
+
+  if (c.kind === "tomb_sentinel") {
+    return (
+      <>
+        <mesh position={[0, s * 0.88, 0]} castShadow>
+          <boxGeometry args={[s * 0.62, s * 0.95, s * 0.42]} />
+          <meshStandardMaterial color={color} metalness={0.45} roughness={0.72} />
+        </mesh>
+        <mesh position={[0, s * 1.52, 0]} castShadow>
+          <boxGeometry args={[s * 0.46, s * 0.42, s * 0.42]} />
+          <meshStandardMaterial color="#4c4a47" metalness={0.55} roughness={0.65} />
+        </mesh>
+        <mesh position={[0, s * 1.58, s * 0.23]}>
+          <boxGeometry args={[s * 0.28, s * 0.055, s * 0.035]} />
+          <meshStandardMaterial color="#b26045" emissive="#64281f" emissiveIntensity={0.8} />
+        </mesh>
+        <mesh position={[-s * 0.52, s * 0.88, 0]} castShadow>
+          <boxGeometry args={[s * 0.38, s * 0.72, s * 0.16]} />
+          <meshStandardMaterial color="#5f5b54" metalness={0.4} roughness={0.78} />
+        </mesh>
+      </>
+    );
+  }
+
+  if (c.kind === "cinder_drake") {
+    return (
+      <>
+        <mesh position={[0, s * 0.58, 0]} castShadow>
+          <boxGeometry args={[s * 0.72, s * 0.62, s * 1.28]} />
+          <meshStandardMaterial color={color} roughness={0.78} />
+        </mesh>
+        <mesh position={[0, s * 0.78, s * 0.67]} castShadow>
+          <boxGeometry args={[s * 0.52, s * 0.48, s * 0.62]} />
+          <meshStandardMaterial color="#8d4930" roughness={0.75} />
+        </mesh>
+        {[-1, 1].map((side) => (
+          <mesh key={side} position={[side * s * 0.62, s * 0.82, -s * 0.05]} rotation={[0.12, 0, side * 0.46]} castShadow>
+            <boxGeometry args={[s * 0.9, s * 0.08, s * 0.72]} />
+            <meshStandardMaterial color="#4b302a" roughness={0.82} side={2} />
+          </mesh>
+        ))}
+        <mesh position={[0, s * 0.55, -s * 0.85]} rotation={[Math.PI / 2, 0, 0]} castShadow>
+          <coneGeometry args={[s * 0.2, s * 0.9, 5]} />
+          <meshStandardMaterial color={color} roughness={0.8} />
+        </mesh>
+        <mesh position={[0, s * 0.78, s * 1.04]}>
+          <boxGeometry args={[s * 0.2, s * 0.12, s * 0.18]} />
+          <meshStandardMaterial color="#d2773e" emissive="#7a2f1f" emissiveIntensity={0.7} />
+        </mesh>
+      </>
+    );
+  }
+
+  if (c.kind === "willow_wisp") {
+    return (
+      <>
+        <pointLight position={[0, s * 1.15, 0]} color={color} intensity={0.7} distance={3.2} />
+        <mesh position={[0, s * 1.12, 0]}>
+          <sphereGeometry args={[s * 0.44, 9, 7]} />
+          <meshStandardMaterial color={color} emissive={color} emissiveIntensity={1.25} transparent opacity={0.72} />
+        </mesh>
+        {[-1, 1].map((side) => (
+          <mesh key={side} position={[side * s * 0.43, s * 0.94, 0]}>
+            <sphereGeometry args={[s * 0.12, 6, 5]} />
+            <meshBasicMaterial color="#d7f3dc" transparent opacity={0.8} />
+          </mesh>
+        ))}
       </>
     );
   }

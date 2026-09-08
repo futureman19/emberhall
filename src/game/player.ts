@@ -22,7 +22,7 @@ import { emitCompanionFx } from "./companion-animation.ts";
 import { emitPersonalActionFx } from "./personal-action-animation.ts";
 import { completeObjective, log } from "./world.ts";
 import { effectiveMain, rareMods, rareName, rollKillRare, weaponDmg } from "./rare.ts";
-import type { ItemId, Person, ResourceInventory, ResourceNodeStateMap, SkillId, WearSlot, World } from "./types.ts";
+import type { FaunaKind, ItemId, Person, ResourceInventory, ResourceNodeStateMap, SkillId, WearSlot, World } from "./types.ts";
 
 export function you(world: World) {
   return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
@@ -61,7 +61,7 @@ const SPILL: ItemId[] = [
   "potion_heal", "potion_night",
 ];
 
-const TAME_RETALIATE: ReadonlySet<string> = new Set([
+const TAME_RETALIATE: ReadonlySet<FaunaKind> = new Set([
   "wolf",
   "wight",
   "ridgeback_warg",
@@ -72,9 +72,13 @@ const TAME_RETALIATE: ReadonlySet<string> = new Set([
   "stonefang_ogre",
   "orc_marauder",
   "pine_lynx",
+  "oak_bear",
+  "tideclaw_crab",
+  "cavern_bat",
+  "cinder_drake",
 ]);
 
-const RETALIATE_KINDS: ReadonlySet<string> = new Set([
+const RETALIATE_KINDS: ReadonlySet<FaunaKind> = new Set([
   "wolf",
   "wight",
   "ridgeback_warg",
@@ -88,6 +92,13 @@ const RETALIATE_KINDS: ReadonlySet<string> = new Set([
   "greybarrow_wightling",
   "ashen_banshee",
   "bonecrow",
+  "oak_bear",
+  "fen_leech",
+  "tideclaw_crab",
+  "cavern_bat",
+  "tomb_sentinel",
+  "cinder_drake",
+  "willow_wisp",
 ]);
 
 export function resurrect(world: World, at?: { x: number; z: number }) {

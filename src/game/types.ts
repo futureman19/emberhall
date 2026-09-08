@@ -239,7 +239,15 @@ export type FaunaKind =
   | "bonecrow"
   | "brine_troll"
   | "stonefang_ogre"
-  | "orc_marauder";
+  | "orc_marauder"
+  | "oak_bear"
+  | "frosthorn_ram"
+  | "fen_leech"
+  | "tideclaw_crab"
+  | "cavern_bat"
+  | "tomb_sentinel"
+  | "cinder_drake"
+  | "willow_wisp";
 export type BuildingKind =
   | "hall"
   | "dormitory"
