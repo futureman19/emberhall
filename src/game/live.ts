@@ -1,7 +1,7 @@
 import { COURT, regionAt } from "./atlas.ts";
 import { paintBiomes } from "./biome.ts";
 import { hourOfDay, isDusk, isNight, settleGear, SKILL_META } from "./catalog.ts";
-import { seedBarrow, seedFauna } from "./ecology.ts";
+import { ensureExpansionFauna, seedBarrow, seedFauna } from "./ecology.ts";
 import { seedFarmPlots } from "./farm.ts";
 import { maxMana } from "./magery.ts";
 import { you } from "./player.ts";
@@ -31,6 +31,7 @@ function withFauna(w: World) {
   if (w.tiles.length) seedFieldStones(w);
   if (w.tiles.length) paintBiomes(w);
   if (w.tiles.length && w.fauna.length === 0) seedFauna(w, mulberry32(w.seed));
+  if (w.tiles.length) ensureExpansionFauna(w);
   if (w.tiles.length) seedBarrow(w, mulberry32(w.seed + 17));
   if (w.fauna) {
     for (const c of w.fauna) {

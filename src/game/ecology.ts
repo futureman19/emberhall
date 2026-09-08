@@ -201,7 +201,7 @@ const SPAWN_ZONES: SpawnZone[] = [
   { placeId: "greybarrow", count: 5, pool: RUIN_POOL },
 ];
 
-const EXTRA_SPAWNS: { id: string; kind: FaunaKind; dx: number; dz: number }[] = [
+const EXTRA_SPAWNS: { id: string; kind: FaunaKind; dx: number; dz: number; ensure?: boolean }[] = [
   { id: "ridgewatch", kind: "ironwood_boar", dx: 3, dz: 8 },
   { id: "ridgewatch", kind: "brambleback_stag", dx: -4, dz: 6 },
   { id: "ridgewatch", kind: "stonefang_ogre", dx: 2, dz: -5 },
@@ -216,22 +216,22 @@ const EXTRA_SPAWNS: { id: string; kind: FaunaKind; dx: number; dz: number }[] = 
   { id: "ironfold", kind: "coal_salamander", dx: 7, dz: 2 },
   { id: "cairnash", kind: "barrow_hound", dx: 6, dz: 3 },
   { id: "cairnash", kind: "bonecrow", dx: -6, dz: -1 },
-  { id: "oakstand", kind: "oak_bear", dx: -7, dz: 5 },
-  { id: "ridgewatch", kind: "frosthorn_ram", dx: 7, dz: -2 },
-  { id: "hearthfen", kind: "fen_leech", dx: -6, dz: -3 },
-  { id: "brinegate", kind: "tideclaw_crab", dx: 6, dz: -6 },
-  { id: "ironfold", kind: "cavern_bat", dx: -5, dz: 4 },
-  { id: "greybarrow", kind: "tomb_sentinel", dx: 3, dz: 5 },
-  { id: "ironfold", kind: "cinder_drake", dx: 6, dz: -4 },
-  { id: "southmere", kind: "willow_wisp", dx: 5, dz: 5 },
-  { id: "wolfhollow", kind: "blackbriar_hag", dx: 5, dz: -7 },
-  { id: "ridgewatch", kind: "rime_revenant", dx: -7, dz: -4 },
-  { id: "hearthfen", kind: "fen_ghoul", dx: 4, dz: -6 },
-  { id: "brinegate", kind: "drowned_reaver", dx: -5, dz: 6 },
-  { id: "ironfold", kind: "deepmaw_basilisk", dx: -7, dz: -3 },
-  { id: "greybarrow", kind: "ossuary_knight", dx: -4, dz: 6 },
-  { id: "cairnash", kind: "ash_demon", dx: 4, dz: -6 },
-  { id: "greybarrow", kind: "grave_lich", dx: 0, dz: 6 },
+  { id: "oakstand", kind: "oak_bear", dx: -7, dz: 5, ensure: true },
+  { id: "ridgewatch", kind: "frosthorn_ram", dx: 7, dz: -2, ensure: true },
+  { id: "hearthfen", kind: "fen_leech", dx: -6, dz: -3, ensure: true },
+  { id: "brinegate", kind: "tideclaw_crab", dx: 6, dz: -6, ensure: true },
+  { id: "ironfold", kind: "cavern_bat", dx: -5, dz: 4, ensure: true },
+  { id: "greybarrow", kind: "tomb_sentinel", dx: 3, dz: 5, ensure: true },
+  { id: "ironfold", kind: "cinder_drake", dx: 6, dz: -4, ensure: true },
+  { id: "southmere", kind: "willow_wisp", dx: 5, dz: 5, ensure: true },
+  { id: "wolfhollow", kind: "blackbriar_hag", dx: 5, dz: -7, ensure: true },
+  { id: "ridgewatch", kind: "rime_revenant", dx: -7, dz: -4, ensure: true },
+  { id: "hearthfen", kind: "fen_ghoul", dx: 4, dz: -6, ensure: true },
+  { id: "brinegate", kind: "drowned_reaver", dx: -5, dz: 6, ensure: true },
+  { id: "ironfold", kind: "deepmaw_basilisk", dx: -7, dz: -3, ensure: true },
+  { id: "greybarrow", kind: "ossuary_knight", dx: -4, dz: 6, ensure: true },
+  { id: "cairnash", kind: "ash_demon", dx: 4, dz: -6, ensure: true },
+  { id: "greybarrow", kind: "grave_lich", dx: 0, dz: 6, ensure: true },
 ];
 
 function addExtraFauna(world: World, rng: () => number) {
@@ -242,6 +242,20 @@ function addExtraFauna(world: World, rng: () => number) {
     if (dest) world.fauna.push(spawn(world, e.kind, dest.x, dest.y));
   }
   void rng;
+}
+
+/** Add expansion fauna missing from a continued world without duplicating survivors. */
+export function ensureExpansionFauna(world: World) {
+  const present = new Set(world.fauna.map((creature) => creature.kind));
+  for (const entry of EXTRA_SPAWNS) {
+    if (!entry.ensure || present.has(entry.kind)) continue;
+    const place = PLACES.find((candidate) => candidate.id === entry.id);
+    if (!place) continue;
+    const dest = nearestWalkable(world, place.tx + entry.dx, place.ty + entry.dz);
+    if (!dest) continue;
+    world.fauna.push(spawn(world, entry.kind, dest.x, dest.y));
+    present.add(entry.kind);
+  }
 }
 
 export function seedFauna(world: World, rng: () => number) {
