@@ -2,6 +2,7 @@ import { BARROW, MAP, PLACES, inGreybarrow } from "./atlas.ts";
 import { CURSE_SLOW, FAUNA_META, isNight, POISON_TICK_HOURS } from "./catalog.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { spawnCorpsePile } from "./piles.ts";
+import { mulberry32 } from "./rng.ts";
 import { sheltering } from "./weather.ts";
 import { log, nid } from "./world.ts";
 import type { Creature, FaunaKind, World } from "./types.ts";
@@ -14,6 +15,33 @@ type SpawnZone = {
   pool: SpawnEntry[];
   radiusBias?: number;
 };
+
+export const STARTER_FAUNA_TARGET = 12;
+export const STARTER_FAUNA_RADIUS = 15;
+export const STARTER_FAUNA_REFILL_HOURS = 6;
+export const STARTER_FAUNA_KINDS: ReadonlySet<FaunaKind> = new Set([
+  "field_rat",
+  "hare",
+  "redtail_squirrel",
+  "cave_mole",
+  "hart",
+  "saltback_tortoise",
+]);
+const STARTER_FAUNA_POOL: SpawnEntry[] = [
+  { kind: "field_rat", weight: 30 },
+  { kind: "hare", weight: 25 },
+  { kind: "redtail_squirrel", weight: 20 },
+  { kind: "cave_mole", weight: 10 },
+  { kind: "hart", weight: 10 },
+  { kind: "saltback_tortoise", weight: 5 },
+];
+const STARTER_REQUIRED: ReadonlyArray<{ kind: FaunaKind; dx: number; dz: number }> = [
+  { kind: "field_rat", dx: 6, dz: 4 },
+  { kind: "hare", dx: -6, dz: 4 },
+  { kind: "hart", dx: 7, dz: -5 },
+  { kind: "saltback_tortoise", dx: -7, dz: -5 },
+];
+const starterRefillAt = new WeakMap<World, number>();
 
 export function spawn(world: World, kind: FaunaKind, x: number, z: number): Creature {
   const meta = FAUNA_META[kind];
@@ -286,6 +314,48 @@ export function ensureExpansionFauna(world: World) {
   }
 }
 
+function starterFauna(world: World, tx: number, ty: number) {
+  return world.fauna.filter((creature) =>
+    creature.task !== "dead" &&
+    !creature.ownerId &&
+    STARTER_FAUNA_KINDS.has(creature.kind) &&
+    Math.hypot(creature.x - tx, creature.z - ty) <= STARTER_FAUNA_RADIUS + 3
+  );
+}
+
+/** Keep a peaceful, capped training population around the starting hall. */
+export function ensureStarterFauna(world: World) {
+  const hall = PLACES.find((place) => place.id === "emberhall");
+  if (!hall || !world.tiles.length) return;
+  let local = starterFauna(world, hall.tx, hall.ty);
+  if (local.length >= STARTER_FAUNA_TARGET) return;
+
+  const present = new Set(local.map((creature) => creature.kind));
+  for (const required of STARTER_REQUIRED) {
+    if (local.length >= STARTER_FAUNA_TARGET || present.has(required.kind)) continue;
+    const dest = nearestWalkable(world, hall.tx + required.dx, hall.ty + required.dz);
+    if (!dest) continue;
+    world.fauna.push(spawn(world, required.kind, dest.x, dest.y));
+    present.add(required.kind);
+    local = starterFauna(world, hall.tx, hall.ty);
+  }
+
+  const bucket = Math.floor(world.hour / STARTER_FAUNA_REFILL_HOURS);
+  const rng = mulberry32((world.seed ^ Math.imul(bucket + 1, 0x9e3779b1)) >>> 0);
+  let attempts = 0;
+  while (local.length < STARTER_FAUNA_TARGET && attempts < STARTER_FAUNA_TARGET * 12) {
+    attempts += 1;
+    const angle = rng() * Math.PI * 2;
+    const radius = 7 + rng() * (STARTER_FAUNA_RADIUS - 7);
+    const x = hall.tx + Math.round(Math.cos(angle) * radius);
+    const z = hall.ty + Math.round(Math.sin(angle) * radius);
+    const dest = nearestWalkable(world, x, z);
+    if (!dest || Math.hypot(dest.x - hall.tx, dest.y - hall.ty) > STARTER_FAUNA_RADIUS + 3) continue;
+    world.fauna.push(spawn(world, pickFauna(rng, STARTER_FAUNA_POOL), dest.x, dest.y));
+    local = starterFauna(world, hall.tx, hall.ty);
+  }
+}
+
 export function seedFauna(world: World, rng: () => number) {
   if (world.fauna.length) return;
   for (const zone of SPAWN_ZONES) {
@@ -318,6 +388,12 @@ export function seedBarrow(world: World, rng: () => number) {
 }
 
 export function tickEcology(world: World, dt: number) {
+  const refillAt = starterRefillAt.get(world);
+  if (refillAt === undefined) starterRefillAt.set(world, world.hour + STARTER_FAUNA_REFILL_HOURS);
+  else if (world.hour >= refillAt) {
+    ensureStarterFauna(world);
+    starterRefillAt.set(world, world.hour + STARTER_FAUNA_REFILL_HOURS);
+  }
   const night = isNight(world.hour);
   const shelter = sheltering(world);
   for (const c of world.fauna) {

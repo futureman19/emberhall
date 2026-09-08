@@ -263,7 +263,8 @@ export type FaunaKind =
   | "river_otter"
   | "brine_seal"
   | "cave_mole"
-  | "dusk_owl";
+  | "dusk_owl"
+  | "field_rat";
 export type BuildingKind =
   | "hall"
   | "dormitory"

@@ -33,7 +33,7 @@ const EXPANSION_KINDS = [
   "dusk_owl",
 ] as const satisfies readonly FaunaKind[];
 
-test("continued worlds gain every missing expansion kind exactly once", () => {
+test("continued worlds gain every missing expansion kind without repeat-load duplication", () => {
   const oldWorld = createWorld();
   const player = you(oldWorld)!;
   oldWorld.fauna = [spawn(oldWorld, "hare", player.x + 2, player.z)];
@@ -42,7 +42,7 @@ test("continued worlds gain every missing expansion kind exactly once", () => {
   const hydrated = getWorld();
   assert.ok(hydrated.fauna.some((creature) => creature.kind === "hare"), "existing fauna survives hydration");
   for (const kind of EXPANSION_KINDS) {
-    assert.equal(hydrated.fauna.filter((creature) => creature.kind === kind).length, 1, `${kind} is added once`);
+    assert.ok(hydrated.fauna.some((creature) => creature.kind === kind), `${kind} is present after hydration`);
   }
 
   const count = hydrated.fauna.length;

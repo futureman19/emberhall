@@ -224,6 +224,7 @@ export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp
   brine_seal: { label: "Brine Seal", tameDiff: 44, hp: 38, dmg: 6, eats: ["meat"], meat: 2, hide: 2, loot: [{ item: "raw_fish", chance: 0.3, min: 1, max: 1 }, { item: "pearl", chance: 0.08, min: 1, max: 1 }] },
   cave_mole: { label: "Cave Mole", tameDiff: 18, hp: 14, dmg: 2, eats: ["plant", "meat"], meat: 1, hide: 1, loot: [{ item: "ore", chance: 0.2, min: 1, max: 1 }] },
   dusk_owl: { label: "Dusk Owl", tameDiff: 40, hp: 20, dmg: 5, eats: ["meat"], meat: 1, hide: 1, loot: [{ item: "rabbit_foot", chance: 0.12, min: 1, max: 1 }] },
+  field_rat: { label: "Field Rat", tameDiff: 6, hp: 6, dmg: 1, eats: ["plant", "meat"], meat: 1 },
 };
 
 /** Tag lookup on the catalog — the single place items declare what they ARE. */

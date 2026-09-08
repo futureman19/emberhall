@@ -63,6 +63,7 @@ const COLOR: Record<FaunaKind, string> = {
   brine_seal: "#75838a",
   cave_mole: "#3f342f",
   dusk_owl: "#6b655c",
+  field_rat: "#8a6a54",
 };
 
 const SIZE: Record<FaunaKind, number> = {
@@ -117,6 +118,7 @@ const SIZE: Record<FaunaKind, number> = {
   brine_seal: 0.72,
   cave_mole: 0.4,
   dusk_owl: 0.58,
+  field_rat: 0.38,
 };
 
 const DARK_MONSTER_KINDS: ReadonlySet<FaunaKind> = new Set([
@@ -587,6 +589,31 @@ function Body({ c }: { c: Creature }) {
         <mesh position={[s * 0.62, s * 1.98, 0]}>
           <sphereGeometry args={[s * 0.16, 8, 6]} />
           <meshStandardMaterial color="#b994d0" emissive="#73518c" emissiveIntensity={1.2} />
+        </mesh>
+      </>
+    );
+  }
+
+  if (c.kind === "field_rat") {
+    return (
+      <>
+        <mesh position={[0, s * 0.35, 0]} castShadow>
+          <boxGeometry args={[s * 0.62, s * 0.48, s * 1.0]} />
+          <meshStandardMaterial color={color} roughness={0.98} />
+        </mesh>
+        <mesh position={[0, s * 0.46, s * 0.5]} castShadow>
+          <boxGeometry args={[s * 0.48, s * 0.42, s * 0.48]} />
+          <meshStandardMaterial color="#806a5e" roughness={0.96} />
+        </mesh>
+        {[-1, 1].map((side) => (
+          <mesh key={side} position={[side * s * 0.18, s * 0.72, s * 0.43]} rotation={[Math.PI / 2, 0, 0]}>
+            <cylinderGeometry args={[s * 0.12, s * 0.12, s * 0.05, 8]} />
+            <meshStandardMaterial color="#a67d73" roughness={0.88} />
+          </mesh>
+        ))}
+        <mesh position={[0, s * 0.28, -s * 0.82]} rotation={[Math.PI / 2, 0, 0]} castShadow>
+          <cylinderGeometry args={[s * 0.045, s * 0.065, s * 0.95, 6]} />
+          <meshStandardMaterial color="#b58a7c" roughness={0.9} />
         </mesh>
       </>
     );
