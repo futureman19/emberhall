@@ -447,9 +447,10 @@ export const useGame = create<GameUI>((set, get) => ({
   hunt: (id) => {
     const w = getWorld();
     if (w.player.armedSpell && OFFENSIVE_SPELLS.has(w.player.armedSpell)) {
-      const err = commandCast(w, w.player.armedSpell, { kind: "fauna", id });
+      const spell = w.player.armedSpell;
+      const err = commandCast(w, spell, { kind: "fauna", id });
       if (err) get().flash(err);
-      else get().flash(SPELL_META[w.player.armedSpell].words);
+      else get().flash(SPELL_META[spell].words);
       set({ selectedId: id, snap: snapshot(), ctx: null, openBook: false });
       return;
     }
