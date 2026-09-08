@@ -425,7 +425,8 @@ function HelpPanel() {
     <div>
       <h2 className="font-display text-sm text-fg">The vale is a country</h2>
       <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">
-        Click the ground to walk. Click a tree to chop, stone to mine, a beast to hunt. Right-click a live beast and Tame
+        Click the ground to walk. Click a tree to chop, stone to mine, a beast to hunt. Hold the fishing rod and right-click
+        water to cast a line; roast the catch at a hearth or campfire. Right-click a live beast and Tame
         — hares yield, wolves rarely do. Open You for the paperdoll. Tap a hatchet, pick, hoe, or sword in the pack — it
         sits in your Hand. Tap the Hand to put it away. Chop needs the hatchet held. Mine needs the pick. Farm needs the
         hoe. The book in the pack is magery. Open it. Right-click a tamed beast and Care opens its loyalty and whereabouts.

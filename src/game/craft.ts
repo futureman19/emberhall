@@ -130,6 +130,7 @@ export const RECIPES: Recipe[] = [
   { id: "campfire", station: null, skill: "cooking", diff: -25, label: "Build a campfire", hint: "Any three wood. Cooks like a hearth, dies in three hours.", need: {}, needTags: [{ tag: "wood", n: 3 }], placesFire: true, give: {}, sfx: "fire" },
   // The fire — roast, bake, stew. A campfire or the kitchen hearth both serve.
   { id: "roast_meat", station: "fire", skill: "cooking", diff: -15, label: "Roast meat", hint: "Raw meat to a proper meal.", need: { meat: 1 }, give: { cooked_meat: 1 }, sfx: "fire" },
+  { id: "roast_fish", station: "fire", skill: "cooking", diff: -12, label: "Roast fish", hint: "A fresh catch over the flame.", need: { raw_fish: 1 }, give: { cooked_fish: 1 }, sfx: "fire" },
   { id: "bake_bread", station: "fire", skill: "cooking", diff: 8, label: "Bake bread", hint: "Two wheat, one loaf.", need: { wheat: 2 }, give: { bread: 1 }, sfx: "fire" },
   { id: "stew_pot", station: "fire", skill: "cooking", diff: 22, label: "Venison stew", hint: "A cabbage and a cut of meat, simmered.", need: { cabbage: 1, meat: 1 }, give: { stew: 1 }, sfx: "fire" },
 ];

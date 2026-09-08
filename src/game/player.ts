@@ -55,7 +55,7 @@ function hands(world: World) {
 }
 
 const SPILL: ItemId[] = [
-  "log", "board", "ore", "meat", "hide", "ingot", "club", "shield",
+  "log", "board", "ore", "meat", "raw_fish", "cooked_fish", "hide", "ingot", "club", "shield",
   "garlic", "ginseng", "silk", "pearl", "moss", "mandrake", "ash", "nightshade",
   "cabbage", "wheat", "cabbage_seed", "wheat_seed", "garlic_seed", "acorn",
   "potion_heal", "potion_night",
@@ -262,6 +262,19 @@ export function commandMine(world: World, tx: number, ty: number) {
   if (held) return held;
   world.player.intent = { kind: "mine", tx, ty, targetId: null, spell: null };
   pathBeside(world, p, tx, ty);
+  return null;
+}
+
+export function commandFish(world: World, tx: number, ty: number) {
+  const p = you(world);
+  if (!p) return "You are not in the vale.";
+  const dead = hands(world);
+  if (dead) return dead;
+  if (world.tiles[ty]?.[tx]?.kind !== "water") return "Cast into water.";
+  const held = needHeld(world, "fishing_rod");
+  if (held) return held;
+  if (!pathBeside(world, p, tx, ty)) return "The shore is closed.";
+  world.player.intent = { kind: "fish", tx, ty, targetId: null, spell: null };
   return null;
 }
 
@@ -524,10 +537,12 @@ export function commandCook(world: World) {
   const meals: [ItemId, number, string][] = [
     ["stew", 52, "The stew warms you through."],
     ["cooked_meat", 40, "Hot meat. Proper food."],
+    ["cooked_fish", 38, "The fish flakes from the bone."],
     ["bread", 32, "Fresh bread."],
     ["cabbage", 34, "The cabbage holds."],
     ["wheat", 22, "The wheat fills."],
     ["meat", 14, "You force the raw meat down."],
+    ["raw_fish", 12, "You force the raw fish down."],
   ];
   for (const [id, fill, note] of meals) {
     if ((world.player.pack[id] ?? 0) > 0) {
@@ -679,6 +694,21 @@ function chopNow(world: World, prepared: PreparedResourceHarvest) {
 
 function mineNow(world: World, prepared: PreparedResourceHarvest) {
   return resourceHarvestNow(world, "rock", prepared);
+}
+
+function fishNow(world: World) {
+  const { tx, ty } = world.player.intent;
+  world.player.intent.kind = "none";
+  if (world.tiles[ty]?.[tx]?.kind !== "water") return "The water is gone.";
+  const held = needHeld(world, "fishing_rod");
+  if (held) return held;
+  const fishing = effSkill(world, "fishing");
+  const ok = Math.random() < successChance(fishing, 18);
+  if (!ok) return "The line comes back bare.";
+  world.player.pack.raw_fish = (world.player.pack.raw_fish ?? 0) + 1;
+  playSfx("loot", 0.3);
+  const gain = tryGain(world, "fishing", true, true);
+  return gain ? `A silver fish takes the hook. ${gain}.` : "A silver fish takes the hook.";
 }
 
 function huntNow(world: World, p: Person) {
@@ -1004,7 +1034,7 @@ export function tickPlayer(world: World, dt: number): string | null {
     intent.kind = "none";
     return null;
   }
-  if (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till" || intent.kind === "forest" || intent.kind === "pick") {
+  if (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "fish" || intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till" || intent.kind === "forest" || intent.kind === "pick") {
     p.facing = Math.atan2(intent.tx - p.x, intent.ty - p.z);
     const prev = world.player.workT;
     world.player.workT += dt;
@@ -1012,6 +1042,9 @@ export function tickPlayer(world: World, dt: number): string | null {
     if (!hit) return null;
     if (intent.kind === "pick") {
       return pickNow(world);
+    }
+    if (intent.kind === "fish") {
+      return fishNow(world);
     }
     if (intent.kind === "till") {
       burstChips(world, intent.tx, intent.ty, "chop");

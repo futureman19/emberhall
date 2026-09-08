@@ -285,7 +285,23 @@ function Held({ id, ghost }: { id: ItemId; ghost: boolean }) {
   if (id === "staff") return <Staff ghost={ghost} />;
   if (id === "bow") return <Bow ghost={ghost} />;
   if (id === "torch") return <Torch ghost={ghost} />;
+  if (id === "fishing_rod") return <FishingRod ghost={ghost} />;
   return null;
+}
+
+function FishingRod({ ghost }: { ghost: boolean }) {
+  return (
+    <group position={[0.01, -0.28, 0.04]} rotation={[0.18, 0, 0.28]}>
+      <mesh position={[0, 0.42, 0]} castShadow={!ghost}>
+        <cylinderGeometry args={[0.018, 0.032, 0.9, 6]} />
+        <Mat color="#6a4a32" ghost={ghost} />
+      </mesh>
+      <mesh position={[0, -0.03, 0.035]} rotation={[Math.PI / 2, 0, 0]} castShadow={!ghost}>
+        <torusGeometry args={[0.07, 0.014, 6, 12]} />
+        <meshStandardMaterial color="#8a8680" metalness={0.45} roughness={0.4} />
+      </mesh>
+    </group>
+  );
 }
 
 function Hoe({ ghost }: { ghost: boolean }) {
@@ -945,6 +961,8 @@ function Figure({
         it.kind === "harvest" ||
         it.kind === "till");
     const casting = idle && it.kind === "cast";
+    const fishing = idle && it.kind === "fish";
+    const castLine = fishing ? Math.sin(Math.min(1, w.player.workT / 0.6) * Math.PI) : 0;
     const hunting = idle && it.kind === "hunt";
     const bowing = hunting && w.player.wear.main === "bow";
     const draw = bowing ? bowDrawAmount(w.player.workT) : 0;
@@ -973,6 +991,8 @@ function Figure({
         left.current.rotation.set(0.62 + npcPose.reach * 0.72, 0.38, 0.68 + npcPose.reach * 0.38);
       } else if (extracting) {
         left.current.rotation.set(0.45 + extractPose.brace * 0.75, extractionKind === "lumberjacking" ? 0.42 : 0.16, extractionKind === "lumberjacking" ? 0.72 : 0.42);
+      } else if (fishing) {
+        left.current.rotation.set(0.72 + castLine * 0.18, 0.28, 0.74);
       } else if (casting) {
         const u = Math.min(1, w.player.workT / 0.26);
         const e = u * u * (3 - 2 * u);
@@ -1028,6 +1048,8 @@ function Figure({
       } else if (chopping) {
         const pitch = workPitch(w.player.workT);
         right.current.rotation.set(pitch, 0.18, -0.22);
+      } else if (fishing) {
+        right.current.rotation.set(0.48 - castLine * 1.1, -0.18, -0.5);
       } else if (casting) {
         const u = Math.min(1, w.player.workT / 0.26);
         const e = u * u * (3 - 2 * u);

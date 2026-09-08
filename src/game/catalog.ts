@@ -28,6 +28,7 @@ export const SKILL_META: Record<SkillId, { label: string }> = {
   magery: { label: "Magery" },
   farming: { label: "Farming" },
   forestry: { label: "Forestry" },
+  fishing: { label: "Fishing" },
   alchemy: { label: "Alchemy" },
   archery: { label: "Archery" },
   cartography: { label: "Cartography" },
@@ -56,6 +57,7 @@ export const LIVE_SKILLS: SkillId[] = [
   "magery",
   "farming",
   "forestry",
+  "fishing",
   "archery",
   "alchemy",
   "tracking",
@@ -69,6 +71,7 @@ export const ITEM_META: Record<
   knife: { label: "Skinning knife", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 8, sell: 3, tags: ["tool", "blade"] },
   pick: { label: "Pick", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 14, sell: 5, tags: ["tool"] },
   hoe: { label: "Hoe", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 12, sell: 4, tags: ["tool"] },
+  fishing_rod: { label: "Fishing rod", tool: true, slot: "main", fill: "var(--color-gold)", armor: 0, buy: 16, sell: 6, tags: ["tool"] },
   log: { label: "Log", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 2, tags: ["wood", "fuel"] },
   board: { label: "Board", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 3, tags: ["wood", "fuel"] },
   ore: { label: "Iron ore", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 0, sell: 3, tags: ["metal"] },
@@ -118,6 +121,8 @@ export const ITEM_META: Record<
   ash: { label: "Sulfurous ash", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 4, sell: 1, tags: ["reagent"] },
   cabbage: { label: "Cabbage", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 4, sell: 2, tags: ["plant", "food"] },
   cooked_meat: { label: "Cooked meat", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 8, sell: 4, tags: ["meat", "food"] },
+  raw_fish: { label: "Raw fish", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 0, sell: 3, tags: ["meat", "food"] },
+  cooked_fish: { label: "Cooked fish", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 9, sell: 4, tags: ["meat", "food"] },
   bread: { label: "Bread", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 6, sell: 3, tags: ["food", "plant"] },
   stew: { label: "Bowl of stew", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 14, sell: 7, tags: ["food"] },
   wheat: { label: "Wheat", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 3, sell: 1, tags: ["plant", "food"] },
@@ -248,7 +253,7 @@ export const NOTORIETY_META: Record<Notoriety, { label: string }> = {
 };
 
 export const SHOP_STOCK: ItemId[] = [
-  "hatchet", "pick", "hoe", "knife", "bandage", "tunic", "hood", "cloak", "boots",
+  "hatchet", "pick", "hoe", "fishing_rod", "knife", "bandage", "tunic", "hood", "cloak", "boots",
   "rune", "garlic", "ginseng", "silk", "pearl", "moss", "mandrake", "ash", "cabbage", "wheat",
   "cabbage_seed", "wheat_seed", "garlic_seed", "acorn",
 ];
@@ -267,6 +272,7 @@ export function emptySkills(): Record<SkillId, number> {
     magery: 8,
     farming: 10,
     forestry: 8,
+    fishing: 8,
     alchemy: 8,
     archery: 0,
     cartography: 0,
@@ -285,7 +291,7 @@ export function emptySkills(): Record<SkillId, number> {
 export function emptyLastGain(): Record<SkillId, number> {
   return {
     swords: 0, lumberjack: 0, mining: 0, anatomy: 0, healing: 0,
-    cooking: 0, smithing: 0, carpentry: 0, taming: 0, magery: 0, farming: 0, forestry: 0,
+    cooking: 0, smithing: 0, carpentry: 0, taming: 0, magery: 0, farming: 0, forestry: 0, fishing: 0,
     alchemy: 0, archery: 0, cartography: 0, fencing: 0,
     lockpicking: 0, mace: 0, music: 0, poisoning: 0,
     stealing: 0, tailoring: 0, tinkering: 0, tracking: 0,
@@ -294,14 +300,14 @@ export function emptyLastGain(): Record<SkillId, number> {
 
 export function emptyPack(): Record<ItemId, number> {
   return {
-    hatchet: 1, knife: 1, pick: 1, hoe: 1, log: 0, board: 0, ore: 0, ingot: 0, club: 0, shield: 0,
+    hatchet: 1, knife: 1, pick: 1, hoe: 1, fishing_rod: 1, log: 0, board: 0, ore: 0, ingot: 0, club: 0, shield: 0,
     staff: 0, bow: 0, torch: 0, crate: 0, cap: 0, cuirass: 0, sword: 0, mace: 0, gauntlets: 0, gorget: 0, heater: 0,
     rabbit_foot: 0, orc_tusk: 0,
     meat: 1, hide: 0, bandage: 3, potion_heal: 0, potion_night: 0,
     tunic: 0, leather: 0, mail: 0, hood: 1, helm: 0, cloak: 0, gloves: 1, hose: 0, greaves: 0,
     boots: 0, pendant: 1, ring: 1, relic: 0, spellbook: 1, rune: 4, garlic: 12, ginseng: 12,
     silk: 16, nightshade: 4, pearl: 14, moss: 10, mandrake: 10, ash: 12, cabbage: 2, wheat: 0,
-    cooked_meat: 0, bread: 0, stew: 0,
+    cooked_meat: 0, raw_fish: 0, cooked_fish: 0, bread: 0, stew: 0,
     cabbage_seed: 8, wheat_seed: 6, garlic_seed: 4, ginseng_seed: 0, mandrake_seed: 0, moss_seed: 0, acorn: 6,
     deed_porch: 0, deed_hut: 0, deed_homestead: 0,
   };

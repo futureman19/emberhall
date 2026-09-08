@@ -43,6 +43,7 @@ export type SkillId =
   | "magery"
   | "farming"
   | "forestry"
+  | "fishing"
   // Placeholders — on the books, not yet taught. Mechanics arrive one
   // window at a time; until then they sit at zero and gain nothing.
   | "alchemy"
@@ -63,6 +64,7 @@ export type ItemId =
   | "knife"
   | "pick"
   | "hoe"
+  | "fishing_rod"
   | "log"
   | "board"
   | "ore"
@@ -113,6 +115,8 @@ export type ItemId =
   | "cabbage"
   | "wheat"
   | "cooked_meat"
+  | "raw_fish"
+  | "cooked_fish"
   | "bread"
   | "stew"
   | "cabbage_seed"
@@ -255,7 +259,7 @@ export type BuildingKind =
   | "homestead";
 export type VocationId = "cook" | "armourer" | "trader" | "recruiter" | "guard";
 export type Notoriety = "innocent" | "criminal" | "murderer";
-export type IntentKind = "walk" | "chop" | "mine" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "till" | "forest" | "pick" | "none";
+export type IntentKind = "walk" | "chop" | "mine" | "fish" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "till" | "forest" | "pick" | "none";
 export type Speed = 0 | 1 | 2 | 3;
 export type PanelId = "none" | "help" | "you" | "journal" | "vale" | "roster" | "build";
 export type WeatherKind = "clear" | "fair" | "cloudy" | "rain" | "storm";
@@ -563,6 +567,7 @@ export type CtxVerb =
   | "walk"
   | "chop"
   | "mine"
+  | "fish"
   | "hunt"
   | "skin"
   | "loot"

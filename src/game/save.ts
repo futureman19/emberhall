@@ -32,6 +32,7 @@ const INTENT_KINDS = new Set([
   "walk",
   "chop",
   "mine",
+  "fish",
   "hunt",
   "skin",
   "loot",

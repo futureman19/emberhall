@@ -411,6 +411,7 @@ const SKILL_IDS = {
   magery: true,
   farming: true,
   forestry: true,
+  fishing: true,
   alchemy: true,
   archery: true,
   cartography: true,
