@@ -15,10 +15,11 @@ import { getWorld, setWorld, snapshot } from "../live.ts";
 import { tickWorld } from "../sim.ts";
 import { createStubWorld } from "../world.ts";
 
-const tree = { seed: 1_419, tx: 188, ty: 88, nodeKind: "tree" } as const;
+const tree = { seed: 1_419, tx: 248, ty: 148, nodeKind: "tree" } as const;
+const hollow = { seed: 1_419, tx: 188, ty: 88, nodeKind: "tree" } as const;
 const rock = { seed: 532, tx: 470, ty: 420, nodeKind: "rock" } as const;
 
-function nodeId(input: typeof tree | typeof rock): string {
+function nodeId(input: typeof tree | typeof rock | typeof hollow): string {
   return resolveResourceNode(input).identity.nodeId;
 }
 
@@ -140,6 +141,26 @@ test("resource state - deterministic regrowth waits until the exact kind boundar
   assert.equal(regrowResourceNodes(world), 0);
   assert.equal(world.landRev, beforeRev + 1);
   assert.equal(resolveResourceNode(tree).identity.nodeId, nodeId(tree));
+});
+
+test("resource state - Wolfhollow trees never come back; Oakstand still does", () => {
+  const world = createStubWorld();
+  world.seed = hollow.seed;
+  world.tiles[hollow.ty]![hollow.tx]!.kind = "dirt";
+  world.scars[`${hollow.tx},${hollow.ty}`] = { kind: "dirt" };
+  world.resourceNodes = depleteResourceNode({ ...hollow, hour: 0, resourceNodes: world.resourceNodes });
+  world.hour = RESOURCE_REGROWTH_HOURS.tree + 1_000;
+  assert.equal(regrowResourceNodes(world), 0);
+  assert.equal(world.tiles[hollow.ty]![hollow.tx]!.kind, "dirt");
+  assert.equal(world.scars[`${hollow.tx},${hollow.ty}`]?.kind, "dirt");
+  assert.notEqual(world.resourceNodes[nodeId(hollow)]!.depletedAtHour, null);
+
+  world.tiles[tree.ty]![tree.tx]!.kind = "dirt";
+  world.scars[`${tree.tx},${tree.ty}`] = { kind: "dirt" };
+  world.resourceNodes = depleteResourceNode({ ...tree, hour: 0, resourceNodes: world.resourceNodes });
+  world.hour = RESOURCE_REGROWTH_HOURS.tree;
+  assert.equal(regrowResourceNodes(world), 1);
+  assert.equal(world.tiles[tree.ty]![tree.tx]!.kind, "tree");
 });
 
 test("resource state - rock regrowth uses the exact 168 hour boundary", () => {

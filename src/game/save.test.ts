@@ -542,9 +542,9 @@ test("save - load order applies scars before regrowth and leaves v2 dirt scars p
 
   const current = currentSave();
   const seed = current.seed as number;
-  const node = { seed, tx: 188, ty: 88, nodeKind: "tree" } as const;
+  const node = { seed, tx: 248, ty: 148, nodeKind: "tree" } as const;
   current.hour = 72;
-  current.scars = { "188,88": { kind: "dirt" } };
+  current.scars = { "248,148": { kind: "dirt" } };
   current.resourceNodes = depleteResourceNode({ ...node, hour: 0, resourceNodes: {} });
   localStorage.setItem(SAVE_KEY, JSON.stringify(current));
   const regrown = loadSave();

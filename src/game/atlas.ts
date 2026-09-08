@@ -27,8 +27,8 @@ export interface Place {
 
 export const PLACES: Place[] = [
   { id: "emberhall", name: "Emberhall", tx: 256, ty: 292, radius: 8, kind: "town", blurb: "Your hall. The bank stands on the cobbles." },
-  { id: "oakstand", name: "Oakstand", tx: 248, ty: 148, radius: 28, kind: "woods", blurb: "Old oaks. Wolves own the night." },
-  { id: "wolfhollow", name: "Wolfhollow", tx: 188, ty: 88, radius: 18, kind: "woods", blurb: "Pine and shadow. Wolves own the stand." },
+  { id: "oakstand", name: "Oakstand", tx: 248, ty: 148, radius: 28, kind: "woods", blurb: "Old oaks. The stand comes back. Wolves own the night." },
+  { id: "wolfhollow", name: "Wolfhollow", tx: 188, ty: 88, radius: 18, kind: "woods", blurb: "Pine and shadow. What you fell stays fallen. Wolves own the stand." },
   { id: "ridgewatch", name: "Ridgewatch", tx: 250, ty: 48, radius: 16, kind: "ridge", blurb: "The north wall. Snow on the height." },
   { id: "hearthfen", name: "Hearthfen", tx: 400, ty: 168, radius: 8, kind: "town", blurb: "Peat smoke and wet marsh." },
   { id: "ironfold", name: "Ironfold", tx: 420, ty: 268, radius: 18, kind: "mine", blurb: "The east slope. Iron in the bone of the hill." },
@@ -43,6 +43,13 @@ export const PLACES: Place[] = [
 
 export function placeById(id: string) {
   return PLACES.find((p) => p.id === id)!;
+}
+
+/** Inside the named radius, not the spawn-weight spread. */
+export function inPlace(tx: number, ty: number, placeId: string) {
+  const place = PLACES.find((p) => p.id === placeId);
+  if (!place) return false;
+  return Math.hypot(tx - place.tx, ty - place.ty) <= place.radius;
 }
 
 export const BARROW = {

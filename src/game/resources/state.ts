@@ -1,4 +1,4 @@
-import { MAP } from "../atlas.ts";
+import { MAP, inPlace } from "../atlas.ts";
 import type { ResourceNodeState, ResourceNodeStateMap, TileKind, World } from "../types.ts";
 import { resolveResourceNode, type ResourceNodeKind } from "./nodes.ts";
 
@@ -344,6 +344,7 @@ export function regrowResourceNodes(world: World): number {
       nextDueHour = Math.min(nextDueHour, dueAt);
       continue;
     }
+    if (state.nodeKind === "tree" && inPlace(state.tx, state.ty, "wolfhollow")) continue;
     if (world.plots.some((plot) => plot.tx === state.tx && plot.ty === state.ty)) continue;
     const tile = world.tiles[state.ty]?.[state.tx];
     const scarKey = `${state.tx},${state.ty}`;
