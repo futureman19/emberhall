@@ -81,7 +81,7 @@ export function getCraftFx() {
 
 function emitCraftFx(world: World, rec: Recipe, success: boolean) {
   const kind: CraftAnimationKind | null =
-    rec.skill === "smithing" ? "smithing" : rec.skill === "carpentry" ? "carpentry" : rec.skill === "cooking" || rec.skill === "alchemy" ? "cooking" : null;
+    rec.skill === "smithing" ? "smithing" : rec.skill === "carpentry" || rec.skill === "tailoring" ? "carpentry" : rec.skill === "cooking" || rec.skill === "alchemy" ? "cooking" : null;
   const player = you(world);
   if (!kind || !player) return;
   craftFx = { kind, recipeId: rec.id, success, x: player.x, z: player.z, at: world.hour };
@@ -125,7 +125,12 @@ export const RECIPES: Recipe[] = [
   { id: "cut_bandage", station: null, skill: "healing", diff: -20, label: "Cut bandages", hint: "Any cloth, a blade. Two dressings.", need: {}, needTags: [{ tag: "cloth", n: 1 }], needsBlade: true, give: { bandage: 2 }, sfx: "chop" },
   { id: "potion_heal", station: null, skill: "alchemy", diff: 8, label: "Heal potion", hint: "Garlic and ginseng, a red draught.", need: { garlic: 1, ginseng: 1 }, give: { potion_heal: 1 }, sfx: "cast" },
   { id: "potion_night", station: null, skill: "alchemy", diff: 12, label: "Night sight potion", hint: "Silk and ash. See as if dusk.", need: { silk: 1, ash: 1 }, give: { potion_night: 1 }, sfx: "cast" },
-  { id: "cut_leather", station: null, skill: "carpentry", diff: 10, label: "Stitch a hide shirt", hint: "Two hides, a blade. Leather armor.", need: {}, needTags: [{ tag: "hide", n: 2 }], needsBlade: true, give: { leather: 1 }, sfx: "chop" },
+  { id: "cut_leather", station: null, skill: "tailoring", diff: 10, label: "Stitch a hide shirt", hint: "Two hides, a blade. Leather armor.", need: {}, needTags: [{ tag: "hide", n: 2 }], needsBlade: true, give: { leather: 1 }, sfx: "chop" },
+  { id: "sew_hood", station: null, skill: "tailoring", diff: 4, label: "Hood", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { hood: 1 }, sfx: "chop" },
+  { id: "sew_gloves", station: null, skill: "tailoring", diff: 6, label: "Gloves", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { gloves: 1 }, sfx: "chop" },
+  { id: "sew_hose", station: null, skill: "tailoring", diff: 8, label: "Hose", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { hose: 1 }, sfx: "chop" },
+  { id: "sew_tunic", station: null, skill: "tailoring", diff: 12, label: "Tunic", hint: "Any three cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 3 }], needsBlade: true, give: { tunic: 1 }, sfx: "chop" },
+  { id: "sew_cloak", station: null, skill: "tailoring", diff: 18, label: "Travel cloak", hint: "Any four cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 4 }], needsBlade: true, give: { cloak: 1 }, sfx: "chop" },
   // Camping — three wood buys a fire that burns three hours.
   { id: "campfire", station: null, skill: "cooking", diff: -25, label: "Build a campfire", hint: "Any three wood. Cooks like a hearth, dies in three hours.", need: {}, needTags: [{ tag: "wood", n: 3 }], placesFire: true, give: {}, sfx: "fire" },
   // The fire — roast, bake, stew. A campfire or the kitchen hearth both serve.
