@@ -3,7 +3,7 @@ import { buildingBox } from "./building-size.ts";
 import { isGhost, resurrect, you } from "./player.ts";
 import { astarToRange, tileOf } from "./pathfinding.ts";
 import { appraiseRare, rareName } from "./rare.ts";
-import { completeObjective, log } from "./world.ts";
+import { completeObjective, log, RYN_NAME, RYN_PAY, RYN_WANT } from "./world.ts";
 import { emitNpcInteractionFx } from "./npc-interaction-animation.ts";
 import type { ItemId, NpcRole, World } from "./types.ts";
 
@@ -102,6 +102,27 @@ export function commandTalk(world: World, id: string) {
   if (t.role === "provisioner") {
     if (isGhost(world)) return answer(`${t.name}: Dust will not sell to the dead.`);
     return answer(`${t.name}: Dust, steel, and a blank rune if you have the coin.`);
+  }
+  if (t.name === RYN_NAME) {
+    if (isGhost(world)) return answer(`${t.name}: The dead keep no bargains.`);
+    if ((world.rep[RYN_WANT] ?? 0) > 0) {
+      return answer(`${t.name}: The hollow stays fallen. I remember.`);
+    }
+    const hides = world.player.pack.hide ?? 0;
+    if (hides < 1) {
+      if (!world.quests.some((q) => q.id === RYN_WANT)) {
+        world.quests.push({ id: RYN_WANT, title: "Bring Ryn a hide" });
+      }
+      return answer(`${t.name}: Wolfhollow took my last hide. Bring me one. I'll pay.`);
+    }
+    world.player.pack.hide = hides - 1;
+    world.gold += RYN_PAY;
+    world.rep[RYN_WANT] = 1;
+    const quest = world.quests.find((q) => q.id === RYN_WANT);
+    if (quest) quest.title = "Ryn has her hide";
+    else world.quests.push({ id: RYN_WANT, title: "Ryn has her hide" });
+    log(world, `${t.name} takes the hide. ${RYN_PAY} gold.`);
+    return answer(`${t.name}: That's the one. Don't sleep in the hollow.`);
   }
   return answer(`${t.name} nods.`);
 }

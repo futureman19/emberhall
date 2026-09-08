@@ -9,7 +9,7 @@ import { mulberry32 } from "./rng.ts";
 import { ensureWeather, weatherSnap } from "./weather.ts";
 import { ensureCity, ensureKeepSite } from "./city.ts";
 import { ensureHerbs } from "./herbs.ts";
-import { createStubWorld, createWorld, seedEmberhallBank, seedFieldStones, seedTownNpcs } from "./world.ts";
+import { createStubWorld, createWorld, ensureRynWain, seedEmberhallBank, seedFieldStones, seedTownNpcs } from "./world.ts";
 import { ensureLookHut } from "./house.ts";
 import { createResourceNodeStateMap, regrowResourceNodes } from "./resources/state.ts";
 import type { SkillId, Snapshot, World } from "./types.ts";
@@ -91,6 +91,7 @@ function withFauna(w: World) {
   ensureCity(w);
   ensureKeepSite(w);
   ensureLookHut(w);
+  ensureRynWain(w);
   ensureWeather(w);
   ensureHerbs(w);
   regrowResourceNodes(w);

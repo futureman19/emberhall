@@ -430,6 +430,7 @@ export function createWorld(): World {
   seedEmberhallBank(world);
   ensureCity(world);
   ensureHerbs(world);
+  ensureRynWain(world);
   log(world, `You are ${you.name}. The vale is a country — Ridgewatch to Brinegate. Follow the dirt.`);
   revealAround(world, COURT.tx, COURT.ty, 28);
   return world;
@@ -468,4 +469,21 @@ export function seedEmberhallBank(world: World) {
   pell.z = EMBERHALL_BANKER.z;
   pell.path = [];
   pell.home = { tx: Math.round(pell.x), ty: Math.round(pell.z) };
+}
+
+export const RYN_NAME = "Ryn Wain";
+export const RYN_WANT = "ryn-hide";
+export const RYN_PAY = 20;
+
+/** Brann's cousin on the court — a want, not a shop. Old saves pick her up. */
+export function ensureRynWain(world: World) {
+  if (world.people.some((p) => p.name === RYN_NAME)) return;
+  const p = createPerson(world, mulberry32(world.seed + 77), {
+    x: COURT.tx - 1,
+    z: COURT.ty + 2,
+    cls: "ranger",
+    name: RYN_NAME,
+  });
+  p.home = { tx: Math.round(p.x), ty: Math.round(p.z) };
+  world.people.push(p);
 }
