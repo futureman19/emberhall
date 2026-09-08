@@ -247,7 +247,15 @@ export type FaunaKind =
   | "cavern_bat"
   | "tomb_sentinel"
   | "cinder_drake"
-  | "willow_wisp";
+  | "willow_wisp"
+  | "blackbriar_hag"
+  | "rime_revenant"
+  | "fen_ghoul"
+  | "drowned_reaver"
+  | "deepmaw_basilisk"
+  | "ossuary_knight"
+  | "ash_demon"
+  | "grave_lich";
 export type BuildingKind =
   | "hall"
   | "dormitory"

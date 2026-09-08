@@ -415,8 +415,8 @@ export function rollLootBase(rng: () => number): ItemId {
 }
 
 /**
- * A kill yields a rare? Wights hoard rank III relics a quarter of the
- * time; wolves drag rank II prizes from old camps one time in twelve.
+ * A kill yields a rare? Greater undead and demons hoard the strongest
+ * relics; lesser night-things still carry spoils worth hunting.
  */
 export function rollKillRare(world: World, kind: FaunaKind, rng: () => number): RareItem | null {
   const cfg =
@@ -424,6 +424,8 @@ export function rollKillRare(world: World, kind: FaunaKind, rng: () => number): 
     kind === "wolf" ? { chance: 1 / 12, maxRank: 2, two: 0 } :
     kind === "ridgeback_warg" || kind === "barrow_hound" ? { chance: 0.14, maxRank: 2, two: 0.1 } :
     kind === "brine_troll" || kind === "stonefang_ogre" || kind === "orc_marauder" ? { chance: 1 / 9, maxRank: 4, two: 0.25 } :
+    kind === "grave_lich" || kind === "ash_demon" || kind === "ossuary_knight" ? { chance: 1 / 6, maxRank: 5, two: 0.35 } :
+    kind === "blackbriar_hag" || kind === "rime_revenant" || kind === "fen_ghoul" || kind === "drowned_reaver" || kind === "deepmaw_basilisk" || kind === "cinder_drake" ? { chance: 0.1, maxRank: 3, two: 0.15 } :
     null;
   if (!cfg || rng() >= cfg.chance) return null;
   const base = rollLootBase(rng);

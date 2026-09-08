@@ -99,6 +99,14 @@ const RETALIATE_KINDS: ReadonlySet<FaunaKind> = new Set([
   "tomb_sentinel",
   "cinder_drake",
   "willow_wisp",
+  "blackbriar_hag",
+  "rime_revenant",
+  "fen_ghoul",
+  "drowned_reaver",
+  "deepmaw_basilisk",
+  "ossuary_knight",
+  "ash_demon",
+  "grave_lich",
 ]);
 
 export function resurrect(world: World, at?: { x: number; z: number }) {

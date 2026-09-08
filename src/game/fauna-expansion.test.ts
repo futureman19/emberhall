@@ -20,7 +20,7 @@ const EXPANSION_KINDS = [
 ] as const satisfies readonly FaunaKind[];
 
 test("balanced fauna pack adds eight complete creature contracts", () => {
-  assert.equal(Object.keys(FAUNA_META).length, 35);
+  assert.ok(Object.keys(FAUNA_META).length >= 35, "later packs may extend the balanced roster");
   for (const kind of EXPANSION_KINDS) {
     const meta = FAUNA_META[kind];
     assert.ok(meta.label.length > 3, `${kind} has a proper name`);

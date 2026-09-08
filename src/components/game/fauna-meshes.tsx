@@ -47,6 +47,14 @@ const COLOR: Record<FaunaKind, string> = {
   tomb_sentinel: "#777269",
   cinder_drake: "#6f3828",
   willow_wisp: "#86c8a5",
+  blackbriar_hag: "#3d4434",
+  rime_revenant: "#9aabb7",
+  fen_ghoul: "#56604b",
+  drowned_reaver: "#45626a",
+  deepmaw_basilisk: "#465440",
+  ossuary_knight: "#8a8579",
+  ash_demon: "#572f29",
+  grave_lich: "#665674",
 };
 
 const SIZE: Record<FaunaKind, number> = {
@@ -85,7 +93,26 @@ const SIZE: Record<FaunaKind, number> = {
   tomb_sentinel: 0.92,
   cinder_drake: 0.92,
   willow_wisp: 0.48,
+  blackbriar_hag: 1.12,
+  rime_revenant: 1.12,
+  fen_ghoul: 1.02,
+  drowned_reaver: 1.18,
+  deepmaw_basilisk: 1.12,
+  ossuary_knight: 1.24,
+  ash_demon: 1.38,
+  grave_lich: 1.3,
 };
+
+const DARK_MONSTER_KINDS: ReadonlySet<FaunaKind> = new Set([
+  "blackbriar_hag",
+  "rime_revenant",
+  "fen_ghoul",
+  "drowned_reaver",
+  "deepmaw_basilisk",
+  "ossuary_knight",
+  "ash_demon",
+  "grave_lich",
+]);
 
 function Body({ c }: { c: Creature }) {
   const s = SIZE[c.kind];
@@ -338,6 +365,217 @@ function Body({ c }: { c: Creature }) {
     );
   }
 
+  if (c.kind === "blackbriar_hag") {
+    return (
+      <>
+        <mesh position={[0, s * 0.78, 0]} rotation={[0.18, 0, 0]} castShadow>
+          <coneGeometry args={[s * 0.52, s * 1.5, 6]} />
+          <meshStandardMaterial color={color} roughness={0.98} />
+        </mesh>
+        <mesh position={[0, s * 1.55, s * 0.12]} castShadow>
+          <sphereGeometry args={[s * 0.3, 7, 5]} />
+          <meshStandardMaterial color="#7b8063" roughness={1} />
+        </mesh>
+        <mesh position={[0, s * 1.82, s * 0.04]} rotation={[0, 0, -0.16]} castShadow>
+          <coneGeometry args={[s * 0.48, s * 0.65, 6]} />
+          <meshStandardMaterial color="#252a22" roughness={1} />
+        </mesh>
+        <mesh position={[s * 0.55, s * 0.85, s * 0.08]} rotation={[0.08, 0, -0.12]} castShadow>
+          <cylinderGeometry args={[s * 0.045, s * 0.07, s * 1.75, 5]} />
+          <meshStandardMaterial color="#33271f" roughness={1} />
+        </mesh>
+      </>
+    );
+  }
+
+  if (c.kind === "rime_revenant") {
+    return (
+      <>
+        <mesh position={[0, s * 0.82, 0]} castShadow>
+          <coneGeometry args={[s * 0.48, s * 1.55, 7]} />
+          <meshStandardMaterial color={color} emissive="#405664" emissiveIntensity={0.28} transparent opacity={0.78} roughness={0.55} />
+        </mesh>
+        <mesh position={[0, s * 1.62, 0]} castShadow>
+          <boxGeometry args={[s * 0.42, s * 0.42, s * 0.36]} />
+          <meshStandardMaterial color="#c5d3d8" emissive="#607887" emissiveIntensity={0.35} roughness={0.5} />
+        </mesh>
+        {[-1, 0, 1].map((side) => (
+          <mesh key={side} position={[side * s * 0.2, s * (1.98 - Math.abs(side) * 0.08), 0]}>
+            <coneGeometry args={[s * 0.07, s * (0.38 - Math.abs(side) * 0.08), 4]} />
+            <meshStandardMaterial color="#d8e4e6" emissive="#7895a3" emissiveIntensity={0.42} />
+          </mesh>
+        ))}
+      </>
+    );
+  }
+
+  if (c.kind === "fen_ghoul") {
+    return (
+      <>
+        <mesh position={[0, s * 0.78, 0]} rotation={[0.26, 0, 0]} castShadow>
+          <boxGeometry args={[s * 0.62, s * 0.9, s * 0.42]} />
+          <meshStandardMaterial color={color} roughness={1} />
+        </mesh>
+        <mesh position={[0, s * 1.35, s * 0.2]} castShadow>
+          <sphereGeometry args={[s * 0.29, 6, 5]} />
+          <meshStandardMaterial color="#778064" roughness={0.96} />
+        </mesh>
+        {[-1, 1].map((side) => (
+          <mesh key={side} position={[side * s * 0.48, s * 0.55, s * 0.18]} rotation={[0.3, 0, side * 0.2]} castShadow>
+            <boxGeometry args={[s * 0.16, s * 1.05, s * 0.17]} />
+            <meshStandardMaterial color="#667052" roughness={1} />
+          </mesh>
+        ))}
+        <mesh position={[0, s * 1.37, s * 0.47]}>
+          <boxGeometry args={[s * 0.23, s * 0.055, s * 0.04]} />
+          <meshStandardMaterial color="#c1b36b" emissive="#75642b" emissiveIntensity={0.7} />
+        </mesh>
+      </>
+    );
+  }
+
+  if (c.kind === "drowned_reaver") {
+    return (
+      <>
+        <mesh position={[0, s * 0.84, 0]} castShadow>
+          <boxGeometry args={[s * 0.7, s * 1.0, s * 0.46]} />
+          <meshStandardMaterial color={color} metalness={0.28} roughness={0.84} />
+        </mesh>
+        <mesh position={[0, s * 1.54, 0]} castShadow>
+          <boxGeometry args={[s * 0.5, s * 0.44, s * 0.42]} />
+          <meshStandardMaterial color="#607a7b" roughness={0.9} />
+        </mesh>
+        <mesh position={[-s * 0.52, s * 0.82, 0]} castShadow>
+          <boxGeometry args={[s * 0.42, s * 0.74, s * 0.16]} />
+          <meshStandardMaterial color="#374d52" metalness={0.38} roughness={0.75} />
+        </mesh>
+        <mesh position={[s * 0.58, s * 0.77, s * 0.02]} rotation={[0, 0, -0.18]} castShadow>
+          <boxGeometry args={[s * 0.09, s * 1.15, s * 0.11]} />
+          <meshStandardMaterial color="#85867f" metalness={0.7} roughness={0.45} />
+        </mesh>
+      </>
+    );
+  }
+
+  if (c.kind === "deepmaw_basilisk") {
+    return (
+      <>
+        <mesh position={[0, s * 0.42, 0]} castShadow>
+          <boxGeometry args={[s * 0.74, s * 0.52, s * 1.45]} />
+          <meshStandardMaterial color={color} roughness={0.9} />
+        </mesh>
+        <mesh position={[0, s * 0.52, s * 0.82]} castShadow>
+          <boxGeometry args={[s * 0.62, s * 0.46, s * 0.62]} />
+          <meshStandardMaterial color="#536348" roughness={0.88} />
+        </mesh>
+        <mesh position={[0, s * 0.38, -s * 1.0]} rotation={[Math.PI / 2, 0, 0]} castShadow>
+          <coneGeometry args={[s * 0.24, s * 1.1, 5]} />
+          <meshStandardMaterial color="#394334" roughness={0.92} />
+        </mesh>
+        {[-1, 0, 1].map((side) => (
+          <mesh key={side} position={[side * s * 0.18, s * 0.82, -side * side * s * 0.08]}>
+            <coneGeometry args={[s * 0.09, s * (0.42 - Math.abs(side) * 0.08), 4]} />
+            <meshStandardMaterial color="#758064" roughness={0.78} />
+          </mesh>
+        ))}
+        {[-1, 1].map((side) => (
+          <mesh key={side} position={[side * s * 0.19, s * 0.61, s * 1.13]}>
+            <sphereGeometry args={[s * 0.065, 6, 4]} />
+            <meshStandardMaterial color="#d2a657" emissive="#8b5b24" emissiveIntensity={0.9} />
+          </mesh>
+        ))}
+      </>
+    );
+  }
+
+  if (c.kind === "ossuary_knight") {
+    return (
+      <>
+        <mesh position={[0, s * 0.88, 0]} castShadow>
+          <boxGeometry args={[s * 0.7, s * 1.02, s * 0.46]} />
+          <meshStandardMaterial color={color} metalness={0.5} roughness={0.66} />
+        </mesh>
+        <mesh position={[0, s * 1.58, 0]} castShadow>
+          <boxGeometry args={[s * 0.5, s * 0.48, s * 0.43]} />
+          <meshStandardMaterial color="#514f4b" metalness={0.6} roughness={0.58} />
+        </mesh>
+        <mesh position={[0, s * 1.68, s * 0.24]}>
+          <boxGeometry args={[s * 0.34, s * 0.07, s * 0.035]} />
+          <meshStandardMaterial color="#bd4a38" emissive="#6f201b" emissiveIntensity={0.85} />
+        </mesh>
+        <mesh position={[-s * 0.57, s * 0.86, 0]} castShadow>
+          <cylinderGeometry args={[s * 0.34, s * 0.34, s * 0.18, 8]} />
+          <meshStandardMaterial color="#706c63" metalness={0.58} roughness={0.62} />
+        </mesh>
+        <mesh position={[s * 0.6, s * 0.8, 0]} rotation={[0, 0, -0.12]} castShadow>
+          <boxGeometry args={[s * 0.1, s * 1.3, s * 0.12]} />
+          <meshStandardMaterial color="#aaa79c" metalness={0.72} roughness={0.42} />
+        </mesh>
+      </>
+    );
+  }
+
+  if (c.kind === "ash_demon") {
+    return (
+      <>
+        <mesh position={[0, s * 0.92, 0]} castShadow>
+          <boxGeometry args={[s * 0.88, s * 1.08, s * 0.58]} />
+          <meshStandardMaterial color={color} roughness={0.88} />
+        </mesh>
+        <mesh position={[0, s * 1.66, s * 0.04]} castShadow>
+          <boxGeometry args={[s * 0.58, s * 0.5, s * 0.48]} />
+          <meshStandardMaterial color="#71382d" roughness={0.82} />
+        </mesh>
+        {[-1, 1].map((side) => (
+          <group key={side}>
+            <mesh position={[side * s * 0.32, s * 2.03, 0]} rotation={[0, 0, side * -0.34]}>
+              <coneGeometry args={[s * 0.12, s * 0.62, 5]} />
+              <meshStandardMaterial color="#332725" roughness={0.8} />
+            </mesh>
+            <mesh position={[side * s * 0.68, s * 1.08, -s * 0.15]} rotation={[0.05, 0, side * 0.38]} castShadow>
+              <boxGeometry args={[s * 0.72, s * 0.08, s * 0.82]} />
+              <meshStandardMaterial color="#352827" roughness={0.9} side={2} />
+            </mesh>
+          </group>
+        ))}
+        <mesh position={[0, s * 1.65, s * 0.3]}>
+          <boxGeometry args={[s * 0.28, s * 0.07, s * 0.04]} />
+          <meshStandardMaterial color="#ed7a43" emissive="#a23624" emissiveIntensity={1.1} />
+        </mesh>
+      </>
+    );
+  }
+
+  if (c.kind === "grave_lich") {
+    return (
+      <>
+        <pointLight position={[0, s * 1.55, 0]} color="#9d79ba" intensity={0.55} distance={3.5} />
+        <mesh position={[0, s * 0.9, 0]} castShadow>
+          <coneGeometry args={[s * 0.58, s * 1.72, 7]} />
+          <meshStandardMaterial color={color} roughness={0.82} />
+        </mesh>
+        <mesh position={[0, s * 1.72, 0]} castShadow>
+          <sphereGeometry args={[s * 0.3, 7, 5]} />
+          <meshStandardMaterial color="#b8b29f" roughness={0.86} />
+        </mesh>
+        {[-1, 0, 1].map((side) => (
+          <mesh key={side} position={[side * s * 0.19, s * (2.08 - Math.abs(side) * 0.08), 0]}>
+            <coneGeometry args={[s * 0.065, s * (0.38 - Math.abs(side) * 0.06), 4]} />
+            <meshStandardMaterial color="#c1a25c" metalness={0.56} roughness={0.52} />
+          </mesh>
+        ))}
+        <mesh position={[s * 0.62, s * 0.98, 0]} castShadow>
+          <cylinderGeometry args={[s * 0.045, s * 0.065, s * 1.95, 6]} />
+          <meshStandardMaterial color="#312738" roughness={0.88} />
+        </mesh>
+        <mesh position={[s * 0.62, s * 1.98, 0]}>
+          <sphereGeometry args={[s * 0.16, 8, 6]} />
+          <meshStandardMaterial color="#b994d0" emissive="#73518c" emissiveIntensity={1.2} />
+        </mesh>
+      </>
+    );
+  }
+
   if (isWolfBody) {
     return (
       <>
@@ -531,6 +769,12 @@ function Beast({ c }: { c: Creature }) {
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.06, 0]}>
           <ringGeometry args={[0.22, 0.3, 12]} />
           <meshBasicMaterial color="#c9a36a" transparent opacity={0.7} />
+        </mesh>
+      )}
+      {DARK_MONSTER_KINDS.has(c.kind) && (
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.045, 0]}>
+          <ringGeometry args={[SIZE[c.kind] * 0.5, SIZE[c.kind] * 0.68, 16]} />
+          <meshBasicMaterial color="#9f4938" transparent opacity={0.42} />
         </mesh>
       )}
       {c.kind === "wight" && (
