@@ -105,7 +105,7 @@ export function LookGump({ onDone }: { onDone: (choice: LookChoice) => void }) {
         {/* the mirror — always watching, and it answers to fingers */}
         <div className="order-first flex w-full shrink-0 flex-col sm:order-none sm:h-auto sm:w-56">
           <div
-            className="h-48 min-h-0 rounded-sm border sm:h-auto sm:flex-1"
+            className="h-48 min-h-0 shrink-0 rounded-sm border sm:h-80"
             style={{ borderColor: "#2e241c", background: "#181410" }}
           >
             <LookPreview look={preview} parts={wornParts} />

@@ -1,4 +1,6 @@
+import { AuthoredCharacterGeometry, AuthoredCharacterFace, AuthoredCharacterTunic } from "./authored-character.tsx";
 import { Html } from "@react-three/drei";
+import { playerVisualYaw } from "./character-facing";
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import { Quaternion, type Group, type Mesh, type MeshBasicMaterial, type PointLight } from "three";
@@ -50,38 +52,38 @@ const WEAR_HEX: Partial<Record<ItemId, string>> = {
 
 // Hair vocabulary — crop alone is the vale's classic cap (bit-for-bit parity
 // when no look is stored); the rest are the looking glass's offerings.
-function HairMeshes({ look, ghost }: { look: ResolvedLook; ghost: boolean }) {
+function HairMeshes({ look, ghost, authored = false }: { look: ResolvedLook; ghost: boolean; authored?: boolean }) {
   const c = look.hairColor;
   if (look.hairStyle === "bald") return null;
   return (
     <group>
       <mesh position={[0, HAIR.cap.y, 0]} castShadow={!ghost}>
-        <boxGeometry args={[...HAIR.cap.size]} />
+        <AuthoredCharacterGeometry part="hair_cap" size={HAIR.cap.size} authored={authored} />
         <Mat color={c} ghost={ghost} />
       </mesh>
       {look.hairStyle === "shag" && (
         <>
           {[-HAIR.shagSide.x, HAIR.shagSide.x].map((x) => (
             <mesh key={x} position={[x, HAIR.shagSide.y, 0]} castShadow={!ghost}>
-              <boxGeometry args={[...HAIR.shagSide.size]} />
+              <AuthoredCharacterGeometry part="hair_shagSide" size={HAIR.shagSide.size} authored={authored} />
               <Mat color={c} ghost={ghost} />
             </mesh>
           ))}
           <mesh position={[0, HAIR.shagFront.y, HAIR.shagFront.z]} castShadow={!ghost}>
-            <boxGeometry args={[...HAIR.shagFront.size]} />
+            <AuthoredCharacterGeometry part="hair_shagFront" size={HAIR.shagFront.size} authored={authored} />
             <Mat color={c} ghost={ghost} />
           </mesh>
         </>
       )}
       {look.hairStyle === "tail" && (
         <mesh position={[0, HAIR.tail.y, HAIR.tail.z]} castShadow={!ghost}>
-          <boxGeometry args={[...HAIR.tail.size]} />
+          <AuthoredCharacterGeometry part="hair_tail" size={HAIR.tail.size} authored={authored} />
           <Mat color={c} ghost={ghost} />
         </mesh>
       )}
       {look.hairStyle === "long" && (
         <mesh position={[0, HAIR.long.y, HAIR.long.z]} castShadow={!ghost}>
-          <boxGeometry args={[...HAIR.long.size]} />
+          <AuthoredCharacterGeometry part="hair_long" size={HAIR.long.size} authored={authored} />
           <Mat color={c} ghost={ghost} />
         </mesh>
       )}
@@ -952,7 +954,7 @@ function Figure({
         you.z,
       );
       root.current.rotation.x = healPose.lean + corpseWorkPose.lean + (constructing ? buildPose.lean : 0) + (companionNear ? companionWorkPose.bow * 0.6 : 0) + (npcNear ? npcPose.bow : 0) + (extracting ? extractPose.swing * 0.12 : 0) + (taming ? tamePose.bow : 0) + (crafting ? craftPose.work * 0.14 : 0) + (gathering ? gatherPose.work * 0.2 : 0) + (personal ? personalPose.lean : 0);
-      root.current.rotation.y = you.facing;
+      root.current.rotation.y = playerVisualYaw(you.facing);
     }
     const it = w.player.intent;
     const idle = Boolean(you && !you.ghost && !you.path.length);
@@ -1100,40 +1102,41 @@ function Figure({
   const hover = ghost ? 0.32 : 0;
 
   return (
-    <group ref={root} position={[p.x, groundAt(p.x, p.z, p.story) + hover, p.z]} rotation={[0, p.facing, 0]}>
+    <group name={p.isPlayer ? "emberhall-player-figure" : "emberhall-npc-figure"} ref={root} position={[p.x, groundAt(p.x, p.z, p.story) + hover, p.z]} rotation={[0, p.isPlayer ? playerVisualYaw(p.facing) : p.facing, 0]}>
       {cloak && (
         <mesh position={[0, FIGURE.cloak.y + bob, FIGURE.cloak.z]} castShadow={!ghost}>
-          <boxGeometry args={[...FIGURE.cloak.size]} />
+          <AuthoredCharacterGeometry part="cloak" size={FIGURE.cloak.size} authored={p.isPlayer} />
           <Mat color={cloakColor} ghost={ghost} />
         </mesh>
       )}
       <mesh position={[-FIGURE.leg.x, FIGURE.leg.y + bob, 0]} castShadow={!ghost}>
-        <boxGeometry args={[...FIGURE.leg.size]} />
+        <AuthoredCharacterGeometry part="leg" size={FIGURE.leg.size} authored={p.isPlayer} />
         <Mat color={legs} ghost={ghost} />
       </mesh>
       <mesh position={[FIGURE.leg.x, FIGURE.leg.y + bob, 0]} castShadow={!ghost}>
-        <boxGeometry args={[...FIGURE.leg.size]} />
+        <AuthoredCharacterGeometry part="leg" size={FIGURE.leg.size} authored={p.isPlayer} />
         <Mat color={legs} ghost={ghost} />
       </mesh>
       <mesh position={[-FIGURE.foot.x, FIGURE.foot.y + bob, FIGURE.foot.z]} castShadow={!ghost}>
-        <boxGeometry args={[...FIGURE.foot.size]} />
+        <AuthoredCharacterGeometry part="foot" size={FIGURE.foot.size} authored={p.isPlayer} />
         <Mat color={feet} ghost={ghost} />
       </mesh>
       <mesh position={[FIGURE.foot.x, FIGURE.foot.y + bob, FIGURE.foot.z]} castShadow={!ghost}>
-        <boxGeometry args={[...FIGURE.foot.size]} />
+        <AuthoredCharacterGeometry part="foot" size={FIGURE.foot.size} authored={p.isPlayer} />
         <Mat color={feet} ghost={ghost} />
       </mesh>
       <mesh position={[0, FIGURE.torso.y + bob, 0]} castShadow={!ghost}>
-        <boxGeometry args={[...FIGURE.torso.size]} />
+        <AuthoredCharacterGeometry part="torso" size={FIGURE.torso.size} authored={p.isPlayer} />
         <Mat color={chest} ghost={ghost} />
+        <AuthoredCharacterTunic color={chest} authored={p.isPlayer} ghost={ghost} />
       </mesh>
       <group ref={left} position={[-FIGURE.arm.x, FIGURE.arm.y + bob, 0]} rotation={[walkSwing, 0, 0.12]}>
         <mesh position={[0, FIGURE.armMesh.y, 0]} castShadow={!ghost}>
-          <boxGeometry args={[...FIGURE.arm.size]} />
+          <AuthoredCharacterGeometry part="arm" size={FIGURE.arm.size} authored={p.isPlayer} />
           <Mat color={chest} ghost={ghost} />
         </mesh>
         <mesh position={[0, FIGURE.hand.y, 0]} castShadow={!ghost}>
-          <boxGeometry args={[...FIGURE.hand.size]} />
+          <AuthoredCharacterGeometry part="hand" size={FIGURE.hand.size} authored={p.isPlayer} />
           <Mat color={hands} ghost={ghost} />
         </mesh>
         {p.isPlayer && !ghost && <PalmFlame />}
@@ -1141,11 +1144,11 @@ function Figure({
       </group>
       <group ref={right} position={[FIGURE.arm.x, FIGURE.arm.y + bob, 0]} rotation={[-walkSwing, 0, -0.12]}>
         <mesh position={[0, FIGURE.armMesh.y, 0]} castShadow={!ghost}>
-          <boxGeometry args={[...FIGURE.arm.size]} />
+          <AuthoredCharacterGeometry part="arm" size={FIGURE.arm.size} authored={p.isPlayer} />
           <Mat color={chest} ghost={ghost} />
         </mesh>
         <mesh position={[0, FIGURE.hand.y, 0]} castShadow={!ghost}>
-          <boxGeometry args={[...FIGURE.hand.size]} />
+          <AuthoredCharacterGeometry part="hand" size={FIGURE.hand.size} authored={p.isPlayer} />
           <Mat color={hands} ghost={ghost} />
         </mesh>
         <group ref={held}>{p.isPlayer && wear.main && <Held id={wear.main} ghost={ghost} />}</group>
@@ -1155,28 +1158,29 @@ function Figure({
         {p.isPlayer && !ghost && <PalmFlame />}
       </group>
       <mesh position={[0, FIGURE.head.y + bob, 0]} castShadow={!ghost}>
-        <boxGeometry args={[...FIGURE.head.size]} />
+        <AuthoredCharacterGeometry part="head" size={FIGURE.head.size} authored={p.isPlayer} />
         <Mat color={look.skin} ghost={ghost} />
+        <AuthoredCharacterFace skin={look.skin} authored={p.isPlayer} ghost={ghost} />
       </mesh>
       {!hood && (
         <group position={[0, bob, 0]}>
-          <HairMeshes look={look} ghost={ghost} />
+          <HairMeshes look={look} ghost={ghost} authored={p.isPlayer} />
         </group>
       )}
       {hood === "helm" || hood === "cap" ? (
         <mesh position={[0, FIGURE.helm.y + bob, 0]} castShadow={!ghost}>
-          <boxGeometry args={[...FIGURE.helm.size]} />
+          <AuthoredCharacterGeometry part="helm" size={FIGURE.helm.size} authored={p.isPlayer} />
           <Mat color={hoodColor} ghost={ghost} />
         </mesh>
       ) : hood ? (
         <mesh position={[0, FIGURE.hood.y + bob, FIGURE.hood.z]} castShadow={!ghost}>
-          <boxGeometry args={[...FIGURE.hood.size]} />
+          <AuthoredCharacterGeometry part="hood" size={FIGURE.hood.size} authored={p.isPlayer} />
           <Mat color={hoodColor} ghost={ghost} />
         </mesh>
       ) : null}
       {p.isPlayer && !ghost && (
         <mesh position={[0, FIGURE.belt.y + bob, FIGURE.belt.z]} castShadow>
-          <boxGeometry args={[...FIGURE.belt.size]} />
+          <AuthoredCharacterGeometry part="belt" size={FIGURE.belt.size} authored={p.isPlayer} />
           <meshStandardMaterial color="#c9a36a" roughness={0.7} />
         </mesh>
       )}

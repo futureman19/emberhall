@@ -32,6 +32,8 @@ import { getChips, getCombatFx, getHealingFx, getTamingFx } from "@/game/player"
 import { useGame } from "@/game/store";
 import { hoverAt, leftAt, liftAt } from "@/game/world-pointer";
 import { Buildings } from "./building-meshes";
+import { LanternwoodDressing } from "./lanternwood-dressing";
+import { OakStumps } from "./oak-stumps";
 import { Crops } from "./crop-meshes";
 import { Fauna } from "./fauna-meshes";
 import { Gates } from "./gate-meshes";
@@ -1855,6 +1857,8 @@ export function WorldScene() {
       <Horizon treeReduction={graphics.horizonTreeReduction} />
       <Terrain />
       <Buildings />
+      <LanternwoodDressing />
+      <OakStumps />
       <Crops />
       <People />
       <Fauna />

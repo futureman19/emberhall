@@ -1,3 +1,4 @@
+import { AuthoredCharacterGeometry, AuthoredCharacterFace, AuthoredCharacterTunic } from "./authored-character.tsx";
 // The looking-glass preview — the vale's own chibi figure, drawn live in 3D
 // from the same proportions as people-meshes.tsx (FIGURE in look/figure.ts).
 // The mirror answers to fingers: drag to turn them, and when left alone it
@@ -24,32 +25,32 @@ function Hair({ look }: { look: ResolvedLook }) {
   return (
     <group>
       <mesh position={[0, HAIR.cap.y, 0]}>
-        <boxGeometry args={[...HAIR.cap.size]} />
+        <AuthoredCharacterGeometry part="hair_cap" size={HAIR.cap.size} />
         <Mat color={c} />
       </mesh>
       {look.hairStyle === "shag" && (
         <>
           {[-HAIR.shagSide.x, HAIR.shagSide.x].map((x) => (
             <mesh key={x} position={[x, HAIR.shagSide.y, 0]}>
-              <boxGeometry args={[...HAIR.shagSide.size]} />
+              <AuthoredCharacterGeometry part="hair_shagSide" size={HAIR.shagSide.size} />
               <Mat color={c} />
             </mesh>
           ))}
           <mesh position={[0, HAIR.shagFront.y, HAIR.shagFront.z]}>
-            <boxGeometry args={[...HAIR.shagFront.size]} />
+            <AuthoredCharacterGeometry part="hair_shagFront" size={HAIR.shagFront.size} />
             <Mat color={c} />
           </mesh>
         </>
       )}
       {look.hairStyle === "tail" && (
         <mesh position={[0, HAIR.tail.y, HAIR.tail.z]}>
-          <boxGeometry args={[...HAIR.tail.size]} />
+          <AuthoredCharacterGeometry part="hair_tail" size={HAIR.tail.size} />
           <Mat color={c} />
         </mesh>
       )}
       {look.hairStyle === "long" && (
         <mesh position={[0, HAIR.long.y, HAIR.long.z]}>
-          <boxGeometry args={[...HAIR.long.size]} />
+          <AuthoredCharacterGeometry part="hair_long" size={HAIR.long.size} />
           <Mat color={c} />
         </mesh>
       )}
@@ -82,40 +83,42 @@ function Figure({ look, parts = [] }: { look: ResolvedLook; parts?: VoxelPartV1[
   return (
     <group ref={g}>
       <mesh position={[-FIGURE.leg.x, FIGURE.leg.y, 0]}>
-        <boxGeometry args={[...FIGURE.leg.size]} />
+        <AuthoredCharacterGeometry part="leg" size={FIGURE.leg.size} />
         <Mat color={LEGS} />
       </mesh>
       <mesh position={[FIGURE.leg.x, FIGURE.leg.y, 0]}>
-        <boxGeometry args={[...FIGURE.leg.size]} />
+        <AuthoredCharacterGeometry part="leg" size={FIGURE.leg.size} />
         <Mat color={LEGS} />
       </mesh>
       <mesh position={[-FIGURE.foot.x, FIGURE.foot.y, FIGURE.foot.z]}>
-        <boxGeometry args={[...FIGURE.foot.size]} />
+        <AuthoredCharacterGeometry part="foot" size={FIGURE.foot.size} />
         <Mat color={FEET} />
       </mesh>
       <mesh position={[FIGURE.foot.x, FIGURE.foot.y, FIGURE.foot.z]}>
-        <boxGeometry args={[...FIGURE.foot.size]} />
+        <AuthoredCharacterGeometry part="foot" size={FIGURE.foot.size} />
         <Mat color={FEET} />
       </mesh>
       <mesh position={[0, FIGURE.torso.y, 0]}>
-        <boxGeometry args={[...FIGURE.torso.size]} />
+        <AuthoredCharacterGeometry part="torso" size={FIGURE.torso.size} />
         <Mat color={look.garb} />
+        <AuthoredCharacterTunic color={look.garb} />
       </mesh>
       {[-FIGURE.arm.x, FIGURE.arm.x].map((x) => (
         <group key={x} position={[x, FIGURE.arm.y, 0]} rotation={[0, 0, x < 0 ? 0.12 : -0.12]}>
           <mesh position={[0, FIGURE.armMesh.y, 0]}>
-            <boxGeometry args={[...FIGURE.arm.size]} />
+            <AuthoredCharacterGeometry part="arm" size={FIGURE.arm.size} />
             <Mat color={look.garb} />
           </mesh>
           <mesh position={[0, FIGURE.hand.y, 0]}>
-            <boxGeometry args={[...FIGURE.hand.size]} />
+            <AuthoredCharacterGeometry part="hand" size={FIGURE.hand.size} />
             <Mat color={look.skin} />
           </mesh>
         </group>
       ))}
       <mesh position={[0, FIGURE.head.y, 0]}>
-        <boxGeometry args={[...FIGURE.head.size]} />
+        <AuthoredCharacterGeometry part="head" size={FIGURE.head.size} />
         <Mat color={look.skin} />
+        <AuthoredCharacterFace skin={look.skin} />
       </mesh>
       <Hair look={look} />
       <PartMeshes parts={parts} />
@@ -160,9 +163,9 @@ export function LookPreview({ look, parts = [] }: { look: ResolvedLook; parts?: 
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
   return (
-    <Canvas camera={{ position: [1.5, 1.1, 2.7], fov: 38 }} onCreated={({ camera }) => camera.lookAt(0, FIGURE.torso.y, 0)}>
-      <hemisphereLight args={["#efe3c4", "#3a342e", 0.9]} />
-      <directionalLight position={[3, 5, 4]} intensity={1.1} color="#f2e4c8" />
+    <Canvas camera={{ position: [1.5, 1.1, -2.7], fov: 38 }} onCreated={({ camera }) => camera.lookAt(0, FIGURE.torso.y, 0)}>
+      <hemisphereLight args={["#efe3c4", "#3a342e", 1.25]} />
+      <directionalLight position={[3, 5, -4]} intensity={1.1} color="#f2e4c8" />
       <Figure look={look} parts={parts} />
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.005, 0]}>
         <circleGeometry args={[0.85, 24]} />

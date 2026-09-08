@@ -10,6 +10,10 @@ import { useGame } from "@/game/store";
 import { hoverAt, leftAt, liftAt } from "@/game/world-pointer";
 import type { Building, BuildingKind } from "@/game/types";
 
+import { LANTERNWOOD_BLOCKS, lanternwoodInfluence } from "./lanternwood-art";
+import { LanternwoodBuilding } from "./lanternwood-dressing";
+import { useArtistKit, usesBlenderHall } from "./lanternwood-kit";
+
 const B = 0.5;
 /** Default cube scale. 1.04 fuses faces — only the hut preview uses it. */
 const GAP = 0.96;
@@ -883,6 +887,7 @@ function BlockLayer({
   emissive,
   emissiveIntensity,
   ghost,
+  pickOnly = false,
   scale,
 }: {
   items: THREE.Vector3[];
@@ -893,6 +898,7 @@ function BlockLayer({
   emissive?: string;
   emissiveIntensity?: number;
   ghost?: boolean;
+  pickOnly?: boolean;
   scale: number;
 }) {
   const ref = useRef<THREE.InstancedMesh>(null);
@@ -915,8 +921,8 @@ function BlockLayer({
     <instancedMesh
       ref={ref}
       args={[undefined, undefined, items.length]}
-      castShadow={!ghost}
-      receiveShadow={!ghost}
+      castShadow={!ghost && !pickOnly}
+      receiveShadow={!ghost && !pickOnly}
       renderOrder={ghost ? 2 : 0}
     >
       <boxGeometry args={[scale, scale, scale]} />
@@ -928,14 +934,21 @@ function BlockLayer({
         emissiveIntensity={ghost ? 0 : (emissiveIntensity ?? 0)}
         transparent={fade < 1}
         opacity={fade}
-        depthWrite={fade >= 1}
+        colorWrite={!pickOnly}
+        depthWrite={!pickOnly && fade >= 1}
       />
     </instancedMesh>
   );
 }
 
 function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
+  const authored = useArtistKit(usesBlenderHall(b.kind, b.tx, b.ty) ? "hall" : null);
+  const exterior = Boolean(authored && !inside);
   const spec = SPECS[b.kind];
+  const palette = useMemo(() => {
+    const influence = lanternwoodInfluence(b.tx, b.ty);
+    return Object.fromEntries(KINDS.map(k => [k, { ...PALETTE[k], color: influence && LANTERNWOOD_BLOCKS[k] ? `#${new THREE.Color(PALETTE[k].color).lerp(new THREE.Color(LANTERNWOOD_BLOCKS[k]), influence).getHexString()}` : PALETTE[k].color }])) as typeof PALETTE;
+  }, [b.tx, b.ty]);
   const y0 = groundY(getWorld(), b.tx, b.ty);
   const story = getWorld().people.find((p) => p.isPlayer)?.story ?? 0;
   const layers = useMemo(() => {
@@ -1025,11 +1038,14 @@ function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
         liftAt(Math.round(e.point.x), Math.round(e.point.z));
       }}
     >
+      {exterior && authored && <primitive name="blender-hall-exterior" object={authored} position={[b.tx, y0, b.ty]} dispose={null} />}
+      {!exterior && <LanternwoodBuilding kind={b.kind} x={b.tx} z={b.ty} y={y0} inside={inside} />}
       {KINDS.map((k) => (
         <BlockLayer
           key={`${k}-s`}
           items={layers.solid[k]}
-          {...PALETTE[k]}
+          pickOnly={exterior}
+          {...palette[k]}
           {...(spec.fuse && k === "glass"
             ? { color: "#e8b96a", opacity: 0.92, emissive: "#e8b96a", emissiveIntensity: 0.62 }
             : spec.fuse && k === "gold"
@@ -1043,7 +1059,8 @@ function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
           <BlockLayer
             key={`${k}-c`}
             items={layers.cut[k]}
-            {...PALETTE[k]}
+            pickOnly={exterior}
+            {...palette[k]}
             {...(spec.fuse && k === "glass"
               ? { color: "#e8b96a", opacity: 0.92, emissive: "#e8b96a", emissiveIntensity: 0.62 }
               : spec.fuse && k === "gold"

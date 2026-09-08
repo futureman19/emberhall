@@ -7,6 +7,7 @@ import { DEV_DAYLIGHT } from "@/game/debug";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { useGame } from "@/game/store";
+import { lanternwoodInfluence } from "./lanternwood-art";
 import { playSfx } from "@/game/vale-sfx";
 import { rainRate } from "@/game/weather";
 import { skyFlash, skyTone, sunColorFor, sunDirFor, sunHeight } from "./sky-math";
@@ -81,10 +82,13 @@ export function Lighting({ shadows }: { shadows: boolean }) {
       pit ? 0.1 : night ? 0.16 : dusk ? 0.46 : climate === "taiga" ? 0.42 : climate === "jungle" ? 0.52 : 0.58;
     const dirI =
       pit ? 0.12 : night ? 0.22 : dusk ? 1.21 : climate === "taiga" ? 1.35 : climate === "jungle" ? 1.7 : 1.94;
+    const local = lanternwoodInfluence(px, pz);
+    const woodlandFill = !pit && w.hour >= 7 && w.hour <= 18 ? local : 0;
+    if (dir.current) dir.current.shadow.radius = 1 + local * 1.5;
     const cloudDim = 1 - cloud * 0.55;
-    if (amb.current) amb.current.intensity = ambI * (1 - cloud * 0.22) + flash * 0.9;
+    if (amb.current) amb.current.intensity = ambI * (1 - cloud * 0.22) + flash * 0.9 + woodlandFill * 0.24;
     if (hemi.current)
-      hemi.current.intensity = pit ? 0.04 : night ? 0.08 : dusk ? 0.23 : climate === "taiga" ? 0.16 : 0.29;
+      hemi.current.intensity = (pit ? 0.04 : night ? 0.08 : dusk ? 0.23 : climate === "taiga" ? 0.16 : 0.29) + woodlandFill * 0.15;
 
     const lx = px + sunDir.x * 48;
     const ly = py + sunDir.y * 48;

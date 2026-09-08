@@ -5,6 +5,8 @@ import { useGame } from "@/game/store";
 import { hitAt, hoverAt, leftAt, liftAt } from "@/game/world-pointer";
 import { RESOURCE_CATALOG } from "@/game/resources/catalog";
 import type { CropPlot, Sapling } from "@/game/types";
+import { useOakGeometry } from "./oak-renderer-data";
+import { usesAuthoredOak } from "./oak-renderer-policy";
 
 function Plant({ plot }: { plot: CropPlot }) {
   const y = groundY(getWorld(), plot.tx, plot.ty);
@@ -128,6 +130,8 @@ function TillGhost() {
 }
 
 function YoungTree({ sapling }: { sapling: Sapling }) {
+  const oak = useOakGeometry();
+  const authored = usesAuthoredOak(sapling.resourceId ?? "oak", sapling.tx, sapling.ty, Boolean(oak?.sapling));
   const y = groundY(getWorld(), sapling.tx, sapling.ty);
   const intent = useGame((s) => s.snap.player.intent);
   const marked = intent.kind === "forest" && intent.tx === sapling.tx && intent.ty === sapling.ty;
@@ -148,6 +152,9 @@ function YoungTree({ sapling }: { sapling: Sapling }) {
         if (e.button === 0) liftAt(sapling.tx, sapling.ty);
       }}
     >
+      {authored && oak?.sapling ? <mesh name="authored-oak-sapling" geometry={oak.sapling} scale={(h + r * 0.9) / 1.2} castShadow dispose={null}>
+        <meshStandardMaterial color={marked ? "#c9a36a" : "#ffffff"} vertexColors={Boolean(oak.sapling.getAttribute("color"))} roughness={0.9} />
+      </mesh> : <>
       <mesh position={[0, h * 0.45, 0]} castShadow>
         <boxGeometry args={[0.08, h, 0.08]} />
         <meshStandardMaterial color={marked ? "#c9a36a" : "#6a4a32"} roughness={0.9} />
@@ -156,6 +163,7 @@ function YoungTree({ sapling }: { sapling: Sapling }) {
         <boxGeometry args={[r * 2, r, r * 2]} />
         <meshStandardMaterial color={leaf} roughness={0.82} />
       </mesh>
+      </>}
     </group>
   );
 }

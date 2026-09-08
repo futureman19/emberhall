@@ -442,7 +442,10 @@ test("terrain keeps selection assignment ordering, animations, and instanced bat
   ordered("rockAt.current[ri] = { tx, ty };", "ri++;");
   assert.equal(source.match(/getVisibleResourceVisual\(/g)?.length, 2, "tree and rock scans use the visible-instance lookup");
   assert.equal(source.match(/resourceVisuals\.get\(/g)?.length ?? 0, 0, "work scan never calls the strict resolver cache directly");
-  assert.equal(source.match(/<instancedMesh\b/g)?.length, 10, "Task 6 adds no instanced batches or draw calls");
+  // Original batches, non-pickable lobes, and four same-index oak replacements.
+  assert.equal(source.match(/<instancedMesh\b/g)?.length, 15, "Oak adds exactly four mapped solid/faded batches");
+  assert.ok(source.includes('name="lanternwood-soft-canopies"'));
+  assert.ok(source.includes('frustumCulled={false} raycast={noArtRaycast}'));
   assert.match(source, /const wobble = strike \? Math\.sin\(w\.player\.workT \* 28\)/);
   assert.match(source, /Math\.sin\(w\.player\.workT \* 32\)/);
   assert.match(source, /marked \? COL_MARK_WOOD/);
