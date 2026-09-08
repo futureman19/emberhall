@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { FAUNA_META, ITEM_META, countTag, hasTag, tagConsumeOrder } from "./catalog.ts";
 import { commandCraft, commandCraftBatch, maxCraftable, recipeById } from "./craft.ts";
-import { seedFauna } from "./ecology.ts";
+import { seedFauna, spawn } from "./ecology.ts";
 import { commandChop, commandFeed, commandSkin, you } from "./player.ts";
 import { mulberry32 } from "./rng.ts";
 import { createWorld } from "./world.ts";
@@ -143,10 +143,10 @@ test("bladed script - dressing a carcass takes any blade", () => {
 
 test("diets - beasts eat by tag: hares want greens, wolves want meat", () => {
   const w = createWorld();
-  seedFauna(w, mulberry32(3));
-  const hare = w.fauna.find((c) => c.kind === "hare")!;
-  const wolf = w.fauna.find((c) => c.kind === "wolf")!;
-  assert.ok(hare && wolf, "the vale seeds both kinds");
+  const player = you(w)!;
+  const hare = spawn(w, "hare", player.x + 1, player.z);
+  const wolf = spawn(w, "wolf", player.x + 2, player.z);
+  w.fauna = [hare, wolf];
   hare.ownerId = w.player.id;
   wolf.ownerId = w.player.id;
   givePack(w, { meat: 1 });

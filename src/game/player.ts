@@ -76,6 +76,10 @@ const TAME_RETALIATE: ReadonlySet<FaunaKind> = new Set([
   "tideclaw_crab",
   "cavern_bat",
   "cinder_drake",
+  "whiteback_elk",
+  "highland_aurochs",
+  "river_otter",
+  "brine_seal",
 ]);
 
 const RETALIATE_KINDS: ReadonlySet<FaunaKind> = new Set([
@@ -107,6 +111,10 @@ const RETALIATE_KINDS: ReadonlySet<FaunaKind> = new Set([
   "ossuary_knight",
   "ash_demon",
   "grave_lich",
+  "whiteback_elk",
+  "highland_aurochs",
+  "river_otter",
+  "brine_seal",
 ]);
 
 export function resurrect(world: World, at?: { x: number; z: number }) {

@@ -261,6 +261,7 @@ test("invisibility - the pack loses your scent until your hand betrays it", () =
   for (let i = 0; i < 3; i++) tickEcology(world, 0.016);
   assert.notEqual(wolf.task, "fight", "the hunters cannot smell the unseen");
   // Your hand betrays the shimmer — the swing reveals you.
+  standBy(world, wolf, -1); // Test revelation, not a seed-dependent route across the trees.
   Math.random = () => 0.5;
   try {
     assert.equal(commandHunt(world, wolf.id), null);

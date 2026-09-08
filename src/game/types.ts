@@ -255,7 +255,15 @@ export type FaunaKind =
   | "deepmaw_basilisk"
   | "ossuary_knight"
   | "ash_demon"
-  | "grave_lich";
+  | "grave_lich"
+  | "redtail_squirrel"
+  | "whiteback_elk"
+  | "highland_aurochs"
+  | "reed_heron"
+  | "river_otter"
+  | "brine_seal"
+  | "cave_mole"
+  | "dusk_owl";
 export type BuildingKind =
   | "hall"
   | "dormitory"

@@ -23,6 +23,14 @@ const EXPANSION_KINDS = [
   "ossuary_knight",
   "ash_demon",
   "grave_lich",
+  "redtail_squirrel",
+  "whiteback_elk",
+  "highland_aurochs",
+  "reed_heron",
+  "river_otter",
+  "brine_seal",
+  "cave_mole",
+  "dusk_owl",
 ] as const satisfies readonly FaunaKind[];
 
 test("continued worlds gain every missing expansion kind exactly once", () => {

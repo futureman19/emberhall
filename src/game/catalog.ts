@@ -215,6 +215,15 @@ export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp
   ossuary_knight: { label: "Ossuary Knight", tameDiff: 99, hp: 76, dmg: 17, eats: ["meat"], hasCorpse: false, loot: [{ item: "sword", chance: 0.2, min: 1, max: 1 }, { item: "shield", chance: 0.18, min: 1, max: 1 }, { item: "helm", chance: 0.14, min: 1, max: 1 }, { item: "mail", chance: 0.1, min: 1, max: 1 }, { item: "relic", chance: 0.08, min: 1, max: 1 }], gold: { chance: 0.65, min: 7, max: 16 } },
   ash_demon: { label: "Ash Demon", tameDiff: 99, hp: 88, dmg: 19, eats: ["meat"], hasCorpse: false, loot: [{ item: "ash", chance: 0.8, min: 1, max: 3 }, { item: "mandrake", chance: 0.3, min: 1, max: 2 }, { item: "ring", chance: 0.1, min: 1, max: 1 }, { item: "pendant", chance: 0.08, min: 1, max: 1 }], gold: { chance: 0.7, min: 9, max: 20 } },
   grave_lich: { label: "Grave Lich", tameDiff: 99, hp: 96, dmg: 21, eats: ["meat"], hasCorpse: false, loot: [{ item: "staff", chance: 0.22, min: 1, max: 1 }, { item: "ring", chance: 0.16, min: 1, max: 1 }, { item: "pendant", chance: 0.14, min: 1, max: 1 }, { item: "relic", chance: 0.12, min: 1, max: 1 }, { item: "nightshade", chance: 0.45, min: 1, max: 2 }, { item: "mandrake", chance: 0.35, min: 1, max: 2 }, { item: "pearl", chance: 0.3, min: 1, max: 1 }], gold: { chance: 0.85, min: 12, max: 28 } },
+
+  redtail_squirrel: { label: "Redtail Squirrel", tameDiff: 10, hp: 8, dmg: 1, eats: ["plant"], meat: 1, hide: 1, loot: [{ item: "acorn", chance: 0.3, min: 1, max: 2 }] },
+  whiteback_elk: { label: "Whiteback Elk", tameDiff: 48, hp: 42, dmg: 8, eats: ["plant"], meat: 3, hide: 2 },
+  highland_aurochs: { label: "Highland Aurochs", tameDiff: 65, hp: 64, dmg: 12, eats: ["plant"], meat: 4, hide: 3 },
+  reed_heron: { label: "Reed Heron", tameDiff: 26, hp: 18, dmg: 3, eats: ["meat"], meat: 1, hide: 1, loot: [{ item: "raw_fish", chance: 0.25, min: 1, max: 1 }] },
+  river_otter: { label: "River Otter", tameDiff: 34, hp: 24, dmg: 4, eats: ["meat"], meat: 1, hide: 1, loot: [{ item: "raw_fish", chance: 0.22, min: 1, max: 1 }] },
+  brine_seal: { label: "Brine Seal", tameDiff: 44, hp: 38, dmg: 6, eats: ["meat"], meat: 2, hide: 2, loot: [{ item: "raw_fish", chance: 0.3, min: 1, max: 1 }, { item: "pearl", chance: 0.08, min: 1, max: 1 }] },
+  cave_mole: { label: "Cave Mole", tameDiff: 18, hp: 14, dmg: 2, eats: ["plant", "meat"], meat: 1, hide: 1, loot: [{ item: "ore", chance: 0.2, min: 1, max: 1 }] },
+  dusk_owl: { label: "Dusk Owl", tameDiff: 40, hp: 20, dmg: 5, eats: ["meat"], meat: 1, hide: 1, loot: [{ item: "rabbit_foot", chance: 0.12, min: 1, max: 1 }] },
 };
 
 /** Tag lookup on the catalog — the single place items declare what they ARE. */
