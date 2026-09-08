@@ -1,5 +1,5 @@
 import { EH, inGreybarrow } from "./atlas.ts";
-import { FAUNA_META, hasTag, ITEM_META, armorOf, tagConsumeOrder } from "./catalog.ts";
+import { FAUNA_META, hasTag, ITEM_META, armorOf, POISON_PLAYER_HOURS, POISON_TICK_HOURS, tagConsumeOrder } from "./catalog.ts";
 import { harvestNow, plantNow, tillNow } from "./farm.ts";
 import { GHOSTWOOD_LUMBERJACK } from "./resources/catalog.ts";
 import { isGhostwoodTree, isTimberId, plantTreeNow } from "./forestry.ts";
@@ -745,10 +745,20 @@ function huntNow(world: World, p: Person) {
   }
   const slayerMul = mods.vs[c.kind];
   if (slayerMul) dmg = Math.floor(dmg * slayerMul);
+  if (world.hour < world.player.blessUntil) dmg = Math.floor(dmg * 1.25);
   const arm = armorOf(world.player.wear) + mods.armor;
   c.hp -= dmg;
   // Teeth only answer when they can reach you — an arrow from afar draws none.
-  if (RETALIATE_KINDS.has(c.kind) && (!bow || dist < 1.8)) p.hp = Math.max(0, p.hp - Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2)));
+  if (RETALIATE_KINDS.has(c.kind) && (!bow || dist < 1.8)) {
+    const ward = world.hour < world.player.blessUntil ? 2 : 0;
+    p.hp = Math.max(0, p.hp - Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2) - ward));
+    if (c.kind === "stonecrawl_spider" && c.hp > 0 && world.hour >= world.player.poisonUntil && Math.random() < 0.35) {
+      world.player.poisonUntil = world.hour + POISON_PLAYER_HOURS;
+      world.player.poisonTickAt = world.hour + POISON_TICK_HOURS;
+      playSfx("spell_poison", 0.35);
+      log(world, "The spider's fangs leave venom in the wound.");
+    }
+  }
   if (bow) {
     p.facing = Math.atan2(c.x - p.x, c.z - p.z);
     tryGain(world, "archery", ok, true);
@@ -942,6 +952,17 @@ export function tickPlayer(world: World, dt: number): string | null {
   if (inGreybarrow(Math.round(p.x), Math.round(p.z))) completeObjective(world, "barrow");
   if (world.player.notoriety === "criminal" && world.hour > world.player.criminalUntil) world.player.notoriety = "innocent";
   if (p.hp <= 0 && !p.ghost && !world.player.ghost) return dieAsGhost(world, p);
+  // Venom in the blood — spider fangs and worse. An Nox cuts it short.
+  if (world.player.poisonUntil > 0 && !p.ghost) {
+    if (world.hour >= world.player.poisonUntil) {
+      world.player.poisonUntil = 0;
+      world.player.poisonTickAt = 0;
+    } else if (world.hour >= world.player.poisonTickAt) {
+      p.hp = Math.max(0, p.hp - 1);
+      world.player.poisonTickAt = world.hour + POISON_TICK_HOURS;
+      if (p.hp <= 0 && !world.player.ghost) return dieAsGhost(world, p);
+    }
+  }
   if (p.ghost || world.player.ghost) {
     p.ghost = true;
     world.player.ghost = true;

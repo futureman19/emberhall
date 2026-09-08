@@ -293,6 +293,7 @@ function CastFxMesh() {
   const puff = useRef<THREE.Mesh>(null);
   const bolt = useRef<THREE.Mesh>(null);
   const trail = useRef<THREE.Mesh>(null);
+  const strike = useRef<THREE.Mesh>(null);
   const impact = useRef<THREE.Mesh>(null);
   const ring = useRef<THREE.Mesh>(null);
   const sigil = useRef<THREE.Group>(null);
@@ -306,11 +307,12 @@ function CastFxMesh() {
     const puffMesh = puff.current;
     const boltMesh = bolt.current;
     const trailMesh = trail.current;
+    const strikeMesh = strike.current;
     const impactMesh = impact.current;
     const ringMesh = ring.current;
     const sigilGroup = sigil.current;
     const anchor = wordsAnchor.current;
-    if (!g || !puffMesh || !boltMesh || !trailMesh || !impactMesh || !ringMesh || !sigilGroup || !anchor) return;
+    if (!g || !puffMesh || !boltMesh || !trailMesh || !strikeMesh || !impactMesh || !ringMesh || !sigilGroup || !anchor) return;
     const world = getWorld();
     const profile = fx ? spellFxProfile(fx.spell) : null;
     const age = fx ? (world.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
@@ -361,15 +363,18 @@ function CastFxMesh() {
     const ringMat = ringMesh.material as THREE.MeshBasicMaterial;
     const projectile = profile.kind === "dart" || profile.kind === "burst";
     const travel = profile.kind === "fold" || profile.kind === "surge";
+    const skyStrike = profile.kind === "strike";
+    strikeMesh.visible = skyStrike;
 
-    // Impact shards: dart bursts into force-splinters, fireball into embers.
+    // Impact shards: dart bursts into force-splinters, fireball into embers,
+    // lightning scatters charge the instant the bolt lands.
     for (let i = 0; i < SHARDS_MAX; i++) {
       const shard = shards.current[i];
       if (!shard) continue;
-      const shardLive = projectile && t > 0.5;
+      const shardLive = (projectile && t > 0.5) || (skyStrike && t > 0.12);
       shard.visible = shardLive;
       if (!shardLive) continue;
-      const s = impactShard(fx.spell, i, (t - 0.5) / 0.5);
+      const s = impactShard(fx.spell, i, (t - (skyStrike ? 0.12 : 0.5)) / (skyStrike ? 0.88 : 0.5));
       shard.position.set(fx.tx + s.dx, groundY(fx.tx, fx.tz) + s.dy, fx.tz + s.dz);
       shard.scale.setScalar(s.scale * (profile.kind === "burst" ? 1.7 : 1.05));
       shard.rotation.set(age * (3 + i * 0.4), i * 1.7 + age * 2.2, 0);
@@ -379,7 +384,7 @@ function CastFxMesh() {
     }
 
     // Self-target releases: ground ring + drifting motes in the spell's palette.
-    const selfFx = !projectile && !travel;
+    const selfFx = !projectile && !travel && !skyStrike;
     for (let i = 0; i < MOTES_MAX; i++) {
       const mote = motes.current[i];
       if (!mote) continue;
@@ -467,6 +472,27 @@ function CastFxMesh() {
       puffMesh.scale.setScalar(0.7 + t * 2.2);
       puffMat.color.set(profile.ring);
       puffMat.opacity = 0.7 * (1 - t);
+    } else if (skyStrike) {
+      // Lightning: a white column falls out of the sky onto the target —
+      // flicker-hot at first, then gone, leaving the impact ring and shards.
+      boltMesh.visible = false;
+      trailMesh.visible = false;
+      const gy = groundY(fx.tx, fx.tz);
+      const flicker = t < 0.22 ? 1 : Math.max(0, 1 - (t - 0.22) / 0.5);
+      strikeMesh.position.set(fx.tx, gy + 3.6, fx.tz);
+      strikeMesh.scale.set(1 + t * 0.6, 7.2, 1 + t * 0.6);
+      const strikeMat = strikeMesh.material as THREE.MeshBasicMaterial;
+      strikeMat.color.set(profile.core);
+      strikeMat.opacity = 0.95 * flicker;
+      impactMesh.visible = true;
+      impactMesh.position.set(fx.tx, gy + 0.08, fx.tz);
+      impactMesh.scale.setScalar(0.5 + t * 1.7);
+      impactMat.color.set(profile.ring);
+      impactMat.opacity = 0.85 * (1 - t);
+      puffMesh.position.set(fx.tx, gy + 0.75, fx.tz);
+      puffMesh.scale.setScalar(0.5 + t * 1.5);
+      puffMat.color.set(profile.accent);
+      puffMat.opacity = 0.65 * (1 - t);
     } else {
       trailMesh.visible = false;
       impactMesh.visible = false;
@@ -507,6 +533,17 @@ function CastFxMesh() {
           color="#4a8ee8"
           transparent
           opacity={0.4}
+          depthWrite={false}
+          depthTest={false}
+          toneMapped={false}
+        />
+      </mesh>
+      <mesh ref={strike} visible={false}>
+        <boxGeometry args={[0.09, 1, 0.09]} />
+        <meshBasicMaterial
+          color="#eaf4ff"
+          transparent
+          opacity={0.9}
           depthWrite={false}
           depthTest={false}
           toneMapped={false}

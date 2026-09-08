@@ -199,6 +199,10 @@ export type SpellId =
   | "magicarrow"
   | "teleport"
   | "fireball"
+  | "cure"
+  | "poison"
+  | "bless"
+  | "lightning"
   | "mark"
   | "recall";
 
@@ -356,6 +360,9 @@ export interface Creature {
   name?: string | null;
   /** One-time "looks restless" warning latch — feeding re-arms it. */
   warnedLoyal?: boolean;
+  /** Poison spell: venom works until this hour; next tick at poisonTickAt. */
+  poisonUntil?: number;
+  poisonTickAt?: number;
 }
 
 export interface GroundPile {
@@ -442,6 +449,11 @@ export interface PlayerState {
   intent: Intent;
   mana: number;
   nightSightUntil: number;
+  /** Spider venom (or worse): poison drains until this hour; next tick at poisonTickAt. */
+  poisonUntil: number;
+  poisonTickAt: number;
+  /** Rel Sanct: the battle boon holds until this hour. */
+  blessUntil: number;
   armedSpell: SpellId | null;
   marks: RecallMark[];
   gateCoolUntil: number;

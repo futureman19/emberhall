@@ -1,4 +1,4 @@
-"""Synthesize the seven unique spell SFX for Emberhall magery.
+"""Synthesize the unique spell SFX for Emberhall magery.
 
 Each spell gets a distinct voice (all original, synthesized here — CC0):
   nightsight  — airy moonlit shimmer, rising fifth glissandi
@@ -8,6 +8,10 @@ Each spell gets a distinct voice (all original, synthesized here — CC0):
   teleport    — phasey upward zip
   mark        — crystalline rune-etch ding
   recall      — deep gate swirl
+  cure        — clean water-drop chime, minor resolving to major
+  poison      — sizzling hiss with bubbling glugs
+  bless       — warm golden pad with rising fifth bells
+  lightning   — sharp crack + sizzling descent + thunder tail
 
 Writes MP3s into public/audio/sfx/spell-<id>.mp3 via ffmpeg.
 """
@@ -176,6 +180,62 @@ def sfx_recall() -> np.ndarray:
     return finish(sig * adsr(len(sig), 0.15, 0.4))
 
 
+def sfx_cure() -> np.ndarray:
+    total = 0.9
+    sig = np.zeros(int(SR * total))
+    # water drops: quick downward blips
+    for onset, f0 in [(0.0, 980.0), (0.16, 1240.0)]:
+        drop = gliss(f0, f0 * 0.45, 0.09) * np.exp(-t(0.09) / 0.028)
+        start = int(SR * onset)
+        sig[start : start + len(drop)] += drop * 0.8
+    # the resolve: A5 -> C#6 -> E6 bells, cool and clean
+    for i, f in enumerate([880.0, 1108.7, 1318.5]):
+        sig += bell(f, 0.7, 0.32, 0.28 + i * 0.09, total)
+    return finish(sig * 0.85)
+
+
+def sfx_poison() -> np.ndarray:
+    dur = 0.75
+    sizzle = sweep_noise(dur, 4600, 2300, 1.1, seed=17) * adsr(int(SR * dur), 0.01, 0.3)
+    sig = sizzle * 0.55
+    # bubbling glugs, descending
+    for onset, f0 in [(0.1, 320.0), (0.28, 260.0), (0.46, 200.0)]:
+        glug = gliss(f0, f0 * 0.5, 0.08, 1.4) * np.exp(-t(0.08) / 0.03)
+        start = int(SR * onset)
+        sig[start : start + len(glug)] += glug * 0.9
+    drone = gliss(160, 120, dur) * np.exp(-t(dur) / 0.5) * 0.18
+    return finish(sig + drone)
+
+
+def sfx_bless() -> np.ndarray:
+    total = 1.2
+    sig = np.zeros(int(SR * total))
+    # golden pad: D-A fifth breathing underneath
+    pad = (gliss(293.7, 293.7, total) + 0.6 * gliss(440.0, 440.0, total)) * adsr(int(SR * total), 0.4, 0.5)
+    sig += pad * 0.22
+    # rising fifth bells: D5 A5 D6
+    for i, f in enumerate([587.3, 880.0, 1174.7]):
+        sig += bell(f, 0.85, 0.4, 0.1 + i * 0.14, total)
+    shimmer = sweep_noise(total, 7000, 9000, 0.8, seed=19) * 0.05
+    return finish(sig * 0.8 + shimmer)
+
+
+def sfx_lightning() -> np.ndarray:
+    dur = 0.62
+    sig = np.zeros(int(SR * dur))
+    # the crack: a 25ms high snap
+    snap = sweep_noise(0.025, 7500, 9000, 0.6, seed=23)
+    sig[: len(snap)] += snap * 3.2
+    # the sizzling descent of the bolt itself
+    fry = sweep_noise(0.22, 8000, 900, 0.9, seed=29) * np.exp(-t(0.22) / 0.1)
+    sig[int(SR * 0.02) : int(SR * 0.02) + len(fry)] += fry * 1.1
+    # thunder tail
+    roll = gliss(78, 44, 0.42, 1.3) * np.exp(-t(0.42) / 0.22)
+    sig[int(SR * 0.16) : int(SR * 0.16) + len(roll)] += roll * 0.85
+    sig = np.tanh(sig * 1.1)
+    return finish(sig, peak=0.78)
+
+
 SPELLS = {
     "spell-nightsight": sfx_nightsight,
     "spell-heal": sfx_heal,
@@ -184,6 +244,10 @@ SPELLS = {
     "spell-teleport": sfx_teleport,
     "spell-mark": sfx_mark,
     "spell-recall": sfx_recall,
+    "spell-cure": sfx_cure,
+    "spell-poison": sfx_poison,
+    "spell-bless": sfx_bless,
+    "spell-lightning": sfx_lightning,
 }
 
 if __name__ == "__main__":

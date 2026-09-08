@@ -15,7 +15,7 @@ import { commandPick } from "./herbs.ts";
 import { commandPlantTree } from "./forestry.ts";
 import { getWorld, resetWorld, setWorld, snapshot } from "./live.ts";
 import type { LookChoice } from "./look/types.ts";
-import { commandCast, forgetMark, SPELL_META, hasBook } from "./magery.ts";
+import { commandCast, forgetMark, OFFENSIVE_SPELLS, SPELL_META, hasBook } from "./magery.ts";
 import type { CastTarget } from "./magery.ts";
 import {
   commandApproach,
@@ -446,7 +446,7 @@ export const useGame = create<GameUI>((set, get) => ({
   },
   hunt: (id) => {
     const w = getWorld();
-    if (w.player.armedSpell === "magicarrow" || w.player.armedSpell === "fireball") {
+    if (w.player.armedSpell && OFFENSIVE_SPELLS.has(w.player.armedSpell)) {
       const err = commandCast(w, w.player.armedSpell, { kind: "fauna", id });
       if (err) get().flash(err);
       else get().flash(SPELL_META[w.player.armedSpell].words);

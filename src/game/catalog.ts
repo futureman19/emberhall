@@ -2,6 +2,13 @@ import { createResourceInventory } from "./inventory/resources.ts";
 import type { BuildingKind, ClassId, FaunaKind, ItemId, LootDrop, LootGold, NpcRole, Notoriety, ResourceInventory, ResourceTag, SkillId, WearSlot } from "./types.ts";
 
 export const SECONDS_PER_HOUR = 36;
+/** Rel Sanct holds this many game hours. */
+export const BLESS_HOURS = 1;
+/** Venom works this long on a creature, biting each POISON_TICK_HOURS. */
+export const POISON_FAUNA_HOURS = 0.8;
+export const POISON_TICK_HOURS = 0.08;
+/** Spider venom in your own blood — longer, and it can finish you. */
+export const POISON_PLAYER_HOURS = 1;
 
 export function hourOfDay(hour: number) {
   return ((hour % 24) + 24) % 24;

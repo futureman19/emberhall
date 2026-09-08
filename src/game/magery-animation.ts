@@ -14,7 +14,8 @@ export type SpellFxKind =
   | "burst" // heavy projectile + ember impact (fireball)
   | "fold" // blink: collapse at source, bloom at destination (teleport)
   | "sigil" // rune circle drawn on the ground (mark)
-  | "surge"; // gate bloom at both ends (recall)
+  | "surge" // gate bloom at both ends (recall)
+  | "strike"; // bolt falls from the sky onto the target (lightning)
 
 export interface SpellFxProfile {
   kind: SpellFxKind;
@@ -84,6 +85,46 @@ const PROFILES: Record<SpellId, Readonly<SpellFxProfile>> = {
     duration: 0.9,
     motesCount: 10,
     glow: "#ff9a4a",
+  }),
+  cure: Object.freeze({
+    kind: "fountain",
+    core: "#e8fff4",
+    ring: "#5fae92",
+    motes: "#a8e8d0",
+    accent: "#ffffff",
+    duration: 1.0,
+    motesCount: 12,
+    glow: "#9fe8d0",
+  }),
+  poison: Object.freeze({
+    kind: "dart",
+    core: "#d8ff8a",
+    ring: "#6a9a2f",
+    motes: "#8ac03a",
+    accent: "#e2ff9a",
+    duration: 0.85,
+    motesCount: 9,
+    glow: "#9ac84a",
+  }),
+  bless: Object.freeze({
+    kind: "fountain",
+    core: "#fff2c9",
+    ring: "#d8a83a",
+    motes: "#ffd86a",
+    accent: "#ffffff",
+    duration: 1.05,
+    motesCount: 14,
+    glow: "#ffd86a",
+  }),
+  lightning: Object.freeze({
+    kind: "strike",
+    core: "#eaf4ff",
+    ring: "#6aa8ff",
+    motes: "#b8d8ff",
+    accent: "#ffffff",
+    duration: 0.5,
+    motesCount: 10,
+    glow: "#cfe4ff",
   }),
   mark: Object.freeze({
     kind: "sigil",

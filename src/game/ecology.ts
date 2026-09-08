@@ -1,6 +1,7 @@
 import { BARROW, MAP, PLACES, inGreybarrow } from "./atlas.ts";
-import { FAUNA_META, isNight } from "./catalog.ts";
+import { FAUNA_META, isNight, POISON_TICK_HOURS } from "./catalog.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
+import { spawnCorpsePile } from "./piles.ts";
 import { sheltering } from "./weather.ts";
 import { nid } from "./world.ts";
 import type { Creature, FaunaKind, World } from "./types.ts";
@@ -231,6 +232,24 @@ export function tickEcology(world: World, dt: number) {
         world.fauna = world.fauna.filter((x) => x.id !== c.id);
       }
       continue;
+    }
+    // Venom keeps its teeth — the Poison spell's damage-over-time.
+    if (c.poisonUntil && c.poisonUntil > 0) {
+      if (world.hour >= c.poisonUntil) {
+        c.poisonUntil = 0;
+        c.poisonTickAt = 0;
+      } else if (world.hour >= (c.poisonTickAt ?? 0)) {
+        c.hp -= 1;
+        c.poisonTickAt = world.hour + POISON_TICK_HOURS;
+        if (c.hp <= 0) {
+          c.hp = 0;
+          c.task = "dead";
+          c.path = [];
+          c.corpseUntil = world.hour + 8;
+          spawnCorpsePile(world, c);
+          continue;
+        }
+      }
     }
     if (WARDEN_KINDS.has(c.kind) && !inGreybarrow(Math.round(c.x), Math.round(c.z))) {
       const dest = nearestWalkable(world, BARROW.cx, BARROW.cy);

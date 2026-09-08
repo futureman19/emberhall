@@ -51,11 +51,15 @@ const SPELL_IDS = new Set([
   "magicarrow",
   "teleport",
   "fireball",
+  "cure",
+  "poison",
+  "bless",
+  "lightning",
   "mark",
   "recall",
 ]);
 const CREATURE_TASKS = new Set(["wander", "flee", "fight", "follow", "dead", "idle"]);
-const CROP_IDS = new Set(["cabbage", "wheat", "garlic"]);
+const CROP_IDS = new Set(["cabbage", "wheat", "garlic", "ginseng", "mandrake", "moss"]);
 const CROP_STAGES = new Set([0, 1, 2, 3]);
 const SPEEDS = new Set([0, 1, 2, 3]);
 const TILE_KINDS = new Set([
@@ -276,6 +280,9 @@ function isPlayer(value: unknown): boolean {
     isIntent(value.intent) &&
     isFiniteNumber(value.mana) &&
     isFiniteNumber(value.nightSightUntil) &&
+    (value.poisonUntil === undefined || isFiniteNumber(value.poisonUntil)) &&
+    (value.poisonTickAt === undefined || isFiniteNumber(value.poisonTickAt)) &&
+    (value.blessUntil === undefined || isFiniteNumber(value.blessUntil)) &&
     (value.armedSpell === null ||
       (isString(value.armedSpell) && SPELL_IDS.has(value.armedSpell))) &&
     isArrayOf(value.marks, isRecallMark) &&

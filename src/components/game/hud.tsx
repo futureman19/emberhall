@@ -232,6 +232,13 @@ function TopBar() {
           <div className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2">
             <div className="h-full bg-gold" style={{ width: `${Math.max(0, Math.min(1, mana)) * 100}%` }} />
           </div>
+          {(snap.hour < (snap.player?.poisonUntil ?? 0) || snap.hour < (snap.player?.blessUntil ?? 0)) && (
+            <p className="mt-1 text-[10px] tracking-wider uppercase">
+              {snap.hour < (snap.player?.poisonUntil ?? 0) && <span className="text-[#8ac03a]">Poisoned</span>}
+              {snap.hour < (snap.player?.poisonUntil ?? 0) && snap.hour < (snap.player?.blessUntil ?? 0) && <span className="text-muted"> · </span>}
+              {snap.hour < (snap.player?.blessUntil ?? 0) && <span className="text-gold">Blessed</span>}
+            </p>
+          )}
         </div>
         <button
           type="button"

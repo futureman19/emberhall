@@ -1,5 +1,5 @@
 import { PLACES, regionAt } from "./atlas.ts";
-import { FAUNA_META, ITEM_META, SECONDS_PER_HOUR } from "./catalog.ts";
+import { BLESS_HOURS, FAUNA_META, ITEM_META, POISON_FAUNA_HOURS, POISON_TICK_HOURS, SECONDS_PER_HOUR } from "./catalog.ts";
 import { astarToRange, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { spawnCorpsePile } from "./piles.ts";
 import { rareName, rollKillRare } from "./rare.ts";
@@ -9,12 +9,13 @@ import { completeObjective, nid, revealAround } from "./world.ts";
 import type { ItemId, Person, RecallMark, SpellId, World } from "./types.ts";
 
 export const SPELL_ORDER: SpellId[] = [
-  "nightsight", "heal", "magicarrow", "teleport", "fireball", "mark", "recall",
+  "nightsight", "heal", "magicarrow", "teleport", "fireball", "cure", "poison", "bless", "lightning", "mark", "recall",
 ];
 
 export const SPELL_CIRCLES: { circle: number; label: string; ids: SpellId[] }[] = [
   { circle: 1, label: "First circle", ids: ["nightsight", "heal", "magicarrow"] },
-  { circle: 2, label: "Second", ids: ["teleport", "fireball"] },
+  { circle: 2, label: "Second", ids: ["teleport", "fireball", "cure", "poison"] },
+  { circle: 3, label: "Third", ids: ["bless", "lightning"] },
 ];
 
 export const SPELL_META: Record<
@@ -26,6 +27,10 @@ export const SPELL_META: Record<
   magicarrow: { label: "Magic Arrow", circle: 1, diff: 8, mana: 5, reagents: ["pearl"], words: "In Por Ylem", target: "fauna", hint: "A dart of force." },
   teleport: { label: "Teleport", circle: 2, diff: 12, mana: 8, reagents: ["pearl", "mandrake"], words: "Rel Por", target: "tile", hint: "A few paces. Click the ground." },
   fireball: { label: "Fireball", circle: 2, diff: 14, mana: 9, reagents: ["pearl", "mandrake"], words: "Vas Flam", target: "fauna", hint: "A heavier dart." },
+  cure: { label: "Cure", circle: 2, diff: 10, mana: 6, reagents: ["garlic", "ginseng"], words: "An Nox", target: "self", hint: "Draw the venom out." },
+  poison: { label: "Poison", circle: 2, diff: 12, mana: 8, reagents: ["nightshade"], words: "In Nox", target: "fauna", hint: "Venom that keeps its teeth." },
+  bless: { label: "Bless", circle: 3, diff: 13, mana: 9, reagents: ["garlic", "mandrake"], words: "Rel Sanct", target: "self", hint: "The blade and the breast, lifted." },
+  lightning: { label: "Lightning", circle: 3, diff: 14, mana: 9, reagents: ["ash", "pearl"], words: "Por Ort Grav", target: "fauna", hint: "The sky answers at once." },
   mark: { label: "Mark", circle: 3, diff: 8, mana: 8, reagents: ["pearl", "moss", "mandrake"], words: "Kal Por Ylem", target: "self", hint: "Write this dirt on a rune." },
   recall: { label: "Recall", circle: 3, diff: 8, mana: 9, reagents: ["pearl", "moss", "mandrake"], words: "Kal Ort Por", target: "mark", hint: "Tap a mark. Walk off first." },
 };
@@ -34,6 +39,8 @@ export const ARROW_RANGE = 14;
 export const FIREBALL_RANGE = 16;
 export const TELEPORT_RANGE = 10;
 export const MARK_CAP = 8;
+/** Spells that strike a beast downrange. */
+export const OFFENSIVE_SPELLS: ReadonlySet<SpellId> = new Set(["magicarrow", "fireball", "poison", "lightning"]);
 
 /** Every spell has its own voice — the windup "cast" hum is shared, the
  * release is not. Fizzle keeps its own sad sputter. */
@@ -132,7 +139,7 @@ function pathToward(world: World, tx: number, ty: number, range: number) {
 }
 
 function faunaRange(spell: SpellId) {
-  return spell === "fireball" ? FIREBALL_RANGE : ARROW_RANGE;
+  return spell === "fireball" || spell === "lightning" ? FIREBALL_RANGE : ARROW_RANGE;
 }
 
 function footing(world: World, tx: number, ty: number) {
@@ -207,7 +214,7 @@ export function commandCast(world: World, spell: SpellId, target?: CastTarget): 
   if ((world.player.mana ?? 0) < meta.mana) return "Not enough mana.";
   if (!world.player.marks) world.player.marks = [];
 
-  if (spell === "magicarrow" || spell === "fireball") {
+  if (OFFENSIVE_SPELLS.has(spell)) {
     if (!target || target.kind !== "fauna") {
       world.player.armedSpell = spell;
       world.player.intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
@@ -258,6 +265,12 @@ export function commandCast(world: World, spell: SpellId, target?: CastTarget): 
     return null;
   }
 
+  if (spell === "cure") {
+    if (world.hour >= world.player.poisonUntil) return "There is no venom in you.";
+    beginCast(world, p, spell, Math.round(p.x), Math.round(p.z), p.id);
+    return null;
+  }
+
   beginCast(world, p, spell, Math.round(p.x), Math.round(p.z), p.id);
   return null;
 }
@@ -285,7 +298,7 @@ export function castNow(world: World): string | null {
   }
   if (!world.player.marks) world.player.marks = [];
 
-  if (spell === "magicarrow" || spell === "fireball") {
+  if (OFFENSIVE_SPELLS.has(spell)) {
     const c = world.fauna.find((x) => x.id === world.player.intent.targetId);
     if (!c || c.task === "dead") {
       world.player.intent.kind = "none";
@@ -362,13 +375,38 @@ export function castNow(world: World): string | null {
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The wound closes.`, gain);
   }
-  if (spell === "magicarrow" || spell === "fireball") {
+  if (spell === "cure") {
+    if (world.hour >= world.player.poisonUntil) {
+      castFx = { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour };
+      playSfx(spellSfx(spell), 0.5);
+      return withGain(`${meta.words}. The venom had already passed.`, gain);
+    }
+    world.player.poisonUntil = 0;
+    world.player.poisonTickAt = 0;
+    castFx = { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour };
+    playSfx(spellSfx(spell), 0.5);
+    return withGain(`${meta.words}. The venom leaves the blood.`, gain);
+  }
+  if (spell === "bless") {
+    world.player.blessUntil = world.hour + BLESS_HOURS;
+    castFx = { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour };
+    playSfx(spellSfx(spell), 0.5);
+    return withGain(`${meta.words}. The arm remembers old battles.`, gain);
+  }
+  if (spell === "magicarrow" || spell === "fireball" || spell === "poison" || spell === "lightning") {
     const c = world.fauna.find((x) => x.id === savedId);
     if (!c) return "It fled.";
-    const dmg = spell === "fireball" ? 10 + Math.floor(skill / 8) + Math.floor(p.int / 4) : 5 + Math.floor(skill / 10) + Math.floor(p.int / 6);
+    let dmg = 5 + Math.floor(skill / 10) + Math.floor(p.int / 6);
+    if (spell === "fireball") dmg = 10 + Math.floor(skill / 8) + Math.floor(p.int / 4);
+    if (spell === "lightning") dmg = 8 + Math.floor(skill / 9) + Math.floor(p.int / 4);
+    if (spell === "poison") dmg = 3 + Math.floor(skill / 12) + Math.floor(p.int / 8);
     c.hp -= dmg;
     c.task = "fight";
     c.taskUntil = world.hour + 0.25;
+    if (spell === "poison") {
+      c.poisonUntil = world.hour + POISON_FAUNA_HOURS;
+      c.poisonTickAt = world.hour + POISON_TICK_HOURS;
+    }
     castFx = { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour };
     playSfx(spellSfx(spell), 0.54);
     if (c.hp <= 0) {
@@ -378,7 +416,7 @@ export function castNow(world: World): string | null {
       c.corpseUntil = world.hour + 8;
       spawnCorpsePile(world, c);
       completeObjective(world, "hunt");
-      completeObjective(world, spell === "fireball" ? "fireball" : "arrow");
+      completeObjective(world, spell === "fireball" ? "fireball" : spell === "magicarrow" ? "arrow" : spell);
       const found = rollKillRare(world, c.kind, Math.random);
       if (found) {
         world.player.rares.push(found);
@@ -386,7 +424,8 @@ export function castNow(world: World): string | null {
       }
       return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()} falls.`, gain);
     }
-    return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()} is struck.`, gain);
+    const struck = spell === "poison" ? "sickens" : spell === "lightning" ? "is blasted" : "is struck";
+    return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()} ${struck}.`, gain);
   }
   if (spell === "teleport") {
     const fromX = p.x;

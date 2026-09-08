@@ -44,7 +44,7 @@ export interface SpellProjectileProfile {
   impactScale: number;
 }
 
-const SPELL_PROJECTILES: Record<"magicarrow" | "fireball", Readonly<SpellProjectileProfile>> = {
+const SPELL_PROJECTILES: Record<"magicarrow" | "fireball" | "poison", Readonly<SpellProjectileProfile>> = {
   magicarrow: Object.freeze({
     core: "#ffffff",
     trail: "#79c8ff",
@@ -61,10 +61,20 @@ const SPELL_PROJECTILES: Record<"magicarrow" | "fireball", Readonly<SpellProject
     trailScale: 3.2,
     impactScale: 3.8,
   }),
+  poison: Object.freeze({
+    core: "#d8ff8a",
+    trail: "#6a9a2f",
+    impact: "#8ac03a",
+    coreScale: 2.6,
+    trailScale: 2.4,
+    impactScale: 2.4,
+  }),
 };
 
 export function spellProjectileProfile(spell: SpellId): Readonly<SpellProjectileProfile> {
-  return spell === "fireball" ? SPELL_PROJECTILES.fireball : SPELL_PROJECTILES.magicarrow;
+  if (spell === "fireball") return SPELL_PROJECTILES.fireball;
+  if (spell === "poison") return SPELL_PROJECTILES.poison;
+  return SPELL_PROJECTILES.magicarrow;
 }
 
 export interface TravelEffectProfile {
