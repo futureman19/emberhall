@@ -70,6 +70,7 @@ function withFauna(w: World) {
     if (w.player.poisonUntil == null) w.player.poisonUntil = 0;
     if (w.player.poisonTickAt == null) w.player.poisonTickAt = 0;
     if (w.player.blessUntil == null) w.player.blessUntil = 0;
+    if (w.player.invisUntil == null) w.player.invisUntil = 0;
     if (w.player.armedSpell === undefined) w.player.armedSpell = null;
     if (!Array.isArray(w.player.marks)) w.player.marks = [];
     if (w.player.ghost == null) w.player.ghost = false;

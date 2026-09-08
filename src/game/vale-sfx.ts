@@ -49,7 +49,11 @@ export type SfxId =
   | "spell_cure"
   | "spell_poison"
   | "spell_bless"
-  | "spell_lightning";
+  | "spell_lightning"
+  | "spell_summon"
+  | "spell_paralyze"
+  | "spell_invisibility"
+  | "spell_curse";
 
 const SRC: Record<SfxId, string> = {
   chop: "/audio/sfx/chop.mp3",
@@ -75,6 +79,10 @@ const SRC: Record<SfxId, string> = {
   spell_poison: "/audio/sfx/spell-poison.mp3",
   spell_bless: "/audio/sfx/spell-bless.mp3",
   spell_lightning: "/audio/sfx/spell-lightning.mp3",
+  spell_summon: "/audio/sfx/spell-summon.mp3",
+  spell_paralyze: "/audio/sfx/spell-paralyze.mp3",
+  spell_invisibility: "/audio/sfx/spell-invisibility.mp3",
+  spell_curse: "/audio/sfx/spell-curse.mp3",
 };
 
 const POOL = 3;

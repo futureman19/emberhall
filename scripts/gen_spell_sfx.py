@@ -236,6 +236,62 @@ def sfx_lightning() -> np.ndarray:
     return finish(sig, peak=0.78)
 
 
+def sfx_summon() -> np.ndarray:
+    total = 1.1
+    sig = np.zeros(int(SR * total))
+    # the portal: a deep whoosh opening downward, then the bind pulls up
+    whoosh = sweep_noise(0.55, 900, 220, 1.2, seed=31) * np.exp(-t(0.55) / 0.3)
+    sig[: len(whoosh)] += whoosh * 0.9
+    pull = sweep_noise(0.35, 300, 1400, 1.4, seed=37) * adsr(int(SR * 0.35), 0.12, 0.12)
+    sig[int(SR * 0.4) : int(SR * 0.4) + len(pull)] += pull * 0.4
+    # a low toll, then the binding chime
+    sig += bell(196.0, 0.9, 0.4, 0.05, total) * 0.5
+    sig += bell(392.0, 0.6, 0.3, 0.62, total) * 0.35
+    sig += bell(523.3, 0.5, 0.26, 0.72, total) * 0.28
+    return finish(sig * 0.9)
+
+
+def sfx_paralyze() -> np.ndarray:
+    total = 0.7
+    sig = np.zeros(int(SR * total))
+    # the lock: a cluster of high sines snapping into unison
+    for i, f in enumerate([1760.0, 2217.5, 2637.0, 3136.0]):
+        blip = gliss(f * 1.12, f, 0.1 + i * 0.02, 1.6) * np.exp(-t(0.1 + i * 0.02) / 0.05)
+        start = int(SR * (0.03 + i * 0.05))
+        sig[start : start + len(blip)] += blip * 0.5
+    # the freeze: glassy shimmer held, then cut short
+    hold = (gliss(3136.0, 3136.0, 0.3) + 0.5 * gliss(4698.3, 4698.3, 0.3)) * adsr(int(SR * 0.3), 0.02, 0.06)
+    sig[int(SR * 0.28) : int(SR * 0.28) + len(hold)] += hold * 0.16
+    snap = sweep_noise(0.02, 8000, 9000, 0.7, seed=41)
+    sig[int(SR * 0.58) : int(SR * 0.58) + len(snap)] += snap * 2.0
+    return finish(sig, peak=0.82)
+
+
+def sfx_invisibility() -> np.ndarray:
+    total = 0.9
+    sig = np.zeros(int(SR * total))
+    # detuned high sines dissolving — the shape of you coming apart
+    for i, f in enumerate([1046.5, 1051.5, 1318.5, 1324.0]):
+        sig += bell(f, 0.75, 0.34, 0.04 + i * 0.07, total) * 0.3
+    # the hush that swallows them
+    hush = sweep_noise(0.6, 6500, 2400, 0.8, seed=43) * adsr(int(SR * 0.6), 0.2, 0.35)
+    sig[int(SR * 0.28) : int(SR * 0.28) + len(hush)] += hush * 0.3
+    return finish(sig * 0.8)
+
+
+def sfx_curse() -> np.ndarray:
+    total = 0.95
+    sig = np.zeros(int(SR * total))
+    # a low drone, soured by its own minor second
+    drone = (gliss(138.6, 110.0, total, 1.4) + 0.7 * gliss(146.8, 116.5, total, 1.4)) * adsr(int(SR * total), 0.1, 0.4)
+    sig += drone * 0.34
+    # something wraps around the throat: a slow descending wheeze
+    wheeze = sweep_noise(0.5, 1200, 500, 1.5, seed=47) * np.exp(-t(0.5) / 0.3)
+    sig[int(SR * 0.3) : int(SR * 0.3) + len(wheeze)] += wheeze * 0.4
+    sig = np.tanh(sig * 1.2)
+    return finish(sig, peak=0.8)
+
+
 SPELLS = {
     "spell-nightsight": sfx_nightsight,
     "spell-heal": sfx_heal,
@@ -248,6 +304,10 @@ SPELLS = {
     "spell-poison": sfx_poison,
     "spell-bless": sfx_bless,
     "spell-lightning": sfx_lightning,
+    "spell-summon": sfx_summon,
+    "spell-paralyze": sfx_paralyze,
+    "spell-invisibility": sfx_invisibility,
+    "spell-curse": sfx_curse,
 }
 
 if __name__ == "__main__":

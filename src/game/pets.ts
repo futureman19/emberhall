@@ -40,6 +40,8 @@ export function commandNamePet(world: World, id: string, raw: string): string {
 export function tickPets(world: World, dt: number): void {
   for (const c of world.fauna) {
     if (c.ownerId !== world.player.id || c.task === "dead") continue;
+    // Bound by words, not by bond — a summon knows no hunger.
+    if (c.boundUntil && world.hour < c.boundUntil) continue;
     c.loyalty = Math.max(0, c.loyalty - LOYALTY_EBB * (dt / SECONDS_PER_HOUR));
     const who = c.name ?? `the ${FAUNA_META[c.kind].label.toLowerCase()}`;
     if (c.loyalty <= 0) {

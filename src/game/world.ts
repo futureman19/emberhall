@@ -327,6 +327,7 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
       poisonUntil: 0,
       poisonTickAt: 0,
       blessUntil: 0,
+      invisUntil: 0,
       armedSpell: null,
       marks: [],
       gateCoolUntil: 0,

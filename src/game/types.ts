@@ -203,6 +203,10 @@ export type SpellId =
   | "poison"
   | "bless"
   | "lightning"
+  | "summon"
+  | "paralyze"
+  | "invisibility"
+  | "curse"
   | "mark"
   | "recall";
 
@@ -363,6 +367,12 @@ export interface Creature {
   /** Poison spell: venom works until this hour; next tick at poisonTickAt. */
   poisonUntil?: number;
   poisonTickAt?: number;
+  /** Paralyze spell: held fast until this hour — no stride, no bite. */
+  paralyzeUntil?: number;
+  /** Curse spell: strength soured until this hour — weaker bite, slower stride. */
+  curseUntil?: number;
+  /** Summon spell: bound to the caster's side until this hour, then crumbles. */
+  boundUntil?: number;
 }
 
 export interface GroundPile {
@@ -454,6 +464,8 @@ export interface PlayerState {
   poisonTickAt: number;
   /** Rel Sanct: the battle boon holds until this hour. */
   blessUntil: number;
+  /** An Lor Xen: the world forgets your shape until this hour. */
+  invisUntil: number;
   armedSpell: SpellId | null;
   marks: RecallMark[];
   gateCoolUntil: number;

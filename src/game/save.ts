@@ -55,6 +55,10 @@ const SPELL_IDS = new Set([
   "poison",
   "bless",
   "lightning",
+  "summon",
+  "paralyze",
+  "invisibility",
+  "curse",
   "mark",
   "recall",
 ]);
@@ -283,6 +287,7 @@ function isPlayer(value: unknown): boolean {
     (value.poisonUntil === undefined || isFiniteNumber(value.poisonUntil)) &&
     (value.poisonTickAt === undefined || isFiniteNumber(value.poisonTickAt)) &&
     (value.blessUntil === undefined || isFiniteNumber(value.blessUntil)) &&
+    (value.invisUntil === undefined || isFiniteNumber(value.invisUntil)) &&
     (value.armedSpell === null ||
       (isString(value.armedSpell) && SPELL_IDS.has(value.armedSpell))) &&
     isArrayOf(value.marks, isRecallMark) &&
@@ -345,7 +350,12 @@ function isCreature(value: unknown): boolean {
     isFiniteNumber(value.loyalty) &&
     isBoolean(value.stay) &&
     (value.name === undefined || isNullableString(value.name)) &&
-    (value.warnedLoyal === undefined || isBoolean(value.warnedLoyal))
+    (value.warnedLoyal === undefined || isBoolean(value.warnedLoyal)) &&
+    (value.poisonUntil === undefined || isFiniteNumber(value.poisonUntil)) &&
+    (value.poisonTickAt === undefined || isFiniteNumber(value.poisonTickAt)) &&
+    (value.paralyzeUntil === undefined || isFiniteNumber(value.paralyzeUntil)) &&
+    (value.curseUntil === undefined || isFiniteNumber(value.curseUntil)) &&
+    (value.boundUntil === undefined || isFiniteNumber(value.boundUntil))
   );
 }
 

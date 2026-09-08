@@ -35,7 +35,7 @@ test("failed spellcasting emits a visible fizzle event at the caster", () => {
 });
 
 test("spell fx profiles - every spell has a complete, distinct identity", () => {
-  assert.equal(SPELL_ORDER.length, 11);
+  assert.equal(SPELL_ORDER.length, 15);
   const kinds = new Set<string>();
   const voices = new Set<string>();
   for (const spell of SPELL_ORDER) {
@@ -44,15 +44,16 @@ test("spell fx profiles - every spell has a complete, distinct identity", () => 
       assert.match(color, /^#[0-9a-f]{6}$/i, `${spell} ${color} is a hex color`);
     }
     assert.ok(p.duration > 0.3, `${spell} has a visible lifetime`);
-    assert.ok(p.motesCount >= 8 && p.motesCount <= 14, `${spell} mote budget sane`);
+    assert.ok(p.motesCount >= 8 && p.motesCount <= 16, `${spell} mote budget sane`);
     kinds.add(p.kind);
     voices.add(p.motes);
     assert.equal(spellSfx(spell), `spell_${spell}`);
   }
-  // Eight archetypes across eleven spells — kin share a motion (heal/cure/bless
-  // all fountain; magicarrow/poison both dart) but never a particle voice.
+  // Eight archetypes across fifteen spells — kin share a motion (heal/cure/bless
+  // all fountain; magicarrow/poison/curse all dart; mark/summon both sigil)
+  // but never a particle voice.
   assert.equal(kinds.size, 8);
-  assert.equal(voices.size, 11);
+  assert.equal(voices.size, 15);
 });
 
 test("windupGlow - tint per spell, safe fallback", () => {

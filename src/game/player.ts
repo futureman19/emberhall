@@ -1,5 +1,5 @@
 import { EH, inGreybarrow } from "./atlas.ts";
-import { FAUNA_META, hasTag, ITEM_META, armorOf, POISON_PLAYER_HOURS, POISON_TICK_HOURS, tagConsumeOrder } from "./catalog.ts";
+import { CURSE_BITE_WEAKEN, FAUNA_META, hasTag, ITEM_META, armorOf, POISON_PLAYER_HOURS, POISON_TICK_HOURS, tagConsumeOrder } from "./catalog.ts";
 import { harvestNow, plantNow, tillNow } from "./farm.ts";
 import { GHOSTWOOD_LUMBERJACK } from "./resources/catalog.ts";
 import { isGhostwoodTree, isTimberId, plantTreeNow } from "./forestry.ts";
@@ -717,6 +717,10 @@ function huntNow(world: World, p: Person) {
     world.player.intent.kind = "none";
     return "It fled.";
   }
+  if (world.hour < world.player.invisUntil) {
+    world.player.invisUntil = 0;
+    log(world, "Your hand betrays the shimmer.");
+  }
   const bow = effectiveMain(world) === "bow";
   const dist = Math.hypot(p.x - c.x, p.z - c.z);
   playSfx("hunt", 0.52);
@@ -748,10 +752,19 @@ function huntNow(world: World, p: Person) {
   if (world.hour < world.player.blessUntil) dmg = Math.floor(dmg * 1.25);
   const arm = armorOf(world.player.wear) + mods.armor;
   c.hp -= dmg;
+  // A bound beast tears at whatever its caster hunts.
+  const bound = world.fauna.find(
+    (x) => x.ownerId === world.player.id && x.boundUntil && x.boundUntil > world.hour && x.id !== c.id && Math.hypot(x.x - c.x, x.z - c.z) < 3.5,
+  );
+  if (bound) c.hp -= FAUNA_META[bound.kind].dmg;
   // Teeth only answer when they can reach you — an arrow from afar draws none.
-  if (RETALIATE_KINDS.has(c.kind) && (!bow || dist < 1.8)) {
+  // A held beast cannot answer at all.
+  const held = c.paralyzeUntil !== undefined && c.paralyzeUntil > 0 && world.hour < c.paralyzeUntil;
+  if (!held && RETALIATE_KINDS.has(c.kind) && (!bow || dist < 1.8)) {
     const ward = world.hour < world.player.blessUntil ? 2 : 0;
-    p.hp = Math.max(0, p.hp - Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2) - ward));
+    let bite = Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2) - ward);
+    if (c.curseUntil && world.hour < c.curseUntil) bite = Math.max(1, Math.floor(bite * (1 - CURSE_BITE_WEAKEN)));
+    p.hp = Math.max(0, p.hp - bite);
     if (c.kind === "stonecrawl_spider" && c.hp > 0 && world.hour >= world.player.poisonUntil && Math.random() < 0.35) {
       world.player.poisonUntil = world.hour + POISON_PLAYER_HOURS;
       world.player.poisonTickAt = world.hour + POISON_TICK_HOURS;
@@ -816,8 +829,9 @@ function tameNow(world: World, p: Person) {
   tryGain(world, "taming", ok, chance > 0.3 && chance < 0.8);
   world.player.intent.kind = "none";
   if (!ok) {
-    if (TAME_RETALIATE.has(c.kind)) p.hp = Math.max(0, p.hp - 4);
-    c.task = "flee";
+    const held = c.paralyzeUntil !== undefined && c.paralyzeUntil > 0 && world.hour < c.paralyzeUntil;
+    if (!held && TAME_RETALIATE.has(c.kind)) p.hp = Math.max(0, p.hp - 4);
+    if (!held) c.task = "flee";
     return "It will not yield.";
   }
   c.ownerId = world.player.id;

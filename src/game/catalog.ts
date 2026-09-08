@@ -4,6 +4,16 @@ import type { BuildingKind, ClassId, FaunaKind, ItemId, LootDrop, LootGold, NpcR
 export const SECONDS_PER_HOUR = 36;
 /** Rel Sanct holds this many game hours. */
 export const BLESS_HOURS = 1;
+/** An Lor Xen: how long the shimmer holds (game hours). */
+export const INVIS_HOURS = 2;
+/** An Ex Por: how long the lock holds (game hours). */
+export const PARALYZE_HOURS = 0.5;
+/** Des Sanct: how long the bane holds; bite and stride penalties. */
+export const CURSE_HOURS = 1;
+export const CURSE_BITE_WEAKEN = 0.25;
+export const CURSE_SLOW = 0.75;
+/** Kal Xen: how long the binding holds (game hours). */
+export const SUMMON_HOURS = 2;
 /** Venom works this long on a creature, biting each POISON_TICK_HOURS. */
 export const POISON_FAUNA_HOURS = 0.8;
 export const POISON_TICK_HOURS = 0.08;

@@ -1,9 +1,9 @@
 import { BARROW, MAP, PLACES, inGreybarrow } from "./atlas.ts";
-import { FAUNA_META, isNight, POISON_TICK_HOURS } from "./catalog.ts";
+import { CURSE_SLOW, FAUNA_META, isNight, POISON_TICK_HOURS } from "./catalog.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { spawnCorpsePile } from "./piles.ts";
 import { sheltering } from "./weather.ts";
-import { nid } from "./world.ts";
+import { log, nid } from "./world.ts";
 import type { Creature, FaunaKind, World } from "./types.ts";
 
 type SpawnEntry = { kind: FaunaKind; weight: number };
@@ -15,7 +15,7 @@ type SpawnZone = {
   radiusBias?: number;
 };
 
-function spawn(world: World, kind: FaunaKind, x: number, z: number): Creature {
+export function spawn(world: World, kind: FaunaKind, x: number, z: number): Creature {
   const meta = FAUNA_META[kind];
   return {
     id: nid(world, "f"),
@@ -233,6 +233,22 @@ export function tickEcology(world: World, dt: number) {
       }
       continue;
     }
+    // Kal Xen loosens — a bound beast crumbles back into the vale.
+    if (c.boundUntil && world.hour >= c.boundUntil) {
+      world.fauna = world.fauna.filter((x) => x.id !== c.id);
+      log(world, `The binding loosens; the ${FAUNA_META[c.kind].label.toLowerCase()} returns to the vale.`);
+      continue;
+    }
+    // An Ex Por holds — no stride, no shelter, no hunt. The lock simply keeps.
+    if (c.paralyzeUntil && world.hour < c.paralyzeUntil) {
+      c.path = [];
+      continue;
+    }
+    if (c.paralyzeUntil && world.hour >= c.paralyzeUntil) {
+      c.paralyzeUntil = 0;
+      c.task = "wander";
+      c.taskUntil = world.hour + 0.4;
+    }
     // Venom keeps its teeth — the Poison spell's damage-over-time.
     if (c.poisonUntil && c.poisonUntil > 0) {
       if (world.hour >= c.poisonUntil) {
@@ -307,7 +323,7 @@ export function tickEcology(world: World, dt: number) {
       }
       c.taskUntil = world.hour + 0.6 + Math.random();
     }
-    if (you && NIGHT_HUNTERS.has(c.kind) && night && !c.ownerId && c.task !== "fight" && !you.ghost) {
+    if (you && NIGHT_HUNTERS.has(c.kind) && night && !c.ownerId && c.task !== "fight" && !you.ghost && world.hour >= world.player.invisUntil) {
       if (Math.hypot(c.x - you.x, c.z - you.z) < 10) {
         c.task = "fight";
         const path = astar(world, Math.round(c.x), Math.round(c.z), Math.round(you.x), Math.round(you.z), 2000);
@@ -319,7 +335,8 @@ export function tickEcology(world: World, dt: number) {
       const dx = n.tx - c.x;
       const dz = n.ty - c.z;
       const dist = Math.hypot(dx, dz);
-      const step = Math.min(dist, 2.2 * dt);
+      const slow = c.curseUntil && world.hour < c.curseUntil ? CURSE_SLOW : 1;
+      const step = Math.min(dist, 2.2 * dt * slow);
       if (dist < 0.12) c.path.shift();
       else {
         c.x += (dx / dist) * step;

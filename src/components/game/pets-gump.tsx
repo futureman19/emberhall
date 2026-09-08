@@ -20,11 +20,13 @@ function PetRow({ c, youX, youZ, renaming }: { c: Creature; youX: number; youZ: 
   const feedPet = useGame((s) => s.feedPet);
   const releasePet = useGame((s) => s.releasePet);
   const namePet = useGame((s) => s.namePet);
+  const hour = useGame((s) => s.snap.hour);
   const [editing, setEditing] = useState(renaming);
   const [draft, setDraft] = useState(c.name ?? "");
   const dist = Math.hypot(c.x - youX, c.z - youZ);
   const where = dist < 5 ? "at heel" : dist < 20 ? "nearby" : "far off";
   const meta = FAUNA_META[c.kind];
+  const bound = c.boundUntil !== undefined && c.boundUntil > hour;
   return (
     <li className="rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 py-2">
       <span className="flex items-center justify-between gap-2">
@@ -66,10 +68,16 @@ function PetRow({ c, youX, youZ, renaming }: { c: Creature; youX: number; youZ: 
         </span>
       </span>
       <span className="mt-1.5 flex items-center gap-2">
-        <LoyaltyBar loyalty={c.loyalty} />
-        <span className={`shrink-0 text-[11px] ${c.loyalty < 15 ? "text-red-400" : "text-muted"}`}>
-          {c.loyalty < 15 ? "restless" : `${Math.round(c.loyalty)}`}
-        </span>
+        {bound ? (
+          <span className="text-[11px] italic text-[#b48ae8]">bound by words — the binding holds while the hour does</span>
+        ) : (
+          <>
+            <LoyaltyBar loyalty={c.loyalty} />
+            <span className={`shrink-0 text-[11px] ${c.loyalty < 15 ? "text-red-400" : "text-muted"}`}>
+              {c.loyalty < 15 ? "restless" : `${Math.round(c.loyalty)}`}
+            </span>
+          </>
+        )}
       </span>
       <span className="mt-2 flex gap-1.5">
         {c.stay ? (
@@ -77,8 +85,8 @@ function PetRow({ c, youX, youZ, renaming }: { c: Creature; youX: number; youZ: 
         ) : (
           <Button className="h-7 px-2 text-[11px]" onClick={() => stayPet(c.id)}>Stay</Button>
         )}
-        <Button className="h-7 px-2 text-[11px]" onClick={() => feedPet(c.id)}>Feed</Button>
-        <Button className="h-7 px-2 text-[11px]" onClick={() => releasePet(c.id)}>Release</Button>
+        {!bound && <Button className="h-7 px-2 text-[11px]" onClick={() => feedPet(c.id)}>Feed</Button>}
+        {!bound && <Button className="h-7 px-2 text-[11px]" onClick={() => releasePet(c.id)}>Release</Button>}
       </span>
     </li>
   );

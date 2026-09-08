@@ -1,21 +1,23 @@
 import { PLACES, regionAt } from "./atlas.ts";
-import { BLESS_HOURS, FAUNA_META, ITEM_META, POISON_FAUNA_HOURS, POISON_TICK_HOURS, SECONDS_PER_HOUR } from "./catalog.ts";
+import { BLESS_HOURS, CURSE_HOURS, FAUNA_META, INVIS_HOURS, ITEM_META, PARALYZE_HOURS, POISON_FAUNA_HOURS, POISON_TICK_HOURS, SECONDS_PER_HOUR, SUMMON_HOURS } from "./catalog.ts";
+import { spawn } from "./ecology.ts";
 import { astarToRange, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { spawnCorpsePile } from "./piles.ts";
 import { rareName, rollKillRare } from "./rare.ts";
 import { successChance, tryGain } from "./skills.ts";
 import { playSfx, type SfxId } from "./vale-sfx.ts";
-import { completeObjective, nid, revealAround } from "./world.ts";
+import { completeObjective, log, nid, revealAround } from "./world.ts";
 import type { ItemId, Person, RecallMark, SpellId, World } from "./types.ts";
 
 export const SPELL_ORDER: SpellId[] = [
-  "nightsight", "heal", "magicarrow", "teleport", "fireball", "cure", "poison", "bless", "lightning", "mark", "recall",
+  "nightsight", "heal", "magicarrow", "teleport", "fireball", "cure", "poison", "bless", "lightning", "summon", "paralyze", "invisibility", "curse", "mark", "recall",
 ];
 
 export const SPELL_CIRCLES: { circle: number; label: string; ids: SpellId[] }[] = [
   { circle: 1, label: "First circle", ids: ["nightsight", "heal", "magicarrow"] },
   { circle: 2, label: "Second", ids: ["teleport", "fireball", "cure", "poison"] },
   { circle: 3, label: "Third", ids: ["bless", "lightning"] },
+  { circle: 4, label: "Fourth", ids: ["summon", "paralyze", "invisibility", "curse"] },
 ];
 
 export const SPELL_META: Record<
@@ -31,6 +33,10 @@ export const SPELL_META: Record<
   poison: { label: "Poison", circle: 2, diff: 12, mana: 8, reagents: ["nightshade"], words: "In Nox", target: "fauna", hint: "Venom that keeps its teeth." },
   bless: { label: "Bless", circle: 3, diff: 13, mana: 9, reagents: ["garlic", "mandrake"], words: "Rel Sanct", target: "self", hint: "The blade and the breast, lifted." },
   lightning: { label: "Lightning", circle: 3, diff: 14, mana: 9, reagents: ["ash", "pearl"], words: "Por Ort Grav", target: "fauna", hint: "The sky answers at once." },
+  summon: { label: "Summon Creature", circle: 4, diff: 16, mana: 14, reagents: ["mandrake", "moss", "silk"], words: "Kal Xen", target: "self", hint: "A vale-beast bound to your side." },
+  paralyze: { label: "Paralyze", circle: 4, diff: 14, mana: 10, reagents: ["nightshade", "silk"], words: "An Ex Por", target: "fauna", hint: "Lock a beast mid-stride." },
+  invisibility: { label: "Invisibility", circle: 4, diff: 14, mana: 10, reagents: ["nightshade", "moss"], words: "An Lor Xen", target: "self", hint: "The world forgets your shape." },
+  curse: { label: "Curse", circle: 4, diff: 14, mana: 10, reagents: ["nightshade", "garlic", "silk"], words: "Des Sanct", target: "fauna", hint: "Sour a beast's strength." },
   mark: { label: "Mark", circle: 3, diff: 8, mana: 8, reagents: ["pearl", "moss", "mandrake"], words: "Kal Por Ylem", target: "self", hint: "Write this dirt on a rune." },
   recall: { label: "Recall", circle: 3, diff: 8, mana: 9, reagents: ["pearl", "moss", "mandrake"], words: "Kal Ort Por", target: "mark", hint: "Tap a mark. Walk off first." },
 };
@@ -39,8 +45,8 @@ export const ARROW_RANGE = 14;
 export const FIREBALL_RANGE = 16;
 export const TELEPORT_RANGE = 10;
 export const MARK_CAP = 8;
-/** Spells that strike a beast downrange. */
-export const OFFENSIVE_SPELLS: ReadonlySet<SpellId> = new Set(["magicarrow", "fireball", "poison", "lightning"]);
+/** Spells that strike (or hex) a beast downrange. */
+export const OFFENSIVE_SPELLS: ReadonlySet<SpellId> = new Set(["magicarrow", "fireball", "poison", "lightning", "paralyze", "curse"]);
 
 /** Every spell has its own voice — the windup "cast" hum is shared, the
  * release is not. Fizzle keeps its own sad sputter. */
@@ -360,6 +366,11 @@ export function castNow(world: World): string | null {
 
   world.player.mana = Math.max(0, (world.player.mana ?? 0) - meta.mana);
   const gain = tryGain(world, "magery", true, chance >= 0.45 && chance <= 0.75);
+  // Harmful work betrays the shimmer.
+  if (OFFENSIVE_SPELLS.has(spell) && world.hour < world.player.invisUntil) {
+    world.player.invisUntil = 0;
+    log(world, "Your hand betrays the shimmer.");
+  }
 
   if (spell === "nightsight") {
     world.player.nightSightUntil = world.hour + 8;
@@ -392,6 +403,57 @@ export function castNow(world: World): string | null {
     castFx = { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour };
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The arm remembers old battles.`, gain);
+  }
+  if (spell === "summon") {
+    const old = world.fauna.find((c) => c.ownerId === world.player.id && c.boundUntil && c.boundUntil > world.hour);
+    if (old) world.fauna = world.fauna.filter((x) => x.id !== old.id);
+    const roll = skill + Math.random() * 30;
+    const kind = roll >= 70 ? "ironwood_boar" : roll >= 40 ? "wolf" : "ember_fox";
+    const dest = nearestWalkable(world, Math.round(p.x) + 1, Math.round(p.z)) ?? nearestWalkable(world, Math.round(p.x), Math.round(p.z));
+    if (!dest) return "The vale has no room for a guest.";
+    const beast = spawn(world, kind, dest.x, dest.y);
+    beast.ownerId = world.player.id;
+    beast.loyalty = 100;
+    beast.boundUntil = world.hour + SUMMON_HOURS;
+    world.fauna.push(beast);
+    castFx = { spell, x: p.x, z: p.z, tx: dest.x, tz: dest.y, at: world.hour };
+    playSfx(spellSfx(spell), 0.55);
+    const oldNote = old ? " The old binding loosens." : "";
+    return withGain(`${meta.words}. A ${FAUNA_META[kind].label.toLowerCase()} pads to your side.${oldNote}`, gain);
+  }
+  if (spell === "invisibility") {
+    world.player.invisUntil = world.hour + INVIS_HOURS;
+    // The pack loses your scent.
+    for (const c of world.fauna) {
+      if (c.task === "fight" && !c.ownerId) {
+        c.task = "idle";
+        c.path = [];
+      }
+    }
+    castFx = { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour };
+    playSfx(spellSfx(spell), 0.5);
+    return withGain(`${meta.words}. The world forgets your shape.`, gain);
+  }
+  if (spell === "paralyze") {
+    const c = world.fauna.find((x) => x.id === savedId);
+    if (!c) return "It fled.";
+    c.paralyzeUntil = world.hour + PARALYZE_HOURS;
+    c.path = [];
+    c.task = "idle";
+    c.taskUntil = c.paralyzeUntil;
+    castFx = { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour };
+    playSfx(spellSfx(spell), 0.5);
+    return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()} locks mid-stride.`, gain);
+  }
+  if (spell === "curse") {
+    const c = world.fauna.find((x) => x.id === savedId);
+    if (!c) return "It fled.";
+    c.curseUntil = world.hour + CURSE_HOURS;
+    c.task = "fight";
+    c.taskUntil = world.hour + 0.25;
+    castFx = { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour };
+    playSfx(spellSfx(spell), 0.5);
+    return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()}'s strength sours.`, gain);
   }
   if (spell === "magicarrow" || spell === "fireball" || spell === "poison" || spell === "lightning") {
     const c = world.fauna.find((x) => x.id === savedId);
