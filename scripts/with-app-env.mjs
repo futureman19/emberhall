@@ -111,12 +111,13 @@ function main(argv) {
     process.exit(2);
   }
   const env = mergeAppEnv(readAppEnv(projectRoot()), process.env);
-  // Windows resolves `vite` to a `.cmd` shim, which libuv cannot exec without
-  // a shell; Linux keeps the direct spawn (and its signal semantics) intact.
+  // Native Windows executables must bypass cmd.exe: it splits paths containing
+  // spaces and interprets argument metacharacters. Keep the shell only for
+  // extensionless/package .cmd shims such as vite; POSIX stays direct.
   const child = spawn(command, args, {
     stdio: "inherit",
     env,
-    shell: process.platform === "win32",
+    shell: process.platform === "win32" && !/\.(?:exe|com)$/i.test(command),
   });
   // The dev server is long-running and is stopped by signalling this wrapper.
   for (const signal of ["SIGINT", "SIGTERM", "SIGHUP"]) {

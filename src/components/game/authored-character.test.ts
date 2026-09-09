@@ -43,7 +43,7 @@ test("real modular GLB has every named part centered and sized in runtime Y-up s
   }
 });
 
-test("player-only runtime, shared mirror, guarded fallback and non-picking face", () => {
+test("bounded authored runtime, shared mirror, guarded fallback and non-picking face", () => {
   const people = source("src/components/game/people-meshes.tsx");
   const mirror = source("src/components/game/look-preview.tsx");
   const shared = source("src/components/game/authored-character.tsx");
@@ -51,7 +51,7 @@ test("player-only runtime, shared mirror, guarded fallback and non-picking face"
   for (const match of people.matchAll(/<AuthoredCharacterGeometry[^>]+/g)) {
     assert.match(match[0], /authored=\{(?:p.isPlayer|authored)\}/);
   }
-  assert.match(people, /<HairMeshes[^>]+authored=\{p.isPlayer\}/);
+  assert.match(people, /<HairMeshes[^>]+authored=\{authored\}/);
   for (const text of [people, mirror]) {
     assert.match(text, /<AuthoredCharacterFace/);
     assert.match(text, /<AuthoredCharacterTunic/);

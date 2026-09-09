@@ -14,9 +14,9 @@ test("authored negative-Z face aligns with actual simulation heading in eight di
     assert.ok(oldFace.dot(target) < -.999999, "reproduces the original backwards face");
   }
 });
-test("visual yaw correction applies on initial player render and live update, not NPCs", () => {
+test("visual yaw correction applies to player and bounded authored civic NPCs", () => {
   const text=readFileSync(new URL('./people-meshes.tsx',import.meta.url),'utf8');
   assert.ok(text.includes('root.current.rotation.y = playerVisualYaw(you.facing)'));
-  assert.ok(text.includes('p.isPlayer ? playerVisualYaw(p.facing) : p.facing'));
-  assert.ok(text.includes('root.current.rotation.set(pose.bow, live.facing + pose.turn, 0)'));
+  assert.ok(text.includes('civicVisualYaw(p.facing, authored)'));
+  assert.ok(text.includes('root.current.rotation.set(pose.bow, civicVisualYaw(live.facing, authored) + pose.turn, 0)'));
 });

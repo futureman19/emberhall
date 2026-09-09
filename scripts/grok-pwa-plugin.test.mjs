@@ -1,14 +1,14 @@
 import assert from "node:assert/strict";
-import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import test from "node:test";
+import test, { after } from "node:test";
 import {
   appNameFromHost,
-  createHeadInjector,
+  createHeadInjector as createHeadInjectorImpl,
   grokXCreatorHeadTags,
-  injectGrokPwaHead,
+  injectGrokPwaHead as injectGrokPwaHeadImpl,
   isDocumentPath,
   isInstallQuery,
   publicAppHost,
@@ -20,6 +20,29 @@ import {
 import { renderInstallPage } from "./grok-pwa-plugin.mjs";
 
 const TEMPLATE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+// Unit inputs must not inherit this game's site.json or public share images.
+// Explicit filesystem fixtures still override this empty default.
+const EMPTY_WORKSPACE = mkdtempSync(join(tmpdir(), "grok-head-unit-"));
+after(() => rmSync(EMPTY_WORKSPACE, { recursive: true, force: true }));
+const injectGrokPwaHead = (html, ctx = {}) => injectGrokPwaHeadImpl(html, { cwd: EMPTY_WORKSPACE, ...ctx });
+const createHeadInjector = (ctx = {}) => createHeadInjectorImpl({ cwd: EMPTY_WORKSPACE, ...ctx });
+
+test("explicit workspace identity still overrides document title and placeholder image", () => {
+  const cwd = mkdtempSync(join(tmpdir(), "grok-explicit-identity-"));
+  try {
+    mkdirSync(join(cwd, "src/lib/og"), { recursive: true });
+    mkdirSync(join(cwd, "public"));
+    writeFileSync(join(cwd, "src/lib/og/site.json"), JSON.stringify({ title: "Fixture Identity" }));
+    writeFileSync(join(cwd, "public/og.jpg"), "fixture");
+    const html = '<html><head><title>Document fallback</title></head></html>';
+    const out = injectGrokPwaHead(html, { cwd, host: "fixture.grok.me" });
+    assert.match(out, /property="og:title" content="Fixture Identity"/);
+    assert.match(out, /https:\/\/fixture\.grok\.me\/og\.jpg/);
+    const isolated = injectGrokPwaHead(html, { host: "fixture.grok.me" });
+    assert.match(isolated, /property="og:title" content="Document fallback"/);
+    assert.match(isolated, /og\.grok\.me/);
+  } finally { rmSync(cwd, { recursive: true, force: true }); }
+});
 
 test("injects before </head>", () => {
   const out = injectGrokPwaHead("<html><head><title>x</title></head><body></body></html>");

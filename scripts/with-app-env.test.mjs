@@ -73,6 +73,14 @@ test("vite loadEnv resolves the wrapped value", () => {
   assert.equal(merged.VITE_AUTH_ENABLED, "false");
 });
 
+test("native executable arguments retain spaces, quotes and shell metacharacters", async () => {
+  const args = ['two words', 'a"quoted"value', '& whoami', '%PATH%', 'semi;colon', ''];
+  const { stdout } = await execFileAsync(process.execPath, [
+    WRAPPER, process.execPath, '-e', 'process.stdout.write(JSON.stringify(process.argv.slice(1)))', ...args,
+  ]);
+  assert.deepEqual(JSON.parse(stdout), args);
+});
+
 test("the wrapped command runs with the app env applied", async () => {
   const { stdout } = await execFileAsync(process.execPath, [
     WRAPPER,

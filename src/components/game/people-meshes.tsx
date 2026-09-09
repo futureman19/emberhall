@@ -1,6 +1,7 @@
 import { AuthoredCharacterGeometry, AuthoredCharacterFace, AuthoredCharacterTunic } from "./authored-character.tsx";
 import { Html } from "@react-three/drei";
 import { playerVisualYaw } from "./character-facing";
+import { civicCharacterArt, civicVisualYaw } from "./civic-character.ts";
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import { Quaternion, type Group, type Mesh, type MeshBasicMaterial, type PointLight } from "three";
@@ -862,6 +863,7 @@ function Figure({
   selected: boolean;
   wear: Partial<Record<WearSlot, ItemId>>;
 }) {
+  const authored = civicCharacterArt(p);
   const ghost0 = Boolean(p.ghost);
   // An Lor Xen: the shimmer renders as the same not-quite-there translucence.
   const faded = p.isPlayer && !ghost0 && getWorld().hour < (getWorld().player.invisUntil ?? 0);
@@ -882,7 +884,7 @@ function Figure({
       const pose = active && fx ? npcInteractionPose(fx.kind, age) : { bow: 0, reach: 0, lift: 0, turn: 0 };
       if (root.current) {
         root.current.position.set(live.x, groundAt(live.x, live.z, live.story) + pose.lift, live.z);
-        root.current.rotation.set(pose.bow, live.facing + pose.turn, 0);
+        root.current.rotation.set(pose.bow, civicVisualYaw(live.facing, authored) + pose.turn, 0);
       }
       if (left.current) left.current.rotation.set(active ? 0.58 + pose.reach : walkSwing, active ? 0.28 : 0, active ? 0.72 : 0.12);
       if (right.current) right.current.rotation.set(active ? 0.62 + pose.reach : -walkSwing, active ? -0.28 : 0, active ? -0.72 : -0.12);
@@ -1102,41 +1104,41 @@ function Figure({
   const hover = ghost ? 0.32 : 0;
 
   return (
-    <group name={p.isPlayer ? "emberhall-player-figure" : "emberhall-npc-figure"} ref={root} position={[p.x, groundAt(p.x, p.z, p.story) + hover, p.z]} rotation={[0, p.isPlayer ? playerVisualYaw(p.facing) : p.facing, 0]}>
+    <group name={p.isPlayer ? "emberhall-player-figure" : "emberhall-npc-figure"} ref={root} position={[p.x, groundAt(p.x, p.z, p.story) + hover, p.z]} rotation={[0, civicVisualYaw(p.facing, authored), 0]}>
       {cloak && (
         <mesh position={[0, FIGURE.cloak.y + bob, FIGURE.cloak.z]} castShadow={!ghost}>
-          <AuthoredCharacterGeometry part="cloak" size={FIGURE.cloak.size} authored={p.isPlayer} />
+          <AuthoredCharacterGeometry part="cloak" size={FIGURE.cloak.size} authored={authored} />
           <Mat color={cloakColor} ghost={ghost} />
         </mesh>
       )}
       <mesh position={[-FIGURE.leg.x, FIGURE.leg.y + bob, 0]} castShadow={!ghost}>
-        <AuthoredCharacterGeometry part="leg" size={FIGURE.leg.size} authored={p.isPlayer} />
+        <AuthoredCharacterGeometry part="leg" size={FIGURE.leg.size} authored={authored} />
         <Mat color={legs} ghost={ghost} />
       </mesh>
       <mesh position={[FIGURE.leg.x, FIGURE.leg.y + bob, 0]} castShadow={!ghost}>
-        <AuthoredCharacterGeometry part="leg" size={FIGURE.leg.size} authored={p.isPlayer} />
+        <AuthoredCharacterGeometry part="leg" size={FIGURE.leg.size} authored={authored} />
         <Mat color={legs} ghost={ghost} />
       </mesh>
       <mesh position={[-FIGURE.foot.x, FIGURE.foot.y + bob, FIGURE.foot.z]} castShadow={!ghost}>
-        <AuthoredCharacterGeometry part="foot" size={FIGURE.foot.size} authored={p.isPlayer} />
+        <AuthoredCharacterGeometry part="foot" size={FIGURE.foot.size} authored={authored} />
         <Mat color={feet} ghost={ghost} />
       </mesh>
       <mesh position={[FIGURE.foot.x, FIGURE.foot.y + bob, FIGURE.foot.z]} castShadow={!ghost}>
-        <AuthoredCharacterGeometry part="foot" size={FIGURE.foot.size} authored={p.isPlayer} />
+        <AuthoredCharacterGeometry part="foot" size={FIGURE.foot.size} authored={authored} />
         <Mat color={feet} ghost={ghost} />
       </mesh>
       <mesh position={[0, FIGURE.torso.y + bob, 0]} castShadow={!ghost}>
-        <AuthoredCharacterGeometry part="torso" size={FIGURE.torso.size} authored={p.isPlayer} />
+        <AuthoredCharacterGeometry part="torso" size={FIGURE.torso.size} authored={authored} />
         <Mat color={chest} ghost={ghost} />
-        <AuthoredCharacterTunic color={chest} authored={p.isPlayer} ghost={ghost} />
+        <AuthoredCharacterTunic color={chest} authored={authored} ghost={ghost} />
       </mesh>
       <group ref={left} position={[-FIGURE.arm.x, FIGURE.arm.y + bob, 0]} rotation={[walkSwing, 0, 0.12]}>
         <mesh position={[0, FIGURE.armMesh.y, 0]} castShadow={!ghost}>
-          <AuthoredCharacterGeometry part="arm" size={FIGURE.arm.size} authored={p.isPlayer} />
+          <AuthoredCharacterGeometry part="arm" size={FIGURE.arm.size} authored={authored} />
           <Mat color={chest} ghost={ghost} />
         </mesh>
         <mesh position={[0, FIGURE.hand.y, 0]} castShadow={!ghost}>
-          <AuthoredCharacterGeometry part="hand" size={FIGURE.hand.size} authored={p.isPlayer} />
+          <AuthoredCharacterGeometry part="hand" size={FIGURE.hand.size} authored={authored} />
           <Mat color={hands} ghost={ghost} />
         </mesh>
         {p.isPlayer && !ghost && <PalmFlame />}
@@ -1144,11 +1146,11 @@ function Figure({
       </group>
       <group ref={right} position={[FIGURE.arm.x, FIGURE.arm.y + bob, 0]} rotation={[-walkSwing, 0, -0.12]}>
         <mesh position={[0, FIGURE.armMesh.y, 0]} castShadow={!ghost}>
-          <AuthoredCharacterGeometry part="arm" size={FIGURE.arm.size} authored={p.isPlayer} />
+          <AuthoredCharacterGeometry part="arm" size={FIGURE.arm.size} authored={authored} />
           <Mat color={chest} ghost={ghost} />
         </mesh>
         <mesh position={[0, FIGURE.hand.y, 0]} castShadow={!ghost}>
-          <AuthoredCharacterGeometry part="hand" size={FIGURE.hand.size} authored={p.isPlayer} />
+          <AuthoredCharacterGeometry part="hand" size={FIGURE.hand.size} authored={authored} />
           <Mat color={hands} ghost={ghost} />
         </mesh>
         <group ref={held}>{p.isPlayer && wear.main && <Held id={wear.main} ghost={ghost} />}</group>
@@ -1158,29 +1160,29 @@ function Figure({
         {p.isPlayer && !ghost && <PalmFlame />}
       </group>
       <mesh position={[0, FIGURE.head.y + bob, 0]} castShadow={!ghost}>
-        <AuthoredCharacterGeometry part="head" size={FIGURE.head.size} authored={p.isPlayer} />
+        <AuthoredCharacterGeometry part="head" size={FIGURE.head.size} authored={authored} />
         <Mat color={look.skin} ghost={ghost} />
-        <AuthoredCharacterFace skin={look.skin} authored={p.isPlayer} ghost={ghost} />
+        <AuthoredCharacterFace skin={look.skin} authored={authored} ghost={ghost} />
       </mesh>
       {!hood && (
         <group position={[0, bob, 0]}>
-          <HairMeshes look={look} ghost={ghost} authored={p.isPlayer} />
+          <HairMeshes look={look} ghost={ghost} authored={authored} />
         </group>
       )}
       {hood === "helm" || hood === "cap" ? (
         <mesh position={[0, FIGURE.helm.y + bob, 0]} castShadow={!ghost}>
-          <AuthoredCharacterGeometry part="helm" size={FIGURE.helm.size} authored={p.isPlayer} />
+          <AuthoredCharacterGeometry part="helm" size={FIGURE.helm.size} authored={authored} />
           <Mat color={hoodColor} ghost={ghost} />
         </mesh>
       ) : hood ? (
         <mesh position={[0, FIGURE.hood.y + bob, FIGURE.hood.z]} castShadow={!ghost}>
-          <AuthoredCharacterGeometry part="hood" size={FIGURE.hood.size} authored={p.isPlayer} />
+          <AuthoredCharacterGeometry part="hood" size={FIGURE.hood.size} authored={authored} />
           <Mat color={hoodColor} ghost={ghost} />
         </mesh>
       ) : null}
       {p.isPlayer && !ghost && (
         <mesh position={[0, FIGURE.belt.y + bob, FIGURE.belt.z]} castShadow>
-          <AuthoredCharacterGeometry part="belt" size={FIGURE.belt.size} authored={p.isPlayer} />
+          <AuthoredCharacterGeometry part="belt" size={FIGURE.belt.size} authored={authored} />
           <meshStandardMaterial color="#c9a36a" roughness={0.7} />
         </mesh>
       )}
