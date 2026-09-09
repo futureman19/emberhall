@@ -1,0 +1,30 @@
+[
+  {
+    "arm": "legacy-a",
+    "frameMax": 216.59999999999854,
+    "terrainMax": 178.10000002384186,
+    "terrainTotal": 249.70000004768372,
+    "minimapTotal": 10.100000023841858
+  },
+  {
+    "arm": "prepared-a",
+    "frameMax": 233.3000000000011,
+    "terrainMax": 199.10000002384186,
+    "terrainTotal": 238.39999997615814,
+    "minimapTotal": 16.200000047683716
+  },
+  {
+    "arm": "prepared-b",
+    "frameMax": 266.60000000000036,
+    "terrainMax": 226.60000002384186,
+    "terrainTotal": 271.7000000476837,
+    "minimapTotal": 15.799999952316284
+  },
+  {
+    "arm": "legacy-b",
+    "frameMax": 216.60000000000036,
+    "terrainMax": 196.39999997615814,
+    "terrainTotal": 257.3000000715256,
+    "minimapTotal": 15
+  }
+]

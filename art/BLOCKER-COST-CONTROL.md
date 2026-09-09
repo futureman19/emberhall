@@ -1,0 +1,7 @@
+# Prepared-footprint same-build control
+
+Four sequential mobile hoe runs: original/prepared/prepared/original within deployed routes-CDxGU_xg.js. Browser-only AST replacement restores original blocked scan for control arms, with same instrumentation in all arms. All4 outcomes passed; lint passed. Raw results actions-blocker-{legacy,prepared}-{a,b}; aggregate blocker-control-summary.json.
+
+Maximum terrain callback CPU(ms): original178.1/196.4; prepared199.1/226.6. Maximum frame(ms): original216.6/216.6; prepared233.3/266.6. Terrain total original249.7/257.3 versus prepared238.4/271.7; minimap10.1–16.2ms. No consistent total terrain benefit; worse worst frames in both prepared runs. Therefore previous149.9ms single candidate result is not confirmed as improvement. Treat prepared-footprint change as performance-unaccepted/potential regression despite exact output parity and green functional gates. No speedup claim.
+
+Do not continue performance-driven deployments from isolated microbenchmarks. Existing preview remains review-only, production untouched. Next decision should be parking/reverting unproven footprint optimization or deeper allocation/rebuild phase attribution, not more near-identical ABBA retries. First harness generation failed because read_file truncated an overlong line; corrected from complete source, syntax/runtime and lint passed afterward; no failed runtime evidence overwritten.
