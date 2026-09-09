@@ -1,0 +1,355 @@
+{
+  "diagnostic": "One synchronous before/trimmed/restored render; inherited frames field is not timing evidence",
+  "scope": "Current civic renderer in both arms, mobile hall interior, fixed fixture/noon/clear. Off aborts only new Phase1 props/signs. CPU render submission is NOT GPU execution time. Diagnostic does not waive original failed gates.",
+  "order": [
+    "on"
+  ],
+  "frames": 300,
+  "settleMs": 8500,
+  "runs": [
+    {
+      "device": "desktop",
+      "x": 256,
+      "z": 290,
+      "counts": [
+        {
+          "used": 921,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 921,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 0,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 0,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 107,
+          "capacity": 16384,
+          "type": "DodecahedronGeometry"
+        },
+        {
+          "used": 217,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 86,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 49,
+          "capacity": 700,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 62,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        }
+      ],
+      "pixelsEqual": true,
+      "restoredEqual": true,
+      "picksEqual": true,
+      "beforeTriangles": 4391324,
+      "expandedTriangles": 7019600
+    },
+    {
+      "device": "desktop",
+      "x": 220,
+      "z": 260,
+      "counts": [
+        {
+          "used": 921,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 921,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 1,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 1,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 96,
+          "capacity": 16384,
+          "type": "DodecahedronGeometry"
+        },
+        {
+          "used": 230,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 84,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 74,
+          "capacity": 700,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 58,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        }
+      ],
+      "pixelsEqual": true,
+      "restoredEqual": true,
+      "picksEqual": true,
+      "beforeTriangles": 4212586,
+      "expandedTriangles": 6840984
+    },
+    {
+      "device": "desktop",
+      "x": 280,
+      "z": 320,
+      "counts": [
+        {
+          "used": 919,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 919,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 3,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 3,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 108,
+          "capacity": 16384,
+          "type": "DodecahedronGeometry"
+        },
+        {
+          "used": 233,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 78,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 44,
+          "capacity": 700,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 67,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        }
+      ],
+      "pixelsEqual": true,
+      "restoredEqual": true,
+      "picksEqual": true,
+      "beforeTriangles": 4425502,
+      "expandedTriangles": 7053468
+    },
+    {
+      "device": "mobile",
+      "x": 256,
+      "z": 290,
+      "counts": [
+        {
+          "used": 921,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 921,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 0,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 0,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 107,
+          "capacity": 16384,
+          "type": "DodecahedronGeometry"
+        },
+        {
+          "used": 217,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 86,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 49,
+          "capacity": 700,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 62,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        }
+      ],
+      "pixelsEqual": true,
+      "restoredEqual": true,
+      "picksEqual": true,
+      "beforeTriangles": 4357799,
+      "expandedTriangles": 6986075
+    },
+    {
+      "device": "mobile",
+      "x": 220,
+      "z": 260,
+      "counts": [
+        {
+          "used": 921,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 921,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 1,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 1,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 96,
+          "capacity": 16384,
+          "type": "DodecahedronGeometry"
+        },
+        {
+          "used": 230,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 84,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 74,
+          "capacity": 700,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 58,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        }
+      ],
+      "pixelsEqual": true,
+      "restoredEqual": true,
+      "picksEqual": true,
+      "beforeTriangles": 4212508,
+      "expandedTriangles": 6840906
+    },
+    {
+      "device": "mobile",
+      "x": 280,
+      "z": 320,
+      "counts": [
+        {
+          "used": 919,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 919,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 3,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 3,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 108,
+          "capacity": 16384,
+          "type": "DodecahedronGeometry"
+        },
+        {
+          "used": 233,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 78,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 44,
+          "capacity": 700,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 67,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        }
+      ],
+      "pixelsEqual": true,
+      "restoredEqual": true,
+      "picksEqual": true,
+      "beforeTriangles": 4424032,
+      "expandedTriangles": 7051998
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

@@ -1,0 +1,183 @@
+{
+  "scope": "Six disposable streaming-window relocations, desktop/mobile; synchronous current/old-capacity/restored rendering and nine NDC ray probes. Not continuous walking or resource UI action proof.",
+  "order": [
+    "on"
+  ],
+  "settleMs": 8500,
+  "runs": [
+    {
+      "device": "desktop",
+      "x": 256,
+      "z": 290,
+      "counts": [
+        {
+          "used": 921,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 921,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 0,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 0,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 107,
+          "capacity": 16384,
+          "type": "DodecahedronGeometry"
+        },
+        {
+          "used": 217,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 86,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 49,
+          "capacity": 700,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 62,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        }
+      ],
+      "pixelsEqual": true,
+      "restoredEqual": true,
+      "picksEqual": true,
+      "beforeTriangles": 4391324,
+      "expandedTriangles": 7019600
+    },
+    {
+      "device": "desktop",
+      "x": 220,
+      "z": 260,
+      "counts": [
+        {
+          "used": 921,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 921,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 1,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 1,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 96,
+          "capacity": 16384,
+          "type": "DodecahedronGeometry"
+        },
+        {
+          "used": 230,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 84,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 74,
+          "capacity": 700,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 58,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        }
+      ],
+      "pixelsEqual": true,
+      "restoredEqual": true,
+      "picksEqual": true,
+      "beforeTriangles": 4212586,
+      "expandedTriangles": 6840984
+    },
+    {
+      "device": "desktop",
+      "x": 280,
+      "z": 320,
+      "counts": [
+        {
+          "used": 919,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 919,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 3,
+          "capacity": 16384,
+          "type": "CylinderGeometry"
+        },
+        {
+          "used": 3,
+          "capacity": 16384,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 108,
+          "capacity": 16384,
+          "type": "DodecahedronGeometry"
+        },
+        {
+          "used": 233,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 78,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        },
+        {
+          "used": 44,
+          "capacity": 700,
+          "type": "ConeGeometry"
+        },
+        {
+          "used": 67,
+          "capacity": 700,
+          "type": "BoxGeometry"
+        }
+      ],
+      "pixelsEqual": false,
+      "restoredEqual": true,
+      "picksEqual": true,
+      "beforeTriangles": 4425490,
+      "expandedTriangles": 7053456
+    }
+  ],
+  "errors": [],
+  "passed": false,
+  "failure": "pixel/raycast parity"
+}
