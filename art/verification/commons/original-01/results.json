@@ -1,0 +1,2033 @@
+{
+  "url": "http://127.0.0.1:8093",
+  "label": "original-01",
+  "authored": false,
+  "started": "2026-09-09T01:40:40.342Z",
+  "checks": [
+    {
+      "name": "all-53-original-building-records-unchanged",
+      "ok": true
+    },
+    {
+      "name": "all-nonbuilding-save-records-unchanged",
+      "ok": true
+    },
+    {
+      "name": "55-buildings-one-original-yard",
+      "ok": true
+    },
+    {
+      "name": "exact-target-scene-camera",
+      "ok": true,
+      "available": true,
+      "method": "exact-local-fiber-_roots:/node_modules/.vite/deps/@react-three_fiber.js?v=8fddb7ff",
+      "camera": "PerspectiveCamera"
+    },
+    {
+      "name": "real-world-walkable-floors-approaches",
+      "ok": true,
+      "available": true,
+      "buildings": [
+        {
+          "id": "qa-commons-dormitory",
+          "tiles": [
+            {
+              "x": 264,
+              "z": 282,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 265,
+              "z": 282,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 282,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 282,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 282,
+              "kind": "road",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 282,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 282,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 264,
+              "z": 283,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 265,
+              "z": 283,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 283,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 283,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 283,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 283,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 283,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 264,
+              "z": 284,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 265,
+              "z": 284,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 284,
+              "kind": "road",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 284,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 284,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 284,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 284,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 264,
+              "z": 285,
+              "kind": "road",
+              "walkable": true
+            },
+            {
+              "x": 265,
+              "z": 285,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 285,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 285,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 285,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 285,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 285,
+              "kind": "grass",
+              "walkable": true
+            }
+          ],
+          "approach": true
+        },
+        {
+          "id": "b-7",
+          "tiles": [
+            {
+              "x": 245,
+              "z": 288,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 246,
+              "z": 288,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 247,
+              "z": 288,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 248,
+              "z": 288,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 249,
+              "z": 288,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 250,
+              "z": 288,
+              "kind": "cobble",
+              "walkable": true
+            },
+            {
+              "x": 245,
+              "z": 289,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 246,
+              "z": 289,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 247,
+              "z": 289,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 248,
+              "z": 289,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 249,
+              "z": 289,
+              "kind": "cobble",
+              "walkable": true
+            },
+            {
+              "x": 250,
+              "z": 289,
+              "kind": "cobble",
+              "walkable": true
+            },
+            {
+              "x": 245,
+              "z": 290,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 246,
+              "z": 290,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 247,
+              "z": 290,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 248,
+              "z": 290,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 249,
+              "z": 290,
+              "kind": "cobble",
+              "walkable": true
+            },
+            {
+              "x": 250,
+              "z": 290,
+              "kind": "cobble",
+              "walkable": true
+            },
+            {
+              "x": 245,
+              "z": 291,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 246,
+              "z": 291,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 247,
+              "z": 291,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 248,
+              "z": 291,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 249,
+              "z": 291,
+              "kind": "cobble",
+              "walkable": true
+            },
+            {
+              "x": 250,
+              "z": 291,
+              "kind": "cobble",
+              "walkable": true
+            },
+            {
+              "x": 245,
+              "z": 292,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 246,
+              "z": 292,
+              "kind": "road",
+              "walkable": true
+            },
+            {
+              "x": 247,
+              "z": 292,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 248,
+              "z": 292,
+              "kind": "cobble",
+              "walkable": true
+            },
+            {
+              "x": 249,
+              "z": 292,
+              "kind": "cobble",
+              "walkable": true
+            },
+            {
+              "x": 250,
+              "z": 292,
+              "kind": "cobble",
+              "walkable": true
+            },
+            {
+              "x": 245,
+              "z": 293,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 246,
+              "z": 293,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 247,
+              "z": 293,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 248,
+              "z": 293,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 249,
+              "z": 293,
+              "kind": "cobble",
+              "walkable": true
+            },
+            {
+              "x": 250,
+              "z": 293,
+              "kind": "cobble",
+              "walkable": true
+            }
+          ],
+          "approach": true
+        },
+        {
+          "id": "qa-commons-farm",
+          "tiles": [
+            {
+              "x": 266,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            }
+          ],
+          "approach": true
+        }
+      ]
+    },
+    {
+      "name": "desktop-dormitory-court-waypoint",
+      "ok": true,
+      "target": [
+        256,
+        298
+      ],
+      "before": {
+        "position": [
+          256,
+          297
+        ],
+        "path": [],
+        "selectedId": null,
+        "openCraft": false,
+        "gold": 120,
+        "vault": 0,
+        "pack": {
+          "hatchet": 0,
+          "knife": 1,
+          "pick": 1,
+          "hoe": 1,
+          "fishing_rod": 1,
+          "log": 0,
+          "board": 3,
+          "ore": 0,
+          "ingot": 0,
+          "club": 0,
+          "shield": 0,
+          "staff": 0,
+          "bow": 0,
+          "torch": 0,
+          "crate": 0,
+          "cap": 0,
+          "cuirass": 0,
+          "sword": 0,
+          "mace": 0,
+          "gauntlets": 0,
+          "gorget": 0,
+          "heater": 0,
+          "rabbit_foot": 0,
+          "orc_tusk": 0,
+          "meat": 8,
+          "hide": 0,
+          "bandage": 3,
+          "potion_heal": 0,
+          "potion_night": 0,
+          "tunic": 0,
+          "leather": 0,
+          "mail": 0,
+          "hood": 1,
+          "helm": 0,
+          "cloak": 0,
+          "gloves": 1,
+          "hose": 0,
+          "greaves": 0,
+          "boots": 0,
+          "pendant": 1,
+          "ring": 1,
+          "relic": 0,
+          "spellbook": 1,
+          "rune": 4,
+          "garlic": 12,
+          "ginseng": 12,
+          "silk": 16,
+          "nightshade": 4,
+          "pearl": 14,
+          "moss": 10,
+          "mandrake": 10,
+          "ash": 12,
+          "cabbage": 4,
+          "wheat": 8,
+          "cooked_meat": 0,
+          "raw_fish": 4,
+          "cooked_fish": 0,
+          "bread": 0,
+          "stew": 0,
+          "cabbage_seed": 8,
+          "wheat_seed": 6,
+          "garlic_seed": 4,
+          "ginseng_seed": 0,
+          "mandrake_seed": 0,
+          "moss_seed": 0,
+          "acorn": 6,
+          "deed_porch": 0,
+          "deed_hut": 0,
+          "deed_homestead": 0
+        },
+        "chest": {
+          "hatchet": 0,
+          "knife": 0,
+          "pick": 0,
+          "hoe": 0,
+          "fishing_rod": 0,
+          "log": 0,
+          "board": 0,
+          "ore": 0,
+          "ingot": 0,
+          "club": 0,
+          "shield": 0,
+          "staff": 0,
+          "bow": 0,
+          "torch": 0,
+          "crate": 0,
+          "cap": 0,
+          "cuirass": 0,
+          "sword": 0,
+          "mace": 0,
+          "gauntlets": 0,
+          "gorget": 0,
+          "heater": 0,
+          "rabbit_foot": 0,
+          "orc_tusk": 0,
+          "meat": 0,
+          "hide": 0,
+          "bandage": 0,
+          "potion_heal": 0,
+          "potion_night": 0,
+          "tunic": 0,
+          "leather": 0,
+          "mail": 0,
+          "hood": 0,
+          "helm": 0,
+          "cloak": 0,
+          "gloves": 0,
+          "hose": 0,
+          "greaves": 0,
+          "boots": 0,
+          "pendant": 0,
+          "ring": 0,
+          "relic": 0,
+          "spellbook": 0,
+          "rune": 0,
+          "garlic": 0,
+          "ginseng": 0,
+          "silk": 0,
+          "nightshade": 0,
+          "pearl": 0,
+          "moss": 0,
+          "mandrake": 0,
+          "ash": 0,
+          "cabbage": 0,
+          "wheat": 0,
+          "cooked_meat": 0,
+          "raw_fish": 0,
+          "cooked_fish": 0,
+          "bread": 0,
+          "stew": 0,
+          "cabbage_seed": 0,
+          "wheat_seed": 0,
+          "garlic_seed": 0,
+          "ginseng_seed": 0,
+          "mandrake_seed": 0,
+          "moss_seed": 0,
+          "acorn": 0,
+          "deed_porch": 0,
+          "deed_hut": 0,
+          "deed_homestead": 0
+        },
+        "resources": {
+          "iron_ore:ore:sound": 12,
+          "highland_ore:ore:pristine": 7,
+          "ruby:gem:flawless": 5,
+          "redwood:log:pristine": 9
+        },
+        "toast": null
+      },
+      "after": {
+        "position": [
+          256,
+          298
+        ],
+        "path": [],
+        "selectedId": null,
+        "openCraft": false,
+        "gold": 120,
+        "vault": 0,
+        "pack": {
+          "hatchet": 0,
+          "knife": 1,
+          "pick": 1,
+          "hoe": 1,
+          "fishing_rod": 1,
+          "log": 0,
+          "board": 3,
+          "ore": 0,
+          "ingot": 0,
+          "club": 0,
+          "shield": 0,
+          "staff": 0,
+          "bow": 0,
+          "torch": 0,
+          "crate": 0,
+          "cap": 0,
+          "cuirass": 0,
+          "sword": 0,
+          "mace": 0,
+          "gauntlets": 0,
+          "gorget": 0,
+          "heater": 0,
+          "rabbit_foot": 0,
+          "orc_tusk": 0,
+          "meat": 8,
+          "hide": 0,
+          "bandage": 3,
+          "potion_heal": 0,
+          "potion_night": 0,
+          "tunic": 0,
+          "leather": 0,
+          "mail": 0,
+          "hood": 1,
+          "helm": 0,
+          "cloak": 0,
+          "gloves": 1,
+          "hose": 0,
+          "greaves": 0,
+          "boots": 0,
+          "pendant": 1,
+          "ring": 1,
+          "relic": 0,
+          "spellbook": 1,
+          "rune": 4,
+          "garlic": 12,
+          "ginseng": 12,
+          "silk": 16,
+          "nightshade": 4,
+          "pearl": 14,
+          "moss": 10,
+          "mandrake": 10,
+          "ash": 12,
+          "cabbage": 4,
+          "wheat": 8,
+          "cooked_meat": 0,
+          "raw_fish": 4,
+          "cooked_fish": 0,
+          "bread": 0,
+          "stew": 0,
+          "cabbage_seed": 8,
+          "wheat_seed": 6,
+          "garlic_seed": 4,
+          "ginseng_seed": 0,
+          "mandrake_seed": 0,
+          "moss_seed": 0,
+          "acorn": 6,
+          "deed_porch": 0,
+          "deed_hut": 0,
+          "deed_homestead": 0
+        },
+        "chest": {
+          "hatchet": 0,
+          "knife": 0,
+          "pick": 0,
+          "hoe": 0,
+          "fishing_rod": 0,
+          "log": 0,
+          "board": 0,
+          "ore": 0,
+          "ingot": 0,
+          "club": 0,
+          "shield": 0,
+          "staff": 0,
+          "bow": 0,
+          "torch": 0,
+          "crate": 0,
+          "cap": 0,
+          "cuirass": 0,
+          "sword": 0,
+          "mace": 0,
+          "gauntlets": 0,
+          "gorget": 0,
+          "heater": 0,
+          "rabbit_foot": 0,
+          "orc_tusk": 0,
+          "meat": 0,
+          "hide": 0,
+          "bandage": 0,
+          "potion_heal": 0,
+          "potion_night": 0,
+          "tunic": 0,
+          "leather": 0,
+          "mail": 0,
+          "hood": 0,
+          "helm": 0,
+          "cloak": 0,
+          "gloves": 0,
+          "hose": 0,
+          "greaves": 0,
+          "boots": 0,
+          "pendant": 0,
+          "ring": 0,
+          "relic": 0,
+          "spellbook": 0,
+          "rune": 0,
+          "garlic": 0,
+          "ginseng": 0,
+          "silk": 0,
+          "nightshade": 0,
+          "pearl": 0,
+          "moss": 0,
+          "mandrake": 0,
+          "ash": 0,
+          "cabbage": 0,
+          "wheat": 0,
+          "cooked_meat": 0,
+          "raw_fish": 0,
+          "cooked_fish": 0,
+          "bread": 0,
+          "stew": 0,
+          "cabbage_seed": 0,
+          "wheat_seed": 0,
+          "garlic_seed": 0,
+          "ginseng_seed": 0,
+          "mandrake_seed": 0,
+          "moss_seed": 0,
+          "acorn": 0,
+          "deed_porch": 0,
+          "deed_hut": 0,
+          "deed_homestead": 0
+        },
+        "resources": {
+          "iron_ore:ore:sound": 12,
+          "highland_ore:ore:pristine": 7,
+          "ruby:gem:flawless": 5,
+          "redwood:log:pristine": 9
+        },
+        "toast": null
+      },
+      "method": "simulation-useTile-240x.05-not-pointer"
+    },
+    {
+      "name": "desktop-dormitory-outside",
+      "ok": true,
+      "target": [
+        268,
+        287
+      ],
+      "before": {
+        "position": [
+          256,
+          298
+        ],
+        "path": [],
+        "selectedId": null,
+        "openCraft": false,
+        "gold": 120,
+        "vault": 0,
+        "pack": {
+          "hatchet": 0,
+          "knife": 1,
+          "pick": 1,
+          "hoe": 1,
+          "fishing_rod": 1,
+          "log": 0,
+          "board": 3,
+          "ore": 0,
+          "ingot": 0,
+          "club": 0,
+          "shield": 0,
+          "staff": 0,
+          "bow": 0,
+          "torch": 0,
+          "crate": 0,
+          "cap": 0,
+          "cuirass": 0,
+          "sword": 0,
+          "mace": 0,
+          "gauntlets": 0,
+          "gorget": 0,
+          "heater": 0,
+          "rabbit_foot": 0,
+          "orc_tusk": 0,
+          "meat": 8,
+          "hide": 0,
+          "bandage": 3,
+          "potion_heal": 0,
+          "potion_night": 0,
+          "tunic": 0,
+          "leather": 0,
+          "mail": 0,
+          "hood": 1,
+          "helm": 0,
+          "cloak": 0,
+          "gloves": 1,
+          "hose": 0,
+          "greaves": 0,
+          "boots": 0,
+          "pendant": 1,
+          "ring": 1,
+          "relic": 0,
+          "spellbook": 1,
+          "rune": 4,
+          "garlic": 12,
+          "ginseng": 12,
+          "silk": 16,
+          "nightshade": 4,
+          "pearl": 14,
+          "moss": 10,
+          "mandrake": 10,
+          "ash": 12,
+          "cabbage": 4,
+          "wheat": 8,
+          "cooked_meat": 0,
+          "raw_fish": 4,
+          "cooked_fish": 0,
+          "bread": 0,
+          "stew": 0,
+          "cabbage_seed": 8,
+          "wheat_seed": 6,
+          "garlic_seed": 4,
+          "ginseng_seed": 0,
+          "mandrake_seed": 0,
+          "moss_seed": 0,
+          "acorn": 6,
+          "deed_porch": 0,
+          "deed_hut": 0,
+          "deed_homestead": 0
+        },
+        "chest": {
+          "hatchet": 0,
+          "knife": 0,
+          "pick": 0,
+          "hoe": 0,
+          "fishing_rod": 0,
+          "log": 0,
+          "board": 0,
+          "ore": 0,
+          "ingot": 0,
+          "club": 0,
+          "shield": 0,
+          "staff": 0,
+          "bow": 0,
+          "torch": 0,
+          "crate": 0,
+          "cap": 0,
+          "cuirass": 0,
+          "sword": 0,
+          "mace": 0,
+          "gauntlets": 0,
+          "gorget": 0,
+          "heater": 0,
+          "rabbit_foot": 0,
+          "orc_tusk": 0,
+          "meat": 0,
+          "hide": 0,
+          "bandage": 0,
+          "potion_heal": 0,
+          "potion_night": 0,
+          "tunic": 0,
+          "leather": 0,
+          "mail": 0,
+          "hood": 0,
+          "helm": 0,
+          "cloak": 0,
+          "gloves": 0,
+          "hose": 0,
+          "greaves": 0,
+          "boots": 0,
+          "pendant": 0,
+          "ring": 0,
+          "relic": 0,
+          "spellbook": 0,
+          "rune": 0,
+          "garlic": 0,
+          "ginseng": 0,
+          "silk": 0,
+          "nightshade": 0,
+          "pearl": 0,
+          "moss": 0,
+          "mandrake": 0,
+          "ash": 0,
+          "cabbage": 0,
+          "wheat": 0,
+          "cooked_meat": 0,
+          "raw_fish": 0,
+          "cooked_fish": 0,
+          "bread": 0,
+          "stew": 0,
+          "cabbage_seed": 0,
+          "wheat_seed": 0,
+          "garlic_seed": 0,
+          "ginseng_seed": 0,
+          "mandrake_seed": 0,
+          "moss_seed": 0,
+          "acorn": 0,
+          "deed_porch": 0,
+          "deed_hut": 0,
+          "deed_homestead": 0
+        },
+        "resources": {
+          "iron_ore:ore:sound": 12,
+          "highland_ore:ore:pristine": 7,
+          "ruby:gem:flawless": 5,
+          "redwood:log:pristine": 9
+        },
+        "toast": null
+      },
+      "after": {
+        "position": [
+          268,
+          287
+        ],
+        "path": [],
+        "selectedId": null,
+        "openCraft": false,
+        "gold": 120,
+        "vault": 0,
+        "pack": {
+          "hatchet": 0,
+          "knife": 1,
+          "pick": 1,
+          "hoe": 1,
+          "fishing_rod": 1,
+          "log": 0,
+          "board": 3,
+          "ore": 0,
+          "ingot": 0,
+          "club": 0,
+          "shield": 0,
+          "staff": 0,
+          "bow": 0,
+          "torch": 0,
+          "crate": 0,
+          "cap": 0,
+          "cuirass": 0,
+          "sword": 0,
+          "mace": 0,
+          "gauntlets": 0,
+          "gorget": 0,
+          "heater": 0,
+          "rabbit_foot": 0,
+          "orc_tusk": 0,
+          "meat": 8,
+          "hide": 0,
+          "bandage": 3,
+          "potion_heal": 0,
+          "potion_night": 0,
+          "tunic": 0,
+          "leather": 0,
+          "mail": 0,
+          "hood": 1,
+          "helm": 0,
+          "cloak": 0,
+          "gloves": 1,
+          "hose": 0,
+          "greaves": 0,
+          "boots": 0,
+          "pendant": 1,
+          "ring": 1,
+          "relic": 0,
+          "spellbook": 1,
+          "rune": 4,
+          "garlic": 12,
+          "ginseng": 12,
+          "silk": 16,
+          "nightshade": 4,
+          "pearl": 14,
+          "moss": 10,
+          "mandrake": 10,
+          "ash": 12,
+          "cabbage": 4,
+          "wheat": 8,
+          "cooked_meat": 0,
+          "raw_fish": 4,
+          "cooked_fish": 0,
+          "bread": 0,
+          "stew": 0,
+          "cabbage_seed": 8,
+          "wheat_seed": 6,
+          "garlic_seed": 4,
+          "ginseng_seed": 0,
+          "mandrake_seed": 0,
+          "moss_seed": 0,
+          "acorn": 6,
+          "deed_porch": 0,
+          "deed_hut": 0,
+          "deed_homestead": 0
+        },
+        "chest": {
+          "hatchet": 0,
+          "knife": 0,
+          "pick": 0,
+          "hoe": 0,
+          "fishing_rod": 0,
+          "log": 0,
+          "board": 0,
+          "ore": 0,
+          "ingot": 0,
+          "club": 0,
+          "shield": 0,
+          "staff": 0,
+          "bow": 0,
+          "torch": 0,
+          "crate": 0,
+          "cap": 0,
+          "cuirass": 0,
+          "sword": 0,
+          "mace": 0,
+          "gauntlets": 0,
+          "gorget": 0,
+          "heater": 0,
+          "rabbit_foot": 0,
+          "orc_tusk": 0,
+          "meat": 0,
+          "hide": 0,
+          "bandage": 0,
+          "potion_heal": 0,
+          "potion_night": 0,
+          "tunic": 0,
+          "leather": 0,
+          "mail": 0,
+          "hood": 0,
+          "helm": 0,
+          "cloak": 0,
+          "gloves": 0,
+          "hose": 0,
+          "greaves": 0,
+          "boots": 0,
+          "pendant": 0,
+          "ring": 0,
+          "relic": 0,
+          "spellbook": 0,
+          "rune": 0,
+          "garlic": 0,
+          "ginseng": 0,
+          "silk": 0,
+          "nightshade": 0,
+          "pearl": 0,
+          "moss": 0,
+          "mandrake": 0,
+          "ash": 0,
+          "cabbage": 0,
+          "wheat": 0,
+          "cooked_meat": 0,
+          "raw_fish": 0,
+          "cooked_fish": 0,
+          "bread": 0,
+          "stew": 0,
+          "cabbage_seed": 0,
+          "wheat_seed": 0,
+          "garlic_seed": 0,
+          "ginseng_seed": 0,
+          "mandrake_seed": 0,
+          "moss_seed": 0,
+          "acorn": 0,
+          "deed_porch": 0,
+          "deed_hut": 0,
+          "deed_homestead": 0
+        },
+        "resources": {
+          "iron_ore:ore:sound": 12,
+          "highland_ore:ore:pristine": 7,
+          "ruby:gem:flawless": 5,
+          "redwood:log:pristine": 9
+        },
+        "toast": null
+      },
+      "method": "simulation-useTile-240x.05-not-pointer"
+    },
+    {
+      "name": "desktop-dormitory-exterior-contract",
+      "ok": false,
+      "scene": {
+        "found": false
+      }
+    }
+  ],
+  "errors": [],
+  "assets": [],
+  "screenshots": [],
+  "projections": [],
+  "measurements": [],
+  "scope": "Disposable fixture, exact target scene, desktop/mobile viewport emulation, not physical phone",
+  "releaseGate": "BLOCKED: existing 10/14 p95 comparison and 529 green / 12 baseline game failures remain unwaived",
+  "mechanics": {
+    "yard": "Existing bench station UI, not training UI",
+    "dormitory": "Original two unassigned beds; no rest UI asserted",
+    "farm": "No synthetic plots, items, resources or plant/harvest proof; preserve baseline plots"
+  },
+  "fixture": {
+    "path": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\public\\art\\commons-review-save.json",
+    "positions": [
+      {
+        "id": "qa-commons-dormitory",
+        "kind": "dormitory",
+        "tx": 267,
+        "ty": 284,
+        "beds": [
+          {
+            "occupantId": null
+          },
+          {
+            "occupantId": null
+          }
+        ]
+      },
+      {
+        "id": "b-7",
+        "kind": "yard",
+        "tx": 248,
+        "ty": 291,
+        "beds": []
+      },
+      {
+        "id": "qa-commons-farm",
+        "kind": "farm",
+        "tx": 269,
+        "ty": 304,
+        "beds": []
+      }
+    ],
+    "adjustments": [
+      {
+        "building": "dormitory",
+        "approach": [
+          268,
+          287
+        ],
+        "reason": "Centreline approach rejected by real A* (The way is closed); selected clear reachable tile; building unchanged"
+      }
+    ],
+    "placement": {
+      "added": [
+        {
+          "id": "qa-commons-dormitory",
+          "kind": "dormitory",
+          "tx": 267,
+          "ty": 284,
+          "beds": [
+            {
+              "occupantId": null
+            },
+            {
+              "occupantId": null
+            }
+          ]
+        },
+        {
+          "id": "qa-commons-farm",
+          "kind": "farm",
+          "tx": 269,
+          "ty": 304,
+          "beds": []
+        }
+      ],
+      "selected": [
+        {
+          "id": "b-7",
+          "kind": "yard",
+          "tx": 248,
+          "ty": 291,
+          "beds": []
+        },
+        {
+          "id": "qa-commons-dormitory",
+          "kind": "dormitory",
+          "tx": 267,
+          "ty": 284,
+          "beds": [
+            {
+              "occupantId": null
+            },
+            {
+              "occupantId": null
+            }
+          ]
+        },
+        {
+          "id": "qa-commons-farm",
+          "kind": "farm",
+          "tx": 269,
+          "ty": 304,
+          "beds": []
+        }
+      ],
+      "checks": [
+        {
+          "kind": "dormitory",
+          "box": {
+            "x0": 264,
+            "x1": 270.5,
+            "z0": 282.5,
+            "z1": 286
+          },
+          "tiles": [
+            {
+              "x": 264,
+              "z": 282,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 265,
+              "z": 282,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 282,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 282,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 282,
+              "kind": "road",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 282,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 282,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 264,
+              "z": 283,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 265,
+              "z": 283,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 283,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 283,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 283,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 283,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 283,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 264,
+              "z": 284,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 265,
+              "z": 284,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 284,
+              "kind": "road",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 284,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 284,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 284,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 284,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 264,
+              "z": 285,
+              "kind": "road",
+              "walkable": true
+            },
+            {
+              "x": 265,
+              "z": 285,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 285,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 285,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 285,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 285,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 285,
+              "kind": "grass",
+              "walkable": true
+            }
+          ]
+        },
+        {
+          "kind": "farm",
+          "box": {
+            "x0": 266.5,
+            "x1": 272,
+            "z0": 301.5,
+            "z1": 307
+          },
+          "tiles": [
+            {
+              "x": 266,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            }
+          ]
+        }
+      ]
+    },
+    "changes": [
+      "two disposable buildings only; dorm beds exactly world.ts placeBuilding definition"
+    ],
+    "sha256": "f63fce1a92da2814ecd1c7738f55a88e5daa3533f0b0b2aa3b9fc439de925d54"
+  },
+  "lastWalkIntent": {
+    "name": "desktop-dormitory-outside",
+    "target": [
+      268,
+      287
+    ],
+    "intent": {
+      "position": [
+        256,
+        298
+      ],
+      "path": [
+        {
+          "tx": 257,
+          "ty": 296
+        },
+        {
+          "tx": 264,
+          "ty": 295
+        },
+        {
+          "tx": 267,
+          "ty": 292
+        },
+        {
+          "tx": 266,
+          "ty": 289
+        },
+        {
+          "tx": 268,
+          "ty": 287
+        }
+      ],
+      "selectedId": null,
+      "openCraft": false,
+      "gold": 120,
+      "vault": 0,
+      "pack": {
+        "hatchet": 0,
+        "knife": 1,
+        "pick": 1,
+        "hoe": 1,
+        "fishing_rod": 1,
+        "log": 0,
+        "board": 3,
+        "ore": 0,
+        "ingot": 0,
+        "club": 0,
+        "shield": 0,
+        "staff": 0,
+        "bow": 0,
+        "torch": 0,
+        "crate": 0,
+        "cap": 0,
+        "cuirass": 0,
+        "sword": 0,
+        "mace": 0,
+        "gauntlets": 0,
+        "gorget": 0,
+        "heater": 0,
+        "rabbit_foot": 0,
+        "orc_tusk": 0,
+        "meat": 8,
+        "hide": 0,
+        "bandage": 3,
+        "potion_heal": 0,
+        "potion_night": 0,
+        "tunic": 0,
+        "leather": 0,
+        "mail": 0,
+        "hood": 1,
+        "helm": 0,
+        "cloak": 0,
+        "gloves": 1,
+        "hose": 0,
+        "greaves": 0,
+        "boots": 0,
+        "pendant": 1,
+        "ring": 1,
+        "relic": 0,
+        "spellbook": 1,
+        "rune": 4,
+        "garlic": 12,
+        "ginseng": 12,
+        "silk": 16,
+        "nightshade": 4,
+        "pearl": 14,
+        "moss": 10,
+        "mandrake": 10,
+        "ash": 12,
+        "cabbage": 4,
+        "wheat": 8,
+        "cooked_meat": 0,
+        "raw_fish": 4,
+        "cooked_fish": 0,
+        "bread": 0,
+        "stew": 0,
+        "cabbage_seed": 8,
+        "wheat_seed": 6,
+        "garlic_seed": 4,
+        "ginseng_seed": 0,
+        "mandrake_seed": 0,
+        "moss_seed": 0,
+        "acorn": 6,
+        "deed_porch": 0,
+        "deed_hut": 0,
+        "deed_homestead": 0
+      },
+      "chest": {
+        "hatchet": 0,
+        "knife": 0,
+        "pick": 0,
+        "hoe": 0,
+        "fishing_rod": 0,
+        "log": 0,
+        "board": 0,
+        "ore": 0,
+        "ingot": 0,
+        "club": 0,
+        "shield": 0,
+        "staff": 0,
+        "bow": 0,
+        "torch": 0,
+        "crate": 0,
+        "cap": 0,
+        "cuirass": 0,
+        "sword": 0,
+        "mace": 0,
+        "gauntlets": 0,
+        "gorget": 0,
+        "heater": 0,
+        "rabbit_foot": 0,
+        "orc_tusk": 0,
+        "meat": 0,
+        "hide": 0,
+        "bandage": 0,
+        "potion_heal": 0,
+        "potion_night": 0,
+        "tunic": 0,
+        "leather": 0,
+        "mail": 0,
+        "hood": 0,
+        "helm": 0,
+        "cloak": 0,
+        "gloves": 0,
+        "hose": 0,
+        "greaves": 0,
+        "boots": 0,
+        "pendant": 0,
+        "ring": 0,
+        "relic": 0,
+        "spellbook": 0,
+        "rune": 0,
+        "garlic": 0,
+        "ginseng": 0,
+        "silk": 0,
+        "nightshade": 0,
+        "pearl": 0,
+        "moss": 0,
+        "mandrake": 0,
+        "ash": 0,
+        "cabbage": 0,
+        "wheat": 0,
+        "cooked_meat": 0,
+        "raw_fish": 0,
+        "cooked_fish": 0,
+        "bread": 0,
+        "stew": 0,
+        "cabbage_seed": 0,
+        "wheat_seed": 0,
+        "garlic_seed": 0,
+        "ginseng_seed": 0,
+        "mandrake_seed": 0,
+        "moss_seed": 0,
+        "acorn": 0,
+        "deed_porch": 0,
+        "deed_hut": 0,
+        "deed_homestead": 0
+      },
+      "resources": {
+        "iron_ore:ore:sound": 12,
+        "highland_ore:ore:pristine": 7,
+        "ruby:gem:flawless": 5,
+        "redwood:log:pristine": 9
+      },
+      "toast": null
+    }
+  },
+  "status": "blocked-or-failed",
+  "failure": {
+    "message": "desktop-dormitory-exterior-contract",
+    "stack": "AssertionError [ERR_ASSERTION]: desktop-dormitory-exterior-contract\n    at check (file:///C:/Users/futur/Desktop/emberhall-lanternwood-preview/scripts/commons-smoke.mjs:20:64)\n    at file:///C:/Users/futur/Desktop/emberhall-lanternwood-preview/scripts/commons-smoke.mjs:101:1"
+  },
+  "finished": "2026-09-09T01:40:56.770Z"
+}

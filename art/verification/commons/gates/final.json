@@ -1,0 +1,8 @@
+{
+  "ledger-final": 0,
+  "lint-final": 0,
+  "typecheck-final": 0,
+  "game-test-final": 1,
+  "build-final": 0,
+  "auth-final": 0
+}

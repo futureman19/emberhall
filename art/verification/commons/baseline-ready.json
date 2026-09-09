@@ -1,0 +1,654 @@
+{
+  "status": "passed",
+  "fixture": {
+    "path": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\public\\art\\commons-review-save.json",
+    "positions": [
+      {
+        "id": "qa-commons-dormitory",
+        "kind": "dormitory",
+        "tx": 267,
+        "ty": 284,
+        "beds": [
+          {
+            "occupantId": null
+          },
+          {
+            "occupantId": null
+          }
+        ]
+      },
+      {
+        "id": "b-7",
+        "kind": "yard",
+        "tx": 248,
+        "ty": 291,
+        "beds": []
+      },
+      {
+        "id": "qa-commons-farm",
+        "kind": "farm",
+        "tx": 269,
+        "ty": 304,
+        "beds": []
+      }
+    ],
+    "adjustments": [
+      {
+        "building": "dormitory",
+        "approach": [
+          268,
+          287
+        ],
+        "reason": "Centreline approach rejected by real A* (The way is closed); selected clear reachable tile; building unchanged"
+      },
+      {
+        "building": "dormitory",
+        "approach": [
+          268,
+          287
+        ],
+        "reason": "Centreline approach rejected by real A* (The way is closed); selected clear reachable tile; building unchanged"
+      }
+    ],
+    "placement": {
+      "added": [
+        {
+          "id": "qa-commons-dormitory",
+          "kind": "dormitory",
+          "tx": 267,
+          "ty": 284,
+          "beds": [
+            {
+              "occupantId": null
+            },
+            {
+              "occupantId": null
+            }
+          ]
+        },
+        {
+          "id": "qa-commons-farm",
+          "kind": "farm",
+          "tx": 269,
+          "ty": 304,
+          "beds": []
+        }
+      ],
+      "selected": [
+        {
+          "id": "b-7",
+          "kind": "yard",
+          "tx": 248,
+          "ty": 291,
+          "beds": []
+        },
+        {
+          "id": "qa-commons-dormitory",
+          "kind": "dormitory",
+          "tx": 267,
+          "ty": 284,
+          "beds": [
+            {
+              "occupantId": null
+            },
+            {
+              "occupantId": null
+            }
+          ]
+        },
+        {
+          "id": "qa-commons-farm",
+          "kind": "farm",
+          "tx": 269,
+          "ty": 304,
+          "beds": []
+        }
+      ],
+      "checks": [
+        {
+          "kind": "dormitory",
+          "box": {
+            "x0": 264,
+            "x1": 270.5,
+            "z0": 282.5,
+            "z1": 286
+          },
+          "tiles": [
+            {
+              "x": 264,
+              "z": 282,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 265,
+              "z": 282,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 282,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 282,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 282,
+              "kind": "road",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 282,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 282,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 264,
+              "z": 283,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 265,
+              "z": 283,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 283,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 283,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 283,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 283,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 283,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 264,
+              "z": 284,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 265,
+              "z": 284,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 284,
+              "kind": "road",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 284,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 284,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 284,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 284,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 264,
+              "z": 285,
+              "kind": "road",
+              "walkable": true
+            },
+            {
+              "x": 265,
+              "z": 285,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 285,
+              "kind": "dirt",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 285,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 285,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 285,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 285,
+              "kind": "grass",
+              "walkable": true
+            }
+          ]
+        },
+        {
+          "kind": "farm",
+          "box": {
+            "x0": 266.5,
+            "x1": 272,
+            "z0": 301.5,
+            "z1": 307
+          },
+          "tiles": [
+            {
+              "x": 266,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 301,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 302,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 303,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 304,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 305,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 267,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 268,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 269,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 270,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 271,
+              "z": 306,
+              "kind": "grass",
+              "walkable": true
+            }
+          ]
+        }
+      ]
+    },
+    "changes": [
+      "two disposable buildings only; dorm beds exactly world.ts placeBuilding definition"
+    ],
+    "sha256": "f63fce1a92da2814ecd1c7738f55a88e5daa3533f0b0b2aa3b9fc439de925d54"
+  },
+  "results": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\commons\\original-02\\results.json",
+  "measurements": [
+    {
+      "device": "desktop",
+      "building": "dormitory",
+      "frames": 180,
+      "elapsedMs": 3525.300000047684,
+      "medianMs": 16.69999999999891,
+      "p95Ms": 50,
+      "drawCalls": 596,
+      "triangles": 7059290,
+      "geometryCount": 373,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "desktop",
+      "building": "yard",
+      "frames": 180,
+      "elapsedMs": 3605.600000023842,
+      "medianMs": 16.700000000000728,
+      "p95Ms": 50,
+      "drawCalls": 555,
+      "triangles": 6914180,
+      "geometryCount": 377,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "desktop",
+      "building": "farm",
+      "frames": 180,
+      "elapsedMs": 3625.8000000476823,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 50,
+      "drawCalls": 620,
+      "triangles": 7111346,
+      "geometryCount": 378,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "mobile",
+      "building": "dormitory",
+      "frames": 180,
+      "elapsedMs": 3363.100000047685,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 49.900000000001455,
+      "drawCalls": 352,
+      "triangles": 7006324,
+      "geometryCount": 378,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "mobile",
+      "building": "yard",
+      "frames": 180,
+      "elapsedMs": 3375.7000000238404,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 49.900000000001455,
+      "drawCalls": 410,
+      "triangles": 6896100,
+      "geometryCount": 378,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "mobile",
+      "building": "farm",
+      "frames": 180,
+      "elapsedMs": 3431.2000000476837,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 50,
+      "drawCalls": 537,
+      "triangles": 7102665,
+      "geometryCount": 378,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    }
+  ],
+  "screenshots": [
+    "desktop-dormitory-outside.png",
+    "desktop-dormitory-inside.png",
+    "desktop-dormitory-restored.png",
+    "desktop-dormitory-interaction.png",
+    "desktop-yard-outside.png",
+    "desktop-yard-inside.png",
+    "desktop-yard-restored.png",
+    "desktop-yard-interaction.png",
+    "desktop-farm-outside.png",
+    "desktop-farm-inside.png",
+    "desktop-farm-restored.png",
+    "desktop-farm-interaction.png",
+    "mobile-dormitory-outside.png",
+    "mobile-dormitory-inside.png",
+    "mobile-dormitory-restored.png",
+    "mobile-dormitory-interaction.png",
+    "mobile-yard-outside.png",
+    "mobile-yard-inside.png",
+    "mobile-yard-restored.png",
+    "mobile-yard-interaction.png",
+    "mobile-farm-outside.png",
+    "mobile-farm-inside.png",
+    "mobile-farm-restored.png",
+    "mobile-farm-interaction.png"
+  ],
+  "releaseGate": "BLOCKED: existing 10/14 p95 comparison and 529 green / 12 baseline game failures remain unwaived",
+  "finished": "2026-09-09T01:42:48.262Z"
+}

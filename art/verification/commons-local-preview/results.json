@@ -1,0 +1,284 @@
+{
+  "url": "http://127.0.0.1:8093",
+  "mode": "candidate",
+  "errors": [],
+  "assets": [
+    {
+      "url": "http://127.0.0.1:8093/art/lanternwood/oak.glb",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8093/art/lanternwood/hall.glb",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8093/art/lanternwood/tree-1.glb",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8093/art/lanternwood/tree-0.glb",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8093/art/lanternwood/yard.glb",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8093/art/lanternwood/bank.glb",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8093/art/lanternwood/forge.glb",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8093/art/lanternwood/tavern.glb",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8093/art/lanternwood/kitchen.glb",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8093/art/lanternwood/market.glb",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8093/art/lanternwood/dormitory.glb",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8093/art/lanternwood/farm.glb",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8093/art/lanternwood/character.glb",
+      "status": 200
+    }
+  ],
+  "checks": [
+    "launcher preserves existing preview save",
+    "restore reads back exact prior save",
+    "bank.glb HTTP200 valid header",
+    "forge.glb HTTP200 valid header",
+    "hall.glb HTTP200 valid header",
+    "character.glb HTTP200 valid header",
+    "oak.glb HTTP200 valid header",
+    "kitchen.glb HTTP200 valid header",
+    "tavern.glb HTTP200 valid header",
+    "market.glb HTTP200 valid header",
+    "dormitory.glb HTTP200 valid header",
+    "yard.glb HTTP200 valid header",
+    "farm.glb HTTP200 valid header",
+    "game visible desktop/mobile with no captured page/shader errors"
+  ],
+  "world": {
+    "player": {
+      "id": "you-2",
+      "name": "Ione Reed",
+      "cls": "ranger",
+      "isPlayer": true,
+      "member": true,
+      "role": null,
+      "vocation": null,
+      "x": 256,
+      "z": 297,
+      "facing": 0,
+      "hp": 40,
+      "maxHp": 40,
+      "hunger": 79.77666666666663,
+      "energy": 79.83250000000015,
+      "morale": 70,
+      "int": 11,
+      "str": 10,
+      "dex": 10,
+      "path": [],
+      "task": "idle",
+      "taskUntil": 0,
+      "lingerUntil": 16,
+      "awayUntil": 0,
+      "home": {
+        "tx": 256,
+        "ty": 293
+      },
+      "bob": 10.050000000000004,
+      "ghost": false,
+      "story": 0,
+      "look": {
+        "schema": "emberhall.look/1",
+        "cls": "ranger",
+        "skin": "#c9c3b6",
+        "hairStyle": "crop",
+        "hairColor": "#3a322c",
+        "garb": "#a85a42"
+      }
+    },
+    "localBuildings": [
+      {
+        "id": "b-5",
+        "kind": "hall",
+        "tx": 256,
+        "ty": 290,
+        "beds": [
+          {
+            "occupantId": "you-2"
+          },
+          {
+            "occupantId": null
+          }
+        ]
+      },
+      {
+        "id": "b-6",
+        "kind": "notice",
+        "tx": 263,
+        "ty": 291,
+        "beds": []
+      },
+      {
+        "id": "b-7",
+        "kind": "yard",
+        "tx": 248,
+        "ty": 291,
+        "beds": []
+      },
+      {
+        "id": "b-13",
+        "kind": "bank",
+        "tx": 261,
+        "ty": 295,
+        "beds": []
+      },
+      {
+        "id": "b-182",
+        "kind": "hut",
+        "tx": 250,
+        "ty": 298,
+        "beds": [],
+        "ownerId": "you-2",
+        "chest": {
+          "hatchet": 0,
+          "knife": 0,
+          "pick": 0,
+          "hoe": 0,
+          "fishing_rod": 0,
+          "log": 0,
+          "board": 0,
+          "ore": 0,
+          "ingot": 0,
+          "club": 0,
+          "shield": 0,
+          "staff": 0,
+          "bow": 0,
+          "torch": 0,
+          "crate": 0,
+          "cap": 0,
+          "cuirass": 0,
+          "sword": 0,
+          "mace": 0,
+          "gauntlets": 0,
+          "gorget": 0,
+          "heater": 0,
+          "rabbit_foot": 0,
+          "orc_tusk": 0,
+          "meat": 0,
+          "hide": 0,
+          "bandage": 0,
+          "potion_heal": 0,
+          "potion_night": 0,
+          "tunic": 0,
+          "leather": 0,
+          "mail": 0,
+          "hood": 0,
+          "helm": 0,
+          "cloak": 0,
+          "gloves": 0,
+          "hose": 0,
+          "greaves": 0,
+          "boots": 0,
+          "pendant": 0,
+          "ring": 0,
+          "relic": 0,
+          "spellbook": 0,
+          "rune": 0,
+          "garlic": 0,
+          "ginseng": 0,
+          "silk": 0,
+          "nightshade": 0,
+          "pearl": 0,
+          "moss": 0,
+          "mandrake": 0,
+          "ash": 0,
+          "cabbage": 0,
+          "wheat": 0,
+          "cooked_meat": 0,
+          "raw_fish": 0,
+          "cooked_fish": 0,
+          "bread": 0,
+          "stew": 0,
+          "cabbage_seed": 0,
+          "wheat_seed": 0,
+          "garlic_seed": 0,
+          "ginseng_seed": 0,
+          "mandrake_seed": 0,
+          "moss_seed": 0,
+          "acorn": 0,
+          "deed_porch": 0,
+          "deed_hut": 0,
+          "deed_homestead": 0
+        },
+        "chestGold": 0
+      },
+      {
+        "id": "art-review-forge",
+        "kind": "forge",
+        "tx": 253,
+        "ty": 295,
+        "beds": []
+      },
+      {
+        "id": "qa-hospitality-kitchen",
+        "kind": "kitchen",
+        "tx": 247,
+        "ty": 302,
+        "beds": []
+      },
+      {
+        "id": "qa-hospitality-tavern",
+        "kind": "tavern",
+        "tx": 262,
+        "ty": 302,
+        "beds": []
+      },
+      {
+        "id": "qa-hospitality-market",
+        "kind": "market",
+        "tx": 254,
+        "ty": 303,
+        "beds": []
+      },
+      {
+        "id": "qa-commons-dormitory",
+        "kind": "dormitory",
+        "tx": 267,
+        "ty": 284,
+        "beds": [
+          {
+            "occupantId": null
+          },
+          {
+            "occupantId": null
+          }
+        ]
+      },
+      {
+        "id": "qa-commons-farm",
+        "kind": "farm",
+        "tx": 269,
+        "ty": 304,
+        "beds": []
+      }
+    ]
+  },
+  "passed": true
+}

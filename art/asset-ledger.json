@@ -9,6 +9,7 @@
     "src/components/game/building-meshes.tsx",
     "src/components/game/campfire-meshes.tsx",
     "src/components/game/character-facing.ts",
+    "src/components/game/commons-kit.ts",
     "src/components/game/context-menu.tsx",
     "src/components/game/craft-gump.tsx",
     "src/components/game/crafting/confirm-craft.tsx",
@@ -541,6 +542,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -554,6 +556,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -822,6 +825,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -835,6 +839,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -926,6 +931,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -939,6 +945,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -1030,6 +1037,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -1040,9 +1048,10 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "rendererMapping": "Explicit commonsKitName: built placements within 18 world units of COURT only",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -1054,23 +1063,27 @@
       "states": [
         {
           "id": "exterior",
-          "status": "inventoried",
+          "status": "integrated",
           "evidence": [
             "src/game/building-size.ts:7",
             "src/game/catalog.ts:269",
-            "src/game/types.ts:268"
+            "src/game/types.ts:268",
+            "art/COMMONS-BRIEF.md",
+            "art/COMMONS-VERIFICATION.md",
+            "public/art/lanternwood/commons-manifest.json"
           ],
-          "applicability": "source contract; runtime unverified"
+          "applicability": "Starting-settlement exterior only; art approval pending"
         },
         {
           "id": "interior-cutaway",
-          "status": "inventoried",
+          "status": "retained-by-decision",
           "evidence": [
-            "src/game/building-size.ts:7",
-            "src/game/catalog.ts:269",
-            "src/game/types.ts:268"
+            "art/COMMONS-BRIEF.md"
           ],
-          "applicability": "source contract; runtime unverified"
+          "applicability": "User plan explicitly preserves original interior until a separate approved interior batch",
+          "reviewEvidence": [
+            "art/COMMONS-BRIEF.md"
+          ]
         },
         {
           "id": "placement-invalid",
@@ -1094,28 +1107,182 @@
         }
       ],
       "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
+        "blend": "art/blender/commons-kit.blend",
+        "script": "art/blender/build_commons.py",
+        "export": "public/art/lanternwood/dormitory.glb",
+        "parts": [
+          "dormitory cream long end wall",
+          "dormitory end stone footing",
+          "dormitory cream long end wall.001",
+          "dormitory end stone footing.001",
+          "dormitory rear communal plaster",
+          "dormitory rear stone footing",
+          "dormitory front plaster wing",
+          "dormitory front stone footing",
+          "dormitory front plaster wing.001",
+          "dormitory front stone footing.001",
+          "dormitory communal timber post",
+          "dormitory gold timber peg",
+          "dormitory communal timber post.001",
+          "dormitory gold timber peg.001",
+          "dormitory communal timber post.002",
+          "dormitory gold timber peg.002",
+          "dormitory communal timber post.003",
+          "dormitory gold timber peg.003",
+          "dormitory communal timber post.004",
+          "dormitory gold timber peg.004",
+          "dormitory communal timber post.005",
+          "dormitory gold timber peg.005",
+          "dormitory door lintel",
+          "dormitory long top plate",
+          "dormitory dark window frame",
+          "dormitory warm window pane",
+          "dormitory window center mullion",
+          "dormitory window sill",
+          "dormitory angled half timber",
+          "dormitory dark window frame.001",
+          "dormitory warm window pane.001",
+          "dormitory window center mullion.001",
+          "dormitory window sill.001",
+          "dormitory angled half timber.001",
+          "dormitory dark window frame.002",
+          "dormitory warm window pane.002",
+          "dormitory window center mullion.002",
+          "dormitory window sill.002",
+          "dormitory angled half timber.002",
+          "dormitory dark window frame.003",
+          "dormitory warm window pane.003",
+          "dormitory window center mullion.003",
+          "dormitory window sill.003",
+          "dormitory angled half timber.003",
+          "dormitory continuous bowed roof shell",
+          "dormitory individual bowed shingle",
+          "dormitory individual bowed shingle.001",
+          "dormitory individual bowed shingle.002",
+          "dormitory individual bowed shingle.003",
+          "dormitory individual bowed shingle.004",
+          "dormitory individual bowed shingle.005",
+          "dormitory individual bowed shingle.006",
+          "dormitory individual bowed shingle.007",
+          "dormitory individual bowed shingle.008",
+          "dormitory individual bowed shingle.009",
+          "dormitory individual bowed shingle.010",
+          "dormitory individual bowed shingle.011",
+          "dormitory individual bowed shingle.012",
+          "dormitory individual bowed shingle.013",
+          "dormitory individual bowed shingle.014",
+          "dormitory individual bowed shingle.015",
+          "dormitory individual bowed shingle.016",
+          "dormitory individual bowed shingle.017",
+          "dormitory individual bowed shingle.018",
+          "dormitory individual bowed shingle.019",
+          "dormitory individual bowed shingle.020",
+          "dormitory individual bowed shingle.021",
+          "dormitory individual bowed shingle.022",
+          "dormitory individual bowed shingle.023",
+          "dormitory individual bowed shingle.024",
+          "dormitory individual bowed shingle.025",
+          "dormitory individual bowed shingle.026",
+          "dormitory individual bowed shingle.027",
+          "dormitory individual bowed shingle.028",
+          "dormitory individual bowed shingle.029",
+          "dormitory individual bowed shingle.030",
+          "dormitory individual bowed shingle.031",
+          "dormitory individual bowed shingle.032",
+          "dormitory individual bowed shingle.033",
+          "dormitory individual bowed shingle.034",
+          "dormitory individual bowed shingle.035",
+          "dormitory individual bowed shingle.036",
+          "dormitory individual bowed shingle.037",
+          "dormitory individual bowed shingle.038",
+          "dormitory individual bowed shingle.039",
+          "dormitory individual bowed shingle.040",
+          "dormitory individual bowed shingle.041",
+          "dormitory individual bowed shingle.042",
+          "dormitory individual bowed shingle.043",
+          "dormitory individual bowed shingle.044",
+          "dormitory individual bowed shingle.045",
+          "dormitory individual bowed shingle.046",
+          "dormitory individual bowed shingle.047",
+          "dormitory individual bowed shingle.048",
+          "dormitory individual bowed shingle.049",
+          "dormitory individual bowed shingle.050",
+          "dormitory individual bowed shingle.051",
+          "dormitory individual bowed shingle.052",
+          "dormitory individual bowed shingle.053",
+          "dormitory individual bowed shingle.054",
+          "dormitory individual bowed shingle.055",
+          "dormitory individual bowed shingle.056",
+          "dormitory individual bowed shingle.057",
+          "dormitory individual bowed shingle.058",
+          "dormitory individual bowed shingle.059",
+          "dormitory individual bowed shingle.060",
+          "dormitory individual bowed shingle.061",
+          "dormitory individual bowed shingle.062",
+          "dormitory individual bowed shingle.063",
+          "dormitory individual bowed shingle.064",
+          "dormitory individual bowed shingle.065",
+          "dormitory individual bowed shingle.066",
+          "dormitory individual bowed shingle.067",
+          "dormitory individual bowed shingle.068",
+          "dormitory individual bowed shingle.069",
+          "dormitory individual bowed shingle.070",
+          "dormitory individual bowed shingle.071",
+          "dormitory individual bowed shingle.072",
+          "dormitory individual bowed shingle.073",
+          "dormitory individual bowed shingle.074",
+          "dormitory individual bowed shingle.075",
+          "dormitory individual bowed shingle.076",
+          "dormitory individual bowed shingle.077",
+          "dormitory individual bowed shingle.078",
+          "dormitory individual bowed shingle.079",
+          "dormitory curved gable verge",
+          "dormitory curved gable verge.001",
+          "dormitory rolled timber eave",
+          "dormitory rolled timber eave.001",
+          "dormitory bowed ridge cap",
+          "dormitory communal red door crest",
+          "dormitory gold communal crest bars",
+          "dormitory gold communal crest bars.001",
+          "dormitory gold communal crest bars.002"
+        ],
+        "materials": [
+          "commons shared vertex palette",
+          "restrained honey ember"
+        ],
+        "attachments": "Original ground anchor, no-op art raycast, retained original voxel picking; dorm interior, yard target and farm soil beds; open perimeters stay visible on entry",
+        "lods": [
+          "Shared base kit, no added lights; existing graphics settings retained"
+        ]
       },
       "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
+        "bounds": {
+          "min": [
+            -3.2300000190734863,
+            0,
+            -1.7000000476837158
+          ],
+          "max": [
+            3.2300000190734863,
+            3.0712499618530273,
+            1.7000000476837158
+          ]
+        },
+        "bytes": 218396,
+        "triangles": 3184,
+        "materialSlots": 2
       },
-      "status": "inventoried",
+      "status": "integrated",
       "evidence": [
         "src/game/building-size.ts:7",
         "src/game/catalog.ts:269",
-        "src/game/types.ts:268"
+        "src/game/types.ts:268",
+        "art/COMMONS-BRIEF.md",
+        "art/COMMONS-VERIFICATION.md",
+        "public/art/lanternwood/commons-manifest.json"
       ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+      "batchOwner": "phase1-commons",
+      "notes": "Review batch only; not whole-world replacement or performance approval."
     },
     {
       "id": "building:farm",
@@ -1134,6 +1301,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -1144,9 +1312,10 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "rendererMapping": "Explicit commonsKitName: built placements within 18 world units of COURT only",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -1158,23 +1327,27 @@
       "states": [
         {
           "id": "exterior",
-          "status": "inventoried",
+          "status": "integrated",
           "evidence": [
             "src/game/building-size.ts:15",
             "src/game/catalog.ts:277",
-            "src/game/types.ts:268"
+            "src/game/types.ts:268",
+            "art/COMMONS-BRIEF.md",
+            "art/COMMONS-VERIFICATION.md",
+            "public/art/lanternwood/commons-manifest.json"
           ],
-          "applicability": "source contract; runtime unverified"
+          "applicability": "Starting-settlement exterior only; art approval pending"
         },
         {
           "id": "interior-cutaway",
-          "status": "inventoried",
+          "status": "retained-by-decision",
           "evidence": [
-            "src/game/building-size.ts:15",
-            "src/game/catalog.ts:277",
-            "src/game/types.ts:268"
+            "art/COMMONS-BRIEF.md"
           ],
-          "applicability": "source contract; runtime unverified"
+          "applicability": "User plan explicitly preserves original interior until a separate approved interior batch",
+          "reviewEvidence": [
+            "art/COMMONS-BRIEF.md"
+          ]
         },
         {
           "id": "placement-invalid",
@@ -1198,28 +1371,198 @@
         }
       ],
       "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
+        "blend": "art/blender/commons-kit.blend",
+        "script": "art/blender/build_commons.py",
+        "export": "public/art/lanternwood/farm.glb",
+        "parts": [
+          "farm border stone shoe",
+          "farm shaped border post",
+          "farm cream post cap",
+          "farm border stone shoe.001",
+          "farm shaped border post.001",
+          "farm cream post cap.001",
+          "farm border stone shoe.002",
+          "farm shaped border post.002",
+          "farm cream post cap.002",
+          "farm border stone shoe.003",
+          "farm shaped border post.003",
+          "farm cream post cap.003",
+          "farm border stone shoe.004",
+          "farm shaped border post.004",
+          "farm cream post cap.004",
+          "farm horizontal boundary rail",
+          "farm horizontal boundary rail.001",
+          "farm border stone shoe.005",
+          "farm shaped border post.005",
+          "farm cream post cap.005",
+          "farm border stone shoe.006",
+          "farm shaped border post.006",
+          "farm cream post cap.006",
+          "farm border stone shoe.007",
+          "farm shaped border post.007",
+          "farm cream post cap.007",
+          "farm border stone shoe.008",
+          "farm shaped border post.008",
+          "farm cream post cap.008",
+          "farm horizontal boundary rail.002",
+          "farm horizontal boundary rail.003",
+          "farm horizontal boundary rail.004",
+          "farm horizontal boundary rail.005",
+          "farm side post",
+          "farm side post.001",
+          "farm side post.002",
+          "farm long side boundary rail",
+          "farm long side boundary rail.001",
+          "farm side post.003",
+          "farm side post.004",
+          "farm side post.005",
+          "farm long side boundary rail.002",
+          "farm long side boundary rail.003",
+          "farm open gate jamb",
+          "farm gate gold collar",
+          "farm gate carved finial",
+          "farm open gate jamb.001",
+          "farm gate gold collar.001",
+          "farm gate carved finial.001",
+          "farm red gate identity band",
+          "farm red gate identity band.001",
+          "farm tool shed side",
+          "farm tool shed side.001",
+          "farm tool shed rear",
+          "farm cream tool shed panel",
+          "farm cream tool shed panel.001",
+          "farm cream tool shed panel.002",
+          "farm cream tool shed panel.003",
+          "farm shed front upright",
+          "farm shed front upright.001",
+          "farm shed front upright.002",
+          "farm shed front upright.003",
+          "farm shed footing",
+          "farm continuous bowed roof shell",
+          "farm individual bowed shingle",
+          "farm individual bowed shingle.001",
+          "farm individual bowed shingle.002",
+          "farm individual bowed shingle.003",
+          "farm individual bowed shingle.004",
+          "farm individual bowed shingle.005",
+          "farm individual bowed shingle.006",
+          "farm individual bowed shingle.007",
+          "farm individual bowed shingle.008",
+          "farm individual bowed shingle.009",
+          "farm individual bowed shingle.010",
+          "farm individual bowed shingle.011",
+          "farm individual bowed shingle.012",
+          "farm individual bowed shingle.013",
+          "farm individual bowed shingle.014",
+          "farm individual bowed shingle.015",
+          "farm individual bowed shingle.016",
+          "farm individual bowed shingle.017",
+          "farm individual bowed shingle.018",
+          "farm individual bowed shingle.019",
+          "farm individual bowed shingle.020",
+          "farm individual bowed shingle.021",
+          "farm individual bowed shingle.022",
+          "farm individual bowed shingle.023",
+          "farm individual bowed shingle.024",
+          "farm individual bowed shingle.025",
+          "farm individual bowed shingle.026",
+          "farm individual bowed shingle.027",
+          "farm individual bowed shingle.028",
+          "farm individual bowed shingle.029",
+          "farm individual bowed shingle.030",
+          "farm individual bowed shingle.031",
+          "farm individual bowed shingle.032",
+          "farm individual bowed shingle.033",
+          "farm individual bowed shingle.034",
+          "farm individual bowed shingle.035",
+          "farm individual bowed shingle.036",
+          "farm individual bowed shingle.037",
+          "farm individual bowed shingle.038",
+          "farm individual bowed shingle.039",
+          "farm individual bowed shingle.040",
+          "farm individual bowed shingle.041",
+          "farm individual bowed shingle.042",
+          "farm individual bowed shingle.043",
+          "farm individual bowed shingle.044",
+          "farm individual bowed shingle.045",
+          "farm individual bowed shingle.046",
+          "farm individual bowed shingle.047",
+          "farm individual bowed shingle.048",
+          "farm individual bowed shingle.049",
+          "farm individual bowed shingle.050",
+          "farm individual bowed shingle.051",
+          "farm individual bowed shingle.052",
+          "farm individual bowed shingle.053",
+          "farm individual bowed shingle.054",
+          "farm individual bowed shingle.055",
+          "farm individual bowed shingle.056",
+          "farm individual bowed shingle.057",
+          "farm individual bowed shingle.058",
+          "farm individual bowed shingle.059",
+          "farm individual bowed shingle.060",
+          "farm individual bowed shingle.061",
+          "farm individual bowed shingle.062",
+          "farm individual bowed shingle.063",
+          "farm individual bowed shingle.064",
+          "farm individual bowed shingle.065",
+          "farm individual bowed shingle.066",
+          "farm individual bowed shingle.067",
+          "farm individual bowed shingle.068",
+          "farm individual bowed shingle.069",
+          "farm individual bowed shingle.070",
+          "farm individual bowed shingle.071",
+          "farm individual bowed shingle.072",
+          "farm individual bowed shingle.073",
+          "farm individual bowed shingle.074",
+          "farm individual bowed shingle.075",
+          "farm individual bowed shingle.076",
+          "farm individual bowed shingle.077",
+          "farm individual bowed shingle.078",
+          "farm individual bowed shingle.079",
+          "farm curved gable verge",
+          "farm curved gable verge.001",
+          "farm rolled timber eave",
+          "farm rolled timber eave.001",
+          "farm bowed ridge cap",
+          "farm red tools plaque",
+          "farm gold tool motif"
+        ],
+        "materials": [
+          "commons shared vertex palette"
+        ],
+        "attachments": "Original ground anchor, no-op art raycast, retained original voxel picking; dorm interior, yard target and farm soil beds; open perimeters stay visible on entry",
+        "lods": [
+          "Shared base kit, no added lights; existing graphics settings retained"
+        ]
       },
       "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
+        "bounds": {
+          "min": [
+            -2.6800003051757812,
+            -2.9802322387695312e-8,
+            -3.357484817504883
+          ],
+          "max": [
+            2.6800003051757812,
+            1.8311232328414917,
+            2.684999942779541
+          ]
+        },
+        "bytes": 271764,
+        "triangles": 3988,
+        "materialSlots": 1
       },
-      "status": "inventoried",
+      "status": "integrated",
       "evidence": [
         "src/game/building-size.ts:15",
         "src/game/catalog.ts:277",
-        "src/game/types.ts:268"
+        "src/game/types.ts:268",
+        "art/COMMONS-BRIEF.md",
+        "art/COMMONS-VERIFICATION.md",
+        "public/art/lanternwood/commons-manifest.json"
       ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+      "batchOwner": "phase1-commons",
+      "notes": "Review batch only; not whole-world replacement or performance approval."
     },
     {
       "id": "building:forge",
@@ -1238,6 +1581,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -1251,6 +1595,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -1512,6 +1857,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -1525,6 +1871,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -1616,6 +1963,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -1629,6 +1977,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -1720,6 +2069,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -1733,6 +2083,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -1824,6 +2175,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -1837,6 +2189,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -1928,6 +2281,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -1941,6 +2295,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -2032,6 +2387,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -2042,9 +2398,10 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "Explicit hospitalityKitName: built placements within 18 world units of COURT only",
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -2274,7 +2631,13 @@
         "public/art/lanternwood/hospitality-manifest.json"
       ],
       "batchOwner": "phase1-hospitality",
-      "notes": "Review batch only; not whole-world replacement or performance approval."
+      "notes": "User authorized continuation after hospitality delivery. Full performance acceptance remains unresolved; other placements/states are not globally approved.",
+      "visualApproval": {
+        "status": "continuation-authorized",
+        "scope": "proceed to next review batch; no full acceptance",
+        "evidence": "User: Ok continue",
+        "preview": "https://emberhall-vale-im01t0obl-andrews-projects-ffe8a9fd.vercel.app"
+      }
     },
     {
       "id": "building:market",
@@ -2293,6 +2656,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -2303,9 +2667,10 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "Explicit hospitalityKitName: built placements within 18 world units of COURT only",
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -2455,7 +2820,13 @@
         "public/art/lanternwood/hospitality-manifest.json"
       ],
       "batchOwner": "phase1-hospitality",
-      "notes": "Review batch only; not whole-world replacement or performance approval."
+      "notes": "User authorized continuation after hospitality delivery. Full performance acceptance remains unresolved; other placements/states are not globally approved.",
+      "visualApproval": {
+        "status": "continuation-authorized",
+        "scope": "proceed to next review batch; no full acceptance",
+        "evidence": "User: Ok continue",
+        "preview": "https://emberhall-vale-im01t0obl-andrews-projects-ffe8a9fd.vercel.app"
+      }
     },
     {
       "id": "building:notice",
@@ -2474,6 +2845,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -2487,6 +2859,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -2578,6 +2951,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -2591,6 +2965,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -2682,6 +3057,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -2695,6 +3071,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -2786,6 +3163,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -2799,6 +3177,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -2890,6 +3269,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -2903,6 +3283,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -2994,6 +3375,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -3004,9 +3386,10 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "Explicit hospitalityKitName: built placements within 18 world units of COURT only",
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -3239,7 +3622,13 @@
         "public/art/lanternwood/hospitality-manifest.json"
       ],
       "batchOwner": "phase1-hospitality",
-      "notes": "Review batch only; not whole-world replacement or performance approval."
+      "notes": "User authorized continuation after hospitality delivery. Full performance acceptance remains unresolved; other placements/states are not globally approved.",
+      "visualApproval": {
+        "status": "continuation-authorized",
+        "scope": "proceed to next review batch; no full acceptance",
+        "evidence": "User: Ok continue",
+        "preview": "https://emberhall-vale-im01t0obl-andrews-projects-ffe8a9fd.vercel.app"
+      }
     },
     {
       "id": "building:tower",
@@ -3258,6 +3647,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -3271,6 +3661,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -3362,6 +3753,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -3375,6 +3767,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -3466,6 +3859,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -3479,6 +3873,7 @@
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -3570,6 +3965,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:11",
+        "src/components/game/commons-kit.ts:2",
         "src/components/game/hospitality-kit.ts:2",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -3580,9 +3976,10 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "rendererMapping": "Explicit commonsKitName: built placements within 18 world units of COURT only",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
+        "src/components/game/commons-kit.ts",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -3594,23 +3991,27 @@
       "states": [
         {
           "id": "exterior",
-          "status": "inventoried",
+          "status": "integrated",
           "evidence": [
             "src/game/building-size.ts:9",
             "src/game/catalog.ts:271",
-            "src/game/types.ts:268"
+            "src/game/types.ts:268",
+            "art/COMMONS-BRIEF.md",
+            "art/COMMONS-VERIFICATION.md",
+            "public/art/lanternwood/commons-manifest.json"
           ],
-          "applicability": "source contract; runtime unverified"
+          "applicability": "Starting-settlement exterior only; art approval pending"
         },
         {
           "id": "interior-cutaway",
-          "status": "inventoried",
+          "status": "retained-by-decision",
           "evidence": [
-            "src/game/building-size.ts:9",
-            "src/game/catalog.ts:271",
-            "src/game/types.ts:268"
+            "art/COMMONS-BRIEF.md"
           ],
-          "applicability": "source contract; runtime unverified"
+          "applicability": "User plan explicitly preserves original interior until a separate approved interior batch",
+          "reviewEvidence": [
+            "art/COMMONS-BRIEF.md"
+          ]
         },
         {
           "id": "placement-invalid",
@@ -3634,28 +4035,100 @@
         }
       ],
       "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
+        "blend": "art/blender/commons-kit.blend",
+        "script": "art/blender/build_commons.py",
+        "export": "public/art/lanternwood/yard.glb",
+        "parts": [
+          "yard border stone shoe",
+          "yard shaped border post",
+          "yard cream post cap",
+          "yard border stone shoe.001",
+          "yard shaped border post.001",
+          "yard cream post cap.001",
+          "yard border stone shoe.002",
+          "yard shaped border post.002",
+          "yard cream post cap.002",
+          "yard border stone shoe.003",
+          "yard shaped border post.003",
+          "yard cream post cap.003",
+          "yard border stone shoe.004",
+          "yard shaped border post.004",
+          "yard cream post cap.004",
+          "yard horizontal boundary rail",
+          "yard horizontal boundary rail.001",
+          "yard border stone shoe.005",
+          "yard shaped border post.005",
+          "yard cream post cap.005",
+          "yard border stone shoe.006",
+          "yard shaped border post.006",
+          "yard cream post cap.006",
+          "yard border stone shoe.007",
+          "yard shaped border post.007",
+          "yard cream post cap.007",
+          "yard border stone shoe.008",
+          "yard shaped border post.008",
+          "yard cream post cap.008",
+          "yard horizontal boundary rail.002",
+          "yard horizontal boundary rail.003",
+          "yard horizontal boundary rail.004",
+          "yard horizontal boundary rail.005",
+          "yard side post",
+          "yard side post.001",
+          "yard side post.002",
+          "yard long side boundary rail",
+          "yard long side boundary rail.001",
+          "yard side post.003",
+          "yard side post.004",
+          "yard side post.005",
+          "yard long side boundary rail.002",
+          "yard long side boundary rail.003",
+          "yard open gate jamb",
+          "yard gate gold collar",
+          "yard gate carved finial",
+          "yard open gate jamb.001",
+          "yard gate gold collar.001",
+          "yard gate carved finial.001",
+          "yard pennant upright",
+          "yard red forked pennant",
+          "yard pennant upright.001",
+          "yard red forked pennant.001"
+        ],
+        "materials": [
+          "commons shared vertex palette"
+        ],
+        "attachments": "Original ground anchor, no-op art raycast, retained original voxel picking; dorm interior, yard target and farm soil beds; open perimeters stay visible on entry",
+        "lods": [
+          "Shared base kit, no added lights; existing graphics settings retained"
+        ]
       },
       "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
+        "bounds": {
+          "min": [
+            -2.559999942779541,
+            0,
+            -2.559999942779541
+          ],
+          "max": [
+            2.8499999046325684,
+            1.559999942779541,
+            2.565000057220459
+          ]
+        },
+        "bytes": 159880,
+        "triangles": 2146,
+        "materialSlots": 1
       },
-      "status": "inventoried",
+      "status": "integrated",
       "evidence": [
         "src/game/building-size.ts:9",
         "src/game/catalog.ts:271",
-        "src/game/types.ts:268"
+        "src/game/types.ts:268",
+        "art/COMMONS-BRIEF.md",
+        "art/COMMONS-VERIFICATION.md",
+        "public/art/lanternwood/commons-manifest.json"
       ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+      "batchOwner": "phase1-commons",
+      "notes": "Review batch only; not whole-world replacement or performance approval."
     },
     {
       "id": "catalog/src/game/catalog.ts#NOTORIETY_META:criminal",
@@ -25356,13 +25829,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#bake",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:102"
+        "src/components/game/building-meshes.tsx:103"
       ],
       "sourceNames": [
         "bake"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:102"
+        "src/components/game/building-meshes.tsx:103"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -25414,13 +25887,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#dressHutCute",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:808"
+        "src/components/game/building-meshes.tsx:809"
       ],
       "sourceNames": [
         "dressHutCute"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:808"
+        "src/components/game/building-meshes.tsx:809"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -25472,13 +25945,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#fill",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:67"
+        "src/components/game/building-meshes.tsx:68"
       ],
       "sourceNames": [
         "fill"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:67",
+        "src/components/game/building-meshes.tsx:68",
         "src/components/game/paperdoll.tsx:42"
       ],
       "rendererMapping": "direct AST declaration/name",
@@ -25540,13 +26013,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#gableRoof",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:109"
+        "src/components/game/building-meshes.tsx:110"
       ],
       "sourceNames": [
         "gableRoof"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:109"
+        "src/components/game/building-meshes.tsx:110"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -25606,13 +26079,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#halfTimber",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:123"
+        "src/components/game/building-meshes.tsx:124"
       ],
       "sourceNames": [
         "halfTimber"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:123"
+        "src/components/game/building-meshes.tsx:124"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -25680,13 +26153,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#hallTower",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:216"
+        "src/components/game/building-meshes.tsx:217"
       ],
       "sourceNames": [
         "hallTower"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:216"
+        "src/components/game/building-meshes.tsx:217"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -25746,13 +26219,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#house",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:150"
+        "src/components/game/building-meshes.tsx:151"
       ],
       "sourceNames": [
         "house"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:150"
+        "src/components/game/building-meshes.tsx:151"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -25828,13 +26301,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#insideLabel",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:878"
+        "src/components/game/building-meshes.tsx:879"
       ],
       "sourceNames": [
         "insideLabel"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:878"
+        "src/components/game/building-meshes.tsx:879"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -25894,13 +26367,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#keepTower",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:460"
+        "src/components/game/building-meshes.tsx:461"
       ],
       "sourceNames": [
         "keepTower"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:460"
+        "src/components/game/building-meshes.tsx:461"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -25960,13 +26433,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#key",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:88"
+        "src/components/game/building-meshes.tsx:89"
       ],
       "sourceNames": [
         "key"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:88",
+        "src/components/game/building-meshes.tsx:89",
         "src/components/game/craft-gump.tsx:52",
         "src/components/game/crafting/confirm-craft.tsx:15",
         "src/components/game/crafting/inlay-panel.tsx:25",
@@ -26028,13 +26501,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeBank",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:723"
+        "src/components/game/building-meshes.tsx:724"
       ],
       "sourceNames": [
         "makeBank"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:723"
+        "src/components/game/building-meshes.tsx:724"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -26086,13 +26559,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeBoard",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:449"
+        "src/components/game/building-meshes.tsx:450"
       ],
       "sourceNames": [
         "makeBoard"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:449"
+        "src/components/game/building-meshes.tsx:450"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -26144,13 +26617,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeCottage",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:709"
+        "src/components/game/building-meshes.tsx:710"
       ],
       "sourceNames": [
         "makeCottage"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:709"
+        "src/components/game/building-meshes.tsx:710"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -26202,13 +26675,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeDorm",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:293"
+        "src/components/game/building-meshes.tsx:294"
       ],
       "sourceNames": [
         "makeDorm"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:293"
+        "src/components/game/building-meshes.tsx:294"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -26260,13 +26733,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeFarm",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:410"
+        "src/components/game/building-meshes.tsx:411"
       ],
       "sourceNames": [
         "makeFarm"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:410"
+        "src/components/game/building-meshes.tsx:411"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -26342,13 +26815,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeForge",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:364"
+        "src/components/game/building-meshes.tsx:365"
       ],
       "sourceNames": [
         "makeForge"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:364"
+        "src/components/game/building-meshes.tsx:365"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -26408,13 +26881,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeGatehouse",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:627"
+        "src/components/game/building-meshes.tsx:628"
       ],
       "sourceNames": [
         "makeGatehouse"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:627"
+        "src/components/game/building-meshes.tsx:628"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -26466,13 +26939,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeHall",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:242"
+        "src/components/game/building-meshes.tsx:243"
       ],
       "sourceNames": [
         "makeHall"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:242"
+        "src/components/game/building-meshes.tsx:243"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -26540,13 +27013,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeHomestead",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:833"
+        "src/components/game/building-meshes.tsx:834"
       ],
       "sourceNames": [
         "makeHomestead"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:833"
+        "src/components/game/building-meshes.tsx:834"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -26598,13 +27071,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeHut",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:759"
+        "src/components/game/building-meshes.tsx:760"
       ],
       "sourceNames": [
         "makeHut"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:759"
+        "src/components/game/building-meshes.tsx:760"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -26664,13 +27137,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeKeep",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:488"
+        "src/components/game/building-meshes.tsx:489"
       ],
       "sourceNames": [
         "makeKeep"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:488"
+        "src/components/game/building-meshes.tsx:489"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -26754,13 +27227,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeKitchen",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:311"
+        "src/components/game/building-meshes.tsx:312"
       ],
       "sourceNames": [
         "makeKitchen"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:311"
+        "src/components/game/building-meshes.tsx:312"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -26812,13 +27285,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeMarket",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:349"
+        "src/components/game/building-meshes.tsx:350"
       ],
       "sourceNames": [
         "makeMarket"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:349"
+        "src/components/game/building-meshes.tsx:350"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -26878,13 +27351,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeNotice",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:401"
+        "src/components/game/building-meshes.tsx:402"
       ],
       "sourceNames": [
         "makeNotice"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:401"
+        "src/components/game/building-meshes.tsx:402"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -26936,13 +27409,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makePorch",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:747"
+        "src/components/game/building-meshes.tsx:748"
       ],
       "sourceNames": [
         "makePorch"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:747"
+        "src/components/game/building-meshes.tsx:748"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -26994,13 +27467,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeRampart",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:591"
+        "src/components/game/building-meshes.tsx:592"
       ],
       "sourceNames": [
         "makeRampart"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:591"
+        "src/components/game/building-meshes.tsx:592"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -27052,13 +27525,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeRampartV",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:600"
+        "src/components/game/building-meshes.tsx:601"
       ],
       "sourceNames": [
         "makeRampartV"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:600"
+        "src/components/game/building-meshes.tsx:601"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -27110,13 +27583,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeShop",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:650"
+        "src/components/game/building-meshes.tsx:651"
       ],
       "sourceNames": [
         "makeShop"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:650"
+        "src/components/game/building-meshes.tsx:651"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -27168,13 +27641,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeTavern",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:383"
+        "src/components/game/building-meshes.tsx:384"
       ],
       "sourceNames": [
         "makeTavern"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:383"
+        "src/components/game/building-meshes.tsx:384"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -27226,13 +27699,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeTower",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:609"
+        "src/components/game/building-meshes.tsx:610"
       ],
       "sourceNames": [
         "makeTower"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:609"
+        "src/components/game/building-meshes.tsx:610"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -27284,13 +27757,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeTownhome",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:673"
+        "src/components/game/building-meshes.tsx:674"
       ],
       "sourceNames": [
         "makeTownhome"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:673"
+        "src/components/game/building-meshes.tsx:674"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -27342,13 +27815,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeTownhouse",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:690"
+        "src/components/game/building-meshes.tsx:691"
       ],
       "sourceNames": [
         "makeTownhouse"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:690"
+        "src/components/game/building-meshes.tsx:691"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -27400,13 +27873,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#makeYard",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:330"
+        "src/components/game/building-meshes.tsx:331"
       ],
       "sourceNames": [
         "makeYard"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:330"
+        "src/components/game/building-meshes.tsx:331"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -27474,13 +27947,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#markRoof",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:92"
+        "src/components/game/building-meshes.tsx:93"
       ],
       "sourceNames": [
         "markRoof"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:92"
+        "src/components/game/building-meshes.tsx:93"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -27556,13 +28029,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#occupant",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:863"
+        "src/components/game/building-meshes.tsx:864"
       ],
       "sourceNames": [
         "occupant"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:863"
+        "src/components/game/building-meshes.tsx:864"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -27630,13 +28103,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#put",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:63"
+        "src/components/game/building-meshes.tsx:64"
       ],
       "sourceNames": [
         "put"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:63"
+        "src/components/game/building-meshes.tsx:64"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -27737,6 +28210,228 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/character-facing.ts:2"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/commons-kit.ts#commonsKitName",
+      "canonicalId": "src/components/game/commons-kit.ts#commonsKitName",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/commons-kit.ts:5"
+      ],
+      "sourceNames": [
+        "commonsKitName"
+      ],
+      "rendererLocations": [
+        "src/components/game/commons-kit.ts:5"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/commons-kit.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/commons-kit.ts:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:Math.hypot(x-COURT.tx,z-COURT.ty)<=18",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/commons-kit.ts:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:kind!=='dormitory'&&kind!=='yard'&&kind!=='farm'",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/commons-kit.ts:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/commons-kit.ts:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/commons-kit.ts:5"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/commons-kit.ts#keepCommonsExteriorOnEntry",
+      "canonicalId": "src/components/game/commons-kit.ts#keepCommonsExteriorOnEntry",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/commons-kit.ts:10"
+      ],
+      "sourceNames": [
+        "keepCommonsExteriorOnEntry"
+      ],
+      "rendererLocations": [
+        "src/components/game/commons-kit.ts:10"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/commons-kit.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/commons-kit.ts:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/commons-kit.ts:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/commons-kit.ts:10"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/commons-kit.ts#retainCommonsInteriorVoxel",
+      "canonicalId": "src/components/game/commons-kit.ts#retainCommonsInteriorVoxel",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/commons-kit.ts:13"
+      ],
+      "sourceNames": [
+        "retainCommonsInteriorVoxel"
+      ],
+      "rendererLocations": [
+        "src/components/game/commons-kit.ts:13"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/commons-kit.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/commons-kit.ts:13"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:kind!=='dormitory'",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/commons-kit.ts:13"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:kind==='farm'",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/commons-kit.ts:13"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:kind==='yard'",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/commons-kit.ts:13"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:v.cut",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/commons-kit.ts:13"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/commons-kit.ts:13"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/commons-kit.ts:13"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -34255,13 +34950,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#BlockLayer",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:883"
+        "src/components/game/building-meshes.tsx:884"
       ],
       "sourceNames": [
         "BlockLayer"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:883"
+        "src/components/game/building-meshes.tsx:884"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -34341,13 +35036,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#Buildings",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:1086"
+        "src/components/game/building-meshes.tsx:1087"
       ],
       "sourceNames": [
         "Buildings"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:1086"
+        "src/components/game/building-meshes.tsx:1087"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -34411,13 +35106,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#GhostAt",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:1133"
+        "src/components/game/building-meshes.tsx:1134"
       ],
       "sourceNames": [
         "GhostAt"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:1133"
+        "src/components/game/building-meshes.tsx:1134"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -34503,13 +35198,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#OneBuilding",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:946"
+        "src/components/game/building-meshes.tsx:947"
       ],
       "sourceNames": [
         "OneBuilding"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:946"
+        "src/components/game/building-meshes.tsx:947"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -34595,10 +35290,10 @@
           "applicability": "source contract; runtime unverified"
         },
         {
-          "id": "predicate:retainSettlementInteriorVoxel(b.kind, v) || retainHospitalityInteriorVoxel(b.kind, v)",
+          "id": "predicate:retainSettlementInteriorVoxel(b.kind, v) || retainHospitalityInteriorVoxel(b.kind, v) || retainCommonsInteriorVoxel(b.kind, v)",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/building-meshes.tsx:946"
+            "src/components/game/building-meshes.tsx:947"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -34694,13 +35389,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#PlaceGhost",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:1126"
+        "src/components/game/building-meshes.tsx:1127"
       ],
       "sourceNames": [
         "PlaceGhost"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:1126"
+        "src/components/game/building-meshes.tsx:1127"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -34762,13 +35457,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#PreviewLayer",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:1102"
+        "src/components/game/building-meshes.tsx:1103"
       ],
       "sourceNames": [
         "PreviewLayer"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:1102"
+        "src/components/game/building-meshes.tsx:1103"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [

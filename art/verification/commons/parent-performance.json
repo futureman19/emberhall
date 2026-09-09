@@ -1,0 +1,266 @@
+[
+  {
+    "id": "desktop-dormitory",
+    "before": {
+      "device": "desktop",
+      "building": "dormitory",
+      "frames": 180,
+      "elapsedMs": 3525.300000047684,
+      "medianMs": 16.69999999999891,
+      "p95Ms": 50,
+      "drawCalls": 596,
+      "triangles": 7059290,
+      "geometryCount": 373,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "after": {
+      "device": "desktop",
+      "building": "dormitory",
+      "frames": 180,
+      "elapsedMs": 3508.800000047684,
+      "medianMs": 16.69999999999891,
+      "p95Ms": 50,
+      "drawCalls": 598,
+      "triangles": 7071386,
+      "geometryCount": 383,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "checks": {
+      "p95": true,
+      "draws": true,
+      "triangles": true,
+      "geometry": true,
+      "heap": true
+    }
+  },
+  {
+    "id": "desktop-yard",
+    "before": {
+      "device": "desktop",
+      "building": "yard",
+      "frames": 180,
+      "elapsedMs": 3605.600000023842,
+      "medianMs": 16.700000000000728,
+      "p95Ms": 50,
+      "drawCalls": 555,
+      "triangles": 6914180,
+      "geometryCount": 377,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "after": {
+      "device": "desktop",
+      "building": "yard",
+      "frames": 180,
+      "elapsedMs": 3339.600000047685,
+      "medianMs": 16.700000000000728,
+      "p95Ms": 33.400000000001455,
+      "drawCalls": 548,
+      "triangles": 6922292,
+      "geometryCount": 387,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "checks": {
+      "p95": true,
+      "draws": true,
+      "triangles": true,
+      "geometry": true,
+      "heap": true
+    }
+  },
+  {
+    "id": "desktop-farm",
+    "before": {
+      "device": "desktop",
+      "building": "farm",
+      "frames": 180,
+      "elapsedMs": 3625.8000000476823,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 50,
+      "drawCalls": 620,
+      "triangles": 7111346,
+      "geometryCount": 378,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "after": {
+      "device": "desktop",
+      "building": "farm",
+      "frames": 180,
+      "elapsedMs": 3370.800000023839,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 33.400000000001455,
+      "drawCalls": 608,
+      "triangles": 7123274,
+      "geometryCount": 388,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "checks": {
+      "p95": true,
+      "draws": true,
+      "triangles": true,
+      "geometry": true,
+      "heap": true
+    }
+  },
+  {
+    "id": "mobile-dormitory",
+    "before": {
+      "device": "mobile",
+      "building": "dormitory",
+      "frames": 180,
+      "elapsedMs": 3363.100000047685,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 49.900000000001455,
+      "drawCalls": 352,
+      "triangles": 7006324,
+      "geometryCount": 378,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "after": {
+      "device": "mobile",
+      "building": "dormitory",
+      "frames": 180,
+      "elapsedMs": 3320.4999999761567,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 33.400000000001455,
+      "drawCalls": 341,
+      "triangles": 7012046,
+      "geometryCount": 399,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "checks": {
+      "p95": true,
+      "draws": true,
+      "triangles": true,
+      "geometry": true,
+      "heap": true
+    }
+  },
+  {
+    "id": "mobile-yard",
+    "before": {
+      "device": "mobile",
+      "building": "yard",
+      "frames": 180,
+      "elapsedMs": 3375.7000000238404,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 49.900000000001455,
+      "drawCalls": 410,
+      "triangles": 6896100,
+      "geometryCount": 378,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "after": {
+      "device": "mobile",
+      "building": "yard",
+      "frames": 180,
+      "elapsedMs": 3367.7999999761596,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 49.900000000001455,
+      "drawCalls": 431,
+      "triangles": 6900208,
+      "geometryCount": 399,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "checks": {
+      "p95": true,
+      "draws": true,
+      "triangles": true,
+      "geometry": true,
+      "heap": true
+    }
+  },
+  {
+    "id": "mobile-farm",
+    "before": {
+      "device": "mobile",
+      "building": "farm",
+      "frames": 180,
+      "elapsedMs": 3431.2000000476837,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 50,
+      "drawCalls": 537,
+      "triangles": 7102665,
+      "geometryCount": 378,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "after": {
+      "device": "mobile",
+      "building": "farm",
+      "frames": 180,
+      "elapsedMs": 3473.399999976158,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 50,
+      "drawCalls": 561,
+      "triangles": 7114965,
+      "geometryCount": 399,
+      "textures": 7,
+      "heap": {
+        "used": 364000000,
+        "total": 410000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    "checks": {
+      "p95": true,
+      "draws": true,
+      "triangles": true,
+      "geometry": true,
+      "heap": true
+    }
+  }
+]
