@@ -1,0 +1,42 @@
+[
+  {
+    "arm": "distance-original-a",
+    "tool": "hatchet",
+    "maxMs": 216.60000000000036
+  },
+  {
+    "arm": "distance-original-a",
+    "tool": "hoe",
+    "maxMs": 183.29999999999927
+  },
+  {
+    "arm": "distance-first-a",
+    "tool": "hatchet",
+    "maxMs": 216.6999999999989
+  },
+  {
+    "arm": "distance-first-a",
+    "tool": "hoe",
+    "maxMs": 200.09999999999854
+  },
+  {
+    "arm": "distance-first-b",
+    "tool": "hatchet",
+    "maxMs": 233.29999999999927
+  },
+  {
+    "arm": "distance-first-b",
+    "tool": "hoe",
+    "maxMs": 166.59999999999854
+  },
+  {
+    "arm": "distance-original-b",
+    "tool": "hatchet",
+    "maxMs": 166.70000000000073
+  },
+  {
+    "arm": "distance-original-b",
+    "tool": "hoe",
+    "maxMs": 166.59999999999854
+  }
+]
