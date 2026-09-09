@@ -33996,13 +33996,13 @@
       "canonicalId": "src/components/game/terrain.tsx#align",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/terrain.tsx:829"
+        "src/components/game/terrain.tsx:830"
       ],
       "sourceNames": [
         "align"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:829"
+        "src/components/game/terrain.tsx:830"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -36033,13 +36033,13 @@
       "canonicalId": "src/components/game/terrain.tsx#far-horizon-trees",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:989"
+        "src/components/game/terrain.tsx:991"
       ],
       "sourceNames": [
         "Horizon"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:989"
+        "src/components/game/terrain.tsx:991"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -36091,13 +36091,13 @@
       "canonicalId": "src/components/game/terrain.tsx#harvestable-oak-crowns",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:735"
+        "src/components/game/terrain.tsx:736"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:735"
+        "src/components/game/terrain.tsx:736"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -36149,13 +36149,13 @@
       "canonicalId": "src/components/game/terrain.tsx#harvestable-oak-crowns-faded",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:741"
+        "src/components/game/terrain.tsx:742"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:741"
+        "src/components/game/terrain.tsx:742"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -36207,13 +36207,13 @@
       "canonicalId": "src/components/game/terrain.tsx#harvestable-oak-trunks",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:732"
+        "src/components/game/terrain.tsx:733"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:732"
+        "src/components/game/terrain.tsx:733"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -36265,13 +36265,13 @@
       "canonicalId": "src/components/game/terrain.tsx#harvestable-oak-trunks-faded",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:738"
+        "src/components/game/terrain.tsx:739"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:738"
+        "src/components/game/terrain.tsx:739"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -36323,13 +36323,13 @@
       "canonicalId": "src/components/game/terrain.tsx#lanternwood-soft-canopies",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:755"
+        "src/components/game/terrain.tsx:756"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:755"
+        "src/components/game/terrain.tsx:756"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44843,13 +44843,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_FAR",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:825"
+        "src/components/game/terrain.tsx:826"
       ],
       "sourceNames": [
         "COL_FAR"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:825"
+        "src/components/game/terrain.tsx:826"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -46087,13 +46087,13 @@
       "canonicalId": "src/components/game/terrain.tsx#Horizon",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:833"
+        "src/components/game/terrain.tsx:834"
       ],
       "sourceNames": [
         "Horizon"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:833"
+        "src/components/game/terrain.tsx:834"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [

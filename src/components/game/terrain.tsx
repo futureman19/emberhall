@@ -166,7 +166,7 @@ function kindAt(world: World, tx: number, ty: number): TileKind {
   return world.tiles[ty]?.[tx]?.kind ?? "grass";
 }
 
-function colorAt(world: World, x: number, z: number, out: THREE.Color) {
+function colorAt(world: World, x: number, z: number, out: THREE.Color, weights: ReturnType<typeof biomeWeights>) {
   const x0 = Math.floor(x);
   const z0 = Math.floor(z);
   const fx = x - x0;
@@ -178,7 +178,7 @@ function colorAt(world: World, x: number, z: number, out: THREE.Color) {
   out.copy(c00).lerp(c10, fx);
   tmp.copy(c01).lerp(c11, fx);
   out.lerp(tmp, fz);
-  const w = biomeWeights(x, z);
+  const w = weights;
   if (w.tundra > 0.04) out.lerp(COL_GROUND_SNOW, w.tundra * 0.62);
   if (w.taiga > 0.04) out.lerp(COL_GROUND_TAIGA, w.taiga * 0.4);
   if (w.fen > 0.04) out.lerp(COL_GROUND_MARSH, w.fen * 0.5);
@@ -188,7 +188,7 @@ function colorAt(world: World, x: number, z: number, out: THREE.Color) {
   if (localColor) out.lerp(LW_GROUND.set(localColor), lanternwoodInfluence(x, z) * 0.72);
 }
 
-function coverAt(world: World, x: number, z: number, dest: Float32Array, i: number) {
+function coverAt(world: World, x: number, z: number, dest: Float32Array, i: number, weights: ReturnType<typeof biomeWeights>) {
   const x0 = Math.floor(x);
   const z0 = Math.floor(z);
   const fx = x - x0;
@@ -206,7 +206,7 @@ function coverAt(world: World, x: number, z: number, dest: Float32Array, i: numb
   dest[i] = sx0 + (sx1 - sx0) * fz;
   dest[i + 1] = sy0 + (sy1 - sy0) * fz;
   dest[i + 2] = sz0 + (sz1 - sz0) * fz;
-  const w = biomeWeights(x, z);
+  const w = weights;
   if (w.tundra > 0.05) {
     dest[i] += (0.08 - dest[i]) * w.tundra * 0.7;
     dest[i + 1] += (0.06 - dest[i + 1]) * w.tundra * 0.7;
@@ -393,8 +393,9 @@ export function Terrain() {
           arr[i + 1] = t ? groundY(w, wx, wz) : -8.05;
           arr[i + 2] = wz;
           if (t) {
-            colorAt(w, wx, wz, pal);
-            coverAt(w, wx, wz, karr, i);
+            const weights = biomeWeights(wx, wz);
+            colorAt(w, wx, wz, pal, weights);
+            coverAt(w, wx, wz, karr, i, weights);
           } else {
             // Off the map: sink just beneath the horizon skirt and wear the
             // sky's haze, so the world's rim melts into the distance.
@@ -902,8 +903,9 @@ export function Horizon({ treeReduction }: { treeReduction: HorizonTreeReduction
             karr[i + 1] = 0;
             karr[i + 2] = 0;
           } else {
-            colorAt(w, wx, wz, pal);
-            coverAt(w, wx, wz, karr, i);
+            const weights = biomeWeights(wx, wz);
+            colorAt(w, wx, wz, pal, weights);
+            coverAt(w, wx, wz, karr, i, weights);
           }
           car[i] = pal.r;
           car[i + 1] = pal.g;
