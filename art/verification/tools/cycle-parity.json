@@ -1,0 +1,584 @@
+{
+  "pairs": 112,
+  "allMatch": true,
+  "restored": [
+    {
+      "tool": "hatchet",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "equal": true
+    }
+  ],
+  "rows": [
+    {
+      "tool": "hatchet",
+      "pose": "idle",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "idle",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "idle",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "idle",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work0",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work0",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work0",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work0",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work1",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work1",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work1",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work1",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work2",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work2",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work2",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work2",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work3",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work3",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work3",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work3",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work4",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work4",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work4",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work4",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work5",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work5",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work5",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work5",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work6",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work6",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work6",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work6",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work7",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work7",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work7",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work7",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work8",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work8",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work8",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work8",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work9",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work9",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work9",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work9",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work10",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work10",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work10",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work10",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work11",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work11",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work11",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work11",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work12",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work12",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work12",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work12",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work13",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work13",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work13",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work13",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work14",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work14",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work14",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work14",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work15",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work15",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work15",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work15",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work16",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work16",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work16",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work16",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work17",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work17",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work17",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work17",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work18",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work18",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work18",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work18",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work19",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work19",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work19",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work19",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work20",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work20",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work20",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work20",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work21",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work21",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work21",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work21",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work22",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work22",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work22",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work22",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work23",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work23",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work23",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work23",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "work24",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "work24",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "work24",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "work24",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "ghost",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "ghost",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "ghost",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "ghost",
+      "equal": true
+    },
+    {
+      "tool": "hatchet",
+      "pose": "restored",
+      "equal": true
+    },
+    {
+      "tool": "pick",
+      "pose": "restored",
+      "equal": true
+    },
+    {
+      "tool": "hoe",
+      "pose": "restored",
+      "equal": true
+    },
+    {
+      "tool": "fishing_rod",
+      "pose": "restored",
+      "equal": true
+    }
+  ]
+}
