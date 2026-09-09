@@ -4,7 +4,7 @@ import { ItemGlyph } from "@/components/game/paperdoll";
 import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "@/game/catalog";
-import { RECIPES, haveNeed, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
+import { RECIPES, canMake, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
 import { BOW_FORM } from "@/game/crafting/forms";
 import { listResourceInventory } from "@/game/inventory/resources";
 import { getWorld } from "@/game/live";
@@ -135,7 +135,7 @@ function RecipeRow({
   onMake: () => void;
   onMakeBatch: (times: number) => void;
 }) {
-  const ready = at && haveNeed(pack, rec) && (!rec.needsBlade || bladeOk);
+  const ready = at && canMake(getWorld(), rec) && (!rec.needsBlade || bladeOk);
   const product = (Object.keys(rec.give) as ItemId[]).find((k) => (rec.give[k] ?? 0) > 0);
   return (
     <div

@@ -1,0 +1,34 @@
+{
+  "original-baseline": {
+    "status": "completed-with-failures",
+    "checks": 46,
+    "failed": [
+      "desktop-typed-smelt-UI",
+      "mobile-typed-smelt-UI"
+    ],
+    "screenshots": 11,
+    "errors": [],
+    "scene": "exact-local-fiber-_roots:/node_modules/.vite/deps/@react-three_fiber.js?v=8fddb7ff"
+  },
+  "original-fixed": {
+    "status": "passed",
+    "checks": 46,
+    "failed": [],
+    "screenshots": 11,
+    "errors": [],
+    "scene": "exact-local-fiber-_roots:/node_modules/.vite/deps/@react-three_fiber.js?v=8fddb7ff"
+  },
+  "tests": {
+    "red": {
+      "pass": 1,
+      "fail": 1
+    },
+    "green": {
+      "pass": 7,
+      "fail": 0
+    },
+    "targetedLint": "passed",
+    "typecheck": "blocked by scripts/audit-art-coverage.mjs and src/components/game/art-coverage.test.ts; no owned-file diagnostics",
+    "build": "not run; parent owns integration/build"
+  }
+}

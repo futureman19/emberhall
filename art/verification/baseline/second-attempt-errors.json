@@ -1,0 +1,223 @@
+{
+  "started": "2026-09-08T23:44:42.782Z",
+  "url": "http://127.0.0.1:8093",
+  "reference": "https://emberhall-vale-jqdd64bla-andrews-projects-ffe8a9fd.vercel.app",
+  "commit": "0fa7360e02bb23015cec1898aee3f0c7a1ccf171",
+  "fixtureSha256": "9b07c6dccdf938185e7d46eeccea06002a94e948a7935ae3b218b705784acbb4",
+  "host": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "cpu": "13th Gen Intel(R) Core(TM) i5-13400F",
+    "logicalCpus": 16,
+    "totalMemory": 34164097024
+  },
+  "browser": "151.0.7922.34",
+  "settings": {
+    "hour": 12,
+    "speed": 0,
+    "weather": {
+      "kind": "clear",
+      "cloud": 0.06,
+      "wet": 0,
+      "wind": 0.12,
+      "untilHour": 99999,
+      "rolls": 1,
+      "douseHour": 0
+    },
+    "frames": 180,
+    "dpr": 1,
+    "camera": "unchanged normal gameplay camera; follow translates to fixture player",
+    "scenes": [
+      {
+        "id": "starting-town",
+        "x": 256,
+        "z": 293
+      },
+      {
+        "id": "dense-woodland",
+        "x": 248,
+        "z": 148
+      },
+      {
+        "id": "capital-interior",
+        "x": 176,
+        "z": 320
+      },
+      {
+        "id": "combat-arena",
+        "x": 248,
+        "z": 291,
+        "combat": true
+      },
+      {
+        "id": "distant-biome",
+        "x": 250,
+        "z": 48
+      }
+    ]
+  },
+  "loads": [
+    {
+      "label": "cold-new-context",
+      "navigationToPlayableSettledMs": 15050.3063,
+      "continueToPlayableSettledMs": 13596.0249,
+      "includesFixedSettleMs": 1000,
+      "navigation": {
+        "name": "http://127.0.0.1:8093/",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 309.39999997615814,
+        "navigationId": 7283,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 1.100000023841858,
+        "domainLookupStart": 1.100000023841858,
+        "domainLookupEnd": 1.100000023841858,
+        "connectStart": 1.100000023841858,
+        "secureConnectionStart": 0,
+        "connectEnd": 1.100000023841858,
+        "requestStart": 2.6999999284744263,
+        "responseStart": 19.5,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 19.5,
+        "responseEnd": 19.799999952316284,
+        "transferSize": 4940,
+        "encodedBodySize": 4640,
+        "decodedBodySize": 4640,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 21.899999976158142,
+        "unloadEventEnd": 21.899999976158142,
+        "domInteractive": 88.10000002384186,
+        "domContentLoadedEventStart": 88.60000002384186,
+        "domContentLoadedEventEnd": 88.69999992847443,
+        "domComplete": 309.39999997615814,
+        "loadEventStart": 309.39999997615814,
+        "loadEventEnd": 309.39999997615814,
+        "type": "reload",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "low"
+        }
+      }
+    },
+    {
+      "label": "warm-same-context-new-page",
+      "navigationToPlayableSettledMs": 16398.718800000002,
+      "continueToPlayableSettledMs": 14951.5873,
+      "includesFixedSettleMs": 1000,
+      "navigation": {
+        "name": "http://127.0.0.1:8093/",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 113.19999992847443,
+        "navigationId": 4326,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 1,
+        "domainLookupStart": 1,
+        "domainLookupEnd": 1,
+        "connectStart": 1,
+        "secureConnectionStart": 0,
+        "connectEnd": 1,
+        "requestStart": 1.600000023841858,
+        "responseStart": 27.299999952316284,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 27.299999952316284,
+        "responseEnd": 27.699999928474426,
+        "transferSize": 4940,
+        "encodedBodySize": 4640,
+        "decodedBodySize": 4640,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 31.799999952316284,
+        "unloadEventEnd": 31.799999952316284,
+        "domInteractive": 101.39999997615814,
+        "domContentLoadedEventStart": 101.89999997615814,
+        "domContentLoadedEventEnd": 101.89999997615814,
+        "domComplete": 113.19999992847443,
+        "loadEventStart": 113.19999992847443,
+        "loadEventEnd": 113.19999992847443,
+        "type": "reload",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "high"
+        }
+      }
+    }
+  ],
+  "samples": [],
+  "errors": [
+    {
+      "label": "local-cold",
+      "type": "warning",
+      "text": "[.WebGL-0x5e3401072e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "label": "local-cold",
+      "type": "warning",
+      "text": "[.WebGL-0x5e3401072e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "label": "local-cold",
+      "type": "warning",
+      "text": "[.WebGL-0x5e3401072e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "label": "local-cold",
+      "type": "warning",
+      "text": "[.WebGL-0x5e3401072e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    },
+    {
+      "label": "local-cold",
+      "type": "requestfailed",
+      "url": "http://127.0.0.1:8093/",
+      "error": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "type": "harness-blocker",
+      "text": "Error: page.evaluate: Execution context was destroyed, most likely because of a navigation.",
+      "stack": "page.evaluate: Execution context was destroyed, most likely because of a navigation.\n    at C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\scripts\\settlement-baseline.mjs:76:14"
+    },
+    {
+      "label": "local-warm",
+      "type": "requestfailed",
+      "url": "http://127.0.0.1:8093/",
+      "error": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  ]
+}

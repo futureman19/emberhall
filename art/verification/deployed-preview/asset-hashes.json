@@ -1,0 +1,27 @@
+[
+  {
+    "asset": "bank",
+    "sha256": "5ec9cb2a1c79ffe075e8ea2d0f66349ecfbcd5b49fa2ecc651992294322cfc4e",
+    "liveMatchesLocal": true
+  },
+  {
+    "asset": "forge",
+    "sha256": "e2248044493918fe8bfc0133cee0e3bb85374c53b1a3f5899f81cb2f95124a3b",
+    "liveMatchesLocal": true
+  },
+  {
+    "asset": "hall",
+    "sha256": "1b7d67ac7dbadbd1c5d4024c63a76b59ae641b45443d4b1d0219ecd695612482",
+    "liveMatchesLocal": true
+  },
+  {
+    "asset": "character",
+    "sha256": "4c08799d4ebc2de738783a148d7538f069974b059ce12b1d4feb0518ed21566b",
+    "liveMatchesLocal": true
+  },
+  {
+    "asset": "oak",
+    "sha256": "e38306e785170da4e66399611d7e1e715d4ccb40b9693883f63abb66055f0f8a",
+    "liveMatchesLocal": true
+  }
+]

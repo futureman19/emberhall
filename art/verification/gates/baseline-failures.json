@@ -1,0 +1,14 @@
+[
+  "platform chrome overwrites share-card metas and always sets og:title",
+  "published grok.me slug is still a title fallback",
+  "emits og:image for a public host and prefers a custom card",
+  "placeholder og:image appends site.color when it is 6-digit hex",
+  "document title entities are not double-escaped on og:title",
+  "injects into documents with no head element",
+  "streaming injector matches </HEAD> case-insensitively",
+  "uses the app name in the injected title tag",
+  "the wrapped command runs with the app env applied",
+  "the wrapped command sees an explicit override, not the file value",
+  "the wrapper propagates the command's exit code",
+  "the CLI still runs when invoked through a symlinked path"
+]

@@ -1,0 +1,761 @@
+{
+  "url": "https://emberhall-vale-3liuqzdyi-andrews-projects-ffe8a9fd.vercel.app",
+  "label": "deployed-final",
+  "authored": true,
+  "started": "2026-09-09T00:31:03.319Z",
+  "scope": "disposable browser context; no runtime edits",
+  "browserExercised": true,
+  "checks": [
+    {
+      "name": "fixture-buildingBox-clear",
+      "ok": true,
+      "proposed": {
+        "x0": 251.5,
+        "x1": 255,
+        "z0": 293.5,
+        "z1": 297
+      },
+      "collisions": [],
+      "nearby": [
+        {
+          "id": "b-7",
+          "kind": "yard",
+          "tx": 248,
+          "ty": 291,
+          "box": {
+            "x0": 245.5,
+            "x1": 251,
+            "z0": 288.5,
+            "z1": 294
+          },
+          "overlaps": false
+        },
+        {
+          "id": "b-182",
+          "kind": "hut",
+          "tx": 250,
+          "ty": 298,
+          "box": {
+            "x0": 248.5,
+            "x1": 252,
+            "z0": 297,
+            "z1": 299.5
+          },
+          "overlaps": false
+        }
+      ]
+    },
+    {
+      "name": "exact-target-scene-camera",
+      "ok": false,
+      "available": false,
+      "reason": "No exact target scene/camera. Cannot claim local or live cutaway proof."
+    }
+  ],
+  "errors": [],
+  "assets": [
+    {
+      "url": "https://emberhall-vale-3liuqzdyi-andrews-projects-ffe8a9fd.vercel.app/art/lanternwood/hall.glb",
+      "status": 200
+    },
+    {
+      "url": "https://emberhall-vale-3liuqzdyi-andrews-projects-ffe8a9fd.vercel.app/art/lanternwood/tree-0.glb",
+      "status": 200
+    },
+    {
+      "url": "https://emberhall-vale-3liuqzdyi-andrews-projects-ffe8a9fd.vercel.app/art/lanternwood/tree-1.glb",
+      "status": 200
+    },
+    {
+      "url": "https://emberhall-vale-3liuqzdyi-andrews-projects-ffe8a9fd.vercel.app/art/lanternwood/oak.glb",
+      "status": 200
+    },
+    {
+      "url": "https://emberhall-vale-3liuqzdyi-andrews-projects-ffe8a9fd.vercel.app/art/lanternwood/character.glb",
+      "status": 200
+    },
+    {
+      "url": "https://emberhall-vale-3liuqzdyi-andrews-projects-ffe8a9fd.vercel.app/art/lanternwood/forge.glb",
+      "status": 200
+    },
+    {
+      "url": "https://emberhall-vale-3liuqzdyi-andrews-projects-ffe8a9fd.vercel.app/art/lanternwood/bank.glb",
+      "status": 200
+    }
+  ],
+  "screenshots": [],
+  "projections": [],
+  "sourceSave": {
+    "path": "C:/Users/futur/.hermes/profiles/telegram2/lanternwood-review/baseline-save.json",
+    "sha256": "1f99703d2bb28a521819a46a280ffd8a8f7bb6984dec6d564bc30298e9ce3467"
+  },
+  "fixture": {
+    "proposed": {
+      "id": "qa-disposable-settlement-forge",
+      "kind": "forge",
+      "tx": 253,
+      "ty": 295,
+      "beds": []
+    },
+    "box": {
+      "x0": 251.5,
+      "x1": 255,
+      "z0": 293.5,
+      "z1": 297
+    },
+    "comparisons": [
+      {
+        "id": "b-5",
+        "kind": "hall",
+        "tx": 256,
+        "ty": 290,
+        "box": {
+          "x0": 253.5,
+          "x1": 259,
+          "z0": 288,
+          "z1": 292.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-6",
+        "kind": "notice",
+        "tx": 263,
+        "ty": 291,
+        "box": {
+          "x0": 262.5,
+          "x1": 264,
+          "z0": 291,
+          "z1": 292.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-7",
+        "kind": "yard",
+        "tx": 248,
+        "ty": 291,
+        "box": {
+          "x0": 245.5,
+          "x1": 251,
+          "z0": 288.5,
+          "z1": 294
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-13",
+        "kind": "bank",
+        "tx": 261,
+        "ty": 295,
+        "box": {
+          "x0": 259.5,
+          "x1": 263,
+          "z0": 294,
+          "z1": 296.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-14",
+        "kind": "keep",
+        "tx": 176,
+        "ty": 320,
+        "box": {
+          "x0": 166,
+          "x1": 187,
+          "z0": 312,
+          "z1": 328
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-15",
+        "kind": "rampart",
+        "tx": 156,
+        "ty": 310,
+        "box": {
+          "x0": 152,
+          "x1": 160,
+          "z0": 309.5,
+          "z1": 310.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-16",
+        "kind": "rampart",
+        "tx": 156,
+        "ty": 362,
+        "box": {
+          "x0": 152,
+          "x1": 160,
+          "z0": 361.5,
+          "z1": 362.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-17",
+        "kind": "rampart",
+        "tx": 164,
+        "ty": 310,
+        "box": {
+          "x0": 160,
+          "x1": 168,
+          "z0": 309.5,
+          "z1": 310.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-18",
+        "kind": "rampart",
+        "tx": 164,
+        "ty": 362,
+        "box": {
+          "x0": 160,
+          "x1": 168,
+          "z0": 361.5,
+          "z1": 362.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-19",
+        "kind": "rampart",
+        "tx": 172,
+        "ty": 310,
+        "box": {
+          "x0": 168,
+          "x1": 176,
+          "z0": 309.5,
+          "z1": 310.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-20",
+        "kind": "rampart",
+        "tx": 172,
+        "ty": 362,
+        "box": {
+          "x0": 168,
+          "x1": 176,
+          "z0": 361.5,
+          "z1": 362.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-21",
+        "kind": "rampart",
+        "tx": 180,
+        "ty": 310,
+        "box": {
+          "x0": 176,
+          "x1": 184,
+          "z0": 309.5,
+          "z1": 310.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-22",
+        "kind": "rampart",
+        "tx": 180,
+        "ty": 362,
+        "box": {
+          "x0": 176,
+          "x1": 184,
+          "z0": 361.5,
+          "z1": 362.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-23",
+        "kind": "rampart",
+        "tx": 188,
+        "ty": 310,
+        "box": {
+          "x0": 184,
+          "x1": 192,
+          "z0": 309.5,
+          "z1": 310.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-24",
+        "kind": "rampart",
+        "tx": 188,
+        "ty": 362,
+        "box": {
+          "x0": 184,
+          "x1": 192,
+          "z0": 361.5,
+          "z1": 362.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-25",
+        "kind": "rampart",
+        "tx": 196,
+        "ty": 310,
+        "box": {
+          "x0": 192,
+          "x1": 200,
+          "z0": 309.5,
+          "z1": 310.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-26",
+        "kind": "rampart",
+        "tx": 196,
+        "ty": 362,
+        "box": {
+          "x0": 192,
+          "x1": 200,
+          "z0": 361.5,
+          "z1": 362.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-27",
+        "kind": "rampartV",
+        "tx": 152,
+        "ty": 314,
+        "box": {
+          "x0": 151.5,
+          "x1": 152.5,
+          "z0": 310,
+          "z1": 318
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-28",
+        "kind": "rampartV",
+        "tx": 200,
+        "ty": 314,
+        "box": {
+          "x0": 199.5,
+          "x1": 200.5,
+          "z0": 310,
+          "z1": 318
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-29",
+        "kind": "rampartV",
+        "tx": 152,
+        "ty": 322,
+        "box": {
+          "x0": 151.5,
+          "x1": 152.5,
+          "z0": 318,
+          "z1": 326
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-30",
+        "kind": "rampartV",
+        "tx": 200,
+        "ty": 322,
+        "box": {
+          "x0": 199.5,
+          "x1": 200.5,
+          "z0": 318,
+          "z1": 326
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-31",
+        "kind": "rampartV",
+        "tx": 152,
+        "ty": 330,
+        "box": {
+          "x0": 151.5,
+          "x1": 152.5,
+          "z0": 326,
+          "z1": 334
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-32",
+        "kind": "rampartV",
+        "tx": 200,
+        "ty": 330,
+        "box": {
+          "x0": 199.5,
+          "x1": 200.5,
+          "z0": 326,
+          "z1": 334
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-33",
+        "kind": "rampartV",
+        "tx": 152,
+        "ty": 342,
+        "box": {
+          "x0": 151.5,
+          "x1": 152.5,
+          "z0": 338,
+          "z1": 346
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-34",
+        "kind": "rampartV",
+        "tx": 200,
+        "ty": 342,
+        "box": {
+          "x0": 199.5,
+          "x1": 200.5,
+          "z0": 338,
+          "z1": 346
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-35",
+        "kind": "rampartV",
+        "tx": 152,
+        "ty": 350,
+        "box": {
+          "x0": 151.5,
+          "x1": 152.5,
+          "z0": 346,
+          "z1": 354
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-36",
+        "kind": "rampartV",
+        "tx": 200,
+        "ty": 350,
+        "box": {
+          "x0": 199.5,
+          "x1": 200.5,
+          "z0": 346,
+          "z1": 354
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-37",
+        "kind": "rampartV",
+        "tx": 152,
+        "ty": 358,
+        "box": {
+          "x0": 151.5,
+          "x1": 152.5,
+          "z0": 354,
+          "z1": 362
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-38",
+        "kind": "rampartV",
+        "tx": 200,
+        "ty": 358,
+        "box": {
+          "x0": 199.5,
+          "x1": 200.5,
+          "z0": 354,
+          "z1": 362
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-39",
+        "kind": "tower",
+        "tx": 152,
+        "ty": 310,
+        "box": {
+          "x0": 151,
+          "x1": 153.5,
+          "z0": 309,
+          "z1": 311.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-40",
+        "kind": "tower",
+        "tx": 200,
+        "ty": 310,
+        "box": {
+          "x0": 199,
+          "x1": 201.5,
+          "z0": 309,
+          "z1": 311.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-41",
+        "kind": "tower",
+        "tx": 152,
+        "ty": 362,
+        "box": {
+          "x0": 151,
+          "x1": 153.5,
+          "z0": 361,
+          "z1": 363.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-42",
+        "kind": "tower",
+        "tx": 200,
+        "ty": 362,
+        "box": {
+          "x0": 199,
+          "x1": 201.5,
+          "z0": 361,
+          "z1": 363.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-43",
+        "kind": "gatehouse",
+        "tx": 152,
+        "ty": 336,
+        "box": {
+          "x0": 151,
+          "x1": 153.5,
+          "z0": 334,
+          "z1": 338.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-44",
+        "kind": "gatehouse",
+        "tx": 200,
+        "ty": 336,
+        "box": {
+          "x0": 199,
+          "x1": 201.5,
+          "z0": 334,
+          "z1": 338.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-45",
+        "kind": "notice",
+        "tx": 166,
+        "ty": 331,
+        "box": {
+          "x0": 165.5,
+          "x1": 167,
+          "z0": 331,
+          "z1": 332.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-46",
+        "kind": "market",
+        "tx": 170,
+        "ty": 343,
+        "box": {
+          "x0": 168,
+          "x1": 172.5,
+          "z0": 341.5,
+          "z1": 345
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-47",
+        "kind": "shop",
+        "tx": 182,
+        "ty": 343,
+        "box": {
+          "x0": 180,
+          "x1": 184.5,
+          "z0": 341.5,
+          "z1": 345
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-48",
+        "kind": "forge",
+        "tx": 192,
+        "ty": 344,
+        "box": {
+          "x0": 190.5,
+          "x1": 194,
+          "z0": 342.5,
+          "z1": 346
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-49",
+        "kind": "tavern",
+        "tx": 160,
+        "ty": 345,
+        "box": {
+          "x0": 158,
+          "x1": 162.5,
+          "z0": 343.5,
+          "z1": 347
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-50",
+        "kind": "townhome",
+        "tx": 162,
+        "ty": 330,
+        "box": {
+          "x0": 160,
+          "x1": 164.5,
+          "z0": 328.5,
+          "z1": 332
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-51",
+        "kind": "townhouse",
+        "tx": 190,
+        "ty": 330,
+        "box": {
+          "x0": 188.5,
+          "x1": 192,
+          "z0": 328.5,
+          "z1": 332
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-52",
+        "kind": "cottage",
+        "tx": 157,
+        "ty": 326,
+        "box": {
+          "x0": 155.5,
+          "x1": 159,
+          "z0": 325,
+          "z1": 327.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-53",
+        "kind": "townhome",
+        "tx": 193,
+        "ty": 324,
+        "box": {
+          "x0": 191,
+          "x1": 195.5,
+          "z0": 322.5,
+          "z1": 326
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-54",
+        "kind": "cottage",
+        "tx": 166,
+        "ty": 352,
+        "box": {
+          "x0": 164.5,
+          "x1": 168,
+          "z0": 351,
+          "z1": 353.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-55",
+        "kind": "townhome",
+        "tx": 176,
+        "ty": 354,
+        "box": {
+          "x0": 174,
+          "x1": 178.5,
+          "z0": 352.5,
+          "z1": 356
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-56",
+        "kind": "townhouse",
+        "tx": 186,
+        "ty": 353,
+        "box": {
+          "x0": 184.5,
+          "x1": 188,
+          "z0": 351.5,
+          "z1": 355
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-57",
+        "kind": "cottage",
+        "tx": 195,
+        "ty": 349,
+        "box": {
+          "x0": 193.5,
+          "x1": 197,
+          "z0": 348,
+          "z1": 350.5
+        },
+        "overlaps": false
+      },
+      {
+        "id": "b-182",
+        "kind": "hut",
+        "tx": 250,
+        "ty": 298,
+        "box": {
+          "x0": 248.5,
+          "x1": 252,
+          "z0": 297,
+          "z1": 299.5
+        },
+        "overlaps": false
+      }
+    ],
+    "collisions": [],
+    "randomMock": false,
+    "modifications": [
+      "add explicitly positioned forge only after collision gate",
+      "noon and paused simulation",
+      "100 smithing",
+      "typed iron plus rare sentinel stacks",
+      "80 gold and 3 boards for banking; zero legacy ore/ingot"
+    ]
+  },
+  "status": "blocked-or-failed",
+  "failure": {
+    "message": "exact-target-scene-camera",
+    "stack": "AssertionError [ERR_ASSERTION]: exact-target-scene-camera\n    at check (file:///C:/Users/futur/Desktop/emberhall-lanternwood-preview/scripts/settlement-smoke.mjs:32:76)\n    at file:///C:/Users/futur/Desktop/emberhall-lanternwood-preview/scripts/settlement-smoke.mjs:103:5"
+  },
+  "finished": "2026-09-09T00:31:08.137Z"
+}

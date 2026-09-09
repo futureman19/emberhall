@@ -1,0 +1,164 @@
+{
+  "started": "2026-09-08T23:43:49.086Z",
+  "url": "http://127.0.0.1:8093",
+  "reference": "https://emberhall-vale-jqdd64bla-andrews-projects-ffe8a9fd.vercel.app",
+  "commit": "0fa7360e02bb23015cec1898aee3f0c7a1ccf171",
+  "fixtureSha256": "1f99703d2bb28a521819a46a280ffd8a8f7bb6984dec6d564bc30298e9ce3467",
+  "host": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "cpu": "13th Gen Intel(R) Core(TM) i5-13400F",
+    "logicalCpus": 16,
+    "totalMemory": 34164097024
+  },
+  "browser": "151.0.7922.34",
+  "settings": {
+    "hour": 12,
+    "speed": 0,
+    "weather": {
+      "kind": "clear",
+      "cloud": 0.06,
+      "wet": 0,
+      "wind": 0.12,
+      "untilHour": 99999,
+      "rolls": 1,
+      "douseHour": 0
+    },
+    "frames": 180,
+    "dpr": 1,
+    "camera": "unchanged normal gameplay camera; follow translates to fixture player",
+    "scenes": [
+      {
+        "id": "starting-town",
+        "x": 256,
+        "z": 293
+      },
+      {
+        "id": "dense-woodland",
+        "x": 248,
+        "z": 148
+      },
+      {
+        "id": "capital-interior",
+        "x": 176,
+        "z": 320
+      },
+      {
+        "id": "combat-arena",
+        "x": 248,
+        "z": 291,
+        "combat": true
+      },
+      {
+        "id": "distant-biome",
+        "x": 250,
+        "z": 48
+      }
+    ]
+  },
+  "loads": [
+    {
+      "label": "cold-new-context",
+      "navigationToPlayableSettledMs": 18447.017399999997,
+      "continueToPlayableSettledMs": 16055.239099999999,
+      "includesFixedSettleMs": 1000,
+      "navigation": {
+        "name": "http://127.0.0.1:8093/",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 1051.7000000476837,
+        "navigationId": 6590,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 0.10000002384185791,
+        "domainLookupStart": 1.5,
+        "domainLookupEnd": 2.600000023841858,
+        "connectStart": 2.600000023841858,
+        "secureConnectionStart": 0,
+        "connectEnd": 76.60000002384186,
+        "requestStart": 76.79999995231628,
+        "responseStart": 141,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 141,
+        "responseEnd": 142.29999995231628,
+        "transferSize": 4940,
+        "encodedBodySize": 4640,
+        "decodedBodySize": 4640,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 709.2999999523163,
+        "domContentLoadedEventStart": 709.5,
+        "domContentLoadedEventEnd": 709.5,
+        "domComplete": 1051.7000000476837,
+        "loadEventStart": 1051.7000000476837,
+        "loadEventEnd": 1051.7000000476837,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "low"
+        }
+      }
+    }
+  ],
+  "samples": [],
+  "errors": [
+    {
+      "label": "local",
+      "type": "warning",
+      "text": "[.WebGL-0xb7c001bf400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "label": "local",
+      "type": "warning",
+      "text": "[.WebGL-0xb7c001bf400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "label": "local",
+      "type": "warning",
+      "text": "[.WebGL-0xb7c001bf400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "label": "local",
+      "type": "warning",
+      "text": "[.WebGL-0xb7c001bf400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    },
+    {
+      "type": "harness-blocker",
+      "text": "Error: page.goto: net::ERR_ABORTED at http://127.0.0.1:8093/\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:8093/\", waiting until \"domcontentloaded\"\u001b[22m\n",
+      "stack": "page.goto: net::ERR_ABORTED at http://127.0.0.1:8093/\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:8093/\", waiting until \"domcontentloaded\"\u001b[22m\n\n    at load (C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\scripts\\settlement-baseline.mjs:32:14)\n    at C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\scripts\\settlement-baseline.mjs:73:9"
+    },
+    {
+      "label": "local",
+      "type": "requestfailed",
+      "url": "http://127.0.0.1:8093/",
+      "error": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "label": "local",
+      "type": "requestfailed",
+      "url": "http://127.0.0.1:8093/",
+      "error": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  ]
+}

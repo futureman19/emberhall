@@ -13,6 +13,7 @@ import type { Building, BuildingKind } from "@/game/types";
 import { LANTERNWOOD_BLOCKS, lanternwoodInfluence } from "./lanternwood-art";
 import { LanternwoodBuilding } from "./lanternwood-dressing";
 import { useArtistKit, usesBlenderHall } from "./lanternwood-kit";
+import { settlementKitName, retainSettlementInteriorVoxel } from "./settlement-kit";
 
 const B = 0.5;
 /** Default cube scale. 1.04 fuses faces — only the hut preview uses it. */
@@ -942,8 +943,11 @@ function BlockLayer({
 }
 
 function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
-  const authored = useArtistKit(usesBlenderHall(b.kind, b.tx, b.ty) ? "hall" : null);
+  const settlement = settlementKitName(b.kind, b.tx, b.ty);
+  const kitName = usesBlenderHall(b.kind, b.tx, b.ty) ? "hall" : settlement;
+  const authored = useArtistKit(kitName);
   const exterior = Boolean(authored && !inside);
+  const settlementExterior = exterior && settlement !== null;
   const spec = SPECS[b.kind];
   const palette = useMemo(() => {
     const influence = lanternwoodInfluence(b.tx, b.ty);
@@ -978,13 +982,15 @@ function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
       soil: [],
       leaf: [],
     };
+    const interior = Object.fromEntries(KINDS.map(k => [k, [] as THREE.Vector3[]])) as Record<Block, THREE.Vector3[]>;
     const cap = inside && b.kind === "keep" ? Math.round(story) * KEEP_STORY_VOX + KEEP_STORY_VOX + 1 : Infinity;
     for (const v of spec.voxels) {
       if (v.y > cap) continue;
       const p = new THREE.Vector3(b.tx + (v.x + 0.5) * B, y0 + (v.y + 0.5) * B, b.ty + (v.z + 0.5) * B);
       (v.cut ? cut : solid)[v.t].push(p);
+      if (retainSettlementInteriorVoxel(b.kind, v)) interior[v.t].push(p);
     }
-    return { solid, cut };
+    return { solid, cut, interior };
   }, [spec, b.tx, b.ty, b.kind, y0, inside, story]);
 
   return (
@@ -1038,7 +1044,10 @@ function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
         liftAt(Math.round(e.point.x), Math.round(e.point.z));
       }}
     >
-      {exterior && authored && <primitive name="blender-hall-exterior" object={authored} position={[b.tx, y0, b.ty]} dispose={null} />}
+      {exterior && authored && <primitive name={`blender-${kitName}-exterior`} object={authored} position={[b.tx, y0, b.ty]} dispose={null} />}
+      {settlementExterior && KINDS.map(k => (
+        <BlockLayer key={`${k}-retained-interior`} items={layers.interior[k]} {...palette[k]} scale={B * GAP} />
+      ))}
       {!exterior && <LanternwoodBuilding kind={b.kind} x={b.tx} z={b.ty} y={y0} inside={inside} />}
       {KINDS.map((k) => (
         <BlockLayer

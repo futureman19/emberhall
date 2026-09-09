@@ -1,0 +1,1835 @@
+{
+  "started": "2026-09-08T23:48:18.462Z",
+  "url": "http://127.0.0.1:8093",
+  "reference": "https://emberhall-vale-jqdd64bla-andrews-projects-ffe8a9fd.vercel.app",
+  "commit": "0fa7360e02bb23015cec1898aee3f0c7a1ccf171",
+  "fixtureSha256": "9b07c6dccdf938185e7d46eeccea06002a94e948a7935ae3b218b705784acbb4",
+  "host": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "cpu": "13th Gen Intel(R) Core(TM) i5-13400F",
+    "logicalCpus": 16,
+    "totalMemory": 34164097024
+  },
+  "browser": "151.0.7922.34",
+  "settings": {
+    "hour": 12,
+    "speed": 0,
+    "weather": {
+      "kind": "clear",
+      "cloud": 0.06,
+      "wet": 0,
+      "wind": 0.12,
+      "untilHour": 99999,
+      "rolls": 1,
+      "douseHour": 0
+    },
+    "frames": 180,
+    "dpr": 1,
+    "camera": "unchanged normal gameplay camera; follow translates to fixture player",
+    "scenes": [
+      {
+        "id": "starting-town",
+        "x": 256,
+        "z": 293
+      },
+      {
+        "id": "dense-woodland",
+        "x": 248,
+        "z": 148
+      },
+      {
+        "id": "capital-interior",
+        "x": 176,
+        "z": 320
+      },
+      {
+        "id": "combat-arena",
+        "x": 248,
+        "z": 291,
+        "combat": true
+      },
+      {
+        "id": "distant-biome",
+        "x": 250,
+        "z": 48
+      }
+    ]
+  },
+  "loads": [
+    {
+      "label": "cold-new-context",
+      "navigationToPlayableSettledMs": 15225.361,
+      "continueToPlayableSettledMs": 13789.3796,
+      "includesFixedSettleMs": 1000,
+      "navigation": {
+        "name": "http://127.0.0.1:8093/",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 745.7999999523163,
+        "navigationId": 5656,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 0.09999990463256836,
+        "domainLookupStart": 1.0999999046325684,
+        "domainLookupEnd": 1.899999976158142,
+        "connectStart": 1.899999976158142,
+        "secureConnectionStart": 0,
+        "connectEnd": 2.299999952316284,
+        "requestStart": 2.5,
+        "responseStart": 20.09999990463257,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 20.09999990463257,
+        "responseEnd": 20.699999928474426,
+        "transferSize": 4940,
+        "encodedBodySize": 4640,
+        "decodedBodySize": 4640,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 410.5,
+        "domContentLoadedEventStart": 410.89999997615814,
+        "domContentLoadedEventEnd": 410.89999997615814,
+        "domComplete": 745.7999999523163,
+        "loadEventStart": 745.7999999523163,
+        "loadEventEnd": 745.7999999523163,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "low"
+        }
+      }
+    },
+    {
+      "label": "warm-same-context-new-page",
+      "navigationToPlayableSettledMs": 15374.207600000002,
+      "continueToPlayableSettledMs": 13919.964900000003,
+      "includesFixedSettleMs": 1000,
+      "navigation": {
+        "name": "http://127.0.0.1:8093/",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 323.40000009536743,
+        "navigationId": 8258,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 0,
+        "domainLookupStart": 0.9000000953674316,
+        "domainLookupEnd": 1.100000023841858,
+        "connectStart": 1.100000023841858,
+        "secureConnectionStart": 0,
+        "connectEnd": 1.3000000715255737,
+        "requestStart": 1.3000000715255737,
+        "responseStart": 19.5,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 19.5,
+        "responseEnd": 19.90000009536743,
+        "transferSize": 4940,
+        "encodedBodySize": 4640,
+        "decodedBodySize": 4640,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 290.3000000715256,
+        "domContentLoadedEventStart": 290.60000002384186,
+        "domContentLoadedEventEnd": 290.7000000476837,
+        "domComplete": 323.40000009536743,
+        "loadEventStart": 323.40000009536743,
+        "loadEventEnd": 323.40000009536743,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "low"
+        }
+      }
+    },
+    {
+      "label": "approved-reference-independent",
+      "navigationToPlayableSettledMs": 14687.916399999987,
+      "continueToPlayableSettledMs": 12682.5196,
+      "includesFixedSettleMs": 1000,
+      "navigation": {
+        "name": "https://emberhall-vale-jqdd64bla-andrews-projects-ffe8a9fd.vercel.app/?qa=1",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 16032.100000023842,
+        "navigationId": 3642,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "h2",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "br",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 0.20000004768371582,
+        "domainLookupStart": 3.4000000953674316,
+        "domainLookupEnd": 24.800000071525574,
+        "connectStart": 24.800000071525574,
+        "secureConnectionStart": 35.300000071525574,
+        "connectEnd": 66.80000007152557,
+        "requestStart": 66.90000009536743,
+        "responseStart": 84.20000004768372,
+        "firstInterimResponseStart": 84.20000004768372,
+        "finalResponseHeadersStart": 1437.8000000715256,
+        "responseEnd": 1441.6000000238419,
+        "transferSize": 2331,
+        "encodedBodySize": 2031,
+        "decodedBodySize": 4545,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 1796.9000000953674,
+        "domContentLoadedEventStart": 1797.1000000238419,
+        "domContentLoadedEventEnd": 1797.1000000238419,
+        "domComplete": 16032,
+        "loadEventStart": 16032.100000023842,
+        "loadEventEnd": 16032.100000023842,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "high"
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "frames": 5,
+      "rafMs": {
+        "min": 1983.199999999997,
+        "p50": 2033.2999999999993,
+        "p95": 2116.5,
+        "p99": 2116.5,
+        "max": 2116.5,
+        "mean": 2036.5799999999995
+      },
+      "rawRafMs": [
+        2033.2999999999993,
+        2116.5,
+        2016.5999999999985,
+        2033.300000000003,
+        1983.199999999997
+      ],
+      "drawCalls": {
+        "min": 444,
+        "p50": 444,
+        "p95": 444,
+        "p99": 444,
+        "max": 444,
+        "mean": 444
+      },
+      "triangles": {
+        "min": 6948140,
+        "p50": 6948140,
+        "p95": 6948140,
+        "p99": 6948140,
+        "max": 6948140,
+        "mean": 6948140
+      },
+      "rendererMemory": {
+        "geometries": 267,
+        "textures": 7
+      },
+      "sceneCounts": {
+        "objects": 2326,
+        "meshes": 1532,
+        "materials": 1527,
+        "geometries": 1521
+      },
+      "heap": {
+        "used": 212000000,
+        "total": 269000000,
+        "limit": 3760000000
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "state": {
+        "position": [
+          256,
+          293
+        ],
+        "hour": 12,
+        "speed": 0,
+        "weather": {
+          "kind": "clear",
+          "cloud": 0.06,
+          "wet": 0,
+          "wind": 0.12,
+          "untilHour": 99999,
+          "rolls": 1,
+          "douseHour": 0
+        },
+        "camera": [
+          272,
+          22.999999999999968,
+          313
+        ],
+        "quaternion": [
+          -0.33373831406769217,
+          0.3096133490936211,
+          0.11706907935708878,
+          0.8826398713205572
+        ],
+        "fov": 48,
+        "target": {
+          "x": 256,
+          "y": 0.4,
+          "z": 293
+        },
+        "intent": {
+          "kind": "none",
+          "tx": 0,
+          "ty": 0,
+          "targetId": null,
+          "spell": null
+        }
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 960,
+        "dpr": 1,
+        "scrollWidth": 1440
+      },
+      "id": "desktop-starting-town",
+      "proposedDiagnosticBudgets": {
+        "rafP95Ms": 2539.7999999999997,
+        "rafP99Ms": 2645.625,
+        "drawCallsMax": 489,
+        "trianglesMax": 7990361,
+        "geometriesMax": 294,
+        "materialsMax": 1680,
+        "usedHeapMax": 254400000
+      }
+    },
+    {
+      "frames": 5,
+      "rafMs": {
+        "min": 2333.2000000000044,
+        "p50": 2383.300000000003,
+        "p95": 2466.5999999999985,
+        "p99": 2466.5999999999985,
+        "max": 2466.5999999999985,
+        "mean": 2389.9
+      },
+      "rawRafMs": [
+        2366.5,
+        2333.2000000000044,
+        2399.899999999994,
+        2383.300000000003,
+        2466.5999999999985
+      ],
+      "drawCalls": {
+        "min": 133,
+        "p50": 133,
+        "p95": 133,
+        "p99": 133,
+        "max": 133,
+        "mean": 133
+      },
+      "triangles": {
+        "min": 10645760,
+        "p50": 10645760,
+        "p95": 10645760,
+        "p99": 10645760,
+        "max": 10645760,
+        "mean": 10645760
+      },
+      "rendererMemory": {
+        "geometries": 305,
+        "textures": 7
+      },
+      "sceneCounts": {
+        "objects": 2326,
+        "meshes": 1532,
+        "materials": 1527,
+        "geometries": 1521
+      },
+      "heap": {
+        "used": 212000000,
+        "total": 269000000,
+        "limit": 3760000000
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "state": {
+        "position": [
+          248,
+          148
+        ],
+        "hour": 12,
+        "speed": 0,
+        "weather": {
+          "kind": "clear",
+          "cloud": 0.06,
+          "wet": 0,
+          "wind": 0.12,
+          "untilHour": 99999,
+          "rolls": 1,
+          "douseHour": 0
+        },
+        "camera": [
+          264,
+          24.199999999999967,
+          168
+        ],
+        "quaternion": [
+          -0.33373831406769217,
+          0.3096133490936211,
+          0.1170690793570888,
+          0.8826398713205572
+        ],
+        "fov": 48,
+        "target": {
+          "x": 248,
+          "y": 1.6,
+          "z": 148
+        },
+        "intent": {
+          "kind": "none",
+          "tx": 0,
+          "ty": 0,
+          "targetId": null,
+          "spell": null
+        }
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 960,
+        "dpr": 1,
+        "scrollWidth": 1440
+      },
+      "id": "desktop-dense-woodland",
+      "proposedDiagnosticBudgets": {
+        "rafP95Ms": 2959.9199999999983,
+        "rafP99Ms": 3083.249999999998,
+        "drawCallsMax": 147,
+        "trianglesMax": 12242624,
+        "geometriesMax": 336,
+        "materialsMax": 1680,
+        "usedHeapMax": 254400000
+      }
+    },
+    {
+      "frames": 5,
+      "rafMs": {
+        "min": 1983.199999999997,
+        "p50": 1999.8999999999942,
+        "p95": 2050,
+        "p99": 2050,
+        "max": 2050,
+        "mean": 2006.6
+      },
+      "rawRafMs": [
+        1999.8999999999942,
+        2050,
+        1983.199999999997,
+        2016.6000000000058,
+        1983.300000000003
+      ],
+      "drawCalls": {
+        "min": 554,
+        "p50": 554,
+        "p95": 554,
+        "p99": 554,
+        "max": 554,
+        "mean": 554
+      },
+      "triangles": {
+        "min": 6065992,
+        "p50": 6065992,
+        "p95": 6065992,
+        "p99": 6065992,
+        "max": 6065992,
+        "mean": 6065992
+      },
+      "rendererMemory": {
+        "geometries": 672,
+        "textures": 7
+      },
+      "sceneCounts": {
+        "objects": 2320,
+        "meshes": 1526,
+        "materials": 1521,
+        "geometries": 1515
+      },
+      "heap": {
+        "used": 212000000,
+        "total": 269000000,
+        "limit": 3760000000
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "state": {
+        "position": [
+          176,
+          320
+        ],
+        "hour": 12,
+        "speed": 0,
+        "weather": {
+          "kind": "clear",
+          "cloud": 0.06,
+          "wet": 0,
+          "wind": 0.12,
+          "untilHour": 99999,
+          "rolls": 1,
+          "douseHour": 0
+        },
+        "camera": [
+          192,
+          23.499999999999968,
+          340
+        ],
+        "quaternion": [
+          -0.33373831406769217,
+          0.3096133490936211,
+          0.11706907935708878,
+          0.8826398713205572
+        ],
+        "fov": 48,
+        "target": {
+          "x": 176,
+          "y": 0.9000000000000001,
+          "z": 320
+        },
+        "intent": {
+          "kind": "none",
+          "tx": 0,
+          "ty": 0,
+          "targetId": null,
+          "spell": null
+        }
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 960,
+        "dpr": 1,
+        "scrollWidth": 1440
+      },
+      "id": "desktop-capital-interior",
+      "proposedDiagnosticBudgets": {
+        "rafP95Ms": 2460,
+        "rafP99Ms": 2562.5,
+        "drawCallsMax": 610,
+        "trianglesMax": 6975891,
+        "geometriesMax": 740,
+        "materialsMax": 1674,
+        "usedHeapMax": 254400000
+      }
+    },
+    {
+      "frames": 5,
+      "rafMs": {
+        "min": 2050,
+        "p50": 2166.5999999999913,
+        "p95": 2249.9000000000087,
+        "p99": 2249.9000000000087,
+        "max": 2249.9000000000087,
+        "mean": 2146.5800000000017
+      },
+      "rawRafMs": [
+        2066.600000000006,
+        2050,
+        2199.800000000003,
+        2166.5999999999913,
+        2249.9000000000087
+      ],
+      "drawCalls": {
+        "min": 426,
+        "p50": 426,
+        "p95": 426,
+        "p99": 426,
+        "max": 426,
+        "mean": 426
+      },
+      "triangles": {
+        "min": 6826144,
+        "p50": 6826144,
+        "p95": 6826144,
+        "p99": 6826144,
+        "max": 6826144,
+        "mean": 6826144
+      },
+      "rendererMemory": {
+        "geometries": 673,
+        "textures": 7
+      },
+      "sceneCounts": {
+        "objects": 2327,
+        "meshes": 1533,
+        "materials": 1528,
+        "geometries": 1522
+      },
+      "heap": {
+        "used": 212000000,
+        "total": 269000000,
+        "limit": 3760000000
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "state": {
+        "position": [
+          248,
+          291
+        ],
+        "hour": 12,
+        "speed": 0,
+        "weather": {
+          "kind": "clear",
+          "cloud": 0.06,
+          "wet": 0,
+          "wind": 0.12,
+          "untilHour": 99999,
+          "rolls": 1,
+          "douseHour": 0
+        },
+        "camera": [
+          264,
+          23.649999999999967,
+          311
+        ],
+        "quaternion": [
+          -0.33373831406769217,
+          0.3096133490936211,
+          0.1170690793570888,
+          0.8826398713205572
+        ],
+        "fov": 48,
+        "target": {
+          "x": 248,
+          "y": 1.05,
+          "z": 291
+        },
+        "intent": {
+          "kind": "hunt",
+          "tx": 250,
+          "ty": 291,
+          "targetId": "f-73",
+          "spell": null
+        }
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 960,
+        "dpr": 1,
+        "scrollWidth": 1440
+      },
+      "id": "desktop-combat-arena",
+      "proposedDiagnosticBudgets": {
+        "rafP95Ms": 2699.8800000000106,
+        "rafP99Ms": 2812.375000000011,
+        "drawCallsMax": 469,
+        "trianglesMax": 7850066,
+        "geometriesMax": 741,
+        "materialsMax": 1681,
+        "usedHeapMax": 254400000
+      }
+    },
+    {
+      "frames": 7,
+      "rafMs": {
+        "min": 1566.5999999999913,
+        "p50": 1600,
+        "p95": 1633.300000000003,
+        "p99": 1633.300000000003,
+        "max": 1633.300000000003,
+        "mean": 1604.7000000000012
+      },
+      "rawRafMs": [
+        1566.5999999999913,
+        1633.300000000003,
+        1616.6000000000058,
+        1599.9000000000087,
+        1600,
+        1633.1999999999825,
+        1583.3000000000175
+      ],
+      "drawCalls": {
+        "min": 160,
+        "p50": 160,
+        "p95": 160,
+        "p99": 160,
+        "max": 160,
+        "mean": 160
+      },
+      "triangles": {
+        "min": 4787228,
+        "p50": 4787228,
+        "p95": 4787228,
+        "p99": 4787228,
+        "max": 4787228,
+        "mean": 4787228
+      },
+      "rendererMemory": {
+        "geometries": 731,
+        "textures": 7
+      },
+      "sceneCounts": {
+        "objects": 2326,
+        "meshes": 1532,
+        "materials": 1527,
+        "geometries": 1521
+      },
+      "heap": {
+        "used": 212000000,
+        "total": 269000000,
+        "limit": 3760000000
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "state": {
+        "position": [
+          250,
+          48
+        ],
+        "hour": 12,
+        "speed": 0,
+        "weather": {
+          "kind": "clear",
+          "cloud": 0.06,
+          "wet": 0,
+          "wind": 0.12,
+          "untilHour": 99999,
+          "rolls": 1,
+          "douseHour": 0
+        },
+        "camera": [
+          266,
+          24.499999999999968,
+          68
+        ],
+        "quaternion": [
+          -0.33373831406769217,
+          0.3096133490936211,
+          0.11706907935708878,
+          0.8826398713205572
+        ],
+        "fov": 48,
+        "target": {
+          "x": 250,
+          "y": 1.9000000000000001,
+          "z": 48
+        },
+        "intent": {
+          "kind": "none",
+          "tx": 0,
+          "ty": 0,
+          "targetId": null,
+          "spell": null
+        }
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 960,
+        "dpr": 1,
+        "scrollWidth": 1440
+      },
+      "id": "desktop-distant-biome",
+      "proposedDiagnosticBudgets": {
+        "rafP95Ms": 1959.9600000000034,
+        "rafP99Ms": 2041.6250000000036,
+        "drawCallsMax": 176,
+        "trianglesMax": 5505313,
+        "geometriesMax": 805,
+        "materialsMax": 1680,
+        "usedHeapMax": 254400000
+      }
+    },
+    {
+      "frames": 5,
+      "rafMs": {
+        "min": 1966.5,
+        "p50": 2066.600000000006,
+        "p95": 2116.600000000006,
+        "p99": 2116.600000000006,
+        "max": 2116.600000000006,
+        "mean": 2053.2600000000034
+      },
+      "rawRafMs": [
+        2049.9000000000233,
+        1966.5,
+        2066.6999999999825,
+        2066.600000000006,
+        2116.600000000006
+      ],
+      "drawCalls": {
+        "min": 444,
+        "p50": 444,
+        "p95": 444,
+        "p99": 444,
+        "max": 444,
+        "mean": 444
+      },
+      "triangles": {
+        "min": 6948140,
+        "p50": 6948140,
+        "p95": 6948140,
+        "p99": 6948140,
+        "max": 6948140,
+        "mean": 6948140
+      },
+      "rendererMemory": {
+        "geometries": 731,
+        "textures": 7
+      },
+      "sceneCounts": {
+        "objects": 2326,
+        "meshes": 1532,
+        "materials": 1527,
+        "geometries": 1521
+      },
+      "heap": {
+        "used": 212000000,
+        "total": 269000000,
+        "limit": 3760000000
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "state": {
+        "position": [
+          256,
+          293
+        ],
+        "hour": 12,
+        "speed": 0,
+        "weather": {
+          "kind": "clear",
+          "cloud": 0.06,
+          "wet": 0,
+          "wind": 0.12,
+          "untilHour": 99999,
+          "rolls": 1,
+          "douseHour": 0
+        },
+        "camera": [
+          272,
+          23.499999999999968,
+          313
+        ],
+        "quaternion": [
+          -0.33373831406769217,
+          0.3096133490936211,
+          0.11706907935708878,
+          0.8826398713205572
+        ],
+        "fov": 48,
+        "target": {
+          "x": 256,
+          "y": 0.9000000000000001,
+          "z": 293
+        },
+        "intent": {
+          "kind": "none",
+          "tx": 0,
+          "ty": 0,
+          "targetId": null,
+          "spell": null
+        }
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 960,
+        "dpr": 1,
+        "scrollWidth": 1440
+      },
+      "id": "desktop-travel-return-town",
+      "proposedDiagnosticBudgets": {
+        "rafP95Ms": 2539.920000000007,
+        "rafP99Ms": 2645.7500000000073,
+        "drawCallsMax": 489,
+        "trianglesMax": 7990361,
+        "geometriesMax": 805,
+        "materialsMax": 1680,
+        "usedHeapMax": 254400000
+      }
+    },
+    {
+      "frames": 6,
+      "rafMs": {
+        "min": 1666.6000000000058,
+        "p50": 1716.6000000000058,
+        "p95": 1799.8999999999942,
+        "p99": 1799.8999999999942,
+        "max": 1799.8999999999942,
+        "mean": 1730.4833333333324
+      },
+      "rawRafMs": [
+        1733.2999999999884,
+        1799.8999999999942,
+        1716.6000000000058,
+        1749.8999999999942,
+        1666.6000000000058,
+        1716.6000000000058
+      ],
+      "drawCalls": {
+        "min": 414,
+        "p50": 414,
+        "p95": 414,
+        "p99": 414,
+        "max": 414,
+        "mean": 414
+      },
+      "triangles": {
+        "min": 6944816,
+        "p50": 6944816,
+        "p95": 6944816,
+        "p99": 6944816,
+        "max": 6944816,
+        "mean": 6944816
+      },
+      "rendererMemory": {
+        "geometries": 700,
+        "textures": 7
+      },
+      "sceneCounts": {
+        "objects": 2326,
+        "meshes": 1532,
+        "materials": 1527,
+        "geometries": 1521
+      },
+      "heap": {
+        "used": 212000000,
+        "total": 269000000,
+        "limit": 3760000000
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "state": {
+        "position": [
+          256,
+          293
+        ],
+        "hour": 12,
+        "speed": 0,
+        "weather": {
+          "kind": "clear",
+          "cloud": 0.06,
+          "wet": 0,
+          "wind": 0.12,
+          "untilHour": 99999,
+          "rolls": 1,
+          "douseHour": 0
+        },
+        "camera": [
+          272,
+          23.499999999999968,
+          313
+        ],
+        "quaternion": [
+          -0.33373831406769217,
+          0.3096133490936211,
+          0.11706907935708878,
+          0.8826398713205572
+        ],
+        "fov": 48,
+        "target": {
+          "x": 256,
+          "y": 0.9000000000000001,
+          "z": 293
+        },
+        "intent": {
+          "kind": "none",
+          "tx": 0,
+          "ty": 0,
+          "targetId": null,
+          "spell": null
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "scrollWidth": 390
+      },
+      "id": "mobile-starting-town",
+      "proposedDiagnosticBudgets": {
+        "rafP95Ms": 2159.879999999993,
+        "rafP99Ms": 2249.8749999999927,
+        "drawCallsMax": 456,
+        "trianglesMax": 7986539,
+        "geometriesMax": 771,
+        "materialsMax": 1680,
+        "usedHeapMax": 254400000
+      }
+    },
+    {
+      "frames": 5,
+      "rafMs": {
+        "min": 1999.8999999999942,
+        "p50": 2050,
+        "p95": 2149.9000000000233,
+        "p99": 2149.9000000000233,
+        "max": 2149.9000000000233,
+        "mean": 2059.9199999999955
+      },
+      "rawRafMs": [
+        2066.5999999999767,
+        2149.9000000000233,
+        2050,
+        2033.1999999999825,
+        1999.8999999999942
+      ],
+      "drawCalls": {
+        "min": 113,
+        "p50": 113,
+        "p95": 113,
+        "p99": 113,
+        "max": 113,
+        "mean": 113
+      },
+      "triangles": {
+        "min": 10645520,
+        "p50": 10645520,
+        "p95": 10645520,
+        "p99": 10645520,
+        "max": 10645520,
+        "mean": 10645520
+      },
+      "rendererMemory": {
+        "geometries": 700,
+        "textures": 7
+      },
+      "sceneCounts": {
+        "objects": 2326,
+        "meshes": 1532,
+        "materials": 1527,
+        "geometries": 1521
+      },
+      "heap": {
+        "used": 212000000,
+        "total": 269000000,
+        "limit": 3760000000
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "state": {
+        "position": [
+          248,
+          148
+        ],
+        "hour": 12,
+        "speed": 0,
+        "weather": {
+          "kind": "clear",
+          "cloud": 0.06,
+          "wet": 0,
+          "wind": 0.12,
+          "untilHour": 99999,
+          "rolls": 1,
+          "douseHour": 0
+        },
+        "camera": [
+          264,
+          24.199999999999967,
+          168
+        ],
+        "quaternion": [
+          -0.33373831406769217,
+          0.3096133490936211,
+          0.1170690793570888,
+          0.8826398713205572
+        ],
+        "fov": 48,
+        "target": {
+          "x": 248,
+          "y": 1.6,
+          "z": 148
+        },
+        "intent": {
+          "kind": "none",
+          "tx": 0,
+          "ty": 0,
+          "targetId": null,
+          "spell": null
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "scrollWidth": 390
+      },
+      "id": "mobile-dense-woodland",
+      "proposedDiagnosticBudgets": {
+        "rafP95Ms": 2579.880000000028,
+        "rafP99Ms": 2687.375000000029,
+        "drawCallsMax": 125,
+        "trianglesMax": 12242348,
+        "geometriesMax": 771,
+        "materialsMax": 1680,
+        "usedHeapMax": 254400000
+      }
+    },
+    {
+      "frames": 6,
+      "rafMs": {
+        "min": 1633.2000000000116,
+        "p50": 1683.2999999999884,
+        "p95": 1716.6000000000058,
+        "p99": 1716.6000000000058,
+        "max": 1716.6000000000058,
+        "mean": 1680.5
+      },
+      "rawRafMs": [
+        1683.2999999999884,
+        1633.2000000000116,
+        1683.3999999999942,
+        1666.6000000000058,
+        1716.6000000000058,
+        1699.8999999999942
+      ],
+      "drawCalls": {
+        "min": 465,
+        "p50": 465,
+        "p95": 465,
+        "p99": 465,
+        "max": 465,
+        "mean": 465
+      },
+      "triangles": {
+        "min": 6035084,
+        "p50": 6035084,
+        "p95": 6035084,
+        "p99": 6035084,
+        "max": 6035084,
+        "mean": 6035084
+      },
+      "rendererMemory": {
+        "geometries": 700,
+        "textures": 7
+      },
+      "sceneCounts": {
+        "objects": 2320,
+        "meshes": 1526,
+        "materials": 1521,
+        "geometries": 1515
+      },
+      "heap": {
+        "used": 212000000,
+        "total": 269000000,
+        "limit": 3760000000
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "state": {
+        "position": [
+          176,
+          320
+        ],
+        "hour": 12,
+        "speed": 0,
+        "weather": {
+          "kind": "clear",
+          "cloud": 0.06,
+          "wet": 0,
+          "wind": 0.12,
+          "untilHour": 99999,
+          "rolls": 1,
+          "douseHour": 0
+        },
+        "camera": [
+          192,
+          23.499999999999968,
+          340
+        ],
+        "quaternion": [
+          -0.33373831406769217,
+          0.3096133490936211,
+          0.11706907935708878,
+          0.8826398713205572
+        ],
+        "fov": 48,
+        "target": {
+          "x": 176,
+          "y": 0.9000000000000001,
+          "z": 320
+        },
+        "intent": {
+          "kind": "none",
+          "tx": 0,
+          "ty": 0,
+          "targetId": null,
+          "spell": null
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "scrollWidth": 390
+      },
+      "id": "mobile-capital-interior",
+      "proposedDiagnosticBudgets": {
+        "rafP95Ms": 2059.920000000007,
+        "rafP99Ms": 2145.7500000000073,
+        "drawCallsMax": 512,
+        "trianglesMax": 6940347,
+        "geometriesMax": 771,
+        "materialsMax": 1674,
+        "usedHeapMax": 254400000
+      }
+    },
+    {
+      "frames": 6,
+      "rafMs": {
+        "min": 1633.2000000000116,
+        "p50": 1650,
+        "p95": 1716.6000000000058,
+        "p99": 1716.6000000000058,
+        "max": 1716.6000000000058,
+        "mean": 1677.7166666666697
+      },
+      "rawRafMs": [
+        1716.6000000000058,
+        1716.6000000000058,
+        1700,
+        1633.2000000000116,
+        1650,
+        1649.8999999999942
+      ],
+      "drawCalls": {
+        "min": 348,
+        "p50": 348,
+        "p95": 348,
+        "p99": 348,
+        "max": 348,
+        "mean": 348
+      },
+      "triangles": {
+        "min": 6824016,
+        "p50": 6824016,
+        "p95": 6824016,
+        "p99": 6824016,
+        "max": 6824016,
+        "mean": 6824016
+      },
+      "rendererMemory": {
+        "geometries": 701,
+        "textures": 7
+      },
+      "sceneCounts": {
+        "objects": 2327,
+        "meshes": 1533,
+        "materials": 1528,
+        "geometries": 1522
+      },
+      "heap": {
+        "used": 212000000,
+        "total": 269000000,
+        "limit": 3760000000
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "state": {
+        "position": [
+          248,
+          291
+        ],
+        "hour": 12,
+        "speed": 0,
+        "weather": {
+          "kind": "clear",
+          "cloud": 0.06,
+          "wet": 0,
+          "wind": 0.12,
+          "untilHour": 99999,
+          "rolls": 1,
+          "douseHour": 0
+        },
+        "camera": [
+          264,
+          23.649999999999967,
+          311
+        ],
+        "quaternion": [
+          -0.33373831406769217,
+          0.3096133490936211,
+          0.1170690793570888,
+          0.8826398713205572
+        ],
+        "fov": 48,
+        "target": {
+          "x": 248,
+          "y": 1.05,
+          "z": 291
+        },
+        "intent": {
+          "kind": "hunt",
+          "tx": 250,
+          "ty": 291,
+          "targetId": "f-73",
+          "spell": null
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "scrollWidth": 390
+      },
+      "id": "mobile-combat-arena",
+      "proposedDiagnosticBudgets": {
+        "rafP95Ms": 2059.920000000007,
+        "rafP99Ms": 2145.7500000000073,
+        "drawCallsMax": 383,
+        "trianglesMax": 7847619,
+        "geometriesMax": 772,
+        "materialsMax": 1681,
+        "usedHeapMax": 254400000
+      }
+    },
+    {
+      "frames": 8,
+      "rafMs": {
+        "min": 1333.2999999999884,
+        "p50": 1350,
+        "p95": 1416.5999999999767,
+        "p99": 1416.5999999999767,
+        "max": 1416.5999999999767,
+        "mean": 1362.4500000000007
+      },
+      "rawRafMs": [
+        1350,
+        1350,
+        1383.2000000000116,
+        1333.2999999999884,
+        1366.6000000000058,
+        1333.3000000000175,
+        1416.5999999999767,
+        1366.6000000000058
+      ],
+      "drawCalls": {
+        "min": 151,
+        "p50": 151,
+        "p95": 151,
+        "p99": 151,
+        "max": 151,
+        "mean": 151
+      },
+      "triangles": {
+        "min": 4787120,
+        "p50": 4787120,
+        "p95": 4787120,
+        "p99": 4787120,
+        "max": 4787120,
+        "mean": 4787120
+      },
+      "rendererMemory": {
+        "geometries": 701,
+        "textures": 7
+      },
+      "sceneCounts": {
+        "objects": 2326,
+        "meshes": 1532,
+        "materials": 1527,
+        "geometries": 1521
+      },
+      "heap": {
+        "used": 212000000,
+        "total": 269000000,
+        "limit": 3760000000
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "state": {
+        "position": [
+          250,
+          48
+        ],
+        "hour": 12,
+        "speed": 0,
+        "weather": {
+          "kind": "clear",
+          "cloud": 0.06,
+          "wet": 0,
+          "wind": 0.12,
+          "untilHour": 99999,
+          "rolls": 1,
+          "douseHour": 0
+        },
+        "camera": [
+          266,
+          24.499999999999968,
+          68
+        ],
+        "quaternion": [
+          -0.33373831406769217,
+          0.3096133490936211,
+          0.11706907935708878,
+          0.8826398713205572
+        ],
+        "fov": 48,
+        "target": {
+          "x": 250,
+          "y": 1.9000000000000001,
+          "z": 48
+        },
+        "intent": {
+          "kind": "none",
+          "tx": 0,
+          "ty": 0,
+          "targetId": null,
+          "spell": null
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "scrollWidth": 390
+      },
+      "id": "mobile-distant-biome",
+      "proposedDiagnosticBudgets": {
+        "rafP95Ms": 1699.919999999972,
+        "rafP99Ms": 1770.749999999971,
+        "drawCallsMax": 167,
+        "trianglesMax": 5505188,
+        "geometriesMax": 772,
+        "materialsMax": 1680,
+        "usedHeapMax": 254400000
+      }
+    },
+    {
+      "frames": 6,
+      "rafMs": {
+        "min": 1683.2999999999884,
+        "p50": 1699.9000000000233,
+        "p95": 1749.899999999965,
+        "p99": 1749.899999999965,
+        "max": 1749.899999999965,
+        "mean": 1708.25
+      },
+      "rawRafMs": [
+        1699.899999999965,
+        1683.2999999999884,
+        1716.600000000035,
+        1749.899999999965,
+        1699.9000000000233,
+        1699.9000000000233
+      ],
+      "drawCalls": {
+        "min": 414,
+        "p50": 414,
+        "p95": 414,
+        "p99": 414,
+        "max": 414,
+        "mean": 414
+      },
+      "triangles": {
+        "min": 6944816,
+        "p50": 6944816,
+        "p95": 6944816,
+        "p99": 6944816,
+        "max": 6944816,
+        "mean": 6944816
+      },
+      "rendererMemory": {
+        "geometries": 701,
+        "textures": 7
+      },
+      "sceneCounts": {
+        "objects": 2326,
+        "meshes": 1532,
+        "materials": 1527,
+        "geometries": 1521
+      },
+      "heap": {
+        "used": 212000000,
+        "total": 269000000,
+        "limit": 3760000000
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "state": {
+        "position": [
+          256,
+          293
+        ],
+        "hour": 12,
+        "speed": 0,
+        "weather": {
+          "kind": "clear",
+          "cloud": 0.06,
+          "wet": 0,
+          "wind": 0.12,
+          "untilHour": 99999,
+          "rolls": 1,
+          "douseHour": 0
+        },
+        "camera": [
+          272,
+          23.499999999999968,
+          313
+        ],
+        "quaternion": [
+          -0.33373831406769217,
+          0.3096133490936211,
+          0.11706907935708878,
+          0.8826398713205572
+        ],
+        "fov": 48,
+        "target": {
+          "x": 256,
+          "y": 0.9000000000000001,
+          "z": 293
+        },
+        "intent": {
+          "kind": "none",
+          "tx": 0,
+          "ty": 0,
+          "targetId": null,
+          "spell": null
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "scrollWidth": 390
+      },
+      "id": "mobile-travel-return-town",
+      "proposedDiagnosticBudgets": {
+        "rafP95Ms": 2099.879999999958,
+        "rafP99Ms": 2187.3749999999563,
+        "drawCallsMax": 456,
+        "trianglesMax": 7986539,
+        "geometriesMax": 772,
+        "materialsMax": 1680,
+        "usedHeapMax": 254400000
+      }
+    },
+    {
+      "frames": 5,
+      "rafMs": {
+        "min": 1983.2000000000116,
+        "p50": 2033.1999999999534,
+        "p95": 2050,
+        "p99": 2050,
+        "max": 2050,
+        "mean": 2023.2599999999977
+      },
+      "rawRafMs": [
+        2033.1999999999534,
+        2050,
+        1983.2000000000116,
+        2033.2999999999884,
+        2016.600000000035
+      ],
+      "drawCalls": {
+        "min": 458,
+        "p50": 458,
+        "p95": 458,
+        "p99": 458,
+        "max": 458,
+        "mean": 458
+      },
+      "triangles": {
+        "min": 6951332,
+        "p50": 6951332,
+        "p95": 6951332,
+        "p99": 6951332,
+        "max": 6951332,
+        "mean": 6951332
+      },
+      "rendererMemory": {
+        "geometries": 707,
+        "textures": 7
+      },
+      "sceneCounts": {
+        "objects": 2334,
+        "meshes": 1539,
+        "materials": 1534,
+        "geometries": 1528
+      },
+      "heap": {
+        "used": 212000000,
+        "total": 269000000,
+        "limit": 3760000000
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "state": {
+        "position": [
+          256,
+          293
+        ],
+        "hour": 12,
+        "speed": 0,
+        "weather": {
+          "kind": "clear",
+          "cloud": 0.06,
+          "wet": 0,
+          "wind": 0.12,
+          "untilHour": 99999,
+          "rolls": 1,
+          "douseHour": 0
+        },
+        "camera": [
+          272,
+          23.499999999999968,
+          313
+        ],
+        "quaternion": [
+          -0.33373831406769217,
+          0.3096133490936211,
+          0.11706907935708878,
+          0.8826398713205572
+        ],
+        "fov": 48,
+        "target": {
+          "x": 256,
+          "y": 0.9000000000000001,
+          "z": 293
+        },
+        "intent": {
+          "kind": "none",
+          "tx": 0,
+          "ty": 0,
+          "targetId": null,
+          "spell": null
+        }
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 960,
+        "dpr": 1,
+        "scrollWidth": 1440
+      },
+      "id": "desktop-pilot-town-forge",
+      "proposedDiagnosticBudgets": {
+        "rafP95Ms": 2460,
+        "rafP99Ms": 2562.5,
+        "drawCallsMax": 504,
+        "trianglesMax": 7994032,
+        "geometriesMax": 778,
+        "materialsMax": 1688,
+        "usedHeapMax": 254400000
+      }
+    },
+    {
+      "frames": 6,
+      "rafMs": {
+        "min": 1666.600000000035,
+        "p50": 1683.2999999999884,
+        "p95": 1816.600000000035,
+        "p99": 1816.600000000035,
+        "max": 1816.600000000035,
+        "mean": 1716.6000000000058
+      },
+      "rawRafMs": [
+        1666.600000000035,
+        1699.899999999965,
+        1683.2999999999884,
+        1749.9000000000233,
+        1683.2999999999884,
+        1816.600000000035
+      ],
+      "drawCalls": {
+        "min": 428,
+        "p50": 428,
+        "p95": 428,
+        "p99": 428,
+        "max": 428,
+        "mean": 428
+      },
+      "triangles": {
+        "min": 6948008,
+        "p50": 6948008,
+        "p95": 6948008,
+        "p99": 6948008,
+        "max": 6948008,
+        "mean": 6948008
+      },
+      "rendererMemory": {
+        "geometries": 707,
+        "textures": 7
+      },
+      "sceneCounts": {
+        "objects": 2334,
+        "meshes": 1539,
+        "materials": 1534,
+        "geometries": 1528
+      },
+      "heap": {
+        "used": 212000000,
+        "total": 269000000,
+        "limit": 3760000000
+      },
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "state": {
+        "position": [
+          256,
+          293
+        ],
+        "hour": 12,
+        "speed": 0,
+        "weather": {
+          "kind": "clear",
+          "cloud": 0.06,
+          "wet": 0,
+          "wind": 0.12,
+          "untilHour": 99999,
+          "rolls": 1,
+          "douseHour": 0
+        },
+        "camera": [
+          272,
+          23.499999999999968,
+          313
+        ],
+        "quaternion": [
+          -0.33373831406769217,
+          0.3096133490936211,
+          0.11706907935708878,
+          0.8826398713205572
+        ],
+        "fov": 48,
+        "target": {
+          "x": 256,
+          "y": 0.9000000000000001,
+          "z": 293
+        },
+        "intent": {
+          "kind": "none",
+          "tx": 0,
+          "ty": 0,
+          "targetId": null,
+          "spell": null
+        }
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "scrollWidth": 390
+      },
+      "id": "mobile-pilot-town-forge",
+      "proposedDiagnosticBudgets": {
+        "rafP95Ms": 2179.920000000042,
+        "rafP99Ms": 2270.7500000000437,
+        "drawCallsMax": 471,
+        "trianglesMax": 7990210,
+        "geometriesMax": 778,
+        "materialsMax": 1688,
+        "usedHeapMax": 254400000
+      }
+    }
+  ],
+  "errors": [
+    {
+      "label": "local-cold",
+      "type": "warning",
+      "text": "[.WebGL-0x49b401091000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "label": "local-cold",
+      "type": "warning",
+      "text": "[.WebGL-0x49b401091000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "label": "local-cold",
+      "type": "warning",
+      "text": "[.WebGL-0x49b401091000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "label": "local-cold",
+      "type": "warning",
+      "text": "[.WebGL-0x49b401091000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    },
+    {
+      "label": "local-warm",
+      "type": "warning",
+      "text": "THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead."
+    },
+    {
+      "label": "local-warm",
+      "type": "warning",
+      "text": "THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead."
+    },
+    {
+      "label": "local-warm",
+      "type": "warning",
+      "text": "THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead."
+    }
+  ],
+  "pilotFixtureSha256": "396dd8bc67f007a9f4b9bd56267f5e3b65038e41bfed24dd5bbda93c49586f93",
+  "referenceState": {
+    "hour": 12,
+    "position": {
+      "id": "you-2",
+      "name": "Ione Reed",
+      "cls": "ranger",
+      "isPlayer": true,
+      "member": true,
+      "role": null,
+      "vocation": null,
+      "x": 256,
+      "z": 293,
+      "facing": 0,
+      "hp": 40,
+      "maxHp": 40,
+      "hunger": 79.78666666666663,
+      "energy": 79.84000000000015,
+      "morale": 70,
+      "int": 11,
+      "str": 10,
+      "dex": 10,
+      "path": [],
+      "task": "idle",
+      "taskUntil": 0,
+      "lingerUntil": 16,
+      "awayUntil": 0,
+      "home": {
+        "tx": 256,
+        "ty": 293
+      },
+      "bob": 9.600000000000003,
+      "ghost": false,
+      "story": 0,
+      "look": {
+        "schema": "emberhall.look/1",
+        "cls": "ranger",
+        "skin": "#c9c3b6",
+        "hairStyle": "crop",
+        "hairColor": "#3a322c",
+        "garb": "#a85a42"
+      }
+    },
+    "camera": {
+      "x": 272,
+      "y": 22.999999999999968,
+      "z": 313
+    }
+  },
+  "completed": "2026-09-08T23:54:31.113Z"
+}

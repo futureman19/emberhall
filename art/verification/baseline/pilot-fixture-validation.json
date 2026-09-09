@@ -1,0 +1,37 @@
+{
+  "inserted": {
+    "id": "phase0-pilot-forge",
+    "kind": "forge",
+    "tx": 253,
+    "ty": 295,
+    "beds": []
+  },
+  "footprint": [
+    251.5,
+    255.0,
+    293.5,
+    297.0
+  ],
+  "overlappingBuildings": [],
+  "rejectedSuggestion": "249,295 overlaps yard footprint",
+  "nearby": [
+    {
+      "kind": "yard",
+      "box": [
+        245.5,
+        251.0,
+        288.5,
+        294.0
+      ]
+    },
+    {
+      "kind": "hut",
+      "box": [
+        248.5,
+        252.0,
+        297.0,
+        299.5
+      ]
+    }
+  ]
+}

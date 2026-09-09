@@ -1,0 +1,207 @@
+{
+  "started": "2026-09-08T23:46:02.297Z",
+  "url": "http://127.0.0.1:8093",
+  "reference": "https://emberhall-vale-jqdd64bla-andrews-projects-ffe8a9fd.vercel.app",
+  "commit": "0fa7360e02bb23015cec1898aee3f0c7a1ccf171",
+  "fixtureSha256": "9b07c6dccdf938185e7d46eeccea06002a94e948a7935ae3b218b705784acbb4",
+  "host": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "cpu": "13th Gen Intel(R) Core(TM) i5-13400F",
+    "logicalCpus": 16,
+    "totalMemory": 34164097024
+  },
+  "browser": "151.0.7922.34",
+  "settings": {
+    "hour": 12,
+    "speed": 0,
+    "weather": {
+      "kind": "clear",
+      "cloud": 0.06,
+      "wet": 0,
+      "wind": 0.12,
+      "untilHour": 99999,
+      "rolls": 1,
+      "douseHour": 0
+    },
+    "frames": 180,
+    "dpr": 1,
+    "camera": "unchanged normal gameplay camera; follow translates to fixture player",
+    "scenes": [
+      {
+        "id": "starting-town",
+        "x": 256,
+        "z": 293
+      },
+      {
+        "id": "dense-woodland",
+        "x": 248,
+        "z": 148
+      },
+      {
+        "id": "capital-interior",
+        "x": 176,
+        "z": 320
+      },
+      {
+        "id": "combat-arena",
+        "x": 248,
+        "z": 291,
+        "combat": true
+      },
+      {
+        "id": "distant-biome",
+        "x": 250,
+        "z": 48
+      }
+    ]
+  },
+  "loads": [
+    {
+      "label": "cold-new-context",
+      "navigationToPlayableSettledMs": 15227.9702,
+      "continueToPlayableSettledMs": 13826.839,
+      "includesFixedSettleMs": 1000,
+      "navigation": {
+        "name": "http://127.0.0.1:8093/",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 738.6000000238419,
+        "navigationId": 3673,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 0.20000004768371582,
+        "domainLookupStart": 1.2000000476837158,
+        "domainLookupEnd": 2.200000047683716,
+        "connectStart": 2.200000047683716,
+        "secureConnectionStart": 0,
+        "connectEnd": 2.600000023841858,
+        "requestStart": 2.700000047683716,
+        "responseStart": 18.600000023841858,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 18.600000023841858,
+        "responseEnd": 19.200000047683716,
+        "transferSize": 4940,
+        "encodedBodySize": 4640,
+        "decodedBodySize": 4640,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 421.8000000715256,
+        "domContentLoadedEventStart": 422.10000002384186,
+        "domContentLoadedEventEnd": 422.2000000476837,
+        "domComplete": 738.6000000238419,
+        "loadEventStart": 738.6000000238419,
+        "loadEventEnd": 738.6000000238419,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "low"
+        }
+      }
+    },
+    {
+      "label": "warm-same-context-new-page",
+      "navigationToPlayableSettledMs": 15531.064400000003,
+      "continueToPlayableSettledMs": 14104.6917,
+      "includesFixedSettleMs": 1000,
+      "navigation": {
+        "name": "http://127.0.0.1:8093/",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 295.6999999284744,
+        "navigationId": 8685,
+        "initiatorType": "navigation",
+        "deliveryType": "",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "contentType": "text/html",
+        "contentEncoding": "",
+        "workerStart": 0,
+        "workerRouterEvaluationStart": 0,
+        "workerCacheLookupStart": 0,
+        "workerMatchedSourceType": "",
+        "workerFinalSourceType": "",
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 0.09999990463256836,
+        "domainLookupStart": 0.7999999523162842,
+        "domainLookupEnd": 1,
+        "connectStart": 1,
+        "secureConnectionStart": 0,
+        "connectEnd": 1.2999999523162842,
+        "requestStart": 1.399999976158142,
+        "responseStart": 18.699999928474426,
+        "firstInterimResponseStart": 0,
+        "finalResponseHeadersStart": 18.699999928474426,
+        "responseEnd": 19,
+        "transferSize": 4940,
+        "encodedBodySize": 4640,
+        "decodedBodySize": 4640,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 256.2999999523163,
+        "domContentLoadedEventStart": 256.59999990463257,
+        "domContentLoadedEventEnd": 256.6999999284744,
+        "domComplete": 295.6999999284744,
+        "loadEventStart": 295.6999999284744,
+        "loadEventEnd": 295.6999999284744,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null,
+        "confidence": {
+          "randomizedTriggerRate": 0.4994798,
+          "value": "high"
+        }
+      }
+    }
+  ],
+  "samples": [],
+  "errors": [
+    {
+      "label": "local-cold",
+      "type": "warning",
+      "text": "[.WebGL-0x27f400feaa00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "label": "local-cold",
+      "type": "warning",
+      "text": "[.WebGL-0x27f400feaa00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "label": "local-cold",
+      "type": "warning",
+      "text": "[.WebGL-0x27f400feaa00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "label": "local-cold",
+      "type": "warning",
+      "text": "[.WebGL-0x27f400feaa00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    },
+    {
+      "type": "harness-blocker",
+      "text": "Error: desktop-starting-town timeout 45000ms",
+      "stack": "Error: desktop-starting-town timeout 45000ms\n    at Timeout._onTimeout (file:///C:/Users/futur/Desktop/emberhall-lanternwood-preview/scripts/settlement-baseline.mjs:27:130)\n    at listOnTimeout (node:internal/timers:605:17)\n    at process.processTimers (node:internal/timers:541:7)"
+    }
+  ]
+}

@@ -1,0 +1,352 @@
+[
+  {
+    "id": "desktop-starting-town",
+    "before": {
+      "p95": 49.899999999999636,
+      "calls": 444,
+      "triangles": 6948140,
+      "heap": 239000000
+    },
+    "after": {
+      "p95": 50,
+      "calls": 453,
+      "triangles": 6935020,
+      "heap": 239000000
+    },
+    "checks": {
+      "rafP95": true,
+      "rafP99": true,
+      "calls": true,
+      "triangles": true,
+      "geometries": true,
+      "materials": true,
+      "heap": true
+    },
+    "pass": true
+  },
+  {
+    "id": "desktop-dense-woodland",
+    "before": {
+      "p95": 33.30000000000109,
+      "calls": 133,
+      "triangles": 10645760,
+      "heap": 239000000
+    },
+    "after": {
+      "p95": 49.899999999999636,
+      "calls": 133,
+      "triangles": 10645760,
+      "heap": 239000000
+    },
+    "checks": {
+      "rafP95": false,
+      "rafP99": true,
+      "calls": true,
+      "triangles": true,
+      "geometries": true,
+      "materials": true,
+      "heap": true
+    },
+    "pass": false
+  },
+  {
+    "id": "desktop-capital-interior",
+    "before": {
+      "p95": 33.400000000001455,
+      "calls": 554,
+      "triangles": 6065992,
+      "heap": 239000000
+    },
+    "after": {
+      "p95": 50,
+      "calls": 554,
+      "triangles": 6065992,
+      "heap": 239000000
+    },
+    "checks": {
+      "rafP95": false,
+      "rafP99": true,
+      "calls": true,
+      "triangles": true,
+      "geometries": true,
+      "materials": true,
+      "heap": true
+    },
+    "pass": false
+  },
+  {
+    "id": "desktop-combat-arena",
+    "before": {
+      "p95": 49.89999999999782,
+      "calls": 423,
+      "triangles": 6826116,
+      "heap": 239000000
+    },
+    "after": {
+      "p95": 49.900000000001455,
+      "calls": 435,
+      "triangles": 6813024,
+      "heap": 239000000
+    },
+    "checks": {
+      "rafP95": true,
+      "rafP99": true,
+      "calls": true,
+      "triangles": true,
+      "geometries": true,
+      "materials": true,
+      "heap": true
+    },
+    "pass": true
+  },
+  {
+    "id": "desktop-distant-biome",
+    "before": {
+      "p95": 33.29999999999927,
+      "calls": 160,
+      "triangles": 4787228,
+      "heap": 239000000
+    },
+    "after": {
+      "p95": 33.30000000000291,
+      "calls": 160,
+      "triangles": 4787228,
+      "heap": 239000000
+    },
+    "checks": {
+      "rafP95": true,
+      "rafP99": true,
+      "calls": true,
+      "triangles": true,
+      "geometries": true,
+      "materials": true,
+      "heap": true
+    },
+    "pass": true
+  },
+  {
+    "id": "desktop-travel-return-town",
+    "before": {
+      "p95": 33.39999999999418,
+      "calls": 444,
+      "triangles": 6948140,
+      "heap": 239000000
+    },
+    "after": {
+      "p95": 33.400000000001455,
+      "calls": 453,
+      "triangles": 6935020,
+      "heap": 239000000
+    },
+    "checks": {
+      "rafP95": true,
+      "rafP99": true,
+      "calls": true,
+      "triangles": true,
+      "geometries": true,
+      "materials": true,
+      "heap": true
+    },
+    "pass": true
+  },
+  {
+    "id": "mobile-starting-town",
+    "before": {
+      "p95": 33.400000000001455,
+      "calls": 412,
+      "triangles": 6944792,
+      "heap": 239000000
+    },
+    "after": {
+      "p95": 49.900000000001455,
+      "calls": 422,
+      "triangles": 6931684,
+      "heap": 239000000
+    },
+    "checks": {
+      "rafP95": false,
+      "rafP99": true,
+      "calls": true,
+      "triangles": true,
+      "geometries": true,
+      "materials": true,
+      "heap": true
+    },
+    "pass": false
+  },
+  {
+    "id": "mobile-dense-woodland",
+    "before": {
+      "p95": 49.900000000001455,
+      "calls": 113,
+      "triangles": 10645520,
+      "heap": 239000000
+    },
+    "after": {
+      "p95": 33.39999999999418,
+      "calls": 113,
+      "triangles": 10645520,
+      "heap": 239000000
+    },
+    "checks": {
+      "rafP95": true,
+      "rafP99": true,
+      "calls": true,
+      "triangles": true,
+      "geometries": true,
+      "materials": true,
+      "heap": true
+    },
+    "pass": true
+  },
+  {
+    "id": "mobile-capital-interior",
+    "before": {
+      "p95": 50,
+      "calls": 465,
+      "triangles": 6035084,
+      "heap": 239000000
+    },
+    "after": {
+      "p95": 16.80000000000291,
+      "calls": 465,
+      "triangles": 6035084,
+      "heap": 239000000
+    },
+    "checks": {
+      "rafP95": true,
+      "rafP99": true,
+      "calls": true,
+      "triangles": true,
+      "geometries": true,
+      "materials": true,
+      "heap": true
+    },
+    "pass": true
+  },
+  {
+    "id": "mobile-combat-arena",
+    "before": {
+      "p95": 50,
+      "calls": 348,
+      "triangles": 6824016,
+      "heap": 239000000
+    },
+    "after": {
+      "p95": 33.39999999999418,
+      "calls": 347,
+      "triangles": 6806802,
+      "heap": 239000000
+    },
+    "checks": {
+      "rafP95": true,
+      "rafP99": true,
+      "calls": true,
+      "triangles": true,
+      "geometries": true,
+      "materials": true,
+      "heap": true
+    },
+    "pass": true
+  },
+  {
+    "id": "mobile-distant-biome",
+    "before": {
+      "p95": 50,
+      "calls": 150,
+      "triangles": 4787040,
+      "heap": 239000000
+    },
+    "after": {
+      "p95": 33.400000000001455,
+      "calls": 151,
+      "triangles": 4787120,
+      "heap": 239000000
+    },
+    "checks": {
+      "rafP95": true,
+      "rafP99": true,
+      "calls": true,
+      "triangles": true,
+      "geometries": true,
+      "materials": true,
+      "heap": true
+    },
+    "pass": true
+  },
+  {
+    "id": "mobile-travel-return-town",
+    "before": {
+      "p95": 50,
+      "calls": 412,
+      "triangles": 6944792,
+      "heap": 239000000
+    },
+    "after": {
+      "p95": 33.400000000001455,
+      "calls": 422,
+      "triangles": 6931684,
+      "heap": 239000000
+    },
+    "checks": {
+      "rafP95": true,
+      "rafP99": true,
+      "calls": true,
+      "triangles": true,
+      "geometries": true,
+      "materials": true,
+      "heap": true
+    },
+    "pass": true
+  },
+  {
+    "id": "desktop-pilot-town-forge",
+    "before": {
+      "p95": 50,
+      "calls": 458,
+      "triangles": 6951332,
+      "heap": 239000000
+    },
+    "after": {
+      "p95": 50,
+      "calls": 486,
+      "triangles": 6946082,
+      "heap": 239000000
+    },
+    "checks": {
+      "rafP95": true,
+      "rafP99": true,
+      "calls": true,
+      "triangles": true,
+      "geometries": true,
+      "materials": true,
+      "heap": true
+    },
+    "pass": true
+  },
+  {
+    "id": "mobile-pilot-town-forge",
+    "before": {
+      "p95": 50,
+      "calls": 426,
+      "triangles": 6947984,
+      "heap": 239000000
+    },
+    "after": {
+      "p95": 50,
+      "calls": 455,
+      "triangles": 6942746,
+      "heap": 239000000
+    },
+    "checks": {
+      "rafP95": true,
+      "rafP99": true,
+      "calls": true,
+      "triangles": true,
+      "geometries": true,
+      "materials": true,
+      "heap": true
+    },
+    "pass": true
+  }
+]
