@@ -1,3 +1,4 @@
+import { createTerrainPalette } from "./terrain-palette.ts";
 import { sameHorizonUpdateKey } from "./horizon-update-key.ts";
 import { useFrame } from "@react-three/fiber";
 import type { ThreeEvent } from "@react-three/fiber";
@@ -58,6 +59,8 @@ const KIND_COLOR: Record<TileKind, string> = {
   snow: "#d8d2c6",
   marsh: "#3a4a36",
 };
+
+const getKindPalette = createTerrainPalette(KIND_COLOR);
 
 const COVER: Record<TileKind, [number, number, number]> = {
   grass: [1, 0.12, 0],
@@ -171,10 +174,11 @@ function colorAt(world: World, x: number, z: number, out: THREE.Color, weights: 
   const z0 = Math.floor(z);
   const fx = x - x0;
   const fz = z - z0;
-  c00.set(KIND_COLOR[kindAt(world, x0, z0)]);
-  c10.set(KIND_COLOR[kindAt(world, x0 + 1, z0)]);
-  c01.set(KIND_COLOR[kindAt(world, x0, z0 + 1)]);
-  c11.set(KIND_COLOR[kindAt(world, x0 + 1, z0 + 1)]);
+  const palette = getKindPalette();
+  c00.copy(palette[kindAt(world, x0, z0)]);
+  c10.copy(palette[kindAt(world, x0 + 1, z0)]);
+  c01.copy(palette[kindAt(world, x0, z0 + 1)]);
+  c11.copy(palette[kindAt(world, x0 + 1, z0 + 1)]);
   out.copy(c00).lerp(c10, fx);
   tmp.copy(c01).lerp(c11, fx);
   out.lerp(tmp, fz);
