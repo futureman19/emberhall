@@ -1,0 +1,7 @@
+# Minimap repaint bottleneck and bounded browser proof
+
+Recovered CPU stacks identify compiled qy->Ky->ea->noise beneath React effect. Direct bundle/source mapping: vale-map.tsx paint->colorAt->biomeWeights, invoked on landKey changes. Every map repaint recalculates all256x256 coordinate biome weights. This explains a substantial named React-effect cost; not all action stalls.
+
+Browser-only production bundle injection cached exact biomeWeights by coordinate for the fixed minimap sample grid. Five cases: original grass,dirt,water,tree,restored grass at220,260. Each uses uncached/cached/cached/uncached paint. Full canvas PNG data URLs identical in all cases. Cache65536 entries; live source untouched. Timings raw minimap-cache-proof.json: uncached72–115ms, warm cached12.8–23.8ms. This measures synchronous paint CPU, not frame-time speedup; cold fill occurred during initial mount and is excluded.
+
+Both original tile restoration and browser context isolation preserved. Lint passed, no page errors. Candidate still needs bounded compact storage (avoid an unrestricted general coordinate cache), dependency contract for biome atlas changes, world replacement/tile mutation parity, full gates and real action-window measurement. biomeWeights reads static atlas/coordinate noise rather than live world seed; do not cache tile RGB without tile-kind invalidation. No runtime change or deployment. Next implement the exact minimap-only reuse with tests and verify composed action performance before delivery.
