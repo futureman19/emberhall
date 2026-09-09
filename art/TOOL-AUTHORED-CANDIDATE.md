@@ -1,0 +1,7 @@
+# Authored tool silhouette candidate — held, not integrated
+
+Head-only Blender revision: hatchet asymmetric wedge and pick hooked tips, inside original geometry envelopes. Six other parts retain generator definitions. Editable equipment-silhouette.blend, reproducible build_equipment_silhouette.py, actual tools-silhouette.glb. Measured54472bytes,8parts,968triangles. Approved tools.glb byte-equal to HEAD. No runtime references to candidate; Playwright route override only.
+
+npx tsx --test scripts/check-tool-silhouette.ts:2 pass (actual GLTFLoader/runtime extractor, finite vertices, all original bounds and budgets, malformed-kit rejection). Lint passes. Mobile authored-facing-audit:32 tool/facing/idle-work cases and33 structural checks, no captured page/shader errors. Comparison.png reconciles16 changed-tool cases against prior original32-case dataset, native-size unscaled crops. The unchanged hoe/rod were structurally checked but not separately visually reapproved.
+
+Visual result: new wedge/hook details do not establish clear recognition gains at normal mobile scale. Candidate held, not integrated or deployed. No full animation/performance clearance. Asset geometry alone within these tight envelopes has not solved hand/body overlap. Further arbitrary palette/scale variants are not justified by this evidence. Preserve current assets; next acceptance work can move to known performance diagnosis while readability remains explicitly blocked pending a reviewed change to presentation constraints or stronger recognition evidence.
