@@ -135,6 +135,7 @@ function smooth01(a: number, b: number, x: number) {
 
 function hideRest(mesh: THREE.InstancedMesh | null, from: number, total: number) {
   if (!mesh) return;
+  mesh.count = from;
   for (let i = from; i < total; i++) {
     dummy.position.set(0, -40, 0);
     dummy.scale.set(0.01, 0.01, 0.01);
