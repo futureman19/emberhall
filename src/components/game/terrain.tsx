@@ -1,3 +1,4 @@
+import { sameHorizonUpdateKey } from "./horizon-update-key.ts";
 import { useFrame } from "@react-three/fiber";
 import type { ThreeEvent } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
@@ -834,6 +835,7 @@ export function Horizon({ treeReduction }: { treeReduction: HorizonTreeReduction
   const origin = useRef({ x: COURT.tx, z: COURT.ty, rev: -1, treeReduction: -1 });
   const horizonWorld = useRef<World | null>(null);
   const farTreeLimit = Math.floor(FAR_TREES * (1 - treeReduction / 100));
+  const lastFarUpdate = useRef<readonly unknown[] | null>(null);
   const stock = useRef<FarStock[]>([]);
   const geo = useMemo(() => {
     const g = new THREE.BufferGeometry();
@@ -947,6 +949,10 @@ export function Horizon({ treeReduction }: { treeReduction: HorizonTreeReduction
 
     const mesh = far.current;
     ensureColor(mesh, FAR_TREES);
+    if (!mesh) return;
+    const updateKey = [w, w.tiles, rev, w.seed, px, pz, stock.current, mesh, farTreeLimit, mesh.instanceMatrix, mesh.instanceColor];
+    if (sameHorizonUpdateKey(lastFarUpdate.current, updateKey)) return;
+    lastFarUpdate.current = updateKey;
     let fi = 0;
     if (mesh) {
       for (const t of stock.current) {

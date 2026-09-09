@@ -23,6 +23,7 @@
     "src/components/game/gate-gump.tsx",
     "src/components/game/gate-meshes.tsx",
     "src/components/game/herb-meshes.tsx",
+    "src/components/game/horizon-update-key.ts",
     "src/components/game/hospitality-kit.ts",
     "src/components/game/house-gump.tsx",
     "src/components/game/hud.tsx",
@@ -29397,6 +29398,64 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "renderer-helper:src/components/game/horizon-update-key.ts#sameHorizonUpdateKey",
+      "canonicalId": "src/components/game/horizon-update-key.ts#sameHorizonUpdateKey",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/horizon-update-key.ts:2"
+      ],
+      "sourceNames": [
+        "sameHorizonUpdateKey"
+      ],
+      "rendererLocations": [
+        "src/components/game/horizon-update-key.ts:2"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/horizon-update-key.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/horizon-update-key.ts:2"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/horizon-update-key.ts:2"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/horizon-update-key.ts:2"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "renderer-helper:src/components/game/hospitality-kit.ts#hospitalityKitName",
       "canonicalId": "src/components/game/hospitality-kit.ts#hospitalityKitName",
       "family": "renderer-helper",
@@ -33771,13 +33830,13 @@
       "canonicalId": "src/components/game/terrain.tsx#align",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/terrain.tsx:828"
+        "src/components/game/terrain.tsx:829"
       ],
       "sourceNames": [
         "align"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:828"
+        "src/components/game/terrain.tsx:829"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -33829,13 +33888,13 @@
       "canonicalId": "src/components/game/terrain.tsx#blocked",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/terrain.tsx:114"
+        "src/components/game/terrain.tsx:115"
       ],
       "sourceNames": [
         "blocked"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:114"
+        "src/components/game/terrain.tsx:115"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -33911,13 +33970,13 @@
       "canonicalId": "src/components/game/terrain.tsx#colorAt",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/terrain.tsx:168"
+        "src/components/game/terrain.tsx:169"
       ],
       "sourceNames": [
         "colorAt"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:168"
+        "src/components/game/terrain.tsx:169"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -34017,13 +34076,13 @@
       "canonicalId": "src/components/game/terrain.tsx#coverAt",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/terrain.tsx:190"
+        "src/components/game/terrain.tsx:191"
       ],
       "sourceNames": [
         "coverAt"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:190"
+        "src/components/game/terrain.tsx:191"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -34099,13 +34158,13 @@
       "canonicalId": "src/components/game/terrain.tsx#hideRest",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/terrain.tsx:136"
+        "src/components/game/terrain.tsx:137"
       ],
       "sourceNames": [
         "hideRest"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:136"
+        "src/components/game/terrain.tsx:137"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -34165,13 +34224,13 @@
       "canonicalId": "src/components/game/terrain.tsx#kindAt",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/terrain.tsx:164"
+        "src/components/game/terrain.tsx:165"
       ],
       "sourceNames": [
         "kindAt"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:164"
+        "src/components/game/terrain.tsx:165"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -34223,13 +34282,13 @@
       "canonicalId": "src/components/game/terrain.tsx#paint",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/terrain.tsx:154"
+        "src/components/game/terrain.tsx:155"
       ],
       "sourceNames": [
         "paint"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:154"
+        "src/components/game/terrain.tsx:155"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -34289,13 +34348,13 @@
       "canonicalId": "src/components/game/terrain.tsx#smooth01",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/terrain.tsx:130"
+        "src/components/game/terrain.tsx:131"
       ],
       "sourceNames": [
         "smooth01"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:130"
+        "src/components/game/terrain.tsx:131"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -34363,13 +34422,13 @@
       "canonicalId": "src/components/game/terrain.tsx#treeGrow",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/terrain.tsx:125"
+        "src/components/game/terrain.tsx:126"
       ],
       "sourceNames": [
         "treeGrow"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:125"
+        "src/components/game/terrain.tsx:126"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -35393,7 +35452,7 @@
         "src/components/game/people-meshes.tsx:21",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/sky.tsx:7",
-        "src/components/game/terrain.tsx:10",
+        "src/components/game/terrain.tsx:11",
         "src/components/game/world-scene.tsx:103",
         "src/components/game/world-scene.tsx:25"
       ],
@@ -35808,13 +35867,13 @@
       "canonicalId": "src/components/game/terrain.tsx#far-horizon-trees",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:983"
+        "src/components/game/terrain.tsx:989"
       ],
       "sourceNames": [
         "Horizon"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:983"
+        "src/components/game/terrain.tsx:989"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -35866,13 +35925,13 @@
       "canonicalId": "src/components/game/terrain.tsx#harvestable-oak-crowns",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:734"
+        "src/components/game/terrain.tsx:735"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:734"
+        "src/components/game/terrain.tsx:735"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -35924,13 +35983,13 @@
       "canonicalId": "src/components/game/terrain.tsx#harvestable-oak-crowns-faded",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:740"
+        "src/components/game/terrain.tsx:741"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:740"
+        "src/components/game/terrain.tsx:741"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -35982,13 +36041,13 @@
       "canonicalId": "src/components/game/terrain.tsx#harvestable-oak-trunks",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:731"
+        "src/components/game/terrain.tsx:732"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:731"
+        "src/components/game/terrain.tsx:732"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -36040,13 +36099,13 @@
       "canonicalId": "src/components/game/terrain.tsx#harvestable-oak-trunks-faded",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:737"
+        "src/components/game/terrain.tsx:738"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:737"
+        "src/components/game/terrain.tsx:738"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -36098,13 +36157,13 @@
       "canonicalId": "src/components/game/terrain.tsx#lanternwood-soft-canopies",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:754"
+        "src/components/game/terrain.tsx:755"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:754"
+        "src/components/game/terrain.tsx:755"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44328,13 +44387,13 @@
       "canonicalId": "src/components/game/terrain.tsx#c00",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:158"
+        "src/components/game/terrain.tsx:159"
       ],
       "sourceNames": [
         "c00"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:158"
+        "src/components/game/terrain.tsx:159"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44386,13 +44445,13 @@
       "canonicalId": "src/components/game/terrain.tsx#c01",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:160"
+        "src/components/game/terrain.tsx:161"
       ],
       "sourceNames": [
         "c01"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:160"
+        "src/components/game/terrain.tsx:161"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44444,13 +44503,13 @@
       "canonicalId": "src/components/game/terrain.tsx#c10",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:159"
+        "src/components/game/terrain.tsx:160"
       ],
       "sourceNames": [
         "c10"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:159"
+        "src/components/game/terrain.tsx:160"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44502,13 +44561,13 @@
       "canonicalId": "src/components/game/terrain.tsx#c11",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:161"
+        "src/components/game/terrain.tsx:162"
       ],
       "sourceNames": [
         "c11"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:161"
+        "src/components/game/terrain.tsx:162"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44560,13 +44619,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_CANOPY",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:90"
+        "src/components/game/terrain.tsx:91"
       ],
       "sourceNames": [
         "COL_CANOPY"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:90"
+        "src/components/game/terrain.tsx:91"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44618,13 +44677,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_FAR",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:824"
+        "src/components/game/terrain.tsx:825"
       ],
       "sourceNames": [
         "COL_FAR"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:824"
+        "src/components/game/terrain.tsx:825"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44676,13 +44735,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_FLOWER_GOLD",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:102"
+        "src/components/game/terrain.tsx:103"
       ],
       "sourceNames": [
         "COL_FLOWER_GOLD"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:102"
+        "src/components/game/terrain.tsx:103"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44734,13 +44793,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_FLOWER_PALE",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:103"
+        "src/components/game/terrain.tsx:104"
       ],
       "sourceNames": [
         "COL_FLOWER_PALE"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:103"
+        "src/components/game/terrain.tsx:104"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44792,13 +44851,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_FLOWER_RUST",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:101"
+        "src/components/game/terrain.tsx:102"
       ],
       "sourceNames": [
         "COL_FLOWER_RUST"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:101"
+        "src/components/game/terrain.tsx:102"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44850,13 +44909,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_GROUND_JUNGLE",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:92"
+        "src/components/game/terrain.tsx:93"
       ],
       "sourceNames": [
         "COL_GROUND_JUNGLE"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:92"
+        "src/components/game/terrain.tsx:93"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44908,13 +44967,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_GROUND_MARSH",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:94"
+        "src/components/game/terrain.tsx:95"
       ],
       "sourceNames": [
         "COL_GROUND_MARSH"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:94"
+        "src/components/game/terrain.tsx:95"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44966,13 +45025,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_GROUND_SAND",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:95"
+        "src/components/game/terrain.tsx:96"
       ],
       "sourceNames": [
         "COL_GROUND_SAND"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:95"
+        "src/components/game/terrain.tsx:96"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45024,13 +45083,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_GROUND_SNOW",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:93"
+        "src/components/game/terrain.tsx:94"
       ],
       "sourceNames": [
         "COL_GROUND_SNOW"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:93"
+        "src/components/game/terrain.tsx:94"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45082,13 +45141,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_GROUND_TAIGA",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:91"
+        "src/components/game/terrain.tsx:92"
       ],
       "sourceNames": [
         "COL_GROUND_TAIGA"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:91"
+        "src/components/game/terrain.tsx:92"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45140,13 +45199,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_MARK",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:96"
+        "src/components/game/terrain.tsx:97"
       ],
       "sourceNames": [
         "COL_MARK"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:96"
+        "src/components/game/terrain.tsx:97"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45198,13 +45257,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_MARK_WOOD",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:97"
+        "src/components/game/terrain.tsx:98"
       ],
       "sourceNames": [
         "COL_MARK_WOOD"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:97"
+        "src/components/game/terrain.tsx:98"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45256,13 +45315,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_SAPLING",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:104"
+        "src/components/game/terrain.tsx:105"
       ],
       "sourceNames": [
         "COL_SAPLING"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:104"
+        "src/components/game/terrain.tsx:105"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45314,13 +45373,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_SHRUB",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:98"
+        "src/components/game/terrain.tsx:99"
       ],
       "sourceNames": [
         "COL_SHRUB"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:98"
+        "src/components/game/terrain.tsx:99"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45372,13 +45431,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_SHRUB_2",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:99"
+        "src/components/game/terrain.tsx:100"
       ],
       "sourceNames": [
         "COL_SHRUB_2"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:99"
+        "src/components/game/terrain.tsx:100"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45430,13 +45489,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_THORN",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:100"
+        "src/components/game/terrain.tsx:101"
       ],
       "sourceNames": [
         "COL_THORN"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:100"
+        "src/components/game/terrain.tsx:101"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45488,13 +45547,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_TUFT",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:105"
+        "src/components/game/terrain.tsx:106"
       ],
       "sourceNames": [
         "COL_TUFT"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:105"
+        "src/components/game/terrain.tsx:106"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45546,13 +45605,13 @@
       "canonicalId": "src/components/game/terrain.tsx#dummy",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:88"
+        "src/components/game/terrain.tsx:89"
       ],
       "sourceNames": [
         "dummy"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:88"
+        "src/components/game/terrain.tsx:89"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45604,13 +45663,13 @@
       "canonicalId": "src/components/game/terrain.tsx#ensureColor",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:147"
+        "src/components/game/terrain.tsx:148"
       ],
       "sourceNames": [
         "ensureColor"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:147"
+        "src/components/game/terrain.tsx:148"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45678,13 +45737,13 @@
       "canonicalId": "src/components/game/terrain.tsx#GROUND_FADE",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:107"
+        "src/components/game/terrain.tsx:108"
       ],
       "sourceNames": [
         "GROUND_FADE"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:107"
+        "src/components/game/terrain.tsx:108"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45736,13 +45795,13 @@
       "canonicalId": "src/components/game/terrain.tsx#GroundMaterial",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:224"
+        "src/components/game/terrain.tsx:225"
       ],
       "sourceNames": [
         "GroundMaterial"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:224"
+        "src/components/game/terrain.tsx:225"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45804,13 +45863,13 @@
       "canonicalId": "src/components/game/terrain.tsx#HIDDEN_OAK",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:29"
+        "src/components/game/terrain.tsx:30"
       ],
       "sourceNames": [
         "HIDDEN_OAK"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:29"
+        "src/components/game/terrain.tsx:30"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45862,13 +45921,13 @@
       "canonicalId": "src/components/game/terrain.tsx#Horizon",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:832"
+        "src/components/game/terrain.tsx:833"
       ],
       "sourceNames": [
         "Horizon"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:832"
+        "src/components/game/terrain.tsx:833"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45888,6 +45947,14 @@
           "status": "inventoried",
           "evidence": [
             "src/components/game/terrain.tsx:832"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!mesh",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/terrain.tsx:833"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -45980,6 +46047,14 @@
           "applicability": "source contract; runtime unverified"
         },
         {
+          "id": "predicate:sameHorizonUpdateKey(lastFarUpdate.current, updateKey)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/terrain.tsx:833"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
           "id": "predicate:tx < 0 || ty < 0 || tx >= MAP || ty >= MAP",
           "status": "inventoried",
           "evidence": [
@@ -46031,13 +46106,13 @@
       "canonicalId": "src/components/game/terrain.tsx#LW_GROUND",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:33"
+        "src/components/game/terrain.tsx:34"
       ],
       "sourceNames": [
         "LW_GROUND"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:33"
+        "src/components/game/terrain.tsx:34"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -46089,13 +46164,13 @@
       "canonicalId": "src/components/game/terrain.tsx#LW_LEAF",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:32"
+        "src/components/game/terrain.tsx:33"
       ],
       "sourceNames": [
         "LW_LEAF"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:32"
+        "src/components/game/terrain.tsx:33"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -46147,13 +46222,13 @@
       "canonicalId": "src/components/game/terrain.tsx#pal",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:89"
+        "src/components/game/terrain.tsx:90"
       ],
       "sourceNames": [
         "pal"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:89"
+        "src/components/game/terrain.tsx:90"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -46205,13 +46280,13 @@
       "canonicalId": "src/components/game/terrain.tsx#Terrain",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:283"
+        "src/components/game/terrain.tsx:284"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:283"
+        "src/components/game/terrain.tsx:284"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -46857,13 +46932,13 @@
       "canonicalId": "src/components/game/terrain.tsx#tmp",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:162"
+        "src/components/game/terrain.tsx:163"
       ],
       "sourceNames": [
         "tmp"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:162"
+        "src/components/game/terrain.tsx:163"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -147779,7 +147854,7 @@
       ],
       "rendererLocations": [
         "src/components/game/terrain.tsx:1",
-        "src/components/game/terrain.tsx:18",
+        "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
         "src/components/game/vale-map.tsx:7"
       ],
@@ -147833,7 +147908,7 @@
       ],
       "rendererLocations": [
         "src/components/game/terrain.tsx:1",
-        "src/components/game/terrain.tsx:18",
+        "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
         "src/components/game/vale-map.tsx:7"
       ],
@@ -147887,7 +147962,7 @@
       ],
       "rendererLocations": [
         "src/components/game/terrain.tsx:1",
-        "src/components/game/terrain.tsx:18",
+        "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
         "src/components/game/vale-map.tsx:7"
       ],
@@ -147941,7 +148016,7 @@
       ],
       "rendererLocations": [
         "src/components/game/terrain.tsx:1",
-        "src/components/game/terrain.tsx:18",
+        "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
         "src/components/game/vale-map.tsx:7"
       ],
@@ -147995,7 +148070,7 @@
       ],
       "rendererLocations": [
         "src/components/game/terrain.tsx:1",
-        "src/components/game/terrain.tsx:18",
+        "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
         "src/components/game/vale-map.tsx:7"
       ],
@@ -148049,7 +148124,7 @@
       ],
       "rendererLocations": [
         "src/components/game/terrain.tsx:1",
-        "src/components/game/terrain.tsx:18",
+        "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
         "src/components/game/vale-map.tsx:7"
       ],
@@ -148103,7 +148178,7 @@
       ],
       "rendererLocations": [
         "src/components/game/terrain.tsx:1",
-        "src/components/game/terrain.tsx:18",
+        "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
         "src/components/game/vale-map.tsx:7"
       ],
@@ -148157,7 +148232,7 @@
       ],
       "rendererLocations": [
         "src/components/game/terrain.tsx:1",
-        "src/components/game/terrain.tsx:18",
+        "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
         "src/components/game/vale-map.tsx:7"
       ],
@@ -148211,7 +148286,7 @@
       ],
       "rendererLocations": [
         "src/components/game/terrain.tsx:1",
-        "src/components/game/terrain.tsx:18",
+        "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
         "src/components/game/vale-map.tsx:7"
       ],
@@ -148265,7 +148340,7 @@
       ],
       "rendererLocations": [
         "src/components/game/terrain.tsx:1",
-        "src/components/game/terrain.tsx:18",
+        "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
         "src/components/game/vale-map.tsx:7"
       ],
@@ -148319,7 +148394,7 @@
       ],
       "rendererLocations": [
         "src/components/game/terrain.tsx:1",
-        "src/components/game/terrain.tsx:18",
+        "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
         "src/components/game/vale-map.tsx:7"
       ],
@@ -148373,7 +148448,7 @@
       ],
       "rendererLocations": [
         "src/components/game/terrain.tsx:1",
-        "src/components/game/terrain.tsx:18",
+        "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
         "src/components/game/vale-map.tsx:7"
       ],
@@ -148427,7 +148502,7 @@
       ],
       "rendererLocations": [
         "src/components/game/terrain.tsx:1",
-        "src/components/game/terrain.tsx:18",
+        "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
         "src/components/game/vale-map.tsx:7"
       ],
@@ -148481,7 +148556,7 @@
       ],
       "rendererLocations": [
         "src/components/game/terrain.tsx:1",
-        "src/components/game/terrain.tsx:18",
+        "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
         "src/components/game/vale-map.tsx:7"
       ],
@@ -156642,7 +156717,7 @@
       ],
       "rendererLocations": [
         "src/components/game/settings-gump.tsx:8",
-        "src/components/game/terrain.tsx:14"
+        "src/components/game/terrain.tsx:15"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -156694,7 +156769,7 @@
       ],
       "rendererLocations": [
         "src/components/game/settings-gump.tsx:8",
-        "src/components/game/terrain.tsx:14"
+        "src/components/game/terrain.tsx:15"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -156746,7 +156821,7 @@
       ],
       "rendererLocations": [
         "src/components/game/settings-gump.tsx:8",
-        "src/components/game/terrain.tsx:14"
+        "src/components/game/terrain.tsx:15"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
