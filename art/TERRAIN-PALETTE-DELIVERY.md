@@ -1,0 +1,7 @@
+# Final palette control and isolated delivery
+
+Runtime4564b1c, production routes-BfNKbK8R.js. Browser-only original control restores fixed raw strings and four Color.set calls without per-call instrumentation. ABBA, two real-time actions per arm, all8 outcomes passed. Max RAF ms: original-a216.6 chop/183.4 hoe; cached-a150.0/166.6; cached-b183.2/116.7; original-b183.3/199.9. Candidate ranges lower, but chop boundary difference is tiny/noisy; bounded evidence, not global clearance. Mobile viewport on desktop GPU. Final harness lint passed.
+
+Deployed prebuilt preview: https://emberhall-vale-4hukuk6ze-andrews-projects-ffe8a9fd.vercel.app/art/phase1-preview.html . Independent Vercel inspect: dpl_C9gXsTSzJMnemu282zLKcAC8B9ms, target preview, Ready. Downloaded routes-BfNKbK8R.js equals local build bytes. Live82 settlement checks and8 real-time tool outcomes passed. Local207 script/562 game tests, lint/typecheck/build and4 exact buffer/pixel cases documented in TERRAIN-PALETTE-INTEGRATION.md. Production not promoted.
+
+Raw actions-palette-final-{original-a,cached-a,cached-b,original-b}, palette-final-control-lint.log, palette-deploy.log, palette-inspect.log, palette-live.log; phase1/palette-deployed/results.json and tools/actions-palette-deployed/results.json retained. Remaining: completion stalls and broader performance acceptance, including physical mobile. Next target is static biome weight recomputation, with bounded cache dependency proof before implementation.
