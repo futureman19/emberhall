@@ -1,0 +1,7 @@
+# Real-time production tool actions
+
+Four tools x desktop/mobile:8 gameplay outcomes passed using actual doVerb and normal-speed rendered simulation, max skills/controlled successful RNG/disposable cleared fixture tiles. Chop/mine yield2 typed resources and dirt; till creates plot; fish yields1 raw fish preserving water. No page errors; lint passed. This is not pointer-selection, natural RNG or complete animation/effect coverage.
+
+Initial immediate-after-relocation run (actions-production-realtime/results.json) passed all8 outcomes but max frame intervals250–383.2ms were confounded by setup/streaming. Retained raw evidence. Revised harness waits8500ms after setup before doVerb. Settled output actions-production-realtime-settled/results.json again passes8 outcomes, yet max intervals50.1–83.4ms remain (desktop hatchet83.4,pick83.4,hoe66.6,rod50.1; mobile83.3,83.4,66.7,66.7ms). Only7–29 intervals per action, too short for sustained p95 acceptance. No performance pass claimed.
+
+This establishes action-window stalls worth profiling, not their cause. Unlike idle fixtures, outcomes mutate world state and may rebuild geometry/UI. Next capture action-aligned CPU traces and land-revision transitions; do not assume tool meshes are responsible. Current harness has settling enabled; initial raw data predates that change. No runtime changes or deployment. Historical parent comparison remains uncompleted.
