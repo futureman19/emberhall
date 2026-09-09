@@ -37,6 +37,7 @@
     "src/components/game/lighting.tsx",
     "src/components/game/look-gump.tsx",
     "src/components/game/look-preview.tsx",
+    "src/components/game/minimap-biome-cache.ts",
     "src/components/game/minimap-layout.ts",
     "src/components/game/movable-minimap.tsx",
     "src/components/game/npc-gump.tsx",
@@ -31242,6 +31243,80 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "renderer-helper:src/components/game/minimap-biome-cache.ts#createMinimapBiomeCache",
+      "canonicalId": "src/components/game/minimap-biome-cache.ts#createMinimapBiomeCache",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/minimap-biome-cache.ts:7"
+      ],
+      "sourceNames": [
+        "createMinimapBiomeCache"
+      ],
+      "rendererLocations": [
+        "src/components/game/minimap-biome-cache.ts:7"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/minimap-biome-cache.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/minimap-biome-cache.ts:7"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!Number.isInteger(mapSize) || mapSize < 1 || !Number.isInteger(pixels) || pixels < 1 || pixels > 256",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/minimap-biome-cache.ts:7"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!Number.isInteger(px) || !Number.isInteger(py) || px < 0 || py < 0 || px >= pixels || py >= pixels",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/minimap-biome-cache.ts:7"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/minimap-biome-cache.ts:7"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/minimap-biome-cache.ts:7"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "renderer-helper:src/components/game/minimap-layout.ts#clamp",
       "canonicalId": "src/components/game/minimap-layout.ts#clamp",
       "family": "renderer-helper",
@@ -34660,13 +34735,13 @@
       "canonicalId": "src/components/game/vale-map.tsx#colorAt",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/vale-map.tsx:35"
+        "src/components/game/vale-map.tsx:37"
       ],
       "sourceNames": [
         "colorAt"
       ],
       "rendererLocations": [
-        "src/components/game/vale-map.tsx:35"
+        "src/components/game/vale-map.tsx:37"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -34734,13 +34809,13 @@
       "canonicalId": "src/components/game/vale-map.tsx#mix",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/vale-map.tsx:31"
+        "src/components/game/vale-map.tsx:33"
       ],
       "sourceNames": [
         "mix"
       ],
       "rendererLocations": [
-        "src/components/game/vale-map.tsx:31"
+        "src/components/game/vale-map.tsx:33"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -34792,13 +34867,13 @@
       "canonicalId": "src/components/game/vale-map.tsx#nearPlace",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/vale-map.tsx:85"
+        "src/components/game/vale-map.tsx:86"
       ],
       "sourceNames": [
         "nearPlace"
       ],
       "rendererLocations": [
-        "src/components/game/vale-map.tsx:85"
+        "src/components/game/vale-map.tsx:86"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -34858,13 +34933,13 @@
       "canonicalId": "src/components/game/vale-map.tsx#onChartClick",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/vale-map.tsx:153"
+        "src/components/game/vale-map.tsx:154"
       ],
       "sourceNames": [
         "onChartClick"
       ],
       "rendererLocations": [
-        "src/components/game/vale-map.tsx:153"
+        "src/components/game/vale-map.tsx:154"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -34924,13 +34999,13 @@
       "canonicalId": "src/components/game/vale-map.tsx#paint",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/vale-map.tsx:51"
+        "src/components/game/vale-map.tsx:52"
       ],
       "sourceNames": [
         "paint"
       ],
       "rendererLocations": [
-        "src/components/game/vale-map.tsx:51"
+        "src/components/game/vale-map.tsx:52"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -35006,13 +35081,13 @@
       "canonicalId": "src/components/game/vale-map.tsx#tileFromEvent",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/vale-map.tsx:74"
+        "src/components/game/vale-map.tsx:75"
       ],
       "sourceNames": [
         "tileFromEvent"
       ],
       "rendererLocations": [
-        "src/components/game/vale-map.tsx:74"
+        "src/components/game/vale-map.tsx:75"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -35072,13 +35147,13 @@
       "canonicalId": "src/components/game/vale-map.tsx#walkTo",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/vale-map.tsx:98"
+        "src/components/game/vale-map.tsx:99"
       ],
       "sourceNames": [
         "walkTo"
       ],
       "rendererLocations": [
-        "src/components/game/vale-map.tsx:98"
+        "src/components/game/vale-map.tsx:99"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -147856,7 +147931,7 @@
         "src/components/game/terrain.tsx:1",
         "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
-        "src/components/game/vale-map.tsx:7"
+        "src/components/game/vale-map.tsx:8"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -147910,7 +147985,7 @@
         "src/components/game/terrain.tsx:1",
         "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
-        "src/components/game/vale-map.tsx:7"
+        "src/components/game/vale-map.tsx:8"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -147964,7 +148039,7 @@
         "src/components/game/terrain.tsx:1",
         "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
-        "src/components/game/vale-map.tsx:7"
+        "src/components/game/vale-map.tsx:8"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -148018,7 +148093,7 @@
         "src/components/game/terrain.tsx:1",
         "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
-        "src/components/game/vale-map.tsx:7"
+        "src/components/game/vale-map.tsx:8"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -148072,7 +148147,7 @@
         "src/components/game/terrain.tsx:1",
         "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
-        "src/components/game/vale-map.tsx:7"
+        "src/components/game/vale-map.tsx:8"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -148126,7 +148201,7 @@
         "src/components/game/terrain.tsx:1",
         "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
-        "src/components/game/vale-map.tsx:7"
+        "src/components/game/vale-map.tsx:8"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -148180,7 +148255,7 @@
         "src/components/game/terrain.tsx:1",
         "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
-        "src/components/game/vale-map.tsx:7"
+        "src/components/game/vale-map.tsx:8"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -148234,7 +148309,7 @@
         "src/components/game/terrain.tsx:1",
         "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
-        "src/components/game/vale-map.tsx:7"
+        "src/components/game/vale-map.tsx:8"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -148288,7 +148363,7 @@
         "src/components/game/terrain.tsx:1",
         "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
-        "src/components/game/vale-map.tsx:7"
+        "src/components/game/vale-map.tsx:8"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -148342,7 +148417,7 @@
         "src/components/game/terrain.tsx:1",
         "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
-        "src/components/game/vale-map.tsx:7"
+        "src/components/game/vale-map.tsx:8"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -148396,7 +148471,7 @@
         "src/components/game/terrain.tsx:1",
         "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
-        "src/components/game/vale-map.tsx:7"
+        "src/components/game/vale-map.tsx:8"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -148450,7 +148525,7 @@
         "src/components/game/terrain.tsx:1",
         "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
-        "src/components/game/vale-map.tsx:7"
+        "src/components/game/vale-map.tsx:8"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -148504,7 +148579,7 @@
         "src/components/game/terrain.tsx:1",
         "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
-        "src/components/game/vale-map.tsx:7"
+        "src/components/game/vale-map.tsx:8"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -148558,7 +148633,7 @@
         "src/components/game/terrain.tsx:1",
         "src/components/game/terrain.tsx:19",
         "src/components/game/vale-map.tsx:1",
-        "src/components/game/vale-map.tsx:7"
+        "src/components/game/vale-map.tsx:8"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -153734,13 +153809,13 @@
       "canonicalId": "src/components/game/vale-map.tsx#ChartCanvas",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/vale-map.tsx:104"
+        "src/components/game/vale-map.tsx:105"
       ],
       "sourceNames": [
         "ChartCanvas"
       ],
       "rendererLocations": [
-        "src/components/game/vale-map.tsx:104"
+        "src/components/game/vale-map.tsx:105"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -153802,13 +153877,13 @@
       "canonicalId": "src/components/game/vale-map.tsx#Marks",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/vale-map.tsx:121"
+        "src/components/game/vale-map.tsx:122"
       ],
       "sourceNames": [
         "Marks"
       ],
       "rendererLocations": [
-        "src/components/game/vale-map.tsx:121"
+        "src/components/game/vale-map.tsx:122"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -153878,13 +153953,13 @@
       "canonicalId": "src/components/game/vale-map.tsx#MiniVale",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/vale-map.tsx:159"
+        "src/components/game/vale-map.tsx:160"
       ],
       "sourceNames": [
         "MiniVale"
       ],
       "rendererLocations": [
-        "src/components/game/vale-map.tsx:159"
+        "src/components/game/vale-map.tsx:160"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -153940,13 +154015,13 @@
       "canonicalId": "src/components/game/vale-map.tsx#ValeChart",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/vale-map.tsx:173"
+        "src/components/game/vale-map.tsx:174"
       ],
       "sourceNames": [
         "ValeChart"
       ],
       "rendererLocations": [
-        "src/components/game/vale-map.tsx:173"
+        "src/components/game/vale-map.tsx:174"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [

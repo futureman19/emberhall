@@ -1,6 +1,7 @@
 import { useEffect, useRef, type MouseEvent } from "react";
 import { MAP, PLACES } from "@/game/atlas";
-import { biomeWeights } from "@/game/biome";
+import type { BiomeW } from "@/game/biome";
+import { createMinimapBiomeCache } from "./minimap-biome-cache";
 import { getWorld } from "@/game/live";
 import { commandWalk } from "@/game/player";
 import { useGame } from "@/game/store";
@@ -24,6 +25,7 @@ const KIND_RGB: Record<TileKind, [number, number, number]> = {
 };
 
 const PIX = 256;
+const minimapBiomeAt = createMinimapBiomeCache(MAP, PIX);
 const WALK_CAP = 48000;
 const JUNGLE: [number, number, number] = [42, 66, 40];
 const TAIGA: [number, number, number] = [58, 70, 52];
@@ -32,12 +34,11 @@ function mix(a: [number, number, number], b: [number, number, number], t: number
   return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
 }
 
-function colorAt(tx: number, ty: number): [number, number, number] {
+function colorAt(tx: number, ty: number, wgt: Readonly<BiomeW>): [number, number, number] {
   const w = getWorld();
   const t = w.tiles[ty]?.[tx];
   if (!t) return [20, 16, 14];
   let c = KIND_RGB[t.kind] ?? KIND_RGB.grass;
-  const wgt = biomeWeights(tx, ty);
   if (t.kind === "grass" || t.kind === "tree" || t.kind === "dirt") {
     c = mix(c, JUNGLE, wgt.jungle * 0.45);
     c = mix(c, TAIGA, wgt.taiga * 0.4);
@@ -60,7 +61,7 @@ function paint(canvas: HTMLCanvasElement) {
     for (let px = 0; px < PIX; px++) {
       const tx = Math.min(MAP - 1, Math.floor(px * step));
       const ty = Math.min(MAP - 1, Math.floor(py * step));
-      const [r, g, b] = colorAt(tx, ty);
+      const [r, g, b] = colorAt(tx, ty, minimapBiomeAt(px, py));
       const i = (py * PIX + px) * 4;
       data[i] = r;
       data[i + 1] = g;
