@@ -1,0 +1,55 @@
+{
+  "minimap": {
+    "x": 158,
+    "y": 612,
+    "width": 220,
+    "height": 220
+  },
+  "dock": {
+    "x": 96,
+    "y": 778,
+    "width": 198,
+    "height": 54
+  },
+  "buttons": {
+    "Guide": {
+      "x": 101,
+      "y": 783,
+      "width": 44,
+      "height": 44
+    },
+    "Hold": {
+      "x": 149,
+      "y": 783,
+      "width": 44,
+      "height": 44
+    },
+    "Spellbook": {
+      "x": 197,
+      "y": 783,
+      "width": 44,
+      "height": 44
+    },
+    "Work": {
+      "x": 245,
+      "y": 783,
+      "width": 44,
+      "height": 44
+    }
+  },
+  "layout": "{\"x\":158,\"y\":612,\"size\":220,\"minimized\":false}",
+  "dockOverlap": {
+    "overlaps": true,
+    "area": 7344,
+    "x": 158,
+    "y": 778,
+    "width": 136,
+    "height": 54
+  },
+  "coveredButtons": [
+    "Hold",
+    "Spellbook",
+    "Work"
+  ],
+  "screenshot": "C:\\Users\\futur\\Desktop\\emberhall-mobile-hud-ai\\art\\verification\\mobile-hud\\before-mobile-grown.png"
+}

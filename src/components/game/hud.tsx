@@ -308,7 +308,10 @@ function BottomDock() {
     { id: "build", icon: Hammer, label: "Hold" },
   ];
   return (
-    <div className="pointer-events-auto absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-[var(--radius-lg)] border border-border bg-bg/90 p-1">
+    <div
+      data-testid="bottom-dock"
+      className="pointer-events-auto absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-[var(--radius-lg)] border border-border bg-bg/90 p-1"
+    >
       {items.map((it) => {
         const Icon = it.icon;
         return (

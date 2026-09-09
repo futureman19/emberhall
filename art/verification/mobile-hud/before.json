@@ -1,0 +1,110 @@
+{
+  "url": "http://127.0.0.1:4178/",
+  "capturedAt": "2026-09-09T04:27:14.119Z",
+  "viewports": [
+    {
+      "name": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "minimap": {
+        "x": 218,
+        "y": 604,
+        "width": 160,
+        "height": 160
+      },
+      "dock": {
+        "x": 96,
+        "y": 778,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": {
+        "Guide": {
+          "x": 101,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        "Hold": {
+          "x": 149,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        "Spellbook": {
+          "x": 197,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        "Work": {
+          "x": 245,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "layout": "{\"x\":218,\"y\":604,\"size\":160,\"minimized\":false}",
+      "dockOverlap": {
+        "overlaps": false,
+        "area": 0
+      },
+      "coveredButtons": [],
+      "screenshot": "C:\\Users\\futur\\Desktop\\emberhall-mobile-hud-ai\\art\\verification\\mobile-hud\\before-mobile.png"
+    },
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 960
+      },
+      "minimap": {
+        "x": 1268,
+        "y": 720,
+        "width": 160,
+        "height": 160
+      },
+      "dock": {
+        "x": 621,
+        "y": 894,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": {
+        "Guide": {
+          "x": 626,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        "Hold": {
+          "x": 674,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        "Spellbook": {
+          "x": 722,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        "Work": {
+          "x": 770,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "layout": "{\"x\":1268,\"y\":720,\"size\":160,\"minimized\":false}",
+      "dockOverlap": {
+        "overlaps": false,
+        "area": 0
+      },
+      "coveredButtons": [],
+      "screenshot": "C:\\Users\\futur\\Desktop\\emberhall-mobile-hud-ai\\art\\verification\\mobile-hud\\before-desktop.png"
+    }
+  ]
+}

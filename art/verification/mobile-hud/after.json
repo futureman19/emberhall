@@ -1,0 +1,144 @@
+{
+  "ok": true,
+  "url": "http://127.0.0.1:4178/",
+  "cases": [
+    {
+      "name": "mobile-default",
+      "minimap": {
+        "x": 218,
+        "y": 604,
+        "width": 160,
+        "height": 160
+      },
+      "dock": {
+        "x": 96,
+        "y": 778,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": {
+        "Guide": {
+          "x": 101,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        "Hold": {
+          "x": 149,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        "Spellbook": {
+          "x": 197,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        "Work": {
+          "x": 245,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "layout": "{\"x\":218,\"y\":604,\"size\":160,\"minimized\":false}",
+      "dockOverlap": {
+        "overlaps": false,
+        "area": 0
+      }
+    },
+    {
+      "name": "mobile-grown",
+      "minimap": {
+        "x": 158,
+        "y": 544,
+        "width": 220,
+        "height": 220
+      },
+      "dock": {
+        "x": 96,
+        "y": 778,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": {
+        "Guide": {
+          "x": 101,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        "Hold": {
+          "x": 149,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        "Spellbook": {
+          "x": 197,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        "Work": {
+          "x": 245,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "layout": "{\"x\":158,\"y\":544,\"size\":220,\"minimized\":false}",
+      "dockOverlap": {
+        "overlaps": false,
+        "area": 0
+      }
+    },
+    {
+      "name": "desktop-default",
+      "minimap": {
+        "x": 1268,
+        "y": 720,
+        "width": 160,
+        "height": 160
+      },
+      "dock": {
+        "x": 621,
+        "y": 894,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": {
+        "Guide": {
+          "x": 626,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        "Hold": {
+          "x": 674,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        "Spellbook": {
+          "x": 722,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        "Work": {
+          "x": 770,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        }
+      },
+      "layout": "{\"x\":1268,\"y\":720,\"size\":160,\"minimized\":false}",
+      "dockOverlap": {
+        "overlaps": false,
+        "area": 0
+      }
+    }
+  ]
+}

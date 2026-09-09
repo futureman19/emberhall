@@ -4,6 +4,8 @@ export const MAX_MINIMAP_SIZE = 320;
 export const DEFAULT_MINIMAP_SIZE = 160;
 export const MINIMAP_ICON_SIZE = 44;
 export const MINIMAP_VIEWPORT_PADDING = 12;
+/** Bottom dock sits at `bottom-3` with 44px buttons + padding (~66px). Keep 80px so the map cannot cover Guide/Hold/Spellbook/Work. */
+export const MINIMAP_BOTTOM_CHROME = 80;
 
 export type MinimapLayout = {
   x: number;
@@ -44,7 +46,7 @@ export function clampMinimapLayout(layout: MinimapLayout, viewport: Viewport): M
   return {
     ...layout,
     x: clamp(layout.x, MINIMAP_VIEWPORT_PADDING, viewport.width - width - MINIMAP_VIEWPORT_PADDING),
-    y: clamp(layout.y, MINIMAP_VIEWPORT_PADDING, viewport.height - height - MINIMAP_VIEWPORT_PADDING),
+    y: clamp(layout.y, MINIMAP_VIEWPORT_PADDING, viewport.height - height - MINIMAP_BOTTOM_CHROME),
     size,
   };
 }
@@ -53,7 +55,7 @@ export function defaultMinimapLayout(viewport: Viewport): MinimapLayout {
   return clampMinimapLayout(
     {
       x: viewport.width - DEFAULT_MINIMAP_SIZE - MINIMAP_VIEWPORT_PADDING,
-      y: viewport.height - DEFAULT_MINIMAP_SIZE - 80,
+      y: viewport.height - DEFAULT_MINIMAP_SIZE - MINIMAP_BOTTOM_CHROME,
       size: DEFAULT_MINIMAP_SIZE,
       minimized: false,
     },
