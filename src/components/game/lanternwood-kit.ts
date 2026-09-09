@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { lanternwoodInfluence, artNoise, noArtRaycast } from "./lanternwood-art.ts";
 
-export type KitName = "hall" | "tree-0" | "tree-1" | "bank" | "forge" | "kitchen" | "tavern" | "market" | "dormitory" | "yard" | "farm";
+export type KitName = "hall" | "tree-0" | "tree-1" | "bank" | "forge" | "kitchen" | "tavern" | "market" | "dormitory" | "yard" | "farm" | "notice" | "board" | "interior-hall" | "interior-dormitory" | "interior-kitchen" | "interior-yard" | "interior-market" | "interior-forge" | "interior-tavern" | "interior-bank";
 const loads = new Map<KitName, Promise<THREE.Group>>();
 /** Cache shared GPU geometry/materials; only the object hierarchy is per placement. */
 export function useArtistKit(name: KitName | null): THREE.Group | null {

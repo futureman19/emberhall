@@ -1,4 +1,6 @@
 import { useLayoutEffect, useMemo, useRef } from "react";
+import { signageKitName } from "./signage-kit.ts";
+import { interiorKitName, replaceInteriorVoxel } from "./interior-kit.ts";
 import * as THREE from "three";
 import { COURT } from "@/game/atlas";
 import { stationOf } from "@/game/craft";
@@ -945,9 +947,11 @@ function BlockLayer({
 }
 
 function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
-  const settlement = settlementKitName(b.kind, b.tx, b.ty) ?? hospitalityKitName(b.kind, b.tx, b.ty) ?? commonsKitName(b.kind, b.tx, b.ty);
+  const settlement = settlementKitName(b.kind, b.tx, b.ty) ?? hospitalityKitName(b.kind, b.tx, b.ty) ?? commonsKitName(b.kind, b.tx, b.ty) ?? signageKitName(b.kind, b.tx, b.ty);
   const kitName = usesBlenderHall(b.kind, b.tx, b.ty) ? "hall" : settlement;
   const authored = useArtistKit(kitName);
+  const interiorName = interiorKitName(b.kind, b.tx, b.ty);
+  const furnishings = useArtistKit(interiorName);
   const exterior = Boolean(authored && !inside) || Boolean(authored && keepCommonsExteriorOnEntry(kitName));
   const settlementExterior = exterior && settlement !== null;
   const spec = SPECS[b.kind];
@@ -985,15 +989,20 @@ function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
       leaf: [],
     };
     const interior = Object.fromEntries(KINDS.map(k => [k, [] as THREE.Vector3[]])) as Record<Block, THREE.Vector3[]>;
+    const furnitureProxies = Object.fromEntries(KINDS.map(k => [k, [] as THREE.Vector3[]])) as Record<Block, THREE.Vector3[]>;
     const cap = inside && b.kind === "keep" ? Math.round(story) * KEEP_STORY_VOX + KEEP_STORY_VOX + 1 : Infinity;
     for (const v of spec.voxels) {
       if (v.y > cap) continue;
       const p = new THREE.Vector3(b.tx + (v.x + 0.5) * B, y0 + (v.y + 0.5) * B, b.ty + (v.z + 0.5) * B);
+      if (furnishings && replaceInteriorVoxel(b.kind, v)) {
+        furnitureProxies[v.t].push(p);
+        continue;
+      }
       (v.cut ? cut : solid)[v.t].push(p);
       if (retainSettlementInteriorVoxel(b.kind, v) || retainHospitalityInteriorVoxel(b.kind, v) || retainCommonsInteriorVoxel(b.kind, v)) interior[v.t].push(p);
     }
-    return { solid, cut, interior };
-  }, [spec, b.tx, b.ty, b.kind, y0, inside, story]);
+    return { solid, cut, interior, furnitureProxies };
+  }, [spec, b.tx, b.ty, b.kind, y0, inside, story, furnishings]);
 
   return (
     <group
@@ -1047,6 +1056,10 @@ function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
       }}
     >
       {exterior && authored && <primitive name={`blender-${kitName}-exterior`} object={authored} position={[b.tx, y0, b.ty]} dispose={null} />}
+      {furnishings && <primitive name={`blender-interior-${b.kind}`} object={furnishings} position={[b.tx, y0, b.ty]} dispose={null} />}
+      {furnishings && KINDS.map(k => (
+        <BlockLayer key={`${k}-furniture-proxy`} items={layers.furnitureProxies[k]} pickOnly {...palette[k]} scale={B * (spec.fuse ? FUSE : GAP)} />
+      ))}
       {settlementExterior && KINDS.map(k => (
         <BlockLayer key={`${k}-retained-interior`} items={layers.interior[k]} {...palette[k]} scale={B * GAP} />
       ))}

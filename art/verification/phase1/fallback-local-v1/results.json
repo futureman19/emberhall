@@ -1,0 +1,1197 @@
+{
+  "url": "http://127.0.0.1:8093/",
+  "label": "fallback-local-v1",
+  "status": "failed",
+  "started": "2026-09-09T05:58:20.567Z",
+  "scope": "Local disposable fixture only. Explicit player-position setup, NOT walking, placement-commit, pointer-click, visual-quality, mobile, or performance proof.",
+  "limits": {
+    "totalMs": 120000,
+    "actionMs": 7000,
+    "navigationMs": 30000,
+    "readyMs": 35000,
+    "settleMs": 180,
+    "screenshots": 2,
+    "siteCandidatesPerKind": 1681,
+    "browsers": 1,
+    "pages": 1
+  },
+  "checks": [
+    {
+      "name": "fixture-original-building-records-byte-equivalent-JSON",
+      "ok": true,
+      "originals": 55
+    },
+    {
+      "name": "fixture-original-nonbuilding-records-byte-equivalent-JSON",
+      "ok": true
+    },
+    {
+      "name": "source-generator-boundaries",
+      "ok": true
+    },
+    {
+      "name": "eleven-unique-fixture-kinds",
+      "ok": true
+    },
+    {
+      "name": "source-hall-exact-selected-original-cells",
+      "ok": true,
+      "count": 7,
+      "cells": [
+        {
+          "x": -1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "z": -1,
+          "t": "gold"
+        }
+      ]
+    },
+    {
+      "name": "source-dormitory-exact-selected-original-cells",
+      "ok": true,
+      "count": 7,
+      "cells": [
+        {
+          "x": -1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "z": -1,
+          "t": "gold"
+        }
+      ]
+    },
+    {
+      "name": "source-kitchen-exact-selected-original-cells",
+      "ok": true,
+      "count": 9,
+      "cells": [
+        {
+          "x": -2,
+          "y": 1,
+          "z": -2,
+          "t": "wool"
+        },
+        {
+          "x": -2,
+          "y": 1,
+          "z": -1,
+          "t": "coal"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "z": -1,
+          "t": "gold"
+        }
+      ]
+    },
+    {
+      "name": "source-yard-exact-selected-original-cells",
+      "ok": true,
+      "count": 2,
+      "cells": [
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "t": "stone"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "z": 0,
+          "t": "stone"
+        }
+      ]
+    },
+    {
+      "name": "source-market-exact-selected-original-cells",
+      "ok": true,
+      "count": 16,
+      "cells": [
+        {
+          "x": -2,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": -2,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": -2,
+          "y": 1,
+          "z": 1,
+          "t": "dark"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": 1,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 1,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": 1,
+          "t": "dark"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "z": 1,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "z": 0,
+          "t": "gold"
+        }
+      ]
+    },
+    {
+      "name": "source-forge-exact-selected-original-cells",
+      "ok": true,
+      "count": 3,
+      "cells": [
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "t": "wool"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 1,
+          "t": "coal"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": 0,
+          "t": "gold"
+        }
+      ]
+    },
+    {
+      "name": "source-tavern-exact-selected-original-cells",
+      "ok": true,
+      "count": 9,
+      "cells": [
+        {
+          "x": 3,
+          "y": 1,
+          "z": -2,
+          "t": "wool"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "z": -1,
+          "t": "coal"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "z": -1,
+          "t": "gold"
+        }
+      ]
+    },
+    {
+      "name": "source-bank-exact-selected-original-cells",
+      "ok": true,
+      "count": 8,
+      "cells": [
+        {
+          "x": -1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "z": -1,
+          "t": "gold"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "z": 0,
+          "t": "gold"
+        }
+      ]
+    },
+    {
+      "name": "source-original-GhostAt-not-authored",
+      "ok": true
+    },
+    {
+      "name": "source-all-eleven-valid-states-unreachable-without-world-mutation",
+      "ok": true
+    },
+    {
+      "name": "navigation-still-local-exact-origin",
+      "ok": true
+    },
+    {
+      "name": "exact-local-scene-and-byte-identical-served-sources",
+      "ok": true,
+      "method": "exact-local-fiber-_roots:/node_modules/.vite/deps/@react-three_fiber.js?v=8fddb7ff",
+      "camera": "PerspectiveCamera"
+    },
+    {
+      "name": "loaded-fixture-building-records-byte-equivalent-JSON",
+      "ok": true,
+      "sameCount": true,
+      "identical": true
+    },
+    {
+      "name": "hall-outside-original-proxies-floors-walls",
+      "ok": true,
+      "scene": {
+        "found": true,
+        "uuid": "9a649e95-9b74-4e87-a5d7-e2a49935f292",
+        "sameOriginalGroupAndHandlerSlots": true,
+        "meshIds": [
+          "65e298ee-0990-4b61-b4fe-79c5f8495f67",
+          "0efdfdff-d3e9-48da-918e-e261894c5e61",
+          "812dafd1-f36d-470c-8784-e2f889ab04e3",
+          "a8d70e64-2ae6-4d38-8b00-be7f8803f332",
+          "336c82f3-39e3-4a09-8886-950bdcfcc15d",
+          "3e9668e7-4c44-4df0-b4bf-d8e771eb99e0",
+          "ebe1ad35-f2c6-4bb9-9b5d-3e1eb7821baf",
+          "04bf7c37-2d1d-441c-ae7e-df61c151f25e",
+          "181d2f2c-ae1b-4824-9cff-ef747ae83019",
+          "8fbbaf09-a000-442a-b4ba-396986916470",
+          "d4b28d71-5583-4daa-b4dd-5b804cd7432a",
+          "9ac396d9-49eb-4286-8267-3af3887fc4d2",
+          "402f32d7-2b07-4852-a288-d3db68f0713b",
+          "fa6ef4c6-413a-4e0c-838c-6faf2f540982"
+        ],
+        "names": [
+          "blender-hall-exterior",
+          "hall-artist-mesh",
+          "Cube064",
+          "Cube064_1",
+          "Cube064_2",
+          "Cube064_3",
+          "Cube064_4",
+          "Cube064_5",
+          "Cube064_6",
+          "Cube064_7",
+          "Cube064_8",
+          "Cube064_9",
+          "Cube064_10"
+        ],
+        "selected": [
+          {
+            "voxel": {
+              "x": -1,
+              "y": 1,
+              "z": -1,
+              "t": "dark"
+            },
+            "entries": [
+              {
+                "mesh": "0efdfdff-d3e9-48da-918e-e261894c5e61",
+                "instance": 20,
+                "visibleColor": false,
+                "colorWrite": [
+                  false
+                ]
+              }
+            ]
+          },
+          {
+            "voxel": {
+              "x": 0,
+              "y": 1,
+              "z": -1,
+              "t": "dark"
+            },
+            "entries": [
+              {
+                "mesh": "0efdfdff-d3e9-48da-918e-e261894c5e61",
+                "instance": 21,
+                "visibleColor": false,
+                "colorWrite": [
+                  false
+                ]
+              }
+            ]
+          },
+          {
+            "voxel": {
+              "x": 1,
+              "y": 1,
+              "z": -1,
+              "t": "dark"
+            },
+            "entries": [
+              {
+                "mesh": "0efdfdff-d3e9-48da-918e-e261894c5e61",
+                "instance": 22,
+                "visibleColor": false,
+                "colorWrite": [
+                  false
+                ]
+              }
+            ]
+          },
+          {
+            "voxel": {
+              "x": -1,
+              "y": 1,
+              "z": 0,
+              "t": "dark"
+            },
+            "entries": [
+              {
+                "mesh": "0efdfdff-d3e9-48da-918e-e261894c5e61",
+                "instance": 23,
+                "visibleColor": false,
+                "colorWrite": [
+                  false
+                ]
+              }
+            ]
+          },
+          {
+            "voxel": {
+              "x": 0,
+              "y": 1,
+              "z": 0,
+              "t": "dark"
+            },
+            "entries": [
+              {
+                "mesh": "0efdfdff-d3e9-48da-918e-e261894c5e61",
+                "instance": 24,
+                "visibleColor": false,
+                "colorWrite": [
+                  false
+                ]
+              }
+            ]
+          },
+          {
+            "voxel": {
+              "x": 1,
+              "y": 1,
+              "z": 0,
+              "t": "dark"
+            },
+            "entries": [
+              {
+                "mesh": "0efdfdff-d3e9-48da-918e-e261894c5e61",
+                "instance": 25,
+                "visibleColor": false,
+                "colorWrite": [
+                  false
+                ]
+              }
+            ]
+          },
+          {
+            "voxel": {
+              "x": 0,
+              "y": 2,
+              "z": -1,
+              "t": "gold"
+            },
+            "entries": [
+              {
+                "mesh": "a8d70e64-2ae6-4d38-8b00-be7f8803f332",
+                "instance": 0,
+                "visibleColor": false,
+                "colorWrite": [
+                  false
+                ]
+              }
+            ]
+          }
+        ],
+        "noncutPresent": true,
+        "floorPresent": true,
+        "cutWallsPresent": true,
+        "allOriginalPresent": true,
+        "originalCount": 582,
+        "visibleOriginalCenters": 0
+      }
+    },
+    {
+      "name": "hall-inside-same-original-building-group",
+      "ok": false,
+      "scene": {
+        "found": true,
+        "uuid": "9a649e95-9b74-4e87-a5d7-e2a49935f292",
+        "sameOriginalGroupAndHandlerSlots": true,
+        "meshIds": [
+          "65e298ee-0990-4b61-b4fe-79c5f8495f67",
+          "0efdfdff-d3e9-48da-918e-e261894c5e61",
+          "812dafd1-f36d-470c-8784-e2f889ab04e3",
+          "a8d70e64-2ae6-4d38-8b00-be7f8803f332",
+          "336c82f3-39e3-4a09-8886-950bdcfcc15d",
+          "3e9668e7-4c44-4df0-b4bf-d8e771eb99e0"
+        ],
+        "names": [
+          "lanternwood-decoration",
+          "lanternwood-box-craft",
+          "lanternwood-round-craft"
+        ],
+        "selected": [
+          {
+            "voxel": {
+              "x": -1,
+              "y": 1,
+              "z": -1,
+              "t": "dark"
+            },
+            "entries": [
+              {
+                "mesh": "0efdfdff-d3e9-48da-918e-e261894c5e61",
+                "instance": 20,
+                "visibleColor": true,
+                "colorWrite": [
+                  true
+                ]
+              }
+            ]
+          },
+          {
+            "voxel": {
+              "x": 0,
+              "y": 1,
+              "z": -1,
+              "t": "dark"
+            },
+            "entries": [
+              {
+                "mesh": "0efdfdff-d3e9-48da-918e-e261894c5e61",
+                "instance": 21,
+                "visibleColor": true,
+                "colorWrite": [
+                  true
+                ]
+              }
+            ]
+          },
+          {
+            "voxel": {
+              "x": 1,
+              "y": 1,
+              "z": -1,
+              "t": "dark"
+            },
+            "entries": [
+              {
+                "mesh": "0efdfdff-d3e9-48da-918e-e261894c5e61",
+                "instance": 22,
+                "visibleColor": true,
+                "colorWrite": [
+                  true
+                ]
+              }
+            ]
+          },
+          {
+            "voxel": {
+              "x": -1,
+              "y": 1,
+              "z": 0,
+              "t": "dark"
+            },
+            "entries": [
+              {
+                "mesh": "0efdfdff-d3e9-48da-918e-e261894c5e61",
+                "instance": 23,
+                "visibleColor": true,
+                "colorWrite": [
+                  true
+                ]
+              }
+            ]
+          },
+          {
+            "voxel": {
+              "x": 0,
+              "y": 1,
+              "z": 0,
+              "t": "dark"
+            },
+            "entries": [
+              {
+                "mesh": "0efdfdff-d3e9-48da-918e-e261894c5e61",
+                "instance": 24,
+                "visibleColor": true,
+                "colorWrite": [
+                  true
+                ]
+              }
+            ]
+          },
+          {
+            "voxel": {
+              "x": 1,
+              "y": 1,
+              "z": 0,
+              "t": "dark"
+            },
+            "entries": [
+              {
+                "mesh": "0efdfdff-d3e9-48da-918e-e261894c5e61",
+                "instance": 25,
+                "visibleColor": true,
+                "colorWrite": [
+                  true
+                ]
+              }
+            ]
+          },
+          {
+            "voxel": {
+              "x": 0,
+              "y": 2,
+              "z": -1,
+              "t": "gold"
+            },
+            "entries": [
+              {
+                "mesh": "a8d70e64-2ae6-4d38-8b00-be7f8803f332",
+                "instance": 0,
+                "visibleColor": true,
+                "colorWrite": [
+                  true
+                ]
+              }
+            ]
+          }
+        ],
+        "noncutPresent": true,
+        "floorPresent": false,
+        "cutWallsPresent": false,
+        "allOriginalPresent": false,
+        "originalCount": 582,
+        "visibleOriginalCenters": 182
+      }
+    }
+  ],
+  "fallback": [],
+  "ghosts": [],
+  "assets": [
+    {
+      "event": "aborted",
+      "path": "/art/lanternwood/interior-hall.glb",
+      "url": "http://127.0.0.1:8093/art/lanternwood/interior-hall.glb"
+    },
+    {
+      "event": "failed",
+      "path": "/art/lanternwood/interior-hall.glb",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "event": "response",
+      "path": "/art/lanternwood/oak.glb",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "path": "/art/lanternwood/hall.glb",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "path": "/art/lanternwood/tree-1.glb",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "path": "/art/lanternwood/tree-0.glb",
+      "status": 200
+    },
+    {
+      "event": "aborted",
+      "path": "/art/lanternwood/interior-hall.glb",
+      "url": "http://127.0.0.1:8093/art/lanternwood/interior-hall.glb"
+    },
+    {
+      "event": "aborted",
+      "path": "/art/lanternwood/notice.glb",
+      "url": "http://127.0.0.1:8093/art/lanternwood/notice.glb"
+    },
+    {
+      "event": "aborted",
+      "path": "/art/lanternwood/interior-yard.glb",
+      "url": "http://127.0.0.1:8093/art/lanternwood/interior-yard.glb"
+    },
+    {
+      "event": "aborted",
+      "path": "/art/lanternwood/interior-bank.glb",
+      "url": "http://127.0.0.1:8093/art/lanternwood/interior-bank.glb"
+    },
+    {
+      "event": "aborted",
+      "path": "/art/lanternwood/interior-forge.glb",
+      "url": "http://127.0.0.1:8093/art/lanternwood/interior-forge.glb"
+    },
+    {
+      "event": "aborted",
+      "path": "/art/lanternwood/interior-kitchen.glb",
+      "url": "http://127.0.0.1:8093/art/lanternwood/interior-kitchen.glb"
+    },
+    {
+      "event": "aborted",
+      "path": "/art/lanternwood/interior-tavern.glb",
+      "url": "http://127.0.0.1:8093/art/lanternwood/interior-tavern.glb"
+    },
+    {
+      "event": "aborted",
+      "path": "/art/lanternwood/interior-market.glb",
+      "url": "http://127.0.0.1:8093/art/lanternwood/interior-market.glb"
+    },
+    {
+      "event": "aborted",
+      "path": "/art/lanternwood/interior-dormitory.glb",
+      "url": "http://127.0.0.1:8093/art/lanternwood/interior-dormitory.glb"
+    },
+    {
+      "event": "aborted",
+      "path": "/art/lanternwood/board.glb",
+      "url": "http://127.0.0.1:8093/art/lanternwood/board.glb"
+    },
+    {
+      "event": "failed",
+      "path": "/art/lanternwood/interior-hall.glb",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "event": "failed",
+      "path": "/art/lanternwood/notice.glb",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "event": "failed",
+      "path": "/art/lanternwood/interior-yard.glb",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "event": "failed",
+      "path": "/art/lanternwood/interior-bank.glb",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "event": "failed",
+      "path": "/art/lanternwood/interior-forge.glb",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "event": "failed",
+      "path": "/art/lanternwood/interior-kitchen.glb",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "event": "failed",
+      "path": "/art/lanternwood/interior-tavern.glb",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "event": "failed",
+      "path": "/art/lanternwood/interior-market.glb",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "event": "failed",
+      "path": "/art/lanternwood/interior-dormitory.glb",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "event": "failed",
+      "path": "/art/lanternwood/board.glb",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "event": "response",
+      "path": "/art/lanternwood/yard.glb",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "path": "/art/lanternwood/bank.glb",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "path": "/art/lanternwood/forge.glb",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "path": "/art/lanternwood/tavern.glb",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "path": "/art/lanternwood/market.glb",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "path": "/art/lanternwood/kitchen.glb",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "path": "/art/lanternwood/dormitory.glb",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "path": "/art/lanternwood/farm.glb",
+      "status": 200
+    },
+    {
+      "event": "response",
+      "path": "/art/lanternwood/character.glb",
+      "status": 200
+    }
+  ],
+  "errors": [
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "location": {
+        "url": "http://127.0.0.1:8093/art/lanternwood/interior-hall.glb",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "expectedBlockedAsset": true
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "location": {
+        "url": "http://127.0.0.1:8093/art/lanternwood/interior-hall.glb",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "expectedBlockedAsset": true
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "location": {
+        "url": "http://127.0.0.1:8093/art/lanternwood/notice.glb",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "expectedBlockedAsset": true
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "location": {
+        "url": "http://127.0.0.1:8093/art/lanternwood/interior-yard.glb",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "expectedBlockedAsset": true
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "location": {
+        "url": "http://127.0.0.1:8093/art/lanternwood/interior-bank.glb",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "expectedBlockedAsset": true
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "location": {
+        "url": "http://127.0.0.1:8093/art/lanternwood/interior-forge.glb",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "expectedBlockedAsset": true
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "location": {
+        "url": "http://127.0.0.1:8093/art/lanternwood/interior-kitchen.glb",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "expectedBlockedAsset": true
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "location": {
+        "url": "http://127.0.0.1:8093/art/lanternwood/interior-tavern.glb",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "expectedBlockedAsset": true
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "location": {
+        "url": "http://127.0.0.1:8093/art/lanternwood/interior-market.glb",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "expectedBlockedAsset": true
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "location": {
+        "url": "http://127.0.0.1:8093/art/lanternwood/interior-dormitory.glb",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "expectedBlockedAsset": true
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: net::ERR_FAILED",
+      "location": {
+        "url": "http://127.0.0.1:8093/art/lanternwood/board.glb",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "expectedBlockedAsset": true
+    }
+  ],
+  "screenshots": [],
+  "acceptanceComplete": false,
+  "source": {
+    "building": "8168bc09af53897150026d8c6d8ccc3a284f2dc71478dc73dd62a9e92f375427",
+    "interior": "c44ba7d35e8854fc49923c0394987ebf3eccc6de59e1e44c734d85b3ff9eab41",
+    "site": "8c097162251ce77f4c8d194c2c1ab82de521dc286840979ce19ce95c50bfbee4",
+    "fixture": "75fa58ffab84d41e3f5fee43a2db1ddf96033ea3f4d3292000e0e7181019421c"
+  },
+  "sourcePlacementConstraints": [
+    {
+      "kind": "hall",
+      "rejection": "The hall already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "dormitory",
+      "rejection": "The dormitory already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "kitchen",
+      "rejection": "The kitchen already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "yard",
+      "rejection": "The yard already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "market",
+      "rejection": "The market already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "forge",
+      "rejection": "The forge already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "tavern",
+      "rejection": "The tavern already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "notice",
+      "rejection": "The notice already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "board",
+      "rejection": "The board already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "farm",
+      "rejection": "The farm already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "bank",
+      "rejection": "The bank already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    }
+  ],
+  "runtimeExecuted": true,
+  "failure": {
+    "message": "hall-inside-same-original-building-group",
+    "stack": "AssertionError [ERR_ASSERTION]: hall-inside-same-original-building-group\n    at check (file:///C:/Users/futur/Desktop/emberhall-lanternwood-preview/scripts/phase1-fallback-smoke.mjs:31:108)\n    at file:///C:/Users/futur/Desktop/emberhall-lanternwood-preview/scripts/phase1-fallback-smoke.mjs:181:7"
+  },
+  "finished": "2026-09-09T05:58:31.413Z"
+}

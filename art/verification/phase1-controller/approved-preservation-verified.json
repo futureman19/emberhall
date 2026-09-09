@@ -1,0 +1,85 @@
+{
+  "base": "adfc02db9e78425deb1671fced0dae1b8a40660d",
+  "assets": [
+    {
+      "path": "public/art/lanternwood/bank.glb",
+      "base": "5ec9cb2a1c79ffe075e8ea2d0f66349ecfbcd5b49fa2ecc651992294322cfc4e",
+      "current": "5ec9cb2a1c79ffe075e8ea2d0f66349ecfbcd5b49fa2ecc651992294322cfc4e",
+      "matches": true
+    },
+    {
+      "path": "public/art/lanternwood/character.glb",
+      "base": "4c08799d4ebc2de738783a148d7538f069974b059ce12b1d4feb0518ed21566b",
+      "current": "4c08799d4ebc2de738783a148d7538f069974b059ce12b1d4feb0518ed21566b",
+      "matches": true
+    },
+    {
+      "path": "public/art/lanternwood/dormitory.glb",
+      "base": "197294073d2a11e3ef3996b5154689222fa806667b14b370c24f7a87d9b86618",
+      "current": "197294073d2a11e3ef3996b5154689222fa806667b14b370c24f7a87d9b86618",
+      "matches": true
+    },
+    {
+      "path": "public/art/lanternwood/farm.glb",
+      "base": "2dcfdaf40fd1639bf45a41f6a6435b065d6f9727b0d5fad20611b04a58e82bdd",
+      "current": "2dcfdaf40fd1639bf45a41f6a6435b065d6f9727b0d5fad20611b04a58e82bdd",
+      "matches": true
+    },
+    {
+      "path": "public/art/lanternwood/forge.glb",
+      "base": "e2248044493918fe8bfc0133cee0e3bb85374c53b1a3f5899f81cb2f95124a3b",
+      "current": "e2248044493918fe8bfc0133cee0e3bb85374c53b1a3f5899f81cb2f95124a3b",
+      "matches": true
+    },
+    {
+      "path": "public/art/lanternwood/hall.glb",
+      "base": "1b7d67ac7dbadbd1c5d4024c63a76b59ae641b45443d4b1d0219ecd695612482",
+      "current": "1b7d67ac7dbadbd1c5d4024c63a76b59ae641b45443d4b1d0219ecd695612482",
+      "matches": true
+    },
+    {
+      "path": "public/art/lanternwood/kitchen.glb",
+      "base": "a934e2a660ecc1546ef76beab9b5058f8baa0d823ad86d405ce59f73e270b928",
+      "current": "a934e2a660ecc1546ef76beab9b5058f8baa0d823ad86d405ce59f73e270b928",
+      "matches": true
+    },
+    {
+      "path": "public/art/lanternwood/market.glb",
+      "base": "8a9222f1455df7cf7ad46f184ef88bb91298079f00b221648a9ad631d504bd62",
+      "current": "8a9222f1455df7cf7ad46f184ef88bb91298079f00b221648a9ad631d504bd62",
+      "matches": true
+    },
+    {
+      "path": "public/art/lanternwood/oak.glb",
+      "base": "e38306e785170da4e66399611d7e1e715d4ccb40b9693883f63abb66055f0f8a",
+      "current": "e38306e785170da4e66399611d7e1e715d4ccb40b9693883f63abb66055f0f8a",
+      "matches": true
+    },
+    {
+      "path": "public/art/lanternwood/tavern.glb",
+      "base": "22dbf34dd6641729036aa538c39f54b419ddbbe7a6d45af2bd3c56c237a1e7a4",
+      "current": "22dbf34dd6641729036aa538c39f54b419ddbbe7a6d45af2bd3c56c237a1e7a4",
+      "matches": true
+    },
+    {
+      "path": "public/art/lanternwood/tree-0.glb",
+      "base": "d8abba92639654a6651c23f99bb692fd54c8afcff9613c779abf2b041aa6c458",
+      "current": "d8abba92639654a6651c23f99bb692fd54c8afcff9613c779abf2b041aa6c458",
+      "matches": true
+    },
+    {
+      "path": "public/art/lanternwood/tree-1.glb",
+      "base": "dd1c1464f67078702d6ec41ea850fa39ff95a21d1ce5e95cf122ae1f6f02966f",
+      "current": "dd1c1464f67078702d6ec41ea850fa39ff95a21d1ce5e95cf122ae1f6f02966f",
+      "matches": true
+    },
+    {
+      "path": "public/art/lanternwood/yard.glb",
+      "base": "65434b460900b270723b8a40ef9abcaeaa91fcf3a345530eaa5e4c7acfeeea53",
+      "current": "65434b460900b270723b8a40ef9abcaeaa91fcf3a345530eaa5e4c7acfeeea53",
+      "matches": true
+    }
+  ],
+  "count": 13,
+  "passed": true
+}

@@ -1,0 +1,9 @@
+{
+  "lint": 0,
+  "typecheck": 0,
+  "full-test": 1,
+  "game-test": 1,
+  "build": 0,
+  "auth": 0,
+  "game-test-after-ledger": 0
+}

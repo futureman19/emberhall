@@ -40,7 +40,14 @@ function isLayout(value: unknown): value is MinimapLayout {
 }
 
 export function clampMinimapLayout(layout: MinimapLayout, viewport: Viewport): MinimapLayout {
-  const size = clamp(layout.size, MIN_MINIMAP_SIZE, MAX_MINIMAP_SIZE);
+  // Position clamping alone cannot clear the dock when a resized map is taller
+  // than the usable landscape viewport. Keep its controls at normal scale.
+  const availableSize = Math.min(
+    MAX_MINIMAP_SIZE,
+    viewport.width - 2 * MINIMAP_VIEWPORT_PADDING,
+    viewport.height - MINIMAP_BOTTOM_CHROME - MINIMAP_VIEWPORT_PADDING,
+  );
+  const size = clamp(layout.size, MIN_MINIMAP_SIZE, availableSize);
   const width = layout.minimized ? MINIMAP_ICON_SIZE : size;
   const height = layout.minimized ? MINIMAP_ICON_SIZE : size;
   return {

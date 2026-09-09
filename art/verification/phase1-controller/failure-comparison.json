@@ -1,0 +1,18 @@
+{
+  "sameScriptFailures": true,
+  "failures": [
+    "document title entities are not double-escaped on og:title",
+    "emits og:image for a public host and prefers a custom card",
+    "injects into documents with no head element",
+    "placeholder og:image appends site.color when it is 6-digit hex",
+    "platform chrome overwrites share-card metas and always sets og:title",
+    "published grok.me slug is still a title fallback",
+    "streaming injector matches </HEAD> case-insensitively",
+    "the CLI still runs when invoked through a symlinked path",
+    "the wrapped command runs with the app env applied",
+    "the wrapped command sees an explicit override, not the file value",
+    "the wrapper propagates the command's exit code",
+    "uses the app name in the injected title tag"
+  ],
+  "new": []
+}

@@ -1,0 +1,538 @@
+{
+  "status": "passed",
+  "fixture": {
+    "path": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\public\\art\\phase1-review-save.json",
+    "positions": [
+      {
+        "id": "b-5",
+        "kind": "hall",
+        "tx": 256,
+        "ty": 290,
+        "beds": [
+          {
+            "occupantId": "you-2"
+          },
+          {
+            "occupantId": null
+          }
+        ]
+      },
+      {
+        "id": "qa-commons-dormitory",
+        "kind": "dormitory",
+        "tx": 267,
+        "ty": 284,
+        "beds": [
+          {
+            "occupantId": null
+          },
+          {
+            "occupantId": null
+          }
+        ]
+      },
+      {
+        "id": "qa-hospitality-kitchen",
+        "kind": "kitchen",
+        "tx": 247,
+        "ty": 302,
+        "beds": []
+      },
+      {
+        "id": "b-7",
+        "kind": "yard",
+        "tx": 248,
+        "ty": 291,
+        "beds": []
+      },
+      {
+        "id": "qa-hospitality-market",
+        "kind": "market",
+        "tx": 254,
+        "ty": 303,
+        "beds": []
+      },
+      {
+        "id": "art-review-forge",
+        "kind": "forge",
+        "tx": 253,
+        "ty": 295,
+        "beds": []
+      },
+      {
+        "id": "qa-hospitality-tavern",
+        "kind": "tavern",
+        "tx": 262,
+        "ty": 302,
+        "beds": []
+      },
+      {
+        "id": "b-6",
+        "kind": "notice",
+        "tx": 263,
+        "ty": 291,
+        "beds": []
+      },
+      {
+        "id": "qa-phase1-board",
+        "kind": "board",
+        "tx": 265,
+        "ty": 288,
+        "beds": []
+      },
+      {
+        "id": "qa-commons-farm",
+        "kind": "farm",
+        "tx": 269,
+        "ty": 304,
+        "beds": []
+      },
+      {
+        "id": "b-13",
+        "kind": "bank",
+        "tx": 261,
+        "ty": 295,
+        "beds": []
+      }
+    ],
+    "placement": {
+      "added": [
+        {
+          "id": "qa-phase1-board",
+          "kind": "board",
+          "tx": 265,
+          "ty": 288,
+          "beds": []
+        }
+      ],
+      "checks": [
+        {
+          "box": {
+            "x0": 263.5,
+            "x1": 267,
+            "z0": 288,
+            "z1": 289.5
+          },
+          "tiles": [
+            {
+              "x": 263,
+              "z": 288,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 264,
+              "z": 288,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 265,
+              "z": 288,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 288,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 263,
+              "z": 289,
+              "kind": "cobble",
+              "walkable": true
+            },
+            {
+              "x": 264,
+              "z": 289,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 265,
+              "z": 289,
+              "kind": "grass",
+              "walkable": true
+            },
+            {
+              "x": 266,
+              "z": 289,
+              "kind": "grass",
+              "walkable": true
+            }
+          ]
+        }
+      ]
+    },
+    "adjustments": [
+      {
+        "building": "dormitory",
+        "approach": [
+          268,
+          287
+        ],
+        "reason": "Centreline approach rejected by real A* (The way is closed); selected clear reachable tile; building unchanged"
+      },
+      {
+        "building": "tavern",
+        "approach": [
+          263,
+          305
+        ],
+        "reason": "Centreline approach rejected by real A* (The way is closed); selected clear reachable tile; building unchanged"
+      },
+      {
+        "building": "dormitory",
+        "approach": [
+          268,
+          287
+        ],
+        "reason": "Centreline approach rejected by real A* (The way is closed); selected clear reachable tile; building unchanged"
+      },
+      {
+        "building": "tavern",
+        "approach": [
+          263,
+          305
+        ],
+        "reason": "Centreline approach rejected by real A* (The way is closed); selected clear reachable tile; building unchanged"
+      }
+    ],
+    "sha256": "75fa58ffab84d41e3f5fee43a2db1ddf96033ea3f4d3292000e0e7181019421c"
+  },
+  "results": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\phase1\\baseline-complete\\results.json",
+  "measurements": [
+    {
+      "device": "desktop",
+      "building": "hall-interior",
+      "frames": 180,
+      "elapsedMs": 3458.9000000476844,
+      "medianMs": 16.69999999999891,
+      "p95Ms": 50,
+      "drawCalls": 564,
+      "triangles": 6955884,
+      "geometryCount": 381,
+      "textures": 7,
+      "heap": {
+        "used": 322000000,
+        "total": 386000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "desktop",
+      "building": "dormitory-interior",
+      "frames": 180,
+      "elapsedMs": 3374.9999999761567,
+      "medianMs": 16.700000000000728,
+      "p95Ms": 50,
+      "drawCalls": 558,
+      "triangles": 7050871,
+      "geometryCount": 378,
+      "textures": 7,
+      "heap": {
+        "used": 322000000,
+        "total": 386000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "desktop",
+      "building": "kitchen-interior",
+      "frames": 180,
+      "elapsedMs": 18624,
+      "medianMs": 83.40000000000146,
+      "p95Ms": 150,
+      "drawCalls": 557,
+      "triangles": 6872406,
+      "geometryCount": 394,
+      "textures": 7,
+      "heap": {
+        "used": 322000000,
+        "total": 386000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "desktop",
+      "building": "forge-interior",
+      "frames": 180,
+      "elapsedMs": 18505.499999952313,
+      "medianMs": 83.40000000000873,
+      "p95Ms": 150,
+      "drawCalls": 569,
+      "triangles": 7028030,
+      "geometryCount": 397,
+      "textures": 7,
+      "heap": {
+        "used": 322000000,
+        "total": 386000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "desktop",
+      "building": "notice-exterior",
+      "frames": 180,
+      "elapsedMs": 17889.200000047684,
+      "medianMs": 83.40000000000873,
+      "p95Ms": 133.39999999999418,
+      "drawCalls": 601,
+      "triangles": 7095888,
+      "geometryCount": 399,
+      "textures": 7,
+      "heap": {
+        "used": 322000000,
+        "total": 386000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "desktop",
+      "building": "board-exterior",
+      "frames": 180,
+      "elapsedMs": 3483.7000000476837,
+      "medianMs": 16.699999999982538,
+      "p95Ms": 50,
+      "drawCalls": 623,
+      "triangles": 7089120,
+      "geometryCount": 397,
+      "textures": 7,
+      "heap": {
+        "used": 322000000,
+        "total": 386000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "desktop",
+      "building": "bank-interior",
+      "frames": 180,
+      "elapsedMs": 17280.899999976158,
+      "medianMs": 83.39999999999418,
+      "p95Ms": 133.39999999999418,
+      "drawCalls": 601,
+      "triangles": 7083080,
+      "geometryCount": 400,
+      "textures": 7,
+      "heap": {
+        "used": 322000000,
+        "total": 386000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "mobile",
+      "building": "hall-interior",
+      "frames": 180,
+      "elapsedMs": 3473.499999976164,
+      "medianMs": 16.699999999982538,
+      "p95Ms": 33.40000000002328,
+      "drawCalls": 474,
+      "triangles": 6924339,
+      "geometryCount": 392,
+      "textures": 7,
+      "heap": {
+        "used": 322000000,
+        "total": 386000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "mobile",
+      "building": "dormitory-interior",
+      "frames": 180,
+      "elapsedMs": 3375.3000000238535,
+      "medianMs": 16.699999999982538,
+      "p95Ms": 33.39999999999418,
+      "drawCalls": 313,
+      "triangles": 6975978,
+      "geometryCount": 389,
+      "textures": 7,
+      "heap": {
+        "used": 322000000,
+        "total": 386000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "mobile",
+      "building": "kitchen-interior",
+      "frames": 180,
+      "elapsedMs": 16696.80000004769,
+      "medianMs": 83.39999999999418,
+      "p95Ms": 133.30000000001746,
+      "drawCalls": 327,
+      "triangles": 6802929,
+      "geometryCount": 398,
+      "textures": 7,
+      "heap": {
+        "used": 322000000,
+        "total": 386000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "mobile",
+      "building": "forge-interior",
+      "frames": 180,
+      "elapsedMs": 16984.300000023853,
+      "medianMs": 83.39999999999418,
+      "p95Ms": 133.39999999999418,
+      "drawCalls": 467,
+      "triangles": 7012340,
+      "geometryCount": 398,
+      "textures": 7,
+      "heap": {
+        "used": 322000000,
+        "total": 386000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "mobile",
+      "building": "notice-exterior",
+      "frames": 180,
+      "elapsedMs": 17322.899999952293,
+      "medianMs": 83.40000000002328,
+      "p95Ms": 133.40000000002328,
+      "drawCalls": 509,
+      "triangles": 7076564,
+      "geometryCount": 400,
+      "textures": 7,
+      "heap": {
+        "used": 322000000,
+        "total": 386000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "mobile",
+      "building": "board-exterior",
+      "frames": 180,
+      "elapsedMs": 3455.999999976135,
+      "medianMs": 16.70000000001164,
+      "p95Ms": 49.90000000002328,
+      "drawCalls": 463,
+      "triangles": 7059185,
+      "geometryCount": 398,
+      "textures": 7,
+      "heap": {
+        "used": 322000000,
+        "total": 386000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "mobile",
+      "building": "bank-interior",
+      "frames": 180,
+      "elapsedMs": 17430.300000023853,
+      "medianMs": 83.40000000002328,
+      "p95Ms": 133.39999999996508,
+      "drawCalls": 530,
+      "triangles": 7063663,
+      "geometryCount": 400,
+      "textures": 7,
+      "heap": {
+        "used": 322000000,
+        "total": 386000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    }
+  ],
+  "screenshots": [
+    "desktop-hall-outside.png",
+    "desktop-hall-inside.png",
+    "desktop-hall-restored.png",
+    "desktop-hall-interaction.png",
+    "desktop-dormitory-outside.png",
+    "desktop-dormitory-inside.png",
+    "desktop-dormitory-restored.png",
+    "desktop-dormitory-interaction.png",
+    "desktop-kitchen-outside.png",
+    "desktop-kitchen-inside.png",
+    "desktop-kitchen-restored.png",
+    "desktop-kitchen-interaction.png",
+    "desktop-yard-outside.png",
+    "desktop-yard-inside.png",
+    "desktop-yard-restored.png",
+    "desktop-yard-interaction.png",
+    "desktop-market-outside.png",
+    "desktop-market-inside.png",
+    "desktop-market-restored.png",
+    "desktop-market-interaction.png",
+    "desktop-forge-outside.png",
+    "desktop-forge-inside.png",
+    "desktop-forge-restored.png",
+    "desktop-forge-interaction.png",
+    "desktop-tavern-outside.png",
+    "desktop-tavern-inside.png",
+    "desktop-tavern-restored.png",
+    "desktop-tavern-interaction.png",
+    "desktop-notice-outside.png",
+    "desktop-notice-inside.png",
+    "desktop-notice-restored.png",
+    "desktop-notice-interaction.png",
+    "desktop-board-outside.png",
+    "desktop-board-inside.png",
+    "desktop-board-restored.png",
+    "desktop-board-interaction.png",
+    "desktop-farm-outside.png",
+    "desktop-farm-inside.png",
+    "desktop-farm-restored.png",
+    "desktop-farm-interaction.png",
+    "desktop-bank-outside.png",
+    "desktop-bank-inside.png",
+    "desktop-bank-restored.png",
+    "desktop-bank-interaction.png",
+    "mobile-hall-outside.png",
+    "mobile-hall-inside.png",
+    "mobile-hall-restored.png",
+    "mobile-hall-interaction.png",
+    "mobile-dormitory-outside.png",
+    "mobile-dormitory-inside.png",
+    "mobile-dormitory-restored.png",
+    "mobile-dormitory-interaction.png",
+    "mobile-kitchen-outside.png",
+    "mobile-kitchen-inside.png",
+    "mobile-kitchen-restored.png",
+    "mobile-kitchen-interaction.png",
+    "mobile-yard-outside.png",
+    "mobile-yard-inside.png",
+    "mobile-yard-restored.png",
+    "mobile-yard-interaction.png",
+    "mobile-market-outside.png",
+    "mobile-market-inside.png",
+    "mobile-market-restored.png",
+    "mobile-market-interaction.png",
+    "mobile-forge-outside.png",
+    "mobile-forge-inside.png",
+    "mobile-forge-restored.png",
+    "mobile-forge-interaction.png",
+    "mobile-tavern-outside.png",
+    "mobile-tavern-inside.png",
+    "mobile-tavern-restored.png",
+    "mobile-tavern-interaction.png",
+    "mobile-notice-outside.png",
+    "mobile-notice-inside.png",
+    "mobile-notice-restored.png",
+    "mobile-notice-interaction.png",
+    "mobile-board-outside.png",
+    "mobile-board-inside.png",
+    "mobile-board-restored.png",
+    "mobile-board-interaction.png",
+    "mobile-farm-outside.png",
+    "mobile-farm-inside.png",
+    "mobile-farm-restored.png",
+    "mobile-farm-interaction.png",
+    "mobile-bank-outside.png",
+    "mobile-bank-inside.png",
+    "mobile-bank-restored.png",
+    "mobile-bank-interaction.png"
+  ],
+  "releaseGate": "Prior global and hospitality performance acceptance remains unresolved; exact full-suite baseline script failures are tracked by parent gate evidence.",
+  "finished": "2026-09-09T05:34:29.190Z"
+}

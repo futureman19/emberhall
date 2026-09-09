@@ -1,0 +1,56 @@
+{
+  "source": "art/blender/signage-kit.blend",
+  "anchor": "[tx, groundY, ty], identity rotation and scale",
+  "assets": {
+    "notice": {
+      "bytes": 83576,
+      "sha256": "4c344a6a14ec9508aac6cc1e9331a534980d3cbce2bc3747cdc1f8493c469b8c",
+      "triangles": 1439,
+      "meshes": 1,
+      "materials": 1,
+      "bounds": {
+        "min": [
+          -0.4359999895095825,
+          0,
+          0.1029999852180481
+        ],
+        "max": [
+          0.9360000491142273,
+          2.8718273639678955,
+          1.3969999551773071
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "yUp": true
+    },
+    "board": {
+      "bytes": 126368,
+      "sha256": "23ccb03bb93454303bc3047ee81ca5c222b22206e4d3749f8d5109a67ba7c38b",
+      "triangles": 1947,
+      "meshes": 1,
+      "materials": 1,
+      "bounds": {
+        "min": [
+          -1.4359999895095825,
+          0,
+          0.1029999852180481
+        ],
+        "max": [
+          1.935999870300293,
+          1.9529414176940918,
+          1.3969999551773071
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "yUp": true
+    }
+  }
+}

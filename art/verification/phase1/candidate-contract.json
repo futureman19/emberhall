@@ -1,0 +1,99 @@
+{
+  "hall": {
+    "exterior": [
+      "blender-hall-exterior",
+      "blender-interior-hall"
+    ],
+    "interior": [
+      "blender-interior-hall"
+    ]
+  },
+  "dormitory": {
+    "exterior": [
+      "blender-dormitory-exterior",
+      "blender-interior-dormitory"
+    ],
+    "interior": [
+      "blender-interior-dormitory"
+    ]
+  },
+  "kitchen": {
+    "exterior": [
+      "blender-kitchen-exterior",
+      "blender-interior-kitchen"
+    ],
+    "interior": [
+      "blender-interior-kitchen"
+    ]
+  },
+  "yard": {
+    "exterior": [
+      "blender-yard-exterior",
+      "blender-interior-yard"
+    ],
+    "interior": [
+      "blender-yard-exterior",
+      "blender-interior-yard"
+    ]
+  },
+  "market": {
+    "exterior": [
+      "blender-market-exterior",
+      "blender-interior-market"
+    ],
+    "interior": [
+      "blender-interior-market"
+    ]
+  },
+  "forge": {
+    "exterior": [
+      "blender-forge-exterior",
+      "blender-interior-forge"
+    ],
+    "interior": [
+      "blender-interior-forge"
+    ]
+  },
+  "tavern": {
+    "exterior": [
+      "blender-tavern-exterior",
+      "blender-interior-tavern"
+    ],
+    "interior": [
+      "blender-interior-tavern"
+    ]
+  },
+  "notice": {
+    "exterior": [
+      "blender-notice-exterior"
+    ],
+    "interior": [
+      "blender-notice-exterior"
+    ]
+  },
+  "board": {
+    "exterior": [
+      "blender-board-exterior"
+    ],
+    "interior": [
+      "blender-board-exterior"
+    ]
+  },
+  "farm": {
+    "exterior": [
+      "blender-farm-exterior"
+    ],
+    "interior": [
+      "blender-farm-exterior"
+    ]
+  },
+  "bank": {
+    "exterior": [
+      "blender-bank-exterior",
+      "blender-interior-bank"
+    ],
+    "interior": [
+      "blender-interior-bank"
+    ]
+  }
+}

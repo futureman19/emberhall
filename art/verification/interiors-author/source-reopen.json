@@ -1,0 +1,34 @@
+{
+  "hall": {
+    "editableParts": 12,
+    "modifiers": 11
+  },
+  "dormitory": {
+    "editableParts": 12,
+    "modifiers": 11
+  },
+  "kitchen": {
+    "editableParts": 23,
+    "modifiers": 22
+  },
+  "yard": {
+    "editableParts": 5,
+    "modifiers": 4
+  },
+  "market": {
+    "editableParts": 19,
+    "modifiers": 18
+  },
+  "forge": {
+    "editableParts": 16,
+    "modifiers": 15
+  },
+  "tavern": {
+    "editableParts": 23,
+    "modifiers": 22
+  },
+  "bank": {
+    "editableParts": 15,
+    "modifiers": 13
+  }
+}

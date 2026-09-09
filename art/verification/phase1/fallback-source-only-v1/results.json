@@ -1,0 +1,538 @@
+{
+  "url": "http://127.0.0.1:8093/",
+  "label": "fallback-source-only-v1",
+  "status": "source-only-passed",
+  "started": "2026-09-09T05:49:04.051Z",
+  "scope": "Local disposable fixture only. Explicit player-position setup, NOT walking, placement-commit, pointer-click, visual-quality, mobile, or performance proof.",
+  "limits": {
+    "totalMs": 120000,
+    "actionMs": 7000,
+    "navigationMs": 30000,
+    "readyMs": 35000,
+    "settleMs": 180,
+    "screenshots": 2,
+    "siteCandidatesPerKind": 1681,
+    "browsers": 1,
+    "pages": 1
+  },
+  "checks": [
+    {
+      "name": "fixture-original-building-records-byte-equivalent-JSON",
+      "ok": true,
+      "originals": 55
+    },
+    {
+      "name": "fixture-original-nonbuilding-records-byte-equivalent-JSON",
+      "ok": true
+    },
+    {
+      "name": "source-generator-boundaries",
+      "ok": true
+    },
+    {
+      "name": "eleven-unique-fixture-kinds",
+      "ok": true
+    },
+    {
+      "name": "source-hall-exact-selected-original-cells",
+      "ok": true,
+      "count": 7,
+      "cells": [
+        {
+          "x": -1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "z": -1,
+          "t": "gold"
+        }
+      ]
+    },
+    {
+      "name": "source-dormitory-exact-selected-original-cells",
+      "ok": true,
+      "count": 7,
+      "cells": [
+        {
+          "x": -1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "z": -1,
+          "t": "gold"
+        }
+      ]
+    },
+    {
+      "name": "source-kitchen-exact-selected-original-cells",
+      "ok": true,
+      "count": 9,
+      "cells": [
+        {
+          "x": -2,
+          "y": 1,
+          "z": -2,
+          "t": "wool"
+        },
+        {
+          "x": -2,
+          "y": 1,
+          "z": -1,
+          "t": "coal"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "z": -1,
+          "t": "gold"
+        }
+      ]
+    },
+    {
+      "name": "source-yard-exact-selected-original-cells",
+      "ok": true,
+      "count": 2,
+      "cells": [
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "t": "stone"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "z": 0,
+          "t": "stone"
+        }
+      ]
+    },
+    {
+      "name": "source-market-exact-selected-original-cells",
+      "ok": true,
+      "count": 16,
+      "cells": [
+        {
+          "x": -2,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": -2,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": -2,
+          "y": 1,
+          "z": 1,
+          "t": "dark"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": 1,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 1,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": 1,
+          "t": "dark"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "z": 1,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "z": 0,
+          "t": "gold"
+        }
+      ]
+    },
+    {
+      "name": "source-forge-exact-selected-original-cells",
+      "ok": true,
+      "count": 3,
+      "cells": [
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "t": "wool"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 1,
+          "t": "coal"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": 0,
+          "t": "gold"
+        }
+      ]
+    },
+    {
+      "name": "source-tavern-exact-selected-original-cells",
+      "ok": true,
+      "count": 9,
+      "cells": [
+        {
+          "x": 3,
+          "y": 1,
+          "z": -2,
+          "t": "wool"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "z": -1,
+          "t": "coal"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "z": -1,
+          "t": "gold"
+        }
+      ]
+    },
+    {
+      "name": "source-bank-exact-selected-original-cells",
+      "ok": true,
+      "count": 8,
+      "cells": [
+        {
+          "x": -1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": -1,
+          "t": "dark"
+        },
+        {
+          "x": -1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "z": 0,
+          "t": "dark"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "z": -1,
+          "t": "gold"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "z": 0,
+          "t": "gold"
+        }
+      ]
+    },
+    {
+      "name": "source-original-GhostAt-not-authored",
+      "ok": true
+    },
+    {
+      "name": "source-all-eleven-valid-states-unreachable-without-world-mutation",
+      "ok": true
+    }
+  ],
+  "fallback": [],
+  "ghosts": [],
+  "assets": [],
+  "errors": [],
+  "screenshots": [],
+  "acceptanceComplete": false,
+  "source": {
+    "building": "8168bc09af53897150026d8c6d8ccc3a284f2dc71478dc73dd62a9e92f375427",
+    "interior": "c44ba7d35e8854fc49923c0394987ebf3eccc6de59e1e44c734d85b3ff9eab41",
+    "site": "8c097162251ce77f4c8d194c2c1ab82de521dc286840979ce19ce95c50bfbee4",
+    "fixture": "75fa58ffab84d41e3f5fee43a2db1ddf96033ea3f4d3292000e0e7181019421c"
+  },
+  "sourcePlacementConstraints": [
+    {
+      "kind": "hall",
+      "rejection": "The hall already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "dormitory",
+      "rejection": "The dormitory already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "kitchen",
+      "rejection": "The kitchen already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "yard",
+      "rejection": "The yard already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "market",
+      "rejection": "The market already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "forge",
+      "rejection": "The forge already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "tavern",
+      "rejection": "The tavern already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "notice",
+      "rejection": "The notice already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "board",
+      "rejection": "The board already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "farm",
+      "rejection": "The farm already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    },
+    {
+      "kind": "bank",
+      "rejection": "The bank already stands.",
+      "valid": "unreachable in unchanged all-11 fixture: singleton existing-kind rejection; hall/bank always rejected"
+    }
+  ],
+  "runtimeExecuted": false,
+  "finished": "2026-09-09T05:49:04.189Z"
+}

@@ -1,0 +1,145 @@
+{
+  "url": "https://emberhall-vale-euyahys5k-andrews-projects-ffe8a9fd.vercel.app",
+  "count": 23,
+  "passed": true,
+  "assets": [
+    {
+      "file": "public/art/lanternwood/bank.glb",
+      "local": "5ec9cb2a1c79ffe075e8ea2d0f66349ecfbcd5b49fa2ecc651992294322cfc4e",
+      "remote": "5ec9cb2a1c79ffe075e8ea2d0f66349ecfbcd5b49fa2ecc651992294322cfc4e",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/board.glb",
+      "local": "23ccb03bb93454303bc3047ee81ca5c222b22206e4d3749f8d5109a67ba7c38b",
+      "remote": "23ccb03bb93454303bc3047ee81ca5c222b22206e4d3749f8d5109a67ba7c38b",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/character.glb",
+      "local": "4c08799d4ebc2de738783a148d7538f069974b059ce12b1d4feb0518ed21566b",
+      "remote": "4c08799d4ebc2de738783a148d7538f069974b059ce12b1d4feb0518ed21566b",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/dormitory.glb",
+      "local": "197294073d2a11e3ef3996b5154689222fa806667b14b370c24f7a87d9b86618",
+      "remote": "197294073d2a11e3ef3996b5154689222fa806667b14b370c24f7a87d9b86618",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/farm.glb",
+      "local": "2dcfdaf40fd1639bf45a41f6a6435b065d6f9727b0d5fad20611b04a58e82bdd",
+      "remote": "2dcfdaf40fd1639bf45a41f6a6435b065d6f9727b0d5fad20611b04a58e82bdd",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/forge.glb",
+      "local": "e2248044493918fe8bfc0133cee0e3bb85374c53b1a3f5899f81cb2f95124a3b",
+      "remote": "e2248044493918fe8bfc0133cee0e3bb85374c53b1a3f5899f81cb2f95124a3b",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/hall.glb",
+      "local": "1b7d67ac7dbadbd1c5d4024c63a76b59ae641b45443d4b1d0219ecd695612482",
+      "remote": "1b7d67ac7dbadbd1c5d4024c63a76b59ae641b45443d4b1d0219ecd695612482",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/interior-bank.glb",
+      "local": "960c2c9d0ebf88f346962cf2b7211067f3c075654d6882af48d01796120d2451",
+      "remote": "960c2c9d0ebf88f346962cf2b7211067f3c075654d6882af48d01796120d2451",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/interior-dormitory.glb",
+      "local": "1de243763402b93470d7af6c212567aa30ced48b52b170b2d87206fe4a7778ac",
+      "remote": "1de243763402b93470d7af6c212567aa30ced48b52b170b2d87206fe4a7778ac",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/interior-forge.glb",
+      "local": "998af7bb42f0ccb583558ca5679e5ece7f4c96ebe37df2dcb53de0fb81f1f953",
+      "remote": "998af7bb42f0ccb583558ca5679e5ece7f4c96ebe37df2dcb53de0fb81f1f953",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/interior-hall.glb",
+      "local": "bdfe882b9240dc7b19d409a9d8d5af63e9bcbdce41a15a70f411d935b0e4afc9",
+      "remote": "bdfe882b9240dc7b19d409a9d8d5af63e9bcbdce41a15a70f411d935b0e4afc9",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/interior-kitchen.glb",
+      "local": "851f895fb778791b7d9654aa0020835b262b092b3a90379c069a8f49d736e3a8",
+      "remote": "851f895fb778791b7d9654aa0020835b262b092b3a90379c069a8f49d736e3a8",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/interior-market.glb",
+      "local": "0cc575f87189ddfe49b8e573d5dda665f8052cb22d9217e31ec6af0878d72f01",
+      "remote": "0cc575f87189ddfe49b8e573d5dda665f8052cb22d9217e31ec6af0878d72f01",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/interior-tavern.glb",
+      "local": "7da485b7389075ad0278c64ce9f8547a0615899c753fe75f5563ca5ede7d0dc2",
+      "remote": "7da485b7389075ad0278c64ce9f8547a0615899c753fe75f5563ca5ede7d0dc2",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/interior-yard.glb",
+      "local": "0472693c8447776a1827458cccf3922add883885c6e48e0fe3e10c96ea46d39b",
+      "remote": "0472693c8447776a1827458cccf3922add883885c6e48e0fe3e10c96ea46d39b",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/kitchen.glb",
+      "local": "a934e2a660ecc1546ef76beab9b5058f8baa0d823ad86d405ce59f73e270b928",
+      "remote": "a934e2a660ecc1546ef76beab9b5058f8baa0d823ad86d405ce59f73e270b928",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/market.glb",
+      "local": "8a9222f1455df7cf7ad46f184ef88bb91298079f00b221648a9ad631d504bd62",
+      "remote": "8a9222f1455df7cf7ad46f184ef88bb91298079f00b221648a9ad631d504bd62",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/notice.glb",
+      "local": "4c344a6a14ec9508aac6cc1e9331a534980d3cbce2bc3747cdc1f8493c469b8c",
+      "remote": "4c344a6a14ec9508aac6cc1e9331a534980d3cbce2bc3747cdc1f8493c469b8c",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/oak.glb",
+      "local": "e38306e785170da4e66399611d7e1e715d4ccb40b9693883f63abb66055f0f8a",
+      "remote": "e38306e785170da4e66399611d7e1e715d4ccb40b9693883f63abb66055f0f8a",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/tavern.glb",
+      "local": "22dbf34dd6641729036aa538c39f54b419ddbbe7a6d45af2bd3c56c237a1e7a4",
+      "remote": "22dbf34dd6641729036aa538c39f54b419ddbbe7a6d45af2bd3c56c237a1e7a4",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/tree-0.glb",
+      "local": "d8abba92639654a6651c23f99bb692fd54c8afcff9613c779abf2b041aa6c458",
+      "remote": "d8abba92639654a6651c23f99bb692fd54c8afcff9613c779abf2b041aa6c458",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/tree-1.glb",
+      "local": "dd1c1464f67078702d6ec41ea850fa39ff95a21d1ce5e95cf122ae1f6f02966f",
+      "remote": "dd1c1464f67078702d6ec41ea850fa39ff95a21d1ce5e95cf122ae1f6f02966f",
+      "matches": true
+    },
+    {
+      "file": "public/art/lanternwood/yard.glb",
+      "local": "65434b460900b270723b8a40ef9abcaeaa91fcf3a345530eaa5e4c7acfeeea53",
+      "remote": "65434b460900b270723b8a40ef9abcaeaa91fcf3a345530eaa5e4c7acfeeea53",
+      "matches": true
+    }
+  ]
+}

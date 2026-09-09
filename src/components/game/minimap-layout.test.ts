@@ -64,6 +64,15 @@ test("mobile clamp keeps a grown map off the bottom dock", () => {
   assert.equal(overlaps(mapRect(layout), dockRect(mobile)), false);
 });
 
+test("short landscape caps the expanded map to the space above the dock", () => {
+  const landscape = { width: 844, height: 390 };
+  const layout = clampMinimapLayout({ x: 340, y: 700, size: 320, minimized: false }, landscape);
+  assert.equal(layout.size, 298);
+  assert.equal(overlaps(mapRect(layout), dockRect(landscape)), false);
+  assert(layout.y >= 12);
+  assert(layout.y + layout.size <= landscape.height - MINIMAP_BOTTOM_CHROME);
+});
+
 test("mobile default layout does not cover the bottom dock", () => {
   const layout = defaultMinimapLayout(mobile);
   assert.equal(layout.size, DEFAULT_MINIMAP_SIZE);
