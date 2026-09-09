@@ -1,0 +1,777 @@
+{
+  "url": "https://emberhall-vale-qkjxo92bb-andrews-projects-ffe8a9fd.vercel.app",
+  "cases": [
+    {
+      "device": "desktop",
+      "name": "loaded",
+      "map": {
+        "x": 1268,
+        "y": 720,
+        "width": 160,
+        "height": 160
+      },
+      "dock": {
+        "x": 621,
+        "y": 894,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": [
+        {
+          "name": "Guide",
+          "x": 626,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Hold",
+          "x": 674,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Spellbook",
+          "x": 722,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Work",
+          "x": 770,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        }
+      ],
+      "stored": {
+        "x": 1268,
+        "y": 720,
+        "size": 160,
+        "minimized": false
+      }
+    },
+    {
+      "device": "desktop",
+      "name": "restored",
+      "map": {
+        "x": 1268,
+        "y": 720,
+        "width": 160,
+        "height": 160
+      },
+      "dock": {
+        "x": 621,
+        "y": 894,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": [
+        {
+          "name": "Guide",
+          "x": 626,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Hold",
+          "x": 674,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Spellbook",
+          "x": 722,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Work",
+          "x": 770,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        }
+      ],
+      "stored": {
+        "x": 1268,
+        "y": 720,
+        "size": 160,
+        "minimized": false
+      }
+    },
+    {
+      "device": "desktop",
+      "name": "dragged",
+      "map": {
+        "x": 1268,
+        "y": 720,
+        "width": 160,
+        "height": 160
+      },
+      "dock": {
+        "x": 621,
+        "y": 894,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": [
+        {
+          "name": "Guide",
+          "x": 626,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Hold",
+          "x": 674,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Spellbook",
+          "x": 722,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Work",
+          "x": 770,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        }
+      ],
+      "stored": {
+        "x": 1268,
+        "y": 720,
+        "size": 160,
+        "minimized": false
+      }
+    },
+    {
+      "device": "desktop",
+      "name": "reloaded",
+      "map": {
+        "x": 1268,
+        "y": 720,
+        "width": 160,
+        "height": 160
+      },
+      "dock": {
+        "x": 621,
+        "y": 894,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": [
+        {
+          "name": "Guide",
+          "x": 626,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Hold",
+          "x": 674,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Spellbook",
+          "x": 722,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Work",
+          "x": 770,
+          "y": 899,
+          "width": 44,
+          "height": 44
+        }
+      ],
+      "stored": {
+        "x": 1268,
+        "y": 720,
+        "size": 160,
+        "minimized": false
+      }
+    },
+    {
+      "device": "mobile",
+      "name": "loaded",
+      "map": {
+        "x": 158,
+        "y": 544,
+        "width": 220,
+        "height": 220
+      },
+      "dock": {
+        "x": 96,
+        "y": 778,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": [
+        {
+          "name": "Guide",
+          "x": 101,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Hold",
+          "x": 149,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Spellbook",
+          "x": 197,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Work",
+          "x": 245,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        }
+      ],
+      "stored": {
+        "x": 158,
+        "y": 544,
+        "size": 220,
+        "minimized": false
+      }
+    },
+    {
+      "device": "mobile",
+      "name": "restored",
+      "map": {
+        "x": 158,
+        "y": 544,
+        "width": 220,
+        "height": 220
+      },
+      "dock": {
+        "x": 96,
+        "y": 778,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": [
+        {
+          "name": "Guide",
+          "x": 101,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Hold",
+          "x": 149,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Spellbook",
+          "x": 197,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Work",
+          "x": 245,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        }
+      ],
+      "stored": {
+        "x": 158,
+        "y": 544,
+        "size": 220,
+        "minimized": false
+      }
+    },
+    {
+      "device": "mobile",
+      "name": "dragged",
+      "map": {
+        "x": 158,
+        "y": 544,
+        "width": 220,
+        "height": 220
+      },
+      "dock": {
+        "x": 96,
+        "y": 778,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": [
+        {
+          "name": "Guide",
+          "x": 101,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Hold",
+          "x": 149,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Spellbook",
+          "x": 197,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Work",
+          "x": 245,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        }
+      ],
+      "stored": {
+        "x": 158,
+        "y": 544,
+        "size": 220,
+        "minimized": false
+      }
+    },
+    {
+      "device": "mobile",
+      "name": "reloaded",
+      "map": {
+        "x": 158,
+        "y": 544,
+        "width": 220,
+        "height": 220
+      },
+      "dock": {
+        "x": 96,
+        "y": 778,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": [
+        {
+          "name": "Guide",
+          "x": 101,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Hold",
+          "x": 149,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Spellbook",
+          "x": 197,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Work",
+          "x": 245,
+          "y": 783,
+          "width": 44,
+          "height": 44
+        }
+      ],
+      "stored": {
+        "x": 158,
+        "y": 544,
+        "size": 220,
+        "minimized": false
+      }
+    },
+    {
+      "device": "landscape",
+      "name": "loaded",
+      "map": {
+        "x": 340,
+        "y": 12,
+        "width": 298,
+        "height": 298
+      },
+      "dock": {
+        "x": 323,
+        "y": 324,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": [
+        {
+          "name": "Guide",
+          "x": 328,
+          "y": 329,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Hold",
+          "x": 376,
+          "y": 329,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Spellbook",
+          "x": 424,
+          "y": 329,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Work",
+          "x": 472,
+          "y": 329,
+          "width": 44,
+          "height": 44
+        }
+      ],
+      "stored": {
+        "x": 340,
+        "y": 12,
+        "size": 298,
+        "minimized": false
+      }
+    },
+    {
+      "device": "landscape",
+      "name": "restored",
+      "map": {
+        "x": 340,
+        "y": 12,
+        "width": 298,
+        "height": 298
+      },
+      "dock": {
+        "x": 323,
+        "y": 324,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": [
+        {
+          "name": "Guide",
+          "x": 328,
+          "y": 329,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Hold",
+          "x": 376,
+          "y": 329,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Spellbook",
+          "x": 424,
+          "y": 329,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Work",
+          "x": 472,
+          "y": 329,
+          "width": 44,
+          "height": 44
+        }
+      ],
+      "stored": {
+        "x": 340,
+        "y": 12,
+        "size": 298,
+        "minimized": false
+      }
+    },
+    {
+      "device": "landscape",
+      "name": "dragged",
+      "map": {
+        "x": 355,
+        "y": 12,
+        "width": 298,
+        "height": 298
+      },
+      "dock": {
+        "x": 323,
+        "y": 324,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": [
+        {
+          "name": "Guide",
+          "x": 328,
+          "y": 329,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Hold",
+          "x": 376,
+          "y": 329,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Spellbook",
+          "x": 424,
+          "y": 329,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Work",
+          "x": 472,
+          "y": 329,
+          "width": 44,
+          "height": 44
+        }
+      ],
+      "stored": {
+        "x": 355,
+        "y": 12,
+        "size": 298,
+        "minimized": false
+      }
+    },
+    {
+      "device": "landscape",
+      "name": "reloaded",
+      "map": {
+        "x": 355,
+        "y": 12,
+        "width": 298,
+        "height": 298
+      },
+      "dock": {
+        "x": 323,
+        "y": 324,
+        "width": 198,
+        "height": 54
+      },
+      "buttons": [
+        {
+          "name": "Guide",
+          "x": 328,
+          "y": 329,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Hold",
+          "x": 376,
+          "y": 329,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Spellbook",
+          "x": 424,
+          "y": 329,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "Work",
+          "x": 472,
+          "y": 329,
+          "width": 44,
+          "height": 44
+        }
+      ],
+      "stored": {
+        "x": 355,
+        "y": 12,
+        "size": 298,
+        "minimized": false
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "desktop-loaded-dock-clear",
+      "ok": true
+    },
+    {
+      "name": "desktop-loaded-44px-buttons",
+      "ok": true
+    },
+    {
+      "name": "desktop-default-slot-preserved",
+      "ok": true
+    },
+    {
+      "name": "desktop-minimize",
+      "ok": true
+    },
+    {
+      "name": "desktop-restored-dock-clear",
+      "ok": true
+    },
+    {
+      "name": "desktop-restored-44px-buttons",
+      "ok": true
+    },
+    {
+      "name": "desktop-dragged-dock-clear",
+      "ok": true
+    },
+    {
+      "name": "desktop-dragged-44px-buttons",
+      "ok": true
+    },
+    {
+      "name": "desktop-drag-no-walk-intent",
+      "ok": true
+    },
+    {
+      "name": "desktop-layout-persists",
+      "ok": true
+    },
+    {
+      "name": "desktop-reloaded-dock-clear",
+      "ok": true
+    },
+    {
+      "name": "desktop-reloaded-44px-buttons",
+      "ok": true
+    },
+    {
+      "name": "mobile-loaded-dock-clear",
+      "ok": true
+    },
+    {
+      "name": "mobile-loaded-44px-buttons",
+      "ok": true
+    },
+    {
+      "name": "mobile-minimize",
+      "ok": true
+    },
+    {
+      "name": "mobile-restored-dock-clear",
+      "ok": true
+    },
+    {
+      "name": "mobile-restored-44px-buttons",
+      "ok": true
+    },
+    {
+      "name": "mobile-dragged-dock-clear",
+      "ok": true
+    },
+    {
+      "name": "mobile-dragged-44px-buttons",
+      "ok": true
+    },
+    {
+      "name": "mobile-drag-no-walk-intent",
+      "ok": true
+    },
+    {
+      "name": "mobile-layout-persists",
+      "ok": true
+    },
+    {
+      "name": "mobile-reloaded-dock-clear",
+      "ok": true
+    },
+    {
+      "name": "mobile-reloaded-44px-buttons",
+      "ok": true
+    },
+    {
+      "name": "landscape-loaded-dock-clear",
+      "ok": true
+    },
+    {
+      "name": "landscape-loaded-44px-buttons",
+      "ok": true
+    },
+    {
+      "name": "landscape-size-fits",
+      "ok": true
+    },
+    {
+      "name": "landscape-minimize",
+      "ok": true
+    },
+    {
+      "name": "landscape-restored-dock-clear",
+      "ok": true
+    },
+    {
+      "name": "landscape-restored-44px-buttons",
+      "ok": true
+    },
+    {
+      "name": "landscape-dragged-dock-clear",
+      "ok": true
+    },
+    {
+      "name": "landscape-dragged-44px-buttons",
+      "ok": true
+    },
+    {
+      "name": "landscape-drag-no-walk-intent",
+      "ok": true
+    },
+    {
+      "name": "landscape-layout-persists",
+      "ok": true
+    },
+    {
+      "name": "landscape-reloaded-dock-clear",
+      "ok": true
+    },
+    {
+      "name": "landscape-reloaded-44px-buttons",
+      "ok": true
+    },
+    {
+      "name": "no-page-errors",
+      "ok": true
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

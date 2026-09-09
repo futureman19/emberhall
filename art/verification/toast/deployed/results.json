@@ -1,0 +1,55 @@
+{
+  "url": "https://emberhall-vale-qkjxo92bb-andrews-projects-ffe8a9fd.vercel.app",
+  "cases": [
+    {
+      "device": "mobile",
+      "rect": {
+        "x": 16,
+        "y": 192,
+        "width": 358,
+        "height": 58
+      },
+      "toastZ": 40,
+      "mapZ": 0,
+      "pointerEvents": "none",
+      "scrollWidth": 356,
+      "clientWidth": 356,
+      "role": "status",
+      "overlappingButtons": []
+    },
+    {
+      "device": "landscape",
+      "rect": {
+        "x": 198,
+        "y": 96,
+        "width": 448,
+        "height": 58
+      },
+      "toastZ": 40,
+      "mapZ": 0,
+      "pointerEvents": "none",
+      "scrollWidth": 446,
+      "clientWidth": 446,
+      "role": "status",
+      "overlappingButtons": []
+    },
+    {
+      "device": "desktop",
+      "rect": {
+        "x": 496,
+        "y": 96,
+        "width": 448,
+        "height": 58
+      },
+      "toastZ": 40,
+      "mapZ": 0,
+      "pointerEvents": "none",
+      "scrollWidth": 446,
+      "clientWidth": 446,
+      "role": "status",
+      "overlappingButtons": []
+    }
+  ],
+  "errors": [],
+  "passed": true
+}
