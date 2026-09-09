@@ -1,0 +1,9 @@
+# Settled mobile hall diagnostic
+
+Current renderer (approved tools, no candidate integration), mobile390x844, original fixed fixture hall256,290 noon/clear, RTX4060 ANGLE D3D11. Wait8500ms after fixture rather than prior1500ms. Two sequential fresh-browser runs ABBA and BAAB,300 measured frames per arm. Eight runs/2400 frames reconciled from hall-settled-{abba,baab}.json to hall-settled-summary.json. Each run verified hall interior asset present for on and absent for off. Off suppresses all Phase1 furnishing/sign GLBs, not just hall furniture; it is a diagnostic presentation change, not an optimization.
+
+On:1200 frames, pooled p95 approximately33.4ms,77 frames above25ms. Off:1200 frames, pooled p95 approximately33.4ms,82 frames above25ms. Individual on p95 spans16.8–33.4ms; off33.3–33.4ms. Render submission p95 roughly5.9–6.1ms across runs is CPU submission, not GPU execution time. On reported473–478 draw calls and approximately6.986M triangles; off491–497 calls and approximately6.973M triangles. Slight differing draw counts within arms show the fixture is not pixel-identical/static; simulation is paused but renderer/effects can vary.
+
+Conclusion: this bounded run does not reproduce a consistent furnishing-related timing penalty. It does NOT erase the original failed13/14 comparison or prove performance acceptance, nor prove streaming warmup caused earlier regressions. No thresholds relaxed. Frame scheduling can straddle percentile boundaries; a single16.8ms result is not evidence of a speedup. Next useful diagnosis: identify dominant scene geometry/render passes and correlate slow frames with CPU/GPU work, not remove approved furnishings or repeatedly rerun the same coarse toggle.
+
+No application code or deployment changes. Historical raw outputs retained. First settled ABBA file predates adding explicit settleMs metadata; script used8500ms in both batches.
