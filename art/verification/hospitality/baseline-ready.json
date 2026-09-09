@@ -1,0 +1,190 @@
+{
+  "status": "baseline-complete-before-integration",
+  "fixture": {
+    "path": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\public\\art\\hospitality-review-save.json",
+    "positions": [
+      {
+        "id": "qa-hospitality-kitchen",
+        "kind": "kitchen",
+        "tx": 247,
+        "ty": 302,
+        "beds": []
+      },
+      {
+        "id": "qa-hospitality-tavern",
+        "kind": "tavern",
+        "tx": 262,
+        "ty": 302,
+        "beds": []
+      },
+      {
+        "id": "qa-hospitality-market",
+        "kind": "market",
+        "tx": 254,
+        "ty": 303,
+        "beds": []
+      }
+    ],
+    "adjustments": [
+      {
+        "building": "tavern",
+        "approach": [
+          263,
+          305
+        ],
+        "reason": "Centreline approach rejected by real A* (The way is closed); selected clear reachable tile; building unchanged"
+      },
+      {
+        "building": "tavern",
+        "approach": [
+          263,
+          305
+        ],
+        "reason": "Centreline approach rejected by real A* (The way is closed); selected clear reachable tile; building unchanged"
+      }
+    ],
+    "collisions": [],
+    "comparisonScope": "Each of three hospitality buildings against ALL saved buildings; existing unrelated overlaps not rewritten",
+    "stationContract": {
+      "kitchen": "fire",
+      "tavern": null,
+      "market": null
+    },
+    "changes": [
+      "three missing local buildings",
+      "noon paused",
+      "cooking 100",
+      "ordinary meat wheat cabbage raw_fish; existing tools preserved"
+    ],
+    "sha256": "dbc13b317a2687729991a99a8643f47c049f9a74ccc21ed10ab8f6a565e41aba"
+  },
+  "results": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\hospitality\\baseline\\results.json",
+  "measurements": [
+    {
+      "device": "desktop",
+      "building": "kitchen",
+      "frames": 180,
+      "elapsedMs": 3358.3999999523166,
+      "medianMs": 16.69999999999891,
+      "p95Ms": 49.899999999999636,
+      "drawCalls": 533,
+      "triangles": 6818102,
+      "geometryCount": 304,
+      "textures": 7,
+      "heap": {
+        "used": 254000000,
+        "total": 304000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "desktop",
+      "building": "tavern",
+      "frames": 180,
+      "elapsedMs": 3253.0999999999985,
+      "medianMs": 16.700000000000728,
+      "p95Ms": 33.29999999999927,
+      "drawCalls": 551,
+      "triangles": 7016278,
+      "geometryCount": 308,
+      "textures": 7,
+      "heap": {
+        "used": 254000000,
+        "total": 304000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "desktop",
+      "building": "market",
+      "frames": 180,
+      "elapsedMs": 3358.599999928476,
+      "medianMs": 16.700000000000728,
+      "p95Ms": 50,
+      "drawCalls": 551,
+      "triangles": 7016574,
+      "geometryCount": 308,
+      "textures": 7,
+      "heap": {
+        "used": 254000000,
+        "total": 304000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "mobile",
+      "building": "kitchen",
+      "frames": 180,
+      "elapsedMs": 3393.7999999761596,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 49.900000000001455,
+      "drawCalls": 394,
+      "triangles": 6849817,
+      "geometryCount": 379,
+      "textures": 7,
+      "heap": {
+        "used": 254000000,
+        "total": 304000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "mobile",
+      "building": "tavern",
+      "frames": 180,
+      "elapsedMs": 3328.9999999284773,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 50,
+      "drawCalls": 467,
+      "triangles": 7012138,
+      "geometryCount": 379,
+      "textures": 7,
+      "heap": {
+        "used": 254000000,
+        "total": 304000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "device": "mobile",
+      "building": "market",
+      "frames": 180,
+      "elapsedMs": 3405.100000023842,
+      "medianMs": 16.69999999999709,
+      "p95Ms": 49.900000000001455,
+      "drawCalls": 400,
+      "triangles": 6999188,
+      "geometryCount": 380,
+      "textures": 7,
+      "heap": {
+        "used": 254000000,
+        "total": 304000000
+      },
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    }
+  ],
+  "screenshots": [
+    "desktop-kitchen-outside.png",
+    "desktop-kitchen-inside.png",
+    "desktop-kitchen-restored.png",
+    "desktop-tavern-outside.png",
+    "desktop-tavern-inside.png",
+    "desktop-tavern-restored.png",
+    "desktop-market-outside.png",
+    "desktop-market-inside.png",
+    "desktop-market-restored.png",
+    "desktop-kitchen-cooking.png",
+    "mobile-kitchen-outside.png",
+    "mobile-kitchen-inside.png",
+    "mobile-kitchen-restored.png",
+    "mobile-tavern-outside.png",
+    "mobile-tavern-inside.png",
+    "mobile-tavern-restored.png",
+    "mobile-market-outside.png",
+    "mobile-market-inside.png",
+    "mobile-market-restored.png",
+    "mobile-kitchen-cooking.png"
+  ],
+  "releaseGate": "BLOCKED: existing 10/14 p95 comparison and 529 green / 12 baseline game failures remain unwaived",
+  "finished": "2026-09-09T00:53:15.275Z"
+}

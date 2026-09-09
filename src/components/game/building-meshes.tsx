@@ -14,6 +14,7 @@ import { LANTERNWOOD_BLOCKS, lanternwoodInfluence } from "./lanternwood-art";
 import { LanternwoodBuilding } from "./lanternwood-dressing";
 import { useArtistKit, usesBlenderHall } from "./lanternwood-kit";
 import { settlementKitName, retainSettlementInteriorVoxel } from "./settlement-kit";
+import { hospitalityKitName, retainHospitalityInteriorVoxel } from "./hospitality-kit";
 
 const B = 0.5;
 /** Default cube scale. 1.04 fuses faces — only the hut preview uses it. */
@@ -943,7 +944,7 @@ function BlockLayer({
 }
 
 function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
-  const settlement = settlementKitName(b.kind, b.tx, b.ty);
+  const settlement = settlementKitName(b.kind, b.tx, b.ty) ?? hospitalityKitName(b.kind, b.tx, b.ty);
   const kitName = usesBlenderHall(b.kind, b.tx, b.ty) ? "hall" : settlement;
   const authored = useArtistKit(kitName);
   const exterior = Boolean(authored && !inside);
@@ -988,7 +989,7 @@ function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
       if (v.y > cap) continue;
       const p = new THREE.Vector3(b.tx + (v.x + 0.5) * B, y0 + (v.y + 0.5) * B, b.ty + (v.z + 0.5) * B);
       (v.cut ? cut : solid)[v.t].push(p);
-      if (retainSettlementInteriorVoxel(b.kind, v)) interior[v.t].push(p);
+      if (retainSettlementInteriorVoxel(b.kind, v) || retainHospitalityInteriorVoxel(b.kind, v)) interior[v.t].push(p);
     }
     return { solid, cut, interior };
   }, [spec, b.tx, b.ty, b.kind, y0, inside, story]);

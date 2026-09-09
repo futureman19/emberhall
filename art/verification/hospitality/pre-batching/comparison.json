@@ -1,0 +1,188 @@
+{
+  "kitchen": {
+    "old": {
+      "bytes": 260536,
+      "triangles": 5281,
+      "vertices": 6874,
+      "meshes": 9,
+      "geometries": 9,
+      "materials": 9,
+      "coloredMeshes": 0,
+      "paletteColors": 9,
+      "emissiveTriangles": 26,
+      "bounds": {
+        "min": [
+          -1.7599999904632568,
+          0,
+          -1.465000033378601
+        ],
+        "max": [
+          1.9899998903274536,
+          3.307499885559082,
+          2.75600004196167
+        ]
+      }
+    },
+    "current": {
+      "bytes": 336600,
+      "triangles": 5281,
+      "vertices": 6874,
+      "meshes": 2,
+      "geometries": 2,
+      "materials": 2,
+      "coloredMeshes": 2,
+      "paletteColors": 9,
+      "emissiveTriangles": 26,
+      "bounds": {
+        "min": [
+          -1.7599999904632568,
+          0,
+          -1.465000033378601
+        ],
+        "max": [
+          1.9899998903274536,
+          3.307499885559082,
+          2.75600004196167
+        ]
+      }
+    },
+    "maxError": {
+      "position": 0,
+      "normal": 0,
+      "color": 0,
+      "emission": 0,
+      "surface": 0
+    },
+    "tolerance": {
+      "position": 0.000001,
+      "normal": 0.000001,
+      "color": 0.00001535902189669642,
+      "emission": 1e-7
+    },
+    "equivalent": true
+  },
+  "tavern": {
+    "old": {
+      "bytes": 251192,
+      "triangles": 5254,
+      "vertices": 6587,
+      "meshes": 9,
+      "geometries": 9,
+      "materials": 9,
+      "coloredMeshes": 0,
+      "paletteColors": 9,
+      "emissiveTriangles": 39,
+      "bounds": {
+        "min": [
+          -2.115000009536743,
+          0,
+          -1.590000033378601
+        ],
+        "max": [
+          2.614999771118164,
+          3.9912126064300537,
+          2.1550002098083496
+        ]
+      }
+    },
+    "current": {
+      "bytes": 323828,
+      "triangles": 5254,
+      "vertices": 6587,
+      "meshes": 2,
+      "geometries": 2,
+      "materials": 2,
+      "coloredMeshes": 2,
+      "paletteColors": 9,
+      "emissiveTriangles": 39,
+      "bounds": {
+        "min": [
+          -2.115000009536743,
+          0,
+          -1.590000033378601
+        ],
+        "max": [
+          2.614999771118164,
+          3.9912126064300537,
+          2.1550002098083496
+        ]
+      }
+    },
+    "maxError": {
+      "position": 0,
+      "normal": 0,
+      "color": 0,
+      "emission": 0,
+      "surface": 0
+    },
+    "tolerance": {
+      "position": 0.000001,
+      "normal": 0.000001,
+      "color": 0.00001535902189669642,
+      "emission": 1e-7
+    },
+    "equivalent": true
+  },
+  "market": {
+    "old": {
+      "bytes": 170760,
+      "triangles": 3632,
+      "vertices": 4612,
+      "meshes": 5,
+      "geometries": 5,
+      "materials": 5,
+      "coloredMeshes": 0,
+      "paletteColors": 5,
+      "emissiveTriangles": 0,
+      "bounds": {
+        "min": [
+          -1.965000033378601,
+          -2.2351741790771484e-8,
+          -1.4914002418518066
+        ],
+        "max": [
+          1.9650001525878906,
+          2.821650505065918,
+          1.554999828338623
+        ]
+      }
+    },
+    "current": {
+      "bytes": 226072,
+      "triangles": 3632,
+      "vertices": 4612,
+      "meshes": 1,
+      "geometries": 1,
+      "materials": 1,
+      "coloredMeshes": 1,
+      "paletteColors": 5,
+      "emissiveTriangles": 0,
+      "bounds": {
+        "min": [
+          -1.965000033378601,
+          -2.2351741790771484e-8,
+          -1.4914002418518066
+        ],
+        "max": [
+          1.9650001525878906,
+          2.821650505065918,
+          1.554999828338623
+        ]
+      }
+    },
+    "maxError": {
+      "position": 0,
+      "normal": 0,
+      "color": 0,
+      "emission": 0,
+      "surface": 0
+    },
+    "tolerance": {
+      "position": 0.000001,
+      "normal": 0.000001,
+      "color": 0.00001535902189669642,
+      "emission": 1e-7
+    },
+    "equivalent": true
+  }
+}

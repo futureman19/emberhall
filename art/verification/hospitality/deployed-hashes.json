@@ -1,0 +1,45 @@
+{
+  "url": "https://emberhall-vale-im01t0obl-andrews-projects-ffe8a9fd.vercel.app",
+  "assets": [
+    {
+      "asset": "bank",
+      "sha256": "5ec9cb2a1c79ffe075e8ea2d0f66349ecfbcd5b49fa2ecc651992294322cfc4e",
+      "match": true
+    },
+    {
+      "asset": "forge",
+      "sha256": "e2248044493918fe8bfc0133cee0e3bb85374c53b1a3f5899f81cb2f95124a3b",
+      "match": true
+    },
+    {
+      "asset": "hall",
+      "sha256": "1b7d67ac7dbadbd1c5d4024c63a76b59ae641b45443d4b1d0219ecd695612482",
+      "match": true
+    },
+    {
+      "asset": "character",
+      "sha256": "4c08799d4ebc2de738783a148d7538f069974b059ce12b1d4feb0518ed21566b",
+      "match": true
+    },
+    {
+      "asset": "oak",
+      "sha256": "e38306e785170da4e66399611d7e1e715d4ccb40b9693883f63abb66055f0f8a",
+      "match": true
+    },
+    {
+      "asset": "kitchen",
+      "sha256": "a934e2a660ecc1546ef76beab9b5058f8baa0d823ad86d405ce59f73e270b928",
+      "match": true
+    },
+    {
+      "asset": "tavern",
+      "sha256": "22dbf34dd6641729036aa538c39f54b419ddbbe7a6d45af2bd3c56c237a1e7a4",
+      "match": true
+    },
+    {
+      "asset": "market",
+      "sha256": "8a9222f1455df7cf7ad46f184ef88bb91298079f00b221648a9ad631d504bd62",
+      "match": true
+    }
+  ]
+}
