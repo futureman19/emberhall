@@ -1,0 +1,246 @@
+{
+  "url": "http://127.0.0.1:8093",
+  "scope": "Disposable HP=0 injury; actual tickPlayer death and healer Return me button; local material inspection separate from bundled visual evidence",
+  "cases": [
+    {
+      "device": "desktop",
+      "before": {
+        "ghost": false,
+        "hp": 40,
+        "maxHp": 40,
+        "parts": [
+          {
+            "y": 0.18302692875108068,
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "3a342e",
+            "emissive": "000000"
+          },
+          {
+            "y": 0.18302692875108068,
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "3a342e",
+            "emissive": "000000"
+          },
+          {
+            "y": 0.033026928751080674,
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "2e241c",
+            "emissive": "000000"
+          },
+          {
+            "y": 0.033026928751080674,
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "2e241c",
+            "emissive": "000000"
+          },
+          {
+            "y": 0.47302692875108066,
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "a85a42",
+            "emissive": "000000"
+          },
+          {
+            "y": 0.8730269287510807,
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "c9c3b6",
+            "emissive": "000000"
+          },
+          {
+            "y": 1.0530269287510807,
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "6a3a32",
+            "emissive": "000000"
+          },
+          {
+            "y": 0.47302692875108066,
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "c9a36a",
+            "emissive": "000000"
+          },
+          {
+            "y": 0.14,
+            "opacity": 0.9,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ffd36a"
+          }
+        ]
+      },
+      "ghost": {
+        "ghost": true,
+        "hp": 0,
+        "maxHp": 40,
+        "parts": [
+          {
+            "y": 0.4706816696598456,
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "y": 0.1606816696598456,
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "y": 0.1606816696598456,
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "y": 0.010681669659845596,
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "y": 0.010681669659845596,
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "y": 0.4506816696598456,
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "y": 0.8506816696598456,
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "y": 1.0306816696598458,
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "y": 0.02,
+            "opacity": 0.35,
+            "transparent": true,
+            "depthWrite": true,
+            "color": "ece6d8"
+          }
+        ]
+      },
+      "after": {
+        "ghost": false,
+        "hp": 16,
+        "maxHp": 40,
+        "parts": [
+          {
+            "y": 0.1753408348299228,
+            "opacity": 0,
+            "transparent": 0,
+            "depthWrite": 0,
+            "color": "3a342e",
+            "emissive": "000000"
+          },
+          {
+            "y": 0.1753408348299228,
+            "opacity": 0,
+            "transparent": 0,
+            "depthWrite": 0,
+            "color": "3a342e",
+            "emissive": "000000"
+          },
+          {
+            "y": 0.025340834829922797,
+            "opacity": 0,
+            "transparent": 0,
+            "depthWrite": 0,
+            "color": "2e241c",
+            "emissive": "000000"
+          },
+          {
+            "y": 0.025340834829922797,
+            "opacity": 0,
+            "transparent": 0,
+            "depthWrite": 0,
+            "color": "2e241c",
+            "emissive": "000000"
+          },
+          {
+            "y": 0.4653408348299228,
+            "opacity": 0,
+            "transparent": 0,
+            "depthWrite": 0,
+            "color": "a85a42",
+            "emissive": "000000"
+          },
+          {
+            "y": 0.8653408348299229,
+            "opacity": 0,
+            "transparent": 0,
+            "depthWrite": 0,
+            "color": "c9c3b6",
+            "emissive": "000000"
+          },
+          {
+            "y": 1.045340834829923,
+            "opacity": 0,
+            "transparent": 0,
+            "depthWrite": 0,
+            "color": "6a3a32",
+            "emissive": "000000"
+          },
+          {
+            "y": 0.4653408348299228,
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "c9a36a",
+            "emissive": "000000"
+          },
+          {
+            "y": 0.14,
+            "opacity": 0.9,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ffd36a"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "passed": false,
+  "failure": "No invisible living body materials"
+}

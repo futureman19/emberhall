@@ -1,0 +1,50 @@
+{
+  "url": "https://emberhall-vale-ohhfcdd6o-andrews-projects-ffe8a9fd.vercel.app",
+  "scope": "Disposable HP=0 injury; actual tickPlayer death and healer Return me button; local material inspection separate from bundled visual evidence",
+  "cases": [
+    {
+      "device": "desktop",
+      "before": {
+        "ghost": false,
+        "hp": 40,
+        "maxHp": 40,
+        "parts": []
+      },
+      "ghost": {
+        "ghost": true,
+        "hp": 0,
+        "maxHp": 40,
+        "parts": []
+      },
+      "after": {
+        "ghost": false,
+        "hp": 16,
+        "maxHp": 40,
+        "parts": []
+      }
+    },
+    {
+      "device": "mobile",
+      "before": {
+        "ghost": false,
+        "hp": 40,
+        "maxHp": 40,
+        "parts": []
+      },
+      "ghost": {
+        "ghost": true,
+        "hp": 0,
+        "maxHp": 40,
+        "parts": []
+      },
+      "after": {
+        "ghost": false,
+        "hp": 16,
+        "maxHp": 40,
+        "parts": []
+      }
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

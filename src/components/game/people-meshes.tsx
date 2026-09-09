@@ -107,7 +107,9 @@ function Mat({ color, ghost }: { color: string; ghost: boolean }) {
       />
     );
   }
-  return <meshStandardMaterial color={color} roughness={0.82} />;
+  // R3F reuses this material across ghost/invisibility transitions. Restore
+  // every switched property explicitly; removed scalar props can reset to 0.
+  return <meshStandardMaterial color={color} roughness={0.82} opacity={1} transparent={false} depthWrite={true} emissive="#000000" emissiveIntensity={1} />;
 }
 
 function Hatchet({ ghost }: { ghost: boolean }) {

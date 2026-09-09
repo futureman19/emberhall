@@ -1,0 +1,428 @@
+{
+  "url": "http://127.0.0.1:8093",
+  "scope": "Disposable HP=0 injury; actual tickPlayer death and healer Return me button; local material inspection separate from bundled visual evidence",
+  "cases": [
+    {
+      "device": "desktop",
+      "before": {
+        "ghost": false,
+        "hp": 40,
+        "maxHp": 40,
+        "parts": [
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "3a342e",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "3a342e",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "2e241c",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "2e241c",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "a85a42",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "c9c3b6",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "6a3a32",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "c9a36a",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 0.9,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ffd36a"
+          }
+        ]
+      },
+      "ghost": {
+        "ghost": true,
+        "hp": 0,
+        "maxHp": 40,
+        "parts": [
+          {
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "opacity": 0.35,
+            "transparent": true,
+            "depthWrite": true,
+            "color": "ece6d8"
+          }
+        ]
+      },
+      "after": {
+        "ghost": false,
+        "hp": 16,
+        "maxHp": 40,
+        "parts": [
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "3a342e",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "3a342e",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "2e241c",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "2e241c",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "a85a42",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "c9c3b6",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "6a3a32",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "c9a36a",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 0.9,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ffd36a"
+          }
+        ]
+      }
+    },
+    {
+      "device": "mobile",
+      "before": {
+        "ghost": false,
+        "hp": 40,
+        "maxHp": 40,
+        "parts": [
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "3a342e",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "3a342e",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "2e241c",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "2e241c",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "a85a42",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "c9c3b6",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "6a3a32",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "c9a36a",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 0.9,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ffd36a"
+          }
+        ]
+      },
+      "ghost": {
+        "ghost": true,
+        "hp": 0,
+        "maxHp": 40,
+        "parts": [
+          {
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "opacity": 0.58,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ece6d8",
+            "emissive": "c9c3b6"
+          },
+          {
+            "opacity": 0.35,
+            "transparent": true,
+            "depthWrite": true,
+            "color": "ece6d8"
+          }
+        ]
+      },
+      "after": {
+        "ghost": false,
+        "hp": 16,
+        "maxHp": 40,
+        "parts": [
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "3a342e",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "3a342e",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "2e241c",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "2e241c",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "a85a42",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "c9c3b6",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "6a3a32",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "color": "c9a36a",
+            "emissive": "000000"
+          },
+          {
+            "opacity": 0.9,
+            "transparent": true,
+            "depthWrite": false,
+            "color": "ffd36a"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

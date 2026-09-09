@@ -40210,13 +40210,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#BandageBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:588"
+        "src/components/game/people-meshes.tsx:590"
       ],
       "sourceNames": [
         "BandageBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:588"
+        "src/components/game/people-meshes.tsx:590"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -40304,13 +40304,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#BandageWrap",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:463"
+        "src/components/game/people-meshes.tsx:465"
       ],
       "sourceNames": [
         "BandageWrap"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:463"
+        "src/components/game/people-meshes.tsx:465"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -40394,13 +40394,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Bow",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:207"
+        "src/components/game/people-meshes.tsx:209"
       ],
       "sourceNames": [
         "Bow"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:207"
+        "src/components/game/people-meshes.tsx:209"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -40469,13 +40469,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Club",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:162"
+        "src/components/game/people-meshes.tsx:164"
       ],
       "sourceNames": [
         "Club"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:162"
+        "src/components/game/people-meshes.tsx:164"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -40532,13 +40532,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#ConstructionBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:817"
+        "src/components/game/people-meshes.tsx:819"
       ],
       "sourceNames": [
         "ConstructionBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:817"
+        "src/components/game/people-meshes.tsx:819"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -40625,13 +40625,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#ConstructionTool",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:798"
+        "src/components/game/people-meshes.tsx:800"
       ],
       "sourceNames": [
         "ConstructionTool"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:798"
+        "src/components/game/people-meshes.tsx:800"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -40712,13 +40712,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#CorpseBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:745"
+        "src/components/game/people-meshes.tsx:747"
       ],
       "sourceNames": [
         "CorpseBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:745"
+        "src/components/game/people-meshes.tsx:747"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -40813,13 +40813,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#CraftingBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:676"
+        "src/components/game/people-meshes.tsx:678"
       ],
       "sourceNames": [
         "CraftingBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:676"
+        "src/components/game/people-meshes.tsx:678"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -40930,13 +40930,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#CraftingTool",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:654"
+        "src/components/game/people-meshes.tsx:656"
       ],
       "sourceNames": [
         "CraftingTool"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:654"
+        "src/components/game/people-meshes.tsx:656"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -41027,13 +41027,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#ExtractionBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:766"
+        "src/components/game/people-meshes.tsx:768"
       ],
       "sourceNames": [
         "ExtractionBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:766"
+        "src/components/game/people-meshes.tsx:768"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -41184,13 +41184,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Figure",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:858"
+        "src/components/game/people-meshes.tsx:860"
       ],
       "sourceNames": [
         "Figure"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:858"
+        "src/components/game/people-meshes.tsx:860"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -41781,13 +41781,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#FishingRod",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:296"
+        "src/components/game/people-meshes.tsx:298"
       ],
       "sourceNames": [
         "FishingRod"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:296"
+        "src/components/game/people-meshes.tsx:298"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -41847,13 +41847,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#GatheringBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:723"
+        "src/components/game/people-meshes.tsx:725"
       ],
       "sourceNames": [
         "GatheringBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:723"
+        "src/components/game/people-meshes.tsx:725"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -41972,13 +41972,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#GatheringTool",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:699"
+        "src/components/game/people-meshes.tsx:701"
       ],
       "sourceNames": [
         "GatheringTool"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:699"
+        "src/components/game/people-meshes.tsx:701"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -42139,13 +42139,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Hatchet",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:113"
+        "src/components/game/people-meshes.tsx:115"
       ],
       "sourceNames": [
         "Hatchet"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:113"
+        "src/components/game/people-meshes.tsx:115"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -42204,13 +42204,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Held",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:281"
+        "src/components/game/people-meshes.tsx:283"
       ],
       "sourceNames": [
         "Held"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:281"
+        "src/components/game/people-meshes.tsx:283"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -42362,13 +42362,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Hoe",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:311"
+        "src/components/game/people-meshes.tsx:313"
       ],
       "sourceNames": [
         "Hoe"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:311"
+        "src/components/game/people-meshes.tsx:313"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -42427,13 +42427,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Knife",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:128"
+        "src/components/game/people-meshes.tsx:130"
       ],
       "sourceNames": [
         "Knife"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:128"
+        "src/components/game/people-meshes.tsx:130"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -42491,13 +42491,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Mace",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:177"
+        "src/components/game/people-meshes.tsx:179"
       ],
       "sourceNames": [
         "Mace"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:177"
+        "src/components/game/people-meshes.tsx:179"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -42623,13 +42623,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#MeleeSwingArc",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:341"
+        "src/components/game/people-meshes.tsx:343"
       ],
       "sourceNames": [
         "MeleeSwingArc"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:341"
+        "src/components/game/people-meshes.tsx:343"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -42701,13 +42701,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#NpcInteractionBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:837"
+        "src/components/game/people-meshes.tsx:839"
       ],
       "sourceNames": [
         "NpcInteractionBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:837"
+        "src/components/game/people-meshes.tsx:839"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -42810,13 +42810,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#PalmFlame",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:382"
+        "src/components/game/people-meshes.tsx:384"
       ],
       "sourceNames": [
         "PalmFlame"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:382"
+        "src/components/game/people-meshes.tsx:384"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -42923,13 +42923,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#People",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:1228"
+        "src/components/game/people-meshes.tsx:1230"
       ],
       "sourceNames": [
         "People"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:1228"
+        "src/components/game/people-meshes.tsx:1230"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -42992,13 +42992,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Pick",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:326"
+        "src/components/game/people-meshes.tsx:328"
       ],
       "sourceNames": [
         "Pick"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:326"
+        "src/components/game/people-meshes.tsx:328"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -43057,13 +43057,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Shield",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:261"
+        "src/components/game/people-meshes.tsx:263"
       ],
       "sourceNames": [
         "Shield"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:261"
+        "src/components/game/people-meshes.tsx:263"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -43128,13 +43128,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Staff",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:192"
+        "src/components/game/people-meshes.tsx:194"
       ],
       "sourceNames": [
         "Staff"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:192"
+        "src/components/game/people-meshes.tsx:194"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -43192,13 +43192,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Sword",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:143"
+        "src/components/game/people-meshes.tsx:145"
       ],
       "sourceNames": [
         "Sword"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:143"
+        "src/components/game/people-meshes.tsx:145"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -43256,13 +43256,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Torch",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:241"
+        "src/components/game/people-meshes.tsx:243"
       ],
       "sourceNames": [
         "Torch"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:241"
+        "src/components/game/people-meshes.tsx:243"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
