@@ -1,0 +1,7 @@
+# Tool envelope spike — not accepted
+
+Browser-only diagnostic using candidate-silhouette-clearing. Original materials retained. Clone geometry at existing mesh anchors: head/reel XYZ multiplied by(1.45,1.7,1.3); handle XYZ by(1.4,1,1.4). Originals restored and clones disposed after capture. No asset, runtime, grip, camera or animation edits. This deliberately exceeds original part-bound contracts only in the disposable experiment; it is not integrated geometry and old bounds tests are not relaxed.
+
+Eight tool/device before-after pairs completed,25 structural checks pass,8 baseline frame samples. All16 screenshots reconciled into native-resolution comparison-native.png. Visual inspection of all eight pairs finds slightly stronger detail, notably fishing reel, but no reliably identifiable tool silhouettes. Working ends remain crowded against body/hands. Reject enlarged/thicker geometry alone as sufficient readability fix. Frame samples taken after restoring original geometry are not candidate performance evidence. No real action or animation acceptance claimed.
+
+Evidence: art/verification/tools/candidate-silhouette-clearing/{results.json,comparison-native.png,*-before.png,*-after.png}. Preview unchanged. Next investigation should inspect action-facing/pose visibility rather than repeat idle palette or uniform scale experiments. Changing grip or camera is outside the current preserve-grip contract and must not be silently introduced.
