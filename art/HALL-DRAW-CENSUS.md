@@ -1,0 +1,7 @@
+# Hall submitted-draw census
+
+Single current mobile hall frame after8500ms settle, all approved assets on. Diagnostic wraps renderer.renderBufferDirect and records per-call renderer.info triangle deltas, restoring wrappers after render.477 invocations,475 actual draw calls; summed traced triangles6986023 exactly reconcile to renderer.info. Zero-triangle invocations explain call difference. Paths group unnamed meshes and are not unique object identifiers.
+
+Harvestable oak trunks:3065088 submitted triangles; crowns884160. Combined56.5% of frame submissions.921 instances each, submitted in both MeshDepthMaterial shadow and MeshStandardMaterial passes. Depth materials total3229168 triangles. Several unnamed cylinder/cone/dodecahedron batches submit16384 instances each. These full-capacity counts are a concrete investigation target, NOT yet proof that instances are unused or safe to trim. Geometry submission counts do not measure GPU time, fragment cost, or establish causality for slow frames.
+
+Artifacts: hall-draw-census.json contains all raw invocations; hall-draw-summary.json aggregates all rows programmatically. No application source/assets/deployment changed. Next: locate high-capacity instance writers and determine whether active counts can be bounded without altering visible instances, picking IDs, shadows or streaming. Preserve all approved art. Original performance acceptance remains blocked.

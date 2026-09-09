@@ -1,0 +1,78 @@
+{
+  "totals": {
+    "frame": 456,
+    "calls": 475,
+    "triangles": 6986023,
+    "points": 0,
+    "lines": 0
+  },
+  "tracedTriangles": 6986023,
+  "materialTriangles": {
+    "MeshDepthMaterial": 3229168,
+    "ShaderMaterial": 1216,
+    "MeshBasicMaterial": 1448,
+    "MeshStandardMaterial": 3754191
+  },
+  "top": [
+    [
+      "Scene/Group/Group/harvestable-oak-trunks BufferGeometry",
+      3065088
+    ],
+    [
+      "Scene/Group/Mesh DodecahedronGeometry",
+      1179648
+    ],
+    [
+      "Scene/Group/Mesh CylinderGeometry",
+      983040
+    ],
+    [
+      "Scene/Group/Group/harvestable-oak-crowns BufferGeometry",
+      884160
+    ],
+    [
+      "Scene/Group/Mesh ConeGeometry",
+      502720
+    ],
+    [
+      "Scene/Group/Mesh BufferGeometry",
+      134632
+    ],
+    [
+      "Scene/Group/Mesh BoxGeometry",
+      33600
+    ],
+    [
+      "Scene/Group/Group/Mesh BoxGeometry",
+      25332
+    ],
+    [
+      "Scene/Group/lanternwood-soft-canopies DodecahedronGeometry",
+      19584
+    ],
+    [
+      "Scene/Group/far-horizon-trees ConeGeometry",
+      17600
+    ],
+    [
+      "Scene/lanternwood-starting-town/lanternwood-decoration/lanternwood-box-craft RoundedBoxGeometry",
+      16200
+    ],
+    [
+      "Scene/lanternwood-starting-town/lanternwood-decoration/lanternwood-round-craft DodecahedronGeometry",
+      15480
+    ],
+    [
+      "Scene/Group/emberhall-npc-figure/Mesh BufferGeometry",
+      11312
+    ],
+    [
+      "Scene/Group/Group/blender-tavern-exterior/tavern-exterior/Cube115 BufferGeometry",
+      10430
+    ],
+    [
+      "Scene/Group/Group/blender-farm-exterior/farm-exterior BufferGeometry",
+      7976
+    ]
+  ]
+}
