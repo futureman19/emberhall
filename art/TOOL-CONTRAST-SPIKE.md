@@ -1,0 +1,7 @@
+# Tool contrast spike — not accepted
+
+Browser-only experiment; no application source/material/geometry changes. Clone each of the two tool materials temporarily, set head/reel to #d4dce0 and handle to #603a24, capture at unchanged gameplay camera, then restore/dispose clones. Four tools x desktop/mobile = eight paired cases. Results in art/verification/tools/candidate-contrast-retry/results.json:25 checks pass,8 samples. Original candidate-contrast-spike attempt timed out navigating and is retained.
+
+Normal-camera mobile hatchet baseline and candidate were independently inspected. Neither shows a confidently identifiable held head/handle: foreground trees and the market framework obscure the player/tool. The UI tool icon must not be mistaken for the held model. Contrast-only candidate therefore NOT accepted as a readability fix. This does not prove the color treatment cannot help exposed tools; it establishes this unchanged town fixture remains unreadable. No visual verdict is asserted for the other seven pairs. Frame samples are not performance clearance.
+
+Next: separate exposed-tool contrast evaluation from ordinary-town occlusion acceptance. Do not adopt a world-wide tree fade or tool scale change implicitly. Existing preview remains unchanged. Raw paired PNGs/results retained locally. A montage attempt failed because the default Python lacks Pillow; original PNGs were inspected directly instead.
