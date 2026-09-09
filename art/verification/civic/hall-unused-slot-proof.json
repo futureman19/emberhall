@@ -1,0 +1,82 @@
+{
+  "scope": "Current civic renderer in both arms, mobile hall interior, fixed fixture/noon/clear. Off aborts only new Phase1 props/signs. CPU render submission is NOT GPU execution time. Diagnostic does not waive original failed gates.",
+  "order": [
+    "on"
+  ],
+  "frames": 300,
+  "settleMs": 8500,
+  "runs": [
+    {
+      "rows": [
+        {
+          "old": 16384,
+          "used": 921,
+          "geometry": "CylinderGeometry"
+        },
+        {
+          "old": 16384,
+          "used": 921,
+          "geometry": "ConeGeometry"
+        },
+        {
+          "old": 16384,
+          "used": 0,
+          "geometry": "CylinderGeometry"
+        },
+        {
+          "old": 16384,
+          "used": 0,
+          "geometry": "ConeGeometry"
+        },
+        {
+          "old": 16384,
+          "used": 107,
+          "geometry": "DodecahedronGeometry"
+        },
+        {
+          "old": 700,
+          "used": 217,
+          "geometry": "BoxGeometry"
+        },
+        {
+          "old": 700,
+          "used": 86,
+          "geometry": "BoxGeometry"
+        },
+        {
+          "old": 700,
+          "used": 49,
+          "geometry": "ConeGeometry"
+        },
+        {
+          "old": 700,
+          "used": 62,
+          "geometry": "BoxGeometry"
+        },
+        {
+          "old": 32,
+          "used": 0,
+          "geometry": "BoxGeometry"
+        }
+      ],
+      "beforeInfo": {
+        "frame": 456,
+        "calls": 478,
+        "triangles": 6986099,
+        "points": 0,
+        "lines": 0
+      },
+      "afterInfo": {
+        "frame": 457,
+        "calls": 475,
+        "triangles": 4357439,
+        "points": 0,
+        "lines": 0
+      },
+      "pixelsEqual": true,
+      "restoredPixelsEqual": true
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

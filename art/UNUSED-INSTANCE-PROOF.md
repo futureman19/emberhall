@@ -1,0 +1,7 @@
+# Unused instance-slot proof
+
+Source root cause located in src/components/game/terrain.tsx hideRest: unused suffix matrices translated to y=-40, scaled0.01, but mesh.count stays at full capacity. Rendering still submits these hidden slots. Browser-only exact same synchronous scene/camera test limits only matching hidden suffixes then restores original counts. No matrices, colors, instance IDs or gameplay state changed.
+
+hall-unused-slot-proof.json: ten batches reduced, including16384-capacity terrain batches with921,921,0,0,107 used slots. Submitted triangles6986099 ->4357439 (37.6% reduction). Exact canvas PNG equality before/trimmed and before/restored both true, including normal shadow rendering in this hall frame. No screenshot claim for other world states. This is geometry-work reduction, not measured frame-time speedup. One extra32-slot box batch also matched; application implementation must be scoped to verified terrain writer, not blindly trim every scene batch.
+
+No runtime edit or deployment yet. Next safe implementation: set terrain mesh.count to known active prefix in hideRest; verify shrink/grow/empty batches, capacity reuse and index-to-tile preservation, then movement/streaming/real picking and visual parity across desktop/mobile, full gates and performance remeasure before preview deployment. Raw proof retained. Current proof's inherited ABBA metadata is generic boilerplate; actual runs contain one synchronous before/after/restored snapshot, not300 timing frames.
