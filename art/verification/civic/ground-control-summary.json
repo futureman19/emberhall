@@ -1,0 +1,50 @@
+[
+  {
+    "arm": "ground-double-a",
+    "tool": "hatchet",
+    "maxMs": 266.59999999999854,
+    "frames": 10
+  },
+  {
+    "arm": "ground-double-a",
+    "tool": "hoe",
+    "maxMs": 233.29999999999927,
+    "frames": 33
+  },
+  {
+    "arm": "ground-shared-a",
+    "tool": "hatchet",
+    "maxMs": 233.29999999999927,
+    "frames": 10
+  },
+  {
+    "arm": "ground-shared-a",
+    "tool": "hoe",
+    "maxMs": 183.29999999999927,
+    "frames": 33
+  },
+  {
+    "arm": "ground-shared-b",
+    "tool": "hatchet",
+    "maxMs": 233.39999999999782,
+    "frames": 11
+  },
+  {
+    "arm": "ground-shared-b",
+    "tool": "hoe",
+    "maxMs": 133.29999999999927,
+    "frames": 31
+  },
+  {
+    "arm": "ground-double-b",
+    "tool": "hatchet",
+    "maxMs": 250,
+    "frames": 11
+  },
+  {
+    "arm": "ground-double-b",
+    "tool": "hoe",
+    "maxMs": 233.29999999999927,
+    "frames": 33
+  }
+]
