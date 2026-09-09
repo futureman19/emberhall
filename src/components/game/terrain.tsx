@@ -1,3 +1,4 @@
+import { createNearBiomeCache } from "./near-biome-cache.ts";
 import { createTerrainPalette } from "./terrain-palette.ts";
 import { sameHorizonUpdateKey } from "./horizon-update-key.ts";
 import { useFrame } from "@react-three/fiber";
@@ -308,6 +309,7 @@ export function Terrain() {
   const rockAt = useRef<{ tx: number; ty: number }[]>([]);
   const origin = useRef({ x: COURT.tx, z: COURT.ty, rev: -1 });
   const rebuildCount = useRef(0);
+  const nearBiome = useMemo(() => createNearBiomeCache(VERT_COUNT), []);
   const resourceSeed = useRef<number | null>(null);
   const resourceVisuals = useMemo(() => createResourceVisualCache(), []);
   const visibleResourceVisuals = useRef<VisibleResourceVisualLookup>(new Map());
@@ -377,6 +379,7 @@ export function Terrain() {
     const landMoved = seedChanged || origin.current.x !== ox || origin.current.z !== oz || origin.current.rev !== rev;
     if (landMoved) {
       rebuildCount.current += 1;
+      nearBiome.begin(w);
       resourceSeed.current = w.seed;
       origin.current = { x: ox, z: oz, rev };
       const pos = geo.attributes.position as THREE.BufferAttribute;
@@ -397,7 +400,7 @@ export function Terrain() {
           arr[i + 1] = t ? groundY(w, wx, wz) : -8.05;
           arr[i + 2] = wz;
           if (t) {
-            const weights = biomeWeights(wx, wz);
+            const weights = nearBiome.sample(iz * VERTS + ix, wx, wz);
             colorAt(w, wx, wz, pal, weights);
             coverAt(w, wx, wz, karr, i, weights);
           } else {
