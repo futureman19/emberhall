@@ -1,0 +1,23 @@
+# Phase 2 tools — bounded review pilot
+
+Parent civic checkpoint 1e6128b. Four existing tools only: hatchet, pick, hoe, fishing_rod. Eight geometry attachments replaced; original parent/mesh transforms, materials, ghost styling and animation callbacks untouched. No src/game changes. Existing original primitives retained on missing/invalid optional art; one shared load, copied world-axis geometry cached for reuse.
+
+## Sources / assets
+Editable art/blender/equipment.blend with eight named parts, independent Blender reopen confirms eight unique export_part values. Reproducible build_equipment.py (overwrites manual source edits) and scripts/measure-tools.mjs. Actual tools.glb 52,408 bytes, eight meshes, 928 triangles total. GLTFLoader tests verify finite coordinates, all eight original local geometry envelopes, complete kit and per-part triangle budgets. Two focused tests red -> green. Runtime original materials override exported authoring palette.
+
+## Runtime and limits
+- Same fixture baseline before integration: nine checks/eight 180-frame samples. Candidate:17 checks/eight samples. Forced tools.glb failure:17 checks/eight samples, all four tools retain original geometry desktop/mobile.
+- Twenty controlled pose records in each candidate/fallback close-up run: idle, three workT samples, ghost for each tool. Initial20 pairs match every mesh transform, opacity and visibility; geometry is the only intended difference. These are sparse pose samples, NOT exhaustive animation-cycle proof.
+- Normal starting-town frames were tree-occluded, retained rather than called a visual pass. Diagnostic isolated close-ups give better silhouette evidence, not normal-camera certification. Pick visibly tapered; other tools restrained. Fine finger contact is not proven from screenshots. Existing grip anchors unchanged.
+- Initial diagnostic ghost->opaque fixture transitions made body geometry disappear in BOTH candidate/fallback; disabling diagnostic shadows did not fix it. Third run samples all opaque poses before ghost and visibly restores body. Root cause not established, not represented as fixed. Preserve first/second raw evidence. No real death/resurrection flow certified.
+- Controlled doVerb gameplay: local2 eight successful cases desktop/mobile: chopping/mining actual typed resource delta2 plus depleted dirt, tilling creates actual plot, fishing adds one fish and preserves water. Disposable tiles/skills/Math.random fixture clearly labeled. First local run reused one resource tile for two node types and failed; corrected disjoint fixture coordinates, not game rules. Screenshots local2 had Guide open, so do not certify unobstructed mobile UI from them.
+
+## Performance
+RTX4060 ANGLE D3D11 recorded in samples. Seven/eight paired p95 comparisons meet +10% relative budget; mobile hoe 33.4 ->49.9ms fails. Draw calls unchanged, rendered triangles increased (including shadow passes). Full raw frames in performance.json and baseline/candidate results. No 60FPS/global performance acceptance; earlier hall/civic/hospitality gaps remain. No budget relaxed.
+
+## Gates / deployment
+Initial lint/typecheck/build passed; scripts198/198 and game561/562: only stale AST coverage ledger failed. Refresh and explicit phase1/civic annotations applied before final rerun. Final lint/typecheck/test/build/auth all exit0. Canonical suites198/198 scripts and562/562 game/components. Renderer source comparison after removing only eight AuthoredToolGeometry wrappers and import is byte-equivalent to parent (normalized text), confirming no grip/material/animation edits.
+
+Local3 and exact deployed action checks8/8 pass. Exact preview https://emberhall-vale-l92t81o1x-andrews-projects-ffe8a9fd.vercel.app/art/phase1-preview.html independently inspected Preview/Ready (dpl_53KtQXAQYMutHhm87UwfvKfFpptt);82 settlement live checks and36 HUD checks pass;24/24 GLB hashes match. Live mobile screenshot confirms world/figure rendered, but minimap occludes recovery toast and prior HOE/TILLING FX label remains in rapidly reset fixture. These screenshots are not accepted as clean tool-action readability proof; real state/inventory assertions, not visible stale labels, establish controlled action success.
+
+Final candidate3/fallback3 twenty pose records match transforms/visibility/opacity; opaque body is visible when opaque poses precede diagnostic ghost transitions. Full animation cycles, real resurrection, normal-camera tool recognition and existing mobile toast overlap remain open. Preview is review-only, not release acceptance. Original workspace/production untouched. Weapons, wearables and other NPC families deferred.

@@ -1,0 +1,20 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+const [label='baseline',url='http://127.0.0.1:8093']=process.argv.slice(2);
+assert.match(label,/^[a-z0-9-]+$/);const out='art/verification/tools/'+label;fs.mkdirSync(out,{recursive:true});assert(!fs.existsSync(out+'/results.json'));
+const r={label,url,checks:[],samples:[],errors:[],tools:[]};const save=()=>fs.writeFileSync(out+'/results.json',JSON.stringify(r,null,2));const check=(name,ok,data)=>{r.checks.push({name,ok:!!ok,data});save();assert(ok,name)};
+const b=await chromium.launch({headless:true,args:['--use-angle=d3d11','--enable-gpu']});const timer=setTimeout(()=>b.close(),160000);
+try{
+const c=await b.newContext();await c.routeWebSocket(/.*/,()=>{});if(label.includes('fallback'))await c.route('**/tools.glb',route=>route.abort());const p=await c.newPage();p.setDefaultTimeout(15000);p.on('pageerror',e=>r.errors.push(e.message));p.on('console',m=>{if(m.type()==='error'&&/shader|WebGL/i.test(m.text()))r.errors.push(m.text())});
+await p.addInitScript(s=>localStorage.setItem('emberhall-save-v4',s),fs.readFileSync('public/art/phase1-review-save.json','utf8'));await p.goto(url+'/?qa=1');await p.getByRole('button',{name:'Continue',exact:true}).click();await p.waitForFunction(()=>window.__ember?.useGame.getState().phase==='playing');await p.waitForLoadState('networkidle');
+await p.evaluate(async()=>{const src=await(await fetch('/src/components/game/world-scene.tsx')).text(),m=src.match(/from\s+["']([^"']*(?:react-three_fiber|@react-three\/fiber)[^"']*)["']/),f=await import(m[1]);window.__tools=f._roots.get(document.querySelector('canvas')).store.getState();window.__ember.useGame.getState().speed(0)});
+for(const [device,size]of [['desktop',{width:1440,height:960}],['mobile',{width:390,height:844}]]){await p.setViewportSize(size);for(const id of ['hatchet','pick','hoe','fishing_rod']){
+await p.evaluate(id=>{const w=window.__ember.getWorld(),s=window.__ember.useGame.getState(),you=w.people.find(p=>p.isPlayer);you.x=256;you.z=304;you.path=[];you.facing=Math.PI;you.ghost=false;w.player.ghost=false;w.player.intent={kind:'idle'};w.player.wear.main=id;w.hour=12;s.select(null);s.setPanel('none');s.speed(0);s.tick(0)},id);await p.waitForTimeout(700);
+const inspect=await p.evaluate(()=>{const s=window.__tools,g=s.scene.getObjectByName('emberhall-player-figure'),meshes=[];g.traverse(o=>{if(o.isMesh)meshes.push({type:o.geometry.type,part:o.geometry.userData.toolPart??null,position:o.position.toArray(),vertices:o.geometry.attributes.position.count})});const v=g.position.clone();v.y+=.8;v.project(s.camera);return{meshes,point:{x:(v.x+1)*innerWidth/2,y:(1-v.y)*innerHeight/2}}});check(device+'-'+id+'-figure',inspect.meshes.length>0);r.tools.push({device,id,...inspect});
+if(label.startsWith('candidate'))check(device+'-'+id+'-two-authored-parts',inspect.meshes.filter(m=>m.part?.startsWith(id+'_')).length===2);if(label.includes('fallback'))check(device+'-'+id+'-original-fallback',inspect.meshes.every(m=>!m.part));
+await p.screenshot({path:out+'/'+device+'-'+id+'.png'});
+const sample=await p.evaluate(()=>new Promise(resolve=>{const times=[];let last;const step=t=>{if(last!==undefined)times.push(t-last);last=t;if(times.length<180)return requestAnimationFrame(step);const sorted=[...times].sort((a,b)=>a-b),g=window.__tools.gl,ctx=g.getContext(),debug=ctx.getExtension('WEBGL_debug_renderer_info');resolve({times,p95:sorted[171],median:sorted[90],calls:g.info.render.calls,triangles:g.info.render.triangles,renderer:debug?ctx.getParameter(debug.UNMASKED_RENDERER_WEBGL):ctx.getParameter(ctx.RENDERER)})};requestAnimationFrame(step)}));r.samples.push({device,id,...sample});save();
+}}
+check('no-errors',r.errors.length===0);r.passed=true;
+}catch(e){r.passed=false;r.failure=e.message;process.exitCode=1}finally{clearTimeout(timer);save();await b.close()}console.log(JSON.stringify({passed:r.passed,checks:r.checks.length,samples:r.samples.length,failure:r.failure}));

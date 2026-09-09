@@ -1,5 +1,6 @@
 import { AuthoredCharacterGeometry, AuthoredCharacterFace, AuthoredCharacterTunic } from "./authored-character.tsx";
 import { Html } from "@react-three/drei";
+import { AuthoredToolGeometry } from "./authored-tool.tsx";
 import { playerVisualYaw } from "./character-facing";
 import { civicCharacterArt, civicVisualYaw } from "./civic-character.ts";
 import { useFrame } from "@react-three/fiber";
@@ -113,11 +114,11 @@ function Hatchet({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.44, 0.04]} rotation={[0.15, 0, 0.35]}>
       <mesh position={[0, 0.16, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.045, 0.42, 0.045]} />
+        <AuthoredToolGeometry part="hatchet_handle"><boxGeometry args={[0.045, 0.42, 0.045]} /></AuthoredToolGeometry>
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0.08, 0.36, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.2, 0.1, 0.07]} />
+        <AuthoredToolGeometry part="hatchet_head"><boxGeometry args={[0.2, 0.1, 0.07]} /></AuthoredToolGeometry>
         <meshStandardMaterial color="#8a8680" metalness={0.45} roughness={0.4} />
       </mesh>
     </group>
@@ -296,11 +297,11 @@ function FishingRod({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.01, -0.28, 0.04]} rotation={[0.18, 0, 0.28]}>
       <mesh position={[0, 0.42, 0]} castShadow={!ghost}>
-        <cylinderGeometry args={[0.018, 0.032, 0.9, 6]} />
+        <AuthoredToolGeometry part="fishing_rod_handle"><cylinderGeometry args={[0.018, 0.032, 0.9, 6]} /></AuthoredToolGeometry>
         <Mat color="#6a4a32" ghost={ghost} />
       </mesh>
       <mesh position={[0, -0.03, 0.035]} rotation={[Math.PI / 2, 0, 0]} castShadow={!ghost}>
-        <torusGeometry args={[0.07, 0.014, 6, 12]} />
+        <AuthoredToolGeometry part="fishing_rod_head"><torusGeometry args={[0.07, 0.014, 6, 12]} /></AuthoredToolGeometry>
         <meshStandardMaterial color="#8a8680" metalness={0.45} roughness={0.4} />
       </mesh>
     </group>
@@ -311,11 +312,11 @@ function Hoe({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.44, 0.04]} rotation={[0.15, 0, 0.35]}>
       <mesh position={[0, 0.16, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.04, 0.44, 0.04]} />
+        <AuthoredToolGeometry part="hoe_handle"><boxGeometry args={[0.04, 0.44, 0.04]} /></AuthoredToolGeometry>
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0.1, 0.38, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.22, 0.05, 0.12]} />
+        <AuthoredToolGeometry part="hoe_head"><boxGeometry args={[0.22, 0.05, 0.12]} /></AuthoredToolGeometry>
         <meshStandardMaterial color="#8a8680" metalness={0.45} roughness={0.4} />
       </mesh>
     </group>
@@ -326,11 +327,11 @@ function Pick({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.44, 0.04]} rotation={[0.15, 0, 0.35]}>
       <mesh position={[0, 0.16, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.04, 0.44, 0.04]} />
+        <AuthoredToolGeometry part="pick_handle"><boxGeometry args={[0.04, 0.44, 0.04]} /></AuthoredToolGeometry>
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0.02, 0.38, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.28, 0.07, 0.06]} />
+        <AuthoredToolGeometry part="pick_head"><boxGeometry args={[0.28, 0.07, 0.06]} /></AuthoredToolGeometry>
         <meshStandardMaterial color="#9a9286" metalness={0.5} roughness={0.38} />
       </mesh>
     </group>
