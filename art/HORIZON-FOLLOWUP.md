@@ -1,0 +1,7 @@
+# Horizon cache follow-up: settings and movement
+
+Graphics verification:8 desktop/mobile transitions through reduction0/shadows on ->30/on ->15/off ->0/on. Actual renderer shadow flag matches requested value. Distant-tree limits2200->1540->1870->2200; count restores2200. In every case cached buffers(count/matrix/color) and PNG pixels exactly match forced uncached recomputation. Settings changed through real settings module in disposable local context, not UI clicks. No preview/user defaults modified.
+
+Whole-frame moving diagnostic: four sequential uncached/cached/cached/uncached mobile traversals using real useTile pathfinding and normal simulation speed along a cleared disposable24-tile corridor. All arrived.2026 moving frames recorded. Uncached p95:50.0/33.4ms; cached49.9/50.0ms; medians16.7ms in all arms. No consistent moving frame-time improvement demonstrated. This is expected scope: exact player position changes invalidate the horizon key while walking. Stationary CPU benefit remains separately measured; no global performance clearance.
+
+Raw evidence horizon-graphics-parity.json and horizon-walking-abba.json. Lint passed after harness changes. No new runtime source change or deployment. Existing isolated preview8491178 remains current. Next performance work should attribute long frames during movement, especially streaming-origin rebuilds, not widen cache tolerances or reduce scenery.
