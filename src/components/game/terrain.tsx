@@ -6,7 +6,7 @@ import type { MutableRefObject } from "react";
 import * as THREE from "three";
 import { COURT, MAP, VIEW } from "@/game/atlas";
 import { biomeAt, biomeWeights } from "@/game/biome";
-import { createTerrainBlocker } from "./terrain-blocker";
+import { buildingBox } from "@/game/building-size";
 import { GROUND_SHADER, makeDirtTex, makeGrassTex } from "@/game/ground-tex";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
@@ -112,6 +112,16 @@ const GROUND_FADE = {
   uFog: { value: new THREE.Color("#3d4c2c") },
 };
 
+function blocked(world: World, tx: number, ty: number) {
+  if (world.plots) {
+    for (const p of world.plots) if (p.tx === tx && p.ty === ty) return true;
+  }
+  for (const b of world.buildings) {
+    const box = buildingBox(b.kind, b.tx, b.ty);
+    if (tx + 0.5 > box.x0 && tx + 0.5 < box.x1 && ty + 0.5 > box.z0 && ty + 0.5 < box.z1) return true;
+  }
+  return false;
+}
 
 function treeGrow(tx: number, ty: number) {
   return TREE_WORLD_SILHOUETTE.minimumGrow
@@ -435,7 +445,6 @@ export function Terrain() {
     const oakBatches = [oakTrunk.current, oakCrown.current, oakTrunkGhost.current, oakCrownGhost.current];
     for (const mesh of oakBatches) ensureColor(mesh, count);
     if (landMoved) visibleResourceVisuals.current.clear();
-    const blocked = createTerrainBlocker(w);
     let li = 0;
     let si = 0;
     let gi = 0;
@@ -580,7 +589,7 @@ export function Terrain() {
         }
         const wooded = t.kind === "tree";
         const open = t.kind === "grass" || t.kind === "sand" || t.kind === "snow" || t.kind === "marsh";
-        if ((wooded || open) && !blocked(tx, ty) && Math.hypot(tx - px, ty - pz) < visibleHalf - 3) {
+        if ((wooded || open) && !blocked(w, tx, ty) && Math.hypot(tx - px, ty - pz) < visibleHalf - 3) {
           const climate = biomeAt(tx, ty);
           const roll = hash2(tx, ty, w.seed + 41);
           let flora = -1;
