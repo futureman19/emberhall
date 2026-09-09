@@ -1,0 +1,17 @@
+[
+  {
+    "label": "active-count-repro-0",
+    "passed": true,
+    "cases": 6
+  },
+  {
+    "label": "active-count-repro-1",
+    "passed": true,
+    "cases": 6
+  },
+  {
+    "label": "active-count-repro-2",
+    "passed": true,
+    "cases": 6
+  }
+]
