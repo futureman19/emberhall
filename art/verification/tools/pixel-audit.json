@@ -1,0 +1,114 @@
+[
+  {
+    "device": "desktop",
+    "tool": "hatchet",
+    "part": "hatchet_handle",
+    "width": 5.456154745845197,
+    "height": 11.14069062653283
+  },
+  {
+    "device": "desktop",
+    "tool": "hatchet",
+    "part": "hatchet_head",
+    "width": 6.821971631846395,
+    "height": 5.319351844701146
+  },
+  {
+    "device": "desktop",
+    "tool": "pick",
+    "part": "pick_handle",
+    "width": 5.407829800649893,
+    "height": 11.472003543501899
+  },
+  {
+    "device": "desktop",
+    "tool": "pick",
+    "part": "pick_head",
+    "width": 8.094695348999494,
+    "height": 4.9676182823448585
+  },
+  {
+    "device": "desktop",
+    "tool": "hoe",
+    "part": "hoe_handle",
+    "width": 5.407829800649893,
+    "height": 11.472003543501899
+  },
+  {
+    "device": "desktop",
+    "tool": "hoe",
+    "part": "hoe_head",
+    "width": 7.830066527236681,
+    "height": 5.244636170097863
+  },
+  {
+    "device": "desktop",
+    "tool": "fishing_rod",
+    "part": "fishing_rod_handle",
+    "width": 9.464292667157451,
+    "height": 22.36905635891435
+  },
+  {
+    "device": "desktop",
+    "tool": "fishing_rod",
+    "part": "fishing_rod_head",
+    "width": 7.386951446706462,
+    "height": 5.532104930532114
+  },
+  {
+    "device": "mobile",
+    "tool": "hatchet",
+    "part": "hatchet_handle",
+    "width": 4.796869380722256,
+    "height": 9.794523842493447
+  },
+  {
+    "device": "mobile",
+    "tool": "hatchet",
+    "part": "hatchet_head",
+    "width": 5.997650059664778,
+    "height": 4.676596830133121
+  },
+  {
+    "device": "mobile",
+    "tool": "pick",
+    "part": "pick_handle",
+    "width": 4.754383699737957,
+    "height": 10.085803115328815
+  },
+  {
+    "device": "mobile",
+    "tool": "pick",
+    "part": "pick_head",
+    "width": 7.1165863276620485,
+    "height": 4.367364406561478
+  },
+  {
+    "device": "mobile",
+    "tool": "hoe",
+    "part": "hoe_handle",
+    "width": 4.754383699737957,
+    "height": 10.085803115328815
+  },
+  {
+    "device": "mobile",
+    "tool": "hoe",
+    "part": "hoe_head",
+    "width": 6.883933488528925,
+    "height": 4.610909299544403
+  },
+  {
+    "device": "mobile",
+    "tool": "fishing_rod",
+    "part": "fishing_rod_handle",
+    "width": 8.320690636542594,
+    "height": 19.66612871554554
+  },
+  {
+    "device": "mobile",
+    "tool": "fishing_rod",
+    "part": "fishing_rod_head",
+    "width": 6.4943614802293155,
+    "height": 4.863642251426143
+  }
+]
