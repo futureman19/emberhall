@@ -1,0 +1,26 @@
+[
+  {
+    "arm": "hoe-bypass-a",
+    "maxMs": 216.79999999999927,
+    "frames": 31,
+    "rebuildDelta": 1
+  },
+  {
+    "arm": "hoe-cache-a",
+    "maxMs": 300,
+    "frames": 30,
+    "rebuildDelta": 1
+  },
+  {
+    "arm": "hoe-cache-b",
+    "maxMs": 233.29999999999927,
+    "frames": 31,
+    "rebuildDelta": 1
+  },
+  {
+    "arm": "hoe-bypass-b",
+    "maxMs": 266.60000000000036,
+    "frames": 31,
+    "rebuildDelta": 1
+  }
+]
