@@ -1,3 +1,4 @@
+import { floraRollEligible } from "./flora-eligibility.ts";
 import { createTerrainPalette } from "./terrain-palette.ts";
 import { sameHorizonUpdateKey } from "./horizon-update-key.ts";
 import { useFrame } from "@react-three/fiber";
@@ -594,7 +595,8 @@ export function Terrain() {
         }
         const wooded = t.kind === "tree";
         const open = t.kind === "grass" || t.kind === "sand" || t.kind === "snow" || t.kind === "marsh";
-        if ((wooded || open) && !blocked(w, tx, ty) && Math.hypot(tx - px, ty - pz) < visibleHalf - 3) {
+        if ((wooded || open) && floraRollEligible(wooded, hash2(tx, ty, w.seed + (wooded ? 51 : 41)))
+          && !blocked(w, tx, ty) && Math.hypot(tx - px, ty - pz) < visibleHalf - 3) {
           const climate = biomeAt(tx, ty);
           const roll = hash2(tx, ty, w.seed + 41);
           let flora = -1;
