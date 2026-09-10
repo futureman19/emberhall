@@ -1,0 +1,155 @@
+{
+  "scope": "Lane3 evidence consolidation, not whole-game acceptance. Local controller dev renderer; no production deployment.",
+  "rows": [
+    {
+      "kind": "dormitory",
+      "modelPlacement": "pass",
+      "ghostStructure": "pass",
+      "desktopPointer": "pass",
+      "touchPointer": "pass",
+      "touchFixture": "court-centered original",
+      "desktopSampledAnimation": "pass",
+      "buildMenu": "not-tested",
+      "mobileAnimation": "not-tested",
+      "visualLegibility": "not-tested",
+      "physicalMobile": "not-tested",
+      "fallbackFailureRendering": "not-retested"
+    },
+    {
+      "kind": "kitchen",
+      "modelPlacement": "pass",
+      "ghostStructure": "pass",
+      "desktopPointer": "pass",
+      "touchPointer": "pass",
+      "touchFixture": "court-centered original",
+      "desktopSampledAnimation": "pass",
+      "buildMenu": "not-tested",
+      "mobileAnimation": "not-tested",
+      "visualLegibility": "not-tested",
+      "physicalMobile": "not-tested",
+      "fallbackFailureRendering": "not-retested"
+    },
+    {
+      "kind": "yard",
+      "modelPlacement": "pass",
+      "ghostStructure": "pass",
+      "desktopPointer": "pass",
+      "touchPointer": "pass",
+      "touchFixture": "court-centered original",
+      "desktopSampledAnimation": "pass",
+      "buildMenu": "not-tested",
+      "mobileAnimation": "not-tested",
+      "visualLegibility": "not-tested",
+      "physicalMobile": "not-tested",
+      "fallbackFailureRendering": "not-retested"
+    },
+    {
+      "kind": "market",
+      "modelPlacement": "pass",
+      "ghostStructure": "pass",
+      "desktopPointer": "pass",
+      "touchPointer": "pass",
+      "touchFixture": "court-centered original",
+      "desktopSampledAnimation": "pass",
+      "buildMenu": "not-tested",
+      "mobileAnimation": "not-tested",
+      "visualLegibility": "not-tested",
+      "physicalMobile": "not-tested",
+      "fallbackFailureRendering": "not-retested"
+    },
+    {
+      "kind": "forge",
+      "modelPlacement": "pass",
+      "ghostStructure": "pass",
+      "desktopPointer": "pass",
+      "touchPointer": "pass",
+      "touchFixture": "court-centered original",
+      "desktopSampledAnimation": "pass",
+      "buildMenu": "not-tested",
+      "mobileAnimation": "not-tested",
+      "visualLegibility": "not-tested",
+      "physicalMobile": "not-tested",
+      "fallbackFailureRendering": "not-retested"
+    },
+    {
+      "kind": "tavern",
+      "modelPlacement": "pass",
+      "ghostStructure": "pass",
+      "desktopPointer": "pass",
+      "touchPointer": "pass",
+      "touchFixture": "court-centered original",
+      "desktopSampledAnimation": "pass",
+      "buildMenu": "not-tested",
+      "mobileAnimation": "not-tested",
+      "visualLegibility": "not-tested",
+      "physicalMobile": "not-tested",
+      "fallbackFailureRendering": "not-retested"
+    },
+    {
+      "kind": "notice",
+      "modelPlacement": "pass",
+      "ghostStructure": "pass",
+      "desktopPointer": "pass",
+      "touchPointer": "pass",
+      "touchFixture": "court-centered original",
+      "desktopSampledAnimation": "pass",
+      "buildMenu": "not-tested",
+      "mobileAnimation": "not-tested",
+      "visualLegibility": "not-tested",
+      "physicalMobile": "not-tested",
+      "fallbackFailureRendering": "not-retested"
+    },
+    {
+      "kind": "board",
+      "modelPlacement": "pass",
+      "ghostStructure": "pass",
+      "desktopPointer": "pass",
+      "touchPointer": "pass",
+      "touchFixture": "court-centered original",
+      "desktopSampledAnimation": "pass",
+      "buildMenu": "not-tested",
+      "mobileAnimation": "not-tested",
+      "visualLegibility": "not-tested",
+      "physicalMobile": "not-tested",
+      "fallbackFailureRendering": "not-retested"
+    },
+    {
+      "kind": "farm",
+      "modelPlacement": "pass",
+      "ghostStructure": "pass",
+      "desktopPointer": "pass",
+      "touchPointer": "pass",
+      "touchFixture": "site-centered followup",
+      "desktopSampledAnimation": "pass",
+      "buildMenu": "not-tested",
+      "mobileAnimation": "not-tested",
+      "visualLegibility": "not-tested",
+      "physicalMobile": "not-tested",
+      "fallbackFailureRendering": "not-retested"
+    }
+  ],
+  "totals": {
+    "kinds": 9,
+    "modelPlacement": 9,
+    "ghostStructure": 9,
+    "desktopPointer": 9,
+    "touchPointerAcrossTwoFixtures": 9,
+    "desktopSampledAnimation": 9
+  },
+  "excludedPositivePlacements": {
+    "hall": "prohibited by siteError",
+    "bank": "prohibited by siteError"
+  },
+  "preservedFailures": [
+    "touch-placement/results.json: farm projected outside viewport; separate followup only"
+  ],
+  "acceptanceComplete": false,
+  "remaining": [
+    "Build-menu interaction",
+    "Mobile rendered construction lifecycle",
+    "Animation pixel legibility/occlusion",
+    "Physical mobile",
+    "Failure-fallback rendering not rerun"
+  ],
+  "note": "Existing original fallback evidence retained outside this lane. No blanket clearance."
+}
