@@ -1,0 +1,19 @@
+{
+  "cases": [
+    {
+      "width": 1440,
+      "x": 256,
+      "buffers": true,
+      "pixels": true
+    },
+    {
+      "width": 1440,
+      "x": 4,
+      "buffers": false,
+      "pixels": false
+    }
+  ],
+  "errors": [],
+  "passed": false,
+  "failure": "The expression evaluated to a falsy value:\n\n  assert(proof.buffers&&proof.pixels)\n"
+}
