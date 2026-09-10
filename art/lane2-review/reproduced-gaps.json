@@ -1,0 +1,15 @@
+{
+  "scope": "Negative reproductions against isolated proposal; not runtime regression",
+  "rows": [
+    {
+      "case": "replacement buffers",
+      "mode": "skip",
+      "differences": 340843
+    },
+    {
+      "case": "biome anchor mutation",
+      "mode": "skip",
+      "differences": 168921
+    }
+  ]
+}
