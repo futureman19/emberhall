@@ -1,0 +1,1112 @@
+{
+  "url": "http://127.0.0.1:8102",
+  "scope": "Disposable fixture tiles, max skills, controlled successful RNG, actual doVerb and real-time simulation; short RAF traces include completion, not sustained FPS benchmark. Not natural-RNG or pointer-selection proof.",
+  "checks": [
+    {
+      "device": "mobile",
+      "id": "hatchet",
+      "ok": true,
+      "terrainBefore": {
+        "origin": {
+          "x": 224,
+          "z": 256,
+          "rev": 10
+        },
+        "count": 3
+      },
+      "times": [
+        33.400000000001455,
+        33.20000000000073,
+        16.799999999999272,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        33.29999999999927,
+        16.700000000000728,
+        16.600000000002183,
+        33.39999999999782,
+        16.600000000002183,
+        33.29999999999927,
+        33.39999999999782,
+        16.700000000000728,
+        33.29999999999927,
+        16.600000000002183,
+        16.700000000000728,
+        16.69999999999709,
+        33.30000000000291,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        100,
+        33.29999999999927,
+        16.799999999999272
+      ],
+      "timeline": [
+        {
+          "t": 18276.8,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.020300000071525572
+        },
+        {
+          "t": 18310.2,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.05690000009536743
+        },
+        {
+          "t": 18343.4,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.08450000011920929
+        },
+        {
+          "t": 18360.2,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.10160000014305115
+        },
+        {
+          "t": 18376.8,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.122200000166893
+        },
+        {
+          "t": 18393.5,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.14230000019073485
+        },
+        {
+          "t": 18410.1,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.161200000166893
+        },
+        {
+          "t": 18426.8,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.179200000166893
+        },
+        {
+          "t": 18460.1,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.19980000019073485
+        },
+        {
+          "t": 18476.8,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.21480000019073486
+        },
+        {
+          "t": 18493.4,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.24180000019073486
+        },
+        {
+          "t": 18526.8,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.2704000002145767
+        },
+        {
+          "t": 18543.4,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.29590000021457674
+        },
+        {
+          "t": 18576.7,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.32130000030994416
+        },
+        {
+          "t": 18610.1,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.35250000035762785
+        },
+        {
+          "t": 18626.8,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.37820000040531154
+        },
+        {
+          "t": 18660.1,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.40370000040531157
+        },
+        {
+          "t": 18676.7,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.42530000042915345
+        },
+        {
+          "t": 18693.4,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.440900000333786
+        },
+        {
+          "t": 18710.1,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.45860000038146975
+        },
+        {
+          "t": 18743.4,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.4809000004529953
+        },
+        {
+          "t": 18760.1,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.4957000005245209
+        },
+        {
+          "t": 18776.7,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 10
+          },
+          "rebuilds": 3,
+          "landRev": 10,
+          "intent": "chop",
+          "workT": 0.511100000500679
+        },
+        {
+          "t": 18793.4,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 11
+          },
+          "rebuilds": 4,
+          "landRev": 11,
+          "intent": "none",
+          "workT": 0.5284000005722046
+        },
+        {
+          "t": 18893.4,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 11
+          },
+          "rebuilds": 4,
+          "landRev": 11,
+          "intent": "none",
+          "workT": 0
+        },
+        {
+          "t": 18926.7,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 11
+          },
+          "rebuilds": 4,
+          "landRev": 11,
+          "intent": "none",
+          "workT": 0
+        },
+        {
+          "t": 18943.5,
+          "position": [
+            219,
+            260
+          ],
+          "origin": {
+            "x": 224,
+            "z": 256,
+            "rev": 11
+          },
+          "rebuilds": 4,
+          "landRev": 11,
+          "intent": "none",
+          "workT": 0
+        }
+      ],
+      "frames": 26,
+      "maxFrameMs": 100,
+      "intent": "chop",
+      "after": "none",
+      "resources": 2,
+      "fish": 0,
+      "plot": false,
+      "tile": "dirt",
+      "toast": "Recovered 2 sound oak logs."
+    },
+    {
+      "device": "mobile",
+      "id": "hoe",
+      "ok": true,
+      "terrainBefore": {
+        "origin": {
+          "x": 256,
+          "z": 256,
+          "rev": 12
+        },
+        "count": 5
+      },
+      "times": [
+        16.700000000000728,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.799999999999272,
+        16.600000000002183,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.700000000000728,
+        16.600000000002183,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.69999999999709,
+        16.600000000002183,
+        16.700000000000728,
+        16.599999999998545,
+        16.700000000000728,
+        16.599999999998545,
+        16.799999999999272,
+        16.600000000002183,
+        16.599999999998545,
+        16.700000000000728,
+        16.700000000000728,
+        16.700000000000728,
+        83.29999999999927,
+        16.700000000000728,
+        16.599999999998545
+      ],
+      "timeline": [
+        {
+          "t": 27959.7,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.019
+        },
+        {
+          "t": 27976.4,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.03389999997615814
+        },
+        {
+          "t": 27993.1,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.050300000071525575
+        },
+        {
+          "t": 28009.8,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.06640000009536744
+        },
+        {
+          "t": 28026.4,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.08290000009536744
+        },
+        {
+          "t": 28043,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.09890000009536744
+        },
+        {
+          "t": 28059.8,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.11580000007152558
+        },
+        {
+          "t": 28076.4,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.13290000009536743
+        },
+        {
+          "t": 28093,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.14960000014305114
+        },
+        {
+          "t": 28109.7,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.16500000023841857
+        },
+        {
+          "t": 28126.4,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.18130000030994414
+        },
+        {
+          "t": 28143.1,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.19880000030994416
+        },
+        {
+          "t": 28159.8,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.21480000030994417
+        },
+        {
+          "t": 28176.4,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.23160000026226046
+        },
+        {
+          "t": 28193,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.24740000033378604
+        },
+        {
+          "t": 28209.7,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.264400000333786
+        },
+        {
+          "t": 28226.4,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.2805000003576279
+        },
+        {
+          "t": 28243.1,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.2974000004529953
+        },
+        {
+          "t": 28259.7,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.3140000004768372
+        },
+        {
+          "t": 28276.4,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.3298000004291535
+        },
+        {
+          "t": 28293.1,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.3467000004053116
+        },
+        {
+          "t": 28309.7,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.3631000003814698
+        },
+        {
+          "t": 28326.4,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.3803000003099442
+        },
+        {
+          "t": 28343,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.3961000002622605
+        },
+        {
+          "t": 28359.7,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.4122000002861024
+        },
+        {
+          "t": 28376.3,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.4297000002861024
+        },
+        {
+          "t": 28393.1,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.44640000033378613
+        },
+        {
+          "t": 28409.7,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.4633000003099443
+        },
+        {
+          "t": 28426.3,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.47820000028610243
+        },
+        {
+          "t": 28443,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.49490000033378617
+        },
+        {
+          "t": 28459.7,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 12
+          },
+          "rebuilds": 5,
+          "landRev": 12,
+          "intent": "till",
+          "workT": 0.5122000004053118
+        },
+        {
+          "t": 28476.4,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 13
+          },
+          "rebuilds": 6,
+          "landRev": 13,
+          "intent": "none",
+          "workT": 0.5286000005006792
+        },
+        {
+          "t": 28559.7,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 13
+          },
+          "rebuilds": 6,
+          "landRev": 13,
+          "intent": "none",
+          "workT": 0
+        },
+        {
+          "t": 28576.4,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 13
+          },
+          "rebuilds": 6,
+          "landRev": 13,
+          "intent": "none",
+          "workT": 0
+        },
+        {
+          "t": 28593,
+          "position": [
+            255,
+            260
+          ],
+          "origin": {
+            "x": 256,
+            "z": 256,
+            "rev": 13
+          },
+          "rebuilds": 6,
+          "landRev": 13,
+          "intent": "none",
+          "workT": 0
+        }
+      ],
+      "frames": 34,
+      "maxFrameMs": 83.29999999999927,
+      "intent": "till",
+      "after": "none",
+      "resources": 0,
+      "fish": 0,
+      "plot": true,
+      "tile": "dirt",
+      "toast": "Recovered 2 sound oak logs."
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

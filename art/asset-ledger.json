@@ -565,7 +565,7 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "Starting-settlement built placements only; bounded selectors. Other settlements unchanged.",
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
@@ -916,7 +916,7 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "Starting-settlement built placements only; bounded selectors. Other settlements unchanged.",
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
@@ -1186,7 +1186,7 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "Starting-settlement built placements only; bounded selectors. Other settlements unchanged.",
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
@@ -1519,7 +1519,7 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "Starting-settlement built placements only; bounded selectors. Other settlements unchanged.",
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
@@ -1837,7 +1837,7 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "Starting-settlement built placements only; bounded selectors. Other settlements unchanged.",
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
@@ -2287,7 +2287,7 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "Starting-settlement built placements only; bounded selectors. Other settlements unchanged.",
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
@@ -2783,7 +2783,7 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "Starting-settlement built placements only; bounded selectors. Other settlements unchanged.",
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
@@ -3121,7 +3121,7 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "Starting-settlement built placements only; bounded selectors. Other settlements unchanged.",
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
@@ -3379,7 +3379,7 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "Starting-settlement built placements only; bounded selectors. Other settlements unchanged.",
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
@@ -3967,7 +3967,7 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "Starting-settlement built placements only; bounded selectors. Other settlements unchanged.",
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
@@ -4626,7 +4626,7 @@
         "src/components/game/lanternwood-dressing.tsx:12",
         "src/components/game/settlement-kit.ts:2"
       ],
-      "rendererMapping": "Starting-settlement built placements only; bounded selectors. Other settlements unchanged.",
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
@@ -29529,7 +29529,23 @@
           "applicability": "source contract; runtime unverified"
         },
         {
-          "id": "predicate:same && (tile?.kind !== previous!.kinds[i] || !Object.is(tile?.h, previous!.heights[i]))",
+          "id": "predicate:kinds.includes(undefined)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/ground-update-planner.ts:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:kinds[i] !== previous!.kinds[i] || !Object.is(heights[i], previous!.heights[i])",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/ground-update-planner.ts:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:same",
           "status": "inventoried",
           "evidence": [
             "src/components/game/ground-update-planner.ts:9"
@@ -34328,13 +34344,13 @@
       "canonicalId": "src/components/game/terrain.tsx#align",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/terrain.tsx:848"
+        "src/components/game/terrain.tsx:849"
       ],
       "sourceNames": [
         "align"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:848"
+        "src/components/game/terrain.tsx:849"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -36365,13 +36381,13 @@
       "canonicalId": "src/components/game/terrain.tsx#far-horizon-trees",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:1009"
+        "src/components/game/terrain.tsx:1010"
       ],
       "sourceNames": [
         "Horizon"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:1009"
+        "src/components/game/terrain.tsx:1010"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -36423,13 +36439,13 @@
       "canonicalId": "src/components/game/terrain.tsx#harvestable-oak-crowns",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:754"
+        "src/components/game/terrain.tsx:755"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:754"
+        "src/components/game/terrain.tsx:755"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -36481,13 +36497,13 @@
       "canonicalId": "src/components/game/terrain.tsx#harvestable-oak-crowns-faded",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:760"
+        "src/components/game/terrain.tsx:761"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:760"
+        "src/components/game/terrain.tsx:761"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -36539,13 +36555,13 @@
       "canonicalId": "src/components/game/terrain.tsx#harvestable-oak-trunks",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:751"
+        "src/components/game/terrain.tsx:752"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:751"
+        "src/components/game/terrain.tsx:752"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -36597,13 +36613,13 @@
       "canonicalId": "src/components/game/terrain.tsx#harvestable-oak-trunks-faded",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:757"
+        "src/components/game/terrain.tsx:758"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:757"
+        "src/components/game/terrain.tsx:758"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -36655,13 +36671,13 @@
       "canonicalId": "src/components/game/terrain.tsx#lanternwood-soft-canopies",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:774"
+        "src/components/game/terrain.tsx:775"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:774"
+        "src/components/game/terrain.tsx:775"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45175,13 +45191,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_FAR",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:844"
+        "src/components/game/terrain.tsx:845"
       ],
       "sourceNames": [
         "COL_FAR"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:844"
+        "src/components/game/terrain.tsx:845"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -46419,13 +46435,13 @@
       "canonicalId": "src/components/game/terrain.tsx#Horizon",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:852"
+        "src/components/game/terrain.tsx:853"
       ],
       "sourceNames": [
         "Horizon"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:852"
+        "src/components/game/terrain.tsx:853"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
