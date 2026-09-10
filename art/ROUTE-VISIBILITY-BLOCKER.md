@@ -1,0 +1,5 @@
+# Route visibility attempt — blocked, not accepted
+
+Isolated flora preview1hq8nnatn. Predefined route256,298 to262,304 via QA useTile failed on desktop and mobile: empty intent path and unchanged final256,298. No page/shader errors. Twelve images per device captured, but all stationary: they cannot prove moving visibility. Raw results.json passed=false retained in art/verification/civic/route-visibility, with images and contact sheets. Lint passed independently; shell final exit0 was lint, not route acceptance.
+
+Source store.ts394–445 shows useTile can dispatch plot work/chop/mine instead of walking depending on tile type/state. Therefore this result is not yet a pathfinding regression: harness did not capture destination kind, interaction mode or flash error. Stop condition respected; no rerun for a passing route. Next diagnostic must capture those fields before classifying the failed destination, then choose a walkable building-adjacent route with an explicit contract. Camera-obstruction acceptance remains open. No runtime changes or deployment. Existing src/routeTree.gen.ts modification preserved.
