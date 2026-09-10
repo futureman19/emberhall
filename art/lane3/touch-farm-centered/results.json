@@ -1,0 +1,64 @@
+{
+  "scope": "Local8093 renderer, missing-kind disposable worlds, actual touchscreen tap on camera-projected terrain; build mode set by fixture; mobile viewport, not physical phone, physical mobile or animation acceptance.",
+  "rows": [
+    {
+      "kind": "farm",
+      "setup": {
+        "site": {
+          "tx": 247,
+          "ty": 307
+        },
+        "gold": 100,
+        "count": 55
+      },
+      "ghost": [
+        {
+          "count": 143,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "pointer": {
+        "x": 194.99999999999883,
+        "y": 428.20589739472854
+      },
+      "after": {
+        "fx": {
+          "buildingId": "b-26",
+          "kind": "farm",
+          "x": 247,
+          "z": 307,
+          "at": 12.002777777777778,
+          "source": "gold"
+        },
+        "activePose": {
+          "crouch": 0.11852260087141653,
+          "lean": 0.1777839013071248,
+          "hammer": -0.011230381226680504,
+          "lift": 0.8314696123025452
+        },
+        "endPose": {
+          "crouch": 0,
+          "lean": 0,
+          "hammer": 0,
+          "lift": 1
+        },
+        "gold": 72,
+        "count": 56,
+        "building": {
+          "id": "b-26",
+          "kind": "farm",
+          "tx": 247,
+          "ty": 307,
+          "beds": []
+        },
+        "buildKind": null
+      },
+      "commitPassed": true,
+      "effectContractPassed": true
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

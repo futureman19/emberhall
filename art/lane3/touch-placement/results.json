@@ -1,0 +1,514 @@
+{
+  "scope": "Local8093 renderer, missing-kind disposable worlds, actual touchscreen tap on camera-projected terrain; build mode set by fixture; mobile viewport, not physical phone, physical mobile or animation acceptance.",
+  "rows": [
+    {
+      "kind": "dormitory",
+      "setup": {
+        "site": {
+          "tx": 255,
+          "ty": 299
+        },
+        "gold": 100,
+        "count": 55
+      },
+      "ghost": [
+        {
+          "count": 529,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "pointer": {
+        "x": 155.97739625287184,
+        "y": 427.9913538140119
+      },
+      "after": {
+        "fx": {
+          "buildingId": "b-26",
+          "kind": "dormitory",
+          "x": 255,
+          "z": 299,
+          "at": 12.002777777777778,
+          "source": "gold"
+        },
+        "activePose": {
+          "crouch": 0.11852260087141653,
+          "lean": 0.1777839013071248,
+          "hammer": -0.011230381226680504,
+          "lift": 0.8314696123025452
+        },
+        "endPose": {
+          "crouch": 0,
+          "lean": 0,
+          "hammer": 0,
+          "lift": 1
+        },
+        "gold": 60,
+        "count": 56,
+        "building": {
+          "id": "b-26",
+          "kind": "dormitory",
+          "tx": 255,
+          "ty": 299,
+          "beds": [
+            {
+              "occupantId": null
+            },
+            {
+              "occupantId": null
+            }
+          ]
+        },
+        "buildKind": null
+      },
+      "commitPassed": true,
+      "effectContractPassed": true
+    },
+    {
+      "kind": "kitchen",
+      "setup": {
+        "site": {
+          "tx": 257,
+          "ty": 297
+        },
+        "gold": 100,
+        "count": 55
+      },
+      "ghost": [
+        {
+          "count": 327,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "pointer": {
+        "x": 233.7753842795475,
+        "y": 421.7351242923872
+      },
+      "after": {
+        "fx": {
+          "buildingId": "b-26",
+          "kind": "kitchen",
+          "x": 257,
+          "z": 297,
+          "at": 12.002777777777778,
+          "source": "gold"
+        },
+        "activePose": {
+          "crouch": 0.11852260087141653,
+          "lean": 0.1777839013071248,
+          "hammer": -0.011230381226680504,
+          "lift": 0.8314696123025452
+        },
+        "endPose": {
+          "crouch": 0,
+          "lean": 0,
+          "hammer": 0,
+          "lift": 1
+        },
+        "gold": 72,
+        "count": 56,
+        "building": {
+          "id": "b-26",
+          "kind": "kitchen",
+          "tx": 257,
+          "ty": 297,
+          "beds": []
+        },
+        "buildKind": null
+      },
+      "commitPassed": true,
+      "effectContractPassed": true
+    },
+    {
+      "kind": "yard",
+      "setup": {
+        "site": {
+          "tx": 248,
+          "ty": 290
+        },
+        "gold": 100,
+        "count": 55
+      },
+      "ghost": [
+        {
+          "count": 85,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "pointer": {
+        "x": 166.95512547385044,
+        "y": 245.7438794374453
+      },
+      "after": {
+        "fx": {
+          "buildingId": "b-26",
+          "kind": "yard",
+          "x": 248,
+          "z": 290,
+          "at": 12.002777777777778,
+          "source": "gold"
+        },
+        "activePose": {
+          "crouch": 0.11852260087141653,
+          "lean": 0.1777839013071248,
+          "hammer": -0.011230381226680504,
+          "lift": 0.8314696123025452
+        },
+        "endPose": {
+          "crouch": 0,
+          "lean": 0,
+          "hammer": 0,
+          "lift": 1
+        },
+        "gold": 72,
+        "count": 56,
+        "building": {
+          "id": "b-26",
+          "kind": "yard",
+          "tx": 248,
+          "ty": 290,
+          "beds": []
+        },
+        "buildKind": null
+      },
+      "commitPassed": true,
+      "effectContractPassed": true
+    },
+    {
+      "kind": "market",
+      "setup": {
+        "site": {
+          "tx": 257,
+          "ty": 297
+        },
+        "gold": 100,
+        "count": 54
+      },
+      "ghost": [
+        {
+          "count": 99,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "pointer": {
+        "x": 233.7753842795475,
+        "y": 421.7351242923872
+      },
+      "after": {
+        "fx": {
+          "buildingId": "b-26",
+          "kind": "market",
+          "x": 257,
+          "z": 297,
+          "at": 12.002777777777778,
+          "source": "gold"
+        },
+        "activePose": {
+          "crouch": 0.11852260087141653,
+          "lean": 0.1777839013071248,
+          "hammer": -0.011230381226680504,
+          "lift": 0.8314696123025452
+        },
+        "endPose": {
+          "crouch": 0,
+          "lean": 0,
+          "hammer": 0,
+          "lift": 1
+        },
+        "gold": 72,
+        "count": 55,
+        "building": {
+          "id": "b-26",
+          "kind": "market",
+          "tx": 257,
+          "ty": 297,
+          "beds": []
+        },
+        "buildKind": null
+      },
+      "commitPassed": true,
+      "effectContractPassed": true
+    },
+    {
+      "kind": "forge",
+      "setup": {
+        "site": {
+          "tx": 256,
+          "ty": 298
+        },
+        "gold": 100,
+        "count": 54
+      },
+      "ghost": [
+        {
+          "count": 133,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "pointer": {
+        "x": 194.99999999999932,
+        "y": 426.1452478363322
+      },
+      "after": {
+        "fx": {
+          "buildingId": "b-26",
+          "kind": "forge",
+          "x": 256,
+          "z": 298,
+          "at": 12.002777777777778,
+          "source": "gold"
+        },
+        "activePose": {
+          "crouch": 0.11852260087141653,
+          "lean": 0.1777839013071248,
+          "hammer": -0.011230381226680504,
+          "lift": 0.8314696123025452
+        },
+        "endPose": {
+          "crouch": 0,
+          "lean": 0,
+          "hammer": 0,
+          "lift": 1
+        },
+        "gold": 72,
+        "count": 55,
+        "building": {
+          "id": "b-26",
+          "kind": "forge",
+          "tx": 256,
+          "ty": 298,
+          "beds": []
+        },
+        "buildKind": null
+      },
+      "commitPassed": true,
+      "effectContractPassed": true
+    },
+    {
+      "kind": "tavern",
+      "setup": {
+        "site": {
+          "tx": 257,
+          "ty": 297
+        },
+        "gold": 100,
+        "count": 54
+      },
+      "ghost": [
+        {
+          "count": 421,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "pointer": {
+        "x": 233.7753842795475,
+        "y": 421.7351242923872
+      },
+      "after": {
+        "fx": {
+          "buildingId": "b-26",
+          "kind": "tavern",
+          "x": 257,
+          "z": 297,
+          "at": 12.002777777777778,
+          "source": "gold"
+        },
+        "activePose": {
+          "crouch": 0.11852260087141653,
+          "lean": 0.1777839013071248,
+          "hammer": -0.011230381226680504,
+          "lift": 0.8314696123025452
+        },
+        "endPose": {
+          "crouch": 0,
+          "lean": 0,
+          "hammer": 0,
+          "lift": 1
+        },
+        "gold": 72,
+        "count": 55,
+        "building": {
+          "id": "b-26",
+          "kind": "tavern",
+          "tx": 257,
+          "ty": 297,
+          "beds": []
+        },
+        "buildKind": null
+      },
+      "commitPassed": true,
+      "effectContractPassed": true
+    },
+    {
+      "kind": "notice",
+      "setup": {
+        "site": {
+          "tx": 256,
+          "ty": 298
+        },
+        "gold": 100,
+        "count": 54
+      },
+      "ghost": [
+        {
+          "count": 24,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "pointer": {
+        "x": 194.99999999999932,
+        "y": 426.1452478363322
+      },
+      "after": {
+        "fx": {
+          "buildingId": "b-26",
+          "kind": "notice",
+          "x": 256,
+          "z": 298,
+          "at": 12.002777777777778,
+          "source": "gold"
+        },
+        "activePose": {
+          "crouch": 0.11852260087141653,
+          "lean": 0.1777839013071248,
+          "hammer": -0.011230381226680504,
+          "lift": 0.8314696123025452
+        },
+        "endPose": {
+          "crouch": 0,
+          "lean": 0,
+          "hammer": 0,
+          "lift": 1
+        },
+        "gold": 72,
+        "count": 55,
+        "building": {
+          "id": "b-26",
+          "kind": "notice",
+          "tx": 256,
+          "ty": 298,
+          "beds": []
+        },
+        "buildKind": null
+      },
+      "commitPassed": true,
+      "effectContractPassed": true
+    },
+    {
+      "kind": "board",
+      "setup": {
+        "site": {
+          "tx": 256,
+          "ty": 298
+        },
+        "gold": 100,
+        "count": 55
+      },
+      "ghost": [
+        {
+          "count": 45,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "pointer": {
+        "x": 194.99999999999932,
+        "y": 426.1452478363322
+      },
+      "after": {
+        "fx": {
+          "buildingId": "b-26",
+          "kind": "board",
+          "x": 256,
+          "z": 298,
+          "at": 12.002777777777778,
+          "source": "gold"
+        },
+        "activePose": {
+          "crouch": 0.11852260087141653,
+          "lean": 0.1777839013071248,
+          "hammer": -0.011230381226680504,
+          "lift": 0.8314696123025452
+        },
+        "endPose": {
+          "crouch": 0,
+          "lean": 0,
+          "hammer": 0,
+          "lift": 1
+        },
+        "gold": 72,
+        "count": 56,
+        "building": {
+          "id": "b-26",
+          "kind": "board",
+          "tx": 256,
+          "ty": 298,
+          "beds": []
+        },
+        "buildKind": null
+      },
+      "commitPassed": true,
+      "effectContractPassed": true
+    },
+    {
+      "kind": "farm",
+      "setup": {
+        "site": {
+          "tx": 247,
+          "ty": 307
+        },
+        "gold": 100,
+        "count": 55
+      },
+      "ghost": [
+        {
+          "count": 143,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "pointer": {
+        "x": -172.52070374641966,
+        "y": 433.2243896240906
+      },
+      "after": {
+        "fx": null,
+        "activePose": {
+          "crouch": 0.11852260087141653,
+          "lean": 0.1777839013071248,
+          "hammer": -0.011230381226680504,
+          "lift": 0.8314696123025452
+        },
+        "endPose": {
+          "crouch": 0,
+          "lean": 0,
+          "hammer": 0,
+          "lift": 1
+        },
+        "gold": 100,
+        "count": 55,
+        "buildKind": "farm"
+      },
+      "commitPassed": false,
+      "effectContractPassed": false
+    }
+  ],
+  "errors": [],
+  "failure": "Effect contract farm",
+  "passed": false
+}
