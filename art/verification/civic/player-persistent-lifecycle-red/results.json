@@ -1,0 +1,151 @@
+{
+  "scope": "Persistent overlay lifecycle diagnostic; full depth pass, not production integration/performance acceptance. Disposable local save and QA state transitions.",
+  "checks": [
+    {
+      "device": "desktop",
+      "id": "continuous-transform-sync",
+      "frames": 174,
+      "mismatches": 3633,
+      "passed": false
+    },
+    {
+      "device": "desktop",
+      "id": "persistent-copy-reuse",
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "id": "ghost",
+      "hiddenCopies": 0,
+      "restoredCopies": 21,
+      "pixelsEqual": true,
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "id": "invisible",
+      "hiddenCopies": 0,
+      "restoredCopies": 21,
+      "pixelsEqual": true,
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "id": "hidden",
+      "hiddenCopies": 0,
+      "restoredCopies": 21,
+      "pixelsEqual": true,
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "id": "detached",
+      "hiddenCopies": 0,
+      "restoredCopies": 21,
+      "pixelsEqual": true,
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "id": "material-replacement",
+      "created": 1,
+      "disposed": 1,
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "id": "resize-and-idempotent-cleanup",
+      "pixelsEqual": true,
+      "renderRestored": true,
+      "groupRemoved": true,
+      "balanced": true,
+      "stats": {
+        "frames": 249,
+        "mismatches": 4137,
+        "created": 107,
+        "disposed": 107,
+        "suppressed": 4,
+        "eligible": 21,
+        "maxCopies": 21,
+        "errors": [],
+        "copies": 0,
+        "ids": []
+      },
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "id": "continuous-transform-sync",
+      "frames": 177,
+      "mismatches": 3717,
+      "passed": false
+    },
+    {
+      "device": "mobile",
+      "id": "persistent-copy-reuse",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "id": "ghost",
+      "hiddenCopies": 0,
+      "restoredCopies": 21,
+      "pixelsEqual": true,
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "id": "invisible",
+      "hiddenCopies": 0,
+      "restoredCopies": 21,
+      "pixelsEqual": true,
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "id": "hidden",
+      "hiddenCopies": 0,
+      "restoredCopies": 21,
+      "pixelsEqual": true,
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "id": "detached",
+      "hiddenCopies": 0,
+      "restoredCopies": 21,
+      "pixelsEqual": true,
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "id": "material-replacement",
+      "created": 1,
+      "disposed": 1,
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "id": "resize-and-idempotent-cleanup",
+      "pixelsEqual": true,
+      "renderRestored": true,
+      "groupRemoved": true,
+      "balanced": true,
+      "stats": {
+        "frames": 241,
+        "mismatches": 3948,
+        "created": 107,
+        "disposed": 107,
+        "suppressed": 4,
+        "eligible": 21,
+        "maxCopies": 21,
+        "errors": [],
+        "copies": 0,
+        "ids": []
+      },
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "passed": false
+}

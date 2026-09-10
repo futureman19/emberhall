@@ -1,0 +1,24 @@
+{
+  "status": "SHELVED",
+  "lifecycle_diagnostic": "COMPLETE",
+  "automatic_next_step": null,
+  "reopen_requires": "Explicit changed goal or materially new evidence, not generic heartbeat",
+  "runtime_integrated": false,
+  "deployed": false,
+  "green_checks": 16,
+  "red_expected_failures": [
+    "continuous-transform-sync:desktop",
+    "continuous-transform-sync:mobile"
+  ],
+  "suite_summary": [],
+  "lint": "passed",
+  "typecheck": "passed",
+  "build": "passed",
+  "preexisting_files_unchanged": {
+    "art/lane3/ACCEPTANCE-SUMMARY.json": true,
+    "art/lane3/generated-placement.json": true,
+    "src/routeTree.gen.ts": true
+  },
+  "gateway_fix": "Not modified; process discipline corrected in profile skills",
+  "evidence_document": "art/PLAYER-VISIBILITY-CLOSURE.md"
+}
