@@ -1,0 +1,39 @@
+{
+  "scope": "Frozen scenery-only depth texture prototype: isolated negative control and occluded tavern positive control, desktop/mobile. Not runtime integration or animation/performance acceptance.",
+  "checks": [
+    {
+      "device": "desktop",
+      "isolated": true,
+      "unobstructedEqual": true,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "isolated": false,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "isolated": true,
+      "unobstructedEqual": true,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "isolated": false,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "passed": true
+}
