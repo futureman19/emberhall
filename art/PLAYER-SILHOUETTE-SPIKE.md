@@ -1,0 +1,7 @@
+# Player silhouette browser prototype (not integrated)
+
+Attempted live R3F access failed; raw civic/player-silhouette-spike retained. Alternative local8093 development target exposed exact Fiber root. Browser-only overlay cloned21 currently visible player meshes, gold emissive opacity0.55, GreaterDepth6, depthWritefalse, renderOrder10000, no raycast/shadows. No camera/terrain/scenery edits. Both desktop/mobile synchronous before/candidate/removal renders completed without captured errors; removal restored exact prior canvas bytes. Only cloned materials disposed, shared geometry retained.
+
+Mobile candidate visually reviewed: marker locates player through foliage while preserving surrounding scenery, but body/facing still reads as compact indistinct silhouette. Not accepted for integration. Before image review identified another nearby figure ambiguously; do not infer player identity from that visual interpretation. Mesh selection used explicit emberhall-player-figure name.
+
+Limitations: frozen pose; cloned21 meshes, no animation synchronization, no ghost/effect transitions, no clear-view control, no final production performance/picking parity. Numeric depth constant confirmed as GreaterDepth in Three API semantics but integration should use named constant. Browser trial is not shipped code. Local dev screenshot does not establish deployed outcome. Next bounded test: clear-view negative control and moving/ghost-safe overlay design; reject any overlay that persists when unobscured or diverges from player pose. Public preview unchanged.
