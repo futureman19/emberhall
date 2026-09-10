@@ -396,7 +396,8 @@ export function Terrain() {
         span: { x0, z0, width: Math.floor(ox - half + SEGS * STEP) + 3 - x0, height: Math.floor(oz - half + SEGS * STEP) + 3 - z0 },
         dependencies: [w, w.seed, ox, oz, arr, car, karr, uarr, COURT.tx, COURT.ty,
           ...PLACES.flatMap(p => [p.id, p.tx, p.ty]), THREE.ColorManagement.enabled, THREE.ColorManagement.workingColorSpace,
-          skyTone.haze.r, skyTone.haze.g, skyTone.haze.b],
+        ],
+        missingTileDependencies: [skyTone.haze.r, skyTone.haze.g, skyTone.haze.b],
       });
       for (let iz = 0; iz < VERTS; iz++) {
         for (let ix = 0; ix < VERTS; ix++) {

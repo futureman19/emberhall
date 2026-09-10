@@ -1,0 +1,30 @@
+{
+  "cases": [
+    {
+      "width": 1440,
+      "x": 256,
+      "buffers": true,
+      "pixels": true
+    },
+    {
+      "width": 1440,
+      "x": 4,
+      "buffers": true,
+      "pixels": true
+    },
+    {
+      "width": 390,
+      "x": 256,
+      "buffers": true,
+      "pixels": true
+    },
+    {
+      "width": 390,
+      "x": 4,
+      "buffers": true,
+      "pixels": true
+    }
+  ],
+  "errors": [],
+  "passed": true
+}
