@@ -1,0 +1,39 @@
+{
+  "scope": "Transparent non-depth-writing occluder regression: isolated player must remain unchanged; tavern positive retained. Disposable synthetic box, not new gameplay scenery.",
+  "checks": [
+    {
+      "device": "desktop",
+      "isolated": true,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": false
+    },
+    {
+      "device": "desktop",
+      "isolated": false,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "isolated": true,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": false
+    },
+    {
+      "device": "mobile",
+      "isolated": false,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "passed": false
+}
