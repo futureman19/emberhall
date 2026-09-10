@@ -10,7 +10,18 @@
     "continuous-transform-sync:desktop",
     "continuous-transform-sync:mobile"
   ],
-  "suite_summary": [],
+  "suite_summary": [
+    "ℹ tests 250",
+    "ℹ suites 0",
+    "ℹ pass 250",
+    "ℹ fail 0",
+    "ℹ duration_ms 992.0084",
+    "ℹ tests 562",
+    "ℹ suites 8",
+    "ℹ pass 562",
+    "ℹ fail 0",
+    "ℹ duration_ms 85108.0186"
+  ],
   "lint": "passed",
   "typecheck": "passed",
   "build": "passed",
