@@ -1,0 +1,185 @@
+{
+  "scope": "Six normal-speed route samples per viewport; overlay reconstructed per sample, not persistent-frame synchronization or continuous animation acceptance. Temporary invisible test occluder retained; terrain unchanged.",
+  "checks": [
+    {
+      "device": "desktop",
+      "sample": 0,
+      "position": [
+        256.82148665357386,
+        296.3570266928523
+      ],
+      "matricesExact": true,
+      "isolated": false,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "sample": 1,
+      "position": [
+        257.99291370146096,
+        296.99291370146096
+      ],
+      "matricesExact": true,
+      "isolated": false,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "sample": 2,
+      "position": [
+        258.5592103700359,
+        298.67763111010754
+      ],
+      "matricesExact": true,
+      "isolated": false,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "sample": 3,
+      "position": [
+        259.37465402216145,
+        300.37465402216145
+      ],
+      "matricesExact": true,
+      "isolated": false,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "sample": 4,
+      "position": [
+        260.9629272360352,
+        301
+      ],
+      "matricesExact": true,
+      "isolated": false,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "sample": 5,
+      "position": [
+        262,
+        302
+      ],
+      "matricesExact": true,
+      "isolated": false,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "sample": 0,
+      "position": [
+        256.6846303488848,
+        296.63073930223015
+      ],
+      "matricesExact": true,
+      "isolated": false,
+      "unobstructedEqual": true,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "sample": 1,
+      "position": [
+        257.833333842513,
+        296.833333842513
+      ],
+      "matricesExact": true,
+      "isolated": false,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "sample": 2,
+      "position": [
+        258.4879263069813,
+        298.46377892094364
+      ],
+      "matricesExact": true,
+      "isolated": false,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "sample": 3,
+      "position": [
+        259.19889556102464,
+        300.19889556102464
+      ],
+      "matricesExact": true,
+      "isolated": false,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "sample": 4,
+      "position": [
+        260.62336723752384,
+        301
+      ],
+      "matricesExact": true,
+      "isolated": false,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "sample": 5,
+      "position": [
+        262,
+        302
+      ],
+      "matricesExact": true,
+      "isolated": false,
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "routes": [
+    {
+      "device": "desktop",
+      "arrived": true
+    },
+    {
+      "device": "mobile",
+      "arrived": true
+    }
+  ],
+  "passed": true
+}
