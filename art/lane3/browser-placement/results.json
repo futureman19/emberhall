@@ -1,0 +1,302 @@
+{
+  "scope": "Local8093 renderer, missing-kind disposable worlds, real build-state/useTile dispatch; not pointer input, physical mobile or animation acceptance.",
+  "rows": [
+    {
+      "kind": "dormitory",
+      "setup": {
+        "site": {
+          "tx": 255,
+          "ty": 299
+        },
+        "gold": 100,
+        "count": 55
+      },
+      "ghost": [
+        {
+          "count": 529,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "after": {
+        "gold": 60,
+        "count": 56,
+        "building": {
+          "id": "b-26",
+          "kind": "dormitory",
+          "tx": 255,
+          "ty": 299,
+          "beds": [
+            {
+              "occupantId": null
+            },
+            {
+              "occupantId": null
+            }
+          ]
+        },
+        "buildKind": null
+      },
+      "commitPassed": true
+    },
+    {
+      "kind": "kitchen",
+      "setup": {
+        "site": {
+          "tx": 257,
+          "ty": 297
+        },
+        "gold": 100,
+        "count": 55
+      },
+      "ghost": [
+        {
+          "count": 327,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "after": {
+        "gold": 72,
+        "count": 56,
+        "building": {
+          "id": "b-26",
+          "kind": "kitchen",
+          "tx": 257,
+          "ty": 297,
+          "beds": []
+        },
+        "buildKind": null
+      },
+      "commitPassed": true
+    },
+    {
+      "kind": "yard",
+      "setup": {
+        "site": {
+          "tx": 248,
+          "ty": 290
+        },
+        "gold": 100,
+        "count": 55
+      },
+      "ghost": [
+        {
+          "count": 85,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "after": {
+        "gold": 72,
+        "count": 56,
+        "building": {
+          "id": "b-26",
+          "kind": "yard",
+          "tx": 248,
+          "ty": 290,
+          "beds": []
+        },
+        "buildKind": null
+      },
+      "commitPassed": true
+    },
+    {
+      "kind": "market",
+      "setup": {
+        "site": {
+          "tx": 257,
+          "ty": 297
+        },
+        "gold": 100,
+        "count": 54
+      },
+      "ghost": [
+        {
+          "count": 99,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "after": {
+        "gold": 72,
+        "count": 55,
+        "building": {
+          "id": "b-26",
+          "kind": "market",
+          "tx": 257,
+          "ty": 297,
+          "beds": []
+        },
+        "buildKind": null
+      },
+      "commitPassed": true
+    },
+    {
+      "kind": "forge",
+      "setup": {
+        "site": {
+          "tx": 256,
+          "ty": 298
+        },
+        "gold": 100,
+        "count": 54
+      },
+      "ghost": [
+        {
+          "count": 133,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "after": {
+        "gold": 72,
+        "count": 55,
+        "building": {
+          "id": "b-26",
+          "kind": "forge",
+          "tx": 256,
+          "ty": 298,
+          "beds": []
+        },
+        "buildKind": null
+      },
+      "commitPassed": true
+    },
+    {
+      "kind": "tavern",
+      "setup": {
+        "site": {
+          "tx": 257,
+          "ty": 297
+        },
+        "gold": 100,
+        "count": 54
+      },
+      "ghost": [
+        {
+          "count": 421,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "after": {
+        "gold": 72,
+        "count": 55,
+        "building": {
+          "id": "b-26",
+          "kind": "tavern",
+          "tx": 257,
+          "ty": 297,
+          "beds": []
+        },
+        "buildKind": null
+      },
+      "commitPassed": true
+    },
+    {
+      "kind": "notice",
+      "setup": {
+        "site": {
+          "tx": 256,
+          "ty": 298
+        },
+        "gold": 100,
+        "count": 54
+      },
+      "ghost": [
+        {
+          "count": 24,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "after": {
+        "gold": 72,
+        "count": 55,
+        "building": {
+          "id": "b-26",
+          "kind": "notice",
+          "tx": 256,
+          "ty": 298,
+          "beds": []
+        },
+        "buildKind": null
+      },
+      "commitPassed": true
+    },
+    {
+      "kind": "board",
+      "setup": {
+        "site": {
+          "tx": 256,
+          "ty": 298
+        },
+        "gold": 100,
+        "count": 55
+      },
+      "ghost": [
+        {
+          "count": 45,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "after": {
+        "gold": 72,
+        "count": 56,
+        "building": {
+          "id": "b-26",
+          "kind": "board",
+          "tx": 256,
+          "ty": 298,
+          "beds": []
+        },
+        "buildKind": null
+      },
+      "commitPassed": true
+    },
+    {
+      "kind": "farm",
+      "setup": {
+        "site": {
+          "tx": 247,
+          "ty": 307
+        },
+        "gold": 100,
+        "count": 55
+      },
+      "ghost": [
+        {
+          "count": 143,
+          "color": "c9a36a",
+          "visible": true
+        }
+      ],
+      "ghostPassed": true,
+      "after": {
+        "gold": 72,
+        "count": 56,
+        "building": {
+          "id": "b-26",
+          "kind": "farm",
+          "tx": 247,
+          "ty": 307,
+          "beds": []
+        },
+        "buildKind": null
+      },
+      "commitPassed": true
+    }
+  ],
+  "errors": [],
+  "passed": true
+}
