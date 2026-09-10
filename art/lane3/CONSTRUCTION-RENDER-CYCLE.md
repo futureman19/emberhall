@@ -1,0 +1,5 @@
+# Construction rendered lifecycle
+
+All9 buildable kinds passed local desktop actual pointer placement followed by fixed0.05-second simulation steps. At cumulative0.2 and0.7seconds, the player construction hammer mesh is ancestor-visible and changes rotation; at1.9seconds it is hidden. Construction label is displayed during active sample and hidden afterward. Each scene identifies exactly one hammer by source geometry dimensions. All9 lifecycle assertions passed, no page errors.
+
+This is rendered scene-state and DOM lifecycle proof, NOT pixel-level legibility, continuous real-time movement or performance. The mesh can be scene-visible but still occluded by scenery. No visual screenshot approval is inferred. Raw results inherited generic scope wording saying no animation acceptance; this report narrows the actual evidence to sampled rendered lifecycle only. Preview unchanged. Remaining consolidated acceptance gaps: build-menu flow, mobile lifecycle, visual animation legibility, fallback checks; tests not yet merged into controller or deployed.
