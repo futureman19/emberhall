@@ -1,0 +1,7 @@
+# Ground planner local integration
+
+Near-ground uses planner with original authoritative vertex loop unchanged except necessary dirty-AABB selection. Explicit dependencies: world/seed, exact origin, output arrays, COURT coordinates, all PLACES ids/coordinates, ColorManagement enabled/working space, haze RGB. Tile snapshot includes missing/kind/height. Normal and bounds recomputation retained even on skip for conservative integration. Far/scenery unchanged. Commit snapshot only after geometry writes/finalization. Existing outer landMoved scheduling retained, no claim arbitrary external mutations trigger immediate rebuild.
+
+Four desktop/mobile same-browser comparisons after kind+height edits passed exact mesh geometry/instance buffers and pixels against forced original full vertex loop. Comparison uses actual terrain source, not Agent2 duplicated samplers. Six planner tests pass. Full249script/562game tests, typecheck,lint,build passed after refreshing stale AST art ledger with annotations; first stale-ledger failure retained.
+
+No deployment. This is local correctness batch, not performance acceptance. Still need broader atlas/buffer invalidation runtime cases and production-built stationary/walking controls; snapshot allocations and full-grid dirty search may offset savings. No FPS claim. Raw civic/ground-planner-parity.json, ground-planner-tests[-final].log, ground-planner-build.log.

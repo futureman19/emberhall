@@ -1,3 +1,4 @@
+import { createGroundUpdatePlanner } from "./ground-update-planner.ts";
 import { floraRollEligible } from "./flora-eligibility.ts";
 import { createTerrainPalette } from "./terrain-palette.ts";
 import { sameHorizonUpdateKey } from "./horizon-update-key.ts";
@@ -6,7 +7,7 @@ import type { ThreeEvent } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
 import type { MutableRefObject } from "react";
 import * as THREE from "three";
-import { COURT, MAP, VIEW } from "@/game/atlas";
+import { COURT, MAP, VIEW, PLACES } from "@/game/atlas";
 import { biomeAt, biomeWeights } from "@/game/biome";
 import { buildingBox } from "@/game/building-size";
 import { GROUND_SHADER, makeDirtTex, makeGrassTex } from "@/game/ground-tex";
@@ -309,6 +310,7 @@ export function Terrain() {
   const rockAt = useRef<{ tx: number; ty: number }[]>([]);
   const origin = useRef({ x: COURT.tx, z: COURT.ty, rev: -1 });
   const rebuildCount = useRef(0);
+  const groundPlanner = useMemo(() => createGroundUpdatePlanner(), []);
   const resourceSeed = useRef<number | null>(null);
   const resourceVisuals = useMemo(() => createResourceVisualCache(), []);
   const visibleResourceVisuals = useRef<VisibleResourceVisualLookup>(new Map());
@@ -388,10 +390,19 @@ export function Terrain() {
       const car = col.array as Float32Array;
       const karr = cov.array as Float32Array;
       const uarr = uv.array as Float32Array;
+      const x0 = Math.floor(ox - half) - 2, z0 = Math.floor(oz - half) - 2;
+      const transaction = groundPlanner.prepare({
+        tiles: w.tiles,
+        span: { x0, z0, width: Math.floor(ox - half + SEGS * STEP) + 3 - x0, height: Math.floor(oz - half + SEGS * STEP) + 3 - z0 },
+        dependencies: [w, w.seed, ox, oz, arr, car, karr, uarr, COURT.tx, COURT.ty,
+          ...PLACES.flatMap(p => [p.id, p.tx, p.ty]), THREE.ColorManagement.enabled, THREE.ColorManagement.workingColorSpace,
+          skyTone.haze.r, skyTone.haze.g, skyTone.haze.b],
+      });
       for (let iz = 0; iz < VERTS; iz++) {
         for (let ix = 0; ix < VERTS; ix++) {
           const wx = ox - half + ix * STEP;
           const wz = oz - half + iz * STEP;
+          if (transaction.plan.mode === "skip" || (transaction.plan.mode === "patch" && !transaction.plan.dirty.some(t => wx >= t.tx - 2 && wx < t.tx + 2 && wz >= t.ty - 2 && wz < t.ty + 2))) continue;
           const i = (iz * VERTS + ix) * 3;
           const t = w.tiles[Math.round(wz)]?.[Math.round(wx)];
           arr[i] = wx;
@@ -423,6 +434,7 @@ export function Terrain() {
       uv.needsUpdate = true;
       geo.computeVertexNormals();
       geo.computeBoundingSphere();
+      transaction.commit();
     }
     const px = you?.x ?? ox;
     const pz = you?.z ?? oz;
