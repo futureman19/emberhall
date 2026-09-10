@@ -1,0 +1,21 @@
+{
+  "scope": "Isolated-player negative control: hide non-player meshes only in synchronous disposable render, preserving live scene afterward. Tests self-occlusion leakage, not a proposal to remove scenery.",
+  "checks": [
+    {
+      "device": "desktop",
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": false
+    },
+    {
+      "device": "mobile",
+      "unobstructedEqual": false,
+      "meshes": 21,
+      "restoredEqual": true,
+      "passed": false
+    }
+  ],
+  "errors": [],
+  "passed": false
+}
