@@ -1,0 +1,191 @@
+{
+  "scope": "Missing-kind disposable fixtures on generated terrain; path search and model commit only, no player traversal or rendering.",
+  "expectedKinds": [
+    "dormitory",
+    "kitchen",
+    "yard",
+    "market",
+    "forge",
+    "tavern",
+    "notice",
+    "board",
+    "farm"
+  ],
+  "rows": [
+    {
+      "kind": "dormitory",
+      "site": [
+        255,
+        299
+      ],
+      "path": [
+        {
+          "x": 255,
+          "y": 299
+        }
+      ],
+      "placementPredicate": "pass",
+      "navigationSearch": "pass",
+      "placementCommit": "pass",
+      "ghostRendering": "not-tested",
+      "constructionAnimation": "not-tested"
+    },
+    {
+      "kind": "kitchen",
+      "site": [
+        257,
+        297
+      ],
+      "path": [
+        {
+          "x": 257,
+          "y": 297
+        }
+      ],
+      "placementPredicate": "pass",
+      "navigationSearch": "pass",
+      "placementCommit": "pass",
+      "ghostRendering": "not-tested",
+      "constructionAnimation": "not-tested"
+    },
+    {
+      "kind": "yard",
+      "site": [
+        248,
+        290
+      ],
+      "path": [
+        {
+          "x": 252,
+          "y": 293
+        },
+        {
+          "x": 248,
+          "y": 290
+        }
+      ],
+      "placementPredicate": "pass",
+      "navigationSearch": "pass",
+      "placementCommit": "pass",
+      "ghostRendering": "not-tested",
+      "constructionAnimation": "not-tested"
+    },
+    {
+      "kind": "market",
+      "site": [
+        257,
+        297
+      ],
+      "path": [
+        {
+          "x": 257,
+          "y": 297
+        }
+      ],
+      "placementPredicate": "pass",
+      "navigationSearch": "pass",
+      "placementCommit": "pass",
+      "ghostRendering": "not-tested",
+      "constructionAnimation": "not-tested"
+    },
+    {
+      "kind": "forge",
+      "site": [
+        256,
+        298
+      ],
+      "path": [],
+      "placementPredicate": "pass",
+      "navigationSearch": "pass",
+      "placementCommit": "pass",
+      "ghostRendering": "not-tested",
+      "constructionAnimation": "not-tested"
+    },
+    {
+      "kind": "tavern",
+      "site": [
+        257,
+        297
+      ],
+      "path": [
+        {
+          "x": 257,
+          "y": 297
+        }
+      ],
+      "placementPredicate": "pass",
+      "navigationSearch": "pass",
+      "placementCommit": "pass",
+      "ghostRendering": "not-tested",
+      "constructionAnimation": "not-tested"
+    },
+    {
+      "kind": "notice",
+      "site": [
+        256,
+        298
+      ],
+      "path": [],
+      "placementPredicate": "pass",
+      "navigationSearch": "pass",
+      "placementCommit": "pass",
+      "ghostRendering": "not-tested",
+      "constructionAnimation": "not-tested"
+    },
+    {
+      "kind": "board",
+      "site": [
+        256,
+        298
+      ],
+      "path": [],
+      "placementPredicate": "pass",
+      "navigationSearch": "pass",
+      "placementCommit": "pass",
+      "ghostRendering": "not-tested",
+      "constructionAnimation": "not-tested"
+    },
+    {
+      "kind": "farm",
+      "site": [
+        247,
+        307
+      ],
+      "path": [
+        {
+          "x": 255,
+          "y": 296
+        },
+        {
+          "x": 250,
+          "y": 297
+        },
+        {
+          "x": 248,
+          "y": 299
+        },
+        {
+          "x": 247,
+          "y": 302
+        },
+        {
+          "x": 247,
+          "y": 307
+        }
+      ],
+      "placementPredicate": "pass",
+      "navigationSearch": "pass",
+      "placementCommit": "pass",
+      "ghostRendering": "not-tested",
+      "constructionAnimation": "not-tested"
+    }
+  ],
+  "totals": {
+    "kinds": 9,
+    "placementPredicatePassed": 9,
+    "navigationSearchPassed": 9,
+    "placementCommitPassed": 9,
+    "ghostRenderingNotTested": 9,
+    "constructionAnimationNotTested": 9
+  }
+}
