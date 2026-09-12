@@ -144,7 +144,9 @@ function pathToward(world: World, tx: number, ty: number, range: number) {
   return true;
 }
 
-function faunaRange(spell: SpellId) {
+/** Release reach for a harmful spell — the one resolver behind command
+ *  admission, ongoing pursuit, terrain replanning, and impact validation. */
+export function offensiveRange(spell: SpellId) {
   return spell === "fireball" || spell === "lightning" ? FIREBALL_RANGE : ARROW_RANGE;
 }
 
@@ -231,7 +233,7 @@ export function commandCast(world: World, spell: SpellId, target?: CastTarget): 
     if (c.ownerId === world.player.id) return "It is yours.";
     world.player.armedSpell = null;
     world.player.intent = { kind: "cast", tx: Math.round(c.x), ty: Math.round(c.z), targetId: c.id, spell };
-    const range = faunaRange(spell);
+    const range = offensiveRange(spell);
     if (Math.hypot(p.x - c.x, p.z - c.z) > range) pathToward(world, c.x, c.z, range - 0.75);
     else p.path = [];
     return null;
@@ -310,7 +312,7 @@ export function castNow(world: World): string | null {
       world.player.intent.kind = "none";
       return "It fled.";
     }
-    const range = faunaRange(spell);
+    const range = offensiveRange(spell);
     if (Math.hypot(p.x - c.x, p.z - c.z) > range) {
       pathToward(world, c.x, c.z, range - 0.75);
       return null;

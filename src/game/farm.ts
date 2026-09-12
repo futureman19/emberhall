@@ -6,9 +6,17 @@ import { emitGatheringFx } from "./gathering-animation.ts";
 import type { CropId, ItemId, World } from "./types.ts";
 
 const MAX_PLOTS = 40;
+/** Legal work reach at impact: the arrival ring plus stride slack. */
+const WORK_REACH = 2.4;
 
 function you(world: World) {
   return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
+}
+
+/** An empty route is not evidence of arrival — checked at every commit. */
+function inReach(world: World, tx: number, ty: number) {
+  const p = you(world);
+  return Boolean(p) && Math.hypot(p!.x - tx, p!.z - ty) <= WORK_REACH;
 }
 
 function noteDone(world: World, id: string) {
@@ -139,8 +147,10 @@ export function commandTill(world: World, tx: number, ty: number) {
   if (hoe) return hoe;
   const err = canTill(world, tx, ty);
   if (err) return err;
+  const closed = pathBesidePlot(world, tx, ty);
+  if (closed) return closed;
   world.player.intent = { kind: "till", tx, ty, targetId: null, spell: null };
-  return pathBesidePlot(world, tx, ty);
+  return null;
 }
 
 export function commandPlant(world: World, tx: number, ty: number, crop: CropId) {
@@ -154,8 +164,10 @@ export function commandPlant(world: World, tx: number, ty: number, crop: CropId)
   if (bed.crop) return bed.stage >= 3 ? "It is ripe. Take it." : "Something already grows.";
   const seed = CROP_META[crop].seed;
   if ((world.player.pack[seed] ?? 0) < 1) return `Need ${ITEM_META[seed].label.toLowerCase()}.`;
+  const closed = pathBesidePlot(world, tx, ty);
+  if (closed) return closed;
   world.player.intent = { kind: "plant", tx, ty, targetId: crop, spell: null };
-  return pathBesidePlot(world, tx, ty);
+  return null;
 }
 
 export function commandHarvest(world: World, tx: number, ty: number) {
@@ -167,8 +179,10 @@ export function commandHarvest(world: World, tx: number, ty: number) {
   const bed = plotAt(world, tx, ty);
   if (!bed || !bed.crop) return "Nothing grows.";
   if (bed.stage < 3) return "Not yet.";
+  const closed = pathBesidePlot(world, tx, ty);
+  if (closed) return closed;
   world.player.intent = { kind: "harvest", tx, ty, targetId: bed.id, spell: null };
-  return pathBesidePlot(world, tx, ty);
+  return null;
 }
 
 export function commandWorkPlot(world: World, tx: number, ty: number) {
@@ -184,6 +198,7 @@ export function commandWorkPlot(world: World, tx: number, ty: number) {
 export function tillNow(world: World) {
   const { tx, ty } = world.player.intent;
   world.player.intent.kind = "none";
+  if (!inReach(world, tx, ty)) return "Too far.";
   const err = canTill(world, tx, ty);
   if (err) return err;
   makePlot(world, tx, ty);
@@ -199,6 +214,7 @@ export function plantNow(world: World) {
   const meta = CROP_META[crop];
   const bed = plotAt(world, world.player.intent.tx, world.player.intent.ty);
   world.player.intent.kind = "none";
+  if (!inReach(world, world.player.intent.tx, world.player.intent.ty)) return "Too far.";
   if (!meta || !bed) return "The bed is gone.";
   if (bed.crop) return "Something already grows.";
   if ((world.player.pack[meta.seed] ?? 0) < 1) return `Need ${ITEM_META[meta.seed].label.toLowerCase()}.`;
@@ -219,6 +235,7 @@ export function harvestNow(world: World) {
     plotAt(world, world.player.intent.tx, world.player.intent.ty);
   world.player.intent.kind = "none";
   if (!bed || !bed.crop || bed.stage < 3) return "Nothing ripe.";
+  if (!inReach(world, bed.tx, bed.ty)) return "Too far.";
   const meta = CROP_META[bed.crop];
   const crop = bed.crop;
   const chance = successChance(world.player.skills.farming, meta.diff);
