@@ -16,6 +16,7 @@ import { ContextMenu, PileGump } from "@/components/game/context-menu";
 import { GateGump } from "@/components/game/gate-gump";
 import { NpcGump } from "@/components/game/npc-gump";
 import { HouseGump } from "@/components/game/house-gump";
+import { housePanelActive } from "@/components/game/house-panel";
 import { YouDressing } from "@/components/game/paperdoll";
 import { SpellbookGump } from "@/components/game/spell-gump";
 import { CraftGump } from "@/components/game/craft-gump";
@@ -628,7 +629,10 @@ function GhostBanner() {
 
 function Toast() {
   const toast = useGame((s) => s.toast);
-  if (!toast) return null;
+  const houseOpen = useGame((s) => housePanelActive(s.snap.buildings, s.openHouseId, s));
+  const pileOpen = useGame((s) => s.snap.piles.some((p) => p.id === s.openPileId));
+  if (!toast || houseOpen) return null;
+  if (pileOpen) return null;
   return (
     <p role="status" className="pointer-events-none absolute top-48 left-1/2 z-40 w-max max-w-[calc(100vw-2rem)] -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/95 px-4 py-2 text-center font-display text-sm break-words text-fg sm:top-24 sm:max-w-md">
       {toast}

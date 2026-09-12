@@ -79,16 +79,16 @@ export function Lighting({ shadows }: { shadows: boolean }) {
     const flash = skyFlash.v * skyFlash.v;
 
     const ambI =
-      pit ? 0.1 : night ? 0.16 : dusk ? 0.46 : climate === "taiga" ? 0.42 : climate === "jungle" ? 0.52 : 0.58;
+      pit ? 0.28 : night ? 0.16 : dusk ? 0.46 : climate === "taiga" ? 0.42 : climate === "jungle" ? 0.52 : 0.58;
     const dirI =
-      pit ? 0.12 : night ? 0.22 : dusk ? 1.21 : climate === "taiga" ? 1.35 : climate === "jungle" ? 1.7 : 1.94;
+      pit ? 0.6 : night ? 0.22 : dusk ? 1.21 : climate === "taiga" ? 1.35 : climate === "jungle" ? 1.7 : 1.94;
     const local = lanternwoodInfluence(px, pz);
     const woodlandFill = !pit && w.hour >= 7 && w.hour <= 18 ? local : 0;
     if (dir.current) dir.current.shadow.radius = 1 + local * 1.5;
     const cloudDim = 1 - cloud * 0.55;
     if (amb.current) amb.current.intensity = ambI * (1 - cloud * 0.22) + flash * 0.9 + woodlandFill * 0.24;
     if (hemi.current)
-      hemi.current.intensity = (pit ? 0.04 : night ? 0.08 : dusk ? 0.23 : climate === "taiga" ? 0.16 : 0.29) + woodlandFill * 0.15;
+      hemi.current.intensity = (pit ? 0.16 : night ? 0.08 : dusk ? 0.23 : climate === "taiga" ? 0.16 : 0.29) + woodlandFill * 0.15;
 
     const lx = px + sunDir.x * 48;
     const ly = py + sunDir.y * 48;
@@ -121,7 +121,9 @@ export function Lighting({ shadows }: { shadows: boolean }) {
     if (bg.current) bg.current.copy(skyTone.horizon);
     if (fog.current) {
       fog.current.color.copy(skyTone.haze).lerp(GROUND_HAZE, pit ? 0 : 0.22);
-      fog.current.density = pit ? 0.14 : 0.007 + cloud * 0.005 + rain * 0.008;
+      // FogExp2 measures from the camera, not the player. At the fixed
+      // tactical view (~35 units), 0.14 erases even nearby cave geometry.
+      fog.current.density = pit ? 0.02 : 0.007 + cloud * 0.005 + rain * 0.008;
     }
     scene.background = bg.current;
   });

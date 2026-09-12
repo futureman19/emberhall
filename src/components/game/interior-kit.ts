@@ -1,4 +1,3 @@
-import { COURT } from "../../game/atlas.ts";
 export const INTERIOR_KINDS = [
   "hall",
   "dormitory",
@@ -30,7 +29,7 @@ export function interiorKitName(
   z: number,
 ): `interior-${InteriorKind}` | null {
   return INTERIOR_KINDS.includes(kind as InteriorKind) &&
-    Math.hypot(x - COURT.tx, z - COURT.ty) <= 18
+    Number.isFinite(x) && Number.isFinite(z)
     ? `interior-${kind as InteriorKind}`
     : null;
 }

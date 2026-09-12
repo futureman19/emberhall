@@ -5,11 +5,11 @@ import {COURT} from '../../game/atlas.ts';
 import {BUILD_SIZE} from '../../game/building-size.ts';
 import {commonsKitName,keepCommonsExteriorOnEntry,retainCommonsInteriorVoxel} from './commons-kit.ts';
 
-test('commons route only starting-settlement dormitory, yard and farm',()=>{
+test('commons route existing dormitory, yard and farm worldwide',()=>{
  for(const k of ['dormitory','yard','farm']){
   assert.equal(commonsKitName(k,COURT.tx,COURT.ty),k);
   assert.equal(commonsKitName(k,COURT.tx+18,COURT.ty),k);
-  assert.equal(commonsKitName(k,COURT.tx+19,COURT.ty),null);
+  assert.equal(commonsKitName(k,COURT.tx+19,COURT.ty),k);
   assert.equal(commonsKitName(k,NaN,COURT.ty),null);
  }
  for(const k of ['hall','bank','forge','tavern','kitchen','market','hut','unknown']) assert.equal(commonsKitName(k,COURT.tx,COURT.ty),null);

@@ -28,9 +28,13 @@ import {
   type VisibleResourceVisualLookup,
 } from "./resource-visuals";
 import { skyTone } from "./sky-math";
-import { useOakGeometry } from "./oak-renderer-data";
-import { usesAuthoredOak } from "./oak-renderer-policy";
-const HIDDEN_OAK = new THREE.Matrix4().makeScale(0, 0, 0);
+import { useTimberGeometry } from "./timber-renderer-data";
+import { useFieldPropGeometry } from "./field-prop-art";
+import { useGhostwoodTouch } from "./use-ghostwood-touch";
+import { useHouseTouch } from "./use-house-touch";
+import { authoredTimberId } from "./timber-renderer-policy";
+import { createTimberBatches, resetTimberBatches, claimTimberSlot, finishTimberBatches, HIDDEN_TIMBER } from "./timber-batches";
+import { RESOURCE_CATALOG } from "@/game/resources/catalog";
 import { LANTERNWOOD_GROUND_GLSL } from "./lanternwood-ground";
 import { LW_COLOR, lanternwoodGround, lanternwoodInfluence, noArtRaycast } from "./lanternwood-art";
 const LW_LEAF = new THREE.Color(LW_COLOR.leaf);
@@ -57,7 +61,7 @@ const KIND_COLOR: Record<TileKind, string> = {
   floor: "#5a4a3a",
   wall: "#4a4640",
   step: "#7a6a58",
-  pit: "#1a1612",
+  pit: "#75654f",
   snow: "#d8d2c6",
   marsh: "#3a4a36",
 };
@@ -288,12 +292,13 @@ if (uLod < 0.5 && fade < 0.05) discard;
 }
 
 export function Terrain() {
-  const oak = useOakGeometry();
-  const oakTrunk = useRef<THREE.InstancedMesh>(null);
-  const oakCrown = useRef<THREE.InstancedMesh>(null);
-  const oakTrunkGhost = useRef<THREE.InstancedMesh>(null);
-  const oakCrownGhost = useRef<THREE.InstancedMesh>(null);
-  const lastOak = useRef(oak);
+  const ghostwoodTouch = useGhostwoodTouch();
+  const houseTouch = useHouseTouch();
+  const timber = useTimberGeometry();
+  const fieldProps = useFieldPropGeometry();
+  const authoredRocks = useRef<THREE.InstancedMesh>(null);
+  const timberBatches = useMemo(createTimberBatches, []);
+  const lastTimber = useRef(timber);
   const lastTreeView = useRef("");
   const trunks = useRef<THREE.InstancedMesh>(null);
   const trunksGhost = useRef<THREE.InstancedMesh>(null);
@@ -310,6 +315,7 @@ export function Terrain() {
   const rockAt = useRef<{ tx: number; ty: number }[]>([]);
   const origin = useRef({ x: COURT.tx, z: COURT.ty, rev: -1 });
   const rebuildCount = useRef(0);
+  useEffect(() => { origin.current.rev = -1; }, [fieldProps]);
   const groundPlanner = useMemo(() => createGroundUpdatePlanner(), []);
   const resourceSeed = useRef<number | null>(null);
   const resourceVisuals = useMemo(() => createResourceVisualCache(), []);
@@ -364,6 +370,7 @@ export function Terrain() {
     const cn = canopy.current;
     const gh = canopyGhost.current;
     const rk = rocks.current;
+    const ar = authoredRocks.current;
     const shb = shrubs.current;
     const flw = flowers.current;
     const sap = saplings.current;
@@ -373,6 +380,7 @@ export function Terrain() {
     ensureColor(cn, count);
     ensureColor(gh, count);
     ensureColor(rk, count);
+    ensureColor(ar, count);
     ensureColor(shb, FLORA);
     ensureColor(flw, FLORA);
     ensureColor(sap, FLORA);
@@ -458,11 +466,12 @@ export function Terrain() {
       (w.player.intent.kind === "chop" || w.player.intent.kind === "mine") && !you?.path.length;
     // Preserve chunk-based refresh cadence: walking alone must not rescan all terrain.
         const treeView = `${w.player.ghost},${w.player.intent.kind},${w.player.intent.tx},${w.player.intent.ty}`;
-    if (landMoved || working || lastOak.current !== oak || lastTreeView.current !== treeView) {
-    lastOak.current = oak;
+    if (landMoved || working || lastTimber.current !== timber || lastTreeView.current !== treeView) {
+    lastTimber.current = timber;
     lastTreeView.current = treeView;
-    const oakBatches = [oakTrunk.current, oakCrown.current, oakTrunkGhost.current, oakCrownGhost.current];
-    for (const mesh of oakBatches) ensureColor(mesh, count);
+    resetTimberBatches(timberBatches);
+    const authoredBatches = timberBatches.flatMap(b => [b.trunk.current, b.crown.current, b.trunkGhost.current, b.crownGhost.current]);
+    for (const mesh of authoredBatches) ensureColor(mesh, count);
     if (landMoved) visibleResourceVisuals.current.clear();
     let li = 0;
     let si = 0;
@@ -492,7 +501,10 @@ export function Terrain() {
           );
           const plantedId = w.plantedTimber?.[`${tx},${ty}`];
           const woodId = plantedId ?? resourceVisual.resourceId;
-          const customOak = usesAuthoredOak(woodId, tx, ty, Boolean(oak && oakTrunk.current && oakCrown.current && oakTrunkGhost.current && oakCrownGhost.current));
+          const species = authoredTimberId(woodId, true);
+          const batch = timberBatches.find(b => b.id === species);
+          const customTimber = authoredTimberId(woodId, Boolean(species && timber[species] && batch?.trunk.current && batch?.crown.current && batch?.trunkGhost.current && batch?.crownGhost.current));
+          const plantedVisual = plantedId && species ? RESOURCE_CATALOG[species].visual : null;
           if (woodId === "ghostwood" && !w.player.ghost) continue;
           if (resourceVisual.shape.kind !== "tree") throw new Error("tree tile resolved a non-tree visual");
           if (resourceVisual.family !== "broadleaf" && resourceVisual.family !== "conifer") {
@@ -502,7 +514,8 @@ export function Terrain() {
           const grow = treeGrow(tx, ty);
           const gy = groundY(w, tx, ty);
           const climate = biomeAt(tx, ty);
-          const climateShape = treeClimateShapeScale(resourceVisual.family, climate);
+          const family = plantedVisual?.family;
+          const climateShape = treeClimateShapeScale(family === "broadleaf" || family === "conifer" ? family : resourceVisual.family, climate);
           const trunkRadius = grow * climateShape.radius * treeShape.trunkRadius * nearFade;
           const trunkScaleY = grow * climateShape.height * treeShape.trunkHeight * nearFade;
           const crownRadius = grow * climateShape.crownRadius * treeShape.crownRadius * nearFade;
@@ -517,16 +530,18 @@ export function Terrain() {
           dummy.position.set(tx, gy + trunkH * 0.5, ty);
           dummy.scale.set(trunkRadius, trunkScaleY, trunkRadius);
           dummy.updateMatrix();
-          const trunkCol = marked ? COL_MARK_WOOD : pal.set(resourceVisual.palette.primary);
-          const customTrunk = under ? oakTrunkGhost.current : oakTrunk.current;
-          const treeIndex = under ? gi : si;
-          customTrunk?.setMatrixAt(treeIndex, customOak ? dummy.matrix : HIDDEN_OAK);
-          paint(customTrunk, treeIndex, trunkCol);
+          const trunkCol = marked ? COL_MARK_WOOD : pal.set(plantedVisual?.primary ?? resourceVisual.palette.primary);
+          const customTrunk = under ? batch?.trunkGhost.current : batch?.trunk.current;
+          const treeIndex = customTimber && batch ? claimTimberSlot(batch, under, { tx, ty }) : -1;
+          if (customTimber) {
+            customTrunk?.setMatrixAt(treeIndex, dummy.matrix);
+            paint(customTrunk ?? null, treeIndex, trunkCol);
+          }
           if (under) {
-            tkg?.setMatrixAt(gi, customOak ? HIDDEN_OAK : dummy.matrix);
+            tkg?.setMatrixAt(gi, customTimber ? HIDDEN_TIMBER : dummy.matrix);
             paint(tkg, gi, trunkCol);
           } else {
-            tk?.setMatrixAt(si, customOak ? HIDDEN_OAK : dummy.matrix);
+            tk?.setMatrixAt(si, customTimber ? HIDDEN_TIMBER : dummy.matrix);
             paint(tk, si, trunkCol);
           }
           dummy.position.set(tx, gy + trunkH + CANOPY_H * crownScaleY * treeShape.crownLift, ty);
@@ -535,12 +550,12 @@ export function Terrain() {
           dummy.updateMatrix();
           dummy.rotation.set(0, 0, 0);
           dummy.scale.set(1, 1, 1);
-          const leafCol = marked ? COL_MARK : pal.set(resourceVisual.palette.secondary);
+          const leafCol = marked ? COL_MARK : pal.set(plantedVisual?.secondary ?? resourceVisual.palette.secondary);
           const local = lanternwoodInfluence(tx, ty);
           if (!marked) leafCol.lerp(LW_LEAF, local * 0.55);
           // Additional rounded lobes are visual-only. Keep the original resource
           // mesh, pick mapping, ghostwood exclusion and under-canopy fade intact.
-          if (!customOak && local > 0 && !under && softCanopy.current) {
+          if (!customTimber && local > 0 && !under && softCanopy.current) {
             for (let lobe = 0; lobe < 2; lobe++) {
               dummy.position.set(tx + (lobe === 0 ? -0.28 : 0.32) * crownRadius, gy + trunkH + CANOPY_H * crownScaleY * (lobe === 0 ? 0.18 : 0.37), ty + (lobe === 0 ? 0.12 : -0.12));
               dummy.scale.set(CANOPY_R * crownRadius * (lobe === 0 ? 0.88 : 0.68) * local, CANOPY_H * crownScaleY * 0.34 * local, CANOPY_R * crownRadius * 0.9 * local);
@@ -557,16 +572,18 @@ export function Terrain() {
             dummy.rotation.set(0, 0, 0);
             dummy.scale.set(1, 1, 1);
           }
-          const customCrown = under ? oakCrownGhost.current : oakCrown.current;
-          customCrown?.setMatrixAt(treeIndex, customOak ? dummy.matrix : HIDDEN_OAK);
-          paint(customCrown, treeIndex, leafCol);
+          const customCrown = under ? batch?.crownGhost.current : batch?.crown.current;
+          if (customTimber) {
+            customCrown?.setMatrixAt(treeIndex, dummy.matrix);
+            paint(customCrown ?? null, treeIndex, leafCol);
+          }
           if (under) {
-            gh?.setMatrixAt(gi, customOak ? HIDDEN_OAK : dummy.matrix);
+            gh?.setMatrixAt(gi, customTimber ? HIDDEN_TIMBER : dummy.matrix);
             paint(gh, gi, leafCol);
             ghostAt.current[gi] = { tx, ty };
             gi++;
           } else {
-            cn?.setMatrixAt(si, customOak ? HIDDEN_OAK : dummy.matrix);
+            cn?.setMatrixAt(si, customTimber ? HIDDEN_TIMBER : dummy.matrix);
             paint(cn, si, leafCol);
             solidAt.current[si] = { tx, ty };
             si++;
@@ -596,8 +613,16 @@ export function Terrain() {
           dummy.updateMatrix();
           dummy.rotation.set(0, 0, 0);
           rk.setMatrixAt(ri, dummy.matrix);
+          ar?.setMatrixAt(ri, dummy.matrix);
           paint(
             rk,
+            ri,
+            marked
+              ? COL_MARK
+              : pal.set(rockShape.tiltX > 0 ? resourceVisual.palette.secondary : resourceVisual.palette.primary),
+          );
+          paint(
+            ar,
             ri,
             marked
               ? COL_MARK
@@ -665,13 +690,7 @@ export function Terrain() {
       }
     }
     hideRest(tk, si, count);
-    for (const [index, mesh] of oakBatches.entries()) {
-      if (!mesh) continue;
-      mesh.count = index < 2 ? si : gi;
-      mesh.instanceMatrix.needsUpdate = true;
-      if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
-      mesh.boundingSphere = null;
-    }
+    finishTimberBatches(timberBatches);
     hideRest(tkg, gi, count);
     if (softCanopy.current) {
       softCanopy.current.count = li;
@@ -680,7 +699,18 @@ export function Terrain() {
     }
     hideRest(cn, si, count);
     hideRest(gh, gi, count);
+    // A rejected/asynchronous timber load can restore primitives after their
+    // bounds were cached at the hidden pool. Rebuild on the next actual ray,
+    // using the existing chunk update cadence rather than scanning per frame.
+    for (const mesh of [tk, tkg, cn, gh]) {
+      if (mesh) mesh.boundingSphere = null;
+    }
     hideRest(rk, ri, count);
+    if (ar) {
+      ar.count = ri;
+      ar.instanceMatrix.needsUpdate = true;
+      if (ar.instanceColor) ar.instanceColor.needsUpdate = true;
+    }
     hideRest(shb, shi, FLORA);
     hideRest(flw, fli, FLORA);
     hideRest(sap, sai, FLORA);
@@ -709,6 +739,7 @@ export function Terrain() {
   function onDown(e: ThreeEvent<PointerEvent>, map?: MutableRefObject<{ tx: number; ty: number }[]>) {
     e.stopPropagation();
     const t = tileOf(e, map);
+    if (e.button === 0 && (ghostwoodTouch(e, t) || houseTouch(e, t))) return;
     if (e.button === 2) hitAt(t.tx, t.ty, e.clientX, e.clientY);
     else if (e.button === 0 && useGame.getState().phase === "playing") leftAt(t.tx, t.ty);
   }
@@ -748,20 +779,24 @@ export function Terrain() {
       >
         <GroundMaterial />
       </mesh>
-      {oak && <group dispose={null}>
-        <instancedMesh name="harvestable-oak-trunks" ref={oakTrunk} args={[oak.trunk, undefined, count]} castShadow frustumCulled={false} {...pickMap(solidAt)}>
-          <meshStandardMaterial vertexColors={Boolean(oak.trunk.getAttribute("color"))} roughness={0.94} />
-        </instancedMesh>
-        <instancedMesh name="harvestable-oak-crowns" ref={oakCrown} args={[oak.crown, undefined, count]} castShadow frustumCulled={false} {...pickMap(solidAt)}>
-          <meshStandardMaterial vertexColors={Boolean(oak.crown.getAttribute("color"))} roughness={0.95} />
-        </instancedMesh>
-        <instancedMesh name="harvestable-oak-trunks-faded" ref={oakTrunkGhost} args={[oak.trunk, undefined, count]} frustumCulled={false} {...pickMap(ghostAt)}>
-          <meshStandardMaterial vertexColors={Boolean(oak.trunk.getAttribute("color"))} roughness={0.94} transparent opacity={0.2} depthWrite={false} />
-        </instancedMesh>
-        <instancedMesh name="harvestable-oak-crowns-faded" ref={oakCrownGhost} args={[oak.crown, undefined, count]} frustumCulled={false} {...pickMap(ghostAt)}>
-          <meshStandardMaterial vertexColors={Boolean(oak.crown.getAttribute("color"))} roughness={0.95} transparent opacity={0.2} depthWrite={false} />
-        </instancedMesh>
-      </group>}
+      {timberBatches.map(batch => {
+        const geometry = timber[batch.id];
+        if (!geometry) return null;
+        return <group key={batch.id} dispose={null}>
+          <instancedMesh name={`harvestable-${batch.id}-trunks`} ref={batch.trunk} args={[geometry.trunk, undefined, count]} count={0} castShadow frustumCulled={false} {...pickMap(batch.solidAt)}>
+            <meshStandardMaterial vertexColors={Boolean(geometry.trunk.getAttribute("color"))} roughness={0.94} />
+          </instancedMesh>
+          <instancedMesh name={`harvestable-${batch.id}-crowns`} ref={batch.crown} args={[geometry.crown, undefined, count]} count={0} castShadow frustumCulled={false} {...pickMap(batch.solidAt)}>
+            <meshStandardMaterial vertexColors={Boolean(geometry.crown.getAttribute("color"))} roughness={0.95} />
+          </instancedMesh>
+          <instancedMesh name={`harvestable-${batch.id}-trunks-faded`} ref={batch.trunkGhost} args={[geometry.trunk, undefined, count]} count={0} frustumCulled={false} {...pickMap(batch.ghostAt)}>
+            <meshStandardMaterial vertexColors={Boolean(geometry.trunk.getAttribute("color"))} roughness={0.94} transparent opacity={0.2} depthWrite={false} />
+          </instancedMesh>
+          <instancedMesh name={`harvestable-${batch.id}-crowns-faded`} ref={batch.crownGhost} args={[geometry.crown, undefined, count]} count={0} frustumCulled={false} {...pickMap(batch.ghostAt)}>
+            <meshStandardMaterial vertexColors={Boolean(geometry.crown.getAttribute("color"))} roughness={0.95} transparent opacity={0.2} depthWrite={false} />
+          </instancedMesh>
+        </group>;
+      })}
       <instancedMesh
         ref={trunks}
         args={[undefined, undefined, count]}
@@ -807,13 +842,16 @@ export function Terrain() {
       <instancedMesh
         ref={rocks}
         args={[undefined, undefined, count]}
-        castShadow
+        castShadow={!fieldProps}
         frustumCulled={false}
         {...pickMap(rockAt)}
       >
         <dodecahedronGeometry args={[0.42, 0]} />
-        <meshStandardMaterial color="#ffffff" roughness={0.9} />
+        <meshStandardMaterial color="#ffffff" roughness={0.9} colorWrite={!fieldProps} depthWrite={!fieldProps} />
       </instancedMesh>
+      {fieldProps && <instancedMesh name="authored-field-rocks" ref={authoredRocks} args={[fieldProps.field_rock, undefined, count]} castShadow frustumCulled={false} raycast={noArtRaycast} dispose={null}>
+        <meshStandardMaterial color="#ffffff" vertexColors roughness={0.94} />
+      </instancedMesh>}
       <instancedMesh ref={shrubs} args={[undefined, undefined, FLORA]} castShadow frustumCulled={false} raycast={() => {}}>
         <boxGeometry args={[0.42, 0.4, 0.36]} />
         <meshStandardMaterial color="#ffffff" roughness={0.96} />

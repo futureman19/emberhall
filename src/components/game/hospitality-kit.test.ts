@@ -5,12 +5,12 @@ import {COURT} from '../../game/atlas.ts';
 import {BUILD_SIZE} from '../../game/building-size.ts';
 import {hospitalityKitName,retainHospitalityInteriorVoxel} from './hospitality-kit.ts';
 
-test('hospitality art routes only three built kinds within the starting settlement',()=>{
+test('hospitality art routes only three existing built kinds worldwide',()=>{
  for(const kind of ['kitchen','tavern','market']){
   assert.equal(hospitalityKitName(kind,COURT.tx,COURT.ty),kind);
   assert.equal(hospitalityKitName(kind,COURT.tx+18,COURT.ty),kind);
-  assert.equal(hospitalityKitName(kind,COURT.tx+19,COURT.ty),null);
-  assert.equal(hospitalityKitName(kind,176,320),null);
+  assert.equal(hospitalityKitName(kind,COURT.tx+19,COURT.ty),kind);
+  assert.equal(hospitalityKitName(kind,176,320),kind);
  }
  for(const kind of ['bank','forge','hall','shop','hut','dormitory'])assert.equal(hospitalityKitName(kind,COURT.tx,COURT.ty),null);
 });

@@ -10,6 +10,7 @@ import { TAMING_DURATION, tamingPulse } from "@/game/taming-animation";
 import { COMPANION_DURATION, companionLabel, companionPose, getCompanionFx } from "@/game/companion-animation";
 import { useGame } from "@/game/store";
 import type { Creature, FaunaKind } from "@/game/types";
+import { FaunaArtBody } from "./fauna-art";
 
 const COLOR: Record<FaunaKind, string> = {
   hare: "#c4a882",
@@ -978,6 +979,7 @@ function Beast({ c }: { c: Creature }) {
   useFrame(() => {
     const group = root.current;
     if (!group) return;
+    const deadNow = c.task === "dead";
     const world = getWorld();
     const fx = getCombatFx();
     const age = fx ? (world.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
@@ -1003,9 +1005,9 @@ function Beast({ c }: { c: Creature }) {
       c.z,
     );
     group.rotation.set(
-      dead ? Math.PI / 2 : -pulse * (fx?.clean ? 0.28 : 0.13) + (refusal ? resultPulse * -0.34 : 0) + companionMotion.bow,
+      deadNow ? Math.PI / 2 : -pulse * (fx?.clean ? 0.28 : 0.13) + (refusal ? resultPulse * -0.34 : 0) + companionMotion.bow,
       (taming ? Math.sin(world.player.workT * 20) * 0.2 : 0) + companionMotion.turn,
-      dead ? 0 : pulse * 0.2 + appeal * 0.08 + (refusal ? resultPulse * 0.26 : 0),
+      deadNow ? 0 : pulse * 0.2 + appeal * 0.08 + (refusal ? resultPulse * 0.26 : 0),
     );
     group.scale.setScalar(
       1 +
@@ -1021,7 +1023,9 @@ function Beast({ c }: { c: Creature }) {
       position={[c.x, groundY(getWorld(), c.x, c.z), c.z]}
       rotation={dead ? [Math.PI / 2, 0, 0] : [0, 0, 0]}
     >
-      <Body c={c} />
+      <FaunaArtBody kind={c.kind} size={SIZE[c.kind]}>
+        <Body c={c} />
+      </FaunaArtBody>
       {c.ownerId && (
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.06, 0]}>
           <ringGeometry args={[0.22, 0.3, 12]} />

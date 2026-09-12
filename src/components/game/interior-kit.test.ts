@@ -10,11 +10,11 @@ import {
   interiorVoxelCenter,
   replaceInteriorVoxel,
 } from "./interior-kit.ts";
-test("bounded routes cover exact starting kinds; no farm/sign/Phase2 mutations", () => {
+test("worldwide routes cover exact approved kinds; no farm/sign/keep/housing replacements", () => {
   assert.equal(Object.keys(INTERIOR_COVERAGE).length, 11);
   for (const k of INTERIOR_KINDS) {
     assert.equal(interiorKitName(k, COURT.tx, COURT.ty), `interior-${k}`);
-    assert.equal(interiorKitName(k, COURT.tx + 19, COURT.ty), null);
+    assert.equal(interiorKitName(k, COURT.tx + 19, COURT.ty), `interior-${k}`);
     assert.equal(interiorKitName(k, NaN, COURT.ty), null);
   }
   for (const k of ["farm", "notice", "board", "keep", "hut", "townhouse"])

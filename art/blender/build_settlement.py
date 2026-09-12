@@ -150,7 +150,7 @@ box('chimney dark throat',(.25,3.845,-1.10),(.43,.018,.33),wood,.01)
 for x in [-.28,.0,.28,.56,.79]: box('banked ember accent',(x,.20,-1.22),(.13,.07,.10),glow,.025)
 box('forge hanging trade board',(1.30,1.94,1.98),(.52,.38,.08),red)
 # Small gold anvil pictogram on the right, never in the front opening.
-mesh('gold anvil trade symbol',[(1.08,2.04,2.03),(1.52,2.04,2.03),(1.42,1.94,2.03),(1.34,1.94,2.03),(1.34,1.87,2.03),(1.44,1.84,2.03),(1.14,1.84,2.03),(1.23,1.88,2.03),(1.23,1.95,2.03)],[(0,1,2,3,4,5,6,7,8)],gold)
+mesh('gold anvil trade symbol',[(1.08,2.04,2.03),(1.52,2.04,2.03),(1.42,1.94,2.03),(1.34,1.94,2.03),(1.34,1.87,2.03),(1.44,1.84,2.03),(1.14,1.84,2.03),(1.23,1.88,2.03),(1.23,1.95,2.03)],[(0,1,2,3,4,5,6,7,8)],mat('forge readable gold sign',(.95,.72,.30),.08))
 
 for o in bpy.context.scene.objects:
     if o.get('roof_top'): assert all(p.normal.z>0 for p in o.data.polygons)

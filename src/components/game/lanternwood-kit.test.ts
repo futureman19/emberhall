@@ -59,10 +59,10 @@ test("hall export contains chestnut roofs, red cloth and emissive honey glass", 
   assert.ok(glow);
 });
 
-test("kit placement is deterministic and hall swap restricted to original starting-town interior", () => {
+test("kit placement is deterministic and existing hall routing is worldwide", () => {
   assert.ok(usesBlenderHall("hall", COURT.tx, COURT.ty - 2));
   assert.equal(usesBlenderHall("bank", COURT.tx, COURT.ty), false);
-  assert.equal(usesBlenderHall("hall", COURT.tx + 40, COURT.ty), false);
+  assert.equal(usesBlenderHall("hall", COURT.tx + 40, COURT.ty), true);
   for (let i = 0; i < 20; i++) {
     const value = gardenTreeTransform(i, i + 2);
     assert.deepEqual(value, gardenTreeTransform(i, i + 2));

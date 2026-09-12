@@ -33,6 +33,7 @@ export function ContextMenu() {
 }
 
 export function PileGump() {
+  const toast = useGame((s) => s.toast);
   const id = useGame((s) => s.openPileId);
   const piles = useGame((s) => s.snap.piles);
   const take = useGame((s) => s.takePile);
@@ -41,9 +42,15 @@ export function PileGump() {
   if (!pile) return null;
   const items = (Object.keys(pile.items) as ItemId[]).filter((k) => (pile.items[k] ?? 0) > 0);
   return (
-    <div className="pointer-events-auto absolute top-16 left-3 w-[min(100%-1.5rem,18rem)] rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4">
-      <p className="font-display text-sm text-fg">{pile.label}</p>
-      <ul className="mt-2 space-y-1">
+    <div className="pointer-events-auto absolute top-16 left-3 flex max-h-[calc(100dvh-5rem)] w-[min(100%-1.5rem,18rem)] flex-col rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4">
+      <div className="flex shrink-0 items-start justify-between gap-2">
+        <p className="min-w-0 pt-2 font-display text-sm break-words text-fg">{pile.label}</p>
+        <button type="button" aria-label="Close loot" onClick={() => useGame.setState({ openPileId: null })} className="flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-border text-fg hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-accent">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      {toast && <p role="status" className="mt-2 max-h-20 shrink-0 overflow-y-auto rounded-[var(--radius-xs)] border border-border bg-surface-2 px-2 py-1.5 text-xs break-words text-fg">{toast}</p>}
+      <ul className="mt-2 min-h-0 space-y-1 overflow-y-auto overscroll-contain">
         {pile.gold > 0 && (
           <li>
             <button
@@ -72,7 +79,7 @@ export function PileGump() {
       <button
         type="button"
         onClick={() => take(pile.id)}
-        className="mt-2 flex min-h-11 w-full items-center justify-center rounded-[var(--radius-md)] bg-accent text-sm text-accent-fg"
+        className="mt-2 flex min-h-11 w-full shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-accent text-sm text-accent-fg"
       >
         Take all
       </button>

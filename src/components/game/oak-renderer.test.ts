@@ -8,11 +8,11 @@ import { usesAuthoredOak } from "./oak-renderer-policy.ts";
 import { extractOakGeometry } from "./oak-renderer-data.ts";
 
 const root = new URL("../../../", import.meta.url);
-test("oak selection is local, identity-driven, readiness-gated and pure", () => {
+test("oak selection is worldwide, identity-driven, readiness-gated and pure", () => {
   const state = Object.freeze({ resourceId: "oak", tx: COURT.tx, ty: COURT.ty });
   assert.equal(usesAuthoredOak(state.resourceId, state.tx, state.ty, true), true);
   assert.equal(usesAuthoredOak("oak", COURT.tx + 22, COURT.ty, true), true);
-  assert.equal(usesAuthoredOak("oak", COURT.tx + 22.001, COURT.ty, true), false);
+  assert.equal(usesAuthoredOak("oak", COURT.tx + 22.001, COURT.ty, true), true);
   assert.equal(usesAuthoredOak("oak", COURT.tx, COURT.ty, false), false);
   for (const id of ["ghostwood", "ash", "yew", "pine", "willow", "ironwood", "elderwood", ""]) {
     assert.equal(usesAuthoredOak(id, COURT.tx, COURT.ty, true), false);
@@ -61,10 +61,11 @@ test("renderer keeps canonical maps, depletion and sapling state; no world write
   const crop = readFileSync(new URL("src/components/game/crop-meshes.tsx", root), "utf8");
   assert.match(terrain, /const woodId = plantedId \?\? resourceVisual.resourceId/);
   assert.match(terrain, /if \(t.kind === "tree"\)/);
-  assert.match(terrain, /lastOak.current !== oak/);
+  assert.match(terrain, /lastTimber.current !== timber/);
   for (const name of ["trunks", "crowns", "trunks-faded", "crowns-faded"]) {
-    const tag = terrain.match(new RegExp(`<instancedMesh name="harvestable-oak-${name}"[^>]+`))![0];
-    assert.match(tag, name.includes("faded") ? /pickMap\(ghostAt\)/ : /pickMap\(solidAt\)/);
+    const tag = terrain.split("\n").find(line => line.includes("harvestable-${batch.id}-" + name + "`"))!;
+    assert.ok(tag, name);
+    assert.match(tag, name.includes("faded") ? /pickMap\(batch.ghostAt\)/ : /pickMap\(batch.solidAt\)/);
   }
   assert.match(crop, /sapling.resourceId \?\? "oak"/);
   assert.match(crop, /sapling.stage === 1/);
@@ -72,8 +73,15 @@ test("renderer keeps canonical maps, depletion and sapling state; no world write
   assert.doesNotMatch(terrain, /oak_stump/);
   assert.doesNotMatch(terrain.match(/const treeView =[^;]+/)![0], /px|pz/, "walking does not introduce additional full-terrain rebuilds");
   const stumps=readFileSync(new URL("src/components/game/oak-stumps.tsx",root),"utf8");
-  assert.ok(stumps.includes("n.depletedAtHour===null"));
+  assert.ok(/n\.depletedAtHour\s*===\s*null/.test(stumps));
   assert.ok(stumps.includes("saplings.some"));
   assert.ok(stumps.includes("raycast={noArtRaycast}"));
   assert.ok(stumps.includes("resolveResourceNode"));
+});
+test("stump memo invalidates on in-place sapling occupancy changes, not growth-only updates", () => {
+  const source = readFileSync(new URL("src/components/game/oak-stumps.tsx", root), "utf8");
+  // Forestry pushes into the existing saplings array without incrementing landRev.
+  // Array identity/count alone also misses a same-size replacement at another tile.
+  assert.match(source, /const saplingSitesKey = saplings\.map\(s => `\$\{s\.tx\},\$\{s\.ty\}`\)\.join\(";"\)/);
+  assert.match(source, /\[nodes, saplings, saplingSitesKey, buildings, land, world, ghost\]/);
 });

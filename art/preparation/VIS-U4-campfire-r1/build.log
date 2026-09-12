@@ -1,0 +1,17 @@
+C:\Users\futur\Desktop\emberhall-lanternwood-preview\art\preparation\VIS-U4-campfire-r1\build_campfire.py:12: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m=bpy.data.materials.new(name);m.diffuse_color=(*rgb,1);m.use_nodes=True
+00:04.859  render           | Saved: 'C:\Users\futur\Desktop\emberhall-lanternwood-preview\art\preparation\VIS-U4-campfire-r1\campfire.png'
+Info: Saved as "campfire.blend"
+INFO Draco is available, use library at C:\Users\futur\AppData\Local\Programs\Blender-5.2.1\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Users\futur\AppData\Local\Programs\Blender-5.2.1\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+11:52:49 | INFO: Starting glTF 2.0 export
+11:52:49 | INFO: Extracting primitive: campfire_log.003
+11:52:49 | INFO: Primitives created: 1
+11:52:49 | INFO: Extracting primitive: Icosphere.007
+11:52:49 | INFO: Primitives created: 1
+11:52:49 | INFO: Finished glTF 2.0 export in 0.009706497192382812 s
+
+OFFLINE_WEAPONS_EXPORTED 2 parts 6552 bytes
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

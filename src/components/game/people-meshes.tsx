@@ -1,5 +1,8 @@
+import { equipmentMaterial, type EquipmentSurface } from "./equipment-material.ts";
 import { AuthoredCharacterGeometry, AuthoredCharacterFace, AuthoredCharacterTunic } from "./authored-character.tsx";
 import { Html } from "@react-three/drei";
+import { AuthoredOffhandGeometry } from "./authored-offhand.tsx";
+import { AuthoredWeaponGeometry } from "./authored-weapon.tsx";
 import { AuthoredToolGeometry } from "./authored-tool.tsx";
 import { playerVisualYaw } from "./character-facing";
 import { civicCharacterArt, civicVisualYaw } from "./civic-character.ts";
@@ -20,6 +23,7 @@ import { EXTRACTION_DURATION, extractionPose, extractionVisualProfile, getExtrac
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY } from "@/game/height";
 import { keepStoryY } from "@/game/keep-story";
+import { keepPlayerOffset } from "./keep-presentation.ts";
 import { getWorld } from "@/game/live";
 import { FIGURE, HAIR } from "@/game/look/figure.ts";
 import { SLOT_ANCHOR, partsById } from "@/game/look/parts.ts";
@@ -93,6 +97,10 @@ function HairMeshes({ look, ghost, authored = false }: { look: ResolvedLook; gho
   );
 }
 
+function EquipmentMat({ ghost, ...surface }: EquipmentSurface & { ghost: boolean }) {
+  return <meshStandardMaterial {...equipmentMaterial(ghost, surface)} />;
+}
+
 function Mat({ color, ghost }: { color: string; ghost: boolean }) {
   if (ghost) {
     return (
@@ -121,7 +129,7 @@ function Hatchet({ ghost }: { ghost: boolean }) {
       </mesh>
       <mesh position={[0.08, 0.36, 0]} castShadow={!ghost}>
         <AuthoredToolGeometry part="hatchet_head"><boxGeometry args={[0.2, 0.1, 0.07]} /></AuthoredToolGeometry>
-        <meshStandardMaterial color="#8a8680" metalness={0.45} roughness={0.4} />
+        <EquipmentMat ghost={ghost} color="#8a8680" metalness={0.45} roughness={0.4} />
       </mesh>
     </group>
   );
@@ -131,12 +139,12 @@ function Knife({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.42, 0.04]} rotation={[0.2, 0, 0.2]}>
       <mesh position={[0, 0.08, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.04, 0.16, 0.04]} />
+        <AuthoredWeaponGeometry part="knife_handle"><boxGeometry args={[0.04, 0.16, 0.04]} /></AuthoredWeaponGeometry>
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0, 0.24, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.05, 0.22, 0.02]} />
-        <meshStandardMaterial color="#9a9286" metalness={0.55} roughness={0.32} />
+        <AuthoredWeaponGeometry part="knife_blade"><boxGeometry args={[0.05, 0.22, 0.02]} /></AuthoredWeaponGeometry>
+        <EquipmentMat ghost={ghost} color="#9a9286" metalness={0.55} roughness={0.32} />
       </mesh>
     </group>
   );
@@ -146,16 +154,16 @@ function Sword({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.44, 0.04]} rotation={[0.12, 0, 0.28]}>
       <mesh position={[0, 0.1, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.045, 0.22, 0.045]} />
+        <AuthoredWeaponGeometry part="sword_handle"><boxGeometry args={[0.045, 0.22, 0.045]} /></AuthoredWeaponGeometry>
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0, 0.22, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.16, 0.04, 0.04]} />
-        <meshStandardMaterial color="#8a8680" metalness={0.5} roughness={0.4} />
+        <AuthoredWeaponGeometry part="sword_guard"><boxGeometry args={[0.16, 0.04, 0.04]} /></AuthoredWeaponGeometry>
+        <EquipmentMat ghost={ghost} color="#8a8680" metalness={0.5} roughness={0.4} />
       </mesh>
       <mesh position={[0, 0.44, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.055, 0.46, 0.02]} />
-        <meshStandardMaterial color="#c9c3b6" metalness={0.65} roughness={0.28} />
+        <AuthoredWeaponGeometry part="sword_blade"><boxGeometry args={[0.055, 0.46, 0.02]} /></AuthoredWeaponGeometry>
+        <EquipmentMat ghost={ghost} color="#c9c3b6" metalness={0.65} roughness={0.28} />
       </mesh>
     </group>
   );
@@ -165,11 +173,11 @@ function Club({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.44, 0.04]} rotation={[0.15, 0, 0.3]}>
       <mesh position={[0, 0.22, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.055, 0.5, 0.055]} />
+        <AuthoredWeaponGeometry part="club_handle"><boxGeometry args={[0.055, 0.5, 0.055]} /></AuthoredWeaponGeometry>
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0, 0.48, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.12, 0.16, 0.12]} />
+        <AuthoredWeaponGeometry part="club_head"><boxGeometry args={[0.12, 0.16, 0.12]} /></AuthoredWeaponGeometry>
         <Mat color="#6a4a32" ghost={ghost} />
       </mesh>
     </group>
@@ -180,12 +188,12 @@ function Mace({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.44, 0.04]} rotation={[0.15, 0, 0.3]}>
       <mesh position={[0, 0.2, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.045, 0.42, 0.045]} />
+        <AuthoredWeaponGeometry part="mace_handle"><boxGeometry args={[0.045, 0.42, 0.045]} /></AuthoredWeaponGeometry>
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0, 0.46, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.16, 0.16, 0.16]} />
-        <meshStandardMaterial color="#8a8680" metalness={0.5} roughness={0.38} />
+        <AuthoredWeaponGeometry part="mace_head"><boxGeometry args={[0.16, 0.16, 0.16]} /></AuthoredWeaponGeometry>
+        <EquipmentMat ghost={ghost} color="#8a8680" metalness={0.5} roughness={0.38} />
       </mesh>
     </group>
   );
@@ -195,12 +203,12 @@ function Staff({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.5, 0.04]} rotation={[0.08, 0, 0.22]}>
       <mesh position={[0, 0.38, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.04, 0.9, 0.04]} />
+        <AuthoredWeaponGeometry part="staff_handle"><boxGeometry args={[0.04, 0.9, 0.04]} /></AuthoredWeaponGeometry>
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0, 0.86, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.1, 0.1, 0.1]} />
-        <meshStandardMaterial color="#c9a36a" roughness={0.45} />
+        <AuthoredWeaponGeometry part="staff_head"><boxGeometry args={[0.1, 0.1, 0.1]} /></AuthoredWeaponGeometry>
+        <EquipmentMat ghost={ghost} color="#c9a36a" roughness={0.45} />
       </mesh>
     </group>
   );
@@ -219,12 +227,12 @@ function Bow({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.04, -0.4, 0.02]} rotation={[0.1, 0.4, 0.15]}>
       <mesh position={[0, 0.28, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.04, 0.62, 0.04]} />
+        <AuthoredOffhandGeometry part="bow_limb"><boxGeometry args={[0.04, 0.62, 0.04]} /></AuthoredOffhandGeometry>
         <Mat color="#6a4a32" ghost={ghost} />
       </mesh>
       <mesh position={[0.08, 0.28, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.02, 0.56, 0.02]} />
-        <meshStandardMaterial color="#ece6d8" roughness={0.6} />
+        <AuthoredOffhandGeometry part="bow_string"><boxGeometry args={[0.02, 0.56, 0.02]} /></AuthoredOffhandGeometry>
+        <EquipmentMat ghost={ghost} color="#ece6d8" roughness={0.6} />
       </mesh>
       <group ref={arrow} position={[0, 0.28, -0.05]} visible={false}>
         <mesh rotation={[Math.PI / 2, 0, 0]}>
@@ -244,15 +252,16 @@ function Torch({ ghost }: { ghost: boolean }) {
   return (
     <group position={[0.02, -0.44, 0.04]} rotation={[0.18, 0, 0.25]}>
       <mesh position={[0, 0.18, 0]} castShadow={!ghost}>
-        <boxGeometry args={[0.045, 0.36, 0.045]} />
+        <AuthoredOffhandGeometry part="torch_handle"><boxGeometry args={[0.045, 0.36, 0.045]} /></AuthoredOffhandGeometry>
         <Mat color="#5a3e28" ghost={ghost} />
       </mesh>
       <mesh position={[0, 0.4, 0]}>
-        <boxGeometry args={[0.08, 0.1, 0.08]} />
-        <meshStandardMaterial
+        <AuthoredOffhandGeometry part="torch_ember"><boxGeometry args={[0.08, 0.1, 0.08]} /></AuthoredOffhandGeometry>
+        <EquipmentMat ghost={ghost}
           color="#a85a42"
           emissive="#a85a42"
-          emissiveIntensity={ghost ? 0.2 : 0.8}
+          emissiveIntensity={0.8}
+          ghostIntensity={0.2}
         />
       </mesh>
       {!ghost && <pointLight color="#e0b56a" intensity={1.6} distance={5.2} />}
@@ -265,16 +274,16 @@ function Shield({ id, ghost }: { id: ItemId; ghost: boolean }) {
   return (
     <group position={[-0.02, -0.28, 0.08]} rotation={[0.2, 0.15, -0.35]}>
       <mesh castShadow={!ghost}>
-        <boxGeometry args={[0.28, 0.38, 0.06]} />
-        <meshStandardMaterial
+        <AuthoredOffhandGeometry part={iron ? "heater_face" : "shield_face"}><boxGeometry args={[0.28, 0.38, 0.06]} /></AuthoredOffhandGeometry>
+        <EquipmentMat ghost={ghost}
           color={iron ? "#8a8680" : "#6a4a32"}
           metalness={iron ? 0.5 : 0.05}
           roughness={iron ? 0.4 : 0.85}
         />
       </mesh>
       <mesh position={[0, 0.02, 0.04]}>
-        <boxGeometry args={[0.1, 0.1, 0.04]} />
-        <meshStandardMaterial color="#c9a36a" roughness={0.5} />
+        <AuthoredOffhandGeometry part={iron ? "heater_boss" : "shield_boss"}><boxGeometry args={[0.1, 0.1, 0.04]} /></AuthoredOffhandGeometry>
+        <EquipmentMat ghost={ghost} color="#c9a36a" roughness={0.5} />
       </mesh>
     </group>
   );
@@ -304,7 +313,7 @@ function FishingRod({ ghost }: { ghost: boolean }) {
       </mesh>
       <mesh position={[0, -0.03, 0.035]} rotation={[Math.PI / 2, 0, 0]} castShadow={!ghost}>
         <AuthoredToolGeometry part="fishing_rod_head"><torusGeometry args={[0.07, 0.014, 6, 12]} /></AuthoredToolGeometry>
-        <meshStandardMaterial color="#8a8680" metalness={0.45} roughness={0.4} />
+        <EquipmentMat ghost={ghost} color="#8a8680" metalness={0.45} roughness={0.4} />
       </mesh>
     </group>
   );
@@ -319,7 +328,7 @@ function Hoe({ ghost }: { ghost: boolean }) {
       </mesh>
       <mesh position={[0.1, 0.38, 0]} castShadow={!ghost}>
         <AuthoredToolGeometry part="hoe_head"><boxGeometry args={[0.22, 0.05, 0.12]} /></AuthoredToolGeometry>
-        <meshStandardMaterial color="#8a8680" metalness={0.45} roughness={0.4} />
+        <EquipmentMat ghost={ghost} color="#8a8680" metalness={0.45} roughness={0.4} />
       </mesh>
     </group>
   );
@@ -334,7 +343,7 @@ function Pick({ ghost }: { ghost: boolean }) {
       </mesh>
       <mesh position={[0.02, 0.38, 0]} castShadow={!ghost}>
         <AuthoredToolGeometry part="pick_head"><boxGeometry args={[0.28, 0.07, 0.06]} /></AuthoredToolGeometry>
-        <meshStandardMaterial color="#9a9286" metalness={0.5} roughness={0.38} />
+        <EquipmentMat ghost={ghost} color="#9a9286" metalness={0.5} roughness={0.38} />
       </mesh>
     </group>
   );
@@ -955,7 +964,7 @@ function Figure({
     if (you && root.current) {
       root.current.position.set(
         you.x,
-        groundAt(you.x, you.z, you.story) + (you.ghost ? 0.32 : 0) - healPose.crouch - corpseWorkPose.crouch - (constructing ? buildPose.crouch : 0) - (extracting ? extractPose.crouch : 0) - (personal ? personalPose.crouch : 0),
+        groundAt(you.x, you.z, you.story) + keepPlayerOffset(you.x, you.z) + (you.ghost ? 0.32 : 0) - healPose.crouch - corpseWorkPose.crouch - (constructing ? buildPose.crouch : 0) - (extracting ? extractPose.crouch : 0) - (personal ? personalPose.crouch : 0),
         you.z,
       );
       root.current.rotation.x = healPose.lean + corpseWorkPose.lean + (constructing ? buildPose.lean : 0) + (companionNear ? companionWorkPose.bow * 0.6 : 0) + (npcNear ? npcPose.bow : 0) + (extracting ? extractPose.swing * 0.12 : 0) + (taming ? tamePose.bow : 0) + (crafting ? craftPose.work * 0.14 : 0) + (gathering ? gatherPose.work * 0.2 : 0) + (personal ? personalPose.lean : 0);
@@ -1107,7 +1116,7 @@ function Figure({
   const hover = ghost ? 0.32 : 0;
 
   return (
-    <group name={p.isPlayer ? "emberhall-player-figure" : "emberhall-npc-figure"} ref={root} position={[p.x, groundAt(p.x, p.z, p.story) + hover, p.z]} rotation={[0, civicVisualYaw(p.facing, authored), 0]}>
+    <group name={p.isPlayer ? "emberhall-player-figure" : "emberhall-npc-figure"} ref={root} position={[p.x, groundAt(p.x, p.z, p.story) + (p.isPlayer ? keepPlayerOffset(p.x, p.z) : 0) + hover, p.z]} rotation={[0, civicVisualYaw(p.facing, authored), 0]}>
       {cloak && (
         <mesh position={[0, FIGURE.cloak.y + bob, FIGURE.cloak.z]} castShadow={!ghost}>
           <AuthoredCharacterGeometry part="cloak" size={FIGURE.cloak.size} authored={authored} />

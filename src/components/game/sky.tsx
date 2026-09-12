@@ -172,7 +172,8 @@ void main() {
   c += uSun * (core * 1.15 + halo * 0.28 + wash * 0.1) * uGlow;
   float hz = 1.0 - smoothstep(0.0, 0.34, abs(y));
   c = mix(c, mix(uHorizon, uSun, wash * 0.45), hz * 0.32 * uGlow);
-  c = mix(c, uHaze, smoothstep(-0.05, -0.5, y));
+  // GLSL requires edge0 < edge1; invert the result for downward haze.
+  c = mix(c, uHaze, (1.0 - smoothstep(-0.5, -0.05, y)));
   gl_FragColor = vec4(c, 1.0);
 }
 `}

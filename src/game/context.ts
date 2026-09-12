@@ -1,6 +1,6 @@
 import { CROP_META, plotAt } from "./farm.ts";
-import { plantVerbLabel, isGhostwoodTree } from "./forestry.ts";
-import { GHOSTWOOD_LUMBERJACK } from "./resources/catalog.ts";
+import { plantVerbLabel, isGhostwoodTree, isTimberId } from "./forestry.ts";
+import { GHOSTWOOD_LUMBERJACK, RESOURCE_CATALOG, timberGradeLabel } from "./resources/catalog.ts";
 import { hasBook } from "./magery.ts";
 import { herbReady } from "./herbs.ts";
 import { getWorld } from "./live.ts";
@@ -13,6 +13,8 @@ function harvestVerbLabel(tx: number, ty: number, nodeKind: "tree" | "rock"): st
   const world = getWorld();
   const verb = nodeKind === "tree" ? "Chop" : "Mine";
   const skill = nodeKind === "tree" ? "lumberjack" : "mining";
+  const planted = nodeKind === "tree" ? world.plantedTimber?.[`${tx},${ty}`] : undefined;
+  const plantedTimber = isTimberId(planted) ? planted : null;
   const discovered = hasDiscoveredResourceNode({
     seed: world.seed,
     tx,
@@ -26,7 +28,7 @@ function harvestVerbLabel(tx: number, ty: number, nodeKind: "tree" | "rock"): st
     ty,
     nodeKind,
     effectiveSkill: effSkill(world, skill),
-    discovered,
+    discovered: Boolean(plantedTimber) || discovered,
   });
   if (identification.status !== "identified") return verb;
   world.resourceNodes = discoverResourceNode({
@@ -37,6 +39,11 @@ function harvestVerbLabel(tx: number, ty: number, nodeKind: "tree" | "rock"): st
     hour: world.hour,
     resourceNodes: world.resourceNodes,
   });
+  if (plantedTimber) {
+    // Planting knows the family; the canonical tile still owns its quality ceiling.
+    const grade = timberGradeLabel(identification.identity.qualityCeiling);
+    return `${verb} ${grade[0]!.toUpperCase()}${grade.slice(1)} ${RESOURCE_CATALOG[plantedTimber].label}`;
+  }
   return `${verb} ${identification.label}`;
 }
 

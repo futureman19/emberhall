@@ -1,0 +1,77 @@
+// Retained keep: unchanged hydrated city, actual mouse/touch route, no floor teleports.
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import ts from 'typescript';
+import {chromium} from 'playwright';
+import {PerspectiveCamera,Vector3} from 'three';
+import {createWorld} from '../src/game/world.ts';
+import {setWorld} from '../src/game/live.ts';
+import {writeSave,loadSave,SAVE_KEY} from '../src/game/save.ts';
+import {groundY} from '../src/game/height.ts';
+import {lineWalkable} from '../src/game/pathfinding.ts';
+import {KEEP} from '../src/game/city.ts';
+import {KEEP_STORY_VOX} from '../src/game/keep-story.ts';
+const [url='http://127.0.0.1:8123',label='keep-dev-v1',mode='candidate']=process.argv.slice(2);
+assert(['127.0.0.1','localhost'].includes(new URL(url).hostname));assert.match(label,/^[a-z0-9-]+$/);assert(['candidate','control','failure','built'].includes(mode));
+const out=path.resolve('art/verification/worldwide',label);assert(!fs.existsSync(path.join(out,'results.json')));fs.mkdirSync(out,{recursive:true});
+const hash=v=>createHash('sha256').update(JSON.stringify(v)).digest('hex'),round=v=>+v.toFixed(4);
+const source=fs.readFileSync('src/components/game/building-meshes.tsx','utf8');
+const code=ts.transpile(source.slice(source.indexOf('function put('),source.indexOf('function occupant('))+'\nexport { SPECS };',{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022});
+const specs={};new Function('exports',code)(specs);const spec=specs.SPECS.keep;
+const report={url,mode,seed:2469134,scope:'Retained original keep, canonical generated/save-loaded city, actor-isolated disposable fixture. Native mouse and touch ground-projected clicks with normal fixed substeps, story/geometry/terrain records. No changed terrain, floor teleport, custom keep model, construction, full-world AI, physical-phone or performance acceptance.',checks:[],cases:[],errors:[],requests:[]};
+const flush=()=>fs.writeFileSync(path.join(out,'results.json'),JSON.stringify(report,null,2));
+const check=(name,ok,data={})=>{report.checks.push({name,ok:!!ok,...data});flush();assert(ok,name);};
+const storage=new Map();globalThis.localStorage={getItem:k=>storage.get(k)??null,setItem:(k,v)=>storage.set(k,v)};
+const random=Math.random;let fresh;try{Math.random=()=>report.seed/1e9;fresh=createWorld();}finally{Math.random=random;}
+setWorld(fresh);const body=fresh.people.find(p=>p.isPlayer);body.x=176;body.z=332;body.path=[];body.story=0;body.hunger=0;body.energy=100;fresh.hour=12;writeSave(fresh);
+const raw=storage.get(SAVE_KEY);assert(raw);fs.writeFileSync(path.join(out,'disposable-save.json'),raw);const loaded=loadSave();assert(loaded);setWorld(loaded);
+function region(w){const tiles=[];for(let z=308;z<=334;z++)for(let x=162;x<=190;x++)tiles.push({x,z,...w.tiles[z][x]});return tiles;}
+const expectedHash=hash(region(loaded)),baseY=groundY(loaded,KEEP.tx,KEEP.ty);
+report.expectedTerrainHash=expectedHash;report.baseY=baseY;report.spec={count:spec.voxels.length,hash:hash(spec),fuse:spec.fuse};
+function expected(inside,story){const cap=inside?Math.round(story)*KEEP_STORY_VOX+KEEP_STORY_VOX+1:Infinity;return spec.voxels.filter(v=>v.y<=cap&&(!inside||!v.cut)&&!(mode!=='control'&&inside&&v.t==='timber'&&v.y%KEEP_STORY_VOX===0&&v.y>Math.round(story)*KEEP_STORY_VOX)).map(v=>[KEEP.tx+(v.x+.5)*.5,baseY+(v.y+.5)*.5,KEEP.ty+(v.z+.5)*.5].map(round).join(',')).sort();}
+const browser=await chromium.launch({headless:true,args:['--use-angle=d3d11','--enable-gpu']});const watchdog=setTimeout(()=>browser.close(),300000);
+async function state(page){return page.evaluate(()=>{const w=window.__ember.getWorld(),p=w.people.find(p=>p.isPlayer),s=window.__ember.useGame.getState();return {x:p.x,z:p.z,story:p.story,facing:p.facing,path:structuredClone(p.path),intent:structuredClone(w.player.intent),ctx:s.ctx,toast:s.toast};});}
+async function tick(page){await page.evaluate(()=>{const s=window.__ember.useGame.getState(),r=Math.random;s.speed(1);try{Math.random=()=>.5;for(let i=0;i<4;i++)s.tick(.05);}finally{Math.random=r;s.speed(0);}});await page.waitForTimeout(60);}
+async function screen(page,x,z,y=groundY(loaded,x,z)){const v=await page.evaluate(()=>{const r=document.querySelector('canvas').getBoundingClientRect();return {c:window.__emberCamera.getCamera(),t:window.__emberCamera.getTarget(),r:{x:r.x,y:r.y,width:r.width,height:r.height}};});const c=new PerspectiveCamera(48,v.r.width/v.r.height,.2,480);c.position.set(v.c.x,v.c.y,v.c.z);c.lookAt(v.t.x,v.t.y,v.t.z);c.updateMatrixWorld(true);const p=new Vector3(x,y,z).project(c);return {x:v.r.x+(p.x+1)*v.r.width/2,y:v.r.y+(1-p.y)*v.r.height/2};}
+async function geometry(page){if(mode==='built')return null;return page.evaluate(()=>{const {scene,THREE:T}=window.__keepScene;scene.updateMatrixWorld(true);let group;scene.traverse(o=>{if(group||!o.isGroup)return;for(const m of o.children.filter(o=>o.isInstancedMesh&&o.count>100)){const mat=new T.Matrix4();m.getMatrixAt(0,mat);const p=new T.Vector3().setFromMatrixPosition(mat);if(p.x>=165&&p.x<=187&&p.z>=311&&p.z<=328){group=o;break;}}});if(!group)return {found:false};const visible=[],proxy=[],sizes=[];for(const m of group.children){if(!m.isInstancedMesh)continue;sizes.push(m.geometry.parameters);for(let i=0;i<m.count;i++){const a=new T.Matrix4();m.getMatrixAt(i,a);const v=new T.Vector3().setFromMatrixPosition(a);(m.material.colorWrite?visible:proxy).push(v.toArray().map(v=>+v.toFixed(4)).join(','));}}const player=scene.getObjectByName('emberhall-player-figure');return {found:true,visible:visible.sort(),proxy:proxy.sort(),sizes,authored:group.children.filter(o=>o.name.startsWith('blender-')).map(o=>o.name),player:player?.getWorldPosition(new T.Vector3()).toArray(),camera:window.__emberCamera.getCamera(),anchor:window.__emberCamera.getAnchor()};});}
+try{
+ for(const [device,viewport] of [['desktop',{width:1440,height:960}],['mobile',{width:390,height:844}]]){
+  const context=await browser.newContext({viewport,hasTouch:device==='mobile',deviceScaleFactor:1});await context.routeWebSocket(/.*/,()=>{});
+  if(mode==='control')await context.route('**/src/components/game/building-meshes.tsx*',async route=>{const response=await route.fetch(),text=await response.text();const line=/if \(inside && b.kind === "keep" && v.t === "timber" && v.y % KEEP_STORY_VOX === 0 && v.y > Math.round\(story\) \* KEEP_STORY_VOX\) continue;/;assert(line.test(text));report.requests.push({device,url:route.request().url(),originalPolicy:true});await route.fulfill({response,body:text.replace(line,'/* Original keep ceiling policy control. */')});});
+  if(mode==='failure')await context.route('**/art/lanternwood/*.glb',route=>{report.requests.push({device,url:route.request().url(),injected:true,status:503});return route.fulfill({status:503,contentType:'text/plain',body:'Deliberate local art QA rejection'});});
+  const page=await context.newPage();page.on('pageerror',e=>report.errors.push({device,type:'page',text:e.message}));page.on('console',m=>{if(m.type()==='error')report.errors.push({device,type:'console',text:m.text()});});
+  await page.addInitScript(({raw,key})=>localStorage.setItem(key,raw),{raw,key:SAVE_KEY});await page.goto(url+'/?qa=1');await page.getByRole('button',{name:'Continue',exact:true}).click();await page.waitForFunction(()=>{if(window.__ember?.useGame.getState().phase!=='playing'||!window.__emberCamera)return false;window.__ember.useGame.getState().speed(0);return true;});await page.waitForLoadState('networkidle');
+  if(mode!=='built')await page.evaluate(async()=>{const text=await(await fetch('/src/components/game/world-scene.tsx')).text(),f=text.match(/from\s+["']([^"']*(?:react-three_fiber|@react-three\/fiber)[^"']*)["']/),t=text.match(/from\s+["']([^"']*three\.js[^"']*)["']/),fiber=await import(f[1]);window.__keepScene={...fiber._roots.get(document.querySelector('canvas')).store.getState(),THREE:await import(t[1])};});
+  if(mode==='control')check(device+'-original-policy-actually-intercepted',report.requests.some(r=>r.device===device&&r.originalPolicy));
+  await page.evaluate(()=>{const w=window.__ember.getWorld(),s=window.__ember.useGame.getState(),p=w.people.find(p=>p.isPlayer);w.people=[p];w.fauna=[];p.x=176;p.z=332;p.story=0;p.path=[];p.hunger=0;p.energy=100;w.hour=12;w.player.intent.kind='none';s.select(null);s.setPanel('none');s.closeCtx();s.tick(.1);});
+  async function stable(){return page.evaluate(()=>{const w=window.__ember.getWorld(),tiles=[];for(let z=308;z<=334;z++)for(let x=162;x<=190;x++)tiles.push({x,z,...w.tiles[z][x]});return {seed:w.seed,tiles,buildings:structuredClone(w.buildings)};});}
+  const row={device,legs:[],captures:[],before:await stable()};report.active=row;check(device+'-canonical-hydrated-terrain',row.before.seed===report.seed&&hash(row.before.tiles)===expectedHash);await page.waitForTimeout(700);
+  async function capture(phase,inside,story){const s=await state(page),g=await geometry(page),entry={phase,state:s,geometry:g};row.captures.push(entry);await page.screenshot({path:path.join(out,device+'-'+phase+'.png')});check(device+'-'+phase+'-story',Math.abs(s.story-story)<.02,{state:s});if(g){check(device+'-'+phase+'-original-exact-voxels',g.found&&hash(g.visible)===hash(expected(inside,s.story))&&g.proxy.length===0&&g.authored.length===0,{actual:g.visible.length,expected:expected(inside,s.story).length});check(device+'-'+phase+'-player-height',Math.abs(g.player[1]-(groundY(loaded,s.x,s.z)+s.story*2))<.02,{actual:g.player});}flush();}
+  await capture('outside',false,0);
+  const legs=[['door',176,329,0],['ground',176,325,0],['approach-east',181,325,0],['stair-base',184,325,0],['up1',184,322,1],['floor1',181,322,1],['back1',184,322,1],['up2',184,319,2],['floor2',181,319,2],['back2',184,319,2],['up3',184,316,3],['floor3',181,316,3],['back3',184,316,3],['down2',184,319,2],['down1',184,322,1],['down0',184,325,0],['leave-stair',181,325,0],['leave-floor',176,325,0],['exit',176,329,0],['restored',176,332,0]];
+  for(const [phase,x,z,story] of legs){const from=await state(page),point=await screen(page,x,z),leg={phase,target:{x,z,story},from,point,track:[]};row.legs.push(leg);const prefix=device+'-'+phase;
+   const hit=await page.evaluate(p=>{const e=document.elementFromPoint(p.x,p.y);return {tag:e?.tagName,text:e?.textContent?.slice(0,100)};},point);check(prefix+'-canvas-input-target',hit.tag==='CANVAS',{point,hit});
+   if(device==='mobile')await page.touchscreen.tap(point.x,point.y);else await page.mouse.click(point.x,point.y);
+   leg.command=await state(page);check(prefix+'-native-exact-walk',leg.command.intent.kind==='walk'&&leg.command.intent.tx===x&&leg.command.intent.ty===z&&leg.command.path.length>0,{command:leg.command});
+   const nodes=[{x:Math.round(from.x),y:Math.round(from.z)},...leg.command.path.map(p=>({x:p.tx,y:p.ty}))];check(prefix+'-legal-canonical-route',nodes.slice(1).every((b,i)=>lineWalkable(loaded,nodes[i].x,nodes[i].y,b.x,b.y)),{nodes});
+   for(let i=0;i<80;i++){await tick(page);const p=await state(page);leg.track.push(p);if(i===1&&['ground','up1','up2','up3','down1'].includes(phase)){leg.moving=await geometry(page);await page.screenshot({path:path.join(out,prefix+'-moving.png')});check(prefix+'-moving-sample',p.path.length>0&&Math.hypot(p.x-from.x,p.z-from.z)>.05,{state:p});}if(Math.hypot(p.x-x,p.z-z)<.05&&p.path.length===0)break;}
+   leg.arrived=await state(page);check(prefix+'-arrived-story',Math.hypot(leg.arrived.x-x,leg.arrived.z-z)<.05&&leg.arrived.path.length===0&&Math.abs(leg.arrived.story-story)<.02,{arrived:leg.arrived});
+   if(['ground','floor1','floor2','floor3','restored'].includes(phase))await capture(phase,phase!=='restored',story);
+   if(phase==='floor3'){
+    // Diagnostic, not positive point-on-floor acceptance: the current handler
+    // propagates through the raised deck to an underlying terrain intersection.
+    const target={x:181,z:320,y:baseY+6+.51},point=await screen(page,target.x,target.z,target.y);
+    const surface=mode==='built'?null:await page.evaluate(point=>{const {scene,camera,THREE:T}=window.__keepScene,r=document.querySelector('canvas').getBoundingClientRect(),ray=new T.Raycaster();ray.setFromCamera(new T.Vector2((point.x-r.x)/r.width*2-1,1-(point.y-r.y)/r.height*2),camera);const hit=ray.intersectObjects(scene.children,true).find(h=>h.object.isInstancedMesh&&h.object.material.colorWrite&&h.object.material.opacity>=1);return hit?{point:hit.point.toArray(),distance:hit.distance}:null;},point);
+    if(device==='mobile')await page.touchscreen.tap(point.x,point.y);else await page.mouse.click(point.x,point.y);
+    row.raisedFloorPicking={target,point,surface,command:await state(page)};flush();
+    // Simulation is paused: the next real back3 input replaces this command.
+   }
+  }
+  row.after=await stable();check(device+'-terrain-buildings-preserved',hash(row.after.tiles)===expectedHash&&hash(row.after.buildings)===hash(row.before.buildings));report.cases.push(row);flush();await context.close();
+ }
+ if(mode==='failure')for(const device of ['desktop','mobile'])check(device+'-real-art-download-rejection',report.requests.some(r=>r.device===device&&r.injected));
+ check('exact-two-device-coverage',report.cases.length===2&&new Set(report.cases.map(r=>r.device)).size===2);check('no-unexpected-errors',report.errors.filter(e=>!(mode==='failure'&&e.type==='console'&&e.text.includes('503'))).length===0,{errors:report.errors});report.passed=true;
+}catch(e){report.passed=false;report.failure=e.stack;process.exitCode=1;try{for(const c of browser.contexts())for(const p of c.pages())if(!p.isClosed())await p.screenshot({path:path.join(out,'failure.png')});}catch{ /* Preserve first failure. */ }}finally{clearTimeout(watchdog);flush();await browser.close();}
+console.log(JSON.stringify({passed:report.passed,checks:report.checks.length,cases:report.cases.length,failure:report.failure,out}));

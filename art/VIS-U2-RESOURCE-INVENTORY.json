@@ -1,0 +1,321 @@
+{
+  "update": "VIS-U2",
+  "status": "VIS-U2-r1 implemented; independent QA pending",
+  "counts": {
+    "crop": 6,
+    "herb": 5,
+    "resource": 14
+  },
+  "entries": [
+    {
+      "id": "crop:cabbage",
+      "canonicalId": "cabbage",
+      "family": "crop",
+      "disposition": "Polish/author crop-specific silhouettes; retain plot frame, authored sapling lane and existing stage/selection semantics.",
+      "implementation": "Blender flora kit integrated; asset/type/lint/build and desktop/browser-touch render/input smoke passed; independent lifecycle QA pending",
+      "sourceLocations": [
+        "src/game/farm.ts:34",
+        "src/game/types.ts:434"
+      ]
+    },
+    {
+      "id": "crop:garlic",
+      "canonicalId": "garlic",
+      "family": "crop",
+      "disposition": "Polish/author crop-specific silhouettes; retain plot frame, authored sapling lane and existing stage/selection semantics.",
+      "implementation": "Blender flora kit integrated; asset/type/lint/build and desktop/browser-touch render/input smoke passed; independent lifecycle QA pending",
+      "sourceLocations": [
+        "src/game/farm.ts:36",
+        "src/game/types.ts:434"
+      ]
+    },
+    {
+      "id": "crop:ginseng",
+      "canonicalId": "ginseng",
+      "family": "crop",
+      "disposition": "Polish/author crop-specific silhouettes; retain plot frame, authored sapling lane and existing stage/selection semantics.",
+      "implementation": "Blender flora kit integrated; asset/type/lint/build and desktop/browser-touch render/input smoke passed; independent lifecycle QA pending",
+      "sourceLocations": [
+        "src/game/farm.ts:37",
+        "src/game/types.ts:434"
+      ]
+    },
+    {
+      "id": "crop:mandrake",
+      "canonicalId": "mandrake",
+      "family": "crop",
+      "disposition": "Polish/author crop-specific silhouettes; retain plot frame, authored sapling lane and existing stage/selection semantics.",
+      "implementation": "Blender flora kit integrated; asset/type/lint/build and desktop/browser-touch render/input smoke passed; independent lifecycle QA pending",
+      "sourceLocations": [
+        "src/game/farm.ts:38",
+        "src/game/types.ts:434"
+      ]
+    },
+    {
+      "id": "crop:moss",
+      "canonicalId": "moss",
+      "family": "crop",
+      "disposition": "Polish/author crop-specific silhouettes; retain plot frame, authored sapling lane and existing stage/selection semantics.",
+      "implementation": "Blender flora kit integrated; asset/type/lint/build and desktop/browser-touch render/input smoke passed; independent lifecycle QA pending",
+      "sourceLocations": [
+        "src/game/farm.ts:39",
+        "src/game/types.ts:434"
+      ]
+    },
+    {
+      "id": "crop:wheat",
+      "canonicalId": "wheat",
+      "family": "crop",
+      "disposition": "Polish/author crop-specific silhouettes; retain plot frame, authored sapling lane and existing stage/selection semantics.",
+      "implementation": "Blender flora kit integrated; asset/type/lint/build and desktop/browser-touch render/input smoke passed; independent lifecycle QA pending",
+      "sourceLocations": [
+        "src/game/farm.ts:35",
+        "src/game/types.ts:434"
+      ]
+    },
+    {
+      "id": "herb:ash",
+      "canonicalId": "ash",
+      "family": "herb",
+      "disposition": "Polish existing distinct wild-reagent silhouette and ready/picked readability; preserve patch IDs and readiness.",
+      "implementation": "Blender flora kit integrated; asset/type/lint/build and desktop/browser-touch render/input smoke passed; independent lifecycle QA pending",
+      "sourceLocations": [
+        "src/game/herbs.ts:35",
+        "src/game/types.ts:445"
+      ]
+    },
+    {
+      "id": "herb:ginseng",
+      "canonicalId": "ginseng",
+      "family": "herb",
+      "disposition": "Polish existing distinct wild-reagent silhouette and ready/picked readability; preserve patch IDs and readiness.",
+      "implementation": "Blender flora kit integrated; asset/type/lint/build and desktop/browser-touch render/input smoke passed; independent lifecycle QA pending",
+      "sourceLocations": [
+        "src/game/herbs.ts:34",
+        "src/game/types.ts:445"
+      ]
+    },
+    {
+      "id": "herb:mandrake",
+      "canonicalId": "mandrake",
+      "family": "herb",
+      "disposition": "Polish existing distinct wild-reagent silhouette and ready/picked readability; preserve patch IDs and readiness.",
+      "implementation": "Blender flora kit integrated; asset/type/lint/build and desktop/browser-touch render/input smoke passed; independent lifecycle QA pending",
+      "sourceLocations": [
+        "src/game/herbs.ts:33",
+        "src/game/types.ts:445"
+      ]
+    },
+    {
+      "id": "herb:moss",
+      "canonicalId": "moss",
+      "family": "herb",
+      "disposition": "Polish existing distinct wild-reagent silhouette and ready/picked readability; preserve patch IDs and readiness.",
+      "implementation": "Blender flora kit integrated; asset/type/lint/build and desktop/browser-touch render/input smoke passed; independent lifecycle QA pending",
+      "sourceLocations": [
+        "src/game/herbs.ts:32",
+        "src/game/types.ts:445"
+      ]
+    },
+    {
+      "id": "herb:pearl",
+      "canonicalId": "pearl",
+      "family": "herb",
+      "disposition": "Polish existing distinct wild-reagent silhouette and ready/picked readability; preserve patch IDs and readiness.",
+      "implementation": "Blender flora kit integrated; asset/type/lint/build and desktop/browser-touch render/input smoke passed; independent lifecycle QA pending",
+      "sourceLocations": [
+        "src/game/herbs.ts:36",
+        "src/game/types.ts:445"
+      ]
+    },
+    {
+      "id": "resource:ash",
+      "canonicalId": "ash",
+      "family": "resource",
+      "disposition": "Retain accepted timber asset/lifecycle; not new U2 tree work.",
+      "implementation": "Approved timber retained unchanged; no U2 replacement",
+      "sourceLocations": [
+        "src/game/resources/catalog.ts:152",
+        "src/game/resources/catalog.ts:21",
+        "src/game/resources/catalog.ts:633",
+        "src/game/resources/types.ts:17"
+      ]
+    },
+    {
+      "id": "resource:birch",
+      "canonicalId": "birch",
+      "family": "resource",
+      "disposition": "Retain accepted timber asset/lifecycle; not new U2 tree work.",
+      "implementation": "Approved timber retained unchanged; no U2 replacement",
+      "sourceLocations": [
+        "src/game/resources/catalog.ts:124",
+        "src/game/resources/catalog.ts:20",
+        "src/game/resources/catalog.ts:633",
+        "src/game/resources/types.ts:17"
+      ]
+    },
+    {
+      "id": "resource:common_cloth",
+      "canonicalId": "common_cloth",
+      "family": "resource",
+      "disposition": "Inventory/material resource: no invented world harvest node. Shared loot-container presentation only.",
+      "implementation": "No world node introduced; shared loot pouch integrated",
+      "sourceLocations": [
+        "src/game/resources/catalog.ts:27",
+        "src/game/resources/catalog.ts:318",
+        "src/game/resources/catalog.ts:633",
+        "src/game/resources/types.ts:17"
+      ]
+    },
+    {
+      "id": "resource:fine_linen",
+      "canonicalId": "fine_linen",
+      "family": "resource",
+      "disposition": "Inventory/material resource: no invented world harvest node. Shared loot-container presentation only.",
+      "implementation": "No world node introduced; shared loot pouch integrated",
+      "sourceLocations": [
+        "src/game/resources/catalog.ts:28",
+        "src/game/resources/catalog.ts:328",
+        "src/game/resources/catalog.ts:633",
+        "src/game/resources/types.ts:17"
+      ]
+    },
+    {
+      "id": "resource:ghostwood",
+      "canonicalId": "ghostwood",
+      "family": "resource",
+      "disposition": "Retain accepted timber asset/lifecycle; not new U2 tree work.",
+      "implementation": "Approved timber retained unchanged; no U2 replacement",
+      "sourceLocations": [
+        "src/game/resources/catalog.ts:236",
+        "src/game/resources/catalog.ts:24",
+        "src/game/resources/catalog.ts:633",
+        "src/game/resources/types.ts:17"
+      ]
+    },
+    {
+      "id": "resource:highland_ore",
+      "canonicalId": "highland_ore",
+      "family": "resource",
+      "disposition": "Review existing rock/gem renderer dispatch; author/polish within original bounds and discovery rules.",
+      "implementation": "Shared authored stone batch integrated; canonical catalog tint/shape/identity retained; independent identity/mining lifecycle QA pending",
+      "sourceLocations": [
+        "src/game/resources/catalog.ts:26",
+        "src/game/resources/catalog.ts:291",
+        "src/game/resources/catalog.ts:633",
+        "src/game/resources/types.ts:17"
+      ]
+    },
+    {
+      "id": "resource:iron_ore",
+      "canonicalId": "iron_ore",
+      "family": "resource",
+      "disposition": "Review existing rock/gem renderer dispatch; author/polish within original bounds and discovery rules.",
+      "implementation": "Shared authored stone batch integrated; canonical catalog tint/shape/identity retained; independent identity/mining lifecycle QA pending",
+      "sourceLocations": [
+        "src/game/resources/catalog.ts:25",
+        "src/game/resources/catalog.ts:264",
+        "src/game/resources/catalog.ts:633",
+        "src/game/resources/types.ts:17"
+      ]
+    },
+    {
+      "id": "resource:oak",
+      "canonicalId": "oak",
+      "family": "resource",
+      "disposition": "Retain accepted timber asset/lifecycle; not new U2 tree work.",
+      "implementation": "Approved timber retained unchanged; no U2 replacement",
+      "sourceLocations": [
+        "src/game/resources/catalog.ts:17",
+        "src/game/resources/catalog.ts:41",
+        "src/game/resources/catalog.ts:633",
+        "src/game/resources/types.ts:17"
+      ]
+    },
+    {
+      "id": "resource:pine",
+      "canonicalId": "pine",
+      "family": "resource",
+      "disposition": "Retain accepted timber asset/lifecycle; not new U2 tree work.",
+      "implementation": "Approved timber retained unchanged; no U2 replacement",
+      "sourceLocations": [
+        "src/game/resources/catalog.ts:18",
+        "src/game/resources/catalog.ts:633",
+        "src/game/resources/catalog.ts:68",
+        "src/game/resources/types.ts:17"
+      ]
+    },
+    {
+      "id": "resource:redwood",
+      "canonicalId": "redwood",
+      "family": "resource",
+      "disposition": "Retain accepted timber asset/lifecycle; not new U2 tree work.",
+      "implementation": "Approved timber retained unchanged; no U2 replacement",
+      "sourceLocations": [
+        "src/game/resources/catalog.ts:180",
+        "src/game/resources/catalog.ts:22",
+        "src/game/resources/catalog.ts:633",
+        "src/game/resources/types.ts:17"
+      ]
+    },
+    {
+      "id": "resource:ruby",
+      "canonicalId": "ruby",
+      "family": "resource",
+      "disposition": "Review existing rock/gem renderer dispatch; author/polish within original bounds and discovery rules.",
+      "implementation": "Shared authored stone batch integrated; canonical catalog tint/shape/identity retained; independent identity/mining lifecycle QA pending",
+      "sourceLocations": [
+        "src/game/resources/catalog.ts:29",
+        "src/game/resources/catalog.ts:338",
+        "src/game/resources/catalog.ts:633",
+        "src/game/resources/types.ts:17"
+      ]
+    },
+    {
+      "id": "resource:sapphire",
+      "canonicalId": "sapphire",
+      "family": "resource",
+      "disposition": "Review existing rock/gem renderer dispatch; author/polish within original bounds and discovery rules.",
+      "implementation": "Shared authored stone batch integrated; canonical catalog tint/shape/identity retained; independent identity/mining lifecycle QA pending",
+      "sourceLocations": [
+        "src/game/resources/catalog.ts:30",
+        "src/game/resources/catalog.ts:356",
+        "src/game/resources/catalog.ts:633",
+        "src/game/resources/types.ts:17"
+      ]
+    },
+    {
+      "id": "resource:willow",
+      "canonicalId": "willow",
+      "family": "resource",
+      "disposition": "Retain accepted timber asset/lifecycle; not new U2 tree work.",
+      "implementation": "Approved timber retained unchanged; no U2 replacement",
+      "sourceLocations": [
+        "src/game/resources/catalog.ts:19",
+        "src/game/resources/catalog.ts:633",
+        "src/game/resources/catalog.ts:96",
+        "src/game/resources/types.ts:17"
+      ]
+    },
+    {
+      "id": "resource:yew",
+      "canonicalId": "yew",
+      "family": "resource",
+      "disposition": "Retain accepted timber asset/lifecycle; not new U2 tree work.",
+      "implementation": "Approved timber retained unchanged; no U2 replacement",
+      "sourceLocations": [
+        "src/game/resources/catalog.ts:208",
+        "src/game/resources/catalog.ts:23",
+        "src/game/resources/catalog.ts:633",
+        "src/game/resources/types.ts:17"
+      ]
+    }
+  ],
+  "loot": {
+    "source": "src/components/game/pile-meshes.tsx",
+    "currentPresentation": "shared pile container; corpse-colored pile; separate DeathBody",
+    "policy": "Do not create unique ground models for every inventory item or change contents/identity. Improve shared collectible/death presentation and route death/body overlap to U3 if necessary.",
+    "implementation": "Authored shared drawstring pouch for drop/corpse; original DeathBody preserved for U3"
+  },
+  "firstAuthoringBatch": "Crop and wild-reagent shapes; no edits to U1 keep/player files while its QA packet is pending."
+}
