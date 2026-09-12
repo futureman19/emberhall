@@ -112,7 +112,10 @@ const SHELTER_SEEKERS: ReadonlySet<FaunaKind> = new Set([
   "cave_mole",
   "dusk_owl",
 ]);
-const WARDEN_KINDS: ReadonlySet<FaunaKind> = new Set(["wight", "greybarrow_wightling", "barrow_hound", "ashen_banshee", "bonecrow", "tomb_sentinel", "ossuary_knight", "grave_lich"]);
+/** Greybarrow's own dead — leashed to the tomb. The carrion of the wider
+ *  ruins (barrow hounds, bonecrows, ashen banshees) are regional: the Cairn
+ *  of Ash keeps its authored pack, and ruin strays wander their own homes. */
+const WARDEN_KINDS: ReadonlySet<FaunaKind> = new Set(["wight", "greybarrow_wightling", "tomb_sentinel", "ossuary_knight", "grave_lich"]);
 const NIGHT_HUNTERS: ReadonlySet<FaunaKind> = new Set([
   "wolf",
   "pine_lynx",
