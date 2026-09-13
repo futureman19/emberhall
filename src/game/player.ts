@@ -1,9 +1,10 @@
 import { EH, inGreybarrow } from "./atlas.ts";
-import { CURSE_BITE_WEAKEN, FAUNA_META, hasTag, ITEM_META, armorOf, POISON_PLAYER_HOURS, POISON_TICK_HOURS, tagConsumeOrder } from "./catalog.ts";
+import { FAUNA_META, hasTag, ITEM_META, POISON_TICK_HOURS, tagConsumeOrder } from "./catalog.ts";
+import { provoke, strikePlayer } from "./ecology.ts";
 import { harvestNow, plantNow, tillNow } from "./farm.ts";
 import { GHOSTWOOD_LUMBERJACK } from "./resources/catalog.ts";
 import { isGhostwoodTree, isTimberId, plantTreeNow } from "./forestry.ts";
-import { ARROW_RANGE, FIREBALL_RANGE, burstDeath, castNow, maxMana, tickMana } from "./magery.ts";
+import { burstDeath, castNow, maxMana, OFFENSIVE_SPELLS, offensiveRange, tickMana } from "./magery.ts";
 import { pickNow } from "./herbs.ts";
 import { pickPetName } from "./names.ts";
 import { petLabel } from "./pets.ts";
@@ -115,6 +116,9 @@ const RETALIATE_KINDS: ReadonlySet<FaunaKind> = new Set([
   "highland_aurochs",
   "river_otter",
   "brine_seal",
+  // Venom-capable: the fang roll lives in the ecology strike — a swung-at
+  // spider must turn and fight like any other retaliator.
+  "stonecrawl_spider",
 ]);
 
 export function resurrect(world: World, at?: { x: number; z: number }) {
@@ -194,11 +198,10 @@ export function replanIntentPath(world: World, p: Person) {
     const bow = intent.kind === "hunt" && effectiveMain(world) === "bow";
     return pathWithin(world, p, creature.x, creature.z, bow ? BOW_RANGE - 0.75 : 1.5, 2500);
   }
-  if (intent.kind === "cast" && (intent.spell === "magicarrow" || intent.spell === "fireball")) {
+  if (intent.kind === "cast" && intent.spell && OFFENSIVE_SPELLS.has(intent.spell)) {
     const creature = world.fauna.find((candidate) => candidate.id === intent.targetId && candidate.task !== "dead");
     if (!creature) return false;
-    const range = intent.spell === "fireball" ? FIREBALL_RANGE : ARROW_RANGE;
-    return pathWithin(world, p, creature.x, creature.z, range - 0.75, 2500);
+    return pathWithin(world, p, creature.x, creature.z, offensiveRange(intent.spell) - 0.75, 2500);
   }
   return pathBeside(world, p, intent.tx, intent.ty);
 }
@@ -275,8 +278,8 @@ export function commandChop(world: World, tx: number, ty: number) {
   }
   const held = inHand(world);
   if (!held || !hasTag(held, "blade")) return "Hold a blade — hatchet, knife, or sword.";
+  if (!pathBeside(world, p, tx, ty)) return "The way is closed.";
   world.player.intent = { kind: "chop", tx, ty, targetId: null, spell: null };
-  pathBeside(world, p, tx, ty);
   return null;
 }
 
@@ -287,8 +290,8 @@ export function commandMine(world: World, tx: number, ty: number) {
   if (dead) return dead;
   const held = needHeld(world, "pick");
   if (held) return held;
+  if (!pathBeside(world, p, tx, ty)) return "The way is closed.";
   world.player.intent = { kind: "mine", tx, ty, targetId: null, spell: null };
-  pathBeside(world, p, tx, ty);
   return null;
 }
 
@@ -665,6 +668,13 @@ function prepareResourceHarvest(world: World, nodeKind: "tree" | "rock"): Prepar
 
 function resourceHarvestNow(world: World, nodeKind: "tree" | "rock", prepared: PreparedResourceHarvest) {
   const { tx, ty } = world.player.intent;
+  // An empty route is not evidence of arrival: the commit itself validates
+  // legal interaction reach before any depletion, inventory, scar, or gain.
+  const actor = you(world);
+  if (!actor || Math.hypot(actor.x - tx, actor.z - ty) > WORK_REACH) {
+    world.player.intent.kind = "none";
+    return "Too far.";
+  }
   const t = world.tiles[ty]?.[tx];
   if (!t || t.kind !== nodeKind) {
     world.player.intent.kind = "none";
@@ -777,7 +787,6 @@ function huntNow(world: World, p: Person) {
   const slayerMul = mods.vs[c.kind];
   if (slayerMul) dmg = Math.floor(dmg * slayerMul);
   if (world.hour < world.player.blessUntil) dmg = Math.floor(dmg * 1.25);
-  const arm = armorOf(world.player.wear) + mods.armor;
   c.hp -= dmg;
   // A bound beast tears at whatever its caster hunts.
   const bound = world.fauna.find(
@@ -785,19 +794,15 @@ function huntNow(world: World, p: Person) {
   );
   if (bound) c.hp -= FAUNA_META[bound.kind].dmg;
   // Teeth only answer when they can reach you — an arrow from afar draws none.
-  // A held beast cannot answer at all.
+  // A held beast cannot answer at all. The swing's counter is the OPENING
+  // bite that starts the war: it lands through the one shared strike (same
+  // armor, ward, curse, and venom math as the ecology fight beat), and
+  // provoke resets the beast's beat so the cadence never doubles it. A beast
+  // already at war echoes nothing — the cadence alone owns its teeth.
   const held = c.paralyzeUntil !== undefined && c.paralyzeUntil > 0 && world.hour < c.paralyzeUntil;
-  if (!held && RETALIATE_KINDS.has(c.kind) && (!bow || dist < 1.8)) {
-    const ward = world.hour < world.player.blessUntil ? 2 : 0;
-    let bite = Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2) - ward);
-    if (c.curseUntil && world.hour < c.curseUntil) bite = Math.max(1, Math.floor(bite * (1 - CURSE_BITE_WEAKEN)));
-    p.hp = Math.max(0, p.hp - bite);
-    if (c.kind === "stonecrawl_spider" && c.hp > 0 && world.hour >= world.player.poisonUntil && Math.random() < 0.35) {
-      world.player.poisonUntil = world.hour + POISON_PLAYER_HOURS;
-      world.player.poisonTickAt = world.hour + POISON_TICK_HOURS;
-      playSfx("spell_poison", 0.35);
-      log(world, "The spider's fangs leave venom in the wound.");
-    }
+  if (!held && RETALIATE_KINDS.has(c.kind) && (!bow || dist < 1.8) && c.hp > 0 && c.task !== "fight") {
+    strikePlayer(world, c, p);
+    provoke(world, c);
   }
   if (bow) {
     p.facing = Math.atan2(c.x - p.x, c.z - p.z);
@@ -897,6 +902,9 @@ function skinNow(world: World, p: Person) {
 
 /** Arrow-shot for a hunting bow — shorter than a mage's reach, longer than a blade's. */
 const BOW_RANGE = 10;
+/** Legal work reach at impact: the pathBeside arrival ring plus stride slack
+ *  (the herbs lane uses the same 1.8 + 0.6 margin). */
+const WORK_REACH = 2.4;
 const targetReplans = new WeakMap<World, { tick: number; targetId: string | null }>();
 
 export interface CombatFx {
@@ -1055,14 +1063,14 @@ export function tickPlayer(world: World, dt: number): string | null {
     }
   }
   if (intent.kind === "cast") {
-    if (intent.spell === "magicarrow" || intent.spell === "fireball") {
+    if (intent.spell && OFFENSIVE_SPELLS.has(intent.spell)) {
       const c = world.fauna.find((x) => x.id === intent.targetId);
       if (!c || c.task === "dead") {
         intent.kind = "none";
         p.path = [];
         return "The target is gone.";
       }
-      const range = intent.spell === "fireball" ? FIREBALL_RANGE : ARROW_RANGE;
+      const range = offensiveRange(intent.spell);
       const distance = Math.hypot(p.x - c.x, p.z - c.z);
       if (distance < range) {
         p.path = [];

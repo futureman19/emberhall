@@ -63,6 +63,17 @@ function bankHands(world: World) {
   return null;
 }
 
+/** A stall's counter reach: the court's keeper stands a few paces off and
+ *  still trades — but not from across the vale, and never with no keeper
+ *  anywhere near. Checked at transaction time from canonical positions. */
+export const SHOP_RANGE = 4.5;
+
+function shopHands(world: World) {
+  if (isGhost(world)) return "A ghost cannot.";
+  if (!nearNpcRole(world, "provisioner", SHOP_RANGE)) return "The keeper is not here.";
+  return null;
+}
+
 export function commandApproach(world: World, id: string) {
   const t = world.people.find((p) => p.id === id);
   const self = you(world);
@@ -128,7 +139,8 @@ export function commandTalk(world: World, id: string) {
 }
 
 export function commandBuy(world: World, item: ItemId) {
-  if (isGhost(world)) return "A ghost cannot.";
+  const err = shopHands(world);
+  if (err) return err;
   const meta = ITEM_META[item];
   if (!SHOP_STOCK.includes(item)) return "They do not keep that.";
   if (world.gold < meta.buy) return `Need ${meta.buy} gold.`;
@@ -139,7 +151,8 @@ export function commandBuy(world: World, item: ItemId) {
 }
 
 export function commandSell(world: World, item: ItemId) {
-  if (isGhost(world)) return "A ghost cannot.";
+  const err = shopHands(world);
+  if (err) return err;
   const n = world.player.pack[item] ?? 0;
   if (n < 1) return "You do not carry that.";
   const meta = ITEM_META[item];
@@ -151,7 +164,8 @@ export function commandSell(world: World, item: ItemId) {
 }
 
 export function commandSellRare(world: World, uid: string) {
-  if (isGhost(world)) return "A ghost cannot.";
+  const err = shopHands(world);
+  if (err) return err;
   const rare = world.player.rares.find((r) => r.uid === uid);
   if (!rare) return "No such wonder.";
   const { total } = appraiseRare(rare);

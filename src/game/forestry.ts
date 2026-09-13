@@ -13,9 +13,17 @@ import type { Sapling, World } from "./types.ts";
 export const MAX_SAPLINGS = 40;
 /** Game hours from acorn to a standing tree. Rain shortens it. */
 export const TREE_HOURS = 1.6;
+/** Legal work reach at impact: the arrival ring plus stride slack. */
+const WORK_REACH = 2.4;
 
 function you(world: World) {
   return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
+}
+
+/** An empty route is not evidence of arrival — checked at every commit. */
+function inReach(world: World, tx: number, ty: number) {
+  const p = you(world);
+  return Boolean(p) && Math.hypot(p!.x - tx, p!.z - ty) <= WORK_REACH;
 }
 
 /** Plant gate is the catalog extract threshold — new timber joins this ladder automatically. */
@@ -88,13 +96,16 @@ export function commandPlantTree(world: World, tx: number, ty: number) {
   if (!species) return "Forestry is not yet taught.";
   const err = canPlantTree(world, tx, ty);
   if (err) return err;
+  const closed = pathBeside(world, tx, ty);
+  if (closed) return closed;
   world.player.intent = { kind: "forest", tx, ty, targetId: species, spell: null };
-  return pathBeside(world, tx, ty);
+  return null;
 }
 
 export function plantTreeNow(world: World) {
   const { tx, ty, targetId } = world.player.intent;
   world.player.intent.kind = "none";
+  if (!inReach(world, tx, ty)) return "Too far.";
   if ((world.player.pack.acorn ?? 0) < 1) return `Need ${ITEM_META.acorn.label.toLowerCase()}.`;
   const forestry = world.player.skills.forestry ?? 0;
   const species = isTimberId(targetId) && forestry >= plantSkillFor(targetId) ? targetId : bestPlantableTimber(forestry);

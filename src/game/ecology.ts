@@ -1,11 +1,14 @@
 import { BARROW, MAP, PLACES, inGreybarrow } from "./atlas.ts";
-import { CURSE_SLOW, FAUNA_META, isNight, POISON_TICK_HOURS } from "./catalog.ts";
+import { CURSE_BITE_WEAKEN, CURSE_SLOW, FAUNA_META, isNight, POISON_PLAYER_HOURS, POISON_TICK_HOURS, armorOf } from "./catalog.ts";
+import { COMBAT_BEAT } from "./combat-animation.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { spawnCorpsePile } from "./piles.ts";
+import { rareMods } from "./rare.ts";
 import { mulberry32 } from "./rng.ts";
+import { playSfx } from "./vale-sfx.ts";
 import { sheltering } from "./weather.ts";
 import { log, nid } from "./world.ts";
-import type { Creature, FaunaKind, World } from "./types.ts";
+import type { Creature, FaunaKind, Person, World } from "./types.ts";
 
 type SpawnEntry = { kind: FaunaKind; weight: number };
 
@@ -109,7 +112,10 @@ const SHELTER_SEEKERS: ReadonlySet<FaunaKind> = new Set([
   "cave_mole",
   "dusk_owl",
 ]);
-const WARDEN_KINDS: ReadonlySet<FaunaKind> = new Set(["wight", "greybarrow_wightling", "barrow_hound", "ashen_banshee", "bonecrow", "tomb_sentinel", "ossuary_knight", "grave_lich"]);
+/** Tomb-only species stay leashed globally. Shared carrion species belong
+ * to Greybarrow only when their home is there; regional homes stay regional. */
+const REGIONAL_WARDEN_KINDS: ReadonlySet<FaunaKind> = new Set(["barrow_hound", "bonecrow", "ashen_banshee"]);
+const WARDEN_KINDS: ReadonlySet<FaunaKind> = new Set(["wight", "greybarrow_wightling", "tomb_sentinel", "ossuary_knight", "grave_lich"]);
 const NIGHT_HUNTERS: ReadonlySet<FaunaKind> = new Set([
   "wolf",
   "pine_lynx",
@@ -387,6 +393,52 @@ export function seedBarrow(world: World, rng: () => number) {
   }
 }
 
+/** Teeth reach for a fighting beast — the same arm's reach the player swings at. */
+const FIGHT_REACH = 1.8;
+/** A fight is let go beyond this stride — pursuit stays bounded. */
+const FIGHT_LEASH = 16;
+/** One path search per six simulation ticks per beast, like the player's own. */
+const fightPlans = new WeakMap<Creature, { tick: number; tx: number; ty: number }>();
+/** Elapsed-simulation-time attack cadence per beast. */
+const fightBeats = new WeakMap<Creature, number>();
+
+/** A struck beast turns on its striker: fight now, its next free bite a full
+ *  beat away — the swing's own counter already landed. */
+export function provoke(world: World, c: Creature) {
+  c.task = "fight";
+  c.taskUntil = world.hour + 0.25;
+  fightBeats.set(c, 0);
+}
+
+/**
+ * The one predator strike — shared armor, bless ward, and curse weaken
+ * formulas, and the spider's venom roll. The autonomous fight beat and the
+ * player-swing counter both land through here, sharing one beat (provoke
+ * resets it) so a beast never bites twice in the same breath.
+ */
+export function strikePlayer(world: World, c: Creature, you: Person) {
+  const arm = armorOf(world.player.wear) + rareMods(world).armor;
+  const ward = world.hour < world.player.blessUntil ? 2 : 0;
+  let bite = Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2) - ward);
+  if (c.curseUntil && world.hour < c.curseUntil) bite = Math.max(1, Math.floor(bite * (1 - CURSE_BITE_WEAKEN)));
+  you.hp = Math.max(0, you.hp - bite);
+  if (c.kind === "stonecrawl_spider" && c.hp > 0 && world.hour >= world.player.poisonUntil && Math.random() < 0.35) {
+    world.player.poisonUntil = world.hour + POISON_PLAYER_HOURS;
+    world.player.poisonTickAt = world.hour + POISON_TICK_HOURS;
+    playSfx("spell_poison", 0.35);
+    log(world, "The spider's fangs leave venom in the wound.");
+  }
+}
+
+/** A fight is let go: back to grazing, cadence and route forgotten. */
+function letGo(c: Creature, world: World) {
+  c.task = "wander";
+  c.taskUntil = world.hour;
+  c.path = [];
+  fightBeats.delete(c);
+  fightPlans.delete(c);
+}
+
 export function tickEcology(world: World, dt: number) {
   const refillAt = starterRefillAt.get(world);
   if (refillAt === undefined) starterRefillAt.set(world, world.hour + STARTER_FAUNA_REFILL_HOURS);
@@ -437,7 +489,9 @@ export function tickEcology(world: World, dt: number) {
         }
       }
     }
-    if (WARDEN_KINDS.has(c.kind) && !inGreybarrow(Math.round(c.x), Math.round(c.z))) {
+    const barrowWarden = WARDEN_KINDS.has(c.kind)
+      || (REGIONAL_WARDEN_KINDS.has(c.kind) && inGreybarrow(c.home.tx, c.home.ty));
+    if (barrowWarden && !inGreybarrow(Math.round(c.x), Math.round(c.z))) {
       const dest = nearestWalkable(world, BARROW.cx, BARROW.cy);
       if (dest) {
         c.x = dest.x;
@@ -498,6 +552,46 @@ export function tickEcology(world: World, dt: number) {
         c.task = "fight";
         const path = astar(world, Math.round(c.x), Math.round(c.z), Math.round(you.x), Math.round(you.z), 2000);
         if (path) c.path = path.map((n) => ({ tx: n.x, ty: n.y }));
+      }
+    }
+    // A beast at war presses the attack on its own: bounded pursuit on a
+    // replan budget, teeth on the combat beat. Ghosts, the unseen, and the
+    // far-off are let go. (The paralyzed never arrive — they hold above.)
+    if (c.task === "fight" && !c.ownerId) {
+      if (!you || you.ghost || world.player.ghost || world.hour < world.player.invisUntil) {
+        letGo(c, world);
+      } else {
+        const dist = Math.hypot(c.x - you.x, c.z - you.z);
+        if (dist > FIGHT_LEASH) {
+          letGo(c, world);
+        } else if (dist <= FIGHT_REACH) {
+          c.path = [];
+          const beat = (fightBeats.get(c) ?? 0) + dt;
+          if (beat >= COMBAT_BEAT) {
+            fightBeats.set(c, beat - COMBAT_BEAT);
+            strikePlayer(world, c, you);
+          } else {
+            fightBeats.set(c, beat);
+          }
+        } else {
+          fightBeats.delete(c);
+          const tx = Math.round(you.x);
+          const ty = Math.round(you.z);
+          let plan = fightPlans.get(c);
+          if (!plan && c.path.length) {
+            // A path planted by the night's first lunge carries no plan yet —
+            // anchor the watch here so a moving target is noticed.
+            plan = { tick: world.tickCount, tx, ty };
+            fightPlans.set(c, plan);
+          }
+          const targetMoved = plan !== undefined && (tx !== plan.tx || ty !== plan.ty);
+          const canReplan = !plan || world.tickCount - plan.tick >= 6;
+          if ((!c.path.length || targetMoved) && canReplan) {
+            const path = astar(world, Math.round(c.x), Math.round(c.z), tx, ty, 2000);
+            fightPlans.set(c, { tick: world.tickCount, tx, ty });
+            if (path) c.path = path.map((n) => ({ tx: n.x, ty: n.y }));
+          }
+        }
       }
     }
     if (c.path.length) {

@@ -28,6 +28,53 @@ type MotionWatch = {
 };
 const motionWatches = new WeakMap<Person, MotionWatch>();
 
+/** Every planned leg after the current position, checked as the planner made
+ *  it: waypoint to waypoint, tile-exact. A route whose later legs no longer
+ *  walk is not walked at all — the caller replans around the new terrain. */
+function remainingLegsWalkable(world: World, path: ReadonlyArray<{ tx: number; ty: number }>) {
+  for (let i = 0; i + 1 < path.length; i++) {
+    const a = path[i]!;
+    const b = path[i + 1]!;
+    if (!lineWalkable(world, a.tx, a.ty, b.tx, b.ty)) return false;
+  }
+  return true;
+}
+
+/** First observation may be mid-segment (restored/replaced route). Traverse
+ * the actual continuous line's tile boundaries, not a new line from its
+ * rounded start. Each boundary uses the planner's climb/corner rules. */
+function firstLegWalkable(world: World, p: Person, tx: number, ty: number) {
+  let { tx: x, ty: y } = tileOf(p.x, p.z);
+  const dx = tx - p.x;
+  const dy = ty - p.z;
+  const sx = Math.sign(dx);
+  const sy = Math.sign(dy);
+  const deltaX = dx === 0 ? Infinity : 1 / Math.abs(dx);
+  const deltaY = dy === 0 ? Infinity : 1 / Math.abs(dy);
+  let maxX = dx === 0 ? Infinity : (x + sx * 0.5 - p.x) / dx;
+  let maxY = dy === 0 ? Infinity : (y + sy * 0.5 - p.z) / dy;
+  while (x !== tx || y !== ty) {
+    let nx = x;
+    let ny = y;
+    if (Math.abs(maxX - maxY) < 1e-9) {
+      nx += sx;
+      ny += sy;
+      maxX += deltaX;
+      maxY += deltaY;
+    } else if (maxX < maxY) {
+      nx += sx;
+      maxX += deltaX;
+    } else {
+      ny += sy;
+      maxY += deltaY;
+    }
+    if (!lineWalkable(world, x, y, nx, ny)) return false;
+    x = nx;
+    y = ny;
+  }
+  return lineWalkable(world, x, y, tx, ty);
+}
+
 export function setSpeed(world: World, s: Speed) {
   world.speed = s;
 }
@@ -56,6 +103,19 @@ function followPath(world: World, p: Person, dt: number): "idle" | "moving" | "s
     if (!lineWalkable(world, here.tx, here.ty, first.tx, first.ty)) {
       p.path = [];
       motionWatches.delete(p);
+      return "stuck";
+    }
+  }
+  // A revision may instead touch a LATER leg of the route. Revalidate the
+  // remaining planned legs tile-to-tile — waypoints are integers, so this
+  // cannot trip on fractional rounding — whenever the revision moved under
+  // an active route, and on the first observed frame (the planner ran before
+  // any watch existed, so a pre-tick change is otherwise invisible until its
+  // leg begins).
+  if ((previous && previous.landRev !== world.landRev) || !previous) {
+    if ((!previous && !firstLegWalkable(world, p, first.tx, first.ty)) || !remainingLegsWalkable(world, p.path)) {
+      p.path = [];
+      if (previous) motionWatches.delete(p);
       return "stuck";
     }
   }
