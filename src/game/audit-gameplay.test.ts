@@ -3,7 +3,7 @@ import test from "node:test";
 import { inGreybarrow, inPlace } from "./atlas.ts";
 import { FAUNA_META } from "./catalog.ts";
 import { seedFauna, spawn, tickEcology } from "./ecology.ts";
-import { commandTill, plotAt } from "./farm.ts";
+import { commandHarvest, commandPlant, commandTill, plotAt } from "./farm.ts";
 import { commandPlantTree, saplingAt } from "./forestry.ts";
 import { makeResourceStackKey, resourceCount } from "./inventory/resources.ts";
 import { commandCast } from "./magery.ts";
@@ -266,6 +266,42 @@ test("G2 - impact without reach is refused at commit time", () => {
   assert.equal(world.player.intent.kind, "none");
 });
 
+for (const work of ["till", "plant", "harvest"] as const) {
+  for (const replaceHoe of [true, false]) {
+    test(`G2 - ${work} ${replaceHoe ? "rejects a hoe replaced during travel" : "completes with the hoe retained"}`, () => {
+      const { world, player } = playerWorld();
+      world.player.wear.main = "hoe";
+      world.player.pack.cabbage_seed = 2;
+      world.player.skills.farming = 100;
+      if (work !== "till") {
+        world.plots.push({ id: "impact-bed", tx: 34, ty: 30,
+          crop: work === "harvest" ? "cabbage" : null,
+          stage: work === "harvest" ? 3 : 0, plantedHour: 0 });
+      }
+      const snapshot = () => structuredClone({ plots: world.plots, pack: world.player.pack,
+        skills: world.player.skills, scars: world.scars, landRev: world.landRev,
+        tile: world.tiles[30]![34], objectives: world.objectives });
+      const before = snapshot();
+      const note = work === "till" ? commandTill(world, 34, 30)
+        : work === "plant" ? commandPlant(world, 34, 30, "cabbage")
+        : commandHarvest(world, 34, 30);
+      assert.equal(note, null);
+      assert.ok(player.path.length > 0, "a real travel order was admitted");
+      tickWorld(world, 0.1);
+      assert.notEqual(world.player.intent.kind, "none", "work is still pending during travel");
+      if (replaceHoe) world.player.wear.main = "pick";
+      withRandom(0.01, () => {
+        for (let i = 0; i < 40; i++) tickWorld(world, 0.1);
+      });
+      assert.equal(world.player.intent.kind, "none");
+      if (replaceHoe) assert.deepEqual(snapshot(), before, "no farm mutation, inventory change or gain");
+      else if (work === "till") assert.ok(plotAt(world, 34, 30));
+      else if (work === "plant") assert.equal(plotAt(world, 34, 30)?.crop, "cabbage");
+      else assert.equal(world.player.pack.cabbage, (before.pack.cabbage ?? 0) + 1);
+    });
+  }
+}
+
 // ---------------------------------------------------------------------------
 // G3 — every harmful spell keeps its approach and releases only in range.
 // ---------------------------------------------------------------------------
@@ -377,6 +413,28 @@ test("G4 - a route invalidated before the first tick is never crossed", () => {
   assert.equal(crossed, false, "the blocked tile is never entered");
 });
 
+for (const singleWaypoint of [true, false]) {
+  for (const fractional of [false, true]) {
+    test(`G4 - first leg blocked before observation (${singleWaypoint ? "single" : "multiple"} waypoint, fractional=${fractional})`, () => {
+      const { world, player } = playerWorld();
+      if (fractional) player.x += 0.2;
+      player.path = [{ tx: 35, ty: 30 }, ...(singleWaypoint ? [] : [{ tx: 35, ty: 35 }])];
+      const goal = player.path.at(-1)!;
+      world.player.intent = { kind: "walk", ...goal, targetId: null, spell: null };
+      world.tiles[30]![33]!.kind = "wall";
+      world.landRev += 1;
+      const before = { x: player.x, z: player.z };
+      tickWorld(world, 0.1);
+      assert.deepEqual({ x: player.x, z: player.z }, before, "invalid first leg is rejected before motion");
+      for (let i = 0; i < 80; i++) {
+        tickWorld(world, 0.1);
+        assert.ok(Math.hypot(player.x - 33, player.z - 30) >= 0.51, "never enters the obstruction");
+      }
+      assert.ok(Math.hypot(player.x - goal.tx, player.z - goal.ty) < 0.1, "replanned route arrives");
+    });
+  }
+}
+
 // ---------------------------------------------------------------------------
 // G5 — dying on an existing pile keeps corpse identity and recovery.
 // ---------------------------------------------------------------------------
@@ -477,6 +535,24 @@ test("G6 - the Cairn keeps its hounds and crows after an ecology tick; the lich 
     "Greybarrow's own dead are still leashed to the tomb",
   );
 });
+
+for (const kind of ["barrow_hound", "bonecrow", "ashen_banshee"] as const) {
+  for (const barrowHome of [true, false]) {
+    test(`G6 - ${kind} preserves ${barrowHome ? "Greybarrow confinement" : "regional home"}`, () => {
+      const world = createStubWorld();
+      const c = spawn(world, kind, barrowHome ? 110 : 64, barrowHome ? 440 : 96);
+      const home = { ...c.home };
+      c.x = 64;
+      c.z = 96;
+      c.taskUntil = world.hour + 10;
+      world.fauna.push(c);
+      tickEcology(world, 0.016);
+      assert.equal(inGreybarrow(Math.round(c.x), Math.round(c.z)), barrowHome);
+      assert.deepEqual(c.home, home);
+      if (!barrowHome) assert.deepEqual({ x: c.x, z: c.z }, { x: 64, z: 96 });
+    });
+  }
+}
 
 // ---------------------------------------------------------------------------
 // G7 — provisioner trade requires the keeper at hand, at transaction time.

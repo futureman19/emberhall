@@ -112,9 +112,9 @@ const SHELTER_SEEKERS: ReadonlySet<FaunaKind> = new Set([
   "cave_mole",
   "dusk_owl",
 ]);
-/** Greybarrow's own dead — leashed to the tomb. The carrion of the wider
- *  ruins (barrow hounds, bonecrows, ashen banshees) are regional: the Cairn
- *  of Ash keeps its authored pack, and ruin strays wander their own homes. */
+/** Tomb-only species stay leashed globally. Shared carrion species belong
+ * to Greybarrow only when their home is there; regional homes stay regional. */
+const REGIONAL_WARDEN_KINDS: ReadonlySet<FaunaKind> = new Set(["barrow_hound", "bonecrow", "ashen_banshee"]);
 const WARDEN_KINDS: ReadonlySet<FaunaKind> = new Set(["wight", "greybarrow_wightling", "tomb_sentinel", "ossuary_knight", "grave_lich"]);
 const NIGHT_HUNTERS: ReadonlySet<FaunaKind> = new Set([
   "wolf",
@@ -489,7 +489,9 @@ export function tickEcology(world: World, dt: number) {
         }
       }
     }
-    if (WARDEN_KINDS.has(c.kind) && !inGreybarrow(Math.round(c.x), Math.round(c.z))) {
+    const barrowWarden = WARDEN_KINDS.has(c.kind)
+      || (REGIONAL_WARDEN_KINDS.has(c.kind) && inGreybarrow(c.home.tx, c.home.ty));
+    if (barrowWarden && !inGreybarrow(Math.round(c.x), Math.round(c.z))) {
       const dest = nearestWalkable(world, BARROW.cx, BARROW.cy);
       if (dest) {
         c.x = dest.x;

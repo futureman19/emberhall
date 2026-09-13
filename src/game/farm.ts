@@ -198,6 +198,8 @@ export function commandWorkPlot(world: World, tx: number, ty: number) {
 export function tillNow(world: World) {
   const { tx, ty } = world.player.intent;
   world.player.intent.kind = "none";
+  const hoe = heldHoe(world);
+  if (hoe) return hoe;
   if (!inReach(world, tx, ty)) return "Too far.";
   const err = canTill(world, tx, ty);
   if (err) return err;
@@ -214,6 +216,8 @@ export function plantNow(world: World) {
   const meta = CROP_META[crop];
   const bed = plotAt(world, world.player.intent.tx, world.player.intent.ty);
   world.player.intent.kind = "none";
+  const hoe = heldHoe(world);
+  if (hoe) return hoe;
   if (!inReach(world, world.player.intent.tx, world.player.intent.ty)) return "Too far.";
   if (!meta || !bed) return "The bed is gone.";
   if (bed.crop) return "Something already grows.";
@@ -234,6 +238,8 @@ export function harvestNow(world: World) {
     world.plots.find((p) => p.id === world.player.intent.targetId) ??
     plotAt(world, world.player.intent.tx, world.player.intent.ty);
   world.player.intent.kind = "none";
+  const hoe = heldHoe(world);
+  if (hoe) return hoe;
   if (!bed || !bed.crop || bed.stage < 3) return "Nothing ripe.";
   if (!inReach(world, bed.tx, bed.ty)) return "Too far.";
   const meta = CROP_META[bed.crop];
