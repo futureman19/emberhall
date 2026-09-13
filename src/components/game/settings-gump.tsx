@@ -19,7 +19,7 @@ export function SettingsGump() {
   if (!open) return null;
   return (
     <div
-      className="pointer-events-auto absolute top-3 left-16 z-10 w-72 max-w-[calc(100vw-5rem)] rounded-[var(--radius-lg)] border border-border bg-bg p-4 shadow-2xl"
+      className="pointer-events-auto absolute top-3 left-16 z-10 max-h-[calc(100dvh-1.5rem)] w-72 max-w-[calc(100vw-5rem)] overflow-y-auto overscroll-contain rounded-[var(--radius-lg)] border border-border bg-bg p-4 shadow-2xl"
       role="dialog"
       aria-label="Settings — sound, graphics and the Vault"
     >

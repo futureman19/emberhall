@@ -40,7 +40,7 @@ import { sfxMuted, toggleSfx, warmSfx } from "@/game/vale-sfx";
 import { useGame } from "@/game/store";
 import type { PanelId, Speed } from "@/game/types";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function clockLabel(clock: number, day: number) {
   const h = Math.floor(clock) % 24;
@@ -110,19 +110,56 @@ function startHall(fresh: boolean) {
 function TitleOverlay() {
   const [hasSave, setHasSave] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [confirmNew, setConfirmNew] = useState(false);
+  const startError = useGame((s) => s.toast);
+  const keepButton = useRef<HTMLButtonElement>(null);
+  const newButton = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     setHasSave(hallHasSave());
   }, []);
   useEffect(() => {
+    if (confirmNew) keepButton.current?.focus();
+  }, [confirmNew]);
+  // "started" ran begin; "confirming" only opened the replace prompt; "held"
+  // changed nothing (busy or already confirming). Opening the prompt never
+  // touches the save — destruction commits only on the explicit confirm.
+  const requestStart = (fresh: boolean): "started" | "confirming" | "held" => {
+    if (busy) return "held";
+    if (fresh && hasSave && !confirmNew) {
+      setConfirmNew(true);
+      return "confirming";
+    }
+    if (fresh && hasSave && confirmNew) return "held";
+    setBusy(true);
+    startHall(fresh);
+    return "started";
+  };
+  const requestStartRef = useRef(requestStart);
+  requestStartRef.current = requestStart;
+  const swallowClick = useRef(false);
+  useEffect(() => {
     const onDoc = (e: Event) => {
+      // The tap that opened the replace prompt releases into a click that
+      // must not reach anything — wherever it lands now.
+      if (e.type === "click" && swallowClick.current) {
+        swallowClick.current = false;
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
       const el = e.target as HTMLElement | null;
       if (!el) return;
       const hit = el.closest("[data-start]") as HTMLElement | null;
-      if (!hit) return;
+      if (!hit) {
+        if (e.type === "pointerdown") swallowClick.current = false;
+        return;
+      }
       e.preventDefault();
       e.stopPropagation();
-      setBusy(true);
-      startHall(hit.getAttribute("data-start") === "new");
+      if (requestStartRef.current(hit.getAttribute("data-start") === "new") === "confirming" && e.type === "pointerdown") {
+        // The tap that opened the prompt must not also confirm on release.
+        swallowClick.current = true;
+      }
     };
     document.addEventListener("click", onDoc, true);
     document.addEventListener("pointerdown", onDoc, true);
@@ -131,11 +168,6 @@ function TitleOverlay() {
       document.removeEventListener("pointerdown", onDoc, true);
     };
   }, []);
-  const go = (fresh: boolean) => {
-    if (busy) return;
-    setBusy(true);
-    startHall(fresh);
-  };
   return (
     <div className="absolute inset-0 z-50 flex items-center justify-center bg-gradient-to-t from-bg via-bg/55 to-bg/15 p-4 pb-28">
       <div className="w-full max-w-md rounded-[var(--radius-xl)] border border-border bg-bg/92 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.45)]">
@@ -145,31 +177,80 @@ function TitleOverlay() {
           You walk a country, not a yard. Dirt from Ridgewatch to Brinegate. Click the ground — or a name on the map —
           and walk. Skills rise by using them. The woods do not wait.
         </p>
-        <div className="mt-6 flex flex-col gap-2">
-          {hasSave && (
-            <button
-              type="button"
-              data-start="continue"
-              disabled={busy}
-              className="h-14 w-full rounded-[var(--radius-md)] bg-accent text-base font-medium text-accent-fg"
-              onClick={() => go(false)}
-            >
-              {busy ? "Opening…" : "Continue"}
-            </button>
-          )}
-          <button
-            type="button"
-            data-start="new"
-            disabled={busy}
-            className={
-              hasSave
-                ? "h-14 w-full rounded-[var(--radius-md)] border border-border-strong bg-surface-2 text-base font-medium text-fg"
-                : "h-14 w-full rounded-[var(--radius-md)] bg-accent text-base font-medium text-accent-fg"
-            }
-            onClick={() => go(true)}
+        {startError && (
+          <p
+            role="alert"
+            className="mt-4 rounded-[var(--radius-md)] border border-accent/60 bg-accent/15 px-3 py-2 text-pretty text-sm leading-relaxed text-fg"
           >
-            {busy ? "Raising…" : "New hall"}
-          </button>
+            {startError} Your hall is untouched — try again.
+          </p>
+        )}
+        <div className="mt-6 flex flex-col gap-2">
+          {confirmNew ? (
+            <div role="alertdialog" aria-labelledby="replace-hall-title" aria-describedby="replace-hall-desc">
+              <p id="replace-hall-title" className="font-display text-sm text-fg">
+                Replace the saved hall?
+              </p>
+              <p id="replace-hall-desc" className="mt-1 text-pretty text-xs leading-relaxed text-muted">
+                Starting a new hall erases the vale you already saved — its people, goods and gold. This cannot be
+                undone.
+              </p>
+              <div className="mt-3 flex flex-col gap-2">
+                <button
+                  ref={keepButton}
+                  type="button"
+                  className="h-14 w-full rounded-[var(--radius-md)] bg-accent text-base font-medium text-accent-fg"
+                  onClick={() => {
+                    setConfirmNew(false);
+                    newButton.current?.focus();
+                  }}
+                >
+                  Keep my hall
+                </button>
+                <button
+                  type="button"
+                  disabled={busy}
+                  className="h-14 w-full rounded-[var(--radius-md)] border border-border-strong bg-surface-2 text-base font-medium text-fg"
+                  onClick={() => {
+                    if (busy) return;
+                    setConfirmNew(false);
+                    setBusy(true);
+                    startHall(true);
+                  }}
+                >
+                  {busy ? "Raising…" : "Erase it and start anew"}
+                </button>
+              </div>
+            </div>
+          ) : (
+            <>
+              {hasSave && (
+                <button
+                  type="button"
+                  data-start="continue"
+                  disabled={busy}
+                  className="h-14 w-full rounded-[var(--radius-md)] bg-accent text-base font-medium text-accent-fg"
+                  onClick={() => requestStart(false)}
+                >
+                  {busy ? "Opening…" : "Continue"}
+                </button>
+              )}
+              <button
+                ref={newButton}
+                type="button"
+                data-start="new"
+                disabled={busy}
+                className={
+                  hasSave
+                    ? "h-14 w-full rounded-[var(--radius-md)] border border-border-strong bg-surface-2 text-base font-medium text-fg"
+                    : "h-14 w-full rounded-[var(--radius-md)] bg-accent text-base font-medium text-accent-fg"
+                }
+                onClick={() => requestStart(true)}
+              >
+                {busy ? "Raising…" : "New hall"}
+              </button>
+            </>
+          )}
           <SoundToggles className="mt-3 justify-center" />
         </div>
       </div>
@@ -438,21 +519,25 @@ function HelpPanel() {
     <div>
       <h2 className="font-display text-sm text-fg">The vale is a country</h2>
       <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">
-        Click the ground to walk. Click a tree to chop, stone to mine, a beast to hunt. Hold the fishing rod and right-click
-        water to cast a line; roast the catch at a hearth or campfire. Right-click a live beast and Tame
+        Click the ground to walk. Click a tree to chop, stone to mine, a beast to hunt. On touch, tap does the same and
+        touch-and-hold opens the same menu a right-click does — nothing starts until you pick from it. Hold the fishing
+        rod and right-click or touch-and-hold
+        water to cast a line; roast the catch at a hearth or campfire. Right-click or touch-and-hold a live beast and Tame
         — hares yield, wolves rarely do. Open You for the paperdoll. Tap a hatchet, pick, hoe, or sword in the pack — it
         sits in your Hand. Tap the Hand to put it away. Chop needs the hatchet held. Mine needs the pick. Farm needs the
-        hoe. The book in the pack is magery. Open it. Right-click a tamed beast and Care opens its loyalty and whereabouts.
+        hoe. The book in the pack is magery. Open it. Right-click or touch-and-hold a tamed beast and Care opens its
+        loyalty and whereabouts.
         Mark writes this dirt on a rune. Walk off. Tap the mark — Recall folds you back. The moons still hold. Towns keep
         a banker, a healer, a stall. Click Old Pell or Odo — the box is your bank. Gold and goods in the box stay when you
         die. Die and you walk pale — Ione at the hall can return you. Your corpse keeps what it
-        took until you come back living. Right-click the hall to read the roster — who has joined, who might. Open
+        took until you come back living. Right-click or touch-and-hold the hall to read the roster — who has joined, who
+        might. Open
         Hold to raise timber on the dirt — dorm, kitchen, forge, tavern. Walk
         through a door and the roof goes thin so you can see the room. The yard saws logs into boards. Raise a forge —
         Hold, then the dirt — to smelt ore and beat iron. Raise a farm the same way — eight beds inside a fence. Or open
         Hold and Till a plot on grass. Walk a bed. Click it to sow a seed — cabbage, wheat, garlic. Wait. Click ripe
         green to take the crop and more seed. Farming is a skill. Eat cabbage from You.
-        Acorns in the pack — right-click grass or dirt and plant. Forestry starts at oak, then pine, willow, birch, ash,
+        Acorns in the pack — right-click or touch-and-hold grass or dirt and plant. Forestry starts at oak, then pine, willow, birch, ash,
         redwood, yew, and at 80 ghostwood. Chopping grades the log from rough to hardened. Ghostwood is only for the
         dead — a ghost with 80 lumberjacking can cut it. Living eyes do not see it. Wild oak stands the whole map.
         Pine is Wolfhollow. Willow is Hearthfen. Birch is Ridgewatch. Ash is the Cairn of Ash. Redwood is Southmere.

@@ -32,6 +32,7 @@ import { useTimberGeometry } from "./timber-renderer-data";
 import { useFieldPropGeometry } from "./field-prop-art";
 import { useGhostwoodTouch } from "./use-ghostwood-touch";
 import { useHouseTouch } from "./use-house-touch";
+import { useWorldTouch } from "./use-world-touch";
 import { authoredTimberId } from "./timber-renderer-policy";
 import { createTimberBatches, resetTimberBatches, claimTimberSlot, finishTimberBatches, HIDDEN_TIMBER } from "./timber-batches";
 import { RESOURCE_CATALOG } from "@/game/resources/catalog";
@@ -294,6 +295,7 @@ if (uLod < 0.5 && fade < 0.05) discard;
 export function Terrain() {
   const ghostwoodTouch = useGhostwoodTouch();
   const houseTouch = useHouseTouch();
+  const worldTouch = useWorldTouch();
   const timber = useTimberGeometry();
   const fieldProps = useFieldPropGeometry();
   const authoredRocks = useRef<THREE.InstancedMesh>(null);
@@ -739,7 +741,7 @@ export function Terrain() {
   function onDown(e: ThreeEvent<PointerEvent>, map?: MutableRefObject<{ tx: number; ty: number }[]>) {
     e.stopPropagation();
     const t = tileOf(e, map);
-    if (e.button === 0 && (ghostwoodTouch(e, t) || houseTouch(e, t))) return;
+    if (e.button === 0 && (ghostwoodTouch(e, t) || houseTouch(e, t) || worldTouch(e, t))) return;
     if (e.button === 2) hitAt(t.tx, t.ty, e.clientX, e.clientY);
     else if (e.button === 0 && useGame.getState().phase === "playing") leftAt(t.tx, t.ty);
   }

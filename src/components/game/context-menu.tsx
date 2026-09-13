@@ -2,30 +2,68 @@ import { verbsFor } from "@/game/context";
 import { ITEM_META } from "@/game/catalog";
 import { useGame } from "@/game/store";
 import type { ItemId } from "@/game/types";
+import { useLayoutEffect, useRef, useState } from "react";
+import {
+  clampMenuPosition,
+  MENU_FALLBACK_HEIGHT,
+  MENU_FALLBACK_WIDTH,
+  menuMaxHeight,
+} from "@/components/game/menu-bounds";
 
 export function ContextMenu() {
   const ctx = useGame((s) => s.ctx);
   const doVerb = useGame((s) => s.doVerb);
   const close = useGame((s) => s.closeCtx);
+  const box = useRef<HTMLDivElement>(null);
+  const [measured, setMeasured] = useState({ width: MENU_FALLBACK_WIDTH, height: MENU_FALLBACK_HEIGHT });
+  useLayoutEffect(() => {
+    if (!ctx) return;
+    const el = box.current;
+    if (!el) return;
+    const measure = () => {
+      const rect = el.getBoundingClientRect();
+      setMeasured((current) =>
+        Math.abs(current.width - rect.width) < 1 && Math.abs(current.height - rect.height) < 1
+          ? current
+          : { width: rect.width, height: rect.height },
+      );
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [ctx]);
   if (!ctx) return null;
   const verbs = verbsFor(ctx.target);
+  const viewport = { width: window.innerWidth, height: window.innerHeight };
+  const pos = clampMenuPosition({ x: ctx.x, y: ctx.y }, measured, viewport);
   return (
     <div
-      className="pointer-events-auto absolute z-20 min-w-40 rounded-[var(--radius-md)] border border-border bg-bg/95 p-1"
-      style={{ left: Math.min(ctx.x, window.innerWidth - 180), top: Math.min(ctx.y, window.innerHeight - 220) }}
+      ref={box}
+      className="pointer-events-auto absolute z-20 flex min-w-40 flex-col rounded-[var(--radius-md)] border border-border bg-bg/95 p-1"
+      style={{ left: pos.x, top: pos.y, maxHeight: menuMaxHeight(viewport) }}
+      role="menu"
+      aria-label={`Actions for ${ctx.target.label}`}
     >
-      <p className="px-3 py-1 font-display text-xs tracking-wider text-muted uppercase">{ctx.target.label}</p>
-      {verbs.map((v) => (
-        <button
-          key={v.verb}
-          type="button"
-          onClick={() => doVerb(v.verb, ctx.target)}
-          className="flex min-h-11 w-full items-center px-3 text-left text-sm text-fg hover:bg-surface-2"
-        >
-          {v.label}
-        </button>
-      ))}
-      <button type="button" onClick={close} className="flex min-h-11 w-full items-center px-3 text-left text-sm text-muted">
+      <p className="shrink-0 px-3 py-1 font-display text-xs tracking-wider text-muted uppercase">{ctx.target.label}</p>
+      <div className="min-h-0 overflow-y-auto overscroll-contain">
+        {verbs.map((v) => (
+          <button
+            key={v.verb}
+            type="button"
+            role="menuitem"
+            onClick={() => doVerb(v.verb, ctx.target)}
+            className="flex min-h-11 w-full items-center px-3 text-left text-sm text-fg hover:bg-surface-2"
+          >
+            {v.label}
+          </button>
+        ))}
+      </div>
+      <button
+        type="button"
+        role="menuitem"
+        onClick={close}
+        className="flex min-h-11 w-full shrink-0 items-center border-t border-border px-3 text-left text-sm text-muted"
+      >
         Cancel
       </button>
     </div>
