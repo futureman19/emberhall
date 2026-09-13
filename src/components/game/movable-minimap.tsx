@@ -4,8 +4,9 @@ import { MiniVale } from "@/components/game/vale-map";
 import {
   clampMinimapLayout,
   defaultMinimapLayout,
+  hasSavedMinimapLayout,
   loadMinimapLayout,
-  MINIMAP_STORAGE_KEY,
+  minimapStorage,
   saveMinimapLayout,
   type MinimapLayout,
 } from "@/components/game/minimap-layout";
@@ -35,8 +36,8 @@ export function MovableMinimap() {
   const suppressRestore = useRef(false);
 
   useEffect(() => {
-    const hasSavedLayout = localStorage.getItem(MINIMAP_STORAGE_KEY) !== null;
-    const initial = hasSavedLayout ? loadMinimapLayout(localStorage) : defaultMinimapLayout(viewport());
+    const storage = minimapStorage();
+    const initial = storage && hasSavedMinimapLayout(storage) ? loadMinimapLayout(storage) : defaultMinimapLayout(viewport());
     setLayout(clampMinimapLayout(initial, viewport()));
     setReady(true);
 
@@ -46,7 +47,8 @@ export function MovableMinimap() {
   }, []);
 
   useEffect(() => {
-    if (ready) saveMinimapLayout(localStorage, layout);
+    const storage = minimapStorage();
+    if (ready && storage) saveMinimapLayout(storage, layout);
   }, [layout, ready]);
 
   if (panel === "vale" || openBook || openCraft) return null;

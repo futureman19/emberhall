@@ -81,6 +81,25 @@ export function loadMinimapLayout(storage: Pick<Storage, "getItem">): MinimapLay
   }
 }
 
+/** Whether a layout was ever saved — guarded like the read/write helpers. */
+export function hasSavedMinimapLayout(storage: Pick<Storage, "getItem">): boolean {
+  try {
+    return storage.getItem(MINIMAP_STORAGE_KEY) !== null;
+  } catch {
+    return false;
+  }
+}
+
+/** Accessing window.localStorage itself can throw in restricted embeddings. */
+export function minimapStorage(): Storage | null {
+  try {
+    if (typeof window === "undefined") return null;
+    return window.localStorage ?? null;
+  } catch {
+    return null;
+  }
+}
+
 export function saveMinimapLayout(storage: Pick<StorageAdapter, "setItem">, layout: MinimapLayout) {
   try {
     storage.setItem(MINIMAP_STORAGE_KEY, JSON.stringify(layout));

@@ -25,6 +25,7 @@ import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGathering
 import { groundY as heightAt } from "@/game/height";
 import { keepStoryY } from "@/game/keep-story";
 import { getGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
+import { useEffectsReduced } from "./effects-preference";
 import { getWorld } from "@/game/live";
 import { getCastFx, getDeathFx, getFizzleFx, SPELL_META } from "@/game/magery";
 import { impactShard, moteState, ringBloom, spellFxProfile, windupGlow } from "@/game/magery-animation";
@@ -1832,12 +1833,22 @@ function ChipBits() {
 
 export function WorldScene() {
   const graphics = useGraphicsSettings();
+  const reducedFx = useEffectsReduced();
+  // Mirror the preference onto the root element so DOM chrome (rain,
+  // shimmer) honors it in CSS; the canvas gate below covers the scene.
+  useEffect(() => {
+    document.documentElement.dataset.effects = reducedFx ? "reduced" : "full";
+    return () => {
+      delete document.documentElement.dataset.effects;
+    };
+  }, [reducedFx]);
   return (
     <Canvas
       className="h-full w-full touch-none"
       shadows={graphics.shadows}
       data-graphics-shadows={graphics.shadows ? "on" : "off"}
       data-horizon-tree-reduction={graphics.horizonTreeReduction}
+      data-effects={reducedFx ? "reduced" : "full"}
       dpr={[1, 1.5]}
       camera={{ position: [COURT.tx + 16, 23, COURT.ty + 20], fov: 48, near: 0.2, far: 480 }}
       gl={{ antialias: true, alpha: false }}
@@ -1868,23 +1879,28 @@ export function WorldScene() {
       <Gates />
       <WalkMarker />
       <MarkStones />
-      <CastFxMesh />
-      <TravelFxMesh />
-      <MoongateTravelFxMesh />
-      <PersonalActionFxMesh />
-      <FizzleFxMesh />
-      <HealingFxMesh />
-      <TamingFxMesh />
-      <CraftFxMesh />
-      <GatheringFxMesh />
-      <NpcInteractionFxMesh />
-      <CompanionFxMesh />
-      <ConstructionFxMesh />
-      <ExtractionFxMesh />
-      <CorpseFxMesh />
-      <CombatFxMesh />
-      <DeathFxMesh />
-      <ChipBits />
+      {/* Transient action effects are presentation-only: under reduced
+          effects they stay hidden while the simulation, toasts, journal
+          and the spoken words of power keep the results legible. */}
+      <group visible={!reducedFx} name="transient-action-fx">
+        <CastFxMesh />
+        <TravelFxMesh />
+        <MoongateTravelFxMesh />
+        <PersonalActionFxMesh />
+        <FizzleFxMesh />
+        <HealingFxMesh />
+        <TamingFxMesh />
+        <CraftFxMesh />
+        <GatheringFxMesh />
+        <NpcInteractionFxMesh />
+        <CompanionFxMesh />
+        <ConstructionFxMesh />
+        <ExtractionFxMesh />
+        <CorpseFxMesh />
+        <CombatFxMesh />
+        <DeathFxMesh />
+        <ChipBits />
+      </group>
       <PlacePointer />
       <Rig />
       <SimClock />

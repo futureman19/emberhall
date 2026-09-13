@@ -4,6 +4,7 @@ import {
   CircleHelp,
   FastForward,
   Hammer,
+  Hand,
   Anvil,
   Music2,
   Pause,
@@ -25,6 +26,8 @@ import { SettingsGump } from "@/components/game/settings-gump";
 import { PetsGump } from "@/components/game/pets-gump";
 import { ValeChart } from "@/components/game/vale-map";
 import { MovableMinimap } from "@/components/game/movable-minimap";
+import { ActionsPanel } from "@/components/game/actions-panel";
+import { usePanelA11y } from "@/components/game/use-panel-a11y";
 import { insideLabel } from "@/components/game/building-meshes";
 import { PLACES, regionAt } from "@/game/atlas";
 import { BUILD_ORDER, BUILDING_META, CLASS_META } from "@/game/catalog";
@@ -40,7 +43,7 @@ import { sfxMuted, toggleSfx, warmSfx } from "@/game/vale-sfx";
 import { useGame } from "@/game/store";
 import type { PanelId, Speed } from "@/game/types";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 
 function clockLabel(clock: number, day: number) {
   const h = Math.floor(clock) % 24;
@@ -67,15 +70,28 @@ export function Hud() {
 }
 
 function PlayingChrome() {
+  const [actionsOpen, setActionsOpen] = useState(false);
+  const closeActions = useCallback(() => setActionsOpen(false), []);
   useEffect(() => {
     const block = (e: Event) => e.preventDefault();
     window.addEventListener("contextmenu", block);
     return () => window.removeEventListener("contextmenu", block);
   }, []);
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "." || e.repeat) return;
+      const el = e.target as HTMLElement | null;
+      if (el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.isContentEditable)) return;
+      e.preventDefault();
+      setActionsOpen((v) => !v);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
   return (
     <>
       <TopBar />
-      <BottomDock />
+      <BottomDock actionsOpen={actionsOpen} onToggleActions={() => setActionsOpen((v) => !v)} />
       <SidePanel />
       <SelectedCard />
       <PileGump />
@@ -93,6 +109,7 @@ function PlayingChrome() {
       <TravelRibbon />
       <MovableMinimap />
       <ContextMenu />
+      {actionsOpen && <ActionsPanel onClose={closeActions} />}
     </>
   );
 }
@@ -110,19 +127,65 @@ function startHall(fresh: boolean) {
 function TitleOverlay() {
   const [hasSave, setHasSave] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [confirmNew, setConfirmNew] = useState(false);
+  const startError = useGame((s) => s.toast);
+  const keepButton = useRef<HTMLButtonElement>(null);
+  const newButton = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     setHasSave(hallHasSave());
   }, []);
+  const restoreNewFocus = useRef(false);
+  const cancelNew = () => {
+    restoreNewFocus.current = true;
+    setConfirmNew(false);
+  };
+  useEffect(() => {
+    if (confirmNew) keepButton.current?.focus();
+    else if (restoreNewFocus.current) {
+      restoreNewFocus.current = false;
+      newButton.current?.focus();
+    }
+  }, [confirmNew]);
+  // "started" ran begin; "confirming" only opened the replace prompt; "held"
+  // changed nothing (busy or already confirming). Opening the prompt never
+  // touches the save — destruction commits only on the explicit confirm.
+  const requestStart = (fresh: boolean): "started" | "confirming" | "held" => {
+    if (busy) return "held";
+    if (fresh && hasSave && !confirmNew) {
+      setConfirmNew(true);
+      return "confirming";
+    }
+    if (fresh && hasSave && confirmNew) return "held";
+    setBusy(true);
+    startHall(fresh);
+    return "started";
+  };
+  const requestStartRef = useRef(requestStart);
+  requestStartRef.current = requestStart;
+  const swallowClick = useRef(false);
   useEffect(() => {
     const onDoc = (e: Event) => {
+      // The tap that opened the replace prompt releases into a click that
+      // must not reach anything — wherever it lands now.
+      if (e.type === "click" && swallowClick.current) {
+        swallowClick.current = false;
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
       const el = e.target as HTMLElement | null;
       if (!el) return;
       const hit = el.closest("[data-start]") as HTMLElement | null;
-      if (!hit) return;
+      if (!hit) {
+        if (e.type === "pointerdown") swallowClick.current = false;
+        return;
+      }
       e.preventDefault();
       e.stopPropagation();
-      setBusy(true);
-      startHall(hit.getAttribute("data-start") === "new");
+      if (requestStartRef.current(hit.getAttribute("data-start") === "new") === "confirming" && e.type === "pointerdown") {
+        // The tap that opened the prompt must not also confirm on release.
+        swallowClick.current = true;
+      }
     };
     document.addEventListener("click", onDoc, true);
     document.addEventListener("pointerdown", onDoc, true);
@@ -131,11 +194,6 @@ function TitleOverlay() {
       document.removeEventListener("pointerdown", onDoc, true);
     };
   }, []);
-  const go = (fresh: boolean) => {
-    if (busy) return;
-    setBusy(true);
-    startHall(fresh);
-  };
   return (
     <div className="absolute inset-0 z-50 flex items-center justify-center bg-gradient-to-t from-bg via-bg/55 to-bg/15 p-4 pb-28">
       <div className="w-full max-w-md rounded-[var(--radius-xl)] border border-border bg-bg/92 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.45)]">
@@ -145,31 +203,79 @@ function TitleOverlay() {
           You walk a country, not a yard. Dirt from Ridgewatch to Brinegate. Click the ground — or a name on the map —
           and walk. Skills rise by using them. The woods do not wait.
         </p>
-        <div className="mt-6 flex flex-col gap-2">
-          {hasSave && (
-            <button
-              type="button"
-              data-start="continue"
-              disabled={busy}
-              className="h-14 w-full rounded-[var(--radius-md)] bg-accent text-base font-medium text-accent-fg"
-              onClick={() => go(false)}
-            >
-              {busy ? "Opening…" : "Continue"}
-            </button>
-          )}
-          <button
-            type="button"
-            data-start="new"
-            disabled={busy}
-            className={
-              hasSave
-                ? "h-14 w-full rounded-[var(--radius-md)] border border-border-strong bg-surface-2 text-base font-medium text-fg"
-                : "h-14 w-full rounded-[var(--radius-md)] bg-accent text-base font-medium text-accent-fg"
-            }
-            onClick={() => go(true)}
+        {startError && (
+          <p
+            role="alert"
+            className="mt-4 rounded-[var(--radius-md)] border border-accent/60 bg-accent/15 px-3 py-2 text-pretty text-sm leading-relaxed text-fg"
           >
-            {busy ? "Raising…" : "New hall"}
-          </button>
+            {startError} Please try again.
+          </p>
+        )}
+        <div className="mt-6 flex flex-col gap-2">
+          {confirmNew ? (
+            <div role="alertdialog" aria-labelledby="replace-hall-title" aria-describedby="replace-hall-desc" onKeyDown={(e) => {
+              if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); cancelNew(); }
+            }}>
+              <p id="replace-hall-title" className="font-display text-sm text-fg">
+                Replace the saved hall?
+              </p>
+              <p id="replace-hall-desc" className="mt-1 text-pretty text-xs leading-relaxed text-muted">
+                Starting a new hall erases the vale you already saved — its people, goods and gold. This cannot be
+                undone.
+              </p>
+              <div className="mt-3 flex flex-col gap-2">
+                <button
+                  ref={keepButton}
+                  type="button"
+                  className="h-14 w-full rounded-[var(--radius-md)] bg-accent text-base font-medium text-accent-fg"
+                  onClick={cancelNew}
+                >
+                  Keep my hall
+                </button>
+                <button
+                  type="button"
+                  disabled={busy}
+                  className="h-14 w-full rounded-[var(--radius-md)] border border-border-strong bg-surface-2 text-base font-medium text-fg"
+                  onClick={() => {
+                    if (busy) return;
+                    setConfirmNew(false);
+                    setBusy(true);
+                    startHall(true);
+                  }}
+                >
+                  {busy ? "Raising…" : "Erase it and start anew"}
+                </button>
+              </div>
+            </div>
+          ) : (
+            <>
+              {hasSave && (
+                <button
+                  type="button"
+                  data-start="continue"
+                  disabled={busy}
+                  className="h-14 w-full rounded-[var(--radius-md)] bg-accent text-base font-medium text-accent-fg"
+                  onClick={() => requestStart(false)}
+                >
+                  {busy ? "Opening…" : "Continue"}
+                </button>
+              )}
+              <button
+                ref={newButton}
+                type="button"
+                data-start="new"
+                disabled={busy}
+                className={
+                  hasSave
+                    ? "h-14 w-full rounded-[var(--radius-md)] border border-border-strong bg-surface-2 text-base font-medium text-fg"
+                    : "h-14 w-full rounded-[var(--radius-md)] bg-accent text-base font-medium text-accent-fg"
+                }
+                onClick={() => requestStart(true)}
+              >
+                {busy ? "Raising…" : "New hall"}
+              </button>
+            </>
+          )}
           <SoundToggles className="mt-3 justify-center" />
         </div>
       </div>
@@ -227,10 +333,24 @@ function TopBar() {
           <p className="text-xs text-muted tabular-nums">
             {ghost ? "Ghost" : clockLabel(snap.clock, snap.day)} · {phaseName(snap.hour)} · {snap.weather.label}
           </p>
-          <div className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2">
+          <div
+            className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2"
+            role="meter"
+            aria-label="Health"
+            aria-valuemin={0}
+            aria-valuemax={self?.maxHp ?? 1}
+            aria-valuenow={ghost ? 0 : (self?.hp ?? 0)}
+          >
             <div className="h-full bg-accent" style={{ width: `${Math.max(0, Math.min(1, hp)) * 100}%` }} />
           </div>
-          <div className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2">
+          <div
+            className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2"
+            role="meter"
+            aria-label="Mana"
+            aria-valuemin={0}
+            aria-valuemax={max}
+            aria-valuenow={snap.player?.mana ?? 0}
+          >
             <div className="h-full bg-gold" style={{ width: `${Math.max(0, Math.min(1, mana)) * 100}%` }} />
           </div>
           {(snap.hour < (snap.player?.poisonUntil ?? 0) || snap.hour < (snap.player?.blessUntil ?? 0) || snap.hour < (snap.player?.invisUntil ?? 0)) && (
@@ -299,7 +419,7 @@ function SettingsButton() {
   );
 }
 
-function BottomDock() {
+function BottomDock({ actionsOpen, onToggleActions }: { actionsOpen: boolean; onToggleActions: () => void }) {
   const panel = useGame((s) => s.panel);
   const setPanel = useGame((s) => s.setPanel);
   const openBook = useGame((s) => s.openBookGump);
@@ -313,6 +433,19 @@ function BottomDock() {
       data-testid="bottom-dock"
       className="pointer-events-auto absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-[var(--radius-lg)] border border-border bg-bg/90 p-1"
     >
+      <button
+        type="button"
+        onClick={onToggleActions}
+        className={cn(
+          "grid size-11 place-items-center rounded-[var(--radius-md)] text-muted",
+          actionsOpen && "bg-surface-2 text-fg",
+        )}
+        aria-label="Nearby actions — keyboard: period"
+        aria-expanded={actionsOpen}
+        title="Nearby actions (.)"
+      >
+        <Hand className="size-4" />
+      </button>
       {items.map((it) => {
         const Icon = it.icon;
         return (
@@ -383,9 +516,25 @@ function SfxToggle() {
 
 function SidePanel() {
   const panel = useGame((s) => s.panel);
+  const closePanel = useCallback(() => useGame.setState({ panel: "none" }), []);
+  const region = usePanelA11y<HTMLDivElement>(closePanel, panel !== "none");
   if (panel === "none") return null;
+  const LABELS: Partial<Record<PanelId, string>> = {
+    help: "Guide, journal and roster",
+    you: "You — pack, paperdoll, skills",
+    journal: "Journal",
+    vale: "The chart of the vale",
+    roster: "Roster",
+    build: "The hold — building",
+  };
   return (
-    <div className="pointer-events-auto absolute top-16 bottom-20 left-16 w-[min(100%-5rem,22rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4">
+    <div
+      ref={region}
+      tabIndex={-1}
+      role="region"
+      aria-label={LABELS[panel] ?? "Panel"}
+      className="pointer-events-auto absolute top-16 bottom-20 left-16 w-[min(100%-5rem,22rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 outline-none"
+    >
       {panel === "help" && <GuideTabs />}
       {panel === "you" && <YouDressing />}
       {panel === "journal" && <JournalPanel />}
@@ -404,15 +553,26 @@ function GuideTabs() {
     { id: "journal" as const, label: "Journal" },
     { id: "roster" as const, label: "Roster" },
   ];
+  const onTabKeys = (e: ReactKeyboardEvent) => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    e.preventDefault();
+    const i = tabs.findIndex((t) => t.id === tab);
+    const next = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length]!;
+    setTab(next.id);
+    document.getElementById(`reading-tab-${next.id}`)?.focus();
+  };
   return (
     <div>
-      <div className="flex gap-1" role="tablist" aria-label="Reading pages">
+      <div className="flex gap-1" role="tablist" aria-label="Reading pages" onKeyDown={onTabKeys}>
         {tabs.map((t) => (
           <button
             key={t.id}
+            id={`reading-tab-${t.id}`}
             type="button"
             role="tab"
             aria-selected={tab === t.id}
+            aria-controls={`reading-panel-${t.id}`}
+            tabIndex={tab === t.id ? 0 : -1}
             onClick={() => setTab(t.id)}
             className={cn(
               "min-h-9 flex-1 rounded-[var(--radius-xs)] border px-2 text-xs",
@@ -423,7 +583,7 @@ function GuideTabs() {
           </button>
         ))}
       </div>
-      <div className="mt-3">
+      <div className="mt-3" role="tabpanel" id={`reading-panel-${tab}`} aria-labelledby={`reading-tab-${tab}`}>
         {tab === "guide" && <HelpPanel />}
         {tab === "journal" && <JournalPanel />}
         {tab === "roster" && <RosterPanel />}
@@ -438,21 +598,25 @@ function HelpPanel() {
     <div>
       <h2 className="font-display text-sm text-fg">The vale is a country</h2>
       <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">
-        Click the ground to walk. Click a tree to chop, stone to mine, a beast to hunt. Hold the fishing rod and right-click
-        water to cast a line; roast the catch at a hearth or campfire. Right-click a live beast and Tame
+        Click the ground to walk. Click a tree to chop, stone to mine, a beast to hunt. On touch, tap does the same and
+        touch-and-hold opens the same menu a right-click does — nothing starts until you pick from it. Hold the fishing
+        rod and right-click or touch-and-hold
+        water to cast a line; roast the catch at a hearth or campfire. Right-click or touch-and-hold a live beast and Tame
         — hares yield, wolves rarely do. Open You for the paperdoll. Tap a hatchet, pick, hoe, or sword in the pack — it
         sits in your Hand. Tap the Hand to put it away. Chop needs the hatchet held. Mine needs the pick. Farm needs the
-        hoe. The book in the pack is magery. Open it. Right-click a tamed beast and Care opens its loyalty and whereabouts.
+        hoe. The book in the pack is magery. Open it. Right-click or touch-and-hold a tamed beast and Care opens its
+        loyalty and whereabouts.
         Mark writes this dirt on a rune. Walk off. Tap the mark — Recall folds you back. The moons still hold. Towns keep
         a banker, a healer, a stall. Click Old Pell or Odo — the box is your bank. Gold and goods in the box stay when you
         die. Die and you walk pale — Ione at the hall can return you. Your corpse keeps what it
-        took until you come back living. Right-click the hall to read the roster — who has joined, who might. Open
+        took until you come back living. Right-click or touch-and-hold the hall to read the roster — who has joined, who
+        might. Open
         Hold to raise timber on the dirt — dorm, kitchen, forge, tavern. Walk
         through a door and the roof goes thin so you can see the room. The yard saws logs into boards. Raise a forge —
         Hold, then the dirt — to smelt ore and beat iron. Raise a farm the same way — eight beds inside a fence. Or open
         Hold and Till a plot on grass. Walk a bed. Click it to sow a seed — cabbage, wheat, garlic. Wait. Click ripe
         green to take the crop and more seed. Farming is a skill. Eat cabbage from You.
-        Acorns in the pack — right-click grass or dirt and plant. Forestry starts at oak, then pine, willow, birch, ash,
+        Acorns in the pack — right-click or touch-and-hold grass or dirt and plant. Forestry starts at oak, then pine, willow, birch, ash,
         redwood, yew, and at 80 ghostwood. Chopping grades the log from rough to hardened. Ghostwood is only for the
         dead — a ghost with 80 lumberjacking can cut it. Living eyes do not see it. Wild oak stands the whole map.
         Pine is Wolfhollow. Willow is Hearthfen. Birch is Ridgewatch. Ash is the Cairn of Ash. Redwood is Southmere.

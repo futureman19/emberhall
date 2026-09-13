@@ -6,13 +6,14 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { INTRO_BEATS, type IntroBeat } from "@/game/intro/beats";
+import { sfxMuted } from "@/game/vale-sfx";
 
 type Props = {
   onDone: () => void;
   beats?: IntroBeat[];
 };
 
-/** Tiny two-note chime — self-contained, no audio module dependency. */
+/** Tiny two-note chime — honors the shared work-sounds preference. */
 function useChime() {
   const ctxRef = useRef<AudioContext | null>(null);
   const ensure = useCallback(() => {
@@ -25,27 +26,52 @@ function useChime() {
     }
     return ctxRef.current;
   }, []);
-  const unlock = useCallback(() => void ensure(), [ensure]);
-  const chime = useCallback(() => {
+  // The component owns its context — close it with the component.
+  useEffect(
+    () => () => {
+      const ctx = ctxRef.current;
+      ctxRef.current = null;
+      if (ctx && ctx.state !== "closed") ctx.close().catch(() => {});
+    },
+    [],
+  );
+  const unlock = useCallback(() => {
+    // Muted means no context at all — not even a suspended one.
+    if (sfxMuted()) return;
     const ctx = ensure();
-    if (!ctx || ctx.state === "suspended") return;
-    try {
-      const t0 = ctx.currentTime;
-      [880, 1174.66].forEach((freq, i) => {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = "sine";
-        osc.frequency.value = freq;
-        gain.gain.setValueAtTime(0.0001, t0 + i * 0.14);
-        gain.gain.exponentialRampToValueAtTime(0.035, t0 + i * 0.14 + 0.03);
-        gain.gain.exponentialRampToValueAtTime(0.0001, t0 + i * 0.14 + 0.5);
-        osc.connect(gain).connect(ctx.destination);
-        osc.start(t0 + i * 0.14);
-        osc.stop(t0 + i * 0.14 + 0.55);
-      });
-    } catch {
-      /* audio is a garnish, never a blocker */
+    // A suspended context stays silent forever unless a live gesture resumes it.
+    if (ctx && ctx.state === "suspended") ctx.resume().catch(() => {});
+  }, [ensure]);
+  const chime = useCallback(() => {
+    if (sfxMuted()) return;
+    const ctx = ensure();
+    if (!ctx) return;
+    const emit = () => {
+      try {
+        const t0 = ctx.currentTime;
+        [880, 1174.66].forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(0.0001, t0 + i * 0.14);
+          gain.gain.exponentialRampToValueAtTime(0.035, t0 + i * 0.14 + 0.03);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t0 + i * 0.14 + 0.5);
+          osc.connect(gain).connect(ctx.destination);
+          osc.start(t0 + i * 0.14);
+          osc.stop(t0 + i * 0.14 + 0.55);
+        });
+      } catch {
+        /* audio is a garnish, never a blocker */
+      }
+    };
+    if (ctx.state === "suspended") {
+      // advance/skip run inside a user gesture — resume is allowed here.
+      ctx.resume().then(emit).catch(() => {});
+      return;
     }
+    if (ctx.state !== "running") return;
+    emit();
   }, [ensure]);
   return { unlock, chime };
 }

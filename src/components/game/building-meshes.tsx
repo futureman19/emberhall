@@ -1,4 +1,5 @@
 import { useLayoutEffect, useMemo, useRef } from "react";
+import { beginWorldTouch } from "./use-world-touch";
 import { architectureKitName, retainArchitectureInteriorVoxel } from "./architecture-kit.ts";
 import { signageKitName } from "./signage-kit.ts";
 import { interiorKitName, replaceInteriorVoxel } from "./interior-kit.ts";
@@ -1013,6 +1014,24 @@ function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
   return (
     <group
       onPointerDown={(e) => {
+        const floor = inside && b.kind === "keep";
+        if (floor || b.kind === "bank" || stationOf(b.kind)) {
+          const tx = floor ? Math.round(e.point.x) : b.tx;
+          const ty = floor ? Math.round(e.point.z) : b.ty;
+          if (beginWorldTouch(e.nativeEvent, { tx, ty,
+            tap: () => {
+              if (floor) leftAt(tx, ty);
+              else if (b.kind === "bank") {
+                const pell = getWorld().people.find((p) => p.role === "banker" && Math.hypot(p.x - b.tx, p.z - b.ty) < 10);
+                if (pell) useGame.getState().select(pell.id);
+              } else useGame.getState().useStation(b.id);
+            },
+            secondary: (point) => {
+              if (floor) hitAt(tx, ty, point.clientX, point.clientY);
+              else useGame.getState().openCtx(point.clientX, point.clientY, { kind: "building", id: b.id, tx: b.tx, ty: b.ty, label: b.kind });
+            },
+          })) { e.stopPropagation(); return; }
+        }
         if (useGame.getState().buildKind) {
           e.stopPropagation();
           leftAt(Math.round(e.point.x), Math.round(e.point.z));
