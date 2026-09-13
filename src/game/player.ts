@@ -186,8 +186,7 @@ export function replanIntentPath(world: World, p: Person) {
   const intent = world.player.intent;
   if (intent.kind === "none") return false;
   if (intent.kind === "walk") {
-    const from = tileOf(p.x, p.z);
-    const path = astar(world, from.tx, from.ty, intent.tx, intent.ty);
+    const path = astar(world, p.x, p.z, intent.tx, intent.ty);
     if (!path) return false;
     p.path = path.map((node) => ({ tx: node.x, ty: node.y }));
     return true;
@@ -212,8 +211,7 @@ export function commandWalk(world: World, tx: number, ty: number, cap = 9000): s
   world.player.armedSpell = null;
   const dest = nearestWalkable(world, tx, ty);
   if (!dest) return "No footing.";
-  const from = tileOf(p.x, p.z);
-  const path = astar(world, from.tx, from.ty, dest.x, dest.y, cap);
+  const path = astar(world, p.x, p.z, dest.x, dest.y, cap);
   if (!path) return "The way is closed.";
   p.path = path.map((n) => ({ tx: n.x, ty: n.y }));
   world.player.intent = { kind: "walk", tx: dest.x, ty: dest.y, targetId: null, spell: null };

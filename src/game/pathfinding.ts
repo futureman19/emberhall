@@ -111,19 +111,22 @@ function canStep(world: World, x: number, y: number, nx: number, ny: number) {
   return true;
 }
 
-/** True when a straight tile-center segment obeys the same rules as A*. */
+/** Traverse actual tile boundaries from a possibly fractional origin to a tile
+ * center, using the same collision/climb predicate as A*. Never rerasterize a
+ * moving segment from its rounded origin: that is a different line. */
 export function lineWalkable(world: World, ax: number, ay: number, bx: number, by: number) {
-  if (!inBounds(ax, ay) || !inBounds(bx, by) || !walkable(world, bx, by)) return false;
-  let x = ax;
-  let y = ay;
+  if (![ax, ay, bx, by].every(Number.isFinite) || !Number.isInteger(bx) || !Number.isInteger(by)) return false;
+  if (!inBounds(Math.round(ax), Math.round(ay)) || !inBounds(bx, by) || !walkable(world, bx, by)) return false;
+  let x = Math.round(ax);
+  let y = Math.round(ay);
   const dx = bx - ax;
   const dy = by - ay;
   const stepX = Math.sign(dx);
   const stepY = Math.sign(dy);
   const deltaX = dx === 0 ? Infinity : 1 / Math.abs(dx);
   const deltaY = dy === 0 ? Infinity : 1 / Math.abs(dy);
-  let maxX = dx === 0 ? Infinity : deltaX / 2;
-  let maxY = dy === 0 ? Infinity : deltaY / 2;
+  let maxX = dx === 0 ? Infinity : (x + stepX * 0.5 - ax) / dx;
+  let maxY = dy === 0 ? Infinity : (y + stepY * 0.5 - ay) / dy;
 
   while (x !== bx || y !== by) {
     let nx = x;
@@ -238,7 +241,12 @@ export function astar(world: World, ax: number, ay: number, bx: number, by: numb
     bx = nearest.x;
     by = nearest.y;
   }
-  return search(world, ax, ay, (x, y) => x === bx && y === by, (x, y) => octile(x, y, bx, by), cap);
+  const path = search(world, ax, ay, (x, y) => x === bx && y === by, (x, y) => octile(x, y, bx, by), cap);
+  if (!path || (ax === Math.round(ax) && ay === Math.round(ay))) return path;
+  // Search is discrete, but the follower starts at the real position. Smooth
+  // from there, retaining the rounded footing only if it is actually needed
+  // to enter the searched corridor safely (not as an unconditional backtrack).
+  return smoothPath(world, [{ x: ax, y: ay }, { x: Math.round(ax), y: Math.round(ay) }, ...path]).slice(1);
 }
 
 /** Route to a reachable ring around an interaction or moving target. */

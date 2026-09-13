@@ -107058,7 +107058,7 @@
       "canonicalId": "src/game/player.ts#CombatFx.clean=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:917"
+        "src/game/player.ts:915"
       ],
       "sourceNames": [
         "CombatFx.clean"
@@ -107104,7 +107104,7 @@
       "canonicalId": "src/game/player.ts#CombatFx.clean=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:917"
+        "src/game/player.ts:915"
       ],
       "sourceNames": [
         "CombatFx.clean"
@@ -107150,7 +107150,7 @@
       "canonicalId": "src/game/player.ts#CombatFx.kind=arrow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:911"
+        "src/game/player.ts:909"
       ],
       "sourceNames": [
         "CombatFx.kind"
@@ -107196,7 +107196,7 @@
       "canonicalId": "src/game/player.ts#CombatFx.kind=melee",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:911"
+        "src/game/player.ts:909"
       ],
       "sourceNames": [
         "CombatFx.kind"
@@ -107242,7 +107242,7 @@
       "canonicalId": "src/game/player.ts#TamingFx.success=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:842"
+        "src/game/player.ts:840"
       ],
       "sourceNames": [
         "TamingFx.success"
@@ -107288,7 +107288,7 @@
       "canonicalId": "src/game/player.ts#TamingFx.success=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:842"
+        "src/game/player.ts:840"
       ],
       "sourceNames": [
         "TamingFx.success"

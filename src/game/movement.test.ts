@@ -108,6 +108,77 @@ test("a planned corner-safe line cannot get stuck when fractional movement round
   assert.deepEqual(player.path, [{ tx: 12, ty: 21 }]);
 });
 
+test("a fractional click redirect keeps the clear continuous line instead of detouring via rounded footing", () => {
+  const { world, player } = playerWorld();
+  world.tiles[10]![12]!.kind = "wall";
+  player.x = 10.5408;
+  player.z = 10.3606;
+  assert.equal(commandWalk(world, 13, 12), null);
+  assert.deepEqual(player.path, [{ tx: 13, ty: 12 }]);
+  const before = { x: player.x, z: player.z };
+  tickWorld(world, 0.1);
+  assert.ok(Math.abs(Math.hypot(player.x - before.x, player.z - before.z) - 0.26) < 1e-9);
+  assert.deepEqual(player.path, [{ tx: 13, ty: 12 }]);
+});
+
+test("a click in the current rounded tile still reaches its center", () => {
+  const { world, player } = playerWorld();
+  player.x = 10.3;
+  assert.equal(commandWalk(world, 10, 10), null);
+  tickWorld(world, 0.1);
+  assert.ok(player.x < 10.3);
+  tickWorld(world, 0.1);
+  assert.equal(player.x, 10);
+});
+
+test("open-ground clicks and mid-walk redirects take one straight leg in every octant", () => {
+  for (const [dx, dz] of [[6, 0], [-6, 0], [0, 6], [0, -6], [6, 3], [-6, 3], [3, -6], [-3, -6]]) {
+    const { world, player } = playerWorld();
+    assert.equal(commandWalk(world, 14, 12), null);
+    tickWorld(world, 0.1);
+    const before = { x: player.x, z: player.z };
+    const target = { tx: 10 + dx!, ty: 10 + dz! };
+    assert.equal(commandWalk(world, target.tx, target.ty), null);
+    assert.deepEqual(player.path, [target]);
+    tickWorld(world, 0.1);
+    const distance = Math.hypot(target.tx - before.x, target.ty - before.z);
+    assert.ok(Math.abs(player.x - before.x - 0.26 * (target.tx - before.x) / distance) < 1e-9);
+    assert.ok(Math.abs(player.z - before.z - 0.26 * (target.ty - before.z) / distance) < 1e-9);
+  }
+});
+
+test("fractional obstacle routes retain safe footing and arrive without cutting walls or cliffs", () => {
+  for (const block of ["wall", "cliff"] as const) {
+    const { world, player } = playerWorld();
+    player.x = 10.4;
+    player.z = 10.4;
+    if (block === "wall") world.tiles[11]![11]!.kind = "wall";
+    else world.tiles[11]![11]!.h = 8;
+    assert.equal(commandWalk(world, 14, 14), null);
+    assert.ok(player.path.length > 1);
+    let from = { x: player.x, y: player.z };
+    for (const n of player.path) {
+      assert.ok(lineWalkable(world, from.x, from.y, n.tx, n.ty));
+      from = { x: n.tx, y: n.ty };
+    }
+    for (let i = 0; i < 100 && player.path.length; i++) tickWorld(world, 0.1);
+    assert.equal(player.x, 14);
+    assert.equal(player.z, 14);
+  }
+});
+
+test("an unrelated terrain revision does not invent a detour from rounded mid-walk footing", () => {
+  const { world, player } = playerWorld();
+  world.tiles[10]![12]!.kind = "wall";
+  assert.equal(commandWalk(world, 13, 12), null);
+  for (let i = 0; i < 3; i++) tickWorld(world, 0.1);
+  const before = { x: player.x, z: player.z };
+  world.landRev += 1;
+  tickWorld(world, 0.1);
+  assert.ok(Math.abs(Math.hypot(player.x - before.x, player.z - before.z) - 0.26) < 1e-9);
+  assert.deepEqual(player.path, [{ tx: 13, ty: 12 }]);
+});
+
 test("hunting replans toward a moving target without striking out of range", () => {
   const { world, player } = playerWorld();
   const wolf = creature(20, 10);
