@@ -8,6 +8,8 @@ import ts from "typescript";
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const normalize = (value) => value.replaceAll("\\", "/");
 const sorted = (values) => [...new Set(values)].sort();
+// Only checkout EOL differences are equivalent; retain all other predicate text.
+const canonicalStateId = (id) => id.startsWith("predicate:") ? id.replaceAll("\r\n", "\n") : id;
 const STATUS = new Set([
   "inventoried",
   "authored",
@@ -371,7 +373,8 @@ export function collectInventory({ root = ROOT, overrides = {} } = {}) {
             visual = true;
           if (ts.isConditionalExpression(node) || ts.isIfStatement(node)) {
             const condition = ts.isConditionalExpression(node) ? node.condition : node.expression;
-            branches.push(`predicate:${condition.getText(source)}`);
+            // Git checkout EOL conversion must not invent a different renderer state.
+            branches.push(canonicalStateId(`predicate:${condition.getText(source)}`));
           }
         });
         const callable =
@@ -575,7 +578,7 @@ export function makeLedger(inventory) {
       surfaces: row.surfaces,
       jsxTags: row.jsxTags ?? null,
       states: row.states.map((id) => ({
-        id,
+        id: canonicalStateId(id),
         status: "inventoried",
         evidence: row.sources,
         applicability: id.includes("unreviewed")
@@ -609,16 +612,22 @@ export function refreshLedger(inventory, previous) {
   next.assets = next.assets.map((row) => {
     const old = prior.get(row.id);
     if (!old) return row;
-    const states = new Map(old.states.map((state) => [state.id, state]));
+    const states = new Map();
+    for (const state of old.states) {
+      const id = canonicalStateId(state.id);
+      if (states.has(id))
+        throw new Error(`Refusing to merge duplicate canonical state ${row.id}/${id}`);
+      states.set(id, state);
+    }
     const currentStates = new Set(row.states.map((state) => state.id));
     for (const state of old.states)
-      if (!currentStates.has(state.id) &&
+      if (!currentStates.has(canonicalStateId(state.id)) &&
           (state.status !== "inventoried" || state.reviewEvidence?.length))
         throw new Error(`Refusing to remove reviewed stale state ${row.id}/${state.id}`);
     return { ...old, ...row, source: old.source, metrics: old.metrics,
       status: old.status, evidence: old.evidence, batchOwner: old.batchOwner,
       notes: old.notes,
-      states: row.states.map((state) => ({ ...state, ...states.get(state.id) })) };
+      states: row.states.map((state) => ({ ...state, ...states.get(state.id), id: state.id })) };
   });
   return { ...previous, ...next };
 }
@@ -648,8 +657,9 @@ export function auditLedger(ledger, inventory) {
     if (!row.evidence?.length) errors.push(`missing evidence ${row.id}`);
     const stateIds = new Set();
     for (const state of row.states ?? []) {
-      if (stateIds.has(state.id)) errors.push(`duplicate state ${row.id}/${state.id}`);
-      stateIds.add(state.id);
+      const id = canonicalStateId(state.id);
+      if (stateIds.has(id)) errors.push(`duplicate state ${row.id}/${state.id}`);
+      stateIds.add(id);
       if (!STATUS.has(state.status)) errors.push(`invalid state status ${row.id}/${state.id}`);
       if (!state.evidence?.length) errors.push(`missing state evidence ${row.id}/${state.id}`);
       if (
@@ -674,7 +684,7 @@ export function auditLedger(ledger, inventory) {
     if (actual.canonicalId !== row.canonicalId || actual.family !== row.family)
       errors.push(`identity mismatch ${row.id}`);
     for (const state of row.states)
-      if (!actual.states?.some((entry) => entry.id === state))
+      if (!actual.states?.some((entry) => canonicalStateId(entry.id) === canonicalStateId(state)))
         errors.push(`unmapped state ${row.id}/${state}`);
     for (const [key, values] of [["catalogSources", row.sources], ["rendererLocations", row.rendererLocations]])
       for (const value of values)

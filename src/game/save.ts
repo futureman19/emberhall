@@ -11,6 +11,8 @@ import {
 import { WEATHER_META } from "./weather.ts";
 import { ITEM_FORM_CATALOG } from "./crafting/forms.ts";
 import { resolveItemStats } from "./crafting/resolve.ts";
+import { recipeById } from "./craft.ts";
+import { rareClassOf, weaponDmg } from "./rare.ts";
 import { generateTiles } from "./world.ts";
 import {
   createResourceInventory,
@@ -21,7 +23,7 @@ import {
   parseResourceNodeStateMapAtHour,
   regrowResourceNodes,
 } from "./resources/state.ts";
-import type { World } from "./types.ts";
+import type { ItemId, World } from "./types.ts";
 
 export const SAVE_KEY = "emberhall-save-v4";
 export const CURRENT_SAVE_VERSION = 4;
@@ -162,6 +164,14 @@ function isWearRecord(value: unknown): boolean {
   );
 }
 
+/** Empty runtime links are absent on disk; retain all other entries for validation. */
+function projectWearRecord(value: unknown): unknown {
+  if (!isRecord(value)) return value;
+  return Object.fromEntries(Object.entries(value).filter(
+    ([slot, item]) => !WEAR_SLOTS.has(slot) || item !== undefined,
+  ));
+}
+
 function isRareWearRecord(value: unknown): boolean {
   return (
     isRecord(value) &&
@@ -201,6 +211,9 @@ function isRecallMark(value: unknown): boolean {
 
 function normalizeRareRecord(value: unknown): unknown {
   if (!isRecord(value)) return value;
+  // Current crafted producers provide a complete identity. Do not repair malformed
+  // crafted fields into a valid utility record (e.g. null components into []).
+  if (value.source === "crafted") return value;
   const source = value.source ?? (value.formId ? "crafted" : "legacy");
   return {
     ...value,
@@ -211,6 +224,34 @@ function normalizeRareRecord(value: unknown): unknown {
     recipeVersion: value.recipeVersion ?? 1,
     source,
   };
+}
+
+/** Utility work has no material form. Its recipe/output and physical stats are closed. */
+function isUtilityWorkmanshipItem(value: SaveRecord): boolean {
+  if (value.formId !== undefined
+    || !isString(value.recipeId)
+    || !isRegistryKey(value.base, ITEM_META)
+    || (value.workmanship !== "fine" && value.workmanship !== "exceptional")
+    || value.recipeVersion !== 1
+    || !isString(value.maker) || value.maker.trim().length === 0
+    || !Array.isArray(value.components) || value.components.length !== 0
+    || !Array.isArray(value.inlays) || value.inlays.length !== 0
+    || !Array.isArray(value.affixes) || value.affixes.length !== 0
+    || !isRecord(value.resolvedStats)) return false;
+  const recipe = recipeById(value.recipeId);
+  const base = value.base as ItemId;
+  const itemClass = rareClassOf(base);
+  if (!recipe || recipe.exactRecipeId || recipe.placesFire
+    || !Object.hasOwn(recipe.give, base) || recipe.give[base] !== 1 || !itemClass) return false;
+  const exceptional = value.workmanship === "exceptional";
+  const weapon = itemClass === "weapon";
+  const stats = value.resolvedStats;
+  return Object.keys(stats).length === 5
+    && stats.damage === (weapon ? weaponDmg(base) + (exceptional ? 1 : 0) : 0)
+    && stats.hitBonus === (weapon ? (exceptional ? 2 : 1) : 0)
+    && stats.armor === ITEM_META[base].armor + (itemClass === "armor" && exceptional ? 1 : 0)
+    && isRecord(stats.skillBonuses) && Object.keys(stats.skillBonuses).length === 0
+    && isRecord(stats.slayerMultipliers) && Object.keys(stats.slayerMultipliers).length === 0;
 }
 
 function isRareItem(value: unknown): boolean {
@@ -230,6 +271,8 @@ function isRareItem(value: unknown): boolean {
     || !["crafted", "loot", "legacy"].includes(String(value.source))) return false;
 
   if (value.source !== "crafted") return value.components.length === 0 && value.inlays.length === 0;
+  // Missing form alone is not an escape hatch: only canonical utility recipes qualify.
+  if (value.formId === undefined) return isUtilityWorkmanshipItem(value);
   if (!isString(value.formId) || !Object.hasOwn(ITEM_FORM_CATALOG, value.formId) || !isRecord(value.resolvedStats)) return false;
   if (!isString(value.maker) || value.maker.trim().length === 0) return false;
   try {
@@ -579,8 +622,10 @@ export function clearSave() {
   }
 }
 
-export function writeSave(world: World) {
-  try {
+export type SaveResult = { ok: true } | { ok: false; reason: "invalid-state" | "storage-unavailable" };
+
+/** Pure save projection: transaction preflight uses the exact persisted schema. */
+export function encodeSave(world: World): string {
     const resources = parseResourceInventory(world.player.resources);
     const resourceNodes = parseResourceNodeStateMapAtHour({
       seed: world.seed,
@@ -591,14 +636,32 @@ export function writeSave(world: World) {
     const payload = {
       ...rest,
       resourceNodes,
-      player: { ...player, resources, rares: player.rares.map(normalizeRareRecord) },
+      player: {
+        ...player,
+        resources,
+        wear: projectWearRecord(player.wear),
+        wearRare: projectWearRecord(player.wearRare),
+        rares: player.rares.map(normalizeRareRecord),
+      },
       saveVersion: CURRENT_SAVE_VERSION,
       tiles: null,
     };
-    if (!isCurrentSave(payload)) return;
-    localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
+    if (!isCurrentSave(payload)) throw new Error("Invalid game state; save rejected.");
+    return JSON.stringify(payload);
+}
+
+export function writeSave(world: World): SaveResult {
+  let encoded: string;
+  try {
+    encoded = encodeSave(world);
   } catch {
-    /* invalid runtime state or quota */
+    return { ok: false, reason: "invalid-state" };
+  }
+  try {
+    localStorage.setItem(SAVE_KEY, encoded);
+    return { ok: true };
+  } catch {
+    return { ok: false, reason: "storage-unavailable" };
   }
 }
 

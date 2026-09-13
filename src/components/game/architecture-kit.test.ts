@@ -191,14 +191,21 @@ function buildingPointerHarness(options: { kind?: string; inside?: boolean; phas
   }
   visit(component);
   assert.ok(handler);
-  const code = ts.transpile(`exports.make = (env) => { const { b, inside, useGame, getWorld, leftAt, hitAt, stationOf } = env; return ${handler}; };`, {module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022});
+  const code = ts.transpile(`exports.make = (env) => { const { b, inside, useGame, getWorld, leftAt, hitAt, stationOf, beginWorldTouch } = env; return ${handler}; };`, {module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022});
   const exports: { make?: (env: Record<string,unknown>) => (e: Record<string,unknown>) => void } = {};
   new Function("exports", code)(exports);
   const calls: Array<{method:string;args:unknown[]}> = [];
   const record = (method:string) => (...args:unknown[]) => calls.push({method,args});
   const state = { phase: options.phase ?? "playing", buildKind: options.buildKind ?? null, select:record("select"), openCtx:record("openCtx"), useStation:record("useStation") };
-  const run = exports.make!({ b:{id:"sample",kind:options.kind??"keep",tx:176,ty:320}, inside:options.inside??true, useGame:{getState:()=>state}, getWorld:()=>({people:[{id:"banker",role:"banker",x:176,z:320}]}), leftAt:record("leftAt"), hitAt:record("hitAt"), stationOf:(kind:string)=>kind==="forge"?"forge":null });
-  return { calls, fire:(button=0) => run({button,point:{x:181.2,y:7.11,z:320.3},clientX:109,clientY:333,stopPropagation:record("stop")}) };
+  // Mouse-only harness: the live hook declines mouse contacts. Actual touch
+  // hold/tap/drag/multicontact behavior executes the real hook and mesh callbacks
+  // in scripts/audit-ui-review-regressions.test.mjs, not this adapter.
+  const beginWorldTouch = (point: { pointerType: string }) => {
+    assert.equal(point.pointerType, "mouse", "touch must use the real-hook regression harness");
+    return false;
+  };
+  const run = exports.make!({ b:{id:"sample",kind:options.kind??"keep",tx:176,ty:320}, inside:options.inside??true, useGame:{getState:()=>state}, getWorld:()=>({people:[{id:"banker",role:"banker",x:176,z:320}]}), leftAt:record("leftAt"), hitAt:record("hitAt"), stationOf:(kind:string)=>kind==="forge"?"forge":null, beginWorldTouch });
+  return { calls, fire:(button=0) => run({button,nativeEvent:{pointerType:"mouse",pointerId:1,button,clientX:109,clientY:333},point:{x:181.2,y:7.11,z:320.3},clientX:109,clientY:333,stopPropagation:record("stop")}) };
 }
 
 for (const button of [0,2]) test(`inside keep pointer ${button} uses the visible surface once`, () => {

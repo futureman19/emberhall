@@ -30,10 +30,13 @@ export function effectsReduced(): boolean {
 /** Reactive read for components: follows the setting and the OS preference. */
 export function useEffectsReduced(): boolean {
   const graphics = useGraphicsSettings();
-  const [motion, setMotion] = useState(() => reducedMotionMedia()?.matches ?? false);
+  // Match the server snapshot, then reconcile after hydration so Canvas DOM
+  // attributes and scene state receive the same committed preference update.
+  const [motion, setMotion] = useState(false);
   useEffect(() => {
-    const mql = reducedMotionMedia();
-    if (!mql) return;
+    if (typeof window.matchMedia !== "function") return;
+    // Own the subscription's MQL rather than reusing the frame-loop cache.
+    const mql = window.matchMedia(REDUCED_MOTION_QUERY);
     const onChange = (e: MediaQueryListEvent) => setMotion(e.matches);
     setMotion(mql.matches);
     mql.addEventListener("change", onChange);

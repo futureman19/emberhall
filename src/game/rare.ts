@@ -215,7 +215,7 @@ export interface CraftedItemInput {
   readonly recipeVersion: number;
 }
 
-/** Fine/exceptional legacy work uses the same singular path without magic. */
+/** Utility workmanship is singular crafted work without an exact material form. */
 export function createWorkmanshipItem(
   world: World,
   base: ItemId,
@@ -236,6 +236,7 @@ export function createWorkmanshipItem(
     seed: world.seed,
     hour: Math.floor(world.hour),
     workmanship,
+    components: [],
     inlays: [],
     resolvedStats: {
       damage: weapon ? weaponDmg(base) + (exceptional ? 1 : 0) : 0,

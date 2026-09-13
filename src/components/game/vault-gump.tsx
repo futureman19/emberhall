@@ -1,9 +1,11 @@
 import { useWallet } from "@1sat/react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createReadEpoch, isLedgerEntry, isTrackedListing, loadWalletRecords, walletRecordKey, walletScope, walletSessionKey } from "@/chain/wallet-read-state";
 import { Button } from "@/components/ui/button";
 import { ItemGlyph } from "@/components/game/paperdoll";
 import { ITEM_META } from "@/game/catalog";
 import { getWorld } from "@/game/live";
+import { preflightItemRedeem } from "@/chain/vault-preflight";
 import { useGame } from "@/game/store";
 import type { ItemId, RareItem } from "@/game/types";
 import {
@@ -37,24 +39,7 @@ import { Tip } from "@/components/ui/tip";
 import { latestCharacterLook, previewRedeemPart } from "@/game/chain-artifacts";
 import { listParts } from "@/game/look/parts";
 
-const LISTINGS_KEY = "emberhall-vault-listings";
-const LEDGER_KEY = "emberhall-vault-ledger";
-
-function loadJson<T>(key: string, fallback: T): T {
-  try {
-    const raw = localStorage.getItem(key);
-    return raw ? (JSON.parse(raw) as T) : fallback;
-  } catch {
-    return fallback;
-  }
-}
-function saveJson(key: string, value: unknown) {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch {
-    /* the vault forgives a full coffer */
-  }
-}
+// History is scoped only to a validated provider identity; legacy keys stay untouched.
 
 /** A rare tooltip needs a RareItem shape — rebuild it from the inscription. */
 function rareFromInscription(nft: VaultNft): RareItem | undefined {
@@ -70,11 +55,16 @@ function rareFromInscription(nft: VaultNft): RareItem | undefined {
  */
 export function VaultGump() {
   const open = useGame((s) => s.openVault);
+  const walletState = useWallet();
+  const { wallet, identityKey, status } = walletState;
+  const scope = status === "connected" ? walletScope(identityKey) : null;
+  const session = walletSessionKey(wallet, scope, status);
   if (!open) return null;
-  return <VaultInner />;
+  // Remount before painting, so no old holdings, prices or history cross accounts.
+  return <VaultInner key={session} walletState={walletState} scope={scope} />;
 }
 
-function VaultInner() {
+function VaultInner({ walletState, scope }: { walletState: ReturnType<typeof useWallet>; scope: string | null }) {
   const close = useGame((s) => s.closeVault);
   const pack = useGame((s) => s.snap.player?.pack);
   const self = useGame((s) => s.snap.people.find(({ isPlayer }) => isPlayer));
@@ -87,65 +77,115 @@ function VaultInner() {
   const redeemPartApplied = useGame((s) => s.redeemPartApplied);
   const togglePartWorn = useGame((s) => s.togglePartWorn);
   const flash = useGame((s) => s.flash);
-  const { wallet, status, connect, error: walletError } = useWallet();
+  const { wallet, status, connect, disconnect, error: walletError } = walletState;
 
   const [artifacts, setArtifacts] = useState<EmberhallNft[] | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [prices, setPrices] = useState<Record<string, string>>({});
-  const [listings, setListings] = useState<TrackedListing[]>(() => loadJson(LISTINGS_KEY, []));
-  const [ledger, setLedger] = useState<LedgerEntry[]>(() => loadJson(LEDGER_KEY, []));
-
+  const [listings, setListings] = useState<TrackedListing[]>([]);
+  const [ledger, setLedger] = useState<LedgerEntry[]>([]);
+  const [recordError, setRecordError] = useState<string | null>(null);
+  const [readState, setReadState] = useState<"loading" | "complete" | "unavailable">("loading");
+  const [readError, setReadError] = useState<string | null>(null);
+  const ledgerRef = useRef<LedgerEntry[]>([]);
+  const listingsRef = useRef<TrackedListing[]>([]);
+  const alive = useRef(true);
+  const actionBusy = useRef(false);
+  const [reads] = useState(createReadEpoch);
   const connected = status === "connected" && wallet;
+  const actionsDisabled = busy !== null || !scope || readState !== "complete";
+
+  useLayoutEffect(() => {
+    alive.current = true;
+    return () => { alive.current = false; reads.invalidate(); };
+  }, [reads]);
+
+  useEffect(() => {
+    if (!scope) return;
+    try {
+      const history = loadWalletRecords(localStorage, scope, "ledger", isLedgerEntry);
+      const tracked = loadWalletRecords(localStorage, scope, "listings", isTrackedListing);
+      ledgerRef.current = history;
+      listingsRef.current = tracked;
+      setLedger(history);
+      setListings(tracked);
+    } catch {
+      setRecordError("This account's browser history could not be read. It was not adopted or repaired.");
+    }
+  }, [scope]);
+
+  const persist = useCallback((kind: "ledger" | "listings", value: unknown) => {
+    if (!scope || !alive.current) return;
+    try {
+      localStorage.setItem(walletRecordKey(scope, kind), JSON.stringify(value));
+    } catch {
+      setRecordError("Wallet activity occurred, but this browser could not save its display history. This is not a transaction journal.");
+    }
+  }, [scope]);
 
   const remember = useCallback((e: Omit<LedgerEntry, "at">) => {
-    setLedger((cur) => {
-      const next = appendLedger(cur, { ...e, at: Date.now() });
-      saveJson(LEDGER_KEY, next);
-      return next;
-    });
-  }, []);
+    if (!scope || !alive.current) return;
+    const next = appendLedger(ledgerRef.current, { ...e, at: Date.now() });
+    ledgerRef.current = next;
+    setLedger(next);
+    persist("ledger", next);
+  }, [scope, persist]);
 
   const track = useCallback((t: TrackedListing) => {
-    setListings((cur) => {
-      const next = trackListing(cur, t);
-      saveJson(LISTINGS_KEY, next);
-      return next;
-    });
-  }, []);
+    if (!scope || !alive.current) return;
+    const next = trackListing(listingsRef.current, t);
+    listingsRef.current = next;
+    setListings(next);
+    persist("listings", next);
+  }, [scope, persist]);
 
   const untrack = useCallback((id: string) => {
-    setListings((cur) => {
-      const next = untrackListing(cur, id);
-      saveJson(LISTINGS_KEY, next);
-      return next;
-    });
-  }, []);
+    if (!scope || !alive.current) return;
+    const next = untrackListing(listingsRef.current, id);
+    listingsRef.current = next;
+    setListings(next);
+    persist("listings", next);
+  }, [scope, persist]);
 
   const refresh = useCallback(async () => {
-    if (!wallet) return;
-    setError(null);
+    if (!wallet || !scope || !alive.current) return;
+    const ticket = reads.begin();
+    setReadError(null);
+    setReadState("loading");
     try {
-      setArtifacts(await listEmberhallNfts(oneSatCtx(wallet)));
+      const next = await listEmberhallNfts(oneSatCtx(wallet), { signal: ticket.signal });
+      if (!alive.current || !ticket.current()) return;
+      setArtifacts(next);
+      setReadState("complete");
     } catch (e) {
-      setError(e instanceof Error ? e.message : "The chain did not answer.");
+      if (!alive.current || !ticket.current()) return;
+      setReadState("unavailable");
+      setReadError(e instanceof Error ? e.message : "The chain did not answer.");
     }
-  }, [wallet]);
+  }, [wallet, scope, reads]);
 
   useEffect(() => {
     if (connected) void refresh();
-  }, [connected, refresh]);
+    return () => reads.invalidate();
+  }, [connected, refresh, reads]);
 
-  async function run(label: string, fn: () => Promise<void>) {
-    if (busy) return;
+  async function run(label: string, fn: (assertCurrent: () => void) => Promise<void>) {
+    if (actionBusy.current || !alive.current || (label !== "connect" && actionsDisabled)) return;
+    actionBusy.current = true;
     setBusy(label);
     setError(null);
+    const startedWorld = getWorld();
+    const assertCurrent = () => {
+      if (!alive.current || getWorld() !== startedWorld) throw new Error("Wallet or world changed; local completion was not applied. Chain recovery requires reconciliation.");
+    };
     try {
-      await fn();
+      await fn(assertCurrent);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "The rite failed.");
+      if (alive.current) setError(e instanceof Error ? e.message : "The rite failed.");
     } finally {
-      setBusy(null);
+      actionBusy.current = false;
+      if (alive.current) setBusy(null);
     }
   }
 
@@ -157,7 +197,7 @@ function VaultInner() {
   const localParts = listParts();
   const walletOrigins = new Set((artifacts ?? []).map((n) => n.origin));
   /** Listings we remember that the wallet no longer holds — location unknown, not presumed sold. */
-  const awayListings = listings.filter((t) => !walletOrigins.has(t.id));
+  const awayListings = readState === "complete" ? listings.filter((t) => !walletOrigins.has(t.id)) : [];
   const suggestFor = (inscription: ItemInscription) => suggestSats(inscription);
 
   return (
@@ -183,6 +223,26 @@ function VaultInner() {
         </div>
       ) : (
         <>
+          <div className="mt-3 flex gap-3 text-xs">
+            <button type="button" className="underline" disabled={busy !== null} onClick={disconnect}>Disconnect wallet</button>
+            <button type="button" className="underline" disabled={busy !== null || !scope} onClick={() => {
+              if (!scope) return;
+              try {
+                localStorage.removeItem(walletRecordKey(scope, "ledger"));
+                localStorage.removeItem(walletRecordKey(scope, "listings"));
+                ledgerRef.current = [];
+                listingsRef.current = [];
+                setLedger([]);
+                setListings([]);
+                setRecordError(null);
+              } catch { setRecordError("This account's browser history could not be cleared."); }
+            }}>Clear this account's history</button>
+          </div>
+          <p className="mt-2 text-xs text-muted">Older unscoped browser history is not assigned to this account. Clearing history does not change the chain or your game save.</p>
+          {!scope && <p role="alert" className="mt-2 text-xs text-accent">The wallet has not supplied a valid public identity. Reconnect before reading holdings or using chain actions.</p>}
+          {readState !== "complete" && artifacts !== null && <p role="status" className="mt-2 text-xs text-accent">Showing this account's last successful read. Holdings may have changed; chain actions are disabled until refresh succeeds.</p>}
+          {readError && <p role="alert" className="mt-2 text-xs text-accent">Holdings unavailable: {readError}</p>}
+          {recordError && <p role="alert" className="mt-2 text-xs text-accent">{recordError}</p>}
           {self ? (
             <div className="mt-4" data-testid="vault-look-section">
               <p className="font-display text-xs tracking-wider text-gold uppercase">Your person — the chain remembers</p>
@@ -194,11 +254,12 @@ function VaultInner() {
                   <Button
                     className="h-8 shrink-0 px-2 text-xs"
                     variant="secondary"
-                    disabled={busy !== null}
+                    disabled={actionsDisabled}
                     data-testid="vault-mint-look"
                     onClick={() =>
-                      void run("mint:look", async () => {
+                      void run("mint:look", async (assertCurrent) => {
                         await mintCharacterLookNft(oneSatCtx(wallet!), getWorld(), latestLook ?? undefined);
+                        assertCurrent();
                         remember({ kind: "mint", label: `${self.name}'s look` });
                         flash(latestLook ? "A new reflection succeeds the old on chain." : "Your reflection now rides the chain.");
                         await refresh();
@@ -214,7 +275,7 @@ function VaultInner() {
                     <Button
                       className="h-8 px-2 text-xs"
                       variant="secondary"
-                      disabled={busy !== null}
+                      disabled={actionsDisabled}
                       data-testid="vault-restore-look"
                       onClick={() => {
                         restoreLookApplied(latestLook.inscription);
@@ -244,7 +305,7 @@ function VaultInner() {
                       <Button
                         className="h-8 px-2 text-xs"
                         variant="secondary"
-                        disabled={busy !== null}
+                        disabled={actionsDisabled}
                         data-testid={`vault-wear-part-${part.id}`}
                         onClick={() => togglePartWorn(part.id)}
                       >
@@ -253,11 +314,12 @@ function VaultInner() {
                       <Button
                         className="h-8 px-2 text-xs"
                         variant="secondary"
-                        disabled={busy !== null}
+                        disabled={actionsDisabled}
                         data-testid={`vault-mint-part-${part.id}`}
                         onClick={() =>
-                          void run(`mint:part:${part.id}`, async () => {
+                          void run(`mint:part:${part.id}`, async (assertCurrent) => {
                             await mintPartNft(oneSatCtx(wallet!), getWorld(), part);
+                            assertCurrent();
                             mintPartApplied(part.id);
                             remember({ kind: "mint", label: part.name });
                             await refresh();
@@ -291,11 +353,12 @@ function VaultInner() {
                     <Button
                       className="h-8 px-2 text-xs"
                       variant="secondary"
-                      disabled={busy !== null}
+                      disabled={actionsDisabled}
                       onClick={() =>
-                        void run(`mint:${id}`, async () => {
+                        void run(`mint:${id}`, async (assertCurrent) => {
                           const w = getWorld();
                           await mintItemNft(oneSatCtx(wallet!), w, id);
+                          assertCurrent();
                           mintApplied(id);
                           remember({ kind: "mint", label: ITEM_META[id].label });
                           await refresh();
@@ -325,11 +388,12 @@ function VaultInner() {
                     <Button
                       className="h-8 shrink-0 px-2 text-xs"
                       variant="secondary"
-                      disabled={busy !== null}
+                      disabled={actionsDisabled}
                       onClick={() =>
-                        void run(`mint:${r.uid}`, async () => {
+                        void run(`mint:${r.uid}`, async (assertCurrent) => {
                           const w = getWorld();
                           await mintRareNft(oneSatCtx(wallet!), w, r);
+                          assertCurrent();
                           mintRareApplied(r.uid);
                           remember({ kind: "mint", label: rareName(r) });
                           await refresh();
@@ -361,13 +425,14 @@ function VaultInner() {
                           <Button
                             className="h-8 shrink-0 px-2 text-xs"
                             variant="secondary"
-                            disabled={busy !== null}
+                            disabled={actionsDisabled}
                             data-testid={`vault-redeem-part-${nft.inscription.part.id}`}
                             onClick={() =>
-                              void run(`redeem:${nft.id}`, async () => {
+                              void run(`redeem:${nft.id}`, async (assertCurrent) => {
                                 const blocked = previewRedeemPart(nft.inscription, nft.origin);
                                 if (blocked) throw new Error(blocked);
                                 await redeemItemNft(oneSatCtx(wallet!), nft.id);
+                                assertCurrent();
                                 redeemPartApplied(nft.inscription, nft.origin);
                                 untrack(nft.origin);
                                 remember({ kind: "redeem", label });
@@ -385,10 +450,11 @@ function VaultInner() {
                           <Button
                             className="h-8 px-2 text-xs"
                             variant="secondary"
-                            disabled={busy !== null}
+                            disabled={actionsDisabled}
                             onClick={() =>
-                              void run(`cancel:${nft.id}`, async () => {
+                              void run(`cancel:${nft.id}`, async (assertCurrent) => {
                                 await cancelItemNft(oneSatCtx(wallet!), nft.id);
+                                assertCurrent();
                                 untrack(nft.origin);
                                 remember({ kind: "cancel", label, sats: tracked.sats });
                                 await refresh();
@@ -412,12 +478,13 @@ function VaultInner() {
                           <Button
                             className="h-8 px-2 text-xs"
                             variant="secondary"
-                            disabled={busy !== null || !Number(prices[nft.origin])}
+                            disabled={actionsDisabled || !Number(prices[nft.origin])}
                             data-testid={`vault-list-part-${nft.inscription.part.id}`}
                             onClick={() =>
-                              void run(`sell:${nft.id}`, async () => {
+                              void run(`sell:${nft.id}`, async (assertCurrent) => {
                                 const price = Math.floor(Number(prices[nft.origin]));
                                 await sellItemNft(oneSatCtx(wallet!), nft.id, price);
+                                assertCurrent();
                                 track({ id: nft.origin, label, sats: price, at: Date.now() });
                                 remember({ kind: "list", label, sats: price });
                                 flash(`${label} is listed for ${price} sats — any 1Sat market can sell it now.`);
@@ -439,13 +506,13 @@ function VaultInner() {
           <div className="mt-4">
             <div className="flex items-center justify-between">
               <p className="font-display text-xs tracking-wider text-muted uppercase">On the chain — yours</p>
-              <button type="button" className="text-xs text-muted underline" disabled={busy !== null} onClick={() => void refresh()}>
-                {artifacts === null ? "Loading…" : "Refresh"}
+              <button type="button" className="text-xs text-muted underline" disabled={busy !== null || !scope} onClick={() => void refresh()}>
+                              {readState === "loading" ? "Restart read" : readState === "unavailable" ? "Retry" : "Refresh"}
               </button>
             </div>
             {artifacts === null ? (
-              <p className="mt-1 text-xs text-muted">Reading the chain…</p>
-            ) : nfts.length === 0 && awayListings.length === 0 ? (
+              <p className="mt-1 text-xs text-muted">{!scope ? "Wallet identity unavailable." : readState === "unavailable" ? "Holdings could not be read. Retry; this is not an empty inventory." : "Reading the chain…"}</p>
+            ) : readState === "complete" && nfts.length === 0 && awayListings.length === 0 ? (
               <p className="mt-1 text-xs text-muted">No Emberhall items in this wallet yet. Mint one above.</p>
             ) : (
               <ul className="mt-2 space-y-1">
@@ -467,10 +534,13 @@ function VaultInner() {
                           <Button
                             className="h-8 shrink-0 px-2 text-xs"
                             variant="secondary"
-                            disabled={busy !== null}
+                            disabled={actionsDisabled}
                             onClick={() =>
-                              void run(`redeem:${nft.id}`, async () => {
+                              void run(`redeem:${nft.id}`, async (assertCurrent) => {
+                                preflightItemRedeem(getWorld(), nft.inscription);
+                                if (!useGame.getState().saveNow()) throw new Error("Save your current progress before redeeming.");
                                 await redeemItemNft(oneSatCtx(wallet!), nft.id);
+                                assertCurrent();
                                 redeemApplied(nft.inscription.item, nft.inscription.rare);
                                 untrack(nft.origin);
                                 remember({ kind: "redeem", label });
@@ -488,10 +558,11 @@ function VaultInner() {
                           <Button
                             className="h-8 px-2 text-xs"
                             variant="secondary"
-                            disabled={busy !== null}
+                            disabled={actionsDisabled}
                             onClick={() =>
-                              void run(`cancel:${nft.id}`, async () => {
+                              void run(`cancel:${nft.id}`, async (assertCurrent) => {
                                 await cancelItemNft(oneSatCtx(wallet!), nft.id);
+                                assertCurrent();
                                 untrack(nft.origin);
                                 remember({ kind: "cancel", label: tracked.label, sats: tracked.sats });
                                 flash(`${tracked.label} is off the market.`);
@@ -524,11 +595,12 @@ function VaultInner() {
                           <Button
                             className="h-8 px-2 text-xs"
                             variant="secondary"
-                            disabled={busy !== null || !Number(prices[nft.origin])}
+                            disabled={actionsDisabled || !Number(prices[nft.origin])}
                             onClick={() =>
-                              void run(`sell:${nft.id}`, async () => {
+                              void run(`sell:${nft.id}`, async (assertCurrent) => {
                                 const price = Math.floor(Number(prices[nft.origin]));
                                 await sellItemNft(oneSatCtx(wallet!), nft.id, price);
+                                assertCurrent();
                                 track({ id: nft.origin, label, sats: price, at: Date.now() });
                                 remember({ kind: "list", label, sats: price });
                                 flash(`${label} is listed for ${price} sats — any 1Sat market can sell it now.`);

@@ -104,6 +104,7 @@ function PlayingChrome() {
       <SettingsGump />
       <PetsGump />
       <Toast />
+      <SaveFailureBanner />
       <GhostBanner />
       <BuildRibbon />
       <TravelRibbon />
@@ -111,6 +112,18 @@ function PlayingChrome() {
       <ContextMenu />
       {actionsOpen && <ActionsPanel onClose={closeActions} />}
     </>
+  );
+}
+
+function SaveFailureBanner() {
+  const error = useGame((s) => s.saveError);
+  const retry = useGame((s) => s.saveNow);
+  if (!error) return null;
+  return (
+    <div role="alert" className="pointer-events-auto fixed inset-x-3 top-16 z-[100] mx-auto flex max-w-lg flex-wrap items-center gap-2 rounded border border-amber-400 bg-stone-950 p-3 text-sm text-amber-100 shadow-lg">
+      <span className="min-w-0 flex-1">{error}</span>
+      <button type="button" onClick={() => retry()} className="min-h-11 rounded border border-amber-400 px-3">Retry save</button>
+    </div>
   );
 }
 

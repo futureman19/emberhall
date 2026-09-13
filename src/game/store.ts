@@ -79,6 +79,9 @@ interface GameUI {
   panel: PanelId;
   ctx: { x: number; y: number; target: CtxTarget } | null;
   toast: string | null;
+  /** Remains set until a real save succeeds; UI must not imply progress is durable. */
+  saveError: string | null;
+  saveNow: () => boolean;
   openBook: boolean;
   openCraft: boolean;
   openVault: boolean;
@@ -207,6 +210,20 @@ export const useGame = create<GameUI>((set, get) => ({
   panel: "none",
   ctx: null,
   toast: null,
+  saveError: null,
+  saveNow: () => {
+    const result = writeSave(getWorld());
+    if (result.ok) {
+      set({ saveError: null });
+      return true;
+    }
+    const message = result.reason === "invalid-state"
+      ? "Progress could not be saved because the game state is invalid. Keep this tab open."
+      : "Progress could not be saved in this browser. Keep this tab open and allow browser storage.";
+    if (get().saveError !== message) get().flash(message);
+    set({ saveError: message });
+    return false;
+  },
   openBook: false,
   openCraft: false,
   openVault: false,
@@ -300,7 +317,7 @@ export const useGame = create<GameUI>((set, get) => ({
       self.cls = choice.cls;
       self.look = choice.look;
     }
-    writeSave(w); // the face survives a refresh from the first minute
+    get().saveNow(); // the face survives a refresh from the first minute
     set({ phase: "playing", snap: snapshot() });
   },
   tick: (dt) => {
@@ -369,7 +386,7 @@ export const useGame = create<GameUI>((set, get) => ({
     }
     if (saveAcc > 8) {
       saveAcc = 0;
-      if (get().phase === "playing") writeSave(w);
+      if (get().phase === "playing") get().saveNow();
     }
   },
   flash: (msg) => {
@@ -764,14 +781,14 @@ export const useGame = create<GameUI>((set, get) => ({
     const w = getWorld();
     const note = applyCharacterLook(w, inscription);
     if (note) get().flash(note);
-    writeSave(w);
+    get().saveNow();
     set({ snap: snapshot() });
   },
   mintPartApplied: (id) => {
     const w = getWorld();
     const note = applyMintPart(w, id);
     if (note) get().flash(note);
-    writeSave(w);
+    get().saveNow();
     set({ snap: snapshot() });
   },
   redeemPartApplied: (inscription, origin) => {
@@ -783,7 +800,7 @@ export const useGame = create<GameUI>((set, get) => ({
     const w = getWorld();
     const note = applyTogglePart(w, id);
     if (note) get().flash(note);
-    writeSave(w);
+    get().saveNow();
     set({ snap: snapshot() });
   },
   makeRecipe: (id) => {

@@ -1,5 +1,5 @@
 import { ITEM_META } from "./catalog.ts";
-import { AFFIXES, rareName, rareUid } from "./rare.ts";
+import { AFFIXES, rareClassOf, rareName, rareUid } from "./rare.ts";
 import { ITEM_FORM_CATALOG } from "./crafting/forms.ts";
 import { resolveItemStats } from "./crafting/resolve.ts";
 import { log } from "./world.ts";
@@ -59,7 +59,7 @@ export interface ItemInscription {
 const ITEM_IDS = new Set(Object.keys(ITEM_META));
 
 export function encodeItemInscription(world: World, item: ItemId): ItemInscription | null {
-  if (!ITEM_META[item]) return null;
+  if (!ITEM_IDS.has(item) || !Number.isSafeInteger(world.seed) || !Number.isFinite(world.hour)) return null;
   return {
     app: VAULT_APP,
     v: VAULT_VERSION,
@@ -73,8 +73,32 @@ export function encodeItemInscription(world: World, item: ItemId): ItemInscripti
 
 /** A rare mints with its full identity — name, affixes, maker's mark. */
 export function encodeRareInscription(world: World, rare: RareItem): ItemInscription | null {
-  if (!ITEM_META[rare.base]) return null;
-  return {
+  if (!rare || !ITEM_IDS.has(rare.base)) return null;
+  // v3 has no no-form utility schema. Never mint by dropping workmanship,
+  // components, inlays or resolved stats. Legacy affix-only records remain v2-compatible.
+  const exact = rare.formId !== undefined;
+  if (!exact && (rare.source === "crafted"
+    || rare.resolvedStats !== undefined
+    || (rare.workmanship !== undefined && rare.workmanship !== "ordinary")
+    || (rare.components !== undefined && (!Array.isArray(rare.components) || rare.components.length !== 0))
+    || (rare.inlays !== undefined && (!Array.isArray(rare.inlays) || rare.inlays.length !== 0))
+    || (rare.source !== undefined && !["loot", "legacy"].includes(rare.source))
+    || (rare.recipeId !== undefined && rare.recipeId !== (rare.source ?? "legacy"))
+    || (rare.recipeVersion !== undefined && rare.recipeVersion !== 1))) return null;
+  if (!Array.isArray(rare.affixes)) return null;
+  const identity = decodeRare({
+    name: "",
+    affixes: rare.affixes,
+    ...(rare.maker !== undefined ? { maker: rare.maker } : {}),
+    ...(exact ? { unique: {
+      uid: rare.uid, formId: rare.formId, workmanship: rare.workmanship,
+      components: rare.components, inlays: rare.inlays, resolvedStats: rare.resolvedStats,
+      recipeId: rare.recipeId, recipeVersion: rare.recipeVersion, source: rare.source,
+      seed: rare.seed, hour: rare.hour,
+    } } : {}),
+  }, rare.base);
+  if (!identity) return null;
+  return decodeItemInscription({
     app: VAULT_APP,
     v: VAULT_VERSION,
     type: "item",
@@ -82,35 +106,16 @@ export function encodeRareInscription(world: World, rare: RareItem): ItemInscrip
     label: ITEM_META[rare.base].label,
     world: world.seed,
     hour: Math.floor(world.hour),
-    rare: {
-      name: rareName(rare),
-      affixes: [...rare.affixes],
-      ...(rare.maker ? { maker: rare.maker } : {}),
-      ...(rare.formId && rare.workmanship && rare.components && rare.inlays && rare.resolvedStats && rare.recipeId && rare.recipeVersion && rare.source
-        ? {
-            unique: {
-              uid: rare.uid,
-              formId: rare.formId,
-              workmanship: rare.workmanship,
-              components: structuredClone(rare.components),
-              inlays: structuredClone(rare.inlays),
-              resolvedStats: structuredClone(rare.resolvedStats),
-              recipeId: rare.recipeId,
-              recipeVersion: rare.recipeVersion,
-              source: rare.source,
-              seed: rare.seed,
-              hour: rare.hour,
-            },
-          }
-        : {}),
-    },
-  };
+    rare: { ...identity, name: rareName(rare) },
+  });
 }
 
 function decodeUnique(raw: unknown, item: ItemId): NonNullable<RareInscription["unique"]> | null {
-  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return null;
-  const value = raw as Record<string, unknown>;
-  if (typeof value.uid !== "string"
+  if (!isRecord(raw)) return null;
+  const value = raw;
+  const fields = ["uid", "formId", "workmanship", "components", "inlays", "resolvedStats", "recipeId", "recipeVersion", "source", "seed", "hour"];
+  if (Object.keys(value).some(key => !fields.includes(key)) || fields.some(key => !Object.hasOwn(value, key))) return null;
+  if (typeof value.uid !== "string" || value.uid.trim().length === 0
     || typeof value.formId !== "string"
     || !Object.hasOwn(ITEM_FORM_CATALOG, value.formId)
     || !["ordinary", "fine", "exceptional"].includes(String(value.workmanship))
@@ -119,7 +124,7 @@ function decodeUnique(raw: unknown, item: ItemId): NonNullable<RareInscription["
     || !value.resolvedStats || typeof value.resolvedStats !== "object"
     || typeof value.recipeId !== "string"
     || !Number.isSafeInteger(value.recipeVersion)
-    || !["crafted", "loot", "legacy"].includes(String(value.source))
+    || value.source !== "crafted"
     || typeof value.seed !== "number" || !Number.isSafeInteger(value.seed)
     || typeof value.hour !== "number" || !Number.isFinite(value.hour)) return null;
   try {
@@ -137,12 +142,46 @@ function decodeUnique(raw: unknown, item: ItemId): NonNullable<RareInscription["
   }
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === "object" && !Array.isArray(value)
+    && (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
+}
+
+/** Shared mint/decode/redeem boundary; never interpret a broken rare as ordinary. */
+function decodeRare(raw: unknown, item: ItemId): RareInscription | null {
+  if (!isRecord(raw) || !Array.isArray(raw.affixes)
+    || Object.keys(raw).some(key => !["name", "affixes", "maker", "unique"].includes(key))
+    || (Object.hasOwn(raw, "name") && typeof raw.name !== "string")
+    || (Object.hasOwn(raw, "maker") && (typeof raw.maker !== "string" || raw.maker.trim().length === 0))) return null;
+  const groups = new Set<string>();
+  for (const affix of raw.affixes) {
+    if (typeof affix !== "string" || !Object.hasOwn(AFFIXES, affix)) return null;
+    const definition = AFFIXES[affix];
+    if (definition.applies !== rareClassOf(item) || groups.has(definition.group)) return null;
+    groups.add(definition.group);
+  }
+  const unique = Object.hasOwn(raw, "unique") ? decodeUnique(raw.unique, item) : undefined;
+  if (Object.hasOwn(raw, "unique") && (!unique || typeof raw.maker !== "string" || !raw.maker.trim())) return null;
+  if (!unique && raw.affixes.length === 0) return null;
+  return {
+    name: typeof raw.name === "string" ? raw.name : "",
+    affixes: [...raw.affixes] as string[],
+    ...(typeof raw.maker === "string" ? { maker: raw.maker } : {}),
+    ...(unique ? { unique } : {}),
+  };
+}
+
 /** Parse an on-chain JSON payload back into an item inscription, or null. */
 export function decodeItemInscription(raw: unknown): ItemInscription | null {
-  if (!raw || typeof raw !== "object") return null;
-  const o = raw as Record<string, unknown>;
+  if (!isRecord(raw)) return null;
+  const o = raw;
   if (o.app !== VAULT_APP || o.type !== "item") return null;
   if (typeof o.item !== "string" || !ITEM_IDS.has(o.item)) return null;
+  // Historical ordinary payloads may omit metadata. Present invalid values are not defaults.
+  if ((Object.hasOwn(o, "v") && (!Number.isInteger(o.v) || (o.v as number) < 1 || (o.v as number) > VAULT_VERSION))
+    || (Object.hasOwn(o, "world") && !Number.isSafeInteger(o.world))
+    || (Object.hasOwn(o, "hour") && (typeof o.hour !== "number" || !Number.isFinite(o.hour)))
+    || (Object.hasOwn(o, "label") && typeof o.label !== "string")) return null;
   const item = o.item as ItemId;
   const out: ItemInscription = {
     app: VAULT_APP,
@@ -153,19 +192,11 @@ export function decodeItemInscription(raw: unknown): ItemInscription | null {
     world: typeof o.world === "number" ? o.world : 0,
     hour: typeof o.hour === "number" ? o.hour : 0,
   };
-  // v2+: a rare block rides along — validate loosely, trust the affix list.
-  if (o.rare && typeof o.rare === "object") {
-    const r = o.rare as Record<string, unknown>;
-    if (Array.isArray(r.affixes) && r.affixes.every((a) => typeof a === "string")) {
-      const unique = Object.hasOwn(r, "unique") ? decodeUnique(r.unique, item) : undefined;
-      if (Object.hasOwn(r, "unique") && !unique) return null;
-      out.rare = {
-        name: typeof r.name === "string" ? r.name : "",
-        affixes: r.affixes as string[],
-        ...(typeof r.maker === "string" ? { maker: r.maker } : {}),
-        ...(unique ? { unique } : {}),
-      };
-    }
+  if (Object.hasOwn(o, "rare")) {
+    if (out.v < 2) return null;
+    const rare = decodeRare(o.rare, item);
+    if (!rare || (rare.unique && out.v < 3)) return null;
+    out.rare = rare;
   }
   return out;
 }
@@ -197,6 +228,17 @@ export function applyMintRare(world: World, uid: string): string | null {
 
 /** Grant an item back after its ordinal burns in the redeem rite. */
 export function applyRedeem(world: World, item: ItemId, rare?: RareInscription): string {
+  // This is defense in depth, not a substitute for preflight before a wallet burn.
+  // Throw rather than a success-shaped note: callers must not persist/log success.
+  if (!ITEM_IDS.has(item)) throw new Error("Invalid Vault item.");
+  if (rare !== undefined) {
+    const validated = decodeRare(rare, item);
+    if (!validated) throw new Error("Invalid Vault rare identity.");
+    rare = validated;
+  }
+  if (rare?.unique && world.player.rares.some(value => value.uid === rare.unique!.uid)) {
+    throw new Error("This Vault identity is already in the keeping.");
+  }
   if (rare?.unique) {
     const unique = rare.unique;
     const restored: RareItem = {
@@ -248,6 +290,7 @@ export function applyRedeem(world: World, item: ItemId, rare?: RareInscription):
 
 /** Base64 JSON payload for the 1Sat inscribe action (browser + node). */
 export function inscriptionBase64(world: World, item: ItemId, rare?: RareItem): string | null {
+  if (rare !== undefined && (!rare || rare.base !== item)) return null;
   const payload = rare ? encodeRareInscription(world, rare) : encodeItemInscription(world, item);
   if (!payload) return null;
   const json = JSON.stringify(payload);

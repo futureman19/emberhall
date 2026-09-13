@@ -129,6 +129,7 @@ test("reagent crops - ginseng seed plants, ripens, and harvests", () => {
   const ty = Math.round(player.z);
   world.plots.push({ id: "bed_test", tx, ty, crop: null, plantedHour: 0, stage: 0 });
   world.player.pack.ginseng_seed = 2;
+  world.player.wear.main = "hoe"; // Planting and harvesting require the tool at impact.
   world.player.intent = { kind: "plant", tx, ty, targetId: "ginseng", spell: null };
   const plantNote = plantNow(world);
   assert.match(String(plantNote), /seed takes/i);
