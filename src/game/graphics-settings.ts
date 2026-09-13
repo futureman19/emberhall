@@ -7,11 +7,14 @@ export type HorizonTreeReduction = (typeof HORIZON_TREE_REDUCTIONS)[number];
 export type GraphicsSettings = {
   shadows: boolean;
   horizonTreeReduction: HorizonTreeReduction;
+  /** Calmer presentation: no storm flashes, suppressed transient action FX. */
+  reducedEffects: boolean;
 };
 
 export const DEFAULT_GRAPHICS_SETTINGS: Readonly<GraphicsSettings> = Object.freeze({
   shadows: true,
   horizonTreeReduction: 0,
+  reducedEffects: false,
 });
 
 type ReadStorage = Pick<Storage, "getItem">;
@@ -21,12 +24,13 @@ function isGraphicsSettings(value: unknown): value is GraphicsSettings {
   if (!value || typeof value !== "object") return false;
   const record = value as Record<string, unknown>;
   const keys = Object.keys(record);
+  // Saves written before reducedEffects existed load with the approved
+  // default (effects on).
   return (
-    keys.length === 2 &&
-    keys.includes("shadows") &&
-    keys.includes("horizonTreeReduction") &&
+    keys.every((key) => key === "shadows" || key === "horizonTreeReduction" || key === "reducedEffects") &&
     typeof record.shadows === "boolean" &&
-    HORIZON_TREE_REDUCTIONS.includes(record.horizonTreeReduction as HorizonTreeReduction)
+    HORIZON_TREE_REDUCTIONS.includes(record.horizonTreeReduction as HorizonTreeReduction) &&
+    (record.reducedEffects === undefined || typeof record.reducedEffects === "boolean")
   );
 }
 
@@ -35,7 +39,9 @@ export function loadGraphicsSettings(storage: ReadStorage): GraphicsSettings {
     const raw = storage.getItem(GRAPHICS_STORAGE_KEY);
     if (!raw) return { ...DEFAULT_GRAPHICS_SETTINGS };
     const parsed: unknown = JSON.parse(raw);
-    return isGraphicsSettings(parsed) ? { ...parsed } : { ...DEFAULT_GRAPHICS_SETTINGS };
+    return isGraphicsSettings(parsed)
+      ? { ...parsed, reducedEffects: parsed.reducedEffects ?? false }
+      : { ...DEFAULT_GRAPHICS_SETTINGS };
   } catch {
     return { ...DEFAULT_GRAPHICS_SETTINGS };
   }
@@ -75,6 +81,7 @@ export function updateGraphicsSettings(patch: Partial<GraphicsSettings>) {
     horizonTreeReduction: HORIZON_TREE_REDUCTIONS.includes(patch.horizonTreeReduction as HorizonTreeReduction)
       ? (patch.horizonTreeReduction as HorizonTreeReduction)
       : current.horizonTreeReduction,
+    reducedEffects: typeof patch.reducedEffects === "boolean" ? patch.reducedEffects : current.reducedEffects,
   };
   current = next;
   hydrated = true;

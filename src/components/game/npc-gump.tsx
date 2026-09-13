@@ -7,9 +7,32 @@ import { BANK_RANGE } from "@/game/npcs";
 import { appraiseRare, rareName } from "@/game/rare";
 import { useGame } from "@/game/store";
 import type { ItemId } from "@/game/types";
+import { Info } from "lucide-react";
+import { useState, type ReactNode } from "react";
 
 function heldItems(bag?: Partial<Record<ItemId, number>>) {
   return (Object.keys(bag ?? {}) as ItemId[]).filter((id) => (bag?.[id] ?? 0) > 0);
+}
+
+/** Inspect at the counter: the full card without buying or selling. */
+function InspectableRow({ id, children }: { id: ItemId; children: ReactNode }) {
+  const [inspecting, setInspecting] = useState(false);
+  return (
+    <li className="flex gap-1">
+      <Tip content={<ItemTipContent id={id} />} className="w-full min-w-0 flex-1" pin={inspecting}>
+        {children}
+      </Tip>
+      <button
+        type="button"
+        aria-label={`Inspect ${ITEM_META[id].label}`}
+        aria-expanded={inspecting}
+        onClick={() => setInspecting((v) => !v)}
+        className={`grid size-11 shrink-0 place-items-center rounded-[var(--radius-xs)] border border-border bg-surface-2 ${inspecting ? "text-gold" : "text-muted"}`}
+      >
+        <Info className="size-4" aria-hidden />
+      </button>
+    </li>
+  );
 }
 
 /** The provisioner's counter — buy their stock, sell your finds, have wonders appraised. */
@@ -26,18 +49,16 @@ function ProvisionerShop() {
         <p className="font-display text-xs tracking-wider text-muted uppercase">The counter — buy</p>
         <ul className="mt-1 space-y-1">
           {SHOP_STOCK.slice(0, 10).map((id) => (
-            <li key={id}>
-              <Tip content={<ItemTipContent id={id} />} className="w-full min-w-0">
-                <button
-                  type="button"
-                  onClick={() => buy(id)}
-                  className="flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left text-sm text-fg"
-                >
-                  <span>{ITEM_META[id].label}</span>
-                  <span className="text-muted">{ITEM_META[id].buy}g</span>
-                </button>
-              </Tip>
-            </li>
+            <InspectableRow key={id} id={id}>
+              <button
+                type="button"
+                onClick={() => buy(id)}
+                className="flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left text-sm text-fg"
+              >
+                <span>{ITEM_META[id].label}</span>
+                <span className="text-muted">{ITEM_META[id].buy}g</span>
+              </button>
+            </InspectableRow>
           ))}
         </ul>
       </div>
@@ -46,20 +67,18 @@ function ProvisionerShop() {
           <p className="font-display text-xs tracking-wider text-muted uppercase">Your pack — sell</p>
           <ul className="mt-1 space-y-1">
             {sellables.map((id) => (
-              <li key={id}>
-                <Tip content={<ItemTipContent id={id} />} className="w-full min-w-0">
-                  <button
-                    type="button"
-                    onClick={() => sell(id)}
-                    className="flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left text-sm text-fg"
-                  >
-                    <span>
-                      {ITEM_META[id].label} <span className="text-xs text-muted">×{pack?.[id]}</span>
-                    </span>
-                    <span className="text-gold">{ITEM_META[id].sell}g</span>
-                  </button>
-                </Tip>
-              </li>
+              <InspectableRow key={id} id={id}>
+                <button
+                  type="button"
+                  onClick={() => sell(id)}
+                  className="flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left text-sm text-fg"
+                >
+                  <span>
+                    {ITEM_META[id].label} <span className="text-xs text-muted">×{pack?.[id]}</span>
+                  </span>
+                  <span className="text-gold">{ITEM_META[id].sell}g</span>
+                </button>
+              </InspectableRow>
             ))}
           </ul>
         </div>

@@ -42,6 +42,16 @@ body,
   }
 }
 
+/* Reduced effects: weather and results stay; the motion and flashes go. */
+[data-effects="reduced"] .ember-shimmer {
+  animation: none;
+  opacity: 0;
+}
+
+[data-effects="reduced"] .ember-screen-rain > span {
+  animation: none;
+}
+
 @keyframes ember-load {
   from {
     transform: translateX(-120%);

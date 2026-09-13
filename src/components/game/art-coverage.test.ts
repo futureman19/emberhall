@@ -81,7 +81,9 @@ test("AST/checker follows indexed aliases, satisfies, spread catalogs and anonym
     ),
   );
   const changedTags = structuredClone(inventory);
-  const taggedRow = changedTags.rows.find((row) => row.jsxTags?.length);
+  // Pin the art-renderer row: DOM-chrome rows (buttons, sections) carry
+  // jsxTags too, but tag-mapping only applies to the scene-graph vocabulary.
+  const taggedRow = changedTags.rows.find((row) => row.jsxTags?.includes("primitive"));
   assert.ok(taggedRow?.jsxTags?.length, "fixture must contain a JSX renderer");
   taggedRow.jsxTags.push("NewUnmappedVisual");
   assert.ok(auditLedger(ledger, changedTags).some((error) => error.includes("NewUnmappedVisual")));

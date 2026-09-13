@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useGame } from "@/game/store";
 import { createTouchHold, type TouchContact, type TouchTile } from "@/game/touch-hold";
 import { hitAt, leftAt } from "@/game/world-pointer";
@@ -17,6 +17,12 @@ function eligible(_tile: TouchTile) {
  * hold never begins hunting, casting, planting or walking before a menu pick.
  */
 export function useWorldTouch() {
+  // The finger that releases a hold fires one compatibility click at the hold
+  // point — right where the menu just opened. It must not activate or dismiss
+  // anything. Every genuine later click is preceded by its own pointerdown,
+  // which disarms the swallow; the release's compat click is the only click
+  // that arrives without one.
+  const swallowReleaseClick = useRef(false);
   const hold = useMemo(
     () =>
       createTouchHold({
@@ -24,10 +30,30 @@ export function useWorldTouch() {
         unschedule: (handle) => window.clearTimeout(handle),
         eligible,
         tap: ({ tx, ty }) => leftAt(tx, ty),
-        hold: ({ tx, ty }, point) => hitAt(tx, ty, point.clientX, point.clientY),
+        hold: ({ tx, ty }, point) => {
+          swallowReleaseClick.current = true;
+          hitAt(tx, ty, point.clientX, point.clientY);
+        },
       }),
     [],
   );
+  useEffect(() => {
+    const click = (e: Event) => {
+      if (!swallowReleaseClick.current) return;
+      swallowReleaseClick.current = false;
+      e.preventDefault();
+      e.stopPropagation();
+    };
+    const disarm = () => {
+      swallowReleaseClick.current = false;
+    };
+    window.addEventListener("click", click, true);
+    window.addEventListener("pointerdown", disarm, true);
+    return () => {
+      window.removeEventListener("click", click, true);
+      window.removeEventListener("pointerdown", disarm, true);
+    };
+  }, []);
   useEffect(() => {
     const down = (e: PointerEvent) => hold.trackDown(e);
     const move = (e: PointerEvent) => hold.move(e);

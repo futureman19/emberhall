@@ -38,6 +38,17 @@ test('full lighting source differs from frozen only in approved pit fog and thre
     .replace('pit ? 0.1 : night', 'pit ? 0.28 : night')
     .replace('pit ? 0.12 : night', 'pit ? 0.6 : night')
     .replace('pit ? 0.04 : night', 'pit ? 0.16 : night')
-    .replace('      fog.current.density = pit ? 0.14', '      // FogExp2 measures from the camera, not the player. At the fixed\n      // tactical view (~35 units), 0.14 erases even nearby cave geometry.\n      fog.current.density = pit ? 0.02');
+    .replace('      fog.current.density = pit ? 0.14', '      // FogExp2 measures from the camera, not the player. At the fixed\n      // tactical view (~35 units), 0.14 erases even nearby cave geometry.\n      fog.current.density = pit ? 0.02')
+    // UI-10 (audit-ui lane): the reduced-effects preference suppresses only
+    // the strike flash. Default mode (effects on) keeps the frozen behavior —
+    // the gate short-circuits to the same expression it always ran.
+    .replace(
+      'import { rainRate } from "@/game/weather";',
+      'import { rainRate } from "@/game/weather";\nimport { effectsReduced } from "./effects-preference";',
+    )
+    .replace(
+      '    // Lightning: the storm picks its own moments; the sky dome and clouds\n    // read skyFlash so the whole heavens answer the same strike.\n    const storm = !pit && w.weather?.kind === "storm";\n    if (storm && Math.random() < dt * 0.32) {',
+      '    // Lightning: the storm picks its own moments; the sky dome and clouds\n    // read skyFlash so the whole heavens answer the same strike. Under\n    // reduced effects the strike is never generated — the storm keeps its\n    // sky, rain and thunder, only the flash is withheld.\n    const storm = !pit && w.weather?.kind === "storm";\n    if (storm && !effectsReduced() && Math.random() < dt * 0.32) {',
+    );
   assert.equal(source, expected);
 });

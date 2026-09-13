@@ -4,6 +4,7 @@ import {
   CircleHelp,
   FastForward,
   Hammer,
+  Hand,
   Anvil,
   Music2,
   Pause,
@@ -25,6 +26,8 @@ import { SettingsGump } from "@/components/game/settings-gump";
 import { PetsGump } from "@/components/game/pets-gump";
 import { ValeChart } from "@/components/game/vale-map";
 import { MovableMinimap } from "@/components/game/movable-minimap";
+import { ActionsPanel } from "@/components/game/actions-panel";
+import { usePanelA11y } from "@/components/game/use-panel-a11y";
 import { insideLabel } from "@/components/game/building-meshes";
 import { PLACES, regionAt } from "@/game/atlas";
 import { BUILD_ORDER, BUILDING_META, CLASS_META } from "@/game/catalog";
@@ -40,7 +43,7 @@ import { sfxMuted, toggleSfx, warmSfx } from "@/game/vale-sfx";
 import { useGame } from "@/game/store";
 import type { PanelId, Speed } from "@/game/types";
 import { cn } from "@/lib/utils";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 
 function clockLabel(clock: number, day: number) {
   const h = Math.floor(clock) % 24;
@@ -67,15 +70,28 @@ export function Hud() {
 }
 
 function PlayingChrome() {
+  const [actionsOpen, setActionsOpen] = useState(false);
+  const closeActions = useCallback(() => setActionsOpen(false), []);
   useEffect(() => {
     const block = (e: Event) => e.preventDefault();
     window.addEventListener("contextmenu", block);
     return () => window.removeEventListener("contextmenu", block);
   }, []);
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "." || e.repeat) return;
+      const el = e.target as HTMLElement | null;
+      if (el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.isContentEditable)) return;
+      e.preventDefault();
+      setActionsOpen((v) => !v);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
   return (
     <>
       <TopBar />
-      <BottomDock />
+      <BottomDock actionsOpen={actionsOpen} onToggleActions={() => setActionsOpen((v) => !v)} />
       <SidePanel />
       <SelectedCard />
       <PileGump />
@@ -93,6 +109,7 @@ function PlayingChrome() {
       <TravelRibbon />
       <MovableMinimap />
       <ContextMenu />
+      {actionsOpen && <ActionsPanel onClose={closeActions} />}
     </>
   );
 }
@@ -308,10 +325,24 @@ function TopBar() {
           <p className="text-xs text-muted tabular-nums">
             {ghost ? "Ghost" : clockLabel(snap.clock, snap.day)} · {phaseName(snap.hour)} · {snap.weather.label}
           </p>
-          <div className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2">
+          <div
+            className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2"
+            role="meter"
+            aria-label="Health"
+            aria-valuemin={0}
+            aria-valuemax={self?.maxHp ?? 1}
+            aria-valuenow={ghost ? 0 : (self?.hp ?? 0)}
+          >
             <div className="h-full bg-accent" style={{ width: `${Math.max(0, Math.min(1, hp)) * 100}%` }} />
           </div>
-          <div className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2">
+          <div
+            className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2"
+            role="meter"
+            aria-label="Mana"
+            aria-valuemin={0}
+            aria-valuemax={max}
+            aria-valuenow={snap.player?.mana ?? 0}
+          >
             <div className="h-full bg-gold" style={{ width: `${Math.max(0, Math.min(1, mana)) * 100}%` }} />
           </div>
           {(snap.hour < (snap.player?.poisonUntil ?? 0) || snap.hour < (snap.player?.blessUntil ?? 0) || snap.hour < (snap.player?.invisUntil ?? 0)) && (
@@ -380,7 +411,7 @@ function SettingsButton() {
   );
 }
 
-function BottomDock() {
+function BottomDock({ actionsOpen, onToggleActions }: { actionsOpen: boolean; onToggleActions: () => void }) {
   const panel = useGame((s) => s.panel);
   const setPanel = useGame((s) => s.setPanel);
   const openBook = useGame((s) => s.openBookGump);
@@ -394,6 +425,19 @@ function BottomDock() {
       data-testid="bottom-dock"
       className="pointer-events-auto absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-[var(--radius-lg)] border border-border bg-bg/90 p-1"
     >
+      <button
+        type="button"
+        onClick={onToggleActions}
+        className={cn(
+          "grid size-11 place-items-center rounded-[var(--radius-md)] text-muted",
+          actionsOpen && "bg-surface-2 text-fg",
+        )}
+        aria-label="Nearby actions — keyboard: period"
+        aria-expanded={actionsOpen}
+        title="Nearby actions (.)"
+      >
+        <Hand className="size-4" />
+      </button>
       {items.map((it) => {
         const Icon = it.icon;
         return (
@@ -464,9 +508,25 @@ function SfxToggle() {
 
 function SidePanel() {
   const panel = useGame((s) => s.panel);
+  const closePanel = useCallback(() => useGame.setState({ panel: "none" }), []);
+  const region = usePanelA11y<HTMLDivElement>(closePanel, panel !== "none");
   if (panel === "none") return null;
+  const LABELS: Partial<Record<PanelId, string>> = {
+    help: "Guide, journal and roster",
+    you: "You — pack, paperdoll, skills",
+    journal: "Journal",
+    vale: "The chart of the vale",
+    roster: "Roster",
+    build: "The hold — building",
+  };
   return (
-    <div className="pointer-events-auto absolute top-16 bottom-20 left-16 w-[min(100%-5rem,22rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4">
+    <div
+      ref={region}
+      tabIndex={-1}
+      role="region"
+      aria-label={LABELS[panel] ?? "Panel"}
+      className="pointer-events-auto absolute top-16 bottom-20 left-16 w-[min(100%-5rem,22rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 outline-none"
+    >
       {panel === "help" && <GuideTabs />}
       {panel === "you" && <YouDressing />}
       {panel === "journal" && <JournalPanel />}
@@ -485,15 +545,26 @@ function GuideTabs() {
     { id: "journal" as const, label: "Journal" },
     { id: "roster" as const, label: "Roster" },
   ];
+  const onTabKeys = (e: ReactKeyboardEvent) => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    e.preventDefault();
+    const i = tabs.findIndex((t) => t.id === tab);
+    const next = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length]!;
+    setTab(next.id);
+    document.getElementById(`reading-tab-${next.id}`)?.focus();
+  };
   return (
     <div>
-      <div className="flex gap-1" role="tablist" aria-label="Reading pages">
+      <div className="flex gap-1" role="tablist" aria-label="Reading pages" onKeyDown={onTabKeys}>
         {tabs.map((t) => (
           <button
             key={t.id}
+            id={`reading-tab-${t.id}`}
             type="button"
             role="tab"
             aria-selected={tab === t.id}
+            aria-controls={`reading-panel-${t.id}`}
+            tabIndex={tab === t.id ? 0 : -1}
             onClick={() => setTab(t.id)}
             className={cn(
               "min-h-9 flex-1 rounded-[var(--radius-xs)] border px-2 text-xs",
@@ -504,7 +575,7 @@ function GuideTabs() {
           </button>
         ))}
       </div>
-      <div className="mt-3">
+      <div className="mt-3" role="tabpanel" id={`reading-panel-${tab}`} aria-labelledby={`reading-tab-${tab}`}>
         {tab === "guide" && <HelpPanel />}
         {tab === "journal" && <JournalPanel />}
         {tab === "roster" && <RosterPanel />}

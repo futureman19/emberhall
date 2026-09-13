@@ -2,19 +2,25 @@ import { verbsFor } from "@/game/context";
 import { ITEM_META } from "@/game/catalog";
 import { useGame } from "@/game/store";
 import type { ItemId } from "@/game/types";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import {
   clampMenuPosition,
   MENU_FALLBACK_HEIGHT,
   MENU_FALLBACK_WIDTH,
   menuMaxHeight,
 } from "@/components/game/menu-bounds";
+import { usePanelA11y } from "@/components/game/use-panel-a11y";
 
 export function ContextMenu() {
   const ctx = useGame((s) => s.ctx);
   const doVerb = useGame((s) => s.doVerb);
   const close = useGame((s) => s.closeCtx);
+  const menuA11y = usePanelA11y<HTMLDivElement>(close, Boolean(ctx));
   const box = useRef<HTMLDivElement>(null);
+  const setBox = (el: HTMLDivElement | null) => {
+    box.current = el;
+    menuA11y.current = el;
+  };
   const [measured, setMeasured] = useState({ width: MENU_FALLBACK_WIDTH, height: MENU_FALLBACK_HEIGHT });
   useLayoutEffect(() => {
     if (!ctx) return;
@@ -38,8 +44,9 @@ export function ContextMenu() {
   const pos = clampMenuPosition({ x: ctx.x, y: ctx.y }, measured, viewport);
   return (
     <div
-      ref={box}
-      className="pointer-events-auto absolute z-20 flex min-w-40 flex-col rounded-[var(--radius-md)] border border-border bg-bg/95 p-1"
+      ref={setBox}
+      tabIndex={-1}
+      className="pointer-events-auto absolute z-20 flex min-w-40 flex-col rounded-[var(--radius-md)] border border-border bg-bg/95 p-1 outline-none"
       style={{ left: pos.x, top: pos.y, maxHeight: menuMaxHeight(viewport) }}
       role="menu"
       aria-label={`Actions for ${ctx.target.label}`}
@@ -77,10 +84,18 @@ export function PileGump() {
   const take = useGame((s) => s.takePile);
   const takeGold = useGame((s) => s.takePileGold);
   const pile = piles.find((p) => p.id === id);
+  const closePile = useCallback(() => useGame.setState({ openPileId: null }), []);
+  const dialog = usePanelA11y<HTMLDivElement>(closePile, Boolean(pile));
   if (!pile) return null;
   const items = (Object.keys(pile.items) as ItemId[]).filter((k) => (pile.items[k] ?? 0) > 0);
   return (
-    <div className="pointer-events-auto absolute top-16 left-3 flex max-h-[calc(100dvh-5rem)] w-[min(100%-1.5rem,18rem)] flex-col rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4">
+    <div
+      ref={dialog}
+      tabIndex={-1}
+      role="dialog"
+      aria-label={`Loot — ${pile.label}`}
+      className="pointer-events-auto absolute top-16 left-3 flex max-h-[calc(100dvh-5rem)] w-[min(100%-1.5rem,18rem)] flex-col rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 outline-none"
+    >
       <div className="flex shrink-0 items-start justify-between gap-2">
         <p className="min-w-0 pt-2 font-display text-sm break-words text-fg">{pile.label}</p>
         <button type="button" aria-label="Close loot" onClick={() => useGame.setState({ openPileId: null })} className="flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-border text-fg hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-accent">

@@ -36,9 +36,11 @@ function useChime() {
     [],
   );
   const unlock = useCallback(() => {
+    // Muted means no context at all — not even a suspended one.
+    if (sfxMuted()) return;
     const ctx = ensure();
     // A suspended context stays silent forever unless a live gesture resumes it.
-    if (ctx && ctx.state === "suspended" && !sfxMuted()) ctx.resume().catch(() => {});
+    if (ctx && ctx.state === "suspended") ctx.resume().catch(() => {});
   }, [ensure]);
   const chime = useCallback(() => {
     if (sfxMuted()) return;

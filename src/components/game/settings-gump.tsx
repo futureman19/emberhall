@@ -1,4 +1,4 @@
-import { AudioLines, Gem, Music2, SunMedium, Trees } from "lucide-react";
+import { AudioLines, Gem, Music2, Sparkles, SunMedium, Trees } from "lucide-react";
 import { useWallet } from "@1sat/react";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,16 +10,21 @@ import {
 import { musicMuted, toggleValeMusic } from "@/game/vale-music";
 import { sfxMuted, toggleSfx } from "@/game/vale-sfx";
 import { useGame } from "@/game/store";
+import { usePanelA11y } from "@/components/game/use-panel-a11y";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
 /** The little room of levers — sound, graphics and the chain wallet, off the dock. */
 export function SettingsGump() {
   const open = useGame((s) => s.openSettings);
+  const closeSettings = useGame((s) => s.closeSettings);
+  const dialog = usePanelA11y<HTMLDivElement>(closeSettings, open);
   if (!open) return null;
   return (
     <div
-      className="pointer-events-auto absolute top-3 left-16 z-10 max-h-[calc(100dvh-1.5rem)] w-72 max-w-[calc(100vw-5rem)] overflow-y-auto overscroll-contain rounded-[var(--radius-lg)] border border-border bg-bg p-4 shadow-2xl"
+      ref={dialog}
+      tabIndex={-1}
+      className="pointer-events-auto absolute top-3 left-16 z-10 max-h-[calc(100dvh-1.5rem)] w-72 max-w-[calc(100vw-5rem)] overflow-y-auto overscroll-contain rounded-[var(--radius-lg)] border border-border bg-bg p-4 shadow-2xl outline-none"
       role="dialog"
       aria-label="Settings — sound, graphics and the Vault"
     >
@@ -107,6 +112,28 @@ function GraphicsSection() {
           ))}
         </div>
       </div>
+
+      <button
+        type="button"
+        onClick={() => updateGraphicsSettings({ reducedEffects: !graphics.reducedEffects })}
+        className="mt-1 flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left"
+        aria-pressed={graphics.reducedEffects}
+        aria-label={`Reduced effects: ${graphics.reducedEffects ? "on" : "off"}`}
+      >
+        <span className="flex items-center gap-2">
+          <Sparkles className={cn("size-4", graphics.reducedEffects ? "text-muted/50" : "text-accent")} />
+          <span>
+            <span className="block text-sm text-fg">Reduced effects</span>
+            <span className="block text-[11px] text-muted">calm the flashes, keep the results</span>
+          </span>
+        </span>
+        <span className="flex items-center gap-2">
+          <span className={cn("relative h-5 w-9 rounded-full border transition-colors", graphics.reducedEffects ? "border-accent bg-accent/35" : "border-border-strong bg-bg")}>
+            <span className={cn("absolute top-0.5 size-3.5 rounded-full bg-fg transition-transform", graphics.reducedEffects ? "translate-x-4" : "translate-x-0.5")} />
+          </span>
+          <span className={cn("text-xs", graphics.reducedEffects ? "text-gold" : "text-muted")}>{graphics.reducedEffects ? "On" : "Off"}</span>
+        </span>
+      </button>
     </section>
   );
 }

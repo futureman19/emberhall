@@ -6,8 +6,10 @@ const intro = readFileSync(new URL("../src/components/game/intro-cinematic.tsx",
 
 test("intro chime honors the shared sfx preference", () => {
   assert.ok(intro.includes('import { sfxMuted } from "@/game/vale-sfx"'));
-  assert.ok(intro.includes("if (sfxMuted()) return;"));
-  assert.ok(intro.includes('ctx.state === "suspended" && !sfxMuted()'));
+  // Both the gesture unlock and the chime gate on the preference, so muted
+  // play never even creates the context.
+  const gates = intro.match(/if \(sfxMuted\(\)\) return;/g) ?? [];
+  assert.ok(gates.length >= 2);
 });
 
 test("component-owned audio context is closed on unmount", () => {

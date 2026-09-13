@@ -8,6 +8,8 @@ import { useGame } from "@/game/store";
 import type { ItemId, RareItem, SkillId, WearSlot } from "@/game/types";
 import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
+import { Info } from "lucide-react";
+import { useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /** Slot layout — the left flank, the right flank, and where each hangs on the body. */
@@ -25,6 +27,44 @@ const RIGHT_SLOTS: { id: WearSlot; label: string }[] = [
   { id: "legs", label: "Legs" },
   { id: "feet", label: "Feet" },
 ];
+
+/** A row's full item card plus a separate Inspect toggle — touch and
+ *  keyboard users read stats, comparison and worth without taking the
+ *  row's own action (equip, hold, buy). */
+function InspectTip({
+  id,
+  rare,
+  label,
+  className,
+  children,
+}: {
+  id: ItemId;
+  rare?: RareItem;
+  label: string;
+  className?: string;
+  children: ReactNode;
+}) {
+  const [inspecting, setInspecting] = useState(false);
+  return (
+    <>
+      <Tip content={<ItemTipContent id={id} rare={rare} />} className={className} pin={inspecting}>
+        {children}
+      </Tip>
+      <button
+        type="button"
+        aria-label={`Inspect ${label}`}
+        aria-expanded={inspecting}
+        onClick={() => setInspecting((v) => !v)}
+        className={cn(
+          "grid size-11 shrink-0 place-items-center rounded-[var(--radius-xs)] border border-border bg-surface-2",
+          inspecting ? "text-gold" : "text-muted",
+        )}
+      >
+        <Info className="size-4" aria-hidden />
+      </button>
+    </>
+  );
+}
 
 function packHint(id: ItemId) {
   if (id === "deed_porch" || id === "deed_hut" || id === "deed_homestead") return "Place";
@@ -224,8 +264,8 @@ export function YouDressing() {
       {rares.length > 0 ? (
         <ul className="mt-1 space-y-1">
           {rares.map((r) => (
-            <li key={r.uid}>
-              <Tip content={<ItemTipContent id={r.base} rare={r} />} className="w-full min-w-0">
+            <li key={r.uid} className="flex gap-1">
+              <InspectTip id={r.base} rare={r} label={rareName(r)} className="w-full min-w-0 flex-1">
                 <button
                   type="button"
                   onClick={() => equipRare(r.uid)}
@@ -237,7 +277,7 @@ export function YouDressing() {
                     {r.workmanship ? `${r.workmanship} · ` : ""}{r.maker ? `by ${r.maker}` : "wonder"}
                   </span>
                 </button>
-              </Tip>
+              </InspectTip>
             </li>
           ))}
         </ul>
@@ -247,7 +287,7 @@ export function YouDressing() {
           const hint = packHint(id);
           return (
             <li key={id} className="flex gap-1">
-              <Tip content={<ItemTipContent id={id} />} className="min-w-0 flex-1">
+              <InspectTip id={id} label={ITEM_META[id].label} className="min-w-0 flex-1">
                 <button
                   type="button"
                   onClick={() => equip(id)}
@@ -260,7 +300,7 @@ export function YouDressing() {
                     {hint ? ` · ${hint}` : ""}
                   </span>
                 </button>
-              </Tip>
+              </InspectTip>
               <button
                 type="button"
                 onClick={() => drop(id)}

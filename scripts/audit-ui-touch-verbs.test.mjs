@@ -9,13 +9,23 @@ const hud = readFileSync(new URL("../src/components/game/hud.tsx", import.meta.u
 test("general touch hold reuses the cancellable hold contract", () => {
   assert.ok(worldTouch.includes("createTouchHold"));
   assert.ok(worldTouch.includes("tap: ({ tx, ty }) => leftAt(tx, ty)"));
-  assert.ok(worldTouch.includes("hold: ({ tx, ty }, point) => hitAt(tx, ty, point.clientX, point.clientY)"));
+  assert.ok(worldTouch.includes("hitAt(tx, ty, point.clientX, point.clientY)"));
   // Same play-state guards as the specialized hooks: no build/till interference.
   assert.ok(worldTouch.includes('state.phase === "playing" && !state.buildKind && !state.tillArmed'));
   // Same lifecycle cancellation as the specialized hooks.
   for (const token of ["pointercancel", "visibilitychange", "blur", "trackDown", "hold.cancel()"]) {
     assert.ok(worldTouch.includes(token), token);
   }
+});
+
+test("the hold release cannot activate or dismiss the menu it opened", () => {
+  // The releasing finger fires one compatibility click at the hold point;
+  // it is swallowed, and any genuine later click disarms via its pointerdown.
+  assert.ok(worldTouch.includes("swallowReleaseClick"));
+  assert.ok(worldTouch.includes('window.addEventListener("click", click, true)'));
+  assert.ok(worldTouch.includes('window.addEventListener("pointerdown", disarm, true)'));
+  assert.ok(worldTouch.includes("e.preventDefault();"));
+  assert.ok(worldTouch.includes("e.stopPropagation();"));
 });
 
 test("terrain tries specialized hooks first, then the general touch path", () => {

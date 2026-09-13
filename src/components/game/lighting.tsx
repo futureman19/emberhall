@@ -10,6 +10,7 @@ import { useGame } from "@/game/store";
 import { lanternwoodInfluence } from "./lanternwood-art";
 import { playSfx } from "@/game/vale-sfx";
 import { rainRate } from "@/game/weather";
+import { effectsReduced } from "./effects-preference";
 import { skyFlash, skyTone, sunColorFor, sunDirFor, sunHeight } from "./sky-math";
 
 // Distant land fades toward the sky's haze, tinted a touch groundward so
@@ -65,9 +66,11 @@ export function Lighting({ shadows }: { shadows: boolean }) {
     const sunH = DEV_DAYLIGHT ? Math.max(sunHeight(w.hour), 0.5) : sunHeight(w.hour);
 
     // Lightning: the storm picks its own moments; the sky dome and clouds
-    // read skyFlash so the whole heavens answer the same strike.
+    // read skyFlash so the whole heavens answer the same strike. Under
+    // reduced effects the strike is never generated — the storm keeps its
+    // sky, rain and thunder, only the flash is withheld.
     const storm = !pit && w.weather?.kind === "storm";
-    if (storm && Math.random() < dt * 0.32) {
+    if (storm && !effectsReduced() && Math.random() < dt * 0.32) {
       skyFlash.v = 1;
       thunderIn.current = 0.35 + Math.random() * 1.1;
     }
