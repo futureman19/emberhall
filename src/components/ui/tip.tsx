@@ -1,4 +1,4 @@
-import { cloneElement, isValidElement, useId, useState, type KeyboardEvent, type ReactElement, type ReactNode } from "react";
+import { cloneElement, isValidElement, useId, useState, useEffect, useRef, type KeyboardEvent, type ReactElement, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -15,28 +15,40 @@ export function Tip({
   className,
   side = "top",
   pin = false,
+  onDismiss,
 }: {
   content: ReactNode;
   children: ReactNode;
   className?: string;
   side?: "top" | "bottom";
   pin?: boolean;
+  onDismiss?: () => void;
 }) {
   const [pinned, setPinned] = useState(false);
   const tipId = useId();
+  const wrapper = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    const el = wrapper.current;
+    const dismiss = () => { setPinned(false); onDismiss?.(); };
+    el?.addEventListener("dismiss-tip", dismiss);
+    return () => el?.removeEventListener("dismiss-tip", dismiss);
+  }, [onDismiss]);
   if (!content) return <>{children}</>;
   const open = pinned || pin;
   const trigger = isValidElement(children)
     ? cloneElement(children as ReactElement<Record<string, unknown>>, { "aria-describedby": tipId })
     : children;
   const onKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Escape" && pinned) {
+    if (e.key === "Escape" && open) {
       e.stopPropagation();
       setPinned(false);
+      onDismiss?.();
     }
   };
   return (
     <span
+      ref={wrapper}
+      data-tip-open={open || undefined}
       className={cn("group/tip relative inline-flex min-w-0", className)}
       onPointerEnter={() => setPinned(true)}
       onPointerLeave={() => setPinned(false)}

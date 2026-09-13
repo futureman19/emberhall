@@ -47,7 +47,7 @@ function InspectTip({
   const [inspecting, setInspecting] = useState(false);
   return (
     <>
-      <Tip content={<ItemTipContent id={id} rare={rare} />} className={className} pin={inspecting}>
+      <Tip content={<ItemTipContent id={id} rare={rare} />} className={className} pin={inspecting} onDismiss={() => setInspecting(false)}>
         {children}
       </Tip>
       <button

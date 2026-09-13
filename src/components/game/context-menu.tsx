@@ -22,32 +22,40 @@ export function ContextMenu() {
     menuA11y.current = el;
   };
   const [measured, setMeasured] = useState({ width: MENU_FALLBACK_WIDTH, height: MENU_FALLBACK_HEIGHT });
+  const [viewport, setViewport] = useState({ width: window.innerWidth, height: window.innerHeight, x: 0, y: 0 });
   useLayoutEffect(() => {
     if (!ctx) return;
     const el = box.current;
     if (!el) return;
     const measure = () => {
+      const visual = window.visualViewport;
+      setViewport({ width: visual?.width ?? window.innerWidth, height: visual?.height ?? window.innerHeight, x: visual?.offsetLeft ?? 0, y: visual?.offsetTop ?? 0 });
       const rect = el.getBoundingClientRect();
-      setMeasured((current) =>
-        Math.abs(current.width - rect.width) < 1 && Math.abs(current.height - rect.height) < 1
-          ? current
-          : { width: rect.width, height: rect.height },
-      );
+      setMeasured((current) => current.width === rect.width && current.height === rect.height ? current : { width: rect.width, height: rect.height });
     };
     measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    window.visualViewport?.addEventListener("resize", measure);
+    window.visualViewport?.addEventListener("scroll", measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+      window.visualViewport?.removeEventListener("resize", measure);
+      window.visualViewport?.removeEventListener("scroll", measure);
+    };
   }, [ctx]);
   if (!ctx) return null;
   const verbs = verbsFor(ctx.target);
-  const viewport = { width: window.innerWidth, height: window.innerHeight };
-  const pos = clampMenuPosition({ x: ctx.x, y: ctx.y }, measured, viewport);
+
+  const pos = clampMenuPosition({ x: ctx.x - viewport.x, y: ctx.y - viewport.y }, measured, viewport);
   return (
     <div
       ref={setBox}
       tabIndex={-1}
-      className="pointer-events-auto absolute z-20 flex min-w-40 flex-col rounded-[var(--radius-md)] border border-border bg-bg/95 p-1 outline-none"
-      style={{ left: pos.x, top: pos.y, maxHeight: menuMaxHeight(viewport) }}
+      className="pointer-events-auto absolute z-20 flex min-w-0 flex-col overflow-y-auto break-words rounded-[var(--radius-md)] border border-border bg-bg/95 p-1 outline-none"
+      style={{ left: pos.x + viewport.x, top: pos.y + viewport.y, width: "max-content", maxWidth: Math.max(0, viewport.width - 16), maxHeight: menuMaxHeight(viewport), overflowWrap: "anywhere" }}
       role="menu"
       aria-label={`Actions for ${ctx.target.label}`}
     >

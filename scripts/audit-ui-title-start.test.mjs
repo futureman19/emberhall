@@ -31,5 +31,5 @@ test("confirmation opens without busy and never starts on the opening tap", () =
 test("startup failure is rendered and announced on the title path", () => {
   assert.ok(title.includes('const startError = useGame((s) => s.toast)'));
   assert.ok(title.includes('role="alert"'));
-  assert.ok(title.includes("Your hall is untouched — try again."));
+  assert.ok(!title.includes("Your hall is untouched"));
 });

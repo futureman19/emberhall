@@ -7,8 +7,9 @@ import { BANK_RANGE } from "@/game/npcs";
 import { appraiseRare, rareName } from "@/game/rare";
 import { useGame } from "@/game/store";
 import type { ItemId } from "@/game/types";
+import { usePanelA11y } from "./use-panel-a11y";
 import { Info } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { useCallback, useState, type ReactNode } from "react";
 
 function heldItems(bag?: Partial<Record<ItemId, number>>) {
   return (Object.keys(bag ?? {}) as ItemId[]).filter((id) => (bag?.[id] ?? 0) > 0);
@@ -19,7 +20,7 @@ function InspectableRow({ id, children }: { id: ItemId; children: ReactNode }) {
   const [inspecting, setInspecting] = useState(false);
   return (
     <li className="flex gap-1">
-      <Tip content={<ItemTipContent id={id} />} className="w-full min-w-0 flex-1" pin={inspecting}>
+      <Tip content={<ItemTipContent id={id} />} className="w-full min-w-0 flex-1" pin={inspecting} onDismiss={() => setInspecting(false)}>
         {children}
       </Tip>
       <button
@@ -226,10 +227,16 @@ export function NpcGump() {
   const select = useGame((s) => s.select);
   const ghost = useGame((s) => Boolean(s.snap.player?.ghost));
   const p = people.find((x) => x.id === selectedId);
+  const closeNpc = useCallback(() => select(null), [select]);
+  const dialog = usePanelA11y<HTMLDivElement>(closeNpc, Boolean(p?.role));
   if (!p?.role) return null;
   const close = Math.hypot(youX - p.x, youZ - p.z) <= BANK_RANGE;
   return (
     <div
+      ref={dialog}
+      tabIndex={-1}
+      role="dialog"
+      aria-label={p.name}
       className={
         p.role === "banker"
           ? "pointer-events-auto absolute top-16 left-3 w-[min(100%-1.5rem,28rem)] rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4"

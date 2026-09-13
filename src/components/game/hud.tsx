@@ -134,8 +134,17 @@ function TitleOverlay() {
   useEffect(() => {
     setHasSave(hallHasSave());
   }, []);
+  const restoreNewFocus = useRef(false);
+  const cancelNew = () => {
+    restoreNewFocus.current = true;
+    setConfirmNew(false);
+  };
   useEffect(() => {
     if (confirmNew) keepButton.current?.focus();
+    else if (restoreNewFocus.current) {
+      restoreNewFocus.current = false;
+      newButton.current?.focus();
+    }
   }, [confirmNew]);
   // "started" ran begin; "confirming" only opened the replace prompt; "held"
   // changed nothing (busy or already confirming). Opening the prompt never
@@ -199,12 +208,14 @@ function TitleOverlay() {
             role="alert"
             className="mt-4 rounded-[var(--radius-md)] border border-accent/60 bg-accent/15 px-3 py-2 text-pretty text-sm leading-relaxed text-fg"
           >
-            {startError} Your hall is untouched — try again.
+            {startError} Please try again.
           </p>
         )}
         <div className="mt-6 flex flex-col gap-2">
           {confirmNew ? (
-            <div role="alertdialog" aria-labelledby="replace-hall-title" aria-describedby="replace-hall-desc">
+            <div role="alertdialog" aria-labelledby="replace-hall-title" aria-describedby="replace-hall-desc" onKeyDown={(e) => {
+              if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); cancelNew(); }
+            }}>
               <p id="replace-hall-title" className="font-display text-sm text-fg">
                 Replace the saved hall?
               </p>
@@ -217,10 +228,7 @@ function TitleOverlay() {
                   ref={keepButton}
                   type="button"
                   className="h-14 w-full rounded-[var(--radius-md)] bg-accent text-base font-medium text-accent-fg"
-                  onClick={() => {
-                    setConfirmNew(false);
-                    newButton.current?.focus();
-                  }}
+                  onClick={cancelNew}
                 >
                   Keep my hall
                 </button>

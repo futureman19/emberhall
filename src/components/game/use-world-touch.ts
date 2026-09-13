@@ -3,6 +3,14 @@ import { useGame } from "@/game/store";
 import { createTouchHold, type TouchContact, type TouchTile } from "@/game/touch-hold";
 import { hitAt, leftAt } from "@/game/world-pointer";
 
+type WorldTouchTile = TouchTile & { tap?: () => void; secondary?: (point: TouchContact) => void };
+let dispatchTouch: ((point: TouchContact, tile: WorldTouchTile) => boolean) | null = null;
+
+/** Intercepting meshes share Terrain's single gesture owner. */
+export function beginWorldTouch(point: TouchContact, tile: WorldTouchTile) {
+  return dispatchTouch?.(point, tile) ?? false;
+}
+
 function eligible(_tile: TouchTile) {
   const state = useGame.getState();
   return state.phase === "playing" && !state.buildKind && !state.tillArmed;
@@ -29,10 +37,11 @@ export function useWorldTouch() {
         schedule: (fn, ms) => window.setTimeout(fn, ms),
         unschedule: (handle) => window.clearTimeout(handle),
         eligible,
-        tap: ({ tx, ty }) => leftAt(tx, ty),
-        hold: ({ tx, ty }, point) => {
-          swallowReleaseClick.current = true;
-          hitAt(tx, ty, point.clientX, point.clientY);
+        tap: (tile: WorldTouchTile) => tile.tap ? tile.tap() : leftAt(tile.tx, tile.ty),
+        hold: (tile: WorldTouchTile, point) => {
+                  swallowReleaseClick.current = true;
+                  if (tile.secondary) tile.secondary(point);
+                  else hitAt(tile.tx, tile.ty, point.clientX, point.clientY);
         },
       }),
     [],
@@ -74,6 +83,14 @@ export function useWorldTouch() {
       window.removeEventListener("blur", cancel);
       document.removeEventListener("visibilitychange", cancel);
     };
+  }, [hold]);
+  useEffect(() => {
+    dispatchTouch = (point, tile) => {
+      if (point.pointerType !== "touch" || !eligible(tile)) return false;
+      hold.begin(point, tile);
+      return true;
+    };
+    return () => { dispatchTouch = null; };
   }, [hold]);
   return (point: TouchContact, tile: TouchTile) => {
     if (point.pointerType !== "touch" || !eligible(tile)) return false;

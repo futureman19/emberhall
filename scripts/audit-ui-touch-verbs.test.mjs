@@ -8,8 +8,8 @@ const hud = readFileSync(new URL("../src/components/game/hud.tsx", import.meta.u
 
 test("general touch hold reuses the cancellable hold contract", () => {
   assert.ok(worldTouch.includes("createTouchHold"));
-  assert.ok(worldTouch.includes("tap: ({ tx, ty }) => leftAt(tx, ty)"));
-  assert.ok(worldTouch.includes("hitAt(tx, ty, point.clientX, point.clientY)"));
+  assert.ok(worldTouch.includes("tap: (tile: WorldTouchTile) => tile.tap ? tile.tap() : leftAt(tile.tx, tile.ty)"));
+  assert.ok(worldTouch.includes("hitAt(tile.tx, tile.ty, point.clientX, point.clientY)"));
   // Same play-state guards as the specialized hooks: no build/till interference.
   assert.ok(worldTouch.includes('state.phase === "playing" && !state.buildKind && !state.tillArmed'));
   // Same lifecycle cancellation as the specialized hooks.

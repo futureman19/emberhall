@@ -17,6 +17,11 @@ export function usePanelA11y<T extends HTMLElement>(onEscape: () => void, active
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
       e.stopPropagation();
+      e.preventDefault();
+      // Native layer arbitration happens before React delegation. Inspect
+      // buttons can be siblings of their Tip, so search the entire panel.
+      const detail = el.querySelector<HTMLElement>('[data-tip-open="true"]');
+      if (detail) { detail.dispatchEvent(new Event("dismiss-tip")); return; }
       onEscape();
     };
     el.addEventListener("keydown", onKey);

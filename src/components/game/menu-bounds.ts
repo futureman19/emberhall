@@ -25,5 +25,5 @@ export function clampMenuPosition(
 
 /** Tallest list the menu may show before its own scroll takes over. */
 export function menuMaxHeight(viewport: MenuViewport, margin = MENU_VIEWPORT_MARGIN) {
-  return Math.max(160, viewport.height - margin * 2);
+  return Math.max(0, viewport.height - margin * 2);
 }

@@ -66,12 +66,12 @@ export function Lighting({ shadows }: { shadows: boolean }) {
     const sunH = DEV_DAYLIGHT ? Math.max(sunHeight(w.hour), 0.5) : sunHeight(w.hour);
 
     // Lightning: the storm picks its own moments; the sky dome and clouds
-    // read skyFlash so the whole heavens answer the same strike. Under
-    // reduced effects the strike is never generated — the storm keeps its
-    // sky, rain and thunder, only the flash is withheld.
+    // read skyFlash so the whole heavens answer the same strike.
+    // Reduced effects withhold only visuals, never storm events or thunder.
     const storm = !pit && w.weather?.kind === "storm";
-    if (storm && !effectsReduced() && Math.random() < dt * 0.32) {
-      skyFlash.v = 1;
+    if (effectsReduced()) skyFlash.v = 0;
+    if (storm && Math.random() < dt * 0.32) {
+      if (!effectsReduced()) skyFlash.v = 1;
       thunderIn.current = 0.35 + Math.random() * 1.1;
     }
     if (thunderIn.current > 0) {
