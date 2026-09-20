@@ -22,13 +22,13 @@
       "inspections": {
         "p50": 5,
         "p90": 5,
-        "p99": 6,
-        "max": 6
+        "p99": 7,
+        "max": 8
       },
       "modeledSeconds": {
         "p50": 11.1,
         "p90": 11.1,
-        "p99": 12.6
+        "p99": 14.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -44,15 +44,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 758,
-        "p90": 1316,
-        "p99": 1729,
-        "max": 2786
+        "p50": 5485,
+        "p90": 8401,
+        "p99": 11333,
+        "max": 17405
       },
       "modeledSeconds": {
-        "p50": 1140.6,
-        "p90": 1977.6,
-        "p99": 2597.1
+        "p50": 8231.1,
+        "p90": 12605.1,
+        "p99": 17003.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -280,24 +280,25 @@
     }
   },
   "workmanshipAtMaxSkill": {
+    "inputGrade": "choice",
     "bow": {
-      "ordinary": 0.6719999999999999,
-      "fine": 0.164,
-      "exceptional": 0.164
+      "ordinary": 0,
+      "fine": 0.806,
+      "exceptional": 0.194
     },
     "sword": {
-      "ordinary": 0.6799999999999999,
-      "fine": 0.16,
-      "exceptional": 0.16
+      "ordinary": 0,
+      "fine": 0.81,
+      "exceptional": 0.19
     }
   },
   "statEnumeration": {
-    "legalCombinationCount": 22656,
+    "legalCombinationCount": 90624,
     "forms": {
       "bow": {
-        "combinations": 4224,
+        "combinations": 16896,
         "roleOptionCounts": [
-          16,
+          64,
           8
         ],
         "inlayOptions": 11,
@@ -317,10 +318,10 @@
         "capViolations": 0
       },
       "sword": {
-        "combinations": 18432,
+        "combinations": 73728,
         "roleOptionCounts": [
           8,
-          16,
+          64,
           8
         ],
         "inlayOptions": 6,
@@ -342,7 +343,7 @@
     }
   },
   "payloadSizes": {
-    "representativeSaveBytes": 18792,
+    "representativeSaveBytes": 23723,
     "fiveItemBytes": 2654,
     "vaultInscriptionBytes": {
       "min": 589,
@@ -546,8 +547,6 @@
       ]
     }
   ],
-  "decision": "HOLD",
-  "reasons": [
-    "Max-skill workmanship still yields ordinary quality more than 50% of the time on rare inputs; add skill-banded workmanship minimums before expanding the catalog."
-  ]
+  "decision": "READY",
+  "reasons": []
 }

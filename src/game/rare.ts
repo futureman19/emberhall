@@ -9,6 +9,7 @@ import type {
   ItemFormId,
   Workmanship,
 } from "./crafting/types.ts";
+import type { MaterialGrade } from "./resources/types.ts";
 import type { FaunaKind, ItemId, RareItem, SkillId, WearSlot, World } from "./types.ts";
 
 /**
@@ -183,23 +184,40 @@ export function bornRare(rare: RareItem, world: World, maker?: string): RareItem
   return rare;
 }
 
+/** Rare-material bonus added to the crafter's effective margin: better stock, better work. */
+const GRADE_MARGIN_BONUS: Readonly<Record<MaterialGrade, number>> = Object.freeze({
+  rough: 0,
+  sound: 0,
+  choice: 15,
+  pristine: 30,
+});
+
+/** Skill at which a master working choice-or-better materials never produces ordinary work. */
+const WORKMANSHIP_FLOOR_SKILL = 80;
+
 /** A separate physical-quality roll for exact crafting; it never chooses magic. */
-export function workmanshipChances(skill: number, difficulty: number): Readonly<Record<Workmanship, number>> {
+export function workmanshipChances(
+  skill: number,
+  difficulty: number,
+  primaryGrade?: MaterialGrade,
+): Readonly<Record<Workmanship, number>> {
   if (!Number.isFinite(skill) || !Number.isFinite(difficulty)) throw new Error("craft skill and difficulty must be finite");
-  const margin = skill - difficulty;
+  const margin = skill - difficulty + (primaryGrade ? GRADE_MARGIN_BONUS[primaryGrade] : 0);
   if (margin < 25) return Object.freeze({ ordinary: 1, fine: 0, exceptional: 0 });
   const exceptional = margin >= 60 ? Math.min(0.2, margin / 500) : 0;
   const fineThreshold = Math.min(0.45, margin / 250);
-  return Object.freeze({
-    ordinary: 1 - fineThreshold,
-    fine: Math.max(0, fineThreshold - exceptional),
-    exceptional,
-  });
+  let ordinary = 1 - fineThreshold;
+  let fine = Math.max(0, fineThreshold - exceptional);
+  if (skill >= WORKMANSHIP_FLOOR_SKILL && (primaryGrade === "choice" || primaryGrade === "pristine")) {
+    fine += ordinary;
+    ordinary = 0;
+  }
+  return Object.freeze({ ordinary, fine, exceptional });
 }
 
-export function workmanshipForCraft(skill: number, difficulty: number, roll: number): Workmanship {
+export function workmanshipForCraft(skill: number, difficulty: number, roll: number, primaryGrade?: MaterialGrade): Workmanship {
   if (!Number.isFinite(roll) || roll < 0 || roll >= 1) throw new Error("workmanship roll must be within 0..<1");
-  const chances = workmanshipChances(skill, difficulty);
+  const chances = workmanshipChances(skill, difficulty, primaryGrade);
   if (roll < chances.exceptional) return "exceptional";
   return roll < chances.exceptional + chances.fine ? "fine" : "ordinary";
 }

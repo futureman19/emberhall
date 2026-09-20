@@ -8,6 +8,7 @@ import { RECIPES, canMake, maxCraftable, stationsHere, type Recipe, type Station
 import { BOW_FORM } from "@/game/crafting/forms";
 import { listResourceInventory } from "@/game/inventory/resources";
 import { getWorld } from "@/game/live";
+import type { MaterialGrade } from "@/game/resources/types";
 import { useGame } from "@/game/store";
 import type { ItemId, ResourceStackKey } from "@/game/types";
 import { MaterialSelector } from "./crafting/material-selector";
@@ -68,7 +69,11 @@ export function CraftGump() {
         <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Bow</p>
         <MaterialSelector role={bodyRole} rows={resourceRows} selected={body} onSelect={setBody} />
         <MaterialSelector role={bindingRole} rows={resourceRows} selected={binding} onSelect={setBinding} />
-        <WorkmanshipPreview skill={skills?.carpentry ?? 0} difficulty={18} />
+        <WorkmanshipPreview
+          skill={skills?.carpentry ?? 0}
+          difficulty={18}
+          primaryGrade={body ? (body.split(":")[2] as MaterialGrade) : undefined}
+        />
         <ConfirmCraft
           selected={{ body, binding }}
           rows={resourceRows}

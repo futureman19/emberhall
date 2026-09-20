@@ -357,7 +357,8 @@ export function commandCraftExact(
     return note;
   }
 
-  const workmanship = workmanshipForCraft(skill, rec.diff, Math.random());
+  const primary = preview.components.find(({ role }) => role === "body" || role === "edge" || role === "plate");
+  const workmanship = workmanshipForCraft(skill, rec.diff, Math.random(), primary?.grade);
   const form = ITEM_FORM_CATALOG[exactRecipe.formId];
   const maker = you(world)?.name ?? "an unknown hand";
   const specialty = preview.components.some(

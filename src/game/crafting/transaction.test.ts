@@ -192,12 +192,12 @@ test("exact bowcraft - redwood always creates one material-specific item with de
   assert.equal(bow.recipeId, "bow");
   assert.equal(bow.recipeVersion, 1);
   assert.equal(bow.source, "crafted");
-  assert.equal(bow.workmanship, "ordinary");
+  assert.equal(bow.workmanship, "fine", "mastery on choice redwood floors ordinary work out");
   assert.equal(bow.maker, you(world)!.name);
   assert.deepEqual(bow.affixes, [], "materials and workmanship never invent gem magic");
   assert.deepEqual(bow.inlays, []);
   assert.equal(bow.resolvedStats?.damage, 8);
-  assert.equal(bow.resolvedStats?.hitBonus, 2, "choice redwood contributes its stable accuracy trait");
+  assert.equal(bow.resolvedStats?.hitBonus, 3, "choice redwood accuracy trait plus fine workmanship");
   assert.deepEqual(bow.components, [
     { role: "body", resourceId: "redwood", form: "log", grade: "choice", amount: 5 },
     { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
