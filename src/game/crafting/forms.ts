@@ -44,7 +44,7 @@ const MATERIAL_ROLES = [
   "finish",
 ] as const satisfies readonly MaterialRole[];
 const MATERIAL_CONTRIBUTIONS = ["primary", "secondary", "cosmetic"] as const satisfies readonly MaterialContribution[];
-const GEM_FAMILIES = ["power", "fortune"] as const satisfies readonly GemFamily[];
+const GEM_FAMILIES = ["power", "fortune", "precision"] as const satisfies readonly GemFamily[];
 const GRADE_KINDS = ["timber", "ore", "fiber"] as const;
 const GRADE_FORMS = ["log", "board", "ore", "ingot", "cloth"] as const;
 
@@ -312,7 +312,7 @@ const BOW_FORM_DEFINITION = {
   ],
   baseStats: { damage: 8, hitBonus: 0, armor: 0, skillBonuses: {}, slayerMultipliers: {} },
   caps: { damage: 15, hitBonus: 10, armor: 0, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
-  allowedGemFamilies: ["power", "fortune"],
+  allowedGemFamilies: ["power", "fortune", "precision"],
   maxInlays: 1,
 } as const satisfies ItemFormDefinition;
 
@@ -344,7 +344,7 @@ const SWORD_FORM_DEFINITION = {
   ],
   baseStats: { damage: 10, hitBonus: 0, armor: 0, skillBonuses: {}, slayerMultipliers: {} },
   caps: { damage: 18, hitBonus: 8, armor: 0, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
-  allowedGemFamilies: ["power"],
+  allowedGemFamilies: ["power", "precision"],
   maxInlays: 1,
 } as const satisfies ItemFormDefinition;
 

@@ -28,10 +28,11 @@ const EXPECTED_IDS = [
   "fine_linen",
   "ruby",
   "sapphire",
+  "emerald",
 ] as const satisfies readonly ResourceId[];
 
-const GEM_IDS = ["ruby", "sapphire"] as const satisfies readonly GemResourceId[];
-const TRAIT_IDS = ["accuracy", "damage", "handling", "power", "fortune"] as const satisfies readonly MaterialTraitId[];
+const GEM_IDS = ["ruby", "sapphire", "emerald"] as const satisfies readonly GemResourceId[];
+const TRAIT_IDS = ["accuracy", "damage", "handling", "power", "fortune", "precision"] as const satisfies readonly MaterialTraitId[];
 
 type DeepMutable<T> = T extends readonly (infer Item)[]
   ? DeepMutable<Item>[]
@@ -262,6 +263,7 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       fine_linen: ["handling"],
       ruby: ["power"],
       sapphire: ["fortune"],
+      emerald: ["precision"],
     },
   );
   assert.deepEqual(TRAIT_REGISTRY.accuracy.values, { rough: 0.5, sound: 1, choice: 2, pristine: 3 });
@@ -269,6 +271,7 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
   assert.deepEqual(TRAIT_REGISTRY.handling.values, { rough: 0.25, sound: 0.5, choice: 0.75, pristine: 1 });
   assert.deepEqual(TRAIT_REGISTRY.power.values, { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 });
   assert.deepEqual(TRAIT_REGISTRY.fortune.values, { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 });
+  assert.deepEqual(TRAIT_REGISTRY.precision.values, { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 });
 
   const routeIds = new Set<string>();
   const familyByForm: Record<ResourceForm, "timber" | "ore" | "fiber" | "gem"> = {
@@ -308,6 +311,7 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       fine_linen: ["cloth"],
       ruby: ["gem"],
       sapphire: ["gem"],
+      emerald: ["gem"],
     },
   );
   assert.deepEqual(

@@ -210,10 +210,10 @@
     "NpcRole": 3,
     "PART_SLOTS": 4,
     "RECIPES": 41,
-    "RESOURCE_CATALOG": 14,
-    "RESOURCE_DEFINITIONS": 14,
-    "RESOURCE_IDS": 14,
-    "ResourceId": 14,
+    "RESOURCE_CATALOG": 15,
+    "RESOURCE_DEFINITIONS": 15,
+    "RESOURCE_IDS": 15,
+    "ResourceId": 15,
     "SKILL_META": 25,
     "SKIN_TONES": 6,
     "SLOT_ANCHOR": 4,
@@ -55022,9 +55022,9 @@
       "canonicalId": "ash",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:152",
+        "src/game/resources/catalog.ts:153",
         "src/game/resources/catalog.ts:21",
-        "src/game/resources/catalog.ts:633",
+        "src/game/resources/catalog.ts:653",
         "src/game/resources/types.ts:17"
       ],
       "sourceNames": [
@@ -55143,9 +55143,9 @@
       "canonicalId": "birch",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:124",
+        "src/game/resources/catalog.ts:125",
         "src/game/resources/catalog.ts:20",
-        "src/game/resources/catalog.ts:633",
+        "src/game/resources/catalog.ts:653",
         "src/game/resources/types.ts:17"
       ],
       "sourceNames": [
@@ -55265,8 +55265,8 @@
       "family": "resource",
       "catalogSources": [
         "src/game/resources/catalog.ts:27",
-        "src/game/resources/catalog.ts:318",
-        "src/game/resources/catalog.ts:633",
+        "src/game/resources/catalog.ts:319",
+        "src/game/resources/catalog.ts:653",
         "src/game/resources/types.ts:17"
       ],
       "sourceNames": [
@@ -55348,13 +55348,101 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "resource:emerald",
+      "canonicalId": "emerald",
+      "family": "resource",
+      "catalogSources": [
+        "src/game/resources/catalog.ts:31",
+        "src/game/resources/catalog.ts:375",
+        "src/game/resources/catalog.ts:653",
+        "src/game/resources/types.ts:17"
+      ],
+      "sourceNames": [
+        "RESOURCE_CATALOG",
+        "RESOURCE_DEFINITIONS",
+        "RESOURCE_IDS",
+        "ResourceId"
+      ],
+      "rendererLocations": [
+        "src/components/game/crafting/inlay-panel.tsx:5",
+        "src/components/game/crop-meshes.tsx:1",
+        "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/oak-stumps.tsx:1",
+        "src/components/game/oak-stumps.tsx:7",
+        "src/components/game/paperdoll.tsx:1",
+        "src/components/game/resource-visuals.ts:1",
+        "src/components/game/resource-visuals.ts:10",
+        "src/components/game/resource-visuals.ts:3",
+        "src/components/game/terrain.tsx:1",
+        "src/components/game/terrain.tsx:38"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/inlay-panel.tsx",
+        "src/components/game/crop-meshes.tsx",
+        "src/components/game/oak-stumps.tsx",
+        "src/components/game/paperdoll.tsx",
+        "src/components/game/resource-visuals.ts",
+        "src/components/game/terrain.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/catalog.ts:31",
+            "src/game/resources/catalog.ts:375",
+            "src/game/resources/catalog.ts:653",
+            "src/game/resources/types.ts:17"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "node-or-processing-applicability-unreviewed",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/catalog.ts:31",
+            "src/game/resources/catalog.ts:375",
+            "src/game/resources/catalog.ts:653",
+            "src/game/resources/types.ts:17"
+          ],
+          "applicability": "unreviewed"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/catalog.ts:31",
+        "src/game/resources/catalog.ts:375",
+        "src/game/resources/catalog.ts:653",
+        "src/game/resources/types.ts:17"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "resource:fine_linen",
       "canonicalId": "fine_linen",
       "family": "resource",
       "catalogSources": [
         "src/game/resources/catalog.ts:28",
-        "src/game/resources/catalog.ts:328",
-        "src/game/resources/catalog.ts:633",
+        "src/game/resources/catalog.ts:329",
+        "src/game/resources/catalog.ts:653",
         "src/game/resources/types.ts:17"
       ],
       "sourceNames": [
@@ -55440,9 +55528,9 @@
       "canonicalId": "ghostwood",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:236",
+        "src/game/resources/catalog.ts:237",
         "src/game/resources/catalog.ts:24",
-        "src/game/resources/catalog.ts:633",
+        "src/game/resources/catalog.ts:653",
         "src/game/resources/types.ts:17"
       ],
       "sourceNames": [
@@ -55562,8 +55650,8 @@
       "family": "resource",
       "catalogSources": [
         "src/game/resources/catalog.ts:26",
-        "src/game/resources/catalog.ts:291",
-        "src/game/resources/catalog.ts:633",
+        "src/game/resources/catalog.ts:292",
+        "src/game/resources/catalog.ts:653",
         "src/game/resources/types.ts:17"
       ],
       "sourceNames": [
@@ -55683,8 +55771,8 @@
       "family": "resource",
       "catalogSources": [
         "src/game/resources/catalog.ts:25",
-        "src/game/resources/catalog.ts:264",
-        "src/game/resources/catalog.ts:633",
+        "src/game/resources/catalog.ts:265",
+        "src/game/resources/catalog.ts:653",
         "src/game/resources/types.ts:17"
       ],
       "sourceNames": [
@@ -55804,8 +55892,8 @@
       "family": "resource",
       "catalogSources": [
         "src/game/resources/catalog.ts:17",
-        "src/game/resources/catalog.ts:41",
-        "src/game/resources/catalog.ts:633",
+        "src/game/resources/catalog.ts:42",
+        "src/game/resources/catalog.ts:653",
         "src/game/resources/types.ts:17"
       ],
       "sourceNames": [
@@ -55991,8 +56079,8 @@
       "family": "resource",
       "catalogSources": [
         "src/game/resources/catalog.ts:18",
-        "src/game/resources/catalog.ts:633",
-        "src/game/resources/catalog.ts:68",
+        "src/game/resources/catalog.ts:653",
+        "src/game/resources/catalog.ts:69",
         "src/game/resources/types.ts:17"
       ],
       "sourceNames": [
@@ -56111,9 +56199,9 @@
       "canonicalId": "redwood",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:180",
+        "src/game/resources/catalog.ts:181",
         "src/game/resources/catalog.ts:22",
-        "src/game/resources/catalog.ts:633",
+        "src/game/resources/catalog.ts:653",
         "src/game/resources/types.ts:17"
       ],
       "sourceNames": [
@@ -56233,8 +56321,8 @@
       "family": "resource",
       "catalogSources": [
         "src/game/resources/catalog.ts:29",
-        "src/game/resources/catalog.ts:338",
-        "src/game/resources/catalog.ts:633",
+        "src/game/resources/catalog.ts:339",
+        "src/game/resources/catalog.ts:653",
         "src/game/resources/types.ts:17"
       ],
       "sourceNames": [
@@ -56321,8 +56409,8 @@
       "family": "resource",
       "catalogSources": [
         "src/game/resources/catalog.ts:30",
-        "src/game/resources/catalog.ts:356",
-        "src/game/resources/catalog.ts:633",
+        "src/game/resources/catalog.ts:357",
+        "src/game/resources/catalog.ts:653",
         "src/game/resources/types.ts:17"
       ],
       "sourceNames": [
@@ -56409,8 +56497,8 @@
       "family": "resource",
       "catalogSources": [
         "src/game/resources/catalog.ts:19",
-        "src/game/resources/catalog.ts:633",
-        "src/game/resources/catalog.ts:96",
+        "src/game/resources/catalog.ts:653",
+        "src/game/resources/catalog.ts:97",
         "src/game/resources/types.ts:17"
       ],
       "sourceNames": [
@@ -56529,9 +56617,9 @@
       "canonicalId": "yew",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:208",
+        "src/game/resources/catalog.ts:209",
         "src/game/resources/catalog.ts:23",
-        "src/game/resources/catalog.ts:633",
+        "src/game/resources/catalog.ts:653",
         "src/game/resources/types.ts:17"
       ],
       "sourceNames": [
@@ -64698,6 +64786,236 @@
     {
       "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactMaterialSelection.key=common_cloth:cloth:sound",
       "canonicalId": "src/game/crafting/recipes.ts#ExactMaterialSelection.key=common_cloth:cloth:sound",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "sourceNames": [
+        "ExactMaterialSelection.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:33"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactMaterialSelection.key=emerald:gem:cracked",
+      "canonicalId": "src/game/crafting/recipes.ts#ExactMaterialSelection.key=emerald:gem:cracked",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "sourceNames": [
+        "ExactMaterialSelection.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:33"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactMaterialSelection.key=emerald:gem:cut",
+      "canonicalId": "src/game/crafting/recipes.ts#ExactMaterialSelection.key=emerald:gem:cut",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "sourceNames": [
+        "ExactMaterialSelection.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:33"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactMaterialSelection.key=emerald:gem:flawed",
+      "canonicalId": "src/game/crafting/recipes.ts#ExactMaterialSelection.key=emerald:gem:flawed",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "sourceNames": [
+        "ExactMaterialSelection.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:33"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactMaterialSelection.key=emerald:gem:flawless",
+      "canonicalId": "src/game/crafting/recipes.ts#ExactMaterialSelection.key=emerald:gem:flawless",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "sourceNames": [
+        "ExactMaterialSelection.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:33"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactMaterialSelection.key=emerald:gem:perfect",
+      "canonicalId": "src/game/crafting/recipes.ts#ExactMaterialSelection.key=emerald:gem:perfect",
       "family": "state-vocabulary",
       "catalogSources": [
         "src/game/crafting/recipes.ts:33"
@@ -73988,6 +74306,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/crafting/types.ts#GemInlay.resourceId=emerald",
+      "canonicalId": "src/game/crafting/types.ts#GemInlay.resourceId=emerald",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/types.ts:77"
+      ],
+      "sourceNames": [
+        "GemInlay.resourceId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/types.ts:77"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/types.ts:77"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/crafting/types.ts#GemInlay.resourceId=ruby",
       "canonicalId": "src/game/crafting/types.ts#GemInlay.resourceId=ruby",
       "family": "state-vocabulary",
@@ -81716,6 +82080,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/crafting/types.ts#StatContribution.family=precision",
+      "canonicalId": "src/game/crafting/types.ts#StatContribution.family=precision",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/types.ts:92"
+      ],
+      "sourceNames": [
+        "StatContribution.family"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/types.ts:92"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/types.ts:92"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/crafting/types.ts#StatContribution.role=binding",
       "canonicalId": "src/game/crafting/types.ts#StatContribution.role=binding",
       "family": "state-vocabulary",
@@ -82316,6 +82726,52 @@
     {
       "id": "state-vocabulary:src/game/crafting/types.ts#StatContribution.sourceId=common_cloth",
       "canonicalId": "src/game/crafting/types.ts#StatContribution.sourceId=common_cloth",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/types.ts:89"
+      ],
+      "sourceNames": [
+        "StatContribution.sourceId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/types.ts:89"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/types.ts:89"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/types.ts#StatContribution.sourceId=emerald",
+      "canonicalId": "src/game/crafting/types.ts#StatContribution.sourceId=emerald",
       "family": "state-vocabulary",
       "catalogSources": [
         "src/game/crafting/types.ts:89"
@@ -83190,6 +83646,52 @@
     {
       "id": "state-vocabulary:src/game/crafting/types.ts#StatContribution.traitId=power",
       "canonicalId": "src/game/crafting/types.ts#StatContribution.traitId=power",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/types.ts:91"
+      ],
+      "sourceNames": [
+        "StatContribution.traitId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/types.ts:91"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/types.ts:91"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/types.ts#StatContribution.traitId=precision",
+      "canonicalId": "src/game/crafting/types.ts#StatContribution.traitId=precision",
       "family": "state-vocabulary",
       "catalogSources": [
         "src/game/crafting/types.ts:91"
@@ -86408,6 +86910,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/gems.ts#GemEffect.family=precision",
+      "canonicalId": "src/game/gems.ts#GemEffect.family=precision",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/gems.ts:9"
+      ],
+      "sourceNames": [
+        "GemEffect.family"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/gems.ts:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/gems.ts:9"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/gems.ts#GemEffect.rank=1",
       "canonicalId": "src/game/gems.ts#GemEffect.rank=1",
       "family": "state-vocabulary",
@@ -86633,6 +87181,52 @@
       "status": "inventoried",
       "evidence": [
         "src/game/gems.ts:11"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/gems.ts#GemEffect.resourceId=emerald",
+      "canonicalId": "src/game/gems.ts#GemEffect.resourceId=emerald",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/gems.ts:8"
+      ],
+      "sourceNames": [
+        "GemEffect.resourceId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/gems.ts:8"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/gems.ts:8"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -86870,6 +87464,52 @@
     {
       "id": "state-vocabulary:src/game/gems.ts#GemEffect.stat=fortune",
       "canonicalId": "src/game/gems.ts#GemEffect.stat=fortune",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/gems.ts:14"
+      ],
+      "sourceNames": [
+        "GemEffect.stat"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/gems.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/gems.ts:14"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/gems.ts#GemEffect.stat=hitBonus",
+      "canonicalId": "src/game/gems.ts#GemEffect.stat=hitBonus",
       "family": "state-vocabulary",
       "catalogSources": [
         "src/game/gems.ts:14"
@@ -88296,6 +88936,236 @@
     {
       "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceDebit.key=common_cloth:cloth:sound",
       "canonicalId": "src/game/inventory/resources.ts#ResourceDebit.key=common_cloth:cloth:sound",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "sourceNames": [
+        "ResourceDebit.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceDebit.key=emerald:gem:cracked",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceDebit.key=emerald:gem:cracked",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "sourceNames": [
+        "ResourceDebit.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceDebit.key=emerald:gem:cut",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceDebit.key=emerald:gem:cut",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "sourceNames": [
+        "ResourceDebit.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceDebit.key=emerald:gem:flawed",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceDebit.key=emerald:gem:flawed",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "sourceNames": [
+        "ResourceDebit.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceDebit.key=emerald:gem:flawless",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceDebit.key=emerald:gem:flawless",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "sourceNames": [
+        "ResourceDebit.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceDebit.key=emerald:gem:perfect",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceDebit.key=emerald:gem:perfect",
       "family": "state-vocabulary",
       "catalogSources": [
         "src/game/inventory/resources.ts:12"
@@ -92804,6 +93674,236 @@
     {
       "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceInventoryRow.key=common_cloth:cloth:sound",
       "canonicalId": "src/game/inventory/resources.ts#ResourceInventoryRow.key=common_cloth:cloth:sound",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "sourceNames": [
+        "ResourceInventoryRow.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceInventoryRow.key=emerald:gem:cracked",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceInventoryRow.key=emerald:gem:cracked",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "sourceNames": [
+        "ResourceInventoryRow.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceInventoryRow.key=emerald:gem:cut",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceInventoryRow.key=emerald:gem:cut",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "sourceNames": [
+        "ResourceInventoryRow.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceInventoryRow.key=emerald:gem:flawed",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceInventoryRow.key=emerald:gem:flawed",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "sourceNames": [
+        "ResourceInventoryRow.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceInventoryRow.key=emerald:gem:flawless",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceInventoryRow.key=emerald:gem:flawless",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "sourceNames": [
+        "ResourceInventoryRow.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceInventoryRow.key=emerald:gem:perfect",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceInventoryRow.key=emerald:gem:perfect",
       "family": "state-vocabulary",
       "catalogSources": [
         "src/game/inventory/resources.ts:24"
@@ -119436,6 +120536,236 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/resources/harvest.ts#HarvestYield.key=emerald:gem:cracked",
+      "canonicalId": "src/game/resources/harvest.ts#HarvestYield.key=emerald:gem:cracked",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "sourceNames": [
+        "HarvestYield.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/harvest.ts:90"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/resources/harvest.ts#HarvestYield.key=emerald:gem:cut",
+      "canonicalId": "src/game/resources/harvest.ts#HarvestYield.key=emerald:gem:cut",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "sourceNames": [
+        "HarvestYield.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/harvest.ts:90"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/resources/harvest.ts#HarvestYield.key=emerald:gem:flawed",
+      "canonicalId": "src/game/resources/harvest.ts#HarvestYield.key=emerald:gem:flawed",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "sourceNames": [
+        "HarvestYield.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/harvest.ts:90"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/resources/harvest.ts#HarvestYield.key=emerald:gem:flawless",
+      "canonicalId": "src/game/resources/harvest.ts#HarvestYield.key=emerald:gem:flawless",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "sourceNames": [
+        "HarvestYield.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/harvest.ts:90"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/resources/harvest.ts#HarvestYield.key=emerald:gem:perfect",
+      "canonicalId": "src/game/resources/harvest.ts#HarvestYield.key=emerald:gem:perfect",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "sourceNames": [
+        "HarvestYield.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/harvest.ts:90"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/resources/harvest.ts#HarvestYield.key=ghostwood:log:choice",
       "canonicalId": "src/game/resources/harvest.ts#HarvestYield.key=ghostwood:log:choice",
       "family": "state-vocabulary",
@@ -121966,6 +123296,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/resources/harvest.ts#HarvestYield.resourceId=emerald",
+      "canonicalId": "src/game/resources/harvest.ts#HarvestYield.resourceId=emerald",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/harvest.ts:91"
+      ],
+      "sourceNames": [
+        "HarvestYield.resourceId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/harvest.ts:91"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/harvest.ts:91"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/resources/harvest.ts#HarvestYield.resourceId=ghostwood",
       "canonicalId": "src/game/resources/harvest.ts#HarvestYield.resourceId=ghostwood",
       "family": "state-vocabulary",
@@ -122888,6 +124264,52 @@
     {
       "id": "state-vocabulary:src/game/resources/nodes.ts#ResourceFamilyProbability.resourceId=common_cloth",
       "canonicalId": "src/game/resources/nodes.ts#ResourceFamilyProbability.resourceId=common_cloth",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/nodes.ts:30"
+      ],
+      "sourceNames": [
+        "ResourceFamilyProbability.resourceId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/nodes.ts:30"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/nodes.ts:30"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/resources/nodes.ts#ResourceFamilyProbability.resourceId=emerald",
+      "canonicalId": "src/game/resources/nodes.ts#ResourceFamilyProbability.resourceId=emerald",
       "family": "state-vocabulary",
       "catalogSources": [
         "src/game/resources/nodes.ts:30"
@@ -125922,6 +127344,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/resources/types.ts#ResourceDefinition.id=emerald",
+      "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=emerald",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/types.ts:93"
+      ],
+      "sourceNames": [
+        "ResourceDefinition.id"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/types.ts:93"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/types.ts:93"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/resources/types.ts#ResourceDefinition.id=fine_linen",
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=fine_linen",
       "family": "state-vocabulary",
@@ -126798,6 +128266,52 @@
     {
       "id": "state-vocabulary:src/game/resources/types.ts#ResourceDefinitionFor.id=common_cloth",
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=common_cloth",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/types.ts:93"
+      ],
+      "sourceNames": [
+        "ResourceDefinitionFor.id"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/types.ts:93"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/types.ts:93"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/resources/types.ts#ResourceDefinitionFor.id=emerald",
+      "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=emerald",
       "family": "state-vocabulary",
       "catalogSources": [
         "src/game/resources/types.ts:93"
@@ -128132,6 +129646,52 @@
     {
       "id": "state-vocabulary:src/game/resources/types.ts#ResourceNodeIdentity.resourceId=common_cloth",
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=common_cloth",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/types.ts:147"
+      ],
+      "sourceNames": [
+        "ResourceNodeIdentity.resourceId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/types.ts:147"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/types.ts:147"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/resources/types.ts#ResourceNodeIdentity.resourceId=emerald",
+      "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=emerald",
       "family": "state-vocabulary",
       "catalogSources": [
         "src/game/resources/types.ts:147"
@@ -161161,6 +162721,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "vocabulary/src/game/crafting/types.ts#GemFamily:precision",
+      "canonicalId": "precision",
+      "family": "vocabulary/src/game/crafting/types.ts#GemFamily",
+      "catalogSources": [
+        "src/game/crafting/types.ts:20"
+      ],
+      "sourceNames": [
+        "GemFamily"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/types.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/types.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "vocabulary/src/game/crafting/types.ts#ItemClass:armor",
       "canonicalId": "armor",
       "family": "vocabulary/src/game/crafting/types.ts#ItemClass",
@@ -163771,6 +165377,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "vocabulary/src/game/resources/harvest.ts#HarvestResourceId:emerald",
+      "canonicalId": "emerald",
+      "family": "vocabulary/src/game/resources/harvest.ts#HarvestResourceId",
+      "catalogSources": [
+        "src/game/resources/harvest.ts:82"
+      ],
+      "sourceNames": [
+        "HarvestResourceId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/harvest.ts:82"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/harvest.ts:82"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "vocabulary/src/game/resources/harvest.ts#HarvestResourceId:ghostwood",
       "canonicalId": "ghostwood",
       "family": "vocabulary/src/game/resources/harvest.ts#HarvestResourceId",
@@ -164607,6 +166259,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "vocabulary/src/game/resources/types.ts#ClarityMaterialTraitId:precision",
+      "canonicalId": "precision",
+      "family": "vocabulary/src/game/resources/types.ts#ClarityMaterialTraitId",
+      "catalogSources": [
+        "src/game/resources/types.ts:28"
+      ],
+      "sourceNames": [
+        "ClarityMaterialTraitId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/types.ts:28"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/types.ts:28"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "vocabulary/src/game/resources/types.ts#GemClarity:cracked",
       "canonicalId": "cracked",
       "family": "vocabulary/src/game/resources/types.ts#GemClarity",
@@ -164832,6 +166530,52 @@
       "status": "inventoried",
       "evidence": [
         "src/game/resources/types.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/resources/types.ts#GemResourceId:emerald",
+      "canonicalId": "emerald",
+      "family": "vocabulary/src/game/resources/types.ts#GemResourceId",
+      "catalogSources": [
+        "src/game/resources/types.ts:16"
+      ],
+      "sourceNames": [
+        "GemResourceId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/types.ts:16"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/types.ts:16"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -166657,6 +168401,52 @@
     {
       "id": "vocabulary/src/game/resources/types.ts#MaterialTraitId:power",
       "canonicalId": "power",
+      "family": "vocabulary/src/game/resources/types.ts#MaterialTraitId",
+      "catalogSources": [
+        "src/game/resources/types.ts:29"
+      ],
+      "sourceNames": [
+        "MaterialTraitId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/types.ts:29"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/types.ts:29"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/resources/types.ts#MaterialTraitId:precision",
+      "canonicalId": "precision",
       "family": "vocabulary/src/game/resources/types.ts#MaterialTraitId",
       "catalogSources": [
         "src/game/resources/types.ts:29"

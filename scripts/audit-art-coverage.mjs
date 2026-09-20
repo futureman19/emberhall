@@ -283,7 +283,9 @@ export function collectInventory({ root = ROOT, overrides = {} } = {}) {
           const declaration = prop.valueDeclaration ?? prop.declarations?.[0];
           if (!declaration) continue;
           const values = literalValues(checker.getTypeOfSymbolAtLocation(prop, declaration));
-          if (!values.length || values.length > 100) continue;
+          // Resource stack-key unions scale with the catalog (species × forms ×
+          // qualities); the bound must cover legitimate combinatorial vocabulary.
+          if (!values.length || values.length > 512) continue;
           for (const value of values)
             add(
               "state-vocabulary",

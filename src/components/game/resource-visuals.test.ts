@@ -105,7 +105,7 @@ test("same Task 5 node produces deterministic deeply immutable renderer data wit
 });
 
 test("every catalog-spawned definition maps to its catalog node kind and family with bounded finite parameters", () => {
-  assert.equal(SPAWNED_IDS.length, 12, "all current catalog definitions that have world spawns are covered");
+  assert.equal(SPAWNED_IDS.length, 13, "all current catalog definitions that have world spawns are covered");
   for (const resourceId of SPAWNED_IDS) {
     const definition = RESOURCE_CATALOG[resourceId];
     const visual = visualFor(resourceId);

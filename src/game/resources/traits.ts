@@ -84,6 +84,12 @@ const TRAITS = {
     scope: "local",
     values: { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 },
   },
+  precision: {
+    qualityType: "clarity",
+    stat: "hitBonus",
+    scope: "canonical",
+    values: { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 },
+  },
 } satisfies Record<MaterialTraitId, MaterialTraitDefinition>;
 
 export const TRAIT_REGISTRY = deepFreeze(TRAITS);

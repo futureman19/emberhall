@@ -9,6 +9,7 @@ const FLAWED_RUBY = makeResourceStackKey("ruby", "gem", "flawed");
 const CUT_RUBY = makeResourceStackKey("ruby", "gem", "cut");
 const FLAWLESS_SAPPHIRE = makeResourceStackKey("sapphire", "gem", "flawless");
 const PERFECT_SAPPHIRE = makeResourceStackKey("sapphire", "gem", "perfect");
+const CUT_EMERALD = makeResourceStackKey("emerald", "gem", "cut");
 
 function craftedBow(resourceId: "oak" | "redwood" = "redwood") {
   const world = createWorld();
@@ -94,6 +95,54 @@ test("inlay - Sapphire Fortune remains local-only and capped at five", () => {
   const perfectPreview = previewItemInlay(perfect.world.player, perfect.item.uid, PERFECT_SAPPHIRE);
   assert.equal(perfectPreview.status, "ready");
   if (perfectPreview.status === "ready") assert.equal(perfectPreview.local.fortune, 5);
+});
+
+test("inlay - cut Emerald adds deterministic Precision III accuracy", () => {
+  const { world, item } = craftedBow();
+  addResource(world.player.resources, CUT_EMERALD, 1);
+  const before = structuredClone(item.resolvedStats);
+
+  const preview = previewItemInlay(world.player, item.uid, CUT_EMERALD);
+  assert.equal(preview.status, "ready");
+  if (preview.status !== "ready") return;
+  assert.equal(preview.effect.label, "Precision III");
+  assert.equal(preview.stats.hitBonus, (before?.hitBonus ?? 0) + 3);
+  assert.equal(preview.stats.damage, before?.damage, "precision never adds damage");
+
+  const result = applyItemInlay(world.player, item.uid, CUT_EMERALD);
+  assert.equal(result.status, "inlaid");
+  assert.equal(resourceCount(world.player.resources, CUT_EMERALD), 0);
+  const updated = world.player.rares[0]!;
+  assert.deepEqual(updated.inlays, [{ resourceId: "emerald", clarity: "cut" }]);
+  assert.equal(updated.resolvedStats?.hitBonus, (before?.hitBonus ?? 0) + 3);
+  assert.match(rareName(updated), /of Precision III/);
+});
+
+test("inlay - swords accept precision and reject a second precision family", () => {
+  const world = createWorld();
+  const sword = createCraftedItem(world, {
+    formId: "sword",
+    base: "sword",
+    workmanship: "ordinary",
+    components: [
+      { role: "edge", resourceId: "iron_ore", form: "ingot", grade: "choice", amount: 5 },
+      { role: "hilt", resourceId: "oak", form: "board", grade: "sound", amount: 1 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+    maker: "Testhand",
+    recipeId: "sword",
+    recipeVersion: 1,
+  });
+  world.player.rares.push(sword);
+  addResource(world.player.resources, CUT_EMERALD, 2);
+
+  assert.equal(applyItemInlay(world.player, sword.uid, CUT_EMERALD).status, "inlaid");
+  assert.deepEqual(previewItemInlay(world.player, sword.uid, CUT_EMERALD), {
+    status: "blocked",
+    reason: "family",
+    message: "Sword already carries precision.",
+  });
 });
 
 test("inlay - insufficient gem and noncrafted targets reject before mutation", () => {

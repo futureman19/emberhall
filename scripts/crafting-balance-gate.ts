@@ -5,6 +5,7 @@ import { MAP } from "../src/game/atlas.ts";
 import { ITEM_FORM_CATALOG, MATERIAL_GRADES, GEM_CLARITIES } from "../src/game/crafting/forms.ts";
 import { resolveItemStats } from "../src/game/crafting/resolve.ts";
 import type { CraftedComponent, GemInlay, ItemFormDefinition, Workmanship } from "../src/game/crafting/types.ts";
+import type { GemResourceId } from "../src/game/resources/types.ts";
 import { RESOURCE_CATALOG, RESOURCE_IDS } from "../src/game/resources/catalog.ts";
 import { resolveResourceNode, type ResourceNodeKind } from "../src/game/resources/nodes.ts";
 import { successChance } from "../src/game/skills.ts";
@@ -75,9 +76,11 @@ function cartesian<T>(sets: readonly T[][]): T[][] {
 function legalInlays(form: ItemFormDefinition): Array<readonly GemInlay[]> {
   const rows: Array<readonly GemInlay[]> = [[]];
   if (form.maxInlays < 1) return rows;
-  for (const resourceId of ["ruby", "sapphire"] as const) {
-    const family = RESOURCE_CATALOG[resourceId].traitIds[0];
+  for (const definition of Object.values(RESOURCE_CATALOG)) {
+    if (definition.kind !== "gem") continue;
+    const family = definition.traitIds[0];
     if (!form.allowedGemFamilies.includes(family as never)) continue;
+    const resourceId = definition.id as GemResourceId;
     for (const clarity of GEM_CLARITIES) rows.push([{ resourceId, clarity }]);
   }
   return rows;

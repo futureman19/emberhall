@@ -23,11 +23,21 @@ test("gems - family and clarity deterministically define rank and effect", () =>
     stat: "fortune",
     amount: 4,
   });
+  assert.deepEqual(gemEffect("emerald", "cut"), {
+    resourceId: "emerald",
+    family: "precision",
+    clarity: "cut",
+    rank: 3,
+    label: "Precision III",
+    scope: "canonical",
+    stat: "hitBonus",
+    amount: 3,
+  });
 });
 
 test("gems - all five clarities map monotonically and effects are frozen", () => {
   const clarities = ["cracked", "flawed", "cut", "flawless", "perfect"] as const;
-  for (const resourceId of ["ruby", "sapphire"] as const) {
+  for (const resourceId of ["ruby", "sapphire", "emerald"] as const) {
     const effects = clarities.map((clarity) => gemEffect(resourceId, clarity));
     assert.deepEqual(effects.map(({ rank }) => rank), [1, 2, 3, 4, 5]);
     assert.deepEqual(effects.map(({ amount }) => amount), [1, 2, 3, 4, 5]);

@@ -68,15 +68,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 319,
-        "p90": 594,
-        "p99": 861,
-        "max": 1119
+        "p50": 332,
+        "p90": 603,
+        "p99": 891,
+        "max": 1015
       },
       "modeledSeconds": {
-        "p50": 482.1,
-        "p90": 894.6,
-        "p99": 1295.1
+        "p50": 501.6,
+        "p90": 908.1,
+        "p99": 1340.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -92,15 +92,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 567,
-        "p90": 1583,
-        "p99": 2590,
-        "max": 4202
+        "p50": 519,
+        "p90": 1693,
+        "p99": 3483,
+        "max": 4422
       },
       "modeledSeconds": {
-        "p50": 851.22,
-        "p90": 2375.22,
-        "p99": 3885.72
+        "p50": 779.22,
+        "p90": 2540.22,
+        "p99": 5225.22
       },
       "blockedMatches": {
         "p50": 0,
@@ -116,15 +116,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 265,
-        "p90": 1049,
-        "p99": 1888,
-        "max": 2081
+        "p50": 261,
+        "p90": 773,
+        "p99": 1553,
+        "max": 2676
       },
       "modeledSeconds": {
-        "p50": 398.22,
-        "p90": 1574.22,
-        "p99": 2832.72
+        "p50": 392.22,
+        "p90": 1160.22,
+        "p99": 2330.22
       },
       "blockedMatches": {
         "p50": 0,
@@ -293,18 +293,18 @@
     }
   },
   "statEnumeration": {
-    "legalCombinationCount": 90624,
+    "legalCombinationCount": 159744,
     "forms": {
       "bow": {
-        "combinations": 16896,
+        "combinations": 24576,
         "roleOptionCounts": [
           64,
           8
         ],
-        "inlayOptions": 11,
+        "inlayOptions": 16,
         "maxima": {
           "damage": 14,
-          "hitBonus": 5.25,
+          "hitBonus": 10,
           "armor": 0,
           "fortune": 5
         },
@@ -318,16 +318,16 @@
         "capViolations": 0
       },
       "sword": {
-        "combinations": 73728,
+        "combinations": 135168,
         "roleOptionCounts": [
           8,
           64,
           8
         ],
-        "inlayOptions": 6,
+        "inlayOptions": 11,
         "maxima": {
           "damage": 18,
-          "hitBonus": 3,
+          "hitBonus": 8,
           "armor": 0,
           "fortune": 0
         },
