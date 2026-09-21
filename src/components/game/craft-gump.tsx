@@ -27,6 +27,14 @@ const TITLE: Record<Group, { title: string; blurb: string }> = {
   field: { title: "In the field", blurb: "A blade in hand. Cloth to bandages, or to hood, gloves, hose, tunic, cloak. Two hides to a leather shirt. Three wood to a campfire. Garlic and ginseng to a heal draught; silk and ash to night sight." },
 };
 
+const WORK_TABS = [
+  { id: "forms", label: "Forms" },
+  { id: "refine", label: "Refine" },
+  { id: "inlay", label: "Inlay" },
+  { id: "recipes", label: "Recipes" },
+] as const;
+type WorkTab = (typeof WORK_TABS)[number]["id"];
+
 export function CraftGump() {
   const open = useGame((s) => s.openCraft);
   const close = useGame((s) => s.closeCraft);
@@ -60,6 +68,7 @@ export function CraftGump() {
   const [gauntletsLining, setGauntletsLining] = useState<ResourceStackKey | null>(null);
   const [greavesPlate, setGreavesPlate] = useState<ResourceStackKey | null>(null);
   const [greavesLining, setGreavesLining] = useState<ResourceStackKey | null>(null);
+  const [tab, setTab] = useState<WorkTab>("forms");
   if (!open) return null;
   const here = stationsHere(getWorld());
   void x;
@@ -121,6 +130,25 @@ export function CraftGump() {
       <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">
         Wood at the yard. Iron at a forge. A blade anywhere. The work takes, or it splits.
       </p>
+      <div role="tablist" aria-label="Work sections" className="mt-3 flex gap-1">
+        {WORK_TABS.map(({ id, label }) => (
+          <button
+            key={id}
+            type="button"
+            role="tab"
+            aria-selected={tab === id}
+            onClick={() => setTab(id)}
+            className={cn(
+              "min-h-11 flex-1 rounded-[var(--radius-xs)] border px-2 text-xs font-medium",
+              tab === id ? "border-gold/60 bg-gold/10 text-gold" : "border-border bg-surface text-muted",
+            )}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      {tab === "forms" && (
+      <>
       <div className="mt-4 space-y-2" aria-label="Advanced bow work">
         <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Bow</p>
         <MaterialSelector role={bodyRole} rows={resourceRows} selected={body} onSelect={setBody} group="bow-body" />
@@ -140,7 +168,6 @@ export function CraftGump() {
             { role: "binding", key: binding },
           ])}
         />
-        <InlayPanel items={rares} rows={resourceRows} onInlay={inlayItem} />
       </div>
       <div className="mt-2 space-y-2" aria-label="Advanced sword work">
         <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Sword</p>
@@ -263,7 +290,28 @@ export function CraftGump() {
           </div>
         );
       })}
-      {groups.map((st) => {
+      </>
+      )}
+      {tab === "refine" && (
+        <div className="mt-4 space-y-4">
+          {(["bench", "forge"] as const).map((st) => (
+            <RefiningPanel
+              key={st}
+              rows={resourceRows}
+              station={st}
+              atStation={here.includes(st)}
+              skill={st === "forge" ? (skills?.smithing ?? 0) : (skills?.carpentry ?? 0)}
+              onRefine={refine}
+            />
+          ))}
+        </div>
+      )}
+      {tab === "inlay" && (
+        <div className="mt-4">
+          <InlayPanel items={rares} rows={resourceRows} onInlay={inlayItem} />
+        </div>
+      )}
+      {tab === "recipes" && groups.map((st) => {
         const at = st === "field" ? true : here.includes(st);
         const list = st === "field"
           ? RECIPES.filter((r) => r.station === null && !r.exactRecipeId)
@@ -273,15 +321,6 @@ export function CraftGump() {
           <div key={st} className="mt-4">
             <p className="font-display text-xs tracking-wider text-muted uppercase">{TITLE[st].title}</p>
             <p className="mt-1 text-xs leading-relaxed text-muted">{at ? TITLE[st].blurb : st === "forge" ? "Raise a forge, then stand by the fire." : "Stand in the yard, or the hall."}</p>
-            {st === "forge" || st === "bench" ? (
-              <RefiningPanel
-                rows={resourceRows}
-                station={st}
-                atStation={at}
-                skill={st === "forge" ? (skills?.smithing ?? 0) : (skills?.carpentry ?? 0)}
-                onRefine={refine}
-              />
-            ) : null}
             <ul className="mt-2 space-y-1">
               {list.map((r) => (
                 <li key={r.id}>

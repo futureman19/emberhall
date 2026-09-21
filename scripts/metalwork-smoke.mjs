@@ -5,6 +5,7 @@ import { chromium } from "playwright";
 
 const url = process.env.METALWORK_SMOKE_URL || "http://127.0.0.1:8080/";
 const output = resolve(process.env.METALWORK_SMOKE_OUTPUT_DIR || "screenshots/metalwork-smoke");
+const flow = process.env.METALWORK_SMOKE_FLOW ?? "all";
 mkdirSync(output, { recursive: true });
 
 const viewports = [
@@ -95,63 +96,85 @@ try {
 
     // Refining panel: copper ore row smelts into an ingot through the real button.
     lap(`${viewport.name}: fixture applied`);
+    const tabTo = (name) => domClick(page.getByRole("tab", { name, exact: true }));
     const refining = page.locator('[aria-label="Refining"]');
-    await refining.getByText(/Copper Ore ×2 · choice → ingot/).waitFor({ state: "visible", timeout: 15000 });
-    await domClick(refining.getByRole("button", { name: "Smelt" }).first());
-    await refining.getByText(/Copper Ore ×1 · choice → ingot/).waitFor({ state: "visible", timeout: 15000 });
+    const refineFlow = flow === "all" || flow === "a";
+    const earlyForms = flow === "all" || flow === "a"; // sword, shield, helm
+    const lateForms = flow === "all" || flow === "b"; // mail, gauntlets, inlay
 
-    // Sword form: pick the exact stacks and craft through the real button.
-    const swordWork = page.locator('[aria-label="Advanced sword work"]');
-    await domClick(swordWork.getByRole("radio", { name: /Copper Ore · Choice ingot/ }));
-    await domClick(swordWork.getByRole("radio", { name: /Oak · Sound board/ }));
-    await domClick(swordWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
-    await domClick(swordWork.getByRole("button", { name: "Craft selected sword" }));
+    if (refineFlow) {
+      await tabTo("Refine");
+      await refining.getByText(/Copper Ore ×2 · choice → ingot/).waitFor({ state: "visible", timeout: 15000 });
+      await domClick(refining.getByRole("button", { name: "Smelt" }).first());
+      await refining.getByText(/Copper Ore ×1 · choice → ingot/).waitFor({ state: "visible", timeout: 15000 });
+      lap(`${viewport.name}: copper smelted`);
+    }
 
-    // Alloy: the copper-ingot row offers bronze and shows its tin requirement.
-    const bronzeRow = refining.locator("li", { hasText: "(+ 1 tin ore)" });
-    await bronzeRow.getByText(/Bronze ×3 · choice → ingot/).waitFor({ state: "visible", timeout: 15000 });
-    await domClick(bronzeRow.getByRole("button", { name: "Smelt" }));
+    if (earlyForms) {
+      await tabTo("Forms");
+      // Sword form: pick the exact stacks and craft through the real button.
+      const swordWork = page.locator('[aria-label="Advanced sword work"]');
+      await domClick(swordWork.getByRole("radio", { name: /Copper Ore · Choice ingot/ }));
+      await domClick(swordWork.getByRole("radio", { name: /Oak · Sound board/ }));
+      await domClick(swordWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
+      await domClick(swordWork.getByRole("button", { name: "Craft selected sword" }));
 
-    // Shield: first armor form — iron plates, oak frame, linen binding.
-    const shieldWork = page.locator('[aria-label="Advanced shield work"]');
-    await shieldWork.getByText("Form · Shield").waitFor({ state: "visible", timeout: 15000 });
-    await domClick(shieldWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }));
-    await domClick(shieldWork.getByRole("radio", { name: /Oak · Sound board/ }));
-    await domClick(shieldWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
-    await domClick(shieldWork.getByRole("button", { name: "Craft selected shield" }));
+      // Alloy: the copper-ingot row offers bronze once the sword work has taught
+      // enough smithing — and shows its tin requirement.
+      await tabTo("Refine");
+      const bronzeRow = refining.locator("li", { hasText: "(+ 1 tin ore)" });
+      await bronzeRow.getByText(/Bronze ×3 · choice → ingot/).waitFor({ state: "visible", timeout: 15000 });
+      await domClick(bronzeRow.getByRole("button", { name: "Smelt" }));
+      lap(`${viewport.name}: bronze smelted`);
+      await tabTo("Forms");
 
-    // Helm: second armor form — two iron plates and a cloth lining, head slot.
-    const helmWork = page.locator('[aria-label="Advanced helm work"]');
-    await helmWork.getByText("Form · Helm").waitFor({ state: "visible", timeout: 15000 });
-    await domClick(helmWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }));
-    await domClick(helmWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
-    await domClick(helmWork.getByRole("button", { name: "Craft selected helm" }));
+      // Shield: first armor form — iron plates, oak frame, linen binding.
+      const shieldWork = page.locator('[aria-label="Advanced shield work"]');
+      await shieldWork.getByText("Form · Shield").waitFor({ state: "visible", timeout: 15000 });
+      await domClick(shieldWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }));
+      await domClick(shieldWork.getByRole("radio", { name: /Oak · Sound board/ }));
+      await domClick(shieldWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
+      await domClick(shieldWork.getByRole("button", { name: "Craft selected shield" }));
 
-    // Mail: chest armor — four iron plates and two cloth lining.
-    const mailWork = page.locator('[aria-label="Advanced mail work"]');
-    await mailWork.getByText("Form · Mail").waitFor({ state: "visible", timeout: 15000 });
-    await domClick(mailWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }));
-    await domClick(mailWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
-    await domClick(mailWork.getByRole("button", { name: "Craft selected mail" }));
-    // Gauntlets: hands slot — the template-identical boots/greaves sections are
-    // covered by the unit set test and the balance gate (same component path).
-    const gauntletsWork = page.locator('[aria-label="Advanced gauntlets work"]');
-    await gauntletsWork.getByText("Form · Gauntlets").waitFor({ state: "visible", timeout: 15000 });
-    await domClick(gauntletsWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }));
-    await domClick(gauntletsWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
-    await domClick(gauntletsWork.getByRole("button", { name: "Craft selected gauntlets" }));
-    lap(`${viewport.name}: all forms crafted`);
+      // Helm: second armor form — two iron plates and a cloth lining, head slot.
+      const helmWork = page.locator('[aria-label="Advanced helm work"]');
+      await helmWork.getByText("Form · Helm").waitFor({ state: "visible", timeout: 15000 });
+      await domClick(helmWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }));
+      await domClick(helmWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
+      await domClick(helmWork.getByRole("button", { name: "Craft selected helm" }));
+      lap(`${viewport.name}: early forms crafted`);
+    }
 
-    // Gem inlay: a flawless diamond into the new shield through the real panel.
-    const inlayPanel = page.locator('[aria-label="Gem inlay"]');
-    const itemSelect = inlayPanel.getByLabel("Crafted item");
-    const shieldValue = await itemSelect.evaluate((el) => [...el.options].find((o) => /shield/i.test(o.text))?.value ?? "");
-    if (!shieldValue) throw new Error("shield missing from the inlay item select");
-    await itemSelect.selectOption(shieldValue);
-    await inlayPanel.getByLabel("Gem").selectOption({ value: "diamond:gem:flawless" });
-    await inlayPanel.getByText("Protection IV: +1 armor").waitFor({ state: "visible", timeout: 15000 });
-    await domClick(inlayPanel.getByRole("button", { name: "Inlay exact result" }));
-    lap(`${viewport.name}: inlay done`);
+    if (lateForms) {
+      // The gump opens on the Forms tab by default — no switch needed in flow "b".
+      // Mail: chest armor — four iron plates and two cloth lining.
+      const mailWork = page.locator('[aria-label="Advanced mail work"]');
+      await mailWork.getByText("Form · Mail").waitFor({ state: "visible", timeout: 15000 });
+      await domClick(mailWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }));
+      await domClick(mailWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
+      await domClick(mailWork.getByRole("button", { name: "Craft selected mail" }));
+      // Gauntlets: hands slot — the template-identical boots/greaves sections are
+      // covered by the unit set test and the balance gate (same component path).
+      const gauntletsWork = page.locator('[aria-label="Advanced gauntlets work"]');
+      await gauntletsWork.getByText("Form · Gauntlets").waitFor({ state: "visible", timeout: 15000 });
+      await domClick(gauntletsWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }));
+      await domClick(gauntletsWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
+      await domClick(gauntletsWork.getByRole("button", { name: "Craft selected gauntlets" }));
+      lap(`${viewport.name}: late forms crafted`);
+
+      // Gem inlay: a flawless diamond through the real panel — into the shield in
+      // the full flow, into the mail in flow "b" (the first eligible item either way).
+      await tabTo("Inlay");
+      const inlayPanel = page.locator('[aria-label="Gem inlay"]');
+      const itemSelect = inlayPanel.getByLabel("Crafted item");
+      const targetValue = await itemSelect.evaluate((el, re) => [...el.options].find((o) => new RegExp(re, "i").test(o.text))?.value ?? "", flow === "b" ? "mail" : "shield");
+      if (!targetValue) throw new Error("inlay target missing from the item select");
+      await itemSelect.selectOption(targetValue);
+      await inlayPanel.getByLabel("Gem").selectOption({ value: "diamond:gem:flawless" });
+      await inlayPanel.getByText("Protection IV: +1 armor").waitFor({ state: "visible", timeout: 15000 });
+      await domClick(inlayPanel.getByRole("button", { name: "Inlay exact result" }));
+      lap(`${viewport.name}: inlay done`);
+    }
 
     const state = await page.evaluate(async () => {
       const appUrl = (path) => performance.getEntriesByType("resource").find((e) => e.name.includes(path))?.name ?? path;
@@ -184,6 +207,7 @@ try {
         helmArmor: helm?.resolvedStats?.armor,
         helmEquipped: helm ? world.player.wearRare.head === helm.uid : false,
         mailArmor: mail?.resolvedStats?.armor,
+        mailInlay: mail?.inlays?.[0] ? `${mail.inlays[0].resourceId}:${mail.inlays[0].clarity}` : null,
         mailEquipped: mail ? world.player.wearRare.chest === mail.uid : false,
         gauntletsArmor: gauntlets?.resolvedStats?.armor,
         gauntletsEquipped: gauntlets ? world.player.wearRare.hands === gauntlets.uid : false,
@@ -202,28 +226,53 @@ try {
     await page.screenshot({ path: screenshot, fullPage: false });
     const passed = response?.ok()
       && state.saved
-      && state.ingots === 1 // 7 + 1 smelted − 5 sword edge − 2 alloyed
-      && state.oreLeft === 1
-      && state.bronze === 3 // 2 copper + 1 tin → 3 bronze ingots
-      && state.tinLeft === 0
-      && state.shieldArmor === 4.5 // 2 base + 1.5 choice sturdy plates + 1 flawless protection diamond
-      && state.shieldInlay === "diamond:flawless"
-      && state.diamondLeft === 0
-      && state.shieldEquipped // rare shields equip into the off hand
-      && state.helmArmor === 3.5 // 2 base + 1.5 choice sturdy plates; workmanship adds no armor
-      && state.helmEquipped // rare helms equip into the head slot
-      && state.mailArmor === 5.5 // 4 base + 1.5 choice sturdy plates; the chest carries the most armor
-      && state.mailEquipped // rare mail equips into the chest slot
-      && state.gauntletsArmor === 3.5 // 2 base + 1.5 choice sturdy plates
-      && state.gauntletsEquipped // rare gauntlets equip into the hands slot
-      && state.ironLeft === 0 // 11 − 3 shield − 2 helm − 4 mail − 2 gauntlets
-      && state.clothLeft === 0 // 6 − sword binding − shield binding − helm lining − 2 mail lining − gauntlets lining
-      && state.armorWorn === 17 // 4.5 shield + 3.5 helm + 5.5 mail + 3.5 gauntlets, all worn
-      && state.itemName === "sword"
-      && state.edge === "copper_ore"
-      && state.hitBonus === 1.875 // 0.75 choice copper edge (primary) + 0.125 sound linen handling (secondary) + 1 fine workmanship
       && !overflow
-      && errors.length === 0;
+      && errors.length === 0
+      && (flow === "b"
+        ? state.mailArmor === 6.5 // 4 base + 1.5 choice sturdy plates + 1 flawless protection diamond
+          && state.mailInlay === "diamond:flawless"
+          && state.diamondLeft === 0
+          && state.mailEquipped // rare mail equips into the chest slot
+          && state.gauntletsArmor === 3.5 // 2 base + 1.5 choice sturdy plates
+          && state.gauntletsEquipped // rare gauntlets equip into the hands slot
+          && state.ironLeft === 5 // 11 − 4 mail − 2 gauntlets
+          && state.clothLeft === 3 // 6 − 2 mail lining − gauntlets lining
+          && state.armorWorn === 10 // 6.5 mail + 3.5 gauntlets, both worn
+        : flow === "a"
+          ? state.ingots === 1 // 7 + 1 smelted − 5 sword edge − 2 alloyed
+            && state.oreLeft === 1
+            && state.bronze === 3 // 2 copper + 1 tin → 3 bronze ingots
+            && state.tinLeft === 0
+            && state.shieldArmor === 3.5 // 2 base + 1.5 choice sturdy plates; no inlay in this flow
+            && state.shieldEquipped // rare shields equip into the off hand
+            && state.helmArmor === 3.5 // 2 base + 1.5 choice sturdy plates; workmanship adds no armor
+            && state.helmEquipped // rare helms equip into the head slot
+            && state.ironLeft === 6 // 11 − 3 shield − 2 helm
+            && state.clothLeft === 3 // 6 − sword binding − shield binding − helm lining
+            && state.armorWorn === 7 // 3.5 shield + 3.5 helm, both worn
+            && state.itemName === "sword"
+            && state.edge === "copper_ore"
+            && state.hitBonus === 1.875 // 0.75 choice copper edge (primary) + 0.125 sound linen handling (secondary) + 1 fine workmanship
+          : state.ingots === 1
+            && state.oreLeft === 1
+            && state.bronze === 3
+            && state.tinLeft === 0
+            && state.shieldArmor === 4.5 // 2 base + 1.5 choice sturdy plates + 1 flawless protection diamond
+            && state.shieldInlay === "diamond:flawless"
+            && state.diamondLeft === 0
+            && state.shieldEquipped
+            && state.helmArmor === 3.5
+            && state.helmEquipped
+            && state.mailArmor === 5.5
+            && state.mailEquipped
+            && state.gauntletsArmor === 3.5
+            && state.gauntletsEquipped
+            && state.ironLeft === 0 // 11 − 3 shield − 2 helm − 4 mail − 2 gauntlets
+            && state.clothLeft === 0
+            && state.armorWorn === 17
+            && state.itemName === "sword"
+            && state.edge === "copper_ore"
+            && state.hitBonus === 1.875);
     verdict.viewports[viewport.name] = { passed, state, overflow, errors, screenshot };
     lap(`${viewport.name}: verdict passed=${passed}`);
     if (!passed) verdict.ok = false;

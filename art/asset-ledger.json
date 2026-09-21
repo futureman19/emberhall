@@ -29296,7 +29296,7 @@
       ],
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:94",
-        "src/components/game/craft-gump.tsx:81",
+        "src/components/game/craft-gump.tsx:90",
         "src/components/game/crafting/confirm-craft.tsx:17",
         "src/components/game/crafting/inlay-panel.tsx:25",
         "src/components/game/crafting/material-selector.tsx:36",
@@ -36323,7 +36323,7 @@
         "key"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:81",
+        "src/components/game/craft-gump.tsx:90",
         "src/components/game/crafting/confirm-craft.tsx:17",
         "src/components/game/crafting/inlay-panel.tsx:25",
         "src/components/game/crafting/material-selector.tsx:36",
@@ -166441,13 +166441,13 @@
       "canonicalId": "src/components/game/craft-gump.tsx#CraftGump",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/craft-gump.tsx:30"
+        "src/components/game/craft-gump.tsx:38"
       ],
       "sourceNames": [
         "CraftGump"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:30"
+        "src/components/game/craft-gump.tsx:38"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -166461,6 +166461,7 @@
         "RecipeRow",
         "RefiningPanel",
         "WorkmanshipPreview",
+        "button",
         "div",
         "li",
         "p",
@@ -166676,10 +166677,10 @@
           "applicability": "source contract; runtime unverified"
         },
         {
-          "id": "predicate:st === \"forge\" || st === \"bench\"",
+          "id": "predicate:tab === id",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/craft-gump.tsx:30"
+            "src/components/game/craft-gump.tsx:38"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -166719,13 +166720,13 @@
       "canonicalId": "src/components/game/craft-gump.tsx#RecipeRow",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/craft-gump.tsx:311"
+        "src/components/game/craft-gump.tsx:350"
       ],
       "sourceNames": [
         "RecipeRow"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:311"
+        "src/components/game/craft-gump.tsx:350"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
