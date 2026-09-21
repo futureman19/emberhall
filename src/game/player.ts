@@ -761,7 +761,7 @@ function huntNow(world: World, p: Person) {
   playSfx("hunt", 0.52);
   const blade = weaponDmg(effectiveMain(world));
   const mods = rareMods(world);
-  const skill = bow ? world.player.skills.archery : world.player.skills.swords;
+  const skill = effSkill(world, bow ? "archery" : "swords");
   const anatomy = effSkill(world, "anatomy");
   const chance = successChance(skill, 10 + FAUNA_META[c.kind].hp / 2);
   const ok = Math.random() < chance + 0.2 + mods.hit / 100;

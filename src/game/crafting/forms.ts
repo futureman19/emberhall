@@ -1,4 +1,5 @@
 import { FAUNA_META, ITEM_META, SKILL_META } from "../catalog.ts";
+import type { SkillId } from "../types.ts";
 import { RESOURCE_CATALOG } from "../resources/catalog.ts";
 import type {
   GemClarity,
@@ -44,7 +45,7 @@ const MATERIAL_ROLES = [
   "finish",
 ] as const satisfies readonly MaterialRole[];
 const MATERIAL_CONTRIBUTIONS = ["primary", "secondary", "cosmetic"] as const satisfies readonly MaterialContribution[];
-const GEM_FAMILIES = ["power", "fortune", "precision", "protection"] as const satisfies readonly GemFamily[];
+const GEM_FAMILIES = ["power", "fortune", "precision", "protection", "mastery"] as const satisfies readonly GemFamily[];
 const GRADE_KINDS = ["timber", "ore", "fiber"] as const;
 const GRADE_FORMS = ["log", "board", "ore", "ingot", "cloth"] as const;
 
@@ -318,7 +319,7 @@ const BOW_FORM_DEFINITION = {
   ],
   baseStats: { damage: 8, hitBonus: 0, armor: 0, skillBonuses: {}, slayerMultipliers: {} },
   caps: { damage: 15, hitBonus: 10, armor: 0, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
-  allowedGemFamilies: ["power", "fortune", "precision"],
+  allowedGemFamilies: ["power", "fortune", "precision", "mastery"],
   maxInlays: 1,
 } as const satisfies ItemFormDefinition;
 
@@ -350,7 +351,7 @@ const SWORD_FORM_DEFINITION = {
   ],
   baseStats: { damage: 10, hitBonus: 0, armor: 0, skillBonuses: {}, slayerMultipliers: {} },
   caps: { damage: 18, hitBonus: 8, armor: 0, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
-  allowedGemFamilies: ["power", "precision"],
+  allowedGemFamilies: ["power", "precision", "mastery"],
   maxInlays: 1,
 } as const satisfies ItemFormDefinition;
 
@@ -515,6 +516,9 @@ const GREAVES_FORM_DEFINITION = {
   allowedGemFamilies: ["fortune", "protection"],
   maxInlays: 1,
 } as const satisfies ItemFormDefinition;
+
+/** The art a weapon schools its wielder in when a mastery gem is set into it. */
+export const FORM_GOVERNING_SKILL = deepFreeze({ sword: "swords", bow: "archery" } as Partial<Record<ItemFormId, SkillId>>);
 
 export const ITEM_FORM_CATALOG = buildItemFormCatalog([BOW_FORM_DEFINITION, SWORD_FORM_DEFINITION, SHIELD_FORM_DEFINITION, HELM_FORM_DEFINITION, MAIL_FORM_DEFINITION, BOOTS_FORM_DEFINITION, GAUNTLETS_FORM_DEFINITION, GREAVES_FORM_DEFINITION]);
 export const BOW_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.bow;

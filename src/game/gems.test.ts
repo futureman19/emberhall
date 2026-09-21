@@ -55,6 +55,28 @@ test("gems - all five clarities map monotonically and effects are frozen", () =>
   }
 });
 
+test("gems - amethyst carries the mastery family onto the skill axis", () => {
+  assert.deepEqual(gemEffect("amethyst", "flawless"), {
+    resourceId: "amethyst",
+    family: "mastery",
+    clarity: "flawless",
+    rank: 4,
+    label: "Mastery IV",
+    scope: "canonical",
+    stat: "skill",
+    amount: 2,
+  });
+});
+
+test("gems - amethyst's mastery ladder is monotonic", () => {
+  const clarities = ["cracked", "flawed", "cut", "flawless", "perfect"] as const;
+  const effects = clarities.map((clarity) => gemEffect("amethyst", clarity));
+  assert.deepEqual(effects.map(({ rank }) => rank), [1, 2, 3, 4, 5]);
+  assert.deepEqual(effects.map(({ amount }) => amount), [0.5, 1, 1.5, 2, 3]);
+  assert.ok(effects.every(({ stat, scope }) => stat === "skill" && scope === "canonical"));
+  assert.ok(effects.every(Object.isFrozen));
+});
+
 test("gems - diamond's protection ladder is monotonic within the armor budget", () => {
   const clarities = ["cracked", "flawed", "cut", "flawless", "perfect"] as const;
   const effects = clarities.map((clarity) => gemEffect("diamond", clarity));

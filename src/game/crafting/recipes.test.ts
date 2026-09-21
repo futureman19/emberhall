@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { BOOTS_FORM, BOW_FORM, GAUNTLETS_FORM, GREAVES_FORM, HELM_FORM, MAIL_FORM, SHIELD_FORM } from "./forms.ts";
+import { BOOTS_FORM, BOW_FORM, GAUNTLETS_FORM, GREAVES_FORM, HELM_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM } from "./forms.ts";
 import {
   EXACT_RECIPE_CATALOG,
   exactRecipeById,
@@ -39,6 +39,8 @@ test("exact recipes - shield form is the first armor craft", () => {
   assert.deepEqual(SHIELD_FORM.roles[0]?.accepts, { qualityType: "grade", kinds: ["ore"], forms: ["ingot"] });
   assert.deepEqual(SHIELD_FORM.baseStats, { damage: 0, hitBonus: 0, armor: 2, skillBonuses: {}, slayerMultipliers: {} });
   assert.deepEqual(SHIELD_FORM.caps, { damage: 0, hitBonus: 0, armor: 5, skillBonusPerSkill: 5, slayerMultiplier: 1.5 });
+  assert.deepEqual(SWORD_FORM.allowedGemFamilies, ["power", "precision", "mastery"]);
+  assert.deepEqual(BOW_FORM.allowedGemFamilies, ["power", "fortune", "precision", "mastery"]);
   assert.deepEqual(SHIELD_FORM.allowedGemFamilies, ["fortune", "protection"]);
   assert.equal(SHIELD_FORM.maxInlays, 1);
 });

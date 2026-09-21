@@ -7,6 +7,7 @@ import type {
 } from "../resources/types.ts";
 import type { FaunaKind, SkillId } from "../types.ts";
 import {
+  FORM_GOVERNING_SKILL,
   GEM_CLARITIES,
   MATERIAL_GRADES,
   validateItemFormDefinition,
@@ -342,6 +343,27 @@ export function resolveItemStats(
   for (const { inlay, definition } of inlays) {
     for (const traitId of definition.traitIds) {
       const trait = TRAIT_REGISTRY[traitId];
+      if (trait.stat === "skill") {
+        // Mastery gems school the wielder in the form's governing art.
+        const skill = FORM_GOVERNING_SKILL[form.id];
+        if (skill) {
+          const before = stats.skillBonuses[skill] ?? 0;
+          const after = Math.min(before + trait.values[inlay.clarity], form.caps.skillBonusPerSkill);
+          const applied = after - before;
+          if (applied !== 0) {
+            stats.skillBonuses = { ...stats.skillBonuses, [skill]: after };
+            contributions.push({
+              source: "gem",
+              sourceId: inlay.resourceId,
+              traitId,
+              family: traitId,
+              stats: { skillBonuses: { [skill]: applied } },
+              local: {},
+            });
+          }
+        }
+        continue;
+      }
       if (trait.scope === "canonical") {
         const applied = applyCanonical(stats, { [trait.stat]: trait.values[inlay.clarity] }, form);
         if (!hasAppliedStats(applied)) continue;

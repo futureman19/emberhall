@@ -86,6 +86,7 @@ try {
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("oak", "board", "sound"), 3);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("fine_linen", "cloth", "sound"), 6);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("diamond", "gem", "flawless"), 1);
+      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("amethyst", "gem", "flawless"), 1);
       Math.random = () => 0.5;
       store.useGame.setState({ phase: "playing", openCraft: true, panel: "none", snap: live.snapshot(world) });
       // Freeze the frame-driven sim: every tick re-renders the gump and replaces
@@ -143,6 +144,19 @@ try {
       await domClick(helmWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
       await domClick(helmWork.getByRole("button", { name: "Craft selected helm" }));
       lap(`${viewport.name}: early forms crafted`);
+
+      // Mastery: a flawless amethyst into the sword — the blade schools its wielder.
+      await tabTo("Inlay");
+      const earlyInlay = page.locator('[aria-label="Gem inlay"]');
+      const earlyItem = earlyInlay.getByLabel("Crafted item");
+      const swordValue = await earlyItem.evaluate((el) => [...el.options].find((o) => /sword/i.test(o.text))?.value ?? "");
+      if (!swordValue) throw new Error("sword missing from the inlay item select");
+      await earlyItem.selectOption(swordValue);
+      await earlyInlay.getByLabel("Gem").selectOption({ value: "amethyst:gem:flawless" });
+      await earlyInlay.getByText("Mastery IV: +2 skill").waitFor({ state: "visible", timeout: 15000 });
+      await domClick(earlyInlay.getByRole("button", { name: "Inlay exact result" }));
+      lap(`${viewport.name}: mastery inlay done`);
+      await tabTo("Forms");
     }
 
     if (lateForms) {
@@ -213,6 +227,8 @@ try {
         gauntletsEquipped: gauntlets ? world.player.wearRare.hands === gauntlets.uid : false,
         ironLeft: inventory.resourceCount(world.player.resources, "iron_ore:ingot:choice"),
         clothLeft: inventory.resourceCount(world.player.resources, "fine_linen:cloth:sound"),
+        swordSkills: world.player.rares.find((r) => r.base === "sword")?.resolvedStats?.skillBonuses?.swords,
+        amethystLeft: inventory.resourceCount(world.player.resources, "amethyst:gem:flawless"),
         shieldEquipped: shield ? world.player.wearRare.off === shield.uid : false,
         armorWorn,
         itemName: item?.base,
@@ -250,6 +266,8 @@ try {
             && state.ironLeft === 6 // 11 − 3 shield − 2 helm
             && state.clothLeft === 3 // 6 − sword binding − shield binding − helm lining
             && state.armorWorn === 7 // 3.5 shield + 3.5 helm, both worn
+            && state.swordSkills === 2 // flawless mastery in the blade
+            && state.amethystLeft === 0
             && state.itemName === "sword"
             && state.edge === "copper_ore"
             && state.hitBonus === 1.875 // 0.75 choice copper edge (primary) + 0.125 sound linen handling (secondary) + 1 fine workmanship
@@ -270,6 +288,8 @@ try {
             && state.ironLeft === 0 // 11 − 3 shield − 2 helm − 4 mail − 2 gauntlets
             && state.clothLeft === 0
             && state.armorWorn === 17
+            && state.swordSkills === 2
+            && state.amethystLeft === 0
             && state.itemName === "sword"
             && state.edge === "copper_ore"
             && state.hitBonus === 1.875);

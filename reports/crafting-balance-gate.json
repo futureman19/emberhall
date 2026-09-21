@@ -92,15 +92,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 248,
-        "p90": 424,
-        "p99": 585,
-        "max": 678
+        "p50": 247,
+        "p90": 413,
+        "p99": 566,
+        "max": 632
       },
       "modeledSeconds": {
-        "p50": 375.6,
-        "p90": 639.6,
-        "p99": 881.1
+        "p50": 374.1,
+        "p90": 623.1,
+        "p99": 852.6
       },
       "blockedMatches": {
         "p50": 0,
@@ -116,15 +116,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 654,
-        "p90": 1078,
-        "p99": 1689,
-        "max": 2020
+        "p50": 669,
+        "p90": 1122,
+        "p99": 1833,
+        "max": 1857
       },
       "modeledSeconds": {
-        "p50": 984.6,
-        "p90": 1620.6,
-        "p99": 2537.1
+        "p50": 1007.1,
+        "p90": 1686.6,
+        "p99": 2753.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -140,15 +140,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 909,
-        "p90": 2653,
-        "p99": 5878,
-        "max": 6683
+        "p50": 868,
+        "p90": 2837,
+        "p99": 6449,
+        "max": 7014
       },
       "modeledSeconds": {
-        "p50": 1364.22,
-        "p90": 3980.22,
-        "p99": 8817.72
+        "p50": 1302.72,
+        "p90": 4256.22,
+        "p99": 9674.22
       },
       "blockedMatches": {
         "p50": 0,
@@ -164,15 +164,39 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 224,
-        "p90": 835,
-        "p99": 1761,
-        "max": 1937
+        "p50": 219,
+        "p90": 809,
+        "p99": 1500,
+        "max": 2197
       },
       "modeledSeconds": {
-        "p50": 336.72,
-        "p90": 1253.22,
-        "p99": 2642.22
+        "p50": 329.22,
+        "p90": 1214.22,
+        "p99": 2250.72
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
+      "label": "amethyst inlay",
+      "resourceId": "amethyst",
+      "required": 1,
+      "skill": 60,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 230,
+        "p90": 863,
+        "p99": 1688,
+        "max": 2142
+      },
+      "modeledSeconds": {
+        "p50": 345.72,
+        "p90": 1295.22,
+        "p99": 2532.72
       },
       "blockedMatches": {
         "p50": 0,
@@ -188,15 +212,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 203,
-        "p90": 700,
-        "p99": 1518,
-        "max": 1888
+        "p50": 184,
+        "p90": 599,
+        "p99": 1185,
+        "max": 1347
       },
       "modeledSeconds": {
-        "p50": 305.22,
-        "p90": 1050.72,
-        "p99": 2277.72
+        "p50": 276.72,
+        "p90": 899.22,
+        "p99": 1778.22
       },
       "blockedMatches": {
         "p50": 0,
@@ -212,15 +236,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 421,
-        "p90": 1697,
-        "p99": 2973,
-        "max": 4530
+        "p50": 516,
+        "p90": 1810,
+        "p99": 3572,
+        "max": 6554
       },
       "modeledSeconds": {
-        "p50": 632.22,
-        "p90": 2546.22,
-        "p99": 4460.22
+        "p50": 774.72,
+        "p90": 2715.72,
+        "p99": 5358.72
       },
       "blockedMatches": {
         "p50": 0,
@@ -389,15 +413,15 @@
     }
   },
   "statEnumeration": {
-    "legalCombinationCount": 557856,
+    "legalCombinationCount": 719136,
     "forms": {
       "bow": {
-        "combinations": 24576,
+        "combinations": 32256,
         "roleOptionCounts": [
           64,
           8
         ],
-        "inlayOptions": 16,
+        "inlayOptions": 21,
         "maxima": {
           "damage": 14,
           "hitBonus": 10,
@@ -414,13 +438,13 @@
         "capViolations": 0
       },
       "sword": {
-        "combinations": 337920,
+        "combinations": 491520,
         "roleOptionCounts": [
           20,
           64,
           8
         ],
-        "inlayOptions": 11,
+        "inlayOptions": 16,
         "maxima": {
           "damage": 18,
           "hitBonus": 8,

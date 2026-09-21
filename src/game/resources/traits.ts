@@ -35,7 +35,18 @@ type ClarityLocalTraitDefinition = {
   readonly values: Readonly<Record<GemClarity, number>>;
 };
 
-export type MaterialTraitDefinition = GradeTraitDefinition | ClarityCanonicalTraitDefinition | ClarityLocalTraitDefinition;
+type ClaritySkillTraitDefinition = {
+  readonly qualityType: "clarity";
+  readonly stat: "skill";
+  readonly scope: "canonical";
+  readonly values: Readonly<Record<GemClarity, number>>;
+};
+
+export type MaterialTraitDefinition =
+  | GradeTraitDefinition
+  | ClarityCanonicalTraitDefinition
+  | ClarityLocalTraitDefinition
+  | ClaritySkillTraitDefinition;
 
 export const MAX_LOCAL_FORTUNE = 5;
 
@@ -107,6 +118,12 @@ const TRAITS = {
     stat: "armor",
     scope: "canonical",
     values: { cracked: 0.25, flawed: 0.5, cut: 0.75, flawless: 1, perfect: 1.5 },
+  },
+  mastery: {
+    qualityType: "clarity",
+    stat: "skill",
+    scope: "canonical",
+    values: { cracked: 0.5, flawed: 1, cut: 1.5, flawless: 2, perfect: 3 },
   },
 } satisfies Record<MaterialTraitId, MaterialTraitDefinition>;
 

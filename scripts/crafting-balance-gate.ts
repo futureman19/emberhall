@@ -214,6 +214,7 @@ const acquisitions = [
   acquisitionScenario("highland sword edge", "highland_ore", "rock", 5, 55),
   acquisitionScenario("ruby inlay", "ruby", "rock", 1, 60),
   acquisitionScenario("emerald inlay", "emerald", "rock", 1, 70),
+  acquisitionScenario("amethyst inlay", "amethyst", "rock", 1, 60),
   acquisitionScenario("diamond inlay", "diamond", "rock", 1, 70),
   acquisitionScenario("sapphire inlay", "sapphire", "rock", 1, 65),
 ];
