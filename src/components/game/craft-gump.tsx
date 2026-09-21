@@ -5,7 +5,7 @@ import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "@/game/catalog";
 import { RECIPES, canMake, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
-import { BOW_FORM, HELM_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
+import { BOW_FORM, HELM_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
 import { listResourceInventory } from "@/game/inventory/resources";
 import { getWorld } from "@/game/live";
 import type { MaterialGrade } from "@/game/resources/types";
@@ -52,6 +52,8 @@ export function CraftGump() {
   const [shieldBinding, setShieldBinding] = useState<ResourceStackKey | null>(null);
   const [helmPlate, setHelmPlate] = useState<ResourceStackKey | null>(null);
   const [helmLining, setHelmLining] = useState<ResourceStackKey | null>(null);
+  const [mailPlate, setMailPlate] = useState<ResourceStackKey | null>(null);
+  const [mailLining, setMailLining] = useState<ResourceStackKey | null>(null);
   if (!open) return null;
   const here = stationsHere(getWorld());
   void x;
@@ -68,6 +70,8 @@ export function CraftGump() {
   const shieldBindingRole = SHIELD_FORM.roles.find(({ role }) => role === "binding")!;
   const helmPlateRole = HELM_FORM.roles.find(({ role }) => role === "plate")!;
   const helmLiningRole = HELM_FORM.roles.find(({ role }) => role === "lining")!;
+  const mailPlateRole = MAIL_FORM.roles.find(({ role }) => role === "plate")!;
+  const mailLiningRole = MAIL_FORM.roles.find(({ role }) => role === "lining")!;
   const selectedCount = (key: ResourceStackKey | null) => resourceRows.find((row) => row.key === key)?.count ?? 0;
   const bowDisabled = !here.includes("bench")
     ? "Stand at the yard or hall"
@@ -95,6 +99,13 @@ export function CraftGump() {
     : !helmPlate || !helmLining
       ? "Choose plates and lining"
       : selectedCount(helmPlate) < helmPlateRole.amount || selectedCount(helmLining) < helmLiningRole.amount
+        ? "Not enough selected material"
+        : null;
+  const mailDisabled = !here.includes("forge")
+    ? "Stand at the forge"
+    : !mailPlate || !mailLining
+      ? "Choose plates and lining"
+      : selectedCount(mailPlate) < mailPlateRole.amount || selectedCount(mailLining) < mailLiningRole.amount
         ? "Not enough selected material"
         : null;
   const groups: Group[] = ["bench", "forge", "fire", "field"];
@@ -186,6 +197,26 @@ export function CraftGump() {
           onConfirm={() => helmPlate && helmLining && makeExact("helm", [
             { role: "plate", key: helmPlate },
             { role: "lining", key: helmLining },
+          ])}
+        />
+      </div>
+      <div className="mt-2 space-y-2" aria-label="Advanced mail work">
+        <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Mail</p>
+        <MaterialSelector role={mailPlateRole} rows={resourceRows} selected={mailPlate} onSelect={setMailPlate} group="mail-plate" />
+        <MaterialSelector role={mailLiningRole} rows={resourceRows} selected={mailLining} onSelect={setMailLining} group="mail-lining" />
+        <WorkmanshipPreview
+          skill={skills?.smithing ?? 0}
+          difficulty={30}
+          primaryGrade={mailPlate ? (mailPlate.split(":")[2] as MaterialGrade) : undefined}
+        />
+        <ConfirmCraft
+          selected={{ plate: mailPlate, lining: mailLining }}
+          rows={resourceRows}
+          disabledReason={mailDisabled}
+          formLabel="mail"
+          onConfirm={() => mailPlate && mailLining && makeExact("mail", [
+            { role: "plate", key: mailPlate },
+            { role: "lining", key: mailLining },
           ])}
         />
       </div>

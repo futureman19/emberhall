@@ -13,6 +13,13 @@ const viewports = [
 ].filter((v) => !process.env.METALWORK_SMOKE_VIEWPORT || v.name === process.env.METALWORK_SMOKE_VIEWPORT);
 
 const verdict = { url, viewports: {}, ok: true };
+const t0 = Date.now();
+const lap = (label) => console.error(`[smoke ${((Date.now() - t0) / 1000).toFixed(0)}s] ${label}`);
+// SwiftShader stalls the main thread for seconds per frame, so Playwright's
+// actionability loop (stability + hit-target polls) burns whole timeouts per
+// click. Dispatch real DOM clicks instead — they fire the same React handlers,
+// just without the stall-prone preflight. waitFor(visible) stays the gate.
+const domClick = (locator) => locator.evaluate((el) => el.click());
 const browser = await chromium.launch({ headless: true, args: ["--no-sandbox", "--disable-dev-shm-usage"] });
 // Warmup: the first page load after source edits absorbs vite's re-optimization
 // and any queued HMR full-reload. Viewport pages then drive a quiet graph.
@@ -32,6 +39,7 @@ const browser = await chromium.launch({ headless: true, args: ["--no-sandbox", "
 }
 try {
   for (const viewport of viewports) {
+    lap(`${viewport.name}: new page`);
     const page = await browser.newPage({ viewport });
     const errors = [];
     page.on("pageerror", (error) => errors.push(`page: ${error.message}`));
@@ -53,6 +61,7 @@ try {
       if (!alive) await page.waitForTimeout(1000);
     }
     if (!alive) throw new Error("dev server page never hydrated (React dead after 30s)");
+    lap(`${viewport.name}: hydrated`);
     await page.evaluate(async () => {
       // The app loads its modules with vite's ?t= invalidation query; a bare
       // dynamic import would spin up a SECOND store/world instance. Reuse the
@@ -72,9 +81,9 @@ try {
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("copper_ore", "ore", "choice"), 2);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("copper_ore", "ingot", "choice"), 7);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("tin_ore", "ingot", "choice"), 1);
-      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("iron_ore", "ingot", "choice"), 5);
+      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("iron_ore", "ingot", "choice"), 9);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("oak", "board", "sound"), 3);
-      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("fine_linen", "cloth", "sound"), 3);
+      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("fine_linen", "cloth", "sound"), 5);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("diamond", "gem", "flawless"), 1);
       Math.random = () => 0.5;
       store.useGame.setState({ phase: "playing", openCraft: true, panel: "none", snap: live.snapshot(world) });
@@ -85,37 +94,46 @@ try {
     });
 
     // Refining panel: copper ore row smelts into an ingot through the real button.
+    lap(`${viewport.name}: fixture applied`);
     const refining = page.locator('[aria-label="Refining"]');
     await refining.getByText(/Copper Ore ×2 · choice → ingot/).waitFor({ state: "visible", timeout: 15000 });
-    await refining.getByRole("button", { name: "Smelt" }).first().click();
+    await domClick(refining.getByRole("button", { name: "Smelt" }).first());
     await refining.getByText(/Copper Ore ×1 · choice → ingot/).waitFor({ state: "visible", timeout: 15000 });
 
     // Sword form: pick the exact stacks and craft through the real button.
     const swordWork = page.locator('[aria-label="Advanced sword work"]');
-    await swordWork.getByRole("radio", { name: /Copper Ore · Choice ingot/ }).check();
-    await swordWork.getByRole("radio", { name: /Oak · Sound board/ }).check();
-    await swordWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }).check();
-    await swordWork.getByRole("button", { name: "Craft selected sword" }).click();
+    await domClick(swordWork.getByRole("radio", { name: /Copper Ore · Choice ingot/ }));
+    await domClick(swordWork.getByRole("radio", { name: /Oak · Sound board/ }));
+    await domClick(swordWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
+    await domClick(swordWork.getByRole("button", { name: "Craft selected sword" }));
 
     // Alloy: the copper-ingot row offers bronze and shows its tin requirement.
     const bronzeRow = refining.locator("li", { hasText: "(+ 1 tin ore)" });
     await bronzeRow.getByText(/Bronze ×3 · choice → ingot/).waitFor({ state: "visible", timeout: 15000 });
-    await bronzeRow.getByRole("button", { name: "Smelt" }).click();
+    await domClick(bronzeRow.getByRole("button", { name: "Smelt" }));
 
     // Shield: first armor form — iron plates, oak frame, linen binding.
     const shieldWork = page.locator('[aria-label="Advanced shield work"]');
     await shieldWork.getByText("Form · Shield").waitFor({ state: "visible", timeout: 15000 });
-    await shieldWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }).check();
-    await shieldWork.getByRole("radio", { name: /Oak · Sound board/ }).check();
-    await shieldWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }).check();
-    await shieldWork.getByRole("button", { name: "Craft selected shield" }).click();
+    await domClick(shieldWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }));
+    await domClick(shieldWork.getByRole("radio", { name: /Oak · Sound board/ }));
+    await domClick(shieldWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
+    await domClick(shieldWork.getByRole("button", { name: "Craft selected shield" }));
 
     // Helm: second armor form — two iron plates and a cloth lining, head slot.
     const helmWork = page.locator('[aria-label="Advanced helm work"]');
     await helmWork.getByText("Form · Helm").waitFor({ state: "visible", timeout: 15000 });
-    await helmWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }).check();
-    await helmWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }).check();
-    await helmWork.getByRole("button", { name: "Craft selected helm" }).click();
+    await domClick(helmWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }));
+    await domClick(helmWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
+    await domClick(helmWork.getByRole("button", { name: "Craft selected helm" }));
+
+    // Mail: chest armor — four iron plates and two cloth lining.
+    const mailWork = page.locator('[aria-label="Advanced mail work"]');
+    await mailWork.getByText("Form · Mail").waitFor({ state: "visible", timeout: 15000 });
+    await domClick(mailWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }));
+    await domClick(mailWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
+    await domClick(mailWork.getByRole("button", { name: "Craft selected mail" }));
+    lap(`${viewport.name}: all forms crafted`);
 
     // Gem inlay: a flawless diamond into the new shield through the real panel.
     const inlayPanel = page.locator('[aria-label="Gem inlay"]');
@@ -125,7 +143,8 @@ try {
     await itemSelect.selectOption(shieldValue);
     await inlayPanel.getByLabel("Gem").selectOption({ value: "diamond:gem:flawless" });
     await inlayPanel.getByText("Protection IV: +1 armor").waitFor({ state: "visible", timeout: 15000 });
-    await inlayPanel.getByRole("button", { name: "Inlay exact result" }).click();
+    await domClick(inlayPanel.getByRole("button", { name: "Inlay exact result" }));
+    lap(`${viewport.name}: inlay done`);
 
     const state = await page.evaluate(async () => {
       const appUrl = (path) => performance.getEntriesByType("resource").find((e) => e.name.includes(path))?.name ?? path;
@@ -139,6 +158,8 @@ try {
       if (shield) player.commandEquipRare(world, shield.uid);
       const helm = world.player.rares.find((r) => r.base === "helm");
       if (helm) player.commandEquipRare(world, helm.uid);
+      const mail = world.player.rares.find((r) => r.base === "mail");
+      if (mail) player.commandEquipRare(world, mail.uid);
       const armorWorn = rare.rareMods(world).armor;
       save.writeSave(world);
       const loaded = save.loadSave();
@@ -153,6 +174,8 @@ try {
         diamondLeft: inventory.resourceCount(world.player.resources, "diamond:gem:flawless"),
         helmArmor: helm?.resolvedStats?.armor,
         helmEquipped: helm ? world.player.wearRare.head === helm.uid : false,
+        mailArmor: mail?.resolvedStats?.armor,
+        mailEquipped: mail ? world.player.wearRare.chest === mail.uid : false,
         ironLeft: inventory.resourceCount(world.player.resources, "iron_ore:ingot:choice"),
         clothLeft: inventory.resourceCount(world.player.resources, "fine_linen:cloth:sound"),
         shieldEquipped: shield ? world.player.wearRare.off === shield.uid : false,
@@ -178,15 +201,18 @@ try {
       && state.shieldEquipped // rare shields equip into the off hand
       && state.helmArmor === 3.5 // 2 base + 1.5 choice sturdy plates; workmanship adds no armor
       && state.helmEquipped // rare helms equip into the head slot
-      && state.ironLeft === 0 // 5 − 3 shield plates − 2 helm plates
-      && state.clothLeft === 0 // 3 − sword binding − shield binding − helm lining
-      && state.armorWorn === 8 // 4.5 shield + 3.5 helm, both worn, feed the mitigation pool
+      && state.mailArmor === 5.5 // 4 base + 1.5 choice sturdy plates; the chest carries the most armor
+      && state.mailEquipped // rare mail equips into the chest slot
+      && state.ironLeft === 0 // 9 − 3 shield plates − 2 helm plates − 4 mail plates
+      && state.clothLeft === 0 // 5 − sword binding − shield binding − helm lining − 2 mail lining
+      && state.armorWorn === 13.5 // 4.5 shield + 3.5 helm + 5.5 mail, all worn, feed the mitigation pool
       && state.itemName === "sword"
       && state.edge === "copper_ore"
       && state.hitBonus === 1.875 // 0.75 choice copper edge (primary) + 0.125 sound linen handling (secondary) + 1 fine workmanship
       && !overflow
       && errors.length === 0;
     verdict.viewports[viewport.name] = { passed, state, overflow, errors, screenshot };
+    lap(`${viewport.name}: verdict passed=${passed}`);
     if (!passed) verdict.ok = false;
     await page.close();
   }

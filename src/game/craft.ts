@@ -121,6 +121,8 @@ export const RECIPES: Recipe[] = [
   // The exact helm rides beside the legacy tag recipe "helm" (any eight metal);
   // commandCraftExact resolves work records by exactRecipeId, so the legacy id stays untouched.
   { id: "helm_smith", station: "forge", skill: "smithing", diff: 24, label: "Helm", hint: "Choose two ingot plates and one cloth lining.", exactRecipeId: "helm", need: {}, give: { helm: 1 }, sfx: "smith" },
+  // Same pattern as the helm: the exact mail rides beside the legacy tag recipe "mail" (any fourteen metal).
+  { id: "mail_smith", station: "forge", skill: "smithing", diff: 30, label: "Mail", hint: "Choose four ingot plates and two cloth lining.", exactRecipeId: "mail", need: {}, give: { mail: 1 }, sfx: "smith" },
   { id: "helm", station: "forge", skill: "smithing", diff: 22, label: "Helm", hint: "Any eight metal.", need: {}, needTags: [{ tag: "metal", n: 8 }], give: { helm: 1 }, sfx: "smith" },
   { id: "heater", station: "forge", skill: "smithing", diff: 24, label: "Iron shield", hint: "Any eight metal, a face.", need: {}, needTags: [{ tag: "metal", n: 8 }], give: { heater: 1 }, sfx: "smith" },
   { id: "greaves", station: "forge", skill: "smithing", diff: 28, label: "Greaves", hint: "Any ten metal.", need: {}, needTags: [{ tag: "metal", n: 10 }], give: { greaves: 1 }, sfx: "smith" },

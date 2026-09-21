@@ -366,3 +366,26 @@ test("exact helmcraft - two plates and a lining, iron sturdy carries into head a
   assert.ok(equipped, "helm rare equips generically through ITEM_META");
   assert.equal(world.player.wearRare.head, helm.uid, "helm slots into the head");
 });
+
+test("exact mailcraft - four plates and two lining, the chest piece outclasses the tag mail", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  const IRON_PLATES = makeResourceStackKey("iron_ore", "ingot", "choice");
+  addResource(world.player.resources, IRON_PLATES, 4);
+  addResource(world.player.resources, SOUND_CLOTH, 2);
+  const note = withRoll(0.5, () => commandCraftExact(world, "mail", [
+    { role: "plate", key: IRON_PLATES },
+    { role: "lining", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /mail/i);
+  const mail = world.player.rares[0]!;
+  assert.equal(mail.base, "mail");
+  assert.equal(mail.resolvedStats?.armor, 5.5, "4 base + 1.5 choice sturdy plates; workmanship adds no armor");
+  assert.equal(mail.resolvedStats?.damage, 0);
+  assert.equal(mail.resolvedStats?.hitBonus, 0, "sound cloth handling clamps against the armor form's zero hit cap");
+  assert.deepEqual(mail.components?.[0], { role: "plate", resourceId: "iron_ore", form: "ingot", grade: "choice", amount: 4 });
+  const equipped = commandEquipRare(world, mail.uid);
+  assert.ok(equipped, "mail rare equips generically through ITEM_META");
+  assert.equal(world.player.wearRare.chest, mail.uid, "mail slots into the chest");
+});
