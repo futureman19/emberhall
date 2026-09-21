@@ -117,6 +117,7 @@ export const RECIPES: Recipe[] = [
   { id: "gauntlets", station: "forge", skill: "smithing", diff: 16, label: "Gauntlets", hint: "Any five metal.", need: {}, needTags: [{ tag: "metal", n: 5 }], give: { gauntlets: 1 }, sfx: "smith" },
   { id: "mace", station: "forge", skill: "smithing", diff: 18, label: "Mace", hint: "Any six metal, a head.", need: {}, needTags: [{ tag: "metal", n: 6 }], give: { mace: 1 }, sfx: "smith" },
   { id: "sword", station: "forge", skill: "smithing", diff: 20, label: "Sword", hint: "Choose five ingots, one timber hilt, and one cloth binding.", exactRecipeId: "sword", need: {}, give: { sword: 1 }, sfx: "smith" },
+  { id: "shield_smith", station: "forge", skill: "smithing", diff: 21, label: "Shield", hint: "Choose three ingot plates, two boards, and one cloth binding.", exactRecipeId: "shield", need: {}, give: { shield: 1 }, sfx: "smith" },
   { id: "helm", station: "forge", skill: "smithing", diff: 22, label: "Helm", hint: "Any eight metal.", need: {}, needTags: [{ tag: "metal", n: 8 }], give: { helm: 1 }, sfx: "smith" },
   { id: "heater", station: "forge", skill: "smithing", diff: 24, label: "Iron shield", hint: "Any eight metal, a face.", need: {}, needTags: [{ tag: "metal", n: 8 }], give: { heater: 1 }, sfx: "smith" },
   { id: "greaves", station: "forge", skill: "smithing", diff: 28, label: "Greaves", hint: "Any ten metal.", need: {}, needTags: [{ tag: "metal", n: 10 }], give: { greaves: 1 }, sfx: "smith" },
@@ -335,8 +336,10 @@ export function commandCraftExact(
 ): string | null {
   if (world.player.ghost) return "A ghost cannot.";
   const exactRecipe = exactRecipeById(recipeId);
-  const rec = recipeById(recipeId);
-  if (!exactRecipe || !rec || rec.exactRecipeId !== exactRecipe.id) return "No such exact work.";
+  // The exact id — not the legacy recipe id — locates the work record: legacy
+  // recipes can hold the plain item id (e.g. the carpentry "shield").
+  const rec = exactRecipe ? RECIPES.find((candidate) => candidate.exactRecipeId === exactRecipe.id) : undefined;
+  if (!exactRecipe || !rec) return "No such exact work.";
   if (rec.station !== null && !stationsHere(world).includes(rec.station)) {
     if (rec.station === "forge") return "The ore wants a fire. Raise a forge.";
     if (rec.station === "fire") return "The pot wants a fire — build a campfire, or find a hearth.";

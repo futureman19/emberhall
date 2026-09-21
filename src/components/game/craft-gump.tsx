@@ -5,7 +5,7 @@ import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "@/game/catalog";
 import { RECIPES, canMake, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
-import { BOW_FORM, SWORD_FORM } from "@/game/crafting/forms";
+import { BOW_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
 import { listResourceInventory } from "@/game/inventory/resources";
 import { getWorld } from "@/game/live";
 import type { MaterialGrade } from "@/game/resources/types";
@@ -47,6 +47,9 @@ export function CraftGump() {
   const [edge, setEdge] = useState<ResourceStackKey | null>(null);
   const [hilt, setHilt] = useState<ResourceStackKey | null>(null);
   const [swordBinding, setSwordBinding] = useState<ResourceStackKey | null>(null);
+  const [plate, setPlate] = useState<ResourceStackKey | null>(null);
+  const [frame, setFrame] = useState<ResourceStackKey | null>(null);
+  const [shieldBinding, setShieldBinding] = useState<ResourceStackKey | null>(null);
   if (!open) return null;
   const here = stationsHere(getWorld());
   void x;
@@ -58,6 +61,9 @@ export function CraftGump() {
   const edgeRole = SWORD_FORM.roles.find(({ role }) => role === "edge")!;
   const hiltRole = SWORD_FORM.roles.find(({ role }) => role === "hilt")!;
   const swordBindingRole = SWORD_FORM.roles.find(({ role }) => role === "binding")!;
+  const plateRole = SHIELD_FORM.roles.find(({ role }) => role === "plate")!;
+  const frameRole = SHIELD_FORM.roles.find(({ role }) => role === "frame")!;
+  const shieldBindingRole = SHIELD_FORM.roles.find(({ role }) => role === "binding")!;
   const selectedCount = (key: ResourceStackKey | null) => resourceRows.find((row) => row.key === key)?.count ?? 0;
   const bowDisabled = !here.includes("bench")
     ? "Stand at the yard or hall"
@@ -73,6 +79,13 @@ export function CraftGump() {
       : selectedCount(edge) < edgeRole.amount || selectedCount(hilt) < hiltRole.amount || selectedCount(swordBinding) < swordBindingRole.amount
         ? "Not enough selected material"
         : null;
+  const shieldDisabled = !here.includes("forge")
+    ? "Stand at the forge"
+    : !plate || !frame || !shieldBinding
+      ? "Choose plates, frame, and binding"
+      : selectedCount(plate) < plateRole.amount || selectedCount(frame) < frameRole.amount || selectedCount(shieldBinding) < shieldBindingRole.amount
+        ? "Not enough selected material"
+        : null;
   const groups: Group[] = ["bench", "forge", "fire", "field"];
   return (
     <div className="pointer-events-auto absolute top-16 right-3 max-h-[min(70vh,36rem)] w-[min(100%-1.5rem,22rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 sm:right-4">
@@ -82,8 +95,8 @@ export function CraftGump() {
       </p>
       <div className="mt-4 space-y-2" aria-label="Advanced bow work">
         <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Bow</p>
-        <MaterialSelector role={bodyRole} rows={resourceRows} selected={body} onSelect={setBody} />
-        <MaterialSelector role={bindingRole} rows={resourceRows} selected={binding} onSelect={setBinding} />
+        <MaterialSelector role={bodyRole} rows={resourceRows} selected={body} onSelect={setBody} group="bow-body" />
+        <MaterialSelector role={bindingRole} rows={resourceRows} selected={binding} onSelect={setBinding} group="bow-binding" />
         <WorkmanshipPreview
           skill={skills?.carpentry ?? 0}
           difficulty={18}
@@ -103,9 +116,9 @@ export function CraftGump() {
       </div>
       <div className="mt-2 space-y-2" aria-label="Advanced sword work">
         <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Sword</p>
-        <MaterialSelector role={edgeRole} rows={resourceRows} selected={edge} onSelect={setEdge} />
-        <MaterialSelector role={hiltRole} rows={resourceRows} selected={hilt} onSelect={setHilt} />
-        <MaterialSelector role={swordBindingRole} rows={resourceRows} selected={swordBinding} onSelect={setSwordBinding} />
+        <MaterialSelector role={edgeRole} rows={resourceRows} selected={edge} onSelect={setEdge} group="sword-edge" />
+        <MaterialSelector role={hiltRole} rows={resourceRows} selected={hilt} onSelect={setHilt} group="sword-hilt" />
+        <MaterialSelector role={swordBindingRole} rows={resourceRows} selected={swordBinding} onSelect={setSwordBinding} group="sword-binding" />
         <WorkmanshipPreview
           skill={skills?.smithing ?? 0}
           difficulty={20}
@@ -120,6 +133,28 @@ export function CraftGump() {
             { role: "edge", key: edge },
             { role: "hilt", key: hilt },
             { role: "binding", key: swordBinding },
+          ])}
+        />
+      </div>
+      <div className="mt-2 space-y-2" aria-label="Advanced shield work">
+        <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Shield</p>
+        <MaterialSelector role={plateRole} rows={resourceRows} selected={plate} onSelect={setPlate} group="shield-plate" />
+        <MaterialSelector role={frameRole} rows={resourceRows} selected={frame} onSelect={setFrame} group="shield-frame" />
+        <MaterialSelector role={shieldBindingRole} rows={resourceRows} selected={shieldBinding} onSelect={setShieldBinding} group="shield-binding" />
+        <WorkmanshipPreview
+          skill={skills?.smithing ?? 0}
+          difficulty={21}
+          primaryGrade={plate ? (plate.split(":")[2] as MaterialGrade) : undefined}
+        />
+        <ConfirmCraft
+          selected={{ plate, frame, binding: shieldBinding }}
+          rows={resourceRows}
+          disabledReason={shieldDisabled}
+          formLabel="shield"
+          onConfirm={() => plate && frame && shieldBinding && makeExact("shield", [
+            { role: "plate", key: plate },
+            { role: "frame", key: frame },
+            { role: "binding", key: shieldBinding },
           ])}
         />
       </div>

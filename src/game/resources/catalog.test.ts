@@ -35,7 +35,7 @@ const EXPECTED_IDS = [
 ] as const satisfies readonly ResourceId[];
 
 const GEM_IDS = ["ruby", "sapphire", "emerald"] as const satisfies readonly GemResourceId[];
-const TRAIT_IDS = ["accuracy", "damage", "handling", "keen", "power", "fortune", "precision"] as const satisfies readonly MaterialTraitId[];
+const TRAIT_IDS = ["accuracy", "damage", "handling", "keen", "sturdy", "power", "fortune", "precision"] as const satisfies readonly MaterialTraitId[];
 
 type DeepMutable<T> = T extends readonly (infer Item)[]
   ? DeepMutable<Item>[]
@@ -263,7 +263,7 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       copper_ore: ["handling"],
       tin_ore: [],
       bronze: ["keen"],
-      iron_ore: [],
+      iron_ore: ["sturdy"],
       highland_ore: ["damage"],
       common_cloth: [],
       fine_linen: ["handling"],

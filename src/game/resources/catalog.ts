@@ -346,7 +346,7 @@ const RESOURCE_DEFINITIONS = [
     kind: "ore",
     forms: ["ore", "ingot"],
     qualityType: "grade",
-    traitIds: [],
+    traitIds: ["sturdy"],
     spawn: {
       nodeKind: "rock",
       weight: 100,

@@ -341,7 +341,7 @@
     }
   },
   "statEnumeration": {
-    "legalCombinationCount": 362496,
+    "legalCombinationCount": 454656,
     "forms": {
       "bow": {
         "combinations": 24576,
@@ -383,6 +383,29 @@
           "damage": 18,
           "hitBonus": 8,
           "armor": 0,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "shield": {
+        "combinations": 92160,
+        "roleOptionCounts": [
+          20,
+          32,
+          8
+        ],
+        "inlayOptions": 6,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 4,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
           "skillBonusPerSkill": 5,
           "slayerMultiplier": 1.5
         },

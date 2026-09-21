@@ -78,6 +78,12 @@ const TRAITS = {
     scope: "canonical",
     values: { rough: 0.25, sound: 0.5, choice: 0.75, pristine: 1 },
   },
+  sturdy: {
+    qualityType: "grade",
+    stat: "armor",
+    scope: "canonical",
+    values: { rough: 0.5, sound: 1, choice: 1.5, pristine: 2 },
+  },
   power: {
     qualityType: "clarity",
     stat: "damage",

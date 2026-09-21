@@ -321,3 +321,25 @@ test("exact swordcraft - bronze carries its keen trait through the alloy chain",
   assert.deepEqual(blade.affixes, []);
   assert.deepEqual(blade.components?.[0], { role: "edge", resourceId: "bronze", form: "ingot", grade: "choice", amount: 5 });
 });
+
+test("exact shieldcraft - iron plates carry the sturdy trait into armor", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  const IRON_PLATES = makeResourceStackKey("iron_ore", "ingot", "choice");
+  addResource(world.player.resources, IRON_PLATES, 3);
+  addResource(world.player.resources, OAK_BOARD, 2);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "shield", [
+    { role: "plate", key: IRON_PLATES },
+    { role: "frame", key: OAK_BOARD },
+    { role: "binding", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /shield/i);
+  const shield = world.player.rares[0]!;
+  assert.equal(shield.base, "shield");
+  assert.equal(shield.resolvedStats?.armor, 3.5, "2 base + 1.5 choice sturdy plates; workmanship adds no armor");
+  assert.equal(shield.resolvedStats?.damage, 0);
+  assert.equal(shield.resolvedStats?.hitBonus, 0, "fine hit bonus clamps against the armor form's zero hit cap");
+  assert.deepEqual(shield.components?.[0], { role: "plate", resourceId: "iron_ore", form: "ingot", grade: "choice", amount: 3 });
+});
