@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { commandCraft } from "./craft.ts";
+import { commandBuy } from "./npcs.ts";
 import { commandHunt, tickPlayer, you } from "./player.ts";
-import { createWorld } from "./world.ts";
+import { createPerson, createWorld } from "./world.ts";
 import type { World } from "./types.ts";
 
 function withRoll<T>(value: number, action: () => T): T {
@@ -98,4 +99,20 @@ test("arrows - a melee swing never touches the quiver", () => {
   assert.equal(commandHunt(world, hare.id), null);
   withRoll(0.5, () => tickUntilNote(world));
   assert.equal(world.player.pack.arrows, 3, "melee leaves the quiver alone");
+});
+
+test("arrows - the provisioner keeps a quiver's worth in stock", () => {
+  const world = createWorld();
+  world.gold = 20;
+  const keeper = createPerson(world, () => 0.5, {
+    x: world.player.x + 1,
+    z: world.player.z,
+    role: "provisioner",
+    name: "Quill",
+  });
+  world.people.push(keeper);
+  world.player.pack.arrows = 0;
+  assert.equal(commandBuy(world, "arrows"), "Bought arrows.");
+  assert.equal(world.player.pack.arrows, 1);
+  assert.equal(world.gold, 18);
 });

@@ -116,6 +116,11 @@ try {
     if (earlyForms) {
       await tabTo("Forms");
       // Sword form: pick the exact stacks and craft through the real button.
+      // The forms tab groups its sections by craft.
+      await page.getByText("Carpentry · the bench").waitFor({ state: "visible", timeout: 15000 });
+      await page.getByText("Smithing · the forge").waitFor({ state: "visible", timeout: 15000 });
+      await page.getByText("Tailoring · field work").waitFor({ state: "visible", timeout: 15000 });
+
       const swordWork = page.locator('[aria-label="Advanced sword work"]');
       await domClick(swordWork.getByRole("radio", { name: /Copper Ore · Choice ingot/ }));
       await domClick(swordWork.getByRole("radio", { name: /Oak · Sound board/ }));

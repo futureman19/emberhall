@@ -6331,7 +6331,7 @@
       "canonicalId": "armourer",
       "family": "catalog/src/game/catalog.ts#VOCATION_META",
       "catalogSources": [
-        "src/game/catalog.ts:419"
+        "src/game/catalog.ts:420"
       ],
       "sourceNames": [
         "VOCATION_META"
@@ -6377,7 +6377,7 @@
       "canonicalId": "cook",
       "family": "catalog/src/game/catalog.ts#VOCATION_META",
       "catalogSources": [
-        "src/game/catalog.ts:418"
+        "src/game/catalog.ts:419"
       ],
       "sourceNames": [
         "VOCATION_META"
@@ -6423,7 +6423,7 @@
       "canonicalId": "guard",
       "family": "catalog/src/game/catalog.ts#VOCATION_META",
       "catalogSources": [
-        "src/game/catalog.ts:422"
+        "src/game/catalog.ts:423"
       ],
       "sourceNames": [
         "VOCATION_META"
@@ -6469,7 +6469,7 @@
       "canonicalId": "recruiter",
       "family": "catalog/src/game/catalog.ts#VOCATION_META",
       "catalogSources": [
-        "src/game/catalog.ts:421"
+        "src/game/catalog.ts:422"
       ],
       "sourceNames": [
         "VOCATION_META"
@@ -6515,7 +6515,7 @@
       "canonicalId": "trader",
       "family": "catalog/src/game/catalog.ts#VOCATION_META",
       "catalogSources": [
-        "src/game/catalog.ts:420"
+        "src/game/catalog.ts:421"
       ],
       "sourceNames": [
         "VOCATION_META"
@@ -172431,13 +172431,13 @@
       "canonicalId": "src/components/game/craft-gump.tsx#RecipeRow",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/craft-gump.tsx:423"
+        "src/components/game/craft-gump.tsx:426"
       ],
       "sourceNames": [
         "RecipeRow"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:423"
+        "src/components/game/craft-gump.tsx:426"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [

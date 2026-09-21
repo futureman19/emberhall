@@ -159,7 +159,8 @@ export function CraftGump() {
       </div>
       {tab === "forms" && (
       <>
-      <div className="mt-4 space-y-2" aria-label="Advanced bow work">
+      <p className="mt-5 border-t border-border pt-3 font-display text-[10px] uppercase tracking-widest text-muted">Carpentry · the bench</p>
+      <div className="mt-2 space-y-2" aria-label="Advanced bow work">
         <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Bow</p>
         <MaterialSelector role={bodyRole} rows={resourceRows} selected={body} onSelect={setBody} group="bow-body" />
         <MaterialSelector role={bindingRole} rows={resourceRows} selected={binding} onSelect={setBinding} group="bow-binding" />
@@ -179,6 +180,7 @@ export function CraftGump() {
           ])}
         />
       </div>
+<p className="mt-5 border-t border-border pt-3 font-display text-[10px] uppercase tracking-widest text-muted">Smithing · the forge</p>
       <div className="mt-2 space-y-2" aria-label="Advanced sword work">
         <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Sword</p>
         <MaterialSelector role={edgeRole} rows={resourceRows} selected={edge} onSelect={setEdge} group="sword-edge" />
@@ -300,6 +302,7 @@ export function CraftGump() {
           </div>
         );
       })}
+<p className="mt-5 border-t border-border pt-3 font-display text-[10px] uppercase tracking-widest text-muted">Tailoring · field work</p>
       <div className="mt-2 space-y-2" aria-label="Advanced leather work">
         <p className="font-display text-xs tracking-wider text-gold uppercase">Form · {LEATHER_FORM.label}</p>
         <MaterialSelector role={leatherBodyRole} rows={resourceRows} selected={leatherBody} onSelect={setLeatherBody} group="leather-body" />

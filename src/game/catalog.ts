@@ -309,6 +309,7 @@ export const NOTORIETY_META: Record<Notoriety, { label: string }> = {
 
 export const SHOP_STOCK: ItemId[] = [
   "hatchet", "pick", "hoe", "fishing_rod", "knife", "bandage", "tunic", "hood", "cloak", "boots",
+  "arrows",
   "rune", "garlic", "ginseng", "silk", "pearl", "moss", "mandrake", "ash", "cabbage", "wheat",
   "cabbage_seed", "wheat_seed", "garlic_seed", "acorn",
 ];
