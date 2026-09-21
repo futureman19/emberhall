@@ -15,6 +15,7 @@ const SOUND_CLOTH = makeResourceStackKey("common_cloth", "cloth", "sound");
 const PRISTINE_LINEN = makeResourceStackKey("fine_linen", "cloth", "pristine");
 const IRON_INGOT = makeResourceStackKey("iron_ore", "ingot", "sound");
 const HIGHLAND_INGOT = makeResourceStackKey("highland_ore", "ingot", "choice");
+const EMBERITE_INGOT = makeResourceStackKey("emberite", "ingot", "choice");
 const COPPER_INGOT = makeResourceStackKey("copper_ore", "ingot", "choice");
 const OAK_BOARD = makeResourceStackKey("oak", "board", "sound");
 
@@ -308,6 +309,22 @@ test("exact swordcraft - ordinary iron remains fungible while Highland steel bec
   assert.equal(highland.player.rares.length, 1);
   assert.equal(highland.player.rares[0]!.resolvedStats?.damage, 11.5);
   assert.deepEqual(highland.player.rares[0]!.affixes, []);
+});
+
+test("exact swordcraft - emberite carries its ember trait into the blade", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  addResource(world.player.resources, EMBERITE_INGOT, 5);
+  addResource(world.player.resources, OAK_BOARD, 1);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "sword", swordSelections(EMBERITE_INGOT)));
+  assert.match(note ?? "", /emberite sword/i);
+  assert.equal(world.player.pack.sword, 0);
+  assert.equal(world.player.rares.length, 1);
+  assert.equal(world.player.rares[0]!.resolvedStats?.damage, 13);
+  assert.equal(world.player.rares[0]!.resolvedStats?.hitBonus, 1);
+  assert.deepEqual(world.player.rares[0]!.affixes, []);
 });
 
 test("exact swordcraft - copper becomes a unique handling blade with no damage trait", () => {

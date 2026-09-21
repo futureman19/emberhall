@@ -116,14 +116,14 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 247,
-        "p90": 413,
+        "p50": 248,
+        "p90": 414,
         "p99": 566,
         "max": 632
       },
       "modeledSeconds": {
-        "p50": 374.1,
-        "p90": 623.1,
+        "p50": 375.6,
+        "p90": 624.6,
         "p99": 852.6
       },
       "blockedMatches": {
@@ -140,15 +140,39 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 669,
+        "p50": 670,
         "p90": 1122,
         "p99": 1833,
         "max": 1857
       },
       "modeledSeconds": {
-        "p50": 1007.1,
+        "p50": 1008.6,
         "p90": 1686.6,
         "p99": 2753.1
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
+      "label": "emberite sword edge",
+      "resourceId": "emberite",
+      "required": 5,
+      "skill": 90,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 45693,
+        "p90": 85358,
+        "p99": 109903,
+        "max": 123179
+      },
+      "modeledSeconds": {
+        "p50": 68543.1,
+        "p90": 128040.6,
+        "p99": 164858.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -189,13 +213,13 @@
       "completionRate": 1,
       "inspections": {
         "p50": 219,
-        "p90": 809,
+        "p90": 855,
         "p99": 1500,
         "max": 2197
       },
       "modeledSeconds": {
         "p50": 329.22,
-        "p90": 1214.22,
+        "p90": 1283.22,
         "p99": 2250.72
       },
       "blockedMatches": {
@@ -437,7 +461,7 @@
     }
   },
   "statEnumeration": {
-    "legalCombinationCount": 809952,
+    "legalCombinationCount": 963840,
     "forms": {
       "bow": {
         "combinations": 36288,
@@ -462,9 +486,9 @@
         "capViolations": 0
       },
       "sword": {
-        "combinations": 552960,
+        "combinations": 663552,
         "roleOptionCounts": [
-          20,
+          24,
           72,
           8
         ],
@@ -485,9 +509,9 @@
         "capViolations": 0
       },
       "shield": {
-        "combinations": 190080,
+        "combinations": 228096,
         "roleOptionCounts": [
-          20,
+          24,
           36,
           8
         ],
@@ -508,9 +532,9 @@
         "capViolations": 0
       },
       "helm": {
-        "combinations": 5280,
+        "combinations": 6336,
         "roleOptionCounts": [
-          20,
+          24,
           8
         ],
         "inlayOptions": 11,
@@ -530,9 +554,9 @@
         "capViolations": 0
       },
       "mail": {
-        "combinations": 5280,
+        "combinations": 6336,
         "roleOptionCounts": [
-          20,
+          24,
           8
         ],
         "inlayOptions": 11,
@@ -552,9 +576,9 @@
         "capViolations": 0
       },
       "boots": {
-        "combinations": 5280,
+        "combinations": 6336,
         "roleOptionCounts": [
-          20,
+          24,
           8
         ],
         "inlayOptions": 11,
@@ -574,9 +598,9 @@
         "capViolations": 0
       },
       "gauntlets": {
-        "combinations": 5280,
+        "combinations": 6336,
         "roleOptionCounts": [
-          20,
+          24,
           8
         ],
         "inlayOptions": 11,
@@ -596,9 +620,9 @@
         "capViolations": 0
       },
       "greaves": {
-        "combinations": 5280,
+        "combinations": 6336,
         "roleOptionCounts": [
-          20,
+          24,
           8
         ],
         "inlayOptions": 11,

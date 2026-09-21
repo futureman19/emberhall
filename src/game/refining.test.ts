@@ -10,6 +10,8 @@ const IRON_ROUGH_ORE = makeResourceStackKey("iron_ore", "ore", "rough");
 const IRON_ROUGH_INGOT = makeResourceStackKey("iron_ore", "ingot", "rough");
 const COPPER_SOUND_ORE = makeResourceStackKey("copper_ore", "ore", "sound");
 const COPPER_SOUND_INGOT = makeResourceStackKey("copper_ore", "ingot", "sound");
+const EMBERITE_CHOICE_ORE = makeResourceStackKey("emberite", "ore", "choice");
+const EMBERITE_CHOICE_INGOT = makeResourceStackKey("emberite", "ingot", "choice");
 
 test("refining - route discovery is shared between the command and the work gump", () => {
   const copper = findProcessingRoute("copper_ore", "ore");
@@ -18,6 +20,9 @@ test("refining - route discovery is shared between the command and the work gump
   const bronze = findProcessingRoute("copper_ore", "ingot");
   assert.equal(bronze?.route.id, "smelt_bronze", "copper ingots primary the bronze alloy route");
   assert.equal(bronze?.owner.id, "bronze");
+  const emberite = findProcessingRoute("emberite", "ore");
+  assert.equal(emberite?.route.id, "smelt_emberite");
+  assert.equal(emberite?.owner.id, "emberite");
   assert.equal(findProcessingRoute("oak", "board"), null);
   assert.equal(findProcessingRoute("oak", "log")?.route.id, "saw_oak");
 });
@@ -112,6 +117,26 @@ test("refining - ore family and grade survive exact forge processing", () => {
   });
   assert.equal(resourceCount(world.player.resources, HIGHLAND_CHOICE_ORE), 1);
   assert.equal(resourceCount(world.player.resources, HIGHLAND_CHOICE_INGOT), 1);
+});
+
+test("refining - emberite holds its grade through the grandmaster smelt", () => {
+  const world = createWorld();
+  addResource(world.player.resources, EMBERITE_CHOICE_ORE, 2);
+  const result = refineResource(world.player, EMBERITE_CHOICE_ORE, "forge", 80);
+  assert.deepEqual(result, {
+    status: "refined",
+    input: EMBERITE_CHOICE_ORE,
+    output: EMBERITE_CHOICE_INGOT,
+    quantity: 1,
+  });
+  assert.equal(resourceCount(world.player.resources, EMBERITE_CHOICE_ORE), 1);
+  assert.equal(resourceCount(world.player.resources, EMBERITE_CHOICE_INGOT), 1);
+
+  const before = structuredClone(world.player.resources);
+  const unskilled = refineResource(world.player, EMBERITE_CHOICE_ORE, "forge", 79);
+  assert.equal(unskilled.status, "blocked");
+  if (unskilled.status === "blocked") assert.equal(unskilled.reason, "skill");
+  assert.deepEqual(world.player.resources, before);
 });
 
 test("refining - ordinary iron follows the same retained-identity route", () => {

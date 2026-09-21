@@ -117,6 +117,9 @@ test("soft biome affinities make catalog preferences observable and omit zero af
   assert.ok(rawWeightAt(250, 48, "rock", "sapphire") > rawWeightAt(470, 420, "rock", "sapphire"));
   assert.ok(rawWeightAt(188, 88, "rock", "sapphire") > 0);
   assert.ok(rawWeightAt(250, 48, "rock", "highland_ore") > rawWeightAt(256, 292, "rock", "highland_ore"));
+  assert.ok(rawWeightAt(420, 268, "rock", "emberite") > rawWeightAt(64, 96, "rock", "emberite"), "ironfold is the richer emberite vein");
+  assert.ok(rawWeightAt(64, 96, "rock", "emberite") > 0, "cairnash holds an emberite vein");
+  assert.equal(rawWeightAt(256, 292, "rock", "emberite"), 0, "emberite keeps to its named veins");
 });
 
 test("bounded deterministic grid frequencies track inspected probabilities", () => {

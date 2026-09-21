@@ -101,6 +101,12 @@ const TRAITS = {
     scope: "canonical",
     values: { rough: 0.5, sound: 1, choice: 1.5, pristine: 2 },
   },
+  ember: {
+    qualityType: "grade",
+    stat: "damage",
+    scope: "canonical",
+    values: { rough: 1, sound: 2, choice: 3, pristine: 4 },
+  },
   power: {
     qualityType: "clarity",
     stat: "damage",

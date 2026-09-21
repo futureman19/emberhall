@@ -15,6 +15,7 @@ export type GradeResourceId =
   | "bronze"
   | "iron_ore"
   | "highland_ore"
+  | "emberite"
   | "common_cloth"
   | "fine_linen"
   | "hide";
@@ -29,7 +30,7 @@ export type MaterialGrade = "rough" | "sound" | "choice" | "pristine";
 export type GemClarity = "cracked" | "flawed" | "cut" | "flawless" | "perfect";
 export type MaterialQuality = MaterialGrade | GemClarity;
 export type QualityForResource<I extends ResourceId> = I extends GemResourceId ? GemClarity : MaterialGrade;
-export type GradeMaterialTraitId = "accuracy" | "damage" | "handling" | "keen" | "sturdy" | "supple";
+export type GradeMaterialTraitId = "accuracy" | "damage" | "handling" | "keen" | "sturdy" | "supple" | "ember";
 export type ClarityMaterialTraitId = "power" | "fortune" | "precision" | "protection" | "mastery";
 export type MaterialTraitId = GradeMaterialTraitId | ClarityMaterialTraitId;
 export type ProcessingStation = "bench" | "forge" | "fire";
@@ -82,7 +83,7 @@ interface ResourceDefinitionBase {
   readonly visual: ResourceVisual;
 }
 
-export type ResourceKindFor<I extends ResourceId> = I extends "copper_ore" | "tin_ore" | "bronze" | "iron_ore" | "highland_ore"
+export type ResourceKindFor<I extends ResourceId> = I extends "copper_ore" | "tin_ore" | "bronze" | "iron_ore" | "highland_ore" | "emberite"
   ? "ore"
   : I extends "common_cloth" | "fine_linen"
     ? "fiber"
@@ -177,6 +178,7 @@ const GRADE_RESOURCE_IDS = [
   "bronze",
   "iron_ore",
   "highland_ore",
+  "emberite",
   "common_cloth",
   "fine_linen",
   "hide",

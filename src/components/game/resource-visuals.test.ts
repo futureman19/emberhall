@@ -42,6 +42,7 @@ function findSpawnedInputs(): ReadonlyMap<ResourceId, ResourceNodeInput> {
     { tx: 188, ty: 88, nodeKind: "tree" },
     { tx: 250, ty: 48, nodeKind: "rock" },
     { tx: 470, ty: 420, nodeKind: "rock" },
+    { tx: 420, ty: 268, nodeKind: "rock" },
   ] as const;
   for (let seed = 0; seed < 20_000 && found.size < SPAWNED_IDS.length; seed += 1) {
     for (const location of locations) {
@@ -106,7 +107,7 @@ test("same Task 5 node produces deterministic deeply immutable renderer data wit
 });
 
 test("every catalog-spawned definition maps to its catalog node kind and family with bounded finite parameters", () => {
-  assert.equal(SPAWNED_IDS.length, 18, "all current catalog definitions that have world spawns are covered");
+  assert.equal(SPAWNED_IDS.length, 19, "all current catalog definitions that have world spawns are covered");
   for (const resourceId of SPAWNED_IDS) {
     const definition = RESOURCE_CATALOG[resourceId];
     const visual = visualFor(resourceId);

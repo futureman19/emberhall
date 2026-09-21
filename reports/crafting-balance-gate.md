@@ -6,7 +6,7 @@
 - All measured gates passed.
 
 ## Evidence
-- Legal combinations enumerated: **809,952**; cap violations: **0**.
+- Legal combinations enumerated: **963,840**; cap violations: **0**.
 - Max-skill bow workmanship on choice-grade inputs: ordinary 0.0%, fine 80.6%, exceptional 19.4%.
 - Max-skill sword workmanship on choice-grade inputs: ordinary 0.0%, fine 81.0%, exceptional 19.0%.
 - Representative save payload: **23,746 bytes**; largest Vault inscription: **779 bytes**.
@@ -21,10 +21,11 @@ Deterministic 200-seed simulations use 1.5s per surveyed node plus 0.72s per suc
 | redwood bow body | 50 | 5485 | 8401 | 11333 | 8231.1 |
 | ironwood bow body | 70 | 5085 | 8619 | 10925 | 7631.1 |
 | copper sword edge | 20 | 29 | 47 | 68 | 47.1 |
-| tin for bronze | 35 | 247 | 413 | 566 | 374.1 |
-| highland sword edge | 55 | 669 | 1122 | 1833 | 1007.1 |
+| tin for bronze | 35 | 248 | 414 | 566 | 375.6 |
+| highland sword edge | 55 | 670 | 1122 | 1833 | 1008.6 |
+| emberite sword edge | 90 | 45693 | 85358 | 109903 | 68543.1 |
 | ruby inlay | 60 | 868 | 2837 | 6449 | 1302.72 |
-| emerald inlay | 70 | 219 | 809 | 1500 | 329.22 |
+| emerald inlay | 70 | 219 | 855 | 1500 | 329.22 |
 | amethyst inlay | 60 | 230 | 863 | 1688 | 345.72 |
 | diamond inlay | 70 | 184 | 599 | 1185 | 276.72 |
 | sapphire inlay | 65 | 516 | 1810 | 3572 | 774.72 |
@@ -38,13 +39,13 @@ Deterministic 200-seed simulations use 1.5s per surveyed node plus 0.72s per suc
 
 ## Stat caps
 - **bow:** 36,288 legal combinations; max damage 15/15, hit 10/10, armor 0/0, local Fortune 5/5; 0 violations.
-- **sword:** 552,960 legal combinations; max damage 18/18, hit 8/8, armor 0/0, local Fortune 0/5; 0 violations.
-- **shield:** 190,080 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
-- **helm:** 5,280 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
-- **mail:** 5,280 legal combinations; max damage 0/0, hit 0/0, armor 7/7, local Fortune 5/5; 0 violations.
-- **boots:** 5,280 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
-- **gauntlets:** 5,280 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
-- **greaves:** 5,280 legal combinations; max damage 0/0, hit 0/0, armor 6/6, local Fortune 5/5; 0 violations.
+- **sword:** 663,552 legal combinations; max damage 18/18, hit 8/8, armor 0/0, local Fortune 0/5; 0 violations.
+- **shield:** 228,096 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
+- **helm:** 6,336 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
+- **mail:** 6,336 legal combinations; max damage 0/0, hit 0/0, armor 7/7, local Fortune 5/5; 0 violations.
+- **boots:** 6,336 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
+- **gauntlets:** 6,336 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
+- **greaves:** 6,336 legal combinations; max damage 0/0, hit 0/0, armor 6/6, local Fortune 5/5; 0 violations.
 - **leather:** 1,056 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
 - **hood:** 1,056 legal combinations; max damage 0/0, hit 0/0, armor 4/4, local Fortune 5/5; 0 violations.
 - **gloves:** 1,056 legal combinations; max damage 0/0, hit 0/0, armor 4/4, local Fortune 5/5; 0 violations.
