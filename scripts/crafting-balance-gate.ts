@@ -209,6 +209,7 @@ const curves = skillCurves();
 const acquisitions = [
   acquisitionScenario("oak bow body", "oak", "tree", 5, 50),
   acquisitionScenario("redwood bow body", "redwood", "tree", 5, 50),
+  acquisitionScenario("copper sword edge", "copper_ore", "rock", 5, 20),
   acquisitionScenario("highland sword edge", "highland_ore", "rock", 5, 55),
   acquisitionScenario("ruby inlay", "ruby", "rock", 1, 60),
   acquisitionScenario("sapphire inlay", "sapphire", "rock", 1, 65),

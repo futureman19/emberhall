@@ -9,6 +9,7 @@ export type GradeResourceId =
   | "redwood"
   | "yew"
   | "ghostwood"
+  | "copper_ore"
   | "iron_ore"
   | "highland_ore"
   | "common_cloth"
@@ -73,7 +74,7 @@ interface ResourceDefinitionBase {
   readonly visual: ResourceVisual;
 }
 
-export type ResourceKindFor<I extends ResourceId> = I extends "iron_ore" | "highland_ore"
+export type ResourceKindFor<I extends ResourceId> = I extends "copper_ore" | "iron_ore" | "highland_ore"
   ? "ore"
   : I extends "common_cloth" | "fine_linen"
     ? "fiber"
@@ -158,6 +159,7 @@ const GRADE_RESOURCE_IDS = [
   "redwood",
   "yew",
   "ghostwood",
+  "copper_ore",
   "iron_ore",
   "highland_ore",
   "common_cloth",

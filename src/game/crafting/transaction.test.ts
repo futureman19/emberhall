@@ -14,6 +14,7 @@ const SOUND_CLOTH = makeResourceStackKey("common_cloth", "cloth", "sound");
 const PRISTINE_LINEN = makeResourceStackKey("fine_linen", "cloth", "pristine");
 const IRON_INGOT = makeResourceStackKey("iron_ore", "ingot", "sound");
 const HIGHLAND_INGOT = makeResourceStackKey("highland_ore", "ingot", "choice");
+const COPPER_INGOT = makeResourceStackKey("copper_ore", "ingot", "choice");
 const OAK_BOARD = makeResourceStackKey("oak", "board", "sound");
 
 function bowSelections(body: ResourceStackKey = CHOICE_REDWOOD, binding: ResourceStackKey = SOUND_CLOTH) {
@@ -276,4 +277,25 @@ test("exact swordcraft - ordinary iron remains fungible while Highland steel bec
   assert.equal(highland.player.rares.length, 1);
   assert.equal(highland.player.rares[0]!.resolvedStats?.damage, 11.5);
   assert.deepEqual(highland.player.rares[0]!.affixes, []);
+});
+
+test("exact swordcraft - copper becomes a unique handling blade with no damage trait", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  addResource(world.player.resources, COPPER_INGOT, 5);
+  addResource(world.player.resources, OAK_BOARD, 1);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+
+  const note = withRoll(0.5, () => commandCraftExact(world, "sword", swordSelections(COPPER_INGOT)));
+
+  assert.match(note ?? "", /copper ore sword/i);
+  assert.equal(world.player.pack.sword, 0, "specialty metal always crafts unique");
+  assert.equal(world.player.rares.length, 1);
+  const sword = world.player.rares[0]!;
+  assert.equal(sword.workmanship, "fine", "mastery on choice stock floors to fine");
+  assert.equal(sword.resolvedStats?.damage, 10, "copper contributes no damage trait");
+  assert.equal(sword.resolvedStats?.hitBonus, 1.75, "choice handling edge plus fine workmanship");
+  assert.deepEqual(sword.affixes, []);
+  assert.deepEqual(sword.components?.[0], { role: "edge", resourceId: "copper_ore", form: "ingot", grade: "choice", amount: 5 });
 });

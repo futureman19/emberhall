@@ -8,6 +8,28 @@ const HIGHLAND_CHOICE_ORE = makeResourceStackKey("highland_ore", "ore", "choice"
 const HIGHLAND_CHOICE_INGOT = makeResourceStackKey("highland_ore", "ingot", "choice");
 const IRON_ROUGH_ORE = makeResourceStackKey("iron_ore", "ore", "rough");
 const IRON_ROUGH_INGOT = makeResourceStackKey("iron_ore", "ingot", "rough");
+const COPPER_SOUND_ORE = makeResourceStackKey("copper_ore", "ore", "sound");
+const COPPER_SOUND_INGOT = makeResourceStackKey("copper_ore", "ingot", "sound");
+
+test("refining - copper family and grade survive the forge at its lower gate", () => {
+  const world = createWorld();
+  addResource(world.player.resources, COPPER_SOUND_ORE, 2);
+  const result = refineResource(world.player, COPPER_SOUND_ORE, "forge", 20);
+  assert.deepEqual(result, {
+    status: "refined",
+    input: COPPER_SOUND_ORE,
+    output: COPPER_SOUND_INGOT,
+    quantity: 1,
+  });
+  assert.equal(resourceCount(world.player.resources, COPPER_SOUND_ORE), 1);
+  assert.equal(resourceCount(world.player.resources, COPPER_SOUND_INGOT), 1);
+
+  const before = structuredClone(world.player.resources);
+  const unskilled = refineResource(world.player, COPPER_SOUND_ORE, "forge", 14);
+  assert.equal(unskilled.status, "blocked");
+  if (unskilled.status === "blocked") assert.equal(unskilled.reason, "skill");
+  assert.deepEqual(world.player.resources, before);
+});
 
 test("refining - ore family and grade survive exact forge processing", () => {
   const world = createWorld();

@@ -60,6 +60,30 @@
       }
     },
     {
+      "label": "copper sword edge",
+      "resourceId": "copper_ore",
+      "required": 5,
+      "skill": 20,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 26,
+        "p90": 46,
+        "p99": 59,
+        "max": 64
+      },
+      "modeledSeconds": {
+        "p50": 42.6,
+        "p90": 72.6,
+        "p99": 92.1
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
       "label": "highland sword edge",
       "resourceId": "highland_ore",
       "required": 5,
@@ -68,15 +92,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 332,
-        "p90": 603,
-        "p99": 891,
-        "max": 1015
+        "p50": 442,
+        "p90": 845,
+        "p99": 1224,
+        "max": 1284
       },
       "modeledSeconds": {
-        "p50": 501.6,
-        "p90": 908.1,
-        "p99": 1340.1
+        "p50": 666.6,
+        "p90": 1271.1,
+        "p99": 1839.6
       },
       "blockedMatches": {
         "p50": 0,
@@ -92,15 +116,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 519,
-        "p90": 1693,
-        "p99": 3483,
-        "max": 4422
+        "p50": 812,
+        "p90": 2892,
+        "p99": 6212,
+        "max": 6853
       },
       "modeledSeconds": {
-        "p50": 779.22,
-        "p90": 2540.22,
-        "p99": 5225.22
+        "p50": 1218.72,
+        "p90": 4338.72,
+        "p99": 9318.72
       },
       "blockedMatches": {
         "p50": 0,
@@ -116,15 +140,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 261,
-        "p90": 773,
-        "p99": 1553,
-        "max": 2676
+        "p50": 393,
+        "p90": 1138,
+        "p99": 1888,
+        "max": 2938
       },
       "modeledSeconds": {
-        "p50": 392.22,
-        "p90": 1160.22,
-        "p99": 2330.22
+        "p50": 590.22,
+        "p90": 1707.72,
+        "p99": 2832.72
       },
       "blockedMatches": {
         "p50": 0,
@@ -293,7 +317,7 @@
     }
   },
   "statEnumeration": {
-    "legalCombinationCount": 159744,
+    "legalCombinationCount": 227328,
     "forms": {
       "bow": {
         "combinations": 24576,
@@ -318,9 +342,9 @@
         "capViolations": 0
       },
       "sword": {
-        "combinations": 135168,
+        "combinations": 202752,
         "roleOptionCounts": [
-          8,
+          12,
           64,
           8
         ],

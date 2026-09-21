@@ -6,7 +6,7 @@
 - All measured gates passed.
 
 ## Evidence
-- Legal combinations enumerated: **159,744**; cap violations: **0**.
+- Legal combinations enumerated: **227,328**; cap violations: **0**.
 - Max-skill bow workmanship on choice-grade inputs: ordinary 0.0%, fine 80.6%, exceptional 19.4%.
 - Max-skill sword workmanship on choice-grade inputs: ordinary 0.0%, fine 81.0%, exceptional 19.0%.
 - Representative save payload: **23,723 bytes**; largest Vault inscription: **779 bytes**.
@@ -19,9 +19,10 @@ Deterministic 200-seed simulations use 1.5s per surveyed node plus 0.72s per suc
 |---|---:|---:|---:|---:|---:|
 | oak bow body | 50 | 5 | 5 | 7 | 11.1 |
 | redwood bow body | 50 | 5485 | 8401 | 11333 | 8231.1 |
-| highland sword edge | 55 | 332 | 603 | 891 | 501.6 |
-| ruby inlay | 60 | 519 | 1693 | 3483 | 779.22 |
-| sapphire inlay | 65 | 261 | 773 | 1553 | 392.22 |
+| copper sword edge | 20 | 26 | 46 | 59 | 42.6 |
+| highland sword edge | 55 | 442 | 845 | 1224 | 666.6 |
+| ruby inlay | 60 | 812 | 2892 | 6212 | 1218.72 |
+| sapphire inlay | 65 | 393 | 1138 | 1888 | 590.22 |
 
 ## Supply and sinks
 - Harvest: 1 unit below skill 100; 2 at skill 100.
@@ -32,7 +33,7 @@ Deterministic 200-seed simulations use 1.5s per surveyed node plus 0.72s per suc
 
 ## Stat caps
 - **bow:** 24,576 legal combinations; max damage 14/15, hit 10/10, armor 0/0, local Fortune 5/5; 0 violations.
-- **sword:** 135,168 legal combinations; max damage 18/18, hit 8/8, armor 0/0, local Fortune 0/5; 0 violations.
+- **sword:** 202,752 legal combinations; max damage 18/18, hit 8/8, armor 0/0, local Fortune 0/5; 0 violations.
 
 ## Five representative items
 - **common:** an oak bow — damage 8, hit 0, armor 0.
