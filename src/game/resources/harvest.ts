@@ -82,7 +82,7 @@ export type HarvestIdentification =
 type HarvestResourceId = Exclude<ResourceId, "common_cloth" | "fine_linen">;
 type HarvestFormFor<I extends HarvestResourceId> = I extends GemResourceId
   ? "gem"
-  : I extends "copper_ore" | "iron_ore" | "highland_ore"
+  : I extends "copper_ore" | "tin_ore" | "bronze" | "iron_ore" | "highland_ore"
     ? "ore"
     : "log";
 type HarvestYieldFor<I extends HarvestResourceId> = {
@@ -254,12 +254,12 @@ function yieldFor(identity: ResourceNodeIdentity, effectiveSkill: number): Harve
   const quality = qualityFromSkill(identity, effectiveSkill);
   const quantity = effectiveSkill >= 100 ? 2 : 1;
   if (definition.kind === "timber") {
-    const resourceId = identity.resourceId as Exclude<HarvestResourceId, GemResourceId | "copper_ore" | "iron_ore" | "highland_ore">;
+    const resourceId = identity.resourceId as Exclude<HarvestResourceId, GemResourceId | "copper_ore" | "tin_ore" | "bronze" | "iron_ore" | "highland_ore">;
     const key = makeResourceStackKey(resourceId, "log", quality as MaterialGrade);
     return Object.freeze({ key, resourceId, form: "log", quality, quantity }) as HarvestYield;
   }
   if (definition.kind === "ore") {
-    const resourceId = identity.resourceId as "copper_ore" | "iron_ore" | "highland_ore";
+    const resourceId = identity.resourceId as "copper_ore" | "tin_ore" | "bronze" | "iron_ore" | "highland_ore";
     const key = makeResourceStackKey(resourceId, "ore", quality as MaterialGrade);
     return Object.freeze({ key, resourceId, form: "ore", quality, quantity }) as HarvestYield;
   }

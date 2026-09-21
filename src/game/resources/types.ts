@@ -10,6 +10,8 @@ export type GradeResourceId =
   | "yew"
   | "ghostwood"
   | "copper_ore"
+  | "tin_ore"
+  | "bronze"
   | "iron_ore"
   | "highland_ore"
   | "common_cloth"
@@ -25,7 +27,7 @@ export type MaterialGrade = "rough" | "sound" | "choice" | "pristine";
 export type GemClarity = "cracked" | "flawed" | "cut" | "flawless" | "perfect";
 export type MaterialQuality = MaterialGrade | GemClarity;
 export type QualityForResource<I extends ResourceId> = I extends GemResourceId ? GemClarity : MaterialGrade;
-export type GradeMaterialTraitId = "accuracy" | "damage" | "handling";
+export type GradeMaterialTraitId = "accuracy" | "damage" | "handling" | "keen";
 export type ClarityMaterialTraitId = "power" | "fortune" | "precision";
 export type MaterialTraitId = GradeMaterialTraitId | ClarityMaterialTraitId;
 export type ProcessingStation = "bench" | "forge" | "fire";
@@ -35,15 +37,19 @@ export interface SkillRequirement {
   readonly minimum: number;
 }
 
+export interface ProcessingInput {
+  readonly resourceId: GradeResourceId;
+  readonly form: ResourceForm;
+  readonly quantity: number;
+}
+
 export interface ProcessingRoute {
   readonly id: string;
   readonly operation: "saw" | "smelt";
   readonly station: ProcessingStation;
   readonly skill: SkillRequirement;
-  readonly input: {
-    readonly form: ResourceForm;
-    readonly quantity: number;
-  };
+  /** Primary input first; extra inputs make the route an alloy (weakest-link grade). */
+  readonly inputs: readonly ProcessingInput[];
   readonly output: {
     readonly form: ResourceForm;
     readonly quantity: number;
@@ -74,7 +80,7 @@ interface ResourceDefinitionBase {
   readonly visual: ResourceVisual;
 }
 
-export type ResourceKindFor<I extends ResourceId> = I extends "copper_ore" | "iron_ore" | "highland_ore"
+export type ResourceKindFor<I extends ResourceId> = I extends "copper_ore" | "tin_ore" | "bronze" | "iron_ore" | "highland_ore"
   ? "ore"
   : I extends "common_cloth" | "fine_linen"
     ? "fiber"
@@ -160,6 +166,8 @@ const GRADE_RESOURCE_IDS = [
   "yew",
   "ghostwood",
   "copper_ore",
+  "tin_ore",
+  "bronze",
   "iron_ore",
   "highland_ore",
   "common_cloth",

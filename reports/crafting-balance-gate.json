@@ -68,15 +68,39 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 26,
-        "p90": 46,
-        "p99": 59,
-        "max": 64
+        "p50": 28,
+        "p90": 47,
+        "p99": 68,
+        "max": 76
       },
       "modeledSeconds": {
-        "p50": 42.6,
-        "p90": 72.6,
-        "p99": 92.1
+        "p50": 45.6,
+        "p90": 74.1,
+        "p99": 105.6
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
+      "label": "tin for bronze",
+      "resourceId": "tin_ore",
+      "required": 5,
+      "skill": 35,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 249,
+        "p90": 412,
+        "p99": 555,
+        "max": 598
+      },
+      "modeledSeconds": {
+        "p50": 377.1,
+        "p90": 621.6,
+        "p99": 836.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -92,15 +116,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 442,
-        "p90": 845,
-        "p99": 1224,
-        "max": 1284
+        "p50": 589,
+        "p90": 1017,
+        "p99": 1567,
+        "max": 1740
       },
       "modeledSeconds": {
-        "p50": 666.6,
-        "p90": 1271.1,
-        "p99": 1839.6
+        "p50": 887.1,
+        "p90": 1529.1,
+        "p99": 2354.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -116,15 +140,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 812,
-        "p90": 2892,
-        "p99": 6212,
+        "p50": 837,
+        "p90": 2904,
+        "p99": 5850,
         "max": 6853
       },
       "modeledSeconds": {
-        "p50": 1218.72,
-        "p90": 4338.72,
-        "p99": 9318.72
+        "p50": 1256.22,
+        "p90": 4356.72,
+        "p99": 8775.72
       },
       "blockedMatches": {
         "p50": 0,
@@ -140,15 +164,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 393,
-        "p90": 1138,
-        "p99": 1888,
-        "max": 2938
+        "p50": 506,
+        "p90": 1583,
+        "p99": 4127,
+        "max": 4498
       },
       "modeledSeconds": {
-        "p50": 590.22,
-        "p90": 1707.72,
-        "p99": 2832.72
+        "p50": 759.72,
+        "p90": 2375.22,
+        "p99": 6191.22
       },
       "blockedMatches": {
         "p50": 0,
@@ -317,7 +341,7 @@
     }
   },
   "statEnumeration": {
-    "legalCombinationCount": 227328,
+    "legalCombinationCount": 362496,
     "forms": {
       "bow": {
         "combinations": 24576,
@@ -342,9 +366,9 @@
         "capViolations": 0
       },
       "sword": {
-        "combinations": 202752,
+        "combinations": 337920,
         "roleOptionCounts": [
-          12,
+          20,
           64,
           8
         ],

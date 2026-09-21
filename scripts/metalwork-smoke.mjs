@@ -37,7 +37,8 @@ try {
       self.z = forge.ty;
       world.player.skills.smithing = 100;
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("copper_ore", "ore", "choice"), 2);
-      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("copper_ore", "ingot", "choice"), 5);
+      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("copper_ore", "ingot", "choice"), 7);
+      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("tin_ore", "ingot", "choice"), 1);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("oak", "board", "sound"), 1);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("fine_linen", "cloth", "sound"), 1);
       Math.random = () => 0.5;
@@ -61,6 +62,11 @@ try {
     await swordWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }).check();
     await swordWork.getByRole("button", { name: "Craft selected sword" }).click();
 
+    // Alloy: the copper-ingot row offers bronze and shows its tin requirement.
+    const bronzeRow = refining.locator("li", { hasText: "(+ 1 tin ore)" });
+    await bronzeRow.getByText(/Bronze ×3 · choice → ingot/).waitFor({ state: "visible", timeout: 15000 });
+    await bronzeRow.getByRole("button", { name: "Smelt" }).click();
+
     const state = await page.evaluate(async () => {
       const live = await import("/src/game/live.ts");
       const save = await import("/src/game/save.ts");
@@ -72,6 +78,8 @@ try {
       return {
         ingots: inventory.resourceCount(world.player.resources, "copper_ore:ingot:choice"),
         oreLeft: inventory.resourceCount(world.player.resources, "copper_ore:ore:choice"),
+        bronze: inventory.resourceCount(world.player.resources, "bronze:ingot:choice"),
+        tinLeft: inventory.resourceCount(world.player.resources, "tin_ore:ingot:choice"),
         itemName: item?.base,
         edge: item?.components?.[0]?.resourceId,
         hitBonus: item?.resolvedStats?.hitBonus,
@@ -83,8 +91,10 @@ try {
     await page.screenshot({ path: screenshot, fullPage: false });
     const passed = response?.ok()
       && state.saved
-      && state.ingots === 1 // 5 + 1 smelted − 5 consumed by the sword edge
+      && state.ingots === 1 // 7 + 1 smelted − 5 sword edge − 2 alloyed
       && state.oreLeft === 1
+      && state.bronze === 3 // 2 copper + 1 tin → 3 bronze ingots
+      && state.tinLeft === 0
       && state.itemName === "sword"
       && state.edge === "copper_ore"
       && state.hitBonus === 1.875 // 0.75 choice copper edge (primary) + 0.125 sound linen handling (secondary) + 1 fine workmanship

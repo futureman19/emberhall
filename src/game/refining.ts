@@ -1,20 +1,27 @@
-import { addResource, debitResources, makeResourceStackKey, parseResourceInventory, parseResourceStackKey } from "./inventory/resources.ts";
+import { addResource, debitResources, makeResourceStackKey, parseResourceInventory, parseResourceStackKey, resourceCount } from "./inventory/resources.ts";
 import { RESOURCE_CATALOG } from "./resources/catalog.ts";
 import type { GradeResourceId, MaterialGrade, ProcessingRoute, ProcessingStation, ResourceDefinition, ResourceForm } from "./resources/types.ts";
 import type { PlayerState, ResourceStackKey } from "./types.ts";
 
 export type RefiningPlayer = Pick<PlayerState, "resources">;
 
-/** Single discovery path for the refine command and the work gump. Today a
- * route begins with the owner's own material; alloy routes widen this scan. */
+const GRADE_ORDER = ["rough", "sound", "choice", "pristine"] as const satisfies readonly MaterialGrade[];
+
+/** Single discovery path for the refine command and the work gump. A route is
+ * found by its PRIMARY input (inputs[0]) — alloy routes live on their output
+ * resource but surface under the metal the player selects. */
 export function findProcessingRoute(
   resourceId: GradeResourceId,
   form: ResourceForm,
 ): Readonly<{ owner: ResourceDefinition; route: ProcessingRoute }> | null {
-  const definition = RESOURCE_CATALOG[resourceId];
-  if (!definition || definition.qualityType !== "grade") return null;
-  const route = definition.processing.find((candidate) => candidate.input.form === form);
-  return route ? Object.freeze({ owner: definition, route }) : null;
+  for (const owner of Object.values(RESOURCE_CATALOG)) {
+    if (owner.qualityType !== "grade") continue;
+    const route = owner.processing.find(
+      (candidate) => candidate.inputs[0]?.resourceId === resourceId && candidate.inputs[0].form === form,
+    );
+    if (route) return Object.freeze({ owner, route });
+  }
+  return null;
 }
 
 export type RefiningResult =
@@ -44,10 +51,43 @@ export function refineResource(
   }
 
   const resources = parseResourceInventory(player.resources);
-  if (!debitResources(resources, [{ key, amount: route.input.quantity }])) {
+
+  // Plan the full melt before anything moves: the selected primary stack plus
+  // every secondary input, lowest-grade stock first, weakest-link output grade.
+  const primary = route.inputs[0]!;
+  const debits: { key: ResourceStackKey; amount: number }[] = [];
+  if (resourceCount(resources, key) < primary.quantity) {
     return Object.freeze({ status: "blocked", reason: "materials", message: "Not enough selected material to refine." });
   }
-  const output = makeResourceStackKey(resourceId, route.output.form as never, grade as never);
+  debits.push({ key, amount: primary.quantity });
+  let weakest = GRADE_ORDER.indexOf(grade);
+
+  for (const input of route.inputs.slice(1)) {
+    let needed = input.quantity;
+    for (const inputGrade of GRADE_ORDER) {
+      if (needed === 0) break;
+      const stackKey = makeResourceStackKey(input.resourceId, input.form as never, inputGrade as never);
+      const available = resourceCount(resources, stackKey);
+      if (available === 0) continue;
+      const take = Math.min(needed, available);
+      debits.push({ key: stackKey, amount: take });
+      needed -= take;
+      weakest = Math.min(weakest, GRADE_ORDER.indexOf(inputGrade));
+    }
+    if (needed > 0) {
+      const label = RESOURCE_CATALOG[input.resourceId].label.toLowerCase();
+      return Object.freeze({
+        status: "blocked",
+        reason: "materials",
+        message: `The melt needs ${input.quantity} ${label} ${input.form}.`,
+      });
+    }
+  }
+
+  if (!debitResources(resources, debits)) {
+    return Object.freeze({ status: "blocked", reason: "materials", message: "Not enough selected material to refine." });
+  }
+  const output = makeResourceStackKey(found.owner.id as GradeResourceId, route.output.form as never, GRADE_ORDER[weakest] as never);
   addResource(resources, output, route.output.quantity);
   player.resources = resources;
   return Object.freeze({ status: "refined", input: key, output, quantity: route.output.quantity });

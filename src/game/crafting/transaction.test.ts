@@ -299,3 +299,25 @@ test("exact swordcraft - copper becomes a unique handling blade with no damage t
   assert.deepEqual(sword.affixes, []);
   assert.deepEqual(sword.components?.[0], { role: "edge", resourceId: "copper_ore", form: "ingot", grade: "choice", amount: 5 });
 });
+
+test("exact swordcraft - bronze carries its keen trait through the alloy chain", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  const BRONZE_INGOT = makeResourceStackKey("bronze", "ingot", "choice");
+  addResource(world.player.resources, BRONZE_INGOT, 5);
+  addResource(world.player.resources, OAK_BOARD, 1);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+
+  const note = withRoll(0.5, () => commandCraftExact(world, "sword", swordSelections(BRONZE_INGOT)));
+
+  assert.match(note ?? "", /bronze sword/i);
+  assert.equal(world.player.pack.sword, 0, "specialty metal always crafts unique");
+  assert.equal(world.player.rares.length, 1);
+  const blade = world.player.rares[0]!;
+  assert.equal(blade.workmanship, "fine", "mastery on choice stock floors to fine");
+  assert.equal(blade.resolvedStats?.damage, 10.75, "choice keen edge adds 0.75 damage");
+  assert.equal(blade.resolvedStats?.hitBonus, 1, "common cloth adds no handling; fine workmanship only");
+  assert.deepEqual(blade.affixes, []);
+  assert.deepEqual(blade.components?.[0], { role: "edge", resourceId: "bronze", form: "ingot", grade: "choice", amount: 5 });
+});

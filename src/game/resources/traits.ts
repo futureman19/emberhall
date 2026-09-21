@@ -72,6 +72,12 @@ const TRAITS = {
     scope: "canonical",
     values: { rough: 0.25, sound: 0.5, choice: 0.75, pristine: 1 },
   },
+  keen: {
+    qualityType: "grade",
+    stat: "damage",
+    scope: "canonical",
+    values: { rough: 0.25, sound: 0.5, choice: 0.75, pristine: 1 },
+  },
   power: {
     qualityType: "clarity",
     stat: "damage",

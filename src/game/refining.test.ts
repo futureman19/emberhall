@@ -15,9 +15,69 @@ test("refining - route discovery is shared between the command and the work gump
   const copper = findProcessingRoute("copper_ore", "ore");
   assert.equal(copper?.route.id, "smelt_copper_ore");
   assert.equal(copper?.owner.id, "copper_ore");
-  assert.equal(findProcessingRoute("copper_ore", "ingot"), null, "no route begins with an ingot yet");
+  const bronze = findProcessingRoute("copper_ore", "ingot");
+  assert.equal(bronze?.route.id, "smelt_bronze", "copper ingots primary the bronze alloy route");
+  assert.equal(bronze?.owner.id, "bronze");
   assert.equal(findProcessingRoute("oak", "board"), null);
   assert.equal(findProcessingRoute("oak", "log")?.route.id, "saw_oak");
+});
+
+test("refining - bronze alloy debits both metals at the weakest-link grade", () => {
+  const world = createWorld();
+  const COPPER_CHOICE_INGOT = makeResourceStackKey("copper_ore", "ingot", "choice");
+  const TIN_SOUND_INGOT = makeResourceStackKey("tin_ore", "ingot", "sound");
+  const BRONZE_SOUND_INGOT = makeResourceStackKey("bronze", "ingot", "sound");
+  addResource(world.player.resources, COPPER_CHOICE_INGOT, 3);
+  addResource(world.player.resources, TIN_SOUND_INGOT, 2);
+  const result = refineResource(world.player, COPPER_CHOICE_INGOT, "forge", 40);
+  assert.deepEqual(result, {
+    status: "refined",
+    input: COPPER_CHOICE_INGOT,
+    output: BRONZE_SOUND_INGOT,
+    quantity: 3,
+  });
+  assert.equal(resourceCount(world.player.resources, COPPER_CHOICE_INGOT), 1, "2 copper consumed");
+  assert.equal(resourceCount(world.player.resources, TIN_SOUND_INGOT), 1, "1 tin consumed");
+  assert.equal(resourceCount(world.player.resources, BRONZE_SOUND_INGOT), 3, "weakest link sets the melt grade");
+});
+
+test("refining - bronze alloy names the missing secondary metal", () => {
+  const world = createWorld();
+  const COPPER_ROUGH_INGOT = makeResourceStackKey("copper_ore", "ingot", "rough");
+  addResource(world.player.resources, COPPER_ROUGH_INGOT, 2);
+  const result = refineResource(world.player, COPPER_ROUGH_INGOT, "forge", 40);
+  assert.equal(result.status, "blocked");
+  if (result.status === "blocked") {
+    assert.equal(result.reason, "materials");
+    assert.match(result.message, /tin/i);
+  }
+  assert.equal(resourceCount(world.player.resources, COPPER_ROUGH_INGOT), 2, "nothing consumed on a failed melt");
+});
+
+test("refining - bronze alloy respects its smithing gate", () => {
+  const world = createWorld();
+  const COPPER_ROUGH_INGOT = makeResourceStackKey("copper_ore", "ingot", "rough");
+  const TIN_ROUGH_INGOT = makeResourceStackKey("tin_ore", "ingot", "rough");
+  addResource(world.player.resources, COPPER_ROUGH_INGOT, 2);
+  addResource(world.player.resources, TIN_ROUGH_INGOT, 1);
+  const result = refineResource(world.player, COPPER_ROUGH_INGOT, "forge", 34);
+  assert.equal(result.status, "blocked");
+  if (result.status === "blocked") assert.equal(result.reason, "skill");
+});
+
+test("refining - bronze alloy melts the lowest-grade secondary stock first", () => {
+  const world = createWorld();
+  const COPPER_CHOICE_INGOT = makeResourceStackKey("copper_ore", "ingot", "choice");
+  const TIN_SOUND_INGOT = makeResourceStackKey("tin_ore", "ingot", "sound");
+  const TIN_PRISTINE_INGOT = makeResourceStackKey("tin_ore", "ingot", "pristine");
+  addResource(world.player.resources, COPPER_CHOICE_INGOT, 2);
+  addResource(world.player.resources, TIN_SOUND_INGOT, 1);
+  addResource(world.player.resources, TIN_PRISTINE_INGOT, 1);
+  const result = refineResource(world.player, COPPER_CHOICE_INGOT, "forge", 40);
+  assert.equal(result.status, "refined");
+  assert.equal(resourceCount(world.player.resources, TIN_SOUND_INGOT), 0, "weakest tin feeds the melt first");
+  assert.equal(resourceCount(world.player.resources, TIN_PRISTINE_INGOT), 1, "pristine tin is saved for later");
+  if (result.status === "refined") assert.equal(result.output, makeResourceStackKey("bronze", "ingot", "sound"));
 });
 
 test("refining - copper family and grade survive the forge at its lower gate", () => {

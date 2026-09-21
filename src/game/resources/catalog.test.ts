@@ -23,6 +23,8 @@ const EXPECTED_IDS = [
   "yew",
   "ghostwood",
   "copper_ore",
+  "tin_ore",
+  "bronze",
   "iron_ore",
   "highland_ore",
   "common_cloth",
@@ -33,7 +35,7 @@ const EXPECTED_IDS = [
 ] as const satisfies readonly ResourceId[];
 
 const GEM_IDS = ["ruby", "sapphire", "emerald"] as const satisfies readonly GemResourceId[];
-const TRAIT_IDS = ["accuracy", "damage", "handling", "power", "fortune", "precision"] as const satisfies readonly MaterialTraitId[];
+const TRAIT_IDS = ["accuracy", "damage", "handling", "keen", "power", "fortune", "precision"] as const satisfies readonly MaterialTraitId[];
 
 type DeepMutable<T> = T extends readonly (infer Item)[]
   ? DeepMutable<Item>[]
@@ -194,7 +196,7 @@ test("catalog builder rejects illegal forms and malformed processing routes", ()
   assert.throws(() => buildUnsafe(formNotDeclared), /saw_oak output form board is not declared by oak/);
 
   const invalidAmount = mutableDefinitions();
-  definition(invalidAmount, "oak").processing[0].input.quantity = 0;
+  definition(invalidAmount, "oak").processing[0].inputs[0].quantity = 0;
   assert.throws(() => buildUnsafe(invalidAmount), /saw_oak input quantity must be a positive integer/);
 
   const fractionalAmount = mutableDefinitions();
@@ -220,13 +222,13 @@ test("catalog builder clones and deeply freezes all nested data", () => {
   sourceOak.label = "Changed";
   sourceOak.forms[0] = "board";
   sourceOak.spawn!.regions.vale = 99;
-  sourceOak.processing[0].input.quantity = 99;
+  sourceOak.processing[0].inputs[0].quantity = 99;
   sourceOak.visual.primary = "#000000";
 
   assert.equal(built.oak.label, "Oak");
   assert.deepEqual(built.oak.forms, ["log", "board"]);
   assert.equal(built.oak.spawn?.regions.vale, 1);
-  assert.equal(built.oak.processing[0].input.quantity, 1);
+  assert.equal(built.oak.processing[0].inputs[0].quantity, 1);
   assert.equal(built.oak.visual.primary, "#756044");
   assert.throws(() => {
     (built.oak.visual as { primary: string }).primary = "#ffffff";
@@ -259,6 +261,8 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       yew: ["accuracy"],
       ghostwood: [],
       copper_ore: ["handling"],
+      tin_ore: [],
+      bronze: ["keen"],
       iron_ore: [],
       highland_ore: ["damage"],
       common_cloth: [],
@@ -292,10 +296,12 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
     }
     for (const route of resource.processing) {
       routeIds.add(route.id);
-      assert.equal(familyByForm[route.input.form], familyByForm[route.output.form]);
+      for (const input of route.inputs) {
+        assert.equal(familyByForm[input.form], familyByForm[route.output.form], `${route.id} input ${input.resourceId}`);
+      }
     }
   }
-  assert.deepEqual([...routeIds], ["saw_oak", "saw_pine", "saw_willow", "saw_birch", "saw_ash", "saw_redwood", "saw_yew", "saw_ghostwood", "smelt_copper_ore", "smelt_iron_ore", "smelt_highland_ore"]);
+  assert.deepEqual([...routeIds], ["saw_oak", "saw_pine", "saw_willow", "saw_birch", "saw_ash", "saw_redwood", "saw_yew", "saw_ghostwood", "smelt_copper_ore", "smelt_tin_ore", "smelt_bronze", "smelt_iron_ore", "smelt_highland_ore"]);
   assert.deepEqual(
     Object.fromEntries(Object.values(RESOURCE_CATALOG).map(({ id, forms }) => [id, forms])),
     {
@@ -308,6 +314,8 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       yew: ["log", "board"],
       ghostwood: ["log", "board"],
       copper_ore: ["ore", "ingot"],
+      tin_ore: ["ore", "ingot"],
+      bronze: ["ingot"],
       iron_ore: ["ore", "ingot"],
       highland_ore: ["ore", "ingot"],
       common_cloth: ["cloth"],

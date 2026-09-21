@@ -23,6 +23,8 @@ export const RESOURCE_IDS = Object.freeze([
   "yew",
   "ghostwood",
   "copper_ore",
+  "tin_ore",
+  "bronze",
   "iron_ore",
   "highland_ore",
   "common_cloth",
@@ -60,7 +62,7 @@ const RESOURCE_DEFINITIONS = [
         operation: "saw",
         station: "bench",
         skill: { id: "carpentry", minimum: 0 },
-        input: { form: "log", quantity: 1 },
+        inputs: [{ resourceId: "oak", form: "log", quantity: 1 }],
         output: { form: "board", quantity: 2 },
       },
     ],
@@ -88,7 +90,7 @@ const RESOURCE_DEFINITIONS = [
         operation: "saw",
         station: "bench",
         skill: { id: "carpentry", minimum: 0 },
-        input: { form: "log", quantity: 1 },
+        inputs: [{ resourceId: "pine", form: "log", quantity: 1 }],
         output: { form: "board", quantity: 2 },
       },
     ],
@@ -116,7 +118,7 @@ const RESOURCE_DEFINITIONS = [
         operation: "saw",
         station: "bench",
         skill: { id: "carpentry", minimum: 5 },
-        input: { form: "log", quantity: 1 },
+        inputs: [{ resourceId: "willow", form: "log", quantity: 1 }],
         output: { form: "board", quantity: 2 },
       },
     ],
@@ -144,7 +146,7 @@ const RESOURCE_DEFINITIONS = [
         operation: "saw",
         station: "bench",
         skill: { id: "carpentry", minimum: 10 },
-        input: { form: "log", quantity: 1 },
+        inputs: [{ resourceId: "birch", form: "log", quantity: 1 }],
         output: { form: "board", quantity: 2 },
       },
     ],
@@ -172,7 +174,7 @@ const RESOURCE_DEFINITIONS = [
         operation: "saw",
         station: "bench",
         skill: { id: "carpentry", minimum: 15 },
-        input: { form: "log", quantity: 1 },
+        inputs: [{ resourceId: "ash", form: "log", quantity: 1 }],
         output: { form: "board", quantity: 2 },
       },
     ],
@@ -200,7 +202,7 @@ const RESOURCE_DEFINITIONS = [
         operation: "saw",
         station: "bench",
         skill: { id: "carpentry", minimum: 25 },
-        input: { form: "log", quantity: 1 },
+        inputs: [{ resourceId: "redwood", form: "log", quantity: 1 }],
         output: { form: "board", quantity: 2 },
       },
     ],
@@ -228,7 +230,7 @@ const RESOURCE_DEFINITIONS = [
         operation: "saw",
         station: "bench",
         skill: { id: "carpentry", minimum: 40 },
-        input: { form: "log", quantity: 1 },
+        inputs: [{ resourceId: "yew", form: "log", quantity: 1 }],
         output: { form: "board", quantity: 2 },
       },
     ],
@@ -256,7 +258,7 @@ const RESOURCE_DEFINITIONS = [
         operation: "saw",
         station: "bench",
         skill: { id: "carpentry", minimum: 50 },
-        input: { form: "log", quantity: 1 },
+        inputs: [{ resourceId: "ghostwood", form: "log", quantity: 1 }],
         output: { form: "board", quantity: 2 },
       },
     ],
@@ -283,11 +285,60 @@ const RESOURCE_DEFINITIONS = [
         operation: "smelt",
         station: "forge",
         skill: { id: "smithing", minimum: 15 },
-        input: { form: "ore", quantity: 1 },
+        inputs: [{ resourceId: "copper_ore", form: "ore", quantity: 1 }],
         output: { form: "ingot", quantity: 1 },
       },
     ],
     visual: { family: "stone", primary: "#7a5a44", secondary: "#b08054" },
+  },
+  {
+    id: "tin_ore",
+    label: "Tin Ore",
+    kind: "ore",
+    forms: ["ore", "ingot"],
+    qualityType: "grade",
+    traitIds: [],
+    spawn: {
+      nodeKind: "rock",
+      weight: 40,
+      regions: { fen: 1, tundra: 0.5 },
+      identifySkill: { id: "mining", minimum: 25 },
+      extractSkill: { id: "mining", minimum: 35 },
+      toolTier: 1,
+    },
+    processing: [
+      {
+        id: "smelt_tin_ore",
+        operation: "smelt",
+        station: "forge",
+        skill: { id: "smithing", minimum: 25 },
+        inputs: [{ resourceId: "tin_ore", form: "ore", quantity: 1 }],
+        output: { form: "ingot", quantity: 1 },
+      },
+    ],
+    visual: { family: "stone", primary: "#6f7076", secondary: "#a8adb4" },
+  },
+  {
+    id: "bronze",
+    label: "Bronze",
+    kind: "ore",
+    forms: ["ingot"],
+    qualityType: "grade",
+    traitIds: ["keen"],
+    processing: [
+      {
+        id: "smelt_bronze",
+        operation: "smelt",
+        station: "forge",
+        skill: { id: "smithing", minimum: 35 },
+        inputs: [
+          { resourceId: "copper_ore", form: "ingot", quantity: 2 },
+          { resourceId: "tin_ore", form: "ingot", quantity: 1 },
+        ],
+        output: { form: "ingot", quantity: 3 },
+      },
+    ],
+    visual: { family: "stone", primary: "#8a6a3f", secondary: "#c49a5c" },
   },
   {
     id: "iron_ore",
@@ -310,7 +361,7 @@ const RESOURCE_DEFINITIONS = [
         operation: "smelt",
         station: "forge",
         skill: { id: "smithing", minimum: 0 },
-        input: { form: "ore", quantity: 1 },
+        inputs: [{ resourceId: "iron_ore", form: "ore", quantity: 1 }],
         output: { form: "ingot", quantity: 1 },
       },
     ],
@@ -337,7 +388,7 @@ const RESOURCE_DEFINITIONS = [
         operation: "smelt",
         station: "forge",
         skill: { id: "smithing", minimum: 35 },
-        input: { form: "ore", quantity: 1 },
+        inputs: [{ resourceId: "highland_ore", form: "ore", quantity: 1 }],
         output: { form: "ingot", quantity: 1 },
       },
     ],
@@ -429,6 +480,8 @@ const RESOURCE_KIND_BY_ID = {
   yew: "timber",
   ghostwood: "timber",
   copper_ore: "ore",
+  tin_ore: "ore",
+  bronze: "ore",
   iron_ore: "ore",
   highland_ore: "ore",
   common_cloth: "fiber",
@@ -581,7 +634,12 @@ function validateQuantity(routeId: string, side: "input" | "output", value: unkn
   }
 }
 
-function validateRoute(definition: ResourceDefinition, route: ProcessingRoute, routeIds: Set<string>): void {
+function validateRoute(
+  definition: ResourceDefinition,
+  route: ProcessingRoute,
+  routeIds: Set<string>,
+  definitionsById: Readonly<Partial<Record<string, ResourceDefinition>>>,
+): void {
   if (typeof route.id !== "string" || route.id.length === 0) throw new Error(`${definition.id} has an invalid route id`);
   if (routeIds.has(route.id)) throw new Error(`duplicate route id: ${route.id}`);
   routeIds.add(route.id);
@@ -589,25 +647,39 @@ function validateRoute(definition: ResourceDefinition, route: ProcessingRoute, r
   const requiredStation = REQUIRED_STATION[route.operation];
   if (route.station !== requiredStation) throw new Error(`operation ${route.operation} requires station ${requiredStation}`);
   validateSkillRequirement(route.skill);
-  if (!isRecord(route.input) || typeof route.input.form !== "string") throw new Error(`${route.id} has an invalid input`);
-  if (!isRecord(route.output) || typeof route.output.form !== "string") throw new Error(`${route.id} has an invalid output`);
-  if (!(definition.forms as readonly string[]).includes(route.input.form)) {
-    throw new Error(`${route.id} input form ${route.input.form} is not declared by ${definition.id}`);
+  if (!Array.isArray(route.inputs) || route.inputs.length === 0) throw new Error(`${route.id} has an invalid inputs list`);
+  for (const input of route.inputs) {
+    if (!isRecord(input) || typeof input.form !== "string" || typeof input.resourceId !== "string") {
+      throw new Error(`${route.id} has an invalid input`);
+    }
+    const inputDefinition = definitionsById[input.resourceId];
+    if (!inputDefinition) throw new Error(`${route.id} input references unknown resource ${input.resourceId}`);
+    if (!(inputDefinition.forms as readonly string[]).includes(input.form)) {
+      throw new Error(`${route.id} input form ${input.form} is not declared by ${input.resourceId}`);
+    }
+    validateQuantity(route.id, "input", input.quantity);
   }
+  if (!isRecord(route.output) || typeof route.output.form !== "string") throw new Error(`${route.id} has an invalid output`);
   if (!(definition.forms as readonly string[]).includes(route.output.form)) {
     throw new Error(`${route.id} output form ${route.output.form} is not declared by ${definition.id}`);
   }
-  validateQuantity(route.id, "input", route.input.quantity);
   validateQuantity(route.id, "output", route.output.quantity);
-  if (route.operation === "saw" && (route.input.form !== "log" || route.output.form !== "board")) {
+  if (route.operation === "saw" && (route.inputs.length !== 1 || route.inputs[0]!.form !== "log" || route.output.form !== "board")) {
     throw new Error(`${route.id} must convert log to board`);
   }
-  if (route.operation === "smelt" && (route.input.form !== "ore" || route.output.form !== "ingot")) {
-    throw new Error(`${route.id} must convert ore to ingot`);
+  const smeltInputOk = route.inputs.length === 1
+    ? route.inputs[0]!.form === "ore"
+    : route.inputs.every((input) => input.form === "ingot");
+  if (route.operation === "smelt" && (!smeltInputOk || route.output.form !== "ingot")) {
+    throw new Error(`${route.id} must convert ore to ingot, or alloy ingots to ingot`);
   }
 }
 
-function validateDefinition(definition: ResourceDefinition, routeIds: Set<string>): void {
+function validateDefinition(
+  definition: ResourceDefinition,
+  routeIds: Set<string>,
+  definitionsById: Readonly<Partial<Record<string, ResourceDefinition>>>,
+): void {
   const expectedKind = RESOURCE_KIND_BY_ID[definition.id];
   if (definition.kind !== expectedKind) throw new Error(`resource ${definition.id} must use kind ${expectedKind}`);
   const expectedQuality = definition.kind === "gem" ? "clarity" : "grade";
@@ -642,7 +714,7 @@ function validateDefinition(definition: ResourceDefinition, routeIds: Set<string
   if (!Array.isArray(definition.processing)) throw new Error(`resource ${definition.id} must declare processing routes`);
   for (const route of definition.processing) {
     if (!isRecord(route)) throw new Error(`${definition.id} has an invalid processing route`);
-    validateRoute(definition, route as unknown as ProcessingRoute, routeIds);
+    validateRoute(definition, route as unknown as ProcessingRoute, routeIds, definitionsById);
   }
   if (!isRecord(definition.visual)) throw new Error(`${definition.id} must define a visual`);
   const legalFamilies = VISUAL_FAMILIES_BY_KIND[definition.kind] as readonly string[];
@@ -664,13 +736,19 @@ export function buildResourceCatalog(
   if (!Array.isArray(definitions)) throw new Error("resource definitions must be an array");
   const catalog: Partial<Record<ResourceId, ResourceDefinition>> = {};
   const routeIds = new Set<string>();
+  const definitionsById: Partial<Record<string, ResourceDefinition>> = {};
+  for (const candidate of definitions) {
+    if (isRecord(candidate) && typeof candidate.id === "string") {
+      definitionsById[candidate.id] = candidate as unknown as ResourceDefinition;
+    }
+  }
   for (const candidate of definitions as readonly unknown[]) {
     if (!isRecord(candidate)) throw new Error("resource definition must be an object");
     if (!isResourceId(candidate.id)) throw new Error(`unknown resource id: ${String(candidate.id)}`);
     const id = candidate.id;
     if (catalog[id]) throw new Error(`duplicate resource id: ${id}`);
     const definition = candidate as unknown as ResourceDefinition;
-    validateDefinition(definition, routeIds);
+    validateDefinition(definition, routeIds, definitionsById);
     catalog[id] = deepFreeze(cloneDefinition(definition)) as ResourceDefinition;
   }
   for (const id of RESOURCE_IDS) {
