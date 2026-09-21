@@ -403,6 +403,35 @@ test("exact leathercraft - the hides want a blade in hand", () => {
   assert.equal(world.player.rares.length, 0, "no tunic without the blade");
 });
 
+test("exact leather set - hood, gloves, and hose carry supple into their slots", () => {
+  const world = createWorld();
+  world.player.skills.tailoring = 100;
+  world.player.wear.main = "knife";
+  const CHOICE_HIDES = makeResourceStackKey("hide", "hide", "choice");
+  addResource(world.player.resources, CHOICE_HIDES, 7);
+  addResource(world.player.resources, SOUND_CLOTH, 4);
+  const cases = [
+    { recipe: "hood", base: "hood", slot: "head", armor: 2.5, hides: 2 },
+    { recipe: "gloves", base: "gloves", slot: "hands", armor: 2.5, hides: 2 },
+    { recipe: "hose", base: "hose", slot: "legs", armor: 3.5, hides: 3 },
+  ] as const;
+  for (const { recipe, base, slot, armor, hides } of cases) {
+    const before = world.player.rares.length;
+    const note = withRoll(0.5, () => commandCraftExact(world, recipe, [
+      { role: "body", key: CHOICE_HIDES },
+      { role: "binding", key: SOUND_CLOTH },
+    ]));
+    assert.match(note ?? "", new RegExp(base, "i"));
+    assert.equal(world.player.rares.length, before + 1, recipe);
+    const piece = world.player.rares[world.player.rares.length - 1]!;
+    assert.equal(piece.base, base);
+    assert.equal(piece.resolvedStats?.armor, armor, `${recipe}: base + 1.5 choice supple`);
+    assert.equal(piece.components?.[0]?.amount, hides);
+    commandEquipRare(world, piece.uid);
+    assert.equal(world.player.wearRare[slot], piece.uid, `${recipe} wears into ${slot}`);
+  }
+});
+
 test("exact mailcraft - four plates and two lining, the chest piece outclasses the tag mail", () => {
   const world = createWorld();
   standAtForge(world);

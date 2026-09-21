@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { BOOTS_FORM, BOW_FORM, GAUNTLETS_FORM, GREAVES_FORM, HELM_FORM, LEATHER_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM } from "./forms.ts";
+import { BOOTS_FORM, BOW_FORM, GAUNTLETS_FORM, GLOVES_FORM, GREAVES_FORM, HELM_FORM, HOOD_FORM, HOSE_FORM, LEATHER_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM } from "./forms.ts";
 import {
   EXACT_RECIPE_CATALOG,
   exactRecipeById,
@@ -41,6 +41,22 @@ test("exact recipes - shield form is the first armor craft", () => {
   assert.deepEqual(SHIELD_FORM.caps, { damage: 0, hitBonus: 0, armor: 5, skillBonusPerSkill: 5, slayerMultiplier: 1.5 });
   assert.deepEqual(SWORD_FORM.allowedGemFamilies, ["power", "precision", "mastery"]);
   assert.deepEqual(BOW_FORM.allowedGemFamilies, ["power", "fortune", "precision", "mastery"]);
+  for (const [form, roles, base, cap] of [
+    [HOOD_FORM, [["body", 2], ["binding", 1]], 1, 4],
+    [GLOVES_FORM, [["body", 2], ["binding", 1]], 1, 4],
+    [HOSE_FORM, [["body", 3], ["binding", 2]], 2, 5],
+  ] as const) {
+    assert.equal(form.itemClass, "armor");
+    assert.deepEqual(form.roles.map((r) => [r.role, r.amount]), roles, form.id);
+    assert.deepEqual(form.roles[0]!.accepts.kinds, ["hide"], `${form.id} body takes hides`);
+    assert.equal(form.baseStats.armor, base, form.id);
+    assert.equal(form.caps.armor, cap, form.id);
+    assert.deepEqual(form.allowedGemFamilies, ["fortune", "protection"], form.id);
+    assert.equal(form.maxInlays, 1, form.id);
+  }
+  assert.equal(HOOD_FORM.baseItem, "hood");
+  assert.equal(GLOVES_FORM.baseItem, "gloves");
+  assert.equal(HOSE_FORM.baseItem, "hose");
   assert.deepEqual(LEATHER_FORM.allowedGemFamilies, ["fortune", "protection"]);
   assert.equal(LEATHER_FORM.baseItem, "leather");
   assert.equal(LEATHER_FORM.itemClass, "armor");

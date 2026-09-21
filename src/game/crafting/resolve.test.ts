@@ -5,11 +5,14 @@ import {
   BOW_FORM,
   GAUNTLETS_FORM,
   GEM_CLARITIES,
+  GLOVES_FORM,
   GREAVES_FORM,
   HELM_FORM,
+  HOOD_FORM,
+  HOSE_FORM,
   ITEM_FORM_CATALOG,
-  LEATHER_FORM,
   ITEM_FORM_IDENTITY,
+  LEATHER_FORM,
   MAIL_FORM,
   MATERIAL_GRADES,
   SHIELD_FORM,
@@ -380,7 +383,7 @@ test("null-prototype forms are accepted only when all required fields are own pr
     deepMutable(BOW_FORM),
   ) as unknown as ItemFormDefinition;
 
-  const catalog = buildItemFormCatalog([nullPrototypeForm, SWORD_FORM, SHIELD_FORM, HELM_FORM, MAIL_FORM, BOOTS_FORM, GAUNTLETS_FORM, GREAVES_FORM, LEATHER_FORM]);
+  const catalog = buildItemFormCatalog([nullPrototypeForm, SWORD_FORM, SHIELD_FORM, HELM_FORM, MAIL_FORM, BOOTS_FORM, GAUNTLETS_FORM, GREAVES_FORM, LEATHER_FORM, HOOD_FORM, GLOVES_FORM, HOSE_FORM]);
   assert.deepEqual(catalog.bow, BOW_FORM);
   assert.deepEqual(resolveItemStats(nullPrototypeForm, bowBuild()), resolveItemStats(BOW_FORM, bowBuild()));
 
@@ -608,6 +611,9 @@ test("form identity contract binds bow to bow base item and weapon class", () =>
     gauntlets: { baseItem: "gauntlets", itemClass: "armor" },
     greaves: { baseItem: "greaves", itemClass: "armor" },
     leather: { baseItem: "leather", itemClass: "armor" },
+    hood: { baseItem: "hood", itemClass: "armor" },
+    gloves: { baseItem: "gloves", itemClass: "armor" },
+    hose: { baseItem: "hose", itemClass: "armor" },
   });
   assert.throws(
     () => resolveItemStats({ ...deepMutable(BOW_FORM), baseItem: "sword" }, bowBuild()),

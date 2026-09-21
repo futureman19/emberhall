@@ -413,7 +413,7 @@
     }
   },
   "statEnumeration": {
-    "legalCombinationCount": 720192,
+    "legalCombinationCount": 723360,
     "forms": {
       "bow": {
         "combinations": 32256,
@@ -594,6 +594,72 @@
         "capViolations": 0
       },
       "leather": {
+        "combinations": 1056,
+        "roleOptionCounts": [
+          4,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "hood": {
+        "combinations": 1056,
+        "roleOptionCounts": [
+          4,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 4,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 4,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "gloves": {
+        "combinations": 1056,
+        "roleOptionCounts": [
+          4,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 4,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 4,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "hose": {
         "combinations": 1056,
         "roleOptionCounts": [
           4,

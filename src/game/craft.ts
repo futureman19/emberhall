@@ -138,8 +138,11 @@ export const RECIPES: Recipe[] = [
   { id: "cut_leather", station: null, skill: "tailoring", diff: 10, label: "Stitch a hide shirt", hint: "Two hides, a blade. Leather armor.", need: {}, needTags: [{ tag: "hide", n: 2 }], needsBlade: true, give: { leather: 1 }, sfx: "chop" },
   { id: "leather_sew", station: null, skill: "tailoring", diff: 12, label: "Stitch a fine tunic", hint: "Choose three hides and one cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "leather" },
   { id: "sew_hood", station: null, skill: "tailoring", diff: 4, label: "Hood", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { hood: 1 }, sfx: "chop" },
+  { id: "hood_sew", station: null, skill: "tailoring", diff: 13, label: "Stitch a hide hood", hint: "Choose two hides and one cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "hood" },
   { id: "sew_gloves", station: null, skill: "tailoring", diff: 6, label: "Gloves", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { gloves: 1 }, sfx: "chop" },
+  { id: "gloves_sew", station: null, skill: "tailoring", diff: 15, label: "Stitch hide gloves", hint: "Choose two hides and one cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "gloves" },
   { id: "sew_hose", station: null, skill: "tailoring", diff: 8, label: "Hose", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { hose: 1 }, sfx: "chop" },
+  { id: "hose_sew", station: null, skill: "tailoring", diff: 17, label: "Stitch hide hose", hint: "Choose three hides and two cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "hose" },
   { id: "sew_tunic", station: null, skill: "tailoring", diff: 12, label: "Tunic", hint: "Any three cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 3 }], needsBlade: true, give: { tunic: 1 }, sfx: "chop" },
   { id: "sew_cloak", station: null, skill: "tailoring", diff: 18, label: "Travel cloak", hint: "Any four cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 4 }], needsBlade: true, give: { cloak: 1 }, sfx: "chop" },
   // Camping — three wood buys a fire that burns three hours.

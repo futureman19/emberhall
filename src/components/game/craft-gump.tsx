@@ -5,7 +5,7 @@ import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "@/game/catalog";
 import { RECIPES, canMake, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
-import { BOOTS_FORM, BOW_FORM, GAUNTLETS_FORM, GREAVES_FORM, HELM_FORM, LEATHER_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
+import { BOOTS_FORM, BOW_FORM, GAUNTLETS_FORM, GLOVES_FORM, GREAVES_FORM, HELM_FORM, HOOD_FORM, HOSE_FORM, LEATHER_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
 import { listResourceInventory } from "@/game/inventory/resources";
 import { getWorld } from "@/game/live";
 import type { MaterialGrade } from "@/game/resources/types";
@@ -70,6 +70,12 @@ export function CraftGump() {
   const [greavesLining, setGreavesLining] = useState<ResourceStackKey | null>(null);
   const [leatherBody, setLeatherBody] = useState<ResourceStackKey | null>(null);
   const [leatherBinding, setLeatherBinding] = useState<ResourceStackKey | null>(null);
+  const [hoodBody, setHoodBody] = useState<ResourceStackKey | null>(null);
+  const [hoodBinding, setHoodBinding] = useState<ResourceStackKey | null>(null);
+  const [glovesBody, setGlovesBody] = useState<ResourceStackKey | null>(null);
+  const [glovesBinding, setGlovesBinding] = useState<ResourceStackKey | null>(null);
+  const [hoseBody, setHoseBody] = useState<ResourceStackKey | null>(null);
+  const [hoseBinding, setHoseBinding] = useState<ResourceStackKey | null>(null);
   const [tab, setTab] = useState<WorkTab>("forms");
   if (!open) return null;
   const here = stationsHere(getWorld());
@@ -320,6 +326,43 @@ export function CraftGump() {
           ])}
         />
       </div>
+      {[
+        { form: HOOD_FORM, label: "hood", diff: 13, body: hoodBody, setBody: setHoodBody, binding: hoodBinding, setBinding: setHoodBinding },
+        { form: GLOVES_FORM, label: "gloves", diff: 15, body: glovesBody, setBody: setGlovesBody, binding: glovesBinding, setBinding: setGlovesBinding },
+        { form: HOSE_FORM, label: "hose", diff: 17, body: hoseBody, setBody: setHoseBody, binding: hoseBinding, setBinding: setHoseBinding },
+      ].map(({ form, label, diff, body: pieceBody, setBody, binding: pieceBinding, setBinding }) => {
+        const pieceBodyRole = form.roles.find(({ role }) => role === "body")!;
+        const pieceBindingRole = form.roles.find(({ role }) => role === "binding")!;
+        const disabled = !bladeOk
+          ? "Hold a blade"
+          : !pieceBody || !pieceBinding
+            ? "Choose hides and binding"
+            : selectedCount(pieceBody) < pieceBodyRole.amount || selectedCount(pieceBinding) < pieceBindingRole.amount
+              ? "Not enough selected material"
+              : null;
+        return (
+          <div key={form.id} className="mt-2 space-y-2" aria-label={`Advanced ${label} work`}>
+            <p className="font-display text-xs tracking-wider text-gold uppercase">Form · {form.label}</p>
+            <MaterialSelector role={pieceBodyRole} rows={resourceRows} selected={pieceBody} onSelect={setBody} group={`${label}-body`} />
+            <MaterialSelector role={pieceBindingRole} rows={resourceRows} selected={pieceBinding} onSelect={setBinding} group={`${label}-binding`} />
+            <WorkmanshipPreview
+              skill={skills?.tailoring ?? 0}
+              difficulty={diff}
+              primaryGrade={pieceBody ? (pieceBody.split(":")[2] as MaterialGrade) : undefined}
+            />
+            <ConfirmCraft
+              selected={{ body: pieceBody, binding: pieceBinding }}
+              rows={resourceRows}
+              disabledReason={disabled}
+              formLabel={label}
+              onConfirm={() => pieceBody && pieceBinding && makeExact(form.id, [
+                { role: "body", key: pieceBody },
+                { role: "binding", key: pieceBinding },
+              ])}
+            />
+          </div>
+        );
+      })}
       </>
       )}
       {tab === "refine" && (
