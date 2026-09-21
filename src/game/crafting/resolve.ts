@@ -327,6 +327,30 @@ export function resolveItemStats(
     const scale = CONTRIBUTION_SCALE[role.contribution];
     for (const traitId of definition.traitIds) {
       const trait = TRAIT_REGISTRY[traitId];
+      if (trait.stat === "slayer") {
+        // Slayer multipliers are absolute with 1 as neutral, so a reduced
+        // contribution scale softens only the excess over neutral.
+        const raw = trait.values[component.grade];
+        const multiplier = Math.min(scale === 1 ? raw : 1 + (raw - 1) * scale, form.caps.slayerMultiplier);
+        const appliedSlayers: Partial<Record<FaunaKind, number>> = {};
+        for (const kind of trait.fauna) {
+          const before = stats.slayerMultipliers[kind] ?? 1;
+          const after = Math.max(before, multiplier);
+          if (after - before === 0) continue;
+          stats.slayerMultipliers = { ...stats.slayerMultipliers, [kind]: after };
+          appliedSlayers[kind] = after - before;
+        }
+        if (Object.keys(appliedSlayers).length === 0) continue;
+        contributions.push({
+          source: "material",
+          sourceId: component.resourceId,
+          role: component.role,
+          traitId,
+          stats: { slayerMultipliers: appliedSlayers },
+          local: {},
+        });
+        continue;
+      }
       const applied = applyCanonical(stats, { [trait.stat]: trait.values[component.grade] * scale }, form);
       if (!hasAppliedStats(applied)) continue;
       contributions.push({

@@ -198,6 +198,48 @@ test("flawless Sapphire derives Fortune four locally without entering canonical 
   assert.equal(JSON.stringify(sapphire.stats).includes("fortune"), false);
 });
 
+test("moon silver contributes its slayer multiplier to every fleshless kind at full primary scale", () => {
+  const result = resolveItemStats(SWORD_FORM, {
+    workmanship: "ordinary",
+    components: [
+      { role: "edge", resourceId: "moon_silver", form: "ingot", grade: "choice", amount: 5 },
+      { role: "hilt", resourceId: "oak", form: "board", grade: "sound", amount: 1 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+  });
+  assert.equal(result.stats.damage, 10, "moon silver adds no raw damage");
+  assert.equal(result.stats.hitBonus, 0);
+  assert.equal(result.stats.slayerMultipliers.wight, 1.2);
+  assert.equal(result.stats.slayerMultipliers.ossuary_knight, 1.2);
+  assert.equal(result.stats.slayerMultipliers.wolf, undefined, "flesh kinds gain nothing");
+  assert.equal(result.stats.slayerMultipliers.cinder_drake, undefined, "a flesh drake is no spirit");
+  assert.equal(Object.keys(result.stats.slayerMultipliers).length, 13);
+
+  const moon = result.contributions.find((contribution) => contribution.traitId === "moon");
+  assert.equal(moon?.source, "material");
+  assert.equal(moon?.sourceId, "moon_silver");
+  assert.equal(moon?.role, "edge");
+  assert.ok(
+    Math.abs((moon?.stats.slayerMultipliers?.wight ?? 0) - 0.2) < 1e-12,
+    "the contribution records the delta from neutral",
+  );
+});
+
+test("a pristine moon silver slayer stays under the form cap", () => {
+  const result = resolveItemStats(SWORD_FORM, {
+    workmanship: "ordinary",
+    components: [
+      { role: "edge", resourceId: "moon_silver", form: "ingot", grade: "pristine", amount: 5 },
+      { role: "hilt", resourceId: "oak", form: "board", grade: "sound", amount: 1 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+  });
+  assert.equal(result.stats.slayerMultipliers.wight, 1.3);
+  assert.ok(result.stats.slayerMultipliers.wight! <= SWORD_FORM.caps.slayerMultiplier);
+});
+
 test("canonical stats and defensive maps are capped by the item form", () => {
   const cappedForm: ItemFormDefinition = {
     ...deepMutable(BOW_FORM),

@@ -117,14 +117,14 @@
       "completionRate": 1,
       "inspections": {
         "p50": 248,
-        "p90": 414,
-        "p99": 566,
-        "max": 632
+        "p90": 422,
+        "p99": 585,
+        "max": 691
       },
       "modeledSeconds": {
         "p50": 375.6,
-        "p90": 624.6,
-        "p99": 852.6
+        "p90": 636.6,
+        "p99": 881.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -140,14 +140,14 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 670,
-        "p90": 1122,
+        "p50": 677,
+        "p90": 1153,
         "p99": 1833,
         "max": 1857
       },
       "modeledSeconds": {
-        "p50": 1008.6,
-        "p90": 1686.6,
+        "p50": 1019.1,
+        "p90": 1733.1,
         "p99": 2753.1
       },
       "blockedMatches": {
@@ -180,6 +180,30 @@
       }
     },
     {
+      "label": "moon silver sword edge",
+      "resourceId": "moon_silver",
+      "required": 5,
+      "skill": 75,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 19030,
+        "p90": 30480,
+        "p99": 40434,
+        "max": 48491
+      },
+      "modeledSeconds": {
+        "p50": 28548.6,
+        "p90": 45723.6,
+        "p99": 60654.6
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
       "label": "ruby inlay",
       "resourceId": "ruby",
       "required": 1,
@@ -188,15 +212,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 868,
-        "p90": 2837,
-        "p99": 6449,
-        "max": 7014
+        "p50": 909,
+        "p90": 2567,
+        "p99": 5944,
+        "max": 6637
       },
       "modeledSeconds": {
-        "p50": 1302.72,
-        "p90": 4256.22,
-        "p99": 9674.22
+        "p50": 1364.22,
+        "p90": 3851.22,
+        "p99": 8916.72
       },
       "blockedMatches": {
         "p50": 0,
@@ -461,7 +485,7 @@
     }
   },
   "statEnumeration": {
-    "legalCombinationCount": 963840,
+    "legalCombinationCount": 1117728,
     "forms": {
       "bow": {
         "combinations": 36288,
@@ -486,9 +510,9 @@
         "capViolations": 0
       },
       "sword": {
-        "combinations": 663552,
+        "combinations": 774144,
         "roleOptionCounts": [
-          24,
+          28,
           72,
           8
         ],
@@ -509,9 +533,9 @@
         "capViolations": 0
       },
       "shield": {
-        "combinations": 228096,
+        "combinations": 266112,
         "roleOptionCounts": [
-          24,
+          28,
           36,
           8
         ],
@@ -532,9 +556,9 @@
         "capViolations": 0
       },
       "helm": {
-        "combinations": 6336,
+        "combinations": 7392,
         "roleOptionCounts": [
-          24,
+          28,
           8
         ],
         "inlayOptions": 11,
@@ -554,9 +578,9 @@
         "capViolations": 0
       },
       "mail": {
-        "combinations": 6336,
+        "combinations": 7392,
         "roleOptionCounts": [
-          24,
+          28,
           8
         ],
         "inlayOptions": 11,
@@ -576,9 +600,9 @@
         "capViolations": 0
       },
       "boots": {
-        "combinations": 6336,
+        "combinations": 7392,
         "roleOptionCounts": [
-          24,
+          28,
           8
         ],
         "inlayOptions": 11,
@@ -598,9 +622,9 @@
         "capViolations": 0
       },
       "gauntlets": {
-        "combinations": 6336,
+        "combinations": 7392,
         "roleOptionCounts": [
-          24,
+          28,
           8
         ],
         "inlayOptions": 11,
@@ -620,9 +644,9 @@
         "capViolations": 0
       },
       "greaves": {
-        "combinations": 6336,
+        "combinations": 7392,
         "roleOptionCounts": [
-          24,
+          28,
           8
         ],
         "inlayOptions": 11,

@@ -12,6 +12,8 @@ const COPPER_SOUND_ORE = makeResourceStackKey("copper_ore", "ore", "sound");
 const COPPER_SOUND_INGOT = makeResourceStackKey("copper_ore", "ingot", "sound");
 const EMBERITE_CHOICE_ORE = makeResourceStackKey("emberite", "ore", "choice");
 const EMBERITE_CHOICE_INGOT = makeResourceStackKey("emberite", "ingot", "choice");
+const MOON_SILVER_CHOICE_ORE = makeResourceStackKey("moon_silver", "ore", "choice");
+const MOON_SILVER_CHOICE_INGOT = makeResourceStackKey("moon_silver", "ingot", "choice");
 
 test("refining - route discovery is shared between the command and the work gump", () => {
   const copper = findProcessingRoute("copper_ore", "ore");
@@ -23,6 +25,9 @@ test("refining - route discovery is shared between the command and the work gump
   const emberite = findProcessingRoute("emberite", "ore");
   assert.equal(emberite?.route.id, "smelt_emberite");
   assert.equal(emberite?.owner.id, "emberite");
+  const moonSilver = findProcessingRoute("moon_silver", "ore");
+  assert.equal(moonSilver?.route.id, "smelt_moon_silver");
+  assert.equal(moonSilver?.owner.id, "moon_silver");
   assert.equal(findProcessingRoute("oak", "board"), null);
   assert.equal(findProcessingRoute("oak", "log")?.route.id, "saw_oak");
 });
@@ -134,6 +139,26 @@ test("refining - emberite holds its grade through the grandmaster smelt", () => 
 
   const before = structuredClone(world.player.resources);
   const unskilled = refineResource(world.player, EMBERITE_CHOICE_ORE, "forge", 79);
+  assert.equal(unskilled.status, "blocked");
+  if (unskilled.status === "blocked") assert.equal(unskilled.reason, "skill");
+  assert.deepEqual(world.player.resources, before);
+});
+
+test("refining - moon silver holds its grade through the master smelt", () => {
+  const world = createWorld();
+  addResource(world.player.resources, MOON_SILVER_CHOICE_ORE, 2);
+  const result = refineResource(world.player, MOON_SILVER_CHOICE_ORE, "forge", 65);
+  assert.deepEqual(result, {
+    status: "refined",
+    input: MOON_SILVER_CHOICE_ORE,
+    output: MOON_SILVER_CHOICE_INGOT,
+    quantity: 1,
+  });
+  assert.equal(resourceCount(world.player.resources, MOON_SILVER_CHOICE_ORE), 1);
+  assert.equal(resourceCount(world.player.resources, MOON_SILVER_CHOICE_INGOT), 1);
+
+  const before = structuredClone(world.player.resources);
+  const unskilled = refineResource(world.player, MOON_SILVER_CHOICE_ORE, "forge", 64);
   assert.equal(unskilled.status, "blocked");
   if (unskilled.status === "blocked") assert.equal(unskilled.reason, "skill");
   assert.deepEqual(world.player.resources, before);

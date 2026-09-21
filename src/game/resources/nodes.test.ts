@@ -120,6 +120,9 @@ test("soft biome affinities make catalog preferences observable and omit zero af
   assert.ok(rawWeightAt(420, 268, "rock", "emberite") > rawWeightAt(64, 96, "rock", "emberite"), "ironfold is the richer emberite vein");
   assert.ok(rawWeightAt(64, 96, "rock", "emberite") > 0, "cairnash holds an emberite vein");
   assert.equal(rawWeightAt(256, 292, "rock", "emberite"), 0, "emberite keeps to its named veins");
+  assert.ok(rawWeightAt(110, 440, "rock", "moon_silver") > rawWeightAt(250, 48, "rock", "moon_silver"), "greybarrow is the richer moon-silver vein");
+  assert.ok(rawWeightAt(250, 48, "rock", "moon_silver") > 0, "ridgewatch holds a moon-silver vein");
+  assert.equal(rawWeightAt(256, 292, "rock", "moon_silver"), 0, "moon-silver keeps to its named veins");
 });
 
 test("bounded deterministic grid frequencies track inspected probabilities", () => {

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { buildResourceCatalog, RESOURCE_CATALOG, RESOURCE_IDS } from "./catalog.ts";
 import { CANONICAL_STAT_IDS, MAX_LOCAL_FORTUNE, TRAIT_REGISTRY } from "./traits.ts";
+import { FAUNA_META } from "../catalog.ts";
 import {
   defineResourceNodeIdentity,
   type GemResourceId,
@@ -29,6 +30,7 @@ const EXPECTED_IDS = [
   "iron_ore",
   "highland_ore",
   "emberite",
+  "moon_silver",
   "common_cloth",
   "fine_linen",
   "hide",
@@ -40,7 +42,7 @@ const EXPECTED_IDS = [
 ] as const satisfies readonly ResourceId[];
 
 const GEM_IDS = ["ruby", "sapphire", "emerald", "diamond", "amethyst"] as const satisfies readonly GemResourceId[];
-const TRAIT_IDS = ["accuracy", "damage", "handling", "keen", "sturdy", "supple", "ember", "power", "fortune", "precision", "protection", "mastery"] as const satisfies readonly MaterialTraitId[];
+const TRAIT_IDS = ["accuracy", "damage", "handling", "keen", "sturdy", "supple", "ember", "moon", "power", "fortune", "precision", "protection", "mastery"] as const satisfies readonly MaterialTraitId[];
 
 type DeepMutable<T> = T extends readonly (infer Item)[]
   ? DeepMutable<Item>[]
@@ -272,6 +274,7 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       iron_ore: ["sturdy"],
       highland_ore: ["damage"],
       emberite: ["ember"],
+      moon_silver: ["moon"],
       common_cloth: [],
       fine_linen: ["handling"],
       hide: ["supple"],
@@ -287,6 +290,12 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
   assert.deepEqual(TRAIT_REGISTRY.handling.values, { rough: 0.25, sound: 0.5, choice: 0.75, pristine: 1 });
   assert.deepEqual(TRAIT_REGISTRY.supple.values, { rough: 0.5, sound: 1, choice: 1.5, pristine: 2 });
   assert.deepEqual(TRAIT_REGISTRY.ember.values, { rough: 1, sound: 2, choice: 3, pristine: 4 });
+  assert.deepEqual(TRAIT_REGISTRY.moon.values, { rough: 1.05, sound: 1.1, choice: 1.2, pristine: 1.3 });
+  assert.deepEqual(
+    TRAIT_REGISTRY.moon.fauna,
+    Object.entries(FAUNA_META).filter(([, meta]) => meta.hasCorpse === false).map(([kind]) => kind),
+    "moon silver bites exactly the fleshless kinds",
+  );
   assert.deepEqual(TRAIT_REGISTRY.power.values, { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 });
   assert.deepEqual(TRAIT_REGISTRY.fortune.values, { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 });
   assert.deepEqual(TRAIT_REGISTRY.precision.values, { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 });
@@ -314,7 +323,7 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       }
     }
   }
-  assert.deepEqual([...routeIds], ["saw_oak", "saw_pine", "saw_willow", "saw_birch", "saw_ash", "saw_redwood", "saw_yew", "saw_ghostwood", "saw_ironwood", "smelt_copper_ore", "smelt_tin_ore", "smelt_bronze", "smelt_iron_ore", "smelt_highland_ore", "smelt_emberite"]);
+  assert.deepEqual([...routeIds], ["saw_oak", "saw_pine", "saw_willow", "saw_birch", "saw_ash", "saw_redwood", "saw_yew", "saw_ghostwood", "saw_ironwood", "smelt_copper_ore", "smelt_tin_ore", "smelt_bronze", "smelt_iron_ore", "smelt_highland_ore", "smelt_emberite", "smelt_moon_silver"]);
   assert.deepEqual(
     Object.fromEntries(Object.values(RESOURCE_CATALOG).map(({ id, forms }) => [id, forms])),
     {
@@ -333,6 +342,7 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       iron_ore: ["ore", "ingot"],
       highland_ore: ["ore", "ingot"],
       emberite: ["ore", "ingot"],
+      moon_silver: ["ore", "ingot"],
       common_cloth: ["cloth"],
       fine_linen: ["cloth"],
       hide: ["hide"],

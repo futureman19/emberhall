@@ -3,6 +3,7 @@ import test from "node:test";
 import { commandCraft, commandCraftExact } from "../craft.ts";
 import { addResource, makeResourceStackKey, resourceCount } from "../inventory/resources.ts";
 import { commandEquipRare, you } from "../player.ts";
+import { rareMods } from "../rare.ts";
 import type { ResourceStackKey, World } from "../types.ts";
 import { createWorld } from "../world.ts";
 import { executeExactCraftTransaction } from "./transaction.ts";
@@ -16,6 +17,7 @@ const PRISTINE_LINEN = makeResourceStackKey("fine_linen", "cloth", "pristine");
 const IRON_INGOT = makeResourceStackKey("iron_ore", "ingot", "sound");
 const HIGHLAND_INGOT = makeResourceStackKey("highland_ore", "ingot", "choice");
 const EMBERITE_INGOT = makeResourceStackKey("emberite", "ingot", "choice");
+const MOON_SILVER_INGOT = makeResourceStackKey("moon_silver", "ingot", "choice");
 const COPPER_INGOT = makeResourceStackKey("copper_ore", "ingot", "choice");
 const OAK_BOARD = makeResourceStackKey("oak", "board", "sound");
 
@@ -325,6 +327,32 @@ test("exact swordcraft - emberite carries its ember trait into the blade", () =>
   assert.equal(world.player.rares[0]!.resolvedStats?.damage, 13);
   assert.equal(world.player.rares[0]!.resolvedStats?.hitBonus, 1);
   assert.deepEqual(world.player.rares[0]!.affixes, []);
+});
+
+test("exact swordcraft - moon silver bites the fleshless and no one else", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  addResource(world.player.resources, MOON_SILVER_INGOT, 5);
+  addResource(world.player.resources, OAK_BOARD, 1);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "sword", swordSelections(MOON_SILVER_INGOT)));
+  assert.match(note ?? "", /moon silver sword/i);
+  assert.equal(world.player.pack.sword, 0);
+  assert.equal(world.player.rares.length, 1);
+  const blade = world.player.rares[0]!;
+  assert.equal(blade.resolvedStats?.damage, 10, "moon silver adds no raw damage");
+  assert.equal(blade.resolvedStats?.hitBonus, 1);
+  assert.equal(blade.resolvedStats?.slayerMultipliers.wight, 1.2);
+  assert.equal(blade.resolvedStats?.slayerMultipliers.grave_lich, 1.2);
+  assert.equal(blade.resolvedStats?.slayerMultipliers.wolf, undefined, "flesh kinds gain nothing");
+  assert.equal(Object.keys(blade.resolvedStats?.slayerMultipliers ?? {}).length, 13);
+  assert.deepEqual(blade.affixes, []);
+
+  assert.ok(commandEquipRare(world, blade.uid));
+  const mods = rareMods(world);
+  assert.equal(mods.vs.wight, 1.2, "the resolved slayer reaches the combat aggregate");
+  assert.equal(mods.vs.wolf, undefined);
 });
 
 test("exact swordcraft - copper becomes a unique handling blade with no damage trait", () => {
