@@ -18,10 +18,10 @@ test("every canonical timber routes to its own authored asset worldwide, never u
     assert.equal(authoredTimberId(id, false), null);
     assert.match(timberAssetUrl(authoredTimberId(id, true)!), new RegExp(id + "\\.glb$"));
   }
-  for (const id of ["iron_ore", "ironwood", "", "__proto__"]) assert.equal(authoredTimberId(id, true), null);
+  for (const id of ["iron_ore", "", "__proto__"]) assert.equal(authoredTimberId(id, true), null);
 });
 
-test("actual GLTFLoader meshes: eight distinct assets, baked axes, bounded anchors, ground stumps", async () => {
+test("actual GLTFLoader meshes: nine distinct assets, baked axes, bounded anchors, ground stumps", async () => {
   const manifest = JSON.parse(readFileSync(new URL("public/art/lanternwood/timber-manifest.json", root), "utf8"));
   assert.deepEqual(Object.keys(manifest.assets).sort(), [...TIMBER_IDS].sort());
   const hashes = new Set<string>();

@@ -60,6 +60,30 @@
       }
     },
     {
+      "label": "ironwood bow body",
+      "resourceId": "ironwood",
+      "required": 5,
+      "skill": 70,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 5085,
+        "p90": 8619,
+        "p99": 10925,
+        "max": 18957
+      },
+      "modeledSeconds": {
+        "p50": 7631.1,
+        "p90": 12932.1,
+        "p99": 16391.1
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
       "label": "copper sword edge",
       "resourceId": "copper_ore",
       "required": 5,
@@ -413,17 +437,17 @@
     }
   },
   "statEnumeration": {
-    "legalCombinationCount": 723360,
+    "legalCombinationCount": 809952,
     "forms": {
       "bow": {
-        "combinations": 32256,
+        "combinations": 36288,
         "roleOptionCounts": [
-          64,
+          72,
           8
         ],
         "inlayOptions": 21,
         "maxima": {
-          "damage": 14,
+          "damage": 15,
           "hitBonus": 10,
           "armor": 0,
           "fortune": 5
@@ -438,10 +462,10 @@
         "capViolations": 0
       },
       "sword": {
-        "combinations": 491520,
+        "combinations": 552960,
         "roleOptionCounts": [
           20,
-          64,
+          72,
           8
         ],
         "inlayOptions": 16,
@@ -461,10 +485,10 @@
         "capViolations": 0
       },
       "shield": {
-        "combinations": 168960,
+        "combinations": 190080,
         "roleOptionCounts": [
           20,
-          32,
+          36,
           8
         ],
         "inlayOptions": 11,
@@ -684,7 +708,7 @@
     }
   },
   "payloadSizes": {
-    "representativeSaveBytes": 23723,
+    "representativeSaveBytes": 23746,
     "fiveItemBytes": 2654,
     "vaultInscriptionBytes": {
       "min": 589,

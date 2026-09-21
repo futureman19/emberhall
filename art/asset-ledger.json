@@ -211,10 +211,10 @@
     "NpcRole": 3,
     "PART_SLOTS": 4,
     "RECIPES": 52,
-    "RESOURCE_CATALOG": 21,
-    "RESOURCE_DEFINITIONS": 21,
-    "RESOURCE_IDS": 21,
-    "ResourceId": 21,
+    "RESOURCE_CATALOG": 22,
+    "RESOURCE_DEFINITIONS": 22,
+    "RESOURCE_IDS": 22,
+    "ResourceId": 22,
     "SKILL_META": 25,
     "SKIN_TONES": 6,
     "SLOT_ANCHOR": 4,
@@ -57685,10 +57685,10 @@
       "canonicalId": "amethyst",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:37",
-        "src/game/resources/catalog.ts:503",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:38",
+        "src/game/resources/catalog.ts:532",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -57775,10 +57775,10 @@
       "canonicalId": "ash",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:159",
+        "src/game/resources/catalog.ts:160",
         "src/game/resources/catalog.ts:21",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -57898,10 +57898,10 @@
       "canonicalId": "birch",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:131",
+        "src/game/resources/catalog.ts:132",
         "src/game/resources/catalog.ts:20",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -58021,10 +58021,10 @@
       "canonicalId": "bronze",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:27",
-        "src/game/resources/catalog.ts:325",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:28",
+        "src/game/resources/catalog.ts:354",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -58111,10 +58111,10 @@
       "canonicalId": "common_cloth",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:30",
-        "src/game/resources/catalog.ts:401",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:31",
+        "src/game/resources/catalog.ts:430",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -58201,10 +58201,10 @@
       "canonicalId": "copper_ore",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:25",
-        "src/game/resources/catalog.ts:271",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:26",
+        "src/game/resources/catalog.ts:300",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -58291,10 +58291,10 @@
       "canonicalId": "diamond",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:36",
-        "src/game/resources/catalog.ts:485",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:37",
+        "src/game/resources/catalog.ts:514",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -58381,10 +58381,10 @@
       "canonicalId": "emerald",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:35",
-        "src/game/resources/catalog.ts:467",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:36",
+        "src/game/resources/catalog.ts:496",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -58471,10 +58471,10 @@
       "canonicalId": "fine_linen",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:31",
-        "src/game/resources/catalog.ts:411",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:32",
+        "src/game/resources/catalog.ts:440",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -58562,9 +58562,9 @@
       "family": "resource",
       "catalogSources": [
         "src/game/resources/catalog.ts:24",
-        "src/game/resources/catalog.ts:243",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:244",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -58684,10 +58684,10 @@
       "canonicalId": "hide",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:32",
-        "src/game/resources/catalog.ts:421",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:33",
+        "src/game/resources/catalog.ts:450",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -58774,10 +58774,10 @@
       "canonicalId": "highland_ore",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:29",
-        "src/game/resources/catalog.ts:374",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:30",
+        "src/game/resources/catalog.ts:403",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -58897,10 +58897,10 @@
       "canonicalId": "iron_ore",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:28",
-        "src/game/resources/catalog.ts:347",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:29",
+        "src/game/resources/catalog.ts:376",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -59016,14 +59016,104 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "resource:ironwood",
+      "canonicalId": "ironwood",
+      "family": "resource",
+      "catalogSources": [
+        "src/game/resources/catalog.ts:25",
+        "src/game/resources/catalog.ts:272",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
+      ],
+      "sourceNames": [
+        "RESOURCE_CATALOG",
+        "RESOURCE_DEFINITIONS",
+        "RESOURCE_IDS",
+        "ResourceId"
+      ],
+      "rendererLocations": [
+        "src/components/game/crafting/inlay-panel.tsx:5",
+        "src/components/game/crafting/refining-panel.tsx:3",
+        "src/components/game/crop-meshes.tsx:1",
+        "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/oak-stumps.tsx:1",
+        "src/components/game/oak-stumps.tsx:7",
+        "src/components/game/paperdoll.tsx:1",
+        "src/components/game/resource-visuals.ts:1",
+        "src/components/game/resource-visuals.ts:10",
+        "src/components/game/resource-visuals.ts:3",
+        "src/components/game/terrain.tsx:1",
+        "src/components/game/terrain.tsx:38"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/inlay-panel.tsx",
+        "src/components/game/crafting/refining-panel.tsx",
+        "src/components/game/crop-meshes.tsx",
+        "src/components/game/oak-stumps.tsx",
+        "src/components/game/paperdoll.tsx",
+        "src/components/game/resource-visuals.ts",
+        "src/components/game/terrain.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/catalog.ts:25",
+            "src/game/resources/catalog.ts:272",
+            "src/game/resources/catalog.ts:844",
+            "src/game/resources/types.ts:22"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "node-or-processing-applicability-unreviewed",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/catalog.ts:25",
+            "src/game/resources/catalog.ts:272",
+            "src/game/resources/catalog.ts:844",
+            "src/game/resources/types.ts:22"
+          ],
+          "applicability": "unreviewed"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/catalog.ts:25",
+        "src/game/resources/catalog.ts:272",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "resource:oak",
       "canonicalId": "oak",
       "family": "resource",
       "catalogSources": [
         "src/game/resources/catalog.ts:17",
-        "src/game/resources/catalog.ts:48",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:49",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -59210,9 +59300,9 @@
       "family": "resource",
       "catalogSources": [
         "src/game/resources/catalog.ts:18",
-        "src/game/resources/catalog.ts:75",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:76",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -59332,10 +59422,10 @@
       "canonicalId": "redwood",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:187",
+        "src/game/resources/catalog.ts:188",
         "src/game/resources/catalog.ts:22",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -59455,10 +59545,10 @@
       "canonicalId": "ruby",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:33",
-        "src/game/resources/catalog.ts:431",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:34",
+        "src/game/resources/catalog.ts:460",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -59545,10 +59635,10 @@
       "canonicalId": "sapphire",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:34",
-        "src/game/resources/catalog.ts:449",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:35",
+        "src/game/resources/catalog.ts:478",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -59635,10 +59725,10 @@
       "canonicalId": "tin_ore",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:26",
-        "src/game/resources/catalog.ts:298",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:27",
+        "src/game/resources/catalog.ts:327",
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -59725,10 +59815,10 @@
       "canonicalId": "willow",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:103",
+        "src/game/resources/catalog.ts:104",
         "src/game/resources/catalog.ts:19",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -59848,10 +59938,10 @@
       "canonicalId": "yew",
       "family": "resource",
       "catalogSources": [
-        "src/game/resources/catalog.ts:215",
+        "src/game/resources/catalog.ts:216",
         "src/game/resources/catalog.ts:23",
-        "src/game/resources/catalog.ts:814",
-        "src/game/resources/types.ts:21"
+        "src/game/resources/catalog.ts:844",
+        "src/game/resources/types.ts:22"
       ],
       "sourceNames": [
         "RESOURCE_CATALOG",
@@ -71421,6 +71511,374 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactMaterialSelection.key=ironwood:board:choice",
+      "canonicalId": "src/game/crafting/recipes.ts#ExactMaterialSelection.key=ironwood:board:choice",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "sourceNames": [
+        "ExactMaterialSelection.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:33"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactMaterialSelection.key=ironwood:board:pristine",
+      "canonicalId": "src/game/crafting/recipes.ts#ExactMaterialSelection.key=ironwood:board:pristine",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "sourceNames": [
+        "ExactMaterialSelection.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:33"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactMaterialSelection.key=ironwood:board:rough",
+      "canonicalId": "src/game/crafting/recipes.ts#ExactMaterialSelection.key=ironwood:board:rough",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "sourceNames": [
+        "ExactMaterialSelection.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:33"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactMaterialSelection.key=ironwood:board:sound",
+      "canonicalId": "src/game/crafting/recipes.ts#ExactMaterialSelection.key=ironwood:board:sound",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "sourceNames": [
+        "ExactMaterialSelection.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:33"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactMaterialSelection.key=ironwood:log:choice",
+      "canonicalId": "src/game/crafting/recipes.ts#ExactMaterialSelection.key=ironwood:log:choice",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "sourceNames": [
+        "ExactMaterialSelection.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:33"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactMaterialSelection.key=ironwood:log:pristine",
+      "canonicalId": "src/game/crafting/recipes.ts#ExactMaterialSelection.key=ironwood:log:pristine",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "sourceNames": [
+        "ExactMaterialSelection.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:33"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactMaterialSelection.key=ironwood:log:rough",
+      "canonicalId": "src/game/crafting/recipes.ts#ExactMaterialSelection.key=ironwood:log:rough",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "sourceNames": [
+        "ExactMaterialSelection.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:33"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactMaterialSelection.key=ironwood:log:sound",
+      "canonicalId": "src/game/crafting/recipes.ts#ExactMaterialSelection.key=ironwood:log:sound",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "sourceNames": [
+        "ExactMaterialSelection.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:33"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/recipes.ts:33"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactMaterialSelection.key=oak:board:choice",
       "canonicalId": "src/game/crafting/recipes.ts#ExactMaterialSelection.key=oak:board:choice",
       "family": "state-vocabulary",
@@ -80025,6 +80483,52 @@
     {
       "id": "state-vocabulary:src/game/crafting/types.ts#CraftedComponent.resourceId=iron_ore",
       "canonicalId": "src/game/crafting/types.ts#CraftedComponent.resourceId=iron_ore",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/types.ts:70"
+      ],
+      "sourceNames": [
+        "CraftedComponent.resourceId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/types.ts:70"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/types.ts:70"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/types.ts#CraftedComponent.resourceId=ironwood",
+      "canonicalId": "src/game/crafting/types.ts#CraftedComponent.resourceId=ironwood",
       "family": "state-vocabulary",
       "catalogSources": [
         "src/game/crafting/types.ts:70"
@@ -90695,6 +91199,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/crafting/types.ts#StatContribution.sourceId=ironwood",
+      "canonicalId": "src/game/crafting/types.ts#StatContribution.sourceId=ironwood",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/types.ts:89"
+      ],
+      "sourceNames": [
+        "StatContribution.sourceId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/types.ts:89"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/types.ts:89"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/crafting/types.ts#StatContribution.sourceId=oak",
       "canonicalId": "src/game/crafting/types.ts#StatContribution.sourceId=oak",
       "family": "state-vocabulary",
@@ -100033,6 +100583,374 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceDebit.key=ironwood:board:choice",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceDebit.key=ironwood:board:choice",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "sourceNames": [
+        "ResourceDebit.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceDebit.key=ironwood:board:pristine",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceDebit.key=ironwood:board:pristine",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "sourceNames": [
+        "ResourceDebit.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceDebit.key=ironwood:board:rough",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceDebit.key=ironwood:board:rough",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "sourceNames": [
+        "ResourceDebit.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceDebit.key=ironwood:board:sound",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceDebit.key=ironwood:board:sound",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "sourceNames": [
+        "ResourceDebit.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceDebit.key=ironwood:log:choice",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceDebit.key=ironwood:log:choice",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "sourceNames": [
+        "ResourceDebit.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceDebit.key=ironwood:log:pristine",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceDebit.key=ironwood:log:pristine",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "sourceNames": [
+        "ResourceDebit.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceDebit.key=ironwood:log:rough",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceDebit.key=ironwood:log:rough",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "sourceNames": [
+        "ResourceDebit.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceDebit.key=ironwood:log:sound",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceDebit.key=ironwood:log:sound",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "sourceNames": [
+        "ResourceDebit.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:12"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceDebit.key=oak:board:choice",
       "canonicalId": "src/game/inventory/resources.ts#ResourceDebit.key=oak:board:choice",
       "family": "state-vocabulary",
@@ -106475,6 +107393,374 @@
     {
       "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceInventoryRow.key=iron_ore:ore:sound",
       "canonicalId": "src/game/inventory/resources.ts#ResourceInventoryRow.key=iron_ore:ore:sound",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "sourceNames": [
+        "ResourceInventoryRow.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceInventoryRow.key=ironwood:board:choice",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceInventoryRow.key=ironwood:board:choice",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "sourceNames": [
+        "ResourceInventoryRow.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceInventoryRow.key=ironwood:board:pristine",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceInventoryRow.key=ironwood:board:pristine",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "sourceNames": [
+        "ResourceInventoryRow.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceInventoryRow.key=ironwood:board:rough",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceInventoryRow.key=ironwood:board:rough",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "sourceNames": [
+        "ResourceInventoryRow.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceInventoryRow.key=ironwood:board:sound",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceInventoryRow.key=ironwood:board:sound",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "sourceNames": [
+        "ResourceInventoryRow.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceInventoryRow.key=ironwood:log:choice",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceInventoryRow.key=ironwood:log:choice",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "sourceNames": [
+        "ResourceInventoryRow.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceInventoryRow.key=ironwood:log:pristine",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceInventoryRow.key=ironwood:log:pristine",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "sourceNames": [
+        "ResourceInventoryRow.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceInventoryRow.key=ironwood:log:rough",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceInventoryRow.key=ironwood:log:rough",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "sourceNames": [
+        "ResourceInventoryRow.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/inventory/resources.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/inventory/resources.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/inventory/resources.ts#ResourceInventoryRow.key=ironwood:log:sound",
+      "canonicalId": "src/game/inventory/resources.ts#ResourceInventoryRow.key=ironwood:log:sound",
       "family": "state-vocabulary",
       "catalogSources": [
         "src/game/inventory/resources.ts:24"
@@ -134441,6 +135727,190 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/resources/harvest.ts#HarvestYield.key=ironwood:log:choice",
+      "canonicalId": "src/game/resources/harvest.ts#HarvestYield.key=ironwood:log:choice",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "sourceNames": [
+        "HarvestYield.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/harvest.ts:90"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/resources/harvest.ts#HarvestYield.key=ironwood:log:pristine",
+      "canonicalId": "src/game/resources/harvest.ts#HarvestYield.key=ironwood:log:pristine",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "sourceNames": [
+        "HarvestYield.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/harvest.ts:90"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/resources/harvest.ts#HarvestYield.key=ironwood:log:rough",
+      "canonicalId": "src/game/resources/harvest.ts#HarvestYield.key=ironwood:log:rough",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "sourceNames": [
+        "HarvestYield.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/harvest.ts:90"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/resources/harvest.ts#HarvestYield.key=ironwood:log:sound",
+      "canonicalId": "src/game/resources/harvest.ts#HarvestYield.key=ironwood:log:sound",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "sourceNames": [
+        "HarvestYield.key"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/harvest.ts:90"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/harvest.ts:90"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/resources/harvest.ts#HarvestYield.key=oak:log:choice",
       "canonicalId": "src/game/resources/harvest.ts#HarvestYield.key=oak:log:choice",
       "family": "state-vocabulary",
@@ -137017,6 +138487,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/resources/harvest.ts#HarvestYield.resourceId=ironwood",
+      "canonicalId": "src/game/resources/harvest.ts#HarvestYield.resourceId=ironwood",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/harvest.ts:91"
+      ],
+      "sourceNames": [
+        "HarvestYield.resourceId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/harvest.ts:91"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/harvest.ts:91"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/resources/harvest.ts#HarvestYield.resourceId=oak",
       "canonicalId": "src/game/resources/harvest.ts#HarvestYield.resourceId=oak",
       "family": "state-vocabulary",
@@ -138307,6 +139823,52 @@
     {
       "id": "state-vocabulary:src/game/resources/nodes.ts#ResourceFamilyProbability.resourceId=iron_ore",
       "canonicalId": "src/game/resources/nodes.ts#ResourceFamilyProbability.resourceId=iron_ore",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/nodes.ts:30"
+      ],
+      "sourceNames": [
+        "ResourceFamilyProbability.resourceId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/nodes.ts:30"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/nodes.ts:30"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/resources/nodes.ts#ResourceFamilyProbability.resourceId=ironwood",
+      "canonicalId": "src/game/resources/nodes.ts#ResourceFamilyProbability.resourceId=ironwood",
       "family": "state-vocabulary",
       "catalogSources": [
         "src/game/resources/nodes.ts:30"
@@ -140793,7 +142355,7 @@
       "canonicalId": "src/game/resources/types.ts#GemResourceDefinition.kind=gem",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:114"
+        "src/game/resources/types.ts:115"
       ],
       "sourceNames": [
         "GemResourceDefinition.kind"
@@ -140839,7 +142401,7 @@
       "canonicalId": "src/game/resources/types.ts#GemResourceDefinition.qualityType=clarity",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:116"
+        "src/game/resources/types.ts:117"
       ],
       "sourceNames": [
         "GemResourceDefinition.qualityType"
@@ -140885,7 +142447,7 @@
       "canonicalId": "src/game/resources/types.ts#GemResourceSelector.qualityType=clarity",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:143"
+        "src/game/resources/types.ts:144"
       ],
       "sourceNames": [
         "GemResourceSelector.qualityType"
@@ -140931,7 +142493,7 @@
       "canonicalId": "src/game/resources/types.ts#GradeResourceDefinition.qualityType=grade",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:108"
+        "src/game/resources/types.ts:109"
       ],
       "sourceNames": [
         "GradeResourceDefinition.qualityType"
@@ -140977,7 +142539,7 @@
       "canonicalId": "src/game/resources/types.ts#GradeResourceSelector.qualityType=grade",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:135"
+        "src/game/resources/types.ts:136"
       ],
       "sourceNames": [
         "GradeResourceSelector.qualityType"
@@ -141023,7 +142585,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.form=board",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:43"
+        "src/game/resources/types.ts:44"
       ],
       "sourceNames": [
         "ProcessingInput.form"
@@ -141069,7 +142631,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.form=cloth",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:43"
+        "src/game/resources/types.ts:44"
       ],
       "sourceNames": [
         "ProcessingInput.form"
@@ -141115,7 +142677,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.form=gem",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:43"
+        "src/game/resources/types.ts:44"
       ],
       "sourceNames": [
         "ProcessingInput.form"
@@ -141161,7 +142723,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.form=hide",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:43"
+        "src/game/resources/types.ts:44"
       ],
       "sourceNames": [
         "ProcessingInput.form"
@@ -141207,7 +142769,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.form=ingot",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:43"
+        "src/game/resources/types.ts:44"
       ],
       "sourceNames": [
         "ProcessingInput.form"
@@ -141253,7 +142815,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.form=log",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:43"
+        "src/game/resources/types.ts:44"
       ],
       "sourceNames": [
         "ProcessingInput.form"
@@ -141299,7 +142861,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.form=ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:43"
+        "src/game/resources/types.ts:44"
       ],
       "sourceNames": [
         "ProcessingInput.form"
@@ -141345,7 +142907,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=ash",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:42"
+        "src/game/resources/types.ts:43"
       ],
       "sourceNames": [
         "ProcessingInput.resourceId"
@@ -141391,7 +142953,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=birch",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:42"
+        "src/game/resources/types.ts:43"
       ],
       "sourceNames": [
         "ProcessingInput.resourceId"
@@ -141437,7 +142999,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=bronze",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:42"
+        "src/game/resources/types.ts:43"
       ],
       "sourceNames": [
         "ProcessingInput.resourceId"
@@ -141483,7 +143045,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=common_cloth",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:42"
+        "src/game/resources/types.ts:43"
       ],
       "sourceNames": [
         "ProcessingInput.resourceId"
@@ -141529,7 +143091,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=copper_ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:42"
+        "src/game/resources/types.ts:43"
       ],
       "sourceNames": [
         "ProcessingInput.resourceId"
@@ -141575,7 +143137,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=fine_linen",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:42"
+        "src/game/resources/types.ts:43"
       ],
       "sourceNames": [
         "ProcessingInput.resourceId"
@@ -141621,7 +143183,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=ghostwood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:42"
+        "src/game/resources/types.ts:43"
       ],
       "sourceNames": [
         "ProcessingInput.resourceId"
@@ -141667,7 +143229,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=hide",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:42"
+        "src/game/resources/types.ts:43"
       ],
       "sourceNames": [
         "ProcessingInput.resourceId"
@@ -141713,7 +143275,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=highland_ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:42"
+        "src/game/resources/types.ts:43"
       ],
       "sourceNames": [
         "ProcessingInput.resourceId"
@@ -141759,7 +143321,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=iron_ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:42"
+        "src/game/resources/types.ts:43"
       ],
       "sourceNames": [
         "ProcessingInput.resourceId"
@@ -141801,11 +143363,57 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/resources/types.ts#ProcessingInput.resourceId=ironwood",
+      "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=ironwood",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/types.ts:43"
+      ],
+      "sourceNames": [
+        "ProcessingInput.resourceId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/types.ts:43"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/types.ts:43"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/resources/types.ts#ProcessingInput.resourceId=oak",
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=oak",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:42"
+        "src/game/resources/types.ts:43"
       ],
       "sourceNames": [
         "ProcessingInput.resourceId"
@@ -141851,7 +143459,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=pine",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:42"
+        "src/game/resources/types.ts:43"
       ],
       "sourceNames": [
         "ProcessingInput.resourceId"
@@ -141897,7 +143505,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=redwood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:42"
+        "src/game/resources/types.ts:43"
       ],
       "sourceNames": [
         "ProcessingInput.resourceId"
@@ -141943,7 +143551,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=tin_ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:42"
+        "src/game/resources/types.ts:43"
       ],
       "sourceNames": [
         "ProcessingInput.resourceId"
@@ -141989,7 +143597,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=willow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:42"
+        "src/game/resources/types.ts:43"
       ],
       "sourceNames": [
         "ProcessingInput.resourceId"
@@ -142035,7 +143643,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingInput.resourceId=yew",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:42"
+        "src/game/resources/types.ts:43"
       ],
       "sourceNames": [
         "ProcessingInput.resourceId"
@@ -142081,7 +143689,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingRoute.operation=saw",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:49"
+        "src/game/resources/types.ts:50"
       ],
       "sourceNames": [
         "ProcessingRoute.operation"
@@ -142127,7 +143735,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingRoute.operation=smelt",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:49"
+        "src/game/resources/types.ts:50"
       ],
       "sourceNames": [
         "ProcessingRoute.operation"
@@ -142173,7 +143781,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingRoute.station=bench",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:50"
+        "src/game/resources/types.ts:51"
       ],
       "sourceNames": [
         "ProcessingRoute.station"
@@ -142219,7 +143827,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingRoute.station=fire",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:50"
+        "src/game/resources/types.ts:51"
       ],
       "sourceNames": [
         "ProcessingRoute.station"
@@ -142265,7 +143873,7 @@
       "canonicalId": "src/game/resources/types.ts#ProcessingRoute.station=forge",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:50"
+        "src/game/resources/types.ts:51"
       ],
       "sourceNames": [
         "ProcessingRoute.station"
@@ -142311,7 +143919,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=amethyst",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -142357,7 +143965,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=ash",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -142403,7 +144011,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=birch",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -142449,7 +144057,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=bronze",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -142495,7 +144103,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=common_cloth",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -142541,7 +144149,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=copper_ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -142587,7 +144195,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=diamond",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -142633,7 +144241,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=emerald",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -142679,7 +144287,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=fine_linen",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -142725,7 +144333,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=ghostwood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -142771,7 +144379,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=hide",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -142817,7 +144425,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=highland_ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -142863,7 +144471,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=iron_ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -142905,11 +144513,57 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/resources/types.ts#ResourceDefinition.id=ironwood",
+      "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=ironwood",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/types.ts:106"
+      ],
+      "sourceNames": [
+        "ResourceDefinition.id"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/types.ts:106"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/types.ts:106"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/resources/types.ts#ResourceDefinition.id=oak",
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=oak",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -142955,7 +144609,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=pine",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -143001,7 +144655,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=redwood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -143047,7 +144701,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=ruby",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -143093,7 +144747,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=sapphire",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -143139,7 +144793,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=tin_ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -143185,7 +144839,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=willow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -143231,7 +144885,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.id=yew",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinition.id"
@@ -143277,7 +144931,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.kind=fiber",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:106"
+        "src/game/resources/types.ts:107"
       ],
       "sourceNames": [
         "ResourceDefinition.kind"
@@ -143323,7 +144977,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.kind=gem",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:106"
+        "src/game/resources/types.ts:107"
       ],
       "sourceNames": [
         "ResourceDefinition.kind"
@@ -143369,7 +145023,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.kind=hide",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:106"
+        "src/game/resources/types.ts:107"
       ],
       "sourceNames": [
         "ResourceDefinition.kind"
@@ -143415,7 +145069,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.kind=ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:106"
+        "src/game/resources/types.ts:107"
       ],
       "sourceNames": [
         "ResourceDefinition.kind"
@@ -143461,7 +145115,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.kind=timber",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:106"
+        "src/game/resources/types.ts:107"
       ],
       "sourceNames": [
         "ResourceDefinition.kind"
@@ -143507,7 +145161,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.qualityType=clarity",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:108"
+        "src/game/resources/types.ts:109"
       ],
       "sourceNames": [
         "ResourceDefinition.qualityType"
@@ -143553,7 +145207,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinition.qualityType=grade",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:108"
+        "src/game/resources/types.ts:109"
       ],
       "sourceNames": [
         "ResourceDefinition.qualityType"
@@ -143599,7 +145253,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=amethyst",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -143645,7 +145299,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=ash",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -143691,7 +145345,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=birch",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -143737,7 +145391,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=bronze",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -143783,7 +145437,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=common_cloth",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -143829,7 +145483,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=copper_ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -143875,7 +145529,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=diamond",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -143921,7 +145575,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=emerald",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -143967,7 +145621,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=fine_linen",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -144013,7 +145667,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=ghostwood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -144059,7 +145713,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=hide",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -144105,7 +145759,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=highland_ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -144151,7 +145805,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=iron_ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -144193,11 +145847,57 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/resources/types.ts#ResourceDefinitionFor.id=ironwood",
+      "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=ironwood",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/types.ts:106"
+      ],
+      "sourceNames": [
+        "ResourceDefinitionFor.id"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/types.ts:106"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/types.ts:106"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/resources/types.ts#ResourceDefinitionFor.id=oak",
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=oak",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -144243,7 +145943,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=pine",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -144289,7 +145989,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=redwood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -144335,7 +146035,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=ruby",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -144381,7 +146081,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=sapphire",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -144427,7 +146127,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=tin_ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -144473,7 +146173,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=willow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -144519,7 +146219,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.id=yew",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:105"
+        "src/game/resources/types.ts:106"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.id"
@@ -144565,7 +146265,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.kind=fiber",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:106"
+        "src/game/resources/types.ts:107"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.kind"
@@ -144611,7 +146311,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.kind=gem",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:106"
+        "src/game/resources/types.ts:107"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.kind"
@@ -144657,7 +146357,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.kind=hide",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:106"
+        "src/game/resources/types.ts:107"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.kind"
@@ -144703,7 +146403,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.kind=ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:106"
+        "src/game/resources/types.ts:107"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.kind"
@@ -144749,7 +146449,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.kind=timber",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:106"
+        "src/game/resources/types.ts:107"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.kind"
@@ -144795,7 +146495,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.qualityType=clarity",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:108"
+        "src/game/resources/types.ts:109"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.qualityType"
@@ -144841,7 +146541,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceDefinitionFor.qualityType=grade",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:108"
+        "src/game/resources/types.ts:109"
       ],
       "sourceNames": [
         "ResourceDefinitionFor.qualityType"
@@ -144887,7 +146587,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.qualityCeiling=choice",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:160"
+        "src/game/resources/types.ts:161"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.qualityCeiling"
@@ -144933,7 +146633,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.qualityCeiling=cracked",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:160"
+        "src/game/resources/types.ts:161"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.qualityCeiling"
@@ -144979,7 +146679,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.qualityCeiling=cut",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:160"
+        "src/game/resources/types.ts:161"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.qualityCeiling"
@@ -145025,7 +146725,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.qualityCeiling=flawed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:160"
+        "src/game/resources/types.ts:161"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.qualityCeiling"
@@ -145071,7 +146771,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.qualityCeiling=flawless",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:160"
+        "src/game/resources/types.ts:161"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.qualityCeiling"
@@ -145117,7 +146817,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.qualityCeiling=perfect",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:160"
+        "src/game/resources/types.ts:161"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.qualityCeiling"
@@ -145163,7 +146863,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.qualityCeiling=pristine",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:160"
+        "src/game/resources/types.ts:161"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.qualityCeiling"
@@ -145209,7 +146909,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.qualityCeiling=rough",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:160"
+        "src/game/resources/types.ts:161"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.qualityCeiling"
@@ -145255,7 +146955,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.qualityCeiling=sound",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:160"
+        "src/game/resources/types.ts:161"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.qualityCeiling"
@@ -145301,7 +147001,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=amethyst",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -145347,7 +147047,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=ash",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -145393,7 +147093,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=birch",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -145439,7 +147139,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=bronze",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -145485,7 +147185,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=common_cloth",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -145531,7 +147231,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=copper_ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -145577,7 +147277,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=diamond",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -145623,7 +147323,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=emerald",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -145669,7 +147369,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=fine_linen",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -145715,7 +147415,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=ghostwood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -145761,7 +147461,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=hide",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -145807,7 +147507,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=highland_ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -145853,7 +147553,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=iron_ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -145895,11 +147595,57 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/resources/types.ts#ResourceNodeIdentity.resourceId=ironwood",
+      "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=ironwood",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/resources/types.ts:160"
+      ],
+      "sourceNames": [
+        "ResourceNodeIdentity.resourceId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/types.ts:160"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/types.ts:160"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/resources/types.ts#ResourceNodeIdentity.resourceId=oak",
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=oak",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -145945,7 +147691,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=pine",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -145991,7 +147737,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=redwood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -146037,7 +147783,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=ruby",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -146083,7 +147829,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=sapphire",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -146129,7 +147875,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=tin_ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -146175,7 +147921,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=willow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -146221,7 +147967,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceNodeIdentity.resourceId=yew",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:159"
+        "src/game/resources/types.ts:160"
       ],
       "sourceNames": [
         "ResourceNodeIdentity.resourceId"
@@ -146267,7 +148013,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceSelector.qualityType=clarity",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:135"
+        "src/game/resources/types.ts:136"
       ],
       "sourceNames": [
         "ResourceSelector.qualityType"
@@ -146313,7 +148059,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceSelector.qualityType=grade",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:135"
+        "src/game/resources/types.ts:136"
       ],
       "sourceNames": [
         "ResourceSelector.qualityType"
@@ -146359,7 +148105,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceSpawn.nodeKind=rock",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:61"
+        "src/game/resources/types.ts:62"
       ],
       "sourceNames": [
         "ResourceSpawn.nodeKind"
@@ -146405,7 +148151,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceSpawn.nodeKind=tree",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:61"
+        "src/game/resources/types.ts:62"
       ],
       "sourceNames": [
         "ResourceSpawn.nodeKind"
@@ -146451,7 +148197,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceVisual.family=broadleaf",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:72"
+        "src/game/resources/types.ts:73"
       ],
       "sourceNames": [
         "ResourceVisual.family"
@@ -146497,7 +148243,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceVisual.family=cloth",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:72"
+        "src/game/resources/types.ts:73"
       ],
       "sourceNames": [
         "ResourceVisual.family"
@@ -146543,7 +148289,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceVisual.family=conifer",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:72"
+        "src/game/resources/types.ts:73"
       ],
       "sourceNames": [
         "ResourceVisual.family"
@@ -146589,7 +148335,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceVisual.family=gem",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:72"
+        "src/game/resources/types.ts:73"
       ],
       "sourceNames": [
         "ResourceVisual.family"
@@ -146635,7 +148381,7 @@
       "canonicalId": "src/game/resources/types.ts#ResourceVisual.family=stone",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:72"
+        "src/game/resources/types.ts:73"
       ],
       "sourceNames": [
         "ResourceVisual.family"
@@ -146681,7 +148427,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=alchemy",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -146727,7 +148473,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=anatomy",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -146773,7 +148519,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=archery",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -146819,7 +148565,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=carpentry",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -146865,7 +148611,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=cartography",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -146911,7 +148657,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=cooking",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -146957,7 +148703,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=farming",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147003,7 +148749,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=fencing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147049,7 +148795,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=fishing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147095,7 +148841,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=forestry",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147141,7 +148887,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=healing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147187,7 +148933,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=lockpicking",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147233,7 +148979,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=lumberjack",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147279,7 +149025,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=mace",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147325,7 +149071,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=magery",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147371,7 +149117,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=mining",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147417,7 +149163,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=music",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147463,7 +149209,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=poisoning",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147509,7 +149255,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=smithing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147555,7 +149301,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=stealing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147601,7 +149347,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=swords",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147647,7 +149393,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=tailoring",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147693,7 +149439,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=taming",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147739,7 +149485,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=tinkering",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -147785,7 +149531,7 @@
       "canonicalId": "src/game/resources/types.ts#SkillRequirement.id=tracking",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/resources/types.ts:37"
+        "src/game/resources/types.ts:38"
       ],
       "sourceNames": [
         "SkillRequirement.id"
@@ -182696,6 +184442,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "vocabulary/src/game/resources/harvest.ts#HarvestResourceId:ironwood",
+      "canonicalId": "ironwood",
+      "family": "vocabulary/src/game/resources/harvest.ts#HarvestResourceId",
+      "catalogSources": [
+        "src/game/resources/harvest.ts:82"
+      ],
+      "sourceNames": [
+        "HarvestResourceId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/harvest.ts:82"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/harvest.ts:82"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "vocabulary/src/game/resources/harvest.ts#HarvestResourceId:oak",
       "canonicalId": "oak",
       "family": "vocabulary/src/game/resources/harvest.ts#HarvestResourceId",
@@ -183352,7 +185144,7 @@
       "canonicalId": "fortune",
       "family": "vocabulary/src/game/resources/types.ts#ClarityMaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:32"
+        "src/game/resources/types.ts:33"
       ],
       "sourceNames": [
         "ClarityMaterialTraitId"
@@ -183398,7 +185190,7 @@
       "canonicalId": "mastery",
       "family": "vocabulary/src/game/resources/types.ts#ClarityMaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:32"
+        "src/game/resources/types.ts:33"
       ],
       "sourceNames": [
         "ClarityMaterialTraitId"
@@ -183444,7 +185236,7 @@
       "canonicalId": "power",
       "family": "vocabulary/src/game/resources/types.ts#ClarityMaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:32"
+        "src/game/resources/types.ts:33"
       ],
       "sourceNames": [
         "ClarityMaterialTraitId"
@@ -183490,7 +185282,7 @@
       "canonicalId": "precision",
       "family": "vocabulary/src/game/resources/types.ts#ClarityMaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:32"
+        "src/game/resources/types.ts:33"
       ],
       "sourceNames": [
         "ClarityMaterialTraitId"
@@ -183536,7 +185328,7 @@
       "canonicalId": "protection",
       "family": "vocabulary/src/game/resources/types.ts#ClarityMaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:32"
+        "src/game/resources/types.ts:33"
       ],
       "sourceNames": [
         "ClarityMaterialTraitId"
@@ -183582,7 +185374,7 @@
       "canonicalId": "cracked",
       "family": "vocabulary/src/game/resources/types.ts#GemClarity",
       "catalogSources": [
-        "src/game/resources/types.ts:28"
+        "src/game/resources/types.ts:29"
       ],
       "sourceNames": [
         "GemClarity"
@@ -183628,7 +185420,7 @@
       "canonicalId": "cut",
       "family": "vocabulary/src/game/resources/types.ts#GemClarity",
       "catalogSources": [
-        "src/game/resources/types.ts:28"
+        "src/game/resources/types.ts:29"
       ],
       "sourceNames": [
         "GemClarity"
@@ -183674,7 +185466,7 @@
       "canonicalId": "flawed",
       "family": "vocabulary/src/game/resources/types.ts#GemClarity",
       "catalogSources": [
-        "src/game/resources/types.ts:28"
+        "src/game/resources/types.ts:29"
       ],
       "sourceNames": [
         "GemClarity"
@@ -183720,7 +185512,7 @@
       "canonicalId": "flawless",
       "family": "vocabulary/src/game/resources/types.ts#GemClarity",
       "catalogSources": [
-        "src/game/resources/types.ts:28"
+        "src/game/resources/types.ts:29"
       ],
       "sourceNames": [
         "GemClarity"
@@ -183766,7 +185558,7 @@
       "canonicalId": "perfect",
       "family": "vocabulary/src/game/resources/types.ts#GemClarity",
       "catalogSources": [
-        "src/game/resources/types.ts:28"
+        "src/game/resources/types.ts:29"
       ],
       "sourceNames": [
         "GemClarity"
@@ -183812,7 +185604,7 @@
       "canonicalId": "amethyst",
       "family": "vocabulary/src/game/resources/types.ts#GemResourceId",
       "catalogSources": [
-        "src/game/resources/types.ts:20"
+        "src/game/resources/types.ts:21"
       ],
       "sourceNames": [
         "GemResourceId"
@@ -183858,7 +185650,7 @@
       "canonicalId": "diamond",
       "family": "vocabulary/src/game/resources/types.ts#GemResourceId",
       "catalogSources": [
-        "src/game/resources/types.ts:20"
+        "src/game/resources/types.ts:21"
       ],
       "sourceNames": [
         "GemResourceId"
@@ -183904,7 +185696,7 @@
       "canonicalId": "emerald",
       "family": "vocabulary/src/game/resources/types.ts#GemResourceId",
       "catalogSources": [
-        "src/game/resources/types.ts:20"
+        "src/game/resources/types.ts:21"
       ],
       "sourceNames": [
         "GemResourceId"
@@ -183950,7 +185742,7 @@
       "canonicalId": "ruby",
       "family": "vocabulary/src/game/resources/types.ts#GemResourceId",
       "catalogSources": [
-        "src/game/resources/types.ts:20"
+        "src/game/resources/types.ts:21"
       ],
       "sourceNames": [
         "GemResourceId"
@@ -183996,7 +185788,7 @@
       "canonicalId": "sapphire",
       "family": "vocabulary/src/game/resources/types.ts#GemResourceId",
       "catalogSources": [
-        "src/game/resources/types.ts:20"
+        "src/game/resources/types.ts:21"
       ],
       "sourceNames": [
         "GemResourceId"
@@ -184042,7 +185834,7 @@
       "canonicalId": "accuracy",
       "family": "vocabulary/src/game/resources/types.ts#GradeMaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:31"
+        "src/game/resources/types.ts:32"
       ],
       "sourceNames": [
         "GradeMaterialTraitId"
@@ -184088,7 +185880,7 @@
       "canonicalId": "damage",
       "family": "vocabulary/src/game/resources/types.ts#GradeMaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:31"
+        "src/game/resources/types.ts:32"
       ],
       "sourceNames": [
         "GradeMaterialTraitId"
@@ -184134,7 +185926,7 @@
       "canonicalId": "handling",
       "family": "vocabulary/src/game/resources/types.ts#GradeMaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:31"
+        "src/game/resources/types.ts:32"
       ],
       "sourceNames": [
         "GradeMaterialTraitId"
@@ -184180,7 +185972,7 @@
       "canonicalId": "keen",
       "family": "vocabulary/src/game/resources/types.ts#GradeMaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:31"
+        "src/game/resources/types.ts:32"
       ],
       "sourceNames": [
         "GradeMaterialTraitId"
@@ -184226,7 +186018,7 @@
       "canonicalId": "sturdy",
       "family": "vocabulary/src/game/resources/types.ts#GradeMaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:31"
+        "src/game/resources/types.ts:32"
       ],
       "sourceNames": [
         "GradeMaterialTraitId"
@@ -184272,7 +186064,7 @@
       "canonicalId": "supple",
       "family": "vocabulary/src/game/resources/types.ts#GradeMaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:31"
+        "src/game/resources/types.ts:32"
       ],
       "sourceNames": [
         "GradeMaterialTraitId"
@@ -184318,7 +186110,7 @@
       "canonicalId": "board",
       "family": "vocabulary/src/game/resources/types.ts#GradeResourceForm",
       "catalogSources": [
-        "src/game/resources/types.ts:25"
+        "src/game/resources/types.ts:26"
       ],
       "sourceNames": [
         "GradeResourceForm"
@@ -184364,7 +186156,7 @@
       "canonicalId": "cloth",
       "family": "vocabulary/src/game/resources/types.ts#GradeResourceForm",
       "catalogSources": [
-        "src/game/resources/types.ts:25"
+        "src/game/resources/types.ts:26"
       ],
       "sourceNames": [
         "GradeResourceForm"
@@ -184410,7 +186202,7 @@
       "canonicalId": "hide",
       "family": "vocabulary/src/game/resources/types.ts#GradeResourceForm",
       "catalogSources": [
-        "src/game/resources/types.ts:25"
+        "src/game/resources/types.ts:26"
       ],
       "sourceNames": [
         "GradeResourceForm"
@@ -184456,7 +186248,7 @@
       "canonicalId": "ingot",
       "family": "vocabulary/src/game/resources/types.ts#GradeResourceForm",
       "catalogSources": [
-        "src/game/resources/types.ts:25"
+        "src/game/resources/types.ts:26"
       ],
       "sourceNames": [
         "GradeResourceForm"
@@ -184502,7 +186294,7 @@
       "canonicalId": "log",
       "family": "vocabulary/src/game/resources/types.ts#GradeResourceForm",
       "catalogSources": [
-        "src/game/resources/types.ts:25"
+        "src/game/resources/types.ts:26"
       ],
       "sourceNames": [
         "GradeResourceForm"
@@ -184548,7 +186340,7 @@
       "canonicalId": "ore",
       "family": "vocabulary/src/game/resources/types.ts#GradeResourceForm",
       "catalogSources": [
-        "src/game/resources/types.ts:25"
+        "src/game/resources/types.ts:26"
       ],
       "sourceNames": [
         "GradeResourceForm"
@@ -185090,6 +186882,56 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "vocabulary/src/game/resources/types.ts#GradeResourceId:ironwood",
+      "canonicalId": "ironwood",
+      "family": "vocabulary/src/game/resources/types.ts#GradeResourceId",
+      "catalogSources": [
+        "src/game/resources/types.ts:3"
+      ],
+      "sourceNames": [
+        "GradeResourceId"
+      ],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:4"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/resources/types.ts:3"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/resources/types.ts:3"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "vocabulary/src/game/resources/types.ts#GradeResourceId:oak",
       "canonicalId": "oak",
       "family": "vocabulary/src/game/resources/types.ts#GradeResourceId",
@@ -185394,7 +187236,7 @@
       "canonicalId": "choice",
       "family": "vocabulary/src/game/resources/types.ts#MaterialGrade",
       "catalogSources": [
-        "src/game/resources/types.ts:27"
+        "src/game/resources/types.ts:28"
       ],
       "sourceNames": [
         "MaterialGrade"
@@ -185448,7 +187290,7 @@
       "canonicalId": "pristine",
       "family": "vocabulary/src/game/resources/types.ts#MaterialGrade",
       "catalogSources": [
-        "src/game/resources/types.ts:27"
+        "src/game/resources/types.ts:28"
       ],
       "sourceNames": [
         "MaterialGrade"
@@ -185502,7 +187344,7 @@
       "canonicalId": "rough",
       "family": "vocabulary/src/game/resources/types.ts#MaterialGrade",
       "catalogSources": [
-        "src/game/resources/types.ts:27"
+        "src/game/resources/types.ts:28"
       ],
       "sourceNames": [
         "MaterialGrade"
@@ -185556,7 +187398,7 @@
       "canonicalId": "sound",
       "family": "vocabulary/src/game/resources/types.ts#MaterialGrade",
       "catalogSources": [
-        "src/game/resources/types.ts:27"
+        "src/game/resources/types.ts:28"
       ],
       "sourceNames": [
         "MaterialGrade"
@@ -185610,7 +187452,7 @@
       "canonicalId": "choice",
       "family": "vocabulary/src/game/resources/types.ts#MaterialQuality",
       "catalogSources": [
-        "src/game/resources/types.ts:29"
+        "src/game/resources/types.ts:30"
       ],
       "sourceNames": [
         "MaterialQuality"
@@ -185656,7 +187498,7 @@
       "canonicalId": "cracked",
       "family": "vocabulary/src/game/resources/types.ts#MaterialQuality",
       "catalogSources": [
-        "src/game/resources/types.ts:29"
+        "src/game/resources/types.ts:30"
       ],
       "sourceNames": [
         "MaterialQuality"
@@ -185702,7 +187544,7 @@
       "canonicalId": "cut",
       "family": "vocabulary/src/game/resources/types.ts#MaterialQuality",
       "catalogSources": [
-        "src/game/resources/types.ts:29"
+        "src/game/resources/types.ts:30"
       ],
       "sourceNames": [
         "MaterialQuality"
@@ -185748,7 +187590,7 @@
       "canonicalId": "flawed",
       "family": "vocabulary/src/game/resources/types.ts#MaterialQuality",
       "catalogSources": [
-        "src/game/resources/types.ts:29"
+        "src/game/resources/types.ts:30"
       ],
       "sourceNames": [
         "MaterialQuality"
@@ -185794,7 +187636,7 @@
       "canonicalId": "flawless",
       "family": "vocabulary/src/game/resources/types.ts#MaterialQuality",
       "catalogSources": [
-        "src/game/resources/types.ts:29"
+        "src/game/resources/types.ts:30"
       ],
       "sourceNames": [
         "MaterialQuality"
@@ -185840,7 +187682,7 @@
       "canonicalId": "perfect",
       "family": "vocabulary/src/game/resources/types.ts#MaterialQuality",
       "catalogSources": [
-        "src/game/resources/types.ts:29"
+        "src/game/resources/types.ts:30"
       ],
       "sourceNames": [
         "MaterialQuality"
@@ -185886,7 +187728,7 @@
       "canonicalId": "pristine",
       "family": "vocabulary/src/game/resources/types.ts#MaterialQuality",
       "catalogSources": [
-        "src/game/resources/types.ts:29"
+        "src/game/resources/types.ts:30"
       ],
       "sourceNames": [
         "MaterialQuality"
@@ -185932,7 +187774,7 @@
       "canonicalId": "rough",
       "family": "vocabulary/src/game/resources/types.ts#MaterialQuality",
       "catalogSources": [
-        "src/game/resources/types.ts:29"
+        "src/game/resources/types.ts:30"
       ],
       "sourceNames": [
         "MaterialQuality"
@@ -185978,7 +187820,7 @@
       "canonicalId": "sound",
       "family": "vocabulary/src/game/resources/types.ts#MaterialQuality",
       "catalogSources": [
-        "src/game/resources/types.ts:29"
+        "src/game/resources/types.ts:30"
       ],
       "sourceNames": [
         "MaterialQuality"
@@ -186024,7 +187866,7 @@
       "canonicalId": "accuracy",
       "family": "vocabulary/src/game/resources/types.ts#MaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:33"
+        "src/game/resources/types.ts:34"
       ],
       "sourceNames": [
         "MaterialTraitId"
@@ -186070,7 +187912,7 @@
       "canonicalId": "damage",
       "family": "vocabulary/src/game/resources/types.ts#MaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:33"
+        "src/game/resources/types.ts:34"
       ],
       "sourceNames": [
         "MaterialTraitId"
@@ -186116,7 +187958,7 @@
       "canonicalId": "fortune",
       "family": "vocabulary/src/game/resources/types.ts#MaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:33"
+        "src/game/resources/types.ts:34"
       ],
       "sourceNames": [
         "MaterialTraitId"
@@ -186162,7 +188004,7 @@
       "canonicalId": "handling",
       "family": "vocabulary/src/game/resources/types.ts#MaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:33"
+        "src/game/resources/types.ts:34"
       ],
       "sourceNames": [
         "MaterialTraitId"
@@ -186208,7 +188050,7 @@
       "canonicalId": "keen",
       "family": "vocabulary/src/game/resources/types.ts#MaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:33"
+        "src/game/resources/types.ts:34"
       ],
       "sourceNames": [
         "MaterialTraitId"
@@ -186254,7 +188096,7 @@
       "canonicalId": "mastery",
       "family": "vocabulary/src/game/resources/types.ts#MaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:33"
+        "src/game/resources/types.ts:34"
       ],
       "sourceNames": [
         "MaterialTraitId"
@@ -186300,7 +188142,7 @@
       "canonicalId": "power",
       "family": "vocabulary/src/game/resources/types.ts#MaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:33"
+        "src/game/resources/types.ts:34"
       ],
       "sourceNames": [
         "MaterialTraitId"
@@ -186346,7 +188188,7 @@
       "canonicalId": "precision",
       "family": "vocabulary/src/game/resources/types.ts#MaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:33"
+        "src/game/resources/types.ts:34"
       ],
       "sourceNames": [
         "MaterialTraitId"
@@ -186392,7 +188234,7 @@
       "canonicalId": "protection",
       "family": "vocabulary/src/game/resources/types.ts#MaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:33"
+        "src/game/resources/types.ts:34"
       ],
       "sourceNames": [
         "MaterialTraitId"
@@ -186438,7 +188280,7 @@
       "canonicalId": "sturdy",
       "family": "vocabulary/src/game/resources/types.ts#MaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:33"
+        "src/game/resources/types.ts:34"
       ],
       "sourceNames": [
         "MaterialTraitId"
@@ -186484,7 +188326,7 @@
       "canonicalId": "supple",
       "family": "vocabulary/src/game/resources/types.ts#MaterialTraitId",
       "catalogSources": [
-        "src/game/resources/types.ts:33"
+        "src/game/resources/types.ts:34"
       ],
       "sourceNames": [
         "MaterialTraitId"
@@ -186530,7 +188372,7 @@
       "canonicalId": "fiber",
       "family": "vocabulary/src/game/resources/types.ts#NonGemResourceKind",
       "catalogSources": [
-        "src/game/resources/types.ts:23"
+        "src/game/resources/types.ts:24"
       ],
       "sourceNames": [
         "NonGemResourceKind"
@@ -186576,7 +188418,7 @@
       "canonicalId": "hide",
       "family": "vocabulary/src/game/resources/types.ts#NonGemResourceKind",
       "catalogSources": [
-        "src/game/resources/types.ts:23"
+        "src/game/resources/types.ts:24"
       ],
       "sourceNames": [
         "NonGemResourceKind"
@@ -186622,7 +188464,7 @@
       "canonicalId": "ore",
       "family": "vocabulary/src/game/resources/types.ts#NonGemResourceKind",
       "catalogSources": [
-        "src/game/resources/types.ts:23"
+        "src/game/resources/types.ts:24"
       ],
       "sourceNames": [
         "NonGemResourceKind"
@@ -186668,7 +188510,7 @@
       "canonicalId": "timber",
       "family": "vocabulary/src/game/resources/types.ts#NonGemResourceKind",
       "catalogSources": [
-        "src/game/resources/types.ts:23"
+        "src/game/resources/types.ts:24"
       ],
       "sourceNames": [
         "NonGemResourceKind"
@@ -186714,7 +188556,7 @@
       "canonicalId": "bench",
       "family": "vocabulary/src/game/resources/types.ts#ProcessingStation",
       "catalogSources": [
-        "src/game/resources/types.ts:34"
+        "src/game/resources/types.ts:35"
       ],
       "sourceNames": [
         "ProcessingStation"
@@ -186760,7 +188602,7 @@
       "canonicalId": "fire",
       "family": "vocabulary/src/game/resources/types.ts#ProcessingStation",
       "catalogSources": [
-        "src/game/resources/types.ts:34"
+        "src/game/resources/types.ts:35"
       ],
       "sourceNames": [
         "ProcessingStation"
@@ -186806,7 +188648,7 @@
       "canonicalId": "forge",
       "family": "vocabulary/src/game/resources/types.ts#ProcessingStation",
       "catalogSources": [
-        "src/game/resources/types.ts:34"
+        "src/game/resources/types.ts:35"
       ],
       "sourceNames": [
         "ProcessingStation"
@@ -186852,7 +188694,7 @@
       "canonicalId": "board",
       "family": "vocabulary/src/game/resources/types.ts#ResourceForm",
       "catalogSources": [
-        "src/game/resources/types.ts:26"
+        "src/game/resources/types.ts:27"
       ],
       "sourceNames": [
         "ResourceForm"
@@ -186902,7 +188744,7 @@
       "canonicalId": "cloth",
       "family": "vocabulary/src/game/resources/types.ts#ResourceForm",
       "catalogSources": [
-        "src/game/resources/types.ts:26"
+        "src/game/resources/types.ts:27"
       ],
       "sourceNames": [
         "ResourceForm"
@@ -186952,7 +188794,7 @@
       "canonicalId": "gem",
       "family": "vocabulary/src/game/resources/types.ts#ResourceForm",
       "catalogSources": [
-        "src/game/resources/types.ts:26"
+        "src/game/resources/types.ts:27"
       ],
       "sourceNames": [
         "ResourceForm"
@@ -187002,7 +188844,7 @@
       "canonicalId": "hide",
       "family": "vocabulary/src/game/resources/types.ts#ResourceForm",
       "catalogSources": [
-        "src/game/resources/types.ts:26"
+        "src/game/resources/types.ts:27"
       ],
       "sourceNames": [
         "ResourceForm"
@@ -187052,7 +188894,7 @@
       "canonicalId": "ingot",
       "family": "vocabulary/src/game/resources/types.ts#ResourceForm",
       "catalogSources": [
-        "src/game/resources/types.ts:26"
+        "src/game/resources/types.ts:27"
       ],
       "sourceNames": [
         "ResourceForm"
@@ -187102,7 +188944,7 @@
       "canonicalId": "log",
       "family": "vocabulary/src/game/resources/types.ts#ResourceForm",
       "catalogSources": [
-        "src/game/resources/types.ts:26"
+        "src/game/resources/types.ts:27"
       ],
       "sourceNames": [
         "ResourceForm"
@@ -187152,7 +188994,7 @@
       "canonicalId": "ore",
       "family": "vocabulary/src/game/resources/types.ts#ResourceForm",
       "catalogSources": [
-        "src/game/resources/types.ts:26"
+        "src/game/resources/types.ts:27"
       ],
       "sourceNames": [
         "ResourceForm"
@@ -187202,7 +189044,7 @@
       "canonicalId": "fiber",
       "family": "vocabulary/src/game/resources/types.ts#ResourceKind",
       "catalogSources": [
-        "src/game/resources/types.ts:24"
+        "src/game/resources/types.ts:25"
       ],
       "sourceNames": [
         "ResourceKind"
@@ -187248,7 +189090,7 @@
       "canonicalId": "gem",
       "family": "vocabulary/src/game/resources/types.ts#ResourceKind",
       "catalogSources": [
-        "src/game/resources/types.ts:24"
+        "src/game/resources/types.ts:25"
       ],
       "sourceNames": [
         "ResourceKind"
@@ -187294,7 +189136,7 @@
       "canonicalId": "hide",
       "family": "vocabulary/src/game/resources/types.ts#ResourceKind",
       "catalogSources": [
-        "src/game/resources/types.ts:24"
+        "src/game/resources/types.ts:25"
       ],
       "sourceNames": [
         "ResourceKind"
@@ -187340,7 +189182,7 @@
       "canonicalId": "ore",
       "family": "vocabulary/src/game/resources/types.ts#ResourceKind",
       "catalogSources": [
-        "src/game/resources/types.ts:24"
+        "src/game/resources/types.ts:25"
       ],
       "sourceNames": [
         "ResourceKind"
@@ -187386,7 +189228,7 @@
       "canonicalId": "timber",
       "family": "vocabulary/src/game/resources/types.ts#ResourceKind",
       "catalogSources": [
-        "src/game/resources/types.ts:24"
+        "src/game/resources/types.ts:25"
       ],
       "sourceNames": [
         "ResourceKind"

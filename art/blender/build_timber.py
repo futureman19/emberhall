@@ -7,12 +7,19 @@ import bpy
 import math
 import json
 import hashlib
+import os
 from pathlib import Path
 from mathutils import Vector
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'public/art/lanternwood'
-IDS = ['pine', 'willow', 'birch', 'ash', 'redwood', 'yew', 'ghostwood']
+IDS = ['pine', 'willow', 'birch', 'ash', 'redwood', 'yew', 'ghostwood', 'ironwood']
+# TIMBER_ONLY=<species> builds one species and merges it into the existing
+# manifest, leaving every sibling GLB and entry byte-identical.
+ONLY = os.environ.get('TIMBER_ONLY')
+if ONLY:
+ assert ONLY in IDS, f'unknown species {ONLY}'
+ IDS = [ONLY]
 DESIGNS = {
  'pine': 'Scalloped evergreen tiers, lifted branch tips and rounded leader',
  'willow': 'Arched arms, umbrella crown and long soft pendant foliage',
@@ -21,6 +28,7 @@ DESIGNS = {
  'redwood': 'Buttressed bole and narrow stacked rounded evergreen boughs',
  'yew': 'Twisted spreading arms and broad flattened evergreen pillows',
  'ghostwood': 'Spiralling pale forks and connected teardrop foliage on visible slender crown boughs',
+ 'ironwood': 'Squat iron-dark bole, short muscular arms and dense hammered rounded pads',
 }
 
 def xyz(p): return Vector((p[0], -p[2], p[1]))
@@ -89,23 +97,27 @@ def clone(objects):
  return copies
 
 OUT.mkdir(parents=True,exist_ok=True)
-manifest={'generator':'Blender '+bpy.app.version_string,'coordinates':'Y-up; assembled mature ground pivot; runtime trunk/crown anchors baked by loader','assets':{}}
+manifest_path=OUT/'timber-manifest.json'
+if ONLY and manifest_path.exists():
+ manifest=json.loads(manifest_path.read_text())
+else:
+ manifest={'generator':'Blender '+bpy.app.version_string,'coordinates':'Y-up; assembled mature ground pivot; runtime trunk/crown anchors baked by loader','assets':{}}
 oak=(OUT/'oak.glb').read_bytes()
 assert hashlib.sha256(oak).hexdigest()=='e38306e785170da4e66399611d7e1e715d4ccb40b9693883f63abb66055f0f8a'
-manifest['assets']['oak']={'url':'/art/lanternwood/oak.glb','bytes':len(oak),'sha256':hashlib.sha256(oak).hexdigest(),'source':'art/blender/oak-kit.blend','design':'Approved oak retained byte-identical; original local-part anchors'}
+manifest['assets'].setdefault('oak',{'url':'/art/lanternwood/oak.glb','bytes':len(oak),'sha256':hashlib.sha256(oak).hexdigest(),'source':'art/blender/oak-kit.blend','design':'Approved oak retained byte-identical; original local-part anchors'})
 for species in IDS:
  bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
  WHITE=material('export_runtime_palette',(1,1,1));bark=material(species+'_editable_bark',(.34,.23,.15));leaf=material(species+'_editable_leaf',(.26,.42,.24))
  trunk=[];crown=[]
- width={'birch':.09,'redwood':.23,'yew':.17,'ghostwood':.11}.get(species,.14)
- bend={'willow':.18,'yew':-.2,'ghostwood':.24}.get(species,.04)
+ width={'birch':.09,'redwood':.23,'yew':.17,'ghostwood':.11,'ironwood':.19}.get(species,.14)
+ bend={'willow':.18,'yew':-.2,'ghostwood':.24,'ironwood':-.08}.get(species,.04)
  trunk.append(tube(species+'_bole',[(0,0,0),(bend,.7,.03),(-bend*.3,1.4,-.02),(.06,2.1,0)],[width*1.5,width,width*.72,.045],bark))
  for k in range(4):
   a=k*math.tau/4+.3
   trunk.append(tube(species+'_root_'+str(k),[(math.cos(a)*width*2.1,.025,math.sin(a)*width*2.1),(math.cos(a)*width*.7,.18,math.sin(a)*width*.7),(0,.4,0)],[.018,width*.45,width*.55],bark))
- arms={'pine':6,'willow':7,'birch':5,'ash':6,'redwood':8,'yew':7,'ghostwood':5}[species]
+ arms={'pine':6,'willow':7,'birch':5,'ash':6,'redwood':8,'yew':7,'ghostwood':5,'ironwood':5}[species]
  for k in range(arms):
-  a=k*2.39996; reach=.55 if species=='redwood' else .82
+  a=k*2.39996; reach=.55 if species in ('redwood','ironwood') else .82
   h=1.1+(k%3)*.21
   trunk.append(tube(species+'_branch_'+str(k),[(0,h,0),(math.cos(a)*reach*.45,h+.35,math.sin(a)*reach*.45),(math.cos(a)*reach,h+.6,math.sin(a)*reach)],[width*.57,.065,.019],bark))
  if species in ['pine','redwood']:
@@ -133,6 +145,11 @@ for species in IDS:
   for k in range(8):
    a=k*2.4
    crown.append(lobe('yew_pillow_'+str(k),(math.cos(a)*.55,2.1+(k%3)*.5,math.sin(a)*.55),(.69,.35,.51),leaf,a))
+ elif species=='ironwood':
+  for k in range(7):
+   a=k*2.4
+   crown.append(lobe('ironwood_pad_'+str(k),(math.cos(a)*.5,2.0+(k%3)*.42,math.sin(a)*.5),(.62,.42,.55),leaf,a))
+  crown.append(lobe('ironwood_crown_cap',(0,3.35,0),(.58,.44,.5),leaf))
  else:
   for k in range(5):
    a=k*2.4
@@ -170,5 +187,5 @@ for species in IDS:
   parts[o.name]={'vertices':len(co),'triangles':sum(len(p.vertices)-2 for p in o.data.polygons),'min':[round(min(p[i] for p in game),6) for i in range(3)],'max':[round(max(p[i] for p in game),6) for i in range(3)]}
  data=dest.read_bytes()
  manifest['assets'][species]={'url':'/art/lanternwood/'+dest.name,'source':source.relative_to(ROOT).as_posix(),'design':DESIGNS[species],'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'parts':parts}
-(OUT/'timber-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+manifest_path.write_text(json.dumps(manifest,indent=2)+'\n')
 print('TIMBER_EXPORT_OK '+json.dumps({id:a['bytes'] for id,a in manifest['assets'].items()}))

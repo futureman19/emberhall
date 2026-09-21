@@ -5,9 +5,9 @@ import { isGhostwoodTree } from "./forestry.ts";
 import { GHOSTWOOD_LUMBERJACK, timberGradeLabel, RESOURCE_IDS, RESOURCE_CATALOG } from "./resources/catalog.ts";
 import { createWorld } from "./world.ts";
 
-test("timber - eight woods sit in the catalog", () => {
+test("timber - nine woods sit in the catalog", () => {
   const woods = RESOURCE_IDS.filter((id) => RESOURCE_CATALOG[id].kind === "timber");
-  assert.deepEqual(woods, ["oak", "pine", "willow", "birch", "ash", "redwood", "yew", "ghostwood"]);
+  assert.deepEqual(woods, ["oak", "pine", "willow", "birch", "ash", "redwood", "yew", "ghostwood", "ironwood"]);
   assert.equal(timberGradeLabel("pristine"), "hardened");
   assert.equal(timberGradeLabel("rough"), "rough");
 });

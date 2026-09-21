@@ -9,6 +9,7 @@ export type GradeResourceId =
   | "redwood"
   | "yew"
   | "ghostwood"
+  | "ironwood"
   | "copper_ore"
   | "tin_ore"
   | "bronze"
@@ -170,6 +171,7 @@ const GRADE_RESOURCE_IDS = [
   "redwood",
   "yew",
   "ghostwood",
+  "ironwood",
   "copper_ore",
   "tin_ore",
   "bronze",

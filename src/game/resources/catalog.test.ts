@@ -22,6 +22,7 @@ const EXPECTED_IDS = [
   "redwood",
   "yew",
   "ghostwood",
+  "ironwood",
   "copper_ore",
   "tin_ore",
   "bronze",
@@ -263,6 +264,7 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       redwood: ["accuracy"],
       yew: ["accuracy"],
       ghostwood: [],
+      ironwood: ["damage"],
       copper_ore: ["handling"],
       tin_ore: [],
       bronze: ["keen"],
@@ -309,7 +311,7 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       }
     }
   }
-  assert.deepEqual([...routeIds], ["saw_oak", "saw_pine", "saw_willow", "saw_birch", "saw_ash", "saw_redwood", "saw_yew", "saw_ghostwood", "smelt_copper_ore", "smelt_tin_ore", "smelt_bronze", "smelt_iron_ore", "smelt_highland_ore"]);
+  assert.deepEqual([...routeIds], ["saw_oak", "saw_pine", "saw_willow", "saw_birch", "saw_ash", "saw_redwood", "saw_yew", "saw_ghostwood", "saw_ironwood", "smelt_copper_ore", "smelt_tin_ore", "smelt_bronze", "smelt_iron_ore", "smelt_highland_ore"]);
   assert.deepEqual(
     Object.fromEntries(Object.values(RESOURCE_CATALOG).map(({ id, forms }) => [id, forms])),
     {
@@ -321,6 +323,7 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       redwood: ["log", "board"],
       yew: ["log", "board"],
       ghostwood: ["log", "board"],
+      ironwood: ["log", "board"],
       copper_ore: ["ore", "ingot"],
       tin_ore: ["ore", "ingot"],
       bronze: ["ingot"],

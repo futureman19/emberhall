@@ -6,10 +6,10 @@
 - All measured gates passed.
 
 ## Evidence
-- Legal combinations enumerated: **723,360**; cap violations: **0**.
+- Legal combinations enumerated: **809,952**; cap violations: **0**.
 - Max-skill bow workmanship on choice-grade inputs: ordinary 0.0%, fine 80.6%, exceptional 19.4%.
 - Max-skill sword workmanship on choice-grade inputs: ordinary 0.0%, fine 81.0%, exceptional 19.0%.
-- Representative save payload: **23,723 bytes**; largest Vault inscription: **779 bytes**.
+- Representative save payload: **23,746 bytes**; largest Vault inscription: **779 bytes**.
 - Desktop/mobile browser journey: **PASS**.
 
 ## Acquisition model
@@ -19,6 +19,7 @@ Deterministic 200-seed simulations use 1.5s per surveyed node plus 0.72s per suc
 |---|---:|---:|---:|---:|---:|
 | oak bow body | 50 | 5 | 5 | 7 | 11.1 |
 | redwood bow body | 50 | 5485 | 8401 | 11333 | 8231.1 |
+| ironwood bow body | 70 | 5085 | 8619 | 10925 | 7631.1 |
 | copper sword edge | 20 | 29 | 47 | 68 | 47.1 |
 | tin for bronze | 35 | 247 | 413 | 566 | 374.1 |
 | highland sword edge | 55 | 669 | 1122 | 1833 | 1007.1 |
@@ -36,9 +37,9 @@ Deterministic 200-seed simulations use 1.5s per surveyed node plus 0.72s per suc
 - Sword: 5 ingots + 1 timber + 1 cloth + optional 1 gem.
 
 ## Stat caps
-- **bow:** 32,256 legal combinations; max damage 14/15, hit 10/10, armor 0/0, local Fortune 5/5; 0 violations.
-- **sword:** 491,520 legal combinations; max damage 18/18, hit 8/8, armor 0/0, local Fortune 0/5; 0 violations.
-- **shield:** 168,960 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
+- **bow:** 36,288 legal combinations; max damage 15/15, hit 10/10, armor 0/0, local Fortune 5/5; 0 violations.
+- **sword:** 552,960 legal combinations; max damage 18/18, hit 8/8, armor 0/0, local Fortune 0/5; 0 violations.
+- **shield:** 190,080 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
 - **helm:** 5,280 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
 - **mail:** 5,280 legal combinations; max damage 0/0, hit 0/0, armor 7/7, local Fortune 5/5; 0 violations.
 - **boots:** 5,280 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.

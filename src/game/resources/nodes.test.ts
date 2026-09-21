@@ -279,6 +279,9 @@ test("wild woods keep to named groves; oak is everywhere; the hall is oak", () =
   assert.ok(rawWeightAt(110, 440, "tree", "yew") > 0);
   assert.ok(rawWeightAt(110, 440, "tree", "ghostwood") > 0);
   assert.equal(rawWeightAt(256, 292, "tree", "ghostwood"), 0);
+  assert.ok(rawWeightAt(188, 88, "tree", "ironwood") > 0);
+  assert.ok(rawWeightAt(250, 48, "tree", "ironwood") > 0);
+  assert.equal(rawWeightAt(256, 292, "tree", "ironwood"), 0);
 });
 
 test("biome ordering export preserves representative biomeAt behavior", () => {

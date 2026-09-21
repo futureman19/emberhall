@@ -10,6 +10,7 @@ import { executeExactCraftTransaction } from "./transaction.ts";
 const ROUGH_OAK = makeResourceStackKey("oak", "log", "rough");
 const SOUND_OAK = makeResourceStackKey("oak", "log", "sound");
 const CHOICE_REDWOOD = makeResourceStackKey("redwood", "log", "choice");
+const CHOICE_IRONWOOD = makeResourceStackKey("ironwood", "log", "choice");
 const SOUND_CLOTH = makeResourceStackKey("common_cloth", "cloth", "sound");
 const PRISTINE_LINEN = makeResourceStackKey("fine_linen", "cloth", "pristine");
 const IRON_INGOT = makeResourceStackKey("iron_ore", "ingot", "sound");
@@ -201,6 +202,36 @@ test("exact bowcraft - redwood always creates one material-specific item with de
   assert.equal(bow.resolvedStats?.hitBonus, 3, "choice redwood accuracy trait plus fine workmanship");
   assert.deepEqual(bow.components, [
     { role: "body", resourceId: "redwood", form: "log", grade: "choice", amount: 5 },
+    { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+  ]);
+});
+
+test("exact bowcraft - ironwood always creates one material-specific item with deterministic physical stats", () => {
+  const world = createWorld();
+  standAtYard(world);
+  world.player.skills.carpentry = 100;
+  addResource(world.player.resources, CHOICE_IRONWOOD, 5);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+
+  const note = withRoll(0.5, () => commandCraftExact(world, "bow", bowSelections(CHOICE_IRONWOOD)));
+
+  assert.match(note ?? "", /ironwood bow/i);
+  assert.equal(world.player.pack.bow, 0, "the unique bow leaves no duplicate mundane stack output");
+  assert.equal(world.player.rares.length, 1);
+  const bow = world.player.rares[0]!;
+  assert.equal(bow.base, "bow");
+  assert.equal(bow.formId, "bow");
+  assert.equal(bow.recipeId, "bow");
+  assert.equal(bow.recipeVersion, 1);
+  assert.equal(bow.source, "crafted");
+  assert.equal(bow.workmanship, "fine", "mastery on choice ironwood floors ordinary work out");
+  assert.equal(bow.maker, you(world)!.name);
+  assert.deepEqual(bow.affixes, [], "materials and workmanship never invent gem magic");
+  assert.deepEqual(bow.inlays, []);
+  assert.equal(bow.resolvedStats?.damage, 9.5, "base bow plus the choice ironwood damage trait");
+  assert.equal(bow.resolvedStats?.hitBonus, 1, "fine workmanship only - ironwood grants no accuracy");
+  assert.deepEqual(bow.components, [
+    { role: "body", resourceId: "ironwood", form: "log", grade: "choice", amount: 5 },
     { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
   ]);
 });
