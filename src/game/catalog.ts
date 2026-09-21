@@ -32,6 +32,14 @@ export function isDusk(hour: number) {
   return (h >= 18 && h < 20) || (h >= 5 && h < 7);
 }
 
+/** Hide grade follows the beast's tier — the taming difficulty ladder doubles as the hunting ladder. */
+export function hideGradeFor(tameDiff: number): "rough" | "sound" | "choice" | "pristine" {
+  if (tameDiff >= 72) return "pristine";
+  if (tameDiff >= 50) return "choice";
+  if (tameDiff >= 30) return "sound";
+  return "rough";
+}
+
 export const SKILL_META: Record<SkillId, { label: string }> = {
   swords: { label: "Swordsmanship" },
   lumberjack: { label: "Lumberjacking" },

@@ -15,19 +15,20 @@ export type GradeResourceId =
   | "iron_ore"
   | "highland_ore"
   | "common_cloth"
-  | "fine_linen";
+  | "fine_linen"
+  | "hide";
 export type GemResourceId = "ruby" | "sapphire" | "emerald" | "diamond" | "amethyst";
 export type ResourceId = GradeResourceId | GemResourceId;
 
-export type NonGemResourceKind = "timber" | "ore" | "fiber";
+export type NonGemResourceKind = "timber" | "ore" | "fiber" | "hide";
 export type ResourceKind = NonGemResourceKind | "gem";
-export type GradeResourceForm = "log" | "board" | "ore" | "ingot" | "cloth";
+export type GradeResourceForm = "log" | "board" | "ore" | "ingot" | "cloth" | "hide";
 export type ResourceForm = GradeResourceForm | "gem";
 export type MaterialGrade = "rough" | "sound" | "choice" | "pristine";
 export type GemClarity = "cracked" | "flawed" | "cut" | "flawless" | "perfect";
 export type MaterialQuality = MaterialGrade | GemClarity;
 export type QualityForResource<I extends ResourceId> = I extends GemResourceId ? GemClarity : MaterialGrade;
-export type GradeMaterialTraitId = "accuracy" | "damage" | "handling" | "keen" | "sturdy";
+export type GradeMaterialTraitId = "accuracy" | "damage" | "handling" | "keen" | "sturdy" | "supple";
 export type ClarityMaterialTraitId = "power" | "fortune" | "precision" | "protection" | "mastery";
 export type MaterialTraitId = GradeMaterialTraitId | ClarityMaterialTraitId;
 export type ProcessingStation = "bench" | "forge" | "fire";
@@ -84,9 +85,11 @@ export type ResourceKindFor<I extends ResourceId> = I extends "copper_ore" | "ti
   ? "ore"
   : I extends "common_cloth" | "fine_linen"
     ? "fiber"
-    : I extends GemResourceId
-      ? "gem"
-      : "timber";
+    : I extends "hide"
+      ? "hide"
+      : I extends GemResourceId
+        ? "gem"
+        : "timber";
 
 export type ResourceFormFor<I extends ResourceId> = ResourceKindFor<I> extends "timber"
   ? "log" | "board"
@@ -94,7 +97,9 @@ export type ResourceFormFor<I extends ResourceId> = ResourceKindFor<I> extends "
     ? "ore" | "ingot"
     : ResourceKindFor<I> extends "fiber"
       ? "cloth"
-      : "gem";
+      : ResourceKindFor<I> extends "hide"
+        ? "hide"
+        : "gem";
 
 export type GradeResourceDefinition<I extends GradeResourceId = GradeResourceId> = ResourceDefinitionBase & {
   readonly id: I;
@@ -172,6 +177,7 @@ const GRADE_RESOURCE_IDS = [
   "highland_ore",
   "common_cloth",
   "fine_linen",
+  "hide",
 ] as const satisfies readonly GradeResourceId[];
 const GEM_RESOURCE_IDS = ["ruby", "sapphire", "emerald", "diamond", "amethyst"] as const satisfies readonly GemResourceId[];
 const MATERIAL_GRADES = ["rough", "sound", "choice", "pristine"] as const satisfies readonly MaterialGrade[];

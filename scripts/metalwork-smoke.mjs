@@ -79,12 +79,14 @@ try {
       self.x = forge.tx;
       self.z = forge.ty;
       world.player.skills.smithing = 100;
+      world.player.skills.tailoring = 100;
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("copper_ore", "ore", "choice"), 2);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("copper_ore", "ingot", "choice"), 7);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("tin_ore", "ingot", "choice"), 1);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("iron_ore", "ingot", "choice"), 11);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("oak", "board", "sound"), 3);
-      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("fine_linen", "cloth", "sound"), 6);
+      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("fine_linen", "cloth", "sound"), 7);
+      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("hide", "hide", "choice"), 3);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("diamond", "gem", "flawless"), 1);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("amethyst", "gem", "flawless"), 1);
       Math.random = () => 0.5;
@@ -143,6 +145,13 @@ try {
       await domClick(helmWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }));
       await domClick(helmWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
       await domClick(helmWork.getByRole("button", { name: "Craft selected helm" }));
+
+      // Leather: field work — three hides and a binding, blade in hand.
+      const leatherWork = page.locator('[aria-label="Advanced leather work"]');
+      await leatherWork.getByText("Form · Leather Tunic").waitFor({ state: "visible", timeout: 15000 });
+      await domClick(leatherWork.getByRole("radio", { name: /Hide · Choice hide/ }));
+      await domClick(leatherWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
+      await domClick(leatherWork.getByRole("button", { name: "Craft selected leather" }));
       lap(`${viewport.name}: early forms crafted`);
 
       // Mastery: a flawless amethyst into the sword — the blade schools its wielder.
@@ -204,6 +213,8 @@ try {
       if (helm) player.commandEquipRare(world, helm.uid);
       const mail = world.player.rares.find((r) => r.base === "mail");
       if (mail) player.commandEquipRare(world, mail.uid);
+      const tunic = world.player.rares.find((r) => r.base === "leather");
+      if (tunic && !mail) player.commandEquipRare(world, tunic.uid);
       const gauntlets = world.player.rares.find((r) => r.base === "gauntlets");
       if (gauntlets) player.commandEquipRare(world, gauntlets.uid);
       const armorWorn = rare.rareMods(world).armor;
@@ -223,6 +234,8 @@ try {
         mailArmor: mail?.resolvedStats?.armor,
         mailInlay: mail?.inlays?.[0] ? `${mail.inlays[0].resourceId}:${mail.inlays[0].clarity}` : null,
         mailEquipped: mail ? world.player.wearRare.chest === mail.uid : false,
+        leatherArmor: tunic?.resolvedStats?.armor,
+        leatherEquipped: tunic ? world.player.wearRare.chest === tunic.uid : false,
         gauntletsArmor: gauntlets?.resolvedStats?.armor,
         gauntletsEquipped: gauntlets ? world.player.wearRare.hands === gauntlets.uid : false,
         ironLeft: inventory.resourceCount(world.player.resources, "iron_ore:ingot:choice"),
@@ -252,7 +265,7 @@ try {
           && state.gauntletsArmor === 3.5 // 2 base + 1.5 choice sturdy plates
           && state.gauntletsEquipped // rare gauntlets equip into the hands slot
           && state.ironLeft === 5 // 11 − 4 mail − 2 gauntlets
-          && state.clothLeft === 3 // 6 − 2 mail lining − gauntlets lining
+          && state.clothLeft === 4 // 7 − 2 mail lining − gauntlets lining
           && state.armorWorn === 10 // 6.5 mail + 3.5 gauntlets, both worn
         : flow === "a"
           ? state.ingots === 1 // 7 + 1 smelted − 5 sword edge − 2 alloyed
@@ -264,8 +277,10 @@ try {
             && state.helmArmor === 3.5 // 2 base + 1.5 choice sturdy plates; workmanship adds no armor
             && state.helmEquipped // rare helms equip into the head slot
             && state.ironLeft === 6 // 11 − 3 shield − 2 helm
-            && state.clothLeft === 3 // 6 − sword binding − shield binding − helm lining
-            && state.armorWorn === 7 // 3.5 shield + 3.5 helm, both worn
+            && state.clothLeft === 3 // 7 − sword binding − shield binding − helm lining − tunic binding
+            && state.leatherArmor === 3.5 // 2 base + 1.5 choice supple hides
+            && state.leatherEquipped // the tunic takes the chest in this flow
+            && state.armorWorn === 10.5 // 3.5 shield + 3.5 helm + 3.5 tunic, all worn
             && state.swordSkills === 2 // flawless mastery in the blade
             && state.amethystLeft === 0
             && state.itemName === "sword"
@@ -286,7 +301,8 @@ try {
             && state.gauntletsArmor === 3.5
             && state.gauntletsEquipped
             && state.ironLeft === 0 // 11 − 3 shield − 2 helm − 4 mail − 2 gauntlets
-            && state.clothLeft === 0
+            && state.leatherArmor === 3.5
+            && state.clothLeft === 0 // 7 − sword − shield − helm − tunic − 2 mail − gauntlets
             && state.armorWorn === 17
             && state.swordSkills === 2
             && state.amethystLeft === 0

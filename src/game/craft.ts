@@ -136,6 +136,7 @@ export const RECIPES: Recipe[] = [
   { id: "potion_heal", station: null, skill: "alchemy", diff: 8, label: "Heal potion", hint: "Garlic and ginseng, a red draught.", need: { garlic: 1, ginseng: 1 }, give: { potion_heal: 1 }, sfx: "cast" },
   { id: "potion_night", station: null, skill: "alchemy", diff: 12, label: "Night sight potion", hint: "Silk and ash. See as if dusk.", need: { silk: 1, ash: 1 }, give: { potion_night: 1 }, sfx: "cast" },
   { id: "cut_leather", station: null, skill: "tailoring", diff: 10, label: "Stitch a hide shirt", hint: "Two hides, a blade. Leather armor.", need: {}, needTags: [{ tag: "hide", n: 2 }], needsBlade: true, give: { leather: 1 }, sfx: "chop" },
+  { id: "leather_sew", station: null, skill: "tailoring", diff: 12, label: "Stitch a fine tunic", hint: "Choose three hides and one cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "leather" },
   { id: "sew_hood", station: null, skill: "tailoring", diff: 4, label: "Hood", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { hood: 1 }, sfx: "chop" },
   { id: "sew_gloves", station: null, skill: "tailoring", diff: 6, label: "Gloves", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { gloves: 1 }, sfx: "chop" },
   { id: "sew_hose", station: null, skill: "tailoring", diff: 8, label: "Hose", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { hose: 1 }, sfx: "chop" },
@@ -349,6 +350,7 @@ export function commandCraftExact(
   // recipes can hold the plain item id (e.g. the carpentry "shield").
   const rec = exactRecipe ? RECIPES.find((candidate) => candidate.exactRecipeId === exactRecipe.id) : undefined;
   if (!exactRecipe || !rec) return "No such exact work.";
+  if (rec.needsBlade && !bladeInHand(world)) return "Hold a blade.";
   if (rec.station !== null && !stationsHere(world).includes(rec.station)) {
     if (rec.station === "forge") return "The ore wants a fire. Raise a forge.";
     if (rec.station === "fire") return "The pot wants a fire — build a campfire, or find a hearth.";

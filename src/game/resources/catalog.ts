@@ -29,6 +29,7 @@ export const RESOURCE_IDS = Object.freeze([
   "highland_ore",
   "common_cloth",
   "fine_linen",
+  "hide",
   "ruby",
   "sapphire",
   "emerald",
@@ -417,6 +418,16 @@ const RESOURCE_DEFINITIONS = [
     visual: { family: "cloth", primary: "#d8d1bd", secondary: "#f0ead9" },
   },
   {
+    id: "hide",
+    label: "Hide",
+    kind: "hide",
+    forms: ["hide"],
+    qualityType: "grade",
+    traitIds: ["supple"],
+    processing: [],
+    visual: { family: "cloth", primary: "#7a5230", secondary: "#b08a5a" },
+  },
+  {
     id: "ruby",
     label: "Ruby",
     kind: "gem",
@@ -529,6 +540,7 @@ const RESOURCE_KIND_BY_ID = {
   emerald: "gem",
   diamond: "gem",
   amethyst: "gem",
+  hide: "hide",
 } as const satisfies Record<ResourceId, ResourceKind>;
 
 const BIOME_IDS = {
@@ -572,12 +584,14 @@ const FORMS_BY_KIND = {
   timber: ["log", "board"],
   ore: ["ore", "ingot"],
   fiber: ["cloth"],
+  hide: ["hide"],
   gem: ["gem"],
 } as const satisfies Record<ResourceKind, readonly ResourceForm[]>;
 
 const VISUAL_FAMILIES_BY_KIND = {
   timber: ["broadleaf", "conifer"],
   ore: ["stone"],
+  hide: ["cloth"],
   fiber: ["cloth"],
   gem: ["gem"],
 } as const;

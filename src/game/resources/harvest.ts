@@ -254,7 +254,7 @@ function yieldFor(identity: ResourceNodeIdentity, effectiveSkill: number): Harve
   const quality = qualityFromSkill(identity, effectiveSkill);
   const quantity = effectiveSkill >= 100 ? 2 : 1;
   if (definition.kind === "timber") {
-    const resourceId = identity.resourceId as Exclude<HarvestResourceId, GemResourceId | "copper_ore" | "tin_ore" | "bronze" | "iron_ore" | "highland_ore">;
+    const resourceId = identity.resourceId as Exclude<HarvestResourceId, GemResourceId | "copper_ore" | "tin_ore" | "bronze" | "iron_ore" | "highland_ore" | "hide">;
     const key = makeResourceStackKey(resourceId, "log", quality as MaterialGrade);
     return Object.freeze({ key, resourceId, form: "log", quality, quantity }) as HarvestYield;
   }

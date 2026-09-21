@@ -95,6 +95,12 @@ const TRAITS = {
     scope: "canonical",
     values: { rough: 0.5, sound: 1, choice: 1.5, pristine: 2 },
   },
+  supple: {
+    qualityType: "grade",
+    stat: "armor",
+    scope: "canonical",
+    values: { rough: 0.5, sound: 1, choice: 1.5, pristine: 2 },
+  },
   power: {
     qualityType: "clarity",
     stat: "damage",

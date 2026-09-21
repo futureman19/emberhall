@@ -4,6 +4,7 @@ import { addToPile, takeFromPile, takeGoldFromPile } from "./piles.ts";
 import { clearCorpseFx, CORPSE_DURATION, corpsePose, getCorpseFx } from "./corpse-animation.ts";
 import { commandLoot, commandSkin, tickPlayer, you } from "./player.ts";
 import { createWorld } from "./world.ts";
+import { makeResourceStackKey, resourceCount } from "./inventory/resources.ts";
 import type { Creature } from "./types.ts";
 
 function deadHare(x: number, z: number): Creature {
@@ -24,6 +25,31 @@ function deadHare(x: number, z: number): Creature {
     stay: false,
   };
 }
+
+test("corpse animation - skinning yields hide graded by beast tier, beside the flat drop", () => {
+  const cases = [
+    { kind: "hare", id: "t-hare", grade: "rough", hides: 1 },           // tameDiff 8
+    { kind: "wolf", id: "t-wolf", grade: "sound", hides: 1 },           // tameDiff 40
+    { kind: "ironwood_boar", id: "t-boar", grade: "choice", hides: 1 }, // tameDiff 50
+    { kind: "ridgeback_warg", id: "t-warg", grade: "pristine", hides: 2 }, // tameDiff 72
+  ] as const;
+  for (const { kind, id, grade, hides } of cases) {
+    clearCorpseFx();
+    const world = createWorld();
+    const player = you(world)!;
+    world.fauna.push({
+      id, kind, x: player.x + 1, z: player.z, hp: 0, maxHp: 8, path: [], task: "dead",
+      taskUntil: 0, corpseUntil: 0, home: { tx: Math.round(player.x + 1), ty: Math.round(player.z) },
+      ownerId: null, loyalty: 0, stay: false,
+    } as never);
+    world.player.wear.main = "knife";
+    assert.equal(commandSkin(world, id), null);
+    tickPlayer(world, 0.8);
+    const key = makeResourceStackKey("hide", "hide", grade);
+    assert.equal(resourceCount(world.player.resources, key), hides, `${kind} hides grade ${grade}`);
+    assert.equal(world.player.pack.hide ?? 0, hides, "the flat hide drop remains for the legacy shirt");
+  }
+});
 
 test("corpse animation - skinning emits only after the result resolves", () => {
   clearCorpseFx();

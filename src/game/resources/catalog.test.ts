@@ -29,6 +29,7 @@ const EXPECTED_IDS = [
   "highland_ore",
   "common_cloth",
   "fine_linen",
+  "hide",
   "ruby",
   "sapphire",
   "emerald",
@@ -37,7 +38,7 @@ const EXPECTED_IDS = [
 ] as const satisfies readonly ResourceId[];
 
 const GEM_IDS = ["ruby", "sapphire", "emerald", "diamond", "amethyst"] as const satisfies readonly GemResourceId[];
-const TRAIT_IDS = ["accuracy", "damage", "handling", "keen", "sturdy", "power", "fortune", "precision", "protection", "mastery"] as const satisfies readonly MaterialTraitId[];
+const TRAIT_IDS = ["accuracy", "damage", "handling", "keen", "sturdy", "supple", "power", "fortune", "precision", "protection", "mastery"] as const satisfies readonly MaterialTraitId[];
 
 type DeepMutable<T> = T extends readonly (infer Item)[]
   ? DeepMutable<Item>[]
@@ -269,6 +270,7 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       highland_ore: ["damage"],
       common_cloth: [],
       fine_linen: ["handling"],
+      hide: ["supple"],
       ruby: ["power"],
       sapphire: ["fortune"],
       emerald: ["precision"],
@@ -279,18 +281,20 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
   assert.deepEqual(TRAIT_REGISTRY.accuracy.values, { rough: 0.5, sound: 1, choice: 2, pristine: 3 });
   assert.deepEqual(TRAIT_REGISTRY.damage.values, { rough: 0.5, sound: 1, choice: 1.5, pristine: 2 });
   assert.deepEqual(TRAIT_REGISTRY.handling.values, { rough: 0.25, sound: 0.5, choice: 0.75, pristine: 1 });
+  assert.deepEqual(TRAIT_REGISTRY.supple.values, { rough: 0.5, sound: 1, choice: 1.5, pristine: 2 });
   assert.deepEqual(TRAIT_REGISTRY.power.values, { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 });
   assert.deepEqual(TRAIT_REGISTRY.fortune.values, { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 });
   assert.deepEqual(TRAIT_REGISTRY.precision.values, { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 });
 
   const routeIds = new Set<string>();
-  const familyByForm: Record<ResourceForm, "timber" | "ore" | "fiber" | "gem"> = {
+  const familyByForm: Record<ResourceForm, "timber" | "ore" | "fiber" | "gem" | "hide"> = {
     log: "timber",
     board: "timber",
     ore: "ore",
     ingot: "ore",
     cloth: "fiber",
     gem: "gem",
+    hide: "hide",
   };
   for (const resource of Object.values(RESOURCE_CATALOG)) {
     assert.equal(resource.qualityType, resource.kind === "gem" ? "clarity" : "grade", resource.id);
@@ -324,6 +328,7 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       highland_ore: ["ore", "ingot"],
       common_cloth: ["cloth"],
       fine_linen: ["cloth"],
+      hide: ["hide"],
       ruby: ["gem"],
       sapphire: ["gem"],
       emerald: ["gem"],

@@ -1,5 +1,5 @@
 import { EH, inGreybarrow } from "./atlas.ts";
-import { FAUNA_META, hasTag, ITEM_META, POISON_TICK_HOURS, tagConsumeOrder } from "./catalog.ts";
+import { FAUNA_META, hasTag, hideGradeFor, ITEM_META, POISON_TICK_HOURS, tagConsumeOrder } from "./catalog.ts";
 import { provoke, strikePlayer } from "./ecology.ts";
 import { harvestNow, plantNow, tillNow } from "./farm.ts";
 import { GHOSTWOOD_LUMBERJACK } from "./resources/catalog.ts";
@@ -12,7 +12,7 @@ import { astar, astarToRange, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { addToPile, spawnCorpsePile, takeFromPile } from "./piles.ts";
 import { mulberry32 } from "./rng.ts";
 import { successChance, tryGain } from "./skills.ts";
-import { addResource, parseResourceInventory } from "./inventory/resources.ts";
+import { addResource, makeResourceStackKey, parseResourceInventory } from "./inventory/resources.ts";
 import { COMBAT_BEAT } from "./combat-animation.ts";
 import { assessPlantedTimberHarvest, assessResourceHarvest, harvestToolTier, type HarvestAssessment } from "./resources/harvest.ts";
 import { depleteResourceNode, discoverResourceNode, hasDiscoveredResourceNode } from "./resources/state.ts";
@@ -888,7 +888,9 @@ function skinNow(world: World, p: Person) {
     world.player.intent.kind = "none";
     return `You dress the ${FAUNA_META[c.kind].label.toLowerCase()}, but nothing sticks to the knife.`;
   }
-  world.player.pack.hide = (world.player.pack.hide ?? 0) + (meta.hide ?? 1);
+  const hideCount = meta.hide ?? 1;
+  world.player.pack.hide = (world.player.pack.hide ?? 0) + hideCount;
+  addResource(world.player.resources, makeResourceStackKey("hide", "hide", hideGradeFor(meta.tameDiff)), hideCount);
   world.player.pack.meat = (world.player.pack.meat ?? 0) + (meta.meat ?? 2);
   emitCorpseFx(world, "skinning", c.id, c.x, c.z);
   world.fauna = world.fauna.filter((x) => x.id !== c.id);

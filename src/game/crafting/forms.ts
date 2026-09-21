@@ -32,7 +32,7 @@ export const GEM_CLARITIES = Object.freeze([
   "perfect",
 ] as const satisfies readonly GemClarity[]);
 
-const ITEM_FORM_IDS = ["bow", "sword", "shield", "helm", "mail", "boots", "gauntlets", "greaves"] as const satisfies readonly ItemFormId[];
+const ITEM_FORM_IDS = ["bow", "sword", "shield", "helm", "mail", "boots", "gauntlets", "greaves", "leather"] as const satisfies readonly ItemFormId[];
 const ITEM_CLASSES = ["weapon", "armor", "jewelry", "tool", "placeable"] as const satisfies readonly ItemClass[];
 const MATERIAL_ROLES = [
   "body",
@@ -46,8 +46,8 @@ const MATERIAL_ROLES = [
 ] as const satisfies readonly MaterialRole[];
 const MATERIAL_CONTRIBUTIONS = ["primary", "secondary", "cosmetic"] as const satisfies readonly MaterialContribution[];
 const GEM_FAMILIES = ["power", "fortune", "precision", "protection", "mastery"] as const satisfies readonly GemFamily[];
-const GRADE_KINDS = ["timber", "ore", "fiber"] as const;
-const GRADE_FORMS = ["log", "board", "ore", "ingot", "cloth"] as const;
+const GRADE_KINDS = ["timber", "ore", "fiber", "hide"] as const;
+const GRADE_FORMS = ["log", "board", "ore", "ingot", "cloth", "hide"] as const;
 
 export const ITEM_FORM_IDENTITY = Object.freeze({
   bow: Object.freeze({ baseItem: "bow", itemClass: "weapon" }),
@@ -58,6 +58,7 @@ export const ITEM_FORM_IDENTITY = Object.freeze({
   boots: Object.freeze({ baseItem: "boots", itemClass: "armor" }),
   gauntlets: Object.freeze({ baseItem: "gauntlets", itemClass: "armor" }),
   greaves: Object.freeze({ baseItem: "greaves", itemClass: "armor" }),
+  leather: Object.freeze({ baseItem: "leather", itemClass: "armor" }),
 } as const satisfies Record<ItemFormId, ItemFormIdentity>);
 
 const FORM_FIELDS = [
@@ -517,10 +518,36 @@ const GREAVES_FORM_DEFINITION = {
   maxInlays: 1,
 } as const satisfies ItemFormDefinition;
 
+const LEATHER_FORM_DEFINITION = {
+  id: "leather",
+  recipeVersion: 1,
+  baseItem: "leather",
+  label: "Leather Tunic",
+  itemClass: "armor",
+  roles: [
+    {
+      role: "body",
+      amount: 3,
+      accepts: { qualityType: "grade", kinds: ["hide"], forms: ["hide"] },
+      contribution: "primary",
+    },
+    {
+      role: "binding",
+      amount: 1,
+      accepts: { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] },
+      contribution: "secondary",
+    },
+  ],
+  baseStats: { damage: 0, hitBonus: 0, armor: 2, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 0, hitBonus: 0, armor: 5, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+  allowedGemFamilies: ["fortune", "protection"],
+  maxInlays: 1,
+} as const satisfies ItemFormDefinition;
+
 /** The art a weapon schools its wielder in when a mastery gem is set into it. */
 export const FORM_GOVERNING_SKILL = deepFreeze({ sword: "swords", bow: "archery" } as Partial<Record<ItemFormId, SkillId>>);
 
-export const ITEM_FORM_CATALOG = buildItemFormCatalog([BOW_FORM_DEFINITION, SWORD_FORM_DEFINITION, SHIELD_FORM_DEFINITION, HELM_FORM_DEFINITION, MAIL_FORM_DEFINITION, BOOTS_FORM_DEFINITION, GAUNTLETS_FORM_DEFINITION, GREAVES_FORM_DEFINITION]);
+export const ITEM_FORM_CATALOG = buildItemFormCatalog([BOW_FORM_DEFINITION, SWORD_FORM_DEFINITION, SHIELD_FORM_DEFINITION, HELM_FORM_DEFINITION, MAIL_FORM_DEFINITION, BOOTS_FORM_DEFINITION, GAUNTLETS_FORM_DEFINITION, GREAVES_FORM_DEFINITION, LEATHER_FORM_DEFINITION]);
 export const BOW_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.bow;
 export const SWORD_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.sword;
 export const SHIELD_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.shield;
@@ -529,3 +556,4 @@ export const MAIL_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.mail;
 export const BOOTS_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.boots;
 export const GAUNTLETS_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.gauntlets;
 export const GREAVES_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.greaves;
+export const LEATHER_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.leather;

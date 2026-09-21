@@ -367,6 +367,42 @@ test("exact helmcraft - two plates and a lining, iron sturdy carries into head a
   assert.equal(world.player.wearRare.head, helm.uid, "helm slots into the head");
 });
 
+test("exact leathercraft - three hides and a binding, the tunic outclasses the tag shirt", () => {
+  const world = createWorld();
+  world.player.skills.tailoring = 100;
+  world.player.wear.main = "knife"; // field work — the hides want a blade
+  const CHOICE_HIDES = makeResourceStackKey("hide", "hide", "choice");
+  addResource(world.player.resources, CHOICE_HIDES, 3);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "leather", [
+    { role: "body", key: CHOICE_HIDES },
+    { role: "binding", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /leather/i);
+  const tunic = world.player.rares[0]!;
+  assert.equal(tunic.base, "leather");
+  assert.equal(tunic.resolvedStats?.armor, 3.5, "2 base + 1.5 choice supple hides; workmanship adds no armor");
+  assert.deepEqual(tunic.components?.[0], { role: "body", resourceId: "hide", form: "hide", grade: "choice", amount: 3 });
+  const equipped = commandEquipRare(world, tunic.uid);
+  assert.ok(equipped, "the tunic equips generically through ITEM_META");
+  assert.equal(world.player.wearRare.chest, tunic.uid, "the tunic slots into the chest");
+});
+
+test("exact leathercraft - the hides want a blade in hand", () => {
+  const world = createWorld();
+  world.player.skills.tailoring = 100;
+  world.player.wear.main = undefined; // fresh hands — no blade
+  const CHOICE_HIDES = makeResourceStackKey("hide", "hide", "choice");
+  addResource(world.player.resources, CHOICE_HIDES, 3);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "leather", [
+    { role: "body", key: CHOICE_HIDES },
+    { role: "binding", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /blade/i);
+  assert.equal(world.player.rares.length, 0, "no tunic without the blade");
+});
+
 test("exact mailcraft - four plates and two lining, the chest piece outclasses the tag mail", () => {
   const world = createWorld();
   standAtForge(world);

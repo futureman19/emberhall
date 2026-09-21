@@ -5,7 +5,7 @@ import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "@/game/catalog";
 import { RECIPES, canMake, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
-import { BOOTS_FORM, BOW_FORM, GAUNTLETS_FORM, GREAVES_FORM, HELM_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
+import { BOOTS_FORM, BOW_FORM, GAUNTLETS_FORM, GREAVES_FORM, HELM_FORM, LEATHER_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
 import { listResourceInventory } from "@/game/inventory/resources";
 import { getWorld } from "@/game/live";
 import type { MaterialGrade } from "@/game/resources/types";
@@ -68,6 +68,8 @@ export function CraftGump() {
   const [gauntletsLining, setGauntletsLining] = useState<ResourceStackKey | null>(null);
   const [greavesPlate, setGreavesPlate] = useState<ResourceStackKey | null>(null);
   const [greavesLining, setGreavesLining] = useState<ResourceStackKey | null>(null);
+  const [leatherBody, setLeatherBody] = useState<ResourceStackKey | null>(null);
+  const [leatherBinding, setLeatherBinding] = useState<ResourceStackKey | null>(null);
   const [tab, setTab] = useState<WorkTab>("forms");
   if (!open) return null;
   const here = stationsHere(getWorld());
@@ -87,6 +89,8 @@ export function CraftGump() {
   const helmLiningRole = HELM_FORM.roles.find(({ role }) => role === "lining")!;
   const mailPlateRole = MAIL_FORM.roles.find(({ role }) => role === "plate")!;
   const mailLiningRole = MAIL_FORM.roles.find(({ role }) => role === "lining")!;
+  const leatherBodyRole = LEATHER_FORM.roles.find(({ role }) => role === "body")!;
+  const leatherBindingRole = LEATHER_FORM.roles.find(({ role }) => role === "binding")!;
   const selectedCount = (key: ResourceStackKey | null) => resourceRows.find((row) => row.key === key)?.count ?? 0;
   const bowDisabled = !here.includes("bench")
     ? "Stand at the yard or hall"
@@ -290,6 +294,32 @@ export function CraftGump() {
           </div>
         );
       })}
+      <div className="mt-2 space-y-2" aria-label="Advanced leather work">
+        <p className="font-display text-xs tracking-wider text-gold uppercase">Form · {LEATHER_FORM.label}</p>
+        <MaterialSelector role={leatherBodyRole} rows={resourceRows} selected={leatherBody} onSelect={setLeatherBody} group="leather-body" />
+        <MaterialSelector role={leatherBindingRole} rows={resourceRows} selected={leatherBinding} onSelect={setLeatherBinding} group="leather-binding" />
+        <WorkmanshipPreview
+          skill={skills?.tailoring ?? 0}
+          difficulty={12}
+          primaryGrade={leatherBody ? (leatherBody.split(":")[2] as MaterialGrade) : undefined}
+        />
+        <ConfirmCraft
+          selected={{ body: leatherBody, binding: leatherBinding }}
+          rows={resourceRows}
+          disabledReason={!bladeOk
+            ? "Hold a blade"
+            : !leatherBody || !leatherBinding
+              ? "Choose hides and binding"
+              : selectedCount(leatherBody) < leatherBodyRole.amount || selectedCount(leatherBinding) < leatherBindingRole.amount
+                ? "Not enough selected material"
+                : null}
+          formLabel="leather"
+          onConfirm={() => leatherBody && leatherBinding && makeExact("leather", [
+            { role: "body", key: leatherBody },
+            { role: "binding", key: leatherBinding },
+          ])}
+        />
+      </div>
       </>
       )}
       {tab === "refine" && (
