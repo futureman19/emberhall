@@ -408,11 +408,11 @@ export function createStubWorld(): World {
   return w;
 }
 
-export function createWorld(): World {
-  const seed = (Math.random() * 1e9) | 0;
-  const tiles = generateTiles(seed);
-  const world = baseWorld(seed, tiles);
-  const rng = mulberry32(seed);
+export function createWorld(seed?: number): World {
+  const resolvedSeed = seed ?? ((Math.random() * 1e9) | 0);
+  const tiles = generateTiles(resolvedSeed);
+  const world = baseWorld(resolvedSeed, tiles);
+  const rng = mulberry32(resolvedSeed);
   const you = createPerson(world, rng, {
     x: COURT.tx,
     z: COURT.ty + 1,

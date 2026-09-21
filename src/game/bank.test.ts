@@ -39,7 +39,9 @@ function walkOff(w: World) {
 }
 
 test("healer - selecting from outside talk range walks into reach before Return me", () => {
-  const w = createWorld();
+  // Pinned seed: an unseeded world leaves the +8,+8 offset enclosed on ~3% of
+  // seeds, which made this test intermittently fail under "The way is closed."
+  const w = createWorld(7);
   const self = you(w)!;
   const healer = w.people.find((p) => p.role === "healer");
   assert.ok(healer, "Ione tends the hall");
