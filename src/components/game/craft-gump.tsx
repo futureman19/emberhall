@@ -5,7 +5,7 @@ import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "@/game/catalog";
 import { RECIPES, canMake, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
-import { BOW_FORM, HELM_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
+import { BOOTS_FORM, BOW_FORM, GAUNTLETS_FORM, GREAVES_FORM, HELM_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
 import { listResourceInventory } from "@/game/inventory/resources";
 import { getWorld } from "@/game/live";
 import type { MaterialGrade } from "@/game/resources/types";
@@ -54,6 +54,12 @@ export function CraftGump() {
   const [helmLining, setHelmLining] = useState<ResourceStackKey | null>(null);
   const [mailPlate, setMailPlate] = useState<ResourceStackKey | null>(null);
   const [mailLining, setMailLining] = useState<ResourceStackKey | null>(null);
+  const [bootsPlate, setBootsPlate] = useState<ResourceStackKey | null>(null);
+  const [bootsLining, setBootsLining] = useState<ResourceStackKey | null>(null);
+  const [gauntletsPlate, setGauntletsPlate] = useState<ResourceStackKey | null>(null);
+  const [gauntletsLining, setGauntletsLining] = useState<ResourceStackKey | null>(null);
+  const [greavesPlate, setGreavesPlate] = useState<ResourceStackKey | null>(null);
+  const [greavesLining, setGreavesLining] = useState<ResourceStackKey | null>(null);
   if (!open) return null;
   const here = stationsHere(getWorld());
   void x;
@@ -220,6 +226,43 @@ export function CraftGump() {
           ])}
         />
       </div>
+      {[
+        { form: BOOTS_FORM, label: "boots", diff: 15, plate: bootsPlate, setPlate: setBootsPlate, lining: bootsLining, setLining: setBootsLining },
+        { form: GAUNTLETS_FORM, label: "gauntlets", diff: 18, plate: gauntletsPlate, setPlate: setGauntletsPlate, lining: gauntletsLining, setLining: setGauntletsLining },
+        { form: GREAVES_FORM, label: "greaves", diff: 27, plate: greavesPlate, setPlate: setGreavesPlate, lining: greavesLining, setLining: setGreavesLining },
+      ].map(({ form, label, diff, plate: piecePlate, setPlate, lining: pieceLining, setLining }) => {
+        const plateRole = form.roles.find(({ role }) => role === "plate")!;
+        const liningRole = form.roles.find(({ role }) => role === "lining")!;
+        const disabled = !here.includes("forge")
+          ? "Stand at the forge"
+          : !piecePlate || !pieceLining
+            ? "Choose plates and lining"
+            : selectedCount(piecePlate) < plateRole.amount || selectedCount(pieceLining) < liningRole.amount
+              ? "Not enough selected material"
+              : null;
+        return (
+          <div key={form.id} className="mt-2 space-y-2" aria-label={`Advanced ${label} work`}>
+            <p className="font-display text-xs tracking-wider text-gold uppercase">Form · {form.label}</p>
+            <MaterialSelector role={plateRole} rows={resourceRows} selected={piecePlate} onSelect={setPlate} group={`${label}-plate`} />
+            <MaterialSelector role={liningRole} rows={resourceRows} selected={pieceLining} onSelect={setLining} group={`${label}-lining`} />
+            <WorkmanshipPreview
+              skill={skills?.smithing ?? 0}
+              difficulty={diff}
+              primaryGrade={piecePlate ? (piecePlate.split(":")[2] as MaterialGrade) : undefined}
+            />
+            <ConfirmCraft
+              selected={{ plate: piecePlate, lining: pieceLining }}
+              rows={resourceRows}
+              disabledReason={disabled}
+              formLabel={label}
+              onConfirm={() => piecePlate && pieceLining && makeExact(form.id, [
+                { role: "plate", key: piecePlate },
+                { role: "lining", key: pieceLining },
+              ])}
+            />
+          </div>
+        );
+      })}
       {groups.map((st) => {
         const at = st === "field" ? true : here.includes(st);
         const list = st === "field"

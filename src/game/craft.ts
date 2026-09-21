@@ -123,6 +123,10 @@ export const RECIPES: Recipe[] = [
   { id: "helm_smith", station: "forge", skill: "smithing", diff: 24, label: "Helm", hint: "Choose two ingot plates and one cloth lining.", exactRecipeId: "helm", need: {}, give: { helm: 1 }, sfx: "smith" },
   // Same pattern as the helm: the exact mail rides beside the legacy tag recipe "mail" (any fourteen metal).
   { id: "mail_smith", station: "forge", skill: "smithing", diff: 30, label: "Mail", hint: "Choose four ingot plates and two cloth lining.", exactRecipeId: "mail", need: {}, give: { mail: 1 }, sfx: "smith" },
+  // The rest of the armor set follows the same rule: exact forms beside their legacy tag recipes.
+  { id: "boots_smith", station: "forge", skill: "smithing", diff: 15, label: "Boots", hint: "Choose two ingot plates and one cloth lining.", exactRecipeId: "boots", need: {}, give: { boots: 1 }, sfx: "smith" },
+  { id: "gauntlets_smith", station: "forge", skill: "smithing", diff: 18, label: "Gauntlets", hint: "Choose two ingot plates and one cloth lining.", exactRecipeId: "gauntlets", need: {}, give: { gauntlets: 1 }, sfx: "smith" },
+  { id: "greaves_smith", station: "forge", skill: "smithing", diff: 27, label: "Greaves", hint: "Choose three ingot plates and two cloth lining.", exactRecipeId: "greaves", need: {}, give: { greaves: 1 }, sfx: "smith" },
   { id: "helm", station: "forge", skill: "smithing", diff: 22, label: "Helm", hint: "Any eight metal.", need: {}, needTags: [{ tag: "metal", n: 8 }], give: { helm: 1 }, sfx: "smith" },
   { id: "heater", station: "forge", skill: "smithing", diff: 24, label: "Iron shield", hint: "Any eight metal, a face.", need: {}, needTags: [{ tag: "metal", n: 8 }], give: { heater: 1 }, sfx: "smith" },
   { id: "greaves", station: "forge", skill: "smithing", diff: 28, label: "Greaves", hint: "Any ten metal.", need: {}, needTags: [{ tag: "metal", n: 10 }], give: { greaves: 1 }, sfx: "smith" },

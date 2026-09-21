@@ -81,9 +81,9 @@ try {
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("copper_ore", "ore", "choice"), 2);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("copper_ore", "ingot", "choice"), 7);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("tin_ore", "ingot", "choice"), 1);
-      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("iron_ore", "ingot", "choice"), 9);
+      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("iron_ore", "ingot", "choice"), 11);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("oak", "board", "sound"), 3);
-      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("fine_linen", "cloth", "sound"), 5);
+      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("fine_linen", "cloth", "sound"), 6);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("diamond", "gem", "flawless"), 1);
       Math.random = () => 0.5;
       store.useGame.setState({ phase: "playing", openCraft: true, panel: "none", snap: live.snapshot(world) });
@@ -133,6 +133,13 @@ try {
     await domClick(mailWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }));
     await domClick(mailWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
     await domClick(mailWork.getByRole("button", { name: "Craft selected mail" }));
+    // Gauntlets: hands slot — the template-identical boots/greaves sections are
+    // covered by the unit set test and the balance gate (same component path).
+    const gauntletsWork = page.locator('[aria-label="Advanced gauntlets work"]');
+    await gauntletsWork.getByText("Form · Gauntlets").waitFor({ state: "visible", timeout: 15000 });
+    await domClick(gauntletsWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }));
+    await domClick(gauntletsWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }));
+    await domClick(gauntletsWork.getByRole("button", { name: "Craft selected gauntlets" }));
     lap(`${viewport.name}: all forms crafted`);
 
     // Gem inlay: a flawless diamond into the new shield through the real panel.
@@ -160,6 +167,8 @@ try {
       if (helm) player.commandEquipRare(world, helm.uid);
       const mail = world.player.rares.find((r) => r.base === "mail");
       if (mail) player.commandEquipRare(world, mail.uid);
+      const gauntlets = world.player.rares.find((r) => r.base === "gauntlets");
+      if (gauntlets) player.commandEquipRare(world, gauntlets.uid);
       const armorWorn = rare.rareMods(world).armor;
       save.writeSave(world);
       const loaded = save.loadSave();
@@ -176,6 +185,8 @@ try {
         helmEquipped: helm ? world.player.wearRare.head === helm.uid : false,
         mailArmor: mail?.resolvedStats?.armor,
         mailEquipped: mail ? world.player.wearRare.chest === mail.uid : false,
+        gauntletsArmor: gauntlets?.resolvedStats?.armor,
+        gauntletsEquipped: gauntlets ? world.player.wearRare.hands === gauntlets.uid : false,
         ironLeft: inventory.resourceCount(world.player.resources, "iron_ore:ingot:choice"),
         clothLeft: inventory.resourceCount(world.player.resources, "fine_linen:cloth:sound"),
         shieldEquipped: shield ? world.player.wearRare.off === shield.uid : false,
@@ -203,9 +214,11 @@ try {
       && state.helmEquipped // rare helms equip into the head slot
       && state.mailArmor === 5.5 // 4 base + 1.5 choice sturdy plates; the chest carries the most armor
       && state.mailEquipped // rare mail equips into the chest slot
-      && state.ironLeft === 0 // 9 − 3 shield plates − 2 helm plates − 4 mail plates
-      && state.clothLeft === 0 // 5 − sword binding − shield binding − helm lining − 2 mail lining
-      && state.armorWorn === 13.5 // 4.5 shield + 3.5 helm + 5.5 mail, all worn, feed the mitigation pool
+      && state.gauntletsArmor === 3.5 // 2 base + 1.5 choice sturdy plates
+      && state.gauntletsEquipped // rare gauntlets equip into the hands slot
+      && state.ironLeft === 0 // 11 − 3 shield − 2 helm − 4 mail − 2 gauntlets
+      && state.clothLeft === 0 // 6 − sword binding − shield binding − helm lining − 2 mail lining − gauntlets lining
+      && state.armorWorn === 17 // 4.5 shield + 3.5 helm + 5.5 mail + 3.5 gauntlets, all worn
       && state.itemName === "sword"
       && state.edge === "copper_ore"
       && state.hitBonus === 1.875 // 0.75 choice copper edge (primary) + 0.125 sound linen handling (secondary) + 1 fine workmanship

@@ -389,3 +389,29 @@ test("exact mailcraft - four plates and two lining, the chest piece outclasses t
   assert.ok(equipped, "mail rare equips generically through ITEM_META");
   assert.equal(world.player.wearRare.chest, mail.uid, "mail slots into the chest");
 });
+
+test("exact armor set - boots, gauntlets, and greaves carry sturdy into their slots", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  const IRON_PLATES = makeResourceStackKey("iron_ore", "ingot", "choice");
+  addResource(world.player.resources, IRON_PLATES, 7);
+  addResource(world.player.resources, SOUND_CLOTH, 4);
+  const cases = [
+    { form: "boots", slot: "feet", armor: 3.5 },
+    { form: "gauntlets", slot: "hands", armor: 3.5 },
+    { form: "greaves", slot: "legs", armor: 4.5 },
+  ] as const;
+  for (const { form, slot, armor } of cases) {
+    const note = withRoll(0.5, () => commandCraftExact(world, form, [
+      { role: "plate", key: IRON_PLATES },
+      { role: "lining", key: SOUND_CLOTH },
+    ]));
+    assert.ok(note && note.toLowerCase().includes(form), `${form} crafts through its exact recipe`);
+    const piece = world.player.rares.find((r) => r.base === form)!;
+    assert.equal(piece.resolvedStats?.armor, armor, `${form}: base + 1.5 choice sturdy plates`);
+    const equipped = commandEquipRare(world, piece.uid);
+    assert.ok(equipped, `${form} equips generically through ITEM_META`);
+    assert.equal(world.player.wearRare[slot], piece.uid, `${form} slots into ${slot}`);
+  }
+});
