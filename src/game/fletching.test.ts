@@ -105,8 +105,8 @@ test("arrows - the provisioner keeps a quiver's worth in stock", () => {
   const world = createWorld();
   world.gold = 20;
   const keeper = createPerson(world, () => 0.5, {
-    x: world.player.x + 1,
-    z: world.player.z,
+    x: you(world)!.x + 1,
+    z: you(world)!.z,
     role: "provisioner",
     name: "Quill",
   });
