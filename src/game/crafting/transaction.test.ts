@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { commandCraft, commandCraftExact } from "../craft.ts";
 import { addResource, makeResourceStackKey, resourceCount } from "../inventory/resources.ts";
-import { you } from "../player.ts";
+import { commandEquipRare, you } from "../player.ts";
 import type { ResourceStackKey, World } from "../types.ts";
 import { createWorld } from "../world.ts";
 import { executeExactCraftTransaction } from "./transaction.ts";
@@ -342,4 +342,27 @@ test("exact shieldcraft - iron plates carry the sturdy trait into armor", () => 
   assert.equal(shield.resolvedStats?.damage, 0);
   assert.equal(shield.resolvedStats?.hitBonus, 0, "fine hit bonus clamps against the armor form's zero hit cap");
   assert.deepEqual(shield.components?.[0], { role: "plate", resourceId: "iron_ore", form: "ingot", grade: "choice", amount: 3 });
+});
+
+test("exact helmcraft - two plates and a lining, iron sturdy carries into head armor", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  const IRON_PLATES = makeResourceStackKey("iron_ore", "ingot", "choice");
+  addResource(world.player.resources, IRON_PLATES, 2);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "helm", [
+    { role: "plate", key: IRON_PLATES },
+    { role: "lining", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /helm/i);
+  const helm = world.player.rares[0]!;
+  assert.equal(helm.base, "helm");
+  assert.equal(helm.resolvedStats?.armor, 3.5, "2 base + 1.5 choice sturdy plates; workmanship adds no armor");
+  assert.equal(helm.resolvedStats?.damage, 0);
+  assert.equal(helm.resolvedStats?.hitBonus, 0, "sound cloth handling clamps against the armor form's zero hit cap");
+  assert.deepEqual(helm.components?.[0], { role: "plate", resourceId: "iron_ore", form: "ingot", grade: "choice", amount: 2 });
+  const equipped = commandEquipRare(world, helm.uid);
+  assert.ok(equipped, "helm rare equips generically through ITEM_META");
+  assert.equal(world.player.wearRare.head, helm.uid, "helm slots into the head");
 });

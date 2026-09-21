@@ -31,7 +31,7 @@ export const GEM_CLARITIES = Object.freeze([
   "perfect",
 ] as const satisfies readonly GemClarity[]);
 
-const ITEM_FORM_IDS = ["bow", "sword", "shield"] as const satisfies readonly ItemFormId[];
+const ITEM_FORM_IDS = ["bow", "sword", "shield", "helm"] as const satisfies readonly ItemFormId[];
 const ITEM_CLASSES = ["weapon", "armor", "jewelry", "tool", "placeable"] as const satisfies readonly ItemClass[];
 const MATERIAL_ROLES = [
   "body",
@@ -52,6 +52,7 @@ export const ITEM_FORM_IDENTITY = Object.freeze({
   bow: Object.freeze({ baseItem: "bow", itemClass: "weapon" }),
   sword: Object.freeze({ baseItem: "sword", itemClass: "weapon" }),
   shield: Object.freeze({ baseItem: "shield", itemClass: "armor" }),
+  helm: Object.freeze({ baseItem: "helm", itemClass: "armor" }),
 } as const satisfies Record<ItemFormId, ItemFormIdentity>);
 
 const FORM_FIELDS = [
@@ -381,7 +382,34 @@ const SHIELD_FORM_DEFINITION = {
   maxInlays: 1,
 } as const satisfies ItemFormDefinition;
 
-export const ITEM_FORM_CATALOG = buildItemFormCatalog([BOW_FORM_DEFINITION, SWORD_FORM_DEFINITION, SHIELD_FORM_DEFINITION]);
+const HELM_FORM_DEFINITION = {
+  id: "helm",
+  recipeVersion: 1,
+  baseItem: "helm",
+  label: "Helm",
+  itemClass: "armor",
+  roles: [
+    {
+      role: "plate",
+      amount: 2,
+      accepts: { qualityType: "grade", kinds: ["ore"], forms: ["ingot"] },
+      contribution: "primary",
+    },
+    {
+      role: "lining",
+      amount: 1,
+      accepts: { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] },
+      contribution: "secondary",
+    },
+  ],
+  baseStats: { damage: 0, hitBonus: 0, armor: 2, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 0, hitBonus: 0, armor: 5, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+  allowedGemFamilies: ["fortune", "protection"],
+  maxInlays: 1,
+} as const satisfies ItemFormDefinition;
+
+export const ITEM_FORM_CATALOG = buildItemFormCatalog([BOW_FORM_DEFINITION, SWORD_FORM_DEFINITION, SHIELD_FORM_DEFINITION, HELM_FORM_DEFINITION]);
 export const BOW_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.bow;
 export const SWORD_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.sword;
 export const SHIELD_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.shield;
+export const HELM_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.helm;

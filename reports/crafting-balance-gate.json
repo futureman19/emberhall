@@ -132,6 +132,30 @@
       }
     },
     {
+      "label": "ruby inlay",
+      "resourceId": "ruby",
+      "required": 1,
+      "skill": 60,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 909,
+        "p90": 2653,
+        "p99": 5878,
+        "max": 6683
+      },
+      "modeledSeconds": {
+        "p50": 1364.22,
+        "p90": 3980.22,
+        "p99": 8817.72
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
       "label": "emerald inlay",
       "resourceId": "emerald",
       "required": 1,
@@ -365,7 +389,7 @@
     }
   },
   "statEnumeration": {
-    "legalCombinationCount": 531456,
+    "legalCombinationCount": 536736,
     "forms": {
       "bow": {
         "combinations": 24576,
@@ -417,6 +441,28 @@
         "roleOptionCounts": [
           20,
           32,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "helm": {
+        "combinations": 5280,
+        "roleOptionCounts": [
+          20,
           8
         ],
         "inlayOptions": 11,

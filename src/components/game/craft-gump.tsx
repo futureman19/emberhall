@@ -5,7 +5,7 @@ import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "@/game/catalog";
 import { RECIPES, canMake, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
-import { BOW_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
+import { BOW_FORM, HELM_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
 import { listResourceInventory } from "@/game/inventory/resources";
 import { getWorld } from "@/game/live";
 import type { MaterialGrade } from "@/game/resources/types";
@@ -50,6 +50,8 @@ export function CraftGump() {
   const [plate, setPlate] = useState<ResourceStackKey | null>(null);
   const [frame, setFrame] = useState<ResourceStackKey | null>(null);
   const [shieldBinding, setShieldBinding] = useState<ResourceStackKey | null>(null);
+  const [helmPlate, setHelmPlate] = useState<ResourceStackKey | null>(null);
+  const [helmLining, setHelmLining] = useState<ResourceStackKey | null>(null);
   if (!open) return null;
   const here = stationsHere(getWorld());
   void x;
@@ -64,6 +66,8 @@ export function CraftGump() {
   const plateRole = SHIELD_FORM.roles.find(({ role }) => role === "plate")!;
   const frameRole = SHIELD_FORM.roles.find(({ role }) => role === "frame")!;
   const shieldBindingRole = SHIELD_FORM.roles.find(({ role }) => role === "binding")!;
+  const helmPlateRole = HELM_FORM.roles.find(({ role }) => role === "plate")!;
+  const helmLiningRole = HELM_FORM.roles.find(({ role }) => role === "lining")!;
   const selectedCount = (key: ResourceStackKey | null) => resourceRows.find((row) => row.key === key)?.count ?? 0;
   const bowDisabled = !here.includes("bench")
     ? "Stand at the yard or hall"
@@ -84,6 +88,13 @@ export function CraftGump() {
     : !plate || !frame || !shieldBinding
       ? "Choose plates, frame, and binding"
       : selectedCount(plate) < plateRole.amount || selectedCount(frame) < frameRole.amount || selectedCount(shieldBinding) < shieldBindingRole.amount
+        ? "Not enough selected material"
+        : null;
+  const helmDisabled = !here.includes("forge")
+    ? "Stand at the forge"
+    : !helmPlate || !helmLining
+      ? "Choose plates and lining"
+      : selectedCount(helmPlate) < helmPlateRole.amount || selectedCount(helmLining) < helmLiningRole.amount
         ? "Not enough selected material"
         : null;
   const groups: Group[] = ["bench", "forge", "fire", "field"];
@@ -155,6 +166,26 @@ export function CraftGump() {
             { role: "plate", key: plate },
             { role: "frame", key: frame },
             { role: "binding", key: shieldBinding },
+          ])}
+        />
+      </div>
+      <div className="mt-2 space-y-2" aria-label="Advanced helm work">
+        <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Helm</p>
+        <MaterialSelector role={helmPlateRole} rows={resourceRows} selected={helmPlate} onSelect={setHelmPlate} group="helm-plate" />
+        <MaterialSelector role={helmLiningRole} rows={resourceRows} selected={helmLining} onSelect={setHelmLining} group="helm-lining" />
+        <WorkmanshipPreview
+          skill={skills?.smithing ?? 0}
+          difficulty={24}
+          primaryGrade={helmPlate ? (helmPlate.split(":")[2] as MaterialGrade) : undefined}
+        />
+        <ConfirmCraft
+          selected={{ plate: helmPlate, lining: helmLining }}
+          rows={resourceRows}
+          disabledReason={helmDisabled}
+          formLabel="helm"
+          onConfirm={() => helmPlate && helmLining && makeExact("helm", [
+            { role: "plate", key: helmPlate },
+            { role: "lining", key: helmLining },
           ])}
         />
       </div>

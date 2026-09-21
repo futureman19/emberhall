@@ -118,6 +118,9 @@ export const RECIPES: Recipe[] = [
   { id: "mace", station: "forge", skill: "smithing", diff: 18, label: "Mace", hint: "Any six metal, a head.", need: {}, needTags: [{ tag: "metal", n: 6 }], give: { mace: 1 }, sfx: "smith" },
   { id: "sword", station: "forge", skill: "smithing", diff: 20, label: "Sword", hint: "Choose five ingots, one timber hilt, and one cloth binding.", exactRecipeId: "sword", need: {}, give: { sword: 1 }, sfx: "smith" },
   { id: "shield_smith", station: "forge", skill: "smithing", diff: 21, label: "Shield", hint: "Choose three ingot plates, two boards, and one cloth binding.", exactRecipeId: "shield", need: {}, give: { shield: 1 }, sfx: "smith" },
+  // The exact helm rides beside the legacy tag recipe "helm" (any eight metal);
+  // commandCraftExact resolves work records by exactRecipeId, so the legacy id stays untouched.
+  { id: "helm_smith", station: "forge", skill: "smithing", diff: 24, label: "Helm", hint: "Choose two ingot plates and one cloth lining.", exactRecipeId: "helm", need: {}, give: { helm: 1 }, sfx: "smith" },
   { id: "helm", station: "forge", skill: "smithing", diff: 22, label: "Helm", hint: "Any eight metal.", need: {}, needTags: [{ tag: "metal", n: 8 }], give: { helm: 1 }, sfx: "smith" },
   { id: "heater", station: "forge", skill: "smithing", diff: 24, label: "Iron shield", hint: "Any eight metal, a face.", need: {}, needTags: [{ tag: "metal", n: 8 }], give: { heater: 1 }, sfx: "smith" },
   { id: "greaves", station: "forge", skill: "smithing", diff: 28, label: "Greaves", hint: "Any ten metal.", need: {}, needTags: [{ tag: "metal", n: 10 }], give: { greaves: 1 }, sfx: "smith" },

@@ -72,9 +72,9 @@ try {
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("copper_ore", "ore", "choice"), 2);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("copper_ore", "ingot", "choice"), 7);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("tin_ore", "ingot", "choice"), 1);
-      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("iron_ore", "ingot", "choice"), 3);
+      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("iron_ore", "ingot", "choice"), 5);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("oak", "board", "sound"), 3);
-      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("fine_linen", "cloth", "sound"), 2);
+      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("fine_linen", "cloth", "sound"), 3);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("diamond", "gem", "flawless"), 1);
       Math.random = () => 0.5;
       store.useGame.setState({ phase: "playing", openCraft: true, panel: "none", snap: live.snapshot(world) });
@@ -110,6 +110,13 @@ try {
     await shieldWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }).check();
     await shieldWork.getByRole("button", { name: "Craft selected shield" }).click();
 
+    // Helm: second armor form — two iron plates and a cloth lining, head slot.
+    const helmWork = page.locator('[aria-label="Advanced helm work"]');
+    await helmWork.getByText("Form · Helm").waitFor({ state: "visible", timeout: 15000 });
+    await helmWork.getByRole("radio", { name: /Iron Ore · Choice ingot/ }).check();
+    await helmWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }).check();
+    await helmWork.getByRole("button", { name: "Craft selected helm" }).click();
+
     // Gem inlay: a flawless diamond into the new shield through the real panel.
     const inlayPanel = page.locator('[aria-label="Gem inlay"]');
     const itemSelect = inlayPanel.getByLabel("Crafted item");
@@ -130,6 +137,8 @@ try {
       const world = live.getWorld();
       const shield = world.player.rares.find((r) => r.base === "shield");
       if (shield) player.commandEquipRare(world, shield.uid);
+      const helm = world.player.rares.find((r) => r.base === "helm");
+      if (helm) player.commandEquipRare(world, helm.uid);
       const armorWorn = rare.rareMods(world).armor;
       save.writeSave(world);
       const loaded = save.loadSave();
@@ -142,6 +151,10 @@ try {
         shieldArmor: shield?.resolvedStats?.armor,
         shieldInlay: shield?.inlays?.[0] ? `${shield.inlays[0].resourceId}:${shield.inlays[0].clarity}` : null,
         diamondLeft: inventory.resourceCount(world.player.resources, "diamond:gem:flawless"),
+        helmArmor: helm?.resolvedStats?.armor,
+        helmEquipped: helm ? world.player.wearRare.head === helm.uid : false,
+        ironLeft: inventory.resourceCount(world.player.resources, "iron_ore:ingot:choice"),
+        clothLeft: inventory.resourceCount(world.player.resources, "fine_linen:cloth:sound"),
         shieldEquipped: shield ? world.player.wearRare.off === shield.uid : false,
         armorWorn,
         itemName: item?.base,
@@ -163,7 +176,11 @@ try {
       && state.shieldInlay === "diamond:flawless"
       && state.diamondLeft === 0
       && state.shieldEquipped // rare shields equip into the off hand
-      && state.armorWorn === 4.5 // equipped armor feeds the mitigation pool
+      && state.helmArmor === 3.5 // 2 base + 1.5 choice sturdy plates; workmanship adds no armor
+      && state.helmEquipped // rare helms equip into the head slot
+      && state.ironLeft === 0 // 5 − 3 shield plates − 2 helm plates
+      && state.clothLeft === 0 // 3 − sword binding − shield binding − helm lining
+      && state.armorWorn === 8 // 4.5 shield + 3.5 helm, both worn, feed the mitigation pool
       && state.itemName === "sword"
       && state.edge === "copper_ore"
       && state.hitBonus === 1.875 // 0.75 choice copper edge (primary) + 0.125 sound linen handling (secondary) + 1 fine workmanship
