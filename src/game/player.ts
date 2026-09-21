@@ -757,6 +757,13 @@ function huntNow(world: World, p: Person) {
     log(world, "Your hand betrays the shimmer.");
   }
   const bow = effectiveMain(world) === "bow";
+  if (bow) {
+    if ((world.player.pack.arrows ?? 0) < 1) {
+      world.player.intent.kind = "none";
+      return "No arrows to loose.";
+    }
+    world.player.pack.arrows -= 1;
+  }
   const dist = Math.hypot(p.x - c.x, p.z - c.z);
   playSfx("hunt", 0.52);
   const blade = weaponDmg(effectiveMain(world));

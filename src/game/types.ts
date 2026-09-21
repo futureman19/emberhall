@@ -86,6 +86,7 @@ export type ItemId =
   | "orc_tusk"
   | "meat"
   | "hide"
+  | "arrows"
   | "bandage"
   | "potion_heal"
   | "potion_night"
@@ -165,7 +166,8 @@ export type ResourceTag =
   | "blade"
   | "weapon"
   | "armor"
-  | "tool";
+  | "tool"
+  | "ammo";
 
 /**
  * A catalog-correlated material stack. Mapping over ResourceId keeps each

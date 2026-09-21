@@ -97,6 +97,7 @@ export const RECIPES: Recipe[] = [
   { id: "board", station: "bench", skill: "carpentry", diff: -18, label: "Boards", hint: "Split a log.", need: { log: 1 }, give: { board: 2 }, sfx: "chop" },
   { id: "torch", station: "bench", skill: "carpentry", diff: -8, label: "Torch", hint: "One board, a pitch.", need: { board: 1 }, give: { torch: 2 }, sfx: "chop" },
   { id: "club", station: "bench", skill: "carpentry", diff: 6, label: "Club", hint: "Any two wood — a heavy stick.", need: {}, needTags: [{ tag: "wood", n: 2 }], give: { club: 1 }, sfx: "chop" },
+  { id: "fletch", station: "bench", skill: "carpentry", diff: 6, label: "Fletch arrows", hint: "One board, fletched. Five arrows.", need: { board: 1 }, give: { arrows: 5 }, sfx: "chop" },
   { id: "crate", station: "bench", skill: "carpentry", diff: 8, label: "Crate", hint: "Any six wood, nailed.", need: {}, needTags: [{ tag: "wood", n: 6 }], give: { crate: 1 }, sfx: "chop" },
   { id: "staff", station: "bench", skill: "carpentry", diff: 10, label: "Staff", hint: "Any three wood, a ferrule.", need: {}, needTags: [{ tag: "wood", n: 3 }], give: { staff: 1 }, sfx: "chop" },
   { id: "cap", station: "bench", skill: "carpentry", diff: 12, label: "Wooden cap", hint: "Any three wood, a crown.", need: {}, needTags: [{ tag: "wood", n: 3 }], give: { cap: 1 }, sfx: "chop" },
