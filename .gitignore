@@ -19,3 +19,4 @@ attachments/
 
 .vercel
 tsconfig.tsbuildinfo
+__pycache__/
