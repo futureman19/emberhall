@@ -11,7 +11,7 @@ export interface GemEffect {
   readonly rank: 1 | 2 | 3 | 4 | 5;
   readonly label: string;
   readonly scope: "canonical" | "local";
-  readonly stat: "damage" | "hitBonus" | "fortune";
+  readonly stat: "damage" | "hitBonus" | "fortune" | "armor";
   readonly amount: number;
 }
 
@@ -24,7 +24,7 @@ export function gemEffect(resourceId: GemResourceId, clarity: GemClarity): GemEf
   const clarityIndex = GEM_CLARITIES.indexOf(clarity);
   if (clarityIndex < 0) throw new Error(`unknown gem clarity: ${clarity}`);
   const family = definition.traitIds[0];
-  if (family !== "power" && family !== "fortune" && family !== "precision") throw new Error(`${resourceId} has no deterministic gem family`);
+  if (family !== "power" && family !== "fortune" && family !== "precision" && family !== "protection") throw new Error(`${resourceId} has no deterministic gem family`);
   const trait = TRAIT_REGISTRY[family];
   const effect = {
     resourceId,

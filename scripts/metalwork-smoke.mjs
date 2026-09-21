@@ -10,7 +10,7 @@ mkdirSync(output, { recursive: true });
 const viewports = [
   { name: "desktop", width: 1280, height: 800 },
   { name: "mobile", width: 390, height: 844 },
-];
+].filter((v) => !process.env.METALWORK_SMOKE_VIEWPORT || v.name === process.env.METALWORK_SMOKE_VIEWPORT);
 
 const verdict = { url, viewports: {}, ok: true };
 const browser = await chromium.launch({ headless: true, args: ["--no-sandbox", "--disable-dev-shm-usage"] });
@@ -75,6 +75,7 @@ try {
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("iron_ore", "ingot", "choice"), 3);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("oak", "board", "sound"), 3);
       inventory.addResource(world.player.resources, inventory.makeResourceStackKey("fine_linen", "cloth", "sound"), 2);
+      inventory.addResource(world.player.resources, inventory.makeResourceStackKey("diamond", "gem", "flawless"), 1);
       Math.random = () => 0.5;
       store.useGame.setState({ phase: "playing", openCraft: true, panel: "none", snap: live.snapshot(world) });
       // Freeze the frame-driven sim: every tick re-renders the gump and replaces
@@ -109,6 +110,16 @@ try {
     await shieldWork.getByRole("radio", { name: /Fine Linen · Sound cloth/ }).check();
     await shieldWork.getByRole("button", { name: "Craft selected shield" }).click();
 
+    // Gem inlay: a flawless diamond into the new shield through the real panel.
+    const inlayPanel = page.locator('[aria-label="Gem inlay"]');
+    const itemSelect = inlayPanel.getByLabel("Crafted item");
+    const shieldValue = await itemSelect.evaluate((el) => [...el.options].find((o) => /shield/i.test(o.text))?.value ?? "");
+    if (!shieldValue) throw new Error("shield missing from the inlay item select");
+    await itemSelect.selectOption(shieldValue);
+    await inlayPanel.getByLabel("Gem").selectOption({ value: "diamond:gem:flawless" });
+    await inlayPanel.getByText("Protection IV: +1 armor").waitFor({ state: "visible", timeout: 15000 });
+    await inlayPanel.getByRole("button", { name: "Inlay exact result" }).click();
+
     const state = await page.evaluate(async () => {
       const appUrl = (path) => performance.getEntriesByType("resource").find((e) => e.name.includes(path))?.name ?? path;
       const live = await import(appUrl("/src/game/live.ts"));
@@ -129,6 +140,8 @@ try {
         bronze: inventory.resourceCount(world.player.resources, "bronze:ingot:choice"),
         tinLeft: inventory.resourceCount(world.player.resources, "tin_ore:ingot:choice"),
         shieldArmor: shield?.resolvedStats?.armor,
+        shieldInlay: shield?.inlays?.[0] ? `${shield.inlays[0].resourceId}:${shield.inlays[0].clarity}` : null,
+        diamondLeft: inventory.resourceCount(world.player.resources, "diamond:gem:flawless"),
         shieldEquipped: shield ? world.player.wearRare.off === shield.uid : false,
         armorWorn,
         itemName: item?.base,
@@ -146,9 +159,11 @@ try {
       && state.oreLeft === 1
       && state.bronze === 3 // 2 copper + 1 tin → 3 bronze ingots
       && state.tinLeft === 0
-      && state.shieldArmor === 3.5 // 2 base + 1.5 choice sturdy plates; workmanship adds no armor
+      && state.shieldArmor === 4.5 // 2 base + 1.5 choice sturdy plates + 1 flawless protection diamond
+      && state.shieldInlay === "diamond:flawless"
+      && state.diamondLeft === 0
       && state.shieldEquipped // rare shields equip into the off hand
-      && state.armorWorn === 3.5 // equipped armor feeds the mitigation pool
+      && state.armorWorn === 4.5 // equipped armor feeds the mitigation pool
       && state.itemName === "sword"
       && state.edge === "copper_ore"
       && state.hitBonus === 1.875 // 0.75 choice copper edge (primary) + 0.125 sound linen handling (secondary) + 1 fine workmanship

@@ -16,7 +16,7 @@ export type GradeResourceId =
   | "highland_ore"
   | "common_cloth"
   | "fine_linen";
-export type GemResourceId = "ruby" | "sapphire" | "emerald";
+export type GemResourceId = "ruby" | "sapphire" | "emerald" | "diamond";
 export type ResourceId = GradeResourceId | GemResourceId;
 
 export type NonGemResourceKind = "timber" | "ore" | "fiber";
@@ -28,7 +28,7 @@ export type GemClarity = "cracked" | "flawed" | "cut" | "flawless" | "perfect";
 export type MaterialQuality = MaterialGrade | GemClarity;
 export type QualityForResource<I extends ResourceId> = I extends GemResourceId ? GemClarity : MaterialGrade;
 export type GradeMaterialTraitId = "accuracy" | "damage" | "handling" | "keen" | "sturdy";
-export type ClarityMaterialTraitId = "power" | "fortune" | "precision";
+export type ClarityMaterialTraitId = "power" | "fortune" | "precision" | "protection";
 export type MaterialTraitId = GradeMaterialTraitId | ClarityMaterialTraitId;
 export type ProcessingStation = "bench" | "forge" | "fire";
 
@@ -173,7 +173,7 @@ const GRADE_RESOURCE_IDS = [
   "common_cloth",
   "fine_linen",
 ] as const satisfies readonly GradeResourceId[];
-const GEM_RESOURCE_IDS = ["ruby", "sapphire", "emerald"] as const satisfies readonly GemResourceId[];
+const GEM_RESOURCE_IDS = ["ruby", "sapphire", "emerald", "diamond"] as const satisfies readonly GemResourceId[];
 const MATERIAL_GRADES = ["rough", "sound", "choice", "pristine"] as const satisfies readonly MaterialGrade[];
 const GEM_CLARITIES = ["cracked", "flawed", "cut", "flawless", "perfect"] as const satisfies readonly GemClarity[];
 

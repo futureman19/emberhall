@@ -213,6 +213,8 @@ const acquisitions = [
   acquisitionScenario("tin for bronze", "tin_ore", "rock", 5, 35),
   acquisitionScenario("highland sword edge", "highland_ore", "rock", 5, 55),
   acquisitionScenario("ruby inlay", "ruby", "rock", 1, 60),
+  acquisitionScenario("emerald inlay", "emerald", "rock", 1, 70),
+  acquisitionScenario("diamond inlay", "diamond", "rock", 1, 70),
   acquisitionScenario("sapphire inlay", "sapphire", "rock", 1, 65),
 ];
 const items = representativeItems();

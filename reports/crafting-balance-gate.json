@@ -68,13 +68,13 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 28,
+        "p50": 29,
         "p90": 47,
         "p99": 68,
         "max": 76
       },
       "modeledSeconds": {
-        "p50": 45.6,
+        "p50": 47.1,
         "p90": 74.1,
         "p99": 105.6
       },
@@ -92,15 +92,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 249,
-        "p90": 412,
-        "p99": 555,
-        "max": 598
+        "p50": 248,
+        "p90": 424,
+        "p99": 585,
+        "max": 678
       },
       "modeledSeconds": {
-        "p50": 377.1,
-        "p90": 621.6,
-        "p99": 836.1
+        "p50": 375.6,
+        "p90": 639.6,
+        "p99": 881.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -116,15 +116,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 589,
-        "p90": 1017,
-        "p99": 1567,
-        "max": 1740
+        "p50": 654,
+        "p90": 1078,
+        "p99": 1689,
+        "max": 2020
       },
       "modeledSeconds": {
-        "p50": 887.1,
-        "p90": 1529.1,
-        "p99": 2354.1
+        "p50": 984.6,
+        "p90": 1620.6,
+        "p99": 2537.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -132,23 +132,47 @@
       }
     },
     {
-      "label": "ruby inlay",
-      "resourceId": "ruby",
+      "label": "emerald inlay",
+      "resourceId": "emerald",
       "required": 1,
-      "skill": 60,
+      "skill": 70,
       "samples": 200,
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 837,
-        "p90": 2904,
-        "p99": 5850,
-        "max": 6853
+        "p50": 224,
+        "p90": 835,
+        "p99": 1761,
+        "max": 1937
       },
       "modeledSeconds": {
-        "p50": 1256.22,
-        "p90": 4356.72,
-        "p99": 8775.72
+        "p50": 336.72,
+        "p90": 1253.22,
+        "p99": 2642.22
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
+      "label": "diamond inlay",
+      "resourceId": "diamond",
+      "required": 1,
+      "skill": 70,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 203,
+        "p90": 700,
+        "p99": 1518,
+        "max": 1888
+      },
+      "modeledSeconds": {
+        "p50": 305.22,
+        "p90": 1050.72,
+        "p99": 2277.72
       },
       "blockedMatches": {
         "p50": 0,
@@ -164,15 +188,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 506,
-        "p90": 1583,
-        "p99": 4127,
-        "max": 4498
+        "p50": 421,
+        "p90": 1697,
+        "p99": 2973,
+        "max": 4530
       },
       "modeledSeconds": {
-        "p50": 759.72,
-        "p90": 2375.22,
-        "p99": 6191.22
+        "p50": 632.22,
+        "p90": 2546.22,
+        "p99": 4460.22
       },
       "blockedMatches": {
         "p50": 0,
@@ -341,7 +365,7 @@
     }
   },
   "statEnumeration": {
-    "legalCombinationCount": 454656,
+    "legalCombinationCount": 531456,
     "forms": {
       "bow": {
         "combinations": 24576,
@@ -389,17 +413,17 @@
         "capViolations": 0
       },
       "shield": {
-        "combinations": 92160,
+        "combinations": 168960,
         "roleOptionCounts": [
           20,
           32,
           8
         ],
-        "inlayOptions": 6,
+        "inlayOptions": 11,
         "maxima": {
           "damage": 0,
           "hitBonus": 0,
-          "armor": 4,
+          "armor": 5,
           "fortune": 5
         },
         "caps": {

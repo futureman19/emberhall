@@ -44,7 +44,7 @@ const MATERIAL_ROLES = [
   "finish",
 ] as const satisfies readonly MaterialRole[];
 const MATERIAL_CONTRIBUTIONS = ["primary", "secondary", "cosmetic"] as const satisfies readonly MaterialContribution[];
-const GEM_FAMILIES = ["power", "fortune", "precision"] as const satisfies readonly GemFamily[];
+const GEM_FAMILIES = ["power", "fortune", "precision", "protection"] as const satisfies readonly GemFamily[];
 const GRADE_KINDS = ["timber", "ore", "fiber"] as const;
 const GRADE_FORMS = ["log", "board", "ore", "ingot", "cloth"] as const;
 
@@ -377,7 +377,7 @@ const SHIELD_FORM_DEFINITION = {
   ],
   baseStats: { damage: 0, hitBonus: 0, armor: 2, skillBonuses: {}, slayerMultipliers: {} },
   caps: { damage: 0, hitBonus: 0, armor: 5, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
-  allowedGemFamilies: ["fortune"],
+  allowedGemFamilies: ["fortune", "protection"],
   maxInlays: 1,
 } as const satisfies ItemFormDefinition;
 

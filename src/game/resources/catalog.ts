@@ -32,6 +32,7 @@ export const RESOURCE_IDS = Object.freeze([
   "ruby",
   "sapphire",
   "emerald",
+  "diamond",
 ] as const satisfies readonly ResourceId[]);
 
 export const GHOSTWOOD_LUMBERJACK = 80;
@@ -468,6 +469,24 @@ const RESOURCE_DEFINITIONS = [
     processing: [],
     visual: { family: "gem", primary: "#1f6b3a", secondary: "#4fae6b" },
   },
+  {
+    id: "diamond",
+    label: "Diamond",
+    kind: "gem",
+    forms: ["gem"],
+    qualityType: "clarity",
+    traitIds: ["protection"],
+    spawn: {
+      nodeKind: "rock",
+      weight: 2,
+      regions: { tundra: 1, vale: 0.5 },
+      identifySkill: { id: "mining", minimum: 60 },
+      extractSkill: { id: "mining", minimum: 70 },
+      toolTier: 2,
+    },
+    processing: [],
+    visual: { family: "gem", primary: "#9fb4c4", secondary: "#e4f0f8" },
+  },
 ] as const satisfies readonly ResourceDefinition[];
 
 const RESOURCE_KIND_BY_ID = {
@@ -489,6 +508,7 @@ const RESOURCE_KIND_BY_ID = {
   ruby: "gem",
   sapphire: "gem",
   emerald: "gem",
+  diamond: "gem",
 } as const satisfies Record<ResourceId, ResourceKind>;
 
 const BIOME_IDS = {

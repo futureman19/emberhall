@@ -145,6 +145,58 @@ test("inlay - swords accept precision and reject a second precision family", () 
   });
 });
 
+test("inlay - shields accept protection, reject a second, and swords reject protection", () => {
+  const world = createWorld();
+  const shield = createCraftedItem(world, {
+    formId: "shield",
+    base: "shield",
+    workmanship: "ordinary",
+    components: [
+      { role: "plate", resourceId: "iron_ore", form: "ingot", grade: "choice", amount: 3 },
+      { role: "frame", resourceId: "oak", form: "board", grade: "sound", amount: 2 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+    maker: "Testhand",
+    recipeId: "shield",
+    recipeVersion: 1,
+  });
+  world.player.rares.push(shield);
+  const FLAWLESS_DIAMOND = makeResourceStackKey("diamond", "gem", "flawless");
+  addResource(world.player.resources, FLAWLESS_DIAMOND, 2);
+
+  const before = structuredClone(shield.resolvedStats);
+  const preview = previewItemInlay(world.player, shield.uid, FLAWLESS_DIAMOND);
+  assert.equal(preview.status, "ready");
+  if (preview.status !== "ready") return;
+  assert.equal(preview.effect.label, "Protection IV");
+  assert.equal(preview.stats.armor, (before?.armor ?? 0) + 1, "flawless diamond adds exactly the shield's cap headroom");
+
+  assert.equal(applyItemInlay(world.player, shield.uid, FLAWLESS_DIAMOND).status, "inlaid");
+  const updated = world.player.rares[0]!;
+  assert.deepEqual(updated.inlays, [{ resourceId: "diamond", clarity: "flawless" }]);
+  assert.equal(updated.resolvedStats?.armor, (before?.armor ?? 0) + 1);
+  assert.match(rareName(updated), /of Protection IV/);
+  assert.equal(previewItemInlay(world.player, shield.uid, FLAWLESS_DIAMOND).status, "blocked", "no second protection family");
+
+  const sword = createCraftedItem(world, {
+    formId: "sword",
+    base: "sword",
+    workmanship: "ordinary",
+    components: [
+      { role: "edge", resourceId: "iron_ore", form: "ingot", grade: "choice", amount: 5 },
+      { role: "hilt", resourceId: "oak", form: "board", grade: "sound", amount: 1 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+    maker: "Testhand",
+    recipeId: "sword",
+    recipeVersion: 1,
+  });
+  world.player.rares.push(sword);
+  assert.equal(previewItemInlay(world.player, sword.uid, FLAWLESS_DIAMOND).status, "blocked", "swords have no protection family slot");
+});
+
 test("inlay - insufficient gem and noncrafted targets reject before mutation", () => {
   const { world, item } = craftedBow();
   const before = structuredClone(world.player);

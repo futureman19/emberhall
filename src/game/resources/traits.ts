@@ -102,6 +102,12 @@ const TRAITS = {
     scope: "canonical",
     values: { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 },
   },
+  protection: {
+    qualityType: "clarity",
+    stat: "armor",
+    scope: "canonical",
+    values: { cracked: 0.25, flawed: 0.5, cut: 0.75, flawless: 1, perfect: 1.5 },
+  },
 } satisfies Record<MaterialTraitId, MaterialTraitDefinition>;
 
 export const TRAIT_REGISTRY = deepFreeze(TRAITS);

@@ -39,7 +39,7 @@ test("exact recipes - shield form is the first armor craft", () => {
   assert.deepEqual(SHIELD_FORM.roles[0]?.accepts, { qualityType: "grade", kinds: ["ore"], forms: ["ingot"] });
   assert.deepEqual(SHIELD_FORM.baseStats, { damage: 0, hitBonus: 0, armor: 2, skillBonuses: {}, slayerMultipliers: {} });
   assert.deepEqual(SHIELD_FORM.caps, { damage: 0, hitBonus: 0, armor: 5, skillBonusPerSkill: 5, slayerMultiplier: 1.5 });
-  assert.deepEqual(SHIELD_FORM.allowedGemFamilies, ["fortune"]);
+  assert.deepEqual(SHIELD_FORM.allowedGemFamilies, ["fortune", "protection"]);
   assert.equal(SHIELD_FORM.maxInlays, 1);
 });
 

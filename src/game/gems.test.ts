@@ -33,6 +33,16 @@ test("gems - family and clarity deterministically define rank and effect", () =>
     stat: "hitBonus",
     amount: 3,
   });
+  assert.deepEqual(gemEffect("diamond", "flawless"), {
+    resourceId: "diamond",
+    family: "protection",
+    clarity: "flawless",
+    rank: 4,
+    label: "Protection IV",
+    scope: "canonical",
+    stat: "armor",
+    amount: 1,
+  });
 });
 
 test("gems - all five clarities map monotonically and effects are frozen", () => {
@@ -43,4 +53,13 @@ test("gems - all five clarities map monotonically and effects are frozen", () =>
     assert.deepEqual(effects.map(({ amount }) => amount), [1, 2, 3, 4, 5]);
     assert.ok(effects.every(Object.isFrozen));
   }
+});
+
+test("gems - diamond's protection ladder is monotonic within the armor budget", () => {
+  const clarities = ["cracked", "flawed", "cut", "flawless", "perfect"] as const;
+  const effects = clarities.map((clarity) => gemEffect("diamond", clarity));
+  assert.deepEqual(effects.map(({ rank }) => rank), [1, 2, 3, 4, 5]);
+  assert.deepEqual(effects.map(({ amount }) => amount), [0.25, 0.5, 0.75, 1, 1.5]);
+  assert.ok(effects.every(({ stat, scope }) => stat === "armor" && scope === "canonical"));
+  assert.ok(effects.every(Object.isFrozen));
 });
