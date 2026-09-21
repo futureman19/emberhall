@@ -5,6 +5,7 @@ import {
   commandCraft,
   commandCraftBatch,
   commandCraftExact,
+  commandRefineExact,
   craftReach,
   stationOf,
   type ExactMaterialSelection,
@@ -170,6 +171,7 @@ interface GameUI {
   makeRecipe: (id: string) => void;
   makeRecipeBatch: (id: string, times: number) => void;
   makeExactRecipe: (id: string, selections: readonly ExactMaterialSelection[]) => void;
+  refineStack: (key: ResourceStackKey) => void;
   inlayItem: (uid: string, key: ResourceStackKey) => void;
   useStation: (id: string) => void;
   cast: (spell: SpellId, target?: CastTarget) => void;
@@ -816,6 +818,12 @@ export const useGame = create<GameUI>((set, get) => ({
   makeExactRecipe: (id, selections) => {
     const note = commandCraftExact(getWorld(), id, selections);
     if (note) get().flash(note);
+    set({ snap: snapshot() });
+  },
+  refineStack: (key) => {
+    const note = commandRefineExact(getWorld(), key);
+    if (note) get().flash(note);
+    get().saveNow();
     set({ snap: snapshot() });
   },
   inlayItem: (uid, key) => {

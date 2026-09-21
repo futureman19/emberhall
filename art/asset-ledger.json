@@ -24,6 +24,7 @@
     "src/components/game/crafting/confirm-craft.tsx",
     "src/components/game/crafting/inlay-panel.tsx",
     "src/components/game/crafting/material-selector.tsx",
+    "src/components/game/crafting/refining-panel.tsx",
     "src/components/game/crafting/workmanship-preview.tsx",
     "src/components/game/crop-meshes.tsx",
     "src/components/game/death-geometry.ts",
@@ -27879,10 +27880,11 @@
       ],
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:94",
-        "src/components/game/craft-gump.tsx:53",
-        "src/components/game/crafting/confirm-craft.tsx:15",
+        "src/components/game/craft-gump.tsx:61",
+        "src/components/game/crafting/confirm-craft.tsx:17",
         "src/components/game/crafting/inlay-panel.tsx:25",
         "src/components/game/crafting/material-selector.tsx:32",
+        "src/components/game/crafting/refining-panel.tsx:22",
         "src/components/game/paperdoll.tsx:319"
       ],
       "rendererMapping": "direct AST declaration/name",
@@ -27892,6 +27894,7 @@
         "src/components/game/crafting/confirm-craft.tsx",
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
+        "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/paperdoll.tsx"
       ],
       "jsxTags": [],
@@ -34904,10 +34907,11 @@
         "key"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:53",
-        "src/components/game/crafting/confirm-craft.tsx:15",
+        "src/components/game/craft-gump.tsx:61",
+        "src/components/game/crafting/confirm-craft.tsx:17",
         "src/components/game/crafting/inlay-panel.tsx:25",
         "src/components/game/crafting/material-selector.tsx:32",
+        "src/components/game/crafting/refining-panel.tsx:22",
         "src/components/game/paperdoll.tsx:319",
         "src/components/game/part-sculptor.tsx:24"
       ],
@@ -34917,6 +34921,7 @@
         "src/components/game/crafting/confirm-craft.tsx",
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
+        "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/paperdoll.tsx",
         "src/components/game/part-sculptor.tsx"
       ],
@@ -42049,6 +42054,111 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/crafting/material-selector.tsx:7"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/crafting/refining-panel.tsx#RefiningPanel",
+      "canonicalId": "src/components/game/crafting/refining-panel.tsx#RefiningPanel",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/crafting/refining-panel.tsx:8"
+      ],
+      "sourceNames": [
+        "RefiningPanel"
+      ],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:8"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
+      "jsxTags": [
+        "Button",
+        "div",
+        "li",
+        "p",
+        "span",
+        "ul"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/crafting/refining-panel.tsx:8"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!atStation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/crafting/refining-panel.tsx:8"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!found || found.route.station !== station",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/crafting/refining-panel.tsx:8"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:row.count < route.input.quantity",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/crafting/refining-panel.tsx:8"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:skill < route.skill.minimum",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/crafting/refining-panel.tsx:8"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:workable.length === 0",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/crafting/refining-panel.tsx:8"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/crafting/refining-panel.tsx:8"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/crafting/refining-panel.tsx:8"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -117362,7 +117472,7 @@
       "canonicalId": "src/game/refining.ts#RefiningResult.status=blocked",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/refining.ts:9"
+        "src/game/refining.ts:21"
       ],
       "sourceNames": [
         "RefiningResult.status"
@@ -117408,7 +117518,7 @@
       "canonicalId": "src/game/refining.ts#RefiningResult.status=refined",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/refining.ts:9"
+        "src/game/refining.ts:21"
       ],
       "sourceNames": [
         "RefiningResult.status"
@@ -133600,7 +133710,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=bank",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -133646,7 +133756,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=board",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -133692,7 +133802,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=cottage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -133738,7 +133848,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=dormitory",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -133784,7 +133894,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=farm",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -133830,7 +133940,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=forge",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -133876,7 +133986,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=gatehouse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -133922,7 +134032,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=hall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -133968,7 +134078,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=homestead",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -134014,7 +134124,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=hut",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -134060,7 +134170,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=keep",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -134106,7 +134216,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=kitchen",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -134152,7 +134262,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=market",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -134198,7 +134308,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=notice",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -134244,7 +134354,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=porch",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -134290,7 +134400,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=rampart",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -134336,7 +134446,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=rampartV",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -134382,7 +134492,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=shop",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -134428,7 +134538,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=tavern",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -134474,7 +134584,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=tower",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -134520,7 +134630,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=townhome",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -134566,7 +134676,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=townhouse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -134612,7 +134722,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=yard",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -134658,7 +134768,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openBook=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:85"
+        "src/game/store.ts:86"
       ],
       "sourceNames": [
         "GameUI.openBook"
@@ -134704,7 +134814,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openBook=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:85"
+        "src/game/store.ts:86"
       ],
       "sourceNames": [
         "GameUI.openBook"
@@ -134750,7 +134860,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openCraft=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:86"
+        "src/game/store.ts:87"
       ],
       "sourceNames": [
         "GameUI.openCraft"
@@ -134796,7 +134906,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openCraft=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:86"
+        "src/game/store.ts:87"
       ],
       "sourceNames": [
         "GameUI.openCraft"
@@ -134842,7 +134952,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openPets=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:90"
       ],
       "sourceNames": [
         "GameUI.openPets"
@@ -134888,7 +134998,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openPets=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:90"
       ],
       "sourceNames": [
         "GameUI.openPets"
@@ -134934,7 +135044,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openSettings=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:88"
+        "src/game/store.ts:89"
       ],
       "sourceNames": [
         "GameUI.openSettings"
@@ -134980,7 +135090,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openSettings=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:88"
+        "src/game/store.ts:89"
       ],
       "sourceNames": [
         "GameUI.openSettings"
@@ -135026,7 +135136,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openVault=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:87"
+        "src/game/store.ts:88"
       ],
       "sourceNames": [
         "GameUI.openVault"
@@ -135072,7 +135182,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openVault=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:87"
+        "src/game/store.ts:88"
       ],
       "sourceNames": [
         "GameUI.openVault"
@@ -135118,7 +135228,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=build",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:79"
+        "src/game/store.ts:80"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -135164,7 +135274,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=help",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:79"
+        "src/game/store.ts:80"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -135210,7 +135320,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=journal",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:79"
+        "src/game/store.ts:80"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -135256,7 +135366,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=none",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:79"
+        "src/game/store.ts:80"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -135302,7 +135412,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=roster",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:79"
+        "src/game/store.ts:80"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -135348,7 +135458,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=vale",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:79"
+        "src/game/store.ts:80"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -135394,7 +135504,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=you",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:79"
+        "src/game/store.ts:80"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -135440,7 +135550,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=intro",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:76"
+        "src/game/store.ts:77"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -135486,7 +135596,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=looking",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:76"
+        "src/game/store.ts:77"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -135532,7 +135642,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=playing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:76"
+        "src/game/store.ts:77"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -135578,7 +135688,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=raising",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:76"
+        "src/game/store.ts:77"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -135624,7 +135734,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=title",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:76"
+        "src/game/store.ts:77"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -135670,7 +135780,7 @@
       "canonicalId": "src/game/store.ts#GameUI.tillArmed=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:99"
       ],
       "sourceNames": [
         "GameUI.tillArmed"
@@ -135716,7 +135826,7 @@
       "canonicalId": "src/game/store.ts#GameUI.tillArmed=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:99"
       ],
       "sourceNames": [
         "GameUI.tillArmed"
@@ -157175,13 +157285,13 @@
       "canonicalId": "src/components/game/craft-gump.tsx#CraftGump",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/craft-gump.tsx:29"
+        "src/components/game/craft-gump.tsx:30"
       ],
       "sourceNames": [
         "CraftGump"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:29"
+        "src/components/game/craft-gump.tsx:30"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -157193,6 +157303,7 @@
         "InlayPanel",
         "MaterialSelector",
         "RecipeRow",
+        "RefiningPanel",
         "WorkmanshipPreview",
         "div",
         "li",
@@ -157217,10 +157328,26 @@
           "applicability": "source contract; runtime unverified"
         },
         {
+          "id": "predicate:!edge || !hilt || !swordBinding",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/craft-gump.tsx:30"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
           "id": "predicate:!here.includes(\"bench\")",
           "status": "inventoried",
           "evidence": [
             "src/components/game/craft-gump.tsx:28"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!here.includes(\"forge\")",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/craft-gump.tsx:30"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -157249,10 +157376,26 @@
           "applicability": "source contract; runtime unverified"
         },
         {
+          "id": "predicate:edge",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/craft-gump.tsx:30"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
           "id": "predicate:selectedCount(body) < bodyRole.amount || selectedCount(binding) < bindingRole.amount",
           "status": "inventoried",
           "evidence": [
             "src/components/game/craft-gump.tsx:28"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:selectedCount(edge) < edgeRole.amount || selectedCount(hilt) < hiltRole.amount || selectedCount(swordBinding) < swordBindingRole.amount",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/craft-gump.tsx:30"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -157277,6 +157420,14 @@
           "status": "inventoried",
           "evidence": [
             "src/components/game/craft-gump.tsx:28"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:st === \"forge\" || st === \"bench\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/craft-gump.tsx:30"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -157316,13 +157467,13 @@
       "canonicalId": "src/components/game/craft-gump.tsx#RecipeRow",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/craft-gump.tsx:124"
+        "src/components/game/craft-gump.tsx:171"
       ],
       "sourceNames": [
         "RecipeRow"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:124"
+        "src/components/game/craft-gump.tsx:171"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -168794,9 +168945,13 @@
       "sourceNames": [
         "GradeResourceId"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -168840,9 +168995,13 @@
       "sourceNames": [
         "GradeResourceId"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -168886,9 +169045,13 @@
       "sourceNames": [
         "GradeResourceId"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -168932,9 +169095,13 @@
       "sourceNames": [
         "GradeResourceId"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -168978,9 +169145,13 @@
       "sourceNames": [
         "GradeResourceId"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -169024,9 +169195,13 @@
       "sourceNames": [
         "GradeResourceId"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -169070,9 +169245,13 @@
       "sourceNames": [
         "GradeResourceId"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -169116,9 +169295,13 @@
       "sourceNames": [
         "GradeResourceId"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -169162,9 +169345,13 @@
       "sourceNames": [
         "GradeResourceId"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -169208,9 +169395,13 @@
       "sourceNames": [
         "GradeResourceId"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -169254,9 +169445,13 @@
       "sourceNames": [
         "GradeResourceId"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -169300,9 +169495,13 @@
       "sourceNames": [
         "GradeResourceId"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -169346,9 +169545,13 @@
       "sourceNames": [
         "GradeResourceId"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -169394,11 +169597,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:11",
+        "src/components/game/crafting/refining-panel.tsx:3",
         "src/components/game/crafting/workmanship-preview.tsx:2"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/workmanship-preview.tsx"
       ],
       "jsxTags": null,
@@ -169446,11 +169651,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:11",
+        "src/components/game/crafting/refining-panel.tsx:3",
         "src/components/game/crafting/workmanship-preview.tsx:2"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/workmanship-preview.tsx"
       ],
       "jsxTags": null,
@@ -169498,11 +169705,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:11",
+        "src/components/game/crafting/refining-panel.tsx:3",
         "src/components/game/crafting/workmanship-preview.tsx:2"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/workmanship-preview.tsx"
       ],
       "jsxTags": null,
@@ -169550,11 +169759,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:11",
+        "src/components/game/crafting/refining-panel.tsx:3",
         "src/components/game/crafting/workmanship-preview.tsx:2"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/workmanship-preview.tsx"
       ],
       "jsxTags": null,
@@ -170566,9 +170777,13 @@
       "sourceNames": [
         "ResourceForm"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -170612,9 +170827,13 @@
       "sourceNames": [
         "ResourceForm"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -170658,9 +170877,13 @@
       "sourceNames": [
         "ResourceForm"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -170704,9 +170927,13 @@
       "sourceNames": [
         "ResourceForm"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -170750,9 +170977,13 @@
       "sourceNames": [
         "ResourceForm"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -170796,9 +171027,13 @@
       "sourceNames": [
         "ResourceForm"
       ],
-      "rendererLocations": [],
-      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
-      "surfaces": [],
+      "rendererLocations": [
+        "src/components/game/crafting/refining-panel.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/refining-panel.tsx"
+      ],
       "jsxTags": null,
       "states": [
         {
@@ -171021,7 +171256,7 @@
       "canonicalId": "intro",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:73"
+        "src/game/store.ts:74"
       ],
       "sourceNames": [
         "Phase"
@@ -171067,7 +171302,7 @@
       "canonicalId": "looking",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:73"
+        "src/game/store.ts:74"
       ],
       "sourceNames": [
         "Phase"
@@ -171113,7 +171348,7 @@
       "canonicalId": "playing",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:73"
+        "src/game/store.ts:74"
       ],
       "sourceNames": [
         "Phase"
@@ -171159,7 +171394,7 @@
       "canonicalId": "raising",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:73"
+        "src/game/store.ts:74"
       ],
       "sourceNames": [
         "Phase"
@@ -171205,7 +171440,7 @@
       "canonicalId": "title",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:73"
+        "src/game/store.ts:74"
       ],
       "sourceNames": [
         "Phase"

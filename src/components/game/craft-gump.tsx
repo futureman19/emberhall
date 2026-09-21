@@ -5,7 +5,7 @@ import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "@/game/catalog";
 import { RECIPES, canMake, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
-import { BOW_FORM } from "@/game/crafting/forms";
+import { BOW_FORM, SWORD_FORM } from "@/game/crafting/forms";
 import { listResourceInventory } from "@/game/inventory/resources";
 import { getWorld } from "@/game/live";
 import type { MaterialGrade } from "@/game/resources/types";
@@ -15,6 +15,7 @@ import { MaterialSelector } from "./crafting/material-selector";
 import { WorkmanshipPreview } from "./crafting/workmanship-preview";
 import { InlayPanel } from "./crafting/inlay-panel";
 import { ConfirmCraft } from "./crafting/confirm-craft";
+import { RefiningPanel } from "./crafting/refining-panel";
 import { cn } from "@/lib/utils";
 
 type Group = Station | "field";
@@ -32,6 +33,7 @@ export function CraftGump() {
   const make = useGame((s) => s.makeRecipe);
   const makeBatch = useGame((s) => s.makeRecipeBatch);
   const makeExact = useGame((s) => s.makeExactRecipe);
+  const refine = useGame((s) => s.refineStack);
   const inlayItem = useGame((s) => s.inlayItem);
   const pack = useGame((s) => s.snap.player?.pack);
   const skills = useGame((s) => s.snap.player?.skills);
@@ -42,6 +44,9 @@ export function CraftGump() {
   const rares = useGame((s) => s.snap.player?.rares ?? []);
   const [body, setBody] = useState<ResourceStackKey | null>(null);
   const [binding, setBinding] = useState<ResourceStackKey | null>(null);
+  const [edge, setEdge] = useState<ResourceStackKey | null>(null);
+  const [hilt, setHilt] = useState<ResourceStackKey | null>(null);
+  const [swordBinding, setSwordBinding] = useState<ResourceStackKey | null>(null);
   if (!open) return null;
   const here = stationsHere(getWorld());
   void x;
@@ -50,12 +55,22 @@ export function CraftGump() {
   const resourceRows = listResourceInventory(resources ?? { stacks: {} });
   const bodyRole = BOW_FORM.roles.find(({ role }) => role === "body")!;
   const bindingRole = BOW_FORM.roles.find(({ role }) => role === "binding")!;
+  const edgeRole = SWORD_FORM.roles.find(({ role }) => role === "edge")!;
+  const hiltRole = SWORD_FORM.roles.find(({ role }) => role === "hilt")!;
+  const swordBindingRole = SWORD_FORM.roles.find(({ role }) => role === "binding")!;
   const selectedCount = (key: ResourceStackKey | null) => resourceRows.find((row) => row.key === key)?.count ?? 0;
   const bowDisabled = !here.includes("bench")
     ? "Stand at the yard or hall"
     : !body || !binding
       ? "Choose body and binding"
       : selectedCount(body) < bodyRole.amount || selectedCount(binding) < bindingRole.amount
+        ? "Not enough selected material"
+        : null;
+  const swordDisabled = !here.includes("forge")
+    ? "Stand at the forge"
+    : !edge || !hilt || !swordBinding
+      ? "Choose edge, hilt, and binding"
+      : selectedCount(edge) < edgeRole.amount || selectedCount(hilt) < hiltRole.amount || selectedCount(swordBinding) < swordBindingRole.amount
         ? "Not enough selected material"
         : null;
   const groups: Group[] = ["bench", "forge", "fire", "field"];
@@ -78,12 +93,35 @@ export function CraftGump() {
           selected={{ body, binding }}
           rows={resourceRows}
           disabledReason={bowDisabled}
+          formLabel="bow"
           onConfirm={() => body && binding && makeExact("bow", [
             { role: "body", key: body },
             { role: "binding", key: binding },
           ])}
         />
         <InlayPanel items={rares} rows={resourceRows} onInlay={inlayItem} />
+      </div>
+      <div className="mt-2 space-y-2" aria-label="Advanced sword work">
+        <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Sword</p>
+        <MaterialSelector role={edgeRole} rows={resourceRows} selected={edge} onSelect={setEdge} />
+        <MaterialSelector role={hiltRole} rows={resourceRows} selected={hilt} onSelect={setHilt} />
+        <MaterialSelector role={swordBindingRole} rows={resourceRows} selected={swordBinding} onSelect={setSwordBinding} />
+        <WorkmanshipPreview
+          skill={skills?.smithing ?? 0}
+          difficulty={20}
+          primaryGrade={edge ? (edge.split(":")[2] as MaterialGrade) : undefined}
+        />
+        <ConfirmCraft
+          selected={{ edge, hilt, binding: swordBinding }}
+          rows={resourceRows}
+          disabledReason={swordDisabled}
+          formLabel="sword"
+          onConfirm={() => edge && hilt && swordBinding && makeExact("sword", [
+            { role: "edge", key: edge },
+            { role: "hilt", key: hilt },
+            { role: "binding", key: swordBinding },
+          ])}
+        />
       </div>
       {groups.map((st) => {
         const at = st === "field" ? true : here.includes(st);
@@ -95,6 +133,15 @@ export function CraftGump() {
           <div key={st} className="mt-4">
             <p className="font-display text-xs tracking-wider text-muted uppercase">{TITLE[st].title}</p>
             <p className="mt-1 text-xs leading-relaxed text-muted">{at ? TITLE[st].blurb : st === "forge" ? "Raise a forge, then stand by the fire." : "Stand in the yard, or the hall."}</p>
+            {st === "forge" || st === "bench" ? (
+              <RefiningPanel
+                rows={resourceRows}
+                station={st}
+                atStation={at}
+                skill={st === "forge" ? (skills?.smithing ?? 0) : (skills?.carpentry ?? 0)}
+                onRefine={refine}
+              />
+            ) : null}
             <ul className="mt-2 space-y-1">
               {list.map((r) => (
                 <li key={r.id}>

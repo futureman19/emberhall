@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { addResource, makeResourceStackKey, resourceCount } from "./inventory/resources.ts";
-import { refineResource } from "./refining.ts";
+import { findProcessingRoute, refineResource } from "./refining.ts";
 import { createWorld } from "./world.ts";
 
 const HIGHLAND_CHOICE_ORE = makeResourceStackKey("highland_ore", "ore", "choice");
@@ -10,6 +10,15 @@ const IRON_ROUGH_ORE = makeResourceStackKey("iron_ore", "ore", "rough");
 const IRON_ROUGH_INGOT = makeResourceStackKey("iron_ore", "ingot", "rough");
 const COPPER_SOUND_ORE = makeResourceStackKey("copper_ore", "ore", "sound");
 const COPPER_SOUND_INGOT = makeResourceStackKey("copper_ore", "ingot", "sound");
+
+test("refining - route discovery is shared between the command and the work gump", () => {
+  const copper = findProcessingRoute("copper_ore", "ore");
+  assert.equal(copper?.route.id, "smelt_copper_ore");
+  assert.equal(copper?.owner.id, "copper_ore");
+  assert.equal(findProcessingRoute("copper_ore", "ingot"), null, "no route begins with an ingot yet");
+  assert.equal(findProcessingRoute("oak", "board"), null);
+  assert.equal(findProcessingRoute("oak", "log")?.route.id, "saw_oak");
+});
 
 test("refining - copper family and grade survive the forge at its lower gate", () => {
   const world = createWorld();

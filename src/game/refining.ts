@@ -1,9 +1,21 @@
 import { addResource, debitResources, makeResourceStackKey, parseResourceInventory, parseResourceStackKey } from "./inventory/resources.ts";
 import { RESOURCE_CATALOG } from "./resources/catalog.ts";
-import type { GradeResourceId, MaterialGrade, ProcessingStation } from "./resources/types.ts";
+import type { GradeResourceId, MaterialGrade, ProcessingRoute, ProcessingStation, ResourceDefinition, ResourceForm } from "./resources/types.ts";
 import type { PlayerState, ResourceStackKey } from "./types.ts";
 
 export type RefiningPlayer = Pick<PlayerState, "resources">;
+
+/** Single discovery path for the refine command and the work gump. Today a
+ * route begins with the owner's own material; alloy routes widen this scan. */
+export function findProcessingRoute(
+  resourceId: GradeResourceId,
+  form: ResourceForm,
+): Readonly<{ owner: ResourceDefinition; route: ProcessingRoute }> | null {
+  const definition = RESOURCE_CATALOG[resourceId];
+  if (!definition || definition.qualityType !== "grade") return null;
+  const route = definition.processing.find((candidate) => candidate.input.form === form);
+  return route ? Object.freeze({ owner: definition, route }) : null;
+}
 
 export type RefiningResult =
   | Readonly<{ status: "blocked"; reason: "route" | "station" | "skill" | "materials"; message: string }>
@@ -17,12 +29,13 @@ export function refineResource(
 ): RefiningResult {
   const key = parseResourceStackKey(rawKey);
   const [resourceId, form, grade] = key.split(":") as [GradeResourceId, string, MaterialGrade];
-  const definition = RESOURCE_CATALOG[resourceId];
-  if (!definition || definition.qualityType !== "grade") {
-    return Object.freeze({ status: "blocked", reason: "route", message: "That resource cannot be refined." });
+  const found = findProcessingRoute(resourceId, form as ResourceForm);
+  if (!found) {
+    const definition = RESOURCE_CATALOG[resourceId];
+    const reason = !definition || definition.qualityType !== "grade" ? "That resource cannot be refined." : "No refining route begins with that material.";
+    return Object.freeze({ status: "blocked", reason: "route", message: reason });
   }
-  const route = definition.processing.find((candidate) => candidate.input.form === form);
-  if (!route) return Object.freeze({ status: "blocked", reason: "route", message: "No refining route begins with that material." });
+  const { route } = found;
   if (route.station !== station) {
     return Object.freeze({ status: "blocked", reason: "station", message: `This work requires a ${route.station}.` });
   }
