@@ -25142,7 +25142,7 @@
       "canonicalId": "bald",
       "family": "look-style",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:50",
+        "src/game/chain-artifacts.ts:54",
         "src/game/look/catalog.ts:44",
         "src/game/look/types.ts:8"
       ],
@@ -25207,7 +25207,7 @@
       "canonicalId": "crop",
       "family": "look-style",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:50",
+        "src/game/chain-artifacts.ts:54",
         "src/game/look/catalog.ts:45",
         "src/game/look/types.ts:8"
       ],
@@ -25272,7 +25272,7 @@
       "canonicalId": "long",
       "family": "look-style",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:50",
+        "src/game/chain-artifacts.ts:54",
         "src/game/look/catalog.ts:48",
         "src/game/look/types.ts:8"
       ],
@@ -25337,7 +25337,7 @@
       "canonicalId": "shag",
       "family": "look-style",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:50",
+        "src/game/chain-artifacts.ts:54",
         "src/game/look/catalog.ts:46",
         "src/game/look/types.ts:8"
       ],
@@ -25402,7 +25402,7 @@
       "canonicalId": "tail",
       "family": "look-style",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:50",
+        "src/game/chain-artifacts.ts:54",
         "src/game/look/catalog.ts:47",
         "src/game/look/types.ts:8"
       ],
@@ -60563,7 +60563,7 @@
       "canonicalId": "src/game/chain-artifacts.ts#CharacterLookInscription.app=emberhall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:26"
+        "src/game/chain-artifacts.ts:29"
       ],
       "sourceNames": [
         "CharacterLookInscription.app"
@@ -60609,7 +60609,7 @@
       "canonicalId": "src/game/chain-artifacts.ts#CharacterLookInscription.calling=mage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:30"
+        "src/game/chain-artifacts.ts:33"
       ],
       "sourceNames": [
         "CharacterLookInscription.calling"
@@ -60655,7 +60655,7 @@
       "canonicalId": "src/game/chain-artifacts.ts#CharacterLookInscription.calling=merchant",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:30"
+        "src/game/chain-artifacts.ts:33"
       ],
       "sourceNames": [
         "CharacterLookInscription.calling"
@@ -60701,7 +60701,7 @@
       "canonicalId": "src/game/chain-artifacts.ts#CharacterLookInscription.calling=ranger",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:30"
+        "src/game/chain-artifacts.ts:33"
       ],
       "sourceNames": [
         "CharacterLookInscription.calling"
@@ -60747,7 +60747,7 @@
       "canonicalId": "src/game/chain-artifacts.ts#CharacterLookInscription.calling=rogue",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:30"
+        "src/game/chain-artifacts.ts:33"
       ],
       "sourceNames": [
         "CharacterLookInscription.calling"
@@ -60793,7 +60793,7 @@
       "canonicalId": "src/game/chain-artifacts.ts#CharacterLookInscription.calling=warrior",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:30"
+        "src/game/chain-artifacts.ts:33"
       ],
       "sourceNames": [
         "CharacterLookInscription.calling"
@@ -60839,7 +60839,7 @@
       "canonicalId": "src/game/chain-artifacts.ts#CharacterLookInscription.type=look",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:28"
+        "src/game/chain-artifacts.ts:31"
       ],
       "sourceNames": [
         "CharacterLookInscription.type"
@@ -60885,7 +60885,7 @@
       "canonicalId": "src/game/chain-artifacts.ts#CharacterLookInscription.v=4",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:27"
+        "src/game/chain-artifacts.ts:30"
       ],
       "sourceNames": [
         "CharacterLookInscription.v"
@@ -60931,7 +60931,7 @@
       "canonicalId": "src/game/chain-artifacts.ts#EmberhallChainArtifact.app=emberhall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:26"
+        "src/game/chain-artifacts.ts:29"
       ],
       "sourceNames": [
         "EmberhallChainArtifact.app"
@@ -60977,7 +60977,7 @@
       "canonicalId": "src/game/chain-artifacts.ts#EmberhallChainArtifact.type=look",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:28"
+        "src/game/chain-artifacts.ts:31"
       ],
       "sourceNames": [
         "EmberhallChainArtifact.type"
@@ -61023,7 +61023,7 @@
       "canonicalId": "src/game/chain-artifacts.ts#EmberhallChainArtifact.type=part",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:28"
+        "src/game/chain-artifacts.ts:31"
       ],
       "sourceNames": [
         "EmberhallChainArtifact.type"
@@ -61069,7 +61069,7 @@
       "canonicalId": "src/game/chain-artifacts.ts#EmberhallChainArtifact.v=4",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:27"
+        "src/game/chain-artifacts.ts:30"
       ],
       "sourceNames": [
         "EmberhallChainArtifact.v"
@@ -61111,11 +61111,57 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/chain-artifacts.ts#EmberhallChainArtifact.v=5",
+      "canonicalId": "src/game/chain-artifacts.ts#EmberhallChainArtifact.v=5",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/chain-artifacts.ts:30"
+      ],
+      "sourceNames": [
+        "EmberhallChainArtifact.v"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/chain-artifacts.ts:30"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/chain-artifacts.ts:30"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/chain-artifacts.ts#PartInscription.app=emberhall",
       "canonicalId": "src/game/chain-artifacts.ts#PartInscription.app=emberhall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:39"
+        "src/game/chain-artifacts.ts:42"
       ],
       "sourceNames": [
         "PartInscription.app"
@@ -61161,7 +61207,7 @@
       "canonicalId": "src/game/chain-artifacts.ts#PartInscription.type=part",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:41"
+        "src/game/chain-artifacts.ts:45"
       ],
       "sourceNames": [
         "PartInscription.type"
@@ -61203,11 +61249,11 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
-      "id": "state-vocabulary:src/game/chain-artifacts.ts#PartInscription.v=4",
-      "canonicalId": "src/game/chain-artifacts.ts#PartInscription.v=4",
+      "id": "state-vocabulary:src/game/chain-artifacts.ts#PartInscription.v=5",
+      "canonicalId": "src/game/chain-artifacts.ts#PartInscription.v=5",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/chain-artifacts.ts:40"
+        "src/game/chain-artifacts.ts:43"
       ],
       "sourceNames": [
         "PartInscription.v"
@@ -61221,7 +61267,7 @@
           "id": "catalog-or-current-presentation",
           "status": "inventoried",
           "evidence": [
-            "src/game/chain-artifacts.ts:40"
+            "src/game/chain-artifacts.ts:43"
           ],
           "applicability": "source contract; runtime unverified"
         }
@@ -61243,7 +61289,7 @@
       },
       "status": "inventoried",
       "evidence": [
-        "src/game/chain-artifacts.ts:40"
+        "src/game/chain-artifacts.ts:43"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
