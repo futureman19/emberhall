@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { createHash } from "node:crypto";
 import {
   CHAIN_ARTIFACT_APP,
   CHAIN_ARTIFACT_VERSION,
@@ -14,7 +15,6 @@ import {
   encodeCharacterLookInscription,
   encodePartInscription,
   latestCharacterLook,
-  localPartIdFromOrigin,
   previewRedeemPart,
 } from "./chain-artifacts.ts";
 import { LOOK_SCHEMA } from "./look/types.ts";
@@ -136,6 +136,94 @@ test("chain part - inscription preserves exact sculpted identity, author, and ra
   assert.equal(decodePartInscription(forgedRarity), null);
 });
 
+test("chain part - valid voxel alteration under the minted ID is rejected", () => {
+  const { world } = personFixture();
+  const inscription = encodePartInscription(world, partFixture("part-tamper-test"))!;
+  assert.ok(decodePartInscription(inscription));
+  for (const field of ["color", "position"] as const) {
+    const changed = structuredClone(inscription);
+    if (field === "color") changed.part.voxels[0].c = "#112233";
+    else changed.part.voxels[0].z = 2;
+    assert.equal(decodePartInscription(changed), null, field);
+  }
+});
+
+function independentDigest(part: VoxelPartV1): string {
+  const { schema, id, name, slot, createdAt, author, rarity } = part;
+  const voxels = part.voxels.map(({ x, y, z, c }) => ({ x, y, z, c: c.toLowerCase() }))
+    .sort((a, b) => a.x - b.x || a.y - b.y || a.z - b.z);
+  return createHash("sha256").update("emberhall.part-content/1\n" + JSON.stringify({
+    schema, id, name, slot, voxels, createdAt, author, rarity,
+  }), "utf8").digest("hex");
+}
+
+test("chain part - v5 SHA256 commitment matches independent canonical implementation", () => {
+  const { world } = personFixture();
+  const part = partFixture();
+  const sound = encodePartInscription(world, part)!;
+  assert.equal(sound.v, 5);
+  assert.equal(sound.commitment.digest, "5c45904082c63b8ebf5445087f442ad7e9ab27768baae1b2e3b09f7801a8c9b1");
+  assert.deepEqual(sound.commitment, { v: 1, algorithm: "sha256", digest: independentDigest(part) });
+  const reordered = { ...sound, part: Object.fromEntries(Object.entries(structuredClone(sound.part)).reverse()) as typeof sound.part };
+  reordered.part.voxels.reverse();
+  reordered.part.voxels = reordered.part.voxels.map(({ x, y, z, c }) => ({ c: c.toUpperCase(), z, y, x }));
+  assert.deepEqual(decodePartInscription(reordered), sound);
+  // Recomputed commitments are accepted: integrity is NOT author authenticity.
+  const changed = structuredClone(sound);
+  changed.part.name = "Another Crown";
+  const recommitted = { ...changed, commitment: { ...changed.commitment, digest: independentDigest(changed.part) } };
+  assert.deepEqual(decodePartInscription(recommitted), recommitted);
+});
+
+test("chain part - commitment protects ID and all metadata and rejects invalid envelopes", () => {
+  const { world } = personFixture();
+  const sound = encodePartInscription(world, partFixture())!;
+  for (const change of [
+    { id: "part-other" }, { name: "Other Crown" }, { slot: "back" },
+    { createdAt: 43 }, { author: "Other Hand" }, { rarity: "rare" }, { schema: "emberhall.part/2" },
+  ]) assert.equal(decodePartInscription({ ...sound, part: { ...sound.part, ...change } }), null);
+  for (const commitment of [
+    undefined, null, {}, { ...sound.commitment, digest: "" },
+    { ...sound.commitment, digest: "a".repeat(63) }, { ...sound.commitment, digest: "g".repeat(64) },
+    { ...sound.commitment, digest: "0".repeat(64) }, { ...sound.commitment, digest: sound.commitment.digest.toUpperCase() },
+    { ...sound.commitment, v: 2 }, { ...sound.commitment, algorithm: "sha512" },
+  ]) assert.equal(decodePartInscription({ ...sound, commitment }), null);
+  const { commitment: _omitted, ...legacy } = sound;
+  assert.equal(decodePartInscription(legacy), null);
+  assert.equal(decodePartInscription({ ...legacy, v: 4 }), null);
+  assert.equal(decodePartInscription({ ...sound, v: 6 }), null);
+  let calls = 0;
+  for (const target of ["commitment", "part", "voxel"] as const) {
+    const accessor = structuredClone(sound);
+    const object = target === "commitment" ? accessor.commitment : target === "part" ? accessor.part : accessor.part.voxels[0];
+    const key = target === "commitment" ? "digest" : target === "part" ? "author" : "c";
+    Object.defineProperty(object, key, { get() { calls++; return "bad"; }, enumerable: true });
+    assert.equal(decodePartInscription(accessor), null);
+  }
+  assert.equal(calls, 0);
+});
+
+test("chain part - exact-ID replay is idempotent, collisions never overwrite, old look references resolve", () => {
+  const { world, person } = personFixture();
+  const part = partFixture("part-idempotent");
+  const sound = encodePartInscription(world, part)!;
+  const oldLook = encodeCharacterLookInscription(world, { ...person, look: { ...person.look!, parts: [part.id] } })!;
+  try {
+    savePart({ ...part, name: "Local Work" });
+    const before = structuredClone(listParts());
+    assert.equal(previewRedeemPart(sound, OUTPOINT), "A different sculpture already uses that part ID.");
+    assert.throws(() => applyRedeemPart(world, sound, OUTPOINT), /different sculpture/);
+    assert.deepEqual(listParts(), before);
+    removePart(part.id);
+    assert.throws(() => applyRedeemPart(world, sound, "bad"), /stable origin/);
+    applyRedeemPart(world, sound, OUTPOINT);
+    applyRedeemPart(world, sound, OUTPOINT);
+    assert.equal(listParts().filter(({ id }) => id === part.id).length, 1);
+    applyCharacterLook(world, oldLook);
+    assert.deepEqual(partsById(person.look?.parts), [part]);
+  } finally { removePart(part.id); }
+});
+
 test("chain part - confirmed mint leaves the bench and redeem restores wearability", () => {
   const { world, person } = personFixture();
   const part = partFixture(`part-cycle-${Date.now()}`);
@@ -149,7 +237,7 @@ test("chain part - confirmed mint leaves the bench and redeem restores wearabili
 
   assert.equal(previewRedeemPart(inscription, OUTPOINT), null);
   assert.equal(applyRedeemPart(world, inscription, OUTPOINT), `${part.name} returns to the sculptor's bench.`);
-  const restoredId = localPartIdFromOrigin(OUTPOINT)!;
+  const restoredId = part.id;
   assert.equal(listParts().some(({ id }) => id === restoredId), true);
   assert.equal(applyTogglePart(world, restoredId), `${person.name} wears ${part.name}.`);
   assert.deepEqual(partsById(person.look.parts), [{ ...part, id: restoredId }]);

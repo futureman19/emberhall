@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { createHash } from "node:crypto";
 import { chromium } from "playwright";
 
 const url = process.env.CHAIN_SMOKE_URL || "http://127.0.0.1:8080/";
@@ -31,14 +32,17 @@ const lookMalformed = {
   predecessor: originLook2.replace(".0", "_0"),
   calling: "bard",
 };
-const part = (id, name, slot) => ({
-  app: "emberhall", v: 4, type: "part", world: 77, hour: 8,
-  part: {
+const part = (id, name, slot) => {
+  const content = {
     schema: "emberhall.part/1", id, name, slot,
     voxels: [{ x: 1, y: 0, z: 1, c: "#e8b96a" }, { x: 2, y: 0, z: 1, c: "#a85a42" }],
     createdAt: 42, author: "Ada Vale", rarity: "common",
-  },
-});
+  };
+  // Independent Node crypto fixture, never the production encoder.
+  const digest = createHash("sha256").update("emberhall.part-content/1\n" + JSON.stringify(content), "utf8").digest("hex");
+  return { app: "emberhall", v: 5, type: "part", world: 77, hour: 8, part: content,
+    commitment: { v: 1, algorithm: "sha256", digest } };
+};
 const pointer = (origin) => origin.replace(".0", "_0");
 const payloads = new Map([
   [pointer(originLook), lookV1],
@@ -290,7 +294,46 @@ try {
     }, payloads.get(pointer(originPart)));
     check(result, 'Same-ID valid voxel tamper rejected', tamper.original !== null && tamper.decoded === null, 'changed color under same ID rejected', tamper);
     check(result, 'Malformed duplicate coordinates still rejected', tamper.malformedDecoded === null, null, tamper.malformedDecoded);
-    result.tamperScope = 'Acceptance expectation is stronger than doc line 15 silent client-beta structural parsing; report mismatch, not a cryptographic security claim.';
+    result.tamperScope = 'v5 SHA256 canonical content integrity: unchanged commitment rejects edited content; a recomputed hash is not author authenticity.';
+  });
+  await runCase('redeem-collision-before-burn', 11, walletOutputs, async (page, result) => {
+    await page.getByTestId('vault-redeem-part-chain-crown').waitFor();
+    await installActionAdapters(page);
+    await page.evaluate(async (content) => {
+      const parts = await import('/src/game/look/parts.ts');
+      parts.savePart({ ...content, name: 'Local Collision' });
+    }, payloads.get(pointer(originPart)).part);
+    const before = await state(page);
+    await page.getByTestId('vault-redeem-part-chain-crown').click();
+    await page.getByText('A different sculpture already uses that part ID.', { exact: true }).waitFor();
+    const after = await state(page);
+    const calls = await page.evaluate(() => window.__qa.burnCalls.length);
+    check(result, 'Collision rejected BEFORE any burn', calls === 0, 0, calls);
+    check(result, 'Existing local part and outfit preserved', same(before, after), before, after);
+    check(result, 'Neutral collision feedback', !/cheat|tamper|fraud|banned|forgery|dishonest/i.test(await page.getByTestId('vault-panel').innerText()), 'neutral', 'collision rejected');
+  });
+  await runCase('redeem-burn-rejection', 11, walletOutputs, async (page, result) => {
+    const redeem = page.getByTestId('vault-redeem-part-chain-crown');
+    await redeem.waitFor();
+    await installActionAdapters(page);
+    const before = await state(page);
+    await redeem.click();
+    await page.waitForFunction(() => window.__qa.pending?.kind === 'burn');
+    check(result, 'Pending burn keeps collection unchanged', same(before, await state(page)), before, await state(page));
+    await page.evaluate(() => window.__qa.pending.resolve({ error: 'QA wallet declined burn' }));
+    await page.getByText('The redeem failed: QA wallet declined burn', { exact: true }).waitFor();
+    const after = await state(page);
+    check(result, 'Rejected burn never restores part', same(before, after), before, after);
+  });
+  await runCase('malformed-part-commitment', 11, [row(originPart)], async (page, result) => {
+    const decoded = await page.evaluate(async (original) => {
+      const a = await import('/src/game/chain-artifacts.ts');
+      return [
+        a.decodePartInscription({ ...original, commitment: { ...original.commitment, digest: 'not-a-digest' } }),
+        a.decodePartInscription({ ...original, v: 4, commitment: undefined }),
+      ];
+    }, payloads.get(pointer(originPart)));
+    check(result, 'Malformed digest and legacy uncommitted part rejected', decoded.every(p => p === null), [null, null], decoded);
   });
   // Preserve the prior desktop/mobile layout and listed-item affordance intent.
   for (const viewport of [{ name: 'desktop', width: 1280, height: 800 }, { name: 'mobile', width: 390, height: 844 }]) {
