@@ -10,7 +10,7 @@ export type PlaceOpts = {
   skipCost?: boolean;
 };
 
-function rotateCell(x: number, z: number, rot: Rotation): [number, number] {
+export function rotateCell(x: number, z: number, rot: Rotation): [number, number] {
   if (rot === 1) return [z, -x];
   if (rot === 2) return [-x, -z];
   if (rot === 3) return [-z, x];

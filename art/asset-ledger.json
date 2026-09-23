@@ -72,6 +72,7 @@
     "src/components/game/people-meshes.tsx",
     "src/components/game/pets-gump.tsx",
     "src/components/game/pile-meshes.tsx",
+    "src/components/game/placeable-meshes.tsx",
     "src/components/game/resource-visuals.ts",
     "src/components/game/screen-rain.tsx",
     "src/components/game/settings-gump.tsx",
@@ -161,6 +162,7 @@
     "src/game/placeables/legacy-buildings.ts",
     "src/game/placeables/materials.ts",
     "src/game/placeables/placement.ts",
+    "src/game/placeables/pose.ts",
     "src/game/placeables/schema.ts",
     "src/game/placeables/types.ts",
     "src/game/placement-preview.ts",
@@ -40360,13 +40362,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#GraphicsProbe",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:70"
+        "src/components/game/world-scene.tsx:71"
       ],
       "sourceNames": [
         "GraphicsProbe"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:70"
+        "src/components/game/world-scene.tsx:71"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -40466,7 +40468,7 @@
       "canonicalId": "src/components/game/world-scene.tsx#groundY",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:105"
+        "src/components/game/world-scene.tsx:106"
       ],
       "sourceNames": [
         "groundY"
@@ -40483,9 +40485,10 @@
         "src/components/game/oak-stumps.tsx:4",
         "src/components/game/people-meshes.tsx:24",
         "src/components/game/pile-meshes.tsx:2",
+        "src/components/game/placeable-meshes.tsx:3",
         "src/components/game/sky.tsx:7",
         "src/components/game/terrain.tsx:14",
-        "src/components/game/world-scene.tsx:105",
+        "src/components/game/world-scene.tsx:106",
         "src/components/game/world-scene.tsx:25"
       ],
       "rendererMapping": "direct AST declaration/name",
@@ -40501,6 +40504,7 @@
         "src/components/game/oak-stumps.tsx",
         "src/components/game/people-meshes.tsx",
         "src/components/game/pile-meshes.tsx",
+        "src/components/game/placeable-meshes.tsx",
         "src/components/game/sky.tsx",
         "src/components/game/terrain.tsx",
         "src/components/game/world-scene.tsx"
@@ -41247,13 +41251,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#transient-action-fx",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1892"
+        "src/components/game/world-scene.tsx:1894"
       ],
       "sourceNames": [
         "WorldScene"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1892"
+        "src/components/game/world-scene.tsx:1894"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -49396,6 +49400,238 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "renderer:src/components/game/placeable-meshes.tsx#Layer",
+      "canonicalId": "src/components/game/placeable-meshes.tsx#Layer",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/placeable-meshes.tsx:14"
+      ],
+      "sourceNames": [
+        "Layer"
+      ],
+      "rendererLocations": [
+        "src/components/game/placeable-meshes.tsx:14"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/placeable-meshes.tsx"
+      ],
+      "jsxTags": [
+        "boxGeometry",
+        "instancedMesh",
+        "meshStandardMaterial"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/placeable-meshes.tsx:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!mesh",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/placeable-meshes.tsx:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:ghost",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/placeable-meshes.tsx:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:highlight",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/placeable-meshes.tsx:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:items.length === 0",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/placeable-meshes.tsx:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/placeable-meshes.tsx:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/placeable-meshes.tsx:14"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/placeable-meshes.tsx#Piece",
+      "canonicalId": "src/components/game/placeable-meshes.tsx#Piece",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/placeable-meshes.tsx:64"
+      ],
+      "sourceNames": [
+        "Piece"
+      ],
+      "rendererLocations": [
+        "src/components/game/placeable-meshes.tsx:64"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/placeable-meshes.tsx"
+      ],
+      "jsxTags": [
+        "Layer",
+        "group"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/placeable-meshes.tsx:64"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:ghost",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/placeable-meshes.tsx:64"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/placeable-meshes.tsx:64"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/placeable-meshes.tsx:64"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/placeable-meshes.tsx#Placeables",
+      "canonicalId": "src/components/game/placeable-meshes.tsx#Placeables",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/placeable-meshes.tsx:110"
+      ],
+      "sourceNames": [
+        "Placeables"
+      ],
+      "rendererLocations": [
+        "src/components/game/placeable-meshes.tsx:110"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/placeable-meshes.tsx"
+      ],
+      "jsxTags": [
+        "Piece",
+        "group"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/placeable-meshes.tsx:110"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:hold.active && hold.definitionId && hold.tx != null && hold.ty != null",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/placeable-meshes.tsx:110"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/placeable-meshes.tsx:110"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/placeable-meshes.tsx:110"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "renderer:src/components/game/screen-rain.tsx#ScreenRain",
       "canonicalId": "src/components/game/screen-rain.tsx#ScreenRain",
       "family": "renderer",
@@ -52973,13 +53209,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CastFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:301"
+        "src/components/game/world-scene.tsx:302"
       ],
       "sourceNames": [
         "CastFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:301"
+        "src/components/game/world-scene.tsx:302"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -53226,13 +53462,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#ChipBits",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1797"
+        "src/components/game/world-scene.tsx:1798"
       ],
       "sourceNames": [
         "ChipBits"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1797"
+        "src/components/game/world-scene.tsx:1798"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -53312,13 +53548,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CombatFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1663"
+        "src/components/game/world-scene.tsx:1664"
       ],
       "sourceNames": [
         "CombatFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1663"
+        "src/components/game/world-scene.tsx:1664"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -53428,13 +53664,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CompanionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1279"
+        "src/components/game/world-scene.tsx:1280"
       ],
       "sourceNames": [
         "CompanionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1279"
+        "src/components/game/world-scene.tsx:1280"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -53609,13 +53845,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#ConstructionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1345"
+        "src/components/game/world-scene.tsx:1346"
       ],
       "sourceNames": [
         "ConstructionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1345"
+        "src/components/game/world-scene.tsx:1346"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -53755,13 +53991,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CorpseFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1524"
+        "src/components/game/world-scene.tsx:1525"
       ],
       "sourceNames": [
         "CorpseFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1524"
+        "src/components/game/world-scene.tsx:1525"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -53896,13 +54132,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CraftFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1141"
+        "src/components/game/world-scene.tsx:1142"
       ],
       "sourceNames": [
         "CraftFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1141"
+        "src/components/game/world-scene.tsx:1142"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54020,13 +54256,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#DeathFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1767"
+        "src/components/game/world-scene.tsx:1768"
       ],
       "sourceNames": [
         "DeathFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1767"
+        "src/components/game/world-scene.tsx:1768"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54106,13 +54342,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#ExtractionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1428"
+        "src/components/game/world-scene.tsx:1429"
       ],
       "sourceNames": [
         "ExtractionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1428"
+        "src/components/game/world-scene.tsx:1429"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54252,13 +54488,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#FizzleFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:896"
+        "src/components/game/world-scene.tsx:897"
       ],
       "sourceNames": [
         "FizzleFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:896"
+        "src/components/game/world-scene.tsx:897"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54357,13 +54593,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#GatheringFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1609"
+        "src/components/game/world-scene.tsx:1610"
       ],
       "sourceNames": [
         "GatheringFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1609"
+        "src/components/game/world-scene.tsx:1610"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54488,13 +54724,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#HealingFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:959"
+        "src/components/game/world-scene.tsx:960"
       ],
       "sourceNames": [
         "HealingFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:959"
+        "src/components/game/world-scene.tsx:960"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54585,13 +54821,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#MarkStones",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:247"
+        "src/components/game/world-scene.tsx:248"
       ],
       "sourceNames": [
         "MarkStones"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:247"
+        "src/components/game/world-scene.tsx:248"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54658,13 +54894,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#MoongateTravelFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:746"
+        "src/components/game/world-scene.tsx:747"
       ],
       "sourceNames": [
         "MoongateTravelFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:746"
+        "src/components/game/world-scene.tsx:747"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54813,13 +55049,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#NpcInteractionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1210"
+        "src/components/game/world-scene.tsx:1211"
       ],
       "sourceNames": [
         "NpcInteractionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1210"
+        "src/components/game/world-scene.tsx:1211"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54989,13 +55225,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#PersonalActionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:648"
+        "src/components/game/world-scene.tsx:649"
       ],
       "sourceNames": [
         "PersonalActionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:648"
+        "src/components/game/world-scene.tsx:649"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55235,13 +55471,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#PlacePointer",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:109"
+        "src/components/game/world-scene.tsx:110"
       ],
       "sourceNames": [
         "PlacePointer"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:109"
+        "src/components/game/world-scene.tsx:110"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55341,13 +55577,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#Rig",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:169"
+        "src/components/game/world-scene.tsx:170"
       ],
       "sourceNames": [
         "Rig"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:169"
+        "src/components/game/world-scene.tsx:170"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55457,13 +55693,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#SimClock",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:98"
+        "src/components/game/world-scene.tsx:99"
       ],
       "sourceNames": [
         "SimClock"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:98"
+        "src/components/game/world-scene.tsx:99"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55515,13 +55751,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#TamingFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1021"
+        "src/components/game/world-scene.tsx:1022"
       ],
       "sourceNames": [
         "TamingFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1021"
+        "src/components/game/world-scene.tsx:1022"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55676,13 +55912,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#TravelFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:815"
+        "src/components/game/world-scene.tsx:816"
       ],
       "sourceNames": [
         "TravelFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:815"
+        "src/components/game/world-scene.tsx:816"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55780,13 +56016,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#WalkMarker",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:275"
+        "src/components/game/world-scene.tsx:276"
       ],
       "sourceNames": [
         "WalkMarker"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:275"
+        "src/components/game/world-scene.tsx:276"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55866,13 +56102,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#WorldScene",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1841"
+        "src/components/game/world-scene.tsx:1842"
       ],
       "sourceNames": [
         "WorldScene"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1841"
+        "src/components/game/world-scene.tsx:1842"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55910,6 +56146,7 @@
         "PersonalActionFxMesh",
         "Piles",
         "PlacePointer",
+        "Placeables",
         "Rig",
         "SimClock",
         "Sky",
@@ -196444,11 +196681,13 @@
         "Block"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:26"
+        "src/components/game/building-meshes.tsx:26",
+        "src/components/game/placeable-meshes.tsx:9"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/building-meshes.tsx"
+        "src/components/game/building-meshes.tsx",
+        "src/components/game/placeable-meshes.tsx"
       ],
       "jsxTags": null,
       "states": [
@@ -196494,11 +196733,13 @@
         "Block"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:26"
+        "src/components/game/building-meshes.tsx:26",
+        "src/components/game/placeable-meshes.tsx:9"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/building-meshes.tsx"
+        "src/components/game/building-meshes.tsx",
+        "src/components/game/placeable-meshes.tsx"
       ],
       "jsxTags": null,
       "states": [
@@ -196544,11 +196785,13 @@
         "Block"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:26"
+        "src/components/game/building-meshes.tsx:26",
+        "src/components/game/placeable-meshes.tsx:9"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/building-meshes.tsx"
+        "src/components/game/building-meshes.tsx",
+        "src/components/game/placeable-meshes.tsx"
       ],
       "jsxTags": null,
       "states": [
@@ -196594,11 +196837,13 @@
         "Block"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:26"
+        "src/components/game/building-meshes.tsx:26",
+        "src/components/game/placeable-meshes.tsx:9"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/building-meshes.tsx"
+        "src/components/game/building-meshes.tsx",
+        "src/components/game/placeable-meshes.tsx"
       ],
       "jsxTags": null,
       "states": [
@@ -196644,11 +196889,13 @@
         "Block"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:26"
+        "src/components/game/building-meshes.tsx:26",
+        "src/components/game/placeable-meshes.tsx:9"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/building-meshes.tsx"
+        "src/components/game/building-meshes.tsx",
+        "src/components/game/placeable-meshes.tsx"
       ],
       "jsxTags": null,
       "states": [
@@ -196694,11 +196941,13 @@
         "Block"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:26"
+        "src/components/game/building-meshes.tsx:26",
+        "src/components/game/placeable-meshes.tsx:9"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/building-meshes.tsx"
+        "src/components/game/building-meshes.tsx",
+        "src/components/game/placeable-meshes.tsx"
       ],
       "jsxTags": null,
       "states": [
@@ -196744,11 +196993,13 @@
         "Block"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:26"
+        "src/components/game/building-meshes.tsx:26",
+        "src/components/game/placeable-meshes.tsx:9"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/building-meshes.tsx"
+        "src/components/game/building-meshes.tsx",
+        "src/components/game/placeable-meshes.tsx"
       ],
       "jsxTags": null,
       "states": [
@@ -196794,11 +197045,13 @@
         "Block"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:26"
+        "src/components/game/building-meshes.tsx:26",
+        "src/components/game/placeable-meshes.tsx:9"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/building-meshes.tsx"
+        "src/components/game/building-meshes.tsx",
+        "src/components/game/placeable-meshes.tsx"
       ],
       "jsxTags": null,
       "states": [
@@ -196844,11 +197097,13 @@
         "Block"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:26"
+        "src/components/game/building-meshes.tsx:26",
+        "src/components/game/placeable-meshes.tsx:9"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/building-meshes.tsx"
+        "src/components/game/building-meshes.tsx",
+        "src/components/game/placeable-meshes.tsx"
       ],
       "jsxTags": null,
       "states": [
@@ -196894,11 +197149,13 @@
         "Block"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:26"
+        "src/components/game/building-meshes.tsx:26",
+        "src/components/game/placeable-meshes.tsx:9"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/building-meshes.tsx"
+        "src/components/game/building-meshes.tsx",
+        "src/components/game/placeable-meshes.tsx"
       ],
       "jsxTags": null,
       "states": [
@@ -196944,11 +197201,13 @@
         "Block"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:26"
+        "src/components/game/building-meshes.tsx:26",
+        "src/components/game/placeable-meshes.tsx:9"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/building-meshes.tsx"
+        "src/components/game/building-meshes.tsx",
+        "src/components/game/placeable-meshes.tsx"
       ],
       "jsxTags": null,
       "states": [

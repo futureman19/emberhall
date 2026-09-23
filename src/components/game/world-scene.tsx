@@ -34,6 +34,7 @@ import { useGame, dropBuildHold } from "@/game/store";
 import { hoverAt, leftAt, liftAt } from "@/game/world-pointer";
 import { cancelHoldBuild, getHoldBuild } from "@/game/placeables/build-mode";
 import { Buildings } from "./building-meshes";
+import { Placeables } from "./placeable-meshes";
 import { LanternwoodDressing } from "./lanternwood-dressing";
 import { OakStumps } from "./oak-stumps";
 import { Crops } from "./crop-meshes";
@@ -1875,6 +1876,7 @@ export function WorldScene() {
       <Horizon treeReduction={graphics.horizonTreeReduction} />
       <Terrain />
       <Buildings />
+      <Placeables />
       <LanternwoodDressing />
       <OakStumps />
       <Crops />
