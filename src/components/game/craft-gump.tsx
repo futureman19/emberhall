@@ -5,7 +5,7 @@ import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "@/game/catalog";
 import { RECIPES, canMake, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
-import { BOOTS_FORM, BOW_FORM, GAUNTLETS_FORM, GLOVES_FORM, GREAVES_FORM, HELM_FORM, HOOD_FORM, HOSE_FORM, LEATHER_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
+import { BOOTS_FORM, BOW_FORM, CHARM_FORM, GAUNTLETS_FORM, GLOVES_FORM, GREAVES_FORM, HELM_FORM, HOOD_FORM, HOSE_FORM, LEATHER_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
 import { listResourceInventory } from "@/game/inventory/resources";
 import { getWorld } from "@/game/live";
 import type { MaterialGrade } from "@/game/resources/types";
@@ -75,6 +75,8 @@ export function CraftGump() {
   const [glovesBody, setGlovesBody] = useState<ResourceStackKey | null>(null);
   const [glovesBinding, setGlovesBinding] = useState<ResourceStackKey | null>(null);
   const [hoseBody, setHoseBody] = useState<ResourceStackKey | null>(null);
+  const [charmBody, setCharmBody] = useState<ResourceStackKey | null>(null);
+  const [charmBinding, setCharmBinding] = useState<ResourceStackKey | null>(null);
   const [hoseBinding, setHoseBinding] = useState<ResourceStackKey | null>(null);
   const [tab, setTab] = useState<WorkTab>("forms");
   if (!open) return null;
@@ -96,6 +98,8 @@ export function CraftGump() {
   const mailPlateRole = MAIL_FORM.roles.find(({ role }) => role === "plate")!;
   const mailLiningRole = MAIL_FORM.roles.find(({ role }) => role === "lining")!;
   const leatherBodyRole = LEATHER_FORM.roles.find(({ role }) => role === "body")!;
+  const charmBodyRole = CHARM_FORM.roles.find(({ role }) => role === "body")!;
+  const charmBindingRole = CHARM_FORM.roles.find(({ role }) => role === "binding")!;
   const leatherBindingRole = LEATHER_FORM.roles.find(({ role }) => role === "binding")!;
   const selectedCount = (key: ResourceStackKey | null) => resourceRows.find((row) => row.key === key)?.count ?? 0;
   const bowDisabled = !here.includes("bench")
@@ -366,6 +370,31 @@ export function CraftGump() {
           </div>
         );
       })}
+      <p className="mt-5 border-t border-border pt-3 font-display text-[10px] uppercase tracking-widest text-muted">Tinkering · field work</p>
+      <div className="mt-2 space-y-2" aria-label="Advanced charm work">
+        <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Charm</p>
+        <MaterialSelector role={charmBodyRole} rows={resourceRows} selected={charmBody} onSelect={setCharmBody} group="charm-body" />
+        <MaterialSelector role={charmBindingRole} rows={resourceRows} selected={charmBinding} onSelect={setCharmBinding} group="charm-binding" />
+        <WorkmanshipPreview
+          skill={skills?.tinkering ?? 0}
+          difficulty={24}
+          primaryGrade={charmBody ? (charmBody.split(":")[2] as MaterialGrade) : undefined}
+        />
+        <ConfirmCraft
+          selected={{ body: charmBody, binding: charmBinding }}
+          rows={resourceRows}
+          disabledReason={!charmBody || !charmBinding
+            ? "Choose a trophy and binding"
+            : selectedCount(charmBody) < charmBodyRole.amount || selectedCount(charmBinding) < charmBindingRole.amount
+              ? "Not enough selected material"
+              : null}
+          formLabel="charm"
+          onConfirm={() => charmBody && charmBinding && makeExact("charm", [
+            { role: "body", key: charmBody },
+            { role: "binding", key: charmBinding },
+          ])}
+        />
+      </div>
       </>
       )}
       {tab === "refine" && (

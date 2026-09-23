@@ -1,5 +1,5 @@
 import type { GemClarity, MaterialGrade, MaterialTraitId } from "./types.ts";
-import type { FaunaKind } from "../types.ts";
+import type { FaunaKind, SkillId } from "../types.ts";
 
 export const CANONICAL_STAT_IDS = ["damage", "hitBonus", "armor"] as const;
 export type CanonicalStatId = (typeof CANONICAL_STAT_IDS)[number];
@@ -52,9 +52,19 @@ type ClaritySkillTraitDefinition = {
   readonly values: Readonly<Record<GemClarity, number>>;
 };
 
+/** Trophy traits: a grade material that teaches a named skill while worn. */
+type GradeSkillTraitDefinition = {
+  readonly qualityType: "grade";
+  readonly stat: "skill";
+  readonly scope: "canonical";
+  readonly values: Readonly<Record<MaterialGrade, number>>;
+  readonly skill: SkillId;
+};
+
 export type MaterialTraitDefinition =
   | GradeTraitDefinition
   | GradeSlayerTraitDefinition
+  | GradeSkillTraitDefinition
   | ClarityCanonicalTraitDefinition
   | ClarityLocalTraitDefinition
   | ClaritySkillTraitDefinition;
@@ -138,6 +148,20 @@ const TRAITS = {
       "ash_demon",
       "grave_lich",
     ],
+  },
+  hunters: {
+    qualityType: "grade",
+    stat: "skill",
+    scope: "canonical",
+    values: { rough: 1, sound: 2, choice: 3, pristine: 4 },
+    skill: "tracking",
+  },
+  ferocity: {
+    qualityType: "grade",
+    stat: "skill",
+    scope: "canonical",
+    values: { rough: 1, sound: 2, choice: 3, pristine: 4 },
+    skill: "swords",
   },
   power: {
     qualityType: "clarity",

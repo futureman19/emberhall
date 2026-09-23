@@ -513,6 +513,29 @@ test("exact swordcraft - an aurochs horn hilt lends mass to the blade", () => {
   assert.deepEqual(blade.components?.[1], { role: "hilt", resourceId: "aurochs_horn", form: "bone", grade: "choice", amount: 1 });
 });
 
+test("exact charmcraft - a stag antler charm carries the hunter's craft, and wearing it shows", () => {
+  const world = createWorld();
+  world.player.skills.tinkering = 100;
+  addResource(world.player.resources, CHOICE_STAG_ANTLER, 1);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "charm", [
+    { role: "body", key: CHOICE_STAG_ANTLER },
+    { role: "binding", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /stag antler pendant/i);
+  const charm = world.player.rares[0]!;
+  assert.equal(charm.base, "pendant");
+  assert.equal(charm.formId, "charm");
+  assert.equal(charm.workmanship, "fine", "choice primary at tinkering 100 floors ordinary work out");
+  assert.deepEqual(charm.resolvedStats?.skillBonuses, { tracking: 3 });
+  assert.equal(charm.resolvedStats?.damage, 0);
+  assert.equal(charm.resolvedStats?.hitBonus, 0, "fine workmanship clamps against the charm's zero hit cap");
+  assert.equal(charm.resolvedStats?.armor, 0);
+  assert.equal(rareMods(world).skills.tracking ?? 0, 0, "in the pack it teaches nothing");
+  assert.equal(commandEquipRare(world, charm.uid) !== null, true);
+  assert.equal(rareMods(world).skills.tracking, 3, "worn at the neck, the charm's craft flows");
+});
+
 test("exact helmcraft - two plates and a lining, iron sturdy carries into head armor", () => {
   const world = createWorld();
   standAtForge(world);

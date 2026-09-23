@@ -7,6 +7,7 @@ import {
   GEM_CLARITIES,
   GLOVES_FORM,
   GREAVES_FORM,
+  CHARM_FORM,
   HELM_FORM,
   HOOD_FORM,
   HOSE_FORM,
@@ -425,7 +426,7 @@ test("null-prototype forms are accepted only when all required fields are own pr
     deepMutable(BOW_FORM),
   ) as unknown as ItemFormDefinition;
 
-  const catalog = buildItemFormCatalog([nullPrototypeForm, SWORD_FORM, SHIELD_FORM, HELM_FORM, MAIL_FORM, BOOTS_FORM, GAUNTLETS_FORM, GREAVES_FORM, LEATHER_FORM, HOOD_FORM, GLOVES_FORM, HOSE_FORM]);
+  const catalog = buildItemFormCatalog([nullPrototypeForm, SWORD_FORM, SHIELD_FORM, HELM_FORM, MAIL_FORM, BOOTS_FORM, GAUNTLETS_FORM, GREAVES_FORM, LEATHER_FORM, HOOD_FORM, GLOVES_FORM, HOSE_FORM, CHARM_FORM]);
   assert.deepEqual(catalog.bow, BOW_FORM);
   assert.deepEqual(resolveItemStats(nullPrototypeForm, bowBuild()), resolveItemStats(BOW_FORM, bowBuild()));
 
@@ -656,6 +657,7 @@ test("form identity contract binds bow to bow base item and weapon class", () =>
     hood: { baseItem: "hood", itemClass: "armor" },
     gloves: { baseItem: "gloves", itemClass: "armor" },
     hose: { baseItem: "hose", itemClass: "armor" },
+    charm: { baseItem: "pendant", itemClass: "jewelry" },
   });
   assert.throws(
     () => resolveItemStats({ ...deepMutable(BOW_FORM), baseItem: "sword" }, bowBuild()),
@@ -665,6 +667,21 @@ test("form identity contract binds bow to bow base item and weapon class", () =>
     () => resolveItemStats({ ...deepMutable(BOW_FORM), itemClass: "jewelry" }, bowBuild()),
     /item form bow must use item class weapon/,
   );
+});
+
+test("grade skill traits resolve onto jewelry through the material loop", () => {
+  const result = resolveItemStats(CHARM_FORM, {
+    workmanship: "ordinary",
+    components: [
+      { role: "body", resourceId: "stag_antler", form: "bone", grade: "choice", amount: 1 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+  });
+  assert.deepEqual(result.stats.skillBonuses, { tracking: 3 }, "choice hunters at primary scale");
+  assert.equal(result.stats.damage, 0, "antler accuracy clamps against the charm's zero hit/damage caps");
+  assert.equal(result.stats.hitBonus, 0);
+  assert.equal(result.stats.armor, 0);
 });
 
 test("base stat maps reject unknown skills, fauna, and invalid values", () => {

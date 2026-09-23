@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { BOOTS_FORM, BOW_FORM, GAUNTLETS_FORM, GLOVES_FORM, GREAVES_FORM, HELM_FORM, HOOD_FORM, HOSE_FORM, LEATHER_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM } from "./forms.ts";
+import { BOOTS_FORM, BOW_FORM, GAUNTLETS_FORM, GLOVES_FORM, GREAVES_FORM, HELM_FORM, HOOD_FORM, HOSE_FORM, LEATHER_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM, CHARM_FORM } from "./forms.ts";
 import {
   EXACT_RECIPE_CATALOG,
   exactRecipeById,
@@ -67,6 +67,21 @@ test("exact recipes - shield form is the first armor craft", () => {
   assert.equal(LEATHER_FORM.maxInlays, 1);
   assert.deepEqual(SHIELD_FORM.allowedGemFamilies, ["fortune", "protection"]);
   assert.equal(SHIELD_FORM.maxInlays, 1);
+});
+
+test("exact recipes - charm form is the first jewelry craft", () => {
+  const recipe = exactRecipeById("charm");
+  assert.equal(recipe?.formId, CHARM_FORM.id);
+  assert.deepEqual(recipe?.output, { itemId: "pendant", quantity: 1 });
+  assert.equal(CHARM_FORM.baseItem, "pendant");
+  assert.equal(CHARM_FORM.itemClass, "jewelry");
+  assert.deepEqual(CHARM_FORM.roles.map((r) => `${r.role}:${r.amount}:${r.contribution}`), ["body:1:primary", "binding:1:secondary"]);
+  assert.deepEqual(CHARM_FORM.roles[0]?.accepts, { qualityType: "grade", kinds: ["bone"], forms: ["bone"] });
+  assert.deepEqual(CHARM_FORM.roles[1]?.accepts, { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] });
+  assert.deepEqual(CHARM_FORM.baseStats, { damage: 0, hitBonus: 0, armor: 0, skillBonuses: {}, slayerMultipliers: {} });
+  assert.deepEqual(CHARM_FORM.caps, { damage: 0, hitBonus: 0, armor: 2, skillBonusPerSkill: 5, slayerMultiplier: 1.5 });
+  assert.deepEqual(CHARM_FORM.allowedGemFamilies, []);
+  assert.equal(CHARM_FORM.maxInlays, 0);
 });
 
 test("exact recipes - helm form is the head-slot armor craft beside the legacy tag recipe", () => {

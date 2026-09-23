@@ -47,7 +47,7 @@ const EXPECTED_IDS = [
 ] as const satisfies readonly ResourceId[];
 
 const GEM_IDS = ["ruby", "sapphire", "emerald", "diamond", "amethyst"] as const satisfies readonly GemResourceId[];
-const TRAIT_IDS = ["accuracy", "damage", "handling", "keen", "sturdy", "supple", "ember", "moon", "power", "fortune", "precision", "protection", "mastery"] as const satisfies readonly MaterialTraitId[];
+const TRAIT_IDS = ["accuracy", "damage", "handling", "keen", "sturdy", "supple", "ember", "moon", "hunters", "ferocity", "power", "fortune", "precision", "protection", "mastery"] as const satisfies readonly MaterialTraitId[];
 
 type DeepMutable<T> = T extends readonly (infer Item)[]
   ? DeepMutable<Item>[]
@@ -283,8 +283,8 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       common_cloth: [],
       fine_linen: ["handling"],
       hide: ["supple"],
-      wolf_fang: ["keen"],
-      stag_antler: ["accuracy"],
+      wolf_fang: ["keen", "ferocity"],
+      stag_antler: ["accuracy", "hunters"],
       drake_scale: ["sturdy"],
       boar_tusk: ["keen"],
       aurochs_horn: ["damage"],
@@ -306,6 +306,10 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
     Object.entries(FAUNA_META).filter(([, meta]) => meta.hasCorpse === false).map(([kind]) => kind),
     "moon silver bites exactly the fleshless kinds",
   );
+  assert.deepEqual(TRAIT_REGISTRY.hunters.values, { rough: 1, sound: 2, choice: 3, pristine: 4 });
+  assert.equal(TRAIT_REGISTRY.hunters.skill, "tracking");
+  assert.deepEqual(TRAIT_REGISTRY.ferocity.values, { rough: 1, sound: 2, choice: 3, pristine: 4 });
+  assert.equal(TRAIT_REGISTRY.ferocity.skill, "swords");
   assert.deepEqual(TRAIT_REGISTRY.power.values, { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 });
   assert.deepEqual(TRAIT_REGISTRY.fortune.values, { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 });
   assert.deepEqual(TRAIT_REGISTRY.precision.values, { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 });

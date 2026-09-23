@@ -351,6 +351,25 @@ export function resolveItemStats(
         });
         continue;
       }
+      if (trait.stat === "skill" && "skill" in trait) {
+        // Trophy traits name their skill on the definition; the per-skill
+        // cap binds the running total, not each contribution.
+        const raw = trait.values[component.grade] * scale;
+        const before = stats.skillBonuses[trait.skill] ?? 0;
+        const after = Math.min(before + raw, form.caps.skillBonusPerSkill);
+        const delta = after - before;
+        if (delta === 0) continue;
+        stats.skillBonuses = { ...stats.skillBonuses, [trait.skill]: after };
+        contributions.push({
+          source: "material",
+          sourceId: component.resourceId,
+          role: component.role,
+          traitId,
+          stats: { skillBonuses: { [trait.skill]: delta } },
+          local: {},
+        });
+        continue;
+      }
       const applied = applyCanonical(stats, { [trait.stat]: trait.values[component.grade] * scale }, form);
       if (!hasAppliedStats(applied)) continue;
       contributions.push({
