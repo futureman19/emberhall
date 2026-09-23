@@ -319,6 +319,9 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
     plots: [],
     saplings: [],
     plantedTimber: {},
+    placedObjects: [],
+    structures: [],
+    blueprints: [],
     player: {
       id: "",
       skills: emptySkills(),

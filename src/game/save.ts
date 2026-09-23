@@ -14,6 +14,7 @@ import { resolveItemStats } from "./crafting/resolve.ts";
 import { recipeById } from "./craft.ts";
 import { rareClassOf, weaponDmg } from "./rare.ts";
 import { generateTiles } from "./world.ts";
+import { parseCreatorFields } from "./placeables/schema.ts";
 import {
   createResourceInventory,
   parseResourceInventory,
@@ -26,7 +27,7 @@ import {
 import type { ItemId, World } from "./types.ts";
 
 export const SAVE_KEY = "emberhall-save-v4";
-export const CURRENT_SAVE_VERSION = 4;
+export const CURRENT_SAVE_VERSION = 5;
 
 type SaveRecord = Record<string, unknown>;
 
@@ -571,14 +572,17 @@ function isCurrentSave(save: SaveRecord): boolean {
     isBoolean(save.restored) &&
     isWeather(save.weather) &&
     (save.boom === null || (isRecord(save.boom) && isFiniteNumber(save.boom.untilHour))) &&
-    isNullableString(save.nightOffer)
+    isNullableString(save.nightOffer) &&
+    parseCreatorFields(save) !== null
   );
 }
 
 function migrateSave(value: unknown): SaveRecord | null {
   if (!isRecord(value)) return null;
   if (value.saveVersion === CURRENT_SAVE_VERSION) return value;
-  if (value.saveVersion !== 1 && value.saveVersion !== 2 && value.saveVersion !== 3) return null;
+  if (value.saveVersion !== 1 && value.saveVersion !== 2 && value.saveVersion !== 3 && value.saveVersion !== 4) {
+    return null;
+  }
 
   // Clone once at the version boundary. Generic copies deliberately carry
   // every existing/optional nested field, including Person.look.
@@ -602,6 +606,12 @@ function migrateSave(value: unknown): SaveRecord | null {
       rares: migrated.player.rares.map(normalizeRareRecord),
     };
     migrated.saveVersion = 4;
+  }
+  if (migrated.saveVersion === 4) {
+    if (migrated.placedObjects === undefined) migrated.placedObjects = [];
+    if (migrated.structures === undefined) migrated.structures = [];
+    if (migrated.blueprints === undefined) migrated.blueprints = [];
+    migrated.saveVersion = 5;
   }
   return migrated;
 }
@@ -685,6 +695,9 @@ export function loadSave(): World | null {
     data.tiles = generateTiles(data.seed);
     if (!data.saplings) data.saplings = [];
     if (!data.plantedTimber) data.plantedTimber = {};
+    if (!data.placedObjects) data.placedObjects = [];
+    if (!data.structures) data.structures = [];
+    if (!data.blueprints) data.blueprints = [];
     if (data.scars) {
       for (const [key, scar] of Object.entries(data.scars)) {
         const [x, y] = key.split(",").map(Number);

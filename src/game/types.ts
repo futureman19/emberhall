@@ -11,6 +11,9 @@ import type {
   ResourceFormFor,
   ResourceId,
 } from "./resources/types.ts";
+import type { Blueprint, PlacedObject, Structure } from "./placeables/schema.ts";
+
+export type { Blueprint, PlacedObject, Structure };
 
 export type TileKind =
   | "grass"
@@ -560,6 +563,9 @@ export interface World {
   plots: CropPlot[];
   saplings: Sapling[];
   plantedTimber: Record<string, string>;
+  placedObjects: PlacedObject[];
+  structures: Structure[];
+  blueprints: Blueprint[];
   player: PlayerState;
   log: LogLine[];
   objectives: Objective[];

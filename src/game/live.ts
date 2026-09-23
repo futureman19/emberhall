@@ -22,6 +22,9 @@ function withFauna(w: World) {
   if (!w.plots) w.plots = [];
   if (!w.saplings) w.saplings = [];
   if (!w.plantedTimber) w.plantedTimber = {};
+  if (!w.placedObjects) w.placedObjects = [];
+  if (!w.structures) w.structures = [];
+  if (!w.blueprints) w.blueprints = [];
   if (w.buildings) {
     for (const b of w.buildings) if (b.kind === "farm") seedFarmPlots(w, b.tx, b.ty);
   }
