@@ -59,6 +59,7 @@ import { clearSave, hasSave, loadSave, writeSave } from "./save.ts";
 import { recruitPerson, setSpeed, tickWorld } from "./sim.ts";
 import { completeObjective, placeBuilding } from "./world.ts";
 import { HOUSE_RANGE, commandHouseItem, commandHouseTake, houseKindForDeed, isHouseKind, placeHouse } from "./house.ts";
+import { enterHoldBuild as startHold, exitHoldBuild as stopHold, selectHoldPiece } from "./placeables/build-mode.ts";
 import { COURT, stationNear } from "./atlas.ts";
 import type { BuildingKind, CtxTarget, CtxVerb, ItemId, PanelId, ResourceStackKey, Speed, SpellId, Snapshot, WearSlot } from "./types.ts";
 import { applyMint, applyMintRare, applyRedeem, type RareInscription } from "./vault.ts";
@@ -96,6 +97,8 @@ interface GameUI {
   gateIgnoreId: string | null;
   buildKind: BuildingKind | null;
   buildAt: { tx: number; ty: number } | null;
+  /** Bumps React when isolated Hold-build state changes. Not saved. */
+  holdRev: number;
   tillArmed: boolean;
   tillAt: { tx: number; ty: number } | null;
   loadNote: string;
@@ -180,6 +183,10 @@ interface GameUI {
   speed: (s: Speed) => void;
   armBuild: (kind: BuildingKind | null) => void;
   hoverBuild: (tx: number, ty: number) => void;
+  enterHold: () => void;
+  exitHold: () => void;
+  armHoldPiece: (id: string | null) => void;
+  noteHold: () => void;
   armTill: (on: boolean) => void;
   hoverTill: (tx: number, ty: number) => void;
 }
@@ -238,6 +245,7 @@ export const useGame = create<GameUI>((set, get) => ({
   gateIgnoreId: null,
   buildKind: null,
   buildAt: null,
+  holdRev: 0,
   tillArmed: false,
   tillAt: null,
   loadNote: "The dirt is listening.",
@@ -245,6 +253,7 @@ export const useGame = create<GameUI>((set, get) => ({
   loadTitle: "Raising the vale",
   begin: (fresh = false) => {
     if (get().phase === "raising") return;
+    stopHold();
     const started = performance.now();
     set({
       phase: "raising",
@@ -904,6 +913,22 @@ export const useGame = create<GameUI>((set, get) => ({
     if (at && at.tx === tx && at.ty === ty) return;
     set({ buildAt: { tx, ty } });
   },
+  enterHold: () => {
+    dropBuildHold();
+    startHold();
+    set({ holdRev: get().holdRev + 1, buildKind: null, buildAt: null, tillArmed: false, tillAt: null, panel: "none", ctx: null });
+  },
+  exitHold: () => {
+    dropBuildHold();
+    stopHold();
+    set({ holdRev: get().holdRev + 1 });
+  },
+  armHoldPiece: (id) => {
+    dropBuildHold();
+    selectHoldPiece(id);
+    set({ holdRev: get().holdRev + 1, buildKind: null, tillArmed: false, panel: "none", ctx: null });
+  },
+  noteHold: () => set({ holdRev: get().holdRev + 1, snap: snapshot() }),
   armTill: (on) => {
     dropBuildHold();
     if (!on) {

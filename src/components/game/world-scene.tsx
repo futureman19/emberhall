@@ -30,8 +30,9 @@ import { getWorld } from "@/game/live";
 import { getCastFx, getDeathFx, getFizzleFx, SPELL_META } from "@/game/magery";
 import { impactShard, moteState, ringBloom, spellFxProfile, windupGlow } from "@/game/magery-animation";
 import { getChips, getCombatFx, getHealingFx, getTamingFx } from "@/game/player";
-import { useGame } from "@/game/store";
+import { useGame, dropBuildHold } from "@/game/store";
 import { hoverAt, leftAt, liftAt } from "@/game/world-pointer";
+import { cancelHoldBuild, getHoldBuild } from "@/game/placeables/build-mode";
 import { Buildings } from "./building-meshes";
 import { LanternwoodDressing } from "./lanternwood-dressing";
 import { OakStumps } from "./oak-stumps";
@@ -109,13 +110,14 @@ function PlacePointer() {
   const { camera, gl } = useThree();
   const kind = useGame((s) => s.buildKind);
   const till = useGame((s) => s.tillArmed);
+  const holdRev = useGame((s) => s.holdRev);
   const ray = useMemo(() => new THREE.Raycaster(), []);
   const ndc = useMemo(() => new THREE.Vector2(), []);
   const hit = useMemo(() => new THREE.Vector3(), []);
   const plane = useMemo(() => new THREE.Plane(), []);
   const up = useMemo(() => new THREE.Vector3(0, 1, 0), []);
   useEffect(() => {
-    if (!kind && !till) return;
+    if (!kind && !till && !getHoldBuild().active) return;
     const el = gl.domElement;
     function xz(ev: PointerEvent) {
       const rect = el.getBoundingClientRect();
@@ -123,7 +125,8 @@ function PlacePointer() {
       ndc.y = -((ev.clientY - rect.top) / rect.height) * 2 + 1;
       ray.setFromCamera(ndc, camera);
       const g = useGame.getState();
-      const at = g.buildAt ?? g.tillAt;
+      const hold = getHoldBuild();
+      const at = hold.active && hold.tx != null && hold.ty != null ? { tx: hold.tx, ty: hold.ty } : g.buildAt ?? g.tillAt;
       const y = at ? heightAt(getWorld(), at.tx, at.ty) : 0;
       plane.set(up, -y);
       if (!ray.ray.intersectPlane(plane, hit)) return null;
@@ -143,19 +146,23 @@ function PlacePointer() {
       const t = xz(ev);
       if (t) liftAt(t.tx, t.ty);
     }
+    function cancelEv() {
+      dropBuildHold();
+      cancelHoldBuild();
+    }
     el.addEventListener("pointermove", move);
     window.addEventListener("pointermove", move);
     el.addEventListener("pointerdown", down);
     window.addEventListener("pointerup", upEv);
-    window.addEventListener("pointercancel", upEv);
+    window.addEventListener("pointercancel", cancelEv);
     return () => {
       el.removeEventListener("pointermove", move);
       window.removeEventListener("pointermove", move);
       el.removeEventListener("pointerdown", down);
       window.removeEventListener("pointerup", upEv);
-      window.removeEventListener("pointercancel", upEv);
+      window.removeEventListener("pointercancel", cancelEv);
     };
-  }, [kind, till, camera, gl, ray, ndc, hit, plane, up]);
+  }, [kind, till, holdRev, camera, gl, ray, ndc, hit, plane, up]);
   return null;
 }
 
