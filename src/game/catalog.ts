@@ -181,7 +181,7 @@ export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp
   wight: { label: "Wight", tameDiff: 99, hp: 36, dmg: 10, eats: ["meat"], hasCorpse: false, loot: [{ item: "nightshade", chance: 0.3, min: 1, max: 2 }, { item: "pearl", chance: 0.25, min: 1, max: 1 }, { item: "moss", chance: 0.2, min: 1, max: 1 }, { item: "relic", chance: 0.06, min: 1, max: 1 }], gold: { chance: 0.4, min: 4, max: 10 } },
 
   brambleback_stag: { label: "Brambleback Stag", tameDiff: 55, hp: 30, dmg: 6, eats: ["plant"], meat: 2, hide: 1, parts: [{ id: "stag_antler", n: 2 }] },
-  ironwood_boar: { label: "Ironwood Boar", tameDiff: 50, hp: 24, dmg: 7, eats: ["meat"], meat: 2, hide: 1 },
+  ironwood_boar: { label: "Ironwood Boar", tameDiff: 50, hp: 24, dmg: 7, eats: ["meat"], meat: 2, hide: 1, parts: [{ id: "boar_tusk", n: 1 }] },
   pine_lynx: { label: "Pine Lynx", tameDiff: 52, hp: 26, dmg: 7, eats: ["meat"], meat: 2, hide: 1 },
   ember_fox: { label: "Ember Fox", tameDiff: 43, hp: 20, dmg: 5, eats: ["meat"], meat: 1, hide: 1 },
   moss_badger: { label: "Moss Badger", tameDiff: 20, hp: 14, dmg: 3, eats: ["meat", "plant"], meat: 1, hide: 1 },
@@ -228,7 +228,7 @@ export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp
 
   redtail_squirrel: { label: "Redtail Squirrel", tameDiff: 10, hp: 8, dmg: 1, eats: ["plant"], meat: 1, hide: 1, loot: [{ item: "acorn", chance: 0.3, min: 1, max: 2 }] },
   whiteback_elk: { label: "Whiteback Elk", tameDiff: 48, hp: 42, dmg: 8, eats: ["plant"], meat: 3, hide: 2, parts: [{ id: "stag_antler", n: 2 }] },
-  highland_aurochs: { label: "Highland Aurochs", tameDiff: 65, hp: 64, dmg: 12, eats: ["plant"], meat: 4, hide: 3 },
+  highland_aurochs: { label: "Highland Aurochs", tameDiff: 65, hp: 64, dmg: 12, eats: ["plant"], meat: 4, hide: 3, parts: [{ id: "aurochs_horn", n: 2 }] },
   reed_heron: { label: "Reed Heron", tameDiff: 26, hp: 18, dmg: 3, eats: ["meat"], meat: 1, hide: 1, loot: [{ item: "raw_fish", chance: 0.25, min: 1, max: 1 }] },
   river_otter: { label: "River Otter", tameDiff: 34, hp: 24, dmg: 4, eats: ["meat"], meat: 1, hide: 1, loot: [{ item: "raw_fish", chance: 0.22, min: 1, max: 1 }] },
   brine_seal: { label: "Brine Seal", tameDiff: 44, hp: 38, dmg: 6, eats: ["meat"], meat: 2, hide: 2, loot: [{ item: "raw_fish", chance: 0.3, min: 1, max: 1 }, { item: "pearl", chance: 0.08, min: 1, max: 1 }] },

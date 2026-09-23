@@ -6,7 +6,7 @@
 - All measured gates passed.
 
 ## Evidence
-- Legal combinations enumerated: **1,366,848**; cap violations: **0**.
+- Legal combinations enumerated: **1,532,928**; cap violations: **0**.
 - Max-skill bow workmanship on choice-grade inputs: ordinary 0.0%, fine 80.6%, exceptional 19.4%.
 - Max-skill sword workmanship on choice-grade inputs: ordinary 0.0%, fine 81.0%, exceptional 19.0%.
 - Representative save payload: **23,746 bytes**; largest Vault inscription: **779 bytes**.
@@ -39,9 +39,9 @@ Deterministic 200-seed simulations use 1.5s per surveyed node plus 0.72s per suc
 - Sword: 5 ingots + 1 timber + 1 cloth + optional 1 gem.
 
 ## Stat caps
-- **bow:** 42,336 legal combinations; max damage 15/15, hit 10/10, armor 0/0, local Fortune 5/5; 0 violations.
-- **sword:** 903,168 legal combinations; max damage 18/18, hit 8/8, armor 0/0, local Fortune 0/5; 0 violations.
-- **shield:** 380,160 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
+- **bow:** 46,368 legal combinations; max damage 15/15, hit 10/10, armor 0/0, local Fortune 5/5; 0 violations.
+- **sword:** 989,184 legal combinations; max damage 18/18, hit 8/8, armor 0/0, local Fortune 0/5; 0 violations.
+- **shield:** 456,192 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
 - **helm:** 7,392 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
 - **mail:** 7,392 legal combinations; max damage 0/0, hit 0/0, armor 7/7, local Fortune 5/5; 0 violations.
 - **boots:** 7,392 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.

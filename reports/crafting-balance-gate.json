@@ -485,12 +485,12 @@
     }
   },
   "statEnumeration": {
-    "legalCombinationCount": 1366848,
+    "legalCombinationCount": 1532928,
     "forms": {
       "bow": {
-        "combinations": 42336,
+        "combinations": 46368,
         "roleOptionCounts": [
-          84,
+          92,
           8
         ],
         "inlayOptions": 21,
@@ -510,10 +510,10 @@
         "capViolations": 0
       },
       "sword": {
-        "combinations": 903168,
+        "combinations": 989184,
         "roleOptionCounts": [
           28,
-          84,
+          92,
           8
         ],
         "inlayOptions": 16,
@@ -533,9 +533,9 @@
         "capViolations": 0
       },
       "shield": {
-        "combinations": 380160,
+        "combinations": 456192,
         "roleOptionCounts": [
-          40,
+          48,
           36,
           8
         ],

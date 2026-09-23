@@ -36,6 +36,8 @@ export const RESOURCE_IDS = Object.freeze([
   "wolf_fang",
   "stag_antler",
   "drake_scale",
+  "boar_tusk",
+  "aurochs_horn",
   "ruby",
   "sapphire",
   "emerald",
@@ -548,6 +550,26 @@ const RESOURCE_DEFINITIONS = [
     visual: { family: "stone", primary: "#5a2f28", secondary: "#8a4a38" },
   },
   {
+    id: "boar_tusk",
+    label: "Boar Tusk",
+    kind: "bone",
+    forms: ["bone"],
+    qualityType: "grade",
+    traitIds: ["keen"],
+    processing: [],
+    visual: { family: "stone", primary: "#e2d8c4", secondary: "#f2ecdc" },
+  },
+  {
+    id: "aurochs_horn",
+    label: "Aurochs Horn",
+    kind: "bone",
+    forms: ["bone"],
+    qualityType: "grade",
+    traitIds: ["damage"],
+    processing: [],
+    visual: { family: "stone", primary: "#4a3b2e", secondary: "#7a6248" },
+  },
+  {
     id: "ruby",
     label: "Ruby",
     kind: "gem",
@@ -667,6 +689,8 @@ const RESOURCE_KIND_BY_ID = {
   wolf_fang: "bone",
   stag_antler: "bone",
   drake_scale: "bone",
+  boar_tusk: "bone",
+  aurochs_horn: "bone",
 } as const satisfies Record<ResourceId, ResourceKind>;
 
 const BIOME_IDS = {

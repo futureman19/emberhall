@@ -59,6 +59,8 @@ test("corpse animation - skinning yields bone parts by species on the same beast
     { kind: "brambleback_stag", id: "b-stag", part: "stag_antler", grade: "choice", n: 2 }, // tameDiff 55
     { kind: "thornhide_doe", id: "b-doe", part: "stag_antler", grade: "rough", n: 1 },     // tameDiff 26
     { kind: "cinder_drake", id: "b-drake", part: "drake_scale", grade: "pristine", n: 3 }, // tameDiff 88
+    { kind: "ironwood_boar", id: "b-boar", part: "boar_tusk", grade: "choice", n: 1 },     // tameDiff 50
+    { kind: "highland_aurochs", id: "b-aurochs", part: "aurochs_horn", grade: "choice", n: 2 }, // tameDiff 65
   ] as const;
   for (const { kind, id, part, grade, n } of cases) {
     clearCorpseFx();

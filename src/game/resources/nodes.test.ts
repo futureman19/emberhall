@@ -125,6 +125,7 @@ test("soft biome affinities make catalog preferences observable and omit zero af
   assert.equal(rawWeightAt(256, 292, "rock", "moon_silver"), 0, "moon-silver keeps to its named veins");
   assert.equal(rawWeightAt(188, 88, "tree", "wolf_fang"), 0, "bone parts never grow on nodes");
   assert.equal(rawWeightAt(420, 268, "rock", "drake_scale"), 0, "bone parts never grow on nodes");
+  assert.equal(rawWeightAt(420, 268, "rock", "aurochs_horn"), 0, "bone parts never grow on nodes");
 });
 
 test("bounded deterministic grid frequencies track inspected probabilities", () => {

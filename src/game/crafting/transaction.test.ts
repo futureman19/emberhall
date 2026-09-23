@@ -21,6 +21,7 @@ const MOON_SILVER_INGOT = makeResourceStackKey("moon_silver", "ingot", "choice")
 const CHOICE_WOLF_FANG = makeResourceStackKey("wolf_fang", "bone", "choice");
 const CHOICE_IRON_INGOT = makeResourceStackKey("iron_ore", "ingot", "choice");
 const CHOICE_STAG_ANTLER = makeResourceStackKey("stag_antler", "bone", "choice");
+const CHOICE_AUROCHS_HORN = makeResourceStackKey("aurochs_horn", "bone", "choice");
 const PRISTINE_DRAKE_SCALE = makeResourceStackKey("drake_scale", "bone", "pristine");
 const COPPER_INGOT = makeResourceStackKey("copper_ore", "ingot", "choice");
 const OAK_BOARD = makeResourceStackKey("oak", "board", "sound");
@@ -477,6 +478,39 @@ test("exact shieldcraft - drake scale plates a shield with hunted sturdy armor",
   assert.equal(shield.resolvedStats?.armor, 4, "2 base + 2 pristine sturdy scales, under the 5 armor cap");
   assert.equal(shield.resolvedStats?.damage, 0);
   assert.deepEqual(shield.components?.[0], { role: "plate", resourceId: "drake_scale", form: "bone", grade: "pristine", amount: 3 });
+});
+
+test("exact bowcraft - an aurochs horn body hits harder than antler, without its accuracy", () => {
+  const world = createWorld();
+  standAtYard(world);
+  world.player.skills.carpentry = 100;
+  addResource(world.player.resources, CHOICE_AUROCHS_HORN, 5);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "bow", bowSelections(CHOICE_AUROCHS_HORN)));
+  assert.match(note ?? "", /aurochs horn bow/i);
+  const bow = world.player.rares[0]!;
+  assert.equal(bow.resolvedStats?.damage, 9.5, "8 base + choice damage 1.5 at primary scale - a horn bow hits like ironwood");
+  assert.equal(bow.resolvedStats?.hitBonus, 1, "fine workmanship only - horn grants no accuracy");
+  assert.deepEqual(bow.components?.[0], { role: "body", resourceId: "aurochs_horn", form: "bone", grade: "choice", amount: 5 });
+});
+
+test("exact swordcraft - an aurochs horn hilt lends mass to the blade", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  addResource(world.player.resources, CHOICE_IRON_INGOT, 5);
+  addResource(world.player.resources, CHOICE_AUROCHS_HORN, 1);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "sword", [
+    { role: "edge", key: CHOICE_IRON_INGOT },
+    { role: "hilt", key: CHOICE_AUROCHS_HORN },
+    { role: "binding", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /iron ore sword/i);
+  const blade = world.player.rares[0]!;
+  assert.equal(blade.resolvedStats?.damage, 10.375, "10 base + choice damage 1.5 at the hilt's 0.25 secondary scale");
+  assert.equal(blade.resolvedStats?.hitBonus, 1, "fine workmanship on a choice edge");
+  assert.deepEqual(blade.components?.[1], { role: "hilt", resourceId: "aurochs_horn", form: "bone", grade: "choice", amount: 1 });
 });
 
 test("exact helmcraft - two plates and a lining, iron sturdy carries into head armor", () => {

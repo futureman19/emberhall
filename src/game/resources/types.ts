@@ -22,9 +22,11 @@ export type GradeResourceId =
   | "hide"
   | "wolf_fang"
   | "stag_antler"
-  | "drake_scale";
+  | "drake_scale"
+  | "boar_tusk"
+  | "aurochs_horn";
 export type GemResourceId = "ruby" | "sapphire" | "emerald" | "diamond" | "amethyst";
-export type BoneResourceId = "wolf_fang" | "stag_antler" | "drake_scale";
+export type BoneResourceId = "wolf_fang" | "stag_antler" | "drake_scale" | "boar_tusk" | "aurochs_horn";
 export type ResourceId = GradeResourceId | GemResourceId;
 
 export type NonGemResourceKind = "timber" | "ore" | "fiber" | "hide" | "bone";
@@ -94,7 +96,7 @@ export type ResourceKindFor<I extends ResourceId> = I extends "copper_ore" | "ti
     ? "fiber"
     : I extends "hide"
       ? "hide"
-      : I extends "wolf_fang" | "stag_antler" | "drake_scale"
+      : I extends "wolf_fang" | "stag_antler" | "drake_scale" | "boar_tusk" | "aurochs_horn"
         ? "bone"
         : I extends GemResourceId
           ? "gem"
@@ -195,6 +197,8 @@ const GRADE_RESOURCE_IDS = [
   "wolf_fang",
   "stag_antler",
   "drake_scale",
+  "boar_tusk",
+  "aurochs_horn",
 ] as const satisfies readonly GradeResourceId[];
 const GEM_RESOURCE_IDS = ["ruby", "sapphire", "emerald", "diamond", "amethyst"] as const satisfies readonly GemResourceId[];
 const MATERIAL_GRADES = ["rough", "sound", "choice", "pristine"] as const satisfies readonly MaterialGrade[];
