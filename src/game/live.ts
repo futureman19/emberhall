@@ -11,6 +11,7 @@ import { ensureCity, ensureKeepSite } from "./city.ts";
 import { ensureHerbs } from "./herbs.ts";
 import { createStubWorld, createWorld, ensureRynWain, seedEmberhallBank, seedFieldStones, seedTownNpcs } from "./world.ts";
 import { ensureLookHut } from "./house.ts";
+import { clearHistory } from "./placeables/history.ts";
 import { createResourceNodeStateMap, regrowResourceNodes } from "./resources/state.ts";
 import type { SkillId, Snapshot, World } from "./types.ts";
 
@@ -109,10 +110,14 @@ export function getWorld() {
   return world;
 }
 export function setWorld(next: World) {
+  clearHistory(world);
   world = withFauna(next);
+  clearHistory(world);
 }
 export function resetWorld() {
+  clearHistory(world);
   world = withFauna(createWorld());
+  clearHistory(world);
   return world;
 }
 
