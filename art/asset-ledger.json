@@ -154,9 +154,11 @@
     "src/game/pets.ts",
     "src/game/piles.ts",
     "src/game/placeables/catalog.ts",
+    "src/game/placeables/commands.ts",
     "src/game/placeables/kits/emberhall.ts",
     "src/game/placeables/legacy-buildings.ts",
     "src/game/placeables/materials.ts",
+    "src/game/placeables/placement.ts",
     "src/game/placeables/schema.ts",
     "src/game/placeables/types.ts",
     "src/game/placement-preview.ts",
@@ -126356,6 +126358,98 @@
       "status": "inventoried",
       "evidence": [
         "src/game/personal-action-animation.ts:5"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/placement.ts#PlaceOpts.skipCost=false",
+      "canonicalId": "src/game/placeables/placement.ts#PlaceOpts.skipCost=false",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/placement.ts:10"
+      ],
+      "sourceNames": [
+        "PlaceOpts.skipCost"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/placement.ts:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/placement.ts:10"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/placement.ts#PlaceOpts.skipCost=true",
+      "canonicalId": "src/game/placeables/placement.ts#PlaceOpts.skipCost=true",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/placement.ts:10"
+      ],
+      "sourceNames": [
+        "PlaceOpts.skipCost"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/placement.ts:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/placement.ts:10"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."

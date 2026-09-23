@@ -31,7 +31,7 @@ export function nid(world: World, prefix: string) {
   // next candidate, so reserve exact live IDs without renaming saved records or
   // advancing the simulation clock. Re-scan on allocation: arrays are mutable.
   const used = new Set<string>([world.player?.id ?? ""]);
-  for (const records of [world.buildings, world.people, world.fauna, world.piles, world.campfires, world.herbs, world.plots, world.saplings, world.player?.marks]) {
+  for (const records of [world.buildings, world.people, world.fauna, world.piles, world.campfires, world.herbs, world.plots, world.saplings, world.placedObjects, world.structures, world.player?.marks]) {
     for (const record of records ?? []) used.add(record.id);
   }
   let id: string;
