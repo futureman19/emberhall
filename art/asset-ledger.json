@@ -189,9 +189,9 @@
     "ClassId": 5,
     "CROP_META": 6,
     "CropId": 6,
-    "EXACT_RECIPE_CATALOG": 13,
-    "EXACT_RECIPE_DEFINITIONS": 13,
-    "ExactRecipeId": 13,
+    "EXACT_RECIPE_CATALOG": 14,
+    "EXACT_RECIPE_DEFINITIONS": 14,
+    "ExactRecipeId": 14,
     "FAUNA_META": 52,
     "FaunaKind": 52,
     "FIGURE": 11,
@@ -202,15 +202,15 @@
     "HairStyleId": 5,
     "HERB_META": 5,
     "HerbKind": 5,
-    "ITEM_FORM_CATALOG": 13,
+    "ITEM_FORM_CATALOG": 14,
     "ITEM_META": 70,
-    "ItemFormId": 13,
+    "ItemFormId": 14,
     "ItemId": 70,
     "NOTORIETY_META": 3,
     "NPC_META": 3,
     "NpcRole": 3,
     "PART_SLOTS": 4,
-    "RECIPES": 53,
+    "RECIPES": 54,
     "RESOURCE_CATALOG": 29,
     "RESOURCE_DEFINITIONS": 29,
     "RESOURCE_IDS": 29,
@@ -8896,7 +8896,7 @@
       "canonicalId": "boots",
       "family": "craft-form",
       "catalogSources": [
-        "src/game/crafting/forms.ts:659",
+        "src/game/crafting/forms.ts:686",
         "src/game/crafting/types.ts:14"
       ],
       "sourceNames": [
@@ -8985,7 +8985,7 @@
       "canonicalId": "bow",
       "family": "craft-form",
       "catalogSources": [
-        "src/game/crafting/forms.ts:659",
+        "src/game/crafting/forms.ts:686",
         "src/game/crafting/types.ts:14"
       ],
       "sourceNames": [
@@ -9074,7 +9074,7 @@
       "canonicalId": "charm",
       "family": "craft-form",
       "catalogSources": [
-        "src/game/crafting/forms.ts:659",
+        "src/game/crafting/forms.ts:686",
         "src/game/crafting/types.ts:14"
       ],
       "sourceNames": [
@@ -9163,7 +9163,7 @@
       "canonicalId": "gauntlets",
       "family": "craft-form",
       "catalogSources": [
-        "src/game/crafting/forms.ts:659",
+        "src/game/crafting/forms.ts:686",
         "src/game/crafting/types.ts:14"
       ],
       "sourceNames": [
@@ -9252,7 +9252,7 @@
       "canonicalId": "gloves",
       "family": "craft-form",
       "catalogSources": [
-        "src/game/crafting/forms.ts:659",
+        "src/game/crafting/forms.ts:686",
         "src/game/crafting/types.ts:14"
       ],
       "sourceNames": [
@@ -9341,7 +9341,7 @@
       "canonicalId": "greaves",
       "family": "craft-form",
       "catalogSources": [
-        "src/game/crafting/forms.ts:659",
+        "src/game/crafting/forms.ts:686",
         "src/game/crafting/types.ts:14"
       ],
       "sourceNames": [
@@ -9430,7 +9430,7 @@
       "canonicalId": "helm",
       "family": "craft-form",
       "catalogSources": [
-        "src/game/crafting/forms.ts:659",
+        "src/game/crafting/forms.ts:686",
         "src/game/crafting/types.ts:14"
       ],
       "sourceNames": [
@@ -9519,7 +9519,7 @@
       "canonicalId": "hood",
       "family": "craft-form",
       "catalogSources": [
-        "src/game/crafting/forms.ts:659",
+        "src/game/crafting/forms.ts:686",
         "src/game/crafting/types.ts:14"
       ],
       "sourceNames": [
@@ -9608,7 +9608,7 @@
       "canonicalId": "hose",
       "family": "craft-form",
       "catalogSources": [
-        "src/game/crafting/forms.ts:659",
+        "src/game/crafting/forms.ts:686",
         "src/game/crafting/types.ts:14"
       ],
       "sourceNames": [
@@ -9697,7 +9697,7 @@
       "canonicalId": "leather",
       "family": "craft-form",
       "catalogSources": [
-        "src/game/crafting/forms.ts:659",
+        "src/game/crafting/forms.ts:686",
         "src/game/crafting/types.ts:14"
       ],
       "sourceNames": [
@@ -9786,7 +9786,7 @@
       "canonicalId": "mail",
       "family": "craft-form",
       "catalogSources": [
-        "src/game/crafting/forms.ts:659",
+        "src/game/crafting/forms.ts:686",
         "src/game/crafting/types.ts:14"
       ],
       "sourceNames": [
@@ -9871,11 +9871,100 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "craft-form:ring",
+      "canonicalId": "ring",
+      "family": "craft-form",
+      "catalogSources": [
+        "src/game/crafting/forms.ts:686",
+        "src/game/crafting/types.ts:14"
+      ],
+      "sourceNames": [
+        "ITEM_FORM_CATALOG",
+        "ItemFormId"
+      ],
+      "rendererLocations": [
+        "src/components/game/crafting/inlay-panel.tsx:1",
+        "src/components/game/crafting/material-selector.tsx:1",
+        "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/paperdoll.tsx:1",
+        "src/components/game/people-meshes.tsx:1"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/crafting/inlay-panel.tsx",
+        "src/components/game/crafting/material-selector.tsx",
+        "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/paperdoll.tsx",
+        "src/components/game/people-meshes.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "equipped",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/forms.ts:686",
+            "src/game/crafting/types.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "inlay-applicability-unreviewed",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/forms.ts:686",
+            "src/game/crafting/types.ts:14"
+          ],
+          "applicability": "unreviewed"
+        },
+        {
+          "id": "material-variation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/forms.ts:686",
+            "src/game/crafting/types.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "preview",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/forms.ts:686",
+            "src/game/crafting/types.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/forms.ts:686",
+        "src/game/crafting/types.ts:14"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "craft-form:shield",
       "canonicalId": "shield",
       "family": "craft-form",
       "catalogSources": [
-        "src/game/crafting/forms.ts:659",
+        "src/game/crafting/forms.ts:686",
         "src/game/crafting/types.ts:14"
       ],
       "sourceNames": [
@@ -9964,7 +10053,7 @@
       "canonicalId": "sword",
       "family": "craft-form",
       "catalogSources": [
-        "src/game/crafting/forms.ts:659",
+        "src/game/crafting/forms.ts:686",
         "src/game/crafting/types.ts:14"
       ],
       "sourceNames": [
@@ -10575,9 +10664,9 @@
       "canonicalId": "boots",
       "family": "exact-recipe",
       "catalogSources": [
-        "src/game/crafting/recipes.ts:147",
+        "src/game/crafting/recipes.ts:153",
         "src/game/crafting/recipes.ts:17",
-        "src/game/crafting/recipes.ts:192"
+        "src/game/crafting/recipes.ts:198"
       ],
       "sourceNames": [
         "EXACT_RECIPE_CATALOG",
@@ -10654,7 +10743,7 @@
       "family": "exact-recipe",
       "catalogSources": [
         "src/game/crafting/recipes.ts:17",
-        "src/game/crafting/recipes.ts:192",
+        "src/game/crafting/recipes.ts:198",
         "src/game/crafting/recipes.ts:87"
       ],
       "sourceNames": [
@@ -10733,7 +10822,7 @@
       "catalogSources": [
         "src/game/crafting/recipes.ts:135",
         "src/game/crafting/recipes.ts:17",
-        "src/game/crafting/recipes.ts:192"
+        "src/game/crafting/recipes.ts:198"
       ],
       "sourceNames": [
         "EXACT_RECIPE_CATALOG",
@@ -10809,9 +10898,9 @@
       "canonicalId": "gauntlets",
       "family": "exact-recipe",
       "catalogSources": [
-        "src/game/crafting/recipes.ts:153",
+        "src/game/crafting/recipes.ts:159",
         "src/game/crafting/recipes.ts:17",
-        "src/game/crafting/recipes.ts:192"
+        "src/game/crafting/recipes.ts:198"
       ],
       "sourceNames": [
         "EXACT_RECIPE_CATALOG",
@@ -10889,7 +10978,7 @@
       "catalogSources": [
         "src/game/crafting/recipes.ts:123",
         "src/game/crafting/recipes.ts:17",
-        "src/game/crafting/recipes.ts:192"
+        "src/game/crafting/recipes.ts:198"
       ],
       "sourceNames": [
         "EXACT_RECIPE_CATALOG",
@@ -10965,9 +11054,9 @@
       "canonicalId": "greaves",
       "family": "exact-recipe",
       "catalogSources": [
-        "src/game/crafting/recipes.ts:159",
+        "src/game/crafting/recipes.ts:165",
         "src/game/crafting/recipes.ts:17",
-        "src/game/crafting/recipes.ts:192"
+        "src/game/crafting/recipes.ts:198"
       ],
       "sourceNames": [
         "EXACT_RECIPE_CATALOG",
@@ -11045,7 +11134,7 @@
       "catalogSources": [
         "src/game/crafting/recipes.ts:105",
         "src/game/crafting/recipes.ts:17",
-        "src/game/crafting/recipes.ts:192"
+        "src/game/crafting/recipes.ts:198"
       ],
       "sourceNames": [
         "EXACT_RECIPE_CATALOG",
@@ -11123,7 +11212,7 @@
       "catalogSources": [
         "src/game/crafting/recipes.ts:117",
         "src/game/crafting/recipes.ts:17",
-        "src/game/crafting/recipes.ts:192"
+        "src/game/crafting/recipes.ts:198"
       ],
       "sourceNames": [
         "EXACT_RECIPE_CATALOG",
@@ -11201,7 +11290,7 @@
       "catalogSources": [
         "src/game/crafting/recipes.ts:129",
         "src/game/crafting/recipes.ts:17",
-        "src/game/crafting/recipes.ts:192"
+        "src/game/crafting/recipes.ts:198"
       ],
       "sourceNames": [
         "EXACT_RECIPE_CATALOG",
@@ -11279,7 +11368,7 @@
       "catalogSources": [
         "src/game/crafting/recipes.ts:111",
         "src/game/crafting/recipes.ts:17",
-        "src/game/crafting/recipes.ts:192"
+        "src/game/crafting/recipes.ts:198"
       ],
       "sourceNames": [
         "EXACT_RECIPE_CATALOG",
@@ -11355,9 +11444,9 @@
       "canonicalId": "mail",
       "family": "exact-recipe",
       "catalogSources": [
-        "src/game/crafting/recipes.ts:141",
+        "src/game/crafting/recipes.ts:147",
         "src/game/crafting/recipes.ts:17",
-        "src/game/crafting/recipes.ts:192"
+        "src/game/crafting/recipes.ts:198"
       ],
       "sourceNames": [
         "EXACT_RECIPE_CATALOG",
@@ -11429,12 +11518,90 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "exact-recipe:ring",
+      "canonicalId": "ring",
+      "family": "exact-recipe",
+      "catalogSources": [
+        "src/game/crafting/recipes.ts:141",
+        "src/game/crafting/recipes.ts:17",
+        "src/game/crafting/recipes.ts:198"
+      ],
+      "sourceNames": [
+        "EXACT_RECIPE_CATALOG",
+        "EXACT_RECIPE_DEFINITIONS",
+        "ExactRecipeId"
+      ],
+      "rendererLocations": [
+        "src/components/game/craft-gump.tsx:1"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/craft-gump.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "failure",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:141",
+            "src/game/crafting/recipes.ts:17",
+            "src/game/crafting/recipes.ts:198"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "selection",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:141",
+            "src/game/crafting/recipes.ts:17",
+            "src/game/crafting/recipes.ts:198"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "success",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:141",
+            "src/game/crafting/recipes.ts:17",
+            "src/game/crafting/recipes.ts:198"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/recipes.ts:141",
+        "src/game/crafting/recipes.ts:17",
+        "src/game/crafting/recipes.ts:198"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "exact-recipe:shield",
       "canonicalId": "shield",
       "family": "exact-recipe",
       "catalogSources": [
         "src/game/crafting/recipes.ts:17",
-        "src/game/crafting/recipes.ts:192",
+        "src/game/crafting/recipes.ts:198",
         "src/game/crafting/recipes.ts:99"
       ],
       "sourceNames": [
@@ -11512,7 +11679,7 @@
       "family": "exact-recipe",
       "catalogSources": [
         "src/game/crafting/recipes.ts:17",
-        "src/game/crafting/recipes.ts:192",
+        "src/game/crafting/recipes.ts:198",
         "src/game/crafting/recipes.ts:93"
       ],
       "sourceNames": [
@@ -25835,7 +26002,7 @@
       "canonicalId": "bake_bread",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:155"
+        "src/game/craft.ts:157"
       ],
       "sourceNames": [
         "RECIPES"
@@ -26180,7 +26347,7 @@
       "canonicalId": "campfire",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:151"
+        "src/game/craft.ts:153"
       ],
       "sourceNames": [
         "RECIPES"
@@ -28522,11 +28689,80 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "recipe:ring_tinker",
+      "canonicalId": "ring_tinker",
+      "family": "recipe",
+      "catalogSources": [
+        "src/game/craft.ts:149"
+      ],
+      "sourceNames": [
+        "RECIPES"
+      ],
+      "rendererLocations": [
+        "src/components/game/craft-gump.tsx:1",
+        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/world-scene.tsx:1"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/craft-gump.tsx",
+        "src/components/game/world-scene.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "failure",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:149"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "selection",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:149"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "success",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:149"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:149"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "recipe:roast_fish",
       "canonicalId": "roast_fish",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:154"
+        "src/game/craft.ts:156"
       ],
       "sourceNames": [
         "RECIPES"
@@ -28595,7 +28831,7 @@
       "canonicalId": "roast_meat",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:153"
+        "src/game/craft.ts:155"
       ],
       "sourceNames": [
         "RECIPES"
@@ -28664,7 +28900,7 @@
       "canonicalId": "sew_cloak",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:149"
+        "src/game/craft.ts:151"
       ],
       "sourceNames": [
         "RECIPES"
@@ -28940,7 +29176,7 @@
       "canonicalId": "sew_tunic",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:148"
+        "src/game/craft.ts:150"
       ],
       "sourceNames": [
         "RECIPES"
@@ -29285,7 +29521,7 @@
       "canonicalId": "stew_pot",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:156"
+        "src/game/craft.ts:158"
       ],
       "sourceNames": [
         "RECIPES"
@@ -30637,7 +30873,7 @@
       ],
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:94",
-        "src/components/game/craft-gump.tsx:104",
+        "src/components/game/craft-gump.tsx:108",
         "src/components/game/crafting/confirm-craft.tsx:17",
         "src/components/game/crafting/inlay-panel.tsx:25",
         "src/components/game/crafting/material-selector.tsx:36",
@@ -37664,7 +37900,7 @@
         "key"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:104",
+        "src/components/game/craft-gump.tsx:108",
         "src/components/game/crafting/confirm-craft.tsx:17",
         "src/components/game/crafting/inlay-panel.tsx:25",
         "src/components/game/crafting/material-selector.tsx:36",
@@ -65845,6 +66081,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.exactRecipeId=ring",
+      "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=ring",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:54"
+      ],
+      "sourceNames": [
+        "Recipe.exactRecipeId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:54"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:54"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/craft.ts#Recipe.exactRecipeId=shield",
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=shield",
       "family": "state-vocabulary",
@@ -78035,6 +78317,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactRecipeDefinition.formId=ring",
+      "canonicalId": "src/game/crafting/recipes.ts#ExactRecipeDefinition.formId=ring",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/recipes.ts:26"
+      ],
+      "sourceNames": [
+        "ExactRecipeDefinition.formId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:26"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/recipes.ts:26"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactRecipeDefinition.formId=shield",
       "canonicalId": "src/game/crafting/recipes.ts#ExactRecipeDefinition.formId=shield",
       "family": "state-vocabulary",
@@ -78589,6 +78917,52 @@
     {
       "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactRecipeDefinition.id=mail",
       "canonicalId": "src/game/crafting/recipes.ts#ExactRecipeDefinition.id=mail",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/recipes.ts:25"
+      ],
+      "sourceNames": [
+        "ExactRecipeDefinition.id"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/recipes.ts:25"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/recipes.ts:25"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/recipes.ts#ExactRecipeDefinition.id=ring",
+      "canonicalId": "src/game/crafting/recipes.ts#ExactRecipeDefinition.id=ring",
       "family": "state-vocabulary",
       "catalogSources": [
         "src/game/crafting/recipes.ts:25"
@@ -88571,6 +88945,52 @@
     {
       "id": "state-vocabulary:src/game/crafting/types.ts#ItemFormDefinition.id=mail",
       "canonicalId": "src/game/crafting/types.ts#ItemFormDefinition.id=mail",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/crafting/types.ts:56"
+      ],
+      "sourceNames": [
+        "ItemFormDefinition.id"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/crafting/types.ts:56"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/crafting/types.ts:56"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/crafting/types.ts#ItemFormDefinition.id=ring",
+      "canonicalId": "src/game/crafting/types.ts#ItemFormDefinition.id=ring",
       "family": "state-vocabulary",
       "catalogSources": [
         "src/game/crafting/types.ts:56"
@@ -136363,6 +136783,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/rare.ts#CraftedItemInput.formId=ring",
+      "canonicalId": "src/game/rare.ts#CraftedItemInput.formId=ring",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/rare.ts:226"
+      ],
+      "sourceNames": [
+        "CraftedItemInput.formId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/rare.ts:226"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/rare.ts:226"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/rare.ts#CraftedItemInput.formId=shield",
       "canonicalId": "src/game/rare.ts#CraftedItemInput.formId=shield",
       "family": "state-vocabulary",
@@ -178131,6 +178597,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/types.ts#RareItem.formId=ring",
+      "canonicalId": "src/game/types.ts#RareItem.formId=ring",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/types.ts:517"
+      ],
+      "sourceNames": [
+        "RareItem.formId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/types.ts:517"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/types.ts:517"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/types.ts#RareItem.formId=shield",
       "canonicalId": "src/game/types.ts#RareItem.formId=shield",
       "family": "state-vocabulary",
@@ -184922,6 +185434,14 @@
           "applicability": "source contract; runtime unverified"
         },
         {
+          "id": "predicate:!ringBody || !ringBinding",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/craft-gump.tsx:38"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
           "id": "predicate:at",
           "status": "inventoried",
           "evidence": [
@@ -185002,6 +185522,14 @@
           "applicability": "source contract; runtime unverified"
         },
         {
+          "id": "predicate:ringBody",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/craft-gump.tsx:38"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
           "id": "predicate:selectedCount(body) < bodyRole.amount || selectedCount(binding) < bindingRole.amount",
           "status": "inventoried",
           "evidence": [
@@ -185074,6 +185602,14 @@
           "applicability": "source contract; runtime unverified"
         },
         {
+          "id": "predicate:selectedCount(ringBody) < ringBodyRole.amount || selectedCount(ringBinding) < ringBindingRole.amount",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/craft-gump.tsx:38"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
           "id": "predicate:st === \"field\"",
           "status": "inventoried",
           "evidence": [
@@ -185141,13 +185677,13 @@
       "canonicalId": "src/components/game/craft-gump.tsx#RecipeRow",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/craft-gump.tsx:455"
+        "src/components/game/craft-gump.tsx:483"
       ],
       "sourceNames": [
         "RecipeRow"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:455"
+        "src/components/game/craft-gump.tsx:483"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [

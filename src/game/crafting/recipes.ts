@@ -14,7 +14,7 @@ import {
 } from "../inventory/resources.ts";
 import type { ItemId, ResourceStackKey } from "../types.ts";
 
-export type ExactRecipeId = "bow" | "sword" | "shield" | "helm" | "mail" | "boots" | "gauntlets" | "greaves" | "leather" | "hood" | "gloves" | "hose" | "charm";
+export type ExactRecipeId = "bow" | "sword" | "shield" | "helm" | "mail" | "boots" | "gauntlets" | "greaves" | "leather" | "hood" | "gloves" | "hose" | "charm" | "ring";
 
 export interface ExactRecipeOutput {
   readonly itemId: ItemId;
@@ -39,7 +39,7 @@ export interface ResolvedExactRecipeSelection {
   readonly debits: readonly ResourceDebit[];
 }
 
-const EXACT_RECIPE_IDS = ["bow", "sword", "shield", "helm", "mail", "boots", "gauntlets", "greaves", "leather", "hood", "gloves", "hose", "charm"] as const satisfies readonly ExactRecipeId[];
+const EXACT_RECIPE_IDS = ["bow", "sword", "shield", "helm", "mail", "boots", "gauntlets", "greaves", "leather", "hood", "gloves", "hose", "charm", "ring"] as const satisfies readonly ExactRecipeId[];
 const SELECTION_FIELDS = ["role", "key"] as const;
 
 type DeepReadonly<T> = T extends (...args: never[]) => unknown
@@ -136,6 +136,12 @@ const EXACT_RECIPE_DEFINITIONS = [
     formId: "charm",
     recipeVersion: 1,
     output: { itemId: "pendant", quantity: 1 },
+  },
+  {
+    id: "ring",
+    formId: "ring",
+    recipeVersion: 1,
+    output: { itemId: "ring", quantity: 1 },
   },
   {
     id: "mail",

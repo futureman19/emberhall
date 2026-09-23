@@ -6,7 +6,7 @@
 - All measured gates passed.
 
 ## Evidence
-- Legal combinations enumerated: **1,533,408**; cap violations: **0**.
+- Legal combinations enumerated: **1,546,080**; cap violations: **0**.
 - Max-skill bow workmanship on choice-grade inputs: ordinary 0.0%, fine 80.6%, exceptional 19.4%.
 - Max-skill sword workmanship on choice-grade inputs: ordinary 0.0%, fine 81.0%, exceptional 19.0%.
 - Representative save payload: **23,746 bytes**; largest Vault inscription: **779 bytes**.
@@ -52,6 +52,7 @@ Deterministic 200-seed simulations use 1.5s per surveyed node plus 0.72s per suc
 - **gloves:** 1,056 legal combinations; max damage 0/0, hit 0/0, armor 4/4, local Fortune 5/5; 0 violations.
 - **hose:** 1,056 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
 - **charm:** 480 legal combinations; max damage 0/0, hit 0/0, armor 2/2, local Fortune 0/5; 0 violations.
+- **ring:** 12,672 legal combinations; max damage 0/0, hit 0/0, armor 3/3, local Fortune 5/5; 0 violations.
 
 ## Five representative items
 - **common:** an oak bow — damage 8, hit 0, armor 0.

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { BOOTS_FORM, BOW_FORM, GAUNTLETS_FORM, GLOVES_FORM, GREAVES_FORM, HELM_FORM, HOOD_FORM, HOSE_FORM, LEATHER_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM, CHARM_FORM } from "./forms.ts";
+import { BOOTS_FORM, BOW_FORM, GAUNTLETS_FORM, GLOVES_FORM, GREAVES_FORM, HELM_FORM, HOOD_FORM, HOSE_FORM, LEATHER_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM, CHARM_FORM, RING_FORM } from "./forms.ts";
 import {
   EXACT_RECIPE_CATALOG,
   exactRecipeById,
@@ -82,6 +82,21 @@ test("exact recipes - charm form is the first jewelry craft", () => {
   assert.deepEqual(CHARM_FORM.caps, { damage: 0, hitBonus: 0, armor: 2, skillBonusPerSkill: 5, slayerMultiplier: 1.5 });
   assert.deepEqual(CHARM_FORM.allowedGemFamilies, []);
   assert.equal(CHARM_FORM.maxInlays, 0);
+});
+
+test("exact recipes - ring form is the second jewelry craft, taking metal bands or trophies", () => {
+  const recipe = exactRecipeById("ring");
+  assert.equal(recipe?.formId, RING_FORM.id);
+  assert.deepEqual(recipe?.output, { itemId: "ring", quantity: 1 });
+  assert.equal(RING_FORM.baseItem, "ring");
+  assert.equal(RING_FORM.itemClass, "jewelry");
+  assert.deepEqual(RING_FORM.roles.map((r) => `${r.role}:${r.amount}:${r.contribution}`), ["body:1:primary", "binding:1:secondary"]);
+  assert.deepEqual(RING_FORM.roles[0]?.accepts, { qualityType: "grade", kinds: ["ore", "bone"], forms: ["ingot", "bone"] });
+  assert.deepEqual(RING_FORM.roles[1]?.accepts, { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] });
+  assert.deepEqual(RING_FORM.baseStats, { damage: 0, hitBonus: 0, armor: 0, skillBonuses: {}, slayerMultipliers: {} });
+  assert.deepEqual(RING_FORM.caps, { damage: 0, hitBonus: 0, armor: 3, skillBonusPerSkill: 5, slayerMultiplier: 1.5 });
+  assert.deepEqual(RING_FORM.allowedGemFamilies, ["fortune", "protection"]);
+  assert.equal(RING_FORM.maxInlays, 1);
 });
 
 test("exact recipes - helm form is the head-slot armor craft beside the legacy tag recipe", () => {

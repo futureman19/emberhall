@@ -145,6 +145,8 @@ export const RECIPES: Recipe[] = [
   { id: "sew_hose", station: null, skill: "tailoring", diff: 8, label: "Hose", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { hose: 1 }, sfx: "chop" },
   { id: "hose_sew", station: null, skill: "tailoring", diff: 17, label: "Stitch hide hose", hint: "Choose three hides and two cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "hose" },
   { id: "charm", station: null, skill: "tinkering", diff: 24, label: "Whittle a charm", hint: "Choose a bone trophy and one cloth binding.", need: {}, give: { pendant: 1 }, sfx: "chop", exactRecipeId: "charm" },
+  // commandCraftExact resolves by exactRecipeId; the legacy forge tag recipe owns the plain "ring" id.
+  { id: "ring_tinker", station: null, skill: "tinkering", diff: 26, label: "Whittle a ring", hint: "Choose an ingot or bone trophy and one cloth binding.", need: {}, give: { ring: 1 }, sfx: "chop", exactRecipeId: "ring" },
   { id: "sew_tunic", station: null, skill: "tailoring", diff: 12, label: "Tunic", hint: "Any three cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 3 }], needsBlade: true, give: { tunic: 1 }, sfx: "chop" },
   { id: "sew_cloak", station: null, skill: "tailoring", diff: 18, label: "Travel cloak", hint: "Any four cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 4 }], needsBlade: true, give: { cloak: 1 }, sfx: "chop" },
   // Camping — three wood buys a fire that burns three hours.

@@ -536,6 +536,26 @@ test("exact charmcraft - a stag antler charm carries the hunter's craft, and wea
   assert.equal(rareMods(world).skills.tracking, 3, "worn at the neck, the charm's craft flows");
 });
 
+test("exact ringcraft - a moon silver ring bites the fleshless from the finger slot", () => {
+  const world = createWorld();
+  world.player.skills.tinkering = 100;
+  addResource(world.player.resources, MOON_SILVER_INGOT, 1);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "ring", [
+    { role: "body", key: MOON_SILVER_INGOT },
+    { role: "binding", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /moon silver ring/i);
+  const ring = world.player.rares[0]!;
+  assert.equal(ring.base, "ring");
+  assert.equal(ring.formId, "ring");
+  assert.equal(ring.resolvedStats?.slayerMultipliers?.wight, 1.2, "choice moon at primary scale");
+  assert.equal(ring.resolvedStats?.armor, 0);
+  assert.equal(rareMods(world).vs.wight ?? 1, 1, "in the pack it bites nothing");
+  assert.equal(commandEquipRare(world, ring.uid) !== null, true);
+  assert.equal(rareMods(world).vs.wight, 1.2, "worn, the ring's moon silver flows");
+});
+
 test("exact helmcraft - two plates and a lining, iron sturdy carries into head armor", () => {
   const world = createWorld();
   standAtForge(world);

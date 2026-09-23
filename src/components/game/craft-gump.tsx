@@ -5,7 +5,7 @@ import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "@/game/catalog";
 import { RECIPES, canMake, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
-import { BOOTS_FORM, BOW_FORM, CHARM_FORM, GAUNTLETS_FORM, GLOVES_FORM, GREAVES_FORM, HELM_FORM, HOOD_FORM, HOSE_FORM, LEATHER_FORM, MAIL_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
+import { BOOTS_FORM, BOW_FORM, CHARM_FORM, GAUNTLETS_FORM, GLOVES_FORM, GREAVES_FORM, HELM_FORM, HOOD_FORM, HOSE_FORM, LEATHER_FORM, MAIL_FORM, RING_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
 import { listResourceInventory } from "@/game/inventory/resources";
 import { getWorld } from "@/game/live";
 import type { MaterialGrade } from "@/game/resources/types";
@@ -77,6 +77,8 @@ export function CraftGump() {
   const [hoseBody, setHoseBody] = useState<ResourceStackKey | null>(null);
   const [charmBody, setCharmBody] = useState<ResourceStackKey | null>(null);
   const [charmBinding, setCharmBinding] = useState<ResourceStackKey | null>(null);
+  const [ringBody, setRingBody] = useState<ResourceStackKey | null>(null);
+  const [ringBinding, setRingBinding] = useState<ResourceStackKey | null>(null);
   const [hoseBinding, setHoseBinding] = useState<ResourceStackKey | null>(null);
   const [tab, setTab] = useState<WorkTab>("forms");
   if (!open) return null;
@@ -100,6 +102,8 @@ export function CraftGump() {
   const leatherBodyRole = LEATHER_FORM.roles.find(({ role }) => role === "body")!;
   const charmBodyRole = CHARM_FORM.roles.find(({ role }) => role === "body")!;
   const charmBindingRole = CHARM_FORM.roles.find(({ role }) => role === "binding")!;
+  const ringBodyRole = RING_FORM.roles.find(({ role }) => role === "body")!;
+  const ringBindingRole = RING_FORM.roles.find(({ role }) => role === "binding")!;
   const leatherBindingRole = LEATHER_FORM.roles.find(({ role }) => role === "binding")!;
   const selectedCount = (key: ResourceStackKey | null) => resourceRows.find((row) => row.key === key)?.count ?? 0;
   const bowDisabled = !here.includes("bench")
@@ -392,6 +396,30 @@ export function CraftGump() {
           onConfirm={() => charmBody && charmBinding && makeExact("charm", [
             { role: "body", key: charmBody },
             { role: "binding", key: charmBinding },
+          ])}
+        />
+      </div>
+      <div className="mt-2 space-y-2" aria-label="Advanced ring work">
+        <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Ring</p>
+        <MaterialSelector role={ringBodyRole} rows={resourceRows} selected={ringBody} onSelect={setRingBody} group="ring-body" />
+        <MaterialSelector role={ringBindingRole} rows={resourceRows} selected={ringBinding} onSelect={setRingBinding} group="ring-binding" />
+        <WorkmanshipPreview
+          skill={skills?.tinkering ?? 0}
+          difficulty={26}
+          primaryGrade={ringBody ? (ringBody.split(":")[2] as MaterialGrade) : undefined}
+        />
+        <ConfirmCraft
+          selected={{ body: ringBody, binding: ringBinding }}
+          rows={resourceRows}
+          disabledReason={!ringBody || !ringBinding
+            ? "Choose a band and binding"
+            : selectedCount(ringBody) < ringBodyRole.amount || selectedCount(ringBinding) < ringBindingRole.amount
+              ? "Not enough selected material"
+              : null}
+          formLabel="ring"
+          onConfirm={() => ringBody && ringBinding && makeExact("ring", [
+            { role: "body", key: ringBody },
+            { role: "binding", key: ringBinding },
           ])}
         />
       </div>
