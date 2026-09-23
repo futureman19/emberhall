@@ -34,8 +34,9 @@ test("original footprint and voxel-centered door/anchor contracts stay fixed", (
   assert.deepEqual(BUILD_SIZE.forge, { x0: -3, x1: 3, z0: -3, z1: 3 });
   assert.deepEqual(buildingBox("bank", 0, 0), { x0: -1.5, x1: 2, z0: -1, z1: 1.5 });
   const source = text("src/components/game/building-meshes.tsx");
-  assert.match(source, /door: \{ x: -1, w: 2, h: 2 \}/);
-  assert.match(source, /const open = z === 3;/);
+  const generators = text("src/game/placeables/legacy-buildings.ts");
+  assert.match(generators, /door: \{ x: -1, w: 2, h: 2 \}/);
+  assert.match(generators, /const open = z === 3;/);
   assert.match(source, /const z1 = b.ty \+ \(s.z1 \+ 1\) \* B \+ 0.45;/);
   assert.match(source, /useGame.getState\(\).useStation\(b.id\)/);
   assert.match(source, /if \(pell\) useGame.getState\(\).select\(pell.id\)/);

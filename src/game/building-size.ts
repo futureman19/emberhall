@@ -1,32 +1,38 @@
 import type { BuildingKind, World } from "./types.ts";
+import { SPECS } from "./placeables/legacy-buildings.ts";
+import type { BuildingSpec } from "./placeables/types.ts";
+import { VOX } from "./placeables/types.ts";
 
-export const VOX = 0.5;
+export { VOX };
+
+function bounds(spec: BuildingSpec) {
+  return { x0: spec.x0, x1: spec.x1, z0: spec.z0, z1: spec.z1 };
+}
 
 export const BUILD_SIZE: Record<BuildingKind, { x0: number; x1: number; z0: number; z1: number }> = {
-  hall: { x0: -5, x1: 5, z0: -4, z1: 4 },
-  dormitory: { x0: -6, x1: 6, z0: -3, z1: 3 },
-  kitchen: { x0: -3, x1: 3, z0: -3, z1: 3 },
-  yard: { x0: -5, x1: 5, z0: -5, z1: 5 },
-  market: { x0: -4, x1: 4, z0: -3, z1: 3 },
-  forge: { x0: -3, x1: 3, z0: -3, z1: 3 },
-  tavern: { x0: -4, x1: 4, z0: -3, z1: 3 },
-  notice: { x0: -1, x1: 1, z0: 0, z1: 2 },
-  board: { x0: -3, x1: 3, z0: 0, z1: 2 },
-  farm: { x0: -5, x1: 5, z0: -5, z1: 5 },
-  bank: { x0: -3, x1: 3, z0: -2, z1: 2 },
-  // Kingsford — the capital's structures.
-  keep: { x0: -20, x1: 21, z0: -16, z1: 15 },
-  rampart: { x0: -8, x1: 7, z0: -1, z1: 0 },
-  rampartV: { x0: -1, x1: 0, z0: -8, z1: 7 },
-  tower: { x0: -2, x1: 2, z0: -2, z1: 2 },
-  gatehouse: { x0: -2, x1: 2, z0: -4, z1: 4 },
-  shop: { x0: -4, x1: 4, z0: -3, z1: 3 },
-  townhome: { x0: -4, x1: 4, z0: -3, z1: 3 },
-  townhouse: { x0: -3, x1: 3, z0: -3, z1: 3 },
-  cottage: { x0: -3, x1: 3, z0: -2, z1: 2 },
-  porch: { x0: -2, x1: 2, z0: -1, z1: 1 },
-  hut: { x0: -3, x1: 3, z0: -2, z1: 2 },
-  homestead: { x0: -3, x1: 3, z0: -3, z1: 3 },
+  hall: bounds(SPECS.hall),
+  dormitory: bounds(SPECS.dormitory),
+  kitchen: bounds(SPECS.kitchen),
+  yard: bounds(SPECS.yard),
+  market: bounds(SPECS.market),
+  forge: bounds(SPECS.forge),
+  tavern: bounds(SPECS.tavern),
+  notice: bounds(SPECS.notice),
+  board: bounds(SPECS.board),
+  farm: bounds(SPECS.farm),
+  bank: bounds(SPECS.bank),
+  keep: bounds(SPECS.keep),
+  rampart: bounds(SPECS.rampart),
+  rampartV: bounds(SPECS.rampartV),
+  tower: bounds(SPECS.tower),
+  gatehouse: bounds(SPECS.gatehouse),
+  shop: bounds(SPECS.shop),
+  townhome: bounds(SPECS.townhome),
+  townhouse: bounds(SPECS.townhouse),
+  cottage: bounds(SPECS.cottage),
+  porch: bounds(SPECS.porch),
+  hut: bounds(SPECS.hut),
+  homestead: bounds(SPECS.homestead),
 };
 
 export function buildingBox(kind: BuildingKind, tx: number, ty: number) {

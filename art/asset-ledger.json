@@ -153,6 +153,9 @@
     "src/game/personal-action-animation.ts",
     "src/game/pets.ts",
     "src/game/piles.ts",
+    "src/game/placeables/legacy-buildings.ts",
+    "src/game/placeables/materials.ts",
+    "src/game/placeables/types.ts",
     "src/game/placement-preview.ts",
     "src/game/player.ts",
     "src/game/rare.ts",
@@ -573,7 +576,7 @@
       "canonicalId": "bank",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:16",
+        "src/game/building-size.ts:23",
         "src/game/catalog.ts:288",
         "src/game/types.ts:270"
       ],
@@ -926,7 +929,7 @@
       "canonicalId": "board",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:14",
+        "src/game/building-size.ts:21",
         "src/game/catalog.ts:282",
         "src/game/types.ts:270"
       ],
@@ -1092,7 +1095,7 @@
       "canonicalId": "cottage",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:26",
+        "src/game/building-size.ts:32",
         "src/game/catalog.ts:297",
         "src/game/types.ts:270"
       ],
@@ -1200,7 +1203,7 @@
       "canonicalId": "dormitory",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:7",
+        "src/game/building-size.ts:14",
         "src/game/catalog.ts:279",
         "src/game/types.ts:270"
       ],
@@ -1535,7 +1538,7 @@
       "canonicalId": "farm",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:15",
+        "src/game/building-size.ts:22",
         "src/game/catalog.ts:287",
         "src/game/types.ts:270"
       ],
@@ -1855,7 +1858,7 @@
       "canonicalId": "forge",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:11",
+        "src/game/building-size.ts:18",
         "src/game/catalog.ts:284",
         "src/game/types.ts:270"
       ],
@@ -2201,7 +2204,7 @@
       "canonicalId": "gatehouse",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:22",
+        "src/game/building-size.ts:28",
         "src/game/catalog.ts:293",
         "src/game/types.ts:270"
       ],
@@ -2309,7 +2312,7 @@
       "canonicalId": "hall",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:6",
+        "src/game/building-size.ts:13",
         "src/game/catalog.ts:278",
         "src/game/types.ts:270"
       ],
@@ -2489,7 +2492,7 @@
       "canonicalId": "homestead",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:29",
+        "src/game/building-size.ts:35",
         "src/game/catalog.ts:300",
         "src/game/types.ts:270"
       ],
@@ -2597,7 +2600,7 @@
       "canonicalId": "hut",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:28",
+        "src/game/building-size.ts:34",
         "src/game/catalog.ts:299",
         "src/game/types.ts:270"
       ],
@@ -2705,7 +2708,7 @@
       "canonicalId": "keep",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:18",
+        "src/game/building-size.ts:24",
         "src/game/catalog.ts:289",
         "src/game/types.ts:270"
       ],
@@ -2813,7 +2816,7 @@
       "canonicalId": "kitchen",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:8",
+        "src/game/building-size.ts:15",
         "src/game/catalog.ts:280",
         "src/game/types.ts:270"
       ],
@@ -3153,7 +3156,7 @@
       "canonicalId": "market",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:10",
+        "src/game/building-size.ts:17",
         "src/game/catalog.ts:283",
         "src/game/types.ts:270"
       ],
@@ -3413,7 +3416,7 @@
       "canonicalId": "notice",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:13",
+        "src/game/building-size.ts:20",
         "src/game/catalog.ts:286",
         "src/game/types.ts:270"
       ],
@@ -3579,7 +3582,7 @@
       "canonicalId": "porch",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:27",
+        "src/game/building-size.ts:33",
         "src/game/catalog.ts:298",
         "src/game/types.ts:270"
       ],
@@ -3687,7 +3690,7 @@
       "canonicalId": "rampart",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:19",
+        "src/game/building-size.ts:25",
         "src/game/catalog.ts:290",
         "src/game/types.ts:270"
       ],
@@ -3795,7 +3798,7 @@
       "canonicalId": "rampartV",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:20",
+        "src/game/building-size.ts:26",
         "src/game/catalog.ts:291",
         "src/game/types.ts:270"
       ],
@@ -3903,7 +3906,7 @@
       "canonicalId": "shop",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:23",
+        "src/game/building-size.ts:29",
         "src/game/catalog.ts:294",
         "src/game/types.ts:270"
       ],
@@ -4011,7 +4014,7 @@
       "canonicalId": "tavern",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:12",
+        "src/game/building-size.ts:19",
         "src/game/catalog.ts:285",
         "src/game/types.ts:270"
       ],
@@ -4354,7 +4357,7 @@
       "canonicalId": "tower",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:21",
+        "src/game/building-size.ts:27",
         "src/game/catalog.ts:292",
         "src/game/types.ts:270"
       ],
@@ -4462,7 +4465,7 @@
       "canonicalId": "townhome",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:24",
+        "src/game/building-size.ts:30",
         "src/game/catalog.ts:295",
         "src/game/types.ts:270"
       ],
@@ -4570,7 +4573,7 @@
       "canonicalId": "townhouse",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:25",
+        "src/game/building-size.ts:31",
         "src/game/catalog.ts:296",
         "src/game/types.ts:270"
       ],
@@ -4678,7 +4681,7 @@
       "canonicalId": "yard",
       "family": "building",
       "catalogSources": [
-        "src/game/building-size.ts:9",
+        "src/game/building-size.ts:16",
         "src/game/catalog.ts:281",
         "src/game/types.ts:270"
       ],
@@ -30258,489 +30261,17 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#bake",
-      "canonicalId": "src/components/game/building-meshes.tsx#bake",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:108"
-      ],
-      "sourceNames": [
-        "bake"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:108"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:100"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:100"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:100"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#dressHutCute",
-      "canonicalId": "src/components/game/building-meshes.tsx#dressHutCute",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:814"
-      ],
-      "sourceNames": [
-        "dressHutCute"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:814"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:806"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:806"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:806"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#fill",
-      "canonicalId": "src/components/game/building-meshes.tsx#fill",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:73"
-      ],
-      "sourceNames": [
-        "fill"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:73",
-        "src/components/game/paperdoll.tsx:82"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx",
-        "src/components/game/paperdoll.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:65"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:skip?.(x, y, z)",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:65"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:65"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:65"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#gableRoof",
-      "canonicalId": "src/components/game/building-meshes.tsx#gableRoof",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:115"
-      ],
-      "sourceNames": [
-        "gableRoof"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:115"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:107"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:za > zb",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:107"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:107"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:107"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#halfTimber",
-      "canonicalId": "src/components/game/building-meshes.tsx#halfTimber",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:129"
-      ],
-      "sourceNames": [
-        "halfTimber"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:129"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:121"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:x1 - x0 >= 6",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:121"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:z1 !== doorZ || x === x0 || x === x1",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:121"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:121"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:121"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#hallTower",
-      "canonicalId": "src/components/game/building-meshes.tsx#hallTower",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:222"
-      ],
-      "sourceNames": [
-        "hallTower"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:222"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:214"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:x0 < 0",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:214"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:214"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:214"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#house",
-      "canonicalId": "src/components/game/building-meshes.tsx#house",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:156"
-      ],
-      "sourceNames": [
-        "house"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:156"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:148"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:!edge",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:148"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:opts.chimney",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:148"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:opts.door",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:148"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:148"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:148"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
       "id": "renderer-helper:src/components/game/building-meshes.tsx#insideLabel",
       "canonicalId": "src/components/game/building-meshes.tsx#insideLabel",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:884"
+        "src/components/game/building-meshes.tsx:52"
       ],
       "sourceNames": [
         "insideLabel"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:884"
+        "src/components/game/building-meshes.tsx:52"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -30796,1681 +30327,17 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#keepTower",
-      "canonicalId": "src/components/game/building-meshes.tsx#keepTower",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:466"
-      ],
-      "sourceNames": [
-        "keepTower"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:466"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:458"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:x0 < 0",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:458"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:458"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:458"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#key",
-      "canonicalId": "src/components/game/building-meshes.tsx#key",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:94"
-      ],
-      "sourceNames": [
-        "key"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:94",
-        "src/components/game/craft-gump.tsx:108",
-        "src/components/game/crafting/confirm-craft.tsx:17",
-        "src/components/game/crafting/inlay-panel.tsx:25",
-        "src/components/game/crafting/material-selector.tsx:36",
-        "src/components/game/crafting/refining-panel.tsx:25",
-        "src/components/game/paperdoll.tsx:319"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx",
-        "src/components/game/craft-gump.tsx",
-        "src/components/game/crafting/confirm-craft.tsx",
-        "src/components/game/crafting/inlay-panel.tsx",
-        "src/components/game/crafting/material-selector.tsx",
-        "src/components/game/crafting/refining-panel.tsx",
-        "src/components/game/paperdoll.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:86"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:86"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:86"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeBank",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeBank",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:729"
-      ],
-      "sourceNames": [
-        "makeBank"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:729"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:721"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:721"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:721"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeBoard",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeBoard",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:455"
-      ],
-      "sourceNames": [
-        "makeBoard"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:455"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:447"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:447"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:447"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeCottage",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeCottage",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:715"
-      ],
-      "sourceNames": [
-        "makeCottage"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:715"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:707"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:707"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:707"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeDorm",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeDorm",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:299"
-      ],
-      "sourceNames": [
-        "makeDorm"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:299"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:291"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:291"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:291"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeFarm",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeFarm",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:416"
-      ],
-      "sourceNames": [
-        "makeFarm"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:416"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:408"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:!edge || gate",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:408"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:corner",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:408"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:post",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:408"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:408"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:408"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeForge",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeForge",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:370"
-      ],
-      "sourceNames": [
-        "makeForge"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:370"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:362"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:open",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:362"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:362"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:362"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeGatehouse",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeGatehouse",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:633"
-      ],
-      "sourceNames": [
-        "makeGatehouse"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:633"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:625"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:625"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:625"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeHall",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeHall",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:248"
-      ],
-      "sourceNames": [
-        "makeHall"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:248"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:240"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:!edge",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:240"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:(x <= x0 + 1 && z >= z1 - 1) || (x >= x1 - 1 && z >= z1 - 1)",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:240"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:240"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:240"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeHomestead",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeHomestead",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:839"
-      ],
-      "sourceNames": [
-        "makeHomestead"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:839"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:831"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:831"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:831"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeHut",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeHut",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:765"
-      ],
-      "sourceNames": [
-        "makeHut"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:765"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:757"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:!edge",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:757"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:757"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:757"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeKeep",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeKeep",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:494"
-      ],
-      "sourceNames": [
-        "makeKeep"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:494"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:486"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:!edge",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:486"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:inTower(x, z)",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:486"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:y > 0",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:486"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:z === iz1 && x >= -1 && x <= 1 && y <= 4",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:486"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:486"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:486"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeKitchen",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeKitchen",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:317"
-      ],
-      "sourceNames": [
-        "makeKitchen"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:317"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:309"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:309"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:309"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeMarket",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeMarket",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:355"
-      ],
-      "sourceNames": [
-        "makeMarket"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:355"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:347"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:v.y >= 4",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:347"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:347"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:347"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeNotice",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeNotice",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:407"
-      ],
-      "sourceNames": [
-        "makeNotice"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:407"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:399"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:399"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:399"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makePorch",
-      "canonicalId": "src/components/game/building-meshes.tsx#makePorch",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:753"
-      ],
-      "sourceNames": [
-        "makePorch"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:753"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:745"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:745"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:745"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeRampart",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeRampart",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:597"
-      ],
-      "sourceNames": [
-        "makeRampart"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:597"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:589"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:589"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:589"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeRampartV",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeRampartV",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:606"
-      ],
-      "sourceNames": [
-        "makeRampartV"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:606"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:598"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:598"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:598"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeShop",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeShop",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:656"
-      ],
-      "sourceNames": [
-        "makeShop"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:656"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:648"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:648"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:648"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeTavern",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeTavern",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:389"
-      ],
-      "sourceNames": [
-        "makeTavern"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:389"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:381"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:381"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:381"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeTower",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeTower",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:615"
-      ],
-      "sourceNames": [
-        "makeTower"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:615"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:607"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:607"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:607"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeTownhome",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeTownhome",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:679"
-      ],
-      "sourceNames": [
-        "makeTownhome"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:679"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:671"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:671"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:671"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeTownhouse",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeTownhouse",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:696"
-      ],
-      "sourceNames": [
-        "makeTownhouse"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:696"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:688"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:688"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:688"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#makeYard",
-      "canonicalId": "src/components/game/building-meshes.tsx#makeYard",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:336"
-      ],
-      "sourceNames": [
-        "makeYard"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:336"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:328"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:!edge || gate",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:328"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:post",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:328"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:328"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:328"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#markRoof",
-      "canonicalId": "src/components/game/building-meshes.tsx#markRoof",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:98"
-      ],
-      "sourceNames": [
-        "markRoof"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:98"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:90"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:v.x >= x1",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:90"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:v.y > h",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:90"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:v.z >= z1",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:90"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:90"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:90"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
       "id": "renderer-helper:src/components/game/building-meshes.tsx#occupant",
       "canonicalId": "src/components/game/building-meshes.tsx#occupant",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:869"
+        "src/components/game/building-meshes.tsx:37"
       ],
       "sourceNames": [
         "occupant"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:869"
+        "src/components/game/building-meshes.tsx:37"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -32529,64 +30396,6 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/building-meshes.tsx:861"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/building-meshes.tsx#put",
-      "canonicalId": "src/components/game/building-meshes.tsx#put",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/building-meshes.tsx:69"
-      ],
-      "sourceNames": [
-        "put"
-      ],
-      "rendererLocations": [
-        "src/components/game/building-meshes.tsx:69"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/building-meshes.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:61"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/building-meshes.tsx:61"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/building-meshes.tsx:61"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -44045,13 +41854,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#BlockLayer",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:889"
+        "src/components/game/building-meshes.tsx:57"
       ],
       "sourceNames": [
         "BlockLayer"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:889"
+        "src/components/game/building-meshes.tsx:57"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44131,13 +41940,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#Buildings",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:1135"
+        "src/components/game/building-meshes.tsx:303"
       ],
       "sourceNames": [
         "Buildings"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:1135"
+        "src/components/game/building-meshes.tsx:303"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44201,13 +42010,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#GhostAt",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:1184"
+        "src/components/game/building-meshes.tsx:352"
       ],
       "sourceNames": [
         "GhostAt"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:1184"
+        "src/components/game/building-meshes.tsx:352"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44293,13 +42102,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#OneBuilding",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:952"
+        "src/components/game/building-meshes.tsx:120"
       ],
       "sourceNames": [
         "OneBuilding"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:952"
+        "src/components/game/building-meshes.tsx:120"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44540,13 +42349,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#PlaceGhost",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:1177"
+        "src/components/game/building-meshes.tsx:345"
       ],
       "sourceNames": [
         "PlaceGhost"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:1177"
+        "src/components/game/building-meshes.tsx:345"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -44608,13 +42417,13 @@
       "canonicalId": "src/components/game/building-meshes.tsx#PreviewLayer",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/building-meshes.tsx:1153"
+        "src/components/game/building-meshes.tsx:321"
       ],
       "sourceNames": [
         "PreviewLayer"
       ],
       "rendererLocations": [
-        "src/components/game/building-meshes.tsx:1153"
+        "src/components/game/building-meshes.tsx:321"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -128549,6 +126358,788 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/placeables/types.ts#BuildingSpec.enterable=false",
+      "canonicalId": "src/game/placeables/types.ts#BuildingSpec.enterable=false",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:30"
+      ],
+      "sourceNames": [
+        "BuildingSpec.enterable"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:30"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:30"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#BuildingSpec.enterable=true",
+      "canonicalId": "src/game/placeables/types.ts#BuildingSpec.enterable=true",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:30"
+      ],
+      "sourceNames": [
+        "BuildingSpec.enterable"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:30"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:30"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#BuildingSpec.fuse=false",
+      "canonicalId": "src/game/placeables/types.ts#BuildingSpec.fuse=false",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:31"
+      ],
+      "sourceNames": [
+        "BuildingSpec.fuse"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:31"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:31"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#BuildingSpec.fuse=true",
+      "canonicalId": "src/game/placeables/types.ts#BuildingSpec.fuse=true",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:31"
+      ],
+      "sourceNames": [
+        "BuildingSpec.fuse"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:31"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:31"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#Vox.cut=false",
+      "canonicalId": "src/game/placeables/types.ts#Vox.cut=false",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:21"
+      ],
+      "sourceNames": [
+        "Vox.cut"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:21"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:21"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#Vox.cut=true",
+      "canonicalId": "src/game/placeables/types.ts#Vox.cut=true",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:21"
+      ],
+      "sourceNames": [
+        "Vox.cut"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:21"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:21"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#Vox.t=coal",
+      "canonicalId": "src/game/placeables/types.ts#Vox.t=coal",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "sourceNames": [
+        "Vox.t"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#Vox.t=cobble",
+      "canonicalId": "src/game/placeables/types.ts#Vox.t=cobble",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "sourceNames": [
+        "Vox.t"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#Vox.t=dark",
+      "canonicalId": "src/game/placeables/types.ts#Vox.t=dark",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "sourceNames": [
+        "Vox.t"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#Vox.t=glass",
+      "canonicalId": "src/game/placeables/types.ts#Vox.t=glass",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "sourceNames": [
+        "Vox.t"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#Vox.t=gold",
+      "canonicalId": "src/game/placeables/types.ts#Vox.t=gold",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "sourceNames": [
+        "Vox.t"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#Vox.t=leaf",
+      "canonicalId": "src/game/placeables/types.ts#Vox.t=leaf",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "sourceNames": [
+        "Vox.t"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#Vox.t=soil",
+      "canonicalId": "src/game/placeables/types.ts#Vox.t=soil",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "sourceNames": [
+        "Vox.t"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#Vox.t=stone",
+      "canonicalId": "src/game/placeables/types.ts#Vox.t=stone",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "sourceNames": [
+        "Vox.t"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#Vox.t=thatch",
+      "canonicalId": "src/game/placeables/types.ts#Vox.t=thatch",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "sourceNames": [
+        "Vox.t"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#Vox.t=timber",
+      "canonicalId": "src/game/placeables/types.ts#Vox.t=timber",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "sourceNames": [
+        "Vox.t"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#Vox.t=wool",
+      "canonicalId": "src/game/placeables/types.ts#Vox.t=wool",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "sourceNames": [
+        "Vox.t"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/player.ts#CombatFx.clean=false",
       "canonicalId": "src/game/player.ts#CombatFx.clean=false",
       "family": "state-vocabulary",
@@ -195431,6 +194022,556 @@
       "status": "inventoried",
       "evidence": [
         "src/game/npc-interaction-animation.ts:3"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/placeables/types.ts#Block:coal",
+      "canonicalId": "coal",
+      "family": "vocabulary/src/game/placeables/types.ts#Block",
+      "catalogSources": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "sourceNames": [
+        "Block"
+      ],
+      "rendererLocations": [
+        "src/components/game/building-meshes.tsx:26"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/building-meshes.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:3"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/placeables/types.ts#Block:cobble",
+      "canonicalId": "cobble",
+      "family": "vocabulary/src/game/placeables/types.ts#Block",
+      "catalogSources": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "sourceNames": [
+        "Block"
+      ],
+      "rendererLocations": [
+        "src/components/game/building-meshes.tsx:26"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/building-meshes.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:3"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/placeables/types.ts#Block:dark",
+      "canonicalId": "dark",
+      "family": "vocabulary/src/game/placeables/types.ts#Block",
+      "catalogSources": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "sourceNames": [
+        "Block"
+      ],
+      "rendererLocations": [
+        "src/components/game/building-meshes.tsx:26"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/building-meshes.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:3"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/placeables/types.ts#Block:glass",
+      "canonicalId": "glass",
+      "family": "vocabulary/src/game/placeables/types.ts#Block",
+      "catalogSources": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "sourceNames": [
+        "Block"
+      ],
+      "rendererLocations": [
+        "src/components/game/building-meshes.tsx:26"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/building-meshes.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:3"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/placeables/types.ts#Block:gold",
+      "canonicalId": "gold",
+      "family": "vocabulary/src/game/placeables/types.ts#Block",
+      "catalogSources": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "sourceNames": [
+        "Block"
+      ],
+      "rendererLocations": [
+        "src/components/game/building-meshes.tsx:26"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/building-meshes.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:3"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/placeables/types.ts#Block:leaf",
+      "canonicalId": "leaf",
+      "family": "vocabulary/src/game/placeables/types.ts#Block",
+      "catalogSources": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "sourceNames": [
+        "Block"
+      ],
+      "rendererLocations": [
+        "src/components/game/building-meshes.tsx:26"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/building-meshes.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:3"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/placeables/types.ts#Block:soil",
+      "canonicalId": "soil",
+      "family": "vocabulary/src/game/placeables/types.ts#Block",
+      "catalogSources": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "sourceNames": [
+        "Block"
+      ],
+      "rendererLocations": [
+        "src/components/game/building-meshes.tsx:26"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/building-meshes.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:3"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/placeables/types.ts#Block:stone",
+      "canonicalId": "stone",
+      "family": "vocabulary/src/game/placeables/types.ts#Block",
+      "catalogSources": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "sourceNames": [
+        "Block"
+      ],
+      "rendererLocations": [
+        "src/components/game/building-meshes.tsx:26"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/building-meshes.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:3"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/placeables/types.ts#Block:thatch",
+      "canonicalId": "thatch",
+      "family": "vocabulary/src/game/placeables/types.ts#Block",
+      "catalogSources": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "sourceNames": [
+        "Block"
+      ],
+      "rendererLocations": [
+        "src/components/game/building-meshes.tsx:26"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/building-meshes.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:3"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/placeables/types.ts#Block:timber",
+      "canonicalId": "timber",
+      "family": "vocabulary/src/game/placeables/types.ts#Block",
+      "catalogSources": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "sourceNames": [
+        "Block"
+      ],
+      "rendererLocations": [
+        "src/components/game/building-meshes.tsx:26"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/building-meshes.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:3"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/placeables/types.ts#Block:wool",
+      "canonicalId": "wool",
+      "family": "vocabulary/src/game/placeables/types.ts#Block",
+      "catalogSources": [
+        "src/game/placeables/types.ts:3"
+      ],
+      "sourceNames": [
+        "Block"
+      ],
+      "rendererLocations": [
+        "src/components/game/building-meshes.tsx:26"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/building-meshes.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:3"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:3"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."

@@ -14,6 +14,7 @@ import { hospitalityKitName } from "./hospitality-kit.ts";
 import { commonsKitName } from "./commons-kit.ts";
 import { signageKitName } from "./signage-kit.ts";
 import { INTERIOR_KINDS, interiorKitName } from "./interior-kit.ts";
+import { SPECS } from "../../game/placeables/legacy-buildings.ts";
 
 const root = new URL("../../../", import.meta.url);
 const text = (file: string) => readFileSync(new URL(file, root), "utf8");
@@ -111,11 +112,8 @@ test("exported door corridors and X-running gate passage remain clear; roofs fac
 
 test("actual canonical specs retain original indoor contents, floors and keep story logic", () => {
   const source=text("src/components/game/building-meshes.tsx");
-  const code=ts.transpile(source.slice(source.indexOf("function put("),source.indexOf("function occupant("))+"\nexport {SPECS};",{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022});
-  const exports: {SPECS?:Record<string,{voxels:Array<{x:number;y:number;z:number;cut?:boolean}>}>}={};
-  new Function("exports",code)(exports);
   for(const kind of ARCHITECTURE_KINDS) {
-    const b=BUILD_SIZE[kind], vox=exports.SPECS![kind].voxels;
+    const b=BUILD_SIZE[kind], vox=SPECS[kind].voxels;
     for(const v of vox) {
       if(v.cut) assert.equal(retainArchitectureInteriorVoxel(kind,v),false);
       else if(v.y===0) assert.equal(retainArchitectureInteriorVoxel(kind,v),true);
@@ -142,10 +140,7 @@ test("actual canonical specs retain original indoor contents, floors and keep st
 
 test("keep cutaway removes ceilings and stair-mouth occluders while retaining walking treads", () => {
   const source = text("src/components/game/building-meshes.tsx");
-  const specsCode = ts.transpile(source.slice(source.indexOf("function put("), source.indexOf("function occupant(")) + "\nexport {SPECS};", { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 });
-  const exports: { SPECS?: Record<string, { voxels: Array<{ x: number; y: number; z: number; t: string; cut?: boolean }> }> } = {};
-  new Function("exports", specsCode)(exports);
-  const spec = exports.SPECS!.keep!;
+  const spec = SPECS.keep;
   // Execute the actual renderer's layer loop, not a test-only copy of its filter.
   const loop = source.slice(source.indexOf("    const cap = inside"), source.indexOf("    return { solid, cut, interior, furnitureProxies };"));
   const run = new Function("spec", "inside", "story", "THREE", "kind", "keepStairCut", `
@@ -170,7 +165,7 @@ test("keep cutaway removes ceilings and stair-mouth occluders while retaining wa
     const visible = [...Object.values(actual.solid).flat(),...Object.values(actual.cut).flat()] as THREE.Vector3[];
     assert.deepEqual(visible.map(v=>v.toArray().join(",")).sort(),spec.voxels.map(coords).sort(),"outside restores the exact original multiset at every story");
   }
-  for (const [kind,other] of Object.entries(exports.SPECS!)) {
+  for (const [kind,other] of Object.entries(SPECS)) {
     if(kind==="keep")continue;
     const actual=run(other,true,3,THREE);
     const visible=Object.values(actual.solid).flat() as THREE.Vector3[];
