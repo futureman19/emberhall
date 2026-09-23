@@ -46,8 +46,8 @@ const MATERIAL_ROLES = [
 ] as const satisfies readonly MaterialRole[];
 const MATERIAL_CONTRIBUTIONS = ["primary", "secondary", "cosmetic"] as const satisfies readonly MaterialContribution[];
 const GEM_FAMILIES = ["power", "fortune", "precision", "protection", "mastery"] as const satisfies readonly GemFamily[];
-const GRADE_KINDS = ["timber", "ore", "fiber", "hide"] as const;
-const GRADE_FORMS = ["log", "board", "ore", "ingot", "cloth", "hide"] as const;
+const GRADE_KINDS = ["timber", "ore", "fiber", "hide", "bone"] as const;
+const GRADE_FORMS = ["log", "board", "ore", "ingot", "cloth", "hide", "bone"] as const;
 
 export const ITEM_FORM_IDENTITY = Object.freeze({
   bow: Object.freeze({ baseItem: "bow", itemClass: "weapon" }),
@@ -311,7 +311,7 @@ const BOW_FORM_DEFINITION = {
     {
       role: "body",
       amount: 5,
-      accepts: { qualityType: "grade", kinds: ["timber"], forms: ["log", "board"] },
+      accepts: { qualityType: "grade", kinds: ["timber", "bone"], forms: ["log", "board", "bone"] },
       contribution: "primary",
     },
     {
@@ -343,7 +343,7 @@ const SWORD_FORM_DEFINITION = {
     {
       role: "hilt",
       amount: 1,
-      accepts: { qualityType: "grade", kinds: ["timber"], forms: ["board", "log"] },
+      accepts: { qualityType: "grade", kinds: ["timber", "bone"], forms: ["board", "log", "bone"] },
       contribution: "secondary",
     },
     {
@@ -369,7 +369,7 @@ const SHIELD_FORM_DEFINITION = {
     {
       role: "plate",
       amount: 3,
-      accepts: { qualityType: "grade", kinds: ["ore"], forms: ["ingot"] },
+      accepts: { qualityType: "grade", kinds: ["ore", "bone"], forms: ["ingot", "bone"] },
       contribution: "primary",
     },
     {

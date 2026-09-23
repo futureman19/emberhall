@@ -11,6 +11,7 @@ import { makeResourceStackKey } from "../inventory/resources.ts";
 
 const ROUGH_OAK = makeResourceStackKey("oak", "log", "rough");
 const CHOICE_REDWOOD = makeResourceStackKey("redwood", "log", "choice");
+const CHOICE_ANTLER = makeResourceStackKey("stag_antler", "bone", "choice");
 const SOUND_CLOTH = makeResourceStackKey("common_cloth", "cloth", "sound");
 const PRISTINE_LINEN = makeResourceStackKey("fine_linen", "cloth", "pristine");
 const ROUGH_IRON = makeResourceStackKey("iron_ore", "ore", "rough");
@@ -36,7 +37,7 @@ test("exact recipes - shield form is the first armor craft", () => {
   assert.equal(SHIELD_FORM.baseItem, "shield");
   assert.equal(SHIELD_FORM.itemClass, "armor");
   assert.deepEqual(SHIELD_FORM.roles.map((r) => `${r.role}:${r.amount}:${r.contribution}`), ["plate:3:primary", "frame:2:secondary", "binding:1:secondary"]);
-  assert.deepEqual(SHIELD_FORM.roles[0]?.accepts, { qualityType: "grade", kinds: ["ore"], forms: ["ingot"] });
+  assert.deepEqual(SHIELD_FORM.roles[0]?.accepts, { qualityType: "grade", kinds: ["ore", "bone"], forms: ["ingot", "bone"] });
   assert.deepEqual(SHIELD_FORM.baseStats, { damage: 0, hitBonus: 0, armor: 2, skillBonuses: {}, slayerMultipliers: {} });
   assert.deepEqual(SHIELD_FORM.caps, { damage: 0, hitBonus: 0, armor: 5, skillBonusPerSkill: 5, slayerMultiplier: 1.5 });
   assert.deepEqual(SWORD_FORM.allowedGemFamilies, ["power", "precision", "mastery"]);
@@ -125,12 +126,14 @@ test("exact recipes - role compatibility follows the canonical form selectors", 
   assert.ok(binding);
   assert.equal(resourceStackMatchesRole(body, ROUGH_OAK), true);
   assert.equal(resourceStackMatchesRole(body, CHOICE_REDWOOD), true);
+  assert.equal(resourceStackMatchesRole(body, CHOICE_ANTLER), true, "a stag antler bodies a composite bow");
   assert.equal(resourceStackMatchesRole(body, SOUND_CLOTH), false);
   assert.equal(resourceStackMatchesRole(body, ROUGH_IRON), false);
   assert.equal(resourceStackMatchesRole(body, FLAWED_RUBY), false);
   assert.equal(resourceStackMatchesRole(binding, SOUND_CLOTH), true);
   assert.equal(resourceStackMatchesRole(binding, PRISTINE_LINEN), true);
   assert.equal(resourceStackMatchesRole(binding, ROUGH_OAK), false);
+  assert.equal(resourceStackMatchesRole(binding, CHOICE_ANTLER), false, "bone never binds");
 });
 
 test("exact recipes - exact selections resolve one correlated component per semantic role", () => {

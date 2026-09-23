@@ -1,5 +1,6 @@
 import { createResourceInventory } from "./inventory/resources.ts";
 import type { BuildingKind, ClassId, FaunaKind, ItemId, LootDrop, LootGold, NpcRole, Notoriety, ResourceInventory, ResourceTag, SkillId, WearSlot } from "./types.ts";
+import type { BoneResourceId } from "./resources/types.ts";
 
 export const SECONDS_PER_HOUR = 36;
 /** Rel Sanct holds this many game hours. */
@@ -173,20 +174,20 @@ export const CLASS_META: Record<ClassId, { label: string; color: string }> = {
   merchant: { label: "Merchant", color: "#a88848" },
 };
 
-export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp: number; dmg: number; eats: ResourceTag[]; meat?: number; hide?: number; hasCorpse?: boolean; loot?: LootDrop[]; gold?: LootGold }> = {
+export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp: number; dmg: number; eats: ResourceTag[]; meat?: number; hide?: number; parts?: readonly { id: BoneResourceId; n: number }[]; hasCorpse?: boolean; loot?: LootDrop[]; gold?: LootGold }> = {
   hare: { label: "Hare", tameDiff: 8, hp: 8, dmg: 1, eats: ["plant"], meat: 1, hide: 1, loot: [{ item: "rabbit_foot", chance: 0.35, min: 1, max: 1 }] },
-  hart: { label: "Hart", tameDiff: 22, hp: 22, dmg: 4, eats: ["plant"], meat: 2, hide: 1 },
-  wolf: { label: "Wolf", tameDiff: 40, hp: 28, dmg: 8, eats: ["meat"], meat: 2, hide: 1 },
+  hart: { label: "Hart", tameDiff: 22, hp: 22, dmg: 4, eats: ["plant"], meat: 2, hide: 1, parts: [{ id: "stag_antler", n: 1 }] },
+  wolf: { label: "Wolf", tameDiff: 40, hp: 28, dmg: 8, eats: ["meat"], meat: 2, hide: 1, parts: [{ id: "wolf_fang", n: 1 }] },
   wight: { label: "Wight", tameDiff: 99, hp: 36, dmg: 10, eats: ["meat"], hasCorpse: false, loot: [{ item: "nightshade", chance: 0.3, min: 1, max: 2 }, { item: "pearl", chance: 0.25, min: 1, max: 1 }, { item: "moss", chance: 0.2, min: 1, max: 1 }, { item: "relic", chance: 0.06, min: 1, max: 1 }], gold: { chance: 0.4, min: 4, max: 10 } },
 
-  brambleback_stag: { label: "Brambleback Stag", tameDiff: 55, hp: 30, dmg: 6, eats: ["plant"], meat: 2, hide: 1 },
+  brambleback_stag: { label: "Brambleback Stag", tameDiff: 55, hp: 30, dmg: 6, eats: ["plant"], meat: 2, hide: 1, parts: [{ id: "stag_antler", n: 2 }] },
   ironwood_boar: { label: "Ironwood Boar", tameDiff: 50, hp: 24, dmg: 7, eats: ["meat"], meat: 2, hide: 1 },
   pine_lynx: { label: "Pine Lynx", tameDiff: 52, hp: 26, dmg: 7, eats: ["meat"], meat: 2, hide: 1 },
   ember_fox: { label: "Ember Fox", tameDiff: 43, hp: 20, dmg: 5, eats: ["meat"], meat: 1, hide: 1 },
   moss_badger: { label: "Moss Badger", tameDiff: 20, hp: 14, dmg: 3, eats: ["meat", "plant"], meat: 1, hide: 1 },
 
-  ridgeback_warg: { label: "Ridgeback Warg", tameDiff: 72, hp: 52, dmg: 12, eats: ["meat"], meat: 3, hide: 2 },
-  thornhide_doe: { label: "Thornhide Doe", tameDiff: 26, hp: 24, dmg: 4, eats: ["plant"], meat: 2, hide: 1 },
+  ridgeback_warg: { label: "Ridgeback Warg", tameDiff: 72, hp: 52, dmg: 12, eats: ["meat"], meat: 3, hide: 2, parts: [{ id: "wolf_fang", n: 2 }] },
+  thornhide_doe: { label: "Thornhide Doe", tameDiff: 26, hp: 24, dmg: 4, eats: ["plant"], meat: 2, hide: 1, parts: [{ id: "stag_antler", n: 1 }] },
   mire_croaker: { label: "Mire Croaker", tameDiff: 34, hp: 18, dmg: 3, eats: ["plant", "meat"], meat: 1, hide: 1 },
   reedback_stalker: { label: "Reedback Stalker", tameDiff: 68, hp: 40, dmg: 10, eats: ["meat"], meat: 2, hide: 2 },
   bog_toad: { label: "Bog Toad", tameDiff: 28, hp: 16, dmg: 3, eats: ["plant", "meat"], meat: 1, hide: 1 },
@@ -213,7 +214,7 @@ export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp
   tideclaw_crab: { label: "Tideclaw Crab", tameDiff: 56, hp: 40, dmg: 9, eats: ["meat", "plant"], meat: 2, hide: 2, loot: [{ item: "pearl", chance: 0.18, min: 1, max: 1 }] },
   cavern_bat: { label: "Cavern Bat", tameDiff: 38, hp: 18, dmg: 5, eats: ["meat"], meat: 1, hide: 1, loot: [{ item: "nightshade", chance: 0.15, min: 1, max: 1 }] },
   tomb_sentinel: { label: "Tomb Sentinel", tameDiff: 99, hp: 58, dmg: 14, eats: ["meat"], hasCorpse: false, loot: [{ item: "sword", chance: 0.14, min: 1, max: 1 }, { item: "helm", chance: 0.12, min: 1, max: 1 }, { item: "relic", chance: 0.1, min: 1, max: 1 }], gold: { chance: 0.55, min: 5, max: 13 } },
-  cinder_drake: { label: "Cinder Drake", tameDiff: 88, hp: 68, dmg: 15, eats: ["meat"], meat: 4, hide: 3, loot: [{ item: "ash", chance: 0.5, min: 1, max: 3 }, { item: "ore", chance: 0.22, min: 1, max: 2 }] },
+  cinder_drake: { label: "Cinder Drake", tameDiff: 88, hp: 68, dmg: 15, eats: ["meat"], meat: 4, hide: 3, parts: [{ id: "drake_scale", n: 3 }], loot: [{ item: "ash", chance: 0.5, min: 1, max: 3 }, { item: "ore", chance: 0.22, min: 1, max: 2 }] },
   willow_wisp: { label: "Willow Wisp", tameDiff: 99, hp: 24, dmg: 10, eats: ["plant"], hasCorpse: false, loot: [{ item: "mandrake", chance: 0.3, min: 1, max: 1 }, { item: "pearl", chance: 0.18, min: 1, max: 1 }, { item: "relic", chance: 0.04, min: 1, max: 1 }], gold: { chance: 0.2, min: 2, max: 7 } },
 
   blackbriar_hag: { label: "Blackbriar Hag", tameDiff: 99, hp: 48, dmg: 12, eats: ["plant", "meat"], hasCorpse: false, loot: [{ item: "staff", chance: 0.12, min: 1, max: 1 }, { item: "nightshade", chance: 0.45, min: 1, max: 2 }, { item: "mandrake", chance: 0.25, min: 1, max: 1 }], gold: { chance: 0.35, min: 3, max: 9 } },
@@ -226,7 +227,7 @@ export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp
   grave_lich: { label: "Grave Lich", tameDiff: 99, hp: 96, dmg: 21, eats: ["meat"], hasCorpse: false, loot: [{ item: "staff", chance: 0.22, min: 1, max: 1 }, { item: "ring", chance: 0.16, min: 1, max: 1 }, { item: "pendant", chance: 0.14, min: 1, max: 1 }, { item: "relic", chance: 0.12, min: 1, max: 1 }, { item: "nightshade", chance: 0.45, min: 1, max: 2 }, { item: "mandrake", chance: 0.35, min: 1, max: 2 }, { item: "pearl", chance: 0.3, min: 1, max: 1 }], gold: { chance: 0.85, min: 12, max: 28 } },
 
   redtail_squirrel: { label: "Redtail Squirrel", tameDiff: 10, hp: 8, dmg: 1, eats: ["plant"], meat: 1, hide: 1, loot: [{ item: "acorn", chance: 0.3, min: 1, max: 2 }] },
-  whiteback_elk: { label: "Whiteback Elk", tameDiff: 48, hp: 42, dmg: 8, eats: ["plant"], meat: 3, hide: 2 },
+  whiteback_elk: { label: "Whiteback Elk", tameDiff: 48, hp: 42, dmg: 8, eats: ["plant"], meat: 3, hide: 2, parts: [{ id: "stag_antler", n: 2 }] },
   highland_aurochs: { label: "Highland Aurochs", tameDiff: 65, hp: 64, dmg: 12, eats: ["plant"], meat: 4, hide: 3 },
   reed_heron: { label: "Reed Heron", tameDiff: 26, hp: 18, dmg: 3, eats: ["meat"], meat: 1, hide: 1, loot: [{ item: "raw_fish", chance: 0.25, min: 1, max: 1 }] },
   river_otter: { label: "River Otter", tameDiff: 34, hp: 24, dmg: 4, eats: ["meat"], meat: 1, hide: 1, loot: [{ item: "raw_fish", chance: 0.22, min: 1, max: 1 }] },

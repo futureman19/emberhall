@@ -52,7 +52,7 @@ const MATERIAL_ROLES = [
   "frame",
   "finish",
 ] as const satisfies readonly MaterialRole[];
-const GRADE_FORMS = ["log", "board", "ore", "ingot", "cloth", "hide"] as const;
+const GRADE_FORMS = ["log", "board", "ore", "ingot", "cloth", "hide", "bone"] as const;
 const BUILD_FIELDS = ["workmanship", "components", "inlays"] as const;
 const COMPONENT_FIELDS = ["role", "resourceId", "form", "grade", "amount"] as const;
 const INLAY_FIELDS = ["resourceId", "clarity"] as const;

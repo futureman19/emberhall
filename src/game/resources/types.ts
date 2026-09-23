@@ -19,13 +19,17 @@ export type GradeResourceId =
   | "moon_silver"
   | "common_cloth"
   | "fine_linen"
-  | "hide";
+  | "hide"
+  | "wolf_fang"
+  | "stag_antler"
+  | "drake_scale";
 export type GemResourceId = "ruby" | "sapphire" | "emerald" | "diamond" | "amethyst";
+export type BoneResourceId = "wolf_fang" | "stag_antler" | "drake_scale";
 export type ResourceId = GradeResourceId | GemResourceId;
 
-export type NonGemResourceKind = "timber" | "ore" | "fiber" | "hide";
+export type NonGemResourceKind = "timber" | "ore" | "fiber" | "hide" | "bone";
 export type ResourceKind = NonGemResourceKind | "gem";
-export type GradeResourceForm = "log" | "board" | "ore" | "ingot" | "cloth" | "hide";
+export type GradeResourceForm = "log" | "board" | "ore" | "ingot" | "cloth" | "hide" | "bone";
 export type ResourceForm = GradeResourceForm | "gem";
 export type MaterialGrade = "rough" | "sound" | "choice" | "pristine";
 export type GemClarity = "cracked" | "flawed" | "cut" | "flawless" | "perfect";
@@ -90,9 +94,11 @@ export type ResourceKindFor<I extends ResourceId> = I extends "copper_ore" | "ti
     ? "fiber"
     : I extends "hide"
       ? "hide"
-      : I extends GemResourceId
-        ? "gem"
-        : "timber";
+      : I extends "wolf_fang" | "stag_antler" | "drake_scale"
+        ? "bone"
+        : I extends GemResourceId
+          ? "gem"
+          : "timber";
 
 export type ResourceFormFor<I extends ResourceId> = ResourceKindFor<I> extends "timber"
   ? "log" | "board"
@@ -102,7 +108,9 @@ export type ResourceFormFor<I extends ResourceId> = ResourceKindFor<I> extends "
       ? "cloth"
       : ResourceKindFor<I> extends "hide"
         ? "hide"
-        : "gem";
+        : ResourceKindFor<I> extends "bone"
+          ? "bone"
+          : "gem";
 
 export type GradeResourceDefinition<I extends GradeResourceId = GradeResourceId> = ResourceDefinitionBase & {
   readonly id: I;
@@ -184,6 +192,9 @@ const GRADE_RESOURCE_IDS = [
   "common_cloth",
   "fine_linen",
   "hide",
+  "wolf_fang",
+  "stag_antler",
+  "drake_scale",
 ] as const satisfies readonly GradeResourceId[];
 const GEM_RESOURCE_IDS = ["ruby", "sapphire", "emerald", "diamond", "amethyst"] as const satisfies readonly GemResourceId[];
 const MATERIAL_GRADES = ["rough", "sound", "choice", "pristine"] as const satisfies readonly MaterialGrade[];

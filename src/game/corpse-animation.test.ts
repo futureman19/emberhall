@@ -51,6 +51,51 @@ test("corpse animation - skinning yields hide graded by beast tier, beside the f
   }
 });
 
+test("corpse animation - skinning yields bone parts by species on the same beast-tier ladder", () => {
+  const cases = [
+    { kind: "wolf", id: "b-wolf", part: "wolf_fang", grade: "sound", n: 1 },              // tameDiff 40
+    { kind: "ridgeback_warg", id: "b-warg", part: "wolf_fang", grade: "pristine", n: 2 }, // tameDiff 72
+    { kind: "hart", id: "b-hart", part: "stag_antler", grade: "rough", n: 1 },            // tameDiff 22
+    { kind: "brambleback_stag", id: "b-stag", part: "stag_antler", grade: "choice", n: 2 }, // tameDiff 55
+    { kind: "thornhide_doe", id: "b-doe", part: "stag_antler", grade: "rough", n: 1 },     // tameDiff 26
+    { kind: "cinder_drake", id: "b-drake", part: "drake_scale", grade: "pristine", n: 3 }, // tameDiff 88
+  ] as const;
+  for (const { kind, id, part, grade, n } of cases) {
+    clearCorpseFx();
+    const world = createWorld();
+    const player = you(world)!;
+    world.fauna.push({
+      id, kind, x: player.x + 1, z: player.z, hp: 0, maxHp: 8, path: [], task: "dead",
+      taskUntil: 0, corpseUntil: 0, home: { tx: Math.round(player.x + 1), ty: Math.round(player.z) },
+      ownerId: null, loyalty: 0, stay: false,
+    } as never);
+    world.player.wear.main = "knife";
+    assert.equal(commandSkin(world, id), null);
+    tickPlayer(world, 0.8);
+    const key = makeResourceStackKey(part, "bone", grade);
+    assert.equal(resourceCount(world.player.resources, key), n, `${kind} yields ${n} ${grade} ${part}`);
+  }
+});
+
+test("corpse animation - the fleshless drop no bone, hide, or meat", () => {
+  clearCorpseFx();
+  const world = createWorld();
+  const player = you(world)!;
+  world.fauna.push({
+    id: "b-wight", kind: "wight", x: player.x + 1, z: player.z, hp: 0, maxHp: 8, path: [], task: "dead",
+    taskUntil: 0, corpseUntil: 0, home: { tx: Math.round(player.x + 1), ty: Math.round(player.z) },
+    ownerId: null, loyalty: 0, stay: false,
+  } as never);
+  world.player.wear.main = "knife";
+  assert.equal(commandSkin(world, "b-wight"), null, "the skinning intent starts like any other");
+  tickPlayer(world, 0.8);
+  assert.equal(resourceCount(world.player.resources, makeResourceStackKey("wolf_fang", "bone", "rough")), 0);
+  assert.equal(resourceCount(world.player.resources, makeResourceStackKey("stag_antler", "bone", "rough")), 0);
+  assert.equal(resourceCount(world.player.resources, makeResourceStackKey("drake_scale", "bone", "rough")), 0);
+  assert.equal(world.player.pack.hide ?? 0, 0, "no hide either - the fleshless leave nothing");
+  assert.equal(world.player.pack.meat, 1, "only the starter ration - the wight added nothing");
+});
+
 test("corpse animation - skinning emits only after the result resolves", () => {
   clearCorpseFx();
   const world = createWorld();

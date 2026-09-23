@@ -899,6 +899,10 @@ function skinNow(world: World, p: Person) {
   world.player.pack.hide = (world.player.pack.hide ?? 0) + hideCount;
   addResource(world.player.resources, makeResourceStackKey("hide", "hide", hideGradeFor(meta.tameDiff)), hideCount);
   world.player.pack.meat = (world.player.pack.meat ?? 0) + (meta.meat ?? 2);
+  // Bone parts ride the same beast-tier grade ladder as hides.
+  for (const part of meta.parts ?? []) {
+    addResource(world.player.resources, makeResourceStackKey(part.id, "bone", hideGradeFor(meta.tameDiff)), part.n);
+  }
   emitCorpseFx(world, "skinning", c.id, c.x, c.z);
   world.fauna = world.fauna.filter((x) => x.id !== c.id);
   completeObjective(world, "skin");

@@ -34,6 +34,9 @@ const EXPECTED_IDS = [
   "common_cloth",
   "fine_linen",
   "hide",
+  "wolf_fang",
+  "stag_antler",
+  "drake_scale",
   "ruby",
   "sapphire",
   "emerald",
@@ -278,6 +281,9 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       common_cloth: [],
       fine_linen: ["handling"],
       hide: ["supple"],
+      wolf_fang: ["keen"],
+      stag_antler: ["accuracy"],
+      drake_scale: ["sturdy"],
       ruby: ["power"],
       sapphire: ["fortune"],
       emerald: ["precision"],
@@ -301,7 +307,7 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
   assert.deepEqual(TRAIT_REGISTRY.precision.values, { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 });
 
   const routeIds = new Set<string>();
-  const familyByForm: Record<ResourceForm, "timber" | "ore" | "fiber" | "gem" | "hide"> = {
+  const familyByForm: Record<ResourceForm, "timber" | "ore" | "fiber" | "gem" | "hide" | "bone"> = {
     log: "timber",
     board: "timber",
     ore: "ore",
@@ -309,6 +315,7 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
     cloth: "fiber",
     gem: "gem",
     hide: "hide",
+    bone: "bone",
   };
   for (const resource of Object.values(RESOURCE_CATALOG)) {
     assert.equal(resource.qualityType, resource.kind === "gem" ? "clarity" : "grade", resource.id);
@@ -346,6 +353,9 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       common_cloth: ["cloth"],
       fine_linen: ["cloth"],
       hide: ["hide"],
+      wolf_fang: ["bone"],
+      stag_antler: ["bone"],
+      drake_scale: ["bone"],
       ruby: ["gem"],
       sapphire: ["gem"],
       emerald: ["gem"],

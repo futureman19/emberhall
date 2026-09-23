@@ -18,6 +18,10 @@ const IRON_INGOT = makeResourceStackKey("iron_ore", "ingot", "sound");
 const HIGHLAND_INGOT = makeResourceStackKey("highland_ore", "ingot", "choice");
 const EMBERITE_INGOT = makeResourceStackKey("emberite", "ingot", "choice");
 const MOON_SILVER_INGOT = makeResourceStackKey("moon_silver", "ingot", "choice");
+const CHOICE_WOLF_FANG = makeResourceStackKey("wolf_fang", "bone", "choice");
+const CHOICE_IRON_INGOT = makeResourceStackKey("iron_ore", "ingot", "choice");
+const CHOICE_STAG_ANTLER = makeResourceStackKey("stag_antler", "bone", "choice");
+const PRISTINE_DRAKE_SCALE = makeResourceStackKey("drake_scale", "bone", "pristine");
 const COPPER_INGOT = makeResourceStackKey("copper_ore", "ingot", "choice");
 const OAK_BOARD = makeResourceStackKey("oak", "board", "sound");
 
@@ -418,6 +422,61 @@ test("exact shieldcraft - iron plates carry the sturdy trait into armor", () => 
   assert.equal(shield.resolvedStats?.damage, 0);
   assert.equal(shield.resolvedStats?.hitBonus, 0, "fine hit bonus clamps against the armor form's zero hit cap");
   assert.deepEqual(shield.components?.[0], { role: "plate", resourceId: "iron_ore", form: "ingot", grade: "choice", amount: 3 });
+});
+
+test("exact swordcraft - a wolf fang hilt lends its keen edge to the blade", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  addResource(world.player.resources, CHOICE_IRON_INGOT, 5);
+  addResource(world.player.resources, CHOICE_WOLF_FANG, 1);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "sword", [
+    { role: "edge", key: CHOICE_IRON_INGOT },
+    { role: "hilt", key: CHOICE_WOLF_FANG },
+    { role: "binding", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /iron ore sword/i);
+  const blade = world.player.rares[0]!;
+  assert.equal(blade.resolvedStats?.damage, 10.1875, "10 base + choice keen 0.75 at the hilt's 0.25 secondary scale");
+  assert.equal(blade.resolvedStats?.hitBonus, 1, "fine workmanship on a choice edge - sturdy carries no accuracy");
+  assert.deepEqual(blade.components?.[1], { role: "hilt", resourceId: "wolf_fang", form: "bone", grade: "choice", amount: 1 });
+});
+
+test("exact bowcraft - a stag antler body draws true like choice redwood", () => {
+  const world = createWorld();
+  standAtYard(world);
+  world.player.skills.carpentry = 100;
+  addResource(world.player.resources, CHOICE_STAG_ANTLER, 5);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "bow", bowSelections(CHOICE_STAG_ANTLER)));
+  assert.match(note ?? "", /stag antler bow/i);
+  const bow = world.player.rares[0]!;
+  assert.equal(bow.resolvedStats?.damage, 8, "antler grants no raw damage - specialization, not power");
+  assert.equal(bow.resolvedStats?.hitBonus, 3, "choice accuracy 2 at primary scale plus fine workmanship");
+  assert.deepEqual(bow.components, [
+    { role: "body", resourceId: "stag_antler", form: "bone", grade: "choice", amount: 5 },
+    { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+  ]);
+});
+
+test("exact shieldcraft - drake scale plates a shield with hunted sturdy armor", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  addResource(world.player.resources, PRISTINE_DRAKE_SCALE, 3);
+  addResource(world.player.resources, OAK_BOARD, 2);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "shield", [
+    { role: "plate", key: PRISTINE_DRAKE_SCALE },
+    { role: "frame", key: OAK_BOARD },
+    { role: "binding", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /shield/i);
+  const shield = world.player.rares[0]!;
+  assert.equal(shield.resolvedStats?.armor, 4, "2 base + 2 pristine sturdy scales, under the 5 armor cap");
+  assert.equal(shield.resolvedStats?.damage, 0);
+  assert.deepEqual(shield.components?.[0], { role: "plate", resourceId: "drake_scale", form: "bone", grade: "pristine", amount: 3 });
 });
 
 test("exact helmcraft - two plates and a lining, iron sturdy carries into head armor", () => {

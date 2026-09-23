@@ -33,6 +33,9 @@ export const RESOURCE_IDS = Object.freeze([
   "common_cloth",
   "fine_linen",
   "hide",
+  "wolf_fang",
+  "stag_antler",
+  "drake_scale",
   "ruby",
   "sapphire",
   "emerald",
@@ -515,6 +518,36 @@ const RESOURCE_DEFINITIONS = [
     visual: { family: "cloth", primary: "#7a5230", secondary: "#b08a5a" },
   },
   {
+    id: "wolf_fang",
+    label: "Wolf Fang",
+    kind: "bone",
+    forms: ["bone"],
+    qualityType: "grade",
+    traitIds: ["keen"],
+    processing: [],
+    visual: { family: "stone", primary: "#e8e0d0", secondary: "#f5efe2" },
+  },
+  {
+    id: "stag_antler",
+    label: "Stag Antler",
+    kind: "bone",
+    forms: ["bone"],
+    qualityType: "grade",
+    traitIds: ["accuracy"],
+    processing: [],
+    visual: { family: "stone", primary: "#c9b89a", secondary: "#e6dcc8" },
+  },
+  {
+    id: "drake_scale",
+    label: "Drake Scale",
+    kind: "bone",
+    forms: ["bone"],
+    qualityType: "grade",
+    traitIds: ["sturdy"],
+    processing: [],
+    visual: { family: "stone", primary: "#5a2f28", secondary: "#8a4a38" },
+  },
+  {
     id: "ruby",
     label: "Ruby",
     kind: "gem",
@@ -631,6 +664,9 @@ const RESOURCE_KIND_BY_ID = {
   diamond: "gem",
   amethyst: "gem",
   hide: "hide",
+  wolf_fang: "bone",
+  stag_antler: "bone",
+  drake_scale: "bone",
 } as const satisfies Record<ResourceId, ResourceKind>;
 
 const BIOME_IDS = {
@@ -675,6 +711,7 @@ const FORMS_BY_KIND = {
   ore: ["ore", "ingot"],
   fiber: ["cloth"],
   hide: ["hide"],
+  bone: ["bone"],
   gem: ["gem"],
 } as const satisfies Record<ResourceKind, readonly ResourceForm[]>;
 
@@ -683,6 +720,7 @@ const VISUAL_FAMILIES_BY_KIND = {
   ore: ["stone"],
   hide: ["cloth"],
   fiber: ["cloth"],
+  bone: ["stone"],
   gem: ["gem"],
 } as const;
 

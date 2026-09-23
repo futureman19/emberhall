@@ -123,6 +123,8 @@ test("soft biome affinities make catalog preferences observable and omit zero af
   assert.ok(rawWeightAt(110, 440, "rock", "moon_silver") > rawWeightAt(250, 48, "rock", "moon_silver"), "greybarrow is the richer moon-silver vein");
   assert.ok(rawWeightAt(250, 48, "rock", "moon_silver") > 0, "ridgewatch holds a moon-silver vein");
   assert.equal(rawWeightAt(256, 292, "rock", "moon_silver"), 0, "moon-silver keeps to its named veins");
+  assert.equal(rawWeightAt(188, 88, "tree", "wolf_fang"), 0, "bone parts never grow on nodes");
+  assert.equal(rawWeightAt(420, 268, "rock", "drake_scale"), 0, "bone parts never grow on nodes");
 });
 
 test("bounded deterministic grid frequencies track inspected probabilities", () => {

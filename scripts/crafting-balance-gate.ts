@@ -215,6 +215,10 @@ const acquisitions = [
   acquisitionScenario("highland sword edge", "highland_ore", "rock", 5, 55),
   acquisitionScenario("emberite sword edge", "emberite", "rock", 5, 90),
   acquisitionScenario("moon silver sword edge", "moon_silver", "rock", 5, 75),
+  // Bone-kind hunt loot (wolf_fang, stag_antler, drake_scale) is intentionally unmodeled here:
+  // it drops from skinning fauna kills, never from node resolution, so the node-survey
+  // scenario would report a garbage "never acquires". Their crafting impact is still
+  // covered by the legal-combination enumeration above (bow body / sword hilt / shield plate).
   acquisitionScenario("ruby inlay", "ruby", "rock", 1, 60),
   acquisitionScenario("emerald inlay", "emerald", "rock", 1, 70),
   acquisitionScenario("amethyst inlay", "amethyst", "rock", 1, 60),
