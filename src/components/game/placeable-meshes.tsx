@@ -88,7 +88,7 @@ function Piece({
     for (const v of voxels) bins[v.t].push(new THREE.Vector3(v.x, v.y, v.z));
     return bins;
   }, [voxels]);
-  const tint = ghost ? ghostTint(!Boolean(getHoldBuild().reason)) : null;
+  const tint = ghost ? ghostTint(!getHoldBuild().reason) : null;
   return (
     <group>
       {KINDS.map((k) => (

@@ -28,13 +28,13 @@ function primed(): World {
 test("The Hold catalog is kit pieces, not a second town-build menu", () => {
   const panel = readFileSync(new URL("../../components/game/hold-panel.tsx", import.meta.url), "utf8");
   const hud = readFileSync(new URL("../../components/game/hud.tsx", import.meta.url), "utf8");
-  assert.match(panel, /data-testid=\"hold-panel\"/);
+  assert.match(panel, /data-testid="hold-panel"/);
   assert.match(panel, /PLACEABLE_CATALOG/);
   assert.match(panel, /PLACEABLE_CATEGORIES/);
   assert.match(panel, /Search/);
   assert.match(panel, /reclaimHold/);
   assert.match(panel, /Town halls/);
-  assert.match(hud, /from \"@\/components\/game\/hold-panel\"/);
+  assert.match(hud, /from "@\/components\/game\/hold-panel"/);
   assert.match(hud, /<HoldPanel \/>/);
 });
 

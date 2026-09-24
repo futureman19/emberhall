@@ -36,7 +36,7 @@ test("a closed door blocks the tile; an open door lets you through", () => {
   const id = world.placedObjects[0]!.id;
   assert.equal(walkable(world, 102, 100), false);
   assert.equal(toggleDoor(world, id), null);
-  assert.equal(world.placedObjects[0]!.state.open, true);
+  assert.equal((world.placedObjects[0]!.state.door as { open?: boolean } | undefined)?.open, true);
   assert.equal(walkable(world, 102, 100), true);
   assert.equal(toggleDoor(world, id), null);
   assert.equal(walkable(world, 102, 100), false);
@@ -78,9 +78,9 @@ test("a sign keeps bounded text", () => {
   assert.equal(placeObject(world, "sign_board", 100, 100, 0), null);
   const id = world.placedObjects[0]!.id;
   assert.equal(setSignText(world, id, "Oakstand mill"), null);
-  assert.equal(world.placedObjects[0]!.state.text, "Oakstand mill");
+  assert.equal((world.placedObjects[0]!.state.sign as { text?: string } | undefined)?.text, "Oakstand mill");
   assert.match(setSignText(world, id, "x".repeat(81)) ?? "", /too long/i);
-  assert.equal(world.placedObjects[0]!.state.text, "Oakstand mill");
+  assert.equal((world.placedObjects[0]!.state.sign as { text?: string } | undefined)?.text, "Oakstand mill");
 });
 
 test("a planter is a crop bed you can sow", () => {

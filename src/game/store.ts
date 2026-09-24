@@ -61,7 +61,7 @@ import { completeObjective, placeBuilding } from "./world.ts";
 import { HOUSE_RANGE, commandHouseItem, commandHouseTake, houseKindForDeed, isHouseKind, placeHouse } from "./house.ts";
 import { applyBlueprint, captureBlueprint } from "./blueprints.ts";
 import { reclaimObject } from "./placeables/commands.ts";
-import { objectFn, usePlaced } from "./placeables/functions.ts";
+import { isDoorOpen, objectFn, usePlaced as applyPlaced } from "./placeables/functions.ts";
 import { withHistory } from "./placeables/history.ts";
 import { enterHoldBuild as startHold, exitHoldBuild as stopHold, selectHoldPiece } from "./placeables/build-mode.ts";
 import { COURT, stationNear } from "./atlas.ts";
@@ -884,9 +884,9 @@ export const useGame = create<GameUI>((set, get) => ({
         get().openCraftGump();
         return;
       }
-      const note = usePlaced(w, id);
+      const note = applyPlaced(w, id);
       if (note) get().flash(fn === "bed" ? "You rest." : note);
-      else if (fn === "door") get().flash(piece.state.open === true ? "The door stands." : "The door shuts.");
+      else if (fn === "door") get().flash(isDoorOpen(piece) ? "The door stands." : "The door shuts.");
       else if (fn === "bed") get().flash("You rest.");
       set({ ctx: null, snap: snapshot() });
       return;

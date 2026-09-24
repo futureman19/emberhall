@@ -7,7 +7,7 @@ import { getWorld } from "./live.ts";
 import { effSkill } from "./player.ts";
 import { identifyHarvestNode } from "./resources/harvest.ts";
 import { discoverResourceNode, hasDiscoveredResourceNode } from "./resources/state.ts";
-import { objectFn } from "./placeables/functions.ts";
+import { isDoorOpen, objectFn } from "./placeables/functions.ts";
 import type { CtxTarget, CtxVerb } from "./types.ts";
 
 function harvestVerbLabel(tx: number, ty: number, nodeKind: "tree" | "rock"): string {
@@ -133,7 +133,7 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
     const piece = w.placedObjects.find((o) => o.id === t.id);
     if (piece) {
       const fn = objectFn(piece);
-      if (fn === "door") out.push({ verb: "use", label: piece.state.open === true ? "Shut the door" : "Open the door" });
+      if (fn === "door") out.push({ verb: "use", label: isDoorOpen(piece) ? "Shut the door" : "Open the door" });
       else if (fn === "storage") out.push({ verb: "house", label: "Open the chest" });
       else if (fn === "bed") out.push({ verb: "use", label: "Rest" });
       else if (fn === "sign") out.push({ verb: "use", label: "Read the sign" });

@@ -20,6 +20,12 @@ function occupiesCell(obj: PlacedObject, tx: number, ty: number) {
   return tx >= Math.floor(box.x0) && tx < Math.ceil(box.x1) && ty >= Math.floor(box.z0) && ty < Math.ceil(box.z1);
 }
 
+export function isDoorOpen(obj: PlacedObject) {
+  if (obj.state.open === true) return true;
+  const door = obj.state.door;
+  return Boolean(door && typeof door === "object" && (door as { open?: boolean }).open === true);
+}
+
 export function objectFn(obj: PlacedObject): PlaceableFunction | null {
   return defOf(obj)?.fn ?? null;
 }
@@ -31,7 +37,7 @@ export function pieceAt(world: World, tx: number, ty: number) {
 function objectBlocks(obj: PlacedObject) {
   const def = defOf(obj);
   if (!def) return false;
-  if (def.fn === "door") return obj.state.open !== true;
+  if (def.fn === "door") return !isDoorOpen(obj);
   if (def.id === "wall_doorway") return false;
   if (def.category === "roofs") return false;
   if (def.id.startsWith("floor_")) return false;
@@ -41,7 +47,7 @@ function objectBlocks(obj: PlacedObject) {
 }
 
 export function pieceBlocks(world: World, tx: number, ty: number) {
-  return world.placedObjects.some((o) => objectBlocks(o) && occupiesCell(o, tx, ty));
+  return (world.placedObjects ?? []).some((o) => objectBlocks(o) && occupiesCell(o, tx, ty));
 }
 
 export function stationsFromPieces(world: World): Array<"bench" | "forge" | "fire"> {
@@ -74,7 +80,7 @@ export function toggleDoor(world: World, id: string) {
   const found = owned(world, id);
   if ("err" in found) return found.err;
   if (objectFn(found.obj) !== "door") return "That is not a door.";
-  found.obj.state = { ...found.obj.state, open: found.obj.state.open !== true };
+  found.obj.state = { door: { open: !isDoorOpen(found.obj) } };
   return null;
 }
 
@@ -135,7 +141,7 @@ export function setSignText(world: World, id: string, text: string) {
   if (objectFn(found.obj) !== "sign") return "That is not a sign.";
   if (typeof text !== "string" || text.length < 1) return "The board wants a word.";
   if (text.length > SIGN_TEXT_MAX) return "That name is too long.";
-  found.obj.state = { ...found.obj.state, text };
+  found.obj.state = { sign: { text } };
   found.obj.name = text;
   return null;
 }
@@ -188,7 +194,13 @@ export function usePlaced(world: World, id: string) {
   if (fn === "door") return toggleDoor(world, id);
   if (fn === "bed") return restAtBed(world, id);
   if (fn === "sign") {
-    const text = typeof obj.state.text === "string" ? obj.state.text : obj.name;
+    const nested = obj.state.sign;
+    const text =
+      typeof obj.state.text === "string"
+        ? obj.state.text
+        : nested && typeof nested === "object" && typeof (nested as { text?: string }).text === "string"
+          ? (nested as { text: string }).text
+          : obj.name;
     return text ? String(text) : "The board is blank.";
   }
   return "No work here.";

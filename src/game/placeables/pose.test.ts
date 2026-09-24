@@ -31,5 +31,5 @@ test("valid ghosts are gold; invalid ghosts are rust", () => {
 test("the vale scene mounts kit meshes beside civic buildings", () => {
   const source = readFileSync(new URL("../../components/game/world-scene.tsx", import.meta.url), "utf8");
   assert.match(source, /<Placeables \/>/);
-  assert.match(source, /from \"\.\/placeable-meshes\"/);
+  assert.match(source, /from "\.\/placeable-meshes"/);
 });
