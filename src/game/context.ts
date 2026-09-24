@@ -7,6 +7,7 @@ import { getWorld } from "./live.ts";
 import { effSkill } from "./player.ts";
 import { identifyHarvestNode } from "./resources/harvest.ts";
 import { discoverResourceNode, hasDiscoveredResourceNode } from "./resources/state.ts";
+import { objectFn } from "./placeables/functions.ts";
 import type { CtxTarget, CtxVerb } from "./types.ts";
 
 function harvestVerbLabel(tx: number, ty: number, nodeKind: "tree" | "rock"): string {
@@ -129,6 +130,18 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
   }
   if (t.kind === "gate") out.push({ verb: "enter", label: "Enter" });
   if (t.kind === "building") {
+    const piece = w.placedObjects.find((o) => o.id === t.id);
+    if (piece) {
+      const fn = objectFn(piece);
+      if (fn === "door") out.push({ verb: "use", label: piece.state.open === true ? "Shut the door" : "Open the door" });
+      else if (fn === "storage") out.push({ verb: "house", label: "Open the chest" });
+      else if (fn === "bed") out.push({ verb: "use", label: "Rest" });
+      else if (fn === "sign") out.push({ verb: "use", label: "Read the sign" });
+      else if (fn === "hearth") out.push({ verb: "use", label: "Work the fire" });
+      else if (fn === "craftStation") out.push({ verb: "use", label: "Use the bench" });
+      out.push({ verb: "walk", label: "Walk" });
+      return out;
+    }
     if (t.label === "hall") out.push({ verb: "roster", label: "Read the roster" });
     if (t.label === "bank") out.push({ verb: "bank", label: "Open the box" });
     else if (t.label === "porch" || t.label === "hut" || t.label === "homestead") {

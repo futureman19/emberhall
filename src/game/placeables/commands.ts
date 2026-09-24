@@ -9,6 +9,7 @@ import {
 } from "./placement.ts";
 import type { Block } from "./types.ts";
 import type { World } from "../types.ts";
+import { bindPlacedFunction, unbindPlacedFunction } from "./functions.ts";
 
 const RECLAIM = 0.75;
 
@@ -60,6 +61,7 @@ export function placeObject(world: World, definitionId: string, tx: number, ty: 
     name: null,
     state: {},
   });
+  bindPlacedFunction(world, world.placedObjects[world.placedObjects.length - 1]!);
   return null;
 }
 
@@ -68,8 +70,10 @@ export function moveObject(world: World, id: string, tx: number, ty: number) {
   if ("err" in found) return found.err;
   const err = canPlace(world, found.obj.definitionId, tx, ty, found.obj.rotation, { ignoreId: id, skipCost: true });
   if (err) return err;
+  unbindPlacedFunction(world, found.obj);
   found.obj.tx = tx;
   found.obj.ty = ty;
+  bindPlacedFunction(world, found.obj);
   return null;
 }
 
@@ -98,6 +102,7 @@ export function reclaimObject(world: World, id: string) {
   const def = PLACEABLE_BY_ID[found.obj.definitionId];
   if (!def) return "No such piece.";
   creditCost(world, def, RECLAIM);
+  unbindPlacedFunction(world, found.obj);
   world.placedObjects = world.placedObjects.filter((o) => o.id !== id);
   for (const hold of world.structures) {
     hold.objectIds = hold.objectIds.filter((oid) => oid !== id);

@@ -20,6 +20,7 @@ import { countGenericCraftResource, debitGenericCraftResource, type GenericCraft
 import { refineResource } from "./refining.ts";
 import type { CraftAnimationKind } from "./crafting-animation.ts";
 import type { BuildingKind, ItemId, RareItem, ResourceStackKey, ResourceTag, SkillId, World } from "./types.ts";
+import { stationsFromPieces } from "./placeables/functions.ts";
 
 export { countTag, hasTag, itemTags, tagConsumeOrder } from "./catalog.ts";
 export {
@@ -201,6 +202,7 @@ export function stationsHere(world: World): Station[] {
     if (dist(world, b.tx, b.ty) <= craftReach(b.kind)) out.add(st);
   }
   if (litFireNear(world)) out.add("fire");
+  for (const st of stationsFromPieces(world)) out.add(st);
   return [...out];
 }
 

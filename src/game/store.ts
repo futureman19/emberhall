@@ -60,6 +60,7 @@ import { recruitPerson, setSpeed, tickWorld } from "./sim.ts";
 import { completeObjective, placeBuilding } from "./world.ts";
 import { HOUSE_RANGE, commandHouseItem, commandHouseTake, houseKindForDeed, isHouseKind, placeHouse } from "./house.ts";
 import { reclaimObject } from "./placeables/commands.ts";
+import { objectFn, usePlaced } from "./placeables/functions.ts";
 import { withHistory } from "./placeables/history.ts";
 import { enterHoldBuild as startHold, exitHoldBuild as stopHold, selectHoldPiece } from "./placeables/build-mode.ts";
 import { COURT, stationNear } from "./atlas.ts";
@@ -563,6 +564,12 @@ export const useGame = create<GameUI>((set, get) => ({
       set({ ctx: null });
       return;
     } else if (verb === "house") {
+      const piece = w.placedObjects.find((o) => o.id === t.id);
+      if (piece && objectFn(piece) === "storage") {
+        get().flash("The chest keeps what you stow.");
+        set({ ctx: null });
+        return;
+      }
       get().openHouse(t.id);
       return;
     } else if (verb === "use") get().useStation(t.id);
@@ -856,6 +863,29 @@ export const useGame = create<GameUI>((set, get) => ({
     const w = getWorld();
     if (w.player.ghost) {
       get().flash("A ghost cannot.");
+      return;
+    }
+    const piece = w.placedObjects.find((x) => x.id === id);
+    if (piece) {
+      const fn = objectFn(piece);
+      if (fn === "craftStation" || fn === "hearth") {
+        const p = you(w);
+        if (!p) return;
+        if (Math.hypot(p.x - piece.tx, p.z - piece.ty) > 4.6) {
+          const err = commandWalk(w, piece.tx, piece.ty);
+          if (err) get().flash(err);
+          else get().flash(fn === "hearth" ? "The fire is that way." : "The bench is that way.");
+          set({ ctx: null, snap: snapshot() });
+          return;
+        }
+        get().openCraftGump();
+        return;
+      }
+      const note = usePlaced(w, id);
+      if (note) get().flash(fn === "bed" ? "You rest." : note);
+      else if (fn === "door") get().flash(piece.state.open === true ? "The door stands." : "The door shuts.");
+      else if (fn === "bed") get().flash("You rest.");
+      set({ ctx: null, snap: snapshot() });
       return;
     }
     const b = w.buildings.find((x) => x.id === id);

@@ -1,4 +1,5 @@
 import { MAP, inBounds } from "./atlas.ts";
+import { pieceBlocks } from "./placeables/functions.ts";
 import type { Tile, TileKind, World } from "./types.ts";
 
 export type GridPoint = { x: number; y: number };
@@ -24,7 +25,8 @@ export function walkable(world: World, tx: number, ty: number) {
   if (!inBounds(tx, ty)) return false;
   const t = world.tiles[ty]?.[tx];
   if (!t) return false;
-  return kindWalk(t.kind);
+  if (!kindWalk(t.kind)) return false;
+  return !pieceBlocks(world, tx, ty);
 }
 
 export function nearestWalkable(world: World, tx: number, ty: number, r = 6) {

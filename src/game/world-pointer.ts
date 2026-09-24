@@ -6,6 +6,7 @@ import { CROP_META, plotAt } from "./farm.ts";
 import { getWorld } from "./live.ts";
 import { markBuildHold, takeBuildHold, useGame } from "./store.ts";
 import { confirmHold, getHoldBuild, hoverHold } from "./placeables/build-mode.ts";
+import { objectFn, pieceAt } from "./placeables/functions.ts";
 import type { CtxTarget } from "./types.ts";
 
 export function hitAt(tx: number, ty: number, sx: number, sy: number) {
@@ -40,6 +41,12 @@ export function hitAt(tx: number, ty: number, sx: number, sy: number) {
   const house = houseAt(w, tx, ty, 2.6);
   if (house) {
     g.openCtx(sx, sy, { kind: "building", id: house.id, tx: house.tx, ty: house.ty, label: house.kind });
+    return;
+  }
+  const piece = pieceAt(w, tx, ty);
+  if (piece) {
+    const fn = objectFn(piece);
+    g.openCtx(sx, sy, { kind: "building", id: piece.id, tx: piece.tx, ty: piece.ty, label: fn ?? piece.definitionId });
     return;
   }
   const b = buildingAt(w, tx, ty, 2.6);
