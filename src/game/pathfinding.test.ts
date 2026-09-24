@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { astar, astarToRange, lineWalkable } from "./pathfinding.ts";
+import { astar, astarToRange, lineWalkable, shortcutRemainingPath } from "./pathfinding.ts";
 import { createStubWorld } from "./world.ts";
 
 function block(world: ReturnType<typeof createStubWorld>, points: ReadonlyArray<readonly [number, number]>) {
@@ -37,6 +37,20 @@ test("astar smooths only across terrain with clear line of travel", () => {
     assert.equal(lineWalkable(world, from.x, from.y, waypoint.x, waypoint.y), true);
     from = waypoint;
   }
+});
+
+test("leftover grid corners drop once a later waypoint is in line", () => {
+  const world = createStubWorld();
+  block(world, [[12, 10]]);
+  const around = [
+    { tx: 12, ty: 11 },
+    { tx: 13, ty: 11 },
+    { tx: 14, ty: 10 },
+  ];
+  assert.equal(lineWalkable(world, 13, 11, 14, 10), true);
+  assert.deepEqual(shortcutRemainingPath(world, 13, 11, around), [{ tx: 14, ty: 10 }]);
+  assert.equal(lineWalkable(world, 10, 10, 14, 10), false);
+  assert.deepEqual(shortcutRemainingPath(world, 10, 10, around), around);
 });
 
 test("astarToRange chooses reachable footing beside an occupied target", () => {

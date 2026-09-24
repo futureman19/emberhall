@@ -179,6 +179,27 @@ test("an unrelated terrain revision does not invent a detour from rounded mid-wa
   assert.deepEqual(player.path, [{ tx: 13, ty: 12 }]);
 });
 
+test("after rounding an obstacle the walk goes straight to the click instead of a leftover corner", () => {
+  const { world, player } = playerWorld();
+  world.tiles[10]![12]!.kind = "wall";
+  assert.equal(commandWalk(world, 14, 10), null);
+  assert.ok(player.path.length > 1);
+  player.x = 13;
+  player.z = 11;
+  player.path = [
+    { tx: 12, ty: 11 },
+    { tx: 13, ty: 11 },
+    { tx: 14, ty: 10 },
+  ];
+  tickWorld(world, 0.1);
+  assert.deepEqual(player.path, [{ tx: 14, ty: 10 }]);
+  const before = { x: player.x, z: player.z };
+  tickWorld(world, 0.1);
+  const toDest = Math.hypot(14 - before.x, 10 - before.z);
+  assert.ok(Math.abs(player.x - before.x - (0.26 * (14 - before.x)) / toDest) < 1e-9);
+  assert.ok(Math.abs(player.z - before.z - (0.26 * (10 - before.z)) / toDest) < 1e-9);
+});
+
 test("hunting replans toward a moving target without striking out of range", () => {
   const { world, player } = playerWorld();
   const wolf = creature(20, 10);

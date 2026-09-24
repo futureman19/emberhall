@@ -3,7 +3,7 @@ import { SECONDS_PER_HOUR } from "./catalog.ts";
 import { tickEcology } from "./ecology.ts";
 import { tickCrops } from "./farm.ts";
 import { tickSaplings } from "./forestry.ts";
-import { astar, lineWalkable, nearestWalkable, tileOf } from "./pathfinding.ts";
+import { astar, lineWalkable, nearestWalkable, shortcutRemainingPath, tileOf } from "./pathfinding.ts";
 import { tickPiles } from "./piles.ts";
 import { tickCampfires } from "./campfire.ts";
 import { tickPets } from "./pets.ts";
@@ -82,6 +82,12 @@ function followPath(world: World, p: Person, dt: number): "idle" | "moving" | "s
       if (previous) motionWatches.delete(p);
       return "stuck";
     }
+  }
+
+  p.path = shortcutRemainingPath(world, p.x, p.z, p.path);
+  if (!p.path.length) {
+    motionWatches.delete(p);
+    return "idle";
   }
 
   // Spend one continuous movement budget across as many short waypoint

@@ -152,6 +152,22 @@ export function lineWalkable(world: World, ax: number, ay: number, bx: number, b
   return true;
 }
 
+/** Drop earlier waypoints once a later one is a clear line from here.
+ *  Grid A* leaves corners that stay surprising after the obstacle is behind you. */
+export function shortcutRemainingPath(
+  world: World,
+  ax: number,
+  ay: number,
+  path: ReadonlyArray<{ tx: number; ty: number }>,
+) {
+  if (path.length <= 1) return path.slice();
+  for (let i = path.length - 1; i >= 0; i--) {
+    const n = path[i]!;
+    if (lineWalkable(world, ax, ay, n.tx, n.ty)) return path.slice(i);
+  }
+  return path.slice();
+}
+
 function smoothPath(world: World, path: GridPoint[]) {
   if (path.length <= 2) return path;
   const smooth: GridPoint[] = [path[0]!];
