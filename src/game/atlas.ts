@@ -63,6 +63,16 @@ export function inGreybarrow(tx: number, ty: number) {
   return tx >= 106 && tx <= 114 && ty >= 432 && ty <= 447;
 }
 
+/** Cairn of Ash and Greybarrow — burnt stone and the tomb. */
+export function inRuins(tx: number, ty: number) {
+  return PLACES.some((p) => p.kind === "ruins" && Math.hypot(tx - p.tx, ty - p.ty) <= Math.max(p.radius * 1.35, 18));
+}
+
+/** Soft 0..1 mist on Greybarrow's surface. Zero at the hall. */
+export function cemeteryHaze(tx: number, ty: number) {
+  return placeAffinity(tx, ty, "greybarrow", 2.2);
+}
+
 export interface Station {
   id: string;
   name: string;

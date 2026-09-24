@@ -17,6 +17,7 @@
     "src/components/game/building-meshes.tsx",
     "src/components/game/campfire-geometry.ts",
     "src/components/game/campfire-meshes.tsx",
+    "src/components/game/cemetery-mist.tsx",
     "src/components/game/character-facing.ts",
     "src/components/game/civic-character.ts",
     "src/components/game/commons-kit.ts",
@@ -32146,6 +32147,138 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "renderer-helper:src/components/game/flora-eligibility.ts#ruinsExtraThorn",
+      "canonicalId": "src/components/game/flora-eligibility.ts#ruinsExtraThorn",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/flora-eligibility.ts:12"
+      ],
+      "sourceNames": [
+        "ruinsExtraThorn"
+      ],
+      "rendererLocations": [
+        "src/components/game/flora-eligibility.ts:12"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/flora-eligibility.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/flora-eligibility.ts:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:wooded",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/flora-eligibility.ts:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/flora-eligibility.ts:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/flora-eligibility.ts:12"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/flora-eligibility.ts#ruinsThornInstead",
+      "canonicalId": "src/components/game/flora-eligibility.ts#ruinsThornInstead",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/flora-eligibility.ts:7"
+      ],
+      "sourceNames": [
+        "ruinsThornInstead"
+      ],
+      "rendererLocations": [
+        "src/components/game/flora-eligibility.ts:7"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/flora-eligibility.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/flora-eligibility.ts:7"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:flora >= 0",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/flora-eligibility.ts:7"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/flora-eligibility.ts:7"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/flora-eligibility.ts:7"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "renderer-helper:src/components/game/ground-update-planner.ts#createGroundUpdatePlanner",
       "canonicalId": "src/components/game/ground-update-planner.ts#createGroundUpdatePlanner",
       "family": "renderer-helper",
@@ -37770,13 +37903,13 @@
       "canonicalId": "src/components/game/terrain.tsx#align",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/terrain.tsx:889"
+        "src/components/game/terrain.tsx:901"
       ],
       "sourceNames": [
         "align"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:889"
+        "src/components/game/terrain.tsx:901"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -40478,13 +40611,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#GraphicsProbe",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:71"
+        "src/components/game/world-scene.tsx:72"
       ],
       "sourceNames": [
         "GraphicsProbe"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:71"
+        "src/components/game/world-scene.tsx:72"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -40584,7 +40717,7 @@
       "canonicalId": "src/components/game/world-scene.tsx#groundY",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:106"
+        "src/components/game/world-scene.tsx:107"
       ],
       "sourceNames": [
         "groundY"
@@ -40592,6 +40725,7 @@
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:9",
         "src/components/game/campfire-meshes.tsx:5",
+        "src/components/game/cemetery-mist.tsx:5",
         "src/components/game/crop-meshes.tsx:3",
         "src/components/game/fauna-meshes.tsx:6",
         "src/components/game/gate-meshes.tsx:6",
@@ -40604,13 +40738,14 @@
         "src/components/game/placeable-meshes.tsx:3",
         "src/components/game/sky.tsx:7",
         "src/components/game/terrain.tsx:14",
-        "src/components/game/world-scene.tsx:106",
+        "src/components/game/world-scene.tsx:107",
         "src/components/game/world-scene.tsx:25"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
         "src/components/game/building-meshes.tsx",
         "src/components/game/campfire-meshes.tsx",
+        "src/components/game/cemetery-mist.tsx",
         "src/components/game/crop-meshes.tsx",
         "src/components/game/fauna-meshes.tsx",
         "src/components/game/gate-meshes.tsx",
@@ -40662,6 +40797,64 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/world-scene.tsx:103"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-name:src/components/game/cemetery-mist.tsx#cemetery-mist",
+      "canonicalId": "src/components/game/cemetery-mist.tsx#cemetery-mist",
+      "family": "renderer-name",
+      "catalogSources": [
+        "src/components/game/cemetery-mist.tsx:59"
+      ],
+      "sourceNames": [
+        "CemeteryMist"
+      ],
+      "rendererLocations": [
+        "src/components/game/cemetery-mist.tsx:59"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/cemetery-mist.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/cemetery-mist.tsx:59"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/cemetery-mist.tsx:59"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/cemetery-mist.tsx:59"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -41193,13 +41386,13 @@
       "canonicalId": "src/components/game/terrain.tsx#authored-field-rocks",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:854"
+        "src/components/game/terrain.tsx:866"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:854"
+        "src/components/game/terrain.tsx:866"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -41251,13 +41444,13 @@
       "canonicalId": "src/components/game/terrain.tsx#far-horizon-trees",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:1050"
+        "src/components/game/terrain.tsx:1062"
       ],
       "sourceNames": [
         "Horizon"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:1050"
+        "src/components/game/terrain.tsx:1062"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -41309,13 +41502,13 @@
       "canonicalId": "src/components/game/terrain.tsx#lanternwood-soft-canopies",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:812"
+        "src/components/game/terrain.tsx:824"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:812"
+        "src/components/game/terrain.tsx:824"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -41367,13 +41560,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#transient-action-fx",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1894"
+        "src/components/game/world-scene.tsx:1896"
       ],
       "sourceNames": [
         "WorldScene"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1894"
+        "src/components/game/world-scene.tsx:1896"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -42742,6 +42935,150 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/campfire-meshes.tsx:10"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/cemetery-mist.tsx#CemeteryMist",
+      "canonicalId": "src/components/game/cemetery-mist.tsx#CemeteryMist",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/cemetery-mist.tsx:14"
+      ],
+      "sourceNames": [
+        "CemeteryMist"
+      ],
+      "rendererLocations": [
+        "src/components/game/cemetery-mist.tsx:14"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/cemetery-mist.tsx"
+      ],
+      "jsxTags": [
+        "instancedMesh",
+        "meshBasicMaterial",
+        "sphereGeometry"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/cemetery-mist.tsx:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!m",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/cemetery-mist.tsx:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!m.visible",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/cemetery-mist.tsx:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:effectsReduced()",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/cemetery-mist.tsx:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/cemetery-mist.tsx:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/cemetery-mist.tsx:14"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/cemetery-mist.tsx#GRAVE_MIST",
+      "canonicalId": "src/components/game/cemetery-mist.tsx#GRAVE_MIST",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/cemetery-mist.tsx:11"
+      ],
+      "sourceNames": [
+        "GRAVE_MIST"
+      ],
+      "rendererLocations": [
+        "src/components/game/cemetery-mist.tsx:11"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/cemetery-mist.tsx"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/cemetery-mist.tsx:11"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/cemetery-mist.tsx:11"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/cemetery-mist.tsx:11"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -51062,13 +51399,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_FAR",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:885"
+        "src/components/game/terrain.tsx:897"
       ],
       "sourceNames": [
         "COL_FAR"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:885"
+        "src/components/game/terrain.tsx:897"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52248,13 +52585,13 @@
       "canonicalId": "src/components/game/terrain.tsx#Horizon",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:893"
+        "src/components/game/terrain.tsx:905"
       ],
       "sourceNames": [
         "Horizon"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:893"
+        "src/components/game/terrain.tsx:905"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52680,10 +53017,10 @@
           "applicability": "source contract; runtime unverified"
         },
         {
-          "id": "predicate:(wooded || open) && floraRollEligible(wooded, hash2(tx, ty, w.seed + (wooded ? 51 : 41)))\n          && !blocked(w, tx, ty) && Math.hypot(tx - px, ty - pz) < visibleHalf - 3",
+          "id": "predicate:(wooded || open) && !blocked(w, tx, ty) && Math.hypot(tx - px, ty - pz) < visibleHalf - 3\n          && (floraRollEligible(wooded, hash2(tx, ty, w.seed + (wooded ? 51 : 41))) || inRuins(tx, ty))",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/terrain.tsx:289"
+            "src/components/game/terrain.tsx:295"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -52708,6 +53045,14 @@
           "status": "inventoried",
           "evidence": [
             "src/components/game/terrain.tsx:283"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:climate === \"desert\" || inRuins(tx, ty)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/terrain.tsx:295"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -52900,6 +53245,22 @@
           "status": "inventoried",
           "evidence": [
             "src/components/game/terrain.tsx:283"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:inRuins(tx, ty)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/terrain.tsx:295"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:inRuins(tx, ty) && ruinsExtraThorn(wooded, roll) && shi < FLORA && shb",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/terrain.tsx:295"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -53491,13 +53852,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CastFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:302"
+        "src/components/game/world-scene.tsx:303"
       ],
       "sourceNames": [
         "CastFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:302"
+        "src/components/game/world-scene.tsx:303"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -53744,13 +54105,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#ChipBits",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1798"
+        "src/components/game/world-scene.tsx:1799"
       ],
       "sourceNames": [
         "ChipBits"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1798"
+        "src/components/game/world-scene.tsx:1799"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -53830,13 +54191,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CombatFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1664"
+        "src/components/game/world-scene.tsx:1665"
       ],
       "sourceNames": [
         "CombatFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1664"
+        "src/components/game/world-scene.tsx:1665"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -53946,13 +54307,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CompanionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1280"
+        "src/components/game/world-scene.tsx:1281"
       ],
       "sourceNames": [
         "CompanionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1280"
+        "src/components/game/world-scene.tsx:1281"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54127,13 +54488,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#ConstructionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1346"
+        "src/components/game/world-scene.tsx:1347"
       ],
       "sourceNames": [
         "ConstructionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1346"
+        "src/components/game/world-scene.tsx:1347"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54273,13 +54634,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CorpseFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1525"
+        "src/components/game/world-scene.tsx:1526"
       ],
       "sourceNames": [
         "CorpseFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1525"
+        "src/components/game/world-scene.tsx:1526"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54414,13 +54775,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CraftFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1142"
+        "src/components/game/world-scene.tsx:1143"
       ],
       "sourceNames": [
         "CraftFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1142"
+        "src/components/game/world-scene.tsx:1143"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54538,13 +54899,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#DeathFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1768"
+        "src/components/game/world-scene.tsx:1769"
       ],
       "sourceNames": [
         "DeathFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1768"
+        "src/components/game/world-scene.tsx:1769"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54624,13 +54985,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#ExtractionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1429"
+        "src/components/game/world-scene.tsx:1430"
       ],
       "sourceNames": [
         "ExtractionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1429"
+        "src/components/game/world-scene.tsx:1430"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54770,13 +55131,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#FizzleFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:897"
+        "src/components/game/world-scene.tsx:898"
       ],
       "sourceNames": [
         "FizzleFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:897"
+        "src/components/game/world-scene.tsx:898"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54875,13 +55236,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#GatheringFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1610"
+        "src/components/game/world-scene.tsx:1611"
       ],
       "sourceNames": [
         "GatheringFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1610"
+        "src/components/game/world-scene.tsx:1611"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55006,13 +55367,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#HealingFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:960"
+        "src/components/game/world-scene.tsx:961"
       ],
       "sourceNames": [
         "HealingFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:960"
+        "src/components/game/world-scene.tsx:961"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55103,13 +55464,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#MarkStones",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:248"
+        "src/components/game/world-scene.tsx:249"
       ],
       "sourceNames": [
         "MarkStones"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:248"
+        "src/components/game/world-scene.tsx:249"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55176,13 +55537,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#MoongateTravelFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:747"
+        "src/components/game/world-scene.tsx:748"
       ],
       "sourceNames": [
         "MoongateTravelFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:747"
+        "src/components/game/world-scene.tsx:748"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55331,13 +55692,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#NpcInteractionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1211"
+        "src/components/game/world-scene.tsx:1212"
       ],
       "sourceNames": [
         "NpcInteractionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1211"
+        "src/components/game/world-scene.tsx:1212"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55507,13 +55868,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#PersonalActionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:649"
+        "src/components/game/world-scene.tsx:650"
       ],
       "sourceNames": [
         "PersonalActionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:649"
+        "src/components/game/world-scene.tsx:650"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55753,13 +56114,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#PlacePointer",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:110"
+        "src/components/game/world-scene.tsx:111"
       ],
       "sourceNames": [
         "PlacePointer"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:110"
+        "src/components/game/world-scene.tsx:111"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55859,13 +56220,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#Rig",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:170"
+        "src/components/game/world-scene.tsx:171"
       ],
       "sourceNames": [
         "Rig"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:170"
+        "src/components/game/world-scene.tsx:171"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55975,13 +56336,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#SimClock",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:99"
+        "src/components/game/world-scene.tsx:100"
       ],
       "sourceNames": [
         "SimClock"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:99"
+        "src/components/game/world-scene.tsx:100"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -56033,13 +56394,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#TamingFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1022"
+        "src/components/game/world-scene.tsx:1023"
       ],
       "sourceNames": [
         "TamingFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1022"
+        "src/components/game/world-scene.tsx:1023"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -56194,13 +56555,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#TravelFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:816"
+        "src/components/game/world-scene.tsx:817"
       ],
       "sourceNames": [
         "TravelFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:816"
+        "src/components/game/world-scene.tsx:817"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -56298,13 +56659,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#WalkMarker",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:276"
+        "src/components/game/world-scene.tsx:277"
       ],
       "sourceNames": [
         "WalkMarker"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:276"
+        "src/components/game/world-scene.tsx:277"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -56384,13 +56745,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#WorldScene",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1842"
+        "src/components/game/world-scene.tsx:1843"
       ],
       "sourceNames": [
         "WorldScene"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1842"
+        "src/components/game/world-scene.tsx:1843"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -56401,6 +56762,7 @@
         "Campfires",
         "Canvas",
         "CastFxMesh",
+        "CemeteryMist",
         "ChipBits",
         "CombatFxMesh",
         "CompanionFxMesh",

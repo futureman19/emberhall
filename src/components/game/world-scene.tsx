@@ -48,6 +48,7 @@ import { Piles } from "./pile-meshes";
 import { Herbs } from "./herb-meshes";
 import { Campfires } from "./campfire-meshes";
 import { Horizon, Terrain } from "./terrain";
+import { CemeteryMist } from "./cemetery-mist";
 
 declare global {
   interface Window {
@@ -1875,6 +1876,7 @@ export function WorldScene() {
       <WeatherFx />
       <Horizon treeReduction={graphics.horizonTreeReduction} />
       <Terrain />
+      <CemeteryMist />
       <Buildings />
       <Placeables />
       <LanternwoodDressing />
