@@ -1,5 +1,7 @@
 /** Eye-height look: same click-to-walk, camera on the body. */
 
+import { cameraFollowAlpha } from "./camera-follow.ts";
+
 export const FIRST_PERSON_EYE = 1.55;
 export const FIRST_PERSON_LOOK = 12;
 export const FIRST_PERSON_FOV = 68;
@@ -68,4 +70,64 @@ export function firstPersonHotkey(key: string, inField: boolean): "toggle" | "ig
   if (inField) return "ignore";
   if (key === "v" || key === "V") return "toggle";
   return "ignore";
+}
+
+export const FIRST_PERSON_YAW_RATE = 10;
+export const FIRST_PERSON_HEIGHT_RATE = 8;
+export const FIRST_PERSON_SNAP_PACES = 8;
+
+export type FirstPersonViewState = {
+  x: number;
+  y: number;
+  z: number;
+  yaw: number;
+};
+
+export function shortestAngleDelta(from: number, to: number) {
+  const a = finite(from, 0);
+  const b = finite(to, 0);
+  let d = (b - a) % (Math.PI * 2);
+  if (d > Math.PI) d -= Math.PI * 2;
+  if (d < -Math.PI) d += Math.PI * 2;
+  return d;
+}
+
+/** Body-locked XZ, damped yaw/height. Snap on first look or a long jump. */
+export function smoothFirstPerson(
+  current: FirstPersonViewState | null,
+  args: { x: number; z: number; facing: number; groundY: number; storyY?: number },
+  dt: number,
+): FirstPersonViewState {
+  const pose = firstPersonPose(args);
+  const yawTarget = finite(args.facing, 0);
+  if (!current) {
+    return { x: pose.position.x, y: pose.position.y, z: pose.position.z, yaw: yawTarget };
+  }
+  const jump = Math.hypot(pose.position.x - current.x, pose.position.z - current.z);
+  if (jump > FIRST_PERSON_SNAP_PACES) {
+    return { x: pose.position.x, y: pose.position.y, z: pose.position.z, yaw: yawTarget };
+  }
+  return {
+    x: pose.position.x,
+    y: current.y + (pose.position.y - current.y) * cameraFollowAlpha(dt, FIRST_PERSON_HEIGHT_RATE),
+    z: pose.position.z,
+    yaw: current.yaw + shortestAngleDelta(current.yaw, yawTarget) * cameraFollowAlpha(dt, FIRST_PERSON_YAW_RATE),
+  };
+}
+
+export function firstPersonPoseFromView(state: FirstPersonViewState): FirstPersonPose {
+  const yaw = finite(state.yaw, 0);
+  const x = finite(state.x, 0);
+  const y = finite(state.y, FIRST_PERSON_EYE);
+  const z = finite(state.z, 0);
+  const sin = Math.sin(yaw);
+  const cos = Math.cos(yaw);
+  return {
+    position: { x, y, z },
+    lookAt: {
+      x: x + sin * FIRST_PERSON_LOOK,
+      y: y - 0.35,
+      z: z + cos * FIRST_PERSON_LOOK,
+    },
+  };
 }

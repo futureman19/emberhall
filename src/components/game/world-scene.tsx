@@ -9,8 +9,10 @@ import {
   FIRST_PERSON_NEAR,
   ORBIT_FOV,
   ORBIT_NEAR,
-  firstPersonPose,
+  firstPersonPoseFromView,
   orbitRestPose,
+  smoothFirstPerson,
+  type FirstPersonViewState,
 } from "@/game/first-person-view";
 import { SECONDS_PER_HOUR } from "@/game/catalog";
 import {
@@ -181,6 +183,7 @@ function Rig() {
   const followAnchor = useRef(new THREE.Vector3());
   const followReady = useRef(false);
   const wasFirstPerson = useRef(false);
+  const firstPersonView = useRef<FirstPersonViewState | null>(null);
   const { camera } = useThree();
   const phase = useGame((s) => s.phase);
   const placing = useGame((s) => Boolean(s.buildKind));
@@ -205,7 +208,7 @@ function Rig() {
       if (window.__emberCamera === probe) delete window.__emberCamera;
     };
   }, [camera]);
-  useFrame(() => {
+  useFrame((_, dt) => {
     const p = getWorld().people.find((x) => x.isPlayer);
     const c = controls.current;
     if (!p || !c || phase !== "playing") return;
@@ -214,7 +217,12 @@ function Rig() {
     const y = feetY + storyY;
     const persp = camera as THREE.PerspectiveCamera;
     if (firstPerson) {
-      const pose = firstPersonPose({ x: p.x, z: p.z, facing: p.facing, groundY: feetY, storyY });
+      firstPersonView.current = smoothFirstPerson(
+        firstPersonView.current,
+        { x: p.x, z: p.z, facing: p.facing, groundY: feetY, storyY },
+        dt,
+      );
+      const pose = firstPersonPoseFromView(firstPersonView.current);
       camera.position.set(pose.position.x, pose.position.y, pose.position.z);
       camera.up.set(0, 1, 0);
       camera.lookAt(pose.lookAt.x, pose.lookAt.y, pose.lookAt.z);
@@ -228,6 +236,7 @@ function Rig() {
       wasFirstPerson.current = true;
       return;
     }
+    firstPersonView.current = null;
     if (wasFirstPerson.current) {
       const rest = orbitRestPose(p.x, p.z, feetY, storyY);
       camera.position.set(rest.position.x, rest.position.y, rest.position.z);
@@ -270,7 +279,7 @@ function Rig() {
     <MapControls
       ref={controls as never}
       enabled={phase === "playing" && !firstPerson}
-      enableDamping
+      enableDamping={phase === "playing" && !firstPerson}
       dampingFactor={0.12}
       enablePan={phase === "playing" && !placing && !firstPerson}
       enableRotate={phase === "playing" && !placing && !firstPerson}
