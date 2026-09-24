@@ -388,6 +388,7 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
     rep: {},
     resourceNodes: createResourceNodeStateMap(),
     scars: {},
+    holes: {},
     seen: {},
     seenRev: 0,
     landRev: 1,

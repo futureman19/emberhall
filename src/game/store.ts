@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { commandTrack } from "./tracking.ts";
+import { commandDig, commandFill } from "./digging.ts";
 import { commandTravel } from "./gates.ts";
 import {
   commandCraft,
@@ -578,6 +579,8 @@ export const useGame = create<GameUI>((set, get) => ({
     } else if (verb === "use") get().useStation(t.id);
     else if (verb === "harvest") err = commandHarvest(w, t.tx, t.ty);
     else if (verb === "till") err = commandTill(w, t.tx, t.ty);
+    else if (verb === "dig") err = commandDig(w, t.tx, t.ty);
+    else if (verb === "fill") err = commandFill(w, t.tx, t.ty);
     else if (verb === "pick" && t.kind === "herb") err = commandPick(w, t.id);
     else if (verb === "sowCabbage") err = commandPlant(w, t.tx, t.ty, "cabbage");
     else if (verb === "sowWheat") err = commandPlant(w, t.tx, t.ty, "wheat");

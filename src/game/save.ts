@@ -46,6 +46,9 @@ const INTENT_KINDS = new Set([
   "harvest",
   "till",
   "forest",
+  "pick",
+  "dig",
+  "fill",
   "none",
 ]);
 const SPELL_IDS = new Set([
@@ -520,6 +523,20 @@ function isScars(value: unknown): boolean {
   );
 }
 
+function isHoles(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    Object.values(value).every((hole) => {
+      if (!isRecord(hole) || !isString(hole.kind) || !TILE_KINDS.has(hole.kind) || !isFiniteNumber(hole.h) || !isBoolean(hole.open)) {
+        return false;
+      }
+      if (hole.buried === undefined) return true;
+      if (!isRecord(hole.buried) || !isFiniteNumber(hole.buried.gold) || !isRecord(hole.buried.items)) return false;
+      return Object.values(hole.buried.items).every((n) => n === undefined || isFiniteNumber(n));
+    })
+  );
+}
+
 function isStoredTiles(value: unknown): boolean {
   return (
     value === null ||
@@ -565,6 +582,7 @@ function isCurrentSave(save: SaveRecord): boolean {
     Object.hasOwn(save, "resourceNodes") &&
     isResourceNodeState(save.resourceNodes, save.seed, save.hour) &&
     isScars(save.scars) &&
+    (save.holes === undefined || isHoles(save.holes)) &&
     isBooleanRecord(save.seen) &&
     isFiniteNumber(save.seenRev) &&
     isFiniteNumber(save.landRev) &&
@@ -698,6 +716,7 @@ export function loadSave(): World | null {
     if (!data.placedObjects) data.placedObjects = [];
     if (!data.structures) data.structures = [];
     if (!data.blueprints) data.blueprints = [];
+    if (!data.holes) data.holes = {};
     if (data.scars) {
       for (const [key, scar] of Object.entries(data.scars)) {
         const [x, y] = key.split(",").map(Number);
@@ -705,6 +724,14 @@ export function loadSave(): World | null {
         if (tile && scar.kind) tile.kind = scar.kind;
         if (tile && scar.h != null) tile.h = scar.h;
       }
+    }
+    for (const [key, hole] of Object.entries(data.holes)) {
+      if (!hole.open) continue;
+      const [x, y] = key.split(",").map(Number);
+      const tile = data.tiles[y!]?.[x!];
+      if (!tile) continue;
+      tile.kind = "pit";
+      tile.h = Math.max(0, hole.h - 1);
     }
     regrowResourceNodes(data);
     data.restored = true;

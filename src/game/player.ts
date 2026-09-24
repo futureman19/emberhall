@@ -2,6 +2,7 @@ import { EH, inGreybarrow } from "./atlas.ts";
 import { FAUNA_META, hasTag, hideGradeFor, ITEM_META, POISON_TICK_HOURS, tagConsumeOrder } from "./catalog.ts";
 import { provoke, strikePlayer } from "./ecology.ts";
 import { harvestNow, plantNow, tillNow } from "./farm.ts";
+import { digNow, fillNow } from "./digging.ts";
 import { GHOSTWOOD_LUMBERJACK } from "./resources/catalog.ts";
 import { isGhostwoodTree, isTimberId, plantTreeNow } from "./forestry.ts";
 import { burstDeath, castNow, maxMana, OFFENSIVE_SPELLS, offensiveRange, tickMana } from "./magery.ts";
@@ -1115,7 +1116,7 @@ export function tickPlayer(world: World, dt: number): string | null {
     intent.kind = "none";
     return null;
   }
-  if (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "fish" || intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till" || intent.kind === "forest" || intent.kind === "pick") {
+  if (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "fish" || intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till" || intent.kind === "forest" || intent.kind === "pick" || intent.kind === "dig" || intent.kind === "fill") {
     p.facing = Math.atan2(intent.tx - p.x, intent.ty - p.z);
     const prev = world.player.workT;
     world.player.workT += dt;
@@ -1130,6 +1131,14 @@ export function tickPlayer(world: World, dt: number): string | null {
     if (intent.kind === "till") {
       burstChips(world, intent.tx, intent.ty, "chop");
       return tillNow(world);
+    }
+    if (intent.kind === "dig") {
+      burstChips(world, intent.tx, intent.ty, "mine");
+      return digNow(world);
+    }
+    if (intent.kind === "fill") {
+      burstChips(world, intent.tx, intent.ty, "chop");
+      return fillNow(world);
     }
     if (intent.kind === "plant") {
       burstChips(world, intent.tx, intent.ty, "chop");

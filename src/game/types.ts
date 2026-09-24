@@ -297,7 +297,7 @@ export type BuildingKind =
   | "homestead";
 export type VocationId = "cook" | "armourer" | "trader" | "recruiter" | "guard";
 export type Notoriety = "innocent" | "criminal" | "murderer";
-export type IntentKind = "walk" | "chop" | "mine" | "fish" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "till" | "forest" | "pick" | "none";
+export type IntentKind = "walk" | "chop" | "mine" | "fish" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "till" | "forest" | "pick" | "dig" | "fill" | "none";
 export type Speed = 0 | 1 | 2 | 3;
 export type PanelId = "none" | "help" | "you" | "journal" | "vale" | "roster" | "build";
 export type WeatherKind = "clear" | "fair" | "cloudy" | "rain" | "storm";
@@ -403,6 +403,14 @@ export interface Creature {
   curseUntil?: number;
   /** Summon spell: bound to the caster's side until this hour, then crumbles. */
   boundUntil?: number;
+}
+
+/** A shovel-cut in the dirt. Rain fills it. Authored pits are not holes. */
+export interface Hole {
+  kind: TileKind;
+  h: number;
+  open: boolean;
+  buried?: { items: Partial<Record<ItemId, number>>; gold: number };
 }
 
 export interface GroundPile {
@@ -573,6 +581,7 @@ export interface World {
   rep: Record<string, number>;
   resourceNodes: ResourceNodeStateMap;
   scars: Record<string, { kind: TileKind; h?: number }>;
+  holes?: Record<string, Hole>;
   seen: Record<string, boolean>;
   seenRev: number;
   landRev: number;
@@ -647,6 +656,8 @@ export type CtxVerb =
   | "use"
   | "harvest"
   | "till"
+  | "dig"
+  | "fill"
   | "sowCabbage"
   | "sowWheat"
   | "sowGarlic"

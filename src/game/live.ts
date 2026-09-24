@@ -30,6 +30,7 @@ function withFauna(w: World) {
     for (const b of w.buildings) if (b.kind === "farm") seedFarmPlots(w, b.tx, b.ty);
   }
   if (w.scars == null) w.scars = {};
+  if (w.holes == null) w.holes = {};
   if (w.resourceNodes == null) w.resourceNodes = createResourceNodeStateMap();
   if (w.landRev == null) w.landRev = 1;
   if (w.tiles.length) seedFieldStones(w);

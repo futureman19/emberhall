@@ -89,6 +89,11 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
         out.push({ verb: "sowAcorn", label: plantVerbLabel(w.player.skills.forestry ?? 0) });
       }
     }
+      const dug = w.holes?.[`${t.tx},${t.ty}`];
+      if (dug?.open) out.push({ verb: "fill", label: "Fill the hole" });
+      else if (tile && (tile.kind === "grass" || tile.kind === "dirt" || tile.kind === "sand" || tile.kind === "snow" || tile.kind === "marsh")) {
+        out.push({ verb: "dig", label: dug?.buried ? "Unearth" : "Dig" });
+      }
     if (hasBook(w)) out.push({ verb: "teleport", label: "Teleport here" });
     out.push({ verb: "track", label: "Track" });
   }
