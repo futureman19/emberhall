@@ -530,6 +530,7 @@ function isHoles(value: unknown): boolean {
       if (!isRecord(hole) || !isString(hole.kind) || !TILE_KINDS.has(hole.kind) || !isFiniteNumber(hole.h) || !isBoolean(hole.open)) {
         return false;
       }
+      if (hole.cellar !== undefined && !isBoolean(hole.cellar)) return false;
       if (hole.buried === undefined) return true;
       if (!isRecord(hole.buried) || !isFiniteNumber(hole.buried.gold) || !isRecord(hole.buried.items)) return false;
       return Object.values(hole.buried.items).every((n) => n === undefined || isFiniteNumber(n));

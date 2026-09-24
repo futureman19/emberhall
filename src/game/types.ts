@@ -411,6 +411,8 @@ export interface Hole {
   h: number;
   open: boolean;
   buried?: { items: Partial<Record<ItemId, number>>; gold: number };
+  /** Lined by a standing house. Rain skips it until the shell is gone. */
+  cellar?: boolean;
 }
 
 export interface GroundPile {

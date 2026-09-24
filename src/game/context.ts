@@ -1,4 +1,5 @@
 import { CROP_META, plotAt } from "./farm.ts";
+import { houseOnTile } from "./house.ts";
 import { plantVerbLabel, isGhostwoodTree, isTimberId } from "./forestry.ts";
 import { GHOSTWOOD_LUMBERJACK, RESOURCE_CATALOG, timberGradeLabel } from "./resources/catalog.ts";
 import { hasBook } from "./magery.ts";
@@ -92,7 +93,9 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
       const dug = w.holes?.[`${t.tx},${t.ty}`];
       if (dug?.open) out.push({ verb: "fill", label: "Fill the hole" });
       else if (tile && (tile.kind === "grass" || tile.kind === "dirt" || tile.kind === "sand" || tile.kind === "snow" || tile.kind === "marsh")) {
-        out.push({ verb: "dig", label: dug?.buried ? "Unearth" : "Dig" });
+        const cover = houseOnTile(w, t.tx, t.ty);
+        const cellar = Boolean(cover && cover.ownerId === w.player.id);
+        out.push({ verb: "dig", label: dug?.buried ? "Unearth" : cellar ? "Dig a cellar" : "Dig" });
       }
     if (hasBook(w)) out.push({ verb: "teleport", label: "Teleport here" });
     out.push({ verb: "track", label: "Track" });

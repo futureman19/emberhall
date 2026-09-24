@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { verbsFor } from "./context.ts";
+import { HOUSE_DEEDS, isHouseKind, placeHouse } from "./house.ts";
 import { applyDig, applyFill, holeAt, washHoles } from "./digging.ts";
 import { setWorld } from "./live.ts";
 import { commandDrop, you } from "./player.ts";
@@ -127,3 +128,67 @@ test("digging - twelve open holes is enough", () => {
   }
   assert.match(applyDig(world, 130, 110), /enough|twelve|rain/i);
 });
+
+function raiseHut(world: World) {
+  world.buildings = world.buildings.filter((b) => !isHouseKind(b.kind));
+  for (let z = 94; z <= 106; z++) {
+    for (let x = 94; x <= 106; x++) {
+      const tile = world.tiles[z]?.[x];
+      if (tile) tile.kind = "grass";
+    }
+  }
+  const self = you(world)!;
+  self.x = 100;
+  self.z = 100;
+  world.player.pack[HOUSE_DEEDS.hut] = 1;
+  assert.equal(placeHouse(world, "hut", 100, 100), null);
+  return world.buildings.find((b) => b.kind === "hut")!;
+}
+
+test("digging - a cellar under your house keeps the rain out", () => {
+  const world = primed();
+  const hut = raiseHut(world);
+  const note = applyDig(world, hut.tx, hut.ty);
+  assert.match(note, /cellar/i);
+  const hole = holeAt(world, hut.tx, hut.ty);
+  assert.equal(hole?.open, true);
+  assert.equal(hole?.cellar, true);
+  assert.equal(world.tiles[hut.ty]![hut.tx]!.kind, "pit");
+  washHoles(world);
+  assert.equal(world.tiles[hut.ty]![hut.tx]!.kind, "pit");
+  assert.equal(holeAt(world, hut.tx, hut.ty)?.open, true);
+});
+
+test("digging - a stranger's house is not a cellar", () => {
+  const world = primed();
+  const hut = raiseHut(world);
+  hut.ownerId = "stranger";
+  assert.match(applyDig(world, hut.tx, hut.ty), /not yours/i);
+});
+
+test("digging - rain fills the cellar when the house is gone", () => {
+  const world = primed();
+  const hut = raiseHut(world);
+  applyDig(world, hut.tx, hut.ty);
+  world.buildings = world.buildings.filter((b) => b.id !== hut.id);
+  washHoles(world);
+  assert.equal(world.tiles[hut.ty]![hut.tx]!.kind, "grass");
+  assert.equal(holeAt(world, hut.tx, hut.ty), null);
+});
+
+test("digging - one cellar under a house", () => {
+  const world = primed();
+  const hut = raiseHut(world);
+  assert.match(applyDig(world, hut.tx, hut.ty), /cellar/i);
+  assert.match(applyDig(world, hut.tx + 1, hut.ty), /one cellar|enough/i);
+});
+
+test("digging - a cellar does not spend the twelve field holes", () => {
+  const world = primed();
+  const hut = raiseHut(world);
+  assert.match(applyDig(world, hut.tx, hut.ty), /cellar/i);
+  for (let i = 0; i < 12; i++) {
+    assert.match(applyDig(world, 110 + i, 110), /hole|dirt/i);
+  }
+});
+

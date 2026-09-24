@@ -51,6 +51,16 @@ export function houseAt(world: World, tx: number, ty: number, reach = 2.8) {
   return best;
 }
 
+/** The house whose footprint covers this tile, if any. */
+export function houseOnTile(world: World, tx: number, ty: number) {
+  for (const b of world.buildings) {
+    if (!isHouseKind(b.kind)) continue;
+    const box = buildingBox(b.kind, b.tx, b.ty);
+    if (tx + 0.5 > box.x0 && tx + 0.5 < box.x1 && ty + 0.5 > box.z0 && ty + 0.5 < box.z1) return b;
+  }
+  return null;
+}
+
 function houseHands(world: World, building: Building) {
   if (world.player.ghost) return "A ghost cannot.";
   const p = you(world);

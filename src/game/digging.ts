@@ -1,6 +1,6 @@
 import { ITEM_META } from "./catalog.ts";
 import { plotAt } from "./farm.ts";
-import { houseAt } from "./house.ts";
+import { houseOnTile } from "./house.ts";
 import { buildingBox } from "./building-size.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { pieceBlocks } from "./placeables/functions.ts";
@@ -32,7 +32,18 @@ export function holeAt(world: World, tx: number, ty: number): Hole | null {
 }
 
 function openCount(world: World) {
-  return Object.values(ensureHoles(world)).filter((h) => h.open).length;
+  return Object.values(ensureHoles(world)).filter((h) => h.open && !h.cellar).length;
+}
+
+function cellarsUnder(world: World, house: NonNullable<ReturnType<typeof houseOnTile>>) {
+  let n = 0;
+  for (const [key, hole] of Object.entries(ensureHoles(world))) {
+    if (!hole.cellar) continue;
+    const [tx, ty] = key.split(",").map(Number) as [number, number];
+    const cover = houseOnTile(world, tx, ty);
+    if (cover && cover.id === house.id) n += 1;
+  }
+  return n;
 }
 
 function inReach(world: World, tx: number, ty: number) {
@@ -60,9 +71,11 @@ function heldPick(world: World) {
 function occupied(world: World, tx: number, ty: number): string | null {
   if (plotAt(world, tx, ty)) return "That dirt is a bed.";
   if (world.saplings?.some((s) => s.tx === tx && s.ty === ty)) return "A sapling grows.";
-  if (houseAt(world, tx, ty, 0.6)) return "Not under a house.";
+  const house = houseOnTile(world, tx, ty);
+  if (house && house.ownerId !== world.player.id) return "That house is not yours.";
   if (pieceBlocks(world, tx, ty)) return "Something stands there.";
   for (const b of world.buildings) {
+    if (house && b.id === house.id) continue;
     const box = buildingBox(b.kind, b.tx, b.ty);
     if (tx + 0.5 > box.x0 && tx + 0.5 < box.x1 && ty + 0.5 > box.z0 && ty + 0.5 < box.z1) {
       return "Not this stone.";
@@ -128,6 +141,7 @@ export function applyDig(world: World, tx: number, ty: number) {
     return gain ? `${note} ${gain}` : note;
   }
   if (existing?.open) return "The hole is already open.";
+  const house = houseOnTile(world, tx, ty);
   const busy = occupied(world, tx, ty);
   if (busy) return busy;
   if (tile.kind === "water") return "The water will not take a hole.";
@@ -138,18 +152,20 @@ export function applyDig(world: World, tx: number, ty: number) {
   if (tile.kind === "rock") return "Mine the stone. Do not shovel it.";
   if (tile.kind === "tree") return "The tree stands.";
   if (!DIG_KINDS.has(tile.kind)) return "Not this dirt.";
-  if (openCount(world) >= HOLE_CAP) return "Twelve holes is enough. Wait for rain.";
+  const cellar = Boolean(house && house.ownerId === world.player.id);
+  if (cellar && cellarsUnder(world, house!) >= 1) return "One cellar is enough.";
+  if (!cellar && openCount(world) >= HOLE_CAP) return "Twelve holes is enough. Wait for rain.";
   const kind = tile.kind;
   const h = tile.h;
   tile.kind = "pit";
   tile.h = Math.max(0, h - 1);
   world.scars[keyOf(tx, ty)] = { kind: "pit", h: tile.h };
-  ensureHoles(world)[keyOf(tx, ty)] = { kind, h, open: true };
+  ensureHoles(world)[keyOf(tx, ty)] = { kind, h, open: true, cellar: cellar || undefined };
   world.landRev += 1;
   emitExtractionFx(world, "mining", true, tx, ty);
   playSfx("mine", 0.5);
   const gain = tryGain(world, "mining", true, true);
-  const note = "A hole in the dirt.";
+  const note = cellar ? "A cellar under the house." : "A hole in the dirt.";
   return gain ? `${note} ${gain}` : note;
 }
 
@@ -180,6 +196,7 @@ export function washHoles(world: World) {
   for (const key of keys) {
     const hole = holes[key]!;
     const [tx, ty] = key.split(",").map(Number) as [number, number];
+    if (houseOnTile(world, tx, ty)) continue;
     if (hole.open) restoreTile(world, tx, ty, hole);
     if (hole.buried) {
       const items = hole.buried.items;
