@@ -41,6 +41,7 @@
     "src/components/game/gate-meshes.tsx",
     "src/components/game/ground-update-planner.ts",
     "src/components/game/herb-meshes.tsx",
+    "src/components/game/hold-panel.tsx",
     "src/components/game/horizon-update-key.ts",
     "src/components/game/hospitality-kit.ts",
     "src/components/game/house-gump.tsx",
@@ -599,6 +600,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -614,6 +616,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -952,6 +955,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -967,6 +971,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -1118,6 +1123,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -1133,6 +1139,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -1226,6 +1233,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -1241,6 +1249,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -1561,6 +1570,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -1576,6 +1586,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -1881,6 +1892,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -1896,6 +1908,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -2227,6 +2240,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -2242,6 +2256,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -2335,6 +2350,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -2350,6 +2366,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -2515,6 +2532,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -2530,6 +2548,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -2623,6 +2642,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -2638,6 +2658,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -2731,6 +2752,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -2746,6 +2768,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -2839,6 +2862,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -2854,6 +2878,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -3179,6 +3204,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -3194,6 +3220,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -3439,6 +3466,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -3454,6 +3482,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -3605,6 +3634,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -3620,6 +3650,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -3713,6 +3744,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -3728,6 +3760,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -3821,6 +3854,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -3836,6 +3870,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -3929,6 +3964,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -3944,6 +3980,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -4037,6 +4074,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -4052,6 +4090,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -4380,6 +4419,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -4395,6 +4435,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -4488,6 +4529,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -4503,6 +4545,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -4596,6 +4639,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -4611,6 +4655,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -4704,6 +4749,7 @@
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
         "src/components/game/commons-kit.ts:1",
+        "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
@@ -4719,6 +4765,7 @@
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
         "src/components/game/commons-kit.ts",
+        "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
         "src/components/game/house-gump.tsx",
         "src/components/game/hud.tsx",
@@ -32210,6 +32257,72 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "renderer-helper:src/components/game/hold-panel.tsx#costLine",
+      "canonicalId": "src/components/game/hold-panel.tsx#costLine",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/hold-panel.tsx:21"
+      ],
+      "sourceNames": [
+        "costLine"
+      ],
+      "rendererLocations": [
+        "src/components/game/hold-panel.tsx:21"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/hold-panel.tsx"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:21"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!def",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:21"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:21"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/hold-panel.tsx:21"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "renderer-helper:src/components/game/horizon-update-key.ts#sameHorizonUpdateKey",
       "canonicalId": "src/components/game/horizon-update-key.ts#sameHorizonUpdateKey",
       "family": "renderer-helper",
@@ -32552,13 +32665,13 @@
       "canonicalId": "src/components/game/hud.tsx#clockLabel",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/hud.tsx:48"
+        "src/components/game/hud.tsx:49"
       ],
       "sourceNames": [
         "clockLabel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:48"
+        "src/components/game/hud.tsx:49"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -32610,13 +32723,13 @@
       "canonicalId": "src/components/game/hud.tsx#startHall",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/hud.tsx:131"
+        "src/components/game/hud.tsx:132"
       ],
       "sourceNames": [
         "startHall"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:131"
+        "src/components/game/hud.tsx:132"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45027,6 +45140,171 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/herb-meshes.tsx:89"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/hold-panel.tsx#HoldPanel",
+      "canonicalId": "src/components/game/hold-panel.tsx#HoldPanel",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/hold-panel.tsx:27"
+      ],
+      "sourceNames": [
+        "HoldPanel"
+      ],
+      "rendererLocations": [
+        "src/components/game/hold-panel.tsx:27"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/hold-panel.tsx"
+      ],
+      "jsxTags": [
+        "button",
+        "div",
+        "h2",
+        "h3",
+        "input",
+        "label",
+        "li",
+        "p",
+        "span",
+        "ul"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!q",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:category !== \"all\" && p.category !== category",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:category === \"all\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:category === c",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:hold.definitionId",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:hold.definitionId === p.id",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:hold.reason",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:kind === \"dormitory\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:need",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:placed.length > 0",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:stood",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:tillArmed",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/hold-panel.tsx:27"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -161942,7 +162220,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=bank",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -161988,7 +162266,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=board",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162034,7 +162312,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=cottage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162080,7 +162358,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=dormitory",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162126,7 +162404,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=farm",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162172,7 +162450,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=forge",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162218,7 +162496,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=gatehouse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162264,7 +162542,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=hall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162310,7 +162588,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=homestead",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162356,7 +162634,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=hut",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162402,7 +162680,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=keep",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162448,7 +162726,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=kitchen",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162494,7 +162772,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=market",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162540,7 +162818,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=notice",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162586,7 +162864,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=porch",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162632,7 +162910,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=rampart",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162678,7 +162956,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=rampartV",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162724,7 +163002,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=shop",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162770,7 +163048,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=tavern",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162816,7 +163094,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=tower",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162862,7 +163140,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=townhome",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162908,7 +163186,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=townhouse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162954,7 +163232,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=yard",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -163000,7 +163278,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openBook=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:87"
+        "src/game/store.ts:89"
       ],
       "sourceNames": [
         "GameUI.openBook"
@@ -163046,7 +163324,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openBook=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:87"
+        "src/game/store.ts:89"
       ],
       "sourceNames": [
         "GameUI.openBook"
@@ -163092,7 +163370,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openCraft=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:88"
+        "src/game/store.ts:90"
       ],
       "sourceNames": [
         "GameUI.openCraft"
@@ -163138,7 +163416,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openCraft=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:88"
+        "src/game/store.ts:90"
       ],
       "sourceNames": [
         "GameUI.openCraft"
@@ -163184,7 +163462,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openPets=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:91"
+        "src/game/store.ts:93"
       ],
       "sourceNames": [
         "GameUI.openPets"
@@ -163230,7 +163508,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openPets=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:91"
+        "src/game/store.ts:93"
       ],
       "sourceNames": [
         "GameUI.openPets"
@@ -163276,7 +163554,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openSettings=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:90"
+        "src/game/store.ts:92"
       ],
       "sourceNames": [
         "GameUI.openSettings"
@@ -163322,7 +163600,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openSettings=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:90"
+        "src/game/store.ts:92"
       ],
       "sourceNames": [
         "GameUI.openSettings"
@@ -163368,7 +163646,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openVault=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:91"
       ],
       "sourceNames": [
         "GameUI.openVault"
@@ -163414,7 +163692,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openVault=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:91"
       ],
       "sourceNames": [
         "GameUI.openVault"
@@ -163460,7 +163738,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=build",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:81"
+        "src/game/store.ts:83"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -163506,7 +163784,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=help",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:81"
+        "src/game/store.ts:83"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -163552,7 +163830,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=journal",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:81"
+        "src/game/store.ts:83"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -163598,7 +163876,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=none",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:81"
+        "src/game/store.ts:83"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -163644,7 +163922,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=roster",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:81"
+        "src/game/store.ts:83"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -163690,7 +163968,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=vale",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:81"
+        "src/game/store.ts:83"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -163736,7 +164014,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=you",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:81"
+        "src/game/store.ts:83"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -163782,7 +164060,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=intro",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:78"
+        "src/game/store.ts:80"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -163828,7 +164106,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=looking",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:78"
+        "src/game/store.ts:80"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -163874,7 +164152,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=playing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:78"
+        "src/game/store.ts:80"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -163920,7 +164198,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=raising",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:78"
+        "src/game/store.ts:80"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -163966,7 +164244,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=title",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:78"
+        "src/game/store.ts:80"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -164012,7 +164290,7 @@
       "canonicalId": "src/game/store.ts#GameUI.tillArmed=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:102"
+        "src/game/store.ts:104"
       ],
       "sourceNames": [
         "GameUI.tillArmed"
@@ -164058,7 +164336,7 @@
       "canonicalId": "src/game/store.ts#GameUI.tillArmed=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:102"
+        "src/game/store.ts:104"
       ],
       "sourceNames": [
         "GameUI.tillArmed"
@@ -187025,13 +187303,13 @@
       "canonicalId": "src/components/game/hud.tsx#BottomDock",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:435"
+        "src/components/game/hud.tsx:436"
       ],
       "sourceNames": [
         "BottomDock"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:435"
+        "src/components/game/hud.tsx:436"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -187090,13 +187368,13 @@
       "canonicalId": "src/components/game/hud.tsx#BuildRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:820"
+        "src/components/game/hud.tsx:768"
       ],
       "sourceNames": [
         "BuildRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:820"
+        "src/components/game/hud.tsx:768"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -187168,13 +187446,13 @@
       "canonicalId": "src/components/game/hud.tsx#GhostBanner",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:769"
+        "src/components/game/hud.tsx:717"
       ],
       "sourceNames": [
         "GhostBanner"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:769"
+        "src/components/game/hud.tsx:717"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -187262,13 +187540,13 @@
       "canonicalId": "src/components/game/hud.tsx#GuideTabs",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:562"
+        "src/components/game/hud.tsx:563"
       ],
       "sourceNames": [
         "GuideTabs"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:562"
+        "src/components/game/hud.tsx:563"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -187350,13 +187628,13 @@
       "canonicalId": "src/components/game/hud.tsx#HelpPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:608"
+        "src/components/game/hud.tsx:609"
       ],
       "sourceNames": [
         "HelpPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:608"
+        "src/components/game/hud.tsx:609"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -187419,107 +187697,17 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
-      "id": "ui:src/components/game/hud.tsx#HoldPanel",
-      "canonicalId": "src/components/game/hud.tsx#HoldPanel",
-      "family": "ui",
-      "catalogSources": [
-        "src/components/game/hud.tsx:700"
-      ],
-      "sourceNames": [
-        "HoldPanel"
-      ],
-      "rendererLocations": [
-        "src/components/game/hud.tsx:700"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/hud.tsx"
-      ],
-      "jsxTags": [
-        "button",
-        "div",
-        "h2",
-        "li",
-        "p",
-        "span",
-        "ul"
-      ],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:519"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:kind === \"dormitory\"",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:519"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:stood",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:519"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:tillArmed",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:519"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:519"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/hud.tsx:519"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
       "id": "ui:src/components/game/hud.tsx#Hud",
       "canonicalId": "src/components/game/hud.tsx#Hud",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:54"
+        "src/components/game/hud.tsx:55"
       ],
       "sourceNames": [
         "Hud"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:54"
+        "src/components/game/hud.tsx:55"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -187618,13 +187806,13 @@
       "canonicalId": "src/components/game/hud.tsx#JournalPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:657"
+        "src/components/game/hud.tsx:658"
       ],
       "sourceNames": [
         "JournalPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:657"
+        "src/components/game/hud.tsx:658"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -187681,13 +187869,13 @@
       "canonicalId": "src/components/game/hud.tsx#MusicToggle",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:498"
+        "src/components/game/hud.tsx:499"
       ],
       "sourceNames": [
         "MusicToggle"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:498"
+        "src/components/game/hud.tsx:499"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -187750,13 +187938,13 @@
       "canonicalId": "src/components/game/hud.tsx#PlayingChrome",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:72"
+        "src/components/game/hud.tsx:73"
       ],
       "sourceNames": [
         "PlayingChrome"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:72"
+        "src/components/game/hud.tsx:73"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -187846,13 +188034,13 @@
       "canonicalId": "src/components/game/hud.tsx#RaisingOverlay",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:299"
+        "src/components/game/hud.tsx:300"
       ],
       "sourceNames": [
         "RaisingOverlay"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:299"
+        "src/components/game/hud.tsx:300"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -187908,13 +188096,13 @@
       "canonicalId": "src/components/game/hud.tsx#RosterPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:673"
+        "src/components/game/hud.tsx:674"
       ],
       "sourceNames": [
         "RosterPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:673"
+        "src/components/game/hud.tsx:674"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -187997,13 +188185,13 @@
       "canonicalId": "src/components/game/hud.tsx#SaveFailureBanner",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:118"
+        "src/components/game/hud.tsx:119"
       ],
       "sourceNames": [
         "SaveFailureBanner"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:118"
+        "src/components/game/hud.tsx:119"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -188067,13 +188255,13 @@
       "canonicalId": "src/components/game/hud.tsx#SelectedCard",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:753"
+        "src/components/game/hud.tsx:701"
       ],
       "sourceNames": [
         "SelectedCard"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:753"
+        "src/components/game/hud.tsx:701"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -188152,13 +188340,13 @@
       "canonicalId": "src/components/game/hud.tsx#SettingsButton",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:416"
+        "src/components/game/hud.tsx:417"
       ],
       "sourceNames": [
         "SettingsButton"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:416"
+        "src/components/game/hud.tsx:417"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -188213,13 +188401,13 @@
       "canonicalId": "src/components/game/hud.tsx#SfxToggle",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:514"
+        "src/components/game/hud.tsx:515"
       ],
       "sourceNames": [
         "SfxToggle"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:514"
+        "src/components/game/hud.tsx:515"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -188282,13 +188470,13 @@
       "canonicalId": "src/components/game/hud.tsx#SidePanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:530"
+        "src/components/game/hud.tsx:531"
       ],
       "sourceNames": [
         "SidePanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:530"
+        "src/components/game/hud.tsx:531"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -188356,13 +188544,13 @@
       "canonicalId": "src/components/game/hud.tsx#SoundToggles",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:489"
+        "src/components/game/hud.tsx:490"
       ],
       "sourceNames": [
         "SoundToggles"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:489"
+        "src/components/game/hud.tsx:490"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -188418,13 +188606,13 @@
       "canonicalId": "src/components/game/hud.tsx#TitleOverlay",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:140"
+        "src/components/game/hud.tsx:141"
       ],
       "sourceNames": [
         "TitleOverlay"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:140"
+        "src/components/game/hud.tsx:141"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -188578,13 +188766,13 @@
       "canonicalId": "src/components/game/hud.tsx#Toast",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:807"
+        "src/components/game/hud.tsx:755"
       ],
       "sourceNames": [
         "Toast"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:807"
+        "src/components/game/hud.tsx:755"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -188654,13 +188842,13 @@
       "canonicalId": "src/components/game/hud.tsx#TopBar",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:321"
+        "src/components/game/hud.tsx:322"
       ],
       "sourceNames": [
         "TopBar"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:321"
+        "src/components/game/hud.tsx:322"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -188762,13 +188950,13 @@
       "canonicalId": "src/components/game/hud.tsx#TravelRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:846"
+        "src/components/game/hud.tsx:794"
       ],
       "sourceNames": [
         "TravelRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:846"
+        "src/components/game/hud.tsx:794"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -204821,7 +205009,7 @@
       "canonicalId": "intro",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:75"
+        "src/game/store.ts:77"
       ],
       "sourceNames": [
         "Phase"
@@ -204867,7 +205055,7 @@
       "canonicalId": "looking",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:75"
+        "src/game/store.ts:77"
       ],
       "sourceNames": [
         "Phase"
@@ -204913,7 +205101,7 @@
       "canonicalId": "playing",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:75"
+        "src/game/store.ts:77"
       ],
       "sourceNames": [
         "Phase"
@@ -204959,7 +205147,7 @@
       "canonicalId": "raising",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:75"
+        "src/game/store.ts:77"
       ],
       "sourceNames": [
         "Phase"
@@ -205005,7 +205193,7 @@
       "canonicalId": "title",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:75"
+        "src/game/store.ts:77"
       ],
       "sourceNames": [
         "Phase"
@@ -207863,7 +208051,7 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:44"
+        "src/components/game/hud.tsx:45"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -207913,7 +208101,7 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:44"
+        "src/components/game/hud.tsx:45"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -207963,7 +208151,7 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:44"
+        "src/components/game/hud.tsx:45"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -208013,7 +208201,7 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:44"
+        "src/components/game/hud.tsx:45"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -208063,7 +208251,7 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:44"
+        "src/components/game/hud.tsx:45"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -208113,7 +208301,7 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:44"
+        "src/components/game/hud.tsx:45"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -208163,7 +208351,7 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:44"
+        "src/components/game/hud.tsx:45"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -210291,7 +210479,7 @@
         "Speed"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:44"
+        "src/components/game/hud.tsx:45"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -210341,7 +210529,7 @@
         "Speed"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:44"
+        "src/components/game/hud.tsx:45"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -210391,7 +210579,7 @@
         "Speed"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:44"
+        "src/components/game/hud.tsx:45"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -210441,7 +210629,7 @@
         "Speed"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:44"
+        "src/components/game/hud.tsx:45"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [

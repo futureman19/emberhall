@@ -30,12 +30,13 @@ import { ActionsPanel } from "@/components/game/actions-panel";
 import { usePanelA11y } from "@/components/game/use-panel-a11y";
 import { insideLabel } from "@/components/game/building-meshes";
 import { PLACES, regionAt } from "@/game/atlas";
-import { BUILD_ORDER, BUILDING_META, CLASS_META } from "@/game/catalog";
+import { BUILDING_META, CLASS_META } from "@/game/catalog";
 import { phaseName } from "@/game/gates";
 import { getWorld } from "@/game/live";
 import { maxMana } from "@/game/magery";
 import { nearestHealer } from "@/game/player";
 import { hasSave as hallHasSave } from "@/game/save";
+import { HoldPanel } from "@/components/game/hold-panel";
 import { IntroCinematic } from "@/components/game/intro-cinematic";
 import { LookGump } from "@/components/game/look-gump";
 import { startValeMusic, musicMuted, toggleValeMusic } from "@/game/vale-music";
@@ -529,7 +530,7 @@ function SfxToggle() {
 
 function SidePanel() {
   const panel = useGame((s) => s.panel);
-  const closePanel = useCallback(() => useGame.setState({ panel: "none" }), []);
+  const closePanel = useCallback(() => useGame.getState().setPanel("none"), []);
   const region = usePanelA11y<HTMLDivElement>(closePanel, panel !== "none");
   if (panel === "none") return null;
   const LABELS: Partial<Record<PanelId, string>> = {
@@ -692,59 +693,6 @@ function RosterPanel() {
               </button>
             </li>
           ))}
-      </ul>
-    </div>
-  );
-}
-
-function HoldPanel() {
-  const gold = useGame((s) => s.snap.gold);
-  const buildings = useGame((s) => s.snap.buildings);
-  const armed = useGame((s) => s.buildKind);
-  const tillArmed = useGame((s) => s.tillArmed);
-  const armBuild = useGame((s) => s.armBuild);
-  const armTill = useGame((s) => s.armTill);
-  return (
-    <div>
-      <h2 className="font-display text-sm text-fg">The hold</h2>
-      <p className="mt-1 text-pretty text-xs leading-relaxed text-muted">
-        Timber cubes, red cloth, gold lintels. Pick a building, then drag the shade on the dirt. Gold if it sits, rust
-        if the ground is taken. Lift to raise. One of each. The forge is the fire for ore. The farm is eight beds and a
-        fence. Till a plot on any grass — the hoe cuts a framed bed. Sow seed. Wait. Take.
-      </p>
-      <button
-        type="button"
-        onClick={() => armTill(!tillArmed)}
-        className={cn(
-          "mt-3 flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border px-3 text-left",
-          tillArmed ? "border-border-strong bg-surface-2 text-fg" : "border-border bg-surface-2 text-fg",
-        )}
-      >
-        <span className="text-sm">Till a plot</span>
-        <span className="text-xs text-muted">{tillArmed ? "Armed" : "Hoe"}</span>
-      </button>
-      <ul className="mt-3 space-y-1">
-        {BUILD_ORDER.map((kind) => {
-          const cost = kind === "dormitory" ? 40 : 28;
-          const stood = buildings.some((b) => b.kind === kind);
-          return (
-            <li key={kind}>
-              <button
-                type="button"
-                disabled={stood || gold < cost}
-                onClick={() => armBuild(kind)}
-                className={cn(
-                  "flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border px-3 text-left",
-                  stood ? "border-border bg-surface text-muted" : "border-border bg-surface-2 text-fg",
-                  armed === kind && "border-border-strong",
-                )}
-              >
-                <span className="text-sm">{BUILDING_META[kind].label}</span>
-                <span className="text-xs text-muted">{stood ? "Stands" : `${cost}g`}</span>
-              </button>
-            </li>
-          );
-        })}
       </ul>
     </div>
   );

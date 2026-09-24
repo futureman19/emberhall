@@ -59,6 +59,8 @@ import { clearSave, hasSave, loadSave, writeSave } from "./save.ts";
 import { recruitPerson, setSpeed, tickWorld } from "./sim.ts";
 import { completeObjective, placeBuilding } from "./world.ts";
 import { HOUSE_RANGE, commandHouseItem, commandHouseTake, houseKindForDeed, isHouseKind, placeHouse } from "./house.ts";
+import { reclaimObject } from "./placeables/commands.ts";
+import { withHistory } from "./placeables/history.ts";
 import { enterHoldBuild as startHold, exitHoldBuild as stopHold, selectHoldPiece } from "./placeables/build-mode.ts";
 import { COURT, stationNear } from "./atlas.ts";
 import type { BuildingKind, CtxTarget, CtxVerb, ItemId, PanelId, ResourceStackKey, Speed, SpellId, Snapshot, WearSlot } from "./types.ts";
@@ -186,6 +188,7 @@ interface GameUI {
   enterHold: () => void;
   exitHold: () => void;
   armHoldPiece: (id: string | null) => void;
+  reclaimHold: (id: string) => void;
   noteHold: () => void;
   armTill: (on: boolean) => void;
   hoverTill: (tx: number, ty: number) => void;
@@ -416,8 +419,17 @@ export const useGame = create<GameUI>((set, get) => ({
     }
   },
   setPanel: (p) => {
-    const next = p === get().panel ? "none" : p;
-    set({ panel: next, ctx: null, openBook: next === "none" ? get().openBook : false, openCraft: next === "none" ? get().openCraft : false });
+    const cur = get().panel;
+    const next = p === cur ? "none" : p;
+    if (cur === "build" && next !== "build") {
+      dropBuildHold();
+      stopHold();
+    }
+    if (next === "build") {
+      dropBuildHold();
+      startHold();
+    }
+    set({ panel: next, holdRev: get().holdRev + 1, ctx: null, openBook: next === "none" ? get().openBook : false, openCraft: next === "none" ? get().openCraft : false });
   },
   useTile: (tx, ty) => {
     const w = getWorld();
@@ -916,7 +928,7 @@ export const useGame = create<GameUI>((set, get) => ({
   enterHold: () => {
     dropBuildHold();
     startHold();
-    set({ holdRev: get().holdRev + 1, buildKind: null, buildAt: null, tillArmed: false, tillAt: null, panel: "none", ctx: null });
+    set({ holdRev: get().holdRev + 1, buildKind: null, buildAt: null, tillArmed: false, tillAt: null, ctx: null });
   },
   exitHold: () => {
     dropBuildHold();
@@ -926,7 +938,14 @@ export const useGame = create<GameUI>((set, get) => ({
   armHoldPiece: (id) => {
     dropBuildHold();
     selectHoldPiece(id);
-    set({ holdRev: get().holdRev + 1, buildKind: null, tillArmed: false, panel: "none", ctx: null });
+    set({ holdRev: get().holdRev + 1, buildKind: null, tillArmed: false, ctx: null });
+  },
+  reclaimHold: (id) => {
+    const w = getWorld();
+    const err = withHistory(w, () => reclaimObject(w, id));
+    if (err) get().flash(err);
+    else get().flash("Reclaimed.");
+    set({ snap: snapshot(), holdRev: get().holdRev + 1 });
   },
   noteHold: () => set({ holdRev: get().holdRev + 1, snap: snapshot() }),
   armTill: (on) => {
