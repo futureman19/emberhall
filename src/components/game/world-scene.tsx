@@ -4,6 +4,14 @@ import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { COURT, VIEW } from "@/game/atlas";
 import { cameraFixedHeight, cameraLockedAxis } from "@/game/camera-follow";
+import {
+  FIRST_PERSON_FOV,
+  FIRST_PERSON_NEAR,
+  ORBIT_FOV,
+  ORBIT_NEAR,
+  firstPersonPose,
+  orbitRestPose,
+} from "@/game/first-person-view";
 import { SECONDS_PER_HOUR } from "@/game/catalog";
 import {
   projectileProgress,
@@ -172,9 +180,11 @@ function Rig() {
   const controls = useRef<{ target: THREE.Vector3 } | null>(null);
   const followAnchor = useRef(new THREE.Vector3());
   const followReady = useRef(false);
+  const wasFirstPerson = useRef(false);
   const { camera } = useThree();
   const phase = useGame((s) => s.phase);
   const placing = useGame((s) => Boolean(s.buildKind));
+  const firstPerson = useGraphicsSettings().firstPerson;
   useEffect(() => {
     if (typeof window === "undefined") return;
     const enabled = import.meta.env.DEV || new URLSearchParams(window.location.search).has("qa");
@@ -199,7 +209,38 @@ function Rig() {
     const p = getWorld().people.find((x) => x.isPlayer);
     const c = controls.current;
     if (!p || !c || phase !== "playing") return;
-    const y = groundY(p.x, p.z) + keepStoryY(p.story ?? 0);
+    const feetY = groundY(p.x, p.z);
+    const storyY = keepStoryY(p.story ?? 0);
+    const y = feetY + storyY;
+    const persp = camera as THREE.PerspectiveCamera;
+    if (firstPerson) {
+      const pose = firstPersonPose({ x: p.x, z: p.z, facing: p.facing, groundY: feetY, storyY });
+      camera.position.set(pose.position.x, pose.position.y, pose.position.z);
+      camera.up.set(0, 1, 0);
+      camera.lookAt(pose.lookAt.x, pose.lookAt.y, pose.lookAt.z);
+      c.target.set(pose.lookAt.x, pose.lookAt.y, pose.lookAt.z);
+      if (persp.fov !== FIRST_PERSON_FOV || persp.near !== FIRST_PERSON_NEAR) {
+        persp.fov = FIRST_PERSON_FOV;
+        persp.near = FIRST_PERSON_NEAR;
+        persp.updateProjectionMatrix();
+      }
+      followReady.current = false;
+      wasFirstPerson.current = true;
+      return;
+    }
+    if (wasFirstPerson.current) {
+      const rest = orbitRestPose(p.x, p.z, feetY, storyY);
+      camera.position.set(rest.position.x, rest.position.y, rest.position.z);
+      c.target.set(rest.target.x, rest.target.y, rest.target.z);
+      followAnchor.current.copy(c.target);
+      followReady.current = true;
+      if (persp.fov !== ORBIT_FOV || persp.near !== ORBIT_NEAR) {
+        persp.fov = ORBIT_FOV;
+        persp.near = ORBIT_NEAR;
+        persp.updateProjectionMatrix();
+      }
+      wasFirstPerson.current = false;
+    }
     const anchor = followAnchor.current;
     if (!followReady.current) {
       anchor.copy(c.target);
@@ -228,12 +269,12 @@ function Rig() {
   return (
     <MapControls
       ref={controls as never}
-      enabled={phase === "playing"}
+      enabled={phase === "playing" && !firstPerson}
       enableDamping
       dampingFactor={0.12}
-      enablePan={phase === "playing" && !placing}
-      enableRotate={phase === "playing" && !placing}
-      enableZoom={phase === "playing"}
+      enablePan={phase === "playing" && !placing && !firstPerson}
+      enableRotate={phase === "playing" && !placing && !firstPerson}
+      enableZoom={phase === "playing" && !firstPerson}
       autoRotate={false}
       minDistance={8}
       maxDistance={150}
@@ -1858,6 +1899,7 @@ export function WorldScene() {
       data-graphics-shadows={graphics.shadows ? "on" : "off"}
       data-horizon-tree-reduction={graphics.horizonTreeReduction}
       data-effects={reducedFx ? "reduced" : "full"}
+      data-first-person={graphics.firstPerson ? "on" : "off"}
       dpr={[1, 1.5]}
       camera={{ position: [COURT.tx + 16, 23, COURT.ty + 20], fov: 48, near: 0.2, far: 480 }}
       gl={{ antialias: true, alpha: false }}

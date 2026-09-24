@@ -9,12 +9,15 @@ export type GraphicsSettings = {
   horizonTreeReduction: HorizonTreeReduction;
   /** Calmer presentation: no storm flashes, suppressed transient action FX. */
   reducedEffects: boolean;
+  /** Eye-height look. Click-to-walk stays. Default is the tactical orbit. */
+  firstPerson: boolean;
 };
 
 export const DEFAULT_GRAPHICS_SETTINGS: Readonly<GraphicsSettings> = Object.freeze({
   shadows: true,
   horizonTreeReduction: 0,
   reducedEffects: false,
+  firstPerson: false,
 });
 
 type ReadStorage = Pick<Storage, "getItem">;
@@ -24,13 +27,20 @@ function isGraphicsSettings(value: unknown): value is GraphicsSettings {
   if (!value || typeof value !== "object") return false;
   const record = value as Record<string, unknown>;
   const keys = Object.keys(record);
-  // Saves written before reducedEffects existed load with the approved
-  // default (effects on).
+  // Saves written before reducedEffects / firstPerson existed load with
+  // the approved defaults (effects on, tactical orbit).
   return (
-    keys.every((key) => key === "shadows" || key === "horizonTreeReduction" || key === "reducedEffects") &&
+    keys.every(
+      (key) =>
+        key === "shadows" ||
+        key === "horizonTreeReduction" ||
+        key === "reducedEffects" ||
+        key === "firstPerson",
+    ) &&
     typeof record.shadows === "boolean" &&
     HORIZON_TREE_REDUCTIONS.includes(record.horizonTreeReduction as HorizonTreeReduction) &&
-    (record.reducedEffects === undefined || typeof record.reducedEffects === "boolean")
+    (record.reducedEffects === undefined || typeof record.reducedEffects === "boolean") &&
+    (record.firstPerson === undefined || typeof record.firstPerson === "boolean")
   );
 }
 
@@ -40,7 +50,11 @@ export function loadGraphicsSettings(storage: ReadStorage): GraphicsSettings {
     if (!raw) return { ...DEFAULT_GRAPHICS_SETTINGS };
     const parsed: unknown = JSON.parse(raw);
     return isGraphicsSettings(parsed)
-      ? { ...parsed, reducedEffects: parsed.reducedEffects ?? false }
+      ? {
+          ...parsed,
+          reducedEffects: parsed.reducedEffects ?? false,
+          firstPerson: parsed.firstPerson ?? false,
+        }
       : { ...DEFAULT_GRAPHICS_SETTINGS };
   } catch {
     return { ...DEFAULT_GRAPHICS_SETTINGS };
@@ -82,6 +96,7 @@ export function updateGraphicsSettings(patch: Partial<GraphicsSettings>) {
       ? (patch.horizonTreeReduction as HorizonTreeReduction)
       : current.horizonTreeReduction,
     reducedEffects: typeof patch.reducedEffects === "boolean" ? patch.reducedEffects : current.reducedEffects,
+    firstPerson: typeof patch.firstPerson === "boolean" ? patch.firstPerson : current.firstPerson,
   };
   current = next;
   hydrated = true;

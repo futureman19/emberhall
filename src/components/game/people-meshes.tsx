@@ -25,6 +25,7 @@ import { groundY } from "@/game/height";
 import { keepStoryY } from "@/game/keep-story";
 import { keepPlayerOffset } from "./keep-presentation.ts";
 import { getWorld } from "@/game/live";
+import { useGraphicsSettings } from "@/game/graphics-settings";
 import { FIGURE, HAIR } from "@/game/look/figure.ts";
 import { SLOT_ANCHOR, partsById } from "@/game/look/parts.ts";
 import { resolveLook } from "@/game/look/resolve.ts";
@@ -1114,9 +1115,10 @@ function Figure({
     : (p.isPlayer && wear.cloak && WEAR_HEX[wear.cloak]) ||
       (p.role === "healer" ? "#ece6d8" : p.cls === "ranger" ? "#6a7a48" : "#a85a42");
   const hover = ghost ? 0.32 : 0;
+  const firstPerson = useGraphicsSettings().firstPerson;
 
   return (
-    <group name={p.isPlayer ? "emberhall-player-figure" : "emberhall-npc-figure"} ref={root} position={[p.x, groundAt(p.x, p.z, p.story) + (p.isPlayer ? keepPlayerOffset(p.x, p.z) : 0) + hover, p.z]} rotation={[0, civicVisualYaw(p.facing, authored), 0]}>
+    <group name={p.isPlayer ? "emberhall-player-figure" : "emberhall-npc-figure"} ref={root} visible={!(p.isPlayer && firstPerson)} position={[p.x, groundAt(p.x, p.z, p.story) + (p.isPlayer ? keepPlayerOffset(p.x, p.z) : 0) + hover, p.z]} rotation={[0, civicVisualYaw(p.facing, authored), 0]}>
       {cloak && (
         <mesh position={[0, FIGURE.cloak.y + bob, FIGURE.cloak.z]} castShadow={!ghost}>
           <AuthoredCharacterGeometry part="cloak" size={FIGURE.cloak.size} authored={authored} />

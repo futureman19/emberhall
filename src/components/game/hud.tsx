@@ -2,6 +2,7 @@ import {
   AudioLines,
   Backpack,
   CircleHelp,
+  Eye,
   FastForward,
   Hammer,
   Hand,
@@ -41,6 +42,8 @@ import { IntroCinematic } from "@/components/game/intro-cinematic";
 import { LookGump } from "@/components/game/look-gump";
 import { startValeMusic, musicMuted, toggleValeMusic } from "@/game/vale-music";
 import { sfxMuted, toggleSfx, warmSfx } from "@/game/vale-sfx";
+import { firstPersonHotkey, toggleFirstPerson } from "@/game/first-person-view";
+import { getGraphicsSettings, updateGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
 import { useGame } from "@/game/store";
 import type { PanelId, Speed } from "@/game/types";
 import { cn } from "@/lib/utils";
@@ -80,9 +83,16 @@ function PlayingChrome() {
   }, []);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key !== "." || e.repeat) return;
+      if (e.repeat) return;
       const el = e.target as HTMLElement | null;
-      if (el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.isContentEditable)) return;
+      const inField = Boolean(el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.isContentEditable));
+      if (firstPersonHotkey(e.key, inField) === "toggle") {
+        e.preventDefault();
+        const current = getGraphicsSettings().firstPerson;
+        updateGraphicsSettings({ firstPerson: toggleFirstPerson(current) });
+        return;
+      }
+      if (e.key !== "." || inField) return;
       e.preventDefault();
       setActionsOpen((v) => !v);
     };
@@ -391,6 +401,7 @@ function TopBar() {
         <SettingsButton />
       </div>
       <div className="flex items-start gap-1.5">
+        <FirstPersonChip />
         <div className="pointer-events-auto flex items-center gap-0.5 rounded-[var(--radius-md)] border border-border bg-bg/80 p-1">
           <button
             type="button"
@@ -411,6 +422,25 @@ function TopBar() {
         </div>
       </div>
     </div>
+  );
+}
+
+function FirstPersonChip() {
+  const firstPerson = useGraphicsSettings().firstPerson;
+  return (
+    <button
+      type="button"
+      onClick={() => updateGraphicsSettings({ firstPerson: toggleFirstPerson(firstPerson) })}
+      className={cn(
+        "pointer-events-auto grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
+        firstPerson && "bg-surface-2 text-fg",
+      )}
+      aria-pressed={firstPerson}
+      aria-label={firstPerson ? "First-person: on" : "First-person: off"}
+      title="Eyes (V)"
+    >
+      <Eye className="size-4" />
+    </button>
   );
 }
 

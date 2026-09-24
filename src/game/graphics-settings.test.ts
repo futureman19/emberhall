@@ -21,6 +21,7 @@ test("graphics settings default to full quality and full effects", () => {
   const storage = memoryStorage();
   assert.deepEqual(loadGraphicsSettings(storage), DEFAULT_GRAPHICS_SETTINGS);
   assert.equal(DEFAULT_GRAPHICS_SETTINGS.reducedEffects, false);
+  assert.equal(DEFAULT_GRAPHICS_SETTINGS.firstPerson, false);
 });
 
 test("graphics settings persist shadows, supported tree reductions and reduced effects", () => {
@@ -30,6 +31,7 @@ test("graphics settings persist shadows, supported tree reductions and reduced e
       shadows: horizonTreeReduction !== 30,
       horizonTreeReduction,
       reducedEffects: horizonTreeReduction === 15,
+      firstPerson: horizonTreeReduction === 0,
     };
     saveGraphicsSettings(storage, settings);
     assert.deepEqual(loadGraphicsSettings(storage), settings);
@@ -43,6 +45,21 @@ test("graphics settings saved before reduced effects existed load with effects o
     shadows: false,
     horizonTreeReduction: 15,
     reducedEffects: false,
+    firstPerson: false,
+  });
+});
+
+test("graphics settings saved before first-person existed load with the orbit", () => {
+  const storage = memoryStorage();
+  storage.values.set(
+    GRAPHICS_STORAGE_KEY,
+    JSON.stringify({ shadows: true, horizonTreeReduction: 0, reducedEffects: false }),
+  );
+  assert.deepEqual(loadGraphicsSettings(storage), {
+    shadows: true,
+    horizonTreeReduction: 0,
+    reducedEffects: false,
+    firstPerson: false,
   });
 });
 

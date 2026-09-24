@@ -1,4 +1,4 @@
-import { AudioLines, Gem, Music2, Sparkles, SunMedium, Trees } from "lucide-react";
+import { AudioLines, Eye, Gem, Music2, Sparkles, SunMedium, Trees } from "lucide-react";
 import { useWallet } from "@1sat/react";
 import { Button } from "@/components/ui/button";
 import {
@@ -112,6 +112,28 @@ function GraphicsSection() {
           ))}
         </div>
       </div>
+
+      <button
+        type="button"
+        onClick={() => updateGraphicsSettings({ firstPerson: !graphics.firstPerson })}
+        className="mt-1 flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left"
+        aria-pressed={graphics.firstPerson}
+        aria-label={`First-person: ${graphics.firstPerson ? "on" : "off"}`}
+      >
+        <span className="flex items-center gap-2">
+          <Eye className={cn("size-4", graphics.firstPerson ? "text-accent" : "text-muted/50")} />
+          <span>
+            <span className="block text-sm text-fg">Eyes</span>
+            <span className="block text-[11px] text-muted">look from the body — V</span>
+          </span>
+        </span>
+        <span className="flex items-center gap-2">
+          <span className={cn("relative h-5 w-9 rounded-full border transition-colors", graphics.firstPerson ? "border-accent bg-accent/35" : "border-border-strong bg-bg")}>
+            <span className={cn("absolute top-0.5 size-3.5 rounded-full bg-fg transition-transform", graphics.firstPerson ? "translate-x-4" : "translate-x-0.5")} />
+          </span>
+          <span className={cn("text-xs", graphics.firstPerson ? "text-gold" : "text-muted")}>{graphics.firstPerson ? "On" : "Off"}</span>
+        </span>
+      </button>
 
       <button
         type="button"
