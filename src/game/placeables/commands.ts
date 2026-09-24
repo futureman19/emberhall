@@ -6,6 +6,7 @@ import {
   creditCost,
   debitCost,
   defaultMaterials,
+  type PlaceOpts,
 } from "./placement.ts";
 import type { Block } from "./types.ts";
 import type { World } from "../types.ts";
@@ -39,11 +40,13 @@ function ensureStructure(world: World, objectId: string) {
   return hold;
 }
 
-export function placeObject(world: World, definitionId: string, tx: number, ty: number, rotation: Rotation) {
-  const err = canPlace(world, definitionId, tx, ty, rotation);
-  if (err) return err;
+export function placeObject(world: World, definitionId: string, tx: number, ty: number, rotation: Rotation, opts: PlaceOpts = {}) {
+  if (!opts.skipValidate) {
+    const err = canPlace(world, definitionId, tx, ty, rotation, opts);
+    if (err) return err;
+  }
   const def = PLACEABLE_BY_ID[definitionId]!;
-  debitCost(world, def);
+  if (!opts.skipCost) debitCost(world, def);
   const id = nid(world, "po");
   const hold = ensureStructure(world, id);
   if (hold.objectIds.length === 1) hold.anchor = { tx, ty };

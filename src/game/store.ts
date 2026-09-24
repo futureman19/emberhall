@@ -59,6 +59,7 @@ import { clearSave, hasSave, loadSave, writeSave } from "./save.ts";
 import { recruitPerson, setSpeed, tickWorld } from "./sim.ts";
 import { completeObjective, placeBuilding } from "./world.ts";
 import { HOUSE_RANGE, commandHouseItem, commandHouseTake, houseKindForDeed, isHouseKind, placeHouse } from "./house.ts";
+import { applyBlueprint, captureBlueprint } from "./blueprints.ts";
 import { reclaimObject } from "./placeables/commands.ts";
 import { objectFn, usePlaced } from "./placeables/functions.ts";
 import { withHistory } from "./placeables/history.ts";
@@ -190,6 +191,8 @@ interface GameUI {
   exitHold: () => void;
   armHoldPiece: (id: string | null) => void;
   reclaimHold: (id: string) => void;
+  captureHold: (name: string) => void;
+  stampBlueprint: (id: string) => void;
   noteHold: () => void;
   armTill: (on: boolean) => void;
   hoverTill: (tx: number, ty: number) => void;
@@ -975,6 +978,22 @@ export const useGame = create<GameUI>((set, get) => ({
     const err = withHistory(w, () => reclaimObject(w, id));
     if (err) get().flash(err);
     else get().flash("Reclaimed.");
+    set({ snap: snapshot(), holdRev: get().holdRev + 1 });
+  },
+  captureHold: (name) => {
+    const w = getWorld();
+    const err = captureBlueprint(w, name);
+    if (err) get().flash(err);
+    else get().flash("The plan is kept.");
+    set({ snap: snapshot(), holdRev: get().holdRev + 1 });
+  },
+  stampBlueprint: (id) => {
+    const w = getWorld();
+    const p = you(w);
+    if (!p) return;
+    const err = withHistory(w, () => applyBlueprint(w, id, Math.round(p.x) + 2, Math.round(p.z), 0));
+    if (err) get().flash(err);
+    else get().flash("The plan is raised.");
     set({ snap: snapshot(), holdRev: get().holdRev + 1 });
   },
   noteHold: () => set({ holdRev: get().holdRev + 1, snap: snapshot() }),

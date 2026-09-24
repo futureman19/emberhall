@@ -573,7 +573,7 @@ function isCurrentSave(save: SaveRecord): boolean {
     isWeather(save.weather) &&
     (save.boom === null || (isRecord(save.boom) && isFiniteNumber(save.boom.untilHour))) &&
     isNullableString(save.nightOffer) &&
-    parseCreatorFields(save) !== null
+    parseCreatorFields(save) !== null // captured blueprints use this same closed schema
   );
 }
 

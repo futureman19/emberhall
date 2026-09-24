@@ -13,6 +13,7 @@
     "src/components/game/authored-offhand.tsx",
     "src/components/game/authored-tool.tsx",
     "src/components/game/authored-weapon.tsx",
+    "src/components/game/build/blueprint-gump.tsx",
     "src/components/game/building-meshes.tsx",
     "src/components/game/campfire-geometry.ts",
     "src/components/game/campfire-meshes.tsx",
@@ -100,6 +101,7 @@
     "src/components/game/world-scene.tsx",
     "src/game/atlas.ts",
     "src/game/biome.ts",
+    "src/game/blueprints.ts",
     "src/game/building-size.ts",
     "src/game/camera-follow.ts",
     "src/game/campfire.ts",
@@ -32262,13 +32264,13 @@
       "canonicalId": "src/components/game/hold-panel.tsx#costLine",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/hold-panel.tsx:21"
+        "src/components/game/hold-panel.tsx:22"
       ],
       "sourceNames": [
         "costLine"
       ],
       "rendererLocations": [
-        "src/components/game/hold-panel.tsx:21"
+        "src/components/game/hold-panel.tsx:22"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45150,19 +45152,20 @@
       "canonicalId": "src/components/game/hold-panel.tsx#HoldPanel",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/hold-panel.tsx:27"
+        "src/components/game/hold-panel.tsx:28"
       ],
       "sourceNames": [
         "HoldPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hold-panel.tsx:27"
+        "src/components/game/hold-panel.tsx:28"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
         "src/components/game/hold-panel.tsx"
       ],
       "jsxTags": [
+        "BlueprintGump",
         "button",
         "div",
         "h2",
@@ -59816,6 +59819,190 @@
       "status": "inventoried",
       "evidence": [
         "src/game/atlas.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/blueprints.ts#PosedPiece.rotation=0",
+      "canonicalId": "src/game/blueprints.ts#PosedPiece.rotation=0",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/blueprints.ts:14"
+      ],
+      "sourceNames": [
+        "PosedPiece.rotation"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/blueprints.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/blueprints.ts:14"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/blueprints.ts#PosedPiece.rotation=1",
+      "canonicalId": "src/game/blueprints.ts#PosedPiece.rotation=1",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/blueprints.ts:14"
+      ],
+      "sourceNames": [
+        "PosedPiece.rotation"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/blueprints.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/blueprints.ts:14"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/blueprints.ts#PosedPiece.rotation=2",
+      "canonicalId": "src/game/blueprints.ts#PosedPiece.rotation=2",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/blueprints.ts:14"
+      ],
+      "sourceNames": [
+        "PosedPiece.rotation"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/blueprints.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/blueprints.ts:14"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/blueprints.ts#PosedPiece.rotation=3",
+      "canonicalId": "src/game/blueprints.ts#PosedPiece.rotation=3",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/blueprints.ts:14"
+      ],
+      "sourceNames": [
+        "PosedPiece.rotation"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/blueprints.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/blueprints.ts:14"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -127395,6 +127582,98 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/placeables/placement.ts#PlaceOpts.skipValidate=false",
+      "canonicalId": "src/game/placeables/placement.ts#PlaceOpts.skipValidate=false",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/placement.ts:11"
+      ],
+      "sourceNames": [
+        "PlaceOpts.skipValidate"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/placement.ts:11"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/placement.ts:11"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/placement.ts#PlaceOpts.skipValidate=true",
+      "canonicalId": "src/game/placeables/placement.ts#PlaceOpts.skipValidate=true",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/placement.ts:11"
+      ],
+      "sourceNames": [
+        "PlaceOpts.skipValidate"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/placement.ts:11"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/placement.ts:11"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/placeables/schema.ts#BlueprintObject.rotation=0",
       "canonicalId": "src/game/placeables/schema.ts#BlueprintObject.rotation=0",
       "family": "state-vocabulary",
@@ -162221,7 +162500,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=bank",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162267,7 +162546,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=board",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162313,7 +162592,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=cottage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162359,7 +162638,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=dormitory",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162405,7 +162684,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=farm",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162451,7 +162730,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=forge",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162497,7 +162776,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=gatehouse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162543,7 +162822,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=hall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162589,7 +162868,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=homestead",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162635,7 +162914,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=hut",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162681,7 +162960,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=keep",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162727,7 +163006,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=kitchen",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162773,7 +163052,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=market",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162819,7 +163098,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=notice",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162865,7 +163144,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=porch",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162911,7 +163190,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=rampart",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -162957,7 +163236,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=rampartV",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -163003,7 +163282,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=shop",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -163049,7 +163328,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=tavern",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -163095,7 +163374,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=tower",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -163141,7 +163420,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=townhome",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -163187,7 +163466,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=townhouse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -163233,7 +163512,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=yard",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:101"
+        "src/game/store.ts:102"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -163279,7 +163558,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openBook=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:90"
+        "src/game/store.ts:91"
       ],
       "sourceNames": [
         "GameUI.openBook"
@@ -163325,7 +163604,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openBook=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:90"
+        "src/game/store.ts:91"
       ],
       "sourceNames": [
         "GameUI.openBook"
@@ -163371,7 +163650,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openCraft=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:91"
+        "src/game/store.ts:92"
       ],
       "sourceNames": [
         "GameUI.openCraft"
@@ -163417,7 +163696,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openCraft=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:91"
+        "src/game/store.ts:92"
       ],
       "sourceNames": [
         "GameUI.openCraft"
@@ -163463,7 +163742,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openPets=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:94"
+        "src/game/store.ts:95"
       ],
       "sourceNames": [
         "GameUI.openPets"
@@ -163509,7 +163788,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openPets=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:94"
+        "src/game/store.ts:95"
       ],
       "sourceNames": [
         "GameUI.openPets"
@@ -163555,7 +163834,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openSettings=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:93"
+        "src/game/store.ts:94"
       ],
       "sourceNames": [
         "GameUI.openSettings"
@@ -163601,7 +163880,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openSettings=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:93"
+        "src/game/store.ts:94"
       ],
       "sourceNames": [
         "GameUI.openSettings"
@@ -163647,7 +163926,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openVault=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:92"
+        "src/game/store.ts:93"
       ],
       "sourceNames": [
         "GameUI.openVault"
@@ -163693,7 +163972,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openVault=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:92"
+        "src/game/store.ts:93"
       ],
       "sourceNames": [
         "GameUI.openVault"
@@ -163739,7 +164018,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=build",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:84"
+        "src/game/store.ts:85"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -163785,7 +164064,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=help",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:84"
+        "src/game/store.ts:85"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -163831,7 +164110,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=journal",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:84"
+        "src/game/store.ts:85"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -163877,7 +164156,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=none",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:84"
+        "src/game/store.ts:85"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -163923,7 +164202,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=roster",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:84"
+        "src/game/store.ts:85"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -163969,7 +164248,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=vale",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:84"
+        "src/game/store.ts:85"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -164015,7 +164294,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=you",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:84"
+        "src/game/store.ts:85"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -164061,7 +164340,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=intro",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:81"
+        "src/game/store.ts:82"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -164107,7 +164386,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=looking",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:81"
+        "src/game/store.ts:82"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -164153,7 +164432,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=playing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:81"
+        "src/game/store.ts:82"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -164199,7 +164478,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=raising",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:81"
+        "src/game/store.ts:82"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -164245,7 +164524,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=title",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:81"
+        "src/game/store.ts:82"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -164291,7 +164570,7 @@
       "canonicalId": "src/game/store.ts#GameUI.tillArmed=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:105"
+        "src/game/store.ts:106"
       ],
       "sourceNames": [
         "GameUI.tillArmed"
@@ -164337,7 +164616,7 @@
       "canonicalId": "src/game/store.ts#GameUI.tillArmed=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:105"
+        "src/game/store.ts:106"
       ],
       "sourceNames": [
         "GameUI.tillArmed"
@@ -186323,6 +186602,74 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "ui:src/components/game/build/blueprint-gump.tsx#BlueprintGump",
+      "canonicalId": "src/components/game/build/blueprint-gump.tsx#BlueprintGump",
+      "family": "ui",
+      "catalogSources": [
+        "src/components/game/build/blueprint-gump.tsx:5"
+      ],
+      "sourceNames": [
+        "BlueprintGump"
+      ],
+      "rendererLocations": [
+        "src/components/game/build/blueprint-gump.tsx:5"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/build/blueprint-gump.tsx"
+      ],
+      "jsxTags": [
+        "button",
+        "div",
+        "h3",
+        "input",
+        "label",
+        "li",
+        "p",
+        "span",
+        "ul"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/build/blueprint-gump.tsx:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/build/blueprint-gump.tsx:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/build/blueprint-gump.tsx:5"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "ui:src/components/game/context-menu.tsx#ContextMenu",
       "canonicalId": "src/components/game/context-menu.tsx#ContextMenu",
       "family": "ui",
@@ -205010,7 +205357,7 @@
       "canonicalId": "intro",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:78"
+        "src/game/store.ts:79"
       ],
       "sourceNames": [
         "Phase"
@@ -205056,7 +205403,7 @@
       "canonicalId": "looking",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:78"
+        "src/game/store.ts:79"
       ],
       "sourceNames": [
         "Phase"
@@ -205102,7 +205449,7 @@
       "canonicalId": "playing",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:78"
+        "src/game/store.ts:79"
       ],
       "sourceNames": [
         "Phase"
@@ -205148,7 +205495,7 @@
       "canonicalId": "raising",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:78"
+        "src/game/store.ts:79"
       ],
       "sourceNames": [
         "Phase"
@@ -205194,7 +205541,7 @@
       "canonicalId": "title",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:78"
+        "src/game/store.ts:79"
       ],
       "sourceNames": [
         "Phase"

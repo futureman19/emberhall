@@ -8,6 +8,7 @@ import type { PlaceableDefinition } from "./types.ts";
 export type PlaceOpts = {
   ignoreId?: string;
   skipCost?: boolean;
+  skipValidate?: boolean;
 };
 
 export function rotateCell(x: number, z: number, rot: Rotation): [number, number] {

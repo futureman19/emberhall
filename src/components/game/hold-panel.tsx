@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import { BUILD_ORDER, BUILDING_META } from "@/game/catalog";
 import { PLACEABLE_BY_ID, PLACEABLE_CATALOG, PLACEABLE_CATEGORIES } from "@/game/placeables/catalog";
+import { BlueprintGump } from "@/components/game/build/blueprint-gump";
 import { getHoldBuild } from "@/game/placeables/build-mode";
 import { getWorld } from "@/game/live";
 import { useGame } from "@/game/store";
@@ -132,6 +133,7 @@ export function HoldPanel() {
           </ul>
         </div>
       ) : null}
+      <BlueprintGump />
       <h3 className="mt-6 font-display text-xs text-fg">Town halls</h3>
       <p className="mt-1 text-pretty text-xs leading-relaxed text-muted">
         One of each civic hall. Till a plot on grass. This is not the kit.
