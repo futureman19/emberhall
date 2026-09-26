@@ -233,7 +233,8 @@ function genericCraftItem(id: ItemId): GenericCraftResourceItem | null {
   return id === "log" || id === "ore" ? id : null;
 }
 
-function exactNeedCount(world: World, id: ItemId): number {
+/** Shared by recipe availability, debits' preflight, and the ingredient display. */
+export function availableCraftIngredient(world: World, id: ItemId): number {
   const generic = genericCraftItem(id);
   return generic ? countGenericCraftResource(world.player, generic) : (world.player.pack[id] ?? 0);
 }
@@ -242,7 +243,7 @@ function exactNeedCount(world: World, id: ItemId): number {
 function haveWorldNeed(world: World, rec: Recipe): boolean {
   if (rec.exactRecipeId) return false;
   for (const [k, n] of Object.entries(rec.need)) {
-    if (exactNeedCount(world, k as ItemId) < (n ?? 0)) return false;
+    if (availableCraftIngredient(world, k as ItemId) < (n ?? 0)) return false;
   }
   const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {
@@ -282,7 +283,7 @@ export function missingNeed(world: World, rec: Recipe): string | null {
   if (rec.exactRecipeId) return "Choose exact materials for this equipment recipe.";
   for (const [k, n] of Object.entries(rec.need)) {
     const id = k as ItemId;
-    const have = exactNeedCount(world, id);
+    const have = availableCraftIngredient(world, id);
     if (have < (n ?? 0)) return `Need ${ITEM_META[id].label.toLowerCase()}.`;
   }
   const self = selfIds(rec);
@@ -482,7 +483,7 @@ export function maxCraftable(world: World, rec: Recipe): number {
   let max = 25;
   for (const [k, n] of Object.entries(rec.need)) {
     if (!n) continue;
-    max = Math.min(max, Math.floor(exactNeedCount(world, k as ItemId) / n));
+    max = Math.min(max, Math.floor(availableCraftIngredient(world, k as ItemId) / n));
   }
   const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {

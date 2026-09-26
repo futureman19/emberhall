@@ -23,6 +23,7 @@
     "lint": "eslint . --max-warnings 0",
     "check": "npm run lint && npm test && npm run typecheck && npm run build && npm run check:auth",
     "smoke:creator": "node scripts/creator-smoke.mjs",
+    "smoke:harvest-counts": "node scripts/harvest-counts-smoke.mjs",
     "smoke:crafting": "node scripts/crafting-smoke.mjs",
     "smoke:metalwork": "node scripts/metalwork-smoke.mjs",
     "smoke:chain": "node scripts/chain-smoke.mjs",

@@ -4,7 +4,7 @@ import { ItemGlyph } from "@/components/game/paperdoll";
 import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "@/game/catalog";
-import { RECIPES, canMake, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
+import { RECIPES, availableCraftIngredient, canMake, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
 import { BOOTS_FORM, BOW_FORM, CHARM_FORM, GAUNTLETS_FORM, GLOVES_FORM, GREAVES_FORM, HELM_FORM, HOOD_FORM, HOSE_FORM, LEATHER_FORM, MAIL_FORM, RING_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
 import { listResourceInventory } from "@/game/inventory/resources";
 import { getWorld } from "@/game/live";
@@ -543,10 +543,13 @@ function RecipeRow({
       <span className="mt-1 flex flex-wrap items-center gap-1">
         {Object.entries(rec.need).map(([k, n]) => (
           <Tip key={k} content={<ItemTipContent id={k as ItemId} />} side="bottom">
-            <span className="flex items-center gap-0.5 text-xs text-muted">
+            <span className="flex flex-wrap items-center gap-0.5 text-xs text-muted">
               <ItemGlyph id={k as ItemId} className="size-3.5" />
               {n} {ITEM_META[k as ItemId].label}
-              <span className="text-muted">({pack?.[k as ItemId] ?? 0})</span>
+              <span className="text-muted">({availableCraftIngredient(getWorld(), k as ItemId)})</span>
+              {k === "log" || k === "ore" ? (
+                <span className="text-muted"> · {k === "log" ? "Oak logs" : "Iron ore"} from Pack; lower grades first</span>
+              ) : null}
             </span>
           </Tip>
         ))}
@@ -561,7 +564,7 @@ function RecipeRow({
               </span>
             }
           >
-            <span className="flex items-center gap-0.5 text-xs text-muted">
+            <span className="flex flex-wrap items-center gap-0.5 text-xs text-muted">
               {nt.n} <span className="italic">{nt.tag}</span>
               <span className="text-muted">({countTag(pack, nt.tag)})</span>
             </span>

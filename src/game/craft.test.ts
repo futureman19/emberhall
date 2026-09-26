@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  availableCraftIngredient,
   canMake,
   commandCraft,
   commandCraftBatch,
@@ -43,6 +44,29 @@ function withRoll<T>(value: number, action: () => T): T {
     Math.random = original;
   }
 }
+
+test("craft ingredient display counts the same ordinary supplies the command can spend", () => {
+  const world = createWorld(1);
+  standAt(world, "yard");
+  world.player.pack.log = 1;
+  world.player.pack.ore = 0;
+  world.player.pack.board = 7;
+  for (const key of Object.values(OAK)) addResource(world.player.resources, key, 1);
+  addResource(world.player.resources, IRON_ROUGH, 2);
+  addResource(world.player.resources, REDWOOD, 9);
+  addResource(world.player.resources, HIGHLAND, 9);
+  const before = structuredClone(world.player);
+  assert.equal(availableCraftIngredient(world, "log"), 5);
+  assert.equal(availableCraftIngredient(world, "ore"), 2);
+  assert.equal(availableCraftIngredient(world, "board"), 7);
+  assert.equal(availableCraftIngredient(world, "ingot"), world.player.pack.ingot ?? 0);
+  assert.deepEqual(world.player, before, "display reads never migrate or duplicate inventory");
+  world.player.skills.carpentry = 100;
+  withRoll(0.5, () => commandCraft(world, "board"));
+  assert.equal(availableCraftIngredient(world, "log"), 4);
+  assert.equal(availableCraftIngredient(world, "board"), 9);
+  assert.equal(resourceCount(world.player.resources, REDWOOD), 9);
+});
 
 test("craft compatibility - rough harvested oak and iron feed the existing utility loop", () => {
   const boardWorld = createWorld();

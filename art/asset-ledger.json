@@ -189115,6 +189115,22 @@
           "applicability": "source contract; runtime unverified"
         },
         {
+          "id": "predicate:k === \"log\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/craft-gump.tsx:483"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:k === \"log\" || k === \"ore\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/craft-gump.tsx:483"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
           "id": "predicate:max > 1",
           "status": "inventoried",
           "evidence": [
