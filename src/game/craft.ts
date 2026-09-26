@@ -279,16 +279,35 @@ export function canMake(world: World, rec: Recipe) {
   return haveWorldNeed(world, rec);
 }
 
-export function missingNeed(world: World, rec: Recipe): string | null {
+/** First command blocker, not a claim that every other requirement is satisfied. */
+export function craftBlocker(world: World, rec: Recipe): string | null {
+  if (world.player.ghost) return "A ghost cannot craft. Return to life first.";
+  if (rec.exactRecipeId) return missingNeed(world, rec);
+  if (rec.station !== null && !stationsHere(world).includes(rec.station)) {
+    if (rec.station === "forge") return "Move near a forge.";
+    if (rec.station === "fire") return "Move near a lit campfire or hearth.";
+    return "Move near a bench in the yard or hall.";
+  }
+  if (rec.needsBlade && !bladeInHand(world)) return "Hold a blade — hatchet, knife, or sword.";
+  if (rec.placesFire && litFireNear(world)) return "A fire already crackles here.";
+  return missingNeed(world, rec, true);
+}
+
+export function missingNeed(world: World, rec: Recipe, quantities = false): string | null {
   if (rec.exactRecipeId) return "Choose exact materials for this equipment recipe.";
   for (const [k, n] of Object.entries(rec.need)) {
     const id = k as ItemId;
     const have = availableCraftIngredient(world, id);
-    if (have < (n ?? 0)) return `Need ${ITEM_META[id].label.toLowerCase()}.`;
+    if (have < (n ?? 0)) return quantities
+      ? `Need ${(n ?? 0) - have} more ${ITEM_META[id].label.toLowerCase()} (${have}/${n}).`
+      : `Need ${ITEM_META[id].label.toLowerCase()}.`;
   }
   const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {
-    if (countTag(world.player.pack, nt.tag, self) < nt.n) return `Need ${nt.n} ${nt.tag} — anything ${nt.tag} will do.`;
+    const have = countTag(world.player.pack, nt.tag, self);
+    if (have < nt.n) return quantities
+      ? `Need ${nt.n - have} more ${nt.tag} (${have}/${nt.n} eligible).`
+      : `Need ${nt.n} ${nt.tag} — anything ${nt.tag} will do.`;
   }
   return null;
 }

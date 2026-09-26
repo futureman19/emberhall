@@ -189115,6 +189115,14 @@
           "applicability": "source contract; runtime unverified"
         },
         {
+          "id": "predicate:blocker",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/craft-gump.tsx:490"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
           "id": "predicate:k === \"log\"",
           "status": "inventoried",
           "evidence": [

@@ -4,7 +4,7 @@ import { ItemGlyph } from "@/components/game/paperdoll";
 import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "@/game/catalog";
-import { RECIPES, availableCraftIngredient, canMake, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
+import { RECIPES, availableCraftIngredient, canMake, craftBlocker, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
 import { BOOTS_FORM, BOW_FORM, CHARM_FORM, GAUNTLETS_FORM, GLOVES_FORM, GREAVES_FORM, HELM_FORM, HOOD_FORM, HOSE_FORM, LEATHER_FORM, MAIL_FORM, RING_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
 import { listResourceInventory } from "@/game/inventory/resources";
 import { getWorld } from "@/game/live";
@@ -506,7 +506,8 @@ function RecipeRow({
   onMake: () => void;
   onMakeBatch: (times: number) => void;
 }) {
-  const ready = at && canMake(getWorld(), rec) && (!rec.needsBlade || bladeOk);
+  const blocker = craftBlocker(getWorld(), rec);
+  const ready = at && canMake(getWorld(), rec) && (!rec.needsBlade || bladeOk) && !blocker;
   const product = (Object.keys(rec.give) as ItemId[]).find((k) => (rec.give[k] ?? 0) > 0);
   return (
     <div
@@ -577,6 +578,7 @@ function RecipeRow({
         {rec.needsBlade ? <span className={cn("text-xs", bladeOk ? "text-muted" : "text-accent")}>+ a blade in hand</span> : null}
       </span>
       <span className="mt-1 text-xs text-muted">{rec.hint}</span>
+      {blocker ? <span className="craft-blocker mt-1 text-xs text-fg">Next requirement: {blocker}</span> : null}
     </div>
   );
 }

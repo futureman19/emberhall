@@ -66,7 +66,17 @@ try {
     const row = (label) => page.locator("li").filter({ has: page.getByText(label, { exact: true }) });
     assert.match(await row("Boards").innerText(), /Log\s*\(2\)/);
     assert.match(await row("Smelt ore").innerText(), /Iron ore\s*\(4\)/i);
+    const torchBlocker = row("Torch").locator('.craft-blocker');
+    await torchBlocker.scrollIntoViewIfNeeded();
+    assert.equal(await torchBlocker.isVisible(), true);
+    assert.equal(await torchBlocker.innerText(), 'Next requirement: Need 1 more board (0/1).');
+    assert.equal(await row("Torch").getByRole('button', { name: 'Make', exact: true }).isDisabled(), true);
+    assert.match(await row("Smelt ore").locator('.craft-blocker').innerText(), /forge/);
+    await page.screenshot({ path: resolve(output, `${viewport.name}-blocker.png`) });
     await row("Boards").getByRole("button", { name: "Make", exact: true }).click({ noWaitAfter: true });
+    await row("Torch").scrollIntoViewIfNeeded();
+    assert.equal(await torchBlocker.count(), 0);
+    assert.equal(await row("Torch").getByRole('button', { name: 'Make', exact: true }).isEnabled(), true);
     assert.match(await row("Boards").innerText(), /Log\s*\(1\)/);
     await row("Boards").evaluate((element) => element.scrollIntoView({ block: "center" }));
     await page.screenshot({ path: resolve(output, `${viewport.name}-boards.png`) });

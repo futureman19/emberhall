@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   availableCraftIngredient,
   canMake,
+  craftBlocker,
   commandCraft,
   commandCraftBatch,
   maxCraftable,
@@ -44,6 +45,44 @@ function withRoll<T>(value: number, action: () => T): T {
     Math.random = original;
   }
 }
+
+test("ordinary craft blockers follow command priority and disappear when ready", () => {
+  const world = createWorld(1);
+  for (const id of Object.keys(world.player.pack) as (keyof typeof world.player.pack)[]) world.player.pack[id] = 0;
+  world.player.resources = { stacks: {} };
+  const board = recipeById("board")!;
+  standAt(world, "forge");
+  assert.match(craftBlocker(world, board)!, /bench/i);
+  world.player.ghost = true;
+  assert.match(craftBlocker(world, board)!, /ghost/i);
+  world.player.ghost = false;
+  standAt(world, "yard");
+  addResource(world.player.resources, REDWOOD, 9);
+  assert.equal(craftBlocker(world, board), "Need 1 more log (0/1).");
+  const before = structuredClone(world.player);
+  craftBlocker(world, board);
+  assert.deepEqual(world.player, before);
+  addResource(world.player.resources, OAK.sound, 1);
+  assert.equal(craftBlocker(world, board), null);
+  assert.equal(canMake(world, board), true);
+  const bandage = recipeById("cut_bandage")!;
+  world.player.wear.main = undefined;
+  world.player.pack.bandage = 20;
+  assert.match(craftBlocker(world, bandage)!, /blade/i);
+  world.player.wear.main = "knife";
+  assert.equal(craftBlocker(world, bandage), "Need 1 more cloth (0/1 eligible).");
+  world.player.pack.silk = 1;
+  assert.equal(craftBlocker(world, bandage), null);
+  world.player.pack.board = 5;
+  assert.equal(craftBlocker(world, recipeById("deed_porch")!), "Need 3 more board (5/8).");
+  assert.match(craftBlocker(world, recipeById("bow")!)!, /exact materials/);
+  const p = you(world)!;
+  p.x = 0; p.z = 0;
+  assert.match(craftBlocker(world, recipeById("roast_meat")!)!, /lit campfire or hearth/);
+  world.campfires.push({ id: "blocker-test", tx: 0, ty: 0, until: world.hour + 1 });
+  assert.equal(craftBlocker(world, recipeById("campfire")!), "A fire already crackles here.");
+  assert.equal(craftBlocker(world, recipeById("roast_meat")!), "Need 1 more raw meat (0/1).");
+});
 
 test("craft ingredient display counts the same ordinary supplies the command can spend", () => {
   const world = createWorld(1);

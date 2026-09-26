@@ -13,6 +13,9 @@ test("RecipeRow routes readiness through world-aware materials without removing 
   assert.doesNotMatch(source, /haveNeed\(pack, rec\)/);
   assert.match(source, /disabled=\{!ready\}/);
   assert.match(source, /disabled=\{!ready \|\| max < 5\}/);
+  assert.match(source, /const blocker = craftBlocker\(getWorld\(\), rec\)/);
+  assert.match(source, /Next requirement: \{blocker\}/);
+  assert.match(source, /&& !blocker/);
 });
 
 test("live world typed iron readiness is pure, exact cost is retained, and rares never substitute", () => {
