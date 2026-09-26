@@ -27,6 +27,7 @@ export const BUILD_SIZE: Record<BuildingKind, { x0: number; x1: number; z0: numb
   tower: bounds(SPECS.tower),
   gatehouse: bounds(SPECS.gatehouse),
   shop: bounds(SPECS.shop),
+  apothecary: bounds(SPECS.apothecary),
   townhome: bounds(SPECS.townhome),
   townhouse: bounds(SPECS.townhouse),
   cottage: bounds(SPECS.cottage),

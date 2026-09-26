@@ -611,6 +611,35 @@ function makeShop(): Spec {
   return spec;
 }
 
+/** An apothecary: shopfront bones, a thatched roof, and a herb-green awning
+ *  with drying bundles hung along the front. */
+function makeApothecary(): Spec {
+  const spec = house({
+    x0: -4,
+    x1: 4,
+    z0: -3,
+    z1: 3,
+    h: 3,
+    door: { x: -1, w: 2, h: 3 },
+    windows: [
+      { x: -4, z: 3, w: 2, h: 2 },
+      { x: 2, z: 3, w: 2, h: 2 },
+    ],
+    roof: "thatch",
+    banners: [3],
+  });
+  fill(spec.voxels, -3, 3, 4, 1, 3, 5, "leaf");
+  for (const x of [-3, -1, 1]) put(spec.voxels, x, 3, 5, "gold");
+  for (const x of [-2, 0]) put(spec.voxels, x, 2, 4, "leaf");
+  fill(spec.voxels, -2, 1, 1, 2, 1, 1, "dark");
+  put(spec.voxels, -1, 2, 1, "leaf");
+  put(spec.voxels, 0, 2, 1, "gold");
+  put(spec.voxels, 1, 2, 1, "leaf");
+  markRoof(spec.voxels, 3, -4, 4, -3, 3);
+  spec.voxels = bake(spec.voxels);
+  return spec;
+}
+
 function makeTownhome(): Spec {
   return house({
     x0: -4,
@@ -792,6 +821,7 @@ export const SPECS: Record<BuildingKind, Spec> = {
   tower: makeTower(),
   gatehouse: makeGatehouse(),
   shop: makeShop(),
+  apothecary: makeApothecary(),
   townhome: makeTownhome(),
   townhouse: makeTownhouse(),
   cottage: makeCottage(),

@@ -88,7 +88,7 @@ test("all new GLBs load with measured finite, grounded Y-up bounds and vertex-co
 });
 
 test("exported door corridors and X-running gate passage remain clear; roofs face up", async () => {
-  const originalDoors: Record<string,[number,number,number]> = {shop:[-.5,.5,2],townhome:[0,1,2],townhouse:[-.5,.5,2],cottage:[0,.5,1.5],porch:[0,.5,1],hut:[0,.5,1.5],homestead:[-.5,.5,2],gatehouse:[-.5,1,1.5]};
+  const originalDoors: Record<string,[number,number,number]> = {shop:[-.5,.5,2],apothecary:[-.5,.5,2],townhome:[0,1,2],townhouse:[-.5,.5,2],cottage:[0,.5,1.5],porch:[0,.5,1],hut:[0,.5,1.5],homestead:[-.5,.5,2],gatehouse:[-.5,1,1.5]};
   for(const kind of ARCHITECTURE_KINDS) {
     const {scene}=await load(kind), door=manifest[kind].door;
     if(door) {

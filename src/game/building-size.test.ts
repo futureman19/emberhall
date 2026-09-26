@@ -22,6 +22,7 @@ const FOOTPRINTS: Record<BuildingKind, { x0: number; x1: number; z0: number; z1:
   tower: { x0: -2, x1: 2, z0: -2, z1: 2 },
   gatehouse: { x0: -2, x1: 2, z0: -4, z1: 4 },
   shop: { x0: -4, x1: 4, z0: -3, z1: 3 },
+  apothecary: { x0: -4, x1: 4, z0: -3, z1: 3 },
   townhome: { x0: -4, x1: 4, z0: -3, z1: 3 },
   townhouse: { x0: -3, x1: 3, z0: -3, z1: 3 },
   cottage: { x0: -3, x1: 3, z0: -2, z1: 2 },

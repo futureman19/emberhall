@@ -2,17 +2,20 @@
 Sources retain named editable parts and original materials. Export copies alone are joined/baked.
 Run Blender --background --factory-startup --python-exit-code 1 --python this_file.
 Use -- --verify to independently reopen saved editable source and check roof normals.
+Set ARCH_ONLY=<kit> to export just one kit and merge its manifest entry, leaving
+sibling GLBs byte-identical (the full lineup still builds and saves to source).
 """
-import bpy, math, json, sys, struct, hashlib
+import bpy, math, json, sys, struct, hashlib, os
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/'public/art/lanternwood'
 SOURCE=ROOT/'art/blender/architecture-kit.blend'
+ONLY=os.environ.get('ARCH_ONLY')
 HOUSING={
  'shop':(-4,4,-3,3,3,-1,2), 'townhome':(-4,4,-3,3,3,0,2),
  'townhouse':(-3,3,-3,3,5,-1,2), 'cottage':(-3,3,-2,2,2,0,1),
  'porch':(-2,2,-1,1,2,0,1), 'hut':(-3,3,-2,2,3,0,1),
- 'homestead':(-3,3,-3,3,5,-1,2),
+ 'homestead':(-3,3,-3,3,5,-1,2), 'apothecary':(-4,4,-3,3,3,-1,2),
 }
 KITS=list(HOUSING)+['rampart','rampartV','tower','gatehouse']
 if '--verify' in sys.argv:
@@ -46,6 +49,7 @@ wood = mat('carved walnut timber', (.15,.075,.038))
 roofs = [mat('chestnut shingles '+str(i), (.19+i*.025,.09+i*.016,.045+i*.01)) for i in range(3)]
 gold = mat('antique gold', (.72,.43,.12))
 red = mat('oxblood civic enamel', (.40,.045,.035))
+herb = mat('dried herb green', (.23,.34,.14))
 glow = mat('restrained honey ember', (1,.38,.065), .55)
 def xyz(p): return (p[0],-p[2],p[1])
 def tag(o, name, material):
@@ -146,6 +150,16 @@ for KIT,(x0,x1,z0,z1,h,dx,dw) in HOUSING.items():
   for i in range(6):
    xx=left+.35+i*(right-left-.7)/6
    box('crimson gold shop awning',(xx+(right-left-.7)/12,top+.07,front+.48),((right-left-.7)/6,.08,.75),red if i%2==0 else gold,.025)
+ elif KIT=='apothecary':
+  # A herb-green hood striped with gold, drying bundles hung beneath, and a
+  # mortar sign — never a post or door across the existing passage.
+  for i in range(6):
+   xx=left+.35+i*(right-left-.7)/6
+   box('herb green apothecary awning',(xx+(right-left-.7)/12,top+.07,front+.48),((right-left-.7)/6,.08,.75),herb if i%2==0 else gold,.025)
+  for xx in [left+.7,left+1.15,right-1.15,right-.7]:
+   line('hanging drying herb bundle',[(xx,top-.18,front+.30),(xx,top-.58,front+.30)],.05,herb)
+  line('gold mortar sign stem',[(right-.30,top-.88,front+.30),(right-.30,top-1.28,front+.30)],.04,gold)
+  box('gold mortar bowl sign',(right-.30,top-1.42,front+.30),(.30,.22,.10),gold,.04)
  elif KIT=='porch':
   # Porch is canonically a tiny enterable house, not a new open navigation surface.
   line('porch ridge flourish',[(cx-.15,top+.86,cz),(cx,top+.96,cz),(cx+.15,top+.86,cz)],.025,gold)
@@ -208,7 +222,9 @@ base=mat('architecture shared vertex palette',(1,1,1))
 vertex=base.node_tree.nodes.new('ShaderNodeVertexColor'); vertex.layer_name='Color'
 base.node_tree.links.new(vertex.outputs['Color'],base.node_tree.nodes.get('Principled BSDF').inputs['Base Color'])
 manifest={}
+if ONLY: manifest=json.loads((OUT/'architecture-manifest.json').read_text())
 for kit in KITS:
+ if ONLY and kit!=ONLY: continue
  originals=[o for o in bpy.context.scene.objects if o.get('kit')==kit]
  bpy.ops.object.select_all(action='DESELECT'); copies=[]
  for o in originals:

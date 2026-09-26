@@ -800,7 +800,7 @@
     }
   },
   "payloadSizes": {
-    "representativeSaveBytes": 23746,
+    "representativeSaveBytes": 24226,
     "fiveItemBytes": 2654,
     "vaultInscriptionBytes": {
       "min": 589,

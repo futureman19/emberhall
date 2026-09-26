@@ -2,8 +2,8 @@ import { Button } from "@/components/ui/button";
 import { ItemTipContent } from "@/components/game/item-tip";
 import { ItemGlyph } from "@/components/game/paperdoll";
 import { Tip } from "@/components/ui/tip";
-import { ITEM_META, NPC_META, SHOP_STOCK } from "@/game/catalog";
-import { BANK_RANGE } from "@/game/npcs";
+import { APOTHECARY_STOCK, ITEM_META, NPC_META, SHOP_STOCK } from "@/game/catalog";
+import { alchemistBuys, BANK_RANGE } from "@/game/npcs";
 import { appraiseRare, rareName } from "@/game/rare";
 import { useGame } from "@/game/store";
 import type { ItemId } from "@/game/types";
@@ -38,18 +38,31 @@ function InspectableRow({ id, children }: { id: ItemId; children: ReactNode }) {
 
 /** The provisioner's counter — buy their stock, sell your finds, have wonders appraised. */
 function ProvisionerShop() {
+  return <ShopCounter stock={SHOP_STOCK} />;
+}
+
+/** The apothecary's scales — draughts and reagents weighed; no loupe here. */
+function ApothecaryShop() {
+  return <ShopCounter stock={APOTHECARY_STOCK} alchemist />;
+}
+
+function ShopCounter({ stock, alchemist }: { stock: readonly ItemId[]; alchemist?: boolean }) {
   const buy = useGame((s) => s.buy);
   const sell = useGame((s) => s.sell);
   const sellRare = useGame((s) => s.sellRare);
   const pack = useGame((s) => s.snap.player?.pack);
   const rares = useGame((s) => s.snap.player?.rares) ?? [];
-  const sellables = (Object.keys(pack ?? {}) as ItemId[]).filter((id) => (pack?.[id] ?? 0) > 0 && ITEM_META[id].sell > 0);
+  const sellables = (Object.keys(pack ?? {}) as ItemId[]).filter(
+    (id) => (pack?.[id] ?? 0) > 0 && ITEM_META[id].sell > 0 && (!alchemist || alchemistBuys(id)),
+  );
   return (
     <div className="mt-3 max-h-64 space-y-3 overflow-auto">
       <div>
-        <p className="font-display text-xs tracking-wider text-muted uppercase">The counter — buy</p>
+        <p className="font-display text-xs tracking-wider text-muted uppercase">
+          {alchemist ? "The scales — buy" : "The counter — buy"}
+        </p>
         <ul className="mt-1 space-y-1">
-          {SHOP_STOCK.slice(0, 10).map((id) => (
+          {stock.slice(0, 10).map((id) => (
             <InspectableRow key={id} id={id}>
               <button
                 type="button"
@@ -84,7 +97,7 @@ function ProvisionerShop() {
           </ul>
         </div>
       )}
-      {rares.length > 0 && (
+      {!alchemist && rares.length > 0 && (
         <div>
           <p className="font-display text-xs tracking-wider text-gold uppercase">The loupe — appraise a wonder</p>
           <ul className="mt-1 space-y-1">
@@ -258,6 +271,7 @@ export function NpcGump() {
       )}
       {p.role === "banker" && (close ? <BankBox /> : <p className="mt-3 text-pretty text-xs text-muted">Walk closer to open the box.</p>)}
       {p.role === "provisioner" && <ProvisionerShop />}
+      {p.role === "alchemist" && <ApothecaryShop />}
       <Button className="mt-3 w-full" variant="ghost" onClick={() => select(null)}>
         Close
       </Button>

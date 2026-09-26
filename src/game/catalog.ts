@@ -272,6 +272,7 @@ export const NPC_META: Record<NpcRole, { label: string }> = {
   banker: { label: "Banker" },
   provisioner: { label: "Provisioner" },
   healer: { label: "Healer" },
+  alchemist: { label: "Master Alchemist" },
 };
 
 export const BUILDING_META: Record<BuildingKind, { label: string }> = {
@@ -292,6 +293,7 @@ export const BUILDING_META: Record<BuildingKind, { label: string }> = {
   tower: { label: "Tower" },
   gatehouse: { label: "Gatehouse" },
   shop: { label: "Shop" },
+  apothecary: { label: "Apothecary" },
   townhome: { label: "Townhome" },
   townhouse: { label: "Townhouse" },
   cottage: { label: "Cottage" },
@@ -313,6 +315,13 @@ export const SHOP_STOCK: ItemId[] = [
   "arrows",
   "rune", "garlic", "ginseng", "silk", "pearl", "moss", "mandrake", "ash", "cabbage", "wheat",
   "cabbage_seed", "wheat_seed", "garlic_seed", "acorn",
+];
+
+/** The Master Alchemist's scales: both draughts and the full reagent purse.
+ *  Nightshade is his alone — the provisioner will not keep it. */
+export const APOTHECARY_STOCK: ItemId[] = [
+  "potion_heal", "potion_night",
+  "garlic", "ginseng", "silk", "nightshade", "pearl", "moss", "mandrake", "ash",
 ];
 
 export function emptySkills(): Record<SkillId, number> {

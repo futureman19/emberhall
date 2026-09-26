@@ -216,7 +216,7 @@ export type SpellId =
   | "recall";
 
 export type ClassId = "ranger" | "warrior" | "mage" | "rogue" | "merchant";
-export type NpcRole = "banker" | "provisioner" | "healer";
+export type NpcRole = "banker" | "provisioner" | "healer" | "alchemist";
 export type FaunaKind =
   | "hare"
   | "hart"
@@ -289,6 +289,7 @@ export type BuildingKind =
   | "tower"
   | "gatehouse"
   | "shop"
+  | "apothecary"
   | "townhome"
   | "townhouse"
   | "cottage"
