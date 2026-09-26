@@ -36136,7 +36136,7 @@
         "key"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:108",
+        "src/components/game/craft-gump.tsx:109",
         "src/components/game/crafting/confirm-craft.tsx:17",
         "src/components/game/crafting/inlay-panel.tsx:25",
         "src/components/game/crafting/material-selector.tsx:36",
@@ -189077,13 +189077,13 @@
       "canonicalId": "src/components/game/craft-gump.tsx#RecipeRow",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/craft-gump.tsx:486"
+        "src/components/game/craft-gump.tsx:490"
       ],
       "sourceNames": [
         "RecipeRow"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:486"
+        "src/components/game/craft-gump.tsx:490"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -189593,13 +189593,13 @@
       "canonicalId": "src/components/game/hud.tsx#BuildRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:798"
+        "src/components/game/hud.tsx:799"
       ],
       "sourceNames": [
         "BuildRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:798"
+        "src/components/game/hud.tsx:799"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -191101,10 +191101,10 @@
           "applicability": "source contract; runtime unverified"
         },
         {
-          "id": "predicate:pileOpen",
+          "id": "predicate:pileOpen || craftOpen",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/hud.tsx:630"
+            "src/components/game/hud.tsx:785"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -191253,13 +191253,13 @@
       "canonicalId": "src/components/game/hud.tsx#TravelRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:824"
+        "src/components/game/hud.tsx:825"
       ],
       "sourceNames": [
         "TravelRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:824"
+        "src/components/game/hud.tsx:825"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [

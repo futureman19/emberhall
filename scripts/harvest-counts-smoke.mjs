@@ -121,6 +121,38 @@ try {
     assert.ok(readability.buttonHeight >= 44);
     assert.ok(readability.scrollHeight > readability.clientHeight);
     assert.ok(readability.hint.bottom <= readability.panel.bottom);
+    const overlap = await page.locator('.craft-panel').evaluate((panel) => {
+      const rect = panel.getBoundingClientRect();
+      const scroll = panel.querySelector('.craft-scroll').getBoundingClientRect();
+      const feedback = panel.querySelector('[role="status"]');
+      const close = [...panel.querySelectorAll('button')].find((button) => button.textContent.trim() === 'Close');
+      const closeRect = close.getBoundingClientRect();
+      const dock = document.querySelector('[data-testid="bottom-dock"]').getBoundingClientRect();
+      const blocked = [];
+      // Hit-test the panel's full surface, including the former HUD overlap strip.
+      for (let x = rect.left + 4; x < rect.right - 4; x += 12) {
+        for (let y = rect.top + 4; y < rect.bottom - 4; y += 12) {
+          if (!panel.contains(document.elementFromPoint(x, y))) blocked.push({ x, y });
+        }
+      }
+      return {
+        blocked,
+        feedback: feedback?.getBoundingClientRect().toJSON(),
+        feedbackText: feedback?.textContent,
+        scroll: scroll.toJSON(), dock: dock.toJSON(),
+        close: closeRect.toJSON(),
+        closeReachable: close.contains(document.elementFromPoint(closeRect.x + closeRect.width / 2, closeRect.y + closeRect.height / 2)),
+        outsideStatuses: [...document.querySelectorAll('[role="status"]')].filter((element) => !panel.contains(element)).map((element) => element.textContent),
+      };
+    });
+    assert.deepEqual(overlap.blocked, [], 'HUD must not cover any crafting surface');
+    assert.match(overlap.feedbackText, /hatchet/i);
+    assert.ok(overlap.feedback.top >= overlap.scroll.bottom, 'Result stays outside scroll content');
+    assert.ok(overlap.feedback.bottom <= overlap.close.top);
+    assert.ok(readability.panel.bottom < overlap.dock.top, 'Bottom navigation remains clear');
+    assert.ok(overlap.closeReachable && overlap.close.height >= 44, 'Close stays touch-accessible');
+    assert.ok(!overlap.outsideStatuses.some((text) => /hatchet/i.test(text)), 'No duplicate floating result');
+    readability.overlap = overlap;
     const scroll = page.getByRole('region', { name: 'Crafting work' });
     const beforeScroll = await scroll.evaluate((el) => el.scrollTop);
     await scroll.focus();
@@ -147,6 +179,10 @@ try {
     assert.equal(state.stacks["highland_ore:ore:rough"], 9);
     assert.equal(state.overflow, false);
     assert.deepEqual(errors, []);
+    await page.locator('.craft-panel').getByRole('button', { name: 'Close', exact: true }).click();
+    assert.equal(await page.locator('.craft-panel').count(), 0);
+    await page.getByRole('button', { name: 'You — pack, paperdoll, skills', exact: true }).click();
+    await page.getByRole('list', { name: 'Resources', exact: true }).waitFor();
     verdict.push({ viewport: viewport.name, state, errors, passed: true });
     await page.close();
   }

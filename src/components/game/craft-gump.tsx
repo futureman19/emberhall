@@ -37,6 +37,7 @@ type WorkTab = (typeof WORK_TABS)[number]["id"];
 
 export function CraftGump() {
   const open = useGame((s) => s.openCraft);
+  const toast = useGame((s) => s.toast);
   const close = useGame((s) => s.closeCraft);
   const make = useGame((s) => s.makeRecipe);
   const makeBatch = useGame((s) => s.makeRecipeBatch);
@@ -143,7 +144,7 @@ export function CraftGump() {
         : null;
   const groups: Group[] = ["bench", "forge", "fire", "field"];
   return (
-    <div className="craft-panel pointer-events-auto absolute top-16 right-3 flex max-h-[min(70vh,36rem)] w-[min(100%-1.5rem,22rem)] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border bg-bg sm:right-4">
+    <div className="craft-panel pointer-events-auto absolute top-16 right-3 z-20 flex max-h-[min(70vh,36rem,calc(100dvh-9rem))] w-[min(100%-1.5rem,22rem)] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border bg-bg sm:right-4">
       <div role="region" aria-label="Crafting work" tabIndex={0} className="craft-scroll min-h-0 overflow-y-auto overscroll-contain p-4">
       <p className="font-display text-sm text-fg">Work</p>
       <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">
@@ -474,11 +475,14 @@ export function CraftGump() {
           </div>
         );
       })}
-      <Button className="mt-3 w-full" variant="secondary" onClick={close}>
-        Close
-      </Button>
       </div>
-      <p className="shrink-0 border-t border-border bg-surface px-4 py-2 text-center text-xs text-muted">Scroll or swipe to browse work ↕</p>
+      <div className="shrink-0 border-t border-border bg-surface px-4 py-2">
+        {toast && <p role="status" className="mb-2 max-h-20 overflow-y-auto text-center text-sm break-words text-fg">{toast}</p>}
+        <p className="text-center text-xs text-muted">Scroll or swipe to browse work ↕</p>
+        <Button className="mt-2 min-h-11 w-full" variant="secondary" onClick={close}>
+          Close
+        </Button>
+      </div>
     </div>
   );
 }

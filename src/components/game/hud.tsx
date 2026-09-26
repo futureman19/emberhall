@@ -786,8 +786,9 @@ function Toast() {
   const toast = useGame((s) => s.toast);
   const houseOpen = useGame((s) => housePanelActive(s.snap.buildings, s.openHouseId, s));
   const pileOpen = useGame((s) => s.snap.piles.some((p) => p.id === s.openPileId));
+  const craftOpen = useGame((s) => s.openCraft);
   if (!toast || houseOpen) return null;
-  if (pileOpen) return null;
+  if (pileOpen || craftOpen) return null;
   return (
     <p role="status" className="pointer-events-none absolute top-48 left-1/2 z-40 w-max max-w-[calc(100vw-2rem)] -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/95 px-4 py-2 text-center font-display text-sm break-words text-fg sm:top-24 sm:max-w-md">
       {toast}
