@@ -4,7 +4,7 @@ import { ItemGlyph } from "@/components/game/paperdoll";
 import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "@/game/catalog";
-import { RECIPES, availableCraftIngredient, canMake, craftBlocker, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
+import { availableCraftIngredient, canMake, craftBlocker, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
 import { BOOTS_FORM, BOW_FORM, CHARM_FORM, GAUNTLETS_FORM, GLOVES_FORM, GREAVES_FORM, HELM_FORM, HOOD_FORM, HOSE_FORM, LEATHER_FORM, MAIL_FORM, RING_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
 import { listResourceInventory } from "@/game/inventory/resources";
 import { getWorld } from "@/game/live";
@@ -17,6 +17,8 @@ import { InlayPanel } from "./crafting/inlay-panel";
 import { ConfirmCraft } from "./crafting/confirm-craft";
 import { RefiningPanel } from "./crafting/refining-panel";
 import { cn } from "@/lib/utils";
+
+import { visibleRecipes } from "./recipe-filter";
 
 type Group = Station | "field";
 
@@ -82,6 +84,9 @@ export function CraftGump() {
   const [ringBinding, setRingBinding] = useState<ResourceStackKey | null>(null);
   const [hoseBinding, setHoseBinding] = useState<ResourceStackKey | null>(null);
   const [tab, setTab] = useState<WorkTab>("forms");
+  const [readyOnly, setReadyOnly] = useState(false);
+  // Subscribe to every snapshot: ghost and nearby fire state also affect readiness.
+  useGame((s) => s.snap);
   if (!open) return null;
   const here = stationsHere(getWorld());
   void x;
@@ -142,6 +147,7 @@ export function CraftGump() {
       : selectedCount(mailPlate) < mailPlateRole.amount || selectedCount(mailLining) < mailLiningRole.amount
         ? "Not enough selected material"
         : null;
+  const recipes = visibleRecipes(getWorld(), readyOnly);
   const groups: Group[] = ["bench", "forge", "fire", "field"];
   return (
     <div className="craft-panel pointer-events-auto absolute top-16 right-3 z-20 flex max-h-[min(70vh,36rem,calc(100dvh-9rem))] w-[min(100%-1.5rem,22rem)] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border bg-bg sm:right-4">
@@ -446,12 +452,23 @@ export function CraftGump() {
           <InlayPanel items={rares} rows={resourceRows} onInlay={inlayItem} />
         </div>
       )}
-      {tab === "recipes" && groups.map((st) => {
+      {tab === "recipes" && <>
+        <div role="group" aria-label="Recipe filter" className="mt-3 flex gap-2">
+          <Button variant={readyOnly ? "secondary" : "default"} className="min-h-11 flex-1" aria-pressed={!readyOnly} onClick={() => setReadyOnly(false)}>All recipes</Button>
+          <Button variant={readyOnly ? "default" : "secondary"} className="min-h-11 flex-1" aria-pressed={readyOnly} onClick={() => setReadyOnly(true)}>Ready to craft</Button>
+        </div>
+        {readyOnly && <p className="mt-2 text-xs text-muted">Ready to attempt here. Success still depends on skill.</p>}
+        {readyOnly && recipes.length === 0 && <div className="mt-4 rounded-[var(--radius-xs)] border border-border bg-surface p-3">
+          <p className="text-sm text-fg">No recipes ready here.</p>
+          <p className="mt-1 text-xs leading-relaxed text-muted">Check All recipes for the next requirement: materials, a station, a blade, or returning to life.</p>
+          <Button variant="secondary" className="mt-3 min-h-11 w-full" onClick={() => setReadyOnly(false)}>Show all recipes</Button>
+        </div>}
+        {groups.map((st) => {
         const at = st === "field" ? true : here.includes(st);
         const list = st === "field"
-          ? RECIPES.filter((r) => r.station === null && !r.exactRecipeId)
-          : RECIPES.filter((r) => r.station === st && !r.exactRecipeId);
-        if (st === "field" && list.length === 0) return null;
+          ? recipes.filter((r) => r.station === null)
+          : recipes.filter((r) => r.station === st);
+        if (list.length === 0) return null;
         return (
           <div key={st} className="mt-4">
             <p className="font-display text-xs tracking-wider text-muted uppercase">{TITLE[st].title}</p>
@@ -474,7 +491,7 @@ export function CraftGump() {
             </ul>
           </div>
         );
-      })}
+      })}</>}
       </div>
       <div className="shrink-0 border-t border-border bg-surface px-4 py-2">
         {toast && <p role="status" className="mb-2 max-h-20 overflow-y-auto text-center text-sm break-words text-fg">{toast}</p>}

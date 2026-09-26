@@ -8,6 +8,52 @@ import { createWorld } from "../../game/world.ts";
 
 const source = readFileSync(new URL("./craft-gump.tsx", import.meta.url), "utf8");
 
+test("ordinary Recipes defaults to All with accessible ready toggle and recovery", () => {
+  assert.match(source, /const \[readyOnly, setReadyOnly\] = useState\(false\)/);
+  assert.match(source, /aria-pressed=\{readyOnly\}/);
+  assert.match(source, /Ready to craft/);
+  assert.match(source, /No recipes ready here/);
+  assert.match(source, /Show all recipes/);
+  assert.match(source, /visibleRecipes\(getWorld\(\), readyOnly\)/);
+});
+
+test("ready filter uses current materials, station, blade, ghost and fire without mutation", async () => {
+  const { visibleRecipes } = await import("./recipe-filter.ts");
+  const world = createWorld(1);
+  const player = you(world)!;
+  const yard = world.buildings.find((b) => b.kind === "yard")!;
+  Object.assign(player, { x: yard.tx, z: yard.ty });
+  for (const id of Object.keys(world.player.pack)) world.player.pack[id as keyof typeof world.player.pack] = 0;
+  world.player.resources.stacks = { "oak:log:sound": 1, "highland_ore:ore:pristine": 8 };
+  const has = (id: string) => visibleRecipes(world, true).some((r) => r.id === id);
+  const before = structuredClone(world);
+  assert.equal(has("board"), true);
+  assert.equal(has("smelt"), false);
+  assert.ok(visibleRecipes(world).length > visibleRecipes(world, true).length);
+  assert.ok(visibleRecipes(world).every((r) => !r.exactRecipeId));
+  assert.deepEqual(structuredClone(world), before);
+  world.player.resources.stacks = {};
+  assert.equal(has("board"), false);
+  world.player.pack.silk = 3;
+  world.player.wear.main = undefined;
+  assert.equal(has("cut_bandage"), false);
+  world.player.wear.main = "knife";
+  assert.equal(has("cut_bandage"), true);
+  world.player.ghost = true;
+  assert.deepEqual(visibleRecipes(world, true), []);
+  world.player.ghost = false;
+  world.player.pack.log = 3;
+  assert.equal(has("campfire"), true);
+  const { placeCampfire } = await import("../../game/campfire.ts");
+  placeCampfire(world);
+  assert.equal(has("campfire"), false);
+  world.player.pack.ore = 1;
+  assert.equal(has("smelt"), false);
+  const forge = world.buildings.find((b) => b.kind === "forge")!;
+  Object.assign(player, { x: forge.tx, z: forge.ty });
+  assert.equal(has("smelt"), true);
+});
+
 test("RecipeRow routes readiness through world-aware materials without removing station gate", () => {
   assert.match(source, /const ready = at && canMake\(getWorld\(\), rec\)/);
   assert.doesNotMatch(source, /haveNeed\(pack, rec\)/);

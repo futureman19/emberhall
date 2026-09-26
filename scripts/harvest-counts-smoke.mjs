@@ -73,6 +73,15 @@ try {
     assert.equal(await row("Torch").getByRole('button', { name: 'Make', exact: true }).isDisabled(), true);
     assert.match(await row("Smelt ore").locator('.craft-blocker').innerText(), /forge/);
     await page.screenshot({ path: resolve(output, `${viewport.name}-blocker.png`) });
+    const allFilter = page.getByRole('button', { name: 'All recipes', exact: true });
+    const readyFilter = page.getByRole('button', { name: 'Ready to craft', exact: true });
+    assert.equal(await allFilter.getAttribute('aria-pressed'), 'true');
+    await readyFilter.click();
+    assert.equal(await readyFilter.getAttribute('aria-pressed'), 'true');
+    assert.ok((await readyFilter.boundingBox()).height >= 44);
+    assert.equal(await row('Smelt ore').count(), 0);
+    assert.equal(await row('Torch').count(), 0);
+    await page.screenshot({ path: resolve(output, `${viewport.name}-ready.png`) });
     await row("Boards").getByRole("button", { name: "Make", exact: true }).click({ noWaitAfter: true });
     await row("Torch").scrollIntoViewIfNeeded();
     assert.equal(await torchBlocker.count(), 0);
@@ -80,6 +89,9 @@ try {
     assert.match(await row("Boards").innerText(), /Log\s*\(1\)/);
     await row("Boards").evaluate((element) => element.scrollIntoView({ block: "center" }));
     await page.screenshot({ path: resolve(output, `${viewport.name}-boards.png`) });
+    await allFilter.click();
+    assert.equal(await row('Smelt ore').count(), 1);
+    await readyFilter.click();
     console.log(`${viewport.name}: entering fixture`);
     await page.evaluate(async () => {
       const live = await import("/src/game/live.ts");
@@ -93,6 +105,8 @@ try {
     console.log(`${viewport.name}: smelting`);
     await row("Smelt ore").getByRole("button", { name: "Max 4", exact: true }).click({ noWaitAfter: true });
     console.log(`${viewport.name}: smelted`);
+    assert.equal(await row('Smelt ore').count(), 0, 'Spent materials remove recipe immediately');
+    await allFilter.click();
     assert.match(await row("Smelt ore").innerText(), /Iron ore\s*\(0\)/i);
     console.log(`${viewport.name}: making hatchet`, await row("Hatchet").innerText());
     console.log(await page.evaluate(async () => (await import("/src/game/live.ts")).getWorld().player.pack));
@@ -189,6 +203,26 @@ try {
     assert.equal(state.stacks["highland_ore:ore:rough"], 9);
     assert.equal(state.overflow, false);
     assert.deepEqual(errors, []);
+    await readyFilter.click();
+    await page.evaluate(async () => {
+      const live = await import('/src/game/live.ts');
+      const { useGame } = await import(window.__harvestSmokeStoreUrl);
+      const world = live.getWorld();
+      world.player.ghost = true;
+      useGame.setState({ snap: live.snapshot(world) });
+    });
+    await page.getByText('No recipes ready here.', { exact: true }).waitFor();
+    assert.equal(await page.locator('.craft-recipe').count(), 0);
+    await page.screenshot({ path: resolve(output, `${viewport.name}-ready-empty.png`) });
+    await page.getByRole('button', { name: 'Show all recipes', exact: true }).click();
+    assert.equal(await allFilter.getAttribute('aria-pressed'), 'true');
+    assert.ok(await page.locator('.craft-recipe').count() > 0);
+    await page.evaluate(async () => {
+      const live = await import('/src/game/live.ts');
+      const { useGame } = await import(window.__harvestSmokeStoreUrl);
+      live.getWorld().player.ghost = false;
+      useGame.setState({ snap: live.snapshot(live.getWorld()) });
+    });
     await page.locator('.craft-panel').getByRole('button', { name: 'Close', exact: true }).click();
     assert.equal(await page.locator('.craft-panel').count(), 0);
     await page.getByRole('button', { name: 'You — pack, paperdoll, skills', exact: true }).click();

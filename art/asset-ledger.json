@@ -76,6 +76,7 @@
     "src/components/game/pets-gump.tsx",
     "src/components/game/pile-meshes.tsx",
     "src/components/game/placeable-meshes.tsx",
+    "src/components/game/recipe-filter.ts",
     "src/components/game/resource-visuals.ts",
     "src/components/game/screen-rain.tsx",
     "src/components/game/settings-gump.tsx",
@@ -26241,12 +26242,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -26310,12 +26312,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -26379,12 +26382,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -26448,12 +26452,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -26517,12 +26522,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -26586,12 +26592,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -26655,12 +26662,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -26724,12 +26732,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -26793,12 +26802,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -26862,12 +26872,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -26931,12 +26942,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -27000,12 +27012,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -27069,12 +27082,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -27138,12 +27152,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -27207,12 +27222,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -27276,12 +27292,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -27345,12 +27362,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -27414,12 +27432,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -27483,12 +27502,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -27552,12 +27572,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -27621,12 +27642,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -27690,12 +27712,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -27759,12 +27782,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -27828,12 +27852,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -27897,12 +27922,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -27966,12 +27992,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -28035,12 +28062,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -28104,12 +28132,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -28173,12 +28202,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -28242,12 +28272,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -28311,12 +28342,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -28380,12 +28412,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -28449,12 +28482,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -28518,12 +28552,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -28587,12 +28622,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -28656,12 +28692,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -28725,12 +28762,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -28794,12 +28832,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -28863,12 +28902,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -28932,12 +28972,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -29001,12 +29042,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -29070,12 +29112,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -29139,12 +29182,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -29208,12 +29252,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -29277,12 +29322,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -29346,12 +29392,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -29415,12 +29462,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -29484,12 +29532,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -29553,12 +29602,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -29622,12 +29672,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -29691,12 +29742,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -29760,12 +29812,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -29829,12 +29882,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -29898,12 +29952,13 @@
       ],
       "rendererLocations": [
         "src/components/game/craft-gump.tsx:1",
-        "src/components/game/craft-gump.tsx:7",
+        "src/components/game/recipe-filter.ts:1",
         "src/components/game/world-scene.tsx:1"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/craft-gump.tsx",
+        "src/components/game/recipe-filter.ts",
         "src/components/game/world-scene.tsx"
       ],
       "jsxTags": null,
@@ -36136,7 +36191,7 @@
         "key"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:109",
+        "src/components/game/craft-gump.tsx:114",
         "src/components/game/crafting/confirm-craft.tsx:17",
         "src/components/game/crafting/inlay-panel.tsx:25",
         "src/components/game/crafting/material-selector.tsx:36",
@@ -36249,6 +36304,64 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/people-meshes.tsx:32"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/recipe-filter.ts#visibleRecipes",
+      "canonicalId": "src/components/game/recipe-filter.ts#visibleRecipes",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/recipe-filter.ts:5"
+      ],
+      "sourceNames": [
+        "visibleRecipes"
+      ],
+      "rendererLocations": [
+        "src/components/game/recipe-filter.ts:5"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/recipe-filter.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/recipe-filter.ts:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/recipe-filter.ts:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/recipe-filter.ts:5"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -188694,13 +188807,13 @@
       "canonicalId": "src/components/game/craft-gump.tsx#CraftGump",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/craft-gump.tsx:38"
+        "src/components/game/craft-gump.tsx:40"
       ],
       "sourceNames": [
         "CraftGump"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:38"
+        "src/components/game/craft-gump.tsx:40"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -188890,6 +189003,14 @@
           "applicability": "source contract; runtime unverified"
         },
         {
+          "id": "predicate:list.length === 0",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/craft-gump.tsx:40"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
           "id": "predicate:mailPlate",
           "status": "inventoried",
           "evidence": [
@@ -188918,6 +189039,14 @@
           "status": "inventoried",
           "evidence": [
             "src/components/game/craft-gump.tsx:30"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:readyOnly",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/craft-gump.tsx:40"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -189018,14 +189147,6 @@
           "applicability": "source contract; runtime unverified"
         },
         {
-          "id": "predicate:st === \"field\" && list.length === 0",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/craft-gump.tsx:28"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
           "id": "predicate:st === \"forge\"",
           "status": "inventoried",
           "evidence": [
@@ -189077,13 +189198,13 @@
       "canonicalId": "src/components/game/craft-gump.tsx#RecipeRow",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/craft-gump.tsx:490"
+        "src/components/game/craft-gump.tsx:507"
       ],
       "sourceNames": [
         "RecipeRow"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:490"
+        "src/components/game/craft-gump.tsx:507"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
