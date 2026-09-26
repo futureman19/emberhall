@@ -143,7 +143,8 @@ export function CraftGump() {
         : null;
   const groups: Group[] = ["bench", "forge", "fire", "field"];
   return (
-    <div className="pointer-events-auto absolute top-16 right-3 max-h-[min(70vh,36rem)] w-[min(100%-1.5rem,22rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 sm:right-4">
+    <div className="craft-panel pointer-events-auto absolute top-16 right-3 flex max-h-[min(70vh,36rem)] w-[min(100%-1.5rem,22rem)] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border bg-bg sm:right-4">
+      <div role="region" aria-label="Crafting work" tabIndex={0} className="craft-scroll min-h-0 overflow-y-auto overscroll-contain p-4">
       <p className="font-display text-sm text-fg">Work</p>
       <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">
         Wood at the yard. Iron at a forge. A blade anywhere. The work takes, or it splits.
@@ -476,6 +477,8 @@ export function CraftGump() {
       <Button className="mt-3 w-full" variant="secondary" onClick={close}>
         Close
       </Button>
+      </div>
+      <p className="shrink-0 border-t border-border bg-surface px-4 py-2 text-center text-xs text-muted">Scroll or swipe to browse work ↕</p>
     </div>
   );
 }
@@ -503,12 +506,9 @@ function RecipeRow({
   const product = (Object.keys(rec.give) as ItemId[]).find((k) => (rec.give[k] ?? 0) > 0);
   return (
     <div
-      className={cn(
-        "flex min-h-11 w-full flex-col items-stretch rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 py-2 text-left",
-        !ready && "opacity-60",
-      )}
+      className="craft-recipe flex min-h-11 w-full flex-col items-stretch rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 py-2 text-left"
     >
-      <span className="flex items-center justify-between gap-2">
+      <span className="flex flex-wrap items-center justify-between gap-2">
         <Tip content={product ? <ItemTipContent id={product} /> : null} side="bottom">
           <span className="text-sm text-fg underline decoration-dotted decoration-border-strong underline-offset-2">{rec.label}</span>
         </Tip>
@@ -517,7 +517,7 @@ function RecipeRow({
             type="button"
             disabled={!ready}
             onClick={onMake}
-            className="min-h-8 rounded-[var(--radius-xs)] border border-border bg-bg px-2 text-xs text-fg disabled:opacity-50"
+            className="min-h-11 rounded-[var(--radius-xs)] border border-gold/60 bg-bg px-2 text-xs text-fg disabled:cursor-not-allowed disabled:border-dashed disabled:border-border-strong disabled:bg-surface disabled:text-muted"
           >
             Make
           </button>
@@ -525,7 +525,7 @@ function RecipeRow({
             type="button"
             disabled={!ready || max < 5}
             onClick={() => onMakeBatch(5)}
-            className="min-h-8 rounded-[var(--radius-xs)] border border-border bg-bg px-2 text-xs text-fg disabled:opacity-50"
+            className="min-h-11 rounded-[var(--radius-xs)] border border-gold/60 bg-bg px-2 text-xs text-fg disabled:cursor-not-allowed disabled:border-dashed disabled:border-border-strong disabled:bg-surface disabled:text-muted"
           >
             ×5
           </button>
@@ -533,7 +533,7 @@ function RecipeRow({
             type="button"
             disabled={!ready || max < 2}
             onClick={() => onMakeBatch(max)}
-            className="min-h-8 rounded-[var(--radius-xs)] border border-border bg-bg px-2 text-xs text-fg disabled:opacity-50"
+            className="min-h-11 rounded-[var(--radius-xs)] border border-gold/60 bg-bg px-2 text-xs text-fg disabled:cursor-not-allowed disabled:border-dashed disabled:border-border-strong disabled:bg-surface disabled:text-muted"
           >
             Max{max > 1 ? ` ${max}` : ""}
           </button>

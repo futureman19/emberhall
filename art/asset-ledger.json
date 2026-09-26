@@ -189077,13 +189077,13 @@
       "canonicalId": "src/components/game/craft-gump.tsx#RecipeRow",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/craft-gump.tsx:483"
+        "src/components/game/craft-gump.tsx:486"
       ],
       "sourceNames": [
         "RecipeRow"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:483"
+        "src/components/game/craft-gump.tsx:486"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [

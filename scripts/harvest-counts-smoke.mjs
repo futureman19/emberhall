@@ -89,7 +89,46 @@ try {
     await row("Hatchet").getByRole("button", { name: "Make", exact: true }).click({ noWaitAfter: true });
     console.log(`${viewport.name}: made hatchet`);
     await row("Smelt ore").evaluate((element) => element.scrollIntoView({ block: "center" }));
+    await page.mouse.move(0, 0);
+    await page.waitForTimeout(200);
+    const readability = await page.locator('.craft-panel').evaluate((panel) => {
+      const scroll = panel.querySelector('.craft-scroll');
+      const card = panel.querySelector('.craft-recipe');
+      const disabled = panel.querySelector('.craft-recipe button:disabled');
+      const muted = card.querySelector('.text-muted');
+      return {
+        panel: panel.getBoundingClientRect().toJSON(),
+        scrollClass: scroll.className,
+        scrollHeight: scroll.scrollHeight, clientHeight: scroll.clientHeight,
+        cardOpacity: getComputedStyle(card).opacity,
+        textColor: getComputedStyle(muted).color,
+        background: getComputedStyle(card).backgroundColor,
+        disabled: disabled.disabled,
+        disabledBorder: getComputedStyle(disabled).borderStyle,
+        buttonHeight: disabled.getBoundingClientRect().height,
+        hint: panel.lastElementChild.getBoundingClientRect().toJSON(),
+      };
+    });
+    const luminance = (color) => color.match(/\d+/g).slice(0, 3).map(Number)
+      .map((channel) => channel / 255)
+      .map((channel) => channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4)
+      .reduce((sum, channel, index) => sum + channel * [0.2126, 0.7152, 0.0722][index], 0);
+    readability.contrast = (luminance(readability.textColor) + 0.05) / (luminance(readability.background) + 0.05);
+    assert.ok(readability.contrast >= 4.5, 'Recipe secondary text must meet normal-text contrast');
+    assert.equal(readability.cardOpacity, '1');
+    assert.equal(readability.disabled, true);
+    assert.equal(readability.disabledBorder, 'dashed');
+    assert.ok(readability.buttonHeight >= 44);
+    assert.ok(readability.scrollHeight > readability.clientHeight);
+    assert.ok(readability.hint.bottom <= readability.panel.bottom);
+    const scroll = page.getByRole('region', { name: 'Crafting work' });
+    const beforeScroll = await scroll.evaluate((el) => el.scrollTop);
+    await scroll.focus();
+    await page.keyboard.press('ArrowDown');
+    await page.waitForTimeout(200);
+    assert.ok(await scroll.evaluate((el) => el.scrollTop) > beforeScroll);
     await page.screenshot({ path: resolve(output, `${viewport.name}-forge.png`) });
+    writeFileSync(resolve(output, `${viewport.name}-readability.json`), JSON.stringify(readability, null, 2));
     console.log(`${viewport.name}: saving`);
     const state = await page.evaluate(async () => {
       const { getWorld } = await import("/src/game/live.ts");
