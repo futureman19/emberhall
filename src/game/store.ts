@@ -284,9 +284,20 @@ export const useGame = create<GameUI>((set, get) => ({
           loadProgress: 0.34,
         });
         await wait(50);
+        // Lazy: keeps the QA aid out of the entry chunk — and the ledger's
+        // line pins above (Phase/GameUI vocabulary) undisturbed.
+        const { grantEverything, syncTestKitFromUrl, testKitEnabled } = await import("./testkit.ts");
+        syncTestKitFromUrl(window.location.search);
         if (fresh) {
           clearSave();
           resetWorld();
+          if (testKitEnabled()) {
+            grantEverything(getWorld());
+            getWorld().log.unshift({
+              t: getWorld().hour,
+              text: "A tester's bounty — every ware and material the vale knows.",
+            });
+          }
         } else {
           const loaded = loadSave();
           if (loaded) setWorld(loaded);

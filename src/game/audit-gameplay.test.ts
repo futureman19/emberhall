@@ -1,13 +1,21 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { inGreybarrow, inPlace } from "./atlas.ts";
-import { FAUNA_META } from "./catalog.ts";
+import { FAUNA_META, ITEM_META } from "./catalog.ts";
 import { seedFauna, spawn, tickEcology } from "./ecology.ts";
 import { commandHarvest, commandPlant, commandTill, plotAt } from "./farm.ts";
 import { commandPlantTree, saplingAt } from "./forestry.ts";
-import { makeResourceStackKey, resourceCount } from "./inventory/resources.ts";
+import { makeResourceStackKey, parseResourceStackKey, resourceCount } from "./inventory/resources.ts";
 import { commandCast } from "./magery.ts";
 import { commandBuy, commandSell, commandSellRare } from "./npcs.ts";
+import { RESOURCE_CATALOG } from "./resources/catalog.ts";
+import {
+  grantEverything,
+  syncTestKitFromUrl,
+  TEST_KIT_GOLD,
+  TEST_KIT_ITEM_STACK,
+  TEST_KIT_RESOURCE_STACK,
+} from "./testkit.ts";
 import { addToPile, spawnCorpsePile, takeFromPile, tickPiles } from "./piles.ts";
 import {
   commandChop,
@@ -18,7 +26,7 @@ import {
 } from "./player.ts";
 import { mulberry32 } from "./rng.ts";
 import { tickWorld } from "./sim.ts";
-import type { Creature, FaunaKind, RareItem, SpellId, World } from "./types.ts";
+import type { Creature, FaunaKind, ItemId, RareItem, SpellId, World } from "./types.ts";
 import { createPerson, createStubWorld, createWorld } from "./world.ts";
 
 /**
@@ -614,4 +622,69 @@ test("G7 - a ghost cannot trade even at the counter (control)", () => {
   world.player.ghost = true;
   assert.equal(commandBuy(world, "hatchet"), "A ghost cannot.");
   assert.equal(world.gold, 80);
+});
+
+// ---------------------------------------------------------------------------
+// G8 — the test kit hands a fresh character the whole catalog (dev QA aid).
+// ---------------------------------------------------------------------------
+
+test("G8 - grantEverything stocks every catalog item on a fresh character", () => {
+  const { world } = playerWorld();
+  const summary = grantEverything(world);
+  const ids = Object.keys(ITEM_META) as ItemId[];
+  for (const id of ids) {
+    assert.equal(world.player.pack[id], TEST_KIT_ITEM_STACK, `pack holds a full stack of ${id}`);
+  }
+  assert.equal(summary.items, ids.length);
+  assert.ok(world.gold >= TEST_KIT_GOLD, "the kit pays for vendor testing");
+});
+
+test("G8 - grantEverything stocks every resource form at every quality", () => {
+  const { world } = playerWorld();
+  const summary = grantEverything(world);
+  let expected = 0;
+  for (const definition of Object.values(RESOURCE_CATALOG)) {
+    const qualities =
+      definition.qualityType === "clarity"
+        ? ["cracked", "flawed", "cut", "flawless", "perfect"]
+        : ["rough", "sound", "choice", "pristine"];
+    for (const form of definition.forms) {
+      for (const quality of qualities) {
+        expected += 1;
+        const key = parseResourceStackKey(`${definition.id}:${form}:${quality}`);
+        assert.equal(
+          resourceCount(world.player.resources, key),
+          TEST_KIT_RESOURCE_STACK,
+          `${definition.id} ${form} ${quality}`,
+        );
+      }
+    }
+  }
+  assert.ok(expected > 0);
+  assert.equal(summary.stacks, expected);
+});
+
+test("G8 - the kit tops up instead of resetting existing progress", () => {
+  const { world } = playerWorld();
+  world.gold = TEST_KIT_GOLD + 1;
+  world.player.resources.stacks[makeResourceStackKey("ruby", "gem", "perfect")] =
+    TEST_KIT_RESOURCE_STACK + 7;
+  grantEverything(world);
+  assert.equal(world.gold, TEST_KIT_GOLD + 1, "a richer purse is kept");
+  assert.equal(
+    resourceCount(
+      world.player.resources,
+      makeResourceStackKey("ruby", "gem", "perfect"),
+    ),
+    TEST_KIT_RESOURCE_STACK + 7,
+    "a richer stack is kept",
+  );
+});
+
+test("G8 - the flag parses only an explicit 1 or 0", () => {
+  assert.equal(syncTestKitFromUrl("?testkit=1"), true);
+  assert.equal(syncTestKitFromUrl("?testkit=0"), false);
+  assert.equal(syncTestKitFromUrl("?testkit=yes"), null);
+  assert.equal(syncTestKitFromUrl("?foo=bar"), null);
+  assert.equal(syncTestKitFromUrl(""), null);
 });
