@@ -35,8 +35,6 @@ import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGathering
 import { groundY as heightAt } from "@/game/height";
 import { keepStoryY } from "@/game/keep-story";
 import { getGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
-import { SPELL_EFFECT_CAP, selectSpellLabel, spellEffects, spellImpactOpacityScale } from "@/game/spell-effects";
-import { SpellFlightMesh, SpellStatusMesh } from "./spell-effects-mesh";
 import { useEffectsReduced } from "./effects-preference";
 import { getWorld } from "@/game/live";
 import { getCastFx, getDeathFx, getFizzleFx, SPELL_META } from "@/game/magery";
@@ -359,11 +357,10 @@ function WalkMarker() {
   );
 }
 
-const MOTES_MAX = 4;
-const SHARDS_MAX = 4;
-const SPELL_SLOTS = Array.from({ length: SPELL_EFFECT_CAP }, (_, i) => i);
+const MOTES_MAX = 12;
+const SHARDS_MAX = 10;
 
-function CastFxMesh({ slot }: { slot: number }) {
+function CastFxMesh() {
   const group = useRef<THREE.Group>(null);
   const puff = useRef<THREE.Mesh>(null);
   const bolt = useRef<THREE.Mesh>(null);
@@ -377,7 +374,7 @@ function CastFxMesh({ slot }: { slot: number }) {
   const shards = useRef<(THREE.Mesh | null)[]>([]);
   const words = useRef<HTMLDivElement>(null);
   useFrame(() => {
-    const fx = getCastFx(getWorld(), slot);
+    const fx = getCastFx();
     const g = group.current;
     const puffMesh = puff.current;
     const boltMesh = bolt.current;
@@ -394,16 +391,34 @@ function CastFxMesh({ slot }: { slot: number }) {
     const duration = profile?.duration ?? 0.68;
     const live = Boolean(fx && profile && age >= 0 && age <= duration);
 
-    // A single label selects independently of this slot's oldest-first impact.
-    const label = slot === 0 ? selectSpellLabel(world) : null;
-    if (words.current) {
-      words.current.style.display = label ? "grid" : "none";
-      if (label) {
-        words.current.textContent = SPELL_META[label.spell].words;
-        words.current.style.borderColor = label.phase === "windup" ? windupGlow(label.spell) : spellFxProfile(label.spell).ring;
+    // The words of power: above the caster while they are spoken (windup),
+    // then riding the release flash.
+    let wordsText: string | null = null;
+    let wordsX = 0;
+    let wordsZ = 0;
+    let wordsColor = "#e0b56a";
+    if (live && fx && profile) {
+      wordsText = SPELL_META[fx.spell].words;
+      wordsX = fx.x;
+      wordsZ = fx.z;
+      wordsColor = profile.ring;
+    } else if (world.player.intent.kind === "cast" && world.player.intent.spell) {
+      const caster = world.people.find((person) => person.isPlayer);
+      if (caster && !caster.path.length) {
+        wordsText = SPELL_META[world.player.intent.spell].words;
+        wordsX = caster.x;
+        wordsZ = caster.z;
+        wordsColor = windupGlow(world.player.intent.spell);
       }
     }
-    if (label) anchor.position.set(label.x, groundY(label.x, label.z) + 2.15, label.z);
+    if (words.current) {
+      words.current.style.display = wordsText ? "grid" : "none";
+      if (wordsText) {
+        words.current.textContent = wordsText;
+        words.current.style.borderColor = wordsColor;
+      }
+    }
+    anchor.position.set(wordsX, wordsX || wordsZ ? groundY(wordsX, wordsZ) + 2.15 : 0, wordsZ);
 
     if (!fx || !profile || !live) {
       g.visible = false;
@@ -428,10 +443,10 @@ function CastFxMesh({ slot }: { slot: number }) {
     for (let i = 0; i < SHARDS_MAX; i++) {
       const shard = shards.current[i];
       if (!shard) continue;
-      const shardLive = projectile || skyStrike;
+      const shardLive = (projectile && t > 0.5) || (skyStrike && t > 0.12);
       shard.visible = shardLive;
       if (!shardLive) continue;
-      const s = impactShard(fx.spell, i, t);
+      const s = impactShard(fx.spell, i, (t - (skyStrike ? 0.12 : 0.5)) / (skyStrike ? 0.88 : 0.5));
       shard.position.set(fx.tx + s.dx, groundY(fx.tx, fx.tz) + s.dy, fx.tz + s.dz);
       shard.scale.setScalar(s.scale * (profile.kind === "burst" ? 1.7 : 1.05));
       shard.rotation.set(age * (3 + i * 0.4), i * 1.7 + age * 2.2, 0);
@@ -449,7 +464,7 @@ function CastFxMesh({ slot }: { slot: number }) {
       mote.visible = moteLive;
       if (!moteLive) continue;
       const m = moteState(fx.spell, i, age);
-      mote.position.set(fx.tx + m.dx, groundY(fx.tx, fx.tz) + m.dy, fx.tz + m.dz);
+      mote.position.set(fx.x + m.dx, groundY(fx.x, fx.z) + m.dy, fx.z + m.dz);
       mote.scale.setScalar(m.scale);
       const mat = mote.material as THREE.MeshBasicMaterial;
       mat.color.set(i % 3 === 0 ? profile.accent : profile.motes);
@@ -459,12 +474,12 @@ function CastFxMesh({ slot }: { slot: number }) {
     sigilGroup.visible = selfFx && profile.kind === "sigil";
     if (selfFx) {
       const bloom = ringBloom(fx.spell, t);
-      ringMesh.position.set(fx.tx, groundY(fx.tx, fx.tz) + 0.06, fx.tz);
+      ringMesh.position.set(fx.x, groundY(fx.x, fx.z) + 0.06, fx.z);
       ringMesh.scale.setScalar(bloom.scale);
       ringMat.color.set(profile.ring);
       ringMat.opacity = bloom.opacity;
       if (sigilGroup.visible) {
-        sigilGroup.position.set(fx.tx, groundY(fx.tx, fx.tz) + 0.07, fx.tz);
+        sigilGroup.position.set(fx.x, groundY(fx.x, fx.z) + 0.07, fx.z);
         sigilGroup.rotation.y = age * 1.3;
         sigilGroup.traverse((object) => {
           if (!(object instanceof THREE.Mesh)) return;
@@ -474,11 +489,10 @@ function CastFxMesh({ slot }: { slot: number }) {
     }
 
     if (projectile) {
-      // Flight is rendered before the authoritative resolution, never after it.
-      const k = 1;
+      const k = Math.min(1, t * 1.55);
       const shot = spellProjectileProfile(fx.spell);
       const fat = profile.kind === "burst";
-      boltMesh.visible = false;
+      boltMesh.visible = t < 0.72;
       boltMesh.position.set(
         fx.x + (fx.tx - fx.x) * k,
         y0 + (y1 - y0) * k,
@@ -487,7 +501,7 @@ function CastFxMesh({ slot }: { slot: number }) {
       boltMesh.scale.setScalar(shot.coreScale);
       boltMat.color.set(shot.core);
       boltMat.opacity = 0.95 * (1 - t);
-      trailMesh.visible = false;
+      trailMesh.visible = t < 0.72;
       trailMesh.position.set(
         (fx.x + boltMesh.position.x) * 0.5,
         (y0 + boltMesh.position.y) * 0.5,
@@ -508,18 +522,17 @@ function CastFxMesh({ slot }: { slot: number }) {
       puffMesh.position.set(fx.tx, y1, fx.tz);
       puffMesh.scale.setScalar(shot.impactScale * (0.35 + t * 1.25));
       puffMat.color.set(shot.impact);
-      puffMat.opacity = (fat ? 0.28 : 0.2) * (1 - t);
-      impactMesh.visible = true;
+      puffMat.opacity = (fat ? 0.68 : 0.5) * (1 - t);
+      impactMesh.visible = t > 0.32;
       impactMesh.position.set(fx.tx, groundY(fx.tx, fx.tz) + 0.08, fx.tz);
-      impactMesh.scale.setScalar((fat ? 1.2 : 1) + t * 0.8);
+      impactMesh.scale.setScalar(shot.impactScale * (0.45 + t * 1.2));
       impactMat.color.set(shot.impact);
       impactMat.opacity = 0.78 * (1 - t);
     } else if (travel) {
       trailMesh.visible = false;
       impactMesh.visible = false;
-      boltMesh.visible = fx.spell === "teleport" || fx.spell === "recall";
-      const k = 0;
-      boltMesh.scale.setScalar(Math.max(0.01, 2 * (1 - t)));
+      boltMesh.visible = t < 0.45;
+      const k = Math.min(1, t * 2.2);
       boltMesh.position.set(
         fx.x + (fx.tx - fx.x) * k,
         y0 + (y1 - y0) * k,
@@ -530,7 +543,7 @@ function CastFxMesh({ slot }: { slot: number }) {
       puffMesh.position.set(fx.tx, y1, fx.tz);
       puffMesh.scale.setScalar(0.7 + t * 2.2);
       puffMat.color.set(profile.ring);
-      puffMat.opacity = 0.22 * (1 - t);
+      puffMat.opacity = 0.7 * (1 - t);
     } else if (skyStrike) {
       // Lightning: a white column falls out of the sky onto the target —
       // flicker-hot at first, then gone, leaving the impact ring and shards.
@@ -556,12 +569,11 @@ function CastFxMesh({ slot }: { slot: number }) {
       trailMesh.visible = false;
       impactMesh.visible = false;
       boltMesh.visible = false;
-      puffMesh.position.set(fx.tx, y1, fx.tz);
+      puffMesh.position.set(fx.x, y0, fx.z);
       puffMesh.scale.setScalar(0.55 + t * 1.8);
       puffMat.color.set(profile.core);
-      puffMat.opacity = 0.25 * (1 - t);
+      puffMat.opacity = 0.6 * (1 - t);
     }
-    puffMat.opacity *= spellImpactOpacityScale(spellEffects(world), fx);
   });
   return (
     <group ref={group} visible={false}>
@@ -610,13 +622,13 @@ function CastFxMesh({ slot }: { slot: number }) {
         />
       </mesh>
       <mesh ref={impact} visible={false} rotation={[-Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[0.65, 0.73, 18]} />
+        <ringGeometry args={[0.2, 0.34, 18]} />
         <meshBasicMaterial
           color="#8ec8ff"
           transparent
           opacity={0.7}
           depthWrite={false}
-          depthTest={true}
+          depthTest={false}
           toneMapped={false}
         />
       </mesh>
@@ -672,7 +684,6 @@ function CastFxMesh({ slot }: { slot: number }) {
         <Html center zIndexRange={[27, 0]} style={{ pointerEvents: "none" }}>
           <div
             ref={words}
-            data-testid={slot === 0 ? "spell-label" : undefined}
             style={{
               display: "none",
               placeItems: "center",
@@ -863,13 +874,13 @@ function MoongateTravelFxMesh() {
   );
 }
 
-function TravelFxMesh({ slot }: { slot: number }) {
+function TravelFxMesh() {
   const sourceRing = useRef<THREE.Mesh>(null);
   const destinationRing = useRef<THREE.Mesh>(null);
   const sourceColumn = useRef<THREE.Mesh>(null);
   const destinationColumn = useRef<THREE.Mesh>(null);
   useFrame(() => {
-    const fx = getCastFx(getWorld(), slot);
+    const fx = getCastFx();
     const meshes = [
       sourceRing.current,
       destinationRing.current,
@@ -944,10 +955,10 @@ function TravelFxMesh({ slot }: { slot: number }) {
   );
 }
 
-function FizzleFxMesh({ slot }: { slot: number }) {
+function FizzleFxMesh() {
   const group = useRef<THREE.Group>(null);
   useFrame(() => {
-    const fx = getFizzleFx(getWorld(), slot);
+    const fx = getFizzleFx();
     const g = group.current;
     if (!g) return;
     const age = fx ? (getWorld().hour - fx.at) * SECONDS_PER_HOUR : Infinity;
@@ -1940,17 +1951,15 @@ export function WorldScene() {
       <Gates />
       <WalkMarker />
       <MarkStones />
-      <SpellStatusMesh />
       {/* Transient action effects are presentation-only: under reduced
           effects they stay hidden while the simulation, toasts, journal
           and the spoken words of power keep the results legible. */}
       <group visible={!reducedFx} name="transient-action-fx">
-        {SPELL_SLOTS.map(slot => <CastFxMesh key={slot} slot={slot} />)}
-        <SpellFlightMesh />
-        {SPELL_SLOTS.map(slot => <TravelFxMesh key={slot} slot={slot} />)}
+        <CastFxMesh />
+        <TravelFxMesh />
         <MoongateTravelFxMesh />
         <PersonalActionFxMesh />
-        {SPELL_SLOTS.map(slot => <FizzleFxMesh key={slot} slot={slot} />)}
+        <FizzleFxMesh />
         <HealingFxMesh />
         <TamingFxMesh />
         <CraftFxMesh />
