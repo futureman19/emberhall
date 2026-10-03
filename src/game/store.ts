@@ -295,7 +295,7 @@ export const useGame = create<GameUI>((set, get) => ({
             grantEverything(getWorld());
             getWorld().log.unshift({
               t: getWorld().hour,
-              text: "A tester's bounty — every ware and material the vale knows.",
+              text: "A tester's bounty — every ware, every material, every lesson the vale knows.",
             });
           }
         } else {

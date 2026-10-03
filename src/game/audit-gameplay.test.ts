@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { inGreybarrow, inPlace } from "./atlas.ts";
-import { FAUNA_META, ITEM_META } from "./catalog.ts";
+import { FAUNA_META, ITEM_META, SKILL_META } from "./catalog.ts";
 import { seedFauna, spawn, tickEcology } from "./ecology.ts";
 import { commandHarvest, commandPlant, commandTill, plotAt } from "./farm.ts";
 import { commandPlantTree, saplingAt } from "./forestry.ts";
 import { makeResourceStackKey, parseResourceStackKey, resourceCount } from "./inventory/resources.ts";
-import { commandCast } from "./magery.ts";
+import { commandCast, maxMana } from "./magery.ts";
 import { commandBuy, commandSell, commandSellRare } from "./npcs.ts";
 import { RESOURCE_CATALOG } from "./resources/catalog.ts";
 import {
@@ -15,6 +15,7 @@ import {
   TEST_KIT_GOLD,
   TEST_KIT_ITEM_STACK,
   TEST_KIT_RESOURCE_STACK,
+  TEST_KIT_SKILL,
 } from "./testkit.ts";
 import { addToPile, spawnCorpsePile, takeFromPile, tickPiles } from "./piles.ts";
 import {
@@ -26,7 +27,7 @@ import {
 } from "./player.ts";
 import { mulberry32 } from "./rng.ts";
 import { tickWorld } from "./sim.ts";
-import type { Creature, FaunaKind, ItemId, RareItem, SpellId, World } from "./types.ts";
+import type { Creature, FaunaKind, ItemId, RareItem, SkillId, SpellId, World } from "./types.ts";
 import { createPerson, createStubWorld, createWorld } from "./world.ts";
 
 /**
@@ -687,4 +688,20 @@ test("G8 - the flag parses only an explicit 1 or 0", () => {
   assert.equal(syncTestKitFromUrl("?testkit=yes"), null);
   assert.equal(syncTestKitFromUrl("?foo=bar"), null);
   assert.equal(syncTestKitFromUrl(""), null);
+});
+
+test("G8 - grantEverything masters every skill and fills mana to match", () => {
+  const { world } = playerWorld();
+  const summary = grantEverything(world);
+  const ids = Object.keys(SKILL_META) as SkillId[];
+  for (const id of ids) {
+    assert.equal(world.player.skills[id], TEST_KIT_SKILL, `${id} is mastered`);
+  }
+  assert.equal(summary.skills, ids.length);
+  const self = world.people.find((p) => p.isPlayer);
+  assert.equal(
+    world.player.mana,
+    maxMana(self?.int ?? 8, world.player.skills.magery ?? 0),
+    "mana reaches the cap a master mage would hold",
+  );
 });

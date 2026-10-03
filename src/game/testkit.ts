@@ -1,18 +1,21 @@
-import { ITEM_META } from "./catalog.ts";
+import { ITEM_META, SKILL_META } from "./catalog.ts";
 import { parseResourceStackKey } from "./inventory/resources.ts";
+import { maxMana } from "./magery.ts";
 import { RESOURCE_CATALOG } from "./resources/catalog.ts";
-import type { ItemId, World } from "./types.ts";
+import type { ItemId, SkillId, World } from "./types.ts";
 
 /**
  * The test kit is a QA aid, not a game feature: while the flag is on, every
  * FRESH character starts with the whole catalog — a full stack of every item,
- * every resource form at every quality, and a fat purse for vendor testing.
+ * every resource form at every quality, every skill mastered, and a fat purse
+ * for vendor testing.
  * Toggle it with ?testkit=1 / ?testkit=0 (persisted on this device) or the
  * __emberTestKit console handle. Existing progress is topped up, never reset.
  */
 
 export const TEST_KIT_ITEM_STACK = 99;
 export const TEST_KIT_RESOURCE_STACK = 25;
+export const TEST_KIT_SKILL = 100;
 export const TEST_KIT_GOLD = 100_000;
 
 const STORAGE_KEY = "emberhall:testkit";
@@ -24,6 +27,7 @@ const CLARITY_QUALITIES = ["cracked", "flawed", "cut", "flawless", "perfect"] as
 export interface TestKitSummary {
   items: number;
   stacks: number;
+  skills: number;
   gold: number;
 }
 
@@ -47,8 +51,16 @@ export function grantEverything(world: World): TestKitSummary {
       }
     }
   }
+  const skillIds = Object.keys(SKILL_META) as SkillId[];
+  for (const id of skillIds) {
+    world.player.skills[id] = Math.max(world.player.skills[id] ?? 0, TEST_KIT_SKILL);
+  }
+  // A master mage holds a deeper well — top mana up to the mastered cap.
+  const self = world.people.find((p) => p.isPlayer);
+  const well = maxMana(self?.int ?? 8, world.player.skills.magery ?? 0);
+  world.player.mana = Math.max(world.player.mana ?? 0, well);
   world.gold = Math.max(world.gold, TEST_KIT_GOLD);
-  return { items: ids.length, stacks, gold: world.gold };
+  return { items: ids.length, stacks, skills: skillIds.length, gold: world.gold };
 }
 
 export function testKitEnabled(): boolean {
