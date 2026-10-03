@@ -31,6 +31,7 @@ import { ActionsPanel } from "@/components/game/actions-panel";
 import { usePanelA11y } from "@/components/game/use-panel-a11y";
 import { insideLabel } from "@/components/game/building-meshes";
 import { PLACES, regionAt } from "@/game/atlas";
+import { getHoldBuild } from "@/game/placeables/build-mode";
 import { BUILDING_META, CLASS_META } from "@/game/catalog";
 import { phaseName } from "@/game/gates";
 import { getWorld } from "@/game/live";
@@ -91,6 +92,15 @@ function PlayingChrome() {
         const current = getGraphicsSettings().firstPerson;
         updateGraphicsSettings({ firstPerson: toggleFirstPerson(current) });
         return;
+      }
+      if (e.key === "Escape" && !inField) {
+        const g = useGame.getState();
+        const hold = getHoldBuild();
+        if (g.buildKind || g.tillArmed || (hold.active && hold.definitionId)) {
+          e.preventDefault();
+          g.cancelPlacement();
+          return;
+        }
       }
       if (e.key !== "." || inField) return;
       e.preventDefault();
@@ -804,7 +814,7 @@ function BuildRibbon() {
   if (till) {
     return (
       <div className="pointer-events-auto absolute top-20 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-[var(--radius-md)] border border-border bg-bg/90 px-3 py-1">
-        <p className="font-display text-xs tracking-wider text-fg uppercase">Till a plot · click grass or dirt</p>
+        <p className="font-display text-xs tracking-wider text-fg uppercase">Till a plot · click grass or dirt · Esc or right-click lets go</p>
         <button type="button" className="text-xs text-muted" onClick={() => armTill(false)}>
           Cancel
         </button>
@@ -814,7 +824,7 @@ function BuildRibbon() {
   if (!kind) return null;
   return (
     <div className="pointer-events-auto absolute top-20 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-[var(--radius-md)] border border-border bg-bg/90 px-3 py-1">
-      <p className="font-display text-xs tracking-wider text-fg uppercase">Raise {BUILDING_META[kind].label} · drag the shade, lift to raise</p>
+      <p className="font-display text-xs tracking-wider text-fg uppercase">Raise {BUILDING_META[kind].label} · drag the shade, lift to raise · Esc or right-click lets go</p>
       <button type="button" className="text-xs text-muted" onClick={() => armBuild(null)}>
         Cancel
       </button>

@@ -66,3 +66,56 @@ test("placing spends boards and reclaiming refunds", () => {
   assert.equal(getWorld().placedObjects.length, 0);
   assert.equal(getWorld().player.pack.board, 19);
 });
+
+test("cancelPlacement lets an armed hold piece go without writing the dirt", () => {
+  primed();
+  const before = encodeSave(getWorld());
+  useGame.getState().setPanel("build");
+  useGame.getState().armHoldPiece("floor_timber");
+  assert.equal(getHoldBuild().definitionId, "floor_timber");
+  useGame.getState().cancelPlacement();
+  // The Hold stays open; only the shade leaves.
+  assert.equal(getHoldBuild().active, true);
+  assert.equal(getHoldBuild().definitionId, null);
+  assert.equal(getWorld().placedObjects.length, 0);
+  assert.equal(encodeSave(getWorld()), before);
+  useGame.getState().setPanel("none");
+});
+
+test("cancelPlacement lets an armed hall go", () => {
+  primed();
+  const hallsBefore = getWorld().buildings.length;
+  useGame.getState().armBuild("dormitory");
+  assert.equal(useGame.getState().buildKind, "dormitory");
+  assert.ok(useGame.getState().buildAt);
+  useGame.getState().cancelPlacement();
+  assert.equal(useGame.getState().buildKind, null);
+  assert.equal(useGame.getState().buildAt, null);
+  assert.equal(getWorld().buildings.length, hallsBefore);
+});
+
+test("cancelPlacement lets an armed hoe go", () => {
+  const world = primed();
+  world.player.wear.main = "hoe";
+  useGame.getState().armTill(true);
+  assert.equal(useGame.getState().tillArmed, true);
+  useGame.getState().cancelPlacement();
+  assert.equal(useGame.getState().tillArmed, false);
+  assert.equal(useGame.getState().tillAt, null);
+});
+
+test("cancelPlacement with nothing armed is a quiet no-op", () => {
+  primed();
+  const before = encodeSave(getWorld());
+  useGame.getState().cancelPlacement();
+  assert.equal(useGame.getState().buildKind, null);
+  assert.equal(useGame.getState().tillArmed, false);
+  assert.equal(encodeSave(getWorld()), before);
+});
+
+test("Esc and right-click are wired to cancelPlacement", () => {
+  const hud = readFileSync(new URL("../../components/game/hud.tsx", import.meta.url), "utf8");
+  const scene = readFileSync(new URL("../../components/game/world-scene.tsx", import.meta.url), "utf8");
+  assert.match(hud, /e\.key === "Escape"[\s\S]{0,400}cancelPlacement\(\)/);
+  assert.match(scene, /ev\.button !== 2[\s\S]{0,200}cancelPlacement\(\)/);
+});

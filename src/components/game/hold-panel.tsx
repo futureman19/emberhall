@@ -89,6 +89,7 @@ export function HoldPanel() {
         <p className="mt-3 text-xs text-fg">
           Selected: {PLACEABLE_BY_ID[hold.definitionId]?.label} — {costLine(hold.definitionId)}
           {hold.reason ? ` · ${hold.reason}` : ""}
+          <span className="mt-1 block text-muted">Esc or right-click lets it go.</span>
         </p>
       ) : null}
       <ul className="mt-3 space-y-1">

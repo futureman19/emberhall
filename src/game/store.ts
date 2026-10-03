@@ -64,7 +64,7 @@ import { applyBlueprint, captureBlueprint } from "./blueprints.ts";
 import { reclaimObject } from "./placeables/commands.ts";
 import { isDoorOpen, objectFn, usePlaced as applyPlaced } from "./placeables/functions.ts";
 import { withHistory } from "./placeables/history.ts";
-import { enterHoldBuild as startHold, exitHoldBuild as stopHold, selectHoldPiece } from "./placeables/build-mode.ts";
+import { enterHoldBuild as startHold, exitHoldBuild as stopHold, getHoldBuild, selectHoldPiece } from "./placeables/build-mode.ts";
 import { COURT, stationNear } from "./atlas.ts";
 import type { BuildingKind, CtxTarget, CtxVerb, ItemId, PanelId, ResourceStackKey, Speed, SpellId, Snapshot, WearSlot } from "./types.ts";
 import { applyMint, applyMintRare, applyRedeem, type RareInscription } from "./vault.ts";
@@ -187,6 +187,7 @@ interface GameUI {
   recruit: (id: string) => void;
   speed: (s: Speed) => void;
   armBuild: (kind: BuildingKind | null) => void;
+  cancelPlacement: () => void;
   hoverBuild: (tx: number, ty: number) => void;
   enterHold: () => void;
   exitHold: () => void;
@@ -965,6 +966,23 @@ export const useGame = create<GameUI>((set, get) => ({
       get().flash("Drag the shade. Lift to raise.");
     }
     set({ buildKind: kind, buildAt: at, tillArmed: false, tillAt: null, panel: "none", ctx: null, openBook: false, openCraft: false });
+  },
+  cancelPlacement: () => {
+    const hold = getHoldBuild();
+    const armedHold = hold.active && Boolean(hold.definitionId);
+    const armedCivic = Boolean(get().buildKind);
+    const armedTill = get().tillArmed;
+    if (!armedCivic && !armedTill && !armedHold) return;
+    dropBuildHold();
+    if (armedHold) selectHoldPiece(null);
+    set({
+      buildKind: null,
+      buildAt: null,
+      tillArmed: false,
+      tillAt: null,
+      holdRev: armedHold ? get().holdRev + 1 : get().holdRev,
+    });
+    get().flash("Set down.");
   },
   hoverBuild: (tx, ty) => {
     if (!get().buildKind) return;
