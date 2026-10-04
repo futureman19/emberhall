@@ -38,6 +38,7 @@ import { getGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settin
 import { SPELL_EFFECT_CAP, selectSpellLabel, spellEffects, spellImpactOpacityScale } from "@/game/spell-effects";
 import { SpellFlightMesh, SpellStatusMesh } from "./spell-effects-mesh";
 import { ZoneMesh } from "./zones-mesh";
+import { MirrorImages } from "./mirrors-mesh";
 import { useEffectsReduced } from "./effects-preference";
 import { getWorld } from "@/game/live";
 import { getCastFx, getDeathFx, getFizzleFx, SPELL_META } from "@/game/magery";
@@ -1980,6 +1981,7 @@ export function WorldScene() {
       <MarkStones />
       <SpellStatusMesh />
       <ZoneMesh />
+      <MirrorImages />
       {/* Transient action effects are presentation-only: under reduced
           effects they stay hidden while the simulation, toasts, journal
           and the spoken words of power keep the results legible. */}

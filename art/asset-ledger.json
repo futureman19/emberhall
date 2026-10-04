@@ -63,6 +63,7 @@
     "src/components/game/menu-bounds.ts",
     "src/components/game/minimap-biome-cache.ts",
     "src/components/game/minimap-layout.ts",
+    "src/components/game/mirrors-mesh.tsx",
     "src/components/game/movable-minimap.tsx",
     "src/components/game/near-biome-cache.ts",
     "src/components/game/npc-gump.tsx",
@@ -7991,7 +7992,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8045,7 +8046,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8099,7 +8100,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8153,7 +8154,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8207,7 +8208,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8261,7 +8262,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8315,7 +8316,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8369,7 +8370,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8423,7 +8424,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8477,7 +8478,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8531,7 +8532,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8585,7 +8586,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8639,7 +8640,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8693,7 +8694,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8747,7 +8748,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8801,7 +8802,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8855,7 +8856,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8909,7 +8910,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -8963,7 +8964,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9017,7 +9018,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9071,7 +9072,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9125,7 +9126,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9179,7 +9180,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9233,7 +9234,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9287,7 +9288,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9341,7 +9342,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9395,7 +9396,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9449,7 +9450,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9503,7 +9504,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9557,7 +9558,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9611,7 +9612,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9665,7 +9666,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9719,7 +9720,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9773,7 +9774,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9827,7 +9828,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9881,7 +9882,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9935,7 +9936,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -9989,7 +9990,7 @@
       "rendererLocations": [
         "src/components/game/hud.tsx:38",
         "src/components/game/spell-gump.tsx:4",
-        "src/components/game/world-scene.tsx:43"
+        "src/components/game/world-scene.tsx:44"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -41001,7 +41002,7 @@
       "rendererLocations": [
         "src/components/game/context-menu.tsx:50",
         "src/components/game/use-house-touch.ts:8",
-        "src/components/game/world-scene.tsx:293"
+        "src/components/game/world-scene.tsx:294"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -42173,13 +42174,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#GraphicsProbe",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:86"
+        "src/components/game/world-scene.tsx:87"
       ],
       "sourceNames": [
         "GraphicsProbe"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:86"
+        "src/components/game/world-scene.tsx:87"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -42279,7 +42280,7 @@
       "canonicalId": "src/components/game/world-scene.tsx#groundY",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:121"
+        "src/components/game/world-scene.tsx:122"
       ],
       "sourceNames": [
         "groundY"
@@ -42294,6 +42295,7 @@
         "src/components/game/herb-meshes.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:9",
         "src/components/game/lighting.tsx:7",
+        "src/components/game/mirrors-mesh.tsx:5",
         "src/components/game/oak-stumps.tsx:4",
         "src/components/game/people-meshes.tsx:24",
         "src/components/game/pile-meshes.tsx:2",
@@ -42301,7 +42303,7 @@
         "src/components/game/sky.tsx:7",
         "src/components/game/spell-effects-mesh.tsx:5",
         "src/components/game/terrain.tsx:14",
-        "src/components/game/world-scene.tsx:121",
+        "src/components/game/world-scene.tsx:122",
         "src/components/game/world-scene.tsx:35"
       ],
       "rendererMapping": "direct AST declaration/name",
@@ -42315,6 +42317,7 @@
         "src/components/game/herb-meshes.tsx",
         "src/components/game/lanternwood-dressing.tsx",
         "src/components/game/lighting.tsx",
+        "src/components/game/mirrors-mesh.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/people-meshes.tsx",
         "src/components/game/pile-meshes.tsx",
@@ -43240,13 +43243,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#transient-action-fx",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1986"
+        "src/components/game/world-scene.tsx:1988"
       ],
       "sourceNames": [
         "WorldScene"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1986"
+        "src/components/game/world-scene.tsx:1988"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -46462,6 +46465,14 @@
           "applicability": "source contract; runtime unverified"
         },
         {
+          "id": "predicate:c.mirror",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-meshes.tsx:1145"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
           "id": "present",
           "status": "inventoried",
           "evidence": [
@@ -48245,6 +48256,147 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "renderer:src/components/game/mirrors-mesh.tsx#MirrorFigure",
+      "canonicalId": "src/components/game/mirrors-mesh.tsx#MirrorFigure",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/mirrors-mesh.tsx:16"
+      ],
+      "sourceNames": [
+        "MirrorFigure"
+      ],
+      "rendererLocations": [
+        "src/components/game/mirrors-mesh.tsx:16"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/mirrors-mesh.tsx"
+      ],
+      "jsxTags": [
+        "capsuleGeometry",
+        "group",
+        "mesh",
+        "meshBasicMaterial",
+        "sphereGeometry"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/mirrors-mesh.tsx:16"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!c || c.task === \"dead\" || c.taskUntil <= w.hour",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/mirrors-mesh.tsx:16"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!root.current",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/mirrors-mesh.tsx:16"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/mirrors-mesh.tsx:16"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/mirrors-mesh.tsx:16"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/mirrors-mesh.tsx#MirrorImages",
+      "canonicalId": "src/components/game/mirrors-mesh.tsx#MirrorImages",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/mirrors-mesh.tsx:55"
+      ],
+      "sourceNames": [
+        "MirrorImages"
+      ],
+      "rendererLocations": [
+        "src/components/game/mirrors-mesh.tsx:55"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/mirrors-mesh.tsx"
+      ],
+      "jsxTags": [
+        "MirrorFigure",
+        "group"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/mirrors-mesh.tsx:55"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/mirrors-mesh.tsx:55"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/mirrors-mesh.tsx:55"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "renderer:src/components/game/oak-stumps.tsx#OakStumps",
       "canonicalId": "src/components/game/oak-stumps.tsx#OakStumps",
       "family": "renderer",
@@ -49559,6 +49711,14 @@
           "status": "inventoried",
           "evidence": [
             "src/components/game/people-meshes.tsx:856"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:aloft",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/people-meshes.tsx:870"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -51222,13 +51382,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#People",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:1241"
+        "src/components/game/people-meshes.tsx:1244"
       ],
       "sourceNames": [
         "People"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:1241"
+        "src/components/game/people-meshes.tsx:1244"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -55772,13 +55932,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CastFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:404"
+        "src/components/game/world-scene.tsx:405"
       ],
       "sourceNames": [
         "CastFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:404"
+        "src/components/game/world-scene.tsx:405"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -56009,13 +56169,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#ChipBits",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1886"
+        "src/components/game/world-scene.tsx:1887"
       ],
       "sourceNames": [
         "ChipBits"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1886"
+        "src/components/game/world-scene.tsx:1887"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -56095,13 +56255,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CombatFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1752"
+        "src/components/game/world-scene.tsx:1753"
       ],
       "sourceNames": [
         "CombatFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1752"
+        "src/components/game/world-scene.tsx:1753"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -56211,13 +56371,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CompanionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1368"
+        "src/components/game/world-scene.tsx:1369"
       ],
       "sourceNames": [
         "CompanionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1368"
+        "src/components/game/world-scene.tsx:1369"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -56392,13 +56552,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#ConstructionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1434"
+        "src/components/game/world-scene.tsx:1435"
       ],
       "sourceNames": [
         "ConstructionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1434"
+        "src/components/game/world-scene.tsx:1435"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -56538,13 +56698,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CorpseFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1613"
+        "src/components/game/world-scene.tsx:1614"
       ],
       "sourceNames": [
         "CorpseFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1613"
+        "src/components/game/world-scene.tsx:1614"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -56679,13 +56839,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CraftFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1230"
+        "src/components/game/world-scene.tsx:1231"
       ],
       "sourceNames": [
         "CraftFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1230"
+        "src/components/game/world-scene.tsx:1231"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -56803,13 +56963,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#DeathFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1856"
+        "src/components/game/world-scene.tsx:1857"
       ],
       "sourceNames": [
         "DeathFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1856"
+        "src/components/game/world-scene.tsx:1857"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -56889,13 +57049,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#ExtractionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1517"
+        "src/components/game/world-scene.tsx:1518"
       ],
       "sourceNames": [
         "ExtractionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1517"
+        "src/components/game/world-scene.tsx:1518"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -57035,13 +57195,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#FizzleFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:985"
+        "src/components/game/world-scene.tsx:986"
       ],
       "sourceNames": [
         "FizzleFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:985"
+        "src/components/game/world-scene.tsx:986"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -57140,13 +57300,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#GatheringFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1698"
+        "src/components/game/world-scene.tsx:1699"
       ],
       "sourceNames": [
         "GatheringFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1698"
+        "src/components/game/world-scene.tsx:1699"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -57271,13 +57431,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#HealingFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1048"
+        "src/components/game/world-scene.tsx:1049"
       ],
       "sourceNames": [
         "HealingFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1048"
+        "src/components/game/world-scene.tsx:1049"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -57368,13 +57528,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#MarkStones",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:349"
+        "src/components/game/world-scene.tsx:350"
       ],
       "sourceNames": [
         "MarkStones"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:349"
+        "src/components/game/world-scene.tsx:350"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -57441,13 +57601,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#MoongateTravelFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:835"
+        "src/components/game/world-scene.tsx:836"
       ],
       "sourceNames": [
         "MoongateTravelFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:835"
+        "src/components/game/world-scene.tsx:836"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -57596,13 +57756,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#NpcInteractionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1299"
+        "src/components/game/world-scene.tsx:1300"
       ],
       "sourceNames": [
         "NpcInteractionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1299"
+        "src/components/game/world-scene.tsx:1300"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -57772,13 +57932,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#PersonalActionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:737"
+        "src/components/game/world-scene.tsx:738"
       ],
       "sourceNames": [
         "PersonalActionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:737"
+        "src/components/game/world-scene.tsx:738"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -58018,13 +58178,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#PlacePointer",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:125"
+        "src/components/game/world-scene.tsx:126"
       ],
       "sourceNames": [
         "PlacePointer"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:125"
+        "src/components/game/world-scene.tsx:126"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -58180,13 +58340,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#Rig",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:231"
+        "src/components/game/world-scene.tsx:232"
       ],
       "sourceNames": [
         "Rig"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:231"
+        "src/components/game/world-scene.tsx:232"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -58328,13 +58488,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#SimClock",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:114"
+        "src/components/game/world-scene.tsx:115"
       ],
       "sourceNames": [
         "SimClock"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:114"
+        "src/components/game/world-scene.tsx:115"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -58386,13 +58546,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#TamingFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1110"
+        "src/components/game/world-scene.tsx:1111"
       ],
       "sourceNames": [
         "TamingFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1110"
+        "src/components/game/world-scene.tsx:1111"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -58547,13 +58707,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#TravelFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:904"
+        "src/components/game/world-scene.tsx:905"
       ],
       "sourceNames": [
         "TravelFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:904"
+        "src/components/game/world-scene.tsx:905"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -58651,13 +58811,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#WalkMarker",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:377"
+        "src/components/game/world-scene.tsx:378"
       ],
       "sourceNames": [
         "WalkMarker"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:377"
+        "src/components/game/world-scene.tsx:378"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -58737,13 +58897,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#WorldScene",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1930"
+        "src/components/game/world-scene.tsx:1931"
       ],
       "sourceNames": [
         "WorldScene"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1930"
+        "src/components/game/world-scene.tsx:1931"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -58775,6 +58935,7 @@
         "LanternwoodDressing",
         "Lighting",
         "MarkStones",
+        "MirrorImages",
         "MoongateTravelFxMesh",
         "NpcInteractionFxMesh",
         "OakStumps",

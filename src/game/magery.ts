@@ -729,6 +729,8 @@ export function castNow(world: World): string | null {
     return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()} drifts off.`, gain);
   }
   if (spell === "jump") {
+    // Two flashes: where you left, and where the ground rushes up.
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     if (!landAt(world, p, savedTx, savedTy)) return "No footing.";
     emitSpellEffect(world, { spell, x: savedTx, z: savedTy, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.5);

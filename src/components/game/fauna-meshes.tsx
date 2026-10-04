@@ -1147,7 +1147,8 @@ export function Fauna() {
   return (
     <group>
       {fauna.map((c) => (
-        <Beast key={c.id} c={c} />
+        // Quas Xen's images are drawn by MirrorImages, not as hares.
+        c.mirror ? null : <Beast key={c.id} c={c} />
       ))}
     </group>
   );

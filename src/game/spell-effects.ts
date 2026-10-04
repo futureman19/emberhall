@@ -128,7 +128,8 @@ function observeFaunaSplices(fauna: World["fauna"]): number {
 const statuses = new WeakMap<World, StatusCache>();
 function hasLiveStatus(c: World["fauna"][number], hour: number): boolean {
   return c.task !== "dead" && c.hp > 0 &&
-    Math.max(c.poisonUntil ?? 0, c.paralyzeUntil ?? 0, c.curseUntil ?? 0, c.boundUntil ?? 0, c.snareUntil ?? 0, c.sleptUntil ?? 0, c.blindUntil ?? 0, c.chillUntil ?? 0) > hour;
+    (Math.max(c.poisonUntil ?? 0, c.paralyzeUntil ?? 0, c.curseUntil ?? 0, c.boundUntil ?? 0, c.snareUntil ?? 0, c.sleptUntil ?? 0, c.blindUntil ?? 0, c.chillUntil ?? 0, c.polyUntil ?? 0) > hour ||
+      Boolean(c.mirror && c.taskUntil > hour));
 }
 /** Rebuild only at load/cast/membership boundaries. Retain ALL active creatures,
  * including distant ones and overflow: movement must not lose their indicators.
@@ -191,6 +192,7 @@ export function visitSpellStatuses(world: World, visit: (x: number, z: number, s
     add(p.x, p.z, "nightsight", world.player.nightSightUntil, 2);
     add(p.x, p.z, "invisibility", world.player.invisUntil, 3);
     add(p.x, p.z, "ironwood", world.player.ironwoodUntil, 4);
+    add(p.x, p.z, "fly", world.player.flyUntil, 5);
   }
   const cache = statuses.get(world);
   if (!cache || cache.fauna !== world.fauna || world.hour < cache.at) return count;
@@ -207,6 +209,8 @@ export function visitSpellStatuses(world: World, visit: (x: number, z: number, s
     add(c.x, c.z, "sleep", c.sleptUntil, 5);
     add(c.x, c.z, "flash", c.blindUntil, 6);
     add(c.x, c.z, "blizzard", c.chillUntil, 7);
+    add(c.x, c.z, "polymorph", c.polyUntil, 8);
+    if (c.mirror) add(c.x, c.z, "mirrorimage", c.taskUntil, 9);
   }
   return count;
 }

@@ -963,9 +963,12 @@ function Figure({
     const extracting = extractionKind !== null;
     const extractPose = extractionPose(extractionKind ?? "lumberjacking", w.player.workT);
     if (you && root.current) {
+      // Vas Hur Por: the wind carries — a lift like the ghost's, with a slow swell.
+      const aloft = w.hour < (w.player.flyUntil ?? 0);
+      const flyLift = aloft ? 0.55 + Math.sin(w.hour * SECONDS_PER_HOUR * 2.2) * 0.06 : 0;
       root.current.position.set(
         you.x,
-        groundAt(you.x, you.z, you.story) + keepPlayerOffset(you.x, you.z) + (you.ghost ? 0.32 : 0) - healPose.crouch - corpseWorkPose.crouch - (constructing ? buildPose.crouch : 0) - (extracting ? extractPose.crouch : 0) - (personal ? personalPose.crouch : 0),
+        groundAt(you.x, you.z, you.story) + keepPlayerOffset(you.x, you.z) + (you.ghost ? 0.32 : 0) + flyLift - healPose.crouch - corpseWorkPose.crouch - (constructing ? buildPose.crouch : 0) - (extracting ? extractPose.crouch : 0) - (personal ? personalPose.crouch : 0),
         you.z,
       );
       root.current.rotation.x = healPose.lean + corpseWorkPose.lean + (constructing ? buildPose.lean : 0) + (companionNear ? companionWorkPose.bow * 0.6 : 0) + (npcNear ? npcPose.bow : 0) + (extracting ? extractPose.swing * 0.12 : 0) + (taming ? tamePose.bow : 0) + (crafting ? craftPose.work * 0.14 : 0) + (gathering ? gatherPose.work * 0.2 : 0) + (personal ? personalPose.lean : 0);

@@ -92,8 +92,10 @@ test("fallback Body and Beast boundary stay byte-preserved except explicit live 
   const renderer = read("./fauna-meshes.tsx");
   assert.equal(hash(renderer.slice(renderer.indexOf("function Body"), renderer.indexOf("function Beast"))), "98d6c6563e9222bbefe429bd049ff28940e8ccd36c772d604ed3cf5780a194d2");
   const root = renderer.slice(renderer.indexOf("function Beast")).replace('      <FaunaArtBody kind={c.kind} size={SIZE[c.kind]}>\n        <Body c={c} />\n      </FaunaArtBody>', '      <Body c={c} />');
-  // Normalize only the verified stale-death-read fix, not any animation/effect formula.
-  const preservedRoot = root.replace('    const deadNow = c.task === "dead";\n', '').replaceAll('      deadNow ?', '      dead ?');
+  // Normalize only the verified explicit fixes, not any animation/effect formula:
+  // the stale-death-read fix, and Quas Xen's handoff of mirror images to MirrorImages.
+  const preservedRoot = root.replace('    const deadNow = c.task === "dead";\n', '').replaceAll('      deadNow ?', '      dead ?')
+    .replace('        // Quas Xen\'s images are drawn by MirrorImages, not as hares.\n        c.mirror ? null : <Beast key={c.id} c={c} />', '        <Beast key={c.id} c={c} />');
   assert.equal(hash(preservedRoot), "7c8661a100b5321414f0ff3bbb6a469baa0be049d6caaee07faaeb97f3fc58d1");
   const integration = read("./fauna-art.tsx");
   assert.ok(integration.includes("dispose={null}")); assert.ok(integration.includes("active && source"));
