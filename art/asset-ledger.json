@@ -21,6 +21,7 @@
     "src/components/game/character-facing.ts",
     "src/components/game/chrome/band.tsx",
     "src/components/game/chrome/docked-minimap.tsx",
+    "src/components/game/chrome/drawer-shell.tsx",
     "src/components/game/chrome/frame.ts",
     "src/components/game/chrome/minimap-dock.ts",
     "src/components/game/chrome/rail.tsx",
@@ -45538,6 +45539,74 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "renderer:src/components/game/chrome/drawer-shell.tsx#DrawerShell",
+      "canonicalId": "src/components/game/chrome/drawer-shell.tsx#DrawerShell",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/drawer-shell.tsx:5"
+      ],
+      "sourceNames": [
+        "DrawerShell"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/drawer-shell.tsx:5"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/drawer-shell.tsx"
+      ],
+      "jsxTags": [
+        "div"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/drawer-shell.tsx:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:parchment",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/drawer-shell.tsx:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/drawer-shell.tsx:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/drawer-shell.tsx:5"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "renderer:src/components/game/chrome/rail.tsx#FirstPersonChip",
       "canonicalId": "src/components/game/chrome/rail.tsx#FirstPersonChip",
       "family": "renderer",
@@ -46088,6 +46157,7 @@
         "src/components/game/chrome/you-drawer.tsx"
       ],
       "jsxTags": [
+        "DrawerShell",
         "X",
         "YouDressing",
         "button",
@@ -203093,13 +203163,13 @@
       "canonicalId": "src/components/game/hud.tsx#BuildRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:571"
+        "src/components/game/hud.tsx:572"
       ],
       "sourceNames": [
         "BuildRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:571"
+        "src/components/game/hud.tsx:572"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -203179,13 +203249,13 @@
       "canonicalId": "src/components/game/hud.tsx#GhostBanner",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:519"
+        "src/components/game/hud.tsx:520"
       ],
       "sourceNames": [
         "GhostBanner"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:519"
+        "src/components/game/hud.tsx:520"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -203273,13 +203343,13 @@
       "canonicalId": "src/components/game/hud.tsx#GuideTabs",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:365"
+        "src/components/game/hud.tsx:366"
       ],
       "sourceNames": [
         "GuideTabs"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:365"
+        "src/components/game/hud.tsx:366"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -203361,13 +203431,13 @@
       "canonicalId": "src/components/game/hud.tsx#HelpPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:411"
+        "src/components/game/hud.tsx:412"
       ],
       "sourceNames": [
         "HelpPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:411"
+        "src/components/game/hud.tsx:412"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -203538,13 +203608,13 @@
       "canonicalId": "src/components/game/hud.tsx#JournalPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:460"
+        "src/components/game/hud.tsx:461"
       ],
       "sourceNames": [
         "JournalPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:460"
+        "src/components/game/hud.tsx:461"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -203784,13 +203854,13 @@
       "canonicalId": "src/components/game/hud.tsx#RosterPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:476"
+        "src/components/game/hud.tsx:477"
       ],
       "sourceNames": [
         "RosterPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:476"
+        "src/components/game/hud.tsx:477"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -203943,13 +204013,13 @@
       "canonicalId": "src/components/game/hud.tsx#SelectedCard",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:503"
+        "src/components/game/hud.tsx:504"
       ],
       "sourceNames": [
         "SelectedCard"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:503"
+        "src/components/game/hud.tsx:504"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -204041,13 +204111,13 @@
         "src/components/game/hud.tsx"
       ],
       "jsxTags": [
+        "DrawerShell",
         "GuideTabs",
         "HoldPanel",
         "JournalPanel",
         "RosterPanel",
         "ValeChart",
-        "YouDrawer",
-        "div"
+        "YouDrawer"
       ],
       "states": [
         {
@@ -204270,13 +204340,13 @@
       "canonicalId": "src/components/game/hud.tsx#Toast",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:557"
+        "src/components/game/hud.tsx:558"
       ],
       "sourceNames": [
         "Toast"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:557"
+        "src/components/game/hud.tsx:558"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -204346,13 +204416,13 @@
       "canonicalId": "src/components/game/hud.tsx#TravelRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:598"
+        "src/components/game/hud.tsx:599"
       ],
       "sourceNames": [
         "TravelRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:598"
+        "src/components/game/hud.tsx:599"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [

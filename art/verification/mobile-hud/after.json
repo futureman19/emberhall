@@ -119,32 +119,32 @@
         "height": 712
       },
       "dock": {
-        "x": -191,
+        "x": -199,
         "y": 792.5,
         "width": 236,
         "height": 44
       },
       "buttons": {
         "Guide": {
-          "x": -143,
+          "x": -151,
           "y": 792.5,
           "width": 44,
           "height": 44
         },
         "Hold": {
-          "x": -95,
+          "x": -103,
           "y": 792.5,
           "width": 44,
           "height": 44
         },
         "Spellbook": {
-          "x": -47,
+          "x": -55,
           "y": 792.5,
           "width": 44,
           "height": 44
         },
         "Work": {
-          "x": 1,
+          "x": -7,
           "y": 792.5,
           "width": 44,
           "height": 44
@@ -201,6 +201,114 @@
         }
       },
       "dockFlag": "0"
+    },
+    {
+      "name": "mobile-help-drawer",
+      "box": {
+        "x": 38,
+        "y": 12,
+        "width": 352,
+        "height": 712
+      }
+    },
+    {
+      "name": "mobile-journal-drawer",
+      "box": {
+        "x": 38,
+        "y": 12,
+        "width": 352,
+        "height": 712
+      }
+    },
+    {
+      "name": "mobile-roster-drawer",
+      "box": {
+        "x": 38,
+        "y": 12,
+        "width": 352,
+        "height": 712
+      }
+    },
+    {
+      "name": "mobile-vale-drawer",
+      "box": {
+        "x": 38,
+        "y": 12,
+        "width": 352,
+        "height": 764
+      }
+    },
+    {
+      "name": "mobile-build-drawer",
+      "box": {
+        "x": 38,
+        "y": 12,
+        "width": 352,
+        "height": 712
+      }
+    },
+    {
+      "name": "mobile-selected-entrance",
+      "box": {
+        "x": 170,
+        "y": 662,
+        "width": 208,
+        "height": 62
+      }
+    },
+    {
+      "name": "mobile-ghost-entrance",
+      "box": {
+        "x": 12,
+        "y": 598.5,
+        "width": 366,
+        "height": 125.5
+      }
+    },
+    {
+      "name": "mobile-spellbook-parchment",
+      "box": {
+        "x": 26,
+        "y": 64,
+        "width": 352,
+        "height": 576
+      }
+    },
+    {
+      "name": "mobile-craft-clearance",
+      "box": {
+        "x": 26,
+        "y": 64,
+        "width": 352,
+        "height": 576
+      }
+    },
+    {
+      "name": "mobile-pets-clearance",
+      "box": {
+        "x": 58,
+        "y": 64,
+        "width": 320,
+        "height": 172
+      }
+    },
+    {
+      "name": "mobile-vault-clearance",
+      "box": {
+        "x": 26,
+        "y": 64,
+        "width": 352,
+        "height": 283.5
+      }
+    },
+    {
+      "name": "mobile-settings-clearance",
+      "box": {
+        "x": 64,
+        "y": 12,
+        "width": 288,
+        "height": 585.5
+      }
     },
     {
       "name": "desktop-default",
@@ -318,6 +426,114 @@
       "dockFlag": "0"
     },
     {
+      "name": "desktop-map-open-help-drawer",
+      "box": {
+        "x": 1088,
+        "y": 12,
+        "width": 352,
+        "height": 828
+      }
+    },
+    {
+      "name": "desktop-map-open-journal-drawer",
+      "box": {
+        "x": 1088,
+        "y": 12,
+        "width": 352,
+        "height": 828
+      }
+    },
+    {
+      "name": "desktop-map-open-roster-drawer",
+      "box": {
+        "x": 1088,
+        "y": 12,
+        "width": 352,
+        "height": 828
+      }
+    },
+    {
+      "name": "desktop-map-open-vale-drawer",
+      "box": {
+        "x": 1088,
+        "y": 12,
+        "width": 352,
+        "height": 880
+      }
+    },
+    {
+      "name": "desktop-map-open-build-drawer",
+      "box": {
+        "x": 1088,
+        "y": 12,
+        "width": 352,
+        "height": 828
+      }
+    },
+    {
+      "name": "desktop-map-open-selected-entrance",
+      "box": {
+        "x": 1164,
+        "y": 778,
+        "width": 208,
+        "height": 62
+      }
+    },
+    {
+      "name": "desktop-map-open-ghost-entrance",
+      "box": {
+        "x": 528,
+        "y": 714.5,
+        "width": 384,
+        "height": 125.5
+      }
+    },
+    {
+      "name": "desktop-map-open-spellbook-parchment",
+      "box": {
+        "x": 1020,
+        "y": 64,
+        "width": 352,
+        "height": 576
+      }
+    },
+    {
+      "name": "desktop-map-open-craft-clearance",
+      "box": {
+        "x": 1020,
+        "y": 64,
+        "width": 352,
+        "height": 576
+      }
+    },
+    {
+      "name": "desktop-map-open-pets-clearance",
+      "box": {
+        "x": 1052,
+        "y": 64,
+        "width": 320,
+        "height": 172
+      }
+    },
+    {
+      "name": "desktop-map-open-vault-clearance",
+      "box": {
+        "x": 1020,
+        "y": 64,
+        "width": 352,
+        "height": 283.5
+      }
+    },
+    {
+      "name": "desktop-map-open-settings-clearance",
+      "box": {
+        "x": 64,
+        "y": 12,
+        "width": 288,
+        "height": 585.5
+      }
+    },
+    {
       "name": "desktop-map-hidden",
       "minimap": null,
       "band": {
@@ -366,6 +582,116 @@
         }
       },
       "dockFlag": "1"
+    },
+    {
+      "name": "desktop-help-drawer",
+      "box": {
+        "x": 1088,
+        "y": 12,
+        "width": 352,
+        "height": 880
+      }
+    },
+    {
+      "name": "desktop-journal-drawer",
+      "box": {
+        "x": 1088,
+        "y": 12,
+        "width": 352,
+        "height": 880
+      }
+    },
+    {
+      "name": "desktop-roster-drawer",
+      "box": {
+        "x": 1088,
+        "y": 12,
+        "width": 352,
+        "height": 880
+      }
+    },
+    {
+      "name": "desktop-vale-drawer",
+      "box": {
+        "x": 1088,
+        "y": 12,
+        "width": 352,
+        "height": 880
+      }
+    },
+    {
+      "name": "desktop-build-drawer",
+      "box": {
+        "x": 1088,
+        "y": 12,
+        "width": 352,
+        "height": 880
+      }
+    },
+    {
+      "name": "desktop-selected-entrance",
+      "box": {
+        "x": 1164,
+        "y": 830,
+        "width": 208,
+        "height": 62
+      }
+    },
+    {
+      "name": "desktop-ghost-entrance",
+      "box": {
+        "x": 528,
+        "y": 766.5,
+        "width": 384,
+        "height": 125.5
+      }
+    },
+    {
+      "name": "desktop-spellbook-parchment",
+      "box": {
+        "x": 1020,
+        "y": 64,
+        "width": 352,
+        "height": 576
+      }
+    },
+    {
+      "name": "desktop-craft-clearance",
+      "box": {
+        "x": 1020,
+        "y": 64,
+        "width": 352,
+        "height": 576
+      }
+    },
+    {
+      "name": "desktop-pets-clearance",
+      "box": {
+        "x": 1052,
+        "y": 64,
+        "width": 320,
+        "height": 172
+      }
+    },
+    {
+      "name": "desktop-vault-clearance",
+      "box": {
+        "x": 1020,
+        "y": 64,
+        "width": 352,
+        "height": 283.5
+      }
+    },
+    {
+      "name": "desktop-settings-clearance",
+      "box": {
+        "x": 64,
+        "y": 12,
+        "width": 288,
+        "height": 585.5
+      }
     }
-  ]
+  ],
+  "pageErrors": [],
+  "errors": []
 }

@@ -14,7 +14,7 @@ export function DockedMinimap({ open, onHide }: { open: boolean; onHide: () => v
     <section
       aria-label="Mini-map"
       data-testid="docked-minimap"
-      className="pointer-events-auto absolute right-0 bottom-0 border-t border-l border-border bg-bg/90"
+      className="classic-frame pointer-events-auto absolute right-0 bottom-0 border-t border-l border-border bg-bg/90"
       style={{
         width: MINIMAP_CORNER,
         height: `calc(${MINIMAP_CORNER}px + env(safe-area-inset-bottom))`,

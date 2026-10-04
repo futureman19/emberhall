@@ -14,7 +14,7 @@ export function YouButton() {
       type="button"
       onClick={() => setPanel("you")}
       className={cn(
-        "pointer-events-auto relative z-10 grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
+        "pointer-events-auto relative grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
         panel === "you" && "bg-surface-2 text-fg",
       )}
       aria-label="You — pack, paperdoll, skills"
@@ -32,7 +32,7 @@ export function SettingsButton() {
       type="button"
       onClick={toggleSettings}
       className={cn(
-        "pointer-events-auto relative z-10 grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
+        "pointer-events-auto relative grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
         open && "bg-surface-2 text-fg",
       )}
       aria-label="Settings — sound, graphics and the Vault"
@@ -85,7 +85,7 @@ export function Rail({ mapCollapsed }: { mapCollapsed: boolean }) {
   return (
     <div
       data-testid="right-rail"
-      className="pointer-events-auto absolute top-0 right-0 hidden flex-col items-center gap-1 border-l border-border bg-bg/90 p-2 md:flex"
+      className="classic-frame pointer-events-auto absolute top-0 right-0 hidden flex-col items-center gap-1 border-l border-border bg-bg/90 p-2 md:flex"
       style={{
         width: RAIL_WIDTH,
         bottom: `calc(${mapCollapsed ? BAND_HEIGHT : MINIMAP_CORNER}px + env(safe-area-inset-bottom))`,

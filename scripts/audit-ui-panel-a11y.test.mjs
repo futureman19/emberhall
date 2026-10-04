@@ -31,7 +31,9 @@ test("context menu and loot gump wire Escape/focus through the hook", () => {
 });
 
 test("side panel is a labeled region with Escape handling while open", () => {
-  assert.match(hud, /usePanelA11y<HTMLDivElement>\(closePanel, panel !== "none"\)/);
+  assert.match(hud, /<DrawerShell/);
+  assert.match(hud, /onClose={closePanel}/);
+  assert.match(read("../src/components/game/chrome/drawer-shell.tsx"), /usePanelA11y<HTMLDivElement>\(onClose\)/);
   assert.match(hud, /role="region"/);
 });
 

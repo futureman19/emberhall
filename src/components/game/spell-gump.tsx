@@ -24,7 +24,7 @@ export function SpellbookGump() {
   const book = (pack?.spellbook ?? 0) > 0;
 
   return (
-    <div className="pointer-events-auto absolute top-16 right-3 max-h-[min(70vh,36rem)] w-[min(100%-1.5rem,22rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 sm:right-4">
+    <div className="parchment-panel pointer-events-auto absolute top-16 right-3 max-h-[min(70vh,36rem,calc(100dvh-4rem-var(--corner-clear)))] w-[min(100%-1.5rem,22rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 md:right-[68px]">
       <p className="font-display text-sm text-fg">Spellbook</p>
       <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">
         Dust from the pack. Mana {Math.floor(mana)}/{max}. The words take or they do not. The moons still hold.

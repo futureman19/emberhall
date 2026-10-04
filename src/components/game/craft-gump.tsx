@@ -150,7 +150,7 @@ export function CraftGump() {
   const recipes = visibleRecipes(getWorld(), readyOnly);
   const groups: Group[] = ["bench", "forge", "fire", "field"];
   return (
-    <div className="craft-panel pointer-events-auto absolute top-16 right-3 z-20 flex max-h-[min(70vh,36rem,calc(100dvh-9rem))] w-[min(100%-1.5rem,22rem)] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border bg-bg sm:right-4">
+    <div className="craft-panel pointer-events-auto absolute top-16 right-3 z-20 flex max-h-[min(70vh,36rem,calc(100dvh-4rem-var(--corner-clear)))] w-[min(100%-1.5rem,22rem)] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border bg-bg md:right-[68px]">
       <div role="region" aria-label="Crafting work" tabIndex={0} className="craft-scroll min-h-0 overflow-y-auto overscroll-contain p-4">
       <p className="font-display text-sm text-fg">Work</p>
       <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">

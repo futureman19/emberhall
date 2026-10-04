@@ -201,7 +201,7 @@ function VaultInner({ walletState, scope }: { walletState: ReturnType<typeof use
   const suggestFor = (inscription: ItemInscription) => suggestSats(inscription);
 
   return (
-    <div data-testid="vault-panel" className="pointer-events-auto absolute top-16 right-3 z-20 max-h-[calc(100dvh-5rem)] w-[min(100%-1.5rem,22rem)] touch-pan-y overflow-y-auto overscroll-contain rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 sm:right-4">
+    <div data-testid="vault-panel" className="pointer-events-auto absolute top-16 right-3 z-20 max-h-[min(70vh,36rem,calc(100dvh-4rem-var(--corner-clear)))] w-[min(100%-1.5rem,22rem)] touch-pan-y overflow-y-auto overscroll-contain rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 md:right-[68px]">
       <p className="font-display text-sm text-fg">The Vault</p>
       <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">
         Mint an item into the chain — an NFT in your wallet, tradable for true coin. Redeem it, and it returns to the vale.

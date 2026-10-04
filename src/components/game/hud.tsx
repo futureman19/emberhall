@@ -18,7 +18,7 @@ import { SettingsGump } from "@/components/game/settings-gump";
 import { PetsGump } from "@/components/game/pets-gump";
 import { ValeChart } from "@/components/game/vale-map";
 import { ActionsPanel } from "@/components/game/actions-panel";
-import { usePanelA11y } from "@/components/game/use-panel-a11y";
+import { DrawerShell } from "@/components/game/chrome/drawer-shell";
 import { PLACES, regionAt } from "@/game/atlas";
 import { getHoldBuild } from "@/game/placeables/build-mode";
 import { BUILDING_META, CLASS_META } from "@/game/catalog";
@@ -94,7 +94,7 @@ function PlayingChrome() {
   }, []);
   return (
     <div
-      className="pointer-events-none absolute inset-0 z-50"
+      className="classic-ui pointer-events-none absolute inset-0 z-50"
       style={{ ["--corner-clear" as string]: `${cornerClearance(mapOpen)}px` }}
     >
       <Band
@@ -333,7 +333,7 @@ function RaisingOverlay() {
 function SidePanel() {
   const panel = useGame((s) => s.panel);
   const closePanel = useCallback(() => useGame.getState().setPanel("none"), []);
-  const region = usePanelA11y<HTMLDivElement>(closePanel, panel !== "none");
+
   if (panel === "none") return null;
   if (panel === "you") return <YouDrawer />;
   const LABELS: Partial<Record<PanelId, string>> = {
@@ -345,19 +345,20 @@ function SidePanel() {
     build: "The hold — building",
   };
   return (
-    <div
-      ref={region}
-      tabIndex={-1}
+    <DrawerShell
+      key={panel}
+      onClose={closePanel}
+      parchment={panel === "help" || panel === "journal"}
       role="region"
       aria-label={LABELS[panel] ?? "Panel"}
-      className="pointer-events-auto absolute top-16 right-3 bottom-[var(--corner-clear)] left-3 overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 outline-none md:top-3 md:right-[68px] md:left-auto md:w-[min(100%-9rem,22rem)]"
+
     >
       {panel === "help" && <GuideTabs />}
       {panel === "journal" && <JournalPanel />}
       {panel === "vale" && <ValeChart />}
       {panel === "roster" && <RosterPanel />}
       {panel === "build" && <HoldPanel />}
-    </div>
+    </DrawerShell>
   );
 }
 
@@ -509,7 +510,7 @@ function SelectedCard() {
   if (!p && !c) return null;
   if (p?.role) return null;
   return (
-    <div className="pointer-events-auto absolute right-3 bottom-[var(--corner-clear)] w-52 rounded-[var(--radius-md)] border border-border bg-bg/90 p-3 md:right-[68px]">
+    <div data-ui-surface="selected" className="classic-frame surface-in pointer-events-auto absolute right-3 bottom-[var(--corner-clear)] w-52 rounded-[var(--radius-md)] border border-border bg-bg/90 p-3 md:right-[68px]">
       <p className="font-display text-sm text-fg">{p?.name ?? c?.kind}</p>
       <p className="text-xs text-muted">{p ? CLASS_META[p.cls].label : c?.task}</p>
     </div>
@@ -526,7 +527,7 @@ function GhostBanner() {
   const dist = corpse ? Math.round(Math.hypot(corpse.tx - x, corpse.ty - z)) : 0;
   const place = corpse ? regionAt(corpse.tx, corpse.ty).name : "";
   return (
-    <div className="pointer-events-auto absolute bottom-[var(--corner-clear)] left-1/2 w-[min(100%-1.5rem,24rem)] -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/92 p-3">
+    <div data-ui-surface="ghost" className="classic-frame surface-in pointer-events-auto absolute bottom-[var(--corner-clear)] left-1/2 w-[min(100%-1.5rem,24rem)] -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/92 p-3">
       <p className="text-center font-display text-sm text-fg">You are a ghost.</p>
       <p className="mt-1 text-center text-pretty text-xs leading-relaxed text-muted">
         {corpse

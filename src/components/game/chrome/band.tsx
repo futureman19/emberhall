@@ -27,7 +27,7 @@ function VitalsBox() {
   const mana = (snap.player?.mana ?? 0) / max;
   const inside = insideLabel(snap.buildings, snap.youX, snap.youZ);
   return (
-    <div className="fixed top-3 left-3 z-10 min-w-0 md:hidden">
+    <div className="fixed top-3 left-3 min-w-0 md:hidden">
       <div className="min-w-0 rounded-[var(--radius-md)] border border-border bg-bg/80 px-3 py-2">
         <button
           type="button"
@@ -49,7 +49,7 @@ function VitalsBox() {
           aria-valuemax={self?.maxHp ?? 1}
           aria-valuenow={ghost ? 0 : (self?.hp ?? 0)}
         >
-          <div className="h-full bg-accent" style={{ width: `${Math.max(0, Math.min(1, hp)) * 100}%` }} />
+          <div className="h-full bg-health" style={{ width: `${Math.max(0, Math.min(1, hp)) * 100}%` }} />
         </div>
         <div
           className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2"
@@ -59,15 +59,15 @@ function VitalsBox() {
           aria-valuemax={max}
           aria-valuenow={snap.player?.mana ?? 0}
         >
-          <div className="h-full bg-gold" style={{ width: `${Math.max(0, Math.min(1, mana)) * 100}%` }} />
+          <div className="h-full bg-mana" style={{ width: `${Math.max(0, Math.min(1, mana)) * 100}%` }} />
         </div>
         {(snap.hour < (snap.player?.poisonUntil ?? 0) || snap.hour < (snap.player?.blessUntil ?? 0) || snap.hour < (snap.player?.invisUntil ?? 0)) && (
           <p className="mt-1 text-[10px] tracking-wider uppercase">
-            {snap.hour < (snap.player?.poisonUntil ?? 0) && <span className="text-[#8ac03a]">Poisoned</span>}
+            {snap.hour < (snap.player?.poisonUntil ?? 0) && <span className="text-gold">Poisoned</span>}
             {snap.hour < (snap.player?.poisonUntil ?? 0) && (snap.hour < (snap.player?.blessUntil ?? 0) || snap.hour < (snap.player?.invisUntil ?? 0)) && <span className="text-muted"> · </span>}
             {snap.hour < (snap.player?.blessUntil ?? 0) && <span className="text-gold">Blessed</span>}
             {snap.hour < (snap.player?.blessUntil ?? 0) && snap.hour < (snap.player?.invisUntil ?? 0) && <span className="text-muted"> · </span>}
-            {snap.hour < (snap.player?.invisUntil ?? 0) && <span className="text-[#c8c8d8]">Unseen</span>}
+            {snap.hour < (snap.player?.invisUntil ?? 0) && <span className="text-fg">Unseen</span>}
           </p>
         )}
       </div>
@@ -114,7 +114,7 @@ function VitalsStrip() {
           aria-valuemax={self?.maxHp ?? 1}
           aria-valuenow={ghost ? 0 : (self?.hp ?? 0)}
         >
-          <div className="h-full bg-accent" style={{ width: `${Math.max(0, Math.min(1, hp)) * 100}%` }} />
+          <div className="h-full bg-health" style={{ width: `${Math.max(0, Math.min(1, hp)) * 100}%` }} />
         </div>
         <div
           className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-surface-2"
@@ -124,16 +124,16 @@ function VitalsStrip() {
           aria-valuemax={max}
           aria-valuenow={snap.player?.mana ?? 0}
         >
-          <div className="h-full bg-gold" style={{ width: `${Math.max(0, Math.min(1, mana)) * 100}%` }} />
+          <div className="h-full bg-mana" style={{ width: `${Math.max(0, Math.min(1, mana)) * 100}%` }} />
         </div>
       </div>
       {(snap.hour < (snap.player?.poisonUntil ?? 0) || snap.hour < (snap.player?.blessUntil ?? 0) || snap.hour < (snap.player?.invisUntil ?? 0)) && (
         <p className="shrink-0 text-[10px] tracking-wider whitespace-nowrap uppercase">
-          {snap.hour < (snap.player?.poisonUntil ?? 0) && <span className="text-[#8ac03a]">Poisoned</span>}
+          {snap.hour < (snap.player?.poisonUntil ?? 0) && <span className="text-gold">Poisoned</span>}
           {snap.hour < (snap.player?.poisonUntil ?? 0) && (snap.hour < (snap.player?.blessUntil ?? 0) || snap.hour < (snap.player?.invisUntil ?? 0)) && <span className="text-muted"> · </span>}
           {snap.hour < (snap.player?.blessUntil ?? 0) && <span className="text-gold">Blessed</span>}
           {snap.hour < (snap.player?.blessUntil ?? 0) && snap.hour < (snap.player?.invisUntil ?? 0) && <span className="text-muted"> · </span>}
-          {snap.hour < (snap.player?.invisUntil ?? 0) && <span className="text-[#c8c8d8]">Unseen</span>}
+          {snap.hour < (snap.player?.invisUntil ?? 0) && <span className="text-fg">Unseen</span>}
         </p>
       )}
     </div>
@@ -231,7 +231,7 @@ export function Band({
   return (
     <div
       data-testid="bottom-band"
-      className="pointer-events-auto absolute bottom-0 left-0 flex items-center gap-1 border-t border-border bg-bg/90 px-2 pt-1 pb-[calc(0.25rem+env(safe-area-inset-bottom))]"
+      className="classic-frame pointer-events-auto absolute bottom-0 left-0 flex items-center gap-1 border-t border-border bg-bg/90 px-2 pt-1 pb-[calc(0.25rem+env(safe-area-inset-bottom))]"
       style={{
         height: `calc(${BAND_HEIGHT}px + env(safe-area-inset-bottom))`,
         right: mapOpen ? MINIMAP_CORNER : 0,
