@@ -45961,6 +45961,14 @@
           "applicability": "source contract; runtime unverified"
         },
         {
+          "id": "predicate:coarsePointer()",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hold-panel.tsx:28"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
           "id": "predicate:hold.definitionId",
           "status": "inventoried",
           "evidence": [
@@ -190876,6 +190884,14 @@
           "applicability": "source contract; runtime unverified"
         },
         {
+          "id": "predicate:coarsePointer()",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hud.tsx:809"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
           "id": "predicate:till",
           "status": "inventoried",
           "evidence": [
@@ -192517,13 +192533,13 @@
       "canonicalId": "src/components/game/hud.tsx#TravelRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:835"
+        "src/components/game/hud.tsx:836"
       ],
       "sourceNames": [
         "TravelRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:835"
+        "src/components/game/hud.tsx:836"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
