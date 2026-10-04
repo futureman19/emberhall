@@ -1,19 +1,9 @@
-import {
-  AudioLines,
-  Backpack,
-  CircleHelp,
-  Eye,
-  FastForward,
-  Hammer,
-  Hand,
-  Anvil,
-  Music2,
-  Pause,
-  Play,
-  ScrollText,
-  Settings,
-} from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Band } from "@/components/game/chrome/band";
+import { DockedMinimap } from "@/components/game/chrome/docked-minimap";
+import { useMinimapDock } from "@/components/game/chrome/use-minimap-dock";
+import { Rail } from "@/components/game/chrome/rail";
+import { SoundToggles } from "@/components/game/chrome/sound-toggles";
 import { ContextMenu, PileGump } from "@/components/game/context-menu";
 import { GateGump } from "@/components/game/gate-gump";
 import { NpcGump } from "@/components/game/npc-gump";
@@ -26,35 +16,26 @@ import { VaultGump } from "@/components/game/vault-gump";
 import { SettingsGump } from "@/components/game/settings-gump";
 import { PetsGump } from "@/components/game/pets-gump";
 import { ValeChart } from "@/components/game/vale-map";
-import { MovableMinimap } from "@/components/game/movable-minimap";
 import { ActionsPanel } from "@/components/game/actions-panel";
 import { usePanelA11y } from "@/components/game/use-panel-a11y";
-import { insideLabel } from "@/components/game/building-meshes";
 import { PLACES, regionAt } from "@/game/atlas";
 import { getHoldBuild } from "@/game/placeables/build-mode";
 import { BUILDING_META, CLASS_META } from "@/game/catalog";
-import { phaseName } from "@/game/gates";
 import { getWorld } from "@/game/live";
-import { maxMana, OFFENSIVE_SPELLS, SPELL_META, targetsGround } from "@/game/magery";
+import { OFFENSIVE_SPELLS, SPELL_META, targetsGround } from "@/game/magery";
 import { nearestHealer } from "@/game/player";
 import { hasSave as hallHasSave } from "@/game/save";
 import { HoldPanel } from "@/components/game/hold-panel";
 import { IntroCinematic } from "@/components/game/intro-cinematic";
 import { LookGump } from "@/components/game/look-gump";
-import { startValeMusic, musicMuted, toggleValeMusic } from "@/game/vale-music";
-import { sfxMuted, toggleSfx, warmSfx } from "@/game/vale-sfx";
+import { startValeMusic } from "@/game/vale-music";
+import { warmSfx } from "@/game/vale-sfx";
 import { firstPersonHotkey, toggleFirstPerson } from "@/game/first-person-view";
-import { getGraphicsSettings, updateGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
+import { getGraphicsSettings, updateGraphicsSettings } from "@/game/graphics-settings";
 import { useGame } from "@/game/store";
-import type { PanelId, Speed } from "@/game/types";
+import type { PanelId } from "@/game/types";
 import { cn, coarsePointer } from "@/lib/utils";
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
-
-function clockLabel(clock: number, day: number) {
-  const h = Math.floor(clock) % 24;
-  const m = Math.floor((clock % 1) * 60);
-  return `Day ${day}  ${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
-}
 
 export function Hud() {
   const phase = useGame((s) => s.phase);
@@ -77,6 +58,7 @@ export function Hud() {
 function PlayingChrome() {
   const [actionsOpen, setActionsOpen] = useState(false);
   const closeActions = useCallback(() => setActionsOpen(false), []);
+  const dock = useMinimapDock();
   useEffect(() => {
     const block = (e: Event) => e.preventDefault();
     window.addEventListener("contextmenu", block);
@@ -111,8 +93,8 @@ function PlayingChrome() {
   }, []);
   return (
     <>
-      <TopBar />
-      <BottomDock actionsOpen={actionsOpen} onToggleActions={() => setActionsOpen((v) => !v)} />
+      <Band actionsOpen={actionsOpen} onToggleActions={() => setActionsOpen((v) => !v)} />
+      <Rail mapCollapsed={dock.collapsed} onToggleMap={dock.toggle} />
       <SidePanel />
       <SelectedCard />
       <PileGump />
@@ -129,7 +111,7 @@ function PlayingChrome() {
       <GhostBanner />
       <BuildRibbon />
       <TravelRibbon />
-      <MovableMinimap />
+      <DockedMinimap dock={dock} />
       <ContextMenu />
       {actionsOpen && <ActionsPanel onClose={closeActions} />}
     </>
@@ -339,235 +321,6 @@ function RaisingOverlay() {
   );
 }
 
-function TopBar() {
-  const snap = useGame((s) => s.snap);
-  const self = snap.people.find((p) => p.isPlayer);
-  const max = maxMana(self?.int ?? 8, snap.player?.skills.magery ?? 0);
-  const ghost = Boolean(self?.ghost || snap.player?.ghost);
-  const hp = ghost ? 0 : self ? self.hp / self.maxHp : 0;
-  const mana = (snap.player?.mana ?? 0) / max;
-  const inside = insideLabel(snap.buildings, snap.youX, snap.youZ);
-  const panel = useGame((s) => s.panel);
-  const setPanel = useGame((s) => s.setPanel);
-  const speed = useGame((s) => s.speed);
-  const cur = useGame((s) => s.snap.speed);
-  return (
-    <div className="pointer-events-none absolute top-3 right-3 left-3 flex items-start justify-between gap-3">
-      <div className="flex flex-col items-start gap-1.5">
-        <div className="min-w-0 rounded-[var(--radius-md)] border border-border bg-bg/80 px-3 py-2">
-          <button
-            type="button"
-            onClick={() => setPanel("vale")}
-            className="pointer-events-auto block max-w-48 truncate text-left font-display text-xs tracking-wider text-gold uppercase hover:text-fg"
-            aria-label="Open the vale map"
-            title="The chart of the vale"
-          >
-            {inside ? BUILDING_META[inside].label : snap.region}
-          </button>
-          <p className="text-xs text-muted tabular-nums">
-            {ghost ? "Ghost" : clockLabel(snap.clock, snap.day)} · {phaseName(snap.hour)} · {snap.weather.label}
-          </p>
-          <div
-            className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2"
-            role="meter"
-            aria-label="Health"
-            aria-valuemin={0}
-            aria-valuemax={self?.maxHp ?? 1}
-            aria-valuenow={ghost ? 0 : (self?.hp ?? 0)}
-          >
-            <div className="h-full bg-accent" style={{ width: `${Math.max(0, Math.min(1, hp)) * 100}%` }} />
-          </div>
-          <div
-            className="mt-1 h-1.5 w-40 overflow-hidden rounded-full bg-surface-2"
-            role="meter"
-            aria-label="Mana"
-            aria-valuemin={0}
-            aria-valuemax={max}
-            aria-valuenow={snap.player?.mana ?? 0}
-          >
-            <div className="h-full bg-gold" style={{ width: `${Math.max(0, Math.min(1, mana)) * 100}%` }} />
-          </div>
-          {(snap.hour < (snap.player?.poisonUntil ?? 0) || snap.hour < (snap.player?.blessUntil ?? 0) || snap.hour < (snap.player?.invisUntil ?? 0)) && (
-            <p className="mt-1 text-[10px] tracking-wider uppercase">
-              {snap.hour < (snap.player?.poisonUntil ?? 0) && <span className="text-[#8ac03a]">Poisoned</span>}
-              {snap.hour < (snap.player?.poisonUntil ?? 0) && (snap.hour < (snap.player?.blessUntil ?? 0) || snap.hour < (snap.player?.invisUntil ?? 0)) && <span className="text-muted"> · </span>}
-              {snap.hour < (snap.player?.blessUntil ?? 0) && <span className="text-gold">Blessed</span>}
-              {snap.hour < (snap.player?.blessUntil ?? 0) && snap.hour < (snap.player?.invisUntil ?? 0) && <span className="text-muted"> · </span>}
-              {snap.hour < (snap.player?.invisUntil ?? 0) && <span className="text-[#c8c8d8]">Unseen</span>}
-            </p>
-          )}
-        </div>
-        <button
-          type="button"
-          onClick={() => setPanel("you")}
-          className={cn(
-            "pointer-events-auto relative z-10 grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
-            panel === "you" && "bg-surface-2 text-fg",
-          )}
-          aria-label="You — pack, paperdoll, skills"
-        >
-          <Backpack className="size-4" />
-        </button>
-        <SettingsButton />
-      </div>
-      <div className="flex items-start gap-1.5">
-        <FirstPersonChip />
-        <div className="pointer-events-auto flex items-center gap-0.5 rounded-[var(--radius-md)] border border-border bg-bg/80 p-1">
-          <button
-            type="button"
-            onClick={() => speed((cur === 0 ? 1 : 0) as Speed)}
-            className="grid size-9 place-items-center rounded-[var(--radius-xs)] text-muted hover:text-fg"
-            aria-label={cur === 0 ? "Resume time" : "Pause time"}
-          >
-            {cur === 0 ? <Play className="size-4" /> : <Pause className="size-4" />}
-          </button>
-          <button
-            type="button"
-            onClick={() => speed(cur === 3 ? 1 : 3)}
-            className={cn("grid size-9 place-items-center rounded-[var(--radius-xs)] hover:text-fg", cur === 3 ? "text-accent" : "text-muted")}
-            aria-label={cur === 3 ? "Normal time" : "Faster time"}
-          >
-            <FastForward className="size-4" />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function FirstPersonChip() {
-  const firstPerson = useGraphicsSettings().firstPerson;
-  return (
-    <button
-      type="button"
-      onClick={() => updateGraphicsSettings({ firstPerson: toggleFirstPerson(firstPerson) })}
-      className={cn(
-        "pointer-events-auto grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
-        firstPerson && "bg-surface-2 text-fg",
-      )}
-      aria-pressed={firstPerson}
-      aria-label={firstPerson ? "First-person: on" : "First-person: off"}
-      title="Eyes (V)"
-    >
-      <Eye className="size-4" />
-    </button>
-  );
-}
-
-function SettingsButton() {
-  const open = useGame((s) => s.openSettings);
-  const toggleSettings = useGame((s) => s.toggleSettings);
-  return (
-    <button
-      type="button"
-      onClick={toggleSettings}
-      className={cn(
-        "pointer-events-auto relative z-10 grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
-        open && "bg-surface-2 text-fg",
-      )}
-      aria-label="Settings — sound, graphics and the Vault"
-      aria-expanded={open}
-    >
-      <Settings className="size-4" />
-    </button>
-  );
-}
-
-function BottomDock({ actionsOpen, onToggleActions }: { actionsOpen: boolean; onToggleActions: () => void }) {
-  const panel = useGame((s) => s.panel);
-  const setPanel = useGame((s) => s.setPanel);
-  const openBook = useGame((s) => s.openBookGump);
-  const openCraft = useGame((s) => s.openCraftGump);
-  const items: { id: PanelId; icon: typeof CircleHelp; label: string }[] = [
-    { id: "help", icon: CircleHelp, label: "Guide" },
-    { id: "build", icon: Hammer, label: "Hold" },
-  ];
-  return (
-    <div
-      data-testid="bottom-dock"
-      className="pointer-events-auto absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-[var(--radius-lg)] border border-border bg-bg/90 p-1"
-    >
-      <button
-        type="button"
-        onClick={onToggleActions}
-        className={cn(
-          "grid size-11 place-items-center rounded-[var(--radius-md)] text-muted",
-          actionsOpen && "bg-surface-2 text-fg",
-        )}
-        aria-label="Nearby actions — keyboard: period"
-        aria-expanded={actionsOpen}
-        title="Nearby actions (.)"
-      >
-        <Hand className="size-4" />
-      </button>
-      {items.map((it) => {
-        const Icon = it.icon;
-        return (
-          <button
-            key={it.id}
-            type="button"
-            onClick={() => setPanel(it.id)}
-            className={cn(
-              "grid size-11 place-items-center rounded-[var(--radius-md)] text-muted",
-              panel === it.id && "bg-surface-2 text-fg",
-            )}
-            aria-label={it.label}
-          >
-            <Icon className="size-4" />
-          </button>
-        );
-      })}
-      <button type="button" onClick={openBook} className="grid size-11 place-items-center rounded-[var(--radius-md)] text-accent" aria-label="Spellbook">
-        <ScrollText className="size-4" />
-      </button>
-      <button type="button" onClick={openCraft} className="grid size-11 place-items-center rounded-[var(--radius-md)] text-gold" aria-label="Work">
-        <Anvil className="size-4" />
-      </button>
-    </div>
-  );
-}
-
-function SoundToggles({ className }: { className?: string }) {
-  return (
-    <div className={cn("flex items-center gap-1", className)}>
-      <MusicToggle />
-      <SfxToggle />
-    </div>
-  );
-}
-
-function MusicToggle() {
-  const [mute, setMute] = useState(musicMuted);
-  return (
-    <button
-      type="button"
-      onClick={() => setMute(toggleValeMusic())}
-      className={cn("grid size-11 place-items-center text-muted", mute && "opacity-40")}
-      aria-label={mute ? "Music off" : "Music on"}
-      aria-pressed={!mute}
-      title={mute ? "Music is still" : "Still the lute"}
-    >
-      <Music2 className="size-4" />
-    </button>
-  );
-}
-
-function SfxToggle() {
-  const [mute, setMute] = useState(sfxMuted);
-  return (
-    <button
-      type="button"
-      onClick={() => setMute(toggleSfx())}
-      className={cn("grid size-11 place-items-center text-muted", mute && "opacity-40")}
-      aria-label={mute ? "Sounds off" : "Sounds on"}
-      aria-pressed={!mute}
-      title={mute ? "Work sounds are still" : "Still the chop and the spell"}
-    >
-      <AudioLines className="size-4" />
-    </button>
-  );
-}
-
 function SidePanel() {
   const panel = useGame((s) => s.panel);
   const closePanel = useCallback(() => useGame.getState().setPanel("none"), []);
@@ -587,7 +340,7 @@ function SidePanel() {
       tabIndex={-1}
       role="region"
       aria-label={LABELS[panel] ?? "Panel"}
-      className="pointer-events-auto absolute top-16 bottom-20 left-16 w-[min(100%-5rem,22rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 outline-none"
+      className="pointer-events-auto absolute top-16 right-3 bottom-[68px] left-3 overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 outline-none md:top-3 md:right-[68px] md:bottom-[68px] md:left-auto md:w-[min(100%-9rem,22rem)]"
     >
       {panel === "help" && <GuideTabs />}
       {panel === "you" && <YouDressing />}
@@ -747,7 +500,7 @@ function SelectedCard() {
   if (!p && !c) return null;
   if (p?.role) return null;
   return (
-    <div className="pointer-events-auto absolute right-3 bottom-20 w-52 rounded-[var(--radius-md)] border border-border bg-bg/90 p-3">
+    <div className="pointer-events-auto absolute right-3 bottom-[68px] w-52 rounded-[var(--radius-md)] border border-border bg-bg/90 p-3 md:right-[68px]">
       <p className="font-display text-sm text-fg">{p?.name ?? c?.kind}</p>
       <p className="text-xs text-muted">{p ? CLASS_META[p.cls].label : c?.task}</p>
     </div>
@@ -764,7 +517,7 @@ function GhostBanner() {
   const dist = corpse ? Math.round(Math.hypot(corpse.tx - x, corpse.ty - z)) : 0;
   const place = corpse ? regionAt(corpse.tx, corpse.ty).name : "";
   return (
-    <div className="pointer-events-auto absolute bottom-20 left-1/2 w-[min(100%-1.5rem,24rem)] -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/92 p-3">
+    <div className="pointer-events-auto absolute bottom-[68px] left-1/2 w-[min(100%-1.5rem,24rem)] -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/92 p-3">
       <p className="text-center font-display text-sm text-fg">You are a ghost.</p>
       <p className="mt-1 text-center text-pretty text-xs leading-relaxed text-muted">
         {corpse

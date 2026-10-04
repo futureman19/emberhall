@@ -6,6 +6,7 @@ const read = (p) => readFileSync(new URL(p, import.meta.url), "utf8").replaceAll
 const actions = read("../src/components/game/actions-panel.tsx");
 const targets = read("../src/components/game/actions-targets.ts");
 const hud = read("../src/components/game/hud.tsx");
+const band = read("../src/components/game/chrome/band.tsx");
 
 test("actions targets come from existing snapshot entities and tile scans only", () => {
   assert.match(targets, /snap\.people/);
@@ -34,16 +35,16 @@ test("keyboard shortcut is the period key, ignores typing contexts and key repea
 });
 
 test("dock exposes the actions toggle with state", () => {
-  assert.match(hud, /aria-label="Nearby actions — keyboard: period"/);
-  assert.match(hud, /aria-expanded=\{actionsOpen\}/);
+  assert.match(band, /aria-label="Nearby actions — keyboard: period"/);
+  assert.match(band, /aria-expanded=\{actionsOpen\}/);
 });
 
 test("vitals are meters with numeric values", () => {
-  assert.match(hud, /role="meter"/);
-  assert.match(hud, /aria-label="Health"/);
-  assert.match(hud, /aria-label="Mana"/);
-  assert.match(hud, /aria-valuenow=\{/);
-  assert.match(hud, /aria-valuemax=\{/);
+  assert.match(band, /role="meter"/);
+  assert.match(band, /aria-label="Health"/);
+  assert.match(band, /aria-label="Mana"/);
+  assert.match(band, /aria-valuenow=\{/);
+  assert.match(band, /aria-valuemax=\{/);
 });
 
 test("reading tabs follow the tabs pattern with arrow-key movement and panels", () => {

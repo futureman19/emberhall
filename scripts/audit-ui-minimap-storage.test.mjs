@@ -2,33 +2,20 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {
-  defaultMinimapLayout,
-  hasSavedMinimapLayout,
-  loadMinimapLayout,
-  MINIMAP_STORAGE_KEY,
-  minimapStorage,
-  saveMinimapLayout,
-} from "../src/components/game/minimap-layout.ts";
+  dockStorage,
+  loadCollapsed,
+  MINIMAP_DOCK_KEY,
+  saveCollapsed,
+} from "../src/components/game/chrome/minimap-dock.ts";
 
-function memoryStorage() {
-  const values = new Map();
-  return {
-    values,
-    getItem: (key) => values.get(key) ?? null,
-    setItem: (key, value) => values.set(key, value),
-  };
-}
-
-test("throwing getItem degrades to the default map, not an exception", () => {
+test("throwing getItem degrades to the fallback, not an exception", () => {
   const throwing = {
     getItem() {
       throw new DOMException("denied", "SecurityError");
     },
   };
-  assert.equal(hasSavedMinimapLayout(throwing), false);
-  const layout = loadMinimapLayout(throwing);
-  assert.equal(layout.size, 160);
-  assert.equal(layout.minimized, false);
+  assert.equal(loadCollapsed(throwing, false), false);
+  assert.equal(loadCollapsed(throwing, true), true);
 });
 
 test("throwing localStorage getter yields null storage", () => {
@@ -41,7 +28,7 @@ test("throwing localStorage getter yields null storage", () => {
     },
   });
   try {
-    assert.equal(minimapStorage(), null);
+    assert.equal(dockStorage(), null);
   } finally {
     globalThis.window = realWindow;
   }
@@ -51,19 +38,18 @@ test("absent window yields null storage", () => {
   const realWindow = globalThis.window;
   delete globalThis.window;
   try {
-    assert.equal(minimapStorage(), null);
+    assert.equal(dockStorage(), null);
   } finally {
     globalThis.window = realWindow;
   }
 });
 
-test("malformed saved layout still falls back, valid layout still loads", () => {
-  const storage = memoryStorage();
-  storage.values.set(MINIMAP_STORAGE_KEY, "{not json");
-  assert.equal(hasSavedMinimapLayout(storage), true);
-  assert.deepEqual(loadMinimapLayout(storage), { x: 12, y: 12, size: 160, minimized: false });
-  storage.values.set(MINIMAP_STORAGE_KEY, JSON.stringify({ x: 40, y: 50, size: 200, minimized: true }));
-  assert.deepEqual(loadMinimapLayout(storage), { x: 40, y: 50, size: 200, minimized: true });
+test("malformed saved flag falls back, valid flag loads", () => {
+  const values = new Map([[MINIMAP_DOCK_KEY, "{not json"]]);
+  const storage = { getItem: (k) => values.get(k) ?? null, setItem: (k, v) => values.set(k, v) };
+  assert.equal(loadCollapsed(storage, true), true);
+  storage.setItem(MINIMAP_DOCK_KEY, "1");
+  assert.equal(loadCollapsed(storage, false), true);
 });
 
 test("quota failure on save never throws", () => {
@@ -72,13 +58,15 @@ test("quota failure on save never throws", () => {
       throw new DOMException("full", "QuotaExceededError");
     },
   };
-  assert.doesNotThrow(() => saveMinimapLayout(full, defaultMinimapLayout({ width: 800, height: 600 })));
+  assert.doesNotThrow(() => saveCollapsed(full, true));
 });
 
-test("minimap component reads and writes storage only through the guarded helpers", () => {
-  const source = readFileSync(new URL("../src/components/game/movable-minimap.tsx", import.meta.url), "utf8");
-  assert.ok(!source.includes("localStorage.getItem"), "no raw localStorage read before the guard");
-  assert.ok(!source.includes("localStorage,"), "no raw localStorage passed to helpers");
-  assert.ok(source.includes("minimapStorage()"));
-  assert.ok(source.includes("hasSavedMinimapLayout(storage)"));
+test("minimap chrome reads and writes storage only through the guarded helpers", () => {
+  for (const file of ["../src/components/game/chrome/docked-minimap.tsx", "../src/components/game/chrome/use-minimap-dock.ts"]) {
+    const source = readFileSync(new URL(file, import.meta.url), "utf8");
+    assert.ok(!source.includes("localStorage.getItem"), `${file}: no raw localStorage read before the guard`);
+    assert.ok(!source.includes("localStorage,"), `${file}: no raw localStorage passed to helpers`);
+  }
+  const hook = readFileSync(new URL("../src/components/game/chrome/use-minimap-dock.ts", import.meta.url), "utf8");
+  assert.ok(hook.includes("dockStorage()"));
 });

@@ -99,6 +99,7 @@ test("rig, figure, HUD chip and settings all reach the same first-person flag", 
   const rig = read("../components/game/world-scene.tsx");
   const people = read("../components/game/people-meshes.tsx");
   const hud = read("../components/game/hud.tsx");
+  const rail = read("../components/game/chrome/rail.tsx");
   const settings = read("../components/game/settings-gump.tsx");
   assert.match(rig, /firstPersonPoseFromView/);
   assert.match(rig, /smoothFirstPerson/);
@@ -108,7 +109,7 @@ test("rig, figure, HUD chip and settings all reach the same first-person flag", 
   assert.match(people, /emberhall-player-figure/);
   assert.match(people, /firstPerson/);
   assert.match(hud, /firstPersonHotkey/);
-  assert.match(hud, /First-person/);
+  assert.match(rail, /First-person/);
   assert.match(settings, /firstPerson/);
   assert.match(settings, /Eyes/);
 });

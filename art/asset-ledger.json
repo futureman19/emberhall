@@ -19,6 +19,13 @@
     "src/components/game/campfire-meshes.tsx",
     "src/components/game/cemetery-mist.tsx",
     "src/components/game/character-facing.ts",
+    "src/components/game/chrome/band.tsx",
+    "src/components/game/chrome/docked-minimap.tsx",
+    "src/components/game/chrome/frame.ts",
+    "src/components/game/chrome/minimap-dock.ts",
+    "src/components/game/chrome/rail.tsx",
+    "src/components/game/chrome/sound-toggles.tsx",
+    "src/components/game/chrome/use-minimap-dock.ts",
     "src/components/game/civic-character.ts",
     "src/components/game/commons-kit.ts",
     "src/components/game/context-menu.tsx",
@@ -62,9 +69,7 @@
     "src/components/game/look-preview.tsx",
     "src/components/game/menu-bounds.ts",
     "src/components/game/minimap-biome-cache.ts",
-    "src/components/game/minimap-layout.ts",
     "src/components/game/mirrors-mesh.tsx",
-    "src/components/game/movable-minimap.tsx",
     "src/components/game/near-biome-cache.ts",
     "src/components/game/npc-gump.tsx",
     "src/components/game/oak-renderer-data.ts",
@@ -613,13 +618,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -629,6 +635,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -723,13 +730,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -739,6 +747,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -1078,13 +1087,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1094,6 +1104,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -1246,13 +1257,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1262,6 +1274,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -1356,13 +1369,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1372,6 +1386,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -1693,13 +1708,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1709,6 +1725,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -2015,13 +2032,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2031,6 +2049,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -2363,13 +2382,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2379,6 +2399,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -2473,13 +2494,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2489,6 +2511,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -2655,13 +2678,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2671,6 +2695,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -2765,13 +2790,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2781,6 +2807,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -2875,13 +2902,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2891,6 +2919,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -2985,13 +3014,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3001,6 +3031,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -3327,13 +3358,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3343,6 +3375,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -3589,13 +3622,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3605,6 +3639,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -3757,13 +3792,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3773,6 +3809,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -3867,13 +3904,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3883,6 +3921,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -3977,13 +4016,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3993,6 +4033,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -4087,13 +4128,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4103,6 +4145,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -4197,13 +4240,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4213,6 +4257,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -4542,13 +4587,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4558,6 +4604,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -4652,13 +4699,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4668,6 +4716,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -4762,13 +4811,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4778,6 +4828,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -4872,13 +4923,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
+        "src/components/game/chrome/band.tsx:3",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4888,6 +4940,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
+        "src/components/game/chrome/band.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -7990,7 +8043,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8044,7 +8097,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8098,7 +8151,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8152,7 +8205,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8206,7 +8259,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8260,7 +8313,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8314,7 +8367,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8368,7 +8421,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8422,7 +8475,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8476,7 +8529,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8530,7 +8583,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8584,7 +8637,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8638,7 +8691,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8692,7 +8745,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8746,7 +8799,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8800,7 +8853,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8854,7 +8907,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8908,7 +8961,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8962,7 +9015,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9016,7 +9069,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9070,7 +9123,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9124,7 +9177,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9178,7 +9231,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9232,7 +9285,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9286,7 +9339,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9340,7 +9393,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9394,7 +9447,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9448,7 +9501,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9502,7 +9555,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9556,7 +9609,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9610,7 +9663,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9664,7 +9717,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9718,7 +9771,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9772,7 +9825,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9826,7 +9879,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9880,7 +9933,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9934,7 +9987,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9988,7 +10041,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:38",
+        "src/components/game/hud.tsx:25",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10044,7 +10097,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10107,7 +10160,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10170,7 +10223,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10233,7 +10286,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10296,7 +10349,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:35",
+        "src/components/game/hud.tsx:23",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -32202,6 +32255,468 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "renderer-helper:src/components/game/chrome/band.tsx#clockLabel",
+      "canonicalId": "src/components/game/chrome/band.tsx#clockLabel",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/chrome/band.tsx:13"
+      ],
+      "sourceNames": [
+        "clockLabel"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/band.tsx:13"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/band.tsx"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:13"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:13"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/band.tsx:13"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/chrome/frame.ts#defaultMinimapCollapsed",
+      "canonicalId": "src/components/game/chrome/frame.ts#defaultMinimapCollapsed",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/chrome/frame.ts:19"
+      ],
+      "sourceNames": [
+        "defaultMinimapCollapsed"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/frame.ts:19"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/frame.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/frame.ts:19"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/frame.ts:19"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/frame.ts:19"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/chrome/frame.ts#frameMode",
+      "canonicalId": "src/components/game/chrome/frame.ts#frameMode",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/chrome/frame.ts:14"
+      ],
+      "sourceNames": [
+        "frameMode"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/frame.ts:14"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/frame.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/frame.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:viewportWidth >= FRAME_BREAKPOINT",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/frame.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/frame.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/frame.ts:14"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/chrome/minimap-dock.ts#dockStorage",
+      "canonicalId": "src/components/game/chrome/minimap-dock.ts#dockStorage",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/chrome/minimap-dock.ts:10"
+      ],
+      "sourceNames": [
+        "dockStorage"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/minimap-dock.ts:10"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/minimap-dock.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/minimap-dock.ts:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:typeof window !== \"undefined\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/minimap-dock.ts:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/minimap-dock.ts:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/minimap-dock.ts:10"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/chrome/minimap-dock.ts#loadCollapsed",
+      "canonicalId": "src/components/game/chrome/minimap-dock.ts#loadCollapsed",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/chrome/minimap-dock.ts:18"
+      ],
+      "sourceNames": [
+        "loadCollapsed"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/minimap-dock.ts:18"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/minimap-dock.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/minimap-dock.ts:18"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:raw === \"0\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/minimap-dock.ts:18"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:raw === \"1\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/minimap-dock.ts:18"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/minimap-dock.ts:18"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/minimap-dock.ts:18"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/chrome/minimap-dock.ts#saveCollapsed",
+      "canonicalId": "src/components/game/chrome/minimap-dock.ts#saveCollapsed",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/chrome/minimap-dock.ts:29"
+      ],
+      "sourceNames": [
+        "saveCollapsed"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/minimap-dock.ts:29"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/minimap-dock.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/minimap-dock.ts:29"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:collapsed",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/minimap-dock.ts:29"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/minimap-dock.ts:29"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/minimap-dock.ts:29"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/chrome/use-minimap-dock.ts#useMinimapDock",
+      "canonicalId": "src/components/game/chrome/use-minimap-dock.ts#useMinimapDock",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/chrome/use-minimap-dock.ts:6"
+      ],
+      "sourceNames": [
+        "useMinimapDock"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/use-minimap-dock.ts:6"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/use-minimap-dock.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/use-minimap-dock.ts:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!ready",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/use-minimap-dock.ts:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:storage",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/use-minimap-dock.ts:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/use-minimap-dock.ts:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/use-minimap-dock.ts:6"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "renderer-helper:src/components/game/civic-character.ts#civicCharacterArt",
       "canonicalId": "src/components/game/civic-character.ts#civicCharacterArt",
       "family": "renderer-helper",
@@ -34654,75 +35169,17 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
-      "id": "renderer-helper:src/components/game/hud.tsx#clockLabel",
-      "canonicalId": "src/components/game/hud.tsx#clockLabel",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/hud.tsx:53"
-      ],
-      "sourceNames": [
-        "clockLabel"
-      ],
-      "rendererLocations": [
-        "src/components/game/hud.tsx:53"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/hud.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:44"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:44"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/hud.tsx:44"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
       "id": "renderer-helper:src/components/game/hud.tsx#startHall",
       "canonicalId": "src/components/game/hud.tsx#startHall",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/hud.tsx:152"
+        "src/components/game/hud.tsx:134"
       ],
       "sourceNames": [
         "startHall"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:152"
+        "src/components/game/hud.tsx:134"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -36591,568 +37048,6 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/minimap-biome-cache.ts:7"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/minimap-layout.ts#clamp",
-      "canonicalId": "src/components/game/minimap-layout.ts#clamp",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/minimap-layout.ts:27"
-      ],
-      "sourceNames": [
-        "clamp"
-      ],
-      "rendererLocations": [
-        "src/components/game/minimap-layout.ts:27"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/minimap-layout.ts"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:25"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:25"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/minimap-layout.ts:25"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/minimap-layout.ts#clampMinimapLayout",
-      "canonicalId": "src/components/game/minimap-layout.ts#clampMinimapLayout",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/minimap-layout.ts:42"
-      ],
-      "sourceNames": [
-        "clampMinimapLayout"
-      ],
-      "rendererLocations": [
-        "src/components/game/minimap-layout.ts:42"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/minimap-layout.ts"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:40"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:layout.minimized",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:40"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:40"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/minimap-layout.ts:40"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/minimap-layout.ts#defaultMinimapLayout",
-      "canonicalId": "src/components/game/minimap-layout.ts#defaultMinimapLayout",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/minimap-layout.ts:61"
-      ],
-      "sourceNames": [
-        "defaultMinimapLayout"
-      ],
-      "rendererLocations": [
-        "src/components/game/minimap-layout.ts:61"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/minimap-layout.ts"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:52"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:52"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/minimap-layout.ts:52"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/minimap-layout.ts#hasSavedMinimapLayout",
-      "canonicalId": "src/components/game/minimap-layout.ts#hasSavedMinimapLayout",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/minimap-layout.ts:85"
-      ],
-      "sourceNames": [
-        "hasSavedMinimapLayout"
-      ],
-      "rendererLocations": [
-        "src/components/game/minimap-layout.ts:85"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/minimap-layout.ts"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:85"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:85"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/minimap-layout.ts:85"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/minimap-layout.ts#isLayout",
-      "canonicalId": "src/components/game/minimap-layout.ts#isLayout",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/minimap-layout.ts:31"
-      ],
-      "sourceNames": [
-        "isLayout"
-      ],
-      "rendererLocations": [
-        "src/components/game/minimap-layout.ts:31"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/minimap-layout.ts"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:29"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:!value || typeof value !== \"object\"",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:29"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:29"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/minimap-layout.ts:29"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/minimap-layout.ts#loadMinimapLayout",
-      "canonicalId": "src/components/game/minimap-layout.ts#loadMinimapLayout",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/minimap-layout.ts:73"
-      ],
-      "sourceNames": [
-        "loadMinimapLayout"
-      ],
-      "rendererLocations": [
-        "src/components/game/minimap-layout.ts:73"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/minimap-layout.ts"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:64"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:!raw",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:64"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:isLayout(parsed)",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:64"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:64"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/minimap-layout.ts:64"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/minimap-layout.ts#minimapStorage",
-      "canonicalId": "src/components/game/minimap-layout.ts#minimapStorage",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/minimap-layout.ts:94"
-      ],
-      "sourceNames": [
-        "minimapStorage"
-      ],
-      "rendererLocations": [
-        "src/components/game/minimap-layout.ts:94"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/minimap-layout.ts"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:94"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:typeof window === \"undefined\"",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:94"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:94"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/minimap-layout.ts:94"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/minimap-layout.ts#saveMinimapLayout",
-      "canonicalId": "src/components/game/minimap-layout.ts#saveMinimapLayout",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/minimap-layout.ts:103"
-      ],
-      "sourceNames": [
-        "saveMinimapLayout"
-      ],
-      "rendererLocations": [
-        "src/components/game/minimap-layout.ts:103"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/minimap-layout.ts"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:75"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/minimap-layout.ts:75"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/minimap-layout.ts:75"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer-helper:src/components/game/movable-minimap.tsx#viewport",
-      "canonicalId": "src/components/game/movable-minimap.tsx#viewport",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/movable-minimap.tsx:24"
-      ],
-      "sourceNames": [
-        "viewport"
-      ],
-      "rendererLocations": [
-        "src/components/game/movable-minimap.tsx:24"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/movable-minimap.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:23"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:23"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/movable-minimap.tsx:23"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -45174,6 +45069,920 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/cemetery-mist.tsx:11"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/band.tsx#ActionCluster",
+      "canonicalId": "src/components/game/chrome/band.tsx#ActionCluster",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/band.tsx:143"
+      ],
+      "sourceNames": [
+        "ActionCluster"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/band.tsx:143"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/band.tsx"
+      ],
+      "jsxTags": [
+        "Anvil",
+        "Hand",
+        "Icon",
+        "ScrollText",
+        "button",
+        "div"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:82"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:82"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/band.tsx:82"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/band.tsx#Band",
+      "canonicalId": "src/components/game/chrome/band.tsx#Band",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/band.tsx:220"
+      ],
+      "sourceNames": [
+        "Band"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/band.tsx:220"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/band.tsx"
+      ],
+      "jsxTags": [
+        "ActionCluster",
+        "FirstPersonChip",
+        "MusicToggle",
+        "SettingsButton",
+        "SfxToggle",
+        "TimeCluster",
+        "VitalsBox",
+        "VitalsStrip",
+        "YouButton",
+        "div"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:159"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:159"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/band.tsx:159"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/band.tsx#TimeCluster",
+      "canonicalId": "src/components/game/chrome/band.tsx#TimeCluster",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/band.tsx:194"
+      ],
+      "sourceNames": [
+        "TimeCluster"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/band.tsx:194"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/band.tsx"
+      ],
+      "jsxTags": [
+        "FastForward",
+        "Pause",
+        "Play",
+        "button",
+        "div"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:133"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:cur === 0",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:133"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:cur === 3",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:133"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:133"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/band.tsx:133"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/band.tsx#VitalsBox",
+      "canonicalId": "src/components/game/chrome/band.tsx#VitalsBox",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/band.tsx:20"
+      ],
+      "sourceNames": [
+        "VitalsBox"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/band.tsx:20"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/band.tsx"
+      ],
+      "jsxTags": [
+        "button",
+        "div",
+        "p",
+        "span"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:ghost",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:inside",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:self",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/band.tsx:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/band.tsx#VitalsStrip",
+      "canonicalId": "src/components/game/chrome/band.tsx#VitalsStrip",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/band.tsx:83"
+      ],
+      "sourceNames": [
+        "VitalsStrip"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/band.tsx:83"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/band.tsx"
+      ],
+      "jsxTags": [
+        "button",
+        "div",
+        "p",
+        "span"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:83"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:ghost",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:83"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:inside",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:83"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:self",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:83"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/band.tsx:83"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/band.tsx:83"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/rail.tsx#FirstPersonChip",
+      "canonicalId": "src/components/game/chrome/rail.tsx#FirstPersonChip",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/rail.tsx:46"
+      ],
+      "sourceNames": [
+        "FirstPersonChip"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/rail.tsx:46"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/rail.tsx"
+      ],
+      "jsxTags": [
+        "Eye",
+        "button"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/rail.tsx:46"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:firstPerson",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/rail.tsx:46"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/rail.tsx:46"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/rail.tsx:46"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/rail.tsx#MapToggle",
+      "canonicalId": "src/components/game/chrome/rail.tsx#MapToggle",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/rail.tsx:65"
+      ],
+      "sourceNames": [
+        "MapToggle"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/rail.tsx:65"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/rail.tsx"
+      ],
+      "jsxTags": [
+        "MapIcon",
+        "button"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/rail.tsx:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:collapsed",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/rail.tsx:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/rail.tsx:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/rail.tsx:65"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/rail.tsx#Rail",
+      "canonicalId": "src/components/game/chrome/rail.tsx#Rail",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/rail.tsx:84"
+      ],
+      "sourceNames": [
+        "Rail"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/rail.tsx:84"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/rail.tsx"
+      ],
+      "jsxTags": [
+        "FirstPersonChip",
+        "MapToggle",
+        "MusicToggle",
+        "SettingsButton",
+        "SfxToggle",
+        "YouButton",
+        "div"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/rail.tsx:84"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/rail.tsx:84"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/rail.tsx:84"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/rail.tsx#SettingsButton",
+      "canonicalId": "src/components/game/chrome/rail.tsx#SettingsButton",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/rail.tsx:27"
+      ],
+      "sourceNames": [
+        "SettingsButton"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/rail.tsx:27"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/rail.tsx"
+      ],
+      "jsxTags": [
+        "Settings",
+        "button"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/rail.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/rail.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/rail.tsx:27"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/rail.tsx#YouButton",
+      "canonicalId": "src/components/game/chrome/rail.tsx#YouButton",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/rail.tsx:9"
+      ],
+      "sourceNames": [
+        "YouButton"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/rail.tsx:9"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/rail.tsx"
+      ],
+      "jsxTags": [
+        "Backpack",
+        "button"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/rail.tsx:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/rail.tsx:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/rail.tsx:9"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/sound-toggles.tsx#MusicToggle",
+      "canonicalId": "src/components/game/chrome/sound-toggles.tsx#MusicToggle",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/sound-toggles.tsx:16"
+      ],
+      "sourceNames": [
+        "MusicToggle"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/sound-toggles.tsx:16"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/sound-toggles.tsx"
+      ],
+      "jsxTags": [
+        "Music2",
+        "button"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/sound-toggles.tsx:16"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:mute",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/sound-toggles.tsx:16"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/sound-toggles.tsx:16"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/sound-toggles.tsx:16"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/sound-toggles.tsx#SfxToggle",
+      "canonicalId": "src/components/game/chrome/sound-toggles.tsx#SfxToggle",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/sound-toggles.tsx:32"
+      ],
+      "sourceNames": [
+        "SfxToggle"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/sound-toggles.tsx:32"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/sound-toggles.tsx"
+      ],
+      "jsxTags": [
+        "AudioLines",
+        "button"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/sound-toggles.tsx:32"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:mute",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/sound-toggles.tsx:32"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/sound-toggles.tsx:32"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/sound-toggles.tsx:32"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/sound-toggles.tsx#SoundToggles",
+      "canonicalId": "src/components/game/chrome/sound-toggles.tsx#SoundToggles",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/sound-toggles.tsx:7"
+      ],
+      "sourceNames": [
+        "SoundToggles"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/sound-toggles.tsx:7"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/sound-toggles.tsx"
+      ],
+      "jsxTags": [
+        "MusicToggle",
+        "SfxToggle",
+        "div"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/sound-toggles.tsx:7"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/sound-toggles.tsx:7"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/sound-toggles.tsx:7"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -201052,6 +201861,95 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "ui:src/components/game/chrome/docked-minimap.tsx#DockedMinimap",
+      "canonicalId": "src/components/game/chrome/docked-minimap.tsx#DockedMinimap",
+      "family": "ui",
+      "catalogSources": [
+        "src/components/game/chrome/docked-minimap.tsx:12"
+      ],
+      "sourceNames": [
+        "DockedMinimap"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/docked-minimap.tsx:12"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/docked-minimap.tsx"
+      ],
+      "jsxTags": [
+        "MapToggle",
+        "MiniVale",
+        "Minimize2",
+        "button",
+        "div",
+        "section"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/docked-minimap.tsx:32"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!dock.ready",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/docked-minimap.tsx:32"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:dock.collapsed",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/docked-minimap.tsx:32"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:panel === \"vale\" || openBook || openCraft",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/docked-minimap.tsx:32"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/docked-minimap.tsx:32"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/docked-minimap.tsx:32"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "ui:src/components/game/context-menu.tsx#ContextMenu",
       "canonicalId": "src/components/game/context-menu.tsx#ContextMenu",
       "family": "ui",
@@ -202061,82 +202959,17 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
-      "id": "ui:src/components/game/hud.tsx#BottomDock",
-      "canonicalId": "src/components/game/hud.tsx#BottomDock",
-      "family": "ui",
-      "catalogSources": [
-        "src/components/game/hud.tsx:476"
-      ],
-      "sourceNames": [
-        "BottomDock"
-      ],
-      "rendererLocations": [
-        "src/components/game/hud.tsx:476"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/hud.tsx"
-      ],
-      "jsxTags": [
-        "Anvil",
-        "Hand",
-        "Icon",
-        "ScrollText",
-        "button",
-        "div"
-      ],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:301"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:301"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/hud.tsx:301"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
       "id": "ui:src/components/game/hud.tsx#BuildRibbon",
       "canonicalId": "src/components/game/hud.tsx#BuildRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:809"
+        "src/components/game/hud.tsx:562"
       ],
       "sourceNames": [
         "BuildRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:809"
+        "src/components/game/hud.tsx:562"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -202212,86 +203045,17 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
-      "id": "ui:src/components/game/hud.tsx#FirstPersonChip",
-      "canonicalId": "src/components/game/hud.tsx#FirstPersonChip",
-      "family": "ui",
-      "catalogSources": [
-        "src/components/game/hud.tsx:438"
-      ],
-      "sourceNames": [
-        "FirstPersonChip"
-      ],
-      "rendererLocations": [
-        "src/components/game/hud.tsx:438"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/hud.tsx"
-      ],
-      "jsxTags": [
-        "Eye",
-        "button"
-      ],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:428"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:firstPerson",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:428"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:428"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/hud.tsx:428"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
       "id": "ui:src/components/game/hud.tsx#GhostBanner",
       "canonicalId": "src/components/game/hud.tsx#GhostBanner",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:757"
+        "src/components/game/hud.tsx:510"
       ],
       "sourceNames": [
         "GhostBanner"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:757"
+        "src/components/game/hud.tsx:510"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -202379,13 +203143,13 @@
       "canonicalId": "src/components/game/hud.tsx#GuideTabs",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:603"
+        "src/components/game/hud.tsx:356"
       ],
       "sourceNames": [
         "GuideTabs"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:603"
+        "src/components/game/hud.tsx:356"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -202467,13 +203231,13 @@
       "canonicalId": "src/components/game/hud.tsx#HelpPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:649"
+        "src/components/game/hud.tsx:402"
       ],
       "sourceNames": [
         "HelpPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:649"
+        "src/components/game/hud.tsx:402"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -202540,13 +203304,13 @@
       "canonicalId": "src/components/game/hud.tsx#Hud",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:59"
+        "src/components/game/hud.tsx:40"
       ],
       "sourceNames": [
         "Hud"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:59"
+        "src/components/game/hud.tsx:40"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -202645,13 +203409,13 @@
       "canonicalId": "src/components/game/hud.tsx#JournalPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:698"
+        "src/components/game/hud.tsx:451"
       ],
       "sourceNames": [
         "JournalPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:698"
+        "src/components/game/hud.tsx:451"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -202704,86 +203468,17 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
-      "id": "ui:src/components/game/hud.tsx#MusicToggle",
-      "canonicalId": "src/components/game/hud.tsx#MusicToggle",
-      "family": "ui",
-      "catalogSources": [
-        "src/components/game/hud.tsx:539"
-      ],
-      "sourceNames": [
-        "MusicToggle"
-      ],
-      "rendererLocations": [
-        "src/components/game/hud.tsx:539"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/hud.tsx"
-      ],
-      "jsxTags": [
-        "Music2",
-        "button"
-      ],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:348"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:mute",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:348"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:348"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/hud.tsx:348"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
       "id": "ui:src/components/game/hud.tsx#PlayingChrome",
       "canonicalId": "src/components/game/hud.tsx#PlayingChrome",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:77"
+        "src/components/game/hud.tsx:58"
       ],
       "sourceNames": [
         "PlayingChrome"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:77"
+        "src/components/game/hud.tsx:58"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -202791,24 +203486,24 @@
       ],
       "jsxTags": [
         "ActionsPanel",
-        "BottomDock",
+        "Band",
         "BuildRibbon",
         "ContextMenu",
         "CraftGump",
+        "DockedMinimap",
         "GateGump",
         "GhostBanner",
         "HouseGump",
-        "MovableMinimap",
         "NpcGump",
         "PetsGump",
         "PileGump",
+        "Rail",
         "SaveFailureBanner",
         "SelectedCard",
         "SettingsGump",
         "SidePanel",
         "SpellbookGump",
         "Toast",
-        "TopBar",
         "TravelRibbon",
         "VaultGump"
       ],
@@ -202897,13 +203592,13 @@
       "canonicalId": "src/components/game/hud.tsx#RaisingOverlay",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:320"
+        "src/components/game/hud.tsx:302"
       ],
       "sourceNames": [
         "RaisingOverlay"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:320"
+        "src/components/game/hud.tsx:302"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -202959,13 +203654,13 @@
       "canonicalId": "src/components/game/hud.tsx#RosterPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:714"
+        "src/components/game/hud.tsx:467"
       ],
       "sourceNames": [
         "RosterPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:714"
+        "src/components/game/hud.tsx:467"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -203048,13 +203743,13 @@
       "canonicalId": "src/components/game/hud.tsx#SaveFailureBanner",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:139"
+        "src/components/game/hud.tsx:121"
       ],
       "sourceNames": [
         "SaveFailureBanner"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:139"
+        "src/components/game/hud.tsx:121"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -203118,13 +203813,13 @@
       "canonicalId": "src/components/game/hud.tsx#SelectedCard",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:741"
+        "src/components/game/hud.tsx:494"
       ],
       "sourceNames": [
         "SelectedCard"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:741"
+        "src/components/game/hud.tsx:494"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -203199,147 +203894,17 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
-      "id": "ui:src/components/game/hud.tsx#SettingsButton",
-      "canonicalId": "src/components/game/hud.tsx#SettingsButton",
-      "family": "ui",
-      "catalogSources": [
-        "src/components/game/hud.tsx:457"
-      ],
-      "sourceNames": [
-        "SettingsButton"
-      ],
-      "rendererLocations": [
-        "src/components/game/hud.tsx:457"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/hud.tsx"
-      ],
-      "jsxTags": [
-        "Settings",
-        "button"
-      ],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:282"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:282"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/hud.tsx:282"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "ui:src/components/game/hud.tsx#SfxToggle",
-      "canonicalId": "src/components/game/hud.tsx#SfxToggle",
-      "family": "ui",
-      "catalogSources": [
-        "src/components/game/hud.tsx:555"
-      ],
-      "sourceNames": [
-        "SfxToggle"
-      ],
-      "rendererLocations": [
-        "src/components/game/hud.tsx:555"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/hud.tsx"
-      ],
-      "jsxTags": [
-        "AudioLines",
-        "button"
-      ],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:364"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:mute",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:364"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:364"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/hud.tsx:364"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
       "id": "ui:src/components/game/hud.tsx#SidePanel",
       "canonicalId": "src/components/game/hud.tsx#SidePanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:571"
+        "src/components/game/hud.tsx:324"
       ],
       "sourceNames": [
         "SidePanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:571"
+        "src/components/game/hud.tsx:324"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -203403,79 +203968,17 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
-      "id": "ui:src/components/game/hud.tsx#SoundToggles",
-      "canonicalId": "src/components/game/hud.tsx#SoundToggles",
-      "family": "ui",
-      "catalogSources": [
-        "src/components/game/hud.tsx:530"
-      ],
-      "sourceNames": [
-        "SoundToggles"
-      ],
-      "rendererLocations": [
-        "src/components/game/hud.tsx:530"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/hud.tsx"
-      ],
-      "jsxTags": [
-        "MusicToggle",
-        "SfxToggle",
-        "div"
-      ],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:339"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:339"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/hud.tsx:339"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
       "id": "ui:src/components/game/hud.tsx#TitleOverlay",
       "canonicalId": "src/components/game/hud.tsx#TitleOverlay",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:161"
+        "src/components/game/hud.tsx:143"
       ],
       "sourceNames": [
         "TitleOverlay"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:161"
+        "src/components/game/hud.tsx:143"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -203629,13 +204132,13 @@
       "canonicalId": "src/components/game/hud.tsx#Toast",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:795"
+        "src/components/game/hud.tsx:548"
       ],
       "sourceNames": [
         "Toast"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:795"
+        "src/components/game/hud.tsx:548"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -203701,126 +204204,17 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
-      "id": "ui:src/components/game/hud.tsx#TopBar",
-      "canonicalId": "src/components/game/hud.tsx#TopBar",
-      "family": "ui",
-      "catalogSources": [
-        "src/components/game/hud.tsx:342"
-      ],
-      "sourceNames": [
-        "TopBar"
-      ],
-      "rendererLocations": [
-        "src/components/game/hud.tsx:342"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/hud.tsx"
-      ],
-      "jsxTags": [
-        "Backpack",
-        "FastForward",
-        "FirstPersonChip",
-        "Pause",
-        "Play",
-        "SettingsButton",
-        "button",
-        "div",
-        "p",
-        "span"
-      ],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:201"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:cur === 0",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:201"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:cur === 3",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:201"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:ghost",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:201"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:inside",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:201"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:self",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:201"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/hud.tsx:201"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/hud.tsx:201"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
       "id": "ui:src/components/game/hud.tsx#TravelRibbon",
       "canonicalId": "src/components/game/hud.tsx#TravelRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:836"
+        "src/components/game/hud.tsx:589"
       ],
       "sourceNames": [
         "TravelRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:836"
+        "src/components/game/hud.tsx:589"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -204762,185 +205156,6 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/look-preview.tsx:61"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "ui:src/components/game/movable-minimap.tsx#MovableMinimap",
-      "canonicalId": "src/components/game/movable-minimap.tsx#MovableMinimap",
-      "family": "ui",
-      "catalogSources": [
-        "src/components/game/movable-minimap.tsx:28"
-      ],
-      "sourceNames": [
-        "MovableMinimap"
-      ],
-      "rendererLocations": [
-        "src/components/game/movable-minimap.tsx:28"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/movable-minimap.tsx"
-      ],
-      "jsxTags": [
-        "Maximize2",
-        "MiniVale",
-        "Minimize2",
-        "MoveDiagonal2",
-        "button",
-        "div",
-        "section",
-        "span"
-      ],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:27"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:!active || active.pointerId !== event.pointerId",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:27"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:!active.moved && Math.abs(dx) + Math.abs(dy) > 4",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:27"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:!suppressMapClick.current",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:27"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:active.kind === \"drag\"",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:27"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:active.layout.minimized",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:27"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:event.button !== 0",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:27"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:event.currentTarget.hasPointerCapture(event.pointerId)",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:27"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:expanded",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:27"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:layout.minimized",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:27"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:panel === \"vale\" || openBook || openCraft",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:27"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:ready",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:27"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:ready && storage",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:28"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:storage && hasSavedMinimapLayout(storage)",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:28"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:suppressRestore.current",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:27"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/movable-minimap.tsx:27"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/movable-minimap.tsx:27"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -223245,10 +223460,12 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:49"
+        "src/components/game/chrome/band.tsx:7",
+        "src/components/game/hud.tsx:36"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/band.tsx",
         "src/components/game/hud.tsx"
       ],
       "jsxTags": null,
@@ -223295,10 +223512,12 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:49"
+        "src/components/game/chrome/band.tsx:7",
+        "src/components/game/hud.tsx:36"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/band.tsx",
         "src/components/game/hud.tsx"
       ],
       "jsxTags": null,
@@ -223345,10 +223564,12 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:49"
+        "src/components/game/chrome/band.tsx:7",
+        "src/components/game/hud.tsx:36"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/band.tsx",
         "src/components/game/hud.tsx"
       ],
       "jsxTags": null,
@@ -223395,10 +223616,12 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:49"
+        "src/components/game/chrome/band.tsx:7",
+        "src/components/game/hud.tsx:36"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/band.tsx",
         "src/components/game/hud.tsx"
       ],
       "jsxTags": null,
@@ -223445,10 +223668,12 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:49"
+        "src/components/game/chrome/band.tsx:7",
+        "src/components/game/hud.tsx:36"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/band.tsx",
         "src/components/game/hud.tsx"
       ],
       "jsxTags": null,
@@ -223495,10 +223720,12 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:49"
+        "src/components/game/chrome/band.tsx:7",
+        "src/components/game/hud.tsx:36"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/band.tsx",
         "src/components/game/hud.tsx"
       ],
       "jsxTags": null,
@@ -223545,10 +223772,12 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:49"
+        "src/components/game/chrome/band.tsx:7",
+        "src/components/game/hud.tsx:36"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/band.tsx",
         "src/components/game/hud.tsx"
       ],
       "jsxTags": null,
@@ -225673,11 +225902,11 @@
         "Speed"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:49"
+        "src/components/game/chrome/band.tsx:7"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/hud.tsx"
+        "src/components/game/chrome/band.tsx"
       ],
       "jsxTags": null,
       "states": [
@@ -225723,11 +225952,11 @@
         "Speed"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:49"
+        "src/components/game/chrome/band.tsx:7"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/hud.tsx"
+        "src/components/game/chrome/band.tsx"
       ],
       "jsxTags": null,
       "states": [
@@ -225773,11 +226002,11 @@
         "Speed"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:49"
+        "src/components/game/chrome/band.tsx:7"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/hud.tsx"
+        "src/components/game/chrome/band.tsx"
       ],
       "jsxTags": null,
       "states": [
@@ -225823,11 +226052,11 @@
         "Speed"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:49"
+        "src/components/game/chrome/band.tsx:7"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/hud.tsx"
+        "src/components/game/chrome/band.tsx"
       ],
       "jsxTags": null,
       "states": [
