@@ -69,6 +69,7 @@ const SPELL_IDS = new Set([
   "recall",
 ]);
 const CREATURE_TASKS = new Set(["wander", "flee", "fight", "follow", "dead", "idle"]);
+const CREATURE_ART = new Set(["thornbound", "stonebound", "galebound", "tidebound", "risen"]);
 const CROP_IDS = new Set(["cabbage", "wheat", "garlic", "ginseng", "mandrake", "moss"]);
 const CROP_STAGES = new Set([0, 1, 2, 3]);
 const SPEEDS = new Set([0, 1, 2, 3]);
@@ -402,7 +403,8 @@ function isCreature(value: unknown): boolean {
     (value.poisonTickAt === undefined || isFiniteNumber(value.poisonTickAt)) &&
     (value.paralyzeUntil === undefined || isFiniteNumber(value.paralyzeUntil)) &&
     (value.curseUntil === undefined || isFiniteNumber(value.curseUntil)) &&
-    (value.boundUntil === undefined || isFiniteNumber(value.boundUntil))
+    (value.boundUntil === undefined || isFiniteNumber(value.boundUntil)) &&
+    (value.art === undefined || (isString(value.art) && CREATURE_ART.has(value.art)))
   );
 }
 

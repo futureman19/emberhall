@@ -56,6 +56,30 @@ export const FAUNA_ART_URLS = {
   field_rat: "/art/lanternwood/fauna-field_rat.glb",
 } as const satisfies Record<FaunaKind, string>;
 
+/** Visual-only spell-art ids. Gameplay ignores these. */
+export const FAUNA_SPELL_ART_IDS = ["thornbound", "stonebound", "galebound", "tidebound", "risen"] as const;
+export type FaunaSpellArt = (typeof FAUNA_SPELL_ART_IDS)[number];
+const SPELL_ART = new Set<string>(FAUNA_SPELL_ART_IDS);
+const ELEMENTAL_ART = new Set<FaunaSpellArt>(["thornbound", "stonebound", "galebound", "tidebound"]);
+
+export const FAUNA_SPELL_ART_URLS = {
+  thornbound: "/art/lanternwood/spell-fauna-thornbound.glb",
+  stonebound: "/art/lanternwood/spell-fauna-stonebound.glb",
+  galebound: "/art/lanternwood/spell-fauna-galebound.glb",
+  tidebound: "/art/lanternwood/spell-fauna-tidebound.glb",
+} as const satisfies Record<Exclude<FaunaSpellArt, "risen">, string>;
+
+export function faunaArtUrl(kind: FaunaKind, art?: FaunaSpellArt): string {
+  if (art && art !== "risen") return FAUNA_SPELL_ART_URLS[art];
+  return FAUNA_ART_URLS[kind];
+}
+
+export function faunaSpellArt(c: { art?: string | null; name?: string | null }): FaunaSpellArt | undefined {
+  if (c.art && SPELL_ART.has(c.art)) return c.art as FaunaSpellArt;
+  if (c.name && ELEMENTAL_ART.has(c.name as FaunaSpellArt)) return c.name as FaunaSpellArt;
+  if (c.name?.startsWith("risen ")) return "risen";
+}
+
 export function faunaArtEnabled(search: string): boolean {
   const params = new URLSearchParams(search);
   return params.get("faunaArt") !== "off" && params.get("faunaArtFail") !== "1";

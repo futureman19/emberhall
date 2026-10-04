@@ -441,6 +441,8 @@ export interface Creature {
   polyUntil?: number;
   /** Mirror Image: a conjured decoy — pops without corpse, loot, or glory. */
   mirror?: boolean;
+  /** Visual-only spell-art variant. Stats, AI, and the Body/Beast boundary ignore this. */
+  art?: "thornbound" | "stonebound" | "galebound" | "tidebound" | "risen";
 }
 
 /** A shovel-cut in the dirt. Rain fills it. Authored pits are not holes. */

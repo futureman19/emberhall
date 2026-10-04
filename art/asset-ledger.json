@@ -11598,7 +11598,7 @@
       "family": "crop",
       "catalogSources": [
         "src/game/farm.ts:42",
-        "src/game/types.ts:487"
+        "src/game/types.ts:489"
       ],
       "sourceNames": [
         "CROP_META",
@@ -11685,7 +11685,7 @@
       "family": "crop",
       "catalogSources": [
         "src/game/farm.ts:44",
-        "src/game/types.ts:487"
+        "src/game/types.ts:489"
       ],
       "sourceNames": [
         "CROP_META",
@@ -11772,7 +11772,7 @@
       "family": "crop",
       "catalogSources": [
         "src/game/farm.ts:45",
-        "src/game/types.ts:487"
+        "src/game/types.ts:489"
       ],
       "sourceNames": [
         "CROP_META",
@@ -11859,7 +11859,7 @@
       "family": "crop",
       "catalogSources": [
         "src/game/farm.ts:46",
-        "src/game/types.ts:487"
+        "src/game/types.ts:489"
       ],
       "sourceNames": [
         "CROP_META",
@@ -11946,7 +11946,7 @@
       "family": "crop",
       "catalogSources": [
         "src/game/farm.ts:47",
-        "src/game/types.ts:487"
+        "src/game/types.ts:489"
       ],
       "sourceNames": [
         "CROP_META",
@@ -12033,7 +12033,7 @@
       "family": "crop",
       "catalogSources": [
         "src/game/farm.ts:43",
-        "src/game/types.ts:487"
+        "src/game/types.ts:489"
       ],
       "sourceNames": [
         "CROP_META",
@@ -18880,7 +18880,7 @@
       "family": "herb",
       "catalogSources": [
         "src/game/herbs.ts:35",
-        "src/game/types.ts:498"
+        "src/game/types.ts:500"
       ],
       "sourceNames": [
         "HERB_META",
@@ -18946,7 +18946,7 @@
       "family": "herb",
       "catalogSources": [
         "src/game/herbs.ts:34",
-        "src/game/types.ts:498"
+        "src/game/types.ts:500"
       ],
       "sourceNames": [
         "HERB_META",
@@ -19012,7 +19012,7 @@
       "family": "herb",
       "catalogSources": [
         "src/game/herbs.ts:33",
-        "src/game/types.ts:498"
+        "src/game/types.ts:500"
       ],
       "sourceNames": [
         "HERB_META",
@@ -19078,7 +19078,7 @@
       "family": "herb",
       "catalogSources": [
         "src/game/herbs.ts:32",
-        "src/game/types.ts:498"
+        "src/game/types.ts:500"
       ],
       "sourceNames": [
         "HERB_META",
@@ -19144,7 +19144,7 @@
       "family": "herb",
       "catalogSources": [
         "src/game/herbs.ts:36",
-        "src/game/types.ts:498"
+        "src/game/types.ts:500"
       ],
       "sourceNames": [
         "HERB_META",
@@ -33054,13 +33054,13 @@
       "canonicalId": "src/components/game/fauna-art-catalog.ts#faunaArtEnabled",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/fauna-art-catalog.ts:59"
+        "src/components/game/fauna-art-catalog.ts:83"
       ],
       "sourceNames": [
         "faunaArtEnabled"
       ],
       "rendererLocations": [
-        "src/components/game/fauna-art-catalog.ts:59"
+        "src/components/game/fauna-art-catalog.ts:83"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -33108,17 +33108,239 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "renderer-helper:src/components/game/fauna-art-catalog.ts#faunaArtUrl",
+      "canonicalId": "src/components/game/fauna-art-catalog.ts#faunaArtUrl",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/fauna-art-catalog.ts:72"
+      ],
+      "sourceNames": [
+        "faunaArtUrl"
+      ],
+      "rendererLocations": [
+        "src/components/game/fauna-art-catalog.ts:72"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/fauna-art-catalog.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-catalog.ts:72"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:art && art !== \"risen\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-catalog.ts:72"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-catalog.ts:72"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/fauna-art-catalog.ts:72"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/fauna-art-catalog.ts#faunaSpellArt",
+      "canonicalId": "src/components/game/fauna-art-catalog.ts#faunaSpellArt",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/fauna-art-catalog.ts:77"
+      ],
+      "sourceNames": [
+        "faunaSpellArt"
+      ],
+      "rendererLocations": [
+        "src/components/game/fauna-art-catalog.ts:77"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/fauna-art-catalog.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-catalog.ts:77"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:c.art && SPELL_ART.has(c.art)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-catalog.ts:77"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:c.name && ELEMENTAL_ART.has(c.name as FaunaSpellArt)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-catalog.ts:77"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:c.name?.startsWith(\"risen \")",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-catalog.ts:77"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-catalog.ts:77"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/fauna-art-catalog.ts:77"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/fauna-art-data.ts#applyRisenLook",
+      "canonicalId": "src/components/game/fauna-art-data.ts#applyRisenLook",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/fauna-art-data.ts:70"
+      ],
+      "sourceNames": [
+        "applyRisenLook"
+      ],
+      "rendererLocations": [
+        "src/components/game/fauna-art-data.ts:70"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/fauna-art-data.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-data.ts:70"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:color",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-data.ts:70"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:object instanceof Mesh",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-data.ts:70"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-data.ts:70"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/fauna-art-data.ts:70"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "renderer-helper:src/components/game/fauna-art-data.ts#cloneFaunaArt",
       "canonicalId": "src/components/game/fauna-art-data.ts#cloneFaunaArt",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/fauna-art-data.ts:30"
+        "src/components/game/fauna-art-data.ts:31"
       ],
       "sourceNames": [
         "cloneFaunaArt"
       ],
       "rendererLocations": [
-        "src/components/game/fauna-art-data.ts:30"
+        "src/components/game/fauna-art-data.ts:31"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -33169,6 +33391,64 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/fauna-art-data.ts:30"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/fauna-art-data.ts#desat",
+      "canonicalId": "src/components/game/fauna-art-data.ts#desat",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/fauna-art-data.ts:45"
+      ],
+      "sourceNames": [
+        "desat"
+      ],
+      "rendererLocations": [
+        "src/components/game/fauna-art-data.ts:45"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/fauna-art-data.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-data.ts:45"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-data.ts:45"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/fauna-art-data.ts:45"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -33243,6 +33523,80 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/fauna-art-data.ts:9"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/fauna-art-data.ts#risenMaterial",
+      "canonicalId": "src/components/game/fauna-art-data.ts#risenMaterial",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/fauna-art-data.ts:50"
+      ],
+      "sourceNames": [
+        "risenMaterial"
+      ],
+      "rendererLocations": [
+        "src/components/game/fauna-art-data.ts:50"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/fauna-art-data.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-data.ts:50"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:Array.isArray(source)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-data.ts:50"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:base instanceof MeshStandardMaterial",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-data.ts:50"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art-data.ts:50"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/fauna-art-data.ts:50"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -42489,13 +42843,13 @@
       "canonicalId": "src/components/game/fauna-art.tsx#fauna-original-pick-proxy",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/fauna-art.tsx:26"
+        "src/components/game/fauna-art.tsx:31"
       ],
       "sourceNames": [
         "FaunaArtBody"
       ],
       "rendererLocations": [
-        "src/components/game/fauna-art.tsx:26"
+        "src/components/game/fauna-art.tsx:31"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45757,7 +46111,15 @@
           "applicability": "source contract; runtime unverified"
         },
         {
-          "id": "predicate:enabled && loaded?.kind === kind",
+          "id": "predicate:art === \"risen\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-art.tsx:8"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:enabled && loaded?.key === key",
           "status": "inventoried",
           "evidence": [
             "src/components/game/fauna-art.tsx:8"
@@ -45800,13 +46162,13 @@
       "canonicalId": "src/components/game/fauna-meshes.tsx#Beast",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/fauna-meshes.tsx:974"
+        "src/components/game/fauna-meshes.tsx:975"
       ],
       "sourceNames": [
         "Beast"
       ],
       "rendererLocations": [
-        "src/components/game/fauna-meshes.tsx:974"
+        "src/components/game/fauna-meshes.tsx:975"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45973,13 +46335,13 @@
       "canonicalId": "src/components/game/fauna-meshes.tsx#Body",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/fauna-meshes.tsx:136"
+        "src/components/game/fauna-meshes.tsx:137"
       ],
       "sourceNames": [
         "Body"
       ],
       "rendererLocations": [
-        "src/components/game/fauna-meshes.tsx:136"
+        "src/components/game/fauna-meshes.tsx:137"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -46322,13 +46684,13 @@
       "canonicalId": "src/components/game/fauna-meshes.tsx#CompanionBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/fauna-meshes.tsx:1123"
+        "src/components/game/fauna-meshes.tsx:1124"
       ],
       "sourceNames": [
         "CompanionBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/fauna-meshes.tsx:1123"
+        "src/components/game/fauna-meshes.tsx:1124"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -46439,13 +46801,13 @@
       "canonicalId": "src/components/game/fauna-meshes.tsx#Fauna",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/fauna-meshes.tsx:1145"
+        "src/components/game/fauna-meshes.tsx:1146"
       ],
       "sourceNames": [
         "Fauna"
       ],
       "rendererLocations": [
-        "src/components/game/fauna-meshes.tsx:1145"
+        "src/components/game/fauna-meshes.tsx:1146"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -46508,13 +46870,13 @@
       "canonicalId": "src/components/game/fauna-meshes.tsx#TamingBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/fauna-meshes.tsx:1053"
+        "src/components/game/fauna-meshes.tsx:1054"
       ],
       "sourceNames": [
         "TamingBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/fauna-meshes.tsx:1053"
+        "src/components/game/fauna-meshes.tsx:1054"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -168424,7 +168786,7 @@
       "canonicalId": "src/game/save.ts#SaveResult.ok=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/save.ts:654"
+        "src/game/save.ts:656"
       ],
       "sourceNames": [
         "SaveResult.ok"
@@ -168470,7 +168832,7 @@
       "canonicalId": "src/game/save.ts#SaveResult.ok=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/save.ts:654"
+        "src/game/save.ts:656"
       ],
       "sourceNames": [
         "SaveResult.ok"
@@ -172564,7 +172926,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=apothecary",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -172610,7 +172972,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=bank",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -172656,7 +173018,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=board",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -172702,7 +173064,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=cottage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -172748,7 +173110,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=dormitory",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -172794,7 +173156,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=farm",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -172840,7 +173202,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=forge",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -172886,7 +173248,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=gatehouse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -172932,7 +173294,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=hall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -172978,7 +173340,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=homestead",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -173024,7 +173386,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=hut",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -173070,7 +173432,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=keep",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -173116,7 +173478,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=kitchen",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -173162,7 +173524,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=market",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -173208,7 +173570,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=notice",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -173254,7 +173616,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=porch",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -173300,7 +173662,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=rampart",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -173346,7 +173708,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=rampartV",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -173392,7 +173754,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=shop",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -173438,7 +173800,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=tavern",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -173484,7 +173846,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=tower",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -173530,7 +173892,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=townhome",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -173576,7 +173938,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=townhouse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -173622,7 +173984,7 @@
       "canonicalId": "src/game/types.ts#Building.kind=yard",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:478"
+        "src/game/types.ts:480"
       ],
       "sourceNames": [
         "Building.kind"
@@ -173659,6 +174021,236 @@
       "status": "inventoried",
       "evidence": [
         "src/game/types.ts:425"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/types.ts#Creature.art=galebound",
+      "canonicalId": "src/game/types.ts#Creature.art=galebound",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/types.ts:445"
+      ],
+      "sourceNames": [
+        "Creature.art"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/types.ts:445"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/types.ts:445"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/types.ts#Creature.art=risen",
+      "canonicalId": "src/game/types.ts#Creature.art=risen",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/types.ts:445"
+      ],
+      "sourceNames": [
+        "Creature.art"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/types.ts:445"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/types.ts:445"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/types.ts#Creature.art=stonebound",
+      "canonicalId": "src/game/types.ts#Creature.art=stonebound",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/types.ts:445"
+      ],
+      "sourceNames": [
+        "Creature.art"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/types.ts:445"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/types.ts:445"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/types.ts#Creature.art=thornbound",
+      "canonicalId": "src/game/types.ts#Creature.art=thornbound",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/types.ts:445"
+      ],
+      "sourceNames": [
+        "Creature.art"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/types.ts:445"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/types.ts:445"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/types.ts#Creature.art=tidebound",
+      "canonicalId": "src/game/types.ts#Creature.art=tidebound",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/types.ts:445"
+      ],
+      "sourceNames": [
+        "Creature.art"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/types.ts:445"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/types.ts:445"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -179004,7 +179596,7 @@
       "canonicalId": "src/game/types.ts#CropPlot.crop=cabbage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:493"
+        "src/game/types.ts:495"
       ],
       "sourceNames": [
         "CropPlot.crop"
@@ -179050,7 +179642,7 @@
       "canonicalId": "src/game/types.ts#CropPlot.crop=garlic",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:493"
+        "src/game/types.ts:495"
       ],
       "sourceNames": [
         "CropPlot.crop"
@@ -179096,7 +179688,7 @@
       "canonicalId": "src/game/types.ts#CropPlot.crop=ginseng",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:493"
+        "src/game/types.ts:495"
       ],
       "sourceNames": [
         "CropPlot.crop"
@@ -179142,7 +179734,7 @@
       "canonicalId": "src/game/types.ts#CropPlot.crop=mandrake",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:493"
+        "src/game/types.ts:495"
       ],
       "sourceNames": [
         "CropPlot.crop"
@@ -179188,7 +179780,7 @@
       "canonicalId": "src/game/types.ts#CropPlot.crop=moss",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:493"
+        "src/game/types.ts:495"
       ],
       "sourceNames": [
         "CropPlot.crop"
@@ -179234,7 +179826,7 @@
       "canonicalId": "src/game/types.ts#CropPlot.crop=wheat",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:493"
+        "src/game/types.ts:495"
       ],
       "sourceNames": [
         "CropPlot.crop"
@@ -179280,7 +179872,7 @@
       "canonicalId": "src/game/types.ts#CropPlot.stage=0",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:495"
+        "src/game/types.ts:497"
       ],
       "sourceNames": [
         "CropPlot.stage"
@@ -179326,7 +179918,7 @@
       "canonicalId": "src/game/types.ts#CropPlot.stage=1",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:495"
+        "src/game/types.ts:497"
       ],
       "sourceNames": [
         "CropPlot.stage"
@@ -179372,7 +179964,7 @@
       "canonicalId": "src/game/types.ts#CropPlot.stage=2",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:495"
+        "src/game/types.ts:497"
       ],
       "sourceNames": [
         "CropPlot.stage"
@@ -179418,7 +180010,7 @@
       "canonicalId": "src/game/types.ts#CropPlot.stage=3",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:495"
+        "src/game/types.ts:497"
       ],
       "sourceNames": [
         "CropPlot.stage"
@@ -179464,7 +180056,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=building",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:734"
+        "src/game/types.ts:736"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -179510,7 +180102,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=fauna",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:734"
+        "src/game/types.ts:736"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -179556,7 +180148,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=gate",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:734"
+        "src/game/types.ts:736"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -179602,7 +180194,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=herb",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:734"
+        "src/game/types.ts:736"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -179648,7 +180240,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=pack",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:734"
+        "src/game/types.ts:736"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -179694,7 +180286,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=person",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:734"
+        "src/game/types.ts:736"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -179740,7 +180332,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=pile",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:734"
+        "src/game/types.ts:736"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -179786,7 +180378,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=plot",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:734"
+        "src/game/types.ts:736"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -179832,7 +180424,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=tile",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:734"
+        "src/game/types.ts:736"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -179878,7 +180470,7 @@
       "canonicalId": "src/game/types.ts#GroundPile.source=corpse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:463"
+        "src/game/types.ts:465"
       ],
       "sourceNames": [
         "GroundPile.source"
@@ -179924,7 +180516,7 @@
       "canonicalId": "src/game/types.ts#GroundPile.source=death",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:463"
+        "src/game/types.ts:465"
       ],
       "sourceNames": [
         "GroundPile.source"
@@ -179970,7 +180562,7 @@
       "canonicalId": "src/game/types.ts#GroundPile.source=drop",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:463"
+        "src/game/types.ts:465"
       ],
       "sourceNames": [
         "GroundPile.source"
@@ -180016,7 +180608,7 @@
       "canonicalId": "src/game/types.ts#GroundZone.kind=earthquake",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:610"
+        "src/game/types.ts:612"
       ],
       "sourceNames": [
         "GroundZone.kind"
@@ -180062,7 +180654,7 @@
       "canonicalId": "src/game/types.ts#GroundZone.kind=flamewall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:610"
+        "src/game/types.ts:612"
       ],
       "sourceNames": [
         "GroundZone.kind"
@@ -180108,7 +180700,7 @@
       "canonicalId": "src/game/types.ts#GroundZone.kind=naturesfury",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:610"
+        "src/game/types.ts:612"
       ],
       "sourceNames": [
         "GroundZone.kind"
@@ -180154,7 +180746,7 @@
       "canonicalId": "src/game/types.ts#GroundZone.kind=sanctuary",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:610"
+        "src/game/types.ts:612"
       ],
       "sourceNames": [
         "GroundZone.kind"
@@ -180200,7 +180792,7 @@
       "canonicalId": "src/game/types.ts#GroundZone.kind=stonewall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:610"
+        "src/game/types.ts:612"
       ],
       "sourceNames": [
         "GroundZone.kind"
@@ -180246,7 +180838,7 @@
       "canonicalId": "src/game/types.ts#GroundZone.kind=tarpit",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:610"
+        "src/game/types.ts:612"
       ],
       "sourceNames": [
         "GroundZone.kind"
@@ -180292,7 +180884,7 @@
       "canonicalId": "src/game/types.ts#HerbPatch.kind=ash",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:503"
+        "src/game/types.ts:505"
       ],
       "sourceNames": [
         "HerbPatch.kind"
@@ -180338,7 +180930,7 @@
       "canonicalId": "src/game/types.ts#HerbPatch.kind=ginseng",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:503"
+        "src/game/types.ts:505"
       ],
       "sourceNames": [
         "HerbPatch.kind"
@@ -180384,7 +180976,7 @@
       "canonicalId": "src/game/types.ts#HerbPatch.kind=mandrake",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:503"
+        "src/game/types.ts:505"
       ],
       "sourceNames": [
         "HerbPatch.kind"
@@ -180430,7 +181022,7 @@
       "canonicalId": "src/game/types.ts#HerbPatch.kind=moss",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:503"
+        "src/game/types.ts:505"
       ],
       "sourceNames": [
         "HerbPatch.kind"
@@ -180476,7 +181068,7 @@
       "canonicalId": "src/game/types.ts#HerbPatch.kind=pearl",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:503"
+        "src/game/types.ts:505"
       ],
       "sourceNames": [
         "HerbPatch.kind"
@@ -180522,7 +181114,7 @@
       "canonicalId": "src/game/types.ts#Hole.cellar=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:453"
+        "src/game/types.ts:455"
       ],
       "sourceNames": [
         "Hole.cellar"
@@ -180568,7 +181160,7 @@
       "canonicalId": "src/game/types.ts#Hole.cellar=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:453"
+        "src/game/types.ts:455"
       ],
       "sourceNames": [
         "Hole.cellar"
@@ -180614,7 +181206,7 @@
       "canonicalId": "src/game/types.ts#Hole.kind=cobble",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:448"
+        "src/game/types.ts:450"
       ],
       "sourceNames": [
         "Hole.kind"
@@ -180660,7 +181252,7 @@
       "canonicalId": "src/game/types.ts#Hole.kind=dirt",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:448"
+        "src/game/types.ts:450"
       ],
       "sourceNames": [
         "Hole.kind"
@@ -180706,7 +181298,7 @@
       "canonicalId": "src/game/types.ts#Hole.kind=floor",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:448"
+        "src/game/types.ts:450"
       ],
       "sourceNames": [
         "Hole.kind"
@@ -180752,7 +181344,7 @@
       "canonicalId": "src/game/types.ts#Hole.kind=grass",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:448"
+        "src/game/types.ts:450"
       ],
       "sourceNames": [
         "Hole.kind"
@@ -180798,7 +181390,7 @@
       "canonicalId": "src/game/types.ts#Hole.kind=marsh",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:448"
+        "src/game/types.ts:450"
       ],
       "sourceNames": [
         "Hole.kind"
@@ -180844,7 +181436,7 @@
       "canonicalId": "src/game/types.ts#Hole.kind=pit",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:448"
+        "src/game/types.ts:450"
       ],
       "sourceNames": [
         "Hole.kind"
@@ -180890,7 +181482,7 @@
       "canonicalId": "src/game/types.ts#Hole.kind=road",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:448"
+        "src/game/types.ts:450"
       ],
       "sourceNames": [
         "Hole.kind"
@@ -180936,7 +181528,7 @@
       "canonicalId": "src/game/types.ts#Hole.kind=rock",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:448"
+        "src/game/types.ts:450"
       ],
       "sourceNames": [
         "Hole.kind"
@@ -180982,7 +181574,7 @@
       "canonicalId": "src/game/types.ts#Hole.kind=sand",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:448"
+        "src/game/types.ts:450"
       ],
       "sourceNames": [
         "Hole.kind"
@@ -181028,7 +181620,7 @@
       "canonicalId": "src/game/types.ts#Hole.kind=snow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:448"
+        "src/game/types.ts:450"
       ],
       "sourceNames": [
         "Hole.kind"
@@ -181074,7 +181666,7 @@
       "canonicalId": "src/game/types.ts#Hole.kind=step",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:448"
+        "src/game/types.ts:450"
       ],
       "sourceNames": [
         "Hole.kind"
@@ -181120,7 +181712,7 @@
       "canonicalId": "src/game/types.ts#Hole.kind=tree",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:448"
+        "src/game/types.ts:450"
       ],
       "sourceNames": [
         "Hole.kind"
@@ -181166,7 +181758,7 @@
       "canonicalId": "src/game/types.ts#Hole.kind=wall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:448"
+        "src/game/types.ts:450"
       ],
       "sourceNames": [
         "Hole.kind"
@@ -181212,7 +181804,7 @@
       "canonicalId": "src/game/types.ts#Hole.kind=water",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:448"
+        "src/game/types.ts:450"
       ],
       "sourceNames": [
         "Hole.kind"
@@ -181258,7 +181850,7 @@
       "canonicalId": "src/game/types.ts#Hole.open=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:450"
+        "src/game/types.ts:452"
       ],
       "sourceNames": [
         "Hole.open"
@@ -181304,7 +181896,7 @@
       "canonicalId": "src/game/types.ts#Hole.open=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:450"
+        "src/game/types.ts:452"
       ],
       "sourceNames": [
         "Hole.open"
@@ -183926,7 +184518,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=acorn",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -183972,7 +184564,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=arrows",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184018,7 +184610,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=ash",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184064,7 +184656,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=bandage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184110,7 +184702,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=board",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184156,7 +184748,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=boots",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184202,7 +184794,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=bow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184248,7 +184840,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=bread",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184294,7 +184886,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=cabbage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184340,7 +184932,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=cabbage_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184386,7 +184978,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=cap",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184432,7 +185024,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=cloak",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184478,7 +185070,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=club",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184524,7 +185116,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=cooked_fish",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184570,7 +185162,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=cooked_meat",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184616,7 +185208,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=crate",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184662,7 +185254,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=cuirass",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184708,7 +185300,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=deed_homestead",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184754,7 +185346,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=deed_hut",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184800,7 +185392,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=deed_porch",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184846,7 +185438,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=fishing_rod",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184892,7 +185484,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=garlic",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184938,7 +185530,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=garlic_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -184984,7 +185576,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=gauntlets",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185030,7 +185622,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=ginseng",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185076,7 +185668,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=ginseng_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185122,7 +185714,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=gloves",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185168,7 +185760,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=gorget",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185214,7 +185806,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=greaves",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185260,7 +185852,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=hatchet",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185306,7 +185898,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=heater",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185352,7 +185944,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=helm",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185398,7 +185990,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=hide",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185444,7 +186036,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=hoe",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185490,7 +186082,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=hood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185536,7 +186128,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=hose",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185582,7 +186174,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=ingot",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185628,7 +186220,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=knife",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185674,7 +186266,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=leather",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185720,7 +186312,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=log",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185766,7 +186358,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=mace",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185812,7 +186404,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=mail",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185858,7 +186450,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=mandrake",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185904,7 +186496,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=mandrake_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185950,7 +186542,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=meat",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -185996,7 +186588,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=moss",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186042,7 +186634,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=moss_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186088,7 +186680,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=nightshade",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186134,7 +186726,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=orc_tusk",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186180,7 +186772,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186226,7 +186818,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=pearl",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186272,7 +186864,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=pendant",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186318,7 +186910,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=pick",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186364,7 +186956,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=potion_heal",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186410,7 +187002,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=potion_night",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186456,7 +187048,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=rabbit_foot",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186502,7 +187094,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=raw_fish",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186548,7 +187140,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=relic",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186594,7 +187186,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=ring",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186640,7 +187232,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=rune",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186686,7 +187278,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=shield",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186732,7 +187324,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=silk",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186778,7 +187370,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=spellbook",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186824,7 +187416,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=staff",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186870,7 +187462,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=stew",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186916,7 +187508,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=sword",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -186962,7 +187554,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=torch",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -187008,7 +187600,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=tunic",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -187054,7 +187646,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=wheat",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -187100,7 +187692,7 @@
       "canonicalId": "src/game/types.ts#LootDrop.item=wheat_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:589"
+        "src/game/types.ts:591"
       ],
       "sourceNames": [
         "LootDrop.item"
@@ -187146,7 +187738,7 @@
       "canonicalId": "src/game/types.ts#Objective.done=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:521"
+        "src/game/types.ts:523"
       ],
       "sourceNames": [
         "Objective.done"
@@ -187192,7 +187784,7 @@
       "canonicalId": "src/game/types.ts#Objective.done=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:521"
+        "src/game/types.ts:523"
       ],
       "sourceNames": [
         "Objective.done"
@@ -188158,7 +188750,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=bless",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188204,7 +188796,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=blizzard",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188250,7 +188842,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=chainlightning",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188296,7 +188888,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=cure",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188342,7 +188934,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=curse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188388,7 +188980,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=earthquake",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188434,7 +189026,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=fireball",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188480,7 +189072,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=fireblast",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188526,7 +189118,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=flamewall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188572,7 +189164,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=flash",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188618,7 +189210,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=fly",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188664,7 +189256,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=gate",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188710,7 +189302,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=heal",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188756,7 +189348,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=invisibility",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188802,7 +189394,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=ironwood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188848,7 +189440,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=jump",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188894,7 +189486,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=leech",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188940,7 +189532,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=lightning",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -188986,7 +189578,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=magicarrow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189032,7 +189624,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=mark",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189078,7 +189670,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=meteor",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189124,7 +189716,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=mirrorimage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189170,7 +189762,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=naturesfury",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189216,7 +189808,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=necromancy",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189262,7 +189854,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=nightsight",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189308,7 +189900,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=paralyze",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189354,7 +189946,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=poison",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189400,7 +189992,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=polymorph",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189446,7 +190038,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=recall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189492,7 +190084,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=resurrect",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189538,7 +190130,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=sanctuary",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189584,7 +190176,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=sleep",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189630,7 +190222,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=stonewall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189676,7 +190268,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=summon",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189722,7 +190314,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=summonelemental",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189768,7 +190360,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=tarpit",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189814,7 +190406,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=teleport",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189860,7 +190452,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.armedSpell=thornsnare",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:551"
+        "src/game/types.ts:553"
       ],
       "sourceNames": [
         "PlayerState.armedSpell"
@@ -189906,7 +190498,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.ghost=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:554"
+        "src/game/types.ts:556"
       ],
       "sourceNames": [
         "PlayerState.ghost"
@@ -189952,7 +190544,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.ghost=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:554"
+        "src/game/types.ts:556"
       ],
       "sourceNames": [
         "PlayerState.ghost"
@@ -189998,7 +190590,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.notoriety=criminal",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:535"
+        "src/game/types.ts:537"
       ],
       "sourceNames": [
         "PlayerState.notoriety"
@@ -190044,7 +190636,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.notoriety=innocent",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:535"
+        "src/game/types.ts:537"
       ],
       "sourceNames": [
         "PlayerState.notoriety"
@@ -190090,7 +190682,7 @@
       "canonicalId": "src/game/types.ts#PlayerState.notoriety=murderer",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:535"
+        "src/game/types.ts:537"
       ],
       "sourceNames": [
         "PlayerState.notoriety"
@@ -190136,7 +190728,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=acorn",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190182,7 +190774,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=arrows",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190228,7 +190820,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=ash",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190274,7 +190866,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=bandage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190320,7 +190912,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=board",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190366,7 +190958,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=boots",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190412,7 +191004,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=bow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190458,7 +191050,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=bread",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190504,7 +191096,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=cabbage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190550,7 +191142,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=cabbage_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190596,7 +191188,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=cap",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190642,7 +191234,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=cloak",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190688,7 +191280,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=club",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190734,7 +191326,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=cooked_fish",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190780,7 +191372,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=cooked_meat",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190826,7 +191418,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=crate",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190872,7 +191464,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=cuirass",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190918,7 +191510,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=deed_homestead",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -190964,7 +191556,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=deed_hut",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191010,7 +191602,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=deed_porch",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191056,7 +191648,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=fishing_rod",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191102,7 +191694,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=garlic",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191148,7 +191740,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=garlic_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191194,7 +191786,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=gauntlets",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191240,7 +191832,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=ginseng",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191286,7 +191878,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=ginseng_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191332,7 +191924,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=gloves",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191378,7 +191970,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=gorget",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191424,7 +192016,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=greaves",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191470,7 +192062,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=hatchet",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191516,7 +192108,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=heater",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191562,7 +192154,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=helm",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191608,7 +192200,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=hide",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191654,7 +192246,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=hoe",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191700,7 +192292,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=hood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191746,7 +192338,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=hose",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191792,7 +192384,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=ingot",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191838,7 +192430,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=knife",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191884,7 +192476,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=leather",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191930,7 +192522,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=log",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -191976,7 +192568,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=mace",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192022,7 +192614,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=mail",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192068,7 +192660,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=mandrake",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192114,7 +192706,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=mandrake_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192160,7 +192752,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=meat",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192206,7 +192798,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=moss",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192252,7 +192844,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=moss_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192298,7 +192890,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=nightshade",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192344,7 +192936,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=orc_tusk",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192390,7 +192982,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192436,7 +193028,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=pearl",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192482,7 +193074,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=pendant",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192528,7 +193120,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=pick",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192574,7 +193166,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=potion_heal",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192620,7 +193212,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=potion_night",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192666,7 +193258,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=rabbit_foot",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192712,7 +193304,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=raw_fish",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192758,7 +193350,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=relic",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192804,7 +193396,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=ring",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192850,7 +193442,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=rune",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192896,7 +193488,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=shield",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192942,7 +193534,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=silk",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -192988,7 +193580,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=spellbook",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -193034,7 +193626,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=staff",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -193080,7 +193672,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=stew",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -193126,7 +193718,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=sword",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -193172,7 +193764,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=torch",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -193218,7 +193810,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=tunic",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -193264,7 +193856,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=wheat",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -193310,7 +193902,7 @@
       "canonicalId": "src/game/types.ts#RareItem.base=wheat_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:566"
+        "src/game/types.ts:568"
       ],
       "sourceNames": [
         "RareItem.base"
@@ -193356,7 +193948,7 @@
       "canonicalId": "src/game/types.ts#RareItem.formId=boots",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:572"
+        "src/game/types.ts:574"
       ],
       "sourceNames": [
         "RareItem.formId"
@@ -193402,7 +193994,7 @@
       "canonicalId": "src/game/types.ts#RareItem.formId=bow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:572"
+        "src/game/types.ts:574"
       ],
       "sourceNames": [
         "RareItem.formId"
@@ -193448,7 +194040,7 @@
       "canonicalId": "src/game/types.ts#RareItem.formId=charm",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:572"
+        "src/game/types.ts:574"
       ],
       "sourceNames": [
         "RareItem.formId"
@@ -193494,7 +194086,7 @@
       "canonicalId": "src/game/types.ts#RareItem.formId=gauntlets",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:572"
+        "src/game/types.ts:574"
       ],
       "sourceNames": [
         "RareItem.formId"
@@ -193540,7 +194132,7 @@
       "canonicalId": "src/game/types.ts#RareItem.formId=gloves",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:572"
+        "src/game/types.ts:574"
       ],
       "sourceNames": [
         "RareItem.formId"
@@ -193586,7 +194178,7 @@
       "canonicalId": "src/game/types.ts#RareItem.formId=greaves",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:572"
+        "src/game/types.ts:574"
       ],
       "sourceNames": [
         "RareItem.formId"
@@ -193632,7 +194224,7 @@
       "canonicalId": "src/game/types.ts#RareItem.formId=helm",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:572"
+        "src/game/types.ts:574"
       ],
       "sourceNames": [
         "RareItem.formId"
@@ -193678,7 +194270,7 @@
       "canonicalId": "src/game/types.ts#RareItem.formId=hood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:572"
+        "src/game/types.ts:574"
       ],
       "sourceNames": [
         "RareItem.formId"
@@ -193724,7 +194316,7 @@
       "canonicalId": "src/game/types.ts#RareItem.formId=hose",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:572"
+        "src/game/types.ts:574"
       ],
       "sourceNames": [
         "RareItem.formId"
@@ -193770,7 +194362,7 @@
       "canonicalId": "src/game/types.ts#RareItem.formId=leather",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:572"
+        "src/game/types.ts:574"
       ],
       "sourceNames": [
         "RareItem.formId"
@@ -193816,7 +194408,7 @@
       "canonicalId": "src/game/types.ts#RareItem.formId=mail",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:572"
+        "src/game/types.ts:574"
       ],
       "sourceNames": [
         "RareItem.formId"
@@ -193862,7 +194454,7 @@
       "canonicalId": "src/game/types.ts#RareItem.formId=ring",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:572"
+        "src/game/types.ts:574"
       ],
       "sourceNames": [
         "RareItem.formId"
@@ -193908,7 +194500,7 @@
       "canonicalId": "src/game/types.ts#RareItem.formId=shield",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:572"
+        "src/game/types.ts:574"
       ],
       "sourceNames": [
         "RareItem.formId"
@@ -193954,7 +194546,7 @@
       "canonicalId": "src/game/types.ts#RareItem.formId=sword",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:572"
+        "src/game/types.ts:574"
       ],
       "sourceNames": [
         "RareItem.formId"
@@ -194000,7 +194592,7 @@
       "canonicalId": "src/game/types.ts#RareItem.source=crafted",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:579"
+        "src/game/types.ts:581"
       ],
       "sourceNames": [
         "RareItem.source"
@@ -194046,7 +194638,7 @@
       "canonicalId": "src/game/types.ts#RareItem.source=legacy",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:579"
+        "src/game/types.ts:581"
       ],
       "sourceNames": [
         "RareItem.source"
@@ -194092,7 +194684,7 @@
       "canonicalId": "src/game/types.ts#RareItem.source=loot",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:579"
+        "src/game/types.ts:581"
       ],
       "sourceNames": [
         "RareItem.source"
@@ -194138,7 +194730,7 @@
       "canonicalId": "src/game/types.ts#RareItem.workmanship=exceptional",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:573"
+        "src/game/types.ts:575"
       ],
       "sourceNames": [
         "RareItem.workmanship"
@@ -194184,7 +194776,7 @@
       "canonicalId": "src/game/types.ts#RareItem.workmanship=fine",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:573"
+        "src/game/types.ts:575"
       ],
       "sourceNames": [
         "RareItem.workmanship"
@@ -194230,7 +194822,7 @@
       "canonicalId": "src/game/types.ts#RareItem.workmanship=ordinary",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:573"
+        "src/game/types.ts:575"
       ],
       "sourceNames": [
         "RareItem.workmanship"
@@ -194368,7 +194960,7 @@
       "canonicalId": "src/game/types.ts#Sapling.stage=1",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:514"
+        "src/game/types.ts:516"
       ],
       "sourceNames": [
         "Sapling.stage"
@@ -194414,7 +195006,7 @@
       "canonicalId": "src/game/types.ts#Sapling.stage=2",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:514"
+        "src/game/types.ts:516"
       ],
       "sourceNames": [
         "Sapling.stage"
@@ -194460,7 +195052,7 @@
       "canonicalId": "src/game/types.ts#Sapling.stage=3",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:514"
+        "src/game/types.ts:516"
       ],
       "sourceNames": [
         "Sapling.stage"
@@ -194506,7 +195098,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.isDusk=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:680"
+        "src/game/types.ts:682"
       ],
       "sourceNames": [
         "Snapshot.isDusk"
@@ -194552,7 +195144,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.isDusk=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:680"
+        "src/game/types.ts:682"
       ],
       "sourceNames": [
         "Snapshot.isDusk"
@@ -194598,7 +195190,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.isNight=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:679"
+        "src/game/types.ts:681"
       ],
       "sourceNames": [
         "Snapshot.isNight"
@@ -194644,7 +195236,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.isNight=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:679"
+        "src/game/types.ts:681"
       ],
       "sourceNames": [
         "Snapshot.isNight"
@@ -194690,7 +195282,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.restored=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:678"
+        "src/game/types.ts:680"
       ],
       "sourceNames": [
         "Snapshot.restored"
@@ -194736,7 +195328,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.restored=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:678"
+        "src/game/types.ts:680"
       ],
       "sourceNames": [
         "Snapshot.restored"
@@ -194782,7 +195374,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.speed=0",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:665"
+        "src/game/types.ts:667"
       ],
       "sourceNames": [
         "Snapshot.speed"
@@ -194828,7 +195420,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.speed=1",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:665"
+        "src/game/types.ts:667"
       ],
       "sourceNames": [
         "Snapshot.speed"
@@ -194874,7 +195466,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.speed=2",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:665"
+        "src/game/types.ts:667"
       ],
       "sourceNames": [
         "Snapshot.speed"
@@ -194920,7 +195512,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.speed=3",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:665"
+        "src/game/types.ts:667"
       ],
       "sourceNames": [
         "Snapshot.speed"
@@ -195840,7 +196432,7 @@
       "canonicalId": "src/game/types.ts#World.restored=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:653"
+        "src/game/types.ts:655"
       ],
       "sourceNames": [
         "World.restored"
@@ -195886,7 +196478,7 @@
       "canonicalId": "src/game/types.ts#World.restored=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:653"
+        "src/game/types.ts:655"
       ],
       "sourceNames": [
         "World.restored"
@@ -195932,7 +196524,7 @@
       "canonicalId": "src/game/types.ts#World.speed=0",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:624"
+        "src/game/types.ts:626"
       ],
       "sourceNames": [
         "World.speed"
@@ -195978,7 +196570,7 @@
       "canonicalId": "src/game/types.ts#World.speed=1",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:624"
+        "src/game/types.ts:626"
       ],
       "sourceNames": [
         "World.speed"
@@ -196024,7 +196616,7 @@
       "canonicalId": "src/game/types.ts#World.speed=2",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:624"
+        "src/game/types.ts:626"
       ],
       "sourceNames": [
         "World.speed"
@@ -196070,7 +196662,7 @@
       "canonicalId": "src/game/types.ts#World.speed=3",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:624"
+        "src/game/types.ts:626"
       ],
       "sourceNames": [
         "World.speed"
@@ -219657,7 +220249,7 @@
       "canonicalId": "building",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:695"
+        "src/game/types.ts:697"
       ],
       "sourceNames": [
         "CtxKind"
@@ -219703,7 +220295,7 @@
       "canonicalId": "fauna",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:695"
+        "src/game/types.ts:697"
       ],
       "sourceNames": [
         "CtxKind"
@@ -219749,7 +220341,7 @@
       "canonicalId": "gate",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:695"
+        "src/game/types.ts:697"
       ],
       "sourceNames": [
         "CtxKind"
@@ -219795,7 +220387,7 @@
       "canonicalId": "herb",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:695"
+        "src/game/types.ts:697"
       ],
       "sourceNames": [
         "CtxKind"
@@ -219841,7 +220433,7 @@
       "canonicalId": "pack",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:695"
+        "src/game/types.ts:697"
       ],
       "sourceNames": [
         "CtxKind"
@@ -219887,7 +220479,7 @@
       "canonicalId": "person",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:695"
+        "src/game/types.ts:697"
       ],
       "sourceNames": [
         "CtxKind"
@@ -219933,7 +220525,7 @@
       "canonicalId": "pile",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:695"
+        "src/game/types.ts:697"
       ],
       "sourceNames": [
         "CtxKind"
@@ -219979,7 +220571,7 @@
       "canonicalId": "plot",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:695"
+        "src/game/types.ts:697"
       ],
       "sourceNames": [
         "CtxKind"
@@ -220025,7 +220617,7 @@
       "canonicalId": "tile",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:695"
+        "src/game/types.ts:697"
       ],
       "sourceNames": [
         "CtxKind"
@@ -220071,7 +220663,7 @@
       "canonicalId": "bank",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220117,7 +220709,7 @@
       "canonicalId": "care",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220163,7 +220755,7 @@
       "canonicalId": "cast",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220209,7 +220801,7 @@
       "canonicalId": "chop",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220255,7 +220847,7 @@
       "canonicalId": "dig",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220301,7 +220893,7 @@
       "canonicalId": "drop",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220347,7 +220939,7 @@
       "canonicalId": "enter",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220393,7 +220985,7 @@
       "canonicalId": "feed",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220439,7 +221031,7 @@
       "canonicalId": "fill",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220485,7 +221077,7 @@
       "canonicalId": "fireball",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220531,7 +221123,7 @@
       "canonicalId": "fish",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220577,7 +221169,7 @@
       "canonicalId": "follow",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220623,7 +221215,7 @@
       "canonicalId": "harvest",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220669,7 +221261,7 @@
       "canonicalId": "house",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220715,7 +221307,7 @@
       "canonicalId": "hunt",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220761,7 +221353,7 @@
       "canonicalId": "loot",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220807,7 +221399,7 @@
       "canonicalId": "mine",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220853,7 +221445,7 @@
       "canonicalId": "name",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220899,7 +221491,7 @@
       "canonicalId": "pick",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220945,7 +221537,7 @@
       "canonicalId": "release",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -220991,7 +221583,7 @@
       "canonicalId": "roster",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -221037,7 +221629,7 @@
       "canonicalId": "skin",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -221083,7 +221675,7 @@
       "canonicalId": "sowAcorn",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -221129,7 +221721,7 @@
       "canonicalId": "sowCabbage",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -221175,7 +221767,7 @@
       "canonicalId": "sowGarlic",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -221221,7 +221813,7 @@
       "canonicalId": "sowWheat",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -221267,7 +221859,7 @@
       "canonicalId": "stay",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -221313,7 +221905,7 @@
       "canonicalId": "take",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -221359,7 +221951,7 @@
       "canonicalId": "talk",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -221405,7 +221997,7 @@
       "canonicalId": "tame",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -221451,7 +222043,7 @@
       "canonicalId": "teleport",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -221497,7 +222089,7 @@
       "canonicalId": "till",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -221543,7 +222135,7 @@
       "canonicalId": "track",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -221589,7 +222181,7 @@
       "canonicalId": "use",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -221635,7 +222227,7 @@
       "canonicalId": "walk",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:696"
+        "src/game/types.ts:698"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -227925,7 +228517,7 @@
       "canonicalId": "earthquake",
       "family": "vocabulary/src/game/types.ts#ZoneKind",
       "catalogSources": [
-        "src/game/types.ts:606"
+        "src/game/types.ts:608"
       ],
       "sourceNames": [
         "ZoneKind"
@@ -227971,7 +228563,7 @@
       "canonicalId": "flamewall",
       "family": "vocabulary/src/game/types.ts#ZoneKind",
       "catalogSources": [
-        "src/game/types.ts:606"
+        "src/game/types.ts:608"
       ],
       "sourceNames": [
         "ZoneKind"
@@ -228017,7 +228609,7 @@
       "canonicalId": "naturesfury",
       "family": "vocabulary/src/game/types.ts#ZoneKind",
       "catalogSources": [
-        "src/game/types.ts:606"
+        "src/game/types.ts:608"
       ],
       "sourceNames": [
         "ZoneKind"
@@ -228063,7 +228655,7 @@
       "canonicalId": "sanctuary",
       "family": "vocabulary/src/game/types.ts#ZoneKind",
       "catalogSources": [
-        "src/game/types.ts:606"
+        "src/game/types.ts:608"
       ],
       "sourceNames": [
         "ZoneKind"
@@ -228109,7 +228701,7 @@
       "canonicalId": "stonewall",
       "family": "vocabulary/src/game/types.ts#ZoneKind",
       "catalogSources": [
-        "src/game/types.ts:606"
+        "src/game/types.ts:608"
       ],
       "sourceNames": [
         "ZoneKind"
@@ -228155,7 +228747,7 @@
       "canonicalId": "tarpit",
       "family": "vocabulary/src/game/types.ts#ZoneKind",
       "catalogSources": [
-        "src/game/types.ts:606"
+        "src/game/types.ts:608"
       ],
       "sourceNames": [
         "ZoneKind"
