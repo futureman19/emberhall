@@ -134,6 +134,7 @@
     "src/game/gates.ts",
     "src/game/gathering-animation.ts",
     "src/game/gems.ts",
+    "src/game/god.ts",
     "src/game/graphics-settings.ts",
     "src/game/ground-tex.ts",
     "src/game/healing-animation.ts",
@@ -7982,7 +7983,7 @@
       "canonicalId": "bless",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:42"
+        "src/game/magery.ts:43"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8036,7 +8037,7 @@
       "canonicalId": "blizzard",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:55"
+        "src/game/magery.ts:56"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8090,7 +8091,7 @@
       "canonicalId": "chainlightning",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:56"
+        "src/game/magery.ts:57"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8144,7 +8145,7 @@
       "canonicalId": "cure",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:40"
+        "src/game/magery.ts:41"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8198,7 +8199,7 @@
       "canonicalId": "curse",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:47"
+        "src/game/magery.ts:48"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8252,7 +8253,7 @@
       "canonicalId": "earthquake",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:63"
+        "src/game/magery.ts:64"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8306,7 +8307,7 @@
       "canonicalId": "fireball",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:39"
+        "src/game/magery.ts:40"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8360,7 +8361,7 @@
       "canonicalId": "fireblast",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:54"
+        "src/game/magery.ts:55"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8414,7 +8415,7 @@
       "canonicalId": "flamewall",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:59"
+        "src/game/magery.ts:60"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8468,7 +8469,7 @@
       "canonicalId": "flash",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:53"
+        "src/game/magery.ts:54"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8522,7 +8523,7 @@
       "canonicalId": "fly",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:68"
+        "src/game/magery.ts:69"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8576,7 +8577,7 @@
       "canonicalId": "gate",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:67"
+        "src/game/magery.ts:68"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8630,7 +8631,7 @@
       "canonicalId": "heal",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:36"
+        "src/game/magery.ts:37"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8684,7 +8685,7 @@
       "canonicalId": "invisibility",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:46"
+        "src/game/magery.ts:47"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8738,7 +8739,7 @@
       "canonicalId": "ironwood",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:51"
+        "src/game/magery.ts:52"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8792,7 +8793,7 @@
       "canonicalId": "jump",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:65"
+        "src/game/magery.ts:66"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8846,7 +8847,7 @@
       "canonicalId": "leech",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:52"
+        "src/game/magery.ts:53"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8900,7 +8901,7 @@
       "canonicalId": "lightning",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:43"
+        "src/game/magery.ts:44"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8954,7 +8955,7 @@
       "canonicalId": "magicarrow",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:37"
+        "src/game/magery.ts:38"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9008,7 +9009,7 @@
       "canonicalId": "mark",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:48"
+        "src/game/magery.ts:49"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9062,7 +9063,7 @@
       "canonicalId": "meteor",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:58"
+        "src/game/magery.ts:59"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9116,7 +9117,7 @@
       "canonicalId": "mirrorimage",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:66"
+        "src/game/magery.ts:67"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9170,7 +9171,7 @@
       "canonicalId": "naturesfury",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:64"
+        "src/game/magery.ts:65"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9224,7 +9225,7 @@
       "canonicalId": "necromancy",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:69"
+        "src/game/magery.ts:70"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9278,7 +9279,7 @@
       "canonicalId": "nightsight",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:35"
+        "src/game/magery.ts:36"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9332,7 +9333,7 @@
       "canonicalId": "paralyze",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:45"
+        "src/game/magery.ts:46"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9386,7 +9387,7 @@
       "canonicalId": "poison",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:41"
+        "src/game/magery.ts:42"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9440,7 +9441,7 @@
       "canonicalId": "polymorph",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:72"
+        "src/game/magery.ts:73"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9494,7 +9495,7 @@
       "canonicalId": "recall",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:49"
+        "src/game/magery.ts:50"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9548,7 +9549,7 @@
       "canonicalId": "resurrect",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:70"
+        "src/game/magery.ts:71"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9602,7 +9603,7 @@
       "canonicalId": "sanctuary",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:62"
+        "src/game/magery.ts:63"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9656,7 +9657,7 @@
       "canonicalId": "sleep",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:57"
+        "src/game/magery.ts:58"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9710,7 +9711,7 @@
       "canonicalId": "stonewall",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:61"
+        "src/game/magery.ts:62"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9764,7 +9765,7 @@
       "canonicalId": "summon",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:44"
+        "src/game/magery.ts:45"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9818,7 +9819,7 @@
       "canonicalId": "summonelemental",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:71"
+        "src/game/magery.ts:72"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9872,7 +9873,7 @@
       "canonicalId": "tarpit",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:60"
+        "src/game/magery.ts:61"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9926,7 +9927,7 @@
       "canonicalId": "teleport",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:38"
+        "src/game/magery.ts:39"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9980,7 +9981,7 @@
       "canonicalId": "thornsnare",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:50"
+        "src/game/magery.ts:51"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -121940,7 +121941,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=bless",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -121986,7 +121987,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=blizzard",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122032,7 +122033,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=chainlightning",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122078,7 +122079,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=cure",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122124,7 +122125,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=curse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122170,7 +122171,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=earthquake",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122216,7 +122217,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=fireball",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122262,7 +122263,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=fireblast",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122308,7 +122309,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=flamewall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122354,7 +122355,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=flash",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122400,7 +122401,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=fly",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122446,7 +122447,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=gate",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122492,7 +122493,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=heal",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122538,7 +122539,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=invisibility",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122584,7 +122585,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=ironwood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122630,7 +122631,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=jump",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122676,7 +122677,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=leech",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122722,7 +122723,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=lightning",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122768,7 +122769,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=magicarrow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122814,7 +122815,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=mark",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122860,7 +122861,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=meteor",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122906,7 +122907,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=mirrorimage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122952,7 +122953,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=naturesfury",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -122998,7 +122999,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=necromancy",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -123044,7 +123045,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=nightsight",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -123090,7 +123091,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=paralyze",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -123136,7 +123137,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=poison",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -123182,7 +123183,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=polymorph",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -123228,7 +123229,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=recall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -123274,7 +123275,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=resurrect",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -123320,7 +123321,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=sanctuary",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -123366,7 +123367,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=sleep",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -123412,7 +123413,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=stonewall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -123458,7 +123459,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=summon",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -123504,7 +123505,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=summonelemental",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -123550,7 +123551,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=tarpit",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -123596,7 +123597,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=teleport",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -123642,7 +123643,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=thornsnare",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:102"
+        "src/game/magery.ts:103"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -123688,7 +123689,7 @@
       "canonicalId": "src/game/magery.ts#CastTarget.kind=fauna",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:97"
+        "src/game/magery.ts:98"
       ],
       "sourceNames": [
         "CastTarget.kind"
@@ -123734,7 +123735,7 @@
       "canonicalId": "src/game/magery.ts#CastTarget.kind=mark",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:97"
+        "src/game/magery.ts:98"
       ],
       "sourceNames": [
         "CastTarget.kind"
@@ -123780,7 +123781,7 @@
       "canonicalId": "src/game/magery.ts#CastTarget.kind=person",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:97"
+        "src/game/magery.ts:98"
       ],
       "sourceNames": [
         "CastTarget.kind"
@@ -123826,7 +123827,7 @@
       "canonicalId": "src/game/magery.ts#CastTarget.kind=self",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:97"
+        "src/game/magery.ts:98"
       ],
       "sourceNames": [
         "CastTarget.kind"
@@ -123872,7 +123873,7 @@
       "canonicalId": "src/game/magery.ts#CastTarget.kind=tile",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:97"
+        "src/game/magery.ts:98"
       ],
       "sourceNames": [
         "CastTarget.kind"
@@ -123918,7 +123919,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=bless",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -123964,7 +123965,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=blizzard",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124010,7 +124011,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=chainlightning",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124056,7 +124057,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=cure",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124102,7 +124103,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=curse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124148,7 +124149,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=earthquake",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124194,7 +124195,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=fireball",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124240,7 +124241,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=fireblast",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124286,7 +124287,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=flamewall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124332,7 +124333,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=flash",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124378,7 +124379,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=fly",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124424,7 +124425,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=gate",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124470,7 +124471,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=heal",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124516,7 +124517,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=invisibility",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124562,7 +124563,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=ironwood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124608,7 +124609,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=jump",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124654,7 +124655,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=leech",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124700,7 +124701,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=lightning",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124746,7 +124747,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=magicarrow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124792,7 +124793,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=mark",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124838,7 +124839,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=meteor",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124884,7 +124885,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=mirrorimage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124930,7 +124931,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=naturesfury",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -124976,7 +124977,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=necromancy",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -125022,7 +125023,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=nightsight",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -125068,7 +125069,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=paralyze",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -125114,7 +125115,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=poison",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -125160,7 +125161,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=polymorph",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -125206,7 +125207,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=recall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -125252,7 +125253,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=resurrect",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -125298,7 +125299,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=sanctuary",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -125344,7 +125345,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=sleep",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -125390,7 +125391,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=stonewall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -125436,7 +125437,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=summon",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -125482,7 +125483,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=summonelemental",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -125528,7 +125529,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=tarpit",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -125574,7 +125575,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=teleport",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -125620,7 +125621,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=thornsnare",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:116"
+        "src/game/magery.ts:117"
       ],
       "sourceNames": [
         "FizzleFx.spell"

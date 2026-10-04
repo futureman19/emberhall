@@ -3,6 +3,7 @@ import { PLACES, regionAt } from "./atlas.ts";
 import { BLAST_RADIUS, BLESS_HOURS, CHAIN_FALLOFF, CHAIN_MAX, CHAIN_RANGE, CHILL_HOURS, CURSE_HOURS, EARTHQUAKE_BASE, ELEMENTAL_HOURS, FAUNA_META, FLAME_TICK_BASE, FLASH_RADIUS, FLY_HOURS, FURY_TICK_BASE, GATE_HOURS, INVIS_HOURS, IRONWOOD_HOURS, ITEM_META, JUMP_RANGE, METEOR_RADIUS, MIRROR_COUNT, MIRROR_HOURS, NECRO_HOURS, NECRO_HP_FRACTION, NECRO_RADIUS, PARALYZE_HOURS, POLYMORPH_HOURS, POISON_FAUNA_HOURS, POISON_TICK_HOURS, BLIND_HOURS, SECONDS_PER_HOUR, SLEEP_HOURS, SNARE_HOURS, SNARE_TICK_HOURS, SUMMON_HOURS } from "./catalog.ts";
 import { letGo, markAsleep, spawn } from "./ecology.ts";
 import { emitMoongateFx } from "./moongate-animation.ts";
+import { godModeEnabled } from "./god.ts";
 import { placeZone } from "./zones.ts";
 import { astarToRange, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { spawnCorpsePile } from "./piles.ts";
@@ -166,6 +167,10 @@ export function tickMana(world: World, dt: number) {
   const p = self(world);
   if (!p) return;
   const max = maxMana(p.int, world.player.skills.magery ?? 0);
+  if (godModeEnabled()) {
+    world.player.mana = max;
+    return;
+  }
   if (world.player.mana == null || Number.isNaN(world.player.mana)) world.player.mana = max;
   const dtHours = dt / SECONDS_PER_HOUR;
   const rate = p.path.length ? 1.6 : 5;
