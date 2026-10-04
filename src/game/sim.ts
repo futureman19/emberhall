@@ -1,5 +1,5 @@
 import { COURT, GATE, placeById } from "./atlas.ts";
-import { SECONDS_PER_HOUR } from "./catalog.ts";
+import { FLY_SPEED, SECONDS_PER_HOUR } from "./catalog.ts";
 import { updateSpellStatuses } from "./spell-effects.ts";
 import { tickEcology } from "./ecology.ts";
 import { tickCrops } from "./farm.ts";
@@ -53,7 +53,7 @@ function followPath(world: World, p: Person, dt: number): "idle" | "moving" | "s
   }
   const startX = p.x;
   const startZ = p.z;
-  let remaining = WALK_SPEED * (p.ghost ? 1.4 : 1) * dt * zonePersonSlowAt(world, p.x, p.z);
+  let remaining = WALK_SPEED * (p.ghost ? 1.4 : 1) * dt * zonePersonSlowAt(world, p.x, p.z) * (p.isPlayer && world.hour < world.player.flyUntil ? FLY_SPEED : 1);
   const previous = motionWatches.get(p);
   const first = p.path[0]!;
   // Planned segments are already corner/climb checked. Revalidate only when

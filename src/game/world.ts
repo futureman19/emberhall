@@ -344,6 +344,7 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
       blessUntil: 0,
       invisUntil: 0,
       ironwoodUntil: 0,
+      flyUntil: 0,
       armedSpell: null,
       marks: [],
       gateCoolUntil: 0,

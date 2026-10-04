@@ -481,7 +481,7 @@ export const useGame = create<GameUI>((set, get) => ({
       set({ snap: snapshot(), ctx: null, tillAt: { tx, ty } });
       return;
     }
-    if (w.player.armedSpell === "teleport" || (w.player.armedSpell && targetsGround(w.player.armedSpell))) {
+    if (w.player.armedSpell === "teleport" || w.player.armedSpell === "jump" || (w.player.armedSpell && targetsGround(w.player.armedSpell))) {
       const spell = w.player.armedSpell;
       const err = commandCast(w, spell, { kind: "tile", tx, ty });
       if (err) get().flash(err);

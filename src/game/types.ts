@@ -228,7 +228,15 @@ export type SpellId =
   | "stonewall"
   | "sanctuary"
   | "earthquake"
-  | "naturesfury";
+  | "naturesfury"
+  | "jump"
+  | "mirrorimage"
+  | "gate"
+  | "fly"
+  | "necromancy"
+  | "resurrect"
+  | "summonelemental"
+  | "polymorph";
 
 export type ClassId = "ranger" | "warrior" | "mage" | "rogue" | "merchant";
 export type NpcRole = "banker" | "provisioner" | "healer" | "alchemist";
@@ -428,6 +436,11 @@ export interface Creature {
   blindUntil?: number;
   /** Blizzard: chilled until this hour — slower stride. */
   chillUntil?: number;
+  /** Polymorph: the shape it wore before the working; reverts at polyUntil. */
+  wasKind?: FaunaKind;
+  polyUntil?: number;
+  /** Mirror Image: a conjured decoy — pops without corpse, loot, or glory. */
+  mirror?: boolean;
 }
 
 /** A shovel-cut in the dirt. Rain fills it. Authored pits are not holes. */
@@ -533,6 +546,8 @@ export interface PlayerState {
   invisUntil: number;
   /** Rel Tym: bark-hard skin blunts every bite until this hour. */
   ironwoodUntil: number;
+  /** Vas Hur Por: the wind carries you until this hour. */
+  flyUntil: number;
   armedSpell: SpellId | null;
   marks: RecallMark[];
   gateCoolUntil: number;

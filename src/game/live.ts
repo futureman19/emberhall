@@ -80,6 +80,7 @@ function withFauna(w: World) {
     if (w.player.blessUntil == null) w.player.blessUntil = 0;
     if (w.player.invisUntil == null) w.player.invisUntil = 0;
     if (w.player.ironwoodUntil == null) w.player.ironwoodUntil = 0;
+    if (w.player.flyUntil == null) w.player.flyUntil = 0;
     if (!Array.isArray(w.zones)) w.zones = [];
     if (w.player.armedSpell === undefined) w.player.armedSpell = null;
     if (!Array.isArray(w.player.marks)) w.player.marks = [];

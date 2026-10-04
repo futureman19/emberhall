@@ -8,7 +8,8 @@ export interface MoongateCompanionArrival {
 
 export interface MoongateFx {
   sourceId: string | null;
-  destinationId: string;
+  /** Null when the gate opens on a marked rune rather than a standing ring. */
+  destinationId: string | null;
   destinationName: string;
   x: number;
   z: number;

@@ -98,6 +98,8 @@ function finishBeast(world: World, c: Creature): void {
   c.hp = 0;
   c.task = "dead";
   c.path = [];
+  // An image pops clean — nothing to bury.
+  if (c.mirror) return;
   c.corpseUntil = world.hour + 8;
   spawnCorpsePile(world, c);
   completeObjective(world, "hunt");

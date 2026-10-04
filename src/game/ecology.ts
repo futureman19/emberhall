@@ -458,11 +458,24 @@ export function tickEcology(world: World, dt: number) {
   const night = isNight(world.hour);
   const shelter = sheltering(world);
   for (const c of world.fauna) {
+    // Quas Xen — an image spends its moment and pops, struck or not.
+    if (c.mirror && (c.task === "dead" || world.hour >= c.taskUntil)) {
+      world.fauna = world.fauna.filter((x) => x.id !== c.id);
+      continue;
+    }
     if (c.task === "dead") {
       if (world.hour > c.corpseUntil) {
         world.fauna = world.fauna.filter((x) => x.id !== c.id);
       }
       continue;
+    }
+    // Quas Xen Tym lapses — the old shape returns.
+    if (c.wasKind && c.polyUntil && world.hour >= c.polyUntil) {
+      c.kind = c.wasKind;
+      c.wasKind = undefined;
+      c.polyUntil = 0;
+      c.maxHp = FAUNA_META[c.kind].hp;
+      c.hp = Math.min(c.hp, c.maxHp);
     }
     // Kal Xen loosens — a bound beast crumbles back into the vale.
     if (c.boundUntil && world.hour >= c.boundUntil) {
@@ -491,8 +504,10 @@ export function tickEcology(world: World, dt: number) {
           c.task = "dead";
           c.snareUntil = 0;
           c.snareTickAt = 0;
-          c.corpseUntil = world.hour + 8;
-          spawnCorpsePile(world, c);
+          if (!c.mirror) {
+            c.corpseUntil = world.hour + 8;
+            spawnCorpsePile(world, c);
+          }
         }
       }
       continue;
@@ -536,8 +551,10 @@ export function tickEcology(world: World, dt: number) {
           c.hp = 0;
           c.task = "dead";
           c.path = [];
-          c.corpseUntil = world.hour + 8;
-          spawnCorpsePile(world, c);
+          if (!c.mirror) {
+            c.corpseUntil = world.hour + 8;
+            spawnCorpsePile(world, c);
+          }
           continue;
         }
       }

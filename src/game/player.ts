@@ -188,7 +188,7 @@ export function replanIntentPath(world: World, p: Person) {
   const intent = world.player.intent;
   if (intent.kind === "none") return false;
   if (intent.kind === "walk") {
-    const path = astar(world, p.x, p.z, intent.tx, intent.ty);
+    const path = astar(world, p.x, p.z, intent.tx, intent.ty, 9000, world.hour < world.player.flyUntil);
     if (!path) return false;
     p.path = path.map((node) => ({ tx: node.x, ty: node.y }));
     return true;
@@ -213,7 +213,7 @@ export function commandWalk(world: World, tx: number, ty: number, cap = 9000): s
   world.player.armedSpell = null;
   const dest = nearestWalkable(world, tx, ty);
   if (!dest) return "No footing.";
-  const path = astar(world, p.x, p.z, dest.x, dest.y, cap);
+  const path = astar(world, p.x, p.z, dest.x, dest.y, cap, world.hour < world.player.flyUntil);
   if (!path) return "The way is closed.";
   p.path = path.map((n) => ({ tx: n.x, ty: n.y }));
   world.player.intent = { kind: "walk", tx: dest.x, ty: dest.y, targetId: null, spell: null };
@@ -1029,7 +1029,8 @@ export function tickPlayer(world: World, dt: number): string | null {
     p.ghost = true;
     world.player.ghost = true;
     p.hp = 0;
-    if (intent.kind !== "chop") return null;
+    // The dead keep one word: In Corp resolves even now.
+    if (intent.kind !== "chop" && !(intent.kind === "cast" && intent.spell === "resurrect")) return null;
   } else {
     tickMana(world, dt);
   }

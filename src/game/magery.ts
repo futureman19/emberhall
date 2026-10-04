@@ -1,7 +1,8 @@
 import { emitSpellEffect, spellEffects } from "./spell-effects.ts";
 import { PLACES, regionAt } from "./atlas.ts";
-import { BLAST_RADIUS, BLESS_HOURS, CHAIN_FALLOFF, CHAIN_MAX, CHAIN_RANGE, CHILL_HOURS, CURSE_HOURS, EARTHQUAKE_BASE, FAUNA_META, FLAME_TICK_BASE, FLASH_RADIUS, FURY_TICK_BASE, INVIS_HOURS, IRONWOOD_HOURS, ITEM_META, METEOR_RADIUS, PARALYZE_HOURS, POISON_FAUNA_HOURS, POISON_TICK_HOURS, BLIND_HOURS, SECONDS_PER_HOUR, SLEEP_HOURS, SNARE_HOURS, SNARE_TICK_HOURS, SUMMON_HOURS } from "./catalog.ts";
+import { BLAST_RADIUS, BLESS_HOURS, CHAIN_FALLOFF, CHAIN_MAX, CHAIN_RANGE, CHILL_HOURS, CURSE_HOURS, EARTHQUAKE_BASE, ELEMENTAL_HOURS, FAUNA_META, FLAME_TICK_BASE, FLASH_RADIUS, FLY_HOURS, FURY_TICK_BASE, GATE_HOURS, INVIS_HOURS, IRONWOOD_HOURS, ITEM_META, JUMP_RANGE, METEOR_RADIUS, MIRROR_COUNT, MIRROR_HOURS, NECRO_HOURS, NECRO_HP_FRACTION, NECRO_RADIUS, PARALYZE_HOURS, POLYMORPH_HOURS, POISON_FAUNA_HOURS, POISON_TICK_HOURS, BLIND_HOURS, SECONDS_PER_HOUR, SLEEP_HOURS, SNARE_HOURS, SNARE_TICK_HOURS, SUMMON_HOURS } from "./catalog.ts";
 import { letGo, markAsleep, spawn } from "./ecology.ts";
+import { emitMoongateFx } from "./moongate-animation.ts";
 import { placeZone } from "./zones.ts";
 import { astarToRange, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { spawnCorpsePile } from "./piles.ts";
@@ -9,21 +10,22 @@ import { rareName, rollKillRare } from "./rare.ts";
 import { successChance, tryGain } from "./skills.ts";
 import { playSfx, type SfxId } from "./vale-sfx.ts";
 import { completeObjective, log, nid, revealAround } from "./world.ts";
-import type { ItemId, Person, RecallMark, SpellId, World, ZoneKind } from "./types.ts";
+import type { Creature, FaunaKind, ItemId, Person, RecallMark, SpellId, Tile, World, ZoneKind } from "./types.ts";
 
 export const SPELL_ORDER: SpellId[] = [
   "nightsight", "heal", "magicarrow", "teleport", "fireball", "cure", "poison", "bless", "lightning", "summon", "paralyze", "invisibility", "curse", "mark", "recall",
   "thornsnare", "ironwood", "leech", "flash", "fireblast", "blizzard", "chainlightning", "sleep", "meteor",
   "flamewall", "tarpit", "stonewall", "sanctuary", "earthquake", "naturesfury",
+  "jump", "mirrorimage", "gate", "fly", "necromancy", "resurrect", "summonelemental", "polymorph",
 ];
 
 export const SPELL_CIRCLES: { circle: number; label: string; ids: SpellId[] }[] = [
   { circle: 1, label: "First circle", ids: ["nightsight", "heal", "magicarrow"] },
-  { circle: 2, label: "Second", ids: ["teleport", "fireball", "cure", "poison", "thornsnare"] },
+  { circle: 2, label: "Second", ids: ["teleport", "fireball", "cure", "poison", "thornsnare", "jump"] },
   { circle: 3, label: "Third", ids: ["bless", "lightning", "ironwood", "leech", "flash", "flamewall"] },
-  { circle: 4, label: "Fourth", ids: ["summon", "paralyze", "invisibility", "curse", "fireblast", "blizzard", "chainlightning", "sleep", "tarpit", "stonewall", "sanctuary"] },
-  { circle: 5, label: "Fifth", ids: ["earthquake", "naturesfury"] },
-  { circle: 6, label: "Sixth", ids: ["meteor"] },
+  { circle: 4, label: "Fourth", ids: ["summon", "paralyze", "invisibility", "curse", "fireblast", "blizzard", "chainlightning", "sleep", "tarpit", "stonewall", "sanctuary", "mirrorimage"] },
+  { circle: 5, label: "Fifth", ids: ["earthquake", "naturesfury", "gate", "fly", "necromancy", "resurrect", "summonelemental"] },
+  { circle: 6, label: "Sixth", ids: ["meteor", "polymorph"] },
 ];
 
 export const SPELL_META: Record<
@@ -60,6 +62,14 @@ export const SPELL_META: Record<
   sanctuary: { label: "Sanctuary", circle: 4, diff: 15, mana: 12, reagents: ["garlic", "moss", "pearl"], words: "In Sanct Hur", target: "tile", hint: "Ground no beast will cross. Click the ground." },
   earthquake: { label: "Earthquake", circle: 5, diff: 18, mana: 15, reagents: ["ash", "mandrake", "nightshade"], words: "Vas Tym Por", target: "tile", hint: "The vale shakes apart. Click the ground." },
   naturesfury: { label: "Nature's Fury", circle: 5, diff: 17, mana: 14, reagents: ["nightshade", "moss", "silk"], words: "Vas Xen Grav", target: "tile", hint: "An unbound swarm harries the ring. Click the ground." },
+  jump: { label: "Jump", circle: 2, diff: 8, mana: 4, reagents: ["silk", "ash"], words: "Hur Por", target: "tile", hint: "A short leap. Click the ground." },
+  mirrorimage: { label: "Mirror Image", circle: 4, diff: 15, mana: 11, reagents: ["silk", "nightshade", "pearl"], words: "Quas Xen", target: "self", hint: "The pack loses you among the images." },
+  gate: { label: "Gate", circle: 5, diff: 17, mana: 14, reagents: ["pearl", "mandrake", "moss", "ash"], words: "Kal Vas Por", target: "mark", hint: "A moongate to a mark — companions follow. Tap a mark." },
+  fly: { label: "Fly", circle: 5, diff: 16, mana: 13, reagents: ["pearl", "ash", "silk"], words: "Vas Hur Por", target: "self", hint: "The wind carries you over what bars the earthbound." },
+  necromancy: { label: "Necromancy", circle: 5, diff: 17, mana: 14, reagents: ["nightshade", "mandrake", "ash"], words: "In Corp Xen", target: "self", hint: "A nearby corpse rises, bound." },
+  resurrect: { label: "Resurrect", circle: 5, diff: 16, mana: 13, reagents: ["garlic", "ginseng", "mandrake"], words: "In Corp", target: "self", hint: "Rise where you fell." },
+  summonelemental: { label: "Summon Elemental", circle: 5, diff: 17, mana: 14, reagents: ["mandrake", "pearl", "ash"], words: "Kal Vas Xen", target: "self", hint: "The terrain chooses what answers." },
+  polymorph: { label: "Polymorph", circle: 6, diff: 19, mana: 16, reagents: ["mandrake", "nightshade", "pearl", "moss"], words: "Quas Xen Tym", target: "fauna", hint: "A beast wears a hare's shape." },
 };
 
 export const ARROW_RANGE = 14;
@@ -67,7 +77,7 @@ export const FIREBALL_RANGE = 16;
 export const TELEPORT_RANGE = 10;
 export const MARK_CAP = 8;
 /** Spells that strike (or hex) a beast downrange. */
-export const OFFENSIVE_SPELLS: ReadonlySet<SpellId> = new Set(["magicarrow", "fireball", "poison", "lightning", "paralyze", "curse", "thornsnare", "leech", "chainlightning", "sleep"]);
+export const OFFENSIVE_SPELLS: ReadonlySet<SpellId> = new Set(["magicarrow", "fireball", "poison", "lightning", "paralyze", "curse", "thornsnare", "leech", "chainlightning", "sleep", "polymorph"]);
 /** Spells that ruin the ground itself — armed, then released on a clicked tile. */
 export const TILE_OFFENSIVE_SPELLS: ReadonlySet<SpellId> = new Set(["fireblast", "blizzard", "meteor"]);
 /** Spells that raise a standing ground working (zones.ts) on a clicked tile. */
@@ -239,6 +249,8 @@ function woundBeast(world: World, c: World["fauna"][number], dmg: number): { kil
   c.hp = 0;
   c.task = "dead";
   c.path = [];
+  // A struck image pops — no corpse, no pile, no glory.
+  if (c.mirror) return { killed: true, rareFound: null };
   c.corpseUntil = world.hour + 8;
   spawnCorpsePile(world, c);
   completeObjective(world, "hunt");
@@ -263,7 +275,8 @@ function beginCast(world: World, p: Person, spell: SpellId, tx: number, ty: numb
 export function commandCast(world: World, spell: SpellId, target?: CastTarget): string | null {
   const p = self(world);
   if (!p) return "You are not in the vale.";
-  if (p.ghost || world.player.ghost) return "The dead have no words.";
+  // In Corp is the one word the dead still have.
+  if ((p.ghost || world.player.ghost) && spell !== "resurrect") return "The dead have no words.";
   if (!hasBook(world)) return "You need a spellbook.";
   const meta = SPELL_META[spell];
   const miss = missingReagent(world, spell);
@@ -313,6 +326,32 @@ export function commandCast(world: World, spell: SpellId, target?: CastTarget): 
     if (Math.hypot(p.x - dest.x, p.z - dest.y) < 0.8) return "You already stand there.";
     if (Math.hypot(p.x - dest.x, p.z - dest.y) > TELEPORT_RANGE) return "Too far.";
     beginCast(world, p, spell, dest.x, dest.y, null);
+    return null;
+  }
+
+  if (spell === "jump") {
+    if (!target || target.kind !== "tile") {
+      world.player.armedSpell = "jump";
+      world.player.intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
+      return "Click the ground.";
+    }
+    if (Math.hypot(p.x - target.tx, p.z - target.ty) > JUMP_RANGE) return "Too far for a leap.";
+    const dest = nearestWalkable(world, target.tx, target.ty, 2);
+    if (!dest) return "No footing.";
+    beginCast(world, p, spell, dest.x, dest.y, null);
+    return null;
+  }
+
+  if (spell === "gate") {
+    const marks = world.player.marks;
+    if (!marks.length) return "Nothing is marked.";
+    let chosen: RecallMark | undefined;
+    if (target?.kind === "mark") chosen = marks.find((m) => m.id === target.id);
+    else if (marks.length === 1) chosen = marks[0];
+    else return "Pick a mark.";
+    if (!chosen) return "That mark is gone.";
+    if (Math.hypot(p.x - chosen.tx, p.z - chosen.ty) < 2) return "You already stand there.";
+    beginCast(world, p, spell, chosen.tx, chosen.ty, chosen.id);
     return null;
   }
 
@@ -683,6 +722,145 @@ export function castNow(world: World): string | null {
     emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()} drifts off.`, gain);
+  }
+  if (spell === "jump") {
+    if (!landAt(world, p, savedTx, savedTy)) return "No footing.";
+    emitSpellEffect(world, { spell, x: savedTx, z: savedTy, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
+    playSfx(spellSfx(spell), 0.5);
+    return withGain(`${meta.words}. The ground rushes up.`, gain);
+  }
+  if (spell === "gate") {
+    const mark = world.player.marks.find((m) => m.id === savedId);
+    if (!mark) return "That mark is gone.";
+    const from = { x: p.x, z: p.z };
+    if (!landAt(world, p, mark.tx, mark.ty)) return "No footing.";
+    const companions: { id: string; x: number; z: number }[] = [];
+    for (const c of world.fauna) {
+      if (c.ownerId !== world.player.id || c.stay || c.task === "dead") continue;
+      c.x = p.x + (Math.random() - 0.5) * 1.6;
+      c.z = p.z + (Math.random() - 0.5) * 1.6;
+      c.path = [];
+      companions.push({ id: c.id, x: c.x, z: c.z });
+    }
+    world.player.gateCoolUntil = world.hour + GATE_HOURS;
+    completeObjective(world, "gate");
+    emitMoongateFx(world, { sourceId: null, destinationId: null, destinationName: mark.name, x: from.x, z: from.z, tx: p.x, tz: p.z, companions });
+    playSfx("gate", 0.5);
+    return withGain(`${meta.words}. The swirl takes you${companions.length ? " — and yours follow" : ""}.`, gain);
+  }
+  if (spell === "fly") {
+    world.player.flyUntil = world.hour + FLY_HOURS;
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
+    playSfx(spellSfx(spell), 0.5);
+    return withGain(`${meta.words}. The wind takes you.`, gain);
+  }
+  if (spell === "necromancy") {
+    let corpse: Creature | null = null;
+    let best = Infinity;
+    for (const c of world.fauna) {
+      if (c.task !== "dead" || c.mirror) continue;
+      const d = Math.hypot(c.x - p.x, c.z - p.z);
+      if (d <= NECRO_RADIUS && d < best) {
+        corpse = c;
+        best = d;
+      }
+    }
+    if (!corpse) return withGain(`${meta.words}. Nothing answers — no corpse lies near.`, gain);
+    corpse.task = "wander";
+    corpse.taskUntil = world.hour + 0.4;
+    corpse.path = [];
+    corpse.corpseUntil = 0;
+    corpse.hp = Math.max(1, Math.floor(corpse.maxHp * NECRO_HP_FRACTION));
+    corpse.ownerId = world.player.id;
+    corpse.loyalty = 100;
+    corpse.boundUntil = world.hour + NECRO_HOURS;
+    corpse.name = `risen ${FAUNA_META[corpse.kind].label.toLowerCase()}`;
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: corpse.x, tz: corpse.z, at: world.hour, outcome: "success" });
+    playSfx(spellSfx(spell), 0.55);
+    return withGain(`${meta.words}. The ${FAUNA_META[corpse.kind].label.toLowerCase()} rises, bound.`, gain);
+  }
+  if (spell === "resurrect") {
+    const ghost = world.player.ghost || p.ghost;
+    if (!ghost) return withGain(`${meta.words}. You still bleed.`, gain);
+    p.ghost = false;
+    world.player.ghost = false;
+    p.hp = Math.max(1, Math.floor(p.maxHp * 0.4));
+    world.player.mana = Math.floor(maxMana(p.int, world.player.skills.magery ?? 0) * 0.4);
+    const fell = world.player.corpseAt;
+    if (fell) {
+      p.x = fell.tx;
+      p.z = fell.ty;
+      p.path = [];
+    }
+    completeObjective(world, "rise");
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
+    playSfx(spellSfx(spell), 0.55);
+    return withGain(`${meta.words}. Blood remembers${fell ? " — you rise where you fell" : ""}.`, gain);
+  }
+  if (spell === "summonelemental") {
+    const old = world.fauna.find((c) => c.ownerId === world.player.id && c.boundUntil && c.boundUntil > world.hour);
+    if (old) world.fauna = world.fauna.filter((x) => x.id !== old.id);
+    const near = (kind: Tile["kind"], r: number) => {
+      for (let y = Math.round(p.z) - r; y <= Math.round(p.z) + r; y++) {
+        for (let x = Math.round(p.x) - r; x <= Math.round(p.x) + r; x++) {
+          if (world.tiles[y]?.[x]?.kind === kind) return true;
+        }
+      }
+      return false;
+    };
+    const element: { kind: FaunaKind; name: string } = near("rock", 3) ? { kind: "ironwood_boar", name: "stonebound" }
+      : near("water", 3) || near("marsh", 3) ? { kind: "moss_badger", name: "tidebound" }
+      : near("tree", 3) ? { kind: "pine_lynx", name: "galebound" }
+      : { kind: "brambleback_stag", name: "thornbound" };
+    const dest = nearestWalkable(world, Math.round(p.x) + 1, Math.round(p.z)) ?? nearestWalkable(world, Math.round(p.x), Math.round(p.z));
+    if (!dest) return "The vale has no room for a guest.";
+    const beast = spawn(world, element.kind, dest.x, dest.y);
+    beast.ownerId = world.player.id;
+    beast.loyalty = 100;
+    beast.boundUntil = world.hour + ELEMENTAL_HOURS;
+    beast.name = element.name;
+    beast.maxHp = Math.floor(beast.maxHp * 1.25);
+    beast.hp = beast.maxHp;
+    world.fauna.push(beast);
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: dest.x, tz: dest.y, at: world.hour, outcome: "success" });
+    playSfx(spellSfx(spell), 0.55);
+    const oldNote = old ? " The old binding loosens." : "";
+    return withGain(`${meta.words}. A ${element.name} ${FAUNA_META[element.kind].label.toLowerCase()} takes shape.${oldNote}`, gain);
+  }
+  if (spell === "mirrorimage") {
+    for (let i = 0; i < MIRROR_COUNT; i++) {
+      const dest = nearestWalkable(world, Math.round(p.x) + (i === 0 ? 1 : -1), Math.round(p.z) + (i === 0 ? 0 : 1), 3);
+      if (!dest) continue;
+      const image = spawn(world, "hare", dest.x, dest.y);
+      image.hp = 1;
+      image.maxHp = 1;
+      image.mirror = true;
+      image.name = "mirror image";
+      image.task = "idle";
+      image.taskUntil = world.hour + MIRROR_HOURS;
+      image.path = [];
+      world.fauna.push(image);
+    }
+    // The pack loses you among the images.
+    for (const c of world.fauna) {
+      if (c.task === "fight" && !c.ownerId) letGo(c, world);
+    }
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
+    playSfx(spellSfx(spell), 0.5);
+    return withGain(`${meta.words}. The air shimmers — and you are three.`, gain);
+  }
+  if (spell === "polymorph") {
+    const c = world.fauna.find((x) => x.id === savedId);
+    if (!c) return "It fled.";
+    if (!c.wasKind) c.wasKind = c.kind;
+    c.kind = "hare";
+    c.maxHp = FAUNA_META.hare.hp;
+    c.hp = Math.min(c.hp, c.maxHp);
+    c.polyUntil = world.hour + POLYMORPH_HOURS;
+    letGo(c, world);
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour, outcome: "success" });
+    playSfx(spellSfx(spell), 0.55);
+    return withGain(`${meta.words}. The beast shrinks — a hare stares back.`, gain);
   }
   if (spell === "teleport") {
     const fromX = p.x;

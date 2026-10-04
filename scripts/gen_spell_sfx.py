@@ -510,6 +510,100 @@ def sfx_naturesfury() -> np.ndarray:
     return finish(sig, peak=0.7)
 
 
+def sfx_jump() -> np.ndarray:
+    total = 0.5
+    sig = np.zeros(int(SR * total))
+    # a quick spring upward, then the soft scuff of landing
+    spring = gliss(220.0, 660.0, 0.2, 0.8) * adsr(int(SR * 0.2), 0.02, 0.06)
+    sig[: len(spring)] += spring * 0.5
+    scuff = sweep_noise(0.14, 900, 300, 1.2, seed=157) * np.exp(-t(0.14) / 0.06)
+    sig[int(SR * 0.32) : int(SR * 0.32) + len(scuff)] += scuff * 0.6
+    return finish(sig, peak=0.68)
+
+
+def sfx_mirrorimage() -> np.ndarray:
+    total = 1.0
+    sig = np.zeros(int(SR * total))
+    # one chime answered by its own ghost, twice
+    for i, onset in enumerate([0.0, 0.18, 0.36]):
+        sig += bell(1174.7 - i * 40.0, 0.6, 0.22, onset, total) * (0.3 - i * 0.07)
+    shimmer = sweep_noise(0.6, 5000, 7000, 3.0, seed=163) * adsr(int(SR * 0.6), 0.15, 0.25)
+    sig[: len(shimmer)] += shimmer * 0.08
+    return finish(sig * 0.8)
+
+
+def sfx_gate() -> np.ndarray:
+    total = 1.2
+    sig = np.zeros(int(SR * total))
+    # the swirl opening: a rising vortex that locks into a held hum
+    vortex = gliss(140.0, 520.0, 0.6, 1.4) * adsr(int(SR * 0.6), 0.25, 0.1)
+    sig[: len(vortex)] += vortex * 0.5
+    hum = gliss(520.0, 508.0, 0.5, 2.0) * adsr(int(SR * 0.5), 0.05, 0.2)
+    sig[int(SR * 0.55) : int(SR * 0.55) + len(hum)] += hum * 0.3
+    swirl = sweep_noise(0.9, 1800, 3600, 4.0, seed=167) * adsr(int(SR * 0.9), 0.3, 0.3)
+    sig[: len(swirl)] += swirl * 0.15
+    sig = np.tanh(sig * 1.1)
+    return finish(sig, peak=0.72)
+
+
+def sfx_fly() -> np.ndarray:
+    total = 1.0
+    sig = np.zeros(int(SR * total))
+    # the updraft: wind gathering under you, then the lift
+    wind = sweep_noise(0.85, 600, 2400, 1.6, seed=171) * adsr(int(SR * 0.85), 0.35, 0.3)
+    sig[: len(wind)] += wind * 0.45
+    lift = gliss(330.0, 880.0, 0.5, 1.0) * adsr(int(SR * 0.5), 0.2, 0.15)
+    sig[int(SR * 0.3) : int(SR * 0.3) + len(lift)] += lift * 0.22
+    return finish(sig, peak=0.7)
+
+
+def sfx_necromancy() -> np.ndarray:
+    total = 1.2
+    sig = np.zeros(int(SR * total))
+    # a low bell under the dirt, and the slow scrape of the answer
+    sig += bell(130.8, 1.1, 0.3, 0.05, total) * 0.5
+    sig += bell(138.6, 1.1, 0.3, 0.05, total) * 0.3  # the dissonant shadow
+    scrape = sweep_noise(0.7, 500, 150, 0.5, seed=173) * adsr(int(SR * 0.7), 0.3, 0.3)
+    sig[int(SR * 0.35) : int(SR * 0.35) + len(scrape)] += scrape * 0.35
+    sig = np.tanh(sig * 1.1)
+    return finish(sig, peak=0.72)
+
+
+def sfx_resurrect() -> np.ndarray:
+    total = 1.2
+    sig = np.zeros(int(SR * total))
+    # breath returning: a rising warm chord, one heartbeat
+    for f, amp in [(392.0, 0.22), (523.3, 0.26), (659.3, 0.2)]:
+        sig += bell(f, 1.0, 0.3, 0.08, total) * amp
+    beat = gliss(75.0, 50.0, 0.1, 1.4) * np.exp(-t(0.1) / 0.05)
+    sig[int(SR * 0.6) : int(SR * 0.6) + len(beat)] += beat * 0.9
+    sig[int(SR * 0.78) : int(SR * 0.78) + len(beat)] += beat * 0.7
+    return finish(sig * 0.85)
+
+
+def sfx_summonelemental() -> np.ndarray:
+    total = 1.1
+    sig = np.zeros(int(SR * total))
+    # the ground answering: a rumble that shapes itself into a chord
+    rumble = gliss(80.0, 160.0, 0.4, 1.2) * adsr(int(SR * 0.4), 0.1, 0.1)
+    sig[: len(rumble)] += rumble * 0.6
+    for f, amp in [(261.6, 0.24), (329.6, 0.2), (392.0, 0.16)]:
+        sig += bell(f, 0.7, 0.2, 0.45, total) * amp
+    sig = np.tanh(sig * 1.1)
+    return finish(sig, peak=0.74)
+
+
+def sfx_polymorph() -> np.ndarray:
+    total = 0.9
+    sig = np.zeros(int(SR * total))
+    # the shape slipping: a wobble downward, then a small bright pop
+    wobble = gliss(700.0, 180.0, 0.5, 2.2) * adsr(int(SR * 0.5), 0.05, 0.15)
+    sig[: len(wobble)] += wobble * 0.4
+    sig += bell(1046.5, 0.3, 0.3, 0.55, total) * 0.25
+    sig = np.tanh(sig * 1.1)
+    return finish(sig, peak=0.7)
+
+
 SPELLS = {
     "spell-nightsight": sfx_nightsight,
     "spell-heal": sfx_heal,
@@ -541,6 +635,14 @@ SPELLS = {
     "spell-sanctuary": sfx_sanctuary,
     "spell-earthquake": sfx_earthquake,
     "spell-naturesfury": sfx_naturesfury,
+    "spell-jump": sfx_jump,
+    "spell-mirrorimage": sfx_mirrorimage,
+    "spell-gate": sfx_gate,
+    "spell-fly": sfx_fly,
+    "spell-necromancy": sfx_necromancy,
+    "spell-resurrect": sfx_resurrect,
+    "spell-summonelemental": sfx_summonelemental,
+    "spell-polymorph": sfx_polymorph,
 }
 
 if __name__ == "__main__":

@@ -838,7 +838,7 @@ function TravelRibbon() {
   const intent = useGame((s) => s.snap.player?.intent);
   const armed = useGame((s) => s.snap.player?.armedSpell);
   if (armed) {
-    const lead = armed === "teleport" || targetsGround(armed) ? "click the ground"
+    const lead = armed === "teleport" || armed === "jump" || targetsGround(armed) ? "click the ground"
       : OFFENSIVE_SPELLS.has(armed) ? "click a beast"
       : null;
     if (lead) {

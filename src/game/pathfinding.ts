@@ -102,10 +102,15 @@ function key(x: number, y: number) {
   return y * MAP + x;
 }
 
-function canStep(world: World, x: number, y: number, nx: number, ny: number) {
+function canStep(world: World, x: number, y: number, nx: number, ny: number, fly = false) {
   const dx = nx - x;
   const dy = ny - y;
   if (Math.abs(dx) > 1 || Math.abs(dy) > 1 || (dx === 0 && dy === 0)) return false;
+  if (fly) {
+    // Aloft: water, rock and rise are weather; only a wall still bars the way.
+    const to = world.tiles[ny]?.[nx];
+    return Boolean(to) && to.kind !== "wall";
+  }
   if (!walkable(world, nx, ny)) return false;
   const from = world.tiles[y]?.[x];
   const to = world.tiles[ny]?.[nx];
@@ -209,6 +214,7 @@ function search(
   isGoal: (x: number, y: number) => boolean,
   heuristic: (x: number, y: number) => number,
   cap: number,
+  fly = false,
 ) {
   ax = Math.max(0, Math.min(MAP - 1, Math.round(ax)));
   ay = Math.max(0, Math.min(MAP - 1, Math.round(ay)));
@@ -232,7 +238,7 @@ function search(
     for (const [dx, dy] of DIRS) {
       const nx = cur.x + dx;
       const ny = cur.y + dy;
-      if (!canStep(world, cur.x, cur.y, nx, ny)) continue;
+      if (!canStep(world, cur.x, cur.y, nx, ny, fly)) continue;
       const to = world.tiles[ny]![nx]!;
       const step = Math.hypot(dx, dy) + Math.abs(to.h - from.h) * 0.35;
       const nextKey = key(nx, ny);
@@ -253,7 +259,7 @@ function octile(ax: number, ay: number, bx: number, by: number) {
 }
 
 /** Find a corner-safe, smoothed route. Returned waypoints never include start. */
-export function astar(world: World, ax: number, ay: number, bx: number, by: number, cap = 9000) {
+export function astar(world: World, ax: number, ay: number, bx: number, by: number, cap = 9000, fly = false) {
   bx = Math.max(0, Math.min(MAP - 1, Math.round(bx)));
   by = Math.max(0, Math.min(MAP - 1, Math.round(by)));
   if (!walkable(world, bx, by)) {
@@ -262,7 +268,7 @@ export function astar(world: World, ax: number, ay: number, bx: number, by: numb
     bx = nearest.x;
     by = nearest.y;
   }
-  const path = search(world, ax, ay, (x, y) => x === bx && y === by, (x, y) => octile(x, y, bx, by), cap);
+  const path = search(world, ax, ay, (x, y) => x === bx && y === by, (x, y) => octile(x, y, bx, by), cap, fly);
   if (!path || (ax === Math.round(ax) && ay === Math.round(ay))) return path;
   // Search is discrete, but the follower starts at the real position. Smooth
   // from there, retaining the rounded footing only if it is actually needed

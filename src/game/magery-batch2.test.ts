@@ -105,7 +105,9 @@ test("batch two - every zone spell has meta, a circle, a profile, and a voice on
   }
   const fifth = SPELL_CIRCLES.find((c) => c.circle === 5);
   assert.ok(fifth, "the fifth circle opens");
-  assert.deepEqual([...fifth.ids].sort(), ["earthquake", "naturesfury"]);
+  for (const id of ["earthquake", "naturesfury"]) {
+    assert.ok(fifth.ids.includes(id as SpellId), `the fifth circle holds ${id}`);
+  }
 });
 
 test("flame wall - the ring keeps its teeth until the working lapses", () => {

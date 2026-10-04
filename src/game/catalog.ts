@@ -57,6 +57,18 @@ export const EARTHQUAKE_BASE = 10;
 export const NATURES_FURY_HOURS = 0.5;
 export const NATURES_FURY_RADIUS = 3.5;
 export const FURY_TICK_BASE = 2;
+/** Batch three mechanics. */
+export const JUMP_RANGE = 6;
+export const GATE_HOURS = 0.05;
+export const FLY_HOURS = 0.15;
+export const FLY_SPEED = 1.7;
+export const NECRO_RADIUS = 8;
+export const NECRO_HP_FRACTION = 0.5;
+export const NECRO_HOURS = 4;
+export const ELEMENTAL_HOURS = 1.5;
+export const POLYMORPH_HOURS = 0.8;
+export const MIRROR_COUNT = 2;
+export const MIRROR_HOURS = 0.2;
 /** Venom works this long on a creature, biting each POISON_TICK_HOURS. */
 export const POISON_FAUNA_HOURS = 0.8;
 export const POISON_TICK_HOURS = 0.08;
