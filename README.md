@@ -40,5 +40,3 @@ npm run check
 ```
 
 That command fails fast in this order: lint (with zero warnings), tests, typecheck, production build, then the auth invariant check. For UI or runtime changes, also run `node scripts/browser-smoke.mjs` against the dev server and inspect both generated screenshots. Hearthwright: `npm run smoke:creator` walks The Hold on desktop and mobile.
-
-<!-- deploy-check 1791124950 -->
