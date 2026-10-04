@@ -27,7 +27,7 @@ test("failed spellcasting emits a visible fizzle event at the caster", () => {
   } finally {
     Math.random = random;
   }
-  const fx = getFizzleFx();
+  const fx = getFizzleFx(world);
   assert.ok(fx);
   assert.equal(fx.spell, "nightsight");
   assert.equal(fx.x, player.x);
@@ -92,6 +92,8 @@ test("moteState - sigil motes orbit at ground level", () => {
 
 test("impactShard - shards scatter outward and fade", () => {
   for (const spell of ["magicarrow", "fireball"] as const) {
+    const onset = impactShard(spell, 3, 0);
+    assert.ok(Math.hypot(onset.dx, onset.dz) >= 0.64, "impact shards leave the target silhouette open from frame zero");
     const near = Math.hypot(impactShard(spell, 3, 0.1).dx, impactShard(spell, 3, 0.1).dz);
     const far0 = impactShard(spell, 3, 0.9);
     const far = Math.hypot(far0.dx, far0.dz);

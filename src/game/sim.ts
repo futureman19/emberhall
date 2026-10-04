@@ -1,5 +1,6 @@
 import { COURT, GATE, placeById } from "./atlas.ts";
 import { SECONDS_PER_HOUR } from "./catalog.ts";
+import { updateSpellStatuses } from "./spell-effects.ts";
 import { tickEcology } from "./ecology.ts";
 import { tickCrops } from "./farm.ts";
 import { tickSaplings } from "./forestry.ts";
@@ -191,6 +192,7 @@ export function tickWorld(world: World, realDt: number) {
   tickPiles(world);
   tickCampfires(world);
   tickPets(world, dt);
+  updateSpellStatuses(world);
   void COURT;
   void GATE;
   void tileOf;

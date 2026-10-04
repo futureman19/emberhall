@@ -278,7 +278,7 @@ export function impactShard(spell: SpellId, i: number, t01: number): MoteState {
   const h1 = hash(i + 23);
   const angle = i * GOLDEN + h0 * 0.6;
   const speed = 1.4 + h0 * 1.8;
-  const dist = speed * t * 0.9;
+  const dist = 0.65 + speed * t * 0.9;
   return {
     dx: Math.cos(angle) * dist,
     dy: Math.max(0, 0.15 + (1.1 + h1 * 1.3) * t - 2.6 * t * t),

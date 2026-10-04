@@ -399,7 +399,7 @@ function PalmFlame() {
   const halo = useRef<Mesh>(null);
   const light = useRef<PointLight>(null);
   const q = useMemo(() => new Quaternion(), []);
-  useFrame((_, dt) => {
+  useFrame(() => {
     const w = wrap.current;
     const f = flame.current;
     if (!w || !f) return;
@@ -412,14 +412,14 @@ function PalmFlame() {
     if (!live) return;
     w.parent?.getWorldQuaternion(q);
     f.quaternion.copy(q).invert();
-    const t = world.player.workT * 14 + dt;
+    const t = world.player.workT * 14;
     const s =
       0.72 +
       Math.min(1, world.player.workT / 0.28) * 0.45 +
       Math.sin(t) * 0.12 +
       Math.sin(t * 2.4) * 0.08;
     f.scale.setScalar(s);
-    f.rotation.y += dt * 5;
+    f.rotation.y += world.player.workT * 5;
     // The flame wears the spell's color while the words are spoken.
     const glow = windupGlow(world.player.intent.spell);
     if (core.current) (core.current.material as MeshBasicMaterial).color.set(glow);

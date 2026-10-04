@@ -5,6 +5,7 @@ import { harvestNow, plantNow, tillNow } from "./farm.ts";
 import { digNow, fillNow } from "./digging.ts";
 import { GHOSTWOOD_LUMBERJACK } from "./resources/catalog.ts";
 import { isGhostwoodTree, isTimberId, plantTreeNow } from "./forestry.ts";
+import { CAST_WINDUP } from "./spell-effects.ts";
 import { burstDeath, castNow, maxMana, OFFENSIVE_SPELLS, offensiveRange, tickMana } from "./magery.ts";
 import { pickNow } from "./herbs.ts";
 import { pickPetName } from "./names.ts";
@@ -937,7 +938,7 @@ export function getCombatFx() {
 }
 
 export const WORK_BEAT = EXTRACTION_BEAT;
-export const CAST_WINDUP = 0.92;
+export { CAST_WINDUP } from "./spell-effects.ts";
 
 function workBeatLands(previous: number, next: number): boolean {
   return previous % WORK_BEAT < EXTRACTION_IMPACT && next % WORK_BEAT >= EXTRACTION_IMPACT;

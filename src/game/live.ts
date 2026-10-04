@@ -3,6 +3,7 @@ import { paintBiomes } from "./biome.ts";
 import { hourOfDay, isDusk, isNight, settleGear, SKILL_META } from "./catalog.ts";
 import { ensureExpansionFauna, ensureStarterFauna, seedBarrow, seedFauna } from "./ecology.ts";
 import { seedFarmPlots } from "./farm.ts";
+import { clearSpellEffects, refreshSpellStatuses } from "./spell-effects.ts";
 import { maxMana } from "./magery.ts";
 import { you } from "./player.ts";
 import { mulberry32 } from "./rng.ts";
@@ -112,13 +113,19 @@ export function getWorld() {
 }
 export function setWorld(next: World) {
   clearHistory(world);
+  clearSpellEffects(world);
   world = withFauna(next);
   clearHistory(world);
+  clearSpellEffects(world);
+  refreshSpellStatuses(world);
 }
 export function resetWorld() {
   clearHistory(world);
+  clearSpellEffects(world);
   world = withFauna(createWorld());
   clearHistory(world);
+  clearSpellEffects(world);
+  refreshSpellStatuses(world);
   return world;
 }
 

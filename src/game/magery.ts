@@ -1,3 +1,4 @@
+import { emitSpellEffect, spellEffects } from "./spell-effects.ts";
 import { PLACES, regionAt } from "./atlas.ts";
 import { BLESS_HOURS, CURSE_HOURS, FAUNA_META, INVIS_HOURS, ITEM_META, PARALYZE_HOURS, POISON_FAUNA_HOURS, POISON_TICK_HOURS, SECONDS_PER_HOUR, SUMMON_HOURS } from "./catalog.ts";
 import { spawn } from "./ecology.ts";
@@ -68,9 +69,9 @@ export interface CastFx {
   at: number;
 }
 
-let castFx: CastFx | null = null;
-export function getCastFx() {
-  return castFx;
+export function getCastFx(world: World, slot = 0) {
+  const fx = spellEffects(world)[slot];
+  return fx?.outcome === "success" ? fx : null;
 }
 
 export interface FizzleFx {
@@ -80,10 +81,9 @@ export interface FizzleFx {
   at: number;
 }
 
-let fizzleFx: FizzleFx | null = null;
-
-export function getFizzleFx() {
-  return fizzleFx;
+export function getFizzleFx(world: World, slot = 0) {
+  const fx = spellEffects(world)[slot];
+  return fx?.outcome === "fizzle" ? fx : null;
 }
 
 export interface DeathFx {
@@ -361,7 +361,7 @@ export function castNow(world: World): string | null {
   const withGain = (flavor: string, gain: string | null) => (gain ? `${flavor} ${gain}.` : flavor);
 
   if (!ok) {
-    fizzleFx = { spell, x: p.x, z: p.z, at: world.hour };
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "fizzle" });
     playSfx("fizzle", 0.4);
     return `${meta.words}. The spell fizzles.`;
   }
@@ -376,33 +376,33 @@ export function castNow(world: World): string | null {
 
   if (spell === "nightsight") {
     world.player.nightSightUntil = world.hour + 8;
-    castFx = { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour };
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The dark thins.`, gain);
   }
   if (spell === "heal") {
     const amt = 5 + Math.floor(skill / 10) + Math.floor(p.int / 5);
     p.hp = Math.min(p.maxHp, p.hp + amt);
-    castFx = { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour };
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     completeObjective(world, "healcast");
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The wound closes.`, gain);
   }
   if (spell === "cure") {
     if (world.hour >= world.player.poisonUntil) {
-      castFx = { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour };
+      emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
       playSfx(spellSfx(spell), 0.5);
       return withGain(`${meta.words}. The venom had already passed.`, gain);
     }
     world.player.poisonUntil = 0;
     world.player.poisonTickAt = 0;
-    castFx = { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour };
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The venom leaves the blood.`, gain);
   }
   if (spell === "bless") {
     world.player.blessUntil = world.hour + BLESS_HOURS;
-    castFx = { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour };
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The arm remembers old battles.`, gain);
   }
@@ -418,7 +418,7 @@ export function castNow(world: World): string | null {
     beast.loyalty = 100;
     beast.boundUntil = world.hour + SUMMON_HOURS;
     world.fauna.push(beast);
-    castFx = { spell, x: p.x, z: p.z, tx: dest.x, tz: dest.y, at: world.hour };
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: dest.x, tz: dest.y, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.55);
     const oldNote = old ? " The old binding loosens." : "";
     return withGain(`${meta.words}. A ${FAUNA_META[kind].label.toLowerCase()} pads to your side.${oldNote}`, gain);
@@ -432,7 +432,7 @@ export function castNow(world: World): string | null {
         c.path = [];
       }
     }
-    castFx = { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour };
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The world forgets your shape.`, gain);
   }
@@ -443,7 +443,7 @@ export function castNow(world: World): string | null {
     c.path = [];
     c.task = "idle";
     c.taskUntil = c.paralyzeUntil;
-    castFx = { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour };
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()} locks mid-stride.`, gain);
   }
@@ -453,7 +453,7 @@ export function castNow(world: World): string | null {
     c.curseUntil = world.hour + CURSE_HOURS;
     c.task = "fight";
     c.taskUntil = world.hour + 0.25;
-    castFx = { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour };
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()}'s strength sours.`, gain);
   }
@@ -471,7 +471,7 @@ export function castNow(world: World): string | null {
       c.poisonUntil = world.hour + POISON_FAUNA_HOURS;
       c.poisonTickAt = world.hour + POISON_TICK_HOURS;
     }
-    castFx = { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour };
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.54);
     if (c.hp <= 0) {
       c.hp = 0;
@@ -495,7 +495,7 @@ export function castNow(world: World): string | null {
     const fromX = p.x;
     const fromZ = p.z;
     if (!landAt(world, p, savedTx, savedTy)) return "No footing.";
-    castFx = { spell, x: fromX, z: fromZ, tx: p.x, tz: p.z, at: world.hour };
+    emitSpellEffect(world, { spell, x: fromX, z: fromZ, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     completeObjective(world, "teleport");
     playSfx(spellSfx(spell), 0.52);
     return withGain(`${meta.words}. The dirt folds.`, gain);
@@ -506,7 +506,7 @@ export function castNow(world: World): string | null {
     const ty = Math.round(p.z);
     const mark: RecallMark = { id: nid(world, "mk"), tx, ty, name: markLabel(world, tx, ty) };
     world.player.marks = [...world.player.marks, mark];
-    castFx = { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour };
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     completeObjective(world, "mark");
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. ${mark.name} is written.`, gain);
@@ -517,7 +517,7 @@ export function castNow(world: World): string | null {
     const fromX = p.x;
     const fromZ = p.z;
     if (!landAt(world, p, mark.tx, mark.ty)) return "No footing.";
-    castFx = { spell, x: fromX, z: fromZ, tx: p.x, tz: p.z, at: world.hour };
+    emitSpellEffect(world, { spell, x: fromX, z: fromZ, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     completeObjective(world, "recall");
     playSfx(spellSfx(spell), 0.52);
     return withGain(`${meta.words}. ${mark.name}.`, gain);
