@@ -42,6 +42,7 @@ import { impactShard, moteState, ringBloom, spellFxProfile, windupGlow } from "@
 import { getChips, getCombatFx, getHealingFx, getTamingFx } from "@/game/player";
 import { useGame, dropBuildHold } from "@/game/store";
 import { hoverAt, leftAt, liftAt } from "@/game/world-pointer";
+import { TOUCH_HOLD_MS, TOUCH_HOLD_SLOP } from "@/game/touch-hold";
 import { cancelHoldBuild, getHoldBuild } from "@/game/placeables/build-mode";
 import { Buildings } from "./building-meshes";
 import { Placeables } from "./placeable-meshes";
@@ -145,15 +146,18 @@ function PlacePointer() {
       return { tx: Math.round(hit.x), ty: Math.round(hit.z) };
     }
     function move(ev: PointerEvent) {
+      moveCancelTouch(ev);
       const t = xz(ev);
       if (t) hoverAt(t.tx, t.ty);
     }
     function down(ev: PointerEvent) {
+      armCancelTouch(ev);
       if (ev.button !== 0) return;
       const t = xz(ev);
       if (t) leftAt(t.tx, t.ty);
     }
     function upEv(ev: PointerEvent) {
+      endCancelTouch(ev);
       if (ev.button !== 0) return;
       const t = xz(ev);
       if (t) liftAt(t.tx, t.ty);
@@ -164,7 +168,39 @@ function PlacePointer() {
       ev.stopPropagation();
       useGame.getState().cancelPlacement();
     }
+    // Touch long-press lets the shade go — the touch twin of right-click. A
+    // quick tap still places, a drag still moves the shade, a second finger
+    // aborts the gesture.
+    let cancelTimer: number | null = null;
+    let cancelTouch: { id: number; x: number; y: number } | null = null;
+    function clearCancelTouch() {
+      if (cancelTimer != null) {
+        window.clearTimeout(cancelTimer);
+        cancelTimer = null;
+      }
+      cancelTouch = null;
+    }
+    function armCancelTouch(ev: PointerEvent) {
+      if (ev.pointerType !== "touch") return;
+      if (cancelTouch) {
+        clearCancelTouch();
+        return;
+      }
+      cancelTouch = { id: ev.pointerId, x: ev.clientX, y: ev.clientY };
+      cancelTimer = window.setTimeout(() => {
+        clearCancelTouch();
+        useGame.getState().cancelPlacement();
+      }, TOUCH_HOLD_MS);
+    }
+    function moveCancelTouch(ev: PointerEvent) {
+      if (!cancelTouch || ev.pointerId !== cancelTouch.id) return;
+      if (Math.hypot(ev.clientX - cancelTouch.x, ev.clientY - cancelTouch.y) > TOUCH_HOLD_SLOP) clearCancelTouch();
+    }
+    function endCancelTouch(ev: PointerEvent) {
+      if (cancelTouch && ev.pointerId === cancelTouch.id) clearCancelTouch();
+    }
     function cancelEv() {
+      clearCancelTouch();
       dropBuildHold();
       cancelHoldBuild();
     }
@@ -177,6 +213,7 @@ function PlacePointer() {
     // shade is armed, right-click always lets it go.
     window.addEventListener("pointerdown", cancelClick, true);
     return () => {
+      clearCancelTouch();
       el.removeEventListener("pointermove", move);
       window.removeEventListener("pointermove", move);
       el.removeEventListener("pointerdown", down);

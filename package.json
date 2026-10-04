@@ -37,6 +37,7 @@
     "smoke:npc-interactions": "node scripts/npc-interaction-smoke.mjs",
     "smoke:moongate-animations": "node scripts/moongate-animation-smoke.mjs",
     "smoke:personal-actions": "node scripts/personal-action-animation-smoke.mjs",
+    "smoke:cancel-placement": "node scripts/cancel-placement-smoke.mjs",
     "gate:crafting": "node --experimental-strip-types scripts/crafting-balance-gate.ts",
     "format": "prettier --write ."
   },
