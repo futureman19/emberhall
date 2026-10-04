@@ -62,7 +62,13 @@ export type SfxId =
   | "spell_blizzard"
   | "spell_chainlightning"
   | "spell_sleep"
-  | "spell_meteor";
+  | "spell_meteor"
+  | "spell_flamewall"
+  | "spell_tarpit"
+  | "spell_stonewall"
+  | "spell_sanctuary"
+  | "spell_earthquake"
+  | "spell_naturesfury";
 
 const SRC: Record<SfxId, string> = {
   chop: "/audio/sfx/chop.mp3",
@@ -101,6 +107,12 @@ const SRC: Record<SfxId, string> = {
   spell_chainlightning: "/audio/sfx/spell-chainlightning.mp3",
   spell_sleep: "/audio/sfx/spell-sleep.mp3",
   spell_meteor: "/audio/sfx/spell-meteor.mp3",
+  spell_flamewall: "/audio/sfx/spell-flamewall.mp3",
+  spell_tarpit: "/audio/sfx/spell-tarpit.mp3",
+  spell_stonewall: "/audio/sfx/spell-stonewall.mp3",
+  spell_sanctuary: "/audio/sfx/spell-sanctuary.mp3",
+  spell_earthquake: "/audio/sfx/spell-earthquake.mp3",
+  spell_naturesfury: "/audio/sfx/spell-naturesfury.mp3",
 };
 
 const POOL = 3;

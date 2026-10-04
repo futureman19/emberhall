@@ -1,5 +1,6 @@
 import { MAP, inBounds } from "./atlas.ts";
 import { pieceBlocks } from "./placeables/functions.ts";
+import { zoneBlocksAt } from "./zones.ts";
 import type { Tile, TileKind, World } from "./types.ts";
 
 export type GridPoint = { x: number; y: number };
@@ -26,6 +27,8 @@ export function walkable(world: World, tx: number, ty: number) {
   const t = world.tiles[ty]?.[tx];
   if (!t) return false;
   if (!kindWalk(t.kind)) return false;
+  // A raised Wall of Stone bars the tile for every walker until it lapses.
+  if (zoneBlocksAt(world, tx, ty)) return false;
   return !pieceBlocks(world, tx, ty);
 }
 

@@ -1,5 +1,6 @@
 import { BARROW, MAP, PLACES, inGreybarrow } from "./atlas.ts";
 import { CURSE_BITE_WEAKEN, CURSE_SLOW, CHILL_SLOW, FAUNA_META, IRONWOOD_WARD, isNight, POISON_PLAYER_HOURS, POISON_TICK_HOURS, SNARE_TICK_DMG, SNARE_TICK_HOURS, armorOf } from "./catalog.ts";
+import { sanctuaryAt, sanctuaryBlocksTile, zoneFaunaSlowAt } from "./zones.ts";
 import { COMBAT_BEAT } from "./combat-animation.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { spawnCorpsePile } from "./piles.ts";
@@ -417,6 +418,8 @@ export function provoke(world: World, c: Creature) {
  * resets it) so a beast never bites twice in the same breath.
  */
 export function strikePlayer(world: World, c: Creature, you: Person) {
+  // In Sanct Hur: on hallowed ground no bite lands — the beast will not cross.
+  if (sanctuaryAt(world, you.x, you.z)) return;
   const arm = armorOf(world.player.wear) + rareMods(world).armor;
   const ward = (world.hour < world.player.blessUntil ? 2 : 0) + (world.hour < world.player.ironwoodUntil ? IRONWOOD_WARD : 0);
   let bite = Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2) - ward);
@@ -646,10 +649,15 @@ export function tickEcology(world: World, dt: number) {
     }
     if (c.path.length) {
       const n = c.path[0]!;
+      // In Sanct Hur: a wild beast refuses the crossing and lets the hunt go.
+      if (!c.ownerId && sanctuaryBlocksTile(world, n.tx, n.ty)) {
+        letGo(c, world);
+        continue;
+      }
       const dx = n.tx - c.x;
       const dz = n.ty - c.z;
       const dist = Math.hypot(dx, dz);
-      const slow = (c.curseUntil && world.hour < c.curseUntil ? CURSE_SLOW : 1) * (c.chillUntil && world.hour < c.chillUntil ? CHILL_SLOW : 1);
+      const slow = (c.curseUntil && world.hour < c.curseUntil ? CURSE_SLOW : 1) * (c.chillUntil && world.hour < c.chillUntil ? CHILL_SLOW : 1) * zoneFaunaSlowAt(world, c.x, c.z);
       const step = Math.min(dist, 2.2 * dt * slow);
       if (dist < 0.12) c.path.shift();
       else {

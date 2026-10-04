@@ -315,6 +315,7 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
     piles: [],
     campfires: [],
     herbs: [],
+    zones: [],
     buildings: [],
     plots: [],
     saplings: [],

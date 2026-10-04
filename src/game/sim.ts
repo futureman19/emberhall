@@ -11,6 +11,7 @@ import { tickPets } from "./pets.ts";
 import { replanIntentPath, tickPlayer, you } from "./player.ts";
 import { regrowResourceNodes } from "./resources/state.ts";
 import { tickWeather } from "./weather.ts";
+import { tickZones, zonePersonSlowAt } from "./zones.ts";
 import { completeObjective, log, revealAround } from "./world.ts";
 import { emitNpcInteractionFx } from "./npc-interaction-animation.ts";
 import { applyKeepStory } from "./keep-story.ts";
@@ -52,7 +53,7 @@ function followPath(world: World, p: Person, dt: number): "idle" | "moving" | "s
   }
   const startX = p.x;
   const startZ = p.z;
-  let remaining = WALK_SPEED * (p.ghost ? 1.4 : 1) * dt;
+  let remaining = WALK_SPEED * (p.ghost ? 1.4 : 1) * dt * zonePersonSlowAt(world, p.x, p.z);
   const previous = motionWatches.get(p);
   const first = p.path[0]!;
   // Planned segments are already corner/climb checked. Revalidate only when
@@ -189,6 +190,7 @@ export function tickWorld(world: World, realDt: number) {
   tickCrops(world);
   tickSaplings(world);
   tickEcology(world, dt);
+  tickZones(world, dt);
   tickPiles(world);
   tickCampfires(world);
   tickPets(world, dt);

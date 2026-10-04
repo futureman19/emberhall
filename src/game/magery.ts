@@ -1,25 +1,28 @@
 import { emitSpellEffect, spellEffects } from "./spell-effects.ts";
 import { PLACES, regionAt } from "./atlas.ts";
-import { BLAST_RADIUS, BLESS_HOURS, CHAIN_FALLOFF, CHAIN_MAX, CHAIN_RANGE, CHILL_HOURS, CURSE_HOURS, FAUNA_META, FLASH_RADIUS, INVIS_HOURS, IRONWOOD_HOURS, ITEM_META, METEOR_RADIUS, PARALYZE_HOURS, POISON_FAUNA_HOURS, POISON_TICK_HOURS, BLIND_HOURS, SECONDS_PER_HOUR, SLEEP_HOURS, SNARE_HOURS, SNARE_TICK_HOURS, SUMMON_HOURS } from "./catalog.ts";
+import { BLAST_RADIUS, BLESS_HOURS, CHAIN_FALLOFF, CHAIN_MAX, CHAIN_RANGE, CHILL_HOURS, CURSE_HOURS, EARTHQUAKE_BASE, FAUNA_META, FLAME_TICK_BASE, FLASH_RADIUS, FURY_TICK_BASE, INVIS_HOURS, IRONWOOD_HOURS, ITEM_META, METEOR_RADIUS, PARALYZE_HOURS, POISON_FAUNA_HOURS, POISON_TICK_HOURS, BLIND_HOURS, SECONDS_PER_HOUR, SLEEP_HOURS, SNARE_HOURS, SNARE_TICK_HOURS, SUMMON_HOURS } from "./catalog.ts";
 import { letGo, markAsleep, spawn } from "./ecology.ts";
+import { placeZone } from "./zones.ts";
 import { astarToRange, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { spawnCorpsePile } from "./piles.ts";
 import { rareName, rollKillRare } from "./rare.ts";
 import { successChance, tryGain } from "./skills.ts";
 import { playSfx, type SfxId } from "./vale-sfx.ts";
 import { completeObjective, log, nid, revealAround } from "./world.ts";
-import type { ItemId, Person, RecallMark, SpellId, World } from "./types.ts";
+import type { ItemId, Person, RecallMark, SpellId, World, ZoneKind } from "./types.ts";
 
 export const SPELL_ORDER: SpellId[] = [
   "nightsight", "heal", "magicarrow", "teleport", "fireball", "cure", "poison", "bless", "lightning", "summon", "paralyze", "invisibility", "curse", "mark", "recall",
   "thornsnare", "ironwood", "leech", "flash", "fireblast", "blizzard", "chainlightning", "sleep", "meteor",
+  "flamewall", "tarpit", "stonewall", "sanctuary", "earthquake", "naturesfury",
 ];
 
 export const SPELL_CIRCLES: { circle: number; label: string; ids: SpellId[] }[] = [
   { circle: 1, label: "First circle", ids: ["nightsight", "heal", "magicarrow"] },
   { circle: 2, label: "Second", ids: ["teleport", "fireball", "cure", "poison", "thornsnare"] },
-  { circle: 3, label: "Third", ids: ["bless", "lightning", "ironwood", "leech", "flash"] },
-  { circle: 4, label: "Fourth", ids: ["summon", "paralyze", "invisibility", "curse", "fireblast", "blizzard", "chainlightning", "sleep"] },
+  { circle: 3, label: "Third", ids: ["bless", "lightning", "ironwood", "leech", "flash", "flamewall"] },
+  { circle: 4, label: "Fourth", ids: ["summon", "paralyze", "invisibility", "curse", "fireblast", "blizzard", "chainlightning", "sleep", "tarpit", "stonewall", "sanctuary"] },
+  { circle: 5, label: "Fifth", ids: ["earthquake", "naturesfury"] },
   { circle: 6, label: "Sixth", ids: ["meteor"] },
 ];
 
@@ -51,6 +54,12 @@ export const SPELL_META: Record<
   chainlightning: { label: "Chain Lightning", circle: 4, diff: 16, mana: 13, reagents: ["ash", "pearl", "mandrake"], words: "Por Ort Grav Vas", target: "fauna", hint: "The bolt arcs to the pack." },
   sleep: { label: "Sleep", circle: 4, diff: 14, mana: 10, reagents: ["nightshade", "mandrake"], words: "In Zu", target: "fauna", hint: "It drifts off — until wounded." },
   meteor: { label: "Meteor", circle: 6, diff: 20, mana: 18, reagents: ["ash", "mandrake", "pearl", "nightshade"], words: "Vas Flam Grav", target: "tile", hint: "The sky falls. Click the ground." },
+  flamewall: { label: "Flame Wall", circle: 3, diff: 14, mana: 10, reagents: ["ash", "mandrake", "pearl"], words: "Vas Flam Hur", target: "tile", hint: "A ring of fire that keeps its teeth. Click the ground." },
+  tarpit: { label: "Tar Pit", circle: 4, diff: 15, mana: 11, reagents: ["nightshade", "ash", "moss"], words: "An Xen Hur", target: "tile", hint: "The ground turns to tar. Click the ground." },
+  stonewall: { label: "Wall of Stone", circle: 4, diff: 15, mana: 11, reagents: ["ash", "mandrake"], words: "Rel Tym Hur", target: "tile", hint: "Stone rises and bars the way. Click the ground." },
+  sanctuary: { label: "Sanctuary", circle: 4, diff: 15, mana: 12, reagents: ["garlic", "moss", "pearl"], words: "In Sanct Hur", target: "tile", hint: "Ground no beast will cross. Click the ground." },
+  earthquake: { label: "Earthquake", circle: 5, diff: 18, mana: 15, reagents: ["ash", "mandrake", "nightshade"], words: "Vas Tym Por", target: "tile", hint: "The vale shakes apart. Click the ground." },
+  naturesfury: { label: "Nature's Fury", circle: 5, diff: 17, mana: 14, reagents: ["nightshade", "moss", "silk"], words: "Vas Xen Grav", target: "tile", hint: "An unbound swarm harries the ring. Click the ground." },
 };
 
 export const ARROW_RANGE = 14;
@@ -61,6 +70,12 @@ export const MARK_CAP = 8;
 export const OFFENSIVE_SPELLS: ReadonlySet<SpellId> = new Set(["magicarrow", "fireball", "poison", "lightning", "paralyze", "curse", "thornsnare", "leech", "chainlightning", "sleep"]);
 /** Spells that ruin the ground itself — armed, then released on a clicked tile. */
 export const TILE_OFFENSIVE_SPELLS: ReadonlySet<SpellId> = new Set(["fireblast", "blizzard", "meteor"]);
+/** Spells that raise a standing ground working (zones.ts) on a clicked tile. */
+export const ZONE_SPELLS: ReadonlySet<SpellId> = new Set(["flamewall", "tarpit", "stonewall", "sanctuary", "earthquake", "naturesfury"]);
+/** Armed, then released on the ground: one tile-click path serves both. */
+export function targetsGround(spell: SpellId): boolean {
+  return TILE_OFFENSIVE_SPELLS.has(spell) || ZONE_SPELLS.has(spell);
+}
 
 /** Every spell has its own voice — the windup "cast" hum is shared, the
  * release is not. Fizzle keeps its own sad sputter. */
@@ -160,7 +175,7 @@ function pathToward(world: World, tx: number, ty: number, range: number) {
 /** Release reach for a harmful spell — the one resolver behind command
  *  admission, ongoing pursuit, terrain replanning, and impact validation. */
 export function offensiveRange(spell: SpellId) {
-  return spell === "fireball" || spell === "lightning" || spell === "chainlightning" || TILE_OFFENSIVE_SPELLS.has(spell) ? FIREBALL_RANGE : ARROW_RANGE;
+  return spell === "fireball" || spell === "lightning" || spell === "chainlightning" || targetsGround(spell) ? FIREBALL_RANGE : ARROW_RANGE;
 }
 
 function footing(world: World, tx: number, ty: number) {
@@ -273,7 +288,7 @@ export function commandCast(world: World, spell: SpellId, target?: CastTarget): 
     return null;
   }
 
-  if (TILE_OFFENSIVE_SPELLS.has(spell)) {
+  if (targetsGround(spell)) {
     if (!target || target.kind !== "tile") {
       world.player.armedSpell = spell;
       world.player.intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
@@ -367,7 +382,7 @@ export function castNow(world: World): string | null {
     }
     p.path = [];
   }
-  if (TILE_OFFENSIVE_SPELLS.has(spell)) {
+  if (targetsGround(spell)) {
     const range = offensiveRange(spell);
     if (Math.hypot(p.x - world.player.intent.tx, p.z - world.player.intent.ty) > range) {
       pathToward(world, world.player.intent.tx, world.player.intent.ty, range - 0.75);
@@ -617,6 +632,23 @@ export function castNow(world: World): string | null {
       : `${burned + felled === 1 ? "one beast" : `${burned + felled} beasts`} caught${felled ? `, ${felled} felled` : ""}`;
     const sky = spell === "meteor" ? "The sky falls" : spell === "blizzard" ? "The cold front takes the ring" : "The ground erupts";
     return withGain(`${meta.words}. ${sky} — ${toll}.${glintNote}`, gain);
+  }
+  if (ZONE_SPELLS.has(spell)) {
+    // One raising serves all six workings; zones.ts owns what the ground does next.
+    const power = spell === "flamewall" ? FLAME_TICK_BASE + Math.floor(skill / 20)
+      : spell === "naturesfury" ? FURY_TICK_BASE + Math.floor(skill / 25)
+      : spell === "earthquake" ? EARTHQUAKE_BASE + Math.floor(skill / 7) + Math.floor(p.int / 3)
+      : 0;
+    placeZone(world, spell as ZoneKind, savedTx, savedTy, p.id, power);
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: savedTx, tz: savedTy, at: world.hour, outcome: "success" });
+    playSfx(spellSfx(spell), 0.55);
+    const raising = spell === "flamewall" ? "A ring of fire takes the ground."
+      : spell === "tarpit" ? "The ground softens to black tar."
+      : spell === "stonewall" ? "Stone rises and bars the way."
+      : spell === "sanctuary" ? "The ground stills. Nothing with teeth will cross."
+      : spell === "earthquake" ? "The vale shakes apart."
+      : "The swarm rises, unbound.";
+    return withGain(`${meta.words}. ${raising}`, gain);
   }
   if (spell === "chainlightning") {
     const c = world.fauna.find((x) => x.id === savedId);

@@ -37,6 +37,26 @@ export const METEOR_RADIUS = 4;
 export const CHAIN_RANGE = 6;
 export const CHAIN_MAX = 2;
 export const CHAIN_FALLOFF = 0.6;
+/** Ground workings (batch two): how long each stands, how wide it reaches. */
+export const ZONE_CAP = 10;
+export const ZONE_TICK_HOURS = 0.08;
+export const FLAME_WALL_HOURS = 0.5;
+export const FLAME_WALL_RADIUS = 2.5;
+export const FLAME_TICK_BASE = 3;
+export const TAR_PIT_HOURS = 0.6;
+export const TAR_PIT_RADIUS = 3;
+export const TAR_PIT_FAUNA_SLOW = 0.25;
+export const TAR_PIT_PERSON_SLOW = 0.5;
+export const STONE_WALL_HOURS = 0.75;
+export const STONE_WALL_RADIUS = 2;
+export const SANCTUARY_HOURS = 1;
+export const SANCTUARY_RADIUS = 3;
+export const EARTHQUAKE_RADIUS = 5;
+export const EARTHQUAKE_PULSE_GAP_HOURS = 0.05;
+export const EARTHQUAKE_BASE = 10;
+export const NATURES_FURY_HOURS = 0.5;
+export const NATURES_FURY_RADIUS = 3.5;
+export const FURY_TICK_BASE = 2;
 /** Venom works this long on a creature, biting each POISON_TICK_HOURS. */
 export const POISON_FAUNA_HOURS = 0.8;
 export const POISON_TICK_HOURS = 0.08;

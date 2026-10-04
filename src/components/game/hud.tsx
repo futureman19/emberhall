@@ -35,7 +35,7 @@ import { getHoldBuild } from "@/game/placeables/build-mode";
 import { BUILDING_META, CLASS_META } from "@/game/catalog";
 import { phaseName } from "@/game/gates";
 import { getWorld } from "@/game/live";
-import { maxMana, OFFENSIVE_SPELLS, SPELL_META, TILE_OFFENSIVE_SPELLS } from "@/game/magery";
+import { maxMana, OFFENSIVE_SPELLS, SPELL_META, targetsGround } from "@/game/magery";
 import { nearestHealer } from "@/game/player";
 import { hasSave as hallHasSave } from "@/game/save";
 import { HoldPanel } from "@/components/game/hold-panel";
@@ -838,7 +838,7 @@ function TravelRibbon() {
   const intent = useGame((s) => s.snap.player?.intent);
   const armed = useGame((s) => s.snap.player?.armedSpell);
   if (armed) {
-    const lead = armed === "teleport" || TILE_OFFENSIVE_SPELLS.has(armed) ? "click the ground"
+    const lead = armed === "teleport" || targetsGround(armed) ? "click the ground"
       : OFFENSIVE_SPELLS.has(armed) ? "click a beast"
       : null;
     if (lead) {

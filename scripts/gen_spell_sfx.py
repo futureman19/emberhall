@@ -430,6 +430,86 @@ def sfx_meteor() -> np.ndarray:
     return finish(sig, peak=0.78)
 
 
+def sfx_flamewall() -> np.ndarray:
+    total = 1.0
+    sig = np.zeros(int(SR * total))
+    # a ring catching: one low whomp, then the steady lick of flames
+    whomp = gliss(180.0, 70.0, 0.3, 0.9) * np.exp(-t(0.3) / 0.12)
+    sig[: len(whomp)] += whomp * 0.9
+    lick = sweep_noise(0.8, 1400, 500, 2.2, seed=131) * adsr(int(SR * 0.8), 0.1, 0.25)
+    sig[int(SR * 0.15) : int(SR * 0.15) + len(lick)] += lick * 0.5
+    sig = np.tanh(sig * 1.1)
+    return finish(sig, peak=0.74)
+
+
+def sfx_tarpit() -> np.ndarray:
+    total = 1.0
+    sig = np.zeros(int(SR * total))
+    # thick bubbles rising through black tar
+    for i, onset in enumerate([0.05, 0.22, 0.44, 0.7]):
+        f0 = 90.0 + i * 25.0
+        bubble = gliss(f0, f0 * 1.8, 0.14, 1.0) * np.exp(-t(0.14) / 0.05)
+        start = int(SR * onset)
+        sig[start : start + len(bubble)] += bubble * 0.8
+    squelch = sweep_noise(0.5, 700, 180, 0.8, seed=137) * np.exp(-t(0.5) / 0.3)
+    sig[int(SR * 0.3) : int(SR * 0.3) + len(squelch)] += squelch * 0.4
+    sig = np.tanh(sig * 1.1)
+    return finish(sig, peak=0.72)
+
+
+def sfx_stonewall() -> np.ndarray:
+    total = 1.1
+    sig = np.zeros(int(SR * total))
+    # stone on stone: three heavy grinds as the wall rises
+    for i, onset in enumerate([0.0, 0.28, 0.58]):
+        grind = sweep_noise(0.22, 500, 120, 0.9, seed=139 + i) * adsr(int(SR * 0.22), 0.03, 0.12)
+        start = int(SR * onset)
+        sig[start : start + len(grind)] += grind * (0.9 - i * 0.15)
+        thud = gliss(120.0, 55.0, 0.12, 1.2) * np.exp(-t(0.12) / 0.05)
+        sig[start : start + len(thud)] += thud * 0.7
+    sig = np.tanh(sig * 1.2)
+    return finish(sig, peak=0.76)
+
+
+def sfx_sanctuary() -> np.ndarray:
+    total = 1.3
+    sig = np.zeros(int(SR * total))
+    # a small choir settling onto one held chord — ground going still
+    for f, amp in [(523.3, 0.30), (659.3, 0.24), (784.0, 0.18)]:
+        sig += bell(f, 1.2, 0.25, 0.05, total) * amp
+    chime = bell(1046.5, 0.9, 0.12, 0.55, total) * 0.10
+    sig += chime
+    return finish(sig * 0.8)
+
+
+def sfx_earthquake() -> np.ndarray:
+    total = 1.5
+    sig = np.zeros(int(SR * total))
+    # three shakes, each weaker — the earth clearing its throat
+    for i, onset in enumerate([0.0, 0.4, 0.85]):
+        shake = gliss(70.0, 30.0, 0.35, 1.4) * np.exp(-t(0.35) / 0.16) * (1.0 - i * 0.28)
+        start = int(SR * onset)
+        sig[start : start + len(shake)] += shake * 1.2
+        rumble = sweep_noise(0.3, 400, 90, 0.7, seed=149 + i) * np.exp(-t(0.3) / 0.18) * (1.0 - i * 0.28)
+        sig[start : start + len(rumble)] += rumble
+    sig = np.tanh(sig * 1.3)
+    return finish(sig, peak=0.78)
+
+
+def sfx_naturesfury() -> np.ndarray:
+    total = 1.1
+    sig = np.zeros(int(SR * total))
+    # the swarm rising: a ragged chorus of tiny wings
+    swarm = sweep_noise(0.9, 2400, 3600, 6.0, seed=151) * adsr(int(SR * 0.9), 0.2, 0.3)
+    sig[: len(swarm)] += swarm * 0.35
+    for i, onset in enumerate([0.1, 0.3, 0.52, 0.78]):
+        buzz = gliss(320.0 + i * 60.0, 480.0 + i * 60.0, 0.16, 3.0) * np.exp(-t(0.16) / 0.07)
+        start = int(SR * onset)
+        sig[start : start + len(buzz)] += buzz * 0.4
+    sig = np.tanh(sig * 1.1)
+    return finish(sig, peak=0.7)
+
+
 SPELLS = {
     "spell-nightsight": sfx_nightsight,
     "spell-heal": sfx_heal,
@@ -455,6 +535,12 @@ SPELLS = {
     "spell-chainlightning": sfx_chainlightning,
     "spell-sleep": sfx_sleep,
     "spell-meteor": sfx_meteor,
+    "spell-flamewall": sfx_flamewall,
+    "spell-tarpit": sfx_tarpit,
+    "spell-stonewall": sfx_stonewall,
+    "spell-sanctuary": sfx_sanctuary,
+    "spell-earthquake": sfx_earthquake,
+    "spell-naturesfury": sfx_naturesfury,
 }
 
 if __name__ == "__main__":

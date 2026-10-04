@@ -222,7 +222,13 @@ export type SpellId =
   | "blizzard"
   | "chainlightning"
   | "sleep"
-  | "meteor";
+  | "meteor"
+  | "flamewall"
+  | "tarpit"
+  | "stonewall"
+  | "sanctuary"
+  | "earthquake"
+  | "naturesfury";
 
 export type ClassId = "ranger" | "warrior" | "mage" | "rogue" | "merchant";
 export type NpcRole = "banker" | "provisioner" | "healer" | "alchemist";
@@ -578,6 +584,25 @@ export interface LootGold {
   max: number;
 }
 
+/** A placed working of ground magic (batch two): it stands on the vale until
+ * `until`, pulsing its effect at `tickAt`. `power` bakes the caster's skill
+ * into the working at the moment it is raised; `pulses` counts the remaining
+ * shakes of an earthquake. */
+export type ZoneKind = "flamewall" | "tarpit" | "stonewall" | "sanctuary" | "earthquake" | "naturesfury";
+
+export interface GroundZone {
+  id: string;
+  kind: ZoneKind;
+  tx: number;
+  ty: number;
+  radius: number;
+  until: number;
+  tickAt: number;
+  ownerId: string | null;
+  power: number;
+  pulses: number;
+}
+
 export interface World {
   seed: number;
   hour: number;
@@ -590,6 +615,7 @@ export interface World {
   piles: GroundPile[];
   campfires: Campfire[];
   herbs: HerbPatch[];
+  zones: GroundZone[];
   buildings: Building[];
   plots: CropPlot[];
   saplings: Sapling[];

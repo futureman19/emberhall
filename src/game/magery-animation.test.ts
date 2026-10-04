@@ -35,7 +35,7 @@ test("failed spellcasting emits a visible fizzle event at the caster", () => {
 });
 
 test("spell fx profiles - every spell has a complete, distinct identity", () => {
-  assert.equal(SPELL_ORDER.length, 24);
+  assert.equal(SPELL_ORDER.length, 30);
   const kinds = new Set<string>();
   const voices = new Set<string>();
   for (const spell of SPELL_ORDER) {
@@ -53,7 +53,7 @@ test("spell fx profiles - every spell has a complete, distinct identity", () => 
   // all fountain; magicarrow/poison/curse all dart; mark/summon both sigil)
   // but never a particle voice.
   assert.equal(kinds.size, 8);
-  assert.equal(voices.size, 24);
+  assert.equal(voices.size, 30);
 });
 
 test("windupGlow - tint per spell, safe fallback", () => {

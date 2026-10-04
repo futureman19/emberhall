@@ -19,6 +19,7 @@ function bareWorld(seed = 7): World {
     piles: [],
     campfires: [],
     herbs: [],
+    zones: [],
     buildings: [],
     plots: [],
     saplings: [],
