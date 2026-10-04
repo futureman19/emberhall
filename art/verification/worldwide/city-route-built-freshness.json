@@ -1,0 +1,26 @@
+[
+  {
+    "url": "/assets/index-DJc50c9K.js",
+    "buildFile": ".vercel/output/static/assets/index-DJc50c9K.js",
+    "sha256": "fbe3e26547fbca3b8987453ee821459abfbb8caea8ba2f70410436d419a86975",
+    "matchesBuild": true
+  },
+  {
+    "url": "/assets/rolldown-runtime-C0FnF6B9.js",
+    "buildFile": ".vercel/output/static/assets/rolldown-runtime-C0FnF6B9.js",
+    "sha256": "e0a79ad36c6ca1ffbc796c80aa5661803a9d1bc684e29d1587f48b4ba9a82714",
+    "matchesBuild": true
+  },
+  {
+    "url": "/assets/routes-BtBVX4KH.js",
+    "buildFile": ".vercel/output/static/assets/routes-BtBVX4KH.js",
+    "sha256": "d7befd2a5bd81049d23e1238fd440159c19001db8ca369c30f4a9e2da3601d00",
+    "matchesBuild": true
+  },
+  {
+    "url": "/assets/styles-DsTtAquI.css",
+    "buildFile": ".vercel/output/static/assets/styles-DsTtAquI.css",
+    "sha256": "ea3ee335fb1824f24ba7e4c55f2914db3168b076d17c6df240191d16305da4dc",
+    "matchesBuild": true
+  }
+]

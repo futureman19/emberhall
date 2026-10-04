@@ -1,0 +1,18 @@
+{
+  "status": "offline authoring complete for remaining equipment; NOT integrated",
+  "equipment": [
+    "bow",
+    "club",
+    "heater",
+    "knife",
+    "mace",
+    "shield",
+    "staff",
+    "sword",
+    "torch"
+  ],
+  "equipmentCount": 9,
+  "partCount": 19,
+  "protectedFilesUnchanged": 421,
+  "remaining": "death-body design, ghost-material review, runtime grip/action integration after QA slot opens"
+}

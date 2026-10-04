@@ -1,0 +1,566 @@
+{
+  "generator": "Blender 5.2.1 LTS",
+  "coordinates": "Y-up; assembled mature ground pivot; runtime trunk/crown anchors baked by loader",
+  "assets": {
+    "oak": {
+      "url": "/art/lanternwood/oak.glb",
+      "bytes": 118352,
+      "sha256": "e38306e785170da4e66399611d7e1e715d4ccb40b9693883f63abb66055f0f8a",
+      "source": "art/blender/oak-kit.blend",
+      "design": "Approved oak retained byte-identical; original local-part anchors"
+    },
+    "pine": {
+      "url": "/art/lanternwood/timber-pine.glb",
+      "source": "art/blender/timber-pine.blend",
+      "design": "Scalloped evergreen tiers, lifted branch tips and rounded leader",
+      "bytes": 90784,
+      "sha256": "b1a6eb8270e6a9abbb0cb5dac94638fe69245257829427d8b919ec88570b6128",
+      "parts": {
+        "pine_trunk": {
+          "vertices": 272,
+          "triangles": 500,
+          "min": [
+            -0.816787,
+            0.0,
+            -0.826186
+          ],
+          "max": [
+            0.829212,
+            2.1,
+            0.664426
+          ]
+        },
+        "pine_crown": {
+          "vertices": 676,
+          "triangles": 1300,
+          "min": [
+            -0.870569,
+            1.7,
+            -0.966637
+          ],
+          "max": [
+            1.070402,
+            4.2,
+            1.035151
+          ]
+        },
+        "pine_stump": {
+          "vertices": 24,
+          "triangles": 44,
+          "min": [
+            -0.202258,
+            0.0,
+            -0.203
+          ],
+          "max": [
+            0.202258,
+            0.29,
+            0.203
+          ]
+        },
+        "pine_sapling_trunk": {
+          "vertices": 272,
+          "triangles": 500,
+          "min": [
+            -0.233368,
+            0.0,
+            -0.236053
+          ],
+          "max": [
+            0.236918,
+            0.6,
+            0.189836
+          ]
+        },
+        "pine_sapling_crown": {
+          "vertices": 676,
+          "triangles": 1300,
+          "min": [
+            -0.248734,
+            0.485714,
+            -0.276182
+          ],
+          "max": [
+            0.305829,
+            1.2,
+            0.295758
+          ]
+        }
+      }
+    },
+    "willow": {
+      "url": "/art/lanternwood/timber-willow.glb",
+      "source": "art/blender/timber-willow.blend",
+      "design": "Arched arms, umbrella crown and long soft pendant foliage",
+      "bytes": 76008,
+      "sha256": "72a718f7b2ef42ff10663b109c6cb19f465cfcb520f391369dc9e9870feebef0",
+      "parts": {
+        "willow_trunk": {
+          "vertices": 296,
+          "triangles": 544,
+          "min": [
+            -0.816787,
+            0.0,
+            -0.826186
+          ],
+          "max": [
+            0.829212,
+            2.1,
+            0.802062
+          ]
+        },
+        "willow_crown": {
+          "vertices": 520,
+          "triangles": 1000,
+          "min": [
+            -1.027913,
+            1.7,
+            -1.060133
+          ],
+          "max": [
+            1.060141,
+            4.2,
+            1.032864
+          ]
+        },
+        "willow_stump": {
+          "vertices": 24,
+          "triangles": 44,
+          "min": [
+            -0.202258,
+            0.0,
+            -0.203
+          ],
+          "max": [
+            0.202258,
+            0.29,
+            0.203
+          ]
+        },
+        "willow_sapling_trunk": {
+          "vertices": 296,
+          "triangles": 544,
+          "min": [
+            -0.233368,
+            0.0,
+            -0.236053
+          ],
+          "max": [
+            0.236918,
+            0.6,
+            0.229161
+          ]
+        },
+        "willow_sapling_crown": {
+          "vertices": 520,
+          "triangles": 1000,
+          "min": [
+            -0.29369,
+            0.485714,
+            -0.302895
+          ],
+          "max": [
+            0.302897,
+            1.2,
+            0.295104
+          ]
+        }
+      }
+    },
+    "birch": {
+      "url": "/art/lanternwood/timber-birch.glb",
+      "source": "art/blender/timber-birch.blend",
+      "design": "Slender twin forks and airy alternating oval leaf sprays",
+      "bytes": 56972,
+      "sha256": "da88a759631af9efa842e830ab1cbe9264293d42c059a9c18e1bbdf9258179d0",
+      "parts": {
+        "birch_trunk": {
+          "vertices": 248,
+          "triangles": 456,
+          "min": [
+            -0.816787,
+            0.0,
+            -0.826186
+          ],
+          "max": [
+            0.829212,
+            2.1,
+            0.664426
+          ]
+        },
+        "birch_crown": {
+          "vertices": 364,
+          "triangles": 700,
+          "min": [
+            -0.984121,
+            1.7,
+            -0.98598
+          ],
+          "max": [
+            0.980276,
+            4.2,
+            0.974712
+          ]
+        },
+        "birch_stump": {
+          "vertices": 24,
+          "triangles": 44,
+          "min": [
+            -0.130023,
+            0.0,
+            -0.1305
+          ],
+          "max": [
+            0.130023,
+            0.29,
+            0.1305
+          ]
+        },
+        "birch_sapling_trunk": {
+          "vertices": 248,
+          "triangles": 456,
+          "min": [
+            -0.233368,
+            0.0,
+            -0.236053
+          ],
+          "max": [
+            0.236918,
+            0.6,
+            0.189836
+          ]
+        },
+        "birch_sapling_crown": {
+          "vertices": 364,
+          "triangles": 700,
+          "min": [
+            -0.281177,
+            0.485714,
+            -0.281709
+          ],
+          "max": [
+            0.280079,
+            1.2,
+            0.278489
+          ]
+        }
+      }
+    },
+    "ash": {
+      "url": "/art/lanternwood/timber-ash.glb",
+      "source": "art/blender/timber-ash.blend",
+      "design": "Uplifted branching fan with layered broad feather-like sprays",
+      "bytes": 63768,
+      "sha256": "d87c6823bb86ad0766fe019516a7ac3bc4a20aad288c7bf7a2c7566f43f23170",
+      "parts": {
+        "ash_trunk": {
+          "vertices": 272,
+          "triangles": 500,
+          "min": [
+            -0.816787,
+            0.0,
+            -0.826186
+          ],
+          "max": [
+            0.829212,
+            2.1,
+            0.664426
+          ]
+        },
+        "ash_crown": {
+          "vertices": 416,
+          "triangles": 800,
+          "min": [
+            -1.136958,
+            1.7,
+            -1.14
+          ],
+          "max": [
+            1.134297,
+            4.2,
+            1.125194
+          ]
+        },
+        "ash_stump": {
+          "vertices": 24,
+          "triangles": 44,
+          "min": [
+            -0.202258,
+            0.0,
+            -0.203
+          ],
+          "max": [
+            0.202258,
+            0.29,
+            0.203
+          ]
+        },
+        "ash_sapling_trunk": {
+          "vertices": 272,
+          "triangles": 500,
+          "min": [
+            -0.233368,
+            0.0,
+            -0.236053
+          ],
+          "max": [
+            0.236918,
+            0.6,
+            0.189836
+          ]
+        },
+        "ash_sapling_crown": {
+          "vertices": 416,
+          "triangles": 800,
+          "min": [
+            -0.324845,
+            0.485714,
+            -0.325714
+          ],
+          "max": [
+            0.324085,
+            1.2,
+            0.321484
+          ]
+        }
+      }
+    },
+    "redwood": {
+      "url": "/art/lanternwood/timber-redwood.glb",
+      "source": "art/blender/timber-redwood.blend",
+      "design": "Buttressed bole and narrow stacked rounded evergreen boughs",
+      "bytes": 126060,
+      "sha256": "f7f884c0fe940f41ce1e4e7a96ae2cd4aa8a6ffc2d6edbf367242b331ddcb23b",
+      "parts": {
+        "redwood_trunk": {
+          "vertices": 320,
+          "triangles": 588,
+          "min": [
+            -0.553808,
+            0.0,
+            -0.560066
+          ],
+          "max": [
+            0.562104,
+            2.1,
+            0.543833
+          ]
+        },
+        "redwood_crown": {
+          "vertices": 988,
+          "triangles": 1900,
+          "min": [
+            -0.679044,
+            1.7,
+            -0.753977
+          ],
+          "max": [
+            0.834914,
+            4.2,
+            0.807418
+          ]
+        },
+        "redwood_stump": {
+          "vertices": 24,
+          "triangles": 44,
+          "min": [
+            -0.332282,
+            0.0,
+            -0.3335
+          ],
+          "max": [
+            0.332282,
+            0.29,
+            0.3335
+          ]
+        },
+        "redwood_sapling_trunk": {
+          "vertices": 320,
+          "triangles": 588,
+          "min": [
+            -0.158231,
+            0.0,
+            -0.160019
+          ],
+          "max": [
+            0.160601,
+            0.6,
+            0.155381
+          ]
+        },
+        "redwood_sapling_crown": {
+          "vertices": 988,
+          "triangles": 1900,
+          "min": [
+            -0.194012,
+            0.485714,
+            -0.215422
+          ],
+          "max": [
+            0.238547,
+            1.2,
+            0.230691
+          ]
+        }
+      }
+    },
+    "yew": {
+      "url": "/art/lanternwood/timber-yew.glb",
+      "source": "art/blender/timber-yew.blend",
+      "design": "Twisted spreading arms and broad flattened evergreen pillows",
+      "bytes": 65188,
+      "sha256": "fd707ea2f88bd4ba1b882e916fedaae861f20ca8c1287ccc505bdcf29d716cd8",
+      "parts": {
+        "yew_trunk": {
+          "vertices": 296,
+          "triangles": 544,
+          "min": [
+            -0.816787,
+            0.0,
+            -0.826186
+          ],
+          "max": [
+            0.829212,
+            2.1,
+            0.802062
+          ]
+        },
+        "yew_crown": {
+          "vertices": 416,
+          "triangles": 800,
+          "min": [
+            -1.139497,
+            1.7,
+            -1.14
+          ],
+          "max": [
+            1.131758,
+            4.2,
+            1.130253
+          ]
+        },
+        "yew_stump": {
+          "vertices": 24,
+          "triangles": 44,
+          "min": [
+            -0.245599,
+            0.0,
+            -0.2465
+          ],
+          "max": [
+            0.245599,
+            0.29,
+            0.2465
+          ]
+        },
+        "yew_sapling_trunk": {
+          "vertices": 296,
+          "triangles": 544,
+          "min": [
+            -0.233368,
+            0.0,
+            -0.236053
+          ],
+          "max": [
+            0.236918,
+            0.6,
+            0.229161
+          ]
+        },
+        "yew_sapling_crown": {
+          "vertices": 416,
+          "triangles": 800,
+          "min": [
+            -0.325571,
+            0.485714,
+            -0.325714
+          ],
+          "max": [
+            0.323359,
+            1.2,
+            0.32293
+          ]
+        }
+      }
+    },
+    "ghostwood": {
+      "url": "/art/lanternwood/timber-ghostwood.glb",
+      "source": "art/blender/timber-ghostwood.blend",
+      "design": "Spiralling pale forks and connected teardrop foliage on visible slender crown boughs",
+      "bytes": 63016,
+      "sha256": "6ab068db3d6a8cc9b27ec21b1778294d60c160aa81868b90e372ef0002429d86",
+      "parts": {
+        "ghostwood_trunk": {
+          "vertices": 248,
+          "triangles": 456,
+          "min": [
+            -0.816787,
+            0.0,
+            -0.826186
+          ],
+          "max": [
+            0.829212,
+            2.1,
+            0.664426
+          ]
+        },
+        "ghostwood_crown": {
+          "vertices": 464,
+          "triangles": 880,
+          "min": [
+            -0.902514,
+            1.7,
+            -0.904795
+          ],
+          "max": [
+            0.900136,
+            4.2,
+            0.768253
+          ]
+        },
+        "ghostwood_stump": {
+          "vertices": 24,
+          "triangles": 44,
+          "min": [
+            -0.158917,
+            0.0,
+            -0.1595
+          ],
+          "max": [
+            0.158917,
+            0.29,
+            0.1595
+          ]
+        },
+        "ghostwood_sapling_trunk": {
+          "vertices": 248,
+          "triangles": 456,
+          "min": [
+            -0.233368,
+            0.0,
+            -0.236053
+          ],
+          "max": [
+            0.236918,
+            0.6,
+            0.189836
+          ]
+        },
+        "ghostwood_sapling_crown": {
+          "vertices": 464,
+          "triangles": 880,
+          "min": [
+            -0.257861,
+            0.485714,
+            -0.258513
+          ],
+          "max": [
+            0.257182,
+            1.2,
+            0.219501
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+# U5 environment work — CPU-only first slice
+U4 source/build/evidence archives remain SHA256-identical to their frozen manifest. User reports Grok handling QA; no independent U4 verdict yet. U5 is NOT frozen or visually accepted.
+
+Implemented shader portability fix in src/components/game/sky.tsx: replaced reversed smoothstep(-0.05,-0.5,y), whose edge ordering is undefined by GLSL, with 1-smoothstep(-0.5,-0.05,y). Preserves intended downward horizon-to-haze ramp, bounds and palette. No new meshes, draws, RNG, gameplay state, visibility settings or streaming cadence changes. This is a source-level defect, not a reproduced visible GPU artifact.
+
+New scripts/sky-shader.test.mjs is automatically included by existing scripts test glob. Red-r2 reproduces reversed-edge failure; green-r2 validates all four shader literal ramps and101numerical horizon samples. Initial test draft incorrectly expected five literal ramps; fixed to actual four and repeated red-to-green proof. First full suite caught stale line-number-based art ledger after added shader comment; refreshed with canonical audit --refresh and reran unchanged tests. Final full suite992/992; typecheck/full lint/build passed, audit errors empty. Retain all logs .hermes/u5-*.log.
+
+No browser/GPU render was run this slice to avoid contention with independent QA performance work. No claim of improved visual appearance or real GPU shader compilation. Day/night/weather screenshots, input sanity and served-byte checks remain required before U5 handoff. Active local built previews may be stale after rebuild: restart only owned process and verify linked bytes before use; do not touch tester ports.
+
+Next: fixed normal-camera day/night/rain/biome references; assess terrain/road/shore/water materials without changing protected horizon/ground update cadence. Existing weather audio is separate from screen-space rain. Existing lightning randomness/timing unchanged. Do not rewrite approved lighting/terrain without comparative evidence. U6 UI/cohesion and PileGump dismiss remain later.

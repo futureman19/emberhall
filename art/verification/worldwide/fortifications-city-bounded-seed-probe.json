@@ -1,0 +1,31 @@
+{
+  "scope": "At most64 deterministic tile seeds; first failed endpoint is checked against actual createWorld with the same seed. Original failing random seed is unknown.",
+  "rows": [
+    {
+      "seed": 1234567,
+      "passed": true,
+      "target": {
+        "h": 8,
+        "kind": "grass"
+      },
+      "targetWalkable": true
+    },
+    {
+      "seed": 2469134,
+      "passed": false,
+      "target": {
+        "h": 7,
+        "kind": "tree"
+      },
+      "targetWalkable": true,
+      "actualWorldSeed": 2469134,
+      "actualWorldRoute": null,
+      "localGate": [
+        {
+          "x": 150,
+          "y": 336
+        }
+      ]
+    }
+  ]
+}

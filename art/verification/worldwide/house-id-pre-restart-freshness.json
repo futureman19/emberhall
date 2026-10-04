@@ -1,0 +1,26 @@
+[
+  {
+    "url": "/assets/index-DsAvVN5Z.js",
+    "status": "HTTP Error 404: ",
+    "builtMatch": false,
+    "builtFiles": []
+  },
+  {
+    "url": "/assets/rolldown-runtime-C0FnF6B9.js",
+    "status": 200,
+    "builtMatch": false,
+    "builtFiles": []
+  },
+  {
+    "url": "/assets/routes-DNiSb1gG.js",
+    "status": "HTTP Error 404: ",
+    "builtMatch": false,
+    "builtFiles": []
+  },
+  {
+    "url": "/assets/styles-H1TFFXgf.css",
+    "status": 200,
+    "builtMatch": false,
+    "builtFiles": []
+  }
+]

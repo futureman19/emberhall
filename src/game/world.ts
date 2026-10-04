@@ -27,8 +27,19 @@ import { emitConstructionFx } from "./construction-animation.ts";
 
 let nidAcc = 1;
 export function nid(world: World, prefix: string) {
-  nidAcc += 1;
-  return `${prefix}-${world.tickCount + nidAcc}`;
+  // The process counter is not saved. Reloaded worlds can already contain its
+  // next candidate, so reserve exact live IDs without renaming saved records or
+  // advancing the simulation clock. Re-scan on allocation: arrays are mutable.
+  const used = new Set<string>([world.player?.id ?? ""]);
+  for (const records of [world.buildings, world.people, world.fauna, world.piles, world.campfires, world.herbs, world.plots, world.saplings, world.player?.marks]) {
+    for (const record of records ?? []) used.add(record.id);
+  }
+  let id: string;
+  do {
+    nidAcc += 1;
+    id = `${prefix}-${world.tickCount + nidAcc}`;
+  } while (used.has(id));
+  return id;
 }
 
 export function log(world: World, text: string) {

@@ -1,0 +1,40 @@
+{
+  "status": "offline authored; NOT integrated or gameplay-tested",
+  "weapons": [
+    "campfire"
+  ],
+  "parts": [
+    {
+      "name": "campfire_stone",
+      "weapon": "campfire",
+      "center": [
+        0,
+        0,
+        0
+      ],
+      "bounds": [
+        0.18,
+        0.18,
+        0.18
+      ],
+      "sourceVertices": 12
+    },
+    {
+      "name": "campfire_log",
+      "weapon": "campfire",
+      "center": [
+        0,
+        0,
+        0
+      ],
+      "bounds": [
+        0.1,
+        0.5,
+        0.1
+      ],
+      "sourceVertices": 32
+    }
+  ],
+  "bytes": 6552,
+  "sha256": "cf77361dd85269bc7cf4c93560469e861e610c523259737abbd7db31a41826ae"
+}

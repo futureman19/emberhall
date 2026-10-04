@@ -1,0 +1,2352 @@
+{
+  "schema": 1,
+  "generator": "art/blender/build_fauna.py",
+  "source": "art/blender/fauna-worldwide.blend",
+  "coordinateSystem": "Y-up +Z-front ground-pivot; normalized SIZE units",
+  "speciesCount": 52,
+  "species": [
+    {
+      "kind": "hare",
+      "family": "lagomorph",
+      "file": "fauna-hare.glb",
+      "size": 0.35,
+      "triangles": 1376,
+      "materials": 1,
+      "bytes": 143888,
+      "sha256": "283033e6c5666855aed2aa0354f5603ecf21c23a9c6910c998fbbd084b58065c",
+      "bounds": {
+        "min": [
+          -0.3709120452404022,
+          0.0,
+          -0.7216796278953552
+        ],
+        "max": [
+          0.3709120452404022,
+          1.4300000667572021,
+          0.8506507277488708
+        ]
+      },
+      "parts": [
+        "haunch",
+        "chest",
+        "head",
+        "long_ear_-1",
+        "ear_lining_-1",
+        "long_ear_1",
+        "ear_lining_1",
+        "muzzle",
+        "nose",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "cotton_tail"
+      ]
+    },
+    {
+      "kind": "hart",
+      "family": "cervid",
+      "file": "fauna-hart.glb",
+      "size": 0.7,
+      "triangles": 1256,
+      "materials": 1,
+      "bytes": 126092,
+      "sha256": "aa16d294efb9815fe7c20d6eb69d8dc0b8fe248bc6b471d11e96fc2995e6be5c",
+      "bounds": {
+        "min": [
+          -0.5347055196762085,
+          0.0,
+          -0.815258800983429
+        ],
+        "max": [
+          0.5347055196762085,
+          2.167570114135742,
+          1.1606507301330566
+        ]
+      },
+      "parts": [
+        "deer_flank",
+        "rising_neck",
+        "deer_head",
+        "muzzle",
+        "nose",
+        "pointed_ear_-1",
+        "pointed_ear_1",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "tail_0",
+        "antler_-10",
+        "antler_-11",
+        "antler_-12",
+        "antler_tine_-10",
+        "antler_10",
+        "antler_11",
+        "antler_12",
+        "antler_tine_10"
+      ]
+    },
+    {
+      "kind": "wolf",
+      "family": "canid",
+      "file": "fauna-wolf.glb",
+      "size": 0.55,
+      "triangles": 1128,
+      "materials": 1,
+      "bytes": 116880,
+      "sha256": "b4c6cc4da59a51bc00ddba363bca061dc31c96f28ac60bfa8baf5fbe465b8736",
+      "bounds": {
+        "min": [
+          -0.356613427400589,
+          0.0,
+          -1.0932631492614746
+        ],
+        "max": [
+          0.356613427400589,
+          1.2400000095367432,
+          1.0806506872177124
+        ]
+      },
+      "parts": [
+        "tapered_flank",
+        "chest",
+        "head",
+        "muzzle",
+        "nose",
+        "pointed_ear_-1",
+        "pointed_ear_1",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "tail_0",
+        "tail_1"
+      ]
+    },
+    {
+      "kind": "wight",
+      "family": "spirit",
+      "file": "fauna-wight.glb",
+      "size": 0.8,
+      "triangles": 456,
+      "materials": 2,
+      "bytes": 49080,
+      "sha256": "34199f09844c7b2de93beaa95e0ae5c05e5daf5bc8d2e7532f230e8f35f96514",
+      "bounds": {
+        "min": [
+          -0.5837419033050537,
+          0.0,
+          -0.4324650764465332
+        ],
+        "max": [
+          0.5837419033050537,
+          1.809999942779541,
+          0.47999998927116394
+        ]
+      },
+      "parts": [
+        "fluted_robe",
+        "sweeping_sleeve-1",
+        "sweeping_sleeve1",
+        "skull",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "mouth"
+      ]
+    },
+    {
+      "kind": "brambleback_stag",
+      "family": "cervid",
+      "file": "fauna-brambleback_stag.glb",
+      "size": 0.78,
+      "triangles": 1448,
+      "materials": 1,
+      "bytes": 146300,
+      "sha256": "2b24b595b401be345b9dbf9f797ed2e8b1b163d42e0540a7696cb9fb1d5d7787",
+      "bounds": {
+        "min": [
+          -0.5347055196762085,
+          0.0,
+          -0.815258800983429
+        ],
+        "max": [
+          0.5347055196762085,
+          2.167570114135742,
+          1.1606507301330566
+        ]
+      },
+      "parts": [
+        "deer_flank",
+        "rising_neck",
+        "deer_head",
+        "muzzle",
+        "nose",
+        "pointed_ear_-1",
+        "pointed_ear_1",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "tail_0",
+        "antler_-10",
+        "antler_-11",
+        "antler_-12",
+        "antler_tine_-10",
+        "antler_10",
+        "antler_11",
+        "antler_12",
+        "antler_tine_10",
+        "moss_clump0",
+        "moss_clump1",
+        "moss_clump2"
+      ]
+    },
+    {
+      "kind": "ironwood_boar",
+      "family": "stocky",
+      "file": "fauna-ironwood_boar.glb",
+      "size": 0.74,
+      "triangles": 1148,
+      "materials": 1,
+      "bytes": 118092,
+      "sha256": "944310adc2067b3d9ad45e54875f11d5ec6bf83d090bcba3d42cd95de02b25d9",
+      "bounds": {
+        "min": [
+          -0.45589208602905273,
+          0.0,
+          -0.6181867122650146
+        ],
+        "max": [
+          0.45589208602905273,
+          1.2599999904632568,
+          1.140650749206543
+        ]
+      },
+      "parts": [
+        "heavy_flank",
+        "heavy_head",
+        "muzzle",
+        "nose",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "pointed_ear_-1",
+        "pointed_ear_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "ivory_tusk-10",
+        "ivory_tusk-11",
+        "ivory_tusk10",
+        "ivory_tusk11",
+        "spine_0",
+        "spine_1",
+        "spine_2"
+      ]
+    },
+    {
+      "kind": "pine_lynx",
+      "family": "feline",
+      "file": "fauna-pine_lynx.glb",
+      "size": 0.53,
+      "triangles": 1168,
+      "materials": 1,
+      "bytes": 122244,
+      "sha256": "c5fc48735698265908afd01750bab6b4f3f4f8f27ed583acd7fbb4ea8288a293",
+      "bounds": {
+        "min": [
+          -0.356613427400589,
+          0.0,
+          -0.8311902284622192
+        ],
+        "max": [
+          0.356613427400589,
+          1.2700001001358032,
+          1.0806506872177124
+        ]
+      },
+      "parts": [
+        "tapered_flank",
+        "chest",
+        "head",
+        "muzzle",
+        "nose",
+        "pointed_ear_-1",
+        "pointed_ear_1",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "bobtail",
+        "ear_tuft-1",
+        "ear_tuft1"
+      ]
+    },
+    {
+      "kind": "ember_fox",
+      "family": "canid",
+      "file": "fauna-ember_fox.glb",
+      "size": 0.48,
+      "triangles": 1192,
+      "materials": 1,
+      "bytes": 123620,
+      "sha256": "138f62c193aa42b30737060ec9b8f45b8f330830fffb568aabd32e5fd0bc0bf5",
+      "bounds": {
+        "min": [
+          -0.356613427400589,
+          0.0,
+          -1.2292324304580688
+        ],
+        "max": [
+          0.356613427400589,
+          1.2400000095367432,
+          1.0806506872177124
+        ]
+      },
+      "parts": [
+        "tapered_flank",
+        "chest",
+        "head",
+        "muzzle",
+        "nose",
+        "pointed_ear_-1",
+        "pointed_ear_1",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "tail_0",
+        "tail_1",
+        "cream_tail_tip"
+      ]
+    },
+    {
+      "kind": "moss_badger",
+      "family": "stocky",
+      "file": "fauna-moss_badger.glb",
+      "size": 0.33,
+      "triangles": 1248,
+      "materials": 1,
+      "bytes": 130476,
+      "sha256": "59a451e29d86f0057f35239c7ff68fb181ade92f604e2e2d9b2060c6f8dd94bc",
+      "bounds": {
+        "min": [
+          -0.45589208602905273,
+          0.0,
+          -0.6181867122650146
+        ],
+        "max": [
+          0.45589208602905273,
+          1.0099999904632568,
+          1.140650749206543
+        ]
+      },
+      "parts": [
+        "heavy_flank",
+        "heavy_head",
+        "muzzle",
+        "nose",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "round_ear_-1",
+        "round_ear_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "face_stripe-1",
+        "face_stripe1"
+      ]
+    },
+    {
+      "kind": "ridgeback_warg",
+      "family": "canid",
+      "file": "fauna-ridgeback_warg.glb",
+      "size": 0.8,
+      "triangles": 1036,
+      "materials": 2,
+      "bytes": 108668,
+      "sha256": "7e128a6ceeb0b355399ad948422d2ef176aaa154c62623b5d397f1694dfba138",
+      "bounds": {
+        "min": [
+          -0.356613427400589,
+          0.0,
+          -1.0932631492614746
+        ],
+        "max": [
+          0.356613427400589,
+          1.2400000095367432,
+          1.0806506872177124
+        ]
+      },
+      "parts": [
+        "tapered_flank",
+        "chest",
+        "head",
+        "muzzle",
+        "nose",
+        "pointed_ear_-1",
+        "pointed_ear_1",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "tail_0",
+        "tail_1",
+        "spine_0",
+        "spine_1",
+        "spine_2"
+      ]
+    },
+    {
+      "kind": "thornhide_doe",
+      "family": "cervid",
+      "file": "fauna-thornhide_doe.glb",
+      "size": 0.44,
+      "triangles": 1256,
+      "materials": 1,
+      "bytes": 130356,
+      "sha256": "544c7175179f5ad6f37de3cf3b0db407fa05b51c769f26c227fcec02acdd896d",
+      "bounds": {
+        "min": [
+          -0.35172778367996216,
+          0.0,
+          -0.815258800983429
+        ],
+        "max": [
+          0.35172778367996216,
+          1.6399999856948853,
+          1.1606507301330566
+        ]
+      },
+      "parts": [
+        "deer_flank",
+        "rising_neck",
+        "deer_head",
+        "muzzle",
+        "nose",
+        "pointed_ear_-1",
+        "pointed_ear_1",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "tail_0",
+        "moss_clump0",
+        "moss_clump1",
+        "moss_clump2"
+      ]
+    },
+    {
+      "kind": "mire_croaker",
+      "family": "amphibian",
+      "file": "fauna-mire_croaker.glb",
+      "size": 0.45,
+      "triangles": 1080,
+      "materials": 1,
+      "bytes": 112928,
+      "sha256": "62474643a607963483d12d85882d20495ae5db554b8ac09ba2ced7e91df2d4ef",
+      "bounds": {
+        "min": [
+          -0.6077641248703003,
+          0.0,
+          -0.6043381094932556
+        ],
+        "max": [
+          0.6077641248703003,
+          0.8700000047683716,
+          0.7655105590820312
+        ]
+      },
+      "parts": [
+        "low_body",
+        "broad_head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "folded_haunch-1",
+        "folded_haunch1",
+        "throat_sac",
+        "spine_0",
+        "spine_1"
+      ]
+    },
+    {
+      "kind": "reedback_stalker",
+      "family": "reptile",
+      "file": "fauna-reedback_stalker.glb",
+      "size": 0.78,
+      "triangles": 972,
+      "materials": 1,
+      "bytes": 100676,
+      "sha256": "d6d699c6dffb7a97a4ec01f60b3af77355b74d6f375493f3d4591ce06f8ddcfe",
+      "bounds": {
+        "min": [
+          -0.4722246825695038,
+          0.0,
+          -1.3998056650161743
+        ],
+        "max": [
+          0.4722246825695038,
+          1.0199999809265137,
+          1.0055105686187744
+        ]
+      },
+      "parts": [
+        "low_body",
+        "broad_head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "tail_0",
+        "tail_1",
+        "spine_0",
+        "spine_1",
+        "spine_2",
+        "reed_crest-1",
+        "reed_crest1"
+      ]
+    },
+    {
+      "kind": "bog_toad",
+      "family": "amphibian",
+      "file": "fauna-bog_toad.glb",
+      "size": 0.38,
+      "triangles": 1056,
+      "materials": 1,
+      "bytes": 110304,
+      "sha256": "2eb0a8cc77decd8db3ea0a897bbc81d8fdf1379e4b5c5d8e9bab0724c02006d9",
+      "bounds": {
+        "min": [
+          -0.6077641248703003,
+          0.0,
+          -0.6043381094932556
+        ],
+        "max": [
+          0.6077641248703003,
+          0.6699999570846558,
+          0.7655105590820312
+        ]
+      },
+      "parts": [
+        "low_body",
+        "broad_head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "folded_haunch-1",
+        "folded_haunch1",
+        "throat_sac"
+      ]
+    },
+    {
+      "kind": "saltback_tortoise",
+      "family": "chelonian",
+      "file": "fauna-saltback_tortoise.glb",
+      "size": 0.9,
+      "triangles": 1248,
+      "materials": 1,
+      "bytes": 130500,
+      "sha256": "df7e931a09a169c6a58e94f56f22aa883f589d37d1a12483708cc82341bf7fa6",
+      "bounds": {
+        "min": [
+          -0.5421022176742554,
+          0.0,
+          -0.6316127777099609
+        ],
+        "max": [
+          0.5421022176742554,
+          0.9299999475479126,
+          1.0055105686187744
+        ]
+      },
+      "parts": [
+        "low_body",
+        "broad_head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "domed_shell",
+        "shell_scute00",
+        "shell_scute-0.260",
+        "shell_scute0.260",
+        "shell_scute0-0.3",
+        "shell_scute00.3"
+      ]
+    },
+    {
+      "kind": "brine_hound",
+      "family": "canid",
+      "file": "fauna-brine_hound.glb",
+      "size": 0.64,
+      "triangles": 1192,
+      "materials": 1,
+      "bytes": 123628,
+      "sha256": "675eaf1c5c4fcb4cea7ad4308bd2b23838ad5d20fafa359324cb73ae4c1a38ee",
+      "bounds": {
+        "min": [
+          -0.356613427400589,
+          0.0,
+          -1.0932631492614746
+        ],
+        "max": [
+          0.356613427400589,
+          1.2400000095367432,
+          1.0806506872177124
+        ]
+      },
+      "parts": [
+        "tapered_flank",
+        "chest",
+        "head",
+        "muzzle",
+        "nose",
+        "pointed_ear_-1",
+        "pointed_ear_1",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "tail_0",
+        "tail_1",
+        "salt_ruff"
+      ]
+    },
+    {
+      "kind": "dune_crawler",
+      "family": "arthropod",
+      "file": "fauna-dune_crawler.glb",
+      "size": 0.58,
+      "triangles": 872,
+      "materials": 1,
+      "bytes": 85192,
+      "sha256": "1af5811b7435265af24057b96e2eaca738bc9d358975d903560cc93ec9aecd38",
+      "bounds": {
+        "min": [
+          -0.8309098482131958,
+          0.0,
+          -0.8040236830711365
+        ],
+        "max": [
+          0.8309098482131958,
+          1.0445698499679565,
+          0.6055105924606323
+        ]
+      },
+      "parts": [
+        "carapace",
+        "cephalothorax",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "jointed_leg-100",
+        "jointed_leg-101",
+        "jointed_leg-110",
+        "jointed_leg-111",
+        "jointed_leg-120",
+        "jointed_leg-121",
+        "jointed_leg100",
+        "jointed_leg101",
+        "jointed_leg110",
+        "jointed_leg111",
+        "jointed_leg120",
+        "jointed_leg121",
+        "tail_0",
+        "tail_1",
+        "tail_2"
+      ]
+    },
+    {
+      "kind": "coal_salamander",
+      "family": "reptile",
+      "file": "fauna-coal_salamander.glb",
+      "size": 0.62,
+      "triangles": 948,
+      "materials": 1,
+      "bytes": 98064,
+      "sha256": "e407f90d37c2f93bdc290aa8e3770b9b6d69349893bc4915a5d7a89fb24f0f76",
+      "bounds": {
+        "min": [
+          -0.4722246825695038,
+          0.0,
+          -1.3998056650161743
+        ],
+        "max": [
+          0.4722246825695038,
+          1.0199999809265137,
+          1.0055105686187744
+        ]
+      },
+      "parts": [
+        "low_body",
+        "broad_head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "tail_0",
+        "tail_1",
+        "spine_0",
+        "spine_1",
+        "spine_2"
+      ]
+    },
+    {
+      "kind": "orebeetle",
+      "family": "arthropod",
+      "file": "fauna-orebeetle.glb",
+      "size": 0.52,
+      "triangles": 976,
+      "materials": 1,
+      "bytes": 96628,
+      "sha256": "193152182950ba42032661b61c11d5ae36804facce980840ae7e7e478abb156d",
+      "bounds": {
+        "min": [
+          -0.8309098482131958,
+          0.0,
+          -0.5710765719413757
+        ],
+        "max": [
+          0.8309098482131958,
+          0.7095920443534851,
+          0.6293299794197083
+        ]
+      },
+      "parts": [
+        "carapace",
+        "cephalothorax",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "jointed_leg-100",
+        "jointed_leg-101",
+        "jointed_leg-110",
+        "jointed_leg-111",
+        "jointed_leg-120",
+        "jointed_leg-121",
+        "antenna-1",
+        "jointed_leg100",
+        "jointed_leg101",
+        "jointed_leg110",
+        "jointed_leg111",
+        "jointed_leg120",
+        "jointed_leg121",
+        "antenna1",
+        "metal_elytron-1",
+        "metal_elytron1"
+      ]
+    },
+    {
+      "kind": "stonecrawl_spider",
+      "family": "arthropod",
+      "file": "fauna-stonecrawl_spider.glb",
+      "size": 0.58,
+      "triangles": 768,
+      "materials": 2,
+      "bytes": 75036,
+      "sha256": "7447d256ba7d404e1c913d03c541491ffe1ac62cb5e2728dfa20ec33828c3fc0",
+      "bounds": {
+        "min": [
+          -0.8309098482131958,
+          0.0,
+          -0.5710765719413757
+        ],
+        "max": [
+          0.8309098482131958,
+          0.5813533067703247,
+          0.599825382232666
+        ]
+      },
+      "parts": [
+        "carapace",
+        "cephalothorax",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "jointed_leg-100",
+        "jointed_leg-101",
+        "jointed_leg-110",
+        "jointed_leg-111",
+        "jointed_leg-120",
+        "jointed_leg-121",
+        "jointed_leg-130",
+        "jointed_leg-131",
+        "jointed_leg100",
+        "jointed_leg101",
+        "jointed_leg110",
+        "jointed_leg111",
+        "jointed_leg120",
+        "jointed_leg121",
+        "jointed_leg130",
+        "jointed_leg131"
+      ]
+    },
+    {
+      "kind": "greybarrow_wightling",
+      "family": "spirit",
+      "file": "fauna-greybarrow_wightling.glb",
+      "size": 0.72,
+      "triangles": 520,
+      "materials": 2,
+      "bytes": 55864,
+      "sha256": "4d3c86ccc88327a14e626a254b5434171a80b13f923174974cbf6bba7f38cbfe",
+      "bounds": {
+        "min": [
+          -0.5837419033050537,
+          0.0,
+          -0.4324650764465332
+        ],
+        "max": [
+          0.5837419033050537,
+          1.8700000047683716,
+          0.47999998927116394
+        ]
+      },
+      "parts": [
+        "fluted_robe",
+        "sweeping_sleeve-1",
+        "sweeping_sleeve1",
+        "skull",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "mouth",
+        "burial_cowl"
+      ]
+    },
+    {
+      "kind": "barrow_hound",
+      "family": "canid",
+      "file": "fauna-barrow_hound.glb",
+      "size": 0.66,
+      "triangles": 1192,
+      "materials": 2,
+      "bytes": 124912,
+      "sha256": "3b0a529bde5f9a3f9caa7129a38dc964640138cc97a37068a7848ea776afaa8e",
+      "bounds": {
+        "min": [
+          -0.356613427400589,
+          0.0,
+          -1.0932631492614746
+        ],
+        "max": [
+          0.356613427400589,
+          1.2400000095367432,
+          1.0806506872177124
+        ]
+      },
+      "parts": [
+        "tapered_flank",
+        "chest",
+        "head",
+        "muzzle",
+        "nose",
+        "pointed_ear_-1",
+        "pointed_ear_1",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "tail_0",
+        "tail_1",
+        "bone_rib-0.22",
+        "bone_rib0",
+        "bone_rib0.22"
+      ]
+    },
+    {
+      "kind": "ashen_banshee",
+      "family": "spirit",
+      "file": "fauna-ashen_banshee.glb",
+      "size": 0.85,
+      "triangles": 552,
+      "materials": 2,
+      "bytes": 57084,
+      "sha256": "8379df0ce74ef323888847dee5a66d83f3d1cb1af2c0dfeb11e69afe47f831b9",
+      "bounds": {
+        "min": [
+          -0.5837419033050537,
+          0.0,
+          -0.4324650764465332
+        ],
+        "max": [
+          0.5837419033050537,
+          1.809999942779541,
+          0.47999998927116394
+        ]
+      },
+      "parts": [
+        "fluted_robe",
+        "sweeping_sleeve-1",
+        "sweeping_sleeve1",
+        "skull",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "mouth",
+        "streaming_hair-10",
+        "streaming_hair-11",
+        "streaming_hair10",
+        "streaming_hair11"
+      ]
+    },
+    {
+      "kind": "bonecrow",
+      "family": "avian",
+      "file": "fauna-bonecrow.glb",
+      "size": 0.55,
+      "triangles": 716,
+      "materials": 1,
+      "bytes": 72528,
+      "sha256": "26e00bb65ff6409ccd725294593eef822eddebdac62a2a84fc046c5b7171540b",
+      "bounds": {
+        "min": [
+          -0.8562726974487305,
+          0.0,
+          -0.47999998927116394
+        ],
+        "max": [
+          0.8562726974487305,
+          1.2820290327072144,
+          0.6100000143051147
+        ]
+      },
+      "parts": [
+        "breast",
+        "head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "beak",
+        "wing-1",
+        "wing-1_finger",
+        "wing1",
+        "wing1_finger",
+        "bird_leg-1",
+        "toe-1",
+        "bird_leg1",
+        "toe1"
+      ]
+    },
+    {
+      "kind": "brine_troll",
+      "family": "humanoid",
+      "file": "fauna-brine_troll.glb",
+      "size": 1.15,
+      "triangles": 768,
+      "materials": 2,
+      "bytes": 80472,
+      "sha256": "70669fe784f9ef9d93e8d6bf1be856e93963e5fc8cf4695fe4dfa5698961a7bb",
+      "bounds": {
+        "min": [
+          -0.5903264284133911,
+          0.0,
+          -0.3100000023841858
+        ],
+        "max": [
+          0.5903264284133911,
+          1.8799999952316284,
+          0.3799999952316284
+        ]
+      },
+      "parts": [
+        "muscular_torso",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_1_0",
+        "paw_1_0",
+        "long_arm-10",
+        "long_arm-11",
+        "long_arm10",
+        "long_arm11",
+        "head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "mouth",
+        "lower_tusk-1",
+        "lower_tusk1",
+        "spine_0",
+        "spine_1"
+      ]
+    },
+    {
+      "kind": "stonefang_ogre",
+      "family": "humanoid",
+      "file": "fauna-stonefang_ogre.glb",
+      "size": 1.05,
+      "triangles": 808,
+      "materials": 2,
+      "bytes": 84596,
+      "sha256": "954caa07fdc8ea7e7b25be1a42be04ade007dd32058a6f65953556a57438c1a0",
+      "bounds": {
+        "min": [
+          -0.5903264284133911,
+          0.0,
+          -0.24727469682693481
+        ],
+        "max": [
+          0.7707006931304932,
+          1.8799999952316284,
+          0.3921690583229065
+        ]
+      },
+      "parts": [
+        "muscular_torso",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_1_0",
+        "paw_1_0",
+        "long_arm-10",
+        "long_arm-11",
+        "long_arm10",
+        "long_arm11",
+        "head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "mouth",
+        "lower_tusk-1",
+        "lower_tusk1",
+        "stone_club"
+      ]
+    },
+    {
+      "kind": "orc_marauder",
+      "family": "humanoid",
+      "file": "fauna-orc_marauder.glb",
+      "size": 0.98,
+      "triangles": 1036,
+      "materials": 2,
+      "bytes": 108048,
+      "sha256": "4dec0a3c4fa9ae81c9a776966bc7d9af4a006dc97d546a81e405e89eaf4fc82d",
+      "bounds": {
+        "min": [
+          -0.845806360244751,
+          0.0,
+          -0.24727469682693481
+        ],
+        "max": [
+          0.7300000190734863,
+          1.8799999952316284,
+          0.3799999952316284
+        ]
+      },
+      "parts": [
+        "muscular_torso",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_1_0",
+        "paw_1_0",
+        "long_arm-10",
+        "long_arm-11",
+        "long_arm10",
+        "long_arm11",
+        "head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "mouth",
+        "breastplate",
+        "pauldron-1",
+        "pauldron1",
+        "shield",
+        "blade",
+        "crossguard",
+        "lower_tusk-1",
+        "lower_tusk1"
+      ]
+    },
+    {
+      "kind": "oak_bear",
+      "family": "stocky",
+      "file": "fauna-oak_bear.glb",
+      "size": 0.92,
+      "triangles": 1120,
+      "materials": 1,
+      "bytes": 117024,
+      "sha256": "f7c3e25e5a4b1b4d6527ec58b7e5edf4dcba3c749d59d402850467d2cca8db44",
+      "bounds": {
+        "min": [
+          -0.45589208602905273,
+          0.0,
+          -0.6181867122650146
+        ],
+        "max": [
+          0.45589208602905273,
+          1.149999976158142,
+          1.140650749206543
+        ]
+      },
+      "parts": [
+        "heavy_flank",
+        "heavy_head",
+        "muzzle",
+        "nose",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "round_ear_-1",
+        "round_ear_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1"
+      ]
+    },
+    {
+      "kind": "frosthorn_ram",
+      "family": "stocky",
+      "file": "fauna-frosthorn_ram.glb",
+      "size": 0.68,
+      "triangles": 1496,
+      "materials": 1,
+      "bytes": 150280,
+      "sha256": "b2d2714cfe69b5bc684906b408144dbd0b8d9c130b40bba11476909038ff6dfc",
+      "bounds": {
+        "min": [
+          -0.45589208602905273,
+          0.0,
+          -0.6181867122650146
+        ],
+        "max": [
+          0.45589208602905273,
+          1.1777440309524536,
+          1.140650749206543
+        ]
+      },
+      "parts": [
+        "heavy_flank",
+        "heavy_head",
+        "muzzle",
+        "nose",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "pointed_ear_-1",
+        "pointed_ear_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "curled_horn-10",
+        "curled_horn-11",
+        "curled_horn-12",
+        "curled_horn-13",
+        "curled_horn-14",
+        "curled_horn-15",
+        "curled_horn10",
+        "curled_horn11",
+        "curled_horn12",
+        "curled_horn13",
+        "curled_horn14",
+        "curled_horn15",
+        "wool-0.35",
+        "wool0",
+        "wool0.3"
+      ]
+    },
+    {
+      "kind": "fen_leech",
+      "family": "worm",
+      "file": "fauna-fen_leech.glb",
+      "size": 0.58,
+      "triangles": 576,
+      "materials": 1,
+      "bytes": 62024,
+      "sha256": "4d56ed4aa8959156bd5e588a53e214c749b1e4db615778fc8b17431a2b9d487a",
+      "bounds": {
+        "min": [
+          -0.27580639719963074,
+          0.0,
+          -0.8802112936973572
+        ],
+        "max": [
+          0.27580639719963074,
+          0.48000001907348633,
+          0.8923359513282776
+        ]
+      },
+      "parts": [
+        "leech_segment0",
+        "leech_segment1",
+        "leech_segment2",
+        "leech_segment3",
+        "leech_segment4",
+        "leech_segment5",
+        "leech_segment6",
+        "feeding_disc",
+        "maw"
+      ]
+    },
+    {
+      "kind": "tideclaw_crab",
+      "family": "arthropod",
+      "file": "fauna-tideclaw_crab.glb",
+      "size": 0.62,
+      "triangles": 1120,
+      "materials": 1,
+      "bytes": 108596,
+      "sha256": "e37c3d89659e52be8d94c05e06b54ca3409b8aed58cd8628ec55d5cad11b44b4",
+      "bounds": {
+        "min": [
+          -0.9507007002830505,
+          0.0,
+          -0.5710765719413757
+        ],
+        "max": [
+          0.9507007002830505,
+          0.6513532996177673,
+          1.1529961824417114
+        ]
+      },
+      "parts": [
+        "carapace",
+        "cephalothorax",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "jointed_leg-100",
+        "jointed_leg-101",
+        "jointed_leg-110",
+        "jointed_leg-111",
+        "jointed_leg-120",
+        "jointed_leg-121",
+        "claw_arm-10",
+        "claw_arm-11",
+        "pincer_palm-1",
+        "pincer_finger-1-0.1",
+        "pincer_finger-10.1",
+        "jointed_leg100",
+        "jointed_leg101",
+        "jointed_leg110",
+        "jointed_leg111",
+        "jointed_leg120",
+        "jointed_leg121",
+        "claw_arm10",
+        "claw_arm11",
+        "pincer_palm1",
+        "pincer_finger1-0.1",
+        "pincer_finger10.1"
+      ]
+    },
+    {
+      "kind": "cavern_bat",
+      "family": "chiropteran",
+      "file": "fauna-cavern_bat.glb",
+      "size": 0.5,
+      "triangles": 728,
+      "materials": 1,
+      "bytes": 73868,
+      "sha256": "b45a14ba673954cf8ac40a8138488c8941bad275365eb602d1055844735d3050",
+      "bounds": {
+        "min": [
+          -1.3537013530731201,
+          3.725290298461914e-09,
+          -0.47999998927116394
+        ],
+        "max": [
+          1.3537013530731201,
+          1.3066177368164062,
+          0.45551058650016785
+        ]
+      },
+      "parts": [
+        "breast",
+        "head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "pointed_ear_-1",
+        "pointed_ear_1",
+        "wing-1",
+        "wing-1_finger",
+        "wing1",
+        "wing1_finger",
+        "bat_hindleg-1",
+        "bat_claw-1",
+        "bat_hindleg1",
+        "bat_claw1"
+      ]
+    },
+    {
+      "kind": "tomb_sentinel",
+      "family": "humanoid",
+      "file": "fauna-tomb_sentinel.glb",
+      "size": 0.92,
+      "triangles": 1012,
+      "materials": 2,
+      "bytes": 105444,
+      "sha256": "da21333a75782f6e9f2291128f74eb28df627795538096a2de1a7f377e97d0cd",
+      "bounds": {
+        "min": [
+          -0.845806360244751,
+          0.0,
+          -0.24727469682693481
+        ],
+        "max": [
+          0.7300000190734863,
+          1.8799999952316284,
+          0.3698253631591797
+        ]
+      },
+      "parts": [
+        "muscular_torso",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_1_0",
+        "paw_1_0",
+        "long_arm-10",
+        "long_arm-11",
+        "long_arm10",
+        "long_arm11",
+        "head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "mouth",
+        "breastplate",
+        "pauldron-1",
+        "pauldron1",
+        "shield",
+        "blade",
+        "crossguard"
+      ]
+    },
+    {
+      "kind": "cinder_drake",
+      "family": "reptile",
+      "file": "fauna-cinder_drake.glb",
+      "size": 0.92,
+      "triangles": 916,
+      "materials": 2,
+      "bytes": 93856,
+      "sha256": "a4372132044b39a3d5bd4b635b98e729294fcacbf6e683c672ecf7e8f27dda10",
+      "bounds": {
+        "min": [
+          -1.0648692846298218,
+          0.0,
+          -1.3998056650161743
+        ],
+        "max": [
+          1.0648692846298218,
+          1.1349999904632568,
+          0.9998253583908081
+        ]
+      },
+      "parts": [
+        "low_body",
+        "broad_head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "tail_0",
+        "tail_1",
+        "spine_0",
+        "spine_1",
+        "spine_2",
+        "drake_wing-1",
+        "drake_wing-1_finger",
+        "drake_wing1",
+        "drake_wing1_finger"
+      ]
+    },
+    {
+      "kind": "willow_wisp",
+      "family": "spirit",
+      "file": "fauna-willow_wisp.glb",
+      "size": 0.48,
+      "triangles": 624,
+      "materials": 3,
+      "bytes": 68440,
+      "sha256": "029d55a1f8c01712ed4f079de476b417b529fb272d7acc9d01d28e73d1b01fdc",
+      "bounds": {
+        "min": [
+          -0.5403503775596619,
+          0.0,
+          -0.3423803746700287
+        ],
+        "max": [
+          0.5403503775596619,
+          1.123058557510376,
+          0.4055105745792389
+        ]
+      },
+      "parts": [
+        "lantern_heart",
+        "wandering_spark-1",
+        "wandering_spark1",
+        "willow_flame0",
+        "willow_flame1",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1"
+      ]
+    },
+    {
+      "kind": "blackbriar_hag",
+      "family": "humanoid",
+      "file": "fauna-blackbriar_hag.glb",
+      "size": 1.12,
+      "triangles": 692,
+      "materials": 3,
+      "bytes": 73004,
+      "sha256": "c531fbcba09faefee9e9b71ffdb7fa39052cfaf702ab22646ea01bb101979a20",
+      "bounds": {
+        "min": [
+          -0.5837419033050537,
+          0.0,
+          -0.4324650764465332
+        ],
+        "max": [
+          0.6993714570999146,
+          2.2023189067840576,
+          0.5302031636238098
+        ]
+      },
+      "parts": [
+        "fluted_robe",
+        "sweeping_sleeve-1",
+        "sweeping_sleeve1",
+        "head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "mouth",
+        "crooked_hat",
+        "hooked_nose",
+        "gripping_hand",
+        "gnarled_staff0",
+        "gnarled_staff1",
+        "gnarled_staff2",
+        "staff_heart"
+      ]
+    },
+    {
+      "kind": "rime_revenant",
+      "family": "spirit",
+      "file": "fauna-rime_revenant.glb",
+      "size": 1.12,
+      "triangles": 492,
+      "materials": 2,
+      "bytes": 53024,
+      "sha256": "e52dc39b5de964f29d2d2208a77e3e7d7effab811582fabf45a770441f50f6eb",
+      "bounds": {
+        "min": [
+          -0.5837419033050537,
+          0.0,
+          -0.4324650764465332
+        ],
+        "max": [
+          0.5837419033050537,
+          2.0900001525878906,
+          0.47999998927116394
+        ]
+      },
+      "parts": [
+        "fluted_robe",
+        "sweeping_sleeve-1",
+        "sweeping_sleeve1",
+        "skull",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "mouth",
+        "crown-1",
+        "crown0",
+        "crown1"
+      ]
+    },
+    {
+      "kind": "fen_ghoul",
+      "family": "humanoid",
+      "file": "fauna-fen_ghoul.glb",
+      "size": 1.02,
+      "triangles": 720,
+      "materials": 2,
+      "bytes": 75252,
+      "sha256": "3764bf2f3baec0028590b879a17021849405a8f544cd97c5ac512b2de3f1af27",
+      "bounds": {
+        "min": [
+          -0.5897606015205383,
+          0.0,
+          -0.24727469682693481
+        ],
+        "max": [
+          0.5897606015205383,
+          1.6299999952316284,
+          0.48982536792755127
+        ]
+      },
+      "parts": [
+        "muscular_torso",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_1_0",
+        "paw_1_0",
+        "long_arm-10",
+        "long_arm-11",
+        "long_arm10",
+        "long_arm11",
+        "head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "mouth"
+      ]
+    },
+    {
+      "kind": "drowned_reaver",
+      "family": "humanoid",
+      "file": "fauna-drowned_reaver.glb",
+      "size": 1.18,
+      "triangles": 1012,
+      "materials": 2,
+      "bytes": 105448,
+      "sha256": "0f05f31d3f8bf9c446b24776ef6d77c6ab4cda94de9d5a5488afccf8f989f6fc",
+      "bounds": {
+        "min": [
+          -0.845806360244751,
+          0.0,
+          -0.24727469682693481
+        ],
+        "max": [
+          0.7300000190734863,
+          1.8799999952316284,
+          0.3698253631591797
+        ]
+      },
+      "parts": [
+        "muscular_torso",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_1_0",
+        "paw_1_0",
+        "long_arm-10",
+        "long_arm-11",
+        "long_arm10",
+        "long_arm11",
+        "head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "mouth",
+        "breastplate",
+        "pauldron-1",
+        "pauldron1",
+        "shield",
+        "blade",
+        "crossguard"
+      ]
+    },
+    {
+      "kind": "deepmaw_basilisk",
+      "family": "reptile",
+      "file": "fauna-deepmaw_basilisk.glb",
+      "size": 1.12,
+      "triangles": 1020,
+      "materials": 2,
+      "bytes": 105940,
+      "sha256": "ac6995209f23a3f10942aa56aa6d9eb76eedcba477af9d1a31be5285cf9e6c54",
+      "bounds": {
+        "min": [
+          -0.4897797405719757,
+          0.0,
+          -1.3998056650161743
+        ],
+        "max": [
+          0.4897797405719757,
+          1.0199999809265137,
+          1.0099999904632568
+        ]
+      },
+      "parts": [
+        "low_body",
+        "broad_head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "tail_0",
+        "tail_1",
+        "spine_0",
+        "spine_1",
+        "spine_2",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_1_0",
+        "paw_1_0",
+        "fang-1",
+        "fang1"
+      ]
+    },
+    {
+      "kind": "ossuary_knight",
+      "family": "humanoid",
+      "file": "fauna-ossuary_knight.glb",
+      "size": 1.24,
+      "triangles": 1204,
+      "materials": 2,
+      "bytes": 125612,
+      "sha256": "ccb7c57ea09c22d109f26b8343bb150956dc35f0225e6c785d406fbd4d75d69d",
+      "bounds": {
+        "min": [
+          -0.845806360244751,
+          0.0,
+          -0.24727469682693481
+        ],
+        "max": [
+          0.7300000190734863,
+          1.8799999952316284,
+          0.3698253631591797
+        ]
+      },
+      "parts": [
+        "muscular_torso",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_1_0",
+        "paw_1_0",
+        "long_arm-10",
+        "long_arm-11",
+        "long_arm10",
+        "long_arm11",
+        "head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "mouth",
+        "breastplate",
+        "pauldron-1",
+        "pauldron1",
+        "shield",
+        "blade",
+        "crossguard",
+        "rib_armor0.9",
+        "rib_armor1.04",
+        "rib_armor1.18"
+      ]
+    },
+    {
+      "kind": "ash_demon",
+      "family": "humanoid",
+      "file": "fauna-ash_demon.glb",
+      "size": 1.38,
+      "triangles": 912,
+      "materials": 2,
+      "bytes": 91184,
+      "sha256": "2fa7105f87616bd520308473e7df2b72c51abc7b3919caf760862d4115209c6f",
+      "bounds": {
+        "min": [
+          -1.015146017074585,
+          0.0,
+          -0.47999998927116394
+        ],
+        "max": [
+          1.015146017074585,
+          2.33180832862854,
+          0.3698253631591797
+        ]
+      },
+      "parts": [
+        "muscular_torso",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_1_0",
+        "paw_1_0",
+        "long_arm-10",
+        "long_arm-11",
+        "long_arm10",
+        "long_arm11",
+        "head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "mouth",
+        "demon_horn-10",
+        "demon_horn-11",
+        "demon_wing-1",
+        "demon_wing-1_finger",
+        "demon_horn10",
+        "demon_horn11",
+        "demon_wing1",
+        "demon_wing1_finger"
+      ]
+    },
+    {
+      "kind": "grave_lich",
+      "family": "humanoid",
+      "file": "fauna-grave_lich.glb",
+      "size": 1.3,
+      "triangles": 692,
+      "materials": 3,
+      "bytes": 73672,
+      "sha256": "8da4a7f5ba65028720d34b125373b34979bce1e5b613ac1b0894c1cc475956f4",
+      "bounds": {
+        "min": [
+          -0.5837419033050537,
+          0.0,
+          -0.4324650764465332
+        ],
+        "max": [
+          0.6993714570999146,
+          2.122319221496582,
+          0.47999998927116394
+        ]
+      },
+      "parts": [
+        "fluted_robe",
+        "sweeping_sleeve-1",
+        "sweeping_sleeve1",
+        "skull",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "mouth",
+        "crown-1",
+        "crown0",
+        "crown1",
+        "gripping_hand",
+        "gnarled_staff0",
+        "gnarled_staff1",
+        "gnarled_staff2",
+        "staff_heart"
+      ]
+    },
+    {
+      "kind": "redtail_squirrel",
+      "family": "small_mammal",
+      "file": "fauna-redtail_squirrel.glb",
+      "size": 0.36,
+      "triangles": 1192,
+      "materials": 1,
+      "bytes": 123036,
+      "sha256": "feb5df446c1a8d34934f5127f3a77162a1305fd932fd31eca4e0b4d6d324ee4b",
+      "bounds": {
+        "min": [
+          -0.3185572624206543,
+          0.0,
+          -0.956983208656311
+        ],
+        "max": [
+          0.3185572624206543,
+          1.4401895999908447,
+          0.890650749206543
+        ]
+      },
+      "parts": [
+        "soft_body",
+        "round_head",
+        "muzzle",
+        "nose",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "round_ear_-1",
+        "round_ear_1",
+        "tail_0",
+        "tail_1",
+        "tail_2",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1"
+      ]
+    },
+    {
+      "kind": "whiteback_elk",
+      "family": "cervid",
+      "file": "fauna-whiteback_elk.glb",
+      "size": 0.84,
+      "triangles": 1368,
+      "materials": 1,
+      "bytes": 136836,
+      "sha256": "737a2757e87ba6cba53ba27ac836afb4a6a6f02b29371824e5d8cc8d63c51c07",
+      "bounds": {
+        "min": [
+          -0.7043420076370239,
+          0.0,
+          -0.815258800983429
+        ],
+        "max": [
+          0.7043420076370239,
+          2.1756043434143066,
+          1.1606507301330566
+        ]
+      },
+      "parts": [
+        "deer_flank",
+        "rising_neck",
+        "deer_head",
+        "muzzle",
+        "nose",
+        "pointed_ear_-1",
+        "pointed_ear_1",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "tail_0",
+        "antler_-10",
+        "antler_-11",
+        "antler_-12",
+        "antler_tine_-10",
+        "antler_tine_-11",
+        "antler_10",
+        "antler_11",
+        "antler_12",
+        "antler_tine_10",
+        "antler_tine_11",
+        "white_saddle"
+      ]
+    },
+    {
+      "kind": "highland_aurochs",
+      "family": "stocky",
+      "file": "fauna-highland_aurochs.glb",
+      "size": 1.02,
+      "triangles": 1176,
+      "materials": 1,
+      "bytes": 120912,
+      "sha256": "591347a7e671d346d2e6d4bd5655186f8ee490b7cf33b35c34268345bd73372a",
+      "bounds": {
+        "min": [
+          -0.8144102096557617,
+          0.0,
+          -0.6181867122650146
+        ],
+        "max": [
+          0.8144102096557617,
+          1.3684313297271729,
+          1.140650749206543
+        ]
+      },
+      "parts": [
+        "heavy_flank",
+        "heavy_head",
+        "muzzle",
+        "nose",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "pointed_ear_-1",
+        "pointed_ear_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1",
+        "shaggy_hump",
+        "swept_horn-10",
+        "swept_horn-11",
+        "swept_horn10",
+        "swept_horn11"
+      ]
+    },
+    {
+      "kind": "reed_heron",
+      "family": "avian",
+      "file": "fauna-reed_heron.glb",
+      "size": 0.68,
+      "triangles": 796,
+      "materials": 1,
+      "bytes": 81992,
+      "sha256": "8897e3e7cb79c0146a9a4cc67f28fa7b5022c2631a58efb6112c616185ee07fa",
+      "bounds": {
+        "min": [
+          -0.4241267740726471,
+          0.0,
+          -0.3928698003292084
+        ],
+        "max": [
+          0.4241267740726471,
+          2.022028923034668,
+          0.8799999952316284
+        ]
+      },
+      "parts": [
+        "breast",
+        "curved_neck0",
+        "curved_neck1",
+        "head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "beak",
+        "folded_wing-1",
+        "folded_wing1",
+        "bird_leg-1",
+        "toe-1",
+        "bird_leg1",
+        "toe1"
+      ]
+    },
+    {
+      "kind": "river_otter",
+      "family": "small_mammal",
+      "file": "fauna-river_otter.glb",
+      "size": 0.52,
+      "triangles": 1168,
+      "materials": 1,
+      "bytes": 121024,
+      "sha256": "e0a01ed984cabb6ab7cc09a8a9b228ebd868d9f30663c74fa8b2ba2c7ad40ebb",
+      "bounds": {
+        "min": [
+          -0.3185572624206543,
+          0.0,
+          -1.3805391788482666
+        ],
+        "max": [
+          0.3185572624206543,
+          0.8600000143051147,
+          1.0906506776809692
+        ]
+      },
+      "parts": [
+        "soft_body",
+        "round_head",
+        "muzzle",
+        "nose",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "round_ear_-1",
+        "round_ear_1",
+        "tail_0",
+        "tail_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1"
+      ]
+    },
+    {
+      "kind": "brine_seal",
+      "family": "small_mammal",
+      "file": "fauna-brine_seal.glb",
+      "size": 0.72,
+      "triangles": 896,
+      "materials": 1,
+      "bytes": 95612,
+      "sha256": "0573c0aa9873b2236f31d1ae0cd20e715f336771c24db330a9c6d7163e7f0398",
+      "bounds": {
+        "min": [
+          -0.6153169870376587,
+          0.0,
+          -0.8958064317703247
+        ],
+        "max": [
+          0.6153169870376587,
+          0.75,
+          1.0906506776809692
+        ]
+      },
+      "parts": [
+        "soft_body",
+        "round_head",
+        "muzzle",
+        "nose",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "flipper-1",
+        "flipper1",
+        "tail_fluke-1",
+        "tail_fluke1"
+      ]
+    },
+    {
+      "kind": "cave_mole",
+      "family": "small_mammal",
+      "file": "fauna-cave_mole.glb",
+      "size": 0.4,
+      "triangles": 768,
+      "materials": 1,
+      "bytes": 82168,
+      "sha256": "efc131b197153ff0b6d220eb0f2efae7fc57e150f414d7c8cb991462aa8f27ec",
+      "bounds": {
+        "min": [
+          -0.6153169870376587,
+          0.0,
+          -0.4589543342590332
+        ],
+        "max": [
+          0.6153169870376587,
+          0.75,
+          1.0906506776809692
+        ]
+      },
+      "parts": [
+        "soft_body",
+        "round_head",
+        "muzzle",
+        "nose",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "flipper-1",
+        "flipper1"
+      ]
+    },
+    {
+      "kind": "dusk_owl",
+      "family": "avian",
+      "file": "fauna-dusk_owl.glb",
+      "size": 0.58,
+      "triangles": 1004,
+      "materials": 2,
+      "bytes": 106160,
+      "sha256": "6fbe9f5d9762ff65de69ab89986c51197ada541bd387971619360a16db1eace3",
+      "bounds": {
+        "min": [
+          -0.4241267740726471,
+          0.0,
+          -0.3928698003292084
+        ],
+        "max": [
+          0.4241267740726471,
+          1.2820290327072144,
+          0.6100000143051147
+        ]
+      },
+      "parts": [
+        "breast",
+        "head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "beak",
+        "folded_wing-1",
+        "folded_wing1",
+        "bird_leg-1",
+        "toe-1",
+        "bird_leg1",
+        "toe1",
+        "facial_disk-1",
+        "facial_disk1",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1"
+      ]
+    },
+    {
+      "kind": "field_rat",
+      "family": "small_mammal",
+      "file": "fauna-field_rat.glb",
+      "size": 0.38,
+      "triangles": 1168,
+      "materials": 1,
+      "bytes": 121016,
+      "sha256": "dbcbd8001aacb5246b44d0f7c8cc13800e9a19aec5998482620318e7cf9a3403",
+      "bounds": {
+        "min": [
+          -0.3185572624206543,
+          0.0,
+          -1.3576347827911377
+        ],
+        "max": [
+          0.3185572624206543,
+          0.8600000143051147,
+          1.0906506776809692
+        ]
+      },
+      "parts": [
+        "soft_body",
+        "round_head",
+        "muzzle",
+        "nose",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_glint_-1",
+        "eye_socket_1",
+        "eye_1",
+        "eye_glint_1",
+        "round_ear_-1",
+        "round_ear_1",
+        "tail_0",
+        "tail_1",
+        "leg_-1_0",
+        "paw_-1_0",
+        "leg_-1_1",
+        "paw_-1_1",
+        "leg_1_0",
+        "paw_1_0",
+        "leg_1_1",
+        "paw_1_1"
+      ]
+    }
+  ]
+}

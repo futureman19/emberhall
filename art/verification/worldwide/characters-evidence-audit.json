@@ -1,0 +1,622 @@
+{
+  "scope": "Cleared disposable single-NPC fixtures for five classes and three roles with null homes (outside the old civic policy). Actual mouse/touch ground selection, ordinary walking/approach, real Talk buttons for services. NPC locomotion uses a fixture path and normal fixed world substeps, not natural AI. Original NPC body control and real rejected GLB. Built mode does not import source. Normal camera; no physical-phone, complete animation, dense-scene or performance acceptance.",
+  "tests": 895,
+  "verified_cases": 8,
+  "device_mode_cases": 64,
+  "browser_checks": {
+    "candidate": 204,
+    "control": 204,
+    "failure": 203,
+    "built": 156
+  },
+  "browser_checks_total": 767,
+  "render_motion_record_parity": "All case fixture and NPC path start/end fields equal across modes except hunger/energy, which differed during pre-fixture loading. Full-person parity is false; no whole-world parity claim.",
+  "full_person_parity": false,
+  "non_render_field_differences": {
+    "hunger": 144,
+    "energy": 144
+  },
+  "first_parity_record": "characters-parity-first.json",
+  "source_checkpoint": "characters-source-checkpoint.json",
+  "checkpoint_file_count": 289,
+  "unchanged_checkpoint_files": true,
+  "asset": {
+    "url": "/art/lanternwood/character.glb",
+    "sha256": "4c08799d4ebc2de738783a148d7538f069974b059ce12b1d4feb0518ed21566b",
+    "bytes": 231732,
+    "prior_source_built_served_match": true
+  },
+  "built_freshness": "characters-built-freshness.json",
+  "records": [
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "id": "ranger",
+      "passed": true,
+      "evidence": "characters-candidate-final/results.json",
+      "standing": "characters-candidate-final/desktop-ranger-standing.png",
+      "walking": "characters-candidate-final/desktop-ranger-walking.png"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "id": "warrior",
+      "passed": true,
+      "evidence": "characters-candidate-final/results.json",
+      "standing": "characters-candidate-final/desktop-warrior-standing.png",
+      "walking": "characters-candidate-final/desktop-warrior-walking.png"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "id": "mage",
+      "passed": true,
+      "evidence": "characters-candidate-final/results.json",
+      "standing": "characters-candidate-final/desktop-mage-standing.png",
+      "walking": "characters-candidate-final/desktop-mage-walking.png"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "id": "rogue",
+      "passed": true,
+      "evidence": "characters-candidate-final/results.json",
+      "standing": "characters-candidate-final/desktop-rogue-standing.png",
+      "walking": "characters-candidate-final/desktop-rogue-walking.png"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "id": "merchant",
+      "passed": true,
+      "evidence": "characters-candidate-final/results.json",
+      "standing": "characters-candidate-final/desktop-merchant-standing.png",
+      "walking": "characters-candidate-final/desktop-merchant-walking.png"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "id": "banker",
+      "passed": true,
+      "evidence": "characters-candidate-final/results.json",
+      "standing": "characters-candidate-final/desktop-banker-standing.png",
+      "walking": "characters-candidate-final/desktop-banker-walking.png"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "id": "provisioner",
+      "passed": true,
+      "evidence": "characters-candidate-final/results.json",
+      "standing": "characters-candidate-final/desktop-provisioner-standing.png",
+      "walking": "characters-candidate-final/desktop-provisioner-walking.png"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "id": "healer",
+      "passed": true,
+      "evidence": "characters-candidate-final/results.json",
+      "standing": "characters-candidate-final/desktop-healer-standing.png",
+      "walking": "characters-candidate-final/desktop-healer-walking.png"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "id": "ranger",
+      "passed": true,
+      "evidence": "characters-candidate-final/results.json",
+      "standing": "characters-candidate-final/mobile-ranger-standing.png",
+      "walking": "characters-candidate-final/mobile-ranger-walking.png"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "id": "warrior",
+      "passed": true,
+      "evidence": "characters-candidate-final/results.json",
+      "standing": "characters-candidate-final/mobile-warrior-standing.png",
+      "walking": "characters-candidate-final/mobile-warrior-walking.png"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "id": "mage",
+      "passed": true,
+      "evidence": "characters-candidate-final/results.json",
+      "standing": "characters-candidate-final/mobile-mage-standing.png",
+      "walking": "characters-candidate-final/mobile-mage-walking.png"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "id": "rogue",
+      "passed": true,
+      "evidence": "characters-candidate-final/results.json",
+      "standing": "characters-candidate-final/mobile-rogue-standing.png",
+      "walking": "characters-candidate-final/mobile-rogue-walking.png"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "id": "merchant",
+      "passed": true,
+      "evidence": "characters-candidate-final/results.json",
+      "standing": "characters-candidate-final/mobile-merchant-standing.png",
+      "walking": "characters-candidate-final/mobile-merchant-walking.png"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "id": "banker",
+      "passed": true,
+      "evidence": "characters-candidate-final/results.json",
+      "standing": "characters-candidate-final/mobile-banker-standing.png",
+      "walking": "characters-candidate-final/mobile-banker-walking.png"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "id": "provisioner",
+      "passed": true,
+      "evidence": "characters-candidate-final/results.json",
+      "standing": "characters-candidate-final/mobile-provisioner-standing.png",
+      "walking": "characters-candidate-final/mobile-provisioner-walking.png"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "id": "healer",
+      "passed": true,
+      "evidence": "characters-candidate-final/results.json",
+      "standing": "characters-candidate-final/mobile-healer-standing.png",
+      "walking": "characters-candidate-final/mobile-healer-walking.png"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "ranger",
+      "passed": true,
+      "evidence": "characters-control-final/results.json",
+      "standing": "characters-control-final/desktop-ranger-standing.png",
+      "walking": "characters-control-final/desktop-ranger-walking.png"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "warrior",
+      "passed": true,
+      "evidence": "characters-control-final/results.json",
+      "standing": "characters-control-final/desktop-warrior-standing.png",
+      "walking": "characters-control-final/desktop-warrior-walking.png"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "mage",
+      "passed": true,
+      "evidence": "characters-control-final/results.json",
+      "standing": "characters-control-final/desktop-mage-standing.png",
+      "walking": "characters-control-final/desktop-mage-walking.png"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "rogue",
+      "passed": true,
+      "evidence": "characters-control-final/results.json",
+      "standing": "characters-control-final/desktop-rogue-standing.png",
+      "walking": "characters-control-final/desktop-rogue-walking.png"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "merchant",
+      "passed": true,
+      "evidence": "characters-control-final/results.json",
+      "standing": "characters-control-final/desktop-merchant-standing.png",
+      "walking": "characters-control-final/desktop-merchant-walking.png"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "banker",
+      "passed": true,
+      "evidence": "characters-control-final/results.json",
+      "standing": "characters-control-final/desktop-banker-standing.png",
+      "walking": "characters-control-final/desktop-banker-walking.png"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "provisioner",
+      "passed": true,
+      "evidence": "characters-control-final/results.json",
+      "standing": "characters-control-final/desktop-provisioner-standing.png",
+      "walking": "characters-control-final/desktop-provisioner-walking.png"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "healer",
+      "passed": true,
+      "evidence": "characters-control-final/results.json",
+      "standing": "characters-control-final/desktop-healer-standing.png",
+      "walking": "characters-control-final/desktop-healer-walking.png"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "ranger",
+      "passed": true,
+      "evidence": "characters-control-final/results.json",
+      "standing": "characters-control-final/mobile-ranger-standing.png",
+      "walking": "characters-control-final/mobile-ranger-walking.png"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "warrior",
+      "passed": true,
+      "evidence": "characters-control-final/results.json",
+      "standing": "characters-control-final/mobile-warrior-standing.png",
+      "walking": "characters-control-final/mobile-warrior-walking.png"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "mage",
+      "passed": true,
+      "evidence": "characters-control-final/results.json",
+      "standing": "characters-control-final/mobile-mage-standing.png",
+      "walking": "characters-control-final/mobile-mage-walking.png"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "rogue",
+      "passed": true,
+      "evidence": "characters-control-final/results.json",
+      "standing": "characters-control-final/mobile-rogue-standing.png",
+      "walking": "characters-control-final/mobile-rogue-walking.png"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "merchant",
+      "passed": true,
+      "evidence": "characters-control-final/results.json",
+      "standing": "characters-control-final/mobile-merchant-standing.png",
+      "walking": "characters-control-final/mobile-merchant-walking.png"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "banker",
+      "passed": true,
+      "evidence": "characters-control-final/results.json",
+      "standing": "characters-control-final/mobile-banker-standing.png",
+      "walking": "characters-control-final/mobile-banker-walking.png"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "provisioner",
+      "passed": true,
+      "evidence": "characters-control-final/results.json",
+      "standing": "characters-control-final/mobile-provisioner-standing.png",
+      "walking": "characters-control-final/mobile-provisioner-walking.png"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "healer",
+      "passed": true,
+      "evidence": "characters-control-final/results.json",
+      "standing": "characters-control-final/mobile-healer-standing.png",
+      "walking": "characters-control-final/mobile-healer-walking.png"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "ranger",
+      "passed": true,
+      "evidence": "characters-failure-final/results.json",
+      "standing": "characters-failure-final/desktop-ranger-standing.png",
+      "walking": "characters-failure-final/desktop-ranger-walking.png"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "warrior",
+      "passed": true,
+      "evidence": "characters-failure-final/results.json",
+      "standing": "characters-failure-final/desktop-warrior-standing.png",
+      "walking": "characters-failure-final/desktop-warrior-walking.png"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "mage",
+      "passed": true,
+      "evidence": "characters-failure-final/results.json",
+      "standing": "characters-failure-final/desktop-mage-standing.png",
+      "walking": "characters-failure-final/desktop-mage-walking.png"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "rogue",
+      "passed": true,
+      "evidence": "characters-failure-final/results.json",
+      "standing": "characters-failure-final/desktop-rogue-standing.png",
+      "walking": "characters-failure-final/desktop-rogue-walking.png"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "merchant",
+      "passed": true,
+      "evidence": "characters-failure-final/results.json",
+      "standing": "characters-failure-final/desktop-merchant-standing.png",
+      "walking": "characters-failure-final/desktop-merchant-walking.png"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "banker",
+      "passed": true,
+      "evidence": "characters-failure-final/results.json",
+      "standing": "characters-failure-final/desktop-banker-standing.png",
+      "walking": "characters-failure-final/desktop-banker-walking.png"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "provisioner",
+      "passed": true,
+      "evidence": "characters-failure-final/results.json",
+      "standing": "characters-failure-final/desktop-provisioner-standing.png",
+      "walking": "characters-failure-final/desktop-provisioner-walking.png"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "healer",
+      "passed": true,
+      "evidence": "characters-failure-final/results.json",
+      "standing": "characters-failure-final/desktop-healer-standing.png",
+      "walking": "characters-failure-final/desktop-healer-walking.png"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "ranger",
+      "passed": true,
+      "evidence": "characters-failure-final/results.json",
+      "standing": "characters-failure-final/mobile-ranger-standing.png",
+      "walking": "characters-failure-final/mobile-ranger-walking.png"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "warrior",
+      "passed": true,
+      "evidence": "characters-failure-final/results.json",
+      "standing": "characters-failure-final/mobile-warrior-standing.png",
+      "walking": "characters-failure-final/mobile-warrior-walking.png"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "mage",
+      "passed": true,
+      "evidence": "characters-failure-final/results.json",
+      "standing": "characters-failure-final/mobile-mage-standing.png",
+      "walking": "characters-failure-final/mobile-mage-walking.png"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "rogue",
+      "passed": true,
+      "evidence": "characters-failure-final/results.json",
+      "standing": "characters-failure-final/mobile-rogue-standing.png",
+      "walking": "characters-failure-final/mobile-rogue-walking.png"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "merchant",
+      "passed": true,
+      "evidence": "characters-failure-final/results.json",
+      "standing": "characters-failure-final/mobile-merchant-standing.png",
+      "walking": "characters-failure-final/mobile-merchant-walking.png"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "banker",
+      "passed": true,
+      "evidence": "characters-failure-final/results.json",
+      "standing": "characters-failure-final/mobile-banker-standing.png",
+      "walking": "characters-failure-final/mobile-banker-walking.png"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "provisioner",
+      "passed": true,
+      "evidence": "characters-failure-final/results.json",
+      "standing": "characters-failure-final/mobile-provisioner-standing.png",
+      "walking": "characters-failure-final/mobile-provisioner-walking.png"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "healer",
+      "passed": true,
+      "evidence": "characters-failure-final/results.json",
+      "standing": "characters-failure-final/mobile-healer-standing.png",
+      "walking": "characters-failure-final/mobile-healer-walking.png"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "ranger",
+      "passed": true,
+      "evidence": "characters-built-final/results.json",
+      "standing": "characters-built-final/desktop-ranger-standing.png",
+      "walking": "characters-built-final/desktop-ranger-walking.png"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "warrior",
+      "passed": true,
+      "evidence": "characters-built-final/results.json",
+      "standing": "characters-built-final/desktop-warrior-standing.png",
+      "walking": "characters-built-final/desktop-warrior-walking.png"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "mage",
+      "passed": true,
+      "evidence": "characters-built-final/results.json",
+      "standing": "characters-built-final/desktop-mage-standing.png",
+      "walking": "characters-built-final/desktop-mage-walking.png"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "rogue",
+      "passed": true,
+      "evidence": "characters-built-final/results.json",
+      "standing": "characters-built-final/desktop-rogue-standing.png",
+      "walking": "characters-built-final/desktop-rogue-walking.png"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "merchant",
+      "passed": true,
+      "evidence": "characters-built-final/results.json",
+      "standing": "characters-built-final/desktop-merchant-standing.png",
+      "walking": "characters-built-final/desktop-merchant-walking.png"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "banker",
+      "passed": true,
+      "evidence": "characters-built-final/results.json",
+      "standing": "characters-built-final/desktop-banker-standing.png",
+      "walking": "characters-built-final/desktop-banker-walking.png"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "provisioner",
+      "passed": true,
+      "evidence": "characters-built-final/results.json",
+      "standing": "characters-built-final/desktop-provisioner-standing.png",
+      "walking": "characters-built-final/desktop-provisioner-walking.png"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "healer",
+      "passed": true,
+      "evidence": "characters-built-final/results.json",
+      "standing": "characters-built-final/desktop-healer-standing.png",
+      "walking": "characters-built-final/desktop-healer-walking.png"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "ranger",
+      "passed": true,
+      "evidence": "characters-built-final/results.json",
+      "standing": "characters-built-final/mobile-ranger-standing.png",
+      "walking": "characters-built-final/mobile-ranger-walking.png"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "warrior",
+      "passed": true,
+      "evidence": "characters-built-final/results.json",
+      "standing": "characters-built-final/mobile-warrior-standing.png",
+      "walking": "characters-built-final/mobile-warrior-walking.png"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "mage",
+      "passed": true,
+      "evidence": "characters-built-final/results.json",
+      "standing": "characters-built-final/mobile-mage-standing.png",
+      "walking": "characters-built-final/mobile-mage-walking.png"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "rogue",
+      "passed": true,
+      "evidence": "characters-built-final/results.json",
+      "standing": "characters-built-final/mobile-rogue-standing.png",
+      "walking": "characters-built-final/mobile-rogue-walking.png"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "merchant",
+      "passed": true,
+      "evidence": "characters-built-final/results.json",
+      "standing": "characters-built-final/mobile-merchant-standing.png",
+      "walking": "characters-built-final/mobile-merchant-walking.png"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "banker",
+      "passed": true,
+      "evidence": "characters-built-final/results.json",
+      "standing": "characters-built-final/mobile-banker-standing.png",
+      "walking": "characters-built-final/mobile-banker-walking.png"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "provisioner",
+      "passed": true,
+      "evidence": "characters-built-final/results.json",
+      "standing": "characters-built-final/mobile-provisioner-standing.png",
+      "walking": "characters-built-final/mobile-provisioner-walking.png"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "healer",
+      "passed": true,
+      "evidence": "characters-built-final/results.json",
+      "standing": "characters-built-final/mobile-healer-standing.png",
+      "walking": "characters-built-final/mobile-healer-walking.png"
+    }
+  ],
+  "open": [
+    "natural NPC AI/world placements",
+    "all player equipment/appearance/ghost and action states",
+    "fine hands/feet/face visibility",
+    "dense scenes and frame-time performance",
+    "physical phones",
+    "full worldwide character/building release acceptance"
+  ],
+  "visual_observations": [
+    "All eight built desktop/mobile gross silhouettes visible and coherent in cleared single-NPC views.",
+    "All eight failed-load fallback box folk remain visible.",
+    "Merchant/banker/provisioner share appearance; mage/healer are similar from this direction. Role uniqueness not claimed.",
+    "Open banker UI retains existing overlap of toast/minimap/panel; real transaction and Close controls executed. Standing captures clear these overlays."
+  ]
+}

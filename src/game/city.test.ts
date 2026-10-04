@@ -1,8 +1,36 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { generateTiles, createWorld } from "./world.ts";
-import { astar, walkable } from "./pathfinding.ts";
+import { astar, lineWalkable, walkable, type GridPoint } from "./pathfinding.ts";
+import { commandWalk } from "./player.ts";
+import type { World } from "./types.ts";
 import { ensureCity, WARD, KEEP } from "./city.ts";
+
+// The exact seed that exposed the old off-road destination, not a lucky seed.
+function regressionWorld() {
+  const random = Math.random;
+  try {
+    Math.random = () => 2469134 / 1e9;
+    const world = createWorld();
+    assert.equal(world.seed, 2469134);
+    return world;
+  } finally {
+    Math.random = random;
+  }
+}
+
+function assertRoute(world: World, from: GridPoint, to: GridPoint) {
+  const route = astar(world, from.x, from.y, to.x, to.y, 4000);
+  assert.ok(route && route.length > 0, `route ${JSON.stringify(from)} -> ${JSON.stringify(to)}`);
+  assert.deepEqual(route.at(-1), to, "reaches the exact destination, not a retarget");
+  const nodes = [from, ...route];
+  for (let i = 1; i < nodes.length; i++) {
+    const a = nodes[i - 1]!;
+    const b = nodes[i]!;
+    assert.ok(lineWalkable(world, a.x, a.y, b.x, b.y), "every smoothed segment obeys climb/wall/corner rules");
+  }
+  return nodes;
+}
 
 test("the capital's ground: wall ring, gates, streets, keep shell", () => {
   const tiles = generateTiles(7);
@@ -29,17 +57,52 @@ test("the capital's ground: wall ring, gates, streets, keep shell", () => {
 });
 
 test("the ward truly encloses: you leave through a gate or not at all", () => {
-  const world = createWorld();
+  const world = regressionWorld();
   assert.equal(walkable(world, WARD.x0, 336), true); // west gate
   assert.equal(walkable(world, WARD.x1, 336), true); // east gate
   assert.equal(walkable(world, WARD.x0, 320), false); // wall
   assert.equal(walkable(world, 176, WARD.z0), false); // wall
-  // Plaza to the Millcross road outside the west gate.
-  const out = astar(world, 176, 336, 140, 336, 4000);
-  assert.ok(out && out.length > 0, "a road out the west gate");
+  // The road heads northwest: at x=140 its centre is z=328, not z=336.
+  // Lock its identity first, so an arbitrary forest tile cannot stand in for it.
+  assert.equal(world.tiles[328]![140]!.kind, "road");
+  const out = assertRoute(world, { x: 176, y: 336 }, { x: 140, y: 328 });
+  const crossing = out.findIndex((b, i) => i > 0 && out[i - 1]!.x >= WARD.x0 && b.x < WARD.x0);
+  assert.ok(crossing > 0, "exits through the west wall, not the east gate");
+  const a = out[crossing - 1]!;
+  const b = out[crossing]!;
+  const z = a.y + (b.y - a.y) * (WARD.x0 - a.x) / (b.x - a.x);
+  assert.ok(z >= 333.5 && z <= 338.5, "crossing lies in the existing gate opening");
+  assertRoute(world, { x: 140, y: 328 }, { x: 176, y: 336 });
   // Bailey to high street.
   const inTown = astar(world, 176, 326, 176, 336, 2000);
   assert.ok(inTown && inTown.length > 0, "bailey to street");
+});
+
+test("the reported seed connects the plaza to Millcross itself", () => {
+  const world = regressionWorld();
+  assert.equal(world.tiles[300]![96]!.kind, "road");
+  assertRoute(world, { x: 176, y: 336 }, { x: 96, y: 300 });
+  assertRoute(world, { x: 96, y: 300 }, { x: 176, y: 336 });
+});
+
+test("the old off-road destination remains an unreachable height island", () => {
+  const world = regressionWorld();
+  const tile = world.tiles[336]![140]!;
+  assert.deepEqual(tile, { h: 7, kind: "tree" });
+  assert.equal(walkable(world, 140, 336), true, "kind-walkable is not reachable");
+  for (let y = 335; y <= 337; y++) {
+    for (let x = 139; x <= 141; x++) {
+      if (x === 140 && y === 336) continue;
+      assert.equal(lineWalkable(world, 140, 336, x, y), false, "no legal edge leaves the island");
+    }
+  }
+  assert.equal(astar(world, 176, 336, 140, 336, 4000), null);
+  const p = world.people.find(p => p.isPlayer)!;
+  p.x = 176;
+  p.z = 336;
+  const before = { x: p.x, z: p.z, path: structuredClone(p.path), intent: structuredClone(world.player.intent) };
+  assert.equal(commandWalk(world, 140, 336), "The way is closed.");
+  assert.deepEqual({ x: p.x, z: p.z, path: p.path, intent: world.player.intent }, before);
 });
 
 test("ensureCity stamps the capital once, buildings and souls", () => {

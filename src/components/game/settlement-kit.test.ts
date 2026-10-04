@@ -18,12 +18,12 @@ const load = async (name: string) => {
   return { ...gltf, bytes: bytes.length };
 };
 
-test("settlement routing is bounded to starting bank and local built forge, never capital", () => {
+test("settlement routing covers existing bank and forge worldwide", () => {
   assert.equal(settlementKitName("bank", EMBERHALL_BANK.tx, EMBERHALL_BANK.ty), "bank");
-  assert.equal(settlementKitName("bank", EMBERHALL_BANK.tx + 1, EMBERHALL_BANK.ty), null);
+  assert.equal(settlementKitName("bank", EMBERHALL_BANK.tx + 1, EMBERHALL_BANK.ty), "bank");
   assert.equal(settlementKitName("forge", COURT.tx - 7, COURT.ty + 3), "forge");
-  assert.equal(settlementKitName("forge", 192, 344), null);
-  assert.equal(settlementKitName("forge", COURT.tx + 20, COURT.ty), null);
+  assert.equal(settlementKitName("forge", 192, 344), "forge");
+  assert.equal(settlementKitName("forge", COURT.tx + 20, COURT.ty), "forge");
   for (const kind of Object.keys(BUILD_SIZE).filter(k => k !== "bank" && k !== "forge")) {
     assert.equal(settlementKitName(kind, COURT.tx, COURT.ty), null);
   }
@@ -126,4 +126,21 @@ test("integration reuses guarded shared loader and preserves cutaway/pick proxie
   assert.match(loader, /o.raycast = noArtRaycast/);
   assert.match(loader, /if \(!active\) return/);
   assert.doesNotMatch(policy, /Math.random|getWorld|useGame|setWorld/);
+});
+
+
+test("forge trade pictogram uses restrained readable gold on its existing seven triangles", async () => {
+  const { scene } = await load("forge");
+  let triangles = 0;
+  scene.traverse(o => {
+    if (!(o instanceof THREE.Mesh) || Array.isArray(o.material)) return;
+    const m = o.material;
+    if (!(m instanceof THREE.MeshStandardMaterial) || m.name !== "forge readable gold sign") return;
+    assert.ok(m.color.r > .94 && m.color.g > .71 && m.color.b > .29);
+    assert.ok(m.emissive.r > 0 && m.emissive.r < .09);
+    assert.equal(m.transparent, false);
+    assert.equal(m.side, THREE.DoubleSide);
+    triangles += (o.geometry.index?.count ?? o.geometry.getAttribute("position").count) / 3;
+  });
+  assert.equal(triangles, 7);
 });

@@ -476,3 +476,38 @@ test("harvest - pre-impact animation frames do not scan or clone sparse node sta
   withRandom(0, () => tickPlayer(world, 0.43));
   assert.ok(ownKeyReads > 0, "the impact frame still validates the untrusted state boundary");
 });
+
+// Planted species and the tile-owned ceiling must label the same material that is harvested.
+for (const species of ["oak", "pine", "willow", "birch", "ash", "redwood", "yew", "ghostwood"] as const) {
+  test(`harvest - planted ${species} menu uses its planted family, not the wild roll`, () => {
+    const { world, tx, ty } = harvestWorld("tree");
+    world.plantedTimber[`${tx},${ty}`] = species;
+    world.player.skills.lumberjack = species === "ghostwood" ? 80 : 0;
+    world.player.ghost = species === "ghostwood";
+    you(world)!.ghost = world.player.ghost;
+    setWorld(world);
+    world.tiles[ty]![tx]!.kind = "tree"; // Hydration repaints terrain before this fixture.
+    const identity = resolveResourceNode({ seed: world.seed, tx, ty, nodeKind: "tree" }).identity;
+    const grade = identity.qualityCeiling === "pristine" ? "hardened" : identity.qualityCeiling;
+    const expected = `Chop ${grade[0]!.toUpperCase()}${grade.slice(1)} ${species[0]!.toUpperCase()}${species.slice(1)}`;
+    const before = structuredClone(world.player.resources);
+    assert.equal(verbsFor({ kind: "tile", id: `${tx},${ty}`, tx, ty, label: "tree" }).find(v => v.verb === "chop")?.label, expected);
+    assert.deepEqual(world.player.resources, before);
+    assert.equal(world.resourceNodes[identity.nodeId]?.depletedAtHour, null);
+    assert.equal(world.plantedTimber[`${tx},${ty}`], species);
+  });
+}
+
+test("harvest - planted ghostwood label is excluded for living and under-skilled ghosts", () => {
+  const { world, tx, ty } = harvestWorld("tree");
+  world.plantedTimber[`${tx},${ty}`] = "ghostwood";
+  const target = { kind: "tile" as const, id: `${tx},${ty}`, tx, ty, label: "tree" };
+  setWorld(world);
+  world.tiles[ty]![tx]!.kind = "tree";
+  world.player.skills.lumberjack = 100;
+  assert.equal(verbsFor(target).some(v => v.verb === "chop"), false);
+  world.player.ghost = true;
+  world.player.skills.lumberjack = 79;
+  assert.equal(verbsFor(target).some(v => v.verb === "chop"), false);
+  assert.deepEqual(world.resourceNodes, {});
+});

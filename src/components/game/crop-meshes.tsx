@@ -5,10 +5,14 @@ import { useGame } from "@/game/store";
 import { hitAt, hoverAt, leftAt, liftAt } from "@/game/world-pointer";
 import { RESOURCE_CATALOG } from "@/game/resources/catalog";
 import type { CropPlot, Sapling } from "@/game/types";
-import { useOakGeometry } from "./oak-renderer-data";
-import { usesAuthoredOak } from "./oak-renderer-policy";
+import { useTimberGeometry } from "./timber-renderer-data";
+import { authoredTimberId } from "./timber-renderer-policy";
+import { noArtRaycast } from "./lanternwood-art";
+
+import { useFloraGeometry } from "./flora-art";
 
 function Plant({ plot }: { plot: CropPlot }) {
+  const flora = useFloraGeometry();
   const y = groundY(getWorld(), plot.tx, plot.ty);
   const intent = useGame((s) => s.snap.player.intent);
   const marked =
@@ -17,6 +21,7 @@ function Plant({ plot }: { plot: CropPlot }) {
     intent.ty === plot.ty;
   const stage = plot.stage;
   const crop = plot.crop;
+  const authored = crop && stage > 0 ? flora?.[`crop_${crop}_${stage}`] : undefined;
   const h = stage <= 1 ? 0.22 : stage === 2 ? 0.44 : 0.7;
   const w = crop === "wheat" ? 0.1 : crop === "garlic" ? 0.2 : 0.34;
   const color = crop ? (marked ? "#e0b56a" : stage >= 3 ? CROP_META[crop].ripe : CROP_META[crop].color) : "#4a3424";
@@ -54,40 +59,43 @@ function Plant({ plot }: { plot: CropPlot }) {
         <boxGeometry args={[0.78, 0.12, 0.78]} />
         <meshStandardMaterial color={marked ? "#6a4a28" : "#4a3424"} roughness={0.96} />
       </mesh>
+      {authored && <mesh name={`authored-crop-${crop}-${stage}`} geometry={authored} position={[0, 0.14, 0]} castShadow raycast={noArtRaycast} dispose={null}>
+        <meshStandardMaterial color={marked ? "#e0b56a" : "#ffffff"} vertexColors roughness={0.9} />
+      </mesh>}
       {crop && stage > 0 && (
         <>
-          <mesh position={[0, 0.14 + h * 0.5, 0]} castShadow>
+          <mesh position={[0, 0.14 + h * 0.5, 0]} castShadow={!authored}>
             <boxGeometry args={[w, h, crop === "wheat" ? 0.1 : w]} />
-            <meshStandardMaterial color={color} roughness={0.82} />
+            <meshStandardMaterial color={color} roughness={0.82} colorWrite={!authored} depthWrite={!authored} />
           </mesh>
           {crop === "cabbage" && stage >= 2 && (
-            <mesh position={[0, 0.16 + h, 0]} castShadow>
+            <mesh position={[0, 0.16 + h, 0]} castShadow={!authored}>
               <boxGeometry args={[w * 1.2, 0.16, w * 1.2]} />
-              <meshStandardMaterial color={stage >= 3 ? "#7a9a50" : "#5a7040"} roughness={0.78} />
+              <meshStandardMaterial color={stage >= 3 ? "#7a9a50" : "#5a7040"} roughness={0.78} colorWrite={!authored} depthWrite={!authored} />
             </mesh>
           )}
           {crop === "wheat" && stage >= 2 && (
             <>
-              <mesh position={[-0.16, 0.14 + h * 0.55, 0.1]} castShadow>
+              <mesh position={[-0.16, 0.14 + h * 0.55, 0.1]} castShadow={!authored}>
                 <boxGeometry args={[0.08, h * 0.95, 0.08]} />
-                <meshStandardMaterial color={color} roughness={0.9} />
+                <meshStandardMaterial color={color} roughness={0.9} colorWrite={!authored} depthWrite={!authored} />
               </mesh>
-              <mesh position={[0.14, 0.14 + h * 0.48, -0.12]} castShadow>
+              <mesh position={[0.14, 0.14 + h * 0.48, -0.12]} castShadow={!authored}>
                 <boxGeometry args={[0.08, h * 0.85, 0.08]} />
-                <meshStandardMaterial color={color} roughness={0.9} />
+                <meshStandardMaterial color={color} roughness={0.9} colorWrite={!authored} depthWrite={!authored} />
               </mesh>
               {stage >= 3 && (
-                <mesh position={[0, 0.14 + h + 0.06, 0]} castShadow>
+                <mesh position={[0, 0.14 + h + 0.06, 0]} castShadow={!authored}>
                   <boxGeometry args={[0.14, 0.1, 0.14]} />
-                  <meshStandardMaterial color="#c9a36a" roughness={0.7} />
+                  <meshStandardMaterial color="#c9a36a" roughness={0.7} colorWrite={!authored} depthWrite={!authored} />
                 </mesh>
               )}
             </>
           )}
           {crop === "garlic" && stage >= 2 && (
-            <mesh position={[0, 0.18, 0]} castShadow>
+            <mesh position={[0, 0.18, 0]} castShadow={!authored}>
               <boxGeometry args={[0.22, 0.18, 0.22]} />
-              <meshStandardMaterial color={stage >= 3 ? "#ece6d8" : "#c9c3b6"} roughness={0.7} />
+              <meshStandardMaterial color={stage >= 3 ? "#ece6d8" : "#c9c3b6"} roughness={0.7} colorWrite={!authored} depthWrite={!authored} />
             </mesh>
           )}
         </>
@@ -130,8 +138,10 @@ function TillGhost() {
 }
 
 function YoungTree({ sapling }: { sapling: Sapling }) {
-  const oak = useOakGeometry();
-  const authored = usesAuthoredOak(sapling.resourceId ?? "oak", sapling.tx, sapling.ty, Boolean(oak?.sapling));
+  const timber = useTimberGeometry();
+  const species = authoredTimberId(sapling.resourceId ?? "oak", true);
+  const geometry = species ? timber[species] : undefined;
+  const authored = Boolean(geometry?.sapling || (geometry?.saplingTrunk && geometry?.saplingCrown));
   const y = groundY(getWorld(), sapling.tx, sapling.ty);
   const intent = useGame((s) => s.snap.player.intent);
   const marked = intent.kind === "forest" && intent.tx === sapling.tx && intent.ty === sapling.ty;
@@ -152,18 +162,27 @@ function YoungTree({ sapling }: { sapling: Sapling }) {
         if (e.button === 0) liftAt(sapling.tx, sapling.ty);
       }}
     >
-      {authored && oak?.sapling ? <mesh name="authored-oak-sapling" geometry={oak.sapling} scale={(h + r * 0.9) / 1.2} castShadow dispose={null}>
-        <meshStandardMaterial color={marked ? "#c9a36a" : "#ffffff"} vertexColors={Boolean(oak.sapling.getAttribute("color"))} roughness={0.9} />
-      </mesh> : <>
-      <mesh position={[0, h * 0.45, 0]} castShadow>
+      {authored && geometry && <group scale={(h + r * 0.9) / 1.2} dispose={null}>
+        {geometry.sapling ? <mesh name="authored-oak-sapling" geometry={geometry.sapling} castShadow raycast={noArtRaycast}>
+          <meshStandardMaterial color={marked ? "#c9a36a" : "#ffffff"} vertexColors={Boolean(geometry.sapling.getAttribute("color"))} roughness={0.9} />
+        </mesh> : <>
+          <mesh name={`authored-${species}-sapling-trunk`} geometry={geometry.saplingTrunk} castShadow raycast={noArtRaycast}>
+            <meshStandardMaterial color={marked ? "#c9a36a" : visual?.primary ?? "#6a4a32"} roughness={0.9} />
+          </mesh>
+          <mesh name={`authored-${species}-sapling-crown`} geometry={geometry.saplingCrown} castShadow raycast={noArtRaycast}>
+            <meshStandardMaterial color={marked ? "#8aaa58" : visual?.secondary ?? leaf} roughness={0.9} />
+          </mesh>
+        </>}
+      </group>}
+      {/* Preserve the original stage-dependent pick proxies; only their paint is replaced. */}
+      <mesh position={[0, h * 0.45, 0]} castShadow={!authored}>
         <boxGeometry args={[0.08, h, 0.08]} />
-        <meshStandardMaterial color={marked ? "#c9a36a" : "#6a4a32"} roughness={0.9} />
+        <meshStandardMaterial color={marked ? "#c9a36a" : "#6a4a32"} roughness={0.9} colorWrite={!authored} depthWrite={!authored} />
       </mesh>
-      <mesh position={[0, h + r * 0.4, 0]} castShadow>
+      <mesh position={[0, h + r * 0.4, 0]} castShadow={!authored}>
         <boxGeometry args={[r * 2, r, r * 2]} />
-        <meshStandardMaterial color={leaf} roughness={0.82} />
+        <meshStandardMaterial color={leaf} roughness={0.82} colorWrite={!authored} depthWrite={!authored} />
       </mesh>
-      </>}
     </group>
   );
 }

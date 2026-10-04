@@ -1,0 +1,877 @@
+{
+  "scope": "Deterministic diagnostic only. Existing unseeded city.test.ts west-road assertion failed in one focused run; original seed was not logged. These fixed seed probes do not identify that original seed or establish a new art regression.",
+  "results": [
+    {
+      "seed": 125000000,
+      "road": [
+        {
+          "x": 145,
+          "y": 336
+        },
+        {
+          "x": 144,
+          "y": 335
+        },
+        {
+          "x": 140,
+          "y": 337
+        },
+        {
+          "x": 140,
+          "y": 336
+        }
+      ],
+      "localGate": [
+        {
+          "x": 150,
+          "y": 336
+        }
+      ],
+      "directWall": false,
+      "target": {
+        "h": 4,
+        "kind": "tree"
+      },
+      "targetWalkable": true,
+      "roadTiles": [
+        {
+          "x": 140,
+          "kind": "tree",
+          "h": 4
+        },
+        {
+          "x": 141,
+          "kind": "grass",
+          "h": 6
+        },
+        {
+          "x": 142,
+          "kind": "grass",
+          "h": 7
+        },
+        {
+          "x": 143,
+          "kind": "grass",
+          "h": 7
+        },
+        {
+          "x": 144,
+          "kind": "grass",
+          "h": 8
+        },
+        {
+          "x": 145,
+          "kind": "grass",
+          "h": 6
+        },
+        {
+          "x": 146,
+          "kind": "grass",
+          "h": 7
+        },
+        {
+          "x": 147,
+          "kind": "grass",
+          "h": 6
+        },
+        {
+          "x": 148,
+          "kind": "grass",
+          "h": 6
+        },
+        {
+          "x": 149,
+          "kind": "grass",
+          "h": 5
+        },
+        {
+          "x": 150,
+          "kind": "dirt",
+          "h": 4
+        },
+        {
+          "x": 151,
+          "kind": "dirt",
+          "h": 4
+        },
+        {
+          "x": 152,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 153,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 154,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 155,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 156,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 157,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 158,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 159,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 160,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 161,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 162,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 163,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 164,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 165,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 166,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 167,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 168,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 169,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 170,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 171,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 172,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 173,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 174,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 175,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 176,
+          "kind": "cobble",
+          "h": 3
+        }
+      ]
+    },
+    {
+      "seed": 250000000,
+      "road": [
+        {
+          "x": 143,
+          "y": 336
+        },
+        {
+          "x": 142,
+          "y": 335
+        },
+        {
+          "x": 140,
+          "y": 336
+        }
+      ],
+      "localGate": [
+        {
+          "x": 150,
+          "y": 336
+        }
+      ],
+      "directWall": false,
+      "target": {
+        "h": 6,
+        "kind": "grass"
+      },
+      "targetWalkable": true,
+      "roadTiles": [
+        {
+          "x": 140,
+          "kind": "grass",
+          "h": 6
+        },
+        {
+          "x": 141,
+          "kind": "grass",
+          "h": 6
+        },
+        {
+          "x": 142,
+          "kind": "grass",
+          "h": 4
+        },
+        {
+          "x": 143,
+          "kind": "grass",
+          "h": 5
+        },
+        {
+          "x": 144,
+          "kind": "grass",
+          "h": 5
+        },
+        {
+          "x": 145,
+          "kind": "grass",
+          "h": 6
+        },
+        {
+          "x": 146,
+          "kind": "grass",
+          "h": 5
+        },
+        {
+          "x": 147,
+          "kind": "grass",
+          "h": 5
+        },
+        {
+          "x": 148,
+          "kind": "grass",
+          "h": 5
+        },
+        {
+          "x": 149,
+          "kind": "grass",
+          "h": 5
+        },
+        {
+          "x": 150,
+          "kind": "dirt",
+          "h": 5
+        },
+        {
+          "x": 151,
+          "kind": "dirt",
+          "h": 4
+        },
+        {
+          "x": 152,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 153,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 154,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 155,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 156,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 157,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 158,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 159,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 160,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 161,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 162,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 163,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 164,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 165,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 166,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 167,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 168,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 169,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 170,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 171,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 172,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 173,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 174,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 175,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 176,
+          "kind": "cobble",
+          "h": 3
+        }
+      ]
+    },
+    {
+      "seed": 500000000,
+      "road": [
+        {
+          "x": 143,
+          "y": 335
+        },
+        {
+          "x": 140,
+          "y": 336
+        }
+      ],
+      "localGate": [
+        {
+          "x": 150,
+          "y": 336
+        }
+      ],
+      "directWall": false,
+      "target": {
+        "h": 6,
+        "kind": "grass"
+      },
+      "targetWalkable": true,
+      "roadTiles": [
+        {
+          "x": 140,
+          "kind": "grass",
+          "h": 6
+        },
+        {
+          "x": 141,
+          "kind": "grass",
+          "h": 5
+        },
+        {
+          "x": 142,
+          "kind": "tree",
+          "h": 6
+        },
+        {
+          "x": 143,
+          "kind": "tree",
+          "h": 7
+        },
+        {
+          "x": 144,
+          "kind": "grass",
+          "h": 7
+        },
+        {
+          "x": 145,
+          "kind": "grass",
+          "h": 6
+        },
+        {
+          "x": 146,
+          "kind": "grass",
+          "h": 6
+        },
+        {
+          "x": 147,
+          "kind": "grass",
+          "h": 8
+        },
+        {
+          "x": 148,
+          "kind": "grass",
+          "h": 6
+        },
+        {
+          "x": 149,
+          "kind": "tree",
+          "h": 4
+        },
+        {
+          "x": 150,
+          "kind": "dirt",
+          "h": 3
+        },
+        {
+          "x": 151,
+          "kind": "dirt",
+          "h": 3
+        },
+        {
+          "x": 152,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 153,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 154,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 155,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 156,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 157,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 158,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 159,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 160,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 161,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 162,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 163,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 164,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 165,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 166,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 167,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 168,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 169,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 170,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 171,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 172,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 173,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 174,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 175,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 176,
+          "kind": "cobble",
+          "h": 3
+        }
+      ]
+    },
+    {
+      "seed": 750000000,
+      "road": [
+        {
+          "x": 150,
+          "y": 336
+        },
+        {
+          "x": 149,
+          "y": 335
+        },
+        {
+          "x": 145,
+          "y": 335
+        },
+        {
+          "x": 142,
+          "y": 334
+        },
+        {
+          "x": 140,
+          "y": 336
+        }
+      ],
+      "localGate": [
+        {
+          "x": 150,
+          "y": 336
+        }
+      ],
+      "directWall": false,
+      "target": {
+        "h": 5,
+        "kind": "grass"
+      },
+      "targetWalkable": true,
+      "roadTiles": [
+        {
+          "x": 140,
+          "kind": "grass",
+          "h": 5
+        },
+        {
+          "x": 141,
+          "kind": "grass",
+          "h": 7
+        },
+        {
+          "x": 142,
+          "kind": "grass",
+          "h": 7
+        },
+        {
+          "x": 143,
+          "kind": "grass",
+          "h": 4
+        },
+        {
+          "x": 144,
+          "kind": "grass",
+          "h": 5
+        },
+        {
+          "x": 145,
+          "kind": "grass",
+          "h": 5
+        },
+        {
+          "x": 146,
+          "kind": "tree",
+          "h": 4
+        },
+        {
+          "x": 147,
+          "kind": "grass",
+          "h": 6
+        },
+        {
+          "x": 148,
+          "kind": "tree",
+          "h": 6
+        },
+        {
+          "x": 149,
+          "kind": "grass",
+          "h": 7
+        },
+        {
+          "x": 150,
+          "kind": "dirt",
+          "h": 4
+        },
+        {
+          "x": 151,
+          "kind": "dirt",
+          "h": 3
+        },
+        {
+          "x": 152,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 153,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 154,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 155,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 156,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 157,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 158,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 159,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 160,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 161,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 162,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 163,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 164,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 165,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 166,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 167,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 168,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 169,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 170,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 171,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 172,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 173,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 174,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 175,
+          "kind": "cobble",
+          "h": 3
+        },
+        {
+          "x": 176,
+          "kind": "cobble",
+          "h": 3
+        }
+      ]
+    }
+  ]
+}

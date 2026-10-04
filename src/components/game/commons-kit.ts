@@ -1,10 +1,9 @@
-import {COURT} from '../../game/atlas.ts';
 import {BUILD_SIZE} from '../../game/building-size.ts';
 export type CommonsKit = 'dormitory'|'yard'|'farm';
-/** Existing built starting-settlement structures only; no world generation. */
+/** Existing built structures worldwide; no world generation. */
 export function commonsKitName(kind:string,x:number,z:number):CommonsKit|null {
  if(kind!=='dormitory'&&kind!=='yard'&&kind!=='farm')return null;
- return Math.hypot(x-COURT.tx,z-COURT.ty)<=18?kind:null;
+ return Number.isFinite(x)&&Number.isFinite(z)?kind:null;
 }
 /** Open compounds have no enclosing roof to remove on entry. */
 export function keepCommonsExteriorOnEntry(kind:string|null):boolean {

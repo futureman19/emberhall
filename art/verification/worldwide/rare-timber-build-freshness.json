@@ -1,0 +1,26 @@
+[
+  {
+    "url": "/assets/index-CZgG_2LF.js",
+    "status": 200,
+    "local_exists": true,
+    "sha_matches": true
+  },
+  {
+    "url": "/assets/rolldown-runtime-C0FnF6B9.js",
+    "status": 200,
+    "local_exists": true,
+    "sha_matches": true
+  },
+  {
+    "url": "/assets/routes-WQhqC7Ex.js",
+    "status": 200,
+    "local_exists": true,
+    "sha_matches": true
+  },
+  {
+    "url": "/assets/styles-kXWtMOc3.css",
+    "status": 200,
+    "local_exists": true,
+    "sha_matches": true
+  }
+]

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { lanternwoodInfluence, artNoise, noArtRaycast } from "./lanternwood-art.ts";
+import { artNoise, noArtRaycast } from "./lanternwood-art.ts";
 
-export type KitName = "hall" | "tree-0" | "tree-1" | "bank" | "forge" | "kitchen" | "tavern" | "market" | "dormitory" | "yard" | "farm" | "notice" | "board" | "interior-hall" | "interior-dormitory" | "interior-kitchen" | "interior-yard" | "interior-market" | "interior-forge" | "interior-tavern" | "interior-bank";
+import type { ArchitectureKind } from "./architecture-kit.ts";
+
+export type KitName = `architecture-${ArchitectureKind}` | "hall" | "tree-0" | "tree-1" | "bank" | "forge" | "kitchen" | "tavern" | "market" | "dormitory" | "yard" | "farm" | "notice" | "board" | "interior-hall" | "interior-dormitory" | "interior-kitchen" | "interior-yard" | "interior-market" | "interior-forge" | "interior-tavern" | "interior-bank";
 const loads = new Map<KitName, Promise<THREE.Group>>();
 /** Cache shared GPU geometry/materials; only the object hierarchy is per placement. */
 export function useArtistKit(name: KitName | null): THREE.Group | null {
@@ -35,7 +37,7 @@ export function useArtistKit(name: KitName | null): THREE.Group | null {
   return loaded?.name === name ? loaded.scene : null;
 }
 export function usesBlenderHall(kind: string, x: number, z: number): boolean {
-  return kind === "hall" && lanternwoodInfluence(x, z) === 1;
+  return kind === "hall" && Number.isFinite(x) && Number.isFinite(z);
 }
 /** Small non-resource garden trees; deterministic, no gameplay RNG consumed. */
 export function gardenTreeTransform(x: number, z: number) {

@@ -1,4 +1,5 @@
 import { useLayoutEffect, useMemo, useRef } from "react";
+import { architectureKitName, retainArchitectureInteriorVoxel } from "./architecture-kit.ts";
 import { signageKitName } from "./signage-kit.ts";
 import { interiorKitName, replaceInteriorVoxel } from "./interior-kit.ts";
 import * as THREE from "three";
@@ -7,9 +8,10 @@ import { stationOf } from "@/game/craft";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { KEEP_STORY_VOX } from "@/game/keep-story";
-import { siteError } from "@/game/building-size";
+import { keepStairCut } from "./keep-presentation.ts";
+import { placementPreviewError } from "@/game/placement-preview";
 import { useGame } from "@/game/store";
-import { hoverAt, leftAt, liftAt } from "@/game/world-pointer";
+import { hitAt, hoverAt, leftAt, liftAt } from "@/game/world-pointer";
 import type { Building, BuildingKind } from "@/game/types";
 
 import { LANTERNWOOD_BLOCKS, lanternwoodInfluence } from "./lanternwood-art";
@@ -947,7 +949,7 @@ function BlockLayer({
 }
 
 function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
-  const settlement = settlementKitName(b.kind, b.tx, b.ty) ?? hospitalityKitName(b.kind, b.tx, b.ty) ?? commonsKitName(b.kind, b.tx, b.ty) ?? signageKitName(b.kind, b.tx, b.ty);
+  const settlement = settlementKitName(b.kind, b.tx, b.ty) ?? hospitalityKitName(b.kind, b.tx, b.ty) ?? commonsKitName(b.kind, b.tx, b.ty) ?? signageKitName(b.kind, b.tx, b.ty) ?? architectureKitName(b.kind, b.tx, b.ty);
   const kitName = usesBlenderHall(b.kind, b.tx, b.ty) ? "hall" : settlement;
   const authored = useArtistKit(kitName);
   const interiorName = interiorKitName(b.kind, b.tx, b.ty);
@@ -993,13 +995,17 @@ function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
     const cap = inside && b.kind === "keep" ? Math.round(story) * KEEP_STORY_VOX + KEEP_STORY_VOX + 1 : Infinity;
     for (const v of spec.voxels) {
       if (v.y > cap) continue;
+      if (inside && b.kind === "keep" && keepStairCut(v, story)) continue;
+      // The next timber deck is this room's ceiling, not its walking floor.
+      // Cut only overhead decks; preserve walls, stairs and the occupied floor.
+      if (inside && b.kind === "keep" && v.t === "timber" && v.y % KEEP_STORY_VOX === 0 && v.y > Math.round(story) * KEEP_STORY_VOX) continue;
       const p = new THREE.Vector3(b.tx + (v.x + 0.5) * B, y0 + (v.y + 0.5) * B, b.ty + (v.z + 0.5) * B);
       if (furnishings && replaceInteriorVoxel(b.kind, v)) {
         furnitureProxies[v.t].push(p);
         continue;
       }
       (v.cut ? cut : solid)[v.t].push(p);
-      if (retainSettlementInteriorVoxel(b.kind, v) || retainHospitalityInteriorVoxel(b.kind, v) || retainCommonsInteriorVoxel(b.kind, v)) interior[v.t].push(p);
+      if (retainSettlementInteriorVoxel(b.kind, v) || retainHospitalityInteriorVoxel(b.kind, v) || retainCommonsInteriorVoxel(b.kind, v) || retainArchitectureInteriorVoxel(b.kind, v)) interior[v.t].push(p);
     }
     return { solid, cut, interior, furnitureProxies };
   }, [spec, b.tx, b.ty, b.kind, y0, inside, story, furnishings]);
@@ -1010,6 +1016,16 @@ function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
         if (useGame.getState().buildKind) {
           e.stopPropagation();
           leftAt(Math.round(e.point.x), Math.round(e.point.z));
+          return;
+        }
+        // Inside the keep, use the visible floor/stair hit rather than letting
+        // the same ray reach a displaced terrain point below the current story.
+        if (inside && b.kind === "keep" && useGame.getState().phase === "playing" && (e.button === 0 || e.button === 2)) {
+          e.stopPropagation();
+          const tx = Math.round(e.point.x);
+          const ty = Math.round(e.point.z);
+          if (e.button === 2) hitAt(tx, ty, e.clientX, e.clientY);
+          else leftAt(tx, ty);
           return;
         }
         if (b.kind === "bank") {
@@ -1099,6 +1115,8 @@ function OneBuilding({ b, inside }: { b: Building; inside: boolean }) {
 
 export function Buildings() {
   const buildings = useGame((s) => s.snap.buildings);
+  // Placement appends to the mutable array; redraw insertions even while paused.
+  useGame((s) => s.snap.buildings.length);
   const youX = useGame((s) => s.snap.youX);
   const youZ = useGame((s) => s.snap.youZ);
   const here = occupant(buildings, youX, youZ);
@@ -1147,7 +1165,8 @@ function PlaceGhost() {
 function GhostAt({ kind, tx, ty }: { kind: BuildingKind; tx: number; ty: number }) {
   const spec = SPECS[kind];
   const y0 = groundY(getWorld(), tx, ty);
-  const ok = !siteError(getWorld(), kind, tx, ty);
+  // Validity can change without moving the pointer (deed, ownership or body state).
+  const ok = useGame(() => !placementPreviewError(getWorld(), kind, tx, ty));
   const color = ok ? "#c9a36a" : "#a85a42";
   const items = useMemo(() => {
     return spec.voxels.map((v) => new THREE.Vector3(tx + (v.x + 0.5) * B, y0 + (v.y + 0.5) * B, ty + (v.z + 0.5) * B));

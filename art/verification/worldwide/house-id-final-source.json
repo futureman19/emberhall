@@ -1,0 +1,12 @@
+{
+  "src/game/world.ts": "692b80e3c4d6f7e87f26327c431815ce801ab1b35de0abad387dacf2aba6df69",
+  "src/game/house.ts": "89a7aeb206927983daad26efe5961f0e972ec086a32780d57b2ae648c75dd12f",
+  "src/game/live.ts": "0c667c4b97b120a8e9ad1f835c5034738054bbe08d8fbf600c9abf624625cb11",
+  "src/game/save.ts": "d3cf6c6712b10ddb2dcc152001aef4354eb1fc95fa22cda7a3f6f8f32ab7d935",
+  "src/game/store.ts": "6f702b913f33c22074c452eea1eb074503a557b1d4910033fd96fe08f6bdabbe",
+  "src/components/game/building-meshes.tsx": "ffc42df1233c91da1b2da91ceb8b67de563c3d9dec35d65290e853c53ea48fab",
+  "package.json": "feb167e2788a5d8bf938fa5b8d954680f85574d011d874fb1fd07705e975982a",
+  "scripts/worldwide-house-shade.mjs": "8a0ac6164eecf8f3582b1c67fcb65e06edc7eb9b7936ec8c9eca0007e7c0acc4",
+  "src/game/world-ids.test.ts": "2aa948ff8a7f41210c6fad702ab55502407e63af04d1f7b2c6227cf873bd33ce",
+  "scripts/worldwide-house-id-checks.mjs": "4cc8f95770e4cb89a48d2d3dda4cbd1b77c0da3ecac04b9f5340f971ef5b5696"
+}

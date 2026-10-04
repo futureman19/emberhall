@@ -1,0 +1,28 @@
+{
+  "linked": [
+    {
+      "url": "/assets/index-Dhk5iWJ5.js",
+      "bytes": 2666303,
+      "sha256": "ffdbc1c5f9cd205620490136318034f61819476dd72464186373b78bc0bbd99b",
+      "match": true
+    },
+    {
+      "url": "/assets/rolldown-runtime-C0FnF6B9.js",
+      "bytes": 1291,
+      "sha256": "e0a79ad36c6ca1ffbc796c80aa5661803a9d1bc684e29d1587f48b4ba9a82714",
+      "match": true
+    },
+    {
+      "url": "/assets/routes-DoZHUyld.js",
+      "bytes": 1591738,
+      "sha256": "8d0b5c90a027bd696f263ebea3ddc3e4d314495b0865f79b366093321cc819eb",
+      "match": true
+    },
+    {
+      "url": "/assets/styles-DsTtAquI.css",
+      "bytes": 47438,
+      "sha256": "ea3ee335fb1824f24ba7e4c55f2914db3168b076d17c6df240191d16305da4dc",
+      "match": true
+    }
+  ]
+}

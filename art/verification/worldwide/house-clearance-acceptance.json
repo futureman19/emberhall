@@ -1,0 +1,68 @@
+{
+  "scope": "Local controlled chest UI; unchanged world/house/store/live/save source. No natural-world, all-overlay, animation, performance or physical-phone acceptance.",
+  "runs": {
+    "candidate": {
+      "path": "house-clearance-routed-v1/results.json",
+      "assertions": 842,
+      "cases": 12
+    },
+    "built": {
+      "path": "house-clearance-built-final/results.json",
+      "assertions": 842,
+      "cases": 12
+    },
+    "idCandidate": {
+      "path": "house-clearance-id-regression/results.json",
+      "assertions": 190,
+      "cases": 6
+    },
+    "idBuilt": {
+      "path": "house-clearance-id-built-regression-final/results.json",
+      "assertions": 160,
+      "cases": 6
+    }
+  },
+  "checks": 2034,
+  "source": {
+    "src/components/game/house-gump.tsx": "a6d1495d87565cdfb65c7be0ed41c591fafbe95fe1a144af1ec88efba8e29f79",
+    "src/components/game/hud.tsx": "d7882593c87d5922f0b334c169210f78badebdc5bf2c01c084dc43df5ef84da4",
+    "src/game/house.ts": "89a7aeb206927983daad26efe5961f0e972ec086a32780d57b2ae648c75dd12f",
+    "src/game/store.ts": "6f702b913f33c22074c452eea1eb074503a557b1d4910033fd96fe08f6bdabbe",
+    "src/game/world.ts": "692b80e3c4d6f7e87f26327c431815ce801ab1b35de0abad387dacf2aba6df69",
+    "src/game/live.ts": "0c667c4b97b120a8e9ad1f835c5034738054bbe08d8fbf600c9abf624625cb11",
+    "src/game/save.ts": "d3cf6c6712b10ddb2dcc152001aef4354eb1fc95fa22cda7a3f6f8f32ab7d935",
+    "package.json": "aeb31f5a1fbcb9c71cb0d487728350e82db4346784c2f6c12d2f7656e89f8d7f",
+    "src/components/game/house-panel.ts": "594bba93b97a6e1af4a7d42042fd5f8c475d654f2651bdca6648b0c6f19a5f58",
+    "src/components/game/house-panel.test.ts": "810cc6c7de0fd9db42c1064d1e6dcd7eba2cd80a2532dc5b111998a6fc468a85",
+    "scripts/worldwide-house-clearance.mjs": "d889e9b01fd60b8ce557c5ce93dde1b098db4df5e8bf261158a69b7ba699c606",
+    "scripts/worldwide-house-clearance-stress.mjs": "f93ca8a87b66354af0b0016f82a7757996b261eb12ddfd3b5d498d25bb7b4969"
+  },
+  "review": {
+    "path": "subagent-summary-0-20260910_160957_334125.txt",
+    "reconciled": "Source-confirmed co-panel priority and hidden Vault feedback reproduced by actual Settings input and fixed by shared temporary visibility. Final five-panel real-input routing + six pure state regressions. Populated lists/native scroll/multiline and status HUD row now checked."
+  },
+  "limits": [
+    "Chest intentionally overlays mini-map where space is narrow; Close restores normal map interaction.",
+    "Scrollable item rows clip and existing hover tooltips may cover rows, not fixed heading/status/Close. Some two-column item names truncate; narrow <380px stacks columns.",
+    "Pets overlay priority is unit-state covered, not actual Pets-entry browser acceptance.",
+    "No automatic duplicate-save repair or publication."
+  ],
+  "fullTests": {
+    "script": 250,
+    "source": 700,
+    "total": 950
+  },
+  "visualReview": {
+    "desktop": "house-clearance-built-desktop.jpg: final built headings, supplied multiline status and Close clear/readable; scroll/tooltip and minimap limitations kept separate.",
+    "mobile": "house-clearance-built-mobile.jpg: final built headings, supplied multiline status and Close clear/readable; scroll/tooltip and minimap limitations kept separate.",
+    "narrow": "house-clearance-built-narrow.jpg: final built headings, supplied multiline status and Close clear/readable; scroll/tooltip and minimap limitations kept separate.",
+    "landscape": "house-clearance-built-landscape.jpg: final built headings, supplied multiline status and Close clear/readable; scroll/tooltip and minimap limitations kept separate."
+  },
+  "retainedFailures": {
+    "house-clearance-before": "12 cases / 54 failed checks. Narrow real-close check was followed by fixture cleanup when hit-test failed; not positive native-Close proof.",
+    "house-clearance-candidate-v2": "Raw offscreen item rectangles falsely intersected footer; changed DOM measurement to effective overflow-clipped rectangles and retained actual native scroll/hit checks.",
+    "house-clearance-stress-v1": "Invalid >8-kind chest fixture rejected a new kind by unchanged capacity rule. Corrected fixture derives canonical HOUSE_SLOTS and now checks actual full-chest rejection.",
+    "house-clearance-overlay-red": "Actual Settings open exposed priority regression; retained pre-fix failure.",
+    "house-clearance-id-built-regression": "Combined command timeout after five cases; superseded by independent final six-case 160-assertion run."
+  }
+}

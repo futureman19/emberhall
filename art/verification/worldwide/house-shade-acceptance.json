@@ -1,0 +1,240 @@
+{
+  "passed": true,
+  "scope": "Bounded preview and paused insertion; explicit no-owned-house bootstrap blockers and tick-counter fixture. Not normal-save housing or full construction acceptance.",
+  "records": [
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "porch",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-candidate/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "hut",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-candidate/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "homestead",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-candidate/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "porch",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-candidate/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "hut",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-candidate/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "homestead",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-candidate/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "porch",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-failure/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "hut",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-failure/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "homestead",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-failure/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "porch",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-failure/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "hut",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-failure/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "homestead",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-failure/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "porch",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-built/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "hut",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-built/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "homestead",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-built/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "porch",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-built/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "hut",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-built/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "homestead",
+      "site": {
+        "x": 254,
+        "z": 308,
+        "d": 16.1245154965971
+      },
+      "result": "art/verification/worldwide/house-shade-verified-built/results.json"
+    }
+  ],
+  "counts": {
+    "candidate": 104,
+    "failure": 104,
+    "built": 74
+  },
+  "browserAssertions": 282,
+  "tests": 916,
+  "testSuites": [
+    250,
+    666
+  ],
+  "sourceCheckpoint": "art/verification/worldwide/house-shade-source-before.json",
+  "changedCheckpointFiles": [
+    "src/components/game/building-meshes.tsx",
+    "package.json"
+  ],
+  "unchangedAssets": 96,
+  "newSource": [
+    "src/game/placement-preview.ts",
+    "src/game/placement-preview.test.ts"
+  ],
+  "builtFreshness": "art/verification/worldwide/house-shade-built-freshness.json",
+  "remaining": [
+    "Low-tick loaded review fixture ID collision (b-27); counter isolated only in QA, runtime not fixed",
+    "Natural housing bootstrap and general placement/animation/performance/physical phone acceptance",
+    "Fortifications and keep/remaining worldwide building coverage"
+  ],
+  "visualReview": {
+    "desktop": "All three built rows show pale gold valid vs reddish invalid and an opaque placed body; trees/toasts obscure parts.",
+    "mobile": "Same visible distinction and placed occupancy for all three genuine-touch rows; not full-body or animation acceptance.",
+    "captures": [
+      "house-shade-built-desktop-comparison.jpg",
+      "house-shade-built-mobile-comparison.jpg"
+    ],
+    "pausedClockPreserved": true
+  }
+}

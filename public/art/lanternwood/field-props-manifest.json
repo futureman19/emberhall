@@ -1,0 +1,16 @@
+{
+  "meshes": [
+    {
+      "name": "field_rock",
+      "editableParts": 1,
+      "vertices": 42
+    },
+    {
+      "name": "field_pouch",
+      "editableParts": 4,
+      "vertices": 150
+    }
+  ],
+  "bytes": 29864,
+  "sha256": "1afecd2b356555bee685679d7c0011ccf1b7485662244955e4184c87d25cdc10"
+}

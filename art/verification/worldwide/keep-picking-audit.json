@@ -1,0 +1,264 @@
+{
+  "runs": [
+    {
+      "name": "keep-picking-candidate-bounded-v1",
+      "checks": 214,
+      "cases": 2,
+      "legs": 38,
+      "rejections": 0,
+      "elevatedTargets": {
+        "desktop": [
+          181,
+          320
+        ],
+        "mobile": [
+          181,
+          320
+        ]
+      }
+    },
+    {
+      "name": "keep-picking-original-control",
+      "checks": 208,
+      "cases": 2,
+      "legs": 38,
+      "rejections": 0,
+      "elevatedTargets": {
+        "desktop": [
+          175,
+          314
+        ],
+        "mobile": [
+          175,
+          314
+        ]
+      }
+    },
+    {
+      "name": "keep-picking-failure-final",
+      "checks": 216,
+      "cases": 2,
+      "legs": 38,
+      "rejections": 168,
+      "elevatedTargets": {
+        "desktop": [
+          181,
+          320
+        ],
+        "mobile": [
+          181,
+          320
+        ]
+      }
+    },
+    {
+      "name": "keep-picking-built-final",
+      "checks": 190,
+      "cases": 2,
+      "legs": 38,
+      "rejections": 0,
+      "elevatedTargets": {
+        "desktop": [
+          181,
+          320
+        ],
+        "mobile": [
+          181,
+          320
+        ]
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "run": "keep-picking-original-control",
+      "device": "desktop",
+      "terrainAndBuildingsExact": true,
+      "motionDifferences": [
+        [
+          "regression-point",
+          "from"
+        ]
+      ],
+      "differenceDetails": [
+        {
+          "field": "regression-point.from.intent.tx",
+          "candidate": 181,
+          "other": 175
+        },
+        {
+          "field": "regression-point.from.intent.ty",
+          "candidate": 320,
+          "other": 314
+        },
+        {
+          "field": "regression-point.from.path[0].tx",
+          "candidate": 181,
+          "other": 175
+        },
+        {
+          "field": "regression-point.from.path[0].ty",
+          "candidate": 320,
+          "other": 314
+        }
+      ],
+      "physicalRouteTracksMatch": true
+    },
+    {
+      "run": "keep-picking-original-control",
+      "device": "mobile",
+      "terrainAndBuildingsExact": true,
+      "motionDifferences": [
+        [
+          "regression-point",
+          "from"
+        ]
+      ],
+      "differenceDetails": [
+        {
+          "field": "regression-point.from.intent.tx",
+          "candidate": 181,
+          "other": 175
+        },
+        {
+          "field": "regression-point.from.intent.ty",
+          "candidate": 320,
+          "other": 314
+        },
+        {
+          "field": "regression-point.from.path[0].tx",
+          "candidate": 181,
+          "other": 175
+        },
+        {
+          "field": "regression-point.from.path[0].ty",
+          "candidate": 320,
+          "other": 314
+        }
+      ],
+      "physicalRouteTracksMatch": true
+    },
+    {
+      "run": "keep-picking-failure-final",
+      "device": "desktop",
+      "terrainAndBuildingsExact": true,
+      "motionDifferences": [],
+      "differenceDetails": [],
+      "physicalRouteTracksMatch": true
+    },
+    {
+      "run": "keep-picking-failure-final",
+      "device": "mobile",
+      "terrainAndBuildingsExact": true,
+      "motionDifferences": [],
+      "differenceDetails": [],
+      "physicalRouteTracksMatch": true
+    },
+    {
+      "run": "keep-picking-built-final",
+      "device": "desktop",
+      "terrainAndBuildingsExact": true,
+      "motionDifferences": [
+        [
+          "door",
+          "track"
+        ]
+      ],
+      "differenceDetails": [
+        {
+          "field": "door.track[0].toast",
+          "candidate": "Clouds gather over the vale.",
+          "other": null
+        },
+        {
+          "field": "door.track[1].toast",
+          "candidate": "Clouds gather over the vale.",
+          "other": null
+        },
+        {
+          "field": "door.track[2].toast",
+          "candidate": "Clouds gather over the vale.",
+          "other": null
+        },
+        {
+          "field": "door.track[3].toast",
+          "candidate": "Clouds gather over the vale.",
+          "other": null
+        }
+      ],
+      "physicalRouteTracksMatch": true
+    },
+    {
+      "run": "keep-picking-built-final",
+      "device": "mobile",
+      "terrainAndBuildingsExact": true,
+      "motionDifferences": [
+        [
+          "door",
+          "from"
+        ],
+        [
+          "door",
+          "command"
+        ],
+        [
+          "door",
+          "track"
+        ]
+      ],
+      "differenceDetails": [
+        {
+          "field": "door.from.toast",
+          "candidate": "Clouds gather over the vale.",
+          "other": null
+        },
+        {
+          "field": "door.command.toast",
+          "candidate": "Clouds gather over the vale.",
+          "other": null
+        },
+        {
+          "field": "door.track[0].toast",
+          "candidate": "Clouds gather over the vale.",
+          "other": null
+        },
+        {
+          "field": "door.track[1].toast",
+          "candidate": "Clouds gather over the vale.",
+          "other": null
+        },
+        {
+          "field": "door.track[2].toast",
+          "candidate": "Clouds gather over the vale.",
+          "other": null
+        },
+        {
+          "field": "door.track[3].toast",
+          "candidate": "Clouds gather over the vale.",
+          "other": null
+        }
+      ],
+      "physicalRouteTracksMatch": true
+    }
+  ],
+  "totalChecks": 828,
+  "positiveModeChecks": 620,
+  "totalLegs": 152,
+  "totalCases": 8,
+  "fullTests": 962,
+  "checkpoint": {
+    "count": 410,
+    "changed": [
+      "src/components/game/architecture-kit.test.ts",
+      "src/components/game/building-meshes.tsx"
+    ]
+  },
+  "ledger": "AST routing refresh separately verified: 3148 existing asset dispositions/evidence/states preserved.",
+  "limits": [
+    "Visible upper-floor targeting repaired; tower still occludes lower-stair targets.",
+    "Bounded final route descends 3 to 2 to 1, then native map exits; not direct visible lower-stair descent acceptance.",
+    "Pre-existing half-voxel floor seating unchanged.",
+    "No all-modes exactly-once proof; native PlacePointer listener remains independent.",
+    "No construction/mesh-collision/performance/physical-phone/publication acceptance."
+  ]
+}

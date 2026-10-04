@@ -1,0 +1,58 @@
+[
+  {
+    "kind": "oak",
+    "url": "/art/lanternwood/oak.glb",
+    "http": 200,
+    "sha256": "e38306e785170da4e66399611d7e1e715d4ccb40b9693883f63abb66055f0f8a",
+    "previous_ledger_and_current_source_and_built_and_served_match": true
+  },
+  {
+    "kind": "pine",
+    "url": "/art/lanternwood/timber-pine.glb",
+    "http": 200,
+    "sha256": "b1a6eb8270e6a9abbb0cb5dac94638fe69245257829427d8b919ec88570b6128",
+    "previous_ledger_and_current_source_and_built_and_served_match": true
+  },
+  {
+    "kind": "willow",
+    "url": "/art/lanternwood/timber-willow.glb",
+    "http": 200,
+    "sha256": "72a718f7b2ef42ff10663b109c6cb19f465cfcb520f391369dc9e9870feebef0",
+    "previous_ledger_and_current_source_and_built_and_served_match": true
+  },
+  {
+    "kind": "birch",
+    "url": "/art/lanternwood/timber-birch.glb",
+    "http": 200,
+    "sha256": "da88a759631af9efa842e830ab1cbe9264293d42c059a9c18e1bbdf9258179d0",
+    "previous_ledger_and_current_source_and_built_and_served_match": true
+  },
+  {
+    "kind": "ash",
+    "url": "/art/lanternwood/timber-ash.glb",
+    "http": 200,
+    "sha256": "d87c6823bb86ad0766fe019516a7ac3bc4a20aad288c7bf7a2c7566f43f23170",
+    "previous_ledger_and_current_source_and_built_and_served_match": true
+  },
+  {
+    "kind": "redwood",
+    "url": "/art/lanternwood/timber-redwood.glb",
+    "http": 200,
+    "sha256": "f7f884c0fe940f41ce1e4e7a96ae2cd4aa8a6ffc2d6edbf367242b331ddcb23b",
+    "previous_ledger_and_current_source_and_built_and_served_match": true
+  },
+  {
+    "kind": "yew",
+    "url": "/art/lanternwood/timber-yew.glb",
+    "http": 200,
+    "sha256": "fd707ea2f88bd4ba1b882e916fedaae861f20ca8c1287ccc505bdcf29d716cd8",
+    "previous_ledger_and_current_source_and_built_and_served_match": true
+  },
+  {
+    "kind": "ghostwood",
+    "url": "/art/lanternwood/timber-ghostwood.glb",
+    "http": 200,
+    "sha256": "6ab068db3d6a8cc9b27ec21b1778294d60c160aa81868b90e372ef0002429d86",
+    "previous_ledger_and_current_source_and_built_and_served_match": true
+  }
+]

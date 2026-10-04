@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "weapons": 1,
+  "parts": 2,
+  "scope": "Actual GLTFLoader vertices and original per-part envelopes; not runtime attachment/animation proof",
+  "results": [
+    {
+      "name": "campfire_stone",
+      "min": [
+        -0.08049824833869934,
+        -0.06480000168085098,
+        -0.07655760645866394
+      ],
+      "max": [
+        0.08049824833869934,
+        0.06480000168085098,
+        0.07655760645866394
+      ],
+      "vertices": 60
+    },
+    {
+      "name": "campfire_log",
+      "min": [
+        -0.04899999871850014,
+        -0.25,
+        -0.04899999871850014
+      ],
+      "max": [
+        0.04899999871850014,
+        0.25,
+        0.04899999871850014
+      ],
+      "vertices": 112
+    }
+  ]
+}

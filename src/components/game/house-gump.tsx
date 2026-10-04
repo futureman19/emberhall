@@ -5,6 +5,7 @@ import { Tip } from "@/components/ui/tip";
 import { BUILDING_META, ITEM_META, SECONDS_PER_HOUR } from "@/game/catalog";
 import { isHouseKind } from "@/game/house";
 import { useGame } from "@/game/store";
+import { housePanelActive } from "./house-panel";
 import { getWorld } from "@/game/live";
 import { PERSONAL_ACTION_DURATION, getPersonalActionFx } from "@/game/personal-action-animation";
 import type { ItemId } from "@/game/types";
@@ -23,14 +24,18 @@ function ChestTransferIcon() {
 
 export function HouseGump() {
   const openHouseId = useGame((s) => s.openHouseId);
-  const buildings = useGame((s) => s.snap.buildings);
-  const pack = useGame((s) => s.snap.player?.pack);
+  const toast = useGame((s) => s.toast);
+  const active = useGame((s) => housePanelActive(s.snap.buildings, s.openHouseId, s));
+  // Bags/buildings are mutable simulation records. Snapshot identity also changes while paused.
+  const snap = useGame((s) => s.snap);
+  const buildings = snap.buildings;
+  const pack = snap.player?.pack;
   const houseItem = useGame((s) => s.houseItem);
   const houseTake = useGame((s) => s.houseTake);
-  const ghost = useGame((s) => Boolean(s.snap.player?.ghost));
-  const hour = useGame((s) => s.snap.hour);
+  const ghost = Boolean(snap.player?.ghost);
+  const hour = snap.hour;
   const house = buildings.find((b) => b.id === openHouseId);
-  if (!house || !isHouseKind(house.kind) || !openHouseId) return null;
+  if (!active || !house || !isHouseKind(house.kind) || !openHouseId) return null;
   const packHeld = heldItems(pack);
   const boxHeld = heldItems(house.chest);
   const transfer = getPersonalActionFx(getWorld());
@@ -39,85 +44,90 @@ export function HouseGump() {
   return (
     <div
       data-testid="house-chest"
-      className="pointer-events-auto absolute top-16 left-3 w-[min(100%-1.5rem,28rem)] rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4"
+      role="region"
+      aria-labelledby="house-chest-title"
+      className="pointer-events-auto absolute top-26 left-16 z-20 flex max-h-[calc(100%-11.5rem)] w-[min(100%-5rem,28rem)] flex-col rounded-[var(--radius-lg)] border border-border bg-bg/95 p-3 [@media(max-height:480px)_and_(min-width:640px)]:top-3 [@media(max-height:480px)_and_(min-width:640px)]:left-56 [@media(max-height:480px)_and_(min-width:640px)]:max-h-[calc(100%-5.75rem)] [@media(max-height:480px)_and_(min-width:640px)]:w-[min(100%-21rem,28rem)]"
     >
-      <p className="font-display text-sm text-fg">{BUILDING_META[house.kind].label}</p>
-      <p className="text-pretty text-xs leading-relaxed text-muted">
-        A locked chest. Not as safe as the bank. Yours while you hold the dirt.
-      </p>
-      {chestTransfer ? (
-        <div key={`${chestTransfer.at}:${chestTransfer.direction}`} className="pointer-events-none mt-3 flex items-center justify-center gap-3 rounded-[var(--radius-md)] border-2 border-gold bg-amber-950 px-3 py-3 shadow-lg" data-testid="house-transfer-fx">
-          <span className="flex flex-col items-center gap-1 text-[9px] font-bold tracking-wider text-fg">
-            <BagTransferIcon />
-            PACK
-          </span>
-          <span className="flex items-center gap-1 text-xl font-bold text-gold">
-            {chestTransfer.direction === "in" ? "››" : "‹‹"}
-            <span className="flex flex-col items-center gap-1 text-[9px] tracking-wider text-fg">
-              <ItemGlyph id={chestTransfer.item} className="size-7 animate-pulse border-2 border-white" />
-              {ITEM_META[chestTransfer.item].label.toUpperCase()}
+      <h2 id="house-chest-title" className="shrink-0 font-display text-sm text-fg">{BUILDING_META[house.kind].label}</h2>
+      <div data-testid="house-chest-content" className="min-h-0 overflow-y-auto overscroll-contain">
+        <p className="text-pretty text-xs leading-relaxed text-muted">
+          A locked chest. Not as safe as the bank. Yours while you hold the dirt.
+        </p>
+        {chestTransfer ? (
+          <div key={`${chestTransfer.at}:${chestTransfer.direction}`} className="pointer-events-none mt-3 flex items-center justify-center gap-3 rounded-[var(--radius-md)] border-2 border-gold bg-amber-950 px-3 py-3 shadow-lg" data-testid="house-transfer-fx">
+            <span className="flex flex-col items-center gap-1 text-[9px] font-bold tracking-wider text-fg">
+              <BagTransferIcon />
+              PACK
             </span>
-            {chestTransfer.direction === "in" ? "››" : "‹‹"}
-          </span>
-          <span className="flex flex-col items-center gap-1 text-[9px] font-bold tracking-wider text-fg">
-            <ChestTransferIcon />
-            CHEST
-          </span>
-        </div>
-      ) : null}
-      <div className="mt-3 grid grid-cols-2 gap-3">
-        <div>
-          <p className="font-display text-xs tracking-wider text-muted uppercase">Pack</p>
-          {packHeld.length === 0 ? (
-            <p className="mt-1 text-xs text-muted">Nothing to put in.</p>
-          ) : (
-            <ul className="mt-1 max-h-48 space-y-1 overflow-auto">
-              {packHeld.map((id) => (
-                <li key={id}>
-                  <Tip content={<ItemTipContent id={id} />} className="w-full min-w-0">
-                    <button
-                      type="button"
-                      disabled={ghost}
-                      onClick={() => houseItem(id, pack?.[id] ?? 0)}
-                      className="flex min-h-11 w-full min-w-0 items-center gap-2 rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left text-sm text-fg disabled:opacity-50"
-                    >
-                      <ItemGlyph id={id} />
-                      <span className="truncate">{ITEM_META[id].label}</span>
-                      <span className="ml-auto shrink-0 text-xs text-muted tabular-nums">{pack?.[id]}</span>
-                    </button>
-                  </Tip>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-        <div>
-          <p className="font-display text-xs tracking-wider text-muted uppercase">Chest</p>
-          {boxHeld.length === 0 ? (
-            <p className="mt-1 text-xs text-muted">Empty.</p>
-          ) : (
-            <ul className="mt-1 max-h-48 space-y-1 overflow-auto">
-              {boxHeld.map((id) => (
-                <li key={id}>
-                  <Tip content={<ItemTipContent id={id} />} className="w-full min-w-0">
-                    <button
-                      type="button"
-                      disabled={ghost}
-                      onClick={() => houseTake(id, house.chest?.[id] ?? 0)}
-                      className="flex min-h-11 w-full min-w-0 items-center gap-2 rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left text-sm text-fg disabled:opacity-50"
-                    >
-                      <ItemGlyph id={id} />
-                      <span className="truncate">{ITEM_META[id].label}</span>
-                      <span className="ml-auto shrink-0 text-xs text-muted tabular-nums">{house.chest?.[id]}</span>
-                    </button>
-                  </Tip>
-                </li>
-              ))}
-            </ul>
-          )}
+            <span className="flex items-center gap-1 text-xl font-bold text-gold">
+              {chestTransfer.direction === "in" ? "››" : "‹‹"}
+              <span className="flex flex-col items-center gap-1 text-[9px] tracking-wider text-fg">
+                <ItemGlyph id={chestTransfer.item} className="size-7 animate-pulse border-2 border-white" />
+                {ITEM_META[chestTransfer.item].label.toUpperCase()}
+              </span>
+              {chestTransfer.direction === "in" ? "››" : "‹‹"}
+            </span>
+            <span className="flex flex-col items-center gap-1 text-[9px] font-bold tracking-wider text-fg">
+              <ChestTransferIcon />
+              CHEST
+            </span>
+          </div>
+        ) : null}
+        <div className="mt-3 grid grid-cols-1 gap-3 min-[380px]:grid-cols-2">
+          <div>
+            <p className="font-display text-xs tracking-wider text-muted uppercase">Pack</p>
+            {packHeld.length === 0 ? (
+              <p className="mt-1 text-xs text-muted">Nothing to put in.</p>
+            ) : (
+              <ul className="mt-1 max-h-48 space-y-1 overflow-auto">
+                {packHeld.map((id) => (
+                  <li key={id}>
+                    <Tip content={<ItemTipContent id={id} />} className="w-full min-w-0">
+                      <button
+                        type="button"
+                        disabled={ghost}
+                        onClick={() => houseItem(id, pack?.[id] ?? 0)}
+                        className="flex min-h-11 w-full min-w-0 items-center gap-2 rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left text-sm text-fg disabled:opacity-50"
+                      >
+                        <ItemGlyph id={id} />
+                        <span className="truncate">{ITEM_META[id].label}</span>
+                        <span className="ml-auto shrink-0 text-xs text-muted tabular-nums">{pack?.[id]}</span>
+                      </button>
+                    </Tip>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <div>
+            <p className="font-display text-xs tracking-wider text-muted uppercase">Chest</p>
+            {boxHeld.length === 0 ? (
+              <p className="mt-1 text-xs text-muted">Empty.</p>
+            ) : (
+              <ul className="mt-1 max-h-48 space-y-1 overflow-auto">
+                {boxHeld.map((id) => (
+                  <li key={id}>
+                    <Tip content={<ItemTipContent id={id} />} className="w-full min-w-0">
+                      <button
+                        type="button"
+                        disabled={ghost}
+                        onClick={() => houseTake(id, house.chest?.[id] ?? 0)}
+                        className="flex min-h-11 w-full min-w-0 items-center gap-2 rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left text-sm text-fg disabled:opacity-50"
+                      >
+                        <ItemGlyph id={id} />
+                        <span className="truncate">{ITEM_META[id].label}</span>
+                        <span className="ml-auto shrink-0 text-xs text-muted tabular-nums">{house.chest?.[id]}</span>
+                      </button>
+                    </Tip>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
-      <Button className="mt-3 w-full" variant="ghost" onClick={() => useGame.setState({ openHouseId: null })}>
+      {toast ? <p data-testid="house-feedback" role="status" aria-live="polite" className="pointer-events-none mt-2 shrink-0 rounded-[var(--radius-md)] border border-border bg-surface-2 px-2 py-1.5 text-pretty text-xs break-words text-fg">{toast}</p> : null}
+      <Button className="mt-3 w-full shrink-0" variant="ghost" onClick={() => useGame.setState({ openHouseId: null })}>
         Close
       </Button>
     </div>

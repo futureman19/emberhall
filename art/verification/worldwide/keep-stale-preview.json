@@ -1,0 +1,11 @@
+{
+  "issue": "Long-lived preview serves removed old chunk after finished rebuild",
+  "oldLinkedAssets": [
+    "/assets/index-DJc50c9K.js",
+    "/assets/rolldown-runtime-C0FnF6B9.js",
+    "/assets/routes-BtBVX4KH.js",
+    "/assets/styles-DsTtAquI.css"
+  ],
+  "verifiedFileRoot": ".vercel/output/static",
+  "status": "restart-required"
+}

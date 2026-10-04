@@ -3,13 +3,12 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { civicCharacterArt, civicVisualYaw } from './civic-character.ts';
 
-test('only three starting civic roles inherit approved authored proportions', () => {
-  for (const role of ['banker', 'provisioner', 'healer']) {
-    assert.equal(civicCharacterArt({ role, home: { tx: 258, ty: 293 }, isPlayer: false }), true);
-    assert.equal(civicCharacterArt({ role, home: { tx: 178, ty: 339 }, isPlayer: false }), false);
-    assert.equal(civicCharacterArt({ role, home: null, isPlayer: false }), false);
+test('every existing NPC class and civic role uses approved art worldwide', () => {
+  for (const role of [null, 'banker', 'provisioner', 'healer']) {
+    for (const home of [null, { tx: 258, ty: 293 }, { tx: 178, ty: 339 }, { tx: 12, ty: 12 }]) {
+      assert.equal(civicCharacterArt({ role, home, isPlayer: false }), true);
+    }
   }
-  assert.equal(civicCharacterArt({ role: 'guard', home: { tx: 258, ty: 293 }, isPlayer: false }), false);
   assert.equal(civicCharacterArt({ role: null, home: null, isPlayer: true }), true);
 });
 

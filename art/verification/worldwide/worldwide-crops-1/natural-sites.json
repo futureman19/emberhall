@@ -1,0 +1,41 @@
+{
+  "seed": 2469134,
+  "herbs": [
+    {
+      "id": "herb_0",
+      "kind": "moss",
+      "tx": 420,
+      "ty": 198,
+      "until": 0
+    },
+    {
+      "id": "herb_14",
+      "kind": "mandrake",
+      "tx": 204,
+      "ty": 107,
+      "until": 0
+    },
+    {
+      "id": "herb_26",
+      "kind": "ginseng",
+      "tx": 196,
+      "ty": 223,
+      "until": 0
+    },
+    {
+      "id": "herb_38",
+      "kind": "ash",
+      "tx": 425,
+      "ty": 414,
+      "until": 0
+    },
+    {
+      "id": "herb_50",
+      "kind": "pearl",
+      "tx": 184,
+      "ty": 385,
+      "until": 0
+    }
+  ],
+  "plots": []
+}

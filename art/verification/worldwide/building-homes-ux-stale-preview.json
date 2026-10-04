@@ -1,0 +1,22 @@
+[
+  {
+    "url": "/assets/index-DNwqyWXw.js",
+    "error": "HTTP Error 404: ",
+    "match": false
+  },
+  {
+    "url": "/assets/rolldown-runtime-C0FnF6B9.js",
+    "status": 200,
+    "match": true
+  },
+  {
+    "url": "/assets/routes-DJa39D02.js",
+    "error": "HTTP Error 404: ",
+    "match": false
+  },
+  {
+    "url": "/assets/styles-H1TFFXgf.css",
+    "status": 200,
+    "match": true
+  }
+]

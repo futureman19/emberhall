@@ -1,0 +1,302 @@
+{
+  "scope": "Controlled planted-timber presentation/lifecycle and selected rare wild-node gates. All eight species meet this bounded scope cumulatively; latest fresh browser rerun covers redwood/yew/ghostwood, including real touch-only ghostwood action entry and exact Ghostwood labels. All eight planted labels have fresh unit regression coverage. Pine/willow growth uses saved saplings due chooser ties. Natural forest, full animation, physical phones, performance and release acceptance remain pending. Historical totals retain 12 expected limitation observations, not positive UX passes.",
+  "verified_species": 8,
+  "fresh_tests": 895,
+  "fresh_browser_checks": 589,
+  "cumulative_browser_assertions": 1613,
+  "historical_limitation_observations": 12,
+  "runs": [
+    {
+      "mode": "candidate",
+      "results": "timber-ux-candidate-v1/results.json",
+      "passed": true,
+      "checks": 214,
+      "device_species_cases": 6,
+      "wild_gate_cases": 28,
+      "real_mobile_holds": 2,
+      "cancelled_hold_negatives": 6,
+      "ghost_labels": [
+        "Chop Rough Ghostwood",
+        "Chop Rough Ghostwood",
+        "Chop Rough Ghostwood",
+        "Chop Rough Ghostwood"
+      ]
+    },
+    {
+      "mode": "fallback",
+      "results": "timber-ux-failure-v1/results.json",
+      "passed": true,
+      "checks": 203,
+      "device_species_cases": 6,
+      "wild_gate_cases": 28,
+      "real_mobile_holds": 2,
+      "cancelled_hold_negatives": 6,
+      "ghost_labels": [
+        "Chop Rough Ghostwood",
+        "Chop Rough Ghostwood",
+        "Chop Rough Ghostwood",
+        "Chop Rough Ghostwood"
+      ]
+    },
+    {
+      "mode": "built",
+      "results": "timber-ux-built-v1/results.json",
+      "passed": true,
+      "checks": 172,
+      "device_species_cases": 6,
+      "wild_gate_cases": 28,
+      "real_mobile_holds": 2,
+      "cancelled_hold_negatives": 6,
+      "ghost_labels": [
+        "Chop Rough Ghostwood",
+        "Chop Rough Ghostwood",
+        "Chop Rough Ghostwood",
+        "Chop Rough Ghostwood"
+      ]
+    }
+  ],
+  "catalog_evidence": [
+    {
+      "kind": "oak",
+      "mode": "candidate",
+      "results": "timber-candidate-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "oak",
+      "mode": "fallback",
+      "results": "timber-failure-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "oak",
+      "mode": "built",
+      "results": "timber-built-v2/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "pine",
+      "mode": "candidate",
+      "results": "timber-candidate-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "pine",
+      "mode": "fallback",
+      "results": "timber-failure-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "pine",
+      "mode": "built",
+      "results": "timber-built-v2/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "willow",
+      "mode": "candidate",
+      "results": "willow-ash-candidate-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "willow",
+      "mode": "fallback",
+      "results": "willow-ash-failure-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "willow",
+      "mode": "built",
+      "results": "willow-ash-built-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "birch",
+      "mode": "candidate",
+      "results": "timber-candidate-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "birch",
+      "mode": "fallback",
+      "results": "timber-failure-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "birch",
+      "mode": "built",
+      "results": "timber-built-v2/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "ash",
+      "mode": "candidate",
+      "results": "willow-ash-candidate-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "ash",
+      "mode": "fallback",
+      "results": "willow-ash-failure-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "ash",
+      "mode": "built",
+      "results": "willow-ash-built-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "redwood",
+      "mode": "candidate",
+      "results": "timber-ux-candidate-v1/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "redwood",
+      "mode": "fallback",
+      "results": "timber-ux-failure-v1/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "redwood",
+      "mode": "built",
+      "results": "timber-ux-built-v1/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "yew",
+      "mode": "candidate",
+      "results": "timber-ux-candidate-v1/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "yew",
+      "mode": "fallback",
+      "results": "timber-ux-failure-v1/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "yew",
+      "mode": "built",
+      "results": "timber-ux-built-v1/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "ghostwood",
+      "mode": "candidate",
+      "results": "timber-ux-candidate-v1/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "ghostwood",
+      "mode": "fallback",
+      "results": "timber-ux-failure-v1/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "ghostwood",
+      "mode": "built",
+      "results": "timber-ux-built-v1/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    }
+  ],
+  "asset_hashes": "timber-ux-catalog-hashes.json",
+  "html_freshness": "timber-ux-built-freshness-final.json"
+}

@@ -1,6 +1,5 @@
-import { COURT } from "../../game/atlas.ts";
-
-/** Presentation only: the caller supplies canonical/planted resource identity. */
+/** Presentation only: retained compatibility for existing oak saplings, now worldwide. */
 export function usesAuthoredOak(resourceId: string, tx: number, ty: number, ready: boolean) {
-  return ready && resourceId === "oak" && Math.hypot(tx - COURT.tx, ty - COURT.ty) <= 22;
+  void tx; void ty;
+  return ready && resourceId === "oak";
 }
