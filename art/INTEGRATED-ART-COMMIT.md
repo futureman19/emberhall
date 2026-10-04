@@ -1,5 +1,8 @@
 # Integrated artwork commit checkpoint
 
+## Cleanup follow-up — current local check status
+The unknown-error access now has an `instanceof Error` guard and a safe fallback. The nonexistent historical test-path token was removed. Seven regression checks cover thrown-value rendering and explicit test-path existence. Existing test commands now pass **1,042 tests**, TypeScript `--noEmit` passes, and scoped ESLint passes. The older typecheck/test-path blockers below are retained as checkpoint history, not current blockers. No new build/browser campaign or release approval is implied; the branch remains a draft review candidate.
+
 This commit saves the existing worldwide artwork implementation and supporting interaction/presentation fixes as a **local integration candidate**, not a production release or blanket QA approval.
 
 ## Included
