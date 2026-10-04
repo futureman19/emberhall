@@ -782,6 +782,7 @@ export function castNow(world: World): string | null {
     corpse.loyalty = 100;
     corpse.boundUntil = world.hour + NECRO_HOURS;
     corpse.name = `risen ${FAUNA_META[corpse.kind].label.toLowerCase()}`;
+    corpse.art = "risen";
     emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: corpse.x, tz: corpse.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.55);
     return withGain(`${meta.words}. The ${FAUNA_META[corpse.kind].label.toLowerCase()} rises, bound.`, gain);
@@ -815,7 +816,7 @@ export function castNow(world: World): string | null {
       }
       return false;
     };
-    const element: { kind: FaunaKind; name: string } = near("rock", 3) ? { kind: "ironwood_boar", name: "stonebound" }
+    const element: { kind: FaunaKind; name: "stonebound" | "tidebound" | "galebound" | "thornbound" } = near("rock", 3) ? { kind: "ironwood_boar", name: "stonebound" }
       : near("water", 3) || near("marsh", 3) ? { kind: "moss_badger", name: "tidebound" }
       : near("tree", 3) ? { kind: "pine_lynx", name: "galebound" }
       : { kind: "brambleback_stag", name: "thornbound" };
@@ -826,6 +827,7 @@ export function castNow(world: World): string | null {
     beast.loyalty = 100;
     beast.boundUntil = world.hour + ELEMENTAL_HOURS;
     beast.name = element.name;
+    beast.art = element.name;
     beast.maxHp = Math.floor(beast.maxHp * 1.25);
     beast.hp = beast.maxHp;
     world.fauna.push(beast);

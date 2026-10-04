@@ -167,6 +167,7 @@ test("necromancy - a corpse answers, bound, and only a corpse", () => {
   assert.equal(dead.ownerId, world.player.id, "bound to you");
   assert.ok(dead.hp > 0, "with a semblance of life");
   assert.ok(dead.boundUntil && dead.boundUntil > world.hour, "held by the binding, not the bond");
+  assert.equal(dead.art, "risen", "spell-art flag so the corpse does not look alive");
 });
 
 test("summon elemental - the terrain chooses what answers", () => {
@@ -177,6 +178,8 @@ test("summon elemental - the terrain chooses what answers", () => {
   const bound = world.fauna.filter((c) => c.ownerId === world.player.id && c.boundUntil && c.boundUntil > world.hour);
   assert.equal(bound.length, 1, "one elemental stands bound");
   assert.ok(bound[0]!.name != null && bound[0]!.name!.length > 0, "it is named for its element");
+  assert.equal(bound[0]!.art, bound[0]!.name, "spell-art flag matches the elemental name");
+  assert.ok(["thornbound", "stonebound", "galebound", "tidebound"].includes(bound[0]!.art!), "one of the four elementals");
   // A second calling loosens the first.
   world.player.mana = 120;
   assert.equal(commandCast(world, "summonelemental", { kind: "self" }), null);
