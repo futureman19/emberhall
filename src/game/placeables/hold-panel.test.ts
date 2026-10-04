@@ -113,9 +113,11 @@ test("cancelPlacement with nothing armed is a quiet no-op", () => {
   assert.equal(encodeSave(getWorld()), before);
 });
 
-test("Esc and right-click are wired to cancelPlacement", () => {
+test("Esc, right-click and long-press are wired to cancelPlacement", () => {
   const hud = readFileSync(new URL("../../components/game/hud.tsx", import.meta.url), "utf8");
   const scene = readFileSync(new URL("../../components/game/world-scene.tsx", import.meta.url), "utf8");
   assert.match(hud, /e\.key === "Escape"[\s\S]{0,400}cancelPlacement\(\)/);
   assert.match(scene, /ev\.button !== 2[\s\S]{0,200}cancelPlacement\(\)/);
+  assert.match(scene, /TOUCH_HOLD_MS/);
+  assert.match(scene, /clearCancelTouch\(\);\s*useGame\.getState\(\)\.cancelPlacement\(\)/);
 });

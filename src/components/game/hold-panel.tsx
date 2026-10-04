@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn, coarsePointer } from "@/lib/utils";
 import { BUILD_ORDER, BUILDING_META } from "@/game/catalog";
 import { PLACEABLE_BY_ID, PLACEABLE_CATALOG, PLACEABLE_CATEGORIES } from "@/game/placeables/catalog";
 import { BlueprintGump } from "@/components/game/build/blueprint-gump";
@@ -89,7 +89,7 @@ export function HoldPanel() {
         <p className="mt-3 text-xs text-fg">
           Selected: {PLACEABLE_BY_ID[hold.definitionId]?.label} — {costLine(hold.definitionId)}
           {hold.reason ? ` · ${hold.reason}` : ""}
-          <span className="mt-1 block text-muted">Esc or right-click lets it go.</span>
+          <span className="mt-1 block text-muted">{coarsePointer() ? "Long-press lets it go." : "Esc or right-click lets it go."}</span>
         </p>
       ) : null}
       <ul className="mt-3 space-y-1">

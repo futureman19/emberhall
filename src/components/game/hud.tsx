@@ -47,7 +47,7 @@ import { firstPersonHotkey, toggleFirstPerson } from "@/game/first-person-view";
 import { getGraphicsSettings, updateGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
 import { useGame } from "@/game/store";
 import type { PanelId, Speed } from "@/game/types";
-import { cn } from "@/lib/utils";
+import { cn, coarsePointer } from "@/lib/utils";
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 
 function clockLabel(clock: number, day: number) {
@@ -811,10 +811,11 @@ function BuildRibbon() {
   const till = useGame((s) => s.tillArmed);
   const armBuild = useGame((s) => s.armBuild);
   const armTill = useGame((s) => s.armTill);
+  const letGo = coarsePointer() ? "long-press lets go" : "Esc or right-click lets go";
   if (till) {
     return (
       <div className="pointer-events-auto absolute top-20 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-[var(--radius-md)] border border-border bg-bg/90 px-3 py-1">
-        <p className="font-display text-xs tracking-wider text-fg uppercase">Till a plot · click grass or dirt · Esc or right-click lets go</p>
+        <p className="font-display text-xs tracking-wider text-fg uppercase">Till a plot · click grass or dirt · {letGo}</p>
         <button type="button" className="text-xs text-muted" onClick={() => armTill(false)}>
           Cancel
         </button>
@@ -824,7 +825,7 @@ function BuildRibbon() {
   if (!kind) return null;
   return (
     <div className="pointer-events-auto absolute top-20 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-[var(--radius-md)] border border-border bg-bg/90 px-3 py-1">
-      <p className="font-display text-xs tracking-wider text-fg uppercase">Raise {BUILDING_META[kind].label} · drag the shade, lift to raise · Esc or right-click lets go</p>
+      <p className="font-display text-xs tracking-wider text-fg uppercase">Raise {BUILDING_META[kind].label} · drag the shade, lift to raise · {letGo}</p>
       <button type="button" className="text-xs text-muted" onClick={() => armBuild(null)}>
         Cancel
       </button>
