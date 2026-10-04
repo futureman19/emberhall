@@ -53,8 +53,16 @@ test("polish - mirror images shimmer with their own seal", () => {
 test("polish - a leap flashes where you leave and where you land", () => {
   const { world, player } = fixture();
   world.hour = 100;
-  assert.equal(commandCast(world, "jump", { kind: "tile", tx: 34, ty: 30 }), null);
-  const note = castNow(world);
+  // Pin the fizzle roll — at 100 skill the chance is high but never 1.
+  const r = Math.random;
+  Math.random = () => 0;
+  let note: string | null = null;
+  try {
+    assert.equal(commandCast(world, "jump", { kind: "tile", tx: 34, ty: 30 }), null);
+    note = castNow(world);
+  } finally {
+    Math.random = r;
+  }
   assert.match(note ?? "", /ground rushes up/i);
   const jumps = spellEffects(world).filter((e) => e.spell === "jump");
   assert.ok(jumps.length >= 2, `two flashes (${jumps.length})`);
