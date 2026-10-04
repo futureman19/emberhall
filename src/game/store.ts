@@ -17,7 +17,7 @@ import { commandPick } from "./herbs.ts";
 import { commandPlantTree } from "./forestry.ts";
 import { getWorld, resetWorld, setWorld, snapshot } from "./live.ts";
 import type { LookChoice } from "./look/types.ts";
-import { commandCast, forgetMark, OFFENSIVE_SPELLS, SPELL_META, hasBook } from "./magery.ts";
+import { commandCast, forgetMark, OFFENSIVE_SPELLS, SPELL_META, TILE_OFFENSIVE_SPELLS, hasBook } from "./magery.ts";
 import type { CastTarget } from "./magery.ts";
 import {
   commandApproach,
@@ -481,10 +481,11 @@ export const useGame = create<GameUI>((set, get) => ({
       set({ snap: snapshot(), ctx: null, tillAt: { tx, ty } });
       return;
     }
-    if (w.player.armedSpell === "teleport") {
-      const err = commandCast(w, "teleport", { kind: "tile", tx, ty });
+    if (w.player.armedSpell === "teleport" || (w.player.armedSpell && TILE_OFFENSIVE_SPELLS.has(w.player.armedSpell))) {
+      const spell = w.player.armedSpell;
+      const err = commandCast(w, spell, { kind: "tile", tx, ty });
       if (err) get().flash(err);
-      else get().flash(SPELL_META.teleport.words);
+      else get().flash(SPELL_META[spell].words);
       set({ snap: snapshot(), ctx: null, openBook: false });
       return;
     }

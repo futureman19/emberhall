@@ -213,7 +213,16 @@ export type SpellId =
   | "invisibility"
   | "curse"
   | "mark"
-  | "recall";
+  | "recall"
+  | "thornsnare"
+  | "ironwood"
+  | "leech"
+  | "flash"
+  | "fireblast"
+  | "blizzard"
+  | "chainlightning"
+  | "sleep"
+  | "meteor";
 
 export type ClassId = "ranger" | "warrior" | "mage" | "rogue" | "merchant";
 export type NpcRole = "banker" | "provisioner" | "healer" | "alchemist";
@@ -404,6 +413,15 @@ export interface Creature {
   curseUntil?: number;
   /** Summon spell: bound to the caster's side until this hour, then crumbles. */
   boundUntil?: number;
+  /** Thorn Snare: rooted until this hour; thorns bite each snareTickAt. */
+  snareUntil?: number;
+  snareTickAt?: number;
+  /** Sleep: drifts until this hour — any wound wakes it. */
+  sleptUntil?: number;
+  /** Flash: blinded until this hour — cannot find a fight. */
+  blindUntil?: number;
+  /** Blizzard: chilled until this hour — slower stride. */
+  chillUntil?: number;
 }
 
 /** A shovel-cut in the dirt. Rain fills it. Authored pits are not holes. */
@@ -507,6 +525,8 @@ export interface PlayerState {
   blessUntil: number;
   /** An Lor Xen: the world forgets your shape until this hour. */
   invisUntil: number;
+  /** Rel Tym: bark-hard skin blunts every bite until this hour. */
+  ironwoodUntil: number;
   armedSpell: SpellId | null;
   marks: RecallMark[];
   gateCoolUntil: number;

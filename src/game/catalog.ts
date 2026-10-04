@@ -15,6 +15,28 @@ export const CURSE_BITE_WEAKEN = 0.25;
 export const CURSE_SLOW = 0.75;
 /** Kal Xen: how long the binding holds (game hours). */
 export const SUMMON_HOURS = 2;
+/** An Xen: how long the thorn roots hold; they bite each SNARE_TICK_HOURS. */
+export const SNARE_HOURS = 0.35;
+export const SNARE_TICK_HOURS = 0.08;
+export const SNARE_TICK_DMG = 2;
+/** Rel Tym: how long the bark-hard skin holds; how much bite it turns. */
+export const IRONWOOD_HOURS = 1;
+export const IRONWOOD_WARD = 3;
+/** In Zu: how long the beast drifts — any wound wakes it early. */
+export const SLEEP_HOURS = 0.6;
+/** In Lor Vas: three seconds of white — how far the burst reaches. */
+export const BLIND_HOURS = 3 / SECONDS_PER_HOUR;
+export const FLASH_RADIUS = 12;
+/** Vas Glaciem: how long the chill slows the stride, and by how much. */
+export const CHILL_HOURS = 0.25;
+export const CHILL_SLOW = 0.5;
+/** Ground rings: the fire blast's reach, the meteor's wider ruin. */
+export const BLAST_RADIUS = 3;
+export const METEOR_RADIUS = 4;
+/** Por Ort Grav Vas: how far the bolt arcs, how many it finds, how weak the kiss. */
+export const CHAIN_RANGE = 6;
+export const CHAIN_MAX = 2;
+export const CHAIN_FALLOFF = 0.6;
 /** Venom works this long on a creature, biting each POISON_TICK_HOURS. */
 export const POISON_FAUNA_HOURS = 0.8;
 export const POISON_TICK_HOURS = 0.08;

@@ -46,6 +46,7 @@ function bareWorld(seed = 7): World {
       poisonTickAt: 0,
       blessUntil: 0,
       invisUntil: 0,
+      ironwoodUntil: 0,
       armedSpell: null,
       marks: [],
       gateCoolUntil: 0,

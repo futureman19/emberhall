@@ -292,6 +292,144 @@ def sfx_curse() -> np.ndarray:
     return finish(sig, peak=0.8)
 
 
+def sfx_thornsnare() -> np.ndarray:
+    total = 0.8
+    sig = np.zeros(int(SR * total))
+    # the briar whips up: a fibrous rising scratch
+    scratch = sweep_noise(0.3, 700, 2600, 1.6, seed=53) * adsr(int(SR * 0.3), 0.03, 0.1)
+    sig[: len(scratch)] += scratch * 0.8
+    # woody snaps as the coils cinch
+    for onset, f0 in [(0.18, 900.0), (0.3, 700.0), (0.44, 520.0)]:
+        snap = sweep_noise(0.03, f0 * 3, f0 * 2, 0.9, seed=int(f0)) * 2.2
+        start = int(SR * onset)
+        sig[start : start + len(snap)] += snap
+        knock = gliss(f0, f0 * 0.6, 0.06, 1.3) * np.exp(-t(0.06) / 0.025)
+        sig[start : start + len(knock)] += knock * 0.6
+    # and the prickles keep biting
+    prickle = sweep_noise(0.25, 4000, 5200, 2.0, seed=59) * adsr(int(SR * 0.25), 0.02, 0.12)
+    sig[int(SR * 0.5) : int(SR * 0.5) + len(prickle)] += prickle * 0.2
+    return finish(sig, peak=0.8)
+
+
+def sfx_ironwood() -> np.ndarray:
+    total = 1.0
+    sig = np.zeros(int(SR * total))
+    # a deep wooden knock, then the grain settling
+    knock = gliss(196.0, 98.0, 0.12, 1.5) * np.exp(-t(0.12) / 0.04)
+    sig[: len(knock)] += knock * 1.1
+    body = (gliss(130.8, 123.5, 0.7) + 0.5 * gliss(196.0, 185.0, 0.7)) * adsr(int(SR * 0.7), 0.02, 0.35)
+    sig[int(SR * 0.08) : int(SR * 0.08) + len(body)] += body * 0.3
+    grain = sweep_noise(0.6, 900, 500, 1.2, seed=61) * np.exp(-t(0.6) / 0.35)
+    sig[int(SR * 0.12) : int(SR * 0.12) + len(grain)] += grain * 0.25
+    sig = np.tanh(sig * 1.1)
+    return finish(sig, peak=0.78)
+
+
+def sfx_leech() -> np.ndarray:
+    total = 0.8
+    sig = np.zeros(int(SR * total))
+    # a wet attach, then the slow draw downward
+    attach = sweep_noise(0.06, 900, 500, 1.0, seed=67) * 1.8
+    sig[: len(attach)] += attach
+    draw = sweep_noise(0.45, 1400, 300, 1.1, seed=71) * adsr(int(SR * 0.45), 0.08, 0.2)
+    sig[int(SR * 0.1) : int(SR * 0.1) + len(draw)] += draw * 0.5
+    pulse = gliss(70.0, 55.0, 0.55) * (1 + 0.5 * np.sin(2 * np.pi * 4 * t(0.55))) * np.exp(-t(0.55) / 0.3)
+    sig[int(SR * 0.12) : int(SR * 0.12) + len(pulse)] += pulse * 0.5
+    sig = np.tanh(sig * 1.15)
+    return finish(sig, peak=0.78)
+
+
+def sfx_flash() -> np.ndarray:
+    total = 0.65
+    sig = np.zeros(int(SR * total))
+    # the white snap: instant broadband burst
+    snap = noise(int(SR * 0.03), seed=73) * 2.6
+    sig[: len(snap)] += snap * np.linspace(1, 0.2, len(snap))
+    # the high ring your ears keep after
+    ring = (gliss(5200.0, 5100.0, 0.45) + 0.4 * gliss(7800.0, 7600.0, 0.45)) * np.exp(-t(0.45) / 0.18)
+    sig[int(SR * 0.03) : int(SR * 0.03) + len(ring)] += ring * 0.28
+    return finish(sig, peak=0.75)
+
+
+def sfx_fireblast() -> np.ndarray:
+    total = 0.9
+    sig = np.zeros(int(SR * total))
+    # the ground thump, then the ring of fire rolling outward
+    thump = gliss(120.0, 40.0, 0.18, 1.3) * np.exp(-t(0.18) / 0.07)
+    sig[: len(thump)] += thump * 1.2
+    roar = sweep_noise(0.6, 1800, 300, 0.6, seed=79) * adsr(int(SR * 0.6), 0.02, 0.3)
+    sig[int(SR * 0.05) : int(SR * 0.05) + len(roar)] += roar * 0.8
+    crackle = noise(int(SR * 0.4), seed=83) * sweep_noise(0.4, 3000, 1500, 0.8, seed=89)
+    sig[int(SR * 0.3) : int(SR * 0.3) + len(crackle)] += crackle * 0.12
+    sig = np.tanh(sig * 1.2)
+    return finish(sig, peak=0.75)
+
+
+def sfx_blizzard() -> np.ndarray:
+    total = 1.1
+    sig = np.zeros(int(SR * total))
+    # the front arrives: a low howl climbing into wind
+    howl = sweep_noise(total, 300, 1800, 0.7, seed=97) * adsr(int(SR * total), 0.25, 0.4)
+    sig += howl * 0.55
+    gust = sweep_noise(0.4, 900, 2400, 1.0, seed=101) * np.sin(np.pi * np.clip(t(0.4) / 0.4, 0, 1)) ** 1.2
+    sig[int(SR * 0.45) : int(SR * 0.45) + len(gust)] += gust * 0.4
+    # ice crystals: a scatter of high cold chimes
+    for i, f in enumerate([2093.0, 2637.0, 3136.0, 3729.0]):
+        sig += bell(f, 0.5, 0.22, 0.12 + i * 0.11, total) * 0.22
+    return finish(sig * 0.9)
+
+
+def sfx_chainlightning() -> np.ndarray:
+    total = 0.7
+    sig = np.zeros(int(SR * total))
+    # the first crack — same sky as lightning
+    snap = sweep_noise(0.025, 7500, 9000, 0.6, seed=103)
+    sig[: len(snap)] += snap * 3.0
+    fry = sweep_noise(0.18, 8000, 900, 0.9, seed=107) * np.exp(-t(0.18) / 0.08)
+    sig[int(SR * 0.02) : int(SR * 0.02) + len(fry)] += fry * 1.0
+    # the arcs: two weaker cracks chasing after
+    for onset, amp in [(0.24, 1.6), (0.42, 1.0)]:
+        arc = sweep_noise(0.02, 6500, 8000, 0.7, seed=int(onset * 1000))
+        start = int(SR * onset)
+        sig[start : start + len(arc)] += arc * amp
+        tail = sweep_noise(0.1, 5000, 1200, 1.0, seed=int(onset * 2000)) * np.exp(-t(0.1) / 0.05)
+        sig[start + int(SR * 0.02) : start + int(SR * 0.02) + len(tail)] += tail * 0.5
+    sig = np.tanh(sig * 1.1)
+    return finish(sig, peak=0.76)
+
+
+def sfx_sleep() -> np.ndarray:
+    total = 1.1
+    sig = np.zeros(int(SR * total))
+    # a small lullaby, descending — bells losing their grip
+    for i, f in enumerate([784.0, 659.3, 587.3, 523.3]):
+        sig += bell(f, 0.9, 0.4, 0.08 + i * 0.18, total) * (0.4 - i * 0.07)
+    # the hush that tucks it in
+    hush = sweep_noise(0.7, 3000, 800, 0.8, seed=109) * adsr(int(SR * 0.7), 0.25, 0.35)
+    sig[int(SR * 0.35) : int(SR * 0.35) + len(hush)] += hush * 0.18
+    return finish(sig * 0.85)
+
+
+def sfx_meteor() -> np.ndarray:
+    total = 1.4
+    sig = np.zeros(int(SR * total))
+    # the whistle of the fall, long and dropping
+    whistle = gliss(2600.0, 300.0, 0.6, 1.2) * adsr(int(SR * 0.6), 0.05, 0.05)
+    sig[: len(whistle)] += whistle * 0.5
+    # the impact: sub boom + earth roar
+    boom = gliss(90.0, 32.0, 0.7, 1.4) * np.exp(-t(0.7) / 0.35)
+    sig[int(SR * 0.55) : int(SR * 0.55) + len(boom)] += boom * 1.2
+    roar = sweep_noise(0.65, 1200, 200, 0.5, seed=113) * np.exp(-t(0.65) / 0.35)
+    sig[int(SR * 0.58) : int(SR * 0.58) + len(roar)] += roar * 0.9
+    # the scatter of falling debris
+    for onset in [0.75, 0.85, 0.98, 1.12]:
+        debris = sweep_noise(0.04, 2000, 800, 1.0, seed=int(onset * 500)) * 0.8
+        start = int(SR * onset)
+        sig[start : start + len(debris)] += debris
+    sig = np.tanh(sig * 1.25)
+    return finish(sig, peak=0.78)
+
+
 SPELLS = {
     "spell-nightsight": sfx_nightsight,
     "spell-heal": sfx_heal,
@@ -308,6 +446,15 @@ SPELLS = {
     "spell-paralyze": sfx_paralyze,
     "spell-invisibility": sfx_invisibility,
     "spell-curse": sfx_curse,
+    "spell-thornsnare": sfx_thornsnare,
+    "spell-ironwood": sfx_ironwood,
+    "spell-leech": sfx_leech,
+    "spell-flash": sfx_flash,
+    "spell-fireblast": sfx_fireblast,
+    "spell-blizzard": sfx_blizzard,
+    "spell-chainlightning": sfx_chainlightning,
+    "spell-sleep": sfx_sleep,
+    "spell-meteor": sfx_meteor,
 }
 
 if __name__ == "__main__":

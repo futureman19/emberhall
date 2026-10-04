@@ -1,5 +1,5 @@
 import { BARROW, MAP, PLACES, inGreybarrow } from "./atlas.ts";
-import { CURSE_BITE_WEAKEN, CURSE_SLOW, FAUNA_META, isNight, POISON_PLAYER_HOURS, POISON_TICK_HOURS, armorOf } from "./catalog.ts";
+import { CURSE_BITE_WEAKEN, CURSE_SLOW, CHILL_SLOW, FAUNA_META, IRONWOOD_WARD, isNight, POISON_PLAYER_HOURS, POISON_TICK_HOURS, SNARE_TICK_DMG, SNARE_TICK_HOURS, armorOf } from "./catalog.ts";
 import { COMBAT_BEAT } from "./combat-animation.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { spawnCorpsePile } from "./piles.ts";
@@ -418,7 +418,7 @@ export function provoke(world: World, c: Creature) {
  */
 export function strikePlayer(world: World, c: Creature, you: Person) {
   const arm = armorOf(world.player.wear) + rareMods(world).armor;
-  const ward = world.hour < world.player.blessUntil ? 2 : 0;
+  const ward = (world.hour < world.player.blessUntil ? 2 : 0) + (world.hour < world.player.ironwoodUntil ? IRONWOOD_WARD : 0);
   let bite = Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2) - ward);
   if (c.curseUntil && world.hour < c.curseUntil) bite = Math.max(1, Math.floor(bite * (1 - CURSE_BITE_WEAKEN)));
   you.hp = Math.max(0, you.hp - bite);
@@ -431,12 +431,18 @@ export function strikePlayer(world: World, c: Creature, you: Person) {
 }
 
 /** A fight is let go: back to grazing, cadence and route forgotten. */
-function letGo(c: Creature, world: World) {
+export function letGo(c: Creature, world: World) {
   c.task = "wander";
   c.taskUntil = world.hour;
   c.path = [];
   fightBeats.delete(c);
   fightPlans.delete(c);
+}
+
+/** In Zu — the hp a sleeping beast had when it drifted off. A wound wakes it. */
+const sleepHp = new WeakMap<Creature, number>();
+export function markAsleep(c: Creature) {
+  sleepHp.set(c, c.hp);
 }
 
 export function tickEcology(world: World, dt: number) {
@@ -471,6 +477,50 @@ export function tickEcology(world: World, dt: number) {
       c.task = "wander";
       c.taskUntil = world.hour + 0.4;
     }
+    // An Xen roots — no stride, and the thorns keep their own teeth.
+    if (c.snareUntil && world.hour < c.snareUntil) {
+      c.path = [];
+      if (world.hour >= (c.snareTickAt ?? 0)) {
+        c.hp -= SNARE_TICK_DMG;
+        c.snareTickAt = world.hour + SNARE_TICK_HOURS;
+        if (c.hp <= 0) {
+          c.hp = 0;
+          c.task = "dead";
+          c.snareUntil = 0;
+          c.snareTickAt = 0;
+          c.corpseUntil = world.hour + 8;
+          spawnCorpsePile(world, c);
+        }
+      }
+      continue;
+    }
+    if (c.snareUntil && world.hour >= c.snareUntil) {
+      c.snareUntil = 0;
+      c.snareTickAt = 0;
+      c.task = "wander";
+      c.taskUntil = world.hour + 0.4;
+    }
+    // In Zu — the beast drifts; a wound wakes it angry.
+    if (c.sleptUntil && world.hour < c.sleptUntil) {
+      const hpAtSleep = sleepHp.get(c);
+      if (hpAtSleep !== undefined && c.hp < hpAtSleep) {
+        c.sleptUntil = 0;
+        sleepHp.delete(c);
+        provoke(world, c);
+      } else {
+        c.path = [];
+        continue;
+      }
+    }
+    if (c.sleptUntil && world.hour >= c.sleptUntil) {
+      c.sleptUntil = 0;
+      sleepHp.delete(c);
+      c.task = "wander";
+      c.taskUntil = world.hour + 0.4;
+    }
+    // In Lor Vas / Vas Glaciem — time-based hexes simply lapse.
+    if (c.blindUntil && world.hour >= c.blindUntil) c.blindUntil = 0;
+    if (c.chillUntil && world.hour >= c.chillUntil) c.chillUntil = 0;
     // Venom keeps its teeth — the Poison spell's damage-over-time.
     if (c.poisonUntil && c.poisonUntil > 0) {
       if (world.hour >= c.poisonUntil) {
@@ -547,7 +597,7 @@ export function tickEcology(world: World, dt: number) {
       }
       c.taskUntil = world.hour + 0.6 + Math.random();
     }
-    if (you && NIGHT_HUNTERS.has(c.kind) && night && !c.ownerId && c.task !== "fight" && !you.ghost && world.hour >= world.player.invisUntil) {
+    if (you && NIGHT_HUNTERS.has(c.kind) && night && !c.ownerId && c.task !== "fight" && !you.ghost && world.hour >= world.player.invisUntil && !(c.blindUntil && world.hour < c.blindUntil)) {
       if (Math.hypot(c.x - you.x, c.z - you.z) < 10) {
         c.task = "fight";
         const path = astar(world, Math.round(c.x), Math.round(c.z), Math.round(you.x), Math.round(you.z), 2000);
@@ -599,7 +649,7 @@ export function tickEcology(world: World, dt: number) {
       const dx = n.tx - c.x;
       const dz = n.ty - c.z;
       const dist = Math.hypot(dx, dz);
-      const slow = c.curseUntil && world.hour < c.curseUntil ? CURSE_SLOW : 1;
+      const slow = (c.curseUntil && world.hour < c.curseUntil ? CURSE_SLOW : 1) * (c.chillUntil && world.hour < c.chillUntil ? CHILL_SLOW : 1);
       const step = Math.min(dist, 2.2 * dt * slow);
       if (dist < 0.12) c.path.shift();
       else {

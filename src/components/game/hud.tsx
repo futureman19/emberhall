@@ -35,7 +35,7 @@ import { getHoldBuild } from "@/game/placeables/build-mode";
 import { BUILDING_META, CLASS_META } from "@/game/catalog";
 import { phaseName } from "@/game/gates";
 import { getWorld } from "@/game/live";
-import { maxMana } from "@/game/magery";
+import { maxMana, OFFENSIVE_SPELLS, SPELL_META, TILE_OFFENSIVE_SPELLS } from "@/game/magery";
 import { nearestHealer } from "@/game/player";
 import { hasSave as hallHasSave } from "@/game/save";
 import { HoldPanel } from "@/components/game/hold-panel";
@@ -837,26 +837,17 @@ function TravelRibbon() {
   const n = useGame((s) => s.snap.youPath);
   const intent = useGame((s) => s.snap.player?.intent);
   const armed = useGame((s) => s.snap.player?.armedSpell);
-  if (armed === "magicarrow") {
-    return (
-      <p className="pointer-events-none absolute top-20 left-1/2 -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/80 px-3 py-1 font-display text-xs tracking-wider text-fg uppercase">
-        Magic Arrow · click a beast
-      </p>
-    );
-  }
-  if (armed === "fireball") {
-    return (
-      <p className="pointer-events-none absolute top-20 left-1/2 -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/80 px-3 py-1 font-display text-xs tracking-wider text-fg uppercase">
-        Fireball · click a beast
-      </p>
-    );
-  }
-  if (armed === "teleport") {
-    return (
-      <p className="pointer-events-none absolute top-20 left-1/2 -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/80 px-3 py-1 font-display text-xs tracking-wider text-fg uppercase">
-        Teleport · click the ground
-      </p>
-    );
+  if (armed) {
+    const lead = armed === "teleport" || TILE_OFFENSIVE_SPELLS.has(armed) ? "click the ground"
+      : OFFENSIVE_SPELLS.has(armed) ? "click a beast"
+      : null;
+    if (lead) {
+      return (
+        <p className="pointer-events-none absolute top-20 left-1/2 -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/80 px-3 py-1 font-display text-xs tracking-wider text-fg uppercase">
+          {SPELL_META[armed].label} · {lead}
+        </p>
+      );
+    }
   }
   if (!intent || intent.kind === "none" || n < 8) return null;
   const dest = PLACES.reduce(

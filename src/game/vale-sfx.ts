@@ -53,7 +53,16 @@ export type SfxId =
   | "spell_summon"
   | "spell_paralyze"
   | "spell_invisibility"
-  | "spell_curse";
+  | "spell_curse"
+  | "spell_thornsnare"
+  | "spell_ironwood"
+  | "spell_leech"
+  | "spell_flash"
+  | "spell_fireblast"
+  | "spell_blizzard"
+  | "spell_chainlightning"
+  | "spell_sleep"
+  | "spell_meteor";
 
 const SRC: Record<SfxId, string> = {
   chop: "/audio/sfx/chop.mp3",
@@ -83,6 +92,15 @@ const SRC: Record<SfxId, string> = {
   spell_paralyze: "/audio/sfx/spell-paralyze.mp3",
   spell_invisibility: "/audio/sfx/spell-invisibility.mp3",
   spell_curse: "/audio/sfx/spell-curse.mp3",
+  spell_thornsnare: "/audio/sfx/spell-thornsnare.mp3",
+  spell_ironwood: "/audio/sfx/spell-ironwood.mp3",
+  spell_leech: "/audio/sfx/spell-leech.mp3",
+  spell_flash: "/audio/sfx/spell-flash.mp3",
+  spell_fireblast: "/audio/sfx/spell-fireblast.mp3",
+  spell_blizzard: "/audio/sfx/spell-blizzard.mp3",
+  spell_chainlightning: "/audio/sfx/spell-chainlightning.mp3",
+  spell_sleep: "/audio/sfx/spell-sleep.mp3",
+  spell_meteor: "/audio/sfx/spell-meteor.mp3",
 };
 
 const POOL = 3;

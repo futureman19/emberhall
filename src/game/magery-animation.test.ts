@@ -35,7 +35,7 @@ test("failed spellcasting emits a visible fizzle event at the caster", () => {
 });
 
 test("spell fx profiles - every spell has a complete, distinct identity", () => {
-  assert.equal(SPELL_ORDER.length, 15);
+  assert.equal(SPELL_ORDER.length, 24);
   const kinds = new Set<string>();
   const voices = new Set<string>();
   for (const spell of SPELL_ORDER) {
@@ -49,11 +49,11 @@ test("spell fx profiles - every spell has a complete, distinct identity", () => 
     voices.add(p.motes);
     assert.equal(spellSfx(spell), `spell_${spell}`);
   }
-  // Eight archetypes across fifteen spells — kin share a motion (heal/cure/bless
+  // Eight archetypes across twenty-four spells — kin share a motion (heal/cure/bless
   // all fountain; magicarrow/poison/curse all dart; mark/summon both sigil)
   // but never a particle voice.
   assert.equal(kinds.size, 8);
-  assert.equal(voices.size, 15);
+  assert.equal(voices.size, 24);
 });
 
 test("windupGlow - tint per spell, safe fallback", () => {

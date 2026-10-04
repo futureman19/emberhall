@@ -1,7 +1,7 @@
 import { emitSpellEffect, spellEffects } from "./spell-effects.ts";
 import { PLACES, regionAt } from "./atlas.ts";
-import { BLESS_HOURS, CURSE_HOURS, FAUNA_META, INVIS_HOURS, ITEM_META, PARALYZE_HOURS, POISON_FAUNA_HOURS, POISON_TICK_HOURS, SECONDS_PER_HOUR, SUMMON_HOURS } from "./catalog.ts";
-import { spawn } from "./ecology.ts";
+import { BLAST_RADIUS, BLESS_HOURS, CHAIN_FALLOFF, CHAIN_MAX, CHAIN_RANGE, CHILL_HOURS, CURSE_HOURS, FAUNA_META, FLASH_RADIUS, INVIS_HOURS, IRONWOOD_HOURS, ITEM_META, METEOR_RADIUS, PARALYZE_HOURS, POISON_FAUNA_HOURS, POISON_TICK_HOURS, BLIND_HOURS, SECONDS_PER_HOUR, SLEEP_HOURS, SNARE_HOURS, SNARE_TICK_HOURS, SUMMON_HOURS } from "./catalog.ts";
+import { letGo, markAsleep, spawn } from "./ecology.ts";
 import { astarToRange, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { spawnCorpsePile } from "./piles.ts";
 import { rareName, rollKillRare } from "./rare.ts";
@@ -12,13 +12,15 @@ import type { ItemId, Person, RecallMark, SpellId, World } from "./types.ts";
 
 export const SPELL_ORDER: SpellId[] = [
   "nightsight", "heal", "magicarrow", "teleport", "fireball", "cure", "poison", "bless", "lightning", "summon", "paralyze", "invisibility", "curse", "mark", "recall",
+  "thornsnare", "ironwood", "leech", "flash", "fireblast", "blizzard", "chainlightning", "sleep", "meteor",
 ];
 
 export const SPELL_CIRCLES: { circle: number; label: string; ids: SpellId[] }[] = [
   { circle: 1, label: "First circle", ids: ["nightsight", "heal", "magicarrow"] },
-  { circle: 2, label: "Second", ids: ["teleport", "fireball", "cure", "poison"] },
-  { circle: 3, label: "Third", ids: ["bless", "lightning"] },
-  { circle: 4, label: "Fourth", ids: ["summon", "paralyze", "invisibility", "curse"] },
+  { circle: 2, label: "Second", ids: ["teleport", "fireball", "cure", "poison", "thornsnare"] },
+  { circle: 3, label: "Third", ids: ["bless", "lightning", "ironwood", "leech", "flash"] },
+  { circle: 4, label: "Fourth", ids: ["summon", "paralyze", "invisibility", "curse", "fireblast", "blizzard", "chainlightning", "sleep"] },
+  { circle: 6, label: "Sixth", ids: ["meteor"] },
 ];
 
 export const SPELL_META: Record<
@@ -40,6 +42,15 @@ export const SPELL_META: Record<
   curse: { label: "Curse", circle: 4, diff: 14, mana: 10, reagents: ["nightshade", "garlic", "silk"], words: "Des Sanct", target: "fauna", hint: "Sour a beast's strength." },
   mark: { label: "Mark", circle: 3, diff: 8, mana: 8, reagents: ["pearl", "moss", "mandrake"], words: "Kal Por Ylem", target: "self", hint: "Write this dirt on a rune." },
   recall: { label: "Recall", circle: 3, diff: 8, mana: 9, reagents: ["pearl", "moss", "mandrake"], words: "Kal Ort Por", target: "mark", hint: "Tap a mark. Walk off first." },
+  thornsnare: { label: "Thorn Snare", circle: 2, diff: 11, mana: 7, reagents: ["nightshade", "moss"], words: "An Xen", target: "fauna", hint: "Thorns hold and bite." },
+  ironwood: { label: "Ironwood", circle: 3, diff: 13, mana: 9, reagents: ["mandrake", "garlic"], words: "Rel Tym", target: "self", hint: "Skin like old bark." },
+  leech: { label: "Leech", circle: 3, diff: 13, mana: 9, reagents: ["nightshade", "pearl"], words: "Des Mani", target: "fauna", hint: "Their wound, your blood." },
+  flash: { label: "Flash", circle: 3, diff: 13, mana: 9, reagents: ["pearl", "ash"], words: "In Lor Vas", target: "self", hint: "Blind everything near." },
+  fireblast: { label: "Fire Blast", circle: 4, diff: 15, mana: 12, reagents: ["ash", "pearl", "mandrake"], words: "Vas Flam Ort", target: "tile", hint: "A ring of fire. Click the ground." },
+  blizzard: { label: "Blizzard", circle: 4, diff: 15, mana: 12, reagents: ["pearl", "ash", "moss"], words: "Vas Glaciem", target: "tile", hint: "Cold that slows. Click the ground." },
+  chainlightning: { label: "Chain Lightning", circle: 4, diff: 16, mana: 13, reagents: ["ash", "pearl", "mandrake"], words: "Por Ort Grav Vas", target: "fauna", hint: "The bolt arcs to the pack." },
+  sleep: { label: "Sleep", circle: 4, diff: 14, mana: 10, reagents: ["nightshade", "mandrake"], words: "In Zu", target: "fauna", hint: "It drifts off — until wounded." },
+  meteor: { label: "Meteor", circle: 6, diff: 20, mana: 18, reagents: ["ash", "mandrake", "pearl", "nightshade"], words: "Vas Flam Grav", target: "tile", hint: "The sky falls. Click the ground." },
 };
 
 export const ARROW_RANGE = 14;
@@ -47,7 +58,9 @@ export const FIREBALL_RANGE = 16;
 export const TELEPORT_RANGE = 10;
 export const MARK_CAP = 8;
 /** Spells that strike (or hex) a beast downrange. */
-export const OFFENSIVE_SPELLS: ReadonlySet<SpellId> = new Set(["magicarrow", "fireball", "poison", "lightning", "paralyze", "curse"]);
+export const OFFENSIVE_SPELLS: ReadonlySet<SpellId> = new Set(["magicarrow", "fireball", "poison", "lightning", "paralyze", "curse", "thornsnare", "leech", "chainlightning", "sleep"]);
+/** Spells that ruin the ground itself — armed, then released on a clicked tile. */
+export const TILE_OFFENSIVE_SPELLS: ReadonlySet<SpellId> = new Set(["fireblast", "blizzard", "meteor"]);
 
 /** Every spell has its own voice — the windup "cast" hum is shared, the
  * release is not. Fizzle keeps its own sad sputter. */
@@ -147,7 +160,7 @@ function pathToward(world: World, tx: number, ty: number, range: number) {
 /** Release reach for a harmful spell — the one resolver behind command
  *  admission, ongoing pursuit, terrain replanning, and impact validation. */
 export function offensiveRange(spell: SpellId) {
-  return spell === "fireball" || spell === "lightning" ? FIREBALL_RANGE : ARROW_RANGE;
+  return spell === "fireball" || spell === "lightning" || spell === "chainlightning" || TILE_OFFENSIVE_SPELLS.has(spell) ? FIREBALL_RANGE : ARROW_RANGE;
 }
 
 function footing(world: World, tx: number, ty: number) {
@@ -198,6 +211,27 @@ function markLabel(world: World, tx: number, ty: number) {
   return used ? `${base} ${used + 1}` : base;
 }
 
+/** One strike against a beast: the wound, the turn-on-you, and — when it
+ *  drops — the full kill rites (corpse, pile, hunt objective, rare glint).
+ *  Shared by the batch-one strikes and ground rings. */
+function woundBeast(world: World, c: World["fauna"][number], dmg: number): { killed: boolean; rareFound: string | null } {
+  c.hp -= dmg;
+  if (c.hp > 0) {
+    c.task = "fight";
+    c.taskUntil = world.hour + 0.25;
+    return { killed: false, rareFound: null };
+  }
+  c.hp = 0;
+  c.task = "dead";
+  c.path = [];
+  c.corpseUntil = world.hour + 8;
+  spawnCorpsePile(world, c);
+  completeObjective(world, "hunt");
+  const found = rollKillRare(world, c.kind, Math.random);
+  if (found) world.player.rares.push(found);
+  return { killed: true, rareFound: found ? rareName(found) : null };
+}
+
 export function forgetMark(world: World, id: string) {
   if (!world.player.marks) world.player.marks = [];
   const n = world.player.marks.length;
@@ -235,6 +269,20 @@ export function commandCast(world: World, spell: SpellId, target?: CastTarget): 
     world.player.intent = { kind: "cast", tx: Math.round(c.x), ty: Math.round(c.z), targetId: c.id, spell };
     const range = offensiveRange(spell);
     if (Math.hypot(p.x - c.x, p.z - c.z) > range) pathToward(world, c.x, c.z, range - 0.75);
+    else p.path = [];
+    return null;
+  }
+
+  if (TILE_OFFENSIVE_SPELLS.has(spell)) {
+    if (!target || target.kind !== "tile") {
+      world.player.armedSpell = spell;
+      world.player.intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
+      return "Click the ground.";
+    }
+    world.player.armedSpell = null;
+    world.player.intent = { kind: "cast", tx: target.tx, ty: target.ty, targetId: null, spell };
+    const range = offensiveRange(spell);
+    if (Math.hypot(p.x - target.tx, p.z - target.ty) > range) pathToward(world, target.tx, target.ty, range - 0.75);
     else p.path = [];
     return null;
   }
@@ -315,6 +363,14 @@ export function castNow(world: World): string | null {
     const range = offensiveRange(spell);
     if (Math.hypot(p.x - c.x, p.z - c.z) > range) {
       pathToward(world, c.x, c.z, range - 0.75);
+      return null;
+    }
+    p.path = [];
+  }
+  if (TILE_OFFENSIVE_SPELLS.has(spell)) {
+    const range = offensiveRange(spell);
+    if (Math.hypot(p.x - world.player.intent.tx, p.z - world.player.intent.ty) > range) {
+      pathToward(world, world.player.intent.tx, world.player.intent.ty, range - 0.75);
       return null;
     }
     p.path = [];
@@ -490,6 +546,111 @@ export function castNow(world: World): string | null {
     }
     const struck = spell === "poison" ? "sickens" : spell === "lightning" ? "is blasted" : "is struck";
     return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()} ${struck}.`, gain);
+  }
+  if (spell === "thornsnare") {
+    const c = world.fauna.find((x) => x.id === savedId);
+    if (!c) return "It fled.";
+    c.snareUntil = world.hour + SNARE_HOURS;
+    c.snareTickAt = world.hour + SNARE_TICK_HOURS;
+    c.path = [];
+    c.task = "idle";
+    c.taskUntil = c.snareUntil;
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour, outcome: "success" });
+    playSfx(spellSfx(spell), 0.5);
+    return withGain(`${meta.words}. Thorns coil around the ${FAUNA_META[c.kind].label.toLowerCase()}.`, gain);
+  }
+  if (spell === "ironwood") {
+    world.player.ironwoodUntil = world.hour + IRONWOOD_HOURS;
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
+    playSfx(spellSfx(spell), 0.5);
+    return withGain(`${meta.words}. Your skin takes the grain of old bark.`, gain);
+  }
+  if (spell === "leech") {
+    const c = world.fauna.find((x) => x.id === savedId);
+    if (!c) return "It fled.";
+    const dmg = 6 + Math.floor(skill / 9) + Math.floor(p.int / 5);
+    const { killed, rareFound } = woundBeast(world, c, dmg);
+    p.hp = Math.min(p.maxHp, p.hp + dmg);
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour, outcome: "success" });
+    playSfx(spellSfx(spell), 0.52);
+    if (killed) {
+      const glint = rareFound ? ` Something glints in the kill — ${rareFound}!` : "";
+      return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()} falls, and its last strength feeds you.${glint}`, gain);
+    }
+    return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()}'s wound feeds you.`, gain);
+  }
+  if (spell === "flash") {
+    let blinded = 0;
+    for (const c of world.fauna) {
+      if (c.task === "dead" || c.ownerId === world.player.id) continue;
+      if (Math.hypot(c.x - p.x, c.z - p.z) > FLASH_RADIUS) continue;
+      c.blindUntil = world.hour + BLIND_HOURS;
+      if (c.task === "fight") letGo(c, world);
+      blinded += 1;
+    }
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
+    playSfx(spellSfx(spell), 0.55);
+    if (!blinded) return withGain(`${meta.words}. White — but the burst finds no eyes.`, gain);
+    return withGain(`${meta.words}. White. ${blinded === 1 ? "A beast loses" : `${blinded} beasts lose`} the fight.`, gain);
+  }
+  if (spell === "fireblast" || spell === "blizzard" || spell === "meteor") {
+    const radius = spell === "meteor" ? METEOR_RADIUS : BLAST_RADIUS;
+    let dmg = 10 + Math.floor(skill / 8) + Math.floor(p.int / 4);
+    if (spell === "blizzard") dmg = 7 + Math.floor(skill / 9) + Math.floor(p.int / 4);
+    if (spell === "meteor") dmg = 16 + Math.floor(skill / 6) + Math.floor(p.int / 3);
+    let burned = 0;
+    let felled = 0;
+    const glints: string[] = [];
+    for (const c of world.fauna) {
+      if (c.task === "dead" || c.ownerId === world.player.id) continue;
+      if (Math.hypot(c.x - savedTx, c.z - savedTy) > radius) continue;
+      const { killed, rareFound } = woundBeast(world, c, dmg);
+      if (!killed && spell === "blizzard") c.chillUntil = world.hour + CHILL_HOURS;
+      if (killed) felled += 1;
+      else burned += 1;
+      if (rareFound) glints.push(rareFound);
+    }
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: savedTx, tz: savedTy, at: world.hour, outcome: "success" });
+    playSfx(spellSfx(spell), 0.58);
+    const glintNote = glints.length ? ` Something glints in the ruin — ${glints.join(", ")}!` : "";
+    const toll = burned + felled === 0 ? "the ring finds nothing"
+      : `${burned + felled === 1 ? "one beast" : `${burned + felled} beasts`} caught${felled ? `, ${felled} felled` : ""}`;
+    const sky = spell === "meteor" ? "The sky falls" : spell === "blizzard" ? "The cold front takes the ring" : "The ground erupts";
+    return withGain(`${meta.words}. ${sky} — ${toll}.${glintNote}`, gain);
+  }
+  if (spell === "chainlightning") {
+    const c = world.fauna.find((x) => x.id === savedId);
+    if (!c) return "It fled.";
+    const dmg = 8 + Math.floor(skill / 9) + Math.floor(p.int / 4);
+    const first = woundBeast(world, c, dmg);
+    const arcs = world.fauna
+      .filter((x) => x.id !== c.id && x.task !== "dead" && x.ownerId !== world.player.id && Math.hypot(x.x - c.x, x.z - c.z) <= CHAIN_RANGE)
+      .sort((a, b) => Math.hypot(a.x - c.x, a.z - c.z) - Math.hypot(b.x - c.x, b.z - c.z))
+      .slice(0, CHAIN_MAX);
+    const arcDmg = Math.max(1, Math.floor(dmg * CHAIN_FALLOFF));
+    const glints: string[] = first.rareFound ? [first.rareFound] : [];
+    for (const arc of arcs) {
+      const { rareFound } = woundBeast(world, arc, arcDmg);
+      if (rareFound) glints.push(rareFound);
+    }
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour, outcome: "success" });
+    playSfx(spellSfx(spell), 0.56);
+    const glintNote = glints.length ? ` Something glints in the kill — ${glints.join(", ")}!` : "";
+    const arcNote = arcs.length ? ` The bolt arcs to ${arcs.length === 1 ? "another" : `${arcs.length} more`}.` : "";
+    const fell = first.killed ? "falls" : "is blasted";
+    return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()} ${fell}.${arcNote}${glintNote}`, gain);
+  }
+  if (spell === "sleep") {
+    const c = world.fauna.find((x) => x.id === savedId);
+    if (!c) return "It fled.";
+    c.sleptUntil = world.hour + SLEEP_HOURS;
+    c.path = [];
+    c.task = "idle";
+    c.taskUntil = c.sleptUntil;
+    markAsleep(c);
+    emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour, outcome: "success" });
+    playSfx(spellSfx(spell), 0.5);
+    return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()} drifts off.`, gain);
   }
   if (spell === "teleport") {
     const fromX = p.x;
