@@ -3,7 +3,7 @@ import { toggleFirstPerson } from "@/game/first-person-view";
 import { getGraphicsSettings, updateGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
 import { useGame } from "@/game/store";
 import { cn } from "@/lib/utils";
-import { BAND_HEIGHT, RAIL_WIDTH } from "./frame";
+import { BAND_HEIGHT, MINIMAP_CORNER, RAIL_WIDTH } from "./frame";
 import { MusicToggle, SfxToggle } from "./sound-toggles";
 
 export function YouButton() {
@@ -81,15 +81,16 @@ export function MapToggle({ collapsed, onToggle }: { collapsed: boolean; onToggl
 }
 
 /** The right edge of the L: panel toggles above, sound at the foot. Desktop only. */
-export function Rail({ mapCollapsed, onToggleMap }: { mapCollapsed: boolean; onToggleMap: () => void }) {
+export function Rail({ mapCollapsed }: { mapCollapsed: boolean }) {
   return (
     <div
       data-testid="right-rail"
       className="pointer-events-auto absolute top-0 right-0 hidden flex-col items-center gap-1 border-l border-border bg-bg/90 p-2 md:flex"
-      style={{ width: RAIL_WIDTH, bottom: `calc(${BAND_HEIGHT}px + env(safe-area-inset-bottom))` }}
+      style={{
+        width: RAIL_WIDTH,
+        bottom: `calc(${mapCollapsed ? BAND_HEIGHT : MINIMAP_CORNER}px + env(safe-area-inset-bottom))`,
+      }}
     >
-      <MapToggle collapsed={mapCollapsed} onToggle={onToggleMap} />
-      <div className="my-1 h-px w-8 bg-border" aria-hidden />
       <YouButton />
       <SettingsButton />
       <FirstPersonChip />

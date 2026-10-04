@@ -6,8 +6,8 @@ import { maxMana } from "@/game/magery";
 import { useGame } from "@/game/store";
 import type { PanelId, Speed } from "@/game/types";
 import { cn } from "@/lib/utils";
-import { BAND_HEIGHT } from "./frame";
-import { FirstPersonChip, SettingsButton, YouButton } from "./rail";
+import { BAND_HEIGHT, MINIMAP_CORNER } from "./frame";
+import { FirstPersonChip, MapToggle, SettingsButton, YouButton } from "./rail";
 import { MusicToggle, SfxToggle } from "./sound-toggles";
 
 function clockLabel(clock: number, day: number) {
@@ -216,13 +216,26 @@ function TimeCluster() {
   );
 }
 
-/** The bottom edge of the L: vitals left, actions center, time at the corner. */
-export function Band({ actionsOpen, onToggleActions }: { actionsOpen: boolean; onToggleActions: () => void }) {
+/** The bottom edge of the L: vitals left, actions center, time + map at the corner. */
+export function Band({
+  actionsOpen,
+  onToggleActions,
+  mapOpen,
+  onToggleMap,
+}: {
+  actionsOpen: boolean;
+  onToggleActions: () => void;
+  mapOpen: boolean;
+  onToggleMap: () => void;
+}) {
   return (
     <div
       data-testid="bottom-band"
-      className="pointer-events-auto absolute right-0 bottom-0 left-0 flex items-center gap-1 border-t border-border bg-bg/90 px-2 pt-1 pb-[calc(0.25rem+env(safe-area-inset-bottom))]"
-      style={{ height: `calc(${BAND_HEIGHT}px + env(safe-area-inset-bottom))` }}
+      className="pointer-events-auto absolute bottom-0 left-0 flex items-center gap-1 border-t border-border bg-bg/90 px-2 pt-1 pb-[calc(0.25rem+env(safe-area-inset-bottom))]"
+      style={{
+        height: `calc(${BAND_HEIGHT}px + env(safe-area-inset-bottom))`,
+        right: mapOpen ? MINIMAP_CORNER : 0,
+      }}
     >
       <VitalsBox />
       <VitalsStrip />
@@ -238,6 +251,7 @@ export function Band({ actionsOpen, onToggleActions }: { actionsOpen: boolean; o
         <div className="flex-1" aria-hidden />
       </div>
       <TimeCluster />
+      <MapToggle collapsed={!mapOpen} onToggle={onToggleMap} />
     </div>
   );
 }

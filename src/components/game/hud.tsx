@@ -1,15 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Band } from "@/components/game/chrome/band";
 import { DockedMinimap } from "@/components/game/chrome/docked-minimap";
-import { useMinimapDock } from "@/components/game/chrome/use-minimap-dock";
+import { cornerClearance } from "@/components/game/chrome/frame";
 import { Rail } from "@/components/game/chrome/rail";
 import { SoundToggles } from "@/components/game/chrome/sound-toggles";
+import { useMinimapDock } from "@/components/game/chrome/use-minimap-dock";
+import { YouDrawer } from "@/components/game/chrome/you-drawer";
 import { ContextMenu, PileGump } from "@/components/game/context-menu";
 import { GateGump } from "@/components/game/gate-gump";
 import { NpcGump } from "@/components/game/npc-gump";
 import { HouseGump } from "@/components/game/house-gump";
 import { housePanelActive } from "@/components/game/house-panel";
-import { YouDressing } from "@/components/game/paperdoll";
 import { SpellbookGump } from "@/components/game/spell-gump";
 import { CraftGump } from "@/components/game/craft-gump";
 import { VaultGump } from "@/components/game/vault-gump";
@@ -48,17 +49,17 @@ export function Hud() {
   if (phase === "raising") return <RaisingOverlay />;
   if (phase === "intro") return <IntroCinematic onDone={introDone} />;
   if (phase === "looking") return <LookGump onDone={lookDone} />;
-  return (
-    <div className="pointer-events-none absolute inset-0 z-50">
-      <PlayingChrome />
-    </div>
-  );
+  return <PlayingChrome />;
 }
 
 function PlayingChrome() {
   const [actionsOpen, setActionsOpen] = useState(false);
   const closeActions = useCallback(() => setActionsOpen(false), []);
   const dock = useMinimapDock();
+  const panel = useGame((s) => s.panel);
+  const openBook = useGame((s) => s.openBook);
+  const openCraft = useGame((s) => s.openCraft);
+  const mapOpen = dock.ready && !dock.collapsed && panel !== "vale" && !openBook && !openCraft;
   useEffect(() => {
     const block = (e: Event) => e.preventDefault();
     window.addEventListener("contextmenu", block);
@@ -92,9 +93,17 @@ function PlayingChrome() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
   return (
-    <>
-      <Band actionsOpen={actionsOpen} onToggleActions={() => setActionsOpen((v) => !v)} />
-      <Rail mapCollapsed={dock.collapsed} onToggleMap={dock.toggle} />
+    <div
+      className="pointer-events-none absolute inset-0 z-50"
+      style={{ ["--corner-clear" as string]: `${cornerClearance(mapOpen)}px` }}
+    >
+      <Band
+        actionsOpen={actionsOpen}
+        onToggleActions={() => setActionsOpen((v) => !v)}
+        mapOpen={mapOpen}
+        onToggleMap={dock.toggle}
+      />
+      <Rail mapCollapsed={!mapOpen} />
       <SidePanel />
       <SelectedCard />
       <PileGump />
@@ -111,10 +120,10 @@ function PlayingChrome() {
       <GhostBanner />
       <BuildRibbon />
       <TravelRibbon />
-      <DockedMinimap dock={dock} />
+      <DockedMinimap open={mapOpen} onHide={dock.toggle} />
       <ContextMenu />
       {actionsOpen && <ActionsPanel onClose={closeActions} />}
-    </>
+    </div>
   );
 }
 
@@ -326,6 +335,7 @@ function SidePanel() {
   const closePanel = useCallback(() => useGame.getState().setPanel("none"), []);
   const region = usePanelA11y<HTMLDivElement>(closePanel, panel !== "none");
   if (panel === "none") return null;
+  if (panel === "you") return <YouDrawer />;
   const LABELS: Partial<Record<PanelId, string>> = {
     help: "Guide, journal and roster",
     you: "You — pack, paperdoll, skills",
@@ -340,10 +350,9 @@ function SidePanel() {
       tabIndex={-1}
       role="region"
       aria-label={LABELS[panel] ?? "Panel"}
-      className="pointer-events-auto absolute top-16 right-3 bottom-[68px] left-3 overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 outline-none md:top-3 md:right-[68px] md:bottom-[68px] md:left-auto md:w-[min(100%-9rem,22rem)]"
+      className="pointer-events-auto absolute top-16 right-3 bottom-[var(--corner-clear)] left-3 overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 outline-none md:top-3 md:right-[68px] md:left-auto md:w-[min(100%-9rem,22rem)]"
     >
       {panel === "help" && <GuideTabs />}
-      {panel === "you" && <YouDressing />}
       {panel === "journal" && <JournalPanel />}
       {panel === "vale" && <ValeChart />}
       {panel === "roster" && <RosterPanel />}
@@ -500,7 +509,7 @@ function SelectedCard() {
   if (!p && !c) return null;
   if (p?.role) return null;
   return (
-    <div className="pointer-events-auto absolute right-3 bottom-[68px] w-52 rounded-[var(--radius-md)] border border-border bg-bg/90 p-3 md:right-[68px]">
+    <div className="pointer-events-auto absolute right-3 bottom-[var(--corner-clear)] w-52 rounded-[var(--radius-md)] border border-border bg-bg/90 p-3 md:right-[68px]">
       <p className="font-display text-sm text-fg">{p?.name ?? c?.kind}</p>
       <p className="text-xs text-muted">{p ? CLASS_META[p.cls].label : c?.task}</p>
     </div>
@@ -517,7 +526,7 @@ function GhostBanner() {
   const dist = corpse ? Math.round(Math.hypot(corpse.tx - x, corpse.ty - z)) : 0;
   const place = corpse ? regionAt(corpse.tx, corpse.ty).name : "";
   return (
-    <div className="pointer-events-auto absolute bottom-[68px] left-1/2 w-[min(100%-1.5rem,24rem)] -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/92 p-3">
+    <div className="pointer-events-auto absolute bottom-[var(--corner-clear)] left-1/2 w-[min(100%-1.5rem,24rem)] -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/92 p-3">
       <p className="text-center font-display text-sm text-fg">You are a ghost.</p>
       <p className="mt-1 text-center text-pretty text-xs leading-relaxed text-muted">
         {corpse

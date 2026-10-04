@@ -1,33 +1,25 @@
 import { Minimize2 } from "lucide-react";
 import { MiniVale } from "@/components/game/vale-map";
-import { useGame } from "@/game/store";
-import { MapToggle } from "./rail";
-import type { useMinimapDock } from "./use-minimap-dock";
+import { MINIMAP_CORNER } from "./frame";
 
 /**
- * The mini-map, docked to the frame: top-right against the rail on desktop
- * (`right` = rail width + gap), a smaller square on mobile. Collapses to the
- * rail's map toggle on desktop, a floating button on mobile.
+ * The mini-map IS the corner of the L: docked at bottom-right, the band ends
+ * at its left edge and the rail ends at its top — one connected frame. When
+ * collapsed the band's map toggle brings it back. `open` is computed by the
+ * overlay root so the band, rail and panel offsets all agree.
  */
-export function DockedMinimap({ dock }: { dock: ReturnType<typeof useMinimapDock> }) {
-  const panel = useGame((s) => s.panel);
-  const openBook = useGame((s) => s.openBook);
-  const openCraft = useGame((s) => s.openCraft);
-  if (panel === "vale" || openBook || openCraft) return null;
-  if (!dock.ready) return null;
-  if (dock.collapsed) {
-    // The desktop rail carries the show-map toggle; mobile needs a floater.
-    return (
-      <div className="fixed top-3 right-3 md:hidden">
-        <MapToggle collapsed={dock.collapsed} onToggle={dock.toggle} />
-      </div>
-    );
-  }
+export function DockedMinimap({ open, onHide }: { open: boolean; onHide: () => void }) {
+  if (!open) return null;
   return (
     <section
       aria-label="Mini-map"
       data-testid="docked-minimap"
-      className="pointer-events-auto absolute top-3 right-3 size-32 overflow-hidden rounded-[var(--radius-md)] border border-border-strong bg-bg/90 shadow-lg md:right-[68px] md:size-44"
+      className="pointer-events-auto absolute right-0 bottom-0 border-t border-l border-border bg-bg/90"
+      style={{
+        width: MINIMAP_CORNER,
+        height: `calc(${MINIMAP_CORNER}px + env(safe-area-inset-bottom))`,
+        paddingBottom: "env(safe-area-inset-bottom)",
+      }}
     >
       <div className="size-full touch-none select-none" title="Tap to walk">
         <MiniVale />
@@ -36,10 +28,10 @@ export function DockedMinimap({ dock }: { dock: ReturnType<typeof useMinimapDock
         type="button"
         aria-label="Hide mini-map"
         title="Hide mini-map"
-        className="absolute top-0 right-0 z-30 grid size-11 place-items-center text-fg drop-shadow-md"
+        className="absolute top-0 left-0 z-30 grid size-11 place-items-center text-fg drop-shadow-md"
         onClick={(event) => {
           event.stopPropagation();
-          dock.toggle();
+          onHide();
         }}
       >
         <Minimize2 className="size-3" aria-hidden />

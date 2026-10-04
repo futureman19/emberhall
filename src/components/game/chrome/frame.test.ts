@@ -4,7 +4,9 @@ import {
   BAND_HEIGHT,
   CHROME_GAP,
   FRAME_BREAKPOINT,
+  MINIMAP_CORNER,
   RAIL_WIDTH,
+  cornerClearance,
   defaultMinimapCollapsed,
   frameMode,
 } from "./frame.ts";
@@ -34,4 +36,16 @@ test("minimap starts collapsed only in band mode", () => {
   assert.equal(defaultMinimapCollapsed(FRAME_BREAKPOINT - 1), true);
   assert.equal(defaultMinimapCollapsed(FRAME_BREAKPOINT), false);
   assert.equal(defaultMinimapCollapsed(1440), false);
+});
+
+test("corner block is a real map size but leaves the band a full row", () => {
+  assert.ok(MINIMAP_CORNER >= 96, `corner ${MINIMAP_CORNER}px is too small to read`);
+  assert.ok(MINIMAP_CORNER <= 144, `corner ${MINIMAP_CORNER}px eats the viewport`);
+});
+
+test("corner clearance matches the panel offset classes (68 / 120)", () => {
+  assert.equal(cornerClearance(false), 68);
+  assert.equal(cornerClearance(true), 120);
+  assert.equal(cornerClearance(false), BAND_HEIGHT + CHROME_GAP);
+  assert.equal(cornerClearance(true), MINIMAP_CORNER + CHROME_GAP);
 });

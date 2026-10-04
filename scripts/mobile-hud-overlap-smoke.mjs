@@ -40,6 +40,7 @@ async function measure(page) {
       minimap: rect(document.querySelector('[data-testid="docked-minimap"]')),
       band: rect(document.querySelector('[data-testid="bottom-band"]')),
       rail: rect(document.querySelector('[data-testid="right-rail"]')),
+      drawer: rect(document.querySelector('[data-testid="you-drawer"]')),
       dock: rect(document.querySelector('[data-testid="bottom-dock"]')),
       buttons,
       dockFlag: localStorage.getItem("emberhall-minimap-dock-v1"),
@@ -52,12 +53,19 @@ async function play(page) {
   await page.evaluate(() => window.__ember.useGame.setState({ phase: "playing" }));
 }
 
-function assertButtonsClear(boxes, minimap, band, prefix) {
+function assertButtonsClear(boxes, minimap, prefix) {
   for (const [name, box] of Object.entries(boxes)) {
     assert.ok(box && box.width === 44 && box.height === 44, `${prefix} ${name} 44px`);
     if (minimap) assert.equal(overlap(minimap, box).overlaps, false, `${prefix} ${name} uncovered by minimap`);
-    assert.ok(box.y + box.height <= band.y + band.height + 1, `${prefix} ${name} inside the band`);
   }
+}
+
+function assertCorner(m, vw, vh, prefix) {
+  assert.ok(m.minimap, `${prefix}: corner block present`);
+  assert.ok(Math.abs(m.minimap.x + m.minimap.width - vw) <= 1, `${prefix}: block flush to the right edge`);
+  assert.ok(Math.abs(m.minimap.y + m.minimap.height - vh) <= 1, `${prefix}: block flush to the bottom edge`);
+  assert.ok(Math.abs(m.band.x + m.band.width - m.minimap.x) <= 1, `${prefix}: band ends at the block's left edge`);
+  if (m.rail) assert.ok(Math.abs(m.rail.y + m.rail.height - m.minimap.y) <= 1, `${prefix}: rail ends at the block's top`);
 }
 
 const browser = await chromium.launch({ headless: true });
@@ -73,25 +81,33 @@ try {
   assert.equal(mobileDefault.minimap, null, "mobile default: minimap starts collapsed");
   assert.equal(mobileDefault.rail, null, "mobile default: rail folds away");
   assert.ok(mobileDefault.band && mobileDefault.band.height >= 56, "mobile default: band present");
-  assertButtonsClear(mobileDefault.buttons, mobileDefault.minimap, mobileDefault.band, "mobile default");
+  assertButtonsClear(mobileDefault.buttons, mobileDefault.minimap, "mobile default");
   report.cases.push({ name: "mobile-default", ...mobileDefault });
 
   await mobilePage.locator('button[aria-label="Show mini-map"]:visible').click();
   const mobileShown = await measure(mobilePage);
   await mobilePage.screenshot({ path: join(outDir, "after-mobile-map.png") });
-  assert.ok(mobileShown.minimap, "mobile: map toggle expands the minimap");
-  assert.equal(overlap(mobileShown.minimap, mobileShown.band).overlaps, false, "mobile: expanded minimap clears the band");
-  assertButtonsClear(mobileShown.buttons, mobileShown.minimap, mobileShown.band, "mobile map shown");
+  assertCorner(mobileShown, 390, 844, "mobile map shown");
+  assertButtonsClear(mobileShown.buttons, mobileShown.minimap, "mobile map shown");
   report.cases.push({ name: "mobile-map-shown", ...mobileShown });
 
-  await mobilePage.evaluate(() => localStorage.setItem("emberhall-minimap-dock-v1", "0"));
+  await mobilePage.locator('button[aria-label="You — pack, paperdoll, skills"]:visible').click();
+  const mobileDrawer = await measure(mobilePage);
+  await mobilePage.screenshot({ path: join(outDir, "after-mobile-drawer.png") });
+  assert.ok(mobileDrawer.drawer, "mobile: You pops the drawer");
+  assert.ok(Math.abs(mobileDrawer.drawer.x + mobileDrawer.drawer.width - 390) <= 1, "mobile: drawer flush to the right edge");
+  assert.equal(overlap(mobileDrawer.drawer, mobileDrawer.band).overlaps, false, "mobile: drawer clears the band");
+  await mobilePage.keyboard.press("Escape");
+  const mobileDrawerClosed = await measure(mobilePage);
+  assert.equal(mobileDrawerClosed.drawer, null, "mobile: Escape puts the drawer away");
+  report.cases.push({ name: "mobile-drawer", ...mobileDrawer });
+
   await mobilePage.reload({ waitUntil: "domcontentloaded" });
   await play(mobilePage);
-  const mobileGrown = await measure(mobilePage);
-  assert.ok(mobileGrown.minimap, "mobile persisted-open: minimap returns");
-  assert.equal(overlap(mobileGrown.minimap, mobileGrown.band).overlaps, false, "mobile persisted-open: minimap clears the band");
-  assertButtonsClear(mobileGrown.buttons, mobileGrown.minimap, mobileGrown.band, "mobile persisted-open");
-  report.cases.push({ name: "mobile-persisted-open", ...mobileGrown });
+  const mobilePersist = await measure(mobilePage);
+  assertCorner(mobilePersist, 390, 844, "mobile persisted-open");
+  assertButtonsClear(mobilePersist.buttons, mobilePersist.minimap, "mobile persisted-open");
+  report.cases.push({ name: "mobile-persisted-open", ...mobilePersist });
   await mobile.close();
 
   const desktop = await browser.newContext({ viewport: { width: 1440, height: 960 } });
@@ -103,18 +119,29 @@ try {
   await play(desktopPage);
   const desktopDefault = await measure(desktopPage);
   await desktopPage.screenshot({ path: join(outDir, "after-desktop.png") });
-  assert.ok(desktopDefault.rail, "desktop default: rail present");
-  assert.ok(desktopDefault.minimap, "desktop default: minimap expanded");
-  assert.ok(Math.abs(desktopDefault.rail.y + desktopDefault.rail.height - desktopDefault.band.y) <= 1, "desktop: rail meets the band (L joint)");
-  assert.equal(overlap(desktopDefault.minimap, desktopDefault.band).overlaps, false, "desktop default: minimap clears the band");
-  assert.equal(overlap(desktopDefault.minimap, desktopDefault.rail).overlaps, false, "desktop default: minimap clears the rail");
-  assertButtonsClear(desktopDefault.buttons, desktopDefault.minimap, desktopDefault.band, "desktop default");
+  assertCorner(desktopDefault, 1440, 960, "desktop default");
+  assertButtonsClear(desktopDefault.buttons, desktopDefault.minimap, "desktop default");
+  assert.equal(overlap(desktopDefault.minimap, desktopDefault.band).overlaps, false, "desktop: block and band share an edge, not area");
   report.cases.push({ name: "desktop-default", ...desktopDefault });
 
-  await desktopPage.getByTestId("right-rail").getByLabel("Hide mini-map").click();
+  await desktopPage.locator('button[aria-label="You — pack, paperdoll, skills"]:visible').click();
+  const desktopDrawer = await measure(desktopPage);
+  await desktopPage.screenshot({ path: join(outDir, "after-desktop-drawer.png") });
+  assert.ok(desktopDrawer.drawer, "desktop: You pops the drawer");
+  assert.ok(Math.abs(desktopDrawer.drawer.x + desktopDrawer.drawer.width - 1440) <= 1, "desktop: drawer flush to the right edge");
+  assert.equal(overlap(desktopDrawer.drawer, desktopDrawer.band).overlaps, false, "desktop: drawer clears the band");
+  assert.equal(overlap(desktopDrawer.drawer, desktopDrawer.minimap).overlaps, false, "desktop: drawer clears the corner block");
+  await desktopPage.keyboard.press("Escape");
+  const desktopDrawerClosed = await measure(desktopPage);
+  assert.equal(desktopDrawerClosed.drawer, null, "desktop: Escape puts the drawer away");
+  report.cases.push({ name: "desktop-drawer", ...desktopDrawer });
+
+  await desktopPage.getByTestId("docked-minimap").getByLabel("Hide mini-map").click();
   const desktopHidden = await measure(desktopPage);
-  assert.equal(desktopHidden.minimap, null, "desktop: rail toggle collapses the minimap");
-  assert.ok(desktopHidden.rail, "desktop: rail stays when the map hides");
+  await desktopPage.screenshot({ path: join(outDir, "after-desktop-map-hidden.png") });
+  assert.equal(desktopHidden.minimap, null, "desktop: corner toggle collapses the block");
+  assert.ok(Math.abs(desktopHidden.band.x + desktopHidden.band.width - 1440) <= 1, "desktop: band spans full width once the block tucks away");
+  assert.ok(Math.abs(desktopHidden.rail.y + desktopHidden.rail.height - desktopHidden.band.y) <= 1, "desktop: rail meets the band when the block tucks away");
   report.cases.push({ name: "desktop-map-hidden", ...desktopHidden });
   await desktop.close();
 } finally {

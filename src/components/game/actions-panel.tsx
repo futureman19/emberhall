@@ -26,7 +26,7 @@ export function ActionsPanel({ onClose }: { onClose: () => void }) {
       role="dialog"
       aria-label="Nearby actions"
       data-testid="actions-panel"
-      className="pointer-events-auto absolute top-16 right-3 bottom-[68px] z-10 flex w-[min(100%-1.5rem,16rem)] flex-col rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 outline-none md:top-3 md:right-[68px]"
+      className="pointer-events-auto absolute top-16 right-3 bottom-[var(--corner-clear)] z-10 flex w-[min(100%-1.5rem,16rem)] flex-col rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 outline-none md:top-3 md:right-[68px]"
     >
       <p className="shrink-0 font-display text-xs tracking-wider text-muted uppercase">What do you do?</p>
       <div className="mt-2 min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-contain">
