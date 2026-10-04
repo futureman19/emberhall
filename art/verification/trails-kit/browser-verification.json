@@ -1,0 +1,137 @@
+{
+  "passed": true,
+  "devices": [
+    {
+      "name": "desktop",
+      "passed": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loaded": [
+        "scree-slope",
+        "snowmelt-bank",
+        "muddy-bank",
+        "grassy-verge",
+        "ash-apron",
+        "cooling-crust",
+        "boardwalk-straight",
+        "boardwalk-corner",
+        "fallen-log",
+        "stepping-stones",
+        "trail-cairn",
+        "guidepost",
+        "ruined-arch",
+        "abandoned-camp"
+      ],
+      "filter": true,
+      "rotationToggle": true,
+      "pointerDrag": true,
+      "touchDrag": false,
+      "reset": true,
+      "glbDownload": true,
+      "errors": [],
+      "frames": 116,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "mobile",
+      "passed": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loaded": [
+        "scree-slope",
+        "snowmelt-bank",
+        "muddy-bank",
+        "grassy-verge",
+        "ash-apron",
+        "cooling-crust",
+        "boardwalk-straight",
+        "boardwalk-corner",
+        "fallen-log",
+        "stepping-stones",
+        "trail-cairn",
+        "guidepost",
+        "ruined-arch",
+        "abandoned-camp"
+      ],
+      "filter": true,
+      "rotationToggle": true,
+      "pointerDrag": true,
+      "touchDrag": true,
+      "reset": true,
+      "glbDownload": true,
+      "errors": [],
+      "frames": 109,
+      "horizontalOverflow": false
+    }
+  ],
+  "assetHttpHashes": [
+    {
+      "id": "scree-slope",
+      "passed": true,
+      "sha256": "c34850c8cf4d99ea7cf7161900a83e9b9104617a871db9bf2efdb00048e1698b"
+    },
+    {
+      "id": "snowmelt-bank",
+      "passed": true,
+      "sha256": "3ce4ad87853e29fab2bdf812d9b085793d2ea0e39aac5ecb6699e2289ae683ef"
+    },
+    {
+      "id": "muddy-bank",
+      "passed": true,
+      "sha256": "cbba646e02640674562f841b0670d3a3eadbc22b826f5af63a553ae82ed950c1"
+    },
+    {
+      "id": "grassy-verge",
+      "passed": true,
+      "sha256": "76fe1a9aac5d5c89a153c63edd64b41af977b2c967d32a2d49e40b77c4254b1e"
+    },
+    {
+      "id": "ash-apron",
+      "passed": true,
+      "sha256": "3904450d6279bd9cb3c1ff46fea7af95912a6acdb155a607950b08839e6d2671"
+    },
+    {
+      "id": "cooling-crust",
+      "passed": true,
+      "sha256": "1b907139900e8294e6bc714bb2e41d82bcd6aa500db9b55fdeb4520e89746c0c"
+    },
+    {
+      "id": "boardwalk-straight",
+      "passed": true,
+      "sha256": "435914fb7c58a0891bdb2f038dd3c0a5bb98679c7c6bcb86f64d6afbf3a4ce14"
+    },
+    {
+      "id": "boardwalk-corner",
+      "passed": true,
+      "sha256": "bc320a8b5d05d64b9c20d9927715354964c93e58efd890442d88ae1467c8f65a"
+    },
+    {
+      "id": "fallen-log",
+      "passed": true,
+      "sha256": "f83819b63e6f830f6b3914c9bd04e6080e46657e4795995d69ef10419b654966"
+    },
+    {
+      "id": "stepping-stones",
+      "passed": true,
+      "sha256": "38efa4ea1561591552e2b461c8720d8b7f34fb89953e21dca5137b590aa2d848"
+    },
+    {
+      "id": "trail-cairn",
+      "passed": true,
+      "sha256": "3d04154e7ce503662d4e7413396c0eeed14e30de8654c99c606b070549d32ea9"
+    },
+    {
+      "id": "guidepost",
+      "passed": true,
+      "sha256": "9c33899735c3dfe7704c21eccdddc59c437cf75f8b990ba6c46fc4d86ad17bc3"
+    },
+    {
+      "id": "ruined-arch",
+      "passed": true,
+      "sha256": "eb2d781619eab355defac1d1dc831961b88774a1a8cd9ff67730addc44c87dc3"
+    },
+    {
+      "id": "abandoned-camp",
+      "passed": true,
+      "sha256": "927e99b984d06e4cf99364f4c3a676832fd193e88c25e06a9c9954cc2e82c9c2"
+    }
+  ]
+}

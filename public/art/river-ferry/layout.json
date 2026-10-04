@@ -1,0 +1,197 @@
+{
+  "name": "Reedwake Crossing",
+  "scope": "Static original decorative art. No walkability, physics, vehicles, NPCs, quests or performance acceptance.",
+  "axis": "glTF Y-up",
+  "assemblyOnlyDressing": [
+    "Presentation water removable (1 opaque slab)",
+    "Presentation land removable (1 raised polygon)",
+    "Presentation ferry silt shoal removable (1)",
+    "Wet shoreline lip (6)",
+    "Bank moss patch (16)",
+    "Static water stroke (12)",
+    "Assembly access ramp plank (5)"
+  ],
+  "reconstruction": "Instances alone do not reconstruct presentation dressing; see assembly() in designs.py. Remove named presentation parts in Blender before re-export to integrate without base/water.",
+  "instances": [
+    {
+      "asset": "wrecked-ferry",
+      "instance": "stranded-ferry",
+      "translation": [
+        3.55,
+        0.12,
+        0.95
+      ],
+      "yawRadians": 1.48,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "intact-dock",
+      "instance": "landing-deck",
+      "translation": [
+        -1.05,
+        0.12,
+        -0.7
+      ],
+      "yawRadians": 0,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "broken-dock",
+      "instance": "broken-end",
+      "translation": [
+        1.14,
+        0.12,
+        -0.7
+      ],
+      "yawRadians": 0,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "mooring-posts",
+      "instance": "dock-bollards",
+      "translation": [
+        -0.7,
+        1.2,
+        -1.36
+      ],
+      "yawRadians": 0,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "mooring-posts",
+      "instance": "bank-bollards",
+      "translation": [
+        -3.5,
+        0.46,
+        2.1
+      ],
+      "yawRadians": 0.24,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "hauling-winch",
+      "instance": "hauling-winch",
+      "translation": [
+        -3.8,
+        0.46,
+        -0.8
+      ],
+      "yawRadians": 0,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "landing-sign",
+      "instance": "old-sign",
+      "translation": [
+        -3.6,
+        0.46,
+        -2.3
+      ],
+      "yawRadians": 0,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "washed-cargo",
+      "instance": "bank-cargo",
+      "translation": [
+        -4.05,
+        0.46,
+        0.95
+      ],
+      "yawRadians": -0.12,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "washed-cargo",
+      "instance": "upper-bank-cargo",
+      "translation": [
+        -4.25,
+        0.46,
+        -3.65
+      ],
+      "yawRadians": 0.35,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "reed-debris",
+      "instance": "south-reeds",
+      "translation": [
+        -1.95,
+        0.13,
+        2.95
+      ],
+      "yawRadians": 0.2,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "reed-debris",
+      "instance": "north-reeds",
+      "translation": [
+        -2.1,
+        0.13,
+        -3.0
+      ],
+      "yawRadians": -0.3,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "reed-debris",
+      "instance": "ferry-reeds",
+      "translation": [
+        1.15,
+        0.12,
+        3.55
+      ],
+      "yawRadians": 0.5,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  ]
+}

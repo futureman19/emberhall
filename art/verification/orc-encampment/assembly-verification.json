@@ -1,0 +1,95 @@
+{
+  "passed": true,
+  "scope": "Source prefab geometry only; not gameplay, pathfinding or spawning",
+  "instances": [
+    {
+      "instance": "chieftain",
+      "asset": "war-tent",
+      "editableParts": 83,
+      "maxVertexTransformError": 1.4901161193847656e-08
+    },
+    {
+      "instance": "entry",
+      "asset": "palisade-gate",
+      "editableParts": 22,
+      "maxVertexTransformError": 4.76837158203125e-07
+    },
+    {
+      "instance": "west-front",
+      "asset": "palisade-wall",
+      "editableParts": 26,
+      "maxVertexTransformError": 2.384185791015625e-07
+    },
+    {
+      "instance": "west-back",
+      "asset": "palisade-wall",
+      "editableParts": 26,
+      "maxVertexTransformError": 2.384185791015625e-07
+    },
+    {
+      "instance": "east-front",
+      "asset": "palisade-wall",
+      "editableParts": 26,
+      "maxVertexTransformError": 2.384185791015625e-07
+    },
+    {
+      "instance": "east-back",
+      "asset": "palisade-wall",
+      "editableParts": 26,
+      "maxVertexTransformError": 2.384185791015625e-07
+    },
+    {
+      "instance": "rear-left",
+      "asset": "palisade-wall",
+      "editableParts": 26,
+      "maxVertexTransformError": 5.331201499700045e-07
+    },
+    {
+      "instance": "rear-right",
+      "asset": "palisade-wall",
+      "editableParts": 26,
+      "maxVertexTransformError": 5.331201499700045e-07
+    },
+    {
+      "instance": "lookout",
+      "asset": "lookout-platform",
+      "editableParts": 43,
+      "maxVertexTransformError": 2.388837865275353e-07
+    },
+    {
+      "instance": "hearth",
+      "asset": "cooking-pit",
+      "editableParts": 28,
+      "maxVertexTransformError": 2.385349660155493e-07
+    },
+    {
+      "instance": "cage",
+      "asset": "empty-cage",
+      "editableParts": 40,
+      "maxVertexTransformError": 2.6656007498500226e-07
+    },
+    {
+      "instance": "standard",
+      "asset": "trophy-standard",
+      "editableParts": 15,
+      "maxVertexTransformError": 2.6656007498500226e-07
+    },
+    {
+      "instance": "stores",
+      "asset": "supply-pile",
+      "editableParts": 23,
+      "maxVertexTransformError": 3.375038997204937e-07
+    },
+    {
+      "instance": "provisions",
+      "asset": "supply-pile",
+      "editableParts": 23,
+      "maxVertexTransformError": 2.457562461863554e-07
+    }
+  ],
+  "assemblyOnlyDressingParts": 30,
+  "uncompressedFrontInfillStakes": 10,
+  "separatedClothPanels": 24,
+  "clearGateSampleRays": 9,
+  "emptyCageCenterChecks": 4
+}

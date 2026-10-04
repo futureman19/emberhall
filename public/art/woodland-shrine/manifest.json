@@ -1,0 +1,307 @@
+{
+  "schemaVersion": 1,
+  "title": "Emberhall • Mossveil Sanctuary",
+  "units": "provisional world units (not approved tile occupancy)",
+  "axis": "glTF Y-up",
+  "pivot": "ground-level local origin; no lineup offsets",
+  "integration": "VISUAL ONLY; placement/collision suggestions are NON-AUTHORITATIVE. No map, biome, navigation or gameplay changes.",
+  "assets": [
+    {
+      "id": "broken-sun-arch",
+      "name": "Broken Sun Arch",
+      "family": "Ruined masonry",
+      "file": "broken-sun-arch.glb",
+      "editableParts": 29,
+      "suggestedPlacement": "ground-origin decorative sanctuary art; no spawns, collision, loot, quests, captives or map integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "broken-sun-arch",
+      "bytes": 74952,
+      "sha256": "3e5e69c121531199ff123c31c1a4ab5e268d502e672aa64820c01dff2208adbe",
+      "bounds": {
+        "min": [
+          -1.75,
+          0,
+          -0.49000000953674316
+        ],
+        "max": [
+          1.75,
+          3.5551810264587402,
+          0.937696099281311
+        ]
+      },
+      "footprint": {
+        "width": 3.5,
+        "depth": 1.4276961088180542
+      },
+      "height": 3.5551810264587402,
+      "triangles": 852,
+      "vertices": 1908,
+      "drawPrimitives": 1,
+      "paletteColors": 186
+    },
+    {
+      "id": "mossy-wall",
+      "name": "Mossy Ruin Wall",
+      "family": "Ruined masonry",
+      "file": "mossy-wall.glb",
+      "editableParts": 24,
+      "suggestedPlacement": "ground-origin decorative sanctuary art; no spawns, collision, loot, quests, captives or map integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "mossy-wall",
+      "bytes": 92376,
+      "sha256": "adf7987c8ab78a7a1db45b511f9a6e6c9aa3aa5fcd4b3ab9efec12a2ecef2c95",
+      "bounds": {
+        "min": [
+          -1.5399999618530273,
+          0,
+          -0.3037467896938324
+        ],
+        "max": [
+          1.594694972038269,
+          1.30482816696167,
+          0.6616843938827515
+        ]
+      },
+      "footprint": {
+        "width": 3.1346949338912964,
+        "depth": 0.9654311835765839
+      },
+      "height": 1.30482816696167,
+      "triangles": 992,
+      "vertices": 2368,
+      "drawPrimitives": 1,
+      "paletteColors": 239
+    },
+    {
+      "id": "worn-paving",
+      "name": "Worn Sanctuary Paving",
+      "family": "Woodland relics",
+      "file": "worn-paving.glb",
+      "editableParts": 17,
+      "suggestedPlacement": "ground-origin decorative sanctuary art; no spawns, collision, loot, quests, captives or map integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "worn-paving",
+      "bytes": 42144,
+      "sha256": "0e5f37d3068c298883bad56acbdf27debb21571f1455f6a26cfd87721949ef1b",
+      "bounds": {
+        "min": [
+          -0.9649999737739563,
+          0,
+          -0.9526285529136658
+        ],
+        "max": [
+          0.9990409016609192,
+          0.4465780556201935,
+          0.9520198106765747
+        ]
+      },
+      "footprint": {
+        "width": 1.9640408754348755,
+        "depth": 1.9046483635902405
+      },
+      "height": 0.4465780556201935,
+      "triangles": 492,
+      "vertices": 1056,
+      "drawPrimitives": 1,
+      "paletteColors": 87
+    },
+    {
+      "id": "votive-markers",
+      "name": "Leaf Votive Markers",
+      "family": "Woodland relics",
+      "file": "votive-markers.glb",
+      "editableParts": 19,
+      "suggestedPlacement": "ground-origin decorative sanctuary art; no spawns, collision, loot, quests, captives or map integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "votive-markers",
+      "bytes": 40568,
+      "sha256": "06d31de2dfcc2a12525e021c615cb7a9c8d94335d9ba92d32552eac1009c96c8",
+      "bounds": {
+        "min": [
+          -0.8815035223960876,
+          0,
+          -0.37583521008491516
+        ],
+        "max": [
+          0.9324811100959778,
+          0.9907864332199097,
+          0.28650495409965515
+        ]
+      },
+      "footprint": {
+        "width": 1.8139846324920654,
+        "depth": 0.6623401641845703
+      },
+      "height": 0.9907864332199097,
+      "triangles": 444,
+      "vertices": 1020,
+      "drawPrimitives": 1,
+      "paletteColors": 166
+    },
+    {
+      "id": "dry-offering-basin",
+      "name": "Dry Offering Basin",
+      "family": "Sacred details",
+      "file": "dry-offering-basin.glb",
+      "editableParts": 5,
+      "suggestedPlacement": "ground-origin decorative sanctuary art; no spawns, collision, loot, quests, captives or map integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "dry-offering-basin",
+      "bytes": 34540,
+      "sha256": "4a113967b0031e481e79b1787f649ad15df2bd3def7b77af171b2ba69423ab63",
+      "bounds": {
+        "min": [
+          -0.7099999785423279,
+          0,
+          -0.7099999785423279
+        ],
+        "max": [
+          0.7099999785423279,
+          0.7200000286102295,
+          0.7099999785423279
+        ]
+      },
+      "footprint": {
+        "width": 1.4199999570846558,
+        "depth": 1.4199999570846558
+      },
+      "height": 0.7200000286102295,
+      "triangles": 328,
+      "vertices": 872,
+      "drawPrimitives": 1,
+      "paletteColors": 182
+    },
+    {
+      "id": "sunleaf-altar",
+      "name": "Sunleaf Carved Altar",
+      "family": "Sacred details",
+      "file": "sunleaf-altar.glb",
+      "editableParts": 20,
+      "suggestedPlacement": "ground-origin decorative sanctuary art; no spawns, collision, loot, quests, captives or map integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "sunleaf-altar",
+      "bytes": 67528,
+      "sha256": "4b00faa74cc385052adb6969a70f67f91e2facae40f1be819a32777f5f69be8c",
+      "bounds": {
+        "min": [
+          -0.9897162914276123,
+          0,
+          -0.6631950736045837
+        ],
+        "max": [
+          0.9897162914276123,
+          1.3280799388885498,
+          0.6631950736045837
+        ]
+      },
+      "footprint": {
+        "width": 1.9794325828552246,
+        "depth": 1.3263901472091675
+      },
+      "height": 1.3280799388885498,
+      "triangles": 750,
+      "vertices": 1718,
+      "drawPrimitives": 1,
+      "paletteColors": 160
+    },
+    {
+      "id": "fallen-columns",
+      "name": "Fallen Column Fragments",
+      "family": "Sacred details",
+      "file": "fallen-columns.glb",
+      "editableParts": 4,
+      "suggestedPlacement": "ground-origin decorative sanctuary art; no spawns, collision, loot, quests, captives or map integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "fallen-columns",
+      "bytes": 20096,
+      "sha256": "8db0e792e6a1e867cfad1682c55b2db81c300dfd573857624f873db2f9751a95",
+      "bounds": {
+        "min": [
+          -1.2375357151031494,
+          0,
+          -0.8538820147514343
+        ],
+        "max": [
+          1.3268835544586182,
+          1.0621858835220337,
+          0.9863289594650269
+        ]
+      },
+      "footprint": {
+        "width": 2.5644192695617676,
+        "depth": 1.8402109742164612
+      },
+      "height": 1.0621858835220337,
+      "triangles": 200,
+      "vertices": 492,
+      "drawPrimitives": 1,
+      "paletteColors": 107
+    },
+    {
+      "id": "ancient-root-tree",
+      "name": "Ancient Root Tree",
+      "family": "Sacred details",
+      "file": "ancient-root-tree.glb",
+      "editableParts": 22,
+      "suggestedPlacement": "ground-origin decorative sanctuary art; no spawns, collision, loot, quests, captives or map integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "ancient-root-tree",
+      "bytes": 87308,
+      "sha256": "28f6753941b8dacc983bbfcfbf2b7dfcc48f4470cf5ba8aed24dcba815e84c45",
+      "bounds": {
+        "min": [
+          -2.110822916030884,
+          0,
+          -1.6799290180206299
+        ],
+        "max": [
+          2.205784320831299,
+          4.604082107543945,
+          1.7930850982666016
+        ]
+      },
+      "footprint": {
+        "width": 4.316607236862183,
+        "depth": 3.4730141162872314
+      },
+      "height": 4.604082107543945,
+      "triangles": 986,
+      "vertices": 2228,
+      "drawPrimitives": 1,
+      "paletteColors": 232
+    },
+    {
+      "id": "mossveil-sanctuary",
+      "name": "Mossveil Sanctuary",
+      "family": "Assembled sanctuary",
+      "file": "mossveil-sanctuary.glb",
+      "editableParts": 247,
+      "suggestedPlacement": "ground-origin decorative sanctuary art; no spawns, collision, loot, quests, captives or map integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "mossveil-sanctuary",
+      "bytes": 789428,
+      "sha256": "bc69193fdcc4e7ba5b090f99e9089f56e4af35d3edca242e3e8fc8bcce80e4fa",
+      "bounds": {
+        "min": [
+          -5.458961486816406,
+          0,
+          -5.300000190734863
+        ],
+        "max": [
+          5.300000190734863,
+          4.724081993103027,
+          5.300000190734863
+        ]
+      },
+      "footprint": {
+        "width": 10.75896167755127,
+        "depth": 10.600000381469727
+      },
+      "height": 4.724081993103027,
+      "triangles": 8672,
+      "vertices": 20450,
+      "drawPrimitives": 1,
+      "paletteColors": 656
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "blenderVersion": "5.2.1 LTS",
+  "source": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\blender\\woodland-shrine\\emberhall-mossveil.blend",
+  "assetCount": 9,
+  "assets": [
+    {
+      "id": "broken-sun-arch",
+      "editableParts": 29,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "mossy-wall",
+      "editableParts": 24,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "worn-paving",
+      "editableParts": 17,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "votive-markers",
+      "editableParts": 19,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "dry-offering-basin",
+      "editableParts": 5,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "sunleaf-altar",
+      "editableParts": 20,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "fallen-columns",
+      "editableParts": 4,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "ancient-root-tree",
+      "editableParts": 22,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "mossveil-sanctuary",
+      "editableParts": 247,
+      "groundZ": 0.0,
+      "passed": true
+    }
+  ]
+}

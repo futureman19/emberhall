@@ -1,0 +1,254 @@
+{
+  "passed": true,
+  "assetCount": 9,
+  "totalBytes": 1633260,
+  "totalTriangles": 19784,
+  "totalDrawPrimitives": 9,
+  "loader": "Installed Three.js GLTFLoader; all binary geometry parsed",
+  "scope": "Asset structural checks only, NOT gameplay/performance acceptance",
+  "assets": [
+    {
+      "id": "war-tent",
+      "passed": true,
+      "bytes": 80004,
+      "sha256": "cbff8a80064a6119b9102de49aa60752474aefb038c6508bb05c7b71a9b4a0ec",
+      "bounds": {
+        "min": [
+          -1.9128049612045288,
+          0,
+          -1.805163025856018
+        ],
+        "max": [
+          1.9080438613891602,
+          2.32745361328125,
+          2.359999895095825
+        ]
+      },
+      "footprint": {
+        "width": 3.820848822593689,
+        "depth": 4.165162920951843
+      },
+      "height": 2.32745361328125,
+      "triangles": 1054,
+      "vertices": 2014,
+      "drawPrimitives": 1,
+      "paletteColors": 294
+    },
+    {
+      "id": "palisade-gate",
+      "passed": true,
+      "bytes": 55132,
+      "sha256": "fd4b80b4fab8e477df404da1e0e9fe9986e142daed88e85eed2c6bf634c8ec43",
+      "bounds": {
+        "min": [
+          -2.40997576713562,
+          0,
+          -0.2511259913444519
+        ],
+        "max": [
+          2.410607099533081,
+          3.135181427001953,
+          0.2511259913444519
+        ]
+      },
+      "footprint": {
+        "width": 4.820582866668701,
+        "depth": 0.5022519826889038
+      },
+      "height": 3.135181427001953,
+      "triangles": 707,
+      "vertices": 1381,
+      "drawPrimitives": 1,
+      "paletteColors": 177
+    },
+    {
+      "id": "lookout-platform",
+      "passed": true,
+      "bytes": 79612,
+      "sha256": "08a214aac7cd97b8bbd871d6ee6bd3efdf022ea73bd79845dde2712d17a2b575",
+      "bounds": {
+        "min": [
+          -0.9106351137161255,
+          0,
+          -0.85276859998703
+        ],
+        "max": [
+          0.9100000262260437,
+          3.1217687129974365,
+          1.3260473012924194
+        ]
+      },
+      "footprint": {
+        "width": 1.8206351399421692,
+        "depth": 2.1788159012794495
+      },
+      "height": 3.1217687129974365,
+      "triangles": 1012,
+      "vertices": 2010,
+      "drawPrimitives": 1,
+      "paletteColors": 195
+    },
+    {
+      "id": "palisade-wall",
+      "passed": true,
+      "bytes": 68584,
+      "sha256": "056b1401bfc425b3d6de3cc76fe69a654e541e9352c2512ff693be61bb1f873d",
+      "bounds": {
+        "min": [
+          -1.9549760818481445,
+          0,
+          -0.9333962202072144
+        ],
+        "max": [
+          1.9534361362457275,
+          2.0248045921325684,
+          0.20092064142227173
+        ]
+      },
+      "footprint": {
+        "width": 3.908412218093872,
+        "depth": 1.134316861629486
+      },
+      "height": 2.0248045921325684,
+      "triangles": 878,
+      "vertices": 1726,
+      "drawPrimitives": 1,
+      "paletteColors": 127
+    },
+    {
+      "id": "cooking-pit",
+      "passed": true,
+      "bytes": 132556,
+      "sha256": "b072f9a7585ebd5de27b61a0e481319971f984d253f52238c4318e00c61962f6",
+      "bounds": {
+        "min": [
+          -1.0199999809265137,
+          0,
+          -0.8234314918518066
+        ],
+        "max": [
+          1.0199999809265137,
+          1.3365278244018555,
+          0.8294932842254639
+        ]
+      },
+      "footprint": {
+        "width": 2.0399999618530273,
+        "depth": 1.6529247760772705
+      },
+      "height": 1.3365278244018555,
+      "triangles": 1328,
+      "vertices": 3428,
+      "drawPrimitives": 1,
+      "paletteColors": 380
+    },
+    {
+      "id": "empty-cage",
+      "passed": true,
+      "bytes": 54504,
+      "sha256": "9c6f8542fe9ff06afe9262f771ffc12c57f078ab9641c6d5488ebfea3809fea8",
+      "bounds": {
+        "min": [
+          -0.8099871873855591,
+          0,
+          -0.7077435255050659
+        ],
+        "max": [
+          0.8213634490966797,
+          1.9019880294799805,
+          0.7124999761581421
+        ]
+      },
+      "footprint": {
+        "width": 1.6313506364822388,
+        "depth": 1.420243501663208
+      },
+      "height": 1.9019880294799805,
+      "triangles": 728,
+      "vertices": 1360,
+      "drawPrimitives": 1,
+      "paletteColors": 135
+    },
+    {
+      "id": "trophy-standard",
+      "passed": true,
+      "bytes": 49996,
+      "sha256": "f5bb5aa8af91f9aeab330e7fdd07c7540e01b8636b958e74c1bd2f9c8a0cf6fb",
+      "bounds": {
+        "min": [
+          -0.6200000047683716,
+          0,
+          -0.5102887749671936
+        ],
+        "max": [
+          0.6200000047683716,
+          2.4813039302825928,
+          0.4658088684082031
+        ]
+      },
+      "footprint": {
+        "width": 1.2400000095367432,
+        "depth": 0.9760976433753967
+      },
+      "height": 2.4813039302825928,
+      "triangles": 545,
+      "vertices": 1265,
+      "drawPrimitives": 1,
+      "paletteColors": 232
+    },
+    {
+      "id": "supply-pile",
+      "passed": true,
+      "bytes": 47680,
+      "sha256": "9582ab40b50a684978cb604a04112cb9718834e6037775235ef3f03fb655e429",
+      "bounds": {
+        "min": [
+          -0.9359779953956604,
+          0,
+          -0.6633666753768921
+        ],
+        "max": [
+          0.7824459671974182,
+          1.422908067703247,
+          0.7232970595359802
+        ]
+      },
+      "footprint": {
+        "width": 1.7184239625930786,
+        "depth": 1.3866637349128723
+      },
+      "height": 1.422908067703247,
+      "triangles": 514,
+      "vertices": 1206,
+      "drawPrimitives": 1,
+      "paletteColors": 182
+    },
+    {
+      "id": "grimroot-camp",
+      "passed": true,
+      "bytes": 1065192,
+      "sha256": "4c2752f679373f8c72e1f64efb5601d660b7d054313eacce9064d9915cdbfd2d",
+      "bounds": {
+        "min": [
+          -6.32961893081665,
+          0,
+          -6.2494378089904785
+        ],
+        "max": [
+          6.53303337097168,
+          3.2351813316345215,
+          6.132178783416748
+        ]
+      },
+      "footprint": {
+        "width": 12.86265230178833,
+        "depth": 12.381616592407227
+      },
+      "height": 3.2351813316345215,
+      "triangles": 13018,
+      "vertices": 27386,
+      "drawPrimitives": 1,
+      "paletteColors": 927
+    }
+  ]
+}

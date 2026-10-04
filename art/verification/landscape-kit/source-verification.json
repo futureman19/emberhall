@@ -1,0 +1,92 @@
+{
+  "passed": true,
+  "blenderVersion": "5.2.1 LTS",
+  "source": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\blender\\landscape-kit\\emberhall-landscape.blend",
+  "assetCount": 14,
+  "assets": [
+    {
+      "id": "rocky-peak",
+      "editableParts": 6,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "snowcap-peak",
+      "editableParts": 7,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "mountain-ridge",
+      "editableParts": 4,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "cliff-straight",
+      "editableParts": 10,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "cliff-corner",
+      "editableParts": 13,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "boulder-cluster",
+      "editableParts": 5,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "active-volcano",
+      "editableParts": 11,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "dormant-caldera",
+      "editableParts": 9,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "basalt-columns",
+      "editableParts": 13,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "lava-pool",
+      "editableParts": 7,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "swamp-patch",
+      "editableParts": 11,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "reed-cluster",
+      "editableParts": 39,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "swamp-tree",
+      "editableParts": 23,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "moss-rocks",
+      "editableParts": 10,
+      "groundZ": 0.0,
+      "passed": true
+    }
+  ]
+}

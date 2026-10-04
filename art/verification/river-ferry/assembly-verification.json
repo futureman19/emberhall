@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "scope": "Static vertex-transform proof only; no gameplay or collision acceptance",
+  "instances": [
+    {
+      "instance": "stranded-ferry",
+      "asset": "wrecked-ferry",
+      "editableParts": 75,
+      "maxVertexTransformError": 5.331201499700045e-07
+    },
+    {
+      "instance": "landing-deck",
+      "asset": "intact-dock",
+      "editableParts": 23,
+      "maxVertexTransformError": 2.6656007498500226e-07
+    },
+    {
+      "instance": "broken-end",
+      "asset": "broken-dock",
+      "editableParts": 10,
+      "maxVertexTransformError": 2.384185791015625e-07
+    },
+    {
+      "instance": "dock-bollards",
+      "asset": "mooring-posts",
+      "editableParts": 9,
+      "maxVertexTransformError": 2.6656007498500226e-07
+    },
+    {
+      "instance": "bank-bollards",
+      "asset": "mooring-posts",
+      "editableParts": 9,
+      "maxVertexTransformError": 5.331201499700045e-07
+    },
+    {
+      "instance": "hauling-winch",
+      "asset": "hauling-winch",
+      "editableParts": 14,
+      "maxVertexTransformError": 4.951133646320149e-07
+    },
+    {
+      "instance": "old-sign",
+      "asset": "landing-sign",
+      "editableParts": 19,
+      "maxVertexTransformError": 3.4240261593687705e-07
+    },
+    {
+      "instance": "bank-cargo",
+      "asset": "washed-cargo",
+      "editableParts": 28,
+      "maxVertexTransformError": 4.915124923727108e-07
+    },
+    {
+      "instance": "upper-bank-cargo",
+      "asset": "washed-cargo",
+      "editableParts": 28,
+      "maxVertexTransformError": 5.331201499700045e-07
+    },
+    {
+      "instance": "south-reeds",
+      "asset": "reed-debris",
+      "editableParts": 36,
+      "maxVertexTransformError": 3.371747880871523e-07
+    },
+    {
+      "instance": "north-reeds",
+      "asset": "reed-debris",
+      "editableParts": 36,
+      "maxVertexTransformError": 3.375038997204937e-07
+    },
+    {
+      "instance": "ferry-reeds",
+      "asset": "reed-debris",
+      "editableParts": 36,
+      "maxVertexTransformError": 2.669762502188819e-07
+    }
+  ],
+  "assemblyOnlyDressingParts": 42
+}

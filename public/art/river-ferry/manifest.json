@@ -1,0 +1,307 @@
+{
+  "schemaVersion": 1,
+  "title": "Emberhall • Reedwake Crossing",
+  "units": "provisional world units (not approved tile occupancy)",
+  "axis": "glTF Y-up",
+  "pivot": "ground-level local origin; no lineup offsets",
+  "integration": "VISUAL ONLY; placement/collision suggestions are NON-AUTHORITATIVE. No map, biome, navigation or gameplay changes.",
+  "assets": [
+    {
+      "id": "wrecked-ferry",
+      "name": "Wrecked River Ferry",
+      "family": "Ferry and landing",
+      "file": "wrecked-ferry.glb",
+      "editableParts": 75,
+      "suggestedPlacement": "ground-origin decorative riverbank art; no vehicles, water simulation, collision or gameplay integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "wrecked-ferry",
+      "bytes": 71336,
+      "sha256": "48f879e9431a55005548d63b5539db677f27a1c9a9c8c903aba119913501ff4c",
+      "bounds": {
+        "min": [
+          -3,
+          0,
+          -1.139115571975708
+        ],
+        "max": [
+          3,
+          1.2000000476837158,
+          1.139115571975708
+        ]
+      },
+      "footprint": {
+        "width": 6,
+        "depth": 2.278231143951416
+      },
+      "height": 1.2000000476837158,
+      "triangles": 900,
+      "vertices": 1800,
+      "drawPrimitives": 1,
+      "paletteColors": 260
+    },
+    {
+      "id": "intact-dock",
+      "name": "Weathered Dock",
+      "family": "Ferry and landing",
+      "file": "intact-dock.glb",
+      "editableParts": 23,
+      "suggestedPlacement": "ground-origin decorative riverbank art; no vehicles, water simulation, collision or gameplay integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "intact-dock",
+      "bytes": 22696,
+      "sha256": "2fd7b5222ff13b4b307b3bc166b589f029f5d3b071a8aa45b4a693e604398606",
+      "bounds": {
+        "min": [
+          -1.4880000352859497,
+          0,
+          -0.8899999856948853
+        ],
+        "max": [
+          1.4880000352859497,
+          1.149999976158142,
+          0.8899999856948853
+        ]
+      },
+      "footprint": {
+        "width": 2.9760000705718994,
+        "depth": 1.7799999713897705
+      },
+      "height": 1.149999976158142,
+      "triangles": 276,
+      "vertices": 552,
+      "drawPrimitives": 1,
+      "paletteColors": 95
+    },
+    {
+      "id": "broken-dock",
+      "name": "Broken Landing End",
+      "family": "Ferry and landing",
+      "file": "broken-dock.glb",
+      "editableParts": 10,
+      "suggestedPlacement": "ground-origin decorative riverbank art; no vehicles, water simulation, collision or gameplay integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "broken-dock",
+      "bytes": 10524,
+      "sha256": "6f2a436209a7c74eaafdc34d55e5669d5ffe55a2bbb6244e6e6e54296593d007",
+      "bounds": {
+        "min": [
+          -0.6901389956474304,
+          0,
+          -0.8899999856948853
+        ],
+        "max": [
+          0.983293890953064,
+          1.0800000429153442,
+          0.8600000143051147
+        ]
+      },
+      "footprint": {
+        "width": 1.6734328866004944,
+        "depth": 1.75
+      },
+      "height": 1.0800000429153442,
+      "triangles": 120,
+      "vertices": 240,
+      "drawPrimitives": 1,
+      "paletteColors": 52
+    },
+    {
+      "id": "mooring-posts",
+      "name": "Roped Mooring Posts",
+      "family": "River hardware",
+      "file": "mooring-posts.glb",
+      "editableParts": 9,
+      "suggestedPlacement": "ground-origin decorative riverbank art; no vehicles, water simulation, collision or gameplay integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "mooring-posts",
+      "bytes": 107640,
+      "sha256": "55e1fddba555d00a14324de0b4d71e7ad4e05ddeb5d299c272ccd1480d71331a",
+      "bounds": {
+        "min": [
+          -0.7400000095367432,
+          0,
+          -0.18424871563911438
+        ],
+        "max": [
+          0.7400000095367432,
+          0.8500000238418579,
+          0.22771281003952026
+        ]
+      },
+      "footprint": {
+        "width": 1.4800000190734863,
+        "depth": 0.41196152567863464
+      },
+      "height": 0.8500000238418579,
+      "triangles": 1352,
+      "vertices": 2732,
+      "drawPrimitives": 1,
+      "paletteColors": 236
+    },
+    {
+      "id": "hauling-winch",
+      "name": "Abandoned Hauling Winch",
+      "family": "River hardware",
+      "file": "hauling-winch.glb",
+      "editableParts": 14,
+      "suggestedPlacement": "ground-origin decorative riverbank art; no vehicles, water simulation, collision or gameplay integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "hauling-winch",
+      "bytes": 171696,
+      "sha256": "7d8350f3fc748592b5b48670d4dc1139e821a565b48dfc61e0b2ec9db2836e30",
+      "bounds": {
+        "min": [
+          -0.8299999833106995,
+          0,
+          -0.625
+        ],
+        "max": [
+          1.059999942779541,
+          1.3049999475479126,
+          0.625
+        ]
+      },
+      "footprint": {
+        "width": 1.8899999260902405,
+        "depth": 1.25
+      },
+      "height": 1.3049999475479126,
+      "triangles": 2216,
+      "vertices": 4368,
+      "drawPrimitives": 1,
+      "paletteColors": 260
+    },
+    {
+      "id": "landing-sign",
+      "name": "Ferry Sign and Lantern",
+      "family": "Bank details",
+      "file": "landing-sign.glb",
+      "editableParts": 19,
+      "suggestedPlacement": "ground-origin decorative riverbank art; no vehicles, water simulation, collision or gameplay integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "landing-sign",
+      "bytes": 19916,
+      "sha256": "e2a3778639b792ea5da2dcee562f040e798be21749df5e0aa21ca071f033f3cd",
+      "bounds": {
+        "min": [
+          -0.5299999713897705,
+          0,
+          -0.26499998569488525
+        ],
+        "max": [
+          0.8999999761581421,
+          2.7300000190734863,
+          0.26499998569488525
+        ]
+      },
+      "footprint": {
+        "width": 1.4299999475479126,
+        "depth": 0.5299999713897705
+      },
+      "height": 2.7300000190734863,
+      "triangles": 244,
+      "vertices": 480,
+      "drawPrimitives": 1,
+      "paletteColors": 87
+    },
+    {
+      "id": "washed-cargo",
+      "name": "Washed-up Cargo",
+      "family": "Bank details",
+      "file": "washed-cargo.glb",
+      "editableParts": 28,
+      "suggestedPlacement": "ground-origin decorative riverbank art; no vehicles, water simulation, collision or gameplay integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "washed-cargo",
+      "bytes": 41040,
+      "sha256": "42109f6f91ac649f4bfab26a548b1100d8ecee7f2cd3ca5c7dcdebdfc27c7958",
+      "bounds": {
+        "min": [
+          -0.7653613686561584,
+          0,
+          -0.4300000071525574
+        ],
+        "max": [
+          0.949999988079071,
+          0.8050000071525574,
+          0.639856219291687
+        ]
+      },
+      "footprint": {
+        "width": 1.7153613567352295,
+        "depth": 1.0698562264442444
+      },
+      "height": 0.8050000071525574,
+      "triangles": 452,
+      "vertices": 1032,
+      "drawPrimitives": 1,
+      "paletteColors": 168
+    },
+    {
+      "id": "reed-debris",
+      "name": "Reeds and Driftwood",
+      "family": "Bank details",
+      "file": "reed-debris.glb",
+      "editableParts": 36,
+      "suggestedPlacement": "ground-origin decorative riverbank art; no vehicles, water simulation, collision or gameplay integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "reed-debris",
+      "bytes": 60316,
+      "sha256": "bc76d49fa2d113b52213057704892c28bcd772b210cf663a9dc1b18d73fb4361",
+      "bounds": {
+        "min": [
+          -0.7606673240661621,
+          0,
+          -0.5906473398208618
+        ],
+        "max": [
+          0.8293929100036621,
+          1.001204490661621,
+          0.4907045066356659
+        ]
+      },
+      "footprint": {
+        "width": 1.5900602340698242,
+        "depth": 1.0813518464565277
+      },
+      "height": 1.001204490661621,
+      "triangles": 750,
+      "vertices": 1518,
+      "drawPrimitives": 1,
+      "paletteColors": 232
+    },
+    {
+      "id": "reedwake-crossing",
+      "name": "Reedwake Crossing",
+      "family": "Assembled landmark",
+      "file": "reedwake-crossing.glb",
+      "editableParts": 365,
+      "suggestedPlacement": "ground-origin decorative riverbank art; no vehicles, water simulation, collision or gameplay integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "reedwake-crossing",
+      "bytes": 877232,
+      "sha256": "46aa81f19344f07ef351ae9a34dc27b4888ae9e54b4451ad5df112dbac41a698",
+      "bounds": {
+        "min": [
+          -5.5,
+          0,
+          -4.614441871643066
+        ],
+        "max": [
+          5.5,
+          3.190000057220459,
+          4.620615482330322
+        ]
+      },
+      "footprint": {
+        "width": 11,
+        "depth": 9.235057353973389
+      },
+      "height": 3.190000057220459,
+      "triangles": 10818,
+      "vertices": 22532,
+      "drawPrimitives": 1,
+      "paletteColors": 938
+    }
+  ]
+}

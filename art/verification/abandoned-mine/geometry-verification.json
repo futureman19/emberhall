@@ -1,0 +1,254 @@
+{
+  "passed": true,
+  "assetCount": 9,
+  "totalBytes": 1206244,
+  "totalTriangles": 13064,
+  "totalDrawPrimitives": 9,
+  "loader": "Installed Three.js GLTFLoader; all binary geometry parsed",
+  "scope": "Asset structural checks only, NOT gameplay/performance acceptance",
+  "assets": [
+    {
+      "id": "sealed-mine-mouth",
+      "passed": true,
+      "bytes": 119724,
+      "sha256": "d8193493ec1879ada89b5aca86b192878798d213c3b115714e461e38ed596e01",
+      "bounds": {
+        "min": [
+          -3.1009395122528076,
+          0,
+          -1.8237501382827759
+        ],
+        "max": [
+          3.2024035453796387,
+          3.2560157775878906,
+          1.684619426727295
+        ]
+      },
+      "footprint": {
+        "width": 6.303343057632446,
+        "depth": 3.508369565010071
+      },
+      "height": 3.2560157775878906,
+      "triangles": 1204,
+      "vertices": 3092,
+      "drawPrimitives": 1,
+      "paletteColors": 423
+    },
+    {
+      "id": "timber-shoring",
+      "passed": true,
+      "bytes": 15200,
+      "sha256": "df951a503dd029a0d5ce65d7ae331809ec4728d0bc241e26dafa646c44d23f09",
+      "bounds": {
+        "min": [
+          -1.215000033378601,
+          0,
+          -0.32499998807907104
+        ],
+        "max": [
+          1.215000033378601,
+          2.385798931121826,
+          0.859312117099762
+        ]
+      },
+      "footprint": {
+        "width": 2.430000066757202,
+        "depth": 1.184312105178833
+      },
+      "height": 2.385798931121826,
+      "triangles": 180,
+      "vertices": 360,
+      "drawPrimitives": 1,
+      "paletteColors": 84
+    },
+    {
+      "id": "straight-track",
+      "passed": true,
+      "bytes": 18924,
+      "sha256": "3e0ddae91928c2a6d050e6f36a00d0ef6fe34ebdb70fb9f9ba5ca6b0478fadf3",
+      "bounds": {
+        "min": [
+          -0.69122314453125,
+          0,
+          -1.5
+        ],
+        "max": [
+          0.69122314453125,
+          0.26649999618530273,
+          1.5
+        ]
+      },
+      "footprint": {
+        "width": 1.3824462890625,
+        "depth": 3
+      },
+      "height": 0.26649999618530273,
+      "triangles": 228,
+      "vertices": 456,
+      "drawPrimitives": 1,
+      "paletteColors": 83
+    },
+    {
+      "id": "broken-track",
+      "passed": true,
+      "bytes": 21456,
+      "sha256": "ec6da0f17c01716d78046eb2ee950cfa331faf3d0280fe9225557a3f98ead12b",
+      "bounds": {
+        "min": [
+          -0.8890537023544312,
+          0,
+          -1.5807009935379028
+        ],
+        "max": [
+          0.9197932481765747,
+          0.43882760405540466,
+          1.3744776248931885
+        ]
+      },
+      "footprint": {
+        "width": 1.8088469505310059,
+        "depth": 2.9551786184310913
+      },
+      "height": 0.43882760405540466,
+      "triangles": 260,
+      "vertices": 520,
+      "drawPrimitives": 1,
+      "paletteColors": 113
+    },
+    {
+      "id": "broken-ore-cart",
+      "passed": true,
+      "bytes": 116908,
+      "sha256": "8b7b372af9661d6e213b795bf0e47bb96a3236fad1bf7a4714ee0be8579a51d6",
+      "bounds": {
+        "min": [
+          -0.8500000238418579,
+          0,
+          -0.9689711332321167
+        ],
+        "max": [
+          1.3376431465148926,
+          1.3930000066757202,
+          1.1067638397216797
+        ]
+      },
+      "footprint": {
+        "width": 2.1876431703567505,
+        "depth": 2.0757349729537964
+      },
+      "height": 1.3930000066757202,
+      "triangles": 1408,
+      "vertices": 2980,
+      "drawPrimitives": 1,
+      "paletteColors": 316
+    },
+    {
+      "id": "tool-rack",
+      "passed": true,
+      "bytes": 19908,
+      "sha256": "2e6b95a838325b25948ffb55705abbabd46efd05ed1ce74ddd13f4066192bfff",
+      "bounds": {
+        "min": [
+          -0.9679608345031738,
+          0,
+          -0.3100000023841858
+        ],
+        "max": [
+          0.7749999761581421,
+          1.710798978805542,
+          0.3626537024974823
+        ]
+      },
+      "footprint": {
+        "width": 1.742960810661316,
+        "depth": 0.6726537048816681
+      },
+      "height": 1.710798978805542,
+      "triangles": 244,
+      "vertices": 480,
+      "drawPrimitives": 1,
+      "paletteColors": 104
+    },
+    {
+      "id": "spoil-heap",
+      "passed": true,
+      "bytes": 107540,
+      "sha256": "e3f6995021cb2f5c4e1d5233f050603bd06ffa508788c57998d4891fbad603c8",
+      "bounds": {
+        "min": [
+          -1.141378402709961,
+          0,
+          -1.0123732089996338
+        ],
+        "max": [
+          1.1822245121002197,
+          0.7929072380065918,
+          0.812213659286499
+        ]
+      },
+      "footprint": {
+        "width": 2.3236029148101807,
+        "depth": 1.8245868682861328
+      },
+      "height": 0.7929072380065918,
+      "triangles": 1048,
+      "vertices": 2780,
+      "drawPrimitives": 1,
+      "paletteColors": 268
+    },
+    {
+      "id": "mining-workbench",
+      "passed": true,
+      "bytes": 48204,
+      "sha256": "bbc60eaf1fe038085eeb458c64c527e50305c96e646d0267086007cc90a2c3ac",
+      "bounds": {
+        "min": [
+          -1.1378364562988281,
+          0,
+          -0.9289252758026123
+        ],
+        "max": [
+          1.0721310377120972,
+          1.2307989597320557,
+          0.864310085773468
+        ]
+      },
+      "footprint": {
+        "width": 2.2099674940109253,
+        "depth": 1.7932353615760803
+      },
+      "height": 1.2307989597320557,
+      "triangles": 516,
+      "vertices": 1220,
+      "drawPrimitives": 1,
+      "paletteColors": 243
+    },
+    {
+      "id": "hollowvein-diggings",
+      "passed": true,
+      "bytes": 738380,
+      "sha256": "8841f9f5f9d79f4cc05e4db1d81ca14ba4b1081dab8f64d8e6544d041ddc138f",
+      "bounds": {
+        "min": [
+          -5.886684417724609,
+          0,
+          -6.161248683929443
+        ],
+        "max": [
+          6.234062671661377,
+          3.356015682220459,
+          6.004940032958984
+        ]
+      },
+      "footprint": {
+        "width": 12.120747089385986,
+        "depth": 12.166188716888428
+      },
+      "height": 3.356015682220459,
+      "triangles": 7976,
+      "vertices": 19148,
+      "drawPrimitives": 1,
+      "paletteColors": 1011
+    }
+  ]
+}

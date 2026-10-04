@@ -1,0 +1,222 @@
+{
+  "name": "Grimroot Warcamp",
+  "scope": "Decorative prefab only. No authoritative collision, spawn, loot or encounter data.",
+  "axis": "glTF Y-up",
+  "assemblyOnlyDressing": [
+    "Camp earth skirt",
+    "Camp edge rubble (15)",
+    "Front infill full-size stakes (10) and rails (4)"
+  ],
+  "instances": [
+    {
+      "asset": "war-tent",
+      "instance": "chieftain",
+      "translation": [
+        0,
+        0.1,
+        -2.5
+      ],
+      "yawRadians": 0,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "palisade-gate",
+      "instance": "entry",
+      "translation": [
+        0,
+        0.1,
+        3.9
+      ],
+      "yawRadians": 0,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "palisade-wall",
+      "instance": "west-front",
+      "translation": [
+        -4,
+        0.1,
+        1.85
+      ],
+      "yawRadians": 1.5707963267948966,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "palisade-wall",
+      "instance": "west-back",
+      "translation": [
+        -4,
+        0.1,
+        -1.85
+      ],
+      "yawRadians": 1.5707963267948966,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "palisade-wall",
+      "instance": "east-front",
+      "translation": [
+        4,
+        0.1,
+        1.85
+      ],
+      "yawRadians": -1.5707963267948966,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "palisade-wall",
+      "instance": "east-back",
+      "translation": [
+        4,
+        0.1,
+        -1.85
+      ],
+      "yawRadians": -1.5707963267948966,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "palisade-wall",
+      "instance": "rear-left",
+      "translation": [
+        -1.95,
+        0.1,
+        -4.2
+      ],
+      "yawRadians": 0,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "palisade-wall",
+      "instance": "rear-right",
+      "translation": [
+        1.95,
+        0.1,
+        -4.2
+      ],
+      "yawRadians": 0,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "lookout-platform",
+      "instance": "lookout",
+      "translation": [
+        -2.55,
+        0.1,
+        -2.75
+      ],
+      "yawRadians": 0,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "cooking-pit",
+      "instance": "hearth",
+      "translation": [
+        -1.15,
+        0.1,
+        0.15
+      ],
+      "yawRadians": 0,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "empty-cage",
+      "instance": "cage",
+      "translation": [
+        2,
+        0.1,
+        -0.5
+      ],
+      "yawRadians": -0.12,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "trophy-standard",
+      "instance": "standard",
+      "translation": [
+        1.75,
+        0.1,
+        1.4
+      ],
+      "yawRadians": 0.12,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "supply-pile",
+      "instance": "stores",
+      "translation": [
+        2.65,
+        0.1,
+        -2.8
+      ],
+      "yawRadians": 0.3,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "supply-pile",
+      "instance": "provisions",
+      "translation": [
+        -2.65,
+        0.1,
+        -0.35
+      ],
+      "yawRadians": -0.4,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  ]
+}

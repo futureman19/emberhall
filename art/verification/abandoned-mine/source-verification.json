@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "blenderVersion": "5.2.1 LTS",
+  "source": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\blender\\abandoned-mine\\emberhall-mine.blend",
+  "assetCount": 9,
+  "assets": [
+    {
+      "id": "sealed-mine-mouth",
+      "editableParts": 37,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "timber-shoring",
+      "editableParts": 15,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "straight-track",
+      "editableParts": 19,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "broken-track",
+      "editableParts": 15,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "broken-ore-cart",
+      "editableParts": 54,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "tool-rack",
+      "editableParts": 17,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "spoil-heap",
+      "editableParts": 24,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "mining-workbench",
+      "editableParts": 25,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "hollowvein-diggings",
+      "editableParts": 302,
+      "groundZ": 0.0,
+      "passed": true
+    }
+  ]
+}

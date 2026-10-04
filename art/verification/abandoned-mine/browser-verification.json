@@ -1,0 +1,102 @@
+{
+  "passed": true,
+  "devices": [
+    {
+      "name": "desktop",
+      "passed": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loaded": [
+        "sealed-mine-mouth",
+        "timber-shoring",
+        "straight-track",
+        "broken-track",
+        "broken-ore-cart",
+        "tool-rack",
+        "spoil-heap",
+        "mining-workbench",
+        "hollowvein-diggings"
+      ],
+      "filter": true,
+      "rotationToggle": true,
+      "pointerDrag": true,
+      "touchDrag": false,
+      "reset": true,
+      "glbDownload": true,
+      "errors": [],
+      "frames": 100,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "mobile",
+      "passed": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loaded": [
+        "sealed-mine-mouth",
+        "timber-shoring",
+        "straight-track",
+        "broken-track",
+        "broken-ore-cart",
+        "tool-rack",
+        "spoil-heap",
+        "mining-workbench",
+        "hollowvein-diggings"
+      ],
+      "filter": true,
+      "rotationToggle": true,
+      "pointerDrag": true,
+      "touchDrag": true,
+      "reset": true,
+      "glbDownload": true,
+      "errors": [],
+      "frames": 92,
+      "horizontalOverflow": false
+    }
+  ],
+  "assetHttpHashes": [
+    {
+      "id": "sealed-mine-mouth",
+      "passed": true,
+      "sha256": "d8193493ec1879ada89b5aca86b192878798d213c3b115714e461e38ed596e01"
+    },
+    {
+      "id": "timber-shoring",
+      "passed": true,
+      "sha256": "df951a503dd029a0d5ce65d7ae331809ec4728d0bc241e26dafa646c44d23f09"
+    },
+    {
+      "id": "straight-track",
+      "passed": true,
+      "sha256": "3e0ddae91928c2a6d050e6f36a00d0ef6fe34ebdb70fb9f9ba5ca6b0478fadf3"
+    },
+    {
+      "id": "broken-track",
+      "passed": true,
+      "sha256": "ec6da0f17c01716d78046eb2ee950cfa331faf3d0280fe9225557a3f98ead12b"
+    },
+    {
+      "id": "broken-ore-cart",
+      "passed": true,
+      "sha256": "8b7b372af9661d6e213b795bf0e47bb96a3236fad1bf7a4714ee0be8579a51d6"
+    },
+    {
+      "id": "tool-rack",
+      "passed": true,
+      "sha256": "2e6b95a838325b25948ffb55705abbabd46efd05ed1ce74ddd13f4066192bfff"
+    },
+    {
+      "id": "spoil-heap",
+      "passed": true,
+      "sha256": "e3f6995021cb2f5c4e1d5233f050603bd06ffa508788c57998d4891fbad603c8"
+    },
+    {
+      "id": "mining-workbench",
+      "passed": true,
+      "sha256": "bbc60eaf1fe038085eeb458c64c527e50305c96e646d0267086007cc90a2c3ac"
+    },
+    {
+      "id": "hollowvein-diggings",
+      "passed": true,
+      "sha256": "8841f9f5f9d79f4cc05e4db1d81ca14ba4b1081dab8f64d8e6544d041ddc138f"
+    }
+  ]
+}

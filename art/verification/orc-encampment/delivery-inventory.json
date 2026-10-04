@@ -1,0 +1,389 @@
+{
+  "archive": "art/verification/orc-encampment/emberhall-orc-encampment-source.zip",
+  "archiveBytes": 9534368,
+  "archiveSha256": "e00c85650964f29076ca38b2454c15ba1fc7be7180b508710117b483bc14c16e",
+  "archiveReadbackVerified": true,
+  "fileCount": 76,
+  "files": [
+    {
+      "file": "art/blender/orc-encampment/browser_verify.mjs",
+      "bytes": 5799,
+      "sha256": "a98c7cb56e50e1db83885f755a845086453e6b1eb5641549b033c14629bf9081"
+    },
+    {
+      "file": "art/blender/orc-encampment/build_camp.py",
+      "bytes": 7308,
+      "sha256": "eb88787c0082c37c841155ef0190eb2ef2d0a97f9cbdf69695ee2c85a4152c4a"
+    },
+    {
+      "file": "art/blender/orc-encampment/designs.py",
+      "bytes": 11268,
+      "sha256": "6d21acac857bca819d8ae8227c25a0aa440c6d3e8585d2e2adbe82989f03ae31"
+    },
+    {
+      "file": "art/blender/orc-encampment/emberhall-orc.blend",
+      "bytes": 451413,
+      "sha256": "3d267e27c299f56f02b2951c60cc54db386f55b5c7fe8e92b0423ab929b11852"
+    },
+    {
+      "file": "art/blender/orc-encampment/package_delivery.py",
+      "bytes": 1442,
+      "sha256": "f91bd44772034db0ab6749b01d84efe6d2b42c237562420ebc535c557407dabf"
+    },
+    {
+      "file": "art/blender/orc-encampment/package_gallery.py",
+      "bytes": 2865,
+      "sha256": "46d953afb3fd154c42c3f883aba931fbb053075d492ddb2abf440b82008ed83e"
+    },
+    {
+      "file": "art/blender/orc-encampment/README.md",
+      "bytes": 8410,
+      "sha256": "e50fe5f60bfe19d32d36662be313d2f3877a9c163f5068925a206dc2a105c4ca"
+    },
+    {
+      "file": "art/blender/orc-encampment/serve.mjs",
+      "bytes": 1124,
+      "sha256": "bc690b3e26e73f3cb6a45e966567f340c6e8889ec1bd3df424fc1f143f933f9e"
+    },
+    {
+      "file": "art/blender/orc-encampment/verify.mjs",
+      "bytes": 3666,
+      "sha256": "d2e3580f59cd755b7b8fef83786f9b302a0ecebb3341065573595fbe2390cdb5"
+    },
+    {
+      "file": "art/blender/orc-encampment/verify_assembly.py",
+      "bytes": 3027,
+      "sha256": "4381e945468295b502bb3a879c8f9d927974fc5603219b901130ebba328eb975"
+    },
+    {
+      "file": "art/blender/orc-encampment/verify_scope.py",
+      "bytes": 719,
+      "sha256": "9968cafd49e80cf588547017602617751201552430697271af6b6be03aa52831"
+    },
+    {
+      "file": "art/blender/orc-encampment/verify_source.py",
+      "bytes": 1622,
+      "sha256": "68ef37de660a603d6860610c08949992557a4edcf14d27a00fe422b68279760a"
+    },
+    {
+      "file": "art/verification/orc-encampment/assembly-red.log",
+      "bytes": 573,
+      "sha256": "d1becfa4d0fade163e8b6ff14b1cc99df34d446768e912099fbb28e42ae5bd76"
+    },
+    {
+      "file": "art/verification/orc-encampment/assembly-verification.json",
+      "bytes": 2569,
+      "sha256": "c152de7447af9e5dbd9f1b5ef161c2e3093d2654d4b3040cfeca6de81b4e2dba"
+    },
+    {
+      "file": "art/verification/orc-encampment/assembly-verify.log",
+      "bytes": 2793,
+      "sha256": "144135270ab2d48deea5e01da7174e4a457d038ceb286c6959cda0ded76b68f3"
+    },
+    {
+      "file": "art/verification/orc-encampment/browser-final.log",
+      "bytes": 2655,
+      "sha256": "61b12caff32702750d2cb93f941d85600ecbbc0c64a4605a5fd3b2b5758011a5"
+    },
+    {
+      "file": "art/verification/orc-encampment/browser-verification.json",
+      "bytes": 2654,
+      "sha256": "7663234110c39ac9ed9aae9fd2ff5be43413793edff0a131aaa78785d1c974ea"
+    },
+    {
+      "file": "art/verification/orc-encampment/browser.log",
+      "bytes": 2655,
+      "sha256": "9eca910a9e765dca301a7563322bcbd8979d1704a483ec6fef4ec4bf2deb787a"
+    },
+    {
+      "file": "art/verification/orc-encampment/camp-before-refinement.jpg",
+      "bytes": 266527,
+      "sha256": "17f016b9dac77d269465a83fccb37dc143e947491f97f489fb0548bdc311f8f5"
+    },
+    {
+      "file": "art/verification/orc-encampment/camp-hero.png",
+      "bytes": 1604777,
+      "sha256": "d29228733c702f7e22dc3a198289fbc09c65a6e64897ca6c5dcde515d2a8e026"
+    },
+    {
+      "file": "art/verification/orc-encampment/camp-presentation.jpg",
+      "bytes": 276372,
+      "sha256": "89e19e1b597266b687ccf292328bdd1c4e4982b270273179ac96bb35e75f49ee"
+    },
+    {
+      "file": "art/verification/orc-encampment/contact-sheet.png",
+      "bytes": 1065284,
+      "sha256": "20539417e06aa193f7f5e914745388b7aa67899431c88748acf6dbed0c05b747"
+    },
+    {
+      "file": "art/verification/orc-encampment/cooking-pit.png",
+      "bytes": 203873,
+      "sha256": "583965671f170e09fbf0a168224b666dc740e2731c280fd95a6ae4d0eab4f4de"
+    },
+    {
+      "file": "art/verification/orc-encampment/desktop-assembled-camp.png",
+      "bytes": 359672,
+      "sha256": "8d18f4db3e6495545ac6bc580ca60dd9e6cc5ef148a886361e4da1ed2f8bd31e"
+    },
+    {
+      "file": "art/verification/orc-encampment/desktop-gallery.png",
+      "bytes": 269861,
+      "sha256": "6a52af12fda0196bf035caa9ce7c66bf5493fd1cf3a3dd2c5d9cdbb19ff718cf"
+    },
+    {
+      "file": "art/verification/orc-encampment/desktop-landmarks.png",
+      "bytes": 296919,
+      "sha256": "d5913041044eb2d5835291b947c2fe012f440f47647cce00db9aa9cd37d24f25"
+    },
+    {
+      "file": "art/verification/orc-encampment/empty-cage.png",
+      "bytes": 270093,
+      "sha256": "87e5033513feb69cc781a1bf5f49106e7c486c4c332ed5ef2fd69f32f1821548"
+    },
+    {
+      "file": "art/verification/orc-encampment/generate-final.log",
+      "bytes": 4276,
+      "sha256": "fe8da77fc653493b3811e58727c0d0bfb2c84905c6b2843f35390f554228a62b"
+    },
+    {
+      "file": "art/verification/orc-encampment/generate.log",
+      "bytes": 4543,
+      "sha256": "2fa8e8c4769e4fc465b204983fb08cbf7e69efc9b06e55100ed40635d36e7e76"
+    },
+    {
+      "file": "art/verification/orc-encampment/geometry-verification.json",
+      "bytes": 6170,
+      "sha256": "e07293f6db5a4cf8de249430b6616e9eb4256c4afddf72777ac03550812c5344"
+    },
+    {
+      "file": "art/verification/orc-encampment/grimroot-camp.png",
+      "bytes": 208300,
+      "sha256": "b8d1f918a93ee836c216f792301415fdeded6a3ff91031a820f2b3a7630b42da"
+    },
+    {
+      "file": "art/verification/orc-encampment/lookout-platform.png",
+      "bytes": 209731,
+      "sha256": "e5f36f5367493b4e5e21f9f3d93a2b79807aa55c53843316e7644a1c7ee1c2d8"
+    },
+    {
+      "file": "art/verification/orc-encampment/measure.log",
+      "bytes": 6171,
+      "sha256": "0872b3373ef52d63a94bd12b7a58b9e37335097e3c82ae5b6493ffcc1df3364c"
+    },
+    {
+      "file": "art/verification/orc-encampment/mobile-assembled-camp.png",
+      "bytes": 129477,
+      "sha256": "4e9614016ecf8f5f35f07de57f9110b6018524a8f51ddc47fca0bc189529ed8d"
+    },
+    {
+      "file": "art/verification/orc-encampment/mobile-gallery.png",
+      "bytes": 102307,
+      "sha256": "2f61cb082fb84e2f333e1279f0644c87207008673b38c399f26e818526993f7f"
+    },
+    {
+      "file": "art/verification/orc-encampment/mobile-landmarks.png",
+      "bytes": 122474,
+      "sha256": "1ee255a85cb291f50b0048248dee0cc9f22d77bf12a9453f3ae060fd0e09cd4e"
+    },
+    {
+      "file": "art/verification/orc-encampment/palisade-gate.png",
+      "bytes": 149398,
+      "sha256": "9beb9cb753abcbcec0deafb790ef61c92ad275c626fc796c039ea99d910ce2ab"
+    },
+    {
+      "file": "art/verification/orc-encampment/palisade-wall.png",
+      "bytes": 162470,
+      "sha256": "236f5dae4b40705d5cda8096e7004e40b6ef6f4e1767c7ae4374c02e22df561c"
+    },
+    {
+      "file": "art/verification/orc-encampment/scope-baseline.json",
+      "bytes": 63388,
+      "sha256": "19017ed6de22ce737b53aff295e0dba2754bb89d42159a4276279dfebd2dee2a"
+    },
+    {
+      "file": "art/verification/orc-encampment/scope-verification.json",
+      "bytes": 214,
+      "sha256": "2d0c49f4eb71fa15b41a7f42e1ab8c0023895947e0416beb177850ae9c015e98"
+    },
+    {
+      "file": "art/verification/orc-encampment/source-verification.json",
+      "bytes": 1276,
+      "sha256": "9728c58cd6da5c9eb6fda31a1a9e2b253fe55a075c5ed305da72ddf6f68a4801"
+    },
+    {
+      "file": "art/verification/orc-encampment/source-verify.log",
+      "bytes": 1117,
+      "sha256": "3c6df49409d07ebc50b94567a311aa9bec500d6f10f08a8ab519da135a27c5cd"
+    },
+    {
+      "file": "art/verification/orc-encampment/supply-pile.png",
+      "bytes": 230730,
+      "sha256": "84941d91e824c9d62eede53b481277f6cd92ebdaba70d1af249831b644ee07d0"
+    },
+    {
+      "file": "art/verification/orc-encampment/trophy-standard.png",
+      "bytes": 148997,
+      "sha256": "78744339a313c1252d6fe645860c2a35230cbb121751241aa953f8e8ddf0c416"
+    },
+    {
+      "file": "art/verification/orc-encampment/verify.log",
+      "bytes": 6171,
+      "sha256": "0872b3373ef52d63a94bd12b7a58b9e37335097e3c82ae5b6493ffcc1df3364c"
+    },
+    {
+      "file": "art/verification/orc-encampment/war-tent.png",
+      "bytes": 196945,
+      "sha256": "2737950c4f9af8c12e25a6b841f0840586c8fa842162c1f0f3e20a947c5a4599"
+    },
+    {
+      "file": "public/art/orc-encampment/contact-sheet.jpg",
+      "bytes": 280430,
+      "sha256": "48ab4486f400b995abfbb6fac0e2c38918bb6979af87b4102d27d1e8fab2b71b"
+    },
+    {
+      "file": "public/art/orc-encampment/cooking-pit.glb",
+      "bytes": 132556,
+      "sha256": "b072f9a7585ebd5de27b61a0e481319971f984d253f52238c4318e00c61962f6"
+    },
+    {
+      "file": "public/art/orc-encampment/cooking-pit.png",
+      "bytes": 203873,
+      "sha256": "583965671f170e09fbf0a168224b666dc740e2731c280fd95a6ae4d0eab4f4de"
+    },
+    {
+      "file": "public/art/orc-encampment/empty-cage.glb",
+      "bytes": 54504,
+      "sha256": "9c6f8542fe9ff06afe9262f771ffc12c57f078ab9641c6d5488ebfea3809fea8"
+    },
+    {
+      "file": "public/art/orc-encampment/empty-cage.png",
+      "bytes": 270093,
+      "sha256": "87e5033513feb69cc781a1bf5f49106e7c486c4c332ed5ef2fd69f32f1821548"
+    },
+    {
+      "file": "public/art/orc-encampment/gallery.js",
+      "bytes": 3968,
+      "sha256": "28e03a6eaa38681877d4394147fe6658dca1d66420faa65683545f2cf2bab338"
+    },
+    {
+      "file": "public/art/orc-encampment/grimroot-camp.glb",
+      "bytes": 1065192,
+      "sha256": "4c2752f679373f8c72e1f64efb5601d660b7d054313eacce9064d9915cdbfd2d"
+    },
+    {
+      "file": "public/art/orc-encampment/grimroot-camp.png",
+      "bytes": 208300,
+      "sha256": "b8d1f918a93ee836c216f792301415fdeded6a3ff91031a820f2b3a7630b42da"
+    },
+    {
+      "file": "public/art/orc-encampment/index.html",
+      "bytes": 4487,
+      "sha256": "8bf3675b5b332c047c1b9a407df077a7920310c562d3d5be8a38b09485dd8344"
+    },
+    {
+      "file": "public/art/orc-encampment/layout.json",
+      "bytes": 3773,
+      "sha256": "43b99507c3fd8db34f8db7764222cf108f8d8c3ca4aa432f6163104b18ed26be"
+    },
+    {
+      "file": "public/art/orc-encampment/lookout-platform.glb",
+      "bytes": 79612,
+      "sha256": "08a214aac7cd97b8bbd871d6ee6bd3efdf022ea73bd79845dde2712d17a2b575"
+    },
+    {
+      "file": "public/art/orc-encampment/lookout-platform.png",
+      "bytes": 209731,
+      "sha256": "e5f36f5367493b4e5e21f9f3d93a2b79807aa55c53843316e7644a1c7ee1c2d8"
+    },
+    {
+      "file": "public/art/orc-encampment/manifest.json",
+      "bytes": 9993,
+      "sha256": "79dcb07c9f18098a58407fad33dd2898fd7a6ec65ade0544ba371ca3200f02f7"
+    },
+    {
+      "file": "public/art/orc-encampment/palisade-gate.glb",
+      "bytes": 55132,
+      "sha256": "fd4b80b4fab8e477df404da1e0e9fe9986e142daed88e85eed2c6bf634c8ec43"
+    },
+    {
+      "file": "public/art/orc-encampment/palisade-gate.png",
+      "bytes": 149398,
+      "sha256": "9beb9cb753abcbcec0deafb790ef61c92ad275c626fc796c039ea99d910ce2ab"
+    },
+    {
+      "file": "public/art/orc-encampment/palisade-wall.glb",
+      "bytes": 68584,
+      "sha256": "056b1401bfc425b3d6de3cc76fe69a654e541e9352c2512ff693be61bb1f873d"
+    },
+    {
+      "file": "public/art/orc-encampment/palisade-wall.png",
+      "bytes": 162470,
+      "sha256": "236f5dae4b40705d5cda8096e7004e40b6ef6f4e1767c7ae4374c02e22df561c"
+    },
+    {
+      "file": "public/art/orc-encampment/supply-pile.glb",
+      "bytes": 47680,
+      "sha256": "9582ab40b50a684978cb604a04112cb9718834e6037775235ef3f03fb655e429"
+    },
+    {
+      "file": "public/art/orc-encampment/supply-pile.png",
+      "bytes": 230730,
+      "sha256": "84941d91e824c9d62eede53b481277f6cd92ebdaba70d1af249831b644ee07d0"
+    },
+    {
+      "file": "public/art/orc-encampment/trophy-standard.glb",
+      "bytes": 49996,
+      "sha256": "f5bb5aa8af91f9aeab330e7fdd07c7540e01b8636b958e74c1bd2f9c8a0cf6fb"
+    },
+    {
+      "file": "public/art/orc-encampment/trophy-standard.png",
+      "bytes": 148997,
+      "sha256": "78744339a313c1252d6fe645860c2a35230cbb121751241aa953f8e8ddf0c416"
+    },
+    {
+      "file": "public/art/orc-encampment/vendor/addons/controls/OrbitControls.js",
+      "bytes": 40504,
+      "sha256": "faabb4e8dfd9235ee4a9fd7c9a3d75f90f1689dbd4944bd6fd32117dacec5f93"
+    },
+    {
+      "file": "public/art/orc-encampment/vendor/addons/loaders/GLTFLoader.js",
+      "bytes": 114959,
+      "sha256": "97642d720f16cc9a0c9844934198e4d0c023bea8e89576d0f7545d03b2d103d2"
+    },
+    {
+      "file": "public/art/orc-encampment/vendor/addons/utils/BufferGeometryUtils.js",
+      "bytes": 37621,
+      "sha256": "5c552223a9309883743b80538d6e9cdb45e3227f30d3ec56fb2c39b46e78d595"
+    },
+    {
+      "file": "public/art/orc-encampment/vendor/addons/utils/SkeletonUtils.js",
+      "bytes": 11535,
+      "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
+    },
+    {
+      "file": "public/art/orc-encampment/vendor/THREE-LICENSE.txt",
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "file": "public/art/orc-encampment/vendor/three.core.js",
+      "bytes": 1443056,
+      "sha256": "3718df126d69c125362a03340913204470d8c50238605150e57f808840fb7759"
+    },
+    {
+      "file": "public/art/orc-encampment/vendor/three.module.js",
+      "bytes": 650153,
+      "sha256": "bbf5ed13fe4373f5bd38b14ea8e62e9f157327da5638edc6d3863e08b167c9c7"
+    },
+    {
+      "file": "public/art/orc-encampment/war-tent.glb",
+      "bytes": 80004,
+      "sha256": "cbff8a80064a6119b9102de49aa60752474aefb038c6508bb05c7b71a9b4a0ec"
+    },
+    {
+      "file": "public/art/orc-encampment/war-tent.png",
+      "bytes": 196945,
+      "sha256": "2737950c4f9af8c12e25a6b841f0840586c8fa842162c1f0f3e20a947c5a4599"
+    }
+  ]
+}

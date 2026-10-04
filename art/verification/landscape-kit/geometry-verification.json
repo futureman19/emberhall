@@ -1,0 +1,389 @@
+{
+  "passed": true,
+  "assetCount": 14,
+  "totalBytes": 747780,
+  "totalTriangles": 7596,
+  "totalDrawPrimitives": 16,
+  "loader": "Installed Three.js GLTFLoader; all binary geometry parsed",
+  "scope": "Asset structural checks only, NOT gameplay/performance acceptance",
+  "assets": [
+    {
+      "id": "rocky-peak",
+      "passed": true,
+      "bytes": 40864,
+      "sha256": "522867bb47cb2f7a158f92a5364c489c1f6a5cf3011b4d3b9cc0310bdf117fe0",
+      "bounds": {
+        "min": [
+          -4.109571933746338,
+          0,
+          -3.8828513622283936
+        ],
+        "max": [
+          3.658400058746338,
+          6.326575756072998,
+          3.498444080352783
+        ]
+      },
+      "footprint": {
+        "width": 7.767971992492676,
+        "depth": 7.381295442581177
+      },
+      "height": 6.326575756072998,
+      "triangles": 386,
+      "vertices": 1038,
+      "drawPrimitives": 1,
+      "paletteColors": 170
+    },
+    {
+      "id": "snowcap-peak",
+      "passed": true,
+      "bytes": 47860,
+      "sha256": "4f473d1c1958f343c47bf766b506f9e6ca82a7c1b7d9a42779c46fe8c5f4a91b",
+      "bounds": {
+        "min": [
+          -3.915682554244995,
+          0,
+          -3.6820685863494873
+        ],
+        "max": [
+          4.164429187774658,
+          6.365691661834717,
+          3.355717420578003
+        ]
+      },
+      "footprint": {
+        "width": 8.080111742019653,
+        "depth": 7.03778600692749
+      },
+      "height": 6.365691661834717,
+      "triangles": 460,
+      "vertices": 1220,
+      "drawPrimitives": 1,
+      "paletteColors": 210
+    },
+    {
+      "id": "mountain-ridge",
+      "passed": true,
+      "bytes": 22588,
+      "sha256": "ec5aa4c54a140010ba19b3b9dbb827ddc04c3f20ea1ef685ea794bb2b3fe1b9c",
+      "bounds": {
+        "min": [
+          -3.595912218093872,
+          0,
+          -1.6151256561279297
+        ],
+        "max": [
+          3.835911273956299,
+          3.6851274967193604,
+          1.5579299926757812
+        ]
+      },
+      "footprint": {
+        "width": 7.431823492050171,
+        "depth": 3.173055648803711
+      },
+      "height": 3.6851274967193604,
+      "triangles": 208,
+      "vertices": 560,
+      "drawPrimitives": 1,
+      "paletteColors": 113
+    },
+    {
+      "id": "cliff-straight",
+      "passed": true,
+      "bytes": 54708,
+      "sha256": "ab3781fe0638fe4ca45e8c543f118d5e1a297cd3bf10cce3e7b0b62b5b8aad22",
+      "bounds": {
+        "min": [
+          -2.309784173965454,
+          0,
+          -0.9442481398582458
+        ],
+        "max": [
+          2.4310758113861084,
+          2.9193224906921387,
+          1.2597349882125854
+        ]
+      },
+      "footprint": {
+        "width": 4.7408599853515625,
+        "depth": 2.2039831280708313
+      },
+      "height": 2.9193224906921387,
+      "triangles": 520,
+      "vertices": 1400,
+      "drawPrimitives": 1,
+      "paletteColors": 191
+    },
+    {
+      "id": "cliff-corner",
+      "passed": true,
+      "bytes": 70760,
+      "sha256": "6b9a3007acdfaf4c467c3af109633b3af0c5e6374aeba91eab913e09ddab2693",
+      "bounds": {
+        "min": [
+          -2.234135150909424,
+          0,
+          -3.188502550125122
+        ],
+        "max": [
+          2.3607003688812256,
+          2.904841899871826,
+          1.2647545337677002
+        ]
+      },
+      "footprint": {
+        "width": 4.594835519790649,
+        "depth": 4.453257083892822
+      },
+      "height": 2.904841899871826,
+      "triangles": 676,
+      "vertices": 1820,
+      "drawPrimitives": 1,
+      "paletteColors": 221
+    },
+    {
+      "id": "boulder-cluster",
+      "passed": true,
+      "bytes": 27932,
+      "sha256": "01c6653e92498a134160e583e89b9de2c336384d76ba6f8453e97a0a911e4f93",
+      "bounds": {
+        "min": [
+          -1.3628671169281006,
+          0,
+          -1.3144766092300415
+        ],
+        "max": [
+          1.5245999097824097,
+          0.9715748429298401,
+          1.515484094619751
+        ]
+      },
+      "footprint": {
+        "width": 2.8874670267105103,
+        "depth": 2.8299607038497925
+      },
+      "height": 0.9715748429298401,
+      "triangles": 260,
+      "vertices": 700,
+      "drawPrimitives": 1,
+      "paletteColors": 105
+    },
+    {
+      "id": "active-volcano",
+      "passed": true,
+      "bytes": 75280,
+      "sha256": "486b556112591d796b30fa4ddeb47921fb3cc2b58cc2eab72a8fea69b1153376",
+      "bounds": {
+        "min": [
+          -3.2367217540740967,
+          0,
+          -3.16847825050354
+        ],
+        "max": [
+          3.140371561050415,
+          3.108936309814453,
+          3.6447243690490723
+        ]
+      },
+      "footprint": {
+        "width": 6.377093315124512,
+        "depth": 6.813202619552612
+      },
+      "height": 3.108936309814453,
+      "triangles": 768,
+      "vertices": 1904,
+      "drawPrimitives": 2,
+      "paletteColors": 124
+    },
+    {
+      "id": "dormant-caldera",
+      "passed": true,
+      "bytes": 62156,
+      "sha256": "9b1450aeb0331db0e23afa5bbe12fa8748e68fa1263413fe1df1336ec77a7dde",
+      "bounds": {
+        "min": [
+          -2.9980103969573975,
+          0,
+          -3.2207913398742676
+        ],
+        "max": [
+          3.4261038303375244,
+          2.787773847579956,
+          3.277155876159668
+        ]
+      },
+      "footprint": {
+        "width": 6.424114227294922,
+        "depth": 6.4979472160339355
+      },
+      "height": 2.787773847579956,
+      "triangles": 608,
+      "vertices": 1592,
+      "drawPrimitives": 1,
+      "paletteColors": 276
+    },
+    {
+      "id": "basalt-columns",
+      "passed": true,
+      "bytes": 60780,
+      "sha256": "7be81ae247b44af52276c476d7a6dc82c4460181756fc9517f21340259b7e635",
+      "bounds": {
+        "min": [
+          -1.3414610624313354,
+          0,
+          -1.2032759189605713
+        ],
+        "max": [
+          1.2040585279464722,
+          2.7094662189483643,
+          1.0977935791015625
+        ]
+      },
+      "footprint": {
+        "width": 2.5455195903778076,
+        "depth": 2.301069498062134
+      },
+      "height": 2.7094662189483643,
+      "triangles": 572,
+      "vertices": 1560,
+      "drawPrimitives": 1,
+      "paletteColors": 58
+    },
+    {
+      "id": "lava-pool",
+      "passed": true,
+      "bytes": 47184,
+      "sha256": "6fbb28f13ad9ab883df44062b15feca629f8c41ce0b20db860d300fa4cb9ef67",
+      "bounds": {
+        "min": [
+          -2.442509174346924,
+          0,
+          -2.6059346199035645
+        ],
+        "max": [
+          2.565291404724121,
+          0.29559603333473206,
+          2.3338680267333984
+        ]
+      },
+      "footprint": {
+        "width": 5.007800579071045,
+        "depth": 4.939802646636963
+      },
+      "height": 0.29559603333473206,
+      "triangles": 456,
+      "vertices": 1176,
+      "drawPrimitives": 2,
+      "paletteColors": 86
+    },
+    {
+      "id": "swamp-patch",
+      "passed": true,
+      "bytes": 53908,
+      "sha256": "ccefd98fc68b654a53c0c143e150a4a5de2a8c0528612aab814759090f5601ef",
+      "bounds": {
+        "min": [
+          -2.671538829803467,
+          0,
+          -2.9233510494232178
+        ],
+        "max": [
+          2.919271945953369,
+          0.41913437843322754,
+          2.909478187561035
+        ]
+      },
+      "footprint": {
+        "width": 5.590810775756836,
+        "depth": 5.832829236984253
+      },
+      "height": 0.41913437843322754,
+      "triangles": 556,
+      "vertices": 1372,
+      "drawPrimitives": 1,
+      "paletteColors": 250
+    },
+    {
+      "id": "reed-cluster",
+      "passed": true,
+      "bytes": 47972,
+      "sha256": "ecb3506150ad836a76de2990f4b6af8eafa41dc28f429f3d3518eb29822446e4",
+      "bounds": {
+        "min": [
+          -0.9401860237121582,
+          0,
+          -0.6818323135375977
+        ],
+        "max": [
+          0.6857099533081055,
+          1.5368366241455078,
+          0.6862590909004211
+        ]
+      },
+      "footprint": {
+        "width": 1.6258959770202637,
+        "depth": 1.3680914044380188
+      },
+      "height": 1.5368366241455078,
+      "triangles": 624,
+      "vertices": 1196,
+      "drawPrimitives": 1,
+      "paletteColors": 142
+    },
+    {
+      "id": "swamp-tree",
+      "passed": true,
+      "bytes": 81092,
+      "sha256": "a9f5577f81970db6af038b182a5fd76afad3ab5a9f9919a3a138a2827d30ab8c",
+      "bounds": {
+        "min": [
+          -1.8512154817581177,
+          0,
+          -1.7180403470993042
+        ],
+        "max": [
+          1.9636274576187134,
+          3.717663526535034,
+          1.8575977087020874
+        ]
+      },
+      "footprint": {
+        "width": 3.814842939376831,
+        "depth": 3.5756380558013916
+      },
+      "height": 3.717663526535034,
+      "triangles": 982,
+      "vertices": 2056,
+      "drawPrimitives": 1,
+      "paletteColors": 198
+    },
+    {
+      "id": "moss-rocks",
+      "passed": true,
+      "bytes": 54696,
+      "sha256": "e9c7377640b071682c4a6472db2a6a3920575de27fcacfa3ac8354c0105c353c",
+      "bounds": {
+        "min": [
+          -1.4486100673675537,
+          0,
+          -1.2974106073379517
+        ],
+        "max": [
+          1.54198157787323,
+          0.9705116152763367,
+          1.4375741481781006
+        ]
+      },
+      "footprint": {
+        "width": 2.9905916452407837,
+        "depth": 2.7349847555160522
+      },
+      "height": 0.9705116152763367,
+      "triangles": 520,
+      "vertices": 1400,
+      "drawPrimitives": 1,
+      "paletteColors": 158
+    }
+  ]
+}

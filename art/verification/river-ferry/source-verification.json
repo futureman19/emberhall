@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "blenderVersion": "5.2.1 LTS",
+  "source": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\blender\\river-ferry\\emberhall-reedwake.blend",
+  "assetCount": 9,
+  "assets": [
+    {
+      "id": "wrecked-ferry",
+      "editableParts": 75,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "intact-dock",
+      "editableParts": 23,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "broken-dock",
+      "editableParts": 10,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "mooring-posts",
+      "editableParts": 9,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "hauling-winch",
+      "editableParts": 14,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "landing-sign",
+      "editableParts": 19,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "washed-cargo",
+      "editableParts": 28,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "reed-debris",
+      "editableParts": 36,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "reedwake-crossing",
+      "editableParts": 365,
+      "groundZ": 0.0,
+      "passed": true
+    }
+  ]
+}

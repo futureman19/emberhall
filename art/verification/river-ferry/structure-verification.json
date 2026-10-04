@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "check": "intact-dock deck planks have positive separation",
+      "parts": 12,
+      "passed": true
+    },
+    {
+      "check": "broken-dock deck planks have positive separation",
+      "parts": 5,
+      "passed": true
+    },
+    {
+      "check": "wrecked-ferry deck planks have positive separation",
+      "parts": 6,
+      "passed": true
+    },
+    {
+      "check": "intact-dock supports start at local ground and reach framing",
+      "parts": 4,
+      "passed": true
+    },
+    {
+      "check": "broken-dock supports start at local ground and reach framing",
+      "parts": 2,
+      "passed": true
+    },
+    {
+      "check": "wreck and broken landing separated along X",
+      "gap": 0.201157808303833,
+      "passed": true
+    },
+    {
+      "check": "bank cargo and equipment seated on raised land, not water",
+      "passed": true
+    },
+    {
+      "check": "mooring rope endpoints seated on winding fronts",
+      "passed": true
+    },
+    {
+      "check": "tapered hull retains 35 strake sections and 10 exposed rib sides",
+      "passed": true
+    },
+    {
+      "check": "distinct opaque water and raised land surfaces",
+      "waterTop": 0.11999999731779099,
+      "landTop": 0.46000000834465027,
+      "passed": true
+    }
+  ],
+  "scope": "Saved decorative geometry only; not comprehensive collision, flotation, rope mechanics or gameplay acceptance."
+}

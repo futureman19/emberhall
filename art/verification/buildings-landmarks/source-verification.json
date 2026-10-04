@@ -1,0 +1,57 @@
+{
+  "roofTopNormalsChecked": 392,
+  "passed": true,
+  "blenderVersion": "5.2.1 LTS",
+  "source": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\blender\\buildings-landmarks\\emberhall-buildings.blend",
+  "assetCount": 8,
+  "assets": [
+    {
+      "id": "hearth-cottage",
+      "editableParts": 133,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "roadside-inn",
+      "editableParts": 219,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "watermill",
+      "editableParts": 184,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "watchtower",
+      "editableParts": 43,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "gatehouse",
+      "editableParts": 149,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "wayside-shrine",
+      "editableParts": 79,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "bell-tower",
+      "editableParts": 88,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "standing-stones",
+      "editableParts": 22,
+      "groundZ": 0.0,
+      "passed": true
+    }
+  ]
+}
