@@ -1,0 +1,127 @@
+{
+  "passed": true,
+  "loader": "Actual installed Three.js GLTFLoader",
+  "assets": [
+    {
+      "id": "baseline-current",
+      "passed": true,
+      "bytes": 227808,
+      "sha256": "21890f6eb13c6c7a745f835c4225a823f0068e576ffde3cfedfd7ab9139faac2",
+      "bounds": {
+        "min": [
+          -0.3893210443338513,
+          0,
+          -0.25
+        ],
+        "max": [
+          0.3893210443338513,
+          1.2499999850988388,
+          0.25
+        ]
+      },
+      "triangles": 4736,
+      "vertices": 5910,
+      "meshNodes": 19,
+      "materialCount": 9
+    },
+    {
+      "id": "rowan",
+      "passed": true,
+      "bytes": 366696,
+      "sha256": "2b5cff5a268c53c36c26351a42e5c2fce7a70fd74d7c13f7414d353fa4fb0ad4",
+      "bounds": {
+        "min": [
+          -0.4090000092983246,
+          0,
+          -0.26899999380111694
+        ],
+        "max": [
+          0.4090000092983246,
+          1.1770000457763672,
+          0.22699999809265137
+        ]
+      },
+      "triangles": 7964,
+      "vertices": 9400,
+      "meshNodes": 75,
+      "materialCount": 14
+    },
+    {
+      "id": "mira",
+      "passed": true,
+      "bytes": 429128,
+      "sha256": "96cec45de65eb98450e850db0b217252eef1c02d74d9ea0a7b8211029c0c520c",
+      "bounds": {
+        "min": [
+          -0.4090000092983246,
+          0,
+          -0.26899999380111694
+        ],
+        "max": [
+          0.4090000092983246,
+          1.1770000457763672,
+          0.2930000051856041
+        ]
+      },
+      "triangles": 9752,
+      "vertices": 10804,
+      "meshNodes": 88,
+      "materialCount": 14
+    },
+    {
+      "id": "arden",
+      "passed": true,
+      "bytes": 397272,
+      "sha256": "aeec68a1ea2d77e5e4346e01d435040addaa2e1d6e085b92feb35812d9974880",
+      "bounds": {
+        "min": [
+          -0.4090000092983246,
+          0,
+          -0.26899999380111694
+        ],
+        "max": [
+          0.4090000092983246,
+          1.1770000457763672,
+          0.23199999332427979
+        ]
+      },
+      "triangles": 8420,
+      "vertices": 10102,
+      "meshNodes": 85,
+      "materialCount": 14
+    }
+  ],
+  "baselineGeometryProof": [
+    {
+      "part": "head",
+      "maximumNearestVertexError": 4.768371586472142e-9,
+      "passed": true
+    },
+    {
+      "part": "torso",
+      "maximumNearestVertexError": 1.0728836041806744e-8,
+      "passed": true
+    },
+    {
+      "part": "leg",
+      "maximumNearestVertexError": 2.4575624643507253e-9,
+      "passed": true
+    },
+    {
+      "part": "foot",
+      "maximumNearestVertexError": 1.163817896265356e-9,
+      "passed": true
+    },
+    {
+      "part": "hair_cap",
+      "maximumNearestVertexError": 1.4305114648394124e-8,
+      "passed": true
+    },
+    {
+      "part": "belt",
+      "maximumNearestVertexError": 1.1309186181130631e-8,
+      "passed": true
+    }
+  ],
+  "scope": "Static geometry, actual rigid arm node transform. No live integration, no performance claim."
+}
