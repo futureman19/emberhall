@@ -1,0 +1,49 @@
+{
+  "url": "http://127.0.0.1:8137",
+  "scope": "Built app creator and player visual check, fresh storage; no Fiber source introspection",
+  "checks": [
+    {
+      "name": "bundled-scripts",
+      "ok": true
+    },
+    {
+      "name": "built-rowan-identical-to-approved-asset",
+      "ok": true,
+      "servedHash": "2b5cff5a268c53c36c26351a42e5c2fce7a70fd74d7c13f7414d353fa4fb0ad4",
+      "localHash": "2b5cff5a268c53c36c26351a42e5c2fce7a70fd74d7c13f7414d353fa4fb0ad4"
+    },
+    {
+      "name": "actual-renderer-rowan-request",
+      "ok": true,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:8137/art/character-reimagined/rowan.glb",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "name": "creator-finished-and-saved",
+      "ok": true
+    },
+    {
+      "name": "no-page-console-errors",
+      "ok": true,
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:8137/art/character-reimagined/rowan.glb",
+      "status": 200
+    }
+  ],
+  "screenshots": [
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\built-v1\\desktop-creator.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\built-v1\\mobile-creator.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\built-v1\\mobile-world.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\built-v1\\desktop-world.png"
+  ],
+  "passed": true
+}

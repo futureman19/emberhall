@@ -1,0 +1,585 @@
+{
+  "outcome": "SCOPED PASS: selected equipment and seeded native poison death/healer restoration accepted locally. No production code changes or Rowan-specific defect found. Not release/deployment clearance.",
+  "automatic_next_step": "none",
+  "passed_checks": 16,
+  "checks": [
+    {
+      "name": "baseline-rowan-and-original-npc",
+      "ok": true
+    },
+    {
+      "name": "headwear-hood",
+      "ok": true,
+      "wear": {
+        "head": "hood"
+      }
+    },
+    {
+      "name": "headwear-helm",
+      "ok": true,
+      "wear": {
+        "head": "helm"
+      }
+    },
+    {
+      "name": "headwear-cap",
+      "ok": true,
+      "wear": {
+        "head": "cap"
+      }
+    },
+    {
+      "name": "leather-gloves-rowan-materials",
+      "ok": true
+    },
+    {
+      "name": "mail-gauntlets-rowan-materials",
+      "ok": true
+    },
+    {
+      "name": "sword-shield-attached-meshes",
+      "ok": true
+    },
+    {
+      "name": "sword-shield-anchors-npc",
+      "ok": true
+    },
+    {
+      "name": "hatchet-heater-attached-meshes",
+      "ok": true
+    },
+    {
+      "name": "hatchet-heater-anchors-npc",
+      "ok": true
+    },
+    {
+      "name": "native-poison-death-lifecycle",
+      "ok": true
+    },
+    {
+      "name": "ghost-rowan-and-equipment-translucency",
+      "ok": true,
+      "visible": [
+        {
+          "name": "",
+          "geometry": "",
+          "type": "BufferGeometry",
+          "vertices": 82,
+          "visible": true,
+          "chain": [
+            [
+              0,
+              0.5528777705597789,
+              0.18
+            ]
+          ],
+          "color": "ece6d8",
+          "opacity": 0.58,
+          "transparent": true,
+          "depthWrite": false,
+          "emissive": "c9c3b6"
+        },
+        {
+          "name": "",
+          "geometry": "rowan:leg:-1",
+          "type": "BufferGeometry",
+          "vertices": 276,
+          "visible": true,
+          "chain": [
+            [
+              -0.11,
+              0.24287777055977894,
+              0
+            ]
+          ],
+          "color": "ece6d8",
+          "opacity": 0.58,
+          "transparent": true,
+          "depthWrite": false,
+          "emissive": "c9c3b6"
+        },
+        {
+          "name": "",
+          "geometry": "rowan:leg:1",
+          "type": "BufferGeometry",
+          "vertices": 276,
+          "visible": true,
+          "chain": [
+            [
+              0.11,
+              0.24287777055977894,
+              0
+            ]
+          ],
+          "color": "ece6d8",
+          "opacity": 0.58,
+          "transparent": true,
+          "depthWrite": false,
+          "emissive": "c9c3b6"
+        },
+        {
+          "name": "",
+          "geometry": "rowan:foot:-1",
+          "type": "BufferGeometry",
+          "vertices": 600,
+          "visible": true,
+          "chain": [
+            [
+              -0.11,
+              0.09287777055977893,
+              0.02
+            ]
+          ],
+          "color": "ece6d8",
+          "opacity": 0.58,
+          "transparent": true,
+          "depthWrite": false,
+          "emissive": "c9c3b6"
+        },
+        {
+          "name": "",
+          "geometry": "rowan:foot:1",
+          "type": "BufferGeometry",
+          "vertices": 600,
+          "visible": true,
+          "chain": [
+            [
+              0.11,
+              0.09287777055977893,
+              0.02
+            ]
+          ],
+          "color": "ece6d8",
+          "opacity": 0.58,
+          "transparent": true,
+          "depthWrite": false,
+          "emissive": "c9c3b6"
+        },
+        {
+          "name": "",
+          "geometry": "rowan:torso",
+          "type": "BufferGeometry",
+          "vertices": 1212,
+          "visible": true,
+          "chain": [
+            [
+              0,
+              0.5328777705597789,
+              0
+            ]
+          ],
+          "color": "ece6d8",
+          "opacity": 0.58,
+          "transparent": true,
+          "depthWrite": false,
+          "emissive": "c9c3b6"
+        },
+        {
+          "name": "",
+          "geometry": "rowan:arm:-1",
+          "type": "BufferGeometry",
+          "vertices": 276,
+          "visible": true,
+          "chain": [
+            [
+              0,
+              -0.1,
+              0
+            ],
+            [
+              -0.32,
+              0.572877770559779,
+              0
+            ]
+          ],
+          "color": "ece6d8",
+          "opacity": 0.58,
+          "transparent": true,
+          "depthWrite": false,
+          "emissive": "c9c3b6"
+        },
+        {
+          "name": "",
+          "geometry": "rowan:hand:-1",
+          "type": "BufferGeometry",
+          "vertices": 1908,
+          "visible": true,
+          "chain": [
+            [
+              0,
+              -0.26,
+              0
+            ],
+            [
+              -0.32,
+              0.572877770559779,
+              0
+            ]
+          ],
+          "color": "ece6d8",
+          "opacity": 0.58,
+          "transparent": true,
+          "depthWrite": false,
+          "emissive": "c9c3b6"
+        },
+        {
+          "name": "",
+          "geometry": "",
+          "type": "BufferGeometry",
+          "vertices": 56,
+          "visible": true,
+          "chain": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              -0.02,
+              -0.28,
+              0.08
+            ],
+            [
+              -0.32,
+              0.572877770559779,
+              0
+            ]
+          ],
+          "color": "ece6d8",
+          "opacity": 0.58,
+          "transparent": true,
+          "depthWrite": false,
+          "emissive": "c9c3b6"
+        },
+        {
+          "name": "",
+          "geometry": "",
+          "type": "BufferGeometry",
+          "vertices": 64,
+          "visible": true,
+          "chain": [
+            [
+              0,
+              0.02,
+              0.04
+            ],
+            [
+              -0.02,
+              -0.28,
+              0.08
+            ],
+            [
+              -0.32,
+              0.572877770559779,
+              0
+            ]
+          ],
+          "color": "ece6d8",
+          "opacity": 0.58,
+          "transparent": true,
+          "depthWrite": false,
+          "emissive": "c9c3b6"
+        },
+        {
+          "name": "",
+          "geometry": "rowan:arm:1",
+          "type": "BufferGeometry",
+          "vertices": 276,
+          "visible": true,
+          "chain": [
+            [
+              0,
+              -0.1,
+              0
+            ],
+            [
+              0.32,
+              0.572877770559779,
+              0
+            ]
+          ],
+          "color": "ece6d8",
+          "opacity": 0.58,
+          "transparent": true,
+          "depthWrite": false,
+          "emissive": "c9c3b6"
+        },
+        {
+          "name": "",
+          "geometry": "rowan:hand:1",
+          "type": "BufferGeometry",
+          "vertices": 1908,
+          "visible": true,
+          "chain": [
+            [
+              0,
+              -0.26,
+              0
+            ],
+            [
+              0.32,
+              0.572877770559779,
+              0
+            ]
+          ],
+          "color": "ece6d8",
+          "opacity": 0.58,
+          "transparent": true,
+          "depthWrite": false,
+          "emissive": "c9c3b6"
+        },
+        {
+          "name": "",
+          "geometry": "",
+          "type": "BufferGeometry",
+          "vertices": 176,
+          "visible": true,
+          "chain": [
+            [
+              0,
+              0.16,
+              0
+            ],
+            [
+              0.02,
+              -0.44,
+              0.04
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.32,
+              0.572877770559779,
+              0
+            ]
+          ],
+          "color": "ece6d8",
+          "opacity": 0.58,
+          "transparent": true,
+          "depthWrite": false,
+          "emissive": "c9c3b6"
+        },
+        {
+          "name": "",
+          "geometry": "",
+          "type": "BufferGeometry",
+          "vertices": 336,
+          "visible": true,
+          "chain": [
+            [
+              0.08,
+              0.36,
+              0
+            ],
+            [
+              0.02,
+              -0.44,
+              0.04
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0.32,
+              0.572877770559779,
+              0
+            ]
+          ],
+          "color": "ece6d8",
+          "opacity": 0.58,
+          "transparent": true,
+          "depthWrite": false,
+          "emissive": "c9c3b6"
+        },
+        {
+          "name": "",
+          "geometry": "rowan:head",
+          "type": "BufferGeometry",
+          "vertices": 2148,
+          "visible": true,
+          "chain": [
+            [
+              0,
+              0.9328777705597789,
+              0
+            ]
+          ],
+          "color": "ece6d8",
+          "opacity": 0.58,
+          "transparent": true,
+          "depthWrite": false,
+          "emissive": "c9c3b6"
+        },
+        {
+          "name": "",
+          "geometry": "",
+          "type": "BufferGeometry",
+          "vertices": 639,
+          "visible": true,
+          "chain": [
+            [
+              0,
+              1.112877770559779,
+              0
+            ]
+          ],
+          "color": "ece6d8",
+          "opacity": 0.58,
+          "transparent": true,
+          "depthWrite": false,
+          "emissive": "c9c3b6"
+        }
+      ]
+    },
+    {
+      "name": "ghost-no-opaque-rowan-details",
+      "ok": true
+    },
+    {
+      "name": "healer-ui-restores-living-rowan",
+      "ok": true
+    },
+    {
+      "name": "restored-materials-exactly-match-equipped",
+      "ok": true
+    },
+    {
+      "name": "asset-request-and-runtime-errors",
+      "ok": true
+    }
+  ],
+  "report": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\CONTINUATION-REPORT.json",
+  "final_browser_results": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\results.json",
+  "screenshots": [
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\desktop-hood.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\desktop-helm.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\desktop-cap.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\desktop-sword-shield.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\desktop-hatchet-heater.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\mobile-equipped.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\desktop-before-death.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\desktop-ghost.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\mobile-ghost.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\mobile-restored.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\desktop-restored.png"
+  ],
+  "exact_repo_files_created": [
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\scripts\\rowan-equipment-ghost-smoke.mjs",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v1\\harness.mjs.txt",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v1\\results.json",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v2\\desktop-before-death.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v2\\desktop-cap.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v2\\desktop-ghost.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v2\\desktop-hatchet-heater.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v2\\desktop-helm.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v2\\desktop-hood.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v2\\desktop-restored.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v2\\desktop-sword-shield.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v2\\harness.mjs.txt",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v2\\mobile-equipped.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v2\\mobile-ghost.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v2\\mobile-restored.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v2\\results.json",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\desktop-before-death.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\desktop-cap.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\desktop-ghost.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\desktop-hatchet-heater.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\desktop-helm.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\desktop-hood.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\desktop-restored.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\desktop-sword-shield.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\harness.mjs.txt",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\mobile-equipped.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\mobile-ghost.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\mobile-restored.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-v3\\results.json",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-tests.txt",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-typecheck.txt",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-lint.txt",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\CONTINUATION-REPORT.json"
+  ],
+  "repo_files_modified": [],
+  "preserved": "Original REPORT.json, all existing dirty work, approved GLB/geometry anchors and NPC production code were not edited. No commit, push or deployment.",
+  "harness_defects": [
+    {
+      "run": "continuation-v1",
+      "issue": "Census assumed every effect mesh has a position attribute; optional count needed. Retained aborted result and exact harness."
+    },
+    {
+      "run": "continuation-v2",
+      "issue": "Paused simulation froze native equipment personal-action animation, intentionally hiding held subtree; wall-clock delay was insufficient. Corrected with 80 native .05s ticks after equips; retained both failed attachment assertions, screenshots and exact harness."
+    },
+    {
+      "run": "review-before-v3",
+      "issue": "Armor selector used unsided arm names and only checked torso. Strengthened to exact three torso/left/right-arm count using actual sided names."
+    }
+  ],
+  "product_defects": [],
+  "death_provenance": {
+    "fixture": "Living player seeded at hp=1 with due poison, gold=90; no ghost flag writes.",
+    "execution": "speed(1); tick(.05); speed(0) triggers native poison damage and dieAsGhost.",
+    "verified": "hp=0; both ghost flags true; gold=60; corpseAt=(256,296); all visible non-ring ghost meshes transparent, opacity between 0 and 1, depthWrite false; no Rowan opaque detail meshes; original NPC path retained.",
+    "restoration": "Real Return me button on healer panel at mobile viewport. Living HP and both ghost flags restored; Rowan details return; all Rowan main-body material properties match predeath equipment snapshot exactly.",
+    "limitations": "Poison acquisition and combat were not natural gameplay; proximity and inventory were fixture-seeded. Existing poison status persists after healer; not asserted cured."
+  },
+  "commands": [
+    {
+      "command": "npm run dev -- --host 127.0.0.1 --port 8197 --strictPort",
+      "result": "Unique port live-checked refused connections before launch. Vite ready and HTTP 200; owned listener PID 24112."
+    },
+    {
+      "command": "node scripts/rowan-equipment-ghost-smoke.mjs http://127.0.0.1:8197 continuation-v1",
+      "result": "exit 1, harness census TypeError; retained"
+    },
+    {
+      "command": "node scripts/rowan-equipment-ghost-smoke.mjs http://127.0.0.1:8197 continuation-v2",
+      "result": "exit 1, 14/16 checks; two harness timing false failures retained"
+    },
+    {
+      "command": "node scripts/rowan-equipment-ghost-smoke.mjs http://127.0.0.1:8197 continuation-v3",
+      "result": "exit 0, 16/16 checks; fresh storage and real WebGL. No page or console errors."
+    },
+    {
+      "command": "node --experimental-strip-types --test src/components/game/authored-character.test.ts src/components/game/equipment-material.test.ts src/game/look/figure.test.ts src/game/look/save-roundtrip.test.ts",
+      "result": "exit 0; 12 passed",
+      "log": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-tests.txt"
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "exit 0",
+      "log": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-typecheck.txt"
+    },
+    {
+      "command": "node node_modules/eslint/bin/eslint.js scripts/rowan-equipment-ghost-smoke.mjs --max-warnings 0",
+      "result": "exit 0 after final edit",
+      "log": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\continuation-lint.txt"
+    },
+    {
+      "command": "taskkill.exe /PID 24112 /T /F",
+      "result": "success; tracked process kill tool timed out, listener ownership confirmed using Win32_Process before direct kill; subsequent socket connect_ex=10061 confirms port closed"
+    }
+  ],
+  "build": "Not rerun: no production code changes. Full suite/broad lint not rerun; existing unrelated broad lint blocker remains.",
+  "untested": [
+    "All equipment permutations, rare-affix appearances, bow/torch/staff/other tools, cloak/feet/legs combinations",
+    "Natural combat death, poison acquisition, native inventory pointer flow (equip uses real store handlers)",
+    "Ghost walking, corpse recovery/save reload, repeated death cycles, invisibility transitions",
+    "Physical mobile touch/device, performance, pixel-level fit of every attachment; ordinary camera makes equipment small"
+  ],
+  "visual_review": [
+    "Desktop sword/shield: no obvious large geometry break; ordinary camera too distant to certify subtle clipping.",
+    "Mobile ghost visibly pale over corpse; minimap overlaps pre-existing ghost instructions. Out of Rowan scope.",
+    "Mobile restored player visible with colored body; restoration FX temporarily obscures some equipment. Material restoration independently verified through live scene."
+  ],
+  "artifacts_sha256": {
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\scripts\\rowan-equipment-ghost-smoke.mjs": "1305ff774be2ed1970f4cfdc333d695df6066942c7c5263ce312e8a595813212",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\REPORT.json": "9a9079b60ebbf0b6caf81aa673a3cdb2850eeaccd83943fb86720eb2ec620e5d",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\public\\art\\character-reimagined\\rowan.glb": "2b5cff5a268c53c36c26351a42e5c2fce7a70fd74d7c13f7414d353fa4fb0ad4"
+  },
+  "active_profile_skill_updated": "C:/Users/futur/.hermes/profiles/telegram2/skills/emberhall-rowan-integration/SKILL.md; no other profile touched"
+}

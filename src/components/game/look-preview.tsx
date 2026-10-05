@@ -1,3 +1,4 @@
+import { RowanCharacterProvider } from "./rowan-character.tsx";
 import { AuthoredCharacterGeometry, AuthoredCharacterFace, AuthoredCharacterTunic } from "./authored-character.tsx";
 // The looking-glass preview — the vale's own chibi figure, drawn live in 3D
 // from the same proportions as people-meshes.tsx (FIGURE in look/figure.ts).
@@ -83,7 +84,7 @@ function Figure({ look, parts = [] }: { look: ResolvedLook; parts?: VoxelPartV1[
   return (
     <group ref={g}>
       <mesh position={[-FIGURE.leg.x, FIGURE.leg.y, 0]}>
-        <AuthoredCharacterGeometry part="leg" size={FIGURE.leg.size} />
+        <AuthoredCharacterGeometry part="leg" side={-1} size={FIGURE.leg.size} />
         <Mat color={LEGS} />
       </mesh>
       <mesh position={[FIGURE.leg.x, FIGURE.leg.y, 0]}>
@@ -91,7 +92,7 @@ function Figure({ look, parts = [] }: { look: ResolvedLook; parts?: VoxelPartV1[
         <Mat color={LEGS} />
       </mesh>
       <mesh position={[-FIGURE.foot.x, FIGURE.foot.y, FIGURE.foot.z]}>
-        <AuthoredCharacterGeometry part="foot" size={FIGURE.foot.size} />
+        <AuthoredCharacterGeometry part="foot" side={-1} size={FIGURE.foot.size} />
         <Mat color={FEET} />
       </mesh>
       <mesh position={[FIGURE.foot.x, FIGURE.foot.y, FIGURE.foot.z]}>
@@ -106,11 +107,11 @@ function Figure({ look, parts = [] }: { look: ResolvedLook; parts?: VoxelPartV1[
       {[-FIGURE.arm.x, FIGURE.arm.x].map((x) => (
         <group key={x} position={[x, FIGURE.arm.y, 0]} rotation={[0, 0, x < 0 ? 0.12 : -0.12]}>
           <mesh position={[0, FIGURE.armMesh.y, 0]}>
-            <AuthoredCharacterGeometry part="arm" size={FIGURE.arm.size} />
+            <AuthoredCharacterGeometry part="arm" side={x < 0 ? -1 : 1} size={FIGURE.arm.size} />
             <Mat color={look.garb} />
           </mesh>
           <mesh position={[0, FIGURE.hand.y, 0]}>
-            <AuthoredCharacterGeometry part="hand" size={FIGURE.hand.size} />
+            <AuthoredCharacterGeometry part="hand" side={x < 0 ? -1 : 1} size={FIGURE.hand.size} />
             <Mat color={look.skin} />
           </mesh>
         </group>
@@ -166,7 +167,9 @@ export function LookPreview({ look, parts = [] }: { look: ResolvedLook; parts?: 
     <Canvas camera={{ position: [1.5, 1.1, -2.7], fov: 38 }} onCreated={({ camera }) => camera.lookAt(0, FIGURE.torso.y, 0)}>
       <hemisphereLight args={["#efe3c4", "#3a342e", 1.25]} />
       <directionalLight position={[3, 5, -4]} intensity={1.1} color="#f2e4c8" />
-      <Figure look={look} parts={parts} />
+      <RowanCharacterProvider skin={look.skin} hair={look.hairColor}>
+        <Figure look={look} parts={parts} />
+      </RowanCharacterProvider>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.005, 0]}>
         <circleGeometry args={[0.85, 24]} />
         <meshStandardMaterial color="#2a2620" roughness={0.9} />

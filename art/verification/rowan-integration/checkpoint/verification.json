@@ -1,0 +1,62 @@
+{
+  "purpose": "Local Rowan integration checkpoint, not production-ready or deployed",
+  "source_unchanged_since_review_handoff": true,
+  "handoff_files_matched": 38,
+  "fresh_checks": {
+    "targeted_character_tests": {
+      "passed": 12,
+      "failed": 0
+    },
+    "scoped_eslint_exit": 0,
+    "typecheck_exit": 0,
+    "art_audit_exit": 0,
+    "full_repo_lint_exit": 1,
+    "full_repo_lint_errors": 7951,
+    "full_repo_lint_warnings": 145,
+    "Rowan_paths_in_full_lint_output": []
+  },
+  "historical_browser_evidence": {
+    "candidate-v1": {
+      "passed": true,
+      "checks": 16,
+      "failed": 0,
+      "errors": []
+    },
+    "failure-v1": {
+      "passed": true,
+      "checks": 13,
+      "failed": 0,
+      "errors": []
+    },
+    "built-v1": {
+      "passed": true,
+      "checks": 5,
+      "failed": 0,
+      "errors": []
+    },
+    "continuation-v3": {
+      "passed": true,
+      "checks": 16,
+      "failed": 0,
+      "errors": []
+    }
+  },
+  "new_browser_run": false,
+  "push": false,
+  "deploy": false,
+  "source_hashes": {
+    "art/asset-ledger.json": "1e18b09e543e08c6a68e0a981c72f2bf441fb256010a3506c737f2565a457f4e",
+    "art/ROWAN-INTEGRATION.md": "30f88b45932902e23be96ec327753b22454ae4d08d21a5148b456b04bdc3e8f2",
+    "src/components/game/authored-character.test.ts": "3cdd36ba1cf3eeb270da99f9abdba2aaca71863e0c5a6b03d89c25117e6178ed",
+    "src/components/game/authored-character.tsx": "ba6e7cc059933ef0052b6f4f6863577076c9163722f251a065bb7d916cd70462",
+    "src/components/game/look-preview.tsx": "cc0205194155cb3cfea55fb261c2c56a573f077e35031a6d79821d2fae1c8b7e",
+    "src/components/game/people-meshes.tsx": "22b4c8f031a682274b14cb3c5cf4a2088fa6252bac41d5ac37cc32852e26ff2b",
+    "src/components/game/rowan-character-data.ts": "0df9be381e5d18166798412ea63fa0c8a93672542c8e71ad7ccc61ff78167934",
+    "src/components/game/rowan-character-context.ts": "198ee9673f7c6e24998c36018e5392287494e2f8df989037eb743e1852ebced0",
+    "src/components/game/rowan-character.tsx": "83ace50b70cf70f5ead27fa4e87703a855532aa3500ba910bcd67d0067567a57",
+    "scripts/rowan-character-smoke.mjs": "b543c165bfed8565978b3602536fb3b55339ab3fe1cf97ebdfcfbd275fece8e5",
+    "scripts/rowan-built-smoke.mjs": "54c5e79068996864630558aca331b3e90c862bc124fb766b4928492d918abb94",
+    "scripts/rowan-equipment-ghost-smoke.mjs": "1305ff774be2ed1970f4cfdc333d695df6066942c7c5263ce312e8a595813212"
+  },
+  "approved_model_sha256": "2b5cff5a268c53c36c26351a42e5c2fce7a70fd74d7c13f7414d353fa4fb0ad4"
+}

@@ -1,10 +1,22 @@
 import { Color } from "three";
+import { useRowan } from "./rowan-character-context.ts";
 import { useCharacterGeometry, type CharacterPart } from "./authored-character-data.ts";
 
-export function AuthoredCharacterGeometry({ part, size, authored = true }: {
-  part: CharacterPart; size: readonly [number, number, number]; authored?: boolean;
+export function AuthoredCharacterGeometry({ part, size, authored = true, side = 1 }: {
+  part: CharacterPart; size: readonly [number, number, number]; authored?: boolean; side?: number;
 }) {
   const geometry = useCharacterGeometry(authored)?.[part];
+  const rowan = useRowan();
+  const attachment = authored ? rowan.geometry?.[["arm", "hand", "leg", "foot"].includes(part) ? `${part}:${side}` : part] : null;
+  if (attachment) return <>
+    <primitive object={attachment.geometry} attach="geometry" dispose={null} />
+    {!rowan.ghost && attachment.details.map((detail, index) => (
+      <mesh key={index} name={`rowan-detail:${part}`} geometry={detail.geometry} dispose={null} raycast={noPick}>
+        <meshStandardMaterial color={detail.tint === "hair" ? rowan.hair : detail.tint === "skin" ? new Color(rowan.skin).multiplyScalar(0.65) : detail.color} roughness={0.82} />
+      </mesh>
+    ))}
+  </>;
+
   return geometry
     ? <primitive object={geometry} attach="geometry" dispose={null} />
     : <boxGeometry args={[...size]} />;
@@ -16,7 +28,8 @@ export function AuthoredCharacterFace({ skin, authored = true, ghost = false }: 
   skin: string; authored?: boolean; ghost?: boolean;
 }) {
   const geometry = useCharacterGeometry(authored);
-  if (!geometry?.head || ghost) return null;
+  const rowan = useRowan();
+  if (!geometry?.head || ghost || (authored && rowan.geometry)) return null;
   return (
     <group>
       {[-0.1, 0.1].map(x => (
@@ -44,7 +57,8 @@ export function AuthoredCharacterTunic({ color, authored = true, ghost = false }
   color: string; authored?: boolean; ghost?: boolean;
 }) {
   const geometry = useCharacterGeometry(authored);
-  if (!geometry?.torso || ghost) return null;
+  const rowan = useRowan();
+  if (!geometry?.torso || ghost || (authored && rowan.geometry)) return null;
   const seam = new Color(color).multiplyScalar(0.67);
   return (
     <group>

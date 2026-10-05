@@ -1,0 +1,18 @@
+{
+  "url": "http://127.0.0.1:8197",
+  "label": "continuation-v1",
+  "scope": "Fresh disposable save, seeded inventory and poison condition; native equip handlers, normal poison/death tick and real healer UI. Not natural combat acquisition or all equipment combinations.",
+  "checks": [],
+  "snapshots": {},
+  "screenshots": [],
+  "errors": [],
+  "consoleErrors": [],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:8197/art/character-reimagined/rowan.glb",
+      "status": 200
+    }
+  ],
+  "passed": false,
+  "failure": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'count')\n    at eval (eval at evaluate (:311:30), <anonymous>:8:126)\n    at Mesh.traverse (http://127.0.0.1:8197/node_modules/.vite/deps/three.module-CgLp5Cif.js?v=b14cf161:9839:3)\n    at Group.traverse (http://127.0.0.1:8197/node_modules/.vite/deps/three.module-CgLp5Cif.js?v=b14cf161:9841:64)\n    at eval (eval at evaluate (:311:30), <anonymous>:4:10)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at inspect (C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\scripts\\rowan-equipment-ghost-smoke.mjs:46:30)\n    at snapshot (C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\scripts\\rowan-equipment-ghost-smoke.mjs:59:55)\n    at C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\scripts\\rowan-equipment-ghost-smoke.mjs:61:22"
+}

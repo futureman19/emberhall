@@ -6,7 +6,41 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { CHARACTER_PARTS, extractCharacterGeometry } from "./authored-character-data.ts";
 import { FIGURE, HAIR } from "../../game/look/figure.ts";
 
+import { extractRowanGeometry } from "./rowan-character-data.ts";
+
 const root = new URL("../../../", import.meta.url);
+test("Rowan real GLB adapts into both existing shoulders with independent recolorable body geometry", async () => {
+  const bytes = readFileSync(new URL("public/art/character-reimagined/rowan.glb", root));
+  const { scene } = await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), "");
+  const original = scene.getObjectByName("rowan_palm_-1") as Mesh;
+  const before = Array.from(original.geometry.attributes.position.array);
+  const parts = extractRowanGeometry(scene);
+  assert.deepEqual(Array.from(original.geometry.attributes.position.array), before);
+  for (const side of [-1, 1]) {
+    const hand = parts[`hand:${side}`].geometry;
+    hand.computeBoundingBox();
+    const center = hand.boundingBox!.getCenter(new Vector3());
+    assert.ok(center.length() < 0.05, `hand remains at grip: ${center.toArray()}`);
+    const arm = parts[`arm:${side}`].geometry;
+    arm.computeBoundingBox();
+    assert.ok(arm.boundingBox!.max.y > 0.17, "sleeve covers original shoulder");
+    const foot = parts[`foot:${side}`].geometry;
+    foot.computeBoundingBox();
+    assert.ok(Math.abs(foot.boundingBox!.min.y + FIGURE.foot.y) < 0.001, "grounded soles");
+  }
+  for (const part of Object.values(parts)) {
+    for (const geometry of [part.geometry, ...part.details.map(d => d.geometry)]) {
+      for (const value of geometry.attributes.position?.array ?? []) assert.ok(Number.isFinite(value));
+    }
+  }
+  assert.ok(parts.head.details.some(d => d.tint === "hair"), "brows follow hair selection");
+  assert.ok(parts.head.details.some(d => d.tint === "skin"), "ear/lip detail follows skin selection");
+  assert.throws(() => extractRowanGeometry(new Group()), /Missing Rowan/);
+});
+test("Rowan is explicitly player-only and shared with the mirror, not a root replacement", () => {
+  assert.match(source("src/components/game/people-meshes.tsx"), /<RowanCharacterProvider enabled=\{p.isPlayer && authored\}/);
+  assert.match(source("src/components/game/look-preview.tsx"), /<RowanCharacterProvider/);
+});
 const source = (path: string) => readFileSync(new URL(path, root), "utf8");
 test("extraction bakes ancestor transforms into independent geometry", () => {
   const scene = new Group();

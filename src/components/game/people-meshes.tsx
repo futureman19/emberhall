@@ -1,3 +1,4 @@
+import { RowanCharacterProvider } from "./rowan-character.tsx";
 import { equipmentMaterial, type EquipmentSurface } from "./equipment-material.ts";
 import { AuthoredCharacterGeometry, AuthoredCharacterFace, AuthoredCharacterTunic } from "./authored-character.tsx";
 import { Html } from "@react-three/drei";
@@ -1118,6 +1119,7 @@ function Figure({
   const hover = ghost ? 0.32 : 0;
 
   return (
+    <RowanCharacterProvider enabled={p.isPlayer && authored} skin={look.skin} hair={look.hairColor} ghost={ghost}>
     <group name={p.isPlayer ? "emberhall-player-figure" : "emberhall-npc-figure"} ref={root} position={[p.x, groundAt(p.x, p.z, p.story) + (p.isPlayer ? keepPlayerOffset(p.x, p.z) : 0) + hover, p.z]} rotation={[0, civicVisualYaw(p.facing, authored), 0]}>
       {cloak && (
         <mesh position={[0, FIGURE.cloak.y + bob, FIGURE.cloak.z]} castShadow={!ghost}>
@@ -1126,7 +1128,7 @@ function Figure({
         </mesh>
       )}
       <mesh position={[-FIGURE.leg.x, FIGURE.leg.y + bob, 0]} castShadow={!ghost}>
-        <AuthoredCharacterGeometry part="leg" size={FIGURE.leg.size} authored={authored} />
+        <AuthoredCharacterGeometry part="leg" side={-1} size={FIGURE.leg.size} authored={authored} />
         <Mat color={legs} ghost={ghost} />
       </mesh>
       <mesh position={[FIGURE.leg.x, FIGURE.leg.y + bob, 0]} castShadow={!ghost}>
@@ -1134,7 +1136,7 @@ function Figure({
         <Mat color={legs} ghost={ghost} />
       </mesh>
       <mesh position={[-FIGURE.foot.x, FIGURE.foot.y + bob, FIGURE.foot.z]} castShadow={!ghost}>
-        <AuthoredCharacterGeometry part="foot" size={FIGURE.foot.size} authored={authored} />
+        <AuthoredCharacterGeometry part="foot" side={-1} size={FIGURE.foot.size} authored={authored} />
         <Mat color={feet} ghost={ghost} />
       </mesh>
       <mesh position={[FIGURE.foot.x, FIGURE.foot.y + bob, FIGURE.foot.z]} castShadow={!ghost}>
@@ -1148,11 +1150,11 @@ function Figure({
       </mesh>
       <group ref={left} position={[-FIGURE.arm.x, FIGURE.arm.y + bob, 0]} rotation={[walkSwing, 0, 0.12]}>
         <mesh position={[0, FIGURE.armMesh.y, 0]} castShadow={!ghost}>
-          <AuthoredCharacterGeometry part="arm" size={FIGURE.arm.size} authored={authored} />
+          <AuthoredCharacterGeometry part="arm" side={-1} size={FIGURE.arm.size} authored={authored} />
           <Mat color={chest} ghost={ghost} />
         </mesh>
         <mesh position={[0, FIGURE.hand.y, 0]} castShadow={!ghost}>
-          <AuthoredCharacterGeometry part="hand" size={FIGURE.hand.size} authored={authored} />
+          <AuthoredCharacterGeometry part="hand" side={-1} size={FIGURE.hand.size} authored={authored} />
           <Mat color={hands} ghost={ghost} />
         </mesh>
         {p.isPlayer && !ghost && <PalmFlame />}
@@ -1235,6 +1237,7 @@ function Figure({
         </mesh>
       )}
     </group>
+    </RowanCharacterProvider>
   );
 }
 
