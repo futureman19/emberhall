@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { buildResourceCatalog, RESOURCE_CATALOG, RESOURCE_IDS } from "./catalog.ts";
 import { CANONICAL_STAT_IDS, MAX_LOCAL_FORTUNE, TRAIT_REGISTRY } from "./traits.ts";
+import { FAUNA_META } from "../catalog.ts";
 import {
   defineResourceNodeIdentity,
   type GemResourceId,
@@ -22,16 +23,31 @@ const EXPECTED_IDS = [
   "redwood",
   "yew",
   "ghostwood",
+  "ironwood",
+  "copper_ore",
+  "tin_ore",
+  "bronze",
   "iron_ore",
   "highland_ore",
+  "emberite",
+  "moon_silver",
   "common_cloth",
   "fine_linen",
+  "hide",
+  "wolf_fang",
+  "stag_antler",
+  "drake_scale",
+  "boar_tusk",
+  "aurochs_horn",
   "ruby",
   "sapphire",
+  "emerald",
+  "diamond",
+  "amethyst",
 ] as const satisfies readonly ResourceId[];
 
-const GEM_IDS = ["ruby", "sapphire"] as const satisfies readonly GemResourceId[];
-const TRAIT_IDS = ["accuracy", "damage", "handling", "power", "fortune"] as const satisfies readonly MaterialTraitId[];
+const GEM_IDS = ["ruby", "sapphire", "emerald", "diamond", "amethyst"] as const satisfies readonly GemResourceId[];
+const TRAIT_IDS = ["accuracy", "damage", "handling", "keen", "sturdy", "supple", "ember", "moon", "hunters", "ferocity", "power", "fortune", "precision", "protection", "mastery"] as const satisfies readonly MaterialTraitId[];
 
 type DeepMutable<T> = T extends readonly (infer Item)[]
   ? DeepMutable<Item>[]
@@ -192,7 +208,7 @@ test("catalog builder rejects illegal forms and malformed processing routes", ()
   assert.throws(() => buildUnsafe(formNotDeclared), /saw_oak output form board is not declared by oak/);
 
   const invalidAmount = mutableDefinitions();
-  definition(invalidAmount, "oak").processing[0].input.quantity = 0;
+  definition(invalidAmount, "oak").processing[0].inputs[0].quantity = 0;
   assert.throws(() => buildUnsafe(invalidAmount), /saw_oak input quantity must be a positive integer/);
 
   const fractionalAmount = mutableDefinitions();
@@ -218,13 +234,13 @@ test("catalog builder clones and deeply freezes all nested data", () => {
   sourceOak.label = "Changed";
   sourceOak.forms[0] = "board";
   sourceOak.spawn!.regions.vale = 99;
-  sourceOak.processing[0].input.quantity = 99;
+  sourceOak.processing[0].inputs[0].quantity = 99;
   sourceOak.visual.primary = "#000000";
 
   assert.equal(built.oak.label, "Oak");
   assert.deepEqual(built.oak.forms, ["log", "board"]);
   assert.equal(built.oak.spawn?.regions.vale, 1);
-  assert.equal(built.oak.processing[0].input.quantity, 1);
+  assert.equal(built.oak.processing[0].inputs[0].quantity, 1);
   assert.equal(built.oak.visual.primary, "#756044");
   assert.throws(() => {
     (built.oak.visual as { primary: string }).primary = "#ffffff";
@@ -256,28 +272,58 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       redwood: ["accuracy"],
       yew: ["accuracy"],
       ghostwood: [],
-      iron_ore: [],
+      ironwood: ["damage"],
+      copper_ore: ["handling"],
+      tin_ore: [],
+      bronze: ["keen"],
+      iron_ore: ["sturdy"],
       highland_ore: ["damage"],
+      emberite: ["ember"],
+      moon_silver: ["moon"],
       common_cloth: [],
       fine_linen: ["handling"],
+      hide: ["supple"],
+      wolf_fang: ["keen", "ferocity"],
+      stag_antler: ["accuracy", "hunters"],
+      drake_scale: ["sturdy"],
+      boar_tusk: ["keen"],
+      aurochs_horn: ["damage"],
       ruby: ["power"],
       sapphire: ["fortune"],
+      emerald: ["precision"],
+      diamond: ["protection"],
+      amethyst: ["mastery"],
     },
   );
   assert.deepEqual(TRAIT_REGISTRY.accuracy.values, { rough: 0.5, sound: 1, choice: 2, pristine: 3 });
   assert.deepEqual(TRAIT_REGISTRY.damage.values, { rough: 0.5, sound: 1, choice: 1.5, pristine: 2 });
   assert.deepEqual(TRAIT_REGISTRY.handling.values, { rough: 0.25, sound: 0.5, choice: 0.75, pristine: 1 });
+  assert.deepEqual(TRAIT_REGISTRY.supple.values, { rough: 0.5, sound: 1, choice: 1.5, pristine: 2 });
+  assert.deepEqual(TRAIT_REGISTRY.ember.values, { rough: 1, sound: 2, choice: 3, pristine: 4 });
+  assert.deepEqual(TRAIT_REGISTRY.moon.values, { rough: 1.05, sound: 1.1, choice: 1.2, pristine: 1.3 });
+  assert.deepEqual(
+    TRAIT_REGISTRY.moon.fauna,
+    Object.entries(FAUNA_META).filter(([, meta]) => meta.hasCorpse === false).map(([kind]) => kind),
+    "moon silver bites exactly the fleshless kinds",
+  );
+  assert.deepEqual(TRAIT_REGISTRY.hunters.values, { rough: 1, sound: 2, choice: 3, pristine: 4 });
+  assert.equal(TRAIT_REGISTRY.hunters.skill, "tracking");
+  assert.deepEqual(TRAIT_REGISTRY.ferocity.values, { rough: 1, sound: 2, choice: 3, pristine: 4 });
+  assert.equal(TRAIT_REGISTRY.ferocity.skill, "swords");
   assert.deepEqual(TRAIT_REGISTRY.power.values, { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 });
   assert.deepEqual(TRAIT_REGISTRY.fortune.values, { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 });
+  assert.deepEqual(TRAIT_REGISTRY.precision.values, { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 });
 
   const routeIds = new Set<string>();
-  const familyByForm: Record<ResourceForm, "timber" | "ore" | "fiber" | "gem"> = {
+  const familyByForm: Record<ResourceForm, "timber" | "ore" | "fiber" | "gem" | "hide" | "bone"> = {
     log: "timber",
     board: "timber",
     ore: "ore",
     ingot: "ore",
     cloth: "fiber",
     gem: "gem",
+    hide: "hide",
+    bone: "bone",
   };
   for (const resource of Object.values(RESOURCE_CATALOG)) {
     assert.equal(resource.qualityType, resource.kind === "gem" ? "clarity" : "grade", resource.id);
@@ -287,10 +333,12 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
     }
     for (const route of resource.processing) {
       routeIds.add(route.id);
-      assert.equal(familyByForm[route.input.form], familyByForm[route.output.form]);
+      for (const input of route.inputs) {
+        assert.equal(familyByForm[input.form], familyByForm[route.output.form], `${route.id} input ${input.resourceId}`);
+      }
     }
   }
-  assert.deepEqual([...routeIds], ["saw_oak", "saw_pine", "saw_willow", "saw_birch", "saw_ash", "saw_redwood", "saw_yew", "saw_ghostwood", "smelt_iron_ore", "smelt_highland_ore"]);
+  assert.deepEqual([...routeIds], ["saw_oak", "saw_pine", "saw_willow", "saw_birch", "saw_ash", "saw_redwood", "saw_yew", "saw_ghostwood", "saw_ironwood", "smelt_copper_ore", "smelt_tin_ore", "smelt_bronze", "smelt_iron_ore", "smelt_highland_ore", "smelt_emberite", "smelt_moon_silver"]);
   assert.deepEqual(
     Object.fromEntries(Object.values(RESOURCE_CATALOG).map(({ id, forms }) => [id, forms])),
     {
@@ -302,12 +350,27 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
       redwood: ["log", "board"],
       yew: ["log", "board"],
       ghostwood: ["log", "board"],
+      ironwood: ["log", "board"],
+      copper_ore: ["ore", "ingot"],
+      tin_ore: ["ore", "ingot"],
+      bronze: ["ingot"],
       iron_ore: ["ore", "ingot"],
       highland_ore: ["ore", "ingot"],
+      emberite: ["ore", "ingot"],
+      moon_silver: ["ore", "ingot"],
       common_cloth: ["cloth"],
       fine_linen: ["cloth"],
+      hide: ["hide"],
+      wolf_fang: ["bone"],
+      stag_antler: ["bone"],
+      drake_scale: ["bone"],
+      boar_tusk: ["bone"],
+      aurochs_horn: ["bone"],
       ruby: ["gem"],
       sapphire: ["gem"],
+      emerald: ["gem"],
+      diamond: ["gem"],
+      amethyst: ["gem"],
     },
   );
   assert.deepEqual(

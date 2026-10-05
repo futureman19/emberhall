@@ -1,0 +1,12 @@
+✔ construction reserves bridge deck, approaches and generated farm beds atomically (3147.2622ms)
+✔ chart-scale non-marker destination and return route use legal road connectors (3616.9885ms)
+✔ blocked nearest connector uses another reachable connector; sealed destinations stay closed (3490.0831ms)
+✔ saved legacy regrowth on a stamped road gets a bounded legal local detour (4881.9434ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 15599.0353

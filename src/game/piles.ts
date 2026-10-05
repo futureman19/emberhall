@@ -18,13 +18,18 @@ export function addToPile(
   if (!world.piles) world.piles = [];
   const exist = world.piles.find((p) => p.tx === tx && p.ty === ty && world.hour < p.until);
   if (exist) {
-    for (const [k, v] of Object.entries(items)) {
-      const id = k as ItemId;
-      exist.items[id] = (exist.items[id] ?? 0) + (v ?? 0);
+    for (const [k, n] of Object.entries(items)) {
+      if (!n) continue;
+      exist.items[k as ItemId] = (exist.items[k as ItemId] ?? 0) + n;
     }
     exist.gold += gold;
     exist.until = Math.max(exist.until, until);
     exist.label = label;
+    // A death claims the tile's pile: whatever lay here first (an ordinary
+    // sack, a creature's corpse) is now part of your corpse, and the pile
+    // keeps the death identity — the ghost marker and the recovery errand
+    // survive the merge.
+    if (source === "death") exist.source = "death";
     return exist;
   }
   const pile: GroundPile = {

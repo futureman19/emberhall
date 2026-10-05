@@ -1,0 +1,795 @@
+{
+  "url": "http://127.0.0.1:8080",
+  "checks": [
+    {
+      "name": "clean-canonical-hydration",
+      "ok": true,
+      "tile": {
+        "h": 6,
+        "kind": "dirt"
+      },
+      "map": 1145
+    },
+    {
+      "name": "clean-native-chart-midpoint",
+      "ok": true,
+      "route": [
+        {
+          "tx": 263,
+          "ty": 297
+        },
+        {
+          "tx": 264,
+          "ty": 296
+        },
+        {
+          "tx": 269,
+          "ty": 297
+        },
+        {
+          "tx": 271,
+          "ty": 298
+        },
+        {
+          "tx": 276,
+          "ty": 297
+        },
+        {
+          "tx": 277,
+          "ty": 298
+        },
+        {
+          "tx": 283,
+          "ty": 298
+        },
+        {
+          "tx": 284,
+          "ty": 299
+        },
+        {
+          "tx": 287,
+          "ty": 298
+        },
+        {
+          "tx": 292,
+          "ty": 299
+        },
+        {
+          "tx": 298,
+          "ty": 297
+        },
+        {
+          "tx": 312,
+          "ty": 299
+        },
+        {
+          "tx": 317,
+          "ty": 300
+        },
+        {
+          "tx": 318,
+          "ty": 301
+        },
+        {
+          "tx": 325,
+          "ty": 300
+        },
+        {
+          "tx": 327,
+          "ty": 298
+        },
+        {
+          "tx": 335,
+          "ty": 295
+        },
+        {
+          "tx": 339,
+          "ty": 295
+        },
+        {
+          "tx": 341,
+          "ty": 293
+        },
+        {
+          "tx": 348,
+          "ty": 292
+        },
+        {
+          "tx": 352,
+          "ty": 294
+        },
+        {
+          "tx": 355,
+          "ty": 293
+        },
+        {
+          "tx": 356,
+          "ty": 294
+        },
+        {
+          "tx": 361,
+          "ty": 294
+        },
+        {
+          "tx": 362,
+          "ty": 293
+        },
+        {
+          "tx": 371,
+          "ty": 292
+        },
+        {
+          "tx": 381,
+          "ty": 294
+        },
+        {
+          "tx": 384,
+          "ty": 295
+        },
+        {
+          "tx": 385,
+          "ty": 296
+        },
+        {
+          "tx": 391,
+          "ty": 296
+        },
+        {
+          "tx": 393,
+          "ty": 294
+        },
+        {
+          "tx": 396,
+          "ty": 293
+        },
+        {
+          "tx": 397,
+          "ty": 293
+        },
+        {
+          "tx": 398,
+          "ty": 292
+        },
+        {
+          "tx": 400,
+          "ty": 294
+        },
+        {
+          "tx": 403,
+          "ty": 293
+        },
+        {
+          "tx": 409,
+          "ty": 293
+        },
+        {
+          "tx": 410,
+          "ty": 294
+        },
+        {
+          "tx": 415,
+          "ty": 294
+        },
+        {
+          "tx": 416,
+          "ty": 293
+        },
+        {
+          "tx": 418,
+          "ty": 293
+        },
+        {
+          "tx": 419,
+          "ty": 292
+        },
+        {
+          "tx": 423,
+          "ty": 291
+        },
+        {
+          "tx": 427,
+          "ty": 289
+        },
+        {
+          "tx": 428,
+          "ty": 288
+        },
+        {
+          "tx": 429,
+          "ty": 285
+        },
+        {
+          "tx": 431,
+          "ty": 283
+        },
+        {
+          "tx": 434,
+          "ty": 282
+        },
+        {
+          "tx": 436,
+          "ty": 280
+        },
+        {
+          "tx": 436,
+          "ty": 278
+        },
+        {
+          "tx": 439,
+          "ty": 275
+        },
+        {
+          "tx": 438,
+          "ty": 273
+        },
+        {
+          "tx": 441,
+          "ty": 270
+        },
+        {
+          "tx": 448,
+          "ty": 268
+        },
+        {
+          "tx": 504,
+          "ty": 268
+        },
+        {
+          "tx": 560,
+          "ty": 268
+        },
+        {
+          "tx": 562,
+          "ty": 273
+        },
+        {
+          "tx": 564,
+          "ty": 275
+        },
+        {
+          "tx": 564,
+          "ty": 276
+        },
+        {
+          "tx": 568,
+          "ty": 280
+        },
+        {
+          "tx": 574,
+          "ty": 281
+        },
+        {
+          "tx": 575,
+          "ty": 283
+        },
+        {
+          "tx": 581,
+          "ty": 289
+        },
+        {
+          "tx": 584,
+          "ty": 297
+        },
+        {
+          "tx": 584,
+          "ty": 356
+        },
+        {
+          "tx": 584,
+          "ty": 414
+        },
+        {
+          "tx": 584,
+          "ty": 472
+        },
+        {
+          "tx": 584,
+          "ty": 531
+        },
+        {
+          "tx": 582,
+          "ty": 543
+        },
+        {
+          "tx": 579,
+          "ty": 546
+        },
+        {
+          "tx": 574,
+          "ty": 547
+        },
+        {
+          "tx": 573,
+          "ty": 553
+        },
+        {
+          "tx": 571,
+          "ty": 555
+        },
+        {
+          "tx": 571,
+          "ty": 556
+        },
+        {
+          "tx": 568,
+          "ty": 559
+        },
+        {
+          "tx": 560,
+          "ty": 560
+        },
+        {
+          "tx": 589,
+          "ty": 560
+        },
+        {
+          "tx": 646,
+          "ty": 560
+        },
+        {
+          "tx": 650,
+          "ty": 557
+        }
+      ],
+      "before": {
+        "x": 256,
+        "z": 293
+      },
+      "after": {
+        "x": 259.3861482542854,
+        "z": 294.93494185959196
+      },
+      "toast": null
+    },
+    {
+      "name": "clean-ordinary-construction-api",
+      "ok": true,
+      "gold": 80,
+      "n": 50,
+      "refused": {
+        "toast": "A landmark stands here.",
+        "gold": 80,
+        "n": 50,
+        "kind": "step"
+      },
+      "after": 51,
+      "farm": {
+        "id": "b-59",
+        "kind": "farm",
+        "tx": 940,
+        "ty": 555,
+        "beds": []
+      }
+    },
+    {
+      "name": "clean-mobile-no-horizontal-overflow",
+      "ok": true,
+      "width": 390,
+      "scroll": 390,
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844,
+        "top": 0,
+        "right": 390,
+        "bottom": 844,
+        "left": 0
+      }
+    },
+    {
+      "name": "regrowth-canonical-hydration",
+      "ok": true,
+      "tile": {
+        "h": 6,
+        "kind": "rock"
+      },
+      "map": 1145
+    },
+    {
+      "name": "regrowth-native-chart-midpoint",
+      "ok": true,
+      "route": [
+        {
+          "tx": 263,
+          "ty": 297
+        },
+        {
+          "tx": 264,
+          "ty": 296
+        },
+        {
+          "tx": 269,
+          "ty": 297
+        },
+        {
+          "tx": 271,
+          "ty": 298
+        },
+        {
+          "tx": 276,
+          "ty": 297
+        },
+        {
+          "tx": 277,
+          "ty": 298
+        },
+        {
+          "tx": 283,
+          "ty": 298
+        },
+        {
+          "tx": 284,
+          "ty": 299
+        },
+        {
+          "tx": 287,
+          "ty": 298
+        },
+        {
+          "tx": 292,
+          "ty": 299
+        },
+        {
+          "tx": 298,
+          "ty": 297
+        },
+        {
+          "tx": 312,
+          "ty": 299
+        },
+        {
+          "tx": 317,
+          "ty": 300
+        },
+        {
+          "tx": 318,
+          "ty": 301
+        },
+        {
+          "tx": 325,
+          "ty": 300
+        },
+        {
+          "tx": 327,
+          "ty": 298
+        },
+        {
+          "tx": 335,
+          "ty": 295
+        },
+        {
+          "tx": 339,
+          "ty": 295
+        },
+        {
+          "tx": 341,
+          "ty": 293
+        },
+        {
+          "tx": 348,
+          "ty": 292
+        },
+        {
+          "tx": 352,
+          "ty": 294
+        },
+        {
+          "tx": 355,
+          "ty": 293
+        },
+        {
+          "tx": 356,
+          "ty": 294
+        },
+        {
+          "tx": 361,
+          "ty": 294
+        },
+        {
+          "tx": 362,
+          "ty": 293
+        },
+        {
+          "tx": 371,
+          "ty": 292
+        },
+        {
+          "tx": 381,
+          "ty": 294
+        },
+        {
+          "tx": 384,
+          "ty": 295
+        },
+        {
+          "tx": 385,
+          "ty": 296
+        },
+        {
+          "tx": 391,
+          "ty": 296
+        },
+        {
+          "tx": 393,
+          "ty": 294
+        },
+        {
+          "tx": 396,
+          "ty": 293
+        },
+        {
+          "tx": 397,
+          "ty": 293
+        },
+        {
+          "tx": 398,
+          "ty": 292
+        },
+        {
+          "tx": 400,
+          "ty": 294
+        },
+        {
+          "tx": 403,
+          "ty": 293
+        },
+        {
+          "tx": 409,
+          "ty": 293
+        },
+        {
+          "tx": 410,
+          "ty": 294
+        },
+        {
+          "tx": 415,
+          "ty": 294
+        },
+        {
+          "tx": 416,
+          "ty": 293
+        },
+        {
+          "tx": 418,
+          "ty": 293
+        },
+        {
+          "tx": 419,
+          "ty": 292
+        },
+        {
+          "tx": 423,
+          "ty": 291
+        },
+        {
+          "tx": 427,
+          "ty": 289
+        },
+        {
+          "tx": 428,
+          "ty": 288
+        },
+        {
+          "tx": 429,
+          "ty": 285
+        },
+        {
+          "tx": 431,
+          "ty": 283
+        },
+        {
+          "tx": 434,
+          "ty": 282
+        },
+        {
+          "tx": 436,
+          "ty": 280
+        },
+        {
+          "tx": 436,
+          "ty": 278
+        },
+        {
+          "tx": 439,
+          "ty": 275
+        },
+        {
+          "tx": 438,
+          "ty": 273
+        },
+        {
+          "tx": 441,
+          "ty": 270
+        },
+        {
+          "tx": 448,
+          "ty": 268
+        },
+        {
+          "tx": 504,
+          "ty": 268
+        },
+        {
+          "tx": 560,
+          "ty": 268
+        },
+        {
+          "tx": 562,
+          "ty": 273
+        },
+        {
+          "tx": 564,
+          "ty": 275
+        },
+        {
+          "tx": 564,
+          "ty": 276
+        },
+        {
+          "tx": 568,
+          "ty": 280
+        },
+        {
+          "tx": 574,
+          "ty": 281
+        },
+        {
+          "tx": 575,
+          "ty": 283
+        },
+        {
+          "tx": 581,
+          "ty": 289
+        },
+        {
+          "tx": 584,
+          "ty": 297
+        },
+        {
+          "tx": 584,
+          "ty": 356
+        },
+        {
+          "tx": 584,
+          "ty": 414
+        },
+        {
+          "tx": 584,
+          "ty": 472
+        },
+        {
+          "tx": 584,
+          "ty": 531
+        },
+        {
+          "tx": 582,
+          "ty": 543
+        },
+        {
+          "tx": 579,
+          "ty": 546
+        },
+        {
+          "tx": 574,
+          "ty": 547
+        },
+        {
+          "tx": 573,
+          "ty": 553
+        },
+        {
+          "tx": 571,
+          "ty": 555
+        },
+        {
+          "tx": 571,
+          "ty": 556
+        },
+        {
+          "tx": 568,
+          "ty": 559
+        },
+        {
+          "tx": 560,
+          "ty": 560
+        },
+        {
+          "tx": 589,
+          "ty": 560
+        },
+        {
+          "tx": 646,
+          "ty": 560
+        },
+        {
+          "tx": 650,
+          "ty": 557
+        }
+      ],
+      "before": {
+        "x": 256,
+        "z": 293
+      },
+      "after": {
+        "x": 259.3861482542854,
+        "z": 294.93494185959196
+      },
+      "toast": "Small clouds drift the blue."
+    },
+    {
+      "name": "hydrated-rock-detour-arrival",
+      "ok": true,
+      "route": [
+        {
+          "tx": 422,
+          "ty": 269
+        },
+        {
+          "tx": 424,
+          "ty": 269
+        },
+        {
+          "tx": 424,
+          "ty": 268
+        }
+      ],
+      "x": 424,
+      "z": 268,
+      "tile": {
+        "h": 6,
+        "kind": "rock"
+      }
+    },
+    {
+      "name": "regrowth-ordinary-construction-api",
+      "ok": true,
+      "gold": 80,
+      "n": 50,
+      "refused": {
+        "toast": "A landmark stands here.",
+        "gold": 80,
+        "n": 50,
+        "kind": "step"
+      },
+      "after": 51,
+      "farm": {
+        "id": "b-155",
+        "kind": "farm",
+        "tx": 940,
+        "ty": 555,
+        "beds": []
+      }
+    },
+    {
+      "name": "regrowth-mobile-no-horizontal-overflow",
+      "ok": true,
+      "width": 390,
+      "scroll": 390,
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844,
+        "top": 0,
+        "right": 390,
+        "bottom": 844,
+        "left": 0
+      }
+    },
+    {
+      "name": "no-page-or-console-errors",
+      "ok": true,
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\dev-final\\clean-desktop-walk.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\dev-final\\clean-desktop-bridge.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\dev-final\\clean-mobile-bridge.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\dev-final\\regrowth-desktop-walk.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\dev-final\\regrowth-desktop-bridge.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\dev-final\\regrowth-mobile-bridge.png"
+  ]
+}

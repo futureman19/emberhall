@@ -147,7 +147,7 @@ export function sceneryBlocked(x: number, z: number) {
   return bridgeRailBlocked(x, z) || blocked.has(`${x},${z}`);
 }
 export function sceneryReserved(x: number, z: number) {
-  return reserved.has(`${x},${z}`);
+  return (x >= 945 && x <= 959 && z >= 558 && z <= 562) || reserved.has(`${x},${z}`);
 }
 
 /** At most 25 bucket lookups, once per 32-tile streaming change, never a terrain scan. */
@@ -201,6 +201,8 @@ export function stampFrontier(tiles: Tile[][], places: Place[]) {
       }
     }
   }
-  stampFrontierRiver(tiles, sceneryReserved);
+  // Construction also reserves the bridge; valley stamping still protects only
+  // the original authored pads so reserving a crossing cannot change its banks.
+  stampFrontierRiver(tiles, (x, z) => reserved.has(`${x},${z}`));
   stampRiverBridge(tiles);
 }

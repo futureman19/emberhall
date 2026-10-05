@@ -7,6 +7,7 @@ import type {
 } from "../resources/types.ts";
 import type { FaunaKind, SkillId } from "../types.ts";
 import {
+  FORM_GOVERNING_SKILL,
   GEM_CLARITIES,
   MATERIAL_GRADES,
   validateItemFormDefinition,
@@ -51,7 +52,7 @@ const MATERIAL_ROLES = [
   "frame",
   "finish",
 ] as const satisfies readonly MaterialRole[];
-const GRADE_FORMS = ["log", "board", "ore", "ingot", "cloth"] as const;
+const GRADE_FORMS = ["log", "board", "ore", "ingot", "cloth", "hide", "bone"] as const;
 const BUILD_FIELDS = ["workmanship", "components", "inlays"] as const;
 const COMPONENT_FIELDS = ["role", "resourceId", "form", "grade", "amount"] as const;
 const INLAY_FIELDS = ["resourceId", "clarity"] as const;
@@ -326,6 +327,49 @@ export function resolveItemStats(
     const scale = CONTRIBUTION_SCALE[role.contribution];
     for (const traitId of definition.traitIds) {
       const trait = TRAIT_REGISTRY[traitId];
+      if (trait.stat === "slayer") {
+        // Slayer multipliers are absolute with 1 as neutral, so a reduced
+        // contribution scale softens only the excess over neutral.
+        const raw = trait.values[component.grade];
+        const multiplier = Math.min(scale === 1 ? raw : 1 + (raw - 1) * scale, form.caps.slayerMultiplier);
+        const appliedSlayers: Partial<Record<FaunaKind, number>> = {};
+        for (const kind of trait.fauna) {
+          const before = stats.slayerMultipliers[kind] ?? 1;
+          const after = Math.max(before, multiplier);
+          if (after - before === 0) continue;
+          stats.slayerMultipliers = { ...stats.slayerMultipliers, [kind]: after };
+          appliedSlayers[kind] = after - before;
+        }
+        if (Object.keys(appliedSlayers).length === 0) continue;
+        contributions.push({
+          source: "material",
+          sourceId: component.resourceId,
+          role: component.role,
+          traitId,
+          stats: { slayerMultipliers: appliedSlayers },
+          local: {},
+        });
+        continue;
+      }
+      if (trait.stat === "skill" && "skill" in trait) {
+        // Trophy traits name their skill on the definition; the per-skill
+        // cap binds the running total, not each contribution.
+        const raw = trait.values[component.grade] * scale;
+        const before = stats.skillBonuses[trait.skill] ?? 0;
+        const after = Math.min(before + raw, form.caps.skillBonusPerSkill);
+        const delta = after - before;
+        if (delta === 0) continue;
+        stats.skillBonuses = { ...stats.skillBonuses, [trait.skill]: after };
+        contributions.push({
+          source: "material",
+          sourceId: component.resourceId,
+          role: component.role,
+          traitId,
+          stats: { skillBonuses: { [trait.skill]: delta } },
+          local: {},
+        });
+        continue;
+      }
       const applied = applyCanonical(stats, { [trait.stat]: trait.values[component.grade] * scale }, form);
       if (!hasAppliedStats(applied)) continue;
       contributions.push({
@@ -342,6 +386,27 @@ export function resolveItemStats(
   for (const { inlay, definition } of inlays) {
     for (const traitId of definition.traitIds) {
       const trait = TRAIT_REGISTRY[traitId];
+      if (trait.stat === "skill") {
+        // Mastery gems school the wielder in the form's governing art.
+        const skill = FORM_GOVERNING_SKILL[form.id];
+        if (skill) {
+          const before = stats.skillBonuses[skill] ?? 0;
+          const after = Math.min(before + trait.values[inlay.clarity], form.caps.skillBonusPerSkill);
+          const applied = after - before;
+          if (applied !== 0) {
+            stats.skillBonuses = { ...stats.skillBonuses, [skill]: after };
+            contributions.push({
+              source: "gem",
+              sourceId: inlay.resourceId,
+              traitId,
+              family: traitId,
+              stats: { skillBonuses: { [skill]: applied } },
+              local: {},
+            });
+          }
+        }
+        continue;
+      }
       if (trait.scope === "canonical") {
         const applied = applyCanonical(stats, { [trait.stat]: trait.values[inlay.clarity] }, form);
         if (!hasAppliedStats(applied)) continue;

@@ -1,7 +1,7 @@
 import { bridgeDeckAt, bridgeGroundY, bridgeTerrainY, bridgeSurfaceKind, REEDWAKE_BRIDGE } from "../../game/river-bridge.ts";
 import { isFrontierRiverSurface } from "../../game/frontier-river.ts";
 import { createGroundUpdatePlanner } from "./ground-update-planner.ts";
-import { floraRollEligible } from "./flora-eligibility.ts";
+import { floraRollEligible, ruinsExtraThorn, ruinsThornInstead } from "./flora-eligibility.ts";
 import { createTerrainPalette } from "./terrain-palette.ts";
 import { sameHorizonUpdateKey } from "./horizon-update-key.ts";
 import { horizonSurfaceY } from "./horizon-water.ts";
@@ -10,7 +10,7 @@ import type { ThreeEvent } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from "react";
 import type { MutableRefObject } from "react";
 import * as THREE from "three";
-import { COURT, MAP, VIEW, PLACES } from "@/game/atlas";
+import { COURT, MAP, VIEW, PLACES, inRuins } from "@/game/atlas";
 import { biomeAt, biomeWeights } from "@/game/biome";
 import { buildingBox } from "@/game/building-size";
 import { GROUND_SHADER, makeDirtTex, makeGrassTex } from "@/game/ground-tex";
@@ -35,6 +35,7 @@ import { useTimberGeometry } from "./timber-renderer-data";
 import { seatFieldRockMatrix, useFieldPropGeometry } from "./field-prop-art";
 import { useGhostwoodTouch } from "./use-ghostwood-touch";
 import { useHouseTouch } from "./use-house-touch";
+import { useWorldTouch } from "./use-world-touch";
 import { authoredTimberId } from "./timber-renderer-policy";
 import { createTimberBatches, resetTimberBatches, claimTimberSlot, finishTimberBatches, HIDDEN_TIMBER } from "./timber-batches";
 import { RESOURCE_CATALOG } from "@/game/resources/catalog";
@@ -303,6 +304,7 @@ if (uLod < 0.5 && fade < 0.05) discard;
 export function Terrain() {
   const ghostwoodTouch = useGhostwoodTouch();
   const houseTouch = useHouseTouch();
+  const worldTouch = useWorldTouch();
   const timber = useTimberGeometry();
   const fieldProps = useFieldPropGeometry();
   const authoredRocks = useRef<THREE.InstancedMesh>(null);
@@ -649,8 +651,8 @@ export function Terrain() {
         }
         const wooded = t.kind === "tree";
         const open = t.kind === "grass" || t.kind === "sand" || t.kind === "snow" || t.kind === "marsh";
-        if ((wooded || open) && floraRollEligible(wooded, hash2(tx, ty, w.seed + (wooded ? 51 : 41)))
-          && !blocked(w, tx, ty) && Math.hypot(tx - px, ty - pz) < visibleHalf - 3) {
+        if ((wooded || open) && !blocked(w, tx, ty) && Math.hypot(tx - px, ty - pz) < visibleHalf - 3
+          && (floraRollEligible(wooded, hash2(tx, ty, w.seed + (wooded ? 51 : 41))) || inRuins(tx, ty))) {
           const climate = biomeAt(tx, ty);
           const roll = hash2(tx, ty, w.seed + 41);
           let flora = -1;
@@ -665,6 +667,7 @@ export function Terrain() {
           else if (roll < 0.025) flora = 2;
           else if (roll < 0.031) flora = 3;
           if (flora >= 0) {
+            if (inRuins(tx, ty)) flora = ruinsThornInstead(flora);
             const gy = groundY(w, tx, ty);
             const jx = (hash2(tx, ty, w.seed + 71) - 0.5) * (wooded ? 0.72 : 0.52);
             const jz = (hash2(tx, ty, w.seed + 91) - 0.5) * (wooded ? 0.72 : 0.52);
@@ -675,7 +678,7 @@ export function Terrain() {
               dummy.scale.set(grow, grow, grow);
               dummy.updateMatrix();
               shb.setMatrixAt(shi, dummy.matrix);
-              paint(shb, shi, climate === "desert" ? COL_THORN : hash2(tx, ty, w.seed + 3) > 0.5 ? COL_SHRUB_2 : COL_SHRUB);
+              paint(shb, shi, climate === "desert" || inRuins(tx, ty) ? COL_THORN : hash2(tx, ty, w.seed + 3) > 0.5 ? COL_SHRUB_2 : COL_SHRUB);
               shi++;
             } else if (flora === 1 && fli < FLORA && flw) {
               dummy.position.set(tx + jx, gy + 0.14, ty + jz);
@@ -700,6 +703,17 @@ export function Terrain() {
               paint(tft, tui, COL_TUFT);
               tui++;
             }
+            dummy.rotation.set(0, 0, 0);
+          } else if (inRuins(tx, ty) && ruinsExtraThorn(wooded, roll) && shi < FLORA && shb) {
+            const gy = groundY(w, tx, ty);
+            const grow = 0.85 + hash2(tx, ty, w.seed + 5) * 0.55;
+            dummy.rotation.set(0, hash2(tx, ty, w.seed + 8) * Math.PI * 2, 0);
+            dummy.position.set(tx + (hash2(tx, ty, w.seed + 71) - 0.5) * 0.52, gy + 0.24 * grow, ty + (hash2(tx, ty, w.seed + 91) - 0.5) * 0.52);
+            dummy.scale.set(grow, grow * 1.12, grow);
+            dummy.updateMatrix();
+            shb.setMatrixAt(shi, dummy.matrix);
+            paint(shb, shi, COL_THORN);
+            shi++;
             dummy.rotation.set(0, 0, 0);
           }
         }
@@ -755,7 +769,7 @@ export function Terrain() {
   function onDown(e: ThreeEvent<PointerEvent>, map?: MutableRefObject<{ tx: number; ty: number }[]>) {
     e.stopPropagation();
     const t = tileOf(e, map);
-    if (e.button === 0 && (ghostwoodTouch(e, t) || houseTouch(e, t))) return;
+    if (e.button === 0 && (ghostwoodTouch(e, t) || houseTouch(e, t) || worldTouch(e, t))) return;
     if (e.button === 2) hitAt(t.tx, t.ty, e.clientX, e.clientY);
     else if (e.button === 0 && useGame.getState().phase === "playing") leftAt(t.tx, t.ty);
   }

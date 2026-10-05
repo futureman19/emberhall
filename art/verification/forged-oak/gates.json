@@ -1,0 +1,40 @@
+{
+  "full_check": {
+    "command": "npm run check",
+    "exit_code": 0,
+    "script_tests": 457,
+    "game_tests": 1028,
+    "total": 1485,
+    "fail": 0,
+    "skip": 0,
+    "raw_log": "C:/Users/futur/.hermes/profiles/telegram2/cache/scratch/emberhall-oak-check-final.log",
+    "raw_sha256": "4064a2360c9a56f93d38d9eb8aeb7d50cd21e15c79384033ee3dfbab0118e8f6",
+    "auth": "dev and build agree: sign-in off"
+  },
+  "art_audit": {
+    "command": "node scripts/audit-art-coverage.mjs --check",
+    "exit_code": 0
+  },
+  "tdd": {
+    "initial": "asset/CSS test failed before runtime integration",
+    "clock_regression": "failed without opaque text backing; passed after paint-only backing",
+    "clock_red_log": "C:/Users/futur/.hermes/profiles/telegram2/cache/scratch/emberhall-oak-clock-red.log"
+  },
+  "browser": {
+    "oak_and_rejected_assets": 4,
+    "full_hud": 43,
+    "page_errors": 0,
+    "report": "report.json",
+    "hud_report": "hud/after.json"
+  },
+  "source_reopen": {
+    "blender": "5.2.1",
+    "objects": 189,
+    "collections": [
+      "A | repeatable oak-and-iron band",
+      "B | open minimap reliquary",
+      "C | recessed action slot"
+    ]
+  },
+  "scope": "Paint-only integration of approved artwork; no gameplay or world renderer edits. Desktop Chromium and emulated mobile viewport, not physical-phone QA."
+}

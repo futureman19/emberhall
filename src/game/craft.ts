@@ -20,6 +20,7 @@ import { countGenericCraftResource, debitGenericCraftResource, type GenericCraft
 import { refineResource } from "./refining.ts";
 import type { CraftAnimationKind } from "./crafting-animation.ts";
 import type { BuildingKind, ItemId, RareItem, ResourceStackKey, ResourceTag, SkillId, World } from "./types.ts";
+import { stationsFromPieces } from "./placeables/functions.ts";
 
 export { countTag, hasTag, itemTags, tagConsumeOrder } from "./catalog.ts";
 export {
@@ -97,6 +98,7 @@ export const RECIPES: Recipe[] = [
   { id: "board", station: "bench", skill: "carpentry", diff: -18, label: "Boards", hint: "Split a log.", need: { log: 1 }, give: { board: 2 }, sfx: "chop" },
   { id: "torch", station: "bench", skill: "carpentry", diff: -8, label: "Torch", hint: "One board, a pitch.", need: { board: 1 }, give: { torch: 2 }, sfx: "chop" },
   { id: "club", station: "bench", skill: "carpentry", diff: 6, label: "Club", hint: "Any two wood — a heavy stick.", need: {}, needTags: [{ tag: "wood", n: 2 }], give: { club: 1 }, sfx: "chop" },
+  { id: "fletch", station: "bench", skill: "carpentry", diff: 6, label: "Fletch arrows", hint: "One board, fletched. Five arrows.", need: { board: 1 }, give: { arrows: 5 }, sfx: "chop" },
   { id: "crate", station: "bench", skill: "carpentry", diff: 8, label: "Crate", hint: "Any six wood, nailed.", need: {}, needTags: [{ tag: "wood", n: 6 }], give: { crate: 1 }, sfx: "chop" },
   { id: "staff", station: "bench", skill: "carpentry", diff: 10, label: "Staff", hint: "Any three wood, a ferrule.", need: {}, needTags: [{ tag: "wood", n: 3 }], give: { staff: 1 }, sfx: "chop" },
   { id: "cap", station: "bench", skill: "carpentry", diff: 12, label: "Wooden cap", hint: "Any three wood, a crown.", need: {}, needTags: [{ tag: "wood", n: 3 }], give: { cap: 1 }, sfx: "chop" },
@@ -117,6 +119,16 @@ export const RECIPES: Recipe[] = [
   { id: "gauntlets", station: "forge", skill: "smithing", diff: 16, label: "Gauntlets", hint: "Any five metal.", need: {}, needTags: [{ tag: "metal", n: 5 }], give: { gauntlets: 1 }, sfx: "smith" },
   { id: "mace", station: "forge", skill: "smithing", diff: 18, label: "Mace", hint: "Any six metal, a head.", need: {}, needTags: [{ tag: "metal", n: 6 }], give: { mace: 1 }, sfx: "smith" },
   { id: "sword", station: "forge", skill: "smithing", diff: 20, label: "Sword", hint: "Choose five ingots, one timber hilt, and one cloth binding.", exactRecipeId: "sword", need: {}, give: { sword: 1 }, sfx: "smith" },
+  { id: "shield_smith", station: "forge", skill: "smithing", diff: 21, label: "Shield", hint: "Choose three ingot plates, two boards, and one cloth binding.", exactRecipeId: "shield", need: {}, give: { shield: 1 }, sfx: "smith" },
+  // The exact helm rides beside the legacy tag recipe "helm" (any eight metal);
+  // commandCraftExact resolves work records by exactRecipeId, so the legacy id stays untouched.
+  { id: "helm_smith", station: "forge", skill: "smithing", diff: 24, label: "Helm", hint: "Choose two ingot plates and one cloth lining.", exactRecipeId: "helm", need: {}, give: { helm: 1 }, sfx: "smith" },
+  // Same pattern as the helm: the exact mail rides beside the legacy tag recipe "mail" (any fourteen metal).
+  { id: "mail_smith", station: "forge", skill: "smithing", diff: 30, label: "Mail", hint: "Choose four ingot plates and two cloth lining.", exactRecipeId: "mail", need: {}, give: { mail: 1 }, sfx: "smith" },
+  // The rest of the armor set follows the same rule: exact forms beside their legacy tag recipes.
+  { id: "boots_smith", station: "forge", skill: "smithing", diff: 15, label: "Boots", hint: "Choose two ingot plates and one cloth lining.", exactRecipeId: "boots", need: {}, give: { boots: 1 }, sfx: "smith" },
+  { id: "gauntlets_smith", station: "forge", skill: "smithing", diff: 18, label: "Gauntlets", hint: "Choose two ingot plates and one cloth lining.", exactRecipeId: "gauntlets", need: {}, give: { gauntlets: 1 }, sfx: "smith" },
+  { id: "greaves_smith", station: "forge", skill: "smithing", diff: 27, label: "Greaves", hint: "Choose three ingot plates and two cloth lining.", exactRecipeId: "greaves", need: {}, give: { greaves: 1 }, sfx: "smith" },
   { id: "helm", station: "forge", skill: "smithing", diff: 22, label: "Helm", hint: "Any eight metal.", need: {}, needTags: [{ tag: "metal", n: 8 }], give: { helm: 1 }, sfx: "smith" },
   { id: "heater", station: "forge", skill: "smithing", diff: 24, label: "Iron shield", hint: "Any eight metal, a face.", need: {}, needTags: [{ tag: "metal", n: 8 }], give: { heater: 1 }, sfx: "smith" },
   { id: "greaves", station: "forge", skill: "smithing", diff: 28, label: "Greaves", hint: "Any ten metal.", need: {}, needTags: [{ tag: "metal", n: 10 }], give: { greaves: 1 }, sfx: "smith" },
@@ -126,9 +138,16 @@ export const RECIPES: Recipe[] = [
   { id: "potion_heal", station: null, skill: "alchemy", diff: 8, label: "Heal potion", hint: "Garlic and ginseng, a red draught.", need: { garlic: 1, ginseng: 1 }, give: { potion_heal: 1 }, sfx: "cast" },
   { id: "potion_night", station: null, skill: "alchemy", diff: 12, label: "Night sight potion", hint: "Silk and ash. See as if dusk.", need: { silk: 1, ash: 1 }, give: { potion_night: 1 }, sfx: "cast" },
   { id: "cut_leather", station: null, skill: "tailoring", diff: 10, label: "Stitch a hide shirt", hint: "Two hides, a blade. Leather armor.", need: {}, needTags: [{ tag: "hide", n: 2 }], needsBlade: true, give: { leather: 1 }, sfx: "chop" },
+  { id: "leather_sew", station: null, skill: "tailoring", diff: 12, label: "Stitch a fine tunic", hint: "Choose three hides and one cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "leather" },
   { id: "sew_hood", station: null, skill: "tailoring", diff: 4, label: "Hood", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { hood: 1 }, sfx: "chop" },
+  { id: "hood_sew", station: null, skill: "tailoring", diff: 13, label: "Stitch a hide hood", hint: "Choose two hides and one cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "hood" },
   { id: "sew_gloves", station: null, skill: "tailoring", diff: 6, label: "Gloves", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { gloves: 1 }, sfx: "chop" },
+  { id: "gloves_sew", station: null, skill: "tailoring", diff: 15, label: "Stitch hide gloves", hint: "Choose two hides and one cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "gloves" },
   { id: "sew_hose", station: null, skill: "tailoring", diff: 8, label: "Hose", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { hose: 1 }, sfx: "chop" },
+  { id: "hose_sew", station: null, skill: "tailoring", diff: 17, label: "Stitch hide hose", hint: "Choose three hides and two cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "hose" },
+  { id: "charm", station: null, skill: "tinkering", diff: 24, label: "Whittle a charm", hint: "Choose a bone trophy and one cloth binding.", need: {}, give: { pendant: 1 }, sfx: "chop", exactRecipeId: "charm" },
+  // commandCraftExact resolves by exactRecipeId; the legacy forge tag recipe owns the plain "ring" id.
+  { id: "ring_tinker", station: null, skill: "tinkering", diff: 26, label: "Whittle a ring", hint: "Choose an ingot or bone trophy and one cloth binding.", need: {}, give: { ring: 1 }, sfx: "chop", exactRecipeId: "ring" },
   { id: "sew_tunic", station: null, skill: "tailoring", diff: 12, label: "Tunic", hint: "Any three cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 3 }], needsBlade: true, give: { tunic: 1 }, sfx: "chop" },
   { id: "sew_cloak", station: null, skill: "tailoring", diff: 18, label: "Travel cloak", hint: "Any four cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 4 }], needsBlade: true, give: { cloak: 1 }, sfx: "chop" },
   // Camping — three wood buys a fire that burns three hours.
@@ -183,6 +202,7 @@ export function stationsHere(world: World): Station[] {
     if (dist(world, b.tx, b.ty) <= craftReach(b.kind)) out.add(st);
   }
   if (litFireNear(world)) out.add("fire");
+  for (const st of stationsFromPieces(world)) out.add(st);
   return [...out];
 }
 
@@ -213,7 +233,8 @@ function genericCraftItem(id: ItemId): GenericCraftResourceItem | null {
   return id === "log" || id === "ore" ? id : null;
 }
 
-function exactNeedCount(world: World, id: ItemId): number {
+/** Shared by recipe availability, debits' preflight, and the ingredient display. */
+export function availableCraftIngredient(world: World, id: ItemId): number {
   const generic = genericCraftItem(id);
   return generic ? countGenericCraftResource(world.player, generic) : (world.player.pack[id] ?? 0);
 }
@@ -222,7 +243,7 @@ function exactNeedCount(world: World, id: ItemId): number {
 function haveWorldNeed(world: World, rec: Recipe): boolean {
   if (rec.exactRecipeId) return false;
   for (const [k, n] of Object.entries(rec.need)) {
-    if (exactNeedCount(world, k as ItemId) < (n ?? 0)) return false;
+    if (availableCraftIngredient(world, k as ItemId) < (n ?? 0)) return false;
   }
   const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {
@@ -258,16 +279,35 @@ export function canMake(world: World, rec: Recipe) {
   return haveWorldNeed(world, rec);
 }
 
-export function missingNeed(world: World, rec: Recipe): string | null {
+/** First command blocker, not a claim that every other requirement is satisfied. */
+export function craftBlocker(world: World, rec: Recipe): string | null {
+  if (world.player.ghost) return "A ghost cannot craft. Return to life first.";
+  if (rec.exactRecipeId) return missingNeed(world, rec);
+  if (rec.station !== null && !stationsHere(world).includes(rec.station)) {
+    if (rec.station === "forge") return "Move near a forge.";
+    if (rec.station === "fire") return "Move near a lit campfire or hearth.";
+    return "Move near a bench in the yard or hall.";
+  }
+  if (rec.needsBlade && !bladeInHand(world)) return "Hold a blade — hatchet, knife, or sword.";
+  if (rec.placesFire && litFireNear(world)) return "A fire already crackles here.";
+  return missingNeed(world, rec, true);
+}
+
+export function missingNeed(world: World, rec: Recipe, quantities = false): string | null {
   if (rec.exactRecipeId) return "Choose exact materials for this equipment recipe.";
   for (const [k, n] of Object.entries(rec.need)) {
     const id = k as ItemId;
-    const have = exactNeedCount(world, id);
-    if (have < (n ?? 0)) return `Need ${ITEM_META[id].label.toLowerCase()}.`;
+    const have = availableCraftIngredient(world, id);
+    if (have < (n ?? 0)) return quantities
+      ? `Need ${(n ?? 0) - have} more ${ITEM_META[id].label.toLowerCase()} (${have}/${n}).`
+      : `Need ${ITEM_META[id].label.toLowerCase()}.`;
   }
   const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {
-    if (countTag(world.player.pack, nt.tag, self) < nt.n) return `Need ${nt.n} ${nt.tag} — anything ${nt.tag} will do.`;
+    const have = countTag(world.player.pack, nt.tag, self);
+    if (have < nt.n) return quantities
+      ? `Need ${nt.n - have} more ${nt.tag} (${have}/${nt.n} eligible).`
+      : `Need ${nt.n} ${nt.tag} — anything ${nt.tag} will do.`;
   }
   return null;
 }
@@ -335,8 +375,11 @@ export function commandCraftExact(
 ): string | null {
   if (world.player.ghost) return "A ghost cannot.";
   const exactRecipe = exactRecipeById(recipeId);
-  const rec = recipeById(recipeId);
-  if (!exactRecipe || !rec || rec.exactRecipeId !== exactRecipe.id) return "No such exact work.";
+  // The exact id — not the legacy recipe id — locates the work record: legacy
+  // recipes can hold the plain item id (e.g. the carpentry "shield").
+  const rec = exactRecipe ? RECIPES.find((candidate) => candidate.exactRecipeId === exactRecipe.id) : undefined;
+  if (!exactRecipe || !rec) return "No such exact work.";
+  if (rec.needsBlade && !bladeInHand(world)) return "Hold a blade.";
   if (rec.station !== null && !stationsHere(world).includes(rec.station)) {
     if (rec.station === "forge") return "The ore wants a fire. Raise a forge.";
     if (rec.station === "fire") return "The pot wants a fire — build a campfire, or find a hearth.";
@@ -357,7 +400,8 @@ export function commandCraftExact(
     return note;
   }
 
-  const workmanship = workmanshipForCraft(skill, rec.diff, Math.random());
+  const primary = preview.components.find(({ role }) => role === "body" || role === "edge" || role === "plate");
+  const workmanship = workmanshipForCraft(skill, rec.diff, Math.random(), primary?.grade);
   const form = ITEM_FORM_CATALOG[exactRecipe.formId];
   const maker = you(world)?.name ?? "an unknown hand";
   const specialty = preview.components.some(
@@ -458,7 +502,7 @@ export function maxCraftable(world: World, rec: Recipe): number {
   let max = 25;
   for (const [k, n] of Object.entries(rec.need)) {
     if (!n) continue;
-    max = Math.min(max, Math.floor(exactNeedCount(world, k as ItemId) / n));
+    max = Math.min(max, Math.floor(availableCraftIngredient(world, k as ItemId) / n));
   }
   const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {

@@ -17,6 +17,8 @@ npm run dev
 
 Click the ground to walk. Right-click for verbs. Open **You** for the paperdoll and pack. The book in the pack is magery: Mark writes this dirt on a rune. Walk off. Tap the mark — Recall folds you back. Public moongates still hold.
 
+The hammer dock is **The Hold**. Search the timber kit, drag a gold shade, lift to set. Doors, beds, chests, benches and hearths work. Capture a hold as a plan and stamp the bill — or nothing, if the dirt is taken.
+
 Die and you walk pale. Chop, hunt, and the book are closed until a healer returns you. Ione stands at the hall. Your corpse keeps a third of your gold and half the stacks — a body on the dirt, a ring on the vale. Vault stays. Walk back living and take it.
 
 ## Spine
@@ -37,4 +39,4 @@ Run the complete post-change gate before merging:
 npm run check
 ```
 
-That command fails fast in this order: lint (with zero warnings), tests, typecheck, production build, then the auth invariant check. For UI or runtime changes, also run `node scripts/browser-smoke.mjs` against the dev server and inspect both generated screenshots.
+That command fails fast in this order: lint (with zero warnings), tests, typecheck, production build, then the auth invariant check. For UI or runtime changes, also run `node scripts/browser-smoke.mjs` against the dev server and inspect both generated screenshots. Hearthwright: `npm run smoke:creator` walks The Hold on desktop and mobile.

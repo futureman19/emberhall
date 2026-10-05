@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { commandCraft, commandCraftExact } from "../craft.ts";
 import { addResource, makeResourceStackKey, resourceCount } from "../inventory/resources.ts";
-import { you } from "../player.ts";
+import { commandEquipRare, you } from "../player.ts";
+import { rareMods } from "../rare.ts";
 import type { ResourceStackKey, World } from "../types.ts";
 import { createWorld } from "../world.ts";
 import { executeExactCraftTransaction } from "./transaction.ts";
@@ -10,10 +11,19 @@ import { executeExactCraftTransaction } from "./transaction.ts";
 const ROUGH_OAK = makeResourceStackKey("oak", "log", "rough");
 const SOUND_OAK = makeResourceStackKey("oak", "log", "sound");
 const CHOICE_REDWOOD = makeResourceStackKey("redwood", "log", "choice");
+const CHOICE_IRONWOOD = makeResourceStackKey("ironwood", "log", "choice");
 const SOUND_CLOTH = makeResourceStackKey("common_cloth", "cloth", "sound");
 const PRISTINE_LINEN = makeResourceStackKey("fine_linen", "cloth", "pristine");
 const IRON_INGOT = makeResourceStackKey("iron_ore", "ingot", "sound");
 const HIGHLAND_INGOT = makeResourceStackKey("highland_ore", "ingot", "choice");
+const EMBERITE_INGOT = makeResourceStackKey("emberite", "ingot", "choice");
+const MOON_SILVER_INGOT = makeResourceStackKey("moon_silver", "ingot", "choice");
+const CHOICE_WOLF_FANG = makeResourceStackKey("wolf_fang", "bone", "choice");
+const CHOICE_IRON_INGOT = makeResourceStackKey("iron_ore", "ingot", "choice");
+const CHOICE_STAG_ANTLER = makeResourceStackKey("stag_antler", "bone", "choice");
+const CHOICE_AUROCHS_HORN = makeResourceStackKey("aurochs_horn", "bone", "choice");
+const PRISTINE_DRAKE_SCALE = makeResourceStackKey("drake_scale", "bone", "pristine");
+const COPPER_INGOT = makeResourceStackKey("copper_ore", "ingot", "choice");
 const OAK_BOARD = makeResourceStackKey("oak", "board", "sound");
 
 function bowSelections(body: ResourceStackKey = CHOICE_REDWOOD, binding: ResourceStackKey = SOUND_CLOTH) {
@@ -192,14 +202,44 @@ test("exact bowcraft - redwood always creates one material-specific item with de
   assert.equal(bow.recipeId, "bow");
   assert.equal(bow.recipeVersion, 1);
   assert.equal(bow.source, "crafted");
-  assert.equal(bow.workmanship, "ordinary");
+  assert.equal(bow.workmanship, "fine", "mastery on choice redwood floors ordinary work out");
   assert.equal(bow.maker, you(world)!.name);
   assert.deepEqual(bow.affixes, [], "materials and workmanship never invent gem magic");
   assert.deepEqual(bow.inlays, []);
   assert.equal(bow.resolvedStats?.damage, 8);
-  assert.equal(bow.resolvedStats?.hitBonus, 2, "choice redwood contributes its stable accuracy trait");
+  assert.equal(bow.resolvedStats?.hitBonus, 3, "choice redwood accuracy trait plus fine workmanship");
   assert.deepEqual(bow.components, [
     { role: "body", resourceId: "redwood", form: "log", grade: "choice", amount: 5 },
+    { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+  ]);
+});
+
+test("exact bowcraft - ironwood always creates one material-specific item with deterministic physical stats", () => {
+  const world = createWorld();
+  standAtYard(world);
+  world.player.skills.carpentry = 100;
+  addResource(world.player.resources, CHOICE_IRONWOOD, 5);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+
+  const note = withRoll(0.5, () => commandCraftExact(world, "bow", bowSelections(CHOICE_IRONWOOD)));
+
+  assert.match(note ?? "", /ironwood bow/i);
+  assert.equal(world.player.pack.bow, 0, "the unique bow leaves no duplicate mundane stack output");
+  assert.equal(world.player.rares.length, 1);
+  const bow = world.player.rares[0]!;
+  assert.equal(bow.base, "bow");
+  assert.equal(bow.formId, "bow");
+  assert.equal(bow.recipeId, "bow");
+  assert.equal(bow.recipeVersion, 1);
+  assert.equal(bow.source, "crafted");
+  assert.equal(bow.workmanship, "fine", "mastery on choice ironwood floors ordinary work out");
+  assert.equal(bow.maker, you(world)!.name);
+  assert.deepEqual(bow.affixes, [], "materials and workmanship never invent gem magic");
+  assert.deepEqual(bow.inlays, []);
+  assert.equal(bow.resolvedStats?.damage, 9.5, "base bow plus the choice ironwood damage trait");
+  assert.equal(bow.resolvedStats?.hitBonus, 1, "fine workmanship only - ironwood grants no accuracy");
+  assert.deepEqual(bow.components, [
+    { role: "body", resourceId: "ironwood", form: "log", grade: "choice", amount: 5 },
     { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
   ]);
 });
@@ -276,4 +316,379 @@ test("exact swordcraft - ordinary iron remains fungible while Highland steel bec
   assert.equal(highland.player.rares.length, 1);
   assert.equal(highland.player.rares[0]!.resolvedStats?.damage, 11.5);
   assert.deepEqual(highland.player.rares[0]!.affixes, []);
+});
+
+test("exact swordcraft - emberite carries its ember trait into the blade", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  addResource(world.player.resources, EMBERITE_INGOT, 5);
+  addResource(world.player.resources, OAK_BOARD, 1);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "sword", swordSelections(EMBERITE_INGOT)));
+  assert.match(note ?? "", /emberite sword/i);
+  assert.equal(world.player.pack.sword, 0);
+  assert.equal(world.player.rares.length, 1);
+  assert.equal(world.player.rares[0]!.resolvedStats?.damage, 13);
+  assert.equal(world.player.rares[0]!.resolvedStats?.hitBonus, 1);
+  assert.deepEqual(world.player.rares[0]!.affixes, []);
+});
+
+test("exact swordcraft - moon silver bites the fleshless and no one else", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  addResource(world.player.resources, MOON_SILVER_INGOT, 5);
+  addResource(world.player.resources, OAK_BOARD, 1);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "sword", swordSelections(MOON_SILVER_INGOT)));
+  assert.match(note ?? "", /moon silver sword/i);
+  assert.equal(world.player.pack.sword, 0);
+  assert.equal(world.player.rares.length, 1);
+  const blade = world.player.rares[0]!;
+  assert.equal(blade.resolvedStats?.damage, 10, "moon silver adds no raw damage");
+  assert.equal(blade.resolvedStats?.hitBonus, 1);
+  assert.equal(blade.resolvedStats?.slayerMultipliers.wight, 1.2);
+  assert.equal(blade.resolvedStats?.slayerMultipliers.grave_lich, 1.2);
+  assert.equal(blade.resolvedStats?.slayerMultipliers.wolf, undefined, "flesh kinds gain nothing");
+  assert.equal(Object.keys(blade.resolvedStats?.slayerMultipliers ?? {}).length, 13);
+  assert.deepEqual(blade.affixes, []);
+
+  assert.ok(commandEquipRare(world, blade.uid));
+  const mods = rareMods(world);
+  assert.equal(mods.vs.wight, 1.2, "the resolved slayer reaches the combat aggregate");
+  assert.equal(mods.vs.wolf, undefined);
+});
+
+test("exact swordcraft - copper becomes a unique handling blade with no damage trait", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  addResource(world.player.resources, COPPER_INGOT, 5);
+  addResource(world.player.resources, OAK_BOARD, 1);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+
+  const note = withRoll(0.5, () => commandCraftExact(world, "sword", swordSelections(COPPER_INGOT)));
+
+  assert.match(note ?? "", /copper ore sword/i);
+  assert.equal(world.player.pack.sword, 0, "specialty metal always crafts unique");
+  assert.equal(world.player.rares.length, 1);
+  const sword = world.player.rares[0]!;
+  assert.equal(sword.workmanship, "fine", "mastery on choice stock floors to fine");
+  assert.equal(sword.resolvedStats?.damage, 10, "copper contributes no damage trait");
+  assert.equal(sword.resolvedStats?.hitBonus, 1.75, "choice handling edge plus fine workmanship");
+  assert.deepEqual(sword.affixes, []);
+  assert.deepEqual(sword.components?.[0], { role: "edge", resourceId: "copper_ore", form: "ingot", grade: "choice", amount: 5 });
+});
+
+test("exact swordcraft - bronze carries its keen trait through the alloy chain", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  const BRONZE_INGOT = makeResourceStackKey("bronze", "ingot", "choice");
+  addResource(world.player.resources, BRONZE_INGOT, 5);
+  addResource(world.player.resources, OAK_BOARD, 1);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+
+  const note = withRoll(0.5, () => commandCraftExact(world, "sword", swordSelections(BRONZE_INGOT)));
+
+  assert.match(note ?? "", /bronze sword/i);
+  assert.equal(world.player.pack.sword, 0, "specialty metal always crafts unique");
+  assert.equal(world.player.rares.length, 1);
+  const blade = world.player.rares[0]!;
+  assert.equal(blade.workmanship, "fine", "mastery on choice stock floors to fine");
+  assert.equal(blade.resolvedStats?.damage, 10.75, "choice keen edge adds 0.75 damage");
+  assert.equal(blade.resolvedStats?.hitBonus, 1, "common cloth adds no handling; fine workmanship only");
+  assert.deepEqual(blade.affixes, []);
+  assert.deepEqual(blade.components?.[0], { role: "edge", resourceId: "bronze", form: "ingot", grade: "choice", amount: 5 });
+});
+
+test("exact shieldcraft - iron plates carry the sturdy trait into armor", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  const IRON_PLATES = makeResourceStackKey("iron_ore", "ingot", "choice");
+  addResource(world.player.resources, IRON_PLATES, 3);
+  addResource(world.player.resources, OAK_BOARD, 2);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "shield", [
+    { role: "plate", key: IRON_PLATES },
+    { role: "frame", key: OAK_BOARD },
+    { role: "binding", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /shield/i);
+  const shield = world.player.rares[0]!;
+  assert.equal(shield.base, "shield");
+  assert.equal(shield.resolvedStats?.armor, 3.5, "2 base + 1.5 choice sturdy plates; workmanship adds no armor");
+  assert.equal(shield.resolvedStats?.damage, 0);
+  assert.equal(shield.resolvedStats?.hitBonus, 0, "fine hit bonus clamps against the armor form's zero hit cap");
+  assert.deepEqual(shield.components?.[0], { role: "plate", resourceId: "iron_ore", form: "ingot", grade: "choice", amount: 3 });
+});
+
+test("exact swordcraft - a wolf fang hilt lends its keen edge to the blade", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  addResource(world.player.resources, CHOICE_IRON_INGOT, 5);
+  addResource(world.player.resources, CHOICE_WOLF_FANG, 1);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "sword", [
+    { role: "edge", key: CHOICE_IRON_INGOT },
+    { role: "hilt", key: CHOICE_WOLF_FANG },
+    { role: "binding", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /iron ore sword/i);
+  const blade = world.player.rares[0]!;
+  assert.equal(blade.resolvedStats?.damage, 10.1875, "10 base + choice keen 0.75 at the hilt's 0.25 secondary scale");
+  assert.equal(blade.resolvedStats?.hitBonus, 1, "fine workmanship on a choice edge - sturdy carries no accuracy");
+  assert.deepEqual(blade.components?.[1], { role: "hilt", resourceId: "wolf_fang", form: "bone", grade: "choice", amount: 1 });
+});
+
+test("exact bowcraft - a stag antler body draws true like choice redwood", () => {
+  const world = createWorld();
+  standAtYard(world);
+  world.player.skills.carpentry = 100;
+  addResource(world.player.resources, CHOICE_STAG_ANTLER, 5);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "bow", bowSelections(CHOICE_STAG_ANTLER)));
+  assert.match(note ?? "", /stag antler bow/i);
+  const bow = world.player.rares[0]!;
+  assert.equal(bow.resolvedStats?.damage, 8, "antler grants no raw damage - specialization, not power");
+  assert.equal(bow.resolvedStats?.hitBonus, 3, "choice accuracy 2 at primary scale plus fine workmanship");
+  assert.deepEqual(bow.components, [
+    { role: "body", resourceId: "stag_antler", form: "bone", grade: "choice", amount: 5 },
+    { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+  ]);
+});
+
+test("exact shieldcraft - drake scale plates a shield with hunted sturdy armor", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  addResource(world.player.resources, PRISTINE_DRAKE_SCALE, 3);
+  addResource(world.player.resources, OAK_BOARD, 2);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "shield", [
+    { role: "plate", key: PRISTINE_DRAKE_SCALE },
+    { role: "frame", key: OAK_BOARD },
+    { role: "binding", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /shield/i);
+  const shield = world.player.rares[0]!;
+  assert.equal(shield.resolvedStats?.armor, 4, "2 base + 2 pristine sturdy scales, under the 5 armor cap");
+  assert.equal(shield.resolvedStats?.damage, 0);
+  assert.deepEqual(shield.components?.[0], { role: "plate", resourceId: "drake_scale", form: "bone", grade: "pristine", amount: 3 });
+});
+
+test("exact bowcraft - an aurochs horn body hits harder than antler, without its accuracy", () => {
+  const world = createWorld();
+  standAtYard(world);
+  world.player.skills.carpentry = 100;
+  addResource(world.player.resources, CHOICE_AUROCHS_HORN, 5);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "bow", bowSelections(CHOICE_AUROCHS_HORN)));
+  assert.match(note ?? "", /aurochs horn bow/i);
+  const bow = world.player.rares[0]!;
+  assert.equal(bow.resolvedStats?.damage, 9.5, "8 base + choice damage 1.5 at primary scale - a horn bow hits like ironwood");
+  assert.equal(bow.resolvedStats?.hitBonus, 1, "fine workmanship only - horn grants no accuracy");
+  assert.deepEqual(bow.components?.[0], { role: "body", resourceId: "aurochs_horn", form: "bone", grade: "choice", amount: 5 });
+});
+
+test("exact swordcraft - an aurochs horn hilt lends mass to the blade", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  addResource(world.player.resources, CHOICE_IRON_INGOT, 5);
+  addResource(world.player.resources, CHOICE_AUROCHS_HORN, 1);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "sword", [
+    { role: "edge", key: CHOICE_IRON_INGOT },
+    { role: "hilt", key: CHOICE_AUROCHS_HORN },
+    { role: "binding", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /iron ore sword/i);
+  const blade = world.player.rares[0]!;
+  assert.equal(blade.resolvedStats?.damage, 10.375, "10 base + choice damage 1.5 at the hilt's 0.25 secondary scale");
+  assert.equal(blade.resolvedStats?.hitBonus, 1, "fine workmanship on a choice edge");
+  assert.deepEqual(blade.components?.[1], { role: "hilt", resourceId: "aurochs_horn", form: "bone", grade: "choice", amount: 1 });
+});
+
+test("exact charmcraft - a stag antler charm carries the hunter's craft, and wearing it shows", () => {
+  const world = createWorld();
+  world.player.skills.tinkering = 100;
+  addResource(world.player.resources, CHOICE_STAG_ANTLER, 1);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "charm", [
+    { role: "body", key: CHOICE_STAG_ANTLER },
+    { role: "binding", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /stag antler pendant/i);
+  const charm = world.player.rares[0]!;
+  assert.equal(charm.base, "pendant");
+  assert.equal(charm.formId, "charm");
+  assert.equal(charm.workmanship, "fine", "choice primary at tinkering 100 floors ordinary work out");
+  assert.deepEqual(charm.resolvedStats?.skillBonuses, { tracking: 3 });
+  assert.equal(charm.resolvedStats?.damage, 0);
+  assert.equal(charm.resolvedStats?.hitBonus, 0, "fine workmanship clamps against the charm's zero hit cap");
+  assert.equal(charm.resolvedStats?.armor, 0);
+  assert.equal(rareMods(world).skills.tracking ?? 0, 0, "in the pack it teaches nothing");
+  assert.equal(commandEquipRare(world, charm.uid) !== null, true);
+  assert.equal(rareMods(world).skills.tracking, 3, "worn at the neck, the charm's craft flows");
+});
+
+test("exact ringcraft - a moon silver ring bites the fleshless from the finger slot", () => {
+  const world = createWorld();
+  world.player.skills.tinkering = 100;
+  addResource(world.player.resources, MOON_SILVER_INGOT, 1);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "ring", [
+    { role: "body", key: MOON_SILVER_INGOT },
+    { role: "binding", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /moon silver ring/i);
+  const ring = world.player.rares[0]!;
+  assert.equal(ring.base, "ring");
+  assert.equal(ring.formId, "ring");
+  assert.equal(ring.resolvedStats?.slayerMultipliers?.wight, 1.2, "choice moon at primary scale");
+  assert.equal(ring.resolvedStats?.armor, 0);
+  assert.equal(rareMods(world).vs.wight ?? 1, 1, "in the pack it bites nothing");
+  assert.equal(commandEquipRare(world, ring.uid) !== null, true);
+  assert.equal(rareMods(world).vs.wight, 1.2, "worn, the ring's moon silver flows");
+});
+
+test("exact helmcraft - two plates and a lining, iron sturdy carries into head armor", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  const IRON_PLATES = makeResourceStackKey("iron_ore", "ingot", "choice");
+  addResource(world.player.resources, IRON_PLATES, 2);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "helm", [
+    { role: "plate", key: IRON_PLATES },
+    { role: "lining", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /helm/i);
+  const helm = world.player.rares[0]!;
+  assert.equal(helm.base, "helm");
+  assert.equal(helm.resolvedStats?.armor, 3.5, "2 base + 1.5 choice sturdy plates; workmanship adds no armor");
+  assert.equal(helm.resolvedStats?.damage, 0);
+  assert.equal(helm.resolvedStats?.hitBonus, 0, "sound cloth handling clamps against the armor form's zero hit cap");
+  assert.deepEqual(helm.components?.[0], { role: "plate", resourceId: "iron_ore", form: "ingot", grade: "choice", amount: 2 });
+  const equipped = commandEquipRare(world, helm.uid);
+  assert.ok(equipped, "helm rare equips generically through ITEM_META");
+  assert.equal(world.player.wearRare.head, helm.uid, "helm slots into the head");
+});
+
+test("exact leathercraft - three hides and a binding, the tunic outclasses the tag shirt", () => {
+  const world = createWorld();
+  world.player.skills.tailoring = 100;
+  world.player.wear.main = "knife"; // field work — the hides want a blade
+  const CHOICE_HIDES = makeResourceStackKey("hide", "hide", "choice");
+  addResource(world.player.resources, CHOICE_HIDES, 3);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "leather", [
+    { role: "body", key: CHOICE_HIDES },
+    { role: "binding", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /leather/i);
+  const tunic = world.player.rares[0]!;
+  assert.equal(tunic.base, "leather");
+  assert.equal(tunic.resolvedStats?.armor, 3.5, "2 base + 1.5 choice supple hides; workmanship adds no armor");
+  assert.deepEqual(tunic.components?.[0], { role: "body", resourceId: "hide", form: "hide", grade: "choice", amount: 3 });
+  const equipped = commandEquipRare(world, tunic.uid);
+  assert.ok(equipped, "the tunic equips generically through ITEM_META");
+  assert.equal(world.player.wearRare.chest, tunic.uid, "the tunic slots into the chest");
+});
+
+test("exact leathercraft - the hides want a blade in hand", () => {
+  const world = createWorld();
+  world.player.skills.tailoring = 100;
+  world.player.wear.main = undefined; // fresh hands — no blade
+  const CHOICE_HIDES = makeResourceStackKey("hide", "hide", "choice");
+  addResource(world.player.resources, CHOICE_HIDES, 3);
+  addResource(world.player.resources, SOUND_CLOTH, 1);
+  const note = withRoll(0.5, () => commandCraftExact(world, "leather", [
+    { role: "body", key: CHOICE_HIDES },
+    { role: "binding", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /blade/i);
+  assert.equal(world.player.rares.length, 0, "no tunic without the blade");
+});
+
+test("exact leather set - hood, gloves, and hose carry supple into their slots", () => {
+  const world = createWorld();
+  world.player.skills.tailoring = 100;
+  world.player.wear.main = "knife";
+  const CHOICE_HIDES = makeResourceStackKey("hide", "hide", "choice");
+  addResource(world.player.resources, CHOICE_HIDES, 7);
+  addResource(world.player.resources, SOUND_CLOTH, 4);
+  const cases = [
+    { recipe: "hood", base: "hood", slot: "head", armor: 2.5, hides: 2 },
+    { recipe: "gloves", base: "gloves", slot: "hands", armor: 2.5, hides: 2 },
+    { recipe: "hose", base: "hose", slot: "legs", armor: 3.5, hides: 3 },
+  ] as const;
+  for (const { recipe, base, slot, armor, hides } of cases) {
+    const before = world.player.rares.length;
+    const note = withRoll(0.5, () => commandCraftExact(world, recipe, [
+      { role: "body", key: CHOICE_HIDES },
+      { role: "binding", key: SOUND_CLOTH },
+    ]));
+    assert.match(note ?? "", new RegExp(base, "i"));
+    assert.equal(world.player.rares.length, before + 1, recipe);
+    const piece = world.player.rares[world.player.rares.length - 1]!;
+    assert.equal(piece.base, base);
+    assert.equal(piece.resolvedStats?.armor, armor, `${recipe}: base + 1.5 choice supple`);
+    assert.equal(piece.components?.[0]?.amount, hides);
+    commandEquipRare(world, piece.uid);
+    assert.equal(world.player.wearRare[slot], piece.uid, `${recipe} wears into ${slot}`);
+  }
+});
+
+test("exact mailcraft - four plates and two lining, the chest piece outclasses the tag mail", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  const IRON_PLATES = makeResourceStackKey("iron_ore", "ingot", "choice");
+  addResource(world.player.resources, IRON_PLATES, 4);
+  addResource(world.player.resources, SOUND_CLOTH, 2);
+  const note = withRoll(0.5, () => commandCraftExact(world, "mail", [
+    { role: "plate", key: IRON_PLATES },
+    { role: "lining", key: SOUND_CLOTH },
+  ]));
+  assert.match(note ?? "", /mail/i);
+  const mail = world.player.rares[0]!;
+  assert.equal(mail.base, "mail");
+  assert.equal(mail.resolvedStats?.armor, 5.5, "4 base + 1.5 choice sturdy plates; workmanship adds no armor");
+  assert.equal(mail.resolvedStats?.damage, 0);
+  assert.equal(mail.resolvedStats?.hitBonus, 0, "sound cloth handling clamps against the armor form's zero hit cap");
+  assert.deepEqual(mail.components?.[0], { role: "plate", resourceId: "iron_ore", form: "ingot", grade: "choice", amount: 4 });
+  const equipped = commandEquipRare(world, mail.uid);
+  assert.ok(equipped, "mail rare equips generically through ITEM_META");
+  assert.equal(world.player.wearRare.chest, mail.uid, "mail slots into the chest");
+});
+
+test("exact armor set - boots, gauntlets, and greaves carry sturdy into their slots", () => {
+  const world = createWorld();
+  standAtForge(world);
+  world.player.skills.smithing = 100;
+  const IRON_PLATES = makeResourceStackKey("iron_ore", "ingot", "choice");
+  addResource(world.player.resources, IRON_PLATES, 7);
+  addResource(world.player.resources, SOUND_CLOTH, 4);
+  const cases = [
+    { form: "boots", slot: "feet", armor: 3.5 },
+    { form: "gauntlets", slot: "hands", armor: 3.5 },
+    { form: "greaves", slot: "legs", armor: 4.5 },
+  ] as const;
+  for (const { form, slot, armor } of cases) {
+    const note = withRoll(0.5, () => commandCraftExact(world, form, [
+      { role: "plate", key: IRON_PLATES },
+      { role: "lining", key: SOUND_CLOTH },
+    ]));
+    assert.ok(note && note.toLowerCase().includes(form), `${form} crafts through its exact recipe`);
+    const piece = world.player.rares.find((r) => r.base === form)!;
+    assert.equal(piece.resolvedStats?.armor, armor, `${form}: base + 1.5 choice sturdy plates`);
+    const equipped = commandEquipRare(world, piece.uid);
+    assert.ok(equipped, `${form} equips generically through ITEM_META`);
+    assert.equal(world.player.wearRare[slot], piece.uid, `${form} slots into ${slot}`);
+  }
 });

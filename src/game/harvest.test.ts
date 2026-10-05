@@ -180,7 +180,8 @@ test("harvest - an adjacent rock yields exactly one canonical typed ore", () => 
 
   assert.deepEqual(world.player.pack, packBefore);
   assert.equal(
-    resourceCount(world.player.resources, makeResourceStackKey("iron_ore", "ore", "rough")),
+    // Copper displaced iron at this vale rock when the copper family joined the catalog.
+    resourceCount(world.player.resources, makeResourceStackKey("copper_ore", "ore", "rough")),
     1,
   );
 });
@@ -273,7 +274,8 @@ test("harvest - save reload preserves the depletion scar and typed result", () =
     assert.deepEqual(loaded.scars[`${tx},${ty}`], { kind: "dirt" });
     assert.equal(loaded.player.pack.ore, 0);
     assert.equal(
-      resourceCount(loaded.player.resources, makeResourceStackKey("iron_ore", "ore", "rough")),
+      // Same vale fixture as above: copper now resolves where iron once did.
+      resourceCount(loaded.player.resources, makeResourceStackKey("copper_ore", "ore", "rough")),
       1,
     );
     const id = resolveResourceNode({ seed: world.seed, tx, ty, nodeKind: "rock" }).identity.nodeId;

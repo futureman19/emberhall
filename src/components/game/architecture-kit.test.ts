@@ -16,6 +16,7 @@ import { hospitalityKitName } from "./hospitality-kit.ts";
 import { commonsKitName } from "./commons-kit.ts";
 import { signageKitName } from "./signage-kit.ts";
 import { INTERIOR_KINDS, interiorKitName } from "./interior-kit.ts";
+import { SPECS } from "../../game/placeables/legacy-buildings.ts";
 
 const root = new URL("../../../", import.meta.url);
 const text = (file: string) => readFileSync(new URL(file, root), "utf8");
@@ -89,7 +90,7 @@ test("all new GLBs load with measured finite, grounded Y-up bounds and vertex-co
 });
 
 test("exported door corridors and X-running gate passage remain clear; roofs face up", async () => {
-  const originalDoors: Record<string,[number,number,number]> = {shop:[-.5,.5,2],townhome:[0,1,2],townhouse:[-.5,.5,2],cottage:[0,.5,1.5],porch:[0,.5,1],hut:[0,.5,1.5],homestead:[-.5,.5,2],gatehouse:[-.5,1,1.5]};
+  const originalDoors: Record<string,[number,number,number]> = {shop:[-.5,.5,2],apothecary:[-.5,.5,2],townhome:[0,1,2],townhouse:[-.5,.5,2],cottage:[0,.5,1.5],porch:[0,.5,1],hut:[0,.5,1.5],homestead:[-.5,.5,2],gatehouse:[-.5,1,1.5]};
   for(const kind of ARCHITECTURE_KINDS) {
     const {scene}=await load(kind), door=manifest[kind].door;
     if(door) {
@@ -113,11 +114,8 @@ test("exported door corridors and X-running gate passage remain clear; roofs fac
 
 test("actual canonical specs retain original indoor contents, floors and keep story logic", () => {
   const source=text("src/components/game/building-meshes.tsx");
-  const code=ts.transpile(source.slice(source.indexOf("function put("),source.indexOf("function occupant("))+"\nexport {SPECS};",{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022});
-  const exports: {SPECS?:Record<string,{voxels:Array<{x:number;y:number;z:number;cut?:boolean}>}>}={};
-  new Function("exports",code)(exports);
   for(const kind of ARCHITECTURE_KINDS) {
-    const b=BUILD_SIZE[kind], vox=exports.SPECS![kind].voxels;
+    const b=BUILD_SIZE[kind], vox=SPECS[kind].voxels;
     for(const v of vox) {
       if(v.cut) assert.equal(retainArchitectureInteriorVoxel(kind,v),false);
       else if(v.y===0) assert.equal(retainArchitectureInteriorVoxel(kind,v),true);
@@ -144,10 +142,7 @@ test("actual canonical specs retain original indoor contents, floors and keep st
 
 test("keep cutaway removes ceilings and stair-mouth occluders while retaining walking treads", () => {
   const source = text("src/components/game/building-meshes.tsx");
-  const specsCode = ts.transpile(source.slice(source.indexOf("function put("), source.indexOf("function occupant(")) + "\nexport {SPECS};", { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 });
-  const exports: { SPECS?: Record<string, { voxels: Array<{ x: number; y: number; z: number; t: string; cut?: boolean }> }> } = {};
-  new Function("exports", specsCode)(exports);
-  const spec = exports.SPECS!.keep!;
+  const spec = SPECS.keep;
   // Execute the actual renderer's layer loop, not a test-only copy of its filter.
   const loop = source.slice(source.indexOf("    const cap = inside"), source.indexOf("    return { solid, cut, interior, furnitureProxies };"));
   const run = new Function("spec", "inside", "story", "THREE", "kind", "keepStairCut", `
@@ -172,7 +167,7 @@ test("keep cutaway removes ceilings and stair-mouth occluders while retaining wa
     const visible = [...Object.values(actual.solid).flat(),...Object.values(actual.cut).flat()] as THREE.Vector3[];
     assert.deepEqual(visible.map(v=>v.toArray().join(",")).sort(),spec.voxels.map(coords).sort(),"outside restores the exact original multiset at every story");
   }
-  for (const [kind,other] of Object.entries(exports.SPECS!)) {
+  for (const [kind,other] of Object.entries(SPECS)) {
     if(kind==="keep")continue;
     const actual=run(other,true,3,THREE);
     const visible=Object.values(actual.solid).flat() as THREE.Vector3[];
@@ -193,14 +188,21 @@ function buildingPointerHarness(options: { kind?: string; inside?: boolean; phas
   }
   visit(component);
   assert.ok(handler);
-  const code = ts.transpile(`exports.make = (env) => { const { b, inside, useGame, getWorld, leftAt, hitAt, stationOf } = env; return ${handler}; };`, {module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022});
+  const code = ts.transpile(`exports.make = (env) => { const { b, inside, useGame, getWorld, leftAt, hitAt, stationOf, beginWorldTouch } = env; return ${handler}; };`, {module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022});
   const exports: { make?: (env: Record<string,unknown>) => (e: Record<string,unknown>) => void } = {};
   new Function("exports", code)(exports);
   const calls: Array<{method:string;args:unknown[]}> = [];
   const record = (method:string) => (...args:unknown[]) => calls.push({method,args});
   const state = { phase: options.phase ?? "playing", buildKind: options.buildKind ?? null, select:record("select"), openCtx:record("openCtx"), useStation:record("useStation") };
-  const run = exports.make!({ b:{id:"sample",kind:options.kind??"keep",tx:176,ty:320}, inside:options.inside??true, useGame:{getState:()=>state}, getWorld:()=>({people:[{id:"banker",role:"banker",x:176,z:320}]}), leftAt:record("leftAt"), hitAt:record("hitAt"), stationOf:(kind:string)=>kind==="forge"?"forge":null });
-  return { calls, fire:(button=0, point={x:181.2,y:7.11,z:320.3}) => run({button,point,clientX:109,clientY:333,stopPropagation:record("stop")}) };
+  // Mouse-only harness: the live hook declines mouse contacts. Actual touch
+  // hold/tap/drag/multicontact behavior executes the real hook and mesh callbacks
+  // in scripts/audit-ui-review-regressions.test.mjs, not this adapter.
+  const beginWorldTouch = (point: { pointerType: string }) => {
+    assert.equal(point.pointerType, "mouse", "touch must use the real-hook regression harness");
+    return false;
+  };
+  const run = exports.make!({ b:{id:"sample",kind:options.kind??"keep",tx:176,ty:320}, inside:options.inside??true, useGame:{getState:()=>state}, getWorld:()=>({people:[{id:"banker",role:"banker",x:176,z:320}]}), leftAt:record("leftAt"), hitAt:record("hitAt"), stationOf:(kind:string)=>kind==="forge"?"forge":null, beginWorldTouch });
+  return { calls, fire:(button=0, point={x:181.2,y:7.11,z:320.3}) => run({button,nativeEvent:{pointerType:"mouse",pointerId:1,button,clientX:109,clientY:333},point,clientX:109,clientY:333,stopPropagation:record("stop")}) };
 }
 
 for (const button of [0,2]) test(`inside keep pointer ${button} uses the visible surface once`, () => {
@@ -232,10 +234,7 @@ test("other-building bank and crafting dispatch remain intact", () => {
 for (const [fromZ, z, story] of [[316,319,3],[319,322,2],[322,325,1],[323,324,2/3],[324,325,1/3]]) {
   for (const dx of [-.35,0,.35]) test(`lower stair first-hit dispatch ${fromZ}->${z} offset ${dx}`, () => {
     const source = text("src/components/game/building-meshes.tsx");
-    const exports: { SPECS?: Record<string, { voxels: Array<{x:number;y:number;z:number;t:string}> }> } = {};
-    const code = ts.transpile(source.slice(source.indexOf("function put("),source.indexOf("function occupant(")) + "\nexport {SPECS};", {module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022});
-    new Function("exports", code)(exports);
-    const spec = exports.SPECS!.keep;
+    const spec = SPECS.keep;
     const loop = source.slice(source.indexOf("    const cap = inside"),source.indexOf("    return { solid, cut, interior, furnitureProxies };"));
     const run = new Function("spec", "story", "THREE", "keepStairCut", `
       const b={kind:"keep",tx:176,ty:320},y0=.6,B=.5,KEEP_STORY_VOX=4,inside=true,furnishings=null;
@@ -312,10 +311,7 @@ function figureBob(p: { isPlayer: boolean; x: number; z: number; bob: number; pa
 
 for (const [story,x,z] of [[0,176,325],[1,181,322],[2,181,319],[3,181,316]]) {
   test(`keep floor seating story ${story}: idle soles stay on original floor throughout bob cycle`, () => {
-    const source = text("src/components/game/building-meshes.tsx");
-    const exports: { SPECS?: Record<string, { fuse: boolean; voxels: Array<{x:number;y:number;z:number;t:string}> }> } = {};
-    new Function("exports", ts.transpile(source.slice(source.indexOf("function put("), source.indexOf("function occupant(")) + "\nexport {SPECS};", {module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022})) (exports);
-    const spec = exports.SPECS!.keep;
+    const spec = SPECS.keep;
     assert.equal(spec.fuse, true);
     const floor = spec.voxels.filter(v => v.y === story * 4 && v.t === (story === 0 ? "stone" : "timber") && Math.abs(176+(v.x+.5)*.5-x)<=.26 && Math.abs(320+(v.z+.5)*.5-z)<=.26);
     assert.ok(floor.length > 0);

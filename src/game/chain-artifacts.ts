@@ -1,3 +1,4 @@
+import { Hash } from "@bsv/sdk";
 import { CLASS_META } from "./catalog.ts";
 import { log } from "./world.ts";
 import { LOOK_SCHEMA, type HairStyleId, type LookRecipeV1 } from "./look/types.ts";
@@ -19,6 +20,8 @@ import type { ClassId, Person, World } from "./types.ts";
 
 export const CHAIN_ARTIFACT_APP = "emberhall" as const;
 export const CHAIN_ARTIFACT_VERSION = 4 as const;
+export const PART_INSCRIPTION_VERSION = 5 as const;
+export const PART_COMMITMENT_DOMAIN = "emberhall.part-content/1\n" as const;
 export const CHAIN_MINT_AUTHORITY = "client-beta" as const;
 export const MAX_LOOK_PARTS = 16;
 
@@ -37,7 +40,8 @@ export interface CharacterLookInscription {
 
 export interface PartInscription {
   readonly app: typeof CHAIN_ARTIFACT_APP;
-  readonly v: typeof CHAIN_ARTIFACT_VERSION;
+  readonly v: typeof PART_INSCRIPTION_VERSION;
+  readonly commitment: { readonly v: 1; readonly algorithm: "sha256"; readonly digest: string };
   readonly type: "part";
   readonly part: VoxelPartV1 & { author: string; rarity: PartRarity };
   readonly world: number;
@@ -203,6 +207,12 @@ function parsePart(value: unknown): PartInscription["part"] | null {
   return part;
 }
 
+function partCommitment(part: PartInscription["part"]): PartInscription["commitment"] {
+  const digest = Hash.sha256(PART_COMMITMENT_DOMAIN + JSON.stringify(part))
+    .map((byte) => byte.toString(16).padStart(2, "0")).join("");
+  return { v: 1, algorithm: "sha256", digest };
+}
+
 export function encodePartInscription(world: World, part: VoxelPartV1): PartInscription | null {
   const person = playerPerson(world);
   const parsed = parsePart({
@@ -213,8 +223,9 @@ export function encodePartInscription(world: World, part: VoxelPartV1): PartInsc
   if (!parsed) return null;
   return Object.freeze({
     app: CHAIN_ARTIFACT_APP,
-    v: CHAIN_ARTIFACT_VERSION,
+    v: PART_INSCRIPTION_VERSION,
     type: "part",
+    commitment: partCommitment(parsed),
     part: parsed,
     world: world.seed,
     hour: Math.floor(world.hour),
@@ -222,12 +233,17 @@ export function encodePartInscription(world: World, part: VoxelPartV1): PartInsc
 }
 
 export function decodePartInscription(value: unknown): PartInscription | null {
-  const raw = snapshotRecord(value, ["app", "v", "type", "part", "world", "hour"]);
-  if (!raw || raw.app !== CHAIN_ARTIFACT_APP || raw.v !== CHAIN_ARTIFACT_VERSION || raw.type !== "part") return null;
+  const raw = snapshotRecord(value, ["app", "v", "type", "part", "commitment", "world", "hour"]);
+  if (!raw || raw.app !== CHAIN_ARTIFACT_APP || raw.v !== PART_INSCRIPTION_VERSION || raw.type !== "part") return null;
   if (!Number.isSafeInteger(raw.world) || !Number.isFinite(raw.hour)) return null;
   const part = parsePart(raw.part);
   if (!part) return null;
-  return { app: CHAIN_ARTIFACT_APP, v: CHAIN_ARTIFACT_VERSION, type: "part", part, world: raw.world as number, hour: raw.hour as number };
+  const commitment = snapshotRecord(raw.commitment, ["v", "algorithm", "digest"]);
+  if (!commitment || commitment.v !== 1 || commitment.algorithm !== "sha256" ||
+    typeof commitment.digest !== "string" || !/^[0-9a-f]{64}$/.test(commitment.digest)) return null;
+  const expected = partCommitment(part);
+  if (commitment.digest !== expected.digest) return null;
+  return { app: CHAIN_ARTIFACT_APP, v: PART_INSCRIPTION_VERSION, type: "part", commitment: expected, part, world: raw.world as number, hour: raw.hour as number };
 }
 
 export function decodeChainArtifact(value: unknown): EmberhallChainArtifact | null {
@@ -264,19 +280,22 @@ export function localPartIdFromOrigin(origin: string): string | null {
 }
 
 export function previewRedeemPart(inscription: PartInscription, origin: string): string | null {
-  const id = localPartIdFromOrigin(origin);
-  if (!id) return "That ordinal has no stable origin.";
-  const existing = listParts().find((part) => part.id === id);
+  if (!OUTPOINT.test(origin)) return "That ordinal has no stable origin.";
+  const decoded = decodePartInscription(inscription);
+  if (!decoded) return "That sculpture could not be read. Your collection is unchanged.";
+  const existing = listParts().find((part) => part.id === decoded.part.id);
   if (!existing) return null;
-  const candidate = { ...structuredClone(inscription.part), id };
-  return JSON.stringify(existing) === JSON.stringify(candidate) ? null : "A different sculpture already holds that chain origin.";
+  const canonicalExisting = parsePart(existing);
+  return canonicalExisting && JSON.stringify(canonicalExisting) === JSON.stringify(decoded.part)
+    ? null
+    : "A different sculpture already uses that part ID.";
 }
 
 export function applyRedeemPart(world: World, inscription: PartInscription, origin: string): string {
   const blocked = previewRedeemPart(inscription, origin);
   if (blocked) throw new Error(blocked);
-  const id = localPartIdFromOrigin(origin)!;
-  savePart({ ...structuredClone(inscription.part), id });
+  const decoded = decodePartInscription(inscription)!;
+  savePart(structuredClone(decoded.part));
   const note = `${inscription.part.name} returns to the sculptor's bench.`;
   log(world, note);
   return note;

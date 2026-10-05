@@ -9,23 +9,36 @@ export type GradeResourceId =
   | "redwood"
   | "yew"
   | "ghostwood"
+  | "ironwood"
+  | "copper_ore"
+  | "tin_ore"
+  | "bronze"
   | "iron_ore"
   | "highland_ore"
+  | "emberite"
+  | "moon_silver"
   | "common_cloth"
-  | "fine_linen";
-export type GemResourceId = "ruby" | "sapphire";
+  | "fine_linen"
+  | "hide"
+  | "wolf_fang"
+  | "stag_antler"
+  | "drake_scale"
+  | "boar_tusk"
+  | "aurochs_horn";
+export type GemResourceId = "ruby" | "sapphire" | "emerald" | "diamond" | "amethyst";
+export type BoneResourceId = "wolf_fang" | "stag_antler" | "drake_scale" | "boar_tusk" | "aurochs_horn";
 export type ResourceId = GradeResourceId | GemResourceId;
 
-export type NonGemResourceKind = "timber" | "ore" | "fiber";
+export type NonGemResourceKind = "timber" | "ore" | "fiber" | "hide" | "bone";
 export type ResourceKind = NonGemResourceKind | "gem";
-export type GradeResourceForm = "log" | "board" | "ore" | "ingot" | "cloth";
+export type GradeResourceForm = "log" | "board" | "ore" | "ingot" | "cloth" | "hide" | "bone";
 export type ResourceForm = GradeResourceForm | "gem";
 export type MaterialGrade = "rough" | "sound" | "choice" | "pristine";
 export type GemClarity = "cracked" | "flawed" | "cut" | "flawless" | "perfect";
 export type MaterialQuality = MaterialGrade | GemClarity;
 export type QualityForResource<I extends ResourceId> = I extends GemResourceId ? GemClarity : MaterialGrade;
-export type GradeMaterialTraitId = "accuracy" | "damage" | "handling";
-export type ClarityMaterialTraitId = "power" | "fortune";
+export type GradeMaterialTraitId = "accuracy" | "damage" | "handling" | "keen" | "sturdy" | "supple" | "ember" | "moon" | "hunters" | "ferocity";
+export type ClarityMaterialTraitId = "power" | "fortune" | "precision" | "protection" | "mastery";
 export type MaterialTraitId = GradeMaterialTraitId | ClarityMaterialTraitId;
 export type ProcessingStation = "bench" | "forge" | "fire";
 
@@ -34,15 +47,19 @@ export interface SkillRequirement {
   readonly minimum: number;
 }
 
+export interface ProcessingInput {
+  readonly resourceId: GradeResourceId;
+  readonly form: ResourceForm;
+  readonly quantity: number;
+}
+
 export interface ProcessingRoute {
   readonly id: string;
   readonly operation: "saw" | "smelt";
   readonly station: ProcessingStation;
   readonly skill: SkillRequirement;
-  readonly input: {
-    readonly form: ResourceForm;
-    readonly quantity: number;
-  };
+  /** Primary input first; extra inputs make the route an alloy (weakest-link grade). */
+  readonly inputs: readonly ProcessingInput[];
   readonly output: {
     readonly form: ResourceForm;
     readonly quantity: number;
@@ -73,13 +90,17 @@ interface ResourceDefinitionBase {
   readonly visual: ResourceVisual;
 }
 
-export type ResourceKindFor<I extends ResourceId> = I extends "iron_ore" | "highland_ore"
+export type ResourceKindFor<I extends ResourceId> = I extends "copper_ore" | "tin_ore" | "bronze" | "iron_ore" | "highland_ore" | "emberite" | "moon_silver"
   ? "ore"
   : I extends "common_cloth" | "fine_linen"
     ? "fiber"
-    : I extends GemResourceId
-      ? "gem"
-      : "timber";
+    : I extends "hide"
+      ? "hide"
+      : I extends "wolf_fang" | "stag_antler" | "drake_scale" | "boar_tusk" | "aurochs_horn"
+        ? "bone"
+        : I extends GemResourceId
+          ? "gem"
+          : "timber";
 
 export type ResourceFormFor<I extends ResourceId> = ResourceKindFor<I> extends "timber"
   ? "log" | "board"
@@ -87,7 +108,11 @@ export type ResourceFormFor<I extends ResourceId> = ResourceKindFor<I> extends "
     ? "ore" | "ingot"
     : ResourceKindFor<I> extends "fiber"
       ? "cloth"
-      : "gem";
+      : ResourceKindFor<I> extends "hide"
+        ? "hide"
+        : ResourceKindFor<I> extends "bone"
+          ? "bone"
+          : "gem";
 
 export type GradeResourceDefinition<I extends GradeResourceId = GradeResourceId> = ResourceDefinitionBase & {
   readonly id: I;
@@ -158,12 +183,24 @@ const GRADE_RESOURCE_IDS = [
   "redwood",
   "yew",
   "ghostwood",
+  "ironwood",
+  "copper_ore",
+  "tin_ore",
+  "bronze",
   "iron_ore",
   "highland_ore",
+  "emberite",
+  "moon_silver",
   "common_cloth",
   "fine_linen",
+  "hide",
+  "wolf_fang",
+  "stag_antler",
+  "drake_scale",
+  "boar_tusk",
+  "aurochs_horn",
 ] as const satisfies readonly GradeResourceId[];
-const GEM_RESOURCE_IDS = ["ruby", "sapphire"] as const satisfies readonly GemResourceId[];
+const GEM_RESOURCE_IDS = ["ruby", "sapphire", "emerald", "diamond", "amethyst"] as const satisfies readonly GemResourceId[];
 const MATERIAL_GRADES = ["rough", "sound", "choice", "pristine"] as const satisfies readonly MaterialGrade[];
 const GEM_CLARITIES = ["cracked", "flawed", "cut", "flawless", "perfect"] as const satisfies readonly GemClarity[];
 

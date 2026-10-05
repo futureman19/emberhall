@@ -27,7 +27,7 @@ test('hospitality retains original interior content, not duplicate market pillar
 test('hospitality original footprint and entry contracts stay fixed',()=>{
  assert.deepEqual(BUILD_SIZE.kitchen,{x0:-3,x1:3,z0:-3,z1:3});
  for(const k of ['tavern','market'] as const)assert.deepEqual(BUILD_SIZE[k],{x0:-4,x1:4,z0:-3,z1:3});
- const s=readFileSync(new URL('./building-meshes.tsx',import.meta.url),'utf8');
+ const s=readFileSync(new URL('../../game/placeables/legacy-buildings.ts',import.meta.url),'utf8');
  assert.match(s,/function makeKitchen\(\)[\s\S]*?door: \{ x: 0, w: 2, h: 2 \}/);
  assert.match(s,/function makeTavern\(\)[\s\S]*?door: \{ x: -1, w: 2, h: 3 \}/);
 });

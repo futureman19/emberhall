@@ -3,12 +3,13 @@ Run with Blender --background --factory-startup --python-exit-code 1 --python th
 Game coordinates X,Y-up,+Z-front are mapped to Blender X,-Z,Y before glTF export.
 Regeneration overwrites fauna sources/exports, never existing non-fauna art.
 """
-import bpy, json, re, math, hashlib
+import bpy, json, re, math, hashlib, os
 from pathlib import Path
 from mathutils import Vector
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'public/art/lanternwood'
 OUT.mkdir(parents=True, exist_ok=True)
+MODE = os.environ.get('FAUNA_EXPORT', 'all')
 text = (ROOT / 'src/components/game/fauna-meshes.tsx').read_text()
 COLORS = dict(re.findall(r'  (\w+): "(#[a-f0-9]+)"', text.split('const SIZE')[0]))
 SIZES = {k: float(v) for k,v in re.findall(r'  (\w+): ([\d.]+)', text.split('const SIZE')[1].split('const DARK')[0])}
@@ -254,21 +255,54 @@ def author(k):
     front=bpy.data.objects.new(k+'__front_axis',None); bpy.context.collection.objects.link(front); front.location=coord((0,1,1)); front['front_axis']='+Z'; front['species']=k
     return list(parts),front
 
-entries=[]; sources=[]
-# Individual sources keep all editable semantic parts; also one collection per species.
-for k in COLORS:
-    authored,front=author(k)
-    collection=bpy.data.collections.new('Fauna_'+k); bpy.context.scene.collection.children.link(collection)
-    for o in authored+[front]:
-        for c in list(o.users_collection): c.objects.unlink(o)
-        collection.objects.link(o)
-    sources.append((k,authored,front))
-# Save the actual named unmerged authoring source before export mutation.
-bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'art/blender/fauna-worldwide.blend'))
-opaque=material('#ffffff'); opaque.name='Fauna_VertexClay'
-vertex_node=opaque.node_tree.nodes.new('ShaderNodeVertexColor'); vertex_node.layer_name='ClayColor'
-opaque.node_tree.links.new(vertex_node.outputs['Color'],opaque.node_tree.nodes.get('Principled BSDF').inputs['Base Color'])
-for k,authored,front in sources:
+def mix_hex(a,b,t):
+    ar,ag,ab=(int(a[i:i+2],16) for i in (1,3,5)); br,bg,bb=(int(b[i:i+2],16) for i in (1,3,5))
+    return '#%02x%02x%02x' % (int(ar+(br-ar)*t), int(ag+(bg-ag)*t), int(ab+(bb-ab)*t))
+
+def retint_parts(targets, tint, amount=0.72):
+    keep=('eye','nose','ivory','glint','socket')
+    for o in targets:
+        if any(k in o.get('part','') for k in keep): continue
+        p=o.data.materials[0].node_tree.nodes.get('Principled BSDF')
+        glow=p.inputs['Emission Strength'].default_value>0
+        name=o.data.materials[0].name
+        hx=name.split('_')[-1]
+        src='#'+hx if len(hx)==6 else COLORS[current]
+        o.data.materials.clear(); o.data.materials.append(material(mix_hex(src,tint,amount), glow))
+
+def dress_thornbound():
+    for i,z in enumerate((-.4,-.12,.16,.42)):
+        chain('thorn_vine',[ (.06,.72,z), (.22,.98,z+.06), (.04,1.22,z-.04) ], .045, '#2f5c32')
+        rod('vine_thorn',(.2,.96,z),(.3,1.12,z+.05),.03,'#1e3f22',0)
+    oval('thorn_crown',(0,1.42,.62),(.16,.12,.16),'#3d6b3a')
+
+def dress_stonebound():
+    for i,z in enumerate((-.38,-.08,.22)):
+        rod('stone_crack',(-.04,.62,z),(.08,.86,z+.1),.022,'#4a4a48',0)
+        oval('stone_plate',(.2,.7,z),(.18,.07,.15),'#8a8a86')
+    oval('gravel_ruff',(0,.62,.4),(.4,.14,.2),'#6e6e6a')
+
+def dress_galebound():
+    for i,z in enumerate((-.28,.02,.3)):
+        rod('gale_streak',(0,.62,z),(.14,.92,z-.24),.032,'#e8eef2',.01)
+    oval('wind_mane',(0,.88,.12),(.22,.15,.3),'#d5dee6')
+    for side in (-1,1):
+        rod('gale_tuft'+str(side),(side*.22,1.12,.5),(side*.28,1.34,.42),.028,'#c9d4dc',0)
+
+def dress_tidebound():
+    for i,z in enumerate((-.28,.02,.3)):
+        oval('tide_slick',(.14,.52,z),(.2,.055,.16),'#2d6a86')
+    oval('wet_sheen',(0,.58,.9),(.22,.07,.14),'#4f8aa0')
+    oval('tide_dew',(.16,.42,.2),(.1,.05,.1),'#3a7a96')
+
+def bake_export(k, family, path, authored, front):
+    opaque=None
+    for m in bpy.data.materials:
+        if m.name=='Fauna_VertexClay': opaque=m
+    if opaque is None:
+        opaque=material('#ffffff'); opaque.name='Fauna_VertexClay'
+        vertex_node=opaque.node_tree.nodes.new('ShaderNodeVertexColor'); vertex_node.layer_name='ClayColor'
+        opaque.node_tree.links.new(vertex_node.outputs['Color'],opaque.node_tree.nodes.get('Principled BSDF').inputs['Base Color'])
     bpy.ops.object.select_all(action='DESELECT'); copies=[]
     for original in authored:
         o=original.copy(); o.data=original.data.copy(); bpy.context.scene.collection.objects.link(o); o.select_set(True); copies.append(o)
@@ -279,17 +313,65 @@ for k,authored,front in sources:
             for d in attr.data: d.color=color
             o.data.materials.clear(); o.data.materials.append(opaque)
     bpy.context.view_layer.objects.active=copies[0]; bpy.ops.object.join(); merged=bpy.context.object; merged.name='Fauna_'+k
-    merged['kind']=k; merged['family']=FAMILY[k]; merged['front_axis']='+Z'; merged['ground_pivot']=True
-    marker=front.copy(); bpy.context.scene.collection.objects.link(marker); marker.name='front_axis'; marker.select_set(True)
-    path=OUT/('fauna-'+k+'.glb')
+    merged['kind']=k; merged['family']=family; merged['front_axis']='+Z'; merged['ground_pivot']=True
+    marker=front.copy(); bpy.context.collection.objects.link(marker); marker.name='front_axis'; marker.select_set(True)
     bpy.ops.export_scene.gltf(filepath=str(path),export_format='GLB',use_selection=True,export_yup=True,export_animations=False,export_extras=True)
     mesh=merged.data; mesh.calc_loop_triangles(); triangles=len(mesh.loop_triangles)
     assert triangles<2500,(k,triangles)
     points=[merged.matrix_world @ v.co for v in mesh.vertices]
     mins=[min(p[i] for p in points) for i in range(3)]; maxs=[max(p[i] for p in points) for i in range(3)]
-    entries.append(dict(kind=k,family=FAMILY[k],file=path.name,size=SIZES[k],triangles=triangles,materials=len(mesh.materials),bytes=path.stat().st_size,sha256=hashlib.sha256(path.read_bytes()).hexdigest(),bounds={'min':[mins[0],mins[2],-maxs[1]],'max':[maxs[0],maxs[2],-mins[1]]},parts=[o['part'] for o in authored]))
+    entry=dict(kind=k,family=family,file=path.name,size=SIZES.get(k,SIZES[family] if family in SIZES else 1),triangles=triangles,materials=len(mesh.materials),bytes=path.stat().st_size,sha256=hashlib.sha256(path.read_bytes()).hexdigest(),bounds={'min':[mins[0],mins[2],-maxs[1]],'max':[maxs[0],maxs[2],-mins[1]]},parts=[o['part'] for o in authored])
     bpy.data.objects.remove(merged,do_unlink=True); bpy.data.objects.remove(marker,do_unlink=True)
-    print('FAUNA_EXPORT',k,triangles,path.stat().st_size,flush=True)
-manifest={'schema':1,'generator':'art/blender/build_fauna.py','source':'art/blender/fauna-worldwide.blend','coordinateSystem':'Y-up +Z-front ground-pivot; normalized SIZE units','speciesCount':len(entries),'species':entries}
-(OUT/'fauna-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
-print('FAUNA_COMPLETE',len(entries),'species',sum(e['bytes'] for e in entries),'bytes',flush=True)
+    return entry
+
+def export_spell_variants():
+    variants=[
+        dict(id='thornbound', kind='brambleback_stag', tint='#3f7a48', dress=dress_thornbound),
+        dict(id='stonebound', kind='ironwood_boar', tint='#7a7a76', dress=dress_stonebound),
+        dict(id='galebound', kind='pine_lynx', tint='#c9d4dc', dress=dress_galebound),
+        dict(id='tidebound', kind='moss_badger', tint='#3a6f88', dress=dress_tidebound),
+    ]
+    entries=[]
+    for v in variants:
+        authored,front=author(v['kind'])
+        n_orig=len(parts)
+        v['dress']()
+        bpy.context.view_layer.update()
+        low=min((o.matrix_world @ vco.co).z for o in parts for vco in o.data.vertices)
+        for o in parts: o.location.z-=low
+        front.location.z-=low
+        retint_parts(parts[:n_orig], v['tint'])
+        path=OUT/('spell-fauna-'+v['id']+'.glb')
+        entry=bake_export(v['id'], FAMILY[v['kind']], path, list(parts), front)
+        entry['id']=v['id']; entry['kind']=v['kind']; entry['baseKind']=v['kind']
+        entries.append(entry)
+        print('FAUNA_SPELL_EXPORT',v['id'],entry['triangles'],entry['bytes'],flush=True)
+    manifest={'schema':1,'generator':'art/blender/build_fauna.py','coordinateSystem':'Y-up +Z-front ground-pivot; normalized SIZE units','variantCount':len(entries),'variants':entries}
+    (OUT/'spell-fauna-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+    print('FAUNA_SPELL_COMPLETE',len(entries),'variants',sum(e['bytes'] for e in entries),'bytes',flush=True)
+
+entries=[]; sources=[]
+# Individual sources keep all editable semantic parts; also one collection per species.
+if MODE in ('all','species'):
+    for k in COLORS:
+        authored,front=author(k)
+        collection=bpy.data.collections.new('Fauna_'+k); bpy.context.scene.collection.children.link(collection)
+        for o in authored+[front]:
+            for c in list(o.users_collection): c.objects.unlink(o)
+            collection.objects.link(o)
+        sources.append((k,authored,front))
+    # Save the actual named unmerged authoring source before export mutation.
+    bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'art/blender/fauna-worldwide.blend'))
+    opaque=material('#ffffff'); opaque.name='Fauna_VertexClay'
+    vertex_node=opaque.node_tree.nodes.new('ShaderNodeVertexColor'); vertex_node.layer_name='ClayColor'
+    opaque.node_tree.links.new(vertex_node.outputs['Color'],opaque.node_tree.nodes.get('Principled BSDF').inputs['Base Color'])
+    for k,authored,front in sources:
+        entry=bake_export(k, FAMILY[k], OUT/('fauna-'+k+'.glb'), authored, front)
+        entry['size']=SIZES[k]
+        entries.append(entry)
+        print('FAUNA_EXPORT',k,entry['triangles'],entry['bytes'],flush=True)
+    manifest={'schema':1,'generator':'art/blender/build_fauna.py','source':'art/blender/fauna-worldwide.blend','coordinateSystem':'Y-up +Z-front ground-pivot; normalized SIZE units','speciesCount':len(entries),'species':entries}
+    (OUT/'fauna-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+    print('FAUNA_COMPLETE',len(entries),'species',sum(e['bytes'] for e in entries),'bytes',flush=True)
+if MODE in ('all','variants'):
+    export_spell_variants()

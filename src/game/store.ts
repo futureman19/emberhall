@@ -1,10 +1,12 @@
 import { create } from "zustand";
 import { commandTrack } from "./tracking.ts";
+import { commandDig, commandFill } from "./digging.ts";
 import { commandTravel } from "./gates.ts";
 import {
   commandCraft,
   commandCraftBatch,
   commandCraftExact,
+  commandRefineExact,
   craftReach,
   stationOf,
   type ExactMaterialSelection,
@@ -15,7 +17,7 @@ import { commandPick } from "./herbs.ts";
 import { commandPlantTree } from "./forestry.ts";
 import { getWorld, resetWorld, setWorld, snapshot } from "./live.ts";
 import type { LookChoice } from "./look/types.ts";
-import { commandCast, forgetMark, OFFENSIVE_SPELLS, SPELL_META, hasBook } from "./magery.ts";
+import { commandCast, forgetMark, OFFENSIVE_SPELLS, SPELL_META, targetsGround, hasBook } from "./magery.ts";
 import type { CastTarget } from "./magery.ts";
 import {
   commandApproach,
@@ -58,6 +60,11 @@ import { clearSave, hasSave, loadSave, writeSave } from "./save.ts";
 import { recruitPerson, setSpeed, tickWorld } from "./sim.ts";
 import { completeObjective, placeBuilding } from "./world.ts";
 import { HOUSE_RANGE, commandHouseItem, commandHouseTake, houseKindForDeed, isHouseKind, placeHouse } from "./house.ts";
+import { applyBlueprint, captureBlueprint } from "./blueprints.ts";
+import { reclaimObject } from "./placeables/commands.ts";
+import { isDoorOpen, objectFn, usePlaced as applyPlaced } from "./placeables/functions.ts";
+import { withHistory } from "./placeables/history.ts";
+import { enterHoldBuild as startHold, exitHoldBuild as stopHold, getHoldBuild, selectHoldPiece } from "./placeables/build-mode.ts";
 import { COURT, stationNear } from "./atlas.ts";
 import type { BuildingKind, CtxTarget, CtxVerb, ItemId, PanelId, ResourceStackKey, Speed, SpellId, Snapshot, WearSlot } from "./types.ts";
 import { applyMint, applyMintRare, applyRedeem, type RareInscription } from "./vault.ts";
@@ -79,6 +86,9 @@ interface GameUI {
   panel: PanelId;
   ctx: { x: number; y: number; target: CtxTarget } | null;
   toast: string | null;
+  /** Remains set until a real save succeeds; UI must not imply progress is durable. */
+  saveError: string | null;
+  saveNow: () => boolean;
   openBook: boolean;
   openCraft: boolean;
   openVault: boolean;
@@ -92,6 +102,8 @@ interface GameUI {
   gateIgnoreId: string | null;
   buildKind: BuildingKind | null;
   buildAt: { tx: number; ty: number } | null;
+  /** Bumps React when isolated Hold-build state changes. Not saved. */
+  holdRev: number;
   tillArmed: boolean;
   tillAt: { tx: number; ty: number } | null;
   loadNote: string;
@@ -167,6 +179,7 @@ interface GameUI {
   makeRecipe: (id: string) => void;
   makeRecipeBatch: (id: string, times: number) => void;
   makeExactRecipe: (id: string, selections: readonly ExactMaterialSelection[]) => void;
+  refineStack: (key: ResourceStackKey) => void;
   inlayItem: (uid: string, key: ResourceStackKey) => void;
   useStation: (id: string) => void;
   cast: (spell: SpellId, target?: CastTarget) => void;
@@ -174,7 +187,15 @@ interface GameUI {
   recruit: (id: string) => void;
   speed: (s: Speed) => void;
   armBuild: (kind: BuildingKind | null) => void;
+  cancelPlacement: () => void;
   hoverBuild: (tx: number, ty: number) => void;
+  enterHold: () => void;
+  exitHold: () => void;
+  armHoldPiece: (id: string | null) => void;
+  reclaimHold: (id: string) => void;
+  captureHold: (name: string) => void;
+  stampBlueprint: (id: string) => void;
+  noteHold: () => void;
   armTill: (on: boolean) => void;
   hoverTill: (tx: number, ty: number) => void;
 }
@@ -207,6 +228,20 @@ export const useGame = create<GameUI>((set, get) => ({
   panel: "none",
   ctx: null,
   toast: null,
+  saveError: null,
+  saveNow: () => {
+    const result = writeSave(getWorld());
+    if (result.ok) {
+      set({ saveError: null });
+      return true;
+    }
+    const message = result.reason === "invalid-state"
+      ? "Progress could not be saved because the game state is invalid. Keep this tab open."
+      : "Progress could not be saved in this browser. Keep this tab open and allow browser storage.";
+    if (get().saveError !== message) get().flash(message);
+    set({ saveError: message });
+    return false;
+  },
   openBook: false,
   openCraft: false,
   openVault: false,
@@ -219,6 +254,7 @@ export const useGame = create<GameUI>((set, get) => ({
   gateIgnoreId: null,
   buildKind: null,
   buildAt: null,
+  holdRev: 0,
   tillArmed: false,
   tillAt: null,
   loadNote: "The dirt is listening.",
@@ -226,6 +262,7 @@ export const useGame = create<GameUI>((set, get) => ({
   loadTitle: "Raising the vale",
   begin: (fresh = false) => {
     if (get().phase === "raising") return;
+    stopHold();
     const started = performance.now();
     set({
       phase: "raising",
@@ -248,9 +285,20 @@ export const useGame = create<GameUI>((set, get) => ({
           loadProgress: 0.34,
         });
         await wait(50);
+        // Lazy: keeps the QA aid out of the entry chunk — and the ledger's
+        // line pins above (Phase/GameUI vocabulary) undisturbed.
+        const { grantEverything, syncTestKitFromUrl, testKitEnabled } = await import("./testkit.ts");
+        syncTestKitFromUrl(window.location.search);
         if (fresh) {
           clearSave();
           resetWorld();
+          if (testKitEnabled()) {
+            grantEverything(getWorld());
+            getWorld().log.unshift({
+              t: getWorld().hour,
+              text: "A tester's bounty — every ware, every material, every lesson the vale knows.",
+            });
+          }
         } else {
           const loaded = loadSave();
           if (loaded) setWorld(loaded);
@@ -300,7 +348,7 @@ export const useGame = create<GameUI>((set, get) => ({
       self.cls = choice.cls;
       self.look = choice.look;
     }
-    writeSave(w); // the face survives a refresh from the first minute
+    get().saveNow(); // the face survives a refresh from the first minute
     set({ phase: "playing", snap: snapshot() });
   },
   tick: (dt) => {
@@ -369,7 +417,7 @@ export const useGame = create<GameUI>((set, get) => ({
     }
     if (saveAcc > 8) {
       saveAcc = 0;
-      if (get().phase === "playing") writeSave(w);
+      if (get().phase === "playing") get().saveNow();
     }
   },
   flash: (msg) => {
@@ -388,8 +436,17 @@ export const useGame = create<GameUI>((set, get) => ({
     }
   },
   setPanel: (p) => {
-    const next = p === get().panel ? "none" : p;
-    set({ panel: next, ctx: null, openBook: next === "none" ? get().openBook : false, openCraft: next === "none" ? get().openCraft : false });
+    const cur = get().panel;
+    const next = p === cur ? "none" : p;
+    if (cur === "build" && next !== "build") {
+      dropBuildHold();
+      stopHold();
+    }
+    if (next === "build") {
+      dropBuildHold();
+      startHold();
+    }
+    set({ panel: next, holdRev: get().holdRev + 1, ctx: null, openBook: next === "none" ? get().openBook : false, openCraft: next === "none" ? get().openCraft : false });
   },
   useTile: (tx, ty) => {
     const w = getWorld();
@@ -424,10 +481,11 @@ export const useGame = create<GameUI>((set, get) => ({
       set({ snap: snapshot(), ctx: null, tillAt: { tx, ty } });
       return;
     }
-    if (w.player.armedSpell === "teleport") {
-      const err = commandCast(w, "teleport", { kind: "tile", tx, ty });
+    if (w.player.armedSpell === "teleport" || w.player.armedSpell === "jump" || (w.player.armedSpell && targetsGround(w.player.armedSpell))) {
+      const spell = w.player.armedSpell;
+      const err = commandCast(w, spell, { kind: "tile", tx, ty });
       if (err) get().flash(err);
-      else get().flash(SPELL_META.teleport.words);
+      else get().flash(SPELL_META[spell].words);
       set({ snap: snapshot(), ctx: null, openBook: false });
       return;
     }
@@ -523,11 +581,19 @@ export const useGame = create<GameUI>((set, get) => ({
       set({ ctx: null });
       return;
     } else if (verb === "house") {
+      const piece = w.placedObjects.find((o) => o.id === t.id);
+      if (piece && objectFn(piece) === "storage") {
+        get().flash("The chest keeps what you stow.");
+        set({ ctx: null });
+        return;
+      }
       get().openHouse(t.id);
       return;
     } else if (verb === "use") get().useStation(t.id);
     else if (verb === "harvest") err = commandHarvest(w, t.tx, t.ty);
     else if (verb === "till") err = commandTill(w, t.tx, t.ty);
+    else if (verb === "dig") err = commandDig(w, t.tx, t.ty);
+    else if (verb === "fill") err = commandFill(w, t.tx, t.ty);
     else if (verb === "pick" && t.kind === "herb") err = commandPick(w, t.id);
     else if (verb === "sowCabbage") err = commandPlant(w, t.tx, t.ty, "cabbage");
     else if (verb === "sowWheat") err = commandPlant(w, t.tx, t.ty, "wheat");
@@ -764,14 +830,14 @@ export const useGame = create<GameUI>((set, get) => ({
     const w = getWorld();
     const note = applyCharacterLook(w, inscription);
     if (note) get().flash(note);
-    writeSave(w);
+    get().saveNow();
     set({ snap: snapshot() });
   },
   mintPartApplied: (id) => {
     const w = getWorld();
     const note = applyMintPart(w, id);
     if (note) get().flash(note);
-    writeSave(w);
+    get().saveNow();
     set({ snap: snapshot() });
   },
   redeemPartApplied: (inscription, origin) => {
@@ -783,7 +849,7 @@ export const useGame = create<GameUI>((set, get) => ({
     const w = getWorld();
     const note = applyTogglePart(w, id);
     if (note) get().flash(note);
-    writeSave(w);
+    get().saveNow();
     set({ snap: snapshot() });
   },
   makeRecipe: (id) => {
@@ -801,6 +867,12 @@ export const useGame = create<GameUI>((set, get) => ({
     if (note) get().flash(note);
     set({ snap: snapshot() });
   },
+  refineStack: (key) => {
+    const note = commandRefineExact(getWorld(), key);
+    if (note) get().flash(note);
+    get().saveNow();
+    set({ snap: snapshot() });
+  },
   inlayItem: (uid, key) => {
     const result = applyItemInlay(getWorld().player, uid, key);
     get().flash(result.status === "inlaid" ? `${result.effect.label} settles into the work.` : result.message);
@@ -810,6 +882,29 @@ export const useGame = create<GameUI>((set, get) => ({
     const w = getWorld();
     if (w.player.ghost) {
       get().flash("A ghost cannot.");
+      return;
+    }
+    const piece = w.placedObjects.find((x) => x.id === id);
+    if (piece) {
+      const fn = objectFn(piece);
+      if (fn === "craftStation" || fn === "hearth") {
+        const p = you(w);
+        if (!p) return;
+        if (Math.hypot(p.x - piece.tx, p.z - piece.ty) > 4.6) {
+          const err = commandWalk(w, piece.tx, piece.ty);
+          if (err) get().flash(err);
+          else get().flash(fn === "hearth" ? "The fire is that way." : "The bench is that way.");
+          set({ ctx: null, snap: snapshot() });
+          return;
+        }
+        get().openCraftGump();
+        return;
+      }
+      const note = applyPlaced(w, id);
+      if (note) get().flash(fn === "bed" ? "You rest." : note);
+      else if (fn === "door") get().flash(isDoorOpen(piece) ? "The door stands." : "The door shuts.");
+      else if (fn === "bed") get().flash("You rest.");
+      set({ ctx: null, snap: snapshot() });
       return;
     }
     const b = w.buildings.find((x) => x.id === id);
@@ -873,12 +968,68 @@ export const useGame = create<GameUI>((set, get) => ({
     }
     set({ buildKind: kind, buildAt: at, tillArmed: false, tillAt: null, panel: "none", ctx: null, openBook: false, openCraft: false });
   },
+  cancelPlacement: () => {
+    const hold = getHoldBuild();
+    const armedHold = hold.active && Boolean(hold.definitionId);
+    const armedCivic = Boolean(get().buildKind);
+    const armedTill = get().tillArmed;
+    if (!armedCivic && !armedTill && !armedHold) return;
+    dropBuildHold();
+    if (armedHold) selectHoldPiece(null);
+    set({
+      buildKind: null,
+      buildAt: null,
+      tillArmed: false,
+      tillAt: null,
+      holdRev: armedHold ? get().holdRev + 1 : get().holdRev,
+    });
+    get().flash("Set down.");
+  },
   hoverBuild: (tx, ty) => {
     if (!get().buildKind) return;
     const at = get().buildAt;
     if (at && at.tx === tx && at.ty === ty) return;
     set({ buildAt: { tx, ty } });
   },
+  enterHold: () => {
+    dropBuildHold();
+    startHold();
+    set({ holdRev: get().holdRev + 1, buildKind: null, buildAt: null, tillArmed: false, tillAt: null, ctx: null });
+  },
+  exitHold: () => {
+    dropBuildHold();
+    stopHold();
+    set({ holdRev: get().holdRev + 1 });
+  },
+  armHoldPiece: (id) => {
+    dropBuildHold();
+    selectHoldPiece(id);
+    set({ holdRev: get().holdRev + 1, buildKind: null, tillArmed: false, ctx: null });
+  },
+  reclaimHold: (id) => {
+    const w = getWorld();
+    const err = withHistory(w, () => reclaimObject(w, id));
+    if (err) get().flash(err);
+    else get().flash("Reclaimed.");
+    set({ snap: snapshot(), holdRev: get().holdRev + 1 });
+  },
+  captureHold: (name) => {
+    const w = getWorld();
+    const err = captureBlueprint(w, name);
+    if (err) get().flash(err);
+    else get().flash("The plan is kept.");
+    set({ snap: snapshot(), holdRev: get().holdRev + 1 });
+  },
+  stampBlueprint: (id) => {
+    const w = getWorld();
+    const p = you(w);
+    if (!p) return;
+    const err = withHistory(w, () => applyBlueprint(w, id, Math.round(p.x) + 2, Math.round(p.z), 0));
+    if (err) get().flash(err);
+    else get().flash("The plan is raised.");
+    set({ snap: snapshot(), holdRev: get().holdRev + 1 });
+  },
+  noteHold: () => set({ holdRev: get().holdRev + 1, snap: snapshot() }),
   armTill: (on) => {
     dropBuildHold();
     if (!on) {

@@ -2,42 +2,77 @@ import { Button } from "@/components/ui/button";
 import { ItemTipContent } from "@/components/game/item-tip";
 import { ItemGlyph } from "@/components/game/paperdoll";
 import { Tip } from "@/components/ui/tip";
-import { ITEM_META, NPC_META, SHOP_STOCK } from "@/game/catalog";
-import { BANK_RANGE } from "@/game/npcs";
+import { APOTHECARY_STOCK, ITEM_META, NPC_META, SHOP_STOCK } from "@/game/catalog";
+import { alchemistBuys, BANK_RANGE } from "@/game/npcs";
 import { appraiseRare, rareName } from "@/game/rare";
 import { useGame } from "@/game/store";
 import type { ItemId } from "@/game/types";
+import { usePanelA11y } from "./use-panel-a11y";
+import { Info } from "lucide-react";
+import { useCallback, useState, type ReactNode } from "react";
 
 function heldItems(bag?: Partial<Record<ItemId, number>>) {
   return (Object.keys(bag ?? {}) as ItemId[]).filter((id) => (bag?.[id] ?? 0) > 0);
 }
 
+/** Inspect at the counter: the full card without buying or selling. */
+function InspectableRow({ id, children }: { id: ItemId; children: ReactNode }) {
+  const [inspecting, setInspecting] = useState(false);
+  return (
+    <li className="flex gap-1">
+      <Tip content={<ItemTipContent id={id} />} className="w-full min-w-0 flex-1" pin={inspecting} onDismiss={() => setInspecting(false)}>
+        {children}
+      </Tip>
+      <button
+        type="button"
+        aria-label={`Inspect ${ITEM_META[id].label}`}
+        aria-expanded={inspecting}
+        onClick={() => setInspecting((v) => !v)}
+        className={`grid size-11 shrink-0 place-items-center rounded-[var(--radius-xs)] border border-border bg-surface-2 ${inspecting ? "text-gold" : "text-muted"}`}
+      >
+        <Info className="size-4" aria-hidden />
+      </button>
+    </li>
+  );
+}
+
 /** The provisioner's counter — buy their stock, sell your finds, have wonders appraised. */
 function ProvisionerShop() {
+  return <ShopCounter stock={SHOP_STOCK} />;
+}
+
+/** The apothecary's scales — draughts and reagents weighed; no loupe here. */
+function ApothecaryShop() {
+  return <ShopCounter stock={APOTHECARY_STOCK} alchemist />;
+}
+
+function ShopCounter({ stock, alchemist }: { stock: readonly ItemId[]; alchemist?: boolean }) {
   const buy = useGame((s) => s.buy);
   const sell = useGame((s) => s.sell);
   const sellRare = useGame((s) => s.sellRare);
   const pack = useGame((s) => s.snap.player?.pack);
   const rares = useGame((s) => s.snap.player?.rares) ?? [];
-  const sellables = (Object.keys(pack ?? {}) as ItemId[]).filter((id) => (pack?.[id] ?? 0) > 0 && ITEM_META[id].sell > 0);
+  const sellables = (Object.keys(pack ?? {}) as ItemId[]).filter(
+    (id) => (pack?.[id] ?? 0) > 0 && ITEM_META[id].sell > 0 && (!alchemist || alchemistBuys(id)),
+  );
   return (
     <div className="mt-3 max-h-64 space-y-3 overflow-auto">
       <div>
-        <p className="font-display text-xs tracking-wider text-muted uppercase">The counter — buy</p>
+        <p className="font-display text-xs tracking-wider text-muted uppercase">
+          {alchemist ? "The scales — buy" : "The counter — buy"}
+        </p>
         <ul className="mt-1 space-y-1">
-          {SHOP_STOCK.slice(0, 10).map((id) => (
-            <li key={id}>
-              <Tip content={<ItemTipContent id={id} />} className="w-full min-w-0">
-                <button
-                  type="button"
-                  onClick={() => buy(id)}
-                  className="flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left text-sm text-fg"
-                >
-                  <span>{ITEM_META[id].label}</span>
-                  <span className="text-muted">{ITEM_META[id].buy}g</span>
-                </button>
-              </Tip>
-            </li>
+          {stock.slice(0, 10).map((id) => (
+            <InspectableRow key={id} id={id}>
+              <button
+                type="button"
+                onClick={() => buy(id)}
+                className="flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left text-sm text-fg"
+              >
+                <span>{ITEM_META[id].label}</span>
+                <span className="text-muted">{ITEM_META[id].buy}g</span>
+              </button>
+            </InspectableRow>
           ))}
         </ul>
       </div>
@@ -46,25 +81,23 @@ function ProvisionerShop() {
           <p className="font-display text-xs tracking-wider text-muted uppercase">Your pack — sell</p>
           <ul className="mt-1 space-y-1">
             {sellables.map((id) => (
-              <li key={id}>
-                <Tip content={<ItemTipContent id={id} />} className="w-full min-w-0">
-                  <button
-                    type="button"
-                    onClick={() => sell(id)}
-                    className="flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left text-sm text-fg"
-                  >
-                    <span>
-                      {ITEM_META[id].label} <span className="text-xs text-muted">×{pack?.[id]}</span>
-                    </span>
-                    <span className="text-gold">{ITEM_META[id].sell}g</span>
-                  </button>
-                </Tip>
-              </li>
+              <InspectableRow key={id} id={id}>
+                <button
+                  type="button"
+                  onClick={() => sell(id)}
+                  className="flex min-h-11 w-full items-center justify-between rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left text-sm text-fg"
+                >
+                  <span>
+                    {ITEM_META[id].label} <span className="text-xs text-muted">×{pack?.[id]}</span>
+                  </span>
+                  <span className="text-gold">{ITEM_META[id].sell}g</span>
+                </button>
+              </InspectableRow>
             ))}
           </ul>
         </div>
       )}
-      {rares.length > 0 && (
+      {!alchemist && rares.length > 0 && (
         <div>
           <p className="font-display text-xs tracking-wider text-gold uppercase">The loupe — appraise a wonder</p>
           <ul className="mt-1 space-y-1">
@@ -207,10 +240,16 @@ export function NpcGump() {
   const select = useGame((s) => s.select);
   const ghost = useGame((s) => Boolean(s.snap.player?.ghost));
   const p = people.find((x) => x.id === selectedId);
+  const closeNpc = useCallback(() => select(null), [select]);
+  const dialog = usePanelA11y<HTMLDivElement>(closeNpc, Boolean(p?.role));
   if (!p?.role) return null;
   const close = Math.hypot(youX - p.x, youZ - p.z) <= BANK_RANGE;
   return (
     <div
+      ref={dialog}
+      tabIndex={-1}
+      role="dialog"
+      aria-label={p.name}
       className={
         p.role === "banker"
           ? "pointer-events-auto absolute top-16 left-3 w-[min(100%-1.5rem,28rem)] rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4"
@@ -232,6 +271,7 @@ export function NpcGump() {
       )}
       {p.role === "banker" && (close ? <BankBox /> : <p className="mt-3 text-pretty text-xs text-muted">Walk closer to open the box.</p>)}
       {p.role === "provisioner" && <ProvisionerShop />}
+      {p.role === "alchemist" && <ApothecaryShop />}
       <Button className="mt-3 w-full" variant="ghost" onClick={() => select(null)}>
         Close
       </Button>

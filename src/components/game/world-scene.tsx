@@ -4,6 +4,16 @@ import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { COURT, VIEW } from "@/game/atlas";
 import { cameraFixedHeight, cameraLockedAxis } from "@/game/camera-follow";
+import {
+  FIRST_PERSON_FOV,
+  FIRST_PERSON_NEAR,
+  ORBIT_FOV,
+  ORBIT_NEAR,
+  firstPersonPoseFromView,
+  orbitRestPose,
+  smoothFirstPerson,
+  type FirstPersonViewState,
+} from "@/game/first-person-view";
 import { SECONDS_PER_HOUR } from "@/game/catalog";
 import {
   projectileProgress,
@@ -25,13 +35,21 @@ import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGathering
 import { groundY as heightAt } from "@/game/height";
 import { keepStoryY } from "@/game/keep-story";
 import { getGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
+import { SPELL_EFFECT_CAP, selectSpellLabel, spellEffects, spellImpactOpacityScale } from "@/game/spell-effects";
+import { SpellFlightMesh, SpellStatusMesh } from "./spell-effects-mesh";
+import { ZoneMesh } from "./zones-mesh";
+import { MirrorImages } from "./mirrors-mesh";
+import { useEffectsReduced } from "./effects-preference";
 import { getWorld } from "@/game/live";
 import { getCastFx, getDeathFx, getFizzleFx, SPELL_META } from "@/game/magery";
 import { impactShard, moteState, ringBloom, spellFxProfile, windupGlow } from "@/game/magery-animation";
 import { getChips, getCombatFx, getHealingFx, getTamingFx } from "@/game/player";
-import { useGame } from "@/game/store";
+import { useGame, dropBuildHold } from "@/game/store";
 import { hoverAt, leftAt, liftAt } from "@/game/world-pointer";
+import { TOUCH_HOLD_MS, TOUCH_HOLD_SLOP } from "@/game/touch-hold";
+import { cancelHoldBuild, getHoldBuild } from "@/game/placeables/build-mode";
 import { Buildings } from "./building-meshes";
+import { Placeables } from "./placeable-meshes";
 import { LanternwoodDressing } from "./lanternwood-dressing";
 import { OakStumps } from "./oak-stumps";
 import { Crops } from "./crop-meshes";
@@ -46,6 +64,7 @@ import { Herbs } from "./herb-meshes";
 import { Campfires } from "./campfire-meshes";
 import { Horizon, Terrain } from "./terrain";
 import { FrontierScenery } from "./frontier-scenery";
+import { CemeteryMist } from "./cemetery-mist";
 
 declare global {
   interface Window {
@@ -109,13 +128,14 @@ function PlacePointer() {
   const { camera, gl } = useThree();
   const kind = useGame((s) => s.buildKind);
   const till = useGame((s) => s.tillArmed);
+  const holdRev = useGame((s) => s.holdRev);
   const ray = useMemo(() => new THREE.Raycaster(), []);
   const ndc = useMemo(() => new THREE.Vector2(), []);
   const hit = useMemo(() => new THREE.Vector3(), []);
   const plane = useMemo(() => new THREE.Plane(), []);
   const up = useMemo(() => new THREE.Vector3(0, 1, 0), []);
   useEffect(() => {
-    if (!kind && !till) return;
+    if (!kind && !till && !getHoldBuild().active) return;
     const el = gl.domElement;
     function xz(ev: PointerEvent) {
       const rect = el.getBoundingClientRect();
@@ -123,39 +143,90 @@ function PlacePointer() {
       ndc.y = -((ev.clientY - rect.top) / rect.height) * 2 + 1;
       ray.setFromCamera(ndc, camera);
       const g = useGame.getState();
-      const at = g.buildAt ?? g.tillAt;
+      const hold = getHoldBuild();
+      const at = hold.active && hold.tx != null && hold.ty != null ? { tx: hold.tx, ty: hold.ty } : g.buildAt ?? g.tillAt;
       const y = at ? heightAt(getWorld(), at.tx, at.ty) : 0;
       plane.set(up, -y);
       if (!ray.ray.intersectPlane(plane, hit)) return null;
       return { tx: Math.round(hit.x), ty: Math.round(hit.z) };
     }
     function move(ev: PointerEvent) {
+      moveCancelTouch(ev);
       const t = xz(ev);
       if (t) hoverAt(t.tx, t.ty);
     }
     function down(ev: PointerEvent) {
+      armCancelTouch(ev);
       if (ev.button !== 0) return;
       const t = xz(ev);
       if (t) leftAt(t.tx, t.ty);
     }
     function upEv(ev: PointerEvent) {
+      endCancelTouch(ev);
       if (ev.button !== 0) return;
       const t = xz(ev);
       if (t) liftAt(t.tx, t.ty);
+    }
+    function cancelClick(ev: PointerEvent) {
+      if (ev.button !== 2) return;
+      ev.preventDefault();
+      ev.stopPropagation();
+      useGame.getState().cancelPlacement();
+    }
+    // Touch long-press lets the shade go — the touch twin of right-click. A
+    // quick tap still places, a drag still moves the shade, a second finger
+    // aborts the gesture.
+    let cancelTimer: number | null = null;
+    let cancelTouch: { id: number; x: number; y: number } | null = null;
+    function clearCancelTouch() {
+      if (cancelTimer != null) {
+        window.clearTimeout(cancelTimer);
+        cancelTimer = null;
+      }
+      cancelTouch = null;
+    }
+    function armCancelTouch(ev: PointerEvent) {
+      if (ev.pointerType !== "touch") return;
+      if (cancelTouch) {
+        clearCancelTouch();
+        return;
+      }
+      cancelTouch = { id: ev.pointerId, x: ev.clientX, y: ev.clientY };
+      cancelTimer = window.setTimeout(() => {
+        clearCancelTouch();
+        useGame.getState().cancelPlacement();
+      }, TOUCH_HOLD_MS);
+    }
+    function moveCancelTouch(ev: PointerEvent) {
+      if (!cancelTouch || ev.pointerId !== cancelTouch.id) return;
+      if (Math.hypot(ev.clientX - cancelTouch.x, ev.clientY - cancelTouch.y) > TOUCH_HOLD_SLOP) clearCancelTouch();
+    }
+    function endCancelTouch(ev: PointerEvent) {
+      if (cancelTouch && ev.pointerId === cancelTouch.id) clearCancelTouch();
+    }
+    function cancelEv() {
+      clearCancelTouch();
+      dropBuildHold();
+      cancelHoldBuild();
     }
     el.addEventListener("pointermove", move);
     window.addEventListener("pointermove", move);
     el.addEventListener("pointerdown", down);
     window.addEventListener("pointerup", upEv);
-    window.addEventListener("pointercancel", upEv);
+    window.addEventListener("pointercancel", cancelEv);
+    // Capture phase so a right-click beats mesh-level context menus: while a
+    // shade is armed, right-click always lets it go.
+    window.addEventListener("pointerdown", cancelClick, true);
     return () => {
+      clearCancelTouch();
       el.removeEventListener("pointermove", move);
       window.removeEventListener("pointermove", move);
       el.removeEventListener("pointerdown", down);
       window.removeEventListener("pointerup", upEv);
-      window.removeEventListener("pointercancel", upEv);
+      window.removeEventListener("pointercancel", cancelEv);
+      window.removeEventListener("pointerdown", cancelClick, true);
     };
-  }, [kind, till, camera, gl, ray, ndc, hit, plane, up]);
+  }, [kind, till, holdRev, camera, gl, ray, ndc, hit, plane, up]);
   return null;
 }
 
@@ -163,9 +234,12 @@ function Rig() {
   const controls = useRef<{ target: THREE.Vector3 } | null>(null);
   const followAnchor = useRef(new THREE.Vector3());
   const followReady = useRef(false);
+  const wasFirstPerson = useRef(false);
+  const firstPersonView = useRef<FirstPersonViewState | null>(null);
   const { camera } = useThree();
   const phase = useGame((s) => s.phase);
   const placing = useGame((s) => Boolean(s.buildKind));
+  const firstPerson = useGraphicsSettings().firstPerson;
   useEffect(() => {
     if (typeof window === "undefined") return;
     const enabled = import.meta.env.DEV || new URLSearchParams(window.location.search).has("qa");
@@ -186,11 +260,48 @@ function Rig() {
       if (window.__emberCamera === probe) delete window.__emberCamera;
     };
   }, [camera]);
-  useFrame(() => {
+  useFrame((_, dt) => {
     const p = getWorld().people.find((x) => x.isPlayer);
     const c = controls.current;
     if (!p || !c || phase !== "playing") return;
-    const y = groundY(p.x, p.z) + keepStoryY(p.story ?? 0);
+    const feetY = groundY(p.x, p.z);
+    const storyY = keepStoryY(p.story ?? 0);
+    const y = feetY + storyY;
+    const persp = camera as THREE.PerspectiveCamera;
+    if (firstPerson) {
+      firstPersonView.current = smoothFirstPerson(
+        firstPersonView.current,
+        { x: p.x, z: p.z, facing: p.facing, groundY: feetY, storyY },
+        dt,
+      );
+      const pose = firstPersonPoseFromView(firstPersonView.current);
+      camera.position.set(pose.position.x, pose.position.y, pose.position.z);
+      camera.up.set(0, 1, 0);
+      camera.lookAt(pose.lookAt.x, pose.lookAt.y, pose.lookAt.z);
+      c.target.set(pose.lookAt.x, pose.lookAt.y, pose.lookAt.z);
+      if (persp.fov !== FIRST_PERSON_FOV || persp.near !== FIRST_PERSON_NEAR) {
+        persp.fov = FIRST_PERSON_FOV;
+        persp.near = FIRST_PERSON_NEAR;
+        persp.updateProjectionMatrix();
+      }
+      followReady.current = false;
+      wasFirstPerson.current = true;
+      return;
+    }
+    firstPersonView.current = null;
+    if (wasFirstPerson.current) {
+      const rest = orbitRestPose(p.x, p.z, feetY, storyY);
+      camera.position.set(rest.position.x, rest.position.y, rest.position.z);
+      c.target.set(rest.target.x, rest.target.y, rest.target.z);
+      followAnchor.current.copy(c.target);
+      followReady.current = true;
+      if (persp.fov !== ORBIT_FOV || persp.near !== ORBIT_NEAR) {
+        persp.fov = ORBIT_FOV;
+        persp.near = ORBIT_NEAR;
+        persp.updateProjectionMatrix();
+      }
+      wasFirstPerson.current = false;
+    }
     const anchor = followAnchor.current;
     if (!followReady.current) {
       anchor.copy(c.target);
@@ -219,12 +330,12 @@ function Rig() {
   return (
     <MapControls
       ref={controls as never}
-      enabled={phase === "playing"}
-      enableDamping
+      enabled={phase === "playing" && !firstPerson}
+      enableDamping={phase === "playing" && !firstPerson}
       dampingFactor={0.12}
-      enablePan={phase === "playing" && !placing}
-      enableRotate={phase === "playing" && !placing}
-      enableZoom={phase === "playing"}
+      enablePan={phase === "playing" && !placing && !firstPerson}
+      enableRotate={phase === "playing" && !placing && !firstPerson}
+      enableZoom={phase === "playing" && !firstPerson}
       autoRotate={false}
       minDistance={8}
       maxDistance={150}
@@ -288,10 +399,11 @@ function WalkMarker() {
   );
 }
 
-const MOTES_MAX = 12;
-const SHARDS_MAX = 10;
+const MOTES_MAX = 4;
+const SHARDS_MAX = 4;
+const SPELL_SLOTS = Array.from({ length: SPELL_EFFECT_CAP }, (_, i) => i);
 
-function CastFxMesh() {
+function CastFxMesh({ slot }: { slot: number }) {
   const group = useRef<THREE.Group>(null);
   const puff = useRef<THREE.Mesh>(null);
   const bolt = useRef<THREE.Mesh>(null);
@@ -305,7 +417,7 @@ function CastFxMesh() {
   const shards = useRef<(THREE.Mesh | null)[]>([]);
   const words = useRef<HTMLDivElement>(null);
   useFrame(() => {
-    const fx = getCastFx();
+    const fx = getCastFx(getWorld(), slot);
     const g = group.current;
     const puffMesh = puff.current;
     const boltMesh = bolt.current;
@@ -322,34 +434,16 @@ function CastFxMesh() {
     const duration = profile?.duration ?? 0.68;
     const live = Boolean(fx && profile && age >= 0 && age <= duration);
 
-    // The words of power: above the caster while they are spoken (windup),
-    // then riding the release flash.
-    let wordsText: string | null = null;
-    let wordsX = 0;
-    let wordsZ = 0;
-    let wordsColor = "#e0b56a";
-    if (live && fx && profile) {
-      wordsText = SPELL_META[fx.spell].words;
-      wordsX = fx.x;
-      wordsZ = fx.z;
-      wordsColor = profile.ring;
-    } else if (world.player.intent.kind === "cast" && world.player.intent.spell) {
-      const caster = world.people.find((person) => person.isPlayer);
-      if (caster && !caster.path.length) {
-        wordsText = SPELL_META[world.player.intent.spell].words;
-        wordsX = caster.x;
-        wordsZ = caster.z;
-        wordsColor = windupGlow(world.player.intent.spell);
-      }
-    }
+    // A single label selects independently of this slot's oldest-first impact.
+    const label = slot === 0 ? selectSpellLabel(world) : null;
     if (words.current) {
-      words.current.style.display = wordsText ? "grid" : "none";
-      if (wordsText) {
-        words.current.textContent = wordsText;
-        words.current.style.borderColor = wordsColor;
+      words.current.style.display = label ? "grid" : "none";
+      if (label) {
+        words.current.textContent = SPELL_META[label.spell].words;
+        words.current.style.borderColor = label.phase === "windup" ? windupGlow(label.spell) : spellFxProfile(label.spell).ring;
       }
     }
-    anchor.position.set(wordsX, wordsX || wordsZ ? groundY(wordsX, wordsZ) + 2.15 : 0, wordsZ);
+    if (label) anchor.position.set(label.x, groundY(label.x, label.z) + 2.15, label.z);
 
     if (!fx || !profile || !live) {
       g.visible = false;
@@ -374,10 +468,10 @@ function CastFxMesh() {
     for (let i = 0; i < SHARDS_MAX; i++) {
       const shard = shards.current[i];
       if (!shard) continue;
-      const shardLive = (projectile && t > 0.5) || (skyStrike && t > 0.12);
+      const shardLive = projectile || skyStrike;
       shard.visible = shardLive;
       if (!shardLive) continue;
-      const s = impactShard(fx.spell, i, (t - (skyStrike ? 0.12 : 0.5)) / (skyStrike ? 0.88 : 0.5));
+      const s = impactShard(fx.spell, i, t);
       shard.position.set(fx.tx + s.dx, groundY(fx.tx, fx.tz) + s.dy, fx.tz + s.dz);
       shard.scale.setScalar(s.scale * (profile.kind === "burst" ? 1.7 : 1.05));
       shard.rotation.set(age * (3 + i * 0.4), i * 1.7 + age * 2.2, 0);
@@ -395,7 +489,7 @@ function CastFxMesh() {
       mote.visible = moteLive;
       if (!moteLive) continue;
       const m = moteState(fx.spell, i, age);
-      mote.position.set(fx.x + m.dx, groundY(fx.x, fx.z) + m.dy, fx.z + m.dz);
+      mote.position.set(fx.tx + m.dx, groundY(fx.tx, fx.tz) + m.dy, fx.tz + m.dz);
       mote.scale.setScalar(m.scale);
       const mat = mote.material as THREE.MeshBasicMaterial;
       mat.color.set(i % 3 === 0 ? profile.accent : profile.motes);
@@ -405,12 +499,12 @@ function CastFxMesh() {
     sigilGroup.visible = selfFx && profile.kind === "sigil";
     if (selfFx) {
       const bloom = ringBloom(fx.spell, t);
-      ringMesh.position.set(fx.x, groundY(fx.x, fx.z) + 0.06, fx.z);
+      ringMesh.position.set(fx.tx, groundY(fx.tx, fx.tz) + 0.06, fx.tz);
       ringMesh.scale.setScalar(bloom.scale);
       ringMat.color.set(profile.ring);
       ringMat.opacity = bloom.opacity;
       if (sigilGroup.visible) {
-        sigilGroup.position.set(fx.x, groundY(fx.x, fx.z) + 0.07, fx.z);
+        sigilGroup.position.set(fx.tx, groundY(fx.tx, fx.tz) + 0.07, fx.tz);
         sigilGroup.rotation.y = age * 1.3;
         sigilGroup.traverse((object) => {
           if (!(object instanceof THREE.Mesh)) return;
@@ -420,10 +514,11 @@ function CastFxMesh() {
     }
 
     if (projectile) {
-      const k = Math.min(1, t * 1.55);
+      // Flight is rendered before the authoritative resolution, never after it.
+      const k = 1;
       const shot = spellProjectileProfile(fx.spell);
       const fat = profile.kind === "burst";
-      boltMesh.visible = t < 0.72;
+      boltMesh.visible = false;
       boltMesh.position.set(
         fx.x + (fx.tx - fx.x) * k,
         y0 + (y1 - y0) * k,
@@ -432,7 +527,7 @@ function CastFxMesh() {
       boltMesh.scale.setScalar(shot.coreScale);
       boltMat.color.set(shot.core);
       boltMat.opacity = 0.95 * (1 - t);
-      trailMesh.visible = t < 0.72;
+      trailMesh.visible = false;
       trailMesh.position.set(
         (fx.x + boltMesh.position.x) * 0.5,
         (y0 + boltMesh.position.y) * 0.5,
@@ -453,17 +548,18 @@ function CastFxMesh() {
       puffMesh.position.set(fx.tx, y1, fx.tz);
       puffMesh.scale.setScalar(shot.impactScale * (0.35 + t * 1.25));
       puffMat.color.set(shot.impact);
-      puffMat.opacity = (fat ? 0.68 : 0.5) * (1 - t);
-      impactMesh.visible = t > 0.32;
+      puffMat.opacity = (fat ? 0.28 : 0.2) * (1 - t);
+      impactMesh.visible = true;
       impactMesh.position.set(fx.tx, groundY(fx.tx, fx.tz) + 0.08, fx.tz);
-      impactMesh.scale.setScalar(shot.impactScale * (0.45 + t * 1.2));
+      impactMesh.scale.setScalar((fat ? 1.2 : 1) + t * 0.8);
       impactMat.color.set(shot.impact);
       impactMat.opacity = 0.78 * (1 - t);
     } else if (travel) {
       trailMesh.visible = false;
       impactMesh.visible = false;
-      boltMesh.visible = t < 0.45;
-      const k = Math.min(1, t * 2.2);
+      boltMesh.visible = fx.spell === "teleport" || fx.spell === "recall";
+      const k = 0;
+      boltMesh.scale.setScalar(Math.max(0.01, 2 * (1 - t)));
       boltMesh.position.set(
         fx.x + (fx.tx - fx.x) * k,
         y0 + (y1 - y0) * k,
@@ -474,7 +570,7 @@ function CastFxMesh() {
       puffMesh.position.set(fx.tx, y1, fx.tz);
       puffMesh.scale.setScalar(0.7 + t * 2.2);
       puffMat.color.set(profile.ring);
-      puffMat.opacity = 0.7 * (1 - t);
+      puffMat.opacity = 0.22 * (1 - t);
     } else if (skyStrike) {
       // Lightning: a white column falls out of the sky onto the target —
       // flicker-hot at first, then gone, leaving the impact ring and shards.
@@ -500,11 +596,12 @@ function CastFxMesh() {
       trailMesh.visible = false;
       impactMesh.visible = false;
       boltMesh.visible = false;
-      puffMesh.position.set(fx.x, y0, fx.z);
+      puffMesh.position.set(fx.tx, y1, fx.tz);
       puffMesh.scale.setScalar(0.55 + t * 1.8);
       puffMat.color.set(profile.core);
-      puffMat.opacity = 0.6 * (1 - t);
+      puffMat.opacity = 0.25 * (1 - t);
     }
+    puffMat.opacity *= spellImpactOpacityScale(spellEffects(world), fx);
   });
   return (
     <group ref={group} visible={false}>
@@ -553,13 +650,13 @@ function CastFxMesh() {
         />
       </mesh>
       <mesh ref={impact} visible={false} rotation={[-Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[0.2, 0.34, 18]} />
+        <ringGeometry args={[0.65, 0.73, 18]} />
         <meshBasicMaterial
           color="#8ec8ff"
           transparent
           opacity={0.7}
           depthWrite={false}
-          depthTest={false}
+          depthTest={true}
           toneMapped={false}
         />
       </mesh>
@@ -615,6 +712,7 @@ function CastFxMesh() {
         <Html center zIndexRange={[27, 0]} style={{ pointerEvents: "none" }}>
           <div
             ref={words}
+            data-testid={slot === 0 ? "spell-label" : undefined}
             style={{
               display: "none",
               placeItems: "center",
@@ -805,13 +903,13 @@ function MoongateTravelFxMesh() {
   );
 }
 
-function TravelFxMesh() {
+function TravelFxMesh({ slot }: { slot: number }) {
   const sourceRing = useRef<THREE.Mesh>(null);
   const destinationRing = useRef<THREE.Mesh>(null);
   const sourceColumn = useRef<THREE.Mesh>(null);
   const destinationColumn = useRef<THREE.Mesh>(null);
   useFrame(() => {
-    const fx = getCastFx();
+    const fx = getCastFx(getWorld(), slot);
     const meshes = [
       sourceRing.current,
       destinationRing.current,
@@ -886,10 +984,10 @@ function TravelFxMesh() {
   );
 }
 
-function FizzleFxMesh() {
+function FizzleFxMesh({ slot }: { slot: number }) {
   const group = useRef<THREE.Group>(null);
   useFrame(() => {
-    const fx = getFizzleFx();
+    const fx = getFizzleFx(getWorld(), slot);
     const g = group.current;
     if (!g) return;
     const age = fx ? (getWorld().hour - fx.at) * SECONDS_PER_HOUR : Infinity;
@@ -1833,12 +1931,23 @@ function ChipBits() {
 
 export function WorldScene() {
   const graphics = useGraphicsSettings();
+  const reducedFx = useEffectsReduced();
+  // Mirror the preference onto the root element so DOM chrome (rain,
+  // shimmer) honors it in CSS; the canvas gate below covers the scene.
+  useEffect(() => {
+    document.documentElement.dataset.effects = reducedFx ? "reduced" : "full";
+    return () => {
+      delete document.documentElement.dataset.effects;
+    };
+  }, [reducedFx]);
   return (
     <Canvas
       className="h-full w-full touch-none"
       shadows={graphics.shadows}
       data-graphics-shadows={graphics.shadows ? "on" : "off"}
       data-horizon-tree-reduction={graphics.horizonTreeReduction}
+      data-effects={reducedFx ? "reduced" : "full"}
+      data-first-person={graphics.firstPerson ? "on" : "off"}
       dpr={[1, 1.5]}
       camera={{ position: [COURT.tx + 16, 23, COURT.ty + 20], fov: 48, near: 0.2, far: 480 }}
       gl={{ antialias: true, alpha: false }}
@@ -1858,7 +1967,9 @@ export function WorldScene() {
       <Horizon treeReduction={graphics.horizonTreeReduction} />
       <Terrain />
       <FrontierScenery />
+      <CemeteryMist />
       <Buildings />
+      <Placeables />
       <LanternwoodDressing />
       <OakStumps />
       <Crops />
@@ -1870,23 +1981,32 @@ export function WorldScene() {
       <Gates />
       <WalkMarker />
       <MarkStones />
-      <CastFxMesh />
-      <TravelFxMesh />
-      <MoongateTravelFxMesh />
-      <PersonalActionFxMesh />
-      <FizzleFxMesh />
-      <HealingFxMesh />
-      <TamingFxMesh />
-      <CraftFxMesh />
-      <GatheringFxMesh />
-      <NpcInteractionFxMesh />
-      <CompanionFxMesh />
-      <ConstructionFxMesh />
-      <ExtractionFxMesh />
-      <CorpseFxMesh />
-      <CombatFxMesh />
-      <DeathFxMesh />
-      <ChipBits />
+      <SpellStatusMesh />
+      <ZoneMesh />
+      <MirrorImages />
+      {/* Transient action effects are presentation-only: under reduced
+          effects they stay hidden while the simulation, toasts, journal
+          and the spoken words of power keep the results legible. */}
+      <group visible={!reducedFx} name="transient-action-fx">
+        {SPELL_SLOTS.map(slot => <CastFxMesh key={slot} slot={slot} />)}
+        <SpellFlightMesh />
+        {SPELL_SLOTS.map(slot => <TravelFxMesh key={slot} slot={slot} />)}
+        <MoongateTravelFxMesh />
+        <PersonalActionFxMesh />
+        {SPELL_SLOTS.map(slot => <FizzleFxMesh key={slot} slot={slot} />)}
+        <HealingFxMesh />
+        <TamingFxMesh />
+        <CraftFxMesh />
+        <GatheringFxMesh />
+        <NpcInteractionFxMesh />
+        <CompanionFxMesh />
+        <ConstructionFxMesh />
+        <ExtractionFxMesh />
+        <CorpseFxMesh />
+        <CombatFxMesh />
+        <DeathFxMesh />
+        <ChipBits />
+      </group>
       <PlacePointer />
       <Rig />
       <SimClock />

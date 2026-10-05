@@ -2,14 +2,14 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import { createHash } from "node:crypto";
 import test from "node:test";
-import { Box3, Group, Mesh, MeshStandardMaterial, BoxGeometry, Raycaster, Vector3 } from "three";
+import { Box3, Group, Mesh, MeshStandardMaterial, BoxGeometry, Raycaster, Vector3, BufferAttribute } from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { FAUNA_ART_URLS, faunaArtEnabled } from "./fauna-art-catalog.ts";
-import { cloneFaunaArt } from "./fauna-art-data.ts";
+import { FAUNA_ART_URLS, FAUNA_SPELL_ART_IDS, faunaArtEnabled, faunaSpellArt } from "./fauna-art-catalog.ts";
+import { applyRisenLook, cloneFaunaArt } from "./fauna-art-data.ts";
 import { FAUNA_META } from "../../game/catalog.ts";
 
 const art = new URL("../../../public/art/lanternwood/", import.meta.url);
-const read = (file: string) => readFileSync(new URL(file, import.meta.url), "utf8").replace(/\r\n/g, "\n");
+const read = (file: string) => readFileSync(new URL(file, import.meta.url), "utf8").split(String.fromCharCode(13)).join("");
 const hash = (s: string | Buffer) => createHash("sha256").update(s).digest("hex");
 const manifest = JSON.parse(readFileSync(new URL("fauna-manifest.json", art), "utf8"));
 type Entry = { kind: keyof typeof FAUNA_ART_URLS; family: string; file: string; bytes: number; sha256: string; triangles: number; materials: number; parts: string[]; bounds: { min: number[]; max: number[] } };
@@ -91,9 +91,12 @@ test("hidden parent skips visible traversal while retaining exact picking and or
 test("fallback Body and Beast boundary stay byte-preserved except explicit live death-read fix", () => {
   const renderer = read("./fauna-meshes.tsx");
   assert.equal(hash(renderer.slice(renderer.indexOf("function Body"), renderer.indexOf("function Beast"))), "98d6c6563e9222bbefe429bd049ff28940e8ccd36c772d604ed3cf5780a194d2");
-  const root = renderer.slice(renderer.indexOf("function Beast")).replace('      <FaunaArtBody kind={c.kind} size={SIZE[c.kind]}>\n        <Body c={c} />\n      </FaunaArtBody>', '      <Body c={c} />');
-  // Normalize only the verified stale-death-read fix, not any animation/effect formula.
-  const preservedRoot = root.replace('    const deadNow = c.task === "dead";\n', '').replaceAll('      deadNow ?', '      dead ?');
+  const root = renderer.slice(renderer.indexOf("function Beast")).replace('      <FaunaArtBody kind={c.kind} size={SIZE[c.kind]} art={faunaSpellArt(c)}>\n        <Body c={c} />\n      </FaunaArtBody>', '      <Body c={c} />');
+  // Normalize only the verified explicit fixes, not any animation/effect formula:
+  // the stale-death-read fix, Quas Xen's handoff of mirror images to MirrorImages,
+  // and the additive spell-art variant prop on FaunaArtBody (elementals + risen).
+  const preservedRoot = root.replace('    const deadNow = c.task === "dead";\n', '').replaceAll('      deadNow ?', '      dead ?')
+    .replace('        // Quas Xen\'s images are drawn by MirrorImages, not as hares.\n        c.mirror ? null : <Beast key={c.id} c={c} />', '        <Beast key={c.id} c={c} />');
   assert.equal(hash(preservedRoot), "7c8661a100b5321414f0ff3bbb6a469baa0be049d6caaee07faaeb97f3fc58d1");
   const integration = read("./fauna-art.tsx");
   assert.ok(integration.includes("dispose={null}")); assert.ok(integration.includes("active && source"));
@@ -106,6 +109,89 @@ test("lynx export retains one bobtail without the previous extra canid tail", ()
   const lynx = manifest.species.find((entry: Entry) => entry.kind === "pine_lynx") as Entry;
   assert.ok(lynx.parts.some(part => part.includes("bobtail")));
   assert.ok(!lynx.parts.some(part => /(?:^|_)tail_[01]$/.test(part)));
+});
+
+test("spell-art variants are additive GLBs, never extra FaunaKind ids", () => {
+  const spell = JSON.parse(readFileSync(new URL("spell-fauna-manifest.json", art), "utf8"));
+  assert.deepEqual([...FAUNA_SPELL_ART_IDS].sort(), ["galebound", "risen", "stonebound", "thornbound", "tidebound"]);
+  assert.deepEqual(spell.variants.map((v: { id: string }) => v.id).sort(), ["galebound", "stonebound", "thornbound", "tidebound"]);
+  assert.equal(new Set(spell.variants.map((v: { sha256: string }) => v.sha256)).size, 4);
+  const speciesGlb = readdirSync(art).filter((s) => /^fauna-.*\.glb$/.test(s)).sort();
+  assert.deepEqual(speciesGlb, Object.keys(FAUNA_ART_URLS).sort().map((id) => `fauna-${id}.glb`));
+  for (const entry of spell.variants as { id: string; kind: string; file: string; bytes: number; sha256: string; triangles: number; parts: string[] }[]) {
+    assert.equal(entry.file, `spell-fauna-${entry.id}.glb`);
+    const bytes = readFileSync(new URL(entry.file, art));
+    assert.equal(bytes.length, entry.bytes);
+    assert.equal(hash(bytes), entry.sha256);
+    assert.ok(entry.triangles < 2500);
+    assert.ok(entry.parts.length >= 8);
+  }
+});
+
+const SPELL_MARK = {
+  thornbound: /thorn_vine|vine_thorn/,
+  stonebound: /stone_crack|stone_plate/,
+  galebound: /gale_streak|wind_mane/,
+  tidebound: /tide_slick|wet_sheen/,
+} as const;
+
+for (const id of ["thornbound", "stonebound", "galebound", "tidebound"] as const) {
+  test(`${id}: elemental silhouette loads as opaque spell-art, not a plain animal`, async () => {
+    const spell = JSON.parse(readFileSync(new URL("spell-fauna-manifest.json", art), "utf8"));
+    const entry = spell.variants.find((v: { id: string }) => v.id === id);
+    const bytes = readFileSync(new URL(entry.file, art));
+    const { scene, animations } = await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), "");
+    assert.equal(animations.length, 0);
+    scene.updateMatrixWorld(true);
+    const bounds = new Box3().setFromObject(scene);
+    assert.ok(Math.abs(bounds.min.y) < 0.00001, `ground pivot ${bounds.min.y}`);
+    assert.ok(bounds.max.y > .2 && bounds.max.y < 2.7);
+    let marker = false; let colored = 0;
+    scene.traverse((object) => {
+      if (object.userData.front_axis === "+Z" && !(object instanceof Mesh) && object.name.includes("front_axis")) marker = true;
+      if (object instanceof Mesh && object.geometry.getAttribute("color")) colored++;
+    });
+    assert.ok(marker, "exported +Z front marker");
+    assert.ok(colored > 0, "opaque vertex-colored elemental");
+    assert.ok(entry.parts.some((part: string) => SPELL_MARK[id].test(part)), `${id} must carry elemental overlay parts`);
+  });
+}
+
+test("faunaSpellArt prefers the art flag, then the live magery names until spawn wiring", () => {
+  assert.equal(faunaSpellArt({ art: "thornbound" }), "thornbound");
+  assert.equal(faunaSpellArt({ art: "risen", name: "thornbound" }), "risen");
+  assert.equal(faunaSpellArt({ name: "stonebound" }), "stonebound");
+  assert.equal(faunaSpellArt({ name: "tidebound" }), "tidebound");
+  assert.equal(faunaSpellArt({ name: "galebound" }), "galebound");
+  assert.equal(faunaSpellArt({ name: "risen wolf" }), "risen");
+  assert.equal(faunaSpellArt({ name: "Daisy" }), undefined);
+  assert.equal(faunaSpellArt({}), undefined);
+});
+
+test("risen look desaturates a clone, ghost-edges it, and leaves the shared species source alone", () => {
+  const material = new MeshStandardMaterial({ color: "#4d7a4f" });
+  const geometry = new BoxGeometry(1, 1, 1);
+  const colors = new Float32Array([1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0]);
+  geometry.setAttribute("color", new BufferAttribute(colors, 3));
+  const mesh = new Mesh(geometry, material);
+  const source = new Group();
+  source.add(mesh);
+  const a = cloneFaunaArt(source);
+  const risen = applyRisenLook(cloneFaunaArt(source));
+  const risenMesh = risen.children.find((o) => o instanceof Mesh) as Mesh;
+  const sourceColor = geometry.getAttribute("color") as BufferAttribute;
+  assert.equal(sourceColor.getX(0), 1);
+  assert.equal(mesh.material, material);
+  assert.notEqual(risenMesh.geometry, geometry);
+  assert.notEqual(risenMesh.material, material);
+  const risenMat = risenMesh.material as MeshStandardMaterial;
+  assert.ok(risenMat.transparent);
+  assert.ok(risenMat.opacity < 0.9);
+  const attr = risenMesh.geometry.getAttribute("color") as BufferAttribute;
+  assert.ok(attr.getX(0) < 0.85 && attr.getY(0) > 0.05);
+  assert.ok(risen.getObjectByName("risen-ghost-edge"));
+  assert.ok(Math.abs(risen.rotation.z) > 0.02, "slightly wrong tilt");
+  assert.equal(a.children[0] instanceof Mesh ? (a.children[0] as Mesh).material : null, material);
 });
 
 test("Beast death pose reads mutable creature task inside the frame callback", () => {

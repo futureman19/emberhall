@@ -1,6 +1,6 @@
 import { inBounds } from "./atlas.ts";
 import { mulberry32 } from "./rng.ts";
-import type { Building, BuildingKind, ClassId, Tile, World } from "./types.ts";
+import type { Building, BuildingKind, ClassId, NpcRole, Tile, World } from "./types.ts";
 import { createPerson, nid } from "./world.ts";
 
 /**
@@ -22,6 +22,8 @@ export const CITY = { tx: 176, ty: 336 };
 const WARD_H = 3;
 const GATE_Z = [334, 335, 336, 337, 338];
 export const KEEP = { tx: 176, ty: 320, x0: 166, x1: 186, z0: 312, z1: 327 };
+/** The apothecary on market row, between the market and the shop. */
+export const APOTHECARY = { tx: 176, ty: 343 };
 
 function paintRoad(tiles: Tile[][], ax: number, ay: number, bx: number, by: number, w = 1) {
   const n = Math.max(1, Math.hypot(bx - ax, by - ay));
@@ -140,6 +142,7 @@ function cityBuildings(): CityBuilding[] {
     // The bailey and market row.
     { kind: "notice", tx: 166, ty: 331 },
     { kind: "market", tx: 170, ty: 343 },
+    { kind: "apothecary", tx: APOTHECARY.tx, ty: APOTHECARY.ty },
     { kind: "shop", tx: 182, ty: 343 },
     { kind: "forge", tx: 192, ty: 344 },
     { kind: "tavern", tx: 160, ty: 345 },
@@ -161,13 +164,16 @@ interface CitySoul {
   x: number;
   z: number;
   cls: ClassId;
-  role?: "banker" | "provisioner" | "healer";
+  role?: NpcRole;
   name: string;
 }
+
+const ALCHEMIST_SOUL: CitySoul = { x: 176, z: 342, cls: "mage", role: "alchemist", name: "Severin Ashe" };
 
 const CITY_SOULS: CitySoul[] = [
   { x: 178, z: 339, cls: "merchant", role: "banker", name: "Odo Goldhand" },
   { x: 170, z: 342, cls: "merchant", role: "provisioner", name: "Wren Hall" },
+  ALCHEMIST_SOUL,
   { x: 181, z: 333, cls: "mage", role: "healer", name: "Sister Anselm" },
   { x: 192, z: 343, cls: "warrior", name: "Baldric Smith" },
   { x: 160, z: 344, cls: "merchant", name: "Maeb Oakley" },
@@ -197,9 +203,22 @@ export function ensureKeepSite(world: World) {
     anselm.home = { tx: 181, ty: 333 };
   }
 }
+/** Old saves gain the apothecary on load — the shop and its master, once each. */
+export function ensureApothecary(world: World) {
+  if (!world.buildings.some((b) => b.kind === "apothecary")) {
+    world.buildings.push({ id: nid(world, "b"), kind: "apothecary", tx: APOTHECARY.tx, ty: APOTHECARY.ty, beds: [] });
+  }
+  if (!world.people.some((p) => p.role === "alchemist")) {
+    // A dedicated stream: fresh worlds roll the master with the other souls.
+    const rng = mulberry32(world.seed + 1338);
+    world.people.push(createPerson(world, rng, ALCHEMIST_SOUL));
+  }
+}
+
 export function ensureCity(world: World): void {
   if (world.buildings.some((b) => b.kind === "keep")) {
     ensureKeepSite(world);
+    ensureApothecary(world);
     return;
   }
   for (const b of cityBuildings()) {

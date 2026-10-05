@@ -27,7 +27,7 @@ test("failed spellcasting emits a visible fizzle event at the caster", () => {
   } finally {
     Math.random = random;
   }
-  const fx = getFizzleFx();
+  const fx = getFizzleFx(world);
   assert.ok(fx);
   assert.equal(fx.spell, "nightsight");
   assert.equal(fx.x, player.x);
@@ -35,7 +35,7 @@ test("failed spellcasting emits a visible fizzle event at the caster", () => {
 });
 
 test("spell fx profiles - every spell has a complete, distinct identity", () => {
-  assert.equal(SPELL_ORDER.length, 15);
+  assert.equal(SPELL_ORDER.length, 38);
   const kinds = new Set<string>();
   const voices = new Set<string>();
   for (const spell of SPELL_ORDER) {
@@ -49,11 +49,11 @@ test("spell fx profiles - every spell has a complete, distinct identity", () => 
     voices.add(p.motes);
     assert.equal(spellSfx(spell), `spell_${spell}`);
   }
-  // Eight archetypes across fifteen spells — kin share a motion (heal/cure/bless
+  // Eight archetypes across twenty-four spells — kin share a motion (heal/cure/bless
   // all fountain; magicarrow/poison/curse all dart; mark/summon both sigil)
   // but never a particle voice.
   assert.equal(kinds.size, 8);
-  assert.equal(voices.size, 15);
+  assert.equal(voices.size, 38);
 });
 
 test("windupGlow - tint per spell, safe fallback", () => {
@@ -92,6 +92,8 @@ test("moteState - sigil motes orbit at ground level", () => {
 
 test("impactShard - shards scatter outward and fade", () => {
   for (const spell of ["magicarrow", "fireball"] as const) {
+    const onset = impactShard(spell, 3, 0);
+    assert.ok(Math.hypot(onset.dx, onset.dz) >= 0.64, "impact shards leave the target silhouette open from frame zero");
     const near = Math.hypot(impactShard(spell, 3, 0.1).dx, impactShard(spell, 3, 0.1).dz);
     const far0 = impactShard(spell, 3, 0.9);
     const far = Math.hypot(far0.dx, far0.dz);

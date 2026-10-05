@@ -1,0 +1,70 @@
+✖ construction reserves bridge deck, approaches and generated farm beds atomically (3604.2551ms)
+✖ chart-scale non-marker destination and return route use legal road connectors (3155.9089ms)
+✖ saved legacy regrowth on a stamped road gets a bounded legal local detour (4666.0493ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11880.7811
+
+✖ failing tests:
+
+test at src\game\review-blockers.test.ts:16:1
+✖ construction reserves bridge deck, approaches and generated farm beds atomically (3604.2551ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to: null
+      at TestContext.<anonymous> (file:///C:/Users/futur/Desktop/emberhall-review-fixes/src/game/review-blockers.test.ts:18:10)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.start (node:internal/test_runner/test:1003:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: null,
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at src\game\review-blockers.test.ts:26:1
+✖ chart-scale non-marker destination and return route use legal road connectors (3155.9089ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'The way is closed.'
+  - null
+  
+      at TestContext.<anonymous> (file:///C:/Users/futur/Desktop/emberhall-review-fixes/src/game/review-blockers.test.ts:28:10)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'The way is closed.',
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at src\game\review-blockers.test.ts:33:1
+✖ saved legacy regrowth on a stamped road gets a bounded legal local detour (4666.0493ms)
+  AssertionError [ERR_ASSERTION]: 560,560
+      at TestContext.<anonymous> (file:///C:/Users/futur/Desktop/emberhall-review-fixes/src/game/review-blockers.test.ts:48:58)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

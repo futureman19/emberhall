@@ -33,7 +33,7 @@ export function nid(world: World, prefix: string) {
   // next candidate, so reserve exact live IDs without renaming saved records or
   // advancing the simulation clock. Re-scan on allocation: arrays are mutable.
   const used = new Set<string>([world.player?.id ?? ""]);
-  for (const records of [world.buildings, world.people, world.fauna, world.piles, world.campfires, world.herbs, world.plots, world.saplings, world.player?.marks]) {
+  for (const records of [world.buildings, world.people, world.fauna, world.piles, world.campfires, world.herbs, world.plots, world.saplings, world.placedObjects, world.structures, world.player?.marks]) {
     for (const record of records ?? []) used.add(record.id);
   }
   let id: string;
@@ -319,10 +319,14 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
     piles: [],
     campfires: [],
     herbs: [],
+    zones: [],
     buildings: [],
     plots: [],
     saplings: [],
     plantedTimber: {},
+    placedObjects: [],
+    structures: [],
+    blueprints: [],
     player: {
       id: "",
       skills: emptySkills(),
@@ -343,6 +347,8 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
       poisonTickAt: 0,
       blessUntil: 0,
       invisUntil: 0,
+      ironwoodUntil: 0,
+      flyUntil: 0,
       armedSpell: null,
       marks: [],
       gateCoolUntil: 0,
@@ -389,6 +395,7 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
     rep: {},
     resourceNodes: createResourceNodeStateMap(),
     scars: {},
+    holes: {},
     seen: {},
     seenRev: 0,
     landRev: 1,
@@ -412,11 +419,11 @@ export function createStubWorld(): World {
   return w;
 }
 
-export function createWorld(): World {
-  const seed = (Math.random() * 1e9) | 0;
-  const tiles = generateTiles(seed);
-  const world = baseWorld(seed, tiles);
-  const rng = mulberry32(seed);
+export function createWorld(seed?: number): World {
+  const resolvedSeed = seed ?? ((Math.random() * 1e9) | 0);
+  const tiles = generateTiles(resolvedSeed);
+  const world = baseWorld(resolvedSeed, tiles);
+  const rng = mulberry32(resolvedSeed);
   const you = createPerson(world, rng, {
     x: COURT.tx,
     z: COURT.ty + 1,

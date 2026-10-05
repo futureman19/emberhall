@@ -11,6 +11,9 @@ import type {
   ResourceFormFor,
   ResourceId,
 } from "./resources/types.ts";
+import type { Blueprint, PlacedObject, Structure } from "./placeables/schema.ts";
+
+export type { Blueprint, PlacedObject, Structure };
 
 export type TileKind =
   | "grass"
@@ -86,6 +89,7 @@ export type ItemId =
   | "orc_tusk"
   | "meat"
   | "hide"
+  | "arrows"
   | "bandage"
   | "potion_heal"
   | "potion_night"
@@ -165,7 +169,8 @@ export type ResourceTag =
   | "blade"
   | "weapon"
   | "armor"
-  | "tool";
+  | "tool"
+  | "ammo";
 
 /**
  * A catalog-correlated material stack. Mapping over ResourceId keeps each
@@ -208,10 +213,33 @@ export type SpellId =
   | "invisibility"
   | "curse"
   | "mark"
-  | "recall";
+  | "recall"
+  | "thornsnare"
+  | "ironwood"
+  | "leech"
+  | "flash"
+  | "fireblast"
+  | "blizzard"
+  | "chainlightning"
+  | "sleep"
+  | "meteor"
+  | "flamewall"
+  | "tarpit"
+  | "stonewall"
+  | "sanctuary"
+  | "earthquake"
+  | "naturesfury"
+  | "jump"
+  | "mirrorimage"
+  | "gate"
+  | "fly"
+  | "necromancy"
+  | "resurrect"
+  | "summonelemental"
+  | "polymorph";
 
 export type ClassId = "ranger" | "warrior" | "mage" | "rogue" | "merchant";
-export type NpcRole = "banker" | "provisioner" | "healer";
+export type NpcRole = "banker" | "provisioner" | "healer" | "alchemist";
 export type FaunaKind =
   | "hare"
   | "hart"
@@ -284,6 +312,7 @@ export type BuildingKind =
   | "tower"
   | "gatehouse"
   | "shop"
+  | "apothecary"
   | "townhome"
   | "townhouse"
   | "cottage"
@@ -292,7 +321,7 @@ export type BuildingKind =
   | "homestead";
 export type VocationId = "cook" | "armourer" | "trader" | "recruiter" | "guard";
 export type Notoriety = "innocent" | "criminal" | "murderer";
-export type IntentKind = "walk" | "chop" | "mine" | "fish" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "till" | "forest" | "pick" | "none";
+export type IntentKind = "walk" | "chop" | "mine" | "fish" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "till" | "forest" | "pick" | "dig" | "fill" | "none";
 export type Speed = 0 | 1 | 2 | 3;
 export type PanelId = "none" | "help" | "you" | "journal" | "vale" | "roster" | "build";
 export type WeatherKind = "clear" | "fair" | "cloudy" | "rain" | "storm";
@@ -398,6 +427,32 @@ export interface Creature {
   curseUntil?: number;
   /** Summon spell: bound to the caster's side until this hour, then crumbles. */
   boundUntil?: number;
+  /** Thorn Snare: rooted until this hour; thorns bite each snareTickAt. */
+  snareUntil?: number;
+  snareTickAt?: number;
+  /** Sleep: drifts until this hour — any wound wakes it. */
+  sleptUntil?: number;
+  /** Flash: blinded until this hour — cannot find a fight. */
+  blindUntil?: number;
+  /** Blizzard: chilled until this hour — slower stride. */
+  chillUntil?: number;
+  /** Polymorph: the shape it wore before the working; reverts at polyUntil. */
+  wasKind?: FaunaKind;
+  polyUntil?: number;
+  /** Mirror Image: a conjured decoy — pops without corpse, loot, or glory. */
+  mirror?: boolean;
+  /** Visual-only spell-art variant. Stats, AI, and the Body/Beast boundary ignore this. */
+  art?: "thornbound" | "stonebound" | "galebound" | "tidebound" | "risen";
+}
+
+/** A shovel-cut in the dirt. Rain fills it. Authored pits are not holes. */
+export interface Hole {
+  kind: TileKind;
+  h: number;
+  open: boolean;
+  buried?: { items: Partial<Record<ItemId, number>>; gold: number };
+  /** Lined by a standing house. Rain skips it until the shell is gone. */
+  cellar?: boolean;
 }
 
 export interface GroundPile {
@@ -491,6 +546,10 @@ export interface PlayerState {
   blessUntil: number;
   /** An Lor Xen: the world forgets your shape until this hour. */
   invisUntil: number;
+  /** Rel Tym: bark-hard skin blunts every bite until this hour. */
+  ironwoodUntil: number;
+  /** Vas Hur Por: the wind carries you until this hour. */
+  flyUntil: number;
   armedSpell: SpellId | null;
   marks: RecallMark[];
   gateCoolUntil: number;
@@ -542,6 +601,25 @@ export interface LootGold {
   max: number;
 }
 
+/** A placed working of ground magic (batch two): it stands on the vale until
+ * `until`, pulsing its effect at `tickAt`. `power` bakes the caster's skill
+ * into the working at the moment it is raised; `pulses` counts the remaining
+ * shakes of an earthquake. */
+export type ZoneKind = "flamewall" | "tarpit" | "stonewall" | "sanctuary" | "earthquake" | "naturesfury";
+
+export interface GroundZone {
+  id: string;
+  kind: ZoneKind;
+  tx: number;
+  ty: number;
+  radius: number;
+  until: number;
+  tickAt: number;
+  ownerId: string | null;
+  power: number;
+  pulses: number;
+}
+
 export interface World {
   seed: number;
   hour: number;
@@ -554,10 +632,14 @@ export interface World {
   piles: GroundPile[];
   campfires: Campfire[];
   herbs: HerbPatch[];
+  zones: GroundZone[];
   buildings: Building[];
   plots: CropPlot[];
   saplings: Sapling[];
   plantedTimber: Record<string, string>;
+  placedObjects: PlacedObject[];
+  structures: Structure[];
+  blueprints: Blueprint[];
   player: PlayerState;
   log: LogLine[];
   objectives: Objective[];
@@ -565,6 +647,7 @@ export interface World {
   rep: Record<string, number>;
   resourceNodes: ResourceNodeStateMap;
   scars: Record<string, { kind: TileKind; h?: number }>;
+  holes?: Record<string, Hole>;
   seen: Record<string, boolean>;
   seenRev: number;
   landRev: number;
@@ -639,6 +722,8 @@ export type CtxVerb =
   | "use"
   | "harvest"
   | "till"
+  | "dig"
+  | "fill"
   | "sowCabbage"
   | "sowWheat"
   | "sowGarlic"

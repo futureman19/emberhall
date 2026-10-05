@@ -32,7 +32,7 @@ export function createTouchHold(options: {
     begin(point: TouchContact, tile: TouchTile) {
       if (point.pointerType !== "touch" || multi || contacts.size !== 1 || !options.eligible(tile)) return false;
       clearActive();
-      const current = { point: { ...point }, tile: { ...tile }, held: false, timer: null as number | null };
+      const current = { point: { pointerId: point.pointerId, pointerType: point.pointerType, clientX: point.clientX, clientY: point.clientY }, tile: { ...tile }, held: false, timer: null as number | null };
       active = current;
       current.timer = options.schedule(() => {
         if (active !== current || current.held) return;

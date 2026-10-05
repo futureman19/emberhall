@@ -1,0 +1,90 @@
+
+> build
+> node scripts/with-app-env.mjs vite build && npm run db:migrate
+
+(node:25788) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[90m[[90mnitro:vercel[90m][39m [36mℹ[39m Using [36mnodejs24.x[39m runtime.
+[90m[[90mnitro:vercel[90m][39m [36mℹ[39m Using [36mweb[39m entry format.
+[36mvite v8.2.2 [32mbuilding client environment for production...[36m[39m
+transforming...
+[33m[plugin rolldown:vite-resolve] Module "bun:sqlite" has been externalized for browser compatibility, imported by "C:/Users/futur/Desktop/emberhall-review-fixes/node_modules/@1sat/actions/dist/sync/index.js". See https://vite.dev/guide/troubleshooting.html#module-externalized-for-browser-compatibility for more details.[39m
+✓ 3376 modules transformed.
+rendering chunks...
+computing gzip size...
+.vercel/output/static/assets/styles-B0UEBHvD.css                     55.16 kB │ gzip:  10.81 kB
+.vercel/output/static/assets/__vite-browser-external-Cavc_B4G.js      0.10 kB │ gzip:   0.11 kB
+.vercel/output/static/assets/rolldown-runtime-C0FnF6B9.js             1.29 kB │ gzip:   0.71 kB
+.vercel/output/static/assets/testkit-DyTlZqLE.js                      1.29 kB │ gzip:   0.69 kB
+.vercel/output/static/assets/routes-BfLh9sAe.js                   1,800.10 kB │ gzip: 489.92 kB
+.vercel/output/static/assets/dist-DhNrIjXP.js                     2,297.31 kB │ gzip: 629.00 kB
+.vercel/output/static/assets/index-BPwnDYQF.js                    2,684.01 kB │ gzip: 770.79 kB
+
+[32m✓ built in 4.95s[39m
+[33m[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[36mvite v8.2.2 [32mbuilding ssr environment for production...[36m[39m
+transforming...
+✓ 281 modules transformed.
+rendering chunks...
+computing gzip size...
+node_modules/.nitro/vite/services/ssr/assets/styles-B0UEBHvD.css                        55.16 kB │ gzip:  10.81 kB
+node_modules/.nitro/vite/services/ssr/assets/start-5Z2QO8AU.js                           0.14 kB │ gzip:   0.13 kB
+node_modules/.nitro/vite/services/ssr/assets/empty-plugin-adapters-D9UWiqvJ.js           0.22 kB │ gzip:   0.16 kB
+node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-D_7rXfE7.js      0.58 kB │ gzip:   0.34 kB
+node_modules/.nitro/vite/services/ssr/assets/testkit-hJPja4Pb.js                         2.55 kB │ gzip:   1.13 kB
+node_modules/.nitro/vite/services/ssr/assets/router-DoHjdNAh.js                         12.33 kB │ gzip:   4.16 kB
+node_modules/.nitro/vite/services/ssr/index.js                                          69.43 kB │ gzip:  17.70 kB
+node_modules/.nitro/vite/services/ssr/assets/routes-Cwx1Teq-.js                      1,360.24 kB │ gzip: 305.16 kB
+
+[32m✓ built in 2.32s[39m
+
+[90m[[90mnitro[90m][39m [35m◐[39m Building [[35mNitro[39m] [2m(preset: [36mvercel[39m, compatibility: [36m2026-09-30[39m)[22m
+[90m[[90mnitro[90m][39m [32m✔[39m Generated public [36m.vercel/output/static[39m
+[36mvite v8.2.2 [32mbuilding nitro environment for production...[36m[39m
+transforming...
+✓ 3237 modules transformed.
+rendering chunks...
+computing gzip size...
+.vercel/output/functions/__server.func/_ssr/start-5Z2QO8AU.mjs                      0.14 kB │ gzip:     0.13 kB
+.vercel/output/functions/__server.func/_ssr/empty-plugin-adapters-D9UWiqvJ.mjs      0.23 kB │ gzip:     0.16 kB
+.vercel/output/functions/__server.func/_libs/babel__runtime.mjs                     0.39 kB │ gzip:     0.26 kB
+.vercel/output/functions/__server.func/_tanstack-start-manifest_v-D_7rXfE7.mjs      0.64 kB │ gzip:     0.37 kB
+.vercel/output/functions/__server.func/_chunks/ssr-renderer.mjs                     0.96 kB │ gzip:     0.49 kB
+.vercel/output/functions/__server.func/_libs/radix-ui__react-compose-refs.mjs       1.23 kB │ gzip:     0.58 kB
+.vercel/output/functions/__server.func/_runtime.mjs                                 1.92 kB │ gzip:     0.87 kB
+.vercel/output/functions/__server.func/_ssr/testkit-hJPja4Pb.mjs                    2.63 kB │ gzip:     1.18 kB
+.vercel/output/functions/__server.func/_libs/zustand.mjs                            2.76 kB │ gzip:     0.97 kB
+.vercel/output/functions/__server.func/_libs/class-variance-authority+clsx.mjs      3.17 kB │ gzip:     1.24 kB
+.vercel/output/functions/__server.func/_libs/radix-ui__react-slot.mjs               5.65 kB │ gzip:     1.74 kB
+.vercel/output/functions/__server.func/_libs/h3-v2+rou3.mjs                         9.83 kB │ gzip:     3.05 kB
+.vercel/output/functions/__server.func/_libs/tanstack__history.mjs                 12.50 kB │ gzip:     3.70 kB
+.vercel/output/functions/__server.func/_ssr/router-DoHjdNAh.mjs                    12.73 kB │ gzip:     4.28 kB
+.vercel/output/functions/__server.func/_libs/lucide-react.mjs                      14.43 kB │ gzip:     3.54 kB
+.vercel/output/functions/__server.func/_libs/1sat__react+react.mjs                 21.66 kB │ gzip:     5.59 kB
+.vercel/output/functions/__server.func/_libs/h3+rou3+srvx.mjs                      22.57 kB │ gzip:     6.12 kB
+.vercel/output/functions/__server.func/_libs/@tanstack/router-core+[...].mjs       29.60 kB │ gzip:     7.98 kB
+.vercel/output/functions/__server.func/index.mjs                                   32.06 kB │ gzip:     9.95 kB
+.vercel/output/functions/__server.func/_ssr/ssr.mjs                                67.77 kB │ gzip:    17.61 kB
+.vercel/output/functions/__server.func/_libs/tailwind-merge.mjs                    88.13 kB │ gzip:    15.66 kB
+.vercel/output/functions/__server.func/_libs/three.mjs                            113.49 kB │ gzip:    24.75 kB
+.vercel/output/functions/__server.func/_libs/zod.mjs                              167.56 kB │ gzip:    37.36 kB
+.vercel/output/functions/__server.func/_libs/@tanstack/react-router+[...].mjs     749.98 kB │ gzip:   157.85 kB
+.vercel/output/functions/__server.func/_ssr/routes-Cwx1Teq-.mjs                 1,423.90 kB │ gzip:   305.09 kB
+.vercel/output/functions/__server.func/_libs/@react-three/drei+[...].mjs        2,639.58 kB │ gzip:   529.73 kB
+.vercel/output/functions/__server.func/_libs/1sat__connect.mjs                  3,727.48 kB │ gzip:   809.00 kB
+.vercel/output/functions/__server.func/_libs/@1sat/actions.mjs                  4,703.20 kB │ gzip: 1,066.11 kB
+
+[32m✓ built in 2.44s[39m
+[36mℹ[39m Generated [36m.vercel/output/nitro.json[39m
+
+[90m[[90mnitro[90m][39m [32m✔[39m You can preview this build using [36mnpx vite preview[39m
+[90m[[90mnitro[90m][39m [32m✔[39m You can deploy this build using [36mnpx nitro deploy --prebuilt[39m
+
+> db:migrate
+> node scripts/migrate.mjs
+
+[migrate] DATABASE_URL not set — skipping (the PGLite fallback migrates itself).

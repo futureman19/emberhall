@@ -1,0 +1,54 @@
+/* User-approved Blender relief renders. Paint only: never change frame geometry. */
+:root {
+  --oak-band: url("/art/gui/forged-oak/band.png");
+  --oak-button: url("/art/gui/forged-oak/button.png");
+  --oak-corner: url("/art/gui/forged-oak/corner.png");
+}
+
+.classic-ui > [data-testid="bottom-band"] {
+  background-image: var(--oak-band), linear-gradient(var(--color-stone), var(--color-bg));
+  background-size: 512px 60px, 100% 100%;
+  background-repeat: repeat-x;
+  background-position: left top;
+  box-shadow: 0 -2px 6px var(--color-shadow);
+  /* Keep the 1px border in layout so the centered controls never shift. */
+  border-top-color: transparent;
+}
+
+.classic-ui > [data-testid="bottom-band"]::before,
+.classic-ui > [data-testid="bottom-band"]::after {
+  display: none;
+}
+
+.classic-ui [data-testid="bottom-band"] button:not([aria-label="Open the vale map"]),
+.classic-ui [data-testid="right-rail"] button {
+  background-image: var(--oak-button), linear-gradient(var(--color-stone), var(--color-bg));
+  background-size: 100% 100%;
+  background-color: var(--color-bg);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.classic-ui [data-testid="bottom-band"] button:hover,
+.classic-ui [data-testid="right-rail"] button:hover {
+  filter: brightness(1.22);
+}
+
+.classic-ui [data-testid="bottom-band"] button:active,
+.classic-ui [data-testid="right-rail"] button:active {
+  filter: brightness(0.82);
+}
+
+.classic-ui [data-testid="bottom-band"] [aria-label="Open the vale map"] + p {
+  /* The clock sits over the low brass molding: back the text without moving it. */
+  background-color: var(--color-bg);
+}
+
+.classic-ui > [data-testid="docked-minimap"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--oak-corner);
+  background-size: 100% 100%;
+  pointer-events: none;
+}

@@ -69,7 +69,7 @@ function PetRow({ c, youX, youZ, renaming }: { c: Creature; youX: number; youZ: 
       </span>
       <span className="mt-1.5 flex items-center gap-2">
         {bound ? (
-          <span className="text-[11px] italic text-[#b48ae8]">bound by words — the binding holds while the hour does</span>
+          <span className="text-[11px] italic text-gold">bound by words — the binding holds while the hour does</span>
         ) : (
           <>
             <LoyaltyBar loyalty={c.loyalty} />
@@ -104,7 +104,7 @@ export function PetsGump() {
   if (!open) return null;
   const pets = fauna.filter((c) => c.ownerId === playerId && c.task !== "dead");
   return (
-    <div className="pointer-events-auto absolute top-16 right-3 max-h-[min(70vh,36rem)] w-[min(100%-1.5rem,20rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 sm:right-4">
+    <div data-ui-surface="pets" className="pointer-events-auto absolute top-16 right-3 max-h-[min(70vh,36rem,calc(100dvh-4rem-var(--corner-clear)))] w-[min(100%-1.5rem,20rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 md:right-[68px]">
       <p className="font-display text-sm text-fg">Companions</p>
       <p className="mt-0.5 text-xs text-muted">Feed them, and they are yours forever. Forget, and the wild takes them back.</p>
       {pets.length === 0 ? (

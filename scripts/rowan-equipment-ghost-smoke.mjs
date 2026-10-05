@@ -7,17 +7,18 @@ const url = process.argv[2];
 const label = process.argv[3];
 assert(['localhost', '127.0.0.1'].includes(new URL(url).hostname));
 assert.match(label, /^[a-z0-9-]+$/);
-const out = path.resolve('art/verification/rowan-integration', label);
+const out = path.resolve(process.env.EMBERHALL_ARTIFACT_DIR, label);
 fs.mkdirSync(out, { recursive: true });
 assert(!fs.existsSync(path.join(out, 'results.json')), 'Never overwrite evidence');
 const report = { url, label, scope: 'Fresh disposable save, seeded inventory and poison condition; native equip handlers, normal poison/death tick and real healer UI. Not natural combat acquisition or all equipment combinations.', checks: [], snapshots: {}, screenshots: [], errors: [], consoleErrors: [], requests: [] };
 const flush = () => fs.writeFileSync(path.join(out, 'results.json'), JSON.stringify(report, null, 2));
 const check = (name, ok, data = {}) => { report.checks.push({ name, ok: !!ok, ...data }); flush(); };
-const browser = await chromium.launch({ headless: true, args: ['--use-angle=d3d11', '--enable-gpu'] });
+const browser = await chromium.launch({ headless: true, args: ['--use-angle=d3d11', '--enable-webgl', '--ignore-gpu-blocklist'] });
 const timer = setTimeout(() => browser.close(), 180000);
 try {
   const context = await browser.newContext({ viewport: { width: 1440, height: 960 } });
   await context.routeWebSocket(/.*/, () => {});
+  await context.route('**/*', route => route.request().method() === 'GET' ? route.continue() : route.abort());
   const page = await context.newPage(); page.setDefaultTimeout(20000);
   page.on('pageerror', e => report.errors.push(e.message));
   page.on('console', m => { if (m.type() === 'error') report.consoleErrors.push(m.text()); });
@@ -34,7 +35,7 @@ try {
     const fiber = await import(match[1]);
     window.__rowanQA = fiber._roots.get(document.querySelector('canvas')).store.getState();
     const w = window.__ember.getWorld(), s = window.__ember.useGame.getState(), p = w.people.find(p => p.isPlayer), healer = w.people.find(p => p.role === 'healer');
-    w.buildings = []; w.fauna = []; w.hour = 12;
+    w.buildings = []; w.fauna = []; // Retain monotonic hour: resource-node timestamps are validated.
     for (let z = 280; z <= 310; z++) for (let x = 240; x <= 275; x++) w.tiles[z][x].kind = 'grass';
     w.landRev++; p.x = 256; p.z = 296; p.path = []; p.facing = 0;
     healer.x = 258; healer.z = 296; healer.path = []; w.people = [p, healer];

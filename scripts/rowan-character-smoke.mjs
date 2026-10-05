@@ -7,18 +7,19 @@ const url = process.argv[2] ?? 'http://127.0.0.1:8080';
 const label = process.argv[3] ?? 'candidate';
 assert(['localhost', '127.0.0.1'].includes(new URL(url).hostname));
 assert.match(label, /^[a-z0-9-]+$/);
-const out = path.resolve('art/verification/rowan-integration', label);
+const out = path.resolve(process.env.EMBERHALL_ARTIFACT_DIR, label);
 fs.mkdirSync(out, { recursive: true });
 assert(!fs.existsSync(path.join(out, 'results.json')), 'Preserve previous run');
 const report = { url, label, scope: 'Local real-app loaded-save fixture; creator UI, walk and bounded action samples, not all animations or performance certification', checks: [], errors: [], screenshots: [], requests: [] };
 const flush = () => fs.writeFileSync(path.join(out, 'results.json'), JSON.stringify(report, null, 2));
 const check = (name, ok, data = {}) => { report.checks.push({ name, ok: !!ok, ...data }); flush(); assert(ok, name); };
-const browser = await chromium.launch({ headless: true, args: ['--use-angle=d3d11', '--enable-gpu'] });
+const browser = await chromium.launch({ headless: true, args: ['--use-angle=d3d11', '--enable-webgl', '--ignore-gpu-blocklist'] });
 const watchdog = setTimeout(() => browser.close(), 240000);
 const rejected = label.startsWith('failure');
 try {
   const context = await browser.newContext({ viewport: { width: 1440, height: 960 } });
   await context.routeWebSocket(/.*/, () => {});
+  await context.route('**/*', route => route.request().method() === 'GET' ? route.continue() : route.abort());
   if (rejected) await context.route('**/art/character-reimagined/rowan.glb', route => { report.requests.push('rejected-rowan'); return route.abort('failed'); });
   const page = await context.newPage(); page.setDefaultTimeout(25000);
   page.on('pageerror', error => report.errors.push(error.message));
@@ -37,7 +38,7 @@ try {
     window.__rowanWorld = window.__rowanFiber._roots.get(document.querySelector('canvas')).store.getState();
     const w = window.__ember.getWorld(), s = window.__ember.useGame.getState(), p = w.people.find(p => p.isPlayer);
     // Flat disposable scene, not the user's save. Retain one original NPC to verify policy.
-    w.buildings = []; w.fauna = []; w.hour = 12;
+    w.buildings = []; w.fauna = []; // Retain monotonic hour: resource-node timestamps are validated.
     for (let z = 280; z <= 310; z++) for (let x = 240; x <= 275; x++) w.tiles[z][x].kind = 'grass';
     w.landRev++; p.x = 256; p.z = 296; p.path = []; p.facing = 0;
     const npc = w.people.find(p => !p.isPlayer); npc.x = 258; npc.z = 296; npc.path = [];
@@ -49,13 +50,13 @@ try {
     const root = mirror ? state.scene : state.scene.getObjectByName('emberhall-player-figure');
     const meshes = [];
     root?.traverse(o => { if (o.isMesh) meshes.push({ name: o.geometry.name, type: o.geometry.type, vertices: o.geometry.attributes.position?.count ?? 0, color: o.material.color?.getHexString(), parent: o.parent.name, position: o.position.toArray(), matrix: o.matrixWorld.toArray() }); });
-    let npcRowan = 0; state.scene.getObjectByName('emberhall-npc-figure')?.traverse(o => { if (o.isMesh && o.geometry.name.startsWith('rowan:')) npcRowan++; });
+    let npcRowan = 0, npcMeshes = 0; state.scene.getObjectByName('emberhall-npc-figure')?.traverse(o => { if (o.isMesh) {npcMeshes++; if (o.geometry.name.startsWith('rowan:')) npcRowan++;} });
     const shoulders = root?.children.filter(o => Math.abs(Math.abs(o.position.x) - .32) < .0001).map(o => ({ x: o.position.x, rotation: o.rotation.toArray(), children: o.children.map(c => ({ geometry: c.geometry?.name, position: c.position.toArray(), children: c.children.length })) }));
-    return { meshes, npcRowan, shoulders, yaw: root?.rotation.y };
+    return { meshes, npcRowan, npcMeshes, shoulders, yaw: root?.rotation.y };
   }, mirror);
   const screenshot = async name => { const target = path.join(out, name + '.png'); await page.screenshot({ path: target }); report.screenshots.push(target); flush(); };
   const body = await inspect();
-  check('player-model-and-npc-isolation', body.meshes.some(m => m.name === 'rowan:head') === !rejected && body.npcRowan === 0, body);
+  check('player-model-and-npc-isolation', body.meshes.some(m => m.name === 'rowan:head') === !rejected && body.npcRowan === 0 && body.npcMeshes > 0 && (!rejected || body.meshes.some(m => m.type === 'BufferGeometry' && m.vertices > 0)), body);
   check('original-shoulder-anchors-retained', body.shoulders.length === 2 && body.shoulders.every(s => s.children.some(c => Math.abs(c.position[1] + .26) < .0001)), { shoulders: body.shoulders });
   await screenshot('desktop-world');
   // Real creator UI on the loaded disposable world (not procedural new-world onboarding).
@@ -75,7 +76,10 @@ try {
   await page.waitForTimeout(150);
   const chosen = await inspect(true);
   await screenshot('desktop-creator-custom');
+  await page.setViewportSize({ width: 390, height: 844 }); await page.waitForTimeout(300);
+  await page.getByTestId('look-hairstyle-crop').click(); await screenshot('mobile-creator-custom');
   await page.getByTestId('look-done').click();
+  await page.setViewportSize({ width: 1440, height: 960 });
   await page.waitForFunction(() => window.__ember.useGame.getState().phase === 'playing');
   await page.waitForTimeout(500);
   const world = await inspect();
@@ -93,12 +97,13 @@ try {
   await page.evaluate(() => {
     const w = window.__ember.getWorld(), s = window.__ember.useGame.getState(), p = w.people.find(p => p.isPlayer);
     p.path = []; w.player.wear.main = 'sword';
-    w.fauna.push({ id: 'rowan-qa-target', kind: 'deer', x: p.x + .7, z: p.z, hp: 999, maxHp: 999, path: [], task: 'idle', taskUntil: w.hour + 99, corpseUntil: 0, home: { tx: Math.floor(p.x), ty: Math.floor(p.z) }, ownerId: null, loyalty: 0, stay: false });
+    w.fauna.push({ id: 'rowan-qa-target', kind: 'hart', x: p.x + .7, z: p.z, hp: 999, maxHp: 999, path: [], task: 'idle', taskUntil: w.hour + 99, corpseUntil: 0, home: { tx: Math.floor(p.x), ty: Math.floor(p.z) }, ownerId: null, loyalty: 0, stay: false });
     s.hunt('rowan-qa-target'); s.speed(1); for (let i = 0; i < 4; i++) s.tick(.05); s.speed(0);
   });
   await page.waitForTimeout(500);
   const action = await inspect();
   check('action-shoulder-pose-and-equipment', action.shoulders.some((s, i) => Math.abs(s.rotation[0] - body.shoulders[i].rotation[0]) > .02) && action.shoulders.find(s => s.x > 0).children.some(c => c.children > 0 && !c.geometry), { shoulders: action.shoulders });
+  check('action-fixture-save-valid', await page.evaluate(() => { const s=window.__ember.useGame.getState();s.saveNow();return !window.__ember.useGame.getState().saveError; }));
   await screenshot('desktop-action');
   await page.setViewportSize({ width: 390, height: 844 }); await page.waitForTimeout(500); await screenshot('mobile-world');
   check('actual-asset-request', rejected ? report.requests.includes('rejected-rowan') : report.requests.some(r => r.status === 200), { requests: report.requests });

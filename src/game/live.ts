@@ -3,7 +3,9 @@ import { paintBiomes } from "./biome.ts";
 import { hourOfDay, isDusk, isNight, settleGear, SKILL_META } from "./catalog.ts";
 import { ensureExpansionFauna, ensureStarterFauna, seedBarrow, seedFauna } from "./ecology.ts";
 import { seedFarmPlots } from "./farm.ts";
+import { clearSpellEffects, refreshSpellStatuses } from "./spell-effects.ts";
 import { maxMana } from "./magery.ts";
+import { godModeEnabled } from "./god.ts";
 import { you } from "./player.ts";
 import { mulberry32 } from "./rng.ts";
 import { ensureWeather, weatherSnap } from "./weather.ts";
@@ -11,6 +13,7 @@ import { ensureCity, ensureKeepSite } from "./city.ts";
 import { ensureHerbs } from "./herbs.ts";
 import { createStubWorld, createWorld, ensureRynWain, seedEmberhallBank, seedFieldStones, seedTownNpcs } from "./world.ts";
 import { ensureLookHut } from "./house.ts";
+import { clearHistory } from "./placeables/history.ts";
 import { createResourceNodeStateMap, regrowResourceNodes } from "./resources/state.ts";
 import type { SkillId, Snapshot, World } from "./types.ts";
 
@@ -22,10 +25,14 @@ function withFauna(w: World) {
   if (!w.plots) w.plots = [];
   if (!w.saplings) w.saplings = [];
   if (!w.plantedTimber) w.plantedTimber = {};
+  if (!w.placedObjects) w.placedObjects = [];
+  if (!w.structures) w.structures = [];
+  if (!w.blueprints) w.blueprints = [];
   if (w.buildings) {
     for (const b of w.buildings) if (b.kind === "farm") seedFarmPlots(w, b.tx, b.ty);
   }
   if (w.scars == null) w.scars = {};
+  if (w.holes == null) w.holes = {};
   if (w.resourceNodes == null) w.resourceNodes = createResourceNodeStateMap();
   if (w.landRev == null) w.landRev = 1;
   if (w.tiles.length) seedFieldStones(w);
@@ -73,6 +80,9 @@ function withFauna(w: World) {
     if (w.player.poisonTickAt == null) w.player.poisonTickAt = 0;
     if (w.player.blessUntil == null) w.player.blessUntil = 0;
     if (w.player.invisUntil == null) w.player.invisUntil = 0;
+    if (w.player.ironwoodUntil == null) w.player.ironwoodUntil = 0;
+    if (w.player.flyUntil == null) w.player.flyUntil = 0;
+    if (!Array.isArray(w.zones)) w.zones = [];
     if (w.player.armedSpell === undefined) w.player.armedSpell = null;
     if (!Array.isArray(w.player.marks)) w.player.marks = [];
     if (w.player.ghost == null) w.player.ghost = false;
@@ -102,14 +112,34 @@ function withFauna(w: World) {
 
 let world: World = createStubWorld();
 
+/** God mode (?god=1): every skill taught to 100 and the well filled, each time a world loads. */
+function godify(w: World): void {
+  if (!godModeEnabled()) return;
+  for (const key of Object.keys(w.player.skills)) w.player.skills[key as keyof typeof w.player.skills] = 100;
+  const p = w.people.find((x) => x.isPlayer);
+  w.player.mana = maxMana(p?.int ?? 8, 100);
+}
+
 export function getWorld() {
   return world;
 }
 export function setWorld(next: World) {
+  clearHistory(world);
+  clearSpellEffects(world);
   world = withFauna(next);
+  clearHistory(world);
+  clearSpellEffects(world);
+  refreshSpellStatuses(world);
+  godify(world);
 }
 export function resetWorld() {
+  clearHistory(world);
+  clearSpellEffects(world);
   world = withFauna(createWorld());
+  clearHistory(world);
+  clearSpellEffects(world);
+  refreshSpellStatuses(world);
+  godify(world);
   return world;
 }
 

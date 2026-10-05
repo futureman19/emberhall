@@ -1,5 +1,6 @@
 import { SECONDS_PER_HOUR } from "./catalog.ts";
 import { mulberry32 } from "./rng.ts";
+import { washHoles } from "./digging.ts";
 import type { WeatherKind, WeatherState, World } from "./types.ts";
 
 /**
@@ -193,6 +194,7 @@ export function tickWeather(world: World, dt: number) {
   }
 
   tickTorch(world, wx, rain);
+  if (rain >= 0.35) washHoles(world);
 }
 
 /** Whether wild small game bolts for cover. Wolves and wights don't mind the wet. */

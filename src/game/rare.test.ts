@@ -127,6 +127,32 @@ test("rare - exceptional respects class and rank ladders", () => {
   assert.ok(gm!.affixes.every((a) => AFFIXES[a]!.rank <= 5));
 });
 
+test("workmanship - master with rare materials never crafts ordinary", () => {
+  for (const grade of ["choice", "pristine"] as const) {
+    const chances = workmanshipChances(100, 18, grade);
+    assert.equal(chances.ordinary, 0, `${grade} at mastery has no ordinary outcome`);
+    assert.equal(Number((chances.ordinary + chances.fine + chances.exceptional).toFixed(8)), 1);
+    assert.equal(workmanshipForCraft(100, 18, 0.999, grade), "fine");
+    assert.notEqual(workmanshipForCraft(100, 18, 0.001, grade), "ordinary");
+  }
+});
+
+test("workmanship - floor requires both mastery and rare grade", () => {
+  assert.ok(workmanshipChances(79, 18, "pristine").ordinary > 0, "below mastery ordinary stays possible");
+  assert.ok(workmanshipChances(100, 18, "sound").ordinary > 0, "common materials keep ordinary");
+  assert.ok(workmanshipChances(100, 18, "rough").ordinary > 0, "rough materials keep ordinary");
+  assert.ok(workmanshipChances(100, 18).ordinary > 0, "grade-less legacy rolls keep ordinary");
+});
+
+test("workmanship - better grade shifts odds upward without forcing exceptional", () => {
+  const sound = workmanshipChances(80, 18, "sound");
+  const choice = workmanshipChances(80, 18, "choice");
+  const pristine = workmanshipChances(80, 18, "pristine");
+  assert.ok(choice.exceptional > sound.exceptional, "choice beats sound");
+  assert.ok(pristine.exceptional > choice.exceptional, "pristine beats choice");
+  assert.ok(pristine.exceptional <= 0.2, "exceptional stays capped");
+});
+
 test("crafted bows - workmanship is a physical quality roll, never a magic-affix roll", () => {
   assert.deepEqual(workmanshipChances(20, 18), { ordinary: 1, fine: 0, exceptional: 0 });
   const mastery = workmanshipChances(100, 18);

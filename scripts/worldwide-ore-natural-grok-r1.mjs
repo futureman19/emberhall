@@ -149,7 +149,7 @@ try {
         });
         flush();
       }
-      const mine = await page.evaluate(({site}) => {
+      const mine = await page.evaluate(() => {
         const w = window.__ember.getWorld();
         w.player.intent.kind = 'none';
         window.__ember.useGame.getState().tick(0.01);

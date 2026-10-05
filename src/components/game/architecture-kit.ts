@@ -1,7 +1,7 @@
 import { BUILD_SIZE } from "../../game/building-size.ts";
 
 export const ARCHITECTURE_KINDS = [
-  "rampart", "rampartV", "tower", "gatehouse", "shop", "townhome",
+  "rampart", "rampartV", "tower", "gatehouse", "shop", "apothecary", "townhome",
   "townhouse", "cottage", "porch", "hut", "homestead",
 ] as const;
 export type ArchitectureKind = (typeof ARCHITECTURE_KINDS)[number];

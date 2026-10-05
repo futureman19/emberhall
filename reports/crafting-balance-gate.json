@@ -22,13 +22,13 @@
       "inspections": {
         "p50": 5,
         "p90": 5,
-        "p99": 6,
-        "max": 6
+        "p99": 7,
+        "max": 8
       },
       "modeledSeconds": {
         "p50": 11.1,
         "p90": 11.1,
-        "p99": 12.6
+        "p99": 14.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -44,15 +44,87 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 758,
-        "p90": 1316,
-        "p99": 1729,
-        "max": 2786
+        "p50": 5485,
+        "p90": 8401,
+        "p99": 11333,
+        "max": 17405
       },
       "modeledSeconds": {
-        "p50": 1140.6,
-        "p90": 1977.6,
-        "p99": 2597.1
+        "p50": 8231.1,
+        "p90": 12605.1,
+        "p99": 17003.1
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
+      "label": "ironwood bow body",
+      "resourceId": "ironwood",
+      "required": 5,
+      "skill": 70,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 5085,
+        "p90": 8619,
+        "p99": 10925,
+        "max": 18957
+      },
+      "modeledSeconds": {
+        "p50": 7631.1,
+        "p90": 12932.1,
+        "p99": 16391.1
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
+      "label": "copper sword edge",
+      "resourceId": "copper_ore",
+      "required": 5,
+      "skill": 20,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 29,
+        "p90": 47,
+        "p99": 68,
+        "max": 76
+      },
+      "modeledSeconds": {
+        "p50": 47.1,
+        "p90": 74.1,
+        "p99": 105.6
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
+      "label": "tin for bronze",
+      "resourceId": "tin_ore",
+      "required": 5,
+      "skill": 35,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 248,
+        "p90": 422,
+        "p99": 585,
+        "max": 691
+      },
+      "modeledSeconds": {
+        "p50": 375.6,
+        "p90": 636.6,
+        "p99": 881.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -68,15 +140,63 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 319,
-        "p90": 594,
-        "p99": 861,
-        "max": 1119
+        "p50": 677,
+        "p90": 1153,
+        "p99": 1833,
+        "max": 1857
       },
       "modeledSeconds": {
-        "p50": 482.1,
-        "p90": 894.6,
-        "p99": 1295.1
+        "p50": 1019.1,
+        "p90": 1733.1,
+        "p99": 2753.1
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
+      "label": "emberite sword edge",
+      "resourceId": "emberite",
+      "required": 5,
+      "skill": 90,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 45693,
+        "p90": 85358,
+        "p99": 109903,
+        "max": 123179
+      },
+      "modeledSeconds": {
+        "p50": 68543.1,
+        "p90": 128040.6,
+        "p99": 164858.1
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
+      "label": "moon silver sword edge",
+      "resourceId": "moon_silver",
+      "required": 5,
+      "skill": 75,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 19030,
+        "p90": 30480,
+        "p99": 40434,
+        "max": 48491
+      },
+      "modeledSeconds": {
+        "p50": 28548.6,
+        "p90": 45723.6,
+        "p99": 60654.6
       },
       "blockedMatches": {
         "p50": 0,
@@ -92,15 +212,87 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 567,
-        "p90": 1583,
-        "p99": 2590,
-        "max": 4202
+        "p50": 909,
+        "p90": 2567,
+        "p99": 5944,
+        "max": 6637
       },
       "modeledSeconds": {
-        "p50": 851.22,
-        "p90": 2375.22,
-        "p99": 3885.72
+        "p50": 1364.22,
+        "p90": 3851.22,
+        "p99": 8916.72
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
+      "label": "emerald inlay",
+      "resourceId": "emerald",
+      "required": 1,
+      "skill": 70,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 219,
+        "p90": 855,
+        "p99": 1500,
+        "max": 2197
+      },
+      "modeledSeconds": {
+        "p50": 329.22,
+        "p90": 1283.22,
+        "p99": 2250.72
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
+      "label": "amethyst inlay",
+      "resourceId": "amethyst",
+      "required": 1,
+      "skill": 60,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 230,
+        "p90": 863,
+        "p99": 1688,
+        "max": 2142
+      },
+      "modeledSeconds": {
+        "p50": 345.72,
+        "p90": 1295.22,
+        "p99": 2532.72
+      },
+      "blockedMatches": {
+        "p50": 0,
+        "max": 0
+      }
+    },
+    {
+      "label": "diamond inlay",
+      "resourceId": "diamond",
+      "required": 1,
+      "skill": 70,
+      "samples": 200,
+      "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
+      "completionRate": 1,
+      "inspections": {
+        "p50": 184,
+        "p90": 599,
+        "p99": 1185,
+        "max": 1347
+      },
+      "modeledSeconds": {
+        "p50": 276.72,
+        "p90": 899.22,
+        "p99": 1778.22
       },
       "blockedMatches": {
         "p50": 0,
@@ -116,15 +308,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 265,
-        "p90": 1049,
-        "p99": 1888,
-        "max": 2081
+        "p50": 516,
+        "p90": 1810,
+        "p99": 3572,
+        "max": 6554
       },
       "modeledSeconds": {
-        "p50": 398.22,
-        "p90": 1574.22,
-        "p99": 2832.72
+        "p50": 774.72,
+        "p90": 2715.72,
+        "p99": 5358.72
       },
       "blockedMatches": {
         "p50": 0,
@@ -280,30 +472,31 @@
     }
   },
   "workmanshipAtMaxSkill": {
+    "inputGrade": "choice",
     "bow": {
-      "ordinary": 0.6719999999999999,
-      "fine": 0.164,
-      "exceptional": 0.164
+      "ordinary": 0,
+      "fine": 0.806,
+      "exceptional": 0.194
     },
     "sword": {
-      "ordinary": 0.6799999999999999,
-      "fine": 0.16,
-      "exceptional": 0.16
+      "ordinary": 0,
+      "fine": 0.81,
+      "exceptional": 0.19
     }
   },
   "statEnumeration": {
-    "legalCombinationCount": 22656,
+    "legalCombinationCount": 1546080,
     "forms": {
       "bow": {
-        "combinations": 4224,
+        "combinations": 46368,
         "roleOptionCounts": [
-          16,
+          92,
           8
         ],
-        "inlayOptions": 11,
+        "inlayOptions": 21,
         "maxima": {
-          "damage": 14,
-          "hitBonus": 5.25,
+          "damage": 15,
+          "hitBonus": 10,
           "armor": 0,
           "fortune": 5
         },
@@ -317,16 +510,16 @@
         "capViolations": 0
       },
       "sword": {
-        "combinations": 18432,
+        "combinations": 989184,
         "roleOptionCounts": [
-          8,
-          16,
+          28,
+          92,
           8
         ],
-        "inlayOptions": 6,
+        "inlayOptions": 16,
         "maxima": {
           "damage": 18,
-          "hitBonus": 3,
+          "hitBonus": 8,
           "armor": 0,
           "fortune": 0
         },
@@ -338,11 +531,276 @@
           "slayerMultiplier": 1.5
         },
         "capViolations": 0
+      },
+      "shield": {
+        "combinations": 456192,
+        "roleOptionCounts": [
+          48,
+          36,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "helm": {
+        "combinations": 7392,
+        "roleOptionCounts": [
+          28,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "mail": {
+        "combinations": 7392,
+        "roleOptionCounts": [
+          28,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 7,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 7,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "boots": {
+        "combinations": 7392,
+        "roleOptionCounts": [
+          28,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "gauntlets": {
+        "combinations": 7392,
+        "roleOptionCounts": [
+          28,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "greaves": {
+        "combinations": 7392,
+        "roleOptionCounts": [
+          28,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 6,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 6,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "leather": {
+        "combinations": 1056,
+        "roleOptionCounts": [
+          4,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "hood": {
+        "combinations": 1056,
+        "roleOptionCounts": [
+          4,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 4,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 4,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "gloves": {
+        "combinations": 1056,
+        "roleOptionCounts": [
+          4,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 4,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 4,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "hose": {
+        "combinations": 1056,
+        "roleOptionCounts": [
+          4,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 5,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "charm": {
+        "combinations": 480,
+        "roleOptionCounts": [
+          20,
+          8
+        ],
+        "inlayOptions": 1,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 2,
+          "fortune": 0
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 2,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "ring": {
+        "combinations": 12672,
+        "roleOptionCounts": [
+          48,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 3,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 3,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
       }
     }
   },
   "payloadSizes": {
-    "representativeSaveBytes": 18792,
+    "representativeSaveBytes": 24226,
     "fiveItemBytes": 2654,
     "vaultInscriptionBytes": {
       "min": 589,
@@ -546,8 +1004,6 @@
       ]
     }
   ],
-  "decision": "HOLD",
-  "reasons": [
-    "Max-skill workmanship still yields ordinary quality more than 50% of the time on rare inputs; add skill-banded workmanship minimums before expanding the catalog."
-  ]
+  "decision": "READY",
+  "reasons": []
 }

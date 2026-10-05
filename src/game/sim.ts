@@ -1,15 +1,17 @@
 import { COURT, GATE, placeById } from "./atlas.ts";
-import { SECONDS_PER_HOUR } from "./catalog.ts";
+import { FLY_SPEED, SECONDS_PER_HOUR } from "./catalog.ts";
+import { updateSpellStatuses } from "./spell-effects.ts";
 import { tickEcology } from "./ecology.ts";
 import { tickCrops } from "./farm.ts";
 import { tickSaplings } from "./forestry.ts";
-import { astar, lineWalkable, nearestWalkable, tileOf } from "./pathfinding.ts";
+import { astar, lineWalkable, nearestWalkable, shortcutRemainingPath, tileOf } from "./pathfinding.ts";
 import { tickPiles } from "./piles.ts";
 import { tickCampfires } from "./campfire.ts";
 import { tickPets } from "./pets.ts";
 import { replanIntentPath, tickPlayer, you } from "./player.ts";
 import { regrowResourceNodes } from "./resources/state.ts";
 import { tickWeather } from "./weather.ts";
+import { tickZones, zonePersonSlowAt } from "./zones.ts";
 import { completeObjective, log, revealAround } from "./world.ts";
 import { emitNpcInteractionFx } from "./npc-interaction-animation.ts";
 import { applyKeepStory } from "./keep-story.ts";
@@ -28,6 +30,18 @@ type MotionWatch = {
 };
 const motionWatches = new WeakMap<Person, MotionWatch>();
 
+/** Every planned leg after the current position, checked as the planner made
+ *  it: waypoint to waypoint, tile-exact. A route whose later legs no longer
+ *  walk is not walked at all — the caller replans around the new terrain. */
+function remainingLegsWalkable(world: World, path: ReadonlyArray<{ tx: number; ty: number }>) {
+  for (let i = 0; i + 1 < path.length; i++) {
+    const a = path[i]!;
+    const b = path[i + 1]!;
+    if (!lineWalkable(world, a.tx, a.ty, b.tx, b.ty)) return false;
+  }
+  return true;
+}
+
 export function setSpeed(world: World, s: Speed) {
   world.speed = s;
 }
@@ -39,7 +53,7 @@ function followPath(world: World, p: Person, dt: number): "idle" | "moving" | "s
   }
   const startX = p.x;
   const startZ = p.z;
-  let remaining = WALK_SPEED * (p.ghost ? 1.4 : 1) * dt;
+  let remaining = WALK_SPEED * (p.ghost ? 1.4 : 1) * dt * zonePersonSlowAt(world, p.x, p.z) * (p.isPlayer && world.hour < world.player.flyUntil ? FLY_SPEED : 1);
   const previous = motionWatches.get(p);
   const first = p.path[0]!;
   // Planned segments are already corner/climb checked. Revalidate only when
@@ -52,12 +66,30 @@ function followPath(world: World, p: Person, dt: number): "idle" | "moving" | "s
     && previous.nextTx === first.tx
     && previous.nextTy === first.ty
   ) {
-    const here = tileOf(p.x, p.z);
-    if (!lineWalkable(world, here.tx, here.ty, first.tx, first.ty)) {
+    if (!lineWalkable(world, p.x, p.z, first.tx, first.ty)) {
       p.path = [];
       motionWatches.delete(p);
       return "stuck";
     }
+  }
+  // A revision may instead touch a LATER leg of the route. Revalidate the
+  // remaining planned legs tile-to-tile — waypoints are integers, so this
+  // cannot trip on fractional rounding — whenever the revision moved under
+  // an active route, and on the first observed frame (the planner ran before
+  // any watch existed, so a pre-tick change is otherwise invisible until its
+  // leg begins).
+  if ((previous && previous.landRev !== world.landRev) || !previous) {
+    if ((!previous && !lineWalkable(world, p.x, p.z, first.tx, first.ty)) || !remainingLegsWalkable(world, p.path)) {
+      p.path = [];
+      if (previous) motionWatches.delete(p);
+      return "stuck";
+    }
+  }
+
+  p.path = shortcutRemainingPath(world, p.x, p.z, p.path);
+  if (!p.path.length) {
+    motionWatches.delete(p);
+    return "idle";
   }
 
   // Spend one continuous movement budget across as many short waypoint
@@ -158,9 +190,11 @@ export function tickWorld(world: World, realDt: number) {
   tickCrops(world);
   tickSaplings(world);
   tickEcology(world, dt);
+  tickZones(world, dt);
   tickPiles(world);
   tickCampfires(world);
   tickPets(world, dt);
+  updateSpellStatuses(world);
   void COURT;
   void GATE;
   void tileOf;

@@ -1,11 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap");
+
 @import "tailwindcss";
+@import "./styles/forged-oak.css";
 
 @theme {
-  --color-bg: #141210;
+  --color-bg: #111110;
+  --color-stone: #333431;
+  --color-parchment: #d6c39a;
+  --color-ink: #292319;
+  --color-ink-muted: #514432;
+  --color-health: #853b36;
+  --color-mana: #345575;
+  --color-bevel: #77715e;
+  --color-shadow: #080807;
   --color-fg: #ece6d8;
   --color-muted: #9a9286;
-  --color-accent: #a85a42;
+  --color-craft-muted: #b9ad9b;
+  --color-accent: #b39963;
   --color-accent-fg: #ece6d8;
   --color-surface: #1c1916;
   --color-surface-2: #241f1b;
@@ -13,13 +23,101 @@
   --color-border-strong: #5c5348;
   --color-gold: #c9a36a;
   --font-sans: "Source Serif 4", Georgia, "Times New Roman", serif;
-  --font-display: Cinzel, Georgia, serif;
+  --font-display: "Cinzel", "Palatino Linotype", Georgia, serif;
   --radius-xs: 0.125rem;
   --radius-sm: 0.25rem;
   --radius-md: 0.375rem;
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
   --radius: 0.375rem;
+}
+
+/* Classic brass and carved stone: paint only, the L-frame geometry stays fixed. */
+.classic-frame,
+.classic-ui > .pointer-events-auto.border {
+  background-color: var(--color-stone);
+  background-image: linear-gradient(115deg, var(--color-surface-2), transparent 45%, var(--color-bg));
+  border-color: var(--color-border-strong);
+  box-shadow: inset 0 2px var(--color-bevel), inset 2px 0 var(--color-bevel), inset 0 -2px var(--color-shadow), inset -2px 0 var(--color-shadow), 0 0 0 2px var(--color-shadow);
+}
+.drawer-shell {
+  border: 3px ridge var(--color-gold);
+  border-right: 0;
+  scrollbar-color: var(--color-gold) var(--color-stone);
+}
+.drawer-shell::before,
+[data-testid="bottom-band"]::before,
+[data-testid="bottom-band"]::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  width: 8px;
+  height: 8px;
+  top: 2px;
+  left: 2px;
+  border: 2px outset var(--color-gold);
+  background: var(--color-stone);
+}
+[data-testid="bottom-band"]::after { left: auto; right: 2px; }
+.classic-ui button {
+  min-height: 44px;
+  min-width: 44px;
+  background-image: linear-gradient(var(--color-stone), var(--color-bg));
+  box-shadow: inset 0 1px var(--color-bevel), inset 1px 0 var(--color-border-strong), inset 0 -2px var(--color-shadow);
+  color: var(--color-fg);
+  transition: box-shadow 120ms ease-out;
+}
+.classic-ui button:hover {
+  box-shadow: inset 0 0 0 1px var(--color-gold), inset 0 1px var(--color-bevel);
+}
+.classic-ui button:active,
+.classic-ui button[aria-selected="true"] {
+  box-shadow: inset 0 2px 4px var(--color-shadow), inset 0 0 0 1px var(--color-gold);
+}
+.classic-ui button:focus-visible { outline: 2px solid var(--color-gold); outline-offset: -2px; }
+.classic-ui .font-display { color: var(--color-gold); }
+.classic-ui [role="meter"] {
+  border-radius: 0;
+  clip-path: polygon(4px 0, calc(100% - 4px) 0, 100% 50%, calc(100% - 4px) 100%, 4px 100%, 0 50%);
+  box-shadow: 0 0 0 1px var(--color-bevel);
+}
+.classic-ui [role="meter"] > div { box-shadow: inset 0 2px color-mix(in srgb, var(--color-fg) 22%, transparent); }
+.classic-ui > .pointer-events-auto.parchment-panel {
+  --color-fg: var(--color-ink);
+  --color-muted: var(--color-ink-muted);
+  --color-gold: var(--color-ink-muted);
+  --color-accent: var(--color-ink-muted);
+  --color-surface: var(--color-parchment);
+  --color-surface-2: var(--color-parchment);
+  background: linear-gradient(100deg, color-mix(in srgb, var(--color-parchment) 84%, var(--color-ink)), var(--color-parchment) 12%, var(--color-parchment) 88%, color-mix(in srgb, var(--color-parchment) 84%, var(--color-ink)));
+  color: var(--color-ink);
+}
+.classic-ui .parchment-panel button { background-image: none; background-color: var(--color-parchment); }
+@keyframes surface-in {
+  from { opacity: 0; translate: 12px 0; }
+  to { opacity: 1; translate: 0 0; }
+}
+.surface-in { animation: surface-in 160ms ease-out; }
+[data-effects="reduced"] .surface-in { animation: none; }
+[data-effects="reduced"] .classic-ui button { transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .drawer-in, .surface-in { animation: none; }
+  .classic-ui button { transition: none; }
+}
+
+.craft-panel {
+  --color-muted: var(--color-craft-muted);
+}
+
+.craft-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gold) var(--color-surface);
+  scrollbar-gutter: stable;
+}
+
+.craft-scroll:focus-visible {
+  outline: 1px solid var(--color-gold);
+  outline-offset: -2px;
 }
 
 html {
@@ -40,6 +138,33 @@ body,
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
+}
+
+/* Reduced effects: weather and results stay; the motion and flashes go. */
+[data-effects="reduced"] .ember-shimmer {
+  animation: none;
+  opacity: 0;
+}
+
+@keyframes drawer-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.drawer-in {
+  animation: drawer-in 160ms ease-out;
+}
+
+[data-effects="reduced"] .drawer-in {
+  animation: none;
+}
+
+[data-effects="reduced"] .ember-screen-rain > span {
+  animation: none;
 }
 
 @keyframes ember-load {

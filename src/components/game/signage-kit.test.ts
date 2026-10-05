@@ -17,9 +17,10 @@ test('signage selects only built notice and board kinds worldwide', () => {
 });
 
 test('signage does not alter original board/notice footprint or invent an interaction', () => {
+  const generators = fs.readFileSync(new URL('../../game/placeables/legacy-buildings.ts', import.meta.url), 'utf8');
   const source = fs.readFileSync(new URL('./building-meshes.tsx', import.meta.url), 'utf8');
-  const notice = source.slice(source.indexOf('function makeNotice()'), source.indexOf('function makeFarm()'));
-  const board = source.slice(source.indexOf('function makeBoard()'), source.indexOf('/** The King'));
+  const notice = generators.slice(generators.indexOf('function makeNotice()'), generators.indexOf('function makeFarm()'));
+  const board = generators.slice(generators.indexOf('function makeBoard()'), generators.indexOf('/** The King'));
   assert.match(notice, /x0: -1, x1: 1, z0: 0, z1: 2, enterable: false/);
   assert.match(board, /x0: -3, x1: 3, z0: 0, z1: 2, enterable: false/);
   assert.match(source, /if \(!stationOf\(b.kind\)\) return;/);

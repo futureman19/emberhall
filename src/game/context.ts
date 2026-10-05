@@ -1,4 +1,5 @@
 import { CROP_META, plotAt } from "./farm.ts";
+import { houseOnTile } from "./house.ts";
 import { plantVerbLabel, isGhostwoodTree, isTimberId } from "./forestry.ts";
 import { GHOSTWOOD_LUMBERJACK, RESOURCE_CATALOG, timberGradeLabel } from "./resources/catalog.ts";
 import { hasBook } from "./magery.ts";
@@ -7,6 +8,7 @@ import { getWorld } from "./live.ts";
 import { effSkill } from "./player.ts";
 import { identifyHarvestNode } from "./resources/harvest.ts";
 import { discoverResourceNode, hasDiscoveredResourceNode } from "./resources/state.ts";
+import { isDoorOpen, objectFn } from "./placeables/functions.ts";
 import type { CtxTarget, CtxVerb } from "./types.ts";
 
 function harvestVerbLabel(tx: number, ty: number, nodeKind: "tree" | "rock"): string {
@@ -88,6 +90,13 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
         out.push({ verb: "sowAcorn", label: plantVerbLabel(w.player.skills.forestry ?? 0) });
       }
     }
+      const dug = w.holes?.[`${t.tx},${t.ty}`];
+      if (dug?.open) out.push({ verb: "fill", label: "Fill the hole" });
+      else if (tile && (tile.kind === "grass" || tile.kind === "dirt" || tile.kind === "sand" || tile.kind === "snow" || tile.kind === "marsh")) {
+        const cover = houseOnTile(w, t.tx, t.ty);
+        const cellar = Boolean(cover && cover.ownerId === w.player.id);
+        out.push({ verb: "dig", label: dug?.buried ? "Unearth" : cellar ? "Dig a cellar" : "Dig" });
+      }
     if (hasBook(w)) out.push({ verb: "teleport", label: "Teleport here" });
     out.push({ verb: "track", label: "Track" });
   }
@@ -129,6 +138,18 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
   }
   if (t.kind === "gate") out.push({ verb: "enter", label: "Enter" });
   if (t.kind === "building") {
+    const piece = w.placedObjects.find((o) => o.id === t.id);
+    if (piece) {
+      const fn = objectFn(piece);
+      if (fn === "door") out.push({ verb: "use", label: isDoorOpen(piece) ? "Shut the door" : "Open the door" });
+      else if (fn === "storage") out.push({ verb: "house", label: "Open the chest" });
+      else if (fn === "bed") out.push({ verb: "use", label: "Rest" });
+      else if (fn === "sign") out.push({ verb: "use", label: "Read the sign" });
+      else if (fn === "hearth") out.push({ verb: "use", label: "Work the fire" });
+      else if (fn === "craftStation") out.push({ verb: "use", label: "Use the bench" });
+      out.push({ verb: "walk", label: "Walk" });
+      return out;
+    }
     if (t.label === "hall") out.push({ verb: "roster", label: "Read the roster" });
     if (t.label === "bank") out.push({ verb: "bank", label: "Open the box" });
     else if (t.label === "porch" || t.label === "hut" || t.label === "homestead") {

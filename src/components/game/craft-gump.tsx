@@ -4,17 +4,21 @@ import { ItemGlyph } from "@/components/game/paperdoll";
 import { ItemTipContent } from "@/components/game/item-tip";
 import { Tip } from "@/components/ui/tip";
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "@/game/catalog";
-import { RECIPES, canMake, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
-import { BOW_FORM } from "@/game/crafting/forms";
+import { availableCraftIngredient, canMake, craftBlocker, maxCraftable, stationsHere, type Recipe, type Station } from "@/game/craft";
+import { BOOTS_FORM, BOW_FORM, CHARM_FORM, GAUNTLETS_FORM, GLOVES_FORM, GREAVES_FORM, HELM_FORM, HOOD_FORM, HOSE_FORM, LEATHER_FORM, MAIL_FORM, RING_FORM, SHIELD_FORM, SWORD_FORM } from "@/game/crafting/forms";
 import { listResourceInventory } from "@/game/inventory/resources";
 import { getWorld } from "@/game/live";
+import type { MaterialGrade } from "@/game/resources/types";
 import { useGame } from "@/game/store";
 import type { ItemId, ResourceStackKey } from "@/game/types";
 import { MaterialSelector } from "./crafting/material-selector";
 import { WorkmanshipPreview } from "./crafting/workmanship-preview";
 import { InlayPanel } from "./crafting/inlay-panel";
 import { ConfirmCraft } from "./crafting/confirm-craft";
+import { RefiningPanel } from "./crafting/refining-panel";
 import { cn } from "@/lib/utils";
+
+import { visibleRecipes } from "./recipe-filter";
 
 type Group = Station | "field";
 
@@ -25,12 +29,22 @@ const TITLE: Record<Group, { title: string; blurb: string }> = {
   field: { title: "In the field", blurb: "A blade in hand. Cloth to bandages, or to hood, gloves, hose, tunic, cloak. Two hides to a leather shirt. Three wood to a campfire. Garlic and ginseng to a heal draught; silk and ash to night sight." },
 };
 
+const WORK_TABS = [
+  { id: "forms", label: "Forms" },
+  { id: "refine", label: "Refine" },
+  { id: "inlay", label: "Inlay" },
+  { id: "recipes", label: "Recipes" },
+] as const;
+type WorkTab = (typeof WORK_TABS)[number]["id"];
+
 export function CraftGump() {
   const open = useGame((s) => s.openCraft);
+  const toast = useGame((s) => s.toast);
   const close = useGame((s) => s.closeCraft);
   const make = useGame((s) => s.makeRecipe);
   const makeBatch = useGame((s) => s.makeRecipeBatch);
   const makeExact = useGame((s) => s.makeExactRecipe);
+  const refine = useGame((s) => s.refineStack);
   const inlayItem = useGame((s) => s.inlayItem);
   const pack = useGame((s) => s.snap.player?.pack);
   const skills = useGame((s) => s.snap.player?.skills);
@@ -41,6 +55,38 @@ export function CraftGump() {
   const rares = useGame((s) => s.snap.player?.rares ?? []);
   const [body, setBody] = useState<ResourceStackKey | null>(null);
   const [binding, setBinding] = useState<ResourceStackKey | null>(null);
+  const [edge, setEdge] = useState<ResourceStackKey | null>(null);
+  const [hilt, setHilt] = useState<ResourceStackKey | null>(null);
+  const [swordBinding, setSwordBinding] = useState<ResourceStackKey | null>(null);
+  const [plate, setPlate] = useState<ResourceStackKey | null>(null);
+  const [frame, setFrame] = useState<ResourceStackKey | null>(null);
+  const [shieldBinding, setShieldBinding] = useState<ResourceStackKey | null>(null);
+  const [helmPlate, setHelmPlate] = useState<ResourceStackKey | null>(null);
+  const [helmLining, setHelmLining] = useState<ResourceStackKey | null>(null);
+  const [mailPlate, setMailPlate] = useState<ResourceStackKey | null>(null);
+  const [mailLining, setMailLining] = useState<ResourceStackKey | null>(null);
+  const [bootsPlate, setBootsPlate] = useState<ResourceStackKey | null>(null);
+  const [bootsLining, setBootsLining] = useState<ResourceStackKey | null>(null);
+  const [gauntletsPlate, setGauntletsPlate] = useState<ResourceStackKey | null>(null);
+  const [gauntletsLining, setGauntletsLining] = useState<ResourceStackKey | null>(null);
+  const [greavesPlate, setGreavesPlate] = useState<ResourceStackKey | null>(null);
+  const [greavesLining, setGreavesLining] = useState<ResourceStackKey | null>(null);
+  const [leatherBody, setLeatherBody] = useState<ResourceStackKey | null>(null);
+  const [leatherBinding, setLeatherBinding] = useState<ResourceStackKey | null>(null);
+  const [hoodBody, setHoodBody] = useState<ResourceStackKey | null>(null);
+  const [hoodBinding, setHoodBinding] = useState<ResourceStackKey | null>(null);
+  const [glovesBody, setGlovesBody] = useState<ResourceStackKey | null>(null);
+  const [glovesBinding, setGlovesBinding] = useState<ResourceStackKey | null>(null);
+  const [hoseBody, setHoseBody] = useState<ResourceStackKey | null>(null);
+  const [charmBody, setCharmBody] = useState<ResourceStackKey | null>(null);
+  const [charmBinding, setCharmBinding] = useState<ResourceStackKey | null>(null);
+  const [ringBody, setRingBody] = useState<ResourceStackKey | null>(null);
+  const [ringBinding, setRingBinding] = useState<ResourceStackKey | null>(null);
+  const [hoseBinding, setHoseBinding] = useState<ResourceStackKey | null>(null);
+  const [tab, setTab] = useState<WorkTab>("forms");
+  const [readyOnly, setReadyOnly] = useState(false);
+  // Subscribe to every snapshot: ghost and nearby fire state also affect readiness.
+  useGame((s) => s.snap);
   if (!open) return null;
   const here = stationsHere(getWorld());
   void x;
@@ -49,6 +95,22 @@ export function CraftGump() {
   const resourceRows = listResourceInventory(resources ?? { stacks: {} });
   const bodyRole = BOW_FORM.roles.find(({ role }) => role === "body")!;
   const bindingRole = BOW_FORM.roles.find(({ role }) => role === "binding")!;
+  const edgeRole = SWORD_FORM.roles.find(({ role }) => role === "edge")!;
+  const hiltRole = SWORD_FORM.roles.find(({ role }) => role === "hilt")!;
+  const swordBindingRole = SWORD_FORM.roles.find(({ role }) => role === "binding")!;
+  const plateRole = SHIELD_FORM.roles.find(({ role }) => role === "plate")!;
+  const frameRole = SHIELD_FORM.roles.find(({ role }) => role === "frame")!;
+  const shieldBindingRole = SHIELD_FORM.roles.find(({ role }) => role === "binding")!;
+  const helmPlateRole = HELM_FORM.roles.find(({ role }) => role === "plate")!;
+  const helmLiningRole = HELM_FORM.roles.find(({ role }) => role === "lining")!;
+  const mailPlateRole = MAIL_FORM.roles.find(({ role }) => role === "plate")!;
+  const mailLiningRole = MAIL_FORM.roles.find(({ role }) => role === "lining")!;
+  const leatherBodyRole = LEATHER_FORM.roles.find(({ role }) => role === "body")!;
+  const charmBodyRole = CHARM_FORM.roles.find(({ role }) => role === "body")!;
+  const charmBindingRole = CHARM_FORM.roles.find(({ role }) => role === "binding")!;
+  const ringBodyRole = RING_FORM.roles.find(({ role }) => role === "body")!;
+  const ringBindingRole = RING_FORM.roles.find(({ role }) => role === "binding")!;
+  const leatherBindingRole = LEATHER_FORM.roles.find(({ role }) => role === "binding")!;
   const selectedCount = (key: ResourceStackKey | null) => resourceRows.find((row) => row.key === key)?.count ?? 0;
   const bowDisabled = !here.includes("bench")
     ? "Stand at the yard or hall"
@@ -57,35 +119,356 @@ export function CraftGump() {
       : selectedCount(body) < bodyRole.amount || selectedCount(binding) < bindingRole.amount
         ? "Not enough selected material"
         : null;
+  const swordDisabled = !here.includes("forge")
+    ? "Stand at the forge"
+    : !edge || !hilt || !swordBinding
+      ? "Choose edge, hilt, and binding"
+      : selectedCount(edge) < edgeRole.amount || selectedCount(hilt) < hiltRole.amount || selectedCount(swordBinding) < swordBindingRole.amount
+        ? "Not enough selected material"
+        : null;
+  const shieldDisabled = !here.includes("forge")
+    ? "Stand at the forge"
+    : !plate || !frame || !shieldBinding
+      ? "Choose plates, frame, and binding"
+      : selectedCount(plate) < plateRole.amount || selectedCount(frame) < frameRole.amount || selectedCount(shieldBinding) < shieldBindingRole.amount
+        ? "Not enough selected material"
+        : null;
+  const helmDisabled = !here.includes("forge")
+    ? "Stand at the forge"
+    : !helmPlate || !helmLining
+      ? "Choose plates and lining"
+      : selectedCount(helmPlate) < helmPlateRole.amount || selectedCount(helmLining) < helmLiningRole.amount
+        ? "Not enough selected material"
+        : null;
+  const mailDisabled = !here.includes("forge")
+    ? "Stand at the forge"
+    : !mailPlate || !mailLining
+      ? "Choose plates and lining"
+      : selectedCount(mailPlate) < mailPlateRole.amount || selectedCount(mailLining) < mailLiningRole.amount
+        ? "Not enough selected material"
+        : null;
+  const recipes = visibleRecipes(getWorld(), readyOnly);
   const groups: Group[] = ["bench", "forge", "fire", "field"];
   return (
-    <div className="pointer-events-auto absolute top-16 right-3 max-h-[min(70vh,36rem)] w-[min(100%-1.5rem,22rem)] overflow-auto rounded-[var(--radius-lg)] border border-border bg-bg/92 p-4 sm:right-4">
+    <div className="craft-panel pointer-events-auto absolute top-16 right-3 z-20 flex max-h-[min(70vh,36rem,calc(100dvh-4rem-var(--corner-clear)))] w-[min(100%-1.5rem,22rem)] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border bg-bg md:right-[68px]">
+      <div role="region" aria-label="Crafting work" tabIndex={0} className="craft-scroll min-h-0 overflow-y-auto overscroll-contain p-4">
       <p className="font-display text-sm text-fg">Work</p>
       <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">
         Wood at the yard. Iron at a forge. A blade anywhere. The work takes, or it splits.
       </p>
-      <div className="mt-4 space-y-2" aria-label="Advanced bow work">
+      <div role="tablist" aria-label="Work sections" className="mt-3 flex gap-1">
+        {WORK_TABS.map(({ id, label }) => (
+          <button
+            key={id}
+            type="button"
+            role="tab"
+            aria-selected={tab === id}
+            onClick={() => setTab(id)}
+            className={cn(
+              "min-h-11 flex-1 rounded-[var(--radius-xs)] border px-2 text-xs font-medium",
+              tab === id ? "border-gold/60 bg-gold/10 text-gold" : "border-border bg-surface text-muted",
+            )}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      {tab === "forms" && (
+      <>
+      <p className="mt-5 border-t border-border pt-3 font-display text-[10px] uppercase tracking-widest text-muted">Carpentry · the bench</p>
+      <div className="mt-2 space-y-2" aria-label="Advanced bow work">
         <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Bow</p>
-        <MaterialSelector role={bodyRole} rows={resourceRows} selected={body} onSelect={setBody} />
-        <MaterialSelector role={bindingRole} rows={resourceRows} selected={binding} onSelect={setBinding} />
-        <WorkmanshipPreview skill={skills?.carpentry ?? 0} difficulty={18} />
+        <MaterialSelector role={bodyRole} rows={resourceRows} selected={body} onSelect={setBody} group="bow-body" />
+        <MaterialSelector role={bindingRole} rows={resourceRows} selected={binding} onSelect={setBinding} group="bow-binding" />
+        <WorkmanshipPreview
+          skill={skills?.carpentry ?? 0}
+          difficulty={18}
+          primaryGrade={body ? (body.split(":")[2] as MaterialGrade) : undefined}
+        />
         <ConfirmCraft
           selected={{ body, binding }}
           rows={resourceRows}
           disabledReason={bowDisabled}
+          formLabel="bow"
           onConfirm={() => body && binding && makeExact("bow", [
             { role: "body", key: body },
             { role: "binding", key: binding },
           ])}
         />
-        <InlayPanel items={rares} rows={resourceRows} onInlay={inlayItem} />
       </div>
-      {groups.map((st) => {
+<p className="mt-5 border-t border-border pt-3 font-display text-[10px] uppercase tracking-widest text-muted">Smithing · the forge</p>
+      <div className="mt-2 space-y-2" aria-label="Advanced sword work">
+        <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Sword</p>
+        <MaterialSelector role={edgeRole} rows={resourceRows} selected={edge} onSelect={setEdge} group="sword-edge" />
+        <MaterialSelector role={hiltRole} rows={resourceRows} selected={hilt} onSelect={setHilt} group="sword-hilt" />
+        <MaterialSelector role={swordBindingRole} rows={resourceRows} selected={swordBinding} onSelect={setSwordBinding} group="sword-binding" />
+        <WorkmanshipPreview
+          skill={skills?.smithing ?? 0}
+          difficulty={20}
+          primaryGrade={edge ? (edge.split(":")[2] as MaterialGrade) : undefined}
+        />
+        <ConfirmCraft
+          selected={{ edge, hilt, binding: swordBinding }}
+          rows={resourceRows}
+          disabledReason={swordDisabled}
+          formLabel="sword"
+          onConfirm={() => edge && hilt && swordBinding && makeExact("sword", [
+            { role: "edge", key: edge },
+            { role: "hilt", key: hilt },
+            { role: "binding", key: swordBinding },
+          ])}
+        />
+      </div>
+      <div className="mt-2 space-y-2" aria-label="Advanced shield work">
+        <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Shield</p>
+        <MaterialSelector role={plateRole} rows={resourceRows} selected={plate} onSelect={setPlate} group="shield-plate" />
+        <MaterialSelector role={frameRole} rows={resourceRows} selected={frame} onSelect={setFrame} group="shield-frame" />
+        <MaterialSelector role={shieldBindingRole} rows={resourceRows} selected={shieldBinding} onSelect={setShieldBinding} group="shield-binding" />
+        <WorkmanshipPreview
+          skill={skills?.smithing ?? 0}
+          difficulty={21}
+          primaryGrade={plate ? (plate.split(":")[2] as MaterialGrade) : undefined}
+        />
+        <ConfirmCraft
+          selected={{ plate, frame, binding: shieldBinding }}
+          rows={resourceRows}
+          disabledReason={shieldDisabled}
+          formLabel="shield"
+          onConfirm={() => plate && frame && shieldBinding && makeExact("shield", [
+            { role: "plate", key: plate },
+            { role: "frame", key: frame },
+            { role: "binding", key: shieldBinding },
+          ])}
+        />
+      </div>
+      <div className="mt-2 space-y-2" aria-label="Advanced helm work">
+        <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Helm</p>
+        <MaterialSelector role={helmPlateRole} rows={resourceRows} selected={helmPlate} onSelect={setHelmPlate} group="helm-plate" />
+        <MaterialSelector role={helmLiningRole} rows={resourceRows} selected={helmLining} onSelect={setHelmLining} group="helm-lining" />
+        <WorkmanshipPreview
+          skill={skills?.smithing ?? 0}
+          difficulty={24}
+          primaryGrade={helmPlate ? (helmPlate.split(":")[2] as MaterialGrade) : undefined}
+        />
+        <ConfirmCraft
+          selected={{ plate: helmPlate, lining: helmLining }}
+          rows={resourceRows}
+          disabledReason={helmDisabled}
+          formLabel="helm"
+          onConfirm={() => helmPlate && helmLining && makeExact("helm", [
+            { role: "plate", key: helmPlate },
+            { role: "lining", key: helmLining },
+          ])}
+        />
+      </div>
+      <div className="mt-2 space-y-2" aria-label="Advanced mail work">
+        <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Mail</p>
+        <MaterialSelector role={mailPlateRole} rows={resourceRows} selected={mailPlate} onSelect={setMailPlate} group="mail-plate" />
+        <MaterialSelector role={mailLiningRole} rows={resourceRows} selected={mailLining} onSelect={setMailLining} group="mail-lining" />
+        <WorkmanshipPreview
+          skill={skills?.smithing ?? 0}
+          difficulty={30}
+          primaryGrade={mailPlate ? (mailPlate.split(":")[2] as MaterialGrade) : undefined}
+        />
+        <ConfirmCraft
+          selected={{ plate: mailPlate, lining: mailLining }}
+          rows={resourceRows}
+          disabledReason={mailDisabled}
+          formLabel="mail"
+          onConfirm={() => mailPlate && mailLining && makeExact("mail", [
+            { role: "plate", key: mailPlate },
+            { role: "lining", key: mailLining },
+          ])}
+        />
+      </div>
+      {[
+        { form: BOOTS_FORM, label: "boots", diff: 15, plate: bootsPlate, setPlate: setBootsPlate, lining: bootsLining, setLining: setBootsLining },
+        { form: GAUNTLETS_FORM, label: "gauntlets", diff: 18, plate: gauntletsPlate, setPlate: setGauntletsPlate, lining: gauntletsLining, setLining: setGauntletsLining },
+        { form: GREAVES_FORM, label: "greaves", diff: 27, plate: greavesPlate, setPlate: setGreavesPlate, lining: greavesLining, setLining: setGreavesLining },
+      ].map(({ form, label, diff, plate: piecePlate, setPlate, lining: pieceLining, setLining }) => {
+        const plateRole = form.roles.find(({ role }) => role === "plate")!;
+        const liningRole = form.roles.find(({ role }) => role === "lining")!;
+        const disabled = !here.includes("forge")
+          ? "Stand at the forge"
+          : !piecePlate || !pieceLining
+            ? "Choose plates and lining"
+            : selectedCount(piecePlate) < plateRole.amount || selectedCount(pieceLining) < liningRole.amount
+              ? "Not enough selected material"
+              : null;
+        return (
+          <div key={form.id} className="mt-2 space-y-2" aria-label={`Advanced ${label} work`}>
+            <p className="font-display text-xs tracking-wider text-gold uppercase">Form · {form.label}</p>
+            <MaterialSelector role={plateRole} rows={resourceRows} selected={piecePlate} onSelect={setPlate} group={`${label}-plate`} />
+            <MaterialSelector role={liningRole} rows={resourceRows} selected={pieceLining} onSelect={setLining} group={`${label}-lining`} />
+            <WorkmanshipPreview
+              skill={skills?.smithing ?? 0}
+              difficulty={diff}
+              primaryGrade={piecePlate ? (piecePlate.split(":")[2] as MaterialGrade) : undefined}
+            />
+            <ConfirmCraft
+              selected={{ plate: piecePlate, lining: pieceLining }}
+              rows={resourceRows}
+              disabledReason={disabled}
+              formLabel={label}
+              onConfirm={() => piecePlate && pieceLining && makeExact(form.id, [
+                { role: "plate", key: piecePlate },
+                { role: "lining", key: pieceLining },
+              ])}
+            />
+          </div>
+        );
+      })}
+<p className="mt-5 border-t border-border pt-3 font-display text-[10px] uppercase tracking-widest text-muted">Tailoring · field work</p>
+      <div className="mt-2 space-y-2" aria-label="Advanced leather work">
+        <p className="font-display text-xs tracking-wider text-gold uppercase">Form · {LEATHER_FORM.label}</p>
+        <MaterialSelector role={leatherBodyRole} rows={resourceRows} selected={leatherBody} onSelect={setLeatherBody} group="leather-body" />
+        <MaterialSelector role={leatherBindingRole} rows={resourceRows} selected={leatherBinding} onSelect={setLeatherBinding} group="leather-binding" />
+        <WorkmanshipPreview
+          skill={skills?.tailoring ?? 0}
+          difficulty={12}
+          primaryGrade={leatherBody ? (leatherBody.split(":")[2] as MaterialGrade) : undefined}
+        />
+        <ConfirmCraft
+          selected={{ body: leatherBody, binding: leatherBinding }}
+          rows={resourceRows}
+          disabledReason={!bladeOk
+            ? "Hold a blade"
+            : !leatherBody || !leatherBinding
+              ? "Choose hides and binding"
+              : selectedCount(leatherBody) < leatherBodyRole.amount || selectedCount(leatherBinding) < leatherBindingRole.amount
+                ? "Not enough selected material"
+                : null}
+          formLabel="leather"
+          onConfirm={() => leatherBody && leatherBinding && makeExact("leather", [
+            { role: "body", key: leatherBody },
+            { role: "binding", key: leatherBinding },
+          ])}
+        />
+      </div>
+      {[
+        { form: HOOD_FORM, label: "hood", diff: 13, body: hoodBody, setBody: setHoodBody, binding: hoodBinding, setBinding: setHoodBinding },
+        { form: GLOVES_FORM, label: "gloves", diff: 15, body: glovesBody, setBody: setGlovesBody, binding: glovesBinding, setBinding: setGlovesBinding },
+        { form: HOSE_FORM, label: "hose", diff: 17, body: hoseBody, setBody: setHoseBody, binding: hoseBinding, setBinding: setHoseBinding },
+      ].map(({ form, label, diff, body: pieceBody, setBody, binding: pieceBinding, setBinding }) => {
+        const pieceBodyRole = form.roles.find(({ role }) => role === "body")!;
+        const pieceBindingRole = form.roles.find(({ role }) => role === "binding")!;
+        const disabled = !bladeOk
+          ? "Hold a blade"
+          : !pieceBody || !pieceBinding
+            ? "Choose hides and binding"
+            : selectedCount(pieceBody) < pieceBodyRole.amount || selectedCount(pieceBinding) < pieceBindingRole.amount
+              ? "Not enough selected material"
+              : null;
+        return (
+          <div key={form.id} className="mt-2 space-y-2" aria-label={`Advanced ${label} work`}>
+            <p className="font-display text-xs tracking-wider text-gold uppercase">Form · {form.label}</p>
+            <MaterialSelector role={pieceBodyRole} rows={resourceRows} selected={pieceBody} onSelect={setBody} group={`${label}-body`} />
+            <MaterialSelector role={pieceBindingRole} rows={resourceRows} selected={pieceBinding} onSelect={setBinding} group={`${label}-binding`} />
+            <WorkmanshipPreview
+              skill={skills?.tailoring ?? 0}
+              difficulty={diff}
+              primaryGrade={pieceBody ? (pieceBody.split(":")[2] as MaterialGrade) : undefined}
+            />
+            <ConfirmCraft
+              selected={{ body: pieceBody, binding: pieceBinding }}
+              rows={resourceRows}
+              disabledReason={disabled}
+              formLabel={label}
+              onConfirm={() => pieceBody && pieceBinding && makeExact(form.id, [
+                { role: "body", key: pieceBody },
+                { role: "binding", key: pieceBinding },
+              ])}
+            />
+          </div>
+        );
+      })}
+      <p className="mt-5 border-t border-border pt-3 font-display text-[10px] uppercase tracking-widest text-muted">Tinkering · field work</p>
+      <div className="mt-2 space-y-2" aria-label="Advanced charm work">
+        <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Charm</p>
+        <MaterialSelector role={charmBodyRole} rows={resourceRows} selected={charmBody} onSelect={setCharmBody} group="charm-body" />
+        <MaterialSelector role={charmBindingRole} rows={resourceRows} selected={charmBinding} onSelect={setCharmBinding} group="charm-binding" />
+        <WorkmanshipPreview
+          skill={skills?.tinkering ?? 0}
+          difficulty={24}
+          primaryGrade={charmBody ? (charmBody.split(":")[2] as MaterialGrade) : undefined}
+        />
+        <ConfirmCraft
+          selected={{ body: charmBody, binding: charmBinding }}
+          rows={resourceRows}
+          disabledReason={!charmBody || !charmBinding
+            ? "Choose a trophy and binding"
+            : selectedCount(charmBody) < charmBodyRole.amount || selectedCount(charmBinding) < charmBindingRole.amount
+              ? "Not enough selected material"
+              : null}
+          formLabel="charm"
+          onConfirm={() => charmBody && charmBinding && makeExact("charm", [
+            { role: "body", key: charmBody },
+            { role: "binding", key: charmBinding },
+          ])}
+        />
+      </div>
+      <div className="mt-2 space-y-2" aria-label="Advanced ring work">
+        <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Ring</p>
+        <MaterialSelector role={ringBodyRole} rows={resourceRows} selected={ringBody} onSelect={setRingBody} group="ring-body" />
+        <MaterialSelector role={ringBindingRole} rows={resourceRows} selected={ringBinding} onSelect={setRingBinding} group="ring-binding" />
+        <WorkmanshipPreview
+          skill={skills?.tinkering ?? 0}
+          difficulty={26}
+          primaryGrade={ringBody ? (ringBody.split(":")[2] as MaterialGrade) : undefined}
+        />
+        <ConfirmCraft
+          selected={{ body: ringBody, binding: ringBinding }}
+          rows={resourceRows}
+          disabledReason={!ringBody || !ringBinding
+            ? "Choose a band and binding"
+            : selectedCount(ringBody) < ringBodyRole.amount || selectedCount(ringBinding) < ringBindingRole.amount
+              ? "Not enough selected material"
+              : null}
+          formLabel="ring"
+          onConfirm={() => ringBody && ringBinding && makeExact("ring", [
+            { role: "body", key: ringBody },
+            { role: "binding", key: ringBinding },
+          ])}
+        />
+      </div>
+      </>
+      )}
+      {tab === "refine" && (
+        <div className="mt-4 space-y-4">
+          {(["bench", "forge"] as const).map((st) => (
+            <RefiningPanel
+              key={st}
+              rows={resourceRows}
+              station={st}
+              atStation={here.includes(st)}
+              skill={st === "forge" ? (skills?.smithing ?? 0) : (skills?.carpentry ?? 0)}
+              onRefine={refine}
+            />
+          ))}
+        </div>
+      )}
+      {tab === "inlay" && (
+        <div className="mt-4">
+          <InlayPanel items={rares} rows={resourceRows} onInlay={inlayItem} />
+        </div>
+      )}
+      {tab === "recipes" && <>
+        <div role="group" aria-label="Recipe filter" className="mt-3 flex gap-2">
+          <Button variant={readyOnly ? "secondary" : "default"} className="min-h-11 flex-1" aria-pressed={!readyOnly} onClick={() => setReadyOnly(false)}>All recipes</Button>
+          <Button variant={readyOnly ? "default" : "secondary"} className="min-h-11 flex-1" aria-pressed={readyOnly} onClick={() => setReadyOnly(true)}>Ready to craft</Button>
+        </div>
+        {readyOnly && <p className="mt-2 text-xs text-muted">Ready to attempt here. Success still depends on skill.</p>}
+        {readyOnly && recipes.length === 0 && <div className="mt-4 rounded-[var(--radius-xs)] border border-border bg-surface p-3">
+          <p className="text-sm text-fg">No recipes ready here.</p>
+          <p className="mt-1 text-xs leading-relaxed text-muted">Check All recipes for the next requirement: materials, a station, a blade, or returning to life.</p>
+          <Button variant="secondary" className="mt-3 min-h-11 w-full" onClick={() => setReadyOnly(false)}>Show all recipes</Button>
+        </div>}
+        {groups.map((st) => {
         const at = st === "field" ? true : here.includes(st);
         const list = st === "field"
-          ? RECIPES.filter((r) => r.station === null && !r.exactRecipeId)
-          : RECIPES.filter((r) => r.station === st && !r.exactRecipeId);
-        if (st === "field" && list.length === 0) return null;
+          ? recipes.filter((r) => r.station === null)
+          : recipes.filter((r) => r.station === st);
+        if (list.length === 0) return null;
         return (
           <div key={st} className="mt-4">
             <p className="font-display text-xs tracking-wider text-muted uppercase">{TITLE[st].title}</p>
@@ -108,10 +491,15 @@ export function CraftGump() {
             </ul>
           </div>
         );
-      })}
-      <Button className="mt-3 w-full" variant="secondary" onClick={close}>
-        Close
-      </Button>
+      })}</>}
+      </div>
+      <div className="shrink-0 border-t border-border bg-surface px-4 py-2">
+        {toast && <p role="status" className="mb-2 max-h-20 overflow-y-auto text-center text-sm break-words text-fg">{toast}</p>}
+        <p className="text-center text-xs text-muted">Scroll or swipe to browse work ↕</p>
+        <Button className="mt-2 min-h-11 w-full" variant="secondary" onClick={close}>
+          Close
+        </Button>
+      </div>
     </div>
   );
 }
@@ -135,16 +523,14 @@ function RecipeRow({
   onMake: () => void;
   onMakeBatch: (times: number) => void;
 }) {
-  const ready = at && canMake(getWorld(), rec) && (!rec.needsBlade || bladeOk);
+  const blocker = craftBlocker(getWorld(), rec);
+  const ready = at && canMake(getWorld(), rec) && (!rec.needsBlade || bladeOk) && !blocker;
   const product = (Object.keys(rec.give) as ItemId[]).find((k) => (rec.give[k] ?? 0) > 0);
   return (
     <div
-      className={cn(
-        "flex min-h-11 w-full flex-col items-stretch rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 py-2 text-left",
-        !ready && "opacity-60",
-      )}
+      className="craft-recipe flex min-h-11 w-full flex-col items-stretch rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 py-2 text-left"
     >
-      <span className="flex items-center justify-between gap-2">
+      <span className="flex flex-wrap items-center justify-between gap-2">
         <Tip content={product ? <ItemTipContent id={product} /> : null} side="bottom">
           <span className="text-sm text-fg underline decoration-dotted decoration-border-strong underline-offset-2">{rec.label}</span>
         </Tip>
@@ -153,7 +539,7 @@ function RecipeRow({
             type="button"
             disabled={!ready}
             onClick={onMake}
-            className="min-h-8 rounded-[var(--radius-xs)] border border-border bg-bg px-2 text-xs text-fg disabled:opacity-50"
+            className="min-h-11 rounded-[var(--radius-xs)] border border-gold/60 bg-bg px-2 text-xs text-fg disabled:cursor-not-allowed disabled:border-dashed disabled:border-border-strong disabled:bg-surface disabled:text-muted"
           >
             Make
           </button>
@@ -161,7 +547,7 @@ function RecipeRow({
             type="button"
             disabled={!ready || max < 5}
             onClick={() => onMakeBatch(5)}
-            className="min-h-8 rounded-[var(--radius-xs)] border border-border bg-bg px-2 text-xs text-fg disabled:opacity-50"
+            className="min-h-11 rounded-[var(--radius-xs)] border border-gold/60 bg-bg px-2 text-xs text-fg disabled:cursor-not-allowed disabled:border-dashed disabled:border-border-strong disabled:bg-surface disabled:text-muted"
           >
             ×5
           </button>
@@ -169,7 +555,7 @@ function RecipeRow({
             type="button"
             disabled={!ready || max < 2}
             onClick={() => onMakeBatch(max)}
-            className="min-h-8 rounded-[var(--radius-xs)] border border-border bg-bg px-2 text-xs text-fg disabled:opacity-50"
+            className="min-h-11 rounded-[var(--radius-xs)] border border-gold/60 bg-bg px-2 text-xs text-fg disabled:cursor-not-allowed disabled:border-dashed disabled:border-border-strong disabled:bg-surface disabled:text-muted"
           >
             Max{max > 1 ? ` ${max}` : ""}
           </button>
@@ -179,10 +565,13 @@ function RecipeRow({
       <span className="mt-1 flex flex-wrap items-center gap-1">
         {Object.entries(rec.need).map(([k, n]) => (
           <Tip key={k} content={<ItemTipContent id={k as ItemId} />} side="bottom">
-            <span className="flex items-center gap-0.5 text-xs text-muted">
+            <span className="flex flex-wrap items-center gap-0.5 text-xs text-muted">
               <ItemGlyph id={k as ItemId} className="size-3.5" />
               {n} {ITEM_META[k as ItemId].label}
-              <span className="text-muted">({pack?.[k as ItemId] ?? 0})</span>
+              <span className="text-muted">({availableCraftIngredient(getWorld(), k as ItemId)})</span>
+              {k === "log" || k === "ore" ? (
+                <span className="text-muted"> · {k === "log" ? "Oak logs" : "Iron ore"} from Pack; lower grades first</span>
+              ) : null}
             </span>
           </Tip>
         ))}
@@ -197,7 +586,7 @@ function RecipeRow({
               </span>
             }
           >
-            <span className="flex items-center gap-0.5 text-xs text-muted">
+            <span className="flex flex-wrap items-center gap-0.5 text-xs text-muted">
               {nt.n} <span className="italic">{nt.tag}</span>
               <span className="text-muted">({countTag(pack, nt.tag)})</span>
             </span>
@@ -206,6 +595,7 @@ function RecipeRow({
         {rec.needsBlade ? <span className={cn("text-xs", bladeOk ? "text-muted" : "text-accent")}>+ a blade in hand</span> : null}
       </span>
       <span className="mt-1 text-xs text-muted">{rec.hint}</span>
+      {blocker ? <span className="craft-blocker mt-1 text-xs text-fg">Next requirement: {blocker}</span> : null}
     </div>
   );
 }

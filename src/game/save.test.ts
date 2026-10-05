@@ -98,10 +98,13 @@ test("save - writes an explicit schema version without generated tiles", () => {
 
   assert.equal(hasSave(), true);
   const stored = JSON.parse(localStorage.getItem(SAVE_KEY)!);
-  assert.equal(CURRENT_SAVE_VERSION, 4);
-  assert.equal(stored.saveVersion, 4);
+  assert.equal(CURRENT_SAVE_VERSION, 5);
+  assert.equal(stored.saveVersion, 5);
   assert.equal(stored.tiles, null);
   assert.equal(stored.seed, world.seed);
+  assert.deepEqual(stored.placedObjects, []);
+  assert.deepEqual(stored.structures, []);
+  assert.deepEqual(stored.blueprints, []);
   assert.deepEqual(stored.player.resources, { stacks: {} });
   assert.deepEqual(stored.resourceNodes, {});
 
@@ -337,6 +340,9 @@ test("save - rejects current-version saves missing required World fields", () =>
     "weather",
     "boom",
     "nightOffer",
+    "placedObjects",
+    "structures",
+    "blueprints",
   ] as const;
 
   for (const field of requiredFields) {
@@ -698,4 +704,84 @@ test("save - rejects values outside every persisted closed domain", () => {
     localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
     assert.equal(loadSave(), null, `accepted invalid ${label}`);
   }
+});
+
+test("save - migrates v4 halls with empty creator arrays and does not rewrite buildings", () => {
+  const save = persistedWorld();
+  const buildings = structuredClone(save.buildings);
+  delete record(save).placedObjects;
+  delete record(save).structures;
+  delete record(save).blueprints;
+  localStorage.setItem(SAVE_KEY, JSON.stringify({ ...save, saveVersion: 4 }));
+  const loaded = loadSave();
+  assert.ok(loaded);
+  assert.deepEqual(loaded.placedObjects, []);
+  assert.deepEqual(loaded.structures, []);
+  assert.deepEqual(loaded.blueprints, []);
+  assert.deepEqual(loaded.buildings, buildings);
+});
+
+test("save - creator lodge round-trips; corrupt or scripted state fails closed", () => {
+  const world = createWorld();
+  world.placedObjects = [
+    {
+      id: "o1",
+      definitionId: "wall_straight",
+      definitionVersion: 1,
+      tx: 12,
+      ty: 14,
+      level: 0,
+      rotation: 2,
+      materialSlots: { timber: "timber" },
+      ownerId: world.player.id,
+      structureId: "s1",
+      name: null,
+      state: { door: { open: false } },
+    },
+  ];
+  world.structures = [
+    {
+      id: "s1",
+      name: "Lodge",
+      ownerId: world.player.id,
+      objectIds: ["o1"],
+      anchor: { tx: 12, ty: 14 },
+      permissions: { visit: "private", use: "owner", build: "owner" },
+      revision: 1,
+    },
+  ];
+  world.blueprints = [
+    {
+      id: "bp1",
+      version: 1,
+      name: "Lean-to",
+      author: "Ada",
+      bounds: { w: 4, d: 3, h: 2 },
+      objects: [
+        {
+          definitionId: "wall_straight",
+          definitionVersion: 1,
+          dx: 0,
+          dy: 0,
+          level: 0,
+          rotation: 0,
+          materialSlots: {},
+          state: {},
+        },
+      ],
+      billOfMaterials: [{ id: "board", n: 8 }],
+      tags: ["lodge"],
+    },
+  ];
+  writeSave(world);
+  const loaded = loadSave();
+  assert.ok(loaded);
+  assert.deepEqual(loaded.placedObjects, world.placedObjects);
+  assert.deepEqual(loaded.structures, world.structures);
+  assert.deepEqual(loaded.blueprints, world.blueprints);
+
+  const forged = JSON.parse(localStorage.getItem(SAVE_KEY)!);
+  forged.placedObjects[0].state = { script: { code: "alert(1)" } };
+  localStorage.setItem(SAVE_KEY, JSON.stringify(forged));
+  assert.equal(loadSave(), null);
 });

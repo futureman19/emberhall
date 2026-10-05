@@ -1,4 +1,4 @@
-import { ITEM_META, SHOP_STOCK } from "./catalog.ts";
+import { APOTHECARY_STOCK, hasTag, ITEM_META, SHOP_STOCK } from "./catalog.ts";
 import { buildingBox } from "./building-size.ts";
 import { isGhost, resurrect, you } from "./player.ts";
 import { astarToRange, tileOf } from "./pathfinding.ts";
@@ -63,6 +63,39 @@ function bankHands(world: World) {
   return null;
 }
 
+/** A stall's counter reach: the court's keeper stands a few paces off and
+ *  still trades — but not from across the vale, and never with no keeper
+ *  anywhere near. Checked at transaction time from canonical positions. */
+export const SHOP_RANGE = 4.5;
+
+/** Every keeper who runs a counter, and what each keeps. */
+export const SHOP_ROLES: readonly NpcRole[] = ["provisioner", "alchemist"];
+
+export function stockFor(role: NpcRole | null | undefined): readonly ItemId[] {
+  return role === "alchemist" ? APOTHECARY_STOCK : SHOP_STOCK;
+}
+
+/** The alchemist weighs only reagents and finished draughts. */
+export function alchemistBuys(item: ItemId): boolean {
+  return hasTag(item, "reagent") || item.startsWith("potion_");
+}
+
+/** The nearest keeper within counter reach, any shop role — the counter you
+ *  actually walked up to decides what stock you see. */
+function keeperNear(world: World, roles: readonly NpcRole[] = SHOP_ROLES) {
+  const self = you(world);
+  if (!self) return null;
+  return world.people
+    .filter((p) => p.role && roles.includes(p.role) && Math.hypot(self.x - p.x, self.z - p.z) <= SHOP_RANGE)
+    .sort((a, b) => Math.hypot(self.x - a.x, self.z - a.z) - Math.hypot(self.x - b.x, self.z - b.z))[0] ?? null;
+}
+
+function shopHands(world: World, roles: readonly NpcRole[] = SHOP_ROLES) {
+  if (isGhost(world)) return "A ghost cannot.";
+  if (!keeperNear(world, roles)) return "The keeper is not here.";
+  return null;
+}
+
 export function commandApproach(world: World, id: string) {
   const t = world.people.find((p) => p.id === id);
   const self = you(world);
@@ -103,6 +136,10 @@ export function commandTalk(world: World, id: string) {
     if (isGhost(world)) return answer(`${t.name}: Dust will not sell to the dead.`);
     return answer(`${t.name}: Dust, steel, and a blank rune if you have the coin.`);
   }
+  if (t.role === "alchemist") {
+    if (isGhost(world)) return answer(`${t.name}: The dead lack the blood for draughts.`);
+    return answer(`${t.name}: Draughts for the wound and the dark — and reagents by the ounce, nightshade among them.`);
+  }
   if (t.name === RYN_NAME) {
     if (isGhost(world)) return answer(`${t.name}: The dead keep no bargains.`);
     if ((world.rep[RYN_WANT] ?? 0) > 0) {
@@ -128,30 +165,37 @@ export function commandTalk(world: World, id: string) {
 }
 
 export function commandBuy(world: World, item: ItemId) {
-  if (isGhost(world)) return "A ghost cannot.";
+  const err = shopHands(world);
+  if (err) return err;
+  const keeper = keeperNear(world);
   const meta = ITEM_META[item];
-  if (!SHOP_STOCK.includes(item)) return "They do not keep that.";
+  if (!stockFor(keeper?.role).includes(item)) return "They do not keep that.";
   if (world.gold < meta.buy) return `Need ${meta.buy} gold.`;
   world.gold -= meta.buy;
   world.player.pack[item] = (world.player.pack[item] ?? 0) + 1;
-  emitTransfer(world, "trade", "out", item, ["provisioner"]);
+  emitTransfer(world, "trade", "out", item, SHOP_ROLES);
   return `Bought ${meta.label.toLowerCase()}.`;
 }
 
 export function commandSell(world: World, item: ItemId) {
-  if (isGhost(world)) return "A ghost cannot.";
+  const err = shopHands(world);
+  if (err) return err;
+  const keeper = keeperNear(world);
+  if (keeper?.role === "alchemist" && !alchemistBuys(item)) return "They will not take it.";
   const n = world.player.pack[item] ?? 0;
   if (n < 1) return "You do not carry that.";
   const meta = ITEM_META[item];
   if (meta.sell <= 0) return "They will not take it.";
   world.player.pack[item] = n - 1;
   world.gold += meta.sell;
-  emitTransfer(world, "trade", "in", item, ["provisioner"]);
+  emitTransfer(world, "trade", "in", item, SHOP_ROLES);
   return `Sold ${meta.label.toLowerCase()}.`;
 }
 
 export function commandSellRare(world: World, uid: string) {
-  if (isGhost(world)) return "A ghost cannot.";
+  // The loupe stays at the provisioner's counter; the alchemist keeps scales.
+  const err = shopHands(world, ["provisioner"]);
+  if (err) return err;
   const rare = world.player.rares.find((r) => r.uid === uid);
   if (!rare) return "No such wonder.";
   const { total } = appraiseRare(rare);

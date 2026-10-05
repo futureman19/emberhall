@@ -5,6 +5,8 @@ import { houseAt } from "./house.ts";
 import { CROP_META, plotAt } from "./farm.ts";
 import { getWorld } from "./live.ts";
 import { markBuildHold, takeBuildHold, useGame } from "./store.ts";
+import { confirmHold, getHoldBuild, hoverHold } from "./placeables/build-mode.ts";
+import { objectFn, pieceAt } from "./placeables/functions.ts";
 import type { CtxTarget } from "./types.ts";
 
 export function hitAt(tx: number, ty: number, sx: number, sy: number) {
@@ -41,6 +43,12 @@ export function hitAt(tx: number, ty: number, sx: number, sy: number) {
     g.openCtx(sx, sy, { kind: "building", id: house.id, tx: house.tx, ty: house.ty, label: house.kind });
     return;
   }
+  const piece = pieceAt(w, tx, ty);
+  if (piece) {
+    const fn = objectFn(piece);
+    g.openCtx(sx, sy, { kind: "building", id: piece.id, tx: piece.tx, ty: piece.ty, label: fn ?? piece.definitionId });
+    return;
+  }
   const b = buildingAt(w, tx, ty, 2.6);
   if (b) {
     g.openCtx(sx, sy, { kind: "building", id: b.id, tx: b.tx, ty: b.ty, label: b.kind });
@@ -53,6 +61,11 @@ export function hitAt(tx: number, ty: number, sx: number, sy: number) {
 
 export function hoverAt(tx: number, ty: number) {
   const g = useGame.getState();
+  if (getHoldBuild().active && getHoldBuild().definitionId) {
+    hoverHold(tx, ty);
+    g.noteHold();
+    return;
+  }
   if (g.buildKind) g.hoverBuild(tx, ty);
   if (g.tillArmed) g.hoverTill(tx, ty);
 }
@@ -60,6 +73,14 @@ export function hoverAt(tx: number, ty: number) {
 export function liftAt(tx: number, ty: number) {
   if (!takeBuildHold()) return;
   const g = useGame.getState();
+  if (getHoldBuild().active && getHoldBuild().definitionId) {
+    hoverHold(tx, ty);
+    const err = confirmHold();
+    if (err) g.flash(err);
+    else g.flash("Set.");
+    g.noteHold();
+    return;
+  }
   if (!g.buildKind) return;
   g.hoverBuild(tx, ty);
   g.useTile(tx, ty);
@@ -68,6 +89,12 @@ export function liftAt(tx: number, ty: number) {
 export function leftAt(tx: number, ty: number) {
   const w = getWorld();
   const g = useGame.getState();
+  if (getHoldBuild().active && getHoldBuild().definitionId) {
+    markBuildHold();
+    hoverHold(tx, ty);
+    g.noteHold();
+    return;
+  }
   if (g.buildKind) {
     markBuildHold();
     g.hoverBuild(tx, ty);

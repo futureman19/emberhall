@@ -1,4 +1,5 @@
 import type { GemClarity, MaterialGrade, MaterialTraitId } from "./types.ts";
+import type { FaunaKind, SkillId } from "../types.ts";
 
 export const CANONICAL_STAT_IDS = ["damage", "hitBonus", "armor"] as const;
 export type CanonicalStatId = (typeof CANONICAL_STAT_IDS)[number];
@@ -21,6 +22,15 @@ type GradeTraitDefinition = {
   readonly values: Readonly<Record<MaterialGrade, number>>;
 };
 
+/** Slayer traits multiply damage against an explicit set of fleshless kinds; 1 is neutral. */
+type GradeSlayerTraitDefinition = {
+  readonly qualityType: "grade";
+  readonly stat: "slayer";
+  readonly scope: "canonical";
+  readonly values: Readonly<Record<MaterialGrade, number>>;
+  readonly fauna: readonly FaunaKind[];
+};
+
 type ClarityCanonicalTraitDefinition = {
   readonly qualityType: "clarity";
   readonly stat: CanonicalStatId;
@@ -35,7 +45,29 @@ type ClarityLocalTraitDefinition = {
   readonly values: Readonly<Record<GemClarity, number>>;
 };
 
-export type MaterialTraitDefinition = GradeTraitDefinition | ClarityCanonicalTraitDefinition | ClarityLocalTraitDefinition;
+type ClaritySkillTraitDefinition = {
+  readonly qualityType: "clarity";
+  readonly stat: "skill";
+  readonly scope: "canonical";
+  readonly values: Readonly<Record<GemClarity, number>>;
+};
+
+/** Trophy traits: a grade material that teaches a named skill while worn. */
+type GradeSkillTraitDefinition = {
+  readonly qualityType: "grade";
+  readonly stat: "skill";
+  readonly scope: "canonical";
+  readonly values: Readonly<Record<MaterialGrade, number>>;
+  readonly skill: SkillId;
+};
+
+export type MaterialTraitDefinition =
+  | GradeTraitDefinition
+  | GradeSlayerTraitDefinition
+  | GradeSkillTraitDefinition
+  | ClarityCanonicalTraitDefinition
+  | ClarityLocalTraitDefinition
+  | ClaritySkillTraitDefinition;
 
 export const MAX_LOCAL_FORTUNE = 5;
 
@@ -72,6 +104,65 @@ const TRAITS = {
     scope: "canonical",
     values: { rough: 0.25, sound: 0.5, choice: 0.75, pristine: 1 },
   },
+  keen: {
+    qualityType: "grade",
+    stat: "damage",
+    scope: "canonical",
+    values: { rough: 0.25, sound: 0.5, choice: 0.75, pristine: 1 },
+  },
+  sturdy: {
+    qualityType: "grade",
+    stat: "armor",
+    scope: "canonical",
+    values: { rough: 0.5, sound: 1, choice: 1.5, pristine: 2 },
+  },
+  supple: {
+    qualityType: "grade",
+    stat: "armor",
+    scope: "canonical",
+    values: { rough: 0.5, sound: 1, choice: 1.5, pristine: 2 },
+  },
+  ember: {
+    qualityType: "grade",
+    stat: "damage",
+    scope: "canonical",
+    values: { rough: 1, sound: 2, choice: 3, pristine: 4 },
+  },
+  moon: {
+    qualityType: "grade",
+    stat: "slayer",
+    scope: "canonical",
+    values: { rough: 1.05, sound: 1.1, choice: 1.2, pristine: 1.3 },
+    fauna: [
+      "wight",
+      "greybarrow_wightling",
+      "ashen_banshee",
+      "bonecrow",
+      "tomb_sentinel",
+      "willow_wisp",
+      "blackbriar_hag",
+      "rime_revenant",
+      "fen_ghoul",
+      "drowned_reaver",
+      "ossuary_knight",
+      "ash_demon",
+      "grave_lich",
+    ],
+  },
+  hunters: {
+    qualityType: "grade",
+    stat: "skill",
+    scope: "canonical",
+    values: { rough: 1, sound: 2, choice: 3, pristine: 4 },
+    skill: "tracking",
+  },
+  ferocity: {
+    qualityType: "grade",
+    stat: "skill",
+    scope: "canonical",
+    values: { rough: 1, sound: 2, choice: 3, pristine: 4 },
+    skill: "swords",
+  },
   power: {
     qualityType: "clarity",
     stat: "damage",
@@ -83,6 +174,24 @@ const TRAITS = {
     stat: "fortune",
     scope: "local",
     values: { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 },
+  },
+  precision: {
+    qualityType: "clarity",
+    stat: "hitBonus",
+    scope: "canonical",
+    values: { cracked: 1, flawed: 2, cut: 3, flawless: 4, perfect: 5 },
+  },
+  protection: {
+    qualityType: "clarity",
+    stat: "armor",
+    scope: "canonical",
+    values: { cracked: 0.25, flawed: 0.5, cut: 0.75, flawless: 1, perfect: 1.5 },
+  },
+  mastery: {
+    qualityType: "clarity",
+    stat: "skill",
+    scope: "canonical",
+    values: { cracked: 0.5, flawed: 1, cut: 1.5, flawless: 2, perfect: 3 },
   },
 } satisfies Record<MaterialTraitId, MaterialTraitDefinition>;
 

@@ -11,6 +11,7 @@ import { COMPANION_DURATION, companionLabel, companionPose, getCompanionFx } fro
 import { useGame } from "@/game/store";
 import type { Creature, FaunaKind } from "@/game/types";
 import { FaunaArtBody } from "./fauna-art";
+import { faunaSpellArt } from "./fauna-art-catalog";
 
 const COLOR: Record<FaunaKind, string> = {
   hare: "#c4a882",
@@ -1023,7 +1024,7 @@ function Beast({ c }: { c: Creature }) {
       position={[c.x, groundY(getWorld(), c.x, c.z), c.z]}
       rotation={dead ? [Math.PI / 2, 0, 0] : [0, 0, 0]}
     >
-      <FaunaArtBody kind={c.kind} size={SIZE[c.kind]}>
+      <FaunaArtBody kind={c.kind} size={SIZE[c.kind]} art={faunaSpellArt(c)}>
         <Body c={c} />
       </FaunaArtBody>
       {c.ownerId && (
@@ -1147,7 +1148,8 @@ export function Fauna() {
   return (
     <group>
       {fauna.map((c) => (
-        <Beast key={c.id} c={c} />
+        // Quas Xen's images are drawn by MirrorImages, not as hares.
+        c.mirror ? null : <Beast key={c.id} c={c} />
       ))}
     </group>
   );

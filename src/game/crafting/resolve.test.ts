@@ -1,11 +1,23 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  BOOTS_FORM,
   BOW_FORM,
+  GAUNTLETS_FORM,
   GEM_CLARITIES,
+  GLOVES_FORM,
+  GREAVES_FORM,
+  CHARM_FORM,
+  HELM_FORM,
+  HOOD_FORM,
+  HOSE_FORM,
   ITEM_FORM_CATALOG,
   ITEM_FORM_IDENTITY,
+  LEATHER_FORM,
+  MAIL_FORM,
   MATERIAL_GRADES,
+  RING_FORM,
+  SHIELD_FORM,
   SWORD_FORM,
   buildItemFormCatalog,
 } from "./forms.ts";
@@ -186,6 +198,48 @@ test("flawless Sapphire derives Fortune four locally without entering canonical 
   assert.equal(sapphire.local.fortune, 4);
   assert.equal("fortune" in sapphire.stats, false);
   assert.equal(JSON.stringify(sapphire.stats).includes("fortune"), false);
+});
+
+test("moon silver contributes its slayer multiplier to every fleshless kind at full primary scale", () => {
+  const result = resolveItemStats(SWORD_FORM, {
+    workmanship: "ordinary",
+    components: [
+      { role: "edge", resourceId: "moon_silver", form: "ingot", grade: "choice", amount: 5 },
+      { role: "hilt", resourceId: "oak", form: "board", grade: "sound", amount: 1 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+  });
+  assert.equal(result.stats.damage, 10, "moon silver adds no raw damage");
+  assert.equal(result.stats.hitBonus, 0);
+  assert.equal(result.stats.slayerMultipliers.wight, 1.2);
+  assert.equal(result.stats.slayerMultipliers.ossuary_knight, 1.2);
+  assert.equal(result.stats.slayerMultipliers.wolf, undefined, "flesh kinds gain nothing");
+  assert.equal(result.stats.slayerMultipliers.cinder_drake, undefined, "a flesh drake is no spirit");
+  assert.equal(Object.keys(result.stats.slayerMultipliers).length, 13);
+
+  const moon = result.contributions.find((contribution) => contribution.traitId === "moon");
+  assert.equal(moon?.source, "material");
+  assert.equal(moon?.sourceId, "moon_silver");
+  assert.equal(moon?.role, "edge");
+  assert.ok(
+    Math.abs((moon?.stats.slayerMultipliers?.wight ?? 0) - 0.2) < 1e-12,
+    "the contribution records the delta from neutral",
+  );
+});
+
+test("a pristine moon silver slayer stays under the form cap", () => {
+  const result = resolveItemStats(SWORD_FORM, {
+    workmanship: "ordinary",
+    components: [
+      { role: "edge", resourceId: "moon_silver", form: "ingot", grade: "pristine", amount: 5 },
+      { role: "hilt", resourceId: "oak", form: "board", grade: "sound", amount: 1 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+  });
+  assert.equal(result.stats.slayerMultipliers.wight, 1.3);
+  assert.ok(result.stats.slayerMultipliers.wight! <= SWORD_FORM.caps.slayerMultiplier);
 });
 
 test("canonical stats and defensive maps are capped by the item form", () => {
@@ -373,7 +427,7 @@ test("null-prototype forms are accepted only when all required fields are own pr
     deepMutable(BOW_FORM),
   ) as unknown as ItemFormDefinition;
 
-  const catalog = buildItemFormCatalog([nullPrototypeForm, SWORD_FORM]);
+  const catalog = buildItemFormCatalog([nullPrototypeForm, SWORD_FORM, SHIELD_FORM, HELM_FORM, MAIL_FORM, BOOTS_FORM, GAUNTLETS_FORM, GREAVES_FORM, LEATHER_FORM, HOOD_FORM, GLOVES_FORM, HOSE_FORM, CHARM_FORM, RING_FORM]);
   assert.deepEqual(catalog.bow, BOW_FORM);
   assert.deepEqual(resolveItemStats(nullPrototypeForm, bowBuild()), resolveItemStats(BOW_FORM, bowBuild()));
 
@@ -594,6 +648,18 @@ test("form identity contract binds bow to bow base item and weapon class", () =>
   assert.deepEqual(ITEM_FORM_IDENTITY, {
     bow: { baseItem: "bow", itemClass: "weapon" },
     sword: { baseItem: "sword", itemClass: "weapon" },
+    shield: { baseItem: "shield", itemClass: "armor" },
+    helm: { baseItem: "helm", itemClass: "armor" },
+    mail: { baseItem: "mail", itemClass: "armor" },
+    boots: { baseItem: "boots", itemClass: "armor" },
+    gauntlets: { baseItem: "gauntlets", itemClass: "armor" },
+    greaves: { baseItem: "greaves", itemClass: "armor" },
+    leather: { baseItem: "leather", itemClass: "armor" },
+    hood: { baseItem: "hood", itemClass: "armor" },
+    gloves: { baseItem: "gloves", itemClass: "armor" },
+    hose: { baseItem: "hose", itemClass: "armor" },
+    charm: { baseItem: "pendant", itemClass: "jewelry" },
+    ring: { baseItem: "ring", itemClass: "jewelry" },
   });
   assert.throws(
     () => resolveItemStats({ ...deepMutable(BOW_FORM), baseItem: "sword" }, bowBuild()),
@@ -603,6 +669,46 @@ test("form identity contract binds bow to bow base item and weapon class", () =>
     () => resolveItemStats({ ...deepMutable(BOW_FORM), itemClass: "jewelry" }, bowBuild()),
     /item form bow must use item class weapon/,
   );
+});
+
+test("grade skill traits resolve onto jewelry through the material loop", () => {
+  const result = resolveItemStats(CHARM_FORM, {
+    workmanship: "ordinary",
+    components: [
+      { role: "body", resourceId: "stag_antler", form: "bone", grade: "choice", amount: 1 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+  });
+  assert.deepEqual(result.stats.skillBonuses, { tracking: 3 }, "choice hunters at primary scale");
+  assert.equal(result.stats.damage, 0, "antler accuracy clamps against the charm's zero hit/damage caps");
+  assert.equal(result.stats.hitBonus, 0);
+  assert.equal(result.stats.armor, 0);
+});
+
+test("a moon silver ring carries the spirit-slayer onto the finger slot", () => {
+  const result = resolveItemStats(RING_FORM, {
+    workmanship: "ordinary",
+    components: [
+      { role: "body", resourceId: "moon_silver", form: "ingot", grade: "choice", amount: 1 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+  });
+  assert.equal(result.stats.slayerMultipliers.wight, 1.2, "choice moon at primary scale");
+  assert.equal(result.stats.armor, 0);
+});
+
+test("a ring's protection inlay clamps armor at the jewelry cap", () => {
+  const result = resolveItemStats(RING_FORM, {
+    workmanship: "ordinary",
+    components: [
+      { role: "body", resourceId: "iron_ore", form: "ingot", grade: "pristine", amount: 1 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [{ resourceId: "diamond", clarity: "perfect" }],
+  });
+  assert.equal(result.stats.armor, 3, "2 pristine sturdy + 1.5 perfect protection clamps at 3");
 });
 
 test("base stat maps reject unknown skills, fauna, and invalid values", () => {

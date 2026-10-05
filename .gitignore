@@ -19,3 +19,7 @@ attachments/
 
 .vercel
 tsconfig.tsbuildinfo
+__pycache__/
+
+# agent scratch
+.hermes/

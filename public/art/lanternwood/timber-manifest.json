@@ -561,6 +561,85 @@
           ]
         }
       }
+    },
+    "ironwood": {
+      "url": "/art/lanternwood/timber-ironwood.glb",
+      "source": "art/blender/timber-ironwood.blend",
+      "design": "Squat iron-dark bole, short muscular arms and dense hammered rounded pads",
+      "bytes": 62388,
+      "sha256": "1a0a57c4049a0d49068c1bd574ac1f69a05a99b1bfbbeb4f481657333397eb7d",
+      "parts": {
+        "ironwood_trunk": {
+          "vertices": 248,
+          "triangles": 456,
+          "min": [
+            -0.553808,
+            0.0,
+            -0.560066
+          ],
+          "max": [
+            0.562104,
+            2.1,
+            0.451508
+          ]
+        },
+        "ironwood_crown": {
+          "vertices": 416,
+          "triangles": 800,
+          "min": [
+            -1.132786,
+            1.7,
+            -1.130886
+          ],
+          "max": [
+            1.120311,
+            4.2,
+            1.125996
+          ]
+        },
+        "ironwood_stump": {
+          "vertices": 24,
+          "triangles": 44,
+          "min": [
+            -0.274494,
+            0.0,
+            -0.2755
+          ],
+          "max": [
+            0.274494,
+            0.29,
+            0.2755
+          ]
+        },
+        "ironwood_sapling_trunk": {
+          "vertices": 248,
+          "triangles": 456,
+          "min": [
+            -0.158231,
+            0.0,
+            -0.160019
+          ],
+          "max": [
+            0.160601,
+            0.6,
+            0.129002
+          ]
+        },
+        "ironwood_sapling_crown": {
+          "vertices": 416,
+          "triangles": 800,
+          "min": [
+            -0.323653,
+            0.485714,
+            -0.32311
+          ],
+          "max": [
+            0.320089,
+            1.2,
+            0.321713
+          ]
+        }
+      }
     }
   }
 }

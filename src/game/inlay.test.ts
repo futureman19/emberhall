@@ -3,12 +3,15 @@ import test from "node:test";
 import { appraiseRare, createCraftedItem, rareName } from "./rare.ts";
 import { addResource, makeResourceStackKey, resourceCount } from "./inventory/resources.ts";
 import { applyItemInlay, previewItemInlay } from "./inlay.ts";
+import { commandEquipRare, effSkill } from "./player.ts";
 import { createWorld } from "./world.ts";
 
 const FLAWED_RUBY = makeResourceStackKey("ruby", "gem", "flawed");
 const CUT_RUBY = makeResourceStackKey("ruby", "gem", "cut");
 const FLAWLESS_SAPPHIRE = makeResourceStackKey("sapphire", "gem", "flawless");
 const PERFECT_SAPPHIRE = makeResourceStackKey("sapphire", "gem", "perfect");
+const CUT_EMERALD = makeResourceStackKey("emerald", "gem", "cut");
+const FLAWLESS_AMETHYST = makeResourceStackKey("amethyst", "gem", "flawless");
 
 function craftedBow(resourceId: "oak" | "redwood" = "redwood") {
   const world = createWorld();
@@ -94,6 +97,179 @@ test("inlay - Sapphire Fortune remains local-only and capped at five", () => {
   const perfectPreview = previewItemInlay(perfect.world.player, perfect.item.uid, PERFECT_SAPPHIRE);
   assert.equal(perfectPreview.status, "ready");
   if (perfectPreview.status === "ready") assert.equal(perfectPreview.local.fortune, 5);
+});
+
+test("inlay - cut Emerald adds deterministic Precision III accuracy", () => {
+  const { world, item } = craftedBow();
+  addResource(world.player.resources, CUT_EMERALD, 1);
+  const before = structuredClone(item.resolvedStats);
+
+  const preview = previewItemInlay(world.player, item.uid, CUT_EMERALD);
+  assert.equal(preview.status, "ready");
+  if (preview.status !== "ready") return;
+  assert.equal(preview.effect.label, "Precision III");
+  assert.equal(preview.stats.hitBonus, (before?.hitBonus ?? 0) + 3);
+  assert.equal(preview.stats.damage, before?.damage, "precision never adds damage");
+
+  const result = applyItemInlay(world.player, item.uid, CUT_EMERALD);
+  assert.equal(result.status, "inlaid");
+  assert.equal(resourceCount(world.player.resources, CUT_EMERALD), 0);
+  const updated = world.player.rares[0]!;
+  assert.deepEqual(updated.inlays, [{ resourceId: "emerald", clarity: "cut" }]);
+  assert.equal(updated.resolvedStats?.hitBonus, (before?.hitBonus ?? 0) + 3);
+  assert.match(rareName(updated), /of Precision III/);
+});
+
+test("inlay - swords accept precision and reject a second precision family", () => {
+  const world = createWorld();
+  const sword = createCraftedItem(world, {
+    formId: "sword",
+    base: "sword",
+    workmanship: "ordinary",
+    components: [
+      { role: "edge", resourceId: "iron_ore", form: "ingot", grade: "choice", amount: 5 },
+      { role: "hilt", resourceId: "oak", form: "board", grade: "sound", amount: 1 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+    maker: "Testhand",
+    recipeId: "sword",
+    recipeVersion: 1,
+  });
+  world.player.rares.push(sword);
+  addResource(world.player.resources, CUT_EMERALD, 2);
+
+  assert.equal(applyItemInlay(world.player, sword.uid, CUT_EMERALD).status, "inlaid");
+  assert.deepEqual(previewItemInlay(world.player, sword.uid, CUT_EMERALD), {
+    status: "blocked",
+    reason: "family",
+    message: "Sword already carries precision.",
+  });
+});
+
+test("inlay - shields accept protection, reject a second, and swords reject protection", () => {
+  const world = createWorld();
+  const shield = createCraftedItem(world, {
+    formId: "shield",
+    base: "shield",
+    workmanship: "ordinary",
+    components: [
+      { role: "plate", resourceId: "iron_ore", form: "ingot", grade: "choice", amount: 3 },
+      { role: "frame", resourceId: "oak", form: "board", grade: "sound", amount: 2 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+    maker: "Testhand",
+    recipeId: "shield",
+    recipeVersion: 1,
+  });
+  world.player.rares.push(shield);
+  const FLAWLESS_DIAMOND = makeResourceStackKey("diamond", "gem", "flawless");
+  addResource(world.player.resources, FLAWLESS_DIAMOND, 2);
+
+  const before = structuredClone(shield.resolvedStats);
+  const preview = previewItemInlay(world.player, shield.uid, FLAWLESS_DIAMOND);
+  assert.equal(preview.status, "ready");
+  if (preview.status !== "ready") return;
+  assert.equal(preview.effect.label, "Protection IV");
+  assert.equal(preview.stats.armor, (before?.armor ?? 0) + 1, "flawless diamond adds exactly the shield's cap headroom");
+
+  assert.equal(applyItemInlay(world.player, shield.uid, FLAWLESS_DIAMOND).status, "inlaid");
+  const updated = world.player.rares[0]!;
+  assert.deepEqual(updated.inlays, [{ resourceId: "diamond", clarity: "flawless" }]);
+  assert.equal(updated.resolvedStats?.armor, (before?.armor ?? 0) + 1);
+  assert.match(rareName(updated), /of Protection IV/);
+  assert.equal(previewItemInlay(world.player, shield.uid, FLAWLESS_DIAMOND).status, "blocked", "no second protection family");
+
+  const sword = createCraftedItem(world, {
+    formId: "sword",
+    base: "sword",
+    workmanship: "ordinary",
+    components: [
+      { role: "edge", resourceId: "iron_ore", form: "ingot", grade: "choice", amount: 5 },
+      { role: "hilt", resourceId: "oak", form: "board", grade: "sound", amount: 1 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+    maker: "Testhand",
+    recipeId: "sword",
+    recipeVersion: 1,
+  });
+  world.player.rares.push(sword);
+  assert.equal(previewItemInlay(world.player, sword.uid, FLAWLESS_DIAMOND).status, "blocked", "swords have no protection family slot");
+});
+
+test("inlay - a flawless amethyst schools a sword in swords and lifts the wielder", () => {
+  const world = createWorld();
+  const sword = createCraftedItem(world, {
+    formId: "sword",
+    base: "sword",
+    workmanship: "ordinary",
+    components: [
+      { role: "edge", resourceId: "iron_ore", form: "ingot", grade: "choice", amount: 5 },
+      { role: "hilt", resourceId: "oak", form: "board", grade: "sound", amount: 1 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+    maker: "Testhand",
+    recipeId: "sword",
+    recipeVersion: 1,
+  });
+  world.player.rares.push(sword);
+  addResource(world.player.resources, FLAWLESS_AMETHYST, 1);
+  world.player.skills.swords = 40;
+
+  assert.equal(applyItemInlay(world.player, sword.uid, FLAWLESS_AMETHYST).status, "inlaid");
+  const schooled = world.player.rares.find((r) => r.uid === sword.uid);
+  assert.equal(schooled?.resolvedStats?.skillBonuses.swords, 2); // flawless mastery: +2
+  assert.equal(effSkill(world, "swords"), 40, "an unequipped sword schools no one");
+  commandEquipRare(world, sword.uid);
+  assert.equal(effSkill(world, "swords"), 42, "the worn sword teaches its art");
+  assert.deepEqual(previewItemInlay(world.player, sword.uid, FLAWLESS_AMETHYST), {
+    status: "blocked",
+    reason: "family",
+    message: "Sword already carries mastery.",
+  });
+});
+
+test("inlay - a bow takes mastery as archery; armor refuses the scholarship", () => {
+  const world = createWorld();
+  const bow = createCraftedItem(world, {
+    formId: "bow",
+    base: "bow",
+    workmanship: "ordinary",
+    components: [
+      { role: "body", resourceId: "oak", form: "board", grade: "choice", amount: 5 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+    maker: "Testhand",
+    recipeId: "bow",
+    recipeVersion: 1,
+  });
+  world.player.rares.push(bow);
+  addResource(world.player.resources, FLAWLESS_AMETHYST, 2);
+  assert.equal(applyItemInlay(world.player, bow.uid, FLAWLESS_AMETHYST).status, "inlaid");
+  assert.equal(world.player.rares.find((r) => r.uid === bow.uid)?.resolvedStats?.skillBonuses.archery, 2);
+
+  const shield = createCraftedItem(world, {
+    formId: "shield",
+    base: "shield",
+    workmanship: "ordinary",
+    components: [
+      { role: "plate", resourceId: "iron_ore", form: "ingot", grade: "choice", amount: 3 },
+      { role: "frame", resourceId: "oak", form: "board", grade: "sound", amount: 2 },
+      { role: "binding", resourceId: "common_cloth", form: "cloth", grade: "sound", amount: 1 },
+    ],
+    inlays: [],
+    maker: "Testhand",
+    recipeId: "shield",
+    recipeVersion: 1,
+  });
+  world.player.rares.push(shield);
+  const preview = previewItemInlay(world.player, shield.uid, FLAWLESS_AMETHYST);
+  assert.equal(preview.status, "blocked");
+  assert.equal(preview.status === "blocked" ? preview.reason : null, "family");
 });
 
 test("inlay - insufficient gem and noncrafted targets reject before mutation", () => {

@@ -9,11 +9,15 @@ export function MaterialSelector({
   rows,
   selected,
   onSelect,
+  group,
 }: {
   role: RecipeRole;
   rows: readonly ResourceInventoryRow[];
   selected: ResourceStackKey | null;
   onSelect: (key: ResourceStackKey) => void;
+  /** Radio group name suffix — required when several forms share a role (two
+   *  "material-binding" groups on one page fight over the checked state). */
+  group?: string;
 }) {
   const compatible = rows.filter(({ key }) => resourceStackMatchesRole(role, key));
   return (
@@ -38,7 +42,7 @@ export function MaterialSelector({
               >
                 <input
                   type="radio"
-                  name={`material-${role.role}`}
+                  name={`material-${group ?? role.role}`}
                   value={row.key}
                   checked={selected === row.key}
                   disabled={!enough}

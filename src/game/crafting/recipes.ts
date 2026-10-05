@@ -14,7 +14,7 @@ import {
 } from "../inventory/resources.ts";
 import type { ItemId, ResourceStackKey } from "../types.ts";
 
-export type ExactRecipeId = "bow" | "sword";
+export type ExactRecipeId = "bow" | "sword" | "shield" | "helm" | "mail" | "boots" | "gauntlets" | "greaves" | "leather" | "hood" | "gloves" | "hose" | "charm" | "ring";
 
 export interface ExactRecipeOutput {
   readonly itemId: ItemId;
@@ -39,7 +39,7 @@ export interface ResolvedExactRecipeSelection {
   readonly debits: readonly ResourceDebit[];
 }
 
-const EXACT_RECIPE_IDS = ["bow", "sword"] as const satisfies readonly ExactRecipeId[];
+const EXACT_RECIPE_IDS = ["bow", "sword", "shield", "helm", "mail", "boots", "gauntlets", "greaves", "leather", "hood", "gloves", "hose", "charm", "ring"] as const satisfies readonly ExactRecipeId[];
 const SELECTION_FIELDS = ["role", "key"] as const;
 
 type DeepReadonly<T> = T extends (...args: never[]) => unknown
@@ -94,6 +94,78 @@ const EXACT_RECIPE_DEFINITIONS = [
     formId: "sword",
     recipeVersion: 1,
     output: { itemId: "sword", quantity: 1 },
+  },
+  {
+    id: "shield",
+    formId: "shield",
+    recipeVersion: 1,
+    output: { itemId: "shield", quantity: 1 },
+  },
+  {
+    id: "helm",
+    formId: "helm",
+    recipeVersion: 1,
+    output: { itemId: "helm", quantity: 1 },
+  },
+  {
+    id: "leather",
+    formId: "leather",
+    recipeVersion: 1,
+    output: { itemId: "leather", quantity: 1 },
+  },
+  {
+    id: "hood",
+    formId: "hood",
+    recipeVersion: 1,
+    output: { itemId: "hood", quantity: 1 },
+  },
+  {
+    id: "gloves",
+    formId: "gloves",
+    recipeVersion: 1,
+    output: { itemId: "gloves", quantity: 1 },
+  },
+  {
+    id: "hose",
+    formId: "hose",
+    recipeVersion: 1,
+    output: { itemId: "hose", quantity: 1 },
+  },
+  {
+    id: "charm",
+    formId: "charm",
+    recipeVersion: 1,
+    output: { itemId: "pendant", quantity: 1 },
+  },
+  {
+    id: "ring",
+    formId: "ring",
+    recipeVersion: 1,
+    output: { itemId: "ring", quantity: 1 },
+  },
+  {
+    id: "mail",
+    formId: "mail",
+    recipeVersion: 1,
+    output: { itemId: "mail", quantity: 1 },
+  },
+  {
+    id: "boots",
+    formId: "boots",
+    recipeVersion: 1,
+    output: { itemId: "boots", quantity: 1 },
+  },
+  {
+    id: "gauntlets",
+    formId: "gauntlets",
+    recipeVersion: 1,
+    output: { itemId: "gauntlets", quantity: 1 },
+  },
+  {
+    id: "greaves",
+    formId: "greaves",
+    recipeVersion: 1,
+    output: { itemId: "greaves", quantity: 1 },
   },
 ] as const satisfies readonly ExactRecipeDefinition[];
 

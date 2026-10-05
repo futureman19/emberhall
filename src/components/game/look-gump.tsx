@@ -99,13 +99,13 @@ export function LookGump({ onDone }: { onDone: (choice: LookChoice) => void }) {
   return (
     <div className="fixed inset-0 z-[90] flex items-center justify-center bg-black/60 p-4" data-testid="look-gump">
       <div
-        className="flex w-full max-w-3xl flex-col gap-6 rounded-md border p-6 sm:flex-row"
+        className="flex max-h-[calc(100dvh-2rem)] w-full max-w-3xl flex-col gap-6 overflow-y-auto overscroll-contain rounded-md border p-6 sm:flex-row"
         style={{ background: "rgba(20,17,14,0.94)", borderColor: "#3a322c" }}
       >
         {/* the mirror — always watching, and it answers to fingers */}
         <div className="order-first flex w-full shrink-0 flex-col sm:order-none sm:h-auto sm:w-56">
           <div
-            className="h-48 min-h-0 shrink-0 rounded-sm border sm:h-80"
+            className="h-[clamp(6rem,30dvh,12rem)] min-h-0 shrink-0 rounded-sm border sm:h-[clamp(6rem,55dvh,20rem)]"
             style={{ borderColor: "#2e241c", background: "#181410" }}
           >
             <LookPreview look={preview} parts={wornParts} />

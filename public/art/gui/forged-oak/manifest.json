@@ -1,0 +1,29 @@
+{
+  "id": "forged-oak-v1",
+  "approval": "User selected Forged Oak over Greyward Stone",
+  "source": {
+    "blend": "art/blender/forged-oak/emberhall-forged-oak.blend",
+    "script": "art/blender/forged-oak/build_gui.py"
+  },
+  "method": "Blender 5.2.1 Cycles orthographic RGBA renders; script-authored geometry and procedural materials",
+  "assets": [
+    {
+      "name": "band",
+      "url": "/art/gui/forged-oak/band.png",
+      "sha256": "639ec8cfee15a28a36ee119999cbf8ec8b6e5baee9434bc2bd0fa5d08bd52441",
+      "bytes": 177707
+    },
+    {
+      "name": "corner",
+      "url": "/art/gui/forged-oak/corner.png",
+      "sha256": "e52a95dacf669232b890e8d6a4a2763a7bef4d9ad939b6131c35029a028a8a89",
+      "bytes": 104584
+    },
+    {
+      "name": "button",
+      "url": "/art/gui/forged-oak/button.png",
+      "sha256": "f175642463664cca05d88a1f8dda284cac740a982d2257832fbbac8cefab4066",
+      "bytes": 27076
+    }
+  ]
+}

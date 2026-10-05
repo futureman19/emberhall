@@ -17,18 +17,50 @@ function memoryStorage() {
   };
 }
 
-test("graphics settings default to full quality", () => {
+test("graphics settings default to full quality and full effects", () => {
   const storage = memoryStorage();
   assert.deepEqual(loadGraphicsSettings(storage), DEFAULT_GRAPHICS_SETTINGS);
+  assert.equal(DEFAULT_GRAPHICS_SETTINGS.reducedEffects, false);
+  assert.equal(DEFAULT_GRAPHICS_SETTINGS.firstPerson, false);
 });
 
-test("graphics settings persist shadows and supported tree reductions", () => {
+test("graphics settings persist shadows, supported tree reductions and reduced effects", () => {
   const storage = memoryStorage();
   for (const horizonTreeReduction of [0, 15, 30] as const) {
-    const settings: GraphicsSettings = { shadows: horizonTreeReduction !== 30, horizonTreeReduction };
+    const settings: GraphicsSettings = {
+      shadows: horizonTreeReduction !== 30,
+      horizonTreeReduction,
+      reducedEffects: horizonTreeReduction === 15,
+      firstPerson: horizonTreeReduction === 0,
+    };
     saveGraphicsSettings(storage, settings);
     assert.deepEqual(loadGraphicsSettings(storage), settings);
   }
+});
+
+test("graphics settings saved before reduced effects existed load with effects on", () => {
+  const storage = memoryStorage();
+  storage.values.set(GRAPHICS_STORAGE_KEY, JSON.stringify({ shadows: false, horizonTreeReduction: 15 }));
+  assert.deepEqual(loadGraphicsSettings(storage), {
+    shadows: false,
+    horizonTreeReduction: 15,
+    reducedEffects: false,
+    firstPerson: false,
+  });
+});
+
+test("graphics settings saved before first-person existed load with the orbit", () => {
+  const storage = memoryStorage();
+  storage.values.set(
+    GRAPHICS_STORAGE_KEY,
+    JSON.stringify({ shadows: true, horizonTreeReduction: 0, reducedEffects: false }),
+  );
+  assert.deepEqual(loadGraphicsSettings(storage), {
+    shadows: true,
+    horizonTreeReduction: 0,
+    reducedEffects: false,
+    firstPerson: false,
+  });
 });
 
 test("graphics settings reject malformed and unsupported values", () => {
@@ -38,6 +70,7 @@ test("graphics settings reject malformed and unsupported values", () => {
     JSON.stringify({ shadows: "yes", horizonTreeReduction: 15 }),
     JSON.stringify({ shadows: false, horizonTreeReduction: 25 }),
     JSON.stringify({ shadows: false, horizonTreeReduction: 30, extra: true }),
+    JSON.stringify({ shadows: false, horizonTreeReduction: 30, reducedEffects: "yes" }),
   ]) {
     storage.values.set(GRAPHICS_STORAGE_KEY, value);
     assert.deepEqual(loadGraphicsSettings(storage), DEFAULT_GRAPHICS_SETTINGS);

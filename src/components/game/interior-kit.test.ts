@@ -1,7 +1,5 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
-import ts from "typescript";
 import { COURT } from "../../game/atlas.ts";
 import {
   INTERIOR_KINDS,
@@ -10,6 +8,7 @@ import {
   interiorVoxelCenter,
   replaceInteriorVoxel,
 } from "./interior-kit.ts";
+import { SPECS } from "../../game/placeables/legacy-buildings.ts";
 test("worldwide routes cover exact approved kinds; no farm/sign/keep/housing replacements", () => {
   assert.equal(Object.keys(INTERIOR_COVERAGE).length, 11);
   for (const k of INTERIOR_KINDS) {
@@ -24,15 +23,6 @@ test("worldwide routes cover exact approved kinds; no farm/sign/keep/housing rep
   assert.equal(interiorVoxelCenter(1), 0.75);
 });
 test("predicate verified against actual original generator: exact furniture counts, no floors/walls/door cells", () => {
-  const source = readFileSync(new URL("./building-meshes.tsx", import.meta.url), "utf8");
-  const start = source.indexOf("function put("),
-    end = source.indexOf("function occupant(");
-  const js = ts.transpile(source.slice(start, end) + "\nexport {SPECS};", {
-    module: ts.ModuleKind.CommonJS,
-    target: ts.ScriptTarget.ES2022,
-  });
-  const exports: Record<string, any> = {};
-  new Function("exports", js)(exports);
   const expected = {
     hall: 7,
     dormitory: 7,
@@ -47,7 +37,7 @@ test("predicate verified against actual original generator: exact furniture coun
     board: 0,
   };
   for (const [kind, count] of Object.entries(expected)) {
-    const vox = exports.SPECS[kind].voxels;
+    const vox = SPECS[kind as keyof typeof SPECS].voxels;
     const replaced = vox.filter((v: any) => replaceInteriorVoxel(kind, v));
     assert.equal(replaced.length, count, kind);
     for (const v of replaced) {

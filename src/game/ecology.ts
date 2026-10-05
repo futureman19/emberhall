@@ -1,11 +1,15 @@
 import { BARROW, MAP, PLACES, inGreybarrow } from "./atlas.ts";
-import { CURSE_SLOW, FAUNA_META, isNight, POISON_TICK_HOURS } from "./catalog.ts";
+import { CURSE_BITE_WEAKEN, CURSE_SLOW, CHILL_SLOW, FAUNA_META, IRONWOOD_WARD, isNight, POISON_PLAYER_HOURS, POISON_TICK_HOURS, SNARE_TICK_DMG, SNARE_TICK_HOURS, armorOf } from "./catalog.ts";
+import { sanctuaryAt, sanctuaryBlocksTile, zoneFaunaSlowAt } from "./zones.ts";
+import { COMBAT_BEAT } from "./combat-animation.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { spawnCorpsePile } from "./piles.ts";
+import { rareMods } from "./rare.ts";
 import { mulberry32 } from "./rng.ts";
+import { playSfx } from "./vale-sfx.ts";
 import { sheltering } from "./weather.ts";
 import { log, nid } from "./world.ts";
-import type { Creature, FaunaKind, World } from "./types.ts";
+import type { Creature, FaunaKind, Person, World } from "./types.ts";
 
 type SpawnEntry = { kind: FaunaKind; weight: number };
 
@@ -109,7 +113,10 @@ const SHELTER_SEEKERS: ReadonlySet<FaunaKind> = new Set([
   "cave_mole",
   "dusk_owl",
 ]);
-const WARDEN_KINDS: ReadonlySet<FaunaKind> = new Set(["wight", "greybarrow_wightling", "barrow_hound", "ashen_banshee", "bonecrow", "tomb_sentinel", "ossuary_knight", "grave_lich"]);
+/** Tomb-only species stay leashed globally. Shared carrion species belong
+ * to Greybarrow only when their home is there; regional homes stay regional. */
+const REGIONAL_WARDEN_KINDS: ReadonlySet<FaunaKind> = new Set(["barrow_hound", "bonecrow", "ashen_banshee"]);
+const WARDEN_KINDS: ReadonlySet<FaunaKind> = new Set(["wight", "greybarrow_wightling", "tomb_sentinel", "ossuary_knight", "grave_lich"]);
 const NIGHT_HUNTERS: ReadonlySet<FaunaKind> = new Set([
   "wolf",
   "pine_lynx",
@@ -387,6 +394,60 @@ export function seedBarrow(world: World, rng: () => number) {
   }
 }
 
+/** Teeth reach for a fighting beast — the same arm's reach the player swings at. */
+const FIGHT_REACH = 1.8;
+/** A fight is let go beyond this stride — pursuit stays bounded. */
+const FIGHT_LEASH = 16;
+/** One path search per six simulation ticks per beast, like the player's own. */
+const fightPlans = new WeakMap<Creature, { tick: number; tx: number; ty: number }>();
+/** Elapsed-simulation-time attack cadence per beast. */
+const fightBeats = new WeakMap<Creature, number>();
+
+/** A struck beast turns on its striker: fight now, its next free bite a full
+ *  beat away — the swing's own counter already landed. */
+export function provoke(world: World, c: Creature) {
+  c.task = "fight";
+  c.taskUntil = world.hour + 0.25;
+  fightBeats.set(c, 0);
+}
+
+/**
+ * The one predator strike — shared armor, bless ward, and curse weaken
+ * formulas, and the spider's venom roll. The autonomous fight beat and the
+ * player-swing counter both land through here, sharing one beat (provoke
+ * resets it) so a beast never bites twice in the same breath.
+ */
+export function strikePlayer(world: World, c: Creature, you: Person) {
+  // In Sanct Hur: on hallowed ground no bite lands — the beast will not cross.
+  if (sanctuaryAt(world, you.x, you.z)) return;
+  const arm = armorOf(world.player.wear) + rareMods(world).armor;
+  const ward = (world.hour < world.player.blessUntil ? 2 : 0) + (world.hour < world.player.ironwoodUntil ? IRONWOOD_WARD : 0);
+  let bite = Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2) - ward);
+  if (c.curseUntil && world.hour < c.curseUntil) bite = Math.max(1, Math.floor(bite * (1 - CURSE_BITE_WEAKEN)));
+  you.hp = Math.max(0, you.hp - bite);
+  if (c.kind === "stonecrawl_spider" && c.hp > 0 && world.hour >= world.player.poisonUntil && Math.random() < 0.35) {
+    world.player.poisonUntil = world.hour + POISON_PLAYER_HOURS;
+    world.player.poisonTickAt = world.hour + POISON_TICK_HOURS;
+    playSfx("spell_poison", 0.35);
+    log(world, "The spider's fangs leave venom in the wound.");
+  }
+}
+
+/** A fight is let go: back to grazing, cadence and route forgotten. */
+export function letGo(c: Creature, world: World) {
+  c.task = "wander";
+  c.taskUntil = world.hour;
+  c.path = [];
+  fightBeats.delete(c);
+  fightPlans.delete(c);
+}
+
+/** In Zu — the hp a sleeping beast had when it drifted off. A wound wakes it. */
+const sleepHp = new WeakMap<Creature, number>();
+export function markAsleep(c: Creature) {
+  sleepHp.set(c, c.hp);
+}
+
 export function tickEcology(world: World, dt: number) {
   const refillAt = starterRefillAt.get(world);
   if (refillAt === undefined) starterRefillAt.set(world, world.hour + STARTER_FAUNA_REFILL_HOURS);
@@ -397,11 +458,24 @@ export function tickEcology(world: World, dt: number) {
   const night = isNight(world.hour);
   const shelter = sheltering(world);
   for (const c of world.fauna) {
+    // Quas Xen — an image spends its moment and pops, struck or not.
+    if (c.mirror && (c.task === "dead" || world.hour >= c.taskUntil)) {
+      world.fauna = world.fauna.filter((x) => x.id !== c.id);
+      continue;
+    }
     if (c.task === "dead") {
       if (world.hour > c.corpseUntil) {
         world.fauna = world.fauna.filter((x) => x.id !== c.id);
       }
       continue;
+    }
+    // Quas Xen Tym lapses — the old shape returns.
+    if (c.wasKind && c.polyUntil && world.hour >= c.polyUntil) {
+      c.kind = c.wasKind;
+      c.wasKind = undefined;
+      c.polyUntil = 0;
+      c.maxHp = FAUNA_META[c.kind].hp;
+      c.hp = Math.min(c.hp, c.maxHp);
     }
     // Kal Xen loosens — a bound beast crumbles back into the vale.
     if (c.boundUntil && world.hour >= c.boundUntil) {
@@ -419,6 +493,52 @@ export function tickEcology(world: World, dt: number) {
       c.task = "wander";
       c.taskUntil = world.hour + 0.4;
     }
+    // An Xen roots — no stride, and the thorns keep their own teeth.
+    if (c.snareUntil && world.hour < c.snareUntil) {
+      c.path = [];
+      if (world.hour >= (c.snareTickAt ?? 0)) {
+        c.hp -= SNARE_TICK_DMG;
+        c.snareTickAt = world.hour + SNARE_TICK_HOURS;
+        if (c.hp <= 0) {
+          c.hp = 0;
+          c.task = "dead";
+          c.snareUntil = 0;
+          c.snareTickAt = 0;
+          if (!c.mirror) {
+            c.corpseUntil = world.hour + 8;
+            spawnCorpsePile(world, c);
+          }
+        }
+      }
+      continue;
+    }
+    if (c.snareUntil && world.hour >= c.snareUntil) {
+      c.snareUntil = 0;
+      c.snareTickAt = 0;
+      c.task = "wander";
+      c.taskUntil = world.hour + 0.4;
+    }
+    // In Zu — the beast drifts; a wound wakes it angry.
+    if (c.sleptUntil && world.hour < c.sleptUntil) {
+      const hpAtSleep = sleepHp.get(c);
+      if (hpAtSleep !== undefined && c.hp < hpAtSleep) {
+        c.sleptUntil = 0;
+        sleepHp.delete(c);
+        provoke(world, c);
+      } else {
+        c.path = [];
+        continue;
+      }
+    }
+    if (c.sleptUntil && world.hour >= c.sleptUntil) {
+      c.sleptUntil = 0;
+      sleepHp.delete(c);
+      c.task = "wander";
+      c.taskUntil = world.hour + 0.4;
+    }
+    // In Lor Vas / Vas Glaciem — time-based hexes simply lapse.
+    if (c.blindUntil && world.hour >= c.blindUntil) c.blindUntil = 0;
+    if (c.chillUntil && world.hour >= c.chillUntil) c.chillUntil = 0;
     // Venom keeps its teeth — the Poison spell's damage-over-time.
     if (c.poisonUntil && c.poisonUntil > 0) {
       if (world.hour >= c.poisonUntil) {
@@ -431,13 +551,17 @@ export function tickEcology(world: World, dt: number) {
           c.hp = 0;
           c.task = "dead";
           c.path = [];
-          c.corpseUntil = world.hour + 8;
-          spawnCorpsePile(world, c);
+          if (!c.mirror) {
+            c.corpseUntil = world.hour + 8;
+            spawnCorpsePile(world, c);
+          }
           continue;
         }
       }
     }
-    if (WARDEN_KINDS.has(c.kind) && !inGreybarrow(Math.round(c.x), Math.round(c.z))) {
+    const barrowWarden = WARDEN_KINDS.has(c.kind)
+      || (REGIONAL_WARDEN_KINDS.has(c.kind) && inGreybarrow(c.home.tx, c.home.ty));
+    if (barrowWarden && !inGreybarrow(Math.round(c.x), Math.round(c.z))) {
       const dest = nearestWalkable(world, BARROW.cx, BARROW.cy);
       if (dest) {
         c.x = dest.x;
@@ -493,19 +617,64 @@ export function tickEcology(world: World, dt: number) {
       }
       c.taskUntil = world.hour + 0.6 + Math.random();
     }
-    if (you && NIGHT_HUNTERS.has(c.kind) && night && !c.ownerId && c.task !== "fight" && !you.ghost && world.hour >= world.player.invisUntil) {
+    if (you && NIGHT_HUNTERS.has(c.kind) && night && !c.ownerId && c.task !== "fight" && !you.ghost && world.hour >= world.player.invisUntil && !(c.blindUntil && world.hour < c.blindUntil)) {
       if (Math.hypot(c.x - you.x, c.z - you.z) < 10) {
         c.task = "fight";
         const path = astar(world, Math.round(c.x), Math.round(c.z), Math.round(you.x), Math.round(you.z), 2000);
         if (path) c.path = path.map((n) => ({ tx: n.x, ty: n.y }));
       }
     }
+    // A beast at war presses the attack on its own: bounded pursuit on a
+    // replan budget, teeth on the combat beat. Ghosts, the unseen, and the
+    // far-off are let go. (The paralyzed never arrive — they hold above.)
+    if (c.task === "fight" && !c.ownerId) {
+      if (!you || you.ghost || world.player.ghost || world.hour < world.player.invisUntil) {
+        letGo(c, world);
+      } else {
+        const dist = Math.hypot(c.x - you.x, c.z - you.z);
+        if (dist > FIGHT_LEASH) {
+          letGo(c, world);
+        } else if (dist <= FIGHT_REACH) {
+          c.path = [];
+          const beat = (fightBeats.get(c) ?? 0) + dt;
+          if (beat >= COMBAT_BEAT) {
+            fightBeats.set(c, beat - COMBAT_BEAT);
+            strikePlayer(world, c, you);
+          } else {
+            fightBeats.set(c, beat);
+          }
+        } else {
+          fightBeats.delete(c);
+          const tx = Math.round(you.x);
+          const ty = Math.round(you.z);
+          let plan = fightPlans.get(c);
+          if (!plan && c.path.length) {
+            // A path planted by the night's first lunge carries no plan yet —
+            // anchor the watch here so a moving target is noticed.
+            plan = { tick: world.tickCount, tx, ty };
+            fightPlans.set(c, plan);
+          }
+          const targetMoved = plan !== undefined && (tx !== plan.tx || ty !== plan.ty);
+          const canReplan = !plan || world.tickCount - plan.tick >= 6;
+          if ((!c.path.length || targetMoved) && canReplan) {
+            const path = astar(world, Math.round(c.x), Math.round(c.z), tx, ty, 2000);
+            fightPlans.set(c, { tick: world.tickCount, tx, ty });
+            if (path) c.path = path.map((n) => ({ tx: n.x, ty: n.y }));
+          }
+        }
+      }
+    }
     if (c.path.length) {
       const n = c.path[0]!;
+      // In Sanct Hur: a wild beast refuses the crossing and lets the hunt go.
+      if (!c.ownerId && sanctuaryBlocksTile(world, n.tx, n.ty)) {
+        letGo(c, world);
+        continue;
+      }
       const dx = n.tx - c.x;
       const dz = n.ty - c.z;
       const dist = Math.hypot(dx, dz);
-      const slow = c.curseUntil && world.hour < c.curseUntil ? CURSE_SLOW : 1;
+      const slow = (c.curseUntil && world.hour < c.curseUntil ? CURSE_SLOW : 1) * (c.chillUntil && world.hour < c.chillUntil ? CHILL_SLOW : 1) * zoneFaunaSlowAt(world, c.x, c.z);
       const step = Math.min(dist, 2.2 * dt * slow);
       if (dist < 0.12) c.path.shift();
       else {

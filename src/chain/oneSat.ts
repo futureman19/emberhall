@@ -22,6 +22,7 @@ import {
 import type { VoxelPartV1 } from "@/game/look/parts";
 import type { ItemId, RareItem, World } from "@/game/types";
 import { contentPointer, walletOrdinalIdentity } from "./ordinal-identity";
+import { abortable, readBoundedJson, readOrdinalPages, WALLET_READ_LIMITS } from "./wallet-read-bounds";
 
 /** Browser glue between Emberhall artifacts and a BRC-100 wallet. */
 const CONTENT_URL = "https://api.1sat.app/content";
@@ -164,22 +165,28 @@ export async function mintPartNft(
   return { txid: await unwrap("The part inscription", res), payload };
 }
 
-const contentCache = new Map<string, WalletInscription | null>();
+const contentCache = new Map<string, WalletInscription>();
 
-async function fetchInscription(outpointUs: string): Promise<WalletInscription | null> {
-  if (contentCache.has(outpointUs)) return contentCache.get(outpointUs) ?? null;
-  let found: WalletInscription | null = null;
+async function fetchInscription(outpointUs: string, signal: AbortSignal): Promise<WalletInscription | null> {
+  signal.throwIfAborted();
+  const hit = contentCache.get(outpointUs);
+  if (hit) return hit;
+  const timeout = new AbortController();
+  const timer = setTimeout(() => timeout.abort(new Error("Inscription read timed out; retry.")), WALLET_READ_LIMITS.contentMs);
+  const bounded = AbortSignal.any([signal, timeout.signal]);
   try {
-    const res = await fetch(`${CONTENT_URL}/${outpointUs}`, { signal: AbortSignal.timeout(8000) });
-    if (res.ok) {
-      const raw = JSON.parse(await res.text()) as unknown;
-      found = decodeItemInscription(raw) ?? decodeChainArtifact(raw);
+    const res = await abortable(fetch(`${CONTENT_URL}/${outpointUs}`, { signal: bounded }), bounded);
+    const raw = await readBoundedJson(res, bounded);
+    const found = decodeItemInscription(raw) ?? decodeChainArtifact(raw);
+    bounded.throwIfAborted();
+    if (found) {
+      if (contentCache.size >= WALLET_READ_LIMITS.cacheEntries) contentCache.delete(contentCache.keys().next().value!);
+      contentCache.set(outpointUs, found);
     }
-  } catch {
-    found = null;
+    return found;
+  } finally {
+    clearTimeout(timer);
   }
-  if (found) contentCache.set(outpointUs, found);
-  return found;
 }
 
 export function artifactLabel(nft: EmberhallNft): string {
@@ -188,46 +195,47 @@ export function artifactLabel(nft: EmberhallNft): string {
   return nft.inscription.part.name;
 }
 
-/** One wallet query reads items, character looks, and sculpted parts. */
-export async function listEmberhallNfts(ctx: OneSatContext): Promise<EmberhallNft[]> {
-  const { listOrdinals } = await import("@1sat/actions");
-  const outputs: WalletOutput[] = [];
-  const limit = 200;
-  let offset = 0;
-  let total = Number.POSITIVE_INFINITY;
-  while (offset < total) {
-    const page = await listOrdinals.execute(ctx, { includeTags: true, limit, offset });
-    const rows = page.outputs ?? [];
-    outputs.push(...rows);
-    total = page.totalOutputs ?? outputs.length;
-    if (rows.length === 0) break;
-    offset += rows.length;
-  }
-  const byOrigin = new Map<string, EmberhallNft>();
-  const CONCURRENCY = 4;
-  let cursor = 0;
-  async function worker() {
-    while (cursor < outputs.length) {
-      const output = outputs[cursor++]!;
-      const identity = walletOrdinalIdentity(output);
-      if (!identity) continue;
-      const inscription = await fetchInscription(contentPointer(identity.origin));
-      if (inscription) {
-        byOrigin.set(identity.origin, {
-          id: identity.trackingId,
-          origin: identity.origin,
-          outpoint: identity.outpoint,
-          listed: identity.listed,
-          ...(identity.priceSats !== undefined ? { priceSats: identity.priceSats } : {}),
-          inscription,
-        } as EmberhallNft);
+/** Complete list or rejection: legacy array callers never receive silent partial data.
+ * Cancellation stops observing SDK reads; it cannot dismiss an outstanding wallet prompt.
+ */
+export async function listEmberhallNfts(ctx: OneSatContext, options: { signal?: AbortSignal } = {}): Promise<EmberhallNft[]> {
+  const stop = new AbortController();
+  const signal = options.signal ? AbortSignal.any([options.signal, stop.signal]) : stop.signal;
+  const timer = setTimeout(() => stop.abort(new Error("Wallet read budget expired; holdings are unavailable. Retry after any wallet permission prompt is resolved.")), WALLET_READ_LIMITS.scanMs);
+  try {
+    signal.throwIfAborted();
+    const { listOrdinals } = await abortable(import("@1sat/actions"), signal);
+    const outputs = await readOrdinalPages<WalletOutput>((input) => listOrdinals.execute(ctx, input), signal);
+    const byOrigin = new Map<string, EmberhallNft>();
+    const CONCURRENCY = 4;
+    let cursor = 0;
+    async function worker() {
+      while (cursor < outputs.length) {
+        signal.throwIfAborted();
+        const output = outputs[cursor++]!;
+        const identity = walletOrdinalIdentity(output);
+        if (!identity) throw new Error("Wallet ordinal metadata could not be validated; holdings are incomplete.");
+        const inscription = await fetchInscription(contentPointer(identity.origin), signal);
+        signal.throwIfAborted();
+        if (inscription) {
+          byOrigin.set(identity.origin, {
+            id: identity.trackingId,
+            origin: identity.origin,
+            outpoint: identity.outpoint,
+            listed: identity.listed,
+            ...(identity.priceSats !== undefined ? { priceSats: identity.priceSats } : {}),
+            inscription,
+          } as EmberhallNft);
+        }
       }
     }
+    await Promise.all(Array.from({ length: Math.min(CONCURRENCY, outputs.length) }, () => worker()));
+    signal.throwIfAborted();
+    return [...byOrigin.values()].sort((a, b) => artifactLabel(a).localeCompare(artifactLabel(b)));
+  } finally {
+    clearTimeout(timer);
+    stop.abort();
   }
-  await Promise.all(Array.from({ length: Math.min(CONCURRENCY, outputs.length) }, () => worker()));
-  const out = [...byOrigin.values()];
-  out.sort((a, b) => artifactLabel(a).localeCompare(artifactLabel(b)));
-  return out;
 }
 
 /** Backward-compatible item-only reader. */

@@ -124,7 +124,9 @@ test("craft - the leather tunic finally has a source: two hides and a blade", ()
 test("bladed script - chopping takes any sharp edge, not only the hatchet", () => {
   const w = createWorld();
   w.player.wear.main = "sword";
-  assert.equal(commandChop(w, 10, 10), null, "a sword fells a tree, UO-style");
+  // A tree that genuinely routes from the hall spawn — the blade gate's probe
+  // must stand on an accepted path now that rejected routes say so.
+  assert.equal(commandChop(w, 252, 299), null, "a sword fells a tree, UO-style");
   w.player.wear.main = "mace";
   assert.equal(commandChop(w, 10, 10), "Hold a blade — hatchet, knife, or sword.");
   w.player.wear.main = undefined;

@@ -26,6 +26,7 @@ import { groundY } from "@/game/height";
 import { keepStoryY, insideKeep, onKeepStairs } from "@/game/keep-story";
 import { keepPlayerOffset } from "./keep-presentation.ts";
 import { getWorld } from "@/game/live";
+import { useGraphicsSettings } from "@/game/graphics-settings";
 import { FIGURE, HAIR } from "@/game/look/figure.ts";
 import { SLOT_ANCHOR, partsById } from "@/game/look/parts.ts";
 import { resolveLook } from "@/game/look/resolve.ts";
@@ -399,7 +400,7 @@ function PalmFlame() {
   const halo = useRef<Mesh>(null);
   const light = useRef<PointLight>(null);
   const q = useMemo(() => new Quaternion(), []);
-  useFrame((_, dt) => {
+  useFrame(() => {
     const w = wrap.current;
     const f = flame.current;
     if (!w || !f) return;
@@ -412,14 +413,14 @@ function PalmFlame() {
     if (!live) return;
     w.parent?.getWorldQuaternion(q);
     f.quaternion.copy(q).invert();
-    const t = world.player.workT * 14 + dt;
+    const t = world.player.workT * 14;
     const s =
       0.72 +
       Math.min(1, world.player.workT / 0.28) * 0.45 +
       Math.sin(t) * 0.12 +
       Math.sin(t * 2.4) * 0.08;
     f.scale.setScalar(s);
-    f.rotation.y += dt * 5;
+    f.rotation.y += world.player.workT * 5;
     // The flame wears the spell's color while the words are spoken.
     const glow = windupGlow(world.player.intent.spell);
     if (core.current) (core.current.material as MeshBasicMaterial).color.set(glow);
@@ -965,9 +966,12 @@ function Figure({
     const extracting = extractionKind !== null;
     const extractPose = extractionPose(extractionKind ?? "lumberjacking", w.player.workT);
     if (you && root.current) {
+      // Vas Hur Por: the wind carries — a lift like the ghost's, with a slow swell.
+      const aloft = w.hour < (w.player.flyUntil ?? 0);
+      const flyLift = aloft ? 0.55 + Math.sin(w.hour * SECONDS_PER_HOUR * 2.2) * 0.06 : 0;
       root.current.position.set(
         you.x,
-        groundAt(you.x, you.z, you.story) + keepPlayerOffset(you.x, you.z) + (you.ghost ? 0.32 : 0) - healPose.crouch - corpseWorkPose.crouch - (constructing ? buildPose.crouch : 0) - (extracting ? extractPose.crouch : 0) - (personal ? personalPose.crouch : 0),
+        groundAt(you.x, you.z, you.story) + keepPlayerOffset(you.x, you.z) + (you.ghost ? 0.32 : 0) + flyLift - healPose.crouch - corpseWorkPose.crouch - (constructing ? buildPose.crouch : 0) - (extracting ? extractPose.crouch : 0) - (personal ? personalPose.crouch : 0),
         you.z,
       );
       root.current.rotation.x = healPose.lean + corpseWorkPose.lean + (constructing ? buildPose.lean : 0) + (companionNear ? companionWorkPose.bow * 0.6 : 0) + (npcNear ? npcPose.bow : 0) + (extracting ? extractPose.swing * 0.12 : 0) + (taming ? tamePose.bow : 0) + (crafting ? craftPose.work * 0.14 : 0) + (gathering ? gatherPose.work * 0.2 : 0) + (personal ? personalPose.lean : 0);
@@ -1117,10 +1121,11 @@ function Figure({
     : (p.isPlayer && wear.cloak && WEAR_HEX[wear.cloak]) ||
       (p.role === "healer" ? "#ece6d8" : p.cls === "ranger" ? "#6a7a48" : "#a85a42");
   const hover = ghost ? 0.32 : 0;
+  const firstPerson = useGraphicsSettings().firstPerson;
 
   return (
     <RowanCharacterProvider enabled={p.isPlayer && authored} skin={look.skin} hair={look.hairColor} ghost={ghost}>
-    <group name={p.isPlayer ? "emberhall-player-figure" : "emberhall-npc-figure"} ref={root} position={[p.x, groundAt(p.x, p.z, p.story) + (p.isPlayer ? keepPlayerOffset(p.x, p.z) : 0) + hover, p.z]} rotation={[0, civicVisualYaw(p.facing, authored), 0]}>
+    <group name={p.isPlayer ? "emberhall-player-figure" : "emberhall-npc-figure"} ref={root} visible={!(p.isPlayer && firstPerson)} position={[p.x, groundAt(p.x, p.z, p.story) + (p.isPlayer ? keepPlayerOffset(p.x, p.z) : 0) + hover, p.z]} rotation={[0, civicVisualYaw(p.facing, authored), 0]}>
       {cloak && (
         <mesh position={[0, FIGURE.cloak.y + bob, FIGURE.cloak.z]} castShadow={!ghost}>
           <AuthoredCharacterGeometry part="cloak" size={FIGURE.cloak.size} authored={authored} />

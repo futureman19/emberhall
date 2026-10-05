@@ -29,7 +29,7 @@ test('retain original dorm floor, yard target and all farm soil beds only',()=>{
  assert(!retainCommonsInteriorVoxel('bank',{x:0,y:0,z:0,t:'stone'}));
 });
 test('source-specific dorm door and open yard/farm entrances stay unchanged',()=>{
- const s=readFileSync(new URL('./building-meshes.tsx',import.meta.url),'utf8');
+ const s=readFileSync(new URL('../../game/placeables/legacy-buildings.ts',import.meta.url),'utf8');
  const dorm=s.slice(s.indexOf('function makeDorm()'),s.indexOf('function makeKitchen()'));
  assert.match(dorm,/door:\s*\{\s*x:\s*-1,\s*w:\s*2,\s*h:\s*2\s*\}/);
  const yard=s.slice(s.indexOf('function makeYard()'),s.indexOf('function makeMarket()'));

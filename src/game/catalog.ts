@@ -1,5 +1,6 @@
 import { createResourceInventory } from "./inventory/resources.ts";
 import type { BuildingKind, ClassId, FaunaKind, ItemId, LootDrop, LootGold, NpcRole, Notoriety, ResourceInventory, ResourceTag, SkillId, WearSlot } from "./types.ts";
+import type { BoneResourceId } from "./resources/types.ts";
 
 export const SECONDS_PER_HOUR = 36;
 /** Rel Sanct holds this many game hours. */
@@ -14,6 +15,60 @@ export const CURSE_BITE_WEAKEN = 0.25;
 export const CURSE_SLOW = 0.75;
 /** Kal Xen: how long the binding holds (game hours). */
 export const SUMMON_HOURS = 2;
+/** An Xen: how long the thorn roots hold; they bite each SNARE_TICK_HOURS. */
+export const SNARE_HOURS = 0.35;
+export const SNARE_TICK_HOURS = 0.08;
+export const SNARE_TICK_DMG = 2;
+/** Rel Tym: how long the bark-hard skin holds; how much bite it turns. */
+export const IRONWOOD_HOURS = 1;
+export const IRONWOOD_WARD = 3;
+/** In Zu: how long the beast drifts — any wound wakes it early. */
+export const SLEEP_HOURS = 0.6;
+/** In Lor Vas: three seconds of white — how far the burst reaches. */
+export const BLIND_HOURS = 3 / SECONDS_PER_HOUR;
+export const FLASH_RADIUS = 12;
+/** Vas Glaciem: how long the chill slows the stride, and by how much. */
+export const CHILL_HOURS = 0.25;
+export const CHILL_SLOW = 0.5;
+/** Ground rings: the fire blast's reach, the meteor's wider ruin. */
+export const BLAST_RADIUS = 3;
+export const METEOR_RADIUS = 4;
+/** Por Ort Grav Vas: how far the bolt arcs, how many it finds, how weak the kiss. */
+export const CHAIN_RANGE = 6;
+export const CHAIN_MAX = 2;
+export const CHAIN_FALLOFF = 0.6;
+/** Ground workings (batch two): how long each stands, how wide it reaches. */
+export const ZONE_CAP = 10;
+export const ZONE_TICK_HOURS = 0.08;
+export const FLAME_WALL_HOURS = 0.5;
+export const FLAME_WALL_RADIUS = 2.5;
+export const FLAME_TICK_BASE = 3;
+export const TAR_PIT_HOURS = 0.6;
+export const TAR_PIT_RADIUS = 3;
+export const TAR_PIT_FAUNA_SLOW = 0.25;
+export const TAR_PIT_PERSON_SLOW = 0.5;
+export const STONE_WALL_HOURS = 0.75;
+export const STONE_WALL_RADIUS = 2;
+export const SANCTUARY_HOURS = 1;
+export const SANCTUARY_RADIUS = 3;
+export const EARTHQUAKE_RADIUS = 5;
+export const EARTHQUAKE_PULSE_GAP_HOURS = 0.05;
+export const EARTHQUAKE_BASE = 10;
+export const NATURES_FURY_HOURS = 0.5;
+export const NATURES_FURY_RADIUS = 3.5;
+export const FURY_TICK_BASE = 2;
+/** Batch three mechanics. */
+export const JUMP_RANGE = 6;
+export const GATE_HOURS = 0.05;
+export const FLY_HOURS = 0.15;
+export const FLY_SPEED = 1.7;
+export const NECRO_RADIUS = 8;
+export const NECRO_HP_FRACTION = 0.5;
+export const NECRO_HOURS = 4;
+export const ELEMENTAL_HOURS = 1.5;
+export const POLYMORPH_HOURS = 0.8;
+export const MIRROR_COUNT = 2;
+export const MIRROR_HOURS = 0.2;
 /** Venom works this long on a creature, biting each POISON_TICK_HOURS. */
 export const POISON_FAUNA_HOURS = 0.8;
 export const POISON_TICK_HOURS = 0.08;
@@ -30,6 +85,14 @@ export function isNight(hour: number) {
 export function isDusk(hour: number) {
   const h = hourOfDay(hour);
   return (h >= 18 && h < 20) || (h >= 5 && h < 7);
+}
+
+/** Hide grade follows the beast's tier — the taming difficulty ladder doubles as the hunting ladder. */
+export function hideGradeFor(tameDiff: number): "rough" | "sound" | "choice" | "pristine" {
+  if (tameDiff >= 72) return "pristine";
+  if (tameDiff >= 50) return "choice";
+  if (tameDiff >= 30) return "sound";
+  return "rough";
 }
 
 export const SKILL_META: Record<SkillId, { label: string }> = {
@@ -110,6 +173,7 @@ export const ITEM_META: Record<
   rabbit_foot: { label: "Rabbit's foot", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 10, sell: 5, tags: ["magic"] },
   orc_tusk: { label: "Orc tusk", tool: false, slot: null, fill: "var(--color-fg)", armor: 0, buy: 8, sell: 4, tags: ["gem"] },
   meat: { label: "Raw meat", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 4, sell: 2, tags: ["meat", "food"] },
+  arrows: { label: "Arrows", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 2, sell: 1, tags: ["ammo"] },
   hide: { label: "Hide", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 4, tags: ["hide"] },
   bandage: { label: "Bandage", tool: false, slot: null, fill: "var(--color-fg)", armor: 0, buy: 3, sell: 1, tags: ["cloth"] },
   potion_heal: { label: "Heal potion", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 12, sell: 4, tags: ["magic"] },
@@ -164,20 +228,20 @@ export const CLASS_META: Record<ClassId, { label: string; color: string }> = {
   merchant: { label: "Merchant", color: "#a88848" },
 };
 
-export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp: number; dmg: number; eats: ResourceTag[]; meat?: number; hide?: number; hasCorpse?: boolean; loot?: LootDrop[]; gold?: LootGold }> = {
+export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp: number; dmg: number; eats: ResourceTag[]; meat?: number; hide?: number; parts?: readonly { id: BoneResourceId; n: number }[]; hasCorpse?: boolean; loot?: LootDrop[]; gold?: LootGold }> = {
   hare: { label: "Hare", tameDiff: 8, hp: 8, dmg: 1, eats: ["plant"], meat: 1, hide: 1, loot: [{ item: "rabbit_foot", chance: 0.35, min: 1, max: 1 }] },
-  hart: { label: "Hart", tameDiff: 22, hp: 22, dmg: 4, eats: ["plant"], meat: 2, hide: 1 },
-  wolf: { label: "Wolf", tameDiff: 40, hp: 28, dmg: 8, eats: ["meat"], meat: 2, hide: 1 },
+  hart: { label: "Hart", tameDiff: 22, hp: 22, dmg: 4, eats: ["plant"], meat: 2, hide: 1, parts: [{ id: "stag_antler", n: 1 }] },
+  wolf: { label: "Wolf", tameDiff: 40, hp: 28, dmg: 8, eats: ["meat"], meat: 2, hide: 1, parts: [{ id: "wolf_fang", n: 1 }] },
   wight: { label: "Wight", tameDiff: 99, hp: 36, dmg: 10, eats: ["meat"], hasCorpse: false, loot: [{ item: "nightshade", chance: 0.3, min: 1, max: 2 }, { item: "pearl", chance: 0.25, min: 1, max: 1 }, { item: "moss", chance: 0.2, min: 1, max: 1 }, { item: "relic", chance: 0.06, min: 1, max: 1 }], gold: { chance: 0.4, min: 4, max: 10 } },
 
-  brambleback_stag: { label: "Brambleback Stag", tameDiff: 55, hp: 30, dmg: 6, eats: ["plant"], meat: 2, hide: 1 },
-  ironwood_boar: { label: "Ironwood Boar", tameDiff: 50, hp: 24, dmg: 7, eats: ["meat"], meat: 2, hide: 1 },
+  brambleback_stag: { label: "Brambleback Stag", tameDiff: 55, hp: 30, dmg: 6, eats: ["plant"], meat: 2, hide: 1, parts: [{ id: "stag_antler", n: 2 }] },
+  ironwood_boar: { label: "Ironwood Boar", tameDiff: 50, hp: 24, dmg: 7, eats: ["meat"], meat: 2, hide: 1, parts: [{ id: "boar_tusk", n: 1 }] },
   pine_lynx: { label: "Pine Lynx", tameDiff: 52, hp: 26, dmg: 7, eats: ["meat"], meat: 2, hide: 1 },
   ember_fox: { label: "Ember Fox", tameDiff: 43, hp: 20, dmg: 5, eats: ["meat"], meat: 1, hide: 1 },
   moss_badger: { label: "Moss Badger", tameDiff: 20, hp: 14, dmg: 3, eats: ["meat", "plant"], meat: 1, hide: 1 },
 
-  ridgeback_warg: { label: "Ridgeback Warg", tameDiff: 72, hp: 52, dmg: 12, eats: ["meat"], meat: 3, hide: 2 },
-  thornhide_doe: { label: "Thornhide Doe", tameDiff: 26, hp: 24, dmg: 4, eats: ["plant"], meat: 2, hide: 1 },
+  ridgeback_warg: { label: "Ridgeback Warg", tameDiff: 72, hp: 52, dmg: 12, eats: ["meat"], meat: 3, hide: 2, parts: [{ id: "wolf_fang", n: 2 }] },
+  thornhide_doe: { label: "Thornhide Doe", tameDiff: 26, hp: 24, dmg: 4, eats: ["plant"], meat: 2, hide: 1, parts: [{ id: "stag_antler", n: 1 }] },
   mire_croaker: { label: "Mire Croaker", tameDiff: 34, hp: 18, dmg: 3, eats: ["plant", "meat"], meat: 1, hide: 1 },
   reedback_stalker: { label: "Reedback Stalker", tameDiff: 68, hp: 40, dmg: 10, eats: ["meat"], meat: 2, hide: 2 },
   bog_toad: { label: "Bog Toad", tameDiff: 28, hp: 16, dmg: 3, eats: ["plant", "meat"], meat: 1, hide: 1 },
@@ -204,7 +268,7 @@ export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp
   tideclaw_crab: { label: "Tideclaw Crab", tameDiff: 56, hp: 40, dmg: 9, eats: ["meat", "plant"], meat: 2, hide: 2, loot: [{ item: "pearl", chance: 0.18, min: 1, max: 1 }] },
   cavern_bat: { label: "Cavern Bat", tameDiff: 38, hp: 18, dmg: 5, eats: ["meat"], meat: 1, hide: 1, loot: [{ item: "nightshade", chance: 0.15, min: 1, max: 1 }] },
   tomb_sentinel: { label: "Tomb Sentinel", tameDiff: 99, hp: 58, dmg: 14, eats: ["meat"], hasCorpse: false, loot: [{ item: "sword", chance: 0.14, min: 1, max: 1 }, { item: "helm", chance: 0.12, min: 1, max: 1 }, { item: "relic", chance: 0.1, min: 1, max: 1 }], gold: { chance: 0.55, min: 5, max: 13 } },
-  cinder_drake: { label: "Cinder Drake", tameDiff: 88, hp: 68, dmg: 15, eats: ["meat"], meat: 4, hide: 3, loot: [{ item: "ash", chance: 0.5, min: 1, max: 3 }, { item: "ore", chance: 0.22, min: 1, max: 2 }] },
+  cinder_drake: { label: "Cinder Drake", tameDiff: 88, hp: 68, dmg: 15, eats: ["meat"], meat: 4, hide: 3, parts: [{ id: "drake_scale", n: 3 }], loot: [{ item: "ash", chance: 0.5, min: 1, max: 3 }, { item: "ore", chance: 0.22, min: 1, max: 2 }] },
   willow_wisp: { label: "Willow Wisp", tameDiff: 99, hp: 24, dmg: 10, eats: ["plant"], hasCorpse: false, loot: [{ item: "mandrake", chance: 0.3, min: 1, max: 1 }, { item: "pearl", chance: 0.18, min: 1, max: 1 }, { item: "relic", chance: 0.04, min: 1, max: 1 }], gold: { chance: 0.2, min: 2, max: 7 } },
 
   blackbriar_hag: { label: "Blackbriar Hag", tameDiff: 99, hp: 48, dmg: 12, eats: ["plant", "meat"], hasCorpse: false, loot: [{ item: "staff", chance: 0.12, min: 1, max: 1 }, { item: "nightshade", chance: 0.45, min: 1, max: 2 }, { item: "mandrake", chance: 0.25, min: 1, max: 1 }], gold: { chance: 0.35, min: 3, max: 9 } },
@@ -217,8 +281,8 @@ export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp
   grave_lich: { label: "Grave Lich", tameDiff: 99, hp: 96, dmg: 21, eats: ["meat"], hasCorpse: false, loot: [{ item: "staff", chance: 0.22, min: 1, max: 1 }, { item: "ring", chance: 0.16, min: 1, max: 1 }, { item: "pendant", chance: 0.14, min: 1, max: 1 }, { item: "relic", chance: 0.12, min: 1, max: 1 }, { item: "nightshade", chance: 0.45, min: 1, max: 2 }, { item: "mandrake", chance: 0.35, min: 1, max: 2 }, { item: "pearl", chance: 0.3, min: 1, max: 1 }], gold: { chance: 0.85, min: 12, max: 28 } },
 
   redtail_squirrel: { label: "Redtail Squirrel", tameDiff: 10, hp: 8, dmg: 1, eats: ["plant"], meat: 1, hide: 1, loot: [{ item: "acorn", chance: 0.3, min: 1, max: 2 }] },
-  whiteback_elk: { label: "Whiteback Elk", tameDiff: 48, hp: 42, dmg: 8, eats: ["plant"], meat: 3, hide: 2 },
-  highland_aurochs: { label: "Highland Aurochs", tameDiff: 65, hp: 64, dmg: 12, eats: ["plant"], meat: 4, hide: 3 },
+  whiteback_elk: { label: "Whiteback Elk", tameDiff: 48, hp: 42, dmg: 8, eats: ["plant"], meat: 3, hide: 2, parts: [{ id: "stag_antler", n: 2 }] },
+  highland_aurochs: { label: "Highland Aurochs", tameDiff: 65, hp: 64, dmg: 12, eats: ["plant"], meat: 4, hide: 3, parts: [{ id: "aurochs_horn", n: 2 }] },
   reed_heron: { label: "Reed Heron", tameDiff: 26, hp: 18, dmg: 3, eats: ["meat"], meat: 1, hide: 1, loot: [{ item: "raw_fish", chance: 0.25, min: 1, max: 1 }] },
   river_otter: { label: "River Otter", tameDiff: 34, hp: 24, dmg: 4, eats: ["meat"], meat: 1, hide: 1, loot: [{ item: "raw_fish", chance: 0.22, min: 1, max: 1 }] },
   brine_seal: { label: "Brine Seal", tameDiff: 44, hp: 38, dmg: 6, eats: ["meat"], meat: 2, hide: 2, loot: [{ item: "raw_fish", chance: 0.3, min: 1, max: 1 }, { item: "pearl", chance: 0.08, min: 1, max: 1 }] },
@@ -262,6 +326,7 @@ export const NPC_META: Record<NpcRole, { label: string }> = {
   banker: { label: "Banker" },
   provisioner: { label: "Provisioner" },
   healer: { label: "Healer" },
+  alchemist: { label: "Master Alchemist" },
 };
 
 export const BUILDING_META: Record<BuildingKind, { label: string }> = {
@@ -282,6 +347,7 @@ export const BUILDING_META: Record<BuildingKind, { label: string }> = {
   tower: { label: "Tower" },
   gatehouse: { label: "Gatehouse" },
   shop: { label: "Shop" },
+  apothecary: { label: "Apothecary" },
   townhome: { label: "Townhome" },
   townhouse: { label: "Townhouse" },
   cottage: { label: "Cottage" },
@@ -300,8 +366,16 @@ export const NOTORIETY_META: Record<Notoriety, { label: string }> = {
 
 export const SHOP_STOCK: ItemId[] = [
   "hatchet", "pick", "hoe", "fishing_rod", "knife", "bandage", "tunic", "hood", "cloak", "boots",
+  "arrows",
   "rune", "garlic", "ginseng", "silk", "pearl", "moss", "mandrake", "ash", "cabbage", "wheat",
   "cabbage_seed", "wheat_seed", "garlic_seed", "acorn",
+];
+
+/** The Master Alchemist's scales: both draughts and the full reagent purse.
+ *  Nightshade is his alone — the provisioner will not keep it. */
+export const APOTHECARY_STOCK: ItemId[] = [
+  "potion_heal", "potion_night",
+  "garlic", "ginseng", "silk", "nightshade", "pearl", "moss", "mandrake", "ash",
 ];
 
 export function emptySkills(): Record<SkillId, number> {
@@ -349,7 +423,7 @@ export function emptyPack(): Record<ItemId, number> {
     hatchet: 1, knife: 1, pick: 1, hoe: 1, fishing_rod: 1, log: 0, board: 0, ore: 0, ingot: 0, club: 0, shield: 0,
     staff: 0, bow: 0, torch: 0, crate: 0, cap: 0, cuirass: 0, sword: 0, mace: 0, gauntlets: 0, gorget: 0, heater: 0,
     rabbit_foot: 0, orc_tusk: 0,
-    meat: 1, hide: 0, bandage: 3, potion_heal: 0, potion_night: 0,
+    meat: 1, hide: 0, arrows: 12, bandage: 3, potion_heal: 0, potion_night: 0,
     tunic: 0, leather: 0, mail: 0, hood: 1, helm: 0, cloak: 0, gloves: 1, hose: 0, greaves: 0,
     boots: 0, pendant: 1, ring: 1, relic: 0, spellbook: 1, rune: 4, garlic: 12, ginseng: 12,
     silk: 16, nightshade: 4, pearl: 14, moss: 10, mandrake: 10, ash: 12, cabbage: 2, wheat: 0,

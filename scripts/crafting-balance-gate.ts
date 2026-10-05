@@ -5,6 +5,7 @@ import { MAP } from "../src/game/atlas.ts";
 import { ITEM_FORM_CATALOG, MATERIAL_GRADES, GEM_CLARITIES } from "../src/game/crafting/forms.ts";
 import { resolveItemStats } from "../src/game/crafting/resolve.ts";
 import type { CraftedComponent, GemInlay, ItemFormDefinition, Workmanship } from "../src/game/crafting/types.ts";
+import type { GemResourceId } from "../src/game/resources/types.ts";
 import { RESOURCE_CATALOG, RESOURCE_IDS } from "../src/game/resources/catalog.ts";
 import { resolveResourceNode, type ResourceNodeKind } from "../src/game/resources/nodes.ts";
 import { successChance } from "../src/game/skills.ts";
@@ -75,9 +76,11 @@ function cartesian<T>(sets: readonly T[][]): T[][] {
 function legalInlays(form: ItemFormDefinition): Array<readonly GemInlay[]> {
   const rows: Array<readonly GemInlay[]> = [[]];
   if (form.maxInlays < 1) return rows;
-  for (const resourceId of ["ruby", "sapphire"] as const) {
-    const family = RESOURCE_CATALOG[resourceId].traitIds[0];
+  for (const definition of Object.values(RESOURCE_CATALOG)) {
+    if (definition.kind !== "gem") continue;
+    const family = definition.traitIds[0];
     if (!form.allowedGemFamilies.includes(family as never)) continue;
+    const resourceId = definition.id as GemResourceId;
     for (const clarity of GEM_CLARITIES) rows.push([{ resourceId, clarity }]);
   }
   return rows;
@@ -206,15 +209,28 @@ const curves = skillCurves();
 const acquisitions = [
   acquisitionScenario("oak bow body", "oak", "tree", 5, 50),
   acquisitionScenario("redwood bow body", "redwood", "tree", 5, 50),
+  acquisitionScenario("ironwood bow body", "ironwood", "tree", 5, 70),
+  acquisitionScenario("copper sword edge", "copper_ore", "rock", 5, 20),
+  acquisitionScenario("tin for bronze", "tin_ore", "rock", 5, 35),
   acquisitionScenario("highland sword edge", "highland_ore", "rock", 5, 55),
+  acquisitionScenario("emberite sword edge", "emberite", "rock", 5, 90),
+  acquisitionScenario("moon silver sword edge", "moon_silver", "rock", 5, 75),
+  // Bone-kind hunt loot (wolf_fang, stag_antler, drake_scale) is intentionally unmodeled here:
+  // it drops from skinning fauna kills, never from node resolution, so the node-survey
+  // scenario would report a garbage "never acquires". Their crafting impact is still
+  // covered by the legal-combination enumeration above (bow body / sword hilt / shield plate).
   acquisitionScenario("ruby inlay", "ruby", "rock", 1, 60),
+  acquisitionScenario("emerald inlay", "emerald", "rock", 1, 70),
+  acquisitionScenario("amethyst inlay", "amethyst", "rock", 1, 60),
+  acquisitionScenario("diamond inlay", "diamond", "rock", 1, 70),
   acquisitionScenario("sapphire inlay", "sapphire", "rock", 1, 65),
 ];
 const items = representativeItems();
 const sizes = payloadSizes(items);
 const browser = browserEvidence();
-const maxSkillBow = workmanshipChances(100, 18);
-const maxSkillSword = workmanshipChances(100, 20);
+const RARE_INPUT_GRADE = "choice" as const;
+const maxSkillBow = workmanshipChances(100, 18, RARE_INPUT_GRADE);
+const maxSkillSword = workmanshipChances(100, 20, RARE_INPUT_GRADE);
 const expansionReady = stats.legalCombinationCount > 0
   && Object.values(stats.forms as Record<string, any>).every((form) => form.capViolations === 0)
   && browser.ok
@@ -230,7 +246,7 @@ const report = {
     refining: { oakLogToBoard: "1:2", redwoodLogToBoard: "1:2", ironOreToIngot: "1:1", highlandOreToIngot: "1:1" },
     exactSinks: { bow: { timber: 5, cloth: 1, optionalGem: 1 }, sword: { ingot: 5, timber: 1, cloth: 1, optionalGem: 1 } },
   },
-  workmanshipAtMaxSkill: { bow: maxSkillBow, sword: maxSkillSword },
+  workmanshipAtMaxSkill: { inputGrade: RARE_INPUT_GRADE, bow: maxSkillBow, sword: maxSkillSword },
   statEnumeration: stats,
   payloadSizes: sizes,
   browser,
@@ -240,7 +256,7 @@ const report = {
 };
 
 writeFileSync(resolve(OUT_DIR, "crafting-balance-gate.json"), `${JSON.stringify(report, null, 2)}\n`);
-const md = `# Crafting balance and expansion gate\n\n**Decision: ${report.decision}**\n\n## Why\n${report.reasons.length ? report.reasons.map((reason) => `- ${reason}`).join("\n") : "- All measured gates passed."}\n\n## Evidence\n- Legal combinations enumerated: **${stats.legalCombinationCount.toLocaleString()}**; cap violations: **${Object.values(stats.forms as Record<string, any>).reduce((n, form) => n + form.capViolations, 0)}**.\n- Max-skill bow workmanship: ordinary ${(maxSkillBow.ordinary * 100).toFixed(1)}%, fine ${(maxSkillBow.fine * 100).toFixed(1)}%, exceptional ${(maxSkillBow.exceptional * 100).toFixed(1)}%.\n- Max-skill sword workmanship: ordinary ${(maxSkillSword.ordinary * 100).toFixed(1)}%, fine ${(maxSkillSword.fine * 100).toFixed(1)}%, exceptional ${(maxSkillSword.exceptional * 100).toFixed(1)}%.\n- Representative save payload: **${sizes.representativeSaveBytes.toLocaleString()} bytes**; largest Vault inscription: **${sizes.vaultInscriptionBytes.max.toLocaleString()} bytes**.\n- Desktop/mobile browser journey: **${browser.ok ? "PASS" : "FAIL/UNAVAILABLE"}**.\n\n## Acquisition model\nDeterministic 200-seed simulations use ${SURVEY_SECONDS_PER_NODE}s per surveyed node plus ${WORK_BEAT_SECONDS}s per successful harvest impact. Travel, loading, combat, and cloth acquisition are explicitly excluded.\n\n| Goal | Skill | p50 inspections | p90 | p99 | Modeled p50 seconds |\n|---|---:|---:|---:|---:|---:|\n${acquisitions.map((x) => `| ${x.label} | ${x.skill} | ${x.inspections.p50} | ${x.inspections.p90} | ${x.inspections.p99} | ${x.modeledSeconds.p50} |`).join("\n")}\n\n## Supply and sinks\n- Harvest: 1 unit below skill 100; 2 at skill 100.\n- Timber refining: 1 log → 2 boards, family and grade preserved.\n- Ore refining: 1 ore → 1 ingot, family and grade preserved.\n- Bow: 5 timber + 1 cloth + optional 1 gem.\n- Sword: 5 ingots + 1 timber + 1 cloth + optional 1 gem.\n\n## Stat caps\n${Object.entries(stats.forms as Record<string, any>).map(([id, x]) => `- **${id}:** ${x.combinations.toLocaleString()} legal combinations; max damage ${x.maxima.damage}/${x.caps.damage}, hit ${x.maxima.hitBonus}/${x.caps.hitBonus}, armor ${x.maxima.armor}/${x.caps.armor}, local Fortune ${x.maxima.fortune}/5; ${x.capViolations} violations.`).join("\n")}\n\n## Five representative items\n${items.map((x) => `- **${x.label}:** ${x.name} — damage ${x.stats?.damage}, hit ${x.stats?.hitBonus}, armor ${x.stats?.armor}${x.inlays?.length ? `; inlay ${x.inlays[0]!.resourceId} ${x.inlays[0]!.clarity}` : ""}.`).join("\n")}\n\n## Expansion rule\nDo not add the full catalog yet. First prevent high-skill use of rare/max-grade materials from producing ordinary workmanship more than half the time. The existing bow/sword vertical slices remain release-testable; this HOLD applies to catalog expansion.\n\nFull machine-readable evidence: \`reports/crafting-balance-gate.json\`.\n`;
+const md = `# Crafting balance and expansion gate\n\n**Decision: ${report.decision}**\n\n## Why\n${report.reasons.length ? report.reasons.map((reason) => `- ${reason}`).join("\n") : "- All measured gates passed."}\n\n## Evidence\n- Legal combinations enumerated: **${stats.legalCombinationCount.toLocaleString()}**; cap violations: **${Object.values(stats.forms as Record<string, any>).reduce((n, form) => n + form.capViolations, 0)}**.\n- Max-skill bow workmanship on ${RARE_INPUT_GRADE}-grade inputs: ordinary ${(maxSkillBow.ordinary * 100).toFixed(1)}%, fine ${(maxSkillBow.fine * 100).toFixed(1)}%, exceptional ${(maxSkillBow.exceptional * 100).toFixed(1)}%.\n- Max-skill sword workmanship on ${RARE_INPUT_GRADE}-grade inputs: ordinary ${(maxSkillSword.ordinary * 100).toFixed(1)}%, fine ${(maxSkillSword.fine * 100).toFixed(1)}%, exceptional ${(maxSkillSword.exceptional * 100).toFixed(1)}%.\n- Representative save payload: **${sizes.representativeSaveBytes.toLocaleString()} bytes**; largest Vault inscription: **${sizes.vaultInscriptionBytes.max.toLocaleString()} bytes**.\n- Desktop/mobile browser journey: **${browser.ok ? "PASS" : "FAIL/UNAVAILABLE"}**.\n\n## Acquisition model\nDeterministic 200-seed simulations use ${SURVEY_SECONDS_PER_NODE}s per surveyed node plus ${WORK_BEAT_SECONDS}s per successful harvest impact. Travel, loading, combat, and cloth acquisition are explicitly excluded.\n\n| Goal | Skill | p50 inspections | p90 | p99 | Modeled p50 seconds |\n|---|---:|---:|---:|---:|---:|\n${acquisitions.map((x) => `| ${x.label} | ${x.skill} | ${x.inspections.p50} | ${x.inspections.p90} | ${x.inspections.p99} | ${x.modeledSeconds.p50} |`).join("\n")}\n\n## Supply and sinks\n- Harvest: 1 unit below skill 100; 2 at skill 100.\n- Timber refining: 1 log → 2 boards, family and grade preserved.\n- Ore refining: 1 ore → 1 ingot, family and grade preserved.\n- Bow: 5 timber + 1 cloth + optional 1 gem.\n- Sword: 5 ingots + 1 timber + 1 cloth + optional 1 gem.\n\n## Stat caps\n${Object.entries(stats.forms as Record<string, any>).map(([id, x]) => `- **${id}:** ${x.combinations.toLocaleString()} legal combinations; max damage ${x.maxima.damage}/${x.caps.damage}, hit ${x.maxima.hitBonus}/${x.caps.hitBonus}, armor ${x.maxima.armor}/${x.caps.armor}, local Fortune ${x.maxima.fortune}/5; ${x.capViolations} violations.`).join("\n")}\n\n## Five representative items\n${items.map((x) => `- **${x.label}:** ${x.name} — damage ${x.stats?.damage}, hit ${x.stats?.hitBonus}, armor ${x.stats?.armor}${x.inlays?.length ? `; inlay ${x.inlays[0]!.resourceId} ${x.inlays[0]!.clarity}` : ""}.`).join("\n")}\n\n## Expansion rule\nDo not add the full catalog yet. First prevent high-skill use of rare/max-grade materials from producing ordinary workmanship more than half the time. The existing bow/sword vertical slices remain release-testable; this HOLD applies to catalog expansion.\n\nFull machine-readable evidence: \`reports/crafting-balance-gate.json\`.\n`;
 writeFileSync(resolve(OUT_DIR, "crafting-balance-gate.md"), md);
 console.log(JSON.stringify({ decision: report.decision, legalCombinations: stats.legalCombinationCount, capViolations: Object.values(stats.forms as Record<string, any>).reduce((n, form) => n + form.capViolations, 0), browserOk: browser.ok, saveBytes: sizes.representativeSaveBytes, maxVaultBytes: sizes.vaultInscriptionBytes.max }, null, 2));
 if (stats.legalCombinationCount === 0 || !browser.ok || Object.values(stats.forms as Record<string, any>).some((form) => form.capViolations > 0)) process.exitCode = 1;

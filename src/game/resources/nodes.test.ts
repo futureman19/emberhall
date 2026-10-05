@@ -118,6 +118,15 @@ test("soft biome affinities make catalog preferences observable and omit zero af
   assert.ok(rawWeightAt(250, 48, "rock", "sapphire") > rawWeightAt(470, 420, "rock", "sapphire"));
   assert.ok(rawWeightAt(188, 88, "rock", "sapphire") > 0);
   assert.ok(rawWeightAt(250, 48, "rock", "highland_ore") > rawWeightAt(256, 292, "rock", "highland_ore"));
+  assert.ok(rawWeightAt(420, 268, "rock", "emberite") > rawWeightAt(64, 96, "rock", "emberite"), "ironfold is the richer emberite vein");
+  assert.ok(rawWeightAt(64, 96, "rock", "emberite") > 0, "cairnash holds an emberite vein");
+  assert.equal(rawWeightAt(256, 292, "rock", "emberite"), 0, "emberite keeps to its named veins");
+  assert.ok(rawWeightAt(110, 440, "rock", "moon_silver") > rawWeightAt(250, 48, "rock", "moon_silver"), "greybarrow is the richer moon-silver vein");
+  assert.ok(rawWeightAt(250, 48, "rock", "moon_silver") > 0, "ridgewatch holds a moon-silver vein");
+  assert.equal(rawWeightAt(256, 292, "rock", "moon_silver"), 0, "moon-silver keeps to its named veins");
+  assert.equal(rawWeightAt(188, 88, "tree", "wolf_fang"), 0, "bone parts never grow on nodes");
+  assert.equal(rawWeightAt(420, 268, "rock", "drake_scale"), 0, "bone parts never grow on nodes");
+  assert.equal(rawWeightAt(420, 268, "rock", "aurochs_horn"), 0, "bone parts never grow on nodes");
 });
 
 test("bounded deterministic grid frequencies track inspected probabilities", () => {
@@ -280,6 +289,9 @@ test("wild woods keep to named groves; oak is everywhere; the hall is oak", () =
   assert.ok(rawWeightAt(110, 440, "tree", "yew") > 0);
   assert.ok(rawWeightAt(110, 440, "tree", "ghostwood") > 0);
   assert.equal(rawWeightAt(256, 292, "tree", "ghostwood"), 0);
+  assert.ok(rawWeightAt(188, 88, "tree", "ironwood") > 0);
+  assert.ok(rawWeightAt(250, 48, "tree", "ironwood") > 0);
+  assert.equal(rawWeightAt(256, 292, "tree", "ironwood"), 0);
 });
 
 test("biome ordering export preserves representative biomeAt behavior", () => {

@@ -1,3 +1,4 @@
+import { beginWorldTouch } from "./use-world-touch";
 import { canTill, CROP_META } from "@/game/farm";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
@@ -31,6 +32,10 @@ function Plant({ plot }: { plot: CropPlot }) {
       position={[plot.tx, y, plot.ty]}
       onPointerDown={(e) => {
         e.stopPropagation();
+        if (beginWorldTouch(e.nativeEvent, { tx: plot.tx, ty: plot.ty,
+          tap: () => leftAt(plot.tx, plot.ty),
+          secondary: (point) => useGame.getState().openCtx(point.clientX, point.clientY, { kind: "plot", id: plot.id, tx: plot.tx, ty: plot.ty, label: plot.crop ? CROP_META[plot.crop].label : "bed" }),
+        })) return;
         if (e.button === 2) hitAt(plot.tx, plot.ty, e.clientX, e.clientY);
         else if (e.button === 0) leftAt(plot.tx, plot.ty);
       }}
@@ -154,6 +159,7 @@ function YoungTree({ sapling }: { sapling: Sapling }) {
       position={[sapling.tx, y, sapling.ty]}
       onPointerDown={(e) => {
         e.stopPropagation();
+        if (beginWorldTouch(e.nativeEvent, { tx: sapling.tx, ty: sapling.ty })) return;
         if (e.button === 2) hitAt(sapling.tx, sapling.ty, e.clientX, e.clientY);
         else if (e.button === 0) leftAt(sapling.tx, sapling.ty);
       }}

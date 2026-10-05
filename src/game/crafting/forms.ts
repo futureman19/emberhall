@@ -1,4 +1,5 @@
 import { FAUNA_META, ITEM_META, SKILL_META } from "../catalog.ts";
+import type { SkillId } from "../types.ts";
 import { RESOURCE_CATALOG } from "../resources/catalog.ts";
 import type {
   GemClarity,
@@ -31,7 +32,7 @@ export const GEM_CLARITIES = Object.freeze([
   "perfect",
 ] as const satisfies readonly GemClarity[]);
 
-const ITEM_FORM_IDS = ["bow", "sword"] as const satisfies readonly ItemFormId[];
+const ITEM_FORM_IDS = ["bow", "sword", "shield", "helm", "mail", "boots", "gauntlets", "greaves", "leather", "hood", "gloves", "hose", "charm", "ring"] as const satisfies readonly ItemFormId[];
 const ITEM_CLASSES = ["weapon", "armor", "jewelry", "tool", "placeable"] as const satisfies readonly ItemClass[];
 const MATERIAL_ROLES = [
   "body",
@@ -44,13 +45,25 @@ const MATERIAL_ROLES = [
   "finish",
 ] as const satisfies readonly MaterialRole[];
 const MATERIAL_CONTRIBUTIONS = ["primary", "secondary", "cosmetic"] as const satisfies readonly MaterialContribution[];
-const GEM_FAMILIES = ["power", "fortune"] as const satisfies readonly GemFamily[];
-const GRADE_KINDS = ["timber", "ore", "fiber"] as const;
-const GRADE_FORMS = ["log", "board", "ore", "ingot", "cloth"] as const;
+const GEM_FAMILIES = ["power", "fortune", "precision", "protection", "mastery"] as const satisfies readonly GemFamily[];
+const GRADE_KINDS = ["timber", "ore", "fiber", "hide", "bone"] as const;
+const GRADE_FORMS = ["log", "board", "ore", "ingot", "cloth", "hide", "bone"] as const;
 
 export const ITEM_FORM_IDENTITY = Object.freeze({
   bow: Object.freeze({ baseItem: "bow", itemClass: "weapon" }),
   sword: Object.freeze({ baseItem: "sword", itemClass: "weapon" }),
+  shield: Object.freeze({ baseItem: "shield", itemClass: "armor" }),
+  helm: Object.freeze({ baseItem: "helm", itemClass: "armor" }),
+  mail: Object.freeze({ baseItem: "mail", itemClass: "armor" }),
+  boots: Object.freeze({ baseItem: "boots", itemClass: "armor" }),
+  gauntlets: Object.freeze({ baseItem: "gauntlets", itemClass: "armor" }),
+  greaves: Object.freeze({ baseItem: "greaves", itemClass: "armor" }),
+  leather: Object.freeze({ baseItem: "leather", itemClass: "armor" }),
+  hood: Object.freeze({ baseItem: "hood", itemClass: "armor" }),
+  gloves: Object.freeze({ baseItem: "gloves", itemClass: "armor" }),
+  hose: Object.freeze({ baseItem: "hose", itemClass: "armor" }),
+  charm: Object.freeze({ baseItem: "pendant", itemClass: "jewelry" }),
+  ring: Object.freeze({ baseItem: "ring", itemClass: "jewelry" }),
 } as const satisfies Record<ItemFormId, ItemFormIdentity>);
 
 const FORM_FIELDS = [
@@ -300,7 +313,7 @@ const BOW_FORM_DEFINITION = {
     {
       role: "body",
       amount: 5,
-      accepts: { qualityType: "grade", kinds: ["timber"], forms: ["log", "board"] },
+      accepts: { qualityType: "grade", kinds: ["timber", "bone"], forms: ["log", "board", "bone"] },
       contribution: "primary",
     },
     {
@@ -312,7 +325,7 @@ const BOW_FORM_DEFINITION = {
   ],
   baseStats: { damage: 8, hitBonus: 0, armor: 0, skillBonuses: {}, slayerMultipliers: {} },
   caps: { damage: 15, hitBonus: 10, armor: 0, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
-  allowedGemFamilies: ["power", "fortune"],
+  allowedGemFamilies: ["power", "fortune", "precision", "mastery"],
   maxInlays: 1,
 } as const satisfies ItemFormDefinition;
 
@@ -332,7 +345,7 @@ const SWORD_FORM_DEFINITION = {
     {
       role: "hilt",
       amount: 1,
-      accepts: { qualityType: "grade", kinds: ["timber"], forms: ["board", "log"] },
+      accepts: { qualityType: "grade", kinds: ["timber", "bone"], forms: ["board", "log", "bone"] },
       contribution: "secondary",
     },
     {
@@ -344,10 +357,344 @@ const SWORD_FORM_DEFINITION = {
   ],
   baseStats: { damage: 10, hitBonus: 0, armor: 0, skillBonuses: {}, slayerMultipliers: {} },
   caps: { damage: 18, hitBonus: 8, armor: 0, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
-  allowedGemFamilies: ["power"],
+  allowedGemFamilies: ["power", "precision", "mastery"],
   maxInlays: 1,
 } as const satisfies ItemFormDefinition;
 
-export const ITEM_FORM_CATALOG = buildItemFormCatalog([BOW_FORM_DEFINITION, SWORD_FORM_DEFINITION]);
+const SHIELD_FORM_DEFINITION = {
+  id: "shield",
+  recipeVersion: 1,
+  baseItem: "shield",
+  label: "Shield",
+  itemClass: "armor",
+  roles: [
+    {
+      role: "plate",
+      amount: 3,
+      accepts: { qualityType: "grade", kinds: ["ore", "bone"], forms: ["ingot", "bone"] },
+      contribution: "primary",
+    },
+    {
+      role: "frame",
+      amount: 2,
+      accepts: { qualityType: "grade", kinds: ["timber"], forms: ["board"] },
+      contribution: "secondary",
+    },
+    {
+      role: "binding",
+      amount: 1,
+      accepts: { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] },
+      contribution: "secondary",
+    },
+  ],
+  baseStats: { damage: 0, hitBonus: 0, armor: 2, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 0, hitBonus: 0, armor: 5, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+  allowedGemFamilies: ["fortune", "protection"],
+  maxInlays: 1,
+} as const satisfies ItemFormDefinition;
+
+const HELM_FORM_DEFINITION = {
+  id: "helm",
+  recipeVersion: 1,
+  baseItem: "helm",
+  label: "Helm",
+  itemClass: "armor",
+  roles: [
+    {
+      role: "plate",
+      amount: 2,
+      accepts: { qualityType: "grade", kinds: ["ore"], forms: ["ingot"] },
+      contribution: "primary",
+    },
+    {
+      role: "lining",
+      amount: 1,
+      accepts: { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] },
+      contribution: "secondary",
+    },
+  ],
+  baseStats: { damage: 0, hitBonus: 0, armor: 2, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 0, hitBonus: 0, armor: 5, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+  allowedGemFamilies: ["fortune", "protection"],
+  maxInlays: 1,
+} as const satisfies ItemFormDefinition;
+
+const MAIL_FORM_DEFINITION = {
+  id: "mail",
+  recipeVersion: 1,
+  baseItem: "mail",
+  label: "Mail",
+  itemClass: "armor",
+  roles: [
+    {
+      role: "plate",
+      amount: 4,
+      accepts: { qualityType: "grade", kinds: ["ore"], forms: ["ingot"] },
+      contribution: "primary",
+    },
+    {
+      role: "lining",
+      amount: 2,
+      accepts: { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] },
+      contribution: "secondary",
+    },
+  ],
+  baseStats: { damage: 0, hitBonus: 0, armor: 4, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 0, hitBonus: 0, armor: 7, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+  allowedGemFamilies: ["fortune", "protection"],
+  maxInlays: 1,
+} as const satisfies ItemFormDefinition;
+
+const BOOTS_FORM_DEFINITION = {
+  id: "boots",
+  recipeVersion: 1,
+  baseItem: "boots",
+  label: "Boots",
+  itemClass: "armor",
+  roles: [
+    {
+      role: "plate",
+      amount: 2,
+      accepts: { qualityType: "grade", kinds: ["ore"], forms: ["ingot"] },
+      contribution: "primary",
+    },
+    {
+      role: "lining",
+      amount: 1,
+      accepts: { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] },
+      contribution: "secondary",
+    },
+  ],
+  baseStats: { damage: 0, hitBonus: 0, armor: 2, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 0, hitBonus: 0, armor: 5, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+  allowedGemFamilies: ["fortune", "protection"],
+  maxInlays: 1,
+} as const satisfies ItemFormDefinition;
+
+const GAUNTLETS_FORM_DEFINITION = {
+  id: "gauntlets",
+  recipeVersion: 1,
+  baseItem: "gauntlets",
+  label: "Gauntlets",
+  itemClass: "armor",
+  roles: [
+    {
+      role: "plate",
+      amount: 2,
+      accepts: { qualityType: "grade", kinds: ["ore"], forms: ["ingot"] },
+      contribution: "primary",
+    },
+    {
+      role: "lining",
+      amount: 1,
+      accepts: { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] },
+      contribution: "secondary",
+    },
+  ],
+  baseStats: { damage: 0, hitBonus: 0, armor: 2, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 0, hitBonus: 0, armor: 5, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+  allowedGemFamilies: ["fortune", "protection"],
+  maxInlays: 1,
+} as const satisfies ItemFormDefinition;
+
+const GREAVES_FORM_DEFINITION = {
+  id: "greaves",
+  recipeVersion: 1,
+  baseItem: "greaves",
+  label: "Greaves",
+  itemClass: "armor",
+  roles: [
+    {
+      role: "plate",
+      amount: 3,
+      accepts: { qualityType: "grade", kinds: ["ore"], forms: ["ingot"] },
+      contribution: "primary",
+    },
+    {
+      role: "lining",
+      amount: 2,
+      accepts: { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] },
+      contribution: "secondary",
+    },
+  ],
+  baseStats: { damage: 0, hitBonus: 0, armor: 3, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 0, hitBonus: 0, armor: 6, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+  allowedGemFamilies: ["fortune", "protection"],
+  maxInlays: 1,
+} as const satisfies ItemFormDefinition;
+
+const LEATHER_FORM_DEFINITION = {
+  id: "leather",
+  recipeVersion: 1,
+  baseItem: "leather",
+  label: "Leather Tunic",
+  itemClass: "armor",
+  roles: [
+    {
+      role: "body",
+      amount: 3,
+      accepts: { qualityType: "grade", kinds: ["hide"], forms: ["hide"] },
+      contribution: "primary",
+    },
+    {
+      role: "binding",
+      amount: 1,
+      accepts: { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] },
+      contribution: "secondary",
+    },
+  ],
+  baseStats: { damage: 0, hitBonus: 0, armor: 2, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 0, hitBonus: 0, armor: 5, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+  allowedGemFamilies: ["fortune", "protection"],
+  maxInlays: 1,
+} as const satisfies ItemFormDefinition;
+
+
+const HOOD_FORM_DEFINITION = {
+  id: "hood",
+  recipeVersion: 1,
+  baseItem: "hood",
+  label: "Leather Hood",
+  itemClass: "armor",
+  roles: [
+    {
+      role: "body",
+      amount: 2,
+      accepts: { qualityType: "grade", kinds: ["hide"], forms: ["hide"] },
+      contribution: "primary",
+    },
+    {
+      role: "binding",
+      amount: 1,
+      accepts: { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] },
+      contribution: "secondary",
+    },
+  ],
+  baseStats: { damage: 0, hitBonus: 0, armor: 1, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 0, hitBonus: 0, armor: 4, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+  allowedGemFamilies: ["fortune", "protection"],
+  maxInlays: 1,
+} as const satisfies ItemFormDefinition;
+
+const GLOVES_FORM_DEFINITION = {
+  id: "gloves",
+  recipeVersion: 1,
+  baseItem: "gloves",
+  label: "Leather Gloves",
+  itemClass: "armor",
+  roles: [
+    {
+      role: "body",
+      amount: 2,
+      accepts: { qualityType: "grade", kinds: ["hide"], forms: ["hide"] },
+      contribution: "primary",
+    },
+    {
+      role: "binding",
+      amount: 1,
+      accepts: { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] },
+      contribution: "secondary",
+    },
+  ],
+  baseStats: { damage: 0, hitBonus: 0, armor: 1, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 0, hitBonus: 0, armor: 4, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+  allowedGemFamilies: ["fortune", "protection"],
+  maxInlays: 1,
+} as const satisfies ItemFormDefinition;
+
+const HOSE_FORM_DEFINITION = {
+  id: "hose",
+  recipeVersion: 1,
+  baseItem: "hose",
+  label: "Leather Hose",
+  itemClass: "armor",
+  roles: [
+    {
+      role: "body",
+      amount: 3,
+      accepts: { qualityType: "grade", kinds: ["hide"], forms: ["hide"] },
+      contribution: "primary",
+    },
+    {
+      role: "binding",
+      amount: 2,
+      accepts: { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] },
+      contribution: "secondary",
+    },
+  ],
+  baseStats: { damage: 0, hitBonus: 0, armor: 2, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 0, hitBonus: 0, armor: 5, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+  allowedGemFamilies: ["fortune", "protection"],
+  maxInlays: 1,
+} as const satisfies ItemFormDefinition;
+
+/** The art a weapon schools its wielder in when a mastery gem is set into it. */
+export const FORM_GOVERNING_SKILL = deepFreeze({ sword: "swords", bow: "archery" } as Partial<Record<ItemFormId, SkillId>>);
+
+const CHARM_FORM_DEFINITION = {
+  id: "charm",
+  recipeVersion: 1,
+  baseItem: "pendant",
+  label: "Charm",
+  itemClass: "jewelry",
+  roles: [
+    {
+      role: "body",
+      amount: 1,
+      accepts: { qualityType: "grade", kinds: ["bone"], forms: ["bone"] },
+      contribution: "primary",
+    },
+    {
+      role: "binding",
+      amount: 1,
+      accepts: { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] },
+      contribution: "secondary",
+    },
+  ],
+  baseStats: { damage: 0, hitBonus: 0, armor: 0, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 0, hitBonus: 0, armor: 2, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+  allowedGemFamilies: [],
+  maxInlays: 0,
+} as const satisfies ItemFormDefinition;
+
+const RING_FORM_DEFINITION = {
+  id: "ring",
+  recipeVersion: 1,
+  baseItem: "ring",
+  label: "Ring",
+  itemClass: "jewelry",
+  roles: [
+    {
+      role: "body",
+      amount: 1,
+      accepts: { qualityType: "grade", kinds: ["ore", "bone"], forms: ["ingot", "bone"] },
+      contribution: "primary",
+    },
+    {
+      role: "binding",
+      amount: 1,
+      accepts: { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] },
+      contribution: "secondary",
+    },
+  ],
+  baseStats: { damage: 0, hitBonus: 0, armor: 0, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 0, hitBonus: 0, armor: 3, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+  allowedGemFamilies: ["fortune", "protection"],
+  maxInlays: 1,
+} as const satisfies ItemFormDefinition;
+
+export const ITEM_FORM_CATALOG = buildItemFormCatalog([BOW_FORM_DEFINITION, SWORD_FORM_DEFINITION, SHIELD_FORM_DEFINITION, HELM_FORM_DEFINITION, MAIL_FORM_DEFINITION, BOOTS_FORM_DEFINITION, GAUNTLETS_FORM_DEFINITION, GREAVES_FORM_DEFINITION, LEATHER_FORM_DEFINITION, HOOD_FORM_DEFINITION, GLOVES_FORM_DEFINITION, HOSE_FORM_DEFINITION, CHARM_FORM_DEFINITION, RING_FORM_DEFINITION]);
 export const BOW_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.bow;
 export const SWORD_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.sword;
+export const SHIELD_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.shield;
+export const HELM_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.helm;
+export const MAIL_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.mail;
+export const BOOTS_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.boots;
+export const GAUNTLETS_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.gauntlets;
+export const GREAVES_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.greaves;
+export const LEATHER_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.leather;
+export const HOOD_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.hood;
+export const GLOVES_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.gloves;
+export const HOSE_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.hose;
+export const CHARM_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.charm;
+export const RING_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.ring;

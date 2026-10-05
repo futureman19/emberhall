@@ -1,15 +1,15 @@
 # Crafting balance and expansion gate
 
-**Decision: HOLD**
+**Decision: READY**
 
 ## Why
-- Max-skill workmanship still yields ordinary quality more than 50% of the time on rare inputs; add skill-banded workmanship minimums before expanding the catalog.
+- All measured gates passed.
 
 ## Evidence
-- Legal combinations enumerated: **22,656**; cap violations: **0**.
-- Max-skill bow workmanship: ordinary 67.2%, fine 16.4%, exceptional 16.4%.
-- Max-skill sword workmanship: ordinary 68.0%, fine 16.0%, exceptional 16.0%.
-- Representative save payload: **18,792 bytes**; largest Vault inscription: **779 bytes**.
+- Legal combinations enumerated: **1,546,080**; cap violations: **0**.
+- Max-skill bow workmanship on choice-grade inputs: ordinary 0.0%, fine 80.6%, exceptional 19.4%.
+- Max-skill sword workmanship on choice-grade inputs: ordinary 0.0%, fine 81.0%, exceptional 19.0%.
+- Representative save payload: **24,226 bytes**; largest Vault inscription: **779 bytes**.
 - Desktop/mobile browser journey: **PASS**.
 
 ## Acquisition model
@@ -17,11 +17,19 @@ Deterministic 200-seed simulations use 1.5s per surveyed node plus 0.72s per suc
 
 | Goal | Skill | p50 inspections | p90 | p99 | Modeled p50 seconds |
 |---|---:|---:|---:|---:|---:|
-| oak bow body | 50 | 5 | 5 | 6 | 11.1 |
-| redwood bow body | 50 | 758 | 1316 | 1729 | 1140.6 |
-| highland sword edge | 55 | 319 | 594 | 861 | 482.1 |
-| ruby inlay | 60 | 567 | 1583 | 2590 | 851.22 |
-| sapphire inlay | 65 | 265 | 1049 | 1888 | 398.22 |
+| oak bow body | 50 | 5 | 5 | 7 | 11.1 |
+| redwood bow body | 50 | 5485 | 8401 | 11333 | 8231.1 |
+| ironwood bow body | 70 | 5085 | 8619 | 10925 | 7631.1 |
+| copper sword edge | 20 | 29 | 47 | 68 | 47.1 |
+| tin for bronze | 35 | 248 | 422 | 585 | 375.6 |
+| highland sword edge | 55 | 677 | 1153 | 1833 | 1019.1 |
+| emberite sword edge | 90 | 45693 | 85358 | 109903 | 68543.1 |
+| moon silver sword edge | 75 | 19030 | 30480 | 40434 | 28548.6 |
+| ruby inlay | 60 | 909 | 2567 | 5944 | 1364.22 |
+| emerald inlay | 70 | 219 | 855 | 1500 | 329.22 |
+| amethyst inlay | 60 | 230 | 863 | 1688 | 345.72 |
+| diamond inlay | 70 | 184 | 599 | 1185 | 276.72 |
+| sapphire inlay | 65 | 516 | 1810 | 3572 | 774.72 |
 
 ## Supply and sinks
 - Harvest: 1 unit below skill 100; 2 at skill 100.
@@ -31,8 +39,20 @@ Deterministic 200-seed simulations use 1.5s per surveyed node plus 0.72s per suc
 - Sword: 5 ingots + 1 timber + 1 cloth + optional 1 gem.
 
 ## Stat caps
-- **bow:** 4,224 legal combinations; max damage 14/15, hit 5.25/10, armor 0/0, local Fortune 5/5; 0 violations.
-- **sword:** 18,432 legal combinations; max damage 18/18, hit 3/8, armor 0/0, local Fortune 0/5; 0 violations.
+- **bow:** 46,368 legal combinations; max damage 15/15, hit 10/10, armor 0/0, local Fortune 5/5; 0 violations.
+- **sword:** 989,184 legal combinations; max damage 18/18, hit 8/8, armor 0/0, local Fortune 0/5; 0 violations.
+- **shield:** 456,192 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
+- **helm:** 7,392 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
+- **mail:** 7,392 legal combinations; max damage 0/0, hit 0/0, armor 7/7, local Fortune 5/5; 0 violations.
+- **boots:** 7,392 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
+- **gauntlets:** 7,392 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
+- **greaves:** 7,392 legal combinations; max damage 0/0, hit 0/0, armor 6/6, local Fortune 5/5; 0 violations.
+- **leather:** 1,056 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
+- **hood:** 1,056 legal combinations; max damage 0/0, hit 0/0, armor 4/4, local Fortune 5/5; 0 violations.
+- **gloves:** 1,056 legal combinations; max damage 0/0, hit 0/0, armor 4/4, local Fortune 5/5; 0 violations.
+- **hose:** 1,056 legal combinations; max damage 0/0, hit 0/0, armor 5/5, local Fortune 5/5; 0 violations.
+- **charm:** 480 legal combinations; max damage 0/0, hit 0/0, armor 2/2, local Fortune 0/5; 0 violations.
+- **ring:** 12,672 legal combinations; max damage 0/0, hit 0/0, armor 3/3, local Fortune 5/5; 0 violations.
 
 ## Five representative items
 - **common:** an oak bow — damage 8, hit 0, armor 0.

@@ -82,7 +82,11 @@ try {
     assert.ok(reduced30 < reduced15, `${viewport.name}: 30% setting should process fewer trees than 15%`);
 
     const saved = await page.evaluate(() => localStorage.getItem("emberhall-graphics-v1"));
-    assert.equal(saved, JSON.stringify({ shadows: false, horizonTreeReduction: 30 }), `${viewport.name}: graphics choices should persist`);
+    assert.equal(
+      saved,
+      JSON.stringify({ shadows: false, horizonTreeReduction: 30, reducedEffects: false, firstPerson: false }),
+      `${viewport.name}: graphics choices should persist`,
+    );
 
     console.log(`[${viewport.name}] checking screen-space rain`);
     await page.evaluate(() => {

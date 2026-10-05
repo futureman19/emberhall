@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  availableCraftIngredient,
   canMake,
+  craftBlocker,
   commandCraft,
   commandCraftBatch,
   maxCraftable,
@@ -43,6 +45,67 @@ function withRoll<T>(value: number, action: () => T): T {
     Math.random = original;
   }
 }
+
+test("ordinary craft blockers follow command priority and disappear when ready", () => {
+  const world = createWorld(1);
+  for (const id of Object.keys(world.player.pack) as (keyof typeof world.player.pack)[]) world.player.pack[id] = 0;
+  world.player.resources = { stacks: {} };
+  const board = recipeById("board")!;
+  standAt(world, "forge");
+  assert.match(craftBlocker(world, board)!, /bench/i);
+  world.player.ghost = true;
+  assert.match(craftBlocker(world, board)!, /ghost/i);
+  world.player.ghost = false;
+  standAt(world, "yard");
+  addResource(world.player.resources, REDWOOD, 9);
+  assert.equal(craftBlocker(world, board), "Need 1 more log (0/1).");
+  const before = structuredClone(world.player);
+  craftBlocker(world, board);
+  assert.deepEqual(world.player, before);
+  addResource(world.player.resources, OAK.sound, 1);
+  assert.equal(craftBlocker(world, board), null);
+  assert.equal(canMake(world, board), true);
+  const bandage = recipeById("cut_bandage")!;
+  world.player.wear.main = undefined;
+  world.player.pack.bandage = 20;
+  assert.match(craftBlocker(world, bandage)!, /blade/i);
+  world.player.wear.main = "knife";
+  assert.equal(craftBlocker(world, bandage), "Need 1 more cloth (0/1 eligible).");
+  world.player.pack.silk = 1;
+  assert.equal(craftBlocker(world, bandage), null);
+  world.player.pack.board = 5;
+  assert.equal(craftBlocker(world, recipeById("deed_porch")!), "Need 3 more board (5/8).");
+  assert.match(craftBlocker(world, recipeById("bow")!)!, /exact materials/);
+  const p = you(world)!;
+  p.x = 0; p.z = 0;
+  assert.match(craftBlocker(world, recipeById("roast_meat")!)!, /lit campfire or hearth/);
+  world.campfires.push({ id: "blocker-test", tx: 0, ty: 0, until: world.hour + 1 });
+  assert.equal(craftBlocker(world, recipeById("campfire")!), "A fire already crackles here.");
+  assert.equal(craftBlocker(world, recipeById("roast_meat")!), "Need 1 more raw meat (0/1).");
+});
+
+test("craft ingredient display counts the same ordinary supplies the command can spend", () => {
+  const world = createWorld(1);
+  standAt(world, "yard");
+  world.player.pack.log = 1;
+  world.player.pack.ore = 0;
+  world.player.pack.board = 7;
+  for (const key of Object.values(OAK)) addResource(world.player.resources, key, 1);
+  addResource(world.player.resources, IRON_ROUGH, 2);
+  addResource(world.player.resources, REDWOOD, 9);
+  addResource(world.player.resources, HIGHLAND, 9);
+  const before = structuredClone(world.player);
+  assert.equal(availableCraftIngredient(world, "log"), 5);
+  assert.equal(availableCraftIngredient(world, "ore"), 2);
+  assert.equal(availableCraftIngredient(world, "board"), 7);
+  assert.equal(availableCraftIngredient(world, "ingot"), world.player.pack.ingot ?? 0);
+  assert.deepEqual(world.player, before, "display reads never migrate or duplicate inventory");
+  world.player.skills.carpentry = 100;
+  withRoll(0.5, () => commandCraft(world, "board"));
+  assert.equal(availableCraftIngredient(world, "log"), 4);
+  assert.equal(availableCraftIngredient(world, "board"), 9);
+  assert.equal(resourceCount(world.player.resources, REDWOOD), 9);
+});
 
 test("craft compatibility - rough harvested oak and iron feed the existing utility loop", () => {
   const boardWorld = createWorld();

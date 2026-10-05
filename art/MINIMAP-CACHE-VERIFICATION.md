@@ -1,0 +1,7 @@
+# Minimap cache delivery
+
+Source fd8423f. Fixed256x256 cache stores frozen exact biome weights, never tile RGB; bounds enforced, max65536 samples. Static coordinate/atlas dependency; recreate cache for changed atlas/sampler. World/tile changes continue reading live tile colors. No density/camera/animation/gameplay changes.
+
+RED missing-module test retained. GREEN exhaustive65536-coordinate exact weight parity, immutability/bounds/separate sampler checks. Ten integrated full-PNG comparisons pass across tile mutations/restoration and cloned world replacement.203 script tests +562 game tests pass; lint/typecheck/build pass. Initial stale-ledger failure refreshed/reannotated; initial preview-server stale-build failure retained. Fresh local production82 settlement checks and2 profiled action outcomes pass. Completion max frames216.6/216.7ms: no whole-action speedup/clearance claimed. Browser spike's warm repaint benefit is not whole-frame acceptance.
+
+Isolated deployment https://emberhall-vale-axyd9urzh-andrews-projects-ffe8a9fd.vercel.app/art/phase1-preview.html ; independently inspected Ready/preview, dpl_3a2BZbh129pZCtF3H3yqvBUtBsDg.82 deployed settlement checks and8 controlled tool outcomes pass. Production untouched. Global performance, full animation/effect coverage and readability remain open. Next isolate remaining completion costs with an unprofiled comparison before more rendering changes.
