@@ -1,0 +1,525 @@
+{
+  "url": "http://127.0.0.1:8138",
+  "mode": "candidate",
+  "scope": "Disposable seed7 v4 save; actual game desktop and emulated mobile. Actor repositioning only for regional coverage; native ground input plus normal simulation for camp entrance. Not physical-phone performance.",
+  "checks": [
+    {
+      "name": "desktop-expanded-save-and-look",
+      "ok": true,
+      "state": {
+        "side": 1145,
+        "width": 1145,
+        "look": {
+          "schema": "emberhall.look/1",
+          "hairStyle": "crop",
+          "skin": "#96795d",
+          "garb": "#526b54"
+        }
+      }
+    },
+    {
+      "name": "desktop-native-ground-command",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 900,
+        "ty": 264,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 793.4072109119405,
+        "y": 425.8974871562544
+      }
+    },
+    {
+      "name": "desktop-normal-movement-through-gate",
+      "ok": true,
+      "arrived": {
+        "x": 900,
+        "z": 264,
+        "path": []
+      }
+    },
+    {
+      "name": "desktop-named-chart-destination",
+      "ok": true,
+      "travel": {
+        "kind": "walk",
+        "tx": 1020,
+        "ty": 1000,
+        "targetId": null,
+        "spell": null
+      }
+    },
+    {
+      "name": "desktop-no-horizontal-overflow",
+      "ok": true
+    },
+    {
+      "name": "desktop-all-placed-assets-requested",
+      "ok": true
+    },
+    {
+      "name": "mobile-expanded-save-and-look",
+      "ok": true,
+      "state": {
+        "side": 1145,
+        "width": 1145,
+        "look": {
+          "schema": "emberhall.look/1",
+          "hairStyle": "crop",
+          "skin": "#96795d",
+          "garb": "#526b54"
+        }
+      }
+    },
+    {
+      "name": "mobile-native-ground-command",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 900,
+        "ty": 264,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 259.5371729267477,
+        "y": 374.43487412487366
+      }
+    },
+    {
+      "name": "mobile-normal-movement-through-gate",
+      "ok": true,
+      "arrived": {
+        "x": 900,
+        "z": 264,
+        "path": []
+      }
+    },
+    {
+      "name": "mobile-named-chart-destination",
+      "ok": true,
+      "travel": {
+        "kind": "walk",
+        "tx": 1020,
+        "ty": 1000,
+        "targetId": null,
+        "spell": null
+      }
+    },
+    {
+      "name": "mobile-no-horizontal-overflow",
+      "ok": true
+    },
+    {
+      "name": "mobile-all-placed-assets-requested",
+      "ok": true
+    },
+    {
+      "name": "no-page-or-console-errors",
+      "ok": true,
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "requests": [
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/watchtower.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/trails-kit/guidepost.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/gatehouse.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/hearth-cottage.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/mountain-ridge.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/rocky-peak.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/trails-kit/snowmelt-bank.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/snowcap-peak.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/trails-kit/trail-cairn.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/trails-kit/scree-slope.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/moss-rocks.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/swamp-tree.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/orc-encampment/grimroot-camp.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/boulder-cluster.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/cliff-straight.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/cliff-corner.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/woodland-shrine/mossveil-sanctuary.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/abandoned-mine/hollowvein-diggings.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/trails-kit/stepping-stones.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/swamp-patch.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/reed-cluster.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/trails-kit/muddy-bank.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/watermill.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/trails-kit/grassy-verge.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/wayside-shrine.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/bell-tower.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/roadside-inn.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/river-ferry/reedwake-crossing.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/lava-pool.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/dormant-caldera.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/trails-kit/ash-apron.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/active-volcano.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/trails-kit/cooling-crust.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/basalt-columns.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/trails-kit/ruined-arch.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/trails-kit/abandoned-camp.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/standing-stones.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/watchtower.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/trails-kit/guidepost.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/rocky-peak.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/gatehouse.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/snowcap-peak.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/hearth-cottage.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/mountain-ridge.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/trails-kit/snowmelt-bank.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/trails-kit/trail-cairn.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/trails-kit/scree-slope.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/moss-rocks.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/swamp-tree.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/cliff-straight.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/orc-encampment/grimroot-camp.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/boulder-cluster.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/cliff-corner.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/woodland-shrine/mossveil-sanctuary.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/trails-kit/stepping-stones.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/swamp-patch.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/reed-cluster.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/trails-kit/muddy-bank.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/watermill.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/abandoned-mine/hollowvein-diggings.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/trails-kit/grassy-verge.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/wayside-shrine.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/bell-tower.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/roadside-inn.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/river-ferry/reedwake-crossing.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/lava-pool.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/dormant-caldera.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/trails-kit/ash-apron.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/active-volcano.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/trails-kit/cooling-crust.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/basalt-columns.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/trails-kit/ruined-arch.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/standing-stones.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/trails-kit/abandoned-camp.glb",
+      "status": 200
+    }
+  ],
+  "rejected": [],
+  "screenshots": [
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\desktop-twinward.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\desktop-wintercrown.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\desktop-grimroot.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\desktop-mossveil.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\desktop-hollowvein.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\desktop-reedwake.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\desktop-amberrest.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\desktop-ashfall.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\desktop-eldercircle.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\desktop-gate-arrived.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\desktop-chart.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\mobile-twinward.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\mobile-wintercrown.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\mobile-grimroot.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\mobile-mossveil.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\mobile-hollowvein.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\mobile-reedwake.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\mobile-amberrest.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\mobile-ashfall.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\mobile-eldercircle.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\mobile-gate-arrived.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\world-expansion\\built-final\\mobile-chart.png"
+  ],
+  "passed": true
+}

@@ -1,0 +1,651 @@
+{
+  "url": "http://127.0.0.1:8139",
+  "mode": "candidate",
+  "scope": "Disposable seed7 v4 save; actual game desktop and emulated mobile. Actor repositioning only for regional coverage; native bridge-deck input and both-way bank traversal plus retained ford checks; dev-only actual player mesh height; built uses movement/screenshots. Not physical-phone performance.",
+  "checks": [
+    {
+      "name": "desktop-expanded-save-and-look",
+      "ok": true,
+      "state": {
+        "side": 1145,
+        "width": 1145,
+        "look": {
+          "schema": "emberhall.look/1",
+          "hairStyle": "crop",
+          "skin": "#96795d",
+          "garb": "#526b54"
+        }
+      }
+    },
+    {
+      "name": "desktop-bridge-download",
+      "ok": true
+    },
+    {
+      "name": "desktop-native-deck-input",
+      "ok": true,
+      "deckCommand": {
+        "kind": "walk",
+        "tx": 952,
+        "ty": 560,
+        "targetId": null,
+        "spell": null
+      }
+    },
+    {
+      "name": "desktop-on-deck-arrival",
+      "ok": true,
+      "deckActor": {
+        "x": 952,
+        "z": 560
+      },
+      "canonicalGroundY": 1.2
+    },
+    {
+      "name": "desktop-ferry-download",
+      "ok": true
+    },
+    {
+      "name": "desktop-snowmelt-1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 755,
+        "ty": 268,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 873.192413582174,
+        "y": 565.4988989749129
+      }
+    },
+    {
+      "name": "desktop-snowmelt-1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 755,
+        "z": 268,
+        "path": []
+      }
+    },
+    {
+      "name": "desktop-snowmelt--1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 745,
+        "ty": 268,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 589.1194307111042,
+        "y": 414.4943261365991
+      }
+    },
+    {
+      "name": "desktop-snowmelt--1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 745,
+        "z": 268,
+        "path": []
+      }
+    },
+    {
+      "name": "desktop-reedwake-1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 958,
+        "ty": 560,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 907.0191014649088,
+        "y": 583.4801392274796
+      }
+    },
+    {
+      "name": "desktop-reedwake-1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 958,
+        "z": 560,
+        "path": []
+      }
+    },
+    {
+      "name": "desktop-reedwake--1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 946,
+        "ty": 560,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 565.1979450464803,
+        "y": 401.7783906472873
+      }
+    },
+    {
+      "name": "desktop-reedwake--1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 946,
+        "z": 560,
+        "path": []
+      }
+    },
+    {
+      "name": "desktop-south-1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 950,
+        "ty": 820,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 1054.9337129647326,
+        "y": 662.1070558048077
+      }
+    },
+    {
+      "name": "desktop-south-1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 950,
+        "z": 820,
+        "path": []
+      }
+    },
+    {
+      "name": "desktop-south--1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 930,
+        "ty": 820,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 476.0071392087687,
+        "y": 354.3672662224764
+      }
+    },
+    {
+      "name": "desktop-south--1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 930,
+        "z": 820,
+        "path": []
+      }
+    },
+    {
+      "name": "desktop-legacy-scar-preserved",
+      "ok": true,
+      "scar": {
+        "h": 2,
+        "kind": "dirt"
+      }
+    },
+    {
+      "name": "desktop-chart-river-water-pixels",
+      "ok": true,
+      "colors": [
+        {
+          "x": 800,
+          "z": 340,
+          "rgba": [
+            58,
+            74,
+            88,
+            255
+          ]
+        },
+        {
+          "x": 990,
+          "z": 660,
+          "rgba": [
+            58,
+            74,
+            88,
+            255
+          ]
+        },
+        {
+          "x": 970,
+          "z": 940,
+          "rgba": [
+            58,
+            74,
+            88,
+            255
+          ]
+        },
+        {
+          "x": 1100,
+          "z": 1134,
+          "rgba": [
+            58,
+            74,
+            88,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "desktop-no-horizontal-overflow",
+      "ok": true
+    },
+    {
+      "name": "mobile-expanded-save-and-look",
+      "ok": true,
+      "state": {
+        "side": 1145,
+        "width": 1145,
+        "look": {
+          "schema": "emberhall.look/1",
+          "hairStyle": "crop",
+          "skin": "#96795d",
+          "garb": "#526b54"
+        }
+      }
+    },
+    {
+      "name": "mobile-bridge-download",
+      "ok": true
+    },
+    {
+      "name": "mobile-native-deck-input",
+      "ok": true,
+      "deckCommand": {
+        "kind": "walk",
+        "tx": 952,
+        "ty": 560,
+        "targetId": null,
+        "spell": null
+      }
+    },
+    {
+      "name": "mobile-on-deck-arrival",
+      "ok": true,
+      "deckActor": {
+        "x": 952,
+        "z": 560
+      },
+      "canonicalGroundY": 1.2
+    },
+    {
+      "name": "mobile-ferry-download",
+      "ok": true
+    },
+    {
+      "name": "mobile-snowmelt-1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 755,
+        "ty": 268,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 259.74649432363196,
+        "y": 458.1359537832898
+      }
+    },
+    {
+      "name": "mobile-snowmelt-1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 755,
+        "z": 268,
+        "path": []
+      }
+    },
+    {
+      "name": "mobile-snowmelt--1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 745,
+        "ty": 268,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 135.15779067978838,
+        "y": 392.0489975838779
+      }
+    },
+    {
+      "name": "mobile-snowmelt--1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 745,
+        "z": 268,
+        "path": []
+      }
+    },
+    {
+      "name": "mobile-reedwake-1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 958,
+        "ty": 560,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 273.33779972649256,
+        "y": 465.3453393742936
+      }
+    },
+    {
+      "name": "mobile-reedwake-1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 958,
+        "z": 560,
+        "path": []
+      }
+    },
+    {
+      "name": "mobile-reedwake--1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 946,
+        "ty": 560,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 123.72919631995644,
+        "y": 385.98680259517215
+      }
+    },
+    {
+      "name": "mobile-reedwake--1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 946,
+        "z": 560,
+        "path": []
+      }
+    },
+    {
+      "name": "mobile-south-1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 950,
+        "ty": 820,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 330.02591932217666,
+        "y": 495.41504206143645
+      }
+    },
+    {
+      "name": "mobile-south-1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 950,
+        "z": 820,
+        "path": []
+      }
+    },
+    {
+      "name": "mobile-south--1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 930,
+        "ty": 820,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 79.6829802177325,
+        "y": 362.6228838034765
+      }
+    },
+    {
+      "name": "mobile-south--1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 930,
+        "z": 820,
+        "path": []
+      }
+    },
+    {
+      "name": "mobile-legacy-scar-preserved",
+      "ok": true,
+      "scar": {
+        "h": 2,
+        "kind": "dirt"
+      }
+    },
+    {
+      "name": "mobile-chart-river-water-pixels",
+      "ok": true,
+      "colors": [
+        {
+          "x": 800,
+          "z": 340,
+          "rgba": [
+            58,
+            74,
+            88,
+            255
+          ]
+        },
+        {
+          "x": 990,
+          "z": 660,
+          "rgba": [
+            58,
+            74,
+            88,
+            255
+          ]
+        },
+        {
+          "x": 970,
+          "z": 940,
+          "rgba": [
+            58,
+            74,
+            88,
+            255
+          ]
+        },
+        {
+          "x": 1100,
+          "z": 1134,
+          "rgba": [
+            58,
+            74,
+            88,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "mobile-no-horizontal-overflow",
+      "ok": true
+    },
+    {
+      "name": "no-page-or-console-errors",
+      "ok": true,
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "requests": [
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8139/art/landscape-kit/swamp-patch.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8139/art/buildings-landmarks/watermill.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8139/art/landscape-kit/reed-cluster.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8139/art/river-bridge/reedwake-bridge.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8139/art/trails-kit/muddy-bank.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8139/art/reedwake-waterfront/reedwake-crossing.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8139/art/landscape-kit/mountain-ridge.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8139/art/landscape-kit/rocky-peak.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8139/art/landscape-kit/snowcap-peak.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8139/art/trails-kit/trail-cairn.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8139/art/trails-kit/snowmelt-bank.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8139/art/trails-kit/scree-slope.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8139/art/landscape-kit/swamp-patch.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8139/art/buildings-landmarks/watermill.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8139/art/landscape-kit/reed-cluster.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8139/art/trails-kit/muddy-bank.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8139/art/river-bridge/reedwake-bridge.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8139/art/reedwake-waterfront/reedwake-crossing.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8139/art/landscape-kit/mountain-ridge.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8139/art/landscape-kit/snowcap-peak.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8139/art/landscape-kit/rocky-peak.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8139/art/trails-kit/snowmelt-bank.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8139/art/trails-kit/trail-cairn.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8139/art/trails-kit/scree-slope.glb",
+      "status": 200
+    }
+  ],
+  "rejected": [],
+  "screenshots": [
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\desktop-bridge-normal-camera.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\desktop-bridge-on-deck.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\desktop-snowmelt-before.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\desktop-snowmelt-returned.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\desktop-reedwake-before.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\desktop-reedwake-returned.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\desktop-south-before.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\desktop-south-returned.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\desktop-mountain-source.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\desktop-meander.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\desktop-south-mouth.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\desktop-chart.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\mobile-bridge-normal-camera.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\mobile-bridge-on-deck.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\mobile-snowmelt-before.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\mobile-snowmelt-returned.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\mobile-reedwake-before.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\mobile-reedwake-returned.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\mobile-south-before.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\mobile-south-returned.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\mobile-mountain-source.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\mobile-meander.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\mobile-south-mouth.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\reedwake-waterfront\\built-parent\\mobile-chart.png"
+  ],
+  "passed": true
+}

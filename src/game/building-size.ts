@@ -1,3 +1,4 @@
+import { sceneryReserved } from "./frontier.ts";
 import type { BuildingKind, World } from "./types.ts";
 
 export const VOX = 0.5;
@@ -56,6 +57,7 @@ export function siteError(world: World, kind: BuildingKind, tx: number, ty: numb
   const box = buildingBox(kind, tx, ty);
   for (let z = Math.floor(box.z0); z <= Math.floor(box.z1 - 1e-4); z++) {
     for (let x = Math.floor(box.x0); x <= Math.floor(box.x1 - 1e-4); x++) {
+      if (sceneryReserved(x, z)) return "A landmark stands here.";
       const tile = world.tiles[z]?.[x];
       if (!tile || tile.kind === "water" || tile.kind === "wall" || tile.kind === "pit") return "No footing.";
     }

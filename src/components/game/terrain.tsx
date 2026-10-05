@@ -1,3 +1,5 @@
+import { bridgeDeckAt, bridgeGroundY, bridgeTerrainY, bridgeSurfaceKind, REEDWAKE_BRIDGE } from "../../game/river-bridge.ts";
+import { isFrontierRiverSurface } from "../../game/frontier-river.ts";
 import { createGroundUpdatePlanner } from "./ground-update-planner.ts";
 import { floraRollEligible } from "./flora-eligibility.ts";
 import { createTerrainPalette } from "./terrain-palette.ts";
@@ -176,19 +178,24 @@ function kindAt(world: World, tx: number, ty: number): TileKind {
   return world.tiles[ty]?.[tx]?.kind ?? "grass";
 }
 
+function surfaceKindAt(world: World, x: number, z: number): TileKind {
+  return bridgeSurfaceKind(x, z, kindAt(world, x, z));
+}
+
 function colorAt(world: World, x: number, z: number, out: THREE.Color, weights: ReturnType<typeof biomeWeights>) {
   const x0 = Math.floor(x);
   const z0 = Math.floor(z);
   const fx = x - x0;
   const fz = z - z0;
   const palette = getKindPalette();
-  c00.copy(palette[kindAt(world, x0, z0)]);
-  c10.copy(palette[kindAt(world, x0 + 1, z0)]);
-  c01.copy(palette[kindAt(world, x0, z0 + 1)]);
-  c11.copy(palette[kindAt(world, x0 + 1, z0 + 1)]);
+  c00.copy(palette[surfaceKindAt(world, x0, z0)]);
+  c10.copy(palette[surfaceKindAt(world, x0 + 1, z0)]);
+  c01.copy(palette[surfaceKindAt(world, x0, z0 + 1)]);
+  c11.copy(palette[surfaceKindAt(world, x0 + 1, z0 + 1)]);
   out.copy(c00).lerp(c10, fx);
   tmp.copy(c01).lerp(c11, fx);
   out.lerp(tmp, fz);
+  if (isFrontierRiverSurface(Math.round(x), Math.round(z), kindAt(world, Math.round(x), Math.round(z)))) return;
   const w = weights;
   if (w.tundra > 0.04) out.lerp(COL_GROUND_SNOW, w.tundra * 0.62);
   if (w.taiga > 0.04) out.lerp(COL_GROUND_TAIGA, w.taiga * 0.4);
@@ -204,10 +211,10 @@ function coverAt(world: World, x: number, z: number, dest: Float32Array, i: numb
   const z0 = Math.floor(z);
   const fx = x - x0;
   const fz = z - z0;
-  const a = COVER[kindAt(world, x0, z0)];
-  const b = COVER[kindAt(world, x0 + 1, z0)];
-  const c = COVER[kindAt(world, x0, z0 + 1)];
-  const d = COVER[kindAt(world, x0 + 1, z0 + 1)];
+  const a = COVER[surfaceKindAt(world, x0, z0)];
+  const b = COVER[surfaceKindAt(world, x0 + 1, z0)];
+  const c = COVER[surfaceKindAt(world, x0, z0 + 1)];
+  const d = COVER[surfaceKindAt(world, x0 + 1, z0 + 1)];
   const sx0 = a[0] + (b[0] - a[0]) * fx;
   const sx1 = c[0] + (d[0] - c[0]) * fx;
   const sy0 = a[1] + (b[1] - a[1]) * fx;
@@ -217,6 +224,7 @@ function coverAt(world: World, x: number, z: number, dest: Float32Array, i: numb
   dest[i] = sx0 + (sx1 - sx0) * fz;
   dest[i + 1] = sy0 + (sy1 - sy0) * fz;
   dest[i + 2] = sz0 + (sz1 - sz0) * fz;
+  if (isFrontierRiverSurface(Math.round(x), Math.round(z), kindAt(world, Math.round(x), Math.round(z)))) return;
   const w = weights;
   if (w.tundra > 0.05) {
     dest[i] += (0.08 - dest[i]) * w.tundra * 0.7;
@@ -416,12 +424,16 @@ export function Terrain() {
           const i = (iz * VERTS + ix) * 3;
           const t = w.tiles[Math.round(wz)]?.[Math.round(wx)];
           arr[i] = wx;
-          arr[i + 1] = t ? groundY(w, wx, wz) : -8.05;
+          arr[i + 1] = t ? bridgeTerrainY(w, wx, wz, groundY(w, wx, wz)) : -8.05;
           arr[i + 2] = wz;
           if (t) {
             const weights = biomeWeights(wx, wz);
             colorAt(w, wx, wz, pal, weights);
             coverAt(w, wx, wz, karr, i, weights);
+            if (bridgeDeckAt(wx, wz) && bridgeGroundY(w, wx, wz) !== null) {
+              pal.set(KIND_COLOR.water);
+              karr[i] = karr[i + 1] = karr[i + 2] = 0;
+            }
           } else {
             // Off the map: sink just beneath the horizon skirt and wear the
             // sky's haze, so the world's rim melts into the distance.
@@ -782,6 +794,11 @@ export function Terrain() {
         onPointerUp={(e) => onUp(e)}
       >
         <GroundMaterial />
+      </mesh>
+      {/* Canonical deck picking remains available even if the decorative download fails. */}
+      <mesh name="reedwake-deck-pick" position={[REEDWAKE_BRIDGE.x, REEDWAKE_BRIDGE.deckY, REEDWAKE_BRIDGE.z]} rotation={[-Math.PI / 2, 0, 0]} onPointerDown={(e) => onDown(e)} onPointerMove={(e) => onMove(e)} onPointerUp={(e) => onUp(e)}>
+        <planeGeometry args={[7, 3]} />
+        <meshBasicMaterial colorWrite={false} depthWrite={false} />
       </mesh>
       {timberBatches.map(batch => {
         const geometry = timber[batch.id];

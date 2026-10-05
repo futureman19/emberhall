@@ -1,4 +1,5 @@
-import { MAP, inBounds } from "./atlas.ts";
+import { FRONTIER_ROUTES, FRONTIER_SITES, frontierRoadPoints, sceneryBlocked } from "./frontier.ts";
+import { MAP, inBounds, placeById } from "./atlas.ts";
 import type { Tile, TileKind, World } from "./types.ts";
 
 export type GridPoint = { x: number; y: number };
@@ -21,7 +22,7 @@ export function climbOk(from: Tile, to: Tile) {
 }
 
 export function walkable(world: World, tx: number, ty: number) {
-  if (!inBounds(tx, ty)) return false;
+  if (!inBounds(tx, ty) || sceneryBlocked(tx, ty)) return false;
   const t = world.tiles[ty]?.[tx];
   if (!t) return false;
   return kindWalk(t.kind);
@@ -228,6 +229,47 @@ function octile(ax: number, ay: number, bx: number, by: number) {
   return Math.max(dx, dy) + (Math.SQRT2 - 1) * Math.min(dx, dy);
 }
 
+/** Chart-scale journeys use the small road graph, validating every segment against live terrain.
+ * The existing bounded A* handles the approach; no full-map search cap increase. */
+function frontierJourney(world: World, ax: number, ay: number, bx: number, by: number, cap: number) {
+  const returning = (ax >= 512 || ay >= 512) && bx < 512 && by < 512;
+  const target = returning ? placeById("ironfold") : FRONTIER_SITES.find(p => p.tx === bx && p.ty === by);
+  if (!target) return null;
+  const nodes = [placeById("ironfold"), ...FRONTIER_SITES];
+  const entry = nodes.reduce((a, b) => Math.hypot(a.tx - ax, a.ty - ay) < Math.hypot(b.tx - ax, b.ty - ay) ? a : b);
+  const queue: string[][] = [[entry.id]];
+  const seen = new Set([entry.id]);
+  let ids: string[] | undefined;
+  while (queue.length) {
+    const route = queue.shift()!;
+    const last = route[route.length - 1]!;
+    if (last === target.id) { ids = route; break; }
+    for (const [a, b] of FRONTIER_ROUTES) {
+      const next = a === last ? b : b === last ? a : null;
+      if (next && !seen.has(next)) { seen.add(next); queue.push([...route, next]); }
+    }
+  }
+  if (!ids) return null;
+  const result = search(world, ax, ay, (x, y) => x === entry.tx && y === entry.ty, (x, y) => octile(x, y, entry.tx, entry.ty), cap);
+  if (!result) return null;
+  for (let i = 1; i < ids.length; i++) {
+    const a = placeById(ids[i - 1]!), b = placeById(ids[i]!);
+    // These are stamped straight routes. A new obstacle must fail closed, not be walked through.
+    const points = frontierRoadPoints(a, b);
+    for (let j = 1; j < points.length; j++) {
+      const [x, y] = points[j]!, [px, py] = points[j - 1]!;
+      if (!lineWalkable(world, px, py, x, y)) return null;
+      result.push({ x, y });
+    }
+  }
+  if (returning) {
+    const last = search(world, target.tx, target.ty, (x, y) => x === bx && y === by, (x, y) => octile(x, y, bx, by), cap);
+    if (!last) return null;
+    result.push(...last);
+  }
+  return result;
+}
+
 /** Find a corner-safe, smoothed route. Returned waypoints never include start. */
 export function astar(world: World, ax: number, ay: number, bx: number, by: number, cap = 9000) {
   bx = Math.max(0, Math.min(MAP - 1, Math.round(bx)));
@@ -237,6 +279,10 @@ export function astar(world: World, ax: number, ay: number, bx: number, by: numb
     if (!nearest) return null;
     bx = nearest.x;
     by = nearest.y;
+  }
+  if (cap >= 48000 && Math.hypot(bx - ax, by - ay) > 128) {
+    const journey = frontierJourney(world, ax, ay, bx, by, cap);
+    if (journey) return journey;
   }
   return search(world, ax, ay, (x, y) => x === bx && y === by, (x, y) => octile(x, y, bx, by), cap);
 }

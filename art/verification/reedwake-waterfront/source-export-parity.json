@@ -1,0 +1,583 @@
+{
+  "passed": true,
+  "source": "art/blender/reedwake-waterfront/reedwake-waterfront.blend",
+  "originalSource": "art\\blender\\river-ferry\\emberhall-reedwake.blend",
+  "originalSourceSHA256": "64e1bae287218d0bc199d1a9a3e468af8bea37c27295d1acb95337e91eab8147",
+  "placement": [
+    955,
+    0,
+    551
+  ],
+  "waterY": 0.6,
+  "bankY": 0.8,
+  "removed": [
+    "Presentation water removable",
+    "Presentation land removable",
+    "Presentation ferry silt shoal removable",
+    "Wet shoreline lip",
+    "Wet shoreline lip.001",
+    "Wet shoreline lip.002",
+    "Wet shoreline lip.003",
+    "Wet shoreline lip.004",
+    "Wet shoreline lip.005",
+    "Bank moss patch",
+    "Bank moss patch.001",
+    "Bank moss patch.002",
+    "Bank moss patch.003",
+    "Bank moss patch.004",
+    "Bank moss patch.005",
+    "Bank moss patch.006",
+    "Bank moss patch.007",
+    "Bank moss patch.008",
+    "Bank moss patch.009",
+    "Bank moss patch.010",
+    "Bank moss patch.011",
+    "Bank moss patch.012",
+    "Bank moss patch.013",
+    "Bank moss patch.014",
+    "Bank moss patch.015",
+    "Static water stroke",
+    "Static water stroke.001",
+    "Static water stroke.002",
+    "Static water stroke.003",
+    "Static water stroke.004",
+    "Static water stroke.005",
+    "Static water stroke.006",
+    "Static water stroke.007",
+    "Static water stroke.008",
+    "Static water stroke.009",
+    "Static water stroke.010",
+    "Static water stroke.011"
+  ],
+  "parts": {
+    "access-ramp": {
+      "min": [
+        0.49691343307495117,
+        0.7850539088249207,
+        0.04249999672174454
+      ],
+      "max": [
+        1.0830864906311035,
+        1.3699461221694946,
+        1.3574999570846558
+      ],
+      "objects": [
+        "Assembly access ramp plank",
+        "Assembly access ramp plank.001",
+        "Assembly access ramp plank.002",
+        "Assembly access ramp plank.003",
+        "Assembly access ramp plank.004"
+      ]
+    },
+    "stranded-ferry": {
+      "min": [
+        -4.225548267364502,
+        0.3499999940395355,
+        -3.946709632873535
+      ],
+      "max": [
+        -1.774451732635498,
+        1.5500000715255737,
+        2.0467097759246826
+      ],
+      "objects": [
+        "stranded-ferry/Heavy keel",
+        "stranded-ferry/Exposed rib floor 0",
+        "stranded-ferry/Exposed curved rib 0",
+        "stranded-ferry/Exposed curved rib 0.001",
+        "stranded-ferry/Exposed rib floor 1",
+        "stranded-ferry/Exposed curved rib 1",
+        "stranded-ferry/Exposed curved rib 1.001",
+        "stranded-ferry/Exposed rib floor 2",
+        "stranded-ferry/Exposed curved rib 2",
+        "stranded-ferry/Exposed curved rib 2.001",
+        "stranded-ferry/Exposed rib floor 3",
+        "stranded-ferry/Exposed curved rib 3",
+        "stranded-ferry/Exposed curved rib 3.001",
+        "stranded-ferry/Exposed rib floor 4",
+        "stranded-ferry/Exposed curved rib 4",
+        "stranded-ferry/Exposed curved rib 4.001",
+        "stranded-ferry/Hull strake s-1 r0 bay0",
+        "stranded-ferry/Hull strake s-1 r0 bay1",
+        "stranded-ferry/Hull strake s-1 r0 bay2",
+        "stranded-ferry/Hull strake s-1 r0 bay3",
+        "stranded-ferry/Hull strake s-1 r0 bay4",
+        "stranded-ferry/Hull strake s-1 r1 bay0",
+        "stranded-ferry/Hull strake s-1 r1 bay1",
+        "stranded-ferry/Hull strake s-1 r1 bay3",
+        "stranded-ferry/Hull strake s-1 r1 bay4",
+        "stranded-ferry/Hull strake s-1 r2 bay0",
+        "stranded-ferry/Hull strake s-1 r2 bay3",
+        "stranded-ferry/Hull strake s-1 r2 bay4",
+        "stranded-ferry/Hull strake s-1 r3 bay0",
+        "stranded-ferry/Hull strake s-1 r3 bay3",
+        "stranded-ferry/Hull strake s-1 r3 bay4",
+        "stranded-ferry/Worn gunwale",
+        "stranded-ferry/Worn gunwale.001",
+        "stranded-ferry/Worn gunwale.002",
+        "stranded-ferry/Hull strake s1 r0 bay0",
+        "stranded-ferry/Hull strake s1 r0 bay1",
+        "stranded-ferry/Hull strake s1 r0 bay2",
+        "stranded-ferry/Hull strake s1 r0 bay3",
+        "stranded-ferry/Hull strake s1 r0 bay4",
+        "stranded-ferry/Hull strake s1 r1 bay0",
+        "stranded-ferry/Hull strake s1 r1 bay1",
+        "stranded-ferry/Hull strake s1 r1 bay2",
+        "stranded-ferry/Hull strake s1 r1 bay3",
+        "stranded-ferry/Hull strake s1 r1 bay4",
+        "stranded-ferry/Hull strake s1 r2 bay0",
+        "stranded-ferry/Hull strake s1 r2 bay1",
+        "stranded-ferry/Hull strake s1 r2 bay2",
+        "stranded-ferry/Hull strake s1 r2 bay3",
+        "stranded-ferry/Hull strake s1 r2 bay4",
+        "stranded-ferry/Hull strake s1 r3 bay0",
+        "stranded-ferry/Hull strake s1 r3 bay1",
+        "stranded-ferry/Hull strake s1 r3 bay2",
+        "stranded-ferry/Hull strake s1 r3 bay3",
+        "stranded-ferry/Hull strake s1 r3 bay4",
+        "stranded-ferry/Worn gunwale.003",
+        "stranded-ferry/Worn gunwale.004",
+        "stranded-ferry/Worn gunwale.005",
+        "stranded-ferry/Worn gunwale.006",
+        "stranded-ferry/Worn gunwale.007",
+        "stranded-ferry/Rising end stem",
+        "stranded-ferry/Rising end stem.001",
+        "stranded-ferry/Surviving ferry deck 0",
+        "stranded-ferry/Surviving ferry deck 1",
+        "stranded-ferry/Surviving ferry deck 2",
+        "stranded-ferry/Surviving ferry deck 5",
+        "stranded-ferry/Surviving ferry deck 7",
+        "stranded-ferry/Surviving ferry deck 8",
+        "stranded-ferry/Broken deck splinter",
+        "stranded-ferry/Rear transverse bench",
+        "stranded-ferry/Bench leg",
+        "stranded-ferry/Bench leg.001",
+        "stranded-ferry/Hull end iron strap",
+        "stranded-ferry/Hull end iron strap.001",
+        "stranded-ferry/Discarded oar shaft",
+        "stranded-ferry/Discarded oar blade"
+      ]
+    },
+    "landing-deck": {
+      "min": [
+        -2.437999963760376,
+        0.3199999928474426,
+        -0.18999998271465302
+      ],
+      "max": [
+        0.5380001068115234,
+        1.4700000286102295,
+        1.590000033378601
+      ],
+      "objects": [
+        "landing-deck/Dock bearing pile",
+        "landing-deck/Iron pile collar",
+        "landing-deck/Dock bearing pile.001",
+        "landing-deck/Iron pile collar.001",
+        "landing-deck/Dock bearing pile.002",
+        "landing-deck/Iron pile collar.002",
+        "landing-deck/Dock bearing pile.003",
+        "landing-deck/Iron pile collar.003",
+        "landing-deck/Longitudinal deck bearer",
+        "landing-deck/Longitudinal deck bearer.001",
+        "landing-deck/Dock deck plank 00",
+        "landing-deck/Dock deck plank 01",
+        "landing-deck/Dock deck plank 02",
+        "landing-deck/Dock deck plank 03",
+        "landing-deck/Dock deck plank 04",
+        "landing-deck/Dock deck plank 05",
+        "landing-deck/Dock deck plank 06",
+        "landing-deck/Dock deck plank 07",
+        "landing-deck/Dock deck plank 08",
+        "landing-deck/Dock deck plank 09",
+        "landing-deck/Dock deck plank 10",
+        "landing-deck/Dock deck plank 11",
+        "landing-deck/Dock diagonal brace"
+      ]
+    },
+    "broken-end": {
+      "min": [
+        -4.123293876647949,
+        0.3199999928474426,
+        -0.1600000113248825
+      ],
+      "max": [
+        -2.4498610496520996,
+        1.4000000953674316,
+        1.590000033378601
+      ],
+      "objects": [
+        "broken-end/Snapped end bearer",
+        "broken-end/Snapped end bearer.001",
+        "broken-end/Broken end deck plank 00",
+        "broken-end/Broken end deck plank 01",
+        "broken-end/Broken end deck plank 02",
+        "broken-end/Broken end deck plank 03",
+        "broken-end/Broken end deck plank 04",
+        "broken-end/Broken end support",
+        "broken-end/Broken end support.001",
+        "broken-end/Trailing fractured plank"
+      ]
+    },
+    "dock-bollards": {
+      "min": [
+        -2.0399999618530273,
+        1.4000000953674316,
+        1.1322871446609497
+      ],
+      "max": [
+        -0.559999942779541,
+        2.25,
+        1.5442487001419067
+      ],
+      "objects": [
+        "dock-bollards/Mooring post",
+        "dock-bollards/Attached rope winding",
+        "dock-bollards/Attached rope winding.001",
+        "dock-bollards/Bollard cross pin",
+        "dock-bollards/Mooring post.001",
+        "dock-bollards/Attached rope winding.002",
+        "dock-bollards/Attached rope winding.003",
+        "dock-bollards/Bollard cross pin.001",
+        "dock-bollards/Sagging attached mooring rope"
+      ]
+    },
+    "bank-bollards": {
+      "min": [
+        0.7675418853759766,
+        0.800000011920929,
+        -2.3989944458007812
+      ],
+      "max": [
+        2.2324581146240234,
+        1.6500000953674316,
+        -1.801697850227356
+      ],
+      "objects": [
+        "bank-bollards/Mooring post",
+        "bank-bollards/Attached rope winding",
+        "bank-bollards/Attached rope winding.001",
+        "bank-bollards/Bollard cross pin",
+        "bank-bollards/Mooring post.001",
+        "bank-bollards/Attached rope winding.002",
+        "bank-bollards/Attached rope winding.003",
+        "bank-bollards/Bollard cross pin.001",
+        "bank-bollards/Sagging attached mooring rope"
+      ]
+    },
+    "hauling-winch": {
+      "min": [
+        0.7400000095367432,
+        0.800000011920929,
+        0.17499999701976776
+      ],
+      "max": [
+        2.630000114440918,
+        2.1050000190734863,
+        1.4249999523162842
+      ],
+      "objects": [
+        "hauling-winch/Winch sleeper",
+        "hauling-winch/Winch sleeper.001",
+        "hauling-winch/Winch upright",
+        "hauling-winch/Winch angled footing",
+        "hauling-winch/Winch upright.001",
+        "hauling-winch/Winch angled footing.001",
+        "hauling-winch/Wooden hauling drum",
+        "hauling-winch/Iron drum axle",
+        "hauling-winch/Drum end flange",
+        "hauling-winch/Drum end flange.001",
+        "hauling-winch/Wound hauling rope",
+        "hauling-winch/Crank arm",
+        "hauling-winch/Crank grip",
+        "hauling-winch/Attached loose rope end"
+      ]
+    },
+    "old-sign": {
+      "min": [
+        0.7000000476837158,
+        0.800000011920929,
+        2.0350000858306885
+      ],
+      "max": [
+        2.130000114440918,
+        3.5299999713897705,
+        2.565000057220459
+      ],
+      "objects": [
+        "old-sign/Sign stone socket",
+        "old-sign/Landing sign upright",
+        "old-sign/Sign crossarm",
+        "old-sign/Sign suspension iron",
+        "old-sign/Sign suspension iron.001",
+        "old-sign/Faded ferry signboard",
+        "old-sign/Faded ferry signboard.001",
+        "old-sign/Boat pictogram keel",
+        "old-sign/Boat pictogram stem",
+        "old-sign/Boat pictogram stem.001",
+        "old-sign/Unlit lantern top",
+        "old-sign/Unlit lantern foot",
+        "old-sign/Clouded amber lantern panes",
+        "old-sign/Lantern iron corner",
+        "old-sign/Lantern iron corner.001",
+        "old-sign/Lantern iron corner.002",
+        "old-sign/Lantern iron corner.003",
+        "old-sign/Lantern wall bracket",
+        "old-sign/Lantern hanger"
+      ]
+    },
+    "bank-cargo": {
+      "min": [
+        1.098451852798462,
+        0.800000011920929,
+        -1.5938618183135986
+      ],
+      "max": [
+        2.875810146331787,
+        1.6050000190734863,
+        -0.5051112174987793
+      ],
+      "objects": [
+        "bank-cargo/Crate side plank",
+        "bank-cargo/Crate side plank.001",
+        "bank-cargo/Crate end plank",
+        "bank-cargo/Crate end plank.001",
+        "bank-cargo/Crate side plank.002",
+        "bank-cargo/Crate side plank.003",
+        "bank-cargo/Crate end plank.002",
+        "bank-cargo/Crate end plank.003",
+        "bank-cargo/Crate side plank.004",
+        "bank-cargo/Crate side plank.005",
+        "bank-cargo/Crate end plank.004",
+        "bank-cargo/Crate end plank.005",
+        "bank-cargo/Crate side plank.006",
+        "bank-cargo/Crate side plank.007",
+        "bank-cargo/Crate end plank.006",
+        "bank-cargo/Crate end plank.007",
+        "bank-cargo/Crate lid board",
+        "bank-cargo/Crate lid board.001",
+        "bank-cargo/Crate lid board.002",
+        "bank-cargo/Crate lid board.003",
+        "bank-cargo/Crate iron binding",
+        "bank-cargo/Crate iron binding.001",
+        "bank-cargo/Washed-up barrel",
+        "bank-cargo/Barrel hoop",
+        "bank-cargo/Barrel hoop.001",
+        "bank-cargo/Barrel hoop.002",
+        "bank-cargo/Barrel bung",
+        "bank-cargo/Washed-up loose timber"
+      ]
+    },
+    "upper-bank-cargo": {
+      "min": [
+        1.3651838302612305,
+        0.800000011920929,
+        2.790172576904297
+      ],
+      "max": [
+        3.0520682334899902,
+        1.6050000190734863,
+        4.272655010223389
+      ],
+      "objects": [
+        "upper-bank-cargo/Crate side plank",
+        "upper-bank-cargo/Crate side plank.001",
+        "upper-bank-cargo/Crate end plank",
+        "upper-bank-cargo/Crate end plank.001",
+        "upper-bank-cargo/Crate side plank.002",
+        "upper-bank-cargo/Crate side plank.003",
+        "upper-bank-cargo/Crate end plank.002",
+        "upper-bank-cargo/Crate end plank.003",
+        "upper-bank-cargo/Crate side plank.004",
+        "upper-bank-cargo/Crate side plank.005",
+        "upper-bank-cargo/Crate end plank.004",
+        "upper-bank-cargo/Crate end plank.005",
+        "upper-bank-cargo/Crate side plank.006",
+        "upper-bank-cargo/Crate side plank.007",
+        "upper-bank-cargo/Crate end plank.006",
+        "upper-bank-cargo/Crate end plank.007",
+        "upper-bank-cargo/Crate lid board",
+        "upper-bank-cargo/Crate lid board.001",
+        "upper-bank-cargo/Crate lid board.002",
+        "upper-bank-cargo/Crate lid board.003",
+        "upper-bank-cargo/Crate iron binding",
+        "upper-bank-cargo/Crate iron binding.001",
+        "upper-bank-cargo/Washed-up barrel",
+        "upper-bank-cargo/Barrel hoop",
+        "upper-bank-cargo/Barrel hoop.001",
+        "upper-bank-cargo/Barrel hoop.002",
+        "upper-bank-cargo/Barrel bung",
+        "upper-bank-cargo/Washed-up loose timber"
+      ]
+    },
+    "south-reeds": {
+      "min": [
+        -0.8628603219985962,
+        0.800000011920929,
+        -3.508310317993164
+      ],
+      "max": [
+        0.7510442733764648,
+        1.8012044429779053,
+        -2.38177227973938
+      ],
+      "objects": [
+        "south-reeds/Silt mound",
+        "south-reeds/Bent reed stalk",
+        "south-reeds/Dry cattail",
+        "south-reeds/Reed blade",
+        "south-reeds/Bent reed stalk.001",
+        "south-reeds/Reed blade.001",
+        "south-reeds/Bent reed stalk.002",
+        "south-reeds/Dry cattail.001",
+        "south-reeds/Reed blade.002",
+        "south-reeds/Bent reed stalk.003",
+        "south-reeds/Reed blade.003",
+        "south-reeds/Bent reed stalk.004",
+        "south-reeds/Dry cattail.002",
+        "south-reeds/Reed blade.004",
+        "south-reeds/Bent reed stalk.005",
+        "south-reeds/Reed blade.005",
+        "south-reeds/Bent reed stalk.006",
+        "south-reeds/Dry cattail.003",
+        "south-reeds/Reed blade.006",
+        "south-reeds/Bent reed stalk.007",
+        "south-reeds/Reed blade.007",
+        "south-reeds/Bent reed stalk.008",
+        "south-reeds/Dry cattail.004",
+        "south-reeds/Reed blade.008",
+        "south-reeds/Bent reed stalk.009",
+        "south-reeds/Reed blade.009",
+        "south-reeds/Bent reed stalk.010",
+        "south-reeds/Dry cattail.005",
+        "south-reeds/Reed blade.010",
+        "south-reeds/Bent reed stalk.011",
+        "south-reeds/Reed blade.011",
+        "south-reeds/Bent reed stalk.012",
+        "south-reeds/Dry cattail.006",
+        "south-reeds/Reed blade.012",
+        "south-reeds/Stranded driftwood",
+        "south-reeds/River pebble"
+      ]
+    },
+    "north-reeds": {
+      "min": [
+        -0.6923493146896362,
+        0.800000011920929,
+        2.4074532985687256
+      ],
+      "max": [
+        0.8428559303283691,
+        1.8012044429779053,
+        3.6164703369140625
+      ],
+      "objects": [
+        "north-reeds/Silt mound",
+        "north-reeds/Bent reed stalk",
+        "north-reeds/Dry cattail",
+        "north-reeds/Reed blade",
+        "north-reeds/Bent reed stalk.001",
+        "north-reeds/Reed blade.001",
+        "north-reeds/Bent reed stalk.002",
+        "north-reeds/Dry cattail.001",
+        "north-reeds/Reed blade.002",
+        "north-reeds/Bent reed stalk.003",
+        "north-reeds/Reed blade.003",
+        "north-reeds/Bent reed stalk.004",
+        "north-reeds/Dry cattail.002",
+        "north-reeds/Reed blade.004",
+        "north-reeds/Bent reed stalk.005",
+        "north-reeds/Reed blade.005",
+        "north-reeds/Bent reed stalk.006",
+        "north-reeds/Dry cattail.003",
+        "north-reeds/Reed blade.006",
+        "north-reeds/Bent reed stalk.007",
+        "north-reeds/Reed blade.007",
+        "north-reeds/Bent reed stalk.008",
+        "north-reeds/Dry cattail.004",
+        "north-reeds/Reed blade.008",
+        "north-reeds/Bent reed stalk.009",
+        "north-reeds/Reed blade.009",
+        "north-reeds/Bent reed stalk.010",
+        "north-reeds/Dry cattail.005",
+        "north-reeds/Reed blade.010",
+        "north-reeds/Bent reed stalk.011",
+        "north-reeds/Reed blade.011",
+        "north-reeds/Bent reed stalk.012",
+        "north-reeds/Dry cattail.006",
+        "north-reeds/Reed blade.012",
+        "north-reeds/Stranded driftwood",
+        "north-reeds/River pebble"
+      ]
+    },
+    "ferry-reeds": {
+      "min": [
+        -1.8778607845306396,
+        0.800000011920929,
+        -4.2433905601501465
+      ],
+      "max": [
+        -0.34842410683631897,
+        1.8012044429779053,
+        -2.9160573482513428
+      ],
+      "objects": [
+        "ferry-reeds/Silt mound",
+        "ferry-reeds/Bent reed stalk",
+        "ferry-reeds/Dry cattail",
+        "ferry-reeds/Reed blade",
+        "ferry-reeds/Bent reed stalk.001",
+        "ferry-reeds/Reed blade.001",
+        "ferry-reeds/Bent reed stalk.002",
+        "ferry-reeds/Dry cattail.001",
+        "ferry-reeds/Reed blade.002",
+        "ferry-reeds/Bent reed stalk.003",
+        "ferry-reeds/Reed blade.003",
+        "ferry-reeds/Bent reed stalk.004",
+        "ferry-reeds/Dry cattail.002",
+        "ferry-reeds/Reed blade.004",
+        "ferry-reeds/Bent reed stalk.005",
+        "ferry-reeds/Reed blade.005",
+        "ferry-reeds/Bent reed stalk.006",
+        "ferry-reeds/Dry cattail.003",
+        "ferry-reeds/Reed blade.006",
+        "ferry-reeds/Bent reed stalk.007",
+        "ferry-reeds/Reed blade.007",
+        "ferry-reeds/Bent reed stalk.008",
+        "ferry-reeds/Dry cattail.004",
+        "ferry-reeds/Reed blade.008",
+        "ferry-reeds/Bent reed stalk.009",
+        "ferry-reeds/Reed blade.009",
+        "ferry-reeds/Bent reed stalk.010",
+        "ferry-reeds/Dry cattail.005",
+        "ferry-reeds/Reed blade.010",
+        "ferry-reeds/Bent reed stalk.011",
+        "ferry-reeds/Reed blade.011",
+        "ferry-reeds/Bent reed stalk.012",
+        "ferry-reeds/Dry cattail.006",
+        "ferry-reeds/Reed blade.012",
+        "ferry-reeds/Stranded driftwood",
+        "ferry-reeds/River pebble"
+      ]
+    }
+  },
+  "scope": "Static wreck and blocked dock; not transport or climbable deck. Original gallery untouched.",
+  "bytes": 766384,
+  "sha256": "5859e6825891c72ab03f6804869bc0f3de3e48a027763a8592d5c50aee446be4",
+  "meshes": 1,
+  "triangles": 9674,
+  "bounds": {
+    "min": [
+      -4.225548267364502,
+      0.3199999928474426,
+      -4.2433905601501465
+    ],
+    "max": [
+      3.0520682334899902,
+      3.5299999713897705,
+      4.272655010223389
+    ]
+  },
+  "sourceExportUniqueVertices": 5537,
+  "sourceExportTolerance": 0.0001
+}

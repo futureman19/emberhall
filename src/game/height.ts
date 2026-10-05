@@ -1,3 +1,4 @@
+import { bridgeGroundY } from "./river-bridge.ts";
 import { EH, MAP } from "./atlas.ts";
 import type { World } from "./types.ts";
 
@@ -16,6 +17,8 @@ export function smoothH(world: World, tx: number, ty: number) {
 }
 
 export function groundY(world: World, x: number, z: number) {
+  const deck = bridgeGroundY(world, x, z);
+  if (deck !== null) return deck;
   const x0 = Math.floor(x);
   const z0 = Math.floor(z);
   const fx = x - x0;

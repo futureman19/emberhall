@@ -1,0 +1,591 @@
+{
+  "url": "http://127.0.0.1:8138",
+  "mode": "candidate",
+  "scope": "Disposable seed7 v4 save; actual game desktop and emulated mobile. Actor repositioning only for regional coverage; native ground input plus normal simulation across all three river fords. Not physical-phone performance.",
+  "checks": [
+    {
+      "name": "desktop-expanded-save-and-look",
+      "ok": true,
+      "state": {
+        "side": 1145,
+        "width": 1145,
+        "look": {
+          "schema": "emberhall.look/1",
+          "hairStyle": "crop",
+          "skin": "#96795d",
+          "garb": "#526b54"
+        }
+      }
+    },
+    {
+      "name": "desktop-snowmelt-1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 755,
+        "ty": 268,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 873.192413582172,
+        "y": 565.4988989749129
+      }
+    },
+    {
+      "name": "desktop-snowmelt-1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 755,
+        "z": 268,
+        "path": []
+      }
+    },
+    {
+      "name": "desktop-snowmelt--1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 745,
+        "ty": 268,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 589.119430711101,
+        "y": 414.494326136599
+      }
+    },
+    {
+      "name": "desktop-snowmelt--1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 745,
+        "z": 268,
+        "path": []
+      }
+    },
+    {
+      "name": "desktop-reedwake-1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 955,
+        "ty": 560,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 808.8849196336317,
+        "y": 531.3149876579818
+      }
+    },
+    {
+      "name": "desktop-reedwake-1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 955,
+        "z": 560,
+        "path": []
+      }
+    },
+    {
+      "name": "desktop-reedwake--1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 949,
+        "ty": 560,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 639.1155613340377,
+        "y": 441.07075122279707
+      }
+    },
+    {
+      "name": "desktop-reedwake--1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 949,
+        "z": 560,
+        "path": []
+      }
+    },
+    {
+      "name": "desktop-south-1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 950,
+        "ty": 820,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 1054.9337129647306,
+        "y": 662.1070558048053
+      }
+    },
+    {
+      "name": "desktop-south-1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 950,
+        "z": 820,
+        "path": []
+      }
+    },
+    {
+      "name": "desktop-south--1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 930,
+        "ty": 820,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 476.0071392087642,
+        "y": 354.36726622247625
+      }
+    },
+    {
+      "name": "desktop-south--1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 930,
+        "z": 820,
+        "path": []
+      }
+    },
+    {
+      "name": "desktop-legacy-scar-preserved",
+      "ok": true,
+      "scar": {
+        "h": 2,
+        "kind": "dirt"
+      }
+    },
+    {
+      "name": "desktop-chart-river-water-pixels",
+      "ok": true,
+      "colors": [
+        {
+          "x": 800,
+          "z": 340,
+          "rgba": [
+            58,
+            74,
+            88,
+            255
+          ]
+        },
+        {
+          "x": 990,
+          "z": 660,
+          "rgba": [
+            58,
+            74,
+            88,
+            255
+          ]
+        },
+        {
+          "x": 970,
+          "z": 940,
+          "rgba": [
+            58,
+            74,
+            88,
+            255
+          ]
+        },
+        {
+          "x": 1100,
+          "z": 1134,
+          "rgba": [
+            58,
+            74,
+            88,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "desktop-no-horizontal-overflow",
+      "ok": true
+    },
+    {
+      "name": "mobile-expanded-save-and-look",
+      "ok": true,
+      "state": {
+        "side": 1145,
+        "width": 1145,
+        "look": {
+          "schema": "emberhall.look/1",
+          "hairStyle": "crop",
+          "skin": "#96795d",
+          "garb": "#526b54"
+        }
+      }
+    },
+    {
+      "name": "mobile-snowmelt-1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 755,
+        "ty": 268,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 259.7464943236325,
+        "y": 458.1359537832893
+      }
+    },
+    {
+      "name": "mobile-snowmelt-1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 755,
+        "z": 268,
+        "path": []
+      }
+    },
+    {
+      "name": "mobile-snowmelt--1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 745,
+        "ty": 268,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 135.15779067978832,
+        "y": 392.04899758387836
+      }
+    },
+    {
+      "name": "mobile-snowmelt--1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 745,
+        "z": 268,
+        "path": []
+      }
+    },
+    {
+      "name": "mobile-reedwake-1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 955,
+        "ty": 560,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 233.22141993587994,
+        "y": 444.06596687451906
+      }
+    },
+    {
+      "name": "mobile-reedwake-1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 955,
+        "z": 560,
+        "path": []
+      }
+    },
+    {
+      "name": "mobile-reedwake--1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 949,
+        "ty": 560,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 158.5423708248238,
+        "y": 404.45313759487436
+      }
+    },
+    {
+      "name": "mobile-reedwake--1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 949,
+        "z": 560,
+        "path": []
+      }
+    },
+    {
+      "name": "mobile-south-1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 950,
+        "ty": 820,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 330.02591932217746,
+        "y": 495.4150420614343
+      }
+    },
+    {
+      "name": "mobile-south-1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 950,
+        "z": 820,
+        "path": []
+      }
+    },
+    {
+      "name": "mobile-south--1-native-input",
+      "ok": true,
+      "command": {
+        "kind": "walk",
+        "tx": 930,
+        "ty": 820,
+        "targetId": null,
+        "spell": null
+      },
+      "input": {
+        "x": 79.6829802177323,
+        "y": 362.6228838034773
+      }
+    },
+    {
+      "name": "mobile-south--1-arrived",
+      "ok": true,
+      "arrived": {
+        "x": 930,
+        "z": 820,
+        "path": []
+      }
+    },
+    {
+      "name": "mobile-legacy-scar-preserved",
+      "ok": true,
+      "scar": {
+        "h": 2,
+        "kind": "dirt"
+      }
+    },
+    {
+      "name": "mobile-chart-river-water-pixels",
+      "ok": true,
+      "colors": [
+        {
+          "x": 800,
+          "z": 340,
+          "rgba": [
+            58,
+            74,
+            88,
+            255
+          ]
+        },
+        {
+          "x": 990,
+          "z": 660,
+          "rgba": [
+            58,
+            74,
+            88,
+            255
+          ]
+        },
+        {
+          "x": 970,
+          "z": 940,
+          "rgba": [
+            58,
+            74,
+            88,
+            255
+          ]
+        },
+        {
+          "x": 1100,
+          "z": 1134,
+          "rgba": [
+            58,
+            74,
+            88,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "mobile-no-horizontal-overflow",
+      "ok": true
+    },
+    {
+      "name": "no-page-or-console-errors",
+      "ok": true,
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "requests": [
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/mountain-ridge.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/rocky-peak.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/snowcap-peak.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/trails-kit/snowmelt-bank.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/trails-kit/trail-cairn.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/trails-kit/scree-slope.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/trails-kit/stepping-stones.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/reed-cluster.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/swamp-patch.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/trails-kit/muddy-bank.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/watermill.glb",
+      "status": 200
+    },
+    {
+      "device": "desktop",
+      "url": "http://127.0.0.1:8138/art/river-ferry/reedwake-crossing.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/mountain-ridge.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/rocky-peak.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/snowcap-peak.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/trails-kit/snowmelt-bank.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/trails-kit/trail-cairn.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/trails-kit/scree-slope.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/trails-kit/stepping-stones.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/swamp-patch.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/landscape-kit/reed-cluster.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/trails-kit/muddy-bank.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/buildings-landmarks/watermill.glb",
+      "status": 200
+    },
+    {
+      "device": "mobile",
+      "url": "http://127.0.0.1:8138/art/river-ferry/reedwake-crossing.glb",
+      "status": 200
+    }
+  ],
+  "rejected": [],
+  "screenshots": [
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\desktop-snowmelt-before.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\desktop-snowmelt-returned.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\desktop-reedwake-before.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\desktop-reedwake-returned.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\desktop-south-before.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\desktop-south-returned.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\desktop-mountain-source.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\desktop-meander.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\desktop-south-mouth.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\desktop-chart.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\mobile-snowmelt-before.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\mobile-snowmelt-returned.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\mobile-reedwake-before.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\mobile-reedwake-returned.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\mobile-south-before.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\mobile-south-returned.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\mobile-mountain-source.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\mobile-meander.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\mobile-south-mouth.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\frontier-river\\built-final\\mobile-chart.png"
+  ],
+  "passed": true
+}

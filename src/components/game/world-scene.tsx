@@ -45,6 +45,7 @@ import { Piles } from "./pile-meshes";
 import { Herbs } from "./herb-meshes";
 import { Campfires } from "./campfire-meshes";
 import { Horizon, Terrain } from "./terrain";
+import { FrontierScenery } from "./frontier-scenery";
 
 declare global {
   interface Window {
@@ -1856,6 +1857,7 @@ export function WorldScene() {
       <WeatherFx />
       <Horizon treeReduction={graphics.horizonTreeReduction} />
       <Terrain />
+      <FrontierScenery />
       <Buildings />
       <LanternwoodDressing />
       <OakStumps />
