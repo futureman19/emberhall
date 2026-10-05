@@ -86,6 +86,9 @@
     "src/components/game/placeable-meshes.tsx",
     "src/components/game/recipe-filter.ts",
     "src/components/game/resource-visuals.ts",
+    "src/components/game/rowan-character-context.ts",
+    "src/components/game/rowan-character-data.ts",
+    "src/components/game/rowan-character.tsx",
     "src/components/game/screen-rain.tsx",
     "src/components/game/settings-gump.tsx",
     "src/components/game/settlement-kit.ts",
@@ -6805,13 +6808,15 @@
         "FIGURE"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:11",
-        "src/components/game/people-meshes.tsx:29"
+        "src/components/game/look-preview.tsx:12",
+        "src/components/game/people-meshes.tsx:30",
+        "src/components/game/rowan-character-data.ts:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/look-preview.tsx",
-        "src/components/game/people-meshes.tsx"
+        "src/components/game/people-meshes.tsx",
+        "src/components/game/rowan-character-data.ts"
       ],
       "jsxTags": null,
       "states": [
@@ -6857,13 +6862,15 @@
         "FIGURE"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:11",
-        "src/components/game/people-meshes.tsx:29"
+        "src/components/game/look-preview.tsx:12",
+        "src/components/game/people-meshes.tsx:30",
+        "src/components/game/rowan-character-data.ts:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/look-preview.tsx",
-        "src/components/game/people-meshes.tsx"
+        "src/components/game/people-meshes.tsx",
+        "src/components/game/rowan-character-data.ts"
       ],
       "jsxTags": null,
       "states": [
@@ -6909,13 +6916,15 @@
         "FIGURE"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:11",
-        "src/components/game/people-meshes.tsx:29"
+        "src/components/game/look-preview.tsx:12",
+        "src/components/game/people-meshes.tsx:30",
+        "src/components/game/rowan-character-data.ts:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/look-preview.tsx",
-        "src/components/game/people-meshes.tsx"
+        "src/components/game/people-meshes.tsx",
+        "src/components/game/rowan-character-data.ts"
       ],
       "jsxTags": null,
       "states": [
@@ -6961,13 +6970,15 @@
         "FIGURE"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:11",
-        "src/components/game/people-meshes.tsx:29"
+        "src/components/game/look-preview.tsx:12",
+        "src/components/game/people-meshes.tsx:30",
+        "src/components/game/rowan-character-data.ts:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/look-preview.tsx",
-        "src/components/game/people-meshes.tsx"
+        "src/components/game/people-meshes.tsx",
+        "src/components/game/rowan-character-data.ts"
       ],
       "jsxTags": null,
       "states": [
@@ -7013,13 +7024,15 @@
         "FIGURE"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:11",
-        "src/components/game/people-meshes.tsx:29"
+        "src/components/game/look-preview.tsx:12",
+        "src/components/game/people-meshes.tsx:30",
+        "src/components/game/rowan-character-data.ts:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/look-preview.tsx",
-        "src/components/game/people-meshes.tsx"
+        "src/components/game/people-meshes.tsx",
+        "src/components/game/rowan-character-data.ts"
       ],
       "jsxTags": null,
       "states": [
@@ -7065,13 +7078,15 @@
         "FIGURE"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:11",
-        "src/components/game/people-meshes.tsx:29"
+        "src/components/game/look-preview.tsx:12",
+        "src/components/game/people-meshes.tsx:30",
+        "src/components/game/rowan-character-data.ts:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/look-preview.tsx",
-        "src/components/game/people-meshes.tsx"
+        "src/components/game/people-meshes.tsx",
+        "src/components/game/rowan-character-data.ts"
       ],
       "jsxTags": null,
       "states": [
@@ -7117,13 +7132,15 @@
         "FIGURE"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:11",
-        "src/components/game/people-meshes.tsx:29"
+        "src/components/game/look-preview.tsx:12",
+        "src/components/game/people-meshes.tsx:30",
+        "src/components/game/rowan-character-data.ts:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/look-preview.tsx",
-        "src/components/game/people-meshes.tsx"
+        "src/components/game/people-meshes.tsx",
+        "src/components/game/rowan-character-data.ts"
       ],
       "jsxTags": null,
       "states": [
@@ -7169,13 +7186,15 @@
         "FIGURE"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:11",
-        "src/components/game/people-meshes.tsx:29"
+        "src/components/game/look-preview.tsx:12",
+        "src/components/game/people-meshes.tsx:30",
+        "src/components/game/rowan-character-data.ts:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/look-preview.tsx",
-        "src/components/game/people-meshes.tsx"
+        "src/components/game/people-meshes.tsx",
+        "src/components/game/rowan-character-data.ts"
       ],
       "jsxTags": null,
       "states": [
@@ -7221,13 +7240,15 @@
         "FIGURE"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:11",
-        "src/components/game/people-meshes.tsx:29"
+        "src/components/game/look-preview.tsx:12",
+        "src/components/game/people-meshes.tsx:30",
+        "src/components/game/rowan-character-data.ts:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/look-preview.tsx",
-        "src/components/game/people-meshes.tsx"
+        "src/components/game/people-meshes.tsx",
+        "src/components/game/rowan-character-data.ts"
       ],
       "jsxTags": null,
       "states": [
@@ -7273,13 +7294,15 @@
         "FIGURE"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:11",
-        "src/components/game/people-meshes.tsx:29"
+        "src/components/game/look-preview.tsx:12",
+        "src/components/game/people-meshes.tsx:30",
+        "src/components/game/rowan-character-data.ts:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/look-preview.tsx",
-        "src/components/game/people-meshes.tsx"
+        "src/components/game/people-meshes.tsx",
+        "src/components/game/rowan-character-data.ts"
       ],
       "jsxTags": null,
       "states": [
@@ -7325,13 +7348,15 @@
         "FIGURE"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:11",
-        "src/components/game/people-meshes.tsx:29"
+        "src/components/game/look-preview.tsx:12",
+        "src/components/game/people-meshes.tsx:30",
+        "src/components/game/rowan-character-data.ts:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/look-preview.tsx",
-        "src/components/game/people-meshes.tsx"
+        "src/components/game/people-meshes.tsx",
+        "src/components/game/rowan-character-data.ts"
       ],
       "jsxTags": null,
       "states": [
@@ -7377,13 +7402,15 @@
         "HAIR"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:11",
-        "src/components/game/people-meshes.tsx:29"
+        "src/components/game/look-preview.tsx:12",
+        "src/components/game/people-meshes.tsx:30",
+        "src/components/game/rowan-character-data.ts:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/look-preview.tsx",
-        "src/components/game/people-meshes.tsx"
+        "src/components/game/people-meshes.tsx",
+        "src/components/game/rowan-character-data.ts"
       ],
       "jsxTags": null,
       "states": [
@@ -7429,13 +7456,15 @@
         "HAIR"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:11",
-        "src/components/game/people-meshes.tsx:29"
+        "src/components/game/look-preview.tsx:12",
+        "src/components/game/people-meshes.tsx:30",
+        "src/components/game/rowan-character-data.ts:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/look-preview.tsx",
-        "src/components/game/people-meshes.tsx"
+        "src/components/game/people-meshes.tsx",
+        "src/components/game/rowan-character-data.ts"
       ],
       "jsxTags": null,
       "states": [
@@ -7481,13 +7510,15 @@
         "HAIR"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:11",
-        "src/components/game/people-meshes.tsx:29"
+        "src/components/game/look-preview.tsx:12",
+        "src/components/game/people-meshes.tsx:30",
+        "src/components/game/rowan-character-data.ts:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/look-preview.tsx",
-        "src/components/game/people-meshes.tsx"
+        "src/components/game/people-meshes.tsx",
+        "src/components/game/rowan-character-data.ts"
       ],
       "jsxTags": null,
       "states": [
@@ -7533,13 +7564,15 @@
         "HAIR"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:11",
-        "src/components/game/people-meshes.tsx:29"
+        "src/components/game/look-preview.tsx:12",
+        "src/components/game/people-meshes.tsx:30",
+        "src/components/game/rowan-character-data.ts:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/look-preview.tsx",
-        "src/components/game/people-meshes.tsx"
+        "src/components/game/people-meshes.tsx",
+        "src/components/game/rowan-character-data.ts"
       ],
       "jsxTags": null,
       "states": [
@@ -7585,13 +7618,15 @@
         "HAIR"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:11",
-        "src/components/game/people-meshes.tsx:29"
+        "src/components/game/look-preview.tsx:12",
+        "src/components/game/people-meshes.tsx:30",
+        "src/components/game/rowan-character-data.ts:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
         "src/components/game/look-preview.tsx",
-        "src/components/game/people-meshes.tsx"
+        "src/components/game/people-meshes.tsx",
+        "src/components/game/rowan-character-data.ts"
       ],
       "jsxTags": null,
       "states": [
@@ -7637,8 +7672,8 @@
         "SLOT_ANCHOR"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:12",
-        "src/components/game/people-meshes.tsx:30"
+        "src/components/game/look-preview.tsx:13",
+        "src/components/game/people-meshes.tsx:31"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -7689,8 +7724,8 @@
         "SLOT_ANCHOR"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:12",
-        "src/components/game/people-meshes.tsx:30"
+        "src/components/game/look-preview.tsx:13",
+        "src/components/game/people-meshes.tsx:31"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -7741,8 +7776,8 @@
         "SLOT_ANCHOR"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:12",
-        "src/components/game/people-meshes.tsx:30"
+        "src/components/game/look-preview.tsx:13",
+        "src/components/game/people-meshes.tsx:31"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -7793,8 +7828,8 @@
         "SLOT_ANCHOR"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:12",
-        "src/components/game/people-meshes.tsx:30"
+        "src/components/game/look-preview.tsx:13",
+        "src/components/game/people-meshes.tsx:31"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -10105,7 +10140,7 @@
         "src/components/game/look-gump.tsx:6",
         "src/components/game/look-preview.tsx:1",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:12"
+        "src/components/game/people-meshes.tsx:13"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -10168,7 +10203,7 @@
         "src/components/game/look-gump.tsx:6",
         "src/components/game/look-preview.tsx:1",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:12"
+        "src/components/game/people-meshes.tsx:13"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -10231,7 +10266,7 @@
         "src/components/game/look-gump.tsx:6",
         "src/components/game/look-preview.tsx:1",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:12"
+        "src/components/game/people-meshes.tsx:13"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -10294,7 +10329,7 @@
         "src/components/game/look-gump.tsx:6",
         "src/components/game/look-preview.tsx:1",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:12"
+        "src/components/game/people-meshes.tsx:13"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -10357,7 +10392,7 @@
         "src/components/game/look-gump.tsx:6",
         "src/components/game/look-preview.tsx:1",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:12"
+        "src/components/game/people-meshes.tsx:13"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -19287,7 +19322,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -19379,7 +19414,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -19471,7 +19506,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -19563,7 +19598,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -19655,7 +19690,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -19747,7 +19782,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -19839,7 +19874,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -19931,7 +19966,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -20023,7 +20058,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -20115,7 +20150,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -20207,7 +20242,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -20299,7 +20334,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -20391,7 +20426,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -20483,7 +20518,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -20575,7 +20610,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -20667,7 +20702,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -20759,7 +20794,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -20851,7 +20886,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -20943,7 +20978,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -21035,7 +21070,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -21127,7 +21162,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -21226,7 +21261,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -21318,7 +21353,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -21410,7 +21445,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -21502,7 +21537,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -21594,7 +21629,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -21686,7 +21721,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -21778,7 +21813,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -21870,7 +21905,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -21962,7 +21997,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -22061,7 +22096,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -22153,7 +22188,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -22245,7 +22280,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -22337,7 +22372,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -22436,7 +22471,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -22528,7 +22563,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -22620,7 +22655,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -22712,7 +22747,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -22804,7 +22839,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -22896,7 +22931,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -22988,7 +23023,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -23080,7 +23115,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -23172,7 +23207,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -23264,7 +23299,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -23356,7 +23391,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -23448,7 +23483,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -23540,7 +23575,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -23632,7 +23667,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -23724,7 +23759,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -23816,7 +23851,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -23908,7 +23943,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -24000,7 +24035,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -24092,7 +24127,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -24191,7 +24226,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -24283,7 +24318,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -24375,7 +24410,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -24467,7 +24502,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -24559,7 +24594,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -24651,7 +24686,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -24743,7 +24778,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -24835,7 +24870,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -24927,7 +24962,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -25019,7 +25054,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -25111,7 +25146,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -25203,7 +25238,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -25295,7 +25330,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -25387,7 +25422,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -25479,7 +25514,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -25571,7 +25606,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -25663,7 +25698,7 @@
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/paperdoll.tsx:8",
         "src/components/game/people-meshes.tsx:1",
-        "src/components/game/people-meshes.tsx:37",
+        "src/components/game/people-meshes.tsx:38",
         "src/components/game/pile-meshes.tsx:1",
         "src/components/game/spell-gump.tsx:3",
         "src/components/game/vault-gump.tsx:1",
@@ -31825,13 +31860,13 @@
       "canonicalId": "src/components/game/authored-character.tsx#noPick",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/authored-character.tsx:13"
+        "src/components/game/authored-character.tsx:25"
       ],
       "sourceNames": [
         "noPick"
       ],
       "rendererLocations": [
-        "src/components/game/authored-character.tsx:13"
+        "src/components/game/authored-character.tsx:25"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -37851,13 +37886,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#groundAt",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:39"
+        "src/components/game/people-meshes.tsx:40"
       ],
       "sourceNames": [
         "groundAt"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:39"
+        "src/components/game/people-meshes.tsx:40"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -39278,6 +39313,372 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/resource-visuals.ts:216"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/rowan-character-context.ts#useRowan",
+      "canonicalId": "src/components/game/rowan-character-context.ts#useRowan",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/rowan-character-context.ts:7"
+      ],
+      "sourceNames": [
+        "useRowan"
+      ],
+      "rendererLocations": [
+        "src/components/game/rowan-character-context.ts:7"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/rowan-character-context.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-context.ts:7"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-context.ts:7"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/rowan-character-context.ts:7"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/rowan-character-context.ts#useRowanGeometry",
+      "canonicalId": "src/components/game/rowan-character-context.ts#useRowanGeometry",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/rowan-character-context.ts:10"
+      ],
+      "sourceNames": [
+        "useRowanGeometry"
+      ],
+      "rendererLocations": [
+        "src/components/game/rowan-character-context.ts:10"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/rowan-character-context.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-context.ts:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!(node instanceof Mesh)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-context.ts:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!enabled",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-context.ts:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:Array.isArray(node.material)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-context.ts:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:active",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-context.ts:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:enabled",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-context.ts:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-context.ts:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/rowan-character-context.ts:10"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/rowan-character-data.ts#extractRowanGeometry",
+      "canonicalId": "src/components/game/rowan-character-data.ts#extractRowanGeometry",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/rowan-character-data.ts:14"
+      ],
+      "sourceNames": [
+        "extractRowanGeometry"
+      ],
+      "rendererLocations": [
+        "src/components/game/rowan-character-data.ts:14"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/rowan-character-data.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!(material instanceof MeshStandardMaterial)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!(node instanceof Mesh) || !node.name.startsWith(\"rowan_\")",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!bucket",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!detail",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!geometry",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!result[key]",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:/^(ear_inner_|smile_)/.test(name)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:/^(hair_crown|temple_|swept_lock_)/.test(name)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:/^(palm|thumb|knuckle)_/.test(name)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:/^(sleeve|cuff|bracer)_/.test(name)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:/^(sole|boot)_/.test(name)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:/_-1(?:_|$)/.test(name)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:[\"arm\", \"hand\", \"leg\", \"foot\"].includes(part)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:attribute !== \"position\" && attribute !== \"normal\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:geometry.index",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:name.startsWith(\"expressive_brow_\")",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:name.startsWith(\"trouser_\")",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:node.parent?.name === \"rowan_head\" || name === \"neck\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:primary",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character-data.ts:14"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/rowan-character-data.ts:14"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -42614,7 +43015,7 @@
         "src/components/game/lighting.tsx:7",
         "src/components/game/mirrors-mesh.tsx:5",
         "src/components/game/oak-stumps.tsx:4",
-        "src/components/game/people-meshes.tsx:24",
+        "src/components/game/people-meshes.tsx:25",
         "src/components/game/pile-meshes.tsx:2",
         "src/components/game/placeable-meshes.tsx:3",
         "src/components/game/sky.tsx:7",
@@ -43816,13 +44217,13 @@
       "canonicalId": "src/components/game/authored-character.tsx#AuthoredCharacterFace",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/authored-character.tsx:15"
+        "src/components/game/authored-character.tsx:27"
       ],
       "sourceNames": [
         "AuthoredCharacterFace"
       ],
       "rendererLocations": [
-        "src/components/game/authored-character.tsx:15"
+        "src/components/game/authored-character.tsx:27"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -43845,10 +44246,10 @@
           "applicability": "source contract; runtime unverified"
         },
         {
-          "id": "predicate:!geometry?.head || ghost",
+          "id": "predicate:!geometry?.head || ghost || (authored && rowan.geometry)",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/authored-character.tsx:15"
+            "src/components/game/authored-character.tsx:27"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -43888,13 +44289,13 @@
       "canonicalId": "src/components/game/authored-character.tsx#AuthoredCharacterGeometry",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/authored-character.tsx:4"
+        "src/components/game/authored-character.tsx:5"
       ],
       "sourceNames": [
         "AuthoredCharacterGeometry"
       ],
       "rendererLocations": [
-        "src/components/game/authored-character.tsx:4"
+        "src/components/game/authored-character.tsx:5"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -43902,6 +44303,8 @@
       ],
       "jsxTags": [
         "boxGeometry",
+        "mesh",
+        "meshStandardMaterial",
         "primitive"
       ],
       "states": [
@@ -43910,6 +44313,46 @@
           "status": "inventoried",
           "evidence": [
             "src/components/game/authored-character.tsx:4"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:[\"arm\", \"hand\", \"leg\", \"foot\"].includes(part)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/authored-character.tsx:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:attachment",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/authored-character.tsx:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:authored",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/authored-character.tsx:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:detail.tint === \"hair\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/authored-character.tsx:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:detail.tint === \"skin\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/authored-character.tsx:5"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -43957,13 +44400,13 @@
       "canonicalId": "src/components/game/authored-character.tsx#AuthoredCharacterTunic",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/authored-character.tsx:43"
+        "src/components/game/authored-character.tsx:56"
       ],
       "sourceNames": [
         "AuthoredCharacterTunic"
       ],
       "rendererLocations": [
-        "src/components/game/authored-character.tsx:43"
+        "src/components/game/authored-character.tsx:56"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -43985,10 +44428,10 @@
           "applicability": "source contract; runtime unverified"
         },
         {
-          "id": "predicate:!geometry?.torso || ghost",
+          "id": "predicate:!geometry?.torso || ghost || (authored && rowan.geometry)",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/authored-character.tsx:43"
+            "src/components/game/authored-character.tsx:56"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -50003,13 +50446,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#BandageBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:600"
+        "src/components/game/people-meshes.tsx:601"
       ],
       "sourceNames": [
         "BandageBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:600"
+        "src/components/game/people-meshes.tsx:601"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -50097,13 +50540,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#BandageWrap",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:475"
+        "src/components/game/people-meshes.tsx:476"
       ],
       "sourceNames": [
         "BandageWrap"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:475"
+        "src/components/game/people-meshes.tsx:476"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -50187,13 +50630,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Bow",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:218"
+        "src/components/game/people-meshes.tsx:219"
       ],
       "sourceNames": [
         "Bow"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:218"
+        "src/components/game/people-meshes.tsx:219"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -50264,13 +50707,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Club",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:173"
+        "src/components/game/people-meshes.tsx:174"
       ],
       "sourceNames": [
         "Club"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:173"
+        "src/components/game/people-meshes.tsx:174"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -50328,13 +50771,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#ConstructionBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:829"
+        "src/components/game/people-meshes.tsx:830"
       ],
       "sourceNames": [
         "ConstructionBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:829"
+        "src/components/game/people-meshes.tsx:830"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -50421,13 +50864,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#ConstructionTool",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:810"
+        "src/components/game/people-meshes.tsx:811"
       ],
       "sourceNames": [
         "ConstructionTool"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:810"
+        "src/components/game/people-meshes.tsx:811"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -50508,13 +50951,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#CorpseBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:757"
+        "src/components/game/people-meshes.tsx:758"
       ],
       "sourceNames": [
         "CorpseBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:757"
+        "src/components/game/people-meshes.tsx:758"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -50609,13 +51052,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#CraftingBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:688"
+        "src/components/game/people-meshes.tsx:689"
       ],
       "sourceNames": [
         "CraftingBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:688"
+        "src/components/game/people-meshes.tsx:689"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -50726,13 +51169,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#CraftingTool",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:666"
+        "src/components/game/people-meshes.tsx:667"
       ],
       "sourceNames": [
         "CraftingTool"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:666"
+        "src/components/game/people-meshes.tsx:667"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -50823,13 +51266,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#EquipmentMat",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:101"
+        "src/components/game/people-meshes.tsx:102"
       ],
       "sourceNames": [
         "EquipmentMat"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:101"
+        "src/components/game/people-meshes.tsx:102"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -50883,13 +51326,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#ExtractionBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:778"
+        "src/components/game/people-meshes.tsx:779"
       ],
       "sourceNames": [
         "ExtractionBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:778"
+        "src/components/game/people-meshes.tsx:779"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -51040,13 +51483,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Figure",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:870"
+        "src/components/game/people-meshes.tsx:871"
       ],
       "sourceNames": [
         "Figure"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:870"
+        "src/components/game/people-meshes.tsx:871"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -51072,6 +51515,7 @@
         "MeleeSwingArc",
         "NpcInteractionBillboard",
         "PalmFlame",
+        "RowanCharacterProvider",
         "Shield",
         "boxGeometry",
         "group",
@@ -51645,13 +52089,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#FishingRod",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:308"
+        "src/components/game/people-meshes.tsx:309"
       ],
       "sourceNames": [
         "FishingRod"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:308"
+        "src/components/game/people-meshes.tsx:309"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -51711,13 +52155,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#GatheringBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:735"
+        "src/components/game/people-meshes.tsx:736"
       ],
       "sourceNames": [
         "GatheringBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:735"
+        "src/components/game/people-meshes.tsx:736"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -51836,13 +52280,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#GatheringTool",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:711"
+        "src/components/game/people-meshes.tsx:712"
       ],
       "sourceNames": [
         "GatheringTool"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:711"
+        "src/components/game/people-meshes.tsx:712"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -51932,13 +52376,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#HairMeshes",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:62"
+        "src/components/game/people-meshes.tsx:63"
       ],
       "sourceNames": [
         "HairMeshes"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:62"
+        "src/components/game/people-meshes.tsx:63"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52003,13 +52447,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Hatchet",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:124"
+        "src/components/game/people-meshes.tsx:125"
       ],
       "sourceNames": [
         "Hatchet"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:124"
+        "src/components/game/people-meshes.tsx:125"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52068,13 +52512,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Held",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:293"
+        "src/components/game/people-meshes.tsx:294"
       ],
       "sourceNames": [
         "Held"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:293"
+        "src/components/game/people-meshes.tsx:294"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52226,13 +52670,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Hoe",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:323"
+        "src/components/game/people-meshes.tsx:324"
       ],
       "sourceNames": [
         "Hoe"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:323"
+        "src/components/game/people-meshes.tsx:324"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52291,13 +52735,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Knife",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:139"
+        "src/components/game/people-meshes.tsx:140"
       ],
       "sourceNames": [
         "Knife"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:139"
+        "src/components/game/people-meshes.tsx:140"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52356,13 +52800,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Mace",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:188"
+        "src/components/game/people-meshes.tsx:189"
       ],
       "sourceNames": [
         "Mace"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:188"
+        "src/components/game/people-meshes.tsx:189"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52421,13 +52865,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Mat",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:105"
+        "src/components/game/people-meshes.tsx:106"
       ],
       "sourceNames": [
         "Mat"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:105"
+        "src/components/game/people-meshes.tsx:106"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52489,13 +52933,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#MeleeSwingArc",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:353"
+        "src/components/game/people-meshes.tsx:354"
       ],
       "sourceNames": [
         "MeleeSwingArc"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:353"
+        "src/components/game/people-meshes.tsx:354"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52567,13 +53011,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#NpcInteractionBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:849"
+        "src/components/game/people-meshes.tsx:850"
       ],
       "sourceNames": [
         "NpcInteractionBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:849"
+        "src/components/game/people-meshes.tsx:850"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52676,13 +53120,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#PalmFlame",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:394"
+        "src/components/game/people-meshes.tsx:395"
       ],
       "sourceNames": [
         "PalmFlame"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:394"
+        "src/components/game/people-meshes.tsx:395"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52789,13 +53233,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#People",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:1244"
+        "src/components/game/people-meshes.tsx:1247"
       ],
       "sourceNames": [
         "People"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:1244"
+        "src/components/game/people-meshes.tsx:1247"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52858,13 +53302,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Pick",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:338"
+        "src/components/game/people-meshes.tsx:339"
       ],
       "sourceNames": [
         "Pick"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:338"
+        "src/components/game/people-meshes.tsx:339"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52923,13 +53367,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Shield",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:273"
+        "src/components/game/people-meshes.tsx:274"
       ],
       "sourceNames": [
         "Shield"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:273"
+        "src/components/game/people-meshes.tsx:274"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52995,13 +53439,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Staff",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:203"
+        "src/components/game/people-meshes.tsx:204"
       ],
       "sourceNames": [
         "Staff"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:203"
+        "src/components/game/people-meshes.tsx:204"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -53060,13 +53504,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Sword",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:154"
+        "src/components/game/people-meshes.tsx:155"
       ],
       "sourceNames": [
         "Sword"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:154"
+        "src/components/game/people-meshes.tsx:155"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -53125,13 +53569,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Torch",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:252"
+        "src/components/game/people-meshes.tsx:253"
       ],
       "sourceNames": [
         "Torch"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:252"
+        "src/components/game/people-meshes.tsx:253"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -53559,6 +54003,66 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/placeable-meshes.tsx:110"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/rowan-character.tsx#RowanCharacterProvider",
+      "canonicalId": "src/components/game/rowan-character.tsx#RowanCharacterProvider",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/rowan-character.tsx:5"
+      ],
+      "sourceNames": [
+        "RowanCharacterProvider"
+      ],
+      "rendererLocations": [
+        "src/components/game/rowan-character.tsx:5"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/rowan-character.tsx"
+      ],
+      "jsxTags": [
+        "RowanContext.Provider"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character.tsx:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/rowan-character.tsx:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/rowan-character.tsx:5"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -204982,13 +205486,13 @@
       "canonicalId": "src/components/game/look-preview.tsx#Figure",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/look-preview.tsx:77"
+        "src/components/game/look-preview.tsx:78"
       ],
       "sourceNames": [
         "Figure"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:77"
+        "src/components/game/look-preview.tsx:78"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -205065,13 +205569,13 @@
       "canonicalId": "src/components/game/look-preview.tsx#Hair",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/look-preview.tsx:22"
+        "src/components/game/look-preview.tsx:23"
       ],
       "sourceNames": [
         "Hair"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:22"
+        "src/components/game/look-preview.tsx:23"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -205136,13 +205640,13 @@
       "canonicalId": "src/components/game/look-preview.tsx#LookPreview",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/look-preview.tsx:160"
+        "src/components/game/look-preview.tsx:161"
       ],
       "sourceNames": [
         "LookPreview"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:160"
+        "src/components/game/look-preview.tsx:161"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -205152,6 +205656,7 @@
         "Canvas",
         "Figure",
         "MirrorControls",
+        "RowanCharacterProvider",
         "circleGeometry",
         "directionalLight",
         "hemisphereLight",
@@ -205211,13 +205716,13 @@
       "canonicalId": "src/components/game/look-preview.tsx#Mat",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/look-preview.tsx:18"
+        "src/components/game/look-preview.tsx:19"
       ],
       "sourceNames": [
         "Mat"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:18"
+        "src/components/game/look-preview.tsx:19"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -205271,13 +205776,13 @@
       "canonicalId": "src/components/game/look-preview.tsx#MirrorControls",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/look-preview.tsx:130"
+        "src/components/game/look-preview.tsx:131"
       ],
       "sourceNames": [
         "MirrorControls"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:130"
+        "src/components/game/look-preview.tsx:131"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -205339,13 +205844,13 @@
       "canonicalId": "src/components/game/look-preview.tsx#PartMeshes",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/look-preview.tsx:61"
+        "src/components/game/look-preview.tsx:62"
       ],
       "sourceNames": [
         "PartMeshes"
       ],
       "rendererLocations": [
-        "src/components/game/look-preview.tsx:61"
+        "src/components/game/look-preview.tsx:62"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -228469,7 +228974,7 @@
       ],
       "rendererLocations": [
         "src/components/game/paperdoll.tsx:8",
-        "src/components/game/people-meshes.tsx:37"
+        "src/components/game/people-meshes.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -228521,7 +229026,7 @@
       ],
       "rendererLocations": [
         "src/components/game/paperdoll.tsx:8",
-        "src/components/game/people-meshes.tsx:37"
+        "src/components/game/people-meshes.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -228573,7 +229078,7 @@
       ],
       "rendererLocations": [
         "src/components/game/paperdoll.tsx:8",
-        "src/components/game/people-meshes.tsx:37"
+        "src/components/game/people-meshes.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -228625,7 +229130,7 @@
       ],
       "rendererLocations": [
         "src/components/game/paperdoll.tsx:8",
-        "src/components/game/people-meshes.tsx:37"
+        "src/components/game/people-meshes.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -228677,7 +229182,7 @@
       ],
       "rendererLocations": [
         "src/components/game/paperdoll.tsx:8",
-        "src/components/game/people-meshes.tsx:37"
+        "src/components/game/people-meshes.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -228729,7 +229234,7 @@
       ],
       "rendererLocations": [
         "src/components/game/paperdoll.tsx:8",
-        "src/components/game/people-meshes.tsx:37"
+        "src/components/game/people-meshes.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -228781,7 +229286,7 @@
       ],
       "rendererLocations": [
         "src/components/game/paperdoll.tsx:8",
-        "src/components/game/people-meshes.tsx:37"
+        "src/components/game/people-meshes.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -228833,7 +229338,7 @@
       ],
       "rendererLocations": [
         "src/components/game/paperdoll.tsx:8",
-        "src/components/game/people-meshes.tsx:37"
+        "src/components/game/people-meshes.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -228885,7 +229390,7 @@
       ],
       "rendererLocations": [
         "src/components/game/paperdoll.tsx:8",
-        "src/components/game/people-meshes.tsx:37"
+        "src/components/game/people-meshes.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -228937,7 +229442,7 @@
       ],
       "rendererLocations": [
         "src/components/game/paperdoll.tsx:8",
-        "src/components/game/people-meshes.tsx:37"
+        "src/components/game/people-meshes.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
