@@ -27,4 +27,6 @@ Reviewed whitespace-insensitive per-parent diffs and conflict blocks; source/typ
 
 Unresolved requested blockers: none. Nonblocking inherited whitespace: main's digging.test.ts and placeables/legacy-buildings.ts contain blank lines at EOF; no unrelated whitespace churn performed. Initial/abandoned gate logs are retained and superseded only by `check-verified.log`. Database migration skipped automatically because this isolated checkout has no DATABASE_URL; PGLite fallback remains the app default.
 
-Next: user/parent may inspect the local commit and evidence, then explicitly authorize a push. No automatic next action.
+Final post-check production reruns: `built-final/results.json` passes 10/10 checks and `rowan-final/results.json` passes 15/15, both with empty error lists. Selected built screenshots are committed beside the results. Owned isolated-worktree Vite processes were stopped; an unrelated original `Desktop/emberhall` server on 8080 was left untouched. Original review worktree remains at `4fa90664ee226347e22a6ca394c3ee80dc1c1878` with its same three tracked dirty paths.
+
+Implementation merge commit: `d4baadbe9ec68f5286e2cc6aa3f60c743c28e5bf`. Next: parent may inspect the local commits and evidence before pushing the existing review branch. No push or deployed verification was performed.
