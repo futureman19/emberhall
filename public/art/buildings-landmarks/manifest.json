@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "title": "Emberhall • Hearth & Heritage",
+  "units": "provisional world units (not approved tile occupancy)",
+  "axis": "glTF Y-up",
+  "pivot": "ground-level local origin; no lineup offsets",
+  "integration": "VISUAL ONLY; placement/collision suggestions are NON-AUTHORITATIVE. No map, biome, navigation or gameplay changes.",
+  "assets": [
+    {
+      "id": "hearth-cottage",
+      "name": "Hearthside Cottage",
+      "family": "Buildings",
+      "file": "hearth-cottage.glb",
+      "editableParts": 133,
+      "suggestedPlacement": "ground-origin exterior art; no interiors, roof cutaways, interactions, navigation or placement integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "hearth-cottage",
+      "bytes": 161444,
+      "sha256": "e5dbcc3173fe17982c08cfd14d9a2b1a59e3d35188b28d77e1aeaf5c517c4280",
+      "bounds": {
+        "min": [
+          -1.75,
+          0,
+          -1.527500033378601
+        ],
+        "max": [
+          2.0233569145202637,
+          3.452500104904175,
+          1.75
+        ]
+      },
+      "footprint": {
+        "width": 3.7733569145202637,
+        "depth": 3.277500033378601
+      },
+      "height": 3.452500104904175,
+      "triangles": 1924,
+      "vertices": 4132,
+      "drawPrimitives": 1,
+      "paletteColors": 528
+    },
+    {
+      "id": "roadside-inn",
+      "name": "The Amber Rest",
+      "family": "Buildings",
+      "file": "roadside-inn.glb",
+      "editableParts": 219,
+      "suggestedPlacement": "ground-origin exterior art; no interiors, roof cutaways, interactions, navigation or placement integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "roadside-inn",
+      "bytes": 207120,
+      "sha256": "6274daa90387a239e9e1ecbafe5ce206796e23e02dd3949ff9eb762493ad0941",
+      "bounds": {
+        "min": [
+          -2.4000000953674316,
+          0,
+          -1.902500033378601
+        ],
+        "max": [
+          2.4000000953674316,
+          4.702499866485596,
+          2.7274999618530273
+        ]
+      },
+      "footprint": {
+        "width": 4.800000190734863,
+        "depth": 4.629999995231628
+      },
+      "height": 4.702499866485596,
+      "triangles": 2644,
+      "vertices": 5280,
+      "drawPrimitives": 1,
+      "paletteColors": 441
+    },
+    {
+      "id": "watermill",
+      "name": "Willowbrook Mill",
+      "family": "Buildings",
+      "file": "watermill.glb",
+      "editableParts": 184,
+      "suggestedPlacement": "ground-origin exterior art; no interiors, roof cutaways, interactions, navigation or placement integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "watermill",
+      "bytes": 180980,
+      "sha256": "b7bd3af3983a1f6aae3bf5e3775a17bd0e372d207134c777451ceb019e0b63a7",
+      "bounds": {
+        "min": [
+          -1.9563713073730469,
+          0,
+          -1.7999999523162842
+        ],
+        "max": [
+          2.630000114440918,
+          3.5850000381469727,
+          2.062376022338867
+        ]
+      },
+      "footprint": {
+        "width": 4.586371421813965,
+        "depth": 3.8623759746551514
+      },
+      "height": 3.5850000381469727,
+      "triangles": 2320,
+      "vertices": 4608,
+      "drawPrimitives": 1,
+      "paletteColors": 379
+    },
+    {
+      "id": "watchtower",
+      "name": "Border Watch",
+      "family": "Buildings",
+      "file": "watchtower.glb",
+      "editableParts": 43,
+      "suggestedPlacement": "ground-origin exterior art; no interiors, roof cutaways, interactions, navigation or placement integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "watchtower",
+      "bytes": 41252,
+      "sha256": "d43ae94ac1e44fa91f3b2b209f8d3089387f8a8c26528b915f33890df72142df",
+      "bounds": {
+        "min": [
+          -1,
+          0,
+          -1
+        ],
+        "max": [
+          1,
+          4.239999771118164,
+          1.7999999523162842
+        ]
+      },
+      "footprint": {
+        "width": 2,
+        "depth": 2.799999952316284
+      },
+      "height": 4.239999771118164,
+      "triangles": 515,
+      "vertices": 1029,
+      "drawPrimitives": 1,
+      "paletteColors": 205
+    },
+    {
+      "id": "gatehouse",
+      "name": "Twinward Gate",
+      "family": "Landmarks",
+      "file": "gatehouse.glb",
+      "editableParts": 149,
+      "suggestedPlacement": "ground-origin exterior art; no interiors, roof cutaways, interactions, navigation or placement integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "gatehouse",
+      "bytes": 140892,
+      "sha256": "23073516c866ac8d24148a57309db0cca5ba784bad0245b3bef6f88ba18cb052",
+      "bounds": {
+        "min": [
+          -2.950000047683716,
+          0,
+          -1.0525000095367432
+        ],
+        "max": [
+          2.950000047683716,
+          4.039999961853027,
+          1.0525000095367432
+        ]
+      },
+      "footprint": {
+        "width": 5.900000095367432,
+        "depth": 2.1050000190734863
+      },
+      "height": 4.039999961853027,
+      "triangles": 1794,
+      "vertices": 3582,
+      "drawPrimitives": 1,
+      "paletteColors": 511
+    },
+    {
+      "id": "wayside-shrine",
+      "name": "Pilgrim’s Shelter",
+      "family": "Landmarks",
+      "file": "wayside-shrine.glb",
+      "editableParts": 79,
+      "suggestedPlacement": "ground-origin exterior art; no interiors, roof cutaways, interactions, navigation or placement integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "wayside-shrine",
+      "bytes": 82784,
+      "sha256": "b5f6cd53e74f3deb3e6dcce020bf5df0984c13ad981f4547a7cb3aa7c5168859",
+      "bounds": {
+        "min": [
+          -1.100000023841858,
+          0,
+          -1.002500057220459
+        ],
+        "max": [
+          1.100000023841858,
+          2.8450000286102295,
+          1.002500057220459
+        ]
+      },
+      "footprint": {
+        "width": 2.200000047683716,
+        "depth": 2.005000114440918
+      },
+      "height": 2.8450000286102295,
+      "triangles": 1043,
+      "vertices": 2093,
+      "drawPrimitives": 1,
+      "paletteColors": 289
+    },
+    {
+      "id": "bell-tower",
+      "name": "Evening Bell",
+      "family": "Landmarks",
+      "file": "bell-tower.glb",
+      "editableParts": 88,
+      "suggestedPlacement": "ground-origin exterior art; no interiors, roof cutaways, interactions, navigation or placement integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "bell-tower",
+      "bytes": 97552,
+      "sha256": "2570497a6f7653238b367210c9f8dd9e3cb20f800871e063095b9887bde90eb6",
+      "bounds": {
+        "min": [
+          -0.925000011920929,
+          0,
+          -0.9775000214576721
+        ],
+        "max": [
+          0.925000011920929,
+          4.414999961853027,
+          1.2100000381469727
+        ]
+      },
+      "footprint": {
+        "width": 1.850000023841858,
+        "depth": 2.1875000596046448
+      },
+      "height": 4.414999961853027,
+      "triangles": 1194,
+      "vertices": 2478,
+      "drawPrimitives": 1,
+      "paletteColors": 352
+    },
+    {
+      "id": "standing-stones",
+      "name": "The Elder Circle",
+      "family": "Landmarks",
+      "file": "standing-stones.glb",
+      "editableParts": 22,
+      "suggestedPlacement": "ground-origin exterior art; no interiors, roof cutaways, interactions, navigation or placement integration",
+      "collisionSuggestion": "NON-AUTHORITATIVE: traversal, ground clearance, blockers and sockets require separate integration approval",
+      "sourceCollection": "standing-stones",
+      "bytes": 55408,
+      "sha256": "bef85c0266256d6f63505bd7d2c5a7e05e1728fc454dce66033b99e73f1c7149",
+      "bounds": {
+        "min": [
+          -2.3721137046813965,
+          0,
+          -2.1870529651641846
+        ],
+        "max": [
+          2.2050371170043945,
+          2.145876169204712,
+          2.4191553592681885
+        ]
+      },
+      "footprint": {
+        "width": 4.577150821685791,
+        "depth": 4.606208324432373
+      },
+      "height": 2.145876169204712,
+      "triangles": 578,
+      "vertices": 1410,
+      "drawPrimitives": 1,
+      "paletteColors": 216
+    }
+  ]
+}

@@ -5,7 +5,8 @@ import { createHash } from "node:crypto";
 import { Group } from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { CROP_ORDER } from "../../game/farm.ts";
-import { extractFloraGeometry, FLORA_CROPS, FLORA_HERBS, FLORA_NAMES } from "./flora-art.ts";
+import { extractFloraGeometry, floraHerbGroundOffset, FLORA_CROPS, FLORA_HERBS, FLORA_NAMES } from "./flora-art.ts";
+import { HERB_ORDER } from "../../game/herbs.ts";
 
 const bytes = fs.readFileSync(new URL("../../../public/art/lanternwood/flora.glb", import.meta.url));
 const scene = (await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), "")).scene;
@@ -40,6 +41,31 @@ test("crop growth increases visible bounds and harvested herbs have distinct sta
   for (const id of FLORA_HERBS) {
     assert.notDeepEqual(Array.from(geometry[`herb_${id}_ready`].getAttribute("color").array), Array.from(geometry[`herb_${id}_picked`].getAttribute("color").array));
   }
+});
+test("all canonical wild herbs seat ready and picked authored bases just above soil", () => {
+  assert.deepEqual([...FLORA_HERBS].sort(), [...HERB_ORDER].sort());
+  for (const kind of HERB_ORDER) {
+    for (const ready of [true, false]) {
+      const g = geometry[`herb_${kind}_${ready ? "ready" : "picked"}`];
+      const scale = ready ? 1 : 0.62;
+      const positions = Array.from(g.getAttribute("position").array);
+      const offset = floraHerbGroundOffset(g, ready);
+      for (const soilY of [-2, 0, 0.8, 5]) {
+        const base = soilY + offset + g.boundingBox!.min.y * scale;
+        assert(Math.abs(base - soilY - 0.006) < 1e-9, `${kind}/${ready}: ${base}`);
+      }
+      assert.deepEqual(Array.from(g.getAttribute("position").array), positions, "shared geometry stays unchanged");
+    }
+  }
+});
+test("wild herb fallback keeps its original primitive root offset in both states", () => {
+  assert.equal(floraHerbGroundOffset(undefined, true), 0.06);
+  assert.equal(floraHerbGroundOffset(undefined, false), 0.06);
+});
+test("herb renderer applies geometry-aware seating without changing scale or crop beds", () => {
+  const source = fs.readFileSync(new URL("./herb-meshes.tsx", import.meta.url), "utf8");
+  assert.match(source, /position=\{\[patch\.tx, y \+ floraHerbGroundOffset\(authored, ready\), patch\.ty\]\}/);
+  assert.match(source, /scale=\{ready \? 1 : 0\.62\}/);
 });
 test("missing export fails closed instead of displaying an incomplete kit", () => {
   assert.throws(() => extractFloraGeometry(new Group()), /Missing flora/);

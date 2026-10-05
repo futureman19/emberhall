@@ -6,7 +6,11 @@ export function keepStairCut(v: { x: number; y: number; z: number; t: string }, 
   const floor = Math.round(story) * 4;
   const foregroundTower = v.x >= 18 && v.z >= 12 && v.y > floor;
   const stairMouth = v.t === "timber" && v.x >= 15 && v.x <= 18 && v.z >= 11 && v.z <= 14 && v.y > 0;
-  return foregroundTower || stairMouth;
+  // The east lip of the occupied deck sits in front of lower tread centres
+  // in the fixed southeast view. Remove it visually AND from raycasting;
+  // retaining an invisible pick proxy would still command the deck tile.
+  const stairEastLip = v.t === "timber" && v.x >= 19 && v.x <= 20 && v.z >= -9 && v.z <= 14 && v.y > 0;
+  return foregroundTower || stairMouth || stairEastLip;
 }
 
 /** Presentation only: retain the authoritative story and simulation position. */

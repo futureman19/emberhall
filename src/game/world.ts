@@ -6,6 +6,7 @@ import {
   EMBERHALL_BANKER,
   GATE,
   MAP,
+  LEGACY_MAP,
   PLACES,
   ROADS,
   inBounds,
@@ -23,6 +24,7 @@ import { initialWeather } from "./weather.ts";
 import { createResourceInventory } from "./inventory/resources.ts";
 import { createResourceNodeStateMap } from "./resources/state.ts";
 import type { BuildingKind, ClassId, Person, Tile, TileKind, World } from "./types.ts";
+import { stampFrontier, sceneryReserved } from "./frontier.ts";
 import { emitConstructionFx } from "./construction-animation.ts";
 
 let nidAcc = 1;
@@ -118,7 +120,7 @@ export function generateTiles(seed: number): Tile[][] {
     const row: Tile[] = new Array(MAP);
     for (let x = 0; x < MAP; x++) {
       const n = fbm(x, y, seed);
-      let h = Math.round(1 + n * 7 + (1 - y / MAP) * 3);
+      let h = Math.round(1 + n * 7 + Math.max(0, 1 - y / LEGACY_MAP) * 3);
       let kind: TileKind = "grass";
       if (y > 360 && y < 410 && Math.abs(x - 256) > 6) {
         const river = Math.abs(y - (384 + Math.sin(x * 0.04) * 6));
@@ -207,6 +209,7 @@ export function generateTiles(seed: number): Tile[][] {
   flatten(tiles, 261, 304, 2, 1, "cobble");
 
   stampCityTiles(tiles);
+  stampFrontier(tiles, PLACES);
   return tiles;
 }
 
@@ -216,6 +219,7 @@ export function seedFieldStones(world: World) {
   for (let y = 0; y < MAP; y++) {
     for (let x = 0; x < MAP; x++) {
       const t = tiles[y]![x]!;
+      if (sceneryReserved(x, y)) continue;
       const field = hash2(x, y, seed + 19) >= 0.99;
       const named =
         Math.hypot(x - iron.tx, y - iron.ty) <= iron.radius ||

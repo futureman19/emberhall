@@ -1,0 +1,364 @@
+{
+  "archive": "art/verification/buildings-landmarks/emberhall-buildings-landmarks-source.zip",
+  "archiveBytes": 7372860,
+  "archiveSha256": "34bf785b68c0dda56049453a9efb520a92d9ac9c2cd20446be737867023a5980",
+  "archiveReadbackVerified": true,
+  "fileCount": 71,
+  "files": [
+    {
+      "file": "art/blender/buildings-landmarks/browser_verify.mjs",
+      "bytes": 5659,
+      "sha256": "82c5db93adbcd8738edbe2f92f3e57d33beb522d600329b13426b13133bb417b"
+    },
+    {
+      "file": "art/blender/buildings-landmarks/build_buildings.py",
+      "bytes": 7012,
+      "sha256": "696ff1be09fc7b4b3821c0ca2dd86a77955f882111687769f80e3607045b947d"
+    },
+    {
+      "file": "art/blender/buildings-landmarks/designs.py",
+      "bytes": 11370,
+      "sha256": "8726fa0ba646fad0b6ab10005846891b1c1efcccfc7db82afeb01ad12394527f"
+    },
+    {
+      "file": "art/blender/buildings-landmarks/emberhall-buildings.blend",
+      "bytes": 504427,
+      "sha256": "098566c7fc15ba107091cfb158e1e3e3e7c7f6bba4c6be3638e225cb14e118f7"
+    },
+    {
+      "file": "art/blender/buildings-landmarks/package_delivery.py",
+      "bytes": 1472,
+      "sha256": "149dd392b90efc24e144ea2aac1ab722b0be2e15fa8b049653311bb4305ad577"
+    },
+    {
+      "file": "art/blender/buildings-landmarks/package_gallery.py",
+      "bytes": 2915,
+      "sha256": "ef91ff1c8dbcaeae2b97b1d8fce50ec9a3e2ed865088b4287c40f9e5c938d809"
+    },
+    {
+      "file": "art/blender/buildings-landmarks/README.md",
+      "bytes": 7754,
+      "sha256": "0479443c5bda9a020fd34eddd673103e8ba4b060de8c88135fdb7af1cd456f4b"
+    },
+    {
+      "file": "art/blender/buildings-landmarks/serve.mjs",
+      "bytes": 1129,
+      "sha256": "db840f0819f6597077d6ed259fe237a9be1408c3e839f0d37f58c9fbe0f79619"
+    },
+    {
+      "file": "art/blender/buildings-landmarks/verify.mjs",
+      "bytes": 3660,
+      "sha256": "4a4346daadc0d097c57787d8a20a45200470d57956b4fc6a2c4696677347dd83"
+    },
+    {
+      "file": "art/blender/buildings-landmarks/verify_details.py",
+      "bytes": 2499,
+      "sha256": "280c9dfab1ebf82e27678da8b9e0e565f628c0ec6022b1c4208c4777ef8152db"
+    },
+    {
+      "file": "art/blender/buildings-landmarks/verify_scope.py",
+      "bytes": 697,
+      "sha256": "0f9b2483ef739cb15eab28cf0e60f5fcadd21dfeebb8f2b9a885a1f9c89e40d9"
+    },
+    {
+      "file": "art/blender/buildings-landmarks/verify_source.py",
+      "bytes": 1889,
+      "sha256": "ae5bed93d942c22fbbde3cc5e5f293b491e0850c59ad39231590893e431cb2cd"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/bell-tower.png",
+      "bytes": 182603,
+      "sha256": "d2266234666a6a46f7fdbe3d41dbef360303821f92175da67b89de6c9277e5b0"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/browser-final.log",
+      "bytes": 2446,
+      "sha256": "1a384f3e2810042faee800ebfc861ce60c9b1ed3bf3f43b297491b71e4c4efad"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/browser-verification.json",
+      "bytes": 2445,
+      "sha256": "a5e59bfc27a3f75d87e54173ad6c620861714bc945c7608695305fd17b7ec53f"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/browser.log",
+      "bytes": 2447,
+      "sha256": "6f3985ca6e64565b60ff1ace8c1026d645824f76c83efb35c19ed4986d91f597"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/buildings-closeup.jpg",
+      "bytes": 221494,
+      "sha256": "78a002d754513c6e0fc3d8adce23120b65522e2cfc36f0905170258c85ad6c25"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/contact-sheet-before-refinement.png",
+      "bytes": 545993,
+      "sha256": "f259196918e522641f5dd5341fc1c4e6b675736973a221c15fd4778293c57706"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/contact-sheet.png",
+      "bytes": 540995,
+      "sha256": "908780ea928322d18c762e878916913c70a78dc3f6c6dadbdd58b3e43f7e8d4f"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/desktop-gallery.png",
+      "bytes": 297123,
+      "sha256": "58e7a25cabf08ca1b3ad03bcaa0af7c2323da84788b67b2941dbf21f3664812a"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/desktop-landmarks.png",
+      "bytes": 296713,
+      "sha256": "5f57f7e5174dd25ca7b8e109de8c6dd329277916d99d706ce9c46b4c8a268405"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/detail-verification.json",
+      "bytes": 814,
+      "sha256": "44dff373929c7e804c8a4630acf7573ce40c47872863b2e096ab6fe64769149e"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/detail-verify.log",
+      "bytes": 1049,
+      "sha256": "291768be6a3354f810480dc5a2415a7ecbec8b3870d9f6f0b5608f2eb5e508f7"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/details-red.log",
+      "bytes": 632,
+      "sha256": "e5c6e4327ffa4469a015dad51c99fffdf3629d46e1c4d16c4276eb66f16e43c5"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/gatehouse.png",
+      "bytes": 246763,
+      "sha256": "a523d020baaf1b760b92b5b0a4302f2a60c8ee61d708300dc23527f8948e2987"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/generate-final.log",
+      "bytes": 4172,
+      "sha256": "5c819d59005e9655bf19ded17c9424bcf68e9e4f9c5d3ffe031ad73f9114323a"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/generate.log",
+      "bytes": 4423,
+      "sha256": "468739b2b3f9aee5bbb2c3de920305c1fbbba922dd6395c2f2bd1eac78e9a439"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/geometry-verification.json",
+      "bytes": 5405,
+      "sha256": "9741bc2441b63a8d5395c2e87f55f17eb37b8a3d25d33304bb700c1c7ae3812a"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/hearth-cottage.png",
+      "bytes": 284245,
+      "sha256": "bc4db36fe582f35f4394caf5d3c327614df76b93efeff785928d4ec586cd7dea"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/landmarks-closeup.jpg",
+      "bytes": 168293,
+      "sha256": "01a6a44cc2164e687f10b2b9bcdec6b4769d7e0462a889da8c04dc6053671ae3"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/measure.log",
+      "bytes": 5406,
+      "sha256": "86f88ee2ea6887256fdbbc192febcb1853740e80c6e5d6641d62db30799a3bd9"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/mobile-gallery.png",
+      "bytes": 112864,
+      "sha256": "46d698d4d4855be65d71505d1ca8eb228ae1b00efbc02c11549bc8f15caa4dcc"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/mobile-landmarks.png",
+      "bytes": 119030,
+      "sha256": "54c69db62c13f7ea39f4e8535341bd938a106283b1145c09b586af1b6608cdeb"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/roadside-inn.png",
+      "bytes": 296348,
+      "sha256": "a5338f9877a67ebf43a1731fcc1ed617f36fc1692937cc892733cf27feb535de"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/scope-baseline.json",
+      "bytes": 54028,
+      "sha256": "98e0935133646f1d7df532b5e9d6ef56020d5a08782d23971d30a9c37b81ba38"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/scope-verification.json",
+      "bytes": 187,
+      "sha256": "97c832ab5a202ad041a9896f8bdf3590978caa6e6ffcecb8bb5598df71b981dc"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/source-verification.json",
+      "bytes": 1201,
+      "sha256": "30069bb006686081eda0ecbcfc909964768a05aee9f05bbd504a56fc2f52247a"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/source-verify.log",
+      "bytes": 1090,
+      "sha256": "ef1f722660b0a15d73d53c04f5b30c20cc6f9682eef923ea9b6cdf702deb6607"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/standing-stones.png",
+      "bytes": 167521,
+      "sha256": "9df70cf319632aaaa942b14fc0ddaa7a4fd772db056365cb85b0554dfbe0dd6b"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/verify-final.log",
+      "bytes": 5406,
+      "sha256": "86f88ee2ea6887256fdbbc192febcb1853740e80c6e5d6641d62db30799a3bd9"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/verify.log",
+      "bytes": 5406,
+      "sha256": "86f88ee2ea6887256fdbbc192febcb1853740e80c6e5d6641d62db30799a3bd9"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/watchtower.png",
+      "bytes": 208148,
+      "sha256": "50ef8acfe115a8d935f82d2813e039fa8d9119293100ec60c9dc32fe4e0adb96"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/watermill.png",
+      "bytes": 285558,
+      "sha256": "812ee3d38a0cbbd06e5e8c0615d9305391f1dd98df1dbe3453e08daf1a48cf87"
+    },
+    {
+      "file": "art/verification/buildings-landmarks/wayside-shrine.png",
+      "bytes": 218756,
+      "sha256": "398109a64af4644323987c6db7080355d5efb6d87a9a8f63dc9e80e14e653b1f"
+    },
+    {
+      "file": "public/art/buildings-landmarks/bell-tower.glb",
+      "bytes": 97552,
+      "sha256": "2570497a6f7653238b367210c9f8dd9e3cb20f800871e063095b9887bde90eb6"
+    },
+    {
+      "file": "public/art/buildings-landmarks/bell-tower.png",
+      "bytes": 182603,
+      "sha256": "d2266234666a6a46f7fdbe3d41dbef360303821f92175da67b89de6c9277e5b0"
+    },
+    {
+      "file": "public/art/buildings-landmarks/contact-sheet.jpg",
+      "bytes": 211380,
+      "sha256": "9ff462a398cc7c188f55b840bfa8ab2d989f3850d864e48e14569ef130ab043a"
+    },
+    {
+      "file": "public/art/buildings-landmarks/gallery.js",
+      "bytes": 3939,
+      "sha256": "205e99443e42c5cbee1d0fffcced9909327179c3e1f913b70d8eb433a69cba15"
+    },
+    {
+      "file": "public/art/buildings-landmarks/gatehouse.glb",
+      "bytes": 140892,
+      "sha256": "23073516c866ac8d24148a57309db0cca5ba784bad0245b3bef6f88ba18cb052"
+    },
+    {
+      "file": "public/art/buildings-landmarks/gatehouse.png",
+      "bytes": 246763,
+      "sha256": "a523d020baaf1b760b92b5b0a4302f2a60c8ee61d708300dc23527f8948e2987"
+    },
+    {
+      "file": "public/art/buildings-landmarks/hearth-cottage.glb",
+      "bytes": 161444,
+      "sha256": "e5dbcc3173fe17982c08cfd14d9a2b1a59e3d35188b28d77e1aeaf5c517c4280"
+    },
+    {
+      "file": "public/art/buildings-landmarks/hearth-cottage.png",
+      "bytes": 284245,
+      "sha256": "bc4db36fe582f35f4394caf5d3c327614df76b93efeff785928d4ec586cd7dea"
+    },
+    {
+      "file": "public/art/buildings-landmarks/index.html",
+      "bytes": 4459,
+      "sha256": "0e6b0f1105bb839b5472f3d84f8dd729e3a2aa913bd684d148644aef6215574c"
+    },
+    {
+      "file": "public/art/buildings-landmarks/manifest.json",
+      "bytes": 8848,
+      "sha256": "f4e061627def951b6d42e57a68b19ac91477709c3f613f55208e81af347ee993"
+    },
+    {
+      "file": "public/art/buildings-landmarks/roadside-inn.glb",
+      "bytes": 207120,
+      "sha256": "6274daa90387a239e9e1ecbafe5ce206796e23e02dd3949ff9eb762493ad0941"
+    },
+    {
+      "file": "public/art/buildings-landmarks/roadside-inn.png",
+      "bytes": 296348,
+      "sha256": "a5338f9877a67ebf43a1731fcc1ed617f36fc1692937cc892733cf27feb535de"
+    },
+    {
+      "file": "public/art/buildings-landmarks/standing-stones.glb",
+      "bytes": 55408,
+      "sha256": "bef85c0266256d6f63505bd7d2c5a7e05e1728fc454dce66033b99e73f1c7149"
+    },
+    {
+      "file": "public/art/buildings-landmarks/standing-stones.png",
+      "bytes": 167521,
+      "sha256": "9df70cf319632aaaa942b14fc0ddaa7a4fd772db056365cb85b0554dfbe0dd6b"
+    },
+    {
+      "file": "public/art/buildings-landmarks/vendor/addons/controls/OrbitControls.js",
+      "bytes": 40504,
+      "sha256": "faabb4e8dfd9235ee4a9fd7c9a3d75f90f1689dbd4944bd6fd32117dacec5f93"
+    },
+    {
+      "file": "public/art/buildings-landmarks/vendor/addons/loaders/GLTFLoader.js",
+      "bytes": 114959,
+      "sha256": "97642d720f16cc9a0c9844934198e4d0c023bea8e89576d0f7545d03b2d103d2"
+    },
+    {
+      "file": "public/art/buildings-landmarks/vendor/addons/utils/BufferGeometryUtils.js",
+      "bytes": 37621,
+      "sha256": "5c552223a9309883743b80538d6e9cdb45e3227f30d3ec56fb2c39b46e78d595"
+    },
+    {
+      "file": "public/art/buildings-landmarks/vendor/addons/utils/SkeletonUtils.js",
+      "bytes": 11535,
+      "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
+    },
+    {
+      "file": "public/art/buildings-landmarks/vendor/THREE-LICENSE.txt",
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "file": "public/art/buildings-landmarks/vendor/three.core.js",
+      "bytes": 1443056,
+      "sha256": "3718df126d69c125362a03340913204470d8c50238605150e57f808840fb7759"
+    },
+    {
+      "file": "public/art/buildings-landmarks/vendor/three.module.js",
+      "bytes": 650153,
+      "sha256": "bbf5ed13fe4373f5bd38b14ea8e62e9f157327da5638edc6d3863e08b167c9c7"
+    },
+    {
+      "file": "public/art/buildings-landmarks/watchtower.glb",
+      "bytes": 41252,
+      "sha256": "d43ae94ac1e44fa91f3b2b209f8d3089387f8a8c26528b915f33890df72142df"
+    },
+    {
+      "file": "public/art/buildings-landmarks/watchtower.png",
+      "bytes": 208148,
+      "sha256": "50ef8acfe115a8d935f82d2813e039fa8d9119293100ec60c9dc32fe4e0adb96"
+    },
+    {
+      "file": "public/art/buildings-landmarks/watermill.glb",
+      "bytes": 180980,
+      "sha256": "b7bd3af3983a1f6aae3bf5e3775a17bd0e372d207134c777451ceb019e0b63a7"
+    },
+    {
+      "file": "public/art/buildings-landmarks/watermill.png",
+      "bytes": 285558,
+      "sha256": "812ee3d38a0cbbd06e5e8c0615d9305391f1dd98df1dbe3453e08daf1a48cf87"
+    },
+    {
+      "file": "public/art/buildings-landmarks/wayside-shrine.glb",
+      "bytes": 82784,
+      "sha256": "b5f6cd53e74f3deb3e6dcce020bf5df0984c13ad981f4547a7cb3aa7c5168859"
+    },
+    {
+      "file": "public/art/buildings-landmarks/wayside-shrine.png",
+      "bytes": 218756,
+      "sha256": "398109a64af4644323987c6db7080355d5efb6d87a9a8f63dc9e80e14e653b1f"
+    }
+  ]
+}

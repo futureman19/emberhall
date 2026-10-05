@@ -15,6 +15,16 @@ export default tseslint.config(
       ".nitro/**",
       "node_modules/**",
       "src/routeTree.gen.ts",
+      // Unmodified upstream Three.js distributions shipped with standalone art galleries.
+      "public/art/abandoned-mine/vendor/**",
+      "public/art/buildings-landmarks/vendor/**",
+      "public/art/character-reimagined/vendor/**",
+      "public/art/landscape-kit/vendor/**",
+      "public/art/orc-encampment/vendor/**",
+      "public/art/river-ferry/vendor/**",
+      "public/art/trails-kit/vendor/**",
+      "public/art/woodland-shrine/vendor/**",
+
     ],
   },
   js.configs.recommended,

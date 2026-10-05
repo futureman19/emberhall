@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "scope": "Static geometry only; no walkability or collision acceptance",
+  "instances": [
+    {
+      "instance": "sealed-seam",
+      "asset": "sealed-mine-mouth",
+      "editableParts": 37,
+      "maxVertexTransformError": 2.384185791015625e-07
+    },
+    {
+      "instance": "track-rear",
+      "asset": "straight-track",
+      "editableParts": 19,
+      "maxVertexTransformError": 1.4901161193847656e-08
+    },
+    {
+      "instance": "track-front",
+      "asset": "straight-track",
+      "editableParts": 19,
+      "maxVertexTransformError": 2.388837865275353e-07
+    },
+    {
+      "instance": "derailed-spur",
+      "asset": "broken-track",
+      "editableParts": 15,
+      "maxVertexTransformError": 4.76837158203125e-07
+    },
+    {
+      "instance": "abandoned-cart",
+      "asset": "broken-ore-cart",
+      "editableParts": 54,
+      "maxVertexTransformError": 3.371747880871523e-07
+    },
+    {
+      "instance": "forgotten-shore",
+      "asset": "timber-shoring",
+      "editableParts": 15,
+      "maxVertexTransformError": 4.805480091749757e-07
+    },
+    {
+      "instance": "old-tools",
+      "asset": "tool-rack",
+      "editableParts": 17,
+      "maxVertexTransformError": 2.6656007498500226e-07
+    },
+    {
+      "instance": "tailings-east",
+      "asset": "spoil-heap",
+      "editableParts": 24,
+      "maxVertexTransformError": 4.76837158203125e-07
+    },
+    {
+      "instance": "tailings-west",
+      "asset": "spoil-heap",
+      "editableParts": 24,
+      "maxVertexTransformError": 3.371747880871523e-07
+    },
+    {
+      "instance": "assay-bench",
+      "asset": "mining-workbench",
+      "editableParts": 25,
+      "maxVertexTransformError": 2.6656007498500226e-07
+    }
+  ],
+  "assemblyOnlyDressingParts": 53,
+  "blockedMineSealRays": 9
+}

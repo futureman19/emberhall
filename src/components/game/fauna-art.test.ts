@@ -9,7 +9,7 @@ import { applyRisenLook, cloneFaunaArt } from "./fauna-art-data.ts";
 import { FAUNA_META } from "../../game/catalog.ts";
 
 const art = new URL("../../../public/art/lanternwood/", import.meta.url);
-const read = (file: string) => readFileSync(new URL(file, import.meta.url), "utf8").replace(/\r\n/g, "\n");
+const read = (file: string) => readFileSync(new URL(file, import.meta.url), "utf8").split(String.fromCharCode(13)).join("");
 const hash = (s: string | Buffer) => createHash("sha256").update(s).digest("hex");
 const manifest = JSON.parse(readFileSync(new URL("fauna-manifest.json", art), "utf8"));
 type Entry = { kind: keyof typeof FAUNA_ART_URLS; family: string; file: string; bytes: number; sha256: string; triangles: number; materials: number; parts: string[]; bounds: { min: number[]; max: number[] } };

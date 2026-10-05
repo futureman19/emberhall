@@ -1,0 +1,24 @@
+{
+  "review": "subagent-summary-0-20260910_144918_859468.txt",
+  "sourceCheckpointStillMatches": true,
+  "acceptedChecks": {
+    "candidate": 104,
+    "failure": 104,
+    "built": 74
+  },
+  "acceptedTotal": 282,
+  "independentLiveValidatorAndVisibleLayers": "verified from final candidate/failure results",
+  "builtVisualEvidence": "retained separate reviewed desktop/mobile comparisons in house-shade-acceptance.json",
+  "originalPolicyControl": {
+    "result": "art/verification/worldwide/house-shade-review-original-red/results.json",
+    "expectedExit": 1,
+    "onlyFailedCheck": "desktop-porch-legal-shade-valid-color",
+    "canonicalError": null,
+    "visible": true,
+    "count": 114,
+    "color": "a85a42"
+  },
+  "historicalControlCaveat": "house-shade-original-red-final predates independent live canonical assertion; do not use as independent-validator red proof",
+  "applicationChanges": false,
+  "remaining": "Duplicate building ID in low-tick loaded save remains open; no normal-save or full-world acceptance"
+}

@@ -1,0 +1,102 @@
+{
+  "passed": true,
+  "devices": [
+    {
+      "name": "desktop",
+      "passed": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loaded": [
+        "broken-sun-arch",
+        "mossy-wall",
+        "worn-paving",
+        "votive-markers",
+        "dry-offering-basin",
+        "sunleaf-altar",
+        "fallen-columns",
+        "ancient-root-tree",
+        "mossveil-sanctuary"
+      ],
+      "filter": true,
+      "rotationToggle": true,
+      "pointerDrag": true,
+      "touchDrag": false,
+      "reset": true,
+      "glbDownload": true,
+      "errors": [],
+      "frames": 102,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "mobile",
+      "passed": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loaded": [
+        "broken-sun-arch",
+        "mossy-wall",
+        "worn-paving",
+        "votive-markers",
+        "dry-offering-basin",
+        "sunleaf-altar",
+        "fallen-columns",
+        "ancient-root-tree",
+        "mossveil-sanctuary"
+      ],
+      "filter": true,
+      "rotationToggle": true,
+      "pointerDrag": true,
+      "touchDrag": true,
+      "reset": true,
+      "glbDownload": true,
+      "errors": [],
+      "frames": 102,
+      "horizontalOverflow": false
+    }
+  ],
+  "assetHttpHashes": [
+    {
+      "id": "broken-sun-arch",
+      "passed": true,
+      "sha256": "3e5e69c121531199ff123c31c1a4ab5e268d502e672aa64820c01dff2208adbe"
+    },
+    {
+      "id": "mossy-wall",
+      "passed": true,
+      "sha256": "adf7987c8ab78a7a1db45b511f9a6e6c9aa3aa5fcd4b3ab9efec12a2ecef2c95"
+    },
+    {
+      "id": "worn-paving",
+      "passed": true,
+      "sha256": "0e5f37d3068c298883bad56acbdf27debb21571f1455f6a26cfd87721949ef1b"
+    },
+    {
+      "id": "votive-markers",
+      "passed": true,
+      "sha256": "06d31de2dfcc2a12525e021c615cb7a9c8d94335d9ba92d32552eac1009c96c8"
+    },
+    {
+      "id": "dry-offering-basin",
+      "passed": true,
+      "sha256": "4a113967b0031e481e79b1787f649ad15df2bd3def7b77af171b2ba69423ab63"
+    },
+    {
+      "id": "sunleaf-altar",
+      "passed": true,
+      "sha256": "4b00faa74cc385052adb6969a70f67f91e2facae40f1be819a32777f5f69be8c"
+    },
+    {
+      "id": "fallen-columns",
+      "passed": true,
+      "sha256": "8db0e792e6a1e867cfad1682c55b2db81c300dfd573857624f873db2f9751a95"
+    },
+    {
+      "id": "ancient-root-tree",
+      "passed": true,
+      "sha256": "28f6753941b8dacc983bbfcfbf2b7dfcc48f4470cf5ba8aed24dcba815e84c45"
+    },
+    {
+      "id": "mossveil-sanctuary",
+      "passed": true,
+      "sha256": "bc69193fdcc4e7ba5b090f99e9089f56e4af35d3edca242e3e8fc8bcce80e4fa"
+    }
+  ]
+}

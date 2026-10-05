@@ -1,0 +1,194 @@
+{
+  "scope": "Controlled planted-timber presentation/lifecycle and selected rare wild-node gate fixtures. Seven species fully meet this bounded input scope; ghostwood visual/lifecycle passes but touch-only command entry remains open. Pine/willow use saved sapling fixtures due chooser ties. No natural forest, full animation, performance or release acceptance. Passing assertion counts include expected limitation observations, not all-positive UX acceptance.",
+  "verified_species": 7,
+  "catalog_count": 8,
+  "tests": 879,
+  "browser_checks": {
+    "candidate": 385,
+    "fallback": 356,
+    "built": 283
+  },
+  "browser_checks_total": 1024,
+  "species": [
+    {
+      "kind": "oak",
+      "controlled_desktop_mobile": "verified",
+      "built_output": "verified",
+      "natural_forest": "pending",
+      "performance": "pending",
+      "ordinary_planting": "verified command dispatch and completion; not menu-button interaction",
+      "evidence": {
+        "candidate": "timber-candidate-final/results.json",
+        "fallback": "timber-failure-final/results.json",
+        "built": "timber-built-v2/results.json"
+      },
+      "sha256": "e38306e785170da4e66399611d7e1e715d4ccb40b9693883f63abb66055f0f8a"
+    },
+    {
+      "kind": "pine",
+      "controlled_desktop_mobile": "verified",
+      "built_output": "verified",
+      "natural_forest": "pending",
+      "performance": "pending",
+      "ordinary_planting": "not selected by current chooser; explicit saved-sapling fixture only",
+      "evidence": {
+        "candidate": "timber-candidate-final/results.json",
+        "fallback": "timber-failure-final/results.json",
+        "built": "timber-built-v2/results.json"
+      },
+      "sha256": "b1a6eb8270e6a9abbb0cb5dac94638fe69245257829427d8b919ec88570b6128"
+    },
+    {
+      "kind": "willow",
+      "controlled_desktop_mobile": "verified",
+      "built_output": "verified",
+      "natural_forest": "pending",
+      "performance": "pending",
+      "ordinary_planting": "actual normal command selects oak at forestry0; canceled before execution, explicit saved willow sapling tested",
+      "evidence": {
+        "candidate": "willow-ash-candidate-final/results.json",
+        "fallback": "willow-ash-failure-final/results.json",
+        "built": "willow-ash-built-final/results.json"
+      },
+      "sha256": "72a718f7b2ef42ff10663b109c6cb19f465cfcb520f391369dc9e9870feebef0"
+    },
+    {
+      "kind": "birch",
+      "controlled_desktop_mobile": "verified",
+      "built_output": "verified",
+      "natural_forest": "pending",
+      "performance": "pending",
+      "ordinary_planting": "verified command dispatch and completion; not menu-button interaction",
+      "evidence": {
+        "candidate": "timber-candidate-final/results.json",
+        "fallback": "timber-failure-final/results.json",
+        "built": "timber-built-v2/results.json"
+      },
+      "sha256": "da88a759631af9efa842e830ab1cbe9264293d42c059a9c18e1bbdf9258179d0"
+    },
+    {
+      "kind": "ash",
+      "controlled_desktop_mobile": "verified",
+      "built_output": "verified",
+      "natural_forest": "pending",
+      "performance": "pending",
+      "ordinary_planting": "verified normal command and completion at forestry30; not menu-button clicking",
+      "evidence": {
+        "candidate": "willow-ash-candidate-final/results.json",
+        "fallback": "willow-ash-failure-final/results.json",
+        "built": "willow-ash-built-final/results.json"
+      },
+      "sha256": "d87c6823bb86ad0766fe019516a7ac3bc4a20aad288c7bf7a2c7566f43f23170"
+    },
+    {
+      "kind": "redwood",
+      "controlled_desktop_mobile": "verified",
+      "built_output": "verified",
+      "natural_forest": "pending",
+      "performance": "pending",
+      "ordinary_planting": "normal command dispatch and completion verified; not menu-button interaction",
+      "evidence": {
+        "candidate": "rare-timber-candidate-final/results.json",
+        "fallback": "rare-timber-failure-final/results.json",
+        "built": "rare-timber-built-final/results.json"
+      },
+      "sha256": "f7f884c0fe940f41ce1e4e7a96ae2cd4aa8a6ffc2d6edbf367242b331ddcb23b",
+      "visual_desktop_mobile": "verified at gross silhouette scope; tiny saplings not anatomically resolved",
+      "special_gates": "wild identification/extraction thresholds, persistent discovery, tier2 tool gate and capped quality verified"
+    },
+    {
+      "kind": "yew",
+      "controlled_desktop_mobile": "verified",
+      "built_output": "verified",
+      "natural_forest": "pending",
+      "performance": "pending",
+      "ordinary_planting": "normal command dispatch and completion verified; not menu-button interaction",
+      "evidence": {
+        "candidate": "rare-timber-candidate-final/results.json",
+        "fallback": "rare-timber-failure-final/results.json",
+        "built": "rare-timber-built-final/results.json"
+      },
+      "sha256": "fd707ea2f88bd4ba1b882e916fedaae861f20ca8c1287ccc505bdcf29d716cd8",
+      "visual_desktop_mobile": "verified at gross silhouette scope; tiny saplings not anatomically resolved",
+      "special_gates": "wild identification/extraction thresholds, persistent discovery, tier2 tool gate and capped quality verified"
+    },
+    {
+      "kind": "ghostwood",
+      "controlled_desktop_mobile": "partial",
+      "built_output": "visual/lifecycle verified; touch-only action entry open",
+      "natural_forest": "pending",
+      "performance": "pending",
+      "ordinary_planting": "living normal command dispatch and completion verified; ghosts cannot plant",
+      "evidence": {
+        "candidate": "rare-timber-candidate-final/results.json",
+        "fallback": "rare-timber-failure-final/results.json",
+        "built": "rare-timber-built-final/results.json"
+      },
+      "sha256": "6ab068db3d6a8cc9b27ec21b1778294d60c160aa81868b90e372ef0002429d86",
+      "visual_desktop_mobile": "verified at gross silhouette scope; tiny saplings not anatomically resolved",
+      "special_gates": "living exclusion, ghost lumberjack80 threshold, no-blade rejection and tier1 knife extraction verified",
+      "desktop_input": "verified actual right-click and Chop menu activation",
+      "mobile_input": "partial: actual tap/800ms hold do not open Chop; fixture-opened menu touch action succeeds",
+      "known_issues": [
+        "Touch-only ghostwood action entry absent in tested Chromium touch emulation.",
+        "Planted ghostwood Chop menu says Rough Oak for this site, while actual yield is ghostwood. Existing context label resolver uses the wild species."
+      ]
+    }
+  ],
+  "batches": [
+    {
+      "name": "oak-pine-birch",
+      "runs": {
+        "candidate": "timber-candidate-final",
+        "fallback": "timber-failure-final",
+        "built": "timber-built-v2"
+      },
+      "browser_checks": {
+        "candidate": 105,
+        "fallback": 94,
+        "built": 69
+      },
+      "browser_checks_total": 268
+    },
+    {
+      "name": "willow-ash",
+      "runs": {
+        "candidate": "willow-ash-candidate-final",
+        "fallback": "willow-ash-failure-final",
+        "built": "willow-ash-built-final"
+      },
+      "browser_checks": {
+        "candidate": 78,
+        "fallback": 71,
+        "built": 54
+      },
+      "browser_checks_total": 203
+    },
+    {
+      "name": "redwood-yew-ghostwood",
+      "runs": {
+        "candidate": "rare-timber-candidate-final",
+        "fallback": "rare-timber-failure-final",
+        "built": "rare-timber-built-final"
+      },
+      "browser_checks": {
+        "candidate": 202,
+        "fallback": 191,
+        "built": 160
+      },
+      "browser_checks_total": 553,
+      "limitation_observation_assertions": 12,
+      "status": "redwood/yew verified; ghostwood partial input acceptance"
+    }
+  ],
+  "latest_batch": "redwood-yew-ghostwood",
+  "latest_browser_checks": {
+    "candidate": 202,
+    "fallback": 191,
+    "built": 160
+  },
+  "partial_species": [
+    "ghostwood"
+  ],
+  "visually_reviewed_species": 8
+}

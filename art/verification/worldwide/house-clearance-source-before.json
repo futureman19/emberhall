@@ -1,0 +1,10 @@
+{
+  "src/components/game/house-gump.tsx": "a223ee8bdc7c28ca5d1d6ad8dbc026173aebc1a19ac855719f7f13341e08b06e",
+  "src/components/game/hud.tsx": "256ac369377b6b95bb3825e8d0c6e6a40ba840c2d7a858348942923a694ad6c3",
+  "src/game/house.ts": "89a7aeb206927983daad26efe5961f0e972ec086a32780d57b2ae648c75dd12f",
+  "src/game/store.ts": "6f702b913f33c22074c452eea1eb074503a557b1d4910033fd96fe08f6bdabbe",
+  "src/game/world.ts": "692b80e3c4d6f7e87f26327c431815ce801ab1b35de0abad387dacf2aba6df69",
+  "src/game/live.ts": "0c667c4b97b120a8e9ad1f835c5034738054bbe08d8fbf600c9abf624625cb11",
+  "src/game/save.ts": "d3cf6c6712b10ddb2dcc152001aef4354eb1fc95fa22cda7a3f6f8f32ab7d935",
+  "package.json": "feb167e2788a5d8bf938fa5b8d954680f85574d011d874fb1fd07705e975982a"
+}

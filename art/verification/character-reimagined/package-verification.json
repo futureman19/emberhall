@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "archive": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\character-reimagined\\emberhall-character-reimagined-source.zip",
+  "bytes": 30766322,
+  "sha256": "a6b0fd0dad4578a23959e2935645e084c61f4c90d740d5afb1053eeabe671e99",
+  "members": 166,
+  "payloadFilesVerified": 165,
+  "readback": "Every ZIP member byte length and SHA256 matched the exact current file; inventory JSON parsed back; CRC test clean.",
+  "sourceAndBrowserHashesFresh": true,
+  "preservedExistingFiles": 320,
+  "backupBlendFilesExcluded": true
+}

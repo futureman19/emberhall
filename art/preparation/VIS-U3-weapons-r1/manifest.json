@@ -1,0 +1,179 @@
+{
+  "status": "offline authored; NOT integrated or gameplay-tested",
+  "weapons": [
+    "knife",
+    "sword",
+    "club",
+    "mace",
+    "staff"
+  ],
+  "parts": [
+    {
+      "name": "knife_handle",
+      "weapon": "knife",
+      "center": [
+        0,
+        0.08,
+        0
+      ],
+      "bounds": [
+        0.04,
+        0.16,
+        0.04
+      ],
+      "sourceVertices": 48
+    },
+    {
+      "name": "knife_blade",
+      "weapon": "knife",
+      "center": [
+        0,
+        0.24,
+        0
+      ],
+      "bounds": [
+        0.05,
+        0.22,
+        0.02
+      ],
+      "sourceVertices": 16
+    },
+    {
+      "name": "sword_handle",
+      "weapon": "sword",
+      "center": [
+        0,
+        0.1,
+        0
+      ],
+      "bounds": [
+        0.045,
+        0.22,
+        0.045
+      ],
+      "sourceVertices": 48
+    },
+    {
+      "name": "sword_guard",
+      "weapon": "sword",
+      "center": [
+        0,
+        0.22,
+        0
+      ],
+      "bounds": [
+        0.16,
+        0.04,
+        0.04
+      ],
+      "sourceVertices": 10
+    },
+    {
+      "name": "sword_blade",
+      "weapon": "sword",
+      "center": [
+        0,
+        0.44,
+        0
+      ],
+      "bounds": [
+        0.055,
+        0.46,
+        0.02
+      ],
+      "sourceVertices": 16
+    },
+    {
+      "name": "club_handle",
+      "weapon": "club",
+      "center": [
+        0,
+        0.22,
+        0
+      ],
+      "bounds": [
+        0.055,
+        0.5,
+        0.055
+      ],
+      "sourceVertices": 48
+    },
+    {
+      "name": "club_head",
+      "weapon": "club",
+      "center": [
+        0,
+        0.48,
+        0
+      ],
+      "bounds": [
+        0.12,
+        0.16,
+        0.12
+      ],
+      "sourceVertices": 28
+    },
+    {
+      "name": "mace_handle",
+      "weapon": "mace",
+      "center": [
+        0,
+        0.2,
+        0
+      ],
+      "bounds": [
+        0.045,
+        0.42,
+        0.045
+      ],
+      "sourceVertices": 48
+    },
+    {
+      "name": "mace_head",
+      "weapon": "mace",
+      "center": [
+        0,
+        0.46,
+        0
+      ],
+      "bounds": [
+        0.16,
+        0.16,
+        0.16
+      ],
+      "sourceVertices": 48
+    },
+    {
+      "name": "staff_handle",
+      "weapon": "staff",
+      "center": [
+        0,
+        0.38,
+        0
+      ],
+      "bounds": [
+        0.04,
+        0.9,
+        0.04
+      ],
+      "sourceVertices": 40
+    },
+    {
+      "name": "staff_head",
+      "weapon": "staff",
+      "center": [
+        0,
+        0.86,
+        0
+      ],
+      "bounds": [
+        0.1,
+        0.1,
+        0.1
+      ],
+      "sourceVertices": 32
+    }
+  ],
+  "bytes": 43352,
+  "sha256": "579a113f2c279dd8561699217c6febb9ba17962a4e05a27ac734f1650151d98c"
+}

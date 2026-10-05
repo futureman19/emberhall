@@ -1,0 +1,98 @@
+{
+  "passed": true,
+  "boardwalkCorner": {
+    "coplanarDeck": true,
+    "overlappingDeckPlanks": false,
+    "jointSeam": 0.009999990463256836,
+    "planks": 22
+  },
+  "blenderVersion": "5.2.1 LTS",
+  "source": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\blender\\trails-kit\\emberhall-trails.blend",
+  "assetCount": 14,
+  "assets": [
+    {
+      "id": "scree-slope",
+      "editableParts": 15,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "snowmelt-bank",
+      "editableParts": 13,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "muddy-bank",
+      "editableParts": 13,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "grassy-verge",
+      "editableParts": 50,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "ash-apron",
+      "editableParts": 13,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "cooling-crust",
+      "editableParts": 9,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "boardwalk-straight",
+      "editableParts": 21,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "boardwalk-corner",
+      "editableParts": 32,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "fallen-log",
+      "editableParts": 12,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "stepping-stones",
+      "editableParts": 6,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "trail-cairn",
+      "editableParts": 10,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "guidepost",
+      "editableParts": 8,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "ruined-arch",
+      "editableParts": 24,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "abandoned-camp",
+      "editableParts": 20,
+      "groundZ": 0.0,
+      "passed": true
+    }
+  ]
+}

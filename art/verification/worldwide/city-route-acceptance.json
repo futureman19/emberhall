@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "scope": "Test-only correction of mislabeled destination on exact failing seed; native ground-out/mini-map-return on unchanged hydrated terrain. Not universal terrain/road/AI acceptance.",
+  "seed": 2469134,
+  "fullTests": 952,
+  "testSuiteParts": [
+    250,
+    702
+  ],
+  "browserAssertions": 156,
+  "browserCases": 4,
+  "nativeLegs": 32,
+  "evidence": {
+    "dev": "city-route-dev-v2",
+    "built": "city-route-built-final"
+  },
+  "changedCheckpointFiles": [
+    "src/game/city.test.ts"
+  ],
+  "checkpointFiles": 410,
+  "artFilesUnchanged": 114,
+  "movementAndTerrainBuildingsEqualAcrossDevBuilt": true,
+  "fullUiParity": false,
+  "observedTrackDifferences": [
+    "toast"
+  ],
+  "differenceDetail": "Clouds gather over the vale. transient notification in early dev frames, absent in built frames; original evidence retained. Position/path/intent/context equal.",
+  "builtFreshness": "city-route-built-freshness.json",
+  "retainedFailures": [
+    ".hermes/city-route-red.log",
+    "city-route-dev-v1/results.json"
+  ],
+  "rootCause": "city-route-root-cause.json",
+  "published": false
+}

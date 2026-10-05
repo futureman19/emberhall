@@ -1,0 +1,133 @@
+{
+  "status": "U4 preparation only; no runtime edits",
+  "buildings": [
+    {
+      "kind": "hall",
+      "route": "hall",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "dormitory",
+      "route": "commons",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "kitchen",
+      "route": "hospitality",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "yard",
+      "route": "commons",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "market",
+      "route": "hospitality",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "forge",
+      "route": "settlement",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "tavern",
+      "route": "hospitality",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "notice",
+      "route": "signage",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "board",
+      "route": "signage",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "farm",
+      "route": "commons",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "bank",
+      "route": "settlement",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "keep",
+      "route": "retained",
+      "decision": "preserve original keep; U1 acceptance pending"
+    },
+    {
+      "kind": "rampart",
+      "route": "architecture",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "rampartV",
+      "route": "architecture",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "tower",
+      "route": "architecture",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "gatehouse",
+      "route": "architecture",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "shop",
+      "route": "architecture",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "townhome",
+      "route": "architecture",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "townhouse",
+      "route": "architecture",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "cottage",
+      "route": "architecture",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "porch",
+      "route": "architecture",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "hut",
+      "route": "architecture",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    },
+    {
+      "kind": "homestead",
+      "route": "architecture",
+      "decision": "preserve existing kit; only evidence-backed polish"
+    }
+  ],
+  "count": 23,
+  "finding": "Every canonical building kind has existing authored routing or intentional original keep; missing art cannot be inferred merely from primitives.",
+  "nextOfflineScope": [
+    "Campfire stone/log geometry: preserve six stone centers, crossed-log transforms, flame refs and light",
+    "Settlement entrance/sign/interior visual census before choosing corrections",
+    "Moongate readability review only; retain station indexing, rotation and effect pulse"
+  ],
+  "exclusions": [
+    "No replacement of approved homes/fortifications by default",
+    "No new furnishings inferred from logical dormitory beds",
+    "No keep cutaway or player-root integration until QA clears"
+  ],
+  "qaState": "U1 and U3 pending; no U3 tester acknowledgment supplied"
+}

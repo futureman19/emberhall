@@ -1,0 +1,133 @@
+{
+  "status": "offline authored; NOT integrated or gameplay-tested",
+  "weapons": [
+    "bow",
+    "torch",
+    "shield",
+    "heater"
+  ],
+  "parts": [
+    {
+      "name": "bow_limb",
+      "weapon": "bow",
+      "center": [
+        0.035,
+        0.28,
+        0
+      ],
+      "bounds": [
+        0.11,
+        0.62,
+        0.04
+      ],
+      "sourceVertices": 56
+    },
+    {
+      "name": "bow_string",
+      "weapon": "bow",
+      "center": [
+        0.035,
+        0.28,
+        0
+      ],
+      "bounds": [
+        0.11,
+        0.62,
+        0.04
+      ],
+      "sourceVertices": 12
+    },
+    {
+      "name": "torch_handle",
+      "weapon": "torch",
+      "center": [
+        0,
+        0.18,
+        0
+      ],
+      "bounds": [
+        0.045,
+        0.36,
+        0.045
+      ],
+      "sourceVertices": 48
+    },
+    {
+      "name": "torch_ember",
+      "weapon": "torch",
+      "center": [
+        0,
+        0.4,
+        0
+      ],
+      "bounds": [
+        0.08,
+        0.1,
+        0.08
+      ],
+      "sourceVertices": 28
+    },
+    {
+      "name": "shield_face",
+      "weapon": "shield",
+      "center": [
+        0,
+        0,
+        0
+      ],
+      "bounds": [
+        0.28,
+        0.38,
+        0.06
+      ],
+      "sourceVertices": 25
+    },
+    {
+      "name": "shield_boss",
+      "weapon": "shield",
+      "center": [
+        0,
+        0.02,
+        0.04
+      ],
+      "bounds": [
+        0.1,
+        0.1,
+        0.04
+      ],
+      "sourceVertices": 17
+    },
+    {
+      "name": "heater_face",
+      "weapon": "heater",
+      "center": [
+        0,
+        0,
+        0
+      ],
+      "bounds": [
+        0.28,
+        0.38,
+        0.06
+      ],
+      "sourceVertices": 15
+    },
+    {
+      "name": "heater_boss",
+      "weapon": "heater",
+      "center": [
+        0,
+        0.02,
+        0.04
+      ],
+      "bounds": [
+        0.1,
+        0.1,
+        0.04
+      ],
+      "sourceVertices": 17
+    }
+  ],
+  "bytes": 27960,
+  "sha256": "d836b6f964743a9238b7d2ab75b3931ed6ca9bee48f36770c2e21f0ca3b7502a"
+}

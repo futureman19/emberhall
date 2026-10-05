@@ -1,3 +1,4 @@
+import { sceneryReserved } from "./frontier.ts";
 import { COURT, EMBERHALL_BANK } from "./atlas.ts";
 import { buildingBox, boxesOverlap } from "./building-size.ts";
 import { emptyChest, ITEM_META } from "./catalog.ts";
@@ -91,6 +92,7 @@ export function houseSiteError(world: World, kind: HouseKind, tx: number, ty: nu
   for (let z = Math.floor(box.z0); z <= Math.floor(box.z1 - 1e-4); z++) {
     for (let x = Math.floor(box.x0); x <= Math.floor(box.x1 - 1e-4); x++) {
       const tile = world.tiles[z]?.[x];
+      if (sceneryReserved(x, z)) return "A landmark stands here.";
       if (!tile || !FOOTING.has(tile.kind)) return "No footing.";
     }
   }

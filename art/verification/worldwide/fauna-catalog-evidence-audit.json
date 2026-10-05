@@ -1,0 +1,1288 @@
+{
+  "passed": true,
+  "audited_at": "2026-09-10T17:58:55.944336+00:00",
+  "scope": "Audits saved controlled-arena/input/death/fallback/build evidence from seven batches; freshly verifies all52 currently served built GLBs. Does not rerun prior48 browser interactions, automate visual judgment or certify natural habitat/performance.",
+  "species_count": 52,
+  "evidence_sets": 7,
+  "accepted_browser_assertions": 1980,
+  "device_species_cases_per_development_mode": 104,
+  "built_captures": 104,
+  "runs": [
+    {
+      "label": "eight-candidate-final",
+      "mode": "candidate",
+      "species": [
+        "hare",
+        "hart",
+        "pine_lynx",
+        "brine_seal",
+        "cavern_bat",
+        "stonefang_ogre",
+        "cinder_drake",
+        "grave_lich"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "eight-baseline-v3",
+      "mode": "baseline",
+      "species": [
+        "hare",
+        "hart",
+        "pine_lynx",
+        "brine_seal",
+        "cavern_bat",
+        "stonefang_ogre",
+        "cinder_drake",
+        "grave_lich"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "eight-failure-v3",
+      "mode": "failure",
+      "species": [
+        "hare",
+        "hart",
+        "pine_lynx",
+        "brine_seal",
+        "cavern_bat",
+        "stonefang_ogre",
+        "cinder_drake",
+        "grave_lich"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "eight-built-final",
+      "mode": "built",
+      "species": [
+        "hare",
+        "hart",
+        "pine_lynx",
+        "brine_seal",
+        "cavern_bat",
+        "stonefang_ogre",
+        "cinder_drake",
+        "grave_lich"
+      ],
+      "checks": 34,
+      "passed": true
+    },
+    {
+      "label": "families-candidate-v1",
+      "mode": "candidate",
+      "species": [
+        "wolf",
+        "ironwood_boar",
+        "mire_croaker",
+        "orebeetle",
+        "saltback_tortoise",
+        "reed_heron",
+        "fen_leech",
+        "willow_wisp"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "families-baseline-v1",
+      "mode": "baseline",
+      "species": [
+        "wolf",
+        "ironwood_boar",
+        "mire_croaker",
+        "orebeetle",
+        "saltback_tortoise",
+        "reed_heron",
+        "fen_leech",
+        "willow_wisp"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "families-failure-v1",
+      "mode": "failure",
+      "species": [
+        "wolf",
+        "ironwood_boar",
+        "mire_croaker",
+        "orebeetle",
+        "saltback_tortoise",
+        "reed_heron",
+        "fen_leech",
+        "willow_wisp"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "families-built-v1",
+      "mode": "built",
+      "species": [
+        "wolf",
+        "ironwood_boar",
+        "mire_croaker",
+        "orebeetle",
+        "saltback_tortoise",
+        "reed_heron",
+        "fen_leech",
+        "willow_wisp"
+      ],
+      "checks": 34,
+      "passed": true
+    },
+    {
+      "label": "humanoids-candidate-v1",
+      "mode": "candidate",
+      "species": [
+        "brine_troll",
+        "orc_marauder",
+        "tomb_sentinel",
+        "blackbriar_hag",
+        "fen_ghoul",
+        "drowned_reaver",
+        "ossuary_knight",
+        "ash_demon"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "humanoids-baseline-v1",
+      "mode": "baseline",
+      "species": [
+        "brine_troll",
+        "orc_marauder",
+        "tomb_sentinel",
+        "blackbriar_hag",
+        "fen_ghoul",
+        "drowned_reaver",
+        "ossuary_knight",
+        "ash_demon"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "humanoids-failure-v1",
+      "mode": "failure",
+      "species": [
+        "brine_troll",
+        "orc_marauder",
+        "tomb_sentinel",
+        "blackbriar_hag",
+        "fen_ghoul",
+        "drowned_reaver",
+        "ossuary_knight",
+        "ash_demon"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "humanoids-built-v2",
+      "mode": "built",
+      "species": [
+        "brine_troll",
+        "orc_marauder",
+        "tomb_sentinel",
+        "blackbriar_hag",
+        "fen_ghoul",
+        "drowned_reaver",
+        "ossuary_knight",
+        "ash_demon"
+      ],
+      "checks": 34,
+      "passed": true
+    },
+    {
+      "label": "dark-candidate-v1",
+      "mode": "candidate",
+      "species": [
+        "wight",
+        "greybarrow_wightling",
+        "ashen_banshee",
+        "rime_revenant",
+        "barrow_hound",
+        "ridgeback_warg",
+        "deepmaw_basilisk",
+        "stonecrawl_spider"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "dark-baseline-v1",
+      "mode": "baseline",
+      "species": [
+        "wight",
+        "greybarrow_wightling",
+        "ashen_banshee",
+        "rime_revenant",
+        "barrow_hound",
+        "ridgeback_warg",
+        "deepmaw_basilisk",
+        "stonecrawl_spider"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "dark-failure-v1",
+      "mode": "failure",
+      "species": [
+        "wight",
+        "greybarrow_wightling",
+        "ashen_banshee",
+        "rime_revenant",
+        "barrow_hound",
+        "ridgeback_warg",
+        "deepmaw_basilisk",
+        "stonecrawl_spider"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "dark-built-v1",
+      "mode": "built",
+      "species": [
+        "wight",
+        "greybarrow_wightling",
+        "ashen_banshee",
+        "rime_revenant",
+        "barrow_hound",
+        "ridgeback_warg",
+        "deepmaw_basilisk",
+        "stonecrawl_spider"
+      ],
+      "checks": 34,
+      "passed": true
+    },
+    {
+      "label": "mammals-candidate-v1",
+      "mode": "candidate",
+      "species": [
+        "ember_fox",
+        "moss_badger",
+        "oak_bear",
+        "frosthorn_ram",
+        "highland_aurochs",
+        "redtail_squirrel",
+        "river_otter",
+        "cave_mole"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "mammals-baseline-v1",
+      "mode": "baseline",
+      "species": [
+        "ember_fox",
+        "moss_badger",
+        "oak_bear",
+        "frosthorn_ram",
+        "highland_aurochs",
+        "redtail_squirrel",
+        "river_otter",
+        "cave_mole"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "mammals-failure-v1",
+      "mode": "failure",
+      "species": [
+        "ember_fox",
+        "moss_badger",
+        "oak_bear",
+        "frosthorn_ram",
+        "highland_aurochs",
+        "redtail_squirrel",
+        "river_otter",
+        "cave_mole"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "mammals-built-v1",
+      "mode": "built",
+      "species": [
+        "ember_fox",
+        "moss_badger",
+        "oak_bear",
+        "frosthorn_ram",
+        "highland_aurochs",
+        "redtail_squirrel",
+        "river_otter",
+        "cave_mole"
+      ],
+      "checks": 34,
+      "passed": true
+    },
+    {
+      "label": "variants-candidate-v1",
+      "mode": "candidate",
+      "species": [
+        "brambleback_stag",
+        "thornhide_doe",
+        "whiteback_elk",
+        "reedback_stalker",
+        "bog_toad",
+        "brine_hound",
+        "dune_crawler",
+        "coal_salamander"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "variants-baseline-v1",
+      "mode": "baseline",
+      "species": [
+        "brambleback_stag",
+        "thornhide_doe",
+        "whiteback_elk",
+        "reedback_stalker",
+        "bog_toad",
+        "brine_hound",
+        "dune_crawler",
+        "coal_salamander"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "variants-failure-v1",
+      "mode": "failure",
+      "species": [
+        "brambleback_stag",
+        "thornhide_doe",
+        "whiteback_elk",
+        "reedback_stalker",
+        "bog_toad",
+        "brine_hound",
+        "dune_crawler",
+        "coal_salamander"
+      ],
+      "checks": 90,
+      "passed": true
+    },
+    {
+      "label": "variants-built-v1",
+      "mode": "built",
+      "species": [
+        "brambleback_stag",
+        "thornhide_doe",
+        "whiteback_elk",
+        "reedback_stalker",
+        "bog_toad",
+        "brine_hound",
+        "dune_crawler",
+        "coal_salamander"
+      ],
+      "checks": 34,
+      "passed": true
+    },
+    {
+      "label": "final-four-candidate-v1",
+      "mode": "candidate",
+      "species": [
+        "bonecrow",
+        "tideclaw_crab",
+        "dusk_owl",
+        "field_rat"
+      ],
+      "checks": 46,
+      "passed": true
+    },
+    {
+      "label": "final-four-baseline-v1",
+      "mode": "baseline",
+      "species": [
+        "bonecrow",
+        "tideclaw_crab",
+        "dusk_owl",
+        "field_rat"
+      ],
+      "checks": 46,
+      "passed": true
+    },
+    {
+      "label": "final-four-failure-v1",
+      "mode": "failure",
+      "species": [
+        "bonecrow",
+        "tideclaw_crab",
+        "dusk_owl",
+        "field_rat"
+      ],
+      "checks": 46,
+      "passed": true
+    },
+    {
+      "label": "final-four-built-v1",
+      "mode": "built",
+      "species": [
+        "bonecrow",
+        "tideclaw_crab",
+        "dusk_owl",
+        "field_rat"
+      ],
+      "checks": 18,
+      "passed": true
+    }
+  ],
+  "species": [
+    {
+      "kind": "ash_demon",
+      "asset_sha256": "2fa7105f87616bd520308473e7df2b72c51abc7b3919caf760862d4115209c6f",
+      "candidate": "humanoids-candidate-v1",
+      "baseline": "humanoids-baseline-v1",
+      "failure": "humanoids-failure-v1",
+      "built": "humanoids-built-v2"
+    },
+    {
+      "kind": "ashen_banshee",
+      "asset_sha256": "8379df0ce74ef323888847dee5a66d83f3d1cb1af2c0dfeb11e69afe47f831b9",
+      "candidate": "dark-candidate-v1",
+      "baseline": "dark-baseline-v1",
+      "failure": "dark-failure-v1",
+      "built": "dark-built-v1"
+    },
+    {
+      "kind": "barrow_hound",
+      "asset_sha256": "3b0a529bde5f9a3f9caa7129a38dc964640138cc97a37068a7848ea776afaa8e",
+      "candidate": "dark-candidate-v1",
+      "baseline": "dark-baseline-v1",
+      "failure": "dark-failure-v1",
+      "built": "dark-built-v1"
+    },
+    {
+      "kind": "blackbriar_hag",
+      "asset_sha256": "c531fbcba09faefee9e9b71ffdb7fa39052cfaf702ab22646ea01bb101979a20",
+      "candidate": "humanoids-candidate-v1",
+      "baseline": "humanoids-baseline-v1",
+      "failure": "humanoids-failure-v1",
+      "built": "humanoids-built-v2"
+    },
+    {
+      "kind": "bog_toad",
+      "asset_sha256": "2eb0a8cc77decd8db3ea0a897bbc81d8fdf1379e4b5c5d8e9bab0724c02006d9",
+      "candidate": "variants-candidate-v1",
+      "baseline": "variants-baseline-v1",
+      "failure": "variants-failure-v1",
+      "built": "variants-built-v1"
+    },
+    {
+      "kind": "bonecrow",
+      "asset_sha256": "26e00bb65ff6409ccd725294593eef822eddebdac62a2a84fc046c5b7171540b",
+      "candidate": "final-four-candidate-v1",
+      "baseline": "final-four-baseline-v1",
+      "failure": "final-four-failure-v1",
+      "built": "final-four-built-v1"
+    },
+    {
+      "kind": "brambleback_stag",
+      "asset_sha256": "2b24b595b401be345b9dbf9f797ed2e8b1b163d42e0540a7696cb9fb1d5d7787",
+      "candidate": "variants-candidate-v1",
+      "baseline": "variants-baseline-v1",
+      "failure": "variants-failure-v1",
+      "built": "variants-built-v1"
+    },
+    {
+      "kind": "brine_hound",
+      "asset_sha256": "675eaf1c5c4fcb4cea7ad4308bd2b23838ad5d20fafa359324cb73ae4c1a38ee",
+      "candidate": "variants-candidate-v1",
+      "baseline": "variants-baseline-v1",
+      "failure": "variants-failure-v1",
+      "built": "variants-built-v1"
+    },
+    {
+      "kind": "brine_seal",
+      "asset_sha256": "0573c0aa9873b2236f31d1ae0cd20e715f336771c24db330a9c6d7163e7f0398",
+      "candidate": "eight-candidate-final",
+      "baseline": "eight-baseline-v3",
+      "failure": "eight-failure-v3",
+      "built": "eight-built-final"
+    },
+    {
+      "kind": "brine_troll",
+      "asset_sha256": "70669fe784f9ef9d93e8d6bf1be856e93963e5fc8cf4695fe4dfa5698961a7bb",
+      "candidate": "humanoids-candidate-v1",
+      "baseline": "humanoids-baseline-v1",
+      "failure": "humanoids-failure-v1",
+      "built": "humanoids-built-v2"
+    },
+    {
+      "kind": "cave_mole",
+      "asset_sha256": "efc131b197153ff0b6d220eb0f2efae7fc57e150f414d7c8cb991462aa8f27ec",
+      "candidate": "mammals-candidate-v1",
+      "baseline": "mammals-baseline-v1",
+      "failure": "mammals-failure-v1",
+      "built": "mammals-built-v1"
+    },
+    {
+      "kind": "cavern_bat",
+      "asset_sha256": "b45a14ba673954cf8ac40a8138488c8941bad275365eb602d1055844735d3050",
+      "candidate": "eight-candidate-final",
+      "baseline": "eight-baseline-v3",
+      "failure": "eight-failure-v3",
+      "built": "eight-built-final"
+    },
+    {
+      "kind": "cinder_drake",
+      "asset_sha256": "a4372132044b39a3d5bd4b635b98e729294fcacbf6e683c672ecf7e8f27dda10",
+      "candidate": "eight-candidate-final",
+      "baseline": "eight-baseline-v3",
+      "failure": "eight-failure-v3",
+      "built": "eight-built-final"
+    },
+    {
+      "kind": "coal_salamander",
+      "asset_sha256": "e407f90d37c2f93bdc290aa8e3770b9b6d69349893bc4915a5d7a89fb24f0f76",
+      "candidate": "variants-candidate-v1",
+      "baseline": "variants-baseline-v1",
+      "failure": "variants-failure-v1",
+      "built": "variants-built-v1"
+    },
+    {
+      "kind": "deepmaw_basilisk",
+      "asset_sha256": "ac6995209f23a3f10942aa56aa6d9eb76eedcba477af9d1a31be5285cf9e6c54",
+      "candidate": "dark-candidate-v1",
+      "baseline": "dark-baseline-v1",
+      "failure": "dark-failure-v1",
+      "built": "dark-built-v1"
+    },
+    {
+      "kind": "drowned_reaver",
+      "asset_sha256": "0f05f31d3f8bf9c446b24776ef6d77c6ab4cda94de9d5a5488afccf8f989f6fc",
+      "candidate": "humanoids-candidate-v1",
+      "baseline": "humanoids-baseline-v1",
+      "failure": "humanoids-failure-v1",
+      "built": "humanoids-built-v2"
+    },
+    {
+      "kind": "dune_crawler",
+      "asset_sha256": "1af5811b7435265af24057b96e2eaca738bc9d358975d903560cc93ec9aecd38",
+      "candidate": "variants-candidate-v1",
+      "baseline": "variants-baseline-v1",
+      "failure": "variants-failure-v1",
+      "built": "variants-built-v1"
+    },
+    {
+      "kind": "dusk_owl",
+      "asset_sha256": "6fbe9f5d9762ff65de69ab89986c51197ada541bd387971619360a16db1eace3",
+      "candidate": "final-four-candidate-v1",
+      "baseline": "final-four-baseline-v1",
+      "failure": "final-four-failure-v1",
+      "built": "final-four-built-v1"
+    },
+    {
+      "kind": "ember_fox",
+      "asset_sha256": "138f62c193aa42b30737060ec9b8f45b8f330830fffb568aabd32e5fd0bc0bf5",
+      "candidate": "mammals-candidate-v1",
+      "baseline": "mammals-baseline-v1",
+      "failure": "mammals-failure-v1",
+      "built": "mammals-built-v1"
+    },
+    {
+      "kind": "fen_ghoul",
+      "asset_sha256": "3764bf2f3baec0028590b879a17021849405a8f544cd97c5ac512b2de3f1af27",
+      "candidate": "humanoids-candidate-v1",
+      "baseline": "humanoids-baseline-v1",
+      "failure": "humanoids-failure-v1",
+      "built": "humanoids-built-v2"
+    },
+    {
+      "kind": "fen_leech",
+      "asset_sha256": "4d56ed4aa8959156bd5e588a53e214c749b1e4db615778fc8b17431a2b9d487a",
+      "candidate": "families-candidate-v1",
+      "baseline": "families-baseline-v1",
+      "failure": "families-failure-v1",
+      "built": "families-built-v1"
+    },
+    {
+      "kind": "field_rat",
+      "asset_sha256": "dbcbd8001aacb5246b44d0f7c8cc13800e9a19aec5998482620318e7cf9a3403",
+      "candidate": "final-four-candidate-v1",
+      "baseline": "final-four-baseline-v1",
+      "failure": "final-four-failure-v1",
+      "built": "final-four-built-v1"
+    },
+    {
+      "kind": "frosthorn_ram",
+      "asset_sha256": "b2d2714cfe69b5bc684906b408144dbd0b8d9c130b40bba11476909038ff6dfc",
+      "candidate": "mammals-candidate-v1",
+      "baseline": "mammals-baseline-v1",
+      "failure": "mammals-failure-v1",
+      "built": "mammals-built-v1"
+    },
+    {
+      "kind": "grave_lich",
+      "asset_sha256": "8da4a7f5ba65028720d34b125373b34979bce1e5b613ac1b0894c1cc475956f4",
+      "candidate": "eight-candidate-final",
+      "baseline": "eight-baseline-v3",
+      "failure": "eight-failure-v3",
+      "built": "eight-built-final"
+    },
+    {
+      "kind": "greybarrow_wightling",
+      "asset_sha256": "4d3c86ccc88327a14e626a254b5434171a80b13f923174974cbf6bba7f38cbfe",
+      "candidate": "dark-candidate-v1",
+      "baseline": "dark-baseline-v1",
+      "failure": "dark-failure-v1",
+      "built": "dark-built-v1"
+    },
+    {
+      "kind": "hare",
+      "asset_sha256": "283033e6c5666855aed2aa0354f5603ecf21c23a9c6910c998fbbd084b58065c",
+      "candidate": "eight-candidate-final",
+      "baseline": "eight-baseline-v3",
+      "failure": "eight-failure-v3",
+      "built": "eight-built-final"
+    },
+    {
+      "kind": "hart",
+      "asset_sha256": "aa16d294efb9815fe7c20d6eb69d8dc0b8fe248bc6b471d11e96fc2995e6be5c",
+      "candidate": "eight-candidate-final",
+      "baseline": "eight-baseline-v3",
+      "failure": "eight-failure-v3",
+      "built": "eight-built-final"
+    },
+    {
+      "kind": "highland_aurochs",
+      "asset_sha256": "591347a7e671d346d2e6d4bd5655186f8ee490b7cf33b35c34268345bd73372a",
+      "candidate": "mammals-candidate-v1",
+      "baseline": "mammals-baseline-v1",
+      "failure": "mammals-failure-v1",
+      "built": "mammals-built-v1"
+    },
+    {
+      "kind": "ironwood_boar",
+      "asset_sha256": "944310adc2067b3d9ad45e54875f11d5ec6bf83d090bcba3d42cd95de02b25d9",
+      "candidate": "families-candidate-v1",
+      "baseline": "families-baseline-v1",
+      "failure": "families-failure-v1",
+      "built": "families-built-v1"
+    },
+    {
+      "kind": "mire_croaker",
+      "asset_sha256": "62474643a607963483d12d85882d20495ae5db554b8ac09ba2ced7e91df2d4ef",
+      "candidate": "families-candidate-v1",
+      "baseline": "families-baseline-v1",
+      "failure": "families-failure-v1",
+      "built": "families-built-v1"
+    },
+    {
+      "kind": "moss_badger",
+      "asset_sha256": "59a451e29d86f0057f35239c7ff68fb181ade92f604e2e2d9b2060c6f8dd94bc",
+      "candidate": "mammals-candidate-v1",
+      "baseline": "mammals-baseline-v1",
+      "failure": "mammals-failure-v1",
+      "built": "mammals-built-v1"
+    },
+    {
+      "kind": "oak_bear",
+      "asset_sha256": "f7c3e25e5a4b1b4d6527ec58b7e5edf4dcba3c749d59d402850467d2cca8db44",
+      "candidate": "mammals-candidate-v1",
+      "baseline": "mammals-baseline-v1",
+      "failure": "mammals-failure-v1",
+      "built": "mammals-built-v1"
+    },
+    {
+      "kind": "orc_marauder",
+      "asset_sha256": "4dec0a3c4fa9ae81c9a776966bc7d9af4a006dc97d546a81e405e89eaf4fc82d",
+      "candidate": "humanoids-candidate-v1",
+      "baseline": "humanoids-baseline-v1",
+      "failure": "humanoids-failure-v1",
+      "built": "humanoids-built-v2"
+    },
+    {
+      "kind": "orebeetle",
+      "asset_sha256": "193152182950ba42032661b61c11d5ae36804facce980840ae7e7e478abb156d",
+      "candidate": "families-candidate-v1",
+      "baseline": "families-baseline-v1",
+      "failure": "families-failure-v1",
+      "built": "families-built-v1"
+    },
+    {
+      "kind": "ossuary_knight",
+      "asset_sha256": "ccb7c57ea09c22d109f26b8343bb150956dc35f0225e6c785d406fbd4d75d69d",
+      "candidate": "humanoids-candidate-v1",
+      "baseline": "humanoids-baseline-v1",
+      "failure": "humanoids-failure-v1",
+      "built": "humanoids-built-v2"
+    },
+    {
+      "kind": "pine_lynx",
+      "asset_sha256": "c5fc48735698265908afd01750bab6b4f3f4f8f27ed583acd7fbb4ea8288a293",
+      "candidate": "eight-candidate-final",
+      "baseline": "eight-baseline-v3",
+      "failure": "eight-failure-v3",
+      "built": "eight-built-final"
+    },
+    {
+      "kind": "redtail_squirrel",
+      "asset_sha256": "feb5df446c1a8d34934f5127f3a77162a1305fd932fd31eca4e0b4d6d324ee4b",
+      "candidate": "mammals-candidate-v1",
+      "baseline": "mammals-baseline-v1",
+      "failure": "mammals-failure-v1",
+      "built": "mammals-built-v1"
+    },
+    {
+      "kind": "reed_heron",
+      "asset_sha256": "8897e3e7cb79c0146a9a4cc67f28fa7b5022c2631a58efb6112c616185ee07fa",
+      "candidate": "families-candidate-v1",
+      "baseline": "families-baseline-v1",
+      "failure": "families-failure-v1",
+      "built": "families-built-v1"
+    },
+    {
+      "kind": "reedback_stalker",
+      "asset_sha256": "d6d699c6dffb7a97a4ec01f60b3af77355b74d6f375493f3d4591ce06f8ddcfe",
+      "candidate": "variants-candidate-v1",
+      "baseline": "variants-baseline-v1",
+      "failure": "variants-failure-v1",
+      "built": "variants-built-v1"
+    },
+    {
+      "kind": "ridgeback_warg",
+      "asset_sha256": "7e128a6ceeb0b355399ad948422d2ef176aaa154c62623b5d397f1694dfba138",
+      "candidate": "dark-candidate-v1",
+      "baseline": "dark-baseline-v1",
+      "failure": "dark-failure-v1",
+      "built": "dark-built-v1"
+    },
+    {
+      "kind": "rime_revenant",
+      "asset_sha256": "e52dc39b5de964f29d2d2208a77e3e7d7effab811582fabf45a770441f50f6eb",
+      "candidate": "dark-candidate-v1",
+      "baseline": "dark-baseline-v1",
+      "failure": "dark-failure-v1",
+      "built": "dark-built-v1"
+    },
+    {
+      "kind": "river_otter",
+      "asset_sha256": "e0a01ed984cabb6ab7cc09a8a9b228ebd868d9f30663c74fa8b2ba2c7ad40ebb",
+      "candidate": "mammals-candidate-v1",
+      "baseline": "mammals-baseline-v1",
+      "failure": "mammals-failure-v1",
+      "built": "mammals-built-v1"
+    },
+    {
+      "kind": "saltback_tortoise",
+      "asset_sha256": "df7e931a09a169c6a58e94f56f22aa883f589d37d1a12483708cc82341bf7fa6",
+      "candidate": "families-candidate-v1",
+      "baseline": "families-baseline-v1",
+      "failure": "families-failure-v1",
+      "built": "families-built-v1"
+    },
+    {
+      "kind": "stonecrawl_spider",
+      "asset_sha256": "7447d256ba7d404e1c913d03c541491ffe1ac62cb5e2728dfa20ec33828c3fc0",
+      "candidate": "dark-candidate-v1",
+      "baseline": "dark-baseline-v1",
+      "failure": "dark-failure-v1",
+      "built": "dark-built-v1"
+    },
+    {
+      "kind": "stonefang_ogre",
+      "asset_sha256": "954caa07fdc8ea7e7b25be1a42be04ade007dd32058a6f65953556a57438c1a0",
+      "candidate": "eight-candidate-final",
+      "baseline": "eight-baseline-v3",
+      "failure": "eight-failure-v3",
+      "built": "eight-built-final"
+    },
+    {
+      "kind": "thornhide_doe",
+      "asset_sha256": "544c7175179f5ad6f37de3cf3b0db407fa05b51c769f26c227fcec02acdd896d",
+      "candidate": "variants-candidate-v1",
+      "baseline": "variants-baseline-v1",
+      "failure": "variants-failure-v1",
+      "built": "variants-built-v1"
+    },
+    {
+      "kind": "tideclaw_crab",
+      "asset_sha256": "e37c3d89659e52be8d94c05e06b54ca3409b8aed58cd8628ec55d5cad11b44b4",
+      "candidate": "final-four-candidate-v1",
+      "baseline": "final-four-baseline-v1",
+      "failure": "final-four-failure-v1",
+      "built": "final-four-built-v1"
+    },
+    {
+      "kind": "tomb_sentinel",
+      "asset_sha256": "da21333a75782f6e9f2291128f74eb28df627795538096a2de1a7f377e97d0cd",
+      "candidate": "humanoids-candidate-v1",
+      "baseline": "humanoids-baseline-v1",
+      "failure": "humanoids-failure-v1",
+      "built": "humanoids-built-v2"
+    },
+    {
+      "kind": "whiteback_elk",
+      "asset_sha256": "737a2757e87ba6cba53ba27ac836afb4a6a6f02b29371824e5d8cc8d63c51c07",
+      "candidate": "variants-candidate-v1",
+      "baseline": "variants-baseline-v1",
+      "failure": "variants-failure-v1",
+      "built": "variants-built-v1"
+    },
+    {
+      "kind": "wight",
+      "asset_sha256": "34199f09844c7b2de93beaa95e0ae5c05e5daf5bc8d2e7532f230e8f35f96514",
+      "candidate": "dark-candidate-v1",
+      "baseline": "dark-baseline-v1",
+      "failure": "dark-failure-v1",
+      "built": "dark-built-v1"
+    },
+    {
+      "kind": "willow_wisp",
+      "asset_sha256": "029d55a1f8c01712ed4f079de476b417b529fb272d7acc9d01d28e73d1b01fdc",
+      "candidate": "families-candidate-v1",
+      "baseline": "families-baseline-v1",
+      "failure": "families-failure-v1",
+      "built": "families-built-v1"
+    },
+    {
+      "kind": "wolf",
+      "asset_sha256": "b4c6cc4da59a51bc00ddba363bca061dc31c96f28ac60bfa8baf5fbe465b8736",
+      "candidate": "families-candidate-v1",
+      "baseline": "families-baseline-v1",
+      "failure": "families-failure-v1",
+      "built": "families-built-v1"
+    }
+  ],
+  "fresh_built_assets": [
+    {
+      "kind": "ash_demon",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-ash_demon.glb",
+      "status": 200,
+      "bytes": 91184,
+      "sha256": "2fa7105f87616bd520308473e7df2b72c51abc7b3919caf760862d4115209c6f",
+      "matches_local": true
+    },
+    {
+      "kind": "ashen_banshee",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-ashen_banshee.glb",
+      "status": 200,
+      "bytes": 57084,
+      "sha256": "8379df0ce74ef323888847dee5a66d83f3d1cb1af2c0dfeb11e69afe47f831b9",
+      "matches_local": true
+    },
+    {
+      "kind": "barrow_hound",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-barrow_hound.glb",
+      "status": 200,
+      "bytes": 124912,
+      "sha256": "3b0a529bde5f9a3f9caa7129a38dc964640138cc97a37068a7848ea776afaa8e",
+      "matches_local": true
+    },
+    {
+      "kind": "blackbriar_hag",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-blackbriar_hag.glb",
+      "status": 200,
+      "bytes": 73004,
+      "sha256": "c531fbcba09faefee9e9b71ffdb7fa39052cfaf702ab22646ea01bb101979a20",
+      "matches_local": true
+    },
+    {
+      "kind": "bog_toad",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-bog_toad.glb",
+      "status": 200,
+      "bytes": 110304,
+      "sha256": "2eb0a8cc77decd8db3ea0a897bbc81d8fdf1379e4b5c5d8e9bab0724c02006d9",
+      "matches_local": true
+    },
+    {
+      "kind": "bonecrow",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-bonecrow.glb",
+      "status": 200,
+      "bytes": 72528,
+      "sha256": "26e00bb65ff6409ccd725294593eef822eddebdac62a2a84fc046c5b7171540b",
+      "matches_local": true
+    },
+    {
+      "kind": "brambleback_stag",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-brambleback_stag.glb",
+      "status": 200,
+      "bytes": 146300,
+      "sha256": "2b24b595b401be345b9dbf9f797ed2e8b1b163d42e0540a7696cb9fb1d5d7787",
+      "matches_local": true
+    },
+    {
+      "kind": "brine_hound",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-brine_hound.glb",
+      "status": 200,
+      "bytes": 123628,
+      "sha256": "675eaf1c5c4fcb4cea7ad4308bd2b23838ad5d20fafa359324cb73ae4c1a38ee",
+      "matches_local": true
+    },
+    {
+      "kind": "brine_seal",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-brine_seal.glb",
+      "status": 200,
+      "bytes": 95612,
+      "sha256": "0573c0aa9873b2236f31d1ae0cd20e715f336771c24db330a9c6d7163e7f0398",
+      "matches_local": true
+    },
+    {
+      "kind": "brine_troll",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-brine_troll.glb",
+      "status": 200,
+      "bytes": 80472,
+      "sha256": "70669fe784f9ef9d93e8d6bf1be856e93963e5fc8cf4695fe4dfa5698961a7bb",
+      "matches_local": true
+    },
+    {
+      "kind": "cave_mole",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-cave_mole.glb",
+      "status": 200,
+      "bytes": 82168,
+      "sha256": "efc131b197153ff0b6d220eb0f2efae7fc57e150f414d7c8cb991462aa8f27ec",
+      "matches_local": true
+    },
+    {
+      "kind": "cavern_bat",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-cavern_bat.glb",
+      "status": 200,
+      "bytes": 73868,
+      "sha256": "b45a14ba673954cf8ac40a8138488c8941bad275365eb602d1055844735d3050",
+      "matches_local": true
+    },
+    {
+      "kind": "cinder_drake",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-cinder_drake.glb",
+      "status": 200,
+      "bytes": 93856,
+      "sha256": "a4372132044b39a3d5bd4b635b98e729294fcacbf6e683c672ecf7e8f27dda10",
+      "matches_local": true
+    },
+    {
+      "kind": "coal_salamander",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-coal_salamander.glb",
+      "status": 200,
+      "bytes": 98064,
+      "sha256": "e407f90d37c2f93bdc290aa8e3770b9b6d69349893bc4915a5d7a89fb24f0f76",
+      "matches_local": true
+    },
+    {
+      "kind": "deepmaw_basilisk",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-deepmaw_basilisk.glb",
+      "status": 200,
+      "bytes": 105940,
+      "sha256": "ac6995209f23a3f10942aa56aa6d9eb76eedcba477af9d1a31be5285cf9e6c54",
+      "matches_local": true
+    },
+    {
+      "kind": "drowned_reaver",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-drowned_reaver.glb",
+      "status": 200,
+      "bytes": 105448,
+      "sha256": "0f05f31d3f8bf9c446b24776ef6d77c6ab4cda94de9d5a5488afccf8f989f6fc",
+      "matches_local": true
+    },
+    {
+      "kind": "dune_crawler",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-dune_crawler.glb",
+      "status": 200,
+      "bytes": 85192,
+      "sha256": "1af5811b7435265af24057b96e2eaca738bc9d358975d903560cc93ec9aecd38",
+      "matches_local": true
+    },
+    {
+      "kind": "dusk_owl",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-dusk_owl.glb",
+      "status": 200,
+      "bytes": 106160,
+      "sha256": "6fbe9f5d9762ff65de69ab89986c51197ada541bd387971619360a16db1eace3",
+      "matches_local": true
+    },
+    {
+      "kind": "ember_fox",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-ember_fox.glb",
+      "status": 200,
+      "bytes": 123620,
+      "sha256": "138f62c193aa42b30737060ec9b8f45b8f330830fffb568aabd32e5fd0bc0bf5",
+      "matches_local": true
+    },
+    {
+      "kind": "fen_ghoul",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-fen_ghoul.glb",
+      "status": 200,
+      "bytes": 75252,
+      "sha256": "3764bf2f3baec0028590b879a17021849405a8f544cd97c5ac512b2de3f1af27",
+      "matches_local": true
+    },
+    {
+      "kind": "fen_leech",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-fen_leech.glb",
+      "status": 200,
+      "bytes": 62024,
+      "sha256": "4d56ed4aa8959156bd5e588a53e214c749b1e4db615778fc8b17431a2b9d487a",
+      "matches_local": true
+    },
+    {
+      "kind": "field_rat",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-field_rat.glb",
+      "status": 200,
+      "bytes": 121016,
+      "sha256": "dbcbd8001aacb5246b44d0f7c8cc13800e9a19aec5998482620318e7cf9a3403",
+      "matches_local": true
+    },
+    {
+      "kind": "frosthorn_ram",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-frosthorn_ram.glb",
+      "status": 200,
+      "bytes": 150280,
+      "sha256": "b2d2714cfe69b5bc684906b408144dbd0b8d9c130b40bba11476909038ff6dfc",
+      "matches_local": true
+    },
+    {
+      "kind": "grave_lich",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-grave_lich.glb",
+      "status": 200,
+      "bytes": 73672,
+      "sha256": "8da4a7f5ba65028720d34b125373b34979bce1e5b613ac1b0894c1cc475956f4",
+      "matches_local": true
+    },
+    {
+      "kind": "greybarrow_wightling",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-greybarrow_wightling.glb",
+      "status": 200,
+      "bytes": 55864,
+      "sha256": "4d3c86ccc88327a14e626a254b5434171a80b13f923174974cbf6bba7f38cbfe",
+      "matches_local": true
+    },
+    {
+      "kind": "hare",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-hare.glb",
+      "status": 200,
+      "bytes": 143888,
+      "sha256": "283033e6c5666855aed2aa0354f5603ecf21c23a9c6910c998fbbd084b58065c",
+      "matches_local": true
+    },
+    {
+      "kind": "hart",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-hart.glb",
+      "status": 200,
+      "bytes": 126092,
+      "sha256": "aa16d294efb9815fe7c20d6eb69d8dc0b8fe248bc6b471d11e96fc2995e6be5c",
+      "matches_local": true
+    },
+    {
+      "kind": "highland_aurochs",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-highland_aurochs.glb",
+      "status": 200,
+      "bytes": 120912,
+      "sha256": "591347a7e671d346d2e6d4bd5655186f8ee490b7cf33b35c34268345bd73372a",
+      "matches_local": true
+    },
+    {
+      "kind": "ironwood_boar",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-ironwood_boar.glb",
+      "status": 200,
+      "bytes": 118092,
+      "sha256": "944310adc2067b3d9ad45e54875f11d5ec6bf83d090bcba3d42cd95de02b25d9",
+      "matches_local": true
+    },
+    {
+      "kind": "mire_croaker",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-mire_croaker.glb",
+      "status": 200,
+      "bytes": 112928,
+      "sha256": "62474643a607963483d12d85882d20495ae5db554b8ac09ba2ced7e91df2d4ef",
+      "matches_local": true
+    },
+    {
+      "kind": "moss_badger",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-moss_badger.glb",
+      "status": 200,
+      "bytes": 130476,
+      "sha256": "59a451e29d86f0057f35239c7ff68fb181ade92f604e2e2d9b2060c6f8dd94bc",
+      "matches_local": true
+    },
+    {
+      "kind": "oak_bear",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-oak_bear.glb",
+      "status": 200,
+      "bytes": 117024,
+      "sha256": "f7c3e25e5a4b1b4d6527ec58b7e5edf4dcba3c749d59d402850467d2cca8db44",
+      "matches_local": true
+    },
+    {
+      "kind": "orc_marauder",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-orc_marauder.glb",
+      "status": 200,
+      "bytes": 108048,
+      "sha256": "4dec0a3c4fa9ae81c9a776966bc7d9af4a006dc97d546a81e405e89eaf4fc82d",
+      "matches_local": true
+    },
+    {
+      "kind": "orebeetle",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-orebeetle.glb",
+      "status": 200,
+      "bytes": 96628,
+      "sha256": "193152182950ba42032661b61c11d5ae36804facce980840ae7e7e478abb156d",
+      "matches_local": true
+    },
+    {
+      "kind": "ossuary_knight",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-ossuary_knight.glb",
+      "status": 200,
+      "bytes": 125612,
+      "sha256": "ccb7c57ea09c22d109f26b8343bb150956dc35f0225e6c785d406fbd4d75d69d",
+      "matches_local": true
+    },
+    {
+      "kind": "pine_lynx",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-pine_lynx.glb",
+      "status": 200,
+      "bytes": 122244,
+      "sha256": "c5fc48735698265908afd01750bab6b4f3f4f8f27ed583acd7fbb4ea8288a293",
+      "matches_local": true
+    },
+    {
+      "kind": "redtail_squirrel",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-redtail_squirrel.glb",
+      "status": 200,
+      "bytes": 123036,
+      "sha256": "feb5df446c1a8d34934f5127f3a77162a1305fd932fd31eca4e0b4d6d324ee4b",
+      "matches_local": true
+    },
+    {
+      "kind": "reed_heron",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-reed_heron.glb",
+      "status": 200,
+      "bytes": 81992,
+      "sha256": "8897e3e7cb79c0146a9a4cc67f28fa7b5022c2631a58efb6112c616185ee07fa",
+      "matches_local": true
+    },
+    {
+      "kind": "reedback_stalker",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-reedback_stalker.glb",
+      "status": 200,
+      "bytes": 100676,
+      "sha256": "d6d699c6dffb7a97a4ec01f60b3af77355b74d6f375493f3d4591ce06f8ddcfe",
+      "matches_local": true
+    },
+    {
+      "kind": "ridgeback_warg",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-ridgeback_warg.glb",
+      "status": 200,
+      "bytes": 108668,
+      "sha256": "7e128a6ceeb0b355399ad948422d2ef176aaa154c62623b5d397f1694dfba138",
+      "matches_local": true
+    },
+    {
+      "kind": "rime_revenant",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-rime_revenant.glb",
+      "status": 200,
+      "bytes": 53024,
+      "sha256": "e52dc39b5de964f29d2d2208a77e3e7d7effab811582fabf45a770441f50f6eb",
+      "matches_local": true
+    },
+    {
+      "kind": "river_otter",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-river_otter.glb",
+      "status": 200,
+      "bytes": 121024,
+      "sha256": "e0a01ed984cabb6ab7cc09a8a9b228ebd868d9f30663c74fa8b2ba2c7ad40ebb",
+      "matches_local": true
+    },
+    {
+      "kind": "saltback_tortoise",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-saltback_tortoise.glb",
+      "status": 200,
+      "bytes": 130500,
+      "sha256": "df7e931a09a169c6a58e94f56f22aa883f589d37d1a12483708cc82341bf7fa6",
+      "matches_local": true
+    },
+    {
+      "kind": "stonecrawl_spider",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-stonecrawl_spider.glb",
+      "status": 200,
+      "bytes": 75036,
+      "sha256": "7447d256ba7d404e1c913d03c541491ffe1ac62cb5e2728dfa20ec33828c3fc0",
+      "matches_local": true
+    },
+    {
+      "kind": "stonefang_ogre",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-stonefang_ogre.glb",
+      "status": 200,
+      "bytes": 84596,
+      "sha256": "954caa07fdc8ea7e7b25be1a42be04ade007dd32058a6f65953556a57438c1a0",
+      "matches_local": true
+    },
+    {
+      "kind": "thornhide_doe",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-thornhide_doe.glb",
+      "status": 200,
+      "bytes": 130356,
+      "sha256": "544c7175179f5ad6f37de3cf3b0db407fa05b51c769f26c227fcec02acdd896d",
+      "matches_local": true
+    },
+    {
+      "kind": "tideclaw_crab",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-tideclaw_crab.glb",
+      "status": 200,
+      "bytes": 108596,
+      "sha256": "e37c3d89659e52be8d94c05e06b54ca3409b8aed58cd8628ec55d5cad11b44b4",
+      "matches_local": true
+    },
+    {
+      "kind": "tomb_sentinel",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-tomb_sentinel.glb",
+      "status": 200,
+      "bytes": 105444,
+      "sha256": "da21333a75782f6e9f2291128f74eb28df627795538096a2de1a7f377e97d0cd",
+      "matches_local": true
+    },
+    {
+      "kind": "whiteback_elk",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-whiteback_elk.glb",
+      "status": 200,
+      "bytes": 136836,
+      "sha256": "737a2757e87ba6cba53ba27ac836afb4a6a6f02b29371824e5d8cc8d63c51c07",
+      "matches_local": true
+    },
+    {
+      "kind": "wight",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-wight.glb",
+      "status": 200,
+      "bytes": 49080,
+      "sha256": "34199f09844c7b2de93beaa95e0ae5c05e5daf5bc8d2e7532f230e8f35f96514",
+      "matches_local": true
+    },
+    {
+      "kind": "willow_wisp",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-willow_wisp.glb",
+      "status": 200,
+      "bytes": 68440,
+      "sha256": "029d55a1f8c01712ed4f079de476b417b529fb272d7acc9d01d28e73d1b01fdc",
+      "matches_local": true
+    },
+    {
+      "kind": "wolf",
+      "url": "http://127.0.0.1:8124/art/lanternwood/fauna-wolf.glb",
+      "status": 200,
+      "bytes": 116880,
+      "sha256": "b4c6cc4da59a51bc00ddba363bca061dc31c96f28ac60bfa8baf5fbe465b8736",
+      "matches_local": true
+    }
+  ],
+  "legacy_format_note": "eight-built-final has no selected field; exact capture filenames and per-species asset/input checks establish coverage. Historical baseline/failure asset hashes are not candidate freshness evidence; candidate hashes match current assets.",
+  "unverified": [
+    "Natural AI and unmodified habitats",
+    "Every attack/spell/flight animation",
+    "Crowded-world visibility",
+    "Physical-phone and frame-time performance",
+    "Worldwide release readiness"
+  ]
+}

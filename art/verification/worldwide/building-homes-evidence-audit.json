@@ -1,0 +1,472 @@
+{
+  "passed": true,
+  "kindCount": 7,
+  "caseCount": 56,
+  "finalAssertions": {
+    "candidate": 244,
+    "control": 258,
+    "failure": 258,
+    "built": 174
+  },
+  "buildingAssertions": 934,
+  "ghostwoodRegressionAssertions": 150,
+  "checkpointCount": 414,
+  "changedCheckpointFiles": [
+    "src/components/game/house-gump.tsx",
+    "src/components/game/terrain.tsx",
+    "package.json"
+  ],
+  "originalArtworkUnchanged": true,
+  "exactCameraCrossModeParity": true,
+  "cases": [
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "shop",
+      "evidence": "art/verification/worldwide/building-homes-ux-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "townhome",
+      "evidence": "art/verification/worldwide/building-homes-ux-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "townhouse",
+      "evidence": "art/verification/worldwide/building-homes-ux-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "cottage",
+      "evidence": "art/verification/worldwide/building-homes-ux-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "porch",
+      "evidence": "art/verification/worldwide/building-homes-ux-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "hut",
+      "evidence": "art/verification/worldwide/building-homes-ux-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "homestead",
+      "evidence": "art/verification/worldwide/building-homes-ux-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "shop",
+      "evidence": "art/verification/worldwide/building-homes-ux-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "townhome",
+      "evidence": "art/verification/worldwide/building-homes-ux-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "townhouse",
+      "evidence": "art/verification/worldwide/building-homes-ux-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "cottage",
+      "evidence": "art/verification/worldwide/building-homes-ux-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "porch",
+      "evidence": "art/verification/worldwide/building-homes-ux-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "hut",
+      "evidence": "art/verification/worldwide/building-homes-ux-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "homestead",
+      "evidence": "art/verification/worldwide/building-homes-ux-candidate-final/results.json"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "kind": "shop",
+      "evidence": "art/verification/worldwide/building-homes-ux-control-final/results.json"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "kind": "townhome",
+      "evidence": "art/verification/worldwide/building-homes-ux-control-final/results.json"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "kind": "townhouse",
+      "evidence": "art/verification/worldwide/building-homes-ux-control-final/results.json"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "kind": "cottage",
+      "evidence": "art/verification/worldwide/building-homes-ux-control-final/results.json"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "kind": "porch",
+      "evidence": "art/verification/worldwide/building-homes-ux-control-final/results.json"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "kind": "hut",
+      "evidence": "art/verification/worldwide/building-homes-ux-control-final/results.json"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "kind": "homestead",
+      "evidence": "art/verification/worldwide/building-homes-ux-control-final/results.json"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "kind": "shop",
+      "evidence": "art/verification/worldwide/building-homes-ux-control-final/results.json"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "kind": "townhome",
+      "evidence": "art/verification/worldwide/building-homes-ux-control-final/results.json"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "kind": "townhouse",
+      "evidence": "art/verification/worldwide/building-homes-ux-control-final/results.json"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "kind": "cottage",
+      "evidence": "art/verification/worldwide/building-homes-ux-control-final/results.json"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "kind": "porch",
+      "evidence": "art/verification/worldwide/building-homes-ux-control-final/results.json"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "kind": "hut",
+      "evidence": "art/verification/worldwide/building-homes-ux-control-final/results.json"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "kind": "homestead",
+      "evidence": "art/verification/worldwide/building-homes-ux-control-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "shop",
+      "evidence": "art/verification/worldwide/building-homes-ux-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "townhome",
+      "evidence": "art/verification/worldwide/building-homes-ux-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "townhouse",
+      "evidence": "art/verification/worldwide/building-homes-ux-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "cottage",
+      "evidence": "art/verification/worldwide/building-homes-ux-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "porch",
+      "evidence": "art/verification/worldwide/building-homes-ux-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "hut",
+      "evidence": "art/verification/worldwide/building-homes-ux-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "homestead",
+      "evidence": "art/verification/worldwide/building-homes-ux-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "shop",
+      "evidence": "art/verification/worldwide/building-homes-ux-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "townhome",
+      "evidence": "art/verification/worldwide/building-homes-ux-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "townhouse",
+      "evidence": "art/verification/worldwide/building-homes-ux-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "cottage",
+      "evidence": "art/verification/worldwide/building-homes-ux-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "porch",
+      "evidence": "art/verification/worldwide/building-homes-ux-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "hut",
+      "evidence": "art/verification/worldwide/building-homes-ux-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "homestead",
+      "evidence": "art/verification/worldwide/building-homes-ux-failure-final/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "shop",
+      "evidence": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "townhome",
+      "evidence": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "townhouse",
+      "evidence": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "cottage",
+      "evidence": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "porch",
+      "evidence": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "hut",
+      "evidence": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "homestead",
+      "evidence": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "shop",
+      "evidence": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "townhome",
+      "evidence": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "townhouse",
+      "evidence": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "cottage",
+      "evidence": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "porch",
+      "evidence": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "hut",
+      "evidence": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "homestead",
+      "evidence": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+    }
+  ],
+  "assets": [
+    {
+      "kind": "shop",
+      "sha256": "72fcc58c67ebd3f4dca6e8f05e8ffa9ae942f1e17318159e4dfab2743cc4c95d",
+      "bytes": 196132,
+      "sourceBuiltServedBaselineEqual": true
+    },
+    {
+      "kind": "townhome",
+      "sha256": "425546d80d4d903d8d28dc2247ccf60791ca390e77c2b2ea9b89cbd9c01ea02e",
+      "bytes": 187828,
+      "sourceBuiltServedBaselineEqual": true
+    },
+    {
+      "kind": "townhouse",
+      "sha256": "a8e3d7906d158421d5af6187e4af298996bec21d025032f303f40666a3030647",
+      "bytes": 183532,
+      "sourceBuiltServedBaselineEqual": true
+    },
+    {
+      "kind": "cottage",
+      "sha256": "809583b5dab1db359f260191f3200da0800ca9c39087d10e862f973a5375052e",
+      "bytes": 185848,
+      "sourceBuiltServedBaselineEqual": true
+    },
+    {
+      "kind": "porch",
+      "sha256": "d708b5aa1b8006e509cfd5b09781128de26e7c6540f3b097d18b456a515382bc",
+      "bytes": 178776,
+      "sourceBuiltServedBaselineEqual": true
+    },
+    {
+      "kind": "hut",
+      "sha256": "5cee287320b9f521d1434dac5af6f314140cc41946fa6e785300a050ac69bcd0",
+      "bytes": 191740,
+      "sourceBuiltServedBaselineEqual": true
+    },
+    {
+      "kind": "homestead",
+      "sha256": "1b518f408ba2c32a459d4bc4ab0fec38cde78fb1888ef5e26ab1c17d64efe469",
+      "bytes": 200528,
+      "sourceBuiltServedBaselineEqual": true
+    }
+  ],
+  "excludedHistoricalRuns": [
+    "building-homes-candidate-v1",
+    "building-homes-candidate-v2",
+    "building-homes-ux-*-v1"
+  ],
+  "scope": "Controlled cleared placement and input; not natural terrain, construction, full collision/body clearance or performance.",
+  "priorityFollowup": {
+    "assertions": {
+      "candidate": 146,
+      "control": 152,
+      "failure": 152,
+      "built": 116
+    },
+    "total": 566,
+    "cases": 24,
+    "kinds": [
+      "porch",
+      "hut",
+      "homestead"
+    ],
+    "reason": "Retain fractional nearby fauna/NPC primary input priority; new arriving-NPC and till-armed cancellation checks. All seven visual/cutaway evidence predates this predicate-only fix; all three affected kinds rerun in four modes on final source."
+  },
+  "tests": 907,
+  "canonicalTestLog": ".hermes/building-homes-priority-tests.log",
+  "originalSpecs": [
+    {
+      "kind": "shop",
+      "unchangedFromHEAD": true,
+      "originalNoncut": 115
+    },
+    {
+      "kind": "townhome",
+      "unchangedFromHEAD": true,
+      "originalNoncut": 111
+    },
+    {
+      "kind": "townhouse",
+      "unchangedFromHEAD": true,
+      "originalNoncut": 111
+    },
+    {
+      "kind": "cottage",
+      "unchangedFromHEAD": true,
+      "originalNoncut": 62
+    },
+    {
+      "kind": "porch",
+      "unchangedFromHEAD": true,
+      "originalNoncut": 28
+    },
+    {
+      "kind": "hut",
+      "unchangedFromHEAD": true,
+      "originalNoncut": 70
+    },
+    {
+      "kind": "homestead",
+      "unchangedFromHEAD": true,
+      "originalNoncut": 111
+    }
+  ],
+  "finalBuildFreshness": "art/verification/worldwide/building-homes-priority-built-freshness.json",
+  "newSourceFiles": [
+    "src/game/house-touch.ts",
+    "src/game/house-touch.test.ts",
+    "src/components/game/use-house-touch.ts"
+  ],
+  "buildingAssertionsAcrossAcceptedBatches": 1500,
+  "allAssertionsAcrossAcceptedBatches": 1650
+}

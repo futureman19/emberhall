@@ -1,0 +1,40 @@
+{
+  "id": "reedwake-bridge",
+  "authoring": "Original script-authored Blender geometry",
+  "source": "art/blender/river-bridge/reedwake-bridge.blend",
+  "origin": "waterline",
+  "waterY": 0.6,
+  "localDeckY": 0.6,
+  "worldDeckY": 1.2,
+  "placement": [
+    952,
+    0.6,
+    560
+  ],
+  "deckBounds": [
+    -3.5,
+    -1.6,
+    3.5,
+    1.6
+  ],
+  "materials": 4,
+  "editableMeshes": 122,
+  "bytes": 314140,
+  "sha256": "3a9831619fde65fbad693e2802f27c16c929d64b470b512ac5610c9e4d0d4ac3",
+  "meshes": 4,
+  "triangles": 5384,
+  "bounds": {
+    "min": [
+      -5.5,
+      0,
+      -2.0999999046325684
+    ],
+    "max": [
+      5.5,
+      1.5849999785423279,
+      2.099999785423279
+    ]
+  },
+  "sourceExportUniqueVertices": 2904,
+  "sourceExportTolerance": 0.0001
+}

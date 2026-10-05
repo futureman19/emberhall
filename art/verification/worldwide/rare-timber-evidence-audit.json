@@ -1,0 +1,364 @@
+{
+  "catalog_count": 8,
+  "scoped_input_verified": 7,
+  "partial_species": [
+    "ghostwood"
+  ],
+  "visual_species": 8,
+  "fresh_assertions": 553,
+  "cumulative_recorded_assertions": 1024,
+  "fresh_limit_observations": 12,
+  "stats": {
+    "candidate": {
+      "assertions": 202,
+      "limitation_observations": 4,
+      "cases": 6,
+      "wild_gate_cases": 28
+    },
+    "fallback": {
+      "assertions": 191,
+      "limitation_observations": 4,
+      "cases": 6,
+      "wild_gate_cases": 28
+    },
+    "built": {
+      "assertions": 160,
+      "limitation_observations": 4,
+      "cases": 6,
+      "wild_gate_cases": 28
+    }
+  },
+  "species": [
+    {
+      "kind": "oak",
+      "acceptance": "verified",
+      "evidence": {
+        "candidate": {
+          "results": "timber-candidate-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        },
+        "fallback": {
+          "results": "timber-failure-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        },
+        "built": {
+          "results": "timber-built-v2/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        }
+      }
+    },
+    {
+      "kind": "pine",
+      "acceptance": "verified",
+      "evidence": {
+        "candidate": {
+          "results": "timber-candidate-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        },
+        "fallback": {
+          "results": "timber-failure-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        },
+        "built": {
+          "results": "timber-built-v2/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        }
+      }
+    },
+    {
+      "kind": "willow",
+      "acceptance": "verified",
+      "evidence": {
+        "candidate": {
+          "results": "willow-ash-candidate-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        },
+        "fallback": {
+          "results": "willow-ash-failure-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        },
+        "built": {
+          "results": "willow-ash-built-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        }
+      }
+    },
+    {
+      "kind": "birch",
+      "acceptance": "verified",
+      "evidence": {
+        "candidate": {
+          "results": "timber-candidate-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        },
+        "fallback": {
+          "results": "timber-failure-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        },
+        "built": {
+          "results": "timber-built-v2/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        }
+      }
+    },
+    {
+      "kind": "ash",
+      "acceptance": "verified",
+      "evidence": {
+        "candidate": {
+          "results": "willow-ash-candidate-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        },
+        "fallback": {
+          "results": "willow-ash-failure-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        },
+        "built": {
+          "results": "willow-ash-built-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        }
+      }
+    },
+    {
+      "kind": "redwood",
+      "acceptance": "verified",
+      "evidence": {
+        "candidate": {
+          "results": "rare-timber-candidate-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        },
+        "fallback": {
+          "results": "rare-timber-failure-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        },
+        "built": {
+          "results": "rare-timber-built-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        }
+      }
+    },
+    {
+      "kind": "yew",
+      "acceptance": "verified",
+      "evidence": {
+        "candidate": {
+          "results": "rare-timber-candidate-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        },
+        "fallback": {
+          "results": "rare-timber-failure-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        },
+        "built": {
+          "results": "rare-timber-built-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        }
+      }
+    },
+    {
+      "kind": "ghostwood",
+      "acceptance": "partial",
+      "evidence": {
+        "candidate": {
+          "results": "rare-timber-candidate-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        },
+        "fallback": {
+          "results": "rare-timber-failure-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        },
+        "built": {
+          "results": "rare-timber-built-final/results.json",
+          "cases": [
+            "desktop",
+            "mobile"
+          ],
+          "saved_passed": true,
+          "current_asset_matches": true
+        }
+      }
+    }
+  ],
+  "current_models": [
+    {
+      "kind": "oak",
+      "url": "/art/lanternwood/oak.glb",
+      "http": 200,
+      "sha256": "e38306e785170da4e66399611d7e1e715d4ccb40b9693883f63abb66055f0f8a",
+      "previous_ledger_and_current_source_and_built_and_served_match": true
+    },
+    {
+      "kind": "pine",
+      "url": "/art/lanternwood/timber-pine.glb",
+      "http": 200,
+      "sha256": "b1a6eb8270e6a9abbb0cb5dac94638fe69245257829427d8b919ec88570b6128",
+      "previous_ledger_and_current_source_and_built_and_served_match": true
+    },
+    {
+      "kind": "willow",
+      "url": "/art/lanternwood/timber-willow.glb",
+      "http": 200,
+      "sha256": "72a718f7b2ef42ff10663b109c6cb19f465cfcb520f391369dc9e9870feebef0",
+      "previous_ledger_and_current_source_and_built_and_served_match": true
+    },
+    {
+      "kind": "birch",
+      "url": "/art/lanternwood/timber-birch.glb",
+      "http": 200,
+      "sha256": "da88a759631af9efa842e830ab1cbe9264293d42c059a9c18e1bbdf9258179d0",
+      "previous_ledger_and_current_source_and_built_and_served_match": true
+    },
+    {
+      "kind": "ash",
+      "url": "/art/lanternwood/timber-ash.glb",
+      "http": 200,
+      "sha256": "d87c6823bb86ad0766fe019516a7ac3bc4a20aad288c7bf7a2c7566f43f23170",
+      "previous_ledger_and_current_source_and_built_and_served_match": true
+    },
+    {
+      "kind": "redwood",
+      "url": "/art/lanternwood/timber-redwood.glb",
+      "http": 200,
+      "sha256": "f7f884c0fe940f41ce1e4e7a96ae2cd4aa8a6ffc2d6edbf367242b331ddcb23b",
+      "previous_ledger_and_current_source_and_built_and_served_match": true
+    },
+    {
+      "kind": "yew",
+      "url": "/art/lanternwood/timber-yew.glb",
+      "http": 200,
+      "sha256": "fd707ea2f88bd4ba1b882e916fedaae861f20ca8c1287ccc505bdcf29d716cd8",
+      "previous_ledger_and_current_source_and_built_and_served_match": true
+    },
+    {
+      "kind": "ghostwood",
+      "url": "/art/lanternwood/timber-ghostwood.glb",
+      "http": 200,
+      "sha256": "6ab068db3d6a8cc9b27ec21b1778294d60c160aa81868b90e372ef0002429d86",
+      "previous_ledger_and_current_source_and_built_and_served_match": true
+    }
+  ],
+  "not_acceptance": [
+    "Natural forest",
+    "Full animation",
+    "Frame-time/performance",
+    "Physical phones",
+    "Release",
+    "Touch-only ghostwood entry",
+    "Planted ghostwood menu identity label"
+  ]
+}

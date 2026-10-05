@@ -184,7 +184,10 @@ export function ValeChart() {
         onClick={onChartClick}
       >
         <ChartCanvas className="pointer-events-none size-full" />
-        <Marks labels />
+        <Marks />
+      </div>
+      <div className="mt-3 grid grid-cols-2 gap-1" aria-label="Named destinations">
+        {PLACES.map(p => <button key={p.id} type="button" className="rounded border border-border px-2 py-2 text-left text-xs text-fg hover:bg-gold/10" title={p.blurb} onClick={() => walkTo(p.tx, p.ty)}>{p.name}</button>)}
       </div>
     </div>
   );

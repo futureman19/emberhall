@@ -1,0 +1,100 @@
+{
+  "repo": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview",
+  "changedSourceAndDocumentation": [
+    {
+      "path": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\src\\components\\game\\authored-character.test.ts",
+      "sha256": "3cdd36ba1cf3eeb270da99f9abdba2aaca71863e0c5a6b03d89c25117e6178ed"
+    },
+    {
+      "path": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\src\\components\\game\\authored-character.tsx",
+      "sha256": "ba6e7cc059933ef0052b6f4f6863577076c9163722f251a065bb7d916cd70462"
+    },
+    {
+      "path": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\src\\components\\game\\look-preview.tsx",
+      "sha256": "cc0205194155cb3cfea55fb261c2c56a573f077e35031a6d79821d2fae1c8b7e"
+    },
+    {
+      "path": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\src\\components\\game\\people-meshes.tsx",
+      "sha256": "22b4c8f031a682274b14cb3c5cf4a2088fa6252bac41d5ac37cc32852e26ff2b"
+    },
+    {
+      "path": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\src\\components\\game\\rowan-character-data.ts",
+      "sha256": "0df9be381e5d18166798412ea63fa0c8a93672542c8e71ad7ccc61ff78167934"
+    },
+    {
+      "path": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\src\\components\\game\\rowan-character-context.ts",
+      "sha256": "198ee9673f7c6e24998c36018e5392287494e2f8df989037eb743e1852ebced0"
+    },
+    {
+      "path": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\src\\components\\game\\rowan-character.tsx",
+      "sha256": "83ace50b70cf70f5ead27fa4e87703a855532aa3500ba910bcd67d0067567a57"
+    },
+    {
+      "path": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\scripts\\rowan-character-smoke.mjs",
+      "sha256": "b543c165bfed8565978b3602536fb3b55339ab3fe1cf97ebdfcfbd275fece8e5"
+    },
+    {
+      "path": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\scripts\\rowan-built-smoke.mjs",
+      "sha256": "54c5e79068996864630558aca331b3e90c862bc124fb766b4928492d918abb94"
+    },
+    {
+      "path": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\asset-ledger.json",
+      "sha256": "1e18b09e543e08c6a68e0a981c72f2bf441fb256010a3506c737f2565a457f4e"
+    },
+    {
+      "path": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\ROWAN-INTEGRATION.md",
+      "sha256": "30f88b45932902e23be96ec327753b22454ae4d08d21a5148b456b04bdc3e8f2"
+    }
+  ],
+  "evidenceFiles": [
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\auth.txt",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\build.txt",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\check.txt",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\REPORT.json",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\tests.txt",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\typecheck.txt",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\built-v1\\desktop-creator.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\built-v1\\desktop-world.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\built-v1\\mobile-creator.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\built-v1\\mobile-world.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\built-v1\\results.json",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\candidate-v1\\desktop-action.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\candidate-v1\\desktop-creator-custom.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\candidate-v1\\desktop-creator.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\candidate-v1\\desktop-walk.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\candidate-v1\\desktop-world.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\candidate-v1\\mobile-world.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\candidate-v1\\results.json",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\failure-v1\\desktop-action.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\failure-v1\\desktop-creator-custom.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\failure-v1\\desktop-creator.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\failure-v1\\desktop-walk.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\failure-v1\\desktop-world.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\failure-v1\\mobile-world.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\failure-v1\\results.json"
+  ],
+  "redTestLog": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-red.txt",
+  "browser": {
+    "candidate-v1": {
+      "passed": true,
+      "checks": 16,
+      "screenshots": 6
+    },
+    "failure-v1": {
+      "passed": true,
+      "checks": 13,
+      "screenshots": 6
+    },
+    "built-v1": {
+      "passed": true,
+      "checks": 5,
+      "screenshots": 4
+    }
+  },
+  "unchangedApprovedAssetSHA256": "2b5cff5a268c53c36c26351a42e5c2fce7a70fd74d7c13f7414d353fa4fb0ad4",
+  "notes": [
+    "Ignored build output under .vercel/output regenerated by npm run build; not deployed.",
+    "Existing lane3 JSON and routeTree dirt were present at task start; no manual edits.",
+    "No commit, push, deploy, game rule changes or other Hermes profile writes."
+  ]
+}

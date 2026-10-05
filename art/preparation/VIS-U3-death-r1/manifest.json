@@ -1,0 +1,55 @@
+{
+  "status": "offline authored; NOT integrated or gameplay-tested",
+  "weapons": [
+    "death"
+  ],
+  "parts": [
+    {
+      "name": "death_tunic",
+      "weapon": "death",
+      "center": [
+        0,
+        0.22,
+        0
+      ],
+      "bounds": [
+        0.4,
+        0.72,
+        0.26
+      ],
+      "sourceVertices": 32
+    },
+    {
+      "name": "death_head",
+      "weapon": "death",
+      "center": [
+        0,
+        0.64,
+        0.02
+      ],
+      "bounds": [
+        0.28,
+        0.26,
+        0.24
+      ],
+      "sourceVertices": 32
+    },
+    {
+      "name": "death_shroud",
+      "weapon": "death",
+      "center": [
+        0,
+        0.2,
+        0.14
+      ],
+      "bounds": [
+        0.48,
+        0.78,
+        0.1
+      ],
+      "sourceVertices": 32
+    }
+  ],
+  "bytes": 12008,
+  "sha256": "f43db05942a08a60c1791cb5b18852ae9fa8a452a0e8c8d5d496af3e2f5d50fd"
+}

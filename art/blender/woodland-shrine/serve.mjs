@@ -1,0 +1,5 @@
+import http from 'node:http';import fs from 'node:fs';import path from 'node:path';import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../../public/art/woodland-shrine');
+const mime={'.html':'text/html','.js':'text/javascript','.json':'application/json','.glb':'model/gltf-binary','.jpg':'image/jpeg','.png':'image/png','.txt':'text/plain'};
+const server=http.createServer((req,res)=>{try{if(req.method!=='GET'&&req.method!=='HEAD'){res.writeHead(405);return res.end();}let p=decodeURIComponent(new URL(req.url,'http://localhost').pathname);if(p==='/')p='/index.html';const f=path.resolve(root,'.'+p);if(!f.startsWith(root+path.sep)||!fs.statSync(f).isFile())throw Error('not found');res.writeHead(200,{'Content-Type':mime[path.extname(f)]||'application/octet-stream','Cache-Control':'no-store'});if(req.method==='HEAD')return res.end();fs.createReadStream(f).pipe(res);}catch{res.writeHead(404);res.end('Not found');}});
+server.listen(Number(process.env.PORT||8190),'127.0.0.1',()=>console.log('Landscape gallery ready http://127.0.0.1:'+server.address().port));

@@ -1,0 +1,102 @@
+{
+  "passed": true,
+  "devices": [
+    {
+      "name": "desktop",
+      "passed": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loaded": [
+        "wrecked-ferry",
+        "intact-dock",
+        "broken-dock",
+        "mooring-posts",
+        "hauling-winch",
+        "landing-sign",
+        "washed-cargo",
+        "reed-debris",
+        "reedwake-crossing"
+      ],
+      "filter": true,
+      "rotationToggle": true,
+      "pointerDrag": true,
+      "touchDrag": false,
+      "reset": true,
+      "glbDownload": true,
+      "errors": [],
+      "frames": 112,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "mobile",
+      "passed": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loaded": [
+        "wrecked-ferry",
+        "intact-dock",
+        "broken-dock",
+        "mooring-posts",
+        "hauling-winch",
+        "landing-sign",
+        "washed-cargo",
+        "reed-debris",
+        "reedwake-crossing"
+      ],
+      "filter": true,
+      "rotationToggle": true,
+      "pointerDrag": true,
+      "touchDrag": true,
+      "reset": true,
+      "glbDownload": true,
+      "errors": [],
+      "frames": 97,
+      "horizontalOverflow": false
+    }
+  ],
+  "assetHttpHashes": [
+    {
+      "id": "wrecked-ferry",
+      "passed": true,
+      "sha256": "48f879e9431a55005548d63b5539db677f27a1c9a9c8c903aba119913501ff4c"
+    },
+    {
+      "id": "intact-dock",
+      "passed": true,
+      "sha256": "2fd7b5222ff13b4b307b3bc166b589f029f5d3b071a8aa45b4a693e604398606"
+    },
+    {
+      "id": "broken-dock",
+      "passed": true,
+      "sha256": "6f2a436209a7c74eaafdc34d55e5669d5ffe55a2bbb6244e6e6e54296593d007"
+    },
+    {
+      "id": "mooring-posts",
+      "passed": true,
+      "sha256": "55e1fddba555d00a14324de0b4d71e7ad4e05ddeb5d299c272ccd1480d71331a"
+    },
+    {
+      "id": "hauling-winch",
+      "passed": true,
+      "sha256": "7d8350f3fc748592b5b48670d4dc1139e821a565b48dfc61e0b2ec9db2836e30"
+    },
+    {
+      "id": "landing-sign",
+      "passed": true,
+      "sha256": "e2a3778639b792ea5da2dcee562f040e798be21749df5e0aa21ca071f033f3cd"
+    },
+    {
+      "id": "washed-cargo",
+      "passed": true,
+      "sha256": "42109f6f91ac649f4bfab26a548b1100d8ecee7f2cd3ca5c7dcdebdfc27c7958"
+    },
+    {
+      "id": "reed-debris",
+      "passed": true,
+      "sha256": "bc76d49fa2d113b52213057704892c28bcd772b210cf663a9dc1b18d73fb4361"
+    },
+    {
+      "id": "reedwake-crossing",
+      "passed": true,
+      "sha256": "46aa81f19344f07ef351ae9a34dc27b4888ae9e54b4451ad5df112dbac41a698"
+    }
+  ]
+}

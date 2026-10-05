@@ -1,4 +1,6 @@
 import { keepStairCut, keepPlayerOffset } from "./keep-presentation.ts";
+import { insideKeep, onKeepStairs, keepStoryY } from "../../game/keep-story.ts";
+import { FIGURE } from "../../game/look/figure.ts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
@@ -156,7 +158,7 @@ test("keep cutaway removes ceilings and stair-mouth occluders while retaining wa
   for (const story of [0,.49,.5,1,1.49,1.5,2,2.49,2.5,3]) {
     const actual = run(spec,true,story,THREE,"keep",keepStairCut);
     const visible = Object.values(actual.solid).flat() as THREE.Vector3[];
-    const expected = spec.voxels.filter(v=>!v.cut && v.y<=Math.round(story)*4+5 && !(v.t==="timber" && v.y>Math.round(story)*4) && !((v.x>=18 && v.z>=12 && v.y>Math.round(story)*4) || (v.t==="timber" && v.x>=15 && v.x<=18 && v.z>=11 && v.z<=14 && v.y>0)));
+    const expected = spec.voxels.filter(v=>!v.cut && v.y<=Math.round(story)*4+5 && !(v.t==="timber" && v.y>Math.round(story)*4) && !((v.x>=18 && v.z>=12 && v.y>Math.round(story)*4) || (v.t==="timber" && v.x>=15 && v.x<=18 && v.z>=11 && v.z<=14 && v.y>0) || (v.t==="timber" && v.x>=19 && v.x<=20 && v.z>=-9 && v.z<=14 && v.y>0)));
     assert.deepEqual(visible.map(v=>v.toArray().join(",")).sort(),expected.map(coords).sort(),`story ${story}: next floor must not cover the player`);
     if(Math.round(story)>0)assert.ok(actual.solid.timber.length>0,`story ${story} retains its own original floor`);
   }
@@ -200,7 +202,7 @@ function buildingPointerHarness(options: { kind?: string; inside?: boolean; phas
     return false;
   };
   const run = exports.make!({ b:{id:"sample",kind:options.kind??"keep",tx:176,ty:320}, inside:options.inside??true, useGame:{getState:()=>state}, getWorld:()=>({people:[{id:"banker",role:"banker",x:176,z:320}]}), leftAt:record("leftAt"), hitAt:record("hitAt"), stationOf:(kind:string)=>kind==="forge"?"forge":null, beginWorldTouch });
-  return { calls, fire:(button=0) => run({button,nativeEvent:{pointerType:"mouse",pointerId:1,button,clientX:109,clientY:333},point:{x:181.2,y:7.11,z:320.3},clientX:109,clientY:333,stopPropagation:record("stop")}) };
+  return { calls, fire:(button=0, point={x:181.2,y:7.11,z:320.3}) => run({button,nativeEvent:{pointerType:"mouse",pointerId:1,button,clientX:109,clientY:333},point,clientX:109,clientY:333,stopPropagation:record("stop")}) };
 }
 
 for (const button of [0,2]) test(`inside keep pointer ${button} uses the visible surface once`, () => {
@@ -227,12 +229,55 @@ test("other-building bank and crafting dispatch remain intact", () => {
 });
 
 
+// CPU only: execute the renderer's actual filter and feed its nearest box hit
+// through the actual pointer handler. No browser, renderer or GPU is created.
+for (const [fromZ, z, story] of [[316,319,3],[319,322,2],[322,325,1],[323,324,2/3],[324,325,1/3]]) {
+  for (const dx of [-.35,0,.35]) test(`lower stair first-hit dispatch ${fromZ}->${z} offset ${dx}`, () => {
+    const source = text("src/components/game/building-meshes.tsx");
+    const spec = SPECS.keep;
+    const loop = source.slice(source.indexOf("    const cap = inside"),source.indexOf("    return { solid, cut, interior, furnitureProxies };"));
+    const run = new Function("spec", "story", "THREE", "keepStairCut", `
+      const b={kind:"keep",tx:176,ty:320},y0=.6,B=.5,KEEP_STORY_VOX=4,inside=true,furnishings=null;
+      const names=["timber","dark","cobble","wool","gold","glass","thatch","stone","coal","soil","leaf"];
+      const solid=Object.fromEntries(names.map(k=>[k,[]])),cut=Object.fromEntries(names.map(k=>[k,[]])),interior=Object.fromEntries(names.map(k=>[k,[]]));
+      const retainSettlementInteriorVoxel=()=>false,retainHospitalityInteriorVoxel=()=>false,retainCommonsInteriorVoxel=()=>false,retainArchitectureInteriorVoxel=()=>false;
+      ${loop}
+      return Object.values(solid).flat();
+    `);
+    const x=184+dx, pz=z-.25;
+    const treadY=Math.max(...spec.voxels.filter(v=>v.t==="stone" && v.x>=15 && v.x<=18 && v.z>=-9 && v.z<=10 && Math.abs(176+(v.x+.5)*.5-x)<=.26001 && Math.abs(320+(v.z+.5)*.5-pz)<=.26001).map(v=>.6+(v.y+.5)*.5+.26));
+    assert.ok(Number.isFinite(treadY));
+    // Canonical fixed camera offset and height recorded by the existing harness.
+    const origin=new THREE.Vector3(200,23.5,fromZ+20);
+    const target=new THREE.Vector3(x,treadY,pz);
+    const ray=new THREE.Ray(origin,target.clone().sub(origin).normalize());
+    const points=run(spec,story,THREE,keepStairCut) as THREE.Vector3[];
+    const hits=points.map(c=>ray.intersectBox(new THREE.Box3(c.clone().addScalar(-.26),c.clone().addScalar(.26)),new THREE.Vector3())).filter((p): p is THREE.Vector3=>p!==null).sort((a,b)=>a.distanceTo(origin)-b.distanceTo(origin));
+    assert.ok(hits.length>0);
+    const hit=hits[0];
+    assert.deepEqual([Math.round(hit.x),Math.round(hit.z)],[184,z],`foreground hit ${hit.toArray()}`);
+    for (const button of [0,2]) {
+      const h=buildingPointerHarness();h.fire(button,{x:hit.x,y:hit.y,z:hit.z});
+      assert.deepEqual(h.calls,[{method:"stop",args:[]},button===0?{method:"leftAt",args:[184,z]}:{method:"hitAt",args:[184,z,109,333]}]);
+    }
+  });
+}
+
 test("keep stair presentation preserves treads and exposes the south mouth", () => {
   assert.equal(keepStairCut({x:19,y:7,z:13,t:"stone"},1),true);
   assert.equal(keepStairCut({x:19,y:4,z:13,t:"stone"},1),false);
   assert.equal(keepStairCut({x:17,y:4,z:11,t:"timber"},1),true);
   assert.equal(keepStairCut({x:16,y:1,z:9,t:"stone"},1),false);
   assert.equal(keepStairCut({x:-20,y:9,z:13,t:"stone"},1),false);
+  for (const story of [0,1,2,3]) {
+    for (const x of [19,20]) for (const z of [-9,0,14]) {
+      assert.equal(keepStairCut({x,y:4,z,t:"timber"},story),true);
+      assert.equal(keepStairCut({x,y:0,z,t:"timber"},story),false);
+    }
+    assert.equal(keepStairCut({x:19,y:4,z:-10,t:"timber"},story),false);
+    assert.equal(keepStairCut({x:18,y:4,z:0,t:"stone"},story),false);
+    assert.equal(keepStairCut({x:14,y:4,z:0,t:"timber"},story),false);
+  }
 });
 
 test("keep visual offset seats floors and treads without changing outside/NPC placement", () => {
@@ -245,4 +290,60 @@ test("keep visual offset seats floors and treads without changing outside/NPC pl
   const people=text("src/components/game/people-meshes.tsx");
   assert.ok(people.includes("p.isPlayer ? keepPlayerOffset(p.x, p.z) : 0"));
   assert.ok(people.includes("groundAt(you.x, you.z, you.story) + keepPlayerOffset(you.x, you.z)"));
+});
+
+// Execute the real Figure bob initializer; compare foot bottoms against the
+// original makeKeep voxel tops, rather than accepting root height alone.
+function figureBob(p: { isPlayer: boolean; x: number; z: number; bob: number; path: unknown[] }, ghost = false) {
+  const source = text("src/components/game/people-meshes.tsx");
+  const file = ts.createSourceFile("people-meshes.tsx", source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const figure = file.statements.find(n => ts.isFunctionDeclaration(n) && n.name?.text === "Figure");
+  assert.ok(figure);
+  let expression: string | undefined;
+  function visit(n: ts.Node) {
+    if (ts.isVariableDeclaration(n) && n.name.getText(file) === "bob") expression = n.initializer?.getText(file);
+    ts.forEachChild(n, visit);
+  }
+  visit(figure);
+  assert.ok(expression);
+  return new Function("p", "ghost", "insideKeep", "onKeepStairs", `return ${expression}`)(p, ghost, insideKeep, onKeepStairs) as number;
+}
+
+for (const [story,x,z] of [[0,176,325],[1,181,322],[2,181,319],[3,181,316]]) {
+  test(`keep floor seating story ${story}: idle soles stay on original floor throughout bob cycle`, () => {
+    const spec = SPECS.keep;
+    assert.equal(spec.fuse, true);
+    const floor = spec.voxels.filter(v => v.y === story * 4 && v.t === (story === 0 ? "stone" : "timber") && Math.abs(176+(v.x+.5)*.5-x)<=.26 && Math.abs(320+(v.z+.5)*.5-z)<=.26);
+    assert.ok(floor.length > 0);
+    const baseY = .6;
+    const floorTop = Math.max(...floor.map(v => baseY+(v.y+.5)*.5+.5*1.04/2));
+    const rootY = baseY + keepStoryY(story) + keepPlayerOffset(x,z);
+    assert.ok(Math.abs(rootY-floorTop)<1e-8, "root at original fused floor top");
+    for (const phase of [0,Math.PI/2,Math.PI,3*Math.PI/2,2*Math.PI]) {
+      const bob = figureBob({isPlayer:true,x,z,bob:phase,path:[]});
+      const soleY = rootY + FIGURE.foot.y + bob - FIGURE.foot.size[1]/2;
+      assert.ok(Math.abs(soleY-floorTop)<1e-8, `idle phase ${phase}: sole ${soleY}, floor ${floorTop}`);
+    }
+  });
+}
+
+test("keep floor seating authored and fallback feet share the zero-height sole anchor", async () => {
+  const raw = readFileSync(new URL("public/art/lanternwood/character.glb", root));
+  const gltf = await new GLTFLoader().parseAsync(raw.buffer.slice(raw.byteOffset, raw.byteOffset + raw.byteLength), "");
+  gltf.scene.updateMatrixWorld(true);
+  const foot = gltf.scene.getObjectByName("foot") as THREE.Mesh;
+  assert.ok(foot?.isMesh);
+  const bounds = new THREE.Box3().setFromObject(foot);
+  assert.ok(Math.abs(bounds.min.y + FIGURE.foot.y) < 1e-6);
+  assert.equal(FIGURE.foot.y - FIGURE.foot.size[1]/2, 0);
+  const people = text("src/components/game/people-meshes.tsx");
+  for (const sign of ["-", ""]) assert.ok(people.includes(`position={[${sign}FIGURE.foot.x, FIGURE.foot.y + bob, FIGURE.foot.z]}`));
+});
+
+test("keep floor seating leaves walking, stairs, outside, NPC and ghost bob unchanged", () => {
+  const base = {isPlayer:true,x:181,z:320,bob:Math.PI/2,path:[] as unknown[]};
+  for (const p of [{...base,path:[{}]},{...base,x:184,z:322},{...base,x:176,z:332},{...base,isPlayer:false}]) {
+    assert.equal(figureBob(p),.04);
+  }
+  assert.equal(figureBob(base,true),.08);
 });

@@ -1,0 +1,439 @@
+{
+  "archive": "art/verification/trails-kit/emberhall-trails-kit-source.zip",
+  "archiveBytes": 7024360,
+  "archiveSha256": "518f7a4641adfebbc818e89b358cc1f0b59f447a70cd38f18c1dc1bbf7638fec",
+  "archiveReadbackVerified": true,
+  "fileCount": 86,
+  "files": [
+    {
+      "file": "art/blender/trails-kit/browser_verify.mjs",
+      "bytes": 5665,
+      "sha256": "93a0c98f90308ad146d3d9759e279ebea9f5658175bb0abe32cb2145399ea6d5"
+    },
+    {
+      "file": "art/blender/trails-kit/build_trails.py",
+      "bytes": 6953,
+      "sha256": "09d3e4a91dcb3a8696c60b0907429f4534bb90bc587d655828c4817d0d0b018f"
+    },
+    {
+      "file": "art/blender/trails-kit/designs.py",
+      "bytes": 7673,
+      "sha256": "cb3f835930f77670f783f670d87f29cf1141b7393ac3dfbcb42f6a390877c807"
+    },
+    {
+      "file": "art/blender/trails-kit/emberhall-trails.blend",
+      "bytes": 277816,
+      "sha256": "44767f1732d7e2336a42c2314af1dd6beef0b42cd42c8fad12b953af90fbd574"
+    },
+    {
+      "file": "art/blender/trails-kit/package_delivery.py",
+      "bytes": 1418,
+      "sha256": "03726eef7e537982f997fac934c766ceff8a892ec4d18ced6d61a5ff945cebdc"
+    },
+    {
+      "file": "art/blender/trails-kit/package_gallery.py",
+      "bytes": 3241,
+      "sha256": "c1d329bf3d03dc511d8c0bca70f05d74475579e9043284f2847d6fb504c4a97d"
+    },
+    {
+      "file": "art/blender/trails-kit/README.md",
+      "bytes": 6716,
+      "sha256": "a244fcb1101df10cc66627e2f3ae673b9f9a7994bde129a5a377e9622d3e0584"
+    },
+    {
+      "file": "art/blender/trails-kit/serve.mjs",
+      "bytes": 1120,
+      "sha256": "a2363a169a27d3ed41a7845e7a1a66aee64c6625887459d886eb18db61f8196a"
+    },
+    {
+      "file": "art/blender/trails-kit/verify.mjs",
+      "bytes": 3382,
+      "sha256": "9bbc1f5e0ec7a445e50e0a67ad6a8084f4a3aab7984b66ca2ac2e49c071a1af6"
+    },
+    {
+      "file": "art/blender/trails-kit/verify_scope.py",
+      "bytes": 681,
+      "sha256": "cad52cd5f14823672c6fa63a1934ebd2156d23ce9701c55c408fce6c27cf3d6f"
+    },
+    {
+      "file": "art/blender/trails-kit/verify_source.py",
+      "bytes": 2564,
+      "sha256": "5430715e1604a782dab45c34676ea6c62d8e526998120d4a0eb173c0bf4182e7"
+    },
+    {
+      "file": "art/verification/trails-kit/abandoned-camp.png",
+      "bytes": 179953,
+      "sha256": "77515c9341a63053b963a7a32bd6894ece26e1a625ffdcb79788751b78301bef"
+    },
+    {
+      "file": "art/verification/trails-kit/ash-apron.png",
+      "bytes": 139178,
+      "sha256": "00e66a7f45bdef7798bbf8bab58388b5783db4129a154654b92db6656030f7bf"
+    },
+    {
+      "file": "art/verification/trails-kit/boardwalk-corner-before.png",
+      "bytes": 153633,
+      "sha256": "9b6e9d59692d484618f994e931f698e09e4a4d93a8655cfad1f3c172cee5bea2"
+    },
+    {
+      "file": "art/verification/trails-kit/boardwalk-corner.png",
+      "bytes": 157246,
+      "sha256": "dfc1389c3672f30b4589f56e23bb9a6f278efc263364b85f870caf89b42bf904"
+    },
+    {
+      "file": "art/verification/trails-kit/boardwalk-straight.png",
+      "bytes": 159491,
+      "sha256": "242f49cdfc66871a65ebf9d0dbbc16cd776ea8bae62406fe759ca20a83eca32a"
+    },
+    {
+      "file": "art/verification/trails-kit/browser-final.log",
+      "bytes": 3633,
+      "sha256": "fd445d968b82d6677fca54de1c7d79ff3a76fd87c1b292280e42a2f8c3a0c2cd"
+    },
+    {
+      "file": "art/verification/trails-kit/browser-verification.json",
+      "bytes": 3632,
+      "sha256": "3491623c94e9230f7325c6446caa971bde57062f25be2b7de1171ec44b8ef6fb"
+    },
+    {
+      "file": "art/verification/trails-kit/browser.log",
+      "bytes": 3633,
+      "sha256": "ad49b751806141ef37043adba8cdbd21139575fb4a5185c04e72bb507eddee75"
+    },
+    {
+      "file": "art/verification/trails-kit/contact-sheet.png",
+      "bytes": 517556,
+      "sha256": "9b948169724268d263cea36e53c020060c0c6834daea5b49480e89efaa18b73f"
+    },
+    {
+      "file": "art/verification/trails-kit/cooling-crust.png",
+      "bytes": 138017,
+      "sha256": "b42a05937750af2252916934d18a44fd87579bf64c507531bf8b034c3fc9e933"
+    },
+    {
+      "file": "art/verification/trails-kit/corner-red.log",
+      "bytes": 535,
+      "sha256": "ef24a5df17084b82b419b3123d5311c4a49447e7ae4dfecaf10490ca71b206f6"
+    },
+    {
+      "file": "art/verification/trails-kit/crossings-closeup.jpg",
+      "bytes": 136877,
+      "sha256": "e9a43a48754fd5e95e20810b463a00797eb2379982293edbe06c6e9dfc135818"
+    },
+    {
+      "file": "art/verification/trails-kit/desktop-gallery.png",
+      "bytes": 261341,
+      "sha256": "871407ef26a22b0581354125451f29582391c0fb966ae52d5efd6ba3e8f16523"
+    },
+    {
+      "file": "art/verification/trails-kit/desktop-landmarks.png",
+      "bytes": 274321,
+      "sha256": "f88026314a483d3323f890352bcbfe3b501866866a79f021b38de0322bacffd9"
+    },
+    {
+      "file": "art/verification/trails-kit/fallen-log.png",
+      "bytes": 128556,
+      "sha256": "e9d43e52bd716bd3dff53f17c989bea65b4e17c55107f74e43edc6aeee7659bf"
+    },
+    {
+      "file": "art/verification/trails-kit/generate-final.log",
+      "bytes": 6090,
+      "sha256": "40ea1c48fe9910c9c140843910f85a9a125e44db9e92dca50f91ad3d784e9da4"
+    },
+    {
+      "file": "art/verification/trails-kit/generate.log",
+      "bytes": 6083,
+      "sha256": "176c65a932a5b5f4c9cb4719540418024ef797b958ac8aa16770b8b83882c083"
+    },
+    {
+      "file": "art/verification/trails-kit/geometry-verification.json",
+      "bytes": 9262,
+      "sha256": "47897d447bb5754a87deb68fc3bb0e03374dc5e6a58744b553a094effa93a976"
+    },
+    {
+      "file": "art/verification/trails-kit/grassy-verge.png",
+      "bytes": 151677,
+      "sha256": "68f2e41ee947300b71cd3fd08ee1ce9fe984847465d7971980360f1c40c8aa02"
+    },
+    {
+      "file": "art/verification/trails-kit/guidepost.png",
+      "bytes": 143302,
+      "sha256": "1417b37cd5bf815007758141813734dd6254be1e44052f46d98b9a0bd791ab68"
+    },
+    {
+      "file": "art/verification/trails-kit/landmarks-closeup.jpg",
+      "bytes": 148114,
+      "sha256": "ddc3b8abb54a2f766ebf7036634395bbf6a64883f3ac7a0a71b208485fef623b"
+    },
+    {
+      "file": "art/verification/trails-kit/measure.log",
+      "bytes": 9263,
+      "sha256": "386176eed9148bedf28a66f8f95b32d275bef841a114d7a88a2721daf864350f"
+    },
+    {
+      "file": "art/verification/trails-kit/mobile-gallery.png",
+      "bytes": 97778,
+      "sha256": "f480c318068291ca79af893c8c7f80855de642c6d96fa922f2c18701129d86c0"
+    },
+    {
+      "file": "art/verification/trails-kit/mobile-landmarks.png",
+      "bytes": 105721,
+      "sha256": "9222e72b0846348a15eeddfaae6ae58fe0838db9f1679c86f1cc09048e9e0a65"
+    },
+    {
+      "file": "art/verification/trails-kit/muddy-bank.png",
+      "bytes": 137409,
+      "sha256": "db3741f36e90ca90d34a5d97bfb11360283da49e8af44bda97ce307cb7841522"
+    },
+    {
+      "file": "art/verification/trails-kit/ruined-arch.png",
+      "bytes": 201688,
+      "sha256": "93b5360b7864c765e9a9f0cbbefc5c9edd3404f3ad64c626b73a78b4ad5f2425"
+    },
+    {
+      "file": "art/verification/trails-kit/scope-baseline.json",
+      "bytes": 43644,
+      "sha256": "2f4cb2c49723667cac4a7e9e54577193920113dde72a31f97a5be3d5aee11125"
+    },
+    {
+      "file": "art/verification/trails-kit/scope-verification.json",
+      "bytes": 180,
+      "sha256": "db00abd58273487ec331bcfc9307ef2427918f8d4aa9bf3cc9b3812f3c348f52"
+    },
+    {
+      "file": "art/verification/trails-kit/scree-slope.png",
+      "bytes": 142513,
+      "sha256": "0a327be3e8c516223197813a72ac5d06d4b720768665d02438d5f692f8a2f6c3"
+    },
+    {
+      "file": "art/verification/trails-kit/snowmelt-bank.png",
+      "bytes": 135785,
+      "sha256": "d2458602a63f442ac4813fcca77cfd3a981fed2b560a72bb4c586d4ddc8596aa"
+    },
+    {
+      "file": "art/verification/trails-kit/source-verification.json",
+      "bytes": 2011,
+      "sha256": "3dc3504facd7c97ea123d6aa7bf7b1cf17af311f020ff3a6d213976c712068d9"
+    },
+    {
+      "file": "art/verification/trails-kit/source-verify.log",
+      "bytes": 1623,
+      "sha256": "8059bd51608a948d3bcc3726c78278961cf90b76231cc8444a64203faa1bbf19"
+    },
+    {
+      "file": "art/verification/trails-kit/stepping-stones.png",
+      "bytes": 104457,
+      "sha256": "6897cb5327b1a4e383a6977b2986f6e3c166fda48ea63a821d5243e3f10b6f2c"
+    },
+    {
+      "file": "art/verification/trails-kit/terrain-closeup.jpg",
+      "bytes": 174361,
+      "sha256": "6b5f0ebb40dc63421456a172a53e7d65a5312a8a59bc699a2523bef590c46c12"
+    },
+    {
+      "file": "art/verification/trails-kit/trail-cairn.png",
+      "bytes": 181608,
+      "sha256": "b0ab0fa25ebc2d820aee9e48e5e681a4901a0fcbb8b1ba7a864ba9ff0f66b05c"
+    },
+    {
+      "file": "art/verification/trails-kit/verify.log",
+      "bytes": 9263,
+      "sha256": "386176eed9148bedf28a66f8f95b32d275bef841a114d7a88a2721daf864350f"
+    },
+    {
+      "file": "public/art/trails-kit/abandoned-camp.glb",
+      "bytes": 63816,
+      "sha256": "927e99b984d06e4cf99364f4c3a676832fd193e88c25e06a9c9954cc2e82c9c2"
+    },
+    {
+      "file": "public/art/trails-kit/abandoned-camp.png",
+      "bytes": 179953,
+      "sha256": "77515c9341a63053b963a7a32bd6894ece26e1a625ffdcb79788751b78301bef"
+    },
+    {
+      "file": "public/art/trails-kit/ash-apron.glb",
+      "bytes": 66204,
+      "sha256": "3904450d6279bd9cb3c1ff46fea7af95912a6acdb155a607950b08839e6d2671"
+    },
+    {
+      "file": "public/art/trails-kit/ash-apron.png",
+      "bytes": 139178,
+      "sha256": "00e66a7f45bdef7798bbf8bab58388b5783db4129a154654b92db6656030f7bf"
+    },
+    {
+      "file": "public/art/trails-kit/boardwalk-corner.glb",
+      "bytes": 31088,
+      "sha256": "bc320a8b5d05d64b9c20d9927715354964c93e58efd890442d88ae1467c8f65a"
+    },
+    {
+      "file": "public/art/trails-kit/boardwalk-corner.png",
+      "bytes": 157246,
+      "sha256": "dfc1389c3672f30b4589f56e23bb9a6f278efc263364b85f870caf89b42bf904"
+    },
+    {
+      "file": "public/art/trails-kit/boardwalk-straight.glb",
+      "bytes": 22188,
+      "sha256": "435914fb7c58a0891bdb2f038dd3c0a5bb98679c7c6bcb86f64d6afbf3a4ce14"
+    },
+    {
+      "file": "public/art/trails-kit/boardwalk-straight.png",
+      "bytes": 159491,
+      "sha256": "242f49cdfc66871a65ebf9d0dbbc16cd776ea8bae62406fe759ca20a83eca32a"
+    },
+    {
+      "file": "public/art/trails-kit/contact-sheet.jpg",
+      "bytes": 235349,
+      "sha256": "58571b68e7502c27307c4621fdda2eff1609728fd546183b03fb2693993a1011"
+    },
+    {
+      "file": "public/art/trails-kit/cooling-crust.glb",
+      "bytes": 50996,
+      "sha256": "1b907139900e8294e6bc714bb2e41d82bcd6aa500db9b55fdeb4520e89746c0c"
+    },
+    {
+      "file": "public/art/trails-kit/cooling-crust.png",
+      "bytes": 138017,
+      "sha256": "b42a05937750af2252916934d18a44fd87579bf64c507531bf8b034c3fc9e933"
+    },
+    {
+      "file": "public/art/trails-kit/fallen-log.glb",
+      "bytes": 30116,
+      "sha256": "f83819b63e6f830f6b3914c9bd04e6080e46657e4795995d69ef10419b654966"
+    },
+    {
+      "file": "public/art/trails-kit/fallen-log.png",
+      "bytes": 128556,
+      "sha256": "e9d43e52bd716bd3dff53f17c989bea65b4e17c55107f74e43edc6aeee7659bf"
+    },
+    {
+      "file": "public/art/trails-kit/gallery.js",
+      "bytes": 3939,
+      "sha256": "205e99443e42c5cbee1d0fffcced9909327179c3e1f913b70d8eb433a69cba15"
+    },
+    {
+      "file": "public/art/trails-kit/grassy-verge.glb",
+      "bytes": 40924,
+      "sha256": "76fe1a9aac5d5c89a153c63edd64b41af977b2c967d32a2d49e40b77c4254b1e"
+    },
+    {
+      "file": "public/art/trails-kit/grassy-verge.png",
+      "bytes": 151677,
+      "sha256": "68f2e41ee947300b71cd3fd08ee1ce9fe984847465d7971980360f1c40c8aa02"
+    },
+    {
+      "file": "public/art/trails-kit/guidepost.glb",
+      "bytes": 13552,
+      "sha256": "9c33899735c3dfe7704c21eccdddc59c437cf75f8b990ba6c46fc4d86ad17bc3"
+    },
+    {
+      "file": "public/art/trails-kit/guidepost.png",
+      "bytes": 143302,
+      "sha256": "1417b37cd5bf815007758141813734dd6254be1e44052f46d98b9a0bd791ab68"
+    },
+    {
+      "file": "public/art/trails-kit/index.html",
+      "bytes": 4479,
+      "sha256": "8861947789e287bd68937641b92cb8f3f6821c1af0cbd519b31e510a71b895f2"
+    },
+    {
+      "file": "public/art/trails-kit/manifest.json",
+      "bytes": 15327,
+      "sha256": "26442868e2f098ebd2f7af5e373aca9761b1ceed8589c8f20ab59c3803afa0b4"
+    },
+    {
+      "file": "public/art/trails-kit/muddy-bank.glb",
+      "bytes": 70704,
+      "sha256": "cbba646e02640674562f841b0670d3a3eadbc22b826f5af63a553ae82ed950c1"
+    },
+    {
+      "file": "public/art/trails-kit/muddy-bank.png",
+      "bytes": 137409,
+      "sha256": "db3741f36e90ca90d34a5d97bfb11360283da49e8af44bda97ce307cb7841522"
+    },
+    {
+      "file": "public/art/trails-kit/ruined-arch.glb",
+      "bytes": 45724,
+      "sha256": "eb2d781619eab355defac1d1dc831961b88774a1a8cd9ff67730addc44c87dc3"
+    },
+    {
+      "file": "public/art/trails-kit/ruined-arch.png",
+      "bytes": 201688,
+      "sha256": "93b5360b7864c765e9a9f0cbbefc5c9edd3404f3ad64c626b73a78b4ad5f2425"
+    },
+    {
+      "file": "public/art/trails-kit/scree-slope.glb",
+      "bytes": 85304,
+      "sha256": "c34850c8cf4d99ea7cf7161900a83e9b9104617a871db9bf2efdb00048e1698b"
+    },
+    {
+      "file": "public/art/trails-kit/scree-slope.png",
+      "bytes": 142513,
+      "sha256": "0a327be3e8c516223197813a72ac5d06d4b720768665d02438d5f692f8a2f6c3"
+    },
+    {
+      "file": "public/art/trails-kit/snowmelt-bank.glb",
+      "bytes": 70696,
+      "sha256": "3ce4ad87853e29fab2bdf812d9b085793d2ea0e39aac5ecb6699e2289ae683ef"
+    },
+    {
+      "file": "public/art/trails-kit/snowmelt-bank.png",
+      "bytes": 135785,
+      "sha256": "d2458602a63f442ac4813fcca77cfd3a981fed2b560a72bb4c586d4ddc8596aa"
+    },
+    {
+      "file": "public/art/trails-kit/stepping-stones.glb",
+      "bytes": 33292,
+      "sha256": "38efa4ea1561591552e2b461c8720d8b7f34fb89953e21dca5137b590aa2d848"
+    },
+    {
+      "file": "public/art/trails-kit/stepping-stones.png",
+      "bytes": 104457,
+      "sha256": "6897cb5327b1a4e383a6977b2986f6e3c166fda48ea63a821d5243e3f10b6f2c"
+    },
+    {
+      "file": "public/art/trails-kit/trail-cairn.glb",
+      "bytes": 54700,
+      "sha256": "3d04154e7ce503662d4e7413396c0eeed14e30de8654c99c606b070549d32ea9"
+    },
+    {
+      "file": "public/art/trails-kit/trail-cairn.png",
+      "bytes": 181608,
+      "sha256": "b0ab0fa25ebc2d820aee9e48e5e681a4901a0fcbb8b1ba7a864ba9ff0f66b05c"
+    },
+    {
+      "file": "public/art/trails-kit/vendor/addons/controls/OrbitControls.js",
+      "bytes": 40504,
+      "sha256": "faabb4e8dfd9235ee4a9fd7c9a3d75f90f1689dbd4944bd6fd32117dacec5f93"
+    },
+    {
+      "file": "public/art/trails-kit/vendor/addons/loaders/GLTFLoader.js",
+      "bytes": 114959,
+      "sha256": "97642d720f16cc9a0c9844934198e4d0c023bea8e89576d0f7545d03b2d103d2"
+    },
+    {
+      "file": "public/art/trails-kit/vendor/addons/utils/BufferGeometryUtils.js",
+      "bytes": 37621,
+      "sha256": "5c552223a9309883743b80538d6e9cdb45e3227f30d3ec56fb2c39b46e78d595"
+    },
+    {
+      "file": "public/art/trails-kit/vendor/addons/utils/SkeletonUtils.js",
+      "bytes": 11535,
+      "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
+    },
+    {
+      "file": "public/art/trails-kit/vendor/THREE-LICENSE.txt",
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "file": "public/art/trails-kit/vendor/three.core.js",
+      "bytes": 1443056,
+      "sha256": "3718df126d69c125362a03340913204470d8c50238605150e57f808840fb7759"
+    },
+    {
+      "file": "public/art/trails-kit/vendor/three.module.js",
+      "bytes": 650153,
+      "sha256": "bbf5ed13fe4373f5bd38b14ea8e62e9f157327da5638edc6d3863e08b167c9c7"
+    }
+  ]
+}

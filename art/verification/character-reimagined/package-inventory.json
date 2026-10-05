@@ -1,0 +1,829 @@
+{
+  "files": [
+    {
+      "path": "art/blender/character-reimagined/arden.blend",
+      "bytes": 182716,
+      "sha256": "42950d03b399486d3fa14c61cae5884b3407e21702c9712b4507fc5fcfdcff37"
+    },
+    {
+      "path": "art/blender/character-reimagined/audit_saved_source.py",
+      "bytes": 3865,
+      "sha256": "7ba13016941ad4ae9332e9fc23b80004e42828c7a4745416725d4f0ad24db3ad"
+    },
+    {
+      "path": "art/blender/character-reimagined/baseline-current.blend",
+      "bytes": 203237,
+      "sha256": "c83f2971a4fa2942764b412e6019fd3bbf70dc469b11ffb16957d4ccaf73b810"
+    },
+    {
+      "path": "art/blender/character-reimagined/baseline-reference/authored-character-data.ts",
+      "bytes": 2269,
+      "sha256": "9d2a8df0340050edce15d0b35194db02ffa97f14b8049ed24d65ecc5b25bdd1c"
+    },
+    {
+      "path": "art/blender/character-reimagined/baseline-reference/authored-character.tsx",
+      "bytes": 2284,
+      "sha256": "a17e6d4c1d584841dcf5e6a33524bf5ccc862467dd357944e74ce2c2cd610ef8"
+    },
+    {
+      "path": "art/blender/character-reimagined/baseline-reference/build_character.py",
+      "bytes": 7952,
+      "sha256": "f18ed61de39fa26da2b362d37f7af3f4d5d4233ad0f0436033dc404d5250f75c"
+    },
+    {
+      "path": "art/blender/character-reimagined/baseline-reference/catalog.ts",
+      "bytes": 2471,
+      "sha256": "8fdbee9c7b10bc62ea281ec94f005b6672fe09e5183c6b808fccf8fe06e55c2b"
+    },
+    {
+      "path": "art/blender/character-reimagined/baseline-reference/character.blend",
+      "bytes": 131956,
+      "sha256": "a0aff57cdc12bdbe8864919c79e7d1111e7b093cc8f58cb2740296527b25248e"
+    },
+    {
+      "path": "art/blender/character-reimagined/baseline-reference/character.glb",
+      "bytes": 231732,
+      "sha256": "4c08799d4ebc2de738783a148d7538f069974b059ce12b1d4feb0518ed21566b"
+    },
+    {
+      "path": "art/blender/character-reimagined/baseline-reference/figure.ts",
+      "bytes": 1627,
+      "sha256": "afafa6983d9083565fd9b0f5d29b721afe802f169a586b8133e8ff1ecc7fc087"
+    },
+    {
+      "path": "art/blender/character-reimagined/baseline-reference/look-preview.tsx",
+      "bytes": 6646,
+      "sha256": "d7f8e942c33902024cd03fb0f12b77c37c26aeef2b77981b8d488a7fc714bcf3"
+    },
+    {
+      "path": "art/blender/character-reimagined/baseline-reference/people-meshes.tsx",
+      "bytes": 59748,
+      "sha256": "e89a2b230d2a86f00955e33acf0729ec201a80a39fe26230c2d11705ce76afc9"
+    },
+    {
+      "path": "art/blender/character-reimagined/browser_verify.mjs",
+      "bytes": 7393,
+      "sha256": "d9b76cd354da9ff0bfe40ce90f24720ad619acd6e5dcaac11022184ccef82940"
+    },
+    {
+      "path": "art/blender/character-reimagined/build_characters.py",
+      "bytes": 18017,
+      "sha256": "ccd64551b2f886a8ed29b23d3859eedda78e38fefcc4db0eaa7a96aaacd54b25"
+    },
+    {
+      "path": "art/blender/character-reimagined/compose_plates.py",
+      "bytes": 3953,
+      "sha256": "6f263e3a8e298f94f6493a7a27e5cb7297dc0111397a4048ad667aa246314612"
+    },
+    {
+      "path": "art/blender/character-reimagined/compose_sheets.py",
+      "bytes": 3208,
+      "sha256": "332c12644f8d0dec39e44326f469ab9eb83d9110ff533927f9cea939910b5800"
+    },
+    {
+      "path": "art/blender/character-reimagined/inspect_baseline.py",
+      "bytes": 551,
+      "sha256": "e6520c6c2e68ddb25f8441585c80af6b7d814a06594abfbcb06adbf8654f9d60"
+    },
+    {
+      "path": "art/blender/character-reimagined/INTEGRATION-CONTRACT.md",
+      "bytes": 4895,
+      "sha256": "d426c6cdf57ec38b86c4d0312d836a7edcd8241d0c8fcbdebfc5732e607e7c7d"
+    },
+    {
+      "path": "art/blender/character-reimagined/launch-gallery.cmd",
+      "bytes": 72,
+      "sha256": "af596c4c3097bb04d1172b484bb6ffd44e294afd02a6401068945219a4196f59"
+    },
+    {
+      "path": "art/blender/character-reimagined/mira.blend",
+      "bytes": 194674,
+      "sha256": "a0d0dd48409b1d56a8db152916085abfbde3d13c1788228f32aeb080a5234b84"
+    },
+    {
+      "path": "art/blender/character-reimagined/package_delivery.py",
+      "bytes": 3364,
+      "sha256": "34a0118ff0e42ec181df0d0bc625cbd5b88f5d24ffe698ac86cd2dd34c2bd071"
+    },
+    {
+      "path": "art/blender/character-reimagined/README.md",
+      "bytes": 7568,
+      "sha256": "01318779185432de8be635189dc41c8cc6a5498dea01bca4d003fde0ed15e52c"
+    },
+    {
+      "path": "art/blender/character-reimagined/rebuild_candidates.py",
+      "bytes": 309,
+      "sha256": "eabb8a9537f9fe65def06c5aaf0a663206992118d07c2ad810879ffddc9517ca"
+    },
+    {
+      "path": "art/blender/character-reimagined/reference/authored-character-data.ts",
+      "bytes": 2269,
+      "sha256": "9d2a8df0340050edce15d0b35194db02ffa97f14b8049ed24d65ecc5b25bdd1c"
+    },
+    {
+      "path": "art/blender/character-reimagined/reference/authored-character.tsx",
+      "bytes": 2284,
+      "sha256": "a17e6d4c1d584841dcf5e6a33524bf5ccc862467dd357944e74ce2c2cd610ef8"
+    },
+    {
+      "path": "art/blender/character-reimagined/reference/catalog.ts",
+      "bytes": 2471,
+      "sha256": "8fdbee9c7b10bc62ea281ec94f005b6672fe09e5183c6b808fccf8fe06e55c2b"
+    },
+    {
+      "path": "art/blender/character-reimagined/reference/current-character.blend",
+      "bytes": 131956,
+      "sha256": "a0aff57cdc12bdbe8864919c79e7d1111e7b093cc8f58cb2740296527b25248e"
+    },
+    {
+      "path": "art/blender/character-reimagined/reference/current-character.glb",
+      "bytes": 231732,
+      "sha256": "4c08799d4ebc2de738783a148d7538f069974b059ce12b1d4feb0518ed21566b"
+    },
+    {
+      "path": "art/blender/character-reimagined/reference/figure.ts",
+      "bytes": 1627,
+      "sha256": "afafa6983d9083565fd9b0f5d29b721afe802f169a586b8133e8ff1ecc7fc087"
+    },
+    {
+      "path": "art/blender/character-reimagined/reference/look-preview.tsx",
+      "bytes": 6646,
+      "sha256": "d7f8e942c33902024cd03fb0f12b77c37c26aeef2b77981b8d488a7fc714bcf3"
+    },
+    {
+      "path": "art/blender/character-reimagined/reference/original-build_character.py",
+      "bytes": 7952,
+      "sha256": "f18ed61de39fa26da2b362d37f7af3f4d5d4233ad0f0436033dc404d5250f75c"
+    },
+    {
+      "path": "art/blender/character-reimagined/reference/people-meshes.tsx",
+      "bytes": 59748,
+      "sha256": "e89a2b230d2a86f00955e33acf0729ec201a80a39fe26230c2d11705ce76afc9"
+    },
+    {
+      "path": "art/blender/character-reimagined/reference/resolve.ts",
+      "bytes": 1097,
+      "sha256": "4805dcc5ad57f56daa62d8eabfd2080d479b323a783e33141e849782d60a3293"
+    },
+    {
+      "path": "art/blender/character-reimagined/rowan.blend",
+      "bytes": 177381,
+      "sha256": "866e8814387636d4d05e309782325e3e20d6d54fdeaedd87e0fbc9649978628d"
+    },
+    {
+      "path": "art/blender/character-reimagined/serve.mjs",
+      "bytes": 1170,
+      "sha256": "509d4c760a55e0de00ba19de723aeed592f21584a4a2c8dafef497cea8589e11"
+    },
+    {
+      "path": "art/blender/character-reimagined/verify.mjs",
+      "bytes": 4566,
+      "sha256": "79a0619eca8e5ac711f5a090c3b10264d532e066305e346ebe48acdafe7af45c"
+    },
+    {
+      "path": "art/blender/character-reimagined/verify_browser.mjs",
+      "bytes": 6160,
+      "sha256": "f6380e68d0891f7c5526931c44e260148b9d31cc7533f9b1ec579eec9d0b03a8"
+    },
+    {
+      "path": "art/blender/character-reimagined/verify_glb.mjs",
+      "bytes": 4223,
+      "sha256": "79d8fd31ac40a74b800c660556b8085c551775ef11d968b8901da6cc5fe2a3f9"
+    },
+    {
+      "path": "art/blender/character-reimagined/verify_source.py",
+      "bytes": 2514,
+      "sha256": "c25a0420a79ab6bde85d98bd66cf7967bc2d3835fdc851e0b9f1263a028e6a0e"
+    },
+    {
+      "path": "art/verification/character-reimagined/arden-back.png",
+      "bytes": 532086,
+      "sha256": "a7865daf9f9f51796cc9a73262aa5ce399146eb21db2875e102a6233bfbef5e2"
+    },
+    {
+      "path": "art/verification/character-reimagined/arden-beauty.png",
+      "bytes": 673508,
+      "sha256": "657a7b81b9bea5f3ace0541006b4083825c72a48b7bdb29e3e540fb6bd969cca"
+    },
+    {
+      "path": "art/verification/character-reimagined/arden-face.png",
+      "bytes": 485140,
+      "sha256": "d7abc36f453a7fee961ce87fbb344dd96d82a9ffaf0a9ebe269178cecab5594e"
+    },
+    {
+      "path": "art/verification/character-reimagined/arden-gameplay.png",
+      "bytes": 1119546,
+      "sha256": "ebd8f1d886b1e2018c84185144e475458c6e2bafa8b6f05d860fb7709974c9a4"
+    },
+    {
+      "path": "art/verification/character-reimagined/baseline-current-back.png",
+      "bytes": 519686,
+      "sha256": "bc594a8034e53a3658405c3e459bc8a0d925b06c8ff0159a8389515c48098de8"
+    },
+    {
+      "path": "art/verification/character-reimagined/baseline-current-beauty.png",
+      "bytes": 640741,
+      "sha256": "1bbcf40bf779f7b916974e84fd342fc03ea97712247e637c967ad0d2134f26a6"
+    },
+    {
+      "path": "art/verification/character-reimagined/baseline-current-face.png",
+      "bytes": 448672,
+      "sha256": "38c97acb3577f7542a42e309abc1a36c7d229534bcf60ee157fff5ce8bb9267d"
+    },
+    {
+      "path": "art/verification/character-reimagined/baseline-current-gameplay.png",
+      "bytes": 1119541,
+      "sha256": "93d7871dd5a3b9a2e15935b8734cca993c6dc62051f2c421e084e13270da83ff"
+    },
+    {
+      "path": "art/verification/character-reimagined/baseline-source-inspection.json",
+      "bytes": 10385,
+      "sha256": "7fba38047d1cfc019e08fb0ee7344ce87452c14da1651a17ecb418a24aa53681"
+    },
+    {
+      "path": "art/verification/character-reimagined/browser-check-final.log",
+      "bytes": 2364,
+      "sha256": "72d82d297fa431f4e460e8e2accbe09bbec7b1140a53fc4d6d5ac63056711f99"
+    },
+    {
+      "path": "art/verification/character-reimagined/browser-check-fresh.log",
+      "bytes": 2364,
+      "sha256": "72d82d297fa431f4e460e8e2accbe09bbec7b1140a53fc4d6d5ac63056711f99"
+    },
+    {
+      "path": "art/verification/character-reimagined/browser-check.log",
+      "bytes": 807,
+      "sha256": "1960e127a3560d178b56712eed35140ae0e1381d1f41e70899af63e85e27c901"
+    },
+    {
+      "path": "art/verification/character-reimagined/browser-final.log",
+      "bytes": 1915,
+      "sha256": "c2b8523548e8a0bb2c81856f0f8bd93e46391aaeb128c4264fbd8392b97fd657"
+    },
+    {
+      "path": "art/verification/character-reimagined/browser-full-verification.json",
+      "bytes": 1914,
+      "sha256": "debd7505e090591bbcde04c40d0fdb5095a283e56759dff48ab3caf4edb8dfe7"
+    },
+    {
+      "path": "art/verification/character-reimagined/browser-verification.json",
+      "bytes": 2363,
+      "sha256": "c9233ddc95c1655963c80c6e6cfa946a3922df55fd26fde982b2d46d6271591c"
+    },
+    {
+      "path": "art/verification/character-reimagined/browser.log",
+      "bytes": 1915,
+      "sha256": "1abb7f1281a8a07af5188f5f89c5cc4f1aaf1e8736ffb626c0f7f5084575f139"
+    },
+    {
+      "path": "art/verification/character-reimagined/build-bevel-fix.log",
+      "bytes": 25545,
+      "sha256": "28010e32011bb896f42adbfe22f4457eb5bd884294e43691830b027123dfe6ea"
+    },
+    {
+      "path": "art/verification/character-reimagined/build-final-bevel-safe.log",
+      "bytes": 29342,
+      "sha256": "a3c775a68b56fa9c11f1d65864f61e7112801c1db7fd54439fa9157a1d295398"
+    },
+    {
+      "path": "art/verification/character-reimagined/build-final-flat-strap.log",
+      "bytes": 29341,
+      "sha256": "cdeadf7aceaee3142e52961cedd3de058e76e03b7e5cb5d2df2a4c656b143a6f"
+    },
+    {
+      "path": "art/verification/character-reimagined/build-final.log",
+      "bytes": 29086,
+      "sha256": "a8910f3862f2e521bd35e2dbd87e033bebca7e7497defbc1710e85e2bd8b8e02"
+    },
+    {
+      "path": "art/verification/character-reimagined/build-refined.log",
+      "bytes": 29342,
+      "sha256": "6037374b47add3913c8dfbede357b31a03f9c7e91e78c7e84af0f669a5c1b8eb"
+    },
+    {
+      "path": "art/verification/character-reimagined/build.log",
+      "bytes": 28813,
+      "sha256": "6c3c376df60a30f77dfc598c0dbe013e261d988ad6f0a73d4011283cec3ad3e3"
+    },
+    {
+      "path": "art/verification/character-reimagined/contact-sheet.png",
+      "bytes": 1587185,
+      "sha256": "5acee8ee4d2552d2c2cedb332b2f3667d94c8ff9a5f861a433933158692c2a3f"
+    },
+    {
+      "path": "art/verification/character-reimagined/DELIVERY.json",
+      "bytes": 3770,
+      "sha256": "a3a6b199f0efac9b36beec2345b142199e0d759bebff1e43827806683ca50827"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-arden-body.png",
+      "bytes": 95873,
+      "sha256": "98972372106b077cc470804de01ec14ab55d406327a42f6268784ce6cf539844"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-arden-face.png",
+      "bytes": 140449,
+      "sha256": "b8116ea9a8c949ad3aa4e523d7923bc9706c4d2db281903fd0c82836dd905162"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-arden-game.png",
+      "bytes": 17504,
+      "sha256": "96cb1fe20b9674a050b706dfb4343237935f577d1ddc9116b946c9c84e6d5cc3"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-arden-webgl-body.png",
+      "bytes": 95873,
+      "sha256": "98972372106b077cc470804de01ec14ab55d406327a42f6268784ce6cf539844"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-arden-webgl-face.png",
+      "bytes": 140449,
+      "sha256": "b8116ea9a8c949ad3aa4e523d7923bc9706c4d2db281903fd0c82836dd905162"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-arm-study.png",
+      "bytes": 96205,
+      "sha256": "ad8d2b815adfda87ff86397299e6e88fae9b0ceb54aba0bd7805e41590d2f58e"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-gallery.png",
+      "bytes": 188825,
+      "sha256": "82f5f23f00ab04163bd6af9343717ae230e77bbbe1f0234962c4150e60ef678b"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-mira-body.png",
+      "bytes": 97142,
+      "sha256": "80d9046fc47493490c386197e58e451be7b426b60efb1f5c1cb585968c7455a8"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-mira-face.png",
+      "bytes": 143527,
+      "sha256": "bce92a7c14e5a3a6436a19370c15e1385e0a3aad439569292809bf146fe8b3c6"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-mira-game.png",
+      "bytes": 17514,
+      "sha256": "86d2e7ca4b41a27e83d1029d1079cca4465b47cfed80539848079f0aa08d6810"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-mira-webgl-body.png",
+      "bytes": 97142,
+      "sha256": "80d9046fc47493490c386197e58e451be7b426b60efb1f5c1cb585968c7455a8"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-mira-webgl-face.png",
+      "bytes": 143527,
+      "sha256": "bce92a7c14e5a3a6436a19370c15e1385e0a3aad439569292809bf146fe8b3c6"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-rigid-arm-study.png",
+      "bytes": 97309,
+      "sha256": "4bf4fbd81b57fafcd149ff33e4c2738dfe117f3925b2e77c8533790b44576f94"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-rowan-body.png",
+      "bytes": 95916,
+      "sha256": "c36cd8150e189ad09afaac6eaacae50dbbfffbd7ecdc0c248d9010c59085cc9e"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-rowan-face.png",
+      "bytes": 142259,
+      "sha256": "f0a0355d773075420b120d85e4c801ef025a6a6d004b7656b046344998682298"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-rowan-game.png",
+      "bytes": 17482,
+      "sha256": "fbb79a87677aee1894c92f2a89bb7d4a49d22230941f816e503a8b1fb07bfa2e"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-rowan-webgl-body.png",
+      "bytes": 95916,
+      "sha256": "c36cd8150e189ad09afaac6eaacae50dbbfffbd7ecdc0c248d9010c59085cc9e"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-rowan-webgl-face.png",
+      "bytes": 142259,
+      "sha256": "f0a0355d773075420b120d85e4c801ef025a6a6d004b7656b046344998682298"
+    },
+    {
+      "path": "art/verification/character-reimagined/desktop-world-distance.png",
+      "bytes": 17514,
+      "sha256": "86d2e7ca4b41a27e83d1029d1079cca4465b47cfed80539848079f0aa08d6810"
+    },
+    {
+      "path": "art/verification/character-reimagined/failed-bevel-geometry.log",
+      "bytes": 763,
+      "sha256": "12c6b23bd13dd3779222959c0d02ca7521e6e352274ec9ea58255d5f343665cb"
+    },
+    {
+      "path": "art/verification/character-reimagined/failed-bevel-source.log",
+      "bytes": 1040,
+      "sha256": "c97721af15dd295127a11952d0c9fea35e8764782a48469a16acc80aa150660e"
+    },
+    {
+      "path": "art/verification/character-reimagined/gameplay-scale-comparison.png",
+      "bytes": 190040,
+      "sha256": "b9ef154bcb6c5a438f7882d5a4ec949f614356d8b544e7f50c51b17136a8a0b3"
+    },
+    {
+      "path": "art/verification/character-reimagined/geometry-final.log",
+      "bytes": 2929,
+      "sha256": "56b8cde76063bce8018534078534b3aa99bc5b3f7f340b5bd59d5919014269b0"
+    },
+    {
+      "path": "art/verification/character-reimagined/geometry-verification.json",
+      "bytes": 2928,
+      "sha256": "cadbfa901da6f04e7b2fc2b88dedadb15b402e3bdce8ca650d6a0f8c5615cfc8"
+    },
+    {
+      "path": "art/verification/character-reimagined/geometry.log",
+      "bytes": 5858,
+      "sha256": "be4999356e8842067a40dadbd7e020b06a2256f761255d9244816de47bbeff2a"
+    },
+    {
+      "path": "art/verification/character-reimagined/glb-check-final.log",
+      "bytes": 3078,
+      "sha256": "859bf2ab350043c5ab45d3f280d8eb1e279de2c5ebc54663fe6f03b0482521ab"
+    },
+    {
+      "path": "art/verification/character-reimagined/glb-check-fresh.log",
+      "bytes": 3078,
+      "sha256": "1cede3f88899c175f2e28bc982b9682a0301660e6e6bde19332171d226c622be"
+    },
+    {
+      "path": "art/verification/character-reimagined/glb-check.log",
+      "bytes": 753,
+      "sha256": "2d8bf30780962bc8429adaada46789cc3b237bdc3085031c276262a4682dd06f"
+    },
+    {
+      "path": "art/verification/character-reimagined/hero-before-after.png",
+      "bytes": 1011746,
+      "sha256": "d8428fb9dc6f182d02774f7eca65fa2307604c456029ccd45c5d6ed7363d0ab2"
+    },
+    {
+      "path": "art/verification/character-reimagined/independent-saved-source-audit.json",
+      "bytes": 10727,
+      "sha256": "efad310846667b716651b27f06ec19363373bc4d7f98018492122603ea5b215b"
+    },
+    {
+      "path": "art/verification/character-reimagined/independent-saved-source-audit.log",
+      "bytes": 26649,
+      "sha256": "e1ece286a9df686f61e9b665e5741bd76b5cbcf24cb8ed55513065369852cc50"
+    },
+    {
+      "path": "art/verification/character-reimagined/mira-back.png",
+      "bytes": 538461,
+      "sha256": "c85965937b8fdc7dd7775555011b27e17307bc47940744dc5123c10decd21f26"
+    },
+    {
+      "path": "art/verification/character-reimagined/mira-beauty.png",
+      "bytes": 679887,
+      "sha256": "c4aba374ddad60ba19033813e66f1ff771ea5f96f52e2b83c3e9e4a1ec5557f0"
+    },
+    {
+      "path": "art/verification/character-reimagined/mira-face.png",
+      "bytes": 487315,
+      "sha256": "ac146a6a09b59e124af7edfda00bbfcc2d8fd5e84c351a0fa82339085b575e1f"
+    },
+    {
+      "path": "art/verification/character-reimagined/mira-gameplay.png",
+      "bytes": 1119498,
+      "sha256": "e3366d7914f7d0f24e3d7e4585e6a6a95fbe1c81d625afbb76840f6112933098"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-arden-body.png",
+      "bytes": 52367,
+      "sha256": "3854c1ba9de8f197c1c74c6f8c63ba9d232b582761ed0347b156bb0c4e24f5dc"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-arden-face.png",
+      "bytes": 60439,
+      "sha256": "4c33d788eca1288398715884cf6407bb2036b098d7eb4e79956bd4e25604afd6"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-arden-game.png",
+      "bytes": 5121,
+      "sha256": "6f25fbd18194fdaf95668d9a773f833d1ba948738b5d0cf567f996ec823906ac"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-arden-webgl-body.png",
+      "bytes": 52367,
+      "sha256": "6ec2c5e736ba04a8e14b19db72ca32c035158ab26ccbce344611172eee6de954"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-arden-webgl-face.png",
+      "bytes": 60439,
+      "sha256": "e5af28711988fbb9376df2d5447ad86ba14667fc5439f9c71f5d9d864950a420"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-arm-study.png",
+      "bytes": 52652,
+      "sha256": "ebd69756a31165c12bb3afdc298d1e9985a6fe61e5949006d6afc9578cc97a43"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-gallery.png",
+      "bytes": 133309,
+      "sha256": "6af48249e419cff1106714c93065bd3198e3bddce981faacfd91c0666fcd6640"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-mira-body.png",
+      "bytes": 53162,
+      "sha256": "112a1d53e021b35a9d244b57ce92f83222b3692a9c891253ef09c56f2c7a7271"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-mira-face.png",
+      "bytes": 61060,
+      "sha256": "13a44fe7c1880aeaa75ef341520414b4919f04f35188883d1484dce36e3e857a"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-mira-game.png",
+      "bytes": 5114,
+      "sha256": "6f7a40942d6038cd92fbabcbe0b429c05515205044ed2a2154c910f336e670fd"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-mira-webgl-body.png",
+      "bytes": 53162,
+      "sha256": "112a1d53e021b35a9d244b57ce92f83222b3692a9c891253ef09c56f2c7a7271"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-mira-webgl-face.png",
+      "bytes": 61060,
+      "sha256": "13a44fe7c1880aeaa75ef341520414b4919f04f35188883d1484dce36e3e857a"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-rigid-arm-study.png",
+      "bytes": 53357,
+      "sha256": "c6e9699397cfea9716cf3f90c5e59a74c24a278dcf57783259f36ceaeb14feb6"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-rowan-body.png",
+      "bytes": 52435,
+      "sha256": "26998a988996c0b3d5188eb7f46e5b7c81626dcb91c9ec628a230ae69809c056"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-rowan-face.png",
+      "bytes": 60812,
+      "sha256": "415a5614fe4ba89d2643b530cf7fcff6bff2ecf14872cf708ef5b3087312e452"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-rowan-game.png",
+      "bytes": 5108,
+      "sha256": "fcca1f1c5fc3cdc33ac1042bce7996db1eaa789581239c8e3af727c91534b577"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-rowan-webgl-body.png",
+      "bytes": 52435,
+      "sha256": "26998a988996c0b3d5188eb7f46e5b7c81626dcb91c9ec628a230ae69809c056"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-rowan-webgl-face.png",
+      "bytes": 60812,
+      "sha256": "415a5614fe4ba89d2643b530cf7fcff6bff2ecf14872cf708ef5b3087312e452"
+    },
+    {
+      "path": "art/verification/character-reimagined/mobile-world-distance.png",
+      "bytes": 5114,
+      "sha256": "6f7a40942d6038cd92fbabcbe0b429c05515205044ed2a2154c910f336e670fd"
+    },
+    {
+      "path": "art/verification/character-reimagined/plate-provenance.json",
+      "bytes": 688,
+      "sha256": "73e6c98ce79148b7846f711fde0a564d4ac0f3ad1e107f0b29b7ace3375d6b8d"
+    },
+    {
+      "path": "art/verification/character-reimagined/portable-baseline-check.log",
+      "bytes": 2929,
+      "sha256": "56b8cde76063bce8018534078534b3aa99bc5b3f7f340b5bd59d5919014269b0"
+    },
+    {
+      "path": "art/verification/character-reimagined/preservation-before.json",
+      "bytes": 33826,
+      "sha256": "c813758f954ed51ed5bcdcc80d129108d5993e1824b6fc1c10e7b069dd0f0cc3"
+    },
+    {
+      "path": "art/verification/character-reimagined/preservation-verification.json",
+      "bytes": 202,
+      "sha256": "b8f43b32754619130431374734b4193de3ebb8a10907f9c3f19db3c3bf29d72e"
+    },
+    {
+      "path": "art/verification/character-reimagined/revision-01/arden-back.png",
+      "bytes": 530533,
+      "sha256": "f595d7f416cfaa79a857f5888a4bc2ce72e1efc404d8a2428565e7117e51252a"
+    },
+    {
+      "path": "art/verification/character-reimagined/revision-01/arden-beauty.png",
+      "bytes": 675300,
+      "sha256": "dbb88f07fd863d868433f7502902ad34d9d5ec2c27fe3a0940e6bf4038c63501"
+    },
+    {
+      "path": "art/verification/character-reimagined/revision-01/arden-face.png",
+      "bytes": 488276,
+      "sha256": "14eef24b21ca1aa87e2cca8994444d1d48152fd0b3ce8e498102c359443d0c50"
+    },
+    {
+      "path": "art/verification/character-reimagined/revision-01/arden-gameplay.png",
+      "bytes": 1119237,
+      "sha256": "f00903d4070a96dfa2862f4aadabf950d70c5e92a13f13effc2f9eaf5a6a02e7"
+    },
+    {
+      "path": "art/verification/character-reimagined/revision-01/baseline-current-back.png",
+      "bytes": 519686,
+      "sha256": "4a84404609c083fceb05368d901df6ed9d1729d8df02ab8cc2de66131ebc5a3a"
+    },
+    {
+      "path": "art/verification/character-reimagined/revision-01/baseline-current-beauty.png",
+      "bytes": 640741,
+      "sha256": "49a21018fd13f8f69a1532e1b48c86e5714bb49beea223ad37ae8b09a4e12cec"
+    },
+    {
+      "path": "art/verification/character-reimagined/revision-01/baseline-current-face.png",
+      "bytes": 448672,
+      "sha256": "1efe9638b216da000ff8cfffd6bfa3574bb8355adef1d7b86ca6a1b77bb59b7b"
+    },
+    {
+      "path": "art/verification/character-reimagined/revision-01/baseline-current-gameplay.png",
+      "bytes": 1119541,
+      "sha256": "3cba0d55d8a943da06e71ebdd41dc98edb2fd8613896b353c2da3f974356c269"
+    },
+    {
+      "path": "art/verification/character-reimagined/revision-01/mira-back.png",
+      "bytes": 537287,
+      "sha256": "62dae27a8d74babbbcf0989d6379801e023c4f150ed3b7f0682f05e68a292cd1"
+    },
+    {
+      "path": "art/verification/character-reimagined/revision-01/mira-beauty.png",
+      "bytes": 682147,
+      "sha256": "fdc84fa90a93d709a12d9ee5bb16a852bb992e4f346ca0a95353570a0242f44d"
+    },
+    {
+      "path": "art/verification/character-reimagined/revision-01/mira-face.png",
+      "bytes": 491404,
+      "sha256": "b929543c21e79058dc24b25af0ba94e146f9ed92dd18d6003662a23fb1779789"
+    },
+    {
+      "path": "art/verification/character-reimagined/revision-01/mira-gameplay.png",
+      "bytes": 1118535,
+      "sha256": "49fafd898d04f2ccdff7cff7a360b16304bb39de26b4465b1b9de339672d1015"
+    },
+    {
+      "path": "art/verification/character-reimagined/revision-01/rowan-back.png",
+      "bytes": 539140,
+      "sha256": "bb5497e8c045f0a34bd19269439bec2dc510ff56a4284517ebd2f89a74927fe8"
+    },
+    {
+      "path": "art/verification/character-reimagined/revision-01/rowan-beauty.png",
+      "bytes": 677946,
+      "sha256": "844c03e97cec1686e897f7da91d61e0e922560b716822e8da3c948969961bfc6"
+    },
+    {
+      "path": "art/verification/character-reimagined/revision-01/rowan-face.png",
+      "bytes": 490128,
+      "sha256": "3815477986c0f014101b6e237948e1e160ed69be93809055fccb71e49249695e"
+    },
+    {
+      "path": "art/verification/character-reimagined/revision-01/rowan-gameplay.png",
+      "bytes": 1118715,
+      "sha256": "b59e0f70b7675fcd0574afaa4d4d80eba63b66446590c519ecf63c59640f1aa9"
+    },
+    {
+      "path": "art/verification/character-reimagined/rowan-back.png",
+      "bytes": 540640,
+      "sha256": "f16b1a481950a12835615431ca37fdfea8b20b99a5d7b55b7ddc57bbe78a8760"
+    },
+    {
+      "path": "art/verification/character-reimagined/rowan-beauty.png",
+      "bytes": 676260,
+      "sha256": "fc2e6e80c510c6bc0a3c0e9b06ec3a3eedae3651221a82ecc28b391a5c1ed31f"
+    },
+    {
+      "path": "art/verification/character-reimagined/rowan-face.png",
+      "bytes": 487621,
+      "sha256": "e7c6db46badf411418c80fb156e753a820874cc487ad6fb463f3cc8097623693"
+    },
+    {
+      "path": "art/verification/character-reimagined/rowan-gameplay.png",
+      "bytes": 1119188,
+      "sha256": "4584a517f3d8ab4002da0d18615cd58d82b5a19a67570c3878cb74fd38420ccc"
+    },
+    {
+      "path": "art/verification/character-reimagined/source-check-final.log",
+      "bytes": 4401,
+      "sha256": "fc6b85c9e6f73495a3cbe3e71a54bbf2aabad40ce6ac14b9600ebc6be69a157a"
+    },
+    {
+      "path": "art/verification/character-reimagined/source-check.log",
+      "bytes": 901,
+      "sha256": "af43f63bd607e09f9b23823cfc239c8254c7b95819fbae28e1098297765d5e60"
+    },
+    {
+      "path": "art/verification/character-reimagined/source-verification.json",
+      "bytes": 3743,
+      "sha256": "bd94caad8e27d594cc001b18e464b75d4191fdbc569e2d21cbe2170f3baa1c7d"
+    },
+    {
+      "path": "art/verification/character-reimagined/source.log",
+      "bytes": 4401,
+      "sha256": "28796d1b06e225f9d03fe62bac6eaa798ef932ce1a197dc3a263f5f20ae19e40"
+    },
+    {
+      "path": "art/verification/character-reimagined/visual-review-final.md",
+      "bytes": 3220,
+      "sha256": "a0165ebb0a6a743da4d1b2151bef7219c0f464bd81a6b68862872c4743dc7141"
+    },
+    {
+      "path": "art/verification/character-reimagined/VISUAL-REVIEW.md",
+      "bytes": 4589,
+      "sha256": "a63d1ac7de2ab36376c98e2187f7dbb726e23acf5b0dd3527b8f7dd611ac7809"
+    },
+    {
+      "path": "public/art/character-reimagined/arden.glb",
+      "bytes": 397272,
+      "sha256": "aeec68a1ea2d77e5e4346e01d435040addaa2e1d6e085b92feb35812d9974880"
+    },
+    {
+      "path": "public/art/character-reimagined/baseline-current.glb",
+      "bytes": 227808,
+      "sha256": "21890f6eb13c6c7a745f835c4225a823f0068e576ffde3cfedfd7ab9139faac2"
+    },
+    {
+      "path": "public/art/character-reimagined/contact-sheet.jpg",
+      "bytes": 359259,
+      "sha256": "6367c48b0a8560efda6b38bcfde9835ca597380f01fd9f7afd75432b9a7526ab"
+    },
+    {
+      "path": "public/art/character-reimagined/gallery.css",
+      "bytes": 3670,
+      "sha256": "aa697289fe80f35d77e811e4c09c9770034f7ad4b6096ef0d8a9bdda4ce0c142"
+    },
+    {
+      "path": "public/art/character-reimagined/gallery.js",
+      "bytes": 5717,
+      "sha256": "70cc4ff2136f12b3ac6917e34e879c4cd8fd3c28c63d1b37af02674fcb98ed60"
+    },
+    {
+      "path": "public/art/character-reimagined/gameplay-scale-comparison.jpg",
+      "bytes": 199585,
+      "sha256": "669ed6c6d68787378df84fe388ee3d40fb98e663d644b8e95c153445c5bc09aa"
+    },
+    {
+      "path": "public/art/character-reimagined/hero-before-after.jpg",
+      "bytes": 263745,
+      "sha256": "32c89e7d16ab036553742a1c22838433ea814cfe498d7aaeb446bd1271a5be46"
+    },
+    {
+      "path": "public/art/character-reimagined/index.html",
+      "bytes": 3735,
+      "sha256": "a0392bdf0f628d3cc2919cdc04a81c10f5dab7be2d1897b16dbabecbe2d9d9d4"
+    },
+    {
+      "path": "public/art/character-reimagined/manifest.json",
+      "bytes": 3668,
+      "sha256": "e4f97eddf3c73daee25b3e8482a674aaa461240b5383b0a0a1ee912d4702f7bc"
+    },
+    {
+      "path": "public/art/character-reimagined/mira.glb",
+      "bytes": 429128,
+      "sha256": "96cec45de65eb98450e850db0b217252eef1c02d74d9ea0a7b8211029c0c520c"
+    },
+    {
+      "path": "public/art/character-reimagined/rowan.glb",
+      "bytes": 366696,
+      "sha256": "2b5cff5a268c53c36c26351a42e5c2fce7a70fd74d7c13f7414d353fa4fb0ad4"
+    },
+    {
+      "path": "public/art/character-reimagined/vendor/addons/controls/OrbitControls.js",
+      "bytes": 40504,
+      "sha256": "faabb4e8dfd9235ee4a9fd7c9a3d75f90f1689dbd4944bd6fd32117dacec5f93"
+    },
+    {
+      "path": "public/art/character-reimagined/vendor/addons/loaders/GLTFLoader.js",
+      "bytes": 114959,
+      "sha256": "97642d720f16cc9a0c9844934198e4d0c023bea8e89576d0f7545d03b2d103d2"
+    },
+    {
+      "path": "public/art/character-reimagined/vendor/addons/utils/BufferGeometryUtils.js",
+      "bytes": 37621,
+      "sha256": "5c552223a9309883743b80538d6e9cdb45e3227f30d3ec56fb2c39b46e78d595"
+    },
+    {
+      "path": "public/art/character-reimagined/vendor/addons/utils/SkeletonUtils.js",
+      "bytes": 11535,
+      "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
+    },
+    {
+      "path": "public/art/character-reimagined/vendor/THREE-LICENSE.txt",
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "path": "public/art/character-reimagined/vendor/three.core.js",
+      "bytes": 1443056,
+      "sha256": "3718df126d69c125362a03340913204470d8c50238605150e57f808840fb7759"
+    },
+    {
+      "path": "public/art/character-reimagined/vendor/three.module.js",
+      "bytes": 650153,
+      "sha256": "bbf5ed13fe4373f5bd38b14ea8e62e9f157327da5638edc6d3863e08b167c9c7"
+    }
+  ]
+}

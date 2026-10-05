@@ -1,0 +1,26 @@
+[
+  {
+    "url": "/assets/index-DNwqyWXw.js",
+    "status": 200,
+    "local": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\.vercel\\output\\static\\assets\\index-DNwqyWXw.js",
+    "match": true
+  },
+  {
+    "url": "/assets/rolldown-runtime-C0FnF6B9.js",
+    "status": 200,
+    "local": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\.vercel\\output\\static\\assets\\rolldown-runtime-C0FnF6B9.js",
+    "match": true
+  },
+  {
+    "url": "/assets/routes-DJa39D02.js",
+    "status": 200,
+    "local": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\.vercel\\output\\static\\assets\\routes-DJa39D02.js",
+    "match": true
+  },
+  {
+    "url": "/assets/styles-H1TFFXgf.css",
+    "status": 200,
+    "local": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\.vercel\\output\\static\\assets\\styles-H1TFFXgf.css",
+    "match": true
+  }
+]

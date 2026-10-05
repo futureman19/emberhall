@@ -1,0 +1,126 @@
+{
+  "kindCount": 7,
+  "scope": "Seven enterable new architecture kinds, not the entire 23-kind building catalog",
+  "entries": [
+    {
+      "kind": "shop",
+      "status": "controlled-visual-and-input-verified",
+      "evidence": {
+        "candidate": "art/verification/worldwide/building-homes-ux-candidate-final/results.json",
+        "control": "art/verification/worldwide/building-homes-ux-control-final/results.json",
+        "failure": "art/verification/worldwide/building-homes-ux-failure-final/results.json",
+        "built": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+      },
+      "priorityFollowup": null,
+      "visual": "whole exterior/roof/ground contact and original voxel cutaway; full player visibility not accepted",
+      "naturalWorld": "pending",
+      "construction": "pending",
+      "performance": "pending"
+    },
+    {
+      "kind": "townhome",
+      "status": "controlled-visual-and-input-verified",
+      "evidence": {
+        "candidate": "art/verification/worldwide/building-homes-ux-candidate-final/results.json",
+        "control": "art/verification/worldwide/building-homes-ux-control-final/results.json",
+        "failure": "art/verification/worldwide/building-homes-ux-failure-final/results.json",
+        "built": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+      },
+      "priorityFollowup": null,
+      "visual": "whole exterior/roof/ground contact and original voxel cutaway; full player visibility not accepted",
+      "naturalWorld": "pending",
+      "construction": "pending",
+      "performance": "pending"
+    },
+    {
+      "kind": "townhouse",
+      "status": "controlled-visual-and-input-verified",
+      "evidence": {
+        "candidate": "art/verification/worldwide/building-homes-ux-candidate-final/results.json",
+        "control": "art/verification/worldwide/building-homes-ux-control-final/results.json",
+        "failure": "art/verification/worldwide/building-homes-ux-failure-final/results.json",
+        "built": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+      },
+      "priorityFollowup": null,
+      "visual": "whole exterior/roof/ground contact and original voxel cutaway; full player visibility not accepted",
+      "naturalWorld": "pending",
+      "construction": "pending",
+      "performance": "pending"
+    },
+    {
+      "kind": "cottage",
+      "status": "controlled-visual-and-input-verified",
+      "evidence": {
+        "candidate": "art/verification/worldwide/building-homes-ux-candidate-final/results.json",
+        "control": "art/verification/worldwide/building-homes-ux-control-final/results.json",
+        "failure": "art/verification/worldwide/building-homes-ux-failure-final/results.json",
+        "built": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+      },
+      "priorityFollowup": null,
+      "visual": "whole exterior/roof/ground contact and original voxel cutaway; full player visibility not accepted",
+      "naturalWorld": "pending",
+      "construction": "pending",
+      "performance": "pending"
+    },
+    {
+      "kind": "porch",
+      "status": "controlled-visual-and-input-verified",
+      "evidence": {
+        "candidate": "art/verification/worldwide/building-homes-ux-candidate-final/results.json",
+        "control": "art/verification/worldwide/building-homes-ux-control-final/results.json",
+        "failure": "art/verification/worldwide/building-homes-ux-failure-final/results.json",
+        "built": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+      },
+      "priorityFollowup": {
+        "candidate": "art/verification/worldwide/building-homes-priority-candidate/results.json",
+        "control": "art/verification/worldwide/building-homes-priority-control/results.json",
+        "failure": "art/verification/worldwide/building-homes-priority-failure/results.json",
+        "built": "art/verification/worldwide/building-homes-priority-built/results.json"
+      },
+      "visual": "whole exterior/roof/ground contact and original voxel cutaway; full player visibility not accepted",
+      "naturalWorld": "pending",
+      "construction": "pending",
+      "performance": "pending"
+    },
+    {
+      "kind": "hut",
+      "status": "controlled-visual-and-input-verified",
+      "evidence": {
+        "candidate": "art/verification/worldwide/building-homes-ux-candidate-final/results.json",
+        "control": "art/verification/worldwide/building-homes-ux-control-final/results.json",
+        "failure": "art/verification/worldwide/building-homes-ux-failure-final/results.json",
+        "built": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+      },
+      "priorityFollowup": {
+        "candidate": "art/verification/worldwide/building-homes-priority-candidate/results.json",
+        "control": "art/verification/worldwide/building-homes-priority-control/results.json",
+        "failure": "art/verification/worldwide/building-homes-priority-failure/results.json",
+        "built": "art/verification/worldwide/building-homes-priority-built/results.json"
+      },
+      "visual": "whole exterior/roof/ground contact and original voxel cutaway; full player visibility not accepted",
+      "naturalWorld": "pending",
+      "construction": "pending",
+      "performance": "pending"
+    },
+    {
+      "kind": "homestead",
+      "status": "controlled-visual-and-input-verified",
+      "evidence": {
+        "candidate": "art/verification/worldwide/building-homes-ux-candidate-final/results.json",
+        "control": "art/verification/worldwide/building-homes-ux-control-final/results.json",
+        "failure": "art/verification/worldwide/building-homes-ux-failure-final/results.json",
+        "built": "art/verification/worldwide/building-homes-ux-built-final/results.json"
+      },
+      "priorityFollowup": {
+        "candidate": "art/verification/worldwide/building-homes-priority-candidate/results.json",
+        "control": "art/verification/worldwide/building-homes-priority-control/results.json",
+        "failure": "art/verification/worldwide/building-homes-priority-failure/results.json",
+        "built": "art/verification/worldwide/building-homes-priority-built/results.json"
+      },
+      "visual": "whole exterior/roof/ground contact and original voxel cutaway; full player visibility not accepted",
+      "naturalWorld": "pending",
+      "construction": "pending",
+      "performance": "pending"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "path": "art/reedwake-waterfront/reedwake-crossing.glb",
+    "allEqual": true,
+    "sha256": "5859e6825891c72ab03f6804869bc0f3de3e48a027763a8592d5c50aee446be4"
+  },
+  {
+    "path": "art/river-bridge/reedwake-bridge.glb",
+    "allEqual": true,
+    "sha256": "3a9831619fde65fbad693e2802f27c16c929d64b470b512ac5610c9e4d0d4ac3"
+  }
+]

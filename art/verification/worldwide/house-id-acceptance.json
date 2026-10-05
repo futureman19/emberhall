@@ -1,0 +1,206 @@
+{
+  "passed": true,
+  "scope": "Prevent new live-entity ID collisions; controlled unchanged-terrain low-tick placement, real mouse/touch chest input, canonical autosave and fresh-context reload; no existing corrupt-save repair, natural-world or performance certification",
+  "counts": {
+    "candidate": 190,
+    "failure": 190,
+    "built": 160
+  },
+  "browserAssertions": 540,
+  "testSuites": [
+    250,
+    687
+  ],
+  "tests": 937,
+  "cases": [
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "porch",
+      "houseId": "b-58",
+      "unchangedFixtureTick": 24,
+      "loadedTick": 25,
+      "result": "art/verification/worldwide/house-id-lifecycle-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "hut",
+      "houseId": "b-59",
+      "unchangedFixtureTick": 24,
+      "loadedTick": 25,
+      "result": "art/verification/worldwide/house-id-lifecycle-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "homestead",
+      "houseId": "b-60",
+      "unchangedFixtureTick": 24,
+      "loadedTick": 25,
+      "result": "art/verification/worldwide/house-id-lifecycle-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "porch",
+      "houseId": "b-58",
+      "unchangedFixtureTick": 24,
+      "loadedTick": 25,
+      "result": "art/verification/worldwide/house-id-lifecycle-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "hut",
+      "houseId": "b-59",
+      "unchangedFixtureTick": 24,
+      "loadedTick": 25,
+      "result": "art/verification/worldwide/house-id-lifecycle-candidate-final/results.json"
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "homestead",
+      "houseId": "b-60",
+      "unchangedFixtureTick": 24,
+      "loadedTick": 25,
+      "result": "art/verification/worldwide/house-id-lifecycle-candidate-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "porch",
+      "houseId": "b-58",
+      "unchangedFixtureTick": 24,
+      "loadedTick": 25,
+      "result": "art/verification/worldwide/house-id-lifecycle-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "hut",
+      "houseId": "b-59",
+      "unchangedFixtureTick": 24,
+      "loadedTick": 25,
+      "result": "art/verification/worldwide/house-id-lifecycle-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "homestead",
+      "houseId": "b-60",
+      "unchangedFixtureTick": 24,
+      "loadedTick": 25,
+      "result": "art/verification/worldwide/house-id-lifecycle-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "porch",
+      "houseId": "b-58",
+      "unchangedFixtureTick": 24,
+      "loadedTick": 25,
+      "result": "art/verification/worldwide/house-id-lifecycle-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "hut",
+      "houseId": "b-59",
+      "unchangedFixtureTick": 24,
+      "loadedTick": 25,
+      "result": "art/verification/worldwide/house-id-lifecycle-failure-final/results.json"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "homestead",
+      "houseId": "b-60",
+      "unchangedFixtureTick": 24,
+      "loadedTick": 25,
+      "result": "art/verification/worldwide/house-id-lifecycle-failure-final/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "porch",
+      "houseId": "b-58",
+      "unchangedFixtureTick": 23,
+      "loadedTick": 24,
+      "result": "art/verification/worldwide/house-id-lifecycle-built-lowtick/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "hut",
+      "houseId": "b-59",
+      "unchangedFixtureTick": 23,
+      "loadedTick": 24,
+      "result": "art/verification/worldwide/house-id-lifecycle-built-lowtick/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "homestead",
+      "houseId": "b-60",
+      "unchangedFixtureTick": 23,
+      "loadedTick": 24,
+      "result": "art/verification/worldwide/house-id-lifecycle-built-lowtick/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "porch",
+      "houseId": "b-58",
+      "unchangedFixtureTick": 23,
+      "loadedTick": 24,
+      "result": "art/verification/worldwide/house-id-lifecycle-built-lowtick/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "hut",
+      "houseId": "b-59",
+      "unchangedFixtureTick": 23,
+      "loadedTick": 24,
+      "result": "art/verification/worldwide/house-id-lifecycle-built-lowtick/results.json"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "homestead",
+      "houseId": "b-60",
+      "unchangedFixtureTick": 23,
+      "loadedTick": 24,
+      "result": "art/verification/worldwide/house-id-lifecycle-built-lowtick/results.json"
+    }
+  ],
+  "changedCheckpointFiles": [
+    "src/game/world.ts",
+    "package.json",
+    "scripts/worldwide-house-shade.mjs"
+  ],
+  "review": "subagent-summary-0-20260910_151851_417205.txt",
+  "remaining": [
+    "Already duplicated/corrupt saves are not rewritten",
+    "Broader housing/bootstrap lifecycle",
+    "Fortifications, keep and remaining worldwide building acceptance",
+    "Full collision/animation/natural-world/performance/physical-phone testing",
+    "Chest header/control and toast visual overlap; separate UI-clarity follow-up"
+  ],
+  "published": false,
+  "unchangedCheckpointAssets": 96,
+  "builtFreshness": "house-id-built-freshness.json",
+  "supersededBuilt": "house-id-lifecycle-built-final had higher startup ticks; use built-lowtick for the controlled low-tick acceptance",
+  "visualReview": {
+    "builtMobile": "All three chest panels open; Chest Empty readable. Offscreen Bandage row is not screenshot evidence; amounts verified by real transfer and runtime records. Header/control and toast overlap retained.",
+    "builtDesktop": "Corrected left-panel crops show all three panels and Empty chest. Header/icon overlap visible; no toast in corrected desktop sheet.",
+    "builtHomestead": "Opaque placed body visible; no gross duplicate observed; foliage/toasts obscure portions.",
+    "captures": [
+      "house-id-built-desktop-panels.jpg",
+      "house-id-built-mobile-reloaded-chests.jpg",
+      "house-id-lifecycle-built-lowtick/mobile-homestead-placed.png"
+    ]
+  }
+}

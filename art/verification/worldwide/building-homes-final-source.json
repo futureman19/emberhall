@@ -1,0 +1,10 @@
+{
+  "src/components/game/house-gump.tsx": "a223ee8bdc7c28ca5d1d6ad8dbc026173aebc1a19ac855719f7f13341e08b06e",
+  "src/components/game/terrain.tsx": "ec48b07696fde2e00c321df858a5fa75b7cd3012c9dc69d604893998c2489b50",
+  "src/components/game/use-house-touch.ts": "40132cd5299c6fcb404aed7a662b092746daafc9f92ae6bdad9bf831a379bc44",
+  "src/game/house-touch.ts": "553e1e840f8857246776b61b3aa044ac97f79cceeefc05df57ed8cb441755e0c",
+  "src/game/house-touch.test.ts": "5141844e97d9a57c612331526960084924509abf920b27a19f2d4e786406083e",
+  "scripts/worldwide-building-homes.mjs": "71b653faac1fc1ce24133f2aba775a815bd1920c62dbee5142b253be0b7fd66f",
+  "scripts/worldwide-house-touch-checks.mjs": "dd12ac0ca0cdad6b8dd76be8ef35ad1bf2a0419015c140bdf4c592889f46985b",
+  "package.json": "c695eb8bf54037a9a3dc8574935592e557e6b1ca634fdab01f38c065fcc4e242"
+}

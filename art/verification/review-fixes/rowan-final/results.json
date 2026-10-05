@@ -1,0 +1,171 @@
+{
+  "url": "http://127.0.0.1:8144",
+  "scope": "Built app creator and player visual check, fresh storage; no Fiber source introspection",
+  "checks": [
+    {
+      "name": "bundled-scripts",
+      "ok": true
+    },
+    {
+      "name": "mobile-creator-navigation-reachable",
+      "ok": true
+    },
+    {
+      "name": "built-rowan-identical-to-approved-asset",
+      "ok": true,
+      "servedHash": "2b5cff5a268c53c36c26351a42e5c2fce7a70fd74d7c13f7414d353fa4fb0ad4",
+      "localHash": "2b5cff5a268c53c36c26351a42e5c2fce7a70fd74d7c13f7414d353fa4fb0ad4"
+    },
+    {
+      "name": "actual-renderer-rowan-request",
+      "ok": true,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:8144/art/character-reimagined/rowan.glb",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "name": "creator-finished-and-saved",
+      "ok": true
+    },
+    {
+      "name": "appearance-saved",
+      "ok": true,
+      "look": {
+        "schema": "emberhall.look/1",
+        "cls": "ranger",
+        "skin": "#b5a48d",
+        "hairStyle": "crop",
+        "hairColor": "#5a4a3a",
+        "garb": "#8a6a4a"
+      },
+      "persistedLook": {
+        "schema": "emberhall.look/1",
+        "cls": "ranger",
+        "skin": "#b5a48d",
+        "hairStyle": "crop",
+        "hairColor": "#5a4a3a",
+        "garb": "#8a6a4a"
+      },
+      "expectedColors": [
+        "#b5a48d",
+        "#5a4a3a",
+        "#8a6a4a"
+      ]
+    },
+    {
+      "name": "native-walk",
+      "ok": true,
+      "before": 256,
+      "after": 257.03999999999996,
+      "path": 1
+    },
+    {
+      "name": "native-equip-all-slots",
+      "ok": true,
+      "equipped": {
+        "head": "helm",
+        "chest": "mail",
+        "hands": "gauntlets",
+        "main": "sword",
+        "off": "shield"
+      }
+    },
+    {
+      "name": "action-fixture-save-valid",
+      "ok": true
+    },
+    {
+      "name": "native-action",
+      "ok": true,
+      "action": {
+        "kind": "hunt",
+        "tx": 258,
+        "ty": 296,
+        "targetId": "rowan-built-target",
+        "spell": null
+      }
+    },
+    {
+      "name": "native-seeded-poison-death",
+      "ok": true,
+      "pre": {
+        "hp": 1,
+        "ghost": false,
+        "tx": 257,
+        "ty": 296
+      },
+      "ghost": {
+        "hp": 0,
+        "ghost": true,
+        "playerGhost": true,
+        "gold": 60,
+        "corpseAt": {
+          "tx": 257,
+          "ty": 296
+        }
+      }
+    },
+    {
+      "name": "healer-ui-restore",
+      "ok": true
+    },
+    {
+      "name": "restored-fixture-save-valid",
+      "ok": true
+    },
+    {
+      "name": "no-page-console-errors",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "name": "built-rejected-request-fallback-ui-survives",
+      "ok": true,
+      "failures": [
+        "http://127.0.0.1:8144/art/character-reimagined/rowan.glb"
+      ],
+      "fallbackErrors": [],
+      "scope": "Visual fallback only; exact original geometry proven by dev context"
+    }
+  ],
+  "errors": [],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:8144/art/character-reimagined/rowan.glb",
+      "status": 200
+    }
+  ],
+  "screenshots": [
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\rowan-final\\desktop-creator.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\rowan-final\\mobile-creator.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\rowan-final\\mobile-creator-navigation.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\rowan-final\\mobile-world.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\rowan-final\\desktop-world.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\rowan-final\\desktop-walk.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\rowan-final\\desktop-equipped.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\rowan-final\\mobile-equipped.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\rowan-final\\mobile-action.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\rowan-final\\mobile-ghost.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\rowan-final\\mobile-restored.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\rowan-final\\desktop-restored.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\rowan-final\\mobile-fallback-creator.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\rowan-final\\desktop-fallback-creator.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-review-fixes\\art\\verification\\review-fixes\\rowan-final\\desktop-fallback-world.png"
+  ],
+  "chosenColors": [
+    "rgb(181, 164, 141)",
+    "rgb(90, 74, 58)",
+    "rgb(138, 106, 74)"
+  ],
+  "bundles": [
+    {
+      "url": "http://127.0.0.1:8144/assets/index-BPwnDYQF.js",
+      "status": 200,
+      "sha256": "a8a8a2e835d6cc1236edb44b8ecfba93257c58e1b7785e6fccc1534c9819a090"
+    }
+  ],
+  "passed": true
+}

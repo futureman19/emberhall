@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { MAP } from "../../game/atlas.ts";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import * as THREE from "three";
@@ -422,7 +423,7 @@ test("visual cache validates primitive values before cache-key lookup", () => {
   for (const seed of [Number.NaN, Infinity, 1.5, Number.MAX_SAFE_INTEGER + 1]) {
     assert.throws(() => getUnsafe({ ...base, seed }), /seed must be a safe integer/);
   }
-  for (const [field, value] of [["tx", -1], ["tx", 512], ["ty", 1.5], ["ty", Infinity]] as const) {
+  for (const [field, value] of [["tx", -1], ["tx", MAP], ["ty", 1.5], ["ty", Infinity]] as const) {
     assert.throws(
       () => getUnsafe({ ...base, [field]: value }),
       new RegExp(`${field} must be a safe integer within map bounds`),

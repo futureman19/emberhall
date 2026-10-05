@@ -23,7 +23,7 @@ import { PERSONAL_ACTION_DURATION, getPersonalActionFx, personalActionPose } fro
 import { EXTRACTION_DURATION, extractionPose, extractionVisualProfile, getExtractionFx } from "@/game/extraction-animation";
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY } from "@/game/height";
-import { keepStoryY } from "@/game/keep-story";
+import { keepStoryY, insideKeep, onKeepStairs } from "@/game/keep-story";
 import { keepPlayerOffset } from "./keep-presentation.ts";
 import { getWorld } from "@/game/live";
 import { useGraphicsSettings } from "@/game/graphics-settings";
@@ -882,7 +882,9 @@ function Figure({
   // An Lor Xen: the shimmer renders as the same not-quite-there translucence.
   const faded = p.isPlayer && !ghost0 && getWorld().hour < (getWorld().player.invisUntil ?? 0);
   const ghost = ghost0 || faded;
-  const bob = Math.sin(p.bob) * (ghost ? 0.08 : 0.04);
+  // The keep root already meets the fused floor top (+.51). Idle bob must
+  // not lift/sink the soles; retain walking, stairs, NPC and ghost animation.
+  const bob = p.isPlayer && !ghost && p.path.length === 0 && insideKeep(p.x, p.z) && !onKeepStairs(p.x, p.z) ? 0 : Math.sin(p.bob) * (ghost ? 0.08 : 0.04);
   const walkSwing = p.path.length ? Math.sin(p.bob) * 0.35 : 0;
   const root = useRef<Group>(null);
   const left = useRef<Group>(null);

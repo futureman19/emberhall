@@ -1,0 +1,39 @@
+{
+  "source": "Actual Blender renders produced by build_characters.py",
+  "sameCamera": true,
+  "hero": "4 beauty renders plus 4 face renders",
+  "contact": "4 beauty, 4 face, 4 back renders",
+  "gameplay": {
+    "renderSize": [
+      1440,
+      900
+    ],
+    "cameraGame": [
+      16,
+      23,
+      20
+    ],
+    "target": [
+      0,
+      0.4,
+      0
+    ],
+    "verticalFov": 48,
+    "avatarYaw": 3.141592653589793,
+    "nativeCrop": [
+      600,
+      340,
+      840,
+      550
+    ],
+    "enlargedCrop": [
+      675,
+      395,
+      765,
+      515
+    ],
+    "enlargement": 4,
+    "filter": "nearest"
+  },
+  "notLiveGameScreenshot": true
+}

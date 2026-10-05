@@ -30,6 +30,31 @@ export function extractFieldPropGeometry(scene: Object3D): FieldPropGeometry {
     throw error;
   }
 }
+// Loaded geometry is immutable. Weld support points once, not per animated tile.
+const rockSupportPoints = new WeakMap<BufferGeometry, readonly number[]>();
+
+/** Seat authored presentation only; the original picking matrix stays untouched. */
+export function seatFieldRockMatrix(geometry: BufferGeometry, matrix: import("three").Matrix4, ground: number): void {
+  let points = rockSupportPoints.get(geometry);
+  if (!points) {
+    const position = geometry.getAttribute("position");
+    const unique = new Map<string, number[]>();
+    for (let i = 0; i < position.count; i++) {
+      const point = [position.getX(i), position.getY(i), position.getZ(i)];
+      unique.set(point.join(","), point);
+    }
+    points = Array.from(unique.values()).flat();
+    rockSupportPoints.set(geometry, points);
+  }
+  const e = matrix.elements;
+  let bottom = Infinity;
+  for (let i = 0; i < points.length; i += 3) {
+    bottom = Math.min(bottom, e[1] * points[i] + e[5] * points[i + 1] + e[9] * points[i + 2]);
+  }
+  // Use transformed vertices, not a rotated AABB (whose empty corners can hover).
+  e[13] = ground + 0.006 - bottom;
+}
+
 let cached: FieldPropGeometry | null = null;
 let pending: Promise<FieldPropGeometry> | undefined;
 export function useFieldPropGeometry() {

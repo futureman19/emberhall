@@ -1,0 +1,137 @@
+{
+  "passed": true,
+  "devices": [
+    {
+      "name": "desktop",
+      "passed": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loaded": [
+        "rocky-peak",
+        "snowcap-peak",
+        "mountain-ridge",
+        "cliff-straight",
+        "cliff-corner",
+        "boulder-cluster",
+        "active-volcano",
+        "dormant-caldera",
+        "basalt-columns",
+        "lava-pool",
+        "swamp-patch",
+        "reed-cluster",
+        "swamp-tree",
+        "moss-rocks"
+      ],
+      "filter": true,
+      "rotationToggle": true,
+      "pointerDrag": true,
+      "touchDrag": false,
+      "reset": true,
+      "glbDownload": true,
+      "errors": [],
+      "frames": 107,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "mobile",
+      "passed": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loaded": [
+        "rocky-peak",
+        "snowcap-peak",
+        "mountain-ridge",
+        "cliff-straight",
+        "cliff-corner",
+        "boulder-cluster",
+        "active-volcano",
+        "dormant-caldera",
+        "basalt-columns",
+        "lava-pool",
+        "swamp-patch",
+        "reed-cluster",
+        "swamp-tree",
+        "moss-rocks"
+      ],
+      "filter": true,
+      "rotationToggle": true,
+      "pointerDrag": true,
+      "touchDrag": true,
+      "reset": true,
+      "glbDownload": true,
+      "errors": [],
+      "frames": 107,
+      "horizontalOverflow": false
+    }
+  ],
+  "assetHttpHashes": [
+    {
+      "id": "rocky-peak",
+      "passed": true,
+      "sha256": "522867bb47cb2f7a158f92a5364c489c1f6a5cf3011b4d3b9cc0310bdf117fe0"
+    },
+    {
+      "id": "snowcap-peak",
+      "passed": true,
+      "sha256": "4f473d1c1958f343c47bf766b506f9e6ca82a7c1b7d9a42779c46fe8c5f4a91b"
+    },
+    {
+      "id": "mountain-ridge",
+      "passed": true,
+      "sha256": "ec5aa4c54a140010ba19b3b9dbb827ddc04c3f20ea1ef685ea794bb2b3fe1b9c"
+    },
+    {
+      "id": "cliff-straight",
+      "passed": true,
+      "sha256": "ab3781fe0638fe4ca45e8c543f118d5e1a297cd3bf10cce3e7b0b62b5b8aad22"
+    },
+    {
+      "id": "cliff-corner",
+      "passed": true,
+      "sha256": "6b9a3007acdfaf4c467c3af109633b3af0c5e6374aeba91eab913e09ddab2693"
+    },
+    {
+      "id": "boulder-cluster",
+      "passed": true,
+      "sha256": "01c6653e92498a134160e583e89b9de2c336384d76ba6f8453e97a0a911e4f93"
+    },
+    {
+      "id": "active-volcano",
+      "passed": true,
+      "sha256": "486b556112591d796b30fa4ddeb47921fb3cc2b58cc2eab72a8fea69b1153376"
+    },
+    {
+      "id": "dormant-caldera",
+      "passed": true,
+      "sha256": "9b1450aeb0331db0e23afa5bbe12fa8748e68fa1263413fe1df1336ec77a7dde"
+    },
+    {
+      "id": "basalt-columns",
+      "passed": true,
+      "sha256": "7be81ae247b44af52276c476d7a6dc82c4460181756fc9517f21340259b7e635"
+    },
+    {
+      "id": "lava-pool",
+      "passed": true,
+      "sha256": "6fbb28f13ad9ab883df44062b15feca629f8c41ce0b20db860d300fa4cb9ef67"
+    },
+    {
+      "id": "swamp-patch",
+      "passed": true,
+      "sha256": "ccefd98fc68b654a53c0c143e150a4a5de2a8c0528612aab814759090f5601ef"
+    },
+    {
+      "id": "reed-cluster",
+      "passed": true,
+      "sha256": "ecb3506150ad836a76de2990f4b6af8eafa41dc28f429f3d3518eb29822446e4"
+    },
+    {
+      "id": "swamp-tree",
+      "passed": true,
+      "sha256": "a9f5577f81970db6af038b182a5fd76afad3ab5a9f9919a3a138a2827d30ab8c"
+    },
+    {
+      "id": "moss-rocks",
+      "passed": true,
+      "sha256": "e9c7377640b071682c4a6472db2a6a3920575de27fcacfa3ac8354c0105c353c"
+    }
+  ]
+}

@@ -1,0 +1,370 @@
+[
+  {
+    "path": "art/blender/character-reimagined/verify.mjs",
+    "errors": 0,
+    "warnings": 1,
+    "rules": {
+      "@typescript-eslint/no-unused-vars": 1
+    }
+  },
+  {
+    "path": "art/blender/character-reimagined/verify_glb.mjs",
+    "errors": 0,
+    "warnings": 1,
+    "rules": {
+      "@typescript-eslint/no-unused-vars": 1
+    }
+  },
+  {
+    "path": "public/art/abandoned-mine/vendor/addons/controls/OrbitControls.js",
+    "errors": 2,
+    "warnings": 0,
+    "rules": {
+      "no-case-declarations": 2
+    }
+  },
+  {
+    "path": "public/art/abandoned-mine/vendor/addons/loaders/GLTFLoader.js",
+    "errors": 20,
+    "warnings": 0,
+    "rules": {
+      "@typescript-eslint/no-this-alias": 17,
+      "no-useless-escape": 3
+    }
+  },
+  {
+    "path": "public/art/abandoned-mine/vendor/three.core.js",
+    "errors": 16,
+    "warnings": 0,
+    "rules": {
+      "no-cond-assign": 5,
+      "no-useless-escape": 7,
+      "no-undef": 1,
+      "@typescript-eslint/no-this-alias": 3
+    }
+  },
+  {
+    "path": "public/art/abandoned-mine/vendor/three.module.js",
+    "errors": 17,
+    "warnings": 1,
+    "rules": {
+      "@typescript-eslint/no-this-alias": 4,
+      "@typescript-eslint/no-unused-expressions": 4,
+      "@typescript-eslint/no-unused-vars": 1,
+      "react-hooks/rules-of-hooks": 8,
+      "no-undef": 1
+    }
+  },
+  {
+    "path": "public/art/buildings-landmarks/vendor/addons/controls/OrbitControls.js",
+    "errors": 2,
+    "warnings": 0,
+    "rules": {
+      "no-case-declarations": 2
+    }
+  },
+  {
+    "path": "public/art/buildings-landmarks/vendor/addons/loaders/GLTFLoader.js",
+    "errors": 20,
+    "warnings": 0,
+    "rules": {
+      "@typescript-eslint/no-this-alias": 17,
+      "no-useless-escape": 3
+    }
+  },
+  {
+    "path": "public/art/buildings-landmarks/vendor/three.core.js",
+    "errors": 16,
+    "warnings": 0,
+    "rules": {
+      "no-cond-assign": 5,
+      "no-useless-escape": 7,
+      "no-undef": 1,
+      "@typescript-eslint/no-this-alias": 3
+    }
+  },
+  {
+    "path": "public/art/buildings-landmarks/vendor/three.module.js",
+    "errors": 17,
+    "warnings": 1,
+    "rules": {
+      "@typescript-eslint/no-this-alias": 4,
+      "@typescript-eslint/no-unused-expressions": 4,
+      "@typescript-eslint/no-unused-vars": 1,
+      "react-hooks/rules-of-hooks": 8,
+      "no-undef": 1
+    }
+  },
+  {
+    "path": "public/art/character-reimagined/gallery.js",
+    "errors": 0,
+    "warnings": 1,
+    "rules": {
+      "@typescript-eslint/no-unused-vars": 1
+    }
+  },
+  {
+    "path": "public/art/character-reimagined/vendor/addons/controls/OrbitControls.js",
+    "errors": 2,
+    "warnings": 0,
+    "rules": {
+      "no-case-declarations": 2
+    }
+  },
+  {
+    "path": "public/art/character-reimagined/vendor/addons/loaders/GLTFLoader.js",
+    "errors": 20,
+    "warnings": 0,
+    "rules": {
+      "@typescript-eslint/no-this-alias": 17,
+      "no-useless-escape": 3
+    }
+  },
+  {
+    "path": "public/art/character-reimagined/vendor/three.core.js",
+    "errors": 16,
+    "warnings": 0,
+    "rules": {
+      "no-cond-assign": 5,
+      "no-useless-escape": 7,
+      "no-undef": 1,
+      "@typescript-eslint/no-this-alias": 3
+    }
+  },
+  {
+    "path": "public/art/character-reimagined/vendor/three.module.js",
+    "errors": 17,
+    "warnings": 1,
+    "rules": {
+      "@typescript-eslint/no-this-alias": 4,
+      "@typescript-eslint/no-unused-expressions": 4,
+      "@typescript-eslint/no-unused-vars": 1,
+      "react-hooks/rules-of-hooks": 8,
+      "no-undef": 1
+    }
+  },
+  {
+    "path": "public/art/landscape-kit/vendor/addons/controls/OrbitControls.js",
+    "errors": 2,
+    "warnings": 0,
+    "rules": {
+      "no-case-declarations": 2
+    }
+  },
+  {
+    "path": "public/art/landscape-kit/vendor/addons/loaders/GLTFLoader.js",
+    "errors": 20,
+    "warnings": 0,
+    "rules": {
+      "@typescript-eslint/no-this-alias": 17,
+      "no-useless-escape": 3
+    }
+  },
+  {
+    "path": "public/art/landscape-kit/vendor/three.core.js",
+    "errors": 16,
+    "warnings": 0,
+    "rules": {
+      "no-cond-assign": 5,
+      "no-useless-escape": 7,
+      "no-undef": 1,
+      "@typescript-eslint/no-this-alias": 3
+    }
+  },
+  {
+    "path": "public/art/landscape-kit/vendor/three.module.js",
+    "errors": 17,
+    "warnings": 1,
+    "rules": {
+      "@typescript-eslint/no-this-alias": 4,
+      "@typescript-eslint/no-unused-expressions": 4,
+      "@typescript-eslint/no-unused-vars": 1,
+      "react-hooks/rules-of-hooks": 8,
+      "no-undef": 1
+    }
+  },
+  {
+    "path": "public/art/orc-encampment/vendor/addons/controls/OrbitControls.js",
+    "errors": 2,
+    "warnings": 0,
+    "rules": {
+      "no-case-declarations": 2
+    }
+  },
+  {
+    "path": "public/art/orc-encampment/vendor/addons/loaders/GLTFLoader.js",
+    "errors": 20,
+    "warnings": 0,
+    "rules": {
+      "@typescript-eslint/no-this-alias": 17,
+      "no-useless-escape": 3
+    }
+  },
+  {
+    "path": "public/art/orc-encampment/vendor/three.core.js",
+    "errors": 16,
+    "warnings": 0,
+    "rules": {
+      "no-cond-assign": 5,
+      "no-useless-escape": 7,
+      "no-undef": 1,
+      "@typescript-eslint/no-this-alias": 3
+    }
+  },
+  {
+    "path": "public/art/orc-encampment/vendor/three.module.js",
+    "errors": 17,
+    "warnings": 1,
+    "rules": {
+      "@typescript-eslint/no-this-alias": 4,
+      "@typescript-eslint/no-unused-expressions": 4,
+      "@typescript-eslint/no-unused-vars": 1,
+      "react-hooks/rules-of-hooks": 8,
+      "no-undef": 1
+    }
+  },
+  {
+    "path": "public/art/river-ferry/vendor/addons/controls/OrbitControls.js",
+    "errors": 2,
+    "warnings": 0,
+    "rules": {
+      "no-case-declarations": 2
+    }
+  },
+  {
+    "path": "public/art/river-ferry/vendor/addons/loaders/GLTFLoader.js",
+    "errors": 20,
+    "warnings": 0,
+    "rules": {
+      "@typescript-eslint/no-this-alias": 17,
+      "no-useless-escape": 3
+    }
+  },
+  {
+    "path": "public/art/river-ferry/vendor/three.core.js",
+    "errors": 16,
+    "warnings": 0,
+    "rules": {
+      "no-cond-assign": 5,
+      "no-useless-escape": 7,
+      "no-undef": 1,
+      "@typescript-eslint/no-this-alias": 3
+    }
+  },
+  {
+    "path": "public/art/river-ferry/vendor/three.module.js",
+    "errors": 17,
+    "warnings": 1,
+    "rules": {
+      "@typescript-eslint/no-this-alias": 4,
+      "@typescript-eslint/no-unused-expressions": 4,
+      "@typescript-eslint/no-unused-vars": 1,
+      "react-hooks/rules-of-hooks": 8,
+      "no-undef": 1
+    }
+  },
+  {
+    "path": "public/art/trails-kit/vendor/addons/controls/OrbitControls.js",
+    "errors": 2,
+    "warnings": 0,
+    "rules": {
+      "no-case-declarations": 2
+    }
+  },
+  {
+    "path": "public/art/trails-kit/vendor/addons/loaders/GLTFLoader.js",
+    "errors": 20,
+    "warnings": 0,
+    "rules": {
+      "@typescript-eslint/no-this-alias": 17,
+      "no-useless-escape": 3
+    }
+  },
+  {
+    "path": "public/art/trails-kit/vendor/three.core.js",
+    "errors": 16,
+    "warnings": 0,
+    "rules": {
+      "no-cond-assign": 5,
+      "no-useless-escape": 7,
+      "no-undef": 1,
+      "@typescript-eslint/no-this-alias": 3
+    }
+  },
+  {
+    "path": "public/art/trails-kit/vendor/three.module.js",
+    "errors": 17,
+    "warnings": 1,
+    "rules": {
+      "@typescript-eslint/no-this-alias": 4,
+      "@typescript-eslint/no-unused-expressions": 4,
+      "@typescript-eslint/no-unused-vars": 1,
+      "react-hooks/rules-of-hooks": 8,
+      "no-undef": 1
+    }
+  },
+  {
+    "path": "public/art/woodland-shrine/vendor/addons/controls/OrbitControls.js",
+    "errors": 2,
+    "warnings": 0,
+    "rules": {
+      "no-case-declarations": 2
+    }
+  },
+  {
+    "path": "public/art/woodland-shrine/vendor/addons/loaders/GLTFLoader.js",
+    "errors": 20,
+    "warnings": 0,
+    "rules": {
+      "@typescript-eslint/no-this-alias": 17,
+      "no-useless-escape": 3
+    }
+  },
+  {
+    "path": "public/art/woodland-shrine/vendor/three.core.js",
+    "errors": 16,
+    "warnings": 0,
+    "rules": {
+      "no-cond-assign": 5,
+      "no-useless-escape": 7,
+      "no-undef": 1,
+      "@typescript-eslint/no-this-alias": 3
+    }
+  },
+  {
+    "path": "public/art/woodland-shrine/vendor/three.module.js",
+    "errors": 17,
+    "warnings": 1,
+    "rules": {
+      "@typescript-eslint/no-this-alias": 4,
+      "@typescript-eslint/no-unused-expressions": 4,
+      "@typescript-eslint/no-unused-vars": 1,
+      "react-hooks/rules-of-hooks": 8,
+      "no-undef": 1
+    }
+  },
+  {
+    "path": "scripts/underground-readability.test.mjs",
+    "errors": 1,
+    "warnings": 0,
+    "rules": {
+      "parse": 1
+    }
+  },
+  {
+    "path": "scripts/worldwide-ore-natural-grok-r1.mjs",
+    "errors": 0,
+    "warnings": 1,
+    "rules": {
+      "@typescript-eslint/no-unused-vars": 1
+    }
+  },
+  {
+    "path": "src/components/game/architecture-kit.test.ts",
+    "errors": 0,
+    "warnings": 1,
+    "rules": {
+      "@typescript-eslint/no-unused-vars": 1
+    }
+  }
+]

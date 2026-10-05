@@ -1,0 +1,171 @@
+{
+  "fresh_checks": {
+    "candidate": 78,
+    "fallback": 71,
+    "built": 54
+  },
+  "fresh_total": 203,
+  "cumulative_accepted_checks": 471,
+  "accepted_species": 5,
+  "catalog_count": 8,
+  "tests": {
+    "tests": 879,
+    "pass": 879,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "all_eight_art_hashes_unchanged": true,
+  "rows": [
+    {
+      "kind": "oak",
+      "mode": "candidate",
+      "evidence": "timber-candidate-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "oak",
+      "mode": "fallback",
+      "evidence": "timber-failure-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "oak",
+      "mode": "built",
+      "evidence": "timber-built-v2/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "pine",
+      "mode": "candidate",
+      "evidence": "timber-candidate-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "pine",
+      "mode": "fallback",
+      "evidence": "timber-failure-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "pine",
+      "mode": "built",
+      "evidence": "timber-built-v2/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "willow",
+      "mode": "candidate",
+      "evidence": "willow-ash-candidate-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "willow",
+      "mode": "fallback",
+      "evidence": "willow-ash-failure-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "willow",
+      "mode": "built",
+      "evidence": "willow-ash-built-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "birch",
+      "mode": "candidate",
+      "evidence": "timber-candidate-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "birch",
+      "mode": "fallback",
+      "evidence": "timber-failure-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "birch",
+      "mode": "built",
+      "evidence": "timber-built-v2/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "ash",
+      "mode": "candidate",
+      "evidence": "willow-ash-candidate-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "ash",
+      "mode": "fallback",
+      "evidence": "willow-ash-failure-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    },
+    {
+      "kind": "ash",
+      "mode": "built",
+      "evidence": "willow-ash-built-final/results.json",
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "passed": true
+    }
+  ]
+}

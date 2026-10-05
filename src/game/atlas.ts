@@ -1,6 +1,10 @@
 import type { Tile } from "./types.ts";
 
-export const MAP = 512;
+import { FRONTIER_SITES } from "./frontier.ts";
+
+export const LEGACY_MAP = 512;
+/** Nearest square to 5x area: 1,311,025 tiles (5.001163x). Old coordinates stay fixed. */
+export const MAP = 1145;
 export const TILE = 1;
 export const EH = 0.2;
 export const VIEW = 128;
@@ -39,6 +43,7 @@ export const PLACES: Place[] = [
   { id: "greybarrow", name: "Greybarrow", tx: 110, ty: 440, radius: 14, kind: "ruins", blurb: "A sunken tomb. Stairs under the stones." },
   { id: "southmere", name: "Southmere", tx: 360, ty: 460, radius: 9, kind: "town", blurb: "Warm reeds and a thick green." },
   { id: "brinegate", name: "Brinegate", tx: 470, ty: 420, radius: 8, kind: "town", blurb: "Salt air. Sand takes the east." },
+  ...FRONTIER_SITES,
 ];
 
 export function placeById(id: string) {

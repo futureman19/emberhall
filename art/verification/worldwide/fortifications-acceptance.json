@@ -1,0 +1,455 @@
+{
+  "passedControlledScope": true,
+  "published": false,
+  "sourceChanges": [],
+  "counts": {
+    "candidate": {
+      "path": "fortifications-candidate-v3/results.json",
+      "assertions": 241,
+      "fortificationCases": 8,
+      "cityCases": 2
+    },
+    "control": {
+      "path": "fortifications-control-final/results.json",
+      "assertions": 215,
+      "fortificationCases": 8,
+      "cityCases": 2
+    },
+    "failure": {
+      "path": "fortifications-failure-final/results.json",
+      "assertions": 215,
+      "fortificationCases": 8,
+      "cityCases": 2
+    },
+    "built": {
+      "path": "fortifications-built-final/results.json",
+      "assertions": 137,
+      "fortificationCases": 8,
+      "cityCases": 2
+    }
+  },
+  "browserAssertions": 808,
+  "sourceCheckpoint": "fortifications-source-before.json",
+  "unchangedCheckpointFiles": 410,
+  "unchangedArtAssets": 114,
+  "tests": {
+    "fullScripts": 250,
+    "fullSource": 700,
+    "canonicalFullTotal": 950,
+    "focusedArchitecture": 4,
+    "focusedArchitectureAndCity": {
+      "passed": 6,
+      "failed": 1,
+      "log": ".hermes/fortifications-focused.log"
+    }
+  },
+  "scope": "Four controlled render/input styles plus one existing west-gate and adjacent-wall tile-policy probe per device; not whole-world/complete collision/AI/construction/keep/performance/physical-phone acceptance.",
+  "crossModeParity": [
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "rampart",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "rampartV",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "tower",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "kind": "gatehouse",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack",
+        "eastTrack",
+        "crossTrack"
+      ]
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "rampart",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "rampartV",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "tower",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "kind": "gatehouse",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack",
+        "eastTrack",
+        "crossTrack"
+      ]
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "kind": "rampart",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "kind": "rampartV",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "kind": "tower",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "kind": "gatehouse",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack",
+        "eastTrack",
+        "crossTrack"
+      ]
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "kind": "rampart",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "kind": "rampartV",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "kind": "tower",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "kind": "gatehouse",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack",
+        "eastTrack",
+        "crossTrack"
+      ]
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "rampart",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "rampartV",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "tower",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "kind": "gatehouse",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack",
+        "eastTrack",
+        "crossTrack"
+      ]
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "rampart",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "rampartV",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "tower",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "kind": "gatehouse",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack",
+        "eastTrack",
+        "crossTrack"
+      ]
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "rampart",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "rampartV",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "tower",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "kind": "gatehouse",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack",
+        "eastTrack",
+        "crossTrack"
+      ]
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "rampart",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "rampartV",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "tower",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack"
+      ]
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "kind": "gatehouse",
+      "equalFields": [
+        "fixture",
+        "footprintTrack",
+        "awayTrack",
+        "eastTrack",
+        "crossTrack"
+      ]
+    }
+  ],
+  "visualReview": {
+    "desktop": "Final built four exteriors fully framed/coherent; fine detailing and passage depth not certified.",
+    "mobile": "Final built four exteriors clear of HUD and coherent; small details and through-clearance limited.",
+    "loadedGate": "Walls/towers continuous; player partly occluded in the existing city opening. One still is not movement evidence.",
+    "controlledGate": "Coherent static lintelled opening; no structure cropped. Actual input/state track independently establishes sampled crossing."
+  },
+  "regressionRisk": {
+    "cityRoute": "Existing unseeded city.test.ts failed once at road beyond west gate. Fixed seed2469134 reproduces plaza(176,336)\u2192(140,336) null at caps4000 and20000; local gate(154,336)\u2192(150,336) succeeds. No art/source changes. Original random failure seed was not logged; this is a deterministic counterexample, not claimed identical seed. No test weakened or production terrain changed."
+  },
+  "remaining": [
+    "Seed-dependent generated-world route beyond west gate.",
+    "Keep stories and earlier global architecture kits.",
+    "Broader natural placement/AI/construction/collision/animation/performance/physical phones."
+  ],
+  "realRejectedRequestedKinds": [
+    [
+      "desktop",
+      "architecture-gatehouse.glb"
+    ],
+    [
+      "desktop",
+      "architecture-rampart.glb"
+    ],
+    [
+      "desktop",
+      "architecture-rampartV.glb"
+    ],
+    [
+      "desktop",
+      "architecture-tower.glb"
+    ],
+    [
+      "mobile",
+      "architecture-gatehouse.glb"
+    ],
+    [
+      "mobile",
+      "architecture-rampart.glb"
+    ],
+    [
+      "mobile",
+      "architecture-rampartV.glb"
+    ],
+    [
+      "mobile",
+      "architecture-tower.glb"
+    ]
+  ],
+  "geometry": {
+    "rampart": {
+      "foundationInstances": 32,
+      "originalProxyInstances": 168,
+      "uniqueProxyCoordinates": 168
+    },
+    "rampartV": {
+      "foundationInstances": 32,
+      "originalProxyInstances": 168,
+      "uniqueProxyCoordinates": 168
+    },
+    "tower": {
+      "foundationInstances": 25,
+      "originalProxyInstances": 167,
+      "uniqueProxyCoordinates": 163
+    },
+    "gatehouse": {
+      "foundationInstances": 45,
+      "originalProxyInstances": 298,
+      "uniqueProxyCoordinates": 298
+    }
+  }
+}

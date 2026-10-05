@@ -1,3 +1,4 @@
+import { sceneryReserved } from "./frontier.ts";
 import { COURT, MAP, placeById } from "./atlas.ts";
 import { hash2 } from "./rng.ts";
 import type { BiomeId, World } from "./types.ts";
@@ -68,6 +69,19 @@ export function biomeWeights(x: number, y: number): BiomeW {
   jungle = clamp01(jungle + (macroNoise(x, y, 31) - 0.5) * 0.32);
   desert = clamp01(desert + (macroNoise(x, y, 37) - 0.5) * 0.42);
 
+  // Keep every legacy biome sample unchanged; the new frontier has its own broad regions.
+  if (x >= 512 || y >= 512) {
+    const winter = falloff(x, y, 728, 245, 140);
+    const wood = falloff(x, y, 560, 552, 145);
+    const reeds = falloff(x, y, 960, 552, 155);
+    const ash = falloff(x, y, 820, 800, 145);
+    tundra = Math.max(tundra, winter);
+    taiga = Math.max(taiga, wood);
+    marsh = Math.max(marsh, reeds);
+    desert *= 1 - Math.max(winter, wood, reeds);
+    desert = Math.max(desert, ash);
+  }
+
   const hall = falloff(x, y, COURT.tx, COURT.ty, 58);
   const damp = 1 - hall * 0.94;
   tundra *= damp;
@@ -110,7 +124,7 @@ export function paintBiomes(world: World) {
     if (!row) continue;
     for (let x = 0; x < MAP; x++) {
       const t = row[x];
-      if (!t) continue;
+      if (!t || sceneryReserved(x, y)) continue;
       if (
         t.kind === "water" ||
         t.kind === "road" ||

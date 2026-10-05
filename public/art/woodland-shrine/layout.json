@@ -1,0 +1,177 @@
+{
+  "name": "Mossveil Sanctuary",
+  "scope": "Static decorative art only; no gameplay, walkability or collision acceptance.",
+  "axis": "glTF Y-up",
+  "assemblyOnlyDressing": [
+    "Sanctuary earth skirt",
+    "Muted grass verge (26)",
+    "Woodland grass clusters (5 x 4)"
+  ],
+  "instances": [
+    {
+      "asset": "broken-sun-arch",
+      "instance": "arch",
+      "translation": [
+        0,
+        0.12,
+        -1.8
+      ],
+      "yawRadians": 0,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "sunleaf-altar",
+      "instance": "altar",
+      "translation": [
+        0,
+        0.27,
+        -0.65
+      ],
+      "yawRadians": 0,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "dry-offering-basin",
+      "instance": "basin",
+      "translation": [
+        -1.9,
+        0.12,
+        0.8
+      ],
+      "yawRadians": 0,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "fallen-columns",
+      "instance": "fallen-east",
+      "translation": [
+        2.35,
+        0.12,
+        0.7
+      ],
+      "yawRadians": 0.35,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "mossy-wall",
+      "instance": "rear-wall",
+      "translation": [
+        -2.2,
+        0.12,
+        -2.6
+      ],
+      "yawRadians": -0.22,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "mossy-wall",
+      "instance": "east-wall",
+      "translation": [
+        2.65,
+        0.12,
+        -2.4
+      ],
+      "yawRadians": 0.28,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "worn-paving",
+      "instance": "sanctum-floor",
+      "translation": [
+        0,
+        0.12,
+        -0.65
+      ],
+      "yawRadians": 0,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "worn-paving",
+      "instance": "approach",
+      "translation": [
+        0,
+        0.12,
+        1.35
+      ],
+      "yawRadians": 0,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "votive-markers",
+      "instance": "west-votives",
+      "translation": [
+        -2.6,
+        0.12,
+        2.1
+      ],
+      "yawRadians": 0.16,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "votive-markers",
+      "instance": "east-votives",
+      "translation": [
+        2.0,
+        0.12,
+        2.8
+      ],
+      "yawRadians": -0.22,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "ancient-root-tree",
+      "instance": "guardian-tree",
+      "translation": [
+        -3.35,
+        0.12,
+        -1.1
+      ],
+      "yawRadians": 0.15,
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  ]
+}

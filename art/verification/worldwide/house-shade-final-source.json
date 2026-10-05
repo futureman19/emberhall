@@ -1,0 +1,7 @@
+{
+  "src/game/placement-preview.ts": "63354c2931a8f903e531a983589413323798ef262ada92a2ce1b7fd08e6749f1",
+  "src/game/placement-preview.test.ts": "1b7a15b2aade7147bade37332e93ef81773ad8ced0b5d0574784b3a768eff15e",
+  "src/components/game/building-meshes.tsx": "ffc42df1233c91da1b2da91ceb8b67de563c3d9dec35d65290e853c53ea48fab",
+  "scripts/worldwide-house-shade.mjs": "ef0ac18dbfe292fd952aceb546b345cc53e277818aa84ca791d1b75c731f4a0a",
+  "package.json": "1310c34e24ac646a08250ecadfdbd7350f60e7d5ad017bba871e4bf31e4ae254"
+}

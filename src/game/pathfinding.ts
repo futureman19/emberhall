@@ -1,4 +1,5 @@
-import { MAP, inBounds } from "./atlas.ts";
+import { FRONTIER_ROUTES, frontierRoadPoints, sceneryBlocked } from "./frontier.ts";
+import { MAP, inBounds, placeById } from "./atlas.ts";
 import { pieceBlocks } from "./placeables/functions.ts";
 import { zoneBlocksAt } from "./zones.ts";
 import type { Tile, TileKind, World } from "./types.ts";
@@ -23,7 +24,7 @@ export function climbOk(from: Tile, to: Tile) {
 }
 
 export function walkable(world: World, tx: number, ty: number) {
-  if (!inBounds(tx, ty)) return false;
+  if (!inBounds(tx, ty) || sceneryBlocked(tx, ty)) return false;
   const t = world.tiles[ty]?.[tx];
   if (!t) return false;
   if (!kindWalk(t.kind)) return false;
@@ -215,6 +216,8 @@ function search(
   heuristic: (x: number, y: number) => number,
   cap: number,
   fly = false,
+  budget?: { remaining: number },
+  within?: (x: number, y: number) => boolean,
 ) {
   ax = Math.max(0, Math.min(MAP - 1, Math.round(ax)));
   ay = Math.max(0, Math.min(MAP - 1, Math.round(ay)));
@@ -227,6 +230,7 @@ function search(
   let steps = 0;
 
   while (open.size && steps++ < cap) {
+    if (budget && budget.remaining-- <= 0) return null;
     const cur = open.pop()!;
     const curKey = key(cur.x, cur.y);
     if (closed.has(curKey) || cur.g !== gScore.get(curKey)) continue;
@@ -238,7 +242,7 @@ function search(
     for (const [dx, dy] of DIRS) {
       const nx = cur.x + dx;
       const ny = cur.y + dy;
-      if (!canStep(world, cur.x, cur.y, nx, ny, fly)) continue;
+      if ((within && !within(nx, ny)) || !canStep(world, cur.x, cur.y, nx, ny, fly)) continue;
       const to = world.tiles[ny]![nx]!;
       const step = Math.hypot(dx, dy) + Math.abs(to.h - from.h) * 0.35;
       const nextKey = key(nx, ny);
@@ -258,6 +262,86 @@ function octile(ax: number, ay: number, bx: number, by: number) {
   return Math.max(dx, dy) + (Math.SQRT2 - 1) * Math.min(dx, dy);
 }
 
+/** Sample only the authored road graph, never the million-tile world. */
+function roadGraph() {
+  const nodes = new Map<number, GridPoint>();
+  const edges = new Map<number, Set<number>>();
+  const add = (p: GridPoint) => { const k = key(p.x, p.y); nodes.set(k, p); if (!edges.has(k)) edges.set(k, new Set()); return k; };
+  for (const [a, b] of FRONTIER_ROUTES) {
+    const bends = frontierRoadPoints(placeById(a), placeById(b));
+    const route: number[] = [];
+    for (let j = 1; j < bends.length; j++) {
+      const [x, y] = bends[j - 1]!, [nx, ny] = bends[j]!;
+      const n = Math.ceil(Math.hypot(nx - x, ny - y) / 32);
+      for (let i = 0; i <= n; i++) {
+        const k = add({ x: Math.round(x + (nx - x) * i / n), y: Math.round(y + (ny - y) * i / n) });
+        if (route.at(-1) !== k) route.push(k);
+      }
+    }
+    // A blocked sample must not sever an otherwise passable road: two-hop
+    // links allow the same bounded local reroute around the sample itself.
+    for (let i = 0; i < route.length; i++) for (let d = 1; d <= 2 && i + d < route.length; d++) {
+      edges.get(route[i]!)!.add(route[i + d]!); edges.get(route[i + d]!)!.add(route[i]!);
+    }
+  }
+  return { nodes, edges };
+}
+let roads: ReturnType<typeof roadGraph> | undefined;
+
+/** Bounded road assistance for arbitrary chart destinations. Entry/exit searches
+ * choose reachable connectors, not the geometrically closest named marker.
+ * Live obstacles are never cached; local detours obey the canonical predicate. */
+function frontierJourney(world: World, ax: number, ay: number, bx: number, by: number, cap: number) {
+  const { nodes, edges } = roads ??= roadGraph();
+  const candidates = [...nodes.values()].filter(p => walkable(world, p.x, p.y));
+  if (!candidates.length) return null;
+  const goalKeys = new Set(candidates.map(p => key(p.x, p.y)));
+  const nearest = (x: number, y: number) => Math.min(...candidates.map(p => octile(x, y, p.x, p.y)));
+  const budget = { remaining: cap * 2 + 8192 };
+  const approach = search(world, ax, ay, (x, y) => goalKeys.has(key(x, y)), nearest, cap, false, budget);
+  if (!approach) return null;
+  const entry = approach.at(-1) ?? { x: Math.round(ax), y: Math.round(ay) };
+  // Reverse exit search is legal: walking/climb/shoulder predicates are symmetric.
+  const exitPath = search(world, bx, by, (x, y) => goalKeys.has(key(x, y)), nearest, cap, false, budget);
+  if (!exitPath) return null;
+  const exit = exitPath.at(-1) ?? { x: bx, y: by };
+  const startKey = key(entry.x, entry.y), endKey = key(exit.x, exit.y);
+  const open = new MinHeap(); open.push({ ...entry, g: 0, f: octile(entry.x, entry.y, exit.x, exit.y) });
+  const costs = new Map<number, number>([[startKey, 0]]);
+  const previous = new Map<number, { from: number; path: GridPoint[] }>();
+  const closed = new Set<number>();
+  while (open.size && budget.remaining > 0) {
+    const p = open.pop()!, k = key(p.x, p.y);
+    if (closed.has(k)) continue;
+    closed.add(k);
+    if (k === endKey) {
+      const segments: GridPoint[][] = [];
+      let cursor = k;
+      while (cursor !== startKey) { const edge = previous.get(cursor)!; segments.push(edge.path); cursor = edge.from; }
+      const path = [...approach, ...segments.reverse().flat(), ...[{ x: bx, y: by }, ...exitPath].reverse().slice(1)];
+      if (ax !== Math.round(ax) || ay !== Math.round(ay)) return smoothPath(world, [{ x: ax, y: ay }, { x: Math.round(ax), y: Math.round(ay) }, ...path]).slice(1);
+      return path;
+    }
+    for (const next of edges.get(k) ?? []) {
+      if (closed.has(next)) continue;
+      const q = nodes.get(next)!;
+      if (!walkable(world, q.x, q.y)) continue;
+      let path: GridPoint[] | null = [q];
+      if (!lineWalkable(world, p.x, p.y, q.x, q.y)) {
+        path = search(world, p.x, p.y, (x, y) => x === q.x && y === q.y,
+          (x, y) => octile(x, y, q.x, q.y), 2048, false, budget,
+          (x, y) => x >= Math.min(p.x, q.x) - 8 && x <= Math.max(p.x, q.x) + 8 && y >= Math.min(p.y, q.y) - 8 && y <= Math.max(p.y, q.y) + 8);
+      }
+      if (!path) continue;
+      const g = p.g + path.reduce((sum, n, i) => { const prev = i ? path![i - 1]! : p; return sum + Math.hypot(n.x - prev.x, n.y - prev.y); }, 0);
+      if (g >= (costs.get(next) ?? Infinity)) continue;
+      costs.set(next, g); previous.set(next, { from: k, path });
+      open.push({ ...q, g, f: g + octile(q.x, q.y, exit.x, exit.y) });
+    }
+  }
+  return null;
+}
+
 /** Find a corner-safe, smoothed route. Returned waypoints never include start. */
 export function astar(world: World, ax: number, ay: number, bx: number, by: number, cap = 9000, fly = false) {
   bx = Math.max(0, Math.min(MAP - 1, Math.round(bx)));
@@ -267,6 +351,10 @@ export function astar(world: World, ax: number, ay: number, bx: number, by: numb
     if (!nearest) return null;
     bx = nearest.x;
     by = nearest.y;
+  }
+  if (!fly && cap >= 48000 && Math.hypot(bx - ax, by - ay) > 128) {
+    const journey = frontierJourney(world, ax, ay, bx, by, cap);
+    if (journey) return journey;
   }
   const path = search(world, ax, ay, (x, y) => x === bx && y === by, (x, y) => octile(x, y, bx, by), cap, fly);
   if (!path || (ax === Math.round(ax) && ay === Math.round(ay))) return path;

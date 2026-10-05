@@ -1,0 +1,389 @@
+{
+  "archive": "art/verification/woodland-shrine/emberhall-woodland-shrine-source.zip",
+  "archiveBytes": 8668643,
+  "archiveSha256": "5eb68d4d029d842a8276fab651a23672dd6b80202906391e2de49a2300cdebda",
+  "archiveReadbackVerified": true,
+  "fileCount": 76,
+  "files": [
+    {
+      "file": "art/blender/woodland-shrine/browser_verify.mjs",
+      "bytes": 6464,
+      "sha256": "7a820a7ee8416546c02f8eb91c915d57b875edc9ba929c6831db884a5a062b3e"
+    },
+    {
+      "file": "art/blender/woodland-shrine/build_sanctuary.py",
+      "bytes": 7424,
+      "sha256": "f094eb10874d93e5aa04b3acceeea4322aef64dd2a2e23570f7ab0ba680032cb"
+    },
+    {
+      "file": "art/blender/woodland-shrine/designs.py",
+      "bytes": 7989,
+      "sha256": "3475d68089727253f8dfa2925318e10de8ebd443a36e71c6217ab6d3a3970027"
+    },
+    {
+      "file": "art/blender/woodland-shrine/emberhall-mossveil.blend",
+      "bytes": 354194,
+      "sha256": "3caa751bbbb9e03c0fcb9007c1b504dadd2232e00ce3abd770152c34af5deeed"
+    },
+    {
+      "file": "art/blender/woodland-shrine/package_delivery.py",
+      "bytes": 1466,
+      "sha256": "ec5c78d6555527387d18005f8a913ebfb91dc57bd0c76dc6f5f0c4aaa1277996"
+    },
+    {
+      "file": "art/blender/woodland-shrine/package_gallery.py",
+      "bytes": 2914,
+      "sha256": "f1ad6a16ade40dfc3e2096bb359c2e98729e320b2bfd69966b72a5a9e987d5a9"
+    },
+    {
+      "file": "art/blender/woodland-shrine/README.md",
+      "bytes": 5429,
+      "sha256": "4e496d79f814cf1ac092ad54ddf7e3f8ef0a94b35e58b5162bdab3f66f36a59f"
+    },
+    {
+      "file": "art/blender/woodland-shrine/serve.mjs",
+      "bytes": 1130,
+      "sha256": "f87170c3aac11a348b6dd694ae92b8c961e4bd53225ad6fbcfd2147b87a107e7"
+    },
+    {
+      "file": "art/blender/woodland-shrine/verify.mjs",
+      "bytes": 3930,
+      "sha256": "d3c5da806bb67278c3b33d517e7cc5f1ce0a9bf631e3135eeb4ed2e1d69d2b53"
+    },
+    {
+      "file": "art/blender/woodland-shrine/verify_assembly.py",
+      "bytes": 1677,
+      "sha256": "418f72b7391e909e6f0efdba0cc3e941e4302549e69e41614f21a9f038378e2b"
+    },
+    {
+      "file": "art/blender/woodland-shrine/verify_scope.py",
+      "bytes": 758,
+      "sha256": "9e2db14478a85037bd3288398877a9f302ff91986815db1f6874ddf244940597"
+    },
+    {
+      "file": "art/blender/woodland-shrine/verify_source.py",
+      "bytes": 1648,
+      "sha256": "a408c657e72a92b679adad4da9bab9a1e3319e0160a6f73f6dad1510fa405917"
+    },
+    {
+      "file": "art/verification/woodland-shrine/ancient-root-tree.png",
+      "bytes": 175588,
+      "sha256": "cf1598b1a19e325441f37300652352b24431ab01af90c02aff4b0b42ac19d23f"
+    },
+    {
+      "file": "art/verification/woodland-shrine/assembly-verification.json",
+      "bytes": 1978,
+      "sha256": "a5d01ee5ac45d6a60797962940da4e98002783df7b2a4945ccc83ff4dd2f3318"
+    },
+    {
+      "file": "art/verification/woodland-shrine/assembly.log",
+      "bytes": 2208,
+      "sha256": "2bdded13f161f799bc27dc8a01253e51f19a9f63c06e29a36302efcf0fce0925"
+    },
+    {
+      "file": "art/verification/woodland-shrine/broken-sun-arch.png",
+      "bytes": 198912,
+      "sha256": "c8339f7f2466c04d78c2fe1ad179afa4201ed4bf99a5f44ce5c2ce4cdf0a8d37"
+    },
+    {
+      "file": "art/verification/woodland-shrine/browser-verification.json",
+      "bytes": 2716,
+      "sha256": "108838ec9ca27266d33c8536af4cad5965eadab8982e8f5e5dceb013dbe5223e"
+    },
+    {
+      "file": "art/verification/woodland-shrine/browser.log",
+      "bytes": 2717,
+      "sha256": "5a4abb95f5ca8eebb819d7a55f29f82e3b7bd65c30c011c47623d59790378c86"
+    },
+    {
+      "file": "art/verification/woodland-shrine/contact-sheet.png",
+      "bytes": 896756,
+      "sha256": "38d4cb1cce59ecfe9a76d3ba5d1581b0baabcbae13bf91568e657a88209fedd0"
+    },
+    {
+      "file": "art/verification/woodland-shrine/desktop-altar-detail.png",
+      "bytes": 287481,
+      "sha256": "ef1146f9440ee4a591b70b8a7d25b7825eb2911bdbfdd55007d83452dc9b949e"
+    },
+    {
+      "file": "art/verification/woodland-shrine/desktop-assembled-sanctuary.png",
+      "bytes": 375395,
+      "sha256": "6c0e671bc9e5db5e9ffb8ca9069c87f4a70284c473c3038b3095a54076daa9d3"
+    },
+    {
+      "file": "art/verification/woodland-shrine/desktop-gallery.png",
+      "bytes": 279545,
+      "sha256": "b695f347a43e6bdba7329a0eb70f60b0e8213605477603e002d07a9ee1cf8e6b"
+    },
+    {
+      "file": "art/verification/woodland-shrine/desktop-landmarks.png",
+      "bytes": 257986,
+      "sha256": "810fce2e9e5548ba19fa8230612ac9fa2453bd408662fdf803407bd1cec49ad3"
+    },
+    {
+      "file": "art/verification/woodland-shrine/dry-offering-basin.png",
+      "bytes": 166349,
+      "sha256": "ce0c5495ab3249cb884539f6c799329043cf499906e7497a25d2a6d55930f58f"
+    },
+    {
+      "file": "art/verification/woodland-shrine/fallen-columns.png",
+      "bytes": 152920,
+      "sha256": "794fb47ec4cd9e47774e93a2525f2ac046fd2b5e785a983255778e8b362a53bb"
+    },
+    {
+      "file": "art/verification/woodland-shrine/generation-refined.log",
+      "bytes": 4334,
+      "sha256": "c8a78c76a9b0f944e0ebc30d591fa13fc8f7eee7a6a92fc7b1ac1a0c92c7d2a8"
+    },
+    {
+      "file": "art/verification/woodland-shrine/generation.log",
+      "bytes": 4333,
+      "sha256": "8e4a3d646a7863c7e2b426dfa30bb652da80769c894fe5518e5aaa6c108cb2ff"
+    },
+    {
+      "file": "art/verification/woodland-shrine/geometry-verification.json",
+      "bytes": 6149,
+      "sha256": "2bc19502a29b4815dfcd9fcc6d834a86fa35e810da2f9c0c8ef32ed4ede123d7"
+    },
+    {
+      "file": "art/verification/woodland-shrine/geometry.log",
+      "bytes": 6150,
+      "sha256": "691f84f8717e4643e68296c55ce18db8c0dcd0cbf8131ef059a2baf5f6614c55"
+    },
+    {
+      "file": "art/verification/woodland-shrine/measure.log",
+      "bytes": 6150,
+      "sha256": "691f84f8717e4643e68296c55ce18db8c0dcd0cbf8131ef059a2baf5f6614c55"
+    },
+    {
+      "file": "art/verification/woodland-shrine/mobile-altar-detail.png",
+      "bytes": 114032,
+      "sha256": "64aef1ab168eaca912127ee7af922f75e32e4ac1e2ea5ee6fa9aba9a0c5103f4"
+    },
+    {
+      "file": "art/verification/woodland-shrine/mobile-assembled-sanctuary.png",
+      "bytes": 140353,
+      "sha256": "e84458badf5fb92134ec61eb0e78a35e0e0f40c7a53a57b616f1407c3072b346"
+    },
+    {
+      "file": "art/verification/woodland-shrine/mobile-gallery.png",
+      "bytes": 115296,
+      "sha256": "410dbce8e61f3bc0b77b31d95b5e91cbbf44cf53017845fe9cbae4d235a363e1"
+    },
+    {
+      "file": "art/verification/woodland-shrine/mobile-landmarks.png",
+      "bytes": 109466,
+      "sha256": "f37271382435761132c63fe475efae21fae31702526a13a3f69aa45bf8ed3459"
+    },
+    {
+      "file": "art/verification/woodland-shrine/mossveil-sanctuary.png",
+      "bytes": 210629,
+      "sha256": "d981a8590d4d011fb8a72088a41c91969f989f9130062e94fbd5dfdb798aca70"
+    },
+    {
+      "file": "art/verification/woodland-shrine/mossy-wall.png",
+      "bytes": 167017,
+      "sha256": "639b2dc9351b25079cfb8a83f89a0217a9789c0341df658940dec4121ddea535"
+    },
+    {
+      "file": "art/verification/woodland-shrine/sanctuary-hero.png",
+      "bytes": 1284304,
+      "sha256": "031c10c96c9576366fe3644d92afa8c60f77ce97f648a59ea1ec0cdcb50677e9"
+    },
+    {
+      "file": "art/verification/woodland-shrine/sanctuary-presentation.jpg",
+      "bytes": 207121,
+      "sha256": "ce89baa6107de5b3cfe7fbfe10a860c443eec82a5afd8dd9737011efa4ef8ed0"
+    },
+    {
+      "file": "art/verification/woodland-shrine/scope-baseline.json",
+      "bytes": 83518,
+      "sha256": "f2ae0df5a7b191e61849e2be67e191836d9ff150973a40fd7606f7f4e5905286"
+    },
+    {
+      "file": "art/verification/woodland-shrine/scope-verification.json",
+      "bytes": 244,
+      "sha256": "32cccc2614c3ce1ad7a88345c49c8dd887559de5b73995e824fa8861f36dc737"
+    },
+    {
+      "file": "art/verification/woodland-shrine/source-verification.json",
+      "bytes": 1300,
+      "sha256": "dd90ddf32ec7e3eac2d9682b129661490f129c1c575ad1c5c19a5ac56b3b0594"
+    },
+    {
+      "file": "art/verification/woodland-shrine/source.log",
+      "bytes": 1340,
+      "sha256": "d1b02a59cd2ba7aea79da2457e044977d3b43e12dae8493795ff68826de71dc8"
+    },
+    {
+      "file": "art/verification/woodland-shrine/sunleaf-altar.png",
+      "bytes": 226493,
+      "sha256": "16a907584273f93eef76f893b46264e9e472086e408a16dadfa6977cc47663a5"
+    },
+    {
+      "file": "art/verification/woodland-shrine/visual-review.json",
+      "bytes": 797,
+      "sha256": "fbf7dd441282f4d4e05fe0e40c0de16db63d12e6e8dbda4a28f479f93a22dbb0"
+    },
+    {
+      "file": "art/verification/woodland-shrine/votive-markers.png",
+      "bytes": 158538,
+      "sha256": "90db332cfacd80d430e876fb24d75f566dc4a3e01b2c54ccc1bb76bb5f887316"
+    },
+    {
+      "file": "art/verification/woodland-shrine/worn-paving.png",
+      "bytes": 183993,
+      "sha256": "cd2c5ed86f037f68b06d671272da4c26914fa179696c8269a9ce67cb77470d55"
+    },
+    {
+      "file": "public/art/woodland-shrine/ancient-root-tree.glb",
+      "bytes": 87308,
+      "sha256": "28f6753941b8dacc983bbfcfbf2b7dfcc48f4470cf5ba8aed24dcba815e84c45"
+    },
+    {
+      "file": "public/art/woodland-shrine/ancient-root-tree.png",
+      "bytes": 175588,
+      "sha256": "cf1598b1a19e325441f37300652352b24431ab01af90c02aff4b0b42ac19d23f"
+    },
+    {
+      "file": "public/art/woodland-shrine/broken-sun-arch.glb",
+      "bytes": 74952,
+      "sha256": "3e5e69c121531199ff123c31c1a4ab5e268d502e672aa64820c01dff2208adbe"
+    },
+    {
+      "file": "public/art/woodland-shrine/broken-sun-arch.png",
+      "bytes": 198912,
+      "sha256": "c8339f7f2466c04d78c2fe1ad179afa4201ed4bf99a5f44ce5c2ce4cdf0a8d37"
+    },
+    {
+      "file": "public/art/woodland-shrine/contact-sheet.jpg",
+      "bytes": 252841,
+      "sha256": "da8949fce45182a2a3e18b3ed01adda04ac6eee12a80b566d13a0cd251009242"
+    },
+    {
+      "file": "public/art/woodland-shrine/dry-offering-basin.glb",
+      "bytes": 34540,
+      "sha256": "4a113967b0031e481e79b1787f649ad15df2bd3def7b77af171b2ba69423ab63"
+    },
+    {
+      "file": "public/art/woodland-shrine/dry-offering-basin.png",
+      "bytes": 166349,
+      "sha256": "ce0c5495ab3249cb884539f6c799329043cf499906e7497a25d2a6d55930f58f"
+    },
+    {
+      "file": "public/art/woodland-shrine/fallen-columns.glb",
+      "bytes": 20096,
+      "sha256": "8db0e792e6a1e867cfad1682c55b2db81c300dfd573857624f873db2f9751a95"
+    },
+    {
+      "file": "public/art/woodland-shrine/fallen-columns.png",
+      "bytes": 152920,
+      "sha256": "794fb47ec4cd9e47774e93a2525f2ac046fd2b5e785a983255778e8b362a53bb"
+    },
+    {
+      "file": "public/art/woodland-shrine/gallery.js",
+      "bytes": 4144,
+      "sha256": "ac1da2dcd16807f39ef292a67846caae1e84511d835ac6e003c041164854a66f"
+    },
+    {
+      "file": "public/art/woodland-shrine/index.html",
+      "bytes": 4704,
+      "sha256": "326c80fd7c61525e9dce509bc79ad065fe32aa0d69b62af38bff18db693e81df"
+    },
+    {
+      "file": "public/art/woodland-shrine/layout.json",
+      "bytes": 3007,
+      "sha256": "74c697f04de3be5e19e3bd57d9056cdda4f5b4886db0e2bd2893a7cf1092c48f"
+    },
+    {
+      "file": "public/art/woodland-shrine/manifest.json",
+      "bytes": 10113,
+      "sha256": "c9edd598df8d41a82a38bbad7169764314f5e3b9bd85ffb6bf1ba788d9ac5d28"
+    },
+    {
+      "file": "public/art/woodland-shrine/mossveil-sanctuary.glb",
+      "bytes": 789428,
+      "sha256": "bc69193fdcc4e7ba5b090f99e9089f56e4af35d3edca242e3e8fc8bcce80e4fa"
+    },
+    {
+      "file": "public/art/woodland-shrine/mossveil-sanctuary.png",
+      "bytes": 210629,
+      "sha256": "d981a8590d4d011fb8a72088a41c91969f989f9130062e94fbd5dfdb798aca70"
+    },
+    {
+      "file": "public/art/woodland-shrine/mossy-wall.glb",
+      "bytes": 92376,
+      "sha256": "adf7987c8ab78a7a1db45b511f9a6e6c9aa3aa5fcd4b3ab9efec12a2ecef2c95"
+    },
+    {
+      "file": "public/art/woodland-shrine/mossy-wall.png",
+      "bytes": 167017,
+      "sha256": "639b2dc9351b25079cfb8a83f89a0217a9789c0341df658940dec4121ddea535"
+    },
+    {
+      "file": "public/art/woodland-shrine/sunleaf-altar.glb",
+      "bytes": 67528,
+      "sha256": "4b00faa74cc385052adb6969a70f67f91e2facae40f1be819a32777f5f69be8c"
+    },
+    {
+      "file": "public/art/woodland-shrine/sunleaf-altar.png",
+      "bytes": 226493,
+      "sha256": "16a907584273f93eef76f893b46264e9e472086e408a16dadfa6977cc47663a5"
+    },
+    {
+      "file": "public/art/woodland-shrine/vendor/addons/controls/OrbitControls.js",
+      "bytes": 40504,
+      "sha256": "faabb4e8dfd9235ee4a9fd7c9a3d75f90f1689dbd4944bd6fd32117dacec5f93"
+    },
+    {
+      "file": "public/art/woodland-shrine/vendor/addons/loaders/GLTFLoader.js",
+      "bytes": 114959,
+      "sha256": "97642d720f16cc9a0c9844934198e4d0c023bea8e89576d0f7545d03b2d103d2"
+    },
+    {
+      "file": "public/art/woodland-shrine/vendor/addons/utils/BufferGeometryUtils.js",
+      "bytes": 37621,
+      "sha256": "5c552223a9309883743b80538d6e9cdb45e3227f30d3ec56fb2c39b46e78d595"
+    },
+    {
+      "file": "public/art/woodland-shrine/vendor/addons/utils/SkeletonUtils.js",
+      "bytes": 11535,
+      "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
+    },
+    {
+      "file": "public/art/woodland-shrine/vendor/THREE-LICENSE.txt",
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "file": "public/art/woodland-shrine/vendor/three.core.js",
+      "bytes": 1443056,
+      "sha256": "3718df126d69c125362a03340913204470d8c50238605150e57f808840fb7759"
+    },
+    {
+      "file": "public/art/woodland-shrine/vendor/three.module.js",
+      "bytes": 650153,
+      "sha256": "bbf5ed13fe4373f5bd38b14ea8e62e9f157327da5638edc6d3863e08b167c9c7"
+    },
+    {
+      "file": "public/art/woodland-shrine/votive-markers.glb",
+      "bytes": 40568,
+      "sha256": "06d31de2dfcc2a12525e021c615cb7a9c8d94335d9ba92d32552eac1009c96c8"
+    },
+    {
+      "file": "public/art/woodland-shrine/votive-markers.png",
+      "bytes": 158538,
+      "sha256": "90db332cfacd80d430e876fb24d75f566dc4a3e01b2c54ccc1bb76bb5f887316"
+    },
+    {
+      "file": "public/art/woodland-shrine/worn-paving.glb",
+      "bytes": 42144,
+      "sha256": "0e5f37d3068c298883bad56acbdf27debb21571f1455f6a26cfd87721949ef1b"
+    },
+    {
+      "file": "public/art/woodland-shrine/worn-paving.png",
+      "bytes": 183993,
+      "sha256": "cd2c5ed86f037f68b06d671272da4c26914fa179696c8269a9ce67cb77470d55"
+    }
+  ]
+}

@@ -63,6 +63,7 @@ import { Piles } from "./pile-meshes";
 import { Herbs } from "./herb-meshes";
 import { Campfires } from "./campfire-meshes";
 import { Horizon, Terrain } from "./terrain";
+import { FrontierScenery } from "./frontier-scenery";
 import { CemeteryMist } from "./cemetery-mist";
 
 declare global {
@@ -1965,6 +1966,7 @@ export function WorldScene() {
       <WeatherFx />
       <Horizon treeReduction={graphics.horizonTreeReduction} />
       <Terrain />
+      <FrontierScenery />
       <CemeteryMist />
       <Buildings />
       <Placeables />

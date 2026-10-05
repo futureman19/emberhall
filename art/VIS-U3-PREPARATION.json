@@ -1,0 +1,175 @@
+{
+  "update": "VIS-U3",
+  "status": "offline preparation; integration paused pending U1/U2 QA",
+  "counts": {
+    "totalEquipment": 13,
+    "main": 11,
+    "off": 2,
+    "existingAuthored": 4,
+    "remainingPrimitive": 9
+  },
+  "equipment": [
+    {
+      "id": "hatchet",
+      "label": "Hatchet",
+      "slot": "main",
+      "renderer": "Hatchet",
+      "authoredParts": [
+        "hatchet_handle",
+        "hatchet_head"
+      ],
+      "disposition": "retain approved tool geometry; verify poses/ghost material",
+      "status": "preparation only; no runtime changes"
+    },
+    {
+      "id": "knife",
+      "label": "Skinning knife",
+      "slot": "main",
+      "renderer": "Knife",
+      "authoredParts": [],
+      "disposition": "author geometry-only replacement at existing mesh anchors; retain original fallback",
+      "status": "offline Blender meshes authored, parsed and source reopened; NOT integrated or gameplay-tested",
+      "offlineArtifact": "art/preparation/VIS-U3-weapons-r1/weapons.glb"
+    },
+    {
+      "id": "pick",
+      "label": "Pick",
+      "slot": "main",
+      "renderer": "Pick",
+      "authoredParts": [
+        "pick_handle",
+        "pick_head"
+      ],
+      "disposition": "retain approved tool geometry; verify poses/ghost material",
+      "status": "preparation only; no runtime changes"
+    },
+    {
+      "id": "hoe",
+      "label": "Hoe",
+      "slot": "main",
+      "renderer": "Hoe",
+      "authoredParts": [
+        "hoe_handle",
+        "hoe_head"
+      ],
+      "disposition": "retain approved tool geometry; verify poses/ghost material",
+      "status": "preparation only; no runtime changes"
+    },
+    {
+      "id": "fishing_rod",
+      "label": "Fishing rod",
+      "slot": "main",
+      "renderer": "FishingRod",
+      "authoredParts": [
+        "fishing_rod_handle",
+        "fishing_rod_head"
+      ],
+      "disposition": "retain approved tool geometry; verify poses/ghost material",
+      "status": "preparation only; no runtime changes"
+    },
+    {
+      "id": "club",
+      "label": "Club",
+      "slot": "main",
+      "renderer": "Club",
+      "authoredParts": [],
+      "disposition": "author geometry-only replacement at existing mesh anchors; retain original fallback",
+      "status": "offline Blender meshes authored, parsed and source reopened; NOT integrated or gameplay-tested",
+      "offlineArtifact": "art/preparation/VIS-U3-weapons-r1/weapons.glb"
+    },
+    {
+      "id": "shield",
+      "label": "Wooden shield",
+      "slot": "off",
+      "renderer": "Shield",
+      "authoredParts": [],
+      "disposition": "author geometry-only replacement at existing mesh anchors; retain original fallback",
+      "status": "offline Blender meshes authored, parsed and source reopened; NOT integrated or gameplay-tested",
+      "offlineArtifact": "art/preparation/VIS-U3-offhands-r1/offhands.glb"
+    },
+    {
+      "id": "staff",
+      "label": "Staff",
+      "slot": "main",
+      "renderer": "Staff",
+      "authoredParts": [],
+      "disposition": "author geometry-only replacement at existing mesh anchors; retain original fallback",
+      "status": "offline Blender meshes authored, parsed and source reopened; NOT integrated or gameplay-tested",
+      "offlineArtifact": "art/preparation/VIS-U3-weapons-r1/weapons.glb"
+    },
+    {
+      "id": "bow",
+      "label": "Bow",
+      "slot": "main",
+      "renderer": "Bow",
+      "authoredParts": [],
+      "disposition": "author geometry-only replacement at existing mesh anchors; retain original fallback",
+      "status": "offline Blender meshes authored, parsed and source reopened; NOT integrated or gameplay-tested",
+      "offlineArtifact": "art/preparation/VIS-U3-offhands-r1/offhands.glb"
+    },
+    {
+      "id": "torch",
+      "label": "Torch",
+      "slot": "main",
+      "renderer": "Torch",
+      "authoredParts": [],
+      "disposition": "author geometry-only replacement at existing mesh anchors; retain original fallback",
+      "status": "offline Blender meshes authored, parsed and source reopened; NOT integrated or gameplay-tested",
+      "offlineArtifact": "art/preparation/VIS-U3-offhands-r1/offhands.glb"
+    },
+    {
+      "id": "sword",
+      "label": "Sword",
+      "slot": "main",
+      "renderer": "Sword",
+      "authoredParts": [],
+      "disposition": "author geometry-only replacement at existing mesh anchors; retain original fallback",
+      "status": "offline Blender meshes authored, parsed and source reopened; NOT integrated or gameplay-tested",
+      "offlineArtifact": "art/preparation/VIS-U3-weapons-r1/weapons.glb"
+    },
+    {
+      "id": "mace",
+      "label": "Mace",
+      "slot": "main",
+      "renderer": "Mace",
+      "authoredParts": [],
+      "disposition": "author geometry-only replacement at existing mesh anchors; retain original fallback",
+      "status": "offline Blender meshes authored, parsed and source reopened; NOT integrated or gameplay-tested",
+      "offlineArtifact": "art/preparation/VIS-U3-weapons-r1/weapons.glb"
+    },
+    {
+      "id": "heater",
+      "label": "Iron shield",
+      "slot": "off",
+      "renderer": "Shield",
+      "authoredParts": [],
+      "disposition": "author geometry-only replacement at existing mesh anchors; retain original fallback",
+      "status": "offline Blender meshes authored, parsed and source reopened; NOT integrated or gameplay-tested",
+      "offlineArtifact": "art/preparation/VIS-U3-offhands-r1/offhands.glb"
+    }
+  ],
+  "characterWork": [
+    {
+      "id": "death-body",
+      "source": "src/components/game/pile-meshes.tsx:DeathBody",
+      "disposition": "original primitive body retained by U2; prepare shape consistent with approved character without changing source/loot semantics"
+    },
+    {
+      "id": "ghost-equipment",
+      "source": "src/components/game/people-meshes.tsx:Mat and held-item meshes",
+      "disposition": "source review shows several metallic heads/shield materials ignore ghost opacity; verify actual baseline transitions before changing materials"
+    },
+    {
+      "id": "body-anchors",
+      "source": "src/components/game/people-meshes.tsx:Figure",
+      "disposition": "retain approved character geometry/facing/hand refs and U1 player seating"
+    }
+  ],
+  "authoringOrder": [
+    "knife/sword/club/mace/staff",
+    "bow/torch with original arrow/light behavior",
+    "shield/heater offhands",
+    "death-body and scoped ghost-material findings"
+  ],
+  "gate": "No further runtime integration until at least one of VIS-U1-r1 or VIS-U2-r1 returns QA results; source/build packets immutable."
+}

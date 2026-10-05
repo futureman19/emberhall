@@ -1,0 +1,95 @@
+{
+  "passed": true,
+  "devices": [
+    {
+      "name": "desktop",
+      "passed": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loaded": [
+        "hearth-cottage",
+        "roadside-inn",
+        "watermill",
+        "watchtower",
+        "gatehouse",
+        "wayside-shrine",
+        "bell-tower",
+        "standing-stones"
+      ],
+      "filter": true,
+      "rotationToggle": true,
+      "pointerDrag": true,
+      "touchDrag": false,
+      "reset": true,
+      "glbDownload": true,
+      "errors": [],
+      "frames": 93,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "mobile",
+      "passed": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loaded": [
+        "hearth-cottage",
+        "roadside-inn",
+        "watermill",
+        "watchtower",
+        "gatehouse",
+        "wayside-shrine",
+        "bell-tower",
+        "standing-stones"
+      ],
+      "filter": true,
+      "rotationToggle": true,
+      "pointerDrag": true,
+      "touchDrag": true,
+      "reset": true,
+      "glbDownload": true,
+      "errors": [],
+      "frames": 91,
+      "horizontalOverflow": false
+    }
+  ],
+  "assetHttpHashes": [
+    {
+      "id": "hearth-cottage",
+      "passed": true,
+      "sha256": "e5dbcc3173fe17982c08cfd14d9a2b1a59e3d35188b28d77e1aeaf5c517c4280"
+    },
+    {
+      "id": "roadside-inn",
+      "passed": true,
+      "sha256": "6274daa90387a239e9e1ecbafe5ce206796e23e02dd3949ff9eb762493ad0941"
+    },
+    {
+      "id": "watermill",
+      "passed": true,
+      "sha256": "b7bd3af3983a1f6aae3bf5e3775a17bd0e372d207134c777451ceb019e0b63a7"
+    },
+    {
+      "id": "watchtower",
+      "passed": true,
+      "sha256": "d43ae94ac1e44fa91f3b2b209f8d3089387f8a8c26528b915f33890df72142df"
+    },
+    {
+      "id": "gatehouse",
+      "passed": true,
+      "sha256": "23073516c866ac8d24148a57309db0cca5ba784bad0245b3bef6f88ba18cb052"
+    },
+    {
+      "id": "wayside-shrine",
+      "passed": true,
+      "sha256": "b5f6cd53e74f3deb3e6dcce020bf5df0984c13ad981f4547a7cb3aa7c5168859"
+    },
+    {
+      "id": "bell-tower",
+      "passed": true,
+      "sha256": "2570497a6f7653238b367210c9f8dd9e3cb20f800871e063095b9887bde90eb6"
+    },
+    {
+      "id": "standing-stones",
+      "passed": true,
+      "sha256": "bef85c0266256d6f63505bd7d2c5a7e05e1728fc454dce66033b99e73f1c7149"
+    }
+  ]
+}

@@ -1,0 +1,429 @@
+{
+  "archive": "art/verification/river-ferry/emberhall-river-ferry-source.zip",
+  "archiveBytes": 10752584,
+  "archiveSha256": "a112ea69f59f7155da9c5ebc1a35e98b1634b085ca1776845637e881862f76d3",
+  "archiveReadbackVerified": true,
+  "fileCount": 84,
+  "files": [
+    {
+      "file": "art/blender/river-ferry/browser_verify.mjs",
+      "bytes": 6415,
+      "sha256": "460721ee1dbf50a94b73e27e4c021b7f4c710c4d86330242f3ed6380387766ed"
+    },
+    {
+      "file": "art/blender/river-ferry/build_crossing.py",
+      "bytes": 7317,
+      "sha256": "d293f98491c761c40af209c724e99202e34202aee18d2940708b6ae3a3c63263"
+    },
+    {
+      "file": "art/blender/river-ferry/designs.py",
+      "bytes": 11561,
+      "sha256": "c630fb8632f8ddcdd6146f396f67eeb48e794cff1c5fe693d93432a2c904aacd"
+    },
+    {
+      "file": "art/blender/river-ferry/emberhall-reedwake.blend",
+      "bytes": 398784,
+      "sha256": "64e1bae287218d0bc199d1a9a3e468af8bea37c27295d1acb95337e91eab8147"
+    },
+    {
+      "file": "art/blender/river-ferry/package_delivery.py",
+      "bytes": 1424,
+      "sha256": "f877f33be0eb3f7841a687139f1bc1de0afb71675533602ddc6083d59278e930"
+    },
+    {
+      "file": "art/blender/river-ferry/package_gallery.py",
+      "bytes": 2886,
+      "sha256": "8a0318faca73b21b051ceeb97f0c858de3856b872a288b7b5d89194da5107aa9"
+    },
+    {
+      "file": "art/blender/river-ferry/README.md",
+      "bytes": 5645,
+      "sha256": "b86c86510a17effe9f81ebd4ded411047acad0946ec2fa810979c45c76c79dec"
+    },
+    {
+      "file": "art/blender/river-ferry/serve.mjs",
+      "bytes": 1121,
+      "sha256": "12cb97db666b86b1caad0703e352392bb442bfb0c6d558b667f31c05698d0daf"
+    },
+    {
+      "file": "art/blender/river-ferry/verify.mjs",
+      "bytes": 3874,
+      "sha256": "8139da8d196db5ff78e3806fb6851c98517d2de635655d567657d825dcbe3c09"
+    },
+    {
+      "file": "art/blender/river-ferry/verify_assembly.py",
+      "bytes": 1645,
+      "sha256": "aa2a5a6a05e10ac316db6865f518bcc54cb10b7a2bc7358d97be87b1e0da6189"
+    },
+    {
+      "file": "art/blender/river-ferry/verify_scope.py",
+      "bytes": 762,
+      "sha256": "86525fd72dd6fe1cecabbed3a3faf757b643f2aef78fcfd367c522bd17385c0c"
+    },
+    {
+      "file": "art/blender/river-ferry/verify_source.py",
+      "bytes": 1616,
+      "sha256": "62b6e5020a9f49467f2016eee41719b8072db2adaf99592842f4fc842ca2086d"
+    },
+    {
+      "file": "art/blender/river-ferry/verify_structure.py",
+      "bytes": 3427,
+      "sha256": "9bb5d2928064bcd02f05782212a946b7bbb62d88fab924b314ba02292b82c113"
+    },
+    {
+      "file": "art/verification/river-ferry/assembly-verification.json",
+      "bytes": 2158,
+      "sha256": "adc53311877408229af7b77e8dceb8e29ec01e7ae9b1e9b2541d0281f796a893"
+    },
+    {
+      "file": "art/verification/river-ferry/broken-dock.png",
+      "bytes": 205298,
+      "sha256": "55714c928a86cf1654ccb08b5a22a820680cda293b62373496397d399adc5565"
+    },
+    {
+      "file": "art/verification/river-ferry/browser-verification.json",
+      "bytes": 2664,
+      "sha256": "186bb1dc538a19d3035b7157b36f689cb0f634cf77d443a81b333c1747d1a96e"
+    },
+    {
+      "file": "art/verification/river-ferry/browser.log",
+      "bytes": 2665,
+      "sha256": "8058218678a96cf41ca7608801f37a5253a2216ad05332bf47b20332ff49b2fd"
+    },
+    {
+      "file": "art/verification/river-ferry/contact-sheet.png",
+      "bytes": 849653,
+      "sha256": "2a736bed43a01449383b68222cedf0f5a33313574a0b504341777c3c3b67cb76"
+    },
+    {
+      "file": "art/verification/river-ferry/crossing-hero.png",
+      "bytes": 1228862,
+      "sha256": "fd65cbd144525b6a24101fa1242d0066ea67ddd5d543f0e03ff2d4aadddcd00a"
+    },
+    {
+      "file": "art/verification/river-ferry/crossing-presentation.jpg",
+      "bytes": 212123,
+      "sha256": "00df10f4abea577b7d1b264036246e3c72b4273fdd0811cc9854dea4879a493f"
+    },
+    {
+      "file": "art/verification/river-ferry/desktop-assembled-crossing.png",
+      "bytes": 370415,
+      "sha256": "afeceef9ad41d5ba5b3cc7a291cc4163c04853f72354f046d44a12def516b967"
+    },
+    {
+      "file": "art/verification/river-ferry/desktop-gallery.png",
+      "bytes": 265964,
+      "sha256": "22e578ce934852544d52c3d44a1badf517ba1f554373cc92b4bbd7793e07cea0"
+    },
+    {
+      "file": "art/verification/river-ferry/desktop-landmarks.png",
+      "bytes": 280360,
+      "sha256": "a885df3ac65bcd574de8c6de8e8f20ac32237e721cc75a2a619675b954870fc2"
+    },
+    {
+      "file": "art/verification/river-ferry/desktop-sign-detail.png",
+      "bytes": 344852,
+      "sha256": "2efb7493ae6a923ee7b83a1c3941a2e6c60a261a7a070199daddb786a63814cd"
+    },
+    {
+      "file": "art/verification/river-ferry/generation-accepted.log",
+      "bytes": 4243,
+      "sha256": "605de98cd38d5dc7a82e2f4eafbdcba7b53be09fda29fd784c8b44a34fc46a7b"
+    },
+    {
+      "file": "art/verification/river-ferry/generation-final.log",
+      "bytes": 4243,
+      "sha256": "9c39e99efffe048fd40109142f77645c13c642eda652cef08640ae9a949d346d"
+    },
+    {
+      "file": "art/verification/river-ferry/generation-refined.log",
+      "bytes": 4240,
+      "sha256": "5095efead00aee8f7d1423196267ed8bfd786ace6717d25cca704fa909fe21f6"
+    },
+    {
+      "file": "art/verification/river-ferry/generation.log",
+      "bytes": 4241,
+      "sha256": "4bcbf6bef24fdb62831f8bac468665b0e27cb077ec569f63dfd507aec71fc850"
+    },
+    {
+      "file": "art/verification/river-ferry/geometry-verification.json",
+      "bytes": 6030,
+      "sha256": "f350ad2e6d2be4210a70c2cfabb0159acc847595ac1bcc638c5860c51550eb2a"
+    },
+    {
+      "file": "art/verification/river-ferry/geometry.log",
+      "bytes": 6031,
+      "sha256": "46bade91ffa8472631c052fe1d7e134402fe09196c84487563a6f3005870449f"
+    },
+    {
+      "file": "art/verification/river-ferry/hauling-winch.png",
+      "bytes": 212651,
+      "sha256": "c07b56910f3de1e1bd6092438ab28165634225b85ceb6c3ea25079a1efff8843"
+    },
+    {
+      "file": "art/verification/river-ferry/intact-dock.png",
+      "bytes": 198828,
+      "sha256": "ff888ba07265ccb4dd820597ae474cc9aeb8b3de98029a342fd01a147d78dcae"
+    },
+    {
+      "file": "art/verification/river-ferry/landing-sign.png",
+      "bytes": 138469,
+      "sha256": "a1287c9e8e077e4dd36d5fb6a865968f25ddae841729528b2ed9c39bdee3495d"
+    },
+    {
+      "file": "art/verification/river-ferry/measurement.log",
+      "bytes": 6031,
+      "sha256": "46bade91ffa8472631c052fe1d7e134402fe09196c84487563a6f3005870449f"
+    },
+    {
+      "file": "art/verification/river-ferry/mobile-assembled-crossing.png",
+      "bytes": 136460,
+      "sha256": "236673e9d8bb37531af830c82e724d69a38363cba610b0715fef90676d1ad58d"
+    },
+    {
+      "file": "art/verification/river-ferry/mobile-gallery.png",
+      "bytes": 113096,
+      "sha256": "82de644270eb11619b12663d8d1ac8151cf1424777aa4576cea7f6d90228aebe"
+    },
+    {
+      "file": "art/verification/river-ferry/mobile-landmarks.png",
+      "bytes": 117931,
+      "sha256": "987067897fb7b9f44fcfabfdff453307eb38ea6badde0b4e5116defaeccb9939"
+    },
+    {
+      "file": "art/verification/river-ferry/mobile-sign-detail.png",
+      "bytes": 124865,
+      "sha256": "0c5c290f4c4f7004e46e7d0dc7a6c2903a75348bb769e875118bf24992643ad6"
+    },
+    {
+      "file": "art/verification/river-ferry/mooring-posts.png",
+      "bytes": 142668,
+      "sha256": "a8dec4d6c0e58eb91605123334eb9b2d136e7a71aca341e1c1f45966af29a132"
+    },
+    {
+      "file": "art/verification/river-ferry/reed-debris.png",
+      "bytes": 168173,
+      "sha256": "35d8710c6d8ff352d5879d05633f521d6d93f9c06826124be6f168accee4838c"
+    },
+    {
+      "file": "art/verification/river-ferry/reedwake-crossing.png",
+      "bytes": 214301,
+      "sha256": "0de9773171368df0f3664ac6a7b0b22d04dec2effedd697bb80354354a870bda"
+    },
+    {
+      "file": "art/verification/river-ferry/review-before/contact-sheet.png",
+      "bytes": 850028,
+      "sha256": "43b573623a240aa24ef56ebd0275ce6b5ab99b9a2267273b2e0e416082281585"
+    },
+    {
+      "file": "art/verification/river-ferry/review-before/crossing-hero.png",
+      "bytes": 1236784,
+      "sha256": "1b25544493cb2a6be0650f01289dfb02f24e304aba9fbc6ba5b4325a9fc1fe1d"
+    },
+    {
+      "file": "art/verification/river-ferry/scope-baseline.json",
+      "bytes": 92543,
+      "sha256": "cde0df48486853456c613fea3d2855e20954955bf7a6a124a835b4e3d6dc100c"
+    },
+    {
+      "file": "art/verification/river-ferry/scope-verification.json",
+      "bytes": 260,
+      "sha256": "0bd7ea2265d696490a47da8480523082ecb63007a45e99ee1ed2adeeec9136db"
+    },
+    {
+      "file": "art/verification/river-ferry/source-audit-accepted.log",
+      "bytes": 4753,
+      "sha256": "0059ae2b8cb2fd80b79c4c52110aa468fc53e14aea5b0d1fdd2de1f24c825c47"
+    },
+    {
+      "file": "art/verification/river-ferry/source-audit-final.log",
+      "bytes": 3865,
+      "sha256": "0ceefde621d4cbffe96c8fc98e325364a4cf86263be131ba208a0c7c5934d898"
+    },
+    {
+      "file": "art/verification/river-ferry/source-audit-refined.log",
+      "bytes": 3864,
+      "sha256": "ff4b01bf12f5109cf5ff8cfb09468c5ed90b9da7dd337a9e11ffb350c34891d8"
+    },
+    {
+      "file": "art/verification/river-ferry/source-audit.log",
+      "bytes": 3280,
+      "sha256": "5d83aa388b91b3d8732815d8a01d34fde57b16046b1b75fd35536f2d8b131adb"
+    },
+    {
+      "file": "art/verification/river-ferry/source-verification.json",
+      "bytes": 1280,
+      "sha256": "0a5f9150ec86d550117e8f50a591637531189ec895080927f503faa8337451ee"
+    },
+    {
+      "file": "art/verification/river-ferry/structure-verification.json",
+      "bytes": 1468,
+      "sha256": "7eea9875348d6eae87561eef722f788b2add3f449a23c032dee4c4ae008e46be"
+    },
+    {
+      "file": "art/verification/river-ferry/visual-review.md",
+      "bytes": 1850,
+      "sha256": "338af6888afe6b0f693bc50ab1bcbacab0d3f6f94df7a60873f2d3086e5b2888"
+    },
+    {
+      "file": "art/verification/river-ferry/washed-cargo.png",
+      "bytes": 204469,
+      "sha256": "dff4c7c7e9752801538c5713987fd9b92825e2a83c5aad6d1a39bd166009f977"
+    },
+    {
+      "file": "art/verification/river-ferry/wrecked-ferry.png",
+      "bytes": 155451,
+      "sha256": "67038bfa3b32bd7e40de5ae44397e9f012eaf41a6eeac5b85cd4ba72fb331ac7"
+    },
+    {
+      "file": "public/art/river-ferry/broken-dock.glb",
+      "bytes": 10524,
+      "sha256": "6f2a436209a7c74eaafdc34d55e5669d5ffe55a2bbb6244e6e6e54296593d007"
+    },
+    {
+      "file": "public/art/river-ferry/broken-dock.png",
+      "bytes": 205298,
+      "sha256": "55714c928a86cf1654ccb08b5a22a820680cda293b62373496397d399adc5565"
+    },
+    {
+      "file": "public/art/river-ferry/contact-sheet.jpg",
+      "bytes": 256715,
+      "sha256": "254ccd890680937e43f239c4df8f11d2327600273dd6c17eba4957de9d6f7752"
+    },
+    {
+      "file": "public/art/river-ferry/gallery.js",
+      "bytes": 4126,
+      "sha256": "198851c3b3f5c38c5769040f051f5587ebbcccb44bd8315135ff3d8f6060bf1b"
+    },
+    {
+      "file": "public/art/river-ferry/hauling-winch.glb",
+      "bytes": 171696,
+      "sha256": "7d8350f3fc748592b5b48670d4dc1139e821a565b48dfc61e0b2ec9db2836e30"
+    },
+    {
+      "file": "public/art/river-ferry/hauling-winch.png",
+      "bytes": 212651,
+      "sha256": "c07b56910f3de1e1bd6092438ab28165634225b85ceb6c3ea25079a1efff8843"
+    },
+    {
+      "file": "public/art/river-ferry/index.html",
+      "bytes": 4698,
+      "sha256": "4137b0c927ca670f6f1b675430aa8d56c997c36df63bf509bc39f2e48fbf15e1"
+    },
+    {
+      "file": "public/art/river-ferry/intact-dock.glb",
+      "bytes": 22696,
+      "sha256": "2fd7b5222ff13b4b307b3bc166b589f029f5d3b071a8aa45b4a693e604398606"
+    },
+    {
+      "file": "public/art/river-ferry/intact-dock.png",
+      "bytes": 198828,
+      "sha256": "ff888ba07265ccb4dd820597ae474cc9aeb8b3de98029a342fd01a147d78dcae"
+    },
+    {
+      "file": "public/art/river-ferry/landing-sign.glb",
+      "bytes": 19916,
+      "sha256": "e2a3778639b792ea5da2dcee562f040e798be21749df5e0aa21ca071f033f3cd"
+    },
+    {
+      "file": "public/art/river-ferry/landing-sign.png",
+      "bytes": 138469,
+      "sha256": "a1287c9e8e077e4dd36d5fb6a865968f25ddae841729528b2ed9c39bdee3495d"
+    },
+    {
+      "file": "public/art/river-ferry/layout.json",
+      "bytes": 3707,
+      "sha256": "8116ce33d3f663a7e35d75cc53d8a5308d6e107ba793233c8ada99cd90619ceb"
+    },
+    {
+      "file": "public/art/river-ferry/manifest.json",
+      "bytes": 9969,
+      "sha256": "d08a41e89822baebe74faa24ce01899a415b72818df857fe3fc7fa69a7f3960e"
+    },
+    {
+      "file": "public/art/river-ferry/mooring-posts.glb",
+      "bytes": 107640,
+      "sha256": "55e1fddba555d00a14324de0b4d71e7ad4e05ddeb5d299c272ccd1480d71331a"
+    },
+    {
+      "file": "public/art/river-ferry/mooring-posts.png",
+      "bytes": 142668,
+      "sha256": "a8dec4d6c0e58eb91605123334eb9b2d136e7a71aca341e1c1f45966af29a132"
+    },
+    {
+      "file": "public/art/river-ferry/reed-debris.glb",
+      "bytes": 60316,
+      "sha256": "bc76d49fa2d113b52213057704892c28bcd772b210cf663a9dc1b18d73fb4361"
+    },
+    {
+      "file": "public/art/river-ferry/reed-debris.png",
+      "bytes": 168173,
+      "sha256": "35d8710c6d8ff352d5879d05633f521d6d93f9c06826124be6f168accee4838c"
+    },
+    {
+      "file": "public/art/river-ferry/reedwake-crossing.glb",
+      "bytes": 877232,
+      "sha256": "46aa81f19344f07ef351ae9a34dc27b4888ae9e54b4451ad5df112dbac41a698"
+    },
+    {
+      "file": "public/art/river-ferry/reedwake-crossing.png",
+      "bytes": 214301,
+      "sha256": "0de9773171368df0f3664ac6a7b0b22d04dec2effedd697bb80354354a870bda"
+    },
+    {
+      "file": "public/art/river-ferry/vendor/addons/controls/OrbitControls.js",
+      "bytes": 40504,
+      "sha256": "faabb4e8dfd9235ee4a9fd7c9a3d75f90f1689dbd4944bd6fd32117dacec5f93"
+    },
+    {
+      "file": "public/art/river-ferry/vendor/addons/loaders/GLTFLoader.js",
+      "bytes": 114959,
+      "sha256": "97642d720f16cc9a0c9844934198e4d0c023bea8e89576d0f7545d03b2d103d2"
+    },
+    {
+      "file": "public/art/river-ferry/vendor/addons/utils/BufferGeometryUtils.js",
+      "bytes": 37621,
+      "sha256": "5c552223a9309883743b80538d6e9cdb45e3227f30d3ec56fb2c39b46e78d595"
+    },
+    {
+      "file": "public/art/river-ferry/vendor/addons/utils/SkeletonUtils.js",
+      "bytes": 11535,
+      "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
+    },
+    {
+      "file": "public/art/river-ferry/vendor/THREE-LICENSE.txt",
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "file": "public/art/river-ferry/vendor/three.core.js",
+      "bytes": 1443056,
+      "sha256": "3718df126d69c125362a03340913204470d8c50238605150e57f808840fb7759"
+    },
+    {
+      "file": "public/art/river-ferry/vendor/three.module.js",
+      "bytes": 650153,
+      "sha256": "bbf5ed13fe4373f5bd38b14ea8e62e9f157327da5638edc6d3863e08b167c9c7"
+    },
+    {
+      "file": "public/art/river-ferry/washed-cargo.glb",
+      "bytes": 41040,
+      "sha256": "42109f6f91ac649f4bfab26a548b1100d8ecee7f2cd3ca5c7dcdebdfc27c7958"
+    },
+    {
+      "file": "public/art/river-ferry/washed-cargo.png",
+      "bytes": 204469,
+      "sha256": "dff4c7c7e9752801538c5713987fd9b92825e2a83c5aad6d1a39bd166009f977"
+    },
+    {
+      "file": "public/art/river-ferry/wrecked-ferry.glb",
+      "bytes": 71336,
+      "sha256": "48f879e9431a55005548d63b5539db677f27a1c9a9c8c903aba119913501ff4c"
+    },
+    {
+      "file": "public/art/river-ferry/wrecked-ferry.png",
+      "bytes": 155451,
+      "sha256": "67038bfa3b32bd7e40de5ae44397e9f012eaf41a6eeac5b85cd4ba72fb331ac7"
+    }
+  ]
+}

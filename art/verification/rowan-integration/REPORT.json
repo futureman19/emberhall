@@ -1,0 +1,104 @@
+{
+  "outcome": "Implemented and locally browser-verified player-only Rowan with shared creator path and original fallback. No commit, push, or deploy.",
+  "files_changed": [
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\asset-ledger.json",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\ROWAN-INTEGRATION.md",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\src\\components\\game\\authored-character.test.ts",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\src\\components\\game\\authored-character.tsx",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\src\\components\\game\\look-preview.tsx",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\src\\components\\game\\people-meshes.tsx",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\src\\components\\game\\rowan-character-data.ts",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\src\\components\\game\\rowan-character-context.ts",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\src\\components\\game\\rowan-character.tsx",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\scripts\\rowan-character-smoke.mjs",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\scripts\\rowan-built-smoke.mjs"
+  ],
+  "evidence_files": [
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\auth.txt",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\build.txt",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\check.txt",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\tests.txt",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\typecheck.txt",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\built-v1\\desktop-creator.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\built-v1\\desktop-world.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\built-v1\\mobile-creator.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\built-v1\\mobile-world.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\built-v1\\results.json",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\candidate-v1\\desktop-action.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\candidate-v1\\desktop-creator-custom.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\candidate-v1\\desktop-creator.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\candidate-v1\\desktop-walk.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\candidate-v1\\desktop-world.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\candidate-v1\\mobile-world.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\candidate-v1\\results.json",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\failure-v1\\desktop-action.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\failure-v1\\desktop-creator-custom.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\failure-v1\\desktop-creator.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\failure-v1\\desktop-walk.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\failure-v1\\desktop-world.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\failure-v1\\mobile-world.png",
+    "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\verification\\rowan-integration\\failure-v1\\results.json",
+    "C:/Users/futur/Desktop/emberhall-lanternwood-preview/art/verification/rowan-red.txt"
+  ],
+  "acceptance": {
+    "rowan_player_and_preview": true,
+    "NPC_original_path": true,
+    "arm_and_equipment_anchors": true,
+    "walk_and_bounded_action": true,
+    "actual_rejected_asset_fallback": true,
+    "appearance_UI_and_save": true,
+    "outline": "not introduced/enabled"
+  },
+  "commands": [
+    {
+      "command": "node --experimental-strip-types --test src/components/game/authored-character.test.ts (before wiring)",
+      "result": "4 passed, 1 failed as expected: missing provider wiring",
+      "log": "C:/Users/futur/Desktop/emberhall-lanternwood-preview/art/verification/rowan-red.txt"
+    },
+    {
+      "command": "node --experimental-strip-types --test src/components/game/authored-character.test.ts src/components/game/character-facing.test.ts src/game/look/figure.test.ts src/game/look/save-roundtrip.test.ts",
+      "result": "12 passed; exit 0"
+    },
+    {
+      "command": "node node_modules/eslint/bin/eslint.js <all changed TS/TSX and both Rowan smoke scripts> --max-warnings 0",
+      "result": "exit 0"
+    },
+    {
+      "command": "node scripts/audit-art-coverage.mjs --refresh",
+      "result": "3178 assets, 5300 states, zero audit errors; refreshed only asset ledger"
+    },
+    {
+      "command": "npm run check",
+      "result": "exit 1 at repository lint: 7951 errors and 145 warnings, from pre-existing experiment/vendor files and unrelated warning. No Rowan files in lint failure output."
+    },
+    {
+      "command": "npm test; npm run typecheck; npm run build; npm run check:auth (remaining stages, once each)",
+      "result": "all exit 0; tests: 276 script tests and 768 TypeScript tests; auth dev/build sign-in off; database migration skipped because DATABASE_URL unset"
+    },
+    {
+      "command": "node scripts/rowan-character-smoke.mjs http://127.0.0.1:8080 candidate-v1",
+      "result": "16 checks passed; actual app/WebGL and 6 screenshots"
+    },
+    {
+      "command": "node scripts/rowan-character-smoke.mjs http://127.0.0.1:8080 failure-v1",
+      "result": "13 checks passed; rejected actual Rowan request; original character rendered; 6 screenshots"
+    },
+    {
+      "command": "node scripts/rowan-built-smoke.mjs http://127.0.0.1:8137",
+      "result": "Successful built-v1 report and 4 screenshots were already produced concurrently by parent session. Read and visually inspected. My duplicate invocation refused to overwrite evidence. My duplicate preview launch failed occupied port; existing preview belongs to parent and was not killed."
+    }
+  ],
+  "browser_scope": "Fresh disposable loaded-save contexts. Actual creator UI selection; local Fiber scene geometry/material/anchor inspection; useTile walking and hunt command with normal fixed simulation substeps. Not complete animation/equipment/performance certification.",
+  "visual_notes": [
+    "Rowan creator has connected limbs and readable authored face/clothing; mobile creator controls fit.",
+    "World view keeps character small at ordinary camera distance.",
+    "Existing minimap overlaps information/guide panels in screenshots; outside player geometry task and not changed."
+  ],
+  "remaining_blockers": [
+    "Whole npm run check remains red on unrelated pre-existing lint inputs; no speculative cleanup performed."
+  ],
+  "asset_preservation": "Approved Rowan GLB, blend, generator and standalone contract have no Git diff.",
+  "built_evidence_provenance": "Parent-owned preview process proc_8dcf08fff02a; its saved successful built-v1 report read here; no independent duplicate built run claimed.",
+  "harness_defects": 0,
+  "duplicate_run_refusals": 1
+}

@@ -1,0 +1,102 @@
+{
+  "passed": true,
+  "devices": [
+    {
+      "name": "desktop",
+      "passed": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loaded": [
+        "war-tent",
+        "palisade-gate",
+        "lookout-platform",
+        "palisade-wall",
+        "cooking-pit",
+        "empty-cage",
+        "trophy-standard",
+        "supply-pile",
+        "grimroot-camp"
+      ],
+      "filter": true,
+      "rotationToggle": true,
+      "pointerDrag": true,
+      "touchDrag": false,
+      "reset": true,
+      "glbDownload": true,
+      "errors": [],
+      "frames": 96,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "mobile",
+      "passed": true,
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loaded": [
+        "war-tent",
+        "palisade-gate",
+        "lookout-platform",
+        "palisade-wall",
+        "cooking-pit",
+        "empty-cage",
+        "trophy-standard",
+        "supply-pile",
+        "grimroot-camp"
+      ],
+      "filter": true,
+      "rotationToggle": true,
+      "pointerDrag": true,
+      "touchDrag": true,
+      "reset": true,
+      "glbDownload": true,
+      "errors": [],
+      "frames": 93,
+      "horizontalOverflow": false
+    }
+  ],
+  "assetHttpHashes": [
+    {
+      "id": "war-tent",
+      "passed": true,
+      "sha256": "cbff8a80064a6119b9102de49aa60752474aefb038c6508bb05c7b71a9b4a0ec"
+    },
+    {
+      "id": "palisade-gate",
+      "passed": true,
+      "sha256": "fd4b80b4fab8e477df404da1e0e9fe9986e142daed88e85eed2c6bf634c8ec43"
+    },
+    {
+      "id": "lookout-platform",
+      "passed": true,
+      "sha256": "08a214aac7cd97b8bbd871d6ee6bd3efdf022ea73bd79845dde2712d17a2b575"
+    },
+    {
+      "id": "palisade-wall",
+      "passed": true,
+      "sha256": "056b1401bfc425b3d6de3cc76fe69a654e541e9352c2512ff693be61bb1f873d"
+    },
+    {
+      "id": "cooking-pit",
+      "passed": true,
+      "sha256": "b072f9a7585ebd5de27b61a0e481319971f984d253f52238c4318e00c61962f6"
+    },
+    {
+      "id": "empty-cage",
+      "passed": true,
+      "sha256": "9c6f8542fe9ff06afe9262f771ffc12c57f078ab9641c6d5488ebfea3809fea8"
+    },
+    {
+      "id": "trophy-standard",
+      "passed": true,
+      "sha256": "f5bb5aa8af91f9aeab330e7fdd07c7540e01b8636b958e74c1bd2f9c8a0cf6fb"
+    },
+    {
+      "id": "supply-pile",
+      "passed": true,
+      "sha256": "9582ab40b50a684978cb604a04112cb9718834e6037775235ef3f03fb655e429"
+    },
+    {
+      "id": "grimroot-camp",
+      "passed": true,
+      "sha256": "4c2752f679373f8c72e1f64efb5601d660b7d054313eacce9064d9915cdbfd2d"
+    }
+  ]
+}

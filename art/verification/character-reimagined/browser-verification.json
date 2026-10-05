@@ -1,0 +1,91 @@
+{
+  "passed": true,
+  "assetHashes": [
+    {
+      "id": "baseline-current",
+      "sha256": "21890f6eb13c6c7a745f835c4225a823f0068e576ffde3cfedfd7ab9139faac2",
+      "passed": true
+    },
+    {
+      "id": "rowan",
+      "sha256": "2b5cff5a268c53c36c26351a42e5c2fce7a70fd74d7c13f7414d353fa4fb0ad4",
+      "passed": true
+    },
+    {
+      "id": "mira",
+      "sha256": "96cec45de65eb98450e850db0b217252eef1c02d74d9ea0a7b8211029c0c520c",
+      "passed": true
+    },
+    {
+      "id": "arden",
+      "sha256": "aeec68a1ea2d77e5e4346e01d435040addaa2e1d6e085b92feb35812d9974880",
+      "passed": true
+    }
+  ],
+  "devices": [
+    {
+      "name": "desktop",
+      "passed": true,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loaded": [
+        "baseline-current",
+        "rowan",
+        "mira",
+        "arden"
+      ],
+      "screenshots": [
+        "desktop-rowan-body.png",
+        "desktop-rowan-face.png",
+        "desktop-rowan-game.png",
+        "desktop-mira-body.png",
+        "desktop-mira-face.png",
+        "desktop-mira-game.png",
+        "desktop-arden-body.png",
+        "desktop-arden-face.png",
+        "desktop-arden-game.png"
+      ],
+      "externalRequests": [],
+      "errors": [],
+      "pointerOrbit": true,
+      "touchOrbit": false,
+      "compareToggle": true,
+      "rigidArmStudy": true,
+      "turntable": true,
+      "reset": true,
+      "glbDownloadHash": true,
+      "horizontalOverflow": false
+    },
+    {
+      "name": "mobile",
+      "passed": true,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 (0x00002882) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "loaded": [
+        "baseline-current",
+        "rowan",
+        "mira",
+        "arden"
+      ],
+      "screenshots": [
+        "mobile-rowan-body.png",
+        "mobile-rowan-face.png",
+        "mobile-rowan-game.png",
+        "mobile-mira-body.png",
+        "mobile-mira-face.png",
+        "mobile-mira-game.png",
+        "mobile-arden-body.png",
+        "mobile-arden-face.png",
+        "mobile-arden-game.png"
+      ],
+      "externalRequests": [],
+      "errors": [],
+      "pointerOrbit": true,
+      "touchOrbit": true,
+      "compareToggle": true,
+      "rigidArmStudy": true,
+      "turntable": true,
+      "reset": true,
+      "glbDownloadHash": true,
+      "horizontalOverflow": false
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "assets": 3148,
+  "protectedFields": [
+    "source",
+    "metrics",
+    "status",
+    "evidence",
+    "reviewEvidence",
+    "batchOwner",
+    "notes"
+  ],
+  "changes": [],
+  "existingStatesPreserved": true
+}

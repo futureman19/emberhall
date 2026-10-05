@@ -10,6 +10,13 @@ export const FLORA_NAMES = [
 ];
 export const FLORA_URL = "/art/lanternwood/flora.glb";
 export type FloraGeometry = Readonly<Record<string, BufferGeometry>>;
+/** Authored bases are soil-relative; legacy primitives straddle their origin.
+ * Keep a small anti-z-fighting clearance and the existing picked-state scale. */
+export function floraHerbGroundOffset(geometry: BufferGeometry | undefined, ready: boolean): number {
+  if (!geometry) return 0.06;
+  // extractFloraGeometry computes this once for each shared, validated state.
+  return 0.006 - geometry.boundingBox!.min.y * (ready ? 1 : 0.62);
+}
 /** Complete kit or original fallback. Bake Blender ancestry before placing on soil. */
 export function extractFloraGeometry(scene: Object3D): FloraGeometry {
   scene.updateMatrixWorld(true);

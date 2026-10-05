@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "blenderVersion": "5.2.1 LTS",
+  "source": "C:\\Users\\futur\\Desktop\\emberhall-lanternwood-preview\\art\\blender\\orc-encampment\\emberhall-orc.blend",
+  "assetCount": 9,
+  "assets": [
+    {
+      "id": "war-tent",
+      "editableParts": 83,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "palisade-gate",
+      "editableParts": 22,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "lookout-platform",
+      "editableParts": 43,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "palisade-wall",
+      "editableParts": 26,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "cooking-pit",
+      "editableParts": 28,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "empty-cage",
+      "editableParts": 40,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "trophy-standard",
+      "editableParts": 15,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "supply-pile",
+      "editableParts": 23,
+      "groundZ": 0.0,
+      "passed": true
+    },
+    {
+      "id": "grimroot-camp",
+      "editableParts": 463,
+      "groundZ": 0.0,
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "links": [
+    {
+      "url": "/assets/index-QeTs3MVI.js",
+      "status": 200,
+      "sha256": "e4e655b3040e69eee5fdc8ea77afc5438349fe5bfc8d3dd940c39947094bdcc2",
+      "same": true
+    },
+    {
+      "url": "/assets/rolldown-runtime-C0FnF6B9.js",
+      "status": 200,
+      "sha256": "e0a79ad36c6ca1ffbc796c80aa5661803a9d1bc684e29d1587f48b4ba9a82714",
+      "same": true
+    },
+    {
+      "url": "/assets/routes-DLi3dleN.js",
+      "status": 200,
+      "sha256": "fdad609816edfeec8ec69fdcaef77ce659bcf8f63e9b0f0e616eafb4cec6c43c",
+      "same": true
+    },
+    {
+      "url": "/assets/styles-DsTtAquI.css",
+      "status": 200,
+      "sha256": "ea3ee335fb1824f24ba7e4c55f2914db3168b076d17c6df240191d16305da4dc",
+      "same": true
+    }
+  ],
+  "passed": true
+}

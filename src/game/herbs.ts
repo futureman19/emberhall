@@ -1,4 +1,4 @@
-import { MAP } from "./atlas.ts";
+import { LEGACY_MAP } from "./atlas.ts";
 import { biomeAt } from "./biome.ts";
 import { ITEM_META } from "./catalog.ts";
 import { astar, nearestWalkable, tileOf, walkable } from "./pathfinding.ts";
@@ -92,8 +92,9 @@ export function ensureHerbs(world: World): void {
     ash: [],
     pearl: [],
   };
-  for (let ty = 1; ty < MAP - 1; ty++) {
-    for (let tx = 1; tx < MAP - 1; tx++) {
+  // Retain the original herb distribution and bounded seeding cost. Frontier scenery adds no new herb population.
+  for (let ty = 1; ty < LEGACY_MAP - 1; ty++) {
+    for (let tx = 1; tx < LEGACY_MAP - 1; tx++) {
       if (!openGround(world, tx, ty)) continue;
       for (const kind of HERB_ORDER) {
         if (herbSuits(world, kind, tx, ty)) cand[kind].push({ tx, ty });

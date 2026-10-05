@@ -1,0 +1,394 @@
+{
+  "archive": "art/verification/abandoned-mine/emberhall-abandoned-mine-source.zip",
+  "archiveBytes": 8474133,
+  "archiveSha256": "6829a837a25513e6765eaa73b16951e386d00adb649e2164581852e1aef007c1",
+  "archiveReadbackVerified": true,
+  "fileCount": 77,
+  "files": [
+    {
+      "file": "art/blender/abandoned-mine/browser_verify.mjs",
+      "bytes": 6268,
+      "sha256": "9648704e5238ea2faa13c631a9c8558a99a04220f67a5623b7841e77ace4f8b4"
+    },
+    {
+      "file": "art/blender/abandoned-mine/build_camp.py",
+      "bytes": 7313,
+      "sha256": "820d77327b227f7b183b449ceb3efe3d55dc6e62be48e4c2ccdc1c0ecaa1159e"
+    },
+    {
+      "file": "art/blender/abandoned-mine/designs.py",
+      "bytes": 8641,
+      "sha256": "43bb446c7a6b7e96c9006cf9dce51bb8b98df1c259eb2f05f39c8a16ec381a21"
+    },
+    {
+      "file": "art/blender/abandoned-mine/emberhall-mine.blend",
+      "bytes": 394294,
+      "sha256": "f088e33a9238302bd163fca98b67059a1b6d60bf161dbe184585bf4696292715"
+    },
+    {
+      "file": "art/blender/abandoned-mine/package_delivery.py",
+      "bytes": 1442,
+      "sha256": "9f05f20196eb4ebfab44e1076e0ba3f2de36499f67906747c416ab322355911b"
+    },
+    {
+      "file": "art/blender/abandoned-mine/package_gallery.py",
+      "bytes": 2869,
+      "sha256": "bd1699fdefcbca7c4a5de4b8d0415be30059f0c5dfea6bb8e901e24a2cb5094e"
+    },
+    {
+      "file": "art/blender/abandoned-mine/README.md",
+      "bytes": 5267,
+      "sha256": "aade94bf8447032b37e8ef5f52f179012cce5affaadf1752af1cf54ecf884bfe"
+    },
+    {
+      "file": "art/blender/abandoned-mine/serve.mjs",
+      "bytes": 1124,
+      "sha256": "d43e35f18be7b3a3c9b4de5d76e101fdbb2fba300318053f7aab377a485d6813"
+    },
+    {
+      "file": "art/blender/abandoned-mine/verify.mjs",
+      "bytes": 3682,
+      "sha256": "a1c5de1dab31a9c3321d1f8dfd69a21169854556582b2aca0c32bf90bf505050"
+    },
+    {
+      "file": "art/blender/abandoned-mine/verify_assembly.py",
+      "bytes": 2072,
+      "sha256": "b24444acc3d8183d3ee312654dcbf466c99b9902312bade325d7fe4124cc8023"
+    },
+    {
+      "file": "art/blender/abandoned-mine/verify_scope.py",
+      "bytes": 734,
+      "sha256": "b5d27e496da70fb9549fb9b336c8259b6a1c72ce1ec4774008c478c4ba565b30"
+    },
+    {
+      "file": "art/blender/abandoned-mine/verify_source.py",
+      "bytes": 1622,
+      "sha256": "30d39ad1282dfbfaec0fbba6736cd7d1ccb88f642fde8ed8ad3be617266641ce"
+    },
+    {
+      "file": "art/verification/abandoned-mine/assembly-final.log",
+      "bytes": 2083,
+      "sha256": "675e3ad8667eac0b62db97a6bb66ec241ff577fb2f87b946a785cefa93647a5d"
+    },
+    {
+      "file": "art/verification/abandoned-mine/assembly-verification.json",
+      "bytes": 1858,
+      "sha256": "ce05fdf84024ce6be301992fb3c77527c4744dafa1ab25ad1a5da12cb5597731"
+    },
+    {
+      "file": "art/verification/abandoned-mine/assembly.log",
+      "bytes": 2084,
+      "sha256": "17a6f101cb52d3d955651698c3b9e5d9d0bbbd0837933a2db52ffcf4852113a8"
+    },
+    {
+      "file": "art/verification/abandoned-mine/broken-ore-cart.png",
+      "bytes": 252874,
+      "sha256": "144568e26eff20a5945c073d43f6cd9f62e3dacafd8ea8c1ee6e4dd1f1a9f5c2"
+    },
+    {
+      "file": "art/verification/abandoned-mine/broken-track.png",
+      "bytes": 142852,
+      "sha256": "80fd283e720ef0c58b6c8c37d33a12352681c92a0ebb3ad230427b0a42d26096"
+    },
+    {
+      "file": "art/verification/abandoned-mine/browser-final.log",
+      "bytes": 2704,
+      "sha256": "ca95a9707aa9a36d4112d773d9939b350abffb6adead4fd2624a055435819f0c"
+    },
+    {
+      "file": "art/verification/abandoned-mine/browser-verification.json",
+      "bytes": 2703,
+      "sha256": "9f9b7d3ab52deb591b1b9b4ddc98d39f6f76dc442f322b91a73c8149220d81c5"
+    },
+    {
+      "file": "art/verification/abandoned-mine/browser.log",
+      "bytes": 2703,
+      "sha256": "214435d5c309ad475ecbc1f458f1a187aa7329dc7bd7ecce8bbae9427f4ba207"
+    },
+    {
+      "file": "art/verification/abandoned-mine/build-final.log",
+      "bytes": 4286,
+      "sha256": "abdfd961be0cf06727aadfdff092ac814baba4333cb3c4ea807c90213fb941ed"
+    },
+    {
+      "file": "art/verification/abandoned-mine/build.log",
+      "bytes": 4287,
+      "sha256": "4ed456bdefd47f0fd5072fd66e7181aeb94f93a8d50fc029128209a996e0b8c1"
+    },
+    {
+      "file": "art/verification/abandoned-mine/camp-hero.png",
+      "bytes": 1389256,
+      "sha256": "735e463ed5de5a5ae9702bdc2e5695081dec47ab6c12fa095ab80d35724ea9ec"
+    },
+    {
+      "file": "art/verification/abandoned-mine/camp-presentation.jpg",
+      "bytes": 227130,
+      "sha256": "bed39290e0a52dd57bec70f8b8ee9df000a0c969d6c55a7fd6abe209a7c4d400"
+    },
+    {
+      "file": "art/verification/abandoned-mine/contact-sheet.png",
+      "bytes": 950481,
+      "sha256": "b0b7e3079d62e978c9d2e108dfacc00ac742999ccd26492fc05832e2f69be24c"
+    },
+    {
+      "file": "art/verification/abandoned-mine/desktop-assembled-camp.png",
+      "bytes": 360736,
+      "sha256": "6aeae367ab52fe9f96edbbb57699df075c47a066d71488e24831107ef864ef68"
+    },
+    {
+      "file": "art/verification/abandoned-mine/desktop-gallery.png",
+      "bytes": 265847,
+      "sha256": "354e7856e24654ba5123d15a40a2f1c1810d88192f3aeae4416c2ff11d9d96e0"
+    },
+    {
+      "file": "art/verification/abandoned-mine/desktop-landmarks.png",
+      "bytes": 284850,
+      "sha256": "f3aef068effbaedc06cfe8c74a2d526f7b1e77accdbe9ff6111453c7fbdbe32f"
+    },
+    {
+      "file": "art/verification/abandoned-mine/geometry-final.log",
+      "bytes": 12274,
+      "sha256": "c549d258d4f1658598a41c2a99acf367d56506ae60e432c30c4322ee0e598a78"
+    },
+    {
+      "file": "art/verification/abandoned-mine/geometry-verification.json",
+      "bytes": 6136,
+      "sha256": "3f47cb991a9e6b59026beb38617b649cd88c654b227c755bd802b2594687bb3d"
+    },
+    {
+      "file": "art/verification/abandoned-mine/geometry.log",
+      "bytes": 12274,
+      "sha256": "44d74385734576a48f6edcb06bf3d2b276af98fb1335a53d92c618c36f88e081"
+    },
+    {
+      "file": "art/verification/abandoned-mine/hollowvein-diggings.png",
+      "bytes": 194110,
+      "sha256": "cf1bd2801fd7aca02b3a93c32a98d3763648600c9d661a29d13d6088c99741b9"
+    },
+    {
+      "file": "art/verification/abandoned-mine/mining-workbench.png",
+      "bytes": 186982,
+      "sha256": "ef2642142e5fc87ff12812d8f6fcb3c532ae12d916eac751584faaac6a6740cc"
+    },
+    {
+      "file": "art/verification/abandoned-mine/mobile-assembled-camp.png",
+      "bytes": 134712,
+      "sha256": "a55f28b4839a733237a7cf07d396f244d9501ecaec25e1e6bb42c0ba5be8fc92"
+    },
+    {
+      "file": "art/verification/abandoned-mine/mobile-gallery.png",
+      "bytes": 111635,
+      "sha256": "4bd9edfd3710b69b8a1a20883f5c0959587079704d356debee6403cd8119f312"
+    },
+    {
+      "file": "art/verification/abandoned-mine/mobile-landmarks.png",
+      "bytes": 117389,
+      "sha256": "afbbb4b193b3d11cae63582e12ede9b19562581a322527a2bf5137cc9fdd8274"
+    },
+    {
+      "file": "art/verification/abandoned-mine/scope-baseline.json",
+      "bytes": 72966,
+      "sha256": "51e5129490bb8c8012f6b0efa903c8da3860983746b46898a0b3be5782be85d8"
+    },
+    {
+      "file": "art/verification/abandoned-mine/scope-verification.json",
+      "bytes": 229,
+      "sha256": "953d62aa3fa4a27672f20c44796403e490fde8e57897dc82ae322793c1214738"
+    },
+    {
+      "file": "art/verification/abandoned-mine/sealed-mine-mouth.png",
+      "bytes": 174095,
+      "sha256": "9a04c8e2c97ae49c6fa7c9d1ad4698c5b936bb23e121c3b4c815ffc56b1d0c64"
+    },
+    {
+      "file": "art/verification/abandoned-mine/source-final.log",
+      "bytes": 1319,
+      "sha256": "50f15ae91ed6912ef980d87dbe126c7b71f988df64147f2a572b21d84ca0eb58"
+    },
+    {
+      "file": "art/verification/abandoned-mine/source-verification.json",
+      "bytes": 1293,
+      "sha256": "d227794ded53c57627d54565dab86c2ba65baea2700237d1319ba3ea2c5b912f"
+    },
+    {
+      "file": "art/verification/abandoned-mine/source.log",
+      "bytes": 1319,
+      "sha256": "b0b42b36f6e3b43797f7a75a5927337c4d37e575153852f152399a2b9b0af3fb"
+    },
+    {
+      "file": "art/verification/abandoned-mine/spoil-heap.png",
+      "bytes": 151580,
+      "sha256": "ee2e42ef782bfe29663e8e5a7fd4bd5efc5d8700fa9a0464e00d7c93fee2524b"
+    },
+    {
+      "file": "art/verification/abandoned-mine/straight-track.png",
+      "bytes": 157003,
+      "sha256": "9d10db9bc810881193803931f7a2a48bdbcfce987e07d262fb97507a11789522"
+    },
+    {
+      "file": "art/verification/abandoned-mine/timber-shoring.png",
+      "bytes": 182992,
+      "sha256": "8e953725d7e6d44fe13111a9b935e8f02bcba2da553373ca35a44e423d1dd0a9"
+    },
+    {
+      "file": "art/verification/abandoned-mine/tool-rack.png",
+      "bytes": 195686,
+      "sha256": "77644242f7aae1fb174a35a5e886131700746a0f4b5ade9b4a95c256347372ba"
+    },
+    {
+      "file": "art/verification/abandoned-mine/visual-review.json",
+      "bytes": 672,
+      "sha256": "d21b82d1851b1db0c35da810298aecc9be79c9f7e2f29797f42daf576b3d31e1"
+    },
+    {
+      "file": "public/art/abandoned-mine/broken-ore-cart.glb",
+      "bytes": 116908,
+      "sha256": "8b7b372af9661d6e213b795bf0e47bb96a3236fad1bf7a4714ee0be8579a51d6"
+    },
+    {
+      "file": "public/art/abandoned-mine/broken-ore-cart.png",
+      "bytes": 252874,
+      "sha256": "144568e26eff20a5945c073d43f6cd9f62e3dacafd8ea8c1ee6e4dd1f1a9f5c2"
+    },
+    {
+      "file": "public/art/abandoned-mine/broken-track.glb",
+      "bytes": 21456,
+      "sha256": "ec6da0f17c01716d78046eb2ee950cfa331faf3d0280fe9225557a3f98ead12b"
+    },
+    {
+      "file": "public/art/abandoned-mine/broken-track.png",
+      "bytes": 142852,
+      "sha256": "80fd283e720ef0c58b6c8c37d33a12352681c92a0ebb3ad230427b0a42d26096"
+    },
+    {
+      "file": "public/art/abandoned-mine/contact-sheet.jpg",
+      "bytes": 261191,
+      "sha256": "4b6c21552685ba030571ac08a8a98f22dc67e44b0bd90c207a4e6166d75ed741"
+    },
+    {
+      "file": "public/art/abandoned-mine/gallery.js",
+      "bytes": 4051,
+      "sha256": "0e80b14728762ea4d0814a70c715fe4005620cd117a8171c218b5307b572ae8b"
+    },
+    {
+      "file": "public/art/abandoned-mine/hollowvein-diggings.glb",
+      "bytes": 738380,
+      "sha256": "8841f9f5f9d79f4cc05e4db1d81ca14ba4b1081dab8f64d8e6544d041ddc138f"
+    },
+    {
+      "file": "public/art/abandoned-mine/hollowvein-diggings.png",
+      "bytes": 194110,
+      "sha256": "cf1bd2801fd7aca02b3a93c32a98d3763648600c9d661a29d13d6088c99741b9"
+    },
+    {
+      "file": "public/art/abandoned-mine/index.html",
+      "bytes": 4678,
+      "sha256": "f57fa19ecf7e6b2232209483be951b76a5ed8d8c0ca1f8238c0a574cf823f0ba"
+    },
+    {
+      "file": "public/art/abandoned-mine/layout.json",
+      "bytes": 2779,
+      "sha256": "90c49a2b7e55b97f4d60ec040b5dc305b6922f720859f84d4204ab2bd08ec6d0"
+    },
+    {
+      "file": "public/art/abandoned-mine/manifest.json",
+      "bytes": 10004,
+      "sha256": "2f8fa374df3163358d999cf10c2fa1b9a03cf6a4c6e840a76b7d595504361c64"
+    },
+    {
+      "file": "public/art/abandoned-mine/mining-workbench.glb",
+      "bytes": 48204,
+      "sha256": "bbc60eaf1fe038085eeb458c64c527e50305c96e646d0267086007cc90a2c3ac"
+    },
+    {
+      "file": "public/art/abandoned-mine/mining-workbench.png",
+      "bytes": 186982,
+      "sha256": "ef2642142e5fc87ff12812d8f6fcb3c532ae12d916eac751584faaac6a6740cc"
+    },
+    {
+      "file": "public/art/abandoned-mine/sealed-mine-mouth.glb",
+      "bytes": 119724,
+      "sha256": "d8193493ec1879ada89b5aca86b192878798d213c3b115714e461e38ed596e01"
+    },
+    {
+      "file": "public/art/abandoned-mine/sealed-mine-mouth.png",
+      "bytes": 174095,
+      "sha256": "9a04c8e2c97ae49c6fa7c9d1ad4698c5b936bb23e121c3b4c815ffc56b1d0c64"
+    },
+    {
+      "file": "public/art/abandoned-mine/spoil-heap.glb",
+      "bytes": 107540,
+      "sha256": "e3f6995021cb2f5c4e1d5233f050603bd06ffa508788c57998d4891fbad603c8"
+    },
+    {
+      "file": "public/art/abandoned-mine/spoil-heap.png",
+      "bytes": 151580,
+      "sha256": "ee2e42ef782bfe29663e8e5a7fd4bd5efc5d8700fa9a0464e00d7c93fee2524b"
+    },
+    {
+      "file": "public/art/abandoned-mine/straight-track.glb",
+      "bytes": 18924,
+      "sha256": "3e0ddae91928c2a6d050e6f36a00d0ef6fe34ebdb70fb9f9ba5ca6b0478fadf3"
+    },
+    {
+      "file": "public/art/abandoned-mine/straight-track.png",
+      "bytes": 157003,
+      "sha256": "9d10db9bc810881193803931f7a2a48bdbcfce987e07d262fb97507a11789522"
+    },
+    {
+      "file": "public/art/abandoned-mine/timber-shoring.glb",
+      "bytes": 15200,
+      "sha256": "df951a503dd029a0d5ce65d7ae331809ec4728d0bc241e26dafa646c44d23f09"
+    },
+    {
+      "file": "public/art/abandoned-mine/timber-shoring.png",
+      "bytes": 182992,
+      "sha256": "8e953725d7e6d44fe13111a9b935e8f02bcba2da553373ca35a44e423d1dd0a9"
+    },
+    {
+      "file": "public/art/abandoned-mine/tool-rack.glb",
+      "bytes": 19908,
+      "sha256": "2e6b95a838325b25948ffb55705abbabd46efd05ed1ce74ddd13f4066192bfff"
+    },
+    {
+      "file": "public/art/abandoned-mine/tool-rack.png",
+      "bytes": 195686,
+      "sha256": "77644242f7aae1fb174a35a5e886131700746a0f4b5ade9b4a95c256347372ba"
+    },
+    {
+      "file": "public/art/abandoned-mine/vendor/addons/controls/OrbitControls.js",
+      "bytes": 40504,
+      "sha256": "faabb4e8dfd9235ee4a9fd7c9a3d75f90f1689dbd4944bd6fd32117dacec5f93"
+    },
+    {
+      "file": "public/art/abandoned-mine/vendor/addons/loaders/GLTFLoader.js",
+      "bytes": 114959,
+      "sha256": "97642d720f16cc9a0c9844934198e4d0c023bea8e89576d0f7545d03b2d103d2"
+    },
+    {
+      "file": "public/art/abandoned-mine/vendor/addons/utils/BufferGeometryUtils.js",
+      "bytes": 37621,
+      "sha256": "5c552223a9309883743b80538d6e9cdb45e3227f30d3ec56fb2c39b46e78d595"
+    },
+    {
+      "file": "public/art/abandoned-mine/vendor/addons/utils/SkeletonUtils.js",
+      "bytes": 11535,
+      "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
+    },
+    {
+      "file": "public/art/abandoned-mine/vendor/THREE-LICENSE.txt",
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "file": "public/art/abandoned-mine/vendor/three.core.js",
+      "bytes": 1443056,
+      "sha256": "3718df126d69c125362a03340913204470d8c50238605150e57f808840fb7759"
+    },
+    {
+      "file": "public/art/abandoned-mine/vendor/three.module.js",
+      "bytes": 650153,
+      "sha256": "bbf5ed13fe4373f5bd38b14ea8e62e9f157327da5638edc6d3863e08b167c9c7"
+    }
+  ]
+}

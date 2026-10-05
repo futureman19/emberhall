@@ -1,0 +1,29 @@
+{
+  "htmlLinkedAssets": [
+    {
+      "url": "/assets/index-BilVOt-b.js",
+      "status": 200,
+      "sha256": "1322152b6e2621a34e4377e0b808efe267da11958dfaf82dc5c55701f40d0f8f",
+      "builtFile": ".vercel\\output\\static\\assets\\index-BilVOt-b.js"
+    },
+    {
+      "url": "/assets/rolldown-runtime-C0FnF6B9.js",
+      "status": 200,
+      "sha256": "e0a79ad36c6ca1ffbc796c80aa5661803a9d1bc684e29d1587f48b4ba9a82714",
+      "builtFile": ".vercel\\output\\static\\assets\\rolldown-runtime-C0FnF6B9.js"
+    },
+    {
+      "url": "/assets/routes-OBdUy0ae.js",
+      "status": 200,
+      "sha256": "b7d289005a4ca10da0f2e18e086ab0ad1bb4077d610d19978ead22c4a9b05cda",
+      "builtFile": ".vercel\\output\\static\\assets\\routes-OBdUy0ae.js"
+    },
+    {
+      "url": "/assets/styles-H1TFFXgf.css",
+      "status": 200,
+      "sha256": "6668625763d437889930b3bf6ff9018503b7ce6bbc64cc8822eee81496faa20c",
+      "builtFile": ".vercel\\output\\static\\assets\\styles-H1TFFXgf.css"
+    }
+  ],
+  "allExact": true
+}

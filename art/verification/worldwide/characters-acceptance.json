@@ -1,0 +1,137 @@
+{
+  "scope": "Cleared disposable single-NPC fixtures for five classes and three roles with null homes (outside the old civic policy). Actual mouse/touch ground selection, ordinary walking/approach, real Talk buttons for services. NPC locomotion uses a fixture path and normal fixed world substeps, not natural AI. Original NPC body control and real rejected GLB. Built mode does not import source. Normal camera; no physical-phone, complete animation, dense-scene or performance acceptance.",
+  "tests": 895,
+  "browser_checks_total": 767,
+  "verified_class_role_cases": 8,
+  "audit": "characters-evidence-audit.json",
+  "entries": [
+    {
+      "id": "ranger",
+      "class": "ranger",
+      "role": null,
+      "controlled_desktop_mobile": "verified",
+      "built_output": "verified",
+      "visual_gross_silhouette": "verified; fine detail scale-limited",
+      "natural_world": "pending",
+      "performance": "pending",
+      "evidence": {
+        "candidate": "characters-candidate-final/results.json",
+        "control": "characters-control-final/results.json",
+        "failure": "characters-failure-final/results.json",
+        "built": "characters-built-final/results.json"
+      }
+    },
+    {
+      "id": "warrior",
+      "class": "warrior",
+      "role": null,
+      "controlled_desktop_mobile": "verified",
+      "built_output": "verified",
+      "visual_gross_silhouette": "verified; fine detail scale-limited",
+      "natural_world": "pending",
+      "performance": "pending",
+      "evidence": {
+        "candidate": "characters-candidate-final/results.json",
+        "control": "characters-control-final/results.json",
+        "failure": "characters-failure-final/results.json",
+        "built": "characters-built-final/results.json"
+      }
+    },
+    {
+      "id": "mage",
+      "class": "mage",
+      "role": null,
+      "controlled_desktop_mobile": "verified",
+      "built_output": "verified",
+      "visual_gross_silhouette": "verified; fine detail scale-limited",
+      "natural_world": "pending",
+      "performance": "pending",
+      "evidence": {
+        "candidate": "characters-candidate-final/results.json",
+        "control": "characters-control-final/results.json",
+        "failure": "characters-failure-final/results.json",
+        "built": "characters-built-final/results.json"
+      }
+    },
+    {
+      "id": "rogue",
+      "class": "rogue",
+      "role": null,
+      "controlled_desktop_mobile": "verified",
+      "built_output": "verified",
+      "visual_gross_silhouette": "verified; fine detail scale-limited",
+      "natural_world": "pending",
+      "performance": "pending",
+      "evidence": {
+        "candidate": "characters-candidate-final/results.json",
+        "control": "characters-control-final/results.json",
+        "failure": "characters-failure-final/results.json",
+        "built": "characters-built-final/results.json"
+      }
+    },
+    {
+      "id": "merchant",
+      "class": "merchant",
+      "role": null,
+      "controlled_desktop_mobile": "verified",
+      "built_output": "verified",
+      "visual_gross_silhouette": "verified; fine detail scale-limited",
+      "natural_world": "pending",
+      "performance": "pending",
+      "evidence": {
+        "candidate": "characters-candidate-final/results.json",
+        "control": "characters-control-final/results.json",
+        "failure": "characters-failure-final/results.json",
+        "built": "characters-built-final/results.json"
+      }
+    },
+    {
+      "id": "banker",
+      "class": "merchant",
+      "role": "banker",
+      "controlled_desktop_mobile": "verified",
+      "built_output": "verified",
+      "visual_gross_silhouette": "verified; fine detail scale-limited",
+      "natural_world": "pending",
+      "performance": "pending",
+      "evidence": {
+        "candidate": "characters-candidate-final/results.json",
+        "control": "characters-control-final/results.json",
+        "failure": "characters-failure-final/results.json",
+        "built": "characters-built-final/results.json"
+      }
+    },
+    {
+      "id": "provisioner",
+      "class": "merchant",
+      "role": "provisioner",
+      "controlled_desktop_mobile": "verified",
+      "built_output": "verified",
+      "visual_gross_silhouette": "verified; fine detail scale-limited",
+      "natural_world": "pending",
+      "performance": "pending",
+      "evidence": {
+        "candidate": "characters-candidate-final/results.json",
+        "control": "characters-control-final/results.json",
+        "failure": "characters-failure-final/results.json",
+        "built": "characters-built-final/results.json"
+      }
+    },
+    {
+      "id": "healer",
+      "class": "mage",
+      "role": "healer",
+      "controlled_desktop_mobile": "verified",
+      "built_output": "verified",
+      "visual_gross_silhouette": "verified; fine detail scale-limited",
+      "natural_world": "pending",
+      "performance": "pending",
+      "evidence": {
+        "candidate": "characters-candidate-final/results.json",
+        "control": "characters-control-final/results.json",
+        "failure": "characters-failure-final/results.json",
+        "built": "characters-built-final/results.json"
+      }
+    }
+  ]
+}

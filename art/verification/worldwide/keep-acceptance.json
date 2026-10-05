@@ -1,0 +1,142 @@
+{
+  "scope": "ceiling-only cutaway fix and ground-projected native route; accurate raised-floor picking and physical floor seating remain open",
+  "published": false,
+  "sourceCheckpointCount": 410,
+  "changed": [
+    "src/components/game/architecture-kit.test.ts",
+    "src/components/game/building-meshes.tsx"
+  ],
+  "unchangedArtFiles": 114,
+  "accepted": {
+    "candidate": {
+      "path": "art/verification/worldwide/keep-candidate-final2/results.json",
+      "assertions": 212,
+      "cases": 2,
+      "legs": 40
+    },
+    "control": {
+      "path": "art/verification/worldwide/keep-control-v3/results.json",
+      "assertions": 214,
+      "cases": 2,
+      "legs": 40
+    },
+    "failure": {
+      "path": "art/verification/worldwide/keep-failure-final/results.json",
+      "assertions": 214,
+      "cases": 2,
+      "legs": 40
+    },
+    "built": {
+      "path": "art/verification/worldwide/keep-built-final/results.json",
+      "assertions": 188,
+      "cases": 2,
+      "legs": 40
+    }
+  },
+  "assertions": 828,
+  "cases": 8,
+  "legs": 160,
+  "movementParity": [
+    {
+      "mode": "candidate",
+      "device": "desktop",
+      "exactMovementFields": [
+        "x",
+        "z",
+        "story",
+        "facing",
+        "path"
+      ],
+      "terrainBuildingsEqual": true
+    },
+    {
+      "mode": "candidate",
+      "device": "mobile",
+      "exactMovementFields": [
+        "x",
+        "z",
+        "story",
+        "facing",
+        "path"
+      ],
+      "terrainBuildingsEqual": true
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "exactMovementFields": [
+        "x",
+        "z",
+        "story",
+        "facing",
+        "path"
+      ],
+      "terrainBuildingsEqual": true
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "exactMovementFields": [
+        "x",
+        "z",
+        "story",
+        "facing",
+        "path"
+      ],
+      "terrainBuildingsEqual": true
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "exactMovementFields": [
+        "x",
+        "z",
+        "story",
+        "facing",
+        "path"
+      ],
+      "terrainBuildingsEqual": true
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "exactMovementFields": [
+        "x",
+        "z",
+        "story",
+        "facing",
+        "path"
+      ],
+      "terrainBuildingsEqual": true
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "exactMovementFields": [
+        "x",
+        "z",
+        "story",
+        "facing",
+        "path"
+      ],
+      "terrainBuildingsEqual": true
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "exactMovementFields": [
+        "x",
+        "z",
+        "story",
+        "facing",
+        "path"
+      ],
+      "terrainBuildingsEqual": true
+    }
+  ],
+  "tests": {
+    "focused": 14,
+    "full": 953
+  },
+  "builtFreshness": "art/verification/worldwide/keep-built-freshness.json"
+}

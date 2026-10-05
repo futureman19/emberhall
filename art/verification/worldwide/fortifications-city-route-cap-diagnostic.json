@@ -1,0 +1,86 @@
+{
+  "seed": 2469134,
+  "rows": [
+    {
+      "cap": 4000,
+      "route": null
+    },
+    {
+      "cap": 20000,
+      "route": null
+    }
+  ],
+  "tiles": [
+    {
+      "x": 140,
+      "h": 7,
+      "kind": "tree"
+    },
+    {
+      "x": 141,
+      "h": 5,
+      "kind": "grass"
+    },
+    {
+      "x": 142,
+      "h": 7,
+      "kind": "grass"
+    },
+    {
+      "x": 143,
+      "h": 4,
+      "kind": "grass"
+    },
+    {
+      "x": 144,
+      "h": 3,
+      "kind": "grass"
+    },
+    {
+      "x": 145,
+      "h": 5,
+      "kind": "tree"
+    },
+    {
+      "x": 146,
+      "h": 5,
+      "kind": "grass"
+    },
+    {
+      "x": 147,
+      "h": 5,
+      "kind": "grass"
+    },
+    {
+      "x": 148,
+      "h": 8,
+      "kind": "grass"
+    },
+    {
+      "x": 149,
+      "h": 6,
+      "kind": "tree"
+    },
+    {
+      "x": 150,
+      "h": 4,
+      "kind": "dirt"
+    },
+    {
+      "x": 151,
+      "h": 4,
+      "kind": "dirt"
+    },
+    {
+      "x": 152,
+      "h": 3,
+      "kind": "cobble"
+    },
+    {
+      "x": 153,
+      "h": 3,
+      "kind": "cobble"
+    }
+  ],
+  "scope": "Existing generated-world route diagnostic; no application changes. Not universal city failure proof."
+}

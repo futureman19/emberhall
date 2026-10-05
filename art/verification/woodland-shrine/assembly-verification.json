@@ -1,0 +1,73 @@
+{
+  "passed": true,
+  "scope": "Static vertex-transform proof only; no gameplay or collision acceptance",
+  "instances": [
+    {
+      "instance": "arch",
+      "asset": "broken-sun-arch",
+      "editableParts": 29,
+      "maxVertexTransformError": 2.384185791015625e-07
+    },
+    {
+      "instance": "altar",
+      "asset": "sunleaf-altar",
+      "editableParts": 20,
+      "maxVertexTransformError": 1.1920928955078125e-07
+    },
+    {
+      "instance": "basin",
+      "asset": "dry-offering-basin",
+      "editableParts": 5,
+      "maxVertexTransformError": 2.457562461863554e-07
+    },
+    {
+      "instance": "fallen-east",
+      "asset": "fallen-columns",
+      "editableParts": 4,
+      "maxVertexTransformError": 2.457562461863554e-07
+    },
+    {
+      "instance": "rear-wall",
+      "asset": "mossy-wall",
+      "editableParts": 24,
+      "maxVertexTransformError": 3.375038997204937e-07
+    },
+    {
+      "instance": "east-wall",
+      "asset": "mossy-wall",
+      "editableParts": 24,
+      "maxVertexTransformError": 5.331201499700045e-07
+    },
+    {
+      "instance": "sanctum-floor",
+      "asset": "worn-paving",
+      "editableParts": 17,
+      "maxVertexTransformError": 1.1920928955078125e-07
+    },
+    {
+      "instance": "approach",
+      "asset": "worn-paving",
+      "editableParts": 17,
+      "maxVertexTransformError": 2.388837865275353e-07
+    },
+    {
+      "instance": "west-votives",
+      "asset": "votive-markers",
+      "editableParts": 19,
+      "maxVertexTransformError": 3.375038997204937e-07
+    },
+    {
+      "instance": "east-votives",
+      "asset": "votive-markers",
+      "editableParts": 19,
+      "maxVertexTransformError": 3.371747880871523e-07
+    },
+    {
+      "instance": "guardian-tree",
+      "asset": "ancient-root-tree",
+      "editableParts": 22,
+      "maxVertexTransformError": 5.331201499700045e-07
+    }
+  ],
+  "assemblyOnlyDressingParts": 47
+}

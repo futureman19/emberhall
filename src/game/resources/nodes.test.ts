@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { MAP } from "../atlas.ts";
 import test from "node:test";
 import { BIOME_IDS, biomeAt } from "../biome.ts";
 import { placeAffinity } from "../atlas.ts";
@@ -209,7 +210,7 @@ test("public node APIs reject malformed inputs with deterministic domain errors"
   for (const seed of [Number.NaN, Infinity, 1.5, Number.MAX_SAFE_INTEGER + 1]) {
     assert.throws(() => resolveUnsafe({ seed, tx: 1, ty: 1, nodeKind: "tree" }), /seed must be a safe integer/);
   }
-  for (const [field, value] of [["tx", -1], ["tx", 512], ["tx", 1.5], ["ty", -1], ["ty", 512], ["ty", Infinity]] as const) {
+  for (const [field, value] of [["tx", -1], ["tx", MAP], ["tx", 1.5], ["ty", -1], ["ty", MAP], ["ty", Infinity]] as const) {
     assert.throws(() => resolveUnsafe({ seed: 1, tx: field === "tx" ? value : 1, ty: field === "ty" ? value : 1, nodeKind: "tree" }), new RegExp(`${field} must be a safe integer within map bounds`));
     assert.throws(() => inspectUnsafe({ tx: field === "tx" ? value : 1, ty: field === "ty" ? value : 1, nodeKind: "tree" }), new RegExp(`${field} must be a safe integer within map bounds`));
   }

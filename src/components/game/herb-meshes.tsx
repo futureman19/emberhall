@@ -2,7 +2,7 @@ import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
 import { useGame } from "@/game/store";
 import type { HerbKind, HerbPatch } from "@/game/types";
-import { useFloraGeometry } from "./flora-art";
+import { floraHerbGroundOffset, useFloraGeometry } from "./flora-art";
 import { noArtRaycast } from "./lanternwood-art";
 
 /** Wild reagent patches. Ready ones glow faintly in their kind's palette;
@@ -113,7 +113,7 @@ function Herb({ patch }: { patch: HerbPatch }) {
   const authored = flora?.[`herb_${patch.kind}_${ready ? "ready" : "picked"}`];
   const y = groundY(getWorld(), patch.tx, patch.ty);
   return (
-    <group position={[patch.tx, y + 0.06, patch.ty]} scale={ready ? 1 : 0.62}>
+    <group position={[patch.tx, y + floraHerbGroundOffset(authored, ready), patch.ty]} scale={ready ? 1 : 0.62}>
       {authored ? <mesh name={`authored-herb-${patch.kind}-${ready ? "ready" : "picked"}`} geometry={authored} raycast={noArtRaycast} castShadow dispose={null}>
         <meshStandardMaterial color="#ffffff" vertexColors roughness={0.9} emissive={ready ? READY_GLOW[patch.kind] : "#000000"} emissiveIntensity={ready ? 0.12 : 0} />
       </mesh> : <>

@@ -1,0 +1,439 @@
+{
+  "archive": "art/verification/landscape-kit/emberhall-landscape-kit-source.zip",
+  "archiveBytes": 7943706,
+  "archiveSha256": "e543a2c38458c418b2b4dda5131f0c0d86b9aa9a2bc80a90b619b223a509c745",
+  "archiveReadbackVerified": true,
+  "fileCount": 86,
+  "files": [
+    {
+      "file": "art/blender/landscape-kit/browser_verify.mjs",
+      "bytes": 5652,
+      "sha256": "194faefe38516e94e01568c4d9fb51915fbe4cd5cc299dda20381abf83e2c04a"
+    },
+    {
+      "file": "art/blender/landscape-kit/build_landscape.py",
+      "bytes": 12130,
+      "sha256": "ddabb1f265886bdaddd8f9af016492550d7db0e52feab373c5464475b3284ff9"
+    },
+    {
+      "file": "art/blender/landscape-kit/emberhall-landscape.blend",
+      "bytes": 251101,
+      "sha256": "440c0e93c1d9a93c9b12e5ea6ccaf7caa79cc94fad06a5cacac5da64f45acbf0"
+    },
+    {
+      "file": "art/blender/landscape-kit/generate-delivery.log",
+      "bytes": 6095,
+      "sha256": "1d6234e46732211f6bc75d4b9c3511fdec8ce0c0e1d94e005061386868981f00"
+    },
+    {
+      "file": "art/blender/landscape-kit/generate-final.log",
+      "bytes": 6098,
+      "sha256": "7f9ae709129eedec9887100d3d9165bf78a0bfe743c901e5c2e5c3073a2d7235"
+    },
+    {
+      "file": "art/blender/landscape-kit/generate-framed.log",
+      "bytes": 6096,
+      "sha256": "438efd1fe709a9e4b4063f16f79173aa982fda4b19e23943f04c362ac42ae952"
+    },
+    {
+      "file": "art/blender/landscape-kit/generate-reviewed.log",
+      "bytes": 6095,
+      "sha256": "c814d5a747efe1f92c945c21ffa17d0fde569e5c326403ca5b77bbc8108fa76d"
+    },
+    {
+      "file": "art/blender/landscape-kit/generate.log",
+      "bytes": 1201,
+      "sha256": "e92b085925f05cb8001fa8f37fd60d9d44bec6eeea14600af1812fe958d61d68"
+    },
+    {
+      "file": "art/blender/landscape-kit/package_delivery.py",
+      "bytes": 1436,
+      "sha256": "32fe7c1e8da5435ecf014c40c6af01855d3e5cba80d91b9c4a17e85fca936d17"
+    },
+    {
+      "file": "art/blender/landscape-kit/package_gallery.py",
+      "bytes": 3264,
+      "sha256": "ac240b5f136fdbf2c186a9b7e6b2663a9be3b2a5adf5b28978b5e3b5be20a5cd"
+    },
+    {
+      "file": "art/blender/landscape-kit/README.md",
+      "bytes": 6724,
+      "sha256": "e06ceff11c73a9910d5ffa437399d849585b82a13afef87fd46bd75c41a30115"
+    },
+    {
+      "file": "art/blender/landscape-kit/serve.mjs",
+      "bytes": 1123,
+      "sha256": "1a8caf09c4c371d61399ec43a8814be1bd0cd96547b334918f0fa6e29dc303f0"
+    },
+    {
+      "file": "art/blender/landscape-kit/verify.mjs",
+      "bytes": 3422,
+      "sha256": "cf6634a6ff48f0fe45a6d1c0e71296c9763caa7d5ea89c2ebfb7d21bcb17fd80"
+    },
+    {
+      "file": "art/blender/landscape-kit/verify_source.py",
+      "bytes": 1620,
+      "sha256": "e9473ed2a13a846eb9edf67d0a651801f6b1378bdf67b6c9ea0e8f5205888739"
+    },
+    {
+      "file": "art/verification/landscape-kit/active-volcano.png",
+      "bytes": 174249,
+      "sha256": "861b8f485529fec091f34879e2b3d68a765e84ab378751626ff389de18436e1a"
+    },
+    {
+      "file": "art/verification/landscape-kit/basalt-columns.png",
+      "bytes": 219816,
+      "sha256": "d8ff1c269fbe62fd9119f004ad0b5431e44e49f12967a372a0d256ae136e04ab"
+    },
+    {
+      "file": "art/verification/landscape-kit/boulder-cluster.png",
+      "bytes": 174424,
+      "sha256": "f2cfe0371cd62341df3050b922899fa06e426ecb5b621dcea96f7f5be8fd0fb4"
+    },
+    {
+      "file": "art/verification/landscape-kit/browser-delivery.log",
+      "bytes": 3633,
+      "sha256": "830ebcda98e9c939a2ed171bb58b322a387952ba7fe301970a440c167cc67f66"
+    },
+    {
+      "file": "art/verification/landscape-kit/browser-final.log",
+      "bytes": 3633,
+      "sha256": "768d09ca5be6dda6b86824d67aaf9f914446fd310c6d47c3c7c08abd88317019"
+    },
+    {
+      "file": "art/verification/landscape-kit/browser-first-failure.log",
+      "bytes": 767,
+      "sha256": "6da36f200167336e26d475df8b471ba1ca4c57a6f1f686df59f2841fc952a038"
+    },
+    {
+      "file": "art/verification/landscape-kit/browser-verification.json",
+      "bytes": 3632,
+      "sha256": "60bfb9809937dbf000e9998db0c022a7b11862f7821dd69fa264e7adbb0770eb"
+    },
+    {
+      "file": "art/verification/landscape-kit/browser-verify.log",
+      "bytes": 3633,
+      "sha256": "009a0bc43041b8e6d61d33adbb9669fba50a5eea6b1308171549c04732649e21"
+    },
+    {
+      "file": "art/verification/landscape-kit/browser.log",
+      "bytes": 298,
+      "sha256": "1e27d3e14d40e3155b49b93ce47519541fd375d61ed570f869a060e7a06c191b"
+    },
+    {
+      "file": "art/verification/landscape-kit/cinderlands-closeup.jpg",
+      "bytes": 139444,
+      "sha256": "cfcf590da72c753f174a22c91b2994afa9d837233f38daefbf94afcbfc8214b4"
+    },
+    {
+      "file": "art/verification/landscape-kit/cliff-corner.png",
+      "bytes": 216380,
+      "sha256": "b08822d58116b9f4260f24513f9f464ddf2f572367fb88adfc4033452400b649"
+    },
+    {
+      "file": "art/verification/landscape-kit/cliff-straight.png",
+      "bytes": 180042,
+      "sha256": "611a4e7ef6c105bf931a9aed6b5dfa1d5a3a25c0651be51415e49af3532e5f21"
+    },
+    {
+      "file": "art/verification/landscape-kit/contact-sheet.png",
+      "bytes": 648355,
+      "sha256": "d024bccd60776646f31866120cfe7356acf18fe9d873b4885c37944c52f433c3"
+    },
+    {
+      "file": "art/verification/landscape-kit/desktop-gallery.png",
+      "bytes": 271291,
+      "sha256": "c497e7f819a7f876ec584a21ace28ba2fc1f617f30d9942256ed251ce12c0bfb"
+    },
+    {
+      "file": "art/verification/landscape-kit/desktop-wetlands.png",
+      "bytes": 270246,
+      "sha256": "6cb8fb85fbf1160fe728553e5fb0ec5d0682a6092541e19ef5e684e6fdf86054"
+    },
+    {
+      "file": "art/verification/landscape-kit/dormant-caldera.png",
+      "bytes": 170376,
+      "sha256": "b356fca29b9e0818e08452f0322b981d153ac11fa21e0a8a921c1cb2e3564138"
+    },
+    {
+      "file": "art/verification/landscape-kit/geometry-verification.json",
+      "bytes": 9411,
+      "sha256": "fe1ece1fed7d9ab5fc966eb1b4cb9556a8c798254ab67d7a7c4330c791fe484b"
+    },
+    {
+      "file": "art/verification/landscape-kit/highlands-closeup.jpg",
+      "bytes": 203990,
+      "sha256": "978b91d86d6f8d0a371bec3a7585ed7a070e00d7296fac4ef7a332659f9d3905"
+    },
+    {
+      "file": "art/verification/landscape-kit/lava-pool.png",
+      "bytes": 149477,
+      "sha256": "87b2cf99f113dfc757059483e8ad5d7db1e8ae433d6a9e114afb331f8fb97205"
+    },
+    {
+      "file": "art/verification/landscape-kit/measure.log",
+      "bytes": 9412,
+      "sha256": "111659bc3987d9bb8c06a077cb5a1ae180efe52fd74579253cde3005dac18097"
+    },
+    {
+      "file": "art/verification/landscape-kit/mobile-gallery.png",
+      "bytes": 103245,
+      "sha256": "fae5ac28e764cb574b6960b19bdaa39eea3e42ceb8925d3f0c8fd2a897a449ea"
+    },
+    {
+      "file": "art/verification/landscape-kit/mobile-wetlands.png",
+      "bytes": 109192,
+      "sha256": "05b0f52be0812a599deb2013590b0a24b90741a20fa72357cc5362f6808a9156"
+    },
+    {
+      "file": "art/verification/landscape-kit/moss-rocks.png",
+      "bytes": 175286,
+      "sha256": "2955689ce8e30a7a9556eba087be092c4e60e07d3cc55d10fe74cc7e596cad3a"
+    },
+    {
+      "file": "art/verification/landscape-kit/mountain-ridge.png",
+      "bytes": 154176,
+      "sha256": "a406a82bfbc57a9fe08873b155fcbc9b47d941b2a33a1f532c34b88c46ddcd9b"
+    },
+    {
+      "file": "art/verification/landscape-kit/reed-cluster.png",
+      "bytes": 217604,
+      "sha256": "05053d35ced8ccad4d7d2b8e34520cfef14503dede1ab33df662ec76b23671fb"
+    },
+    {
+      "file": "art/verification/landscape-kit/rocky-peak.png",
+      "bytes": 178153,
+      "sha256": "a305227780a304c4d2c2ca481e0fc7714e6ea94096e33a22f4192669048af819"
+    },
+    {
+      "file": "art/verification/landscape-kit/snowcap-peak.png",
+      "bytes": 175508,
+      "sha256": "88bdb29a5bd1fcc6c27b3601edc2ad762f96c14c34822580fe9b426ea860d149"
+    },
+    {
+      "file": "art/verification/landscape-kit/source-verification.json",
+      "bytes": 1862,
+      "sha256": "7a4fd8cf630b557c67f8d0feb191e2d8c19f311a0fec847aa4094f1a3bb7ccc9"
+    },
+    {
+      "file": "art/verification/landscape-kit/source-verify.log",
+      "bytes": 1508,
+      "sha256": "c53bfe6d58e9844beabfa72cdf5707127cb109ac01a3fa88f0d25b99228f0c01"
+    },
+    {
+      "file": "art/verification/landscape-kit/swamp-patch.png",
+      "bytes": 151003,
+      "sha256": "9809e3db4de7f7fa677ebdd400a79a473839e2438fa3f7e432da7068e56c3388"
+    },
+    {
+      "file": "art/verification/landscape-kit/swamp-tree.png",
+      "bytes": 191439,
+      "sha256": "1ffb30a41ade7ab8cddfe4244db1278b5ba78a17ba56849bf9fcacc143fed2cf"
+    },
+    {
+      "file": "art/verification/landscape-kit/verify.log",
+      "bytes": 9412,
+      "sha256": "111659bc3987d9bb8c06a077cb5a1ae180efe52fd74579253cde3005dac18097"
+    },
+    {
+      "file": "art/verification/landscape-kit/wetlands-closeup.jpg",
+      "bytes": 152073,
+      "sha256": "9d6d986ddf43055c2af2d97a16d5aacd843c2adee2e1c7f39359e45b83dc9901"
+    },
+    {
+      "file": "public/art/landscape-kit/active-volcano.glb",
+      "bytes": 75280,
+      "sha256": "486b556112591d796b30fa4ddeb47921fb3cc2b58cc2eab72a8fea69b1153376"
+    },
+    {
+      "file": "public/art/landscape-kit/active-volcano.png",
+      "bytes": 174249,
+      "sha256": "861b8f485529fec091f34879e2b3d68a765e84ab378751626ff389de18436e1a"
+    },
+    {
+      "file": "public/art/landscape-kit/basalt-columns.glb",
+      "bytes": 60780,
+      "sha256": "7be81ae247b44af52276c476d7a6dc82c4460181756fc9517f21340259b7e635"
+    },
+    {
+      "file": "public/art/landscape-kit/basalt-columns.png",
+      "bytes": 219816,
+      "sha256": "d8ff1c269fbe62fd9119f004ad0b5431e44e49f12967a372a0d256ae136e04ab"
+    },
+    {
+      "file": "public/art/landscape-kit/boulder-cluster.glb",
+      "bytes": 27932,
+      "sha256": "01c6653e92498a134160e583e89b9de2c336384d76ba6f8453e97a0a911e4f93"
+    },
+    {
+      "file": "public/art/landscape-kit/boulder-cluster.png",
+      "bytes": 174424,
+      "sha256": "f2cfe0371cd62341df3050b922899fa06e426ecb5b621dcea96f7f5be8fd0fb4"
+    },
+    {
+      "file": "public/art/landscape-kit/cliff-corner.glb",
+      "bytes": 70760,
+      "sha256": "6b9a3007acdfaf4c467c3af109633b3af0c5e6374aeba91eab913e09ddab2693"
+    },
+    {
+      "file": "public/art/landscape-kit/cliff-corner.png",
+      "bytes": 216380,
+      "sha256": "b08822d58116b9f4260f24513f9f464ddf2f572367fb88adfc4033452400b649"
+    },
+    {
+      "file": "public/art/landscape-kit/cliff-straight.glb",
+      "bytes": 54708,
+      "sha256": "ab3781fe0638fe4ca45e8c543f118d5e1a297cd3bf10cce3e7b0b62b5b8aad22"
+    },
+    {
+      "file": "public/art/landscape-kit/cliff-straight.png",
+      "bytes": 180042,
+      "sha256": "611a4e7ef6c105bf931a9aed6b5dfa1d5a3a25c0651be51415e49af3532e5f21"
+    },
+    {
+      "file": "public/art/landscape-kit/contact-sheet.jpg",
+      "bytes": 253487,
+      "sha256": "1d3809d64ba1c8a53b00cf3a5303c8ea8fa7f73d1b4d871036a2793ac0bacaf3"
+    },
+    {
+      "file": "public/art/landscape-kit/dormant-caldera.glb",
+      "bytes": 62156,
+      "sha256": "9b1450aeb0331db0e23afa5bbe12fa8748e68fa1263413fe1df1336ec77a7dde"
+    },
+    {
+      "file": "public/art/landscape-kit/dormant-caldera.png",
+      "bytes": 170376,
+      "sha256": "b356fca29b9e0818e08452f0322b981d153ac11fa21e0a8a921c1cb2e3564138"
+    },
+    {
+      "file": "public/art/landscape-kit/gallery.js",
+      "bytes": 3939,
+      "sha256": "205e99443e42c5cbee1d0fffcced9909327179c3e1f913b70d8eb433a69cba15"
+    },
+    {
+      "file": "public/art/landscape-kit/index.html",
+      "bytes": 4473,
+      "sha256": "95dfa4b115f4a0ff5a20c6bbfeeda1ea93a4727cd869064d619d2da7d838cce3"
+    },
+    {
+      "file": "public/art/landscape-kit/lava-pool.glb",
+      "bytes": 47184,
+      "sha256": "6fbb28f13ad9ab883df44062b15feca629f8c41ce0b20db860d300fa4cb9ef67"
+    },
+    {
+      "file": "public/art/landscape-kit/lava-pool.png",
+      "bytes": 149477,
+      "sha256": "87b2cf99f113dfc757059483e8ad5d7db1e8ae433d6a9e114afb331f8fb97205"
+    },
+    {
+      "file": "public/art/landscape-kit/manifest.json",
+      "bytes": 14683,
+      "sha256": "b62c7a099a6129bf85b9bf061a7b423a6c46854555958a4254e1a307ddb7ab6e"
+    },
+    {
+      "file": "public/art/landscape-kit/moss-rocks.glb",
+      "bytes": 54696,
+      "sha256": "e9c7377640b071682c4a6472db2a6a3920575de27fcacfa3ac8354c0105c353c"
+    },
+    {
+      "file": "public/art/landscape-kit/moss-rocks.png",
+      "bytes": 175286,
+      "sha256": "2955689ce8e30a7a9556eba087be092c4e60e07d3cc55d10fe74cc7e596cad3a"
+    },
+    {
+      "file": "public/art/landscape-kit/mountain-ridge.glb",
+      "bytes": 22588,
+      "sha256": "ec5aa4c54a140010ba19b3b9dbb827ddc04c3f20ea1ef685ea794bb2b3fe1b9c"
+    },
+    {
+      "file": "public/art/landscape-kit/mountain-ridge.png",
+      "bytes": 154176,
+      "sha256": "a406a82bfbc57a9fe08873b155fcbc9b47d941b2a33a1f532c34b88c46ddcd9b"
+    },
+    {
+      "file": "public/art/landscape-kit/reed-cluster.glb",
+      "bytes": 47972,
+      "sha256": "ecb3506150ad836a76de2990f4b6af8eafa41dc28f429f3d3518eb29822446e4"
+    },
+    {
+      "file": "public/art/landscape-kit/reed-cluster.png",
+      "bytes": 217604,
+      "sha256": "05053d35ced8ccad4d7d2b8e34520cfef14503dede1ab33df662ec76b23671fb"
+    },
+    {
+      "file": "public/art/landscape-kit/rocky-peak.glb",
+      "bytes": 40864,
+      "sha256": "522867bb47cb2f7a158f92a5364c489c1f6a5cf3011b4d3b9cc0310bdf117fe0"
+    },
+    {
+      "file": "public/art/landscape-kit/rocky-peak.png",
+      "bytes": 178153,
+      "sha256": "a305227780a304c4d2c2ca481e0fc7714e6ea94096e33a22f4192669048af819"
+    },
+    {
+      "file": "public/art/landscape-kit/snowcap-peak.glb",
+      "bytes": 47860,
+      "sha256": "4f473d1c1958f343c47bf766b506f9e6ca82a7c1b7d9a42779c46fe8c5f4a91b"
+    },
+    {
+      "file": "public/art/landscape-kit/snowcap-peak.png",
+      "bytes": 175508,
+      "sha256": "88bdb29a5bd1fcc6c27b3601edc2ad762f96c14c34822580fe9b426ea860d149"
+    },
+    {
+      "file": "public/art/landscape-kit/swamp-patch.glb",
+      "bytes": 53908,
+      "sha256": "ccefd98fc68b654a53c0c143e150a4a5de2a8c0528612aab814759090f5601ef"
+    },
+    {
+      "file": "public/art/landscape-kit/swamp-patch.png",
+      "bytes": 151003,
+      "sha256": "9809e3db4de7f7fa677ebdd400a79a473839e2438fa3f7e432da7068e56c3388"
+    },
+    {
+      "file": "public/art/landscape-kit/swamp-tree.glb",
+      "bytes": 81092,
+      "sha256": "a9f5577f81970db6af038b182a5fd76afad3ab5a9f9919a3a138a2827d30ab8c"
+    },
+    {
+      "file": "public/art/landscape-kit/swamp-tree.png",
+      "bytes": 191439,
+      "sha256": "1ffb30a41ade7ab8cddfe4244db1278b5ba78a17ba56849bf9fcacc143fed2cf"
+    },
+    {
+      "file": "public/art/landscape-kit/vendor/addons/controls/OrbitControls.js",
+      "bytes": 40504,
+      "sha256": "faabb4e8dfd9235ee4a9fd7c9a3d75f90f1689dbd4944bd6fd32117dacec5f93"
+    },
+    {
+      "file": "public/art/landscape-kit/vendor/addons/loaders/GLTFLoader.js",
+      "bytes": 114959,
+      "sha256": "97642d720f16cc9a0c9844934198e4d0c023bea8e89576d0f7545d03b2d103d2"
+    },
+    {
+      "file": "public/art/landscape-kit/vendor/addons/utils/BufferGeometryUtils.js",
+      "bytes": 37621,
+      "sha256": "5c552223a9309883743b80538d6e9cdb45e3227f30d3ec56fb2c39b46e78d595"
+    },
+    {
+      "file": "public/art/landscape-kit/vendor/addons/utils/SkeletonUtils.js",
+      "bytes": 11535,
+      "sha256": "b1632a703206c3d830de9fcbe515696770d04b71a15ee6b50afa6d2c3298c86f"
+    },
+    {
+      "file": "public/art/landscape-kit/vendor/THREE-LICENSE.txt",
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "file": "public/art/landscape-kit/vendor/three.core.js",
+      "bytes": 1443056,
+      "sha256": "3718df126d69c125362a03340913204470d8c50238605150e57f808840fb7759"
+    },
+    {
+      "file": "public/art/landscape-kit/vendor/three.module.js",
+      "bytes": 650153,
+      "sha256": "bbf5ed13fe4373f5bd38b14ea8e62e9f157327da5638edc6d3863e08b167c9c7"
+    }
+  ]
+}

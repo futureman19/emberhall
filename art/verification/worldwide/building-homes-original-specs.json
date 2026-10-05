@@ -1,0 +1,37 @@
+[
+  {
+    "kind": "shop",
+    "unchangedFromHEAD": true,
+    "originalNoncut": 115
+  },
+  {
+    "kind": "townhome",
+    "unchangedFromHEAD": true,
+    "originalNoncut": 111
+  },
+  {
+    "kind": "townhouse",
+    "unchangedFromHEAD": true,
+    "originalNoncut": 111
+  },
+  {
+    "kind": "cottage",
+    "unchangedFromHEAD": true,
+    "originalNoncut": 62
+  },
+  {
+    "kind": "porch",
+    "unchangedFromHEAD": true,
+    "originalNoncut": 28
+  },
+  {
+    "kind": "hut",
+    "unchangedFromHEAD": true,
+    "originalNoncut": 70
+  },
+  {
+    "kind": "homestead",
+    "unchangedFromHEAD": true,
+    "originalNoncut": 111
+  }
+]

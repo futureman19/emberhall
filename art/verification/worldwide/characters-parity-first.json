@@ -1,0 +1,889 @@
+{
+  "status": "full-record-parity-failed",
+  "field_difference_count": {
+    "hunger": 144,
+    "energy": 144
+  },
+  "examples": {
+    "hunger": {
+      "mode": "control",
+      "id": "ranger",
+      "phase": "fixture",
+      "candidate": 79.76888888888885,
+      "other": 79.77255111110472
+    },
+    "energy": {
+      "mode": "control",
+      "id": "ranger",
+      "phase": "fixture",
+      "candidate": 79.82666666666682,
+      "other": 79.82941333332872
+    }
+  },
+  "differences": [
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "ranger",
+      "phase": "fixture"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "ranger",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "ranger",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "warrior",
+      "phase": "fixture"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "warrior",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "warrior",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "mage",
+      "phase": "fixture"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "mage",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "mage",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "rogue",
+      "phase": "fixture"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "rogue",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "rogue",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "merchant",
+      "phase": "fixture"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "merchant",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "merchant",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "banker",
+      "phase": "fixture"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "banker",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "banker",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "provisioner",
+      "phase": "fixture"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "provisioner",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "provisioner",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "healer",
+      "phase": "fixture"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "healer",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "control",
+      "device": "desktop",
+      "id": "healer",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "ranger",
+      "phase": "fixture"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "ranger",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "ranger",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "warrior",
+      "phase": "fixture"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "warrior",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "warrior",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "mage",
+      "phase": "fixture"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "mage",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "mage",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "rogue",
+      "phase": "fixture"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "rogue",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "rogue",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "merchant",
+      "phase": "fixture"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "merchant",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "merchant",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "banker",
+      "phase": "fixture"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "banker",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "banker",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "provisioner",
+      "phase": "fixture"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "provisioner",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "provisioner",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "healer",
+      "phase": "fixture"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "healer",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "control",
+      "device": "mobile",
+      "id": "healer",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "ranger",
+      "phase": "fixture"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "ranger",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "ranger",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "warrior",
+      "phase": "fixture"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "warrior",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "warrior",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "mage",
+      "phase": "fixture"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "mage",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "mage",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "rogue",
+      "phase": "fixture"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "rogue",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "rogue",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "merchant",
+      "phase": "fixture"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "merchant",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "merchant",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "banker",
+      "phase": "fixture"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "banker",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "banker",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "provisioner",
+      "phase": "fixture"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "provisioner",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "provisioner",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "healer",
+      "phase": "fixture"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "healer",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "failure",
+      "device": "desktop",
+      "id": "healer",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "ranger",
+      "phase": "fixture"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "ranger",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "ranger",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "warrior",
+      "phase": "fixture"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "warrior",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "warrior",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "mage",
+      "phase": "fixture"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "mage",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "mage",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "rogue",
+      "phase": "fixture"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "rogue",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "rogue",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "merchant",
+      "phase": "fixture"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "merchant",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "merchant",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "banker",
+      "phase": "fixture"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "banker",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "banker",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "provisioner",
+      "phase": "fixture"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "provisioner",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "provisioner",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "healer",
+      "phase": "fixture"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "healer",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "failure",
+      "device": "mobile",
+      "id": "healer",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "ranger",
+      "phase": "fixture"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "ranger",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "ranger",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "warrior",
+      "phase": "fixture"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "warrior",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "warrior",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "mage",
+      "phase": "fixture"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "mage",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "mage",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "rogue",
+      "phase": "fixture"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "rogue",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "rogue",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "merchant",
+      "phase": "fixture"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "merchant",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "merchant",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "banker",
+      "phase": "fixture"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "banker",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "banker",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "provisioner",
+      "phase": "fixture"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "provisioner",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "provisioner",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "healer",
+      "phase": "fixture"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "healer",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "built",
+      "device": "desktop",
+      "id": "healer",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "ranger",
+      "phase": "fixture"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "ranger",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "ranger",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "warrior",
+      "phase": "fixture"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "warrior",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "warrior",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "mage",
+      "phase": "fixture"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "mage",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "mage",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "rogue",
+      "phase": "fixture"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "rogue",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "rogue",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "merchant",
+      "phase": "fixture"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "merchant",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "merchant",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "banker",
+      "phase": "fixture"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "banker",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "banker",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "provisioner",
+      "phase": "fixture"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "provisioner",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "provisioner",
+      "phase": "walkEnd"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "healer",
+      "phase": "fixture"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "healer",
+      "phase": "walkStart"
+    },
+    {
+      "mode": "built",
+      "device": "mobile",
+      "id": "healer",
+      "phase": "walkEnd"
+    }
+  ]
+}
