@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
 
 const url = process.env.EMBERHALL_URL || "http://127.0.0.1:4178/";
-const outDir = join(dirname(fileURLToPath(import.meta.url)), "../art/verification/mobile-hud");
+const outDir = process.env.EMBERHALL_ARTIFACT_DIR || join(dirname(fileURLToPath(import.meta.url)), "../art/verification/mobile-hud");
 mkdirSync(outDir, { recursive: true });
 
 function overlap(a, b) {

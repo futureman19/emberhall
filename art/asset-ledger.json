@@ -45263,13 +45263,20 @@
         }
       ],
       "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
+        "blend": "art/blender/forged-oak/emberhall-forged-oak.blend",
+        "script": "art/blender/forged-oak/build_gui.py",
+        "export": "public/art/gui/forged-oak/band.png",
+        "parts": [
+          "A | repeatable oak-and-iron band",
+          "C | recessed action slot"
+        ],
+        "materials": [
+          "Blender-baked oak, brass and dark iron"
+        ],
+        "attachments": "CSS-only relief texture; existing frame geometry and pointer islands unchanged",
+        "lods": [
+          "Raster background; no runtime 3D geometry"
+        ]
       },
       "metrics": {
         "bounds": null,
@@ -45277,12 +45284,15 @@
         "triangles": null,
         "materialSlots": null
       },
-      "status": "inventoried",
+      "status": "integrated",
       "evidence": [
-        "src/components/game/chrome/band.tsx:159"
+        "src/components/game/chrome/band.tsx:159",
+        "public/art/gui/forged-oak/manifest.json",
+        "art/verification/forged-oak/report.json",
+        "art/blender/forged-oak/README.md"
       ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+      "batchOwner": "forged-oak-gui",
+      "notes": "User selected the Forged Oak visual prototype. Integrated raster art only: band/map surround and band/rail icon buttons. Other window chrome and world renderer retained. Per-state source inventory is not promoted to complete gameplay verification."
     },
     {
       "id": "renderer:src/components/game/chrome/band.tsx#TimeCluster",
@@ -45796,13 +45806,19 @@
         }
       ],
       "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
+        "blend": "art/blender/forged-oak/emberhall-forged-oak.blend",
+        "script": "art/blender/forged-oak/build_gui.py",
+        "export": "public/art/gui/forged-oak/button.png",
+        "parts": [
+          "C | recessed action slot"
+        ],
+        "materials": [
+          "Blender-baked oak, brass and dark iron"
+        ],
+        "attachments": "CSS-only relief texture; existing frame geometry and pointer islands unchanged",
+        "lods": [
+          "Raster background; no runtime 3D geometry"
+        ]
       },
       "metrics": {
         "bounds": null,
@@ -45810,12 +45826,15 @@
         "triangles": null,
         "materialSlots": null
       },
-      "status": "inventoried",
+      "status": "integrated",
       "evidence": [
-        "src/components/game/chrome/rail.tsx:84"
+        "src/components/game/chrome/rail.tsx:84",
+        "public/art/gui/forged-oak/manifest.json",
+        "art/verification/forged-oak/report.json",
+        "art/blender/forged-oak/README.md"
       ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+      "batchOwner": "forged-oak-gui",
+      "notes": "User selected the Forged Oak visual prototype. Integrated raster art only: band/map surround and band/rail icon buttons. Other window chrome and world renderer retained. Per-state source inventory is not promoted to complete gameplay verification."
     },
     {
       "id": "renderer:src/components/game/chrome/rail.tsx#SettingsButton",
@@ -202128,13 +202147,19 @@
         }
       ],
       "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
+        "blend": "art/blender/forged-oak/emberhall-forged-oak.blend",
+        "script": "art/blender/forged-oak/build_gui.py",
+        "export": "public/art/gui/forged-oak/corner.png",
+        "parts": [
+          "B | open minimap reliquary"
+        ],
+        "materials": [
+          "Blender-baked oak, brass and dark iron"
+        ],
+        "attachments": "CSS-only relief texture; existing frame geometry and pointer islands unchanged",
+        "lods": [
+          "Raster background; no runtime 3D geometry"
+        ]
       },
       "metrics": {
         "bounds": null,
@@ -202142,12 +202167,15 @@
         "triangles": null,
         "materialSlots": null
       },
-      "status": "inventoried",
+      "status": "integrated",
       "evidence": [
-        "src/components/game/chrome/docked-minimap.tsx:32"
+        "src/components/game/chrome/docked-minimap.tsx:32",
+        "public/art/gui/forged-oak/manifest.json",
+        "art/verification/forged-oak/report.json",
+        "art/blender/forged-oak/README.md"
       ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+      "batchOwner": "forged-oak-gui",
+      "notes": "User selected the Forged Oak visual prototype. Integrated raster art only: band/map surround and band/rail icon buttons. Other window chrome and world renderer retained. Per-state source inventory is not promoted to complete gameplay verification."
     },
     {
       "id": "ui:src/components/game/context-menu.tsx#ContextMenu",
