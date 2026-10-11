@@ -21,10 +21,12 @@ test("tip does not swallow child events or change child semantics", () => {
   assert.match(tip, /cloneElement/);
 });
 
-test("paperdoll slots and rows expose item details to keyboard via Inspect", () => {
-  assert.match(paperdoll, /InspectTip/);
-  assert.match(paperdoll, /ItemTipContent/);
-  assert.match(paperdoll, /aria-label=\{`Inspect \$\{label\}`\}/);
+test("paperdoll cells expose item details to keyboard via focusable Tip buttons", () => {
+  // Grid cells are <button>s wrapped in Tip, so keyboard focus raises the
+  // same ItemTipContent card hover shows — no separate Inspect toggle needed.
+  assert.match(paperdoll, /<Tip content=\{<ItemTipContent/);
+  assert.match(paperdoll, /aria-label=\{`\$\{ITEM_META\[id\]\.label\} ×\$\{pack\[id\]\}`\}/);
+  assert.match(paperdoll, /aria-pressed=\{selected === id\}/);
 });
 
 test("shop rows expose item details to keyboard via Inspect", () => {

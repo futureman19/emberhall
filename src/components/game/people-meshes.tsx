@@ -5,6 +5,7 @@ import { Html } from "@react-three/drei";
 import { AuthoredOffhandGeometry } from "./authored-offhand.tsx";
 import { AuthoredWeaponGeometry } from "./authored-weapon.tsx";
 import { AuthoredToolGeometry } from "./authored-tool.tsx";
+import { WEAR_HEX } from "./wear-hex.ts";
 import { playerVisualYaw } from "./character-facing";
 import { civicCharacterArt, civicVisualYaw } from "./civic-character.ts";
 import { useFrame } from "@react-three/fiber";
@@ -41,22 +42,7 @@ function groundAt(x: number, z: number, story = 0) {
   return groundY(getWorld(), x, z) + keepStoryY(story);
 }
 
-const WEAR_HEX: Partial<Record<ItemId, string>> = {
-  tunic: "#c9a36a",
-  leather: "#a85a42",
-  mail: "#8a8680",
-  cuirass: "#6a4a32",
-  hood: "#6a3a32",
-  helm: "#9a9286",
-  cap: "#6a4a32",
-  cloak: "#a85a42",
-  hose: "#4a443c",
-  greaves: "#7a7670",
-  boots: "#4a3228",
-  gloves: "#c9a36a",
-  gauntlets: "#8a8680",
-  gorget: "#9a9286",
-};
+// Wardrobe colors live in wear-hex.ts — shared with the You drawer's doll.
 
 // Hair vocabulary — crop alone is the vale's classic cap (bit-for-bit parity
 // when no look is stored); the rest are the looking glass's offerings.
@@ -271,7 +257,7 @@ function Torch({ ghost }: { ghost: boolean }) {
   );
 }
 
-function Shield({ id, ghost }: { id: ItemId; ghost: boolean }) {
+export function Shield({ id, ghost }: { id: ItemId; ghost: boolean }) {
   const iron = id === "heater";
   return (
     <group position={[-0.02, -0.28, 0.08]} rotation={[0.2, 0.15, -0.35]}>
@@ -291,7 +277,7 @@ function Shield({ id, ghost }: { id: ItemId; ghost: boolean }) {
   );
 }
 
-function Held({ id, ghost }: { id: ItemId; ghost: boolean }) {
+export function Held({ id, ghost }: { id: ItemId; ghost: boolean }) {
   if (id === "hatchet") return <Hatchet ghost={ghost} />;
   if (id === "pick") return <Pick ghost={ghost} />;
   if (id === "hoe") return <Hoe ghost={ghost} />;

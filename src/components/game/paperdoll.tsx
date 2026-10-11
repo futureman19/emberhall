@@ -5,11 +5,15 @@ import { maxMana } from "@/game/magery";
 import { dressedStats } from "@/game/iteminfo";
 import { rareName } from "@/game/rare";
 import { useGame } from "@/game/store";
+import type { MaterialQuality, ResourceId } from "@/game/resources/types";
 import type { ItemId, RareItem, SkillId, WearSlot } from "@/game/types";
 import { ItemTipContent } from "@/components/game/item-tip";
+import { ItemIcon, ResourceIcon } from "@/components/game/item-icon";
+import { GRADE_RING } from "@/components/game/item-icon-catalog";
+import { LivingDoll } from "@/components/game/living-doll";
+import { useGraphicsSettings } from "@/game/graphics-settings";
 import { Tip } from "@/components/ui/tip";
-import { Info } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 /** Slot layout — the left flank, the right flank, and where each hangs on the body. */
@@ -28,44 +32,8 @@ const RIGHT_SLOTS: { id: WearSlot; label: string }[] = [
   { id: "feet", label: "Feet" },
 ];
 
-/** A row's full item card plus a separate Inspect toggle — touch and
- *  keyboard users read stats, comparison and worth without taking the
- *  row's own action (equip, hold, buy). */
-function InspectTip({
-  id,
-  rare,
-  label,
-  className,
-  children,
-}: {
-  id: ItemId;
-  rare?: RareItem;
-  label: string;
-  className?: string;
-  children: ReactNode;
-}) {
-  const [inspecting, setInspecting] = useState(false);
-  return (
-    <>
-      <Tip content={<ItemTipContent id={id} rare={rare} />} className={className} pin={inspecting} onDismiss={() => setInspecting(false)}>
-        {children}
-      </Tip>
-      <button
-        type="button"
-        aria-label={`Inspect ${label}`}
-        aria-expanded={inspecting}
-        onClick={() => setInspecting((v) => !v)}
-        className={cn(
-          "grid size-11 shrink-0 place-items-center rounded-[var(--radius-xs)] border border-border bg-surface-2",
-          inspecting ? "text-gold" : "text-muted",
-        )}
-      >
-        <Info className="size-4" aria-hidden />
-      </button>
-    </>
-  );
-}
-
+/** The pack cell's primary action verb — deeds place, potions drink,
+ *  weapons hold, the rest wear. Everything else is inspect-only. */
 function packHint(id: ItemId) {
   if (id === "deed_porch" || id === "deed_hut" || id === "deed_homestead") return "Place";
   if (id === "potion_heal" || id === "potion_night") return "Drink";
@@ -76,12 +44,8 @@ function packHint(id: ItemId) {
 }
 
 export function ItemGlyph({ id, className }: { id: ItemId; className?: string }) {
-  return (
-    <span
-      className={cn("inline-block size-3 rounded-[var(--radius-xs)] border border-border", className)}
-      style={{ background: ITEM_META[id].fill }}
-    />
-  );
+  // One glyph, every surface: the old color chip grew up into the drawn icon.
+  return <ItemIcon id={id} className={cn("inline-block size-3 rounded-[var(--radius-xs)] border border-border", className)} />;
 }
 
 function VitalBar({ label, value, max, color }: { label: string; value: number; max: number; color: string }) {
@@ -166,6 +130,8 @@ export function YouDressing() {
   const heal = useGame((s) => s.heal);
   const eat = useGame((s) => s.eat);
   const equipRare = useGame((s) => s.equipRare);
+  const [selected, setSelected] = useState<ItemId | null>(null);
+  const reducedEffects = useGraphicsSettings().reducedEffects;
   const self = snap.people.find((p) => p.isPlayer);
   const pack = snap.player?.pack;
   const wear = snap.player?.wear ?? {};
@@ -216,7 +182,13 @@ export function YouDressing() {
             <SlotChip key={s.id} slot={s.id} label={s.label} id={wear[s.id]} rare={rareByUid(wearRare[s.id])} onUnequip={unequip} />
           ))}
         </div>
-        <DollFigure wear={wear} rareSlots={rareSlots} />
+        {reducedEffects ? (
+          <DollFigure wear={wear} rareSlots={rareSlots} />
+        ) : (
+          <div className="mx-auto h-44 w-28 shrink-0 overflow-hidden rounded-[var(--radius-sm)] border border-border bg-surface-2">
+            <LivingDoll wear={wear} rareByUid={(slot) => rareByUid(wearRare[slot])} />
+          </div>
+        )}
         <div className="flex min-w-0 flex-1 flex-col gap-1">
           {RIGHT_SLOTS.map((s) => (
             <SlotChip key={s.id} slot={s.id} label={s.label} id={wear[s.id]} rare={rareByUid(wearRare[s.id])} onUnequip={unequip} />
@@ -224,7 +196,7 @@ export function YouDressing() {
         </div>
       </div>
       <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">
-        Tap a tool or weapon in the pack to hold it. Tap a worn slot to put it away.
+        Tap a pack cell to choose what to do with it. Tap a worn slot to put it away.
       </p>
 
       <p className="mt-4 font-display text-xs tracking-wider text-muted uppercase">Skills</p>
@@ -262,68 +234,87 @@ export function YouDressing() {
 
       <p className="mt-4 font-display text-xs tracking-wider text-muted uppercase">Pack</p>
       {rares.length > 0 ? (
-        <ul className="mt-1 space-y-1">
+        <ul className="mt-1 grid grid-cols-6 gap-1" data-testid="pack-rares">
           {rares.map((r) => (
-            <li key={r.uid} className="flex gap-1">
-              <InspectTip id={r.base} rare={r} label={rareName(r)} className="w-full min-w-0 flex-1">
+            <li key={r.uid}>
+              <Tip content={<ItemTipContent id={r.base} rare={r} />}>
                 <button
                   type="button"
                   onClick={() => equipRare(r.uid)}
-                  className="flex min-h-11 w-full min-w-0 items-center gap-2 rounded-[var(--radius-xs)] border border-gold/40 bg-surface-2 px-3 text-left"
+                  aria-label={rareName(r)}
+                  className="relative grid aspect-square w-full place-items-center rounded-[var(--radius-xs)] border border-gold/60 bg-surface-2 text-fg"
                 >
-                  <ItemGlyph id={r.base} />
-                  <span className="truncate text-sm text-gold">{rareName(r)}</span>
-                  <span className="ml-auto shrink-0 text-xs text-muted">
-                    {r.workmanship ? `${r.workmanship} · ` : ""}{r.maker ? `by ${r.maker}` : "wonder"}
-                  </span>
+                  <ItemIcon id={r.base} className="size-7" />
                 </button>
-              </InspectTip>
+              </Tip>
             </li>
           ))}
         </ul>
       ) : null}
-      <ul className="mt-1 max-h-48 space-y-1 overflow-auto">
-        {held.map((id) => {
-          const hint = packHint(id);
-          return (
-            <li key={id} className="flex gap-1">
-              <InspectTip id={id} label={ITEM_META[id].label} className="min-w-0 flex-1">
-                <button
-                  type="button"
-                  onClick={() => equip(id)}
-                  className="flex min-h-11 w-full min-w-0 items-center gap-2 rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-left"
-                >
-                  <ItemGlyph id={id} />
-                  <span className="truncate text-sm text-fg">{ITEM_META[id].label}</span>
-                  <span className="ml-auto shrink-0 text-xs text-muted">
-                    {pack[id]}
-                    {hint ? ` · ${hint}` : ""}
-                  </span>
-                </button>
-              </InspectTip>
+      <ul className="mt-1 grid grid-cols-6 gap-1" data-testid="pack-grid">
+        {held.map((id) => (
+          <li key={id}>
+            <Tip content={<ItemTipContent id={id} />}>
               <button
                 type="button"
-                onClick={() => drop(id)}
-                className="grid size-11 shrink-0 place-items-center rounded-[var(--radius-xs)] border border-border bg-surface-2 text-muted"
+                onClick={() => setSelected(id)}
+                aria-label={`${ITEM_META[id].label} ×${pack[id]}`}
+                aria-pressed={selected === id}
+                className={cn(
+                  "relative grid aspect-square w-full place-items-center rounded-[var(--radius-xs)] border bg-surface-2 text-fg",
+                  selected === id ? "border-gold" : "border-border",
+                )}
               >
-                Drop
+                <ItemIcon id={id} className="size-7" />
+                <span className="absolute right-1 bottom-0.5 text-[10px] text-muted tabular-nums">{pack[id]}</span>
               </button>
-            </li>
-          );
-        })}
+            </Tip>
+          </li>
+        ))}
       </ul>
-      {resourceRows.length > 0 ? (
-        <ul className="mt-1 max-h-48 space-y-1 overflow-auto" aria-label="Resources">
-          {resourceRows.map((resource) => (
-            <li
-              key={resource.key}
-              className="flex min-h-9 min-w-0 items-center gap-2 rounded-[var(--radius-xs)] border border-border bg-surface px-3"
+      {selected && (pack[selected] ?? 0) > 0 ? (
+        <div className="mt-1 flex items-center gap-2 rounded-[var(--radius-xs)] border border-border bg-surface px-2 py-1.5" data-testid="pack-actions">
+          <ItemIcon id={selected} className="size-5 shrink-0" />
+          <span className="min-w-0 flex-1 truncate text-xs text-fg">{ITEM_META[selected].label}</span>
+          {packHint(selected) ? (
+            <button
+              type="button"
+              onClick={() => equip(selected)}
+              className="min-h-9 shrink-0 rounded-[var(--radius-xs)] border border-gold/50 bg-gold/10 px-3 text-xs text-gold"
             >
-              <span className="inline-block size-3 shrink-0 rounded-full border border-border-strong bg-surface-2" />
-              <span className="min-w-0 flex-1 truncate text-sm text-fg">{resource.label}</span>
-              <span className="shrink-0 text-xs text-muted tabular-nums">{resource.count}</span>
-            </li>
-          ))}
+              {packHint(selected)}
+            </button>
+          ) : null}
+          <button
+            type="button"
+            onClick={() => drop(selected)}
+            className="min-h-9 shrink-0 rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-xs text-muted"
+          >
+            Drop
+          </button>
+        </div>
+      ) : null}
+      {resourceRows.length > 0 ? (
+        <ul className="mt-2 grid grid-cols-6 gap-1" aria-label="Resources" data-testid="resource-grid">
+          {resourceRows.map((resource) => {
+            const [resourceId, , grade] = resource.key.split(":") as [ResourceId, string, MaterialQuality];
+            return (
+              <li key={resource.key}>
+                <Tip content={resource.label}>
+                  <span
+                    aria-label={`${resource.label} ×${resource.count}`}
+                    className={cn(
+                      "relative grid aspect-square w-full place-items-center rounded-[var(--radius-xs)] border-2 bg-surface text-fg",
+                      GRADE_RING[grade],
+                    )}
+                  >
+                    <ResourceIcon id={resourceId} className="size-7" />
+                    <span className="absolute right-1 bottom-0.5 text-[10px] text-muted tabular-nums">{resource.count}</span>
+                  </span>
+                </Tip>
+              </li>
+            );
+          })}
         </ul>
       ) : null}
       <div className="mt-3 flex gap-2">

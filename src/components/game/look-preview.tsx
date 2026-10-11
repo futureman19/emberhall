@@ -20,7 +20,7 @@ function Mat({ color }: { color: string }) {
   return <meshStandardMaterial color={color} roughness={0.82} />;
 }
 
-function Hair({ look }: { look: ResolvedLook }) {
+export function Hair({ look }: { look: ResolvedLook }) {
   const c = look.hairColor;
   if (look.hairStyle === "bald") return null;
   return (
