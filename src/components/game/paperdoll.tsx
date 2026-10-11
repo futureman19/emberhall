@@ -11,9 +11,10 @@ import { ItemTipContent } from "@/components/game/item-tip";
 import { ItemIcon, ResourceIcon } from "@/components/game/item-icon";
 import { GRADE_RING } from "@/components/game/item-icon-catalog";
 import { LivingDoll } from "@/components/game/living-doll";
+import { HOTBAR_SLOTS, dockStorage, loadHotbar, pinItem, saveHotbar, subscribeHotbar, unpinItem } from "@/components/game/chrome/hotbar-dock";
 import { useGraphicsSettings } from "@/game/graphics-settings";
 import { Tip } from "@/components/ui/tip";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 /** Slot layout — the left flank, the right flank, and where each hangs on the body. */
@@ -31,6 +32,40 @@ const RIGHT_SLOTS: { id: WearSlot; label: string }[] = [
   { id: "legs", label: "Legs" },
   { id: "feet", label: "Feet" },
 ];
+
+/** Quick-bar membership toggle for the selected pack cell. */
+function PinButton({ id }: { id: ItemId }) {
+  const [ids, setIds] = useState<ItemId[]>(() => {
+    const storage = dockStorage();
+    return storage ? loadHotbar(storage) : [];
+  });
+  useEffect(
+    () =>
+      subscribeHotbar(() => {
+        const storage = dockStorage();
+        if (storage) setIds(loadHotbar(storage));
+      }),
+    [],
+  );
+  const pinned = ids.includes(id);
+  const full = !pinned && ids.length >= HOTBAR_SLOTS;
+  return (
+    <button
+      type="button"
+      disabled={full}
+      onClick={() => {
+        const storage = dockStorage();
+        if (storage) saveHotbar(storage, pinned ? unpinItem(ids, id) : pinItem(ids, id));
+      }}
+      className={cn(
+        "min-h-9 shrink-0 rounded-[var(--radius-xs)] border px-3 text-xs",
+        pinned ? "border-gold/50 bg-gold/10 text-gold" : "border-border bg-surface-2 text-muted",
+      )}
+    >
+      {pinned ? "Unpin" : full ? "Bar full" : "Pin"}
+    </button>
+  );
+}
 
 /** The pack cell's primary action verb — deeds place, potions drink,
  *  weapons hold, the rest wear. Everything else is inspect-only. */
@@ -292,6 +327,7 @@ export function YouDressing() {
           >
             Drop
           </button>
+          <PinButton id={selected} />
         </div>
       ) : null}
       {resourceRows.length > 0 ? (

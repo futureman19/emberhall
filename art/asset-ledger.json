@@ -23,6 +23,8 @@
     "src/components/game/chrome/docked-minimap.tsx",
     "src/components/game/chrome/drawer-shell.tsx",
     "src/components/game/chrome/frame.ts",
+    "src/components/game/chrome/hotbar-dock.ts",
+    "src/components/game/chrome/hotbar.tsx",
     "src/components/game/chrome/minimap-dock.ts",
     "src/components/game/chrome/rail.tsx",
     "src/components/game/chrome/sound-toggles.tsx",
@@ -644,7 +646,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -756,7 +758,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1113,7 +1115,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1283,7 +1285,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1395,7 +1397,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1734,7 +1736,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2058,7 +2060,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2408,7 +2410,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2520,7 +2522,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2704,7 +2706,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2816,7 +2818,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2928,7 +2930,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3040,7 +3042,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3384,7 +3386,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3648,7 +3650,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3818,7 +3820,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3930,7 +3932,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4042,7 +4044,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4154,7 +4156,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4266,7 +4268,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4613,7 +4615,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4725,7 +4727,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4837,7 +4839,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4949,7 +4951,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -8124,7 +8126,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8178,7 +8180,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8232,7 +8234,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8286,7 +8288,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8340,7 +8342,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8394,7 +8396,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8448,7 +8450,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8502,7 +8504,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8556,7 +8558,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8610,7 +8612,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8664,7 +8666,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8718,7 +8720,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8772,7 +8774,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8826,7 +8828,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8880,7 +8882,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8934,7 +8936,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8988,7 +8990,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9042,7 +9044,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9096,7 +9098,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9150,7 +9152,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9204,7 +9206,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9258,7 +9260,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9312,7 +9314,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9366,7 +9368,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9420,7 +9422,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9474,7 +9476,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9528,7 +9530,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9582,7 +9584,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9636,7 +9638,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9690,7 +9692,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9744,7 +9746,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9798,7 +9800,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9852,7 +9854,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9906,7 +9908,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9960,7 +9962,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10014,7 +10016,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10068,7 +10070,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10122,7 +10124,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:27",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10178,7 +10180,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10241,7 +10243,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10304,7 +10306,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10367,7 +10369,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10430,7 +10432,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:25",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -19351,6 +19353,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -19380,6 +19386,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -19452,6 +19460,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -19481,6 +19493,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -19553,6 +19567,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -19582,6 +19600,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -19654,6 +19674,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -19683,6 +19707,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -19755,6 +19781,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -19784,6 +19814,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -19856,6 +19888,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -19885,6 +19921,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -19957,6 +19995,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -19986,6 +20028,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -20058,6 +20102,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -20087,6 +20135,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -20159,6 +20209,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -20188,6 +20242,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -20260,6 +20316,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -20289,6 +20349,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -20361,6 +20423,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -20390,6 +20456,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -20462,6 +20530,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -20491,6 +20563,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -20563,6 +20637,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -20592,6 +20670,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -20664,6 +20744,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -20693,6 +20777,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -20765,6 +20851,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -20794,6 +20884,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -20866,6 +20958,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -20895,6 +20991,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -20967,6 +21065,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -20996,6 +21098,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -21068,6 +21172,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -21097,6 +21205,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -21169,6 +21279,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -21198,6 +21312,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -21270,6 +21386,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -21299,6 +21419,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -21371,6 +21493,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -21400,6 +21526,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -21479,6 +21607,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -21508,6 +21640,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -21580,6 +21714,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -21609,6 +21747,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -21681,6 +21821,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -21710,6 +21854,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -21782,6 +21928,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -21811,6 +21961,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -21883,6 +22035,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -21912,6 +22068,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -21984,6 +22142,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -22013,6 +22175,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -22085,6 +22249,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -22114,6 +22282,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -22186,6 +22356,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -22215,6 +22389,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -22287,6 +22463,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -22316,6 +22496,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -22395,6 +22577,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -22424,6 +22610,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -22496,6 +22684,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -22525,6 +22717,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -22597,6 +22791,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -22626,6 +22824,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -22698,6 +22898,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -22727,6 +22931,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -22806,6 +23012,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -22835,6 +23045,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -22907,6 +23119,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -22936,6 +23152,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -23008,6 +23226,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -23037,6 +23259,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -23109,6 +23333,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -23138,6 +23366,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -23210,6 +23440,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -23239,6 +23473,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -23311,6 +23547,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -23340,6 +23580,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -23412,6 +23654,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -23441,6 +23687,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -23513,6 +23761,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -23542,6 +23794,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -23614,6 +23868,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -23643,6 +23901,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -23715,6 +23975,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -23744,6 +24008,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -23816,6 +24082,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -23845,6 +24115,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -23917,6 +24189,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -23946,6 +24222,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -24018,6 +24296,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -24047,6 +24329,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -24119,6 +24403,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -24148,6 +24436,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -24220,6 +24510,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -24249,6 +24543,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -24321,6 +24617,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -24350,6 +24650,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -24422,6 +24724,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -24451,6 +24757,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -24523,6 +24831,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -24552,6 +24864,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -24624,6 +24938,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -24653,6 +24971,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -24732,6 +25052,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -24761,6 +25085,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -24833,6 +25159,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -24862,6 +25192,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -24934,6 +25266,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -24963,6 +25299,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -25035,6 +25373,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -25064,6 +25406,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -25136,6 +25480,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -25165,6 +25513,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -25237,6 +25587,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -25266,6 +25620,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -25338,6 +25694,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -25367,6 +25727,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -25439,6 +25801,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -25468,6 +25834,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -25540,6 +25908,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -25569,6 +25941,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -25641,6 +26015,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -25670,6 +26048,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -25742,6 +26122,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -25771,6 +26155,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -25843,6 +26229,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -25872,6 +26262,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -25944,6 +26336,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -25973,6 +26369,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -26045,6 +26443,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -26074,6 +26476,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -26146,6 +26550,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -26175,6 +26583,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -26247,6 +26657,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -26276,6 +26690,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -26348,6 +26764,10 @@
         "ItemId"
       ],
       "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:8",
+        "src/components/game/chrome/hotbar-dock.ts:9",
+        "src/components/game/chrome/hotbar.tsx:4",
+        "src/components/game/chrome/hotbar.tsx:5",
         "src/components/game/context-menu.tsx:2",
         "src/components/game/context-menu.tsx:4",
         "src/components/game/craft-gump.tsx:1",
@@ -26377,6 +26797,8 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts",
+        "src/components/game/chrome/hotbar.tsx",
         "src/components/game/context-menu.tsx",
         "src/components/game/craft-gump.tsx",
         "src/components/game/house-gump.tsx",
@@ -33214,6 +33636,452 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "renderer-helper:src/components/game/chrome/hotbar-dock.ts#dockStorage",
+      "canonicalId": "src/components/game/chrome/hotbar-dock.ts#dockStorage",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/chrome/hotbar-dock.ts:16"
+      ],
+      "sourceNames": [
+        "dockStorage"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:16"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:16"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:typeof window !== \"undefined\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:16"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:16"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/hotbar-dock.ts:16"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/chrome/hotbar-dock.ts#loadHotbar",
+      "canonicalId": "src/components/game/chrome/hotbar-dock.ts#loadHotbar",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/chrome/hotbar-dock.ts:34"
+      ],
+      "sourceNames": [
+        "loadHotbar"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:34"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!Array.isArray(parsed)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!raw",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/hotbar-dock.ts:34"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/chrome/hotbar-dock.ts#notify",
+      "canonicalId": "src/components/game/chrome/hotbar-dock.ts#notify",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/chrome/hotbar-dock.ts:60"
+      ],
+      "sourceNames": [
+        "notify"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:60"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:60"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:60"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/hotbar-dock.ts:60"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/chrome/hotbar-dock.ts#pinItem",
+      "canonicalId": "src/components/game/chrome/hotbar-dock.ts#pinItem",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/chrome/hotbar-dock.ts:24"
+      ],
+      "sourceNames": [
+        "pinItem"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:24"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!Object.hasOwn(ITEM_META, id)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:ids.includes(id as ItemId) || ids.length >= HOTBAR_SLOTS",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/hotbar-dock.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/chrome/hotbar-dock.ts#saveHotbar",
+      "canonicalId": "src/components/game/chrome/hotbar-dock.ts#saveHotbar",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/chrome/hotbar-dock.ts:46"
+      ],
+      "sourceNames": [
+        "saveHotbar"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:46"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:46"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:46"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/hotbar-dock.ts:46"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/chrome/hotbar-dock.ts#subscribeHotbar",
+      "canonicalId": "src/components/game/chrome/hotbar-dock.ts#subscribeHotbar",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/chrome/hotbar-dock.ts:56"
+      ],
+      "sourceNames": [
+        "subscribeHotbar"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:56"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:56"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:56"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/hotbar-dock.ts:56"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/chrome/hotbar-dock.ts#unpinItem",
+      "canonicalId": "src/components/game/chrome/hotbar-dock.ts#unpinItem",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/chrome/hotbar-dock.ts:30"
+      ],
+      "sourceNames": [
+        "unpinItem"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/hotbar-dock.ts:30"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/hotbar-dock.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:30"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar-dock.ts:30"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/hotbar-dock.ts:30"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "renderer-helper:src/components/game/chrome/minimap-dock.ts#dockStorage",
       "canonicalId": "src/components/game/chrome/minimap-dock.ts#dockStorage",
       "family": "renderer-helper",
@@ -36378,13 +37246,13 @@
       "canonicalId": "src/components/game/hud.tsx#startHall",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/hud.tsx:143"
+        "src/components/game/hud.tsx:145"
       ],
       "sourceNames": [
         "startHall"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:143"
+        "src/components/game/hud.tsx:145"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -38828,13 +39696,13 @@
       "canonicalId": "src/components/game/paperdoll.tsx#packHint",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:37"
+        "src/components/game/paperdoll.tsx:72"
       ],
       "sourceNames": [
         "packHint"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:37"
+        "src/components/game/paperdoll.tsx:72"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -38930,7 +39798,7 @@
         "src/components/game/crafting/material-selector.tsx:36",
         "src/components/game/crafting/refining-panel.tsx:25",
         "src/components/game/crafting/salvage-panel.tsx:50",
-        "src/components/game/paperdoll.tsx:300",
+        "src/components/game/paperdoll.tsx:336",
         "src/components/game/part-sculptor.tsx:24"
       ],
       "rendererMapping": "direct AST declaration/name",
@@ -47643,6 +48511,117 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/chrome/drawer-shell.tsx:5"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/hotbar.tsx#Hotbar",
+      "canonicalId": "src/components/game/chrome/hotbar.tsx#Hotbar",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/hotbar.tsx:17"
+      ],
+      "sourceNames": [
+        "Hotbar"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/hotbar.tsx:17"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/hotbar.tsx"
+      ],
+      "jsxTags": [
+        "ItemIcon",
+        "button",
+        "div",
+        "span"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar.tsx:17"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!id",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar.tsx:17"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:holdTimer.current",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar.tsx:17"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:inHand",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar.tsx:17"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:phase !== \"playing\" || ids.length === 0",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar.tsx:17"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:storage",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar.tsx:17"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:usable",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar.tsx:17"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/hotbar.tsx:17"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/hotbar.tsx:17"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -223075,13 +224054,13 @@
       "canonicalId": "src/components/game/hud.tsx#BuildRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:572"
+        "src/components/game/hud.tsx:574"
       ],
       "sourceNames": [
         "BuildRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:572"
+        "src/components/game/hud.tsx:574"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -223161,13 +224140,13 @@
       "canonicalId": "src/components/game/hud.tsx#GhostBanner",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:520"
+        "src/components/game/hud.tsx:522"
       ],
       "sourceNames": [
         "GhostBanner"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:520"
+        "src/components/game/hud.tsx:522"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -223255,13 +224234,13 @@
       "canonicalId": "src/components/game/hud.tsx#GuideTabs",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:366"
+        "src/components/game/hud.tsx:368"
       ],
       "sourceNames": [
         "GuideTabs"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:366"
+        "src/components/game/hud.tsx:368"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -223343,13 +224322,13 @@
       "canonicalId": "src/components/game/hud.tsx#HelpPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:412"
+        "src/components/game/hud.tsx:414"
       ],
       "sourceNames": [
         "HelpPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:412"
+        "src/components/game/hud.tsx:414"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -223416,13 +224395,13 @@
       "canonicalId": "src/components/game/hud.tsx#Hud",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:41"
+        "src/components/game/hud.tsx:42"
       ],
       "sourceNames": [
         "Hud"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:41"
+        "src/components/game/hud.tsx:42"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -223520,13 +224499,13 @@
       "canonicalId": "src/components/game/hud.tsx#JournalPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:461"
+        "src/components/game/hud.tsx:463"
       ],
       "sourceNames": [
         "JournalPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:461"
+        "src/components/game/hud.tsx:463"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -223583,13 +224562,13 @@
       "canonicalId": "src/components/game/hud.tsx#PlayingChrome",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:55"
+        "src/components/game/hud.tsx:56"
       ],
       "sourceNames": [
         "PlayingChrome"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:55"
+        "src/components/game/hud.tsx:56"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -223604,6 +224583,7 @@
         "DockedMinimap",
         "GateGump",
         "GhostBanner",
+        "Hotbar",
         "HouseGump",
         "NpcGump",
         "PetsGump",
@@ -223704,13 +224684,13 @@
       "canonicalId": "src/components/game/hud.tsx#RaisingOverlay",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:311"
+        "src/components/game/hud.tsx:313"
       ],
       "sourceNames": [
         "RaisingOverlay"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:311"
+        "src/components/game/hud.tsx:313"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -223766,13 +224746,13 @@
       "canonicalId": "src/components/game/hud.tsx#RosterPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:477"
+        "src/components/game/hud.tsx:479"
       ],
       "sourceNames": [
         "RosterPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:477"
+        "src/components/game/hud.tsx:479"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -223855,13 +224835,13 @@
       "canonicalId": "src/components/game/hud.tsx#SaveFailureBanner",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:130"
+        "src/components/game/hud.tsx:132"
       ],
       "sourceNames": [
         "SaveFailureBanner"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:130"
+        "src/components/game/hud.tsx:132"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -223925,13 +224905,13 @@
       "canonicalId": "src/components/game/hud.tsx#SelectedCard",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:504"
+        "src/components/game/hud.tsx:506"
       ],
       "sourceNames": [
         "SelectedCard"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:504"
+        "src/components/game/hud.tsx:506"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -224010,13 +224990,13 @@
       "canonicalId": "src/components/game/hud.tsx#SidePanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:333"
+        "src/components/game/hud.tsx:335"
       ],
       "sourceNames": [
         "SidePanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:333"
+        "src/components/game/hud.tsx:335"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -224092,13 +225072,13 @@
       "canonicalId": "src/components/game/hud.tsx#TitleOverlay",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:152"
+        "src/components/game/hud.tsx:154"
       ],
       "sourceNames": [
         "TitleOverlay"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:152"
+        "src/components/game/hud.tsx:154"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -224252,13 +225232,13 @@
       "canonicalId": "src/components/game/hud.tsx#Toast",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:558"
+        "src/components/game/hud.tsx:560"
       ],
       "sourceNames": [
         "Toast"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:558"
+        "src/components/game/hud.tsx:560"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -224328,13 +225308,13 @@
       "canonicalId": "src/components/game/hud.tsx#TravelRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:599"
+        "src/components/game/hud.tsx:601"
       ],
       "sourceNames": [
         "TravelRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:599"
+        "src/components/game/hud.tsx:601"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -225736,13 +226716,13 @@
       "canonicalId": "src/components/game/paperdoll.tsx#DollFigure",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:100"
+        "src/components/game/paperdoll.tsx:135"
       ],
       "sourceNames": [
         "DollFigure"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:100"
+        "src/components/game/paperdoll.tsx:135"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -225813,13 +226793,13 @@
       "canonicalId": "src/components/game/paperdoll.tsx#ItemGlyph",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:46"
+        "src/components/game/paperdoll.tsx:81"
       ],
       "sourceNames": [
         "ItemGlyph"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:46"
+        "src/components/game/paperdoll.tsx:81"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -225869,17 +226849,101 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "ui:src/components/game/paperdoll.tsx#PinButton",
+      "canonicalId": "src/components/game/paperdoll.tsx#PinButton",
+      "family": "ui",
+      "catalogSources": [
+        "src/components/game/paperdoll.tsx:37"
+      ],
+      "sourceNames": [
+        "PinButton"
+      ],
+      "rendererLocations": [
+        "src/components/game/paperdoll.tsx:37"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/paperdoll.tsx"
+      ],
+      "jsxTags": [
+        "button"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/paperdoll.tsx:37"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:full",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/paperdoll.tsx:37"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:pinned",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/paperdoll.tsx:37"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:storage",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/paperdoll.tsx:37"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/paperdoll.tsx:37"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/paperdoll.tsx:37"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "ui:src/components/game/paperdoll.tsx#SlotChip",
       "canonicalId": "src/components/game/paperdoll.tsx#SlotChip",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:65"
+        "src/components/game/paperdoll.tsx:100"
       ],
       "sourceNames": [
         "SlotChip"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:65"
+        "src/components/game/paperdoll.tsx:100"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -225969,13 +227033,13 @@
       "canonicalId": "src/components/game/paperdoll.tsx#VitalBar",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:51"
+        "src/components/game/paperdoll.tsx:86"
       ],
       "sourceNames": [
         "VitalBar"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:51"
+        "src/components/game/paperdoll.tsx:86"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -226029,13 +227093,13 @@
       "canonicalId": "src/components/game/paperdoll.tsx#YouDressing",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:125"
+        "src/components/game/paperdoll.tsx:160"
       ],
       "sourceNames": [
         "YouDressing"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:125"
+        "src/components/game/paperdoll.tsx:160"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -226046,6 +227110,7 @@
         "ItemIcon",
         "ItemTipContent",
         "LivingDoll",
+        "PinButton",
         "ResourceIcon",
         "SlotChip",
         "Tip",
@@ -243576,7 +244641,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/band.tsx:7",
-        "src/components/game/hud.tsx:37"
+        "src/components/game/hud.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -243628,7 +244693,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/band.tsx:7",
-        "src/components/game/hud.tsx:37"
+        "src/components/game/hud.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -243680,7 +244745,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/band.tsx:7",
-        "src/components/game/hud.tsx:37"
+        "src/components/game/hud.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -243732,7 +244797,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/band.tsx:7",
-        "src/components/game/hud.tsx:37"
+        "src/components/game/hud.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -243784,7 +244849,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/band.tsx:7",
-        "src/components/game/hud.tsx:37"
+        "src/components/game/hud.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -243836,7 +244901,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/band.tsx:7",
-        "src/components/game/hud.tsx:37"
+        "src/components/game/hud.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -243888,7 +244953,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/band.tsx:7",
-        "src/components/game/hud.tsx:37"
+        "src/components/game/hud.tsx:38"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [

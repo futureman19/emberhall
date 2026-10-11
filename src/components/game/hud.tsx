@@ -3,6 +3,7 @@ import { Band } from "@/components/game/chrome/band";
 import { DockedMinimap } from "@/components/game/chrome/docked-minimap";
 import { cornerClearance } from "@/components/game/chrome/frame";
 import { Rail } from "@/components/game/chrome/rail";
+import { Hotbar } from "@/components/game/chrome/hotbar";
 import { SoundToggles } from "@/components/game/chrome/sound-toggles";
 import { useMinimapDock } from "@/components/game/chrome/use-minimap-dock";
 import { YouDrawer } from "@/components/game/chrome/you-drawer";
@@ -104,6 +105,7 @@ function PlayingChrome() {
         onToggleMap={dock.toggle}
       />
       <Rail mapCollapsed={!mapOpen} />
+      <Hotbar />
       <SidePanel />
       <SelectedCard />
       <PileGump />

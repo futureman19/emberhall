@@ -32,6 +32,7 @@ try {
       if (message.type() === "error") errors.push(`console: ${message.text()}`);
     });
     await page.goto(url, { waitUntil: "domcontentloaded", timeout: 45000 });
+    page.setDefaultTimeout(20000);
     await page.getByText("New hall").waitFor({ state: "visible", timeout: 45000 });
 
     const mods = await page.evaluate(async () => {
@@ -68,9 +69,9 @@ try {
     steps.resourceCells = await page.locator('[data-testid="resource-grid"] > li').count();
 
     // 3. Select bread → action bar shows with Drop; drop one → count falls to 1.
-    await page.getByRole("button", { name: "Bread ×2" }).click();
+    await page.getByRole("button", { name: "Bread ×2" }).click({ noWaitAfter: true });
     steps.actionBar = await page.locator('[data-testid="pack-actions"]').isVisible();
-    await page.locator('[data-testid="pack-actions"]').getByRole("button", { name: "Drop" }).click();
+    await page.locator('[data-testid="pack-actions"]').getByRole("button", { name: "Drop" }).click({ noWaitAfter: true });
     await page.waitForTimeout(150);
     steps.breadAfterDrop = await page.evaluate(async ({ store }) => {
       const storeMod = await import(store);
@@ -78,19 +79,58 @@ try {
     }, mods);
 
     // 4. Select hatchet → Hold verb; hold it → main hand swaps to hatchet.
-    await page.getByRole("button", { name: "Hatchet ×1" }).click();
+    await page.getByRole("button", { name: "Hatchet ×1" }).click({ noWaitAfter: true });
     const hold = page.locator('[data-testid="pack-actions"]').getByRole("button", { name: "Hold" });
     steps.holdVerb = await hold.isVisible();
-    await hold.click();
+    await hold.click({ noWaitAfter: true });
     await page.waitForTimeout(150);
     steps.mainAfterHold = await page.evaluate(async ({ store }) => {
       const storeMod = await import(store);
       return storeMod.useGame.getState().snap.player.wear.main ?? null;
     }, mods);
 
+    // 5. Pin the torch from the action bar, close the drawer, use the quick slot.
+    await page.getByRole("button", { name: "Torch ×1" }).click({ noWaitAfter: true });
+    await page.locator('[data-testid="pack-actions"]').getByRole("button", { name: "Pin" }).click({ noWaitAfter: true });
+    await page.waitForTimeout(150);
+    await page.evaluate(async ({ store }) => {
+      const storeMod = await import(store);
+      storeMod.useGame.setState({ panel: "none" });
+    }, mods);
+    await page.waitForTimeout(300);
+    steps.hotbarCells = await page.locator('[data-testid="hotbar"] > *').count();
+    const torchSlot = page.getByRole("button", { name: "Torch (quick slot)" });
+    steps.torchSlot = await torchSlot.isVisible();
+    await torchSlot.click({ noWaitAfter: true });
+    await page.waitForTimeout(150);
+    steps.mainAfterHotbar = await page.evaluate(async ({ store }) => {
+      const storeMod = await import(store);
+      return storeMod.useGame.getState().snap.player.wear.main ?? null;
+    }, mods);
+
+    // 6. Press-and-hold the slot (past TOUCH_HOLD_MS) → unpinned, bar goes away.
+    //    Headless SwiftShader renders the 3D world at seconds-per-interaction,
+    //    so the 550ms hold timer lands far later than wall-clock — poll for the
+    //    unpin instead of guessing a wait. (Verified live: handler + timer work.)
+    await page.evaluate(() => {
+      const el = document.querySelector('[data-testid="hotbar"] button');
+      el?.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true }));
+    });
+    try {
+      await page.waitForFunction(() => !document.querySelector('[data-testid="hotbar"]'), { timeout: 20000 });
+      steps.hotbarGone = true;
+    } catch {
+      steps.hotbarGone = false;
+    }
+    await page.evaluate(() => {
+      const el = document.querySelector('[data-testid="hotbar"] button');
+      el?.dispatchEvent(new PointerEvent("pointerup", { bubbles: true }));
+    });
+
     await page.screenshot({ path: resolve(output, `paperdoll-${viewport.name}.png`) });
     verdict.viewports[viewport.name] = { steps, errors };
-    if (!steps.dollCanvas || steps.packCells !== 4 || steps.resourceCells !== 2 || !steps.actionBar || steps.breadAfterDrop !== 1 || !steps.holdVerb || steps.mainAfterHold !== "hatchet" || errors.length) {
+    if (!steps.dollCanvas || steps.packCells !== 4 || steps.resourceCells !== 2 || !steps.actionBar || steps.breadAfterDrop !== 1 || !steps.holdVerb || steps.mainAfterHold !== "hatchet"
+      || steps.hotbarCells !== 6 || !steps.torchSlot || steps.mainAfterHotbar !== "torch" || !steps.hotbarGone || errors.length) {
       verdict.ok = false;
     }
     await page.close();
