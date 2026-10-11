@@ -28,7 +28,7 @@ import { PALETTE } from "@/game/placeables/materials";
 import { SPECS } from "@/game/placeables/legacy-buildings";
 
 const B = VOX;
-/** Default cube scale. 1.04 fuses faces — only the hut preview uses it. */
+/** Default cube scale. 1.04 fuses faces — player houses + hall/keep. */
 const GAP = 0.96;
 const FUSE = 1.04;
 

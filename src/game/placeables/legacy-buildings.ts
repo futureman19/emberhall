@@ -714,15 +714,102 @@ function makeBank(): Spec {
   return spec;
 }
 
+function fusedHouse(opts: {
+  x0: number;
+  x1: number;
+  z0: number;
+  z1: number;
+  h: number;
+  roof?: Block;
+  door: { x: number; w: number; h: number };
+  windows?: { x: number; z: number; w: number; hh: number }[];
+  chimney?: { x: number; z: number };
+  banners?: number[];
+}): Spec {
+  const { x0, x1, z0, z1, h } = opts;
+  const roof = opts.roof ?? "dark";
+  const out: Vox[] = [];
+  fill(out, x0 - 1, 0, z0 - 1, x1 + 1, 0, z1 + 1, "cobble", (x, _y, z) => x >= x0 && x <= x1 && z >= z0 && z <= z1);
+  fill(out, x0, 0, z0, x1, 0, z1, "timber");
+  const holes = new Set<string>();
+  for (let x = opts.door.x; x < opts.door.x + opts.door.w; x++) {
+    for (let y = 1; y <= opts.door.h; y++) holes.add(key(x, y, z1));
+  }
+  for (const w of opts.windows ?? []) {
+    for (let x = w.x; x < w.x + w.w; x++) {
+      for (let y = 2; y < 2 + w.hh; y++) {
+        holes.add(key(x, y, w.z));
+        put(out, x, y, w.z, "glass");
+      }
+      put(out, x, 1, w.z, "gold");
+      put(out, x, 2 + w.hh, w.z, "dark");
+    }
+  }
+  fill(out, x0, 1, z0, x1, h, z1, "timber", (x, y, z) => {
+    const edge = x === x0 || x === x1 || z === z0 || z === z1;
+    if (!edge) return true;
+    return holes.has(key(x, y, z));
+  });
+  halfTimber(out, x0, x1, z0, z1, h, z1);
+  for (let x = opts.door.x; x < opts.door.x + opts.door.w; x++) put(out, x, opts.door.h + 1, z1, "gold");
+  put(out, opts.door.x, 1, z1, "wool");
+  put(out, opts.door.x + opts.door.w - 1, 1, z1, "wool");
+  for (const bx of opts.banners ?? []) {
+    for (let y = 2; y <= h + 1; y++) put(out, bx, y, z1 + 1, "wool");
+    put(out, bx, h + 1, z1 + 1, "gold");
+  }
+  gableRoof(out, x0, x1, z0, z1, h, roof);
+  if (opts.chimney) {
+    for (let y = h + 1; y <= h + 4; y++) put(out, opts.chimney.x, y, opts.chimney.z, "dark");
+    put(out, opts.chimney.x, h + 5, opts.chimney.z, "coal");
+  }
+  fill(out, -1, 1, -1, 1, 1, 0, "dark");
+  put(out, 0, 2, -1, "gold");
+  dressHouseCute(out, x0, x1, z0, z1, h);
+  markRoof(out, h, x0, x1, z0, z1);
+  return { voxels: bake(out), x0, x1, z0, z1, enterable: true, fuse: true };
+}
+
+/** Lanterns, window boxes, bunting, roof cat — player houses. */
+function dressHouseCute(out: Vox[], x0: number, x1: number, z0: number, z1: number, h: number) {
+  const lanternY = Math.min(3, h);
+  put(out, Math.max(x0 + 1, -1), lanternY, z1 + 1, "gold");
+  put(out, Math.max(x0 + 1, -1), Math.max(1, lanternY - 1), z1 + 1, "glass");
+  put(out, Math.min(x1 - 1, 1), lanternY, z1 + 1, "gold");
+  put(out, Math.min(x1 - 1, 1), Math.max(1, lanternY - 1), z1 + 1, "glass");
+  put(out, x0, 1, z1 + 1, "soil");
+  put(out, x0, 2, z1, "wool");
+  put(out, x1, 1, z1 + 1, "soil");
+  put(out, x1, 2, z1, "wool");
+  put(out, x0, 1, z0 - 1, "soil");
+  put(out, x0, 2, z0, "leaf");
+  put(out, x1, 1, z0 - 1, "soil");
+  put(out, x1, 2, z0, "leaf");
+  const steps = Math.max(2, Math.floor((z1 + 1 - (z0 - 1)) / 2) + 1);
+  const ridge = h + steps;
+  put(out, 0, ridge, z1 + 1, "gold");
+  put(out, 0, ridge - 1, z1 + 1, "wool");
+  put(out, -1, ridge + 1, 0, "dark");
+  put(out, -1, ridge + 1, 1, "dark");
+  put(out, -1, ridge + 2, 1, "dark");
+  put(out, 0, ridge + 1, 1, "dark");
+  put(out, Math.max(x0, -2), ridge + 1, 0, "dark");
+  put(out, -1, ridge + 1, -1, "wool");
+}
+
 function makePorch(): Spec {
-  return house({
+  return fusedHouse({
     x0: -2,
     x1: 2,
     z0: -1,
     z1: 1,
     h: 2,
-    door: { x: 0, w: 1, h: 2 },
     roof: "thatch",
+    door: { x: 0, w: 1, h: 2 },
+    windows: [
+      { x: -1, z: -1, w: 1, hh: 1 },
+      { x: 1, z: -1, w: 1, hh: 1 },
+    ],
   });
 }
 
@@ -774,7 +861,7 @@ function makeHut(): Spec {
   return { voxels: bake(out), x0, x1, z0, z1, enterable: true, fuse: true };
 }
 
-/** Lanterns, window boxes, extra bunting, roof cat — hut only. */
+/** Lanterns, window boxes, extra bunting, roof cat — hut (porch/homestead use dressHouseCute). */
 function dressHutCute(out: Vox[], z0: number, z1: number, h: number) {
   put(out, -1, 3, z1 + 1, "gold");
   put(out, -1, 2, z1 + 1, "glass");
@@ -801,7 +888,23 @@ function dressHutCute(out: Vox[], z0: number, z1: number, h: number) {
 }
 
 function makeHomestead(): Spec {
-  return makeTownhouse();
+  return fusedHouse({
+    x0: -3,
+    x1: 3,
+    z0: -3,
+    z1: 3,
+    h: 5,
+    roof: "dark",
+    door: { x: -1, w: 2, h: 2 },
+    windows: [
+      { x: -2, z: 3, w: 1, hh: 2 },
+      { x: 1, z: 3, w: 1, hh: 2 },
+      { x: -2, z: -3, w: 1, hh: 2 },
+      { x: 1, z: -3, w: 1, hh: 2 },
+    ],
+    chimney: { x: 2, z: -2 },
+    banners: [-2, 2],
+  });
 }
 
 export const SPECS: Record<BuildingKind, Spec> = {
