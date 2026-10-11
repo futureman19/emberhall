@@ -7,8 +7,10 @@ import { useGame } from "@/game/store";
 import type { PanelId, Speed } from "@/game/types";
 import { cn } from "@/lib/utils";
 import { BAND_HEIGHT, MINIMAP_CORNER } from "./frame";
+import { Hotbar } from "./hotbar";
 import { FirstPersonChip, MapToggle, SettingsButton, YouButton } from "./rail";
 import { MusicToggle, SfxToggle } from "./sound-toggles";
+import { TechniqueBar } from "./technique-bar";
 
 function clockLabel(clock: number, day: number) {
   const h = Math.floor(clock) % 24;
@@ -239,16 +241,23 @@ export function Band({
     >
       <VitalsBox />
       <VitalsStrip />
-      <div className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto">
-        <ActionCluster actionsOpen={actionsOpen} onToggleActions={onToggleActions} />
-        <div className="flex shrink-0 items-center gap-1 md:hidden">
-          <YouButton />
-          <SettingsButton />
-          <FirstPersonChip />
-          <MusicToggle />
-          <SfxToggle />
+      {/* Combat chrome owns the band's middle-left: move chips, then quick
+          slots, pinned at the scroll origin so a narrow phone never scrolls
+          them out of reach. The utility clusters ride the scroll behind them. */}
+      <div className="flex min-w-0 flex-1 items-center gap-1.5">
+        <TechniqueBar />
+        <Hotbar />
+        <div className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto">
+          <ActionCluster actionsOpen={actionsOpen} onToggleActions={onToggleActions} />
+          <div className="flex shrink-0 items-center gap-1 md:hidden">
+            <YouButton />
+            <SettingsButton />
+            <FirstPersonChip />
+            <MusicToggle />
+            <SfxToggle />
+          </div>
+          <div className="flex-1" aria-hidden />
         </div>
-        <div className="flex-1" aria-hidden />
       </div>
       <TimeCluster />
       <MapToggle collapsed={!mapOpen} onToggle={onToggleMap} />

@@ -57,6 +57,27 @@ try {
 
     const steps = {};
 
+    // 0. Combat chrome lives IN the bottom band, at the scroll origin — and
+    //    the band keeps its fixed height (the L-frame joint depends on it).
+    await page.waitForFunction(
+      () => document.querySelector('[data-testid="bottom-band"]') && document.querySelector('[data-testid="technique-bar"]'),
+    );
+    steps.chipsInBand = await page.evaluate(() => {
+      const band = document.querySelector('[data-testid="bottom-band"]');
+      const bar = document.querySelector('[data-testid="technique-bar"]');
+      return Boolean(band && bar && band.contains(bar));
+    });
+    steps.bandHeight = await page.evaluate(() => {
+      const band = document.querySelector('[data-testid="bottom-band"]');
+      return band ? Math.round(band.getBoundingClientRect().height) : 0;
+    });
+    steps.chipsOnScreen = await page.evaluate(() => {
+      const bar = document.querySelector('[data-testid="technique-bar"]');
+      if (!bar) return false;
+      const r = bar.getBoundingClientRect();
+      return r.left >= 0 && r.right <= window.innerWidth && r.top >= 0 && r.bottom <= window.innerHeight;
+    });
+
     // 1. Row up with the three sword moves.
     await page.waitForFunction(() => document.querySelector('[data-testid="technique-bar"]'));
     steps.chips = await page.locator('[data-testid="technique-bar"] > button').count();
@@ -135,7 +156,7 @@ try {
 
     await page.screenshot({ path: resolve(output, `technique-${viewport.name}.png`) });
     verdict.viewports[viewport.name] = { steps, errors };
-    if (steps.chips !== 3 || !steps.cleaveLocked || !steps.cleaveBadge || steps.lungeArmed !== "lunge" || !steps.lungeGold
+    if (!steps.chipsInBand || steps.bandHeight > 61 || !steps.chipsOnScreen || steps.chips !== 3 || !steps.cleaveLocked || !steps.cleaveBadge || steps.lungeArmed !== "lunge" || !steps.lungeGold
       || !steps.disarmWorks || !steps.cooldownBadge || !steps.riposteCooling || steps.bowKit !== 3 || !steps.lungeGone
       || steps.knifeKit !== 3 || !steps.bowKitGone || errors.length) {
       verdict.ok = false;

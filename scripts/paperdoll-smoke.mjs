@@ -99,6 +99,11 @@ try {
     }, mods);
     await page.waitForTimeout(300);
     steps.hotbarCells = await page.locator('[data-testid="hotbar"] > *').count();
+    steps.hotbarInBand = await page.evaluate(() => {
+      const band = document.querySelector('[data-testid="bottom-band"]');
+      const bar = document.querySelector('[data-testid="hotbar"]');
+      return Boolean(band && bar && band.contains(bar));
+    });
     const torchSlot = page.getByRole("button", { name: "Torch (quick slot)" });
     steps.torchSlot = await torchSlot.isVisible();
     await torchSlot.click({ noWaitAfter: true });
@@ -130,7 +135,7 @@ try {
     await page.screenshot({ path: resolve(output, `paperdoll-${viewport.name}.png`) });
     verdict.viewports[viewport.name] = { steps, errors };
     if (!steps.dollCanvas || steps.packCells !== 4 || steps.resourceCells !== 2 || !steps.actionBar || steps.breadAfterDrop !== 1 || !steps.holdVerb || steps.mainAfterHold !== "hatchet"
-      || steps.hotbarCells !== 6 || !steps.torchSlot || steps.mainAfterHotbar !== "torch" || !steps.hotbarGone || errors.length) {
+      || steps.hotbarCells !== 6 || !steps.hotbarInBand || !steps.torchSlot || steps.mainAfterHotbar !== "torch" || !steps.hotbarGone || errors.length) {
       verdict.ok = false;
     }
     await page.close();
