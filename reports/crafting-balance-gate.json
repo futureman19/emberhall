@@ -22,13 +22,13 @@
       "inspections": {
         "p50": 5,
         "p90": 5,
-        "p99": 7,
-        "max": 8
+        "p99": 6,
+        "max": 7
       },
       "modeledSeconds": {
         "p50": 11.1,
         "p90": 11.1,
-        "p99": 14.1
+        "p99": 12.6
       },
       "blockedMatches": {
         "p50": 0,
@@ -44,15 +44,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 5485,
-        "p90": 8401,
-        "p99": 11333,
-        "max": 17405
+        "p50": 26037,
+        "p90": 44427,
+        "p99": 66767,
+        "max": 82839
       },
       "modeledSeconds": {
-        "p50": 8231.1,
-        "p90": 12605.1,
-        "p99": 17003.1
+        "p50": 39059.1,
+        "p90": 66644.1,
+        "p99": 100154.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -68,15 +68,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 5085,
-        "p90": 8619,
-        "p99": 10925,
-        "max": 18957
+        "p50": 24985,
+        "p90": 42219,
+        "p99": 58922,
+        "max": 66208
       },
       "modeledSeconds": {
-        "p50": 7631.1,
-        "p90": 12932.1,
-        "p99": 16391.1
+        "p50": 37481.1,
+        "p90": 63332.1,
+        "p99": 88386.6
       },
       "blockedMatches": {
         "p50": 0,
@@ -92,15 +92,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 29,
-        "p90": 47,
-        "p99": 68,
-        "max": 76
+        "p50": 30,
+        "p90": 46,
+        "p99": 67,
+        "max": 85
       },
       "modeledSeconds": {
-        "p50": 47.1,
-        "p90": 74.1,
-        "p99": 105.6
+        "p50": 48.6,
+        "p90": 72.6,
+        "p99": 104.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -116,15 +116,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 248,
-        "p90": 422,
-        "p99": 585,
-        "max": 691
+        "p50": 301,
+        "p90": 500,
+        "p99": 725,
+        "max": 789
       },
       "modeledSeconds": {
-        "p50": 375.6,
-        "p90": 636.6,
-        "p99": 881.1
+        "p50": 455.1,
+        "p90": 753.6,
+        "p99": 1091.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -140,15 +140,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 677,
-        "p90": 1153,
-        "p99": 1833,
-        "max": 1857
+        "p50": 755,
+        "p90": 1315,
+        "p99": 2037,
+        "max": 2084
       },
       "modeledSeconds": {
-        "p50": 1019.1,
-        "p90": 1733.1,
-        "p99": 2753.1
+        "p50": 1136.1,
+        "p90": 1976.1,
+        "p99": 3059.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -164,15 +164,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 45693,
-        "p90": 85358,
-        "p99": 109903,
-        "max": 123179
+        "p50": 238578,
+        "p90": 419876,
+        "p99": 649483,
+        "max": 719845
       },
       "modeledSeconds": {
-        "p50": 68543.1,
-        "p90": 128040.6,
-        "p99": 164858.1
+        "p50": 357870.6,
+        "p90": 629817.6,
+        "p99": 974228.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -188,15 +188,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 19030,
-        "p90": 30480,
-        "p99": 40434,
-        "max": 48491
+        "p50": 93599,
+        "p90": 159250,
+        "p99": 207761,
+        "max": 224472
       },
       "modeledSeconds": {
-        "p50": 28548.6,
-        "p90": 45723.6,
-        "p99": 60654.6
+        "p50": 140402.1,
+        "p90": 238878.6,
+        "p99": 311645.1
       },
       "blockedMatches": {
         "p50": 0,
@@ -212,15 +212,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 909,
-        "p90": 2567,
-        "p99": 5944,
-        "max": 6637
+        "p50": 137,
+        "p90": 449,
+        "p99": 909,
+        "max": 1210
       },
       "modeledSeconds": {
-        "p50": 1364.22,
-        "p90": 3851.22,
-        "p99": 8916.72
+        "p50": 206.22,
+        "p90": 674.22,
+        "p99": 1364.22
       },
       "blockedMatches": {
         "p50": 0,
@@ -236,15 +236,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 219,
-        "p90": 855,
-        "p99": 1500,
-        "max": 2197
+        "p50": 257,
+        "p90": 953,
+        "p99": 1462,
+        "max": 1586
       },
       "modeledSeconds": {
-        "p50": 329.22,
-        "p90": 1283.22,
-        "p99": 2250.72
+        "p50": 386.22,
+        "p90": 1430.22,
+        "p99": 2193.72
       },
       "blockedMatches": {
         "p50": 0,
@@ -260,15 +260,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 230,
-        "p90": 863,
-        "p99": 1688,
-        "max": 2142
+        "p50": 224,
+        "p90": 881,
+        "p99": 1901,
+        "max": 2163
       },
       "modeledSeconds": {
-        "p50": 345.72,
-        "p90": 1295.22,
-        "p99": 2532.72
+        "p50": 336.72,
+        "p90": 1322.22,
+        "p99": 2852.22
       },
       "blockedMatches": {
         "p50": 0,
@@ -284,15 +284,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 184,
-        "p90": 599,
-        "p99": 1185,
-        "max": 1347
+        "p50": 202,
+        "p90": 692,
+        "p99": 1277,
+        "max": 2388
       },
       "modeledSeconds": {
-        "p50": 276.72,
-        "p90": 899.22,
-        "p99": 1778.22
+        "p50": 303.72,
+        "p90": 1038.72,
+        "p99": 1916.22
       },
       "blockedMatches": {
         "p50": 0,
@@ -308,15 +308,15 @@
       "model": "1.5s/node survey + 0.72s/successful harvest impact; travel/loading excluded",
       "completionRate": 1,
       "inspections": {
-        "p50": 516,
-        "p90": 1810,
-        "p99": 3572,
-        "max": 6554
+        "p50": 665,
+        "p90": 2132,
+        "p99": 3499,
+        "max": 4296
       },
       "modeledSeconds": {
-        "p50": 774.72,
-        "p90": 2715.72,
-        "p99": 5358.72
+        "p50": 998.22,
+        "p90": 3198.72,
+        "p99": 5249.22
       },
       "blockedMatches": {
         "p50": 0,
@@ -800,7 +800,7 @@
     }
   },
   "payloadSizes": {
-    "representativeSaveBytes": 24226,
+    "representativeSaveBytes": 24269,
     "fiveItemBytes": 2654,
     "vaultInscriptionBytes": {
       "min": 589,

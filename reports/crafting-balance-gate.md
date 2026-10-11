@@ -9,7 +9,7 @@
 - Legal combinations enumerated: **1,546,080**; cap violations: **0**.
 - Max-skill bow workmanship on choice-grade inputs: ordinary 0.0%, fine 80.6%, exceptional 19.4%.
 - Max-skill sword workmanship on choice-grade inputs: ordinary 0.0%, fine 81.0%, exceptional 19.0%.
-- Representative save payload: **24,226 bytes**; largest Vault inscription: **779 bytes**.
+- Representative save payload: **24,269 bytes**; largest Vault inscription: **779 bytes**.
 - Desktop/mobile browser journey: **PASS**.
 
 ## Acquisition model
@@ -17,19 +17,19 @@ Deterministic 200-seed simulations use 1.5s per surveyed node plus 0.72s per suc
 
 | Goal | Skill | p50 inspections | p90 | p99 | Modeled p50 seconds |
 |---|---:|---:|---:|---:|---:|
-| oak bow body | 50 | 5 | 5 | 7 | 11.1 |
-| redwood bow body | 50 | 5485 | 8401 | 11333 | 8231.1 |
-| ironwood bow body | 70 | 5085 | 8619 | 10925 | 7631.1 |
-| copper sword edge | 20 | 29 | 47 | 68 | 47.1 |
-| tin for bronze | 35 | 248 | 422 | 585 | 375.6 |
-| highland sword edge | 55 | 677 | 1153 | 1833 | 1019.1 |
-| emberite sword edge | 90 | 45693 | 85358 | 109903 | 68543.1 |
-| moon silver sword edge | 75 | 19030 | 30480 | 40434 | 28548.6 |
-| ruby inlay | 60 | 909 | 2567 | 5944 | 1364.22 |
-| emerald inlay | 70 | 219 | 855 | 1500 | 329.22 |
-| amethyst inlay | 60 | 230 | 863 | 1688 | 345.72 |
-| diamond inlay | 70 | 184 | 599 | 1185 | 276.72 |
-| sapphire inlay | 65 | 516 | 1810 | 3572 | 774.72 |
+| oak bow body | 50 | 5 | 5 | 6 | 11.1 |
+| redwood bow body | 50 | 26037 | 44427 | 66767 | 39059.1 |
+| ironwood bow body | 70 | 24985 | 42219 | 58922 | 37481.1 |
+| copper sword edge | 20 | 30 | 46 | 67 | 48.6 |
+| tin for bronze | 35 | 301 | 500 | 725 | 455.1 |
+| highland sword edge | 55 | 755 | 1315 | 2037 | 1136.1 |
+| emberite sword edge | 90 | 238578 | 419876 | 649483 | 357870.6 |
+| moon silver sword edge | 75 | 93599 | 159250 | 207761 | 140402.1 |
+| ruby inlay | 60 | 137 | 449 | 909 | 206.22 |
+| emerald inlay | 70 | 257 | 953 | 1462 | 386.22 |
+| amethyst inlay | 60 | 224 | 881 | 1901 | 336.72 |
+| diamond inlay | 70 | 202 | 692 | 1277 | 303.72 |
+| sapphire inlay | 65 | 665 | 2132 | 3499 | 998.22 |
 
 ## Supply and sinks
 - Harvest: 1 unit below skill 100; 2 at skill 100.
