@@ -12,6 +12,8 @@ import {
   type ExactMaterialSelection,
 } from "./craft.ts";
 import { applyItemInlay } from "./inlay.ts";
+import { applySalvage } from "./salvage.ts";
+import { resourceStackLabel } from "./crafting/recipes.ts";
 import { commandHarvest, commandPlant, commandTill, commandWorkPlot, plotAt } from "./farm.ts";
 import { commandPick } from "./herbs.ts";
 import { commandPlantTree } from "./forestry.ts";
@@ -181,6 +183,7 @@ interface GameUI {
   makeExactRecipe: (id: string, selections: readonly ExactMaterialSelection[]) => void;
   refineStack: (key: ResourceStackKey) => void;
   inlayItem: (uid: string, key: ResourceStackKey) => void;
+  salvageItem: (uid: string) => void;
   useStation: (id: string) => void;
   cast: (spell: SpellId, target?: CastTarget) => void;
   forgetMark: (id: string) => void;
@@ -876,6 +879,17 @@ export const useGame = create<GameUI>((set, get) => ({
   inlayItem: (uid, key) => {
     const result = applyItemInlay(getWorld().player, uid, key);
     get().flash(result.status === "inlaid" ? `${result.effect.label} settles into the work.` : result.message);
+    set({ snap: snapshot() });
+  },
+  salvageItem: (uid) => {
+    const result = applySalvage(getWorld(), uid);
+    if (result.status === "salvaged") {
+      const parts = result.recovered.map((row) => `${resourceStackLabel(row.key)} ×${row.amount}`).join(", ");
+      const gems = result.gems.length > 0 ? (result.gemsRecovered ? " The gem is spared." : " The gem is lost.") : "";
+      get().flash(parts ? `Broken down: ${parts}.${gems}` : `Broken down — nothing recoverable.${gems}`);
+    } else {
+      get().flash(result.message);
+    }
     set({ snap: snapshot() });
   },
   useStation: (id) => {

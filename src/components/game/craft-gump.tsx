@@ -14,6 +14,7 @@ import type { ItemId, ResourceStackKey } from "@/game/types";
 import { MaterialSelector } from "./crafting/material-selector";
 import { WorkmanshipPreview } from "./crafting/workmanship-preview";
 import { InlayPanel } from "./crafting/inlay-panel";
+import { SalvagePanel } from "./crafting/salvage-panel";
 import { ConfirmCraft } from "./crafting/confirm-craft";
 import { RefiningPanel } from "./crafting/refining-panel";
 import { cn } from "@/lib/utils";
@@ -33,6 +34,7 @@ const WORK_TABS = [
   { id: "forms", label: "Forms" },
   { id: "refine", label: "Refine" },
   { id: "inlay", label: "Inlay" },
+  { id: "salvage", label: "Salvage" },
   { id: "recipes", label: "Recipes" },
 ] as const;
 type WorkTab = (typeof WORK_TABS)[number]["id"];
@@ -46,6 +48,7 @@ export function CraftGump() {
   const makeExact = useGame((s) => s.makeExactRecipe);
   const refine = useGame((s) => s.refineStack);
   const inlayItem = useGame((s) => s.inlayItem);
+  const salvageItem = useGame((s) => s.salvageItem);
   const pack = useGame((s) => s.snap.player?.pack);
   const skills = useGame((s) => s.snap.player?.skills);
   const held = useGame((s) => s.snap.player?.wear?.main);
@@ -450,6 +453,11 @@ export function CraftGump() {
       {tab === "inlay" && (
         <div className="mt-4">
           <InlayPanel items={rares} rows={resourceRows} onInlay={inlayItem} />
+        </div>
+      )}
+      {tab === "salvage" && (
+        <div className="mt-4">
+          <SalvagePanel items={rares} onSalvage={salvageItem} />
         </div>
       )}
       {tab === "recipes" && <>
