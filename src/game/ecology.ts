@@ -425,6 +425,7 @@ export function strikePlayer(world: World, c: Creature, you: Person) {
   let bite = Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2) - ward);
   if (c.curseUntil && world.hour < c.curseUntil) bite = Math.max(1, Math.floor(bite * (1 - CURSE_BITE_WEAKEN)));
   you.hp = Math.max(0, you.hp - bite);
+  world.player.lastBittenAt = world.hour; // Riposte remembers fresh teeth.
   if (c.kind === "stonecrawl_spider" && c.hp > 0 && world.hour >= world.player.poisonUntil && Math.random() < 0.35) {
     world.player.poisonUntil = world.hour + POISON_PLAYER_HOURS;
     world.player.poisonTickAt = world.hour + POISON_TICK_HOURS;

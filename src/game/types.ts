@@ -1,4 +1,5 @@
 import type { LookRecipeV1 } from "./look/types.ts";
+import type { TechniqueId } from "./techniques.ts";
 import type {
   CraftedComponent,
   GemInlay,
@@ -423,6 +424,8 @@ export interface Creature {
   poisonTickAt?: number;
   /** Paralyze spell: held fast until this hour — no stride, no bite. */
   paralyzeUntil?: number;
+  /** Hunter's Mark technique: marked prey takes a quarter more until this hour. */
+  markedUntil?: number;
   /** Curse spell: strength soured until this hour — weaker bite, slower stride. */
   curseUntil?: number;
   /** Summon spell: bound to the caster's side until this hour, then crumbles. */
@@ -551,6 +554,12 @@ export interface PlayerState {
   /** Vas Hur Por: the wind carries you until this hour. */
   flyUntil: number;
   armedSpell: SpellId | null;
+  /** Warrior techniques: the move riding the next strike, and when each catches its breath. */
+  armedTechnique: TechniqueId | null;
+  techniqueCoolUntil: Partial<Record<TechniqueId, number>>;
+  /** Combat memory for Riposte: when teeth last found you vs when you last swung. */
+  lastBittenAt: number;
+  lastStrikeAt: number;
   marks: RecallMark[];
   gateCoolUntil: number;
   ghost: boolean;

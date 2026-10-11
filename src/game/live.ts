@@ -84,6 +84,10 @@ function withFauna(w: World) {
     if (w.player.flyUntil == null) w.player.flyUntil = 0;
     if (!Array.isArray(w.zones)) w.zones = [];
     if (w.player.armedSpell === undefined) w.player.armedSpell = null;
+    if (w.player.armedTechnique === undefined) w.player.armedTechnique = null;
+    if (w.player.techniqueCoolUntil === undefined) w.player.techniqueCoolUntil = {};
+    if (w.player.lastBittenAt == null) w.player.lastBittenAt = 0;
+    if (w.player.lastStrikeAt == null) w.player.lastStrikeAt = 0;
     if (!Array.isArray(w.player.marks)) w.player.marks = [];
     if (w.player.ghost == null) w.player.ghost = false;
     if (w.player.corpseAt === undefined) w.player.corpseAt = null;

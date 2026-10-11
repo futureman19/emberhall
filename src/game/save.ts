@@ -51,6 +51,8 @@ const INTENT_KINDS = new Set([
   "fill",
   "none",
 ]);
+const TECHNIQUE_IDS = new Set(["lunge", "riposte", "cleave", "aimed_shot", "double_loose", "hunters_mark"]);
+
 const SPELL_IDS = new Set([
   "nightsight",
   "heal",
@@ -338,6 +340,11 @@ function isPlayer(value: unknown): boolean {
     (value.invisUntil === undefined || isFiniteNumber(value.invisUntil)) &&
     (value.armedSpell === null ||
       (isString(value.armedSpell) && SPELL_IDS.has(value.armedSpell))) &&
+    (value.armedTechnique === null ||
+      (isString(value.armedTechnique) && TECHNIQUE_IDS.has(value.armedTechnique))) &&
+    (value.techniqueCoolUntil === undefined || isNumberRecord(value.techniqueCoolUntil)) &&
+    (value.lastBittenAt === undefined || isFiniteNumber(value.lastBittenAt)) &&
+    (value.lastStrikeAt === undefined || isFiniteNumber(value.lastStrikeAt)) &&
     isArrayOf(value.marks, isRecallMark) &&
     isFiniteNumber(value.gateCoolUntil) &&
     isBoolean(value.ghost) &&

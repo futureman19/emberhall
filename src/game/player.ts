@@ -25,6 +25,7 @@ import { emitCompanionFx } from "./companion-animation.ts";
 import { emitPersonalActionFx } from "./personal-action-animation.ts";
 import { completeObjective, log } from "./world.ts";
 import { effectiveMain, rareMods, rareName, rollKillRare, weaponDmg } from "./rare.ts";
+import { armedTechniqueFor } from "./techniques.ts";
 import type { FaunaKind, ItemId, Person, ResourceInventory, ResourceNodeStateMap, SkillId, WearSlot, World } from "./types.ts";
 
 export function you(world: World) {
@@ -772,8 +773,10 @@ function huntNow(world: World, p: Person) {
   const mods = rareMods(world);
   const skill = effSkill(world, bow ? "archery" : "swords");
   const anatomy = effSkill(world, "anatomy");
+  const tech = armedTechniqueFor(world);
   const chance = successChance(skill, 10 + FAUNA_META[c.kind].hp / 2);
-  const ok = Math.random() < chance + 0.2 + mods.hit / 100;
+  let ok = Math.random() < chance + 0.2 + mods.hit / 100 + (tech?.id === "lunge" ? 0.1 : 0);
+  if (!ok && tech?.id === "aimed_shot") ok = true; // the aimed arrow never grazes
   combatFx = {
     kind: bow ? "arrow" : "melee",
     x: p.x,
@@ -785,6 +788,10 @@ function huntNow(world: World, p: Person) {
     at: world.hour,
   };
   let dmg = ok ? blade + Math.floor(skill / 12) + anatomyBonus(anatomy) : Math.max(1, Math.floor(blade / 3));
+  if (ok && tech?.id === "lunge") dmg += 3;
+  if (ok && tech?.id === "riposte" && world.player.lastBittenAt > world.player.lastStrikeAt) {
+    dmg = Math.floor(dmg * 1.5); // fresh teeth, sharper answer
+  }
   dmg += mods.dmg;
   let crit = false;
   if (ok && anatomyCritRoll(world) < anatomyCritChance(anatomy)) {
@@ -793,8 +800,39 @@ function huntNow(world: World, p: Person) {
   }
   const slayerMul = mods.vs[c.kind];
   if (slayerMul) dmg = Math.floor(dmg * slayerMul);
+  if (c.markedUntil !== undefined && world.hour < c.markedUntil) dmg = Math.floor(dmg * 1.25);
   if (world.hour < world.player.blessUntil) dmg = Math.floor(dmg * 1.25);
   c.hp -= dmg;
+  if (ok && tech?.id === "hunters_mark") c.markedUntil = world.hour + 8;
+  // Cleave: the swing follows through to a second beast at half strength.
+  if (ok && tech?.id === "cleave") {
+    const splash = Math.floor(dmg / 2);
+    const other = world.fauna.find(
+      (x) => x.id !== c.id && x.task !== "dead" && x.ownerId !== world.player.id && Math.hypot(x.x - c.x, x.z - c.z) < 2.5,
+    );
+    if (other && splash > 0) {
+      other.hp -= splash;
+      if (other.hp <= 0) {
+        other.hp = 0;
+        other.task = "dead";
+        other.path = [];
+        other.corpseUntil = world.hour + 8;
+        spawnCorpsePile(world, other);
+      }
+    }
+  }
+  // Double Loose: a second shaft rides the same breath.
+  if (tech?.id === "double_loose" && bow && c.hp > 0 && (world.player.pack.arrows ?? 0) > 0) {
+    world.player.pack.arrows -= 1;
+    const ok2 = Math.random() < chance + 0.2 + mods.hit / 100;
+    c.hp -= (ok2 ? blade + Math.floor(skill / 12) + anatomyBonus(anatomy) : Math.max(1, Math.floor(blade / 3))) + mods.dmg;
+  }
+  // A spent move cools down; every swing is remembered (Riposte watches this).
+  if (tech) {
+    world.player.armedTechnique = null;
+    world.player.techniqueCoolUntil[tech.id] = world.hour + tech.cooldownHours;
+  }
+  world.player.lastStrikeAt = world.hour;
   // A bound beast tears at whatever its caster hunts.
   const bound = world.fauna.find(
     (x) => x.ownerId === world.player.id && x.boundUntil && x.boundUntil > world.hour && x.id !== c.id && Math.hypot(x.x - c.x, x.z - c.z) < 3.5,

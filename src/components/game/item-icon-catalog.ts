@@ -4,6 +4,7 @@
 // is a path string, not an asset pipeline. Direland-grade readability comes
 // from the shape language (big, flat, chunky), not from painted detail.
 import type { MaterialQuality } from "../../game/resources/types.ts";
+import type { TechniqueId } from "../../game/techniques.ts";
 import type { ItemId } from "../../game/types.ts";
 
 export type IconKind =
@@ -13,7 +14,8 @@ export type IconKind =
   | "hide" | "bandage" | "potion" | "tunic" | "hood" | "cloak" | "legs" | "boots"
   | "pendant" | "ring" | "relic" | "book" | "rune" | "herb" | "mushroom" | "moss"
   | "silk" | "pearl" | "ash" | "cabbage" | "fish" | "bread" | "bowl" | "wheat"
-  | "seed" | "acorn" | "scroll" | "cloth" | "bone" | "gem";
+  | "seed" | "acorn" | "scroll" | "cloth" | "bone" | "gem"
+  | "lunge" | "riposte" | "cleave" | "aim" | "volley" | "mark";
 
 export interface IconGlyph {
   readonly body: string;
@@ -76,6 +78,13 @@ export const ICON_PATHS: Readonly<Record<IconKind, IconGlyph>> = {
   cloth: { body: "M5 6h14v4H5zM5 12h14v4a2 2 0 01-2 2H7a2 2 0 01-2-2z", accent: "M8 7.4h8v1.2H8zM8 13.4h8v1.2H8z" },
   bone: { body: "M5.2 5.2a2.7 2.7 0 014-1l9.6 9.6a2.7 2.7 0 11-4 4L5.2 8.2a2.7 2.7 0 010-3z" },
   gem: { body: "M7 4h10l4 5-9 12L3 9z", accent: "M7 4l5 5 5-5 .9 1.2L12 10.4 6.1 5.2zM3 9h18v1.6H3z" },
+  // Technique moves — warrior glyphs for the combat chips row.
+  lunge: { body: "M2 11h13v2H2zM3 7v10h2V7z", accent: "M15 9l7 3-7 3z" },
+  riposte: { body: "M4 20C4 10 10 4 20 4l-1 3C12 7 7 12 7 20z", accent: "M13 13l8 8-2 1-7-8z" },
+  cleave: { body: "M10 2h4l-1 20h-2z", accent: "M2 6l7 5-1 2-7-5zM22 6l-7 5 1 2 7-5z" },
+  aim: { body: "M12 3a9 9 0 100 18 9 9 0 000-18zm0 3a6 6 0 110 12 6 6 0 010-12z", accent: "M11 1h2v6h-2zM11 17h2v6h-2zM1 11h6v2H1zM17 11h6v2h-6z" },
+  volley: { body: "M12 2l9 10h-3.5L12 6.5 6.5 12H3z", accent: "M12 11l9 10h-3.5L12 15.5 6.5 21H3z" },
+  mark: { body: "M12 4l2.5 5.5L20 12l-5.5 2.5L12 20l-2.5-5.5L4 12l5.5-2.5z", accent: "M10.5 10.5h3v3h-3z" },
 };
 
 export const ITEM_ICON_KIND: Readonly<Record<ItemId, IconKind>> = {
@@ -159,6 +168,16 @@ export const RESOURCE_ICON_KIND: Readonly<Record<"timber" | "ore" | "fiber" | "h
   hide: "hide",
   bone: "bone",
   gem: "gem",
+};
+
+/** Technique chips reuse the silhouette language: one move glyph per move. */
+export const TECHNIQUE_ICON_KIND: Readonly<Record<TechniqueId, IconKind>> = {
+  lunge: "lunge",
+  riposte: "riposte",
+  cleave: "cleave",
+  aimed_shot: "aim",
+  double_loose: "volley",
+  hunters_mark: "mark",
 };
 
 /** Grid-cell ring per material quality — grade at a glance: plain for

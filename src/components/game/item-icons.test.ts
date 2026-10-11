@@ -8,6 +8,7 @@ import {
   ICON_PATHS,
   ITEM_ICON_KIND,
   RESOURCE_ICON_KIND,
+  TECHNIQUE_ICON_KIND,
   type IconKind,
 } from "./item-icon-catalog.ts";
 
@@ -29,8 +30,12 @@ test("item icons - every kind has valid bold path data", () => {
   }
 });
 
-test("item icons - no orphan kinds (every glyph serves an item or resource family)", () => {
-  const used = new Set<IconKind>([...Object.values(ITEM_ICON_KIND), ...Object.values(RESOURCE_ICON_KIND)]);
+test("item icons - no orphan kinds (every glyph serves an item, resource, or technique)", () => {
+  const used = new Set<IconKind>([
+    ...Object.values(ITEM_ICON_KIND),
+    ...Object.values(RESOURCE_ICON_KIND),
+    ...Object.values(TECHNIQUE_ICON_KIND),
+  ]);
   for (const kind of Object.keys(ICON_PATHS) as IconKind[]) {
     assert.ok(used.has(kind), `icon kind ${kind} is drawn but nothing uses it`);
   }

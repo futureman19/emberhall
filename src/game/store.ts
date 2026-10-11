@@ -13,6 +13,7 @@ import {
 } from "./craft.ts";
 import { applyItemInlay } from "./inlay.ts";
 import { applySalvage } from "./salvage.ts";
+import { TECHNIQUES, commandArmTechnique, type TechniqueId } from "./techniques.ts";
 import { resourceStackLabel } from "./crafting/recipes.ts";
 import { commandHarvest, commandPlant, commandTill, commandWorkPlot, plotAt } from "./farm.ts";
 import { commandPick } from "./herbs.ts";
@@ -129,6 +130,8 @@ interface GameUI {
   closeCtx: () => void;
   drop: (item: ItemId) => void;
   equip: (item: ItemId) => void;
+  /** Arm/disarm a warrior technique (chips row); refusal flashes as a toast. */
+  armTechnique: (id: TechniqueId) => void;
   equipRare: (uid: string) => void;
   unequip: (slot: WearSlot) => void;
   heal: () => void;
@@ -636,6 +639,13 @@ export const useGame = create<GameUI>((set, get) => ({
   equipRare: (uid) => {
     const err = commandEquipRare(getWorld(), uid);
     if (err) get().flash(err);
+    set({ snap: snapshot() });
+  },
+  armTechnique: (id) => {
+    const w = getWorld();
+    const err = commandArmTechnique(w, id);
+    if (err) get().flash(err);
+    else if (w.player.armedTechnique === id) get().flash(`${TECHNIQUES[id].label} ready — land your next strike.`);
     set({ snap: snapshot() });
   },
   unequip: (slot) => {

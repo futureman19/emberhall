@@ -1,8 +1,9 @@
 import { ITEM_META } from "@/game/catalog";
 import { RESOURCE_CATALOG } from "@/game/resources/catalog";
 import type { ResourceId } from "@/game/resources/types";
+import type { TechniqueId } from "@/game/techniques";
 import type { ItemId } from "@/game/types";
-import { ICON_PATHS, ITEM_ICON_KIND, RESOURCE_ICON_KIND } from "./item-icon-catalog";
+import { ICON_PATHS, ITEM_ICON_KIND, RESOURCE_ICON_KIND, TECHNIQUE_ICON_KIND } from "./item-icon-catalog";
 
 /**
  * The vale's items, drawn as bold flat silhouettes (Direland-grade shape
@@ -27,6 +28,17 @@ export function ResourceIcon({ id, className }: { id: ResourceId; className?: st
     <svg viewBox="0 0 24 24" className={className} aria-hidden focusable="false">
       <path d={glyph.body} fill={definition.visual.primary} />
       {glyph.accent ? <path d={glyph.accent} fill={definition.visual.secondary} /> : null}
+    </svg>
+  );
+}
+
+/** Technique chips draw their move glyph; the chip's text color sets the tone. */
+export function TechniqueIcon({ id, className }: { id: TechniqueId; className?: string }) {
+  const glyph = ICON_PATHS[TECHNIQUE_ICON_KIND[id]];
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden focusable="false">
+      <path d={glyph.body} fill="currentColor" opacity={0.9} />
+      {glyph.accent ? <path d={glyph.accent} fill="currentColor" opacity={0.45} /> : null}
     </svg>
   );
 }

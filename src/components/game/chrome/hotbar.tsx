@@ -44,8 +44,7 @@ export function Hotbar() {
   return (
     <div
       data-testid="hotbar"
-      className="pointer-events-auto absolute left-1/2 flex -translate-x-1/2 gap-1 rounded-[var(--radius-sm)] border border-border bg-bg/90 p-1"
-      style={{ bottom: "calc(60px + env(safe-area-inset-bottom) + 8px)" }}
+      className="pointer-events-auto flex gap-1 rounded-[var(--radius-sm)] border border-border bg-bg/90 p-1"
     >
       {slots.map((id, i) => {
         if (!id) {
