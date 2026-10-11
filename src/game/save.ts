@@ -51,7 +51,12 @@ const INTENT_KINDS = new Set([
   "fill",
   "none",
 ]);
-const TECHNIQUE_IDS = new Set(["lunge", "riposte", "cleave", "aimed_shot", "double_loose", "hunters_mark"]);
+const TECHNIQUE_IDS = new Set([
+  "lunge", "riposte", "cleave",
+  "aimed_shot", "double_loose", "hunters_mark",
+  "flurry", "hamstring", "veinfind",
+  "bash", "sunder", "doomblow",
+]);
 
 const SPELL_IDS = new Set([
   "nightsight",

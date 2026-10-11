@@ -141,6 +141,8 @@ export const LIVE_SKILLS: SkillId[] = [
   "archery",
   "alchemy",
   "tracking",
+  "fencing",
+  "mace",
   "tailoring",
 ];
 

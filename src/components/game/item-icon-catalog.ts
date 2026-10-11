@@ -15,7 +15,8 @@ export type IconKind =
   | "pendant" | "ring" | "relic" | "book" | "rune" | "herb" | "mushroom" | "moss"
   | "silk" | "pearl" | "ash" | "cabbage" | "fish" | "bread" | "bowl" | "wheat"
   | "seed" | "acorn" | "scroll" | "cloth" | "bone" | "gem"
-  | "lunge" | "riposte" | "cleave" | "aim" | "volley" | "mark";
+  | "lunge" | "riposte" | "cleave" | "aim" | "volley" | "mark"
+  | "flurry" | "hamstring" | "veinfind" | "bash" | "sunder" | "doomblow";
 
 export interface IconGlyph {
   readonly body: string;
@@ -85,6 +86,12 @@ export const ICON_PATHS: Readonly<Record<IconKind, IconGlyph>> = {
   aim: { body: "M12 3a9 9 0 100 18 9 9 0 000-18zm0 3a6 6 0 110 12 6 6 0 010-12z", accent: "M11 1h2v6h-2zM11 17h2v6h-2zM1 11h6v2H1zM17 11h6v2h-6z" },
   volley: { body: "M12 2l9 10h-3.5L12 6.5 6.5 12H3z", accent: "M12 11l9 10h-3.5L12 15.5 6.5 21H3z" },
   mark: { body: "M12 4l2.5 5.5L20 12l-5.5 2.5L12 20l-2.5-5.5L4 12l5.5-2.5z", accent: "M10.5 10.5h3v3h-3z" },
+  flurry: { body: "M5 2l3-1 9 14-3 1z", accent: "M12 3l2-1 8 12-2 1zM17 4l2-1 6 9-1 1z" },
+  hamstring: { body: "M2 15l14 6-1 2L2 18z", accent: "M4 8l2 3-1.5.5L3 9zM8 6l2 3-1.5.5L7 7z" },
+  veinfind: { body: "M4 3l2-1 10 12-2 2z", accent: "M17 15s3 3.2 3 5a3 3 0 01-6 0c0-1.8 3-5 3-5z" },
+  bash: { body: "M11 8h2v13h-2z", accent: "M7 2h10v6H7zM4 10l3 2-3 2zM20 10l-3 2 3 2z" },
+  sunder: { body: "M12 2l8 3v6c0 6-3.5 9.5-8 11-4.5-1.5-8-5-8-11V5z", accent: "M12 4l-2 5 3 3-2 5 2 3 1-3 2-5-3-3z" },
+  doomblow: { body: "M11 2h2l3 12-4 8-4-8z", accent: "M4 20h16v2H4zM6 16l2 2-1 1-2-2zM18 16l-2 2 1 1 2-2z" },
 };
 
 export const ITEM_ICON_KIND: Readonly<Record<ItemId, IconKind>> = {
@@ -178,6 +185,12 @@ export const TECHNIQUE_ICON_KIND: Readonly<Record<TechniqueId, IconKind>> = {
   aimed_shot: "aim",
   double_loose: "volley",
   hunters_mark: "mark",
+  flurry: "flurry",
+  hamstring: "hamstring",
+  veinfind: "veinfind",
+  bash: "bash",
+  sunder: "sunder",
+  doomblow: "doomblow",
 };
 
 /** Grid-cell ring per material quality — grade at a glance: plain for

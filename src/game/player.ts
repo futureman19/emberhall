@@ -771,11 +771,15 @@ function huntNow(world: World, p: Person) {
   playSfx("hunt", 0.52);
   const blade = weaponDmg(effectiveMain(world));
   const mods = rareMods(world);
-  const skill = effSkill(world, bow ? "archery" : "swords");
+  // The weapon family teaches its own discipline: knives fence, bludgeons mace-fight.
+  const main = effectiveMain(world);
+  const strikeSkill: SkillId = bow ? "archery" : main === "knife" ? "fencing" : main === "club" || main === "mace" ? "mace" : "swords";
+  const skill = effSkill(world, strikeSkill);
   const anatomy = effSkill(world, "anatomy");
   const tech = armedTechniqueFor(world);
   const chance = successChance(skill, 10 + FAUNA_META[c.kind].hp / 2);
   let ok = Math.random() < chance + 0.2 + mods.hit / 100 + (tech?.id === "lunge" ? 0.1 : 0);
+  if (!ok && tech?.id === "flurry") ok = Math.random() < chance + 0.2 + mods.hit / 100; // quick wrists, second try
   if (!ok && tech?.id === "aimed_shot") ok = true; // the aimed arrow never grazes
   combatFx = {
     kind: bow ? "arrow" : "melee",
@@ -792,9 +796,11 @@ function huntNow(world: World, p: Person) {
   if (ok && tech?.id === "riposte" && world.player.lastBittenAt > world.player.lastStrikeAt) {
     dmg = Math.floor(dmg * 1.5); // fresh teeth, sharper answer
   }
+  if (ok && tech?.id === "sunder") dmg = c.maxHp >= 40 ? Math.floor(dmg * 1.5) : dmg + 2;
+  if (ok && tech?.id === "doomblow") dmg *= 2;
   dmg += mods.dmg;
   let crit = false;
-  if (ok && anatomyCritRoll(world) < anatomyCritChance(anatomy)) {
+  if (ok && (tech?.id === "veinfind" || anatomyCritRoll(world) < anatomyCritChance(anatomy))) {
     dmg = Math.floor(dmg * 1.5);
     crit = true;
   }
@@ -804,6 +810,8 @@ function huntNow(world: World, p: Person) {
   if (world.hour < world.player.blessUntil) dmg = Math.floor(dmg * 1.25);
   c.hp -= dmg;
   if (ok && tech?.id === "hunters_mark") c.markedUntil = world.hour + 8;
+  if (ok && tech?.id === "hamstring") c.curseUntil = world.hour + 4; // the leg wound slows its stride
+  if (ok && tech?.id === "bash") c.paralyzeUntil = Math.max(c.paralyzeUntil ?? 0, world.hour + 0.5);
   // Cleave: the swing follows through to a second beast at half strength.
   if (ok && tech?.id === "cleave") {
     const splash = Math.floor(dmg / 2);
@@ -851,10 +859,8 @@ function huntNow(world: World, p: Person) {
   }
   if (bow) {
     p.facing = Math.atan2(c.x - p.x, c.z - p.z);
-    tryGain(world, "archery", ok, true);
-  } else {
-    tryGain(world, "swords", ok, true);
   }
+  tryGain(world, strikeSkill, ok, true);
   tryGain(world, "anatomy", ok, true);
   if (c.hp <= 0) {
     c.hp = 0;

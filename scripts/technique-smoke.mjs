@@ -117,10 +117,27 @@ try {
     steps.bowKit = await page.locator('[data-testid="technique-bar"] > button').count();
     steps.lungeGone = (await page.getByRole("button", { name: "Lunge (technique)" }).count()) === 0;
 
+    // 7. Knife in hand swaps to the fencing kit (Flurry appears), and a
+    //    knife strike teaches Fencing in the skills list.
+    await page.evaluate(async ({ live, store }) => {
+      const liveMod = await import(live);
+      const storeMod = await import(store);
+      const w = liveMod.getWorld();
+      w.player.wear.main = "knife";
+      w.player.skills.fencing = 50;
+      storeMod.useGame.setState({ snap: liveMod.snapshot(w) });
+    }, mods);
+    await page.waitForFunction(() => {
+      return [...document.querySelectorAll('[data-testid="technique-bar"] button')].some((b) => b.getAttribute("aria-label") === "Flurry (technique)");
+    });
+    steps.knifeKit = await page.locator('[data-testid="technique-bar"] > button').count();
+    steps.bowKitGone = (await page.getByRole("button", { name: "Aimed Shot (technique)" }).count()) === 0;
+
     await page.screenshot({ path: resolve(output, `technique-${viewport.name}.png`) });
     verdict.viewports[viewport.name] = { steps, errors };
     if (steps.chips !== 3 || !steps.cleaveLocked || !steps.cleaveBadge || steps.lungeArmed !== "lunge" || !steps.lungeGold
-      || !steps.disarmWorks || !steps.cooldownBadge || !steps.riposteCooling || steps.bowKit !== 3 || !steps.lungeGone || errors.length) {
+      || !steps.disarmWorks || !steps.cooldownBadge || !steps.riposteCooling || steps.bowKit !== 3 || !steps.lungeGone
+      || steps.knifeKit !== 3 || !steps.bowKitGone || errors.length) {
       verdict.ok = false;
     }
     await page.close();

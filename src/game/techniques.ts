@@ -8,8 +8,12 @@ import { effSkill, you } from "./player.ts";
 import { effectiveMain } from "./rare.ts";
 import type { SkillId, World } from "./types.ts";
 
-export type TechniqueWeapon = "sword" | "bow";
-export type TechniqueId = "lunge" | "riposte" | "cleave" | "aimed_shot" | "double_loose" | "hunters_mark";
+export type TechniqueWeapon = "sword" | "bow" | "knife" | "mace";
+export type TechniqueId =
+  | "lunge" | "riposte" | "cleave"
+  | "aimed_shot" | "double_loose" | "hunters_mark"
+  | "flurry" | "hamstring" | "veinfind"
+  | "bash" | "sunder" | "doomblow";
 
 export interface TechniqueMeta {
   id: TechniqueId;
@@ -76,6 +80,60 @@ export const TECHNIQUES: Record<TechniqueId, TechniqueMeta> = {
     cooldownHours: 1.2,
     blurb: "Marked prey bleeds a quarter more.",
   },
+  flurry: {
+    id: "flurry",
+    label: "Flurry",
+    weapon: "knife",
+    skill: "fencing",
+    minSkill: 25,
+    cooldownHours: 0.4,
+    blurb: "Quick wrists — the strike rolls twice, takes the better.",
+  },
+  hamstring: {
+    id: "hamstring",
+    label: "Hamstring",
+    weapon: "knife",
+    skill: "fencing",
+    minSkill: 50,
+    cooldownHours: 0.8,
+    blurb: "A cut to the leg — the beast limps, weakened, for a spell.",
+  },
+  veinfind: {
+    id: "veinfind",
+    label: "Veinfind",
+    weapon: "knife",
+    skill: "fencing",
+    minSkill: 75,
+    cooldownHours: 1.0,
+    blurb: "You read the seams — a clean hit always opens one.",
+  },
+  bash: {
+    id: "bash",
+    label: "Bash",
+    weapon: "mace",
+    skill: "mace",
+    minSkill: 25,
+    cooldownHours: 0.5,
+    blurb: "A ringing blow that holds the beast still.",
+  },
+  sunder: {
+    id: "sunder",
+    label: "Sunder",
+    weapon: "mace",
+    skill: "mace",
+    minSkill: 50,
+    cooldownHours: 0.7,
+    blurb: "Crushing force tells on big game; a flat thump on the small.",
+  },
+  doomblow: {
+    id: "doomblow",
+    label: "Doomblow",
+    weapon: "mace",
+    skill: "mace",
+    minSkill: 75,
+    cooldownHours: 1.2,
+    blurb: "Everything behind one swing — double damage.",
+  },
 };
 
 export const TECHNIQUE_IDS: ReadonlySet<string> = new Set(Object.keys(TECHNIQUES));
@@ -85,6 +143,8 @@ export function techniqueWeaponOf(world: World): TechniqueWeapon | null {
   const main = effectiveMain(world);
   if (main === "sword") return "sword";
   if (main === "bow") return "bow";
+  if (main === "knife") return "knife";
+  if (main === "club" || main === "mace") return "mace";
   return null;
 }
 
