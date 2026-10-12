@@ -39752,13 +39752,13 @@
       "canonicalId": "src/components/game/paperdoll.tsx#packHint",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:72"
+        "src/components/game/paperdoll.tsx:79"
       ],
       "sourceNames": [
         "packHint"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:72"
+        "src/components/game/paperdoll.tsx:79"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -39854,7 +39854,7 @@
         "src/components/game/crafting/material-selector.tsx:36",
         "src/components/game/crafting/refining-panel.tsx:25",
         "src/components/game/crafting/salvage-panel.tsx:50",
-        "src/components/game/paperdoll.tsx:336",
+        "src/components/game/paperdoll.tsx:313",
         "src/components/game/part-sculptor.tsx:24"
       ],
       "rendererMapping": "direct AST declaration/name",
@@ -52364,17 +52364,86 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "renderer:src/components/game/item-icon.tsx#GlyphIcon",
+      "canonicalId": "src/components/game/item-icon.tsx#GlyphIcon",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/item-icon.tsx:48"
+      ],
+      "sourceNames": [
+        "GlyphIcon"
+      ],
+      "rendererLocations": [
+        "src/components/game/item-icon.tsx:48"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/item-icon.tsx"
+      ],
+      "jsxTags": [
+        "path",
+        "svg"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/item-icon.tsx:48"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:glyph.accent",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/item-icon.tsx:48"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/item-icon.tsx:48"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/item-icon.tsx:48"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "renderer:src/components/game/item-icon.tsx#ItemIcon",
       "canonicalId": "src/components/game/item-icon.tsx#ItemIcon",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/item-icon.tsx:13"
+        "src/components/game/item-icon.tsx:14"
       ],
       "sourceNames": [
         "ItemIcon"
       ],
       "rendererLocations": [
-        "src/components/game/item-icon.tsx:13"
+        "src/components/game/item-icon.tsx:14"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52437,13 +52506,13 @@
       "canonicalId": "src/components/game/item-icon.tsx#ResourceIcon",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/item-icon.tsx:24"
+        "src/components/game/item-icon.tsx:25"
       ],
       "sourceNames": [
         "ResourceIcon"
       ],
       "rendererLocations": [
-        "src/components/game/item-icon.tsx:24"
+        "src/components/game/item-icon.tsx:25"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -52506,13 +52575,13 @@
       "canonicalId": "src/components/game/item-icon.tsx#TechniqueIcon",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/item-icon.tsx:36"
+        "src/components/game/item-icon.tsx:37"
       ],
       "sourceNames": [
         "TechniqueIcon"
       ],
       "rendererLocations": [
-        "src/components/game/item-icon.tsx:36"
+        "src/components/game/item-icon.tsx:37"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229490,13 +229559,13 @@
       "canonicalId": "src/components/game/paperdoll.tsx#DollFigure",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:135"
+        "src/components/game/paperdoll.tsx:142"
       ],
       "sourceNames": [
         "DollFigure"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:135"
+        "src/components/game/paperdoll.tsx:142"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229567,13 +229636,13 @@
       "canonicalId": "src/components/game/paperdoll.tsx#ItemGlyph",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:81"
+        "src/components/game/paperdoll.tsx:88"
       ],
       "sourceNames": [
         "ItemGlyph"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:81"
+        "src/components/game/paperdoll.tsx:88"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229627,19 +229696,21 @@
       "canonicalId": "src/components/game/paperdoll.tsx#PinButton",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:37"
+        "src/components/game/paperdoll.tsx:42"
       ],
       "sourceNames": [
         "PinButton"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:37"
+        "src/components/game/paperdoll.tsx:42"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
         "src/components/game/paperdoll.tsx"
       ],
       "jsxTags": [
+        "Pin",
+        "PinOff",
         "button"
       ],
       "states": [
@@ -229707,35 +229778,35 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
-      "id": "ui:src/components/game/paperdoll.tsx#SlotChip",
-      "canonicalId": "src/components/game/paperdoll.tsx#SlotChip",
+      "id": "ui:src/components/game/paperdoll.tsx#SlotCell",
+      "canonicalId": "src/components/game/paperdoll.tsx#SlotCell",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:100"
+        "src/components/game/paperdoll.tsx:108"
       ],
       "sourceNames": [
-        "SlotChip"
+        "SlotCell"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:100"
+        "src/components/game/paperdoll.tsx:108"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
         "src/components/game/paperdoll.tsx"
       ],
       "jsxTags": [
-        "ItemGlyph",
+        "GlyphIcon",
+        "ItemIcon",
         "ItemTipContent",
         "Tip",
-        "button",
-        "span"
+        "button"
       ],
       "states": [
         {
           "id": "catalog-or-current-presentation",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/paperdoll.tsx:61"
+            "src/components/game/paperdoll.tsx:108"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -229743,7 +229814,7 @@
           "id": "predicate:filled",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/paperdoll.tsx:61"
+            "src/components/game/paperdoll.tsx:108"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -229751,7 +229822,7 @@
           "id": "predicate:id",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/paperdoll.tsx:61"
+            "src/components/game/paperdoll.tsx:108"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -229759,7 +229830,7 @@
           "id": "predicate:rare",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/paperdoll.tsx:61"
+            "src/components/game/paperdoll.tsx:108"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -229767,7 +229838,7 @@
           "id": "predicate:tipId",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/paperdoll.tsx:61"
+            "src/components/game/paperdoll.tsx:108"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -229775,7 +229846,7 @@
           "id": "present",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/paperdoll.tsx:61"
+            "src/components/game/paperdoll.tsx:108"
           ],
           "applicability": "source contract; runtime unverified"
         }
@@ -229797,29 +229868,30 @@
       },
       "status": "inventoried",
       "evidence": [
-        "src/components/game/paperdoll.tsx:61"
+        "src/components/game/paperdoll.tsx:108"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
-      "id": "ui:src/components/game/paperdoll.tsx#VitalBar",
-      "canonicalId": "src/components/game/paperdoll.tsx#VitalBar",
+      "id": "ui:src/components/game/paperdoll.tsx#StatChip",
+      "canonicalId": "src/components/game/paperdoll.tsx#StatChip",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:86"
+        "src/components/game/paperdoll.tsx:94"
       ],
       "sourceNames": [
-        "VitalBar"
+        "StatChip"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:86"
+        "src/components/game/paperdoll.tsx:94"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
         "src/components/game/paperdoll.tsx"
       ],
       "jsxTags": [
+        "Icon",
         "span"
       ],
       "states": [
@@ -229827,7 +229899,15 @@
           "id": "catalog-or-current-presentation",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/paperdoll.tsx:47"
+            "src/components/game/paperdoll.tsx:94"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:max",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/paperdoll.tsx:94"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -229835,7 +229915,7 @@
           "id": "present",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/paperdoll.tsx:47"
+            "src/components/game/paperdoll.tsx:94"
           ],
           "applicability": "source contract; runtime unverified"
         }
@@ -229857,7 +229937,7 @@
       },
       "status": "inventoried",
       "evidence": [
-        "src/components/game/paperdoll.tsx:47"
+        "src/components/game/paperdoll.tsx:94"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -229867,28 +229947,32 @@
       "canonicalId": "src/components/game/paperdoll.tsx#YouDressing",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:160"
+        "src/components/game/paperdoll.tsx:167"
       ],
       "sourceNames": [
         "YouDressing"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:160"
+        "src/components/game/paperdoll.tsx:167"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
         "src/components/game/paperdoll.tsx"
       ],
       "jsxTags": [
+        "Bandage",
         "DollFigure",
+        "Drumstick",
+        "Hand",
         "ItemIcon",
         "ItemTipContent",
         "LivingDoll",
         "PinButton",
         "ResourceIcon",
-        "SlotChip",
+        "SlotCell",
+        "StatChip",
         "Tip",
-        "VitalBar",
+        "Trash2",
         "button",
         "div",
         "h2",
@@ -229959,14 +230043,6 @@
           "status": "inventoried",
           "evidence": [
             "src/components/game/paperdoll.tsx:125"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:rares.length > 0",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/paperdoll.tsx:121"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -252994,12 +253070,14 @@
         "WearSlot"
       ],
       "rendererLocations": [
+        "src/components/game/item-icon-catalog.ts:8",
         "src/components/game/living-doll.tsx:9",
         "src/components/game/paperdoll.tsx:9",
         "src/components/game/people-meshes.tsx:39"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/item-icon-catalog.ts",
         "src/components/game/living-doll.tsx",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
@@ -253048,12 +253126,14 @@
         "WearSlot"
       ],
       "rendererLocations": [
+        "src/components/game/item-icon-catalog.ts:8",
         "src/components/game/living-doll.tsx:9",
         "src/components/game/paperdoll.tsx:9",
         "src/components/game/people-meshes.tsx:39"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/item-icon-catalog.ts",
         "src/components/game/living-doll.tsx",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
@@ -253102,12 +253182,14 @@
         "WearSlot"
       ],
       "rendererLocations": [
+        "src/components/game/item-icon-catalog.ts:8",
         "src/components/game/living-doll.tsx:9",
         "src/components/game/paperdoll.tsx:9",
         "src/components/game/people-meshes.tsx:39"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/item-icon-catalog.ts",
         "src/components/game/living-doll.tsx",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
@@ -253156,12 +253238,14 @@
         "WearSlot"
       ],
       "rendererLocations": [
+        "src/components/game/item-icon-catalog.ts:8",
         "src/components/game/living-doll.tsx:9",
         "src/components/game/paperdoll.tsx:9",
         "src/components/game/people-meshes.tsx:39"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/item-icon-catalog.ts",
         "src/components/game/living-doll.tsx",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
@@ -253210,12 +253294,14 @@
         "WearSlot"
       ],
       "rendererLocations": [
+        "src/components/game/item-icon-catalog.ts:8",
         "src/components/game/living-doll.tsx:9",
         "src/components/game/paperdoll.tsx:9",
         "src/components/game/people-meshes.tsx:39"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/item-icon-catalog.ts",
         "src/components/game/living-doll.tsx",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
@@ -253264,12 +253350,14 @@
         "WearSlot"
       ],
       "rendererLocations": [
+        "src/components/game/item-icon-catalog.ts:8",
         "src/components/game/living-doll.tsx:9",
         "src/components/game/paperdoll.tsx:9",
         "src/components/game/people-meshes.tsx:39"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/item-icon-catalog.ts",
         "src/components/game/living-doll.tsx",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
@@ -253318,12 +253406,14 @@
         "WearSlot"
       ],
       "rendererLocations": [
+        "src/components/game/item-icon-catalog.ts:8",
         "src/components/game/living-doll.tsx:9",
         "src/components/game/paperdoll.tsx:9",
         "src/components/game/people-meshes.tsx:39"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/item-icon-catalog.ts",
         "src/components/game/living-doll.tsx",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
@@ -253372,12 +253462,14 @@
         "WearSlot"
       ],
       "rendererLocations": [
+        "src/components/game/item-icon-catalog.ts:8",
         "src/components/game/living-doll.tsx:9",
         "src/components/game/paperdoll.tsx:9",
         "src/components/game/people-meshes.tsx:39"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/item-icon-catalog.ts",
         "src/components/game/living-doll.tsx",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
@@ -253426,12 +253518,14 @@
         "WearSlot"
       ],
       "rendererLocations": [
+        "src/components/game/item-icon-catalog.ts:8",
         "src/components/game/living-doll.tsx:9",
         "src/components/game/paperdoll.tsx:9",
         "src/components/game/people-meshes.tsx:39"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/item-icon-catalog.ts",
         "src/components/game/living-doll.tsx",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
@@ -253480,12 +253574,14 @@
         "WearSlot"
       ],
       "rendererLocations": [
+        "src/components/game/item-icon-catalog.ts:8",
         "src/components/game/living-doll.tsx:9",
         "src/components/game/paperdoll.tsx:9",
         "src/components/game/people-meshes.tsx:39"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/item-icon-catalog.ts",
         "src/components/game/living-doll.tsx",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"

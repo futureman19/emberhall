@@ -8,16 +8,17 @@ import { useGame } from "@/game/store";
 import type { MaterialQuality, ResourceId } from "@/game/resources/types";
 import type { ItemId, RareItem, SkillId, WearSlot } from "@/game/types";
 import { ItemTipContent } from "@/components/game/item-tip";
-import { ItemIcon, ResourceIcon } from "@/components/game/item-icon";
-import { GRADE_RING } from "@/components/game/item-icon-catalog";
+import { GlyphIcon, ItemIcon, ResourceIcon } from "@/components/game/item-icon";
+import { GRADE_RING, SLOT_ICON_KIND } from "@/components/game/item-icon-catalog";
 import { LivingDoll } from "@/components/game/living-doll";
 import { HOTBAR_SLOTS, dockStorage, loadHotbar, pinItem, saveHotbar, subscribeHotbar, unpinItem } from "@/components/game/chrome/hotbar-dock";
 import { useGraphicsSettings } from "@/game/graphics-settings";
 import { Tip } from "@/components/ui/tip";
+import { Bandage, Drumstick, Hand, Heart, Pin, PinOff, Shield, Sparkles, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-/** Slot layout — the left flank, the right flank, and where each hangs on the body. */
+/** Slot order — the left flank and the right flank of the living doll. */
 const LEFT_SLOTS: { id: WearSlot; label: string }[] = [
   { id: "head", label: "Head" },
   { id: "neck", label: "Neck" },
@@ -32,6 +33,10 @@ const RIGHT_SLOTS: { id: WearSlot; label: string }[] = [
   { id: "legs", label: "Legs" },
   { id: "feet", label: "Feet" },
 ];
+
+/** Direland backpack: five columns, nine rows of dark cells, always visible. */
+const PACK_COLUMNS = 5;
+const PACK_CELLS = 45;
 
 /** Quick-bar membership toggle for the selected pack cell. */
 function PinButton({ id }: { id: ItemId }) {
@@ -52,17 +57,19 @@ function PinButton({ id }: { id: ItemId }) {
   return (
     <button
       type="button"
-      disabled={full}
+      aria-disabled={full}
       onClick={() => {
+        if (full) return;
         const storage = dockStorage();
         if (storage) saveHotbar(storage, pinned ? unpinItem(ids, id) : pinItem(ids, id));
       }}
+      aria-label={pinned ? `Unpin ${ITEM_META[id].label} from the quick bar` : full ? `Pin ${ITEM_META[id].label} — quick bar full` : `Pin ${ITEM_META[id].label} to the quick bar`}
       className={cn(
-        "min-h-9 shrink-0 rounded-[var(--radius-xs)] border px-3 text-xs",
-        pinned ? "border-gold/50 bg-gold/10 text-gold" : "border-border bg-surface-2 text-muted",
+        "grid size-11 shrink-0 place-items-center rounded-[var(--radius-xs)] border",
+        pinned ? "border-gold/50 bg-gold/10 text-gold" : full ? "border-border bg-surface-2 text-muted/40" : "border-border bg-surface-2 text-muted",
       )}
     >
-      {pinned ? "Unpin" : full ? "Bar full" : "Pin"}
+      {pinned ? <PinOff className="size-4" /> : <Pin className="size-4" />}
     </button>
   );
 }
@@ -83,21 +90,22 @@ export function ItemGlyph({ id, className }: { id: ItemId; className?: string })
   return <ItemIcon id={id} className={cn("inline-block size-3 rounded-[var(--radius-xs)] border border-border", className)} />;
 }
 
-function VitalBar({ label, value, max, color }: { label: string; value: number; max: number; color: string }) {
-  const pct = Math.max(0, Math.min(100, (value / Math.max(1, max)) * 100));
+/** An icon + number chip — vitals and stats speak in symbols. */
+function StatChip({ icon: Icon, label, value, max, className }: { icon: typeof Heart; label: string; value: number; max?: number; className?: string }) {
   return (
-    <span className="flex min-w-0 flex-1 items-center gap-1.5" title={`${label} ${Math.round(value)}/${max}`}>
-      <span className="w-11 shrink-0 text-[10px] tracking-wide text-muted uppercase">{label}</span>
-      <span className="h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-surface-2">
-        <span className={cn("block h-full", color)} style={{ width: `${pct}%` }} />
-      </span>
-      <span className="shrink-0 text-[11px] text-fg tabular-nums">{Math.round(value)}</span>
+    <span
+      className={cn("flex items-center gap-1 text-xs text-fg tabular-nums", className)}
+      title={max ? `${label} ${Math.round(value)}/${max}` : `${label} ${Math.round(value)}`}
+      aria-label={max ? `${label} ${Math.round(value)} of ${max}` : `${label} ${Math.round(value)}`}
+    >
+      <Icon className="size-3.5" aria-hidden />
+      {Math.round(value)}
     </span>
   );
 }
 
-/** One slot chip — glyph, what it holds (or the slot's name), tap to take off. */
-function SlotChip({
+/** One gear cell — the item's glyph when dressed, the slot's own glyph when bare. */
+function SlotCell({
   slot,
   label,
   id,
@@ -112,26 +120,25 @@ function SlotChip({
 }) {
   const filled = Boolean(id) || Boolean(rare);
   const tipId = rare ? rare.base : id;
+  const name = rare ? rareName(rare) : id ? ITEM_META[id].label : null;
   return (
-    <Tip content={tipId ? <ItemTipContent id={tipId} rare={rare ?? undefined} skipCompare /> : null} className="min-w-0">
+    <Tip content={tipId ? <ItemTipContent id={tipId} rare={rare ?? undefined} skipCompare /> : null}>
       <button
         type="button"
         onClick={() => filled && onUnequip(slot)}
+        aria-label={filled ? `Unequip ${name}` : `${label} — empty`}
         className={cn(
-          "flex min-h-9 w-full min-w-0 items-center gap-1.5 rounded-[var(--radius-xs)] border px-1.5 text-left",
-          rare ? "border-gold/50 bg-surface-2" : filled ? "border-border-strong bg-surface-2" : "border-border bg-surface",
+          "grid size-11 place-items-center rounded-[var(--radius-xs)] border",
+          rare ? "border-gold/50 bg-surface-2 text-gold" : filled ? "border-border-strong bg-surface-2 text-fg" : "border-border/60 bg-bg text-muted/40",
         )}
       >
-        {tipId ? <ItemGlyph id={tipId} className="shrink-0" /> : <span className="inline-block size-3 shrink-0 rounded-[var(--radius-xs)] border border-dashed border-border" />}
-        <span className={cn("truncate text-xs", rare ? "text-gold" : filled ? "text-fg" : "text-muted")}>
-          {rare ? rareName(rare) : id ? ITEM_META[id].label : label}
-        </span>
+        {tipId ? <ItemIcon id={tipId} className="size-6" /> : <GlyphIcon kind={SLOT_ICON_KIND[slot]} className="size-5" />}
       </button>
     </Tip>
   );
 }
 
-/** The little body — each part tints when dressed, gold when a wonder covers it. */
+/** The static body for reduced effects — each part tints when dressed. */
 function DollFigure({
   wear,
   rareSlots,
@@ -142,7 +149,7 @@ function DollFigure({
   const tint = (slot: WearSlot) =>
     rareSlots[slot] ? "bg-gold/70" : wear[slot] ? "bg-accent/70" : "bg-surface-2";
   return (
-    <div className="flex w-20 shrink-0 flex-col items-center gap-1 rounded-[var(--radius-sm)] border border-border bg-surface py-3">
+    <div className="flex w-20 shrink-0 flex-col items-center gap-1 py-3">
       <span className={cn("block size-3.5 rounded-full", tint("head"))} />
       <span className={cn("block h-1.5 w-4 rounded-[var(--radius-xs)]", tint("neck"))} />
       <span className={cn("block h-5 w-9 rounded-[var(--radius-xs)]", tint("chest"))} />
@@ -189,6 +196,8 @@ export function YouDressing() {
   const dressed = dressedStats(getWorld());
   const mana = snap.player?.mana ?? 0;
   const manaMax = maxMana(self.int, skills?.magery ?? 0);
+  const filledCells = rares.length + held.length;
+  const cellCount = Math.max(PACK_CELLS, Math.ceil(filledCells / PACK_COLUMNS) * PACK_COLUMNS);
   return (
     <div>
       <h2 className="font-display text-sm text-fg">{self.name}</h2>
@@ -200,39 +209,135 @@ export function YouDressing() {
           You are a ghost. A healer can return you. Ione stands at the hall. Your corpse still holds what it took.
         </p>
       ) : (
-        <div className="mt-2 space-y-1.5">
-          <VitalBar label="Health" value={self.hp} max={self.maxHp} color="bg-red-500/80" />
-          <VitalBar label="Mana" value={mana} max={manaMax} color="bg-sky-500/80" />
-          <VitalBar label="Belly" value={self.hunger} max={100} color="bg-amber-500/80" />
+        <div className="mt-2 flex items-center gap-3" aria-label="Vitals and gear">
+          <StatChip icon={Heart} label="Health" value={self.hp} max={self.maxHp} className="text-red-400" />
+          <StatChip icon={Sparkles} label="Mana" value={mana} max={manaMax} className="text-sky-400" />
+          <StatChip icon={Drumstick} label="Belly" value={self.hunger} max={100} className="text-amber-400" />
+          <span className="flex-1" aria-hidden />
+          <StatChip icon={Hand} label={`${dressed.mainLabel} — damage`} value={dressed.dmg} className="text-fg" />
+          <StatChip icon={Shield} label="Armor" value={dressed.armor} className="text-fg" />
         </div>
       )}
 
-      <p className="mt-3 font-display text-xs tracking-wider text-muted uppercase">Paperdoll</p>
-      <p className="mt-1 text-xs text-muted">
-        <span className="text-fg">{dressed.mainLabel}</span> · {dressed.dmg} damage · {dressed.armor} armor
-      </p>
-      <div className="mt-2 flex items-start gap-2">
-        <div className="flex min-w-0 flex-1 flex-col gap-1">
-          {LEFT_SLOTS.map((s) => (
-            <SlotChip key={s.id} slot={s.id} label={s.label} id={wear[s.id]} rare={rareByUid(wearRare[s.id])} onUnequip={unequip} />
-          ))}
-        </div>
-        {reducedEffects ? (
-          <DollFigure wear={wear} rareSlots={rareSlots} />
-        ) : (
-          <div className="mx-auto h-44 w-28 shrink-0 overflow-hidden rounded-[var(--radius-sm)] border border-border bg-surface-2">
-            <LivingDoll wear={wear} rareByUid={(slot) => rareByUid(wearRare[slot])} />
+      {/* The Direland block: the living doll with its gear cells, wired
+          straight into the dark backpack grid beneath — one connected surface. */}
+      <div data-testid="doll-pack" className="mt-3 overflow-hidden rounded-[var(--radius-md)] border border-border bg-surface">
+        <div className="flex items-center justify-center gap-2 px-2 py-2">
+          <div className="flex flex-col gap-1">
+            {LEFT_SLOTS.map((s) => (
+              <SlotCell key={s.id} slot={s.id} label={s.label} id={wear[s.id]} rare={rareByUid(wearRare[s.id])} onUnequip={unequip} />
+            ))}
           </div>
-        )}
-        <div className="flex min-w-0 flex-1 flex-col gap-1">
-          {RIGHT_SLOTS.map((s) => (
-            <SlotChip key={s.id} slot={s.id} label={s.label} id={wear[s.id]} rare={rareByUid(wearRare[s.id])} onUnequip={unequip} />
-          ))}
+          {reducedEffects ? (
+            <DollFigure wear={wear} rareSlots={rareSlots} />
+          ) : (
+            <div className="h-52 w-32 shrink-0 overflow-hidden rounded-[var(--radius-sm)] bg-bg">
+              <LivingDoll wear={wear} rareByUid={(slot) => rareByUid(wearRare[slot])} />
+            </div>
+          )}
+          <div className="flex flex-col gap-1">
+            {RIGHT_SLOTS.map((s) => (
+              <SlotCell key={s.id} slot={s.id} label={s.label} id={wear[s.id]} rare={rareByUid(wearRare[s.id])} onUnequip={unequip} />
+            ))}
+          </div>
         </div>
+        <ul className="grid grid-cols-5 gap-1 border-t border-border bg-bg p-1.5" data-testid="pack-grid">
+          {rares.map((r) => (
+            <li key={r.uid} data-filled="true">
+              <Tip content={<ItemTipContent id={r.base} rare={r} />}>
+                <button
+                  type="button"
+                  onClick={() => equipRare(r.uid)}
+                  aria-label={rareName(r)}
+                  className="relative grid aspect-square w-full place-items-center rounded-[var(--radius-xs)] border border-gold/60 bg-surface-2 text-fg"
+                >
+                  <ItemIcon id={r.base} className="size-7" />
+                </button>
+              </Tip>
+            </li>
+          ))}
+          {held.map((id) => (
+            <li key={id} data-filled="true">
+              <Tip content={<ItemTipContent id={id} />}>
+                <button
+                  type="button"
+                  onClick={() => setSelected(id)}
+                  aria-label={`${ITEM_META[id].label} ×${pack[id]}`}
+                  aria-pressed={selected === id}
+                  className={cn(
+                    "relative grid aspect-square w-full place-items-center rounded-[var(--radius-xs)] border text-fg",
+                    selected === id ? "border-gold bg-surface-2" : "border-border",
+                  )}
+                >
+                  <ItemIcon id={id} className="size-7" />
+                  <span className="absolute right-1 bottom-0.5 text-[10px] text-muted tabular-nums">{pack[id]}</span>
+                </button>
+              </Tip>
+            </li>
+          ))}
+          {Array.from({ length: cellCount - filledCells }, (_, i) => (
+            <li key={`empty-${i}`} aria-hidden>
+              <span className="block aspect-square w-full rounded-[var(--radius-xs)] border border-border/50" />
+            </li>
+          ))}
+        </ul>
       </div>
-      <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">
-        Tap a pack cell to choose what to do with it. Tap a worn slot to put it away.
-      </p>
+      {selected && (pack[selected] ?? 0) > 0 ? (
+        <div className="mt-1 flex items-center gap-1.5 rounded-[var(--radius-xs)] border border-border bg-surface px-1.5 py-1" data-testid="pack-actions">
+          <ItemIcon id={selected} className="size-6 shrink-0" />
+          <span className="min-w-0 flex-1" aria-hidden />
+          {packHint(selected) ? (
+            <button
+              type="button"
+              onClick={() => equip(selected)}
+              aria-label={`${packHint(selected)} ${ITEM_META[selected].label}`}
+              className="grid size-11 shrink-0 place-items-center rounded-[var(--radius-xs)] border border-gold/50 bg-gold/10 text-gold"
+            >
+              <Hand className="size-4" />
+            </button>
+          ) : null}
+          <button
+            type="button"
+            onClick={() => drop(selected)}
+            aria-label={`Drop ${ITEM_META[selected].label}`}
+            className="grid size-11 shrink-0 place-items-center rounded-[var(--radius-xs)] border border-border bg-surface-2 text-muted"
+          >
+            <Trash2 className="size-4" />
+          </button>
+          <PinButton id={selected} />
+        </div>
+      ) : null}
+      {resourceRows.length > 0 ? (
+        <ul className="mt-2 grid grid-cols-5 gap-1" aria-label="Resources" data-testid="resource-grid">
+          {resourceRows.map((resource) => {
+            const [resourceId, , grade] = resource.key.split(":") as [ResourceId, string, MaterialQuality];
+            return (
+              <li key={resource.key}>
+                <Tip content={resource.label}>
+                  <span
+                    aria-label={`${resource.label} ×${resource.count}`}
+                    className={cn(
+                      "relative grid aspect-square w-full place-items-center rounded-[var(--radius-xs)] border-2 bg-surface text-fg",
+                      GRADE_RING[grade],
+                    )}
+                  >
+                    <ResourceIcon id={resourceId} className="size-7" />
+                    <span className="absolute right-1 bottom-0.5 text-[10px] text-muted tabular-nums">{resource.count}</span>
+                  </span>
+                </Tip>
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
+      <div className="mt-3 flex gap-2">
+        <button type="button" onClick={heal} aria-label="Bandage" title="Bandage" className="grid min-h-11 flex-1 place-items-center rounded-[var(--radius-md)] border border-border bg-surface-2 text-fg">
+          <Bandage className="size-4" />
+        </button>
+        <button type="button" onClick={eat} aria-label="Eat" title="Eat" className="grid min-h-11 flex-1 place-items-center rounded-[var(--radius-md)] border border-border bg-surface-2 text-fg">
+          <Drumstick className="size-4" />
+        </button>
+      </div>
 
       <p className="mt-4 font-display text-xs tracking-wider text-muted uppercase">Skills</p>
       <ul className="mt-1 grid grid-cols-2 gap-1">
@@ -266,101 +371,6 @@ export function YouDressing() {
             </li>
           ))}
       </ul>
-
-      <p className="mt-4 font-display text-xs tracking-wider text-muted uppercase">Pack</p>
-      {rares.length > 0 ? (
-        <ul className="mt-1 grid grid-cols-6 gap-1" data-testid="pack-rares">
-          {rares.map((r) => (
-            <li key={r.uid}>
-              <Tip content={<ItemTipContent id={r.base} rare={r} />}>
-                <button
-                  type="button"
-                  onClick={() => equipRare(r.uid)}
-                  aria-label={rareName(r)}
-                  className="relative grid aspect-square w-full place-items-center rounded-[var(--radius-xs)] border border-gold/60 bg-surface-2 text-fg"
-                >
-                  <ItemIcon id={r.base} className="size-7" />
-                </button>
-              </Tip>
-            </li>
-          ))}
-        </ul>
-      ) : null}
-      <ul className="mt-1 grid grid-cols-6 gap-1" data-testid="pack-grid">
-        {held.map((id) => (
-          <li key={id}>
-            <Tip content={<ItemTipContent id={id} />}>
-              <button
-                type="button"
-                onClick={() => setSelected(id)}
-                aria-label={`${ITEM_META[id].label} ×${pack[id]}`}
-                aria-pressed={selected === id}
-                className={cn(
-                  "relative grid aspect-square w-full place-items-center rounded-[var(--radius-xs)] border bg-surface-2 text-fg",
-                  selected === id ? "border-gold" : "border-border",
-                )}
-              >
-                <ItemIcon id={id} className="size-7" />
-                <span className="absolute right-1 bottom-0.5 text-[10px] text-muted tabular-nums">{pack[id]}</span>
-              </button>
-            </Tip>
-          </li>
-        ))}
-      </ul>
-      {selected && (pack[selected] ?? 0) > 0 ? (
-        <div className="mt-1 flex items-center gap-2 rounded-[var(--radius-xs)] border border-border bg-surface px-2 py-1.5" data-testid="pack-actions">
-          <ItemIcon id={selected} className="size-5 shrink-0" />
-          <span className="min-w-0 flex-1 truncate text-xs text-fg">{ITEM_META[selected].label}</span>
-          {packHint(selected) ? (
-            <button
-              type="button"
-              onClick={() => equip(selected)}
-              className="min-h-9 shrink-0 rounded-[var(--radius-xs)] border border-gold/50 bg-gold/10 px-3 text-xs text-gold"
-            >
-              {packHint(selected)}
-            </button>
-          ) : null}
-          <button
-            type="button"
-            onClick={() => drop(selected)}
-            className="min-h-9 shrink-0 rounded-[var(--radius-xs)] border border-border bg-surface-2 px-3 text-xs text-muted"
-          >
-            Drop
-          </button>
-          <PinButton id={selected} />
-        </div>
-      ) : null}
-      {resourceRows.length > 0 ? (
-        <ul className="mt-2 grid grid-cols-6 gap-1" aria-label="Resources" data-testid="resource-grid">
-          {resourceRows.map((resource) => {
-            const [resourceId, , grade] = resource.key.split(":") as [ResourceId, string, MaterialQuality];
-            return (
-              <li key={resource.key}>
-                <Tip content={resource.label}>
-                  <span
-                    aria-label={`${resource.label} ×${resource.count}`}
-                    className={cn(
-                      "relative grid aspect-square w-full place-items-center rounded-[var(--radius-xs)] border-2 bg-surface text-fg",
-                      GRADE_RING[grade],
-                    )}
-                  >
-                    <ResourceIcon id={resourceId} className="size-7" />
-                    <span className="absolute right-1 bottom-0.5 text-[10px] text-muted tabular-nums">{resource.count}</span>
-                  </span>
-                </Tip>
-              </li>
-            );
-          })}
-        </ul>
-      ) : null}
-      <div className="mt-3 flex gap-2">
-        <button type="button" onClick={heal} className="min-h-11 flex-1 rounded-[var(--radius-md)] border border-border bg-surface-2 text-sm text-fg">
-          Bandage
-        </button>
-        <button type="button" onClick={eat} className="min-h-11 flex-1 rounded-[var(--radius-md)] border border-border bg-surface-2 text-sm text-fg">
-          Eat
-        </button>
-      </div>
     </div>
   );
 }

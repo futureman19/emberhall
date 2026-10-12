@@ -5,7 +5,7 @@
 // from the shape language (big, flat, chunky), not from painted detail.
 import type { MaterialQuality } from "../../game/resources/types.ts";
 import type { TechniqueId } from "../../game/techniques.ts";
-import type { ItemId } from "../../game/types.ts";
+import type { ItemId, WearSlot } from "../../game/types.ts";
 
 export type IconKind =
   | "axe" | "knife" | "pick" | "hoe" | "rod" | "log" | "board" | "ore" | "ingot"
@@ -191,6 +191,20 @@ export const TECHNIQUE_ICON_KIND: Readonly<Record<TechniqueId, IconKind>> = {
   bash: "bash",
   sunder: "sunder",
   doomblow: "doomblow",
+};
+
+/** Empty gear slots show the slot's glyph — symbols, not words (Direland doll). */
+export const SLOT_ICON_KIND: Readonly<Record<WearSlot, IconKind>> = {
+  head: "helm",
+  neck: "pendant",
+  chest: "armor",
+  cloak: "cloak",
+  finger: "ring",
+  main: "sword",
+  off: "shield",
+  hands: "gloves",
+  legs: "legs",
+  feet: "boots",
 };
 
 /** Grid-cell ring per material quality — grade at a glance: plain for

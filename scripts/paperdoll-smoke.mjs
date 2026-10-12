@@ -65,7 +65,8 @@ try {
     steps.dollCanvas = await page.evaluate(() => Boolean(document.querySelector(".drawer-shell canvas")));
 
     // 2. Pack grid: 4 item cells with counts; resources grid: 2 cells.
-    steps.packCells = await page.locator('[data-testid="pack-grid"] > li').count();
+    steps.packCells = await page.locator('[data-testid="pack-grid"] > li[data-filled="true"]').count();
+    steps.packSlots = await page.locator('[data-testid="pack-grid"] > li').count();
     steps.resourceCells = await page.locator('[data-testid="resource-grid"] > li').count();
 
     // 3. Select bread → action bar shows with Drop; drop one → count falls to 1.
@@ -134,7 +135,7 @@ try {
 
     await page.screenshot({ path: resolve(output, `paperdoll-${viewport.name}.png`) });
     verdict.viewports[viewport.name] = { steps, errors };
-    if (!steps.dollCanvas || steps.packCells !== 4 || steps.resourceCells !== 2 || !steps.actionBar || steps.breadAfterDrop !== 1 || !steps.holdVerb || steps.mainAfterHold !== "hatchet"
+    if (!steps.dollCanvas || steps.packCells !== 4 || steps.packSlots < 45 || steps.resourceCells !== 2 || !steps.actionBar || steps.breadAfterDrop !== 1 || !steps.holdVerb || steps.mainAfterHold !== "hatchet"
       || steps.hotbarCells !== 6 || !steps.hotbarInCluster || !steps.torchSlot || steps.mainAfterHotbar !== "torch" || !steps.hotbarGone || errors.length) {
       verdict.ok = false;
     }
