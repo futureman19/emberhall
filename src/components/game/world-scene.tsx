@@ -34,7 +34,7 @@ import { EXTRACTION_DURATION, extractionVisualProfile, getExtractionFx } from "@
 import { GATHERING_DURATION, gatheringPose, gatheringVisualProfile, getGatheringFx } from "@/game/gathering-animation";
 import { groundY as heightAt } from "@/game/height";
 import { keepStoryY } from "@/game/keep-story";
-import { getGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
+import { getGraphicsSettings, isPhoneBrowser, useGraphicsSettings } from "@/game/graphics-settings";
 import { SPELL_EFFECT_CAP, selectSpellLabel, spellEffects, spellImpactOpacityScale } from "@/game/spell-effects";
 import { SpellFlightMesh, SpellStatusMesh } from "./spell-effects-mesh";
 import { ZoneMesh } from "./zones-mesh";
@@ -96,6 +96,9 @@ function GraphicsProbe() {
         const far = scene.getObjectByName("far-horizon-trees") as THREE.InstancedMesh | undefined;
         return {
           shadows: gl.shadowMap.enabled,
+          drawCalls: gl.info.render.calls,
+          triangles: gl.info.render.triangles,
+          antialias: gl.getContext()?.getContextAttributes()?.antialias ?? null,
           farTreeCount: far?.count ?? null,
           farTreeStock:
             typeof far?.userData.stockCount === "number" ? far.userData.stockCount : null,
@@ -1950,7 +1953,7 @@ export function WorldScene() {
       data-first-person={graphics.firstPerson ? "on" : "off"}
       dpr={[1, 1.5]}
       camera={{ position: [COURT.tx + 16, 23, COURT.ty + 20], fov: 48, near: 0.2, far: 480 }}
-      gl={{ antialias: true, alpha: false }}
+      gl={{ antialias: !isPhoneBrowser(), alpha: false }}
       onContextMenu={(e) => e.preventDefault()}
       onCreated={({ gl }) => {
         gl.setClearColor("#1a1c18", 1);

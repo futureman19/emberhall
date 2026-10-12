@@ -20,6 +20,27 @@ export const DEFAULT_GRAPHICS_SETTINGS: Readonly<GraphicsSettings> = Object.free
   firstPerson: false,
 });
 
+/** Phone browsers (coarse pointer, small screen) start on the light tier —
+ *  no shadows, sparser horizon. An explicit saved choice always wins. */
+export const PHONE_GRAPHICS_SETTINGS: Readonly<GraphicsSettings> = Object.freeze({
+  shadows: false,
+  horizonTreeReduction: 15,
+  reducedEffects: false,
+  firstPerson: false,
+});
+
+let phoneTierOverride: boolean | null = null;
+/** Test hook: pin the phone-browser answer (Node has no window). */
+export function setPhoneTierOverride(value: boolean | null) {
+  phoneTierOverride = value;
+}
+
+export function isPhoneBrowser(): boolean {
+  if (phoneTierOverride !== null) return phoneTierOverride;
+  if (typeof window === "undefined" || typeof window.matchMedia !== "function") return false;
+  return window.matchMedia("(pointer: coarse)").matches && window.innerWidth < 820;
+}
+
 type ReadStorage = Pick<Storage, "getItem">;
 type WriteStorage = Pick<Storage, "setItem">;
 
@@ -47,7 +68,7 @@ function isGraphicsSettings(value: unknown): value is GraphicsSettings {
 export function loadGraphicsSettings(storage: ReadStorage): GraphicsSettings {
   try {
     const raw = storage.getItem(GRAPHICS_STORAGE_KEY);
-    if (!raw) return { ...DEFAULT_GRAPHICS_SETTINGS };
+    if (!raw) return { ...(isPhoneBrowser() ? PHONE_GRAPHICS_SETTINGS : DEFAULT_GRAPHICS_SETTINGS) };
     const parsed: unknown = JSON.parse(raw);
     return isGraphicsSettings(parsed)
       ? {
@@ -55,9 +76,9 @@ export function loadGraphicsSettings(storage: ReadStorage): GraphicsSettings {
           reducedEffects: parsed.reducedEffects ?? false,
           firstPerson: parsed.firstPerson ?? false,
         }
-      : { ...DEFAULT_GRAPHICS_SETTINGS };
+      : { ...(isPhoneBrowser() ? PHONE_GRAPHICS_SETTINGS : DEFAULT_GRAPHICS_SETTINGS) };
   } catch {
-    return { ...DEFAULT_GRAPHICS_SETTINGS };
+    return { ...(isPhoneBrowser() ? PHONE_GRAPHICS_SETTINGS : DEFAULT_GRAPHICS_SETTINGS) };
   }
 }
 

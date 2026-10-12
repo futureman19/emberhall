@@ -72,7 +72,9 @@ function assertFloatingCluster(m, vw, vh, prefix) {
   assert.ok(m.bandGone, `${prefix}: the carved band is gone`);
   assert.ok(m.cluster, `${prefix}: combat cluster floats`);
   assert.ok(Math.abs(m.cluster.x + m.cluster.width / 2 - vw / 2) <= 2, `${prefix}: cluster centered`);
-  assert.ok(Math.abs(vh - (m.cluster.y + m.cluster.height)) <= 12, `${prefix}: cluster hugs the bottom edge`);
+  if (!m.minimap) assert.ok(Math.abs(vh - (m.cluster.y + m.cluster.height)) <= 12, `${prefix}: cluster hugs the bottom edge`);
+  // Phones lift the cluster over the corner block; desktops never meet it.
+  else if (vw < 768) assert.ok(m.cluster.y + m.cluster.height <= m.minimap.y + 1, `${prefix}: cluster rides above the corner block`);
   assert.ok(m.orbHealth && m.orbMana, `${prefix}: vitals globes present`);
   assert.ok(m.orbHealth.x + m.orbHealth.width <= m.orbMana.x, `${prefix}: globes flank, health left of mana`);
   if (m.minimap) assert.equal(overlap(m.cluster, m.minimap).overlaps, false, `${prefix}: cluster clears the corner block`);
@@ -197,6 +199,8 @@ function watchErrors(page) {
 }
 try {
   const mobile = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  // A full quick bar on load: the combat cluster's widest honest case.
+  await mobile.addInitScript(() => localStorage.setItem("emberhall-hotbar-v1", JSON.stringify(["torch", "bread", "hatchet", "bandage", "potion_heal", "bow"])));
   await mobile.routeWebSocket(/.*/, () => {}); // freeze HMR while writing verification artifacts
   const mobilePage = await mobile.newPage();
   watchErrors(mobilePage);
@@ -210,6 +214,8 @@ try {
   assert.equal(mobileDefault.rail, null, "mobile default: rail folds away");
   assertFloatingCluster(mobileDefault, 390, 844, "mobile default");
   assertButtonsClear(mobileDefault.buttons, mobileDefault.minimap, "mobile default");
+  assert.equal(overlap(mobileDefault.vitals, mobileDefault.dock).overlaps, false, "mobile default: vitals chip and utility plate never collide");
+  assert.ok(mobileDefault.cluster.x >= 0 && mobileDefault.cluster.x + mobileDefault.cluster.width <= 390, "mobile default: a full combat cluster fits the viewport");
   report.cases.push({ name: "mobile-default", ...mobileDefault });
 
   await mobilePage.locator('button[aria-label="Show mini-map"]:visible').click();

@@ -6,18 +6,18 @@
       "name": "mobile-default",
       "minimap": null,
       "cluster": {
-        "x": 137,
-        "y": 788,
-        "width": 116,
-        "height": 48
+        "x": 2,
+        "y": 782,
+        "width": 386,
+        "height": 54
       },
       "rail": null,
       "drawer": null,
       "dock": {
-        "x": 138,
+        "x": 140,
         "y": 12,
-        "width": 240,
-        "height": 150
+        "width": 238,
+        "height": 100
       },
       "corner": {
         "x": 236,
@@ -28,44 +28,44 @@
       "vitals": {
         "x": 12,
         "y": 12,
-        "width": 165.671875,
-        "height": 78
+        "width": 124.3125,
+        "height": 73
       },
       "orbHealth": {
-        "x": 137,
-        "y": 788,
-        "width": 48,
-        "height": 48
+        "x": 2,
+        "y": 796,
+        "width": 40,
+        "height": 40
       },
       "orbMana": {
-        "x": 205,
-        "y": 788,
-        "width": 48,
-        "height": 48
+        "x": 348,
+        "y": 796,
+        "width": 40,
+        "height": 40
       },
       "bandGone": true,
       "buttons": {
         "Guide": {
-          "x": 233,
+          "x": 191,
           "y": 17,
           "width": 44,
           "height": 44
         },
         "Hold": {
-          "x": 281,
+          "x": 237,
           "y": 17,
           "width": 44,
           "height": 44
         },
         "Spellbook": {
-          "x": 329,
+          "x": 283,
           "y": 17,
           "width": 44,
           "height": 44
         },
         "Work": {
           "x": 329,
-          "y": 65,
+          "y": 17,
           "width": 44,
           "height": 44
         }
@@ -81,18 +81,18 @@
         "height": 112
       },
       "cluster": {
-        "x": 137,
-        "y": 788,
-        "width": 116,
-        "height": 48
+        "x": 2,
+        "y": 670,
+        "width": 386,
+        "height": 54
       },
       "rail": null,
       "drawer": null,
       "dock": {
-        "x": 138,
+        "x": 140,
         "y": 12,
-        "width": 240,
-        "height": 150
+        "width": 238,
+        "height": 100
       },
       "corner": {
         "x": 236,
@@ -103,44 +103,44 @@
       "vitals": {
         "x": 12,
         "y": 12,
-        "width": 165.671875,
-        "height": 78
+        "width": 124.3125,
+        "height": 73
       },
       "orbHealth": {
-        "x": 137,
-        "y": 788,
-        "width": 48,
-        "height": 48
+        "x": 2,
+        "y": 684,
+        "width": 40,
+        "height": 40
       },
       "orbMana": {
-        "x": 205,
-        "y": 788,
-        "width": 48,
-        "height": 48
+        "x": 348,
+        "y": 684,
+        "width": 40,
+        "height": 40
       },
       "bandGone": true,
       "buttons": {
         "Guide": {
-          "x": 233,
+          "x": 191,
           "y": 17,
           "width": 44,
           "height": 44
         },
         "Hold": {
-          "x": 281,
+          "x": 237,
           "y": 17,
           "width": 44,
           "height": 44
         },
         "Spellbook": {
-          "x": 329,
+          "x": 283,
           "y": 17,
           "width": 44,
           "height": 44
         },
         "Work": {
           "x": 329,
-          "y": 65,
+          "y": 17,
           "width": 44,
           "height": 44
         }
@@ -164,10 +164,10 @@
         "height": 712
       },
       "dock": {
-        "x": 138,
+        "x": 140,
         "y": 12,
-        "width": 240,
-        "height": 150
+        "width": 238,
+        "height": 100
       },
       "corner": {
         "x": 236,
@@ -178,34 +178,34 @@
       "vitals": {
         "x": 12,
         "y": 12,
-        "width": 165.671875,
-        "height": 78
+        "width": 124.3125,
+        "height": 73
       },
       "orbHealth": null,
       "orbMana": null,
       "bandGone": true,
       "buttons": {
         "Guide": {
-          "x": 233,
+          "x": 191,
           "y": 17,
           "width": 44,
           "height": 44
         },
         "Hold": {
-          "x": 281,
+          "x": 237,
           "y": 17,
           "width": 44,
           "height": 44
         },
         "Spellbook": {
-          "x": 329,
+          "x": 283,
           "y": 17,
           "width": 44,
           "height": 44
         },
         "Work": {
           "x": 329,
-          "y": 65,
+          "y": 17,
           "width": 44,
           "height": 44
         }
@@ -221,18 +221,18 @@
         "height": 112
       },
       "cluster": {
-        "x": 137,
-        "y": 788,
-        "width": 116,
-        "height": 48
+        "x": 2,
+        "y": 670,
+        "width": 386,
+        "height": 54
       },
       "rail": null,
       "drawer": null,
       "dock": {
-        "x": 138,
+        "x": 140,
         "y": 12,
-        "width": 240,
-        "height": 150
+        "width": 238,
+        "height": 100
       },
       "corner": {
         "x": 236,
@@ -243,44 +243,44 @@
       "vitals": {
         "x": 12,
         "y": 12,
-        "width": 174.953125,
-        "height": 78
+        "width": 124.3125,
+        "height": 73
       },
       "orbHealth": {
-        "x": 137,
-        "y": 788,
-        "width": 48,
-        "height": 48
+        "x": 2,
+        "y": 684,
+        "width": 40,
+        "height": 40
       },
       "orbMana": {
-        "x": 205,
-        "y": 788,
-        "width": 48,
-        "height": 48
+        "x": 348,
+        "y": 684,
+        "width": 40,
+        "height": 40
       },
       "bandGone": true,
       "buttons": {
         "Guide": {
-          "x": 233,
+          "x": 191,
           "y": 17,
           "width": 44,
           "height": 44
         },
         "Hold": {
-          "x": 281,
+          "x": 237,
           "y": 17,
           "width": 44,
           "height": 44
         },
         "Spellbook": {
-          "x": 329,
+          "x": 283,
           "y": 17,
           "width": 44,
           "height": 44
         },
         "Work": {
           "x": 329,
-          "y": 65,
+          "y": 17,
           "width": 44,
           "height": 44
         }
@@ -431,7 +431,7 @@
       "vitals": {
         "x": 12,
         "y": 12,
-        "width": 158.234375,
+        "width": 171.40625,
         "height": 78
       },
       "orbHealth": {
@@ -511,7 +511,7 @@
       "vitals": {
         "x": 12,
         "y": 12,
-        "width": 158.234375,
+        "width": 171.40625,
         "height": 78
       },
       "orbHealth": null,
@@ -684,7 +684,7 @@
       "vitals": {
         "x": 12,
         "y": 12,
-        "width": 158.234375,
+        "width": 171.40625,
         "height": 78
       },
       "orbHealth": {

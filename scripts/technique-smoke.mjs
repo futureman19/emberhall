@@ -53,7 +53,7 @@ try {
       world.player.skills.swords = 60;
       storeMod.useGame.setState({ phase: "playing", panel: "none", snap: liveMod.snapshot(world) });
       storeMod.useGame.getState().tick = () => {};
-    }, mods);
+    }, mods, { polling: 250 });
 
     const steps = {};
 
@@ -94,23 +94,53 @@ try {
     steps.cleaveBadge = (await cleave.textContent())?.includes("75") ?? false;
 
     // 3. Tap Lunge → armed in the world, gold ring, ready toast.
-    await page.getByRole("button", { name: "Lunge (technique)" }).click({ noWaitAfter: true });
-    await page.waitForFunction(async (store) => {
-      const storeMod = await import(store);
-      return storeMod.useGame.getState().snap && (await import("/src/game/live.ts")).getWorld().player.armedTechnique === "lunge";
-    }, mods.store);
+    // Tap by coordinates: locator.click's retry machinery can stall against
+    // the SwiftShader render loop, while raw CDP input is what a real tap is.
+    await page.evaluate(() => {
+      const chip = document.querySelector('[aria-label="Lunge (technique)"]');
+      const r = chip.getBoundingClientRect();
+      window.__tapAt = { x: r.x + r.width / 2, y: r.y + r.height / 2 };
+    });
+    const tap = await page.evaluate(() => window.__tapAt);
+    await page.mouse.click(tap.x, tap.y);
+    for (let i = 0; i < 40; i++) {
+      const pred = await page.evaluate(async (m) => {
+        const storeMod = await import(m.store);
+        const snap = storeMod.useGame.getState().snap;
+        const armed = (await import(m.live)).getWorld().player.armedTechnique;
+        return { snap: Boolean(snap), armed: armed ?? null };
+      }, mods);
+      if (pred.snap && pred.armed === "lunge") break;
+      await page.waitForTimeout(250);
+      if (i === 39) throw new Error("armed poll stuck: " + JSON.stringify(pred));
+    }
     steps.lungeArmed = await page.evaluate(async ({ live }) => {
       const liveMod = await import(live);
       return liveMod.getWorld().player.armedTechnique;
-    }, mods);
-    steps.lungeGold = await page.getByRole("button", { name: "Lunge (technique)" }).evaluate((el) => el.className.includes("border-gold"));
+    }, mods, { polling: 250 });
+    steps.lungeGold = false;
+    for (let i = 0; i < 40; i++) {
+      steps.lungeGold = await page.getByRole("button", { name: "Lunge (technique)" }).evaluate((el) => el.className.includes("border-gold"));
+      if (steps.lungeGold) break;
+      await page.waitForTimeout(250); // armed state repaints asynchronously on phones
+    }
 
     // 4. Re-tap lets go.
-    await page.getByRole("button", { name: "Lunge (technique)" }).click({ noWaitAfter: true });
-    await page.waitForFunction(async (live) => {
-      const liveMod = await import(live);
-      return liveMod.getWorld().player.armedTechnique === null;
-    }, mods.live);
+    // Tap by coordinates: locator.click's retry machinery can stall against
+    // the SwiftShader render loop, while raw CDP input is what a real tap is.
+    await page.evaluate(() => {
+      const chip = document.querySelector('[aria-label="Lunge (technique)"]');
+      const r = chip.getBoundingClientRect();
+      window.__tapAt = { x: r.x + r.width / 2, y: r.y + r.height / 2 };
+    });
+    const tap2 = await page.evaluate(() => window.__tapAt);
+    await page.mouse.click(tap2.x, tap2.y);
+    for (let i = 0; i < 40; i++) {
+      const armed = await page.evaluate(async (live) => (await import(live)).getWorld().player.armedTechnique ?? null, mods.live);
+      if (armed === null) break;
+      await page.waitForTimeout(250);
+      if (i === 39) throw new Error("disarm poll stuck");
+    }
     steps.disarmWorks = true;
 
     // 5. A cooling move counts down and refuses (aria-disabled).
@@ -119,7 +149,7 @@ try {
       const storeMod = await import(store);
       liveMod.getWorld().player.techniqueCoolUntil.riposte = liveMod.getWorld().hour + 0.5;
       storeMod.useGame.setState({ snap: liveMod.snapshot() });
-    }, mods);
+    }, mods, { polling: 250 });
     const riposte = page.getByRole("button", { name: "Riposte (technique)" });
     await page.waitForFunction(() => {
       const el = [...document.querySelectorAll('[data-testid="technique-bar"] button')].find((b) => b.getAttribute("aria-label") === "Riposte (technique)");
@@ -137,7 +167,7 @@ try {
       w.player.pack.arrows = 5;
       w.player.skills.archery = 80;
       storeMod.useGame.setState({ snap: liveMod.snapshot(w) });
-    }, mods);
+    }, mods, { polling: 250 });
     await page.waitForFunction(() => {
       return [...document.querySelectorAll('[data-testid="technique-bar"] button')].some((b) => b.getAttribute("aria-label") === "Aimed Shot (technique)");
     });
@@ -153,7 +183,7 @@ try {
       w.player.wear.main = "knife";
       w.player.skills.fencing = 50;
       storeMod.useGame.setState({ snap: liveMod.snapshot(w) });
-    }, mods);
+    }, mods, { polling: 250 });
     await page.waitForFunction(() => {
       return [...document.querySelectorAll('[data-testid="technique-bar"] button')].some((b) => b.getAttribute("aria-label") === "Flurry (technique)");
     });

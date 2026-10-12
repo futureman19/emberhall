@@ -5,6 +5,7 @@ import {
   GRAPHICS_STORAGE_KEY,
   loadGraphicsSettings,
   saveGraphicsSettings,
+  setPhoneTierOverride,
   type GraphicsSettings,
 } from "./graphics-settings.ts";
 
@@ -74,5 +75,47 @@ test("graphics settings reject malformed and unsupported values", () => {
   ]) {
     storage.values.set(GRAPHICS_STORAGE_KEY, value);
     assert.deepEqual(loadGraphicsSettings(storage), DEFAULT_GRAPHICS_SETTINGS);
+  }
+});
+
+test("phone browsers get the light tier when nothing is stored", () => {
+  setPhoneTierOverride(true);
+  try {
+    assert.deepEqual(loadGraphicsSettings(memoryStorage()), {
+      shadows: false,
+      horizonTreeReduction: 15,
+      reducedEffects: false,
+      firstPerson: false,
+    });
+  } finally {
+    setPhoneTierOverride(null);
+  }
+});
+
+test("the phone tier never overrides an explicit saved choice", () => {
+  const storage = memoryStorage();
+  storage.values.set(
+    GRAPHICS_STORAGE_KEY,
+    JSON.stringify({ shadows: true, horizonTreeReduction: 0, reducedEffects: true, firstPerson: true }),
+  );
+  setPhoneTierOverride(true);
+  try {
+    assert.deepEqual(loadGraphicsSettings(storage), {
+      shadows: true,
+      horizonTreeReduction: 0,
+      reducedEffects: true,
+      firstPerson: true,
+    });
+  } finally {
+    setPhoneTierOverride(null);
+  }
+});
+
+test("the phone tier leaves desktop defaults alone", () => {
+  setPhoneTierOverride(false);
+  try {
+    assert.deepEqual(loadGraphicsSettings(memoryStorage()), DEFAULT_GRAPHICS_SETTINGS);
+  } finally {
+    setPhoneTierOverride(null);
   }
 });

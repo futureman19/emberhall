@@ -34,7 +34,7 @@ function Orb({
       aria-valuemax={max}
       aria-valuenow={value}
       title={`${label} ${value}/${max}`}
-      className={cn("hud-glass pointer-events-auto relative size-12 overflow-hidden rounded-full md:size-14", className)}
+      className={cn("hud-glass pointer-events-auto relative size-10 overflow-hidden rounded-full md:size-14", className)}
     >
       <svg viewBox="0 0 64 64" className="size-full" aria-hidden focusable="false">
         <clipPath id={`orb-clip-${testid}`}>

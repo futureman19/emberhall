@@ -23,7 +23,7 @@ export function CombatCluster() {
   return (
     <div
       data-testid="combat-cluster"
-      className="pointer-events-none absolute bottom-[calc(8px+env(safe-area-inset-bottom))] left-1/2 flex -translate-x-1/2 items-end gap-2.5"
+      className="pointer-events-none absolute bottom-[var(--corner-clear)] left-1/2 flex -translate-x-1/2 items-end gap-1.5 md:bottom-[calc(8px+env(safe-area-inset-bottom))] md:gap-2.5"
     >
       <HealthOrb />
       <div className="flex flex-col items-center gap-1.5">
