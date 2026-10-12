@@ -3,10 +3,9 @@ import { MiniVale } from "@/components/game/vale-map";
 import { MINIMAP_CORNER } from "./frame";
 
 /**
- * The mini-map IS the corner of the L: docked at bottom-right, the band ends
- * at its left edge and the rail ends at its top — one connected frame. When
- * collapsed the band's map toggle brings it back. `open` is computed by the
- * overlay root so the band, rail and panel offsets all agree.
+ * The mini-map docks at bottom-right as a free-floating glass block — no
+ * carved frame, just the map with a thin edge. `open` is computed by the
+ * overlay root so the rail and panel offsets all agree.
  */
 export function DockedMinimap({ open, onHide }: { open: boolean; onHide: () => void }) {
   if (!open) return null;
@@ -14,7 +13,7 @@ export function DockedMinimap({ open, onHide }: { open: boolean; onHide: () => v
     <section
       aria-label="Mini-map"
       data-testid="docked-minimap"
-      className="classic-frame pointer-events-auto absolute right-0 bottom-0 border-t border-l border-border bg-bg/90"
+      className="hud-glass pointer-events-auto absolute right-0 bottom-0 overflow-hidden rounded-tl-[var(--radius-md)]"
       style={{
         width: MINIMAP_CORNER,
         height: `calc(${MINIMAP_CORNER}px + env(safe-area-inset-bottom))`,

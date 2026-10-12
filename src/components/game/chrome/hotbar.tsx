@@ -44,7 +44,7 @@ export function Hotbar() {
   return (
     <div
       data-testid="hotbar"
-      className="pointer-events-auto flex gap-1 rounded-[var(--radius-sm)] border border-border bg-bg/90 p-1"
+      className="hud-glass pointer-events-auto flex gap-1 rounded-[var(--radius-sm)] p-1"
     >
       {slots.map((id, i) => {
         if (!id) {

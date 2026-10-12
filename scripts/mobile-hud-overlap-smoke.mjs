@@ -22,7 +22,8 @@ function overlap(a, b) {
 }
 
 async function measure(page) {
-  await page.getByTestId("bottom-band").waitFor();
+  // The dock is the only always-on chrome; the combat cluster yields whenever
+  // a drawer or gump owns the screen, so it must never be awaited here.
   await page.getByTestId("bottom-dock").waitFor();
   await page.waitForTimeout(300);
   return page.evaluate(() => {
@@ -38,10 +39,15 @@ async function measure(page) {
     }
     return {
       minimap: rect(document.querySelector('[data-testid="docked-minimap"]')),
-      band: rect(document.querySelector('[data-testid="bottom-band"]')),
+      cluster: rect(document.querySelector('[data-testid="combat-cluster"]')),
       rail: rect(document.querySelector('[data-testid="right-rail"]')),
       drawer: rect(document.querySelector('[data-testid="you-drawer"]')),
       dock: rect(document.querySelector('[data-testid="bottom-dock"]')),
+      corner: rect(document.querySelector('[data-testid="corner-cluster"]')),
+      vitals: rect(document.querySelector('[data-testid="vitals-chip"]')),
+      orbHealth: rect(document.querySelector('[data-testid="orb-health"]')),
+      orbMana: rect(document.querySelector('[data-testid="orb-mana"]')),
+      bandGone: !document.querySelector('[data-testid="bottom-band"]'),
       buttons,
       dockFlag: localStorage.getItem("emberhall-minimap-dock-v1"),
     };
@@ -62,12 +68,24 @@ function assertButtonsClear(boxes, minimap, prefix) {
   }
 }
 
+function assertFloatingCluster(m, vw, vh, prefix) {
+  assert.ok(m.bandGone, `${prefix}: the carved band is gone`);
+  assert.ok(m.cluster, `${prefix}: combat cluster floats`);
+  assert.ok(Math.abs(m.cluster.x + m.cluster.width / 2 - vw / 2) <= 2, `${prefix}: cluster centered`);
+  assert.ok(Math.abs(vh - (m.cluster.y + m.cluster.height)) <= 12, `${prefix}: cluster hugs the bottom edge`);
+  assert.ok(m.orbHealth && m.orbMana, `${prefix}: vitals globes present`);
+  assert.ok(m.orbHealth.x + m.orbHealth.width <= m.orbMana.x, `${prefix}: globes flank, health left of mana`);
+  if (m.minimap) assert.equal(overlap(m.cluster, m.minimap).overlaps, false, `${prefix}: cluster clears the corner block`);
+  if (m.dock) assert.equal(overlap(m.cluster, m.dock).overlaps, false, `${prefix}: cluster clears the utility plate`);
+}
+
 function assertCorner(m, vw, vh, prefix) {
   assert.ok(m.minimap, `${prefix}: corner block present`);
   assert.ok(Math.abs(m.minimap.x + m.minimap.width - vw) <= 1, `${prefix}: block flush to the right edge`);
   assert.ok(Math.abs(m.minimap.y + m.minimap.height - vh) <= 1, `${prefix}: block flush to the bottom edge`);
-  assert.ok(Math.abs(m.band.x + m.band.width - m.minimap.x) <= 1, `${prefix}: band ends at the block's left edge`);
-  if (m.rail) assert.ok(Math.abs(m.rail.y + m.rail.height - m.minimap.y) <= 1, `${prefix}: rail ends at the block's top`);
+  assert.ok(m.corner, `${prefix}: time + map plate present`);
+  assert.ok(Math.abs(m.corner.y + m.corner.height - (m.minimap.y - 8)) <= 1, `${prefix}: time plate floats just above the block`);
+  if (m.rail) assert.ok(Math.abs(m.rail.y + m.rail.height - (m.minimap.y - 8)) <= 1, `${prefix}: rail column ends just above the block`);
 }
 
 async function classicCases(page, label, report) {
@@ -82,7 +100,7 @@ async function classicCases(page, label, report) {
     const box = await drawer.boundingBox();
     const m = await measure(page);
     assert.ok(Math.abs(box.x + box.width - width) < 1, `${label} ${panel}: flush edge`);
-    assert.equal(overlap(box, m.band).overlaps, false, `${label} ${panel}: band clear`);
+    assert.equal(m.cluster, null, `${label} ${panel}: combat cluster yields to the drawer`);
     assert.equal(overlap(box, m.minimap).overlaps, false, `${label} ${panel}: corner clear`);
     assert.equal(await drawer.evaluate((el) => { const r = el.getBoundingClientRect(); return el.contains(document.elementFromPoint(r.left + 24, r.top + 24)); }), true, `${label} ${panel}: drawer header unobscured`);
     assert.equal(await drawer.evaluate((el) => el.contains(document.activeElement)), true, `${label} ${panel}: focus enters`);
@@ -121,7 +139,7 @@ async function classicCases(page, label, report) {
     await page.waitForTimeout(200);
     const box = await el.boundingBox();
     const m = await measure(page);
-    assert.equal(overlap(box, m.band).overlaps, false);
+    assert.equal(m.cluster, null, `${label} ${surface}: combat cluster yields`);
     assert.equal(overlap(box, m.minimap).overlaps, false);
     assert.equal(await el.evaluate((node) => getComputedStyle(node).animationName), "surface-in");
     await page.locator(".classic-ui").evaluate((node) => node.setAttribute("data-effects", "reduced"));
@@ -142,10 +160,10 @@ async function classicCases(page, label, report) {
   await book.waitFor();
   const box = await book.boundingBox();
   const m = await measure(page);
-  assert.equal(overlap(box, m.band).overlaps, false);
+  assert.equal(m.cluster, null, `${label} spellbook: combat cluster yields`);
   assert.equal(overlap(box, m.minimap).overlaps, false);
   assert.equal(overlap(box, m.rail).overlaps, false);
-  assert.equal(await book.evaluate((el) => getComputedStyle(el).backgroundImage.includes("rgb(17, 17, 16)")), false, "parchment material wins over black frame gradient");
+  assert.equal(await book.evaluate((el) => getComputedStyle(el).backgroundImage.includes("rgb(17, 17, 16)")), false, "parchment material wins over dark glass");
   await page.screenshot({ path: join(outDir, `after-${label}-spellbook.png`) });
   await page.evaluate(() => window.__ember.useGame.getState().closeBook());
   report.cases.push({ name: `${label}-spellbook-parchment`, box });
@@ -155,13 +173,13 @@ async function classicCases(page, label, report) {
     await surface.waitFor();
     const bounds = await surface.boundingBox();
     const frame = await measure(page);
-    assert.equal(overlap(bounds, frame.band).overlaps, false, `${label} ${name}: band clear`);
+    assert.equal(frame.cluster, null, `${label} ${name}: combat cluster yields`);
     assert.equal(overlap(bounds, frame.minimap).overlaps, false, `${label} ${name}: corner clear`);
     assert.equal(overlap(bounds, frame.rail).overlaps, false, `${label} ${name}: rail clear`);
     await page.evaluate((key) => window.__ember.useGame.setState({ [key]: false }), state);
     report.cases.push({ name: `${label}-${name}-clearance`, box: bounds });
   }
-  const pointer = await page.locator(".classic-ui").evaluate((node) => ({ root: getComputedStyle(node).pointerEvents, island: getComputedStyle(node.querySelector('[data-testid="bottom-band"]')).pointerEvents }));
+  const pointer = await page.locator(".classic-ui").evaluate((node) => ({ root: getComputedStyle(node).pointerEvents, island: getComputedStyle(node.querySelector('[data-testid="bottom-dock"]')).pointerEvents }));
   assert.deepEqual(pointer, { root: "none", island: "auto" });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await guide.click();
@@ -190,7 +208,7 @@ try {
   await mobilePage.screenshot({ path: join(outDir, "after-mobile.png") });
   assert.equal(mobileDefault.minimap, null, "mobile default: minimap starts collapsed");
   assert.equal(mobileDefault.rail, null, "mobile default: rail folds away");
-  assert.ok(mobileDefault.band && mobileDefault.band.height >= 56, "mobile default: band present");
+  assertFloatingCluster(mobileDefault, 390, 844, "mobile default");
   assertButtonsClear(mobileDefault.buttons, mobileDefault.minimap, "mobile default");
   report.cases.push({ name: "mobile-default", ...mobileDefault });
 
@@ -198,6 +216,7 @@ try {
   const mobileShown = await measure(mobilePage);
   await mobilePage.screenshot({ path: join(outDir, "after-mobile-map.png") });
   assertCorner(mobileShown, 390, 844, "mobile map shown");
+  assertFloatingCluster(mobileShown, 390, 844, "mobile map shown");
   assertButtonsClear(mobileShown.buttons, mobileShown.minimap, "mobile map shown");
   report.cases.push({ name: "mobile-map-shown", ...mobileShown });
 
@@ -206,7 +225,8 @@ try {
   await mobilePage.screenshot({ path: join(outDir, "after-mobile-drawer.png") });
   assert.ok(mobileDrawer.drawer, "mobile: You pops the drawer");
   assert.ok(Math.abs(mobileDrawer.drawer.x + mobileDrawer.drawer.width - 390) <= 1, "mobile: drawer flush to the right edge");
-  assert.equal(overlap(mobileDrawer.drawer, mobileDrawer.band).overlaps, false, "mobile: drawer clears the band");
+  assert.equal(mobileDrawer.cluster, null, "mobile: combat cluster yields to the drawer");
+  assert.equal(overlap(mobileDrawer.drawer, mobileDrawer.minimap).overlaps, false, "mobile: drawer clears the corner block");
   await mobilePage.keyboard.press("Escape");
   const mobileDrawerClosed = await measure(mobilePage);
   assert.equal(mobileDrawerClosed.drawer, null, "mobile: Escape puts the drawer away");
@@ -216,6 +236,7 @@ try {
   await play(mobilePage);
   const mobilePersist = await measure(mobilePage);
   assertCorner(mobilePersist, 390, 844, "mobile persisted-open");
+  assertFloatingCluster(mobilePersist, 390, 844, "mobile persisted-open");
   assertButtonsClear(mobilePersist.buttons, mobilePersist.minimap, "mobile persisted-open");
   report.cases.push({ name: "mobile-persisted-open", ...mobilePersist });
   await classicCases(mobilePage, "mobile", report);
@@ -234,8 +255,8 @@ try {
   const desktopDefault = await measure(desktopPage);
   await desktopPage.screenshot({ path: join(outDir, "after-desktop.png") });
   assertCorner(desktopDefault, 1440, 960, "desktop default");
+  assertFloatingCluster(desktopDefault, 1440, 960, "desktop default");
   assertButtonsClear(desktopDefault.buttons, desktopDefault.minimap, "desktop default");
-  assert.equal(overlap(desktopDefault.minimap, desktopDefault.band).overlaps, false, "desktop: block and band share an edge, not area");
   report.cases.push({ name: "desktop-default", ...desktopDefault });
 
   await desktopPage.locator('button[aria-label="You — pack, paperdoll, skills"]:visible').click();
@@ -243,7 +264,7 @@ try {
   await desktopPage.screenshot({ path: join(outDir, "after-desktop-drawer.png") });
   assert.ok(desktopDrawer.drawer, "desktop: You pops the drawer");
   assert.ok(Math.abs(desktopDrawer.drawer.x + desktopDrawer.drawer.width - 1440) <= 1, "desktop: drawer flush to the right edge");
-  assert.equal(overlap(desktopDrawer.drawer, desktopDrawer.band).overlaps, false, "desktop: drawer clears the band");
+  assert.equal(desktopDrawer.cluster, null, "desktop: combat cluster yields to the drawer");
   assert.equal(overlap(desktopDrawer.drawer, desktopDrawer.minimap).overlaps, false, "desktop: drawer clears the corner block");
   await desktopPage.keyboard.press("Escape");
   const desktopDrawerClosed = await measure(desktopPage);
@@ -255,8 +276,9 @@ try {
   const desktopHidden = await measure(desktopPage);
   await desktopPage.screenshot({ path: join(outDir, "after-desktop-map-hidden.png") });
   assert.equal(desktopHidden.minimap, null, "desktop: corner toggle collapses the block");
-  assert.ok(Math.abs(desktopHidden.band.x + desktopHidden.band.width - 1440) <= 1, "desktop: band spans full width once the block tucks away");
-  assert.ok(Math.abs(desktopHidden.rail.y + desktopHidden.rail.height - desktopHidden.band.y) <= 1, "desktop: rail meets the band when the block tucks away");
+  assertFloatingCluster(desktopHidden, 1440, 960, "desktop map hidden");
+  assert.ok(Math.abs(desktopHidden.rail.y + desktopHidden.rail.height - (960 - 8)) <= 1, "desktop: rail column ends at the bottom gap once the block tucks away");
+  assert.ok(Math.abs(desktopHidden.corner.y + desktopHidden.corner.height - (960 - 8)) <= 1, "desktop: time plate floats at the corner once the block tucks away");
   report.cases.push({ name: "desktop-map-hidden", ...desktopHidden });
   await classicCases(desktopPage, "desktop", report);
   await desktop.close();

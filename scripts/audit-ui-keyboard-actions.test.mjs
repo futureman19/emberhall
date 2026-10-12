@@ -6,7 +6,8 @@ const read = (p) => readFileSync(new URL(p, import.meta.url), "utf8").replaceAll
 const actions = read("../src/components/game/actions-panel.tsx");
 const targets = read("../src/components/game/actions-targets.ts");
 const hud = read("../src/components/game/hud.tsx");
-const band = read("../src/components/game/chrome/band.tsx");
+const dock = read("../src/components/game/chrome/utility-cluster.tsx");
+const orbs = read("../src/components/game/chrome/orb-vitals.tsx");
 
 test("actions targets come from existing snapshot entities and tile scans only", () => {
   assert.match(targets, /snap\.people/);
@@ -35,16 +36,17 @@ test("keyboard shortcut is the period key, ignores typing contexts and key repea
 });
 
 test("dock exposes the actions toggle with state", () => {
-  assert.match(band, /aria-label="Nearby actions — keyboard: period"/);
-  assert.match(band, /aria-expanded=\{actionsOpen\}/);
+  assert.match(dock, /aria-label="Nearby actions — keyboard: period"/);
+  assert.match(dock, /aria-expanded=\{actionsOpen\}/);
 });
 
-test("vitals are meters with numeric values", () => {
-  assert.match(band, /role="meter"/);
-  assert.match(band, /aria-label="Health"/);
-  assert.match(band, /aria-label="Mana"/);
-  assert.match(band, /aria-valuenow=\{/);
-  assert.match(band, /aria-valuemax=\{/);
+test("vital globes are meters with numeric values", () => {
+  assert.match(orbs, /role="meter"/);
+  assert.match(orbs, /aria-label=\{label\}/);
+  assert.match(orbs, /aria-valuenow=\{/);
+  assert.match(orbs, /aria-valuemax=\{/);
+  assert.match(orbs, /label="Health"/);
+  assert.match(orbs, /label="Mana"/);
 });
 
 test("reading tabs follow the tabs pattern with arrow-key movement and panels", () => {

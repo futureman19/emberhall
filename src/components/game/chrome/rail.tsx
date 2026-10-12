@@ -3,7 +3,6 @@ import { toggleFirstPerson } from "@/game/first-person-view";
 import { getGraphicsSettings, updateGraphicsSettings, useGraphicsSettings } from "@/game/graphics-settings";
 import { useGame } from "@/game/store";
 import { cn } from "@/lib/utils";
-import { BAND_HEIGHT, MINIMAP_CORNER, RAIL_WIDTH } from "./frame";
 import { MusicToggle, SfxToggle } from "./sound-toggles";
 
 export function YouButton() {
@@ -14,7 +13,7 @@ export function YouButton() {
       type="button"
       onClick={() => setPanel("you")}
       className={cn(
-        "pointer-events-auto relative grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
+        "hud-glass pointer-events-auto relative grid size-11 place-items-center rounded-[var(--radius-md)] text-muted",
         panel === "you" && "bg-surface-2 text-fg",
       )}
       aria-label="You — pack, paperdoll, skills"
@@ -32,7 +31,7 @@ export function SettingsButton() {
       type="button"
       onClick={toggleSettings}
       className={cn(
-        "pointer-events-auto relative grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
+        "hud-glass pointer-events-auto relative grid size-11 place-items-center rounded-[var(--radius-md)] text-muted",
         open && "bg-surface-2 text-fg",
       )}
       aria-label="Settings — sound, graphics and the Vault"
@@ -50,7 +49,7 @@ export function FirstPersonChip() {
       type="button"
       onClick={() => updateGraphicsSettings({ firstPerson: toggleFirstPerson(getGraphicsSettings().firstPerson) })}
       className={cn(
-        "pointer-events-auto grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
+        "hud-glass pointer-events-auto grid size-11 place-items-center rounded-[var(--radius-md)] text-muted",
         firstPerson && "bg-surface-2 text-fg",
       )}
       aria-pressed={firstPerson}
@@ -68,7 +67,7 @@ export function MapToggle({ collapsed, onToggle }: { collapsed: boolean; onToggl
       type="button"
       onClick={onToggle}
       className={cn(
-        "pointer-events-auto grid size-11 place-items-center rounded-[var(--radius-md)] border border-border bg-bg/80 text-muted",
+        "hud-glass pointer-events-auto grid size-11 place-items-center rounded-[var(--radius-md)] text-muted",
         !collapsed && "bg-surface-2 text-fg",
       )}
       aria-label={collapsed ? "Show mini-map" : "Hide mini-map"}
@@ -80,16 +79,12 @@ export function MapToggle({ collapsed, onToggle }: { collapsed: boolean; onToggl
   );
 }
 
-/** The right edge of the L: panel toggles above, sound at the foot. Desktop only. */
-export function Rail({ mapCollapsed }: { mapCollapsed: boolean }) {
+/** The right edge, floating: personal toggles in a frameless glass column. */
+export function Rail() {
   return (
     <div
       data-testid="right-rail"
-      className="classic-frame pointer-events-auto absolute top-0 right-0 hidden flex-col items-center gap-1 border-l border-border bg-bg/90 p-2 md:flex"
-      style={{
-        width: RAIL_WIDTH,
-        bottom: `calc(${mapCollapsed ? BAND_HEIGHT : MINIMAP_CORNER}px + env(safe-area-inset-bottom))`,
-      }}
+      className="pointer-events-none absolute top-2 right-1.5 bottom-[var(--corner-clear)] hidden flex-col items-center gap-1.5 md:flex"
     >
       <YouButton />
       <SettingsButton />

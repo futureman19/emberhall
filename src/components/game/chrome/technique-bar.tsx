@@ -30,7 +30,7 @@ export function TechniqueBar() {
   return (
     <div
       data-testid="technique-bar"
-      className="pointer-events-auto flex gap-1.5 rounded-[var(--radius-sm)] border border-border bg-bg/90 p-1"
+      className="hud-glass pointer-events-auto flex gap-1.5 rounded-[var(--radius-sm)] p-1"
     >
       {kit.map((t) => {
         const unlocked = techniqueUnlocked(w, t.id);

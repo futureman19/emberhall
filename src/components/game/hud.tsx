@@ -1,5 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { Band } from "@/components/game/chrome/band";
+import { CombatCluster } from "@/components/game/chrome/combat-cluster";
+import { CornerCluster } from "@/components/game/chrome/corner-cluster";
+import { UtilityCluster } from "@/components/game/chrome/utility-cluster";
+import { VitalsChip } from "@/components/game/chrome/vitals-chip";
 import { DockedMinimap } from "@/components/game/chrome/docked-minimap";
 import { cornerClearance } from "@/components/game/chrome/frame";
 import { Rail } from "@/components/game/chrome/rail";
@@ -97,13 +100,11 @@ function PlayingChrome() {
       className="classic-ui pointer-events-none absolute inset-0 z-50"
       style={{ ["--corner-clear" as string]: `${cornerClearance(mapOpen)}px` }}
     >
-      <Band
-        actionsOpen={actionsOpen}
-        onToggleActions={() => setActionsOpen((v) => !v)}
-        mapOpen={mapOpen}
-        onToggleMap={dock.toggle}
-      />
-      <Rail mapCollapsed={!mapOpen} />
+      <VitalsChip />
+      <UtilityCluster actionsOpen={actionsOpen} onToggleActions={() => setActionsOpen((v) => !v)} />
+      <CombatCluster />
+      <CornerCluster mapOpen={mapOpen} onToggleMap={dock.toggle} />
+      <Rail />
       <SidePanel />
       <SelectedCard />
       <PileGump />
@@ -510,7 +511,7 @@ function SelectedCard() {
   if (!p && !c) return null;
   if (p?.role) return null;
   return (
-    <div data-ui-surface="selected" className="classic-frame surface-in pointer-events-auto absolute right-3 bottom-[var(--corner-clear)] w-52 rounded-[var(--radius-md)] border border-border bg-bg/90 p-3 md:right-[68px]">
+    <div data-ui-surface="selected" className="hud-glass surface-in pointer-events-auto absolute right-3 bottom-[var(--corner-clear)] w-52 rounded-[var(--radius-md)] border border-border bg-bg/90 p-3 md:right-[68px]">
       <p className="font-display text-sm text-fg">{p?.name ?? c?.kind}</p>
       <p className="text-xs text-muted">{p ? CLASS_META[p.cls].label : c?.task}</p>
     </div>
@@ -527,7 +528,7 @@ function GhostBanner() {
   const dist = corpse ? Math.round(Math.hypot(corpse.tx - x, corpse.ty - z)) : 0;
   const place = corpse ? regionAt(corpse.tx, corpse.ty).name : "";
   return (
-    <div data-ui-surface="ghost" className="classic-frame surface-in pointer-events-auto absolute bottom-[var(--corner-clear)] left-1/2 w-[min(100%-1.5rem,24rem)] -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/92 p-3">
+    <div data-ui-surface="ghost" className="hud-glass surface-in pointer-events-auto absolute bottom-[var(--corner-clear)] left-1/2 w-[min(100%-1.5rem,24rem)] -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/92 p-3">
       <p className="text-center font-display text-sm text-fg">You are a ghost.</p>
       <p className="mt-1 text-center text-pretty text-xs leading-relaxed text-muted">
         {corpse

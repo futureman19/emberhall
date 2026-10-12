@@ -19,17 +19,21 @@
     "src/components/game/campfire-meshes.tsx",
     "src/components/game/cemetery-mist.tsx",
     "src/components/game/character-facing.ts",
-    "src/components/game/chrome/band.tsx",
+    "src/components/game/chrome/combat-cluster.tsx",
+    "src/components/game/chrome/corner-cluster.tsx",
     "src/components/game/chrome/docked-minimap.tsx",
     "src/components/game/chrome/drawer-shell.tsx",
     "src/components/game/chrome/frame.ts",
     "src/components/game/chrome/hotbar-dock.ts",
     "src/components/game/chrome/hotbar.tsx",
     "src/components/game/chrome/minimap-dock.ts",
+    "src/components/game/chrome/orb-vitals.tsx",
     "src/components/game/chrome/rail.tsx",
     "src/components/game/chrome/sound-toggles.tsx",
     "src/components/game/chrome/technique-bar.tsx",
     "src/components/game/chrome/use-minimap-dock.ts",
+    "src/components/game/chrome/utility-cluster.tsx",
+    "src/components/game/chrome/vitals-chip.tsx",
     "src/components/game/chrome/you-drawer.tsx",
     "src/components/game/civic-character.ts",
     "src/components/game/commons-kit.ts",
@@ -641,14 +645,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -658,7 +662,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -753,14 +757,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -770,7 +774,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -1110,14 +1114,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1127,7 +1131,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -1280,14 +1284,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1297,7 +1301,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -1392,14 +1396,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1409,7 +1413,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -1731,14 +1735,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1748,7 +1752,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -2055,14 +2059,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2072,7 +2076,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -2405,14 +2409,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2422,7 +2426,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -2517,14 +2521,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2534,7 +2538,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -2701,14 +2705,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2718,7 +2722,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -2813,14 +2817,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2830,7 +2834,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -2925,14 +2929,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2942,7 +2946,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -3037,14 +3041,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3054,7 +3058,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -3381,14 +3385,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3398,7 +3402,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -3645,14 +3649,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3662,7 +3666,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -3815,14 +3819,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3832,7 +3836,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -3927,14 +3931,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3944,7 +3948,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -4039,14 +4043,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4056,7 +4060,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -4151,14 +4155,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4168,7 +4172,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -4263,14 +4267,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4280,7 +4284,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -4610,14 +4614,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4627,7 +4631,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -4722,14 +4726,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4739,7 +4743,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -4834,14 +4838,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4851,7 +4855,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -4946,14 +4950,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/band.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:2",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4963,7 +4967,7 @@
       "surfaces": [
         "src/components/game/architecture-kit.ts",
         "src/components/game/building-meshes.tsx",
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/vitals-chip.tsx",
         "src/components/game/commons-kit.ts",
         "src/components/game/hold-panel.tsx",
         "src/components/game/hospitality-kit.ts",
@@ -8178,7 +8182,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8232,7 +8236,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8286,7 +8290,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8340,7 +8344,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8394,7 +8398,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8448,7 +8452,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8502,7 +8506,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8556,7 +8560,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8610,7 +8614,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8664,7 +8668,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8718,7 +8722,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8772,7 +8776,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8826,7 +8830,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8880,7 +8884,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8934,7 +8938,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8988,7 +8992,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9042,7 +9046,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9096,7 +9100,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9150,7 +9154,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9204,7 +9208,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9258,7 +9262,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9312,7 +9316,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9366,7 +9370,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9420,7 +9424,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9474,7 +9478,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9528,7 +9532,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9582,7 +9586,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9636,7 +9640,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9690,7 +9694,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9744,7 +9748,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9798,7 +9802,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9852,7 +9856,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9906,7 +9910,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9960,7 +9964,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10014,7 +10018,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10068,7 +10072,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10122,7 +10126,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10176,7 +10180,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:26",
+        "src/components/game/hud.tsx:29",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10232,7 +10236,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10295,7 +10299,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10358,7 +10362,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10421,7 +10425,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10484,7 +10488,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:24",
+        "src/components/game/hud.tsx:27",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -33440,75 +33444,17 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
-      "id": "renderer-helper:src/components/game/chrome/band.tsx#clockLabel",
-      "canonicalId": "src/components/game/chrome/band.tsx#clockLabel",
-      "family": "renderer-helper",
-      "catalogSources": [
-        "src/components/game/chrome/band.tsx:15"
-      ],
-      "sourceNames": [
-        "clockLabel"
-      ],
-      "rendererLocations": [
-        "src/components/game/chrome/band.tsx:15"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/chrome/band.tsx"
-      ],
-      "jsxTags": [],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/chrome/band.tsx:13"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/chrome/band.tsx:13"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/chrome/band.tsx:13"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
       "id": "renderer-helper:src/components/game/chrome/frame.ts#cornerClearance",
       "canonicalId": "src/components/game/chrome/frame.ts#cornerClearance",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/chrome/frame.ts:31"
+        "src/components/game/chrome/frame.ts:29"
       ],
       "sourceNames": [
         "cornerClearance"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/frame.ts:31"
+        "src/components/game/chrome/frame.ts:29"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -33568,13 +33514,13 @@
       "canonicalId": "src/components/game/chrome/frame.ts#defaultMinimapCollapsed",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/chrome/frame.ts:21"
+        "src/components/game/chrome/frame.ts:20"
       ],
       "sourceNames": [
         "defaultMinimapCollapsed"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/frame.ts:21"
+        "src/components/game/chrome/frame.ts:20"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -33626,13 +33572,13 @@
       "canonicalId": "src/components/game/chrome/frame.ts#frameMode",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/chrome/frame.ts:16"
+        "src/components/game/chrome/frame.ts:15"
       ],
       "sourceNames": [
         "frameMode"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/frame.ts:16"
+        "src/components/game/chrome/frame.ts:15"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -34409,6 +34355,64 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/chrome/use-minimap-dock.ts:6"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/chrome/vitals-chip.tsx#clockLabel",
+      "canonicalId": "src/components/game/chrome/vitals-chip.tsx#clockLabel",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/chrome/vitals-chip.tsx:6"
+      ],
+      "sourceNames": [
+        "clockLabel"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/vitals-chip.tsx:6"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/vitals-chip.tsx"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/vitals-chip.tsx:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/vitals-chip.tsx:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/vitals-chip.tsx:6"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -37298,13 +37302,13 @@
       "canonicalId": "src/components/game/hud.tsx#startHall",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/hud.tsx:143"
+        "src/components/game/hud.tsx:144"
       ],
       "sourceNames": [
         "startHall"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:143"
+        "src/components/game/hud.tsx:144"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -48093,28 +48097,27 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
-      "id": "renderer:src/components/game/chrome/band.tsx#ActionCluster",
-      "canonicalId": "src/components/game/chrome/band.tsx#ActionCluster",
+      "id": "renderer:src/components/game/chrome/combat-cluster.tsx#CombatCluster",
+      "canonicalId": "src/components/game/chrome/combat-cluster.tsx#CombatCluster",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/chrome/band.tsx:145"
+        "src/components/game/chrome/combat-cluster.tsx:13"
       ],
       "sourceNames": [
-        "ActionCluster"
+        "CombatCluster"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/band.tsx:145"
+        "src/components/game/chrome/combat-cluster.tsx:13"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
-        "src/components/game/chrome/band.tsx"
+        "src/components/game/chrome/combat-cluster.tsx"
       ],
       "jsxTags": [
-        "Anvil",
-        "Hand",
-        "Icon",
-        "ScrollText",
-        "button",
+        "HealthOrb",
+        "Hotbar",
+        "ManaOrb",
+        "TechniqueBar",
         "div"
       ],
       "states": [
@@ -48122,7 +48125,15 @@
           "id": "catalog-or-current-presentation",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/chrome/band.tsx:82"
+            "src/components/game/chrome/combat-cluster.tsx:13"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:busy",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/combat-cluster.tsx:13"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -48130,7 +48141,7 @@
           "id": "present",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/chrome/band.tsx:82"
+            "src/components/game/chrome/combat-cluster.tsx:13"
           ],
           "applicability": "source contract; runtime unverified"
         }
@@ -48152,120 +48163,31 @@
       },
       "status": "inventoried",
       "evidence": [
-        "src/components/game/chrome/band.tsx:82"
+        "src/components/game/chrome/combat-cluster.tsx:13"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
-      "id": "renderer:src/components/game/chrome/band.tsx#Band",
-      "canonicalId": "src/components/game/chrome/band.tsx#Band",
+      "id": "renderer:src/components/game/chrome/corner-cluster.tsx#CornerCluster",
+      "canonicalId": "src/components/game/chrome/corner-cluster.tsx#CornerCluster",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/chrome/band.tsx:222"
+        "src/components/game/chrome/corner-cluster.tsx:12"
       ],
       "sourceNames": [
-        "Band"
+        "CornerCluster"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/band.tsx:222"
+        "src/components/game/chrome/corner-cluster.tsx:12"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
-        "src/components/game/chrome/band.tsx"
-      ],
-      "jsxTags": [
-        "ActionCluster",
-        "FirstPersonChip",
-        "Hotbar",
-        "MapToggle",
-        "MusicToggle",
-        "SettingsButton",
-        "SfxToggle",
-        "TechniqueBar",
-        "TimeCluster",
-        "VitalsBox",
-        "VitalsStrip",
-        "YouButton",
-        "div"
-      ],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/chrome/band.tsx:159"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:mapOpen",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/chrome/band.tsx:220"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/chrome/band.tsx:159"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": "art/blender/forged-oak/emberhall-forged-oak.blend",
-        "script": "art/blender/forged-oak/build_gui.py",
-        "export": "public/art/gui/forged-oak/band.png",
-        "parts": [
-          "A | repeatable oak-and-iron band",
-          "C | recessed action slot"
-        ],
-        "materials": [
-          "Blender-baked oak, brass and dark iron"
-        ],
-        "attachments": "CSS-only relief texture; existing frame geometry and pointer islands unchanged",
-        "lods": [
-          "Raster background; no runtime 3D geometry"
-        ]
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "integrated",
-      "evidence": [
-        "src/components/game/chrome/band.tsx:159",
-        "public/art/gui/forged-oak/manifest.json",
-        "art/verification/forged-oak/report.json",
-        "art/blender/forged-oak/README.md"
-      ],
-      "batchOwner": "forged-oak-gui",
-      "notes": "User selected the Forged Oak visual prototype. Integrated raster art only: band/map surround and band/rail icon buttons. Other window chrome and world renderer retained. Per-state source inventory is not promoted to complete gameplay verification."
-    },
-    {
-      "id": "renderer:src/components/game/chrome/band.tsx#TimeCluster",
-      "canonicalId": "src/components/game/chrome/band.tsx#TimeCluster",
-      "family": "renderer",
-      "catalogSources": [
-        "src/components/game/chrome/band.tsx:196"
-      ],
-      "sourceNames": [
-        "TimeCluster"
-      ],
-      "rendererLocations": [
-        "src/components/game/chrome/band.tsx:196"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/chrome/band.tsx"
+        "src/components/game/chrome/corner-cluster.tsx"
       ],
       "jsxTags": [
         "FastForward",
+        "MapToggle",
         "Pause",
         "Play",
         "button",
@@ -48276,7 +48198,7 @@
           "id": "catalog-or-current-presentation",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/chrome/band.tsx:133"
+            "src/components/game/chrome/corner-cluster.tsx:12"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -48284,7 +48206,7 @@
           "id": "predicate:cur === 0",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/chrome/band.tsx:133"
+            "src/components/game/chrome/corner-cluster.tsx:12"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -48292,7 +48214,7 @@
           "id": "predicate:cur === 3",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/chrome/band.tsx:133"
+            "src/components/game/chrome/corner-cluster.tsx:12"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -48300,7 +48222,7 @@
           "id": "present",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/chrome/band.tsx:133"
+            "src/components/game/chrome/corner-cluster.tsx:12"
           ],
           "applicability": "source contract; runtime unverified"
         }
@@ -48322,181 +48244,7 @@
       },
       "status": "inventoried",
       "evidence": [
-        "src/components/game/chrome/band.tsx:133"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer:src/components/game/chrome/band.tsx#VitalsBox",
-      "canonicalId": "src/components/game/chrome/band.tsx#VitalsBox",
-      "family": "renderer",
-      "catalogSources": [
-        "src/components/game/chrome/band.tsx:22"
-      ],
-      "sourceNames": [
-        "VitalsBox"
-      ],
-      "rendererLocations": [
-        "src/components/game/chrome/band.tsx:22"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/chrome/band.tsx"
-      ],
-      "jsxTags": [
-        "button",
-        "div",
-        "p",
-        "span"
-      ],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/chrome/band.tsx:20"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:ghost",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/chrome/band.tsx:20"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:inside",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/chrome/band.tsx:20"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:self",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/chrome/band.tsx:20"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/chrome/band.tsx:20"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/chrome/band.tsx:20"
-      ],
-      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
-      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
-    },
-    {
-      "id": "renderer:src/components/game/chrome/band.tsx#VitalsStrip",
-      "canonicalId": "src/components/game/chrome/band.tsx#VitalsStrip",
-      "family": "renderer",
-      "catalogSources": [
-        "src/components/game/chrome/band.tsx:85"
-      ],
-      "sourceNames": [
-        "VitalsStrip"
-      ],
-      "rendererLocations": [
-        "src/components/game/chrome/band.tsx:85"
-      ],
-      "rendererMapping": "direct AST declaration/name",
-      "surfaces": [
-        "src/components/game/chrome/band.tsx"
-      ],
-      "jsxTags": [
-        "button",
-        "div",
-        "p",
-        "span"
-      ],
-      "states": [
-        {
-          "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/chrome/band.tsx:83"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:ghost",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/chrome/band.tsx:83"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:inside",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/chrome/band.tsx:83"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:self",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/chrome/band.tsx:83"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "present",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/chrome/band.tsx:83"
-          ],
-          "applicability": "source contract; runtime unverified"
-        }
-      ],
-      "source": {
-        "blend": null,
-        "script": null,
-        "export": null,
-        "parts": null,
-        "materials": null,
-        "attachments": null,
-        "lods": null
-      },
-      "metrics": {
-        "bounds": null,
-        "bytes": null,
-        "triangles": null,
-        "materialSlots": null
-      },
-      "status": "inventoried",
-      "evidence": [
-        "src/components/game/chrome/band.tsx:83"
+        "src/components/game/chrome/corner-cluster.tsx:12"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -48681,17 +48429,220 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "renderer:src/components/game/chrome/orb-vitals.tsx#HealthOrb",
+      "canonicalId": "src/components/game/chrome/orb-vitals.tsx#HealthOrb",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/orb-vitals.tsx:60"
+      ],
+      "sourceNames": [
+        "HealthOrb"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/orb-vitals.tsx:60"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/orb-vitals.tsx"
+      ],
+      "jsxTags": [
+        "Orb"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/orb-vitals.tsx:60"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:ghost",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/orb-vitals.tsx:60"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/orb-vitals.tsx:60"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/orb-vitals.tsx:60"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/orb-vitals.tsx#ManaOrb",
+      "canonicalId": "src/components/game/chrome/orb-vitals.tsx#ManaOrb",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/orb-vitals.tsx:69"
+      ],
+      "sourceNames": [
+        "ManaOrb"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/orb-vitals.tsx:69"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/orb-vitals.tsx"
+      ],
+      "jsxTags": [
+        "Orb"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/orb-vitals.tsx:69"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/orb-vitals.tsx:69"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/orb-vitals.tsx:69"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/orb-vitals.tsx#Orb",
+      "canonicalId": "src/components/game/chrome/orb-vitals.tsx#Orb",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/orb-vitals.tsx:10"
+      ],
+      "sourceNames": [
+        "Orb"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/orb-vitals.tsx:10"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/orb-vitals.tsx"
+      ],
+      "jsxTags": [
+        "circle",
+        "clipPath",
+        "div",
+        "ellipse",
+        "g",
+        "rect",
+        "span",
+        "svg"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/orb-vitals.tsx:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:max > 0",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/orb-vitals.tsx:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/orb-vitals.tsx:10"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/orb-vitals.tsx:10"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "renderer:src/components/game/chrome/rail.tsx#FirstPersonChip",
       "canonicalId": "src/components/game/chrome/rail.tsx#FirstPersonChip",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/chrome/rail.tsx:46"
+        "src/components/game/chrome/rail.tsx:45"
       ],
       "sourceNames": [
         "FirstPersonChip"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/rail.tsx:46"
+        "src/components/game/chrome/rail.tsx:45"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -48754,13 +48705,13 @@
       "canonicalId": "src/components/game/chrome/rail.tsx#MapToggle",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/chrome/rail.tsx:65"
+        "src/components/game/chrome/rail.tsx:64"
       ],
       "sourceNames": [
         "MapToggle"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/rail.tsx:65"
+        "src/components/game/chrome/rail.tsx:64"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -48823,13 +48774,13 @@
       "canonicalId": "src/components/game/chrome/rail.tsx#Rail",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/chrome/rail.tsx:84"
+        "src/components/game/chrome/rail.tsx:83"
       ],
       "sourceNames": [
         "Rail"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/rail.tsx:84"
+        "src/components/game/chrome/rail.tsx:83"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -48846,14 +48797,6 @@
       "states": [
         {
           "id": "catalog-or-current-presentation",
-          "status": "inventoried",
-          "evidence": [
-            "src/components/game/chrome/rail.tsx:84"
-          ],
-          "applicability": "source contract; runtime unverified"
-        },
-        {
-          "id": "predicate:mapCollapsed",
           "status": "inventoried",
           "evidence": [
             "src/components/game/chrome/rail.tsx:84"
@@ -48905,13 +48848,13 @@
       "canonicalId": "src/components/game/chrome/rail.tsx#SettingsButton",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/chrome/rail.tsx:27"
+        "src/components/game/chrome/rail.tsx:26"
       ],
       "sourceNames": [
         "SettingsButton"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/rail.tsx:27"
+        "src/components/game/chrome/rail.tsx:26"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -48966,13 +48909,13 @@
       "canonicalId": "src/components/game/chrome/rail.tsx#YouButton",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/chrome/rail.tsx:9"
+        "src/components/game/chrome/rail.tsx:8"
       ],
       "sourceNames": [
         "YouButton"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/rail.tsx:9"
+        "src/components/game/chrome/rail.tsx:8"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -49337,6 +49280,155 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/chrome/technique-bar.tsx:15"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/utility-cluster.tsx#UtilityCluster",
+      "canonicalId": "src/components/game/chrome/utility-cluster.tsx#UtilityCluster",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/utility-cluster.tsx:15"
+      ],
+      "sourceNames": [
+        "UtilityCluster"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/utility-cluster.tsx:15"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/utility-cluster.tsx"
+      ],
+      "jsxTags": [
+        "Anvil",
+        "FirstPersonChip",
+        "Hand",
+        "Icon",
+        "MusicToggle",
+        "ScrollText",
+        "SettingsButton",
+        "SfxToggle",
+        "YouButton",
+        "button",
+        "div"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/utility-cluster.tsx:15"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/utility-cluster.tsx:15"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/utility-cluster.tsx:15"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/chrome/vitals-chip.tsx#VitalsChip",
+      "canonicalId": "src/components/game/chrome/vitals-chip.tsx#VitalsChip",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/chrome/vitals-chip.tsx:17"
+      ],
+      "sourceNames": [
+        "VitalsChip"
+      ],
+      "rendererLocations": [
+        "src/components/game/chrome/vitals-chip.tsx:17"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/chrome/vitals-chip.tsx"
+      ],
+      "jsxTags": [
+        "button",
+        "div",
+        "p",
+        "span"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/vitals-chip.tsx:17"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:ghost",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/vitals-chip.tsx:17"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:inside",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/vitals-chip.tsx:17"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/chrome/vitals-chip.tsx:17"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/chrome/vitals-chip.tsx:17"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -225643,13 +225735,13 @@
       "canonicalId": "src/components/game/chrome/docked-minimap.tsx#DockedMinimap",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/chrome/docked-minimap.tsx:11"
+        "src/components/game/chrome/docked-minimap.tsx:10"
       ],
       "sourceNames": [
         "DockedMinimap"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/docked-minimap.tsx:11"
+        "src/components/game/chrome/docked-minimap.tsx:10"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -226734,13 +226826,13 @@
       "canonicalId": "src/components/game/hud.tsx#BuildRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:572"
+        "src/components/game/hud.tsx:573"
       ],
       "sourceNames": [
         "BuildRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:572"
+        "src/components/game/hud.tsx:573"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -226820,13 +226912,13 @@
       "canonicalId": "src/components/game/hud.tsx#GhostBanner",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:520"
+        "src/components/game/hud.tsx:521"
       ],
       "sourceNames": [
         "GhostBanner"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:520"
+        "src/components/game/hud.tsx:521"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -226914,13 +227006,13 @@
       "canonicalId": "src/components/game/hud.tsx#GuideTabs",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:366"
+        "src/components/game/hud.tsx:367"
       ],
       "sourceNames": [
         "GuideTabs"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:366"
+        "src/components/game/hud.tsx:367"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -227002,13 +227094,13 @@
       "canonicalId": "src/components/game/hud.tsx#HelpPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:412"
+        "src/components/game/hud.tsx:413"
       ],
       "sourceNames": [
         "HelpPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:412"
+        "src/components/game/hud.tsx:413"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -227075,13 +227167,13 @@
       "canonicalId": "src/components/game/hud.tsx#Hud",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:41"
+        "src/components/game/hud.tsx:44"
       ],
       "sourceNames": [
         "Hud"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:41"
+        "src/components/game/hud.tsx:44"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -227179,13 +227271,13 @@
       "canonicalId": "src/components/game/hud.tsx#JournalPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:461"
+        "src/components/game/hud.tsx:462"
       ],
       "sourceNames": [
         "JournalPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:461"
+        "src/components/game/hud.tsx:462"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -227242,13 +227334,13 @@
       "canonicalId": "src/components/game/hud.tsx#PlayingChrome",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:55"
+        "src/components/game/hud.tsx:58"
       ],
       "sourceNames": [
         "PlayingChrome"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:55"
+        "src/components/game/hud.tsx:58"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -227256,9 +227348,10 @@
       ],
       "jsxTags": [
         "ActionsPanel",
-        "Band",
         "BuildRibbon",
+        "CombatCluster",
         "ContextMenu",
+        "CornerCluster",
         "CraftGump",
         "DockedMinimap",
         "GateGump",
@@ -227275,7 +227368,9 @@
         "SpellbookGump",
         "Toast",
         "TravelRibbon",
+        "UtilityCluster",
         "VaultGump",
+        "VitalsChip",
         "div"
       ],
       "states": [
@@ -227363,13 +227458,13 @@
       "canonicalId": "src/components/game/hud.tsx#RaisingOverlay",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:311"
+        "src/components/game/hud.tsx:312"
       ],
       "sourceNames": [
         "RaisingOverlay"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:311"
+        "src/components/game/hud.tsx:312"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -227425,13 +227520,13 @@
       "canonicalId": "src/components/game/hud.tsx#RosterPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:477"
+        "src/components/game/hud.tsx:478"
       ],
       "sourceNames": [
         "RosterPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:477"
+        "src/components/game/hud.tsx:478"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -227514,13 +227609,13 @@
       "canonicalId": "src/components/game/hud.tsx#SaveFailureBanner",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:130"
+        "src/components/game/hud.tsx:131"
       ],
       "sourceNames": [
         "SaveFailureBanner"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:130"
+        "src/components/game/hud.tsx:131"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -227584,13 +227679,13 @@
       "canonicalId": "src/components/game/hud.tsx#SelectedCard",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:504"
+        "src/components/game/hud.tsx:505"
       ],
       "sourceNames": [
         "SelectedCard"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:504"
+        "src/components/game/hud.tsx:505"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -227669,13 +227764,13 @@
       "canonicalId": "src/components/game/hud.tsx#SidePanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:333"
+        "src/components/game/hud.tsx:334"
       ],
       "sourceNames": [
         "SidePanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:333"
+        "src/components/game/hud.tsx:334"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -227751,13 +227846,13 @@
       "canonicalId": "src/components/game/hud.tsx#TitleOverlay",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:152"
+        "src/components/game/hud.tsx:153"
       ],
       "sourceNames": [
         "TitleOverlay"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:152"
+        "src/components/game/hud.tsx:153"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -227911,13 +228006,13 @@
       "canonicalId": "src/components/game/hud.tsx#Toast",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:558"
+        "src/components/game/hud.tsx:559"
       ],
       "sourceNames": [
         "Toast"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:558"
+        "src/components/game/hud.tsx:559"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -227987,13 +228082,13 @@
       "canonicalId": "src/components/game/hud.tsx#TravelRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:599"
+        "src/components/game/hud.tsx:600"
       ],
       "sourceNames": [
         "TravelRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:599"
+        "src/components/game/hud.tsx:600"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -248127,12 +248222,12 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/band.tsx:7",
-        "src/components/game/hud.tsx:37"
+        "src/components/game/chrome/utility-cluster.tsx:3",
+        "src/components/game/hud.tsx:40"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/utility-cluster.tsx",
         "src/components/game/hud.tsx"
       ],
       "jsxTags": null,
@@ -248179,12 +248274,12 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/band.tsx:7",
-        "src/components/game/hud.tsx:37"
+        "src/components/game/chrome/utility-cluster.tsx:3",
+        "src/components/game/hud.tsx:40"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/utility-cluster.tsx",
         "src/components/game/hud.tsx"
       ],
       "jsxTags": null,
@@ -248231,12 +248326,12 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/band.tsx:7",
-        "src/components/game/hud.tsx:37"
+        "src/components/game/chrome/utility-cluster.tsx:3",
+        "src/components/game/hud.tsx:40"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/utility-cluster.tsx",
         "src/components/game/hud.tsx"
       ],
       "jsxTags": null,
@@ -248283,12 +248378,12 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/band.tsx:7",
-        "src/components/game/hud.tsx:37"
+        "src/components/game/chrome/utility-cluster.tsx:3",
+        "src/components/game/hud.tsx:40"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/utility-cluster.tsx",
         "src/components/game/hud.tsx"
       ],
       "jsxTags": null,
@@ -248335,12 +248430,12 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/band.tsx:7",
-        "src/components/game/hud.tsx:37"
+        "src/components/game/chrome/utility-cluster.tsx:3",
+        "src/components/game/hud.tsx:40"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/utility-cluster.tsx",
         "src/components/game/hud.tsx"
       ],
       "jsxTags": null,
@@ -248387,12 +248482,12 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/band.tsx:7",
-        "src/components/game/hud.tsx:37"
+        "src/components/game/chrome/utility-cluster.tsx:3",
+        "src/components/game/hud.tsx:40"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/utility-cluster.tsx",
         "src/components/game/hud.tsx"
       ],
       "jsxTags": null,
@@ -248439,12 +248534,12 @@
         "PanelId"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/band.tsx:7",
-        "src/components/game/hud.tsx:37"
+        "src/components/game/chrome/utility-cluster.tsx:3",
+        "src/components/game/hud.tsx:40"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/chrome/band.tsx",
+        "src/components/game/chrome/utility-cluster.tsx",
         "src/components/game/hud.tsx"
       ],
       "jsxTags": null,
@@ -250569,11 +250664,11 @@
         "Speed"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/band.tsx:7"
+        "src/components/game/chrome/corner-cluster.tsx:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/chrome/band.tsx"
+        "src/components/game/chrome/corner-cluster.tsx"
       ],
       "jsxTags": null,
       "states": [
@@ -250619,11 +250714,11 @@
         "Speed"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/band.tsx:7"
+        "src/components/game/chrome/corner-cluster.tsx:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/chrome/band.tsx"
+        "src/components/game/chrome/corner-cluster.tsx"
       ],
       "jsxTags": null,
       "states": [
@@ -250669,11 +250764,11 @@
         "Speed"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/band.tsx:7"
+        "src/components/game/chrome/corner-cluster.tsx:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/chrome/band.tsx"
+        "src/components/game/chrome/corner-cluster.tsx"
       ],
       "jsxTags": null,
       "states": [
@@ -250719,11 +250814,11 @@
         "Speed"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/band.tsx:7"
+        "src/components/game/chrome/corner-cluster.tsx:3"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
-        "src/components/game/chrome/band.tsx"
+        "src/components/game/chrome/corner-cluster.tsx"
       ],
       "jsxTags": null,
       "states": [

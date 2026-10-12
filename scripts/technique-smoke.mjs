@@ -57,19 +57,25 @@ try {
 
     const steps = {};
 
-    // 0. Combat chrome lives IN the bottom band, at the scroll origin — and
-    //    the band keeps its fixed height (the L-frame joint depends on it).
+    // 0. Combat chrome floats: chips + quick slots + vitals globes in the
+    //    bottom-center cluster — no carved band anywhere.
     await page.waitForFunction(
-      () => document.querySelector('[data-testid="bottom-band"]') && document.querySelector('[data-testid="technique-bar"]'),
+      () => document.querySelector('[data-testid="combat-cluster"]') && document.querySelector('[data-testid="technique-bar"]'),
     );
-    steps.chipsInBand = await page.evaluate(() => {
-      const band = document.querySelector('[data-testid="bottom-band"]');
+    steps.noBand = await page.evaluate(() => !document.querySelector('[data-testid="bottom-band"]'));
+    steps.chipsInCluster = await page.evaluate(() => {
+      const cluster = document.querySelector('[data-testid="combat-cluster"]');
       const bar = document.querySelector('[data-testid="technique-bar"]');
-      return Boolean(band && bar && band.contains(bar));
+      const hotbar = document.querySelector('[data-testid="hotbar"]');
+      return Boolean(cluster && bar && cluster.contains(bar) && (!hotbar || cluster.contains(hotbar)));
     });
-    steps.bandHeight = await page.evaluate(() => {
-      const band = document.querySelector('[data-testid="bottom-band"]');
-      return band ? Math.round(band.getBoundingClientRect().height) : 0;
+    steps.orbsFlank = await page.evaluate(() => {
+      const hp = document.querySelector('[data-testid="orb-health"]');
+      const mana = document.querySelector('[data-testid="orb-mana"]');
+      if (!hp || !mana) return false;
+      const h = hp.getBoundingClientRect();
+      const m = mana.getBoundingClientRect();
+      return h.right <= m.left;
     });
     steps.chipsOnScreen = await page.evaluate(() => {
       const bar = document.querySelector('[data-testid="technique-bar"]');
@@ -156,7 +162,7 @@ try {
 
     await page.screenshot({ path: resolve(output, `technique-${viewport.name}.png`) });
     verdict.viewports[viewport.name] = { steps, errors };
-    if (!steps.chipsInBand || steps.bandHeight > 61 || !steps.chipsOnScreen || steps.chips !== 3 || !steps.cleaveLocked || !steps.cleaveBadge || steps.lungeArmed !== "lunge" || !steps.lungeGold
+    if (!steps.noBand || !steps.chipsInCluster || !steps.orbsFlank || !steps.chipsOnScreen || steps.chips !== 3 || !steps.cleaveLocked || !steps.cleaveBadge || steps.lungeArmed !== "lunge" || !steps.lungeGold
       || !steps.disarmWorks || !steps.cooldownBadge || !steps.riposteCooling || steps.bowKit !== 3 || !steps.lungeGone
       || steps.knifeKit !== 3 || !steps.bowKitGone || errors.length) {
       verdict.ok = false;
