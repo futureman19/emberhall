@@ -13,6 +13,13 @@ const SHORELINE = [
   "..ssss.",
 ] as const;
 
+// Read-only renderer contract; current tiles/scars still decide whether these
+// authored samples remain wet. This does not stamp or repair a loaded world.
+export const EMBERHALL_POND = { x: 247, z: 301, width: 7, height: 7 } as const;
+export function isEmberhallPondWaterSample(x: number, z: number) {
+  return SHORELINE[z - EMBERHALL_POND.z]?.[x - EMBERHALL_POND.x] === "w";
+}
+
 /** Generation only: saved scars are applied afterwards by loadSave. */
 export function stampEmberhallPond(tiles: Tile[][]) {
   for (const [dy, row] of SHORELINE.entries()) {

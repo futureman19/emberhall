@@ -1,6 +1,7 @@
 import { bridgeDeckAt, bridgeGroundY, bridgeTerrainY, bridgeSurfaceKind, REEDWAKE_BRIDGE } from "../../game/river-bridge.ts";
 import { isFrontierRiverSurface } from "../../game/frontier-river.ts";
 import { createGroundUpdatePlanner } from "./ground-update-planner.ts";
+import { createPondWater } from "./pond-water.ts";
 import { floraRollEligible, ruinsExtraThorn, ruinsThornInstead } from "./flora-eligibility.ts";
 import { createTerrainPalette } from "./terrain-palette.ts";
 import { sameHorizonUpdateKey } from "./horizon-update-key.ts";
@@ -244,13 +245,23 @@ function coverAt(world: World, x: number, z: number, dest: Float32Array, i: numb
 
 function GroundMaterial({ far = false }: { far?: boolean }) {
   const maps = useMemo(() => ({ grass: makeGrassTex(), dirt: makeDirtTex() }), []);
+  const pondWater = useMemo(createPondWater, []);
+  useEffect(() => () => pondWater.dispose(), [pondWater]);
+  useFrame((_, delta) => {
+    if (far) return;
+    const world = getWorld();
+    const you = world.people.find(p => p.isPlayer);
+    pondWater.update(world, you?.x ?? COURT.tx, you?.z ?? COURT.ty, delta);
+  });
   return (
     <meshStandardMaterial
+      name={far ? "vale-horizon-ground" : "emberhall-starter-pond-water"}
+      userData={{ pondWater: pondWater.uniforms }}
       vertexColors
       map={maps.grass}
       roughness={0.96}
       metalness={0.02}
-      customProgramCacheKey={() => (far ? "vale-ground-far-lanternwood-v2" : "vale-ground-lanternwood-v2")}
+      customProgramCacheKey={() => (far ? "vale-ground-far-lanternwood-v2" : "vale-ground-lanternwood-pond-v1")}
       onBeforeCompile={(shader) => {
         shader.uniforms.uDirt = { value: maps.dirt };
         shader.uniforms.uOrigin = GROUND_FADE.uOrigin;
@@ -296,6 +307,7 @@ float fade = mix(1.0 - smoothstep(uNear, uFar, dist), 1.0, uLod);
 if (uLod < 0.5 && fade < 0.05) discard;
 `,
         );
+        if (!far) pondWater.inject(shader);
       }}
     />
   );
