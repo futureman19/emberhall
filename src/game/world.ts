@@ -25,6 +25,7 @@ import { createResourceInventory } from "./inventory/resources.ts";
 import { createResourceNodeStateMap } from "./resources/state.ts";
 import type { BuildingKind, ClassId, Person, Tile, TileKind, World } from "./types.ts";
 import { stampFrontier, sceneryReserved } from "./frontier.ts";
+import { stampEmberhallPond } from "./emberhall-pond.ts";
 import { emitConstructionFx } from "./construction-animation.ts";
 
 let nidAcc = 1;
@@ -210,6 +211,7 @@ export function generateTiles(seed: number): Tile[][] {
 
   stampCityTiles(tiles);
   stampFrontier(tiles, PLACES);
+  stampEmberhallPond(tiles);
   return tiles;
 }
 

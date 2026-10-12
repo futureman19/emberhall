@@ -93,7 +93,8 @@ test("river preserves all legacy tiles and keeps landmark anchors dry and approa
     createHash("sha256")
       .update(JSON.stringify(tiles.slice(0, 512).map((r) => r.slice(0, 512))))
       .digest("hex"),
-    "4587ba9a206d892e12f896ec01f38a8516152c6cf5dd42701db270f2af40c6a4",
+    // Authored starter pond: only its 45 local tiles differ from the previous baseline.
+    "bceb35d774eed86b4185c09e05f2901088193e522b60c67f8f8d3cf9156f24e6",
   );
   for (const p of FRONTIER_ART) assert.notEqual(tiles[p.z]![p.x]!.kind, "water", p.id);
   const start = placeById("twinward");
