@@ -4,6 +4,7 @@ import { createGroundUpdatePlanner } from "./ground-update-planner.ts";
 import { createPondWater } from "./pond-water.ts";
 import { PondGrass } from "./pond-grass-scene.tsx";
 import { createPondTreeSway } from "./pond-tree-sway.ts";
+import { createPondAutumn } from "./pond-autumn.ts";
 import { floraRollEligible, ruinsExtraThorn, ruinsThornInstead } from "./flora-eligibility.ts";
 import { createTerrainPalette } from "./terrain-palette.ts";
 import { sameHorizonUpdateKey } from "./horizon-update-key.ts";
@@ -340,12 +341,20 @@ export function Terrain() {
   const rockAt = useRef<{ tx: number; ty: number }[]>([]);
   const origin = useRef({ x: COURT.tx, z: COURT.ty, rev: -1 });
   const rebuildCount = useRef(0);
+  const autumnGroup = useRef<THREE.Group>(null);
+  const autumn = useRef<ReturnType<typeof createPondAutumn> | null>(null);
+  const resourceWorld = useRef<World | null>(null);
+  const resourceTiles = useRef<World["tiles"] | null>(null);
   const treeSway = useRef<ReturnType<typeof createPondTreeSway> | null>(null);
   useEffect(() => {
     const sway = createPondTreeSway();
     treeSway.current = sway;
+    const leaves = createPondAutumn();
+    const parent = autumnGroup.current;
+    parent?.add(leaves.mesh);
+    autumn.current = leaves;
     origin.current.rev = -1;
-    return () => { sway.dispose(); treeSway.current = null; };
+    return () => { sway.dispose(); treeSway.current = null; parent?.remove(leaves.mesh); leaves.dispose(); autumn.current = null; };
   }, [timber]);
   useEffect(() => { origin.current.rev = -1; }, [fieldProps]);
   const groundPlanner = useMemo(() => createGroundUpdatePlanner(), []);
@@ -390,7 +399,9 @@ export function Terrain() {
   useFrame((_, delta) => {
     const w = getWorld();
     const seedChanged = resourceSeed.current !== w.seed;
+    const resourceIdentityChanged = resourceWorld.current !== w || resourceTiles.current !== w.tiles;
     if (seedChanged) resourceVisuals.clear();
+    else if (resourceIdentityChanged) resourceVisuals.clear();
     const you = w.people.find((p) => p.isPlayer);
     const ox = terrainStreamOrigin(you?.x ?? COURT.tx);
     const oz = terrainStreamOrigin(you?.z ?? COURT.ty);
@@ -418,10 +429,11 @@ export function Terrain() {
     ensureColor(flw, FLORA);
     ensureColor(sap, FLORA);
     ensureColor(tft, FLORA);
-    const landMoved = seedChanged || origin.current.x !== ox || origin.current.z !== oz || origin.current.rev !== rev;
+    const landMoved = seedChanged || resourceIdentityChanged || origin.current.x !== ox || origin.current.z !== oz || origin.current.rev !== rev;
     if (landMoved) {
       rebuildCount.current += 1;
       resourceSeed.current = w.seed;
+      resourceWorld.current = w; resourceTiles.current = w.tiles;
       origin.current = { x: ox, z: oz, rev };
       const pos = geo.attributes.position as THREE.BufferAttribute;
       const col = geo.attributes.color as THREE.BufferAttribute;
@@ -508,6 +520,7 @@ export function Terrain() {
     lastTreeView.current = treeView;
     resetTimberBatches(timberBatches);
     treeSway.current?.begin(w);
+    autumn.current?.begin(w);
     const authoredBatches = timberBatches.flatMap(b => [b.trunk.current, b.crown.current, b.trunkGhost.current, b.crownGhost.current]);
     for (const mesh of authoredBatches) ensureColor(mesh, count);
     if (landMoved) visibleResourceVisuals.current.clear();
@@ -591,9 +604,13 @@ export function Terrain() {
           dummy.updateMatrix();
           dummy.rotation.set(0, 0, 0);
           dummy.scale.set(1, 1, 1);
-          const leafCol = marked ? COL_MARK : pal.set(plantedVisual?.secondary ?? resourceVisual.palette.secondary);
+          let leafCol = marked ? COL_MARK : pal.set(plantedVisual?.secondary ?? resourceVisual.palette.secondary);
           const local = lanternwoodInfluence(tx, ty);
-          if (!marked) leafCol.lerp(LW_LEAF, local * 0.55);
+          if (!marked) {
+            leafCol.lerp(LW_LEAF, local * 0.55);
+            leafCol = autumn.current?.tint(woodId, tx, ty, leafCol) ?? leafCol;
+          }
+          autumn.current?.crown(w, woodId, tx, gy + trunkH + CANOPY_H * crownScaleY * treeShape.crownLift, ty);
           // Additional rounded lobes are visual-only. Keep the original resource
           // mesh, pick mapping, ghostwood exclusion and under-canopy fade intact.
           if (!customTimber && local > 0 && !under && softCanopy.current) {
@@ -753,6 +770,7 @@ export function Terrain() {
     hideRest(tk, si, count);
     finishTimberBatches(timberBatches);
     treeSway.current?.flush();
+    autumn.current?.flush();
     hideRest(tkg, gi, count);
     if (softCanopy.current) {
       softCanopy.current.count = li;
@@ -787,6 +805,7 @@ export function Terrain() {
     if (sap?.instanceColor) sap.instanceColor.needsUpdate = true;
     if (tft?.instanceColor) tft.instanceColor.needsUpdate = true;
     }
+    autumn.current?.update(w, px, pz, delta);
   });
 
   function fromEvent(e: ThreeEvent<PointerEvent>) {
@@ -842,6 +861,7 @@ export function Terrain() {
         <GroundMaterial />
       </mesh>
       <PondGrass />
+      <group ref={autumnGroup} dispose={null} />
       {/* Canonical deck picking remains available even if the decorative download fails. */}
       <mesh name="reedwake-deck-pick" position={[REEDWAKE_BRIDGE.x, REEDWAKE_BRIDGE.deckY, REEDWAKE_BRIDGE.z]} rotation={[-Math.PI / 2, 0, 0]} onPointerDown={(e) => onDown(e)} onPointerMove={(e) => onMove(e)} onPointerUp={(e) => onUp(e)}>
         <planeGeometry args={[7, 3]} />

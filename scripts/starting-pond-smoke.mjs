@@ -7,9 +7,10 @@ import { SAVE_KEY, writeSave } from "../src/game/save.ts";
 import { capturePondMotion } from "./pond-water-motion.mjs";
 import { captureGrassMotion } from "./pond-grass-motion.mjs";
 import { captureTreeMotion } from "./pond-tree-motion.mjs";
+import { captureAutumnMotion } from "./pond-autumn-motion.mjs";
 
 const [url = "http://127.0.0.1:8080", label = "dev", mode = "static"] = process.argv.slice(2);
-assert(["static", "motion", "grass", "trees"].includes(mode));
+assert(["static", "motion", "grass", "trees", "autumn"].includes(mode));
 assert.match(label, /^[a-z0-9-]+$/);
 const out = path.resolve("screenshots/starting-pond", label);
 fs.mkdirSync(out, { recursive: true });
@@ -46,6 +47,7 @@ try {
       const locations = new WeakMap();
       window.__pondGPU = { time: null, enabled: null, updates: 0, shaderSeen: false };
       window.__grassGPU = { time: null, updates: 0, shaderSeen: false };
+      window.__autumnGPU = { time: null, updates: 0, shaderSeen: false };
       window.__treeGPU = { time: null, updates: 0, leafTime: null, leafUpdates: 0, shaderSeen: false };
       for (const Type of [window.WebGLRenderingContext, window.WebGL2RenderingContext]) {
         if (!Type) continue;
@@ -55,7 +57,7 @@ try {
         const originalSource = proto.shaderSource;
         proto.getUniformLocation = function (program, name) {
           const location = originalLocation.call(this, program, name);
-          if (location && (name === "uPondTime" || name === "uPondEnabled" || name === "uGrassTime" || name === "uTreeWindTime" || name === "uLeafFlutterTime")) locations.set(location, name);
+          if (location && (name === "uPondTime" || name === "uPondEnabled" || name === "uGrassTime" || name === "uTreeWindTime" || name === "uLeafFlutterTime" || name === "uAutumnLeafTime")) locations.set(location, name);
           return location;
         };
         proto.uniform1f = function (location, value) {
@@ -63,6 +65,7 @@ try {
           if (name === "uPondTime") { window.__pondGPU.time = value; window.__pondGPU.updates++; }
           if (name === "uPondEnabled") window.__pondGPU.enabled = value;
           if (name === "uLeafFlutterTime") { window.__treeGPU.leafTime = value; window.__treeGPU.leafUpdates++; }
+          if (name === "uAutumnLeafTime") { window.__autumnGPU.time = value; window.__autumnGPU.updates++; }
           if (name === "uTreeWindTime") { window.__treeGPU.time = value; window.__treeGPU.updates++; }
           if (name === "uGrassTime") { window.__grassGPU.time = value; window.__grassGPU.updates++; }
           return originalUniform.call(this, location, value);
@@ -70,6 +73,7 @@ try {
         proto.shaderSource = function (shader, source) {
           if (source.includes("float pondHeight")) window.__pondGPU.shaderSeen = true;
           if (source.includes("pondTreeSway")) window.__treeGPU.shaderSeen = true;
+          if (source.includes("pondAutumnLeaves")) window.__autumnGPU.shaderSeen = true;
           if (source.includes("pondGrass")) window.__grassGPU.shaderSeen = true;
           return originalSource.call(this, shader, source);
         };
@@ -121,8 +125,9 @@ try {
     result.checks.push({ device, kind: "bank-handler-traversal", ...traversal });
     if (mode !== "static") {
       result.checks.push({ device, kind: "pond-motion", ...await capturePondMotion(page, out, device) });
-      if (mode === "grass" || mode === "trees") result.checks.push({ device, kind: "grass-motion", ...await captureGrassMotion(page, out, device) });
-      if (mode === "trees") result.checks.push({ device, kind: "tree-motion", ...await captureTreeMotion(page, out, device) });
+      if (mode === "grass" || mode === "trees" || mode === "autumn") result.checks.push({ device, kind: "grass-motion", ...await captureGrassMotion(page, out, device) });
+      if (mode === "trees" || mode === "autumn") result.checks.push({ device, kind: "tree-motion", ...await captureTreeMotion(page, out, device) });
+      if (mode === "autumn") result.checks.push({ device, kind: "autumn-motion", ...await captureAutumnMotion(page, out, device) });
       if (device === "desktop") await page.waitForTimeout(6500);
     }
     await context.close();
