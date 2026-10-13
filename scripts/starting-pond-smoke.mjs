@@ -46,7 +46,7 @@ try {
       const locations = new WeakMap();
       window.__pondGPU = { time: null, enabled: null, updates: 0, shaderSeen: false };
       window.__grassGPU = { time: null, updates: 0, shaderSeen: false };
-      window.__treeGPU = { time: null, updates: 0, shaderSeen: false };
+      window.__treeGPU = { time: null, updates: 0, leafTime: null, leafUpdates: 0, shaderSeen: false };
       for (const Type of [window.WebGLRenderingContext, window.WebGL2RenderingContext]) {
         if (!Type) continue;
         const proto = Type.prototype;
@@ -55,13 +55,14 @@ try {
         const originalSource = proto.shaderSource;
         proto.getUniformLocation = function (program, name) {
           const location = originalLocation.call(this, program, name);
-          if (location && (name === "uPondTime" || name === "uPondEnabled" || name === "uGrassTime" || name === "uTreeWindTime")) locations.set(location, name);
+          if (location && (name === "uPondTime" || name === "uPondEnabled" || name === "uGrassTime" || name === "uTreeWindTime" || name === "uLeafFlutterTime")) locations.set(location, name);
           return location;
         };
         proto.uniform1f = function (location, value) {
           const name = locations.get(location);
           if (name === "uPondTime") { window.__pondGPU.time = value; window.__pondGPU.updates++; }
           if (name === "uPondEnabled") window.__pondGPU.enabled = value;
+          if (name === "uLeafFlutterTime") { window.__treeGPU.leafTime = value; window.__treeGPU.leafUpdates++; }
           if (name === "uTreeWindTime") { window.__treeGPU.time = value; window.__treeGPU.updates++; }
           if (name === "uGrassTime") { window.__grassGPU.time = value; window.__grassGPU.updates++; }
           return originalUniform.call(this, location, value);

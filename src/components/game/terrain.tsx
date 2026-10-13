@@ -603,7 +603,7 @@ export function Terrain() {
               dummy.rotation.set(0, treeShape.yaw + lobe, wobble);
               dummy.updateMatrix();
               softCanopy.current.setMatrixAt(li, dummy.matrix);
-              treeSway.current?.setRoot(softCanopy.current, li, tx, gy, ty);
+              treeSway.current?.setRoot(softCanopy.current, li, tx, gy, ty, true);
               softCanopy.current.setColorAt(li++, leafCol);
             }
             // Restore the unchanged resource matrix for gameplay picking below.
@@ -617,18 +617,19 @@ export function Terrain() {
           const customCrown = under ? batch?.crownGhost.current : batch?.crown.current;
           if (customTimber) {
             customCrown?.setMatrixAt(treeIndex, dummy.matrix);
-            treeSway.current?.setRoot(customCrown, treeIndex, tx, gy, ty);
+            // Ghostwood crown contains unmasked wood as well as foliage. Keep its slow sway only.
+            treeSway.current?.setRoot(customCrown, treeIndex, tx, gy, ty, batch?.id !== "ghostwood");
             paint(customCrown ?? null, treeIndex, leafCol);
           }
           if (under) {
             gh?.setMatrixAt(gi, customTimber ? HIDDEN_TIMBER : dummy.matrix);
-            if (!customTimber) treeSway.current?.setRoot(gh, gi, tx, gy, ty);
+            if (!customTimber) treeSway.current?.setRoot(gh, gi, tx, gy, ty, true);
             paint(gh, gi, leafCol);
             ghostAt.current[gi] = { tx, ty };
             gi++;
           } else {
             cn?.setMatrixAt(si, customTimber ? HIDDEN_TIMBER : dummy.matrix);
-            if (!customTimber) treeSway.current?.setRoot(cn, si, tx, gy, ty);
+            if (!customTimber) treeSway.current?.setRoot(cn, si, tx, gy, ty, true);
             paint(cn, si, leafCol);
             solidAt.current[si] = { tx, ty };
             si++;

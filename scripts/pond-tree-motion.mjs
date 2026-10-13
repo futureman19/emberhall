@@ -7,6 +7,7 @@ export async function captureTreeMotion(page, out, device) {
   await page.waitForTimeout(900);
   const after = await page.evaluate(() => ({ ...window.__treeGPU }));
   assert(before.shaderSeen && after.time > before.time && after.updates > before.updates, "Actual tree shader clock advances");
+  assert(after.leafTime > before.leafTime && after.leafUpdates > before.leafUpdates, "Flutter GPU clock advances");
   let isolation = { method: "built GPU observation; pixel isolation in dev" };
   if (await page.evaluate(() => !!window.__pondQA?.state)) {
     await page.evaluate(() => window.__pondQA.state.setFrameloop("never"));
@@ -14,10 +15,13 @@ export async function captureTreeMotion(page, out, device) {
     isolation = await page.evaluate(() => {
       const state = window.__pondQA.state;
       const { scene, camera, gl } = state;
-      const uniforms = new Set(), roots = new Set();
+      const uniforms = new Set(), leaves = new Set(), roots = new Set();
       scene.traverse(object => {
         for (const material of [object.material].flat()) {
-          if (material?.userData.treeWind) uniforms.add(material.userData.treeWind.uTreeWindTime);
+          if (material?.userData.treeWind) {
+            uniforms.add(material.userData.treeWind.uTreeWindTime);
+            if (material.userData.treeWind.uLeafFlutterTime) leaves.add(material.userData.treeWind.uLeafFlutterTime);
+          }
         }
         const attr = object.geometry?.getAttribute("pondTreeRoot");
         if (attr) for (let i = 0; i < Math.min(object.count ?? attr.count, attr.count); i++) {
@@ -26,6 +30,7 @@ export async function captureTreeMotion(page, out, device) {
       });
       if (!uniforms.size || !roots.size) throw Error("No enabled tree sway instances");
       const old = [...uniforms].map(u => u.value);
+      const leafOld = [...leaves].map(u => u.value);
       const context = gl.getContext(), width = context.drawingBufferWidth, height = context.drawingBufferHeight;
       function frame(t) {
         for (const u of uniforms) u.value = t;
@@ -41,12 +46,24 @@ export async function captureTreeMotion(page, out, device) {
         if (Math.max(...[0, 1, 2].map(j => Math.abs(a[i+j] - b[i+j]))) > 2) changed++;
         if (Math.max(...[0, 1, 2].map(j => Math.abs(b[i+j] - repeat[i+j]))) > 2) unstable++;
       }
+      for (const u of leaves) u.value = 0;
+      const leafA = frame(3);
+      for (const u of leaves) u.value = 1.37;
+      const leafB = frame(3), leafRepeat = frame(3);
+      let leafChanged = 0, leafUnstable = 0;
+      for (let i = 0; i < leafA.length; i += 4) {
+        if ([0, 1, 2].some(j => Math.abs(leafA[i+j] - leafB[i+j]) > 2)) leafChanged++;
+        if ([0, 1, 2].some(j => Math.abs(leafB[i+j] - leafRepeat[i+j]) > 2)) leafUnstable++;
+      }
+      [...leaves].forEach((u, i) => { u.value = leafOld[i]; });
       [...uniforms].forEach((u, i) => { u.value = old[i]; });
       state.setFrameloop("always");
-      return { method: "frozen scene tree-time only, repeat control, shadows included", roots: [...roots], changed, unstable };
+      return { method: "frozen scene tree-time only, repeat control, shadows included", roots: [...roots], changed, unstable, leafChanged, leafUnstable };
     });
     assert(isolation.roots.length <= 6);
     assert(isolation.changed > 30, "Tree sway produces visible pixels");
+    assert(isolation.leafChanged > 20, "Isolated foliage flutter visibly renders");
+    assert.equal(isolation.leafUnstable, 0, "Flutter repeat control stays identical");
     assert.equal(isolation.unstable, 0, "Frozen repeat control stays identical");
   }
   const frames = [];

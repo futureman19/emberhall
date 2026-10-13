@@ -40533,13 +40533,13 @@
       "canonicalId": "src/components/game/pond-tree-sway.ts#createPondTreeSway",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/pond-tree-sway.ts:39"
+        "src/components/game/pond-tree-sway.ts:75"
       ],
       "sourceNames": [
         "createPondTreeSway"
       ],
       "rendererLocations": [
-        "src/components/game/pond-tree-sway.ts:39"
+        "src/components/game/pond-tree-sway.ts:75"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -40596,6 +40596,14 @@
           "applicability": "source contract; runtime unverified"
         },
         {
+          "id": "predicate:foliage",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/pond-tree-sway.ts:75"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
           "id": "present",
           "status": "inventoried",
           "evidence": [
@@ -40622,6 +40630,72 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/pond-tree-sway.ts:39"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/pond-tree-sway.ts#leafFlutter",
+      "canonicalId": "src/components/game/pond-tree-sway.ts#leafFlutter",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/pond-tree-sway.ts:28"
+      ],
+      "sourceNames": [
+        "leafFlutter"
+      ],
+      "rendererLocations": [
+        "src/components/game/pond-tree-sway.ts:28"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/pond-tree-sway.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/pond-tree-sway.ts:28"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!weight",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/pond-tree-sway.ts:28"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/pond-tree-sway.ts:28"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/pond-tree-sway.ts:28"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -43339,13 +43413,13 @@
       "canonicalId": "src/components/game/terrain.tsx#align",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/terrain.tsx:954"
+        "src/components/game/terrain.tsx:955"
       ],
       "sourceNames": [
         "align"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:954"
+        "src/components/game/terrain.tsx:955"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -47314,13 +47388,13 @@
       "canonicalId": "src/components/game/terrain.tsx#authored-field-rocks",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:919"
+        "src/components/game/terrain.tsx:920"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:919"
+        "src/components/game/terrain.tsx:920"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -47372,13 +47446,13 @@
       "canonicalId": "src/components/game/terrain.tsx#far-horizon-trees",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:1114"
+        "src/components/game/terrain.tsx:1115"
       ],
       "sourceNames": [
         "Horizon"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:1114"
+        "src/components/game/terrain.tsx:1115"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -47430,13 +47504,13 @@
       "canonicalId": "src/components/game/terrain.tsx#lanternwood-soft-canopies",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:877"
+        "src/components/game/terrain.tsx:878"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:877"
+        "src/components/game/terrain.tsx:878"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -47488,13 +47562,13 @@
       "canonicalId": "src/components/game/terrain.tsx#reedwake-deck-pick",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/terrain.tsx:845"
+        "src/components/game/terrain.tsx:846"
       ],
       "sourceNames": [
         "Terrain"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:845"
+        "src/components/game/terrain.tsx:846"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -60264,13 +60338,13 @@
       "canonicalId": "src/components/game/terrain.tsx#COL_FAR",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:950"
+        "src/components/game/terrain.tsx:951"
       ],
       "sourceNames": [
         "COL_FAR"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:950"
+        "src/components/game/terrain.tsx:951"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -61458,13 +61532,13 @@
       "canonicalId": "src/components/game/terrain.tsx#Horizon",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/terrain.tsx:958"
+        "src/components/game/terrain.tsx:959"
       ],
       "sourceNames": [
         "Horizon"
       ],
       "rendererLocations": [
-        "src/components/game/terrain.tsx:958"
+        "src/components/game/terrain.tsx:959"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
