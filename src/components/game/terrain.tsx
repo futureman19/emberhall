@@ -2,6 +2,7 @@ import { bridgeDeckAt, bridgeGroundY, bridgeTerrainY, bridgeSurfaceKind, REEDWAK
 import { isFrontierRiverSurface } from "../../game/frontier-river.ts";
 import { createGroundUpdatePlanner } from "./ground-update-planner.ts";
 import { createPondWater } from "./pond-water.ts";
+import { PondGrass } from "./pond-grass-scene.tsx";
 import { floraRollEligible, ruinsExtraThorn, ruinsThornInstead } from "./flora-eligibility.ts";
 import { createTerrainPalette } from "./terrain-palette.ts";
 import { sameHorizonUpdateKey } from "./horizon-update-key.ts";
@@ -821,6 +822,7 @@ export function Terrain() {
       >
         <GroundMaterial />
       </mesh>
+      <PondGrass />
       {/* Canonical deck picking remains available even if the decorative download fails. */}
       <mesh name="reedwake-deck-pick" position={[REEDWAKE_BRIDGE.x, REEDWAKE_BRIDGE.deckY, REEDWAKE_BRIDGE.z]} rotation={[-Math.PI / 2, 0, 0]} onPointerDown={(e) => onDown(e)} onPointerMove={(e) => onMove(e)} onPointerUp={(e) => onUp(e)}>
         <planeGeometry args={[7, 3]} />

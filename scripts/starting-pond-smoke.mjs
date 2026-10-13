@@ -5,9 +5,10 @@ import { chromium } from "playwright";
 import { createWorld } from "../src/game/world.ts";
 import { SAVE_KEY, writeSave } from "../src/game/save.ts";
 import { capturePondMotion } from "./pond-water-motion.mjs";
+import { captureGrassMotion } from "./pond-grass-motion.mjs";
 
 const [url = "http://127.0.0.1:8080", label = "dev", mode = "static"] = process.argv.slice(2);
-assert(["static", "motion"].includes(mode));
+assert(["static", "motion", "grass"].includes(mode));
 assert.match(label, /^[a-z0-9-]+$/);
 const out = path.resolve("screenshots/starting-pond", label);
 fs.mkdirSync(out, { recursive: true });
@@ -36,13 +37,14 @@ try {
     const context = await browser.newContext({
       viewport,
       hasTouch: device === "mobile",
-      ...(mode === "motion" && device === "desktop" ? { recordVideo: { dir: path.join(out, "video"), size: viewport } } : {}),
+      ...(mode !== "static" && device === "desktop" ? { recordVideo: { dir: path.join(out, "video"), size: viewport } } : {}),
     });
     await context.routeWebSocket(/.*/, () => {});
     await context.addInitScript(({ key, raw }) => localStorage.setItem(key, raw), { key: SAVE_KEY, raw });
     await context.addInitScript(() => {
       const locations = new WeakMap();
       window.__pondGPU = { time: null, enabled: null, updates: 0, shaderSeen: false };
+      window.__grassGPU = { time: null, updates: 0, shaderSeen: false };
       for (const Type of [window.WebGLRenderingContext, window.WebGL2RenderingContext]) {
         if (!Type) continue;
         const proto = Type.prototype;
@@ -51,17 +53,19 @@ try {
         const originalSource = proto.shaderSource;
         proto.getUniformLocation = function (program, name) {
           const location = originalLocation.call(this, program, name);
-          if (location && (name === "uPondTime" || name === "uPondEnabled")) locations.set(location, name);
+          if (location && (name === "uPondTime" || name === "uPondEnabled" || name === "uGrassTime")) locations.set(location, name);
           return location;
         };
         proto.uniform1f = function (location, value) {
           const name = locations.get(location);
           if (name === "uPondTime") { window.__pondGPU.time = value; window.__pondGPU.updates++; }
           if (name === "uPondEnabled") window.__pondGPU.enabled = value;
+          if (name === "uGrassTime") { window.__grassGPU.time = value; window.__grassGPU.updates++; }
           return originalUniform.call(this, location, value);
         };
         proto.shaderSource = function (shader, source) {
           if (source.includes("float pondHeight")) window.__pondGPU.shaderSeen = true;
+          if (source.includes("pondGrass")) window.__grassGPU.shaderSeen = true;
           return originalSource.call(this, shader, source);
         };
       }
@@ -110,8 +114,9 @@ try {
     await page.waitForTimeout(1800);
     await page.screenshot({ path: path.join(out, device + "-bank.png") });
     result.checks.push({ device, kind: "bank-handler-traversal", ...traversal });
-    if (mode === "motion") {
+    if (mode !== "static") {
       result.checks.push({ device, kind: "pond-motion", ...await capturePondMotion(page, out, device) });
+      if (mode === "grass") result.checks.push({ device, kind: "grass-motion", ...await captureGrassMotion(page, out, device) });
       if (device === "desktop") await page.waitForTimeout(6500);
     }
     await context.close();
