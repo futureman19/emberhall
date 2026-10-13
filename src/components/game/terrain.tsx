@@ -3,6 +3,7 @@ import { isFrontierRiverSurface } from "../../game/frontier-river.ts";
 import { createGroundUpdatePlanner } from "./ground-update-planner.ts";
 import { createPondWater } from "./pond-water.ts";
 import { PondGrass } from "./pond-grass-scene.tsx";
+import { createPondTreeSway } from "./pond-tree-sway.ts";
 import { floraRollEligible, ruinsExtraThorn, ruinsThornInstead } from "./flora-eligibility.ts";
 import { createTerrainPalette } from "./terrain-palette.ts";
 import { sameHorizonUpdateKey } from "./horizon-update-key.ts";
@@ -339,6 +340,13 @@ export function Terrain() {
   const rockAt = useRef<{ tx: number; ty: number }[]>([]);
   const origin = useRef({ x: COURT.tx, z: COURT.ty, rev: -1 });
   const rebuildCount = useRef(0);
+  const treeSway = useRef<ReturnType<typeof createPondTreeSway> | null>(null);
+  useEffect(() => {
+    const sway = createPondTreeSway();
+    treeSway.current = sway;
+    origin.current.rev = -1;
+    return () => { sway.dispose(); treeSway.current = null; };
+  }, [timber]);
   useEffect(() => { origin.current.rev = -1; }, [fieldProps]);
   const groundPlanner = useMemo(() => createGroundUpdatePlanner(), []);
   const resourceSeed = useRef<number | null>(null);
@@ -379,13 +387,14 @@ export function Terrain() {
     return g;
   }, []);
 
-  useFrame(() => {
+  useFrame((_, delta) => {
     const w = getWorld();
     const seedChanged = resourceSeed.current !== w.seed;
     if (seedChanged) resourceVisuals.clear();
     const you = w.people.find((p) => p.isPlayer);
     const ox = terrainStreamOrigin(you?.x ?? COURT.tx);
     const oz = terrainStreamOrigin(you?.z ?? COURT.ty);
+    if (Math.hypot((you?.x ?? COURT.tx) - 250, (you?.z ?? COURT.ty) - 304) < 44) treeSway.current?.update(delta);
     const rev = w.landRev ?? 0;
     const half = Math.floor(TERRAIN_STREAM_WINDOW / 2);
     const visibleHalf = VIEW / 2;
@@ -498,6 +507,7 @@ export function Terrain() {
     lastTimber.current = timber;
     lastTreeView.current = treeView;
     resetTimberBatches(timberBatches);
+    treeSway.current?.begin(w);
     const authoredBatches = timberBatches.flatMap(b => [b.trunk.current, b.crown.current, b.trunkGhost.current, b.crownGhost.current]);
     for (const mesh of authoredBatches) ensureColor(mesh, count);
     if (landMoved) visibleResourceVisuals.current.clear();
@@ -563,13 +573,16 @@ export function Terrain() {
           const treeIndex = customTimber && batch ? claimTimberSlot(batch, under, { tx, ty }) : -1;
           if (customTimber) {
             customTrunk?.setMatrixAt(treeIndex, dummy.matrix);
+            treeSway.current?.setRoot(customTrunk, treeIndex, tx, gy, ty);
             paint(customTrunk ?? null, treeIndex, trunkCol);
           }
           if (under) {
             tkg?.setMatrixAt(gi, customTimber ? HIDDEN_TIMBER : dummy.matrix);
+            if (!customTimber) treeSway.current?.setRoot(tkg, gi, tx, gy, ty);
             paint(tkg, gi, trunkCol);
           } else {
             tk?.setMatrixAt(si, customTimber ? HIDDEN_TIMBER : dummy.matrix);
+            if (!customTimber) treeSway.current?.setRoot(tk, si, tx, gy, ty);
             paint(tk, si, trunkCol);
           }
           dummy.position.set(tx, gy + trunkH + CANOPY_H * crownScaleY * treeShape.crownLift, ty);
@@ -590,6 +603,7 @@ export function Terrain() {
               dummy.rotation.set(0, treeShape.yaw + lobe, wobble);
               dummy.updateMatrix();
               softCanopy.current.setMatrixAt(li, dummy.matrix);
+              treeSway.current?.setRoot(softCanopy.current, li, tx, gy, ty);
               softCanopy.current.setColorAt(li++, leafCol);
             }
             // Restore the unchanged resource matrix for gameplay picking below.
@@ -603,15 +617,18 @@ export function Terrain() {
           const customCrown = under ? batch?.crownGhost.current : batch?.crown.current;
           if (customTimber) {
             customCrown?.setMatrixAt(treeIndex, dummy.matrix);
+            treeSway.current?.setRoot(customCrown, treeIndex, tx, gy, ty);
             paint(customCrown ?? null, treeIndex, leafCol);
           }
           if (under) {
             gh?.setMatrixAt(gi, customTimber ? HIDDEN_TIMBER : dummy.matrix);
+            if (!customTimber) treeSway.current?.setRoot(gh, gi, tx, gy, ty);
             paint(gh, gi, leafCol);
             ghostAt.current[gi] = { tx, ty };
             gi++;
           } else {
             cn?.setMatrixAt(si, customTimber ? HIDDEN_TIMBER : dummy.matrix);
+            if (!customTimber) treeSway.current?.setRoot(cn, si, tx, gy, ty);
             paint(cn, si, leafCol);
             solidAt.current[si] = { tx, ty };
             si++;
@@ -734,6 +751,7 @@ export function Terrain() {
     }
     hideRest(tk, si, count);
     finishTimberBatches(timberBatches);
+    treeSway.current?.flush();
     hideRest(tkg, gi, count);
     if (softCanopy.current) {
       softCanopy.current.count = li;
