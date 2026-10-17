@@ -39956,7 +39956,7 @@
         "src/components/game/crafting/material-selector.tsx:36",
         "src/components/game/crafting/refining-panel.tsx:25",
         "src/components/game/crafting/salvage-panel.tsx:50",
-        "src/components/game/paperdoll.tsx:313",
+        "src/components/game/paperdoll.tsx:328",
         "src/components/game/part-sculptor.tsx:24"
       ],
       "rendererMapping": "direct AST declaration/name",
@@ -151382,7 +151382,7 @@
       "canonicalId": "src/game/player.ts#CombatFx.clean=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:974"
+        "src/game/player.ts:975"
       ],
       "sourceNames": [
         "CombatFx.clean"
@@ -151428,7 +151428,7 @@
       "canonicalId": "src/game/player.ts#CombatFx.clean=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:974"
+        "src/game/player.ts:975"
       ],
       "sourceNames": [
         "CombatFx.clean"
@@ -151474,7 +151474,7 @@
       "canonicalId": "src/game/player.ts#CombatFx.kind=arrow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:968"
+        "src/game/player.ts:969"
       ],
       "sourceNames": [
         "CombatFx.kind"
@@ -151520,7 +151520,7 @@
       "canonicalId": "src/game/player.ts#CombatFx.kind=melee",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:968"
+        "src/game/player.ts:969"
       ],
       "sourceNames": [
         "CombatFx.kind"
@@ -151566,7 +151566,7 @@
       "canonicalId": "src/game/player.ts#TamingFx.success=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:893"
+        "src/game/player.ts:894"
       ],
       "sourceNames": [
         "TamingFx.success"
@@ -151612,7 +151612,7 @@
       "canonicalId": "src/game/player.ts#TamingFx.success=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:893"
+        "src/game/player.ts:894"
       ],
       "sourceNames": [
         "TamingFx.success"
@@ -228489,13 +228489,13 @@
       "canonicalId": "src/components/game/hud.tsx#BuildRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:573"
+        "src/components/game/hud.tsx:576"
       ],
       "sourceNames": [
         "BuildRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:573"
+        "src/components/game/hud.tsx:576"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229702,6 +229702,14 @@
           "applicability": "source contract; runtime unverified"
         },
         {
+          "id": "predicate:packOpen || fishing",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hud.tsx:559"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
           "id": "predicate:pileOpen || craftOpen",
           "status": "inventoried",
           "evidence": [
@@ -229745,13 +229753,13 @@
       "canonicalId": "src/components/game/hud.tsx#TravelRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:600"
+        "src/components/game/hud.tsx:603"
       ],
       "sourceNames": [
         "TravelRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:600"
+        "src/components/game/hud.tsx:603"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229818,10 +229826,42 @@
           "applicability": "source contract; runtime unverified"
         },
         {
+          "id": "predicate:intent?.kind === \"fish\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hud.tsx:603"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
           "id": "predicate:lead",
           "status": "inventoried",
           "evidence": [
             "src/components/game/hud.tsx:836"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:n > 0",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hud.tsx:603"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:workT < 0.6",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hud.tsx:603"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:workT < 2.2",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hud.tsx:603"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -231572,6 +231612,7 @@
         "h2",
         "li",
         "p",
+        "section",
         "span",
         "ul"
       ],

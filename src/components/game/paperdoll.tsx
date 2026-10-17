@@ -171,6 +171,8 @@ export function YouDressing() {
   const drop = useGame((s) => s.drop);
   const heal = useGame((s) => s.heal);
   const eat = useGame((s) => s.eat);
+  const craft = useGame((s) => s.makeRecipe);
+  const toast = useGame((s) => s.toast);
   const equipRare = useGame((s) => s.equipRare);
   const [selected, setSelected] = useState<ItemId | null>(null);
   const reducedEffects = useGraphicsSettings().reducedEffects;
@@ -217,6 +219,19 @@ export function YouDressing() {
           <StatChip icon={Hand} label={`${dressed.mainLabel} — damage`} value={dressed.dmg} className="text-fg" />
           <StatChip icon={Shield} label="Armor" value={dressed.armor} className="text-fg" />
         </div>
+      )}
+
+      {toast && <p role="status" data-testid="pack-feedback" className="mb-3 rounded-[var(--radius-xs)] border border-border bg-surface-2 p-3 text-sm break-words text-fg">{toast}</p>}
+      {((pack.raw_fish ?? 0) > 0 || (pack.cooked_fish ?? 0) > 0) && (
+        <section data-testid="pond-supper" className="mb-3 rounded-[var(--radius-xs)] border border-border bg-surface-2 p-3">
+          <p className="font-display text-sm text-fg">Your catch</p>
+          <p className="mt-1 text-xs text-muted">{pack.raw_fish ?? 0} raw · {pack.cooked_fish ?? 0} cooked. Roast beside a lit campfire or hearth.</p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {(pack.raw_fish ?? 0) > 0 && <button type="button" disabled={ghost} onClick={() => craft("campfire")} className="min-h-11 rounded-[var(--radius-xs)] border border-border px-3 text-sm text-fg">Build campfire · 3 wood</button>}
+            {(pack.raw_fish ?? 0) > 0 && <button type="button" disabled={ghost} onClick={() => craft("roast_fish")} className="min-h-11 rounded-[var(--radius-xs)] border border-border px-3 text-sm text-fg">Roast fish</button>}
+            {(pack.cooked_fish ?? 0) > 0 && <button type="button" disabled={ghost} onClick={() => eat("cooked_fish")} className="min-h-11 rounded-[var(--radius-xs)] border border-gold/50 px-3 text-sm text-gold">Eat cooked fish</button>}
+          </div>
+        </section>
       )}
 
       {/* The Direland block: the living doll with its gear cells, wired
@@ -334,7 +349,7 @@ export function YouDressing() {
         <button type="button" onClick={heal} aria-label="Bandage" title="Bandage" className="grid min-h-11 flex-1 place-items-center rounded-[var(--radius-md)] border border-border bg-surface-2 text-fg">
           <Bandage className="size-4" />
         </button>
-        <button type="button" onClick={eat} aria-label="Eat" title="Eat" className="grid min-h-11 flex-1 place-items-center rounded-[var(--radius-md)] border border-border bg-surface-2 text-fg">
+        <button type="button" onClick={() => eat()} aria-label="Eat" title="Eat" className="grid min-h-11 flex-1 place-items-center rounded-[var(--radius-md)] border border-border bg-surface-2 text-fg">
           <Drumstick className="size-4" />
         </button>
       </div>

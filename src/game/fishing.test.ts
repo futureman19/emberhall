@@ -5,7 +5,7 @@ import { placeCampfire } from "./campfire.ts";
 import { commandCraft } from "./craft.ts";
 import { verbsFor } from "./context.ts";
 import { setWorld } from "./live.ts";
-import { commandFish, tickPlayer, you } from "./player.ts";
+import { commandEat, commandFish, tickPlayer, you } from "./player.ts";
 import { createPerson, createStubWorld } from "./world.ts";
 import type { TileKind, World } from "./types.ts";
 
@@ -34,7 +34,9 @@ function fishingWorld(kind: TileKind = "water"): { world: World; tx: number; ty:
 function landCast(world: World, roll: number) {
   you(world)!.path = [];
   Math.random = () => roll;
-  return tickPlayer(world, 0.6);
+  let note: string | null = null;
+  for (let i = 0; i < 32; i++) note = tickPlayer(world, 0.1) ?? note;
+  return note;
 }
 
 test("fishing - the skill is live and water exposes a cast action", () => {
@@ -87,6 +89,49 @@ test("fishing - dry ground, wrong gear, failed casts, and changed targets never 
   changed.world.tiles[changed.ty]![changed.tx]!.kind = "grass";
   assert.equal(landCast(changed.world, 0), "The water is gone.");
   assert.equal(changed.world.player.pack.raw_fish, 0);
+});
+
+test("fishing - a cast waits before landing and resets on recast", () => {
+  const { world, tx, ty } = fishingWorld();
+  world.player.wear.main = "fishing_rod";
+  world.player.workT = 50;
+  commandFish(world, tx, ty);
+  assert.equal(world.player.workT, 0);
+  you(world)!.path = [];
+  Math.random = () => 0;
+  for (let i = 0; i < 20; i++) tickPlayer(world, 0.1);
+  assert.equal(world.player.pack.raw_fish, 0);
+  assert.equal(world.player.intent.kind, "fish");
+  assert.match(landCast(world, 0) ?? "", /Pack.*roast/i);
+  assert.equal(world.player.pack.raw_fish, 1);
+});
+
+test("fishing - eat the selected cooked catch, not another meal", () => {
+  const { world } = fishingWorld();
+  world.player.pack.stew = 1;
+  world.player.pack.cooked_fish = 1;
+  you(world)!.hunger = 20;
+  assert.match(commandEat(world, "cooked_fish") ?? "", /fish/);
+  assert.equal(world.player.pack.cooked_fish, 0);
+  assert.equal(world.player.pack.stew, 1);
+  assert.equal(you(world)!.hunger, 58);
+  commandEat(world, "cooked_fish");
+  assert.equal(world.player.pack.stew, 1, "missing selected food never eats another meal");
+  commandEat(world, "fishing_rod");
+  assert.equal(world.player.pack.stew, 1);
+});
+
+test("fishing supper - harvested resource logs fuel the existing campfire recipe", () => {
+  const { world } = fishingWorld();
+  world.player.resources.stacks["oak:log:rough"] = 2;
+  Math.random = () => 0;
+  assert.match(commandCraft(world, "campfire") ?? "", /Need/);
+  assert.equal(world.player.resources.stacks["oak:log:rough"], 2);
+  world.player.pack.log = 1;
+  assert.match(commandCraft(world, "campfire") ?? "", /fire crackles/);
+  assert.equal(world.campfires.length, 1);
+  assert.equal(world.player.pack.log, 0);
+  assert.equal(world.player.resources.stacks["oak:log:rough"] ?? 0, 0);
 });
 
 test("fishing - a fresh catch roasts into proper food", () => {

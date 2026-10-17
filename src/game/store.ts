@@ -136,7 +136,7 @@ interface GameUI {
   unequip: (slot: WearSlot) => void;
   heal: () => void;
   cook: () => void;
-  eat: () => void;
+  eat: (item?: ItemId) => void;
   talk: (id: string) => void;
   buy: (item: ItemId) => void;
   sell: (item: ItemId) => void;
@@ -663,8 +663,8 @@ export const useGame = create<GameUI>((set, get) => ({
     if (err) get().flash(err);
     set({ snap: snapshot() });
   },
-  eat: () => {
-    const err = commandEat(getWorld());
+  eat: (item) => {
+    const err = commandEat(getWorld(), item);
     if (err) get().flash(err);
     set({ snap: snapshot() });
   },

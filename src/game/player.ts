@@ -305,6 +305,7 @@ export function commandFish(world: World, tx: number, ty: number) {
   const held = needHeld(world, "fishing_rod");
   if (held) return held;
   if (!pathBeside(world, p, tx, ty)) return "The shore is closed.";
+  world.player.workT = 0;
   world.player.intent = { kind: "fish", tx, ty, targetId: null, spell: null };
   return null;
 }
@@ -559,7 +560,7 @@ export function commandDrink(world: World, item: ItemId) {
   return "The dark thins.";
 }
 
-export function commandCook(world: World) {
+export function commandCook(world: World, selected?: ItemId) {
   const dead = hands(world);
   if (dead) return dead;
   const p = you(world);
@@ -576,7 +577,7 @@ export function commandCook(world: World) {
     ["raw_fish", 12, "You force the raw fish down."],
   ];
   for (const [id, fill, note] of meals) {
-    if ((world.player.pack[id] ?? 0) > 0) {
+    if ((!selected || selected === id) && (world.player.pack[id] ?? 0) > 0) {
       const before = p.hunger;
       world.player.pack[id] -= 1;
       p.hunger = Math.min(100, p.hunger + fill);
@@ -587,8 +588,8 @@ export function commandCook(world: World) {
   return "Need meat, cabbage, or wheat.";
 }
 
-export function commandEat(world: World) {
-  return commandCook(world);
+export function commandEat(world: World, item?: ItemId) {
+  return commandCook(world, item);
 }
 
 function isAdjacent(ax: number, ay: number, bx: number, by: number) {
@@ -746,7 +747,7 @@ function fishNow(world: World) {
   world.player.pack.raw_fish = (world.player.pack.raw_fish ?? 0) + 1;
   playSfx("loot", 0.3);
   const gain = tryGain(world, "fishing", true, true);
-  return gain ? `A silver fish takes the hook. ${gain}.` : "A silver fish takes the hook.";
+  return `A silver fish takes the hook. Raw fish in Pack — roast it at a fire.${gain ? ` ${gain}.` : ""}`;
 }
 
 function huntNow(world: World, p: Person) {
@@ -1162,7 +1163,13 @@ export function tickPlayer(world: World, dt: number): string | null {
     intent.kind = "none";
     return null;
   }
-  if (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "fish" || intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till" || intent.kind === "forest" || intent.kind === "pick" || intent.kind === "dig" || intent.kind === "fill") {
+  if (intent.kind === "fish") {
+    p.facing = Math.atan2(intent.tx - p.x, intent.ty - p.z);
+    world.player.workT += dt;
+    if (world.player.workT < 3) return null;
+    return fishNow(world);
+  }
+  if (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till" || intent.kind === "forest" || intent.kind === "pick" || intent.kind === "dig" || intent.kind === "fill") {
     p.facing = Math.atan2(intent.tx - p.x, intent.ty - p.z);
     const prev = world.player.workT;
     world.player.workT += dt;
@@ -1171,9 +1178,7 @@ export function tickPlayer(world: World, dt: number): string | null {
     if (intent.kind === "pick") {
       return pickNow(world);
     }
-    if (intent.kind === "fish") {
-      return fishNow(world);
-    }
+
     if (intent.kind === "till") {
       burstChips(world, intent.tx, intent.ty, "chop");
       return tillNow(world);

@@ -561,7 +561,10 @@ function Toast() {
   const houseOpen = useGame((s) => housePanelActive(s.snap.buildings, s.openHouseId, s));
   const pileOpen = useGame((s) => s.snap.piles.some((p) => p.id === s.openPileId));
   const craftOpen = useGame((s) => s.openCraft);
+  const packOpen = useGame((s) => s.panel === "you");
+  const fishing = useGame((s) => s.snap.player?.intent.kind === "fish");
   if (!toast || houseOpen) return null;
+  if (packOpen || fishing) return null;
   if (pileOpen || craftOpen) return null;
   return (
     <p role="status" className="pointer-events-none absolute top-48 left-1/2 z-40 w-max max-w-[calc(100vw-2rem)] -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/95 px-4 py-2 text-center font-display text-sm break-words text-fg sm:top-24 sm:max-w-md">
@@ -601,6 +604,15 @@ function TravelRibbon() {
   const n = useGame((s) => s.snap.youPath);
   const intent = useGame((s) => s.snap.player?.intent);
   const armed = useGame((s) => s.snap.player?.armedSpell);
+  const workT = useGame((s) => s.snap.player?.workT ?? 0);
+  if (intent?.kind === "fish") {
+    const label = n > 0 ? "Walking to the bank" : workT < 0.6 ? "Casting the line" : workT < 2.2 ? "Waiting for a bite" : "A tug — reeling in";
+    return (
+      <p data-testid="fishing-status" role="status" className="pointer-events-none absolute top-36 sm:top-20 left-1/2 w-max max-w-[80%] -translate-x-1/2 rounded-[var(--radius-md)] border border-border bg-bg/90 px-3 py-2 text-center font-display text-sm text-fg">
+        {label}
+      </p>
+    );
+  }
   if (armed) {
     const lead = armed === "teleport" || armed === "jump" || targetsGround(armed) ? "click the ground"
       : OFFENSIVE_SPELLS.has(armed) ? "click a beast"

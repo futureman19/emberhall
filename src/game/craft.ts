@@ -239,6 +239,14 @@ export function availableCraftIngredient(world: World, id: ItemId): number {
   return generic ? countGenericCraftResource(world.player, generic) : (world.player.pack[id] ?? 0);
 }
 
+/** Campfires accept harvested logs as well as legacy wood items. */
+function availableTag(world: World, rec: Recipe, tag: ResourceTag, self: Set<string>): number {
+  const packed = countTag(world.player.pack, tag, self);
+  return rec.placesFire && tag === "wood"
+    ? packed + countGenericCraftResource(world.player, "log") - (world.player.pack.log ?? 0)
+    : packed;
+}
+
 /** World-aware exact requirements; public pack-only haveNeed remains backward compatible. */
 function haveWorldNeed(world: World, rec: Recipe): boolean {
   if (rec.exactRecipeId) return false;
@@ -247,7 +255,7 @@ function haveWorldNeed(world: World, rec: Recipe): boolean {
   }
   const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {
-    if (countTag(world.player.pack, nt.tag, self) < nt.n) return false;
+    if (availableTag(world, rec, nt.tag, self) < nt.n) return false;
   }
   return true;
 }
@@ -304,7 +312,7 @@ export function missingNeed(world: World, rec: Recipe, quantities = false): stri
   }
   const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {
-    const have = countTag(world.player.pack, nt.tag, self);
+    const have = availableTag(world, rec, nt.tag, self);
     if (have < nt.n) return quantities
       ? `Need ${nt.n - have} more ${nt.tag} (${have}/${nt.n} eligible).`
       : `Need ${nt.n} ${nt.tag} — anything ${nt.tag} will do.`;
@@ -321,10 +329,12 @@ function consumeTags(world: World, rec: Recipe): ItemId[] {
     for (const id of tagConsumeOrder(nt.tag)) {
       if (self.has(id)) continue;
       if (left <= 0) break;
-      const have = world.player.pack[id] ?? 0;
+      const harvestedLogs = rec.placesFire && id === "log";
+      const have = harvestedLogs ? countGenericCraftResource(world.player, "log") : (world.player.pack[id] ?? 0);
       if (have <= 0) continue;
       const take = Math.min(have, left);
-      world.player.pack[id] = have - take;
+      if (harvestedLogs) debitGenericCraftResource(world.player, "log", take);
+      else world.player.pack[id] = have - take;
       left -= take;
       for (let i = 0; i < take; i++) used.push(id);
     }
@@ -506,7 +516,7 @@ export function maxCraftable(world: World, rec: Recipe): number {
   }
   const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {
-    max = Math.min(max, Math.floor(countTag(world.player.pack, nt.tag, self) / nt.n));
+    max = Math.min(max, Math.floor(availableTag(world, rec, nt.tag, self) / nt.n));
   }
   return Math.max(0, max);
 }
