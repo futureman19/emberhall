@@ -5,7 +5,8 @@ import { ensureExpansionFauna, ensureStarterFauna, seedBarrow, seedFauna } from 
 import { seedFarmPlots } from "./farm.ts";
 import { clearSpellEffects, refreshSpellStatuses } from "./spell-effects.ts";
 import { maxMana } from "./magery.ts";
-import { godModeEnabled } from "./god.ts";
+import { isSandbox } from "./god.ts";
+import { prepareSandbox } from "./sandbox.ts";
 import { you } from "./player.ts";
 import { mulberry32 } from "./rng.ts";
 import { ensureWeather, weatherSnap } from "./weather.ts";
@@ -116,12 +117,9 @@ function withFauna(w: World) {
 
 let world: World = createStubWorld();
 
-/** God mode (?god=1): every skill taught to 100 and the well filled, each time a world loads. */
+/** Only provenance-marked sandbox worlds receive the registry-driven kit. */
 function godify(w: World): void {
-  if (!godModeEnabled()) return;
-  for (const key of Object.keys(w.player.skills)) w.player.skills[key as keyof typeof w.player.skills] = 100;
-  const p = w.people.find((x) => x.isPlayer);
-  w.player.mana = maxMana(p?.int ?? 8, 100);
+  if (isSandbox(w)) prepareSandbox(w);
 }
 
 export function getWorld() {

@@ -44,6 +44,7 @@ test("god mode - the pool never empties", () => {
   setGodOverride(true);
   try {
     const { world, person } = worldWithSelf();
+    Object.assign(world, { sandbox: true });
     world.player.skills.magery = 100;
     world.player.mana = 1;
     tickMana(world, 0.016);

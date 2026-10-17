@@ -59,6 +59,8 @@ import {
 } from "./player.ts";
 import { commandNamePet } from "./pets.ts";
 import { takeFromPile, takeGoldFromPile } from "./piles.ts";
+import { godModeEnabled, isSandbox } from "./god.ts";
+import { prepareSandbox } from "./sandbox.ts";
 import { clearSave, hasSave, loadSave, writeSave } from "./save.ts";
 import { recruitPerson, setSpeed, tickWorld } from "./sim.ts";
 import { completeObjective, placeBuilding } from "./world.ts";
@@ -295,6 +297,14 @@ export const useGame = create<GameUI>((set, get) => ({
         // line pins above (Phase/GameUI vocabulary) undisturbed.
         const { grantEverything, syncTestKitFromUrl, testKitEnabled } = await import("./testkit.ts");
         syncTestKitFromUrl(window.location.search);
+        if (testKitEnabled() && !godModeEnabled()) {
+          const url = new URL(window.location.href);
+          url.searchParams.set("god", "1");
+          url.searchParams.set("testkit", "0");
+          url.searchParams.set("play", "1");
+          window.location.assign(url.href);
+          return;
+        }
         if (fresh) {
           clearSave();
           resetWorld();
@@ -310,6 +320,7 @@ export const useGame = create<GameUI>((set, get) => ({
           if (loaded) setWorld(loaded);
           else resetWorld();
         }
+        if (godModeEnabled()) prepareSandbox(getWorld());
         set({ loadNote: "Raising the hall.", loadProgress: 0.72 });
         await paint();
         getWorld().speed = 1;
@@ -803,6 +814,7 @@ export const useGame = create<GameUI>((set, get) => ({
   closeCraft: () => set({ openCraft: false }),
   openVaultGump: () => {
     const w = getWorld();
+    if (isSandbox(w)) { get().flash("The Vault is unavailable in the local sandbox."); return; }
     if (w.player.ghost) {
       get().flash("A ghost cannot.");
       return;

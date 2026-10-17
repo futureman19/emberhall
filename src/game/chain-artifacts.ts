@@ -104,11 +104,14 @@ function playerPerson(world: World): Person | null {
   return world.people.find((person) => person.isPlayer) ?? null;
 }
 
+import { isSandbox } from "./god.ts";
+
 export function encodeCharacterLookInscription(
   world: World,
   person: Person,
   previous?: Pick<CharacterLookInscription, "revision"> & { outpoint: string },
 ): CharacterLookInscription | null {
+  if (isSandbox(world)) return null;
   if (!person.isPlayer || !validName(person.name, 24) || !CLASS_IDS.includes(person.cls)) return null;
   const look = parseLookRecipe(person.look ?? { schema: LOOK_SCHEMA, cls: person.cls }, person.cls);
   if (!look) return null;
@@ -214,6 +217,7 @@ function partCommitment(part: PartInscription["part"]): PartInscription["commitm
 }
 
 export function encodePartInscription(world: World, part: VoxelPartV1): PartInscription | null {
+  if (isSandbox(world)) return null;
   const person = playerPerson(world);
   const parsed = parsePart({
     ...part,

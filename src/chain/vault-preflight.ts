@@ -4,6 +4,7 @@ import { encodeSave } from "../game/save.ts";
 
 /** Reject invalid identity/duplicates/unsaveable outcomes before any signature request. */
 export function preflightItemRedeem(world: World, raw: unknown): void {
+  if ("sandbox" in world && world.sandbox === true) throw new Error("Sandbox cannot redeem real items.");
   if (world.player.ghost) throw new Error("A ghost cannot redeem.");
   const payload = decodeItemInscription(raw);
   if (!payload) throw new Error("This Vault inscription is invalid or unsupported.");

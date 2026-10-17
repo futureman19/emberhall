@@ -1,3 +1,5 @@
+import { SandboxControls } from "./sandbox-controls";
+import { isSandbox } from "@/game/god";
 import { Button } from "@/components/ui/button";
 import { CombatCluster } from "@/components/game/chrome/combat-cluster";
 import { CornerCluster } from "@/components/game/chrome/corner-cluster";
@@ -43,6 +45,9 @@ import { useCallback, useEffect, useRef, useState, type KeyboardEvent as ReactKe
 
 export function Hud() {
   const phase = useGame((s) => s.phase);
+  useEffect(() => {
+    if (phase === "title" && new URLSearchParams(window.location.search).get("play") === "1") useGame.getState().begin(false);
+  }, [phase]);
   const introDone = useGame((s) => s.introDone);
   const lookDone = useGame((s) => s.lookDone);
   useEffect(() => {
@@ -113,7 +118,8 @@ function PlayingChrome() {
       <HouseGump />
       <SpellbookGump />
       <CraftGump />
-      <VaultGump />
+      {!isSandbox(getWorld()) && <VaultGump />}
+
       <SettingsGump />
       <PetsGump />
       <Toast />
@@ -237,6 +243,7 @@ function TitleOverlay() {
             {startError} Please try again.
           </p>
         )}
+        <SandboxControls />
         <div className="mt-6 flex flex-col gap-2">
           {confirmNew ? (
             <div role="alertdialog" aria-labelledby="replace-hall-title" aria-describedby="replace-hall-desc" onKeyDown={(e) => {

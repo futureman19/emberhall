@@ -1,3 +1,9 @@
+import { godModeEnabled } from "@/game/god";
+
+function assertRealSession() {
+  if (godModeEnabled()) throw new Error("The Vault is unavailable in the local sandbox.");
+}
+
 import type { OneSatContext } from "@1sat/actions";
 import type { WalletInterface, WalletOutput } from "@bsv/sdk";
 import {
@@ -29,6 +35,7 @@ const CONTENT_URL = "https://api.1sat.app/content";
 let cached: { wallet: WalletInterface; ctx: OneSatContext } | null = null;
 
 export function oneSatCtx(wallet: WalletInterface): OneSatContext {
+  assertRealSession();
   if (cached && cached.wallet === wallet) return cached.ctx;
   // Keep @1sat/actions out of the SSR graph. Its current package export points
   // at an extensionless `dist/types` module that Node cannot resolve, while all
@@ -54,6 +61,7 @@ export async function mintItemNft(
   world: World,
   item: ItemId,
 ): Promise<{ txid: string; payload: ItemInscription }> {
+  assertRealSession();
   const payload = encodeItemInscription(world, item);
   const base64Content = payload ? inscriptionBase64(world, item) : null;
   if (!payload || !base64Content) throw new Error("That item cannot be inscribed.");
@@ -71,6 +79,7 @@ export async function mintRareNft(
   world: World,
   rare: RareItem,
 ): Promise<{ txid: string; payload: ItemInscription }> {
+  assertRealSession();
   const payload = encodeRareInscription(world, rare);
   const base64Content = payload ? inscriptionBase64(world, rare.base, rare) : null;
   if (!payload || !base64Content) throw new Error("That wonder cannot be inscribed.");
@@ -118,6 +127,7 @@ export async function mintCharacterLookNft(
   world: World,
   previous?: LookNft,
 ): Promise<{ txid: string; payload: CharacterLookInscription }> {
+  assertRealSession();
   const person = world.people.find(({ isPlayer }) => isPlayer);
   if (!person) throw new Error("The looking glass cannot find you.");
   const payload = encodeCharacterLookInscription(
@@ -147,6 +157,7 @@ export async function mintPartNft(
   world: World,
   part: VoxelPartV1,
 ): Promise<{ txid: string; payload: PartInscription }> {
+  assertRealSession();
   const payload = encodePartInscription(world, part);
   if (!payload) throw new Error("That sculpture cannot be inscribed.");
   const { inscribe } = await import("@1sat/actions");
@@ -245,6 +256,7 @@ export async function listVaultNfts(ctx: OneSatContext): Promise<VaultNft[]> {
 }
 
 export async function redeemItemNft(ctx: OneSatContext, id: string): Promise<string> {
+  assertRealSession();
   const { burnOrdinals } = await import("@1sat/actions");
   const res = await burnOrdinals.execute(ctx, { ids: [id], app: VAULT_APP });
   return unwrap("The redeem", res);
@@ -252,12 +264,14 @@ export async function redeemItemNft(ctx: OneSatContext, id: string): Promise<str
 
 export async function sellItemNft(ctx: OneSatContext, id: string, priceSats: number): Promise<string> {
   if (!Number.isSafeInteger(priceSats) || priceSats < 1) throw new Error("Name a price in whole satoshis.");
+  assertRealSession();
   const { sellOrdinal } = await import("@1sat/actions");
   const res = await sellOrdinal.execute(ctx, { id, price: priceSats });
   return unwrap("The listing", res);
 }
 
 export async function cancelItemNft(ctx: OneSatContext, id: string): Promise<string> {
+  assertRealSession();
   const { cancelOrdinalListing } = await import("@1sat/actions");
   const res = await cancelOrdinalListing.execute(ctx, { id });
   return unwrap("The cancel", res);

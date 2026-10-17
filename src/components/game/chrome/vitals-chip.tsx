@@ -1,3 +1,5 @@
+import { isSandbox } from "@/game/god";
+import { getWorld } from "@/game/live";
 import { Cloud, CloudLightning, CloudRain, CloudSun, Sun } from "lucide-react";
 import { insideLabel } from "@/components/game/building-meshes";
 import { BUILDING_META } from "@/game/catalog";
@@ -44,6 +46,7 @@ export function VitalsChip() {
         <WeatherIcon className="size-3.5 shrink-0 md:hidden" aria-label={snap.weather.label} />
         <span className="hidden md:inline">· {snap.weather.label}</span>
       </p>
+      {isSandbox(getWorld()) && <button type="button" aria-label="Godmode sandbox settings" className="mt-1 block min-h-6 text-left text-[10px] text-gold" onClick={() => useGame.getState().toggleSettings()}>GODMODE · Sandbox</button>}
       {(poisoned || blessed || unseen) && (
         <p className="mt-1 text-[10px] tracking-wider uppercase">
           {poisoned && <span className="text-gold">Poisoned</span>}

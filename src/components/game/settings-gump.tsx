@@ -1,3 +1,6 @@
+import { SandboxControls } from "./sandbox-controls";
+import { isSandbox } from "@/game/god";
+import { getWorld } from "@/game/live";
 import { AudioLines, Eye, Gem, Music2, Sparkles, SunMedium, Trees } from "lucide-react";
 import { useWallet } from "@1sat/react";
 import { Button } from "@/components/ui/button";
@@ -34,7 +37,8 @@ export function SettingsGump() {
         <SoundRow kind="sfx" />
       </div>
       <GraphicsSection />
-      <VaultRow />
+      <SandboxControls />
+      {!isSandbox(getWorld()) && <VaultRow />}
       <CloseRow />
     </div>
   );

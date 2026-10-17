@@ -8,6 +8,7 @@ import {
   SKILL_META,
   VOCATION_META,
 } from "./catalog.ts";
+import { SPELL_META } from "./magery.ts";
 import { WEATHER_META } from "./weather.ts";
 import { ITEM_FORM_CATALOG } from "./crafting/forms.ts";
 import { resolveItemStats } from "./crafting/resolve.ts";
@@ -26,7 +27,11 @@ import {
 } from "./resources/state.ts";
 import type { ItemId, World } from "./types.ts";
 
+import { godModeEnabled, isSandbox } from "./god.ts";
+
 export const SAVE_KEY = "emberhall-save-v4";
+export const SANDBOX_SAVE_KEY = "emberhall-godmode-save-v1";
+function activeSaveKey() { return godModeEnabled() ? SANDBOX_SAVE_KEY : SAVE_KEY; }
 export const CURRENT_SAVE_VERSION = 5;
 
 type SaveRecord = Record<string, unknown>;
@@ -58,23 +63,7 @@ const TECHNIQUE_IDS = new Set([
   "bash", "sunder", "doomblow",
 ]);
 
-const SPELL_IDS = new Set([
-  "nightsight",
-  "heal",
-  "magicarrow",
-  "teleport",
-  "fireball",
-  "cure",
-  "poison",
-  "bless",
-  "lightning",
-  "summon",
-  "paralyze",
-  "invisibility",
-  "curse",
-  "mark",
-  "recall",
-]);
+const SPELL_IDS = new Set(Object.keys(SPELL_META));
 const CREATURE_TASKS = new Set(["wander", "flee", "fight", "follow", "dead", "idle"]);
 const CREATURE_ART = new Set(["thornbound", "stonebound", "galebound", "tidebound", "risen"]);
 const CROP_IDS = new Set(["cabbage", "wheat", "garlic", "ginseng", "mandrake", "moss"]);
@@ -572,6 +561,7 @@ function isStoredTiles(value: unknown): boolean {
 function isCurrentSave(save: SaveRecord): boolean {
   return (
     save.saveVersion === CURRENT_SAVE_VERSION &&
+    (save.sandbox === undefined || save.sandbox === true) &&
     typeof save.seed === "number" &&
     Number.isSafeInteger(save.seed) &&
     isFiniteNumber(save.hour) &&
@@ -651,7 +641,7 @@ function migrateSave(value: unknown): SaveRecord | null {
 
 export function hasSave() {
   try {
-    return Boolean(localStorage.getItem(SAVE_KEY));
+    return Boolean(localStorage.getItem(activeSaveKey()));
   } catch {
     return false;
   }
@@ -659,7 +649,7 @@ export function hasSave() {
 
 export function clearSave() {
   try {
-    localStorage.removeItem(SAVE_KEY);
+    localStorage.removeItem(activeSaveKey());
   } catch {
     /* ignore */
   }
@@ -701,7 +691,7 @@ export function writeSave(world: World): SaveResult {
     return { ok: false, reason: "invalid-state" };
   }
   try {
-    localStorage.setItem(SAVE_KEY, encoded);
+    localStorage.setItem(isSandbox(world) ? SANDBOX_SAVE_KEY : SAVE_KEY, encoded);
     return { ok: true };
   } catch {
     return { ok: false, reason: "storage-unavailable" };
@@ -710,11 +700,11 @@ export function writeSave(world: World): SaveResult {
 
 export function loadSave(): World | null {
   try {
-    const raw = localStorage.getItem(SAVE_KEY);
+    const raw = localStorage.getItem(activeSaveKey());
     if (!raw) return null;
 
     const migrated = migrateSave(JSON.parse(raw));
-    if (!migrated || !isCurrentSave(migrated)) {
+    if (!migrated || !isCurrentSave(migrated) || isSandbox(migrated) !== godModeEnabled()) {
       return null;
     }
 

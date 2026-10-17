@@ -109,6 +109,7 @@
     "src/components/game/rowan-character-context.ts",
     "src/components/game/rowan-character-data.ts",
     "src/components/game/rowan-character.tsx",
+    "src/components/game/sandbox-controls.tsx",
     "src/components/game/screen-rain.tsx",
     "src/components/game/settings-gump.tsx",
     "src/components/game/settlement-kit.ts",
@@ -225,6 +226,7 @@
     "src/game/river-bridge.ts",
     "src/game/rng.ts",
     "src/game/salvage.ts",
+    "src/game/sandbox.ts",
     "src/game/save.ts",
     "src/game/sim.ts",
     "src/game/skills.ts",
@@ -651,14 +653,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -767,14 +769,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1128,14 +1130,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1302,14 +1304,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1418,14 +1420,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1761,14 +1763,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2089,14 +2091,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2443,14 +2445,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2559,14 +2561,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2747,14 +2749,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2863,14 +2865,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2979,14 +2981,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3095,14 +3097,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3443,14 +3445,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3711,14 +3713,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3885,14 +3887,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4001,14 +4003,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4117,14 +4119,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4233,14 +4235,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4349,14 +4351,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4700,14 +4702,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4816,14 +4818,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4932,14 +4934,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -5048,14 +5050,14 @@
         "src/components/game/architecture-kit.ts:1",
         "src/components/game/building-meshes.tsx:1",
         "src/components/game/building-meshes.tsx:16",
-        "src/components/game/chrome/vitals-chip.tsx:3",
+        "src/components/game/chrome/vitals-chip.tsx:5",
         "src/components/game/commons-kit.ts:1",
         "src/components/game/hold-panel.tsx:3",
         "src/components/game/hospitality-kit.ts:1",
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -8284,7 +8286,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8338,7 +8340,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8392,7 +8394,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8446,7 +8448,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8500,7 +8502,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8554,7 +8556,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8608,7 +8610,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8662,7 +8664,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8716,7 +8718,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8770,7 +8772,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8824,7 +8826,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8878,7 +8880,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8932,7 +8934,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8986,7 +8988,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9040,7 +9042,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9094,7 +9096,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9148,7 +9150,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9202,7 +9204,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9256,7 +9258,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9310,7 +9312,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9364,7 +9366,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9418,7 +9420,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9472,7 +9474,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9526,7 +9528,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9580,7 +9582,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9634,7 +9636,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9688,7 +9690,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9742,7 +9744,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9796,7 +9798,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9850,7 +9852,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9904,7 +9906,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9958,7 +9960,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10012,7 +10014,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10066,7 +10068,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10120,7 +10122,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10174,7 +10176,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10228,7 +10230,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10282,7 +10284,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:31",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10338,7 +10340,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10401,7 +10403,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10464,7 +10466,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10527,7 +10529,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10590,7 +10592,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:29",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -34466,13 +34468,13 @@
       "canonicalId": "src/components/game/chrome/vitals-chip.tsx#clockLabel",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/chrome/vitals-chip.tsx:7"
+        "src/components/game/chrome/vitals-chip.tsx:9"
       ],
       "sourceNames": [
         "clockLabel"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/vitals-chip.tsx:7"
+        "src/components/game/chrome/vitals-chip.tsx:9"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -37404,13 +37406,13 @@
       "canonicalId": "src/components/game/hud.tsx#startHall",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/hud.tsx:144"
+        "src/components/game/hud.tsx:150"
       ],
       "sourceNames": [
         "startHall"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:144"
+        "src/components/game/hud.tsx:150"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -43253,6 +43255,80 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/rowan-character-data.ts:14"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/sandbox-controls.tsx#switchMode",
+      "canonicalId": "src/components/game/sandbox-controls.tsx#switchMode",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/sandbox-controls.tsx:6"
+      ],
+      "sourceNames": [
+        "switchMode"
+      ],
+      "rendererLocations": [
+        "src/components/game/sandbox-controls.tsx:6"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/sandbox-controls.tsx"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/sandbox-controls.tsx:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:game.phase === \"playing\" && !game.saveNow()",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/sandbox-controls.tsx:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:on",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/sandbox-controls.tsx:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/sandbox-controls.tsx:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/sandbox-controls.tsx:6"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -50851,13 +50927,13 @@
       "canonicalId": "src/components/game/chrome/vitals-chip.tsx#VitalsChip",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/chrome/vitals-chip.tsx:21"
+        "src/components/game/chrome/vitals-chip.tsx:23"
       ],
       "sourceNames": [
         "VitalsChip"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/vitals-chip.tsx:21"
+        "src/components/game/chrome/vitals-chip.tsx:23"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -59356,6 +59432,76 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/rowan-character.tsx:5"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/sandbox-controls.tsx#SandboxControls",
+      "canonicalId": "src/components/game/sandbox-controls.tsx#SandboxControls",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/sandbox-controls.tsx:17"
+      ],
+      "sourceNames": [
+        "SandboxControls"
+      ],
+      "rendererLocations": [
+        "src/components/game/sandbox-controls.tsx:17"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/sandbox-controls.tsx"
+      ],
+      "jsxTags": [
+        "button",
+        "p",
+        "section"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/sandbox-controls.tsx:17"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:active",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/sandbox-controls.tsx:17"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/sandbox-controls.tsx:17"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/sandbox-controls.tsx:17"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -192690,7 +192836,7 @@
       "canonicalId": "src/game/save.ts#SaveResult.ok=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/save.ts:668"
+        "src/game/save.ts:658"
       ],
       "sourceNames": [
         "SaveResult.ok"
@@ -192736,7 +192882,7 @@
       "canonicalId": "src/game/save.ts#SaveResult.ok=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/save.ts:668"
+        "src/game/save.ts:658"
       ],
       "sourceNames": [
         "SaveResult.ok"
@@ -194622,7 +194768,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=apothecary",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -194668,7 +194814,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=bank",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -194714,7 +194860,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=board",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -194760,7 +194906,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=cottage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -194806,7 +194952,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=dormitory",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -194852,7 +194998,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=farm",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -194898,7 +195044,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=forge",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -194944,7 +195090,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=gatehouse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -194990,7 +195136,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=hall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195036,7 +195182,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=homestead",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195082,7 +195228,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=hut",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195128,7 +195274,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=keep",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195174,7 +195320,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=kitchen",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195220,7 +195366,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=market",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195266,7 +195412,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=notice",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195312,7 +195458,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=porch",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195358,7 +195504,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=rampart",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195404,7 +195550,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=rampartV",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195450,7 +195596,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=shop",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195496,7 +195642,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=tavern",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195542,7 +195688,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=tower",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195588,7 +195734,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=townhome",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195634,7 +195780,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=townhouse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195680,7 +195826,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=yard",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:108"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195726,7 +195872,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openBook=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:95"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.openBook"
@@ -195772,7 +195918,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openBook=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:95"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.openBook"
@@ -195818,7 +195964,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openCraft=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:98"
       ],
       "sourceNames": [
         "GameUI.openCraft"
@@ -195864,7 +196010,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openCraft=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:98"
       ],
       "sourceNames": [
         "GameUI.openCraft"
@@ -195910,7 +196056,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openPets=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:99"
+        "src/game/store.ts:101"
       ],
       "sourceNames": [
         "GameUI.openPets"
@@ -195956,7 +196102,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openPets=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:99"
+        "src/game/store.ts:101"
       ],
       "sourceNames": [
         "GameUI.openPets"
@@ -196002,7 +196148,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openSettings=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.openSettings"
@@ -196048,7 +196194,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openSettings=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.openSettings"
@@ -196094,7 +196240,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openVault=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:97"
+        "src/game/store.ts:99"
       ],
       "sourceNames": [
         "GameUI.openVault"
@@ -196140,7 +196286,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openVault=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:97"
+        "src/game/store.ts:99"
       ],
       "sourceNames": [
         "GameUI.openVault"
@@ -196186,7 +196332,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=build",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:91"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -196232,7 +196378,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=help",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:91"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -196278,7 +196424,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=journal",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:91"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -196324,7 +196470,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=none",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:91"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -196370,7 +196516,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=roster",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:91"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -196416,7 +196562,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=vale",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:91"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -196462,7 +196608,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=you",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:91"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -196508,7 +196654,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=intro",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:86"
+        "src/game/store.ts:88"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -196554,7 +196700,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=looking",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:86"
+        "src/game/store.ts:88"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -196600,7 +196746,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=playing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:86"
+        "src/game/store.ts:88"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -196646,7 +196792,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=raising",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:86"
+        "src/game/store.ts:88"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -196692,7 +196838,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=title",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:86"
+        "src/game/store.ts:88"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -196738,7 +196884,7 @@
       "canonicalId": "src/game/store.ts#GameUI.tillArmed=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:110"
+        "src/game/store.ts:112"
       ],
       "sourceNames": [
         "GameUI.tillArmed"
@@ -196784,7 +196930,7 @@
       "canonicalId": "src/game/store.ts#GameUI.tillArmed=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:110"
+        "src/game/store.ts:112"
       ],
       "sourceNames": [
         "GameUI.tillArmed"
@@ -223050,7 +223196,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.app=emberhall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:46"
+        "src/game/vault.ts:47"
       ],
       "sourceNames": [
         "ItemInscription.app"
@@ -223096,7 +223242,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=acorn",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223142,7 +223288,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=arrows",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223188,7 +223334,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=ash",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223234,7 +223380,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=bandage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223280,7 +223426,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=board",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223326,7 +223472,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=boots",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223372,7 +223518,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=bow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223418,7 +223564,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=bread",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223464,7 +223610,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=cabbage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223510,7 +223656,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=cabbage_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223556,7 +223702,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=cap",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223602,7 +223748,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=cloak",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223648,7 +223794,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=club",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223694,7 +223840,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=cooked_fish",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223740,7 +223886,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=cooked_meat",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223786,7 +223932,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=crate",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223832,7 +223978,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=cuirass",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223878,7 +224024,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=deed_homestead",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223924,7 +224070,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=deed_hut",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -223970,7 +224116,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=deed_porch",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224016,7 +224162,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=fishing_rod",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224062,7 +224208,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=garlic",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224108,7 +224254,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=garlic_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224154,7 +224300,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=gauntlets",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224200,7 +224346,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=ginseng",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224246,7 +224392,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=ginseng_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224292,7 +224438,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=gloves",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224338,7 +224484,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=gorget",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224384,7 +224530,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=greaves",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224430,7 +224576,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=hatchet",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224476,7 +224622,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=heater",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224522,7 +224668,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=helm",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224568,7 +224714,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=hide",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224614,7 +224760,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=hoe",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224660,7 +224806,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=hood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224706,7 +224852,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=hose",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224752,7 +224898,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=ingot",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224798,7 +224944,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=knife",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224844,7 +224990,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=leather",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224890,7 +225036,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=log",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224936,7 +225082,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=mace",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -224982,7 +225128,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=mail",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225028,7 +225174,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=mandrake",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225074,7 +225220,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=mandrake_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225120,7 +225266,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=meat",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225166,7 +225312,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=moss",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225212,7 +225358,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=moss_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225258,7 +225404,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=nightshade",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225304,7 +225450,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=orc_tusk",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225350,7 +225496,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=ore",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225396,7 +225542,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=pearl",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225442,7 +225588,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=pendant",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225488,7 +225634,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=pick",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225534,7 +225680,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=potion_heal",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225580,7 +225726,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=potion_night",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225626,7 +225772,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=rabbit_foot",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225672,7 +225818,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=raw_fish",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225718,7 +225864,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=relic",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225764,7 +225910,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=ring",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225810,7 +225956,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=rune",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225856,7 +226002,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=shield",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225902,7 +226048,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=silk",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225948,7 +226094,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=spellbook",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -225994,7 +226140,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=staff",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -226040,7 +226186,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=stew",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -226086,7 +226232,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=sword",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -226132,7 +226278,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=torch",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -226178,7 +226324,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=tunic",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -226224,7 +226370,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=wheat",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -226270,7 +226416,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.item=wheat_seed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:49"
+        "src/game/vault.ts:50"
       ],
       "sourceNames": [
         "ItemInscription.item"
@@ -226316,7 +226462,7 @@
       "canonicalId": "src/game/vault.ts#ItemInscription.type=item",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:48"
+        "src/game/vault.ts:49"
       ],
       "sourceNames": [
         "ItemInscription.type"
@@ -226362,7 +226508,7 @@
       "canonicalId": "src/game/vault.ts#LedgerEntry.kind=cancel",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:331"
+        "src/game/vault.ts:334"
       ],
       "sourceNames": [
         "LedgerEntry.kind"
@@ -226408,7 +226554,7 @@
       "canonicalId": "src/game/vault.ts#LedgerEntry.kind=list",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:331"
+        "src/game/vault.ts:334"
       ],
       "sourceNames": [
         "LedgerEntry.kind"
@@ -226454,7 +226600,7 @@
       "canonicalId": "src/game/vault.ts#LedgerEntry.kind=mint",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:331"
+        "src/game/vault.ts:334"
       ],
       "sourceNames": [
         "LedgerEntry.kind"
@@ -226500,7 +226646,7 @@
       "canonicalId": "src/game/vault.ts#LedgerEntry.kind=redeem",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/vault.ts:331"
+        "src/game/vault.ts:334"
       ],
       "sourceNames": [
         "LedgerEntry.kind"
@@ -228489,13 +228635,13 @@
       "canonicalId": "src/components/game/hud.tsx#BuildRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:576"
+        "src/components/game/hud.tsx:583"
       ],
       "sourceNames": [
         "BuildRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:576"
+        "src/components/game/hud.tsx:583"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -228575,13 +228721,13 @@
       "canonicalId": "src/components/game/hud.tsx#GhostBanner",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:521"
+        "src/components/game/hud.tsx:528"
       ],
       "sourceNames": [
         "GhostBanner"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:521"
+        "src/components/game/hud.tsx:528"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -228669,13 +228815,13 @@
       "canonicalId": "src/components/game/hud.tsx#GuideTabs",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:367"
+        "src/components/game/hud.tsx:374"
       ],
       "sourceNames": [
         "GuideTabs"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:367"
+        "src/components/game/hud.tsx:374"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -228757,13 +228903,13 @@
       "canonicalId": "src/components/game/hud.tsx#HelpPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:413"
+        "src/components/game/hud.tsx:420"
       ],
       "sourceNames": [
         "HelpPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:413"
+        "src/components/game/hud.tsx:420"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -228830,13 +228976,13 @@
       "canonicalId": "src/components/game/hud.tsx#Hud",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:44"
+        "src/components/game/hud.tsx:46"
       ],
       "sourceNames": [
         "Hud"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:44"
+        "src/components/game/hud.tsx:46"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -228899,6 +229045,14 @@
           "applicability": "source contract; runtime unverified"
         },
         {
+          "id": "predicate:phase === \"title\" && new URLSearchParams(window.location.search).get(\"play\") === \"1\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/hud.tsx:46"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
           "id": "present",
           "status": "inventoried",
           "evidence": [
@@ -228934,13 +229088,13 @@
       "canonicalId": "src/components/game/hud.tsx#JournalPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:462"
+        "src/components/game/hud.tsx:469"
       ],
       "sourceNames": [
         "JournalPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:462"
+        "src/components/game/hud.tsx:469"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -228997,13 +229151,13 @@
       "canonicalId": "src/components/game/hud.tsx#PlayingChrome",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:58"
+        "src/components/game/hud.tsx:63"
       ],
       "sourceNames": [
         "PlayingChrome"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:58"
+        "src/components/game/hud.tsx:63"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229121,13 +229275,13 @@
       "canonicalId": "src/components/game/hud.tsx#RaisingOverlay",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:312"
+        "src/components/game/hud.tsx:319"
       ],
       "sourceNames": [
         "RaisingOverlay"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:312"
+        "src/components/game/hud.tsx:319"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229183,13 +229337,13 @@
       "canonicalId": "src/components/game/hud.tsx#RosterPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:478"
+        "src/components/game/hud.tsx:485"
       ],
       "sourceNames": [
         "RosterPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:478"
+        "src/components/game/hud.tsx:485"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229272,13 +229426,13 @@
       "canonicalId": "src/components/game/hud.tsx#SaveFailureBanner",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:131"
+        "src/components/game/hud.tsx:137"
       ],
       "sourceNames": [
         "SaveFailureBanner"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:131"
+        "src/components/game/hud.tsx:137"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229342,13 +229496,13 @@
       "canonicalId": "src/components/game/hud.tsx#SelectedCard",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:505"
+        "src/components/game/hud.tsx:512"
       ],
       "sourceNames": [
         "SelectedCard"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:505"
+        "src/components/game/hud.tsx:512"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229427,13 +229581,13 @@
       "canonicalId": "src/components/game/hud.tsx#SidePanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:334"
+        "src/components/game/hud.tsx:341"
       ],
       "sourceNames": [
         "SidePanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:334"
+        "src/components/game/hud.tsx:341"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229509,19 +229663,20 @@
       "canonicalId": "src/components/game/hud.tsx#TitleOverlay",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:153"
+        "src/components/game/hud.tsx:159"
       ],
       "sourceNames": [
         "TitleOverlay"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:153"
+        "src/components/game/hud.tsx:159"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
         "src/components/game/hud.tsx"
       ],
       "jsxTags": [
+        "SandboxControls",
         "SoundToggles",
         "button",
         "div",
@@ -229669,13 +229824,13 @@
       "canonicalId": "src/components/game/hud.tsx#Toast",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:559"
+        "src/components/game/hud.tsx:566"
       ],
       "sourceNames": [
         "Toast"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:559"
+        "src/components/game/hud.tsx:566"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229753,13 +229908,13 @@
       "canonicalId": "src/components/game/hud.tsx#TravelRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:603"
+        "src/components/game/hud.tsx:610"
       ],
       "sourceNames": [
         "TravelRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:603"
+        "src/components/game/hud.tsx:610"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -232194,13 +232349,13 @@
       "canonicalId": "src/components/game/settings-gump.tsx#CloseRow",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/settings-gump.tsx:211"
+        "src/components/game/settings-gump.tsx:215"
       ],
       "sourceNames": [
         "CloseRow"
       ],
       "rendererLocations": [
-        "src/components/game/settings-gump.tsx:211"
+        "src/components/game/settings-gump.tsx:215"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -232254,13 +232409,13 @@
       "canonicalId": "src/components/game/settings-gump.tsx#GraphicsSection",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/settings-gump.tsx:68"
+        "src/components/game/settings-gump.tsx:72"
       ],
       "sourceNames": [
         "GraphicsSection"
       ],
       "rendererLocations": [
-        "src/components/game/settings-gump.tsx:68"
+        "src/components/game/settings-gump.tsx:72"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -232347,13 +232502,13 @@
       "canonicalId": "src/components/game/settings-gump.tsx#SettingsGump",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/settings-gump.tsx:18"
+        "src/components/game/settings-gump.tsx:21"
       ],
       "sourceNames": [
         "SettingsGump"
       ],
       "rendererLocations": [
-        "src/components/game/settings-gump.tsx:18"
+        "src/components/game/settings-gump.tsx:21"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -232362,6 +232517,7 @@
       "jsxTags": [
         "CloseRow",
         "GraphicsSection",
+        "SandboxControls",
         "SoundRow",
         "VaultRow",
         "div",
@@ -232420,13 +232576,13 @@
       "canonicalId": "src/components/game/settings-gump.tsx#SoundRow",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/settings-gump.tsx:43"
+        "src/components/game/settings-gump.tsx:47"
       ],
       "sourceNames": [
         "SoundRow"
       ],
       "rendererLocations": [
-        "src/components/game/settings-gump.tsx:43"
+        "src/components/game/settings-gump.tsx:47"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -232498,13 +232654,13 @@
       "canonicalId": "src/components/game/settings-gump.tsx#TreeDensityButton",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/settings-gump.tsx:163"
+        "src/components/game/settings-gump.tsx:167"
       ],
       "sourceNames": [
         "TreeDensityButton"
       ],
       "rendererLocations": [
-        "src/components/game/settings-gump.tsx:163"
+        "src/components/game/settings-gump.tsx:167"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -232574,13 +232730,13 @@
       "canonicalId": "src/components/game/settings-gump.tsx#VaultRow",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/settings-gump.tsx:181"
+        "src/components/game/settings-gump.tsx:185"
       ],
       "sourceNames": [
         "VaultRow"
       ],
       "rendererLocations": [
-        "src/components/game/settings-gump.tsx:181"
+        "src/components/game/settings-gump.tsx:185"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -236015,7 +236171,7 @@
         "HorizonTreeReduction"
       ],
       "rendererLocations": [
-        "src/components/game/settings-gump.tsx:8",
+        "src/components/game/settings-gump.tsx:11",
         "src/components/game/terrain.tsx:25"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
@@ -236067,7 +236223,7 @@
         "HorizonTreeReduction"
       ],
       "rendererLocations": [
-        "src/components/game/settings-gump.tsx:8",
+        "src/components/game/settings-gump.tsx:11",
         "src/components/game/terrain.tsx:25"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
@@ -236119,7 +236275,7 @@
         "HorizonTreeReduction"
       ],
       "rendererLocations": [
-        "src/components/game/settings-gump.tsx:8",
+        "src/components/game/settings-gump.tsx:11",
         "src/components/game/terrain.tsx:25"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
@@ -245899,7 +246055,7 @@
       "canonicalId": "intro",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:83"
+        "src/game/store.ts:85"
       ],
       "sourceNames": [
         "Phase"
@@ -245945,7 +246101,7 @@
       "canonicalId": "looking",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:83"
+        "src/game/store.ts:85"
       ],
       "sourceNames": [
         "Phase"
@@ -245991,7 +246147,7 @@
       "canonicalId": "playing",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:83"
+        "src/game/store.ts:85"
       ],
       "sourceNames": [
         "Phase"
@@ -246037,7 +246193,7 @@
       "canonicalId": "raising",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:83"
+        "src/game/store.ts:85"
       ],
       "sourceNames": [
         "Phase"
@@ -246083,7 +246239,7 @@
       "canonicalId": "title",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:83"
+        "src/game/store.ts:85"
       ],
       "sourceNames": [
         "Phase"
@@ -249934,7 +250090,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/utility-cluster.tsx:3",
-        "src/components/game/hud.tsx:40"
+        "src/components/game/hud.tsx:42"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -249986,7 +250142,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/utility-cluster.tsx:3",
-        "src/components/game/hud.tsx:40"
+        "src/components/game/hud.tsx:42"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -250038,7 +250194,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/utility-cluster.tsx:3",
-        "src/components/game/hud.tsx:40"
+        "src/components/game/hud.tsx:42"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -250090,7 +250246,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/utility-cluster.tsx:3",
-        "src/components/game/hud.tsx:40"
+        "src/components/game/hud.tsx:42"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -250142,7 +250298,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/utility-cluster.tsx:3",
-        "src/components/game/hud.tsx:40"
+        "src/components/game/hud.tsx:42"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -250194,7 +250350,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/utility-cluster.tsx:3",
-        "src/components/game/hud.tsx:40"
+        "src/components/game/hud.tsx:42"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -250246,7 +250402,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/utility-cluster.tsx:3",
-        "src/components/game/hud.tsx:40"
+        "src/components/game/hud.tsx:42"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [

@@ -6,6 +6,11 @@
  */
 const KEY = "ember-god";
 
+/** Durable provenance: switching the URL cannot turn sandbox goods real. */
+export function isSandbox(world: object): boolean {
+  return "sandbox" in world && world.sandbox === true;
+}
+
 export interface GodStorage {
   get(key: string): string | null;
   set(key: string, value: string): void;
@@ -20,11 +25,11 @@ export function setGodOverride(value: boolean | null): void {
 }
 
 function browserStorage(): GodStorage | null {
-  if (typeof window === "undefined" || !window.localStorage) return null;
+  if (typeof window === "undefined") return null;
   return {
-    get: (k) => window.localStorage.getItem(k),
-    set: (k, v) => window.localStorage.setItem(k, v),
-    clear: (k) => window.localStorage.removeItem(k),
+    get: (k) => { try { return window.localStorage.getItem(k); } catch { return null; } },
+    set: (k, v) => { try { window.localStorage.setItem(k, v); } catch { /* URL still selects the isolated slot. */ } },
+    clear: (k) => { try { window.localStorage.removeItem(k); } catch { /* Explicit URL takes precedence. */ } },
   };
 }
 

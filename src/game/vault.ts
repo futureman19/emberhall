@@ -1,3 +1,4 @@
+import { isSandbox } from "./god.ts";
 import { ITEM_META } from "./catalog.ts";
 import { AFFIXES, rareClassOf, rareName, rareUid } from "./rare.ts";
 import { ITEM_FORM_CATALOG } from "./crafting/forms.ts";
@@ -59,6 +60,7 @@ export interface ItemInscription {
 const ITEM_IDS = new Set(Object.keys(ITEM_META));
 
 export function encodeItemInscription(world: World, item: ItemId): ItemInscription | null {
+  if (isSandbox(world)) return null;
   if (!ITEM_IDS.has(item) || !Number.isSafeInteger(world.seed) || !Number.isFinite(world.hour)) return null;
   return {
     app: VAULT_APP,
@@ -73,6 +75,7 @@ export function encodeItemInscription(world: World, item: ItemId): ItemInscripti
 
 /** A rare mints with its full identity — name, affixes, maker's mark. */
 export function encodeRareInscription(world: World, rare: RareItem): ItemInscription | null {
+  if (isSandbox(world)) return null;
   if (!rare || !ITEM_IDS.has(rare.base)) return null;
   // v3 has no no-form utility schema. Never mint by dropping workmanship,
   // components, inlays or resolved stats. Legacy affix-only records remain v2-compatible.
