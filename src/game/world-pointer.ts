@@ -54,7 +54,7 @@ export function hitAt(tx: number, ty: number, sx: number, sy: number) {
     g.openCtx(sx, sy, { kind: "building", id: b.id, tx: b.tx, ty: b.ty, label: b.kind });
     return;
   }
-  const t: CtxTarget = { kind: "tile", id: `${tx},${ty}`, tx, ty, label: "dirt" };
+  const t: CtxTarget = { kind: "tile", id: `${tx},${ty}`, tx, ty, label: w.tiles[ty]?.[tx]?.kind ?? "dirt" };
   g.openCtx(sx, sy, t);
   void VIEW;
 }
