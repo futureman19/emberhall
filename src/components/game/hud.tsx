@@ -427,8 +427,8 @@ function HelpPanel() {
         touch-and-hold opens the same menu a right-click does — nothing starts until you pick from it. Hold the fishing
         rod and right-click or touch-and-hold
         water to cast a line; roast the catch at a hearth or campfire. Right-click or touch-and-hold a live beast and Tame
-        — hares yield, wolves rarely do. Open You for the paperdoll. Tap a hatchet, pick, hoe, or sword in the pack — it
-        sits in your Hand. Tap the Hand to put it away. Chop needs the hatchet held. Mine needs the pick. Farm needs the
+        — hares yield, wolves rarely do. Open You for the paperdoll. Select gear and choose Equip; select worn gear and
+        choose Stow to return it to your backpack. Or drag, double-click, or right-click gear. Chop needs the hatchet held. Mine needs the pick. Farm needs the
         hoe. The book in the pack is magery. Open it. Right-click or touch-and-hold a tamed beast and Care opens its
         loyalty and whereabouts.
         Mark writes this dirt on a rune. Walk off. Tap the mark — Recall folds you back. The moons still hold. Towns keep

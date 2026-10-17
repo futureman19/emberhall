@@ -11,6 +11,7 @@ import { ItemTipContent } from "@/components/game/item-tip";
 import { GlyphIcon, ItemIcon, ResourceIcon } from "@/components/game/item-icon";
 import { GRADE_RING, SLOT_ICON_KIND } from "@/components/game/item-icon-catalog";
 import { LivingDoll } from "@/components/game/living-doll";
+import { useEquipmentControls } from "@/components/game/equipment-controls";
 import { HOTBAR_SLOTS, dockStorage, loadHotbar, pinItem, saveHotbar, subscribeHotbar, unpinItem } from "@/components/game/chrome/hotbar-dock";
 import { useGraphicsSettings } from "@/game/graphics-settings";
 import { Tip } from "@/components/ui/tip";
@@ -110,13 +111,13 @@ function SlotCell({
   label,
   id,
   rare,
-  onUnequip,
+  equipment,
 }: {
   slot: WearSlot;
   label: string;
   id: ItemId | undefined;
   rare: RareItem | null;
-  onUnequip: (slot: WearSlot) => void;
+  equipment: ReturnType<typeof useEquipmentControls>;
 }) {
   const filled = Boolean(id) || Boolean(rare);
   const tipId = rare ? rare.base : id;
@@ -125,8 +126,9 @@ function SlotCell({
     <Tip content={tipId ? <ItemTipContent id={tipId} rare={rare ?? undefined} skipCompare /> : null}>
       <button
         type="button"
-        onClick={() => filled && onUnequip(slot)}
-        aria-label={filled ? `Unequip ${name}` : `${label} — empty`}
+        {...equipment.targetProps(slot)}
+        {...(filled ? equipment.sourceProps({ kind: "worn", slot, id, uid: rare?.uid }, name!) : {})}
+        aria-label={filled ? `${label}: ${name}` : `${label} — empty`}
         className={cn(
           "grid size-11 place-items-center rounded-[var(--radius-xs)] border",
           rare ? "border-gold/50 bg-surface-2 text-gold" : filled ? "border-border-strong bg-surface-2 text-fg" : "border-border/60 bg-bg text-muted/40",
@@ -167,13 +169,13 @@ function DollFigure({
 export function YouDressing() {
   const snap = useGame((s) => s.snap);
   const equip = useGame((s) => s.equip);
-  const unequip = useGame((s) => s.unequip);
+
   const drop = useGame((s) => s.drop);
   const heal = useGame((s) => s.heal);
   const eat = useGame((s) => s.eat);
   const craft = useGame((s) => s.makeRecipe);
   const toast = useGame((s) => s.toast);
-  const equipRare = useGame((s) => s.equipRare);
+  const equipment = useEquipmentControls();
   const [selected, setSelected] = useState<ItemId | null>(null);
   const reducedEffects = useGraphicsSettings().reducedEffects;
   const self = snap.people.find((p) => p.isPlayer);
@@ -181,6 +183,7 @@ export function YouDressing() {
   const wear = snap.player?.wear ?? {};
   const wearRare = snap.player?.wearRare ?? {};
   const rares = snap.player?.rares ?? [];
+  const packedRares = rares.filter((rare) => !Object.values(wearRare).includes(rare.uid));
   const skills = snap.player?.skills;
   if (!self || !pack) return null;
   const resourceRows = listResourceInventory(snap.player?.resources ?? { stacks: {} });
@@ -198,10 +201,10 @@ export function YouDressing() {
   const dressed = dressedStats(getWorld());
   const mana = snap.player?.mana ?? 0;
   const manaMax = maxMana(self.int, skills?.magery ?? 0);
-  const filledCells = rares.length + held.length;
+  const filledCells = packedRares.length + held.length;
   const cellCount = Math.max(PACK_CELLS, Math.ceil(filledCells / PACK_COLUMNS) * PACK_COLUMNS);
   return (
-    <div>
+    <div onPointerDown={(event) => event.stopPropagation()} onPointerUp={(event) => event.stopPropagation()} onDoubleClick={(event) => event.stopPropagation()} onClick={(event) => event.stopPropagation()} onContextMenu={(event) => { event.preventDefault(); event.stopPropagation(); }} onKeyDown={(event) => { if (event.key !== "Escape") event.stopPropagation(); else if (equipment.active) { event.stopPropagation(); equipment.cancel(); } }}>
       <h2 className="font-display text-sm text-fg">{self.name}</h2>
       <p className="mt-0.5 text-xs text-muted tabular-nums">
         <span className="text-gold">{snap.gold} gold</span> · {NOTORIETY_META[snap.player?.notoriety ?? "innocent"].label}
@@ -236,11 +239,12 @@ export function YouDressing() {
 
       {/* The Direland block: the living doll with its gear cells, wired
           straight into the dark backpack grid beneath — one connected surface. */}
+      {equipment.controls}
       <div data-testid="doll-pack" className="mt-3 overflow-hidden rounded-[var(--radius-md)] border border-border bg-surface">
         <div className="flex items-center justify-center gap-2 px-2 py-2">
           <div className="flex flex-col gap-1">
             {LEFT_SLOTS.map((s) => (
-              <SlotCell key={s.id} slot={s.id} label={s.label} id={wear[s.id]} rare={rareByUid(wearRare[s.id])} onUnequip={unequip} />
+              <SlotCell key={s.id} slot={s.id} label={s.label} id={wear[s.id]} rare={rareByUid(wearRare[s.id])} equipment={equipment} />
             ))}
           </div>
           {reducedEffects ? (
@@ -252,17 +256,18 @@ export function YouDressing() {
           )}
           <div className="flex flex-col gap-1">
             {RIGHT_SLOTS.map((s) => (
-              <SlotCell key={s.id} slot={s.id} label={s.label} id={wear[s.id]} rare={rareByUid(wearRare[s.id])} onUnequip={unequip} />
+              <SlotCell key={s.id} slot={s.id} label={s.label} id={wear[s.id]} rare={rareByUid(wearRare[s.id])} equipment={equipment} />
             ))}
           </div>
         </div>
-        <ul className="grid grid-cols-5 gap-1 border-t border-border bg-bg p-1.5" data-testid="pack-grid">
-          {rares.map((r) => (
+        <ul {...equipment.targetProps("pack")} aria-label="Backpack — drop equipped gear here to stow" className="grid grid-cols-5 gap-1 border-t border-border bg-bg p-1.5" data-testid="pack-grid">
+          {packedRares.map((r) => (
             <li key={r.uid} data-filled="true">
               <Tip content={<ItemTipContent id={r.base} rare={r} />}>
                 <button
                   type="button"
-                  onClick={() => equipRare(r.uid)}
+                  {...equipment.sourceProps({ kind: "rare", uid: r.uid }, rareName(r), () => setSelected(null))}
+                  data-equipment-rare={r.uid}
                   aria-label={rareName(r)}
                   className="relative grid aspect-square w-full place-items-center rounded-[var(--radius-xs)] border border-gold/60 bg-surface-2 text-fg"
                 >
@@ -276,7 +281,8 @@ export function YouDressing() {
               <Tip content={<ItemTipContent id={id} />}>
                 <button
                   type="button"
-                  onClick={() => setSelected(id)}
+                  {...equipment.sourceProps({ kind: "pack", id }, ITEM_META[id].label, () => setSelected(id))}
+                  data-equipment-item={id}
                   aria-label={`${ITEM_META[id].label} ×${pack[id]}`}
                   aria-pressed={selected === id}
                   className={cn(

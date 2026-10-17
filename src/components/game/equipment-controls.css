@@ -1,0 +1,6 @@
+/* Native drag feedback stays inside the existing Forged Oak cells. */
+[data-testid="doll-pack"] [draggable="true"] { cursor: grab; }
+[data-testid="doll-pack"] [data-drop-state="valid"] { outline: 2px solid #b5c77a; outline-offset: -2px; }
+[data-testid="doll-pack"] [data-drop-state="invalid"] { outline: 1px dashed #a96b61; outline-offset: -2px; }
+[data-testid="doll-pack"] [data-drop-over="true"][data-drop-state="valid"] { box-shadow: inset 0 0 0 4px #b5c77a; }
+[data-testid="doll-pack"] [data-drop-over="true"][data-drop-state="invalid"] { box-shadow: inset 0 0 0 3px #a96b61; }

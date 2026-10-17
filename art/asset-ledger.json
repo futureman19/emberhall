@@ -48,6 +48,7 @@
     "src/components/game/crop-meshes.tsx",
     "src/components/game/death-geometry.ts",
     "src/components/game/effects-preference.ts",
+    "src/components/game/equipment-controls.tsx",
     "src/components/game/equipment-material.ts",
     "src/components/game/fauna-art-catalog.ts",
     "src/components/game/fauna-art-data.ts",
@@ -161,6 +162,7 @@
     "src/game/digging.ts",
     "src/game/ecology.ts",
     "src/game/emberhall-pond.ts",
+    "src/game/equipment-transfer.ts",
     "src/game/extraction-animation.ts",
     "src/game/farm.ts",
     "src/game/first-person-view.ts",
@@ -39856,13 +39858,13 @@
       "canonicalId": "src/components/game/paperdoll.tsx#packHint",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:79"
+        "src/components/game/paperdoll.tsx:80"
       ],
       "sourceNames": [
         "packHint"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:79"
+        "src/components/game/paperdoll.tsx:80"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -39958,7 +39960,7 @@
         "src/components/game/crafting/material-selector.tsx:36",
         "src/components/game/crafting/refining-panel.tsx:25",
         "src/components/game/crafting/salvage-panel.tsx:50",
-        "src/components/game/paperdoll.tsx:328",
+        "src/components/game/paperdoll.tsx:334",
         "src/components/game/part-sculptor.tsx:24"
       ],
       "rendererMapping": "direct AST declaration/name",
@@ -52065,6 +52067,205 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/crop-meshes.tsx:132"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/equipment-controls.tsx#useEquipmentControls",
+      "canonicalId": "src/components/game/equipment-controls.tsx#useEquipmentControls",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/equipment-controls.tsx:12"
+      ],
+      "sourceNames": [
+        "useEquipmentControls"
+      ],
+      "rendererLocations": [
+        "src/components/game/equipment-controls.tsx:12"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/equipment-controls.tsx"
+      ],
+      "jsxTags": [
+        "button",
+        "div",
+        "p",
+        "span"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!action",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!actionFor(source, defaultTarget(source))",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!dragRef.current",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:action.kind === \"equip\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:action.kind === \"rare\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:actionFor(drag, target)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:actionFor(dragRef.current, target)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:available && selection",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:drag",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:event.key === \"ArrowDown\" || event.key === \"ArrowUp\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:event.key === \"Escape\" || event.key === \"Tab\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:event.target === event.currentTarget",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:menu",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:over === target",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:selection?.source.kind === \"worn\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:snap.player",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:source",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-controls.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/equipment-controls.tsx:12"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -108509,6 +108710,282 @@
       "status": "inventoried",
       "evidence": [
         "src/game/ecology.ts:10"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/equipment-transfer.ts#EquipmentAction.kind=equip",
+      "canonicalId": "src/game/equipment-transfer.ts#EquipmentAction.kind=equip",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:11"
+      ],
+      "sourceNames": [
+        "EquipmentAction.kind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:11"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:11"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/equipment-transfer.ts#EquipmentAction.kind=rare",
+      "canonicalId": "src/game/equipment-transfer.ts#EquipmentAction.kind=rare",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:11"
+      ],
+      "sourceNames": [
+        "EquipmentAction.kind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:11"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:11"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/equipment-transfer.ts#EquipmentAction.kind=stow",
+      "canonicalId": "src/game/equipment-transfer.ts#EquipmentAction.kind=stow",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:11"
+      ],
+      "sourceNames": [
+        "EquipmentAction.kind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:11"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:11"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/equipment-transfer.ts#EquipmentSource.kind=pack",
+      "canonicalId": "src/game/equipment-transfer.ts#EquipmentSource.kind=pack",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:6"
+      ],
+      "sourceNames": [
+        "EquipmentSource.kind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:6"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/equipment-transfer.ts#EquipmentSource.kind=rare",
+      "canonicalId": "src/game/equipment-transfer.ts#EquipmentSource.kind=rare",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:6"
+      ],
+      "sourceNames": [
+        "EquipmentSource.kind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:6"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/equipment-transfer.ts#EquipmentSource.kind=worn",
+      "canonicalId": "src/game/equipment-transfer.ts#EquipmentSource.kind=worn",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:6"
+      ],
+      "sourceNames": [
+        "EquipmentSource.kind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:6"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -231348,13 +231825,13 @@
       "canonicalId": "src/components/game/paperdoll.tsx#DollFigure",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:142"
+        "src/components/game/paperdoll.tsx:144"
       ],
       "sourceNames": [
         "DollFigure"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:142"
+        "src/components/game/paperdoll.tsx:144"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -231425,13 +231902,13 @@
       "canonicalId": "src/components/game/paperdoll.tsx#ItemGlyph",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:88"
+        "src/components/game/paperdoll.tsx:89"
       ],
       "sourceNames": [
         "ItemGlyph"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:88"
+        "src/components/game/paperdoll.tsx:89"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -231485,13 +231962,13 @@
       "canonicalId": "src/components/game/paperdoll.tsx#PinButton",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:42"
+        "src/components/game/paperdoll.tsx:43"
       ],
       "sourceNames": [
         "PinButton"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:42"
+        "src/components/game/paperdoll.tsx:43"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -231571,13 +232048,13 @@
       "canonicalId": "src/components/game/paperdoll.tsx#SlotCell",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:108"
+        "src/components/game/paperdoll.tsx:109"
       ],
       "sourceNames": [
         "SlotCell"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:108"
+        "src/components/game/paperdoll.tsx:109"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -231667,13 +232144,13 @@
       "canonicalId": "src/components/game/paperdoll.tsx#StatChip",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:94"
+        "src/components/game/paperdoll.tsx:95"
       ],
       "sourceNames": [
         "StatChip"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:94"
+        "src/components/game/paperdoll.tsx:95"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -231736,13 +232213,13 @@
       "canonicalId": "src/components/game/paperdoll.tsx#YouDressing",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/paperdoll.tsx:167"
+        "src/components/game/paperdoll.tsx:169"
       ],
       "sourceNames": [
         "YouDressing"
       ],
       "rendererLocations": [
-        "src/components/game/paperdoll.tsx:167"
+        "src/components/game/paperdoll.tsx:169"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -231817,6 +232294,22 @@
           "status": "inventoried",
           "evidence": [
             "src/components/game/paperdoll.tsx:121"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:equipment.active",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/paperdoll.tsx:169"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:event.key !== \"Escape\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/paperdoll.tsx:169"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -235880,6 +236373,556 @@
       "status": "inventoried",
       "evidence": [
         "src/game/crafting/types.ts:19"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget:chest",
+      "canonicalId": "chest",
+      "family": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "sourceNames": [
+        "EquipmentTarget"
+      ],
+      "rendererLocations": [
+        "src/components/game/equipment-controls.tsx:6"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/equipment-controls.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget:cloak",
+      "canonicalId": "cloak",
+      "family": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "sourceNames": [
+        "EquipmentTarget"
+      ],
+      "rendererLocations": [
+        "src/components/game/equipment-controls.tsx:6"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/equipment-controls.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget:feet",
+      "canonicalId": "feet",
+      "family": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "sourceNames": [
+        "EquipmentTarget"
+      ],
+      "rendererLocations": [
+        "src/components/game/equipment-controls.tsx:6"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/equipment-controls.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget:finger",
+      "canonicalId": "finger",
+      "family": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "sourceNames": [
+        "EquipmentTarget"
+      ],
+      "rendererLocations": [
+        "src/components/game/equipment-controls.tsx:6"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/equipment-controls.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget:hands",
+      "canonicalId": "hands",
+      "family": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "sourceNames": [
+        "EquipmentTarget"
+      ],
+      "rendererLocations": [
+        "src/components/game/equipment-controls.tsx:6"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/equipment-controls.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget:head",
+      "canonicalId": "head",
+      "family": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "sourceNames": [
+        "EquipmentTarget"
+      ],
+      "rendererLocations": [
+        "src/components/game/equipment-controls.tsx:6"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/equipment-controls.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget:legs",
+      "canonicalId": "legs",
+      "family": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "sourceNames": [
+        "EquipmentTarget"
+      ],
+      "rendererLocations": [
+        "src/components/game/equipment-controls.tsx:6"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/equipment-controls.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget:main",
+      "canonicalId": "main",
+      "family": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "sourceNames": [
+        "EquipmentTarget"
+      ],
+      "rendererLocations": [
+        "src/components/game/equipment-controls.tsx:6"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/equipment-controls.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget:neck",
+      "canonicalId": "neck",
+      "family": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "sourceNames": [
+        "EquipmentTarget"
+      ],
+      "rendererLocations": [
+        "src/components/game/equipment-controls.tsx:6"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/equipment-controls.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget:off",
+      "canonicalId": "off",
+      "family": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "sourceNames": [
+        "EquipmentTarget"
+      ],
+      "rendererLocations": [
+        "src/components/game/equipment-controls.tsx:6"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/equipment-controls.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget:pack",
+      "canonicalId": "pack",
+      "family": "vocabulary/src/game/equipment-transfer.ts#EquipmentTarget",
+      "catalogSources": [
+        "src/game/equipment-transfer.ts:9"
+      ],
+      "sourceNames": [
+        "EquipmentTarget"
+      ],
+      "rendererLocations": [
+        "src/components/game/equipment-controls.tsx:6"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/equipment-controls.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/equipment-transfer.ts:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/equipment-transfer.ts:9"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."

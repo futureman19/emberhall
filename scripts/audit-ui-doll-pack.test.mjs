@@ -42,5 +42,8 @@ test("word headings and helper prose leave the dressing block", () => {
 test("accessibility keeps the words: icon actions still speak", () => {
   const doll = read("src/components/game/paperdoll.tsx");
   assert.match(doll, /aria-label=\{pinned \? `Unpin/);
-  assert.match(doll, /`Unequip \$\{name\}`/);
+  assert.match(doll, /`\$\{label\}: \$\{name\}`/, "equipped cells name both slot and item before selection");
+  const controls = read("src/components/game/equipment-controls.tsx");
+  assert.match(controls, /"Stow" : "Equip"/, "selected equipment has an explicit action verb");
+  assert.match(controls, /role="menuitem"/, "context actions are keyboard-accessible menu items");
 });
