@@ -397,6 +397,10 @@ function isCreature(value: unknown): boolean {
     isRecord(value) &&
     isString(value.id) &&
     isRegistryKey(value.kind, FAUNA_META) &&
+    (value.crawler === undefined || (isRecord(value.crawler) &&
+      ["patrol", "windup", "lunge", "retreat"].includes(String(value.crawler.phase)) &&
+      isFiniteNumber(value.crawler.time) && value.crawler.time >= 0 &&
+      isFiniteNumber(value.crawler.targetX) && isFiniteNumber(value.crawler.targetZ))) &&
     isFiniteNumber(value.x) &&
     isFiniteNumber(value.z) &&
     isFiniteNumber(value.hp) &&

@@ -242,6 +242,7 @@ export type SpellId =
 export type ClassId = "ranger" | "warrior" | "mage" | "rogue" | "merchant";
 export type NpcRole = "banker" | "provisioner" | "healer" | "alchemist";
 export type FaunaKind =
+  | "embercrawler"
   | "hare"
   | "hart"
   | "wolf"
@@ -401,6 +402,8 @@ export interface Person {
 }
 
 export interface Creature {
+  /** Embercrawler telegraph/retreat clock, in simulation seconds. */
+  crawler?: { phase: "patrol" | "windup" | "lunge" | "retreat"; time: number; targetX: number; targetZ: number };
   id: string;
   kind: FaunaKind;
   x: number;

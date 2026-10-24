@@ -14,6 +14,7 @@ text = (ROOT / 'src/components/game/fauna-meshes.tsx').read_text()
 COLORS = dict(re.findall(r'  (\w+): "(#[a-f0-9]+)"', text.split('const SIZE')[0]))
 SIZES = {k: float(v) for k,v in re.findall(r'  (\w+): ([\d.]+)', text.split('const SIZE')[1].split('const DARK')[0])}
 FAMILIES = {
+ 'emberdeep_insect':['embercrawler'],
  'lagomorph': ['hare'], 'cervid': ['hart','brambleback_stag','thornhide_doe','whiteback_elk'],
  'canid': ['wolf','ember_fox','ridgeback_warg','brine_hound','barrow_hound'], 'feline':['pine_lynx'],
  'stocky': ['ironwood_boar','moss_badger','oak_bear','frosthorn_ram','highland_aurochs'],
@@ -88,7 +89,17 @@ def muzzle(y,z,w=.18,color='#d0b78f'):
 def author(k):
     global current,parts,base,family
     current=k; parts=[]; base=COLORS[k]; family=FAMILY[k]
-    if family in ('canid','feline'):
+    if k=='embercrawler':
+        # Ported from the interrupted monster pack, now with emissive foot tips.
+        oval('armored_abdomen',(0,.45,-.23),(.4,.27,.53))
+        oval('coal_thorax',(0,.38,.3),(.27,.22,.29),'#432c2a'); eyes(.44,.56,.14,True)
+        for side in (-1,1):
+            for i,z in enumerate((-.48,-.1,.27)):
+                chain('skitter_leg'+str(side)+str(i),[(side*.23,.42,z),(side*.65,.57,z-.1),(side*.9,.04,z+.14)],.065,'#4a3230')
+                oval('glow_tip'+str(side)+str(i),(side*.9,.055,z+.14),(.075,.055,.09),'#ed7d28',True)
+            rod('mandible'+str(side),(side*.17,.27,.5),(side*.12,.23,.83),.065,'#f1bd66',0)
+        for z in (-.48,-.18,.1): oval('ember_plate'+str(z),(0,.64,z),(.28,.08,.12),'#ed7d28',True)
+    elif family in ('canid','feline'):
         oval('tapered_flank',(0,.48,0),(.32,.29,.62)); oval('chest',(0,.56,.36),(.34,.35,.32))
         oval('head',(0,.78,.62),(.25,.25,.29)); muzzle(.69,.88,.17 if family=='canid' else .2)
         ears(.96,.57); eyes(.83,.84,.16,k in ('ridgeback_warg','barrow_hound'))
@@ -373,5 +384,15 @@ if MODE in ('all','species'):
     manifest={'schema':1,'generator':'art/blender/build_fauna.py','source':'art/blender/fauna-worldwide.blend','coordinateSystem':'Y-up +Z-front ground-pivot; normalized SIZE units','speciesCount':len(entries),'species':entries}
     (OUT/'fauna-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('FAUNA_COMPLETE',len(entries),'species',sum(e['bytes'] for e in entries),'bytes',flush=True)
+if MODE=='embercrawler':
+    manifest=json.loads((OUT/'fauna-manifest.json').read_text())
+    authored,front=author('embercrawler')
+    bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'art/blender/fauna-embercrawler.blend'))
+    entry=bake_export('embercrawler',FAMILY['embercrawler'],OUT/'fauna-embercrawler.glb',authored,front)
+    entry['source']='art/blender/fauna-embercrawler.blend'
+    manifest['species']=[e for e in manifest['species'] if e['kind']!='embercrawler']+[entry]
+    manifest['speciesCount']=len(manifest['species'])
+    (OUT/'fauna-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+    print('CRAWLER_COMPLETE',entry['triangles'],entry['bytes'],flush=True)
 if MODE in ('all','variants'):
     export_spell_variants()

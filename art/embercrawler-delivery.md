@@ -1,0 +1,19 @@
+# Embercrawler integration contract
+
+- Species: `embercrawler`; 20 HP, 6 base damage, ash 1–2 on death. Existing player hit/loot pipeline remains authoritative.
+- Runtime: `src/game/embercrawler.ts`, wired into initial seeding, continued-world hydration and ecology after status-effect guards. Fast approach 3.4 tiles/s, committed 0.25s windup, 0.2s physical lunge at 5.8 tiles/s, 1.1s retreat. Wall/sanctuary-aware, bounded home leash, no attacks on ghost/invisible players.
+- Save: optional validated `Creature.crawler = {phase: patrol|windup|lunge|retreat, time, targetX, targetZ}`. Time is simulation seconds. This field intentionally does not share the interrupted pack's generic `monster` state.
+- Spawn IDs: `embercrawler:${anchor.id}:${pairIndex}`; stable seed-local corridor weights 1 and smaller-chamber weights 0.35. Cinder/cistern eligible; no entrance chamber or boss spawns. Corridor pairs use separate adjacent walkable tiles. Dead authored entities are retained as bounded tombstones, so reload cannot repopulate slain crawlers.
+- Shared torch positions: `EMBERDEEP_TORCHES` in `emberdeep.ts` feeds both existing sconce renderer and crawler light-seeking patrol. Props are not consumed or extinguished. Player combat takes precedence.
+- Room clears: deliberately NOT resolved by this species alone. Boss/finale integration must combine all monster species before `clearEmberdeepRoom`; clearing solely from crawler deaths would skip golems/wraiths.
+- Visual: independent `EmbercrawlerBeast` pose owner, existing fauna cache/loader/fallback wrapper. Static six-legged segmented Blender body, emissive plates/foot tips, skitter bob/roll, committed crouch, live damage reaction/death and eight recycled moving sparks. This is rigid body motion, not a skinned six-leg gait.
+- Rebuild only this asset: `FAUNA_EXPORT=embercrawler blender --background --factory-startup --python-exit-code 1 --python art/blender/build_fauna.py`. Source `art/blender/fauna-embercrawler.blend`; export `public/art/lanternwood/fauna-embercrawler.glb`. Other species GLBs are not regenerated.
+- Browser harness: `node --experimental-strip-types scripts/embercrawler-smoke.mjs <url> <label>`. Native Continue on desktop and emulated touch, seeded fixture at corridor, real simulation lunge/retreat/hunt/loot/save-load. Not physical-device QA or a full dungeon difficulty/boss-clear claim.
+- Prerequisites locally cherry-picked: framework f02eb98 (local 94247e0) and crafting-smoke repair 64c381f (local cb43b76). Registry hotspots must be merged additively with sibling monster cards. No deployment authorized.
+
+## Verified delivery
+- Red-first evidence: `embercrawler-red.log` (missing implementation module); final full check: `embercrawler-check-final2.log`, 484 script + 1172 source tests passing, lint/typecheck/build/auth passing. Original chained process exited 0.
+- Solo balance: `embercrawler-balance.log`, READY, 1,546,080 combinations, zero cap violations; current generated reports archived under `screenshots/embercrawler/gates` before restoring tracked report noise.
+- Dev and built desktop/emulated-touch combat smoke both pass: `screenshots/embercrawler/{dev-final,built}/results.json`; zero browser errors, loaded GLB, physical lunge/retreat movement, real damage, hunt/ash loot, save/reload, no horizontal overflow. Built continuation exited 0 with smokeExit 0.
+- Built desktop/mobile moving screenshots visually inspected. Crawler is visible but subtle at tactical camera scale; existing mobile bottom HUD crowding remains. Follow-on animation work should improve silhouette readability without altering the established dungeon aesthetic.
+- Authored model is rigid-body animated here; articulated leg gait, full monster animation sets, sounds, and multi-species room-clear/boss orchestration remain owned by existing downstream cards.
