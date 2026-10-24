@@ -242,6 +242,7 @@ export type SpellId =
 export type ClassId = "ranger" | "warrior" | "mage" | "rogue" | "merchant";
 export type NpcRole = "banker" | "provisioner" | "healer" | "alchemist";
 export type FaunaKind =
+  | "gloomwraith"
   | "hare"
   | "hart"
   | "wolf"
@@ -401,6 +402,7 @@ export interface Person {
 }
 
 export interface Creature {
+  gloom?: { clock: number; phase: "prowl" | "windup" | "bolt" | "recover"; time: number; targetX: number; targetZ: number };
   id: string;
   kind: FaunaKind;
   x: number;

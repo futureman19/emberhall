@@ -3,7 +3,7 @@
   "generator": "art/blender/build_fauna.py",
   "source": "art/blender/fauna-worldwide.blend",
   "coordinateSystem": "Y-up +Z-front ground-pivot; normalized SIZE units",
-  "speciesCount": 52,
+  "speciesCount": 53,
   "species": [
     {
       "kind": "hare",
@@ -2346,6 +2346,53 @@
         "paw_1_0",
         "leg_1_1",
         "paw_1_1"
+      ]
+    },
+    {
+      "kind": "gloomwraith",
+      "family": "emberdeep",
+      "file": "fauna-gloomwraith.glb",
+      "size": 1.0,
+      "triangles": 912,
+      "materials": 3,
+      "bytes": 92352,
+      "sha256": "35c77e639bb6c90fbd943ea2d86801773e8f98e521c586ec8c3cf4bcc565da52",
+      "bounds": {
+        "min": [
+          -0.734616219997406,
+          0.0,
+          -0.26629582047462463
+        ],
+        "max": [
+          0.734616219997406,
+          1.9420397281646729,
+          0.3698253631591797
+        ]
+      },
+      "parts": [
+        "tattered_cowl",
+        "hollow_face",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "shroud_chest",
+        "floating_sleeve-10",
+        "floating_sleeve-11",
+        "spectral_hand-1",
+        "floating_sleeve10",
+        "floating_sleeve11",
+        "spectral_hand1",
+        "shroud_ribbon00",
+        "shroud_ribbon01",
+        "shroud_ribbon10",
+        "shroud_ribbon11",
+        "shroud_ribbon20",
+        "shroud_ribbon21",
+        "shroud_ribbon30",
+        "shroud_ribbon31",
+        "shroud_ribbon40",
+        "shroud_ribbon41"
       ]
     }
   ]

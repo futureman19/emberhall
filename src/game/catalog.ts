@@ -231,6 +231,7 @@ export const CLASS_META: Record<ClassId, { label: string; color: string }> = {
 };
 
 export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp: number; dmg: number; eats: ResourceTag[]; meat?: number; hide?: number; parts?: readonly { id: BoneResourceId; n: number }[]; hasCorpse?: boolean; loot?: LootDrop[]; gold?: LootGold }> = {
+  gloomwraith: { label: "Gloomwraith", tameDiff: 99, hp: 42, dmg: 11, eats: ["meat"], hasCorpse: false, loot: [{ item: "nightshade", chance: 1, min: 1, max: 2 }], gold: { chance: 1, min: 3, max: 7 } },
   hare: { label: "Hare", tameDiff: 8, hp: 8, dmg: 1, eats: ["plant"], meat: 1, hide: 1, loot: [{ item: "rabbit_foot", chance: 0.35, min: 1, max: 1 }] },
   hart: { label: "Hart", tameDiff: 22, hp: 22, dmg: 4, eats: ["plant"], meat: 2, hide: 1, parts: [{ id: "stag_antler", n: 1 }] },
   wolf: { label: "Wolf", tameDiff: 40, hp: 28, dmg: 8, eats: ["meat"], meat: 2, hide: 1, parts: [{ id: "wolf_fang", n: 1 }] },

@@ -1,3 +1,4 @@
+import { ensureGloomwraiths, tickGloomwraith, gloomBoltDamage, gloomTorch } from "./gloomwraith.ts";
 import { BARROW, MAP, PLACES, inGreybarrow } from "./atlas.ts";
 import { CURSE_BITE_WEAKEN, CURSE_SLOW, CHILL_SLOW, FAUNA_META, IRONWOOD_WARD, isNight, POISON_PLAYER_HOURS, POISON_TICK_HOURS, SNARE_TICK_DMG, SNARE_TICK_HOURS, armorOf } from "./catalog.ts";
 import { sanctuaryAt, sanctuaryBlocksTile, zoneFaunaSlowAt } from "./zones.ts";
@@ -309,6 +310,7 @@ function addExtraFauna(world: World, rng: () => number) {
 
 /** Add expansion fauna missing from a continued world without duplicating survivors. */
 export function ensureExpansionFauna(world: World) {
+  ensureGloomwraiths(world);
   const present = new Set(world.fauna.map((creature) => creature.kind));
   for (const entry of EXTRA_SPAWNS) {
     if (!entry.ensure || present.has(entry.kind)) continue;
@@ -371,6 +373,7 @@ export function seedFauna(world: World, rng: () => number) {
     addZoneFauna(world, rng, zone.placeId, zone.count, pool, zone.radiusBias);
   }
   addExtraFauna(world, rng);
+  ensureGloomwraiths(world);
 }
 
 export function seedBarrow(world: World, rng: () => number) {
@@ -422,7 +425,8 @@ export function strikePlayer(world: World, c: Creature, you: Person) {
   if (sanctuaryAt(world, you.x, you.z)) return;
   const arm = armorOf(world.player.wear) + rareMods(world).armor;
   const ward = (world.hour < world.player.blessUntil ? 2 : 0) + (world.hour < world.player.ironwoodUntil ? IRONWOOD_WARD : 0);
-  let bite = Math.max(1, FAUNA_META[c.kind].dmg - Math.floor(arm / 2) - ward);
+  const damage = c.kind === "gloomwraith" ? gloomBoltDamage(gloomTorch(world)) : FAUNA_META[c.kind].dmg;
+  let bite = Math.max(1, damage - Math.floor(arm / 2) - ward);
   if (c.curseUntil && world.hour < c.curseUntil) bite = Math.max(1, Math.floor(bite * (1 - CURSE_BITE_WEAKEN)));
   you.hp = Math.max(0, you.hp - bite);
   world.player.lastBittenAt = world.hour; // Riposte remembers fresh teeth.
@@ -465,7 +469,7 @@ export function tickEcology(world: World, dt: number) {
       continue;
     }
     if (c.task === "dead") {
-      if (world.hour > c.corpseUntil) {
+      if (world.hour > c.corpseUntil && !(c.kind === "gloomwraith" && c.id.startsWith("emberdeep:"))) {
         world.fauna = world.fauna.filter((x) => x.id !== c.id);
       }
       continue;
@@ -559,6 +563,10 @@ export function tickEcology(world: World, dt: number) {
           continue;
         }
       }
+    }
+    if (c.kind === "gloomwraith") {
+      tickGloomwraith(world, c, dt);
+      continue;
     }
     const barrowWarden = WARDEN_KINDS.has(c.kind)
       || (REGIONAL_WARDEN_KINDS.has(c.kind) && inGreybarrow(c.home.tx, c.home.ty));

@@ -14,10 +14,10 @@ const hash = (s: string | Buffer) => createHash("sha256").update(s).digest("hex"
 const manifest = JSON.parse(readFileSync(new URL("fauna-manifest.json", art), "utf8"));
 type Entry = { kind: keyof typeof FAUNA_ART_URLS; family: string; file: string; bytes: number; sha256: string; triangles: number; materials: number; parts: string[]; bounds: { min: number[]; max: number[] } };
 
-test("52 current fauna type/catalog/renderer/export IDs match exactly, worldwide", () => {
+test("53 current fauna type/catalog/renderer/export IDs match exactly, worldwide", () => {
   const types = read("../../game/types.ts").match(/export type FaunaKind\s*=([\s\S]*?);/)![1];
   const ids = [...types.matchAll(/"(\w+)"/g)].map((m) => m[1]).sort();
-  assert.equal(ids.length, 52);
+  assert.equal(ids.length, 53);
   assert.deepEqual(Object.keys(FAUNA_META).sort(), ids);
   assert.deepEqual(Object.keys(FAUNA_ART_URLS).sort(), ids);
   assert.deepEqual(manifest.species.map((s: Entry) => s.kind).sort(), ids);
@@ -91,7 +91,7 @@ test("hidden parent skips visible traversal while retaining exact picking and or
 test("fallback Body and Beast boundary stay byte-preserved except explicit live death-read fix", () => {
   const renderer = read("./fauna-meshes.tsx");
   assert.equal(hash(renderer.slice(renderer.indexOf("function Body"), renderer.indexOf("function Beast"))), "98d6c6563e9222bbefe429bd049ff28940e8ccd36c772d604ed3cf5780a194d2");
-  const root = renderer.slice(renderer.indexOf("function Beast")).replace('      <FaunaArtBody kind={c.kind} size={SIZE[c.kind]} art={faunaSpellArt(c)}>\n        <Body c={c} />\n      </FaunaArtBody>', '      <Body c={c} />');
+  const root = renderer.slice(renderer.indexOf("function Beast")).replace('c.kind === "gloomwraith" ? <GloomwraithMesh key={c.id} c={c} /> : ', '').replace('      <FaunaArtBody kind={c.kind} size={SIZE[c.kind]} art={faunaSpellArt(c)}>\n        <Body c={c} />\n      </FaunaArtBody>', '      <Body c={c} />');
   // Normalize only the verified explicit fixes, not any animation/effect formula:
   // the stale-death-read fix, Quas Xen's handoff of mirror images to MirrorImages,
   // and the additive spell-art variant prop on FaunaArtBody (elementals + risen).

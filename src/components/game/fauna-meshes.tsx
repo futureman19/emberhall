@@ -12,8 +12,10 @@ import { useGame } from "@/game/store";
 import type { Creature, FaunaKind } from "@/game/types";
 import { FaunaArtBody } from "./fauna-art";
 import { faunaSpellArt } from "./fauna-art-catalog";
+import { GloomwraithMesh } from "./gloomwraith-mesh";
 
 const COLOR: Record<FaunaKind, string> = {
+  gloomwraith: "#60527e",
   hare: "#c4a882",
   hart: "#8a6a42",
   wolf: "#6a6a68",
@@ -69,6 +71,7 @@ const COLOR: Record<FaunaKind, string> = {
 };
 
 const SIZE: Record<FaunaKind, number> = {
+  gloomwraith: 1,
   hare: 0.35,
   hart: 0.7,
   wolf: 0.55,
@@ -1149,7 +1152,7 @@ export function Fauna() {
     <group>
       {fauna.map((c) => (
         // Quas Xen's images are drawn by MirrorImages, not as hares.
-        c.mirror ? null : <Beast key={c.id} c={c} />
+        c.mirror ? null : c.kind === "gloomwraith" ? <GloomwraithMesh key={c.id} c={c} /> : <Beast key={c.id} c={c} />
       ))}
     </group>
   );

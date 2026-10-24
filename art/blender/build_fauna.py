@@ -14,6 +14,7 @@ text = (ROOT / 'src/components/game/fauna-meshes.tsx').read_text()
 COLORS = dict(re.findall(r'  (\w+): "(#[a-f0-9]+)"', text.split('const SIZE')[0]))
 SIZES = {k: float(v) for k,v in re.findall(r'  (\w+): ([\d.]+)', text.split('const SIZE')[1].split('const DARK')[0])}
 FAMILIES = {
+ 'emberdeep':['gloomwraith'],
  'lagomorph': ['hare'], 'cervid': ['hart','brambleback_stag','thornhide_doe','whiteback_elk'],
  'canid': ['wolf','ember_fox','ridgeback_warg','brine_hound','barrow_hound'], 'feline':['pine_lynx'],
  'stocky': ['ironwood_boar','moss_badger','oak_bear','frosthorn_ram','highland_aurochs'],
@@ -88,7 +89,17 @@ def muzzle(y,z,w=.18,color='#d0b78f'):
 def author(k):
     global current,parts,base,family
     current=k; parts=[]; base=COLORS[k]; family=FAMILY[k]
-    if family in ('canid','feline'):
+    if k=='gloomwraith':
+        oval('tattered_cowl',(0,1.55,0),(.34,.43,.28))
+        oval('hollow_face',(0,1.57,.25),(.24,.29,.055),'#24202f'); eyes(1.65,.31,.12,True)
+        oval('shroud_chest',(0,1.02,0),(.31,.38,.22))
+        for side in (-1,1):
+            chain('floating_sleeve'+str(side),[(side*.22,1.25,0),(side*.48,1.08,.03),(side*.63,1.34,.21)],.11)
+            oval('spectral_hand'+str(side),(side*.63,1.34,.23),(.11,.12,.1),'#b4acd7',True)
+        for i in range(5):
+            x=(i-2)*.12
+            chain('shroud_ribbon'+str(i),[(x,1.0,0),(x*1.4,.5,-.1),(x*1.7,.05+(i%2)*.15,-.22)],.09)
+    elif family in ('canid','feline'):
         oval('tapered_flank',(0,.48,0),(.32,.29,.62)); oval('chest',(0,.56,.36),(.34,.35,.32))
         oval('head',(0,.78,.62),(.25,.25,.29)); muzzle(.69,.88,.17 if family=='canid' else .2)
         ears(.96,.57); eyes(.83,.84,.16,k in ('ridgeback_warg','barrow_hound'))
@@ -375,3 +386,11 @@ if MODE in ('all','species'):
     print('FAUNA_COMPLETE',len(entries),'species',sum(e['bytes'] for e in entries),'bytes',flush=True)
 if MODE in ('all','variants'):
     export_spell_variants()
+if MODE=='gloomwraith':
+    manifest=json.loads((OUT/'fauna-manifest.json').read_text())
+    authored,front=author('gloomwraith')
+    bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'art/blender/fauna-gloomwraith.blend'))
+    entry=bake_export('gloomwraith','emberdeep',OUT/'fauna-gloomwraith.glb',authored,front)
+    manifest['species']=[e for e in manifest['species'] if e['kind']!='gloomwraith']+[entry]
+    manifest['speciesCount']=len(manifest['species'])
+    (OUT/'fauna-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
