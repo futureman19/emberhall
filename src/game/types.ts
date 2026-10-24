@@ -242,6 +242,7 @@ export type SpellId =
 export type ClassId = "ranger" | "warrior" | "mage" | "rogue" | "merchant";
 export type NpcRole = "banker" | "provisioner" | "healer" | "alchemist";
 export type FaunaKind =
+  | "slag_golem"
   | "hare"
   | "hart"
   | "wolf"
@@ -401,6 +402,8 @@ export interface Person {
 }
 
 export interface Creature {
+  /** Persisted Emberdeep combat clock in simulation seconds. */
+  monster?: { phase: "patrol" | "windup" | "strike" | "recover"; time: number; targetX: number; targetZ: number };
   id: string;
   kind: FaunaKind;
   x: number;

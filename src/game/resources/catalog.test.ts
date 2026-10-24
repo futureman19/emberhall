@@ -303,8 +303,9 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
   assert.deepEqual(TRAIT_REGISTRY.moon.values, { rough: 1.05, sound: 1.1, choice: 1.2, pristine: 1.3 });
   assert.deepEqual(
     TRAIT_REGISTRY.moon.fauna,
-    Object.entries(FAUNA_META).filter(([, meta]) => meta.hasCorpse === false).map(([kind]) => kind),
-    "moon silver bites exactly the fleshless kinds",
+    // A slag construct has no butcherable flesh, but is not undead.
+    Object.entries(FAUNA_META).filter(([kind, meta]) => meta.hasCorpse === false && kind !== "slag_golem").map(([kind]) => kind),
+    "moon silver retains its fleshless undead targets, excluding slag constructs",
   );
   assert.deepEqual(TRAIT_REGISTRY.hunters.values, { rough: 1, sound: 2, choice: 3, pristine: 4 });
   assert.equal(TRAIT_REGISTRY.hunters.skill, "tracking");

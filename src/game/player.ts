@@ -1,3 +1,4 @@
+import { faunaPhysicalDamage } from "./fauna-defense.ts";
 import { EH, inGreybarrow } from "./atlas.ts";
 import { FAUNA_META, hasTag, hideGradeFor, ITEM_META, POISON_TICK_HOURS, tagConsumeOrder } from "./catalog.ts";
 import { provoke, strikePlayer } from "./ecology.ts";
@@ -809,7 +810,7 @@ function huntNow(world: World, p: Person) {
   if (slayerMul) dmg = Math.floor(dmg * slayerMul);
   if (c.markedUntil !== undefined && world.hour < c.markedUntil) dmg = Math.floor(dmg * 1.25);
   if (world.hour < world.player.blessUntil) dmg = Math.floor(dmg * 1.25);
-  c.hp -= dmg;
+  c.hp -= faunaPhysicalDamage(c.kind, dmg);
   if (ok && tech?.id === "hunters_mark") c.markedUntil = world.hour + 8;
   if (ok && tech?.id === "hamstring") c.curseUntil = world.hour + 4; // the leg wound slows its stride
   if (ok && tech?.id === "bash") c.paralyzeUntil = Math.max(c.paralyzeUntil ?? 0, world.hour + 0.5);
@@ -820,7 +821,7 @@ function huntNow(world: World, p: Person) {
       (x) => x.id !== c.id && x.task !== "dead" && x.ownerId !== world.player.id && Math.hypot(x.x - c.x, x.z - c.z) < 2.5,
     );
     if (other && splash > 0) {
-      other.hp -= splash;
+      other.hp -= faunaPhysicalDamage(other.kind, splash);
       if (other.hp <= 0) {
         other.hp = 0;
         other.task = "dead";
@@ -834,7 +835,7 @@ function huntNow(world: World, p: Person) {
   if (tech?.id === "double_loose" && bow && c.hp > 0 && (world.player.pack.arrows ?? 0) > 0) {
     world.player.pack.arrows -= 1;
     const ok2 = Math.random() < chance + 0.2 + mods.hit / 100;
-    c.hp -= (ok2 ? blade + Math.floor(skill / 12) + anatomyBonus(anatomy) : Math.max(1, Math.floor(blade / 3))) + mods.dmg;
+    c.hp -= faunaPhysicalDamage(c.kind, (ok2 ? blade + Math.floor(skill / 12) + anatomyBonus(anatomy) : Math.max(1, Math.floor(blade / 3))) + mods.dmg);
   }
   // A spent move cools down; every swing is remembered (Riposte watches this).
   if (tech) {
@@ -846,7 +847,7 @@ function huntNow(world: World, p: Person) {
   const bound = world.fauna.find(
     (x) => x.ownerId === world.player.id && x.boundUntil && x.boundUntil > world.hour && x.id !== c.id && Math.hypot(x.x - c.x, x.z - c.z) < 3.5,
   );
-  if (bound) c.hp -= FAUNA_META[bound.kind].dmg;
+  if (bound) c.hp -= faunaPhysicalDamage(c.kind, FAUNA_META[bound.kind].dmg);
   // Teeth only answer when they can reach you — an arrow from afar draws none.
   // A held beast cannot answer at all. The swing's counter is the OPENING
   // bite that starts the war: it lands through the one shared strike (same
