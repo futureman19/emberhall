@@ -59,6 +59,7 @@ import { Lighting } from "./lighting";
 import { Sky } from "./sky";
 import { WeatherFx } from "./weather-fx";
 import { People } from "./people-meshes";
+import { FirstPersonWeapon } from "./first-person-weapon";
 import { Piles } from "./pile-meshes";
 import { Herbs } from "./herb-meshes";
 import { Campfires } from "./campfire-meshes";
@@ -2012,6 +2013,7 @@ export function WorldScene() {
       </group>
       <PlacePointer />
       <Rig />
+      <FirstPersonWeapon />
       <SimClock />
     </Canvas>
   );

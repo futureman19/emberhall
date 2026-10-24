@@ -55,6 +55,7 @@
     "src/components/game/fauna-art.tsx",
     "src/components/game/fauna-meshes.tsx",
     "src/components/game/field-prop-art.ts",
+    "src/components/game/first-person-weapon.tsx",
     "src/components/game/flora-art.ts",
     "src/components/game/flora-eligibility.ts",
     "src/components/game/forged-weapon.tsx",
@@ -6984,6 +6985,7 @@
         "FIGURE"
       ],
       "rendererLocations": [
+        "src/components/game/forged-weapon.tsx:3",
         "src/components/game/living-doll.tsx:5",
         "src/components/game/look-preview.tsx:12",
         "src/components/game/people-meshes.tsx:32",
@@ -6991,6 +6993,7 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/forged-weapon.tsx",
         "src/components/game/living-doll.tsx",
         "src/components/game/look-preview.tsx",
         "src/components/game/people-meshes.tsx",
@@ -7040,6 +7043,7 @@
         "FIGURE"
       ],
       "rendererLocations": [
+        "src/components/game/forged-weapon.tsx:3",
         "src/components/game/living-doll.tsx:5",
         "src/components/game/look-preview.tsx:12",
         "src/components/game/people-meshes.tsx:32",
@@ -7047,6 +7051,7 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/forged-weapon.tsx",
         "src/components/game/living-doll.tsx",
         "src/components/game/look-preview.tsx",
         "src/components/game/people-meshes.tsx",
@@ -7096,6 +7101,7 @@
         "FIGURE"
       ],
       "rendererLocations": [
+        "src/components/game/forged-weapon.tsx:3",
         "src/components/game/living-doll.tsx:5",
         "src/components/game/look-preview.tsx:12",
         "src/components/game/people-meshes.tsx:32",
@@ -7103,6 +7109,7 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/forged-weapon.tsx",
         "src/components/game/living-doll.tsx",
         "src/components/game/look-preview.tsx",
         "src/components/game/people-meshes.tsx",
@@ -7152,6 +7159,7 @@
         "FIGURE"
       ],
       "rendererLocations": [
+        "src/components/game/forged-weapon.tsx:3",
         "src/components/game/living-doll.tsx:5",
         "src/components/game/look-preview.tsx:12",
         "src/components/game/people-meshes.tsx:32",
@@ -7159,6 +7167,7 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/forged-weapon.tsx",
         "src/components/game/living-doll.tsx",
         "src/components/game/look-preview.tsx",
         "src/components/game/people-meshes.tsx",
@@ -7208,6 +7217,7 @@
         "FIGURE"
       ],
       "rendererLocations": [
+        "src/components/game/forged-weapon.tsx:3",
         "src/components/game/living-doll.tsx:5",
         "src/components/game/look-preview.tsx:12",
         "src/components/game/people-meshes.tsx:32",
@@ -7215,6 +7225,7 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/forged-weapon.tsx",
         "src/components/game/living-doll.tsx",
         "src/components/game/look-preview.tsx",
         "src/components/game/people-meshes.tsx",
@@ -7264,6 +7275,7 @@
         "FIGURE"
       ],
       "rendererLocations": [
+        "src/components/game/forged-weapon.tsx:3",
         "src/components/game/living-doll.tsx:5",
         "src/components/game/look-preview.tsx:12",
         "src/components/game/people-meshes.tsx:32",
@@ -7271,6 +7283,7 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/forged-weapon.tsx",
         "src/components/game/living-doll.tsx",
         "src/components/game/look-preview.tsx",
         "src/components/game/people-meshes.tsx",
@@ -7320,6 +7333,7 @@
         "FIGURE"
       ],
       "rendererLocations": [
+        "src/components/game/forged-weapon.tsx:3",
         "src/components/game/living-doll.tsx:5",
         "src/components/game/look-preview.tsx:12",
         "src/components/game/people-meshes.tsx:32",
@@ -7327,6 +7341,7 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/forged-weapon.tsx",
         "src/components/game/living-doll.tsx",
         "src/components/game/look-preview.tsx",
         "src/components/game/people-meshes.tsx",
@@ -7376,6 +7391,7 @@
         "FIGURE"
       ],
       "rendererLocations": [
+        "src/components/game/forged-weapon.tsx:3",
         "src/components/game/living-doll.tsx:5",
         "src/components/game/look-preview.tsx:12",
         "src/components/game/people-meshes.tsx:32",
@@ -7383,6 +7399,7 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/forged-weapon.tsx",
         "src/components/game/living-doll.tsx",
         "src/components/game/look-preview.tsx",
         "src/components/game/people-meshes.tsx",
@@ -7432,6 +7449,7 @@
         "FIGURE"
       ],
       "rendererLocations": [
+        "src/components/game/forged-weapon.tsx:3",
         "src/components/game/living-doll.tsx:5",
         "src/components/game/look-preview.tsx:12",
         "src/components/game/people-meshes.tsx:32",
@@ -7439,6 +7457,7 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/forged-weapon.tsx",
         "src/components/game/living-doll.tsx",
         "src/components/game/look-preview.tsx",
         "src/components/game/people-meshes.tsx",
@@ -7488,6 +7507,7 @@
         "FIGURE"
       ],
       "rendererLocations": [
+        "src/components/game/forged-weapon.tsx:3",
         "src/components/game/living-doll.tsx:5",
         "src/components/game/look-preview.tsx:12",
         "src/components/game/people-meshes.tsx:32",
@@ -7495,6 +7515,7 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/forged-weapon.tsx",
         "src/components/game/living-doll.tsx",
         "src/components/game/look-preview.tsx",
         "src/components/game/people-meshes.tsx",
@@ -7544,6 +7565,7 @@
         "FIGURE"
       ],
       "rendererLocations": [
+        "src/components/game/forged-weapon.tsx:3",
         "src/components/game/living-doll.tsx:5",
         "src/components/game/look-preview.tsx:12",
         "src/components/game/people-meshes.tsx:32",
@@ -7551,6 +7573,7 @@
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
+        "src/components/game/forged-weapon.tsx",
         "src/components/game/living-doll.tsx",
         "src/components/game/look-preview.tsx",
         "src/components/game/people-meshes.tsx",
@@ -10659,6 +10682,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -10668,6 +10692,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -10750,6 +10775,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -10759,6 +10785,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -10841,6 +10868,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -10850,6 +10878,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -10932,6 +10961,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -10941,6 +10971,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -11023,6 +11054,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -11032,6 +11064,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -11114,6 +11147,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -11123,6 +11157,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -11205,6 +11240,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -11214,6 +11250,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -11296,6 +11333,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -11305,6 +11343,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -11387,6 +11426,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -11396,6 +11436,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -11478,6 +11519,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -11487,6 +11529,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -11569,6 +11612,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -11578,6 +11622,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -11660,6 +11705,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -11669,6 +11715,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -11751,6 +11798,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -11760,6 +11808,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -11842,6 +11891,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -11851,6 +11901,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -11933,6 +11984,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -11942,6 +11994,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -12024,6 +12077,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -12033,6 +12087,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -12115,6 +12170,7 @@
         "src/components/game/crafting/inlay-panel.tsx:1",
         "src/components/game/crafting/material-selector.tsx:1",
         "src/components/game/crafting/workmanship-preview.tsx:1",
+        "src/components/game/equipment-material.ts:2",
         "src/components/game/paperdoll.tsx:1",
         "src/components/game/people-meshes.tsx:1"
       ],
@@ -12124,6 +12180,7 @@
         "src/components/game/crafting/inlay-panel.tsx",
         "src/components/game/crafting/material-selector.tsx",
         "src/components/game/crafting/workmanship-preview.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/paperdoll.tsx",
         "src/components/game/people-meshes.tsx"
       ],
@@ -36488,10 +36545,76 @@
       "canonicalId": "src/components/game/equipment-material.ts#equipmentMaterial",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/equipment-material.ts:6"
+        "src/components/game/equipment-material.ts:28"
       ],
       "sourceNames": [
         "equipmentMaterial"
+      ],
+      "rendererLocations": [
+        "src/components/game/equipment-material.ts:28"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/equipment-material.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-material.ts:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:ghost",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-material.ts:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-material.ts:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/equipment-material.ts:6"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/equipment-material.ts#exactWeaponSurfaces",
+      "canonicalId": "src/components/game/equipment-material.ts#exactWeaponSurfaces",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/equipment-material.ts:6"
+      ],
+      "sourceNames": [
+        "exactWeaponSurfaces"
       ],
       "rendererLocations": [
         "src/components/game/equipment-material.ts:6"
@@ -36511,7 +36634,39 @@
           "applicability": "source contract; runtime unverified"
         },
         {
-          "id": "predicate:ghost",
+          "id": "predicate:edge",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-material.ts:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:gem && allowed",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-material.ts:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:item?.base === id && item.formId === id",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-material.ts:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:metal?.kind === 'ore'",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/equipment-material.ts:6"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:timber?.kind === 'timber'",
           "status": "inventoried",
           "evidence": [
             "src/components/game/equipment-material.ts:6"
@@ -46552,7 +46707,7 @@
       "rendererLocations": [
         "src/components/game/context-menu.tsx:50",
         "src/components/game/use-house-touch.ts:8",
-        "src/components/game/world-scene.tsx:298"
+        "src/components/game/world-scene.tsx:299"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -47806,13 +47961,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#GraphicsProbe",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:88"
+        "src/components/game/world-scene.tsx:89"
       ],
       "sourceNames": [
         "GraphicsProbe"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:88"
+        "src/components/game/world-scene.tsx:89"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -47912,7 +48067,7 @@
       "canonicalId": "src/components/game/world-scene.tsx#groundY",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:126"
+        "src/components/game/world-scene.tsx:127"
       ],
       "sourceNames": [
         "groundY"
@@ -47939,7 +48094,7 @@
         "src/components/game/sky.tsx:7",
         "src/components/game/spell-effects-mesh.tsx:5",
         "src/components/game/terrain.tsx:21",
-        "src/components/game/world-scene.tsx:126",
+        "src/components/game/world-scene.tsx:127",
         "src/components/game/world-scene.tsx:35"
       ],
       "rendererMapping": "direct AST declaration/name",
@@ -48178,6 +48333,122 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/fauna-art.tsx:26"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-name:src/components/game/first-person-weapon.tsx#emberhall-first-person-weapon",
+      "canonicalId": "src/components/game/first-person-weapon.tsx#emberhall-first-person-weapon",
+      "family": "renderer-name",
+      "catalogSources": [
+        "src/components/game/first-person-weapon.tsx:24"
+      ],
+      "sourceNames": [
+        "FirstPersonWeapon"
+      ],
+      "rendererLocations": [
+        "src/components/game/first-person-weapon.tsx:24"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/first-person-weapon.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/first-person-weapon.tsx:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/first-person-weapon.tsx:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/first-person-weapon.tsx:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-name:src/components/game/forged-weapon.tsx#weapon-inlay",
+      "canonicalId": "src/components/game/forged-weapon.tsx#weapon-inlay",
+      "family": "renderer-name",
+      "catalogSources": [
+        "src/components/game/forged-weapon.tsx:31"
+      ],
+      "sourceNames": [
+        "ForgedWeapon"
+      ],
+      "rendererLocations": [
+        "src/components/game/forged-weapon.tsx:31"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/forged-weapon.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/forged-weapon.tsx:31"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/forged-weapon.tsx:31"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/forged-weapon.tsx:31"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -49231,13 +49502,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#transient-action-fx",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1993"
+        "src/components/game/world-scene.tsx:1994"
       ],
       "sourceNames": [
         "WorldScene"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1993"
+        "src/components/game/world-scene.tsx:1994"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54298,24 +54569,112 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "renderer:src/components/game/first-person-weapon.tsx#FirstPersonWeapon",
+      "canonicalId": "src/components/game/first-person-weapon.tsx#FirstPersonWeapon",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/first-person-weapon.tsx:9"
+      ],
+      "sourceNames": [
+        "FirstPersonWeapon"
+      ],
+      "rendererLocations": [
+        "src/components/game/first-person-weapon.tsx:9"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/first-person-weapon.tsx"
+      ],
+      "jsxTags": [
+        "Held",
+        "group"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/first-person-weapon.tsx:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!firstPerson || ghost || !playing || !id",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/first-person-weapon.tsx:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!root.current",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/first-person-weapon.tsx:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:camera instanceof PerspectiveCamera",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/first-person-weapon.tsx:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/first-person-weapon.tsx:9"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/first-person-weapon.tsx:9"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "renderer:src/components/game/forged-weapon.tsx#ForgedWeapon",
       "canonicalId": "src/components/game/forged-weapon.tsx#ForgedWeapon",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/forged-weapon.tsx:6"
+        "src/components/game/forged-weapon.tsx:9"
       ],
       "sourceNames": [
         "ForgedWeapon"
       ],
       "rendererLocations": [
-        "src/components/game/forged-weapon.tsx:6"
+        "src/components/game/forged-weapon.tsx:9"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
         "src/components/game/forged-weapon.tsx"
       ],
       "jsxTags": [
-        "group"
+        "group",
+        "mesh",
+        "meshStandardMaterial",
+        "octahedronGeometry"
       ],
       "states": [
         {
@@ -54335,10 +54694,10 @@
           "applicability": "source contract; runtime unverified"
         },
         {
-          "id": "predicate:ghost",
+          "id": "predicate:id === \"dagger\"",
           "status": "inventoried",
           "evidence": [
-            "src/components/game/forged-weapon.tsx:6"
+            "src/components/game/forged-weapon.tsx:9"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -57029,13 +57388,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#BandageBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:589"
+        "src/components/game/people-meshes.tsx:590"
       ],
       "sourceNames": [
         "BandageBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:589"
+        "src/components/game/people-meshes.tsx:590"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -57123,13 +57482,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#BandageWrap",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:464"
+        "src/components/game/people-meshes.tsx:465"
       ],
       "sourceNames": [
         "BandageWrap"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:464"
+        "src/components/game/people-meshes.tsx:465"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -57354,13 +57713,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#ConstructionBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:818"
+        "src/components/game/people-meshes.tsx:819"
       ],
       "sourceNames": [
         "ConstructionBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:818"
+        "src/components/game/people-meshes.tsx:819"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -57447,13 +57806,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#ConstructionTool",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:799"
+        "src/components/game/people-meshes.tsx:800"
       ],
       "sourceNames": [
         "ConstructionTool"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:799"
+        "src/components/game/people-meshes.tsx:800"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -57534,13 +57893,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#CorpseBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:746"
+        "src/components/game/people-meshes.tsx:747"
       ],
       "sourceNames": [
         "CorpseBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:746"
+        "src/components/game/people-meshes.tsx:747"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -57635,13 +57994,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#CraftingBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:677"
+        "src/components/game/people-meshes.tsx:678"
       ],
       "sourceNames": [
         "CraftingBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:677"
+        "src/components/game/people-meshes.tsx:678"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -57752,13 +58111,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#CraftingTool",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:655"
+        "src/components/game/people-meshes.tsx:656"
       ],
       "sourceNames": [
         "CraftingTool"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:655"
+        "src/components/game/people-meshes.tsx:656"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -57909,13 +58268,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#ExtractionBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:767"
+        "src/components/game/people-meshes.tsx:768"
       ],
       "sourceNames": [
         "ExtractionBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:767"
+        "src/components/game/people-meshes.tsx:768"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -58066,13 +58425,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Figure",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:859"
+        "src/components/game/people-meshes.tsx:860"
       ],
       "sourceNames": [
         "Figure"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:859"
+        "src/components/game/people-meshes.tsx:860"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -58680,13 +59039,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#FishingRod",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:297"
+        "src/components/game/people-meshes.tsx:298"
       ],
       "sourceNames": [
         "FishingRod"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:297"
+        "src/components/game/people-meshes.tsx:298"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -58746,13 +59105,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#GatheringBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:724"
+        "src/components/game/people-meshes.tsx:725"
       ],
       "sourceNames": [
         "GatheringBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:724"
+        "src/components/game/people-meshes.tsx:725"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -58871,13 +59230,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#GatheringTool",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:700"
+        "src/components/game/people-meshes.tsx:701"
       ],
       "sourceNames": [
         "GatheringTool"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:700"
+        "src/components/game/people-meshes.tsx:701"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -59270,13 +59629,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Hoe",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:312"
+        "src/components/game/people-meshes.tsx:313"
       ],
       "sourceNames": [
         "Hoe"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:312"
+        "src/components/game/people-meshes.tsx:313"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -59533,13 +59892,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#MeleeSwingArc",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:342"
+        "src/components/game/people-meshes.tsx:343"
       ],
       "sourceNames": [
         "MeleeSwingArc"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:342"
+        "src/components/game/people-meshes.tsx:343"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -59611,13 +59970,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#NpcInteractionBillboard",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:838"
+        "src/components/game/people-meshes.tsx:839"
       ],
       "sourceNames": [
         "NpcInteractionBillboard"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:838"
+        "src/components/game/people-meshes.tsx:839"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -59720,13 +60079,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#PalmFlame",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:383"
+        "src/components/game/people-meshes.tsx:384"
       ],
       "sourceNames": [
         "PalmFlame"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:383"
+        "src/components/game/people-meshes.tsx:384"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -59833,13 +60192,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#People",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:1237"
+        "src/components/game/people-meshes.tsx:1238"
       ],
       "sourceNames": [
         "People"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:1237"
+        "src/components/game/people-meshes.tsx:1238"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -59863,6 +60222,14 @@
           "status": "inventoried",
           "evidence": [
             "src/components/game/people-meshes.tsx:1225"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:rareMain",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/people-meshes.tsx:1238"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -59902,13 +60269,13 @@
       "canonicalId": "src/components/game/people-meshes.tsx#Pick",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/people-meshes.tsx:327"
+        "src/components/game/people-meshes.tsx:328"
       ],
       "sourceNames": [
         "Pick"
       ],
       "rendererLocations": [
-        "src/components/game/people-meshes.tsx:327"
+        "src/components/game/people-meshes.tsx:328"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -64642,13 +65009,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CastFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:409"
+        "src/components/game/world-scene.tsx:410"
       ],
       "sourceNames": [
         "CastFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:409"
+        "src/components/game/world-scene.tsx:410"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -64879,13 +65246,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#ChipBits",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1891"
+        "src/components/game/world-scene.tsx:1892"
       ],
       "sourceNames": [
         "ChipBits"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1891"
+        "src/components/game/world-scene.tsx:1892"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -64965,13 +65332,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CombatFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1757"
+        "src/components/game/world-scene.tsx:1758"
       ],
       "sourceNames": [
         "CombatFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1757"
+        "src/components/game/world-scene.tsx:1758"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -65081,13 +65448,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CompanionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1373"
+        "src/components/game/world-scene.tsx:1374"
       ],
       "sourceNames": [
         "CompanionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1373"
+        "src/components/game/world-scene.tsx:1374"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -65262,13 +65629,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#ConstructionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1439"
+        "src/components/game/world-scene.tsx:1440"
       ],
       "sourceNames": [
         "ConstructionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1439"
+        "src/components/game/world-scene.tsx:1440"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -65408,13 +65775,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CorpseFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1618"
+        "src/components/game/world-scene.tsx:1619"
       ],
       "sourceNames": [
         "CorpseFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1618"
+        "src/components/game/world-scene.tsx:1619"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -65549,13 +65916,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CraftFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1235"
+        "src/components/game/world-scene.tsx:1236"
       ],
       "sourceNames": [
         "CraftFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1235"
+        "src/components/game/world-scene.tsx:1236"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -65673,13 +66040,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#DeathFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1861"
+        "src/components/game/world-scene.tsx:1862"
       ],
       "sourceNames": [
         "DeathFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1861"
+        "src/components/game/world-scene.tsx:1862"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -65759,13 +66126,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#ExtractionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1522"
+        "src/components/game/world-scene.tsx:1523"
       ],
       "sourceNames": [
         "ExtractionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1522"
+        "src/components/game/world-scene.tsx:1523"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -65905,13 +66272,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#FizzleFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:990"
+        "src/components/game/world-scene.tsx:991"
       ],
       "sourceNames": [
         "FizzleFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:990"
+        "src/components/game/world-scene.tsx:991"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -66010,13 +66377,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#GatheringFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1703"
+        "src/components/game/world-scene.tsx:1704"
       ],
       "sourceNames": [
         "GatheringFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1703"
+        "src/components/game/world-scene.tsx:1704"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -66141,13 +66508,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#HealingFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1053"
+        "src/components/game/world-scene.tsx:1054"
       ],
       "sourceNames": [
         "HealingFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1053"
+        "src/components/game/world-scene.tsx:1054"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -66238,13 +66605,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#MarkStones",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:354"
+        "src/components/game/world-scene.tsx:355"
       ],
       "sourceNames": [
         "MarkStones"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:354"
+        "src/components/game/world-scene.tsx:355"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -66311,13 +66678,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#MoongateTravelFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:840"
+        "src/components/game/world-scene.tsx:841"
       ],
       "sourceNames": [
         "MoongateTravelFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:840"
+        "src/components/game/world-scene.tsx:841"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -66466,13 +66833,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#NpcInteractionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1304"
+        "src/components/game/world-scene.tsx:1305"
       ],
       "sourceNames": [
         "NpcInteractionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1304"
+        "src/components/game/world-scene.tsx:1305"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -66642,13 +67009,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#PersonalActionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:742"
+        "src/components/game/world-scene.tsx:743"
       ],
       "sourceNames": [
         "PersonalActionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:742"
+        "src/components/game/world-scene.tsx:743"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -66888,13 +67255,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#PlacePointer",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:130"
+        "src/components/game/world-scene.tsx:131"
       ],
       "sourceNames": [
         "PlacePointer"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:130"
+        "src/components/game/world-scene.tsx:131"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -67050,13 +67417,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#Rig",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:236"
+        "src/components/game/world-scene.tsx:237"
       ],
       "sourceNames": [
         "Rig"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:236"
+        "src/components/game/world-scene.tsx:237"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -67198,13 +67565,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#SimClock",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:119"
+        "src/components/game/world-scene.tsx:120"
       ],
       "sourceNames": [
         "SimClock"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:119"
+        "src/components/game/world-scene.tsx:120"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -67256,13 +67623,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#TamingFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1115"
+        "src/components/game/world-scene.tsx:1116"
       ],
       "sourceNames": [
         "TamingFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1115"
+        "src/components/game/world-scene.tsx:1116"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -67417,13 +67784,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#TravelFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:909"
+        "src/components/game/world-scene.tsx:910"
       ],
       "sourceNames": [
         "TravelFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:909"
+        "src/components/game/world-scene.tsx:910"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -67521,13 +67888,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#WalkMarker",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:382"
+        "src/components/game/world-scene.tsx:383"
       ],
       "sourceNames": [
         "WalkMarker"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:382"
+        "src/components/game/world-scene.tsx:383"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -67607,13 +67974,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#WorldScene",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1935"
+        "src/components/game/world-scene.tsx:1936"
       ],
       "sourceNames": [
         "WorldScene"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1935"
+        "src/components/game/world-scene.tsx:1936"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -67635,6 +68002,7 @@
         "DeathFxMesh",
         "ExtractionFxMesh",
         "Fauna",
+        "FirstPersonWeapon",
         "FizzleFxMesh",
         "FrontierScenery",
         "Gates",
@@ -67840,6 +68208,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -67858,6 +68227,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -67936,6 +68306,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -67954,6 +68325,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -68065,6 +68437,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -68083,6 +68456,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -68161,6 +68535,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -68179,6 +68554,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -68290,6 +68666,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -68308,6 +68685,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -68386,6 +68764,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -68404,6 +68783,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -68482,6 +68862,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -68500,6 +68881,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -68578,6 +68960,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -68596,6 +68979,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -68674,6 +69058,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -68692,6 +69077,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -68770,6 +69156,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -68788,6 +69175,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -68866,6 +69254,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -68884,6 +69273,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -68962,6 +69352,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -68980,6 +69371,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -69058,6 +69450,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -69076,6 +69469,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -69154,6 +69548,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -69172,6 +69567,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -69283,6 +69679,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -69301,6 +69698,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -69379,6 +69777,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -69397,6 +69796,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -69508,6 +69908,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -69526,6 +69927,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -69637,6 +70039,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -69655,6 +70058,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -69733,6 +70137,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -69751,6 +70156,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -69829,6 +70235,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -69847,6 +70254,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -70024,6 +70432,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -70042,6 +70451,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -70153,6 +70563,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -70171,6 +70582,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -70282,6 +70694,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -70300,6 +70713,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -70378,6 +70792,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -70396,6 +70811,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -70474,6 +70890,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -70492,6 +70909,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -70570,6 +70988,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -70588,6 +71007,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -70666,6 +71086,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -70684,6 +71105,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -70795,6 +71217,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -70813,6 +71236,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",
@@ -70891,6 +71315,7 @@
         "src/components/game/crafting/salvage-panel.tsx:6",
         "src/components/game/crop-meshes.tsx:1",
         "src/components/game/crop-meshes.tsx:7",
+        "src/components/game/equipment-material.ts:1",
         "src/components/game/item-icon.tsx:2",
         "src/components/game/item-icon.tsx:3",
         "src/components/game/oak-stumps.tsx:1",
@@ -70909,6 +71334,7 @@
         "src/components/game/crafting/refining-panel.tsx",
         "src/components/game/crafting/salvage-panel.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/equipment-material.ts",
         "src/components/game/item-icon.tsx",
         "src/components/game/oak-stumps.tsx",
         "src/components/game/paperdoll.tsx",

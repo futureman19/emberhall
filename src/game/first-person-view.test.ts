@@ -111,5 +111,10 @@ test("rig, figure, HUD chip and settings all reach the same first-person flag", 
   assert.match(hud, /firstPersonHotkey/);
   assert.match(rail, /First-person/);
   assert.match(settings, /firstPerson/);
+  assert.match(rig, /<FirstPersonWeapon \/>/);
+  const held = read("../components/game/first-person-weapon.tsx");
+  assert.match(held, /<Held/);
+  assert.match(held, /camera.quaternion/);
+  assert.match(held, /!firstPerson \|\| ghost/);
   assert.match(settings, /Eyes/);
 });

@@ -24,6 +24,22 @@ for (const [form, height] of [['dagger', 0.42], ['spear', 1.4], ['war_axe', 0.8]
  });
 }
 
+test('exact held forms share hand anchor and expose a visible inlay mount', () => {
+ const source = readFileSync(new URL('./forged-weapon.tsx', import.meta.url), 'utf8');
+ assert.match(source, /name=\{`emberhall-weapon-\$\{id\}`\}/);
+ assert.match(source, /exactWeaponSurfaces/);
+ assert.match(source, /equipmentMaterial/);
+ assert.match(source, /octahedronGeometry/);
+ assert.match(source, /FIGURE\.hand\.y/);
+ for (const form of ['dagger', 'spear', 'war_axe'] as const) {
+  const parts = createExactWeaponGeometry(form);
+  parts.hilt.computeBoundingBox(); parts.edge.computeBoundingBox();
+  assert.ok(Math.abs(parts.hilt.boundingBox!.min.y + parts.hilt.boundingBox!.max.y) < 1e-6);
+  assert.ok(parts.edge.boundingBox!.min.y > 0);
+  Object.values(parts).forEach(g => g.dispose());
+ }
+});
+
 const bytes=readFileSync(new URL('../../../public/art/lanternwood/weapons.glb',import.meta.url));
 const load=()=>new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
 test('all eleven authored melee parts parse inside original envelopes',async()=>{

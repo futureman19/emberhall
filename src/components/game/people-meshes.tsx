@@ -279,7 +279,8 @@ export function Shield({ id, ghost }: { id: ItemId; ghost: boolean }) {
 }
 
 export function Held({ id, ghost }: { id: ItemId; ghost: boolean }) {
-  if (id === "dagger" || id === "spear" || id === "war_axe") return <ForgedWeapon id={id} ghost={ghost} />;
+  const item = useGame(s => s.snap.player.rares.find(r => r.uid === s.snap.player.wearRare.main && r.base === id));
+  if (id === "dagger" || id === "spear" || id === "war_axe") return <ForgedWeapon id={id} ghost={ghost} item={item} />;
   if (id === "hatchet") return <Hatchet ghost={ghost} />;
   if (id === "pick") return <Pick ghost={ghost} />;
   if (id === "hoe") return <Hoe ghost={ghost} />;
@@ -1237,7 +1238,9 @@ function Figure({
 export function People() {
   const people = useGame((s) => s.snap.people);
   const selected = useGame((s) => s.selectedId);
-  const wear = useGame((s) => s.snap.player?.wear ?? {});
+  const baseWear = useGame((s) => s.snap.player?.wear ?? {});
+  const rareMain = useGame(s => s.snap.player.rares.find(r => r.uid === s.snap.player.wearRare.main)?.base);
+  const wear = rareMain ? { ...baseWear, main: rareMain } : baseWear;
   return (
     <group>
       {people.map((p) => (
