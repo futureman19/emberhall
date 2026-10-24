@@ -13,7 +13,7 @@ const viewports = [
 ];
 
 const verdict = { url, viewports: {}, ok: true };
-const browser = await chromium.launch({ headless: true, args: ["--no-sandbox", "--disable-dev-shm-usage"] });
+const browser = await chromium.launch({ headless: true, args: ["--no-sandbox", "--disable-dev-shm-usage", "--use-angle=d3d11", "--enable-webgl", "--ignore-gpu-blocklist"] });
 try {
   for (const viewport of viewports) {
     const page = await browser.newPage({ viewport });
@@ -51,9 +51,10 @@ try {
       store.useGame.setState({ phase: "playing", openCraft: true, panel: "none", snap: live.snapshot(world) });
     });
 
-    await page.getByRole("radio", { name: /Redwood · Choice log/ }).check();
-    await page.getByRole("radio", { name: /Common Cloth · Sound cloth/ }).check();
+    await page.locator('input[name="material-bow-body"]').check();
+    await page.locator('input[name="material-bow-binding"]').check();
     await page.getByRole("button", { name: "Craft selected bow" }).click();
+    await page.getByRole("tab", { name: "Inlay", exact: true }).click();
     await page.getByRole("button", { name: "Inlay exact result" }).click();
 
     const state = await page.evaluate(async () => {
