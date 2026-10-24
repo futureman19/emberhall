@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { withSpecialtyStation } from "../placeables/station-test-fixture.ts";
 import test from "node:test";
 import { commandCraft, commandCraftExact } from "../craft.ts";
 import { addResource, makeResourceStackKey, resourceCount } from "../inventory/resources.ts";
@@ -583,6 +584,7 @@ test("exact helmcraft - two plates and a lining, iron sturdy carries into head a
 
 test("exact leathercraft - three hides and a binding, the tunic outclasses the tag shirt", () => {
   const world = createWorld();
+  withSpecialtyStation(world, "loom");
   world.player.skills.tailoring = 100;
   world.player.wear.main = "knife"; // field work — the hides want a blade
   const CHOICE_HIDES = makeResourceStackKey("hide", "hide", "choice");
@@ -604,6 +606,7 @@ test("exact leathercraft - three hides and a binding, the tunic outclasses the t
 
 test("exact leathercraft - the hides want a blade in hand", () => {
   const world = createWorld();
+  withSpecialtyStation(world, "loom");
   world.player.skills.tailoring = 100;
   world.player.wear.main = undefined; // fresh hands — no blade
   const CHOICE_HIDES = makeResourceStackKey("hide", "hide", "choice");
@@ -619,6 +622,7 @@ test("exact leathercraft - the hides want a blade in hand", () => {
 
 test("exact leather set - hood, gloves, and hose carry supple into their slots", () => {
   const world = createWorld();
+  withSpecialtyStation(world, "loom");
   world.player.skills.tailoring = 100;
   world.player.wear.main = "knife";
   const CHOICE_HIDES = makeResourceStackKey("hide", "hide", "choice");

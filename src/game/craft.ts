@@ -41,7 +41,7 @@ export type {
   ExactCraftTransactionResult,
 } from "./crafting/transaction.ts";
 
-export type Station = "bench" | "forge" | "fire";
+export type Station = "bench" | "forge" | "fire" | "loom" | "alchemy";
 
 export interface Recipe {
   id: string;
@@ -139,21 +139,21 @@ export const RECIPES: Recipe[] = [
   { id: "mail", station: "forge", skill: "smithing", diff: 36, label: "Mail", hint: "Any fourteen metal.", need: {}, needTags: [{ tag: "metal", n: 14 }], give: { mail: 1 }, sfx: "smith" },
   // Field work — the "bladed" script: a sharp edge in hand, no station.
   { id: "cut_bandage", station: null, skill: "healing", diff: -20, label: "Cut bandages", hint: "Any cloth, a blade. Two dressings.", need: {}, needTags: [{ tag: "cloth", n: 1 }], needsBlade: true, give: { bandage: 2 }, sfx: "chop" },
-  { id: "potion_heal", station: null, skill: "alchemy", diff: 8, label: "Heal potion", hint: "Garlic and ginseng, a red draught.", need: { garlic: 1, ginseng: 1 }, give: { potion_heal: 1 }, sfx: "cast" },
-  { id: "potion_night", station: null, skill: "alchemy", diff: 12, label: "Night sight potion", hint: "Silk and ash. See as if dusk.", need: { silk: 1, ash: 1 }, give: { potion_night: 1 }, sfx: "cast" },
-  { id: "cut_leather", station: null, skill: "tailoring", diff: 10, label: "Stitch a hide shirt", hint: "Two hides, a blade. Leather armor.", need: {}, needTags: [{ tag: "hide", n: 2 }], needsBlade: true, give: { leather: 1 }, sfx: "chop" },
-  { id: "leather_sew", station: null, skill: "tailoring", diff: 12, label: "Stitch a fine tunic", hint: "Choose three hides and one cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "leather" },
-  { id: "sew_hood", station: null, skill: "tailoring", diff: 4, label: "Hood", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { hood: 1 }, sfx: "chop" },
-  { id: "hood_sew", station: null, skill: "tailoring", diff: 13, label: "Stitch a hide hood", hint: "Choose two hides and one cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "hood" },
-  { id: "sew_gloves", station: null, skill: "tailoring", diff: 6, label: "Gloves", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { gloves: 1 }, sfx: "chop" },
-  { id: "gloves_sew", station: null, skill: "tailoring", diff: 15, label: "Stitch hide gloves", hint: "Choose two hides and one cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "gloves" },
-  { id: "sew_hose", station: null, skill: "tailoring", diff: 8, label: "Hose", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { hose: 1 }, sfx: "chop" },
-  { id: "hose_sew", station: null, skill: "tailoring", diff: 17, label: "Stitch hide hose", hint: "Choose three hides and two cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "hose" },
+  { id: "potion_heal", station: "alchemy", skill: "alchemy", diff: 8, label: "Heal potion", hint: "Garlic and ginseng, a red draught.", need: { garlic: 1, ginseng: 1 }, give: { potion_heal: 1 }, sfx: "cast" },
+  { id: "potion_night", station: "alchemy", skill: "alchemy", diff: 12, label: "Night sight potion", hint: "Silk and ash. See as if dusk.", need: { silk: 1, ash: 1 }, give: { potion_night: 1 }, sfx: "cast" },
+  { id: "cut_leather", station: "loom", skill: "tailoring", diff: 10, label: "Stitch a hide shirt", hint: "Two hides, a blade. Leather armor.", need: {}, needTags: [{ tag: "hide", n: 2 }], needsBlade: true, give: { leather: 1 }, sfx: "chop" },
+  { id: "leather_sew", station: "loom", skill: "tailoring", diff: 12, label: "Stitch a fine tunic", hint: "Choose three hides and one cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "leather" },
+  { id: "sew_hood", station: "loom", skill: "tailoring", diff: 4, label: "Hood", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { hood: 1 }, sfx: "chop" },
+  { id: "hood_sew", station: "loom", skill: "tailoring", diff: 13, label: "Stitch a hide hood", hint: "Choose two hides and one cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "hood" },
+  { id: "sew_gloves", station: "loom", skill: "tailoring", diff: 6, label: "Gloves", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { gloves: 1 }, sfx: "chop" },
+  { id: "gloves_sew", station: "loom", skill: "tailoring", diff: 15, label: "Stitch hide gloves", hint: "Choose two hides and one cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "gloves" },
+  { id: "sew_hose", station: "loom", skill: "tailoring", diff: 8, label: "Hose", hint: "Any two cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 2 }], needsBlade: true, give: { hose: 1 }, sfx: "chop" },
+  { id: "hose_sew", station: "loom", skill: "tailoring", diff: 17, label: "Stitch hide hose", hint: "Choose three hides and two cloth binding.", need: {}, needsBlade: true, give: {}, sfx: "chop", exactRecipeId: "hose" },
   { id: "charm", station: null, skill: "tinkering", diff: 24, label: "Whittle a charm", hint: "Choose a bone trophy and one cloth binding.", need: {}, give: { pendant: 1 }, sfx: "chop", exactRecipeId: "charm" },
   // commandCraftExact resolves by exactRecipeId; the legacy forge tag recipe owns the plain "ring" id.
   { id: "ring_tinker", station: null, skill: "tinkering", diff: 26, label: "Whittle a ring", hint: "Choose an ingot or bone trophy and one cloth binding.", need: {}, give: { ring: 1 }, sfx: "chop", exactRecipeId: "ring" },
-  { id: "sew_tunic", station: null, skill: "tailoring", diff: 12, label: "Tunic", hint: "Any three cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 3 }], needsBlade: true, give: { tunic: 1 }, sfx: "chop" },
-  { id: "sew_cloak", station: null, skill: "tailoring", diff: 18, label: "Travel cloak", hint: "Any four cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 4 }], needsBlade: true, give: { cloak: 1 }, sfx: "chop" },
+  { id: "sew_tunic", station: "loom", skill: "tailoring", diff: 12, label: "Tunic", hint: "Any three cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 3 }], needsBlade: true, give: { tunic: 1 }, sfx: "chop" },
+  { id: "sew_cloak", station: "loom", skill: "tailoring", diff: 18, label: "Travel cloak", hint: "Any four cloth, a blade.", need: {}, needTags: [{ tag: "cloth", n: 4 }], needsBlade: true, give: { cloak: 1 }, sfx: "chop" },
   // Camping — three wood buys a fire that burns three hours.
   { id: "campfire", station: null, skill: "cooking", diff: -25, label: "Build a campfire", hint: "Any three wood. Cooks like a hearth, dies in three hours.", need: {}, needTags: [{ tag: "wood", n: 3 }], placesFire: true, give: {}, sfx: "fire" },
   // The fire — roast, bake, stew. A campfire or the kitchen hearth both serve.
@@ -296,6 +296,8 @@ export function craftBlocker(world: World, rec: Recipe): string | null {
   if (world.player.ghost) return "A ghost cannot craft. Return to life first.";
   if (rec.exactRecipeId) return missingNeed(world, rec);
   if (rec.station !== null && !stationsHere(world).includes(rec.station)) {
+    if (rec.station === "loom") return "Tailoring now needs a loom. Build one from Hold → Work.";
+    if (rec.station === "alchemy") return "Potion brewing now needs an alchemy bench. Build one from Hold → Work.";
     if (rec.station === "forge") return "Move near a forge.";
     if (rec.station === "fire") return "Move near a lit campfire or hearth.";
     return "Move near a bench in the yard or hall.";
@@ -354,6 +356,8 @@ export function commandCraft(world: World, recipeId: string): string | null {
   if (rec.station !== null) {
     const here = stationsHere(world);
     if (!here.includes(rec.station)) {
+      if (rec.station === "loom") return "Tailoring now needs a loom. Build one from Hold → Work.";
+      if (rec.station === "alchemy") return "Potion brewing now needs an alchemy bench. Build one from Hold → Work.";
       if (rec.station === "forge") return "The ore wants a fire. Raise a forge.";
       if (rec.station === "fire") return "The pot wants a fire — build a campfire, or find a hearth.";
       return "The wood wants a bench. The yard, or the hall.";
@@ -395,6 +399,8 @@ export function commandCraftExact(
   if (!exactRecipe || !rec) return "No such exact work.";
   if (rec.needsBlade && !bladeInHand(world)) return "Hold a blade.";
   if (rec.station !== null && !stationsHere(world).includes(rec.station)) {
+    if (rec.station === "loom") return "Tailoring now needs a loom. Build one from Hold → Work.";
+    if (rec.station === "alchemy") return "Potion brewing now needs an alchemy bench. Build one from Hold → Work.";
     if (rec.station === "forge") return "The ore wants a fire. Raise a forge.";
     if (rec.station === "fire") return "The pot wants a fire — build a campfire, or find a hearth.";
     return "The wood wants a bench. The yard, or the hall.";
@@ -539,6 +545,8 @@ export function commandCraftBatch(world: World, recipeId: string, times: number)
   if (rec.station !== null) {
     const here = stationsHere(world);
     if (!here.includes(rec.station)) {
+      if (rec.station === "loom") return "Tailoring now needs a loom. Build one from Hold → Work.";
+      if (rec.station === "alchemy") return "Potion brewing now needs an alchemy bench. Build one from Hold → Work.";
       if (rec.station === "forge") return "The ore wants a fire. Raise a forge.";
       if (rec.station === "fire") return "The pot wants a fire — build a campfire, or find a hearth.";
       return "The wood wants a bench. The yard, or the hall.";

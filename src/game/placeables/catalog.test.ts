@@ -24,7 +24,7 @@ const REQUIRED_IDS = [
   "table_stool",
   "sign_board",
   "planter_box",
-  "smith_anvil", "smith_forge", "smith_trough", "smith_grindstone", "smith_rack", "smith_bellows",
+  "smith_anvil", "smith_forge", "loom", "alchemy_bench", "smith_trough", "smith_grindstone", "smith_rack", "smith_bellows",
 ] as const;
 
 const VOXEL_MAX = 64;
