@@ -777,7 +777,7 @@ function PersonalActionFxMesh() {
       eat.current.rotation.y = age * 4;
     }
     if (equipment.current) {
-      equipment.current.visible = fx.kind === "equipment";
+      equipment.current.visible = fx.kind === "equipment" && fx.item !== "dagger" && fx.item !== "spear" && fx.item !== "war_axe";
       equipment.current.position.x = 1.72;
       equipment.current.rotation.y = age * (fx.kind === "equipment" && fx.direction === "unequip" ? -5 : 5);
       equipment.current.scale.setScalar(0.9 + Math.sin(phase * Math.PI) * 0.42);

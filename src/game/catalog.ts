@@ -438,7 +438,7 @@ export function emptyLastGain(): Record<SkillId, number> {
 export function emptyPack(): Record<ItemId, number> {
   return {
     hatchet: 1, knife: 1, pick: 1, hoe: 1, fishing_rod: 1, log: 0, board: 0, ore: 0, ingot: 0, club: 0, shield: 0,
-    staff: 0, bow: 0, torch: 0, crate: 0, cap: 0, cuirass: 0, sword: 0, dagger: 0, spear: 0, war_axe: 0, mace: 0, war_hammer: 0, quarterstaff: 0,
+    staff: 0, bow: 0, torch: 0, crate: 0, cap: 0, cuirass: 0, sword: 0, dagger: 0, spear: 0, war_axe: 0, mace: 0, war_hammer: 0, quarterstaff: 0, tower_shield: 0,
     gauntlets: 0, gorget: 0, heater: 0, furnace_heart: 0, rabbit_foot: 0, orc_tusk: 0,
     meat: 1, hide: 0, arrows: 12, bandage: 3, potion_heal: 0, potion_night: 0,
     tunic: 0, leather: 0, mail: 0, hood: 1, helm: 0, cloak: 0, gloves: 1, hose: 0, greaves: 0,
