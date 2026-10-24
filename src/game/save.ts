@@ -9,6 +9,7 @@ import {
   SKILL_META,
   VOCATION_META,
 } from "./catalog.ts";
+import { isCommissionState } from "./commissions.ts";
 import { WEATHER_META } from "./weather.ts";
 import { ITEM_FORM_CATALOG } from "./crafting/forms.ts";
 import { resolveItemStats } from "./crafting/resolve.ts";
@@ -334,6 +335,7 @@ function isPlayer(value: unknown): boolean {
     isWearRecord(value.wear) &&
     isArrayOf(value.rares, isRareItem) &&
     isRareWearRecord(value.wearRare) &&
+    (value.commission === undefined || isCommissionState(value.commission)) &&
     isFiniteNumber(value.vault) &&
     isRegistryKey(value.notoriety, NOTORIETY_META) &&
     isFiniteNumber(value.criminalUntil) &&
