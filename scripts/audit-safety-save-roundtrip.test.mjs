@@ -8,6 +8,7 @@ import { applyMintRare } from "../src/game/vault.ts";
 import { LOOK_SCHEMA } from "../src/game/look/types.ts";
 import { commandCraft, RECIPES } from "../src/game/craft.ts";
 import { ITEM_META } from "../src/game/catalog.ts";
+import { withSpecialtyStation } from "../src/game/placeables/station-test-fixture.ts";
 import { createCraftedItem, rareClassOf, rollRare } from "../src/game/rare.ts";
 
 const storageDescriptor = Object.getOwnPropertyDescriptor(globalThis, "localStorage");
@@ -104,7 +105,9 @@ function craftUtility(recipe, quality) {
   for (const id of Object.keys(ITEM_META)) world.player.pack[id] = 100;
   world.player.skills[recipe.skill] = 100;
   world.player.wear.main = "knife";
-  if (recipe.station) {
+  if (recipe.station === "loom") {
+    withSpecialtyStation(world, "loom");
+  } else if (recipe.station) {
     const building = world.buildings.find(({ kind }) => kind === (recipe.station === "forge" ? "forge" : "yard"));
     assert.ok(building);
     you(world).x = building.tx;

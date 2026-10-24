@@ -18,6 +18,9 @@ const REQUIRED_IDS = [
   "door_timber",
   "chest_keep",
   "bench_work",
+  "smith_forge",
+  "loom",
+  "alchemy_bench",
   "hearth_stone",
   "lamp_ember",
   "bed_simple",
@@ -32,7 +35,7 @@ test("hearthwright kit has unique stable ids covering the v1 lodge set", () => {
   const ids = PLACEABLE_CATALOG.map((d) => d.id);
   assert.deepEqual([...ids].sort(), [...REQUIRED_IDS].sort());
   assert.equal(new Set(ids).size, ids.length);
-  assert.ok(ids.length >= 15 && ids.length <= 20);
+  assert.ok(ids.length >= 15 && ids.length <= 23);
   for (const id of REQUIRED_IDS) {
     assert.equal(PLACEABLE_BY_ID[id]?.id, id);
   }

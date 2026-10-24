@@ -211,6 +211,7 @@
     "src/game/placeables/placement.ts",
     "src/game/placeables/pose.ts",
     "src/game/placeables/schema.ts",
+    "src/game/placeables/station-test-fixture.ts",
     "src/game/placeables/types.ts",
     "src/game/placement-preview.ts",
     "src/game/player.ts",
@@ -39950,7 +39951,7 @@
         "key"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:117",
+        "src/components/game/craft-gump.tsx:119",
         "src/components/game/crafting/confirm-craft.tsx:17",
         "src/components/game/crafting/inlay-panel.tsx:25",
         "src/components/game/crafting/material-selector.tsx:36",
@@ -78560,6 +78561,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.station=alchemy",
+      "canonicalId": "src/game/craft.ts#Recipe.station=alchemy",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:49"
+      ],
+      "sourceNames": [
+        "Recipe.station"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:49"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:49"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/craft.ts#Recipe.station=bench",
       "canonicalId": "src/game/craft.ts#Recipe.station=bench",
       "family": "state-vocabulary",
@@ -78693,6 +78740,52 @@
       "status": "inventoried",
       "evidence": [
         "src/game/craft.ts:48"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.station=loom",
+      "canonicalId": "src/game/craft.ts#Recipe.station=loom",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:49"
+      ],
+      "sourceNames": [
+        "Recipe.station"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:49"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:49"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -150370,7 +150463,7 @@
       "canonicalId": "src/game/placeables/types.ts#PlaceableDefinition.fn=bed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/placeables/types.ts:90"
+        "src/game/placeables/types.ts:92"
       ],
       "sourceNames": [
         "PlaceableDefinition.fn"
@@ -150416,7 +150509,7 @@
       "canonicalId": "src/game/placeables/types.ts#PlaceableDefinition.fn=craftStation",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/placeables/types.ts:90"
+        "src/game/placeables/types.ts:92"
       ],
       "sourceNames": [
         "PlaceableDefinition.fn"
@@ -150462,7 +150555,7 @@
       "canonicalId": "src/game/placeables/types.ts#PlaceableDefinition.fn=door",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/placeables/types.ts:90"
+        "src/game/placeables/types.ts:92"
       ],
       "sourceNames": [
         "PlaceableDefinition.fn"
@@ -150508,7 +150601,7 @@
       "canonicalId": "src/game/placeables/types.ts#PlaceableDefinition.fn=hearth",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/placeables/types.ts:90"
+        "src/game/placeables/types.ts:92"
       ],
       "sourceNames": [
         "PlaceableDefinition.fn"
@@ -150554,7 +150647,7 @@
       "canonicalId": "src/game/placeables/types.ts#PlaceableDefinition.fn=light",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/placeables/types.ts:90"
+        "src/game/placeables/types.ts:92"
       ],
       "sourceNames": [
         "PlaceableDefinition.fn"
@@ -150600,7 +150693,7 @@
       "canonicalId": "src/game/placeables/types.ts#PlaceableDefinition.fn=planter",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/placeables/types.ts:90"
+        "src/game/placeables/types.ts:92"
       ],
       "sourceNames": [
         "PlaceableDefinition.fn"
@@ -150646,7 +150739,7 @@
       "canonicalId": "src/game/placeables/types.ts#PlaceableDefinition.fn=sign",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/placeables/types.ts:90"
+        "src/game/placeables/types.ts:92"
       ],
       "sourceNames": [
         "PlaceableDefinition.fn"
@@ -150692,7 +150785,7 @@
       "canonicalId": "src/game/placeables/types.ts#PlaceableDefinition.fn=storage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/placeables/types.ts:90"
+        "src/game/placeables/types.ts:92"
       ],
       "sourceNames": [
         "PlaceableDefinition.fn"
@@ -150729,6 +150822,144 @@
       "status": "inventoried",
       "evidence": [
         "src/game/placeables/types.ts:90"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#PlaceableDefinition.providesStation=alchemy",
+      "canonicalId": "src/game/placeables/types.ts#PlaceableDefinition.providesStation=alchemy",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:91"
+      ],
+      "sourceNames": [
+        "PlaceableDefinition.providesStation"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:91"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:91"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#PlaceableDefinition.providesStation=forge",
+      "canonicalId": "src/game/placeables/types.ts#PlaceableDefinition.providesStation=forge",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:91"
+      ],
+      "sourceNames": [
+        "PlaceableDefinition.providesStation"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:91"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:91"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/placeables/types.ts#PlaceableDefinition.providesStation=loom",
+      "canonicalId": "src/game/placeables/types.ts#PlaceableDefinition.providesStation=loom",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/placeables/types.ts:91"
+      ],
+      "sourceNames": [
+        "PlaceableDefinition.providesStation"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/placeables/types.ts:91"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/placeables/types.ts:91"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -227638,13 +227869,13 @@
       "canonicalId": "src/components/game/craft-gump.tsx#CraftGump",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/craft-gump.tsx:42"
+        "src/components/game/craft-gump.tsx:44"
       ],
       "sourceNames": [
         "CraftGump"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:42"
+        "src/components/game/craft-gump.tsx:44"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -227727,6 +227958,14 @@
           "status": "inventoried",
           "evidence": [
             "src/components/game/craft-gump.tsx:30"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!here.includes(\"loom\")",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/craft-gump.tsx:44"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -228030,13 +228269,13 @@
       "canonicalId": "src/components/game/craft-gump.tsx#RecipeRow",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/craft-gump.tsx:515"
+        "src/components/game/craft-gump.tsx:521"
       ],
       "sourceNames": [
         "RecipeRow"
       ],
       "rendererLocations": [
-        "src/components/game/craft-gump.tsx:515"
+        "src/components/game/craft-gump.tsx:521"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -234199,6 +234438,56 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "vocabulary/src/game/craft.ts#Station:alchemy",
+      "canonicalId": "alchemy",
+      "family": "vocabulary/src/game/craft.ts#Station",
+      "catalogSources": [
+        "src/game/craft.ts:44"
+      ],
+      "sourceNames": [
+        "Station"
+      ],
+      "rendererLocations": [
+        "src/components/game/craft-gump.tsx:7"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/craft-gump.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:44"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:44"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "vocabulary/src/game/craft.ts#Station:bench",
       "canonicalId": "bench",
       "family": "vocabulary/src/game/craft.ts#Station",
@@ -234344,6 +234633,56 @@
       "status": "inventoried",
       "evidence": [
         "src/game/craft.ts:43"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/craft.ts#Station:loom",
+      "canonicalId": "loom",
+      "family": "vocabulary/src/game/craft.ts#Station",
+      "catalogSources": [
+        "src/game/craft.ts:44"
+      ],
+      "sourceNames": [
+        "Station"
+      ],
+      "rendererLocations": [
+        "src/components/game/craft-gump.tsx:7"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/craft-gump.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:44"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:44"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."

@@ -87,6 +87,8 @@ export interface PlaceableDefinition {
   cost: PlaceableCost[];
   skill: string;
   station: string | null;
+  /** Work provided after placement; station above describes construction. */
+  providesStation?: "forge" | "loom" | "alchemy";
   fn?: PlaceableFunction;
   weight: number;
 }

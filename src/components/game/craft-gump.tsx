@@ -27,7 +27,9 @@ const TITLE: Record<Group, { title: string; blurb: string }> = {
   bench: { title: "The bench", blurb: "Logs to boards. Then torch, club, crate, staff, cap, shield, bow, cuirass — any wood serves." },
   forge: { title: "The forge", blurb: "Ore to ingot. Then ring, knife, tools, gorget, boots, gauntlets, mace, sword, helm, iron shield, greaves, mail." },
   fire: { title: "The fire", blurb: "Roast meat, bake bread, simmer stew — a campfire of three wood, or a kitchen hearth." },
-  field: { title: "In the field", blurb: "A blade in hand. Cloth to bandages, or to hood, gloves, hose, tunic, cloak. Two hides to a leather shirt. Three wood to a campfire. Garlic and ginseng to a heal draught; silk and ash to night sight." },
+  loom: { title: "The loom", blurb: "Tailoring now needs a loom. Build one from Hold → Work; keep a blade in hand for cutting and stitching." },
+  alchemy: { title: "The alchemy bench", blurb: "Potion brewing now needs an alchemy bench. Build one from Hold → Work." },
+  field: { title: "In the field", blurb: "Cut bandages with a blade, whittle a charm or ring, or build a campfire. Tailoring has moved to the loom; potions to the alchemy bench." },
 };
 
 const WORK_TABS = [
@@ -151,13 +153,13 @@ export function CraftGump() {
         ? "Not enough selected material"
         : null;
   const recipes = visibleRecipes(getWorld(), readyOnly);
-  const groups: Group[] = ["bench", "forge", "fire", "field"];
+  const groups: Group[] = ["bench", "forge", "loom", "alchemy", "fire", "field"];
   return (
     <div className="craft-panel pointer-events-auto absolute top-16 right-3 z-20 flex max-h-[min(70vh,36rem,calc(100dvh-4rem-var(--corner-clear)))] w-[min(100%-1.5rem,22rem)] flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border bg-bg md:right-[68px]">
       <div role="region" aria-label="Crafting work" tabIndex={0} className="craft-scroll min-h-0 overflow-y-auto overscroll-contain p-4">
       <p className="font-display text-sm text-fg">Work</p>
       <p className="mt-2 text-pretty text-xs leading-relaxed text-muted">
-        Wood at the yard. Iron at a forge. A blade anywhere. The work takes, or it splits.
+        Wood at the yard. Iron at a forge. Tailoring now needs a loom; potions an alchemy bench. Build stations from Hold → Work.
       </p>
       <div role="tablist" aria-label="Work sections" className="mt-3 flex gap-1">
         {WORK_TABS.map(({ id, label }) => (
@@ -321,7 +323,7 @@ export function CraftGump() {
           </div>
         );
       })}
-<p className="mt-5 border-t border-border pt-3 font-display text-[10px] uppercase tracking-widest text-muted">Tailoring · field work</p>
+<p className="mt-5 border-t border-border pt-3 font-display text-[10px] uppercase tracking-widest text-muted">Tailoring · the loom</p>
       <div className="mt-2 space-y-2" aria-label="Advanced leather work">
         <p className="font-display text-xs tracking-wider text-gold uppercase">Form · {LEATHER_FORM.label}</p>
         <MaterialSelector role={leatherBodyRole} rows={resourceRows} selected={leatherBody} onSelect={setLeatherBody} group="leather-body" />
@@ -334,7 +336,9 @@ export function CraftGump() {
         <ConfirmCraft
           selected={{ body: leatherBody, binding: leatherBinding }}
           rows={resourceRows}
-          disabledReason={!bladeOk
+          disabledReason={!here.includes("loom")
+            ? "Tailoring now needs a loom — build one from Hold → Work"
+            : !bladeOk
             ? "Hold a blade"
             : !leatherBody || !leatherBinding
               ? "Choose hides and binding"
@@ -355,7 +359,9 @@ export function CraftGump() {
       ].map(({ form, label, diff, body: pieceBody, setBody, binding: pieceBinding, setBinding }) => {
         const pieceBodyRole = form.roles.find(({ role }) => role === "body")!;
         const pieceBindingRole = form.roles.find(({ role }) => role === "binding")!;
-        const disabled = !bladeOk
+        const disabled = !here.includes("loom")
+          ? "Tailoring now needs a loom — build one from Hold → Work"
+          : !bladeOk
           ? "Hold a blade"
           : !pieceBody || !pieceBinding
             ? "Choose hides and binding"

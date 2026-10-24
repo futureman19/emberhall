@@ -6,6 +6,7 @@ import { seedFauna, spawn } from "./ecology.ts";
 import { commandChop, commandFeed, commandSkin, you } from "./player.ts";
 import { mulberry32 } from "./rng.ts";
 import { createWorld } from "./world.ts";
+import { withSpecialtyStation } from "./placeables/station-test-fixture.ts";
 import type { ItemId, World } from "./types.ts";
 
 const ITEMS = Object.keys(ITEM_META) as ItemId[];
@@ -109,15 +110,15 @@ test("craft - field work: cut bandages anywhere, any cloth, but only with a blad
   assert.equal(w.player.pack.silk, 0);
 });
 
-test("craft - the leather tunic finally has a source: two hides and a blade", () => {
-  const w = createWorld();
+test("craft - the leather tunic takes two hides and a blade at a loom", () => {
+  const w = withSpecialtyStation(createWorld(), "loom");
   givePack(w, { hide: 2 });
   w.player.wear.main = "knife";
   const note = craftOk(w, "cut_leather");
   assert.ok(note?.includes("leather"), `crafted: ${note}`);
   assert.equal(w.player.pack.leather, 1);
   assert.equal(w.player.pack.hide, 0);
-  assert.equal(recipeById("cut_leather")?.station, null, "field recipe needs no station");
+  assert.equal(recipeById("cut_leather")?.station, "loom", "tailoring uses the specialty loom");
   assert.equal(recipeById("cut_leather")?.skill, "tailoring");
 });
 

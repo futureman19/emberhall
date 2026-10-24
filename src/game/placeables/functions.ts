@@ -50,14 +50,18 @@ export function pieceBlocks(world: World, tx: number, ty: number) {
   return (world.placedObjects ?? []).some((o) => objectBlocks(o) && occupiesCell(o, tx, ty));
 }
 
-export function stationsFromPieces(world: World): Array<"bench" | "forge" | "fire"> {
+export function stationsFromPieces(world: World): Array<"bench" | "forge" | "fire" | "loom" | "alchemy"> {
   const p = you(world);
   if (!p) return [];
-  const out = new Set<"bench" | "forge" | "fire">();
+  const out = new Set<"bench" | "forge" | "fire" | "loom" | "alchemy">();
   for (const obj of world.placedObjects) {
     if (Math.hypot(p.x - obj.tx, p.z - obj.ty) > REACH) continue;
     const def = defOf(obj);
     if (!def) continue;
+    if (def.fn === "craftStation" && def.providesStation) {
+      out.add(def.providesStation);
+      continue;
+    }
     if (def.fn === "craftStation" || def.station === "bench") out.add("bench");
     if (def.fn === "hearth") out.add("fire");
     if (def.station === "forge") out.add("forge");
