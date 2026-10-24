@@ -138,11 +138,14 @@ function followPath(world: World, p: Person, dt: number): "idle" | "moving" | "s
   return "moving";
 }
 
+import { tickCommission } from "./commissions.ts";
+
 export function tickWorld(world: World, realDt: number) {
   if (world.speed === 0) return;
   const dt = Math.min(realDt, 0.1) * world.speed;
   world.hour += dt / SECONDS_PER_HOUR;
   world.tickCount += 1;
+  tickCommission(world);
   // Sparse node metadata is the clock index: no terrain-wide scan is needed.
   regrowResourceNodes(world);
 

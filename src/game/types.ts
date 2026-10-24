@@ -527,6 +527,7 @@ export interface Objective {
 }
 
 export interface PlayerState {
+  commission?: import("./commissions.ts").CommissionState;
   id: string;
   skills: Record<SkillId, number>;
   lastGain: Record<SkillId, number>;

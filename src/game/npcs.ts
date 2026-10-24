@@ -1,3 +1,4 @@
+import { offerCommission } from "./commissions.ts";
 import { APOTHECARY_STOCK, hasTag, ITEM_META, SHOP_STOCK } from "./catalog.ts";
 import { buildingBox } from "./building-size.ts";
 import { isGhost, resurrect, you } from "./player.ts";
@@ -116,6 +117,7 @@ export function commandTalk(world: World, id: string) {
   if (!t || !self) return "They are gone.";
   if (Math.hypot(self.x - t.x, self.z - t.z) > 2.4) return "Walk closer.";
   completeObjective(world, "npc");
+  offerCommission(world, id);
   const answer = (message: string, kind: "talk" | "heal" = "talk") => {
     emitNpcInteractionFx(world, { kind, targetId: t.id, x: t.x, z: t.z });
     return message;
