@@ -83,6 +83,10 @@ export type SfxId =
   | "spell_summonelemental"
   | "spell_polymorph"
   | "slag_golem_aggro"
+  | "warden_roar"
+  | "warden_slam"
+  | "warden_death"
+  | "warden_phase"
   | "slag_golem_attack"
   | "slag_golem_hit"
   | "slag_golem_death"
@@ -98,6 +102,10 @@ export type SfxId =
   | "emberdeep_door";
 
 export const SFX_SOURCES: Record<SfxId, string> = {
+  warden_roar: "/audio/sfx/slag-golem-aggro.mp3",
+  warden_slam: "/audio/sfx/slag-golem-attack.mp3",
+  warden_death: "/audio/sfx/slag-golem-death.mp3",
+  warden_phase: "/audio/sfx/emberdeep-door.mp3",
   slag_golem_aggro: "/audio/sfx/slag-golem-aggro.mp3",
   slag_golem_attack: "/audio/sfx/slag-golem-attack.mp3",
   slag_golem_hit: "/audio/sfx/slag-golem-hit.mp3",

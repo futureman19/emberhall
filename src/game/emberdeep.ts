@@ -27,6 +27,8 @@ export interface EmberdeepState {
   visited: EmberdeepRoomId[];
   cleared: EmberdeepRoomId[];
   bossDoorOpen: boolean;
+  bossDefeated?: boolean;
+  bossEncounter?: "ready" | "fighting" | "reset";
 }
 export const EMBERDEEP_CORRIDORS = [
   { x0: 1018, x1: 1028, y0: 672, y1: 676 },
@@ -61,13 +63,16 @@ export function isEmberdeepState(value: unknown): value is EmberdeepState {
   const v = value as EmberdeepState;
   const ids = new Set<string>(EMBERDEEP_ROOMS.map(r => r.id));
   const valid = (a: unknown) => Array.isArray(a) && a.every(id => typeof id === "string" && ids.has(id)) && new Set(a).size === a.length;
-  return v.version === 1 && typeof v.bossDoorOpen === "boolean" && valid(v.visited) && valid(v.cleared) && v.cleared.every(id => v.visited.includes(id));
+  return v.version === 1 && typeof v.bossDoorOpen === "boolean" &&
+    (v.bossDefeated === undefined || typeof v.bossDefeated === "boolean") &&
+    (v.bossEncounter === undefined || ["ready", "fighting", "reset"].includes(v.bossEncounter)) &&
+    valid(v.visited) && valid(v.cleared) && v.cleared.every(id => v.visited.includes(id));
 }
 /** Canonical collision survives scars, flight and a reloaded tile-free save. */
 export function emberdeepBlocked(w: World, x: number, z: number) {
   if (!inEmberdeep(x, z)) return false;
   if (!emberdeepFloor(x, z)) return true;
-  return !w.emberdeep?.bossDoorOpen && x >= EMBERDEEP_GATE.tx;
+  return !w.emberdeep?.bossDoorOpen && (w.emberdeep?.bossEncounter === "fighting" ? x === EMBERDEEP_GATE.tx : x >= EMBERDEEP_GATE.tx);
 }
 export function stampEmberdeep(tiles: Tile[][]) {
   const b = EMBERDEEP_BOUNDS;

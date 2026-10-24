@@ -1,7 +1,7 @@
 import type { Creature } from './types.ts';
 import { projectileProgress } from './combat-animation.ts';
 
-export type AnimatedMonster = 'slag_golem' | 'embercrawler' | 'gloomwraith';
+export type AnimatedMonster = 'furnace_warden' | 'slag_golem' | 'embercrawler' | 'gloomwraith';
 export type MonsterClip = 'idle' | 'prowl' | 'windup' | 'strike' | 'recover' | 'retreat' | 'flinch' | 'death';
 /** Exhaustive against the gameplay unions; visual poses never advance AI or damage. */
 export const MONSTER_PHASE_CLIPS = {
@@ -13,7 +13,7 @@ export function monsterClip(c:Creature,moving:boolean,hit:boolean):MonsterClip {
  if(c.task==='dead'||c.hp<=0)return 'death';
  if(hit)return 'flinch';
  let clip:MonsterClip='idle';
- if(c.kind==='slag_golem'&&c.monster)clip=MONSTER_PHASE_CLIPS.slag_golem[c.monster.phase];
+ if((c.kind==='slag_golem'||c.kind==='furnace_warden')&&c.monster)clip=MONSTER_PHASE_CLIPS.slag_golem[c.monster.phase];
  if(c.kind==='embercrawler'&&c.crawler)clip=MONSTER_PHASE_CLIPS.embercrawler[c.crawler.phase];
  if(c.kind==='gloomwraith'&&c.gloom)clip=MONSTER_PHASE_CLIPS.gloomwraith[c.gloom.phase];
  return clip==='idle'||clip==='prowl' ? moving?'prowl':'idle' : clip;

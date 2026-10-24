@@ -64,6 +64,7 @@ export type SkillId =
   | "tracking";
 
 export type ItemId =
+  | "furnace_heart"
   | "hatchet"
   | "knife"
   | "pick"
@@ -242,6 +243,7 @@ export type SpellId =
 export type ClassId = "ranger" | "warrior" | "mage" | "rogue" | "merchant";
 export type NpcRole = "banker" | "provisioner" | "healer" | "alchemist";
 export type FaunaKind =
+  | "furnace_warden"
   | "gloomwraith"
   | "slag_golem"
   | "embercrawler"

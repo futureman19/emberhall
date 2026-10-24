@@ -3,6 +3,7 @@ import { inEmberdeep } from "./emberdeep.ts";
 import { playSfx, setDungeonAmbience, type SfxId } from "./vale-sfx.ts";
 
 const SOUNDS = {
+  furnace_warden: { aggro: "warden_roar", attack: "warden_slam", hit: "slag_golem_hit", death: "warden_death" },
   slag_golem: {
     aggro: "slag_golem_aggro",
     attack: "slag_golem_attack",
@@ -22,7 +23,7 @@ const SOUNDS = {
     death: "gloomwraith_death",
   },
 } satisfies Record<string, Record<string, SfxId>>;
-type Snapshot = { hp: number; fighting: boolean; strike: boolean; dead: boolean };
+type Snapshot = { hp: number; fighting: boolean; strike: boolean; dead: boolean; enraged: boolean };
 const history = new WeakMap<World, Map<Creature, Snapshot>>();
 const doors = new WeakMap<World, boolean>();
 /** Sample at both simulation boundaries, not render frames: fast strikes cannot
@@ -40,6 +41,7 @@ export function syncMonsterAudio(world: World) {
       fighting: c.task === "fight",
       strike: phase === "strike" || phase === "lunge" || phase === "bolt",
       dead: c.hp <= 0 || c.task === "dead",
+      enraged: c.kind === "furnace_warden" && c.hp <= c.maxHp * .5,
     };
     const old = previous.get(c);
     next.set(c, state);
@@ -56,6 +58,7 @@ export function syncMonsterAudio(world: World) {
       continue;
     }
     if (old.dead) continue;
+    if(state.enraged && !old.enraged) playSfx("warden_phase", volume);
     if (state.fighting && !old.fighting) playSfx(sounds.aggro, volume);
     if (state.strike && !old.strike) playSfx(sounds.attack, volume);
     if (state.hp < old.hp) playSfx(sounds.hit, volume * 0.8);

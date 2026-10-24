@@ -153,6 +153,22 @@ test("warming does not play before a user gesture and rejected playback is handl
   }
 });
 
+test("Warden roar, slam, phase sting and death use the registered cues once", () => {
+  reset();
+  const w = fixture("furnace_warden"), c = w.fauna[0]; c.maxHp = 100;
+  syncMonsterAudio(w);
+  c.task = "fight"; syncMonsterAudio(w);
+  assert(played().some(a => a.src === sfx.SFX_SOURCES.warden_roar));
+  c.monster = { phase: "strike" }; syncMonsterAudio(w);
+  assert(played().some(a => a.src === sfx.SFX_SOURCES.warden_slam));
+  c.hp = 50; syncMonsterAudio(w);
+  assert(played().some(a => a.src === sfx.SFX_SOURCES.warden_phase));
+  const n = played().length; syncMonsterAudio(w); assert.equal(played().length, n);
+  c.hp = 0; c.task = "dead"; syncMonsterAudio(w);
+  assert(played().some(a => a.src === sfx.SFX_SOURCES.warden_death));
+  const dead = played().length; syncMonsterAudio(w); assert.equal(played().length, dead);
+});
+
 test("remote monsters and loaded corpses are silent", () => {
   reset();
   const w = fixture("slag_golem");

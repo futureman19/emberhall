@@ -14,7 +14,7 @@ text = (ROOT / 'src/components/game/fauna-meshes.tsx').read_text()
 COLORS = dict(re.findall(r'  (\w+): "(#[a-f0-9]+)"', text.split('const SIZE')[0]))
 SIZES = {k: float(v) for k,v in re.findall(r'  (\w+): ([\d.]+)', text.split('const SIZE')[1].split('const DARK')[0])}
 FAMILIES = {
- 'emberdeep':['gloomwraith','slag_golem'],
+ 'emberdeep':['gloomwraith','slag_golem','furnace_warden'],
  'emberdeep_insect':['embercrawler'],
  'lagomorph': ['hare'], 'cervid': ['hart','brambleback_stag','thornhide_doe','whiteback_elk'],
  'canid': ['wolf','ember_fox','ridgeback_warg','brine_hound','barrow_hound'], 'feline':['pine_lynx'],
@@ -100,7 +100,7 @@ def author(k):
         for i in range(5):
             x=(i-2)*.12
             chain('shroud_ribbon'+str(i),[(x,1.0,0),(x*1.4,.5,-.1),(x*1.7,.05+(i%2)*.15,-.22)],.09)
-    if k=='slag_golem':
+    if k in ('slag_golem','furnace_warden'):
         oval('furnace_torso',(0,1.05,0),(.55,.65,.34))
         oval('molten_heart',(0,1.13,.32),(.19,.25,.05),'#ff882b',True)
         oval('basalt_head',(0,1.88,.02),(.3,.28,.28)); eyes(1.94,.28,.15,True)
@@ -111,6 +111,11 @@ def author(k):
             rod('pillar_leg'+str(side),(side*.27,.75,0),(side*.3,.16,.06),.24)
             oval('slag_foot'+str(side),(side*.3,.12,.17),(.27,.12,.34))
         for y in (.78,1.05,1.35): rod('ember_seam'+str(y),(-.31,y,.32),(.31,y+.07,.32),.022,'#ee6b23')
+        if k=='furnace_warden':
+            for side in (-1,1):
+                rod('furnace_chimney'+str(side),(side*.5,1.4,-.1),(side*.5,2.4,-.1),.14,'#322925')
+                oval('chimney_fire'+str(side),(side*.5,2.35,-.1),(.08,.13,.08),'#ff882b',True)
+            for x in (-.16,0,.16): rod('iron_grate'+str(x),(x,.85,.39),(x,1.4,.39),.028,'#292323')
 
     if k=='embercrawler':
         # Ported from the interrupted monster pack, now with emissive foot tips.
@@ -281,6 +286,7 @@ def author(k):
             if k=='ashen_banshee':
                 for side in (-1,1): chain('streaming_hair'+str(side),[(side*.18,1.75,-.06),(side*.37,1.39,-.24),(side*.48,.82,-.3)],.13,'#e6ded4')
             if k=='greybarrow_wightling': oval('burial_cowl',(0,1.61,-.055),(.3,.33,.22),'#6e7376')
+    elif family == 'emberdeep': pass  # authored above, outside the animal family chain
     else: raise AssertionError(k)
     # Ground the actual sculpture once; pivot is the existing simulation ground anchor.
     bpy.context.view_layer.update()
@@ -430,6 +436,15 @@ if MODE=='embercrawler':
     print('CRAWLER_COMPLETE',entry['triangles'],entry['bytes'],flush=True)
 if MODE in ('all','variants'):
     export_spell_variants()
+if MODE=='furnace_warden':
+    manifest=json.loads((OUT/'fauna-manifest.json').read_text())
+    authored,front=author('furnace_warden')
+    bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'art/blender/fauna-furnace_warden.blend'))
+    entry=bake_export('furnace_warden','emberdeep',OUT/'fauna-furnace_warden.glb',authored,front)
+    entry['source']='art/blender/fauna-furnace_warden.blend'
+    manifest['species']=[e for e in manifest['species'] if e['kind']!='furnace_warden']+[entry]
+    manifest['speciesCount']=len(manifest['species'])
+    (OUT/'fauna-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
 if MODE=='gloomwraith':
     manifest=json.loads((OUT/'fauna-manifest.json').read_text())
     authored,front=author('gloomwraith')

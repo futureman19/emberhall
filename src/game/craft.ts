@@ -108,6 +108,7 @@ export const RECIPES: Recipe[] = [
   { id: "deed_porch", station: "bench", skill: "carpentry", diff: 8, label: "Porch deed", hint: "Eight boards. A roof on posts.", need: { board: 8 }, give: { deed_porch: 1 }, sfx: "chop" },
   { id: "deed_hut", station: "bench", skill: "carpentry", diff: 20, label: "Hut deed", hint: "Eighteen boards. A door and a chest.", need: { board: 18 }, give: { deed_hut: 1 }, sfx: "chop" },
   { id: "deed_homestead", station: "bench", skill: "carpentry", diff: 36, label: "Homestead deed", hint: "Thirty-six boards. A proper house.", need: { board: 36 }, give: { deed_homestead: 1 }, sfx: "chop" },
+  { id: "reclaim_furnace_heart", station: "forge", skill: "smithing", diff: -22, label: "Reclaim Furnace Heart", hint: "The Warden's unique core yields six ordinary ingots. Or keep it as a trophy.", need: { furnace_heart: 1 }, give: { ingot: 6 }, sfx: "fire" },
   { id: "smelt", station: "forge", skill: "smithing", diff: -22, label: "Smelt ore", hint: "Ore to ingot — only raw ore will do.", need: { ore: 1 }, give: { ingot: 1 }, sfx: "fire" },
   { id: "ring", station: "forge", skill: "smithing", diff: 4, label: "Ring", hint: "Any two metal, a band.", need: {}, needTags: [{ tag: "metal", n: 2 }], give: { ring: 1 }, sfx: "smith" },
   { id: "knife", station: "forge", skill: "smithing", diff: 6, label: "Skinning knife", hint: "Any three metal.", need: {}, needTags: [{ tag: "metal", n: 3 }], give: { knife: 1 }, sfx: "smith" },

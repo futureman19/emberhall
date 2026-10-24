@@ -8,6 +8,7 @@ import { SECONDS_PER_HOUR } from '@/game/catalog';
 import { gloomPhase, gloomLightAt } from '@/game/gloomwraith';
 import { monsterClip, monsterPose, monsterReaction, type AnimatedMonster, type MonsterReaction } from '@/game/monster-animation';
 import { cloneFaunaArt, loadFaunaArt } from './fauna-art-data';
+import { wardenPhase, WARDEN_STATS } from '@/game/furnace-warden';
 
 /** Same world renderer in tactical and first-person views. Cached GLBs stay immutable. */
 export function AnimatedMonster({c}:{c:Creature}) {
@@ -17,6 +18,7 @@ export function AnimatedMonster({c}:{c:Creature}) {
  const [art,setArt]=useState<Group|null>(null);
  const kind=c.kind as AnimatedMonster;
  const wraith=kind==='gloomwraith',crawler=kind==='embercrawler';
+ const boss=kind==='furnace_warden';
  useEffect(()=>{
   let active=true;const owned:Material[]=[];
   void loadFaunaArt(kind).then(source=>{
@@ -27,12 +29,13 @@ export function AnimatedMonster({c}:{c:Creature}) {
     const mats=(Array.isArray(o.material)?o.material:[o.material]).map(m=>{
      const copy=m.clone();copy.transparent=true;copy.depthWrite=!wraith;
      if(wraith&&copy instanceof MeshStandardMaterial){copy.emissive.set('#30265e');copy.emissiveIntensity=.6;}
+     if(boss&&copy instanceof MeshStandardMaterial){copy.color.set('#8b6042');copy.emissive.set('#a52608');copy.emissiveIntensity=.35;}
      owned.push(copy);return copy;
     });o.material=Array.isArray(o.material)?mats:mats[0]!;
    }});setArt(scene);
   });
   return()=>{active=false;owned.forEach(m=>m.dispose());};
- },[kind,wraith]);
+ },[kind,wraith,boss]);
  useFrame(()=>{
   if(!root.current||!body.current)return;
   const w=getWorld(),time=w.hour*SECONDS_PER_HOUR;
@@ -59,6 +62,12 @@ export function AnimatedMonster({c}:{c:Creature}) {
   const opacity=pose.opacity*(wraith?(visible?.65:.07):1);
   if(art)art.traverse(o=>{if(o instanceof Mesh)for(const m of Array.isArray(o.material)?o.material:[o.material])m.opacity=opacity;});
   if(ring.current){ring.current.visible=kind==='slag_golem'&&clip==='windup';ring.current.scale.setScalar(.7+Math.min(1,age/.9)*.8);}
+  if(boss&&ring.current){
+   ring.current.visible=c.monster?.phase==='windup'&&clip!=='death';
+   ring.current.scale.setScalar(WARDEN_STATS[wardenPhase(c)].radius/1.32);
+   const yaw=root.current.rotation.y,dx=(c.monster?.targetX??c.x)-c.x,dz=(c.monster?.targetZ??c.z)-c.z;
+   ring.current.position.set(dx*Math.cos(yaw)-dz*Math.sin(yaw),.06,dx*Math.sin(yaw)+dz*Math.cos(yaw));
+  }
   if(bolt.current){
    bolt.current.visible=wraith&&c.gloom?.phase==='bolt'&&clip!=='death';
    const t=Math.min(1,(c.gloom?.time??0)/.35),s=c.gloom;
@@ -67,7 +76,7 @@ export function AnimatedMonster({c}:{c:Creature}) {
    bolt.current.position.set(x*Math.cos(yaw)-z*Math.sin(yaw),1.4-t*.6,x*Math.sin(yaw)+z*Math.cos(yaw));
   }
   if(debris.current){
-   const crumble=kind==='slag_golem'&&clip==='death';
+   const crumble=(kind==='slag_golem'||boss)&&clip==='death';
    debris.current.visible=crumble||crawler&&moving&&clip!=='death';
    debris.current.children.forEach((o,i)=>{
     const t=crumble?pose.rubble:((time*2+i/8)%1),angle=i*2.4;
@@ -81,8 +90,9 @@ export function AnimatedMonster({c}:{c:Creature}) {
  const name=wraith?'gloomwraith':crawler?'embercrawler':'emberdeep-monster';
  return <group ref={root} name={`${name}:${c.id}`}>
   <group ref={body} name="monster-pose">
-   <group scale={crawler?.85:wraith?1:1.25}>
+   <group scale={boss?3.75:crawler?.85:wraith?1:1.25}>
     {art?<primitive object={art} dispose={null}/>:<mesh position={[0,.65,0]}><icosahedronGeometry args={[.45,1]}/><meshStandardMaterial color={wraith?'#736392':'#a84c26'}/></mesh>}
+
    </group>
   </group>
   {kind==='slag_golem'&&<mesh rotation={[-Math.PI/2,0,0]} position={[0,.035,0]}><ringGeometry args={[1.65,1.8,32]}/><meshBasicMaterial color="#c95018" transparent opacity={.22}/></mesh>}

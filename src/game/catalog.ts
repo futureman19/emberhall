@@ -158,6 +158,7 @@ export const ITEM_META: Record<
   log: { label: "Log", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 2, tags: ["wood", "fuel"] },
   board: { label: "Board", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 3, tags: ["wood", "fuel"] },
   ore: { label: "Iron ore", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 0, sell: 3, tags: ["metal"] },
+  furnace_heart: { label: "Furnace Heart", tool: false, slot: null, fill: "#ff9a46", armor: 0, buy: 0, sell: 30, tags: ["magic"] },
   ingot: { label: "Ingot", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 8, sell: 5, tags: ["metal"] },
   club: { label: "Club", tool: true, slot: "main", fill: "var(--color-gold)", armor: 0, buy: 10, sell: 6, tags: ["wood", "weapon"] },
   shield: { label: "Wooden shield", tool: false, slot: "off", fill: "var(--color-gold)", armor: 2, buy: 18, sell: 10, tags: ["wood", "armor"] },
@@ -231,6 +232,7 @@ export const CLASS_META: Record<ClassId, { label: string; color: string }> = {
 };
 
 export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp: number; dmg: number; eats: ResourceTag[]; meat?: number; hide?: number; parts?: readonly { id: BoneResourceId; n: number }[]; hasCorpse?: boolean; loot?: LootDrop[]; gold?: LootGold }> = {
+  furnace_warden: { label: "Furnace Warden", tameDiff: 99, hp: 360, dmg: 24, eats: ["meat"], hasCorpse: false },
   gloomwraith: { label: "Gloomwraith", tameDiff: 99, hp: 42, dmg: 11, eats: ["meat"], hasCorpse: false, loot: [{ item: "nightshade", chance: 1, min: 1, max: 2 }], gold: { chance: 1, min: 3, max: 7 } },
   slag_golem: { label: "Slag Golem", tameDiff: 99, hp: 84, dmg: 18, eats: ["meat"], hasCorpse: false, loot: [{ item: "ore", chance: 1, min: 2, max: 3 }], gold: { chance: 1, min: 5, max: 9 } },
   embercrawler: { label: "Embercrawler", tameDiff: 99, hp: 20, dmg: 6, eats: ["meat"], hasCorpse: false, loot: [{ item: "ash", chance: 1, min: 1, max: 2 }] },
@@ -427,7 +429,7 @@ export function emptyPack(): Record<ItemId, number> {
   return {
     hatchet: 1, knife: 1, pick: 1, hoe: 1, fishing_rod: 1, log: 0, board: 0, ore: 0, ingot: 0, club: 0, shield: 0,
     staff: 0, bow: 0, torch: 0, crate: 0, cap: 0, cuirass: 0, sword: 0, mace: 0, gauntlets: 0, gorget: 0, heater: 0,
-    rabbit_foot: 0, orc_tusk: 0,
+    furnace_heart: 0, rabbit_foot: 0, orc_tusk: 0,
     meat: 1, hide: 0, arrows: 12, bandage: 3, potion_heal: 0, potion_night: 0,
     tunic: 0, leather: 0, mail: 0, hood: 1, helm: 0, cloak: 0, gloves: 1, hose: 0, greaves: 0,
     boots: 0, pendant: 1, ring: 1, relic: 0, spellbook: 1, rune: 4, garlic: 12, ginseng: 12,

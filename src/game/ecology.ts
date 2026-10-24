@@ -1,5 +1,6 @@
+import { updateFurnace, tickWarden } from "./furnace-warden.ts";
 import { ensureGloomwraiths, tickGloomwraith, gloomBoltDamage, gloomTorch } from "./gloomwraith.ts";
-import { ensureEmberdeepMonsters, isEmberdeepMonster, tickEmberdeepMonster, updateEmberdeepClears } from "./emberdeep-monsters.ts";
+import { ensureEmberdeepMonsters, isEmberdeepMonster, tickEmberdeepMonster } from "./emberdeep-monsters.ts";
 import { BARROW, MAP, PLACES, inGreybarrow } from "./atlas.ts";
 import { ensureEmbercrawlers, tickEmbercrawler } from "./embercrawler.ts";
 import { CURSE_BITE_WEAKEN, CURSE_SLOW, CHILL_SLOW, FAUNA_META, IRONWOOD_WARD, isNight, POISON_PLAYER_HOURS, POISON_TICK_HOURS, SNARE_TICK_DMG, SNARE_TICK_HOURS, armorOf } from "./catalog.ts";
@@ -466,7 +467,7 @@ export function tickEcology(world: World, dt: number) {
     ensureStarterFauna(world);
     starterRefillAt.set(world, world.hour + STARTER_FAUNA_REFILL_HOURS);
   }
-  updateEmberdeepClears(world);
+  updateFurnace(world);
   const night = isNight(world.hour);
   const shelter = sheltering(world);
   for (const c of world.fauna) {
@@ -575,6 +576,7 @@ export function tickEcology(world: World, dt: number) {
       tickGloomwraith(world, c, dt);
       continue;
     }
+    if (c.kind === "furnace_warden") { tickWarden(world, c, dt); continue; }
     if (isEmberdeepMonster(c.kind)) {
       tickEmberdeepMonster(world, c, dt);
       continue;

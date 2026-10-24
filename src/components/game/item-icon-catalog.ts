@@ -95,6 +95,7 @@ export const ICON_PATHS: Readonly<Record<IconKind, IconGlyph>> = {
 };
 
 export const ITEM_ICON_KIND: Readonly<Record<ItemId, IconKind>> = {
+  furnace_heart: "ore",
   hatchet: "axe",
   knife: "knife",
   pick: "pick",

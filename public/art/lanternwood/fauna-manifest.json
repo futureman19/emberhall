@@ -3,7 +3,7 @@
   "generator": "art/blender/build_fauna.py",
   "source": "art/blender/fauna-worldwide.blend",
   "coordinateSystem": "Y-up +Z-front ground-pivot; normalized SIZE units",
-  "speciesCount": 55,
+  "speciesCount": 56,
   "species": [
     {
       "kind": "hare",
@@ -2492,6 +2492,58 @@
         "ember_plate0.1"
       ],
       "source": "art/blender/fauna-embercrawler.blend"
+    },
+    {
+      "kind": "furnace_warden",
+      "family": "emberdeep",
+      "file": "fauna-furnace_warden.glb",
+      "size": 3.75,
+      "triangles": 1248,
+      "materials": 3,
+      "bytes": 128772,
+      "sha256": "616264d38e8b565ff47c76aeb6a7f84c66f2504960036ebdcaefda6996453769",
+      "bounds": {
+        "min": [
+          -1.0567853450775146,
+          0.0,
+          -0.3233592212200165
+        ],
+        "max": [
+          1.0567853450775146,
+          2.4800000190734863,
+          0.49335920810699463
+        ]
+      },
+      "parts": [
+        "furnace_torso",
+        "molten_heart",
+        "basalt_head",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "shoulder-1",
+        "arm-1",
+        "hammer_fist-1",
+        "pillar_leg-1",
+        "slag_foot-1",
+        "shoulder1",
+        "arm1",
+        "hammer_fist1",
+        "pillar_leg1",
+        "slag_foot1",
+        "ember_seam0.78",
+        "ember_seam1.05",
+        "ember_seam1.35",
+        "furnace_chimney-1",
+        "chimney_fire-1",
+        "furnace_chimney1",
+        "chimney_fire1",
+        "iron_grate-0.16",
+        "iron_grate0",
+        "iron_grate0.16"
+      ],
+      "source": "art/blender/fauna-furnace_warden.blend"
     }
   ]
 }
