@@ -1,6 +1,68 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { commandCraft, commandCraftExact } from "../craft.ts";
+import { commandCraft, commandCraftExact, RECIPES } from "../craft.ts";
+import { ITEM_FORM_CATALOG } from "./forms.ts";
+import { resolveExactRecipeSelection } from "./recipes.ts";
+
+for (const [id, edgeCount, hiltCount, damage, hit] of [
+  ["dagger", 2, 1, 5.5, 2],
+  ["spear", 3, 3, 9.5, 4],
+  ["war_axe", 7, 2, 13.5, 1],
+] as const) {
+  test(`new exact ${id}: unique output, stats, selected debits and equip`, () => {
+    const world = createWorld(42);
+    standAtForge(world);
+    world.player.skills.smithing = 100;
+    addResource(world.player.resources, HIGHLAND_INGOT, edgeCount + 1);
+    addResource(world.player.resources, OAK_BOARD, hiltCount + 1);
+    const selections = [{ role: "edge" as const, key: HIGHLAND_INGOT }, { role: "hilt" as const, key: OAK_BOARD }];
+    const note = withRoll(0.5, () => commandCraftExact(world, id, selections));
+    assert.match(note ?? "", /Made a fine highland ore/i);
+    assert.equal(world.player.rares.length, 1);
+    const item = world.player.rares[0]!;
+    assert.equal(item.base, id);
+    assert.equal(item.formId, id);
+    assert.equal(item.recipeId, id);
+    assert.equal(item.workmanship, "fine");
+    assert.deepEqual(item.resolvedStats, { damage, hitBonus: hit, armor: 0, skillBonuses: {}, slayerMultipliers: {} });
+    assert.equal(resourceCount(world.player.resources, HIGHLAND_INGOT), 1);
+    assert.equal(resourceCount(world.player.resources, OAK_BOARD), 1);
+    assert.equal(world.player.pack[id], 0);
+    commandEquipRare(world, item.uid);
+    assert.equal(world.player.wearRare.main, item.uid);
+    const before = structuredClone(world.player);
+    withRoll(0.5, () => commandCraftExact(world, id, selections));
+    assert.deepEqual(world.player, before, "shortage is atomic");
+  });
+  test(`new exact ${id}: ordinary iron keeps its form stats`, () => {
+    const world = createWorld(42);
+    standAtForge(world);
+    world.player.skills.smithing = 100;
+    addResource(world.player.resources, IRON_INGOT, edgeCount);
+    addResource(world.player.resources, OAK_BOARD, hiltCount);
+    withRoll(0.5, () => commandCraftExact(world, id, [{ role: "edge", key: IRON_INGOT }, { role: "hilt", key: OAK_BOARD }]));
+    if (id === "war_axe") {
+      assert.equal(world.player.pack[id], 1);
+    } else {
+      assert.equal(world.player.rares[0]?.resolvedStats?.hitBonus, ITEM_FORM_CATALOG[id].baseStats.hitBonus);
+    }
+  });
+  test(`new exact ${id}: material rules and work recipe identity`, () => {
+    const form = ITEM_FORM_CATALOG[id];
+    assert.ok(form);
+    assert.deepEqual(form.roles.map(r => [r.role, r.amount]), [["edge", edgeCount], ["hilt", hiltCount]]);
+    for (const ore of ["iron_ore", "copper_ore", "highland_ore"] as const) {
+      for (const timber of ["oak", "redwood", "ironwood"] as const) {
+        assert.ok(resolveExactRecipeSelection(id, [{ role: "edge", key: makeResourceStackKey(ore, "ingot", "choice") }, { role: "hilt", key: makeResourceStackKey(timber, "log", "sound") }]));
+      }
+    }
+    assert.throws(() => resolveExactRecipeSelection(id, [{ role: "edge", key: makeResourceStackKey("iron_ore", "ore", "choice") }, { role: "hilt", key: OAK_BOARD }]));
+    assert.throws(() => resolveExactRecipeSelection(id, [{ role: "edge", key: HIGHLAND_INGOT }, { role: "hilt", key: SOUND_CLOTH }]));
+    assert.equal(RECIPES.filter(r => r.exactRecipeId === id).length, 1);
+    assert.equal(new Set(RECIPES.map(r => r.id)).size, RECIPES.length);
+  });
+}
+
 import { addResource, makeResourceStackKey, resourceCount } from "../inventory/resources.ts";
 import { commandEquipRare, you } from "../player.ts";
 import { rareMods } from "../rare.ts";

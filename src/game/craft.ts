@@ -119,6 +119,9 @@ export const RECIPES: Recipe[] = [
   { id: "gauntlets", station: "forge", skill: "smithing", diff: 16, label: "Gauntlets", hint: "Any five metal.", need: {}, needTags: [{ tag: "metal", n: 5 }], give: { gauntlets: 1 }, sfx: "smith" },
   { id: "mace", station: "forge", skill: "smithing", diff: 18, label: "Mace", hint: "Any six metal, a head.", need: {}, needTags: [{ tag: "metal", n: 6 }], give: { mace: 1 }, sfx: "smith" },
   { id: "sword", station: "forge", skill: "smithing", diff: 20, label: "Sword", hint: "Choose five ingots, one timber hilt, and one cloth binding.", exactRecipeId: "sword", need: {}, give: { sword: 1 }, sfx: "smith" },
+  { id: "dagger_smith", station: "forge", skill: "smithing", diff: 10, label: "Dagger", hint: "Choose two ingots and one timber grip.", exactRecipeId: "dagger", need: {}, give: { dagger: 1 }, sfx: "smith" },
+  { id: "spear_smith", station: "forge", skill: "smithing", diff: 18, label: "Spear", hint: "Choose three ingots and three timber for the shaft.", exactRecipeId: "spear", need: {}, give: { spear: 1 }, sfx: "smith" },
+  { id: "war_axe_smith", station: "forge", skill: "smithing", diff: 28, label: "War axe", hint: "Choose seven ingots and two timber for the haft.", exactRecipeId: "war_axe", need: {}, give: { war_axe: 1 }, sfx: "smith" },
   { id: "shield_smith", station: "forge", skill: "smithing", diff: 21, label: "Shield", hint: "Choose three ingot plates, two boards, and one cloth binding.", exactRecipeId: "shield", need: {}, give: { shield: 1 }, sfx: "smith" },
   // The exact helm rides beside the legacy tag recipe "helm" (any eight metal);
   // commandCraftExact resolves work records by exactRecipeId, so the legacy id stays untouched.
@@ -417,7 +420,8 @@ export function commandCraftExact(
   const specialty = preview.components.some(
     ({ resourceId }) => !["oak", "common_cloth", "iron_ore"].includes(resourceId),
   );
-  const unique = specialty || workmanship !== "ordinary";
+  // Accuracy-bearing forms must retain resolved stats even in ordinary iron.
+  const unique = specialty || workmanship !== "ordinary" || form.baseStats.hitBonus !== 0;
   const crafted = unique
     ? createCraftedItem(world, {
         formId: form.id,

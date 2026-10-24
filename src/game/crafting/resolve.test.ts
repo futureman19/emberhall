@@ -1,27 +1,41 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
-  BOOTS_FORM,
   BOW_FORM,
-  GAUNTLETS_FORM,
   GEM_CLARITIES,
-  GLOVES_FORM,
-  GREAVES_FORM,
   CHARM_FORM,
-  HELM_FORM,
-  HOOD_FORM,
-  HOSE_FORM,
   ITEM_FORM_CATALOG,
   ITEM_FORM_IDENTITY,
-  LEATHER_FORM,
-  MAIL_FORM,
   MATERIAL_GRADES,
   RING_FORM,
-  SHIELD_FORM,
   SWORD_FORM,
   buildItemFormCatalog,
 } from "./forms.ts";
 import { resolveItemStats } from "./resolve.ts";
+
+for (const id of ["dagger", "spear", "war_axe"] as const) {
+  test(`${id} workmanship deltas preserve base flavor and material contributions`, () => {
+    const form = ITEM_FORM_CATALOG[id];
+    const build: ItemBuild = {
+      workmanship: "ordinary",
+      components: [
+        { role: "edge", resourceId: "highland_ore", form: "ingot", grade: "choice", amount: form.roles[0]!.amount },
+        { role: "hilt", resourceId: "oak", form: "board", grade: "sound", amount: form.roles[1]!.amount },
+      ],
+      inlays: [],
+    };
+    const ordinary = resolveItemStats(form, build).stats;
+    const fine = resolveItemStats(form, { ...build, workmanship: "fine" }).stats;
+    const exceptional = resolveItemStats(form, { ...build, workmanship: "exceptional" }).stats;
+    assert.equal(ordinary.damage, form.baseStats.damage + 1.5);
+    assert.equal(fine.damage, ordinary.damage);
+    assert.equal(fine.hitBonus, ordinary.hitBonus + 1);
+    assert.equal(exceptional.damage, ordinary.damage + 1);
+    assert.equal(exceptional.hitBonus, ordinary.hitBonus + 2);
+    assert.equal(exceptional.armor, 0);
+  });
+}
+
 import type { CraftedComponent, ItemBuild, ItemFormDefinition } from "./types.ts";
 
 const OAK_BODY: CraftedComponent = {
@@ -427,7 +441,7 @@ test("null-prototype forms are accepted only when all required fields are own pr
     deepMutable(BOW_FORM),
   ) as unknown as ItemFormDefinition;
 
-  const catalog = buildItemFormCatalog([nullPrototypeForm, SWORD_FORM, SHIELD_FORM, HELM_FORM, MAIL_FORM, BOOTS_FORM, GAUNTLETS_FORM, GREAVES_FORM, LEATHER_FORM, HOOD_FORM, GLOVES_FORM, HOSE_FORM, CHARM_FORM, RING_FORM]);
+  const catalog = buildItemFormCatalog([nullPrototypeForm, ...Object.values(ITEM_FORM_CATALOG).filter(form => form.id !== "bow")]);
   assert.deepEqual(catalog.bow, BOW_FORM);
   assert.deepEqual(resolveItemStats(nullPrototypeForm, bowBuild()), resolveItemStats(BOW_FORM, bowBuild()));
 
@@ -648,6 +662,9 @@ test("form identity contract binds bow to bow base item and weapon class", () =>
   assert.deepEqual(ITEM_FORM_IDENTITY, {
     bow: { baseItem: "bow", itemClass: "weapon" },
     sword: { baseItem: "sword", itemClass: "weapon" },
+    dagger: { baseItem: "dagger", itemClass: "weapon" },
+    spear: { baseItem: "spear", itemClass: "weapon" },
+    war_axe: { baseItem: "war_axe", itemClass: "weapon" },
     shield: { baseItem: "shield", itemClass: "armor" },
     helm: { baseItem: "helm", itemClass: "armor" },
     mail: { baseItem: "mail", itemClass: "armor" },

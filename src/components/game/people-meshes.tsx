@@ -4,6 +4,7 @@ import { AuthoredCharacterGeometry, AuthoredCharacterFace, AuthoredCharacterTuni
 import { Html } from "@react-three/drei";
 import { AuthoredOffhandGeometry } from "./authored-offhand.tsx";
 import { AuthoredWeaponGeometry } from "./authored-weapon.tsx";
+import { ForgedWeapon } from "./forged-weapon";
 import { AuthoredToolGeometry } from "./authored-tool.tsx";
 import { WEAR_HEX } from "./wear-hex.ts";
 import { playerVisualYaw } from "./character-facing";
@@ -278,6 +279,7 @@ export function Shield({ id, ghost }: { id: ItemId; ghost: boolean }) {
 }
 
 export function Held({ id, ghost }: { id: ItemId; ghost: boolean }) {
+  if (id === "dagger" || id === "spear" || id === "war_axe") return <ForgedWeapon id={id} ghost={ghost} />;
   if (id === "hatchet") return <Hatchet ghost={ghost} />;
   if (id === "pick") return <Pick ghost={ghost} />;
   if (id === "hoe") return <Hoe ghost={ghost} />;

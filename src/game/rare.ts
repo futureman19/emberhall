@@ -384,6 +384,9 @@ export function effectiveMain(world: World): ItemId | null {
 
 /** Base weapon damage — the hunt table, extracted so rares inherit their base's bite. */
 export function weaponDmg(id: ItemId | null): number {
+  if (id === "dagger") return 4;
+  if (id === "spear") return 8;
+  if (id === "war_axe") return 12;
   if (id === "sword") return 10;
   if (id === "mace") return 9;
   if (id === "bow") return 8;

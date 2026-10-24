@@ -32,7 +32,7 @@ export const GEM_CLARITIES = Object.freeze([
   "perfect",
 ] as const satisfies readonly GemClarity[]);
 
-const ITEM_FORM_IDS = ["bow", "sword", "shield", "helm", "mail", "boots", "gauntlets", "greaves", "leather", "hood", "gloves", "hose", "charm", "ring"] as const satisfies readonly ItemFormId[];
+const ITEM_FORM_IDS = ["bow", "sword", "shield", "helm", "mail", "boots", "gauntlets", "greaves", "leather", "hood", "gloves", "hose", "charm", "ring", "dagger", "spear", "war_axe"] as const satisfies readonly ItemFormId[];
 const ITEM_CLASSES = ["weapon", "armor", "jewelry", "tool", "placeable"] as const satisfies readonly ItemClass[];
 const MATERIAL_ROLES = [
   "body",
@@ -52,6 +52,9 @@ const GRADE_FORMS = ["log", "board", "ore", "ingot", "cloth", "hide", "bone"] as
 export const ITEM_FORM_IDENTITY = Object.freeze({
   bow: Object.freeze({ baseItem: "bow", itemClass: "weapon" }),
   sword: Object.freeze({ baseItem: "sword", itemClass: "weapon" }),
+  dagger: Object.freeze({ baseItem: "dagger", itemClass: "weapon" }),
+  spear: Object.freeze({ baseItem: "spear", itemClass: "weapon" }),
+  war_axe: Object.freeze({ baseItem: "war_axe", itemClass: "weapon" }),
   shield: Object.freeze({ baseItem: "shield", itemClass: "armor" }),
   helm: Object.freeze({ baseItem: "helm", itemClass: "armor" }),
   mail: Object.freeze({ baseItem: "mail", itemClass: "armor" }),
@@ -361,6 +364,38 @@ const SWORD_FORM_DEFINITION = {
   maxInlays: 1,
 } as const satisfies ItemFormDefinition;
 
+// Two-role forged weapons: metal edge and timber grip/shaft.
+const DAGGER_FORM_DEFINITION = {
+  id: "dagger", recipeVersion: 1, baseItem: "dagger", label: "Dagger", itemClass: "weapon",
+  roles: [
+    { role: "edge", amount: 2, accepts: { qualityType: "grade", kinds: ["ore"], forms: ["ingot"] }, contribution: "primary" },
+    { role: "hilt", amount: 1, accepts: { qualityType: "grade", kinds: ["timber"], forms: ["board", "log"] }, contribution: "secondary" },
+  ],
+  baseStats: { damage: 4, hitBonus: 1, armor: 0, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 12, hitBonus: 9, armor: 0, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+  allowedGemFamilies: ["power", "precision", "mastery"], maxInlays: 1,
+} as const satisfies ItemFormDefinition;
+const SPEAR_FORM_DEFINITION = {
+  ...DAGGER_FORM_DEFINITION,
+  id: "spear", baseItem: "spear", label: "Spear",
+  roles: [
+    { ...DAGGER_FORM_DEFINITION.roles[0], amount: 3 },
+    { ...DAGGER_FORM_DEFINITION.roles[1], amount: 3 },
+  ],
+  baseStats: { damage: 8, hitBonus: 3, armor: 0, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 16, hitBonus: 11, armor: 0, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+} as const satisfies ItemFormDefinition;
+const WAR_AXE_FORM_DEFINITION = {
+  ...DAGGER_FORM_DEFINITION,
+  id: "war_axe", baseItem: "war_axe", label: "War axe",
+  roles: [
+    { ...DAGGER_FORM_DEFINITION.roles[0], amount: 7 },
+    { ...DAGGER_FORM_DEFINITION.roles[1], amount: 2 },
+  ],
+  baseStats: { damage: 12, hitBonus: 0, armor: 0, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 20, hitBonus: 8, armor: 0, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+} as const satisfies ItemFormDefinition;
+
 const SHIELD_FORM_DEFINITION = {
   id: "shield",
   recipeVersion: 1,
@@ -629,7 +664,7 @@ const HOSE_FORM_DEFINITION = {
 } as const satisfies ItemFormDefinition;
 
 /** The art a weapon schools its wielder in when a mastery gem is set into it. */
-export const FORM_GOVERNING_SKILL = deepFreeze({ sword: "swords", bow: "archery" } as Partial<Record<ItemFormId, SkillId>>);
+export const FORM_GOVERNING_SKILL = deepFreeze({ sword: "swords", dagger: "swords", spear: "swords", war_axe: "swords", bow: "archery" } as Partial<Record<ItemFormId, SkillId>>);
 
 const CHARM_FORM_DEFINITION = {
   id: "charm",
@@ -683,7 +718,10 @@ const RING_FORM_DEFINITION = {
   maxInlays: 1,
 } as const satisfies ItemFormDefinition;
 
-export const ITEM_FORM_CATALOG = buildItemFormCatalog([BOW_FORM_DEFINITION, SWORD_FORM_DEFINITION, SHIELD_FORM_DEFINITION, HELM_FORM_DEFINITION, MAIL_FORM_DEFINITION, BOOTS_FORM_DEFINITION, GAUNTLETS_FORM_DEFINITION, GREAVES_FORM_DEFINITION, LEATHER_FORM_DEFINITION, HOOD_FORM_DEFINITION, GLOVES_FORM_DEFINITION, HOSE_FORM_DEFINITION, CHARM_FORM_DEFINITION, RING_FORM_DEFINITION]);
+export const ITEM_FORM_CATALOG = buildItemFormCatalog([BOW_FORM_DEFINITION, SWORD_FORM_DEFINITION, SHIELD_FORM_DEFINITION, HELM_FORM_DEFINITION, MAIL_FORM_DEFINITION, BOOTS_FORM_DEFINITION, GAUNTLETS_FORM_DEFINITION, GREAVES_FORM_DEFINITION, LEATHER_FORM_DEFINITION, HOOD_FORM_DEFINITION, GLOVES_FORM_DEFINITION, HOSE_FORM_DEFINITION, CHARM_FORM_DEFINITION, RING_FORM_DEFINITION, DAGGER_FORM_DEFINITION, SPEAR_FORM_DEFINITION, WAR_AXE_FORM_DEFINITION]);
+export const DAGGER_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.dagger;
+export const SPEAR_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.spear;
+export const WAR_AXE_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.war_axe;
 export const BOW_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.bow;
 export const SWORD_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.sword;
 export const SHIELD_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.shield;
