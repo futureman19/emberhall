@@ -485,7 +485,7 @@
     }
   },
   "statEnumeration": {
-    "legalCombinationCount": 1546080,
+    "legalCombinationCount": 2513760,
     "forms": {
       "bow": {
         "combinations": 46368,
@@ -796,11 +796,166 @@
           "slayerMultiplier": 1.5
         },
         "capViolations": 0
+      },
+      "dagger": {
+        "combinations": 96768,
+        "roleOptionCounts": [
+          28,
+          72
+        ],
+        "inlayOptions": 16,
+        "maxima": {
+          "damage": 12,
+          "hitBonus": 9,
+          "armor": 0,
+          "fortune": 0
+        },
+        "caps": {
+          "damage": 12,
+          "hitBonus": 9,
+          "armor": 0,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "spear": {
+        "combinations": 96768,
+        "roleOptionCounts": [
+          28,
+          72
+        ],
+        "inlayOptions": 16,
+        "maxima": {
+          "damage": 16,
+          "hitBonus": 11,
+          "armor": 0,
+          "fortune": 0
+        },
+        "caps": {
+          "damage": 16,
+          "hitBonus": 11,
+          "armor": 0,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "war_axe": {
+        "combinations": 96768,
+        "roleOptionCounts": [
+          28,
+          72
+        ],
+        "inlayOptions": 16,
+        "maxima": {
+          "damage": 20,
+          "hitBonus": 8,
+          "armor": 0,
+          "fortune": 0
+        },
+        "caps": {
+          "damage": 20,
+          "hitBonus": 8,
+          "armor": 0,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "mace": {
+        "combinations": 96768,
+        "roleOptionCounts": [
+          28,
+          72
+        ],
+        "inlayOptions": 16,
+        "maxima": {
+          "damage": 17,
+          "hitBonus": 8,
+          "armor": 0,
+          "fortune": 0
+        },
+        "caps": {
+          "damage": 17,
+          "hitBonus": 8,
+          "armor": 0,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "war_hammer": {
+        "combinations": 96768,
+        "roleOptionCounts": [
+          28,
+          72
+        ],
+        "inlayOptions": 16,
+        "maxima": {
+          "damage": 21,
+          "hitBonus": 8,
+          "armor": 0,
+          "fortune": 0
+        },
+        "caps": {
+          "damage": 21,
+          "hitBonus": 8,
+          "armor": 0,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "quarterstaff": {
+        "combinations": 27648,
+        "roleOptionCounts": [
+          72,
+          8
+        ],
+        "inlayOptions": 16,
+        "maxima": {
+          "damage": 14,
+          "hitBonus": 10,
+          "armor": 0,
+          "fortune": 0
+        },
+        "caps": {
+          "damage": 14,
+          "hitBonus": 10,
+          "armor": 0,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
+      },
+      "tower_shield": {
+        "combinations": 456192,
+        "roleOptionCounts": [
+          48,
+          36,
+          8
+        ],
+        "inlayOptions": 11,
+        "maxima": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 7,
+          "fortune": 5
+        },
+        "caps": {
+          "damage": 0,
+          "hitBonus": 0,
+          "armor": 7,
+          "skillBonusPerSkill": 5,
+          "slayerMultiplier": 1.5
+        },
+        "capViolations": 0
       }
     }
   },
   "payloadSizes": {
-    "representativeSaveBytes": 24347,
+    "representativeSaveBytes": 24645,
     "fiveItemBytes": 2654,
     "vaultInscriptionBytes": {
       "min": 589,
