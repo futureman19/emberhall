@@ -1,3 +1,4 @@
+import { stampEmberdeep } from "./emberdeep.ts";
 import {
   BARROW,
   CHUNK,
@@ -212,6 +213,7 @@ export function generateTiles(seed: number): Tile[][] {
   stampCityTiles(tiles);
   stampFrontier(tiles, PLACES);
   stampEmberhallPond(tiles);
+  stampEmberdeep(tiles);
   return tiles;
 }
 
