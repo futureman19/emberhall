@@ -95,6 +95,9 @@ export function bladeInHand(world: World): boolean {
 }
 
 export const RECIPES: Recipe[] = [
+  { id: "trail_rations", station: null, skill: "cooking", diff: 4, label: "Trail rations", hint: "Wrap bread and cooked meat for the road. Restores 60 hunger.", need: { bread: 1, cooked_meat: 1 }, give: { trail_rations: 1 }, sfx: "chop" },
+  { id: "wheat_cakes", station: "fire", skill: "cooking", diff: -5, label: "Wheat cakes", hint: "Two wheat, toasted by the fire. Restores 30 hunger.", need: { wheat: 2 }, give: { wheat_cakes: 1 }, sfx: "fire" },
+  { id: "herb_broth", station: "fire", skill: "cooking", diff: 4, label: "Herb broth", hint: "Cabbage and garlic, simmered. Restores 42 hunger.", need: { cabbage: 1, garlic: 1 }, give: { herb_broth: 1 }, sfx: "fire" },
   { id: "board", station: "bench", skill: "carpentry", diff: -18, label: "Boards", hint: "Split a log.", need: { log: 1 }, give: { board: 2 }, sfx: "chop" },
   { id: "torch", station: "bench", skill: "carpentry", diff: -8, label: "Torch", hint: "One board, a pitch.", need: { board: 1 }, give: { torch: 2 }, sfx: "chop" },
   { id: "club", station: "bench", skill: "carpentry", diff: 6, label: "Club", hint: "Any two wood — a heavy stick.", need: {}, needTags: [{ tag: "wood", n: 2 }], give: { club: 1 }, sfx: "chop" },
