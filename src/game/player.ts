@@ -567,6 +567,9 @@ export function commandCook(world: World, selected?: ItemId) {
   if (!p) return "You are not in the vale.";
   // A good meal first — cooked food fills far more than raw.
   const meals: [ItemId, number, string][] = [
+    ["trail_rations", 60, "The rations sustain you for the road."],
+    ["herb_broth", 42, "The warm broth restores you."],
+    ["wheat_cakes", 30, "The wheat cakes fill you."],
     ["stew", 52, "The stew warms you through."],
     ["cooked_meat", 40, "Hot meat. Proper food."],
     ["cooked_fish", 38, "The fish flakes from the bone."],

@@ -75,8 +75,9 @@ function PinButton({ id }: { id: ItemId }) {
 }
 
 /** The pack cell's primary action verb — deeds place, potions drink,
- *  weapons hold, the rest wear. Everything else is inspect-only. */
+ *  trail foods eat, weapons hold, the rest wear. Everything else is inspect-only. */
 function packHint(id: ItemId) {
+  if (id === "trail_rations" || id === "wheat_cakes" || id === "herb_broth") return "Eat";
   if (id === "deed_porch" || id === "deed_hut" || id === "deed_homestead") return "Place";
   if (id === "potion_heal" || id === "potion_night") return "Drink";
   const slot = ITEM_META[id].slot;
@@ -304,7 +305,7 @@ export function YouDressing() {
           {packHint(selected) ? (
             <button
               type="button"
-              onClick={() => equip(selected)}
+              onClick={() => packHint(selected) === "Eat" ? eat(selected) : equip(selected)}
               aria-label={`${packHint(selected)} ${ITEM_META[selected].label}`}
               className="grid size-11 shrink-0 place-items-center rounded-[var(--radius-xs)] border border-gold/50 bg-gold/10 text-gold"
             >

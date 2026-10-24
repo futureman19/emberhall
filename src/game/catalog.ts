@@ -205,6 +205,9 @@ export const ITEM_META: Record<
   ash: { label: "Sulfurous ash", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 4, sell: 1, tags: ["reagent"] },
   cabbage: { label: "Cabbage", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 4, sell: 2, tags: ["plant", "food"] },
   cooked_meat: { label: "Cooked meat", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 8, sell: 4, tags: ["meat", "food"] },
+  trail_rations: { label: "Trail rations", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 16, sell: 6, tags: ["food"] },
+  wheat_cakes: { label: "Wheat cakes", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 3, tags: ["food"] },
+  herb_broth: { label: "Herb broth", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 3, tags: ["food"] },
   raw_fish: { label: "Raw fish", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 0, sell: 3, tags: ["meat", "food"] },
   cooked_fish: { label: "Cooked fish", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 9, sell: 4, tags: ["meat", "food"] },
   bread: { label: "Bread", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 6, sell: 3, tags: ["food", "plant"] },
@@ -367,6 +370,7 @@ export const NOTORIETY_META: Record<Notoriety, { label: string }> = {
 };
 
 export const SHOP_STOCK: ItemId[] = [
+  "trail_rations",
   "hatchet", "pick", "hoe", "fishing_rod", "knife", "bandage", "tunic", "hood", "cloak", "boots",
   "arrows",
   "rune", "garlic", "ginseng", "silk", "pearl", "moss", "mandrake", "ash", "cabbage", "wheat",
@@ -430,6 +434,7 @@ export function emptyPack(): Record<ItemId, number> {
     boots: 0, pendant: 1, ring: 1, relic: 0, spellbook: 1, rune: 4, garlic: 12, ginseng: 12,
     silk: 16, nightshade: 4, pearl: 14, moss: 10, mandrake: 10, ash: 12, cabbage: 2, wheat: 0,
     cooked_meat: 0, raw_fish: 0, cooked_fish: 0, bread: 0, stew: 0,
+    trail_rations: 0, wheat_cakes: 0, herb_broth: 0,
     cabbage_seed: 8, wheat_seed: 6, garlic_seed: 4, ginseng_seed: 0, mandrake_seed: 0, moss_seed: 0, acorn: 6,
     deed_porch: 0, deed_hut: 0, deed_homestead: 0,
   };
