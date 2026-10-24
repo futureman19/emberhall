@@ -17,7 +17,7 @@ type Entry = { kind: keyof typeof FAUNA_ART_URLS; family: string; file: string; 
 test("current fauna type/catalog/renderer/export IDs match exactly, worldwide", () => {
   const types = read("../../game/types.ts").match(/export type FaunaKind\s*=([\s\S]*?);/)![1];
   const ids = [...types.matchAll(/"(\w+)"/g)].map((m) => m[1]).sort();
-  assert.equal(ids.length, 53);
+  assert.equal(ids.length, 55);
   assert.deepEqual(Object.keys(FAUNA_META).sort(), ids);
   assert.deepEqual(Object.keys(FAUNA_ART_URLS).sort(), ids);
   assert.deepEqual(manifest.species.map((s: Entry) => s.kind).sort(), ids);

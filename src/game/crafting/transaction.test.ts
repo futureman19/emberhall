@@ -353,7 +353,7 @@ test("exact swordcraft - moon silver bites the fleshless and no one else", () =>
   assert.equal(blade.resolvedStats?.slayerMultipliers.wolf, undefined, "flesh kinds gain nothing");
   assert.equal(blade.resolvedStats?.slayerMultipliers.gloomwraith, 1.2);
   assert.equal(blade.resolvedStats?.slayerMultipliers.embercrawler, 1.2);
-  assert.equal(Object.keys(blade.resolvedStats?.slayerMultipliers ?? {}).length, 14);
+  assert.equal(Object.keys(blade.resolvedStats?.slayerMultipliers ?? {}).length, 15);
   assert.deepEqual(blade.affixes, []);
 
   assert.ok(commandEquipRare(world, blade.uid));

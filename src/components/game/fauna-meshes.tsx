@@ -14,7 +14,7 @@ import { FaunaArtBody } from "./fauna-art";
 import { faunaSpellArt } from "./fauna-art-catalog";
 import { GloomwraithMesh } from "./gloomwraith-mesh";
 
-import { EmberdeepBeast } from "./emberdeep-beast";
+import { AnimatedMonster as EmberdeepBeast } from "./animated-monster";
 import { isEmberdeepMonster } from "@/game/emberdeep-monsters";
 
 import { EmbercrawlerBeast } from "./embercrawler-beast";
