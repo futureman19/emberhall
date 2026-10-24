@@ -1,3 +1,4 @@
+import { emberdeepBlocked } from "./emberdeep.ts";
 import { FRONTIER_ROUTES, frontierRoadPoints, sceneryBlocked } from "./frontier.ts";
 import { MAP, inBounds, placeById } from "./atlas.ts";
 import { pieceBlocks } from "./placeables/functions.ts";
@@ -24,7 +25,7 @@ export function climbOk(from: Tile, to: Tile) {
 }
 
 export function walkable(world: World, tx: number, ty: number) {
-  if (!inBounds(tx, ty) || sceneryBlocked(tx, ty)) return false;
+  if (!inBounds(tx, ty) || sceneryBlocked(tx, ty) || emberdeepBlocked(world, tx, ty)) return false;
   const t = world.tiles[ty]?.[tx];
   if (!t) return false;
   if (!kindWalk(t.kind)) return false;
@@ -107,6 +108,7 @@ function canStep(world: World, x: number, y: number, nx: number, ny: number, fly
   const dx = nx - x;
   const dy = ny - y;
   if (Math.abs(dx) > 1 || Math.abs(dy) > 1 || (dx === 0 && dy === 0)) return false;
+  if (emberdeepBlocked(world, nx, ny)) return false;
   if (fly) {
     // Aloft: water, rock and rise are weather; only a wall still bars the way.
     const to = world.tiles[ny]?.[nx];

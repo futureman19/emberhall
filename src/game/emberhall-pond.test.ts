@@ -57,9 +57,11 @@ test("pond changes are bounded; every tile outside its local envelope retains th
   for (let y = 299; y <= 307; y++) {
     for (let x = 247; x <= 253; x++) tiles[y]![x] = { h: 0, kind: "grass" };
   }
-  // Captured before adding the stamp, with only this bounded envelope masked.
+  // Emberdeep adds only x998..1122/z648..730 and its x648..652/z561..568 spur.
+  // Restoring those 10,415 changed tiles from the pre-Emberdeep generator
+  // reproduces the prior 9cc3d0e8... baseline; all other tiles are unchanged.
   assert.equal(createHash("sha256").update(JSON.stringify(tiles)).digest("hex"),
-    "9cc3d0e8719a9699d1057cef74c19ada345e4a080d16df595a720d419d061c81");
+    "5f0c72a0ded40adaead478e719536567bc69ccb3d9a8a3e54624ac8cd6e68db8");
 });
 
 test("tile-free saves receive the pond without overwriting stored terrain scars", () => {

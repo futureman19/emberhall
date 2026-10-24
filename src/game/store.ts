@@ -1,3 +1,4 @@
+import { visitEmberdeep } from "./emberdeep.ts";
 import { create } from "zustand";
 import { commandTrack } from "./tracking.ts";
 import { commandDig, commandFill } from "./digging.ts";
@@ -363,6 +364,7 @@ export const useGame = create<GameUI>((set, get) => ({
     const logTopBeforeTick = w.log[0];
     const logTopKeyBeforeTick = logTopBeforeTick ? `${logTopBeforeTick.t}:${logTopBeforeTick.text}` : null;
     tickWorld(w, dt);
+    visitEmberdeep(w);
     if (!wasGhost && w.player.ghost) {
       toastTimer = 0;
       set({ toast: "You are a ghost." });
