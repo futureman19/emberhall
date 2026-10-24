@@ -3,7 +3,7 @@
   "generator": "art/blender/build_fauna.py",
   "source": "art/blender/fauna-worldwide.blend",
   "coordinateSystem": "Y-up +Z-front ground-pivot; normalized SIZE units",
-  "speciesCount": 54,
+  "speciesCount": 55,
   "species": [
     {
       "kind": "hare",
@@ -2438,6 +2438,60 @@
         "ember_seam1.05",
         "ember_seam1.35"
       ]
+    },
+    {
+      "kind": "embercrawler",
+      "family": "emberdeep_insect",
+      "file": "fauna-embercrawler.glb",
+      "size": 0.85,
+      "triangles": 1272,
+      "materials": 3,
+      "bytes": 131396,
+      "sha256": "df693c4a517d2dbd8c95e5612971a772935e87f9279e942903aade04520d1650",
+      "bounds": {
+        "min": [
+          -0.9713292121887207,
+          0.0,
+          -0.7340599298477173
+        ],
+        "max": [
+          0.9713292121887207,
+          0.7200000286102295,
+          0.8299999237060547
+        ]
+      },
+      "parts": [
+        "armored_abdomen",
+        "coal_thorax",
+        "eye_socket_-1",
+        "eye_-1",
+        "eye_socket_1",
+        "eye_1",
+        "skitter_leg-100",
+        "skitter_leg-101",
+        "glow_tip-10",
+        "skitter_leg-110",
+        "skitter_leg-111",
+        "glow_tip-11",
+        "skitter_leg-120",
+        "skitter_leg-121",
+        "glow_tip-12",
+        "mandible-1",
+        "skitter_leg100",
+        "skitter_leg101",
+        "glow_tip10",
+        "skitter_leg110",
+        "skitter_leg111",
+        "glow_tip11",
+        "skitter_leg120",
+        "skitter_leg121",
+        "glow_tip12",
+        "mandible1",
+        "ember_plate-0.48",
+        "ember_plate-0.18",
+        "ember_plate0.1"
+      ],
+      "source": "art/blender/fauna-embercrawler.blend"
     }
   ]
 }

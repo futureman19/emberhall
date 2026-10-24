@@ -406,6 +406,10 @@ function isCreature(value: unknown): boolean {
       ["patrol", "windup", "strike", "recover"].includes(String(value.monster.phase)) &&
       isFiniteNumber(value.monster.time) && value.monster.time >= 0 &&
       isFiniteNumber(value.monster.targetX) && isFiniteNumber(value.monster.targetZ))) &&
+    (value.crawler === undefined || (isRecord(value.crawler) &&
+      ["patrol", "windup", "lunge", "retreat"].includes(String(value.crawler.phase)) &&
+      isFiniteNumber(value.crawler.time) && value.crawler.time >= 0 &&
+      isFiniteNumber(value.crawler.targetX) && isFiniteNumber(value.crawler.targetZ))) &&
     isFiniteNumber(value.x) &&
     isFiniteNumber(value.z) &&
     isFiniteNumber(value.hp) &&

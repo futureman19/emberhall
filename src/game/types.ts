@@ -244,6 +244,7 @@ export type NpcRole = "banker" | "provisioner" | "healer" | "alchemist";
 export type FaunaKind =
   | "gloomwraith"
   | "slag_golem"
+  | "embercrawler"
   | "hare"
   | "hart"
   | "wolf"
@@ -406,6 +407,8 @@ export interface Creature {
   gloom?: { clock: number; phase: "prowl" | "windup" | "bolt" | "recover"; time: number; targetX: number; targetZ: number };
   /** Persisted Emberdeep combat clock in simulation seconds. */
   monster?: { phase: "patrol" | "windup" | "strike" | "recover"; time: number; targetX: number; targetZ: number };
+  /** Embercrawler telegraph/retreat clock, in simulation seconds. */
+  crawler?: { phase: "patrol" | "windup" | "lunge" | "retreat"; time: number; targetX: number; targetZ: number };
   id: string;
   kind: FaunaKind;
   x: number;

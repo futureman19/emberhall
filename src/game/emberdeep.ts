@@ -18,6 +18,10 @@ export const EMBERDEEP_ROOMS = [
   { id: "furnace", name: "The Sealed Furnace", tx: 1106, ty: 674, rx: 12, ry: 14 },
 ] as const;
 export type EmberdeepRoomId = (typeof EMBERDEEP_ROOMS)[number]["id"];
+/** Shared by torch props and light-seeking creatures; no duplicate coordinates. */
+export const EMBERDEEP_TORCHES = EMBERDEEP_ROOMS.flatMap(r => [-1, 1].map(side => ({
+  id: `${r.id}:${side}`, roomId: r.id, tx: r.tx + side * (r.rx - 1), ty: r.ty - r.ry + 1,
+})));
 export interface EmberdeepState {
   version: 1;
   visited: EmberdeepRoomId[];

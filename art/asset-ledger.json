@@ -15580,6 +15580,115 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "fauna:embercrawler",
+      "canonicalId": "embercrawler",
+      "family": "fauna",
+      "catalogSources": [
+        "src/game/catalog.ts:234",
+        "src/game/types.ts:244"
+      ],
+      "sourceNames": [
+        "FAUNA_META",
+        "FaunaKind"
+      ],
+      "rendererLocations": [
+        "src/components/game/fauna-art-catalog.ts:1",
+        "src/components/game/fauna-art-data.ts:3",
+        "src/components/game/fauna-art.tsx:3",
+        "src/components/game/fauna-meshes.tsx:1",
+        "src/components/game/fauna-meshes.tsx:12",
+        "src/components/game/pets-gump.tsx:1",
+        "src/components/game/pets-gump.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/fauna-art-catalog.ts",
+        "src/components/game/fauna-art-data.ts",
+        "src/components/game/fauna-art.tsx",
+        "src/components/game/fauna-meshes.tsx",
+        "src/components/game/pets-gump.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "dead",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/catalog.ts:234",
+            "src/game/types.ts:244"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "fight",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/catalog.ts:234",
+            "src/game/types.ts:244"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "flee",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/catalog.ts:234",
+            "src/game/types.ts:244"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "follow",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/catalog.ts:234",
+            "src/game/types.ts:244"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "idle",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/catalog.ts:234",
+            "src/game/types.ts:244"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "wander",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/catalog.ts:234",
+            "src/game/types.ts:244"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/catalog.ts:234",
+        "src/game/types.ts:244"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "fauna:fen_ghoul",
       "canonicalId": "fen_ghoul",
       "family": "fauna",
@@ -47086,6 +47195,64 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/crop-meshes.tsx:155"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-name:src/components/game/embercrawler-beast.tsx#embercrawler-moving-sparks",
+      "canonicalId": "src/components/game/embercrawler-beast.tsx#embercrawler-moving-sparks",
+      "family": "renderer-name",
+      "catalogSources": [
+        "src/components/game/embercrawler-beast.tsx:54"
+      ],
+      "sourceNames": [
+        "EmbercrawlerBeast"
+      ],
+      "rendererLocations": [
+        "src/components/game/embercrawler-beast.tsx:54"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/embercrawler-beast.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/embercrawler-beast.tsx:54"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/embercrawler-beast.tsx:54"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/embercrawler-beast.tsx:54"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -107928,6 +108095,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/ecology.ts#SpawnEntry.kind=embercrawler",
+      "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=embercrawler",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/ecology.ts:15"
+      ],
+      "sourceNames": [
+        "SpawnEntry.kind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/ecology.ts:15"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/ecology.ts:15"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/ecology.ts#SpawnEntry.kind=fen_ghoul",
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=fen_ghoul",
       "family": "state-vocabulary",
@@ -109542,7 +109755,7 @@
       "canonicalId": "src/game/emberdeep.ts#EmberdeepState.bossDoorOpen=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/emberdeep.ts:25"
+        "src/game/emberdeep.ts:29"
       ],
       "sourceNames": [
         "EmberdeepState.bossDoorOpen"
@@ -109588,7 +109801,7 @@
       "canonicalId": "src/game/emberdeep.ts#EmberdeepState.bossDoorOpen=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/emberdeep.ts:25"
+        "src/game/emberdeep.ts:29"
       ],
       "sourceNames": [
         "EmberdeepState.bossDoorOpen"
@@ -109634,7 +109847,7 @@
       "canonicalId": "src/game/emberdeep.ts#EmberdeepState.version=1",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/emberdeep.ts:22"
+        "src/game/emberdeep.ts:26"
       ],
       "sourceNames": [
         "EmberdeepState.version"
@@ -155671,6 +155884,52 @@
       "status": "inventoried",
       "evidence": [
         "src/game/rare.ts:37"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/rare.ts#AffixDef.vsKind=embercrawler",
+      "canonicalId": "src/game/rare.ts#AffixDef.vsKind=embercrawler",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/rare.ts:38"
+      ],
+      "sourceNames": [
+        "AffixDef.vsKind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/rare.ts:38"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/rare.ts:38"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -202320,6 +202579,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/types.ts#Creature.kind=embercrawler",
+      "canonicalId": "src/game/types.ts#Creature.kind=embercrawler",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/types.ts:408"
+      ],
+      "sourceNames": [
+        "Creature.kind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/types.ts:408"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/types.ts:408"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/types.ts#Creature.kind=fen_ghoul",
       "canonicalId": "src/game/types.ts#Creature.kind=fen_ghoul",
       "family": "state-vocabulary",
@@ -205351,6 +205656,52 @@
       "status": "inventoried",
       "evidence": [
         "src/game/types.ts:440"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/types.ts#Creature.wasKind=embercrawler",
+      "canonicalId": "src/game/types.ts#Creature.wasKind=embercrawler",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/types.ts:446"
+      ],
+      "sourceNames": [
+        "Creature.wasKind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/types.ts:446"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/types.ts:446"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."

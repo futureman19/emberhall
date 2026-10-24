@@ -4,6 +4,7 @@ import type { FaunaKind } from "@/game/types";
 export const FAUNA_ART_URLS = {
   gloomwraith: "/art/lanternwood/fauna-gloomwraith.glb",
   slag_golem: "/art/lanternwood/fauna-slag_golem.glb",
+  embercrawler: "/art/lanternwood/fauna-embercrawler.glb",
   hare: "/art/lanternwood/fauna-hare.glb",
   hart: "/art/lanternwood/fauna-hart.glb",
   wolf: "/art/lanternwood/fauna-wolf.glb",

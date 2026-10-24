@@ -15,6 +15,7 @@ COLORS = dict(re.findall(r'  (\w+): "(#[a-f0-9]+)"', text.split('const SIZE')[0]
 SIZES = {k: float(v) for k,v in re.findall(r'  (\w+): ([\d.]+)', text.split('const SIZE')[1].split('const DARK')[0])}
 FAMILIES = {
  'emberdeep':['gloomwraith','slag_golem'],
+ 'emberdeep_insect':['embercrawler'],
  'lagomorph': ['hare'], 'cervid': ['hart','brambleback_stag','thornhide_doe','whiteback_elk'],
  'canid': ['wolf','ember_fox','ridgeback_warg','brine_hound','barrow_hound'], 'feline':['pine_lynx'],
  'stocky': ['ironwood_boar','moss_badger','oak_bear','frosthorn_ram','highland_aurochs'],
@@ -111,6 +112,16 @@ def author(k):
             oval('slag_foot'+str(side),(side*.3,.12,.17),(.27,.12,.34))
         for y in (.78,1.05,1.35): rod('ember_seam'+str(y),(-.31,y,.32),(.31,y+.07,.32),.022,'#ee6b23')
 
+    if k=='embercrawler':
+        # Ported from the interrupted monster pack, now with emissive foot tips.
+        oval('armored_abdomen',(0,.45,-.23),(.4,.27,.53))
+        oval('coal_thorax',(0,.38,.3),(.27,.22,.29),'#432c2a'); eyes(.44,.56,.14,True)
+        for side in (-1,1):
+            for i,z in enumerate((-.48,-.1,.27)):
+                chain('skitter_leg'+str(side)+str(i),[(side*.23,.42,z),(side*.65,.57,z-.1),(side*.9,.04,z+.14)],.065,'#4a3230')
+                oval('glow_tip'+str(side)+str(i),(side*.9,.055,z+.14),(.075,.055,.09),'#ed7d28',True)
+            rod('mandible'+str(side),(side*.17,.27,.5),(side*.12,.23,.83),.065,'#f1bd66',0)
+        for z in (-.48,-.18,.1): oval('ember_plate'+str(z),(0,.64,z),(.28,.08,.12),'#ed7d28',True)
     elif family in ('canid','feline'):
         oval('tapered_flank',(0,.48,0),(.32,.29,.62)); oval('chest',(0,.56,.36),(.34,.35,.32))
         oval('head',(0,.78,.62),(.25,.25,.29)); muzzle(.69,.88,.17 if family=='canid' else .2)
@@ -407,6 +418,16 @@ if MODE=='emberdeep':
     manifest['species']=entries; manifest['speciesCount']=len(entries)
     manifest['emberdeepSource']='art/blender/fauna-emberdeep.blend'
     (OUT/'fauna-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+if MODE=='embercrawler':
+    manifest=json.loads((OUT/'fauna-manifest.json').read_text())
+    authored,front=author('embercrawler')
+    bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'art/blender/fauna-embercrawler.blend'))
+    entry=bake_export('embercrawler',FAMILY['embercrawler'],OUT/'fauna-embercrawler.glb',authored,front)
+    entry['source']='art/blender/fauna-embercrawler.blend'
+    manifest['species']=[e for e in manifest['species'] if e['kind']!='embercrawler']+[entry]
+    manifest['speciesCount']=len(manifest['species'])
+    (OUT/'fauna-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+    print('CRAWLER_COMPLETE',entry['triangles'],entry['bytes'],flush=True)
 if MODE in ('all','variants'):
     export_spell_variants()
 if MODE=='gloomwraith':
