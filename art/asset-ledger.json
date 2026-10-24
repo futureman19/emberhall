@@ -14,6 +14,7 @@
     "src/components/game/authored-offhand.tsx",
     "src/components/game/authored-tool.tsx",
     "src/components/game/authored-weapon.tsx",
+    "src/components/game/blacksmith-kit.ts",
     "src/components/game/build/blueprint-gump.tsx",
     "src/components/game/building-meshes.tsx",
     "src/components/game/campfire-geometry.ts",
@@ -219,6 +220,7 @@
     "src/game/placeables/commands.ts",
     "src/game/placeables/functions.ts",
     "src/game/placeables/history.ts",
+    "src/game/placeables/kits/blacksmith.ts",
     "src/game/placeables/kits/emberhall.ts",
     "src/game/placeables/legacy-buildings.ts",
     "src/game/placeables/materials.ts",
@@ -33795,6 +33797,220 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "renderer-helper:src/components/game/blacksmith-kit.ts#load",
+      "canonicalId": "src/components/game/blacksmith-kit.ts#load",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/blacksmith-kit.ts:8"
+      ],
+      "sourceNames": [
+        "load"
+      ],
+      "rendererLocations": [
+        "src/components/game/blacksmith-kit.ts:8"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/blacksmith-kit.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/blacksmith-kit.ts:8"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!pending",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/blacksmith-kit.ts:8"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:o instanceof THREE.Mesh",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/blacksmith-kit.ts:8"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/blacksmith-kit.ts:8"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/blacksmith-kit.ts:8"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/blacksmith-kit.ts#noPick",
+      "canonicalId": "src/components/game/blacksmith-kit.ts#noPick",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/blacksmith-kit.ts:7"
+      ],
+      "sourceNames": [
+        "noPick"
+      ],
+      "rendererLocations": [
+        "src/components/game/blacksmith-kit.ts:7"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/blacksmith-kit.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/blacksmith-kit.ts:7"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/blacksmith-kit.ts:7"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/blacksmith-kit.ts:7"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-helper:src/components/game/blacksmith-kit.ts#useBlacksmithScene",
+      "canonicalId": "src/components/game/blacksmith-kit.ts#useBlacksmithScene",
+      "family": "renderer-helper",
+      "catalogSources": [
+        "src/components/game/blacksmith-kit.ts:24"
+      ],
+      "sourceNames": [
+        "useBlacksmithScene"
+      ],
+      "rendererLocations": [
+        "src/components/game/blacksmith-kit.ts:24"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/blacksmith-kit.ts"
+      ],
+      "jsxTags": [],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/blacksmith-kit.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!enabled || !(BLACKSMITH_IDS as readonly string[]).includes(id)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/blacksmith-kit.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:alive",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/blacksmith-kit.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:enabled && loaded?.id === id",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/blacksmith-kit.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/blacksmith-kit.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/blacksmith-kit.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "renderer-helper:src/components/game/building-meshes.tsx#insideLabel",
       "canonicalId": "src/components/game/building-meshes.tsx#insideLabel",
       "family": "renderer-helper",
@@ -47297,7 +47513,7 @@
         "src/components/game/oak-stumps.tsx:4",
         "src/components/game/people-meshes.tsx:26",
         "src/components/game/pile-meshes.tsx:2",
-        "src/components/game/placeable-meshes.tsx:3",
+        "src/components/game/placeable-meshes.tsx:4",
         "src/components/game/pond-autumn.ts:13",
         "src/components/game/pond-grass.ts:4",
         "src/components/game/sky.tsx:7",
@@ -60593,13 +60809,13 @@
       "canonicalId": "src/components/game/placeable-meshes.tsx#Layer",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/placeable-meshes.tsx:14"
+        "src/components/game/placeable-meshes.tsx:15"
       ],
       "sourceNames": [
         "Layer"
       ],
       "rendererLocations": [
-        "src/components/game/placeable-meshes.tsx:14"
+        "src/components/game/placeable-meshes.tsx:15"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -60687,13 +60903,13 @@
       "canonicalId": "src/components/game/placeable-meshes.tsx#Piece",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/placeable-meshes.tsx:64"
+        "src/components/game/placeable-meshes.tsx:65"
       ],
       "sourceNames": [
         "Piece"
       ],
       "rendererLocations": [
-        "src/components/game/placeable-meshes.tsx:64"
+        "src/components/game/placeable-meshes.tsx:65"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -60701,7 +60917,8 @@
       ],
       "jsxTags": [
         "Layer",
-        "group"
+        "group",
+        "primitive"
       ],
       "states": [
         {
@@ -60709,6 +60926,14 @@
           "status": "inventoried",
           "evidence": [
             "src/components/game/placeable-meshes.tsx:64"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:authored",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/placeable-meshes.tsx:65"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -60756,13 +60981,13 @@
       "canonicalId": "src/components/game/placeable-meshes.tsx#Placeables",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/placeable-meshes.tsx:110"
+        "src/components/game/placeable-meshes.tsx:116"
       ],
       "sourceNames": [
         "Placeables"
       ],
       "rendererLocations": [
-        "src/components/game/placeable-meshes.tsx:110"
+        "src/components/game/placeable-meshes.tsx:116"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -243026,7 +243251,7 @@
       ],
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:26",
-        "src/components/game/placeable-meshes.tsx:9"
+        "src/components/game/placeable-meshes.tsx:10"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -243078,7 +243303,7 @@
       ],
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:26",
-        "src/components/game/placeable-meshes.tsx:9"
+        "src/components/game/placeable-meshes.tsx:10"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -243130,7 +243355,7 @@
       ],
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:26",
-        "src/components/game/placeable-meshes.tsx:9"
+        "src/components/game/placeable-meshes.tsx:10"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -243182,7 +243407,7 @@
       ],
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:26",
-        "src/components/game/placeable-meshes.tsx:9"
+        "src/components/game/placeable-meshes.tsx:10"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -243234,7 +243459,7 @@
       ],
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:26",
-        "src/components/game/placeable-meshes.tsx:9"
+        "src/components/game/placeable-meshes.tsx:10"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -243286,7 +243511,7 @@
       ],
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:26",
-        "src/components/game/placeable-meshes.tsx:9"
+        "src/components/game/placeable-meshes.tsx:10"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -243338,7 +243563,7 @@
       ],
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:26",
-        "src/components/game/placeable-meshes.tsx:9"
+        "src/components/game/placeable-meshes.tsx:10"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -243390,7 +243615,7 @@
       ],
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:26",
-        "src/components/game/placeable-meshes.tsx:9"
+        "src/components/game/placeable-meshes.tsx:10"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -243442,7 +243667,7 @@
       ],
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:26",
-        "src/components/game/placeable-meshes.tsx:9"
+        "src/components/game/placeable-meshes.tsx:10"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -243494,7 +243719,7 @@
       ],
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:26",
-        "src/components/game/placeable-meshes.tsx:9"
+        "src/components/game/placeable-meshes.tsx:10"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -243546,7 +243771,7 @@
       ],
       "rendererLocations": [
         "src/components/game/building-meshes.tsx:26",
-        "src/components/game/placeable-meshes.tsx:9"
+        "src/components/game/placeable-meshes.tsx:10"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [

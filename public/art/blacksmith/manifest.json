@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "source": "art/blender/build_blacksmith.py",
+  "anchor": "Y-up ground; X/Z within [0,1]; rotate about (.25,0,.25) matching voxel cells",
+  "assets": {
+    "smith_anvil": {
+      "url": "/art/blacksmith/smith_anvil.glb",
+      "bytes": 26612,
+      "sha256": "6f2ab896461a2ca12dd1a9d0ceee82c4f86ef243a1c111cc5da6fb1f4b400425",
+      "bounds": [
+        0.229379341006279,
+        0,
+        0.229379341006279,
+        0.9800000190734863,
+        0.8399999737739563,
+        0.7706206440925598
+      ],
+      "triangles": 336
+    },
+    "smith_forge": {
+      "url": "/art/blacksmith/smith_forge.glb",
+      "bytes": 65692,
+      "sha256": "78c4dc8e61ae9b728cc6d3f19d4c67236834ba6e0174f2b7e930d3f8c43f21e8",
+      "bounds": [
+        0.050000011920928955,
+        0,
+        0.08000001311302185,
+        0.949999988079071,
+        1.4294999837875366,
+        0.9300000071525574
+      ],
+      "triangles": 880
+    },
+    "smith_trough": {
+      "url": "/art/blacksmith/smith_trough.glb",
+      "bytes": 41064,
+      "sha256": "0edbf35a67a8f816c9d4cc8104f1e5f5e003585fdb2d75ccd2fa5eee8804b85a",
+      "bounds": [
+        0.030000001192092896,
+        0,
+        0.1625000238418579,
+        0.9700000286102295,
+        0.5600000023841858,
+        0.8374999761581421
+      ],
+      "triangles": 528
+    },
+    "smith_grindstone": {
+      "url": "/art/blacksmith/smith_grindstone.glb",
+      "bytes": 35964,
+      "sha256": "d619a73d990ee2506db593acfdef534d95bbb5e8ca758379673791c368fd4ca0",
+      "bounds": [
+        0.15009348094463348,
+        0,
+        0.15906544029712677,
+        0.9800000190734863,
+        1.1600000858306885,
+        0.7915887832641602
+      ],
+      "triangles": 456
+    },
+    "smith_rack": {
+      "url": "/art/blacksmith/smith_rack.glb",
+      "bytes": 60696,
+      "sha256": "333797cf9cff48312bcb1f82f724b95e78bbc024257d47165c8bc3e1de49034a",
+      "bounds": [
+        0.05500000715255737,
+        0,
+        0.1899999976158142,
+        0.9449999928474426,
+        1.309999942779541,
+        0.8100000023841858
+      ],
+      "triangles": 792
+    },
+    "smith_bellows": {
+      "url": "/art/blacksmith/smith_bellows.glb",
+      "bytes": 44196,
+      "sha256": "954784dc84c673cbf0a9098563488ed895b98189cd7a350d8121660ade7f7eee",
+      "bounds": [
+        0.03274334967136383,
+        0,
+        0.22389382123947144,
+        0.9800000190734863,
+        0.6800000071525574,
+        0.7761061787605286
+      ],
+      "triangles": 572
+    }
+  }
+}
