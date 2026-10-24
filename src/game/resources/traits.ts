@@ -134,6 +134,7 @@ const TRAITS = {
     scope: "canonical",
     values: { rough: 1.05, sound: 1.1, choice: 1.2, pristine: 1.3 },
     fauna: [
+      "gloomwraith",
       "wight",
       "greybarrow_wightling",
       "ashen_banshee",

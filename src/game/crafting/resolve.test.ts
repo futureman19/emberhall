@@ -216,7 +216,8 @@ test("moon silver contributes its slayer multiplier to every fleshless kind at f
   assert.equal(result.stats.slayerMultipliers.ossuary_knight, 1.2);
   assert.equal(result.stats.slayerMultipliers.wolf, undefined, "flesh kinds gain nothing");
   assert.equal(result.stats.slayerMultipliers.cinder_drake, undefined, "a flesh drake is no spirit");
-  assert.equal(Object.keys(result.stats.slayerMultipliers).length, 13);
+  assert.equal(result.stats.slayerMultipliers.gloomwraith, 1.2, "the shadow apparition is fleshless");
+  assert.equal(Object.keys(result.stats.slayerMultipliers).length, 14);
 
   const moon = result.contributions.find((contribution) => contribution.traitId === "moon");
   assert.equal(moon?.source, "material");
