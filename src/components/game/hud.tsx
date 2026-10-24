@@ -1,3 +1,4 @@
+import { EmberdeepTravel } from "./emberdeep-travel";
 import { Button } from "@/components/ui/button";
 import { CombatCluster } from "@/components/game/chrome/combat-cluster";
 import { CornerCluster } from "@/components/game/chrome/corner-cluster";
@@ -101,6 +102,7 @@ function PlayingChrome() {
       style={{ ["--corner-clear" as string]: `${cornerClearance(mapOpen)}px` }}
     >
       <VitalsChip />
+      <EmberdeepTravel />
       <UtilityCluster actionsOpen={actionsOpen} onToggleActions={() => setActionsOpen((v) => !v)} />
       <CombatCluster />
       <CornerCluster mapOpen={mapOpen} onToggleMap={dock.toggle} />

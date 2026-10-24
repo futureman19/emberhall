@@ -1,3 +1,4 @@
+import { inEmberdeep, emberdeepRoomAt } from "./emberdeep.ts";
 import { COURT, regionAt } from "./atlas.ts";
 import { paintBiomes } from "./biome.ts";
 import { hourOfDay, isDusk, isNight, settleGear, SKILL_META } from "./catalog.ts";
@@ -182,7 +183,7 @@ export function snapshot(w: World = world): Snapshot {
     campfires: w.campfires ?? [],
     herbs: w.herbs ?? [],
     landKey: String(w.landRev),
-    region: region.name,
+    region: self && inEmberdeep(self.x, self.z) ? `The Emberdeep · ${emberdeepRoomAt(self.x, self.z)?.name ?? "Passages"}` : region.name,
     youX: self?.x ?? COURT.tx,
     youZ: self?.z ?? COURT.ty,
     youPath: self?.path.length ?? 0,

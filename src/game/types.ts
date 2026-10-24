@@ -630,6 +630,7 @@ export interface GroundZone {
 }
 
 export interface World {
+  emberdeep?: import("./emberdeep.ts").EmberdeepState;
   seed: number;
   hour: number;
   speed: Speed;

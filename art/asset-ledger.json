@@ -48,6 +48,8 @@
     "src/components/game/crop-meshes.tsx",
     "src/components/game/death-geometry.ts",
     "src/components/game/effects-preference.ts",
+    "src/components/game/emberdeep-scene.tsx",
+    "src/components/game/emberdeep-travel.tsx",
     "src/components/game/equipment-material.ts",
     "src/components/game/fauna-art-catalog.ts",
     "src/components/game/fauna-art-data.ts",
@@ -159,6 +161,7 @@
     "src/game/debug.ts",
     "src/game/digging.ts",
     "src/game/ecology.ts",
+    "src/game/emberdeep.ts",
     "src/game/emberhall-pond.ts",
     "src/game/extraction-animation.ts",
     "src/game/farm.ts",
@@ -658,7 +661,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -774,7 +777,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1135,7 +1138,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1309,7 +1312,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1425,7 +1428,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -1768,7 +1771,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2096,7 +2099,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2450,7 +2453,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2566,7 +2569,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2754,7 +2757,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2870,7 +2873,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -2986,7 +2989,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3102,7 +3105,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3450,7 +3453,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3718,7 +3721,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -3892,7 +3895,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4008,7 +4011,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4124,7 +4127,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4240,7 +4243,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4356,7 +4359,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4707,7 +4710,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4823,7 +4826,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -4939,7 +4942,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -5055,7 +5058,7 @@
         "src/components/game/house-gump.tsx:1",
         "src/components/game/house-gump.tsx:5",
         "src/components/game/hud.tsx:1",
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/lanternwood-art.ts:2",
         "src/components/game/lanternwood-dressing.tsx:1",
         "src/components/game/lanternwood-dressing.tsx:12",
@@ -8284,7 +8287,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8338,7 +8341,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8392,7 +8395,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8446,7 +8449,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8500,7 +8503,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8554,7 +8557,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8608,7 +8611,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8662,7 +8665,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8716,7 +8719,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8770,7 +8773,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8824,7 +8827,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8878,7 +8881,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8932,7 +8935,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -8986,7 +8989,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9040,7 +9043,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9094,7 +9097,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9148,7 +9151,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9202,7 +9205,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9256,7 +9259,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9310,7 +9313,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9364,7 +9367,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9418,7 +9421,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9472,7 +9475,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9526,7 +9529,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9580,7 +9583,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9634,7 +9637,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9688,7 +9691,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9742,7 +9745,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9796,7 +9799,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9850,7 +9853,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9904,7 +9907,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -9958,7 +9961,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10012,7 +10015,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10066,7 +10069,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10120,7 +10123,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10174,7 +10177,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10228,7 +10231,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10282,7 +10285,7 @@
         "SPELL_META"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:29",
+        "src/components/game/hud.tsx:30",
         "src/components/game/spell-gump.tsx:4",
         "src/components/game/world-scene.tsx:44"
       ],
@@ -10338,7 +10341,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10401,7 +10404,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10464,7 +10467,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10527,7 +10530,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -10590,7 +10593,7 @@
         "ClassId"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:27",
+        "src/components/game/hud.tsx:28",
         "src/components/game/look-gump.tsx:1",
         "src/components/game/look-gump.tsx:12",
         "src/components/game/look-gump.tsx:6",
@@ -37404,13 +37407,13 @@
       "canonicalId": "src/components/game/hud.tsx#startHall",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/hud.tsx:144"
+        "src/components/game/hud.tsx:146"
       ],
       "sourceNames": [
         "startHall"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:144"
+        "src/components/game/hud.tsx:146"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -45368,7 +45371,7 @@
       "rendererLocations": [
         "src/components/game/context-menu.tsx:50",
         "src/components/game/use-house-touch.ts:8",
-        "src/components/game/world-scene.tsx:298"
+        "src/components/game/world-scene.tsx:300"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -46540,13 +46543,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#GraphicsProbe",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:88"
+        "src/components/game/world-scene.tsx:90"
       ],
       "sourceNames": [
         "GraphicsProbe"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:88"
+        "src/components/game/world-scene.tsx:90"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -46646,7 +46649,7 @@
       "canonicalId": "src/components/game/world-scene.tsx#groundY",
       "family": "renderer-helper",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:126"
+        "src/components/game/world-scene.tsx:128"
       ],
       "sourceNames": [
         "groundY"
@@ -46656,13 +46659,14 @@
         "src/components/game/campfire-meshes.tsx:5",
         "src/components/game/cemetery-mist.tsx:5",
         "src/components/game/crop-meshes.tsx:3",
+        "src/components/game/emberdeep-scene.tsx:7",
         "src/components/game/fauna-meshes.tsx:6",
         "src/components/game/frontier-scenery.tsx:6",
         "src/components/game/gate-meshes.tsx:6",
         "src/components/game/herb-meshes.tsx:1",
         "src/components/game/horizon-water.ts:1",
         "src/components/game/lanternwood-dressing.tsx:9",
-        "src/components/game/lighting.tsx:7",
+        "src/components/game/lighting.tsx:8",
         "src/components/game/mirrors-mesh.tsx:5",
         "src/components/game/oak-stumps.tsx:4",
         "src/components/game/people-meshes.tsx:26",
@@ -46673,7 +46677,7 @@
         "src/components/game/sky.tsx:7",
         "src/components/game/spell-effects-mesh.tsx:5",
         "src/components/game/terrain.tsx:21",
-        "src/components/game/world-scene.tsx:126",
+        "src/components/game/world-scene.tsx:128",
         "src/components/game/world-scene.tsx:35"
       ],
       "rendererMapping": "direct AST declaration/name",
@@ -46682,6 +46686,7 @@
         "src/components/game/campfire-meshes.tsx",
         "src/components/game/cemetery-mist.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/emberdeep-scene.tsx",
         "src/components/game/fauna-meshes.tsx",
         "src/components/game/frontier-scenery.tsx",
         "src/components/game/gate-meshes.tsx",
@@ -46854,6 +46859,180 @@
       "status": "inventoried",
       "evidence": [
         "src/components/game/crop-meshes.tsx:155"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-name:src/components/game/emberdeep-scene.tsx#emberdeep-boss-seal",
+      "canonicalId": "src/components/game/emberdeep-scene.tsx#emberdeep-boss-seal",
+      "family": "renderer-name",
+      "catalogSources": [
+        "src/components/game/emberdeep-scene.tsx:94"
+      ],
+      "sourceNames": [
+        "EmberdeepScene"
+      ],
+      "rendererLocations": [
+        "src/components/game/emberdeep-scene.tsx:94"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/emberdeep-scene.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:94"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:94"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/emberdeep-scene.tsx:94"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-name:src/components/game/emberdeep-scene.tsx#emberdeep-dungeon",
+      "canonicalId": "src/components/game/emberdeep-scene.tsx#emberdeep-dungeon",
+      "family": "renderer-name",
+      "catalogSources": [
+        "src/components/game/emberdeep-scene.tsx:88"
+      ],
+      "sourceNames": [
+        "EmberdeepScene"
+      ],
+      "rendererLocations": [
+        "src/components/game/emberdeep-scene.tsx:88"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/emberdeep-scene.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:88"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:88"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/emberdeep-scene.tsx:88"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer-name:src/components/game/emberdeep-scene.tsx#emberdeep-overworld-entrance",
+      "canonicalId": "src/components/game/emberdeep-scene.tsx#emberdeep-overworld-entrance",
+      "family": "renderer-name",
+      "catalogSources": [
+        "src/components/game/emberdeep-scene.tsx:83"
+      ],
+      "sourceNames": [
+        "EmberdeepScene"
+      ],
+      "rendererLocations": [
+        "src/components/game/emberdeep-scene.tsx:83"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/emberdeep-scene.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:83"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:83"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/emberdeep-scene.tsx:83"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -47965,13 +48144,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#transient-action-fx",
       "family": "renderer-name",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1993"
+        "src/components/game/world-scene.tsx:1997"
       ],
       "sourceNames": [
         "WorldScene"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1993"
+        "src/components/game/world-scene.tsx:1997"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -51994,6 +52173,336 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "renderer:src/components/game/emberdeep-scene.tsx#EmberdeepScene",
+      "canonicalId": "src/components/game/emberdeep-scene.tsx#EmberdeepScene",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/emberdeep-scene.tsx:36"
+      ],
+      "sourceNames": [
+        "EmberdeepScene"
+      ],
+      "rendererLocations": [
+        "src/components/game/emberdeep-scene.tsx:36"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/emberdeep-scene.tsx"
+      ],
+      "jsxTags": [
+        "Sconce",
+        "Stair",
+        "boxGeometry",
+        "group",
+        "instancedMesh",
+        "mesh",
+        "meshStandardMaterial",
+        "pointLight"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:36"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!m",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:36"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!underground",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:36"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:dungeon.current",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:36"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:entrance.current",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:36"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:fill.current && p",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:36"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:inside",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:36"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:seal.current",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:36"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:36"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/emberdeep-scene.tsx:36"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/emberdeep-scene.tsx#Sconce",
+      "canonicalId": "src/components/game/emberdeep-scene.tsx#Sconce",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/emberdeep-scene.tsx:16"
+      ],
+      "sourceNames": [
+        "Sconce"
+      ],
+      "rendererLocations": [
+        "src/components/game/emberdeep-scene.tsx:16"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/emberdeep-scene.tsx"
+      ],
+      "jsxTags": [
+        "boxGeometry",
+        "cylinderGeometry",
+        "group",
+        "mesh",
+        "meshStandardMaterial"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:16"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:16"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/emberdeep-scene.tsx:16"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/emberdeep-scene.tsx#Stair",
+      "canonicalId": "src/components/game/emberdeep-scene.tsx#Stair",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/emberdeep-scene.tsx:27"
+      ],
+      "sourceNames": [
+        "Stair"
+      ],
+      "rendererLocations": [
+        "src/components/game/emberdeep-scene.tsx:27"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/emberdeep-scene.tsx"
+      ],
+      "jsxTags": [
+        "boxGeometry",
+        "group",
+        "mesh",
+        "meshBasicMaterial",
+        "meshStandardMaterial",
+        "planeGeometry"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-scene.tsx:27"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/emberdeep-scene.tsx:27"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "renderer:src/components/game/emberdeep-travel.tsx#EmberdeepTravel",
+      "canonicalId": "src/components/game/emberdeep-travel.tsx#EmberdeepTravel",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/emberdeep-travel.tsx:5"
+      ],
+      "sourceNames": [
+        "EmberdeepTravel"
+      ],
+      "rendererLocations": [
+        "src/components/game/emberdeep-travel.tsx:5"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/emberdeep-travel.tsx"
+      ],
+      "jsxTags": [
+        "button",
+        "div",
+        "p"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-travel.tsx:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:inside",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-travel.tsx:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:panel !== \"none\" || Math.hypot(snap.youX - stair.tx, snap.youZ - stair.ty) > 3",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-travel.tsx:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-travel.tsx:5"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/emberdeep-travel.tsx:5"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "renderer:src/components/game/fauna-art.tsx#FaunaArtBody",
       "canonicalId": "src/components/game/fauna-art.tsx#FaunaArtBody",
       "family": "renderer",
@@ -54683,13 +55192,13 @@
       "canonicalId": "src/components/game/lighting.tsx#GROUND_HAZE",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/lighting.tsx:19"
+        "src/components/game/lighting.tsx:20"
       ],
       "sourceNames": [
         "GROUND_HAZE"
       ],
       "rendererLocations": [
-        "src/components/game/lighting.tsx:19"
+        "src/components/game/lighting.tsx:20"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54741,13 +55250,13 @@
       "canonicalId": "src/components/game/lighting.tsx#Lighting",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/lighting.tsx:21"
+        "src/components/game/lighting.tsx:22"
       ],
       "sourceNames": [
         "Lighting"
       ],
       "rendererLocations": [
-        "src/components/game/lighting.tsx:21"
+        "src/components/game/lighting.tsx:22"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -54834,6 +55343,22 @@
           "status": "inventoried",
           "evidence": [
             "src/components/game/lighting.tsx:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:deep",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/lighting.tsx:22"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:deep && bg.current",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/lighting.tsx:22"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -63187,13 +63712,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CastFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:409"
+        "src/components/game/world-scene.tsx:411"
       ],
       "sourceNames": [
         "CastFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:409"
+        "src/components/game/world-scene.tsx:411"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -63424,13 +63949,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#ChipBits",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1891"
+        "src/components/game/world-scene.tsx:1893"
       ],
       "sourceNames": [
         "ChipBits"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1891"
+        "src/components/game/world-scene.tsx:1893"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -63510,13 +64035,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CombatFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1757"
+        "src/components/game/world-scene.tsx:1759"
       ],
       "sourceNames": [
         "CombatFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1757"
+        "src/components/game/world-scene.tsx:1759"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -63626,13 +64151,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CompanionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1373"
+        "src/components/game/world-scene.tsx:1375"
       ],
       "sourceNames": [
         "CompanionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1373"
+        "src/components/game/world-scene.tsx:1375"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -63807,13 +64332,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#ConstructionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1439"
+        "src/components/game/world-scene.tsx:1441"
       ],
       "sourceNames": [
         "ConstructionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1439"
+        "src/components/game/world-scene.tsx:1441"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -63953,13 +64478,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CorpseFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1618"
+        "src/components/game/world-scene.tsx:1620"
       ],
       "sourceNames": [
         "CorpseFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1618"
+        "src/components/game/world-scene.tsx:1620"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -64094,13 +64619,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#CraftFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1235"
+        "src/components/game/world-scene.tsx:1237"
       ],
       "sourceNames": [
         "CraftFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1235"
+        "src/components/game/world-scene.tsx:1237"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -64218,13 +64743,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#DeathFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1861"
+        "src/components/game/world-scene.tsx:1863"
       ],
       "sourceNames": [
         "DeathFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1861"
+        "src/components/game/world-scene.tsx:1863"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -64304,13 +64829,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#ExtractionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1522"
+        "src/components/game/world-scene.tsx:1524"
       ],
       "sourceNames": [
         "ExtractionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1522"
+        "src/components/game/world-scene.tsx:1524"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -64450,13 +64975,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#FizzleFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:990"
+        "src/components/game/world-scene.tsx:992"
       ],
       "sourceNames": [
         "FizzleFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:990"
+        "src/components/game/world-scene.tsx:992"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -64555,13 +65080,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#GatheringFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1703"
+        "src/components/game/world-scene.tsx:1705"
       ],
       "sourceNames": [
         "GatheringFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1703"
+        "src/components/game/world-scene.tsx:1705"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -64686,13 +65211,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#HealingFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1053"
+        "src/components/game/world-scene.tsx:1055"
       ],
       "sourceNames": [
         "HealingFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1053"
+        "src/components/game/world-scene.tsx:1055"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -64783,13 +65308,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#MarkStones",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:354"
+        "src/components/game/world-scene.tsx:356"
       ],
       "sourceNames": [
         "MarkStones"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:354"
+        "src/components/game/world-scene.tsx:356"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -64856,13 +65381,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#MoongateTravelFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:840"
+        "src/components/game/world-scene.tsx:842"
       ],
       "sourceNames": [
         "MoongateTravelFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:840"
+        "src/components/game/world-scene.tsx:842"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -65011,13 +65536,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#NpcInteractionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1304"
+        "src/components/game/world-scene.tsx:1306"
       ],
       "sourceNames": [
         "NpcInteractionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1304"
+        "src/components/game/world-scene.tsx:1306"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -65187,13 +65712,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#PersonalActionFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:742"
+        "src/components/game/world-scene.tsx:744"
       ],
       "sourceNames": [
         "PersonalActionFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:742"
+        "src/components/game/world-scene.tsx:744"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -65433,13 +65958,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#PlacePointer",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:130"
+        "src/components/game/world-scene.tsx:132"
       ],
       "sourceNames": [
         "PlacePointer"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:130"
+        "src/components/game/world-scene.tsx:132"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -65595,13 +66120,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#Rig",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:236"
+        "src/components/game/world-scene.tsx:238"
       ],
       "sourceNames": [
         "Rig"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:236"
+        "src/components/game/world-scene.tsx:238"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -65743,13 +66268,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#SimClock",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:119"
+        "src/components/game/world-scene.tsx:121"
       ],
       "sourceNames": [
         "SimClock"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:119"
+        "src/components/game/world-scene.tsx:121"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -65801,13 +66326,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#TamingFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1115"
+        "src/components/game/world-scene.tsx:1117"
       ],
       "sourceNames": [
         "TamingFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1115"
+        "src/components/game/world-scene.tsx:1117"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -65962,13 +66487,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#TravelFxMesh",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:909"
+        "src/components/game/world-scene.tsx:911"
       ],
       "sourceNames": [
         "TravelFxMesh"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:909"
+        "src/components/game/world-scene.tsx:911"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -66066,13 +66591,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#WalkMarker",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:382"
+        "src/components/game/world-scene.tsx:384"
       ],
       "sourceNames": [
         "WalkMarker"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:382"
+        "src/components/game/world-scene.tsx:384"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -66152,13 +66677,13 @@
       "canonicalId": "src/components/game/world-scene.tsx#WorldScene",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/world-scene.tsx:1935"
+        "src/components/game/world-scene.tsx:1937"
       ],
       "sourceNames": [
         "WorldScene"
       ],
       "rendererLocations": [
-        "src/components/game/world-scene.tsx:1935"
+        "src/components/game/world-scene.tsx:1937"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -66178,6 +66703,7 @@
         "CraftFxMesh",
         "Crops",
         "DeathFxMesh",
+        "EmberdeepScene",
         "ExtractionFxMesh",
         "Fauna",
         "FizzleFxMesh",
@@ -108363,6 +108889,144 @@
       "status": "inventoried",
       "evidence": [
         "src/game/ecology.ts:10"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/emberdeep.ts#EmberdeepState.bossDoorOpen=false",
+      "canonicalId": "src/game/emberdeep.ts#EmberdeepState.bossDoorOpen=false",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/emberdeep.ts:25"
+      ],
+      "sourceNames": [
+        "EmberdeepState.bossDoorOpen"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/emberdeep.ts:25"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/emberdeep.ts:25"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/emberdeep.ts#EmberdeepState.bossDoorOpen=true",
+      "canonicalId": "src/game/emberdeep.ts#EmberdeepState.bossDoorOpen=true",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/emberdeep.ts:25"
+      ],
+      "sourceNames": [
+        "EmberdeepState.bossDoorOpen"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/emberdeep.ts:25"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/emberdeep.ts:25"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/emberdeep.ts#EmberdeepState.version=1",
+      "canonicalId": "src/game/emberdeep.ts#EmberdeepState.version=1",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/emberdeep.ts:22"
+      ],
+      "sourceNames": [
+        "EmberdeepState.version"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/emberdeep.ts:22"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/emberdeep.ts:22"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -192690,7 +193354,7 @@
       "canonicalId": "src/game/save.ts#SaveResult.ok=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/save.ts:668"
+        "src/game/save.ts:670"
       ],
       "sourceNames": [
         "SaveResult.ok"
@@ -192736,7 +193400,7 @@
       "canonicalId": "src/game/save.ts#SaveResult.ok=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/save.ts:668"
+        "src/game/save.ts:670"
       ],
       "sourceNames": [
         "SaveResult.ok"
@@ -194622,7 +195286,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=apothecary",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -194668,7 +195332,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=bank",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -194714,7 +195378,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=board",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -194760,7 +195424,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=cottage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -194806,7 +195470,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=dormitory",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -194852,7 +195516,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=farm",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -194898,7 +195562,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=forge",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -194944,7 +195608,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=gatehouse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -194990,7 +195654,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=hall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195036,7 +195700,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=homestead",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195082,7 +195746,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=hut",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195128,7 +195792,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=keep",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195174,7 +195838,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=kitchen",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195220,7 +195884,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=market",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195266,7 +195930,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=notice",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195312,7 +195976,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=porch",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195358,7 +196022,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=rampart",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195404,7 +196068,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=rampartV",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195450,7 +196114,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=shop",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195496,7 +196160,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=tavern",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195542,7 +196206,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=tower",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195588,7 +196252,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=townhome",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195634,7 +196298,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=townhouse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195680,7 +196344,7 @@
       "canonicalId": "src/game/store.ts#GameUI.buildKind=yard",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:106"
+        "src/game/store.ts:107"
       ],
       "sourceNames": [
         "GameUI.buildKind"
@@ -195726,7 +196390,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openBook=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:95"
+        "src/game/store.ts:96"
       ],
       "sourceNames": [
         "GameUI.openBook"
@@ -195772,7 +196436,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openBook=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:95"
+        "src/game/store.ts:96"
       ],
       "sourceNames": [
         "GameUI.openBook"
@@ -195818,7 +196482,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openCraft=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.openCraft"
@@ -195864,7 +196528,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openCraft=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:96"
+        "src/game/store.ts:97"
       ],
       "sourceNames": [
         "GameUI.openCraft"
@@ -195910,7 +196574,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openPets=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:99"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.openPets"
@@ -195956,7 +196620,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openPets=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:99"
+        "src/game/store.ts:100"
       ],
       "sourceNames": [
         "GameUI.openPets"
@@ -196002,7 +196666,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openSettings=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:99"
       ],
       "sourceNames": [
         "GameUI.openSettings"
@@ -196048,7 +196712,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openSettings=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:98"
+        "src/game/store.ts:99"
       ],
       "sourceNames": [
         "GameUI.openSettings"
@@ -196094,7 +196758,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openVault=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:97"
+        "src/game/store.ts:98"
       ],
       "sourceNames": [
         "GameUI.openVault"
@@ -196140,7 +196804,7 @@
       "canonicalId": "src/game/store.ts#GameUI.openVault=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:97"
+        "src/game/store.ts:98"
       ],
       "sourceNames": [
         "GameUI.openVault"
@@ -196186,7 +196850,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=build",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:90"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -196232,7 +196896,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=help",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:90"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -196278,7 +196942,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=journal",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:90"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -196324,7 +196988,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=none",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:90"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -196370,7 +197034,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=roster",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:90"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -196416,7 +197080,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=vale",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:90"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -196462,7 +197126,7 @@
       "canonicalId": "src/game/store.ts#GameUI.panel=you",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:89"
+        "src/game/store.ts:90"
       ],
       "sourceNames": [
         "GameUI.panel"
@@ -196508,7 +197172,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=intro",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:86"
+        "src/game/store.ts:87"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -196554,7 +197218,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=looking",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:86"
+        "src/game/store.ts:87"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -196600,7 +197264,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=playing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:86"
+        "src/game/store.ts:87"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -196646,7 +197310,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=raising",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:86"
+        "src/game/store.ts:87"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -196692,7 +197356,7 @@
       "canonicalId": "src/game/store.ts#GameUI.phase=title",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:86"
+        "src/game/store.ts:87"
       ],
       "sourceNames": [
         "GameUI.phase"
@@ -196738,7 +197402,7 @@
       "canonicalId": "src/game/store.ts#GameUI.tillArmed=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:110"
+        "src/game/store.ts:111"
       ],
       "sourceNames": [
         "GameUI.tillArmed"
@@ -196784,7 +197448,7 @@
       "canonicalId": "src/game/store.ts#GameUI.tillArmed=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/store.ts:110"
+        "src/game/store.ts:111"
       ],
       "sourceNames": [
         "GameUI.tillArmed"
@@ -205846,7 +206510,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=building",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:745"
+        "src/game/types.ts:746"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -205892,7 +206556,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=fauna",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:745"
+        "src/game/types.ts:746"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -205938,7 +206602,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=gate",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:745"
+        "src/game/types.ts:746"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -205984,7 +206648,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=herb",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:745"
+        "src/game/types.ts:746"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -206030,7 +206694,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=pack",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:745"
+        "src/game/types.ts:746"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -206076,7 +206740,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=person",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:745"
+        "src/game/types.ts:746"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -206122,7 +206786,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=pile",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:745"
+        "src/game/types.ts:746"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -206168,7 +206832,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=plot",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:745"
+        "src/game/types.ts:746"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -206214,7 +206878,7 @@
       "canonicalId": "src/game/types.ts#CtxTarget.kind=tile",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:745"
+        "src/game/types.ts:746"
       ],
       "sourceNames": [
         "CtxTarget.kind"
@@ -221440,7 +222104,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.isDusk=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:691"
+        "src/game/types.ts:692"
       ],
       "sourceNames": [
         "Snapshot.isDusk"
@@ -221486,7 +222150,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.isDusk=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:691"
+        "src/game/types.ts:692"
       ],
       "sourceNames": [
         "Snapshot.isDusk"
@@ -221532,7 +222196,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.isNight=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:690"
+        "src/game/types.ts:691"
       ],
       "sourceNames": [
         "Snapshot.isNight"
@@ -221578,7 +222242,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.isNight=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:690"
+        "src/game/types.ts:691"
       ],
       "sourceNames": [
         "Snapshot.isNight"
@@ -221624,7 +222288,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.restored=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:689"
+        "src/game/types.ts:690"
       ],
       "sourceNames": [
         "Snapshot.restored"
@@ -221670,7 +222334,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.restored=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:689"
+        "src/game/types.ts:690"
       ],
       "sourceNames": [
         "Snapshot.restored"
@@ -221716,7 +222380,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.speed=0",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:676"
+        "src/game/types.ts:677"
       ],
       "sourceNames": [
         "Snapshot.speed"
@@ -221762,7 +222426,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.speed=1",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:676"
+        "src/game/types.ts:677"
       ],
       "sourceNames": [
         "Snapshot.speed"
@@ -221808,7 +222472,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.speed=2",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:676"
+        "src/game/types.ts:677"
       ],
       "sourceNames": [
         "Snapshot.speed"
@@ -221854,7 +222518,7 @@
       "canonicalId": "src/game/types.ts#Snapshot.speed=3",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:676"
+        "src/game/types.ts:677"
       ],
       "sourceNames": [
         "Snapshot.speed"
@@ -222774,7 +223438,7 @@
       "canonicalId": "src/game/types.ts#World.restored=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:664"
+        "src/game/types.ts:665"
       ],
       "sourceNames": [
         "World.restored"
@@ -222820,7 +223484,7 @@
       "canonicalId": "src/game/types.ts#World.restored=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:664"
+        "src/game/types.ts:665"
       ],
       "sourceNames": [
         "World.restored"
@@ -222866,7 +223530,7 @@
       "canonicalId": "src/game/types.ts#World.speed=0",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:635"
+        "src/game/types.ts:636"
       ],
       "sourceNames": [
         "World.speed"
@@ -222912,7 +223576,7 @@
       "canonicalId": "src/game/types.ts#World.speed=1",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:635"
+        "src/game/types.ts:636"
       ],
       "sourceNames": [
         "World.speed"
@@ -222958,7 +223622,7 @@
       "canonicalId": "src/game/types.ts#World.speed=2",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:635"
+        "src/game/types.ts:636"
       ],
       "sourceNames": [
         "World.speed"
@@ -223004,7 +223668,7 @@
       "canonicalId": "src/game/types.ts#World.speed=3",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/types.ts:635"
+        "src/game/types.ts:636"
       ],
       "sourceNames": [
         "World.speed"
@@ -228489,13 +229153,13 @@
       "canonicalId": "src/components/game/hud.tsx#BuildRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:576"
+        "src/components/game/hud.tsx:578"
       ],
       "sourceNames": [
         "BuildRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:576"
+        "src/components/game/hud.tsx:578"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -228575,13 +229239,13 @@
       "canonicalId": "src/components/game/hud.tsx#GhostBanner",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:521"
+        "src/components/game/hud.tsx:523"
       ],
       "sourceNames": [
         "GhostBanner"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:521"
+        "src/components/game/hud.tsx:523"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -228669,13 +229333,13 @@
       "canonicalId": "src/components/game/hud.tsx#GuideTabs",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:367"
+        "src/components/game/hud.tsx:369"
       ],
       "sourceNames": [
         "GuideTabs"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:367"
+        "src/components/game/hud.tsx:369"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -228757,13 +229421,13 @@
       "canonicalId": "src/components/game/hud.tsx#HelpPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:413"
+        "src/components/game/hud.tsx:415"
       ],
       "sourceNames": [
         "HelpPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:413"
+        "src/components/game/hud.tsx:415"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -228830,13 +229494,13 @@
       "canonicalId": "src/components/game/hud.tsx#Hud",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:44"
+        "src/components/game/hud.tsx:45"
       ],
       "sourceNames": [
         "Hud"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:44"
+        "src/components/game/hud.tsx:45"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -228934,13 +229598,13 @@
       "canonicalId": "src/components/game/hud.tsx#JournalPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:462"
+        "src/components/game/hud.tsx:464"
       ],
       "sourceNames": [
         "JournalPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:462"
+        "src/components/game/hud.tsx:464"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -228997,13 +229661,13 @@
       "canonicalId": "src/components/game/hud.tsx#PlayingChrome",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:58"
+        "src/components/game/hud.tsx:59"
       ],
       "sourceNames": [
         "PlayingChrome"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:58"
+        "src/components/game/hud.tsx:59"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229017,6 +229681,7 @@
         "CornerCluster",
         "CraftGump",
         "DockedMinimap",
+        "EmberdeepTravel",
         "GateGump",
         "GhostBanner",
         "HouseGump",
@@ -229121,13 +229786,13 @@
       "canonicalId": "src/components/game/hud.tsx#RaisingOverlay",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:312"
+        "src/components/game/hud.tsx:314"
       ],
       "sourceNames": [
         "RaisingOverlay"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:312"
+        "src/components/game/hud.tsx:314"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229183,13 +229848,13 @@
       "canonicalId": "src/components/game/hud.tsx#RosterPanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:478"
+        "src/components/game/hud.tsx:480"
       ],
       "sourceNames": [
         "RosterPanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:478"
+        "src/components/game/hud.tsx:480"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229272,13 +229937,13 @@
       "canonicalId": "src/components/game/hud.tsx#SaveFailureBanner",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:131"
+        "src/components/game/hud.tsx:133"
       ],
       "sourceNames": [
         "SaveFailureBanner"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:131"
+        "src/components/game/hud.tsx:133"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229342,13 +230007,13 @@
       "canonicalId": "src/components/game/hud.tsx#SelectedCard",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:505"
+        "src/components/game/hud.tsx:507"
       ],
       "sourceNames": [
         "SelectedCard"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:505"
+        "src/components/game/hud.tsx:507"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229427,13 +230092,13 @@
       "canonicalId": "src/components/game/hud.tsx#SidePanel",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:334"
+        "src/components/game/hud.tsx:336"
       ],
       "sourceNames": [
         "SidePanel"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:334"
+        "src/components/game/hud.tsx:336"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229509,13 +230174,13 @@
       "canonicalId": "src/components/game/hud.tsx#TitleOverlay",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:153"
+        "src/components/game/hud.tsx:155"
       ],
       "sourceNames": [
         "TitleOverlay"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:153"
+        "src/components/game/hud.tsx:155"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229669,13 +230334,13 @@
       "canonicalId": "src/components/game/hud.tsx#Toast",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:559"
+        "src/components/game/hud.tsx:561"
       ],
       "sourceNames": [
         "Toast"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:559"
+        "src/components/game/hud.tsx:561"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -229753,13 +230418,13 @@
       "canonicalId": "src/components/game/hud.tsx#TravelRibbon",
       "family": "ui",
       "catalogSources": [
-        "src/components/game/hud.tsx:603"
+        "src/components/game/hud.tsx:605"
       ],
       "sourceNames": [
         "TravelRibbon"
       ],
       "rendererLocations": [
-        "src/components/game/hud.tsx:603"
+        "src/components/game/hud.tsx:605"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -235724,6 +236389,282 @@
       "status": "inventoried",
       "evidence": [
         "src/game/crafting/types.ts:19"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId:cinder",
+      "canonicalId": "cinder",
+      "family": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId",
+      "catalogSources": [
+        "src/game/emberdeep.ts:20"
+      ],
+      "sourceNames": [
+        "EmberdeepRoomId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/emberdeep.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/emberdeep.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId:cistern",
+      "canonicalId": "cistern",
+      "family": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId",
+      "catalogSources": [
+        "src/game/emberdeep.ts:20"
+      ],
+      "sourceNames": [
+        "EmberdeepRoomId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/emberdeep.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/emberdeep.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId:entrance",
+      "canonicalId": "entrance",
+      "family": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId",
+      "catalogSources": [
+        "src/game/emberdeep.ts:20"
+      ],
+      "sourceNames": [
+        "EmberdeepRoomId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/emberdeep.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/emberdeep.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId:forge",
+      "canonicalId": "forge",
+      "family": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId",
+      "catalogSources": [
+        "src/game/emberdeep.ts:20"
+      ],
+      "sourceNames": [
+        "EmberdeepRoomId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/emberdeep.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/emberdeep.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId:furnace",
+      "canonicalId": "furnace",
+      "family": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId",
+      "catalogSources": [
+        "src/game/emberdeep.ts:20"
+      ],
+      "sourceNames": [
+        "EmberdeepRoomId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/emberdeep.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/emberdeep.ts:20"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId:vault",
+      "canonicalId": "vault",
+      "family": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId",
+      "catalogSources": [
+        "src/game/emberdeep.ts:20"
+      ],
+      "sourceNames": [
+        "EmberdeepRoomId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/emberdeep.ts:20"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/emberdeep.ts:20"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -245899,7 +246840,7 @@
       "canonicalId": "intro",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:83"
+        "src/game/store.ts:84"
       ],
       "sourceNames": [
         "Phase"
@@ -245945,7 +246886,7 @@
       "canonicalId": "looking",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:83"
+        "src/game/store.ts:84"
       ],
       "sourceNames": [
         "Phase"
@@ -245991,7 +246932,7 @@
       "canonicalId": "playing",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:83"
+        "src/game/store.ts:84"
       ],
       "sourceNames": [
         "Phase"
@@ -246037,7 +246978,7 @@
       "canonicalId": "raising",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:83"
+        "src/game/store.ts:84"
       ],
       "sourceNames": [
         "Phase"
@@ -246083,7 +247024,7 @@
       "canonicalId": "title",
       "family": "vocabulary/src/game/store.ts#Phase",
       "catalogSources": [
-        "src/game/store.ts:83"
+        "src/game/store.ts:84"
       ],
       "sourceNames": [
         "Phase"
@@ -246937,7 +247878,7 @@
       "canonicalId": "building",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:706"
+        "src/game/types.ts:707"
       ],
       "sourceNames": [
         "CtxKind"
@@ -246983,7 +247924,7 @@
       "canonicalId": "fauna",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:706"
+        "src/game/types.ts:707"
       ],
       "sourceNames": [
         "CtxKind"
@@ -247029,7 +247970,7 @@
       "canonicalId": "gate",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:706"
+        "src/game/types.ts:707"
       ],
       "sourceNames": [
         "CtxKind"
@@ -247075,7 +248016,7 @@
       "canonicalId": "herb",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:706"
+        "src/game/types.ts:707"
       ],
       "sourceNames": [
         "CtxKind"
@@ -247121,7 +248062,7 @@
       "canonicalId": "pack",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:706"
+        "src/game/types.ts:707"
       ],
       "sourceNames": [
         "CtxKind"
@@ -247167,7 +248108,7 @@
       "canonicalId": "person",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:706"
+        "src/game/types.ts:707"
       ],
       "sourceNames": [
         "CtxKind"
@@ -247213,7 +248154,7 @@
       "canonicalId": "pile",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:706"
+        "src/game/types.ts:707"
       ],
       "sourceNames": [
         "CtxKind"
@@ -247259,7 +248200,7 @@
       "canonicalId": "plot",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:706"
+        "src/game/types.ts:707"
       ],
       "sourceNames": [
         "CtxKind"
@@ -247305,7 +248246,7 @@
       "canonicalId": "tile",
       "family": "vocabulary/src/game/types.ts#CtxKind",
       "catalogSources": [
-        "src/game/types.ts:706"
+        "src/game/types.ts:707"
       ],
       "sourceNames": [
         "CtxKind"
@@ -247351,7 +248292,7 @@
       "canonicalId": "bank",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -247397,7 +248338,7 @@
       "canonicalId": "care",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -247443,7 +248384,7 @@
       "canonicalId": "cast",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -247489,7 +248430,7 @@
       "canonicalId": "chop",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -247535,7 +248476,7 @@
       "canonicalId": "dig",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -247581,7 +248522,7 @@
       "canonicalId": "drop",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -247627,7 +248568,7 @@
       "canonicalId": "enter",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -247673,7 +248614,7 @@
       "canonicalId": "feed",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -247719,7 +248660,7 @@
       "canonicalId": "fill",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -247765,7 +248706,7 @@
       "canonicalId": "fireball",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -247811,7 +248752,7 @@
       "canonicalId": "fish",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -247857,7 +248798,7 @@
       "canonicalId": "follow",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -247903,7 +248844,7 @@
       "canonicalId": "harvest",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -247949,7 +248890,7 @@
       "canonicalId": "house",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -247995,7 +248936,7 @@
       "canonicalId": "hunt",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248041,7 +248982,7 @@
       "canonicalId": "loot",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248087,7 +249028,7 @@
       "canonicalId": "mine",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248133,7 +249074,7 @@
       "canonicalId": "name",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248179,7 +249120,7 @@
       "canonicalId": "pick",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248225,7 +249166,7 @@
       "canonicalId": "release",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248271,7 +249212,7 @@
       "canonicalId": "roster",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248317,7 +249258,7 @@
       "canonicalId": "skin",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248363,7 +249304,7 @@
       "canonicalId": "sowAcorn",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248409,7 +249350,7 @@
       "canonicalId": "sowCabbage",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248455,7 +249396,7 @@
       "canonicalId": "sowGarlic",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248501,7 +249442,7 @@
       "canonicalId": "sowWheat",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248547,7 +249488,7 @@
       "canonicalId": "stay",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248593,7 +249534,7 @@
       "canonicalId": "take",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248639,7 +249580,7 @@
       "canonicalId": "talk",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248685,7 +249626,7 @@
       "canonicalId": "tame",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248731,7 +249672,7 @@
       "canonicalId": "teleport",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248777,7 +249718,7 @@
       "canonicalId": "till",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248823,7 +249764,7 @@
       "canonicalId": "track",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248869,7 +249810,7 @@
       "canonicalId": "use",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -248915,7 +249856,7 @@
       "canonicalId": "walk",
       "family": "vocabulary/src/game/types.ts#CtxVerb",
       "catalogSources": [
-        "src/game/types.ts:707"
+        "src/game/types.ts:708"
       ],
       "sourceNames": [
         "CtxVerb"
@@ -249934,7 +250875,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/utility-cluster.tsx:3",
-        "src/components/game/hud.tsx:40"
+        "src/components/game/hud.tsx:41"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -249986,7 +250927,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/utility-cluster.tsx:3",
-        "src/components/game/hud.tsx:40"
+        "src/components/game/hud.tsx:41"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -250038,7 +250979,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/utility-cluster.tsx:3",
-        "src/components/game/hud.tsx:40"
+        "src/components/game/hud.tsx:41"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -250090,7 +251031,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/utility-cluster.tsx:3",
-        "src/components/game/hud.tsx:40"
+        "src/components/game/hud.tsx:41"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -250142,7 +251083,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/utility-cluster.tsx:3",
-        "src/components/game/hud.tsx:40"
+        "src/components/game/hud.tsx:41"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -250194,7 +251135,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/utility-cluster.tsx:3",
-        "src/components/game/hud.tsx:40"
+        "src/components/game/hud.tsx:41"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
@@ -250246,7 +251187,7 @@
       ],
       "rendererLocations": [
         "src/components/game/chrome/utility-cluster.tsx:3",
-        "src/components/game/hud.tsx:40"
+        "src/components/game/hud.tsx:41"
       ],
       "rendererMapping": "family consumer; per-ID dispatch unverified",
       "surfaces": [
