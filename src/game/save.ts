@@ -402,6 +402,10 @@ function isCreature(value: unknown): boolean {
       isFiniteNumber(value.gloom.clock) && value.gloom.clock >= 0 &&
       isFiniteNumber(value.gloom.time) && value.gloom.time >= 0 &&
       isFiniteNumber(value.gloom.targetX) && isFiniteNumber(value.gloom.targetZ))) &&
+    (value.monster === undefined || (isRecord(value.monster) &&
+      ["patrol", "windup", "strike", "recover"].includes(String(value.monster.phase)) &&
+      isFiniteNumber(value.monster.time) && value.monster.time >= 0 &&
+      isFiniteNumber(value.monster.targetX) && isFiniteNumber(value.monster.targetZ))) &&
     isFiniteNumber(value.x) &&
     isFiniteNumber(value.z) &&
     isFiniteNumber(value.hp) &&

@@ -48,6 +48,7 @@
     "src/components/game/crop-meshes.tsx",
     "src/components/game/death-geometry.ts",
     "src/components/game/effects-preference.ts",
+    "src/components/game/emberdeep-beast.tsx",
     "src/components/game/emberdeep-scene.tsx",
     "src/components/game/emberdeep-travel.tsx",
     "src/components/game/equipment-material.ts",
@@ -162,10 +163,12 @@
     "src/game/debug.ts",
     "src/game/digging.ts",
     "src/game/ecology.ts",
+    "src/game/emberdeep-monsters.ts",
     "src/game/emberdeep.ts",
     "src/game/emberhall-pond.ts",
     "src/game/extraction-animation.ts",
     "src/game/farm.ts",
+    "src/game/fauna-defense.ts",
     "src/game/first-person-view.ts",
     "src/game/forestry.ts",
     "src/game/frontier-art-catalog.ts",
@@ -18297,6 +18300,115 @@
       "evidence": [
         "src/game/catalog.ts:185",
         "src/game/types.ts:215"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "fauna:slag_golem",
+      "canonicalId": "slag_golem",
+      "family": "fauna",
+      "catalogSources": [
+        "src/game/catalog.ts:234",
+        "src/game/types.ts:244"
+      ],
+      "sourceNames": [
+        "FAUNA_META",
+        "FaunaKind"
+      ],
+      "rendererLocations": [
+        "src/components/game/fauna-art-catalog.ts:1",
+        "src/components/game/fauna-art-data.ts:3",
+        "src/components/game/fauna-art.tsx:3",
+        "src/components/game/fauna-meshes.tsx:1",
+        "src/components/game/fauna-meshes.tsx:12",
+        "src/components/game/pets-gump.tsx:1",
+        "src/components/game/pets-gump.tsx:3"
+      ],
+      "rendererMapping": "family consumer; per-ID dispatch unverified",
+      "surfaces": [
+        "src/components/game/fauna-art-catalog.ts",
+        "src/components/game/fauna-art-data.ts",
+        "src/components/game/fauna-art.tsx",
+        "src/components/game/fauna-meshes.tsx",
+        "src/components/game/pets-gump.tsx"
+      ],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "dead",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/catalog.ts:234",
+            "src/game/types.ts:244"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "fight",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/catalog.ts:234",
+            "src/game/types.ts:244"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "flee",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/catalog.ts:234",
+            "src/game/types.ts:244"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "follow",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/catalog.ts:234",
+            "src/game/types.ts:244"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "idle",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/catalog.ts:234",
+            "src/game/types.ts:244"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "wander",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/catalog.ts:234",
+            "src/game/types.ts:244"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/catalog.ts:234",
+        "src/game/types.ts:244"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -46770,6 +46882,7 @@
         "src/components/game/campfire-meshes.tsx:5",
         "src/components/game/cemetery-mist.tsx:5",
         "src/components/game/crop-meshes.tsx:3",
+        "src/components/game/emberdeep-beast.tsx:6",
         "src/components/game/emberdeep-scene.tsx:7",
         "src/components/game/fauna-meshes.tsx:6",
         "src/components/game/frontier-scenery.tsx:6",
@@ -46798,6 +46911,7 @@
         "src/components/game/campfire-meshes.tsx",
         "src/components/game/cemetery-mist.tsx",
         "src/components/game/crop-meshes.tsx",
+        "src/components/game/emberdeep-beast.tsx",
         "src/components/game/emberdeep-scene.tsx",
         "src/components/game/fauna-meshes.tsx",
         "src/components/game/frontier-scenery.tsx",
@@ -52286,6 +52400,176 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "renderer:src/components/game/emberdeep-beast.tsx#EmberdeepBeast",
+      "canonicalId": "src/components/game/emberdeep-beast.tsx#EmberdeepBeast",
+      "family": "renderer",
+      "catalogSources": [
+        "src/components/game/emberdeep-beast.tsx:12"
+      ],
+      "sourceNames": [
+        "EmberdeepBeast"
+      ],
+      "rendererLocations": [
+        "src/components/game/emberdeep-beast.tsx:12"
+      ],
+      "rendererMapping": "direct AST declaration/name",
+      "surfaces": [
+        "src/components/game/emberdeep-beast.tsx"
+      ],
+      "jsxTags": [
+        "group",
+        "icosahedronGeometry",
+        "mesh",
+        "meshBasicMaterial",
+        "meshStandardMaterial",
+        "primitive",
+        "ringGeometry"
+      ],
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-beast.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!root.current || !body.current || !isEmberdeepMonster(c.kind)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-beast.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:!source || !active",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-beast.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:Array.isArray(o.material)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-beast.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:art",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-beast.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:c.kind === \"slag_golem\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-beast.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:c.path.length",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-beast.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:dead",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-beast.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:o instanceof Mesh",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-beast.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:ring.current",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-beast.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:s && c.task === \"fight\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-beast.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:s?.phase === \"strike\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-beast.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:s?.phase === \"windup\"",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-beast.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:target",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-beast.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "present",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/emberdeep-beast.tsx:12"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/components/game/emberdeep-beast.tsx:12"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "renderer:src/components/game/emberdeep-scene.tsx#EmberdeepScene",
       "canonicalId": "src/components/game/emberdeep-scene.tsx#EmberdeepScene",
       "family": "renderer",
@@ -53391,6 +53675,14 @@
           "status": "inventoried",
           "evidence": [
             "src/components/game/fauna-meshes.tsx:1145"
+          ],
+          "applicability": "source contract; runtime unverified"
+        },
+        {
+          "id": "predicate:isEmberdeepMonster(c.kind)",
+          "status": "inventoried",
+          "evidence": [
+            "src/components/game/fauna-meshes.tsx:1150"
           ],
           "applicability": "source contract; runtime unverified"
         },
@@ -108786,6 +109078,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/ecology.ts#SpawnEntry.kind=slag_golem",
+      "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=slag_golem",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/ecology.ts:15"
+      ],
+      "sourceNames": [
+        "SpawnEntry.kind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/ecology.ts:15"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/ecology.ts:15"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/ecology.ts#SpawnEntry.kind=stonecrawl_spider",
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=stonecrawl_spider",
       "family": "state-vocabulary",
@@ -152352,7 +152690,7 @@
       "canonicalId": "src/game/player.ts#CombatFx.clean=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:975"
+        "src/game/player.ts:976"
       ],
       "sourceNames": [
         "CombatFx.clean"
@@ -152398,7 +152736,7 @@
       "canonicalId": "src/game/player.ts#CombatFx.clean=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:975"
+        "src/game/player.ts:976"
       ],
       "sourceNames": [
         "CombatFx.clean"
@@ -152444,7 +152782,7 @@
       "canonicalId": "src/game/player.ts#CombatFx.kind=arrow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:969"
+        "src/game/player.ts:970"
       ],
       "sourceNames": [
         "CombatFx.kind"
@@ -152490,7 +152828,7 @@
       "canonicalId": "src/game/player.ts#CombatFx.kind=melee",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:969"
+        "src/game/player.ts:970"
       ],
       "sourceNames": [
         "CombatFx.kind"
@@ -152536,7 +152874,7 @@
       "canonicalId": "src/game/player.ts#TamingFx.success=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:894"
+        "src/game/player.ts:895"
       ],
       "sourceNames": [
         "TamingFx.success"
@@ -152582,7 +152920,7 @@
       "canonicalId": "src/game/player.ts#TamingFx.success=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:894"
+        "src/game/player.ts:895"
       ],
       "sourceNames": [
         "TamingFx.success"
@@ -156483,6 +156821,52 @@
       "status": "inventoried",
       "evidence": [
         "src/game/rare.ts:37"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/rare.ts#AffixDef.vsKind=slag_golem",
+      "canonicalId": "src/game/rare.ts#AffixDef.vsKind=slag_golem",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/rare.ts:38"
+      ],
+      "sourceNames": [
+        "AffixDef.vsKind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/rare.ts:38"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/rare.ts:38"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -203086,6 +203470,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/types.ts#Creature.kind=slag_golem",
+      "canonicalId": "src/game/types.ts#Creature.kind=slag_golem",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/types.ts:408"
+      ],
+      "sourceNames": [
+        "Creature.kind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/types.ts:408"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/types.ts:408"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/types.ts#Creature.kind=stonecrawl_spider",
       "canonicalId": "src/game/types.ts#Creature.kind=stonecrawl_spider",
       "family": "state-vocabulary",
@@ -206071,6 +206501,52 @@
       "status": "inventoried",
       "evidence": [
         "src/game/types.ts:440"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/types.ts#Creature.wasKind=slag_golem",
+      "canonicalId": "src/game/types.ts#Creature.wasKind=slag_golem",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/types.ts:446"
+      ],
+      "sourceNames": [
+        "Creature.wasKind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/types.ts:446"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/types.ts:446"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -236833,6 +237309,52 @@
       "status": "inventoried",
       "evidence": [
         "src/game/crafting/types.ts:19"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/emberdeep-monsters.ts#EmberdeepMonsterKind:slag_golem",
+      "canonicalId": "slag_golem",
+      "family": "vocabulary/src/game/emberdeep-monsters.ts#EmberdeepMonsterKind",
+      "catalogSources": [
+        "src/game/emberdeep-monsters.ts:11"
+      ],
+      "sourceNames": [
+        "EmberdeepMonsterKind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/emberdeep-monsters.ts:11"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/emberdeep-monsters.ts:11"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."

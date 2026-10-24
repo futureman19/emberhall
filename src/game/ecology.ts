@@ -1,4 +1,5 @@
 import { ensureGloomwraiths, tickGloomwraith, gloomBoltDamage, gloomTorch } from "./gloomwraith.ts";
+import { ensureEmberdeepMonsters, isEmberdeepMonster, tickEmberdeepMonster, updateEmberdeepClears } from "./emberdeep-monsters.ts";
 import { BARROW, MAP, PLACES, inGreybarrow } from "./atlas.ts";
 import { CURSE_BITE_WEAKEN, CURSE_SLOW, CHILL_SLOW, FAUNA_META, IRONWOOD_WARD, isNight, POISON_PLAYER_HOURS, POISON_TICK_HOURS, SNARE_TICK_DMG, SNARE_TICK_HOURS, armorOf } from "./catalog.ts";
 import { sanctuaryAt, sanctuaryBlocksTile, zoneFaunaSlowAt } from "./zones.ts";
@@ -311,6 +312,7 @@ function addExtraFauna(world: World, rng: () => number) {
 /** Add expansion fauna missing from a continued world without duplicating survivors. */
 export function ensureExpansionFauna(world: World) {
   ensureGloomwraiths(world);
+  ensureEmberdeepMonsters(world);
   const present = new Set(world.fauna.map((creature) => creature.kind));
   for (const entry of EXTRA_SPAWNS) {
     if (!entry.ensure || present.has(entry.kind)) continue;
@@ -374,6 +376,7 @@ export function seedFauna(world: World, rng: () => number) {
   }
   addExtraFauna(world, rng);
   ensureGloomwraiths(world);
+  ensureEmberdeepMonsters(world);
 }
 
 export function seedBarrow(world: World, rng: () => number) {
@@ -460,6 +463,7 @@ export function tickEcology(world: World, dt: number) {
     ensureStarterFauna(world);
     starterRefillAt.set(world, world.hour + STARTER_FAUNA_REFILL_HOURS);
   }
+  updateEmberdeepClears(world);
   const night = isNight(world.hour);
   const shelter = sheltering(world);
   for (const c of world.fauna) {
@@ -469,7 +473,7 @@ export function tickEcology(world: World, dt: number) {
       continue;
     }
     if (c.task === "dead") {
-      if (world.hour > c.corpseUntil && !(c.kind === "gloomwraith" && c.id.startsWith("emberdeep:"))) {
+      if (world.hour > c.corpseUntil && !c.id.startsWith("emberdeep:")) {
         world.fauna = world.fauna.filter((x) => x.id !== c.id);
       }
       continue;
@@ -566,6 +570,10 @@ export function tickEcology(world: World, dt: number) {
     }
     if (c.kind === "gloomwraith") {
       tickGloomwraith(world, c, dt);
+      continue;
+    }
+    if (isEmberdeepMonster(c.kind)) {
+      tickEmberdeepMonster(world, c, dt);
       continue;
     }
     const barrowWarden = WARDEN_KINDS.has(c.kind)

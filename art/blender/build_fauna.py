@@ -14,7 +14,7 @@ text = (ROOT / 'src/components/game/fauna-meshes.tsx').read_text()
 COLORS = dict(re.findall(r'  (\w+): "(#[a-f0-9]+)"', text.split('const SIZE')[0]))
 SIZES = {k: float(v) for k,v in re.findall(r'  (\w+): ([\d.]+)', text.split('const SIZE')[1].split('const DARK')[0])}
 FAMILIES = {
- 'emberdeep':['gloomwraith'],
+ 'emberdeep':['gloomwraith','slag_golem'],
  'lagomorph': ['hare'], 'cervid': ['hart','brambleback_stag','thornhide_doe','whiteback_elk'],
  'canid': ['wolf','ember_fox','ridgeback_warg','brine_hound','barrow_hound'], 'feline':['pine_lynx'],
  'stocky': ['ironwood_boar','moss_badger','oak_bear','frosthorn_ram','highland_aurochs'],
@@ -99,6 +99,18 @@ def author(k):
         for i in range(5):
             x=(i-2)*.12
             chain('shroud_ribbon'+str(i),[(x,1.0,0),(x*1.4,.5,-.1),(x*1.7,.05+(i%2)*.15,-.22)],.09)
+    if k=='slag_golem':
+        oval('furnace_torso',(0,1.05,0),(.55,.65,.34))
+        oval('molten_heart',(0,1.13,.32),(.19,.25,.05),'#ff882b',True)
+        oval('basalt_head',(0,1.88,.02),(.3,.28,.28)); eyes(1.94,.28,.15,True)
+        for side in (-1,1):
+            oval('shoulder'+str(side),(side*.59,1.52,0),(.3,.3,.32))
+            rod('arm'+str(side),(side*.65,1.4,0),(side*.8,.65,.17),.22)
+            oval('hammer_fist'+str(side),(side*.8,.61,.2),(.27,.29,.29))
+            rod('pillar_leg'+str(side),(side*.27,.75,0),(side*.3,.16,.06),.24)
+            oval('slag_foot'+str(side),(side*.3,.12,.17),(.27,.12,.34))
+        for y in (.78,1.05,1.35): rod('ember_seam'+str(y),(-.31,y,.32),(.31,y+.07,.32),.022,'#ee6b23')
+
     elif family in ('canid','feline'):
         oval('tapered_flank',(0,.48,0),(.32,.29,.62)); oval('chest',(0,.56,.36),(.34,.35,.32))
         oval('head',(0,.78,.62),(.25,.25,.29)); muzzle(.69,.88,.17 if family=='canid' else .2)
@@ -384,6 +396,17 @@ if MODE in ('all','species'):
     manifest={'schema':1,'generator':'art/blender/build_fauna.py','source':'art/blender/fauna-worldwide.blend','coordinateSystem':'Y-up +Z-front ground-pivot; normalized SIZE units','speciesCount':len(entries),'species':entries}
     (OUT/'fauna-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('FAUNA_COMPLETE',len(entries),'species',sum(e['bytes'] for e in entries),'bytes',flush=True)
+if MODE=='emberdeep':
+    manifest=json.loads((OUT/'fauna-manifest.json').read_text())
+    entries=[e for e in manifest['species'] if e['kind'] not in FAMILIES['emberdeep']]
+    for k in FAMILIES['emberdeep']:
+        authored,front=author(k); sources.append((k,authored,front))
+    bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'art/blender/fauna-emberdeep.blend'))
+    for k,authored,front in sources:
+        entries.append(bake_export(k,FAMILY[k],OUT/('fauna-'+k+'.glb'),authored,front))
+    manifest['species']=entries; manifest['speciesCount']=len(entries)
+    manifest['emberdeepSource']='art/blender/fauna-emberdeep.blend'
+    (OUT/'fauna-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
 if MODE in ('all','variants'):
     export_spell_variants()
 if MODE=='gloomwraith':
