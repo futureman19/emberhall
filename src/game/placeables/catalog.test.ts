@@ -24,6 +24,7 @@ const REQUIRED_IDS = [
   "table_stool",
   "sign_board",
   "planter_box",
+  "smith_anvil", "smith_forge", "smith_trough", "smith_grindstone", "smith_rack", "smith_bellows",
 ] as const;
 
 const VOXEL_MAX = 64;
@@ -32,7 +33,7 @@ test("hearthwright kit has unique stable ids covering the v1 lodge set", () => {
   const ids = PLACEABLE_CATALOG.map((d) => d.id);
   assert.deepEqual([...ids].sort(), [...REQUIRED_IDS].sort());
   assert.equal(new Set(ids).size, ids.length);
-  assert.ok(ids.length >= 15 && ids.length <= 20);
+  assert.equal(ids.length, REQUIRED_IDS.length);
   for (const id of REQUIRED_IDS) {
     assert.equal(PLACEABLE_BY_ID[id]?.id, id);
   }
