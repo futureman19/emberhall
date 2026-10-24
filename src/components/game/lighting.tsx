@@ -1,3 +1,4 @@
+import { inEmberdeep } from "@/game/emberdeep";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import * as THREE from "three";
@@ -53,7 +54,8 @@ export function Lighting({ shadows }: { shadows: boolean }) {
     const px = p?.x ?? COURT.tx;
     const pz = p?.z ?? COURT.ty;
     const py = p ? groundY(w, p.x, p.z) : 0;
-    const pit = Boolean(p && inGreybarrow(Math.round(p.x), Math.round(p.z)));
+    const deep = inEmberdeep(px, pz);
+    const pit = deep || Boolean(p && inGreybarrow(Math.round(p.x), Math.round(p.z)));
     const sight = (w.player.nightSightUntil ?? 0) > w.hour;
     const night = !DEV_DAYLIGHT && useGame.getState().snap.isNight && !sight;
     const dusk = !DEV_DAYLIGHT && useGame.getState().snap.isDusk && !sight;
@@ -122,8 +124,10 @@ export function Lighting({ shadows }: { shadows: boolean }) {
     }
 
     if (bg.current) bg.current.copy(skyTone.horizon);
+    if (deep && bg.current) bg.current.set("#18171b");
     if (fog.current) {
       fog.current.color.copy(skyTone.haze).lerp(GROUND_HAZE, pit ? 0 : 0.22);
+      if (deep) fog.current.color.set("#262126");
       // FogExp2 measures from the camera, not the player. At the fixed
       // tactical view (~35 units), 0.14 erases even nearby cave geometry.
       fog.current.density = pit ? 0.02 : 0.007 + cloud * 0.005 + rain * 0.008;

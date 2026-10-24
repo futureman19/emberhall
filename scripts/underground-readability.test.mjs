@@ -48,5 +48,10 @@ test('full lighting source differs only in approved pit values and visual-only r
     )
     .replace('    // read skyFlash so the whole heavens answer the same strike.', '    // read skyFlash so the whole heavens answer the same strike.\n    // Reduced effects withhold only visuals, never storm events or thunder.')
     .replace('    if (storm && Math.random() < dt * 0.32) {\n      skyFlash.v = 1;', '    if (effectsReduced()) skyFlash.v = 0;\n    if (storm && Math.random() < dt * 0.32) {\n      if (!effectsReduced()) skyFlash.v = 1;');
-  assert.equal(source, expected);
+  // Emberdeep uses the existing pit floor; all overworld expressions remain frozen.
+  const withEmberdeep = 'import { inEmberdeep } from "@/game/emberdeep";\n' + expected
+    .replace('    const pit = Boolean(p && inGreybarrow(Math.round(p.x), Math.round(p.z)));', '    const deep = inEmberdeep(px, pz);\n    const pit = deep || Boolean(p && inGreybarrow(Math.round(p.x), Math.round(p.z)));')
+    .replace('    if (bg.current) bg.current.copy(skyTone.horizon);', '    if (bg.current) bg.current.copy(skyTone.horizon);\n    if (deep && bg.current) bg.current.set("#18171b");')
+    .replace('      fog.current.color.copy(skyTone.haze).lerp(GROUND_HAZE, pit ? 0 : 0.22);', '      fog.current.color.copy(skyTone.haze).lerp(GROUND_HAZE, pit ? 0 : 0.22);\n      if (deep) fog.current.color.set("#262126");');
+  assert.equal(source, withEmberdeep);
 });

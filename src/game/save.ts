@@ -1,3 +1,4 @@
+import { isEmberdeepState } from "./emberdeep.ts";
 import {
   BUILDING_META,
   CLASS_META,
@@ -572,6 +573,7 @@ function isStoredTiles(value: unknown): boolean {
 function isCurrentSave(save: SaveRecord): boolean {
   return (
     save.saveVersion === CURRENT_SAVE_VERSION &&
+    (save.emberdeep === undefined || isEmberdeepState(save.emberdeep)) &&
     typeof save.seed === "number" &&
     Number.isSafeInteger(save.seed) &&
     isFiniteNumber(save.hour) &&

@@ -56,6 +56,8 @@ import { Crops } from "./crop-meshes";
 import { Fauna } from "./fauna-meshes";
 import { Gates } from "./gate-meshes";
 import { Lighting } from "./lighting";
+import { EmberdeepScene } from "./emberdeep-scene";
+import { inEmberdeep } from "@/game/emberdeep";
 import { Sky } from "./sky";
 import { WeatherFx } from "./weather-fx";
 import { People } from "./people-meshes";
@@ -1933,6 +1935,7 @@ function ChipBits() {
 }
 
 export function WorldScene() {
+  const underground = useGame(s => inEmberdeep(s.snap.youX, s.snap.youZ));
   const graphics = useGraphicsSettings();
   const reducedFx = useEffectsReduced();
   // Mirror the preference onto the root element so DOM chrome (rain,
@@ -1965,9 +1968,10 @@ export function WorldScene() {
     >
       <Lighting shadows={graphics.shadows} />
       <GraphicsProbe />
-      <Sky />
-      <WeatherFx />
-      <Horizon treeReduction={graphics.horizonTreeReduction} />
+      {!underground && <Sky />}
+      {!underground && <WeatherFx />}
+      {!underground && <Horizon treeReduction={graphics.horizonTreeReduction} />}
+      <EmberdeepScene />
       <Terrain />
       <FrontierScenery />
       <CemeteryMist />
