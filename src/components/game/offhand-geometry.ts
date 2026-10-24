@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Mesh, type BufferGeometry, type Object3D } from 'three';
+import { Mesh, BoxGeometry, SphereGeometry, type BufferGeometry, type Object3D } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 export const OFFHAND_BOUNDS = {"bow_limb": [0.11, 0.62, 0.04], "bow_string": [0.11, 0.62, 0.04], "torch_handle": [0.045, 0.36, 0.045], "torch_ember": [0.08, 0.1, 0.08], "shield_face": [0.28, 0.38, 0.06], "shield_boss": [0.1, 0.1, 0.04], "heater_face": [0.28, 0.38, 0.06], "heater_boss": [0.1, 0.1, 0.04]} as const;
@@ -35,6 +35,10 @@ export function extractOffhandGeometry(scene: Object3D): Parts {
     Object.values(result).forEach(g => g.dispose());
     throw error;
   }
+}
+/** Grip-centered tower panel; caller owns disposal. */
+export function createTowerShieldGeometry() {
+  return { face: new BoxGeometry(.34, .64, .065), boss: new SphereGeometry(.065, 8, 4).scale(1, 1, .35).translate(0, .03, .06) };
 }
 let cache: Parts | null = null;
 let pending: Promise<Parts> | null = null;

@@ -23,6 +23,7 @@
     "lint": "eslint . --max-warnings 0",
     "check": "npm run lint && npm test && npm run typecheck && npm run build && npm run check:auth",
     "test:classic": "node --test scripts/audit-ui-classic-frame.test.mjs",
+    "smoke:wielded-weapons": "node scripts/wielded-weapons-smoke.mjs",
     "smoke:mobile-hud": "node scripts/mobile-hud-overlap-smoke.mjs",
     "smoke:creator": "node scripts/creator-smoke.mjs",
     "smoke:harvest-counts": "node scripts/harvest-counts-smoke.mjs",

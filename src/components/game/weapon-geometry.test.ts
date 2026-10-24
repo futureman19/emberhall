@@ -3,7 +3,43 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {Group} from 'three';
-import {extractWeaponGeometry, WEAPON_BOUNDS} from './weapon-geometry.ts';
+import {extractWeaponGeometry, WEAPON_BOUNDS, createExactWeaponGeometry} from './weapon-geometry.ts';
+for (const [form, height] of [['dagger', 0.42], ['spear', 1.4], ['war_axe', 0.8], ['mace', 0.7], ['war_hammer', 0.89], ['quarterstaff', 1.3]] as const) {
+ test(`parametric ${form} has finite edge and hilt, a centered grip and distinct envelope`, () => {
+  const parts = createExactWeaponGeometry(form);
+  assert.deepEqual(Object.keys(parts), ['hilt', 'edge']);
+  let top = -Infinity;
+  let bottom = Infinity;
+  for (const geometry of Object.values(parts)) {
+   assert.ok(geometry.attributes.position.count > 0);
+   assert.ok(Array.from(geometry.attributes.position.array).every(Number.isFinite));
+   assert.ok(Array.from(geometry.attributes.normal.array).every(Number.isFinite));
+   geometry.computeBoundingBox();
+   top = Math.max(top, geometry.boundingBox!.max.y);
+   bottom = Math.min(bottom, geometry.boundingBox!.min.y);
+   geometry.dispose();
+  }
+  assert.ok(Math.abs(top - bottom - height) < 1e-5);
+  assert.ok(parts.hilt.boundingBox!.min.y < 0 && parts.hilt.boundingBox!.max.y > 0);
+ });
+}
+
+test('exact held forms share hand anchor and expose a visible inlay mount', () => {
+ const source = readFileSync(new URL('./forged-weapon.tsx', import.meta.url), 'utf8');
+ assert.match(source, /name=\{`emberhall-weapon-\$\{id\}`\}/);
+ assert.match(source, /exactWeaponSurfaces/);
+ assert.match(source, /equipmentMaterial/);
+ assert.match(source, /octahedronGeometry/);
+ assert.match(source, /FIGURE\.hand\.y/);
+ for (const form of ['dagger', 'spear', 'war_axe'] as const) {
+  const parts = createExactWeaponGeometry(form);
+  parts.hilt.computeBoundingBox(); parts.edge.computeBoundingBox();
+  assert.ok(Math.abs(parts.hilt.boundingBox!.min.y + parts.hilt.boundingBox!.max.y) < 1e-6);
+  assert.ok(parts.edge.boundingBox!.min.y > 0);
+  Object.values(parts).forEach(g => g.dispose());
+ }
+});
+
 const bytes=readFileSync(new URL('../../../public/art/lanternwood/weapons.glb',import.meta.url));
 const load=()=>new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
 test('all eleven authored melee parts parse inside original envelopes',async()=>{

@@ -10,7 +10,7 @@ import type { ItemId, WearSlot } from "../../game/types.ts";
 export type IconKind =
   | "axe" | "knife" | "pick" | "hoe" | "rod" | "log" | "board" | "ore" | "ingot"
   | "club" | "shield" | "staff" | "bow" | "torch" | "crate" | "helm" | "armor"
-  | "sword" | "mace" | "gloves" | "gorget" | "charm" | "tusk" | "meat" | "arrows"
+  | "sword" | "spear" | "mace" | "gloves" | "gorget" | "charm" | "tusk" | "meat" | "arrows"
   | "hide" | "bandage" | "potion" | "tunic" | "hood" | "cloak" | "legs" | "boots"
   | "pendant" | "ring" | "relic" | "book" | "rune" | "herb" | "mushroom" | "moss"
   | "silk" | "pearl" | "ash" | "cabbage" | "fish" | "bread" | "bowl" | "wheat"
@@ -42,6 +42,7 @@ export const ICON_PATHS: Readonly<Record<IconKind, IconGlyph>> = {
   helm: { body: "M6 10a6 6 0 0112 0v8h-3.4v-4H9.4v4H6z", accent: "M11 13.6h2v3h-2z" },
   armor: { body: "M8 3l4 1.6L16 3l3 4-2.4 2v12H7.4V9L5 7z", accent: "M11.2 5h1.6v15h-1.6z" },
   sword: { body: "M12 2l1.8 2v9.6h-3.6V4z", accent: "M7 14.6h10v2H7zM11 16.6h2V21h-2z" },
+  spear: { body: "M12 1l3 7-3 3-3-3z", accent: "M11 10h2v13h-2z" },
   mace: { body: "M11 9h2v12h-2z", accent: "M12 1.6a4.4 4.4 0 100 8.8 4.4 4.4 0 000-8.8z" },
   gloves: { body: "M8 3h6a3 3 0 013 3v5h2v4l-2.6 6H8.6L5 15V7a4 4 0 013-4z", accent: "M14 8h3.4v3H14z" },
   gorget: { body: "M4 6a8 3.6 0 0016 0v4a8 3.6 0 01-16 0z", accent: "M10 10.4h4v3.2h-4z" },
@@ -114,7 +115,13 @@ export const ITEM_ICON_KIND: Readonly<Record<ItemId, IconKind>> = {
   cap: "helm",
   cuirass: "armor",
   sword: "sword",
+  dagger: "knife",
+  spear: "spear",
+  war_axe: "axe",
   mace: "mace",
+  war_hammer: "mace",
+  quarterstaff: "staff",
+  tower_shield: "shield",
   gauntlets: "gloves",
   gorget: "gorget",
   heater: "shield",
