@@ -33,7 +33,9 @@ import { FIGURE, HAIR } from "@/game/look/figure.ts";
 import { SLOT_ANCHOR, partsById } from "@/game/look/parts.ts";
 import { resolveLook } from "@/game/look/resolve.ts";
 import type { ResolvedLook } from "@/game/look/resolve.ts";
-import { getHealingFx, workPitch } from "@/game/player";
+import { getHealingFx, getCombatFx, workPitch } from "@/game/player";
+import { weaponForm, weaponPose, WEAPON_PROFILES, type WeaponForm } from "@/game/weapon-animation";
+import { effectiveMain } from "@/game/rare";
 import { attackPhase, bowDrawAmount, meleeSwingPitch } from "@/game/combat-animation";
 import { windupGlow } from "@/game/magery-animation";
 import { useGame } from "@/game/store";
@@ -279,7 +281,7 @@ export function Shield({ id, ghost }: { id: ItemId; ghost: boolean }) {
 }
 
 export function Held({ id, ghost }: { id: ItemId; ghost: boolean }) {
-  if (id === "dagger" || id === "spear" || id === "war_axe") return <ForgedWeapon id={id} ghost={ghost} />;
+  if (id === "dagger" || id === "spear" || id === "war_axe") return <WeaponGrip form={id} ghost={ghost} />;
   if (id === "hatchet") return <Hatchet ghost={ghost} />;
   if (id === "pick") return <Pick ghost={ghost} />;
   if (id === "hoe") return <Hoe ghost={ghost} />;
@@ -339,6 +341,35 @@ function Pick({ ghost }: { ghost: boolean }) {
   );
 }
 
+// Pivot the +Y-authored blade at the hand: the figure faces -Z.
+function WeaponGrip({ form, ghost }: { form: WeaponForm; ghost: boolean }) {
+  const grip = useRef<Group>(null);
+  useFrame(() => {
+    const g = grip.current;
+    if (!g) return;
+    let arm = g.parent;
+    while (arm && arm.name !== "weapon-arm") arm = arm.parent;
+    const pitch = arm?.rotation.x ?? 0;
+    g.rotation.x = form === "war_axe" ? -pitch - Math.max(0, Math.min(1, (2.8 - pitch) / 1.35)) * 1.5 - 0.12 : -2 * pitch - 0.12;
+  });
+  return <group ref={grip} position={[0, -0.38, 0.04]}><group position={[0, 0.38, -0.04]}><ForgedWeapon id={form} ghost={ghost} /></group></group>;
+}
+
+// The actual stowed form stays in the hand only during its outgoing motion.
+// Bounded fixed groups avoid a React state update in every render frame.
+function StowingWeapon({ form }: { form: WeaponForm }) {
+  const group = useRef<Group>(null);
+  useFrame(() => {
+    if (!group.current) return;
+    const world = getWorld();
+    const fx = getPersonalActionFx(world);
+    const age = fx ? (world.hour - fx.at) * SECONDS_PER_HOUR : Infinity;
+    const self = world.people.find(p => p.isPlayer);
+    group.current.visible = Boolean(self && !self.ghost && !self.path.length && world.player.intent.kind === "none" && fx?.kind === "equipment" && fx.slot === "main" && fx.direction === "unequip" && fx.item === form && age >= 0 && age < WEAPON_PROFILES[form].draw && !effectiveMain(world));
+  });
+  return <group name={`weapon-stow-${form}`} ref={group} visible={false}><Held id={form} ghost={false} /></group>;
+}
+
 function MeleeSwingArc() {
   const arc = useRef<Mesh>(null);
   useFrame(() => {
@@ -346,6 +377,21 @@ function MeleeSwingArc() {
     if (!mesh) return;
     const world = getWorld();
     const phase = attackPhase(world.player.workT);
+    const form = weaponForm(effectiveMain(world));
+    const self = world.people.find(person => person.isPlayer);
+    if (form) {
+      const start = WEAPON_PROFILES[form].windup;
+      mesh.visible = Boolean(self && !self.ghost && !self.path.length && world.player.intent.kind === "hunt" && phase > start);
+      if (!mesh.visible) return;
+      const strike = (phase - start) / (1 - start);
+      mesh.position.set(0.28, 0.95, -0.6 - strike * (form === "spear" ? 0.7 : 0.3));
+      mesh.rotation.set(form === "war_axe" ? 0 : -Math.PI / 2, form === "war_axe" ? Math.PI / 2 : 0, form === "war_axe" ? strike * 1.8 : 0);
+      mesh.scale.set(form === "war_axe" ? 0.85 : 0.16, form === "spear" ? 1.2 : 0.65, 1);
+      (mesh.material as MeshBasicMaterial).opacity = Math.sin(strike * Math.PI) * 0.8;
+      return;
+    }
+    mesh.position.set(0, 0.14, 0.14);
+    mesh.rotation.set(-Math.PI / 2, 0, 0);
     const live =
       world.player.intent.kind === "hunt" &&
       world.player.wear.main !== "bow" &&
@@ -941,7 +987,14 @@ function Figure({
     const npcPose = npcFx ? npcInteractionPose(npcFx.kind, npcAge) : { bow: 0, reach: 0, lift: 0, turn: 0 };
     const personalFx = getPersonalActionFx(w);
     const personalAge = personalFx ? (w.hour - personalFx.at) * SECONDS_PER_HOUR : Infinity;
-    const personal = Boolean(personalFx && personalAge >= 0 && personalAge < PERSONAL_ACTION_DURATION);
+    const weaponEquipment = personalFx?.kind === "equipment" && personalFx.slot === "main" && weaponForm(personalFx.item) && personalAge >= 0 && personalAge < PERSONAL_ACTION_DURATION ? personalFx : null;
+    const personal = Boolean(personalFx && personalAge >= 0 && personalAge < PERSONAL_ACTION_DURATION && !weaponEquipment);
+    const form = weaponForm(weaponEquipment?.item ?? effectiveMain(w));
+    const hitFx = getCombatFx();
+    const hitAge = hitFx && hitFx.at === w.player.lastStrikeAt && hitFx.kind === "melee" ? (w.hour - hitFx.at) * SECONDS_PER_HOUR : Infinity;
+    const weaponActive = Boolean(form && you && !you.ghost && !you.path.length && !healing && !taming && !crafting && !constructing && !companionNear && !npcNear && !personal && !gathering && !corpseWorking && (weaponEquipment || w.player.intent.kind === "none" || w.player.intent.kind === "hunt"));
+    const weaponAction = weaponEquipment ? (weaponEquipment.direction === "equip" ? "draw" : "sheathe") : form && hitAge >= 0 && hitAge < WEAPON_PROFILES[form].recover ? "hit" : w.player.intent.kind === "hunt" ? "attack" : "idle";
+    const weaponMotion = form && weaponActive ? weaponPose(form, weaponAction, weaponEquipment ? personalAge : weaponAction === "hit" ? hitAge : w.player.workT) : null;
     const personalPose = personalFx ? personalActionPose(personalFx, personalAge) : { crouch: 0, lean: 0, reach: 0, lift: 0 };
     const activeExtractionKind = !you?.path.length
       ? w.player.intent.kind === "chop"
@@ -1024,7 +1077,11 @@ function Figure({
       }
     }
     if (right.current) {
-      if (personal && personalFx) {
+      right.current.position.z = weaponMotion ? -weaponMotion.reach : 0;
+      if (weaponMotion) {
+        right.current.rotation.set(weaponMotion.pitch, weaponMotion.yaw, weaponMotion.roll);
+        if (root.current) root.current.rotation.x += weaponMotion.lean;
+      } else if (personal && personalFx) {
         const eating = personalFx.kind === "eat";
         const low = personalFx.kind === "ground" || personalFx.kind === "chest";
         right.current.rotation.set(eating ? 1.35 - personalPose.reach * 0.34 : 0.72 + personalPose.reach * 0.62, -0.36, eating ? -0.96 : -0.68 - (low ? 0.2 : 0));
@@ -1153,7 +1210,7 @@ function Figure({
         {p.isPlayer && !ghost && <PalmFlame />}
         {p.isPlayer && wear.off && <Shield id={wear.off} ghost={ghost} />}
       </group>
-      <group ref={right} position={[FIGURE.arm.x, FIGURE.arm.y + bob, 0]} rotation={[-walkSwing, 0, -0.12]}>
+      <group name="weapon-arm" ref={right} position={[FIGURE.arm.x, FIGURE.arm.y + bob, 0]} rotation={[-walkSwing, 0, -0.12]}>
         <mesh position={[0, FIGURE.armMesh.y, 0]} castShadow={!ghost}>
           <AuthoredCharacterGeometry part="arm" size={FIGURE.arm.size} authored={authored} />
           <Mat color={chest} ghost={ghost} />
@@ -1162,7 +1219,8 @@ function Figure({
           <AuthoredCharacterGeometry part="hand" size={FIGURE.hand.size} authored={authored} />
           <Mat color={hands} ghost={ghost} />
         </mesh>
-        <group ref={held}>{p.isPlayer && wear.main && <Held id={wear.main} ghost={ghost} />}</group>
+        <group name="weapon-held" ref={held}>{p.isPlayer && wear.main && <Held id={wear.main} ghost={ghost} />}</group>
+        {p.isPlayer && !ghost && <><StowingWeapon form="dagger" /><StowingWeapon form="spear" /><StowingWeapon form="war_axe" /></>}
         {p.isPlayer && !ghost && <CraftingTool />}
         {p.isPlayer && !ghost && <GatheringTool />}
         {p.isPlayer && !ghost && <ConstructionTool />}
@@ -1238,10 +1296,12 @@ export function People() {
   const people = useGame((s) => s.snap.people);
   const selected = useGame((s) => s.selectedId);
   const wear = useGame((s) => s.snap.player?.wear ?? {});
+  const rareMain = useGame((s) => s.snap.player?.rares.find(r => r.uid === s.snap.player.wearRare.main)?.base);
+  const visibleWear = rareMain ? { ...wear, main: rareMain } : wear;
   return (
     <group>
       {people.map((p) => (
-        <Figure key={p.id} p={p} selected={selected === p.id} wear={p.isPlayer ? wear : {}} />
+        <Figure key={p.id} p={p} selected={selected === p.id} wear={p.isPlayer ? visibleWear : {}} />
       ))}
     </group>
   );
