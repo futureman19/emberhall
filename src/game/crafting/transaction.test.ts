@@ -3,6 +3,51 @@ import test from "node:test";
 import { commandCraft, commandCraftExact, RECIPES } from "../craft.ts";
 import { ITEM_FORM_CATALOG } from "./forms.ts";
 import { resolveExactRecipeSelection } from "./recipes.ts";
+import { resolveItemStats } from "./resolve.ts";
+
+for (const [id, amounts, damage, hitBonus, armor] of [
+  ["mace", [6, 2], 10.5, 1, 0],
+  ["war_hammer", [8, 3], 14.5, 1, 0],
+  ["quarterstaff", [5, 1], 7.5, 3, 0],
+  ["tower_shield", [6, 4, 2], 0, 0, 5.5],
+] as const) {
+  test(`pack II ${id}: exact identity, stats, debits, equipment and workmanship`, () => {
+    const world = createWorld(42);
+    if (id === "quarterstaff") standAtYard(world); else standAtForge(world);
+    world.player.skills.smithing = world.player.skills.carpentry = 100;
+    const form = ITEM_FORM_CATALOG[id];
+    assert.ok(form, `registered ${id}`);
+    const keys = id === "tower_shield" ? [CHOICE_IRON_INGOT, OAK_BOARD, SOUND_CLOTH]
+      : id === "quarterstaff" ? [CHOICE_IRONWOOD, SOUND_CLOTH] : [HIGHLAND_INGOT, OAK_BOARD];
+    const selections = form.roles.map((role, i) => {
+      assert.equal(role.amount, amounts[i]);
+      addResource(world.player.resources, keys[i]!, amounts[i]!);
+      return { role: role.role, key: keys[i]! };
+    });
+    const resolved = resolveExactRecipeSelection(id, selections);
+    assert.equal(resolved.recipe.id, id);
+    assert.equal(RECIPES.filter(r => r.exactRecipeId === id).length, 1);
+    withRoll(.5, () => commandCraftExact(world, id, selections));
+    assert.equal(world.player.rares.length, 1);
+    const item = world.player.rares[0]!;
+    assert.equal(item.formId, id); assert.equal(item.recipeId, id); assert.equal(item.base, id);
+    assert.equal(item.workmanship, "fine");
+    assert.deepEqual(item.resolvedStats, { damage, hitBonus, armor, skillBonuses: {}, slayerMultipliers: {} });
+    keys.forEach(key => assert.equal(resourceCount(world.player.resources, key), 0));
+    commandEquipRare(world, item.uid);
+    assert.equal(world.player.wearRare[id === "tower_shield" ? "off" : "main"], item.uid);
+    const before = structuredClone(world.player);
+    withRoll(.5, () => commandCraftExact(world, id, selections));
+    assert.deepEqual(world.player, before, "shortage is atomic");
+    const ordinary = resolveItemStats(form, { components: resolved.components, workmanship: "ordinary", inlays: [] }).stats;
+    const exceptional = resolveItemStats(form, { components: resolved.components, workmanship: "exceptional", inlays: [] }).stats;
+    assert.equal(exceptional.armor, ordinary.armor);
+    assert.equal(exceptional.damage - ordinary.damage, id === "tower_shield" ? 0 : 1);
+    assert.equal(exceptional.hitBonus - ordinary.hitBonus, id === "tower_shield" ? 0 : 2);
+    assert.throws(() => resolveExactRecipeSelection(id, selections.map((s, i) => i === 0 ? { ...s, key: SOUND_CLOTH } : s)));
+  });
+}
+
 
 for (const [id, edgeCount, hiltCount, damage, hit] of [
   ["dagger", 2, 1, 5.5, 2],

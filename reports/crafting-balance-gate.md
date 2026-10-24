@@ -6,10 +6,10 @@
 - All measured gates passed.
 
 ## Evidence
-- Legal combinations enumerated: **1,836,384**; cap violations: **0**.
+- Legal combinations enumerated: **2,513,760**; cap violations: **0**.
 - Max-skill bow workmanship on choice-grade inputs: ordinary 0.0%, fine 80.6%, exceptional 19.4%.
 - Max-skill sword workmanship on choice-grade inputs: ordinary 0.0%, fine 81.0%, exceptional 19.0%.
-- Representative save payload: **24,413 bytes**; largest Vault inscription: **779 bytes**.
+- Representative save payload: **24,511 bytes**; largest Vault inscription: **779 bytes**.
 - Desktop/mobile browser journey: **PASS**.
 
 ## Acquisition model
@@ -56,6 +56,10 @@ Deterministic 200-seed simulations use 1.5s per surveyed node plus 0.72s per suc
 - **dagger:** 96,768 legal combinations; max damage 12/12, hit 9/9, armor 0/0, local Fortune 0/5; 0 violations.
 - **spear:** 96,768 legal combinations; max damage 16/16, hit 11/11, armor 0/0, local Fortune 0/5; 0 violations.
 - **war_axe:** 96,768 legal combinations; max damage 20/20, hit 8/8, armor 0/0, local Fortune 0/5; 0 violations.
+- **mace:** 96,768 legal combinations; max damage 17/17, hit 8/8, armor 0/0, local Fortune 0/5; 0 violations.
+- **war_hammer:** 96,768 legal combinations; max damage 21/21, hit 8/8, armor 0/0, local Fortune 0/5; 0 violations.
+- **quarterstaff:** 27,648 legal combinations; max damage 14/14, hit 10/10, armor 0/0, local Fortune 0/5; 0 violations.
+- **tower_shield:** 456,192 legal combinations; max damage 0/0, hit 0/0, armor 7/7, local Fortune 5/5; 0 violations.
 
 ## Five representative items
 - **common:** an oak bow — damage 8, hit 0, armor 0.

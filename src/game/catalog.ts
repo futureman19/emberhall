@@ -172,6 +172,9 @@ export const ITEM_META: Record<
   spear: { label: "Spear", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 32, sell: 13, tags: ["metal", "blade", "weapon"] },
   war_axe: { label: "War axe", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 48, sell: 21, tags: ["metal", "blade", "weapon"] },
   mace: { label: "Mace", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 28, sell: 12, tags: ["metal", "weapon"] },
+  war_hammer: { label: "War hammer", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 52, sell: 23, tags: ["metal", "weapon"] },
+  quarterstaff: { label: "Quarterstaff", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 24, sell: 10, tags: ["wood", "weapon"] },
+  tower_shield: { label: "Tower shield", tool: false, slot: "off", fill: "var(--color-muted)", armor: 4, buy: 56, sell: 24, tags: ["metal", "armor"] },
   gauntlets: { label: "Gauntlets", tool: false, slot: "hands", fill: "var(--color-muted)", armor: 2, buy: 24, sell: 10, tags: ["metal", "armor"] },
   gorget: { label: "Gorget", tool: false, slot: "neck", fill: "var(--color-muted)", armor: 1, buy: 20, sell: 8, tags: ["metal", "armor"] },
   heater: { label: "Iron shield", tool: false, slot: "off", fill: "var(--color-muted)", armor: 4, buy: 32, sell: 14, tags: ["metal", "armor"] },
@@ -426,7 +429,7 @@ export function emptyLastGain(): Record<SkillId, number> {
 export function emptyPack(): Record<ItemId, number> {
   return {
     hatchet: 1, knife: 1, pick: 1, hoe: 1, fishing_rod: 1, log: 0, board: 0, ore: 0, ingot: 0, club: 0, shield: 0,
-    staff: 0, bow: 0, torch: 0, crate: 0, cap: 0, cuirass: 0, sword: 0, dagger: 0, spear: 0, war_axe: 0, mace: 0, gauntlets: 0, gorget: 0, heater: 0,
+    staff: 0, bow: 0, torch: 0, crate: 0, cap: 0, cuirass: 0, sword: 0, dagger: 0, spear: 0, war_axe: 0, mace: 0, war_hammer: 0, quarterstaff: 0, tower_shield: 0, gauntlets: 0, gorget: 0, heater: 0,
     rabbit_foot: 0, orc_tusk: 0,
     meat: 1, hide: 0, arrows: 12, bandage: 3, potion_heal: 0, potion_night: 0,
     tunic: 0, leather: 0, mail: 0, hood: 1, helm: 0, cloak: 0, gloves: 1, hose: 0, greaves: 0,

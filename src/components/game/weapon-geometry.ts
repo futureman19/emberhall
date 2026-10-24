@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Mesh, CylinderGeometry, ExtrudeGeometry, Shape, type BufferGeometry, type Object3D } from 'three';
+import { Mesh, BoxGeometry, CylinderGeometry, SphereGeometry, ExtrudeGeometry, Shape, type BufferGeometry, type Object3D } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 export const WEAPON_BOUNDS = {"knife_handle": [0.04, 0.16, 0.04], "knife_blade": [0.05, 0.22, 0.02], "sword_handle": [0.045, 0.22, 0.045], "sword_guard": [0.16, 0.04, 0.04], "sword_blade": [0.055, 0.46, 0.02], "club_handle": [0.055, 0.5, 0.055], "club_head": [0.12, 0.16, 0.12], "mace_handle": [0.045, 0.42, 0.045], "mace_head": [0.16, 0.16, 0.16], "staff_handle": [0.04, 0.9, 0.04], "staff_head": [0.1, 0.1, 0.1]} as const;
@@ -32,7 +32,20 @@ export function extractWeaponGeometry(scene: Object3D): Parts {
   }
 }
 /** Procedural two-material weapons. Origin is the grip; caller owns disposal. */
-export function createExactWeaponGeometry(id: 'dagger' | 'spear' | 'war_axe'): { hilt: BufferGeometry; edge: BufferGeometry } {
+export type ExactWeaponId = 'dagger' | 'spear' | 'war_axe' | 'mace' | 'war_hammer' | 'quarterstaff';
+export function createExactWeaponGeometry(id: ExactWeaponId): { hilt: BufferGeometry; edge: BufferGeometry } {
+  if (id === 'mace') return {
+    hilt: new CylinderGeometry(.026, .03, .5, 8),
+    edge: new SphereGeometry(.12, 8, 4).translate(0, .33, 0),
+  };
+  if (id === 'war_hammer') return {
+    hilt: new CylinderGeometry(.028, .034, .7, 8),
+    edge: new BoxGeometry(.34, .18, .16).translate(0, .45, 0),
+  };
+  if (id === 'quarterstaff') return {
+    hilt: new CylinderGeometry(.032, .032, 1.3, 10),
+    edge: new CylinderGeometry(.038, .038, .24, 10),
+  };
   const length = id === 'dagger' ? 0.16 : id === 'spear' ? 1.1 : 0.62;
   const radius = id === 'dagger' ? 0.023 : 0.028;
   const hilt = new CylinderGeometry(radius, radius, length, 8);

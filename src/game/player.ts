@@ -774,7 +774,7 @@ function huntNow(world: World, p: Person) {
   const mods = rareMods(world);
   // The weapon family teaches its own discipline: knives fence, bludgeons mace-fight.
   const main = effectiveMain(world);
-  const strikeSkill: SkillId = bow ? "archery" : main === "knife" ? "fencing" : main === "club" || main === "mace" ? "mace" : "swords";
+  const strikeSkill: SkillId = bow ? "archery" : main === "knife" ? "fencing" : main === "club" || main === "mace" || main === "war_hammer" || main === "quarterstaff" ? "mace" : "swords";
   const skill = effSkill(world, strikeSkill);
   const anatomy = effSkill(world, "anatomy");
   const tech = armedTechniqueFor(world);

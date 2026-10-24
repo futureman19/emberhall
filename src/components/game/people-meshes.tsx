@@ -37,6 +37,7 @@ import { getHealingFx, workPitch } from "@/game/player";
 import { attackPhase, bowDrawAmount, meleeSwingPitch } from "@/game/combat-animation";
 import { windupGlow } from "@/game/magery-animation";
 import { useGame } from "@/game/store";
+import { TowerShield } from "./tower-shield";
 import type { ItemId, Person, WearSlot } from "@/game/types";
 
 function groundAt(x: number, z: number, story = 0) {
@@ -259,6 +260,7 @@ function Torch({ ghost }: { ghost: boolean }) {
 }
 
 export function Shield({ id, ghost }: { id: ItemId; ghost: boolean }) {
+  if (id === "tower_shield") return <TowerShield ghost={ghost} />;
   const iron = id === "heater";
   return (
     <group position={[-0.02, -0.28, 0.08]} rotation={[0.2, 0.15, -0.35]}>
@@ -281,6 +283,7 @@ export function Shield({ id, ghost }: { id: ItemId; ghost: boolean }) {
 export function Held({ id, ghost }: { id: ItemId; ghost: boolean }) {
   const item = useGame(s => s.snap.player.rares.find(r => r.uid === s.snap.player.wearRare.main && r.base === id));
   if (id === "dagger" || id === "spear" || id === "war_axe") return <ForgedWeapon id={id} ghost={ghost} item={item} />;
+  if (id === "war_hammer" || id === "quarterstaff" || (id === "mace" && item?.formId === "mace")) return <ForgedWeapon id={id} ghost={ghost} item={item} />;
   if (id === "hatchet") return <Hatchet ghost={ghost} />;
   if (id === "pick") return <Pick ghost={ghost} />;
   if (id === "hoe") return <Hoe ghost={ghost} />;
@@ -1240,7 +1243,8 @@ export function People() {
   const selected = useGame((s) => s.selectedId);
   const baseWear = useGame((s) => s.snap.player?.wear ?? {});
   const rareMain = useGame(s => s.snap.player.rares.find(r => r.uid === s.snap.player.wearRare.main)?.base);
-  const wear = rareMain ? { ...baseWear, main: rareMain } : baseWear;
+  const rareOff = useGame(s => s.snap.player.rares.find(r => r.uid === s.snap.player.wearRare.off)?.base);
+  const wear = { ...baseWear, main: rareMain ?? baseWear.main, off: rareOff ?? baseWear.off };
   return (
     <group>
       {people.map((p) => (

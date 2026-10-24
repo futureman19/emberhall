@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {Group} from 'three';
 import {extractWeaponGeometry, WEAPON_BOUNDS, createExactWeaponGeometry} from './weapon-geometry.ts';
-for (const [form, height] of [['dagger', 0.42], ['spear', 1.4], ['war_axe', 0.8]] as const) {
+for (const [form, height] of [['dagger', 0.42], ['spear', 1.4], ['war_axe', 0.8], ['mace', 0.7], ['war_hammer', 0.89], ['quarterstaff', 1.3]] as const) {
  test(`parametric ${form} has finite edge and hilt, a centered grip and distinct envelope`, () => {
   const parts = createExactWeaponGeometry(form);
   assert.deepEqual(Object.keys(parts), ['hilt', 'edge']);

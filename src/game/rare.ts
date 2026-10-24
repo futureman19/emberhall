@@ -389,6 +389,8 @@ export function weaponDmg(id: ItemId | null): number {
   if (id === "war_axe") return 12;
   if (id === "sword") return 10;
   if (id === "mace") return 9;
+  if (id === "war_hammer") return 13;
+  if (id === "quarterstaff") return 6;
   if (id === "bow") return 8;
   if (id === "club") return 7;
   if (id === "hatchet") return 6;

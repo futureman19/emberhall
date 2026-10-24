@@ -32,7 +32,7 @@ export const GEM_CLARITIES = Object.freeze([
   "perfect",
 ] as const satisfies readonly GemClarity[]);
 
-const ITEM_FORM_IDS = ["bow", "sword", "shield", "helm", "mail", "boots", "gauntlets", "greaves", "leather", "hood", "gloves", "hose", "charm", "ring", "dagger", "spear", "war_axe"] as const satisfies readonly ItemFormId[];
+const ITEM_FORM_IDS = ["bow", "sword", "shield", "helm", "mail", "boots", "gauntlets", "greaves", "leather", "hood", "gloves", "hose", "charm", "ring", "dagger", "spear", "war_axe", "mace", "war_hammer", "quarterstaff", "tower_shield"] as const satisfies readonly ItemFormId[];
 const ITEM_CLASSES = ["weapon", "armor", "jewelry", "tool", "placeable"] as const satisfies readonly ItemClass[];
 const MATERIAL_ROLES = [
   "body",
@@ -55,6 +55,10 @@ export const ITEM_FORM_IDENTITY = Object.freeze({
   dagger: Object.freeze({ baseItem: "dagger", itemClass: "weapon" }),
   spear: Object.freeze({ baseItem: "spear", itemClass: "weapon" }),
   war_axe: Object.freeze({ baseItem: "war_axe", itemClass: "weapon" }),
+  mace: Object.freeze({ baseItem: "mace", itemClass: "weapon" }),
+  war_hammer: Object.freeze({ baseItem: "war_hammer", itemClass: "weapon" }),
+  quarterstaff: Object.freeze({ baseItem: "quarterstaff", itemClass: "weapon" }),
+  tower_shield: Object.freeze({ baseItem: "tower_shield", itemClass: "armor" }),
   shield: Object.freeze({ baseItem: "shield", itemClass: "armor" }),
   helm: Object.freeze({ baseItem: "helm", itemClass: "armor" }),
   mail: Object.freeze({ baseItem: "mail", itemClass: "armor" }),
@@ -396,6 +400,31 @@ const WAR_AXE_FORM_DEFINITION = {
   caps: { damage: 20, hitBonus: 8, armor: 0, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
 } as const satisfies ItemFormDefinition;
 
+const MACE_FORM_DEFINITION = {
+  ...DAGGER_FORM_DEFINITION, id: "mace", baseItem: "mace", label: "Mace",
+  roles: [
+    { ...DAGGER_FORM_DEFINITION.roles[0], role: "body", amount: 6 },
+    { ...DAGGER_FORM_DEFINITION.roles[1], amount: 2 },
+  ],
+  baseStats: { damage: 9, hitBonus: 0, armor: 0, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 17, hitBonus: 8, armor: 0, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+} as const satisfies ItemFormDefinition;
+const WAR_HAMMER_FORM_DEFINITION = {
+  ...MACE_FORM_DEFINITION, id: "war_hammer", baseItem: "war_hammer", label: "War hammer",
+  roles: [{ ...MACE_FORM_DEFINITION.roles[0], amount: 8 }, { ...MACE_FORM_DEFINITION.roles[1], amount: 3 }],
+  baseStats: { damage: 13, hitBonus: 0, armor: 0, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 21, hitBonus: 8, armor: 0, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+} as const satisfies ItemFormDefinition;
+const QUARTERSTAFF_FORM_DEFINITION = {
+  ...MACE_FORM_DEFINITION, id: "quarterstaff", baseItem: "quarterstaff", label: "Quarterstaff",
+  roles: [
+    { role: "body", amount: 5, accepts: { qualityType: "grade", kinds: ["timber"], forms: ["log", "board"] }, contribution: "primary" },
+    { role: "binding", amount: 1, accepts: { qualityType: "grade", kinds: ["fiber"], forms: ["cloth"] }, contribution: "secondary" },
+  ],
+  baseStats: { damage: 6, hitBonus: 2, armor: 0, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 14, hitBonus: 10, armor: 0, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
+} as const satisfies ItemFormDefinition;
+
 const SHIELD_FORM_DEFINITION = {
   id: "shield",
   recipeVersion: 1,
@@ -426,6 +455,13 @@ const SHIELD_FORM_DEFINITION = {
   caps: { damage: 0, hitBonus: 0, armor: 5, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
   allowedGemFamilies: ["fortune", "protection"],
   maxInlays: 1,
+} as const satisfies ItemFormDefinition;
+
+const TOWER_SHIELD_FORM_DEFINITION = {
+  ...SHIELD_FORM_DEFINITION, id: "tower_shield", baseItem: "tower_shield", label: "Tower shield",
+  roles: [{ ...SHIELD_FORM_DEFINITION.roles[0], amount: 6 }, { ...SHIELD_FORM_DEFINITION.roles[1], amount: 4 }, { ...SHIELD_FORM_DEFINITION.roles[2], amount: 2 }],
+  baseStats: { damage: 0, hitBonus: 0, armor: 4, skillBonuses: {}, slayerMultipliers: {} },
+  caps: { damage: 0, hitBonus: 0, armor: 7, skillBonusPerSkill: 5, slayerMultiplier: 1.5 },
 } as const satisfies ItemFormDefinition;
 
 const HELM_FORM_DEFINITION = {
@@ -664,7 +700,7 @@ const HOSE_FORM_DEFINITION = {
 } as const satisfies ItemFormDefinition;
 
 /** The art a weapon schools its wielder in when a mastery gem is set into it. */
-export const FORM_GOVERNING_SKILL = deepFreeze({ sword: "swords", dagger: "swords", spear: "swords", war_axe: "swords", bow: "archery" } as Partial<Record<ItemFormId, SkillId>>);
+export const FORM_GOVERNING_SKILL = deepFreeze({ sword: "swords", dagger: "swords", spear: "swords", war_axe: "swords", mace: "mace", war_hammer: "mace", quarterstaff: "mace", bow: "archery" } as Partial<Record<ItemFormId, SkillId>>);
 
 const CHARM_FORM_DEFINITION = {
   id: "charm",
@@ -718,7 +754,7 @@ const RING_FORM_DEFINITION = {
   maxInlays: 1,
 } as const satisfies ItemFormDefinition;
 
-export const ITEM_FORM_CATALOG = buildItemFormCatalog([BOW_FORM_DEFINITION, SWORD_FORM_DEFINITION, SHIELD_FORM_DEFINITION, HELM_FORM_DEFINITION, MAIL_FORM_DEFINITION, BOOTS_FORM_DEFINITION, GAUNTLETS_FORM_DEFINITION, GREAVES_FORM_DEFINITION, LEATHER_FORM_DEFINITION, HOOD_FORM_DEFINITION, GLOVES_FORM_DEFINITION, HOSE_FORM_DEFINITION, CHARM_FORM_DEFINITION, RING_FORM_DEFINITION, DAGGER_FORM_DEFINITION, SPEAR_FORM_DEFINITION, WAR_AXE_FORM_DEFINITION]);
+export const ITEM_FORM_CATALOG = buildItemFormCatalog([BOW_FORM_DEFINITION, SWORD_FORM_DEFINITION, SHIELD_FORM_DEFINITION, HELM_FORM_DEFINITION, MAIL_FORM_DEFINITION, BOOTS_FORM_DEFINITION, GAUNTLETS_FORM_DEFINITION, GREAVES_FORM_DEFINITION, LEATHER_FORM_DEFINITION, HOOD_FORM_DEFINITION, GLOVES_FORM_DEFINITION, HOSE_FORM_DEFINITION, CHARM_FORM_DEFINITION, RING_FORM_DEFINITION, DAGGER_FORM_DEFINITION, SPEAR_FORM_DEFINITION, WAR_AXE_FORM_DEFINITION, MACE_FORM_DEFINITION, WAR_HAMMER_FORM_DEFINITION, QUARTERSTAFF_FORM_DEFINITION, TOWER_SHIELD_FORM_DEFINITION]);
 export const DAGGER_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.dagger;
 export const SPEAR_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.spear;
 export const WAR_AXE_FORM: ItemFormDefinition = ITEM_FORM_CATALOG.war_axe;

@@ -224,6 +224,8 @@ export function CraftGump() {
         />
       </div>
         {(["dagger", "spear", "war_axe"] as const).map(id => <ForgedWeaponForm key={id} id={id} rows={resourceRows} atForge={here.includes("forge")} skill={skills?.smithing ?? 0} />)}
+        {(["mace", "war_hammer", "tower_shield"] as const).map(id => <BluntForm key={id} id={id} rows={resourceRows} atStation={here.includes("forge")} skill={skills?.smithing ?? 0} />)}
+        <BluntForm id="quarterstaff" rows={resourceRows} atStation={here.includes("bench")} skill={skills?.carpentry ?? 0} />
       <div className="mt-2 space-y-2" aria-label="Advanced shield work">
         <p className="font-display text-xs tracking-wider text-gold uppercase">Form · Shield</p>
         <MaterialSelector role={plateRole} rows={resourceRows} selected={plate} onSelect={setPlate} group="shield-plate" />
@@ -609,3 +611,4 @@ function RecipeRow({
     </div>
   );
 }
+import { BluntForm } from "./crafting/blunt-form";
