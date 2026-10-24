@@ -15,6 +15,7 @@ import { tickZones, zonePersonSlowAt } from "./zones.ts";
 import { completeObjective, log, revealAround } from "./world.ts";
 import { emitNpcInteractionFx } from "./npc-interaction-animation.ts";
 import { applyKeepStory } from "./keep-story.ts";
+import { syncMonsterAudio } from "./emberdeep-audio.ts";
 import type { Person, Speed, World } from "./types.ts";
 
 const WALK_SPEED = 2.6;
@@ -139,6 +140,7 @@ function followPath(world: World, p: Person, dt: number): "idle" | "moving" | "s
 }
 
 export function tickWorld(world: World, realDt: number) {
+  syncMonsterAudio(world);
   if (world.speed === 0) return;
   const dt = Math.min(realDt, 0.1) * world.speed;
   world.hour += dt / SECONDS_PER_HOUR;
@@ -195,6 +197,7 @@ export function tickWorld(world: World, realDt: number) {
   tickCampfires(world);
   tickPets(world, dt);
   updateSpellStatuses(world);
+  syncMonsterAudio(world);
   void COURT;
   void GATE;
   void tileOf;

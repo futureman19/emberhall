@@ -23,6 +23,11 @@ export function toggleSfx() {
   } catch {
     /* ignore */
   }
+  if (mute) {
+    for (const group of bags.values()) for (const audio of group) audio.pause();
+    rainEl?.pause();
+    dungeonEl?.pause();
+  }
   return mute;
 }
 
@@ -76,9 +81,37 @@ export type SfxId =
   | "spell_necromancy"
   | "spell_resurrect"
   | "spell_summonelemental"
-  | "spell_polymorph";
+  | "spell_polymorph"
+  | "slag_golem_aggro"
+  | "slag_golem_attack"
+  | "slag_golem_hit"
+  | "slag_golem_death"
+  | "embercrawler_aggro"
+  | "embercrawler_attack"
+  | "embercrawler_hit"
+  | "embercrawler_death"
+  | "gloomwraith_aggro"
+  | "gloomwraith_attack"
+  | "gloomwraith_hit"
+  | "gloomwraith_death"
+  | "emberdeep_ambience"
+  | "emberdeep_door";
 
-const SRC: Record<SfxId, string> = {
+export const SFX_SOURCES: Record<SfxId, string> = {
+  slag_golem_aggro: "/audio/sfx/slag-golem-aggro.mp3",
+  slag_golem_attack: "/audio/sfx/slag-golem-attack.mp3",
+  slag_golem_hit: "/audio/sfx/slag-golem-hit.mp3",
+  slag_golem_death: "/audio/sfx/slag-golem-death.mp3",
+  embercrawler_aggro: "/audio/sfx/embercrawler-aggro.mp3",
+  embercrawler_attack: "/audio/sfx/embercrawler-attack.mp3",
+  embercrawler_hit: "/audio/sfx/embercrawler-hit.mp3",
+  embercrawler_death: "/audio/sfx/embercrawler-death.mp3",
+  gloomwraith_aggro: "/audio/sfx/gloomwraith-aggro.mp3",
+  gloomwraith_attack: "/audio/sfx/gloomwraith-attack.mp3",
+  gloomwraith_hit: "/audio/sfx/gloomwraith-hit.mp3",
+  gloomwraith_death: "/audio/sfx/gloomwraith-death.mp3",
+  emberdeep_ambience: "/audio/sfx/emberdeep-ambience.mp3",
+  emberdeep_door: "/audio/sfx/emberdeep-door.mp3",
   chop: "/audio/sfx/chop.mp3",
   mine: "/audio/sfx/mine.mp3",
   hunt: "/audio/sfx/hunt.mp3",
@@ -139,7 +172,7 @@ function bag(id: SfxId) {
   let b = bags.get(id);
   if (!b) {
     b = Array.from({ length: POOL }, () => {
-      const a = new Audio(SRC[id]);
+      const a = new Audio(SFX_SOURCES[id]);
       a.preload = "auto";
       return a;
     });
@@ -150,7 +183,7 @@ function bag(id: SfxId) {
 }
 
 export function warmSfx() {
-  (Object.keys(SRC) as SfxId[]).forEach((id) => bag(id));
+  (Object.keys(SFX_SOURCES) as SfxId[]).forEach((id) => bag(id));
 }
 
 export function playSfx(id: SfxId, vol = 0.5) {
@@ -170,6 +203,45 @@ export function playSfx(id: SfxId, vol = 0.5) {
 }
 
 /* --- Rain loop: one long buffer, volume rides the actual rainfall. --- */
+
+let dungeonEl: HTMLAudioElement | null = null;
+let dungeonPending = false;
+/** One reusable bed; a blocked play is not retried until the next user gesture. */
+export function setDungeonAmbience(inside: boolean) {
+  if (typeof Audio === "undefined") return;
+  const active = inside && !sfxMuted();
+  if (!active) {
+    dungeonEl?.pause();
+    return;
+  }
+  dungeonEl ??= new Audio(SFX_SOURCES.emberdeep_ambience);
+  dungeonEl.loop = true;
+  dungeonEl.volume = 0.22;
+  if (!dungeonEl.paused || dungeonPending) return;
+  dungeonPending = true;
+  dungeonEl
+    .play()
+    .then(() => {
+      dungeonPending = false;
+    })
+    .catch((error: unknown) => {
+      if (
+        typeof window === "undefined" ||
+        !(error instanceof DOMException) ||
+        error.name !== "NotAllowedError"
+      ) {
+        dungeonPending = false;
+        return;
+      }
+      const retry = () => {
+        dungeonPending = false;
+        window.removeEventListener("pointerdown", retry);
+        window.removeEventListener("keydown", retry);
+      };
+      window.addEventListener("pointerdown", retry, { once: true });
+      window.addEventListener("keydown", retry, { once: true });
+    });
+}
 
 let rainEl: HTMLAudioElement | null = null;
 let rainVol = 0;

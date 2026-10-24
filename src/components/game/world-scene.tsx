@@ -1969,7 +1969,7 @@ export function WorldScene() {
       <Lighting shadows={graphics.shadows} />
       <GraphicsProbe />
       {!underground && <Sky />}
-      {!underground && <WeatherFx />}
+      <WeatherFx />
       {!underground && <Horizon treeReduction={graphics.horizonTreeReduction} />}
       <EmberdeepScene />
       <Terrain />

@@ -166,6 +166,7 @@
     "src/game/digging.ts",
     "src/game/ecology.ts",
     "src/game/embercrawler.ts",
+    "src/game/emberdeep-audio.ts",
     "src/game/emberdeep-monsters.ts",
     "src/game/emberdeep.ts",
     "src/game/emberhall-pond.ts",
@@ -64417,13 +64418,13 @@
       "canonicalId": "src/components/game/weather-fx.tsx#WeatherAudio",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/weather-fx.tsx:9"
+        "src/components/game/weather-fx.tsx:11"
       ],
       "sourceNames": [
         "WeatherAudio"
       ],
       "rendererLocations": [
-        "src/components/game/weather-fx.tsx:9"
+        "src/components/game/weather-fx.tsx:11"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -64483,13 +64484,13 @@
       "canonicalId": "src/components/game/weather-fx.tsx#WeatherFx",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/weather-fx.tsx:19"
+        "src/components/game/weather-fx.tsx:32"
       ],
       "sourceNames": [
         "WeatherFx"
       ],
       "rendererLocations": [
-        "src/components/game/weather-fx.tsx:19"
+        "src/components/game/weather-fx.tsx:32"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -76605,6 +76606,282 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.sfx=embercrawler_aggro",
+      "canonicalId": "src/game/craft.ts#Recipe.sfx=embercrawler_aggro",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:65"
+      ],
+      "sourceNames": [
+        "Recipe.sfx"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:65"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.sfx=embercrawler_attack",
+      "canonicalId": "src/game/craft.ts#Recipe.sfx=embercrawler_attack",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:65"
+      ],
+      "sourceNames": [
+        "Recipe.sfx"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:65"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.sfx=embercrawler_death",
+      "canonicalId": "src/game/craft.ts#Recipe.sfx=embercrawler_death",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:65"
+      ],
+      "sourceNames": [
+        "Recipe.sfx"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:65"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.sfx=embercrawler_hit",
+      "canonicalId": "src/game/craft.ts#Recipe.sfx=embercrawler_hit",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:65"
+      ],
+      "sourceNames": [
+        "Recipe.sfx"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:65"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.sfx=emberdeep_ambience",
+      "canonicalId": "src/game/craft.ts#Recipe.sfx=emberdeep_ambience",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:65"
+      ],
+      "sourceNames": [
+        "Recipe.sfx"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:65"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.sfx=emberdeep_door",
+      "canonicalId": "src/game/craft.ts#Recipe.sfx=emberdeep_door",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:65"
+      ],
+      "sourceNames": [
+        "Recipe.sfx"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:65"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/craft.ts#Recipe.sfx=fire",
       "canonicalId": "src/game/craft.ts#Recipe.sfx=fire",
       "family": "state-vocabulary",
@@ -76743,6 +77020,190 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.sfx=gloomwraith_aggro",
+      "canonicalId": "src/game/craft.ts#Recipe.sfx=gloomwraith_aggro",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:65"
+      ],
+      "sourceNames": [
+        "Recipe.sfx"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:65"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.sfx=gloomwraith_attack",
+      "canonicalId": "src/game/craft.ts#Recipe.sfx=gloomwraith_attack",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:65"
+      ],
+      "sourceNames": [
+        "Recipe.sfx"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:65"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.sfx=gloomwraith_death",
+      "canonicalId": "src/game/craft.ts#Recipe.sfx=gloomwraith_death",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:65"
+      ],
+      "sourceNames": [
+        "Recipe.sfx"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:65"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.sfx=gloomwraith_hit",
+      "canonicalId": "src/game/craft.ts#Recipe.sfx=gloomwraith_hit",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:65"
+      ],
+      "sourceNames": [
+        "Recipe.sfx"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:65"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/craft.ts#Recipe.sfx=hunt",
       "canonicalId": "src/game/craft.ts#Recipe.sfx=hunt",
       "family": "state-vocabulary",
@@ -76876,6 +77337,190 @@
       "status": "inventoried",
       "evidence": [
         "src/game/craft.ts:64"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.sfx=slag_golem_aggro",
+      "canonicalId": "src/game/craft.ts#Recipe.sfx=slag_golem_aggro",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:65"
+      ],
+      "sourceNames": [
+        "Recipe.sfx"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:65"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.sfx=slag_golem_attack",
+      "canonicalId": "src/game/craft.ts#Recipe.sfx=slag_golem_attack",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:65"
+      ],
+      "sourceNames": [
+        "Recipe.sfx"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:65"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.sfx=slag_golem_death",
+      "canonicalId": "src/game/craft.ts#Recipe.sfx=slag_golem_death",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:65"
+      ],
+      "sourceNames": [
+        "Recipe.sfx"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:65"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/craft.ts#Recipe.sfx=slag_golem_hit",
+      "canonicalId": "src/game/craft.ts#Recipe.sfx=slag_golem_hit",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/craft.ts:65"
+      ],
+      "sourceNames": [
+        "Recipe.sfx"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/craft.ts:65"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/craft.ts:65"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -109858,6 +110503,282 @@
       "status": "inventoried",
       "evidence": [
         "src/game/ecology.ts:10"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/emberdeep-audio.ts#Snapshot.dead=false",
+      "canonicalId": "src/game/emberdeep-audio.ts#Snapshot.dead=false",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/emberdeep-audio.ts:25"
+      ],
+      "sourceNames": [
+        "Snapshot.dead"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/emberdeep-audio.ts:25"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/emberdeep-audio.ts:25"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/emberdeep-audio.ts#Snapshot.dead=true",
+      "canonicalId": "src/game/emberdeep-audio.ts#Snapshot.dead=true",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/emberdeep-audio.ts:25"
+      ],
+      "sourceNames": [
+        "Snapshot.dead"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/emberdeep-audio.ts:25"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/emberdeep-audio.ts:25"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/emberdeep-audio.ts#Snapshot.fighting=false",
+      "canonicalId": "src/game/emberdeep-audio.ts#Snapshot.fighting=false",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/emberdeep-audio.ts:25"
+      ],
+      "sourceNames": [
+        "Snapshot.fighting"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/emberdeep-audio.ts:25"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/emberdeep-audio.ts:25"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/emberdeep-audio.ts#Snapshot.fighting=true",
+      "canonicalId": "src/game/emberdeep-audio.ts#Snapshot.fighting=true",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/emberdeep-audio.ts:25"
+      ],
+      "sourceNames": [
+        "Snapshot.fighting"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/emberdeep-audio.ts:25"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/emberdeep-audio.ts:25"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/emberdeep-audio.ts#Snapshot.strike=false",
+      "canonicalId": "src/game/emberdeep-audio.ts#Snapshot.strike=false",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/emberdeep-audio.ts:25"
+      ],
+      "sourceNames": [
+        "Snapshot.strike"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/emberdeep-audio.ts:25"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/emberdeep-audio.ts:25"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/emberdeep-audio.ts#Snapshot.strike=true",
+      "canonicalId": "src/game/emberdeep-audio.ts#Snapshot.strike=true",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/emberdeep-audio.ts:25"
+      ],
+      "sourceNames": [
+        "Snapshot.strike"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/emberdeep-audio.ts:25"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/emberdeep-audio.ts:25"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -258423,7 +259344,7 @@
       "canonicalId": "cast",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -258469,7 +259390,7 @@
       "canonicalId": "chop",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -258515,7 +259436,7 @@
       "canonicalId": "die",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -258557,11 +259478,287 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "vocabulary/src/game/vale-sfx.ts#SfxId:embercrawler_aggro",
+      "canonicalId": "embercrawler_aggro",
+      "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
+      "catalogSources": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "sourceNames": [
+        "SfxId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/vale-sfx.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/vale-sfx.ts#SfxId:embercrawler_attack",
+      "canonicalId": "embercrawler_attack",
+      "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
+      "catalogSources": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "sourceNames": [
+        "SfxId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/vale-sfx.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/vale-sfx.ts#SfxId:embercrawler_death",
+      "canonicalId": "embercrawler_death",
+      "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
+      "catalogSources": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "sourceNames": [
+        "SfxId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/vale-sfx.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/vale-sfx.ts#SfxId:embercrawler_hit",
+      "canonicalId": "embercrawler_hit",
+      "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
+      "catalogSources": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "sourceNames": [
+        "SfxId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/vale-sfx.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/vale-sfx.ts#SfxId:emberdeep_ambience",
+      "canonicalId": "emberdeep_ambience",
+      "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
+      "catalogSources": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "sourceNames": [
+        "SfxId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/vale-sfx.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/vale-sfx.ts#SfxId:emberdeep_door",
+      "canonicalId": "emberdeep_door",
+      "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
+      "catalogSources": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "sourceNames": [
+        "SfxId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/vale-sfx.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "vocabulary/src/game/vale-sfx.ts#SfxId:fire",
       "canonicalId": "fire",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -258607,7 +259804,7 @@
       "canonicalId": "fizzle",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -258653,7 +259850,7 @@
       "canonicalId": "gate",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -258695,11 +259892,195 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "vocabulary/src/game/vale-sfx.ts#SfxId:gloomwraith_aggro",
+      "canonicalId": "gloomwraith_aggro",
+      "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
+      "catalogSources": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "sourceNames": [
+        "SfxId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/vale-sfx.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/vale-sfx.ts#SfxId:gloomwraith_attack",
+      "canonicalId": "gloomwraith_attack",
+      "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
+      "catalogSources": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "sourceNames": [
+        "SfxId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/vale-sfx.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/vale-sfx.ts#SfxId:gloomwraith_death",
+      "canonicalId": "gloomwraith_death",
+      "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
+      "catalogSources": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "sourceNames": [
+        "SfxId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/vale-sfx.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/vale-sfx.ts#SfxId:gloomwraith_hit",
+      "canonicalId": "gloomwraith_hit",
+      "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
+      "catalogSources": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "sourceNames": [
+        "SfxId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/vale-sfx.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "vocabulary/src/game/vale-sfx.ts#SfxId:hunt",
       "canonicalId": "hunt",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -258745,7 +260126,7 @@
       "canonicalId": "loot",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -258791,7 +260172,7 @@
       "canonicalId": "mine",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -258833,11 +260214,195 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "vocabulary/src/game/vale-sfx.ts#SfxId:slag_golem_aggro",
+      "canonicalId": "slag_golem_aggro",
+      "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
+      "catalogSources": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "sourceNames": [
+        "SfxId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/vale-sfx.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/vale-sfx.ts#SfxId:slag_golem_attack",
+      "canonicalId": "slag_golem_attack",
+      "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
+      "catalogSources": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "sourceNames": [
+        "SfxId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/vale-sfx.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/vale-sfx.ts#SfxId:slag_golem_death",
+      "canonicalId": "slag_golem_death",
+      "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
+      "catalogSources": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "sourceNames": [
+        "SfxId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/vale-sfx.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/vale-sfx.ts#SfxId:slag_golem_hit",
+      "canonicalId": "slag_golem_hit",
+      "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
+      "catalogSources": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "sourceNames": [
+        "SfxId"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/vale-sfx.ts:34"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/vale-sfx.ts:34"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "vocabulary/src/game/vale-sfx.ts#SfxId:smith",
       "canonicalId": "smith",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -258883,7 +260448,7 @@
       "canonicalId": "spark",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -258929,7 +260494,7 @@
       "canonicalId": "spell_bless",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -258975,7 +260540,7 @@
       "canonicalId": "spell_blizzard",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259021,7 +260586,7 @@
       "canonicalId": "spell_chainlightning",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259067,7 +260632,7 @@
       "canonicalId": "spell_cure",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259113,7 +260678,7 @@
       "canonicalId": "spell_curse",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259159,7 +260724,7 @@
       "canonicalId": "spell_earthquake",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259205,7 +260770,7 @@
       "canonicalId": "spell_fireball",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259251,7 +260816,7 @@
       "canonicalId": "spell_fireblast",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259297,7 +260862,7 @@
       "canonicalId": "spell_flamewall",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259343,7 +260908,7 @@
       "canonicalId": "spell_flash",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259389,7 +260954,7 @@
       "canonicalId": "spell_fly",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259435,7 +261000,7 @@
       "canonicalId": "spell_gate",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259481,7 +261046,7 @@
       "canonicalId": "spell_heal",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259527,7 +261092,7 @@
       "canonicalId": "spell_invisibility",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259573,7 +261138,7 @@
       "canonicalId": "spell_ironwood",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259619,7 +261184,7 @@
       "canonicalId": "spell_jump",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259665,7 +261230,7 @@
       "canonicalId": "spell_leech",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259711,7 +261276,7 @@
       "canonicalId": "spell_lightning",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259757,7 +261322,7 @@
       "canonicalId": "spell_magicarrow",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259803,7 +261368,7 @@
       "canonicalId": "spell_mark",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259849,7 +261414,7 @@
       "canonicalId": "spell_meteor",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259895,7 +261460,7 @@
       "canonicalId": "spell_mirrorimage",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259941,7 +261506,7 @@
       "canonicalId": "spell_naturesfury",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -259987,7 +261552,7 @@
       "canonicalId": "spell_necromancy",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -260033,7 +261598,7 @@
       "canonicalId": "spell_nightsight",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -260079,7 +261644,7 @@
       "canonicalId": "spell_paralyze",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -260125,7 +261690,7 @@
       "canonicalId": "spell_poison",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -260171,7 +261736,7 @@
       "canonicalId": "spell_polymorph",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -260217,7 +261782,7 @@
       "canonicalId": "spell_recall",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -260263,7 +261828,7 @@
       "canonicalId": "spell_resurrect",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -260309,7 +261874,7 @@
       "canonicalId": "spell_sanctuary",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -260355,7 +261920,7 @@
       "canonicalId": "spell_sleep",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -260401,7 +261966,7 @@
       "canonicalId": "spell_stonewall",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -260447,7 +262012,7 @@
       "canonicalId": "spell_summon",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -260493,7 +262058,7 @@
       "canonicalId": "spell_summonelemental",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -260539,7 +262104,7 @@
       "canonicalId": "spell_tarpit",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -260585,7 +262150,7 @@
       "canonicalId": "spell_teleport",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -260631,7 +262196,7 @@
       "canonicalId": "spell_thornsnare",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
@@ -260677,7 +262242,7 @@
       "canonicalId": "thunder",
       "family": "vocabulary/src/game/vale-sfx.ts#SfxId",
       "catalogSources": [
-        "src/game/vale-sfx.ts:29"
+        "src/game/vale-sfx.ts:34"
       ],
       "sourceNames": [
         "SfxId"
