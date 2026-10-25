@@ -30,7 +30,7 @@ try {
   await page.waitForTimeout(1500);
   const press=async loc=>mobile?loc.tap():loc.click();
   const steps=[];
-  for(const [id,label,recipe,product] of [['smith_forge',"Smith's forge",'Smelt ore','ingot'],['loom','Loom','Hood','hood'],['alchemy_bench','Alchemy bench','Heal potion','potion_heal']]) {
+  for(const [id,label,recipe,product] of [['smith_working_forge',"Smith's forge",'Smelt ore','ingot'],['loom','Loom','Hood','hood'],['alchemy_bench','Alchemy bench','Heal potion','potion_heal']]) {
    await page.evaluate(()=>window.__ember.useGame.setState({panel:'none',openCraft:false}));
    await press(page.getByRole('button',{name:'Hold',exact:true}));
    await page.getByPlaceholder('Floor, wall, door…').fill(label);

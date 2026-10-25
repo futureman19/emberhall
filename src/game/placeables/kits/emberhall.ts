@@ -194,7 +194,7 @@ export const EMBERHALL_KIT: PlaceableDefinition[] = [
     fn: "craftStation",
   }),
   piece({
-    id: "smith_forge",
+    id: "smith_working_forge",
     category: "work",
     label: "Smith's forge",
     description: "A coal forge and anvil for metal tools, weapons and armor.",

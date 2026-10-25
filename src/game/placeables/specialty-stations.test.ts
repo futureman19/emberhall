@@ -21,7 +21,7 @@ function fixture() {
 }
 
 for (const [id, station, recipe, product] of [
-  ["smith_forge", "forge", "smelt", "ingot"],
+  ["smith_working_forge", "forge", "smelt", "ingot"],
   ["loom", "loom", "sew_hood", "hood"],
   ["alchemy_bench", "alchemy", "potion_heal", "potion_heal"],
 ] as const) {
