@@ -3,6 +3,8 @@ import type { FaunaKind } from "@/game/types";
 /** Exhaustive worldwide mapping; no region, seed, task or owner filtering. */
 export const FAUNA_ART_URLS = {
   slag_golem: "/art/lanternwood/fauna-slag_golem.glb",
+  embercrawler: "/art/lanternwood/fauna-embercrawler.glb",
+  gloomwraith: "/art/lanternwood/fauna-gloomwraith.glb",
   hare: "/art/lanternwood/fauna-hare.glb",
   hart: "/art/lanternwood/fauna-hart.glb",
   wolf: "/art/lanternwood/fauna-wolf.glb",

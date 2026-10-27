@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useGame } from "@/game/store";
 import * as THREE from "three";
-import { EMBERDEEP_BOUNDS, EMBERDEEP_ENTRY, EMBERDEEP_EXIT, EMBERDEEP_GATE, EMBERDEEP_ROOMS, emberdeepFloor, inEmberdeep } from "@/game/emberdeep";
+import { EMBERDEEP_BOUNDS, EMBERDEEP_ENTRY, EMBERDEEP_EXIT, EMBERDEEP_GATE, EMBERDEEP_TORCHES, emberdeepFloor, inEmberdeep } from "@/game/emberdeep";
 import { getWorld } from "@/game/live";
 import { groundY } from "@/game/height";
 import { useOffhandGeometry } from "./offhand-geometry";
@@ -90,7 +90,7 @@ export function EmberdeepScene() {
         <boxGeometry args={[0.98, 1, 0.98]} /><meshStandardMaterial color="#625b55" roughness={0.96} />
       </instancedMesh>
       <Stair x={EMBERDEEP_EXIT.tx} z={EMBERDEEP_EXIT.ty - 2} />
-      {EMBERDEEP_ROOMS.flatMap(r => [-1, 1].map(side => <Sconce key={`${r.id}:${side}`} x={r.tx + side * (r.rx - 1)} z={r.ty - r.ry + 1} />))}
+      {EMBERDEEP_TORCHES.map(t => <Sconce key={t.id} x={t.tx} z={t.ty} />)}
       <group ref={seal} position={[EMBERDEEP_GATE.tx, 0, 674]} name="emberdeep-boss-seal" raycast={() => {}}>
         {[-2, -1, 0, 1, 2].map(z => <mesh key={z} position={[0, 1.5, z]}><boxGeometry args={[0.6, 3, 0.92]} /><meshStandardMaterial color="#3e302b" metalness={0.6} roughness={0.5} /></mesh>)}
         <mesh position={[-0.35, 1.8, 0]}><boxGeometry args={[0.08, 0.3, 4.8]} /><meshStandardMaterial color="#e69852" emissive="#aa421a" emissiveIntensity={0.7} /></mesh>

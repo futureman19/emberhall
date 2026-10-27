@@ -14,9 +14,13 @@ import { FaunaArtBody } from "./fauna-art";
 import { faunaSpellArt } from "./fauna-art-catalog";
 import { EmberdeepBeast } from "./emberdeep-beast";
 import { isEmberdeepMonster } from "@/game/emberdeep-monsters";
+import { GloomwraithMesh } from "./gloomwraith-mesh";
 
+import { EmbercrawlerBeast } from "./embercrawler-beast";
 const COLOR: Record<FaunaKind, string> = {
   slag_golem: "#302d2b",
+  embercrawler: "#a84c26",
+  gloomwraith: "#60527e",
   hare: "#c4a882",
   hart: "#8a6a42",
   wolf: "#6a6a68",
@@ -73,6 +77,8 @@ const COLOR: Record<FaunaKind, string> = {
 
 const SIZE: Record<FaunaKind, number> = {
   slag_golem: 1.25,
+  embercrawler: 0.85,
+  gloomwraith: 1,
   hare: 0.35,
   hart: 0.7,
   wolf: 0.55,
@@ -1153,7 +1159,7 @@ export function Fauna() {
     <group>
       {fauna.map((c) => (
         // Quas Xen's images are drawn by MirrorImages, not as hares.
-        c.mirror ? null : isEmberdeepMonster(c.kind) ? <EmberdeepBeast key={c.id} c={c} /> : <Beast key={c.id} c={c} />
+        c.mirror ? null : isEmberdeepMonster(c.kind) ? <EmberdeepBeast key={c.id} c={c} /> : c.kind === "embercrawler" ? <EmbercrawlerBeast key={c.id} c={c} /> : c.kind === "gloomwraith" ? <GloomwraithMesh key={c.id} c={c} /> : <Beast key={c.id} c={c} />
       ))}
     </group>
   );

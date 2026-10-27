@@ -1,3 +1,5 @@
+import { crawlerSpawns } from "./embercrawler.ts";
+import { GLOOM_SPAWNS } from "./gloomwraith.ts";
 import type { Creature, FaunaKind, World } from "./types.ts";
 import { EMBERDEEP_ANCHORS, EMBERDEEP_ROOMS, clearEmberdeepRoom, inEmberdeep } from "./emberdeep.ts";
 import { spawn, strikePlayer } from "./ecology.ts";
@@ -23,7 +25,7 @@ export function ensureEmberdeepMonsters(w: World) {
 }
 export function updateEmberdeepClears(w: World) {
   for (const room of EMBERDEEP_ROOMS) {
-    const ids = emberdeepSpawns().filter(a => a.roomId === room.id).map(a => a.id);
+    const ids = [...emberdeepSpawns(), ...crawlerSpawns(w.seed).filter(a => walkable(w, a.tx, a.ty)), ...GLOOM_SPAWNS].filter(a => a.roomId === room.id).map(a => a.id);
     if (ids.length && ids.every(id => w.fauna.some(c => c.id === id && c.task === "dead"))) clearEmberdeepRoom(w, room.id);
   }
 }

@@ -1,10 +1,27 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createWorld } from './world.ts';
-import { spawn, tickEcology } from './ecology.ts';
+import { spawn, tickEcology, ensureExpansionFauna } from './ecology.ts';
 import { commandHunt, tickPlayer } from './player.ts';
 import { ensureEmberdeepMonsters, updateEmberdeepClears } from './emberdeep-monsters.ts';
 import { encodeSave, loadSave, SAVE_KEY } from './save.ts';
+import { crawlerSpawns } from './embercrawler.ts';
+import { GLOOM_SPAWNS } from './gloomwraith.ts';
+import { emberdeepSpawns } from './emberdeep-monsters.ts';
+
+test('mixed rooms clear only after every registered species is defeated', () => {
+ const w=createWorld(41);ensureExpansionFauna(w);
+ const anchors=[...emberdeepSpawns(),...crawlerSpawns(w.seed),...GLOOM_SPAWNS];
+ const forge=anchors.filter(a=>a.roomId==='forge');
+ const golem=w.fauna.find(c=>c.id===forge.find(a=>w.fauna.some(c=>c.id===a.id&&c.kind==='slag_golem'))!.id)!;
+ golem.hp=0;golem.task='dead';updateEmberdeepClears(w);
+ assert.equal(w.emberdeep?.cleared.includes('forge')??false,false,'a living guard prevents premature clear');
+ for(const a of forge){const c=w.fauna.find(c=>c.id===a.id)!;c.hp=0;c.task='dead';}
+ updateEmberdeepClears(w);assert.ok(w.emberdeep?.cleared.includes('forge'));
+ const vault=anchors.filter(a=>a.roomId==='vault');
+ for(const a of vault){const c=w.fauna.find(c=>c.id===a.id)!;c.hp=0;c.task='dead';}
+ updateEmberdeepClears(w);assert.ok(w.emberdeep?.cleared.includes('vault'),'guard-only room can clear');
+});
 
 test('real sword combat applies basalt armor and kills through the ordinary loot path', () => {
  const w=createWorld(41), p=w.people.find(p=>p.isPlayer)!;

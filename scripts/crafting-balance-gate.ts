@@ -195,7 +195,7 @@ function payloadSizes(items: ReturnType<typeof representativeItems>) {
 }
 
 function browserEvidence() {
-  const path = resolve("screenshots/crafting-smoke-final2/verdict.json");
+  const path = resolve(process.env.CRAFTING_SMOKE_OUTPUT_DIR || "screenshots/crafting-smoke", "verdict.json");
   try {
     const parsed = JSON.parse(readFileSync(path, "utf8"));
     return { available: true, ok: parsed.ok, viewports: Object.fromEntries(Object.entries(parsed.viewports).map(([name, value]: [string, any]) => [name, { passed: value.passed, overflow: value.overflow, errors: value.errors, state: value.state }])) };
