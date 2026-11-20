@@ -3,8 +3,9 @@ import { APOTHECARY_STOCK, hasTag, ITEM_META, SHOP_STOCK } from "./catalog.ts";
 import { buildingBox } from "./building-size.ts";
 import { isGhost, resurrect, you } from "./player.ts";
 import { astarToRange, tileOf } from "./pathfinding.ts";
+import { addToPile } from "./piles.ts";
 import { appraiseRare, rareName } from "./rare.ts";
-import { completeObjective, log, RYN_NAME, RYN_PAY, RYN_WANT } from "./world.ts";
+import { BRANN_BANDAGES, BRANN_NAME, BRANN_PAY, BRANN_WANT, completeObjective, log, RYN_NAME, RYN_PAY, RYN_WANT } from "./world.ts";
 import { emitNpcInteractionFx } from "./npc-interaction-animation.ts";
 import type { ItemId, NpcRole, World } from "./types.ts";
 
@@ -133,6 +134,35 @@ export function commandTalk(world: World, id: string) {
     }
     self.hp = self.maxHp;
     return answer(`${t.name}: Sit. The wound closes.`, "heal");
+  }
+  if (t.name === BRANN_NAME) {
+    if (isGhost(world)) return answer(`${t.name}: The dead keep no suppers.`);
+    if ((world.rep[BRANN_WANT] ?? 0) > 0) {
+      return answer(`${t.name}: The hall still speaks of your fish. I remember.`);
+    }
+    const fish = world.player.pack.cooked_fish ?? 0;
+    if (fish < 1) {
+      if (!world.quests.some((q) => q.id === BRANN_WANT)) {
+        world.quests.push({ id: BRANN_WANT, title: "Bring Brann two cooked fish" });
+      }
+      return answer(`${t.name}: The hall wants supper. Bring two cooked fish from the pond south of the court — I'll pay.`);
+    }
+    if (fish < 2) {
+      return answer(`${t.name}: One for the pot. One more and the hall eats.`);
+    }
+    world.player.pack.cooked_fish = fish - 2;
+    world.gold += BRANN_PAY;
+    const before = world.player.pack.bandage ?? 0;
+    world.player.pack.bandage = before + BRANN_BANDAGES;
+    if ((world.player.pack.bandage ?? 0) !== before + BRANN_BANDAGES) {
+      addToPile(world, Math.round(t.x), Math.round(t.z), { bandage: BRANN_BANDAGES }, "drop", world.hour + 24, "Brann's thanks", 0);
+    }
+    world.rep[BRANN_WANT] = 1;
+    const quest = world.quests.find((q) => q.id === BRANN_WANT);
+    if (quest) quest.title = "Brann has his supper";
+    else world.quests.push({ id: BRANN_WANT, title: "Brann has his supper" });
+    log(world, `${t.name} takes the fish. ${BRANN_PAY} gold, ${BRANN_BANDAGES} bandages.`);
+    return answer(`${t.name}: The hall eats well tonight. You have my thanks.`);
   }
   if (t.role === "provisioner") {
     if (isGhost(world)) return answer(`${t.name}: Dust will not sell to the dead.`);

@@ -504,6 +504,10 @@ export function seedEmberhallBank(world: World) {
 export const RYN_NAME = "Ryn Wain";
 export const RYN_WANT = "ryn-hide";
 export const RYN_PAY = 20;
+export const BRANN_NAME = "Brann Wain";
+export const BRANN_WANT = "brann-fish";
+export const BRANN_PAY = 30;
+export const BRANN_BANDAGES = 2;
 
 /** Brann's cousin on the court — a want, not a shop. Old saves pick her up. */
 export function ensureRynWain(world: World) {
