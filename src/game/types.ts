@@ -495,6 +495,8 @@ export interface Building {
   ownerId?: string | null;
   chest?: Record<ItemId, number>;
   chestGold?: number;
+  /** The free look-hut every vale previews: visual only, never a kept house. */
+  preview?: boolean;
 }
 
 export type CropId = "cabbage" | "wheat" | "garlic" | "ginseng" | "mandrake" | "moss";
