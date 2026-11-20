@@ -14,7 +14,7 @@ import {
 } from "../inventory/resources.ts";
 import type { ItemId, ResourceStackKey } from "../types.ts";
 
-export type ExactRecipeId = "bow" | "sword" | "shield" | "helm" | "mail" | "boots" | "gauntlets" | "greaves" | "leather" | "hood" | "gloves" | "hose" | "charm" | "ring";
+export type ExactRecipeId = ItemFormId;
 
 export interface ExactRecipeOutput {
   readonly itemId: ItemId;
@@ -39,7 +39,7 @@ export interface ResolvedExactRecipeSelection {
   readonly debits: readonly ResourceDebit[];
 }
 
-const EXACT_RECIPE_IDS = ["bow", "sword", "shield", "helm", "mail", "boots", "gauntlets", "greaves", "leather", "hood", "gloves", "hose", "charm", "ring"] as const satisfies readonly ExactRecipeId[];
+const EXACT_RECIPE_IDS = ["bow", "sword", "shield", "helm", "mail", "boots", "gauntlets", "greaves", "leather", "hood", "gloves", "hose", "charm", "ring", "dagger", "spear", "war_axe", "mace", "war_hammer", "quarterstaff", "tower_shield"] as const satisfies readonly ExactRecipeId[];
 const SELECTION_FIELDS = ["role", "key"] as const;
 
 type DeepReadonly<T> = T extends (...args: never[]) => unknown
@@ -83,6 +83,13 @@ function snapshotSelection(input: unknown): ExactMaterialSelection {
 }
 
 const EXACT_RECIPE_DEFINITIONS = [
+  { id: "mace", formId: "mace", recipeVersion: 1, output: { itemId: "mace", quantity: 1 } },
+  { id: "war_hammer", formId: "war_hammer", recipeVersion: 1, output: { itemId: "war_hammer", quantity: 1 } },
+  { id: "quarterstaff", formId: "quarterstaff", recipeVersion: 1, output: { itemId: "quarterstaff", quantity: 1 } },
+  { id: "tower_shield", formId: "tower_shield", recipeVersion: 1, output: { itemId: "tower_shield", quantity: 1 } },
+  { id: "dagger", formId: "dagger", recipeVersion: 1, output: { itemId: "dagger", quantity: 1 } },
+  { id: "spear", formId: "spear", recipeVersion: 1, output: { itemId: "spear", quantity: 1 } },
+  { id: "war_axe", formId: "war_axe", recipeVersion: 1, output: { itemId: "war_axe", quantity: 1 } },
   {
     id: "bow",
     formId: "bow",

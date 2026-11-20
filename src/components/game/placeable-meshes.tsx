@@ -1,4 +1,5 @@
 import { useLayoutEffect, useMemo, useRef } from "react";
+import { useBlacksmithScene } from "./blacksmith-kit";
 import * as THREE from "three";
 import { groundY } from "@/game/height";
 import { getWorld } from "@/game/live";
@@ -88,10 +89,15 @@ function Piece({
     for (const v of voxels) bins[v.t].push(new THREE.Vector3(v.x, v.y, v.z));
     return bins;
   }, [voxels]);
+  const authored = useBlacksmithScene(definitionId, !ghost && !highlight);
   const tint = ghost ? ghostTint(!getHoldBuild().reason) : null;
   return (
     <group>
-      {KINDS.map((k) => (
+      {authored ? (
+        <group name={`blacksmith-${definitionId}`} position={[tx + VOX / 2, y0, ty + VOX / 2]} rotation={[0, rotation * Math.PI / 2, 0]}>
+          <primitive object={authored} position={[-VOX / 2, 0, -VOX / 2]} dispose={null} />
+        </group>
+      ) : KINDS.map((k) => (
         <Layer
           key={k}
           items={layers[k]}

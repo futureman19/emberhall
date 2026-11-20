@@ -3,7 +3,17 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {Group} from 'three';
-import {extractOffhandGeometry, OFFHAND_BOUNDS} from './offhand-geometry.ts';
+import {extractOffhandGeometry, OFFHAND_BOUNDS, createTowerShieldGeometry} from './offhand-geometry.ts';
+test('tower shield has a tall finite panel and a forward boss', () => {
+ const parts = createTowerShieldGeometry();
+ for (const geometry of Object.values(parts)) {
+  assert.ok(Array.from(geometry.attributes.position.array).every(Number.isFinite));
+  geometry.computeBoundingBox();
+ }
+ assert.ok(Math.abs(parts.face.boundingBox!.max.y - parts.face.boundingBox!.min.y - .64) < 1e-6);
+ assert.ok(parts.boss.boundingBox!.min.z > parts.face.boundingBox!.max.z);
+ Object.values(parts).forEach(g => g.dispose());
+});
 const bytes=readFileSync(new URL('../../../public/art/lanternwood/offhands.glb',import.meta.url));
 const load=()=>new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
 test('all eight authored offhand parts parse inside original envelopes',async()=>{

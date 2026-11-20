@@ -50,7 +50,7 @@ try {
    for(const [item,n]of Object.entries(fight.loot))assert(fight.after[item]>=fight.before[item]+n);
    cases.push({prepare,fight});
   }
-  assert(assets.has('fauna-slag_golem.glb'));
+  assert.equal(assets.size,1);
   const snapshot=()=>page.evaluate(()=>window.__ember.getWorld().fauna.filter(c=>c.id.startsWith('emberdeep:')).map(c=>({id:c.id,hp:c.hp,task:c.task})));
   const before=await snapshot();assert(before.some(c=>c.task==='dead')&&before.some(c=>c.task!=='dead'));
   assert.equal(await page.evaluate(()=>window.__ember.useGame.getState().saveNow()),true);

@@ -1,5 +1,6 @@
 import { bridgeDeckAt, bridgeGroundY, bridgeTerrainY, bridgeSurfaceKind, REEDWAKE_BRIDGE } from "../../game/river-bridge.ts";
 import { isFrontierRiverSurface } from "../../game/frontier-river.ts";
+import { finishInstancePool as hideRest } from "./instance-pool.ts";
 import { createGroundUpdatePlanner } from "./ground-update-planner.ts";
 import { createPondWater } from "./pond-water.ts";
 import { PondGrass } from "./pond-grass-scene.tsx";
@@ -151,16 +152,6 @@ function smooth01(a: number, b: number, x: number) {
   return t * t * (3 - 2 * t);
 }
 
-function hideRest(mesh: THREE.InstancedMesh | null, from: number, total: number) {
-  if (!mesh) return;
-  for (let i = from; i < total; i++) {
-    dummy.position.set(0, -40, 0);
-    dummy.scale.set(0.01, 0.01, 0.01);
-    dummy.updateMatrix();
-    mesh.setMatrixAt(i, dummy.matrix);
-  }
-  mesh.instanceMatrix.needsUpdate = true;
-}
 
 function ensureColor(mesh: THREE.InstancedMesh | null, n: number) {
   if (!mesh) return;

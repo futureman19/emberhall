@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { CommissionDialog } from "./commission-gump";
 import { ItemTipContent } from "@/components/game/item-tip";
 import { ItemGlyph } from "@/components/game/paperdoll";
 import { Tip } from "@/components/ui/tip";
@@ -237,6 +238,7 @@ export function NpcGump() {
   const youX = useGame((s) => s.snap.youX);
   const youZ = useGame((s) => s.snap.youZ);
   const talk = useGame((s) => s.talk);
+  const toast = useGame((s) => s.toast);
   const select = useGame((s) => s.select);
   const ghost = useGame((s) => Boolean(s.snap.player?.ghost));
   const p = people.find((x) => x.id === selectedId);
@@ -270,6 +272,8 @@ export function NpcGump() {
         <p className="mt-2 text-pretty text-xs text-muted">Ione must be within reach to return you.</p>
       )}
       {p.role === "banker" && (close ? <BankBox /> : <p className="mt-3 text-pretty text-xs text-muted">Walk closer to open the box.</p>)}
+      {(p.role === "provisioner" || p.role === "healer" || p.role === "alchemist") && <CommissionDialog npcId={p.id} close={close} />}
+      {toast && <p role="status" className="mt-2 text-xs text-fg">{toast}</p>}
       {p.role === "provisioner" && <ProvisionerShop />}
       {p.role === "alchemist" && <ApothecaryShop />}
       <Button className="mt-3 w-full" variant="ghost" onClick={() => select(null)}>

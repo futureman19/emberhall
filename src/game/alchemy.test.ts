@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { withSpecialtyStation } from "./placeables/station-test-fixture.ts";
 import test from "node:test";
 import { commandCraft } from "./craft.ts";
 import { LIVE_SKILLS } from "./catalog.ts";
@@ -30,8 +31,8 @@ test("alchemy - draught math", () => {
   assert.ok(LIVE_SKILLS.includes("alchemy"));
 });
 
-test("alchemy - garlic and ginseng stir a heal draught in the field", () => {
-  const world = createWorld();
+test("alchemy - garlic and ginseng stir a heal draught at an alchemy bench", () => {
+  const world = withSpecialtyStation(createWorld(), "alchemy_bench");
   world.player.skills.alchemy = 100;
   world.player.pack.garlic = 1;
   world.player.pack.ginseng = 1;
@@ -45,7 +46,7 @@ test("alchemy - garlic and ginseng stir a heal draught in the field", () => {
 });
 
 test("alchemy - a red draught closes a wound", () => {
-  const world = createWorld();
+  const world = withSpecialtyStation(createWorld(), "alchemy_bench");
   const patient = you(world)!;
   patient.hp = 10;
   world.player.skills.alchemy = 8;
@@ -56,7 +57,7 @@ test("alchemy - a red draught closes a wound", () => {
 });
 
 test("alchemy - silk and ash thin the dark", () => {
-  const world = createWorld();
+  const world = withSpecialtyStation(createWorld(), "alchemy_bench");
   world.player.skills.alchemy = 50;
   world.player.pack.silk = 1;
   world.player.pack.ash = 1;
@@ -69,7 +70,7 @@ test("alchemy - silk and ash thin the dark", () => {
 });
 
 test("alchemy - a ghost cannot brew or drink", () => {
-  const world = createWorld();
+  const world = withSpecialtyStation(createWorld(), "alchemy_bench");
   world.player.ghost = true;
   you(world)!.ghost = true;
   world.player.pack.garlic = 1;

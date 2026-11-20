@@ -1,5 +1,6 @@
 import { visitEmberdeep } from "./emberdeep.ts";
 import { create } from "zustand";
+import { commandCommission, type CommissionAction } from "./commissions.ts";
 import { commandTrack } from "./tracking.ts";
 import { commandDig, commandFill } from "./digging.ts";
 import { commandTravel } from "./gates.ts";
@@ -139,6 +140,7 @@ interface GameUI {
   cook: () => void;
   eat: (item?: ItemId) => void;
   talk: (id: string) => void;
+  commission: (id: string, action: CommissionAction) => void;
   buy: (item: ItemId) => void;
   sell: (item: ItemId) => void;
   sellRare: (uid: string) => void;
@@ -668,6 +670,11 @@ export const useGame = create<GameUI>((set, get) => ({
   eat: (item) => {
     const err = commandEat(getWorld(), item);
     if (err) get().flash(err);
+    set({ snap: snapshot() });
+  },
+  commission: (id, action) => {
+    const err = commandCommission(getWorld(), id, action);
+    get().flash(err ?? (action === "deliver" ? "Commission delivered. Payment received." : action === "accept" ? "Commission accepted." : "Commission cancelled."));
     set({ snap: snapshot() });
   },
   talk: (id) => {

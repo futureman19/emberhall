@@ -9,6 +9,7 @@ import {
   SKILL_META,
   VOCATION_META,
 } from "./catalog.ts";
+import { isCommissionState } from "./commissions.ts";
 import { WEATHER_META } from "./weather.ts";
 import { ITEM_FORM_CATALOG } from "./crafting/forms.ts";
 import { resolveItemStats } from "./crafting/resolve.ts";
@@ -334,6 +335,7 @@ function isPlayer(value: unknown): boolean {
     isWearRecord(value.wear) &&
     isArrayOf(value.rares, isRareItem) &&
     isRareWearRecord(value.wearRare) &&
+    (value.commission === undefined || isCommissionState(value.commission)) &&
     isFiniteNumber(value.vault) &&
     isRegistryKey(value.notoriety, NOTORIETY_META) &&
     isFiniteNumber(value.criminalUntil) &&
@@ -397,6 +399,11 @@ function isCreature(value: unknown): boolean {
     isRecord(value) &&
     isString(value.id) &&
     isRegistryKey(value.kind, FAUNA_META) &&
+    (value.gloom === undefined || (isRecord(value.gloom) &&
+      ["prowl", "windup", "bolt", "recover"].includes(String(value.gloom.phase)) &&
+      isFiniteNumber(value.gloom.clock) && value.gloom.clock >= 0 &&
+      isFiniteNumber(value.gloom.time) && value.gloom.time >= 0 &&
+      isFiniteNumber(value.gloom.targetX) && isFiniteNumber(value.gloom.targetZ))) &&
     (value.monster === undefined || (isRecord(value.monster) &&
       ["patrol", "windup", "strike", "recover"].includes(String(value.monster.phase)) &&
       isFiniteNumber(value.monster.time) && value.monster.time >= 0 &&
@@ -405,11 +412,6 @@ function isCreature(value: unknown): boolean {
       ["patrol", "windup", "lunge", "retreat"].includes(String(value.crawler.phase)) &&
       isFiniteNumber(value.crawler.time) && value.crawler.time >= 0 &&
       isFiniteNumber(value.crawler.targetX) && isFiniteNumber(value.crawler.targetZ))) &&
-    (value.gloom === undefined || (isRecord(value.gloom) &&
-      ["prowl", "windup", "bolt", "recover"].includes(String(value.gloom.phase)) &&
-      isFiniteNumber(value.gloom.clock) && value.gloom.clock >= 0 &&
-      isFiniteNumber(value.gloom.time) && value.gloom.time >= 0 &&
-      isFiniteNumber(value.gloom.targetX) && isFiniteNumber(value.gloom.targetZ))) &&
     isFiniteNumber(value.x) &&
     isFiniteNumber(value.z) &&
     isFiniteNumber(value.hp) &&

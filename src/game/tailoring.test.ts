@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { withSpecialtyStation } from "./placeables/station-test-fixture.ts";
 import test from "node:test";
 import { LIVE_SKILLS } from "./catalog.ts";
 import { commandCraft, recipeById } from "./craft.ts";
@@ -22,7 +23,7 @@ function withRoll<T>(value: number, action: () => T): T {
 test("tailoring - hide shirt trains the needle, not the saw", () => {
   assert.ok(LIVE_SKILLS.includes("tailoring"));
   assert.equal(recipeById("cut_leather")?.skill, "tailoring");
-  const world = createWorld();
+  const world = withSpecialtyStation(createWorld(), "loom");
   givePack(world, { hide: 2 });
   world.player.wear.main = "knife";
   world.player.skills.tailoring = 20;
@@ -35,7 +36,7 @@ test("tailoring - hide shirt trains the needle, not the saw", () => {
 });
 
 test("tailoring - silk becomes a tunic with a blade", () => {
-  const world = createWorld();
+  const world = withSpecialtyStation(createWorld(), "loom");
   givePack(world, { silk: 3 });
   world.player.wear.main = "knife";
   world.player.skills.tailoring = 40;
@@ -46,7 +47,7 @@ test("tailoring - silk becomes a tunic with a blade", () => {
 });
 
 test("tailoring - a cloak wants four cloth and an edge", () => {
-  const world = createWorld();
+  const world = withSpecialtyStation(createWorld(), "loom");
   givePack(world, { silk: 4 });
   world.player.wear.main = "mace";
   world.player.skills.tailoring = 80;
@@ -58,7 +59,7 @@ test("tailoring - a cloak wants four cloth and an edge", () => {
 });
 
 test("tailoring - a ghost cannot stitch", () => {
-  const world = createWorld();
+  const world = withSpecialtyStation(createWorld(), "loom");
   world.player.ghost = true;
   givePack(world, { hide: 2, silk: 3 });
   world.player.wear.main = "knife";

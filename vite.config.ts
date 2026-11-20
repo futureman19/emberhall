@@ -157,6 +157,10 @@ export default defineConfig(({ command, isPreview }) => ({
     strictPort: true,
   },
   resolve: { tsconfigPaths: true },
+  // @1sat/actions@0.0.197 ships an extensionless ESM re-export ('./types') that
+  // Node's native SSR resolution rejects; bundle the @1sat packages in SSR so
+  // vite resolves it (production build already bundles them).
+  ssr: { noExternal: ["@1sat/react", "@1sat/actions"] },
   plugins: [
     pgliteBootstrapPlugin(),
     // Before tanstackStart so /auth/popup never falls through to the SPA.

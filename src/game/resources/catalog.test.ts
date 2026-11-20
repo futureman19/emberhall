@@ -304,7 +304,7 @@ test("existing traits, values, skills, routes, and forms remain unchanged", () =
   assert.deepEqual(
     TRAIT_REGISTRY.moon.fauna,
     // A slag construct has no butcherable flesh, but is not undead.
-    Object.entries(FAUNA_META).filter(([kind, meta]) => meta.hasCorpse === false && kind !== "slag_golem").map(([kind]) => kind),
+    Object.entries(FAUNA_META).filter(([kind, meta]) => meta.hasCorpse === false && kind !== "slag_golem" && kind !== "furnace_warden").map(([kind]) => kind),
     "moon silver retains its fleshless undead targets, excluding slag constructs",
   );
   assert.deepEqual(TRAIT_REGISTRY.hunters.values, { rough: 1, sound: 2, choice: 3, pristine: 4 });

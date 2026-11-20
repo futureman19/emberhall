@@ -146,7 +146,7 @@ export function verbsFor(t: CtxTarget): { verb: CtxVerb; label: string }[] {
       else if (fn === "bed") out.push({ verb: "use", label: "Rest" });
       else if (fn === "sign") out.push({ verb: "use", label: "Read the sign" });
       else if (fn === "hearth") out.push({ verb: "use", label: "Work the fire" });
-      else if (fn === "craftStation") out.push({ verb: "use", label: "Use the bench" });
+      else if (fn === "craftStation") out.push({ verb: "use", label: `Work at ${t.label}` });
       out.push({ verb: "walk", label: "Walk" });
       return out;
     }

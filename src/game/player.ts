@@ -568,6 +568,9 @@ export function commandCook(world: World, selected?: ItemId) {
   if (!p) return "You are not in the vale.";
   // A good meal first — cooked food fills far more than raw.
   const meals: [ItemId, number, string][] = [
+    ["trail_rations", 60, "The rations sustain you for the road."],
+    ["herb_broth", 42, "The warm broth restores you."],
+    ["wheat_cakes", 30, "The wheat cakes fill you."],
     ["stew", 52, "The stew warms you through."],
     ["cooked_meat", 40, "Hot meat. Proper food."],
     ["cooked_fish", 38, "The fish flakes from the bone."],
@@ -775,7 +778,7 @@ function huntNow(world: World, p: Person) {
   const mods = rareMods(world);
   // The weapon family teaches its own discipline: knives fence, bludgeons mace-fight.
   const main = effectiveMain(world);
-  const strikeSkill: SkillId = bow ? "archery" : main === "knife" ? "fencing" : main === "club" || main === "mace" ? "mace" : "swords";
+  const strikeSkill: SkillId = bow ? "archery" : main === "knife" ? "fencing" : main === "club" || main === "mace" || main === "war_hammer" || main === "quarterstaff" ? "mace" : "swords";
   const skill = effSkill(world, strikeSkill);
   const anatomy = effSkill(world, "anatomy");
   const tech = armedTechniqueFor(world);

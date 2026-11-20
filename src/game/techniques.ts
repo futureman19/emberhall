@@ -144,7 +144,7 @@ export function techniqueWeaponOf(world: World): TechniqueWeapon | null {
   if (main === "sword") return "sword";
   if (main === "bow") return "bow";
   if (main === "knife") return "knife";
-  if (main === "club" || main === "mace") return "mace";
+  if (main === "club" || main === "mace" || main === "war_hammer" || main === "quarterstaff") return "mace";
   return null;
 }
 

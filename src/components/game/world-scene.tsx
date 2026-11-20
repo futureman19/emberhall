@@ -61,6 +61,7 @@ import { inEmberdeep } from "@/game/emberdeep";
 import { Sky } from "./sky";
 import { WeatherFx } from "./weather-fx";
 import { People } from "./people-meshes";
+import { FirstPersonWeapon } from "./first-person-weapon";
 import { Piles } from "./pile-meshes";
 import { Herbs } from "./herb-meshes";
 import { Campfires } from "./campfire-meshes";
@@ -776,7 +777,7 @@ function PersonalActionFxMesh() {
       eat.current.rotation.y = age * 4;
     }
     if (equipment.current) {
-      equipment.current.visible = fx.kind === "equipment";
+      equipment.current.visible = fx.kind === "equipment" && fx.item !== "dagger" && fx.item !== "spear" && fx.item !== "war_axe";
       equipment.current.position.x = 1.72;
       equipment.current.rotation.y = age * (fx.kind === "equipment" && fx.direction === "unequip" ? -5 : 5);
       equipment.current.scale.setScalar(0.9 + Math.sin(phase * Math.PI) * 0.42);
@@ -1969,7 +1970,7 @@ export function WorldScene() {
       <Lighting shadows={graphics.shadows} />
       <GraphicsProbe />
       {!underground && <Sky />}
-      {!underground && <WeatherFx />}
+      <WeatherFx />
       {!underground && <Horizon treeReduction={graphics.horizonTreeReduction} />}
       <EmberdeepScene />
       <Terrain />
@@ -2016,6 +2017,7 @@ export function WorldScene() {
       </group>
       <PlacePointer />
       <Rig />
+      <FirstPersonWeapon />
       <SimClock />
     </Canvas>
   );

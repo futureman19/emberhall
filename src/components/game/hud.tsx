@@ -13,6 +13,7 @@ import { YouDrawer } from "@/components/game/chrome/you-drawer";
 import { ContextMenu, PileGump } from "@/components/game/context-menu";
 import { GateGump } from "@/components/game/gate-gump";
 import { NpcGump } from "@/components/game/npc-gump";
+import { CommissionTracker } from "@/components/game/commission-gump";
 import { HouseGump } from "@/components/game/house-gump";
 import { housePanelActive } from "@/components/game/house-panel";
 import { SpellbookGump } from "@/components/game/spell-gump";
@@ -103,6 +104,7 @@ function PlayingChrome() {
     >
       <VitalsChip />
       <EmberdeepTravel />
+      <CommissionTracker />
       <UtilityCluster actionsOpen={actionsOpen} onToggleActions={() => setActionsOpen((v) => !v)} />
       <CombatCluster />
       <CornerCluster mapOpen={mapOpen} onToggleMap={dock.toggle} />
@@ -565,7 +567,9 @@ function Toast() {
   const craftOpen = useGame((s) => s.openCraft);
   const packOpen = useGame((s) => s.panel === "you");
   const fishing = useGame((s) => s.snap.player?.intent.kind === "fish");
+  const npcOpen = useGame((s) => s.snap.people.some((p) => p.id === s.selectedId && Boolean(p.role)));
   if (!toast || houseOpen) return null;
+  if (npcOpen) return null;
   if (packOpen || fishing) return null;
   if (pileOpen || craftOpen) return null;
   return (

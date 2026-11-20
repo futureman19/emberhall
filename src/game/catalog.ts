@@ -158,6 +158,7 @@ export const ITEM_META: Record<
   log: { label: "Log", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 2, tags: ["wood", "fuel"] },
   board: { label: "Board", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 3, tags: ["wood", "fuel"] },
   ore: { label: "Iron ore", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 0, sell: 3, tags: ["metal"] },
+  furnace_heart: { label: "Furnace Heart", tool: false, slot: null, fill: "#ff9a46", armor: 0, buy: 0, sell: 30, tags: ["magic"] },
   ingot: { label: "Ingot", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 8, sell: 5, tags: ["metal"] },
   club: { label: "Club", tool: true, slot: "main", fill: "var(--color-gold)", armor: 0, buy: 10, sell: 6, tags: ["wood", "weapon"] },
   shield: { label: "Wooden shield", tool: false, slot: "off", fill: "var(--color-gold)", armor: 2, buy: 18, sell: 10, tags: ["wood", "armor"] },
@@ -168,7 +169,13 @@ export const ITEM_META: Record<
   cap: { label: "Wooden cap", tool: false, slot: "head", fill: "var(--color-gold)", armor: 1, buy: 14, sell: 6, tags: ["wood", "armor"] },
   cuirass: { label: "Wooden cuirass", tool: false, slot: "chest", fill: "var(--color-gold)", armor: 2, buy: 28, sell: 12, tags: ["wood", "armor"] },
   sword: { label: "Sword", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 36, sell: 16, tags: ["metal", "blade", "weapon"] },
+  dagger: { label: "Dagger", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 18, sell: 7, tags: ["metal", "blade", "weapon"] },
+  spear: { label: "Spear", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 32, sell: 13, tags: ["metal", "blade", "weapon"] },
+  war_axe: { label: "War axe", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 48, sell: 21, tags: ["metal", "blade", "weapon"] },
   mace: { label: "Mace", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 28, sell: 12, tags: ["metal", "weapon"] },
+  war_hammer: { label: "War hammer", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 52, sell: 23, tags: ["metal", "weapon"] },
+  quarterstaff: { label: "Quarterstaff", tool: true, slot: "main", fill: "var(--color-muted)", armor: 0, buy: 24, sell: 10, tags: ["wood", "weapon"] },
+  tower_shield: { label: "Tower shield", tool: false, slot: "off", fill: "var(--color-muted)", armor: 4, buy: 56, sell: 24, tags: ["metal", "armor"] },
   gauntlets: { label: "Gauntlets", tool: false, slot: "hands", fill: "var(--color-muted)", armor: 2, buy: 24, sell: 10, tags: ["metal", "armor"] },
   gorget: { label: "Gorget", tool: false, slot: "neck", fill: "var(--color-muted)", armor: 1, buy: 20, sell: 8, tags: ["metal", "armor"] },
   heater: { label: "Iron shield", tool: false, slot: "off", fill: "var(--color-muted)", armor: 4, buy: 32, sell: 14, tags: ["metal", "armor"] },
@@ -205,6 +212,9 @@ export const ITEM_META: Record<
   ash: { label: "Sulfurous ash", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 4, sell: 1, tags: ["reagent"] },
   cabbage: { label: "Cabbage", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 4, sell: 2, tags: ["plant", "food"] },
   cooked_meat: { label: "Cooked meat", tool: false, slot: null, fill: "var(--color-accent)", armor: 0, buy: 8, sell: 4, tags: ["meat", "food"] },
+  trail_rations: { label: "Trail rations", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 16, sell: 6, tags: ["food"] },
+  wheat_cakes: { label: "Wheat cakes", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 3, tags: ["food"] },
+  herb_broth: { label: "Herb broth", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 0, sell: 3, tags: ["food"] },
   raw_fish: { label: "Raw fish", tool: false, slot: null, fill: "var(--color-muted)", armor: 0, buy: 0, sell: 3, tags: ["meat", "food"] },
   cooked_fish: { label: "Cooked fish", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 9, sell: 4, tags: ["meat", "food"] },
   bread: { label: "Bread", tool: false, slot: null, fill: "var(--color-gold)", armor: 0, buy: 6, sell: 3, tags: ["food", "plant"] },
@@ -231,9 +241,10 @@ export const CLASS_META: Record<ClassId, { label: string; color: string }> = {
 };
 
 export const FAUNA_META: Record<FaunaKind, { label: string; tameDiff: number; hp: number; dmg: number; eats: ResourceTag[]; meat?: number; hide?: number; parts?: readonly { id: BoneResourceId; n: number }[]; hasCorpse?: boolean; loot?: LootDrop[]; gold?: LootGold }> = {
+  furnace_warden: { label: "Furnace Warden", tameDiff: 99, hp: 360, dmg: 24, eats: ["meat"], hasCorpse: false },
+  gloomwraith: { label: "Gloomwraith", tameDiff: 99, hp: 42, dmg: 11, eats: ["meat"], hasCorpse: false, loot: [{ item: "nightshade", chance: 1, min: 1, max: 2 }], gold: { chance: 1, min: 3, max: 7 } },
   slag_golem: { label: "Slag Golem", tameDiff: 99, hp: 84, dmg: 18, eats: ["meat"], hasCorpse: false, loot: [{ item: "ore", chance: 1, min: 2, max: 3 }], gold: { chance: 1, min: 5, max: 9 } },
   embercrawler: { label: "Embercrawler", tameDiff: 99, hp: 20, dmg: 6, eats: ["meat"], hasCorpse: false, loot: [{ item: "ash", chance: 1, min: 1, max: 2 }] },
-  gloomwraith: { label: "Gloomwraith", tameDiff: 99, hp: 42, dmg: 11, eats: ["meat"], hasCorpse: false, loot: [{ item: "nightshade", chance: 1, min: 1, max: 2 }], gold: { chance: 1, min: 3, max: 7 } },
   hare: { label: "Hare", tameDiff: 8, hp: 8, dmg: 1, eats: ["plant"], meat: 1, hide: 1, loot: [{ item: "rabbit_foot", chance: 0.35, min: 1, max: 1 }] },
   hart: { label: "Hart", tameDiff: 22, hp: 22, dmg: 4, eats: ["plant"], meat: 2, hide: 1, parts: [{ id: "stag_antler", n: 1 }] },
   wolf: { label: "Wolf", tameDiff: 40, hp: 28, dmg: 8, eats: ["meat"], meat: 2, hide: 1, parts: [{ id: "wolf_fang", n: 1 }] },
@@ -370,6 +381,7 @@ export const NOTORIETY_META: Record<Notoriety, { label: string }> = {
 };
 
 export const SHOP_STOCK: ItemId[] = [
+  "trail_rations",
   "hatchet", "pick", "hoe", "fishing_rod", "knife", "bandage", "tunic", "hood", "cloak", "boots",
   "arrows",
   "rune", "garlic", "ginseng", "silk", "pearl", "moss", "mandrake", "ash", "cabbage", "wheat",
@@ -426,13 +438,14 @@ export function emptyLastGain(): Record<SkillId, number> {
 export function emptyPack(): Record<ItemId, number> {
   return {
     hatchet: 1, knife: 1, pick: 1, hoe: 1, fishing_rod: 1, log: 0, board: 0, ore: 0, ingot: 0, club: 0, shield: 0,
-    staff: 0, bow: 0, torch: 0, crate: 0, cap: 0, cuirass: 0, sword: 0, mace: 0, gauntlets: 0, gorget: 0, heater: 0,
-    rabbit_foot: 0, orc_tusk: 0,
+    staff: 0, bow: 0, torch: 0, crate: 0, cap: 0, cuirass: 0, sword: 0, dagger: 0, spear: 0, war_axe: 0, mace: 0, war_hammer: 0, quarterstaff: 0, tower_shield: 0,
+    gauntlets: 0, gorget: 0, heater: 0, furnace_heart: 0, rabbit_foot: 0, orc_tusk: 0,
     meat: 1, hide: 0, arrows: 12, bandage: 3, potion_heal: 0, potion_night: 0,
     tunic: 0, leather: 0, mail: 0, hood: 1, helm: 0, cloak: 0, gloves: 1, hose: 0, greaves: 0,
     boots: 0, pendant: 1, ring: 1, relic: 0, spellbook: 1, rune: 4, garlic: 12, ginseng: 12,
     silk: 16, nightshade: 4, pearl: 14, moss: 10, mandrake: 10, ash: 12, cabbage: 2, wheat: 0,
     cooked_meat: 0, raw_fish: 0, cooked_fish: 0, bread: 0, stew: 0,
+    trail_rations: 0, wheat_cakes: 0, herb_broth: 0,
     cabbage_seed: 8, wheat_seed: 6, garlic_seed: 4, ginseng_seed: 0, mandrake_seed: 0, moss_seed: 0, acorn: 6,
     deed_porch: 0, deed_hut: 0, deed_homestead: 0,
   };

@@ -9,6 +9,8 @@ import tseslint from "typescript-eslint";
 export default tseslint.config(
   {
     ignores: [
+      // Independent Git checkouts have their own gates; never recurse into them.
+      ".worktrees/**",
       "dist/**",
       ".output/**",
       ".vercel/**",

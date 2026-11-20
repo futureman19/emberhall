@@ -1,0 +1,37 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import { InstancedMesh, BoxGeometry, MeshBasicMaterial, Matrix4, Raycaster, Vector3 } from "three";
+import { finishInstancePool } from "../src/components/game/instance-pool.ts";
+test("terrain pools submit only populated slots, not tiny buried capacity", () => {
+  const source = fs.readFileSync("src/components/game/terrain.tsx", "utf8");
+  assert.match(source, /finishInstancePool as hideRest/);
+  assert.doesNotMatch(source, /function hideRest/);
+});
+test("pool shrink, zero and regrowth keep capacity, live transforms and current picking bounds", () => {
+  const mesh = new InstancedMesh(new BoxGeometry(1, 1, 1), new MeshBasicMaterial(), 20);
+  const matrix = new Matrix4();
+  mesh.setMatrixAt(0, matrix.makeTranslation(0, 0, 0));
+  mesh.setMatrixAt(1, matrix.makeTranslation(100, 0, 0));
+  const buffer = mesh.instanceMatrix.array;
+  finishInstancePool(mesh, 1, 20);
+  assert.equal(mesh.count, 1);
+  assert.equal(mesh.instanceMatrix.array, buffer);
+  mesh.computeBoundingSphere();
+  assert.ok(mesh.boundingSphere.radius < 2);
+  const ray = new Raycaster(new Vector3(100, 0, 5), new Vector3(0, 0, -1));
+  assert.equal(ray.intersectObject(mesh).length, 0);
+  finishInstancePool(mesh, 2, 20);
+  assert.equal(mesh.boundingSphere, null);
+  assert.ok(ray.intersectObject(mesh).length > 0);
+  finishInstancePool(mesh, 0, 20);
+  assert.equal(ray.intersectObject(mesh).length, 0);
+  assert.equal(mesh.count, 0);
+  finishInstancePool(mesh, 1, 20);
+  const read = new Matrix4();
+  mesh.getMatrixAt(0, read);
+  assert.deepEqual(read.elements, new Matrix4().elements);
+  finishInstancePool(null, 0, 20);
+  mesh.geometry.dispose();
+  mesh.material.dispose();
+});

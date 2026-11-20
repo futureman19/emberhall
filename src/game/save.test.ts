@@ -41,6 +41,26 @@ afterEach(() => {
   }
 });
 
+test("commission state round-trips and malformed contracts reject the save", () => {
+  const w = createWorld(1);
+  const npc = w.people.find((p) => p.role === "provisioner")!;
+  for (const status of ["offered", "active", "completed"] as const) {
+    w.player.commission = { templateId: "boards", npcId: npc.id, status, expiresAt: status === "active" ? w.hour + 24 : null };
+    assert.equal(writeSave(w).ok, true);
+    assert.deepEqual(loadSave()?.player.commission, w.player.commission);
+  }
+  for (const invalid of [
+    { templateId: "unknown", npcId: npc.id, status: "active", expiresAt: 100 },
+    { templateId: "boards", npcId: npc.id, status: "active", expiresAt: null },
+    { templateId: "boards", npcId: npc.id, status: "paid", expiresAt: 100 },
+  ]) {
+    const save = currentSave();
+    record(save.player).commission = invalid;
+    localStorage.setItem(SAVE_KEY, JSON.stringify(save));
+    assert.ok(loadSave() === null, "malformed commission must reject the save");
+  }
+});
+
 const persistedFixture = (() => {
   const { tiles: _tiles, ...world } = createWorld();
   return { ...world, tiles: null };
