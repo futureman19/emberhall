@@ -3,6 +3,7 @@ import { COURT, EMBERHALL_BANK } from "./atlas.ts";
 import { buildingBox, boxesOverlap } from "./building-size.ts";
 import { emptyChest, ITEM_META } from "./catalog.ts";
 import { plotAt } from "./farm.ts";
+import { addToPile } from "./piles.ts";
 import { you } from "./player.ts";
 import type { Building, ItemId, World } from "./types.ts";
 import { log, nid } from "./world.ts";
@@ -34,8 +35,9 @@ export function houseKindForDeed(item: ItemId): HouseKind | null {
   return null;
 }
 
+/** The player's kept house, if any. The look-hut preview is not a kept house. */
 export function playerHouse(world: World) {
-  return world.buildings.find((b) => isHouseKind(b.kind) && b.ownerId === world.player.id) ?? null;
+  return world.buildings.find((b) => isHouseKind(b.kind) && b.ownerId === world.player.id && !b.preview) ?? null;
 }
 
 export function houseAt(world: World, tx: number, ty: number, reach = 2.8) {
@@ -99,6 +101,8 @@ export function houseSiteError(world: World, kind: HouseKind, tx: number, ty: nu
   const bankBox = buildingBox("bank", EMBERHALL_BANK.tx, EMBERHALL_BANK.ty);
   if (boxesOverlap(box, bankBox)) return "The bank is the only safe tile.";
   for (const b of world.buildings) {
+    // The player's look-hut preview yields its ground to a real deed.
+    if (b.preview && b.ownerId === world.player.id) continue;
     if (boxesOverlap(box, buildingBox(b.kind, b.tx, b.ty))) return "That ground is taken.";
   }
   return null;
@@ -111,7 +115,7 @@ export function placeHouse(world: World, kind: HouseKind, tx: number, ty: number
   world.player.pack[deed] = (world.player.pack[deed] ?? 0) - 1;
   const label = ITEM_META[deed].label.replace(/ deed$/i, "");
   const id = nid(world, "b");
-  world.buildings.push({
+  const house: Building = {
     id,
     kind,
     tx,
@@ -120,10 +124,49 @@ export function placeHouse(world: World, kind: HouseKind, tx: number, ty: number
     ownerId: world.player.id,
     chest: emptyChest(),
     chestGold: 0,
-  });
+    preview: false,
+  };
+  const preview = world.buildings.find(
+    (b) => b.preview === true && isHouseKind(b.kind) && b.ownerId === world.player.id,
+  ) ?? null;
+  // Publish a fresh array so mounted building meshes re-render on the swap.
+  world.buildings = [...world.buildings, house];
+  if (preview) {
+    // Goods move first; only then does the preview come down. Nothing is destroyed.
+    transferLookHutGoods(world, preview, house);
+    world.buildings = world.buildings.filter((b) => b.id !== preview.id);
+    log(world, "The look-hut steps aside; its goods are kept.");
+  }
   emitConstructionFx(world, id, kind, tx, ty, "deed");
   log(world, `The ${label.toLowerCase()} is raised.`);
   return null;
+}
+
+/**
+ * Keep everything the look-hut held, in order:
+ * 1. chest stacks into the new house chest while a slot allows (whole stacks),
+ * 2. overflow into the player pack,
+ * 3. any stack the pack cannot accept falls to a ground pile at the old spot.
+ * Chest gold always keeps into the new chest.
+ */
+function transferLookHutGoods(world: World, preview: Building, house: Building) {
+  const chest = house.chest ?? (house.chest = emptyChest());
+  const overflow: Array<[ItemId, number]> = [];
+  for (const id of Object.keys(ITEM_META) as ItemId[]) {
+    const n = preview.chest?.[id] ?? 0;
+    if (n <= 0) continue;
+    if ((chest[id] ?? 0) > 0 || chestSlots(chest) < HOUSE_SLOTS) chest[id] = (chest[id] ?? 0) + n;
+    else overflow.push([id, n]);
+  }
+  house.chestGold = (house.chestGold ?? 0) + (preview.chestGold ?? 0);
+  for (const [id, n] of overflow) {
+    const before = world.player.pack[id] ?? 0;
+    world.player.pack[id] = before + n;
+    if ((world.player.pack[id] ?? 0) !== before + n) {
+      // The pack refused the stack — keep it recoverable on the ground instead.
+      addToPile(world, preview.tx, preview.ty, { [id]: n }, "drop", world.hour + 24, "Look-hut goods", 0);
+    }
+  }
 }
 
 export function commandHouseItem(world: World, buildingId: string, item: ItemId, n = 1) {
@@ -157,16 +200,37 @@ export function commandHouseTake(world: World, buildingId: string, item: ItemId,
   return "Out of the chest.";
 }
 
+/** The fixed look-hut spots near the court, in preference order. */
+export const LOOK_HUT_SPOTS = [
+  { tx: COURT.tx - 6, ty: COURT.ty + 6 },
+  { tx: COURT.tx + 10, ty: COURT.ty + 6 },
+  { tx: COURT.tx - 10, ty: COURT.ty - 8 },
+  { tx: COURT.tx + 2, ty: COURT.ty + 10 },
+];
+
+export function isLookHutSpot(tx: number, ty: number) {
+  return LOOK_HUT_SPOTS.some((s) => s.tx === tx && s.ty === ty);
+}
+
+/**
+ * Default the optional preview flag for buildings that predate it: a player-owned
+ * hut on a look-hut spot is the free preview; every other building is real.
+ * Explicit flags are never overwritten.
+ */
+export function defaultBuildingPreview(world: World) {
+  if (!world.buildings) return;
+  for (const b of world.buildings) {
+    if (b.preview !== undefined) continue;
+    b.preview = b.kind === "hut" && b.ownerId === world.player.id && isLookHutSpot(b.tx, b.ty);
+  }
+}
+
 /** Look-preview hut: no deed, no gold. Idempotent. Skip if you already keep a house. */
 export function ensureLookHut(world: World) {
   if (!world.player?.id || !world.tiles?.length) return;
   if (playerHouse(world)) return;
-  const spots = [
-    { tx: COURT.tx - 6, ty: COURT.ty + 6 },
-    { tx: COURT.tx + 10, ty: COURT.ty + 6 },
-    { tx: COURT.tx - 10, ty: COURT.ty - 8 },
-    { tx: COURT.tx + 2, ty: COURT.ty + 10 },
-  ];
+  if (world.buildings.some((b) => b.preview === true && isHouseKind(b.kind) && b.ownerId === world.player.id)) return;
+  const spots = LOOK_HUT_SPOTS;
   for (const { tx, ty } of spots) {
     const box = buildingBox("hut", tx, ty);
     if (world.buildings.some((b) => boxesOverlap(box, buildingBox(b.kind, b.tx, b.ty)))) continue;
@@ -185,6 +249,7 @@ export function ensureLookHut(world: World) {
       ownerId: world.player.id,
       chest: emptyChest(),
       chestGold: 0,
+      preview: true,
     });
     log(world, "A hut stands for the looking — no deed asked.");
     return;

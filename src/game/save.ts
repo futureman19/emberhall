@@ -485,7 +485,8 @@ function isBuilding(value: unknown): boolean {
     isArrayOf(value.beds, (bed) => isRecord(bed) && isNullableString(bed.occupantId)) &&
     (value.ownerId === undefined || isNullableString(value.ownerId)) &&
     (value.chest === undefined || isItemRecord(value.chest)) &&
-    (value.chestGold === undefined || isFiniteNumber(value.chestGold))
+    (value.chestGold === undefined || isFiniteNumber(value.chestGold)) &&
+    (value.preview === undefined || isBoolean(value.preview))
   );
 }
 
