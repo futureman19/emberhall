@@ -149,10 +149,14 @@
     "src/components/game/weather-fx.tsx",
     "src/components/game/world-scene.tsx",
     "src/components/game/zones-mesh.tsx",
+    "src/game/agent/adapters/local.ts",
+    "src/game/agent/adapters/openai-compatible.ts",
+    "src/game/agent/assembler.ts",
     "src/game/agent/candidates.ts",
     "src/game/agent/fixtures/court-morning.ts",
     "src/game/agent/intent.ts",
     "src/game/agent/log.ts",
+    "src/game/agent/mind.ts",
     "src/game/agent/observe.ts",
     "src/game/agent/reflex.ts",
     "src/game/agent/types.ts",
@@ -76363,6 +76367,144 @@
         "src/game/resources/catalog.ts:23",
         "src/game/resources/catalog.ts:633",
         "src/game/resources/types.ts:17"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/agent/assembler.ts#Message.role=assistant",
+      "canonicalId": "src/game/agent/assembler.ts#Message.role=assistant",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/agent/assembler.ts:16"
+      ],
+      "sourceNames": [
+        "Message.role"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/agent/assembler.ts:16"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/agent/assembler.ts:16"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/agent/assembler.ts#Message.role=system",
+      "canonicalId": "src/game/agent/assembler.ts#Message.role=system",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/agent/assembler.ts:16"
+      ],
+      "sourceNames": [
+        "Message.role"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/agent/assembler.ts:16"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/agent/assembler.ts:16"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/agent/assembler.ts#Message.role=user",
+      "canonicalId": "src/game/agent/assembler.ts#Message.role=user",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/agent/assembler.ts:16"
+      ],
+      "sourceNames": [
+        "Message.role"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/agent/assembler.ts:16"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/agent/assembler.ts:16"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
