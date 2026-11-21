@@ -33,7 +33,7 @@ export const CURRENT_SAVE_VERSION = 5;
 
 type SaveRecord = Record<string, unknown>;
 
-const INTENT_KINDS = new Set([
+export const INTENT_KINDS = new Set([
   "walk",
   "chop",
   "mine",
