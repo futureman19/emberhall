@@ -331,6 +331,7 @@ function baseWorld(seed: number, tiles: Tile[][]): World {
     placedObjects: [],
     structures: [],
     blueprints: [],
+    playerStates: {},
     player: {
       id: "",
       skills: emptySkills(),

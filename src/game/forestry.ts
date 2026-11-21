@@ -1,3 +1,4 @@
+import { actorState, actorPerson } from "./actor.ts";
 import { ITEM_META } from "./catalog.ts";
 import { plotAt } from "./farm.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
@@ -16,13 +17,13 @@ export const TREE_HOURS = 1.6;
 /** Legal work reach at impact: the arrival ring plus stride slack. */
 const WORK_REACH = 2.4;
 
-function you(world: World) {
-  return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
+function you(world: World, actorId?: string) {
+  return actorPerson(world, actorId);
 }
 
 /** An empty route is not evidence of arrival — checked at every commit. */
-function inReach(world: World, tx: number, ty: number) {
-  const p = you(world);
+function inReach(world: World, tx: number, ty: number, actorId?: string) {
+  const p = you(world, actorId);
   return Boolean(p) && Math.hypot(p!.x - tx, p!.z - ty) <= WORK_REACH;
 }
 
@@ -75,8 +76,8 @@ export function canPlantTree(world: World, tx: number, ty: number): string | nul
   return null;
 }
 
-function pathBeside(world: World, tx: number, ty: number) {
-  const p = you(world);
+function pathBeside(world: World, tx: number, ty: number, actorId?: string) {
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
   const dest = nearestWalkable(world, tx, ty);
   if (!dest) return "No footing.";
@@ -87,32 +88,32 @@ function pathBeside(world: World, tx: number, ty: number) {
   return null;
 }
 
-export function commandPlantTree(world: World, tx: number, ty: number) {
-  const p = you(world);
+export function commandPlantTree(world: World, tx: number, ty: number, actorId?: string) {
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
-  if (world.player.ghost) return "A ghost cannot.";
-  if ((world.player.pack.acorn ?? 0) < 1) return `Need ${ITEM_META.acorn.label.toLowerCase()}.`;
-  const species = bestPlantableTimber(world.player.skills.forestry ?? 0);
+  if (actorState(world, actorId).ghost) return "A ghost cannot.";
+  if ((actorState(world, actorId).pack.acorn ?? 0) < 1) return `Need ${ITEM_META.acorn.label.toLowerCase()}.`;
+  const species = bestPlantableTimber(actorState(world, actorId).skills.forestry ?? 0);
   if (!species) return "Forestry is not yet taught.";
   const err = canPlantTree(world, tx, ty);
   if (err) return err;
-  const closed = pathBeside(world, tx, ty);
+  const closed = pathBeside(world, tx, ty, actorId);
   if (closed) return closed;
-  world.player.intent = { kind: "forest", tx, ty, targetId: species, spell: null };
+  actorState(world, actorId).intent = { kind: "forest", tx, ty, targetId: species, spell: null };
   return null;
 }
 
-export function plantTreeNow(world: World) {
-  const { tx, ty, targetId } = world.player.intent;
-  world.player.intent.kind = "none";
-  if (!inReach(world, tx, ty)) return "Too far.";
-  if ((world.player.pack.acorn ?? 0) < 1) return `Need ${ITEM_META.acorn.label.toLowerCase()}.`;
-  const forestry = world.player.skills.forestry ?? 0;
+export function plantTreeNow(world: World, actorId?: string) {
+  const { tx, ty, targetId } = actorState(world, actorId).intent;
+  actorState(world, actorId).intent.kind = "none";
+  if (!inReach(world, tx, ty, actorId)) return "Too far.";
+  if ((actorState(world, actorId).pack.acorn ?? 0) < 1) return `Need ${ITEM_META.acorn.label.toLowerCase()}.`;
+  const forestry = actorState(world, actorId).skills.forestry ?? 0;
   const species = isTimberId(targetId) && forestry >= plantSkillFor(targetId) ? targetId : bestPlantableTimber(forestry);
   if (!species) return "Forestry is not yet taught.";
   const err = canPlantTree(world, tx, ty);
   if (err) return err;
-  world.player.pack.acorn -= 1;
+  actorState(world, actorId).pack.acorn -= 1;
   if (!world.saplings) world.saplings = [];
   const sapling: Sapling = {
     id: `sap-${world.tickCount}-${world.saplings.length}-${world.seed}`,
@@ -128,7 +129,7 @@ export function plantTreeNow(world: World) {
   completeObjective(world, "forest");
   const next = timberSpecies().find((id) => plantSkillFor(id) > forestry);
   const inBand = !next || forestry + 20 >= plantSkillFor(next);
-  const gain = tryGain(world, "forestry", true, inBand);
+  const gain = tryGain(world, "forestry", true, inBand, actorId);
   const label = RESOURCE_CATALOG[species].label.toLowerCase();
   return gain ? `The ${label} takes. ${gain}.` : `The ${label} takes the dirt.`;
 }

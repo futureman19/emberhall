@@ -26,16 +26,17 @@ import { emitCompanionFx } from "./companion-animation.ts";
 import { emitPersonalActionFx } from "./personal-action-animation.ts";
 import { completeObjective, log } from "./world.ts";
 import { effectiveMain, rareMods, rareName, rollKillRare, weaponDmg } from "./rare.ts";
+import { actorState, actorPerson } from "./actor.ts";
 import { armedTechniqueFor } from "./techniques.ts";
 import type { FaunaKind, ItemId, Person, ResourceInventory, ResourceNodeStateMap, SkillId, WearSlot, World } from "./types.ts";
 
-export function you(world: World) {
-  return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
+export function you(world: World, actorId?: string) {
+  return actorPerson(world, actorId);
 }
 
-export function isGhost(world: World) {
-  const p = you(world);
-  return Boolean(world.player.ghost) || Boolean(p?.ghost);
+export function isGhost(world: World, actorId?: string) {
+  const p = you(world, actorId);
+  return Boolean(actorState(world, actorId).ghost) || Boolean(p?.ghost);
 }
 
 export function nearestHealer(world: World) {
@@ -227,8 +228,8 @@ export function inHand(world: World) {
 }
 
 /** A worn charm lifts the skill it blesses. */
-export function effSkill(world: World, id: SkillId) {
-  return (world.player.skills[id] ?? 0) + (rareMods(world).skills[id] ?? 0);
+export function effSkill(world: World, id: SkillId, actorId?: string) {
+  return (actorState(world, actorId).skills[id] ?? 0) + (rareMods(world, actorId).skills[id] ?? 0);
 }
 
 /** Extra strike dice from knowing the body. 0 at 0, 5 at 100. */

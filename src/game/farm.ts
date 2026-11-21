@@ -1,3 +1,4 @@
+import { actorState, actorPerson } from "./actor.ts";
 import { ITEM_META } from "./catalog.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { successChance, tryGain } from "./skills.ts";
@@ -9,13 +10,13 @@ const MAX_PLOTS = 40;
 /** Legal work reach at impact: the arrival ring plus stride slack. */
 const WORK_REACH = 2.4;
 
-function you(world: World) {
-  return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
+function you(world: World, actorId?: string) {
+  return actorPerson(world, actorId);
 }
 
 /** An empty route is not evidence of arrival — checked at every commit. */
-function inReach(world: World, tx: number, ty: number) {
-  const p = you(world);
+function inReach(world: World, tx: number, ty: number, actorId?: string) {
+  const p = you(world, actorId);
   return Boolean(p) && Math.hypot(p!.x - tx, p!.z - ty) <= WORK_REACH;
 }
 
@@ -28,8 +29,8 @@ function bedId(world: World) {
   return `bed-${world.tickCount}-${world.plots.length}-${world.seed}`;
 }
 
-function heldHoe(world: World) {
-  if (world.player.wear.main === "hoe") return null;
+function heldHoe(world: World, actorId?: string) {
+  if (actorState(world, actorId).wear.main === "hoe") return null;
   return "Hold a hoe — tap it in You.";
 }
 
@@ -62,9 +63,9 @@ export function plotAt(world: World, tx: number, ty: number) {
   return world.plots.find((p) => p.tx === tx && p.ty === ty) ?? null;
 }
 
-export function firstSeed(world: World): CropId | null {
+export function firstSeed(world: World, actorId?: string): CropId | null {
   for (const id of CROP_ORDER) {
-    if ((world.player.pack[CROP_META[id].seed] ?? 0) > 0) return id;
+    if ((actorState(world, actorId).pack[CROP_META[id].seed] ?? 0) > 0) return id;
   }
   return null;
 }
@@ -127,8 +128,8 @@ export function tickCrops(world: World) {
   }
 }
 
-function pathBesidePlot(world: World, tx: number, ty: number) {
-  const p = you(world);
+function pathBesidePlot(world: World, tx: number, ty: number, actorId?: string) {
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
   const dest = nearestWalkable(world, tx, ty);
   if (!dest) return "No footing.";
@@ -139,114 +140,114 @@ function pathBesidePlot(world: World, tx: number, ty: number) {
   return null;
 }
 
-export function commandTill(world: World, tx: number, ty: number) {
-  const p = you(world);
+export function commandTill(world: World, tx: number, ty: number, actorId?: string) {
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
-  if (world.player.ghost) return "A ghost cannot.";
-  const hoe = heldHoe(world);
+  if (actorState(world, actorId).ghost) return "A ghost cannot.";
+  const hoe = heldHoe(world, actorId);
   if (hoe) return hoe;
   const err = canTill(world, tx, ty);
   if (err) return err;
-  const closed = pathBesidePlot(world, tx, ty);
+  const closed = pathBesidePlot(world, tx, ty, actorId);
   if (closed) return closed;
-  world.player.intent = { kind: "till", tx, ty, targetId: null, spell: null };
+  actorState(world, actorId).intent = { kind: "till", tx, ty, targetId: null, spell: null };
   return null;
 }
 
-export function commandPlant(world: World, tx: number, ty: number, crop: CropId) {
-  const p = you(world);
+export function commandPlant(world: World, tx: number, ty: number, crop: CropId, actorId?: string) {
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
-  if (world.player.ghost) return "A ghost cannot.";
-  const hoe = heldHoe(world);
+  if (actorState(world, actorId).ghost) return "A ghost cannot.";
+  const hoe = heldHoe(world, actorId);
   if (hoe) return hoe;
   const bed = plotAt(world, tx, ty);
   if (!bed) return "Till a plot first.";
   if (bed.crop) return bed.stage >= 3 ? "It is ripe. Take it." : "Something already grows.";
   const seed = CROP_META[crop].seed;
-  if ((world.player.pack[seed] ?? 0) < 1) return `Need ${ITEM_META[seed].label.toLowerCase()}.`;
-  const closed = pathBesidePlot(world, tx, ty);
+  if ((actorState(world, actorId).pack[seed] ?? 0) < 1) return `Need ${ITEM_META[seed].label.toLowerCase()}.`;
+  const closed = pathBesidePlot(world, tx, ty, actorId);
   if (closed) return closed;
-  world.player.intent = { kind: "plant", tx, ty, targetId: crop, spell: null };
+  actorState(world, actorId).intent = { kind: "plant", tx, ty, targetId: crop, spell: null };
   return null;
 }
 
-export function commandHarvest(world: World, tx: number, ty: number) {
-  const p = you(world);
+export function commandHarvest(world: World, tx: number, ty: number, actorId?: string) {
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
-  if (world.player.ghost) return "A ghost cannot.";
-  const hoe = heldHoe(world);
+  if (actorState(world, actorId).ghost) return "A ghost cannot.";
+  const hoe = heldHoe(world, actorId);
   if (hoe) return hoe;
   const bed = plotAt(world, tx, ty);
   if (!bed || !bed.crop) return "Nothing grows.";
   if (bed.stage < 3) return "Not yet.";
-  const closed = pathBesidePlot(world, tx, ty);
+  const closed = pathBesidePlot(world, tx, ty, actorId);
   if (closed) return closed;
-  world.player.intent = { kind: "harvest", tx, ty, targetId: bed.id, spell: null };
+  actorState(world, actorId).intent = { kind: "harvest", tx, ty, targetId: bed.id, spell: null };
   return null;
 }
 
-export function commandWorkPlot(world: World, tx: number, ty: number) {
+export function commandWorkPlot(world: World, tx: number, ty: number, actorId?: string) {
   const bed = plotAt(world, tx, ty);
   if (!bed) return null;
-  if (bed.crop && bed.stage >= 3) return commandHarvest(world, tx, ty);
+  if (bed.crop && bed.stage >= 3) return commandHarvest(world, tx, ty, actorId);
   if (bed.crop) return "Not yet.";
-  const crop = firstSeed(world);
+  const crop = firstSeed(world, actorId);
   if (!crop) return "Need seed — crop or herb.";
-  return commandPlant(world, tx, ty, crop);
+  return commandPlant(world, tx, ty, crop, actorId);
 }
 
-export function tillNow(world: World) {
-  const { tx, ty } = world.player.intent;
-  world.player.intent.kind = "none";
-  const hoe = heldHoe(world);
+export function tillNow(world: World, actorId?: string) {
+  const { tx, ty } = actorState(world, actorId).intent;
+  actorState(world, actorId).intent.kind = "none";
+  const hoe = heldHoe(world, actorId);
   if (hoe) return hoe;
-  if (!inReach(world, tx, ty)) return "Too far.";
+  if (!inReach(world, tx, ty, actorId)) return "Too far.";
   const err = canTill(world, tx, ty);
   if (err) return err;
   makePlot(world, tx, ty);
   emitGatheringFx({ kind: "tilling", success: true, x: tx, z: ty, at: world.hour, subject: null });
   playSfx("chop", 0.4);
-  const gain = tryGain(world, "farming", true, true);
+  const gain = tryGain(world, "farming", true, true, actorId);
   noteDone(world, "till");
   return gain ? `A bed. ${gain}.` : "The dirt is a bed.";
 }
 
-export function plantNow(world: World) {
-  const crop = world.player.intent.targetId as CropId;
+export function plantNow(world: World, actorId?: string) {
+  const crop = actorState(world, actorId).intent.targetId as CropId;
   const meta = CROP_META[crop];
-  const bed = plotAt(world, world.player.intent.tx, world.player.intent.ty);
-  world.player.intent.kind = "none";
-  const hoe = heldHoe(world);
+  const bed = plotAt(world, actorState(world, actorId).intent.tx, actorState(world, actorId).intent.ty);
+  actorState(world, actorId).intent.kind = "none";
+  const hoe = heldHoe(world, actorId);
   if (hoe) return hoe;
-  if (!inReach(world, world.player.intent.tx, world.player.intent.ty)) return "Too far.";
+  if (!inReach(world, actorState(world, actorId).intent.tx, actorState(world, actorId).intent.ty, actorId)) return "Too far.";
   if (!meta || !bed) return "The bed is gone.";
   if (bed.crop) return "Something already grows.";
-  if ((world.player.pack[meta.seed] ?? 0) < 1) return `Need ${ITEM_META[meta.seed].label.toLowerCase()}.`;
-  world.player.pack[meta.seed] -= 1;
+  if ((actorState(world, actorId).pack[meta.seed] ?? 0) < 1) return `Need ${ITEM_META[meta.seed].label.toLowerCase()}.`;
+  actorState(world, actorId).pack[meta.seed] -= 1;
   bed.crop = crop;
   bed.plantedHour = world.hour;
   bed.stage = 1;
   emitGatheringFx({ kind: "sowing", success: true, x: bed.tx, z: bed.ty, at: world.hour, subject: crop });
   playSfx("chop", 0.38);
-  const gain = tryGain(world, "farming", true, true);
+  const gain = tryGain(world, "farming", true, true, actorId);
   noteDone(world, "plant");
   return gain ? `The seed takes. ${gain}.` : `The ${meta.label.toLowerCase()} seed takes the dirt.`;
 }
 
-export function harvestNow(world: World) {
+export function harvestNow(world: World, actorId?: string) {
   const bed =
-    world.plots.find((p) => p.id === world.player.intent.targetId) ??
-    plotAt(world, world.player.intent.tx, world.player.intent.ty);
-  world.player.intent.kind = "none";
-  const hoe = heldHoe(world);
+    world.plots.find((p) => p.id === actorState(world, actorId).intent.targetId) ??
+    plotAt(world, actorState(world, actorId).intent.tx, actorState(world, actorId).intent.ty);
+  actorState(world, actorId).intent.kind = "none";
+  const hoe = heldHoe(world, actorId);
   if (hoe) return hoe;
   if (!bed || !bed.crop || bed.stage < 3) return "Nothing ripe.";
-  if (!inReach(world, bed.tx, bed.ty)) return "Too far.";
+  if (!inReach(world, bed.tx, bed.ty, actorId)) return "Too far.";
   const meta = CROP_META[bed.crop];
   const crop = bed.crop;
-  const chance = successChance(world.player.skills.farming, meta.diff);
+  const chance = successChance(actorState(world, actorId).skills.farming, meta.diff);
   const ok = Math.random() < chance;
-  const gain = tryGain(world, "farming", ok, true);
+  const gain = tryGain(world, "farming", ok, true, actorId);
   playSfx("chop", 0.5);
   if (!ok) {
     emitGatheringFx({ kind: "harvesting", success: false, x: bed.tx, z: bed.ty, at: world.hour, subject: crop });
@@ -255,9 +256,9 @@ export function harvestNow(world: World) {
     bed.plantedHour = 0;
     return gain ? `The crop breaks. ${gain}.` : "The crop breaks.";
   }
-  const extra = Math.random() < 0.4 + world.player.skills.farming / 200 ? 1 : 0;
-  world.player.pack[meta.crop] = (world.player.pack[meta.crop] ?? 0) + 1;
-  world.player.pack[meta.seed] = (world.player.pack[meta.seed] ?? 0) + 1 + extra;
+  const extra = Math.random() < 0.4 + actorState(world, actorId).skills.farming / 200 ? 1 : 0;
+  actorState(world, actorId).pack[meta.crop] = (actorState(world, actorId).pack[meta.crop] ?? 0) + 1;
+  actorState(world, actorId).pack[meta.seed] = (actorState(world, actorId).pack[meta.seed] ?? 0) + 1 + extra;
   emitGatheringFx({ kind: "harvesting", success: true, x: bed.tx, z: bed.ty, at: world.hour, subject: crop });
   bed.crop = null;
   bed.stage = 0;

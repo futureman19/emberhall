@@ -1,3 +1,4 @@
+import { actorState } from "./actor.ts";
 import { SKILL_META } from "./catalog.ts";
 import { mulberry32 } from "./rng.ts";
 import type { SkillId, World } from "./types.ts";
@@ -6,8 +7,8 @@ function rngAt(world: World, salt: number) {
   return mulberry32((world.seed + world.tickCount * 31 + salt) >>> 0)();
 }
 
-function totalSkill(world: World) {
-  return Object.values(world.player.skills).reduce((a, b) => a + b, 0);
+function totalSkill(world: World, actorId?: string) {
+  return Object.values(actorState(world, actorId).skills).reduce((a, b) => a + b, 0);
 }
 
 function ggsWait(skill: number, total: number) {
@@ -21,17 +22,17 @@ export function successChance(skill: number, difficulty: number) {
   return Math.max(0.05, Math.min(0.95, 0.5 + delta / 80));
 }
 
-export function tryGain(world: World, skill: SkillId, succeeded: boolean, inBand: boolean): string | null {
+export function tryGain(world: World, skill: SkillId, succeeded: boolean, inBand: boolean, actorId?: string): string | null {
   if (!succeeded) return null;
-  const cur = world.player.skills[skill];
+  const cur = actorState(world, actorId).skills[skill];
   if (cur >= 100) return null;
-  const total = totalSkill(world);
+  const total = totalSkill(world, actorId);
   const wait = ggsWait(cur, total);
-  const due = world.hour - world.player.lastGain[skill] >= wait;
+  const due = world.hour - actorState(world, actorId).lastGain[skill] >= wait;
   const p = inBand ? 0.42 : 0.1;
   const roll = rngAt(world, skill.length * 17 + Math.floor(cur * 10));
   if (!due && roll > p) return null;
-  world.player.skills[skill] = Math.min(100, Math.round((cur + 0.1) * 10) / 10);
-  world.player.lastGain[skill] = world.hour;
-  return `${SKILL_META[skill].label} rises to ${world.player.skills[skill].toFixed(1)}`;
+  actorState(world, actorId).skills[skill] = Math.min(100, Math.round((cur + 0.1) * 10) / 10);
+  actorState(world, actorId).lastGain[skill] = world.hour;
+  return `${SKILL_META[skill].label} rises to ${actorState(world, actorId).skills[skill].toFixed(1)}`;
 }

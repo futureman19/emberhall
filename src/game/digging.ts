@@ -1,3 +1,4 @@
+import { actorState, actorPerson } from "./actor.ts";
 import { ITEM_META } from "./catalog.ts";
 import { plotAt } from "./farm.ts";
 import { houseOnTile } from "./house.ts";
@@ -14,8 +15,8 @@ export const HOLE_CAP = 12;
 const WORK_REACH = 2.4;
 const DIG_KINDS = new Set<TileKind>(["grass", "dirt", "sand", "snow", "marsh"]);
 
-function you(world: World) {
-  return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
+function you(world: World, actorId?: string) {
+  return actorPerson(world, actorId);
 }
 
 function keyOf(tx: number, ty: number) {
@@ -46,13 +47,13 @@ function cellarsUnder(world: World, house: NonNullable<ReturnType<typeof houseOn
   return n;
 }
 
-function inReach(world: World, tx: number, ty: number) {
-  const p = you(world);
+function inReach(world: World, tx: number, ty: number, actorId?: string) {
+  const p = you(world, actorId);
   return Boolean(p) && Math.hypot(p!.x - tx, p!.z - ty) <= WORK_REACH;
 }
 
-function pathBeside(world: World, tx: number, ty: number) {
-  const p = you(world);
+function pathBeside(world: World, tx: number, ty: number, actorId?: string) {
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
   const dest = nearestWalkable(world, tx, ty);
   if (!dest) return "No footing.";
@@ -63,16 +64,16 @@ function pathBeside(world: World, tx: number, ty: number) {
   return null;
 }
 
-function heldPick(world: World) {
-  if (world.player.wear.main === "pick") return null;
+function heldPick(world: World, actorId?: string) {
+  if (actorState(world, actorId).wear.main === "pick") return null;
   return "Hold a pick — tap it in You.";
 }
 
-function occupied(world: World, tx: number, ty: number): string | null {
+function occupied(world: World, tx: number, ty: number, actorId?: string): string | null {
   if (plotAt(world, tx, ty)) return "That dirt is a bed.";
   if (world.saplings?.some((s) => s.tx === tx && s.ty === ty)) return "A sapling grows.";
   const house = houseOnTile(world, tx, ty);
-  if (house && house.ownerId !== world.player.id) return "That house is not yours.";
+  if (house && house.ownerId !== actorState(world, actorId).id) return "That house is not yours.";
   if (pieceBlocks(world, tx, ty)) return "Something stands there.";
   for (const b of world.buildings) {
     if (house && b.id === house.id) continue;
@@ -116,33 +117,33 @@ function firstLootName(buried: NonNullable<Hole["buried"]>) {
   return "something";
 }
 
-function giveBuried(world: World, buried: NonNullable<Hole["buried"]>) {
+function giveBuried(world: World, buried: NonNullable<Hole["buried"]>, actorId?: string) {
   for (const [id, n] of Object.entries(buried.items)) {
     if (!n) continue;
-    world.player.pack[id as ItemId] = (world.player.pack[id as ItemId] ?? 0) + n;
+    actorState(world, actorId).pack[id as ItemId] = (actorState(world, actorId).pack[id as ItemId] ?? 0) + n;
   }
   if (buried.gold > 0) world.gold += buried.gold;
 }
 
-export function applyDig(world: World, tx: number, ty: number) {
-  if (world.player.ghost) return "A ghost cannot.";
-  const pick = heldPick(world);
+export function applyDig(world: World, tx: number, ty: number, actorId?: string) {
+  if (actorState(world, actorId).ghost) return "A ghost cannot.";
+  const pick = heldPick(world, actorId);
   if (pick) return pick;
   const tile = world.tiles[ty]?.[tx];
   if (!tile) return "No footing.";
   const existing = holeAt(world, tx, ty);
   if (existing && !existing.open && existing.buried) {
     const name = firstLootName(existing.buried);
-    giveBuried(world, existing.buried);
+    giveBuried(world, existing.buried, actorId);
     delete ensureHoles(world)[keyOf(tx, ty)];
     playSfx("mine", 0.4);
-    const gain = tryGain(world, "mining", true, true);
+    const gain = tryGain(world, "mining", true, true, actorId);
     const note = `You unearth ${name}.`;
     return gain ? `${note} ${gain}` : note;
   }
   if (existing?.open) return "The hole is already open.";
   const house = houseOnTile(world, tx, ty);
-  const busy = occupied(world, tx, ty);
+  const busy = occupied(world, tx, ty, actorId);
   if (busy) return busy;
   if (tile.kind === "water") return "The water will not take a hole.";
   if (tile.kind === "pit") return "The tomb is not yours to shovel.";
@@ -152,7 +153,7 @@ export function applyDig(world: World, tx: number, ty: number) {
   if (tile.kind === "rock") return "Mine the stone. Do not shovel it.";
   if (tile.kind === "tree") return "The tree stands.";
   if (!DIG_KINDS.has(tile.kind)) return "Not this dirt.";
-  const cellar = Boolean(house && house.ownerId === world.player.id);
+  const cellar = Boolean(house && house.ownerId === actorState(world, actorId).id);
   if (cellar && cellarsUnder(world, house!) >= 1) return "One cellar is enough.";
   if (!cellar && openCount(world) >= HOLE_CAP) return "Twelve holes is enough. Wait for rain.";
   const kind = tile.kind;
@@ -164,13 +165,13 @@ export function applyDig(world: World, tx: number, ty: number) {
   world.landRev += 1;
   emitExtractionFx(world, "mining", true, tx, ty);
   playSfx("mine", 0.5);
-  const gain = tryGain(world, "mining", true, true);
+  const gain = tryGain(world, "mining", true, true, actorId);
   const note = cellar ? "A cellar under the house." : "A hole in the dirt.";
   return gain ? `${note} ${gain}` : note;
 }
 
-export function applyFill(world: World, tx: number, ty: number) {
-  if (world.player.ghost) return "A ghost cannot.";
+export function applyFill(world: World, tx: number, ty: number, actorId?: string) {
+  if (actorState(world, actorId).ghost) return "A ghost cannot.";
   const hole = holeAt(world, tx, ty);
   if (!hole?.open) return "No hole to fill.";
   const buried = takePile(world, tx, ty);
@@ -214,39 +215,39 @@ export function washHoles(world: World) {
   }
 }
 
-export function commandDig(world: World, tx: number, ty: number) {
-  const p = you(world);
+export function commandDig(world: World, tx: number, ty: number, actorId?: string) {
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
-  if (world.player.ghost) return "A ghost cannot.";
-  const pick = heldPick(world);
+  if (actorState(world, actorId).ghost) return "A ghost cannot.";
+  const pick = heldPick(world, actorId);
   if (pick) return pick;
-  const closed = pathBeside(world, tx, ty);
+  const closed = pathBeside(world, tx, ty, actorId);
   if (closed) return closed;
-  world.player.intent = { kind: "dig", tx, ty, targetId: null, spell: null };
+  actorState(world, actorId).intent = { kind: "dig", tx, ty, targetId: null, spell: null };
   return null;
 }
 
-export function commandFill(world: World, tx: number, ty: number) {
-  const p = you(world);
+export function commandFill(world: World, tx: number, ty: number, actorId?: string) {
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
-  if (world.player.ghost) return "A ghost cannot.";
+  if (actorState(world, actorId).ghost) return "A ghost cannot.";
   if (!holeAt(world, tx, ty)?.open) return "No hole to fill.";
-  const closed = pathBeside(world, tx, ty);
+  const closed = pathBeside(world, tx, ty, actorId);
   if (closed) return closed;
-  world.player.intent = { kind: "fill", tx, ty, targetId: null, spell: null };
+  actorState(world, actorId).intent = { kind: "fill", tx, ty, targetId: null, spell: null };
   return null;
 }
 
-export function digNow(world: World) {
-  const { tx, ty } = world.player.intent;
-  world.player.intent.kind = "none";
-  if (!inReach(world, tx, ty)) return "Too far.";
-  return applyDig(world, tx, ty);
+export function digNow(world: World, actorId?: string) {
+  const { tx, ty } = actorState(world, actorId).intent;
+  actorState(world, actorId).intent.kind = "none";
+  if (!inReach(world, tx, ty, actorId)) return "Too far.";
+  return applyDig(world, tx, ty, actorId);
 }
 
-export function fillNow(world: World) {
-  const { tx, ty } = world.player.intent;
-  world.player.intent.kind = "none";
-  if (!inReach(world, tx, ty)) return "Too far.";
-  return applyFill(world, tx, ty);
+export function fillNow(world: World, actorId?: string) {
+  const { tx, ty } = actorState(world, actorId).intent;
+  actorState(world, actorId).intent.kind = "none";
+  if (!inReach(world, tx, ty, actorId)) return "Too far.";
+  return applyFill(world, tx, ty, actorId);
 }

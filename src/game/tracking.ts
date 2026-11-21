@@ -1,3 +1,4 @@
+import { actorState } from "./actor.ts";
 import { FAUNA_META } from "./catalog.ts";
 import { isGhost, you, effSkill } from "./player.ts";
 import { tryGain } from "./skills.ts";
@@ -26,11 +27,11 @@ function paces(distance: number) {
   return Math.max(1, Math.round(distance));
 }
 
-export function commandTrack(world: World) {
-  if (isGhost(world)) return "A ghost cannot.";
-  const self = you(world);
+export function commandTrack(world: World, actorId?: string) {
+  if (isGhost(world, actorId)) return "A ghost cannot.";
+  const self = you(world, actorId);
   if (!self) return "You are not in the vale.";
-  const skill = effSkill(world, "tracking");
+  const skill = effSkill(world, "tracking", actorId);
   const range = trackingRange(skill);
   let best: { name: string; x: number; z: number; d: number } | null = null;
 
@@ -46,12 +47,14 @@ export function commandTrack(world: World) {
   }
   if (skill >= TRACK_SOUL) {
     for (const person of world.people) {
-      if (person.isPlayer || person.id === world.player.id) continue;
+      if (actorId === undefined
+        ? person.isPlayer || person.id === actorState(world).id
+        : person.id === self.id) continue;
       consider(person.name, person.x, person.z);
     }
   }
 
-  tryGain(world, "tracking", true, Boolean(best));
+  tryGain(world, "tracking", true, Boolean(best), actorId);
   if (!best) {
     const note = "The trail is cold.";
     log(world, note);

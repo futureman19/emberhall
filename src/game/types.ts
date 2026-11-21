@@ -672,6 +672,8 @@ export interface World {
   placedObjects: PlacedObject[];
   structures: Structure[];
   blueprints: Blueprint[];
+  /** Explicit actor sheets; absent in legacy solo saves. */
+  playerStates?: Record<string, PlayerState>;
   player: PlayerState;
   log: LogLine[];
   objectives: Objective[];

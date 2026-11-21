@@ -1,3 +1,4 @@
+import { actorState } from "./actor.ts";
 import { COURT, GATE, placeById } from "./atlas.ts";
 import { FLY_SPEED, SECONDS_PER_HOUR } from "./catalog.ts";
 import { updateSpellStatuses } from "./spell-effects.ts";
@@ -47,14 +48,18 @@ export function setSpeed(world: World, s: Speed) {
   world.speed = s;
 }
 
-function followPath(world: World, p: Person, dt: number): "idle" | "moving" | "stuck" {
+/** Follow one body's route; explicit actors use their own movement state.
+ * The world tick remains the legacy solo/NPC scheduler. */
+export function followPath(world: World, p: Person, dt: number, actorId?: string): "idle" | "moving" | "stuck" {
+  const state = actorId !== undefined || p.isPlayer ? actorState(world, actorId) : undefined;
+  if (actorId !== undefined && state!.id !== p.id) throw new Error(`Actor body mismatch: ${actorId}`);
   if (!p.path.length) {
     motionWatches.delete(p);
     return "idle";
   }
   const startX = p.x;
   const startZ = p.z;
-  let remaining = WALK_SPEED * (p.ghost ? 1.4 : 1) * dt * zonePersonSlowAt(world, p.x, p.z) * (p.isPlayer && world.hour < world.player.flyUntil ? FLY_SPEED : 1);
+  let remaining = WALK_SPEED * (p.ghost ? 1.4 : 1) * dt * zonePersonSlowAt(world, p.x, p.z) * (state && world.hour < state.flyUntil ? FLY_SPEED : 1);
   const previous = motionWatches.get(p);
   const first = p.path[0]!;
   // Planned segments are already corner/climb checked. Revalidate only when

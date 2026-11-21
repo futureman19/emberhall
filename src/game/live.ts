@@ -19,6 +19,7 @@ import { createResourceNodeStateMap, regrowResourceNodes } from "./resources/sta
 import type { SkillId, Snapshot, World } from "./types.ts";
 
 function withFauna(w: World) {
+  if (!w.playerStates) w.playerStates = {};
   if (!w.fauna) w.fauna = [];
   if (!w.piles) w.piles = [];
   if (!w.campfires) w.campfires = [];

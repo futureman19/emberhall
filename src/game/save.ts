@@ -608,6 +608,9 @@ function isCurrentSave(save: SaveRecord): boolean {
     (save.saplings === undefined || isArrayOf(save.saplings, isSapling)) &&
     (save.plantedTimber === undefined || isStringRecord(save.plantedTimber)) &&
     isPlayer(save.player) &&
+    (save.playerStates === undefined || (isRecord(save.playerStates) &&
+      Object.entries(save.playerStates).every(([id, state]) =>
+        isRecord(state) && state.id === id && isPlayer(state)))) &&
     isArrayOf(save.log, isLogLine) &&
     isArrayOf(save.objectives, isObjective) &&
     isArrayOf(save.quests, isQuest) &&
@@ -696,6 +699,15 @@ export function encodeSave(world: World): string {
     const { tiles: _tiles, player, ...rest } = world;
     const payload = {
       ...rest,
+      playerStates: world.playerStates === undefined ? undefined : Object.fromEntries(
+        Object.entries(world.playerStates).map(([id, state]) => [id, {
+          ...state,
+          resources: parseResourceInventory(state.resources),
+          wear: projectWearRecord(state.wear),
+          wearRare: projectWearRecord(state.wearRare),
+          rares: state.rares.map(normalizeRareRecord),
+        }]),
+      ),
       resourceNodes,
       player: {
         ...player,
@@ -738,6 +750,7 @@ export function loadSave(): World | null {
 
     const { saveVersion: _saveVersion, ...storedWorld } = migrated;
     const data = storedWorld as unknown as World;
+    if (!data.playerStates) data.playerStates = {};
     data.resourceNodes = parseResourceNodeStateMapAtHour({
       seed: data.seed,
       hour: data.hour,

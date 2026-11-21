@@ -1,3 +1,4 @@
+import { actorState } from "./actor.ts";
 import { hasTag, ITEM_META, SKILL_META } from "./catalog.ts";
 import { RESOURCE_CATALOG } from "./resources/catalog.ts";
 import { ITEM_FORM_CATALOG } from "./crafting/forms.ts";
@@ -320,11 +321,11 @@ export function rareName(rare: RareItem): string {
 }
 
 /** The rares a player currently has equipped, slot by slot. */
-export function equippedRares(world: World): { slot: WearSlot; rare: RareItem }[] {
+export function equippedRares(world: World, actorId?: string): { slot: WearSlot; rare: RareItem }[] {
   const out: { slot: WearSlot; rare: RareItem }[] = [];
-  for (const [slot, uid] of Object.entries(world.player.wearRare)) {
+  for (const [slot, uid] of Object.entries(actorState(world, actorId).wearRare)) {
     if (!uid) continue;
-    const rare = world.player.rares.find((r) => r.uid === uid);
+    const rare = actorState(world, actorId).rares.find((r) => r.uid === uid);
     if (rare) out.push({ slot: slot as WearSlot, rare });
   }
   return out;
@@ -339,9 +340,9 @@ export interface RareMods {
 }
 
 /** Aggregate the magical effects of everything equipped. */
-export function rareMods(world: World): RareMods {
+export function rareMods(world: World, actorId?: string): RareMods {
   const mods: RareMods = { hit: 0, dmg: 0, armor: 0, skills: {}, vs: {} };
-  for (const { slot, rare } of equippedRares(world)) {
+  for (const { slot, rare } of equippedRares(world, actorId)) {
     if (rare.resolvedStats) {
       if (slot === "main") {
         mods.hit += rare.resolvedStats.hitBonus;
