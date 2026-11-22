@@ -168098,7 +168098,7 @@
       "canonicalId": "src/game/placeables/placement.ts#PlaceOpts.skipCost=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/placeables/placement.ts:10"
+        "src/game/placeables/placement.ts:12"
       ],
       "sourceNames": [
         "PlaceOpts.skipCost"
@@ -168144,7 +168144,7 @@
       "canonicalId": "src/game/placeables/placement.ts#PlaceOpts.skipCost=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/placeables/placement.ts:10"
+        "src/game/placeables/placement.ts:12"
       ],
       "sourceNames": [
         "PlaceOpts.skipCost"
@@ -168190,7 +168190,7 @@
       "canonicalId": "src/game/placeables/placement.ts#PlaceOpts.skipValidate=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/placeables/placement.ts:11"
+        "src/game/placeables/placement.ts:13"
       ],
       "sourceNames": [
         "PlaceOpts.skipValidate"
@@ -168236,7 +168236,7 @@
       "canonicalId": "src/game/placeables/placement.ts#PlaceOpts.skipValidate=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/placeables/placement.ts:11"
+        "src/game/placeables/placement.ts:13"
       ],
       "sourceNames": [
         "PlaceOpts.skipValidate"
