@@ -1,0 +1,89 @@
+{
+  "LANE": "AI-MMO C1d integration / telegram3",
+  "TASK": "t_934f17c8",
+  "SCOPE": "Integrate all Emberhall C1d parent migrations onto base 9135794c, re-run the world/player authority sweep, run all gates on the final tree, and publish this verified handoff.",
+  "BASE_SHA": "9135794c220f25406b412a15ce5871476a9237f8",
+  "BRANCH": "wt/t_934f17c8",
+  "WORKTREE": "C:/Users/futur/Desktop/emberhall/.worktrees/t_934f17c8",
+  "FINAL_SOURCE_COMMIT": "d288db65cfe5af275f6a41505164965a0d0924b6",
+  "FINAL_LOCAL_COMMIT_NOTE": "Branch tip after this evidence commit; exact hash recorded in the kanban completion metadata and task comment for t_934f17c8.",
+  "INTEGRATED_COMMITS": [
+    {"commit": "d59947ee38cc8d5aac0d786e1814dae7a8ed9737", "from_parent": "t_4dc578ac", "source_commit": "79371aaa322190b2c1863cc88dddadcb3e9bf06b", "lane": "weather + AI target-acquisition ownership doc + lock tests (no production source change)"},
+    {"commit": "635d7928fa2d92b02e6926c8f0d4547466d9ead6", "from_parent": "t_640a949b", "source_commit": "480d32a", "lane": "kit undo per-actor session journals + placement/commands actorId seam"},
+    {"commit": "d288db65cfe5af275f6a41505164965a0d0924b6", "from_parent": "t_ecf5919f", "source_commit": "a9d9ea1311931022f288e84210b7bf2afb279a3c", "lane": "NPC trade + commissions actor authority (rebased off baa10bb onto 9135794c; no Q1a/Q1b content pulled in)"},
+    {"commit": null, "from_parent": "t_5f775f73", "source_commit": null, "lane": "Vault authority boundaries — deliberate no-op per approved policy; nothing to migrate"}
+  ],
+  "DIFF_STAT_VS_BASE": "13 files changed, 1280 insertions(+), 171 deletions(-) — src/game/{npcs,commissions,sim}.ts, src/game/placeables/{history,placement,commands}.ts, docs/actor-ownership-weather-ai.md, 4 new test files, package.json test string (in-place), art/asset-ledger.json pin refresh",
+  "POLICY_APPROVALS": {
+    "source": "t_f37cd205 controller approval (2026-11-21), confirming the kimi-manager bundle approved with amendments on t_e420743a",
+    "kit_undo": "per-actor session journals, conflict-checked deltas, validate-before-inverse, whole-op reject on conflict, omitted-ID legacy solo, unknown IDs fail closed, bounded session-only",
+    "weather": "world-global singular sim; legacy douse deadline scoped to legacy solo; per-actor exposure deferred to host",
+    "ai_targeting": "sim authority with current-target semantics preserved; multi-actor threat table (nearest + lexical tie-break, per-target windup identity) DEFERRED to host — not built client-side",
+    "npc_trade_commissions": "actor-aware resolution; world gold/rep/quest flags stay shared (no per-player economy)",
+    "vault": "boundaries unchanged, commit-chain mutations untouched, client-beta until the host is the only mint signer"
+  },
+  "MIGRATION_SUMMARY": {
+    "conflicts_resolved": "2, both package.json test-string adjacency — union-resolved keeping all four lane test registrations (weather-policy, ai-targeting-policy, c1d-undo, actor-trade) in place; Q1b-only registrations (agent/mind, agent/packs) deliberately NOT pulled from the a9d9ea1 context since base 9135794c lacks those files. art/asset-ledger.json auto-merged cleanly both times (10 pin lines total: 4 undo + 6 commissions); audit re-verified exit 0, no --refresh needed.",
+    "integration_regressions": "none — no production-code conflict between lanes (disjoint files except package.json/ledger); all gates green on first full run of the integrated tree; no fixes required",
+    "deviation_kept": "clearHistory(world) with omitted id wipes ALL journals for the world (t_640a949b's deliberate deviation from the umbrella WIP); only omitted-id callers are live.ts setWorld/resetWorld",
+    "not_integrated": "umbrella worktree t_e420743a dirty tree (SUPERSEDED per-actor douse deadlines, ai-target.ts threat table, piles range guard, blueprint/functions/salvage/vault actor-capture WIP) — excluded per three sibling warnings"
+  },
+  "VAULT_PROTECTION": {
+    "command": "git diff --exit-code 9135794c220f25406b412a15ce5871476a9237f8..HEAD -- src/chain src/game/vault.ts src/components/game/vault-gump.tsx",
+    "exit_code": 0,
+    "result": "no diff — Vault commit-chain mutations and chain code untouched by the integration"
+  },
+  "SWEEP": {
+    "doc": ".hermes/verification/c1d-integration/world-player-sweep.md",
+    "baseline_note": "Requested C1c baseline .worktrees/t_d042973e/.hermes/verification/c1c/world-player-sweep.md is file-not-found (worktree merged/gone); re-ran the identical census on the untouched base worktree .worktrees/t_db6b526c (HEAD verified 9135794c) for a like-for-like baseline; umbrella successor census used as classification framework only",
+    "base_census": "130 files, 165 occurrences, 143 matching lines (world.player 121, w.player 42, getWorld().player 2)",
+    "integrated_census": "130 files, 126 occurrences, 107 matching lines (world.player 82, w.player 42, getWorld().player 2)",
+    "net_delta": "-39 occurrences: npcs 18→0, commissions 10→0, placeables/history 2→0, placement 4→0, commands 6→0; sim.ts +1 (intentional skip-solo-alias registry loop from the NPC-trade lane)",
+    "domain_accounting": {
+      "npc_trade_commissions": "MIGRATED — zero literal hits; actorState resolution, fail-closed unknowns, shared gold/rep/quests per policy; locked by actor-trade.test.ts (15)",
+      "kit_undo": "MIGRATED — zero literal hits; per-actor journals with conflict-checked deltas and ownership guard; locked by c1d-undo.test.ts (12)",
+      "vault_commits": "RETAINED SOLO, APPROVED — 15 hits unchanged, chain diff exit 0; stays client-beta per t_5f775f73",
+      "rain_weather": "DOCUMENTED + LOCKED — 2 hits (legacy solo torch douse 155/169) per world-global singular policy; single tick path tickWeather←tickWorld verified; locked by weather-policy.test.ts (6)",
+      "ai_target_acquisition": "DOCUMENTED + LOCKED — 14 hits across ecology/embercrawler/emberdeep-monsters/furnace-warden/gloomwraith are the preserved current-target sim authority; threat table deferred to host; locked by ai-targeting-policy.test.ts (6)"
+    },
+    "remaining_solo_boundaries": {
+      "approved_retained": "UI solo adapters (store 25, spell-effects 8, iteminfo 4, house-touch 2); compat paths (actor 1, live 5, save 3, world 3, house 4, piles 2, sim 2, zones 2, agent/intent 1, fixtures 2); developer grants (testkit 9, live 4)",
+      "blocked_controller_decision": "blueprints.ts 6 + placeables/functions.ts 6 (amendment #9) and salvage.ts 6 (amendment #7) — only implemented in the superseded umbrella WIP; need a new controller card",
+      "gap1_preexisting": "indirect isPlayer authority alias in sim.ts:54/166 — byte-identical to base, not C1d-introduced; host-side hardening decision",
+      "boundary2_open": "takeFromPile loot-all gold path lacks range/life/expiry validation; the conflicting guard belonged to the superseded WIP and was NOT integrated (loot.test.ts:84/:96 conflict moot here); intentional-legacy vs hardening remains a controller decision"
+    }
+  },
+  "TESTS": {
+    "focused_new_lanes": {"command": "node --experimental-strip-types --test src/game/weather-policy.test.ts src/game/ai-targeting-policy.test.ts src/game/c1d-undo.test.ts src/game/actor-trade.test.ts", "exit_code": 0, "result": "39 passed, 0 failed (6+6+12+15)"},
+    "full_npm_test": {"command": "npm test", "exit_code": 0, "result": "497 script + 1432 source = 1929 passed, 0 failed", "log": ".hermes/verification/c1d-integration/full-npm-test.log", "count_check": "base 1393 + 12 weather/AI + 12 undo + 15 actor-trade = 1432 source tests (exact)"},
+    "typescript": {"command": "npx tsc --noEmit", "exit_code": 0},
+    "scoped_eslint": {"command": "npx eslint src/game/placeables/history.ts src/game/placeables/placement.ts src/game/placeables/commands.ts src/game/c1d-undo.test.ts src/game/npcs.ts src/game/commissions.ts src/game/sim.ts src/game/actor-trade.test.ts src/game/weather-policy.test.ts src/game/ai-targeting-policy.test.ts --max-warnings 0", "exit_code": 0},
+    "art_audit": {"command": "node scripts/audit-art-coverage.mjs", "exit_code": 0, "result": "errors: [] — merged ledger pins correct as-is; no --refresh needed", "log": ".hermes/verification/c1d-integration/art-audit.log"},
+    "registration_audit": {"command": "node --test scripts/audit-safety-test-registration.test.mjs", "exit_code": 0, "result": "1 passed — all four new test files registered in the package.json test string", "log": ".hermes/verification/c1d-integration/registration-audit.log"},
+    "migrated_file_sweep_proof": {"command": "grep -rn -E '\\b(world\\.player|w\\.player|getWorld\\(\\)\\.player)\\b' src/game/npcs.ts src/game/commissions.ts src/game/placeables/history.ts src/game/placeables/placement.ts src/game/placeables/commands.ts", "exit_code": 1, "result": "0 hits — all owned-packet occurrences removed"}
+  },
+  "EVIDENCE": [
+    ".hermes/verification/c1d-integration/handoff.json (this file)",
+    ".hermes/verification/c1d-integration/world-player-sweep.md",
+    ".hermes/verification/c1d-integration/census-integrated.txt",
+    ".hermes/verification/c1d-integration/base-byfile.json",
+    ".hermes/verification/c1d-integration/full-npm-test.log",
+    ".hermes/verification/c1d-integration/npm-test-exit.txt",
+    ".hermes/verification/c1d-integration/art-audit.log",
+    ".hermes/verification/c1d-integration/registration-audit.log"
+  ],
+  "BLOCKERS": [],
+  "UNRESOLVED_ISSUES": [
+    "blueprints.ts + placeables/functions.ts owner-check surfaces and salvage.ts actor-scoping remain unmigrated (controller amendments #7/#9); blocked pending a new controller card — the only implementation is in the superseded umbrella WIP",
+    "GAP-1: pre-existing indirect isPlayer authority alias in sim.ts (identical at base); host-side hardening decision, documented in the sweep",
+    "Boundary-2: loot-all gold path range/life/expiry validation policy decision open with controller (base contract preserved here)",
+    "branch sits on 9135794c; origin/main has advanced to baa10bb (Q1a/Q1b docs+mind-layer, no source overlap with these lanes) — rebase decision belongs to the root card/controller"
+  ],
+  "NOTES_FOR_CONTROLLER": [
+    "No push, no deploy, no chain ops; all commits local on wt/t_934f17c8 in .worktrees/t_934f17c8",
+    "The integrated tree is exactly base + the three carded lanes; the superseded umbrella dirty tree was not merged (triple-checked against sibling warnings)",
+    "Solo gameplay behavior unchanged: every lane preserves the omitted-ID legacy solo path; full suite green including all pre-existing tests unmodified",
+    "Completing this card releases root card t_e420743a (telegram2) whose remaining blocked items are the residual surfaces listed in UNRESOLVED_ISSUES"
+  ],
+  "completed_at": "2026-11-21T23:59:00-08:00"
+}

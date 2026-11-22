@@ -1,0 +1,129 @@
+files 130 occurrences 126 matching lines 107
+Counter({'world.player': 82, 'w.player': 42, 'getWorld().player': 2})
+
+src/game/actor.ts:5 [world.player] if (actorId === undefined) return world.player;
+src/game/agent/fixtures/court-morning.ts:28 [world.player] world.player.id = you.id;
+src/game/agent/intent.ts:4 [world.player] * The sim's own pipeline already executes intents (`world.player.intent`,
+src/game/blueprints.ts:18 [world.player] return world.structures.find((s) => s.ownerId === world.player.id) ?? null;
+src/game/blueprints.ts:38 [world.player] if (world.player.ghost) return "A ghost cannot.";
+src/game/blueprints.ts:88 [world.player] if (world.player.ghost) return "A ghost cannot.";
+src/game/blueprints.ts:97 [world.player] const have = world.player.pack[need.id as ItemId] ?? 0;
+src/game/blueprints.ts:101 [world.player] world.player.pack[need.id as ItemId] = (world.player.pack[need.id as ItemId] ?? 0) - need.n;
+src/game/blueprints.ts:101 [world.player] world.player.pack[need.id as ItemId] = (world.player.pack[need.id as ItemId] ?? 0) - need.n;
+src/game/ecology.ts:602 [world.player] if (c.ownerId === world.player.id) {
+src/game/ecology.ts:649 [world.player] if (you && NIGHT_HUNTERS.has(c.kind) && night && !c.ownerId && c.task !== "fight" && !you.ghost && world.hour >= world.player.invisUntil && !(c.blindUntil && world.hour < c.blindUntil)) {
+src/game/ecology.ts:660 [world.player] if (!you || you.ghost || world.player.ghost || world.hour < world.player.invisUntil) {
+src/game/ecology.ts:660 [world.player] if (!you || you.ghost || world.player.ghost || world.hour < world.player.invisUntil) {
+src/game/embercrawler.ts:56 [w.player] const valid=p&&!p.ghost&&!w.player.ghost&&p.hp>0&&inEmberdeep(p.x,p.z)&&w.hour>=w.player.invisUntil&&
+src/game/embercrawler.ts:56 [w.player] const valid=p&&!p.ghost&&!w.player.ghost&&p.hp>0&&inEmberdeep(p.x,p.z)&&w.hour>=w.player.invisUntil&&
+src/game/emberdeep-monsters.ts:62 [w.player] const valid = p && !p.ghost && !w.player.ghost && p.hp > 0 && inEmberdeep(p.x, p.z) &&
+src/game/emberdeep-monsters.ts:63 [w.player] w.hour >= w.player.invisUntil && !(c.blindUntil && w.hour < c.blindUntil) &&
+src/game/emberdeep-monsters.ts:70 [w.player] w.player.lastBittenAt = w.hour;
+src/game/furnace-warden.ts:40 [w.player] if (!p || p.hp <= 0 || p.ghost || w.player.ghost) {
+src/game/furnace-warden.ts:69 [w.player] if(!p||p.hp<=0||p.ghost||w.player.ghost||emberdeepRoomAt(p.x,p.z)?.id!=='furnace')return;
+src/game/furnace-warden.ts:72 [w.player] if(w.hour<w.player.invisUntil||sanctuaryAt(w,p.x,p.z)||(c.blindUntil&&w.hour<c.blindUntil)){s.phase='patrol';s.time=0;c.path=[];return;}
+src/game/gloomwraith.ts:42 [w.player] const valid = p && !p.ghost && !w.player.ghost && p.hp > 0 && inEmberdeep(p.x,p.z) && w.hour >= w.player.invisUntil && !(c.blindUntil && w.hour < c.blindUntil) && !sanctuaryAt(w,p.x,p.z) && Math.hypot(p.x-c.home.tx,p.z-c.home.ty) < 14;
+src/game/gloomwraith.ts:42 [w.player] const valid = p && !p.ghost && !w.player.ghost && p.hp > 0 && inEmberdeep(p.x,p.z) && w.hour >= w.player.invisUntil && !(c.blindUntil && w.hour < c.blindUntil) && !sanctuaryAt(w,p.x,p.z) && Math.hypot(p.x-c.home.tx,p.z-c.home.ty) < 14;
+src/game/house-touch.ts:7 [world.player] if (world.player.ghost || world.player.armedSpell) return null;
+src/game/house-touch.ts:7 [world.player] if (world.player.ghost || world.player.armedSpell) return null;
+src/game/house.ts:232 [world.player] b.preview = b.kind === "hut" && b.ownerId === world.player.id && isLookHutSpot(b.tx, b.ty);
+src/game/house.ts:238 [world.player] if (!world.player?.id || !world.tiles?.length) return;
+src/game/house.ts:240 [world.player] if (world.buildings.some((b) => b.preview === true && isHouseKind(b.kind) && b.ownerId === world.player.id)) return;
+src/game/house.ts:257 [world.player] ownerId: world.player.id,
+src/game/iteminfo.ts:83 [world.player] const { wear, wearRare, rares } = world.player;
+src/game/iteminfo.ts:119 [world.player] const wornRareUid = world.player.wearRare[slot];
+src/game/iteminfo.ts:120 [world.player] const wornRare = wornRareUid ? (world.player.rares.find((r) => r.uid === wornRareUid) ?? null) : null;
+src/game/iteminfo.ts:122 [world.player] const wornId = wornRare ? wornRare.base : (world.player.wear[slot] ?? null);
+src/game/live.ts:85 [w.player] const sheets = new Set([w.player, ...Object.values(w.playerStates)]);
+src/game/live.ts:88 [w.player] const person = state === w.player
+src/game/live.ts:108 [w.player] if (w.player) {
+src/game/live.ts:111 [w.player] if (p && p.ghost == null) p.ghost = Boolean(w.player.ghost);
+src/game/live.ts:135 [w.player] for (const key of Object.keys(w.player.skills)) w.player.skills[key as keyof typeof w.player.skills] = 100;
+src/game/live.ts:135 [w.player] for (const key of Object.keys(w.player.skills)) w.player.skills[key as keyof typeof w.player.skills] = 100;
+src/game/live.ts:135 [w.player] for (const key of Object.keys(w.player.skills)) w.player.skills[key as keyof typeof w.player.skills] = 100;
+src/game/live.ts:137 [w.player] w.player.mana = maxMana(p?.int ?? 8, 100);
+src/game/live.ts:192 [w.player] player: w.player,
+src/game/piles.ts:91 [world.player] for (const state of new Set([world.player, ...Object.values(world.playerStates ?? {})])) {
+src/game/piles.ts:138 [world.player] for (const owner of new Set([world.player, ...Object.values(world.playerStates ?? {})])) {
+src/game/placeables/functions.ts:75 [world.player] if (obj.ownerId !== world.player.id) return { err: "That hold is not yours." as const };
+src/game/placeables/functions.ts:78 [world.player] if (world.player.ghost) return { err: "A ghost cannot." as const };
+src/game/placeables/functions.ts:120 [world.player] const have = world.player.pack[item] ?? 0;
+src/game/placeables/functions.ts:125 [world.player] world.player.pack[item] = have - n;
+src/game/placeables/functions.ts:138 [world.player] world.player.pack[item] = (world.player.pack[item] ?? 0) + n;
+src/game/placeables/functions.ts:138 [world.player] world.player.pack[item] = (world.player.pack[item] ?? 0) + n;
+src/game/placeables/station-test-fixture.ts:10 [world.player] materialSlots: {}, ownerId: world.player.id, structureId: null, name: null, state: {},
+src/game/salvage.ts:75 [world.player] const index = world.player.rares.findIndex((candidate) => candidate.uid === uid);
+src/game/salvage.ts:76 [world.player] const item = index >= 0 ? world.player.rares[index]! : undefined;
+src/game/salvage.ts:81 [world.player] if (Object.values(world.player.wearRare).includes(uid)) {
+src/game/salvage.ts:122 [world.player] world.player.rares.splice(plan.index, 1);
+src/game/salvage.ts:124 [world.player] addResource(world.player.resources, row.key, row.amount);
+src/game/salvage.ts:128 [world.player] addResource(world.player.resources, makeResourceStackKey(gem.resourceId, "gem", gem.clarity), 1);
+src/game/save.ts:741 [world.player] const resources = parseResourceInventory(world.player.resources);
+src/game/save.ts:751 [world.player] Object.entries(world.playerStates ?? { [world.player.id]: world.player }).map(([id, state]) => [id, {
+src/game/save.ts:751 [world.player] Object.entries(world.playerStates ?? { [world.player.id]: world.player }).map(([id, state]) => [id, {
+src/game/sim.ts:157 [world.player] if (id !== world.player.id) tickCommission(world, id);
+src/game/sim.ts:218 [world.player] if (id !== world.player.id) tickPets(world, dt, id);
+src/game/spell-effects.ts:68 [world.player] const intent = world.player.intent;
+src/game/spell-effects.ts:189 [world.player] if (p && p.hp > 0 && !p.ghost && !world.player.ghost) {
+src/game/spell-effects.ts:190 [world.player] add(p.x, p.z, "poison", world.player.poisonUntil, 0);
+src/game/spell-effects.ts:191 [world.player] add(p.x, p.z, "bless", world.player.blessUntil, 1);
+src/game/spell-effects.ts:192 [world.player] add(p.x, p.z, "nightsight", world.player.nightSightUntil, 2);
+src/game/spell-effects.ts:193 [world.player] add(p.x, p.z, "invisibility", world.player.invisUntil, 3);
+src/game/spell-effects.ts:194 [world.player] add(p.x, p.z, "ironwood", world.player.ironwoodUntil, 4);
+src/game/spell-effects.ts:195 [world.player] add(p.x, p.z, "fly", world.player.flyUntil, 5);
+src/game/store.ts:365 [w.player] const wasGhost = Boolean(w.player.ghost);
+src/game/store.ts:370 [w.player] if (!wasGhost && w.player.ghost) {
+src/game/store.ts:417 [w.player] if (!get().openGateId && get().gateIgnoreId !== st.id && w.hour >= (w.player.gateCoolUntil ?? 0)) {
+src/game/store.ts:463 [w.player] if (w.player.ghost) {
+src/game/store.ts:494 [w.player] if (w.player.armedSpell === "teleport" || w.player.armedSpell === "jump" || (w.player.armedSpell && targetsGround(w.player.armedSpell))) {
+src/game/store.ts:494 [w.player] if (w.player.armedSpell === "teleport" || w.player.armedSpell === "jump" || (w.player.armedSpell && targetsGround(w.player.armedSpell))) {
+src/game/store.ts:494 [w.player] if (w.player.armedSpell === "teleport" || w.player.armedSpell === "jump" || (w.player.armedSpell && targetsGround(w.player.armedSpell))) {
+src/game/store.ts:494 [w.player] if (w.player.armedSpell === "teleport" || w.player.armedSpell === "jump" || (w.player.armedSpell && targetsGround(w.player.armedSpell))) {
+src/game/store.ts:495 [w.player] const spell = w.player.armedSpell;
+src/game/store.ts:502 [w.player] if (w.player.armedSpell) {
+src/game/store.ts:503 [w.player] w.player.armedSpell = null;
+src/game/store.ts:517 [w.player] if (w.player.armedSpell && OFFENSIVE_SPELLS.has(w.player.armedSpell)) {
+src/game/store.ts:517 [w.player] if (w.player.armedSpell && OFFENSIVE_SPELLS.has(w.player.armedSpell)) {
+src/game/store.ts:518 [w.player] const spell = w.player.armedSpell;
+src/game/store.ts:652 [w.player] else if (w.player.armedTechnique === id) get().flash(`${TECHNIQUES[id].label} ready — land your next strike.`);
+src/game/store.ts:743 [w.player] if (w.player.ghost) {
+src/game/store.ts:748 [w.player] if (b.ownerId !== w.player.id) {
+src/game/store.ts:792 [w.player] if (w.player.ghost) {
+src/game/store.ts:806 [w.player] if (w.player.ghost) {
+src/game/store.ts:815 [w.player] if (w.player.ghost) {
+src/game/store.ts:899 [getWorld().player] const result = applyItemInlay(getWorld().player, uid, key);
+src/game/store.ts:916 [w.player] if (w.player.ghost) {
+src/game/store.ts:986 [getWorld().player] if (kind && getWorld().player.ghost) {
+src/game/store.ts:1073 [w.player] if (w.player.ghost) {
+src/game/store.ts:1077 [w.player] if (w.player.wear.main !== "hoe") {
+src/game/testkit.ts:37 [world.player] world.player.pack[id] = Math.max(world.player.pack[id] ?? 0, TEST_KIT_ITEM_STACK);
+src/game/testkit.ts:37 [world.player] world.player.pack[id] = Math.max(world.player.pack[id] ?? 0, TEST_KIT_ITEM_STACK);
+src/game/testkit.ts:45 [world.player] const current = world.player.resources.stacks[key] ?? 0;
+src/game/testkit.ts:48 [world.player] world.player.resources.stacks[key] = TEST_KIT_RESOURCE_STACK;
+src/game/testkit.ts:56 [world.player] world.player.skills[id] = Math.max(world.player.skills[id] ?? 0, TEST_KIT_SKILL);
+src/game/testkit.ts:56 [world.player] world.player.skills[id] = Math.max(world.player.skills[id] ?? 0, TEST_KIT_SKILL);
+src/game/testkit.ts:60 [world.player] const well = maxMana(self?.int ?? 8, world.player.skills.magery ?? 0);
+src/game/testkit.ts:61 [world.player] world.player.mana = Math.max(world.player.mana ?? 0, well);
+src/game/testkit.ts:61 [world.player] world.player.mana = Math.max(world.player.mana ?? 0, well);
+src/game/vault.ts:206 [world.player] if (world.player.ghost) return "A ghost cannot.";
+src/game/vault.ts:207 [world.player] const have = world.player.pack[item] ?? 0;
+src/game/vault.ts:209 [world.player] world.player.pack[item] = have - 1;
+src/game/vault.ts:217 [world.player] if (world.player.ghost) return "A ghost cannot.";
+src/game/vault.ts:218 [world.player] const rare = world.player.rares.find((r) => r.uid === uid);
+src/game/vault.ts:220 [world.player] world.player.rares = world.player.rares.filter((r) => r.uid !== uid);
+src/game/vault.ts:220 [world.player] world.player.rares = world.player.rares.filter((r) => r.uid !== uid);
+src/game/vault.ts:221 [world.player] for (const [slot, link] of Object.entries(world.player.wearRare)) {
+src/game/vault.ts:222 [world.player] if (link === uid) world.player.wearRare[slot as keyof typeof world.player.wearRare] = undefined;
+src/game/vault.ts:222 [world.player] if (link === uid) world.player.wearRare[slot as keyof typeof world.player.wearRare] = undefined;
+src/game/vault.ts:239 [world.player] if (rare?.unique && world.player.rares.some(value => value.uid === rare.unique!.uid)) {
+src/game/vault.ts:260 [world.player] world.player.rares.push(restored);
+src/game/vault.ts:280 [world.player] world.player.rares.push(restored);
+src/game/vault.ts:285 [world.player] world.player.pack[item] = (world.player.pack[item] ?? 0) + 1;
+src/game/vault.ts:285 [world.player] world.player.pack[item] = (world.player.pack[item] ?? 0) + 1;
+src/game/weather.ts:155 [world.player] if (world.player.wear.main !== "torch") {
+src/game/weather.ts:169 [world.player] world.player.wear.main = undefined;
+src/game/world.ts:37 [world.player] const used = new Set<string>([world.player?.id ?? ""]);
+src/game/world.ts:38 [world.player] for (const records of [world.buildings, world.people, world.fauna, world.piles, world.campfires, world.herbs, world.plots, world.saplings, world.placedObjects, world.structures, world.player?.marks]) {
+src/game/world.ts:447 [world.player] world.player.id = you.id;
+src/game/zones.ts:110 [world.player] const isSoloOwner = ownerId === world.player.id;
+src/game/zones.ts:113 [world.player] const state = isSoloOwner ? world.player : actorState(world, ownerId);
