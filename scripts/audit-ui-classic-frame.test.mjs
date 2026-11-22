@@ -39,6 +39,18 @@ test("floating chrome is dark glass, tokenized, with reduced entrances — no ca
   for (const p of ["chrome/rail.tsx", "chrome/docked-minimap.tsx", "chrome/vitals-chip.tsx", "chrome/utility-cluster.tsx", "chrome/corner-cluster.tsx", "chrome/combat-cluster.tsx", "chrome/orb-vitals.tsx", "chrome/hotbar.tsx", "chrome/technique-bar.tsx", "hud.tsx"])
     assert.doesNotMatch(read(`src/components/game/${p}`), /#[0-9a-fA-F]{3,8}\b/, p);
 });
+test("band mode keeps the time plate out of the combat band", () => {
+  // t_8765b104 census: a right-anchored corner plate in the phone bottom band
+  // stole taps from hotbar slots 5-6, the mana orb and the stair card. Band
+  // mode docks the plate under the utility plate; desktop keeps the corner.
+  const corner = read("src/components/game/chrome/corner-cluster.tsx");
+  assert.match(corner, /max-md:top-\[\d+px\]/, "band-mode top anchor under the utility plate");
+  assert.match(corner, /max-md:bottom-auto/, "band mode leaves the bottom band");
+  assert.match(corner, /bottom-\[var\(--corner-clear\)\]/, "desktop corner anchor stays");
+  const travel = read("src/components/game/emberdeep-travel.tsx");
+  assert.match(travel, /max-md:bottom-\[calc\(var\(--corner-clear\)\+\d+px\)\]/, "stair card rides above the combat band on phones");
+  assert.match(read("src/components/game/chrome/combat-cluster.tsx"), /bottom-\[var\(--corner-clear\)\]/, "combat band keeps the corner clearance");
+});
 test("the carved band and rail bars are gone; chrome floats", () => {
   assert.ok(!existsSync(new URL("../src/components/game/chrome/band.tsx", import.meta.url)), "band.tsx is deleted");
   const hud = read("src/components/game/hud.tsx");

@@ -55067,13 +55067,13 @@
       "canonicalId": "src/components/game/chrome/corner-cluster.tsx#CornerCluster",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/chrome/corner-cluster.tsx:12"
+        "src/components/game/chrome/corner-cluster.tsx:19"
       ],
       "sourceNames": [
         "CornerCluster"
       ],
       "rendererLocations": [
-        "src/components/game/chrome/corner-cluster.tsx:12"
+        "src/components/game/chrome/corner-cluster.tsx:19"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [

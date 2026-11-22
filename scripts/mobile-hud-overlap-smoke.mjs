@@ -82,10 +82,23 @@ function assertFloatingCluster(m, vw, vh, prefix) {
 }
 
 function assertCorner(m, vw, vh, prefix) {
+  assert.ok(m.corner, `${prefix}: time + map plate present`);
+  if (vw < 768) {
+    // Band mode (t_8907b99d): the time plate docks under the top-right utility
+    // plate — the bottom band belongs to the centered combat cluster alone.
+    assert.ok(m.dock, `${prefix}: utility plate present`);
+    assert.equal(overlap(m.corner, m.dock).overlaps, false, `${prefix}: time plate clears the utility plate`);
+    assert.ok(m.corner.y >= m.dock.y + m.dock.height, `${prefix}: time plate sits below the utility plate`);
+    if (m.cluster) {
+      assert.equal(overlap(m.corner, m.cluster).overlaps, false, `${prefix}: time plate clears the combat band`);
+      assert.ok(m.corner.y + m.corner.height < m.cluster.y, `${prefix}: time plate stays above the combat band`);
+    }
+    if (m.minimap) assert.equal(overlap(m.corner, m.minimap).overlaps, false, `${prefix}: time plate clears the minimap`);
+    return;
+  }
   assert.ok(m.minimap, `${prefix}: corner block present`);
   assert.ok(Math.abs(m.minimap.x + m.minimap.width - vw) <= 1, `${prefix}: block flush to the right edge`);
   assert.ok(Math.abs(m.minimap.y + m.minimap.height - vh) <= 1, `${prefix}: block flush to the bottom edge`);
-  assert.ok(m.corner, `${prefix}: time + map plate present`);
   assert.ok(Math.abs(m.corner.y + m.corner.height - (m.minimap.y - 8)) <= 1, `${prefix}: time plate floats just above the block`);
   if (m.rail) assert.ok(Math.abs(m.rail.y + m.rail.height - (m.minimap.y - 8)) <= 1, `${prefix}: rail column ends just above the block`);
 }
