@@ -18,6 +18,10 @@
  */
 import type { ReflexAnswer, ReflexExchange } from "./types.ts";
 import {
+  assertAmount,
+  validUsage,
+  validatePrice,
+  microsForReservation,
   microsForEstimatedUsage,
   microsForUsage,
   type PriceProvenance,
@@ -69,6 +73,9 @@ export interface AttemptBegin {
   /** The redacted request payload, in full — replay needs the real inputs. */
   request: { exchange: unknown; bytes: number; redactions: number };
   reservationId: string | null;
+  /** Optional only for legacy logs. New begins retain the original hold and tariff. */
+  reservationMicros?: number;
+  price?: PriceProvenance;
   /** Retry linkage: first attempt has retryOf null / retryN 0. */
   retryOf: string | null;
   retryN: number;
@@ -161,8 +168,8 @@ export function newAttemptId(now: number = Date.now()): string {
 export function createAttemptLog(sink?: (line: AttemptLine) => void): AttemptLog {
   const lines: AttemptLine[] = [];
   const push = (line: AttemptLine) => {
-    lines.push(line);
     sink?.(line);
+    lines.push(line);
   };
   return {
     begin: (rec) => push(rec),
@@ -237,6 +244,12 @@ export function foldAttempts(lines: AttemptLine[], price: PriceProvenance): Fold
   const order: FoldedAttempt[] = [];
   for (const line of lines) {
     if (line.type === "begin") {
+      const originalPrice = line.price === undefined ? price : line.price;
+      validatePrice(originalPrice);
+      if (line.reservationMicros !== undefined)
+        assertAmount(line.reservationMicros, "restored reservation");
+      const hold =
+        line.reservationMicros ?? microsForReservation(line.request.bytes, originalPrice);
       const row: FoldedAttempt = {
         attemptId: line.attemptId,
         agentId: line.agentId,
@@ -256,9 +269,9 @@ export function foldAttempts(lines: AttemptLine[], price: PriceProvenance): Fold
         error: null,
         usage: null,
         cost: {
-          micros: microsForEstimatedUsage(line.request.bytes, 0, price),
+          micros: Math.max(hold, microsForEstimatedUsage(line.request.bytes, 0, originalPrice)),
           basis: "estimated",
-          price,
+          price: originalPrice,
         },
         reservationId: line.reservationId,
         retryOf: line.retryOf,
@@ -269,6 +282,8 @@ export function foldAttempts(lines: AttemptLine[], price: PriceProvenance): Fold
       order.push(row);
       continue;
     }
+    assertAmount(line.cost.micros, "restored cost");
+    if (line.cost.price !== null) validatePrice(line.cost.price);
     const row = byId.get(line.attemptId);
     if (!row) {
       // Orphan end: keep it visible instead of dropping it.
@@ -323,7 +338,7 @@ export function costForOutcome(
   responseBytes: number,
   price: PriceProvenance,
 ): CostAttribution {
-  if (usage) return { micros: microsForUsage(usage, price), basis: "reported", price };
+  if (validUsage(usage)) return { micros: microsForUsage(usage, price), basis: "reported", price };
   return {
     micros: microsForEstimatedUsage(requestBytes, responseBytes, price),
     basis: "estimated",

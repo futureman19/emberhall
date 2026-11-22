@@ -38,7 +38,7 @@ export interface ReplayVerdict {
 }
 
 function questionsOf(f: FoldedAttempt): ReflexQuestion[] | null {
-  const ex = f.request.exchange as Partial<ReflexExchange> | null;
+  const ex = f.request?.exchange as Partial<ReflexExchange> | null;
   if (!ex || !Array.isArray(ex.questions)) return null;
   return ex.questions as ReflexQuestion[];
 }
@@ -48,7 +48,14 @@ function checkAnswersAgainstQuestions(
   answers: ReflexAnswer[],
 ): string[] {
   const problems: string[] = [];
-  const byId = new Map(answers.map((a) => [a.id, a]));
+  if (answers.length !== questions.length) {
+    problems.push(`answer count ${answers.length} != question count ${questions.length}`);
+  }
+  const byId = new Map<string, ReflexAnswer>();
+  for (const a of answers) {
+    if (byId.has(a.id)) problems.push(`duplicate answer for question ${a.id}`);
+    byId.set(a.id, a);
+  }
   for (const q of questions) {
     const a = byId.get(q.id);
     if (!a) {
@@ -61,18 +68,37 @@ function checkAnswersAgainstQuestions(
     }
     if (a.type === "choice" && q.type === "choice") {
       if (a.probabilities.length !== q.options.length) {
-        problems.push(`answer ${q.id}: ${a.probabilities.length} probs for ${q.options.length} options`);
+        problems.push(
+          `answer ${q.id}: ${a.probabilities.length} probs for ${q.options.length} options`,
+        );
       }
-      if (a.pick < 0 || a.pick >= q.options.length) {
+      if (!Number.isInteger(a.pick) || a.pick < 0 || a.pick >= q.options.length) {
         problems.push(`answer ${q.id}: pick ${a.pick} outside ${q.options.length} options`);
       }
-      const sum = a.probabilities.reduce((x, y) => x + y, 0);
-      if (Math.abs(sum - 1) > 1e-6) problems.push(`answer ${q.id}: probabilities sum ${sum}`);
     }
     if (a.type === "score" && q.type === "score" && a.probabilities.length !== q.levels) {
       problems.push(`answer ${q.id}: ${a.probabilities.length} probs for ${q.levels} levels`);
     }
-    if (a.type === "noul" && (a.p < 0 || a.p > 1)) {
+    if (a.type === "choice" || a.type === "score") {
+      if (a.probabilities.some((p) => !Number.isFinite(p) || p < 0 || p > 1)) {
+        problems.push(`answer ${q.id}: probabilities must be finite and in range 0..1`);
+      }
+      const sum = a.probabilities.reduce((x, y) => x + y, 0);
+      if (!Number.isFinite(sum) || Math.abs(sum - 1) > 1e-6) {
+        problems.push(`answer ${q.id}: probabilities sum ${sum}`);
+      }
+      if (a.type === "score") {
+        const expected = a.probabilities.reduce((total, p, i) => total + p * (i + 1), 0);
+        if (
+          !Number.isFinite(a.expectation) ||
+          !Number.isFinite(expected) ||
+          Math.abs(a.expectation - expected) > 1e-6
+        ) {
+          problems.push(`answer ${q.id}: expectation ${a.expectation} != expected ${expected}`);
+        }
+      }
+    }
+    if (a.type === "noul" && (!Number.isFinite(a.p) || a.p < 0 || a.p > 1)) {
       problems.push(`answer ${q.id}: p ${a.p} out of range`);
     }
   }
@@ -126,15 +152,21 @@ export function replayAttempt(f: FoldedAttempt): ReplayVerdict {
     base.problems.push(`lane ${f.lane}: reflex-only reconstruction`);
     return base;
   }
+  // Successful reflex rows must participate in mismatch totals even when
+  // truncation left nothing to reconstruct.
+  base.replayed = true;
   const questions = questionsOf(f);
   const answers = f.response?.answers ?? null;
   const recordedAction = f.response?.action ?? null;
-  if (!questions || !answers) {
+  if (!questions || !Array.isArray(answers)) {
     base.problems.push("recorded request/response incomplete — cannot replay");
     base.match = false;
     return base;
   }
-  base.replayed = true;
+  if (typeof recordedAction !== "string") {
+    base.problems.push("recorded action digest missing or invalid");
+  }
+  base.problems.push(...checkAnswersAgainstQuestions(questions, answers));
 
   const raw = (f.response?.raw ?? null) as Record<string, number[] | number> | null;
   if (raw) {
@@ -149,7 +181,6 @@ export function replayAttempt(f: FoldedAttempt): ReplayVerdict {
     }
   } else {
     base.level = "shallow";
-    base.problems.push(...checkAnswersAgainstQuestions(questions, answers));
     base.action = digestAnswers(answers);
   }
 

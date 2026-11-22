@@ -48,10 +48,7 @@ export const PRICES: Record<string, PriceProvenance> = {
     completionPerMTok: 0,
     source: "https://docs.typesafe.ai/models rate card ($0.042/Mtok input, output free)",
     capturedAt: "2026-11-21",
-    notes:
-      "Org-level rate limits (tokens/s + requests/s, 429 + retry-after). Volume tiers " +
-      "($0.25/Mtok on large prepaid packs) exist but are NOT assumed here — the guard " +
-      "prices at the headline rate, which can only overestimate spend.",
+    notes: "Public per-input-token rate rechecked at source; output free. No volume discounts assumed. Account-specific billing and missing-usage estimates require review.",
   },
 };
 
@@ -62,19 +59,56 @@ export interface UsageReport {
   completionTokens: number;
 }
 
+/** Accounting quantities must stay exactly representable and nonnegative. */
+export function assertAmount(value: number, label = "amount"): void {
+  if (!Number.isSafeInteger(value) || value < 0) throw new RangeError(`invalid ${label}`);
+}
+
+export function validatePrice(price: PriceProvenance): void {
+  if (
+    !price ||
+    price.currency !== "USD" ||
+    !Number.isFinite(price.promptPerMTok) ||
+    price.promptPerMTok < 0 ||
+    !Number.isFinite(price.completionPerMTok) ||
+    price.completionPerMTok < 0
+  ) {
+    throw new RangeError("invalid price");
+  }
+}
+
+export function validUsage(usage: UsageReport | null | undefined): usage is UsageReport {
+  return (
+    !!usage &&
+    Number.isSafeInteger(usage.promptTokens) &&
+    usage.promptTokens >= 0 &&
+    Number.isSafeInteger(usage.completionTokens) &&
+    usage.completionTokens >= 0
+  );
+}
+
+function checkedMicros(value: number): number {
+  const rounded = Math.ceil(value);
+  assertAmount(rounded, "cost");
+  return rounded;
+}
+
 /** Conservative token estimate from serialized payload bytes. BPE averages
  *  ~4 chars/token on prose but JSON keys, digits and punctuation tokenize
  *  denser; /3 errs on the high side, which is the fail-closed direction for
  *  a cost gate. Non-empty payloads never estimate to zero. */
 export function estimateTokens(bytes: number): number {
-  if (bytes <= 0) return 0;
+  assertAmount(bytes, "payload bytes");
+  if (bytes === 0) return 0;
   return Math.max(1, Math.ceil(bytes / 3));
 }
 
 /** Exact cost for a provider-reported usage row. Rounds UP — a cost gate
  *  never rounds down. */
 export function microsForUsage(usage: UsageReport, price: PriceProvenance): number {
-  return Math.ceil(
+  validatePrice(price);
+  if (!validUsage(usage)) throw new RangeError("invalid usage");
+  return checkedMicros(
     usage.promptTokens * price.promptPerMTok + usage.completionTokens * price.completionPerMTok,
   );
 }
@@ -96,7 +130,7 @@ export function microsForEstimatedUsage(
     promptTokens: estimateTokens(requestBytes),
     completionTokens: estimateTokens(responseBytes),
   };
-  return Math.ceil(microsForUsage(usage, price) * MISSING_USAGE_MULTIPLIER);
+  return checkedMicros(microsForUsage(usage, price) * MISSING_USAGE_MULTIPLIER);
 }
 
 /**
@@ -111,9 +145,10 @@ export const RESERVE_MARGIN = 1.25;
 export const RESERVE_PROMPT_FLOOR_TOKENS = 64;
 
 export function microsForReservation(requestBytes: number, price: PriceProvenance): number {
+  validatePrice(price);
   const promptTokens =
     Math.ceil(estimateTokens(requestBytes) * RESERVE_MARGIN) + RESERVE_PROMPT_FLOOR_TOKENS;
-  return Math.ceil(
+  return checkedMicros(
     promptTokens * price.promptPerMTok + RESERVE_COMPLETION_TOKENS * price.completionPerMTok,
   );
 }

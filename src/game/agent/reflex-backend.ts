@@ -79,7 +79,15 @@ export interface ReflexCallMeta {
 }
 
 export type ReflexCallOutcome =
-  | { ok: true; result: ReflexResult; meta: ReflexCallMeta }
+  | {
+      ok: true;
+      result: ReflexResult;
+      /** Raw pre-normalization probabilities keyed by question id (number[]
+       *  for choice/score, number for noul), exactly as the provider returned
+       *  them. Enables STRICT offline replay (t_e3f72207 replay.ts). */
+      raw?: Record<string, number[] | number>;
+      meta: ReflexCallMeta;
+    }
   | { ok: false; error: ReflexCallError; meta: ReflexCallMeta };
 
 export interface ReflexBackend {

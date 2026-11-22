@@ -43,6 +43,9 @@ export interface HostFeed {
    *  refusal reason ("Unknown verb", "Intent queue is full", "ack-timeout",
    *  a host error frame, …). Never throws for host-side refusals. */
   submit(intent: AgentIntent): Promise<string | null>;
+  /** Queue a menu verb on the shard ({type:"verb"} — eat/track/equip/…;
+   *  src/server/shard.ts VERB_KINDS). Same ack semantics as submit. */
+  verb(req: { verb: string; item?: string | null; n?: number | null; recipeId?: string | null }): Promise<string | null>;
   /** Close the socket and detach every subscriber. Idempotent. */
   close(): Promise<void>;
   readonly closed: boolean;
@@ -138,6 +141,16 @@ export function connectHostFeed(opts: {
       }
     });
 
+    const send = (frame: object): Promise<string | null> => {
+      if (closed || socket.readyState !== WebSocket.OPEN) return Promise.resolve("host feed closed");
+      const id = ++seq;
+      return new Promise((resolve) => {
+        const timer = setTimeout(() => { pending.delete(id); resolve("ack-timeout"); }, ackTimeoutMs);
+        pending.set(id, (reason) => { clearTimeout(timer); resolve(reason); });
+        socket.send(JSON.stringify({ ...frame, seq: id }));
+      });
+    };
+
     const feed: HostFeed = {
       get characterId() {
         return characterId;
@@ -165,6 +178,7 @@ export function connectHostFeed(opts: {
           };
         },
       },
+      verb: (req) => send({ type: "verb", verb: req }),
       submit(intent) {
         if (closed || socket.readyState !== WebSocket.OPEN) {
           return Promise.resolve("host feed closed");

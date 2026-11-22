@@ -23,7 +23,7 @@ import type {
   ReflexAttemptMeta,
   ReflexAttemptOutcome,
   ReflexBackend,
-  ReflexCallMeta,
+
   ReflexCallOutcome,
   ReflexUsage,
 } from "./reflex-backend.ts";
@@ -192,6 +192,9 @@ function translateAnswers(body: unknown, questions: ReflexQuestion[]): {
   answers: ReflexAnswer[];
   resolvedModel: string | null;
   usage: ReflexUsage | null;
+  /** Pre-normalization probabilities exactly as returned, keyed by question
+   *  id — the strict-replay record (normalization itself lives in reflex.ts). */
+  raw: Record<string, number[] | number>;
 } {
   if (!isRecord(body)) throw new InvalidResponse("response body is not an object");
   const answersById = body.answers;
@@ -208,6 +211,7 @@ function translateAnswers(body: unknown, questions: ReflexQuestion[]): {
   }
   const resolvedModel = typeof body.model === "string" ? body.model : null;
 
+  const raw: Record<string, number[] | number> = {};
   const answers: ReflexAnswer[] = questions.map((q) => {
     const a = answersById[q.id];
     if (!isRecord(a)) throw new InvalidResponse(`no answer for question ${q.id}`);
@@ -223,6 +227,7 @@ function translateAnswers(body: unknown, questions: ReflexQuestion[]): {
       const ps = q.options.map((o, i) =>
         requireFiniteProbability(probs[o], `question ${q.id} probability[${i}] (${o})`),
       );
+      raw[q.id] = ps;
       return answerChoice(q, ps);
     }
     if (q.type === "score") {
@@ -231,11 +236,14 @@ function translateAnswers(body: unknown, questions: ReflexQuestion[]): {
       const ps = Array.from({ length: q.levels }, (_, i) =>
         requireFiniteProbability(probs[String(i)], `question ${q.id} probability of level ${i}`),
       );
+      raw[q.id] = ps;
       return answerScore(q, ps);
     }
-    return answerNoul(q, requireFiniteProbability(a.noul, `question ${q.id} noul`));
+    const p = requireFiniteProbability(a.noul, `question ${q.id} noul`);
+    raw[q.id] = p;
+    return answerNoul(q, p);
   });
-  return { answers, resolvedModel, usage };
+  return { answers, resolvedModel, usage, raw };
 }
 
 /* ── failure classification ──────────────────────────────────────────── */
@@ -406,6 +414,7 @@ export function createJevBackend(config: JevBackendConfig): ReflexBackend {
             return {
               ok: true,
               result: { answers: translated.answers },
+              raw: translated.raw,
               meta: {
                 provider: JEV_PROVIDER,
                 model,

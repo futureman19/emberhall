@@ -49,7 +49,10 @@ import type { ReflexExchange, ReflexResult } from "./types.ts";
 /* ── Backend seam (implemented by t_0b00ee59; offline stub in stub.ts) ── */
 
 export interface ReflexBackend {
-  decide(exchange: ReflexExchange): Promise<ReflexResult>;
+  budgetExhausted?(): boolean;
+  /** `ctx` carries the attempt's tick/trigger/stateHash for metering
+   *  backends (see AttemptContext); unmetered backends ignore it. */
+  decide(exchange: ReflexExchange, ctx?: AttemptContext): Promise<ReflexResult>;
 }
 
 /* ── Attempt hooks (durable implementations owned by t_e3f72207) ─────── */
@@ -80,6 +83,12 @@ export interface AttemptRecord extends AttemptRequest {
 export interface ThinkContext extends AttemptRequest {
   observation: Observation;
 }
+
+/** Optional per-attempt context a Thinker may forward to the backend so a
+ *  metering wrapper (t_166eb9f5) can attribute the call (tick, trigger,
+ *  stateHash) without re-deriving it from the exchange. Backends that do
+ *  not meter (stub, tests) simply ignore it. */
+export type AttemptContext = AttemptRequest;
 
 /**
  * The schedulable unit. `prepare` runs synchronously on the push path and

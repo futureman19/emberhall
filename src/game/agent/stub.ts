@@ -65,6 +65,8 @@ interface StubState {
   observation?: {
     verbs?: { verb: string; label: string; target: { tx: number; ty: number } }[];
   };
+  /** Parallel to the exchange's choice options (autopilot integration). */
+  candidateVerbs?: string[];
   triggers?: ReflexEvent[];
 }
 
@@ -93,17 +95,20 @@ export function createStubBackend(opts: {
       opts.onCall?.(exchange);
       const state = (exchange.state ?? {}) as StubState;
       const triggers = state.triggers ?? [];
-      const verbs = state.observation?.verbs ?? [];
+      // candidateVerbs is parallel to the option list; the raw observation
+      // menu is not (unmappable UI-flow verbs are filtered out upstream).
+      const verbs = state.candidateVerbs ?? state.observation?.verbs?.map((v) => v.verb) ?? [];
       const table = { ...scoreTableFor(triggers), ...(opts.prefer ?? {}) };
 
       const answers: ReflexAnswer[] = exchange.questions.map((q) => {
         if (q.type === "choice") {
           // Options are "<label> [tx,ty]" (see autopilot.optionLabel). Score
-          // by the candidate verb at the same index when available; fall
-          // back to label keywords so hand-built exchanges still behave.
+          // by the option's verb when known; fall back to label keywords so
+          // hand-built exchanges still behave.
           const scores = q.options.map((label, i) => {
-            const verb = verbs[i]?.verb;
+            const verb = verbs[i];
             if (verb && verb in table) return table[verb]!;
+            if (verb === "eat") return triggers.some((t) => t.kind.startsWith("vitals.hunger")) ? 90 : 35;
             for (const [key, score] of Object.entries(table)) {
               if (label.toLowerCase().includes(key.toLowerCase())) return score;
             }

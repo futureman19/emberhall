@@ -25,7 +25,9 @@
  * the harness, not something the autopilot should smuggle in.
  */
 import { bestPlantableTimber } from "../forestry.ts";
-import type { CtxVerb, Intent, IntentKind, SpellId } from "../types.ts";
+import { ITEM_META } from "../catalog.ts";
+import { bestFoodInPack, commandEat } from "../player.ts";
+import type { CtxVerb, Intent, IntentKind, ItemId, SpellId } from "../types.ts";
 import { type DecisionLog, createDecisionLog } from "./log.ts";
 import { observeLive } from "./observe.ts";
 import { submitIntent } from "./intent.ts";
@@ -144,9 +146,20 @@ export interface PreparedDecision {
   observation: Observation;
   candidates: VerbCandidate[];
   options: string[];
-  intents: (AgentIntent | null)[];
+  /** What submitting option i does: an Intent-pipeline action or a menu verb
+   *  (the shard's verb wire — `eat` rides it, see hostfeed.verb). Parallel
+   *  to options; a pick outside this array is a backend bug. */
+  actions: PreparedAction[];
+  /** Parallel to options: CtxVerb per intent option, "eat" for the
+   *  synthetic pack-food option. Sent as exchange state so the backend can
+   *  score what each option actually does. */
+  optionVerbs: string[];
   question: ReflexChoice;
 }
+
+export type PreparedAction =
+  | { type: "intent"; intent: AgentIntent }
+  | { type: "verb"; verb: string; item: string | null };
 
 export interface AutopilotHooks extends SchedulerHooks {
   /** One DecisionLogRow per executed decision (contract §7). Default appends
@@ -188,6 +201,9 @@ export function createReflexAutopilot(opts: {
   /** Returns the pipeline's refusal reason, or null on acceptance. May be
    *  async: the host feed resolves with the shard's ack (queue admission). */
   submit?: (intent: AgentIntent) => string | null | Promise<string | null>;
+  /** Menu-verb channel (eat/… — the shard's {type:"verb"} wire on a host,
+   *  commandEat locally in the solo driver). Returns null on acceptance. */
+  verb?: (req: { verb: string; item: string | null }) => string | null | Promise<string | null>;
   hooks?: AutopilotHooks;
   config?: Partial<SchedulerConfig>;
   source?: ObservationSource;
@@ -201,29 +217,67 @@ export function createReflexAutopilot(opts: {
       const world = getWorld();
       return submitIntent(world, intent);
     });
+  const verb =
+    opts.verb ??
+    ((req: { verb: string; item: string | null }) => {
+      if (req.verb !== "eat") return `Unknown verb ${req.verb}`;
+      const item = req.item as ItemId | null;
+      if (!item) return "No food selected";
+      const before = observeLive().you.pack[item] ?? 0;
+      const message = commandEat(getWorld(), item);
+      return (observeLive().you.pack[item] ?? 0) < before ? null : message;
+    });
   const hooks = opts.hooks ?? {};
   const log = createDecisionLog();
   let running = false;
   let stopped = false;
   let unsubscribe: (() => void) | null = null;
 
-  /** Build the exchange inputs. Null when fewer than two options map to the
-   *  intent wire — a one-option "choice" is not worth a paid call. */
+  /** A metering backend (t_166eb9f5) exposes budgetExhausted(); when the
+   *  guard has closed the agent's cost day there is nothing to prepare —
+   *  the body rides its last intent, no attempt record, no reservation. */
+  const budgetClosed = (): boolean =>
+    backend.budgetExhausted?.() ?? false;
+
+  /** Build the exchange inputs. Null when fewer than two options map to an
+   *  executable action — a one-option "choice" is not worth a paid call. */
   const prepare = (ctx: {
     observation: Observation;
     triggers: ReflexEvent[];
   }): PreparedDecision | null => {
+    if (budgetClosed()) return null;
     const obs = ctx.observation;
     const candidates: VerbCandidate[] = [];
     const options: string[] = [];
-    const intents: (AgentIntent | null)[] = [];
+    const actions: PreparedAction[] = [];
+    /** Parallel to options/actions: the CtxVerb for intent options, the
+     *  pseudo-verb "eat" for the synthetic pack-food option. */
+    const optionVerbs: string[] = [];
     for (const c of obs.verbs) {
       const intent = intentForCandidate(c, obs);
       if (intent === null) continue;
       candidates.push(c);
-      options.push(optionLabel(c));
-      intents.push(intent);
-      if (options.length >= 255) break; // contract choice() cap
+      const label = optionLabel(c);
+      options.push(options.includes(label) ? `${label} (#${options.length + 1})` : label);
+      actions.push({ type: "intent", intent });
+      optionVerbs.push(c.verb);
+      if (options.length >= 253) break; // reserve food + rest slots
+    }
+    // Pack food is not a context-menu verb, so the sim's menu never offers
+    // it — but a reflex layer that cannot answer hunger cannot survive. The
+    // shard's verb wire (src/server/shard.ts VERB_KINDS) executes "eat"
+    // server-side; offer it whenever the pack carries a meal.
+    const food = bestFoodInPack(obs.you.pack);
+    if (food !== null && options.length < 255) {
+      const label = ITEM_META[food]?.label ?? food;
+      options.push(`Eat ${label} from pack`);
+      actions.push({ type: "verb", verb: "eat", item: food });
+      optionVerbs.push("eat");
+    }
+    if (options.length < 255) {
+      options.push("Rest / remain idle");
+      actions.push({ type: "intent", intent: { kind: "none", tx: 0, ty: 0, targetId: null, spell: null } });
+      optionVerbs.push("idle");
     }
     if (options.length < 2) return null;
     const question: ReflexChoice = {
@@ -232,20 +286,25 @@ export function createReflexAutopilot(opts: {
       question: "What now?",
       options,
     };
-    return { observation: obs, candidates, options, intents, question };
+    return { observation: obs, candidates, options, actions, optionVerbs, question };
   };
 
   const execute = async (req: AttemptRequest, prepared: PreparedDecision): Promise<void> => {
-    const result: ReflexResult = await backend.decide({
-      state: {
-        observation: prepared.observation,
-        triggers: req.triggers,
-        // Verbs parallel to the option list, so the backend scores exactly
-        // what each option does (options alone are display strings).
-        candidateVerbs: prepared.candidates.map((c) => c.verb),
+    const result: ReflexResult = await backend.decide(
+      {
+        state: {
+          observation: prepared.observation,
+          triggers: req.triggers,
+          // Verbs parallel to the OPTION list (CtxVerb for intent options,
+          // "eat" for the synthetic pack option), so the backend scores
+          // exactly what each option does — options alone are display strings.
+          candidateVerbs: prepared.optionVerbs,
+        },
+        questions: [prepared.question],
       },
-      questions: [prepared.question],
-    });
+      req,
+    );
+    if (!running) return; // stop fences late provider results from action submission
     const answer = result.answers.find(
       (a) => a.id === prepared.question.id && a.type === "choice",
     );
@@ -255,14 +314,23 @@ export function createReflexAutopilot(opts: {
     if (!Number.isInteger(answer.pick) || answer.pick < 0 || answer.pick >= prepared.options.length) {
       throw new Error(`backend pick ${answer.pick} out of range (${prepared.options.length} options)`);
     }
-    const intent = prepared.intents[answer.pick] ?? null;
-    if (intent === null) {
-      throw new Error(`option ${answer.pick} has no intent mapping`);
+    const action = prepared.actions[answer.pick] ?? null;
+    if (action === null) {
+      throw new Error(`option ${answer.pick} has no action mapping`);
     }
-    const rejectReason = await submit(intent);
-    // A submit reject is sim-pipeline information, not a provider failure —
-    // the attempt still counts (the backend was paid) and the row logs the
-    // outcome so training data learns which picks the sim refused.
+    // A submit/verb reject is sim-pipeline information, not a provider
+    // failure — the attempt still counts (the backend was paid) and the row
+    // logs the outcome so training data learns which picks the sim refused.
+    let intent: AgentIntent | null = null;
+    let verbName: string | null = null;
+    let rejectReason: string | null = null;
+    if (action.type === "intent") {
+      intent = action.intent;
+      rejectReason = await submit(action.intent);
+    } else {
+      verbName = action.verb;
+      rejectReason = await verb({ verb: action.verb, item: action.item });
+    }
     const row: DecisionLogRow = {
       tick: prepared.observation.tick,
       bodyId: prepared.observation.you.id,
@@ -271,6 +339,7 @@ export function createReflexAutopilot(opts: {
       candidates: prepared.options,
       answer: prepared.options[answer.pick]!,
       intent,
+      verb: verbName,
       stateHash: req.stateHash,
       // Outcome deltas are back-filled from sim movement by the cost/log
       // infrastructure (t_e3f72207); a submit reject is recorded here now.

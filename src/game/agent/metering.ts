@@ -47,7 +47,10 @@ export interface ReflexCallOutcome {
    * without it replay validates structure and digest only.
    */
   raw?: Record<string, number[] | number>;
-  error?: { kind: "http" | "timeout" | "rate_limited" | "parse" | "provider" | "unknown"; message: string };
+  error?: {
+    kind: "http" | "timeout" | "rate_limited" | "parse" | "provider" | "unknown";
+    message: string;
+  };
   /** Provider usage row. Missing/null => fail-closed estimate, never free. */
   usage?: UsageReport | null;
   provider?: { name: string; model: string };
@@ -100,7 +103,8 @@ export async function callReflexMetered(
   deps: MeteredDeps,
   input: MeteredCallInput,
 ): Promise<MeteredCallResult> {
-  const price = deps.price ?? DEFAULT_PRICE;
+  // Snapshot the tariff before awaiting provider work.
+  const price = { ...(deps.price ?? DEFAULT_PRICE) };
   const clock = deps.clock ?? Date.now;
   const lane = input.lane ?? "reflex";
   const attemptId = newAttemptId(clock());
@@ -114,6 +118,47 @@ export async function callReflexMetered(
   const auth = deps.guard.reserve(input.agentId, estimate);
   if (!auth.ok) {
     const now = clock();
+    try {
+      deps.log.begin({
+        type: "begin",
+        attemptId,
+        agentId: input.agentId,
+        bodyId: input.bodyId,
+        lane,
+        trigger: input.trigger,
+        tick: input.tick,
+        stateHash: input.stateHash,
+        startedAt: now,
+        provider: null,
+        request: { exchange: redacted.value, bytes: requestBytes, redactions: redacted.redactions },
+        reservationId: null,
+        reservationMicros: 0,
+        price,
+        retryOf: input.retryOf ?? null,
+        retryN: input.retryN ?? 0,
+      });
+      deps.log.end({
+        type: "end",
+        attemptId,
+        endedAt: now,
+        status: "blocked",
+        response: null,
+        error: { kind: "budget", message: auth.reason },
+        usage: null,
+        cost: blockedCost(),
+        latencyMs: 0,
+      });
+    } catch (error) {
+      deps.guard.failClosed("blocked attempt write failed");
+      throw error;
+    }
+    throw new BudgetExceededError(auth.reason, auth.snapshot);
+  }
+  const reservationId = auth.reservationId;
+
+  // 3. Log begin BEFORE the call — an interruption still leaves this row.
+  const startedAt = clock();
+  try {
     deps.log.begin({
       type: "begin",
       attemptId,
@@ -123,81 +168,65 @@ export async function callReflexMetered(
       trigger: input.trigger,
       tick: input.tick,
       stateHash: input.stateHash,
-      startedAt: now,
-      provider: null,
+      startedAt,
+      provider: deps.provider ?? null,
       request: { exchange: redacted.value, bytes: requestBytes, redactions: redacted.redactions },
-      reservationId: null,
+      reservationId,
+      reservationMicros: estimate,
+      price,
       retryOf: input.retryOf ?? null,
       retryN: input.retryN ?? 0,
     });
-    deps.log.end({
-      type: "end",
-      attemptId,
-      endedAt: now,
-      status: "blocked",
-      response: null,
-      error: { kind: "budget", message: auth.reason },
-      usage: null,
-      cost: blockedCost(),
-      latencyMs: 0,
-    });
-    throw new BudgetExceededError(auth.reason, auth.snapshot);
+  } catch (error) {
+    deps.guard.voidReservation(input.agentId, reservationId);
+    deps.guard.failClosed("attempt begin write failed");
+    throw error;
   }
-  const reservationId = auth.reservationId;
-
-  // 3. Log begin BEFORE the call — an interruption still leaves this row.
-  const startedAt = clock();
-  deps.log.begin({
-    type: "begin",
-    attemptId,
-    agentId: input.agentId,
-    bodyId: input.bodyId,
-    lane,
-    trigger: input.trigger,
-    tick: input.tick,
-    stateHash: input.stateHash,
-    startedAt,
-    provider: deps.provider ?? null,
-    request: { exchange: redacted.value, bytes: requestBytes, redactions: redacted.redactions },
-    reservationId,
-    retryOf: input.retryOf ?? null,
-    retryN: input.retryN ?? 0,
-  });
 
   // 4. The one and only paid path.
   let outcome: ReflexCallOutcome;
   try {
     outcome = await deps.backend.call(input.exchange);
   } catch (err) {
-    outcome = { error: { kind: "unknown", message: err instanceof Error ? err.message : String(err) } };
+    outcome = {
+      error: { kind: "unknown", message: err instanceof Error ? err.message : String(err) },
+    };
   }
 
   // 5. Cost: reported usage if the provider gave it, else fail-closed
   //    estimate — errors included (a failed call may still have been billed).
-  const responseBytes = outcome.result ? utf8Bytes(JSON.stringify(outcome.result)) : 0;
-  const cost = costForOutcome(outcome.usage ?? null, requestBytes, responseBytes, price);
+  let cost: CostAttribution = { micros: estimate, basis: "estimated", price };
+  try {
+    const responseBytes = outcome.result ? utf8Bytes(JSON.stringify(outcome.result)) : 0;
+    cost = costForOutcome(outcome.usage ?? null, requestBytes, responseBytes, price);
+    if (cost.basis === "estimated") cost.micros = Math.max(estimate, cost.micros);
 
-  // 6. Log end + settle.
-  const endedAt = clock();
-  const status = outcome.error ? (outcome.error.kind === "timeout" ? "timeout" : "error") : "ok";
-  deps.log.end({
-    type: "end",
-    attemptId,
-    endedAt,
-    status,
-    response: outcome.result
-      ? {
-          answers: outcome.result.answers,
-          raw: outcome.raw ?? null,
-          action: digestAnswers(outcome.result.answers),
-        }
-      : null,
-    error: outcome.error ?? null,
-    usage: outcome.usage ?? null,
-    cost,
-    latencyMs: endedAt - startedAt,
-  });
-  deps.guard.settle(input.agentId, reservationId, cost.micros);
+    // 6. Log end + settle.
+    const endedAt = clock();
+    const status = outcome.error ? (outcome.error.kind === "timeout" ? "timeout" : "error") : "ok";
+    deps.log.end({
+      type: "end",
+      attemptId,
+      endedAt,
+      status,
+      response: outcome.result
+        ? {
+            answers: outcome.result.answers,
+            raw: outcome.raw ?? null,
+            action: digestAnswers(outcome.result.answers),
+          }
+        : null,
+      error: outcome.error ?? null,
+      usage: outcome.usage ?? null,
+      cost,
+      latencyMs: endedAt - startedAt,
+    });
 
-  return { attemptId, outcome, cost, latencyMs: endedAt - startedAt };
+    return { attemptId, outcome, cost, latencyMs: endedAt - startedAt };
+  } catch (error) {
+    deps.guard.failClosed("attempt accounting or end write failed");
+    throw error;
+  } finally {
+    deps.guard.settle(input.agentId, reservationId, cost.micros);
+  }
 }

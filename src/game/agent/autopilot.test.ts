@@ -130,10 +130,10 @@ test("boot: one reflex decision becomes a submitted intent and a decision row", 
   const q = exchange.questions[0]!;
   assert.equal(q.type, "choice");
   if (q.type !== "choice") return;
-  assert.deepEqual(q.options, ["Chop [12,7]", "Walk [5,5]"]);
+  assert.deepEqual(q.options, ["Chop [12,7]", "Walk [5,5]", "Rest / remain idle"]);
   const state = exchange.state as { triggers: { kind: string }[]; candidateVerbs: string[] };
   assert.deepEqual(state.triggers.map((t) => t.kind), ["boot"]);
-  assert.deepEqual(state.candidateVerbs, ["chop", "walk"]);
+  assert.deepEqual(state.candidateVerbs, ["chop", "walk", "idle"]);
 
   // Stub scores chop over walk; the picked option must be the submitted intent.
   assert.deepEqual(submitted, [{ kind: "chop", tx: 12, ty: 7, targetId: null, spell: null }]);
@@ -144,7 +144,7 @@ test("boot: one reflex decision becomes a submitted intent and a decision row", 
   assert.equal(row.bodyId, "you");
   assert.equal(row.tick, 0);
   assert.equal(row.question, "What now?");
-  assert.deepEqual(row.candidates, ["Chop [12,7]", "Walk [5,5]"]);
+  assert.deepEqual(row.candidates, ["Chop [12,7]", "Walk [5,5]", "Rest / remain idle"]);
   assert.equal(row.answer, "Chop [12,7]");
   assert.deepEqual(row.intent, submitted[0]!);
   assert.equal(row.stateHash, hashObservation(obs));
@@ -286,7 +286,7 @@ test("a submit rejection is logged as an outcome, not thrown as a provider error
   auto.stop();
 });
 
-test("fewer than two intent-mappable options never costs a call", async () => {
+test("one executable candidate still offers a reflex choice against resting", async () => {
   const backend = createStubBackend();
   const auto = createReflexAutopilot({
     backend,
@@ -296,7 +296,7 @@ test("fewer than two intent-mappable options never costs a call", async () => {
   auto.start();
   auto.step();
   await auto.settled();
-  assert.equal(backend.calls.length, 0, "a one-option menu is not worth a paid call");
+  assert.equal(backend.calls.length, 1, "one candidate plus rest is a real choice");
   auto.stop();
 });
 

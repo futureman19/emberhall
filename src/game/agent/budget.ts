@@ -31,6 +31,8 @@
  */
 import { costDayOf, type FoldedAttempt } from "./attempts.ts";
 
+import { assertAmount } from "./pricing.ts";
+
 export const DEFAULT_DAILY_CAP_MICROS = 500_000; // $0.50 — the Phase 3 hard gate.
 export const DEFAULT_RESERVATION_TTL_MS = 5 * 60 * 1000;
 
@@ -74,11 +76,21 @@ export class BudgetGuard {
   /** Key: `${agentId}${day}` — old day buckets are kept for audit. */
   private buckets = new Map<string, DayBucket>();
   private seq = 0;
+  private closedReason: string | null = null;
+
+  /** Persistent for this guard instance; only reconstruction can reopen it. */
+  failClosed(reason: string): void {
+    this.closedReason ??= reason;
+  }
 
   constructor(cfg: BudgetConfig = {}) {
-    this.capMicros = cfg.dailyCapMicros ?? DEFAULT_DAILY_CAP_MICROS;
+    this.capMicros =
+      cfg.dailyCapMicros === undefined ? DEFAULT_DAILY_CAP_MICROS : cfg.dailyCapMicros;
     this.clock = cfg.clock ?? Date.now;
-    this.ttlMs = cfg.reservationTtlMs ?? DEFAULT_RESERVATION_TTL_MS;
+    this.ttlMs =
+      cfg.reservationTtlMs === undefined ? DEFAULT_RESERVATION_TTL_MS : cfg.reservationTtlMs;
+    assertAmount(this.capMicros, "daily cap");
+    assertAmount(this.ttlMs, "reservation TTL");
   }
 
   private bucketFor(agentId: string, day: string): DayBucket {
@@ -89,6 +101,15 @@ export class BudgetGuard {
       this.buckets.set(key, b);
     }
     return b;
+  }
+
+  private charge(b: DayBucket, amount: number): void {
+    const total = b.spentMicros + amount;
+    if (!Number.isSafeInteger(total)) {
+      this.failClosed("accounting total overflow");
+      throw new RangeError("invalid accounting total");
+    }
+    b.spentMicros = total;
   }
 
   private reservedMicros(b: DayBucket): number {
@@ -117,7 +138,11 @@ export class BudgetGuard {
    * concurrent async callers cannot oversubscribe the day.
    */
   reserve(agentId: string, estimateMicros: number): ReserveResult {
+    assertAmount(estimateMicros, "reservation");
     const day = costDayOf(this.clock());
+    if (this.closedReason !== null) {
+      return { ok: false, reason: this.closedReason, snapshot: this.snapshot(agentId, day) };
+    }
     const b = this.bucketFor(agentId, day);
     const committed = b.spentMicros + this.reservedMicros(b);
     if (committed + estimateMicros > this.capMicros) {
@@ -141,16 +166,16 @@ export class BudgetGuard {
    * Actual may exceed the estimate — see the header honesty note.
    */
   settle(agentId: string, reservationId: string, actualMicros: number): void {
+    assertAmount(actualMicros, "settlement");
     const b = this.findBucketWith(agentId, reservationId);
     if (!b) {
       // Unknown reservation (e.g. the guard was rebuilt mid-flight): fail
       // closed — charge the current day rather than losing the spend.
-      this.bucketFor(agentId, costDayOf(this.clock())).spentMicros += actualMicros;
+      this.charge(this.bucketFor(agentId, costDayOf(this.clock())), actualMicros);
       return;
     }
-    const r = b.reservations.get(reservationId);
-    if (r) b.reservations.delete(reservationId);
-    b.spentMicros += actualMicros;
+    this.charge(b, actualMicros);
+    b.reservations.delete(reservationId);
   }
 
   /** The call was never sent (validation failed pre-flight): drop the hold. */
@@ -176,8 +201,8 @@ export class BudgetGuard {
     for (const b of this.buckets.values()) {
       for (const [id, r] of b.reservations) {
         if (now - r.createdAt >= this.ttlMs) {
+          this.charge(b, r.estimateMicros);
           b.reservations.delete(id);
-          b.spentMicros += r.estimateMicros;
           expired.push(id);
           charged += r.estimateMicros;
         }
@@ -195,7 +220,10 @@ export class BudgetGuard {
   static fromAttempts(folded: FoldedAttempt[], cfg: BudgetConfig = {}): BudgetGuard {
     const guard = new BudgetGuard(cfg);
     for (const a of folded) {
-      guard.bucketFor(a.agentId, a.day).spentMicros += a.cost.micros;
+      assertAmount(a.cost.micros, "restored cost");
+      const bucket = guard.bucketFor(a.agentId, a.day);
+      assertAmount(bucket.spentMicros + a.cost.micros, "restored total");
+      bucket.spentMicros += a.cost.micros;
     }
     return guard;
   }

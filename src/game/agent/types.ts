@@ -225,6 +225,9 @@ export interface DecisionLogRow {
   answer: string;
   /** The intent actually submitted, if any. */
   intent: AgentIntent | null;
+  /** Non-intent menu verb actually submitted, if any (e.g. "eat" — the
+   *  shard's verb wire; additive for the Phase 3 autopilot integration). */
+  verb?: string | null;
   /** Stable hash of the observation the decision was made against. */
   stateHash: string;
   /** Back-filled sim deltas (hp, gold, pack counts) once known. */
