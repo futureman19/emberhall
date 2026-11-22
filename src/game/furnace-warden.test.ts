@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createWorld } from './world.ts';
+import { createWorld, log } from './world.ts';
 import { emberdeepState, emberdeepBlocked } from './emberdeep.ts';
 import { updateFurnace, tickWarden, wardenPhase, WARDEN_ID, WARDEN_STATS, dungeonSpawns } from './furnace-warden.ts';
 import { ensureExpansionFauna } from './ecology.ts';
@@ -26,8 +26,9 @@ test('real combat, pending loot and collected reward survive save/load without d
  const c=w.fauna.find(c=>c.id===WARDEN_ID)!;
  const active=roundTrip(w);updateFurnace(active);assert.equal(active.emberdeep?.bossEncounter,'fighting');assert.equal(emberdeepBlocked(active,1106,674),false);
  const random=Math.random;Math.random=()=>.4;
- try {commandHunt(w,c.id);for(let i=0;i<8000&&c.hp>0;i++)tickPlayer(w,.05);}finally{Math.random=random;}
+ try {commandHunt(w,c.id);for(let i=0;i<8000&&c.hp>0;i++){const note=tickPlayer(w,.05);if(note)log(w,note);}}finally{Math.random=random;}
  assert.equal(c.task,'dead');updateFurnace(w);
+ assert.equal(w.log.filter(entry=>/the furnace warden falls\./i.test(entry.text)).length,1,'one death announcement, not duplicate toast fragments');
  const pending=roundTrip(w);updateFurnace(pending);
  const pile=pending.piles.find(p=>p.items.furnace_heart===1)!;assert.ok(pile);takeFromPile(pending,pile.id);
  assert.equal(pending.player.pack.furnace_heart,1);
