@@ -1,0 +1,1823 @@
+{"tick":0,"hour":8,"kind":"verb","action":"equip","payload":{"verb":"equip","item":"pick","n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":0,"hour":8,"kind":"mind","text":"smith marks hour 8: the vale is quiet, the work continues."}
+{"tick":2,"hour":8,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":2,"hour":8,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":2,"hour":8,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":2,"hour":8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1921,"hour":13.3,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":61,"hour":8.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1981,"hour":13.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":121,"hour":8.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":2000,"hour":13.6,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":-1,"ty":10,"targetId":null,"spell":null},"ok":false,"reason":"intent target (-1,10) is outside the map"}
+{"tick":2041,"hour":13.7,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":181,"hour":8.5,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":241,"hour":8.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":2101,"hour":13.8,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":2161,"hour":14,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":301,"hour":8.8,"kind":"intent","action":"mine","payload":{"kind":"mine","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":307,"hour":8.9,"kind":"sim","text":"Dust."}
+{"tick":307,"hour":8.9,"kind":"sim","text":"You strike the field rat."}
+{"tick":307,"hour":8.9,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":307,"hour":8.9,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":307,"hour":8.9,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":313,"hour":8.9,"kind":"sim","text":"The field rat falls."}
+{"tick":313,"hour":8.9,"kind":"sim","text":"Dust."}
+{"tick":313,"hour":8.9,"kind":"sim","text":"You strike the field rat."}
+{"tick":313,"hour":8.9,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":313,"hour":8.9,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":313,"hour":8.9,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":314,"hour":8.9,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":314,"hour":8.9,"kind":"sim","text":"The field rat falls."}
+{"tick":314,"hour":8.9,"kind":"sim","text":"Dust."}
+{"tick":314,"hour":8.9,"kind":"sim","text":"You strike the field rat."}
+{"tick":314,"hour":8.9,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":314,"hour":8.9,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":314,"hour":8.9,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":2221,"hour":14.2,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":360,"hour":9,"kind":"mind","text":"smith marks hour 9: the vale is quiet, the work continues."}
+{"tick":361,"hour":9,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":421,"hour":9.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":2282,"hour":14.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":422,"hour":9.2,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":422,"hour":9.2,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":422,"hour":9.2,"kind":"sim","text":"The field rat falls."}
+{"tick":422,"hour":9.2,"kind":"sim","text":"Dust."}
+{"tick":422,"hour":9.2,"kind":"sim","text":"You strike the field rat."}
+{"tick":422,"hour":9.2,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":422,"hour":9.2,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":422,"hour":9.2,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":2341,"hour":14.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":481,"hour":9.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":541,"hour":9.5,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":2401,"hour":14.7,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":594,"hour":9.7,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":594,"hour":9.7,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":594,"hour":9.7,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":594,"hour":9.7,"kind":"sim","text":"The field rat falls."}
+{"tick":594,"hour":9.7,"kind":"sim","text":"Dust."}
+{"tick":594,"hour":9.7,"kind":"sim","text":"You strike the field rat."}
+{"tick":594,"hour":9.7,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":594,"hour":9.7,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":594,"hour":9.7,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":2461,"hour":14.8,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":601,"hour":9.7,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":602,"hour":9.7,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":602,"hour":9.7,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":602,"hour":9.7,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":602,"hour":9.7,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":602,"hour":9.7,"kind":"sim","text":"The field rat falls."}
+{"tick":602,"hour":9.7,"kind":"sim","text":"Dust."}
+{"tick":602,"hour":9.7,"kind":"sim","text":"You strike the field rat."}
+{"tick":602,"hour":9.7,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":602,"hour":9.7,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":602,"hour":9.7,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":2520,"hour":15,"kind":"mind","text":"smith marks hour 15: the vale is quiet, the work continues."}
+{"tick":2521,"hour":15,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":661,"hour":9.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":2581,"hour":15.2,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":721,"hour":10,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":270,"ty":301,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":2641,"hour":15.3,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"The hart falls."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"You strike the hart."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"You strike the hart."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"You strike the hart."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"The cave mole falls."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"You strike the cave mole."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"You strike the cave mole."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"Saltback Tortoise, southwest, 6 paces."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"Cave Mole, northwest, 4 paces."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"Dust."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"Dust."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"Dust."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"Dust."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"Dust."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"The field rat falls."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":2642,"hour":15.3,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":781,"hour":10.2,"kind":"intent","action":"mine","payload":{"kind":"mine","tx":270,"ty":301,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":787,"hour":10.2,"kind":"sim","text":"Dust."}
+{"tick":787,"hour":10.2,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":787,"hour":10.2,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":787,"hour":10.2,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":787,"hour":10.2,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":787,"hour":10.2,"kind":"sim","text":"The field rat falls."}
+{"tick":787,"hour":10.2,"kind":"sim","text":"Dust."}
+{"tick":787,"hour":10.2,"kind":"sim","text":"You strike the field rat."}
+{"tick":787,"hour":10.2,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":787,"hour":10.2,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":787,"hour":10.2,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":794,"hour":10.2,"kind":"sim","text":"Dust."}
+{"tick":794,"hour":10.2,"kind":"sim","text":"Dust."}
+{"tick":794,"hour":10.2,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":794,"hour":10.2,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":794,"hour":10.2,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":794,"hour":10.2,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":794,"hour":10.2,"kind":"sim","text":"The field rat falls."}
+{"tick":794,"hour":10.2,"kind":"sim","text":"Dust."}
+{"tick":794,"hour":10.2,"kind":"sim","text":"You strike the field rat."}
+{"tick":794,"hour":10.2,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":794,"hour":10.2,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":794,"hour":10.2,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":801,"hour":10.2,"kind":"sim","text":"Dust."}
+{"tick":801,"hour":10.2,"kind":"sim","text":"Dust."}
+{"tick":801,"hour":10.2,"kind":"sim","text":"Dust."}
+{"tick":801,"hour":10.2,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":801,"hour":10.2,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":801,"hour":10.2,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":801,"hour":10.2,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":801,"hour":10.2,"kind":"sim","text":"The field rat falls."}
+{"tick":801,"hour":10.2,"kind":"sim","text":"Dust."}
+{"tick":801,"hour":10.2,"kind":"sim","text":"You strike the field rat."}
+{"tick":801,"hour":10.2,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":801,"hour":10.2,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":801,"hour":10.2,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":808,"hour":10.2,"kind":"sim","text":"Dust."}
+{"tick":808,"hour":10.2,"kind":"sim","text":"Dust."}
+{"tick":808,"hour":10.2,"kind":"sim","text":"Dust."}
+{"tick":808,"hour":10.2,"kind":"sim","text":"Dust."}
+{"tick":808,"hour":10.2,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":808,"hour":10.2,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":808,"hour":10.2,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":808,"hour":10.2,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":808,"hour":10.2,"kind":"sim","text":"The field rat falls."}
+{"tick":808,"hour":10.2,"kind":"sim","text":"Dust."}
+{"tick":808,"hour":10.2,"kind":"sim","text":"You strike the field rat."}
+{"tick":808,"hour":10.2,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":808,"hour":10.2,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":808,"hour":10.2,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":815,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":815,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":815,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":815,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":815,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":815,"hour":10.3,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":815,"hour":10.3,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":815,"hour":10.3,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":815,"hour":10.3,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":815,"hour":10.3,"kind":"sim","text":"The field rat falls."}
+{"tick":815,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":815,"hour":10.3,"kind":"sim","text":"You strike the field rat."}
+{"tick":815,"hour":10.3,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":815,"hour":10.3,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":815,"hour":10.3,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":823,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":823,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":823,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":823,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":823,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":823,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":823,"hour":10.3,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":823,"hour":10.3,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":823,"hour":10.3,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":823,"hour":10.3,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":823,"hour":10.3,"kind":"sim","text":"The field rat falls."}
+{"tick":823,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":823,"hour":10.3,"kind":"sim","text":"You strike the field rat."}
+{"tick":823,"hour":10.3,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":823,"hour":10.3,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":823,"hour":10.3,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"The field rat falls."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"Dust."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"You strike the field rat."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":830,"hour":10.3,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":841,"hour":10.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":847,"hour":10.4,"kind":"sim","text":"You strike the field rat."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"Dust."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"Dust."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"Dust."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"Dust."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"Dust."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"Dust."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"The field rat falls."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"Dust."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"You strike the field rat."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":847,"hour":10.4,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"The field rat falls."}
+{"tick":2701,"hour":15.5,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":853,"hour":10.4,"kind":"sim","text":"You strike the field rat."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"Dust."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"Dust."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"Dust."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"Dust."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"Dust."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"Dust."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"The field rat falls."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"Dust."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"You strike the field rat."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":853,"hour":10.4,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":2761,"hour":15.7,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":902,"hour":10.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":2821,"hour":15.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":961,"hour":10.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1000,"hour":10.8,"kind":"intent","action":"fly","payload":{"kind":"fly","tx":10,"ty":10,"targetId":null,"spell":null},"ok":false,"reason":"unknown intent kind: fly"}
+{"tick":2881,"hour":16,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1021,"hour":10.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"You strike the hart."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"The field rat falls."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"You strike the field rat."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"Dust."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"Dust."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"Dust."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"Dust."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"Dust."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"Dust."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"The field rat falls."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"Dust."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"You strike the field rat."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":1027,"hour":10.9,"kind":"sim","text":"You are Lute Vale. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."}
+{"tick":2941,"hour":16.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1081,"hour":11,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1141,"hour":11.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3001,"hour":16.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":1195,"ty":10,"targetId":null,"spell":null},"ok":false,"reason":"intent target (1195,10) is outside the map"}
+{"tick":3001,"hour":16.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":269,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"The field rat falls."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"The hart falls."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"You strike the hart."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"You strike the hart."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"You strike the hart."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"The cave mole falls."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"You strike the cave mole."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"You strike the cave mole."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Saltback Tortoise, southwest, 6 paces."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Cave Mole, northwest, 4 paces."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Dust."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Dust."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Dust."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Dust."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Dust."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"The field rat falls."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":3061,"hour":16.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":273,"ty":292,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1201,"hour":11.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3121,"hour":16.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1261,"hour":11.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":192,"ty":344,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3181,"hour":16.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1321,"hour":11.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":192,"ty":344,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3241,"hour":17,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1381,"hour":11.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"You strike the hare."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"The field rat falls."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"The hart falls."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"The cave mole falls."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"You strike the cave mole."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"You strike the cave mole."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Saltback Tortoise, southwest, 6 paces."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Cave Mole, northwest, 4 paces."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Dust."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Dust."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Dust."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Dust."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Dust."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"The field rat falls."}
+{"tick":1440,"hour":12,"kind":"mind","text":"smith marks hour 12: the vale is quiet, the work continues."}
+{"tick":1441,"hour":12,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":243,"ty":306,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3301,"hour":17.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":270,"ty":301,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"The hare falls."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"You strike the hare."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"The field rat falls."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"The hart falls."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"You strike the hart."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"You strike the hart."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"You strike the hart."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"The cave mole falls."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"You strike the cave mole."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"You strike the cave mole."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"Saltback Tortoise, southwest, 6 paces."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"Cave Mole, northwest, 4 paces."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"Dust."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"Dust."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"Dust."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"Dust."}
+{"tick":3302,"hour":17.2,"kind":"sim","text":"Dust."}
+{"tick":3361,"hour":17.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1501,"hour":12.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3421,"hour":17.5,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"The hare falls."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"You strike the hare."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"The field rat falls."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"The hart falls."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"The cave mole falls."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"You strike the cave mole."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"You strike the cave mole."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Saltback Tortoise, southwest, 6 paces."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Cave Mole, northwest, 4 paces."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Dust."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Dust."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Dust."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Dust."}
+{"tick":1561,"hour":12.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3481,"hour":17.7,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"The hare falls."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"You strike the hare."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"The field rat falls."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"The hart falls."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"The cave mole falls."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"You strike the cave mole."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"You strike the cave mole."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"Saltback Tortoise, southwest, 6 paces."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"Cave Mole, northwest, 4 paces."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"Dust."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"Dust."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"Dust."}
+{"tick":1621,"hour":12.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3541,"hour":17.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1681,"hour":12.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1741,"hour":12.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3600,"hour":18,"kind":"mind","text":"smith marks hour 18: the vale is quiet, the work continues."}
+{"tick":3601,"hour":18,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3607,"hour":18,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":3607,"hour":18,"kind":"sim","text":"The hare falls."}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the hare."}
+{"tick":3607,"hour":18,"kind":"sim","text":"The field rat falls."}
+{"tick":3607,"hour":18,"kind":"sim","text":"The hart falls."}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3607,"hour":18,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":3607,"hour":18,"kind":"sim","text":"The cave mole falls."}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the cave mole."}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the cave mole."}
+{"tick":3607,"hour":18,"kind":"sim","text":"Saltback Tortoise, southwest, 6 paces."}
+{"tick":3607,"hour":18,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":3607,"hour":18,"kind":"sim","text":"Cave Mole, northwest, 4 paces."}
+{"tick":3607,"hour":18,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":3607,"hour":18,"kind":"sim","text":"Dust."}
+{"tick":3607,"hour":18,"kind":"sim","text":"Dust."}
+{"tick":3661,"hour":18.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":264,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1801,"hour":13,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":264,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3721,"hour":18.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1861,"hour":13.2,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":3781,"hour":18.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1921,"hour":13.3,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"The hare falls."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"You strike the hare."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"The field rat falls."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"The hart falls."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"The cave mole falls."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"You strike the cave mole."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"You strike the cave mole."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"Saltback Tortoise, southwest, 6 paces."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"Cave Mole, northwest, 4 paces."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":3787,"hour":18.5,"kind":"sim","text":"Dust."}
+{"tick":3841,"hour":18.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":1981,"hour":13.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"The hart falls."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"The hare falls."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"You strike the hare."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"The field rat falls."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"The hart falls."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"The cave mole falls."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"You strike the cave mole."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"You strike the cave mole."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"Saltback Tortoise, southwest, 6 paces."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"Cave Mole, northwest, 4 paces."}
+{"tick":3847,"hour":18.7,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":2000,"hour":13.6,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":-1,"ty":10,"targetId":null,"spell":null},"ok":false,"reason":"intent target (-1,10) is outside the map"}
+{"tick":2041,"hour":13.7,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":3901,"hour":18.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":2101,"hour":13.8,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":3961,"hour":19,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":270,"ty":301,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4000,"hour":19.1,"kind":"intent","action":"chop","payload":{"kind":"chop","tx":1.5,"ty":10,"targetId":null,"spell":null},"ok":false,"reason":"intent target must be integer tile coords"}
+{"tick":2161,"hour":14,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4021,"hour":19.2,"kind":"intent","action":"mine","payload":{"kind":"mine","tx":270,"ty":301,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"You strike the hare."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"The hart falls."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"The hare falls."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"You strike the hare."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"The field rat falls."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"The hart falls."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"The cave mole falls."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"You strike the cave mole."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"You strike the cave mole."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"Saltback Tortoise, southwest, 6 paces."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":4022,"hour":19.2,"kind":"sim","text":"Cave Mole, northwest, 4 paces."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"The hare falls."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"You strike the hare."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"The hart falls."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"The hare falls."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"You strike the hare."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"The field rat falls."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"The hart falls."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"The cave mole falls."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"You strike the cave mole."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"You strike the cave mole."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"Saltback Tortoise, southwest, 6 paces."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":2221,"hour":14.2,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":4081,"hour":19.3,"kind":"intent","action":"mine","payload":{"kind":"mine","tx":270,"ty":301,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"The hare falls."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"You strike the hare."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"The hart falls."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"You strike the hart."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"You strike the hart."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"You strike the hart."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"The hare falls."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"You strike the hare."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"The field rat falls."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"The hart falls."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"You strike the hart."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"You strike the hart."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"You strike the hart."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"The cave mole falls."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"You strike the cave mole."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"You strike the cave mole."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"Saltback Tortoise, southwest, 6 paces."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the field rat."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"The hare falls."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the hare."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"The hart falls."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the hart."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the hart."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the hart."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"The hare falls."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the hare."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"The field rat falls."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"The hart falls."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the hart."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the hart."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the hart."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"The cave mole falls."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the cave mole."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the cave mole."}
+{"tick":2281,"hour":14.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4141,"hour":19.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":2341,"hour":14.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4201,"hour":19.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":273,"ty":292,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"The field rat falls."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"You strike the field rat."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"The hare falls."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"You strike the hare."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"The hart falls."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"The hare falls."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"You strike the hare."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"The field rat falls."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"The hart falls."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"The cave mole falls."}
+{"tick":4207,"hour":19.7,"kind":"sim","text":"You strike the cave mole."}
+{"tick":2401,"hour":14.7,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":4261,"hour":19.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"The field rat falls."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"You strike the field rat."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"The hare falls."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"You strike the hare."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"The hart falls."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"You strike the hart."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"You strike the hart."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"You strike the hart."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"The hare falls."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"You strike the hare."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"The field rat falls."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"The hart falls."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"You strike the hart."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"You strike the hart."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"You strike the hart."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"The cave mole falls."}
+{"tick":2461,"hour":14.8,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":4321,"hour":20,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":192,"ty":344,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":2520,"hour":15,"kind":"mind","text":"smith marks hour 15: the vale is quiet, the work continues."}
+{"tick":2521,"hour":15,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4381,"hour":20.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"The trail is cold."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"The field rat falls."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"You strike the field rat."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"The hare falls."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"You strike the hare."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"The hart falls."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"The hare falls."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"You strike the hare."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"The field rat falls."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"The hart falls."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4387,"hour":20.2,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":2581,"hour":15.2,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":4441,"hour":20.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":192,"ty":344,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":2641,"hour":15.3,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":4501,"hour":20.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"The trail is cold."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"The field rat falls."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"You strike the field rat."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"The hare falls."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"You strike the hare."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"The hart falls."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"You strike the hart."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"You strike the hart."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"You strike the hart."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"The hare falls."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"You strike the hare."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"The field rat falls."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"The hart falls."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"You strike the hart."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"You strike the hart."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"You strike the hart."}
+{"tick":2701,"hour":15.5,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":4561,"hour":20.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"No tree."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"The trail is cold."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"The field rat falls."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"You strike the field rat."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"The hare falls."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"You strike the hare."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"The hart falls."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"The hare falls."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"You strike the hare."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"The field rat falls."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"The hart falls."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4567,"hour":20.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"Hart, south, 8 paces."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"No tree."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"The trail is cold."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"The field rat falls."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"You strike the field rat."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"The hare falls."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"You strike the hare."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"The hart falls."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"The hare falls."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"You strike the hare."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"The field rat falls."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"The hart falls."}
+{"tick":4574,"hour":20.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"No tree."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"Hart, south, 8 paces."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"No tree."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"The trail is cold."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"The field rat falls."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"You strike the field rat."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"The hare falls."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"You strike the hare."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"The hart falls."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"The hare falls."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"You strike the hare."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"The field rat falls."}
+{"tick":4581,"hour":20.7,"kind":"sim","text":"The hart falls."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"You strike the hare."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"No tree."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"Hart, south, 8 paces."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"No tree."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"The trail is cold."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"The field rat falls."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"You strike the field rat."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"The hare falls."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"You strike the hare."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"The hart falls."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"You strike the hart."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"The hare falls."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"You strike the hare."}
+{"tick":4588,"hour":20.7,"kind":"sim","text":"The field rat falls."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"The hare falls."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"You strike the hare."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"No tree."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"Hart, south, 8 paces."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"No tree."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"The trail is cold."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"The field rat falls."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"You strike the field rat."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"The hare falls."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"You strike the hare."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"The hart falls."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"You strike the hart."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"You strike the hart."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"You strike the hart."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"The hare falls."}
+{"tick":4595,"hour":20.8,"kind":"sim","text":"You strike the hare."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"You strike the hart."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"The hare falls."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"You strike the hare."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"No tree."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"Hart, south, 8 paces."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"No tree."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"The trail is cold."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"The field rat falls."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"You strike the field rat."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"The hare falls."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"You strike the hare."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"The hart falls."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"You strike the hart."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"You strike the hart."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"You strike the hart."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":4603,"hour":20.8,"kind":"sim","text":"The hare falls."}
+{"tick":2761,"hour":15.7,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":4621,"hour":20.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":2821,"hour":15.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4681,"hour":21,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":264,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4681,"hour":21,"kind":"mind","text":"smith marks hour 21: the vale is quiet, the work continues."}
+{"tick":4682,"hour":21,"kind":"sim","text":"You strike the hart."}
+{"tick":4682,"hour":21,"kind":"sim","text":"You strike the hart."}
+{"tick":4682,"hour":21,"kind":"sim","text":"The hare falls."}
+{"tick":4682,"hour":21,"kind":"sim","text":"You strike the hare."}
+{"tick":4682,"hour":21,"kind":"sim","text":"No tree."}
+{"tick":4682,"hour":21,"kind":"sim","text":"Hart, south, 8 paces."}
+{"tick":4682,"hour":21,"kind":"sim","text":"No tree."}
+{"tick":4682,"hour":21,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4682,"hour":21,"kind":"sim","text":"The trail is cold."}
+{"tick":4682,"hour":21,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4682,"hour":21,"kind":"sim","text":"The field rat falls."}
+{"tick":4682,"hour":21,"kind":"sim","text":"You strike the field rat."}
+{"tick":4682,"hour":21,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":4682,"hour":21,"kind":"sim","text":"The hare falls."}
+{"tick":4682,"hour":21,"kind":"sim","text":"You strike the hare."}
+{"tick":4682,"hour":21,"kind":"sim","text":"The hart falls."}
+{"tick":4682,"hour":21,"kind":"sim","text":"You strike the hart."}
+{"tick":4682,"hour":21,"kind":"sim","text":"You strike the hart."}
+{"tick":4682,"hour":21,"kind":"sim","text":"You strike the hart."}
+{"tick":4682,"hour":21,"kind":"sim","text":"Hart, northwest, 2 paces."}
+{"tick":2881,"hour":16,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4741,"hour":21.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"You strike the hart."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"You strike the hart."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"The field rat falls."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"You strike the field rat."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"The field rat falls."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"You strike the field rat."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":2905,"hour":16.1,"kind":"sim","text":"A hut stands for the looking — no deed asked."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"You strike the hart."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"You strike the hart."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"You strike the hart."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"The field rat falls."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"You strike the field rat."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"The field rat falls."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"You strike the field rat."}
+{"tick":2911,"hour":16.1,"kind":"sim","text":"Field Rat, southeast, 7 paces."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"The hart falls."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"You strike the hart."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"You strike the hart."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"You strike the hart."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"The field rat falls."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"You strike the field rat."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"The field rat falls."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2917,"hour":16.1,"kind":"sim","text":"You strike the field rat."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"You strike the hare."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"The hart falls."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"You strike the hart."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"You strike the hart."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"You strike the hart."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"The field rat falls."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"You strike the field rat."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"The field rat falls."}
+{"tick":2923,"hour":16.1,"kind":"sim","text":"Dust."}
+{"tick":2941,"hour":16.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"You strike the hare."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"You strike the hare."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"The hart falls."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"You strike the hart."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"You strike the hart."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"You strike the hart."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"The field rat falls."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"You strike the field rat."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":2947,"hour":16.2,"kind":"sim","text":"The field rat falls."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"The hare falls."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"You strike the hare."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"You strike the hare."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"The hart falls."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"You strike the hart."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"You strike the hart."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"You strike the hart."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"The field rat falls."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"You strike the field rat."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":2954,"hour":16.2,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.1."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"You strike the hart."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"You strike the hart."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"You strike the hart."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"The hare falls."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"You strike the hare."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"No tree."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"Hart, south, 8 paces."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"No tree."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"The trail is cold."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"The field rat falls."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"You strike the field rat."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"The hare falls."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"You strike the hare."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"The hart falls."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"You strike the hart."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"You strike the hart."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"You strike the hart."}
+{"tick":4801,"hour":21.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"The hare falls."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"You strike the hare."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"You strike the hare."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"The hart falls."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"You strike the hart."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"You strike the hart."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"You strike the hart."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"The field rat falls."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"You strike the field rat."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"Dust."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":2961,"hour":16.2,"kind":"sim","text":"Cave Mole, west, 3 paces."}
+{"tick":4861,"hour":21.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":264,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3001,"hour":16.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":1195,"ty":10,"targetId":null,"spell":null},"ok":false,"reason":"intent target (1195,10) is outside the map"}
+{"tick":3001,"hour":16.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":269,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"You strike the hart."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"The hare falls."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"You strike the hare."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"You strike the hare."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"The hart falls."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"You strike the hart."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"You strike the hart."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"You strike the hart."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"The field rat falls."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"You strike the field rat."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Dust."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Dust."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Dust."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Dust."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Dust."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Dust."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":3002,"hour":16.3,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":4921,"hour":21.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3061,"hour":16.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":273,"ty":292,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"The hare falls."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"You strike the hare."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"You strike the hare."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"The hart falls."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"The field rat falls."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"You strike the field rat."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"Dust."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"Dust."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"Dust."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"Dust."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"Dust."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"Dust."}
+{"tick":3062,"hour":16.5,"kind":"sim","text":"Hare, southeast, 2 paces."}
+{"tick":4981,"hour":21.8,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":3121,"hour":16.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5000,"hour":21.9,"kind":"intent","action":"fly","payload":{"kind":"fly","tx":10,"ty":10,"targetId":null,"spell":null},"ok":false,"reason":"unknown intent kind: fly"}
+{"tick":5041,"hour":22,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3182,"hour":16.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5047,"hour":22,"kind":"sim","text":"You strike the hart."}
+{"tick":5047,"hour":22,"kind":"sim","text":"The hare falls."}
+{"tick":5047,"hour":22,"kind":"sim","text":"You strike the hare."}
+{"tick":5047,"hour":22,"kind":"sim","text":"No tree."}
+{"tick":5047,"hour":22,"kind":"sim","text":"Hart, south, 8 paces."}
+{"tick":5047,"hour":22,"kind":"sim","text":"No tree."}
+{"tick":5047,"hour":22,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":5047,"hour":22,"kind":"sim","text":"The trail is cold."}
+{"tick":5047,"hour":22,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":5047,"hour":22,"kind":"sim","text":"The field rat falls."}
+{"tick":5047,"hour":22,"kind":"sim","text":"You strike the field rat."}
+{"tick":5047,"hour":22,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":5047,"hour":22,"kind":"sim","text":"The hare falls."}
+{"tick":5047,"hour":22,"kind":"sim","text":"You strike the hare."}
+{"tick":5047,"hour":22,"kind":"sim","text":"The hart falls."}
+{"tick":5047,"hour":22,"kind":"sim","text":"You strike the hart."}
+{"tick":5047,"hour":22,"kind":"sim","text":"You strike the hart."}
+{"tick":3241,"hour":17,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5101,"hour":22.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"The hare falls."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"You strike the hare."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"You strike the hare."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"The hart falls."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"The field rat falls."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"You strike the field rat."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Dust."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Dust."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Dust."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Dust."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Dust."}
+{"tick":3292,"hour":17.1,"kind":"sim","text":"Dust."}
+{"tick":5161,"hour":22.3,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3301,"hour":17.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":270,"ty":301,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5221,"hour":22.5,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3361,"hour":17.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3421,"hour":17.5,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":5281,"hour":22.7,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"The hart falls."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"The hare falls."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"You strike the hare."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"You strike the hare."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"The hart falls."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"You strike the hart."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"The field rat falls."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"You strike the field rat."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Dust."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Dust."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Dust."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Dust."}
+{"tick":3422,"hour":17.5,"kind":"sim","text":"Dust."}
+{"tick":3481,"hour":17.7,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":5341,"hour":22.8,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"The field rat falls."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"The hart falls."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"The hare falls."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"You strike the hare."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"You strike the hare."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"The hart falls."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"The field rat falls."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"You strike the field rat."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"Dust."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"Dust."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"Dust."}
+{"tick":3482,"hour":17.7,"kind":"sim","text":"Dust."}
+{"tick":3541,"hour":17.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5401,"hour":23,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5461,"hour":23.2,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3600,"hour":18,"kind":"mind","text":"smith marks hour 18: the vale is quiet, the work continues."}
+{"tick":3601,"hour":18,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3607,"hour":18,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":3607,"hour":18,"kind":"sim","text":"The field rat falls."}
+{"tick":3607,"hour":18,"kind":"sim","text":"The hart falls."}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3607,"hour":18,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3607,"hour":18,"kind":"sim","text":"The hare falls."}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the hare."}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the hare."}
+{"tick":3607,"hour":18,"kind":"sim","text":"The hart falls."}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3607,"hour":18,"kind":"sim","text":"The field rat falls."}
+{"tick":3607,"hour":18,"kind":"sim","text":"You strike the field rat."}
+{"tick":3607,"hour":18,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":3607,"hour":18,"kind":"sim","text":"Dust."}
+{"tick":3607,"hour":18,"kind":"sim","text":"Dust."}
+{"tick":3607,"hour":18,"kind":"sim","text":"Dust."}
+{"tick":3613,"hour":18,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":3613,"hour":18,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":3613,"hour":18,"kind":"sim","text":"The field rat falls."}
+{"tick":3613,"hour":18,"kind":"sim","text":"The hart falls."}
+{"tick":3613,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3613,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3613,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3613,"hour":18,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3613,"hour":18,"kind":"sim","text":"The hare falls."}
+{"tick":3613,"hour":18,"kind":"sim","text":"You strike the hare."}
+{"tick":3613,"hour":18,"kind":"sim","text":"You strike the hare."}
+{"tick":3613,"hour":18,"kind":"sim","text":"The hart falls."}
+{"tick":3613,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3613,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3613,"hour":18,"kind":"sim","text":"You strike the hart."}
+{"tick":3613,"hour":18,"kind":"sim","text":"The field rat falls."}
+{"tick":3613,"hour":18,"kind":"sim","text":"You strike the field rat."}
+{"tick":3613,"hour":18,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":3613,"hour":18,"kind":"sim","text":"Dust."}
+{"tick":3613,"hour":18,"kind":"sim","text":"Dust."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"The field rat falls."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"The hart falls."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"The hare falls."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"You strike the hare."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"You strike the hare."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"The hart falls."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"The field rat falls."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"You strike the field rat."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":3619,"hour":18.1,"kind":"sim","text":"Dust."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"The axe glances."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"The field rat falls."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"The hart falls."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"The hare falls."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"You strike the hare."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"You strike the hare."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"The hart falls."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"You strike the hart."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"The field rat falls."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"You strike the field rat."}
+{"tick":3625,"hour":18.1,"kind":"sim","text":"Recovered a rough iron ore. Mining rises to 8.2."}
+{"tick":5521,"hour":23.3,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3661,"hour":18.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":264,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5581,"hour":23.5,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3721,"hour":18.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"The field rat falls."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"The hart falls."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"The hare falls."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"You strike the hare."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"You strike the hare."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"The hart falls."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"The field rat falls."}
+{"tick":3727,"hour":18.4,"kind":"sim","text":"You strike the field rat."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"The field rat falls."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"The hart falls."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"The hare falls."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"You strike the hare."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"You strike the hare."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"The hart falls."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3733,"hour":18.4,"kind":"sim","text":"The field rat falls."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"The field rat falls."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"The hart falls."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"The hare falls."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"You strike the hare."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"You strike the hare."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"The hart falls."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3739,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"No tree."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"The field rat falls."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"The hart falls."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"The hare falls."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"You strike the hare."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"You strike the hare."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"The hart falls."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3745,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"No tree."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"The field rat falls."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"The hart falls."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"The hare falls."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"You strike the hare."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"You strike the hare."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"The hart falls."}
+{"tick":3751,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"No tree."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"The axe glances."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"The field rat falls."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"The hart falls."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"You strike the hart."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"The hare falls."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"You strike the hare."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"You strike the hare."}
+{"tick":3757,"hour":18.4,"kind":"sim","text":"The hart falls."}
+{"tick":5641,"hour":23.7,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3781,"hour":18.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3841,"hour":18.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"You strike the field rat."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"No tree."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"The axe glances."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"The axe glances."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"The axe glances."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"The field rat falls."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"The hart falls."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"You strike the hart."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"The hare falls."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"You strike the hare."}
+{"tick":3842,"hour":18.7,"kind":"sim","text":"You strike the hare."}
+{"tick":5701,"hour":23.8,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5761,"hour":24,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5761,"hour":24,"kind":"mind","text":"smith marks hour 24: the vale is quiet, the work continues."}
+{"tick":3901,"hour":18.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"The field rat falls."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"You strike the field rat."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"No tree."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"The axe glances."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"The axe glances."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"The axe glances."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"The field rat falls."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"The hart falls."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"You strike the hart."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"You strike the hart."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"You strike the hart."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"The hare falls."}
+{"tick":3907,"hour":18.9,"kind":"sim","text":"You strike the hare."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"Cave Mole, north, 2 paces."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"The field rat falls."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"You strike the field rat."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"No tree."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"The axe glances."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"The axe glances."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"The axe glances."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"The field rat falls."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"The hart falls."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"You strike the hart."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"You strike the hart."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"You strike the hart."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":3913,"hour":18.9,"kind":"sim","text":"The hare falls."}
+{"tick":5821,"hour":24.2,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":3961,"hour":19,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":270,"ty":301,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4000,"hour":19.1,"kind":"intent","action":"chop","payload":{"kind":"chop","tx":1.5,"ty":10,"targetId":null,"spell":null},"ok":false,"reason":"intent target must be integer tile coords"}
+{"tick":5881,"hour":24.3,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4021,"hour":19.2,"kind":"intent","action":"mine","payload":{"kind":"mine","tx":270,"ty":301,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"Cave Mole, north, 2 paces."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"The field rat falls."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"You strike the field rat."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"No tree."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"The axe glances."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"The axe glances."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"The axe glances."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"The field rat falls."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"The hart falls."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"You strike the hart."}
+{"tick":4027,"hour":19.2,"kind":"sim","text":"Hart, south, 3 paces."}
+{"tick":5941,"hour":24.5,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4081,"hour":19.3,"kind":"intent","action":"mine","payload":{"kind":"mine","tx":270,"ty":301,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"Cave Mole, north, 2 paces."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"The field rat falls."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"You strike the field rat."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"No tree."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"The axe glances."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"The axe glances."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"The axe glances."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"The field rat falls."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"The hart falls."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"You strike the hart."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"You strike the hart."}
+{"tick":4082,"hour":19.3,"kind":"sim","text":"You strike the hart."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"Cave Mole, north, 2 paces."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"The field rat falls."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the field rat."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"No tree."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"The axe glances."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"The axe glances."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"The axe glances."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"The field rat falls."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"The hart falls."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the hart."}
+{"tick":4087,"hour":19.4,"kind":"sim","text":"You strike the hart."}
+{"tick":4141,"hour":19.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6000,"hour":24.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":-1,"ty":10,"targetId":null,"spell":null},"ok":false,"reason":"intent target (-1,10) is outside the map"}
+{"tick":6001,"hour":24.7,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4201,"hour":19.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":273,"ty":292,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6061,"hour":24.8,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4261,"hour":19.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6121,"hour":25,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"Cave Mole, north, 2 paces."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"The field rat falls."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"You strike the field rat."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"No tree."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"The axe glances."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"The axe glances."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"The axe glances."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"The field rat falls."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"The hart falls."}
+{"tick":4267,"hour":19.9,"kind":"sim","text":"You strike the hart."}
+{"tick":4321,"hour":20,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":192,"ty":344,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6181,"hour":25.2,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4322,"hour":20,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4322,"hour":20,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4322,"hour":20,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4322,"hour":20,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4322,"hour":20,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4322,"hour":20,"kind":"sim","text":"Cave Mole, north, 2 paces."}
+{"tick":4322,"hour":20,"kind":"sim","text":"The field rat falls."}
+{"tick":4322,"hour":20,"kind":"sim","text":"You strike the field rat."}
+{"tick":4322,"hour":20,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":4322,"hour":20,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":4322,"hour":20,"kind":"sim","text":"No tree."}
+{"tick":4322,"hour":20,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4322,"hour":20,"kind":"sim","text":"The axe glances."}
+{"tick":4322,"hour":20,"kind":"sim","text":"The axe glances."}
+{"tick":4322,"hour":20,"kind":"sim","text":"The axe glances."}
+{"tick":4322,"hour":20,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":4322,"hour":20,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4322,"hour":20,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":4322,"hour":20,"kind":"sim","text":"The field rat falls."}
+{"tick":4322,"hour":20,"kind":"sim","text":"The hart falls."}
+{"tick":6241,"hour":25.3,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4381,"hour":20.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4441,"hour":20.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":192,"ty":344,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"Cave Mole, north, 2 paces."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"The field rat falls."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"You strike the field rat."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"No tree."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"The axe glances."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"The axe glances."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"The axe glances."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":4447,"hour":20.4,"kind":"sim","text":"The field rat falls."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"The saltback tortoise falls."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"Cave Mole, north, 2 paces."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"The field rat falls."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"You strike the field rat."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"No tree."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"The axe glances."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"The axe glances."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"The axe glances."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":4453,"hour":20.4,"kind":"sim","text":"Saltback Tortoise, west, 11 paces."}
+{"tick":6301,"hour":25.5,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4501,"hour":20.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"The axe glances."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"The saltback tortoise falls."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"Cave Mole, north, 2 paces."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"The field rat falls."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"You strike the field rat."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"No tree."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"The axe glances."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"The axe glances."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"The axe glances."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":4502,"hour":20.5,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":6361,"hour":25.7,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"You strike the hart."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"You strike the hart."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"You strike the hart."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"The hare falls."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"You strike the hare."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"No tree."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"Hart, south, 8 paces."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"No tree."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"The trail is cold."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"The field rat falls."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"You strike the field rat."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"The hare falls."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"You strike the hare."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"The hart falls."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"You strike the hart."}
+{"tick":4562,"hour":20.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6421,"hour":25.8,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4621,"hour":20.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6481,"hour":26,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4681,"hour":21,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":264,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4681,"hour":21,"kind":"mind","text":"smith marks hour 21: the vale is quiet, the work continues."}
+{"tick":6541,"hour":26.2,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4741,"hour":21.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6601,"hour":26.3,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"The axe glances."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"The axe glances."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"The saltback tortoise falls."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"Cave Mole, north, 2 paces."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"The field rat falls."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"You strike the field rat."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"No tree."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"The axe glances."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"The axe glances."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"The axe glances."}
+{"tick":4801,"hour":21.3,"kind":"sim","text":"Saltback Tortoise, south, 2 paces."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.2."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"The axe glances."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"The axe glances."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"The saltback tortoise falls."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"Cave Mole, north, 2 paces."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"The field rat falls."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"You strike the field rat."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"No tree."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"The axe glances."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"The axe glances."}
+{"tick":4802,"hour":21.3,"kind":"sim","text":"The axe glances."}
+{"tick":4802,"hour":21.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6661,"hour":26.5,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4861,"hour":21.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":264,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"Cave Mole, south, 6 paces."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.2."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"The axe glances."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"The axe glances."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"The saltback tortoise falls."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"Cave Mole, north, 2 paces."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"The field rat falls."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"You strike the field rat."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"No tree."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"The axe glances."}
+{"tick":4867,"hour":21.5,"kind":"sim","text":"The axe glances."}
+{"tick":6721,"hour":26.7,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"Cave Mole, south, 6 paces."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"Cave Mole, south, 6 paces."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.2."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"The axe glances."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"The axe glances."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"The saltback tortoise falls."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"Cave Mole, north, 2 paces."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"The field rat falls."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"You strike the field rat."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"No tree."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":4873,"hour":21.5,"kind":"sim","text":"The axe glances."}
+{"tick":4921,"hour":21.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6781,"hour":26.8,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":4981,"hour":21.8,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":6841,"hour":27,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6841,"hour":27,"kind":"mind","text":"smith marks hour 27: the vale is quiet, the work continues."}
+{"tick":5000,"hour":21.9,"kind":"intent","action":"fly","payload":{"kind":"fly","tx":10,"ty":10,"targetId":null,"spell":null},"ok":false,"reason":"unknown intent kind: fly"}
+{"tick":5041,"hour":22,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6901,"hour":27.2,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5101,"hour":22.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6961,"hour":27.3,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7000,"hour":27.4,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":1195,"ty":10,"targetId":null,"spell":null},"ok":false,"reason":"intent target (1195,10) is outside the map"}
+{"tick":5161,"hour":22.3,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7021,"hour":27.5,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5221,"hour":22.5,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7081,"hour":27.7,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5281,"hour":22.7,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7141,"hour":27.8,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5341,"hour":22.8,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7201,"hour":28,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5401,"hour":23,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7261,"hour":28.2,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5461,"hour":23.2,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7321,"hour":28.3,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5521,"hour":23.3,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7381,"hour":28.5,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5581,"hour":23.5,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7441,"hour":28.7,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5641,"hour":23.7,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7501,"hour":28.8,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5701,"hour":23.8,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7561,"hour":29,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"You strike the hart."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"You strike the hart."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"You strike the hart."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"You strike the hart."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"The hare falls."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"You strike the hare."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"No tree."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"Hart, south, 8 paces."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"No tree."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"The trail is cold."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"The first drops fall — the beds drink."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"The field rat falls."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"You strike the field rat."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"Field Rat, southeast, 1 pace."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"The hare falls."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"You strike the hare."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"The hart falls."}
+{"tick":5761,"hour":24,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5761,"hour":24,"kind":"mind","text":"smith marks hour 24: the vale is quiet, the work continues."}
+{"tick":7621,"hour":29.2,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5821,"hour":24.2,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7681,"hour":29.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5881,"hour":24.3,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7741,"hour":29.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":5941,"hour":24.5,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7801,"hour":29.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6000,"hour":24.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":-1,"ty":10,"targetId":null,"spell":null},"ok":false,"reason":"intent target (-1,10) is outside the map"}
+{"tick":6001,"hour":24.7,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7861,"hour":29.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":264,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6061,"hour":24.8,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7921,"hour":30,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7921,"hour":30,"kind":"mind","text":"smith marks hour 30: the vale is quiet, the work continues."}
+{"tick":6121,"hour":25,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7981,"hour":30.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":270,"ty":301,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":8000,"hour":30.2,"kind":"intent","action":"chop","payload":{"kind":"chop","tx":1.5,"ty":10,"targetId":null,"spell":null},"ok":false,"reason":"intent target must be integer tile coords"}
+{"tick":6181,"hour":25.2,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":8041,"hour":30.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6241,"hour":25.3,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":8101,"hour":30.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6301,"hour":25.5,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":8161,"hour":30.7,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":6361,"hour":25.7,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":8221,"hour":30.8,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"Cave Mole, south, 6 paces."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"Cave Mole, south, 6 paces."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.2."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"The axe glances."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"The axe glances."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"The saltback tortoise falls."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"Cave Mole, north, 2 paces."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"The field rat falls."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"You strike the field rat."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"No tree."}
+{"tick":6395,"hour":25.8,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.1."}
+{"tick":6421,"hour":25.8,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":8281,"hour":31,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":6481,"hour":26,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":8341,"hour":31.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6541,"hour":26.2,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":8401,"hour":31.3,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":6601,"hour":26.3,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":8461,"hour":31.5,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":6661,"hour":26.5,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":8521,"hour":31.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6721,"hour":26.7,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":8581,"hour":31.8,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":6781,"hour":26.8,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6841,"hour":27,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6841,"hour":27,"kind":"mind","text":"smith marks hour 27: the vale is quiet, the work continues."}
+{"tick":6901,"hour":27.2,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":6961,"hour":27.3,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7000,"hour":27.4,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":1195,"ty":10,"targetId":null,"spell":null},"ok":false,"reason":"intent target (1195,10) is outside the map"}
+{"tick":7021,"hour":27.5,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7081,"hour":27.7,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7141,"hour":27.8,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7201,"hour":28,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7261,"hour":28.2,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7321,"hour":28.3,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7381,"hour":28.5,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7441,"hour":28.7,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7501,"hour":28.8,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7561,"hour":29,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"Cave Mole, south, 4 paces."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"Clouds gather over the vale."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"Cave Mole, south, 6 paces."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"Cave Mole, south, 6 paces."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"Recovered a rough oak log. Lumberjacking rises to 14.2."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"The axe glances."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"The axe glances."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"The saltback tortoise falls."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"You strike the saltback tortoise."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"Cave Mole, north, 2 paces."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"The field rat falls."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"You strike the field rat."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"Recovered a rough oak log."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"Saltback Tortoise, north, 2 paces."}
+{"tick":7613,"hour":29.1,"kind":"sim","text":"No tree."}
+{"tick":7621,"hour":29.2,"kind":"intent","action":"none","payload":{"kind":"none","tx":256,"ty":290,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7681,"hour":29.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7741,"hour":29.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7801,"hour":29.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7861,"hour":29.8,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":264,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7921,"hour":30,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":265,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":7921,"hour":30,"kind":"mind","text":"smith marks hour 30: the vale is quiet, the work continues."}
+{"tick":7981,"hour":30.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":270,"ty":301,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":8000,"hour":30.2,"kind":"intent","action":"chop","payload":{"kind":"chop","tx":1.5,"ty":10,"targetId":null,"spell":null},"ok":false,"reason":"intent target must be integer tile coords"}
+{"tick":8041,"hour":30.3,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":8101,"hour":30.5,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":261,"ty":295,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":8161,"hour":30.7,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":8221,"hour":30.8,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":8281,"hour":31,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":8341,"hour":31.2,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":8401,"hour":31.3,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":8461,"hour":31.5,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}
+{"tick":8521,"hour":31.7,"kind":"intent","action":"walk","payload":{"kind":"walk","tx":258,"ty":305,"targetId":null,"spell":null},"ok":true,"reason":null}
+{"tick":8581,"hour":31.8,"kind":"verb","action":"bank_gold","payload":{"verb":"bank_gold","item":null,"n":null,"recipeId":null},"ok":true,"reason":null}

@@ -1,7 +1,7 @@
 import { createServer } from "node:http";
 import { WebSocket, WebSocketServer } from "ws";
 import type { Intent } from "../game/types.ts";
-import type { createShard } from "./shard.ts";
+import type { createShard, VerbRequest } from "./shard.ts";
 
 type Shard = ReturnType<typeof createShard>;
 const HELLO_MS = 5000;
@@ -96,6 +96,12 @@ export function createTransport(shard: Shard) {
       }
       // A superseded socket cannot queue during its close handshake.
       if (sessions.get(id)?.socket !== socket) return;
+      if (message.type === "verb") {
+        if (typeof message.seq !== "number" || !Number.isFinite(message.seq) || !object(message.verb)) return fail("schema-invalid message");
+        const reason = shard.enqueueVerb(id, message.verb as unknown as VerbRequest);
+        send(socket, { type: "ack", seq: message.seq, ok: reason === null, ...(reason ? { reason } : {}) });
+        return;
+      }
       if (message.type !== "intent" || typeof message.seq !== "number" || !Number.isFinite(message.seq) || !intentShape(message.intent)) return fail("schema-invalid message");
       const reason = shard.enqueueIntent(id, message.intent);
       send(socket, { type: "ack", seq: message.seq, ok: reason === null, ...(reason ? { reason } : {}) });

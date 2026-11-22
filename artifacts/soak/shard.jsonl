@@ -1,0 +1,135 @@
+{"at":"2026-11-22T11:56:03.077Z","line":"shard save tick=1500"}
+{"at":"2026-11-22T11:56:05.582Z","line":"shard restore invalid; starting fresh"}
+{"at":"2026-11-22T11:56:05.606Z","line":"shard save tick=0"}
+{"at":"2026-11-22T11:56:07.100Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Field Rat, southeast, 1 pace."}
+{"at":"2026-11-22T11:56:08.023Z","line":"shard save tick=1800"}
+{"at":"2026-11-22T11:56:09.195Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:09.275Z","line":"[verb host-6627835f988e2c5e50533d49] equip: You take the pick."}
+{"at":"2026-11-22T11:56:09.276Z","line":"[verb host-dbc4a04327176e6577b4da46] equip: You do not carry that."}
+{"at":"2026-11-22T11:56:09.292Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Field Rat, southeast, 7 paces."}
+{"at":"2026-11-22T11:56:10.140Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:12.039Z","line":"[verb host-dbc4a04327176e6577b4da46] track: The trail is cold."}
+{"at":"2026-11-22T11:56:12.040Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:12.154Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:12.963Z","line":"shard save tick=2100"}
+{"at":"2026-11-22T11:56:13.259Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:14.028Z","line":"shard save tick=300"}
+{"at":"2026-11-22T11:56:15.162Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:16.143Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Hart, south, 8 paces."}
+{"at":"2026-11-22T11:56:16.160Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Cave Mole, west, 3 paces."}
+{"at":"2026-11-22T11:56:18.012Z","line":"shard save tick=2400"}
+{"at":"2026-11-22T11:56:18.075Z","line":"[verb host-dbc4a04327176e6577b4da46] eat: The cabbage holds."}
+{"at":"2026-11-22T11:56:18.075Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:18.264Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:18.996Z","line":"shard save tick=600"}
+{"at":"2026-11-22T11:56:19.214Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:19.246Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Hare, southeast, 2 paces."}
+{"at":"2026-11-22T11:56:19.247Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:21.114Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:22.063Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Redtail Squirrel, west, 8 paces."}
+{"at":"2026-11-22T11:56:22.064Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:22.986Z","line":"shard save tick=2700"}
+{"at":"2026-11-22T11:56:23.235Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:23.968Z","line":"shard save tick=900"}
+{"at":"2026-11-22T11:56:24.186Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:27.961Z","line":"shard save tick=3000"}
+{"at":"2026-11-22T11:56:28.255Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Redtail Squirrel, southeast, 2 paces."}
+{"at":"2026-11-22T11:56:28.976Z","line":"shard save tick=1200"}
+{"at":"2026-11-22T11:56:31.147Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Hart, south, 3 paces."}
+{"at":"2026-11-22T11:56:32.974Z","line":"shard save tick=3300"}
+{"at":"2026-11-22T11:56:33.211Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Cave Mole, west, 4 paces."}
+{"at":"2026-11-22T11:56:33.959Z","line":"shard save tick=1500"}
+{"at":"2026-11-22T11:56:35.114Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Redtail Squirrel, southeast, 2 paces."}
+{"at":"2026-11-22T11:56:35.114Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:36.060Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Redtail Squirrel, northeast, 2 paces."}
+{"at":"2026-11-22T11:56:36.060Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:37.930Z","line":"shard save tick=3600"}
+{"at":"2026-11-22T11:56:38.037Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Saltback Tortoise, west, 11 paces."}
+{"at":"2026-11-22T11:56:38.952Z","line":"shard save tick=1800"}
+{"at":"2026-11-22T11:56:40.216Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:41.162Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:42.990Z","line":"shard save tick=3900"}
+{"at":"2026-11-22T11:56:43.059Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Saltback Tortoise, south, 2 paces."}
+{"at":"2026-11-22T11:56:43.060Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:43.981Z","line":"shard save tick=2100"}
+{"at":"2026-11-22T11:56:44.224Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:44.257Z","line":"[verb host-dbc4a04327176e6577b4da46] eat: The cabbage holds."}
+{"at":"2026-11-22T11:56:45.205Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Cave Mole, west, 1 pace."}
+{"at":"2026-11-22T11:56:46.120Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:46.151Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Cave Mole, west, 1 pace."}
+{"at":"2026-11-22T11:56:47.084Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Saltback Tortoise, north, 2 paces."}
+{"at":"2026-11-22T11:56:48.017Z","line":"shard save tick=4200"}
+{"at":"2026-11-22T11:56:48.947Z","line":"shard save tick=2400"}
+{"at":"2026-11-22T11:56:49.211Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:50.155Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:52.070Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:53.021Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Cave Mole, north, 2 paces."}
+{"at":"2026-11-22T11:56:53.022Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:53.041Z","line":"shard save tick=4500"}
+{"at":"2026-11-22T11:56:53.274Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Redtail Squirrel, northwest, 4 paces."}
+{"at":"2026-11-22T11:56:53.939Z","line":"shard save tick=2700"}
+{"at":"2026-11-22T11:56:54.207Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:55.158Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:56:56.139Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Redtail Squirrel, west, 11 paces."}
+{"at":"2026-11-22T11:56:58.008Z","line":"shard save tick=4800"}
+{"at":"2026-11-22T11:56:58.956Z","line":"shard save tick=3000"}
+{"at":"2026-11-22T11:56:59.286Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Cave Mole, south, 6 paces."}
+{"at":"2026-11-22T11:57:00.216Z","line":"[verb host-dbc4a04327176e6577b4da46] eat: You force the raw meat down."}
+{"at":"2026-11-22T11:57:00.257Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Cave Mole, south, 6 paces."}
+{"at":"2026-11-22T11:57:01.147Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:57:03.023Z","line":"shard save tick=5100"}
+{"at":"2026-11-22T11:57:04.019Z","line":"shard save tick=3300"}
+{"at":"2026-11-22T11:57:05.187Z","line":"[verb host-dbc4a04327176e6577b4da46] eat: The cabbage holds."}
+{"at":"2026-11-22T11:57:06.138Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Cave Mole, south, 4 paces."}
+{"at":"2026-11-22T11:57:06.139Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:57:07.089Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Cave Mole, northeast, 8 paces."}
+{"at":"2026-11-22T11:57:07.089Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:57:08.027Z","line":"shard save tick=5400"}
+{"at":"2026-11-22T11:57:08.958Z","line":"shard save tick=3600"}
+{"at":"2026-11-22T11:57:12.954Z","line":"shard save tick=5700"}
+{"at":"2026-11-22T11:57:13.048Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Hare, southeast, 2 paces."}
+{"at":"2026-11-22T11:57:13.949Z","line":"shard save tick=3900"}
+{"at":"2026-11-22T11:57:15.181Z","line":"[verb host-dbc4a04327176e6577b4da46] eat: You force the raw meat down."}
+{"at":"2026-11-22T11:57:17.077Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Field Rat, southeast, 7 paces."}
+{"at":"2026-11-22T11:57:17.949Z","line":"shard save tick=6000"}
+{"at":"2026-11-22T11:57:18.942Z","line":"shard save tick=4200"}
+{"at":"2026-11-22T11:57:21.118Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Field Rat, southeast, 8 paces."}
+{"at":"2026-11-22T11:57:22.992Z","line":"shard save tick=6300"}
+{"at":"2026-11-22T11:57:23.940Z","line":"shard save tick=4500"}
+{"at":"2026-11-22T11:57:24.143Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Field Rat, south, 3 paces."}
+{"at":"2026-11-22T11:57:27.944Z","line":"shard save tick=6600"}
+{"at":"2026-11-22T11:57:28.860Z","line":"shard save tick=4800"}
+{"at":"2026-11-22T11:57:29.078Z","line":"[verb host-dbc4a04327176e6577b4da46] track: Hart, northeast, 7 paces."}
+{"at":"2026-11-22T11:57:31.941Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:57:32.974Z","line":"shard save tick=6900"}
+{"at":"2026-11-22T11:57:33.811Z","line":"shard save tick=5100"}
+{"at":"2026-11-22T11:57:37.949Z","line":"shard save tick=7200"}
+{"at":"2026-11-22T11:57:38.788Z","line":"shard save tick=5400"}
+{"at":"2026-11-22T11:57:42.917Z","line":"shard save tick=7500"}
+{"at":"2026-11-22T11:57:43.744Z","line":"shard save tick=5700"}
+{"at":"2026-11-22T11:57:47.916Z","line":"shard save tick=7800"}
+{"at":"2026-11-22T11:57:48.785Z","line":"shard save tick=6000"}
+{"at":"2026-11-22T11:57:52.879Z","line":"shard save tick=8100"}
+{"at":"2026-11-22T11:57:53.747Z","line":"shard save tick=6300"}
+{"at":"2026-11-22T11:57:54.075Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:57:55.026Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:57:55.980Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:57:57.863Z","line":"shard save tick=8400"}
+{"at":"2026-11-22T11:57:58.100Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:57:58.732Z","line":"shard save tick=6600"}
+{"at":"2026-11-22T11:57:59.029Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:58:00.938Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:58:02.097Z","line":"shard save tick=8640"}
+{"at":"2026-11-22T11:58:03.692Z","line":"shard save tick=6900"}
+{"at":"2026-11-22T11:58:08.677Z","line":"shard save tick=7200"}
+{"at":"2026-11-22T11:58:13.642Z","line":"shard save tick=7500"}
+{"at":"2026-11-22T11:58:18.641Z","line":"shard save tick=7800"}
+{"at":"2026-11-22T11:58:23.607Z","line":"shard save tick=8100"}
+{"at":"2026-11-22T11:58:24.821Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:58:25.772Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:58:26.723Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:58:28.597Z","line":"shard save tick=8400"}
+{"at":"2026-11-22T11:58:28.925Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:58:29.871Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:58:31.772Z","line":"[verb host-6627835f988e2c5e50533d49] bank_gold: The box holds 80 gold."}
+{"at":"2026-11-22T11:58:32.943Z","line":"shard save tick=8640"}
