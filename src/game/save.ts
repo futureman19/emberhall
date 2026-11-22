@@ -790,7 +790,15 @@ export function loadSave(): World | null {
   try {
     const raw = localStorage.getItem(SAVE_KEY);
     if (!raw) return null;
+    return decodeSave(raw);
+  } catch {
+    return null;
+  }
+}
 
+/** Decode persisted bytes without accessing browser storage. */
+export function decodeSave(raw: string): World | null {
+  try {
     const migrated = migrateSave(JSON.parse(raw));
     if (!migrated || !isCurrentSave(migrated)) {
       return null;
