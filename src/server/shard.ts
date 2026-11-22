@@ -5,6 +5,7 @@ import { COURT } from "../game/atlas.ts";
 import { createPerson, createStubWorld, createWorld } from "../game/world.ts";
 import { decodeSave, encodeSave } from "../game/save.ts";
 import { submitIntent, validateIntent } from "../game/agent/intent.ts";
+import { candidatesFor } from "../game/agent/candidates.ts";
 import { observeBody } from "../game/agent/observe.ts";
 import { hashObservation } from "../game/agent/log.ts";
 import { SPELL_META } from "../game/magery.ts";
@@ -219,11 +220,17 @@ export function createShard(config: ShardConfig = shardConfig(), options: {
     },
     observationFor(characterId: string) {
       if (!known(characterId)) throw new Error("Unknown character");
-      return observeBody(world, characterId);
+      // Contract Phase 0: an Observation carries the body's legal verb menu —
+      // without it a reflex autopilot over this feed has nothing to choose
+      // from. Menu computation walks nearby targets (candidatesFor) and, like
+      // the UI's own menu, may record node discoveries on the world.
+      return observeBody(world, characterId, { verbs: candidatesFor(world, characterId) });
     },
     obsHash(characterId: string) {
       if (!known(characterId)) throw new Error("Unknown character");
-      return hashObservation(observeBody(world, characterId));
+      // Hash the same shape observationFor serves (hashObservation covers
+      // tick + body + verb menu), so a menu change alone pushes a fresh obs.
+      return hashObservation(observeBody(world, characterId, { verbs: candidatesFor(world, characterId) }));
     },
     checkpoint: () => encodeSave(world),
     step,
