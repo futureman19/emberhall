@@ -1,0 +1,6 @@
+
+> lint
+> eslint . --max-warnings 0
+
+
+EXIT_CODE=0
