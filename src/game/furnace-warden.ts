@@ -34,7 +34,7 @@ export function updateFurnace(w: World) {
     state.bossDefeated = true; state.bossDoorOpen = true; state.bossEncounter = 'ready';
     clearEmberdeepRoom(w,'furnace');
     addToPile(w,Math.round(c.x),Math.round(c.z),{furnace_heart:1},'corpse',Number.MAX_SAFE_INTEGER,'Furnace Heart — first clear');
-    log(w,'The Furnace Warden falls. Emberdeep is free. Claim its Furnace Heart; a forge can reclaim six ingots.');
+    log(w,'Emberdeep is free. Claim its Furnace Heart; a forge can reclaim six ingots.');
     return;
   }
   if (!p || p.hp <= 0 || p.ghost || w.player.ghost) {
