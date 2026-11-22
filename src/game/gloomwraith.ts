@@ -1,3 +1,4 @@
+import { actorState } from './actor.ts';
 import type { Creature, World } from './types.ts';
 import { EMBERDEEP_ROOMS, inEmberdeep } from './emberdeep.ts';
 import { spawn, strikePlayer } from './ecology.ts';
@@ -11,7 +12,7 @@ export const GLOOM_SPAWNS = [
 export const gloomPhase = (seconds: number, lit: boolean) => lit || seconds % 6 >= 3 ? 'visible' : 'hidden';
 export const gloomBoltDamage = (torch: boolean) => torch ? 4 : 11;
 /** Equipped torches burn until weather removes them; bag torches give no light. */
-export const gloomTorch = (w: World) => w.player.wear.main === 'torch';
+export const gloomTorch = (w: World, actorId?: string) => actorState(w, actorId).wear.main === 'torch';
 /** Continuous exposure allows escape when every neighbouring tile is lit. */
 export function gloomExposure(w: World, x: number, z: number) {
   const p = w.people.find(p => p.isPlayer);

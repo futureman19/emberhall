@@ -1,3 +1,4 @@
+import { actorPerson, actorState } from "./actor.ts";
 import { LEGACY_MAP } from "./atlas.ts";
 import { biomeAt } from "./biome.ts";
 import { ITEM_META } from "./catalog.ts";
@@ -36,8 +37,8 @@ export const HERB_META: Record<
   pearl: { item: "pearl", seed: null, label: "black pearl", patches: 12, pickNote: "The shell opens on a drop of night." },
 };
 
-function self(world: World): Person | null {
-  return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
+function self(world: World, actorId?: string): Person | null {
+  return actorPerson(world, actorId);
 }
 
 /** Is the wild patch ready to pick right now? */
@@ -134,38 +135,40 @@ function pathTo(world: World, p: Person, tx: number, ty: number): string | null 
 }
 
 /** Right-click "Pick" (or a tap on the patch): walk over and pluck it. */
-export function commandPick(world: World, patchId: string): string | null {
-  const p = self(world);
+export function commandPick(world: World, patchId: string, actorId?: string): string | null {
+  const state = actorState(world, actorId);
+  const p = self(world, actorId);
   if (!p) return "You are not in the vale.";
-  if (p.ghost || world.player.ghost) return "A ghost cannot.";
+  if (p.ghost || state.ghost) return "A ghost cannot.";
   const patch = world.herbs?.find((h) => h.id === patchId);
   if (!patch) return "Nothing grows there.";
   const meta = HERB_META[patch.kind];
   if (!herbReady(world, patch)) return `The ${meta.label} is picked clean.`;
-  world.player.intent = { kind: "pick", tx: patch.tx, ty: patch.ty, targetId: patch.id, spell: null };
+  state.intent = { kind: "pick", tx: patch.tx, ty: patch.ty, targetId: patch.id, spell: null };
   if (Math.hypot(p.x - patch.tx, p.z - patch.ty) > PICK_REACH) return pathTo(world, p, patch.tx, patch.ty);
   p.path = [];
   return null;
 }
 
 /** The work-beat lands — the pluck itself. */
-export function pickNow(world: World): string {
-  const patch = world.herbs?.find((h) => h.id === world.player.intent.targetId);
-  world.player.intent.kind = "none";
+export function pickNow(world: World, actorId?: string): string {
+  const state = actorState(world, actorId);
+  const patch = world.herbs?.find((h) => h.id === state.intent.targetId);
+  state.intent.kind = "none";
   if (!patch) return "Nothing grows there.";
-  const p = self(world);
+  const p = self(world, actorId);
   if (!p) return "You are not in the vale.";
   if (Math.hypot(p.x - patch.tx, p.z - patch.ty) > PICK_REACH + 0.6) return "Too far.";
   const meta = HERB_META[patch.kind];
   if (!herbReady(world, patch)) return `The ${meta.label} is picked clean.`;
   patch.until = world.hour + HERB_REGROW_HOURS;
   const n = 1 + (Math.random() < DOUBLE_PINCH ? 1 : 0);
-  world.player.pack[meta.item] = (world.player.pack[meta.item] ?? 0) + n;
+  state.pack[meta.item] = (state.pack[meta.item] ?? 0) + n;
   playSfx("chop", 0.3);
   const itemLabel = ITEM_META[meta.item].label.toLowerCase();
   let note = `You pluck ${n > 1 ? `${n} ` : ""}${itemLabel}. ${meta.pickNote}`;
   if (meta.seed && Math.random() < SEED_CHANCE) {
-    world.player.pack[meta.seed] = (world.player.pack[meta.seed] ?? 0) + 1;
+    state.pack[meta.seed] = (state.pack[meta.seed] ?? 0) + 1;
     note += ` A ${ITEM_META[meta.seed].label.toLowerCase()} comes with the roots.`;
   }
   return note;

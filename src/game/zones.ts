@@ -1,3 +1,4 @@
+import { actorState } from "./actor.ts";
 import {
   EARTHQUAKE_PULSE_GAP_HOURS,
   NATURES_FURY_HOURS,
@@ -93,7 +94,7 @@ export function placeZone(world: World, kind: ZoneKind, tx: number, ty: number, 
 
 /** Death rites for a beast a working finishes — the same rites a blade gives,
  * but no foe to turn on: the ring is not something you can fight. */
-function finishBeast(world: World, c: Creature): void {
+function finishBeast(world: World, c: Creature, ownerId: string | null): void {
   if (c.hp > 0) return;
   c.hp = 0;
   c.task = "dead";
@@ -103,9 +104,16 @@ function finishBeast(world: World, c: Creature): void {
   c.corpseUntil = world.hour + 8;
   spawnCorpsePile(world, c);
   completeObjective(world, "hunt");
+  // Fresh solo worlds have no registered sheets; only the exact player id resolves there.
+  // Unowned or orphaned workings still kill and spill public loot, but grant no personal rare.
+  if (ownerId === null) return;
+  const isSoloOwner = ownerId === world.player.id;
+  if (!isSoloOwner && (!world.playerStates || !Object.hasOwn(world.playerStates, ownerId)
+    || world.playerStates[ownerId]?.id !== ownerId)) return;
+  const state = isSoloOwner ? world.player : actorState(world, ownerId);
   const found = rollKillRare(world, c.kind, Math.random);
   if (found) {
-    world.player.rares.push(found);
+    state.rares.push(found);
     log(world, `In the stillness you find ${rareName(found)}.`);
   }
 }
@@ -122,7 +130,7 @@ function pulse(world: World, zone: GroundZone): void {
       for (const c of world.fauna) {
         if (c.task === "dead" || c.ownerId || !contains(zone, c.x, c.z)) continue;
         c.hp -= zone.power;
-        finishBeast(world, c);
+        finishBeast(world, c, zone.ownerId);
       }
       zone.tickAt += ZONE_TICK_HOURS;
       return;
@@ -148,7 +156,7 @@ function pulse(world: World, zone: GroundZone): void {
         if (c.task === "dead" || c.ownerId || !contains(zone, c.x, c.z)) continue;
         c.hp -= dmg;
         if (c.hp > 0) knockLoose(world, c);
-        else finishBeast(world, c);
+        else finishBeast(world, c, zone.ownerId);
       }
       zone.pulses--;
       zone.tickAt += EARTHQUAKE_PULSE_GAP_HOURS;
@@ -167,7 +175,7 @@ function pulse(world: World, zone: GroundZone): void {
       }
       if (best) {
         best.hp -= zone.power;
-        finishBeast(world, best);
+        finishBeast(world, best, zone.ownerId);
       }
       zone.tickAt += ZONE_TICK_HOURS;
       return;

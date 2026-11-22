@@ -5,11 +5,93 @@ import { setWorld } from "../live.ts";
 import type { Intent, IntentKind } from "../types.ts";
 import { createPerson } from "../world.ts";
 import { candidatesForPlayer } from "./candidates.ts";
+import * as candidateApi from "./candidates.ts";
+import * as observationApi from "./observe.ts";
+import { verbsFor } from "../context.ts";
 import { buildCourtMorning } from "./fixtures/court-morning.ts";
 import { submitIntent, validateIntent } from "./intent.ts";
 import { createDecisionLog, hashObservation } from "./log.ts";
 import { bodySheet, observeWorld } from "./observe.ts";
 import { answerChoice, answerNoul, choice, normalize, noul, topPick } from "./reflex.ts";
+
+function actorFixture() {
+  const fixture = buildCourtMorning();
+  const { world, miraId } = fixture;
+  const actor = structuredClone(world.player);
+  actor.id = miraId;
+  actor.pack = {} as typeof actor.pack;
+  world.playerStates = { [miraId]: actor };
+  return { ...fixture, actor, person: world.people.find((p) => p.id === miraId)! };
+}
+
+test("actor context uses its own pack, skills, ghost state and explicit world", () => {
+  const { world, miraId, actor, treeTx, treeTy } = actorFixture();
+  setWorld(buildCourtMorning().world);
+  const target = { kind: "tile" as const, id: "ground", tx: treeTx, ty: treeTy, label: "grass" };
+  world.tiles[treeTy]![treeTx] = { h: 1, kind: "grass" };
+  world.player.pack.spellbook = 1;
+  actor.pack.acorn = 1;
+  actor.skills.forestry = 100;
+  const before = structuredClone(world.player);
+  const menu = verbsFor(world, miraId, target);
+  assert.ok(menu.some((v) => v.verb === "sowAcorn"));
+  assert.ok(!menu.some((v) => v.verb === "teleport"));
+  actor.pack.spellbook = 1;
+  assert.ok(verbsFor(world, miraId, target).some((v) => v.verb === "teleport"));
+  actor.ghost = true;
+  assert.deepEqual(verbsFor(world, miraId, target).map((v) => v.verb), ["walk"]);
+  assert.deepEqual(world.player, before);
+  assert.throws(() => verbsFor(world, "missing", target), /Unknown actor/);
+  setWorld(world);
+  assert.deepEqual(verbsFor(target), verbsFor(world, undefined, target));
+});
+
+test("explicit actor context restricts a body-only ghost", () => {
+  const { world, miraId, person, treeTx, treeTy } = actorFixture();
+  person.ghost = true;
+  const target = { kind: "tile" as const, id: "ground", tx: treeTx, ty: treeTy, label: "grass" };
+  world.tiles[treeTy]![treeTx] = { h: 1, kind: "grass" };
+  assert.deepEqual(verbsFor(world, miraId, target).map((v) => v.verb), ["walk"]);
+});
+
+test("actor candidates are centered on its body without a live-world dependency", () => {
+  const { world, miraId, person } = actorFixture();
+  setWorld(buildCourtMorning().world);
+  person.x = 10;
+  person.z = 10;
+  world.tiles[10]![10] = { h: 1, kind: "grass" };
+  const nearby = createPerson(world, mulberry32(99), { x: 11, z: 10, name: "Neighbor" });
+  world.people.push(nearby);
+  const menu = candidateApi.candidatesFor(world, miraId);
+  assert.ok(menu.some((c) => c.target.id === nearby.id));
+  assert.ok(menu.some((c) => c.target.id === "10,10"));
+  assert.ok(!menu.some((c) => c.target.id === miraId || c.target.id === world.player.id));
+  assert.doesNotThrow(() => candidatesForPlayer(world));
+  assert.throws(() => candidateApi.candidatesFor(world, "missing"), /Unknown actor/);
+  world.people = world.people.filter((p) => p.id !== miraId);
+  assert.deepEqual(candidateApi.candidatesFor(world, miraId), []);
+});
+
+test("actor observation reads its own sheet and includes the other player body", () => {
+  const { world, miraId, actor, person, youId } = actorFixture();
+  actor.pack.acorn = 3;
+  actor.mana = 7;
+  person.hp = 19;
+  const before = structuredClone(world);
+  const obs = observationApi.observeBody(world, miraId);
+  assert.equal(obs.you.id, miraId);
+  assert.equal(obs.you.hp, 19);
+  assert.equal(obs.you.mana, 7);
+  assert.deepEqual(obs.you.pack, actor.pack);
+  assert.deepEqual(obs.people.map((p) => p.id), [youId]);
+  // structuredClone normalizes null-prototype resource-node dictionaries.
+  assert.deepEqual(structuredClone(world), before);
+  obs.you.pack.acorn = 99;
+  assert.equal(actor.pack.acorn, 3);
+  assert.throws(() => observationApi.observeBody(world, "missing"), /Unknown actor/);
+  world.people = world.people.filter((p) => p.id !== miraId);
+  assert.throws(() => observationApi.observeBody(world, miraId), /body/i);
+});
 
 test("observation mirrors the player's sheet and nearby souls only", () => {
   const { world, youId, miraId } = buildCourtMorning();

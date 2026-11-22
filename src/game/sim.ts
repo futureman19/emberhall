@@ -49,7 +49,7 @@ export function setSpeed(world: World, s: Speed) {
 }
 
 /** Follow one body's route; explicit actors use their own movement state.
- * The world tick remains the legacy solo/NPC scheduler. */
+ * Unregistered people retain the legacy NPC movement contract. */
 export function followPath(world: World, p: Person, dt: number, actorId?: string): "idle" | "moving" | "stuck" {
   const state = actorId !== undefined || p.isPlayer ? actorState(world, actorId) : undefined;
   if (actorId !== undefined && state!.id !== p.id) throw new Error(`Actor body mismatch: ${actorId}`);
@@ -156,16 +156,18 @@ export function tickWorld(world: World, realDt: number) {
   // Sparse node metadata is the clock index: no terrain-wide scan is needed.
   regrowResourceNodes(world);
 
+  const solo = you(world);
   for (const p of world.people) {
     p.bob += dt * (p.path.length ? 10 : 4);
-    if (p.isPlayer) {
+    const actorId = p !== solo && world.playerStates && Object.hasOwn(world.playerStates, p.id) ? p.id : undefined;
+    if (p.isPlayer || actorId !== undefined) {
       if (p.task !== "sleep" && !p.ghost) {
         p.hunger = Math.max(0, p.hunger - 3.2 * (dt / SECONDS_PER_HOUR));
         p.energy = Math.max(0, p.energy - 2.4 * (dt / SECONDS_PER_HOUR));
       }
-      const movement = followPath(world, p, dt);
-      if (movement === "stuck" && !replanIntentPath(world, p)) {
-        world.player.intent.kind = "none";
+      const movement = followPath(world, p, dt, actorId);
+      if (movement === "stuck" && !replanIntentPath(world, p, actorId)) {
+        actorState(world, actorId).intent.kind = "none";
         log(world, "The way closes.");
       }
       const oak = placeById("oakstand");
@@ -196,6 +198,11 @@ export function tickWorld(world: World, realDt: number) {
 
   const note = tickPlayer(world, dt);
   if (note) log(world, note);
+  for (const id of Object.keys(world.playerStates ?? {})) {
+    if (id === solo?.id) continue; // the legacy body already received its beat
+    const actorNote = tickPlayer(world, dt, id);
+    if (actorNote) log(world, actorNote);
+  }
   tickWeather(world, dt);
   tickCrops(world);
   tickSaplings(world);
@@ -204,6 +211,9 @@ export function tickWorld(world: World, realDt: number) {
   tickPiles(world);
   tickCampfires(world);
   tickPets(world, dt);
+  for (const id of Object.keys(world.playerStates ?? {})) {
+    if (id !== world.player.id) tickPets(world, dt, id);
+  }
   updateSpellStatuses(world);
   syncMonsterAudio(world);
   void COURT;

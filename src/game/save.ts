@@ -29,7 +29,7 @@ import {
 import type { ItemId, World } from "./types.ts";
 
 export const SAVE_KEY = "emberhall-save-v4";
-export const CURRENT_SAVE_VERSION = 5;
+export const CURRENT_SAVE_VERSION = 6;
 
 type SaveRecord = Record<string, unknown>;
 
@@ -585,6 +585,43 @@ function isStoredTiles(value: unknown): boolean {
   );
 }
 
+/** Reject executable/inherited map data before projecting or reading its values. */
+function isPlainSaveData(value: unknown, ancestors = new Set<object>()): boolean {
+  if (value === null || typeof value !== "object") return typeof value !== "function";
+  if (ancestors.has(value)) return false;
+  const proto = Object.getPrototypeOf(value);
+  if (!Array.isArray(value) && proto !== Object.prototype && proto !== null) return false;
+  ancestors.add(value);
+  const valid = Reflect.ownKeys(value).every((key) => {
+    if (typeof key !== "string") return false;
+    const descriptor = Object.getOwnPropertyDescriptor(value, key)!;
+    return "value" in descriptor && isPlainSaveData(descriptor.value, ancestors);
+  });
+  ancestors.delete(value);
+  return valid;
+}
+
+function equalSaveData(a: unknown, b: unknown): boolean {
+  if (a === b) return true;
+  if (a === null || b === null || typeof a !== "object" || typeof b !== "object") return false;
+  if (Array.isArray(a) !== Array.isArray(b)) return false;
+  const keys = Object.keys(a);
+  return keys.length === Object.keys(b).length && keys.every((key) =>
+    Object.hasOwn(b, key) && equalSaveData((a as SaveRecord)[key], (b as SaveRecord)[key]));
+}
+
+function isPlayerStateMap(save: SaveRecord): boolean {
+  // Actor sheets may outlive their bodies; persistence must not require a
+  // currently spawned Person. Missing optional maps retain the legacy contract.
+  if (!Object.hasOwn(save, "playerStates")) return true;
+  if (!isRecord(save.playerStates) || !isPlainSaveData(save.playerStates)
+    || !isRecord(save.player)) return false;
+  const player = save.player;
+  return Object.entries(save.playerStates).every(([id, state]) =>
+    isRecord(state) && state.id === id && isPlayer(state)
+    && (id !== player.id || equalSaveData(state, player)));
+}
+
 /** Validate migrated data before any expensive derived-world generation. */
 function isCurrentSave(save: SaveRecord): boolean {
   return (
@@ -608,9 +645,7 @@ function isCurrentSave(save: SaveRecord): boolean {
     (save.saplings === undefined || isArrayOf(save.saplings, isSapling)) &&
     (save.plantedTimber === undefined || isStringRecord(save.plantedTimber)) &&
     isPlayer(save.player) &&
-    (save.playerStates === undefined || (isRecord(save.playerStates) &&
-      Object.entries(save.playerStates).every(([id, state]) =>
-        isRecord(state) && state.id === id && isPlayer(state)))) &&
+    isPlayerStateMap(save) &&
     isArrayOf(save.log, isLogLine) &&
     isArrayOf(save.objectives, isObjective) &&
     isArrayOf(save.quests, isQuest) &&
@@ -634,7 +669,7 @@ function isCurrentSave(save: SaveRecord): boolean {
 function migrateSave(value: unknown): SaveRecord | null {
   if (!isRecord(value)) return null;
   if (value.saveVersion === CURRENT_SAVE_VERSION) return value;
-  if (value.saveVersion !== 1 && value.saveVersion !== 2 && value.saveVersion !== 3 && value.saveVersion !== 4) {
+  if (value.saveVersion !== 1 && value.saveVersion !== 2 && value.saveVersion !== 3 && value.saveVersion !== 4 && value.saveVersion !== 5) {
     return null;
   }
 
@@ -667,6 +702,16 @@ function migrateSave(value: unknown): SaveRecord | null {
     if (migrated.blueprints === undefined) migrated.blueprints = [];
     migrated.saveVersion = 5;
   }
+  if (migrated.saveVersion === 5) {
+    if (!isRecord(migrated.player) || !isString(migrated.player.id)) return migrated;
+    if (!Object.hasOwn(migrated, "playerStates")) migrated.playerStates = {};
+    if (isRecord(migrated.playerStates) && !Object.hasOwn(migrated.playerStates, migrated.player.id)) {
+      Object.defineProperty(migrated.playerStates, migrated.player.id, {
+        value: migrated.player, enumerable: true, configurable: true, writable: true,
+      });
+    }
+    migrated.saveVersion = 6;
+  }
   return migrated;
 }
 
@@ -690,6 +735,9 @@ export type SaveResult = { ok: true } | { ok: false; reason: "invalid-state" | "
 
 /** Pure save projection: transaction preflight uses the exact persisted schema. */
 export function encodeSave(world: World): string {
+    if (world.playerStates !== undefined && (!isRecord(world.playerStates) || !isPlainSaveData(world.playerStates))) {
+      throw new Error("Invalid actor state map; save rejected.");
+    }
     const resources = parseResourceInventory(world.player.resources);
     const resourceNodes = parseResourceNodeStateMapAtHour({
       seed: world.seed,
@@ -699,8 +747,8 @@ export function encodeSave(world: World): string {
     const { tiles: _tiles, player, ...rest } = world;
     const payload = {
       ...rest,
-      playerStates: world.playerStates === undefined ? undefined : Object.fromEntries(
-        Object.entries(world.playerStates).map(([id, state]) => [id, {
+      playerStates: Object.fromEntries(
+        Object.entries(world.playerStates ?? { [world.player.id]: world.player }).map(([id, state]) => [id, {
           ...state,
           resources: parseResourceInventory(state.resources),
           wear: projectWearRecord(state.wear),
@@ -750,7 +798,13 @@ export function loadSave(): World | null {
 
     const { saveVersion: _saveVersion, ...storedWorld } = migrated;
     const data = storedWorld as unknown as World;
-    if (!data.playerStates) data.playerStates = {};
+    // JSON loses alias identity. Validation above rejects conflicting duplicates.
+    data.playerStates ??= {};
+    if (Object.hasOwn(data.playerStates, data.player.id)) {
+      Object.defineProperty(data.playerStates, data.player.id, {
+        value: data.player, enumerable: true, configurable: true, writable: true,
+      });
+    }
     data.resourceNodes = parseResourceNodeStateMapAtHour({
       seed: data.seed,
       hour: data.hour,

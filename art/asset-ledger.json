@@ -8335,7 +8335,7 @@
       "canonicalId": "bless",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:43"
+        "src/game/magery.ts:44"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8389,7 +8389,7 @@
       "canonicalId": "blizzard",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:56"
+        "src/game/magery.ts:57"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8443,7 +8443,7 @@
       "canonicalId": "chainlightning",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:57"
+        "src/game/magery.ts:58"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8497,7 +8497,7 @@
       "canonicalId": "cure",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:41"
+        "src/game/magery.ts:42"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8551,7 +8551,7 @@
       "canonicalId": "curse",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:48"
+        "src/game/magery.ts:49"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8605,7 +8605,7 @@
       "canonicalId": "earthquake",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:64"
+        "src/game/magery.ts:65"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8659,7 +8659,7 @@
       "canonicalId": "fireball",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:40"
+        "src/game/magery.ts:41"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8713,7 +8713,7 @@
       "canonicalId": "fireblast",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:55"
+        "src/game/magery.ts:56"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8767,7 +8767,7 @@
       "canonicalId": "flamewall",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:60"
+        "src/game/magery.ts:61"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8821,7 +8821,7 @@
       "canonicalId": "flash",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:54"
+        "src/game/magery.ts:55"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8875,7 +8875,7 @@
       "canonicalId": "fly",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:69"
+        "src/game/magery.ts:70"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8929,7 +8929,7 @@
       "canonicalId": "gate",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:68"
+        "src/game/magery.ts:69"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -8983,7 +8983,7 @@
       "canonicalId": "heal",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:37"
+        "src/game/magery.ts:38"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9037,7 +9037,7 @@
       "canonicalId": "invisibility",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:47"
+        "src/game/magery.ts:48"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9091,7 +9091,7 @@
       "canonicalId": "ironwood",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:52"
+        "src/game/magery.ts:53"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9145,7 +9145,7 @@
       "canonicalId": "jump",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:66"
+        "src/game/magery.ts:67"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9199,7 +9199,7 @@
       "canonicalId": "leech",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:53"
+        "src/game/magery.ts:54"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9253,7 +9253,7 @@
       "canonicalId": "lightning",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:44"
+        "src/game/magery.ts:45"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9307,7 +9307,7 @@
       "canonicalId": "magicarrow",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:38"
+        "src/game/magery.ts:39"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9361,7 +9361,7 @@
       "canonicalId": "mark",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:49"
+        "src/game/magery.ts:50"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9415,7 +9415,7 @@
       "canonicalId": "meteor",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:59"
+        "src/game/magery.ts:60"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9469,7 +9469,7 @@
       "canonicalId": "mirrorimage",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:67"
+        "src/game/magery.ts:68"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9523,7 +9523,7 @@
       "canonicalId": "naturesfury",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:65"
+        "src/game/magery.ts:66"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9577,7 +9577,7 @@
       "canonicalId": "necromancy",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:70"
+        "src/game/magery.ts:71"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9631,7 +9631,7 @@
       "canonicalId": "nightsight",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:36"
+        "src/game/magery.ts:37"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9685,7 +9685,7 @@
       "canonicalId": "paralyze",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:46"
+        "src/game/magery.ts:47"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9739,7 +9739,7 @@
       "canonicalId": "poison",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:42"
+        "src/game/magery.ts:43"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9793,7 +9793,7 @@
       "canonicalId": "polymorph",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:73"
+        "src/game/magery.ts:74"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9847,7 +9847,7 @@
       "canonicalId": "recall",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:50"
+        "src/game/magery.ts:51"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9901,7 +9901,7 @@
       "canonicalId": "resurrect",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:71"
+        "src/game/magery.ts:72"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -9955,7 +9955,7 @@
       "canonicalId": "sanctuary",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:63"
+        "src/game/magery.ts:64"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -10009,7 +10009,7 @@
       "canonicalId": "sleep",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:58"
+        "src/game/magery.ts:59"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -10063,7 +10063,7 @@
       "canonicalId": "stonewall",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:62"
+        "src/game/magery.ts:63"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -10117,7 +10117,7 @@
       "canonicalId": "summon",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:45"
+        "src/game/magery.ts:46"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -10171,7 +10171,7 @@
       "canonicalId": "summonelemental",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:72"
+        "src/game/magery.ts:73"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -10225,7 +10225,7 @@
       "canonicalId": "tarpit",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:61"
+        "src/game/magery.ts:62"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -10279,7 +10279,7 @@
       "canonicalId": "teleport",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:39"
+        "src/game/magery.ts:40"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -10333,7 +10333,7 @@
       "canonicalId": "thornsnare",
       "family": "catalog/src/game/magery.ts#SPELL_META",
       "catalogSources": [
-        "src/game/magery.ts:51"
+        "src/game/magery.ts:52"
       ],
       "sourceNames": [
         "SPELL_META"
@@ -20961,7 +20961,7 @@
       "canonicalId": "ash",
       "family": "herb",
       "catalogSources": [
-        "src/game/herbs.ts:35",
+        "src/game/herbs.ts:36",
         "src/game/types.ts:524"
       ],
       "sourceNames": [
@@ -21027,7 +21027,7 @@
       "canonicalId": "ginseng",
       "family": "herb",
       "catalogSources": [
-        "src/game/herbs.ts:34",
+        "src/game/herbs.ts:35",
         "src/game/types.ts:524"
       ],
       "sourceNames": [
@@ -21093,7 +21093,7 @@
       "canonicalId": "mandrake",
       "family": "herb",
       "catalogSources": [
-        "src/game/herbs.ts:33",
+        "src/game/herbs.ts:34",
         "src/game/types.ts:524"
       ],
       "sourceNames": [
@@ -21159,7 +21159,7 @@
       "canonicalId": "moss",
       "family": "herb",
       "catalogSources": [
-        "src/game/herbs.ts:32",
+        "src/game/herbs.ts:33",
         "src/game/types.ts:524"
       ],
       "sourceNames": [
@@ -21225,7 +21225,7 @@
       "canonicalId": "pearl",
       "family": "herb",
       "catalogSources": [
-        "src/game/herbs.ts:36",
+        "src/game/herbs.ts:37",
         "src/game/types.ts:524"
       ],
       "sourceNames": [
@@ -86168,6 +86168,1616 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=bank",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=bank",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=care",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=care",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=cast",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=cast",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=chop",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=chop",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=dig",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=dig",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=drop",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=drop",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=enter",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=enter",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=feed",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=feed",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=fill",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=fill",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=fireball",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=fireball",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=fish",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=fish",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=follow",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=follow",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=harvest",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=harvest",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=house",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=house",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=hunt",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=hunt",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=loot",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=loot",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=mine",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=mine",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=name",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=name",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=pick",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=pick",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=release",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=release",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=roster",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=roster",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=skin",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=skin",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=sowAcorn",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=sowAcorn",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=sowCabbage",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=sowCabbage",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=sowGarlic",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=sowGarlic",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=sowWheat",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=sowWheat",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=stay",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=stay",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=take",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=take",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=talk",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=talk",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=tame",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=tame",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=teleport",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=teleport",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=till",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=till",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=track",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=track",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=use",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=use",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/context.ts#ContextVerb.verb=walk",
+      "canonicalId": "src/game/context.ts#ContextVerb.verb=walk",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/context.ts:51"
+      ],
+      "sourceNames": [
+        "ContextVerb.verb"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/context.ts:51"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/context.ts:51"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/corpse-animation.ts#CorpseFx.kind=looting",
       "canonicalId": "src/game/corpse-animation.ts#CorpseFx.kind=looting",
       "family": "state-vocabulary",
@@ -121776,7 +123386,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=ash_demon",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -121822,7 +123432,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=ashen_banshee",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -121868,7 +123478,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=barrow_hound",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -121914,7 +123524,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=blackbriar_hag",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -121960,7 +123570,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=bog_toad",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122006,7 +123616,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=bonecrow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122052,7 +123662,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=brambleback_stag",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122098,7 +123708,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=brine_hound",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122144,7 +123754,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=brine_seal",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122190,7 +123800,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=brine_troll",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122236,7 +123846,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=cave_mole",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122282,7 +123892,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=cavern_bat",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122328,7 +123938,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=cinder_drake",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122374,7 +123984,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=coal_salamander",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122420,7 +124030,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=deepmaw_basilisk",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122466,7 +124076,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=drowned_reaver",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122512,7 +124122,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=dune_crawler",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122558,7 +124168,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=dusk_owl",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122604,7 +124214,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=ember_fox",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122650,7 +124260,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=embercrawler",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122696,7 +124306,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=fen_ghoul",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122742,7 +124352,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=fen_leech",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122788,7 +124398,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=field_rat",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122834,7 +124444,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=frosthorn_ram",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122880,7 +124490,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=furnace_warden",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122926,7 +124536,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=gloomwraith",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -122972,7 +124582,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=grave_lich",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123018,7 +124628,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=greybarrow_wightling",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123064,7 +124674,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=hare",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123110,7 +124720,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=hart",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123156,7 +124766,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=highland_aurochs",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123202,7 +124812,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=ironwood_boar",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123248,7 +124858,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=mire_croaker",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123294,7 +124904,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=moss_badger",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123340,7 +124950,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=oak_bear",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123386,7 +124996,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=orc_marauder",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123432,7 +125042,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=orebeetle",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123478,7 +125088,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=ossuary_knight",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123524,7 +125134,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=pine_lynx",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123570,7 +125180,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=redtail_squirrel",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123616,7 +125226,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=reed_heron",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123662,7 +125272,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=reedback_stalker",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123708,7 +125318,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=ridgeback_warg",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123754,7 +125364,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=rime_revenant",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123800,7 +125410,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=river_otter",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123846,7 +125456,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=saltback_tortoise",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123892,7 +125502,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=slag_golem",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123938,7 +125548,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=stonecrawl_spider",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -123984,7 +125594,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=stonefang_ogre",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -124030,7 +125640,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=thornhide_doe",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -124076,7 +125686,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=tideclaw_crab",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -124122,7 +125732,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=tomb_sentinel",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -124168,7 +125778,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=whiteback_elk",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -124214,7 +125824,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=wight",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -124260,7 +125870,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=willow_wisp",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -124306,7 +125916,7 @@
       "canonicalId": "src/game/ecology.ts#SpawnEntry.kind=wolf",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/ecology.ts:18"
+        "src/game/ecology.ts:19"
       ],
       "sourceNames": [
         "SpawnEntry.kind"
@@ -124720,7 +126330,7 @@
       "canonicalId": "src/game/emberdeep.ts#EmberdeepState.bossDefeated=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/emberdeep.ts:30"
+        "src/game/emberdeep.ts:31"
       ],
       "sourceNames": [
         "EmberdeepState.bossDefeated"
@@ -124766,7 +126376,7 @@
       "canonicalId": "src/game/emberdeep.ts#EmberdeepState.bossDefeated=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/emberdeep.ts:30"
+        "src/game/emberdeep.ts:31"
       ],
       "sourceNames": [
         "EmberdeepState.bossDefeated"
@@ -124812,7 +126422,7 @@
       "canonicalId": "src/game/emberdeep.ts#EmberdeepState.bossDoorOpen=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/emberdeep.ts:29"
+        "src/game/emberdeep.ts:30"
       ],
       "sourceNames": [
         "EmberdeepState.bossDoorOpen"
@@ -124858,7 +126468,7 @@
       "canonicalId": "src/game/emberdeep.ts#EmberdeepState.bossDoorOpen=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/emberdeep.ts:29"
+        "src/game/emberdeep.ts:30"
       ],
       "sourceNames": [
         "EmberdeepState.bossDoorOpen"
@@ -124904,7 +126514,7 @@
       "canonicalId": "src/game/emberdeep.ts#EmberdeepState.bossEncounter=fighting",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/emberdeep.ts:31"
+        "src/game/emberdeep.ts:32"
       ],
       "sourceNames": [
         "EmberdeepState.bossEncounter"
@@ -124950,7 +126560,7 @@
       "canonicalId": "src/game/emberdeep.ts#EmberdeepState.bossEncounter=ready",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/emberdeep.ts:31"
+        "src/game/emberdeep.ts:32"
       ],
       "sourceNames": [
         "EmberdeepState.bossEncounter"
@@ -124996,7 +126606,7 @@
       "canonicalId": "src/game/emberdeep.ts#EmberdeepState.bossEncounter=reset",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/emberdeep.ts:31"
+        "src/game/emberdeep.ts:32"
       ],
       "sourceNames": [
         "EmberdeepState.bossEncounter"
@@ -125042,7 +126652,7 @@
       "canonicalId": "src/game/emberdeep.ts#EmberdeepState.version=1",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/emberdeep.ts:26"
+        "src/game/emberdeep.ts:27"
       ],
       "sourceNames": [
         "EmberdeepState.version"
@@ -154160,7 +155770,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=bless",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154206,7 +155816,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=blizzard",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154252,7 +155862,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=chainlightning",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154298,7 +155908,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=cure",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154344,7 +155954,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=curse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154390,7 +156000,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=earthquake",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154436,7 +156046,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=fireball",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154482,7 +156092,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=fireblast",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154528,7 +156138,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=flamewall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154574,7 +156184,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=flash",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154620,7 +156230,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=fly",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154666,7 +156276,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=gate",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154712,7 +156322,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=heal",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154758,7 +156368,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=invisibility",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154804,7 +156414,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=ironwood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154850,7 +156460,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=jump",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154896,7 +156506,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=leech",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154942,7 +156552,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=lightning",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -154988,7 +156598,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=magicarrow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155034,7 +156644,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=mark",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155080,7 +156690,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=meteor",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155126,7 +156736,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=mirrorimage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155172,7 +156782,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=naturesfury",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155218,7 +156828,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=necromancy",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155264,7 +156874,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=nightsight",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155310,7 +156920,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=paralyze",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155356,7 +156966,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=poison",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155402,7 +157012,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=polymorph",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155448,7 +157058,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=recall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155494,7 +157104,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=resurrect",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155540,7 +157150,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=sanctuary",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155586,7 +157196,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=sleep",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155632,7 +157242,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=stonewall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155678,7 +157288,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=summon",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155724,7 +157334,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=summonelemental",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155770,7 +157380,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=tarpit",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155816,7 +157426,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=teleport",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155862,7 +157472,7 @@
       "canonicalId": "src/game/magery.ts#CastFx.spell=thornsnare",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:103"
+        "src/game/magery.ts:104"
       ],
       "sourceNames": [
         "CastFx.spell"
@@ -155908,7 +157518,7 @@
       "canonicalId": "src/game/magery.ts#CastTarget.kind=fauna",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:98"
+        "src/game/magery.ts:99"
       ],
       "sourceNames": [
         "CastTarget.kind"
@@ -155954,7 +157564,7 @@
       "canonicalId": "src/game/magery.ts#CastTarget.kind=mark",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:98"
+        "src/game/magery.ts:99"
       ],
       "sourceNames": [
         "CastTarget.kind"
@@ -156000,7 +157610,7 @@
       "canonicalId": "src/game/magery.ts#CastTarget.kind=person",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:98"
+        "src/game/magery.ts:99"
       ],
       "sourceNames": [
         "CastTarget.kind"
@@ -156046,7 +157656,7 @@
       "canonicalId": "src/game/magery.ts#CastTarget.kind=self",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:98"
+        "src/game/magery.ts:99"
       ],
       "sourceNames": [
         "CastTarget.kind"
@@ -156092,7 +157702,7 @@
       "canonicalId": "src/game/magery.ts#CastTarget.kind=tile",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:98"
+        "src/game/magery.ts:99"
       ],
       "sourceNames": [
         "CastTarget.kind"
@@ -156138,7 +157748,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=bless",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156184,7 +157794,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=blizzard",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156230,7 +157840,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=chainlightning",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156276,7 +157886,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=cure",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156322,7 +157932,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=curse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156368,7 +157978,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=earthquake",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156414,7 +158024,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=fireball",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156460,7 +158070,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=fireblast",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156506,7 +158116,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=flamewall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156552,7 +158162,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=flash",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156598,7 +158208,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=fly",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156644,7 +158254,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=gate",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156690,7 +158300,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=heal",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156736,7 +158346,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=invisibility",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156782,7 +158392,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=ironwood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156828,7 +158438,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=jump",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156874,7 +158484,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=leech",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156920,7 +158530,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=lightning",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -156966,7 +158576,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=magicarrow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157012,7 +158622,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=mark",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157058,7 +158668,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=meteor",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157104,7 +158714,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=mirrorimage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157150,7 +158760,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=naturesfury",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157196,7 +158806,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=necromancy",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157242,7 +158852,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=nightsight",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157288,7 +158898,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=paralyze",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157334,7 +158944,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=poison",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157380,7 +158990,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=polymorph",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157426,7 +159036,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=recall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157472,7 +159082,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=resurrect",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157518,7 +159128,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=sanctuary",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157564,7 +159174,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=sleep",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157610,7 +159220,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=stonewall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157656,7 +159266,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=summon",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157702,7 +159312,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=summonelemental",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157748,7 +159358,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=tarpit",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157794,7 +159404,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=teleport",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -157840,7 +159450,7 @@
       "canonicalId": "src/game/magery.ts#FizzleFx.spell=thornsnare",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/magery.ts:117"
+        "src/game/magery.ts:118"
       ],
       "sourceNames": [
         "FizzleFx.spell"
@@ -169156,7 +170766,7 @@
       "canonicalId": "src/game/player.ts#CombatFx.clean=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:980"
+        "src/game/player.ts:987"
       ],
       "sourceNames": [
         "CombatFx.clean"
@@ -169202,7 +170812,7 @@
       "canonicalId": "src/game/player.ts#CombatFx.clean=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:980"
+        "src/game/player.ts:987"
       ],
       "sourceNames": [
         "CombatFx.clean"
@@ -169248,7 +170858,7 @@
       "canonicalId": "src/game/player.ts#CombatFx.kind=arrow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:974"
+        "src/game/player.ts:981"
       ],
       "sourceNames": [
         "CombatFx.kind"
@@ -169294,7 +170904,7 @@
       "canonicalId": "src/game/player.ts#CombatFx.kind=melee",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:974"
+        "src/game/player.ts:981"
       ],
       "sourceNames": [
         "CombatFx.kind"
@@ -169340,7 +170950,7 @@
       "canonicalId": "src/game/player.ts#TamingFx.success=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:899"
+        "src/game/player.ts:906"
       ],
       "sourceNames": [
         "TamingFx.success"
@@ -169386,7 +170996,7 @@
       "canonicalId": "src/game/player.ts#TamingFx.success=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/player.ts:899"
+        "src/game/player.ts:906"
       ],
       "sourceNames": [
         "TamingFx.success"
@@ -211890,7 +213500,7 @@
       "canonicalId": "src/game/save.ts#SaveResult.ok=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/save.ts:689"
+        "src/game/save.ts:734"
       ],
       "sourceNames": [
         "SaveResult.ok"
@@ -211936,7 +213546,7 @@
       "canonicalId": "src/game/save.ts#SaveResult.ok=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/save.ts:689"
+        "src/game/save.ts:734"
       ],
       "sourceNames": [
         "SaveResult.ok"
@@ -216030,7 +217640,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.id=aimed_shot",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:19"
+        "src/game/techniques.ts:20"
       ],
       "sourceNames": [
         "TechniqueMeta.id"
@@ -216076,7 +217686,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.id=bash",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:19"
+        "src/game/techniques.ts:20"
       ],
       "sourceNames": [
         "TechniqueMeta.id"
@@ -216122,7 +217732,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.id=cleave",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:19"
+        "src/game/techniques.ts:20"
       ],
       "sourceNames": [
         "TechniqueMeta.id"
@@ -216168,7 +217778,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.id=doomblow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:19"
+        "src/game/techniques.ts:20"
       ],
       "sourceNames": [
         "TechniqueMeta.id"
@@ -216214,7 +217824,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.id=double_loose",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:19"
+        "src/game/techniques.ts:20"
       ],
       "sourceNames": [
         "TechniqueMeta.id"
@@ -216260,7 +217870,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.id=flurry",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:19"
+        "src/game/techniques.ts:20"
       ],
       "sourceNames": [
         "TechniqueMeta.id"
@@ -216306,7 +217916,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.id=hamstring",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:19"
+        "src/game/techniques.ts:20"
       ],
       "sourceNames": [
         "TechniqueMeta.id"
@@ -216352,7 +217962,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.id=hunters_mark",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:19"
+        "src/game/techniques.ts:20"
       ],
       "sourceNames": [
         "TechniqueMeta.id"
@@ -216398,7 +218008,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.id=lunge",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:19"
+        "src/game/techniques.ts:20"
       ],
       "sourceNames": [
         "TechniqueMeta.id"
@@ -216444,7 +218054,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.id=riposte",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:19"
+        "src/game/techniques.ts:20"
       ],
       "sourceNames": [
         "TechniqueMeta.id"
@@ -216490,7 +218100,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.id=sunder",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:19"
+        "src/game/techniques.ts:20"
       ],
       "sourceNames": [
         "TechniqueMeta.id"
@@ -216536,7 +218146,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.id=veinfind",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:19"
+        "src/game/techniques.ts:20"
       ],
       "sourceNames": [
         "TechniqueMeta.id"
@@ -216582,7 +218192,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=alchemy",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -216628,7 +218238,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=anatomy",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -216674,7 +218284,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=archery",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -216720,7 +218330,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=carpentry",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -216766,7 +218376,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=cartography",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -216812,7 +218422,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=cooking",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -216858,7 +218468,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=farming",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -216904,7 +218514,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=fencing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -216950,7 +218560,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=fishing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -216996,7 +218606,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=forestry",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -217042,7 +218652,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=healing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -217088,7 +218698,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=lockpicking",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -217134,7 +218744,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=lumberjack",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -217180,7 +218790,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=mace",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -217226,7 +218836,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=magery",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -217272,7 +218882,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=mining",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -217318,7 +218928,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=music",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -217364,7 +218974,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=poisoning",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -217410,7 +219020,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=smithing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -217456,7 +219066,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=stealing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -217502,7 +219112,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=swords",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -217548,7 +219158,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=tailoring",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -217594,7 +219204,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=taming",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -217640,7 +219250,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=tinkering",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -217686,7 +219296,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.skill=tracking",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:22"
+        "src/game/techniques.ts:23"
       ],
       "sourceNames": [
         "TechniqueMeta.skill"
@@ -217732,7 +219342,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.weapon=bow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:21"
+        "src/game/techniques.ts:22"
       ],
       "sourceNames": [
         "TechniqueMeta.weapon"
@@ -217778,7 +219388,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.weapon=knife",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:21"
+        "src/game/techniques.ts:22"
       ],
       "sourceNames": [
         "TechniqueMeta.weapon"
@@ -217824,7 +219434,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.weapon=mace",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:21"
+        "src/game/techniques.ts:22"
       ],
       "sourceNames": [
         "TechniqueMeta.weapon"
@@ -217870,7 +219480,7 @@
       "canonicalId": "src/game/techniques.ts#TechniqueMeta.weapon=sword",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/techniques.ts:21"
+        "src/game/techniques.ts:22"
       ],
       "sourceNames": [
         "TechniqueMeta.weapon"
@@ -257612,7 +259222,7 @@
       "canonicalId": "cinder",
       "family": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId",
       "catalogSources": [
-        "src/game/emberdeep.ts:20"
+        "src/game/emberdeep.ts:21"
       ],
       "sourceNames": [
         "EmberdeepRoomId"
@@ -257658,7 +259268,7 @@
       "canonicalId": "cistern",
       "family": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId",
       "catalogSources": [
-        "src/game/emberdeep.ts:20"
+        "src/game/emberdeep.ts:21"
       ],
       "sourceNames": [
         "EmberdeepRoomId"
@@ -257704,7 +259314,7 @@
       "canonicalId": "entrance",
       "family": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId",
       "catalogSources": [
-        "src/game/emberdeep.ts:20"
+        "src/game/emberdeep.ts:21"
       ],
       "sourceNames": [
         "EmberdeepRoomId"
@@ -257750,7 +259360,7 @@
       "canonicalId": "forge",
       "family": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId",
       "catalogSources": [
-        "src/game/emberdeep.ts:20"
+        "src/game/emberdeep.ts:21"
       ],
       "sourceNames": [
         "EmberdeepRoomId"
@@ -257796,7 +259406,7 @@
       "canonicalId": "furnace",
       "family": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId",
       "catalogSources": [
-        "src/game/emberdeep.ts:20"
+        "src/game/emberdeep.ts:21"
       ],
       "sourceNames": [
         "EmberdeepRoomId"
@@ -257842,7 +259452,7 @@
       "canonicalId": "vault",
       "family": "vocabulary/src/game/emberdeep.ts#EmberdeepRoomId",
       "catalogSources": [
-        "src/game/emberdeep.ts:20"
+        "src/game/emberdeep.ts:21"
       ],
       "sourceNames": [
         "EmberdeepRoomId"
@@ -268868,7 +270478,7 @@
       "canonicalId": "aimed_shot",
       "family": "vocabulary/src/game/techniques.ts#TechniqueId",
       "catalogSources": [
-        "src/game/techniques.ts:12"
+        "src/game/techniques.ts:13"
       ],
       "sourceNames": [
         "TechniqueId"
@@ -268920,7 +270530,7 @@
       "canonicalId": "bash",
       "family": "vocabulary/src/game/techniques.ts#TechniqueId",
       "catalogSources": [
-        "src/game/techniques.ts:12"
+        "src/game/techniques.ts:13"
       ],
       "sourceNames": [
         "TechniqueId"
@@ -268972,7 +270582,7 @@
       "canonicalId": "cleave",
       "family": "vocabulary/src/game/techniques.ts#TechniqueId",
       "catalogSources": [
-        "src/game/techniques.ts:12"
+        "src/game/techniques.ts:13"
       ],
       "sourceNames": [
         "TechniqueId"
@@ -269024,7 +270634,7 @@
       "canonicalId": "doomblow",
       "family": "vocabulary/src/game/techniques.ts#TechniqueId",
       "catalogSources": [
-        "src/game/techniques.ts:12"
+        "src/game/techniques.ts:13"
       ],
       "sourceNames": [
         "TechniqueId"
@@ -269076,7 +270686,7 @@
       "canonicalId": "double_loose",
       "family": "vocabulary/src/game/techniques.ts#TechniqueId",
       "catalogSources": [
-        "src/game/techniques.ts:12"
+        "src/game/techniques.ts:13"
       ],
       "sourceNames": [
         "TechniqueId"
@@ -269128,7 +270738,7 @@
       "canonicalId": "flurry",
       "family": "vocabulary/src/game/techniques.ts#TechniqueId",
       "catalogSources": [
-        "src/game/techniques.ts:12"
+        "src/game/techniques.ts:13"
       ],
       "sourceNames": [
         "TechniqueId"
@@ -269180,7 +270790,7 @@
       "canonicalId": "hamstring",
       "family": "vocabulary/src/game/techniques.ts#TechniqueId",
       "catalogSources": [
-        "src/game/techniques.ts:12"
+        "src/game/techniques.ts:13"
       ],
       "sourceNames": [
         "TechniqueId"
@@ -269232,7 +270842,7 @@
       "canonicalId": "hunters_mark",
       "family": "vocabulary/src/game/techniques.ts#TechniqueId",
       "catalogSources": [
-        "src/game/techniques.ts:12"
+        "src/game/techniques.ts:13"
       ],
       "sourceNames": [
         "TechniqueId"
@@ -269284,7 +270894,7 @@
       "canonicalId": "lunge",
       "family": "vocabulary/src/game/techniques.ts#TechniqueId",
       "catalogSources": [
-        "src/game/techniques.ts:12"
+        "src/game/techniques.ts:13"
       ],
       "sourceNames": [
         "TechniqueId"
@@ -269336,7 +270946,7 @@
       "canonicalId": "riposte",
       "family": "vocabulary/src/game/techniques.ts#TechniqueId",
       "catalogSources": [
-        "src/game/techniques.ts:12"
+        "src/game/techniques.ts:13"
       ],
       "sourceNames": [
         "TechniqueId"
@@ -269388,7 +270998,7 @@
       "canonicalId": "sunder",
       "family": "vocabulary/src/game/techniques.ts#TechniqueId",
       "catalogSources": [
-        "src/game/techniques.ts:12"
+        "src/game/techniques.ts:13"
       ],
       "sourceNames": [
         "TechniqueId"
@@ -269440,7 +271050,7 @@
       "canonicalId": "veinfind",
       "family": "vocabulary/src/game/techniques.ts#TechniqueId",
       "catalogSources": [
-        "src/game/techniques.ts:12"
+        "src/game/techniques.ts:13"
       ],
       "sourceNames": [
         "TechniqueId"
@@ -269492,7 +271102,7 @@
       "canonicalId": "bow",
       "family": "vocabulary/src/game/techniques.ts#TechniqueWeapon",
       "catalogSources": [
-        "src/game/techniques.ts:11"
+        "src/game/techniques.ts:12"
       ],
       "sourceNames": [
         "TechniqueWeapon"
@@ -269538,7 +271148,7 @@
       "canonicalId": "knife",
       "family": "vocabulary/src/game/techniques.ts#TechniqueWeapon",
       "catalogSources": [
-        "src/game/techniques.ts:11"
+        "src/game/techniques.ts:12"
       ],
       "sourceNames": [
         "TechniqueWeapon"
@@ -269584,7 +271194,7 @@
       "canonicalId": "mace",
       "family": "vocabulary/src/game/techniques.ts#TechniqueWeapon",
       "catalogSources": [
-        "src/game/techniques.ts:11"
+        "src/game/techniques.ts:12"
       ],
       "sourceNames": [
         "TechniqueWeapon"
@@ -269630,7 +271240,7 @@
       "canonicalId": "sword",
       "family": "vocabulary/src/game/techniques.ts#TechniqueWeapon",
       "catalogSources": [
-        "src/game/techniques.ts:11"
+        "src/game/techniques.ts:12"
       ],
       "sourceNames": [
         "TechniqueWeapon"

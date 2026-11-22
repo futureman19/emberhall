@@ -1,12 +1,12 @@
 /**
  * Observation builder — what a body perceives, flattened for a brain.
  *
- * `observeWorld` is pure: it reads a World and never mutates it. Phase 0 is
- * player-centric (`you` = the solo player); the multi-body refactor passes a
- * body id instead of scanning for `isPlayer`.
+ * `observeWorld` and `observeBody` are pure: they never mutate the World.
+ * Omitted body ids preserve the solo-player observation contract.
  *
  * `observeLive` is the driver entry point: live world + legal verb menu.
  */
+import { actorPerson, actorState } from "../actor.ts";
 import { isNight } from "../catalog.ts";
 import { getWorld } from "../live.ts";
 import type { World } from "../types.ts";
@@ -27,10 +27,12 @@ import type {
 export const AGENT_OBS_RADIUS = 24;
 const LOG_TAIL = 20;
 
-export function bodySheet(world: World): BodySheet {
-  const me = world.people.find((p) => p.isPlayer);
+export function bodySheet(world: World, bodyId?: string): BodySheet {
+  const state = actorState(world, bodyId);
+  const me = actorPerson(world, bodyId);
+  if (bodyId !== undefined && !me) throw new Error(`Missing actor body: ${bodyId}`);
   return {
-    id: world.player.id,
+    id: state.id,
     name: me?.name ?? "you",
     x: me?.x ?? 0,
     z: me?.z ?? 0,
@@ -38,13 +40,13 @@ export function bodySheet(world: World): BodySheet {
     maxHp: me?.maxHp ?? 0,
     hunger: me?.hunger ?? 0,
     energy: me?.energy ?? 0,
-    ghost: world.player.ghost,
-    mana: world.player.mana,
-    notoriety: world.player.notoriety,
-    skills: { ...world.player.skills },
-    pack: { ...world.player.pack },
-    wear: { ...world.player.wear },
-    vault: world.player.vault,
+    ghost: state.ghost,
+    mana: state.mana,
+    notoriety: state.notoriety,
+    skills: { ...state.skills },
+    pack: { ...state.pack },
+    wear: { ...state.wear },
+    vault: state.vault,
   };
 }
 
@@ -52,8 +54,17 @@ export function observeWorld(
   world: World,
   opts: { radius?: number; verbs?: VerbCandidate[] } = {},
 ): Observation {
+  return observeBody(world, undefined, opts);
+}
+
+export function observeBody(
+  world: World,
+  bodyId?: string,
+  opts: { radius?: number; verbs?: VerbCandidate[] } = {},
+): Observation {
+  const you = bodySheet(world, bodyId);
   const radius = opts.radius ?? AGENT_OBS_RADIUS;
-  const me = world.people.find((p) => p.isPlayer);
+  const me = actorPerson(world, bodyId);
   const px = me?.x ?? 0;
   const pz = me?.z ?? 0;
   const dist = (x: number, y: number) => Math.round(Math.hypot(x - px, y - pz) * 10) / 10;
@@ -61,7 +72,7 @@ export function observeWorld(
 
   const people: ObservedPerson[] = [];
   for (const p of world.people) {
-    if (p.isPlayer) continue;
+    if (p.id === me?.id) continue;
     const d = dist(p.x, p.z);
     if (!near(d)) continue;
     people.push({
@@ -134,7 +145,7 @@ export function observeWorld(
       wet: world.weather.wet,
       wind: world.weather.wind,
     },
-    you: bodySheet(world),
+    you,
     people,
     fauna,
     piles,

@@ -16,7 +16,36 @@ import { createStubWorld, createWorld, ensureRynWain, seedEmberhallBank, seedFie
 import { defaultBuildingPreview, ensureLookHut } from "./house.ts";
 import { clearHistory } from "./placeables/history.ts";
 import { createResourceNodeStateMap, regrowResourceNodes } from "./resources/state.ts";
-import type { SkillId, Snapshot, World } from "./types.ts";
+import type { Person, PlayerState, SkillId, Snapshot, World } from "./types.ts";
+
+/** Apply the same legacy-save defaults once to each distinct body sheet. */
+function hydratePlayerState(state: PlayerState, person?: Person) {
+  settleGear(state);
+  // Older saves predate the placeholder skills — put them on the books at zero.
+  for (const id of Object.keys(SKILL_META) as SkillId[]) {
+    if (state.skills[id] == null) state.skills[id] = 0;
+    if (state.lastGain[id] == null) state.lastGain[id] = 0;
+  }
+  if (state.nightSightUntil == null) state.nightSightUntil = 0;
+  if (state.poisonUntil == null) state.poisonUntil = 0;
+  if (state.poisonTickAt == null) state.poisonTickAt = 0;
+  if (state.blessUntil == null) state.blessUntil = 0;
+  if (state.invisUntil == null) state.invisUntil = 0;
+  if (state.ironwoodUntil == null) state.ironwoodUntil = 0;
+  if (state.flyUntil == null) state.flyUntil = 0;
+  if (state.armedSpell === undefined) state.armedSpell = null;
+  if (state.armedTechnique === undefined) state.armedTechnique = null;
+  if (state.techniqueCoolUntil === undefined) state.techniqueCoolUntil = {};
+  if (state.lastBittenAt == null) state.lastBittenAt = 0;
+  if (state.lastStrikeAt == null) state.lastStrikeAt = 0;
+  if (!Array.isArray(state.marks)) state.marks = [];
+  if (state.ghost == null) state.ghost = false;
+  if (state.corpseAt === undefined) state.corpseAt = null;
+  if (state.workT == null) state.workT = 0;
+  const max = maxMana(person?.int ?? 8, state.skills.magery ?? 0);
+  if (state.mana == null || Number.isNaN(state.mana)) state.mana = max;
+  state.mana = Math.min(max, state.mana);
+}
 
 function withFauna(w: World) {
   if (!w.playerStates) w.playerStates = {};
@@ -53,13 +82,13 @@ function withFauna(w: World) {
   }
   if (!w.seen) w.seen = {};
   if (w.seenRev == null) w.seenRev = 1;
-  if (w.player) {
-    settleGear(w.player);
-    // Older saves predate the placeholder skills — put them on the books at zero.
-    for (const id of Object.keys(SKILL_META) as SkillId[]) {
-      if (w.player.skills[id] == null) w.player.skills[id] = 0;
-      if (w.player.lastGain[id] == null) w.player.lastGain[id] = 0;
-    }
+  const sheets = new Set([w.player, ...Object.values(w.playerStates)]);
+  for (const state of sheets) {
+    if (!state) continue;
+    const person = state === w.player
+      ? w.people.find((x) => x.isPlayer)
+      : w.people.find((x) => x.id === state.id);
+    hydratePlayerState(state, person);
   }
   if (w.objectives) {
     const extra = [
@@ -77,32 +106,13 @@ function withFauna(w: World) {
     }
   }
   if (w.player) {
-    if (w.player.nightSightUntil == null) w.player.nightSightUntil = 0;
-    if (w.player.poisonUntil == null) w.player.poisonUntil = 0;
-    if (w.player.poisonTickAt == null) w.player.poisonTickAt = 0;
-    if (w.player.blessUntil == null) w.player.blessUntil = 0;
-    if (w.player.invisUntil == null) w.player.invisUntil = 0;
-    if (w.player.ironwoodUntil == null) w.player.ironwoodUntil = 0;
-    if (w.player.flyUntil == null) w.player.flyUntil = 0;
     if (!Array.isArray(w.zones)) w.zones = [];
-    if (w.player.armedSpell === undefined) w.player.armedSpell = null;
-    if (w.player.armedTechnique === undefined) w.player.armedTechnique = null;
-    if (w.player.techniqueCoolUntil === undefined) w.player.techniqueCoolUntil = {};
-    if (w.player.lastBittenAt == null) w.player.lastBittenAt = 0;
-    if (w.player.lastStrikeAt == null) w.player.lastStrikeAt = 0;
-    if (!Array.isArray(w.player.marks)) w.player.marks = [];
-    if (w.player.ghost == null) w.player.ghost = false;
-    if (w.player.corpseAt === undefined) w.player.corpseAt = null;
-    if (w.player.workT == null) w.player.workT = 0;
     const p = w.people.find((x) => x.isPlayer);
     if (p && p.ghost == null) p.ghost = Boolean(w.player.ghost);
     if (p && (p.story == null || Number.isNaN(p.story))) p.story = 0;
     for (const person of w.people) {
       if (person.story == null || Number.isNaN(person.story)) person.story = 0;
     }
-    const max = maxMana(p?.int ?? 8, w.player.skills.magery ?? 0);
-    if (w.player.mana == null || Number.isNaN(w.player.mana)) w.player.mana = max;
-    w.player.mana = Math.min(max, w.player.mana);
   }
   if (w.tiles.length) seedTownNpcs(w, mulberry32(w.seed + 91));
   seedEmberhallBank(w);

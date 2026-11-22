@@ -1,3 +1,4 @@
+import { actorPerson, actorState } from "./actor.ts";
 import { emitSpellEffect, spellEffects } from "./spell-effects.ts";
 import { PLACES, regionAt } from "./atlas.ts";
 import { BLAST_RADIUS, BLESS_HOURS, CHAIN_FALLOFF, CHAIN_MAX, CHAIN_RANGE, CHILL_HOURS, CURSE_HOURS, EARTHQUAKE_BASE, ELEMENTAL_HOURS, FAUNA_META, FLAME_TICK_BASE, FLASH_RADIUS, FLY_HOURS, FURY_TICK_BASE, GATE_HOURS, INVIS_HOURS, IRONWOOD_HOURS, ITEM_META, JUMP_RANGE, METEOR_RADIUS, MIRROR_COUNT, MIRROR_HOURS, NECRO_HOURS, NECRO_HP_FRACTION, NECRO_RADIUS, PARALYZE_HOURS, POLYMORPH_HOURS, POISON_FAUNA_HOURS, POISON_TICK_HOURS, BLIND_HOURS, SECONDS_PER_HOUR, SLEEP_HOURS, SNARE_HOURS, SNARE_TICK_HOURS, SUMMON_HOURS } from "./catalog.ts";
@@ -138,47 +139,47 @@ export function burstDeath(x: number, z: number, at: number) {
   deathFx = { x, z, at };
 }
 
-function self(world: World): Person | null {
-  return world.people.find((p) => p.isPlayer) ?? world.people.find((p) => p.id === world.player.id) ?? null;
+function self(world: World, actorId?: string): Person | null {
+  return actorPerson(world, actorId);
 }
 
 export function maxMana(intel: number, magery: number) {
   return Math.max(8, Math.floor(12 + intel + magery / 4));
 }
 
-export function hasBook(world: World) {
-  return (world.player.pack.spellbook ?? 0) > 0;
+export function hasBook(world: World, actorId?: string) {
+  return (actorState(world, actorId).pack.spellbook ?? 0) > 0;
 }
 
-function missingReagent(world: World, spell: SpellId): ItemId | null {
+function missingReagent(world: World, spell: SpellId, actorId?: string): ItemId | null {
   for (const id of SPELL_META[spell].reagents) {
-    if ((world.player.pack[id] ?? 0) < 1) return id;
+    if ((actorState(world, actorId).pack[id] ?? 0) < 1) return id;
   }
   return null;
 }
 
-function takeReagents(world: World, spell: SpellId) {
+function takeReagents(world: World, spell: SpellId, actorId?: string) {
   for (const id of SPELL_META[spell].reagents) {
-    world.player.pack[id] = Math.max(0, (world.player.pack[id] ?? 0) - 1);
+    actorState(world, actorId).pack[id] = Math.max(0, (actorState(world, actorId).pack[id] ?? 0) - 1);
   }
 }
 
-export function tickMana(world: World, dt: number) {
-  const p = self(world);
+export function tickMana(world: World, dt: number, actorId?: string) {
+  const p = self(world, actorId);
   if (!p) return;
-  const max = maxMana(p.int, world.player.skills.magery ?? 0);
+  const max = maxMana(p.int, actorState(world, actorId).skills.magery ?? 0);
   if (godModeEnabled()) {
-    world.player.mana = max;
+    actorState(world, actorId).mana = max;
     return;
   }
-  if (world.player.mana == null || Number.isNaN(world.player.mana)) world.player.mana = max;
+  if (actorState(world, actorId).mana == null || Number.isNaN(actorState(world, actorId).mana)) actorState(world, actorId).mana = max;
   const dtHours = dt / SECONDS_PER_HOUR;
   const rate = p.path.length ? 1.6 : 5;
-  world.player.mana = Math.min(max, world.player.mana + rate * dtHours);
+  actorState(world, actorId).mana = Math.min(max, actorState(world, actorId).mana + rate * dtHours);
 }
 
-function pathToward(world: World, tx: number, ty: number, range: number) {
-  const p = self(world);
+function pathToward(world: World, tx: number, ty: number, range: number, actorId?: string) {
+  const p = self(world, actorId);
   if (!p) return false;
   const from = tileOf(p.x, p.z);
   const path = astarToRange(world, from.tx, from.ty, tx, ty, range, 2500);
@@ -200,9 +201,9 @@ function footing(world: World, tx: number, ty: number) {
   return dest;
 }
 
-function snapFollowers(world: World, px: number, pz: number) {
+function snapFollowers(world: World, px: number, pz: number, actorId?: string) {
   for (const c of world.fauna) {
-    if (c.ownerId !== world.player.id || c.stay || c.task === "dead") continue;
+    if (c.ownerId !== actorState(world, actorId).id || c.stay || c.task === "dead") continue;
     if (Math.hypot(c.x - px, c.z - pz) <= 12) continue;
     const dest = nearestWalkable(world, Math.round(px), Math.round(pz));
     if (!dest) continue;
@@ -214,7 +215,7 @@ function snapFollowers(world: World, px: number, pz: number) {
   }
 }
 
-function landAt(world: World, p: Person, tx: number, ty: number) {
+function landAt(world: World, p: Person, tx: number, ty: number, actorId?: string) {
   const dest = nearestWalkable(world, tx, ty);
   if (!dest) return false;
   p.x = dest.x;
@@ -222,11 +223,11 @@ function landAt(world: World, p: Person, tx: number, ty: number) {
   p.path = [];
   p.facing = 0;
   revealAround(world, dest.x, dest.y, 22);
-  snapFollowers(world, dest.x, dest.y);
+  snapFollowers(world, dest.x, dest.y, actorId);
   return true;
 }
 
-function markLabel(world: World, tx: number, ty: number) {
+function markLabel(world: World, tx: number, ty: number, actorId?: string) {
   let best = PLACES[0]!;
   let d = Infinity;
   for (const place of PLACES) {
@@ -237,14 +238,14 @@ function markLabel(world: World, tx: number, ty: number) {
     }
   }
   const base = d < 18 ? best.name : regionAt(tx, ty).name;
-  const used = (world.player.marks ?? []).filter((m) => m.name === base || m.name.startsWith(`${base} `)).length;
+  const used = (actorState(world, actorId).marks ?? []).filter((m) => m.name === base || m.name.startsWith(`${base} `)).length;
   return used ? `${base} ${used + 1}` : base;
 }
 
 /** One strike against a beast: the wound, the turn-on-you, and — when it
  *  drops — the full kill rites (corpse, pile, hunt objective, rare glint).
  *  Shared by the batch-one strikes and ground rings. */
-function woundBeast(world: World, c: World["fauna"][number], dmg: number): { killed: boolean; rareFound: string | null } {
+function woundBeast(world: World, c: World["fauna"][number], dmg: number, actorId?: string): { killed: boolean; rareFound: string | null } {
   c.hp -= dmg;
   if (c.hp > 0) {
     c.task = "fight";
@@ -260,95 +261,95 @@ function woundBeast(world: World, c: World["fauna"][number], dmg: number): { kil
   spawnCorpsePile(world, c);
   completeObjective(world, "hunt");
   const found = rollKillRare(world, c.kind, Math.random);
-  if (found) world.player.rares.push(found);
+  if (found) actorState(world, actorId).rares.push(found);
   return { killed: true, rareFound: found ? rareName(found) : null };
 }
 
-export function forgetMark(world: World, id: string) {
-  if (!world.player.marks) world.player.marks = [];
-  const n = world.player.marks.length;
-  world.player.marks = world.player.marks.filter((m) => m.id !== id);
-  return n === world.player.marks.length ? "No such mark." : "The rune fades.";
+export function forgetMark(world: World, id: string, actorId?: string) {
+  if (!actorState(world, actorId).marks) actorState(world, actorId).marks = [];
+  const n = actorState(world, actorId).marks.length;
+  actorState(world, actorId).marks = actorState(world, actorId).marks.filter((m) => m.id !== id);
+  return n === actorState(world, actorId).marks.length ? "No such mark." : "The rune fades.";
 }
 
-function beginCast(world: World, p: Person, spell: SpellId, tx: number, ty: number, targetId: string | null) {
-  world.player.armedSpell = null;
-  world.player.intent = { kind: "cast", tx, ty, targetId, spell };
+function beginCast(world: World, p: Person, spell: SpellId, tx: number, ty: number, targetId: string | null, actorId?: string) {
+  actorState(world, actorId).armedSpell = null;
+  actorState(world, actorId).intent = { kind: "cast", tx, ty, targetId, spell };
   p.path = [];
 }
 
-export function commandCast(world: World, spell: SpellId, target?: CastTarget): string | null {
-  const p = self(world);
+export function commandCast(world: World, spell: SpellId, target?: CastTarget, actorId?: string): string | null {
+  const p = self(world, actorId);
   if (!p) return "You are not in the vale.";
   // In Corp is the one word the dead still have.
-  if ((p.ghost || world.player.ghost) && spell !== "resurrect") return "The dead have no words.";
-  if (!hasBook(world)) return "You need a spellbook.";
+  if ((p.ghost || actorState(world, actorId).ghost) && spell !== "resurrect") return "The dead have no words.";
+  if (!hasBook(world, actorId)) return "You need a spellbook.";
   const meta = SPELL_META[spell];
-  const miss = missingReagent(world, spell);
+  const miss = missingReagent(world, spell, actorId);
   if (miss) return `Need ${ITEM_META[miss].label.toLowerCase()}.`;
-  if ((world.player.mana ?? 0) < meta.mana) return "Not enough mana.";
-  if (!world.player.marks) world.player.marks = [];
+  if ((actorState(world, actorId).mana ?? 0) < meta.mana) return "Not enough mana.";
+  if (!actorState(world, actorId).marks) actorState(world, actorId).marks = [];
 
   if (OFFENSIVE_SPELLS.has(spell)) {
     if (!target || target.kind !== "fauna") {
-      world.player.armedSpell = spell;
-      world.player.intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
+      actorState(world, actorId).armedSpell = spell;
+      actorState(world, actorId).intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
       return "Click a beast.";
     }
     const c = world.fauna.find((x) => x.id === target.id);
     if (!c || c.task === "dead") return "Nothing to strike.";
-    if (c.ownerId === world.player.id) return "It is yours.";
-    world.player.armedSpell = null;
-    world.player.intent = { kind: "cast", tx: Math.round(c.x), ty: Math.round(c.z), targetId: c.id, spell };
+    if (c.ownerId === actorState(world, actorId).id) return "It is yours.";
+    actorState(world, actorId).armedSpell = null;
+    actorState(world, actorId).intent = { kind: "cast", tx: Math.round(c.x), ty: Math.round(c.z), targetId: c.id, spell };
     const range = offensiveRange(spell);
-    if (Math.hypot(p.x - c.x, p.z - c.z) > range) pathToward(world, c.x, c.z, range - 0.75);
+    if (Math.hypot(p.x - c.x, p.z - c.z) > range) pathToward(world, c.x, c.z, range - 0.75, actorId);
     else p.path = [];
     return null;
   }
 
   if (targetsGround(spell)) {
     if (!target || target.kind !== "tile") {
-      world.player.armedSpell = spell;
-      world.player.intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
+      actorState(world, actorId).armedSpell = spell;
+      actorState(world, actorId).intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
       return "Click the ground.";
     }
-    world.player.armedSpell = null;
-    world.player.intent = { kind: "cast", tx: target.tx, ty: target.ty, targetId: null, spell };
+    actorState(world, actorId).armedSpell = null;
+    actorState(world, actorId).intent = { kind: "cast", tx: target.tx, ty: target.ty, targetId: null, spell };
     const range = offensiveRange(spell);
-    if (Math.hypot(p.x - target.tx, p.z - target.ty) > range) pathToward(world, target.tx, target.ty, range - 0.75);
+    if (Math.hypot(p.x - target.tx, p.z - target.ty) > range) pathToward(world, target.tx, target.ty, range - 0.75, actorId);
     else p.path = [];
     return null;
   }
 
   if (spell === "teleport") {
     if (!target || target.kind !== "tile") {
-      world.player.armedSpell = "teleport";
-      world.player.intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
+      actorState(world, actorId).armedSpell = "teleport";
+      actorState(world, actorId).intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
       return "Click the ground.";
     }
     const dest = footing(world, target.tx, target.ty);
     if (!dest) return "No footing.";
     if (Math.hypot(p.x - dest.x, p.z - dest.y) < 0.8) return "You already stand there.";
     if (Math.hypot(p.x - dest.x, p.z - dest.y) > TELEPORT_RANGE) return "Too far.";
-    beginCast(world, p, spell, dest.x, dest.y, null);
+    beginCast(world, p, spell, dest.x, dest.y, null, actorId);
     return null;
   }
 
   if (spell === "jump") {
     if (!target || target.kind !== "tile") {
-      world.player.armedSpell = "jump";
-      world.player.intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
+      actorState(world, actorId).armedSpell = "jump";
+      actorState(world, actorId).intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
       return "Click the ground.";
     }
     if (Math.hypot(p.x - target.tx, p.z - target.ty) > JUMP_RANGE) return "Too far for a leap.";
     const dest = nearestWalkable(world, target.tx, target.ty, 2);
     if (!dest) return "No footing.";
-    beginCast(world, p, spell, dest.x, dest.y, null);
+    beginCast(world, p, spell, dest.x, dest.y, null, actorId);
     return null;
   }
 
   if (spell === "gate") {
-    const marks = world.player.marks;
+    const marks = actorState(world, actorId).marks;
     if (!marks.length) return "Nothing is marked.";
     let chosen: RecallMark | undefined;
     if (target?.kind === "mark") chosen = marks.find((m) => m.id === target.id);
@@ -356,19 +357,19 @@ export function commandCast(world: World, spell: SpellId, target?: CastTarget): 
     else return "Pick a mark.";
     if (!chosen) return "That mark is gone.";
     if (Math.hypot(p.x - chosen.tx, p.z - chosen.ty) < 2) return "You already stand there.";
-    beginCast(world, p, spell, chosen.tx, chosen.ty, chosen.id);
+    beginCast(world, p, spell, chosen.tx, chosen.ty, chosen.id, actorId);
     return null;
   }
 
   if (spell === "mark") {
-    if ((world.player.pack.rune ?? 0) < 1) return "Need a blank rune.";
-    if (world.player.marks.length >= MARK_CAP) return "The book holds eight marks.";
-    beginCast(world, p, spell, Math.round(p.x), Math.round(p.z), p.id);
+    if ((actorState(world, actorId).pack.rune ?? 0) < 1) return "Need a blank rune.";
+    if (actorState(world, actorId).marks.length >= MARK_CAP) return "The book holds eight marks.";
+    beginCast(world, p, spell, Math.round(p.x), Math.round(p.z), p.id, actorId);
     return null;
   }
 
   if (spell === "recall") {
-    const marks = world.player.marks;
+    const marks = actorState(world, actorId).marks;
     if (!marks.length) return "Nothing is marked.";
     let chosen: RecallMark | undefined;
     if (target?.kind === "mark") chosen = marks.find((m) => m.id === target.id);
@@ -376,102 +377,107 @@ export function commandCast(world: World, spell: SpellId, target?: CastTarget): 
     else return "Pick a mark.";
     if (!chosen) return "That mark is gone.";
     if (Math.hypot(p.x - chosen.tx, p.z - chosen.ty) < 2) return "You already stand there.";
-    beginCast(world, p, spell, chosen.tx, chosen.ty, chosen.id);
+    beginCast(world, p, spell, chosen.tx, chosen.ty, chosen.id, actorId);
     return null;
   }
 
   if (spell === "cure") {
-    if (world.hour >= world.player.poisonUntil) return "There is no venom in you.";
-    beginCast(world, p, spell, Math.round(p.x), Math.round(p.z), p.id);
+    if (world.hour >= actorState(world, actorId).poisonUntil) return "There is no venom in you.";
+    beginCast(world, p, spell, Math.round(p.x), Math.round(p.z), p.id, actorId);
     return null;
   }
 
-  beginCast(world, p, spell, Math.round(p.x), Math.round(p.z), p.id);
+  beginCast(world, p, spell, Math.round(p.x), Math.round(p.z), p.id, actorId);
   return null;
 }
 
-export function castNow(world: World): string | null {
-  const p = self(world);
-  const spell = world.player.intent.spell;
+export function castNow(world: World, actorId?: string): string | null {
+  const p = self(world, actorId);
+  const spell = actorState(world, actorId).intent.spell;
   if (!p || !spell) {
-    world.player.intent.kind = "none";
+    actorState(world, actorId).intent.kind = "none";
     return "The words fade.";
   }
+  // Explicit actors may die between command admission and release.
+  if (actorId !== undefined && (p.ghost || actorState(world, actorId).ghost) && spell !== "resurrect") {
+    actorState(world, actorId).intent.kind = "none";
+    return "The dead have no words.";
+  }
   const meta = SPELL_META[spell];
-  if (!hasBook(world)) {
-    world.player.intent.kind = "none";
+  if (!hasBook(world, actorId)) {
+    actorState(world, actorId).intent.kind = "none";
     return "You need a spellbook.";
   }
-  const miss = missingReagent(world, spell);
+  const miss = missingReagent(world, spell, actorId);
   if (miss) {
-    world.player.intent.kind = "none";
+    actorState(world, actorId).intent.kind = "none";
     return `Need ${ITEM_META[miss].label.toLowerCase()}.`;
   }
-  if ((world.player.mana ?? 0) < meta.mana) {
-    world.player.intent.kind = "none";
+  if ((actorState(world, actorId).mana ?? 0) < meta.mana) {
+    actorState(world, actorId).intent.kind = "none";
     return "Not enough mana.";
   }
-  if (!world.player.marks) world.player.marks = [];
+  if (!actorState(world, actorId).marks) actorState(world, actorId).marks = [];
 
   if (OFFENSIVE_SPELLS.has(spell)) {
-    const c = world.fauna.find((x) => x.id === world.player.intent.targetId);
+    const c = world.fauna.find((x) => x.id === actorState(world, actorId).intent.targetId);
     if (!c || c.task === "dead") {
-      world.player.intent.kind = "none";
+      actorState(world, actorId).intent.kind = "none";
       return "It fled.";
     }
     const range = offensiveRange(spell);
     if (Math.hypot(p.x - c.x, p.z - c.z) > range) {
-      pathToward(world, c.x, c.z, range - 0.75);
+      pathToward(world, c.x, c.z, range - 0.75, actorId);
       return null;
     }
     p.path = [];
   }
   if (targetsGround(spell)) {
     const range = offensiveRange(spell);
-    if (Math.hypot(p.x - world.player.intent.tx, p.z - world.player.intent.ty) > range) {
-      pathToward(world, world.player.intent.tx, world.player.intent.ty, range - 0.75);
+    if (Math.hypot(p.x - actorState(world, actorId).intent.tx, p.z - actorState(world, actorId).intent.ty) > range) {
+      pathToward(world, actorState(world, actorId).intent.tx, actorState(world, actorId).intent.ty, range - 0.75, actorId);
       return null;
     }
     p.path = [];
   }
   if (spell === "teleport") {
-    const dest = footing(world, world.player.intent.tx, world.player.intent.ty);
+    const dest = footing(world, actorState(world, actorId).intent.tx, actorState(world, actorId).intent.ty);
     if (!dest) {
-      world.player.intent.kind = "none";
+      actorState(world, actorId).intent.kind = "none";
       return "No footing.";
     }
     if (Math.hypot(p.x - dest.x, p.z - dest.y) > TELEPORT_RANGE) {
-      world.player.intent.kind = "none";
+      actorState(world, actorId).intent.kind = "none";
       return "Too far.";
     }
   }
   if (spell === "mark") {
-    if ((world.player.pack.rune ?? 0) < 1) {
-      world.player.intent.kind = "none";
+    if ((actorState(world, actorId).pack.rune ?? 0) < 1) {
+      actorState(world, actorId).intent.kind = "none";
       return "Need a blank rune.";
     }
-    if (world.player.marks.length >= MARK_CAP) {
-      world.player.intent.kind = "none";
+    if (actorState(world, actorId).marks.length >= MARK_CAP) {
+      actorState(world, actorId).intent.kind = "none";
       return "The book holds eight marks.";
     }
   }
   if (spell === "recall") {
-    const mark = world.player.marks.find((m) => m.id === world.player.intent.targetId);
+    const mark = actorState(world, actorId).marks.find((m) => m.id === actorState(world, actorId).intent.targetId);
     if (!mark) {
-      world.player.intent.kind = "none";
+      actorState(world, actorId).intent.kind = "none";
       return "That mark is gone.";
     }
   }
 
-  takeReagents(world, spell);
-  const skill = world.player.skills.magery ?? 0;
+  takeReagents(world, spell, actorId);
+  const skill = actorState(world, actorId).skills.magery ?? 0;
   const chance = successChance(skill, meta.diff);
   const ok = Math.random() < chance;
-  const savedTx = world.player.intent.tx;
-  const savedTy = world.player.intent.ty;
-  const savedId = world.player.intent.targetId;
-  world.player.intent.kind = "none";
-  world.player.armedSpell = null;
+  const savedTx = actorState(world, actorId).intent.tx;
+  const savedTy = actorState(world, actorId).intent.ty;
+  const savedId = actorState(world, actorId).intent.targetId;
+  actorState(world, actorId).intent.kind = "none";
+  actorState(world, actorId).armedSpell = null;
   completeObjective(world, "book");
   const withGain = (flavor: string, gain: string | null) => (gain ? `${flavor} ${gain}.` : flavor);
 
@@ -481,16 +487,16 @@ export function castNow(world: World): string | null {
     return `${meta.words}. The spell fizzles.`;
   }
 
-  world.player.mana = Math.max(0, (world.player.mana ?? 0) - meta.mana);
-  const gain = tryGain(world, "magery", true, chance >= 0.45 && chance <= 0.75);
+  actorState(world, actorId).mana = Math.max(0, (actorState(world, actorId).mana ?? 0) - meta.mana);
+  const gain = tryGain(world, "magery", true, chance >= 0.45 && chance <= 0.75, actorId);
   // Harmful work betrays the shimmer.
-  if (OFFENSIVE_SPELLS.has(spell) && world.hour < world.player.invisUntil) {
-    world.player.invisUntil = 0;
+  if (OFFENSIVE_SPELLS.has(spell) && world.hour < actorState(world, actorId).invisUntil) {
+    actorState(world, actorId).invisUntil = 0;
     log(world, "Your hand betrays the shimmer.");
   }
 
   if (spell === "nightsight") {
-    world.player.nightSightUntil = world.hour + 8;
+    actorState(world, actorId).nightSightUntil = world.hour + 8;
     emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The dark thins.`, gain);
@@ -504,32 +510,32 @@ export function castNow(world: World): string | null {
     return withGain(`${meta.words}. The wound closes.`, gain);
   }
   if (spell === "cure") {
-    if (world.hour >= world.player.poisonUntil) {
+    if (world.hour >= actorState(world, actorId).poisonUntil) {
       emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
       playSfx(spellSfx(spell), 0.5);
       return withGain(`${meta.words}. The venom had already passed.`, gain);
     }
-    world.player.poisonUntil = 0;
-    world.player.poisonTickAt = 0;
+    actorState(world, actorId).poisonUntil = 0;
+    actorState(world, actorId).poisonTickAt = 0;
     emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The venom leaves the blood.`, gain);
   }
   if (spell === "bless") {
-    world.player.blessUntil = world.hour + BLESS_HOURS;
+    actorState(world, actorId).blessUntil = world.hour + BLESS_HOURS;
     emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The arm remembers old battles.`, gain);
   }
   if (spell === "summon") {
-    const old = world.fauna.find((c) => c.ownerId === world.player.id && c.boundUntil && c.boundUntil > world.hour);
+    const old = world.fauna.find((c) => c.ownerId === actorState(world, actorId).id && c.boundUntil && c.boundUntil > world.hour);
     if (old) world.fauna = world.fauna.filter((x) => x.id !== old.id);
     const roll = skill + Math.random() * 30;
     const kind = roll >= 70 ? "ironwood_boar" : roll >= 40 ? "wolf" : "ember_fox";
     const dest = nearestWalkable(world, Math.round(p.x) + 1, Math.round(p.z)) ?? nearestWalkable(world, Math.round(p.x), Math.round(p.z));
     if (!dest) return "The vale has no room for a guest.";
     const beast = spawn(world, kind, dest.x, dest.y);
-    beast.ownerId = world.player.id;
+    beast.ownerId = actorState(world, actorId).id;
     beast.loyalty = 100;
     beast.boundUntil = world.hour + SUMMON_HOURS;
     world.fauna.push(beast);
@@ -539,7 +545,7 @@ export function castNow(world: World): string | null {
     return withGain(`${meta.words}. A ${FAUNA_META[kind].label.toLowerCase()} pads to your side.${oldNote}`, gain);
   }
   if (spell === "invisibility") {
-    world.player.invisUntil = world.hour + INVIS_HOURS;
+    actorState(world, actorId).invisUntil = world.hour + INVIS_HOURS;
     // The pack loses your scent.
     for (const c of world.fauna) {
       if (c.task === "fight" && !c.ownerId) {
@@ -598,7 +604,7 @@ export function castNow(world: World): string | null {
       completeObjective(world, spell === "fireball" ? "fireball" : spell === "magicarrow" ? "arrow" : spell);
       const found = rollKillRare(world, c.kind, Math.random);
       if (found) {
-        world.player.rares.push(found);
+        actorState(world, actorId).rares.push(found);
         return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()} falls. Something glints in the kill — ${rareName(found)}!`, gain);
       }
       return withGain(`${meta.words}. The ${FAUNA_META[c.kind].label.toLowerCase()} falls.`, gain);
@@ -619,7 +625,7 @@ export function castNow(world: World): string | null {
     return withGain(`${meta.words}. Thorns coil around the ${FAUNA_META[c.kind].label.toLowerCase()}.`, gain);
   }
   if (spell === "ironwood") {
-    world.player.ironwoodUntil = world.hour + IRONWOOD_HOURS;
+    actorState(world, actorId).ironwoodUntil = world.hour + IRONWOOD_HOURS;
     emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. Your skin takes the grain of old bark.`, gain);
@@ -628,7 +634,7 @@ export function castNow(world: World): string | null {
     const c = world.fauna.find((x) => x.id === savedId);
     if (!c) return "It fled.";
     const dmg = 6 + Math.floor(skill / 9) + Math.floor(p.int / 5);
-    const { killed, rareFound } = woundBeast(world, c, dmg);
+    const { killed, rareFound } = woundBeast(world, c, dmg, actorId);
     p.hp = Math.min(p.maxHp, p.hp + dmg);
     emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.52);
@@ -641,7 +647,7 @@ export function castNow(world: World): string | null {
   if (spell === "flash") {
     let blinded = 0;
     for (const c of world.fauna) {
-      if (c.task === "dead" || c.ownerId === world.player.id) continue;
+      if (c.task === "dead" || c.ownerId === actorState(world, actorId).id) continue;
       if (Math.hypot(c.x - p.x, c.z - p.z) > FLASH_RADIUS) continue;
       c.blindUntil = world.hour + BLIND_HOURS;
       if (c.task === "fight") letGo(c, world);
@@ -661,9 +667,9 @@ export function castNow(world: World): string | null {
     let felled = 0;
     const glints: string[] = [];
     for (const c of world.fauna) {
-      if (c.task === "dead" || c.ownerId === world.player.id) continue;
+      if (c.task === "dead" || c.ownerId === actorState(world, actorId).id) continue;
       if (Math.hypot(c.x - savedTx, c.z - savedTy) > radius) continue;
-      const { killed, rareFound } = woundBeast(world, c, dmg);
+      const { killed, rareFound } = woundBeast(world, c, dmg, actorId);
       if (!killed && spell === "blizzard") c.chillUntil = world.hour + CHILL_HOURS;
       if (killed) felled += 1;
       else burned += 1;
@@ -698,15 +704,15 @@ export function castNow(world: World): string | null {
     const c = world.fauna.find((x) => x.id === savedId);
     if (!c) return "It fled.";
     const dmg = 8 + Math.floor(skill / 9) + Math.floor(p.int / 4);
-    const first = woundBeast(world, c, dmg);
+    const first = woundBeast(world, c, dmg, actorId);
     const arcs = world.fauna
-      .filter((x) => x.id !== c.id && x.task !== "dead" && x.ownerId !== world.player.id && Math.hypot(x.x - c.x, x.z - c.z) <= CHAIN_RANGE)
+      .filter((x) => x.id !== c.id && x.task !== "dead" && x.ownerId !== actorState(world, actorId).id && Math.hypot(x.x - c.x, x.z - c.z) <= CHAIN_RANGE)
       .sort((a, b) => Math.hypot(a.x - c.x, a.z - c.z) - Math.hypot(b.x - c.x, b.z - c.z))
       .slice(0, CHAIN_MAX);
     const arcDmg = Math.max(1, Math.floor(dmg * CHAIN_FALLOFF));
     const glints: string[] = first.rareFound ? [first.rareFound] : [];
     for (const arc of arcs) {
-      const { rareFound } = woundBeast(world, arc, arcDmg);
+      const { rareFound } = woundBeast(world, arc, arcDmg, actorId);
       if (rareFound) glints.push(rareFound);
     }
     emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: c.x, tz: c.z, at: world.hour, outcome: "success" });
@@ -731,32 +737,32 @@ export function castNow(world: World): string | null {
   if (spell === "jump") {
     // Two flashes: where you left, and where the ground rushes up.
     emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
-    if (!landAt(world, p, savedTx, savedTy)) return "No footing.";
+    if (!landAt(world, p, savedTx, savedTy, actorId)) return "No footing.";
     emitSpellEffect(world, { spell, x: savedTx, z: savedTy, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The ground rushes up.`, gain);
   }
   if (spell === "gate") {
-    const mark = world.player.marks.find((m) => m.id === savedId);
+    const mark = actorState(world, actorId).marks.find((m) => m.id === savedId);
     if (!mark) return "That mark is gone.";
     const from = { x: p.x, z: p.z };
-    if (!landAt(world, p, mark.tx, mark.ty)) return "No footing.";
+    if (!landAt(world, p, mark.tx, mark.ty, actorId)) return "No footing.";
     const companions: { id: string; x: number; z: number }[] = [];
     for (const c of world.fauna) {
-      if (c.ownerId !== world.player.id || c.stay || c.task === "dead") continue;
+      if (c.ownerId !== actorState(world, actorId).id || c.stay || c.task === "dead") continue;
       c.x = p.x + (Math.random() - 0.5) * 1.6;
       c.z = p.z + (Math.random() - 0.5) * 1.6;
       c.path = [];
       companions.push({ id: c.id, x: c.x, z: c.z });
     }
-    world.player.gateCoolUntil = world.hour + GATE_HOURS;
+    actorState(world, actorId).gateCoolUntil = world.hour + GATE_HOURS;
     completeObjective(world, "gate");
     emitMoongateFx(world, { sourceId: null, destinationId: null, destinationName: mark.name, x: from.x, z: from.z, tx: p.x, tz: p.z, companions });
     playSfx("gate", 0.5);
     return withGain(`${meta.words}. The swirl takes you${companions.length ? " — and yours follow" : ""}.`, gain);
   }
   if (spell === "fly") {
-    world.player.flyUntil = world.hour + FLY_HOURS;
+    actorState(world, actorId).flyUntil = world.hour + FLY_HOURS;
     emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. The wind takes you.`, gain);
@@ -778,7 +784,7 @@ export function castNow(world: World): string | null {
     corpse.path = [];
     corpse.corpseUntil = 0;
     corpse.hp = Math.max(1, Math.floor(corpse.maxHp * NECRO_HP_FRACTION));
-    corpse.ownerId = world.player.id;
+    corpse.ownerId = actorState(world, actorId).id;
     corpse.loyalty = 100;
     corpse.boundUntil = world.hour + NECRO_HOURS;
     corpse.name = `risen ${FAUNA_META[corpse.kind].label.toLowerCase()}`;
@@ -788,13 +794,13 @@ export function castNow(world: World): string | null {
     return withGain(`${meta.words}. The ${FAUNA_META[corpse.kind].label.toLowerCase()} rises, bound.`, gain);
   }
   if (spell === "resurrect") {
-    const ghost = world.player.ghost || p.ghost;
+    const ghost = actorState(world, actorId).ghost || p.ghost;
     if (!ghost) return withGain(`${meta.words}. You still bleed.`, gain);
     p.ghost = false;
-    world.player.ghost = false;
+    actorState(world, actorId).ghost = false;
     p.hp = Math.max(1, Math.floor(p.maxHp * 0.4));
-    world.player.mana = Math.floor(maxMana(p.int, world.player.skills.magery ?? 0) * 0.4);
-    const fell = world.player.corpseAt;
+    actorState(world, actorId).mana = Math.floor(maxMana(p.int, actorState(world, actorId).skills.magery ?? 0) * 0.4);
+    const fell = actorState(world, actorId).corpseAt;
     if (fell) {
       p.x = fell.tx;
       p.z = fell.ty;
@@ -806,7 +812,7 @@ export function castNow(world: World): string | null {
     return withGain(`${meta.words}. Blood remembers${fell ? " — you rise where you fell" : ""}.`, gain);
   }
   if (spell === "summonelemental") {
-    const old = world.fauna.find((c) => c.ownerId === world.player.id && c.boundUntil && c.boundUntil > world.hour);
+    const old = world.fauna.find((c) => c.ownerId === actorState(world, actorId).id && c.boundUntil && c.boundUntil > world.hour);
     if (old) world.fauna = world.fauna.filter((x) => x.id !== old.id);
     const near = (kind: Tile["kind"], r: number) => {
       for (let y = Math.round(p.z) - r; y <= Math.round(p.z) + r; y++) {
@@ -823,7 +829,7 @@ export function castNow(world: World): string | null {
     const dest = nearestWalkable(world, Math.round(p.x) + 1, Math.round(p.z)) ?? nearestWalkable(world, Math.round(p.x), Math.round(p.z));
     if (!dest) return "The vale has no room for a guest.";
     const beast = spawn(world, element.kind, dest.x, dest.y);
-    beast.ownerId = world.player.id;
+    beast.ownerId = actorState(world, actorId).id;
     beast.loyalty = 100;
     beast.boundUntil = world.hour + ELEMENTAL_HOURS;
     beast.name = element.name;
@@ -874,29 +880,29 @@ export function castNow(world: World): string | null {
   if (spell === "teleport") {
     const fromX = p.x;
     const fromZ = p.z;
-    if (!landAt(world, p, savedTx, savedTy)) return "No footing.";
+    if (!landAt(world, p, savedTx, savedTy, actorId)) return "No footing.";
     emitSpellEffect(world, { spell, x: fromX, z: fromZ, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     completeObjective(world, "teleport");
     playSfx(spellSfx(spell), 0.52);
     return withGain(`${meta.words}. The dirt folds.`, gain);
   }
   if (spell === "mark") {
-    world.player.pack.rune = Math.max(0, (world.player.pack.rune ?? 0) - 1);
+    actorState(world, actorId).pack.rune = Math.max(0, (actorState(world, actorId).pack.rune ?? 0) - 1);
     const tx = Math.round(p.x);
     const ty = Math.round(p.z);
-    const mark: RecallMark = { id: nid(world, "mk"), tx, ty, name: markLabel(world, tx, ty) };
-    world.player.marks = [...world.player.marks, mark];
+    const mark: RecallMark = { id: nid(world, "mk"), tx, ty, name: markLabel(world, tx, ty, actorId) };
+    actorState(world, actorId).marks = [...actorState(world, actorId).marks, mark];
     emitSpellEffect(world, { spell, x: p.x, z: p.z, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     completeObjective(world, "mark");
     playSfx(spellSfx(spell), 0.5);
     return withGain(`${meta.words}. ${mark.name} is written.`, gain);
   }
   if (spell === "recall") {
-    const mark = world.player.marks.find((m) => m.id === savedId);
+    const mark = actorState(world, actorId).marks.find((m) => m.id === savedId);
     if (!mark) return "That mark is gone.";
     const fromX = p.x;
     const fromZ = p.z;
-    if (!landAt(world, p, mark.tx, mark.ty)) return "No footing.";
+    if (!landAt(world, p, mark.tx, mark.ty, actorId)) return "No footing.";
     emitSpellEffect(world, { spell, x: fromX, z: fromZ, tx: p.x, tz: p.z, at: world.hour, outcome: "success" });
     completeObjective(world, "recall");
     playSfx(spellSfx(spell), 0.52);

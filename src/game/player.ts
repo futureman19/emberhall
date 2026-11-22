@@ -39,8 +39,8 @@ export function isGhost(world: World, actorId?: string) {
   return Boolean(actorState(world, actorId).ghost) || Boolean(p?.ghost);
 }
 
-export function nearestHealer(world: World) {
-  const p = you(world);
+export function nearestHealer(world: World, actorId?: string) {
+  const p = you(world, actorId);
   if (!p) return null;
   let best: Person | null = null;
   let d = Infinity;
@@ -126,16 +126,16 @@ const RETALIATE_KINDS: ReadonlySet<FaunaKind> = new Set([
   "stonecrawl_spider",
 ]);
 
-export function resurrect(world: World, at?: { x: number; z: number }) {
-  const p = you(world);
+export function resurrect(world: World, at?: { x: number; z: number }, actorId?: string) {
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
-  if (!isGhost(world)) return "You still bleed.";
+  if (!isGhost(world, actorId)) return "You still bleed.";
   p.ghost = false;
-  world.player.ghost = false;
+  actorState(world, actorId).ghost = false;
   p.hp = Math.max(1, Math.floor(p.maxHp * 0.4));
-  world.player.mana = Math.floor(maxMana(p.int, world.player.skills.magery ?? 0) * 0.4);
-  world.player.intent.kind = "none";
-  world.player.armedSpell = null;
+  actorState(world, actorId).mana = Math.floor(maxMana(p.int, actorState(world, actorId).skills.magery ?? 0) * 0.4);
+  actorState(world, actorId).intent.kind = "none";
+  actorState(world, actorId).armedSpell = null;
   if (at) {
     p.x = at.x;
     p.z = at.z;
@@ -146,30 +146,30 @@ export function resurrect(world: World, at?: { x: number; z: number }) {
   return "Blood remembers. Go find your body.";
 }
 
-function dieAsGhost(world: World, p: Person) {
+function dieAsGhost(world: World, p: Person, actorId?: string) {
   const tx = Math.round(p.x);
   const ty = Math.round(p.z);
   const spill: Partial<Record<ItemId, number>> = {};
   for (const id of SPILL) {
-    const n = Math.floor((world.player.pack[id] ?? 0) / 2);
+    const n = Math.floor((actorState(world, actorId).pack[id] ?? 0) / 2);
     if (n > 0) {
-      world.player.pack[id] -= n;
+      actorState(world, actorId).pack[id] -= n;
       spill[id] = n;
     }
   }
   const goldDrop = Math.floor(world.gold / 3);
   world.gold -= goldDrop;
   addToPile(world, tx, ty, spill, "death", world.hour + 48, "your corpse", goldDrop);
-  world.player.corpseAt = { tx, ty };
+  actorState(world, actorId).corpseAt = { tx, ty };
   burstDeath(p.x, p.z, world.hour);
   playSfx("die", 0.55);
   p.ghost = true;
   p.hp = 0;
   p.path = [];
-  world.player.ghost = true;
-  world.player.intent.kind = "none";
-  world.player.armedSpell = null;
-  world.player.nightSightUntil = 0;
+  actorState(world, actorId).ghost = true;
+  actorState(world, actorId).intent.kind = "none";
+  actorState(world, actorId).armedSpell = null;
+  actorState(world, actorId).nightSightUntil = 0;
   completeObjective(world, "die");
   return "You die. The dirt keeps your body. Walk to a healer — Ione stands at the hall.";
 }
@@ -187,11 +187,12 @@ function pathBeside(world: World, p: Person, tx: number, ty: number) {
 }
 
 /** Rebuild the player's active route after terrain invalidates a waypoint. */
-export function replanIntentPath(world: World, p: Person) {
-  const intent = world.player.intent;
+export function replanIntentPath(world: World, p: Person, actorId?: string) {
+  if (actorId !== undefined && actorState(world, actorId).id !== p.id) throw new Error(`Actor body mismatch: ${actorId}`);
+  const intent = actorState(world, actorId).intent;
   if (intent.kind === "none") return false;
   if (intent.kind === "walk") {
-    const path = astar(world, p.x, p.z, intent.tx, intent.ty, 9000, world.hour < world.player.flyUntil);
+    const path = astar(world, p.x, p.z, intent.tx, intent.ty, 9000, world.hour < actorState(world, actorId).flyUntil);
     if (!path) return false;
     p.path = path.map((node) => ({ tx: node.x, ty: node.y }));
     return true;
@@ -199,7 +200,7 @@ export function replanIntentPath(world: World, p: Person) {
   if (intent.kind === "hunt" || intent.kind === "tame") {
     const creature = world.fauna.find((candidate) => candidate.id === intent.targetId && candidate.task !== "dead");
     if (!creature) return false;
-    const bow = intent.kind === "hunt" && effectiveMain(world) === "bow";
+    const bow = intent.kind === "hunt" && inHand(world, actorId) === "bow";
     return pathWithin(world, p, creature.x, creature.z, bow ? BOW_RANGE - 0.75 : 1.5, 2500);
   }
   if (intent.kind === "cast" && intent.spell && OFFENSIVE_SPELLS.has(intent.spell)) {
@@ -210,21 +211,24 @@ export function replanIntentPath(world: World, p: Person) {
   return pathBeside(world, p, intent.tx, intent.ty);
 }
 
-export function commandWalk(world: World, tx: number, ty: number, cap = 9000): string | null {
-  const p = you(world);
+export function commandWalk(world: World, tx: number, ty: number, cap = 9000, actorId?: string): string | null {
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
-  world.player.armedSpell = null;
+  actorState(world, actorId).armedSpell = null;
   const dest = nearestWalkable(world, tx, ty);
   if (!dest) return "No footing.";
-  const path = astar(world, p.x, p.z, dest.x, dest.y, cap, world.hour < world.player.flyUntil);
+  const path = astar(world, p.x, p.z, dest.x, dest.y, cap, world.hour < actorState(world, actorId).flyUntil);
   if (!path) return "The way is closed.";
   p.path = path.map((n) => ({ tx: n.x, ty: n.y }));
-  world.player.intent = { kind: "walk", tx: dest.x, ty: dest.y, targetId: null, spell: null };
+  actorState(world, actorId).intent = { kind: "walk", tx: dest.x, ty: dest.y, targetId: null, spell: null };
   return null;
 }
 
-export function inHand(world: World) {
-  return effectiveMain(world);
+export function inHand(world: World, actorId?: string) {
+  if (actorId === undefined) return effectiveMain(world);
+  const state = actorState(world, actorId);
+  const rare = state.rares.find((item) => item.uid === state.wearRare.main);
+  return rare?.base ?? state.wear.main ?? null;
 }
 
 /** A worn charm lifts the skill it blesses. */
@@ -263,82 +267,83 @@ function anatomyCritRoll(world: World) {
   return mulberry32((world.seed + world.tickCount * 31 + 41) >>> 0)();
 }
 
-export function needHeld(world: World, item: ItemId) {
-  if (world.player.wear.main === item) return null;
+export function needHeld(world: World, item: ItemId, actorId?: string) {
+  if (actorState(world, actorId).wear.main === item) return null;
   return `Hold the ${ITEM_META[item].label.toLowerCase()} — tap it in You.`;
 }
 
-export function commandChop(world: World, tx: number, ty: number) {
-  const p = you(world);
+export function commandChop(world: World, tx: number, ty: number, actorId?: string) {
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
-  if (isGhost(world)) {
-    if (effSkill(world, "lumberjack") < GHOSTWOOD_LUMBERJACK) return "A ghost cannot.";
+  if (isGhost(world, actorId)) {
+    if (effSkill(world, "lumberjack", actorId) < GHOSTWOOD_LUMBERJACK) return "A ghost cannot.";
     if (!isGhostwoodTree(world, tx, ty)) return "The axe passes through.";
   } else {
-    const dead = hands(world);
+    const dead = hands(world, actorId);
     if (dead) return dead;
     if (isGhostwoodTree(world, tx, ty)) return "You see no tree.";
   }
-  const held = inHand(world);
+  const held = inHand(world, actorId);
   if (!held || !hasTag(held, "blade")) return "Hold a blade — hatchet, knife, or sword.";
   if (!pathBeside(world, p, tx, ty)) return "The way is closed.";
-  world.player.intent = { kind: "chop", tx, ty, targetId: null, spell: null };
+  actorState(world, actorId).intent = { kind: "chop", tx, ty, targetId: null, spell: null };
   return null;
 }
 
-export function commandMine(world: World, tx: number, ty: number) {
-  const p = you(world);
+export function commandMine(world: World, tx: number, ty: number, actorId?: string) {
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
-  const dead = hands(world);
+  const dead = hands(world, actorId);
   if (dead) return dead;
-  const held = needHeld(world, "pick");
+  const held = needHeld(world, "pick", actorId);
   if (held) return held;
   if (!pathBeside(world, p, tx, ty)) return "The way is closed.";
-  world.player.intent = { kind: "mine", tx, ty, targetId: null, spell: null };
+  actorState(world, actorId).intent = { kind: "mine", tx, ty, targetId: null, spell: null };
   return null;
 }
 
-export function commandFish(world: World, tx: number, ty: number) {
-  const p = you(world);
+export function commandFish(world: World, tx: number, ty: number, actorId?: string) {
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
-  const dead = hands(world);
+  const dead = hands(world, actorId);
   if (dead) return dead;
   if (world.tiles[ty]?.[tx]?.kind !== "water") return "Cast into water.";
-  const held = needHeld(world, "fishing_rod");
+  const held = needHeld(world, "fishing_rod", actorId);
   if (held) return held;
   if (!pathBeside(world, p, tx, ty)) return "The shore is closed.";
-  world.player.workT = 0;
-  world.player.intent = { kind: "fish", tx, ty, targetId: null, spell: null };
+  actorState(world, actorId).workT = 0;
+  actorState(world, actorId).intent = { kind: "fish", tx, ty, targetId: null, spell: null };
   return null;
 }
 
-export function commandHunt(world: World, id: string) {
-  const dead = hands(world);
+export function commandHunt(world: World, id: string, actorId?: string) {
+  const dead = hands(world, actorId);
   if (dead) return dead;
-  const p = you(world);
+  const p = you(world, actorId);
   const c = world.fauna.find((x) => x.id === id);
   if (!p || !c || c.task === "dead") return "Nothing to hunt.";
-  world.player.intent = { kind: "hunt", tx: Math.round(c.x), ty: Math.round(c.z), targetId: c.id, spell: null };
-  pathWithin(world, p, c.x, c.z, effectiveMain(world) === "bow" ? BOW_RANGE - 0.75 : 1.5);
+  actorState(world, actorId).intent = { kind: "hunt", tx: Math.round(c.x), ty: Math.round(c.z), targetId: c.id, spell: null };
+  pathWithin(world, p, c.x, c.z, inHand(world, actorId) === "bow" ? BOW_RANGE - 0.75 : 1.5);
   return null;
 }
 
-export function commandTame(world: World, id: string) {
-  const dead = hands(world);
+export function commandTame(world: World, id: string, actorId?: string) {
+  const dead = hands(world, actorId);
   if (dead) return dead;
-  const p = you(world);
+  const p = you(world, actorId);
   const c = world.fauna.find((x) => x.id === id);
   if (!p || !c || c.task === "dead") return "Nothing to tame.";
   if (FAUNA_META[c.kind].tameDiff >= 90) return "It will not be tamed.";
-  if (world.fauna.filter((x) => x.ownerId === world.player.id).length >= 3) return "Three is enough.";
-  world.player.intent = { kind: "tame", tx: Math.round(c.x), ty: Math.round(c.z), targetId: c.id, spell: null };
+  if (world.fauna.filter((x) => x.ownerId === actorState(world, actorId).id).length >= 3) return "Three is enough.";
+  actorState(world, actorId).intent = { kind: "tame", tx: Math.round(c.x), ty: Math.round(c.z), targetId: c.id, spell: null };
   pathWithin(world, p, c.x, c.z, 1.5);
   return null;
 }
 
-export function commandStay(world: World, id: string) {
+export function commandStay(world: World, id: string, actorId?: string) {
+  actorState(world, actorId);
   const c = world.fauna.find((x) => x.id === id);
-  if (!c || c.ownerId !== world.player.id) return "It is not yours.";
+  if (!c || c.ownerId !== actorState(world, actorId).id) return "It is not yours.";
   c.stay = true;
   c.task = "idle";
   c.path = [];
@@ -348,9 +353,10 @@ export function commandStay(world: World, id: string) {
   return note;
 }
 
-export function commandFollow(world: World, id: string) {
+export function commandFollow(world: World, id: string, actorId?: string) {
+  actorState(world, actorId);
   const c = world.fauna.find((x) => x.id === id);
-  if (!c || c.ownerId !== world.player.id) return "It is not yours.";
+  if (!c || c.ownerId !== actorState(world, actorId).id) return "It is not yours.";
   c.stay = false;
   c.task = "follow";
   emitCompanionFx(world, { kind: "follow", targetId: c.id, x: c.x, z: c.z });
@@ -359,9 +365,10 @@ export function commandFollow(world: World, id: string) {
   return note;
 }
 
-export function commandRelease(world: World, id: string) {
+export function commandRelease(world: World, id: string, actorId?: string) {
+  actorState(world, actorId);
   const c = world.fauna.find((x) => x.id === id);
-  if (!c || c.ownerId !== world.player.id) return "It is not yours.";
+  if (!c || c.ownerId !== actorState(world, actorId).id) return "It is not yours.";
   const who = petLabel(c);
   c.ownerId = null;
   c.stay = false;
@@ -372,21 +379,21 @@ export function commandRelease(world: World, id: string) {
   return note;
 }
 
-export function commandFeed(world: World, id: string) {
-  const dead = hands(world);
+export function commandFeed(world: World, id: string, actorId?: string) {
+  const dead = hands(world, actorId);
   if (dead) return dead;
   const c = world.fauna.find((x) => x.id === id);
-  if (!c || c.ownerId !== world.player.id) return "It is not yours.";
+  if (!c || c.ownerId !== actorState(world, actorId).id) return "It is not yours.";
   const eats = FAUNA_META[c.kind].eats;
   const cands = [...new Set(eats.flatMap((t) => tagConsumeOrder(t)))];
-  const give = cands.find((it) => (world.player.pack[it] ?? 0) > 0);
+  const give = cands.find((it) => (actorState(world, actorId).pack[it] ?? 0) > 0);
   if (!give) {
     const wants = new Set(eats);
     if (wants.has("plant")) return "It wants greens.";
     if (wants.has("meat")) return "It wants meat.";
     return "It wants a proper feed.";
   }
-  world.player.pack[give] = (world.player.pack[give] ?? 0) - 1;
+  actorState(world, actorId).pack[give] = (actorState(world, actorId).pack[give] ?? 0) - 1;
   c.loyalty = Math.min(100, c.loyalty + 12);
   if (c.loyalty >= 15) c.warnedLoyal = false; // a fed friend forgives
   emitCompanionFx(world, { kind: "feed", targetId: c.id, x: c.x, z: c.z, item: give });
@@ -395,15 +402,15 @@ export function commandFeed(world: World, id: string) {
   return note;
 }
 
-export function commandSkin(world: World, id: string) {
-  const dead = hands(world);
+export function commandSkin(world: World, id: string, actorId?: string) {
+  const dead = hands(world, actorId);
   if (dead) return dead;
-  const p = you(world);
+  const p = you(world, actorId);
   const c = world.fauna.find((x) => x.id === id);
   if (!p || !c) return "Nothing to dress.";
-  const held = inHand(world);
+  const held = inHand(world, actorId);
   if (!held || !hasTag(held, "blade")) return "Hold a blade — hatchet, knife, or sword.";
-  world.player.intent = { kind: "skin", tx: Math.round(c.x), ty: Math.round(c.z), targetId: c.id, spell: null };
+  actorState(world, actorId).intent = { kind: "skin", tx: Math.round(c.x), ty: Math.round(c.z), targetId: c.id, spell: null };
   pathBeside(world, p, Math.round(c.x), Math.round(c.z));
   return null;
 }
@@ -421,70 +428,70 @@ function resolveLootTarget(world: World, id: string): string | null {
   return (corpsePile ?? nearby[0]).id;
 }
 
-export function commandLoot(world: World, id: string) {
-  const dead = hands(world);
+export function commandLoot(world: World, id: string, actorId?: string) {
+  const dead = hands(world, actorId);
   if (dead) return dead;
   const pileId = resolveLootTarget(world, id);
   if (!pileId) return "Nothing to loot.";
-  return takeFromPile(world, pileId);
+  return takeFromPile(world, pileId, undefined, actorId);
 }
 
-export function commandDrop(world: World, item: ItemId) {
-  const dead = hands(world);
+export function commandDrop(world: World, item: ItemId, actorId?: string) {
+  const dead = hands(world, actorId);
   if (dead) return dead;
-  const p = you(world);
-  const n = world.player.pack[item] ?? 0;
+  const p = you(world, actorId);
+  const n = actorState(world, actorId).pack[item] ?? 0;
   if (!p || n < 1) return "You do not carry that.";
-  world.player.pack[item] = n - 1;
+  actorState(world, actorId).pack[item] = n - 1;
   const pile = addToPile(world, Math.round(p.x), Math.round(p.z), { [item]: 1 }, "drop", world.hour + 24, "sack");
   completeObjective(world, "pile");
   emitPersonalActionFx(world, { kind: "ground", direction: "drop", item, count: 1, gold: 0, x: pile.tx, z: pile.ty });
   return `Dropped ${ITEM_META[item].label.toLowerCase()}.`;
 }
 
-export function commandEquip(world: World, item: ItemId) {
-  const dead = hands(world);
+export function commandEquip(world: World, item: ItemId, actorId?: string) {
+  const dead = hands(world, actorId);
   if (dead) return dead;
   const meta = ITEM_META[item];
   if (!meta.slot) return "You cannot hold or wear that.";
-  if ((world.player.pack[item] ?? 0) < 1) return "You do not carry that.";
-  const rareUidThere = world.player.wearRare[meta.slot];
+  if ((actorState(world, actorId).pack[item] ?? 0) < 1) return "You do not carry that.";
+  const rareUidThere = actorState(world, actorId).wearRare[meta.slot];
   if (rareUidThere) {
     // A rare already graces that slot — it comes back to the pack.
-    world.player.wearRare[meta.slot] = undefined;
+    actorState(world, actorId).wearRare[meta.slot] = undefined;
     void rareUidThere; // the rare itself stays in player.rares; only its wear-link clears
   }
-  const prev = world.player.wear[meta.slot];
-  if (prev) world.player.pack[prev] = (world.player.pack[prev] ?? 0) + 1;
-  world.player.pack[item] -= 1;
-  world.player.wear[meta.slot] = item;
+  const prev = actorState(world, actorId).wear[meta.slot];
+  if (prev) actorState(world, actorId).pack[prev] = (actorState(world, actorId).pack[prev] ?? 0) + 1;
+  actorState(world, actorId).pack[item] -= 1;
+  actorState(world, actorId).wear[meta.slot] = item;
   completeObjective(world, "dress");
-  const p = you(world);
+  const p = you(world, actorId);
   if (prev !== item || Boolean(rareUidThere)) emitPersonalActionFx(world, { kind: "equipment", direction: "equip", item, slot: meta.slot, rare: false, uid: null, x: p?.x ?? null, z: p?.z ?? null });
   if (meta.slot === "main") return `You take the ${meta.label.toLowerCase()}.`;
   if (meta.slot === "off") return `You raise the ${meta.label.toLowerCase()}.`;
   return `You wear the ${meta.label.toLowerCase()}.`;
 }
 
-export function commandEquipRare(world: World, uid: string) {
-  const dead = hands(world);
+export function commandEquipRare(world: World, uid: string, actorId?: string) {
+  const dead = hands(world, actorId);
   if (dead) return dead;
-  const rare = world.player.rares.find((r) => r.uid === uid);
+  const rare = actorState(world, actorId).rares.find((r) => r.uid === uid);
   if (!rare) return "No such wonder.";
   const meta = ITEM_META[rare.base];
   if (!meta.slot) return "You cannot hold or wear that.";
   const slot = meta.slot;
-  const prevRare = world.player.wearRare[slot];
+  const prevRare = actorState(world, actorId).wearRare[slot];
   if (prevRare === uid) return "Already worn.";
-  world.player.wearRare[slot] = undefined;
-  const prev = world.player.wear[slot];
+  actorState(world, actorId).wearRare[slot] = undefined;
+  const prev = actorState(world, actorId).wear[slot];
   if (prev) {
-    world.player.pack[prev] = (world.player.pack[prev] ?? 0) + 1;
-    world.player.wear[slot] = undefined;
+    actorState(world, actorId).pack[prev] = (actorState(world, actorId).pack[prev] ?? 0) + 1;
+    actorState(world, actorId).wear[slot] = undefined;
   }
-  world.player.wearRare[slot] = uid;
+  actorState(world, actorId).wearRare[slot] = uid;
   void prevRare; // swapped-out rares stay in player.rares — wearRare is only a link
-  const p = you(world);
+  const p = you(world, actorId);
   emitPersonalActionFx(world, { kind: "equipment", direction: "equip", item: rare.base, slot, rare: true, uid, x: p?.x ?? null, z: p?.z ?? null });
   const name = rareName(rare);
   if (slot === "main") return `You take ${name}.`;
@@ -492,22 +499,22 @@ export function commandEquipRare(world: World, uid: string) {
   return `You wear ${name}.`;
 }
 
-export function commandUnequip(world: World, slot: WearSlot) {
-  const dead = hands(world);
+export function commandUnequip(world: World, slot: WearSlot, actorId?: string) {
+  const dead = hands(world, actorId);
   if (dead) return dead;
-  const rareUidThere = world.player.wearRare[slot];
+  const rareUidThere = actorState(world, actorId).wearRare[slot];
   if (rareUidThere) {
-    const rare = world.player.rares.find((candidate) => candidate.uid === rareUidThere);
-    world.player.wearRare[slot] = undefined;
-    const p = you(world);
+    const rare = actorState(world, actorId).rares.find((candidate) => candidate.uid === rareUidThere);
+    actorState(world, actorId).wearRare[slot] = undefined;
+    const p = you(world, actorId);
     emitPersonalActionFx(world, { kind: "equipment", direction: "unequip", item: rare?.base ?? null, slot, rare: true, uid: rareUidThere, x: p?.x ?? null, z: p?.z ?? null });
     return slot === "main" || slot === "off" ? "You put it away." : "Off.";
   }
-  const id = world.player.wear[slot];
+  const id = actorState(world, actorId).wear[slot];
   if (!id) return "Nothing there.";
-  world.player.wear[slot] = undefined;
-  world.player.pack[id] = (world.player.pack[id] ?? 0) + 1;
-  const p = you(world);
+  actorState(world, actorId).wear[slot] = undefined;
+  actorState(world, actorId).pack[id] = (actorState(world, actorId).pack[id] ?? 0) + 1;
+  const p = you(world, actorId);
   emitPersonalActionFx(world, { kind: "equipment", direction: "unequip", item: id, slot, rare: false, uid: null, x: p?.x ?? null, z: p?.z ?? null });
   return slot === "main" || slot === "off" ? "You put it away." : "Off.";
 }
@@ -525,19 +532,19 @@ export function getHealingFx() {
   return healingFx;
 }
 
-export function commandHeal(world: World) {
-  const dead = hands(world);
+export function commandHeal(world: World, actorId?: string) {
+  const dead = hands(world, actorId);
   if (dead) return dead;
-  const p = you(world);
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
-  if ((world.player.pack.bandage ?? 0) < 1) return "Need a bandage.";
-  world.player.pack.bandage -= 1;
+  if ((actorState(world, actorId).pack.bandage ?? 0) < 1) return "Need a bandage.";
+  actorState(world, actorId).pack.bandage -= 1;
   const before = p.hp;
-  const amount = bandageHealAmount(effSkill(world, "healing"), effSkill(world, "anatomy"));
+  const amount = bandageHealAmount(effSkill(world, "healing", actorId), effSkill(world, "anatomy", actorId));
   p.hp = Math.min(p.maxHp, p.hp + amount);
   healingFx = { x: p.x, z: p.z, at: world.hour, amount: p.hp - before };
-  tryGain(world, "healing", true, true);
-  tryGain(world, "anatomy", true, true);
+  tryGain(world, "healing", true, true, actorId);
+  tryGain(world, "anatomy", true, true, actorId);
   return "The cloth holds.";
 }
 
@@ -608,9 +615,9 @@ interface PreparedResourceHarvest {
   readonly resourceNodesAfterSuccess: ResourceNodeStateMap;
 }
 
-function prepareResourceHarvest(world: World, nodeKind: "tree" | "rock"): PreparedResourceHarvest {
-  const resourcesAfterSuccess = parseResourceInventory(world.player.resources);
-  const { tx, ty } = world.player.intent;
+function prepareResourceHarvest(world: World, nodeKind: "tree" | "rock", actorId?: string): PreparedResourceHarvest {
+  const resourcesAfterSuccess = parseResourceInventory(actorState(world, actorId).resources);
+  const { tx, ty } = actorState(world, actorId).intent;
   const t = world.tiles[ty]?.[tx];
   if (!t || t.kind !== nodeKind) {
     return {
@@ -634,9 +641,9 @@ function prepareResourceHarvest(world: World, nodeKind: "tree" | "rock"): Prepar
     tx,
     ty,
     nodeKind,
-    effectiveSkill: effSkill(world, skill),
+    effectiveSkill: effSkill(world, skill, actorId),
     discovered,
-    toolTier: harvestToolTier({ nodeKind, tool: inHand(world) }),
+    toolTier: harvestToolTier({ nodeKind, tool: inHand(world, actorId) }),
   };
   const assessment =
     planted && isTimberId(planted)
@@ -673,23 +680,23 @@ function prepareResourceHarvest(world: World, nodeKind: "tree" | "rock"): Prepar
   };
 }
 
-function resourceHarvestNow(world: World, nodeKind: "tree" | "rock", prepared: PreparedResourceHarvest) {
-  const { tx, ty } = world.player.intent;
+function resourceHarvestNow(world: World, nodeKind: "tree" | "rock", prepared: PreparedResourceHarvest, actorId?: string) {
+  const { tx, ty } = actorState(world, actorId).intent;
   // An empty route is not evidence of arrival: the commit itself validates
   // legal interaction reach before any depletion, inventory, scar, or gain.
-  const actor = you(world);
+  const actor = you(world, actorId);
   if (!actor || Math.hypot(actor.x - tx, actor.z - ty) > WORK_REACH) {
-    world.player.intent.kind = "none";
+    actorState(world, actorId).intent.kind = "none";
     return "Too far.";
   }
   const t = world.tiles[ty]?.[tx];
   if (!t || t.kind !== nodeKind) {
-    world.player.intent.kind = "none";
+    actorState(world, actorId).intent.kind = "none";
     return nodeKind === "tree" ? "No tree." : "No stone.";
   }
 
   const skill = nodeKind === "tree" ? "lumberjack" : "mining";
-  const effectiveSkill = effSkill(world, skill);
+  const effectiveSkill = effSkill(world, skill, actorId);
   const {
     assessment,
     resourcesAfterSuccess,
@@ -702,7 +709,7 @@ function resourceHarvestNow(world: World, nodeKind: "tree" | "rock", prepared: P
     // same rejection every beat. Identification persists independently; scar,
     // inventory, depletion, and revision remain untouched, with no chance roll.
     world.resourceNodes = resourceNodesAfterIdentification;
-    world.player.intent.kind = "none";
+    actorState(world, actorId).intent.kind = "none";
     return assessment.message;
   }
 
@@ -713,76 +720,76 @@ function resourceHarvestNow(world: World, nodeKind: "tree" | "rock", prepared: P
   emitExtractionFx(world, nodeKind === "tree" ? "lumberjacking" : "mining", ok, tx, ty);
   if (!ok) {
     world.resourceNodes = resourceNodesAfterIdentification;
-    const gain = tryGain(world, skill, false, true);
+    const gain = tryGain(world, skill, false, true, actorId);
     const failure = nodeKind === "tree" ? "The axe glances." : "Dust.";
     return gain ? `${failure.slice(0, -1)}. ${gain}.` : failure;
   }
 
-  world.player.resources = resourcesAfterSuccess;
+  actorState(world, actorId).resources = resourcesAfterSuccess;
   world.resourceNodes = resourceNodesAfterSuccess;
   t.kind = "dirt";
   world.scars[`${tx},${ty}`] = { kind: "dirt" };
   world.landRev += 1;
   if (nodeKind === "tree") {
     completeObjective(world, "chop");
-    if (Math.random() < 0.28) world.player.pack.acorn = (world.player.pack.acorn ?? 0) + 1;
+    if (Math.random() < 0.28) actorState(world, actorId).pack.acorn = (actorState(world, actorId).pack.acorn ?? 0) + 1;
   }
-  world.player.intent.kind = "none";
-  const gain = tryGain(world, skill, true, true);
+  actorState(world, actorId).intent.kind = "none";
+  const gain = tryGain(world, skill, true, true, actorId);
   return gain ? `${assessment.message} ${gain}.` : assessment.message;
 }
 
-function chopNow(world: World, prepared: PreparedResourceHarvest) {
-  return resourceHarvestNow(world, "tree", prepared);
+function chopNow(world: World, prepared: PreparedResourceHarvest, actorId?: string) {
+  return resourceHarvestNow(world, "tree", prepared, actorId);
 }
 
-function mineNow(world: World, prepared: PreparedResourceHarvest) {
-  return resourceHarvestNow(world, "rock", prepared);
+function mineNow(world: World, prepared: PreparedResourceHarvest, actorId?: string) {
+  return resourceHarvestNow(world, "rock", prepared, actorId);
 }
 
-function fishNow(world: World) {
-  const { tx, ty } = world.player.intent;
-  world.player.intent.kind = "none";
+function fishNow(world: World, actorId?: string) {
+  const { tx, ty } = actorState(world, actorId).intent;
+  actorState(world, actorId).intent.kind = "none";
   if (world.tiles[ty]?.[tx]?.kind !== "water") return "The water is gone.";
-  const held = needHeld(world, "fishing_rod");
+  const held = needHeld(world, "fishing_rod", actorId);
   if (held) return held;
-  const fishing = effSkill(world, "fishing");
+  const fishing = effSkill(world, "fishing", actorId);
   const ok = Math.random() < successChance(fishing, 18);
   if (!ok) return "The line comes back bare.";
-  world.player.pack.raw_fish = (world.player.pack.raw_fish ?? 0) + 1;
+  actorState(world, actorId).pack.raw_fish = (actorState(world, actorId).pack.raw_fish ?? 0) + 1;
   playSfx("loot", 0.3);
-  const gain = tryGain(world, "fishing", true, true);
+  const gain = tryGain(world, "fishing", true, true, actorId);
   return `A silver fish takes the hook. Raw fish in Pack — roast it at a fire.${gain ? ` ${gain}.` : ""}`;
 }
 
-function huntNow(world: World, p: Person) {
-  const c = world.fauna.find((x) => x.id === world.player.intent.targetId);
+function huntNow(world: World, p: Person, actorId?: string) {
+  const c = world.fauna.find((x) => x.id === actorState(world, actorId).intent.targetId);
   if (!c || c.task === "dead") {
-    world.player.intent.kind = "none";
+    actorState(world, actorId).intent.kind = "none";
     return "It fled.";
   }
-  if (world.hour < world.player.invisUntil) {
-    world.player.invisUntil = 0;
+  if (world.hour < actorState(world, actorId).invisUntil) {
+    actorState(world, actorId).invisUntil = 0;
     log(world, "Your hand betrays the shimmer.");
   }
-  const bow = effectiveMain(world) === "bow";
+  const bow = inHand(world, actorId) === "bow";
   if (bow) {
-    if ((world.player.pack.arrows ?? 0) < 1) {
-      world.player.intent.kind = "none";
+    if ((actorState(world, actorId).pack.arrows ?? 0) < 1) {
+      actorState(world, actorId).intent.kind = "none";
       return "No arrows to loose.";
     }
-    world.player.pack.arrows -= 1;
+    actorState(world, actorId).pack.arrows -= 1;
   }
   const dist = Math.hypot(p.x - c.x, p.z - c.z);
   playSfx("hunt", 0.52);
-  const blade = weaponDmg(effectiveMain(world));
-  const mods = rareMods(world);
+  const blade = weaponDmg(inHand(world, actorId));
+  const mods = rareMods(world, actorId);
   // The weapon family teaches its own discipline: knives fence, bludgeons mace-fight.
-  const main = effectiveMain(world);
+  const main = inHand(world, actorId);
   const strikeSkill: SkillId = bow ? "archery" : main === "knife" ? "fencing" : main === "club" || main === "mace" || main === "war_hammer" || main === "quarterstaff" ? "mace" : "swords";
-  const skill = effSkill(world, strikeSkill);
-  const anatomy = effSkill(world, "anatomy");
-  const tech = armedTechniqueFor(world);
+  const skill = effSkill(world, strikeSkill, actorId);
+  const anatomy = effSkill(world, "anatomy", actorId);
+  const tech = armedTechniqueFor(world, actorId);
   const chance = successChance(skill, 10 + FAUNA_META[c.kind].hp / 2);
   let ok = Math.random() < chance + 0.2 + mods.hit / 100 + (tech?.id === "lunge" ? 0.1 : 0);
   if (!ok && tech?.id === "flurry") ok = Math.random() < chance + 0.2 + mods.hit / 100; // quick wrists, second try
@@ -799,7 +806,7 @@ function huntNow(world: World, p: Person) {
   };
   let dmg = ok ? blade + Math.floor(skill / 12) + anatomyBonus(anatomy) : Math.max(1, Math.floor(blade / 3));
   if (ok && tech?.id === "lunge") dmg += 3;
-  if (ok && tech?.id === "riposte" && world.player.lastBittenAt > world.player.lastStrikeAt) {
+  if (ok && tech?.id === "riposte" && actorState(world, actorId).lastBittenAt > actorState(world, actorId).lastStrikeAt) {
     dmg = Math.floor(dmg * 1.5); // fresh teeth, sharper answer
   }
   if (ok && tech?.id === "sunder") dmg = c.maxHp >= 40 ? Math.floor(dmg * 1.5) : dmg + 2;
@@ -813,7 +820,7 @@ function huntNow(world: World, p: Person) {
   const slayerMul = mods.vs[c.kind];
   if (slayerMul) dmg = Math.floor(dmg * slayerMul);
   if (c.markedUntil !== undefined && world.hour < c.markedUntil) dmg = Math.floor(dmg * 1.25);
-  if (world.hour < world.player.blessUntil) dmg = Math.floor(dmg * 1.25);
+  if (world.hour < actorState(world, actorId).blessUntil) dmg = Math.floor(dmg * 1.25);
   c.hp -= faunaPhysicalDamage(c.kind, dmg);
   if (ok && tech?.id === "hunters_mark") c.markedUntil = world.hour + 8;
   if (ok && tech?.id === "hamstring") c.curseUntil = world.hour + 4; // the leg wound slows its stride
@@ -822,7 +829,7 @@ function huntNow(world: World, p: Person) {
   if (ok && tech?.id === "cleave") {
     const splash = Math.floor(dmg / 2);
     const other = world.fauna.find(
-      (x) => x.id !== c.id && x.task !== "dead" && x.ownerId !== world.player.id && Math.hypot(x.x - c.x, x.z - c.z) < 2.5,
+      (x) => x.id !== c.id && x.task !== "dead" && x.ownerId !== actorState(world, actorId).id && Math.hypot(x.x - c.x, x.z - c.z) < 2.5,
     );
     if (other && splash > 0) {
       other.hp -= faunaPhysicalDamage(other.kind, splash);
@@ -836,20 +843,20 @@ function huntNow(world: World, p: Person) {
     }
   }
   // Double Loose: a second shaft rides the same breath.
-  if (tech?.id === "double_loose" && bow && c.hp > 0 && (world.player.pack.arrows ?? 0) > 0) {
-    world.player.pack.arrows -= 1;
+  if (tech?.id === "double_loose" && bow && c.hp > 0 && (actorState(world, actorId).pack.arrows ?? 0) > 0) {
+    actorState(world, actorId).pack.arrows -= 1;
     const ok2 = Math.random() < chance + 0.2 + mods.hit / 100;
     c.hp -= faunaPhysicalDamage(c.kind, (ok2 ? blade + Math.floor(skill / 12) + anatomyBonus(anatomy) : Math.max(1, Math.floor(blade / 3))) + mods.dmg);
   }
   // A spent move cools down; every swing is remembered (Riposte watches this).
   if (tech) {
-    world.player.armedTechnique = null;
-    world.player.techniqueCoolUntil[tech.id] = world.hour + tech.cooldownHours;
+    actorState(world, actorId).armedTechnique = null;
+    actorState(world, actorId).techniqueCoolUntil[tech.id] = world.hour + tech.cooldownHours;
   }
-  world.player.lastStrikeAt = world.hour;
+  actorState(world, actorId).lastStrikeAt = world.hour;
   // A bound beast tears at whatever its caster hunts.
   const bound = world.fauna.find(
-    (x) => x.ownerId === world.player.id && x.boundUntil && x.boundUntil > world.hour && x.id !== c.id && Math.hypot(x.x - c.x, x.z - c.z) < 3.5,
+    (x) => x.ownerId === actorState(world, actorId).id && x.boundUntil && x.boundUntil > world.hour && x.id !== c.id && Math.hypot(x.x - c.x, x.z - c.z) < 3.5,
   );
   if (bound) c.hp -= faunaPhysicalDamage(c.kind, FAUNA_META[bound.kind].dmg);
   // Teeth only answer when they can reach you — an arrow from afar draws none.
@@ -860,25 +867,25 @@ function huntNow(world: World, p: Person) {
   // already at war echoes nothing — the cadence alone owns its teeth.
   const held = c.paralyzeUntil !== undefined && c.paralyzeUntil > 0 && world.hour < c.paralyzeUntil;
   if (!held && RETALIATE_KINDS.has(c.kind) && (!bow || dist < 1.8) && c.hp > 0 && c.task !== "fight") {
-    strikePlayer(world, c, p);
+    strikePlayer(world, c, p, actorId);
     provoke(world, c);
   }
   if (bow) {
     p.facing = Math.atan2(c.x - p.x, c.z - p.z);
   }
-  tryGain(world, strikeSkill, ok, true);
-  tryGain(world, "anatomy", ok, true);
+  tryGain(world, strikeSkill, ok, true, actorId);
+  tryGain(world, "anatomy", ok, true, actorId);
   if (c.hp <= 0) {
     c.hp = 0;
     c.task = "dead";
     c.path = [];
     c.corpseUntil = world.hour + 8;
-    world.player.intent.kind = "none";
+    actorState(world, actorId).intent.kind = "none";
     completeObjective(world, "hunt");
     spawnCorpsePile(world, c);
     const found = rollKillRare(world, c.kind, Math.random);
     if (found) {
-      world.player.rares.push(found);
+      actorState(world, actorId).rares.push(found);
       return `The ${FAUNA_META[c.kind].label.toLowerCase()} falls. Something glints in the kill — ${rareName(found)}!`;
     }
     return `The ${FAUNA_META[c.kind].label.toLowerCase()} falls.`;
@@ -905,60 +912,60 @@ export function getTamingFx() {
   return tamingFx;
 }
 
-function tameNow(world: World, p: Person) {
-  const c = world.fauna.find((x) => x.id === world.player.intent.targetId);
+function tameNow(world: World, p: Person, actorId?: string) {
+  const c = world.fauna.find((x) => x.id === actorState(world, actorId).intent.targetId);
   if (!c || c.task === "dead") {
-    world.player.intent.kind = "none";
+    actorState(world, actorId).intent.kind = "none";
     return "Gone.";
   }
   const diff = FAUNA_META[c.kind].tameDiff;
-  const chance = successChance(effSkill(world, "taming"), diff);
+  const chance = successChance(effSkill(world, "taming", actorId), diff);
   const ok = Math.random() < chance;
   tamingFx = { targetId: c.id, x: c.x, z: c.z, at: world.hour, success: ok };
-  tryGain(world, "taming", ok, chance > 0.3 && chance < 0.8);
-  world.player.intent.kind = "none";
+  tryGain(world, "taming", ok, chance > 0.3 && chance < 0.8, actorId);
+  actorState(world, actorId).intent.kind = "none";
   if (!ok) {
     const held = c.paralyzeUntil !== undefined && c.paralyzeUntil > 0 && world.hour < c.paralyzeUntil;
     if (!held && TAME_RETALIATE.has(c.kind)) p.hp = Math.max(0, p.hp - 4);
     if (!held) c.task = "flee";
     return "It will not yield.";
   }
-  c.ownerId = world.player.id;
+  c.ownerId = actorState(world, actorId).id;
   c.loyalty = 40;
   c.stay = false;
   c.task = "follow";
   c.warnedLoyal = false;
-  const taken = new Set(world.fauna.filter((x) => x.ownerId === world.player.id && x.id !== c.id && x.name).map((x) => x.name!));
+  const taken = new Set(world.fauna.filter((x) => x.ownerId === actorState(world, actorId).id && x.id !== c.id && x.name).map((x) => x.name!));
   c.name = pickPetName(mulberry32(world.seed + Math.floor(world.hour * 97) + c.id.length), taken);
   completeObjective(world, "tame");
   return `The ${FAUNA_META[c.kind].label.toLowerCase()} is yours. You name it ${c.name}.`;
 }
 
-function skinNow(world: World, p: Person) {
-  const c = world.fauna.find((x) => x.id === world.player.intent.targetId);
+function skinNow(world: World, p: Person, actorId?: string) {
+  const c = world.fauna.find((x) => x.id === actorState(world, actorId).intent.targetId);
   if (!c) {
-    world.player.intent.kind = "none";
+    actorState(world, actorId).intent.kind = "none";
     return "Gone.";
   }
   const meta = FAUNA_META[c.kind];
   if (meta.hasCorpse === false) {
     emitCorpseFx(world, "skinning", c.id, c.x, c.z);
     world.fauna = world.fauna.filter((x) => x.id !== c.id);
-    world.player.intent.kind = "none";
+    actorState(world, actorId).intent.kind = "none";
     return `You dress the ${FAUNA_META[c.kind].label.toLowerCase()}, but nothing sticks to the knife.`;
   }
   const hideCount = meta.hide ?? 1;
-  world.player.pack.hide = (world.player.pack.hide ?? 0) + hideCount;
-  addResource(world.player.resources, makeResourceStackKey("hide", "hide", hideGradeFor(meta.tameDiff)), hideCount);
-  world.player.pack.meat = (world.player.pack.meat ?? 0) + (meta.meat ?? 2);
+  actorState(world, actorId).pack.hide = (actorState(world, actorId).pack.hide ?? 0) + hideCount;
+  addResource(actorState(world, actorId).resources, makeResourceStackKey("hide", "hide", hideGradeFor(meta.tameDiff)), hideCount);
+  actorState(world, actorId).pack.meat = (actorState(world, actorId).pack.meat ?? 0) + (meta.meat ?? 2);
   // Bone parts ride the same beast-tier grade ladder as hides.
   for (const part of meta.parts ?? []) {
-    addResource(world.player.resources, makeResourceStackKey(part.id, "bone", hideGradeFor(meta.tameDiff)), part.n);
+    addResource(actorState(world, actorId).resources, makeResourceStackKey(part.id, "bone", hideGradeFor(meta.tameDiff)), part.n);
   }
   emitCorpseFx(world, "skinning", c.id, c.x, c.z);
   world.fauna = world.fauna.filter((x) => x.id !== c.id);
   completeObjective(world, "skin");
-  world.player.intent.kind = "none";
+  actorState(world, actorId).intent.kind = "none";
   void p;
   return `You dress the ${FAUNA_META[c.kind].label.toLowerCase()}.`;
 }
@@ -968,7 +975,7 @@ const BOW_RANGE = 10;
 /** Legal work reach at impact: the pathBeside arrival ring plus stride slack
  *  (the herbs lane uses the same 1.8 + 0.6 margin). */
 const WORK_REACH = 2.4;
-const targetReplans = new WeakMap<World, { tick: number; targetId: string | null }>();
+const targetReplans = new WeakMap<Person, { tick: number; targetId: string | null }>();
 
 export interface CombatFx {
   kind: "melee" | "arrow";
@@ -1048,45 +1055,45 @@ function tickChips(dt: number) {
   chips = chips.filter((c) => c.age < 0.6 && c.y > -1);
 }
 
-export function tickPlayer(world: World, dt: number): string | null {
-  const p = you(world);
+export function tickPlayer(world: World, dt: number, actorId?: string): string | null {
+  const p = you(world, actorId);
   if (!p) return null;
-  const intent = world.player.intent;
+  const intent = actorState(world, actorId).intent;
   // Only an impact frame validates and plans the complete typed-inventory
   // transaction. It still runs before facing, timers, effects, random, skills,
   // logs, intent, or world state, while animation-only frames remain O(1).
   const preparedHarvest =
     (intent.kind === "chop" || intent.kind === "mine")
       && p.path.length === 0
-      && workBeatLands(world.player.workT, world.player.workT + dt)
-      ? prepareResourceHarvest(world, intent.kind === "chop" ? "tree" : "rock")
+      && workBeatLands(actorState(world, actorId).workT, actorState(world, actorId).workT + dt)
+      ? prepareResourceHarvest(world, intent.kind === "chop" ? "tree" : "rock", actorId)
       : null;
   if (inGreybarrow(Math.round(p.x), Math.round(p.z))) completeObjective(world, "barrow");
-  if (world.player.notoriety === "criminal" && world.hour > world.player.criminalUntil) world.player.notoriety = "innocent";
-  if (p.hp <= 0 && !p.ghost && !world.player.ghost) return dieAsGhost(world, p);
+  if (actorState(world, actorId).notoriety === "criminal" && world.hour > actorState(world, actorId).criminalUntil) actorState(world, actorId).notoriety = "innocent";
+  if (p.hp <= 0 && !p.ghost && !actorState(world, actorId).ghost) return dieAsGhost(world, p, actorId);
   // Venom in the blood — spider fangs and worse. An Nox cuts it short.
-  if (world.player.poisonUntil > 0 && !p.ghost) {
-    if (world.hour >= world.player.poisonUntil) {
-      world.player.poisonUntil = 0;
-      world.player.poisonTickAt = 0;
-    } else if (world.hour >= world.player.poisonTickAt) {
+  if (actorState(world, actorId).poisonUntil > 0 && !p.ghost) {
+    if (world.hour >= actorState(world, actorId).poisonUntil) {
+      actorState(world, actorId).poisonUntil = 0;
+      actorState(world, actorId).poisonTickAt = 0;
+    } else if (world.hour >= actorState(world, actorId).poisonTickAt) {
       p.hp = Math.max(0, p.hp - 1);
-      world.player.poisonTickAt = world.hour + POISON_TICK_HOURS;
-      if (p.hp <= 0 && !world.player.ghost) return dieAsGhost(world, p);
+      actorState(world, actorId).poisonTickAt = world.hour + POISON_TICK_HOURS;
+      if (p.hp <= 0 && !actorState(world, actorId).ghost) return dieAsGhost(world, p, actorId);
     }
   }
-  if (p.ghost || world.player.ghost) {
+  if (p.ghost || actorState(world, actorId).ghost) {
     p.ghost = true;
-    world.player.ghost = true;
+    actorState(world, actorId).ghost = true;
     p.hp = 0;
     // The dead keep one word: In Corp resolves even now.
     if (intent.kind !== "chop" && !(intent.kind === "cast" && intent.spell === "resurrect")) return null;
   } else {
-    tickMana(world, dt);
+    tickMana(world, dt, actorId);
   }
-  tickChips(dt);
+  if (actorId === undefined) tickChips(dt);
   if (intent.kind === "none" || intent.kind === "walk") {
-    world.player.workT = 0;
+    actorState(world, actorId).workT = 0;
     return null;
   }
   if (intent.kind === "tame" || intent.kind === "hunt") {
@@ -1098,7 +1105,7 @@ export function tickPlayer(world: World, dt: number): string | null {
       return wasHunting ? "It fled." : "Gone.";
     }
     // A bow stops at arrow-shot; anything else must close to arm's reach.
-    const reach = intent.kind === "hunt" && effectiveMain(world) === "bow" ? BOW_RANGE : 1.8;
+    const reach = intent.kind === "hunt" && inHand(world, actorId) === "bow" ? BOW_RANGE : 1.8;
     const distance = Math.hypot(p.x - c.x, p.z - c.z);
     if (distance < reach) {
       p.path = [];
@@ -1106,7 +1113,7 @@ export function tickPlayer(world: World, dt: number): string | null {
       const targetTx = Math.round(c.x);
       const targetTy = Math.round(c.z);
       const targetMoved = targetTx !== intent.tx || targetTy !== intent.ty;
-      const previousReplan = targetReplans.get(world);
+      const previousReplan = targetReplans.get(p);
       const canReplan =
         !previousReplan
         || previousReplan.targetId !== intent.targetId
@@ -1116,12 +1123,12 @@ export function tickPlayer(world: World, dt: number): string | null {
       if ((!p.path.length || targetMoved) && canReplan) {
         intent.tx = targetTx;
         intent.ty = targetTy;
-        targetReplans.set(world, { tick: world.tickCount, targetId: intent.targetId });
+        targetReplans.set(p, { tick: world.tickCount, targetId: intent.targetId });
         pathWithin(world, p, c.x, c.z, reach === BOW_RANGE ? BOW_RANGE - 0.75 : 1.5, 2500);
       }
       // A closed route must never turn into an out-of-range attack or tame.
       if (p.path.length || distance >= reach) {
-        world.player.workT = 0;
+        actorState(world, actorId).workT = 0;
         return null;
       }
     }
@@ -1142,7 +1149,7 @@ export function tickPlayer(world: World, dt: number): string | null {
         const targetTx = Math.round(c.x);
         const targetTy = Math.round(c.z);
         const targetMoved = targetTx !== intent.tx || targetTy !== intent.ty;
-        const previousReplan = targetReplans.get(world);
+        const previousReplan = targetReplans.get(p);
         const canReplan =
           !previousReplan
           || previousReplan.targetId !== intent.targetId
@@ -1150,18 +1157,18 @@ export function tickPlayer(world: World, dt: number): string | null {
         if ((!p.path.length || targetMoved) && canReplan) {
           intent.tx = targetTx;
           intent.ty = targetTy;
-          targetReplans.set(world, { tick: world.tickCount, targetId: intent.targetId });
+          targetReplans.set(p, { tick: world.tickCount, targetId: intent.targetId });
           pathWithin(world, p, c.x, c.z, range - 0.75, 2500);
         }
         if (p.path.length || distance >= range) {
-          world.player.workT = 0;
+          actorState(world, actorId).workT = 0;
           return null;
         }
       }
     } else p.path = [];
   }
   if (p.path.length) {
-    world.player.workT = 0;
+    actorState(world, actorId).workT = 0;
     return null;
   }
   if (intent.kind === "gate") {
@@ -1170,67 +1177,67 @@ export function tickPlayer(world: World, dt: number): string | null {
   }
   if (intent.kind === "fish") {
     p.facing = Math.atan2(intent.tx - p.x, intent.ty - p.z);
-    world.player.workT += dt;
-    if (world.player.workT < 3) return null;
-    return fishNow(world);
+    actorState(world, actorId).workT += dt;
+    if (actorState(world, actorId).workT < 3) return null;
+    return fishNow(world, actorId);
   }
   if (intent.kind === "chop" || intent.kind === "mine" || intent.kind === "plant" || intent.kind === "harvest" || intent.kind === "till" || intent.kind === "forest" || intent.kind === "pick" || intent.kind === "dig" || intent.kind === "fill") {
     p.facing = Math.atan2(intent.tx - p.x, intent.ty - p.z);
-    const prev = world.player.workT;
-    world.player.workT += dt;
-    const hit = workBeatLands(prev, world.player.workT);
+    const prev = actorState(world, actorId).workT;
+    actorState(world, actorId).workT += dt;
+    const hit = workBeatLands(prev, actorState(world, actorId).workT);
     if (!hit) return null;
     if (intent.kind === "pick") {
-      return pickNow(world);
+      return pickNow(world, actorId);
     }
 
     if (intent.kind === "till") {
       burstChips(world, intent.tx, intent.ty, "chop");
-      return tillNow(world);
+      return tillNow(world, actorId);
     }
     if (intent.kind === "dig") {
       burstChips(world, intent.tx, intent.ty, "mine");
-      return digNow(world);
+      return digNow(world, actorId);
     }
     if (intent.kind === "fill") {
       burstChips(world, intent.tx, intent.ty, "chop");
-      return fillNow(world);
+      return fillNow(world, actorId);
     }
     if (intent.kind === "plant") {
       burstChips(world, intent.tx, intent.ty, "chop");
-      return plantNow(world);
+      return plantNow(world, actorId);
     }
     if (intent.kind === "forest") {
       burstChips(world, intent.tx, intent.ty, "chop");
-      return plantTreeNow(world);
+      return plantTreeNow(world, actorId);
     }
     if (intent.kind === "harvest") {
       burstChips(world, intent.tx, intent.ty, "chop");
-      return harvestNow(world);
+      return harvestNow(world, actorId);
     }
     if (!preparedHarvest) throw new Error("harvest work reached commit without a validated inventory");
-    if (intent.kind === "chop") return chopNow(world, preparedHarvest);
-    return mineNow(world, preparedHarvest);
+    if (intent.kind === "chop") return chopNow(world, preparedHarvest, actorId);
+    return mineNow(world, preparedHarvest, actorId);
   }
   if (intent.kind === "cast") {
     const c = world.fauna.find((x) => x.id === intent.targetId);
     if (c) p.facing = Math.atan2(c.x - p.x, c.z - p.z);
     else if (intent.tx || intent.ty) p.facing = Math.atan2(intent.tx - p.x, intent.ty - p.z);
-    const prev = world.player.workT;
-    world.player.workT += dt;
+    const prev = actorState(world, actorId).workT;
+    actorState(world, actorId).workT += dt;
     if (prev === 0) playSfx("cast", 0.42);
-    if (world.player.workT < CAST_WINDUP) return null;
-    world.player.workT = 0;
-    return castNow(world);
+    if (actorState(world, actorId).workT < CAST_WINDUP) return null;
+    actorState(world, actorId).workT = 0;
+    return castNow(world, actorId);
   }
-  world.player.workT += dt;
-  if (world.player.workT < COMBAT_BEAT) return null;
-  world.player.workT = 0;
-  if (intent.kind === "hunt") return huntNow(world, p);
-  if (intent.kind === "tame") return tameNow(world, p);
-  if (intent.kind === "skin") return skinNow(world, p);
+  actorState(world, actorId).workT += dt;
+  if (actorState(world, actorId).workT < COMBAT_BEAT) return null;
+  actorState(world, actorId).workT = 0;
+  if (intent.kind === "hunt") return huntNow(world, p, actorId);
+  if (intent.kind === "tame") return tameNow(world, p, actorId);
+  if (intent.kind === "skin") return skinNow(world, p, actorId);
   if (intent.kind === "loot") {
-    const err = commandLoot(world, intent.targetId ?? "");
+    const err = commandLoot(world, intent.targetId ?? "", actorId);
     intent.kind = "none";
     return err;
   }

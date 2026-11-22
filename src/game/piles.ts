@@ -1,3 +1,4 @@
+import { actorState } from "./actor.ts";
 import { playSfx } from "./vale-sfx.ts";
 import { completeObjective, nid } from "./world.ts";
 import { FAUNA_META } from "./catalog.ts";
@@ -87,15 +88,17 @@ export function takeGoldFromPile(world: World, id: string) {
 export function tickPiles(world: World) {
   if (!world.piles) world.piles = [];
   world.piles = world.piles.filter((p) => world.hour < p.until);
-  if (world.player.corpseAt) {
-    const at = world.player.corpseAt;
+  for (const state of new Set([world.player, ...Object.values(world.playerStates ?? {})])) {
+    const at = state.corpseAt;
+    if (!at) continue;
     const still = world.piles.some((p) => p.source === "death" && p.tx === at.tx && p.ty === at.ty);
-    if (!still) world.player.corpseAt = null;
+    if (!still) state.corpseAt = null;
   }
 }
 
-export function takeFromPile(world: World, pileId: string, item?: ItemId) {
-  if (world.player.ghost) return "A ghost cannot lift.";
+export function takeFromPile(world: World, pileId: string, item?: ItemId, actorId?: string) {
+  const state = actorState(world, actorId);
+  if (state.ghost) return "A ghost cannot lift.";
   const pile = world.piles.find((p) => p.id === pileId);
   if (!pile) return "Nothing there.";
   const corpseSource = pile.source === "corpse" || pile.source === "death";
@@ -108,7 +111,7 @@ export function takeFromPile(world: World, pileId: string, item?: ItemId) {
     const n = pile.items[item] ?? 0;
     if (n < 1) return "Gone.";
     pile.items[item] = n - 1;
-    world.player.pack[item] = (world.player.pack[item] ?? 0) + 1;
+    state.pack[item] = (state.pack[item] ?? 0) + 1;
     pickedItem = item;
     pickedCount = 1;
     if (item === "relic") completeObjective(world, "relic");
@@ -120,7 +123,7 @@ export function takeFromPile(world: World, pileId: string, item?: ItemId) {
     for (const [k, v] of Object.entries(pile.items)) {
       if (!v) continue;
       const id = k as ItemId;
-      world.player.pack[id] = (world.player.pack[id] ?? 0) + v;
+      state.pack[id] = (state.pack[id] ?? 0) + v;
       if (id === "relic") completeObjective(world, "relic");
     }
     world.gold += pile.gold;
@@ -131,7 +134,10 @@ export function takeFromPile(world: World, pileId: string, item?: ItemId) {
   if (!left) {
     if (pile.source === "death") {
       completeObjective(world, "recover");
-      world.player.corpseAt = null;
+      // Death piles merge by tile; clear only markers tied to this emptied tile.
+      for (const owner of new Set([world.player, ...Object.values(world.playerStates ?? {})])) {
+        if (owner.corpseAt?.tx === tx && owner.corpseAt.ty === ty) owner.corpseAt = null;
+      }
     }
     world.piles = world.piles.filter((p) => p.id !== pileId);
   } else if (pile.source === "death") completeObjective(world, "recover");

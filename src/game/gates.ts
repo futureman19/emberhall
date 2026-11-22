@@ -1,3 +1,4 @@
+import { actorPerson, actorState } from "./actor.ts";
 import { STATIONS, stationById, stationNear } from "./atlas.ts";
 import { nearestWalkable } from "./pathfinding.ts";
 import { playSfx } from "./vale-sfx.ts";
@@ -14,10 +15,11 @@ export function trammelPhase(hour: number) {
   return phaseName(hour);
 }
 
-export function commandTravel(world: World, destId: string): string | null {
+export function commandTravel(world: World, destId: string, actorId?: string): string | null {
+  const actor = actorState(world, actorId);
   const st = stationById(destId);
   if (!st) return "No such ring.";
-  const p = world.people.find((x) => x.isPlayer);
+  const p = actorPerson(world, actorId);
   if (!p) return "You are not in the vale.";
   const source = stationNear(p.x, p.z, 2.5);
   const from = { x: p.x, z: p.z };
@@ -26,14 +28,14 @@ export function commandTravel(world: World, destId: string): string | null {
   p.x = dest.x;
   p.z = dest.y;
   p.path = [];
-  world.player.intent.kind = "none";
-  world.player.gateCoolUntil = world.hour + 0.05;
+  actor.intent.kind = "none";
+  actor.gateCoolUntil = world.hour + 0.05;
   revealAround(world, dest.x, dest.y, 22);
   completeObjective(world, "gate");
   playSfx("gate", 0.5);
   const companions: { id: string; x: number; z: number }[] = [];
   for (const c of world.fauna) {
-    if (c.ownerId !== world.player.id || c.stay || c.task === "dead") continue;
+    if (c.ownerId !== actor.id || c.stay || c.task === "dead") continue;
     c.x = dest.x + (Math.random() - 0.5) * 1.6;
     c.z = dest.y + (Math.random() - 0.5) * 1.6;
     c.path = [];

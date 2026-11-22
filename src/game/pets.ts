@@ -1,4 +1,5 @@
 import { FAUNA_META, SECONDS_PER_HOUR } from "./catalog.ts";
+import { actorState } from "./actor.ts";
 import type { Creature, World } from "./types.ts";
 import { log } from "./world.ts";
 import { emitCompanionFx } from "./companion-animation.ts";
@@ -20,9 +21,10 @@ export function petLabel(c: Creature): string {
 }
 
 /** Name a companion. Trimmed, 1–20 chars, letters and spaces. */
-export function commandNamePet(world: World, id: string, raw: string): string {
+export function commandNamePet(world: World, id: string, raw: string, actorId?: string): string {
+  const state = actorState(world, actorId);
   const c = world.fauna.find((x) => x.id === id);
-  if (!c || c.ownerId !== world.player.id) return "It is not yours.";
+  if (!c || c.ownerId !== state.id) return "It is not yours.";
   if (c.task === "dead") return "The dead keep their names.";
   const name = raw.trim().replace(/\s+/g, " ");
   if (!name) return "A name, then — say something.";
@@ -37,9 +39,10 @@ export function commandNamePet(world: World, id: string, raw: string): string {
 }
 
 /** Loyalty ebbs; the restless speak once; the forgotten leave. */
-export function tickPets(world: World, dt: number): void {
+export function tickPets(world: World, dt: number, actorId?: string): void {
+  const state = actorState(world, actorId);
   for (const c of world.fauna) {
-    if (c.ownerId !== world.player.id || c.task === "dead") continue;
+    if (c.ownerId !== state.id || c.task === "dead") continue;
     // Bound by words, not by bond — a summon knows no hunger.
     if (c.boundUntil && world.hour < c.boundUntil) continue;
     c.loyalty = Math.max(0, c.loyalty - LOYALTY_EBB * (dt / SECONDS_PER_HOUR));

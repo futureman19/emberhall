@@ -38,6 +38,10 @@ export function nid(world: World, prefix: string) {
   for (const records of [world.buildings, world.people, world.fauna, world.piles, world.campfires, world.herbs, world.plots, world.saplings, world.placedObjects, world.structures, world.player?.marks]) {
     for (const record of records ?? []) used.add(record.id);
   }
+  for (const state of Object.values(world.playerStates ?? {})) {
+    used.add(state.id);
+    for (const mark of state.marks ?? []) used.add(mark.id);
+  }
   let id: string;
   do {
     nidAcc += 1;

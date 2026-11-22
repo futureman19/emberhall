@@ -4,8 +4,9 @@
 // the blade's only cost is patience.
 
 import { SKILL_META } from "./catalog.ts";
-import { effSkill, you } from "./player.ts";
-import { effectiveMain } from "./rare.ts";
+import { actorPerson, actorState } from "./actor.ts";
+import { effSkill } from "./player.ts";
+import { equippedRares } from "./rare.ts";
 import type { SkillId, World } from "./types.ts";
 
 export type TechniqueWeapon = "sword" | "bow" | "knife" | "mace";
@@ -139,8 +140,9 @@ export const TECHNIQUES: Record<TechniqueId, TechniqueMeta> = {
 export const TECHNIQUE_IDS: ReadonlySet<string> = new Set(Object.keys(TECHNIQUES));
 
 /** The kit the held weapon answers to, if any. */
-export function techniqueWeaponOf(world: World): TechniqueWeapon | null {
-  const main = effectiveMain(world);
+export function techniqueWeaponOf(world: World, actorId?: string): TechniqueWeapon | null {
+  const state = actorState(world, actorId);
+  const main = equippedRares(world, actorId).find(({ slot }) => slot === "main")?.rare.base ?? state.wear.main;
   if (main === "sword") return "sword";
   if (main === "bow") return "bow";
   if (main === "knife") return "knife";
@@ -148,40 +150,42 @@ export function techniqueWeaponOf(world: World): TechniqueWeapon | null {
   return null;
 }
 
-export function techniqueUnlocked(world: World, id: TechniqueId): boolean {
+export function techniqueUnlocked(world: World, id: TechniqueId, actorId?: string): boolean {
   const meta = TECHNIQUES[id];
-  return effSkill(world, meta.skill) >= meta.minSkill;
+  return effSkill(world, meta.skill, actorId) >= meta.minSkill;
 }
 
 /** Hours until the move catches its breath; 0 when ready. */
-export function techniqueCooldownLeft(world: World, id: TechniqueId): number {
-  return Math.max(0, (world.player.techniqueCoolUntil[id] ?? 0) - world.hour);
+export function techniqueCooldownLeft(world: World, id: TechniqueId, actorId?: string): number {
+  return Math.max(0, (actorState(world, actorId).techniqueCoolUntil[id] ?? 0) - world.hour);
 }
 
 /** The armed move, validated against the held weapon; stale arms clear. */
-export function armedTechniqueFor(world: World): TechniqueMeta | null {
-  const id = world.player.armedTechnique;
+export function armedTechniqueFor(world: World, actorId?: string): TechniqueMeta | null {
+  const state = actorState(world, actorId);
+  const id = state.armedTechnique;
   if (!id) return null;
   const meta = TECHNIQUES[id];
-  if (!meta || techniqueWeaponOf(world) !== meta.weapon) {
-    world.player.armedTechnique = null;
+  if (!meta || techniqueWeaponOf(world, actorId) !== meta.weapon) {
+    state.armedTechnique = null;
     return null;
   }
   return meta;
 }
 
 /** Arm a move for the next strike — or let go of it. Returns a refusal, or null. */
-export function commandArmTechnique(world: World, id: TechniqueId): string | null {
+export function commandArmTechnique(world: World, id: TechniqueId, actorId?: string): string | null {
+  const state = actorState(world, actorId);
   const meta = TECHNIQUES[id];
   if (!meta) return "No such move.";
-  if (you(world)?.ghost) return "The dead have no techniques.";
-  if (world.player.armedTechnique === id) {
-    world.player.armedTechnique = null;
+  if (actorPerson(world, actorId)?.ghost) return "The dead have no techniques.";
+  if (state.armedTechnique === id) {
+    state.armedTechnique = null;
     return null;
   }
-  if (techniqueWeaponOf(world) !== meta.weapon) return `${meta.label} asks for a ${meta.weapon} in hand.`;
-  if (!techniqueUnlocked(world, id)) return `${meta.label} asks for ${meta.minSkill} ${SKILL_META[meta.skill].label.toLowerCase()}.`;
-  if (techniqueCooldownLeft(world, id) > 0) return `${meta.label} is still catching its breath.`;
-  world.player.armedTechnique = id;
+  if (techniqueWeaponOf(world, actorId) !== meta.weapon) return `${meta.label} asks for a ${meta.weapon} in hand.`;
+  if (!techniqueUnlocked(world, id, actorId)) return `${meta.label} asks for ${meta.minSkill} ${SKILL_META[meta.skill].label.toLowerCase()}.`;
+  if (techniqueCooldownLeft(world, id, actorId) > 0) return `${meta.label} is still catching its breath.`;
+  state.armedTechnique = id;
   return null;
 }

@@ -1,3 +1,4 @@
+import { actorPerson, actorState } from "./actor.ts";
 import { updateFurnace, tickWarden } from "./furnace-warden.ts";
 import { ensureGloomwraiths, tickGloomwraith, gloomBoltDamage, gloomTorch } from "./gloomwraith.ts";
 import { ensureEmberdeepMonsters, isEmberdeepMonster, tickEmberdeepMonster } from "./emberdeep-monsters.ts";
@@ -427,19 +428,21 @@ export function provoke(world: World, c: Creature) {
  * player-swing counter both land through here, sharing one beat (provoke
  * resets it) so a beast never bites twice in the same breath.
  */
-export function strikePlayer(world: World, c: Creature, you: Person) {
+export function strikePlayer(world: World, c: Creature, you: Person, actorId?: string) {
+  const state = actorState(world, actorId);
+  if (actorPerson(world, actorId) !== you) throw new Error("Strike target does not match actor");
   // In Sanct Hur: on hallowed ground no bite lands — the beast will not cross.
   if (sanctuaryAt(world, you.x, you.z)) return;
-  const arm = armorOf(world.player.wear) + rareMods(world).armor;
-  const ward = (world.hour < world.player.blessUntil ? 2 : 0) + (world.hour < world.player.ironwoodUntil ? IRONWOOD_WARD : 0);
-  const damage = c.kind === "gloomwraith" ? gloomBoltDamage(gloomTorch(world)) : FAUNA_META[c.kind].dmg;
+  const arm = armorOf(state.wear) + rareMods(world, actorId).armor;
+  const ward = (world.hour < state.blessUntil ? 2 : 0) + (world.hour < state.ironwoodUntil ? IRONWOOD_WARD : 0);
+  const damage = c.kind === "gloomwraith" ? gloomBoltDamage(gloomTorch(world, actorId)) : FAUNA_META[c.kind].dmg;
   let bite = Math.max(1, damage - Math.floor(arm / 2) - ward);
   if (c.curseUntil && world.hour < c.curseUntil) bite = Math.max(1, Math.floor(bite * (1 - CURSE_BITE_WEAKEN)));
   you.hp = Math.max(0, you.hp - bite);
-  world.player.lastBittenAt = world.hour; // Riposte remembers fresh teeth.
-  if (c.kind === "stonecrawl_spider" && c.hp > 0 && world.hour >= world.player.poisonUntil && Math.random() < 0.35) {
-    world.player.poisonUntil = world.hour + POISON_PLAYER_HOURS;
-    world.player.poisonTickAt = world.hour + POISON_TICK_HOURS;
+  state.lastBittenAt = world.hour; // Riposte remembers fresh teeth.
+  if (c.kind === "stonecrawl_spider" && c.hp > 0 && world.hour >= state.poisonUntil && Math.random() < 0.35) {
+    state.poisonUntil = world.hour + POISON_PLAYER_HOURS;
+    state.poisonTickAt = world.hour + POISON_TICK_HOURS;
     playSfx("spell_poison", 0.35);
     log(world, "The spider's fangs leave venom in the wound.");
   }

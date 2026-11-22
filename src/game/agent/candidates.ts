@@ -6,14 +6,12 @@
  * instead of the React snapshot. Verbs themselves come from the ONE source
  * of truth, `verbsFor` in ../context.ts — never a parallel rules copy.
  *
- * Phase 0 constraint: `verbsFor` reads the live world (`getWorld()`), so the
- * caller's world must be the live one (tests: `setWorld(world)` first). The
- * multi-body refactor parameterizes `verbsFor(world, actor, target)` and
- * lifts this constraint.
+ * Explicit worlds and actor ids are resolved directly, without live rebinding.
  *
  * Note: like the UI's own menu, `verbsFor` may record resource-node
  * discoveries on the world while labeling (see harvestVerbLabel).
  */
+import { actorPerson } from "../actor.ts";
 import { verbsFor } from "../context.ts";
 import { CROP_META } from "../farm.ts";
 import { HERB_META } from "../herbs.ts";
@@ -44,15 +42,16 @@ const GROUND_TILE_LABEL: Partial<Record<TileKind, string>> = {
   pit: "pit",
 };
 
-export function candidateTargets(world: World, radius = AGENT_MENU_RADIUS): CtxTarget[] {
-  const me = world.people.find((p) => p.isPlayer);
+export function candidateTargets(world: World, radius = AGENT_MENU_RADIUS, actorId?: string): CtxTarget[] {
+  const me = actorPerson(world, actorId);
+  if (actorId !== undefined && !me) return [];
   const px = me?.x ?? 0;
   const pz = me?.z ?? 0;
   const near = (tx: number, ty: number) => Math.hypot(tx - px, ty - pz) <= radius;
   const out: CtxTarget[] = [];
 
   for (const p of world.people) {
-    if (p.isPlayer) continue;
+    if (p.id === me?.id) continue;
     const tx = Math.round(p.x);
     const ty = Math.round(p.z);
     if (near(tx, ty)) out.push({ kind: "person", id: p.id, tx, ty, label: p.name });
@@ -100,16 +99,13 @@ export function candidateTargets(world: World, radius = AGENT_MENU_RADIUS): CtxT
 
 /** The full legal menu: every verb every nearby target affords right now. */
 export function candidatesForPlayer(world?: World, radius = AGENT_MENU_RADIUS): VerbCandidate[] {
-  const w = world ?? getWorld();
-  if (getWorld() !== w) {
-    throw new Error(
-      "candidatesForPlayer reads the live world; call setWorld(world) first " +
-        "(verbsFor is player-centric until the multi-body refactor lands).",
-    );
-  }
+  return candidatesFor(world ?? getWorld(), undefined, radius);
+}
+
+export function candidatesFor(w: World, actorId?: string, radius = AGENT_MENU_RADIUS): VerbCandidate[] {
   const out: VerbCandidate[] = [];
-  for (const target of candidateTargets(w, radius)) {
-    for (const v of verbsFor(target)) out.push({ verb: v.verb, label: v.label, target });
+  for (const target of candidateTargets(w, radius, actorId)) {
+    for (const v of verbsFor(w, actorId, target)) out.push({ verb: v.verb, label: v.label, target });
   }
   return out;
 }

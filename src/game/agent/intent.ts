@@ -9,6 +9,7 @@
  * Kind set is shared with save.ts (single export) so a kind the save loader
  * would reject can never pass harness validation either.
  */
+import { actorState } from "../actor.ts";
 import { MAP } from "../atlas.ts";
 import { INTENT_KINDS } from "../save.ts";
 import type { Intent, World } from "../types.ts";
@@ -37,10 +38,11 @@ export function validateIntent(world: World, intent: Intent): string | null {
 
 /** Validate, then hand to the sim pipeline. Returns null on accept, a
  *  one-line reason on reject. Reject NEVER mutates the world. */
-export function submitIntent(world: World, intent: Intent): string | null {
+export function submitIntent(world: World, intent: Intent, actorId?: string): string | null {
+  const actor = actorState(world, actorId);
   const err = validateIntent(world, intent);
   if (err) return err;
-  world.player.intent = {
+  actor.intent = {
     kind: intent.kind,
     tx: intent.tx,
     ty: intent.ty,

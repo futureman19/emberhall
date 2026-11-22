@@ -1,3 +1,4 @@
+import { actorPerson, actorState } from "./actor.ts";
 import type { Tile, World } from "./types.ts";
 import { walkable } from "./pathfinding.ts";
 import { revealAround } from "./world.ts";
@@ -85,8 +86,8 @@ export function stampEmberdeep(tiles: Tile[][]) {
     if (tiles[z]?.[x]) tiles[z]![x] = { h, kind: "cobble" };
   }
 }
-export function visitEmberdeep(w: World) {
-  const p = w.people.find(p => p.isPlayer);
+export function visitEmberdeep(w: World, actorId?: string) {
+  const p = actorPerson(w, actorId);
   if (!p || !inEmberdeep(p.x, p.z)) return;
   const room = emberdeepRoomAt(p.x, p.z);
   const state = emberdeepState(w);
@@ -100,21 +101,22 @@ export function clearEmberdeepRoom(w: World, id: EmberdeepRoomId) {
   if (!s.cleared.includes(id)) s.cleared.push(id);
   return true;
 }
-function transition(w: World, source: { tx: number; ty: number }, dest: { tx: number; ty: number }) {
-  const p = w.people.find(p => p.isPlayer);
+function transition(w: World, source: { tx: number; ty: number }, dest: { tx: number; ty: number }, actorId?: string) {
+  const actor = actorState(w, actorId);
+  const p = actorPerson(w, actorId);
   if (!p || Math.hypot(p.x - source.tx, p.z - source.ty) > 3) return "Walk to the stair first.";
   // Check actual arrival terrain too: a player construction must not trap travel.
   if (!walkable(w, dest.tx, dest.ty)) return "The stair is blocked.";
   p.x = dest.tx; p.z = dest.ty; p.path = []; p.story = 0; p.task = "idle";
-  w.player.intent.kind = "none";
-  w.player.workT = 0;
+  actor.intent.kind = "none";
+  actor.workT = 0;
   // Following pets use the same safe arrival; stay/dead companions remain behind.
-  for (const c of w.fauna) if (c.ownerId === w.player.id && !c.stay && c.task !== "dead") {
+  for (const c of w.fauna) if (c.ownerId === actor.id && !c.stay && c.task !== "dead") {
     c.x = dest.tx; c.z = dest.ty; c.path = [];
   }
-  visitEmberdeep(w);
+  visitEmberdeep(w, actorId);
   revealAround(w, dest.tx, dest.ty, 22);
   return null;
 }
-export function enterEmberdeep(w: World) { return transition(w, EMBERDEEP_ENTRY, EMBERDEEP_EXIT); }
-export function leaveEmberdeep(w: World) { return transition(w, EMBERDEEP_EXIT, EMBERDEEP_ENTRY); }
+export function enterEmberdeep(w: World, actorId?: string) { return transition(w, EMBERDEEP_ENTRY, EMBERDEEP_EXIT, actorId); }
+export function leaveEmberdeep(w: World, actorId?: string) { return transition(w, EMBERDEEP_EXIT, EMBERDEEP_ENTRY, actorId); }

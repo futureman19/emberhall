@@ -374,13 +374,14 @@ export function rareMods(world: World, actorId?: string): RareMods {
 }
 
 /** The effective main-hand item id — a rare's base when a rare is held. */
-export function effectiveMain(world: World): ItemId | null {
-  const uid = world.player.wearRare.main;
+export function effectiveMain(world: World, actorId?: string): ItemId | null {
+  const state = actorState(world, actorId);
+  const uid = state.wearRare.main;
   if (uid) {
-    const rare = world.player.rares.find((r) => r.uid === uid);
+    const rare = state.rares.find((r) => r.uid === uid);
     if (rare) return rare.base;
   }
-  return world.player.wear.main ?? null;
+  return state.wear.main ?? null;
 }
 
 /** Base weapon damage — the hunt table, extracted so rares inherit their base's bite. */
