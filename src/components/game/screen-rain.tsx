@@ -1,4 +1,5 @@
 import { inGreybarrow } from "@/game/atlas";
+import { inEmberdeep } from "@/game/emberdeep";
 import { useGame } from "@/game/store";
 import { WEATHER_META } from "@/game/weather";
 
@@ -15,7 +16,7 @@ export function ScreenRain() {
   const z = useGame((state) => state.snap.youZ);
   const target = WEATHER_META[kind].rain;
   const cover = Math.max(0, Math.min(1, (cloud - 0.55) / 0.4));
-  const underground = inGreybarrow(Math.round(x), Math.round(z));
+  const underground = inGreybarrow(Math.round(x), Math.round(z)) || inEmberdeep(x, z);
   const rain = phase === "playing" && !underground ? target * cover : 0;
   const active = rain > 0.03;
 

@@ -65993,13 +65993,13 @@
       "canonicalId": "src/components/game/screen-rain.tsx#ScreenRain",
       "family": "renderer",
       "catalogSources": [
-        "src/components/game/screen-rain.tsx:10"
+        "src/components/game/screen-rain.tsx:11"
       ],
       "sourceNames": [
         "ScreenRain"
       ],
       "rendererLocations": [
-        "src/components/game/screen-rain.tsx:10"
+        "src/components/game/screen-rain.tsx:11"
       ],
       "rendererMapping": "direct AST declaration/name",
       "surfaces": [
@@ -283545,7 +283545,7 @@
         "src/components/game/hud.tsx:1",
         "src/components/game/lighting.tsx:1",
         "src/components/game/screen-rain.tsx:1",
-        "src/components/game/screen-rain.tsx:3",
+        "src/components/game/screen-rain.tsx:4",
         "src/components/game/sky.tsx:1",
         "src/components/game/weather-fx.tsx:1"
       ],
@@ -283608,7 +283608,7 @@
         "src/components/game/hud.tsx:1",
         "src/components/game/lighting.tsx:1",
         "src/components/game/screen-rain.tsx:1",
-        "src/components/game/screen-rain.tsx:3",
+        "src/components/game/screen-rain.tsx:4",
         "src/components/game/sky.tsx:1",
         "src/components/game/weather-fx.tsx:1"
       ],
@@ -283671,7 +283671,7 @@
         "src/components/game/hud.tsx:1",
         "src/components/game/lighting.tsx:1",
         "src/components/game/screen-rain.tsx:1",
-        "src/components/game/screen-rain.tsx:3",
+        "src/components/game/screen-rain.tsx:4",
         "src/components/game/sky.tsx:1",
         "src/components/game/weather-fx.tsx:1"
       ],
@@ -283734,7 +283734,7 @@
         "src/components/game/hud.tsx:1",
         "src/components/game/lighting.tsx:1",
         "src/components/game/screen-rain.tsx:1",
-        "src/components/game/screen-rain.tsx:3",
+        "src/components/game/screen-rain.tsx:4",
         "src/components/game/sky.tsx:1",
         "src/components/game/weather-fx.tsx:1"
       ],
@@ -283797,7 +283797,7 @@
         "src/components/game/hud.tsx:1",
         "src/components/game/lighting.tsx:1",
         "src/components/game/screen-rain.tsx:1",
-        "src/components/game/screen-rain.tsx:3",
+        "src/components/game/screen-rain.tsx:4",
         "src/components/game/sky.tsx:1",
         "src/components/game/weather-fx.tsx:1"
       ],
