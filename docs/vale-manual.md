@@ -27,7 +27,7 @@ through what the game offers you; never invent mechanics, items, skills, or plac
 
 - You start with 40 health, 40 max health, hunger 80, energy 80, and 8–12 in each of
   strength, intelligence, dexterity. Pocket gold starts at 80 (`world.gold`).
-- Hunger falls about 0.55 per vale hour; energy about 0.7. Eating restores hunger
+- Hunger falls about 3.2 per vale hour; energy about 2.4. Eating restores hunger
   (cooked food fills far more than raw: `cooked_meat` 40, `cooked_fish` 38, `bread` 32,
   `stew` 52, `trail_rations` 60, raw `meat` only 14). Hunger and energy are tracked
   meters; the vale does not yet kill you for ignoring them, but a good mind keeps the
@@ -55,7 +55,7 @@ through what the game offers you; never invent mechanics, items, skills, or plac
 
 ## Time, night, and weather
 
-- One vale hour is 48 real seconds; a full day is about 19 minutes. The clock and
+- One vale hour is 36 real seconds; a full day is about 14.4 minutes. The clock and
   moon phase are in every observation.
 - Night is 20:00–05:00. Night hunters — wolves, wargs, lynx, trolls, orcs, the
   undead of the ruins, drakes and worse — turn aggressive and strike at you within
@@ -80,7 +80,7 @@ of your ability. The 19 live skills:
 - **Mining** (`mining`) — work rock with a `pick` for `ore`; also trains when you dig dirt.
 - **Anatomy** (`anatomy`) — study bodies in combat: +floor(skill/20) melee and bow damage, seeded crit chance up to 20% at 100, and stronger bandages.
 - **Healing** (`healing`) — wrap `bandage` on yourself; trains on wraps.
-- **Cooking** (`cooking`) — cook `meat`/`raw_fish` at a fire; also governs eating.
+- **Cooking** (`cooking`) — cook `meat`/`raw_fish` at a fire. Eating itself needs no skill.
 - **Blacksmithing** (`smithing`) — smelt `ore` to `ingot` and forge gear at a forge.
 - **Carpentry** (`carpentry`) — saw `log` to `board` and craft wood gear, deeds, and kit pieces at a bench.
 - **Animal Taming** (`taming`) — tame wild beasts; each species has its own difficulty.
@@ -91,9 +91,9 @@ of your ability. The 19 live skills:
 - **Archery** (`archery`) — shoot a `bow` with `arrows`; trains on hits.
 - **Alchemy** (`alchemy`) — brew field recipes: `garlic` + `ginseng` → `potion_heal`, `silk` + `ash` → `potion_night`.
 - **Tracking** (`tracking`) — read the dirt for the nearest wild beast (and, at 40+, people); range grows with skill.
-- **Fencing** (`fencing`) — thrust with spears and daggers; a live melee school of its own.
+- **Fencing** (`fencing`) — the knife's school; a live melee school of its own. Spears and daggers train `swords`, not fencing.
 - **Mace Fighting** (`mace`) — crush with clubs, maces, and hammers; a live melee school of its own.
-- **Tailoring** (`tailoring`) — cut `hide` to `leather` and sew cloth into garb with a `knife`.
+- **Tailoring** (`tailoring`) — cut `hide` to `leather` and sew cloth into garb at a loom (raise one from Hold → Work), blade in hand.
 
 ### Book-only skills
 
@@ -212,8 +212,8 @@ UI. As an agent, cast only what the menu offers.
   (the pristine grade displays as hardened). Ghostwood needs `lumberjack` 80 to
   fell and `forestry` 80 to plant.
 - Stations: the forge smelts and smiths, the fire cooks, the bench saws and
-  carpenters. Field crafts need no station: `alchemy` brews from reagents anywhere,
-  `tailoring` cuts and sews with a `knife`.
+  carpenters. Field crafts need no station: `alchemy` brews from reagents anywhere.
+  `tailoring` needs a loom station.
 - Farming: `till` dirt into beds (40 beds is the cap), sow `cabbage_seed`,
   `wheat_seed`, or `garlic_seed`, wait the grow hours (cabbage 0.75, wheat 1.1,
   garlic 1.55), then `harvest`. Herb patches are wild and picked, not planted.
@@ -256,7 +256,7 @@ UI. As an agent, cast only what the menu offers.
 ## A good day
 
 Wake fed. Check the verb menu before every act. Work at the edge of your skill
-(30–80% success trains fastest). Bank gold and spare goods before risk. Eat cooked
+(each skill has its own useful band — crafting 35–85%, magery 45–75%, taming 30–80% success; outside the band nothing trains). Bank gold and spare goods before risk. Eat cooked
 food. Be inside walls or at a fire before 20:00. When you die, walk ghost-straight
 to a healer, then back to your corpse. Journal what you did and what you learned,
 in your own voice, one or two lines at a time.
