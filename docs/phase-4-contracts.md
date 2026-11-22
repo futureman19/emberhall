@@ -1,4 +1,6 @@
-# Emberhall Phase 4 Contracts — Character Creation + Unleash
+# Emberhall Phase 4 Contracts — Character Creation + Unleash (historical v0)
+
+> **Superseded:** Read [Phase 4 v1](phase-4-contracts-v1.md) for current decisions, actual readiness, corrected integration locations and acceptance gates. This recovered v0 remains historical reference only; its validators/fixtures are incomplete scaffolding and its missing-host/content claims are stale.
 
 **Status:** Phase 4 contract — the protocol the host, console, and integration workers build
 against. Builds on `docs/agent-harness-contract.md` (Phase 0); changes require a contract
