@@ -32,7 +32,7 @@
  * This script never edits src/**; a shard defect is reported, not patched.
  */
 import { spawn, execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { appendFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -104,7 +104,9 @@ async function loadFixture(seed) {
 }
 
 function tileAt(fixture, tx, ty) {
-  return fixture.world.tiles[ty * fixture.world.w + tx];
+  // World.tiles is Tile[][] (rows indexed by ty) — the same access walkable()
+  // uses. A flat ty*w+tx index reads undefined and rejects every candidate.
+  return fixture.world.tiles[ty]?.[tx];
 }
 
 function pickWalkDest(fixture, from, avoid) {
@@ -139,8 +141,10 @@ function pickTree(fixture, bodies) {
         const tx = SPAWN.tx + dx;
         const ty = SPAWN.ty + dy;
         if (tileAt(fixture, tx, ty)?.kind !== "tree") continue;
+        // discovered:false mirrors the shard's fresh world (no prior node
+        // identification); skill 14 still clears oak's identify minimum 0.
         const assessment = assessResourceHarvest({
-          seed, tx, ty, nodeKind: "tree", effectiveSkill: 14, discovered: true, toolTier,
+          seed, tx, ty, nodeKind: "tree", effectiveSkill: 14, discovered: false, toolTier,
         });
         if (assessment.status !== "ready") continue;
         const stands = [];
@@ -232,28 +236,43 @@ class ProofClient {
     });
   }
 
-  /** Exact physical new log lines: suffix-diff the sliding 20-entry tail. */
+  /** Exact physical new log lines, prefix-diffed against the previous tail.
+   *  Wire contract (src/game/world.ts log() + agent/observe.ts): world.log
+   *  is NEWEST-FIRST (unshift, capped at 48) and logTail = log.slice(-20).
+   *  While the log holds <= 20 entries that is the whole log, newest first,
+   *  so new lines are PREPENDED — a suffix-diff would misread every change
+   *  as "all lines are new" and resurrect old lines as phantom events.
+   *  Find the smallest k whose leading overlap matches prev; the k leading
+   *  entries are the physical new lines (reversed to chronological order).
+   *  Once the log exceeds 20 entries the window holds the OLDEST 20 and
+   *  only sheds stale entries (k = 0) until a line ages into it; the same
+   *  prefix-diff stays correct there too. */
   pumpLog(observation) {
     const tail = observation.logTail ?? [];
     const prev = this.prevTail ?? [];
     this.prevTail = tail;
-    let shift = prev.length;
-    for (let s = 0; s <= prev.length; s += 1) {
-      const overlap = prev.length - s;
-      if (overlap > tail.length) continue;
+    let k = tail.length;
+    for (let s = 0; s <= tail.length; s += 1) {
+      const overlap = tail.length - s;
+      if (overlap > prev.length) continue;
       let match = true;
       for (let i = 0; i < overlap; i += 1) {
-        if (prev[s + i] !== tail[i]) { match = false; break; }
+        if (tail[s + i] !== prev[i]) { match = false; break; }
       }
-      if (match) { shift = s; break; }
+      if (match) { k = s; break; }
     }
-    const fresh = tail.slice(prev.length - shift);
+    const fresh = tail.slice(0, k).reverse();
+    if (process.env.PROOF_DEBUG_PUMP) {
+      try { appendFileSync(process.env.PROOF_DEBUG_PUMP, JSON.stringify({ name: this.name, tick: observation.tick, n: tail.length, tail, fresh }) + "\n"); } catch { /* debug only */ }
+    }
     if (fresh.length > 0 && this.onEvents) this.onEvents(this, fresh, observation.tick);
   }
 
   sendIntent(intent) {
     this.seq += 1;
-    this.ws.send(JSON.stringify({ type: "intent", seq: this.seq, intent }));
+    // intentShape (src/server/ws.ts) requires targetId and spell to be
+    // explicitly present; omitted keys fail the schema and close the socket.
+    this.ws.send(JSON.stringify({ type: "intent", seq: this.seq, intent: { targetId: null, spell: null, ...intent } }));
     return this.seq;
   }
 
@@ -395,7 +414,9 @@ class ShardProcess {
 const OUTCOME_KINDS = new Set(["felled", "glance", "no_tree", "too_far", "identify"]);
 
 function classify(text) {
-  if (/^Recovered (a|an|\d+) .*logs?\.$/.test(text)) return "felled";
+  // A skill gain may append " Lumberjacking +0.3." after the yield sentence,
+  // so match the yield prefix without anchoring the end of the line.
+  if (/^Recovered (a|an|\d+) .*logs?\./.test(text)) return "felled";
   if (/glances/.test(text)) return "glance";
   if (text === "No tree.") return "no_tree";
   if (text === "Too far.") return "too_far";
@@ -416,9 +437,11 @@ function makeEventUnion() {
     push(client, lines, tick) {
       for (const text of lines) {
         const kind = classify(text);
-        // The same global line reaches both feeds within a tick or two;
-        // distinct identical lines (sequential probes) are ticks apart.
-        const existing = events.find((e) => e.text === text && Math.abs(e.tick - tick) <= 3);
+        // Cross-client dedup only: the same global line reaches both feeds
+        // within a tick or two. Same-client repeats inside the window are
+        // DISTINCT beats (one obs frame can span >=2 beats under load) —
+        // merging them hides events from cursor-based waits (probe starvation).
+        const existing = events.find((e) => e.text === text && Math.abs(e.tick - tick) <= 3 && !e.clients.includes(client.name));
         if (existing) {
           if (!existing.clients.includes(client.name)) existing.clients.push(client.name);
           existing.tick = Math.min(existing.tick, tick);
@@ -650,13 +673,15 @@ function readSave(ctx) {
 }
 
 function saveLogTotal(save, resourceId) {
+  // ResourceInventory is {stacks: {<resourceId:form:grade>: count}} — plain
+  // numeric counts (src/game/inventory/resources.ts addResource), not objects.
   let total = 0;
   const stacks = [];
   for (const state of Object.values(save.playerStates ?? {})) {
-    for (const [key, stack] of Object.entries(state.resources ?? {})) {
+    for (const [key, count] of Object.entries(state.resources?.stacks ?? {})) {
       if (key.startsWith(`${resourceId}:log:`)) {
-        total += stack.quantity ?? 0;
-        stacks.push({ key, quantity: stack.quantity });
+        total += count ?? 0;
+        stacks.push({ key, quantity: count });
       }
     }
   }
