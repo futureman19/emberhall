@@ -118,6 +118,7 @@ export function createShard(config: ShardConfig = shardConfig(), options: {
   let last = now();
   let stopped = false;
   let ticksSinceSave = 0;
+  const tickListeners = new Set<() => void>();
   const known = (id: string) => characters.some(c => c.characterId === id);
   function save() {
     atomicWrite(savePath, encodeSave(world));
@@ -134,8 +135,20 @@ export function createShard(config: ShardConfig = shardConfig(), options: {
     for (const item of pending) submitIntent(world, item.intent, item.characterId);
     tickWorld(world, clampElapsed(realDt));
     if (++ticksSinceSave >= SAVE_EVERY_TICKS) save();
+    for (const listener of tickListeners) listener();
   }
   return {
+    status: () => ({ tick: world.tickCount, characters: characters.length }),
+    onTick(listener: () => void) {
+      tickListeners.add(listener);
+      return () => { tickListeners.delete(listener); };
+    },
+    disconnect(characterId: string) {
+      if (!known(characterId)) return;
+      queue = queue.filter(item => item.characterId !== characterId);
+      submitIntent(world, { kind: "none", tx: 0, ty: 0, targetId: null, spell: null }, characterId);
+      world.playerStates![characterId].workT = 0;
+    },
     resolveKey(apiKey: string): string | null { return characters.find(c => c.key === apiKey)?.characterId ?? null; },
     enqueueIntent(characterId: string, intent: Intent): string | null {
       if (stopped) return "Shard is stopped";

@@ -1,8 +1,9 @@
-# Shard core (P2-A)
+# Shard host (P2-A + P2-B)
 
 Run locally with `node --experimental-strip-types src/server/main.ts`.
-No HTTP or WebSocket listener is included; `PORT` is reserved for the transport card.
-No browser globals or client imports are required by these modules.
+HTTP and WebSocket share `PORT`, bound on `0.0.0.0` (default 8080).
+`GET /healthz` returns `{ok:true,tick,characters,uptimeSec}`.
+No browser globals are required by these modules.
 
 Environment only (no `.env`):
 
@@ -52,11 +53,35 @@ Hydration mirrors `live.ts`'s `withFauna`, with parity coverage, without binding
 singleton or enabling god mode. `decodeSave` is the same decode/migration path as
 `loadSave`, minus browser storage. No parallel save schema is introduced.
 
+## WebSocket protocol
+
+Send a JSON text `{type:"hello",apiKey,client?}` within five seconds. A valid key
+gets `{type:"welcome",characterId,name,tick,observation}`. Then send
+`{type:"intent",seq,intent:{kind,tx,ty,targetId,spell}}`; receive exactly one
+`{type:"ack",seq,ok,reason?}` for queue admission. A well-shaped but invalid
+intent gets a rejected ack; malformed JSON/schema gets `{type:"error",reason}`
+and closes. Binary messages are rejected. Client bodyId/characterId fields,
+including nested intent fields, never influence binding.
+
+Each authoritative tick notifies transport (no polling). It sends
+`{type:"obs",observation}` only when that character's hash differs. A duplicate
+key closes the old socket with code 4000 / `replaced`; old-session cleanup cannot
+clear the replacement's orders. Disconnect clears queued orders, intent and path,
+but retains the body. Authenticated transport errors also clear its orders.
+Payloads are capped at 64 KiB and slow peers with >2 MiB buffered are disconnected.
+Use a TLS terminator for remote use; this listener alone is plain HTTP/WS.
+
+`createTransport(shard).listen(0, "127.0.0.1")` supports ephemeral test ports;
+`runMain({...shardConfig(env),port:0})` returns `ready: Promise<number>` and
+`shutdown(): Promise<void>` for child harnesses. Environment PORT retains its
+existing 1–65535 validation. Shutdown closes sockets before final persistence.
+
 ## Existing integration boundaries
 
-- The current harness assigns intent slots but does not plan a walk path. Remote
-  walk acceptance needs an approved dispatch/path-planning seam before P2-B can
-  pass its movement proof; do not bypass the intent boundary in transport.
+- Approved harness dispatch now routes walk through actor-scoped `commandWalk`
+  path planning before the sim moves it; transport never writes positions.
+  Other work verbs retain the original intent-only behavior: walk within reach
+  before issuing harvest/work. Ack is not a promise that routing/work succeeds.
 - `hashObservation` includes tick, so it normally changes every active tick.
 - Existing simulation randomness and retained solo-authority systems are not
   redesigned here. This is not an economic replay, chain settlement, or MMO-scale
