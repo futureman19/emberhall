@@ -697,9 +697,27 @@ async function stepRestart(ctx, step) {
   step.inputs.preRestart = pre;
 
   if (ctx.remote) {
-    step.notes.push("remote mode: the shard process cannot be signalled; step 5 verifies disconnect/reconnect persistence instead of SIGTERM/reboot.");
     for (const client of ctx.clients) await client.close();
     ctx.clients = [];
+    if (ctx.cfg.restartRemote) {
+      const { save, evidence } = await ctx.cfg.restartRemote();
+      step.inputs.restart = evidence;
+      const loot = saveLogTotal(save, ctx.tree.resourceId);
+      ctx.saveLogTotal = loot.total;
+      check(step, "remote durable resources total ONE log", loot.total === 1, 1, loot);
+      const scar = save.scars?.[`${ctx.tree.tx},${ctx.tree.ty}`];
+      check(step, "remote durable tree scar retained", scar?.kind === "dirt", "dirt", scar);
+      for (const [name, before] of Object.entries(pre)) {
+        const person = save.people.find(p => p.id === before.id);
+        check(step, `${name} durable position retained`, person && Math.abs(person.x - before.x) < 1e-6 && Math.abs(person.z - before.z) < 1e-6,
+          { x: before.x, z: before.z }, person ? { x: person.x, z: person.z } : null);
+        const pack = save.playerStates?.[before.id]?.pack;
+        check(step, `${name} durable pack retained`, JSON.stringify(pack) === JSON.stringify(before.pack), before.pack, pack);
+      }
+      step.notes.push("Actual remote machine restart and persisted save inspection performed by the operator adapter.");
+    } else {
+      step.notes.push("Reconnect only: NOT a process-restart proof. Use the deployment adapter for the locked gate.");
+    }
     for (const pair of ctx.keys) {
       const client = new ProofClient(pair.name, pair.key, ctx.cfg.url);
       client.onEvents = (c, lines, tick) => ctx.union.push(c, lines, tick);
@@ -795,9 +813,10 @@ export async function runProof(options = {}) {
     httpBase: options.httpBase ?? null,
     quiet: options.quiet ?? false,
     evidencePath: options.evidencePath ?? DEFAULT_EVIDENCE,
+    restartRemote: options.restartRemote,
   };
   const seed = options.seed ?? DEFAULT_SEED;
-  const keysSpec = options.keys ?? DEFAULT_KEYS;
+  const keysSpec = options.keys ?? process.env.EMBERHALL_KEYS ?? DEFAULT_KEYS;
   const keys = parseKeys(keysSpec);
   const remote = Boolean(cfg.url);
   if (remote && !cfg.httpBase) cfg.httpBase = cfg.url.replace(/^ws/, "http").replace(/\/+$/, "");
@@ -867,7 +886,7 @@ export async function runProof(options = {}) {
       dataDir: ctx.dataDir,
       seed,
       keyNames: keys.map((k) => k.name),
-      keysSpec,
+      // Credential values must never enter evidence.
       url: cfg.url,
       httpBase: cfg.httpBase,
       tickMs: 100,

@@ -21,4 +21,6 @@ test("P2-C locked two-client proof against a local shard", { timeout: 300_000 },
   assert.equal(evidence.exactlyOnce.felledCount, 1, "exactly one felling transition across both feeds");
   assert.equal(evidence.exactlyOnce.saveLogTotal, 1, "persisted resources hold exactly one tree's logs");
   assert.equal(evidence.protocol.violations.length, 0, "pinned wire protocol respected");
+  assert.equal(Object.hasOwn(evidence.config, "keysSpec"), false, "evidence never stores credentials");
+  assert.equal(JSON.stringify(evidence).includes("proof-kett"), false, "key values stay out of evidence");
 });
