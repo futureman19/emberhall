@@ -195,16 +195,16 @@ class AgentClient {
     const it = { kind, tx: valid ? Math.round(tx) : tx, ty: valid ? Math.round(ty) : ty, targetId, spell };
     const ack = await this.send({ type: "intent", intent: it });
     this.counts.intents++; this.actionCounts[kind] = (this.actionCounts[kind] || 0) + 1;
-    if (valid) { ack.ok ? this.counts.validAccepted++ : this.counts.validRejected++; }
-    else { this.counts.invalidSent++; ack.ok ? this.counts.invalidAccepted++ : this.counts.invalidRejected++; }
+    if (valid) { this.counts[ack.ok ? "validAccepted" : "validRejected"]++; }
+    else { this.counts.invalidSent++; this.counts[ack.ok ? "invalidAccepted" : "invalidRejected"]++; }
     this.logAction("intent", kind, it, ack); return ack;
   }
   async verb(verb, extra = {}, { valid = true } = {}) {
     const req = { verb, item: extra.item ?? null, n: extra.n ?? null, recipeId: extra.recipeId ?? null };
     const ack = await this.send({ type: "verb", verb: req });
     this.counts.verbs++; this.actionCounts[verb] = (this.actionCounts[verb] || 0) + 1;
-    if (valid) { ack.ok ? this.counts.validAccepted++ : this.counts.validRejected++; }
-    else { this.counts.invalidSent++; ack.ok ? this.counts.invalidAccepted++ : this.counts.invalidRejected++; }
+    if (valid) { this.counts[ack.ok ? "validAccepted" : "validRejected"]++; }
+    else { this.counts.invalidSent++; this.counts[ack.ok ? "invalidAccepted" : "invalidRejected"]++; }
     if (verb === "equip" && ack.ok) this.equipped = extra.item;
     this.logAction("verb", verb, req, ack); return ack;
   }
@@ -473,7 +473,6 @@ async function finish() {
 
   const authority = {
     validAccepted: agents.reduce((a, x) => a + x.counts.validAccepted, 0),
-    validRejected: agents.reduce((a, x) => a + x.counts.validRejected, 0),
     validRejected: agents.reduce((a, x) => a + x.counts.validRejected, 0),
     invalidSent: agents.reduce((a, x) => a + x.counts.invalidSent, 0),
     invalidRejected: agents.reduce((a, x) => a + x.counts.invalidRejected, 0),

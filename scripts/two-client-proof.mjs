@@ -733,7 +733,7 @@ async function stepRestart(ctx, step) {
       loot.total === 1, "sum of quantity over oak:log:* stacks == 1", loot);
 
     // Reboot on the SAME data dir; the registry must restore identities.
-    const bootLinesBefore = ctx.shard.stdoutLines.length;
+    const _bootLinesBefore = ctx.shard.stdoutLines.length;
     ctx.shard = new ShardProcess({ dataDir: ctx.dataDir, seed: ctx.seed, keysSpec: ctx.keysSpec, port: ctx.cfg.port });
     ctx.health = await ctx.shard.start();
     ctx.port = ctx.shard.port;
