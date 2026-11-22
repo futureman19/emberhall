@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "url": "http://127.0.0.1:8080/",
+  "url": "http://127.0.0.1:5517",
   "cases": [
     {
       "name": "mobile-default",
@@ -20,8 +20,8 @@
         "height": 100
       },
       "corner": {
-        "x": 236,
-        "y": 782,
+        "x": 232,
+        "y": 120,
         "width": 146,
         "height": 54
       },
@@ -95,8 +95,8 @@
         "height": 100
       },
       "corner": {
-        "x": 236,
-        "y": 670,
+        "x": 232,
+        "y": 120,
         "width": 146,
         "height": 54
       },
@@ -170,8 +170,8 @@
         "height": 100
       },
       "corner": {
-        "x": 236,
-        "y": 670,
+        "x": 232,
+        "y": 120,
         "width": 146,
         "height": 54
       },
@@ -235,8 +235,8 @@
         "height": 100
       },
       "corner": {
-        "x": 236,
-        "y": 670,
+        "x": 232,
+        "y": 120,
         "width": 146,
         "height": 54
       },
@@ -431,7 +431,7 @@
       "vitals": {
         "x": 12,
         "y": 12,
-        "width": 171.40625,
+        "width": 166.8125,
         "height": 78
       },
       "orbHealth": {
@@ -511,7 +511,7 @@
       "vitals": {
         "x": 12,
         "y": 12,
-        "width": 171.40625,
+        "width": 166.8125,
         "height": 78
       },
       "orbHealth": null,
@@ -684,7 +684,7 @@
       "vitals": {
         "x": 12,
         "y": 12,
-        "width": 171.40625,
+        "width": 166.8125,
         "height": 78
       },
       "orbHealth": {

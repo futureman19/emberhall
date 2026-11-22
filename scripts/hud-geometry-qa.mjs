@@ -9,7 +9,7 @@ import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 import { createWorld } from '../src/game/world.ts';
 import { encodeSave, SAVE_KEY } from '../src/game/save.ts';
-import { EMBERDEEP_ENTRY, EMBERDEEP_EXIT, EMBERDEEP_ROOMS } from '../src/game/emberdeep.ts';
+import { EMBERDEEP_ENTRY, EMBERDEEP_ROOMS } from '../src/game/emberdeep.ts';
 import { COURT } from '../src/game/atlas.ts';
 import { HOTBAR_KEY } from '../src/components/game/chrome/hotbar-dock.ts';
 import { MINIMAP_DOCK_KEY } from '../src/components/game/chrome/minimap-dock.ts';
@@ -131,7 +131,7 @@ function analyze(c) {
     if (o) findings.push({ kind: 'aabb-overlap', a: `technique-chip-${i}`, b: 'corner-cluster', ...o });
     if (s.hit && s.hit.testid !== 'technique-bar') findings.push({ kind: 'hit-stolen', target: `technique-chip-${i}`, aria: s.aria, owner: s.hit });
   });
-  for (const [name, r, h] of [['orb-health', c.orbHealth, c.orbHealthHit], ['orb-mana', c.orbMana, c.orbManaHit]]) {
+  for (const [name, _r, h] of [['orb-health', c.orbHealth, c.orbHealthHit], ['orb-mana', c.orbMana, c.orbManaHit]]) {
     if (h && h.testid !== name) findings.push({ kind: 'hit-stolen', target: name, owner: h });
   }
   if (c.travelButton && c.travelButton.hit && c.travelButton.hit.testid !== 'emberdeep-travel') {
