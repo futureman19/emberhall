@@ -1,6 +1,7 @@
+import { actorState, actorPerson as actorBody } from "./actor.ts";
 import { countTag, hasTag, ITEM_META, tagConsumeOrder } from "./catalog.ts";
 import { litFireNear, placeCampfire } from "./campfire.ts";
-import { effSkill, you } from "./player.ts";
+import { effSkill } from "./player.ts";
 import {
   createCraftedItem,
   createWorkmanshipItem,
@@ -41,6 +42,8 @@ export type {
   ExactCraftTransactionResult,
 } from "./crafting/transaction.ts";
 
+
+
 export type Station = "bench" | "forge" | "fire" | "loom" | "alchemy";
 
 export interface Recipe {
@@ -80,17 +83,17 @@ export function getCraftFx() {
   return craftFx;
 }
 
-function emitCraftFx(world: World, rec: Recipe, success: boolean) {
+function emitCraftFx(world: World, rec: Recipe, success: boolean, actorId?: string) {
   const kind: CraftAnimationKind | null =
     rec.skill === "smithing" ? "smithing" : rec.skill === "carpentry" || rec.skill === "tailoring" ? "carpentry" : rec.skill === "cooking" || rec.skill === "alchemy" ? "cooking" : null;
-  const player = you(world);
+  const player = actorBody(world, actorId);
   if (!kind || !player) return;
   craftFx = { kind, recipeId: rec.id, success, x: player.x, z: player.z, at: world.hour };
 }
 
 /** Held item carries the blade tag (the UO "bladed" script check). */
-export function bladeInHand(world: World): boolean {
-  const held = world.player.wear.main;
+export function bladeInHand(world: World, actorId?: string): boolean {
+  const held = actorState(world, actorId).wear.main;
   return Boolean(held && hasTag(held, "blade"));
 }
 
@@ -170,8 +173,8 @@ export const RECIPES: Recipe[] = [
   { id: "stew_pot", station: "fire", skill: "cooking", diff: 22, label: "Venison stew", hint: "A cabbage and a cut of meat, simmered.", need: { cabbage: 1, meat: 1 }, give: { stew: 1 }, sfx: "fire" },
 ];
 
-function dist(world: World, tx: number, ty: number) {
-  const p = you(world);
+function dist(world: World, tx: number, ty: number, actorId?: string) {
+  const p = actorBody(world, actorId);
   if (!p) return Infinity;
   return Math.hypot(p.x - tx, p.z - ty);
 }
@@ -203,17 +206,17 @@ export function buildingAt(world: World, tx: number, ty: number, reach = 2.8) {
   return best;
 }
 
-export function stationsHere(world: World): Station[] {
-  const p = you(world);
+export function stationsHere(world: World, actorId?: string): Station[] {
+  const p = actorBody(world, actorId);
   if (!p) return [];
   const out = new Set<Station>();
   for (const b of world.buildings) {
     const st = stationOf(b.kind);
     if (!st) continue;
-    if (dist(world, b.tx, b.ty) <= craftReach(b.kind)) out.add(st);
+    if (dist(world, b.tx, b.ty, actorId) <= craftReach(b.kind)) out.add(st);
   }
-  if (litFireNear(world)) out.add("fire");
-  for (const st of stationsFromPieces(world)) out.add(st);
+  if (litFireNear(world, actorId)) out.add("fire");
+  for (const st of stationsFromPieces(world, actorId)) out.add(st);
   return [...out];
 }
 
@@ -245,36 +248,36 @@ function genericCraftItem(id: ItemId): GenericCraftResourceItem | null {
 }
 
 /** Shared by recipe availability, debits' preflight, and the ingredient display. */
-export function availableCraftIngredient(world: World, id: ItemId): number {
+export function availableCraftIngredient(world: World, id: ItemId, actorId?: string): number {
   const generic = genericCraftItem(id);
-  return generic ? countGenericCraftResource(world.player, generic) : (world.player.pack[id] ?? 0);
+  return generic ? countGenericCraftResource(actorState(world, actorId), generic) : (actorState(world, actorId).pack[id] ?? 0);
 }
 
 /** Campfires accept harvested logs as well as legacy wood items. */
-function availableTag(world: World, rec: Recipe, tag: ResourceTag, self: Set<string>): number {
-  const packed = countTag(world.player.pack, tag, self);
+function availableTag(world: World, rec: Recipe, tag: ResourceTag, self: Set<string>, actorId?: string): number {
+  const packed = countTag(actorState(world, actorId).pack, tag, self);
   return rec.placesFire && tag === "wood"
-    ? packed + countGenericCraftResource(world.player, "log") - (world.player.pack.log ?? 0)
+    ? packed + countGenericCraftResource(actorState(world, actorId), "log") - (actorState(world, actorId).pack.log ?? 0)
     : packed;
 }
 
 /** World-aware exact requirements; public pack-only haveNeed remains backward compatible. */
-function haveWorldNeed(world: World, rec: Recipe): boolean {
+function haveWorldNeed(world: World, rec: Recipe, actorId?: string): boolean {
   if (rec.exactRecipeId) return false;
   for (const [k, n] of Object.entries(rec.need)) {
-    if (availableCraftIngredient(world, k as ItemId) < (n ?? 0)) return false;
+    if (availableCraftIngredient(world, k as ItemId, actorId) < (n ?? 0)) return false;
   }
   const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {
-    if (availableTag(world, rec, nt.tag, self) < nt.n) return false;
+    if (availableTag(world, rec, nt.tag, self, actorId) < nt.n) return false;
   }
   return true;
 }
 
 /** Clone-plan-commit exact ingredients so aggregate shortage never partially debits. */
-function debitExactNeeds(world: World, rec: Recipe): boolean {
-  const pack = structuredClone(world.player.pack);
-  const planned = { resources: structuredClone(world.player.resources), pack };
+function debitExactNeeds(world: World, rec: Recipe, actorId?: string): boolean {
+  const pack = structuredClone(actorState(world, actorId).pack);
+  const planned = { resources: structuredClone(actorState(world, actorId).resources), pack };
   for (const [k, n] of Object.entries(rec.need)) {
     const id = k as ItemId;
     const amount = n ?? 0;
@@ -288,44 +291,47 @@ function debitExactNeeds(world: World, rec: Recipe): boolean {
     if (have < amount) return false;
     pack[id] = have - amount;
   }
-  world.player.pack = pack;
-  world.player.resources = planned.resources;
+  actorState(world, actorId).pack = pack;
+  actorState(world, actorId).resources = planned.resources;
   return true;
 }
 
-export function canMake(world: World, rec: Recipe) {
-  if (rec.needsBlade && !bladeInHand(world)) return false;
-  return haveWorldNeed(world, rec);
+export function canMake(world: World, rec: Recipe, actorId?: string) {
+  actorState(world, actorId);
+  if (rec.needsBlade && !bladeInHand(world, actorId)) return false;
+  return haveWorldNeed(world, rec, actorId);
 }
 
 /** First command blocker, not a claim that every other requirement is satisfied. */
-export function craftBlocker(world: World, rec: Recipe): string | null {
-  if (world.player.ghost) return "A ghost cannot craft. Return to life first.";
-  if (rec.exactRecipeId) return missingNeed(world, rec);
-  if (rec.station !== null && !stationsHere(world).includes(rec.station)) {
+export function craftBlocker(world: World, rec: Recipe, actorId?: string): string | null {
+  if (actorId !== undefined && !actorBody(world, actorId)) return "No body.";
+  if (actorState(world, actorId).ghost || (actorId !== undefined && actorBody(world, actorId)?.ghost)) return "A ghost cannot craft. Return to life first.";
+  if (rec.exactRecipeId) return missingNeed(world, rec, false, actorId);
+  if (rec.station !== null && !stationsHere(world, actorId).includes(rec.station)) {
     if (rec.station === "loom") return "Tailoring now needs a loom. Build one from Hold → Work.";
     if (rec.station === "alchemy") return "Potion brewing now needs an alchemy bench. Build one from Hold → Work.";
     if (rec.station === "forge") return "Move near a forge.";
     if (rec.station === "fire") return "Move near a lit campfire or hearth.";
     return "Move near a bench in the yard or hall.";
   }
-  if (rec.needsBlade && !bladeInHand(world)) return "Hold a blade — hatchet, knife, or sword.";
-  if (rec.placesFire && litFireNear(world)) return "A fire already crackles here.";
-  return missingNeed(world, rec, true);
+  if (rec.needsBlade && !bladeInHand(world, actorId)) return "Hold a blade — hatchet, knife, or sword.";
+  if (rec.placesFire && litFireNear(world, actorId)) return "A fire already crackles here.";
+  return missingNeed(world, rec, true, actorId);
 }
 
-export function missingNeed(world: World, rec: Recipe, quantities = false): string | null {
+export function missingNeed(world: World, rec: Recipe, quantities = false, actorId?: string): string | null {
+  actorState(world, actorId);
   if (rec.exactRecipeId) return "Choose exact materials for this equipment recipe.";
   for (const [k, n] of Object.entries(rec.need)) {
     const id = k as ItemId;
-    const have = availableCraftIngredient(world, id);
+    const have = availableCraftIngredient(world, id, actorId);
     if (have < (n ?? 0)) return quantities
       ? `Need ${(n ?? 0) - have} more ${ITEM_META[id].label.toLowerCase()} (${have}/${n}).`
       : `Need ${ITEM_META[id].label.toLowerCase()}.`;
   }
   const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {
-    const have = availableTag(world, rec, nt.tag, self);
+    const have = availableTag(world, rec, nt.tag, self, actorId);
     if (have < nt.n) return quantities
       ? `Need ${nt.n - have} more ${nt.tag} (${have}/${nt.n} eligible).`
       : `Need ${nt.n} ${nt.tag} — anything ${nt.tag} will do.`;
@@ -334,7 +340,7 @@ export function missingNeed(world: World, rec: Recipe, quantities = false): stri
 }
 
 /** Consume tag ingredients cheapest-first; returns a short "what was used" list. */
-function consumeTags(world: World, rec: Recipe): ItemId[] {
+function consumeTags(world: World, rec: Recipe, actorId?: string): ItemId[] {
   const used: ItemId[] = [];
   const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {
@@ -343,11 +349,11 @@ function consumeTags(world: World, rec: Recipe): ItemId[] {
       if (self.has(id)) continue;
       if (left <= 0) break;
       const harvestedLogs = rec.placesFire && id === "log";
-      const have = harvestedLogs ? countGenericCraftResource(world.player, "log") : (world.player.pack[id] ?? 0);
+      const have = harvestedLogs ? countGenericCraftResource(actorState(world, actorId), "log") : (actorState(world, actorId).pack[id] ?? 0);
       if (have <= 0) continue;
       const take = Math.min(have, left);
-      if (harvestedLogs) debitGenericCraftResource(world.player, "log", take);
-      else world.player.pack[id] = have - take;
+      if (harvestedLogs) debitGenericCraftResource(actorState(world, actorId), "log", take);
+      else actorState(world, actorId).pack[id] = have - take;
       left -= take;
       for (let i = 0; i < take; i++) used.push(id);
     }
@@ -355,13 +361,14 @@ function consumeTags(world: World, rec: Recipe): ItemId[] {
   return used;
 }
 
-export function commandCraft(world: World, recipeId: string): string | null {
-  if (world.player.ghost) return "A ghost cannot.";
+export function commandCraft(world: World, recipeId: string, actorId?: string): string | null {
+  if (actorId !== undefined && !actorBody(world, actorId)) return "No body.";
+  if (actorState(world, actorId).ghost || (actorId !== undefined && actorBody(world, actorId)?.ghost)) return "A ghost cannot.";
   const rec = recipeById(recipeId);
   if (!rec) return "No such work.";
   if (rec.exactRecipeId) return "Choose exact materials for this equipment recipe.";
   if (rec.station !== null) {
-    const here = stationsHere(world);
+    const here = stationsHere(world, actorId);
     if (!here.includes(rec.station)) {
       if (rec.station === "loom") return "Tailoring now needs a loom. Build one from Hold → Work.";
       if (rec.station === "alchemy") return "Potion brewing now needs an alchemy bench. Build one from Hold → Work.";
@@ -370,22 +377,22 @@ export function commandCraft(world: World, recipeId: string): string | null {
       return "The wood wants a bench. The yard, or the hall.";
     }
   }
-  if (rec.needsBlade && !bladeInHand(world)) {
+  if (rec.needsBlade && !bladeInHand(world, actorId)) {
     return "The work wants an edge. Hold a blade — hatchet, knife, or sword.";
   }
-  if (rec.placesFire && litFireNear(world)) return "A fire already crackles here.";
-  const miss = missingNeed(world, rec);
+  if (rec.placesFire && litFireNear(world, actorId)) return "A fire already crackles here.";
+  const miss = missingNeed(world, rec, false, actorId);
   if (miss) return miss;
   playSfx(rec.sfx, rec.sfx === "fire" ? 0.48 : 0.52);
-  const { ok, gain, wonder } = craftOnce(world, rec);
-  emitCraftFx(world, rec, ok);
+  const { ok, gain, wonder } = craftOnce(world, rec, actorId);
+  emitCraftFx(world, rec, ok, actorId);
   if (!ok) {
     const note = gain ? `The work splits. ${gain}.` : "The work splits.";
     log(world, note);
     return note;
   }
   const made = rec.placesFire ? "A fire crackles to life" : madeList(rec, 1);
-  const maker = you(world)?.name ?? "an unknown hand";
+  const maker = actorBody(world, actorId)?.name ?? "an unknown hand";
   const wonderNote = wonder ? ` The maker's mark holds — ${rareName(wonder)}, crafted by ${maker}!` : "";
   const note = gain ? `${made}.${wonderNote} ${gain}.` : `${made}.${wonderNote}`;
   log(world, note);
@@ -397,15 +404,17 @@ export function commandCraftExact(
   world: World,
   recipeId: string,
   selections: readonly ExactMaterialSelection[],
+  actorId?: string,
 ): string | null {
-  if (world.player.ghost) return "A ghost cannot.";
+  if (actorId !== undefined && !actorBody(world, actorId)) return "No body.";
+  if (actorState(world, actorId).ghost || (actorId !== undefined && actorBody(world, actorId)?.ghost)) return "A ghost cannot.";
   const exactRecipe = exactRecipeById(recipeId);
   // The exact id — not the legacy recipe id — locates the work record: legacy
   // recipes can hold the plain item id (e.g. the carpentry "shield").
   const rec = exactRecipe ? RECIPES.find((candidate) => candidate.exactRecipeId === exactRecipe.id) : undefined;
   if (!exactRecipe || !rec) return "No such exact work.";
-  if (rec.needsBlade && !bladeInHand(world)) return "Hold a blade.";
-  if (rec.station !== null && !stationsHere(world).includes(rec.station)) {
+  if (rec.needsBlade && !bladeInHand(world, actorId)) return "Hold a blade.";
+  if (rec.station !== null && !stationsHere(world, actorId).includes(rec.station)) {
     if (rec.station === "loom") return "Tailoring now needs a loom. Build one from Hold → Work.";
     if (rec.station === "alchemy") return "Potion brewing now needs an alchemy bench. Build one from Hold → Work.";
     if (rec.station === "forge") return "The ore wants a fire. Raise a forge.";
@@ -413,14 +422,14 @@ export function commandCraftExact(
     return "The wood wants a bench. The yard, or the hall.";
   }
 
-  const preview = previewExactCraftTransaction(world.player, exactRecipe.id, selections);
+  const preview = previewExactCraftTransaction(actorState(world, actorId), exactRecipe.id, selections);
   if (preview.status === "blocked") return preview.message;
-  const skill = effSkill(world, rec.skill);
+  const skill = effSkill(world, rec.skill, actorId);
   const chance = successChance(skill, rec.diff);
   playSfx(rec.sfx, 0.52);
   const ok = Math.random() < chance;
-  const gain = tryGain(world, rec.skill, ok, chance >= 0.35 && chance <= 0.85);
-  emitCraftFx(world, rec, ok);
+  const gain = tryGain(world, rec.skill, ok, chance >= 0.35 && chance <= 0.85, actorId);
+  emitCraftFx(world, rec, ok, actorId);
   if (!ok) {
     const note = gain ? `The work splits. ${gain}.` : "The work splits.";
     log(world, note);
@@ -430,7 +439,7 @@ export function commandCraftExact(
   const primary = preview.components.find(({ role }) => role === "body" || role === "edge" || role === "plate");
   const workmanship = workmanshipForCraft(skill, rec.diff, Math.random(), primary?.grade);
   const form = ITEM_FORM_CATALOG[exactRecipe.formId];
-  const maker = you(world)?.name ?? "an unknown hand";
+  const maker = actorBody(world, actorId)?.name ?? "an unknown hand";
   const specialty = preview.components.some(
     ({ resourceId }) => !["oak", "common_cloth", "iron_ore"].includes(resourceId),
   );
@@ -449,11 +458,11 @@ export function commandCraftExact(
       })
     : null;
 
-  const transaction = executeExactCraftTransaction(world.player, exactRecipe.id, selections);
+  const transaction = executeExactCraftTransaction(actorState(world, actorId), exactRecipe.id, selections);
   if (transaction.status !== "crafted") throw new Error("exact bow materials changed after successful preflight");
   if (crafted) {
-    world.player.pack[crafted.base] -= transaction.output.quantity;
-    world.player.rares.push(crafted);
+    actorState(world, actorId).pack[crafted.base] -= transaction.output.quantity;
+    actorState(world, actorId).rares.push(crafted);
   }
 
   const made = crafted ? rareName(crafted) : "a bow";
@@ -462,13 +471,14 @@ export function commandCraftExact(
   return note;
 }
 
-export function commandRefineExact(world: World, key: ResourceStackKey): string {
-  if (world.player.ghost) return "A ghost cannot.";
-  if (!stationsHere(world).includes("forge")) return "The ore wants a fire. Raise a forge.";
-  const result = refineResource(world.player, key, "forge", effSkill(world, "smithing"));
+export function commandRefineExact(world: World, key: ResourceStackKey, actorId?: string): string {
+  if (actorId !== undefined && !actorBody(world, actorId)) return "No body.";
+  if (actorState(world, actorId).ghost || (actorId !== undefined && actorBody(world, actorId)?.ghost)) return "A ghost cannot.";
+  if (!stationsHere(world, actorId).includes("forge")) return "The ore wants a fire. Raise a forge.";
+  const result = refineResource(actorState(world, actorId), key, "forge", effSkill(world, "smithing", actorId));
   if (result.status === "blocked") return result.message;
   playSfx("fire", 0.48);
-  const player = you(world);
+  const player = actorBody(world, actorId);
   if (player) craftFx = { kind: "smithing", recipeId: "refine", success: true, x: player.x, z: player.z, at: world.hour };
   const note = `Refined ${result.quantity} ${result.output.replaceAll("_", " ")}.`;
   log(world, note);
@@ -492,21 +502,21 @@ function madeList(rec: Recipe, times: number): string {
  * log — callers own the telling. Every attempt rolls its own success and
  * its own gain, so batches keep the skill sim honest.
  */
-function craftOnce(world: World, rec: Recipe): { ok: boolean; gain: string | null; wonder: RareItem | null } {
-  if (!debitExactNeeds(world, rec)) throw new Error("craft ingredients changed during atomic debit");
-  consumeTags(world, rec);
-  const skill = effSkill(world, rec.skill);
+function craftOnce(world: World, rec: Recipe, actorId?: string): { ok: boolean; gain: string | null; wonder: RareItem | null } {
+  if (!debitExactNeeds(world, rec, actorId)) throw new Error("craft ingredients changed during atomic debit");
+  consumeTags(world, rec, actorId);
+  const skill = effSkill(world, rec.skill, actorId);
   const chance = successChance(skill, rec.diff);
   const ok = Math.random() < chance;
-  const gain = tryGain(world, rec.skill, true, chance >= 0.35 && chance <= 0.85);
+  const gain = tryGain(world, rec.skill, true, chance >= 0.35 && chance <= 0.85, actorId);
   if (!ok) return { ok: false, gain, wonder: null };
   for (const [k, n] of Object.entries(rec.give)) {
     const id = k as ItemId;
-    world.player.pack[id] = (world.player.pack[id] ?? 0) + (n ?? 0);
+    actorState(world, actorId).pack[id] = (actorState(world, actorId).pack[id] ?? 0) + (n ?? 0);
   }
-  if (rec.placesFire) placeCampfire(world);
+  if (rec.placesFire) placeCampfire(world, actorId);
   // Fine/exceptional work may become singular, but ordinary materials never invent magic.
-  const maker = you(world)?.name ?? "an unknown hand";
+  const maker = actorBody(world, actorId)?.name ?? "an unknown hand";
   const workmanship = workmanshipForCraft(skill, rec.diff, Math.random());
   const wonder = workmanship === "ordinary"
     ? null
@@ -515,8 +525,8 @@ function craftOnce(world: World, rec: Recipe): { ok: boolean; gain: string | nul
         .find((r) => r !== null) ?? null;
   if (wonder) {
     // The stack loses one of the piece; the singular wonder takes its place.
-    world.player.pack[wonder.base] = Math.max(0, (world.player.pack[wonder.base] ?? 1) - 1);
-    world.player.rares.push(wonder);
+    actorState(world, actorId).pack[wonder.base] = Math.max(0, (actorState(world, actorId).pack[wonder.base] ?? 1) - 1);
+    actorState(world, actorId).rares.push(wonder);
   }
   if (rec.id === "board") completeObjective(world, "plank");
   if (rec.id === "smelt") completeObjective(world, "smelt");
@@ -525,16 +535,17 @@ function craftOnce(world: World, rec: Recipe): { ok: boolean; gain: string | nul
 }
 
 /** How many attempts the carried materials allow right now (hard cap 25). */
-export function maxCraftable(world: World, rec: Recipe): number {
+export function maxCraftable(world: World, rec: Recipe, actorId?: string): number {
+  actorState(world, actorId);
   if (rec.exactRecipeId) return 0;
   let max = 25;
   for (const [k, n] of Object.entries(rec.need)) {
     if (!n) continue;
-    max = Math.min(max, Math.floor(availableCraftIngredient(world, k as ItemId) / n));
+    max = Math.min(max, Math.floor(availableCraftIngredient(world, k as ItemId, actorId) / n));
   }
   const self = selfIds(rec);
   for (const nt of rec.needTags ?? []) {
-    max = Math.min(max, Math.floor(availableTag(world, rec, nt.tag, self) / nt.n));
+    max = Math.min(max, Math.floor(availableTag(world, rec, nt.tag, self, actorId) / nt.n));
   }
   return Math.max(0, max);
 }
@@ -545,13 +556,14 @@ export function maxCraftable(world: World, rec: Recipe): number {
  * rolls success, gain, and the maker's mark on its own. One sound, one
  * summary line: "6 boards. 1 split. The maker's mark holds — an exceptional club!"
  */
-export function commandCraftBatch(world: World, recipeId: string, times: number): string | null {
-  if (world.player.ghost) return "A ghost cannot.";
+export function commandCraftBatch(world: World, recipeId: string, times: number, actorId?: string): string | null {
+  if (actorId !== undefined && !actorBody(world, actorId)) return "No body.";
+  if (actorState(world, actorId).ghost || (actorId !== undefined && actorBody(world, actorId)?.ghost)) return "A ghost cannot.";
   const rec = recipeById(recipeId);
   if (!rec) return "No such work.";
   if (rec.exactRecipeId) return "Exact-material equipment is made one piece at a time.";
   if (rec.station !== null) {
-    const here = stationsHere(world);
+    const here = stationsHere(world, actorId);
     if (!here.includes(rec.station)) {
       if (rec.station === "loom") return "Tailoring now needs a loom. Build one from Hold → Work.";
       if (rec.station === "alchemy") return "Potion brewing now needs an alchemy bench. Build one from Hold → Work.";
@@ -560,32 +572,32 @@ export function commandCraftBatch(world: World, recipeId: string, times: number)
       return "The wood wants a bench. The yard, or the hall.";
     }
   }
-  if (rec.needsBlade && !bladeInHand(world)) {
+  if (rec.needsBlade && !bladeInHand(world, actorId)) {
     return "The work wants an edge. Hold a blade — hatchet, knife, or sword.";
   }
-  if (rec.placesFire && litFireNear(world)) return "A fire already crackles here.";
+  if (rec.placesFire && litFireNear(world, actorId)) return "A fire already crackles here.";
   // One fire is plenty — a batch of campfires makes no sense.
-  const want = rec.placesFire ? 1 : Math.max(1, Math.min(Math.floor(times), maxCraftable(world, rec)));
-  if (want < 1) return missingNeed(world, rec);
+  const want = rec.placesFire ? 1 : Math.max(1, Math.min(Math.floor(times), maxCraftable(world, rec, actorId)));
+  if (want < 1) return missingNeed(world, rec, false, actorId);
   playSfx(rec.sfx, rec.sfx === "fire" ? 0.48 : 0.52);
   let made = 0;
   let failed = 0;
   const gains = new Set<string>();
   const wonders: RareItem[] = [];
   for (let i = 0; i < want; i++) {
-    if (missingNeed(world, rec)) break; // the pile ran short mid-stint
-    const { ok, gain, wonder } = craftOnce(world, rec);
+    if (missingNeed(world, rec, false, actorId)) break; // the pile ran short mid-stint
+    const { ok, gain, wonder } = craftOnce(world, rec, actorId);
     if (gain) gains.add(gain);
     if (ok) made++;
     else failed++;
     if (wonder) wonders.push(wonder);
   }
-  emitCraftFx(world, rec, made > 0);
+  emitCraftFx(world, rec, made > 0, actorId);
   const bits: string[] = [];
   if (made > 0) bits.push(rec.placesFire ? "A fire crackles to life." : madeList(rec, made) + ".");
   if (failed > 0) bits.push(`${failed} split.`);
   if (made === 0 && failed === 0) bits.push("Nothing to work with.");
-  const maker = you(world)?.name ?? "an unknown hand";
+  const maker = actorBody(world, actorId)?.name ?? "an unknown hand";
   for (const w of wonders) bits.push(`The maker's mark holds — ${rareName(w)}, crafted by ${maker}!`);
   const gainText = [...gains].join(" ");
   const note = gainText ? `${bits.join(" ")} ${gainText}.` : bits.join(" ");

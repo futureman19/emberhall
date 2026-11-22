@@ -50,8 +50,8 @@ export function pieceBlocks(world: World, tx: number, ty: number) {
   return (world.placedObjects ?? []).some((o) => objectBlocks(o) && occupiesCell(o, tx, ty));
 }
 
-export function stationsFromPieces(world: World): Array<"bench" | "forge" | "fire" | "loom" | "alchemy"> {
-  const p = you(world);
+export function stationsFromPieces(world: World, actorId?: string): Array<"bench" | "forge" | "fire" | "loom" | "alchemy"> {
+  const p = you(world, actorId);
   if (!p) return [];
   const out = new Set<"bench" | "forge" | "fire" | "loom" | "alchemy">();
   for (const obj of world.placedObjects) {

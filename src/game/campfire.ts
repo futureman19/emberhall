@@ -16,15 +16,15 @@ export const FIRE_HOURS = 3;
 let fireSeq = 0;
 
 /** The lit fire near the player, if one burns within reach. */
-export function litFireNear(world: World): boolean {
-  const p = you(world);
+export function litFireNear(world: World, actorId?: string): boolean {
+  const p = you(world, actorId);
   if (!p) return false;
   return world.campfires.some((f) => world.hour < f.until && Math.hypot(p.x - f.tx, p.z - f.ty) <= FIRE_REACH);
 }
 
 /** Light a new fire at the player's feet. */
-export function placeCampfire(world: World): void {
-  const p = you(world);
+export function placeCampfire(world: World, actorId?: string): void {
+  const p = you(world, actorId);
   if (!p) return;
   world.campfires.push({
     id: `fire_${world.hour}_${fireSeq++}`,

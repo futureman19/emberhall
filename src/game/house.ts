@@ -1,3 +1,4 @@
+import { actorState } from "./actor.ts";
 import { sceneryReserved } from "./frontier.ts";
 import { COURT, EMBERHALL_BANK } from "./atlas.ts";
 import { buildingBox, boxesOverlap } from "./building-size.ts";
@@ -36,8 +37,9 @@ export function houseKindForDeed(item: ItemId): HouseKind | null {
 }
 
 /** The player's kept house, if any. The look-hut preview is not a kept house. */
-export function playerHouse(world: World) {
-  return world.buildings.find((b) => isHouseKind(b.kind) && b.ownerId === world.player.id && !b.preview) ?? null;
+export function playerHouse(world: World, actorId?: string) {
+  const sheet = actorState(world, actorId);
+  return world.buildings.find((b) => isHouseKind(b.kind) && b.ownerId === sheet.id && !b.preview) ?? null;
 }
 
 export function houseAt(world: World, tx: number, ty: number, reach = 2.8) {
@@ -64,12 +66,13 @@ export function houseOnTile(world: World, tx: number, ty: number) {
   return null;
 }
 
-function houseHands(world: World, building: Building) {
-  if (world.player.ghost) return "A ghost cannot.";
-  const p = you(world);
+function houseHands(world: World, building: Building, actorId?: string) {
+  const sheet = actorState(world, actorId);
+  if (sheet.ghost || (actorId !== undefined && you(world, actorId)?.ghost)) return "A ghost cannot.";
+  const p = you(world, actorId);
   if (!p) return "No body.";
   if (Math.hypot(p.x - building.tx, p.z - building.ty) > HOUSE_RANGE) return "Walk closer.";
-  if (building.ownerId !== world.player.id) return "That house is not yours.";
+  if (building.ownerId !== sheet.id) return "That house is not yours.";
   return null;
 }
 
@@ -81,12 +84,13 @@ function chestSlots(chest: Partial<Record<ItemId, number>>) {
   return n;
 }
 
-export function houseSiteError(world: World, kind: HouseKind, tx: number, ty: number): string | null {
-  if (world.player.ghost) return "A ghost cannot.";
-  if (playerHouse(world)) return "You already have a house.";
+export function houseSiteError(world: World, kind: HouseKind, tx: number, ty: number, actorId?: string): string | null {
+  const sheet = actorState(world, actorId);
+  if (sheet.ghost || (actorId !== undefined && you(world, actorId)?.ghost)) return "A ghost cannot.";
+  if (playerHouse(world, actorId)) return "You already have a house.";
   const deed = HOUSE_DEEDS[kind];
-  if ((world.player.pack[deed] ?? 0) < 1) return `Need a ${ITEM_META[deed].label.toLowerCase()}.`;
-  const p = you(world);
+  if ((sheet.pack[deed] ?? 0) < 1) return `Need a ${ITEM_META[deed].label.toLowerCase()}.`;
+  const p = you(world, actorId);
   if (!p) return "No body.";
   if (Math.hypot(p.x - tx, p.z - ty) > 8) return "Stand nearer the dirt.";
   if (plotAt(world, tx, ty)) return "That dirt is a bed.";
@@ -102,17 +106,18 @@ export function houseSiteError(world: World, kind: HouseKind, tx: number, ty: nu
   if (boxesOverlap(box, bankBox)) return "The bank is the only safe tile.";
   for (const b of world.buildings) {
     // The player's look-hut preview yields its ground to a real deed.
-    if (b.preview && b.ownerId === world.player.id) continue;
+    if (b.preview && b.ownerId === sheet.id) continue;
     if (boxesOverlap(box, buildingBox(b.kind, b.tx, b.ty))) return "That ground is taken.";
   }
   return null;
 }
 
-export function placeHouse(world: World, kind: HouseKind, tx: number, ty: number) {
-  const err = houseSiteError(world, kind, tx, ty);
+export function placeHouse(world: World, kind: HouseKind, tx: number, ty: number, actorId?: string) {
+  const sheet = actorState(world, actorId);
+  const err = houseSiteError(world, kind, tx, ty, actorId);
   if (err) return err;
   const deed = HOUSE_DEEDS[kind];
-  world.player.pack[deed] = (world.player.pack[deed] ?? 0) - 1;
+  sheet.pack[deed] = (sheet.pack[deed] ?? 0) - 1;
   const label = ITEM_META[deed].label.replace(/ deed$/i, "");
   const id = nid(world, "b");
   const house: Building = {
@@ -121,19 +126,19 @@ export function placeHouse(world: World, kind: HouseKind, tx: number, ty: number
     tx,
     ty,
     beds: [],
-    ownerId: world.player.id,
+    ownerId: sheet.id,
     chest: emptyChest(),
     chestGold: 0,
     preview: false,
   };
   const preview = world.buildings.find(
-    (b) => b.preview === true && isHouseKind(b.kind) && b.ownerId === world.player.id,
+    (b) => b.preview === true && isHouseKind(b.kind) && b.ownerId === sheet.id,
   ) ?? null;
   // Publish a fresh array so mounted building meshes re-render on the swap.
   world.buildings = [...world.buildings, house];
   if (preview) {
     // Goods move first; only then does the preview come down. Nothing is destroyed.
-    transferLookHutGoods(world, preview, house);
+    transferLookHutGoods(world, preview, house, actorId);
     world.buildings = world.buildings.filter((b) => b.id !== preview.id);
     log(world, "The look-hut steps aside; its goods are kept.");
   }
@@ -149,7 +154,8 @@ export function placeHouse(world: World, kind: HouseKind, tx: number, ty: number
  * 3. any stack the pack cannot accept falls to a ground pile at the old spot.
  * Chest gold always keeps into the new chest.
  */
-function transferLookHutGoods(world: World, preview: Building, house: Building) {
+function transferLookHutGoods(world: World, preview: Building, house: Building, actorId?: string) {
+  const sheet = actorState(world, actorId);
   const chest = house.chest ?? (house.chest = emptyChest());
   const overflow: Array<[ItemId, number]> = [];
   for (const id of Object.keys(ITEM_META) as ItemId[]) {
@@ -160,42 +166,44 @@ function transferLookHutGoods(world: World, preview: Building, house: Building) 
   }
   house.chestGold = (house.chestGold ?? 0) + (preview.chestGold ?? 0);
   for (const [id, n] of overflow) {
-    const before = world.player.pack[id] ?? 0;
-    world.player.pack[id] = before + n;
-    if ((world.player.pack[id] ?? 0) !== before + n) {
+    const before = sheet.pack[id] ?? 0;
+    sheet.pack[id] = before + n;
+    if ((sheet.pack[id] ?? 0) !== before + n) {
       // The pack refused the stack — keep it recoverable on the ground instead.
       addToPile(world, preview.tx, preview.ty, { [id]: n }, "drop", world.hour + 24, "Look-hut goods", 0);
     }
   }
 }
 
-export function commandHouseItem(world: World, buildingId: string, item: ItemId, n = 1) {
+export function commandHouseItem(world: World, buildingId: string, item: ItemId, n = 1, actorId?: string) {
+  const sheet = actorState(world, actorId);
   const building = world.buildings.find((b) => b.id === buildingId);
   if (!building || !isHouseKind(building.kind)) return "No house here.";
-  const err = houseHands(world, building);
+  const err = houseHands(world, building, actorId);
   if (err) return err;
   if (!building.chest) building.chest = emptyChest();
-  const have = world.player.pack[item] ?? 0;
+  const have = sheet.pack[item] ?? 0;
   if (n < 1 || have < n) return "You do not carry that.";
   const had = building.chest[item] ?? 0;
   if (had < 1 && chestSlots(building.chest) >= HOUSE_SLOTS) return "The chest is full.";
-  world.player.pack[item] = have - n;
+  sheet.pack[item] = have - n;
   building.chest[item] = had + n;
   emitPersonalActionFx(world, { kind: "chest", direction: "in", buildingId: building.id, item, count: n, x: building.tx, z: building.ty });
   return "Into the chest.";
 }
 
-export function commandHouseTake(world: World, buildingId: string, item: ItemId, n = 1) {
+export function commandHouseTake(world: World, buildingId: string, item: ItemId, n = 1, actorId?: string) {
+  const sheet = actorState(world, actorId);
   const building = world.buildings.find((b) => b.id === buildingId);
   if (!building || !isHouseKind(building.kind)) return "No house here.";
-  const err = houseHands(world, building);
+  const err = houseHands(world, building, actorId);
   if (err) return err;
   const chest = building.chest ?? emptyChest();
   building.chest = chest;
   const have = chest[item] ?? 0;
   if (n < 1 || have < n) return "The chest has none.";
   chest[item] = have - n;
-  world.player.pack[item] = (world.player.pack[item] ?? 0) + n;
+  sheet.pack[item] = (sheet.pack[item] ?? 0) + n;
   emitPersonalActionFx(world, { kind: "chest", direction: "out", buildingId: building.id, item, count: n, x: building.tx, z: building.ty });
   return "Out of the chest.";
 }

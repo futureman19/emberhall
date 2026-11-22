@@ -1,6 +1,7 @@
 import { offerCommission } from "./commissions.ts";
 import { APOTHECARY_STOCK, hasTag, ITEM_META, SHOP_STOCK } from "./catalog.ts";
-import { buildingBox } from "./building-size.ts";
+import { BANK_RANGE } from "./bank.ts";
+export { BANK_RANGE, BANK_SLOTS, nearNpcRole, nearBank, chestSlots, commandDeposit, commandBankGold, commandWithdraw, commandBankItem, commandUnbankItem } from "./bank.ts";
 import { isGhost, resurrect, you } from "./player.ts";
 import { astarToRange, tileOf } from "./pathfinding.ts";
 import { addToPile } from "./piles.ts";
@@ -9,14 +10,7 @@ import { BRANN_BANDAGES, BRANN_NAME, BRANN_PAY, BRANN_WANT, completeObjective, l
 import { emitNpcInteractionFx } from "./npc-interaction-animation.ts";
 import type { ItemId, NpcRole, World } from "./types.ts";
 
-export const BANK_RANGE = 2.4;
-export const BANK_SLOTS = 125;
 
-export function nearNpcRole(world: World, role: NpcRole, range = BANK_RANGE) {
-  const self = you(world);
-  if (!self) return false;
-  return world.people.some((p) => p.role === role && Math.hypot(self.x - p.x, self.z - p.z) <= range);
-}
 
 function nearestNpc(world: World, roles: readonly NpcRole[]) {
   const self = you(world);
@@ -39,31 +33,7 @@ function emitTransfer(world: World, kind: "trade" | "bank", direction: "in" | "o
   });
 }
 
-export function nearBank(world: World) {
-  if (nearNpcRole(world, "banker")) return true;
-  const self = you(world);
-  if (!self) return false;
-  for (const b of world.buildings) {
-    if (b.kind !== "bank") continue;
-    if (Math.hypot(self.x - b.tx, self.z - b.ty) <= 3.2) return true;
-    const box = buildingBox("bank", b.tx, b.ty);
-    if (self.x >= box.x0 && self.x <= box.x1 && self.z >= box.z0 && self.z <= box.z1) return true;
-  }
-  return false;
-}
 
-export function chestSlots(chest: Partial<Record<string, number>> | undefined) {
-  let n = 0;
-  if (!chest) return 0;
-  for (const v of Object.values(chest)) if ((v ?? 0) > 0) n += 1;
-  return n;
-}
-
-function bankHands(world: World) {
-  if (isGhost(world)) return "The box is for the living.";
-  if (!nearBank(world)) return "The banker is not here.";
-  return null;
-}
 
 /** A stall's counter reach: the court's keeper stands a few paces off and
  *  still trades — but not from across the vale, and never with no keeper
@@ -241,55 +211,4 @@ export function commandSellRare(world: World, uid: string) {
   const note = `The keeper studies ${name}. "${total} gold — and lucky to have it."`;
   log(world, note);
   return note;
-}
-
-export function commandDeposit(world: World, n: number) {
-  const err = bankHands(world);
-  if (err) return err;
-  if (n < 1 || world.gold < n) return "Not that much in the purse.";
-  world.gold -= n;
-  world.player.vault += n;
-  emitTransfer(world, "bank", "in", "gold", ["banker"]);
-  return `The box holds ${world.player.vault} gold.`;
-}
-
-export function commandBankGold(world: World) {
-  const err = bankHands(world);
-  if (err) return err;
-  if (world.gold < 1) return `The box holds ${world.player.vault} gold.`;
-  return commandDeposit(world, world.gold);
-}
-
-export function commandWithdraw(world: World, n: number) {
-  const err = bankHands(world);
-  if (err) return err;
-  if (n < 1 || world.player.vault < n) return "The box has not that much.";
-  world.player.vault -= n;
-  world.gold += n;
-  emitTransfer(world, "bank", "out", "gold", ["banker"]);
-  return `Purse ${world.gold}.`;
-}
-
-export function commandBankItem(world: World, item: ItemId, n = 1) {
-  const err = bankHands(world);
-  if (err) return err;
-  const have = world.player.pack[item] ?? 0;
-  if (n < 1 || have < n) return "You do not carry that.";
-  const had = world.player.chest[item] ?? 0;
-  if (had < 1 && chestSlots(world.player.chest) >= BANK_SLOTS) return "The box is full.";
-  world.player.pack[item] = have - n;
-  world.player.chest[item] = had + n;
-  emitTransfer(world, "bank", "in", item, ["banker"]);
-  return "Into the box.";
-}
-
-export function commandUnbankItem(world: World, item: ItemId, n = 1) {
-  const err = bankHands(world);
-  if (err) return err;
-  const have = world.player.chest[item] ?? 0;
-  if (n < 1 || have < n) return "The box has none.";
-  world.player.chest[item] = have - n;
-  world.player.pack[item] = (world.player.pack[item] ?? 0) + n;
-  emitTransfer(world, "bank", "out", item, ["banker"]);
-  return "Out of the box.";
 }

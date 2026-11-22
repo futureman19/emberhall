@@ -55,8 +55,8 @@ export function nearestHealer(world: World) {
   return best;
 }
 
-function hands(world: World) {
-  if (isGhost(world)) return "A ghost cannot.";
+function hands(world: World, actorId?: string) {
+  if (isGhost(world, actorId)) return "A ghost cannot.";
   return null;
 }
 
@@ -541,16 +541,16 @@ export function commandHeal(world: World) {
   return "The cloth holds.";
 }
 
-export function commandDrink(world: World, item: ItemId) {
-  const dead = hands(world);
+export function commandDrink(world: World, item: ItemId, actorId?: string) {
+  const dead = hands(world, actorId);
   if (dead) return dead;
-  const p = you(world);
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
   if (!isPotion(item)) return "That is not a draught.";
-  if ((world.player.pack[item] ?? 0) < 1) return "You do not carry that.";
-  world.player.pack[item] -= 1;
-  const alchemy = effSkill(world, "alchemy");
-  tryGain(world, "alchemy", true, true);
+  if ((actorState(world, actorId).pack[item] ?? 0) < 1) return "You do not carry that.";
+  actorState(world, actorId).pack[item] -= 1;
+  const alchemy = effSkill(world, "alchemy", actorId);
+  tryGain(world, "alchemy", true, true, actorId);
   if (item === "potion_heal") {
     const before = p.hp;
     const amount = potionHealAmount(alchemy);
@@ -558,14 +558,14 @@ export function commandDrink(world: World, item: ItemId) {
     healingFx = { x: p.x, z: p.z, at: world.hour, amount: p.hp - before };
     return "The draught takes hold.";
   }
-  world.player.nightSightUntil = world.hour + potionNightHours(alchemy);
+  actorState(world, actorId).nightSightUntil = world.hour + potionNightHours(alchemy);
   return "The dark thins.";
 }
 
-export function commandCook(world: World, selected?: ItemId) {
-  const dead = hands(world);
+export function commandCook(world: World, selected?: ItemId, actorId?: string) {
+  const dead = hands(world, actorId);
   if (dead) return dead;
-  const p = you(world);
+  const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
   // A good meal first — cooked food fills far more than raw.
   const meals: [ItemId, number, string][] = [
@@ -582,9 +582,9 @@ export function commandCook(world: World, selected?: ItemId) {
     ["raw_fish", 12, "You force the raw fish down."],
   ];
   for (const [id, fill, note] of meals) {
-    if ((!selected || selected === id) && (world.player.pack[id] ?? 0) > 0) {
+    if ((!selected || selected === id) && (actorState(world, actorId).pack[id] ?? 0) > 0) {
       const before = p.hunger;
-      world.player.pack[id] -= 1;
+      actorState(world, actorId).pack[id] -= 1;
       p.hunger = Math.min(100, p.hunger + fill);
       emitPersonalActionFx(world, { kind: "eat", item: id, fill: p.hunger - before, x: p.x, z: p.z });
       return note;
@@ -593,8 +593,8 @@ export function commandCook(world: World, selected?: ItemId) {
   return "Need meat, cabbage, or wheat.";
 }
 
-export function commandEat(world: World, item?: ItemId) {
-  return commandCook(world, item);
+export function commandEat(world: World, item?: ItemId, actorId?: string) {
+  return commandCook(world, item, actorId);
 }
 
 function isAdjacent(ax: number, ay: number, bx: number, by: number) {

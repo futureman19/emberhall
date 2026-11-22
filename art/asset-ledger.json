@@ -158,6 +158,7 @@
     "src/game/agent/reflex.ts",
     "src/game/agent/types.ts",
     "src/game/atlas.ts",
+    "src/game/bank.ts",
     "src/game/biome.ts",
     "src/game/blueprints.ts",
     "src/game/building-size.ts",
@@ -31875,7 +31876,7 @@
       "canonicalId": "bake_bread",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:169"
+        "src/game/craft.ts:172"
       ],
       "sourceNames": [
         "RECIPES"
@@ -31949,7 +31950,7 @@
       "canonicalId": "board",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:101"
+        "src/game/craft.ts:104"
       ],
       "sourceNames": [
         "RECIPES"
@@ -32023,7 +32024,7 @@
       "canonicalId": "boots",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:122"
+        "src/game/craft.ts:125"
       ],
       "sourceNames": [
         "RECIPES"
@@ -32097,7 +32098,7 @@
       "canonicalId": "boots_smith",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:140"
+        "src/game/craft.ts:143"
       ],
       "sourceNames": [
         "RECIPES"
@@ -32171,7 +32172,7 @@
       "canonicalId": "bow",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:109"
+        "src/game/craft.ts:112"
       ],
       "sourceNames": [
         "RECIPES"
@@ -32245,7 +32246,7 @@
       "canonicalId": "campfire",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:165"
+        "src/game/craft.ts:168"
       ],
       "sourceNames": [
         "RECIPES"
@@ -32319,7 +32320,7 @@
       "canonicalId": "cap",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:107"
+        "src/game/craft.ts:110"
       ],
       "sourceNames": [
         "RECIPES"
@@ -32393,7 +32394,7 @@
       "canonicalId": "charm",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:159"
+        "src/game/craft.ts:162"
       ],
       "sourceNames": [
         "RECIPES"
@@ -32467,7 +32468,7 @@
       "canonicalId": "club",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:103"
+        "src/game/craft.ts:106"
       ],
       "sourceNames": [
         "RECIPES"
@@ -32541,7 +32542,7 @@
       "canonicalId": "crate",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:105"
+        "src/game/craft.ts:108"
       ],
       "sourceNames": [
         "RECIPES"
@@ -32615,7 +32616,7 @@
       "canonicalId": "cuirass",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:110"
+        "src/game/craft.ts:113"
       ],
       "sourceNames": [
         "RECIPES"
@@ -32689,7 +32690,7 @@
       "canonicalId": "cut_bandage",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:148"
+        "src/game/craft.ts:151"
       ],
       "sourceNames": [
         "RECIPES"
@@ -32763,7 +32764,7 @@
       "canonicalId": "cut_leather",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:151"
+        "src/game/craft.ts:154"
       ],
       "sourceNames": [
         "RECIPES"
@@ -32837,7 +32838,7 @@
       "canonicalId": "dagger_smith",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:130"
+        "src/game/craft.ts:133"
       ],
       "sourceNames": [
         "RECIPES"
@@ -32911,7 +32912,7 @@
       "canonicalId": "deed_homestead",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:113"
+        "src/game/craft.ts:116"
       ],
       "sourceNames": [
         "RECIPES"
@@ -32985,7 +32986,7 @@
       "canonicalId": "deed_hut",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:112"
+        "src/game/craft.ts:115"
       ],
       "sourceNames": [
         "RECIPES"
@@ -33059,7 +33060,7 @@
       "canonicalId": "deed_porch",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:111"
+        "src/game/craft.ts:114"
       ],
       "sourceNames": [
         "RECIPES"
@@ -33133,7 +33134,7 @@
       "canonicalId": "fletch",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:104"
+        "src/game/craft.ts:107"
       ],
       "sourceNames": [
         "RECIPES"
@@ -33207,7 +33208,7 @@
       "canonicalId": "gauntlets",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:123"
+        "src/game/craft.ts:126"
       ],
       "sourceNames": [
         "RECIPES"
@@ -33281,7 +33282,7 @@
       "canonicalId": "gauntlets_smith",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:141"
+        "src/game/craft.ts:144"
       ],
       "sourceNames": [
         "RECIPES"
@@ -33355,7 +33356,7 @@
       "canonicalId": "gloves_sew",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:156"
+        "src/game/craft.ts:159"
       ],
       "sourceNames": [
         "RECIPES"
@@ -33429,7 +33430,7 @@
       "canonicalId": "gorget",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:121"
+        "src/game/craft.ts:124"
       ],
       "sourceNames": [
         "RECIPES"
@@ -33503,7 +33504,7 @@
       "canonicalId": "greaves",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:145"
+        "src/game/craft.ts:148"
       ],
       "sourceNames": [
         "RECIPES"
@@ -33577,7 +33578,7 @@
       "canonicalId": "greaves_smith",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:142"
+        "src/game/craft.ts:145"
       ],
       "sourceNames": [
         "RECIPES"
@@ -33651,7 +33652,7 @@
       "canonicalId": "hatchet",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:118"
+        "src/game/craft.ts:121"
       ],
       "sourceNames": [
         "RECIPES"
@@ -33725,7 +33726,7 @@
       "canonicalId": "heater",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:144"
+        "src/game/craft.ts:147"
       ],
       "sourceNames": [
         "RECIPES"
@@ -33799,7 +33800,7 @@
       "canonicalId": "helm",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:143"
+        "src/game/craft.ts:146"
       ],
       "sourceNames": [
         "RECIPES"
@@ -33873,7 +33874,7 @@
       "canonicalId": "helm_smith",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:136"
+        "src/game/craft.ts:139"
       ],
       "sourceNames": [
         "RECIPES"
@@ -33947,7 +33948,7 @@
       "canonicalId": "herb_broth",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:100"
+        "src/game/craft.ts:103"
       ],
       "sourceNames": [
         "RECIPES"
@@ -34021,7 +34022,7 @@
       "canonicalId": "hoe",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:120"
+        "src/game/craft.ts:123"
       ],
       "sourceNames": [
         "RECIPES"
@@ -34095,7 +34096,7 @@
       "canonicalId": "hood_sew",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:154"
+        "src/game/craft.ts:157"
       ],
       "sourceNames": [
         "RECIPES"
@@ -34169,7 +34170,7 @@
       "canonicalId": "hose_sew",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:158"
+        "src/game/craft.ts:161"
       ],
       "sourceNames": [
         "RECIPES"
@@ -34243,7 +34244,7 @@
       "canonicalId": "knife",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:117"
+        "src/game/craft.ts:120"
       ],
       "sourceNames": [
         "RECIPES"
@@ -34317,7 +34318,7 @@
       "canonicalId": "leather_sew",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:152"
+        "src/game/craft.ts:155"
       ],
       "sourceNames": [
         "RECIPES"
@@ -34391,7 +34392,7 @@
       "canonicalId": "mace",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:124"
+        "src/game/craft.ts:127"
       ],
       "sourceNames": [
         "RECIPES"
@@ -34465,7 +34466,7 @@
       "canonicalId": "mace_smith",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:125"
+        "src/game/craft.ts:128"
       ],
       "sourceNames": [
         "RECIPES"
@@ -34539,7 +34540,7 @@
       "canonicalId": "mail",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:146"
+        "src/game/craft.ts:149"
       ],
       "sourceNames": [
         "RECIPES"
@@ -34613,7 +34614,7 @@
       "canonicalId": "mail_smith",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:138"
+        "src/game/craft.ts:141"
       ],
       "sourceNames": [
         "RECIPES"
@@ -34687,7 +34688,7 @@
       "canonicalId": "pick",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:119"
+        "src/game/craft.ts:122"
       ],
       "sourceNames": [
         "RECIPES"
@@ -34761,7 +34762,7 @@
       "canonicalId": "potion_heal",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:149"
+        "src/game/craft.ts:152"
       ],
       "sourceNames": [
         "RECIPES"
@@ -34835,7 +34836,7 @@
       "canonicalId": "potion_night",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:150"
+        "src/game/craft.ts:153"
       ],
       "sourceNames": [
         "RECIPES"
@@ -34909,7 +34910,7 @@
       "canonicalId": "quarterstaff_carpentry",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:127"
+        "src/game/craft.ts:130"
       ],
       "sourceNames": [
         "RECIPES"
@@ -34983,7 +34984,7 @@
       "canonicalId": "reclaim_furnace_heart",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:114"
+        "src/game/craft.ts:117"
       ],
       "sourceNames": [
         "RECIPES"
@@ -35057,7 +35058,7 @@
       "canonicalId": "ring",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:116"
+        "src/game/craft.ts:119"
       ],
       "sourceNames": [
         "RECIPES"
@@ -35131,7 +35132,7 @@
       "canonicalId": "ring_tinker",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:161"
+        "src/game/craft.ts:164"
       ],
       "sourceNames": [
         "RECIPES"
@@ -35205,7 +35206,7 @@
       "canonicalId": "roast_fish",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:168"
+        "src/game/craft.ts:171"
       ],
       "sourceNames": [
         "RECIPES"
@@ -35279,7 +35280,7 @@
       "canonicalId": "roast_meat",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:167"
+        "src/game/craft.ts:170"
       ],
       "sourceNames": [
         "RECIPES"
@@ -35353,7 +35354,7 @@
       "canonicalId": "sew_cloak",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:163"
+        "src/game/craft.ts:166"
       ],
       "sourceNames": [
         "RECIPES"
@@ -35427,7 +35428,7 @@
       "canonicalId": "sew_gloves",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:155"
+        "src/game/craft.ts:158"
       ],
       "sourceNames": [
         "RECIPES"
@@ -35501,7 +35502,7 @@
       "canonicalId": "sew_hood",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:153"
+        "src/game/craft.ts:156"
       ],
       "sourceNames": [
         "RECIPES"
@@ -35575,7 +35576,7 @@
       "canonicalId": "sew_hose",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:157"
+        "src/game/craft.ts:160"
       ],
       "sourceNames": [
         "RECIPES"
@@ -35649,7 +35650,7 @@
       "canonicalId": "sew_tunic",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:162"
+        "src/game/craft.ts:165"
       ],
       "sourceNames": [
         "RECIPES"
@@ -35723,7 +35724,7 @@
       "canonicalId": "shield",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:108"
+        "src/game/craft.ts:111"
       ],
       "sourceNames": [
         "RECIPES"
@@ -35797,7 +35798,7 @@
       "canonicalId": "shield_smith",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:133"
+        "src/game/craft.ts:136"
       ],
       "sourceNames": [
         "RECIPES"
@@ -35871,7 +35872,7 @@
       "canonicalId": "smelt",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:115"
+        "src/game/craft.ts:118"
       ],
       "sourceNames": [
         "RECIPES"
@@ -35945,7 +35946,7 @@
       "canonicalId": "spear_smith",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:131"
+        "src/game/craft.ts:134"
       ],
       "sourceNames": [
         "RECIPES"
@@ -36019,7 +36020,7 @@
       "canonicalId": "staff",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:106"
+        "src/game/craft.ts:109"
       ],
       "sourceNames": [
         "RECIPES"
@@ -36093,7 +36094,7 @@
       "canonicalId": "stew_pot",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:170"
+        "src/game/craft.ts:173"
       ],
       "sourceNames": [
         "RECIPES"
@@ -36167,7 +36168,7 @@
       "canonicalId": "sword",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:129"
+        "src/game/craft.ts:132"
       ],
       "sourceNames": [
         "RECIPES"
@@ -36241,7 +36242,7 @@
       "canonicalId": "torch",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:102"
+        "src/game/craft.ts:105"
       ],
       "sourceNames": [
         "RECIPES"
@@ -36315,7 +36316,7 @@
       "canonicalId": "tower_shield_smith",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:128"
+        "src/game/craft.ts:131"
       ],
       "sourceNames": [
         "RECIPES"
@@ -36389,7 +36390,7 @@
       "canonicalId": "trail_rations",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:98"
+        "src/game/craft.ts:101"
       ],
       "sourceNames": [
         "RECIPES"
@@ -36463,7 +36464,7 @@
       "canonicalId": "war_axe_smith",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:132"
+        "src/game/craft.ts:135"
       ],
       "sourceNames": [
         "RECIPES"
@@ -36537,7 +36538,7 @@
       "canonicalId": "war_hammer_smith",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:126"
+        "src/game/craft.ts:129"
       ],
       "sourceNames": [
         "RECIPES"
@@ -36611,7 +36612,7 @@
       "canonicalId": "wheat_cakes",
       "family": "recipe",
       "catalogSources": [
-        "src/game/craft.ts:99"
+        "src/game/craft.ts:102"
       ],
       "sourceNames": [
         "RECIPES"
@@ -86263,7 +86264,7 @@
       "canonicalId": "src/game/craft.ts#CraftFx.kind=carpentry",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:69"
+        "src/game/craft.ts:72"
       ],
       "sourceNames": [
         "CraftFx.kind"
@@ -86309,7 +86310,7 @@
       "canonicalId": "src/game/craft.ts#CraftFx.kind=cooking",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:69"
+        "src/game/craft.ts:72"
       ],
       "sourceNames": [
         "CraftFx.kind"
@@ -86355,7 +86356,7 @@
       "canonicalId": "src/game/craft.ts#CraftFx.kind=smithing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:69"
+        "src/game/craft.ts:72"
       ],
       "sourceNames": [
         "CraftFx.kind"
@@ -86401,7 +86402,7 @@
       "canonicalId": "src/game/craft.ts#CraftFx.success=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:71"
+        "src/game/craft.ts:74"
       ],
       "sourceNames": [
         "CraftFx.success"
@@ -86447,7 +86448,7 @@
       "canonicalId": "src/game/craft.ts#CraftFx.success=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:71"
+        "src/game/craft.ts:74"
       ],
       "sourceNames": [
         "CraftFx.success"
@@ -86493,7 +86494,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=boots",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -86539,7 +86540,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=bow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -86585,7 +86586,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=charm",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -86631,7 +86632,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=dagger",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -86677,7 +86678,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=gauntlets",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -86723,7 +86724,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=gloves",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -86769,7 +86770,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=greaves",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -86815,7 +86816,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=helm",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -86861,7 +86862,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=hood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -86907,7 +86908,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=hose",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -86953,7 +86954,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=leather",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -86999,7 +87000,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=mace",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -87045,7 +87046,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=mail",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -87091,7 +87092,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=quarterstaff",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -87137,7 +87138,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=ring",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -87183,7 +87184,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=shield",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -87229,7 +87230,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=spear",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -87275,7 +87276,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=sword",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -87321,7 +87322,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=tower_shield",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -87367,7 +87368,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=war_axe",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -87413,7 +87414,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.exactRecipeId=war_hammer",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:55"
+        "src/game/craft.ts:58"
       ],
       "sourceNames": [
         "Recipe.exactRecipeId"
@@ -87459,7 +87460,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.needsBlade=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:61"
+        "src/game/craft.ts:64"
       ],
       "sourceNames": [
         "Recipe.needsBlade"
@@ -87505,7 +87506,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.needsBlade=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:61"
+        "src/game/craft.ts:64"
       ],
       "sourceNames": [
         "Recipe.needsBlade"
@@ -87551,7 +87552,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.placesFire=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:63"
+        "src/game/craft.ts:66"
       ],
       "sourceNames": [
         "Recipe.placesFire"
@@ -87597,7 +87598,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.placesFire=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:63"
+        "src/game/craft.ts:66"
       ],
       "sourceNames": [
         "Recipe.placesFire"
@@ -87643,7 +87644,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=cast",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -87689,7 +87690,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=chop",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -87735,7 +87736,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=die",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -87781,7 +87782,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=embercrawler_aggro",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -87827,7 +87828,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=embercrawler_attack",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -87873,7 +87874,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=embercrawler_death",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -87919,7 +87920,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=embercrawler_hit",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -87965,7 +87966,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=emberdeep_ambience",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88011,7 +88012,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=emberdeep_door",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88057,7 +88058,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=fire",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88103,7 +88104,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=fizzle",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88149,7 +88150,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=gate",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88195,7 +88196,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=gloomwraith_aggro",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88241,7 +88242,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=gloomwraith_attack",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88287,7 +88288,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=gloomwraith_death",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88333,7 +88334,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=gloomwraith_hit",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88379,7 +88380,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=hunt",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88425,7 +88426,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=loot",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88471,7 +88472,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=mine",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88517,7 +88518,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=slag_golem_aggro",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88563,7 +88564,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=slag_golem_attack",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88609,7 +88610,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=slag_golem_death",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88655,7 +88656,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=slag_golem_hit",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88701,7 +88702,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=smith",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88747,7 +88748,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spark",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88793,7 +88794,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_bless",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88839,7 +88840,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_blizzard",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88885,7 +88886,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_chainlightning",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88931,7 +88932,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_cure",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -88977,7 +88978,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_curse",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89023,7 +89024,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_earthquake",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89069,7 +89070,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_fireball",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89115,7 +89116,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_fireblast",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89161,7 +89162,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_flamewall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89207,7 +89208,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_flash",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89253,7 +89254,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_fly",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89299,7 +89300,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_gate",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89345,7 +89346,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_heal",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89391,7 +89392,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_invisibility",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89437,7 +89438,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_ironwood",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89483,7 +89484,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_jump",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89529,7 +89530,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_leech",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89575,7 +89576,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_lightning",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89621,7 +89622,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_magicarrow",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89667,7 +89668,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_mark",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89713,7 +89714,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_meteor",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89759,7 +89760,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_mirrorimage",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89805,7 +89806,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_naturesfury",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89851,7 +89852,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_necromancy",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89897,7 +89898,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_nightsight",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89943,7 +89944,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_paralyze",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -89989,7 +89990,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_poison",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90035,7 +90036,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_polymorph",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90081,7 +90082,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_recall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90127,7 +90128,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_resurrect",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90173,7 +90174,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_sanctuary",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90219,7 +90220,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_sleep",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90265,7 +90266,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_stonewall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90311,7 +90312,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_summon",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90357,7 +90358,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_summonelemental",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90403,7 +90404,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_tarpit",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90449,7 +90450,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_teleport",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90495,7 +90496,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=spell_thornsnare",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90541,7 +90542,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=thunder",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90587,7 +90588,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=warden_death",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90633,7 +90634,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=warden_phase",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90679,7 +90680,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=warden_roar",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90725,7 +90726,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.sfx=warden_slam",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:65"
+        "src/game/craft.ts:68"
       ],
       "sourceNames": [
         "Recipe.sfx"
@@ -90771,7 +90772,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=alchemy",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -90817,7 +90818,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=anatomy",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -90863,7 +90864,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=archery",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -90909,7 +90910,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=carpentry",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -90955,7 +90956,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=cartography",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91001,7 +91002,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=cooking",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91047,7 +91048,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=farming",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91093,7 +91094,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=fencing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91139,7 +91140,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=fishing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91185,7 +91186,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=forestry",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91231,7 +91232,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=healing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91277,7 +91278,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=lockpicking",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91323,7 +91324,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=lumberjack",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91369,7 +91370,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=mace",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91415,7 +91416,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=magery",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91461,7 +91462,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=mining",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91507,7 +91508,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=music",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91553,7 +91554,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=poisoning",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91599,7 +91600,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=smithing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91645,7 +91646,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=stealing",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91691,7 +91692,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=swords",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91737,7 +91738,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=tailoring",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91783,7 +91784,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=taming",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91829,7 +91830,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=tinkering",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91875,7 +91876,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.skill=tracking",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:50"
+        "src/game/craft.ts:53"
       ],
       "sourceNames": [
         "Recipe.skill"
@@ -91921,7 +91922,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.station=alchemy",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:49"
+        "src/game/craft.ts:52"
       ],
       "sourceNames": [
         "Recipe.station"
@@ -91967,7 +91968,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.station=bench",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:49"
+        "src/game/craft.ts:52"
       ],
       "sourceNames": [
         "Recipe.station"
@@ -92013,7 +92014,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.station=fire",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:49"
+        "src/game/craft.ts:52"
       ],
       "sourceNames": [
         "Recipe.station"
@@ -92059,7 +92060,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.station=forge",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:49"
+        "src/game/craft.ts:52"
       ],
       "sourceNames": [
         "Recipe.station"
@@ -92105,7 +92106,7 @@
       "canonicalId": "src/game/craft.ts#Recipe.station=loom",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/craft.ts:49"
+        "src/game/craft.ts:52"
       ],
       "sourceNames": [
         "Recipe.station"
@@ -255903,7 +255904,7 @@
       "canonicalId": "alchemy",
       "family": "vocabulary/src/game/craft.ts#Station",
       "catalogSources": [
-        "src/game/craft.ts:44"
+        "src/game/craft.ts:47"
       ],
       "sourceNames": [
         "Station"
@@ -255953,7 +255954,7 @@
       "canonicalId": "bench",
       "family": "vocabulary/src/game/craft.ts#Station",
       "catalogSources": [
-        "src/game/craft.ts:44"
+        "src/game/craft.ts:47"
       ],
       "sourceNames": [
         "Station"
@@ -256003,7 +256004,7 @@
       "canonicalId": "fire",
       "family": "vocabulary/src/game/craft.ts#Station",
       "catalogSources": [
-        "src/game/craft.ts:44"
+        "src/game/craft.ts:47"
       ],
       "sourceNames": [
         "Station"
@@ -256053,7 +256054,7 @@
       "canonicalId": "forge",
       "family": "vocabulary/src/game/craft.ts#Station",
       "catalogSources": [
-        "src/game/craft.ts:44"
+        "src/game/craft.ts:47"
       ],
       "sourceNames": [
         "Station"
@@ -256103,7 +256104,7 @@
       "canonicalId": "loom",
       "family": "vocabulary/src/game/craft.ts#Station",
       "catalogSources": [
-        "src/game/craft.ts:44"
+        "src/game/craft.ts:47"
       ],
       "sourceNames": [
         "Station"
@@ -258319,7 +258320,7 @@
       "canonicalId": "homestead",
       "family": "vocabulary/src/game/house.ts#HouseKind",
       "catalogSources": [
-        "src/game/house.ts:14"
+        "src/game/house.ts:15"
       ],
       "sourceNames": [
         "HouseKind"
@@ -258365,7 +258366,7 @@
       "canonicalId": "hut",
       "family": "vocabulary/src/game/house.ts#HouseKind",
       "catalogSources": [
-        "src/game/house.ts:14"
+        "src/game/house.ts:15"
       ],
       "sourceNames": [
         "HouseKind"
@@ -258411,7 +258412,7 @@
       "canonicalId": "porch",
       "family": "vocabulary/src/game/house.ts#HouseKind",
       "catalogSources": [
-        "src/game/house.ts:14"
+        "src/game/house.ts:15"
       ],
       "sourceNames": [
         "HouseKind"
