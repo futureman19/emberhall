@@ -1,16 +1,16 @@
 /**
  * Intent wire — the ONLY way a brain acts.
  *
- * The sim's own pipeline already executes intents (`world.player.intent`,
- * same field the UI writes on click). The harness never calls `command*`
- * directly and never writes pack/state: it validates, then submits to the
- * same pipeline. Server-authoritative for free once the host owns the tick.
+ * Validate before dispatching to the sim. Walk uses the same command and
+ * path planner as local input; other work stays in the intent/tick pipeline.
+ * No transport gets a separate movement policy or direct position writes.
  *
  * Kind set is shared with save.ts (single export) so a kind the save loader
  * would reject can never pass harness validation either.
  */
-import { actorState } from "../actor.ts";
+import { actorPerson, actorState } from "../actor.ts";
 import { MAP } from "../atlas.ts";
+import { commandWalk } from "../player.ts";
 import { INTENT_KINDS } from "../save.ts";
 import type { Intent, World } from "../types.ts";
 
@@ -42,6 +42,33 @@ export function submitIntent(world: World, intent: Intent, actorId?: string): st
   const actor = actorState(world, actorId);
   const err = validateIntent(world, intent);
   if (err) return err;
+  if (intent.kind === "walk") {
+    const body = actorPerson(world, actorId);
+    if (!body) return "You are not in the vale.";
+    // commandWalk clears armedSpell even on failure. Stage only its write
+    // targets so rejected routes never touch live state (or need rollback).
+    const plannedActor = { ...actor };
+    const plannedBody = { ...body };
+    const planningWorld: World = {
+      ...world,
+      people: world.people.map((person) => person === body ? plannedBody : person),
+      player: actorId === undefined ? plannedActor : world.player,
+      playerStates: actorId === undefined ? world.playerStates : {
+        ...world.playerStates,
+        [actorId]: plannedActor,
+      },
+    };
+    const reason = commandWalk(planningWorld, intent.tx, intent.ty, 9000, actorId);
+    if (reason) return reason;
+    body.path = plannedBody.path;
+    actor.intent = plannedActor.intent;
+    actor.armedSpell = plannedActor.armedSpell;
+    return null;
+  }
+  if (intent.kind === "none") {
+    const body = actorPerson(world, actorId);
+    if (body) body.path = [];
+  }
   actor.intent = {
     kind: intent.kind,
     tx: intent.tx,
