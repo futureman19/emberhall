@@ -1,3 +1,4 @@
+import { actorState, actorPerson } from "../actor.ts";
 import { boxesOverlap, buildingBox } from "../building-size.ts";
 import { VOX } from "./types.ts";
 import { PLACEABLE_BY_ID } from "./catalog.ts";
@@ -6,6 +7,7 @@ import type { ItemId, World } from "../types.ts";
 import type { PlaceableDefinition } from "./types.ts";
 
 export type PlaceOpts = {
+  actorId?: string;
   ignoreId?: string;
   skipCost?: boolean;
   skipValidate?: boolean;
@@ -42,23 +44,26 @@ export function placedBox(definitionId: string, tx: number, ty: number, rotation
   };
 }
 
-export function costError(world: World, def: PlaceableDefinition): string | null {
+export function costError(world: World, def: PlaceableDefinition, actorId?: string): string | null {
+  const player = actorState(world, actorId);
   for (const need of def.cost) {
-    const have = world.player.pack[need.item as ItemId] ?? 0;
+    const have = player.pack[need.item as ItemId] ?? 0;
     if (have < need.n) return `Need ${need.n} ${need.item}.`;
   }
   return null;
 }
 
-export function debitCost(world: World, def: PlaceableDefinition) {
+export function debitCost(world: World, def: PlaceableDefinition, actorId?: string) {
+  const player = actorState(world, actorId);
   for (const need of def.cost) {
-    world.player.pack[need.item as ItemId] -= need.n;
+    player.pack[need.item as ItemId] -= need.n;
   }
 }
 
-export function creditCost(world: World, def: PlaceableDefinition, fraction: number) {
+export function creditCost(world: World, def: PlaceableDefinition, fraction: number, actorId?: string) {
+  const player = actorState(world, actorId);
   for (const need of def.cost) {
-    world.player.pack[need.item as ItemId] += Math.floor(need.n * fraction);
+    player.pack[need.item as ItemId] += Math.floor(need.n * fraction);
   }
 }
 
@@ -78,12 +83,16 @@ export function canPlace(
   rotation: Rotation,
   opts: PlaceOpts = {},
 ): string | null {
-  if (world.player.ghost) return "A ghost cannot.";
+  const player = actorState(world, opts.actorId);
+  const body = actorPerson(world, opts.actorId);
+  if (player.ghost || body?.ghost) return "A ghost cannot.";
+  if (opts.actorId !== undefined && (!body || body.hp <= 0)) return "No body.";
+  if (!Number.isFinite(tx) || !Number.isFinite(ty)) return "No footing.";
   const def = PLACEABLE_BY_ID[definitionId];
   if (!def) return "No such piece.";
   if (!def.rotations.includes(rotation)) return "It will not turn that way.";
   if (!opts.skipCost) {
-    const need = costError(world, def);
+    const need = costError(world, def, opts.actorId);
     if (need) return need;
   }
   const box = placedBox(definitionId, tx, ty, rotation);
