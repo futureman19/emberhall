@@ -84378,7 +84378,7 @@
       "canonicalId": "src/game/commissions.ts#CommissionState.status=active",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/commissions.ts:9"
+        "src/game/commissions.ts:10"
       ],
       "sourceNames": [
         "CommissionState.status"
@@ -84424,7 +84424,7 @@
       "canonicalId": "src/game/commissions.ts#CommissionState.status=completed",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/commissions.ts:9"
+        "src/game/commissions.ts:10"
       ],
       "sourceNames": [
         "CommissionState.status"
@@ -84470,7 +84470,7 @@
       "canonicalId": "src/game/commissions.ts#CommissionState.status=offered",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/commissions.ts:9"
+        "src/game/commissions.ts:10"
       ],
       "sourceNames": [
         "CommissionState.status"
@@ -257054,7 +257054,7 @@
       "canonicalId": "accept",
       "family": "vocabulary/src/game/commissions.ts#CommissionAction",
       "catalogSources": [
-        "src/game/commissions.ts:12"
+        "src/game/commissions.ts:13"
       ],
       "sourceNames": [
         "CommissionAction"
@@ -257100,7 +257100,7 @@
       "canonicalId": "cancel",
       "family": "vocabulary/src/game/commissions.ts#CommissionAction",
       "catalogSources": [
-        "src/game/commissions.ts:12"
+        "src/game/commissions.ts:13"
       ],
       "sourceNames": [
         "CommissionAction"
@@ -257146,7 +257146,7 @@
       "canonicalId": "deliver",
       "family": "vocabulary/src/game/commissions.ts#CommissionAction",
       "catalogSources": [
-        "src/game/commissions.ts:12"
+        "src/game/commissions.ts:13"
       ],
       "sourceNames": [
         "CommissionAction"

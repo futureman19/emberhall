@@ -153,6 +153,9 @@ export function tickWorld(world: World, realDt: number) {
   world.hour += dt / SECONDS_PER_HOUR;
   world.tickCount += 1;
   tickCommission(world);
+  for (const id of Object.keys(world.playerStates ?? {})) {
+    if (id !== world.player.id) tickCommission(world, id);
+  }
   // Sparse node metadata is the clock index: no terrain-wide scan is needed.
   regrowResourceNodes(world);
 
