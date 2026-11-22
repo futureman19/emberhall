@@ -2,22 +2,25 @@
 
 Task `t_166eb9f5`, recovered on `wt/t_166eb9f5` in `C:/Users/futur/Desktop/emberhall/.worktrees/t_166eb9f5`. The board's BoxSV workspace is incorrect and was not edited. Parent merges are present at `35bf59d` (Jev, scheduler, accounting).
 
-## Acceptance status — NOT a live pass
+## Acceptance status — LIVE RUN 2026-11-22 (measured gates PASS; scale-up withheld)
 
-The Phase 3 plan was re-read from `C:/Users/futur/Desktop/emberhall/.hermes/plans/2026-11-21-ai-mmo-pivot.md`, lines 129–138. It requires a full vale day on reflexes alone, cost evidence, and no hallucinated-intent rejections. The plan does not define a richer survival score: the proof recorder interprets a full day as **24 elapsed authoritative simulation hours**, continuously alive (`hp > 0`, never ghost). A real run must be checked for interventions and host-side execution rejections as well as admission acknowledgments.
+Live paid acceptance executed 2026-11-22 23:15–23:31 UTC on a dedicated local shard (port 5590,
+fresh data dir), character `reflex-proof` / agent `reflex-proof-qwen`, `jev-1.14.0`, reflex-only.
+Full reviewer verdict: `evidence/phase3-live/review.md`; recorder output: `evidence/phase3-live/report.json`.
 
 | Required live evidence | Result |
 |---|---|
-| Run configuration | NOT STARTED; intended one dedicated character, real Jev `jev-1.14.0`, no mind/planner/manual fallback |
-| Live duration | Not measured |
-| Full-day survival | **UNPASSED** |
-| Live provider attempts / retries | **0 issued by this recovery**; not an observed operating call rate |
-| Live DecisionLog | None; no fabricated day log |
-| Per-agent daily live spend | **Not measured**, not `$0/day` |
-| ≤ $0.50 per-agent/day acceptance | **UNPASSED** |
-| Blocking condition | Recovery instruction explicitly forbids paid provider calls. Need manager authorization and an approved dedicated host character/runtime before the real run. Credential availability was not probed or changed. |
+| Run configuration | One dedicated character, real Jev `jev-1.14.0`, no mind/planner/manual fallback; preflight passed before paid start |
+| Live duration | 955,271 ms wall; sim hour 8.0139 → 32.0166 (24.003 sim hours), reason `full-vale-day` |
+| Full-day survival | **PASS** — died=false, 8,642 samples, final hp=40, never ghost |
+| Live provider attempts / retries | 612 attempts: 611 ok, 1 budget-blocked, 0 error/timeout/interrupted; retries 0; independent replay 611/611 match |
+| Live DecisionLog | `evidence/phase3-live/decisions.jsonl` (9,253 rows) + `attempts.jsonl` (612 rows) |
+| Per-agent daily live spend | **$0.499904** measured, UTC day 2026-11-22; estimatedAttempts=0 (all usage reported) |
+| ≤ $0.50 per-agent/day acceptance | **PASS on measured evidence** (independent cost report gate PASS) |
+| Host execution rejections / interventions | rejected=0; no operator interventions |
+| Scale-up economics | **WITHHELD** — budget exhausted at t+277s (~4.6 min); remaining ~11.3 min of the vale day ran budget-forced idle (survival held). Sustained-cadence projection $45.21/agent/day ≈ 90× over the pivot's ≪$0.50/agent/day rule. Projection is labeled, NOT a measured wall-day pass. Reflex cadence/prompt-size reduction required before Phase 4 fleet operation (follow-up card seeded). |
 
-No deployment, remote push, wallet/chain action, credential change, or model-routing change was performed. Local fake-provider tests are **not** survival or live cost evidence.
+No deployment, remote push, wallet/chain action, credential change, or model-routing change was performed. Local fake-provider tests are **not** survival or live cost evidence; the live gates above rest on the real paid run only.
 
 ## Verified integration
 
@@ -70,7 +73,7 @@ npx eslint src/game/agent/ src/game/player.ts scripts/reflex-live-proof.ts scrip
 npm test
 ```
 
-Focused fake HTTP responses test accounting mechanics only. Fresh execution outputs are saved under `evidence/phase3-local/`; final gate counts, hashes and exclusions are recorded in `verification.json`. Pending real-paid acceptance keeps this card blocked rather than completing the Phase 3 root.
+Focused fake HTTP responses test accounting mechanics only. Fresh execution outputs are saved under `evidence/phase3-local/`; final gate counts, hashes and exclusions are recorded in `verification.json`. Real-paid acceptance completed 2026-11-22 (see status table above and `evidence/phase3-live/review.md`); measured gates pass, scale-up economics withheld pending reflex cost reduction.
 
 ### Recovery verification results
 
