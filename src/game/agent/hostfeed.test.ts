@@ -16,7 +16,7 @@ import { createTransport } from "../../server/ws.ts";
 import { connectHostFeed, type HostFeed } from "./hostfeed.ts";
 import { createReflexAutopilot } from "./autopilot.ts";
 import { createStubBackend } from "./stub.ts";
-import type { Observation } from "./types.ts";
+import { DEFAULT_CADENCE, type Observation } from "./types.ts";
 
 type Shard = ReturnType<typeof createShard>;
 type Transport = ReturnType<typeof createTransport>;
@@ -89,8 +89,9 @@ test("autopilot over the host feed boots on reflexes and stop() silences it", as
   t.after(() => feed.close());
   const backend = createStubBackend();
   const auto = createReflexAutopilot({
-    backend,
-    source: feed.source,
+      config: { cadence: { ...DEFAULT_CADENCE, reflexCooldownTicks: 2 } },
+      backend,
+      source: feed.source,
     submit: (intent) => feed.submit(intent),
   });
   auto.start();

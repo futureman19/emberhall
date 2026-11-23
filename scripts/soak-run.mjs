@@ -56,9 +56,10 @@ const SEED = Number(argOf("--seed", "20261121")) || 20261121;
 const REFLEX_USD_PER_CALL = 4 / 86400;     // contract anchor ~$4/agent/day at 1Hz
 const QUIET_START = DEFAULT_CADENCE.sleepStartHour;      // 22
 const QUIET_END = DEFAULT_CADENCE.sleepEndHour;          // 6
-// Decision cadence: the contract's reflexCooldownTicks (2) is the floor for pure
-// reflexes, but chop/mine/hunt are multi-tick WORK beats that a new intent would
-// overwrite mid-swing. Relax to 60 ticks (6 sim-s) so each work task runs to
+// Decision cadence: the Phase 3.5 cost contract default is 150 ticks
+// (reflexCooldownTicks) for PAID reflexes. This soak is an unpaid role loop,
+// and chop/mine/hunt are multi-tick WORK beats that a new intent would
+// overwrite mid-swing — 60 ticks (6 sim-s) lets each work task run to
 // completion before the next decision; this is what makes the role loops real.
 const COOLDOWN = 60;
 const MIND_HOURS = DEFAULT_CADENCE.mindHeartbeatHours;   // 3

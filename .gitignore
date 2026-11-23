@@ -28,3 +28,5 @@ __pycache__/
 # phase-3 live raw logs (20MB; report.json + review.md are the committed evidence)
 evidence/phase3-live/attempts.jsonl
 evidence/phase3-live/decisions.jsonl
+evidence/phase35-live/attempts.jsonl
+evidence/phase35-live/decisions.jsonl

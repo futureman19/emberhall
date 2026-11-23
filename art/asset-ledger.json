@@ -77452,7 +77452,7 @@
       "canonicalId": "src/game/agent/autopilot.ts#PreparedAction.type=intent",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/autopilot.ts:161"
+        "src/game/agent/autopilot.ts:188"
       ],
       "sourceNames": [
         "PreparedAction.type"
@@ -77498,7 +77498,7 @@
       "canonicalId": "src/game/agent/autopilot.ts#PreparedAction.type=verb",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/autopilot.ts:161"
+        "src/game/agent/autopilot.ts:188"
       ],
       "sourceNames": [
         "PreparedAction.type"
@@ -77544,7 +77544,7 @@
       "canonicalId": "src/game/agent/autopilot.ts#ReflexAutopilot.running=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/autopilot.ts:178"
+        "src/game/agent/autopilot.ts:205"
       ],
       "sourceNames": [
         "ReflexAutopilot.running"
@@ -77590,7 +77590,7 @@
       "canonicalId": "src/game/agent/autopilot.ts#ReflexAutopilot.running=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/autopilot.ts:178"
+        "src/game/agent/autopilot.ts:205"
       ],
       "sourceNames": [
         "ReflexAutopilot.running"

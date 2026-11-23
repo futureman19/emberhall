@@ -142,6 +142,33 @@ export function optionLabel(c: VerbCandidate): string {
   return `${c.label} [${c.target.tx},${c.target.ty}]`;
 }
 
+/** Log lines kept on the wire (Phase 3.5 cost contract). The full tail
+ *  stays in the authoritative observation for hashing and the body. */
+const WIRE_LOG_TAIL_LINES = 10;
+
+/**
+ * Phase 3.5 cost contract (t_d8b9704d): compact the observation for the
+ * PROVIDER WIRE only. The model scores `options` + `candidateVerbs`; the
+ * UI-flow verb menu was 76% of the measured r1 wire bytes and is never a
+ * decision input (verbs outside the candidate set are dropped by prepare
+ * anyway). Zero-count pack entries and long log tails are dropped the same
+ * way. The FULL observation remains authoritative for action mapping, the
+ * decision row and hashObservation (replay) — this function must never
+ * mutate its input.
+ */
+export function compactObservationForWire(obs: Observation): Observation {
+  const pack: Observation["you"]["pack"] = {};
+  for (const [id, count] of Object.entries(obs.you.pack)) {
+    if (typeof count === "number" && count > 0) pack[id as ItemId] = count;
+  }
+  return {
+    ...obs,
+    verbs: [],
+    logTail: obs.logTail.slice(-WIRE_LOG_TAIL_LINES),
+    you: { ...obs.you, pack },
+  };
+}
+
 export interface PreparedDecision {
   observation: Observation;
   candidates: VerbCandidate[];
@@ -293,7 +320,11 @@ export function createReflexAutopilot(opts: {
     const result: ReflexResult = await backend.decide(
       {
         state: {
-          observation: prepared.observation,
+          // Wire compaction (Phase 3.5 cost contract): the provider never
+          // needs the UI verb menu, zero-count pack entries or long log
+          // tails. The FULL observation stays authoritative for action
+          // mapping; req.stateHash already hashes it, so replay is intact.
+          observation: compactObservationForWire(prepared.observation),
           triggers: req.triggers,
           // Verbs parallel to the OPTION list (CtxVerb for intent options,
           // "eat" for the synthetic pack option), so the backend scores

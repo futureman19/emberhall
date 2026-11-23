@@ -14,7 +14,7 @@ import { createTransport } from "../../server/ws.ts";
 import { connectHostFeed } from "./hostfeed.ts";
 import { createHostReflex } from "./reflex-runtime.ts";
 import { createReflexAutopilot } from "./autopilot.ts";
-import type { ReflexExchange } from "./types.ts";
+import { DEFAULT_CADENCE, type ReflexExchange } from "./types.ts";
 
 const exchange: ReflexExchange = { state: {}, questions: [{ id: "q", type: "choice", question: "What now?", options: ["A", "B"] }] };
 function response(body: unknown, status = 200) { return new Response(JSON.stringify(body), { status }); }
@@ -73,7 +73,7 @@ test("real shard WS + Jev adapter + durable meter executes eating; stopping prev
   const log = createJsonlAttemptLog(join(dir, "attempts.jsonl"));
   t.after(async () => { await feed.close(); await transport.close(); shard.stop(); log.close(); rmSync(dir, { recursive: true, force: true }); });
   let selected = "";
-  const { autopilot, backend } = createHostReflex({ feed, agentId: "test", log, guard: new BudgetGuard(), price: DEFAULT_PRICE,
+  const { autopilot, backend } = createHostReflex({ feed, agentId: "test", log, guard: new BudgetGuard(), price: DEFAULT_PRICE, cadence: { ...DEFAULT_CADENCE, reflexCooldownTicks: 2 },
     jev: { apiKey: "fixture", fetchImpl: async (_url, init) => response(answer(init, options => {
       selected = options.find(o => o.startsWith("Eat ")) ?? "";
       assert.ok(selected, "fresh host body offers its real pack food");
@@ -91,7 +91,7 @@ test("real shard WS + Jev adapter + durable meter executes eating; stopping prev
   assert.equal(foldAttempts(log.lines(), DEFAULT_PRICE)[0]!.status, "ok");
   let resolve!: (r: { answers: [] }) => void;
   let submitted = 0;
-  const late = createReflexAutopilot({ observe: () => feed.latest, backend: { decide: () => new Promise(r => { resolve = r; }) }, submit: () => { submitted++; return null; } });
+  const late = createReflexAutopilot({ config: { cadence: { ...DEFAULT_CADENCE, reflexCooldownTicks: 2 } }, observe: () => feed.latest, backend: { decide: () => new Promise(r => { resolve = r; }) }, submit: () => { submitted++; return null; } });
   late.start(); late.step(); await waitFor(() => typeof resolve === "function"); late.stop(); resolve({ answers: [] }); await late.settled();
   assert.equal(submitted, 0);
 });

@@ -20,7 +20,7 @@ import {
 } from "./scheduler.ts";
 import { hashObservation } from "./log.ts";
 import type { ReflexEvent } from "./events.ts";
-import type { Observation } from "./types.ts";
+import { DEFAULT_CADENCE, type Observation } from "./types.ts";
 
 /* ── Fabricated observations ─────────────────────────────────────────── */
 
@@ -164,7 +164,7 @@ function makeScheduler(opts: {
         opts.hooks?.onAttemptEnd?.(rec);
       },
     },
-    config: opts.config,
+    config: { cadence: { ...DEFAULT_CADENCE, reflexCooldownTicks: 2 }, ...opts.config },
     now: () => 1000,
   });
   return { scheduler, thinker, records, starts, authorizations };

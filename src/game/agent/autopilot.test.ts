@@ -17,7 +17,7 @@ import {
 import { createStubBackend } from "./stub.ts";
 import { hashObservation } from "./log.ts";
 import type { AttemptRecord } from "./scheduler.ts";
-import type { Observation, ReflexExchange, VerbCandidate } from "./types.ts";
+import { DEFAULT_CADENCE, type Observation, type ReflexExchange, type VerbCandidate } from "./types.ts";
 import type { AgentIntent } from "./types.ts";
 
 const CHOP: VerbCandidate = {
@@ -35,6 +35,9 @@ const TALK: VerbCandidate = {
   label: "Talk",
   target: { kind: "person", id: "mira", tx: 1, ty: 0, label: "Mira" },
 };
+
+/** Tests drive a fast reflex cadence; the production default is cost-bounded (cadence-cost.test.ts). */
+const FAST_CADENCE = { cadence: { ...DEFAULT_CADENCE, reflexCooldownTicks: 2 } };
 
 function makeObs(overrides: {
   tick?: number;
@@ -113,6 +116,7 @@ test("boot: one reflex decision becomes a submitted intent and a decision row", 
   const submitted: AgentIntent[] = [];
   const backend = createStubBackend();
   const auto = createReflexAutopilot({
+    config: FAST_CADENCE,
     backend,
     observe: () => obs,
     submit: (intent) => {
@@ -156,6 +160,7 @@ test("reflex decisions alone: the backend pick drives the intent, nothing else",
   const submitted: AgentIntent[] = [];
   const backend = createStubBackend({ prefer: { walk: 1000 } });
   const auto = createReflexAutopilot({
+    config: FAST_CADENCE,
     backend,
     observe: () => makeObs(),
     submit: (intent) => {
@@ -174,6 +179,7 @@ test("an out-of-range backend pick is an attempt error, never a submitted intent
   const submitted: AgentIntent[] = [];
   const records: AttemptRecord[] = [];
   const auto = createReflexAutopilot({
+    config: FAST_CADENCE,
     backend: {
       async decide() {
         return { answers: [{ id: "next_action", type: "choice", probabilities: [0, 1], pick: 9 }] };
@@ -201,6 +207,7 @@ test("idle time produces no backend calls", async () => {
   const backend = createStubBackend();
   let tick = 0;
   const auto = createReflexAutopilot({
+    config: FAST_CADENCE,
     backend,
     observe: () => makeObs({ tick: tick++ }),
     submit: () => null,
@@ -218,7 +225,7 @@ test("idle time produces no backend calls", async () => {
 test("a burst of eventful pushes cannot create unbounded backend calls", async () => {
   const backend = createStubBackend();
   const feed = makeSource();
-  const auto = createReflexAutopilot({ backend, source: feed.source, submit: () => null });
+  const auto = createReflexAutopilot({ config: FAST_CADENCE, backend, source: feed.source, submit: () => null });
   auto.start();
   // Synchronous burst: 60 pushes, each with a fresh arrival trigger.
   for (let tick = 0; tick < 60; tick++) feed.push(makeObs({ tick, people: [`p${tick}`] }));
@@ -230,7 +237,7 @@ test("a burst of eventful pushes cannot create unbounded backend calls", async (
 test("stopping autopilot removes the subscription; pushes afterwards reach nothing", async () => {
   const backend = createStubBackend();
   const feed = makeSource();
-  const auto = createReflexAutopilot({ backend, source: feed.source, submit: () => null });
+  const auto = createReflexAutopilot({ config: FAST_CADENCE, backend, source: feed.source, submit: () => null });
   auto.start();
   assert.equal(feed.subscriberCount(), 1);
   feed.push(makeObs({ tick: 0 }));
@@ -254,6 +261,7 @@ test("budget authorization gates the backend; denial leaves the provider untouch
   const backend = createStubBackend();
   const records: AttemptRecord[] = [];
   const auto = createReflexAutopilot({
+    config: FAST_CADENCE,
     backend,
     observe: () => makeObs(),
     submit: () => null,
@@ -271,6 +279,7 @@ test("a submit rejection is logged as an outcome, not thrown as a provider error
   const backend = createStubBackend();
   const records: AttemptRecord[] = [];
   const auto = createReflexAutopilot({
+    config: FAST_CADENCE,
     backend,
     observe: () => makeObs(),
     submit: () => "too far",
@@ -289,6 +298,7 @@ test("a submit rejection is logged as an outcome, not thrown as a provider error
 test("one executable candidate still offers a reflex choice against resting", async () => {
   const backend = createStubBackend();
   const auto = createReflexAutopilot({
+    config: FAST_CADENCE,
     backend,
     observe: () => makeObs({ verbs: [CHOP, TALK] }), // talk has no intent wire
     submit: () => null,
@@ -303,6 +313,7 @@ test("one executable candidate still offers a reflex choice against resting", as
 test("onDecision receives the row instead of the default in-memory log", async () => {
   const rows: unknown[] = [];
   const auto = createReflexAutopilot({
+    config: FAST_CADENCE,
     backend: createStubBackend(),
     observe: () => makeObs(),
     submit: () => null,

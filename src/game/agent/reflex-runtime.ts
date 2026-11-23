@@ -6,7 +6,7 @@ import type { JevBackendConfig } from "./jev.ts";
 import type { BudgetGuard } from "./budget.ts";
 import type { AttemptLog } from "./attempts.ts";
 import type { PriceProvenance } from "./pricing.ts";
-import type { DecisionLogRow } from "./types.ts";
+import type { CadencePolicy, DecisionLogRow } from "./types.ts";
 
 export function createHostReflex(opts: {
   feed: HostFeed;
@@ -15,6 +15,8 @@ export function createHostReflex(opts: {
   log: AttemptLog;
   price: PriceProvenance;
   agentId: string;
+  /** Test/tuning seam: override reflex cadence (production uses DEFAULT_CADENCE). */
+  cadence?: CadencePolicy;
   maxRetries?: number;
   backoffMs?: number;
   onDecision?: (row: DecisionLogRow) => void;
@@ -26,6 +28,7 @@ export function createHostReflex(opts: {
     submit: (intent) => opts.feed.submit(intent),
     verb: (req) => opts.feed.verb(req),
     hooks: { onDecision: opts.onDecision },
+    config: opts.cadence ? { cadence: opts.cadence } : undefined,
   });
   return { backend, autopilot };
 }
