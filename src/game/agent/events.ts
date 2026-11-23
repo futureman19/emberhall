@@ -15,14 +15,16 @@
  * - normal:   dropped during the quiet window (22:00–06:00 default cadence).
  *
  * Thresholds are sim-derived where the sim has a rule (hp from combat/poison)
- * and configurable where the sim does not yet drain the stat (hunger/energy
- * exist on BodySheet but nothing decrements them on main today — the events
- * arm for when it does, and tests drive them synthetically).
+ * and from sim.ts decay (hunger 3.2 and energy 2.4 per vale hour).
+ * Crossings remain useful diagnostics; risk.ts selects paid admission and
+ * also detects unresolved danger from the current observation.
  */
 import type { Observation } from "./types.ts";
 
 export type ReflexEventKind =
   | "boot"
+  | "danger.unresolved"
+  | "activity.heartbeat"
   | "vitals.hp_drop"
   | "vitals.hp_critical"
   | "vitals.hunger_low"
@@ -52,8 +54,7 @@ export interface ReflexEvent {
 export interface EventDeriveConfig {
   /** hp/maxHp at or below this fraction raises hp_critical on crossing. */
   hpCriticalFraction: number;
-  /** hunger/energy crossings (the sim does not drain these yet on main;
-   *  armed for when it does, and exercised synthetically in tests). */
+  /** Hunger/energy warning and critical crossings; see risk cadence docs. */
   hungerLow: number;
   hungerCritical: number;
   energyLow: number;

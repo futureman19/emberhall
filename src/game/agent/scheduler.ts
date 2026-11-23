@@ -43,6 +43,7 @@ import {
   DEFAULT_EVENT_CONFIG,
 } from "./events.ts";
 import { hashObservation } from "./log.ts";
+import { IDLE_HEARTBEAT_TICKS, riskGatedEvents, riskStillRelevant } from "./risk.ts";
 import { DEFAULT_CADENCE, type CadencePolicy, type Observation } from "./types.ts";
 import type { ReflexExchange, ReflexResult } from "./types.ts";
 
@@ -116,6 +117,9 @@ export interface SchedulerHooks {
 }
 
 export interface SchedulerConfig {
+  /** Production paid admission; false only for legacy dispatch-mechanics tests. */
+  riskGated: boolean;
+  idleHeartbeatTicks: number;
   cadence: CadencePolicy;
   events: EventDeriveConfig;
   maxConcurrentAttempts: number;
@@ -125,6 +129,8 @@ export interface SchedulerConfig {
 }
 
 export const DEFAULT_SCHEDULER_CONFIG: SchedulerConfig = {
+  riskGated: true,
+  idleHeartbeatTicks: IDLE_HEARTBEAT_TICKS,
   cadence: DEFAULT_CADENCE,
   events: DEFAULT_EVENT_CONFIG,
   maxConcurrentAttempts: 1,
@@ -192,7 +198,9 @@ export function createReflexScheduler<P>(opts: {
   let prevQuiet: boolean | null = null;
   let drainWaiters: (() => void)[] = [];
 
-  const drained = () => inFlight === 0 && pending === null;
+  // Retained work cannot progress without a future push; do not deadlock
+  // callers waiting for the current provider/authorization work to settle.
+  const drained = () => inFlight === 0;
   const notifyDrained = () => {
     if (!drained()) return;
     const waiters = drainWaiters;
@@ -340,9 +348,16 @@ export function createReflexScheduler<P>(opts: {
       }
       prevQuiet = quiet;
 
+      if (config.riskGated && pending !== null) {
+        const remaining = pending.triggers.filter(t => riskStillRelevant(t, obs, config.events));
+        pending = remaining.length ? { obs, triggers: remaining } : null;
+      }
+
       // Quiet window: opportunities are dropped (the body sleeps); danger
       // still wakes the reflexes, per contract §5.
-      let triggers = quiet ? events.filter((e) => e.survival) : events;
+      let triggers = config.riskGated
+        ? riskGatedEvents(obs, events, config.events, lastAttemptTick, config.idleHeartbeatTicks)
+        : quiet ? events.filter((e) => e.survival) : events;
       if (triggers.length === 0) {
         // Eventless (or quiet-filtered) push: the tick still advanced, so a
         // retained trigger whose window has passed releases now. No events

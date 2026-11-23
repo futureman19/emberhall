@@ -164,7 +164,7 @@ function makeScheduler(opts: {
         opts.hooks?.onAttemptEnd?.(rec);
       },
     },
-    config: { cadence: { ...DEFAULT_CADENCE, reflexCooldownTicks: 2 }, ...opts.config },
+    config: { riskGated: false, cadence: { ...DEFAULT_CADENCE, reflexCooldownTicks: 2 }, ...opts.config },
     now: () => 1000,
   });
   return { scheduler, thinker, records, starts, authorizations };

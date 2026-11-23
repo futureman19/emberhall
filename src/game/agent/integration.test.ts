@@ -91,7 +91,7 @@ test("real shard WS + Jev adapter + durable meter executes eating; stopping prev
   assert.equal(foldAttempts(log.lines(), DEFAULT_PRICE)[0]!.status, "ok");
   let resolve!: (r: { answers: [] }) => void;
   let submitted = 0;
-  const late = createReflexAutopilot({ config: { cadence: { ...DEFAULT_CADENCE, reflexCooldownTicks: 2 } }, observe: () => feed.latest, backend: { decide: () => new Promise(r => { resolve = r; }) }, submit: () => { submitted++; return null; } });
+  const late = createReflexAutopilot({ config: { riskGated: false, cadence: { ...DEFAULT_CADENCE, reflexCooldownTicks: 2 } }, observe: () => feed.latest, backend: { decide: () => new Promise(r => { resolve = r; }) }, submit: () => { submitted++; return null; } });
   late.start(); late.step(); await waitFor(() => typeof resolve === "function"); late.stop(); resolve({ answers: [] }); await late.settled();
   assert.equal(submitted, 0);
 });

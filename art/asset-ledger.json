@@ -174,6 +174,7 @@
     "src/game/agent/reflex.ts",
     "src/game/agent/replay.ts",
     "src/game/agent/report.ts",
+    "src/game/agent/risk.ts",
     "src/game/agent/scheduler.ts",
     "src/game/agent/stub.ts",
     "src/game/agent/types.ts",
@@ -77728,7 +77729,7 @@
       "canonicalId": "src/game/agent/events.ts#DeriveState.idleArmed=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:112"
+        "src/game/agent/events.ts:113"
       ],
       "sourceNames": [
         "DeriveState.idleArmed"
@@ -77774,7 +77775,7 @@
       "canonicalId": "src/game/agent/events.ts#DeriveState.idleArmed=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:112"
+        "src/game/agent/events.ts:113"
       ],
       "sourceNames": [
         "DeriveState.idleArmed"
@@ -77816,11 +77817,57 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/agent/events.ts#ReflexEvent.kind=activity.heartbeat",
+      "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=activity.heartbeat",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/agent/events.ts:47"
+      ],
+      "sourceNames": [
+        "ReflexEvent.kind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/agent/events.ts:47"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/agent/events.ts:47"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/agent/events.ts#ReflexEvent.kind=activity.idle",
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=activity.idle",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -77866,7 +77913,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=boot",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -77912,7 +77959,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=danger.hostile_engaged",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -77958,7 +78005,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=danger.hostile_gone",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -78000,11 +78047,57 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "state-vocabulary:src/game/agent/events.ts#ReflexEvent.kind=danger.unresolved",
+      "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=danger.unresolved",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/agent/events.ts:47"
+      ],
+      "sourceNames": [
+        "ReflexEvent.kind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/agent/events.ts:47"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/agent/events.ts:47"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "state-vocabulary:src/game/agent/events.ts#ReflexEvent.kind=opportunity.pile_arrived",
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=opportunity.pile_arrived",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -78050,7 +78143,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=social.fauna_arrived",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -78096,7 +78189,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=social.person_arrived",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -78142,7 +78235,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=vitals.energy_critical",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -78188,7 +78281,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=vitals.energy_low",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -78234,7 +78327,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=vitals.ghost",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -78280,7 +78373,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=vitals.hp_critical",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -78326,7 +78419,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=vitals.hp_drop",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -78372,7 +78465,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=vitals.hunger_critical",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -78418,7 +78511,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=vitals.hunger_low",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -78464,7 +78557,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=vitals.resurrected",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -78510,7 +78603,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=world.daybreak",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -78556,7 +78649,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=world.nightfall",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -78602,7 +78695,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.kind=world.weather_shift",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:45"
+        "src/game/agent/events.ts:47"
       ],
       "sourceNames": [
         "ReflexEvent.kind"
@@ -78648,7 +78741,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.survival=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:47"
+        "src/game/agent/events.ts:49"
       ],
       "sourceNames": [
         "ReflexEvent.survival"
@@ -78694,7 +78787,7 @@
       "canonicalId": "src/game/agent/events.ts#ReflexEvent.survival=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/events.ts:47"
+        "src/game/agent/events.ts:49"
       ],
       "sourceNames": [
         "ReflexEvent.survival"
@@ -80212,7 +80305,7 @@
       "canonicalId": "src/game/agent/scheduler.ts#AttemptRecord.status=denied",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/scheduler.ts:75"
+        "src/game/agent/scheduler.ts:76"
       ],
       "sourceNames": [
         "AttemptRecord.status"
@@ -80258,7 +80351,7 @@
       "canonicalId": "src/game/agent/scheduler.ts#AttemptRecord.status=error",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/scheduler.ts:75"
+        "src/game/agent/scheduler.ts:76"
       ],
       "sourceNames": [
         "AttemptRecord.status"
@@ -80304,7 +80397,7 @@
       "canonicalId": "src/game/agent/scheduler.ts#AttemptRecord.status=ok",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/scheduler.ts:75"
+        "src/game/agent/scheduler.ts:76"
       ],
       "sourceNames": [
         "AttemptRecord.status"
@@ -80350,7 +80443,7 @@
       "canonicalId": "src/game/agent/scheduler.ts#ReflexScheduler.running=false",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/scheduler.ts:157"
+        "src/game/agent/scheduler.ts:163"
       ],
       "sourceNames": [
         "ReflexScheduler.running"
@@ -80396,7 +80489,7 @@
       "canonicalId": "src/game/agent/scheduler.ts#ReflexScheduler.running=true",
       "family": "state-vocabulary",
       "catalogSources": [
-        "src/game/agent/scheduler.ts:157"
+        "src/game/agent/scheduler.ts:163"
       ],
       "sourceNames": [
         "ReflexScheduler.running"
@@ -80433,6 +80526,98 @@
       "status": "inventoried",
       "evidence": [
         "src/game/agent/scheduler.ts:157"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/agent/scheduler.ts#SchedulerConfig.riskGated=false",
+      "canonicalId": "src/game/agent/scheduler.ts#SchedulerConfig.riskGated=false",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/agent/scheduler.ts:121"
+      ],
+      "sourceNames": [
+        "SchedulerConfig.riskGated"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/agent/scheduler.ts:121"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/agent/scheduler.ts:121"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "state-vocabulary:src/game/agent/scheduler.ts#SchedulerConfig.riskGated=true",
+      "canonicalId": "src/game/agent/scheduler.ts#SchedulerConfig.riskGated=true",
+      "family": "state-vocabulary",
+      "catalogSources": [
+        "src/game/agent/scheduler.ts:121"
+      ],
+      "sourceNames": [
+        "SchedulerConfig.riskGated"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/agent/scheduler.ts:121"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/agent/scheduler.ts:121"
       ],
       "batchOwner": "phase-0-inventory; future-authoring-unassigned",
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
@@ -261440,6 +261625,52 @@
       "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
     },
     {
+      "id": "vocabulary/src/game/agent/events.ts#ReflexEventKind:activity.heartbeat",
+      "canonicalId": "activity.heartbeat",
+      "family": "vocabulary/src/game/agent/events.ts#ReflexEventKind",
+      "catalogSources": [
+        "src/game/agent/events.ts:24"
+      ],
+      "sourceNames": [
+        "ReflexEventKind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/agent/events.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/agent/events.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
       "id": "vocabulary/src/game/agent/events.ts#ReflexEventKind:activity.idle",
       "canonicalId": "activity.idle",
       "family": "vocabulary/src/game/agent/events.ts#ReflexEventKind",
@@ -261580,6 +261811,52 @@
     {
       "id": "vocabulary/src/game/agent/events.ts#ReflexEventKind:danger.hostile_gone",
       "canonicalId": "danger.hostile_gone",
+      "family": "vocabulary/src/game/agent/events.ts#ReflexEventKind",
+      "catalogSources": [
+        "src/game/agent/events.ts:24"
+      ],
+      "sourceNames": [
+        "ReflexEventKind"
+      ],
+      "rendererLocations": [],
+      "rendererMapping": "unresolved; vocabulary/catalog inventory only",
+      "surfaces": [],
+      "jsxTags": null,
+      "states": [
+        {
+          "id": "catalog-or-current-presentation",
+          "status": "inventoried",
+          "evidence": [
+            "src/game/agent/events.ts:24"
+          ],
+          "applicability": "source contract; runtime unverified"
+        }
+      ],
+      "source": {
+        "blend": null,
+        "script": null,
+        "export": null,
+        "parts": null,
+        "materials": null,
+        "attachments": null,
+        "lods": null
+      },
+      "metrics": {
+        "bounds": null,
+        "bytes": null,
+        "triangles": null,
+        "materialSlots": null
+      },
+      "status": "inventoried",
+      "evidence": [
+        "src/game/agent/events.ts:24"
+      ],
+      "batchOwner": "phase-0-inventory; future-authoring-unassigned",
+      "notes": "Not an authored replacement, runtime verification, or approval. Existing procedural/fallback presentation is not labeled complete."
+    },
+    {
+      "id": "vocabulary/src/game/agent/events.ts#ReflexEventKind:danger.unresolved",
+      "canonicalId": "danger.unresolved",
       "family": "vocabulary/src/game/agent/events.ts#ReflexEventKind",
       "catalogSources": [
         "src/game/agent/events.ts:24"
@@ -262686,7 +262963,7 @@
       "canonicalId": "denied",
       "family": "vocabulary/src/game/agent/scheduler.ts#AttemptStatus",
       "catalogSources": [
-        "src/game/agent/scheduler.ts:72"
+        "src/game/agent/scheduler.ts:73"
       ],
       "sourceNames": [
         "AttemptStatus"
@@ -262732,7 +263009,7 @@
       "canonicalId": "error",
       "family": "vocabulary/src/game/agent/scheduler.ts#AttemptStatus",
       "catalogSources": [
-        "src/game/agent/scheduler.ts:72"
+        "src/game/agent/scheduler.ts:73"
       ],
       "sourceNames": [
         "AttemptStatus"
@@ -262778,7 +263055,7 @@
       "canonicalId": "ok",
       "family": "vocabulary/src/game/agent/scheduler.ts#AttemptStatus",
       "catalogSources": [
-        "src/game/agent/scheduler.ts:72"
+        "src/game/agent/scheduler.ts:73"
       ],
       "sourceNames": [
         "AttemptStatus"

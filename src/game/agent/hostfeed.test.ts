@@ -89,7 +89,7 @@ test("autopilot over the host feed boots on reflexes and stop() silences it", as
   t.after(() => feed.close());
   const backend = createStubBackend();
   const auto = createReflexAutopilot({
-      config: { cadence: { ...DEFAULT_CADENCE, reflexCooldownTicks: 2 } },
+      config: { riskGated: false, cadence: { ...DEFAULT_CADENCE, reflexCooldownTicks: 2 } },
       backend,
       source: feed.source,
     submit: (intent) => feed.submit(intent),

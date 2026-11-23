@@ -100,7 +100,7 @@ test("default reflex cooldown is at least ten host seconds", () => {
   );
 });
 
-test("default cadence bounds a full vale day of continuous events", async () => {
+test("default risk gate suppresses a full vale day of ambient weather events", async () => {
   // A vale day is ~9,550 host ticks (measured: 955s at 10 ticks/s). Feed a
   // continuous non-survival event stream (weather alternates every tick) at
   // noon — the worst case for reflex burn — and count paid attempts.
@@ -130,7 +130,7 @@ test("default cadence bounds a full vale day of continuous events", async () => 
   await scheduler.settled();
   const n = scheduler.attemptsStarted;
   assert.ok(n <= 65, `a vale day must cost at most ~65 reflex calls, got ${n}`);
-  assert.ok(n >= 55, `reflexes must stay responsive through the day, got ${n}`);
+  assert.equal(n, 1, "ambient weather alone must not buy decisions after boot");
   scheduler.stop();
 });
 

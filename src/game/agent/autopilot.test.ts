@@ -37,7 +37,7 @@ const TALK: VerbCandidate = {
 };
 
 /** Tests drive a fast reflex cadence; the production default is cost-bounded (cadence-cost.test.ts). */
-const FAST_CADENCE = { cadence: { ...DEFAULT_CADENCE, reflexCooldownTicks: 2 } };
+const FAST_CADENCE = { riskGated: false, cadence: { ...DEFAULT_CADENCE, reflexCooldownTicks: 2 } };
 
 function makeObs(overrides: {
   tick?: number;
