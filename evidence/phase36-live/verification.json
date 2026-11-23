@@ -1,0 +1,55 @@
+{
+  "schema": "emberhall-phase36-verdict-v1",
+  "pass": true,
+  "accounting": {
+    "accountingPass": true,
+    "liveAcceptance": false,
+    "problems": [],
+    "enabledWallMs": 954580,
+    "excludedWallMs": 0,
+    "valeHours": 24.002717077771305,
+    "paidCalls": 3,
+    "byStatus": {
+      "ok": 3
+    },
+    "promptTokens": 22700,
+    "completionTokens": 6282,
+    "costMicros": 954,
+    "byUtcDay": {
+      "2026-11-23": 954
+    },
+    "economics": {
+      "observedUsd": 0.000954,
+      "usdPerAgentWallDay": 0.08634750361415493,
+      "usdPerValeDay": 0.0009538920083844914,
+      "valeDaysPerWallDay": 90.52125697162803,
+      "thresholdUsd": 0.1,
+      "thresholdPass": true,
+      "basis": "provider usage at recorded tariff; sustained enabled-time projection, NOT a measured 24h bill"
+    },
+    "survival": {
+      "samples": 8642,
+      "minHp": 40,
+      "minHunger": 24.986860906658087,
+      "minEnergy": 22.353479013341364
+    },
+    "rejections": 0,
+    "interventions": 0,
+    "caveat": "Accounting alone cannot establish replay, unlogged interventions, provider invoices or host truth."
+  },
+  "decisions": {
+    "pass": true,
+    "checked": 3,
+    "mismatches": [],
+    "paidCallsIssued": 0
+  },
+  "policy": {
+    "pass": true,
+    "mismatches": [],
+    "requests": 3,
+    "paidCallsIssued": 0
+  },
+  "problems": [],
+  "acceptance": "PASS_RECORDED_EVIDENCE",
+  "caveat": "Independent offline verification of recorded inputs, not an invoice audit or proof against omitted host actions. Human review of fresh-agent provenance and raw host logs remains required."
+}

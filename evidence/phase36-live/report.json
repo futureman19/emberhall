@@ -1,0 +1,250 @@
+{
+  "acceptance": "INCOMPLETE_WATER_PRESSURE_CRITERION",
+  "recordedEvidencePass": true,
+  "phase4Authorized": false,
+  "codeRevision": "8a441d65ac6b15f462d96164f04acec22b4e7303",
+  "branch": "wt/t_bd4459bd",
+  "agentId": "reflex-proof-36-1795415115",
+  "bodyId": "host-d234ade3a81b52eec6481882",
+  "reason": "full-vale-day",
+  "policy": {
+    "version": "phase36-risk-v1",
+    "config": {
+      "riskGated": true,
+      "idleHeartbeatTicks": 36000,
+      "cadence": {
+        "mindHeartbeatHours": 3,
+        "sleepStartHour": 22,
+        "sleepEndHour": 6,
+        "reflexCooldownTicks": 150
+      },
+      "events": {
+        "hpCriticalFraction": 0.25,
+        "hungerLow": 25,
+        "hungerCritical": 10,
+        "energyLow": 25,
+        "energyCritical": 10,
+        "hostileRadius": 8,
+        "idleStasisPushes": 3
+      },
+      "maxConcurrentAttempts": 1,
+      "failureBackoffTicks": 4,
+      "maxFailureBackoffTicks": 64
+    },
+    "sourceHashes": {
+      "game/agent/autopilot.ts": "721e32b65313154788f5405f46c5c658eefe7adfa9d9182b7606ca3d40efc210",
+      "game/agent/scheduler.ts": "1ac5f8bf830486e65448a6721f6793d179dd13c7fa4ec735b7afb3830ef4f994",
+      "game/agent/events.ts": "22d2e648c45368d2c6f2fcef81dc4ceb3f61b691ff0c22e0d4e89f463888b3a8",
+      "game/agent/types.ts": "6c78dca0b255ad9c757ae3097263f3aef31ff28ef5e908ac7823074a38ce3eaf",
+      "game/agent/log.ts": "28711a56c219c942c2b18a19e2b02ccae71607f5fc872ec1de2dd3176e1aa17c",
+      "game/agent/reflex.ts": "4ff40df08dd8c7e38af3497faef1d9daad88399b3bf4933b473a18830ce16d14",
+      "game/agent/risk.ts": "1147f5aaa0706445a6d1d08b51b445022bfc015780c3849b77269d40d0f1bd8a",
+      "game/player.ts": "f2c36bcfb7812de69d626998df351dc50322a8411ef7fcd0fe642e8a10e77262",
+      "game/catalog.ts": "f8bbb43e0f3fc3421801639f9baa3dd49cbc04f5ce4dcf50151e70729bdcc11f",
+      "game/forestry.ts": "21288a5ba06120ab25d58e57e2b84e4ccd2f2dedd868a4536ece4b89312b4235"
+    }
+  },
+  "metrics": {
+    "accountingPass": true,
+    "liveAcceptance": false,
+    "problems": [],
+    "enabledWallMs": 954580,
+    "excludedWallMs": 0,
+    "valeHours": 24.002717077771305,
+    "paidCalls": 3,
+    "byStatus": {
+      "ok": 3
+    },
+    "promptTokens": 22700,
+    "completionTokens": 6282,
+    "costMicros": 954,
+    "byUtcDay": {
+      "2026-11-23": 954
+    },
+    "economics": {
+      "observedUsd": 0.000954,
+      "usdPerAgentWallDay": 0.08634750361415493,
+      "usdPerValeDay": 0.0009538920083844914,
+      "valeDaysPerWallDay": 90.52125697162803,
+      "thresholdUsd": 0.1,
+      "thresholdPass": true,
+      "basis": "provider usage at recorded tariff; sustained enabled-time projection, NOT a measured 24h bill"
+    },
+    "survival": {
+      "samples": 8642,
+      "minHp": 40,
+      "minHunger": 24.986860906658087,
+      "minEnergy": 22.353479013341364
+    },
+    "rejections": 0,
+    "interventions": 0,
+    "caveat": "Accounting alone cannot establish replay, unlogged interventions, provider invoices or host truth."
+  },
+  "independentReplay": {
+    "decisions": {
+      "pass": true,
+      "checked": 3,
+      "mismatches": [],
+      "paidCallsIssued": 0
+    },
+    "policy": {
+      "pass": true,
+      "mismatches": [],
+      "requests": 3,
+      "paidCallsIssued": 0
+    }
+  },
+  "dayNightObservations": {
+    "day": 5402,
+    "night": 3240
+  },
+  "triggerCounts": {
+    "boot": 1,
+    "vitals.hunger_low": 1,
+    "danger.unresolved": 1,
+    "vitals.energy_low": 1
+  },
+  "decisionDiagnostics": [
+    {
+      "tick": 6,
+      "answer": "Rest / remain idle",
+      "intent": {
+        "kind": "none",
+        "tx": 0,
+        "ty": 0,
+        "targetId": null,
+        "spell": null
+      },
+      "verb": null,
+      "hunger": 79.94666666666666,
+      "energy": 79.96000000000004,
+      "triggers": [
+        {
+          "kind": "boot",
+          "survival": true,
+          "detail": "autopilot engaged"
+        }
+      ]
+    },
+    {
+      "tick": 6188,
+      "answer": "Eat Cabbage from pack",
+      "intent": null,
+      "verb": "eat",
+      "hunger": 24.995749795546978,
+      "energy": 38.74681234667726,
+      "triggers": [
+        {
+          "kind": "vitals.hunger_low",
+          "survival": true,
+          "detail": "hunger 25.004638684435868 -> 24.995749795546978"
+        },
+        {
+          "kind": "danger.unresolved",
+          "survival": true,
+          "detail": "hunger needs food"
+        }
+      ]
+    },
+    {
+      "tick": 8251,
+      "answer": "Rest / remain idle",
+      "intent": {
+        "kind": "none",
+        "tx": 0,
+        "ty": 0,
+        "targetId": null,
+        "spell": null
+      },
+      "verb": null,
+      "hunger": 40.65797201776633,
+      "energy": 24.993479013341776,
+      "triggers": [
+        {
+          "kind": "vitals.energy_low",
+          "survival": true,
+          "detail": "energy 25.000145680008444 -> 24.993479013341776"
+        }
+      ]
+    }
+  ],
+  "guard": {
+    "capMicros": 500000,
+    "everExhausted": false,
+    "maxReservedMicros": 144,
+    "final": {
+      "capMicros": 500000,
+      "spentMicros": 954,
+      "reservedMicros": 0,
+      "exhausted": false
+    }
+  },
+  "startVitals": {
+    "wallMs": 1795416687790,
+    "tick": 6,
+    "hour": 8.01666666666667,
+    "hp": 40,
+    "ghost": false,
+    "hunger": 79.94666666666666,
+    "energy": 79.96000000000004,
+    "utcDay": "2026-11-23",
+    "guard": {
+      "capMicros": 500000,
+      "spentMicros": 0,
+      "reservedMicros": 0,
+      "exhausted": false
+    }
+  },
+  "endVitals": {
+    "wallMs": 1795417642370,
+    "tick": 8647,
+    "hour": 32.019383744437974,
+    "hp": 40,
+    "ghost": false,
+    "hunger": 37.13797201776578,
+    "energy": 22.353479013341364,
+    "utcDay": "2026-11-23",
+    "guard": {
+      "capMicros": 500000,
+      "spentMicros": 954,
+      "reservedMicros": 0,
+      "exhausted": false
+    }
+  },
+  "foodPackStart": {
+    "meat": 1,
+    "cabbage": 2
+  },
+  "foodPackEnd": {
+    "meat": 1,
+    "cabbage": 1
+  },
+  "waterPressure": {
+    "pass": false,
+    "status": "UNPROVEN_BASELINE_HAS_NO_THIRST_OR_DROWNING",
+    "diagnostic": "No water-survival mechanic exists in the pinned baseline. Hunger/energy decay alone does not cause HP damage; no water exposure was manufactured."
+  },
+  "tests": {
+    "fullCheckExit": 0,
+    "scriptPassed": 571,
+    "sourcePassed": 1613,
+    "log": "phase36-check-r3.log",
+    "targetedRecorderRedGreen": true,
+    "exactWorktreeAuthPort": 5595,
+    "priorFailure": "r2: unrelated random want.test.ts Brann/Kip fixture; unchanged targeted rerun and full r3 passed"
+  },
+  "rawEvidenceHashes": {
+    "raw\\run.json": "2492ca21b0c713dc49db74df407edf186ae34590f6a6bd582f63b7dc78cf0735",
+    "raw\\trace.jsonl": "41348592f6eebf749a104f9db13eae2597b6db8f8ed8d8191cca48eb62f4bac6",
+    "raw\\attempts.jsonl": "7d24d3f3af73884574b6eeda9dca63d3b89eb0d737a82f7f92c9939c0b6da5fc",
+    "raw\\shard-runtime.log": "6536abdcefb34ae1bd99eb546439a5dcc5f85eba9cfafca438cac08ff267f1ce",
+    "raw\\live-run.log": "6811cc1c88cf24326ae0365f5d52c70927e251cecd00ae5f7de054e6cb448b3d"
+  },
+  "provenanceHashes": {
+    "scripts\\phase36-live.mjs": "b2cc1dc2316d40288f3ef4bdf95a0467b0cec52ca12f1e9bc6730c859af4bbd6",
+    "scripts\\phase36-recorder.mjs": "7e800b659810533bcdee9833b488dc5e3b0153795f640289326392ffd8f25537",
+    "evidence\\phase36-live\\raw\\run-live-proof.mjs": "2d81f823c71782f0cd6467af857bfa28fc8d62278d4c5ed693a6481a71b8ee46",
+    "evidence\\phase36-live\\raw\\run-with-key.mjs": "a9a18da0195c493b5c83d6f81f1c6c20b38b8f565c3665f12f2c8322d509f475"
+  },
+  "noPushDeployChain": true
+}

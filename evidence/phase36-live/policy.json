@@ -1,0 +1,37 @@
+{
+  "version": "phase36-risk-v1",
+  "config": {
+    "riskGated": true,
+    "idleHeartbeatTicks": 36000,
+    "cadence": {
+      "mindHeartbeatHours": 3,
+      "sleepStartHour": 22,
+      "sleepEndHour": 6,
+      "reflexCooldownTicks": 150
+    },
+    "events": {
+      "hpCriticalFraction": 0.25,
+      "hungerLow": 25,
+      "hungerCritical": 10,
+      "energyLow": 25,
+      "energyCritical": 10,
+      "hostileRadius": 8,
+      "idleStasisPushes": 3
+    },
+    "maxConcurrentAttempts": 1,
+    "failureBackoffTicks": 4,
+    "maxFailureBackoffTicks": 64
+  },
+  "sourceHashes": {
+    "game/agent/autopilot.ts": "721e32b65313154788f5405f46c5c658eefe7adfa9d9182b7606ca3d40efc210",
+    "game/agent/scheduler.ts": "1ac5f8bf830486e65448a6721f6793d179dd13c7fa4ec735b7afb3830ef4f994",
+    "game/agent/events.ts": "22d2e648c45368d2c6f2fcef81dc4ceb3f61b691ff0c22e0d4e89f463888b3a8",
+    "game/agent/types.ts": "6c78dca0b255ad9c757ae3097263f3aef31ff28ef5e908ac7823074a38ce3eaf",
+    "game/agent/log.ts": "28711a56c219c942c2b18a19e2b02ccae71607f5fc872ec1de2dd3176e1aa17c",
+    "game/agent/reflex.ts": "4ff40df08dd8c7e38af3497faef1d9daad88399b3bf4933b473a18830ce16d14",
+    "game/agent/risk.ts": "1147f5aaa0706445a6d1d08b51b445022bfc015780c3849b77269d40d0f1bd8a",
+    "game/player.ts": "f2c36bcfb7812de69d626998df351dc50322a8411ef7fcd0fe642e8a10e77262",
+    "game/catalog.ts": "f8bbb43e0f3fc3421801639f9baa3dd49cbc04f5ce4dcf50151e70729bdcc11f",
+    "game/forestry.ts": "21288a5ba06120ab25d58e57e2b84e4ccd2f2dedd868a4536ece4b89312b4235"
+  }
+}
