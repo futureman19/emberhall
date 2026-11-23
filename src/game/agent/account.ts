@@ -7,8 +7,8 @@
  * console (client) renders and edits them. Zero runtime dependencies —
  * pure types, constants, and validators so both sides validate identically.
  *
- * The full protocol doc is `docs/phase-4-contracts.md`. Decisions are made
- * there once; this file is the executable half.
+ * Normative spec: `docs/phase-4-contracts-v1.md` (supersedes the v0 doc).
+ * Decisions are made there once; this file is the executable half.
  */
 import type { SkillId } from "../types.ts";
 
@@ -37,12 +37,14 @@ export interface RolePackManifestEntry {
   summary: string;
   /** Pack markdown path relative to repo root: `agent-packs/<id>.md`. */
   file: string;
-  /** Applied exactly once at first spawn; never re-applied on recovery. */
+  /** The standard new-hall spread (catalog `emptySkills()`), applied exactly
+   *  once at first spawn; never re-applied on recovery or role change. */
   startingSkills: Partial<Record<SkillId, number>>;
 }
 
 export interface RolePackManifest {
-  packs: RolePackManifestEntry[];
+  version: 1;
+  roles: RolePackManifestEntry[];
 }
 
 /* ── Billing (stub — beta is free; pricing is a launch decision) ───── */
@@ -93,7 +95,9 @@ export interface CloudMindConfig {
 }
 
 /** Local mind: an endpoint the owner hosts (Ollama, llama.cpp, vLLM, …).
- *  Loopback and LAN addresses are explicitly allowed — that is the point. */
+ *  A hosted shard cannot see the owner's laptop: loopback/LAN URLs are only
+ *  accepted when the operator explicitly allows private endpoints (dev), or
+ *  the owner exposes the endpoint over an HTTPS tunnel. */
 export interface LocalMindConfig {
   kind: "local";
   endpointUrl: string;
@@ -102,28 +106,48 @@ export interface LocalMindConfig {
 
 export type MindConfig = CloudMindConfig | LocalMindConfig;
 
+/** Cloud base used when the config names no custom gateway. */
+export const DEFAULT_CLOUD_BASE_URL = "https://api.openai.com/v1";
+
 /** What the API returns about a configured mind: the non-secret config
- *  plus a masked hint that a secret exists. The secret value is write-only
- *  and is never serialized into any API response or log line. */
+ *  plus a presence flag for the stored key. `"configured"` says a key is
+ *  stored; it never discloses any part of the key itself. The secret value
+ *  is write-only and is never serialized into any API response or log line. */
 export interface PublicMind {
   config: MindConfig;
-  /** e.g. "…w9x2" — last four of the stored key, or null when keyless. */
-  secretHint: string | null;
+  secretHint: "configured" | null;
+}
+
+/** The public wire shape for one character: the durable record plus the
+ *  secret-free mind view. Private host fields (token/key bindings, body id,
+ *  spawn markers, recovery state) never appear here. */
+export interface CharacterView {
+  character: Character;
+  publicMind: PublicMind | null;
 }
 
 /* ── Character ─────────────────────────────────────────────────────── */
 
 export type Lifecycle = "draft" | "ready" | "unleashed" | "recalled";
 
-/** Which brain is currently driving executed intents. */
-export type Driver = "mind" | "reflex";
+/** Which brain is currently driving executed intents. `none` whenever the
+ *  runtime is inactive or recalled. */
+export type Driver = "mind" | "reflex" | "none";
 
 /** Observed connectivity of the owner's mind. `asleep` is a supported,
- *  normal state — never an error. */
-export type MindState = "unconfigured" | "awake" | "asleep";
+ *  normal state — never an error. `connecting`/`error` describe the last
+ *  exchange attempt's transport, never the body's health. */
+export type MindState = "unconfigured" | "connecting" | "awake" | "asleep" | "error";
+
+/** Server-owned agent runtime lifecycle, independent of any browser. */
+export type RuntimeState = "inactive" | "starting" | "running" | "degraded" | "recovering";
+
+/** Bundled reflex layer availability. `budget-exhausted` is a visible,
+ *  degraded state — never silently replaced by an unmetered stub. */
+export type ReflexState = "ready" | "unavailable" | "budget-exhausted";
 
 export interface Character {
-  id: string;
+  characterId: string;
   accountId: string;
   /** 1..NAME_MAX, unique per account. */
   name: string;
@@ -134,6 +158,11 @@ export interface Character {
   /** null until the owner connects a mind. */
   mind: MindConfig | null;
   lifecycle: Lifecycle;
+  /** Optimistic-concurrency counter: starts at 1, +1 on every accepted
+   *  mutation. Mutating routes require `expectedRevision`. */
+  revision: number;
+  /** Beta billing is a free, non-blocking stub (v1 §5). */
+  billing: BillingStub;
   createdAt: number;
   updatedAt: number;
   unleashedAt: number | null;
@@ -145,6 +174,8 @@ export interface Character {
 export const NAME_MAX = 32;
 export const DIRECTIVE_MAX = 2000;
 export const ENDPOINT_URL_MAX = 2048;
+export const MODEL_MAX = 128;
+export const SECRET_MAX = 512;
 
 /* ── Validation ────────────────────────────────────────────────────── */
 
@@ -173,7 +204,12 @@ export function validateDirective(
   directive: unknown,
   opts: { required: boolean },
 ): FieldError | null {
-  if (directive === undefined || directive === null || directive === "") {
+  // Whitespace-only counts as empty: a valid draft, never ready (v1 §1).
+  if (
+    directive === undefined ||
+    directive === null ||
+    (typeof directive === "string" && directive.trim().length === 0)
+  ) {
     return opts.required
       ? { field: "directive", code: "REQUIRED", message: "Write a directive — one sentence is enough." }
       : null;
@@ -191,9 +227,52 @@ export function validateDirective(
   return null;
 }
 
-function validateHttpUrl(
+/* ── Endpoint URLs ─────────────────────────────────────────────────── */
+
+/** IPv4/IPv6 literal or hostname that must never be an egress target on a
+ *  hosted shard: loopback, RFC1918, link-local, CGNAT, unspecified,
+ *  multicast/reserved, and the cloud metadata address. WHATWG URL parsing
+ *  already normalizes odd IPv4 spellings (hex, single integer) to dotted
+ *  quads, so checking the parsed hostname covers those bypasses. DNS-level
+ *  rebinding checks happen per-fetch in the host's guarded egress. */
+export function isPrivateHostLiteral(hostname: string): boolean {
+  const h = hostname.toLowerCase();
+  if (h === "localhost" || h === "::1" || h === "[::1]" || h === "0.0.0.0") return true;
+  if (h.startsWith("[") && h.endsWith("]")) {
+    const v6 = h.slice(1, -1);
+    if (v6 === "::" || v6 === "::1") return true;
+    if (/^fe[89ab]/.test(v6)) return true; // fe80::/10 link-local
+    if (/^f[cd]/.test(v6)) return true; // fc00::/7 unique-local
+    return false;
+  }
+  const m = h.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
+  if (!m) return false;
+  const [a, b] = [Number(m[1]), Number(m[2])];
+  if (a > 255 || b > 255 || Number(m[3]) > 255 || Number(m[4]) > 255) return false;
+  if (a === 0 || a === 10 || a === 127) return true;
+  if (a === 100 && b >= 64 && b <= 127) return true; // CGNAT
+  if (a === 169 && b === 254) return true; // link-local (incl. metadata)
+  if (a === 172 && b >= 16 && b <= 31) return true;
+  if (a === 192 && b === 168) return true;
+  if (a === 198 && (b === 18 || b === 19)) return true; // benchmark
+  if (a >= 224) return true; // multicast + reserved
+  return false;
+}
+
+/** The one cloud metadata endpoint, named distinctly so the refusal is
+ *  actionable regardless of the private-address policy. */
+export const METADATA_HOSTS = new Set(["169.254.169.254", "metadata.google.internal"]);
+
+export interface EndpointPolicy {
+  /** Operator-managed development allowlist: permits loopback/LAN HTTP
+   *  origins. Hosted deployments leave this false. */
+  allowPrivateEndpoints: boolean;
+}
+
+export function validateEndpointUrl(
   raw: string,
   field: string,
+  policy: EndpointPolicy,
 ): FieldError | null {
   if (raw.length > ENDPOINT_URL_MAX) {
     return { field, code: "TOO_LONG", message: "That URL is too long." };
@@ -214,16 +293,91 @@ function validateHttpUrl(
       message: "Do not embed credentials in the URL — use the key field instead.",
     };
   }
+  if (url.search !== "" || url.hash !== "") {
+    return {
+      field,
+      code: "QUERY_FRAGMENT",
+      message: "Use the plain API base — no query string or #fragment.",
+    };
+  }
+  const host = url.hostname.toLowerCase();
+  if (METADATA_HOSTS.has(host)) {
+    return {
+      field,
+      code: "METADATA_HOST",
+      message: "That address is a cloud metadata endpoint — it can never be a mind.",
+    };
+  }
+  if (isPrivateHostLiteral(host)) {
+    if (!policy.allowPrivateEndpoints) {
+      return {
+        field,
+        code: "PRIVATE_HOST",
+        message:
+          "A hosted shard cannot reach loopback/LAN addresses — expose your local mind over an HTTPS tunnel and paste that URL.",
+      };
+    }
+    return null; // dev allowlist: loopback/LAN over http or https
+  }
+  if (url.protocol !== "https:") {
+    return {
+      field,
+      code: "HTTPS_REQUIRED",
+      message: "Public endpoints must use https — plain http is only for loopback/LAN development.",
+    };
+  }
   return null;
 }
 
-export function validateMindConfig(mind: unknown): FieldError[] {
-  if (mind === null || typeof mind !== "object") {
+/* ── Mind configuration ────────────────────────────────────────────── */
+
+const CLOUD_KEYS = new Set(["kind", "provider", "baseUrl", "model"]);
+const LOCAL_KEYS = new Set(["kind", "endpointUrl", "model"]);
+/** Names that must never be persisted inside a config blob. */
+const SECRET_KEYS = new Set(["apikey", "secret", "key", "token", "password", "authorization"]);
+
+function validateModel(model: unknown, field: string): FieldError | null {
+  if (model === undefined || model === null) return null;
+  if (typeof model !== "string") {
+    return { field, code: "TYPE", message: "Model must be text." };
+  }
+  // A whitespace-only model is no model at all — normalized to absent.
+  if (model.trim().length > MODEL_MAX) {
+    return { field, code: "TOO_LONG", message: `Keep the model under ${MODEL_MAX} characters.` };
+  }
+  return null;
+}
+
+function unknownMindKeys(m: Record<string, unknown>, allowed: Set<string>): FieldError[] {
+  const errs: FieldError[] = [];
+  for (const key of Object.keys(m)) {
+    if (allowed.has(key)) continue;
+    if (SECRET_KEYS.has(key.toLowerCase())) {
+      errs.push({
+        field: `mind.${key}`,
+        code: "SECRET_IN_CONFIG",
+        message: "Keys and secrets go in the separate key field — never inside the mind config.",
+      });
+    } else {
+      errs.push({ field: `mind.${key}`, code: "UNKNOWN_FIELD", message: `Unknown mind setting "${key}".` });
+    }
+  }
+  return errs;
+}
+
+export function validateMindConfig(
+  mind: unknown,
+  policy: EndpointPolicy = { allowPrivateEndpoints: false },
+): FieldError[] {
+  if (mind === null || mind === undefined) {
     return [{ field: "mind", code: "REQUIRED", message: "Connect a mind: cloud key or local endpoint." }];
+  }
+  if (typeof mind !== "object" || Array.isArray(mind)) {
+    return [{ field: "mind", code: "TYPE", message: "Mind config must be an object." }];
   }
   const m = mind as Record<string, unknown>;
   if (m.kind === "cloud") {
-    const errs: FieldError[] = [];
+    const errs = unknownMindKeys(m, CLOUD_KEYS);
     if (!isCloudProvider(m.provider)) {
       errs.push({
         field: "mind.provider",
@@ -231,29 +385,61 @@ export function validateMindConfig(mind: unknown): FieldError[] {
         message: `Provider must be one of: ${CLOUD_PROVIDERS.join(", ")}.`,
       });
     }
-    if (m.baseUrl !== undefined) {
-      if (typeof m.baseUrl !== "string") {
+    if (m.baseUrl !== undefined && m.baseUrl !== null) {
+      if (typeof m.baseUrl !== "string" || m.baseUrl.trim().length === 0) {
         errs.push({ field: "mind.baseUrl", code: "TYPE", message: "Base URL must be text." });
       } else {
-        const e = validateHttpUrl(m.baseUrl, "mind.baseUrl");
+        const e = validateEndpointUrl(m.baseUrl.trim(), "mind.baseUrl", policy);
         if (e) errs.push(e);
       }
     }
+    const modelErr = validateModel(m.model, "mind.model");
+    if (modelErr) errs.push(modelErr);
     return errs;
   }
   if (m.kind === "local") {
-    if (typeof m.endpointUrl !== "string" || m.endpointUrl.length === 0) {
-      return [{ field: "mind.endpointUrl", code: "REQUIRED", message: "Enter your local endpoint URL." }];
+    const errs = unknownMindKeys(m, LOCAL_KEYS);
+    if (typeof m.endpointUrl !== "string" || m.endpointUrl.trim().length === 0) {
+      errs.push({ field: "mind.endpointUrl", code: "REQUIRED", message: "Enter your local endpoint URL." });
+    } else {
+      const e = validateEndpointUrl(m.endpointUrl.trim(), "mind.endpointUrl", policy);
+      if (e) errs.push(e);
     }
-    const e = validateHttpUrl(m.endpointUrl, "mind.endpointUrl");
-    return e ? [e] : [];
+    const modelErr = validateModel(m.model, "mind.model");
+    if (modelErr) errs.push(modelErr);
+    return errs;
   }
   return [{ field: "mind.kind", code: "UNKNOWN_KIND", message: 'Mind kind must be "cloud" or "local".' }];
 }
 
+/* ── Readiness (write validation ≠ readiness — v1 §1) ──────────────── */
+
+/** Host-supplied facts the pure validators cannot see. */
+export interface ReadinessContext extends EndpointPolicy {
+  /** A key is stored for this character (cloud minds only). */
+  hasMindSecret: boolean;
+  /** Operator-configured default model, or null when the host has none. */
+  defaultModel: string | null;
+}
+
+/** The model an exchange would actually use: config value, else the
+ *  explicit operator default. Never invented. */
+export function effectiveModel(mind: MindConfig, defaultModel: string | null): string | null {
+  const own = mind.model?.trim();
+  if (own) return own;
+  return defaultModel;
+}
+
+/** The API base an exchange would call (adapters append /chat/completions). */
+export function mindBaseUrl(mind: MindConfig): string {
+  if (mind.kind === "cloud") return mind.baseUrl?.trim() || DEFAULT_CLOUD_BASE_URL;
+  return mind.endpointUrl.trim();
+}
+
 /** Everything standing between this character and `unleash`. Empty array
- *  means the character is `ready`. */
-export function readinessErrors(c: Character): FieldError[] {
+ *  means the character is `ready`. Distinct from write validation: a
+ *  name-only draft saves fine but is not ready. */
+export function readinessErrors(c: Character, ctx: ReadinessContext): FieldError[] {
   const errs: FieldError[] = [];
   const nameErr = validateName(c.name);
   if (nameErr) errs.push(nameErr);
@@ -264,7 +450,20 @@ export function readinessErrors(c: Character): FieldError[] {
   }
   const dirErr = validateDirective(c.directive, { required: true });
   if (dirErr) errs.push(dirErr);
-  errs.push(...validateMindConfig(c.mind));
+  const mindErrs = validateMindConfig(c.mind, ctx);
+  errs.push(...mindErrs);
+  if (c.mind && mindErrs.length === 0) {
+    if (c.mind.kind === "cloud" && !ctx.hasMindSecret) {
+      errs.push({ field: "mind.secret", code: "REQUIRED", message: "Add the API key for your cloud mind." });
+    }
+    if (effectiveModel(c.mind, ctx.defaultModel) === null) {
+      errs.push({
+        field: "mind.model",
+        code: "MODEL_REQUIRED",
+        message: "Name a model — this host has no default model configured.",
+      });
+    }
+  }
   return errs;
 }
 
@@ -312,18 +511,50 @@ export function nextLifecycle(current: Lifecycle, event: LifecycleEvent): Lifecy
  * rest is the runtime overlay. While `mindState === "asleep"`, `driver`
  * is `"reflex"` and `autopilotSince` marks when the mind went quiet — the
  * character keeps acting; that is the feature, not a failure.
+ *
+ * `lastReflexTick` means a completed, logged decision — not every tick.
+ * `lastAppliedActionTick` means an actual authoritative sim effect, not
+ * queue admission.
  */
 export interface CharacterStatus {
   characterId: string;
   lifecycle: Lifecycle;
   driver: Driver;
   mindState: MindState;
+  runtimeState: RuntimeState;
+  reflexState: ReflexState;
+  /** Sanitized machine hint for the current degraded/error state. */
+  reasonCode: string | null;
   /** Tick at which the sleeping mind took over, null while awake. */
   autopilotSince: number | null;
   lastMindExchangeTick: number | null;
   lastReflexTick: number | null;
+  lastAppliedActionTick: number | null;
+  /** The config revision the running agent last applied. */
+  configRevision: number;
   body: { hp: number; maxHp: number; x: number; z: number; task: string } | null;
   journalTail: string[];
+}
+
+/* ── Journal (paged, secret-free) ──────────────────────────────────── */
+
+/** One durable journal line as served by `GET /api/v1/characters/:id/journal`
+ *  (v1 §2). `source` is the character's own voice (`mind`) or a host notice
+ *  (`system`); marked autopilot takeover lines are `system` lines whose text
+ *  carries the `(autopilot)` prefix. `sequence` is the monotonic cursor the
+ *  `after` query parameter pages against; `tick` is the authoritative shard
+ *  tick. Secret-free by construction. */
+export interface JournalEntry {
+  sequence: number;
+  tick: number;
+  source: "mind" | "system";
+  text: string;
+}
+
+export interface JournalPage {
+  entries: JournalEntry[];
+  /** Cursor for the next page (`after=sequence`); null when exhausted. */
+  nextCursor: number | null;
 }
 
 /* ── Locked console copy ───────────────────────────────────────────── */
@@ -341,11 +572,3 @@ export const AUTOPILOT_COPY = {
   sleepLine: (name: string) => `(autopilot) ${name}'s mind is asleep; instincts take over.`,
   wakeLine: (name: string) => `(autopilot) ${name}'s mind woke; thinking resumed.`,
 } as const;
-
-/* ── Secrets ───────────────────────────────────────────────────────── */
-
-/** Mask a stored secret for display: last four characters only. */
-export function maskSecret(secret: string): string {
-  const tail = secret.slice(-4);
-  return `…${tail}`;
-}
