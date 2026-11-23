@@ -1,0 +1,140 @@
+{
+  "schema": "emberhall-phase36-independent-validation-v1",
+  "taskId": "t_c9e75cb1",
+  "validatedAt": "2026-11-23T07:29:30.924664+00:00",
+  "acceptance": "FAIL_INCOMPLETE",
+  "phase4Authorized": false,
+  "testedRevision": "6efe2cc0ccfc6720a84058e78f1e27d32c462412",
+  "liveProvenRevision": "8a441d65ac6b15f462d96164f04acec22b4e7303",
+  "runtimeDeltaFromLiveProof": false,
+  "validationChanges": "Evidence only; no runtime, economics, test assertion or policy changes.",
+  "gates": {
+    "command": "PORT=5598 npm run check",
+    "exit": 0,
+    "scriptTests": 571,
+    "sourceTests": 1613,
+    "failures": 0,
+    "lint": "PASS",
+    "typecheck": "PASS",
+    "build": "PASS",
+    "checkAuthDefault8080": "PASS sign-in off (existing server)",
+    "checkAuthOwned5597": "PASS sign-in off; explicit --dev-url against this worktree",
+    "log": "phase36-validation-check.log",
+    "logSha256": "847e73c4d910e1ddc166d020e655269897d237880b7779900476064384680de6",
+    "node": "v26.12.1",
+    "artLedger": "Typecheck then --refresh; no content diff, line pins current",
+    "ownedPorts5597And5598Free": true
+  },
+  "evidenceChecks": {
+    "agentId": "reflex-proof-36-1795415115",
+    "registryRecords": 1,
+    "registryIdentityMatches": true,
+    "freshZeroSpendStart": true,
+    "rawHashesMatched": 5,
+    "provenanceHashesMatched": 4,
+    "traceRowsExactMatch": 8658,
+    "attemptRows": 6,
+    "callBindings": [
+      {
+        "id": "amwswqmk3-001-fzb",
+        "identity": true,
+        "time": true,
+        "usage": true,
+        "cost": true,
+        "raw": true,
+        "stateHash": true
+      },
+      {
+        "id": "amwsx59jz-002-epk",
+        "identity": true,
+        "time": true,
+        "usage": true,
+        "cost": true,
+        "raw": true,
+        "stateHash": true
+      },
+      {
+        "id": "amwsxa5ev-003-ir0",
+        "identity": true,
+        "time": true,
+        "usage": true,
+        "cost": true,
+        "raw": true,
+        "stateHash": true
+      }
+    ],
+    "runtimeErrors": 0,
+    "rawFilesTracked": 0,
+    "rawIgnoreRule": ".gitignore:35 evidence/phase36-*/raw/",
+    "secretScan": "Known credential-value comparisons plus private-key/Bearer/API-key pattern scan; no hits in committed Phase 3.6 evidence. Not a universal proof of secret absence."
+  },
+  "independentReplay": {
+    "exit": 0,
+    "decisionsChecked": 3,
+    "policyRequests": 3,
+    "mismatches": 0,
+    "paidCallsIssued": 0,
+    "log": "phase36-validation-replay.log",
+    "logSha256": "6eb9e245e6b9d0d310dbdbce25d7b55d970462b4a95e5399f6723ce9dfa39672"
+  },
+  "metrics": {
+    "accountingPass": true,
+    "liveAcceptance": false,
+    "problems": [],
+    "enabledWallMs": 954580,
+    "excludedWallMs": 0,
+    "valeHours": 24.002717077771305,
+    "paidCalls": 3,
+    "byStatus": {
+      "ok": 3
+    },
+    "promptTokens": 22700,
+    "completionTokens": 6282,
+    "costMicros": 954,
+    "byUtcDay": {
+      "2026-11-23": 954
+    },
+    "economics": {
+      "observedUsd": 0.000954,
+      "usdPerAgentWallDay": 0.08634750361415493,
+      "usdPerValeDay": 0.0009538920083844914,
+      "valeDaysPerWallDay": 90.52125697162803,
+      "thresholdUsd": 0.1,
+      "thresholdPass": true,
+      "basis": "provider usage at recorded tariff; sustained enabled-time projection, NOT a measured 24h bill"
+    },
+    "survival": {
+      "samples": 8642,
+      "minHp": 40,
+      "minHunger": 24.986860906658087,
+      "minEnergy": 22.353479013341364
+    },
+    "rejections": 0,
+    "interventions": 0,
+    "caveat": "Accounting alone cannot establish replay, unlogged interventions, provider invoices or host truth."
+  },
+  "guard": {
+    "capMicros": 500000,
+    "everExhausted": false,
+    "maxReservedMicros": 144,
+    "final": {
+      "capMicros": 500000,
+      "spentMicros": 954,
+      "reservedMicros": 0,
+      "exhausted": false
+    }
+  },
+  "criteria": {
+    "freshDedicatedAgent": "PASS (retained local registry and zero-start attempt evidence)",
+    "fullValeDayAlive": "PASS recorded 24.002717077771305 vale hours; HP minimum 40",
+    "nightAndFood": "PASS day/night observed; natural hunger threshold and host-acknowledged cabbage consumption",
+    "waterPressure": "FAIL / UNPROVEN: no thirst or drowning mechanics in pinned baseline",
+    "zeroRejectionsInterventions": "PASS recorded traces and inspected host/orchestrator logs; not proof against omitted external actions",
+    "guardNeverExhausted": "PASS all recorded samples; unchanged $0.50 UTC-day cap",
+    "wallDayProjectionUnderTenCents": "PASS root-card projection contract: $0.08634750361415493",
+    "measuredAlwaysOn24HourCost": "NOT ESTABLISHED: only 954580 ms observed, not a measured 24-hour bill",
+    "independentReplay": "PASS 3/3 decisions and 3/3 policy requests; policy driver reuses pinned production scheduler"
+  },
+  "requiredResolution": "Explicit product decision on absent water-pressure criterion; if runtime/economics change, new dedicated-agent live proof and full gate required. No fleet scale-up.",
+  "noPushDeployChain": true
+}

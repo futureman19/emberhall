@@ -225,6 +225,9 @@ export interface DecisionLogRow {
   answer: string;
   /** The intent actually submitted, if any. */
   intent: AgentIntent | null;
+  /** Non-intent menu verb actually submitted, if any (e.g. "eat" — the
+   *  shard's verb wire; additive for the Phase 3 autopilot integration). */
+  verb?: string | null;
   /** Stable hash of the observation the decision was made against. */
   stateHash: string;
   /** Back-filled sim deltas (hp, gold, pack counts) once known. */
@@ -247,5 +250,13 @@ export const DEFAULT_CADENCE: CadencePolicy = {
   mindHeartbeatHours: 3,
   sleepStartHour: 22,
   sleepEndHour: 6,
-  reflexCooldownTicks: 2,
+  // Phase 3.5 cost contract (t_d8b9704d): the r1 live proof measured 611
+  // paid calls in 4.6 min at cooldown 2 — the $0.50/day guard exhausted
+  // mid-day and the sustained-cadence projection was $45.21/agent/day.
+  // 150 ticks = 15 host seconds at 10 Hz bounds the worst case to ~64
+  // calls/vale day. Survival triggers still bypass quiet/dedupe and fire
+  // at the next allowed slot (<=15 s latency against vitals decaying
+  // ~3.2/vale-hour). Dispatch-mechanics tests inject a fast cadence
+  // explicitly; this default is the production spend policy.
+  reflexCooldownTicks: 150,
 };

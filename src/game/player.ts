@@ -569,25 +569,38 @@ export function commandDrink(world: World, item: ItemId, actorId?: string) {
   return "The dark thins.";
 }
 
+/** Meals a body can eat straight from the pack, best first. The reflex
+ *  autopilot offers "eat" when any of these is present (t_166eb9f5), and
+ *  commandCook picks the first available when no item is selected. */
+export const MEALS: ReadonlyArray<readonly [ItemId, number, string]> = [
+  ["trail_rations", 60, "The rations sustain you for the road."],
+  ["herb_broth", 42, "The warm broth restores you."],
+  ["wheat_cakes", 30, "The wheat cakes fill you."],
+  ["stew", 52, "The stew warms you through."],
+  ["cooked_meat", 40, "Hot meat. Proper food."],
+  ["cooked_fish", 38, "The fish flakes from the bone."],
+  ["bread", 32, "Fresh bread."],
+  ["cabbage", 34, "The cabbage holds."],
+  ["wheat", 22, "The wheat fills."],
+  ["meat", 14, "You force the raw meat down."],
+  ["raw_fish", 12, "You force the raw fish down."],
+] as const;
+
+/** First available meal in the existing commandCook priority, or null. Pure read. */
+export function bestFoodInPack(pack: Partial<Record<ItemId, number>>): ItemId | null {
+  for (const [id] of MEALS) {
+    if ((pack[id] ?? 0) > 0) return id;
+  }
+  return null;
+}
+
 export function commandCook(world: World, selected?: ItemId, actorId?: string) {
   const dead = hands(world, actorId);
   if (dead) return dead;
   const p = you(world, actorId);
   if (!p) return "You are not in the vale.";
   // A good meal first — cooked food fills far more than raw.
-  const meals: [ItemId, number, string][] = [
-    ["trail_rations", 60, "The rations sustain you for the road."],
-    ["herb_broth", 42, "The warm broth restores you."],
-    ["wheat_cakes", 30, "The wheat cakes fill you."],
-    ["stew", 52, "The stew warms you through."],
-    ["cooked_meat", 40, "Hot meat. Proper food."],
-    ["cooked_fish", 38, "The fish flakes from the bone."],
-    ["bread", 32, "Fresh bread."],
-    ["cabbage", 34, "The cabbage holds."],
-    ["wheat", 22, "The wheat fills."],
-    ["meat", 14, "You force the raw meat down."],
-    ["raw_fish", 12, "You force the raw fish down."],
-  ];
+  const meals = MEALS;
   for (const [id, fill, note] of meals) {
     if ((!selected || selected === id) && (actorState(world, actorId).pack[id] ?? 0) > 0) {
       const before = p.hunger;

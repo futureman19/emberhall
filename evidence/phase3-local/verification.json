@@ -1,0 +1,64 @@
+{
+  "task": "t_166eb9f5",
+  "recordedAtEpoch": 1795378060,
+  "workspace": "C:\\Users\\futur\\Desktop\\emberhall\\.worktrees\\t_166eb9f5",
+  "base": "35bf59d",
+  "gates": {
+    "focused": {
+      "tests": 105,
+      "pass": 105,
+      "exit": 0,
+      "log": "focused-recovery.log"
+    },
+    "fullSuite": {
+      "scriptTests": 500,
+      "sourceTests": 1599,
+      "exit": 0,
+      "log": "npm-test-bounded.log",
+      "note": "Full run started before addition of one source-text recorder guard test; final-static.log independently passes all 4 preflight/registration checks afterward."
+    },
+    "typecheck": 0,
+    "fullLint": 0,
+    "build": {
+      "exit": 0,
+      "DATABASE_URL": "cleared for this command; migration skipped"
+    },
+    "authInvariant": {
+      "exit": 0,
+      "url": "http://127.0.0.1:5529",
+      "result": "dev and build agree: sign-in off",
+      "serverStopped": true
+    },
+    "artAudit": 0,
+    "finalPreflightAndRegistration": {
+      "tests": 4,
+      "pass": 4,
+      "exit": 0
+    }
+  },
+  "live": {
+    "status": "UNPASSED",
+    "reason": "Recovery explicitly disallows paid provider calls; requires spending authorization and approved dedicated host character/runtime",
+    "providerCallsIssued": 0,
+    "duration": null,
+    "survival": null,
+    "dailyCost": null,
+    "decisionLog": null
+  },
+  "excludedEvidence": [
+    "focused.log and npm-test.log: prior stale pricing-test failure, superseded",
+    "npm-test-recovery.log: foreground tool timeout interrupted subprocesses; not a valid full-suite result"
+  ],
+  "sha256": {
+    "build-recovery.log": "85dafd4438412febfb3ff31621fd8254997c19e18c6e7e63346cca1bb8ce8432",
+    "final-static.log": "861c2649c0e543252e2ce17463a7315148cd06362fa1e732bb58a7ee929c7aea",
+    "focused-final.log": "e040b04f6b0e20373a28f4090fa6508eb05d349ae566edbd67af1f001f958d16",
+    "focused-recovery.log": "a63855eb0ab39cf64da8e270c5ceac3332dfc914eb90f3dd9811a8d11151ac33",
+    "focused.log": "286161860a39e46d8fdc338097611b328983b1018d5d1a7ba299c708c4a2e97b",
+    "lint-recovery.log": "3f5ff51225c020826624569c349e9e2353dbd75e2ab616111eca35a9408dbacb",
+    "npm-test-bounded.log": "225864d7961a49aa38261f66a99916185688a73d9e1491970dd4bfee058ef875",
+    "npm-test-recovery.log": "30e48135d94e496a8050cde63e7190f34584f826720d91a25e0b3bbb13fa6868",
+    "npm-test.log": "6513006bad253603ee80f9ef266d081428cb78fd80cbbcd6c433c1c58c2497d6",
+    "public-pricing.txt": "059cb6829a343a7fb1a9a67485a3c2c7b83fdbbed20836278fc314e6120372ef"
+  }
+}

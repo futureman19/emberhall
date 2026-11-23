@@ -24,3 +24,15 @@ __pycache__/
 # agent scratch
 .hermes/
 .worktrees/
+
+# phase-3 live raw logs (20MB; report.json + review.md are the committed evidence)
+evidence/phase3-live/attempts.jsonl
+evidence/phase3-live/decisions.jsonl
+evidence/phase35-live/attempts.jsonl
+evidence/phase35-live/decisions.jsonl
+
+# Phase 3.6 raw observations, provider attempts and replay envelopes stay local.
+evidence/phase36-*/raw/
+evidence/phase36-*/*.jsonl
+evidence/phase36-*/*.raw.json
+evidence/phase36-*/*.raw.json.gz

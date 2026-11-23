@@ -1,0 +1,56 @@
+{
+  "reason": "full-vale-day",
+  "startedAt": 1795395520490,
+  "elapsedMs": 954804,
+  "startHour": 8.01666666666667,
+  "lastHour": 32.01944444443798,
+  "samples": 8642,
+  "died": false,
+  "rejected": 0,
+  "agentId": "reflex-proof-35-qwen",
+  "model": "jev-1.14.0",
+  "price": {
+    "tableId": "typesafe-jev",
+    "model": "jev-1.14.0",
+    "currency": "USD",
+    "promptPerMTok": 0.042,
+    "completionPerMTok": 0,
+    "source": "https://docs.typesafe.ai/models rate card ($0.042/Mtok input, output free)",
+    "capturedAt": "2026-11-21",
+    "notes": "Public per-input-token rate rechecked at source; output free. No volume discounts assumed. Account-specific billing and missing-usage estimates require review."
+  },
+  "attemptsPath": "C:\\Users\\futur\\Desktop\\emberhall\\.worktrees\\t_166eb9f5\\evidence\\phase35-live\\attempts.jsonl",
+  "survivalGate": true,
+  "costGate": "REVIEW_REQUIRED: UTC buckets are measured; one vale day is not a wall day",
+  "spendRows": [
+    {
+      "agentId": "reflex-proof-35-qwen",
+      "day": "2026-11-23",
+      "attempts": 40,
+      "byStatus": {
+        "ok": 40,
+        "error": 0,
+        "timeout": 0,
+        "blocked": 0,
+        "interrupted": 0
+      },
+      "retries": 0,
+      "promptTokensReported": 299689,
+      "completionTokensReported": 83584,
+      "estimatedAttempts": 0,
+      "spendMicros": 12607,
+      "avgLatencyMs": 186,
+      "pricingBasis": [
+        "typesafe-jev@2026-11-21"
+      ],
+      "warnings": [],
+      "capMicros": 500000,
+      "withinCap": true
+    }
+  ],
+  "spendMicros": 12607,
+  "wallDayProjectionMicros": 1140804.604924152,
+  "projectionCaveat": "Projection assumes sustained identical cadence, not a measured 24h bill. Disabled when prior history exists; retain the same directory to preserve same-day budget accounting.",
+  "replayMismatches": 0,
+  "liveAcceptance": "UNPASSED until reviewer confirms duration, no interventions, runtime log, usage completeness, pricing, rejections and cost normalization"
+}
