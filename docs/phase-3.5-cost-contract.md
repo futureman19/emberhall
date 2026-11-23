@@ -1,6 +1,8 @@
 # Phase 3.5 cost contract — cadence + wire compaction (t_d8b9704d)
 
-Status: implementation complete, agent suites green; full gate + fresh-agent live re-proof pending at authoring time.
+Status: COMPLETE — implementation + full gate green + fresh-agent live
+re-proof PASSED the card gates (commit 7c624d5). Scale-up still withheld:
+wall-day projection $1.14/agent/day > $0.50 cap (see Results).
 
 ## Why
 
@@ -44,12 +46,24 @@ the re-proof uses a NEW dedicated character/agent (`reflex-proof-35` /
 watchdog 4h, no mind/planner/manual fallback, spend fences preflighted with
 zero provider calls.
 
-Results: PENDING (fill after run — survival, calls, spend, guard state,
-replay match, projection).
+Results (evidence/phase35-live/report.json + review.md): full vale day
+survived (24.003 sim hours, died=false, 8,642 samples, 0 rejections) on
+40 paid calls — all ok, 0 retries, 0 estimated usage — costing $0.012607
+(2.52% of the $0.50/day cap; guard NEVER exhausted). Independent replay
+40/40 match. Input tokens 7,492/call (-61% vs r1). ~40x cheaper per vale
+day than r1 ($0.499904 / 611 calls / guard exhausted at t+277s).
+
+Wall-day caveat: an always-on shard runs ~90.5 vale days per UTC day, so
+the sustained projection is $1.1408/agent/WALL day — 2.28x the cap, not
+<<$0.50. Phase 3.6 follow-up must cut another ~3x (risk-gated cadence is
+the promising lever; raw cooldown alone cannot reach the target without
+unsafe survival latency) before Phase 4 fleet scale-up.
 
 ## Gates
 
 - Agent suites (cadence-cost, scheduler, autopilot, integration, hostfeed):
   33/33 pass.
-- Full `npm run check` (PORT=5599): PENDING.
+- Full gate green: lint clean, 501 script + 1603 source tests pass,
+  typecheck/build/check:auth pass (art ledger refreshed: 4 autopilot.ts
+  line pins remapped, no reviewed-evidence changes).
 - No push/deploy/chain actions.
