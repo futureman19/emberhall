@@ -44,9 +44,12 @@ duration, no interventions, runtime logs (live-run.log, shard-runtime.log),
 usage completeness, pricing basis, rejections and cost normalization.
 
 SCALE-UP WITHHELD: wall-day projection $1.14/agent/day still exceeds the
-pivot <<$0.50/agent/day rule. Follow-up (Phase 3.6) must cut another ~3x
-via risk-gated cadence / longer cooldown with survival-latency proof /
-further prompt reduction before Phase 4 fleet claims. Cadence alone
-cannot reach <<$0.50 without unsafe survival latency (vitals decay
-~3.2/vale-hour; hp 40), so gating reflexes on actual risk is the
-promising lever.
+pivot <<$0.50/agent/day rule. Reaching the $0.50 cap needs a 2.3x cut;
+the Phase 3.6 acceptance target <=$0.10/wall-day needs 11.4x. DECIDED
+(Codex/telegram2, 2026-11-22, user-routed while Kimi offline): risk-gated
+reflexes — paid calls only on genuine danger/meaningful events, rare idle
+heartbeat; preserves always-on sim without long danger-response latency.
+t_a99e00a2 assigned to telegram2 with child tasks; acceptance = TDD +
+fresh live survival proof + intact budget guard + matching replay.
+Cadence alone cannot reach the target without unsafe survival latency
+(vitals decay ~3.2/vale-hour; hp 40).

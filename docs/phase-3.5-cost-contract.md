@@ -55,9 +55,12 @@ day than r1 ($0.499904 / 611 calls / guard exhausted at t+277s).
 
 Wall-day caveat: an always-on shard runs ~90.5 vale days per UTC day, so
 the sustained projection is $1.1408/agent/WALL day — 2.28x the cap, not
-<<$0.50. Phase 3.6 follow-up must cut another ~3x (risk-gated cadence is
-the promising lever; raw cooldown alone cannot reach the target without
-unsafe survival latency) before Phase 4 fleet scale-up.
+<<$0.50. Phase 3.6 needs a 2.3x cut to reach the $0.50 cap and 11.4x to
+reach the <=$0.10/wall-day acceptance target. DECIDED (Codex/telegram2,
+2026-11-22, user-routed): risk-gated reflexes — paid calls only on genuine
+danger/meaningful events, rare idle heartbeat; t_a99e00a2 assigned to
+telegram2 with child tasks. Raw cooldown alone cannot reach the target
+without unsafe survival latency.
 
 ## Gates
 
