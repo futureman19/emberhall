@@ -122,7 +122,7 @@ test("decodeSave reconstructs scars, holes and regrowth in the existing order", 
 test("decodeSave and loadSave reject malformed JSON, schemas, people and actor sheets", () => {
   for (const raw of ["", "{bad json", "null", "[]", "{}", "42"]) assert.equal(parity(raw), null);
   const mutations = [
-    (p: ReturnType<typeof JSON.parse>) => { p.saveVersion = 7; },
+    (p: ReturnType<typeof JSON.parse>) => { p.saveVersion = 8; },
     (p: ReturnType<typeof JSON.parse>) => { p.people[0].path = [null]; },
     (p: ReturnType<typeof JSON.parse>) => { p.playerStates = null; },
     (p: ReturnType<typeof JSON.parse>) => { p.playerStates["second-body"].id = "mismatch"; },

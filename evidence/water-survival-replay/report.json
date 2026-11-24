@@ -1,0 +1,4718 @@
+{
+  "schema": "emberhall-water-live-v1",
+  "task": "t_4e2c4d13",
+  "scenario": "A",
+  "paid": false,
+  "backend": "deterministic-local-survival",
+  "providerCalls": 0,
+  "note": "Deterministic local survival scorer (scripted, no Math.random) metered through the real cost seam at a zero tariff. NOT the paid Jev acceptance gate. Scenarios B-D rule coverage is cited from the focused suites and the QA regression report at this revision in review.md.",
+  "revision": "73b16cd7193206584223da6fba492b45364202aa",
+  "branch": "wt/t_0d13c23d",
+  "nodeVersion": "v24.13.0",
+  "agentId": "water-replay-aquila",
+  "bodyId": "host-982f367a2aeea5dcf50985a9",
+  "characterName": "aquila",
+  "initialConditions": {
+    "seed": 20261124,
+    "port": 5599,
+    "dataDir": "C:\\Users\\futur\\Desktop\\emberhall\\.worktrees\\t_0d13c23d\\evidence\\water-survival-replay\\raw\\shard-data",
+    "startHour": 8,
+    "observation": {
+      "tick": 0,
+      "hour": 8,
+      "isNight": false,
+      "weather": {
+        "kind": "fair",
+        "cloud": 0.32,
+        "wet": 0,
+        "wind": 0.2
+      },
+      "you": {
+        "id": "host-982f367a2aeea5dcf50985a9",
+        "name": "aquila",
+        "x": 256,
+        "z": 293,
+        "hp": 40,
+        "maxHp": 40,
+        "hunger": 80,
+        "thirst": 80,
+        "inWater": false,
+        "drowning": false,
+        "energy": 80,
+        "ghost": false,
+        "mana": 22,
+        "notoriety": "innocent",
+        "skills": {
+          "swords": 12,
+          "lumberjack": 14,
+          "mining": 8,
+          "anatomy": 10,
+          "healing": 8,
+          "cooking": 6,
+          "smithing": 8,
+          "carpentry": 12,
+          "taming": 14,
+          "magery": 8,
+          "farming": 10,
+          "forestry": 8,
+          "fishing": 8,
+          "alchemy": 8,
+          "archery": 0,
+          "cartography": 0,
+          "fencing": 0,
+          "lockpicking": 0,
+          "mace": 0,
+          "music": 0,
+          "poisoning": 0,
+          "stealing": 0,
+          "tailoring": 8,
+          "tinkering": 0,
+          "tracking": 8
+        },
+        "pack": {
+          "hatchet": 0,
+          "knife": 1,
+          "pick": 1,
+          "hoe": 1,
+          "fishing_rod": 1,
+          "log": 0,
+          "board": 0,
+          "ore": 0,
+          "ingot": 0,
+          "club": 0,
+          "shield": 0,
+          "staff": 0,
+          "bow": 0,
+          "torch": 0,
+          "crate": 0,
+          "cap": 0,
+          "cuirass": 0,
+          "sword": 0,
+          "dagger": 0,
+          "spear": 0,
+          "war_axe": 0,
+          "mace": 0,
+          "war_hammer": 0,
+          "quarterstaff": 0,
+          "tower_shield": 0,
+          "gauntlets": 0,
+          "gorget": 0,
+          "heater": 0,
+          "furnace_heart": 0,
+          "rabbit_foot": 0,
+          "orc_tusk": 0,
+          "meat": 1,
+          "hide": 0,
+          "arrows": 12,
+          "bandage": 3,
+          "potion_heal": 0,
+          "potion_night": 0,
+          "tunic": 0,
+          "leather": 0,
+          "mail": 0,
+          "hood": 1,
+          "helm": 0,
+          "cloak": 0,
+          "gloves": 1,
+          "hose": 0,
+          "greaves": 0,
+          "boots": 0,
+          "pendant": 1,
+          "ring": 1,
+          "relic": 0,
+          "spellbook": 1,
+          "rune": 4,
+          "garlic": 12,
+          "ginseng": 12,
+          "silk": 16,
+          "nightshade": 4,
+          "pearl": 14,
+          "moss": 10,
+          "mandrake": 10,
+          "ash": 12,
+          "cabbage": 2,
+          "wheat": 0,
+          "cooked_meat": 0,
+          "raw_fish": 0,
+          "cooked_fish": 0,
+          "bread": 0,
+          "stew": 0,
+          "trail_rations": 0,
+          "wheat_cakes": 0,
+          "herb_broth": 0,
+          "cabbage_seed": 8,
+          "wheat_seed": 6,
+          "garlic_seed": 4,
+          "ginseng_seed": 0,
+          "mandrake_seed": 0,
+          "moss_seed": 0,
+          "acorn": 6,
+          "deed_porch": 0,
+          "deed_hut": 0,
+          "deed_homestead": 0
+        },
+        "wear": {
+          "head": "hood",
+          "hands": "gloves",
+          "neck": "pendant",
+          "finger": "ring",
+          "main": "hatchet"
+        },
+        "vault": 0
+      },
+      "people": [
+        {
+          "id": "you-2",
+          "name": "Brann Marsh",
+          "role": null,
+          "x": 256,
+          "z": 293,
+          "hp": 40,
+          "maxHp": 40,
+          "task": "idle",
+          "ghost": false,
+          "dist": 0
+        },
+        {
+          "id": "p-3",
+          "name": "Ysolde Reed",
+          "role": null,
+          "x": 257,
+          "z": 292,
+          "hp": 40,
+          "maxHp": 40,
+          "task": "idle",
+          "ghost": false,
+          "dist": 1.4
+        },
+        {
+          "id": "p-4",
+          "name": "Fen Flint",
+          "role": null,
+          "x": 255,
+          "z": 293,
+          "hp": 40,
+          "maxHp": 40,
+          "task": "idle",
+          "ghost": false,
+          "dist": 1
+        },
+        {
+          "id": "p-8",
+          "name": "Old Pell",
+          "role": "banker",
+          "x": 258,
+          "z": 293,
+          "hp": 40,
+          "maxHp": 40,
+          "task": "idle",
+          "ghost": false,
+          "dist": 2
+        },
+        {
+          "id": "p-9",
+          "name": "Brann Wain",
+          "role": "provisioner",
+          "x": 252,
+          "z": 294,
+          "hp": 40,
+          "maxHp": 40,
+          "task": "idle",
+          "ghost": false,
+          "dist": 4.1
+        },
+        {
+          "id": "p-10",
+          "name": "Ione Hale",
+          "role": "healer",
+          "x": 258,
+          "z": 295,
+          "hp": 40,
+          "maxHp": 40,
+          "task": "idle",
+          "ghost": false,
+          "dist": 2.8
+        },
+        {
+          "id": "p-74",
+          "name": "Ryn Wain",
+          "role": null,
+          "x": 255,
+          "z": 294,
+          "hp": 40,
+          "maxHp": 40,
+          "task": "idle",
+          "ghost": false,
+          "dist": 1.4
+        }
+      ],
+      "fauna": [
+        {
+          "id": "f-183",
+          "kind": "field_rat",
+          "name": null,
+          "x": 262,
+          "z": 296,
+          "hp": 6,
+          "maxHp": 6,
+          "task": "wander",
+          "ownerId": null,
+          "dist": 6.7
+        },
+        {
+          "id": "f-184",
+          "kind": "hare",
+          "name": null,
+          "x": 250,
+          "z": 296,
+          "hp": 8,
+          "maxHp": 8,
+          "task": "wander",
+          "ownerId": null,
+          "dist": 6.7
+        },
+        {
+          "id": "f-185",
+          "kind": "hart",
+          "name": null,
+          "x": 263,
+          "z": 287,
+          "hp": 22,
+          "maxHp": 22,
+          "task": "wander",
+          "ownerId": null,
+          "dist": 9.2
+        },
+        {
+          "id": "f-186",
+          "kind": "saltback_tortoise",
+          "name": null,
+          "x": 249,
+          "z": 287,
+          "hp": 34,
+          "maxHp": 34,
+          "task": "wander",
+          "ownerId": null,
+          "dist": 9.2
+        },
+        {
+          "id": "f-187",
+          "kind": "redtail_squirrel",
+          "name": null,
+          "x": 259,
+          "z": 282,
+          "hp": 8,
+          "maxHp": 8,
+          "task": "wander",
+          "ownerId": null,
+          "dist": 11.4
+        },
+        {
+          "id": "f-188",
+          "kind": "field_rat",
+          "name": null,
+          "x": 263,
+          "z": 281,
+          "hp": 6,
+          "maxHp": 6,
+          "task": "wander",
+          "ownerId": null,
+          "dist": 13.9
+        },
+        {
+          "id": "f-189",
+          "kind": "hart",
+          "name": null,
+          "x": 263,
+          "z": 300,
+          "hp": 22,
+          "maxHp": 22,
+          "task": "wander",
+          "ownerId": null,
+          "dist": 9.9
+        },
+        {
+          "id": "f-190",
+          "kind": "hare",
+          "name": null,
+          "x": 266,
+          "z": 291,
+          "hp": 8,
+          "maxHp": 8,
+          "task": "wander",
+          "ownerId": null,
+          "dist": 10.2
+        },
+        {
+          "id": "f-191",
+          "kind": "field_rat",
+          "name": null,
+          "x": 260,
+          "z": 304,
+          "hp": 6,
+          "maxHp": 6,
+          "task": "wander",
+          "ownerId": null,
+          "dist": 11.7
+        },
+        {
+          "id": "f-192",
+          "kind": "field_rat",
+          "name": null,
+          "x": 268,
+          "z": 299,
+          "hp": 6,
+          "maxHp": 6,
+          "task": "wander",
+          "ownerId": null,
+          "dist": 13.4
+        },
+        {
+          "id": "f-193",
+          "kind": "saltback_tortoise",
+          "name": null,
+          "x": 248,
+          "z": 298,
+          "hp": 34,
+          "maxHp": 34,
+          "task": "wander",
+          "ownerId": null,
+          "dist": 9.4
+        },
+        {
+          "id": "f-194",
+          "kind": "hare",
+          "name": null,
+          "x": 247,
+          "z": 294,
+          "hp": 8,
+          "maxHp": 8,
+          "task": "wander",
+          "ownerId": null,
+          "dist": 9.1
+        }
+      ],
+      "piles": [],
+      "buildings": [
+        {
+          "id": "b-5",
+          "kind": "hall",
+          "tx": 256,
+          "ty": 290,
+          "dist": 3
+        },
+        {
+          "id": "b-6",
+          "kind": "notice",
+          "tx": 263,
+          "ty": 291,
+          "dist": 7.3
+        },
+        {
+          "id": "b-7",
+          "kind": "yard",
+          "tx": 248,
+          "ty": 291,
+          "dist": 8.2
+        },
+        {
+          "id": "b-13",
+          "kind": "bank",
+          "tx": 261,
+          "ty": 295,
+          "dist": 5.4
+        },
+        {
+          "id": "b-199",
+          "kind": "hut",
+          "tx": 250,
+          "ty": 298,
+          "dist": 7.8
+        }
+      ],
+      "plots": [],
+      "herbs": [],
+      "water": {
+        "nearest": {
+          "tx": 251,
+          "ty": 302,
+          "dist": 10.295630140987
+        },
+        "shore": {
+          "tx": 252,
+          "ty": 302
+        },
+        "escape": null
+      },
+      "verbs": [
+        {
+          "verb": "talk",
+          "label": "Talk",
+          "target": {
+            "kind": "person",
+            "id": "you-2",
+            "tx": 256,
+            "ty": 293,
+            "label": "Brann Marsh"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk",
+          "target": {
+            "kind": "person",
+            "id": "you-2",
+            "tx": 256,
+            "ty": 293,
+            "label": "Brann Marsh"
+          }
+        },
+        {
+          "verb": "talk",
+          "label": "Talk",
+          "target": {
+            "kind": "person",
+            "id": "p-3",
+            "tx": 257,
+            "ty": 292,
+            "label": "Ysolde Reed"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk",
+          "target": {
+            "kind": "person",
+            "id": "p-3",
+            "tx": 257,
+            "ty": 292,
+            "label": "Ysolde Reed"
+          }
+        },
+        {
+          "verb": "talk",
+          "label": "Talk",
+          "target": {
+            "kind": "person",
+            "id": "p-4",
+            "tx": 255,
+            "ty": 293,
+            "label": "Fen Flint"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk",
+          "target": {
+            "kind": "person",
+            "id": "p-4",
+            "tx": 255,
+            "ty": 293,
+            "label": "Fen Flint"
+          }
+        },
+        {
+          "verb": "talk",
+          "label": "Talk",
+          "target": {
+            "kind": "person",
+            "id": "p-8",
+            "tx": 258,
+            "ty": 293,
+            "label": "Old Pell"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk",
+          "target": {
+            "kind": "person",
+            "id": "p-8",
+            "tx": 258,
+            "ty": 293,
+            "label": "Old Pell"
+          }
+        },
+        {
+          "verb": "talk",
+          "label": "Talk",
+          "target": {
+            "kind": "person",
+            "id": "p-9",
+            "tx": 252,
+            "ty": 294,
+            "label": "Brann Wain"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk",
+          "target": {
+            "kind": "person",
+            "id": "p-9",
+            "tx": 252,
+            "ty": 294,
+            "label": "Brann Wain"
+          }
+        },
+        {
+          "verb": "talk",
+          "label": "Talk",
+          "target": {
+            "kind": "person",
+            "id": "p-10",
+            "tx": 258,
+            "ty": 295,
+            "label": "Ione Hale"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk",
+          "target": {
+            "kind": "person",
+            "id": "p-10",
+            "tx": 258,
+            "ty": 295,
+            "label": "Ione Hale"
+          }
+        },
+        {
+          "verb": "talk",
+          "label": "Talk",
+          "target": {
+            "kind": "person",
+            "id": "p-74",
+            "tx": 255,
+            "ty": 294,
+            "label": "Ryn Wain"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk",
+          "target": {
+            "kind": "person",
+            "id": "p-74",
+            "tx": 255,
+            "ty": 294,
+            "label": "Ryn Wain"
+          }
+        },
+        {
+          "verb": "hunt",
+          "label": "Hunt",
+          "target": {
+            "kind": "fauna",
+            "id": "f-183",
+            "tx": 262,
+            "ty": 296,
+            "label": "field_rat"
+          }
+        },
+        {
+          "verb": "tame",
+          "label": "Tame",
+          "target": {
+            "kind": "fauna",
+            "id": "f-183",
+            "tx": 262,
+            "ty": 296,
+            "label": "field_rat"
+          }
+        },
+        {
+          "verb": "cast",
+          "label": "Magic Arrow",
+          "target": {
+            "kind": "fauna",
+            "id": "f-183",
+            "tx": 262,
+            "ty": 296,
+            "label": "field_rat"
+          }
+        },
+        {
+          "verb": "fireball",
+          "label": "Fireball",
+          "target": {
+            "kind": "fauna",
+            "id": "f-183",
+            "tx": 262,
+            "ty": 296,
+            "label": "field_rat"
+          }
+        },
+        {
+          "verb": "hunt",
+          "label": "Hunt",
+          "target": {
+            "kind": "fauna",
+            "id": "f-184",
+            "tx": 250,
+            "ty": 296,
+            "label": "hare"
+          }
+        },
+        {
+          "verb": "tame",
+          "label": "Tame",
+          "target": {
+            "kind": "fauna",
+            "id": "f-184",
+            "tx": 250,
+            "ty": 296,
+            "label": "hare"
+          }
+        },
+        {
+          "verb": "cast",
+          "label": "Magic Arrow",
+          "target": {
+            "kind": "fauna",
+            "id": "f-184",
+            "tx": 250,
+            "ty": 296,
+            "label": "hare"
+          }
+        },
+        {
+          "verb": "fireball",
+          "label": "Fireball",
+          "target": {
+            "kind": "fauna",
+            "id": "f-184",
+            "tx": 250,
+            "ty": 296,
+            "label": "hare"
+          }
+        },
+        {
+          "verb": "hunt",
+          "label": "Hunt",
+          "target": {
+            "kind": "fauna",
+            "id": "f-185",
+            "tx": 263,
+            "ty": 287,
+            "label": "hart"
+          }
+        },
+        {
+          "verb": "tame",
+          "label": "Tame",
+          "target": {
+            "kind": "fauna",
+            "id": "f-185",
+            "tx": 263,
+            "ty": 287,
+            "label": "hart"
+          }
+        },
+        {
+          "verb": "cast",
+          "label": "Magic Arrow",
+          "target": {
+            "kind": "fauna",
+            "id": "f-185",
+            "tx": 263,
+            "ty": 287,
+            "label": "hart"
+          }
+        },
+        {
+          "verb": "fireball",
+          "label": "Fireball",
+          "target": {
+            "kind": "fauna",
+            "id": "f-185",
+            "tx": 263,
+            "ty": 287,
+            "label": "hart"
+          }
+        },
+        {
+          "verb": "hunt",
+          "label": "Hunt",
+          "target": {
+            "kind": "fauna",
+            "id": "f-186",
+            "tx": 249,
+            "ty": 287,
+            "label": "saltback_tortoise"
+          }
+        },
+        {
+          "verb": "tame",
+          "label": "Tame",
+          "target": {
+            "kind": "fauna",
+            "id": "f-186",
+            "tx": 249,
+            "ty": 287,
+            "label": "saltback_tortoise"
+          }
+        },
+        {
+          "verb": "cast",
+          "label": "Magic Arrow",
+          "target": {
+            "kind": "fauna",
+            "id": "f-186",
+            "tx": 249,
+            "ty": 287,
+            "label": "saltback_tortoise"
+          }
+        },
+        {
+          "verb": "fireball",
+          "label": "Fireball",
+          "target": {
+            "kind": "fauna",
+            "id": "f-186",
+            "tx": 249,
+            "ty": 287,
+            "label": "saltback_tortoise"
+          }
+        },
+        {
+          "verb": "hunt",
+          "label": "Hunt",
+          "target": {
+            "kind": "fauna",
+            "id": "f-187",
+            "tx": 259,
+            "ty": 282,
+            "label": "redtail_squirrel"
+          }
+        },
+        {
+          "verb": "tame",
+          "label": "Tame",
+          "target": {
+            "kind": "fauna",
+            "id": "f-187",
+            "tx": 259,
+            "ty": 282,
+            "label": "redtail_squirrel"
+          }
+        },
+        {
+          "verb": "cast",
+          "label": "Magic Arrow",
+          "target": {
+            "kind": "fauna",
+            "id": "f-187",
+            "tx": 259,
+            "ty": 282,
+            "label": "redtail_squirrel"
+          }
+        },
+        {
+          "verb": "fireball",
+          "label": "Fireball",
+          "target": {
+            "kind": "fauna",
+            "id": "f-187",
+            "tx": 259,
+            "ty": 282,
+            "label": "redtail_squirrel"
+          }
+        },
+        {
+          "verb": "hunt",
+          "label": "Hunt",
+          "target": {
+            "kind": "fauna",
+            "id": "f-189",
+            "tx": 263,
+            "ty": 300,
+            "label": "hart"
+          }
+        },
+        {
+          "verb": "tame",
+          "label": "Tame",
+          "target": {
+            "kind": "fauna",
+            "id": "f-189",
+            "tx": 263,
+            "ty": 300,
+            "label": "hart"
+          }
+        },
+        {
+          "verb": "cast",
+          "label": "Magic Arrow",
+          "target": {
+            "kind": "fauna",
+            "id": "f-189",
+            "tx": 263,
+            "ty": 300,
+            "label": "hart"
+          }
+        },
+        {
+          "verb": "fireball",
+          "label": "Fireball",
+          "target": {
+            "kind": "fauna",
+            "id": "f-189",
+            "tx": 263,
+            "ty": 300,
+            "label": "hart"
+          }
+        },
+        {
+          "verb": "hunt",
+          "label": "Hunt",
+          "target": {
+            "kind": "fauna",
+            "id": "f-190",
+            "tx": 266,
+            "ty": 291,
+            "label": "hare"
+          }
+        },
+        {
+          "verb": "tame",
+          "label": "Tame",
+          "target": {
+            "kind": "fauna",
+            "id": "f-190",
+            "tx": 266,
+            "ty": 291,
+            "label": "hare"
+          }
+        },
+        {
+          "verb": "cast",
+          "label": "Magic Arrow",
+          "target": {
+            "kind": "fauna",
+            "id": "f-190",
+            "tx": 266,
+            "ty": 291,
+            "label": "hare"
+          }
+        },
+        {
+          "verb": "fireball",
+          "label": "Fireball",
+          "target": {
+            "kind": "fauna",
+            "id": "f-190",
+            "tx": 266,
+            "ty": 291,
+            "label": "hare"
+          }
+        },
+        {
+          "verb": "hunt",
+          "label": "Hunt",
+          "target": {
+            "kind": "fauna",
+            "id": "f-191",
+            "tx": 260,
+            "ty": 304,
+            "label": "field_rat"
+          }
+        },
+        {
+          "verb": "tame",
+          "label": "Tame",
+          "target": {
+            "kind": "fauna",
+            "id": "f-191",
+            "tx": 260,
+            "ty": 304,
+            "label": "field_rat"
+          }
+        },
+        {
+          "verb": "cast",
+          "label": "Magic Arrow",
+          "target": {
+            "kind": "fauna",
+            "id": "f-191",
+            "tx": 260,
+            "ty": 304,
+            "label": "field_rat"
+          }
+        },
+        {
+          "verb": "fireball",
+          "label": "Fireball",
+          "target": {
+            "kind": "fauna",
+            "id": "f-191",
+            "tx": 260,
+            "ty": 304,
+            "label": "field_rat"
+          }
+        },
+        {
+          "verb": "hunt",
+          "label": "Hunt",
+          "target": {
+            "kind": "fauna",
+            "id": "f-193",
+            "tx": 248,
+            "ty": 298,
+            "label": "saltback_tortoise"
+          }
+        },
+        {
+          "verb": "tame",
+          "label": "Tame",
+          "target": {
+            "kind": "fauna",
+            "id": "f-193",
+            "tx": 248,
+            "ty": 298,
+            "label": "saltback_tortoise"
+          }
+        },
+        {
+          "verb": "cast",
+          "label": "Magic Arrow",
+          "target": {
+            "kind": "fauna",
+            "id": "f-193",
+            "tx": 248,
+            "ty": 298,
+            "label": "saltback_tortoise"
+          }
+        },
+        {
+          "verb": "fireball",
+          "label": "Fireball",
+          "target": {
+            "kind": "fauna",
+            "id": "f-193",
+            "tx": 248,
+            "ty": 298,
+            "label": "saltback_tortoise"
+          }
+        },
+        {
+          "verb": "hunt",
+          "label": "Hunt",
+          "target": {
+            "kind": "fauna",
+            "id": "f-194",
+            "tx": 247,
+            "ty": 294,
+            "label": "hare"
+          }
+        },
+        {
+          "verb": "tame",
+          "label": "Tame",
+          "target": {
+            "kind": "fauna",
+            "id": "f-194",
+            "tx": 247,
+            "ty": 294,
+            "label": "hare"
+          }
+        },
+        {
+          "verb": "cast",
+          "label": "Magic Arrow",
+          "target": {
+            "kind": "fauna",
+            "id": "f-194",
+            "tx": 247,
+            "ty": 294,
+            "label": "hare"
+          }
+        },
+        {
+          "verb": "fireball",
+          "label": "Fireball",
+          "target": {
+            "kind": "fauna",
+            "id": "f-194",
+            "tx": 247,
+            "ty": 294,
+            "label": "hare"
+          }
+        },
+        {
+          "verb": "roster",
+          "label": "Read the roster",
+          "target": {
+            "kind": "building",
+            "id": "b-5",
+            "tx": 256,
+            "ty": 290,
+            "label": "hall"
+          }
+        },
+        {
+          "verb": "use",
+          "label": "Use the bench",
+          "target": {
+            "kind": "building",
+            "id": "b-5",
+            "tx": 256,
+            "ty": 290,
+            "label": "hall"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk",
+          "target": {
+            "kind": "building",
+            "id": "b-5",
+            "tx": 256,
+            "ty": 290,
+            "label": "hall"
+          }
+        },
+        {
+          "verb": "use",
+          "label": "Use the bench",
+          "target": {
+            "kind": "building",
+            "id": "b-6",
+            "tx": 263,
+            "ty": 291,
+            "label": "notice"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk",
+          "target": {
+            "kind": "building",
+            "id": "b-6",
+            "tx": 263,
+            "ty": 291,
+            "label": "notice"
+          }
+        },
+        {
+          "verb": "use",
+          "label": "Use the bench",
+          "target": {
+            "kind": "building",
+            "id": "b-7",
+            "tx": 248,
+            "ty": 291,
+            "label": "yard"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk",
+          "target": {
+            "kind": "building",
+            "id": "b-7",
+            "tx": 248,
+            "ty": 291,
+            "label": "yard"
+          }
+        },
+        {
+          "verb": "bank",
+          "label": "Open the box",
+          "target": {
+            "kind": "building",
+            "id": "b-13",
+            "tx": 261,
+            "ty": 295,
+            "label": "bank"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk",
+          "target": {
+            "kind": "building",
+            "id": "b-13",
+            "tx": 261,
+            "ty": 295,
+            "label": "bank"
+          }
+        },
+        {
+          "verb": "house",
+          "label": "Open the chest",
+          "target": {
+            "kind": "building",
+            "id": "b-199",
+            "tx": 250,
+            "ty": 298,
+            "label": "hut"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk",
+          "target": {
+            "kind": "building",
+            "id": "b-199",
+            "tx": 250,
+            "ty": 298,
+            "label": "hut"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "254,291",
+            "tx": 254,
+            "ty": 291,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "254,291",
+            "tx": 254,
+            "ty": 291,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "254,291",
+            "tx": 254,
+            "ty": 291,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "255,291",
+            "tx": 255,
+            "ty": 291,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "255,291",
+            "tx": 255,
+            "ty": 291,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "255,291",
+            "tx": 255,
+            "ty": 291,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "256,291",
+            "tx": 256,
+            "ty": 291,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "till",
+          "label": "Till a plot",
+          "target": {
+            "kind": "tile",
+            "id": "256,291",
+            "tx": 256,
+            "ty": 291,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "sowAcorn",
+          "label": "Plant oak",
+          "target": {
+            "kind": "tile",
+            "id": "256,291",
+            "tx": 256,
+            "ty": 291,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "dig",
+          "label": "Dig",
+          "target": {
+            "kind": "tile",
+            "id": "256,291",
+            "tx": 256,
+            "ty": 291,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "256,291",
+            "tx": 256,
+            "ty": 291,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "256,291",
+            "tx": 256,
+            "ty": 291,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "257,291",
+            "tx": 257,
+            "ty": 291,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "257,291",
+            "tx": 257,
+            "ty": 291,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "257,291",
+            "tx": 257,
+            "ty": 291,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "258,291",
+            "tx": 258,
+            "ty": 291,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "258,291",
+            "tx": 258,
+            "ty": 291,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "258,291",
+            "tx": 258,
+            "ty": 291,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "254,292",
+            "tx": 254,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "till",
+          "label": "Till a plot",
+          "target": {
+            "kind": "tile",
+            "id": "254,292",
+            "tx": 254,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "sowAcorn",
+          "label": "Plant oak",
+          "target": {
+            "kind": "tile",
+            "id": "254,292",
+            "tx": 254,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "dig",
+          "label": "Dig",
+          "target": {
+            "kind": "tile",
+            "id": "254,292",
+            "tx": 254,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "254,292",
+            "tx": 254,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "254,292",
+            "tx": 254,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "255,292",
+            "tx": 255,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "till",
+          "label": "Till a plot",
+          "target": {
+            "kind": "tile",
+            "id": "255,292",
+            "tx": 255,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "sowAcorn",
+          "label": "Plant oak",
+          "target": {
+            "kind": "tile",
+            "id": "255,292",
+            "tx": 255,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "dig",
+          "label": "Dig",
+          "target": {
+            "kind": "tile",
+            "id": "255,292",
+            "tx": 255,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "255,292",
+            "tx": 255,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "255,292",
+            "tx": 255,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "256,292",
+            "tx": 256,
+            "ty": 292,
+            "label": "road"
+          }
+        },
+        {
+          "verb": "till",
+          "label": "Till a plot",
+          "target": {
+            "kind": "tile",
+            "id": "256,292",
+            "tx": 256,
+            "ty": 292,
+            "label": "road"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "256,292",
+            "tx": 256,
+            "ty": 292,
+            "label": "road"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "256,292",
+            "tx": 256,
+            "ty": 292,
+            "label": "road"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "257,292",
+            "tx": 257,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "till",
+          "label": "Till a plot",
+          "target": {
+            "kind": "tile",
+            "id": "257,292",
+            "tx": 257,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "sowAcorn",
+          "label": "Plant oak",
+          "target": {
+            "kind": "tile",
+            "id": "257,292",
+            "tx": 257,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "dig",
+          "label": "Dig",
+          "target": {
+            "kind": "tile",
+            "id": "257,292",
+            "tx": 257,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "257,292",
+            "tx": 257,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "257,292",
+            "tx": 257,
+            "ty": 292,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "258,292",
+            "tx": 258,
+            "ty": 292,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "258,292",
+            "tx": 258,
+            "ty": 292,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "258,292",
+            "tx": 258,
+            "ty": 292,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "254,293",
+            "tx": 254,
+            "ty": 293,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "till",
+          "label": "Till a plot",
+          "target": {
+            "kind": "tile",
+            "id": "254,293",
+            "tx": 254,
+            "ty": 293,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "sowAcorn",
+          "label": "Plant oak",
+          "target": {
+            "kind": "tile",
+            "id": "254,293",
+            "tx": 254,
+            "ty": 293,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "dig",
+          "label": "Dig",
+          "target": {
+            "kind": "tile",
+            "id": "254,293",
+            "tx": 254,
+            "ty": 293,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "254,293",
+            "tx": 254,
+            "ty": 293,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "254,293",
+            "tx": 254,
+            "ty": 293,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "255,293",
+            "tx": 255,
+            "ty": 293,
+            "label": "road"
+          }
+        },
+        {
+          "verb": "till",
+          "label": "Till a plot",
+          "target": {
+            "kind": "tile",
+            "id": "255,293",
+            "tx": 255,
+            "ty": 293,
+            "label": "road"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "255,293",
+            "tx": 255,
+            "ty": 293,
+            "label": "road"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "255,293",
+            "tx": 255,
+            "ty": 293,
+            "label": "road"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "256,293",
+            "tx": 256,
+            "ty": 293,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "till",
+          "label": "Till a plot",
+          "target": {
+            "kind": "tile",
+            "id": "256,293",
+            "tx": 256,
+            "ty": 293,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "sowAcorn",
+          "label": "Plant oak",
+          "target": {
+            "kind": "tile",
+            "id": "256,293",
+            "tx": 256,
+            "ty": 293,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "dig",
+          "label": "Dig",
+          "target": {
+            "kind": "tile",
+            "id": "256,293",
+            "tx": 256,
+            "ty": 293,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "256,293",
+            "tx": 256,
+            "ty": 293,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "256,293",
+            "tx": 256,
+            "ty": 293,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "257,293",
+            "tx": 257,
+            "ty": 293,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "257,293",
+            "tx": 257,
+            "ty": 293,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "257,293",
+            "tx": 257,
+            "ty": 293,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "258,293",
+            "tx": 258,
+            "ty": 293,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "258,293",
+            "tx": 258,
+            "ty": 293,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "258,293",
+            "tx": 258,
+            "ty": 293,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "254,294",
+            "tx": 254,
+            "ty": 294,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "till",
+          "label": "Till a plot",
+          "target": {
+            "kind": "tile",
+            "id": "254,294",
+            "tx": 254,
+            "ty": 294,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "sowAcorn",
+          "label": "Plant oak",
+          "target": {
+            "kind": "tile",
+            "id": "254,294",
+            "tx": 254,
+            "ty": 294,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "dig",
+          "label": "Dig",
+          "target": {
+            "kind": "tile",
+            "id": "254,294",
+            "tx": 254,
+            "ty": 294,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "254,294",
+            "tx": 254,
+            "ty": 294,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "254,294",
+            "tx": 254,
+            "ty": 294,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "255,294",
+            "tx": 255,
+            "ty": 294,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "till",
+          "label": "Till a plot",
+          "target": {
+            "kind": "tile",
+            "id": "255,294",
+            "tx": 255,
+            "ty": 294,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "sowAcorn",
+          "label": "Plant oak",
+          "target": {
+            "kind": "tile",
+            "id": "255,294",
+            "tx": 255,
+            "ty": 294,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "dig",
+          "label": "Dig",
+          "target": {
+            "kind": "tile",
+            "id": "255,294",
+            "tx": 255,
+            "ty": 294,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "255,294",
+            "tx": 255,
+            "ty": 294,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "255,294",
+            "tx": 255,
+            "ty": 294,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "256,294",
+            "tx": 256,
+            "ty": 294,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "256,294",
+            "tx": 256,
+            "ty": 294,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "256,294",
+            "tx": 256,
+            "ty": 294,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "257,294",
+            "tx": 257,
+            "ty": 294,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "257,294",
+            "tx": 257,
+            "ty": 294,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "257,294",
+            "tx": 257,
+            "ty": 294,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "258,294",
+            "tx": 258,
+            "ty": 294,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "258,294",
+            "tx": 258,
+            "ty": 294,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "258,294",
+            "tx": 258,
+            "ty": 294,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "254,295",
+            "tx": 254,
+            "ty": 295,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "till",
+          "label": "Till a plot",
+          "target": {
+            "kind": "tile",
+            "id": "254,295",
+            "tx": 254,
+            "ty": 295,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "sowAcorn",
+          "label": "Plant oak",
+          "target": {
+            "kind": "tile",
+            "id": "254,295",
+            "tx": 254,
+            "ty": 295,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "dig",
+          "label": "Dig",
+          "target": {
+            "kind": "tile",
+            "id": "254,295",
+            "tx": 254,
+            "ty": 295,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "254,295",
+            "tx": 254,
+            "ty": 295,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "254,295",
+            "tx": 254,
+            "ty": 295,
+            "label": "dirt"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "255,295",
+            "tx": 255,
+            "ty": 295,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "255,295",
+            "tx": 255,
+            "ty": 295,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "255,295",
+            "tx": 255,
+            "ty": 295,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "256,295",
+            "tx": 256,
+            "ty": 295,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "256,295",
+            "tx": 256,
+            "ty": 295,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "256,295",
+            "tx": 256,
+            "ty": 295,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "257,295",
+            "tx": 257,
+            "ty": 295,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "257,295",
+            "tx": 257,
+            "ty": 295,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "257,295",
+            "tx": 257,
+            "ty": 295,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "walk",
+          "label": "Walk here",
+          "target": {
+            "kind": "tile",
+            "id": "258,295",
+            "tx": 258,
+            "ty": 295,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "teleport",
+          "label": "Teleport here",
+          "target": {
+            "kind": "tile",
+            "id": "258,295",
+            "tx": 258,
+            "ty": 295,
+            "label": "cobble"
+          }
+        },
+        {
+          "verb": "track",
+          "label": "Track",
+          "target": {
+            "kind": "tile",
+            "id": "258,295",
+            "tx": 258,
+            "ty": 295,
+            "label": "cobble"
+          }
+        }
+      ],
+      "logTail": [
+        "A hut stands for the looking — no deed asked.",
+        "You are Brann Marsh. The vale is a country — Ridgewatch to Brinegate. Follow the dirt."
+      ]
+    }
+  },
+  "config": {
+    "scheduler": {
+      "riskGated": true,
+      "idleHeartbeatTicks": 36000,
+      "cadence": {
+        "mindHeartbeatHours": 3,
+        "sleepStartHour": 22,
+        "sleepEndHour": 6,
+        "reflexCooldownTicks": 150
+      },
+      "events": {
+        "hpCriticalFraction": 0.25,
+        "hungerLow": 25,
+        "hungerCritical": 10,
+        "thirstLow": 25,
+        "thirstCritical": 10,
+        "energyLow": 25,
+        "energyCritical": 10,
+        "hostileRadius": 8,
+        "idleStasisPushes": 3
+      },
+      "maxConcurrentAttempts": 1,
+      "failureBackoffTicks": 4,
+      "maxFailureBackoffTicks": 64
+    },
+    "price": {
+      "tableId": "local-survival-zero",
+      "model": "deterministic-scorer",
+      "currency": "USD",
+      "promptPerMTok": 0,
+      "completionPerMTok": 0,
+      "source": "local deterministic survival backend — no provider call, zero cost",
+      "capturedAt": "2026-11-24",
+      "notes": "Zero-paid water-survival proof (t_4e2c4d13). NOT the paid Jev gate."
+    },
+    "watchdogMs": 1800000,
+    "url": "ws://127.0.0.1:5599"
+  },
+  "reason": "full-vale-day",
+  "duration": {
+    "startedWallMs": 1795553949485,
+    "endedWallMs": 1795554910239,
+    "wallSeconds": 960.753,
+    "simHours": 24.0027777777713,
+    "startTick": 0,
+    "endTick": 8641,
+    "ticks": 8641
+  },
+  "segments": [
+    {
+      "startMs": 1795553953258,
+      "endMs": 1795554909891,
+      "startHour": 8,
+      "endHour": 32.0027777777713,
+      "mode": "enabled"
+    }
+  ],
+  "acceptance": {
+    "fullDaySurvival": true,
+    "zeroRejections": true,
+    "zeroInterventions": true,
+    "budgetGuardIntact": true,
+    "waterPressureExposed": true,
+    "waterPressureResponded": true,
+    "pass": true
+  },
+  "waterExposure": {
+    "thirstStart": 80,
+    "thirstMin": 7.999999999994076,
+    "thirstEnd": 84.78666666665399,
+    "firstTickAtOrBelow": {
+      "offer60": 1500,
+      "low25": 4125,
+      "critical10": 5250
+    },
+    "ticksAtOrBelow": {
+      "offer60": 5441,
+      "low25": 1276,
+      "critical10": 151
+    },
+    "inWaterTicks": 0,
+    "drowningTicks": 0,
+    "maxConsecutiveInWater": 0,
+    "inWaterEpisodes": 0,
+    "drinkOfferObservations": 3363,
+    "drinkDecisions": 3,
+    "drinkAckedOk": 3,
+    "thirstRestoreEvents": 3,
+    "hungerStart": 80,
+    "hungerMin": 23.662222222213416,
+    "hungerEnd": 37.191111111099104,
+    "eatDecisions": 1,
+    "eatAckedOk": 1,
+    "nightObservations": 3240,
+    "hpStart": 40,
+    "hpMin": 40,
+    "hpEnd": 40,
+    "verbsOffered": {
+      "talk": 40393,
+      "walk": 289507,
+      "hunt": 60912,
+      "tame": 60912,
+      "cast": 60912,
+      "fireball": 60912,
+      "roster": 5286,
+      "use": 19200,
+      "bank": 8642,
+      "house": 8642,
+      "teleport": 212630,
+      "track": 212630,
+      "till": 111929,
+      "sowAcorn": 77859,
+      "dig": 101397,
+      "fish": 26868,
+      "drink": 26868
+    },
+    "observationCount": 8642
+  },
+  "budget": {
+    "final": {
+      "agentId": "water-replay-aquila",
+      "day": "2026-11-24",
+      "capMicros": 500000,
+      "spentMicros": 0,
+      "reservedMicros": 0,
+      "remainingMicros": 500000,
+      "openReservations": 0
+    },
+    "totalCostMicros": 0,
+    "capMicros": 500000
+  },
+  "counts": {
+    "observations": 8642,
+    "decisions": 6,
+    "attempts": 6,
+    "rejections": 0,
+    "interventions": 0,
+    "errors": 0
+  },
+  "triggerCounts": {
+    "boot": 1,
+    "vitals.thirst_critical": 1,
+    "danger.unresolved": 4,
+    "vitals.hunger_low": 1,
+    "vitals.energy_low": 1
+  },
+  "traceHash": "82a993ffaa65d88bad38c243da7339cf0fafb34cb0cc1f8df5dbf09127fd0f77",
+  "traceHashBasis": "sha256 over JSON.stringify of each canonical observation {tick,hour,isNight,you:{hp,hunger,thirst,energy,x,z,inWater,drowning,ghost},verbs} joined by newline, then the literal separator line ---decisions---, then canonical decision rows {tick,hour,verb,answer,outcome} joined by newline; wall-clock fields excluded",
+  "rawEvidenceHashes": {
+    "attempts": "9eef87c7e1c1bd43267efa688f9ec6575b41f2248c676405a421e73c2b387641",
+    "trace": "26f14a53ebac75bd4d02ec442ee2a0da42457f9a142f98b2fd66ad0f4b6fe569",
+    "observations": "3439e530622720abbb9a91e2e09cb5203dc862e82e88777f10f60ed904f6d5ed",
+    "feed": "2f2049efc2c3044f7555478296b0fd8c40cd5c12a232682056c3d0c915e76eed",
+    "shardLog": "f8629ee57d09c8ce90728c8192578e798e091de373b3d922830ee0e4564a1ce1"
+  },
+  "cost": {
+    "totalUsd": 0,
+    "totalCostMicros": 0,
+    "providerCalls": 0,
+    "usage": {
+      "promptTokens": 0,
+      "completionTokens": 0
+    },
+    "price": {
+      "tableId": "local-survival-zero",
+      "model": "deterministic-scorer",
+      "currency": "USD",
+      "promptPerMTok": 0,
+      "completionPerMTok": 0,
+      "source": "local deterministic survival backend — no provider call, zero cost",
+      "capturedAt": "2026-11-24",
+      "notes": "Zero-paid water-survival proof (t_4e2c4d13). NOT the paid Jev gate."
+    },
+    "cadence": {
+      "attempts": 6,
+      "wallSeconds": 960.753,
+      "attemptsPerWallHour": 22.482365394643573,
+      "observations": 8642,
+      "simHours": 24.0027777777713
+    },
+    "projectionNote": "Zero-paid run. The paid wall-day projection is t_0d13c23d's scope; inputs recorded here are attempt cadence, observation count and the zero-tariff price table. The Phase 3.6 paid price record is untouched."
+  },
+  "samples": [
+    {
+      "wallMs": 1795553953258,
+      "tick": 0,
+      "hour": 8,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 80,
+      "energy": 80,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0,
+        "exhausted": false
+      }
+    },
+    {
+      "wallMs": 1795553993147,
+      "tick": 360,
+      "hour": 9.000000000000156,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 76.7999999999995,
+      "energy": 77.60000000000218,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554033044,
+      "tick": 720,
+      "hour": 10.000000000000313,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 73.599999999999,
+      "energy": 75.20000000000437,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554072841,
+      "tick": 1080,
+      "hour": 11.000000000000469,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 70.3999999999985,
+      "energy": 72.80000000000655,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554112692,
+      "tick": 1440,
+      "hour": 12.000000000000625,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 67.199999999998,
+      "energy": 70.40000000000873,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554152510,
+      "tick": 1800,
+      "hour": 13.000000000000782,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 63.9999999999975,
+      "energy": 68.00000000001091,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554192352,
+      "tick": 2160,
+      "hour": 14.000000000000938,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 60.799999999997,
+      "energy": 65.6000000000131,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554232232,
+      "tick": 2520,
+      "hour": 15.000000000001094,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 57.5999999999965,
+      "energy": 63.20000000001443,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554272079,
+      "tick": 2880,
+      "hour": 16.00000000000125,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 54.399999999996,
+      "energy": 60.80000000001405,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554311937,
+      "tick": 3240,
+      "hour": 17.000000000000767,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 51.1999999999955,
+      "energy": 58.40000000001368,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554351791,
+      "tick": 3600,
+      "hour": 18.000000000000284,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 47.999999999995,
+      "energy": 56.0000000000133,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554391770,
+      "tick": 3961,
+      "hour": 19.002777777777577,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 44.79111111110561,
+      "energy": 53.59333333334626,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554431601,
+      "tick": 4321,
+      "hour": 20.002777777777094,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 41.59111111110511,
+      "energy": 51.19333333334588,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554471451,
+      "tick": 4681,
+      "hour": 21.00277777777661,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 38.39111111110461,
+      "energy": 48.79333333334551,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554511279,
+      "tick": 5041,
+      "hour": 22.002777777776128,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 35.19111111110411,
+      "energy": 46.39333333334513,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554551154,
+      "tick": 5401,
+      "hour": 23.002777777775645,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 31.991111111103606,
+      "energy": 43.99333333334476,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554591022,
+      "tick": 5761,
+      "hour": 24.00277777777516,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 28.791111111103106,
+      "energy": 41.59333333334438,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554630905,
+      "tick": 6121,
+      "hour": 25.00277777777468,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 25.591111111102606,
+      "energy": 39.19333333334401,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554670772,
+      "tick": 6481,
+      "hour": 26.002777777774195,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 56.391111111102106,
+      "energy": 36.79333333334363,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554710683,
+      "tick": 6841,
+      "hour": 27.002777777773712,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 53.191111111101606,
+      "energy": 34.39333333334326,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554750536,
+      "tick": 7201,
+      "hour": 28.00277777777323,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 49.991111111101105,
+      "energy": 31.993333333342882,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554790385,
+      "tick": 7561,
+      "hour": 29.002777777772746,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 46.791111111100605,
+      "energy": 29.593333333342507,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554830205,
+      "tick": 7921,
+      "hour": 30.002777777772263,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 43.591111111100105,
+      "energy": 27.19333333334213,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554870039,
+      "tick": 8281,
+      "hour": 31.00277777777178,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 40.391111111099605,
+      "energy": 24.793333333341756,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    },
+    {
+      "wallMs": 1795554909891,
+      "tick": 8641,
+      "hour": 32.0027777777713,
+      "hp": 40,
+      "ghost": false,
+      "hunger": 37.191111111099104,
+      "energy": 22.39333333334138,
+      "utcDay": "2026-11-24",
+      "guard": {
+        "capMicros": 500000,
+        "spentMicros": 0,
+        "reservedMicros": 0
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "attemptId": "amwv6gp9s-001-4re",
+      "tick": 0,
+      "hour": 8,
+      "thirst": 80,
+      "hunger": 80,
+      "hp": 40,
+      "energy": 80,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false,
+      "triggers": [
+        "boot"
+      ],
+      "options": [
+        "Walk [256,293]",
+        "Walk [257,292]",
+        "Walk [255,293]",
+        "Walk [258,293]",
+        "Walk [252,294]",
+        "Walk [258,295]",
+        "Walk [255,294]",
+        "Hunt [262,296]",
+        "Tame [262,296]",
+        "Magic Arrow [262,296]",
+        "Fireball [262,296]",
+        "Hunt [250,296]",
+        "Tame [250,296]",
+        "Magic Arrow [250,296]",
+        "Fireball [250,296]",
+        "Hunt [263,287]",
+        "Tame [263,287]",
+        "Magic Arrow [263,287]",
+        "Fireball [263,287]",
+        "Hunt [249,287]",
+        "Tame [249,287]",
+        "Magic Arrow [249,287]",
+        "Fireball [249,287]",
+        "Hunt [259,282]",
+        "Tame [259,282]",
+        "Magic Arrow [259,282]",
+        "Fireball [259,282]",
+        "Hunt [263,300]",
+        "Tame [263,300]",
+        "Magic Arrow [263,300]",
+        "Fireball [263,300]",
+        "Hunt [266,291]",
+        "Tame [266,291]",
+        "Magic Arrow [266,291]",
+        "Fireball [266,291]",
+        "Hunt [260,304]",
+        "Tame [260,304]",
+        "Magic Arrow [260,304]",
+        "Fireball [260,304]",
+        "Hunt [248,298]",
+        "Tame [248,298]",
+        "Magic Arrow [248,298]",
+        "Fireball [248,298]",
+        "Hunt [247,294]",
+        "Tame [247,294]",
+        "Magic Arrow [247,294]",
+        "Fireball [247,294]",
+        "Walk [256,290]",
+        "Walk [263,291]",
+        "Walk [248,291]",
+        "Walk [261,295]",
+        "Walk [250,298]",
+        "Walk here [254,291]",
+        "Teleport here [254,291]",
+        "Walk here [255,291]",
+        "Teleport here [255,291]",
+        "Walk here [256,291]",
+        "Till a plot [256,291]",
+        "Plant oak [256,291]",
+        "Dig [256,291]",
+        "Teleport here [256,291]",
+        "Walk here [257,291]",
+        "Teleport here [257,291]",
+        "Walk here [258,291]",
+        "Teleport here [258,291]",
+        "Walk here [254,292]",
+        "Till a plot [254,292]",
+        "Plant oak [254,292]",
+        "Dig [254,292]",
+        "Teleport here [254,292]",
+        "Walk here [255,292]",
+        "Till a plot [255,292]",
+        "Plant oak [255,292]",
+        "Dig [255,292]",
+        "Teleport here [255,292]",
+        "Walk here [256,292]",
+        "Till a plot [256,292]",
+        "Teleport here [256,292]",
+        "Walk here [257,292]",
+        "Till a plot [257,292]",
+        "Plant oak [257,292]",
+        "Dig [257,292]",
+        "Teleport here [257,292]",
+        "Walk here [258,292]",
+        "Teleport here [258,292]",
+        "Walk here [254,293]",
+        "Till a plot [254,293]",
+        "Plant oak [254,293]",
+        "Dig [254,293]",
+        "Teleport here [254,293]",
+        "Walk here [255,293]",
+        "Till a plot [255,293]",
+        "Teleport here [255,293]",
+        "Walk here [256,293]",
+        "Till a plot [256,293]",
+        "Plant oak [256,293]",
+        "Dig [256,293]",
+        "Teleport here [256,293]",
+        "Walk here [257,293]",
+        "Teleport here [257,293]",
+        "Walk here [258,293]",
+        "Teleport here [258,293]",
+        "Walk here [254,294]",
+        "Till a plot [254,294]",
+        "Plant oak [254,294]",
+        "Dig [254,294]",
+        "Teleport here [254,294]",
+        "Walk here [255,294]",
+        "Till a plot [255,294]",
+        "Plant oak [255,294]",
+        "Dig [255,294]",
+        "Teleport here [255,294]",
+        "Walk here [256,294]",
+        "Teleport here [256,294]",
+        "Walk here [257,294]",
+        "Teleport here [257,294]",
+        "Walk here [258,294]",
+        "Teleport here [258,294]",
+        "Walk here [254,295]",
+        "Till a plot [254,295]",
+        "Plant oak [254,295]",
+        "Dig [254,295]",
+        "Teleport here [254,295]",
+        "Walk here [255,295]",
+        "Teleport here [255,295]",
+        "Walk here [256,295]",
+        "Teleport here [256,295]",
+        "Walk here [257,295]",
+        "Teleport here [257,295]",
+        "Walk here [258,295]",
+        "Teleport here [258,295]",
+        "Eat Cabbage from pack",
+        "Rest / remain idle"
+      ],
+      "optionVerbs": [
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "teleport",
+        "eat",
+        "idle"
+      ],
+      "verb": null,
+      "answer": "Till a plot [256,291]",
+      "outcome": null
+    },
+    {
+      "attemptId": "amwv6t5p5-002-17hx",
+      "tick": 5250,
+      "hour": 22.583333333331403,
+      "thirst": 9.999999999994122,
+      "hunger": 33.33333333332604,
+      "hp": 40,
+      "energy": 45.00000000001158,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false,
+      "triggers": [
+        "vitals.thirst_critical",
+        "danger.unresolved"
+      ],
+      "options": [
+        "Walk [256,293]",
+        "Walk [258,293]",
+        "Walk [252,294]",
+        "Walk [258,295]",
+        "Hunt [258,296]",
+        "Tame [258,296]",
+        "Magic Arrow [258,296]",
+        "Fireball [258,296]",
+        "Hunt [250,297]",
+        "Tame [250,297]",
+        "Magic Arrow [250,297]",
+        "Fireball [250,297]",
+        "Hunt [263,286]",
+        "Tame [263,286]",
+        "Magic Arrow [263,286]",
+        "Fireball [263,286]",
+        "Hunt [250,285]",
+        "Tame [250,285]",
+        "Magic Arrow [250,285]",
+        "Fireball [250,285]",
+        "Hunt [260,283]",
+        "Tame [260,283]",
+        "Magic Arrow [260,283]",
+        "Fireball [260,283]",
+        "Hunt [262,299]",
+        "Tame [262,299]",
+        "Magic Arrow [262,299]",
+        "Fireball [262,299]",
+        "Hunt [266,290]",
+        "Tame [266,290]",
+        "Magic Arrow [266,290]",
+        "Fireball [266,290]",
+        "Hunt [259,304]",
+        "Tame [259,304]",
+        "Magic Arrow [259,304]",
+        "Fireball [259,304]",
+        "Hunt [246,297]",
+        "Tame [246,297]",
+        "Magic Arrow [246,297]",
+        "Fireball [246,297]",
+        "Hunt [247,295]",
+        "Tame [247,295]",
+        "Magic Arrow [247,295]",
+        "Fireball [247,295]",
+        "Walk [256,290]",
+        "Walk [263,291]",
+        "Walk [248,291]",
+        "Walk [261,295]",
+        "Walk [250,298]",
+        "Walk here [254,291]",
+        "Teleport here [254,291]",
+        "Walk here [255,291]",
+        "Teleport here [255,291]",
+        "Walk here [256,291]",
+        "Till a plot [256,291]",
+        "Plant oak [256,291]",
+        "Dig [256,291]",
+        "Teleport here [256,291]",
+        "Walk here [257,291]",
+        "Teleport here [257,291]",
+        "Walk here [258,291]",
+        "Teleport here [258,291]",
+        "Walk here [254,292]",
+        "Till a plot [254,292]",
+        "Plant oak [254,292]",
+        "Dig [254,292]",
+        "Teleport here [254,292]",
+        "Walk here [255,292]",
+        "Till a plot [255,292]",
+        "Plant oak [255,292]",
+        "Dig [255,292]",
+        "Teleport here [255,292]",
+        "Walk here [256,292]",
+        "Till a plot [256,292]",
+        "Teleport here [256,292]",
+        "Walk here [257,292]",
+        "Till a plot [257,292]",
+        "Plant oak [257,292]",
+        "Dig [257,292]",
+        "Teleport here [257,292]",
+        "Walk here [258,292]",
+        "Teleport here [258,292]",
+        "Walk here [254,293]",
+        "Till a plot [254,293]",
+        "Plant oak [254,293]",
+        "Dig [254,293]",
+        "Teleport here [254,293]",
+        "Walk here [255,293]",
+        "Till a plot [255,293]",
+        "Teleport here [255,293]",
+        "Walk here [256,293]",
+        "Till a plot [256,293]",
+        "Plant oak [256,293]",
+        "Dig [256,293]",
+        "Teleport here [256,293]",
+        "Walk here [257,293]",
+        "Teleport here [257,293]",
+        "Walk here [258,293]",
+        "Teleport here [258,293]",
+        "Walk here [254,294]",
+        "Till a plot [254,294]",
+        "Plant oak [254,294]",
+        "Dig [254,294]",
+        "Teleport here [254,294]",
+        "Walk here [255,294]",
+        "Till a plot [255,294]",
+        "Plant oak [255,294]",
+        "Dig [255,294]",
+        "Teleport here [255,294]",
+        "Walk here [256,294]",
+        "Teleport here [256,294]",
+        "Walk here [257,294]",
+        "Teleport here [257,294]",
+        "Walk here [258,294]",
+        "Teleport here [258,294]",
+        "Walk here [254,295]",
+        "Till a plot [254,295]",
+        "Plant oak [254,295]",
+        "Dig [254,295]",
+        "Teleport here [254,295]",
+        "Walk here [255,295]",
+        "Teleport here [255,295]",
+        "Walk here [256,295]",
+        "Teleport here [256,295]",
+        "Walk here [257,295]",
+        "Teleport here [257,295]",
+        "Walk here [258,295]",
+        "Teleport here [258,295]",
+        "Eat Cabbage from pack",
+        "Drink from the water (251, 302)",
+        "Walk to the water’s edge (252, 302)",
+        "Rest / remain idle"
+      ],
+      "optionVerbs": [
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "teleport",
+        "walk",
+        "teleport",
+        "eat",
+        "drink",
+        "walk",
+        "idle"
+      ],
+      "verb": null,
+      "answer": "Walk to the water’s edge (252, 302)",
+      "outcome": null
+    },
+    {
+      "attemptId": "amwv6tiiv-003-jbg",
+      "tick": 5400,
+      "hour": 22.99999999999787,
+      "thirst": 7.999999999994076,
+      "hunger": 31.999999999992497,
+      "hp": 40,
+      "energy": 44.000000000011426,
+      "x": 252,
+      "z": 302,
+      "inWater": false,
+      "drowning": false,
+      "triggers": [
+        "danger.unresolved"
+      ],
+      "options": [
+        "Walk [256,293]",
+        "Walk [258,293]",
+        "Walk [252,294]",
+        "Walk [258,295]",
+        "Hunt [258,296]",
+        "Tame [258,296]",
+        "Magic Arrow [258,296]",
+        "Fireball [258,296]",
+        "Hunt [250,297]",
+        "Tame [250,297]",
+        "Magic Arrow [250,297]",
+        "Fireball [250,297]",
+        "Hunt [262,299]",
+        "Tame [262,299]",
+        "Magic Arrow [262,299]",
+        "Fireball [262,299]",
+        "Hunt [259,304]",
+        "Tame [259,304]",
+        "Magic Arrow [259,304]",
+        "Fireball [259,304]",
+        "Hunt [250,300]",
+        "Tame [250,300]",
+        "Magic Arrow [250,300]",
+        "Fireball [250,300]",
+        "Hunt [247,295]",
+        "Tame [247,295]",
+        "Magic Arrow [247,295]",
+        "Fireball [247,295]",
+        "Walk [248,291]",
+        "Walk [261,295]",
+        "Walk [250,298]",
+        "Walk here [250,300]",
+        "Till a plot [250,300]",
+        "Plant oak [250,300]",
+        "Dig [250,300]",
+        "Teleport here [250,300]",
+        "Walk here [251,300]",
+        "Till a plot [251,300]",
+        "Plant oak [251,300]",
+        "Dig [251,300]",
+        "Teleport here [251,300]",
+        "Walk here [253,300]",
+        "Till a plot [253,300]",
+        "Plant oak [253,300]",
+        "Dig [253,300]",
+        "Teleport here [253,300]",
+        "Walk here [254,300]",
+        "Till a plot [254,300]",
+        "Plant oak [254,300]",
+        "Dig [254,300]",
+        "Teleport here [254,300]",
+        "Walk here [250,301]",
+        "Till a plot [250,301]",
+        "Dig [250,301]",
+        "Teleport here [250,301]",
+        "Walk here [251,301]",
+        "Till a plot [251,301]",
+        "Dig [251,301]",
+        "Teleport here [251,301]",
+        "Walk here [252,301]",
+        "Till a plot [252,301]",
+        "Dig [252,301]",
+        "Teleport here [252,301]",
+        "Walk here [253,301]",
+        "Till a plot [253,301]",
+        "Plant oak [253,301]",
+        "Dig [253,301]",
+        "Teleport here [253,301]",
+        "Walk here [254,301]",
+        "Till a plot [254,301]",
+        "Plant oak [254,301]",
+        "Dig [254,301]",
+        "Teleport here [254,301]",
+        "Walk here [250,302]",
+        "Cast a line [250,302]",
+        "Teleport here [250,302]",
+        "Walk here [251,302]",
+        "Cast a line [251,302]",
+        "Teleport here [251,302]",
+        "Walk here [252,302]",
+        "Till a plot [252,302]",
+        "Dig [252,302]",
+        "Teleport here [252,302]",
+        "Walk here [253,302]",
+        "Till a plot [253,302]",
+        "Dig [253,302]",
+        "Teleport here [253,302]",
+        "Walk here [254,302]",
+        "Till a plot [254,302]",
+        "Plant oak [254,302]",
+        "Dig [254,302]",
+        "Teleport here [254,302]",
+        "Walk here [250,303]",
+        "Cast a line [250,303]",
+        "Teleport here [250,303]",
+        "Walk here [251,303]",
+        "Cast a line [251,303]",
+        "Teleport here [251,303]",
+        "Walk here [252,303]",
+        "Cast a line [252,303]",
+        "Teleport here [252,303]",
+        "Walk here [253,303]",
+        "Till a plot [253,303]",
+        "Dig [253,303]",
+        "Teleport here [253,303]",
+        "Walk here [254,303]",
+        "Till a plot [254,303]",
+        "Plant oak [254,303]",
+        "Dig [254,303]",
+        "Teleport here [254,303]",
+        "Walk here [250,304]",
+        "Cast a line [250,304]",
+        "Teleport here [250,304]",
+        "Walk here [251,304]",
+        "Cast a line [251,304]",
+        "Teleport here [251,304]",
+        "Walk here [252,304]",
+        "Cast a line [252,304]",
+        "Teleport here [252,304]",
+        "Walk here [253,304]",
+        "Till a plot [253,304]",
+        "Dig [253,304]",
+        "Teleport here [253,304]",
+        "Walk here [254,304]",
+        "Till a plot [254,304]",
+        "Plant oak [254,304]",
+        "Dig [254,304]",
+        "Teleport here [254,304]",
+        "Eat Cabbage from pack",
+        "Drink from the water (251, 302)",
+        "Rest / remain idle"
+      ],
+      "optionVerbs": [
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "eat",
+        "drink",
+        "idle"
+      ],
+      "verb": "drink",
+      "answer": "Drink from the water (251, 302)",
+      "outcome": null
+    },
+    {
+      "attemptId": "amwv6vdvg-004-xi5",
+      "tick": 6188,
+      "hour": 25.1888888888857,
+      "thirst": 37.493333333325765,
+      "hunger": 24.995555555546957,
+      "hp": 40,
+      "energy": 38.74666666667727,
+      "x": 252,
+      "z": 302,
+      "inWater": false,
+      "drowning": false,
+      "triggers": [
+        "vitals.hunger_low",
+        "danger.unresolved"
+      ],
+      "options": [
+        "Walk [256,293]",
+        "Walk [258,293]",
+        "Walk [252,294]",
+        "Walk [258,295]",
+        "Hunt [246,299]",
+        "Tame [246,299]",
+        "Magic Arrow [246,299]",
+        "Fireball [246,299]",
+        "Hunt [260,305]",
+        "Tame [260,305]",
+        "Magic Arrow [260,305]",
+        "Fireball [260,305]",
+        "Hunt [248,301]",
+        "Tame [248,301]",
+        "Magic Arrow [248,301]",
+        "Fireball [248,301]",
+        "Hunt [244,297]",
+        "Tame [244,297]",
+        "Magic Arrow [244,297]",
+        "Fireball [244,297]",
+        "Walk [248,291]",
+        "Walk [261,295]",
+        "Walk [250,298]",
+        "Walk here [250,300]",
+        "Till a plot [250,300]",
+        "Plant oak [250,300]",
+        "Dig [250,300]",
+        "Teleport here [250,300]",
+        "Walk here [251,300]",
+        "Till a plot [251,300]",
+        "Plant oak [251,300]",
+        "Dig [251,300]",
+        "Teleport here [251,300]",
+        "Walk here [253,300]",
+        "Till a plot [253,300]",
+        "Plant oak [253,300]",
+        "Dig [253,300]",
+        "Teleport here [253,300]",
+        "Walk here [254,300]",
+        "Till a plot [254,300]",
+        "Plant oak [254,300]",
+        "Dig [254,300]",
+        "Teleport here [254,300]",
+        "Walk here [250,301]",
+        "Till a plot [250,301]",
+        "Dig [250,301]",
+        "Teleport here [250,301]",
+        "Walk here [251,301]",
+        "Till a plot [251,301]",
+        "Dig [251,301]",
+        "Teleport here [251,301]",
+        "Walk here [252,301]",
+        "Till a plot [252,301]",
+        "Dig [252,301]",
+        "Teleport here [252,301]",
+        "Walk here [253,301]",
+        "Till a plot [253,301]",
+        "Plant oak [253,301]",
+        "Dig [253,301]",
+        "Teleport here [253,301]",
+        "Walk here [254,301]",
+        "Till a plot [254,301]",
+        "Plant oak [254,301]",
+        "Dig [254,301]",
+        "Teleport here [254,301]",
+        "Walk here [250,302]",
+        "Cast a line [250,302]",
+        "Teleport here [250,302]",
+        "Walk here [251,302]",
+        "Cast a line [251,302]",
+        "Teleport here [251,302]",
+        "Walk here [252,302]",
+        "Till a plot [252,302]",
+        "Dig [252,302]",
+        "Teleport here [252,302]",
+        "Walk here [253,302]",
+        "Till a plot [253,302]",
+        "Dig [253,302]",
+        "Teleport here [253,302]",
+        "Walk here [254,302]",
+        "Till a plot [254,302]",
+        "Plant oak [254,302]",
+        "Dig [254,302]",
+        "Teleport here [254,302]",
+        "Walk here [250,303]",
+        "Cast a line [250,303]",
+        "Teleport here [250,303]",
+        "Walk here [251,303]",
+        "Cast a line [251,303]",
+        "Teleport here [251,303]",
+        "Walk here [252,303]",
+        "Cast a line [252,303]",
+        "Teleport here [252,303]",
+        "Walk here [253,303]",
+        "Till a plot [253,303]",
+        "Dig [253,303]",
+        "Teleport here [253,303]",
+        "Walk here [254,303]",
+        "Till a plot [254,303]",
+        "Plant oak [254,303]",
+        "Dig [254,303]",
+        "Teleport here [254,303]",
+        "Walk here [250,304]",
+        "Cast a line [250,304]",
+        "Teleport here [250,304]",
+        "Walk here [251,304]",
+        "Cast a line [251,304]",
+        "Teleport here [251,304]",
+        "Walk here [252,304]",
+        "Cast a line [252,304]",
+        "Teleport here [252,304]",
+        "Walk here [253,304]",
+        "Till a plot [253,304]",
+        "Dig [253,304]",
+        "Teleport here [253,304]",
+        "Walk here [254,304]",
+        "Till a plot [254,304]",
+        "Plant oak [254,304]",
+        "Dig [254,304]",
+        "Teleport here [254,304]",
+        "Eat Cabbage from pack",
+        "Drink from the water (251, 302)",
+        "Rest / remain idle"
+      ],
+      "optionVerbs": [
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "eat",
+        "drink",
+        "idle"
+      ],
+      "verb": "drink",
+      "answer": "Drink from the water (251, 302)",
+      "outcome": null
+    },
+    {
+      "attemptId": "amwv6vqoq-005-w",
+      "tick": 6338,
+      "hour": 25.605555555552165,
+      "thirst": 75.49333333332545,
+      "hunger": 23.662222222213416,
+      "hp": 40,
+      "energy": 37.746666666677115,
+      "x": 252,
+      "z": 302,
+      "inWater": false,
+      "drowning": false,
+      "triggers": [
+        "danger.unresolved"
+      ],
+      "options": [
+        "Walk [256,293]",
+        "Walk [258,293]",
+        "Walk [252,294]",
+        "Walk [258,295]",
+        "Hunt [246,299]",
+        "Tame [246,299]",
+        "Magic Arrow [246,299]",
+        "Fireball [246,299]",
+        "Hunt [260,305]",
+        "Tame [260,305]",
+        "Magic Arrow [260,305]",
+        "Fireball [260,305]",
+        "Hunt [252,300]",
+        "Tame [252,300]",
+        "Magic Arrow [252,300]",
+        "Fireball [252,300]",
+        "Hunt [244,297]",
+        "Tame [244,297]",
+        "Magic Arrow [244,297]",
+        "Fireball [244,297]",
+        "Walk [248,291]",
+        "Walk [261,295]",
+        "Walk [250,298]",
+        "Walk here [250,300]",
+        "Till a plot [250,300]",
+        "Plant oak [250,300]",
+        "Dig [250,300]",
+        "Teleport here [250,300]",
+        "Walk here [251,300]",
+        "Till a plot [251,300]",
+        "Plant oak [251,300]",
+        "Dig [251,300]",
+        "Teleport here [251,300]",
+        "Walk here [253,300]",
+        "Till a plot [253,300]",
+        "Plant oak [253,300]",
+        "Dig [253,300]",
+        "Teleport here [253,300]",
+        "Walk here [254,300]",
+        "Till a plot [254,300]",
+        "Plant oak [254,300]",
+        "Dig [254,300]",
+        "Teleport here [254,300]",
+        "Walk here [250,301]",
+        "Till a plot [250,301]",
+        "Dig [250,301]",
+        "Teleport here [250,301]",
+        "Walk here [251,301]",
+        "Till a plot [251,301]",
+        "Dig [251,301]",
+        "Teleport here [251,301]",
+        "Walk here [252,301]",
+        "Till a plot [252,301]",
+        "Dig [252,301]",
+        "Teleport here [252,301]",
+        "Walk here [253,301]",
+        "Till a plot [253,301]",
+        "Plant oak [253,301]",
+        "Dig [253,301]",
+        "Teleport here [253,301]",
+        "Walk here [254,301]",
+        "Till a plot [254,301]",
+        "Plant oak [254,301]",
+        "Dig [254,301]",
+        "Teleport here [254,301]",
+        "Walk here [250,302]",
+        "Cast a line [250,302]",
+        "Teleport here [250,302]",
+        "Walk here [251,302]",
+        "Cast a line [251,302]",
+        "Teleport here [251,302]",
+        "Walk here [252,302]",
+        "Till a plot [252,302]",
+        "Dig [252,302]",
+        "Teleport here [252,302]",
+        "Walk here [253,302]",
+        "Till a plot [253,302]",
+        "Dig [253,302]",
+        "Teleport here [253,302]",
+        "Walk here [254,302]",
+        "Till a plot [254,302]",
+        "Plant oak [254,302]",
+        "Dig [254,302]",
+        "Teleport here [254,302]",
+        "Walk here [250,303]",
+        "Cast a line [250,303]",
+        "Teleport here [250,303]",
+        "Walk here [251,303]",
+        "Cast a line [251,303]",
+        "Teleport here [251,303]",
+        "Walk here [252,303]",
+        "Cast a line [252,303]",
+        "Teleport here [252,303]",
+        "Walk here [253,303]",
+        "Till a plot [253,303]",
+        "Dig [253,303]",
+        "Teleport here [253,303]",
+        "Walk here [254,303]",
+        "Till a plot [254,303]",
+        "Plant oak [254,303]",
+        "Dig [254,303]",
+        "Teleport here [254,303]",
+        "Walk here [250,304]",
+        "Cast a line [250,304]",
+        "Teleport here [250,304]",
+        "Walk here [251,304]",
+        "Cast a line [251,304]",
+        "Teleport here [251,304]",
+        "Walk here [252,304]",
+        "Cast a line [252,304]",
+        "Teleport here [252,304]",
+        "Walk here [253,304]",
+        "Till a plot [253,304]",
+        "Dig [253,304]",
+        "Teleport here [253,304]",
+        "Walk here [254,304]",
+        "Till a plot [254,304]",
+        "Plant oak [254,304]",
+        "Dig [254,304]",
+        "Teleport here [254,304]",
+        "Eat Cabbage from pack",
+        "Rest / remain idle"
+      ],
+      "optionVerbs": [
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "eat",
+        "idle"
+      ],
+      "verb": "eat",
+      "answer": "Eat Cabbage from pack",
+      "outcome": null
+    },
+    {
+      "attemptId": "amwv70a3d-006-i8",
+      "tick": 8251,
+      "hour": 30.919444444438486,
+      "thirst": 49.9866666666548,
+      "hunger": 40.65777777776631,
+      "hp": 40,
+      "energy": 24.993333333341788,
+      "x": 252,
+      "z": 302,
+      "inWater": false,
+      "drowning": false,
+      "triggers": [
+        "vitals.energy_low"
+      ],
+      "options": [
+        "Walk [256,293]",
+        "Walk [258,293]",
+        "Walk [252,294]",
+        "Walk [258,295]",
+        "Hunt [250,295]",
+        "Tame [250,295]",
+        "Magic Arrow [250,295]",
+        "Fireball [250,295]",
+        "Hunt [262,298]",
+        "Tame [262,298]",
+        "Magic Arrow [262,298]",
+        "Fireball [262,298]",
+        "Hunt [260,304]",
+        "Tame [260,304]",
+        "Magic Arrow [260,304]",
+        "Fireball [260,304]",
+        "Hunt [245,299]",
+        "Tame [245,299]",
+        "Magic Arrow [245,299]",
+        "Fireball [245,299]",
+        "Hunt [244,296]",
+        "Tame [244,296]",
+        "Magic Arrow [244,296]",
+        "Fireball [244,296]",
+        "Walk [248,291]",
+        "Walk [261,295]",
+        "Walk [250,298]",
+        "Walk here [250,300]",
+        "Till a plot [250,300]",
+        "Plant oak [250,300]",
+        "Dig [250,300]",
+        "Teleport here [250,300]",
+        "Walk here [251,300]",
+        "Till a plot [251,300]",
+        "Plant oak [251,300]",
+        "Dig [251,300]",
+        "Teleport here [251,300]",
+        "Walk here [253,300]",
+        "Till a plot [253,300]",
+        "Plant oak [253,300]",
+        "Dig [253,300]",
+        "Teleport here [253,300]",
+        "Walk here [254,300]",
+        "Till a plot [254,300]",
+        "Plant oak [254,300]",
+        "Dig [254,300]",
+        "Teleport here [254,300]",
+        "Walk here [250,301]",
+        "Till a plot [250,301]",
+        "Dig [250,301]",
+        "Teleport here [250,301]",
+        "Walk here [251,301]",
+        "Till a plot [251,301]",
+        "Dig [251,301]",
+        "Teleport here [251,301]",
+        "Walk here [252,301]",
+        "Till a plot [252,301]",
+        "Dig [252,301]",
+        "Teleport here [252,301]",
+        "Walk here [253,301]",
+        "Till a plot [253,301]",
+        "Plant oak [253,301]",
+        "Dig [253,301]",
+        "Teleport here [253,301]",
+        "Walk here [254,301]",
+        "Till a plot [254,301]",
+        "Plant oak [254,301]",
+        "Dig [254,301]",
+        "Teleport here [254,301]",
+        "Walk here [250,302]",
+        "Cast a line [250,302]",
+        "Teleport here [250,302]",
+        "Walk here [251,302]",
+        "Cast a line [251,302]",
+        "Teleport here [251,302]",
+        "Walk here [252,302]",
+        "Till a plot [252,302]",
+        "Dig [252,302]",
+        "Teleport here [252,302]",
+        "Walk here [253,302]",
+        "Till a plot [253,302]",
+        "Dig [253,302]",
+        "Teleport here [253,302]",
+        "Walk here [254,302]",
+        "Till a plot [254,302]",
+        "Plant oak [254,302]",
+        "Dig [254,302]",
+        "Teleport here [254,302]",
+        "Walk here [250,303]",
+        "Cast a line [250,303]",
+        "Teleport here [250,303]",
+        "Walk here [251,303]",
+        "Cast a line [251,303]",
+        "Teleport here [251,303]",
+        "Walk here [252,303]",
+        "Cast a line [252,303]",
+        "Teleport here [252,303]",
+        "Walk here [253,303]",
+        "Till a plot [253,303]",
+        "Dig [253,303]",
+        "Teleport here [253,303]",
+        "Walk here [254,303]",
+        "Till a plot [254,303]",
+        "Plant oak [254,303]",
+        "Dig [254,303]",
+        "Teleport here [254,303]",
+        "Walk here [250,304]",
+        "Cast a line [250,304]",
+        "Teleport here [250,304]",
+        "Walk here [251,304]",
+        "Cast a line [251,304]",
+        "Teleport here [251,304]",
+        "Walk here [252,304]",
+        "Cast a line [252,304]",
+        "Teleport here [252,304]",
+        "Walk here [253,304]",
+        "Till a plot [253,304]",
+        "Dig [253,304]",
+        "Teleport here [253,304]",
+        "Walk here [254,304]",
+        "Till a plot [254,304]",
+        "Plant oak [254,304]",
+        "Dig [254,304]",
+        "Teleport here [254,304]",
+        "Eat Cabbage from pack",
+        "Drink from the water (251, 302)",
+        "Rest / remain idle"
+      ],
+      "optionVerbs": [
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "hunt",
+        "tame",
+        "cast",
+        "fireball",
+        "walk",
+        "walk",
+        "walk",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "fish",
+        "teleport",
+        "walk",
+        "till",
+        "dig",
+        "teleport",
+        "walk",
+        "till",
+        "sowAcorn",
+        "dig",
+        "teleport",
+        "eat",
+        "drink",
+        "idle"
+      ],
+      "verb": "drink",
+      "answer": "Drink from the water (251, 302)",
+      "outcome": null
+    }
+  ],
+  "calls": [
+    {
+      "id": "amwv6gp9s-001-4re",
+      "agentId": "water-replay-aquila",
+      "startMs": 1795553953264,
+      "endMs": 1795553953266,
+      "status": "ok",
+      "usage": {
+        "promptTokens": 0,
+        "completionTokens": 0
+      },
+      "price": {
+        "tableId": "local-survival-zero",
+        "model": "deterministic-scorer",
+        "currency": "USD",
+        "promptPerMTok": 0,
+        "completionPerMTok": 0,
+        "source": "local deterministic survival backend — no provider call, zero cost",
+        "capturedAt": "2026-11-24",
+        "notes": "Zero-paid water-survival proof (t_4e2c4d13). NOT the paid Jev gate."
+      },
+      "model": "scripted-deterministic",
+      "provider": "local-survival",
+      "costMicros": 0,
+      "costBasis": "reported"
+    },
+    {
+      "id": "amwv6t5p5-002-17hx",
+      "agentId": "water-replay-aquila",
+      "startMs": 1795554534426,
+      "endMs": 1795554534427,
+      "status": "ok",
+      "usage": {
+        "promptTokens": 0,
+        "completionTokens": 0
+      },
+      "price": {
+        "tableId": "local-survival-zero",
+        "model": "deterministic-scorer",
+        "currency": "USD",
+        "promptPerMTok": 0,
+        "completionPerMTok": 0,
+        "source": "local deterministic survival backend — no provider call, zero cost",
+        "capturedAt": "2026-11-24",
+        "notes": "Zero-paid water-survival proof (t_4e2c4d13). NOT the paid Jev gate."
+      },
+      "model": "scripted-deterministic",
+      "provider": "local-survival",
+      "costMicros": 0,
+      "costBasis": "reported"
+    },
+    {
+      "id": "amwv6tiiv-003-jbg",
+      "agentId": "water-replay-aquila",
+      "startMs": 1795554551047,
+      "endMs": 1795554551048,
+      "status": "ok",
+      "usage": {
+        "promptTokens": 0,
+        "completionTokens": 0
+      },
+      "price": {
+        "tableId": "local-survival-zero",
+        "model": "deterministic-scorer",
+        "currency": "USD",
+        "promptPerMTok": 0,
+        "completionPerMTok": 0,
+        "source": "local deterministic survival backend — no provider call, zero cost",
+        "capturedAt": "2026-11-24",
+        "notes": "Zero-paid water-survival proof (t_4e2c4d13). NOT the paid Jev gate."
+      },
+      "model": "scripted-deterministic",
+      "provider": "local-survival",
+      "costMicros": 0,
+      "costBasis": "reported"
+    },
+    {
+      "id": "amwv6vdvg-004-xi5",
+      "agentId": "water-replay-aquila",
+      "startMs": 1795554638332,
+      "endMs": 1795554638333,
+      "status": "ok",
+      "usage": {
+        "promptTokens": 0,
+        "completionTokens": 0
+      },
+      "price": {
+        "tableId": "local-survival-zero",
+        "model": "deterministic-scorer",
+        "currency": "USD",
+        "promptPerMTok": 0,
+        "completionPerMTok": 0,
+        "source": "local deterministic survival backend — no provider call, zero cost",
+        "capturedAt": "2026-11-24",
+        "notes": "Zero-paid water-survival proof (t_4e2c4d13). NOT the paid Jev gate."
+      },
+      "model": "scripted-deterministic",
+      "provider": "local-survival",
+      "costMicros": 0,
+      "costBasis": "reported"
+    },
+    {
+      "id": "amwv6vqoq-005-w",
+      "agentId": "water-replay-aquila",
+      "startMs": 1795554654938,
+      "endMs": 1795554654938,
+      "status": "ok",
+      "usage": {
+        "promptTokens": 0,
+        "completionTokens": 0
+      },
+      "price": {
+        "tableId": "local-survival-zero",
+        "model": "deterministic-scorer",
+        "currency": "USD",
+        "promptPerMTok": 0,
+        "completionPerMTok": 0,
+        "source": "local deterministic survival backend — no provider call, zero cost",
+        "capturedAt": "2026-11-24",
+        "notes": "Zero-paid water-survival proof (t_4e2c4d13). NOT the paid Jev gate."
+      },
+      "model": "scripted-deterministic",
+      "provider": "local-survival",
+      "costMicros": 0,
+      "costBasis": "reported"
+    },
+    {
+      "id": "amwv70a3d-006-i8",
+      "agentId": "water-replay-aquila",
+      "startMs": 1795554866713,
+      "endMs": 1795554866714,
+      "status": "ok",
+      "usage": {
+        "promptTokens": 0,
+        "completionTokens": 0
+      },
+      "price": {
+        "tableId": "local-survival-zero",
+        "model": "deterministic-scorer",
+        "currency": "USD",
+        "promptPerMTok": 0,
+        "completionPerMTok": 0,
+        "source": "local deterministic survival backend — no provider call, zero cost",
+        "capturedAt": "2026-11-24",
+        "notes": "Zero-paid water-survival proof (t_4e2c4d13). NOT the paid Jev gate."
+      },
+      "model": "scripted-deterministic",
+      "provider": "local-survival",
+      "costMicros": 0,
+      "costBasis": "reported"
+    }
+  ],
+  "rejections": [],
+  "interventions": [],
+  "errors": [],
+  "artifacts": {
+    "attempts": "raw/attempts.ndjson",
+    "trace": "raw/trace.jsonl",
+    "observations": "raw/observations.jsonl",
+    "feed": "raw/feed.ndjson",
+    "shardLog": "raw/shard.log",
+    "shardSave": {
+      "path": "C:\\Users\\futur\\Desktop\\emberhall\\.worktrees\\t_0d13c23d\\evidence\\water-survival-replay\\raw\\shard-data\\shard-save.json",
+      "sha256": "366c3bfc5be46cbf4f4788a66db47cf486d87fd8d68b4e17e807d68d5b3a1f81"
+    }
+  }
+}

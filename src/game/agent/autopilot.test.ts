@@ -59,6 +59,7 @@ function makeObs(overrides: {
       hp: 30,
       maxHp: 30,
       hunger: 100,
+      thirst: 80, inWater: false, drowning: false,
       energy: 100,
       ghost: false,
       mana: 10,
@@ -85,6 +86,7 @@ function makeObs(overrides: {
     buildings: [],
     plots: [],
     herbs: [],
+    water: null,
     verbs,
     logTail: [],
   };

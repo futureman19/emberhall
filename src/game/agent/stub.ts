@@ -37,6 +37,15 @@ const HUNGER_VERB_SCORE: Record<string, number> = {
   loot: 60,
 };
 
+/** Verb preference for thirst triggers: drink, or walk to water. */
+const THIRST_VERB_SCORE: Record<string, number> = {
+  drink: 100,
+  walk: 60,
+  fish: 30,
+  hunt: 20,
+  loot: 10,
+};
+
 /** Baseline verb preference for a quiet vale: work the menu. */
 const DEFAULT_VERB_SCORE: Record<string, number> = {
   chop: 100,
@@ -71,6 +80,9 @@ interface StubState {
 }
 
 function scoreTableFor(triggers: ReflexEvent[]): Record<string, number> {
+  // Drowning outranks thirst: the scramble (walk) must beat a drink offer.
+  if (triggers.some((t) => t.kind === "vitals.in_water" || t.kind === "vitals.drowning")) return DANGER_VERB_SCORE;
+  if (triggers.some((t) => t.kind.startsWith("vitals.thirst"))) return THIRST_VERB_SCORE;
   if (triggers.some((t) => t.kind.startsWith("vitals.hunger"))) return HUNGER_VERB_SCORE;
   if (triggers.some((t) => t.survival)) return DANGER_VERB_SCORE;
   return DEFAULT_VERB_SCORE;

@@ -275,6 +275,7 @@ export function createPerson(
     maxHp: 40,
     hunger: 80,
     energy: 80,
+    thirst: 80,
     morale: 70,
     int: 8 + irange(rng, 0, 4),
     str: 8 + irange(rng, 0, 4),

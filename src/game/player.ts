@@ -25,6 +25,7 @@ import { emitExtractionFx, EXTRACTION_BEAT, EXTRACTION_IMPACT } from "./extracti
 import { emitCompanionFx } from "./companion-animation.ts";
 import { emitPersonalActionFx } from "./personal-action-animation.ts";
 import { completeObjective, log } from "./world.ts";
+import { DRINK_RESTORE, tickWaterSurvival, tileIsWater } from "./survival.ts";
 import { effectiveMain, rareMods, rareName, rollKillRare, weaponDmg } from "./rare.ts";
 import { actorState, actorPerson } from "./actor.ts";
 import { armedTechniqueFor } from "./techniques.ts";
@@ -314,6 +315,36 @@ export function commandFish(world: World, tx: number, ty: number, actorId?: stri
   actorState(world, actorId).workT = 0;
   actorState(world, actorId).intent = { kind: "fish", tx, ty, targetId: null, spell: null };
   return null;
+}
+
+export function commandDrinkWater(world: World, tx: number, ty: number, actorId?: string): string | null {
+  const p = you(world, actorId);
+  if (!p) return "You are not in the vale.";
+  const dead = hands(world, actorId);
+  if (dead) return dead;
+  if (p.ghost) return "Ghosts do not thirst.";
+  if (world.tiles[ty]?.[tx]?.kind !== "water") return "There is no water there.";
+  const st = actorState(world, actorId);
+  const bt = tileOf(p.x, p.z);
+  if (tileIsWater(world, bt.tx, bt.ty)) return "You cannot drink while struggling in the water.";
+  if (!pathBeside(world, p, tx, ty)) return "The shore is closed.";
+  // pathBeside planned the approach into p.path; keep it so the body walks to
+  // the shore before drinkNow resolves (mirrors commandFish).
+  st.intent = { kind: "drink", tx, ty, targetId: null, spell: null };
+  return null;
+}
+
+/** Resolve the drink work intent once the body has reached the shore. */
+function drinkNow(world: World, p: Person, actorId: string | undefined, tx: number, ty: number): string | null {
+  const st = actorState(world, actorId);
+  st.intent = { kind: "none", tx: 0, ty: 0, targetId: null, spell: null };
+  p.path = [];
+  if (world.tiles[ty]?.[tx]?.kind !== "water" || !pathBeside(world, p, tx, ty)) return "The water is out of reach.";
+  p.facing = Math.atan2(tx - p.x, ty - p.z);
+  p.thirst = Math.min(100, p.thirst + DRINK_RESTORE);
+  const note = "You drink from the water. Your thirst eases.";
+  log(world, note);
+  return note;
 }
 
 export function commandHunt(world: World, id: string, actorId?: string) {
@@ -1095,6 +1126,13 @@ export function tickPlayer(world: World, dt: number, actorId?: string): string |
       if (p.hp <= 0 && !actorState(world, actorId).ghost) return dieAsGhost(world, p, actorId);
     }
   }
+  // Water survival: dehydration beats and the narrow drowning rule. Death
+  // routes through the same ghost/corpse machinery as any other kill.
+  const waterNote = tickWaterSurvival(world, p, {
+    flyUntil: actorState(world, actorId).flyUntil,
+    die: (body) => dieAsGhost(world, body, actorId),
+  });
+  if (waterNote) return waterNote;
   if (p.ghost || actorState(world, actorId).ghost) {
     p.ghost = true;
     actorState(world, actorId).ghost = true;
@@ -1187,6 +1225,10 @@ export function tickPlayer(world: World, dt: number, actorId?: string): string |
   if (intent.kind === "gate") {
     intent.kind = "none";
     return null;
+  }
+  if (intent.kind === "drink") {
+    p.facing = Math.atan2(intent.tx - p.x, intent.ty - p.z);
+    return drinkNow(world, p, actorId, intent.tx, intent.ty);
   }
   if (intent.kind === "fish") {
     p.facing = Math.atan2(intent.tx - p.x, intent.ty - p.z);

@@ -26,6 +26,12 @@ export interface BodySheet {
   hp: number;
   maxHp: number;
   hunger: number;
+  /** Water meter 0..100 (survival.ts). */
+  thirst: number;
+  /** Living body standing on an open-water tile. */
+  inWater: boolean;
+  /** In-water grace spent; drowning damage is landing. */
+  drowning: boolean;
   energy: number;
   ghost: boolean;
   mana: number;
@@ -116,6 +122,12 @@ export interface Observation {
   buildings: ObservedBuilding[];
   plots: ObservedPlot[];
   herbs: ObservedHerb[];
+  /** Water awareness (survival.ts): nearest water, its drink shore, escape. */
+  water: {
+    nearest: { tx: number; ty: number; dist: number } | null;
+    shore: { tx: number; ty: number } | null;
+    escape: { tx: number; ty: number } | null;
+  } | null;
   verbs: VerbCandidate[];
   logTail: string[];
 }

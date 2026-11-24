@@ -36,3 +36,6 @@ evidence/phase36-*/raw/
 evidence/phase36-*/*.jsonl
 evidence/phase36-*/*.raw.json
 evidence/phase36-*/*.raw.json.gz
+# water-survival live proof raw logs (report.json + review.md + decisions.jsonl are the committed evidence)
+evidence/water-survival-*/raw/
+evidence/water-smoke*/

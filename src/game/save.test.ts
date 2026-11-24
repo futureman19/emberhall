@@ -118,8 +118,8 @@ test("save - writes an explicit schema version without generated tiles", () => {
 
   assert.equal(hasSave(), true);
   const stored = JSON.parse(localStorage.getItem(SAVE_KEY)!);
-  assert.equal(CURRENT_SAVE_VERSION, 6);
-  assert.equal(stored.saveVersion, 6);
+  assert.equal(CURRENT_SAVE_VERSION, 7);
+  assert.equal(stored.saveVersion, 7);
   assert.equal(stored.tiles, null);
   assert.equal(stored.seed, world.seed);
   assert.deepEqual(stored.placedObjects, []);

@@ -8,6 +8,8 @@ export function unresolvedRisk(obs: Observation, config: EventDeriveConfig): str
   if (obs.you.ghost) return [];
   const reasons: string[] = [];
   if (obs.you.hunger <= config.hungerLow) reasons.push("hunger needs food");
+  if (obs.you.thirst <= config.thirstCritical) reasons.push("thirst needs water");
+  if (obs.you.inWater) reasons.push("body in open water");
   if (obs.you.hp <= obs.you.maxHp * config.hpCriticalFraction) reasons.push("critical hp");
   if (obs.fauna.some(f => f.hp > 0 && f.task === "fight" && f.ownerId !== obs.you.id && f.dist <= config.hostileRadius)) {
     reasons.push("engaged hostile");
@@ -26,6 +28,10 @@ export function riskStillRelevant(event: ReflexEvent, obs: Observation, config: 
     case "vitals.energy_low": return !obs.you.ghost && obs.you.energy <= config.energyLow;
     case "vitals.energy_critical": return !obs.you.ghost && obs.you.energy <= config.energyCritical;
     case "vitals.hp_critical": return !obs.you.ghost && obs.you.hp <= obs.you.maxHp * config.hpCriticalFraction;
+    case "vitals.thirst_low": return !obs.you.ghost && obs.you.thirst <= config.thirstLow;
+    case "vitals.thirst_critical": return !obs.you.ghost && obs.you.thirst <= config.thirstCritical;
+    case "vitals.in_water": return !obs.you.ghost && obs.you.inWater;
+    case "vitals.drowning": return !obs.you.ghost && obs.you.drowning;
     default: return true;
   }
 }

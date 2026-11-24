@@ -1,4 +1,5 @@
 import { actorState } from "./actor.ts";
+import { bodyTileIsWater, IN_WATER_SPEED, THIRST_DECAY_PER_HOUR } from "./survival.ts";
 import { COURT, GATE, placeById } from "./atlas.ts";
 import { FLY_SPEED, SECONDS_PER_HOUR } from "./catalog.ts";
 import { updateSpellStatuses } from "./spell-effects.ts";
@@ -59,7 +60,9 @@ export function followPath(world: World, p: Person, dt: number, actorId?: string
   }
   const startX = p.x;
   const startZ = p.z;
-  let remaining = WALK_SPEED * (p.ghost ? 1.4 : 1) * dt * zonePersonSlowAt(world, p.x, p.z) * (state && world.hour < state.flyUntil ? FLY_SPEED : 1);
+  const flying = state !== undefined && world.hour < state.flyUntil;
+  const wading = !p.ghost && !flying && bodyTileIsWater(world, p);
+  let remaining = WALK_SPEED * (p.ghost ? 1.4 : 1) * dt * zonePersonSlowAt(world, p.x, p.z) * (flying ? FLY_SPEED : 1) * (wading ? IN_WATER_SPEED : 1);
   const previous = motionWatches.get(p);
   const first = p.path[0]!;
   // Planned segments are already corner/climb checked. Revalidate only when
@@ -167,6 +170,7 @@ export function tickWorld(world: World, realDt: number) {
       if (p.task !== "sleep" && !p.ghost) {
         p.hunger = Math.max(0, p.hunger - 3.2 * (dt / SECONDS_PER_HOUR));
         p.energy = Math.max(0, p.energy - 2.4 * (dt / SECONDS_PER_HOUR));
+        p.thirst = Math.max(0, p.thirst - THIRST_DECAY_PER_HOUR * (dt / SECONDS_PER_HOUR));
       }
       const movement = followPath(world, p, dt, actorId);
       if (movement === "stuck" && !replanIntentPath(world, p, actorId)) {
