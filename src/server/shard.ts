@@ -8,7 +8,7 @@ import { submitIntent, validateIntent } from "../game/agent/intent.ts";
 import { observeBody } from "../game/agent/observe.ts";
 import { hashObservation } from "../game/agent/log.ts";
 import { SPELL_META } from "../game/magery.ts";
-import { ITEM_META } from "../game/catalog.ts";
+import { ITEM_META, SKILL_META } from "../game/catalog.ts";
 import { commandEat, commandEquip } from "../game/player.ts";
 import { commandBankGold, commandBankItem } from "../game/bank.ts";
 import { commandTrack } from "../game/tracking.ts";
@@ -182,8 +182,54 @@ export function createShard(config: ShardConfig = shardConfig(), options: {
     if (++ticksSinceSave >= SAVE_EVERY_TICKS) save();
     for (const listener of tickListeners) listener();
   }
+  /* Phase 4 director seam (additive): durable agent bodies for owned
+   * characters. Registration never re-grants skills to an existing body —
+   * restart, crash recovery and re-unleash are all idempotent (v1 §3). */
+  function registerAgent(body: { id: string; name: string; key: string; skills: Partial<Record<string, number>> }, inject: boolean): { created: boolean } {
+    if (stopped) throw new Error("Shard is stopped");
+    if (body.id === world.player.id) throw new Error("Director identity aliases host camera");
+    if (known(body.id)) return { created: false };
+    if (characters.some(c => c.key === body.key)) throw new Error("Director key already bound");
+    let name = body.name;
+    if (characters.some(c => c.name === name)) name = `${body.name} (${body.id.slice(-4)})`;
+    characters.push({ key: body.key, characterId: body.id, name, createdAt: new Date().toISOString() });
+    const person = createPerson(world, mulberry32(world.seed + characters.length), {
+      x: COURT.tx, z: COURT.ty + 1, cls: "ranger", member: true, isPlayer: false, name,
+    });
+    person.id = body.id;
+    world.people.push(person);
+    const state = { ...structuredClone(template), id: body.id };
+    if (inject) {
+      for (const [skill, level] of Object.entries(body.skills)) {
+        if (Object.hasOwn(SKILL_META, skill) && typeof level === "number") state.skills[skill as keyof typeof SKILL_META] = level;
+      }
+    }
+    world.playerStates![body.id] = state;
+    // World first, then registry — the same crash-safety order as seeding.
+    save();
+    atomicWrite(registryPath, JSON.stringify(characters));
+    return { created: true };
+  }
+  function agentBody(id: string) {
+    if (!known(id)) return null;
+    const person = world.people.find(p => p.id === id);
+    if (!person) return null;
+    return { hp: person.hp, maxHp: person.maxHp, x: person.x, z: person.z, task: person.task };
+  }
+  function recallAgent(id: string) {
+    if (!known(id)) return;
+    queue = queue.filter(item => item.characterId !== id);
+    verbQueue = verbQueue.filter(item => item.characterId !== id);
+    submitIntent(world, { kind: "none", tx: 0, ty: 0, targetId: null, spell: null }, id);
+    world.playerStates![id].workT = 0;
+  }
   return {
     status: () => ({ tick: world.tickCount, characters: characters.length }),
+    registerAgent,
+    hasAgent: known,
+    agentBody,
+    recallAgent,
+    currentTick: () => world.tickCount,
     onTick(listener: () => void) {
       tickListeners.add(listener);
       return () => { tickListeners.delete(listener); };
