@@ -1,5 +1,5 @@
 import { actorState } from "./actor.ts";
-import { bodyTileIsWater, IN_WATER_SPEED, THIRST_DECAY_PER_HOUR, tileIsWater } from "./survival.ts";
+import { bodyTileIsWater, IN_WATER_SPEED, THIRST_DECAY_PER_HOUR } from "./survival.ts";
 import { COURT, GATE, placeById } from "./atlas.ts";
 import { FLY_SPEED, SECONDS_PER_HOUR } from "./catalog.ts";
 import { updateSpellStatuses } from "./spell-effects.ts";

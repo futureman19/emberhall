@@ -86,6 +86,7 @@ function makeObs(overrides: {
     buildings: [],
     plots: [],
     herbs: [],
+    water: null,
     verbs,
     logTail: [],
   };

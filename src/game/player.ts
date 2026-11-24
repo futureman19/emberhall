@@ -328,7 +328,8 @@ export function commandDrinkWater(world: World, tx: number, ty: number, actorId?
   const bt = tileOf(p.x, p.z);
   if (tileIsWater(world, bt.tx, bt.ty)) return "You cannot drink while struggling in the water.";
   if (!pathBeside(world, p, tx, ty)) return "The shore is closed.";
-  p.path = [];
+  // pathBeside planned the approach into p.path; keep it so the body walks to
+  // the shore before drinkNow resolves (mirrors commandFish).
   st.intent = { kind: "drink", tx, ty, targetId: null, spell: null };
   return null;
 }

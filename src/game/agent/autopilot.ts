@@ -27,7 +27,7 @@
 import { bestPlantableTimber } from "../forestry.ts";
 import { ITEM_META } from "../catalog.ts";
 import { bestFoodInPack, commandDrinkWater, commandEat } from "../player.ts";
-import { DRINK_OFFER_THIRST, THIRST_LOW } from "../survival.ts";
+import { DRINK_OFFER_THIRST } from "../survival.ts";
 import type { CtxVerb, Intent, IntentKind, ItemId, SpellId } from "../types.ts";
 import { type DecisionLog, createDecisionLog } from "./log.ts";
 import { observeLive } from "./observe.ts";

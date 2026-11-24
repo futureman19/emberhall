@@ -97,10 +97,10 @@ function store(value: unknown) {
   return raw;
 }
 
-test("actor save v6 round-trips independent bodies and restores solo alias identity", () => {
+test("actor save v7 round-trips independent bodies and restores solo alias identity", () => {
   const world = multiBody();
   assert.equal(writeSave(world).ok, true);
-  assert.equal(CURRENT_SAVE_VERSION, 6);
+  assert.equal(CURRENT_SAVE_VERSION, 7);
   assert.equal(SAVE_KEY, "emberhall-save-v4");
   const loaded = loadSave();
   assert.ok(loaded);

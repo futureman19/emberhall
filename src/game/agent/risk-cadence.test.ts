@@ -17,7 +17,7 @@ function obs(tick: number, body: Partial<Observation["you"]> = {}): Observation 
   return { tick, hour: 12, isNight: false, weather: { kind: "clear", cloud: 0, wet: 0, wind: 0 },
     you: { id: "you", name: "You", x: 0, z: 0, hp: 40, maxHp: 40, hunger: 100, thirst: 80, inWater: false, drowning: false, energy: 100,
       ghost: false, mana: 10, notoriety: "innocent", skills: {}, pack: {}, wear: {}, vault: 0, ...body },
-    people: [], fauna: [], piles: [], buildings: [], plots: [], herbs: [], verbs: [], logTail: [] };
+    people: [], fauna: [], piles: [], buildings: [], plots: [], herbs: [], water: null, verbs: [], logTail: [] };
 }
 async function flush() { for (let i = 0; i < 8; i++) await Promise.resolve(); }
 function probe() {
@@ -154,7 +154,7 @@ test("default risk gate cannot bypass the real $0.50 UTC-day metered guard; next
   auto.stop();
 });
 
-test("real full-day decay and eating keep hunger above 23 through night, without inventing water or energy damage", async () => {
+test("real full-day decay and eating keep hunger above 23 through night; thirst dehydrates per the water contract", async () => {
   const world = createWorld(1);
   const me = you(world)!;
   // Isolated stocked-body mechanics fixture, not a live/provider survival proof.
@@ -180,10 +180,19 @@ test("real full-day decay and eating keep hunger above 23 through night, without
   }
   assert.ok(Math.abs(world.hour - 43) < 1e-7);
   assert.ok(nights > 0); assert.equal(world.player.ghost, false);
-  assert.equal(me.hp, initialHp);
-  assert.equal(me.energy, 0, "energy drains but idle does not recover it or damage HP");
+  // Water contract (docs/water-survival-slice.md): thirst empties after
+  // 80 / 4.8 ≈ 16.67h, then 1 HP per 0.25h. Over this 24h day the ~7.33h dry
+  // window lands 29 dehydration beats (40 - 29 = 11). Food/night behavior is
+  // unchanged; only the now-real thirst damage differs from the old proof.
+  assert.equal(me.thirst, 0, "a day without water empties thirst");
+  assert.equal(me.hp, initialHp - 29, "29 dehydration beats at 1 HP per 0.25h");
+  assert.equal(me.energy, 0, "energy drains to zero; idle neither recovers it nor damages HP (thirst does, above)");
   assert.ok(minimum > 23, String(minimum)); assert.equal(meals, 3);
   assert.equal(world.player.pack.bread, initialBread - meals);
-  assert.ok(scheduler.attemptsStarted <= 6, `actual mechanics fixture calls: ${scheduler.attemptsStarted}`);
+  // Thirst is now a real persistent survival risk this eat-only thinker never
+  // resolves, so the scheduler retries it at cadence (one attempt per
+  // reflexCooldownTicks = 150). The budget guard is that calls stay
+  // cadence-bounded over the 8640-tick day (~28 here), never a per-tick loop.
+  assert.ok(scheduler.attemptsStarted <= Math.ceil(8640 / 150) + 1, `cadence-bounded calls: ${scheduler.attemptsStarted}`);
   scheduler.stop();
 });
