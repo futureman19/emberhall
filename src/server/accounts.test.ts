@@ -54,7 +54,7 @@ function fullBody(name = "Wren") {
     name,
     roleId: "ranger",
     directive: "Gather oak logs near the hall and bank them.",
-    mind: { kind: "cloud", model: "test-model" },
+    mind: { kind: "cloud", provider: "openai-compatible", model: "test-model" },
     apiKey: SECRET_VALUE,
   };
 }
@@ -149,7 +149,7 @@ test("invalid configuration returns actionable field errors", async () => {
   try {
     const account = await newAccount(http);
     const token = account.ownerToken;
-    const badName = await http.call("POST", "/api/v1/characters", { token, body: { ...fullBody(), name: "x" } });
+    const badName = await http.call("POST", "/api/v1/characters", { token, body: { ...fullBody(), name: "x".repeat(33) } });
     assert.equal(badName.status, 422);
     assert.equal(badName.body.error.code, "VALIDATION");
     assert.ok(badName.body.fields.some((f: { field: string }) => f.field === "name"));
@@ -262,7 +262,9 @@ test("mind-secret lifecycle: encrypted at rest, hint-only reads, recall gate on 
     assert.equal(del.status, 204);
     const gone = await http.call("GET", `/api/v1/characters/${id}`, { token: account.ownerToken });
     assert.equal(gone.body.publicMind.secretHint, null);
-    assert.equal(gone.body.character.lifecycle, "draft");
+    // v1 §3: "Recalled stays recalled until unleash" — deleting the key is a
+    // config edit, not a recall→draft transition.
+    assert.equal(gone.body.character.lifecycle, "recalled");
   } finally { await http.close(); cleanup(host); }
 });
 
@@ -350,14 +352,14 @@ test("unleash: readiness gate, role skill injection, idempotent repeat", async (
 test("shard seam: existing bodies are never re-granted skills", () => {
   const host = makeHost();
   try {
-    const seed = { id: "char-seam", name: "Seam", key: "seam-key", skills: { woodcutting: 30 } };
+    const seed = { id: "char-seam", name: "Seam", key: "seam-key", skills: { lumberjack: 30 } };
     const first = host.shard.registerAgent(seed, true);
     assert.equal(first.created, true);
-    const before = checkpointStates(host)["char-seam"].skills.woodcutting;
+    const before = checkpointStates(host)["char-seam"].skills.lumberjack;
     assert.equal(before, 30);
-    const second = host.shard.registerAgent({ ...seed, skills: { woodcutting: 99 } }, true);
+    const second = host.shard.registerAgent({ ...seed, skills: { lumberjack: 99 } }, true);
     assert.equal(second.created, false);
-    assert.equal(checkpointStates(host)["char-seam"].skills.woodcutting, 30, "re-registration must not re-inject");
+    assert.equal(checkpointStates(host)["char-seam"].skills.lumberjack, 30, "re-registration must not re-inject");
     host.shard.recallAgent("char-seam");
     assert.ok(host.shard.hasAgent("char-seam"), "recall keeps the durable body");
   } finally { cleanup(host); }
@@ -455,8 +457,10 @@ test("runtime unavailable: lifecycle rolls back, body persists, retry succeeds",
     assert.equal(failed.body.error.code, "RUNTIME_UNAVAILABLE");
     const after = await http.call("GET", `/api/v1/characters/${id}`, { token: ownerToken });
     assert.equal(after.body.character.lifecycle, "recalled");
-  } finally { await http.close(); cleanup(host); }
+  } finally { await http.close(); try { host.shard.stop(); } catch { /* already stopped */ } }
   // Restart with a working runtime; the spawned body must not be re-injected.
+  // NOTE: do not cleanup(host) here — the restart below must read the same
+  // persisted dataDir to prove crash-safe recovery (v1 §4).
   const shard2 = createShard({ port: 0, seed: 20261121, dataDir: host.dataDir, keys: [] }, { log: () => {} });
   const director2 = createDirector({ dataDir: host.dataDir, shard: shard2, secretKey: randomBytes(32), log: () => {} });
   director2.recover();
