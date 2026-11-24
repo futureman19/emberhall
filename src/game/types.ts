@@ -336,7 +336,7 @@ export type BuildingKind =
   | "homestead";
 export type VocationId = "cook" | "armourer" | "trader" | "recruiter" | "guard";
 export type Notoriety = "innocent" | "criminal" | "murderer";
-export type IntentKind = "walk" | "chop" | "mine" | "fish" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "till" | "forest" | "pick" | "dig" | "fill" | "none";
+export type IntentKind = "walk" | "chop" | "mine" | "fish" | "drink" | "hunt" | "skin" | "loot" | "gate" | "tame" | "cast" | "plant" | "harvest" | "till" | "forest" | "pick" | "dig" | "fill" | "none";
 export type Speed = 0 | 1 | 2 | 3;
 export type PanelId = "none" | "help" | "you" | "journal" | "vale" | "roster" | "build";
 export type WeatherKind = "clear" | "fair" | "cloudy" | "rain" | "storm";
@@ -397,6 +397,8 @@ export interface Person {
   hp: number;
   maxHp: number;
   hunger: number;
+  /** Water meter 0..100 — decays 4.8/vale-hour; see survival.ts. */
+  thirst: number;
   energy: number;
   morale: number;
   int: number;
@@ -734,6 +736,7 @@ export type CtxVerb =
   | "chop"
   | "mine"
   | "fish"
+  | "drink"
   | "hunt"
   | "skin"
   | "loot"

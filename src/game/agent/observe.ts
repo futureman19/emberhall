@@ -11,6 +11,7 @@ import { isNight } from "../catalog.ts";
 import { getWorld } from "../live.ts";
 import type { World } from "../types.ts";
 import { candidatesForPlayer } from "./candidates.ts";
+import { nearestWater, shoreBesideWater, waterStatus } from "../survival.ts";
 import type {
   BodySheet,
   Observation,
@@ -31,6 +32,7 @@ export function bodySheet(world: World, bodyId?: string): BodySheet {
   const state = actorState(world, bodyId);
   const me = actorPerson(world, bodyId);
   if (bodyId !== undefined && !me) throw new Error(`Missing actor body: ${bodyId}`);
+  const ws = me ? waterStatus(world, me, state.flyUntil) : { inWater: false, drowning: false };
   return {
     id: state.id,
     name: me?.name ?? "you",
@@ -39,6 +41,9 @@ export function bodySheet(world: World, bodyId?: string): BodySheet {
     hp: me?.hp ?? 0,
     maxHp: me?.maxHp ?? 0,
     hunger: me?.hunger ?? 0,
+    thirst: me?.thirst ?? 0,
+    inWater: ws.inWater,
+    drowning: ws.drowning,
     energy: me?.energy ?? 0,
     ghost: state.ghost,
     mana: state.mana,
@@ -135,6 +140,14 @@ export function observeBody(
     herbs.push({ id: herb.id, kind: herb.kind, tx: herb.tx, ty: herb.ty, dist: d });
   }
 
+  const water = (() => {
+    if (!me) return null;
+    const nearest = nearestWater(world, px, pz);
+    const shore = nearest ? shoreBesideWater(world, nearest.tx, nearest.ty) : null;
+    const escape = you.inWater ? shoreBesideWater(world, Math.round(px), Math.round(pz)) : null;
+    return { nearest, shore, escape };
+  })();
+
   return {
     tick: world.tickCount,
     hour: world.hour,
@@ -152,6 +165,7 @@ export function observeBody(
     buildings,
     plots,
     herbs,
+    water,
     verbs: opts.verbs ?? [],
     logTail: world.log.slice(-LOG_TAIL).map((l) => l.text),
   };

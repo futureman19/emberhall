@@ -26,7 +26,8 @@
  */
 import { bestPlantableTimber } from "../forestry.ts";
 import { ITEM_META } from "../catalog.ts";
-import { bestFoodInPack, commandEat } from "../player.ts";
+import { bestFoodInPack, commandDrinkWater, commandEat } from "../player.ts";
+import { DRINK_OFFER_THIRST, THIRST_LOW } from "../survival.ts";
 import type { CtxVerb, Intent, IntentKind, ItemId, SpellId } from "../types.ts";
 import { type DecisionLog, createDecisionLog } from "./log.ts";
 import { observeLive } from "./observe.ts";
@@ -186,7 +187,7 @@ export interface PreparedDecision {
 
 export type PreparedAction =
   | { type: "intent"; intent: AgentIntent }
-  | { type: "verb"; verb: string; item: string | null };
+  | { type: "verb"; verb: string; item: string | null; tx?: number; ty?: number };
 
 export interface AutopilotHooks extends SchedulerHooks {
   /** One DecisionLogRow per executed decision (contract §7). Default appends
@@ -230,7 +231,7 @@ export function createReflexAutopilot(opts: {
   submit?: (intent: AgentIntent) => string | null | Promise<string | null>;
   /** Menu-verb channel (eat/… — the shard's {type:"verb"} wire on a host,
    *  commandEat locally in the solo driver). Returns null on acceptance. */
-  verb?: (req: { verb: string; item: string | null }) => string | null | Promise<string | null>;
+  verb?: (req: { verb: string; item: string | null; tx?: number | null; ty?: number | null }) => string | null | Promise<string | null>;
   hooks?: AutopilotHooks;
   config?: Partial<SchedulerConfig>;
   source?: ObservationSource;
@@ -246,7 +247,13 @@ export function createReflexAutopilot(opts: {
     });
   const verb =
     opts.verb ??
-    ((req: { verb: string; item: string | null }) => {
+    ((req: { verb: string; item: string | null; tx?: number | null; ty?: number | null }) => {
+      if (req.verb === "drink") {
+        if (req.tx == null || req.ty == null) return "No water selected";
+        const before = observeLive().you.thirst;
+        const message = commandDrinkWater(getWorld(), req.tx, req.ty);
+        return observeLive().you.thirst > before ? null : message;
+      }
       if (req.verb !== "eat") return `Unknown verb ${req.verb}`;
       const item = req.item as ItemId | null;
       if (!item) return "No food selected";
@@ -300,6 +307,26 @@ export function createReflexAutopilot(opts: {
       options.push(`Eat ${label} from pack`);
       actions.push({ type: "verb", verb: "eat", item: food });
       optionVerbs.push("eat");
+    }
+    // Water survival: the context menu only offers Drink when a water tile is
+    // tapped, so a reflex body far from water would never see it. Mirror the
+    // pack-food precedent with synthetic options from Observation.water.
+    if (obs.water && options.length < 254) {
+      const w = obs.water;
+      if (obs.you.inWater && w.escape) {
+        options.push(`Scramble to shore (${w.escape.tx}, ${w.escape.ty})`);
+        actions.push({ type: "intent", intent: { kind: "walk", tx: w.escape.tx, ty: w.escape.ty, targetId: null, spell: null } });
+        optionVerbs.push("walk");
+      } else if (w.nearest && w.shore && obs.you.thirst <= DRINK_OFFER_THIRST) {
+        options.push(`Drink from the water (${w.nearest.tx}, ${w.nearest.ty})`);
+        actions.push({ type: "verb", verb: "drink", item: null, tx: w.nearest.tx, ty: w.nearest.ty });
+        optionVerbs.push("drink");
+        if (Math.round(obs.you.x) !== w.shore.tx || Math.round(obs.you.z) !== w.shore.ty) {
+          options.push(`Walk to the water’s edge (${w.shore.tx}, ${w.shore.ty})`);
+          actions.push({ type: "intent", intent: { kind: "walk", tx: w.shore.tx, ty: w.shore.ty, targetId: null, spell: null } });
+          optionVerbs.push("walk");
+        }
+      }
     }
     if (options.length < 255) {
       options.push("Rest / remain idle");
@@ -360,7 +387,7 @@ export function createReflexAutopilot(opts: {
       rejectReason = await submit(action.intent);
     } else {
       verbName = action.verb;
-      rejectReason = await verb({ verb: action.verb, item: action.item });
+      rejectReason = await verb({ verb: action.verb, item: action.item, tx: action.tx ?? null, ty: action.ty ?? null });
     }
     const row: DecisionLogRow = {
       tick: prepared.observation.tick,

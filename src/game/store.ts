@@ -41,6 +41,7 @@ import {
   commandCook,
   commandDrop,
   commandDrink,
+  commandDrinkWater,
   commandEat,
   commandEquip,
   commandEquipRare,
@@ -553,6 +554,7 @@ export const useGame = create<GameUI>((set, get) => ({
     else if (verb === "chop") err = commandChop(w, t.tx, t.ty);
     else if (verb === "mine") err = commandMine(w, t.tx, t.ty);
     else if (verb === "fish") err = commandFish(w, t.tx, t.ty);
+  else if (verb === "drink") err = commandDrinkWater(w, t.tx, t.ty);
     else if (verb === "hunt" && t.kind === "fauna") err = commandHunt(w, t.id);
     else if (verb === "skin" && t.kind === "fauna") err = commandSkin(w, t.id);
     else if (verb === "loot") err = commandLoot(w, t.id);

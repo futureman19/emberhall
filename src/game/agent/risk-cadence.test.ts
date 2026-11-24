@@ -15,7 +15,7 @@ import { walkable } from "../pathfinding.ts";
 
 function obs(tick: number, body: Partial<Observation["you"]> = {}): Observation {
   return { tick, hour: 12, isNight: false, weather: { kind: "clear", cloud: 0, wet: 0, wind: 0 },
-    you: { id: "you", name: "You", x: 0, z: 0, hp: 40, maxHp: 40, hunger: 100, energy: 100,
+    you: { id: "you", name: "You", x: 0, z: 0, hp: 40, maxHp: 40, hunger: 100, thirst: 80, inWater: false, drowning: false, energy: 100,
       ghost: false, mana: 10, notoriety: "innocent", skills: {}, pack: {}, wear: {}, vault: 0, ...body },
     people: [], fauna: [], piles: [], buildings: [], plots: [], herbs: [], verbs: [], logTail: [] };
 }

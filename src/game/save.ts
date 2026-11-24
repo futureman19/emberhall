@@ -29,7 +29,7 @@ import {
 import type { ItemId, World } from "./types.ts";
 
 export const SAVE_KEY = "emberhall-save-v4";
-export const CURRENT_SAVE_VERSION = 6;
+export const CURRENT_SAVE_VERSION = 7;
 
 type SaveRecord = Record<string, unknown>;
 
@@ -38,6 +38,7 @@ export const INTENT_KINDS = new Set([
   "chop",
   "mine",
   "fish",
+  "drink",
   "hunt",
   "skin",
   "loot",
@@ -378,6 +379,7 @@ function isPerson(value: unknown): boolean {
     isFiniteNumber(value.maxHp) &&
     isFiniteNumber(value.hunger) &&
     isFiniteNumber(value.energy) &&
+    isFiniteNumber(value.thirst) &&
     isFiniteNumber(value.morale) &&
     isFiniteNumber(value.int) &&
     isFiniteNumber(value.str) &&
@@ -669,7 +671,7 @@ function isCurrentSave(save: SaveRecord): boolean {
 function migrateSave(value: unknown): SaveRecord | null {
   if (!isRecord(value)) return null;
   if (value.saveVersion === CURRENT_SAVE_VERSION) return value;
-  if (value.saveVersion !== 1 && value.saveVersion !== 2 && value.saveVersion !== 3 && value.saveVersion !== 4 && value.saveVersion !== 5) {
+  if (value.saveVersion !== 1 && value.saveVersion !== 2 && value.saveVersion !== 3 && value.saveVersion !== 4 && value.saveVersion !== 5 && value.saveVersion !== 6) {
     return null;
   }
 
@@ -711,6 +713,16 @@ function migrateSave(value: unknown): SaveRecord | null {
       });
     }
     migrated.saveVersion = 6;
+  }
+  if (migrated.saveVersion === 6) {
+    // v6 -> v7: water survival. Bodies predating thirst start at the same
+    // footing as hunger/energy (80); the drowning clock re-derives on load.
+    if (Array.isArray(migrated.people)) {
+      for (const body of migrated.people) {
+        if (isRecord(body) && !isFiniteNumber(body.thirst)) body.thirst = 80;
+      }
+    }
+    migrated.saveVersion = 7;
   }
   return migrated;
 }

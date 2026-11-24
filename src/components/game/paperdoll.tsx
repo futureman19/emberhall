@@ -14,7 +14,7 @@ import { LivingDoll } from "@/components/game/living-doll";
 import { HOTBAR_SLOTS, dockStorage, loadHotbar, pinItem, saveHotbar, subscribeHotbar, unpinItem } from "@/components/game/chrome/hotbar-dock";
 import { useGraphicsSettings } from "@/game/graphics-settings";
 import { Tip } from "@/components/ui/tip";
-import { Bandage, Drumstick, Hand, Heart, Pin, PinOff, Shield, Sparkles, Trash2 } from "lucide-react";
+import { Bandage, Droplet, Drumstick, Hand, Heart, Pin, PinOff, Shield, Sparkles, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -216,6 +216,7 @@ export function YouDressing() {
           <StatChip icon={Heart} label="Health" value={self.hp} max={self.maxHp} className="text-red-400" />
           <StatChip icon={Sparkles} label="Mana" value={mana} max={manaMax} className="text-sky-400" />
           <StatChip icon={Drumstick} label="Belly" value={self.hunger} max={100} className="text-amber-400" />
+          <StatChip icon={Droplet} label="Thirst" value={self.thirst} max={100} className="text-cyan-400" />
           <span className="flex-1" aria-hidden />
           <StatChip icon={Hand} label={`${dressed.mainLabel} — damage`} value={dressed.dmg} className="text-fg" />
           <StatChip icon={Shield} label="Armor" value={dressed.armor} className="text-fg" />

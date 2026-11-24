@@ -45,7 +45,7 @@ export interface HostFeed {
   submit(intent: AgentIntent): Promise<string | null>;
   /** Queue a menu verb on the shard ({type:"verb"} — eat/track/equip/…;
    *  src/server/shard.ts VERB_KINDS). Same ack semantics as submit. */
-  verb(req: { verb: string; item?: string | null; n?: number | null; recipeId?: string | null }): Promise<string | null>;
+  verb(req: { verb: string; item?: string | null; n?: number | null; recipeId?: string | null; tx?: number | null; ty?: number | null }): Promise<string | null>;
   /** Close the socket and detach every subscriber. Idempotent. */
   close(): Promise<void>;
   readonly closed: boolean;

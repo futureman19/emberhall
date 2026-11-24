@@ -81,6 +81,7 @@ export function verbsFor(worldOrTarget: World | CtxTarget, actorId?: string, tar
     if (tile?.kind === "tree" && !isGhostwoodTree(w, t.tx, t.ty)) out.push({ verb: "chop", label: harvestVerbLabel(w, actorId, t.tx, t.ty, "tree") });
     if (tile?.kind === "rock") out.push({ verb: "mine", label: harvestVerbLabel(w, actorId, t.tx, t.ty, "rock") });
     if (tile?.kind === "water") out.push({ verb: "fish", label: "Cast a line" });
+    if (tile?.kind === "water") out.push({ verb: "drink", label: "Drink" });
     const bed = plotAt(w, t.tx, t.ty);
     if (bed) {
       if (bed.crop && bed.stage >= 3) out.push({ verb: "harvest", label: "Harvest" });

@@ -29,6 +29,10 @@ export type ReflexEventKind =
   | "vitals.hp_critical"
   | "vitals.hunger_low"
   | "vitals.hunger_critical"
+  | "vitals.thirst_low"
+  | "vitals.thirst_critical"
+  | "vitals.in_water"
+  | "vitals.drowning"
   | "vitals.energy_low"
   | "vitals.energy_critical"
   | "vitals.ghost"
@@ -57,6 +61,8 @@ export interface EventDeriveConfig {
   /** Hunger/energy warning and critical crossings; see risk cadence docs. */
   hungerLow: number;
   hungerCritical: number;
+  thirstLow: number;
+  thirstCritical: number;
   energyLow: number;
   energyCritical: number;
   /** Unowned fauna within this many tiles on task "fight" counts as engaged. */
@@ -69,6 +75,8 @@ export const DEFAULT_EVENT_CONFIG: EventDeriveConfig = {
   hpCriticalFraction: 0.25,
   hungerLow: 25,
   hungerCritical: 10,
+  thirstLow: 25,
+  thirstCritical: 10,
   energyLow: 25,
   energyCritical: 10,
   hostileRadius: 8,
@@ -181,6 +189,14 @@ export function deriveEvents(
     if (prev.you.hunger > config.hungerCritical && obs.you.hunger <= config.hungerCritical) {
       push("vitals.hunger_critical", true, `hunger ${obs.you.hunger}`);
     }
+    if (prev.you.thirst > config.thirstLow && obs.you.thirst <= config.thirstLow) {
+      push("vitals.thirst_low", false, `thirst ${prev.you.thirst} -> ${obs.you.thirst}`);
+    }
+    if (prev.you.thirst > config.thirstCritical && obs.you.thirst <= config.thirstCritical) {
+      push("vitals.thirst_critical", true, `thirst ${obs.you.thirst}`);
+    }
+    if (!prev.you.inWater && obs.you.inWater) push("vitals.in_water", true, "body on open water");
+    if (!prev.you.drowning && obs.you.drowning) push("vitals.drowning", true, "drowning");
     if (prev.you.energy > config.energyLow && obs.you.energy <= config.energyLow) {
       push("vitals.energy_low", false, `energy ${prev.you.energy} -> ${obs.you.energy}`);
     }

@@ -27,6 +27,11 @@ through what the game offers you; never invent mechanics, items, skills, or plac
 
 - You start with 40 health, 40 max health, hunger 80, energy 80, and 8–12 in each of
   strength, intelligence, dexterity. Pocket gold starts at 80 (`world.gold`).
+- Thirst starts at 80 and falls about 4.8 per vale hour. Drink from any water
+  tile beside you (the `drink` verb) to restore 40. At zero thirst the body
+  loses 1 health per quarter hour. A living body on open water — a fly spell
+  lapsing mid-crossing is the only way in — drowns after half an hour of grace,
+  2 health per tenth hour, and moves at half speed until it reaches shore.
 - Hunger falls about 3.2 per vale hour; energy about 2.4. Eating restores hunger
   (cooked food fills far more than raw: `cooked_meat` 40, `cooked_fish` 38, `bread` 32,
   `stew` 52, `trail_rations` 60, raw `meat` only 14). Hunger and energy are tracked
@@ -171,6 +176,7 @@ UI. As an agent, cast only what the menu offers.
 - `chop` — fell a tree with a `hatchet` in hand; trains `lumberjack`.
 - `mine` — work a rock face with a `pick`; trains `mining`, yields `ore`.
 - `fish` — cast at water with a `fishing_rod`; trains `fishing`, yields `raw_fish`.
+- `drink` — drink from an adjacent water tile; restores thirst, no tool needed.
 - `hunt` — attack a beast; melee or `bow` depending on your weapon.
 - `skin` — cut a corpse with a `knife` for `meat` and `hide`.
 - `loot` — take goods from a corpse or ground pile.
