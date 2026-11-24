@@ -575,7 +575,10 @@ export function createDirector(opts: DirectorOptions) {
     tokenIndex.set(account.tokenHash, account.id);
     persistAccounts();
     storeIdempotent(key, {
-      kind: "account", accountId: account.id, resultId: account.id,
+      // Account creation is scoped to the anonymous creator: the replay
+      // lookup (findIdempotent ... "anon") runs before any account id exists,
+      // so the stored scope must match it or every retry mismatches ⇒ 409.
+      kind: "account", accountId: "anon", resultId: account.id,
       fingerprint: createHash("sha256").update(JSON.stringify(b)).digest("hex"),
       tokenCipher: account.tokenCipher ?? undefined, createdAt: now(),
     });
@@ -904,8 +907,12 @@ export function createDirector(opts: DirectorOptions) {
       req.on("data", (chunk: Buffer) => {
         size += chunk.length;
         if (size > BODY_LIMIT_BYTES) {
-          reject(fail("PAYLOAD_TOO_LARGE", "The request body exceeds the 16 KiB limit."));
-          req.destroy();
+          // Stop buffering but keep the socket open so the 413 JSON envelope
+          // can flush to the client. req.destroy() here would RST the
+          // connection before the response is written (fetch: "socket hang
+          // up"); drain the remainder instead and let the route reply 413.
+          req.resume();
+          reject(fail("PAYLOAD_TOO_LARGE", `The request body exceeds the ${BODY_LIMIT_BYTES / 1024} KiB limit.`));
           return;
         }
         chunks.push(chunk);
