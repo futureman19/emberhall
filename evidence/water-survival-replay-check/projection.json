@@ -1,0 +1,126 @@
+{
+  "task": "t_0d13c23d",
+  "generatedAt": "2026-11-24T21:12:43.730Z",
+  "sources": {
+    "phase36Report": "C:\\Users\\futur\\Desktop\\emberhall\\evidence\\phase36-live\\report.json",
+    "phase36Raw": "C:\\Users\\futur\\Desktop\\emberhall\\.worktrees\\t_bd4459bd\\evidence\\phase36-live\\raw\\run.json",
+    "waterReport": "C:\\Users\\futur\\Desktop\\emberhall\\.worktrees\\t_0d13c23d\\evidence\\water-survival-live\\report.json"
+  },
+  "conventions": {
+    "wallDayMs": 86400000,
+    "usdPerAgentWallDay": "observedUsd * 86_400_000 / enabledWallMs (sustained enabled-time projection; NOT a measured 24h bill)",
+    "usdPerValeDay": "observedUsd / (valeHours/24)",
+    "valeDaysPerWallDay": "86_400_000 / enabledWallMs * (valeHours/24)",
+    "perCallMicros": "ceil(promptTokens * promptPerMTok); output free (completionPerMTok=0); summed across calls",
+    "enabledWallMs": "sum of (endMs-startMs) over mode=enabled segments; setup/excluded wall time not counted"
+  },
+  "tariff": {
+    "tableId": "typesafe-jev",
+    "model": "jev-1.14.0",
+    "currency": "USD",
+    "promptPerMTok": 0.042,
+    "completionPerMTok": 0,
+    "source": "https://docs.typesafe.ai/models rate card ($0.042/Mtok input, output free)",
+    "capturedAt": "2026-11-21"
+  },
+  "phase36Baseline": {
+    "codeRevision": "8a441d65ac6b15f462d96164f04acec22b4e7303",
+    "branch": "wt/t_bd4459bd",
+    "testedWaterSurvival": false,
+    "enabledWallMs": 954580,
+    "enabledWallMsFromRawSegments": 954580,
+    "enabledWallMsMatch": true,
+    "valeHours": 24.002717077771305,
+    "paidCalls": 3,
+    "promptTokens": 22700,
+    "completionTokens": 6282,
+    "costMicros": 954,
+    "costMicrosFromRawCalls": 954,
+    "costMicrosMatch": true,
+    "perCallCeil": [
+      {
+        "id": "amwswqmk3-001-fzb",
+        "promptTokens": 7686,
+        "exactMicros": 322.812,
+        "recordedMicros": 323,
+        "ceilMicros": 323
+      },
+      {
+        "id": "amwsx59jz-002-epk",
+        "promptTokens": 7588,
+        "exactMicros": 318.696,
+        "recordedMicros": 319,
+        "ceilMicros": 319
+      },
+      {
+        "id": "amwsxa5ev-003-ir0",
+        "promptTokens": 7426,
+        "exactMicros": 311.892,
+        "recordedMicros": 312,
+        "ceilMicros": 312
+      }
+    ],
+    "observedUsd": 0.000954,
+    "usdPerAgentWallDay": 0.08634750361415493,
+    "usdPerAgentWallDayRecorded": 0.08634750361415493,
+    "reproducedExactly": true,
+    "usdPerValeDay": 0.0009538920083844915,
+    "usdPerValeDayRecorded": 0.0009538920083844914,
+    "valeDaysPerWallDay": 90.52125697162803,
+    "valeDaysPerWallDayRecorded": 90.52125697162803,
+    "meanPromptTokensPerAttempt": 7566.666666666667,
+    "meanCostMicrosPerAttempt": 318,
+    "thresholdUsd": 0.1,
+    "thresholdPassRecorded": true,
+    "basis": "provider usage at recorded tariff; sustained enabled-time projection, NOT a measured 24h bill"
+  },
+  "waterSurvivalObserved": {
+    "revision": "72e2650bf422fd3c462b5bde8373362e15a1c280",
+    "paid": false,
+    "providerCalls": 0,
+    "backend": "deterministic-local-survival",
+    "enabledWallMs": 956378,
+    "wallSeconds": 962.422,
+    "valeHours": 24.0027777777713,
+    "ticks": 8641,
+    "observations": 8642,
+    "attempts": 6,
+    "attemptsPerWallHour": 22.443377229531325,
+    "attemptsPerValeDay": 5.999305635923387,
+    "attemptsPerEnabledWallDay": 542.0450909577594,
+    "valeDaysPerWallDay": 90.35130460965924,
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "observedUsd": 0,
+    "directMeasuredUsdPerAgentWallDay": 0,
+    "note": "Zero-paid deterministic-local-survival backend: 0 provider calls, 0 tokens, 0 micros. The literal measured projection is $0/agent/wall-day; the local price snapshot carries promptPerMTok=0."
+  },
+  "refreshedPaidEquivalentProjection": {
+    "hypothetical": true,
+    "measured": false,
+    "method": "Apply the recorded Phase 3.6 tariff ($0.042/Mtok input, output free) and per-attempt usage to the water run's OBSERVED attempt cadence. The water run made no paid calls; this is an extrapolation, not a water-survival bill.",
+    "attemptsPerEnabledWallDay": 542.0450909577594,
+    "viaMeanReportedCost": {
+      "meanCostMicrosPerAttempt": 318,
+      "usdPerAgentWallDay": 0.1723703389245675,
+      "usdPerValeDay": 0.0019077791922236373
+    },
+    "viaMeanPromptTokens": {
+      "meanPromptTokensPerAttempt": 7566.666666666667,
+      "promptPerMTok": 0.042,
+      "usdPerAgentWallDay": 0.17226192990637593
+    },
+    "primaryUsdPerAgentWallDay": 0.1723703389245675,
+    "ratioToPhase36Baseline": 1.9962399804261493,
+    "phase36BaselineUsdPerAgentWallDay": 0.08634750361415493,
+    "thresholdUsd": 0.1,
+    "breachesHistoricalThreshold": true,
+    "assumptions": [
+      "Per-attempt prompt token usage equals the Phase 3.6 paid mean (7,566.67 tokens). The water-survival observation adds thirst/inWater/drowning/drink fields absent from Phase 3.6, so real paid prompts may be LARGER; this projection is therefore not an upper bound.",
+      "Attempt cadence (6 attempts over a ~24-vale-hour enabled window) is taken from the zero-paid water run; a paid backend could change timing/answers and thus cadence.",
+      "Tariff held at the recorded typesafe-jev jev-1.14.0 rate card ($0.042/Mtok input, output free, captured 2026-11-21); no volume discounts; account-specific billing not reconciled.",
+      "Enabled-time projection convention identical to Phase 3.6 (observed spend x 86,400,000 / enabled ms); a sustained-rate projection, NOT a measured 24-hour bill or invoice.",
+      "The ~2x ratio vs Phase 3.6 reflects the water-survival policy issuing ~2x the reflex attempts per vale-day (6 vs 3), not a tariff change."
+    ]
+  }
+}

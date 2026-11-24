@@ -1,0 +1,365 @@
+{
+  "task": "t_0d13c23d",
+  "generatedAt": "2026-11-24T21:27:08.589Z",
+  "headRevision": "73b16cd7193206584223da6fba492b45364202aa",
+  "recordedRevision": "72e2650bf422fd3c462b5bde8373362e15a1c280",
+  "evidenceDir": "C:\\Users\\futur\\Desktop\\emberhall\\.worktrees\\t_0d13c23d\\evidence\\water-survival-live",
+  "rerunDir": "C:\\Users\\futur\\Desktop\\emberhall\\.worktrees\\t_0d13c23d\\evidence\\water-survival-replay",
+  "sourceHashesAtHead": {
+    "game/agent/autopilot.ts": "1357495e88dd1589ab332e08aec12daa15e21bf7379a7700f4750647ea2e1dd6",
+    "game/agent/scheduler.ts": "39033ba8dac02aa84df98d5f830bdea451da1c8df3e3f511b7446098e3d65d0b",
+    "game/agent/events.ts": "412cef31687699befe13999dd3e14b68d6159a5f0ab20f96216cb9bd5dace041",
+    "game/agent/types.ts": "550be15847c98b9e87dc3a3e2af6026f4c4e4e3ba290d4f317361eb7111e46e9",
+    "game/agent/log.ts": "6ee954f981663d8bb6d4168e057df21722a0c87eb078c1c7bfd3481caae1aeda",
+    "game/agent/reflex.ts": "b4a5cd6c638c583975b68a8a627d6ec2cd7f85f3b1c0959fbbfb4c4a0af2cf2d",
+    "game/agent/risk.ts": "b158c25e05a33565a98881f50b80c2e6000f3dbe7a9fee5e390c8ed0e44227a5",
+    "game/player.ts": "677da17c52dc8c1c89e86488c10ac440644fa0c5a4d39bdc00de71cb8151dde9",
+    "game/catalog.ts": "f8bbb43e0f3fc3421801639f9baa3dd49cbc04f5ce4dcf50151e70729bdcc11f",
+    "game/forestry.ts": "21288a5ba06120ab25d58e57e2b84e4ccd2f2dedd868a4536ece4b89312b4235"
+  },
+  "blobHashesAtHead": {
+    "game/agent/autopilot.ts": "19c5c9fbce8be23ac16825ba924c090d288e315edd756326a56e59977672295e",
+    "game/agent/scheduler.ts": "39033ba8dac02aa84df98d5f830bdea451da1c8df3e3f511b7446098e3d65d0b",
+    "game/agent/events.ts": "a14e43f8ee037973f10d13df871d9e9fb9d8a24d69fe7b8d4d2a93547f5383e7",
+    "game/agent/types.ts": "39951e0f49e76e0d7212ec9d2f1d05777dbb746b4bc828ae38562f53e671c251",
+    "game/agent/log.ts": "6ee954f981663d8bb6d4168e057df21722a0c87eb078c1c7bfd3481caae1aeda",
+    "game/agent/reflex.ts": "b4a5cd6c638c583975b68a8a627d6ec2cd7f85f3b1c0959fbbfb4c4a0af2cf2d",
+    "game/agent/risk.ts": "f87c916d0ce434d3d9bacf612c712e38da6f7b095519d5faab93aca2fa0e6a9f",
+    "game/player.ts": "677da17c52dc8c1c89e86488c10ac440644fa0c5a4d39bdc00de71cb8151dde9",
+    "game/catalog.ts": "f8bbb43e0f3fc3421801639f9baa3dd49cbc04f5ce4dcf50151e70729bdcc11f",
+    "game/forestry.ts": "21288a5ba06120ab25d58e57e2b84e4ccd2f2dedd868a4536ece4b89312b4235"
+  },
+  "fingerprintConvention": "readFileSync working-tree (CRLF, core.autocrlf=true), matching phase36 policyFingerprint; blobHashesAtHead are canonical LF git blobs",
+  "phase36FingerprintDelta": {
+    "game/agent/autopilot.ts": "evolved-since-phase36",
+    "game/agent/scheduler.ts": "evolved-since-phase36",
+    "game/agent/events.ts": "evolved-since-phase36",
+    "game/agent/types.ts": "evolved-since-phase36",
+    "game/agent/log.ts": "evolved-since-phase36",
+    "game/agent/reflex.ts": "evolved-since-phase36",
+    "game/agent/risk.ts": "evolved-since-phase36",
+    "game/player.ts": "evolved-since-phase36",
+    "game/catalog.ts": "unchanged-since-phase36",
+    "game/forestry.ts": "unchanged-since-phase36"
+  },
+  "recomputedTraceHash": "2d599eacc9f52f332efa8b3658996f0af2a9eb546aae68bda68778ea00d95b75",
+  "policyReplay": {
+    "pass": true,
+    "mismatches": [],
+    "requests": 6,
+    "paidCallsIssued": 0
+  },
+  "decisionReconstruction": {
+    "applicable": false,
+    "reason": "raw next_action probabilities absent (zero-paid backend)",
+    "mismatches": [
+      "decision 1 (amwv4mgkq-001-2d5): raw next_action missing/malformed",
+      "decision 2 (amwv4ywvo-002-x8x): raw next_action missing/malformed",
+      "decision 3 (amwv4z9pp-003-uxa): raw next_action missing/malformed",
+      "decision 4 (amwv5152m-004-1759): raw next_action missing/malformed",
+      "decision 5 (amwv51hvm-005-1ccu): raw next_action missing/malformed",
+      "decision 6 (amwv5617b-006-rtu): raw next_action missing/malformed"
+    ],
+    "checked": 6
+  },
+  "rerun": {
+    "present": true,
+    "survivalReplayMatch": true,
+    "fullTraceHashMatch": false,
+    "comparisons": {
+      "survivalTrajectoryBitIdentical": true,
+      "offeredVerbSetIdentical": true,
+      "waterSurvivalMetrics": true,
+      "acceptance": true,
+      "counts": true,
+      "triggerCounts": true,
+      "schedulerConfig": true,
+      "seed": true,
+      "startHour": true,
+      "simHours": true,
+      "ticks": true,
+      "canonicalDecisions": true,
+      "budgetNumerics": true,
+      "zeroPaid": true
+    },
+    "trajectoryMismatchCount": 0,
+    "verbSetMismatchCount": 0,
+    "observationRows": {
+      "recorded": 8642,
+      "rerun": 8642
+    },
+    "ambientVerbMultiplicityDelta": {
+      "talk": {
+        "recorded": 45531,
+        "rerun": 40393
+      },
+      "walk": {
+        "recorded": 294645,
+        "rerun": 289507
+      },
+      "hunt": {
+        "recorded": 61389,
+        "rerun": 60912
+      },
+      "tame": {
+        "recorded": 61389,
+        "rerun": 60912
+      },
+      "cast": {
+        "recorded": 61389,
+        "rerun": 60912
+      },
+      "fireball": {
+        "recorded": 61389,
+        "rerun": 60912
+      }
+    },
+    "rerunRevision": "73b16cd7193206584223da6fba492b45364202aa",
+    "recordedRevision": "72e2650bf422fd3c462b5bde8373362e15a1c280",
+    "rerunAgentId": "water-replay-aquila",
+    "recordedAgentId": "water-proof-aquila",
+    "rerunTraceHash": "82a993ffaa65d88bad38c243da7339cf0fafb34cb0cc1f8df5dbf09127fd0f77",
+    "recordedTraceHash": "2d599eacc9f52f332efa8b3658996f0af2a9eb546aae68bda68778ea00d95b75",
+    "rerunWallSeconds": 960.753,
+    "recordedWallSeconds": 962.422,
+    "note": "Survival-grounded replay MATCHES: vitals/position/water/day-night trajectory bit-identical at all 8642 observations, identical 6 decisions/triggers/acceptance counters/budget guard. The STRICT full traceHash differs ONLY because ambient opportunistic verb-offer multiplicity (walk/talk/hunt/tame/cast/fireball, one per nearby ambient entity) is not seed-reproducible across fresh shard boots; the offered verb SET is identical at every tick and no survival-critical field diverges. Wall-clock fields and agent/attempt ids are expected to differ."
+  },
+  "checks": [
+    {
+      "name": "schema is emberhall-water-live-v1",
+      "pass": true,
+      "detail": "emberhall-water-live-v1"
+    },
+    {
+      "name": "zero-paid backend",
+      "pass": true,
+      "detail": "paid=false providerCalls=0 backend=deterministic-local-survival"
+    },
+    {
+      "name": "recorded revision exists",
+      "pass": true,
+      "detail": "72e2650bf422fd3c462b5bde8373362e15a1c280"
+    },
+    {
+      "name": "846e290 (gated implementation) is ancestor of recorded proof revision",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "recorded proof revision is ancestor of HEAD",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "846e290 is ancestor of HEAD",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "src/ identical between gated implementation 846e290 and HEAD (gates cover the replayed code)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "src/ identical between 846e290 and recorded proof revision",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "working-tree policy files match HEAD (git-normalized)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rawEvidenceHashes reproduce from copied raw artifacts",
+      "pass": true,
+      "detail": "{\"attempts\":\"match\",\"trace\":\"match\",\"observations\":\"match\",\"feed\":\"match\",\"shardLog\":\"match\"}"
+    },
+    {
+      "name": "traceHash recomputed from raw trace matches report",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "counts.observations == raw observation rows",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "counts.observations == trace observation events",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "counts.decisions == trace decision events",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "counts.attempts == report.calls",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "counts.attempts == attempt begin records",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "counts.rejections == 0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "counts.interventions == 0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "counts.errors == 0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rejections/interventions/errors arrays empty",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "reason full-vale-day",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "acceptance.pass true and all sub-flags true",
+      "pass": true,
+      "detail": "{\"fullDaySurvival\":true,\"zeroRejections\":true,\"zeroInterventions\":true,\"budgetGuardIntact\":true,\"waterPressureExposed\":true,\"waterPressureResponded\":true,\"pass\":true}"
+    },
+    {
+      "name": "requests == decisions == attempts (single-flight)",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "exactly one stop event",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "submit/ack pairs balance",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "budget guard intact ($0 of $0.50, no reservations)",
+      "pass": true,
+      "detail": "{\"agentId\":\"water-proof-aquila\",\"day\":\"2026-11-24\",\"capMicros\":500000,\"spentMicros\":0,\"reservedMicros\":0,\"remainingMicros\":500000,\"openReservations\":0}"
+    },
+    {
+      "name": "budget.totalCostMicros == 0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "every call zero-cost reported basis, zero usage, zero tariff",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "attempt end records all ok, zero micros/usage",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "cost.providerCalls == 0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "cost.totalCostMicros == 0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "waterExposure fully re-derived from raw observations/feed",
+      "pass": true,
+      "detail": "{}"
+    },
+    {
+      "name": "agent alive (hp>0, not ghost) at every observation",
+      "pass": true,
+      "detail": "minHp=40"
+    },
+    {
+      "name": "observation ticks strictly increasing",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "day AND night coverage present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "feed rows == decisions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "triggerCounts re-derived from request contexts",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "simHours >= 24",
+      "pass": true,
+      "detail": "24.0027777777713"
+    },
+    {
+      "name": "endTick == last raw tick",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "startTick == first raw tick",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "hourly samples span the day",
+      "pass": true,
+      "detail": "samples=25"
+    },
+    {
+      "name": "every attempt has linked observation/exchange/answers/row",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "offline policy replay PASS (production scheduler re-executed on logged observations)",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "name": "offline policy replay requests == 6",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "offline policy replay issued zero paid calls",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "fresh live re-run reproduces survival trajectory + decisions + acceptance (bit-identical vitals/position/water/night)",
+      "pass": true,
+      "detail": "{\"survivalTrajectoryBitIdentical\":true,\"offeredVerbSetIdentical\":true,\"waterSurvivalMetrics\":true,\"acceptance\":true,\"counts\":true,\"triggerCounts\":true,\"schedulerConfig\":true,\"seed\":true,\"startHour\":true,\"simHours\":true,\"ticks\":true,\"canonicalDecisions\":true,\"budgetNumerics\":true,\"zeroPaid\":true}"
+    }
+  ],
+  "summary": {
+    "total": 46,
+    "passed": 46,
+    "failed": 0,
+    "pass": true
+  }
+}
