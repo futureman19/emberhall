@@ -1,0 +1,24 @@
+{
+  "checkedAt": "2026-11-24T05:10:29.137Z",
+  "commit": "61e8ce558a86add957c395109f504eaad529a1bb",
+  "environmentPresent": {
+    "TYPESAFE_API_KEY": false,
+    "EMBERHALL_SECRET_KEY": false,
+    "EMBERHALL_DEFAULT_MODEL": false,
+    "OPENAI_API_KEY": false,
+    "EMBERHALL_MIND_PRIVATE_ORIGINS": false
+  },
+  "protectionKeyValid": false,
+  "localModels": {
+    "checked": true,
+    "reachable": true,
+    "count": 1,
+    "httpStatus": 200
+  },
+  "paidTraffic": false,
+  "generationRequests": 0,
+  "spendAuthorization": "Requires explicit owner approval; never inferred from environment",
+  "liveReflexVerified": false,
+  "onboardingSeconds": null,
+  "acceptance": "NOT_RUN"
+}
