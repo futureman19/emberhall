@@ -1,5 +1,4 @@
 // Opt-in live local journey. Transparent owned proxy allows isolated disconnection.
-import assert from 'node:assert/strict';
 import { readFileSync, writeFileSync, existsSync, mkdtempSync } from 'node:fs';
 import { parseEnv } from 'node:util';
 import { join } from 'node:path';
