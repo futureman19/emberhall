@@ -94,7 +94,10 @@ async function shot(page, name) { await page.screenshot({ path: join(output, nam
 
 /** Keyboard focus indicator: Tab to the first enabled button, read its style. */
 async function focusRingCheck(page, label) {
-  await page.evaluate(() => { (document.activeElement instanceof HTMLElement) && document.activeElement.blur(); document.body.focus(); });
+  await page.evaluate(() => {
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+    document.body.focus();
+  });
   let r = { found: false };
   for (let i = 0; i < 30; i++) {
     await page.keyboard.press('Tab');
