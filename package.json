@@ -27,6 +27,7 @@
     "smoke:weapon-animations": "node scripts/weapon-animations-smoke.mjs",
     "smoke:mobile-hud": "node scripts/mobile-hud-overlap-smoke.mjs",
     "smoke:creator": "node scripts/creator-smoke.mjs",
+    "smoke:console-mobile": "node --experimental-strip-types scripts/console-mobile-smoke.mjs",
     "smoke:harvest-counts": "node scripts/harvest-counts-smoke.mjs",
     "smoke:crafting": "node scripts/crafting-smoke.mjs",
     "smoke:metalwork": "node scripts/metalwork-smoke.mjs",

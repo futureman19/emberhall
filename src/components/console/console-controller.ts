@@ -415,6 +415,40 @@ export class ConsoleController {
     await run();
   }
 
+  /**
+   * Reload recovery: restore a persisted session on a fresh mount. The
+   * beta token lives in sessionStorage; without this the owner lands back
+   * on the account step and could create a duplicate character. No-op
+   * when nothing is persisted, an account is already open, or the one-time
+   * token reveal is showing. An auth-rejected token is cleared; a
+   * reachable-host failure keeps it so Retry can try again.
+   */
+  async resumeSession(): Promise<boolean> {
+    if (this.state.account !== null || this.state.busy || this.state.tokenRevealed) return false;
+    const token = this.deps.getToken();
+    if (token === null || token.trim() === "") return false;
+    this.set({ busy: true, error: null, fieldErrors: [] });
+    try {
+      const manifest = await this.deps.api.listRoles().catch(() => null);
+      const { characters } = await this.deps.api.listCharacters();
+      this.set({ busy: false, manifest, characters, step: "character", notice: null });
+      return true;
+    } catch (e) {
+      if (isConsoleApiError(e) && !e.recoverable) {
+        this.deps.setToken(null);
+        try {
+          this.storage?.removeItem(CONSOLE_TOKEN_STORAGE_KEY);
+        } catch {
+          /* best-effort */
+        }
+      }
+      this.captureError(e, async () => {
+        await this.resumeSession();
+      });
+      return false;
+    }
+  }
+
   confirmTokenSaved(): void {
     this.set({ tokenRevealed: false, step: "character" });
   }

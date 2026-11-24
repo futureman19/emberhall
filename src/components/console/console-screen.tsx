@@ -10,7 +10,7 @@
  * The owner token is shown exactly once after account creation. Nothing secret
  * is persisted to durable browser storage and nothing secret is ever logged.
  */
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore, type KeyboardEvent } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   CONSOLE_TOKEN_STORAGE_KEY,
@@ -97,14 +97,19 @@ const BTN_PRIMARY =
   "hover:bg-surface-2 disabled:cursor-not-allowed disabled:opacity-50";
 const INPUT =
   "min-h-11 w-full rounded border border-border-strong bg-surface px-3 text-base text-fg " +
-  "placeholder:text-muted focus:border-gold focus:outline-none";
+  "placeholder:text-muted focus:border-gold focus:outline-2 focus:outline-offset-2 focus:outline-gold";
 const LABEL = "mb-1 block text-sm font-semibold text-muted";
 
 function FieldHint({ errors, field }: { errors: FieldError[]; field: string }) {
   const err = fieldErrorFor(errors, field);
   if (!err) return null;
   return (
-    <p className="mt-1 text-sm text-health" data-testid={`field-error-${field}`}>
+    <p
+      id={`field-error-${field}`}
+      role="alert"
+      className="mt-1 break-words text-sm text-health"
+      data-testid={`field-error-${field}`}
+    >
       {err.message}
     </p>
   );
@@ -146,12 +151,30 @@ export function ConsoleScreen({ runtime = "http", api }: ConsoleScreenProps) {
   });
   const state = useSyncExternalStore(controller.subscribe, controller.getState, controller.getState);
   useEffect(() => () => controller.stopPolling(), [controller]);
+  // Reload recovery: a persisted session token resumes the owner silently
+  // instead of stranding them on the account step (duplicate-character trap).
+  useEffect(() => {
+    void controller.resumeSession();
+  }, [controller]);
 
   const [resumeToken, setResumeToken] = useState("");
   const [copied, setCopied] = useState(false);
+  // First client render must match SSR; only after mount may render-time
+  // logic consult sessionStorage (see canGoTo).
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const busy = state.busy;
   const errors = state.fieldErrors;
+  /** ARIA wiring: mark the invalid field and point it at its visible error. */
+  const errorProps = (field: string): { "aria-invalid"?: true; "aria-describedby"?: string } =>
+    fieldErrorFor(errors, field) ? { "aria-invalid": true, "aria-describedby": `field-error-${field}` } : {};
+  /** Enter submits single-line fields (textarea keeps its newline). */
+  const enterSubmit = (submit: () => void) => (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== "Enter" || e.nativeEvent.isComposing || busy) return;
+    e.preventDefault();
+    submit();
+  };
   const stepIndex = stepProgressIndex(state.step);
   const banner = deriveBanner(state.status, state.view?.character.name ?? "Your character");
   const previewLabel = runtimeLabel(runtime);
@@ -159,7 +182,10 @@ export function ConsoleScreen({ runtime = "http", api }: ConsoleScreenProps) {
 
   const canGoTo = (step: (typeof CONSOLE_STEPS)[number]): boolean => {
     if (step === "account") return true;
-    if (!state.account && readToken() === null) return false;
+    // Hydration-safe: the first client render must match SSR (no token).
+    // After mount, a persisted token enables the nav; resumeSession()
+    // restores the session itself.
+    if (!state.account && (!mounted || readToken() === null)) return false;
     if (step === "status") return state.view !== null;
     if (step !== "character" && state.view === null) return false;
     return true;
@@ -189,7 +215,7 @@ export function ConsoleScreen({ runtime = "http", api }: ConsoleScreenProps) {
             </p>
           )}
           <p className="text-sm text-muted" data-testid="beta-note">{BETA_NOTE}</p>
-          <Link to="/" className="text-sm text-accent underline underline-offset-2">
+          <Link to="/" className="inline-block py-1 text-sm text-accent underline underline-offset-2">
             Back to the vale
           </Link>
         </header>
@@ -224,18 +250,18 @@ export function ConsoleScreen({ runtime = "http", api }: ConsoleScreenProps) {
         <BusyNote busy={busy} />
 
         {state.notice && (
-          <p role="status" data-testid="notice" className="rounded border border-border bg-surface px-3 py-2 text-sm">
+          <p role="status" data-testid="notice" className="break-words rounded border border-border bg-surface px-3 py-2 text-sm">
             {state.notice}
           </p>
         )}
 
         {state.error && (
           <div role="alert" data-testid="error" className="rounded border border-health bg-surface px-3 py-2">
-            <p className="text-base">{state.error.message}</p>
+            <p className="break-words text-base">{state.error.message}</p>
             {errors.length > 0 && (
               <ul className="mt-1 list-disc pl-5 text-sm text-health">
                 {errors.map((err) => (
-                  <li key={`${err.field}-${err.code}`}>{err.message}</li>
+                  <li key={`${err.field}-${err.code}`} className="break-words">{err.message}</li>
                 ))}
               </ul>
             )}
@@ -317,6 +343,10 @@ export function ConsoleScreen({ runtime = "http", api }: ConsoleScreenProps) {
                     autoComplete="off"
                     value={resumeToken}
                     onChange={(e) => setResumeToken(e.target.value)}
+                    onKeyDown={enterSubmit(() => {
+                      if (resumeToken.trim() !== "") void controller.resumeWithToken(resumeToken);
+                    })}
+                    {...errorProps("ownerToken")}
                     className={INPUT}
                   />
                   <FieldHint errors={errors} field="ownerToken" />
@@ -349,7 +379,7 @@ export function ConsoleScreen({ runtime = "http", api }: ConsoleScreenProps) {
                       onClick={() => void controller.selectCharacter(entry.character.id)}
                       className={BTN + " w-full text-left"}
                     >
-                      <span className="font-semibold">{entry.character.name}</span>
+                      <span className="break-words font-semibold">{entry.character.name}</span>
                       <span className="ml-2 text-sm text-muted">
                         {entry.character.roleId} · {lifecycleLabel(entry.character.lifecycle)}
                       </span>
@@ -369,6 +399,8 @@ export function ConsoleScreen({ runtime = "http", api }: ConsoleScreenProps) {
                   type="text"
                   value={state.form.name}
                   onChange={(e) => controller.updateForm({ name: e.target.value })}
+                  onKeyDown={enterSubmit(() => void controller.submitName())}
+                  {...errorProps("name")}
                   className={INPUT}
                 />
                 <FieldHint errors={errors} field="name" />
@@ -449,6 +481,7 @@ export function ConsoleScreen({ runtime = "http", api }: ConsoleScreenProps) {
               rows={5}
               value={state.form.directive}
               onChange={(e) => controller.updateForm({ directive: e.target.value })}
+              {...errorProps("directive")}
               className={INPUT + " resize-y"}
             />
             <p
@@ -532,6 +565,8 @@ export function ConsoleScreen({ runtime = "http", api }: ConsoleScreenProps) {
                     type="text"
                     value={state.form.mind.cloud.baseUrl ?? ""}
                     onChange={(e) => controller.updateMindForm({ cloud: { baseUrl: e.target.value } })}
+                    onKeyDown={enterSubmit(() => void controller.submitMind())}
+                    {...errorProps("mind.baseUrl")}
                     className={INPUT}
                   />
                   <FieldHint errors={errors} field="mind.baseUrl" />
@@ -546,6 +581,8 @@ export function ConsoleScreen({ runtime = "http", api }: ConsoleScreenProps) {
                     type="text"
                     value={state.form.mind.cloud.model ?? ""}
                     onChange={(e) => controller.updateMindForm({ cloud: { model: e.target.value } })}
+                    onKeyDown={enterSubmit(() => void controller.submitMind())}
+                    {...errorProps("mind.model")}
                     className={INPUT}
                   />
                   <FieldHint errors={errors} field="mind.model" />
@@ -561,6 +598,8 @@ export function ConsoleScreen({ runtime = "http", api }: ConsoleScreenProps) {
                     autoComplete="off"
                     value={state.form.mind.cloud.key ?? ""}
                     onChange={(e) => controller.updateMindForm({ cloud: { key: e.target.value } })}
+                    onKeyDown={enterSubmit(() => void controller.submitMind())}
+                    {...errorProps("mind.key")}
                     className={INPUT}
                   />
                   <FieldHint errors={errors} field="mind.key" />
@@ -579,6 +618,8 @@ export function ConsoleScreen({ runtime = "http", api }: ConsoleScreenProps) {
                     type="text"
                     value={state.form.mind.local.endpointUrl ?? ""}
                     onChange={(e) => controller.updateMindForm({ local: { endpointUrl: e.target.value } })}
+                    onKeyDown={enterSubmit(() => void controller.submitMind())}
+                    {...errorProps("mind.endpointUrl")}
                     className={INPUT}
                   />
                   <FieldHint errors={errors} field="mind.endpointUrl" />
@@ -593,6 +634,8 @@ export function ConsoleScreen({ runtime = "http", api }: ConsoleScreenProps) {
                     type="text"
                     value={state.form.mind.local.model ?? ""}
                     onChange={(e) => controller.updateMindForm({ local: { model: e.target.value } })}
+                    onKeyDown={enterSubmit(() => void controller.submitMind())}
+                    {...errorProps("mind.model")}
                     className={INPUT}
                   />
                   <FieldHint errors={errors} field="mind.model" />
@@ -618,16 +661,16 @@ export function ConsoleScreen({ runtime = "http", api }: ConsoleScreenProps) {
             <h2 className="font-display text-xl text-gold">{stepHeading("review")}</h2>
             <dl className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-2">
               <dt className="text-muted">Name</dt>
-              <dd data-testid="review-name">{state.view.character.name}</dd>
+              <dd data-testid="review-name" className="min-w-0 break-words">{state.view.character.name}</dd>
               <dt className="text-muted">Role</dt>
-              <dd data-testid="review-role">
+              <dd data-testid="review-role" className="min-w-0 break-words">
                 {state.manifest?.packs.find((p) => p.id === state.view?.character.roleId)?.label ??
                   state.view.character.roleId}
               </dd>
               <dt className="text-muted">Directive</dt>
-              <dd data-testid="review-directive">{state.view.character.directive}</dd>
+              <dd data-testid="review-directive" className="min-w-0 break-words">{state.view.character.directive}</dd>
               <dt className="text-muted">Mind</dt>
-              <dd data-testid="review-mind">
+              <dd data-testid="review-mind" className="min-w-0 break-words">
                 {state.view.publicMind === null
                   ? "none"
                   : state.view.publicMind.config.kind === "cloud"
@@ -729,7 +772,7 @@ export function ConsoleScreen({ runtime = "http", api }: ConsoleScreenProps) {
                 {state.status.journalTail.length > 0 && (
                   <ul data-testid="journal" className="flex flex-col gap-1 border-t border-border pt-2 text-sm">
                     {state.status.journalTail.map((line, i) => (
-                      <li key={i} className={line.includes("(autopilot)") ? "italic text-muted" : ""}>
+                      <li key={i} className={"break-words " + (line.includes("(autopilot)") ? "italic text-muted" : "")}>
                         {line}
                       </li>
                     ))}

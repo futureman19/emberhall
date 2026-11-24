@@ -9,6 +9,7 @@ import { test } from "node:test";
 import { createMockConsoleApi } from "../../lib/console-mock.ts";
 import {
   CONSOLE_DRAFT_STORAGE_KEY,
+  CONSOLE_TOKEN_STORAGE_KEY,
   ConsoleController,
   deriveBanner,
   readinessChecklist,
@@ -152,6 +153,87 @@ test("account: bad resume token is rejected with a clear error", async () => {
   assert.equal(s.step, "account");
   assert.ok(s.error !== null);
   assert.equal(s.error.recoverable, false); // 401 — fix the token, not a retry
+});
+
+/* ── reload recovery: resumeSession (mobile pass t_b3272cf4) ───────── */
+
+/** Two controllers over one host session: the second is a fresh page mount. */
+function reloadHarness() {
+  let token: string | null = null;
+  const storage = memStorage();
+  const { api, controls } = createMockConsoleApi({ getToken: () => token });
+  let idem = 0;
+  const deps = {
+    api,
+    getToken: () => token,
+    setToken: (t: string | null) => {
+      token = t;
+    },
+    storage,
+    delay: () => new Promise<void>(() => {}),
+    isVisible: () => true,
+    pollIntervalMs: 2000,
+    maxBackoffMs: 8000,
+    newIdempotencyKey: () => `${IDEM}-reload-${(idem += 1)}`,
+  };
+  return { deps, storage, controls };
+}
+
+test("resumeSession: persisted token restores the owner's characters on a fresh mount", async () => {
+  const { deps, storage } = reloadHarness();
+  const first = new ConsoleController(deps);
+  await first.createAccount();
+  // While the one-time reveal is up, auto-resume must not steal the step.
+  assert.equal(await first.resumeSession(), false);
+  first.confirmTokenSaved();
+  first.startNewCharacter();
+  first.updateForm({ name: "Reloady" });
+  await first.submitName();
+  assert.ok(deps.getToken() !== null);
+  assert.equal(storage.getItem(CONSOLE_TOKEN_STORAGE_KEY), deps.getToken());
+
+  const second = new ConsoleController(deps);
+  assert.equal(second.getState().step, "account");
+  assert.equal(await second.resumeSession(), true);
+  const s = second.getState();
+  assert.equal(s.step, "character");
+  assert.equal(s.error, null);
+  // Same contract as resumeWithToken: the session is the persisted token,
+  // not a re-fetched account object.
+  assert.equal(s.characters.length, 1);
+  assert.equal(s.characters[0].character.name, "Reloady");
+  assert.ok(s.manifest !== null);
+});
+
+test("resumeSession: no persisted token is a silent no-op", async () => {
+  const { controller: c } = harness();
+  assert.equal(await c.resumeSession(), false);
+  const s = c.getState();
+  assert.equal(s.step, "account");
+  assert.equal(s.error, null);
+  assert.equal(s.busy, false);
+});
+
+test("resumeSession: auth-rejected token is cleared; a recoverable outage keeps it for Retry", async () => {
+  const { deps, storage, controls } = reloadHarness();
+  const c = new ConsoleController(deps);
+  deps.setToken("mtok-stale");
+  storage.setItem(CONSOLE_TOKEN_STORAGE_KEY, "mtok-stale");
+  // skip=1: listRoles is best-effort (.catch); the auth wall must land on
+  // listCharacters, exactly as a real host rejects both calls.
+  controls.failNext(401, "UNAUTHORIZED", undefined, 1);
+  assert.equal(await c.resumeSession(), false);
+  assert.equal(deps.getToken(), null);
+  assert.equal(storage.getItem(CONSOLE_TOKEN_STORAGE_KEY), null);
+  assert.equal(c.getState().error?.recoverable, false);
+
+  deps.setToken("mtok-stale");
+  storage.setItem(CONSOLE_TOKEN_STORAGE_KEY, "mtok-stale");
+  controls.failNext(503, "CONFIG_UNAVAILABLE", "The host is restarting — retry in a moment.", 1);
+  assert.equal(await c.resumeSession(), false);
+  assert.equal(deps.getToken(), "mtok-stale");
+  assert.equal(storage.getItem(CONSOLE_TOKEN_STORAGE_KEY), "mtok-stale");
+  assert.equal(c.getState().error?.recoverable, true);
 });
 
 /* ── role selection ────────────────────────────────────────────────── */
