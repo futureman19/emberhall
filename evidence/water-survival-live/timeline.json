@@ -1,0 +1,410 @@
+{
+  "schema": "emberhall-water-live-timeline-v1",
+  "task": "t_4e2c4d13",
+  "revision": "72e2650bf422fd3c462b5bde8373362e15a1c280",
+  "seed": 20261124,
+  "startHour": 8,
+  "simHours": 24.0027777777713,
+  "hourly": [
+    {
+      "hour": 8,
+      "tick": 0,
+      "isNight": false,
+      "hp": 40,
+      "hunger": 80,
+      "thirst": 80,
+      "energy": 80,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 9,
+      "tick": 360,
+      "isNight": false,
+      "hp": 40,
+      "hunger": 76.7999999999995,
+      "thirst": 75.19999999999925,
+      "energy": 77.60000000000218,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 10,
+      "tick": 720,
+      "isNight": false,
+      "hp": 40,
+      "hunger": 73.599999999999,
+      "thirst": 70.3999999999985,
+      "energy": 75.20000000000437,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 11,
+      "tick": 1080,
+      "isNight": false,
+      "hp": 40,
+      "hunger": 70.3999999999985,
+      "thirst": 65.59999999999775,
+      "energy": 72.80000000000655,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 12,
+      "tick": 1440,
+      "isNight": false,
+      "hp": 40,
+      "hunger": 67.199999999998,
+      "thirst": 60.799999999997,
+      "energy": 70.40000000000873,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 13,
+      "tick": 1800,
+      "isNight": false,
+      "hp": 40,
+      "hunger": 63.9999999999975,
+      "thirst": 55.99999999999625,
+      "energy": 68.00000000001091,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 14,
+      "tick": 2160,
+      "isNight": false,
+      "hp": 40,
+      "hunger": 60.799999999997,
+      "thirst": 51.1999999999955,
+      "energy": 65.6000000000131,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 15,
+      "tick": 2520,
+      "isNight": false,
+      "hp": 40,
+      "hunger": 57.5999999999965,
+      "thirst": 46.39999999999475,
+      "energy": 63.20000000001443,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 16,
+      "tick": 2880,
+      "isNight": false,
+      "hp": 40,
+      "hunger": 54.399999999996,
+      "thirst": 41.599999999994,
+      "energy": 60.80000000001405,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 17,
+      "tick": 3240,
+      "isNight": false,
+      "hp": 40,
+      "hunger": 51.1999999999955,
+      "thirst": 36.79999999999325,
+      "energy": 58.40000000001368,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 18,
+      "tick": 3600,
+      "isNight": false,
+      "hp": 40,
+      "hunger": 47.999999999995,
+      "thirst": 31.9999999999925,
+      "energy": 56.0000000000133,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 19,
+      "tick": 3961,
+      "isNight": false,
+      "hp": 40,
+      "hunger": 44.79111111110561,
+      "thirst": 27.186666666659697,
+      "energy": 53.59333333334626,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 20,
+      "tick": 4321,
+      "isNight": true,
+      "hp": 40,
+      "hunger": 41.59111111110511,
+      "thirst": 22.386666666660226,
+      "energy": 51.19333333334588,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 21,
+      "tick": 4681,
+      "isNight": true,
+      "hp": 40,
+      "hunger": 38.39111111110461,
+      "thirst": 17.586666666660754,
+      "energy": 48.79333333334551,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 22,
+      "tick": 5041,
+      "isNight": true,
+      "hp": 40,
+      "hunger": 35.19111111110411,
+      "thirst": 12.786666666660853,
+      "energy": 46.39333333334513,
+      "x": 256,
+      "z": 293,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 23,
+      "tick": 5401,
+      "isNight": true,
+      "hp": 40,
+      "hunger": 31.991111111103606,
+      "thirst": 47.98666666666074,
+      "energy": 43.99333333334476,
+      "x": 252,
+      "z": 302,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 24,
+      "tick": 5761,
+      "isNight": true,
+      "hp": 40,
+      "hunger": 28.791111111103106,
+      "thirst": 43.18666666665999,
+      "energy": 41.59333333334438,
+      "x": 252,
+      "z": 302,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 25,
+      "tick": 6121,
+      "isNight": true,
+      "hp": 40,
+      "hunger": 25.591111111102606,
+      "thirst": 38.38666666665924,
+      "energy": 39.19333333334401,
+      "x": 252,
+      "z": 302,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 26,
+      "tick": 6481,
+      "isNight": true,
+      "hp": 40,
+      "hunger": 56.391111111102106,
+      "thirst": 73.58666666665849,
+      "energy": 36.79333333334363,
+      "x": 252,
+      "z": 302,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 27,
+      "tick": 6841,
+      "isNight": true,
+      "hp": 40,
+      "hunger": 53.191111111101606,
+      "thirst": 68.78666666665774,
+      "energy": 34.39333333334326,
+      "x": 252,
+      "z": 302,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 28,
+      "tick": 7201,
+      "isNight": true,
+      "hp": 40,
+      "hunger": 49.991111111101105,
+      "thirst": 63.98666666665699,
+      "energy": 31.993333333342882,
+      "x": 252,
+      "z": 302,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 29,
+      "tick": 7561,
+      "isNight": false,
+      "hp": 40,
+      "hunger": 46.791111111100605,
+      "thirst": 59.18666666665624,
+      "energy": 29.593333333342507,
+      "x": 252,
+      "z": 302,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 30,
+      "tick": 7921,
+      "isNight": false,
+      "hp": 40,
+      "hunger": 43.591111111100105,
+      "thirst": 54.386666666655486,
+      "energy": 27.19333333334213,
+      "x": 252,
+      "z": 302,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 31,
+      "tick": 8281,
+      "isNight": false,
+      "hp": 40,
+      "hunger": 40.391111111099605,
+      "thirst": 89.58666666665474,
+      "energy": 24.793333333341756,
+      "x": 252,
+      "z": 302,
+      "inWater": false,
+      "drowning": false
+    },
+    {
+      "hour": 32,
+      "tick": 8641,
+      "isNight": false,
+      "hp": 40,
+      "hunger": 37.191111111099104,
+      "thirst": 84.78666666665399,
+      "energy": 22.39333333334138,
+      "x": 252,
+      "z": 302,
+      "inWater": false,
+      "drowning": false
+    }
+  ],
+  "logEvents": [
+    {
+      "hour": 19.458333333332913,
+      "tick": 4125,
+      "line": "Your throat is dry — find water."
+    },
+    {
+      "hour": 20.658333333332333,
+      "tick": 4557,
+      "line": "The first drops fall — the beds drink."
+    },
+    {
+      "hour": 22.583333333331403,
+      "tick": 5250,
+      "line": "You are parched. Drink soon."
+    },
+    {
+      "hour": 23.002777777775645,
+      "tick": 5401,
+      "line": "You drink from the water. Your thirst eases."
+    }
+  ],
+  "firstDecisionByTrigger": {
+    "boot": {
+      "hour": 8,
+      "tick": 0,
+      "verb": null,
+      "outcome": null
+    },
+    "vitals.thirst_critical": {
+      "hour": 22.583333333331403,
+      "tick": 5250,
+      "verb": null,
+      "outcome": null
+    },
+    "danger.unresolved": {
+      "hour": 22.583333333331403,
+      "tick": 5250,
+      "verb": null,
+      "outcome": null
+    },
+    "vitals.hunger_low": {
+      "hour": 25.1888888888857,
+      "tick": 6188,
+      "verb": "drink",
+      "outcome": null
+    },
+    "vitals.energy_low": {
+      "hour": 30.919444444438486,
+      "tick": 8251,
+      "verb": "drink",
+      "outcome": null
+    }
+  },
+  "triggerCounts": {
+    "boot": 1,
+    "vitals.thirst_critical": 1,
+    "danger.unresolved": 4,
+    "vitals.hunger_low": 1,
+    "vitals.energy_low": 1
+  },
+  "criterion3": {
+    "thirstLowTrigger": false,
+    "drinkAck": true,
+    "hungerLowTrigger": true,
+    "eatAck": true,
+    "nightfall": true,
+    "quietWindowEntry": {
+      "hour": 22
+    },
+    "quietWindowExit": {
+      "hour": 30
+    },
+    "daybreakTrigger": false
+  }
+}
