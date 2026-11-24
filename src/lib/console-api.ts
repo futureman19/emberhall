@@ -19,7 +19,6 @@
 import { CLOUD_PROVIDERS, DIRECTIVE_MAX, ENDPOINT_URL_MAX, NAME_MAX } from "../game/agent/account.ts";
 import type {
   Account,
-  CloudProvider,
   FieldError,
   Lifecycle,
   MindConfig,

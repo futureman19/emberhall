@@ -188,7 +188,7 @@ export function ConsoleScreen({ runtime = "mock", api }: ConsoleScreenProps) {
               {previewLabel}
             </p>
           )}
-          <p className="text-sm text-muted">{BETA_NOTE}</p>
+          <p className="text-sm text-muted" data-testid="beta-note">{BETA_NOTE}</p>
           <Link to="/" className="text-sm text-accent underline underline-offset-2">
             Back to the vale
           </Link>
@@ -471,7 +471,7 @@ export function ConsoleScreen({ runtime = "mock", api }: ConsoleScreenProps) {
         )}
 
         {state.step === "mind" && (
-          <section className="flex flex-col gap-3 rounded border border-border bg-surface p-4">
+          <section data-testid="mind-step" className="flex flex-col gap-3 rounded border border-border bg-surface p-4">
             <h2 className="font-display text-xl text-gold">{stepHeading("mind")}</h2>
             <div className="flex flex-wrap gap-2" role="group" aria-label="Mind connector">
               <button

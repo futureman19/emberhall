@@ -57,10 +57,24 @@ const flush = async () => {
   for (let i = 0; i < 12; i++) await Promise.resolve();
 };
 
+test("getState survives bare-reference calls (useSyncExternalStore contract)", () => {
+  const { controller } = harness();
+  // React's useSyncExternalStore invokes the snapshot without a receiver.
+  // An unbound prototype method throws `this === undefined` during SSR and
+  // blank-screens /console; the snapshot must be a bound/arrow member.
+  const { getState, subscribe } = controller;
+  const snap = getState();
+  assert.equal(snap.step, "account");
+  assert.equal(getState(), snap);
+  const unsubscribe = subscribe(() => {});
+  assert.equal(typeof unsubscribe, "function");
+  unsubscribe();
+});
+
 /** Drives a fresh controller through account → character → role → directive. */
 async function toMindStep(c: ConsoleController, name = "Wren") {
   await c.createAccount();
-  c.getState().tokenRevealed && c.confirmTokenSaved();
+  if (c.getState().tokenRevealed) c.confirmTokenSaved();
   c.startNewCharacter();
   c.updateForm({ name });
   await c.submitName();
@@ -77,7 +91,9 @@ test("account: free creation, token shown once, no billing anywhere", async () =
   assert.equal(c.getState().step, "account");
   await c.createAccount();
   const s = c.getState();
-  assert.equal(s.step, "character");
+  // The one-time reveal renders only on the account step, so creation must
+  // STAY there until the owner confirms the token is saved.
+  assert.equal(s.step, "account");
   assert.equal(s.tokenRevealed, true);
   assert.ok(s.account !== null);
   assert.equal(s.account.billing.plan, "beta-free");
@@ -85,8 +101,37 @@ test("account: free creation, token shown once, no billing anywhere", async () =
   assert.equal(s.manifest?.packs.length, 4);
   c.confirmTokenSaved();
   assert.equal(c.getState().tokenRevealed, false);
+  assert.equal(c.getState().step, "character");
   const screenText = JSON.stringify(c.getState());
   assert.equal(screenText.includes("billing") && screenText.includes("card"), false);
+});
+
+test("character list stays current: creation appends, lifecycle syncs, rename upserts", async () => {
+  const { controller: c } = harness();
+  await c.createAccount();
+  c.confirmTokenSaved();
+  c.startNewCharacter();
+  c.updateForm({ name: "Listy" });
+  await c.submitName();
+  // The character step lists prior characters for resume; a freshly created
+  // character must appear without a round-trip back through account resume.
+  assert.equal(c.getState().characters.length, 1);
+  assert.equal(c.getState().characters[0].character.name, "Listy");
+  await c.submitRole("ranger");
+  c.updateForm({ directive: "Stay listed." });
+  await c.submitDirective();
+  c.updateMindForm({ kind: "local", local: { endpointUrl: "http://127.0.0.1:11434/v1", model: "llama3" } });
+  await c.submitMind();
+  await c.unleashNow();
+  assert.equal(c.getState().characters[0].character.lifecycle, "unleashed");
+  await c.recallNow();
+  assert.equal(c.getState().characters[0].character.lifecycle, "recalled");
+  const id = c.getState().characters[0].character.id;
+  await c.selectCharacter(id);
+  c.updateForm({ name: "Listy II" });
+  await c.submitName();
+  assert.equal(c.getState().characters.length, 1); // upsert, not duplicate
+  assert.equal(c.getState().characters[0].character.name, "Listy II");
 });
 
 test("account: bad resume token is rejected with a clear error", async () => {

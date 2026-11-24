@@ -23,7 +23,6 @@
  */
 import { AUTOPILOT_COPY, type Account, type CloudProvider, type FieldError, type MindConfig, type RoleId } from "../../game/agent/account.ts";
 import {
-  ConsoleApiError,
   isConsoleApiError,
   validateDirectiveValue,
   validateMindConfigV1,
@@ -253,9 +252,11 @@ export class ConsoleController {
     };
   }
 
-  getState(): ConsoleState {
+  // Arrow member, not a prototype method: useSyncExternalStore calls the
+  // snapshot bare (no receiver), so an unbound `this` blank-screens SSR.
+  getState = (): ConsoleState => {
     return this.state;
-  }
+  };
 
   subscribe = (fn: () => void): (() => void) => {
     this.listeners.add(fn);
@@ -344,7 +345,8 @@ export class ConsoleController {
     this.set({ error: null });
     if (this.state.view) {
       try {
-        this.set({ view: await this.deps.api.getCharacter(this.state.view.character.id) });
+        const fresh = await this.deps.api.getCharacter(this.state.view.character.id);
+        this.set({ view: fresh, characters: this.withCharacter(fresh) });
       } catch {
         /* proceed with the last known revision */
       }
@@ -373,7 +375,9 @@ export class ConsoleController {
         this.accountIdemKey = null;
         const manifest = await this.deps.api.listRoles().catch(() => null);
         const { characters } = await this.deps.api.listCharacters();
-        this.set({ busy: false, account, tokenRevealed: true, manifest, characters, step: "character" });
+        // Stay on the account step: the one-time token reveal renders only
+        // there. confirmTokenSaved() advances to the character step.
+        this.set({ busy: false, account, tokenRevealed: true, manifest, characters, step: "account" });
       } catch (e) {
         this.captureError(e, run);
       }
@@ -404,7 +408,17 @@ export class ConsoleController {
   }
 
   confirmTokenSaved(): void {
-    this.set({ tokenRevealed: false });
+    this.set({ tokenRevealed: false, step: "character" });
+  }
+
+  /** Upsert the resume list so it stays current without a host round-trip. */
+  private withCharacter(view: CharacterView): CharacterView[] {
+    const list = this.state.characters;
+    const i = list.findIndex((entry) => entry.character.id === view.character.id);
+    if (i === -1) return [...list, view];
+    const next = list.slice();
+    next[i] = view;
+    return next;
   }
 
   logout(): void {
@@ -448,10 +462,10 @@ export class ConsoleController {
         const form = formFromView(view, this.state.form);
         if (view.character.lifecycle === "unleashed") {
           const status = await this.deps.api.status(id).catch(() => null);
-          this.set({ busy: false, view, form, status, step: "status" });
+          this.set({ busy: false, view, characters: this.withCharacter(view), form, status, step: "status" });
           this.startPolling();
         } else {
-          this.set({ busy: false, view, form, step: "review" });
+          this.set({ busy: false, view, characters: this.withCharacter(view), form, step: "review" });
         }
       } catch (e) {
         this.captureError(e, run);
@@ -505,13 +519,13 @@ export class ConsoleController {
             name: this.state.form.name.trim(),
           });
           this.characterIdemKey = null;
-          this.set({ busy: false, view: created, step: "role" });
+          this.set({ busy: false, view: created, characters: this.withCharacter(created), step: "role" });
         } else {
           const updated = await this.deps.api.patchCharacter(view.character.id, {
             name: this.state.form.name.trim(),
             expectedRevision: view.character.revision,
           });
-          this.set({ busy: false, view: updated, step: "role" });
+          this.set({ busy: false, view: updated, characters: this.withCharacter(updated), step: "role" });
         }
         this.persistDraft();
       } catch (e) {
@@ -532,7 +546,7 @@ export class ConsoleController {
           roleId,
           expectedRevision: view.character.revision,
         });
-        this.set({ busy: false, view: updated, step: "directive" });
+        this.set({ busy: false, view: updated, characters: this.withCharacter(updated), step: "directive" });
       } catch (e) {
         await this.handleMutationError(e, run);
       }
@@ -555,7 +569,7 @@ export class ConsoleController {
           directive: this.state.form.directive,
           expectedRevision: view.character.revision,
         });
-        this.set({ busy: false, view: updated, step: "mind" });
+        this.set({ busy: false, view: updated, characters: this.withCharacter(updated), step: "mind" });
         this.persistDraft();
       } catch (e) {
         await this.handleMutationError(e, run);
@@ -609,7 +623,7 @@ export class ConsoleController {
                 /* fall through to the recoverable error below */
               }
               if (current.publicMind?.secretHint === "configured") {
-                this.set({ busy: false, view: current, step: "review", notice: "Key stored." });
+                this.set({ busy: false, view: current, characters: this.withCharacter(current), step: "review", notice: "Key stored." });
                 return;
               }
             }
@@ -618,7 +632,7 @@ export class ConsoleController {
           this.updateMindForm({ cloud: { key: "" } });
           current = await this.deps.api.getCharacter(view.character.id);
         }
-        this.set({ busy: false, view: current, step: "review" });
+        this.set({ busy: false, view: current, characters: this.withCharacter(current), step: "review" });
         this.persistDraft();
       } catch (e) {
         // S8: a recoverable failure keeps the non-secret form but the key
@@ -643,7 +657,7 @@ export class ConsoleController {
           this.deps.api.getCharacter(view.character.id),
           this.deps.api.status(view.character.id),
         ]);
-        this.set({ busy: false, view: fresh, status, step: "status" });
+        this.set({ busy: false, view: fresh, characters: this.withCharacter(fresh), status, step: "status" });
         this.startPolling();
       } catch (e) {
         await this.handleMutationError(e, run);
@@ -663,7 +677,7 @@ export class ConsoleController {
           this.deps.api.getCharacter(view.character.id),
           this.deps.api.status(view.character.id),
         ]);
-        this.set({ busy: false, view: fresh, status, notice: `${fresh.character.name} was recalled. Nothing is lost — unleash resumes it.` });
+        this.set({ busy: false, view: fresh, characters: this.withCharacter(fresh), status, notice: `${fresh.character.name} was recalled. Nothing is lost — unleash resumes it.` });
       } catch (e) {
         await this.handleMutationError(e, run);
       }
@@ -713,7 +727,7 @@ export class ConsoleController {
     if (isConsoleApiError(e) && e.code === "REVISION_CONFLICT" && this.state.view) {
       try {
         const fresh = await this.deps.api.getCharacter(this.state.view.character.id);
-        this.set({ view: fresh, notice: "This character changed elsewhere — the latest version is loaded." });
+        this.set({ view: fresh, characters: this.withCharacter(fresh), notice: "This character changed elsewhere — the latest version is loaded." });
       } catch {
         /* the original error stands */
       }
