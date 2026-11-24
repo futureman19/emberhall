@@ -10,7 +10,8 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { SKILL_META, LIVE_SKILLS } from "../catalog.ts";
+import {SKILL_META, LIVE_SKILLS, emptySkills } from "../catalog.ts";
+import { ROLE_IDS, isRoleId } from "./account.ts";
 import { PLACES } from "../atlas.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
@@ -197,3 +198,30 @@ for (const [file, doc] of packs) {
     }
   });
 }
+
+test("role manifest packs.json is version 1 and matches the authored spread", () => {
+  assert.ok(readdirSync(packDir).includes("packs.json"), "agent-packs/packs.json must exist");
+  const manifest = JSON.parse(readFileSync(join(packDir, "packs.json"), "utf8")) as {
+    version: number;
+    roles: { id: string; label: string; summary: string; file: string; startingSkills: Record<string, number> }[];
+  };
+  assert.equal(manifest.version, 1, "manifest version is 1 (v1 §4)");
+  assert.deepEqual(
+    manifest.roles.map((r) => r.id).sort(),
+    [...ROLE_IDS].sort(),
+    "manifest covers exactly the four role ids",
+  );
+  const spread = emptySkills();
+  for (const role of manifest.roles) {
+    assert.ok(isRoleId(role.id), `role id ${role.id} is a known RoleId`);
+    assert.ok(role.label.trim().length > 0, `${role.id}: label present`);
+    assert.ok(role.summary.trim().length > 0, `${role.id}: summary present`);
+    assert.equal(role.file, `agent-packs/${role.id}.md`, `${role.id}: file points at its authored pack`);
+    assert.ok(readdirSync(packDir).includes(`${role.id}.md`), `${role.id}: authored pack exists`);
+    assert.deepEqual(role.startingSkills, spread, `${role.id}: startingSkills equals the authored spread`);
+    for (const [skill, value] of Object.entries(role.startingSkills)) {
+      assert.ok(skill in SKILL_META, `${role.id}: skill ${skill} is a real SkillId`);
+      assert.ok(Number.isFinite(value) && value >= 0 && value <= 100, `${role.id}: ${skill} within 0..100`);
+    }
+  }
+});

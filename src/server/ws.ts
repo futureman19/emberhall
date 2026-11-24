@@ -1,4 +1,5 @@
 import { createServer } from "node:http";
+import type { IncomingMessage, ServerResponse } from "node:http";
 import { WebSocket, WebSocketServer } from "ws";
 import type { Intent } from "../game/types.ts";
 import type { createShard, VerbRequest } from "./shard.ts";
@@ -20,9 +21,13 @@ function intentShape(value: unknown): value is Intent {
 /** Only key bindings cross into the shard; client identity fields are ignored.
  * Ack means queue admission, not completion of a simulated action.
  */
-export function createTransport(shard: Shard) {
+export function createTransport(shard: Shard, director?: { handle(req: IncomingMessage, res: ServerResponse): Promise<void> }) {
   const started = performance.now();
   const server = createServer((req, res) => {
+    if (director && req.url && req.url.split("?")[0].startsWith("/api/v1/")) {
+      void director.handle(req, res);
+      return;
+    }
     if (req.method === "GET" && req.url === "/healthz") {
       res.writeHead(200, { "content-type": "application/json", "cache-control": "no-store" });
       res.end(JSON.stringify({ ok: true, ...shard.status(), uptimeSec: (performance.now() - started) / 1000 }));
