@@ -50,7 +50,7 @@ function waterWorld(thirst = THIRST_START): World {
   world.people.push(player);
   // Mirror shard admission (src/server/shard.ts): the admitted actor's state
   // is projected into playerStates so save round-trips exercise the alias.
-  world.playerStates[player.id] = { ...structuredClone(world.player), id: player.id };
+  world.playerStates![player.id] = { ...structuredClone(world.player), id: player.id };
   world.tiles[40]![41]!.kind = "water";
   player.thirst = thirst;
   return world;
