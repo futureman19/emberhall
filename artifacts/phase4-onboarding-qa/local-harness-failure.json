@@ -1,0 +1,15 @@
+{
+  "environment": "real providers, real shard, dev browser UI; no fixtures",
+  "dataDir": "C:\\Users\\futur\\AppData\\Local\\Temp\\phase4-live-L5JeEd",
+  "events": [],
+  "errors": [],
+  "gate": "NOT_PASSED",
+  "cloud": "BLOCKED invalid_api_key",
+  "fullDay": "NOT_VERIFIED",
+  "failure": {
+    "name": "TimeoutError",
+    "message": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('create-account')\u001b[22m\n"
+  },
+  "providerCalls": 0,
+  "reservedEnvelopeMicros": 0
+}

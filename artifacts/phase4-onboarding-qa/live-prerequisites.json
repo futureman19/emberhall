@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-11-24T05:50:06.139Z",
+  "capUsd": 0.25,
+  "cloud": {
+    "httpStatus": 401,
+    "errorCode": "invalid_api_key"
+  },
+  "local": {
+    "httpStatus": 200,
+    "models": [
+      "huihui_ai/qwen3-abliterated:8b"
+    ],
+    "errorCode": null
+  },
+  "reflex": {
+    "success": true,
+    "answers": [
+      {
+        "id": "ready",
+        "type": "choice",
+        "probabilities": [
+          0.97,
+          0.03
+        ],
+        "pick": 0
+      }
+    ],
+    "requests": 1,
+    "wireBytes": 198,
+    "httpStatus": 200,
+    "accounting": {
+      "agentId": "phase4-prerequisite",
+      "day": "2026-11-24",
+      "capMicros": 10000,
+      "spentMicros": 14,
+      "reservedMicros": 0,
+      "remainingMicros": 9986,
+      "openReservations": 0
+    },
+    "reservedProbeEnvelopeUsd": 0.01,
+    "price": {
+      "tableId": "typesafe-jev",
+      "model": "jev-1.14.0",
+      "currency": "USD",
+      "promptPerMTok": 0.042,
+      "completionPerMTok": 0,
+      "source": "https://docs.typesafe.ai/models rate card ($0.042/Mtok input, output free)",
+      "capturedAt": "2026-11-21",
+      "notes": "Public per-input-token rate rechecked at source; output free. No volume discounts assumed. Account-specific billing and missing-usage estimates require review."
+    }
+  },
+  "onboardingSeconds": null,
+  "gate": "NOT_PASSED"
+}
