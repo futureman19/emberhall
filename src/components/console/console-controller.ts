@@ -183,6 +183,14 @@ export function deriveBanner(status: CharacterStatusV1 | null, name: string): Co
       text: `Autopilot unavailable — ${reason}. ${name} is holding position; no instincts are driving it right now.`,
     };
   }
+  if (status.mindState === "error") {
+    const remedy = status.reasonCode === "MIND_AUTH"
+      ? "Replace the cloud key or check its provider permissions."
+      : status.reasonCode === "MIND_INVALID_RESPONSE"
+        ? "Choose a compatible JSON-capable model and check the endpoint response format."
+        : "Check the mind configuration, model and endpoint.";
+    return { kind: "degraded", text: `Mind connection needs attention. ${remedy} Reflexes remain active; edit the character from the mind step, or recall it to stop autonomous actions.` };
+  }
   if (status.mindState === "asleep" && status.driver === "reflex") {
     return { kind: "autopilot", text: AUTOPILOT_COPY.banner(name) };
   }

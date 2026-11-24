@@ -106,6 +106,8 @@ export function createMeteredReflexBackend(opts: {
   backoffMs?: number;
   sleep?: (ms: number) => Promise<void>;
   now?: () => number;
+  /** Host recall closes admission to subsequent internal retries. */
+  isActive?: () => boolean;
 }): MeteredReflexBackend {
   const backend = createJevBackend({ ...opts.jev, maxRetries: 0 });
   const maxRetries = Math.max(0, Math.min(5, Math.floor(opts.maxRetries ?? 2)));
@@ -153,6 +155,7 @@ export function createMeteredReflexBackend(opts: {
       let firstAttemptId: string | null = null;
       let lastError: string | null = null;
       for (let n = 0; n <= maxRetries; n++) {
+        if (opts.isActive?.() === false) throw new Error("reflex runtime stopped");
         lastRaw = null;
         let metered;
         try {

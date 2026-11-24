@@ -38,11 +38,11 @@ test("flag: only the exact string 'true' enables the console", () => {
   }
 });
 
-test("runtime: default is the contract mock; 'http' selects the live client", () => {
-  assert.equal(resolveConsoleRuntimeKind(undefined), "mock");
+test("runtime: real HTTP is default; only explicit mock selects simulation", () => {
+  assert.equal(resolveConsoleRuntimeKind(undefined), "http");
   assert.equal(resolveConsoleRuntimeKind("mock"), "mock");
   assert.equal(resolveConsoleRuntimeKind("http"), "http");
-  assert.equal(resolveConsoleRuntimeKind("HTTP"), "mock"); // closed value, no coercion
+  assert.equal(resolveConsoleRuntimeKind("HTTP"), "http"); // closed value, no coercion
   const mockLabel = runtimeLabel("mock");
   assert.ok(mockLabel !== null && mockLabel.length > 0);
   assert.ok(/preview|mock/i.test(mockLabel)); // never imply a live shard

@@ -29,7 +29,13 @@ export const MIND_TIMEOUT_MS = 20_000;
 export interface MindExchangeOptions {
   /** Override the per-attempt timeout (tests use a small value). */
   timeoutMs?: number;
+  /** Owner recall / runtime shutdown. Cancellation is terminal, never retried. */
+  signal?: AbortSignal;
 }
+
+export type MindExchangeOutcome =
+  | { ok: true; response: MindResponse }
+  | { ok: false; reasonCode: "MIND_UNREACHABLE" | "MIND_INVALID_RESPONSE" | "MIND_AUTH" | "MIND_CANCELLED" };
 
 /** Wire shape only — same kind set as save.ts, same bounds as intent.ts.
  *  Missing nullable refs normalize to null; reach and legality stay the
@@ -82,35 +88,84 @@ export function parseMindResponse(raw: string): MindResponse | null {
   };
 }
 
+const CALL_TIMEOUT = Symbol("mind timeout");
+const CALL_CANCELLED = Symbol("mind cancelled");
+
 async function callWithTimeout(
   req: MindRequest,
   adapter: MindAdapter,
   timeoutMs: number,
+  signal?: AbortSignal,
 ): Promise<string> {
   const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  let cancel = () => {};
+  const interrupted = new Promise<never>((_resolve, reject) => {
+    cancel = () => {
+      reject(CALL_CANCELLED);
+      ctrl.abort(); // Do not forward the owner's potentially private abort reason.
+    };
+    signal?.addEventListener("abort", cancel, { once: true });
+    if (signal?.aborted) cancel();
+    timer = setTimeout(() => {
+      reject(CALL_TIMEOUT);
+      ctrl.abort();
+    }, timeoutMs);
+  });
   try {
-    return await adapter.complete(assembleMindMessages(req), ctrl.signal);
+    // Race even adapters that ignore AbortSignal. Promise.race also observes
+    // late rejections, so a timed-out transport cannot leak an unhandled error.
+    const completion = Promise.resolve().then(() => {
+      if (signal?.aborted) throw CALL_CANCELLED;
+      return adapter.complete(assembleMindMessages(req), ctrl.signal);
+    });
+    return await Promise.race([interrupted, completion]);
   } finally {
     clearTimeout(timer);
+    signal?.removeEventListener("abort", cancel);
   }
 }
 
+/** Explicit, sanitized outcomes for runtime accounting. At most two attempts;
+ * malformed replies, auth failures and owner recall are terminal. */
+export async function runMindExchangeOutcome(
+  req: MindRequest,
+  adapter: MindAdapter,
+  opts: MindExchangeOptions = {},
+): Promise<MindExchangeOutcome> {
+  const timeoutMs = opts.timeoutMs ?? MIND_TIMEOUT_MS;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    if (opts.signal?.aborted) return { ok: false, reasonCode: "MIND_CANCELLED" };
+    try {
+      const raw = await callWithTimeout(req, adapter, timeoutMs, opts.signal);
+      if (opts.signal?.aborted) return { ok: false, reasonCode: "MIND_CANCELLED" };
+      const response = typeof raw === "string" ? parseMindResponse(raw) : null;
+      return response
+        ? { ok: true, response }
+        : { ok: false, reasonCode: "MIND_INVALID_RESPONSE" };
+    } catch (error) {
+      if (opts.signal?.aborted || error === CALL_CANCELLED) {
+        return { ok: false, reasonCode: "MIND_CANCELLED" };
+      }
+      // Only the adapter's exact, body-free status messages are recognized.
+      if (error instanceof Error &&
+          (error.message === "mind endpoint HTTP 401" || error.message === "mind endpoint HTTP 403")) {
+        return { ok: false, reasonCode: "MIND_AUTH" };
+      }
+      // Unknown failures and timeouts retry once; never return raw errors.
+    }
+  }
+  return { ok: false, reasonCode: "MIND_UNREACHABLE" };
+}
+
+/** Compatibility API: callers without outcome accounting retain standing goals. */
 export async function runMindExchange(
   req: MindRequest,
   adapter: MindAdapter,
   opts: MindExchangeOptions = {},
 ): Promise<MindResponse> {
-  const timeoutMs = opts.timeoutMs ?? MIND_TIMEOUT_MS;
-  const fallback: MindResponse = { goals: req.goals, journalEntry: "", intentHints: [] };
-  let raw: string | null = null;
-  for (let attempt = 0; attempt < 2 && raw === null; attempt++) {
-    try {
-      raw = await callWithTimeout(req, adapter, timeoutMs);
-    } catch {
-      raw = null; // network failure / timeout / HTTP error: one retry, then degrade
-    }
-  }
-  if (raw === null) return fallback;
-  return parseMindResponse(raw) ?? fallback;
+  const outcome = await runMindExchangeOutcome(req, adapter, opts);
+  return outcome.ok
+    ? outcome.response
+    : { goals: req.goals, journalEntry: "", intentHints: [] };
 }

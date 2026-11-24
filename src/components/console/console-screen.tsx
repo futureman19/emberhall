@@ -120,13 +120,13 @@ function BusyNote({ busy }: { busy: boolean }) {
 }
 
 export interface ConsoleScreenProps {
-  /** "mock" (default) drives the contract preview; "http" targets the live host. */
+  /** "http" (default) targets the live host; explicit "mock" is a contract preview. */
   runtime?: ConsoleRuntimeKind;
   /** Optional injected client (tests / host integration). */
   api?: ConsoleApi;
 }
 
-export function ConsoleScreen({ runtime = "mock", api }: ConsoleScreenProps) {
+export function ConsoleScreen({ runtime = "http", api }: ConsoleScreenProps) {
   const [controller] = useState(() => {
     const getToken = readToken;
     const client =

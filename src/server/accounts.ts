@@ -153,6 +153,14 @@ export interface RuntimeStatus {
   configRevision?: number;
 }
 
+export interface RuntimeServices {
+  character(id: string): Character;
+  readSecret(id: string): string | null;
+  journalTail(id: string): string[];
+  appendJournal(id: string, source: "mind" | "system", text: string): unknown;
+  recordDecision(row: import("../game/agent/types.ts").DecisionLogRow): void;
+}
+
 export interface RuntimePort {
   ensureAgent(character: Character, operationId: string): { ok: boolean; reason?: string };
   stopAgent(characterId: string): void;
@@ -245,6 +253,7 @@ export interface DirectorOptions {
   /** 32-byte operator key, held outside the data directory (env/config). */
   secretKey?: Buffer | null;
   runtime?: RuntimePort;
+  runtimeFactory?: (services: RuntimeServices) => RuntimePort;
   policy?: EndpointPolicy;
   defaultModel?: string | null;
   allowedOrigins?: string[];
@@ -258,7 +267,7 @@ export function createDirector(opts: DirectorOptions) {
   const { dataDir, shard } = opts;
   const secretKey = opts.secretKey ?? null;
   if (secretKey && secretKey.length !== 32) throw new Error("Director secretKey must be 32 bytes");
-  const runtime = opts.runtime ?? passiveRuntimePort;
+  let runtime = opts.runtime ?? passiveRuntimePort;
   const policy: EndpointPolicy = opts.policy ?? { allowPrivateEndpoints: false };
   const defaultModel = opts.defaultModel ?? null;
   const allowedOrigins = opts.allowedOrigins ?? DEFAULT_DEV_ORIGINS;
@@ -655,7 +664,8 @@ export function createDirector(opts: DirectorOptions) {
 
   function updateCharacter(accountId: string, id: string, body: unknown): CharacterView {
     rateLimit(`mut:${accountId}`, mutationsPerMinute, 60 * 1000);
-    const character = ownedCharacter(accountId, id);
+    const stored = ownedCharacter(accountId, id);
+    const character = structuredClone(stored);
     const b = (body ?? {}) as Record<string, unknown>;
     closedKeys(b, ["expectedRevision", "name", "roleId", "directive", "mind"]);
     parseExpectedRevision(b, character);
@@ -682,9 +692,13 @@ export function createDirector(opts: DirectorOptions) {
       }
       character.mind = parseMindField(b.mind);
     }
+    if (character.lifecycle === "unleashed" && readinessErrors(character, readinessCtx(id)).length) {
+      throw fail("RECALL_REQUIRED", "Recall the character before making its configuration incomplete.");
+    }
     refreshReadiness(character);
-    bump(character);
-    return view(character);
+    Object.assign(stored, character);
+    bump(stored);
+    return view(stored);
   }
 
   function putMindSecret(accountId: string, id: string, body: unknown): void {
@@ -1014,6 +1028,14 @@ export function createDirector(opts: DirectorOptions) {
       sendError(res, err);
     }
   }
+
+  if (opts.runtimeFactory) runtime = opts.runtimeFactory({
+    character: id => structuredClone(findCharacter(id)),
+    readSecret,
+    journalTail: id => journalEntries(id).slice(-10).map(e => e.text),
+    appendJournal,
+    recordDecision: row => appendFileSync(join(dataDir, "director-decisions.jsonl"), `${JSON.stringify(row)}\n`, { encoding: "utf8", mode: 0o600 }),
+  });
 
   return {
     handle, recover, createAccount, createCharacter, listCharacters, getCharacter,

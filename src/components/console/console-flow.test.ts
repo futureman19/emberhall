@@ -17,6 +17,17 @@ import {
 
 const IDEM = "flow-idem-key-0001";
 
+test("mind failures offer sanitized recovery guidance while reflexes continue", () => {
+  const status = { characterId: "fixture", lifecycle: "unleashed" as const, driver: "reflex" as const,
+    mindState: "error" as const, runtimeState: "degraded" as const, reflexState: "ready" as const,
+    reasonCode: "MIND_AUTH", autopilotSince: 1, lastMindExchangeTick: null, lastReflexTick: 2,
+    lastAppliedActionTick: 2, configRevision: 1, body: null, journalTail: [] };
+  assert.match(deriveBanner(status, "Runner")?.text ?? "", /replace.*key/i);
+  assert.match(deriveBanner({ ...status, reasonCode: "MIND_INVALID_RESPONSE" }, "Runner")?.text ?? "", /compatible.*model/i);
+  assert.match(deriveBanner({ ...status, reasonCode: "private-upstream-detail" }, "Runner")?.text ?? "", /check.*configuration/i);
+  assert.doesNotMatch(deriveBanner({ ...status, reasonCode: "private-upstream-detail" }, "Runner")?.text ?? "", /private-upstream/);
+});
+
 function memStorage(): ConsoleStorage & { map: Map<string, string> } {
   const map = new Map<string, string>();
   return {

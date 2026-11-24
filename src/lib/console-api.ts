@@ -1,13 +1,11 @@
 /**
  * Phase 4 director console — v1 API client and wire types.
  *
- * Source of truth: `docs/phase-4-contracts-v1.md`. The shared scaffold
- * `src/game/agent/account.ts` is v0; the host worker (t_2cc15c31) aligns it
- * to v1. Until then the console carries its v1 wire shapes HERE rather than
- * editing the host-owned hotspot file. Stable v0 primitives (RoleId,
- * Lifecycle, MindConfig, limits) are imported from the shared file; the v1
- * deltas (Character.revision, CharacterView/PublicMind, the extended status
- * overlay, the request/response DTOs, error envelope) live in this module.
+ * Source of truth: `docs/phase-4-contracts-v1.md` and the host's shared
+ * `src/game/agent/account.ts`. Console view shapes remain stable for the
+ * controller and mocks; the HTTP boundary explicitly translates host DTOs
+ * (characterId, roles, accountId) into those internal shapes (id, packs,
+ * account). These internal interfaces are not the host wire contract.
  *
  * Security rules baked in:
  *  - secrets are write-only (PUT mind-secret) and never appear in any type
@@ -19,6 +17,8 @@
 import { CLOUD_PROVIDERS, DIRECTIVE_MAX, ENDPOINT_URL_MAX, NAME_MAX } from "../game/agent/account.ts";
 import type {
   Account,
+  CharacterView as HostCharacterView,
+  RolePackManifest as HostRolePackManifest,
   FieldError,
   Lifecycle,
   MindConfig,
@@ -325,6 +325,29 @@ export interface ConsoleHttpOptions {
   fetchImpl?: typeof fetch;
 }
 
+// The account-create route intentionally omits the durable creation time.
+// Preserve the internal Account shape with 0 meaning unknown, never Date.now()
+// (which would invent a timestamp and change on idempotent replay).
+interface HostCreateAccountResponse {
+  accountId: string;
+  ownerToken: string;
+  billing: Account["billing"];
+}
+
+function characterFromHost(view: HostCharacterView): CharacterView {
+  const c = view.character;
+  return {
+    character: {
+      id: c.characterId, accountId: c.accountId, name: c.name,
+      roleId: c.roleId, directive: c.directive, mind: c.mind,
+      lifecycle: c.lifecycle, revision: c.revision,
+      createdAt: c.createdAt, updatedAt: c.updatedAt,
+      unleashedAt: c.unleashedAt, recalledAt: c.recalledAt,
+    },
+    publicMind: view.publicMind,
+  };
+}
+
 const JSON_HEADERS = { "Content-Type": "application/json" } as const;
 
 export function createConsoleHttpApi(opts: ConsoleHttpOptions): ConsoleApi {
@@ -386,14 +409,23 @@ export function createConsoleHttpApi(opts: ConsoleHttpOptions): ConsoleApi {
   }
 
   return {
-    createAccount: ({ idempotencyKey }) =>
-      call("POST", "/api/v1/accounts", {}, { idempotencyKey }),
-    listRoles: () => call("GET", "/api/v1/roles", undefined),
-    listCharacters: () => call("GET", "/api/v1/characters", undefined),
-    createCharacter: ({ idempotencyKey, ...body }) =>
-      call("POST", "/api/v1/characters", body, { idempotencyKey }),
-    getCharacter: (id) => call("GET", `/api/v1/characters/${id}`, undefined),
-    patchCharacter: (id, patch) => call("PATCH", `/api/v1/characters/${id}`, patch),
+    createAccount: async ({ idempotencyKey }) => {
+      const wire = await call<HostCreateAccountResponse>("POST", "/api/v1/accounts", {}, { idempotencyKey });
+      return { account: { id: wire.accountId, createdAt: 0, billing: wire.billing }, ownerToken: wire.ownerToken };
+    },
+    listRoles: async () => {
+      // The host serves the v1 manifest entries but omits its version field.
+      const wire = await call<Pick<HostRolePackManifest, "roles">>("GET", "/api/v1/roles", undefined);
+      return { version: 1, packs: wire.roles };
+    },
+    listCharacters: async () => {
+      const wire = await call<{ characters: HostCharacterView[] }>("GET", "/api/v1/characters", undefined);
+      return { characters: wire.characters.map(characterFromHost) };
+    },
+    createCharacter: async ({ idempotencyKey, ...body }) =>
+      characterFromHost(await call<HostCharacterView>("POST", "/api/v1/characters", body, { idempotencyKey })),
+    getCharacter: async (id) => characterFromHost(await call<HostCharacterView>("GET", `/api/v1/characters/${id}`, undefined)),
+    patchCharacter: async (id, patch) => characterFromHost(await call<HostCharacterView>("PATCH", `/api/v1/characters/${id}`, patch)),
     putMindSecret: (id, args) => call("PUT", `/api/v1/characters/${id}/mind-secret`, args),
     deleteMindSecret: (id, args) => call("DELETE", `/api/v1/characters/${id}/mind-secret`, args),
     unleash: (id, args) => call("POST", `/api/v1/characters/${id}/unleash`, args),

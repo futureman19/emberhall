@@ -118,6 +118,7 @@ export function createShard(config: ShardConfig = shardConfig(), options: {
   const savePath = join(config.dataDir, "shard-save.json");
   const registryPath = join(config.dataDir, "characters.json");
   const restored = existsSync(savePath) ? decodeSave(readFileSync(savePath, "utf8")) : null;
+  if (!restored && existsSync(join(config.dataDir, "director-characters.json")) && existsSync(savePath)) throw new Error("Director shard checkpoint is corrupt; refusing to reset durable bodies");
   const world = hydrateWorld(restored ?? createWorld(config.seed));
   if (restored) log(`shard restore tick=${world.tickCount}`);
   else if (existsSync(savePath)) log("shard restore invalid; starting fresh");
@@ -137,6 +138,7 @@ export function createShard(config: ShardConfig = shardConfig(), options: {
     if (id === world.player.id) throw new Error("Hosted identity aliases host camera");
     const body = world.people.find(p => p.id === id);
     if (body?.isPlayer) throw new Error("Hosted identity aliases player body");
+    if (character.key.startsWith("dir-") && (!body || !Object.hasOwn(world.playerStates, id))) throw new Error("Director body checkpoint missing; refusing to reset assets");
     if (!body) {
       const person = createPerson(world, mulberry32(world.seed + characters.indexOf(character)), {
         x: COURT.tx, z: COURT.ty + 1, cls: "ranger", member: true, isPlayer: false, name: character.name,
@@ -158,6 +160,12 @@ export function createShard(config: ShardConfig = shardConfig(), options: {
   let stopped = false;
   let ticksSinceSave = 0;
   const tickListeners = new Set<() => void>();
+  const effectTicks = new Map<string, number>();
+  function actionState(id: string) {
+    const p = world.people.find(p => p.id === id);
+    const s = world.playerStates?.[id];
+    return JSON.stringify([p?.x, p?.z, p?.task, s?.pack, s?.vault, s?.resources, s?.wear, s?.workT]);
+  }
   const known = (id: string) => characters.some(c => c.characterId === id);
   function save() {
     atomicWrite(savePath, encodeSave(world));
@@ -170,6 +178,8 @@ export function createShard(config: ShardConfig = shardConfig(), options: {
   atomicWrite(registryPath, JSON.stringify(characters));
   function step(realDt: number) {
     if (stopped) throw new Error("Shard is stopped");
+    const before = new Map(characters.map(c => [c.characterId, actionState(c.characterId)]));
+    const active = new Set([...queue.map(q => q.characterId), ...verbQueue.map(q => q.characterId), ...characters.filter(c => world.playerStates?.[c.characterId]?.intent.kind !== "none").map(c => c.characterId)]);
     const pending = queue; queue = [];
     for (const item of pending) submitIntent(world, item.intent, item.characterId);
     // Menu verbs drain in the same serialized beat, after intents: a walk
@@ -180,6 +190,7 @@ export function createShard(config: ShardConfig = shardConfig(), options: {
       log(`[verb ${item.characterId}] ${item.req.verb}: ${result ?? "ok"}`);
     }
     tickWorld(world, clampElapsed(realDt));
+    for (const id of active) if (before.get(id) !== actionState(id)) effectTicks.set(id, world.tickCount);
     if (++ticksSinceSave >= SAVE_EVERY_TICKS) save();
     for (const listener of tickListeners) listener();
   }
@@ -194,13 +205,19 @@ export function createShard(config: ShardConfig = shardConfig(), options: {
     let name = body.name;
     if (characters.some(c => c.name === name)) name = `${body.name} (${body.id.slice(-4)})`;
     characters.push({ key: body.key, characterId: body.id, name, createdAt: new Date().toISOString() });
-    const person = createPerson(world, mulberry32(world.seed + characters.length), {
-      x: COURT.tx, z: COURT.ty + 1, cls: "ranger", member: true, isPlayer: false, name,
-    });
-    person.id = body.id;
-    world.people.push(person);
-    const state = { ...structuredClone(template), id: body.id };
-    if (inject) {
+    // A checkpoint can precede its registry rename. Reuse orphaned durable
+    // bodies/state instead of cloning or granting the initial kit again.
+    let person = world.people.find(p => p.id === body.id);
+    if (!person) {
+      person = createPerson(world, mulberry32(world.seed + characters.length), {
+        x: COURT.tx, z: COURT.ty + 1, cls: "ranger", member: true, isPlayer: false, name,
+      });
+      person.id = body.id;
+      world.people.push(person);
+    }
+    const existing = world.playerStates![body.id];
+    const state = existing ?? { ...structuredClone(template), id: body.id };
+    if (inject && !existing) {
       for (const [skill, level] of Object.entries(body.skills)) {
         if (Object.hasOwn(SKILL_META, skill) && typeof level === "number") state.skills[skill as keyof typeof SKILL_META] = level;
       }
@@ -231,6 +248,7 @@ export function createShard(config: ShardConfig = shardConfig(), options: {
     agentBody,
     recallAgent,
     currentTick: () => world.tickCount,
+    lastAppliedActionTick: (id: string) => effectTicks.get(id) ?? null,
     onTick(listener: () => void) {
       tickListeners.add(listener);
       return () => { tickListeners.delete(listener); };

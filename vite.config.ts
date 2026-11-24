@@ -150,11 +150,13 @@ export default defineConfig(({ command, isPreview }) => ({
     host: "0.0.0.0",
     port: 8080,
     strictPort: true,
+    proxy: process.env.EMBERHALL_DIRECTOR_URL ? { "/api/v1": { target: process.env.EMBERHALL_DIRECTOR_URL, changeOrigin: false } } : undefined,
   },
   preview: {
     host: "127.0.0.1",
     port: 8081,
     strictPort: true,
+    proxy: process.env.EMBERHALL_DIRECTOR_URL ? { "/api/v1": { target: process.env.EMBERHALL_DIRECTOR_URL, changeOrigin: false } } : undefined,
   },
   resolve: { tsconfigPaths: true },
   // @1sat/actions@0.0.197 ships an extensionless ESM re-export ('./types') that

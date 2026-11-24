@@ -27,19 +27,18 @@ export function consoleEnabled(flag: unknown): boolean {
 export type ConsoleRuntimeKind = "mock" | "http";
 
 /**
- * Which host the console talks to. Default is the in-memory v1 contract mock
- * so the whole flow is exercisable before the live host lands; `VITE_CONSOLE_API=http`
- * switches the identical controller to the real HTTP client once the host
- * endpoints exist. Closed value — no case coercion.
+ * The live same-origin host is the default. Contract simulation requires
+ * explicit `VITE_CONSOLE_API=mock`; a missing host must fail honestly rather
+ * than silently creating a simulated character.
  */
 export function resolveConsoleRuntimeKind(flag: unknown): ConsoleRuntimeKind {
-  return flag === "http" ? "http" : "mock";
+  return flag === "mock" ? "mock" : "http";
 }
 
 /** Honest label for the active runtime; null when talking to the live host. */
 export function runtimeLabel(kind: ConsoleRuntimeKind): string | null {
   return kind === "mock"
-    ? "Preview host (contract mock) — live shard wiring lands with the host lane."
+    ? "Preview host (contract mock) — no live agent is running."
     : null;
 }
 
