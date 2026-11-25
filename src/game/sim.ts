@@ -11,6 +11,7 @@ import { tickPiles } from "./piles.ts";
 import { tickCampfires } from "./campfire.ts";
 import { tickPets } from "./pets.ts";
 import { replanIntentPath, tickPlayer, you } from "./player.ts";
+import { tickRng } from "./rng.ts";
 import { regrowResourceNodes } from "./resources/state.ts";
 import { tickWeather } from "./weather.ts";
 import { tickZones, zonePersonSlowAt } from "./zones.ts";
@@ -194,11 +195,16 @@ export function tickWorld(world: World, realDt: number) {
       continue;
     }
     followPath(world, p, dt);
-    if (!p.path.length && Math.random() < 0.01) {
-      const dest = nearestWalkable(world, Math.round(p.x) + (Math.random() < 0.5 ? 4 : -4), Math.round(p.z) + (Math.random() < 0.5 ? 3 : -3));
-      if (dest) {
-        const path = astar(world, Math.round(p.x), Math.round(p.z), dest.x, dest.y, 1500);
-        if (path) p.path = path.map((n) => ({ tx: n.x, ty: n.y }));
+    if (!p.path.length) {
+      // Seeded ambient wander: a pure function of (seed, tick, npc id), so
+      // fresh boots of one seed replay bit-identically (survival oracle).
+      const rng = tickRng(world.seed, world.tickCount, p.id, "wander");
+      if (rng() < 0.01) {
+        const dest = nearestWalkable(world, Math.round(p.x) + (rng() < 0.5 ? 4 : -4), Math.round(p.z) + (rng() < 0.5 ? 3 : -3));
+        if (dest) {
+          const path = astar(world, Math.round(p.x), Math.round(p.z), dest.x, dest.y, 1500);
+          if (path) p.path = path.map((n) => ({ tx: n.x, ty: n.y }));
+        }
       }
     }
   }

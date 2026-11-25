@@ -7,6 +7,7 @@ import { gloomTorch } from "./gloomwraith.ts";
 import { commandPick, pickNow } from "./herbs.ts";
 import { addToPile, takeFromPile, tickPiles } from "./piles.ts";
 import { placeZone, tickZones } from "./zones.ts";
+import { tickRng } from "./rng.ts";
 
 function fixture() {
   const world = createStubWorld();
@@ -47,7 +48,13 @@ test("creature strike uses target torch, wards, poison and bite timestamp", () =
   body.hp = 100;
   strikePlayer(world, spawn(world, "gloomwraith", 100, 100), body, body.id);
   assert.equal(body.hp, 99);
-  withRoll(() => strikePlayer(world, spawn(world, "stonecrawl_spider", 100, 100), body, body.id));
+  // Venom is tick-keyed now (ambient determinism): pin a tick whose seeded
+  // roll poisons instead of stubbing Math.random, which it no longer consults.
+  const spider = spawn(world, "stonecrawl_spider", 100, 100);
+  let poisonTick = 0;
+  while (tickRng(world.seed, poisonTick, spider.id, "venom")() >= 0.35) poisonTick++;
+  world.tickCount = poisonTick;
+  strikePlayer(world, spider, body, body.id);
   assert.ok(actor.poisonUntil > world.hour);
   assert.ok(actor.poisonTickAt > world.hour);
   assert.equal(actor.lastBittenAt, world.hour);

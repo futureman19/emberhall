@@ -19,3 +19,28 @@ export function hash2(x: number, y: number, seed: number) {
   const n = Math.sin(x * 127.1 + y * 311.7 + seed * 0.001) * 43758.5453;
   return n - Math.floor(n);
 }
+
+/** Stable 32-bit FNV-1a hash of a key made of string/number parts. */
+export function hashKey(...parts: (string | number)[]): number {
+  let h = 0x811c9dc5;
+  const s = parts.join("\u0000");
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return h >>> 0;
+}
+
+/**
+ * Ambient roll stream for one entity at one tick — a PURE function of
+ * (world seed, tickCount, entity id, purpose). Two fresh boots of the same
+ * seed draw the same values, and no entity's rolls depend on iteration order
+ * or on how many other entities rolled first (unlike a shared stream). This
+ * is what lets the survival replay's strict traceHash stay an exact oracle:
+ * ambient wander no longer injects unseeded Math.random() into the sim.
+ * Nothing here is persisted — the key is entirely derived from saved state,
+ * so a save/load round-trip preserves the stream by construction.
+ */
+export function tickRng(seed: number, tick: number, id: string, purpose: string): () => number {
+  return mulberry32(hashKey(seed, tick, id, purpose));
+}

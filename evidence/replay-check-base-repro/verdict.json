@@ -1,0 +1,301 @@
+{
+  "procedure": "independent strict replay oracle (shared canonicalization, recomputed from raw evidence)",
+  "generatedAt": "2026-11-25T18:34:17.545Z",
+  "liveDir": "evidence/water-survival-live",
+  "replayDir": "evidence/water-survival-replay",
+  "liveRevision": "72e2650bf422fd3c462b5bde8373362e15a1c280",
+  "replayRevision": "73b16cd7193206584223da6fba492b45364202aa",
+  "traceHashBasis": "sha256 over JSON.stringify of each canonical observation {tick,hour,isNight,you:{hp,hunger,thirst,energy,x,z,inWater,drowning,ghost},verbs} joined by newline, then the literal separator line ---decisions---, then canonical decision rows {tick,hour,verb,answer,outcome} joined by newline; wall-clock fields excluded",
+  "pass": false,
+  "safetyIdentical": true,
+  "strictExact": false,
+  "harmlessAmbientOnly": true,
+  "checksPassed": 20,
+  "checksTotal": 22,
+  "hardPassed": 20,
+  "hardTotal": 21,
+  "verbMultiplicityMismatch": 7480,
+  "ambientVerbDelta": {
+    "talk": {
+      "live": 45531,
+      "replay": 40393
+    },
+    "walk": {
+      "live": 294645,
+      "replay": 289507
+    },
+    "hunt": {
+      "live": 61389,
+      "replay": 60912
+    },
+    "tame": {
+      "live": 61389,
+      "replay": 60912
+    },
+    "cast": {
+      "live": 61389,
+      "replay": 60912
+    },
+    "fireball": {
+      "live": 61389,
+      "replay": 60912
+    }
+  },
+  "checks": [
+    {
+      "name": "same seed",
+      "ok": true,
+      "detail": {
+        "live": 20261124,
+        "replay": 20261124
+      },
+      "hard": true
+    },
+    {
+      "name": "same scenario",
+      "ok": true,
+      "detail": {
+        "live": "A",
+        "replay": "A"
+      },
+      "hard": true
+    },
+    {
+      "name": "observation count live == replay",
+      "ok": true,
+      "detail": {
+        "live": 8642,
+        "replay": 8642
+      },
+      "hard": true
+    },
+    {
+      "name": "observation count == counts.observations",
+      "ok": true,
+      "detail": {
+        "live": 8642,
+        "replay": 8642,
+        "liveCount": 8642,
+        "replayCount": 8642
+      },
+      "hard": true
+    },
+    {
+      "name": "vitals/position/water/day-night trajectory identical",
+      "ok": true,
+      "detail": {
+        "vitalsMismatch": 0,
+        "nightMismatch": 0,
+        "firstMismatch": null
+      },
+      "hard": true
+    },
+    {
+      "name": "decision count live == replay",
+      "ok": true,
+      "detail": {
+        "live": 6,
+        "replay": 6
+      },
+      "hard": true
+    },
+    {
+      "name": "decision rows identical (verb/answer/outcome/tick/hour)",
+      "ok": true,
+      "detail": {
+        "decMismatch": 0,
+        "firstDecMismatch": null
+      },
+      "hard": true
+    },
+    {
+      "name": "triggerCounts identical",
+      "ok": true,
+      "detail": {
+        "live": {
+          "boot": 1,
+          "vitals.thirst_critical": 1,
+          "danger.unresolved": 4,
+          "vitals.hunger_low": 1,
+          "vitals.energy_low": 1
+        },
+        "replay": {
+          "boot": 1,
+          "vitals.thirst_critical": 1,
+          "danger.unresolved": 4,
+          "vitals.hunger_low": 1,
+          "vitals.energy_low": 1
+        }
+      },
+      "hard": true
+    },
+    {
+      "name": "counts.decisions identical",
+      "ok": true,
+      "detail": {
+        "live": 6,
+        "replay": 6
+      },
+      "hard": true
+    },
+    {
+      "name": "counts.attempts identical",
+      "ok": true,
+      "detail": {
+        "live": 6,
+        "replay": 6
+      },
+      "hard": true
+    },
+    {
+      "name": "counts.rejections identical",
+      "ok": true,
+      "detail": {
+        "live": 0,
+        "replay": 0
+      },
+      "hard": true
+    },
+    {
+      "name": "counts.interventions identical",
+      "ok": true,
+      "detail": {
+        "live": 0,
+        "replay": 0
+      },
+      "hard": true
+    },
+    {
+      "name": "counts.errors identical",
+      "ok": true,
+      "detail": {
+        "live": 0,
+        "replay": 0
+      },
+      "hard": true
+    },
+    {
+      "name": "budget guard: zero paid, zero provider calls",
+      "ok": true,
+      "detail": {
+        "liveUsd": 0,
+        "replayUsd": 0,
+        "liveCalls": 0,
+        "replayCalls": 0
+      },
+      "hard": true
+    },
+    {
+      "name": "budget cap identical",
+      "ok": true,
+      "detail": {
+        "live": 500000,
+        "replay": 500000
+      },
+      "hard": true
+    },
+    {
+      "name": "budget spent identical",
+      "ok": true,
+      "detail": {
+        "live": 0,
+        "replay": 0
+      },
+      "hard": true
+    },
+    {
+      "name": "water/food/night exposure safety fields identical",
+      "ok": true,
+      "detail": {
+        "exposureMismatch": []
+      },
+      "hard": true
+    },
+    {
+      "name": "acceptance identical",
+      "ok": true,
+      "detail": {
+        "live": {
+          "fullDaySurvival": true,
+          "zeroRejections": true,
+          "zeroInterventions": true,
+          "budgetGuardIntact": true,
+          "waterPressureExposed": true,
+          "waterPressureResponded": true,
+          "pass": true
+        },
+        "replay": {
+          "fullDaySurvival": true,
+          "zeroRejections": true,
+          "zeroInterventions": true,
+          "budgetGuardIntact": true,
+          "waterPressureExposed": true,
+          "waterPressureResponded": true,
+          "pass": true
+        }
+      },
+      "hard": true
+    },
+    {
+      "name": "recomputed live hash == live report.traceHash",
+      "ok": true,
+      "detail": {
+        "recomputed": "2d599eacc9f52f332efa8b3658996f0af2a9eb546aae68bda68778ea00d95b75",
+        "report": "2d599eacc9f52f332efa8b3658996f0af2a9eb546aae68bda68778ea00d95b75"
+      },
+      "hard": true
+    },
+    {
+      "name": "recomputed replay hash == replay report.traceHash",
+      "ok": true,
+      "detail": {
+        "recomputed": "82a993ffaa65d88bad38c243da7339cf0fafb34cb0cc1f8df5dbf09127fd0f77",
+        "report": "82a993ffaa65d88bad38c243da7339cf0fafb34cb0cc1f8df5dbf09127fd0f77"
+      },
+      "hard": true
+    },
+    {
+      "name": "STRICT traceHash live == replay (exact oracle)",
+      "ok": false,
+      "detail": {
+        "live": "2d599eacc9f52f332efa8b3658996f0af2a9eb546aae68bda68778ea00d95b75",
+        "replay": "82a993ffaa65d88bad38c243da7339cf0fafb34cb0cc1f8df5dbf09127fd0f77"
+      },
+      "hard": true
+    },
+    {
+      "name": "ambient verb-offer multiplicity (classified, non-hard)",
+      "ok": false,
+      "detail": {
+        "verbMultiplicityMismatch": 7480,
+        "ambientVerbDelta": {
+          "talk": {
+            "live": 45531,
+            "replay": 40393
+          },
+          "walk": {
+            "live": 294645,
+            "replay": 289507
+          },
+          "hunt": {
+            "live": 61389,
+            "replay": 60912
+          },
+          "tame": {
+            "live": 61389,
+            "replay": 60912
+          },
+          "cast": {
+            "live": 61389,
+            "replay": 60912
+          },
+          "fireball": {
+            "live": 61389,
+            "replay": 60912
+          }
+        }
+      },
+      "hard": false
+    }
+  ]
+}

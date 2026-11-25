@@ -10,7 +10,7 @@ import { COMBAT_BEAT } from "./combat-animation.ts";
 import { astar, nearestWalkable, tileOf } from "./pathfinding.ts";
 import { spawnCorpsePile } from "./piles.ts";
 import { rareMods } from "./rare.ts";
-import { mulberry32 } from "./rng.ts";
+import { mulberry32, tickRng } from "./rng.ts";
 import { playSfx } from "./vale-sfx.ts";
 import { sheltering } from "./weather.ts";
 import { log, nid } from "./world.ts";
@@ -440,7 +440,7 @@ export function strikePlayer(world: World, c: Creature, you: Person, actorId?: s
   if (c.curseUntil && world.hour < c.curseUntil) bite = Math.max(1, Math.floor(bite * (1 - CURSE_BITE_WEAKEN)));
   you.hp = Math.max(0, you.hp - bite);
   state.lastBittenAt = world.hour; // Riposte remembers fresh teeth.
-  if (c.kind === "stonecrawl_spider" && c.hp > 0 && world.hour >= state.poisonUntil && Math.random() < 0.35) {
+  if (c.kind === "stonecrawl_spider" && c.hp > 0 && world.hour >= state.poisonUntil && tickRng(world.seed, world.tickCount, c.id, "venom")() < 0.35) {
     state.poisonUntil = world.hour + POISON_PLAYER_HOURS;
     state.poisonTickAt = world.hour + POISON_TICK_HOURS;
     playSfx("spell_poison", 0.35);
@@ -631,20 +631,24 @@ export function tickEcology(world: World, dt: number) {
     } else if (c.task === "idle" && SHELTER_SEEKERS.has(c.kind)) {
       // The sky cleared — back to grazing.
       c.task = "wander";
-      c.taskUntil = world.hour + 0.2 + Math.random() * 0.6;
+      const rng = tickRng(world.seed, world.tickCount, c.id, "wander");
+      c.taskUntil = world.hour + 0.2 + rng() * 0.6;
     } else if (c.task === "wander" && !c.path.length && world.hour > c.taskUntil) {
+      // Seeded ambient wander: a pure function of (seed, tick, creature id),
+      // so fresh boots of one seed replay bit-identically (survival oracle).
+      const rng = tickRng(world.seed, world.tickCount, c.id, "wander");
       const home = c.home;
       const scale = NIGHT_HUNTERS.has(c.kind) ? 10 : 8;
       const dest = nearestWalkable(
         world,
-        home.tx + Math.floor((Math.random() - 0.5) * scale),
-        home.ty + Math.floor((Math.random() - 0.5) * scale),
+        home.tx + Math.floor((rng() - 0.5) * scale),
+        home.ty + Math.floor((rng() - 0.5) * scale),
       );
       if (dest) {
         const path = astar(world, Math.round(c.x), Math.round(c.z), dest.x, dest.y, 1800);
         if (path) c.path = path.map((n) => ({ tx: n.x, ty: n.y }));
       }
-      c.taskUntil = world.hour + 0.6 + Math.random();
+      c.taskUntil = world.hour + 0.6 + rng();
     }
     if (you && NIGHT_HUNTERS.has(c.kind) && night && !c.ownerId && c.task !== "fight" && !you.ghost && world.hour >= world.player.invisUntil && !(c.blindUntil && world.hour < c.blindUntil)) {
       if (Math.hypot(c.x - you.x, c.z - you.z) < 10) {

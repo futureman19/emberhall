@@ -29,9 +29,16 @@ import { stampFrontier, sceneryReserved } from "./frontier.ts";
 import { stampEmberhallPond } from "./emberhall-pond.ts";
 import { emitConstructionFx } from "./construction-animation.ts";
 
-let nidAcc = 1;
+/** Per-world fallback counter for id allocation. A module-level counter that
+ *  survived across boots made ids (and therefore ambient verb-offer
+ *  multiplicity) depend on how many worlds the process had created — the
+ *  strict replay oracle could not match across repeated boots. The counter
+ *  lives in a WeakMap keyed by the world so the world stays JSON-pure; a
+ *  fresh empty world starts at 1 and a loaded world resumes after its highest
+ *  existing id (initialized on first allocation, then the used-id rescan). */
+const nidAccByWorld = new WeakMap<World, number>();
 export function nid(world: World, prefix: string) {
-  // The process counter is not saved. Reloaded worlds can already contain its
+  // The per-world counter is not saved. Reloaded worlds can already contain its
   // next candidate, so reserve exact live IDs without renaming saved records or
   // advancing the simulation clock. Re-scan on allocation: arrays are mutable.
   const used = new Set<string>([world.player?.id ?? ""]);
@@ -42,11 +49,24 @@ export function nid(world: World, prefix: string) {
     used.add(state.id);
     for (const mark of state.marks ?? []) used.add(mark.id);
   }
+  let acc = nidAccByWorld.get(world);
+  if (acc === undefined) {
+    // First allocation for this world object. A fresh empty boot starts at 1
+    // (ids are a pure function of seed/tick/allocation order). A loaded world
+    // resumes after its highest existing id so new allocations never re-issue
+    // a saved id and the allocator's next candidate is genuinely free.
+    acc = 1;
+    for (const existing of used) {
+      const n = Number(existing.slice(existing.lastIndexOf("-") + 1));
+      if (Number.isFinite(n) && n - world.tickCount + 1 > acc) acc = n - world.tickCount + 1;
+    }
+  }
   let id: string;
   do {
-    nidAcc += 1;
-    id = `${prefix}-${world.tickCount + nidAcc}`;
+    acc += 1;
+    id = `${prefix}-${world.tickCount + acc}`;
   } while (used.has(id));
+  nidAccByWorld.set(world, acc);
   return id;
 }
 
@@ -316,6 +336,9 @@ export function placeBuilding(world: World, kind: BuildingKind, tx: number, ty: 
 }
 
 function baseWorld(seed: number, tiles: Tile[][]): World {
+  // Fresh boots allocate identical ids for identical seeds: nid's counter is
+  // per-world (WeakMap), so a new world object starts at 1 regardless of how
+  // many worlds this process created before (strict replay oracle, t_5465ed80).
   return {
     seed,
     hour: 8,

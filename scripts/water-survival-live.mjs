@@ -18,6 +18,7 @@ import { mkdirSync, existsSync, openSync, writeSync, closeSync, writeFileSync, r
 import { resolve, join } from "node:path";
 import { spawn, execSync } from "node:child_process";
 import { createHash } from "node:crypto";
+import { canonicalObservation, canonicalDecision, traceHash as computeTraceHash, TRACE_HASH_BASIS } from "./lib/replay-trace.mjs";
 import { connectHostFeed } from "../src/game/agent/hostfeed.ts";
 import { createReflexAutopilot } from "../src/game/agent/autopilot.ts";
 import { callReflexMetered } from "../src/game/agent/metering.ts";
@@ -289,7 +290,7 @@ auto.start();
 const unsubscribe = feed.source.subscribe((obs) => {
   if (stopped) return;
   latestObservation = obs; lastObs = obs;
-  canonicalObs.push({ tick: obs.tick, hour: obs.hour, isNight: obs.isNight, you: { hp: obs.you.hp, hunger: obs.you.hunger, thirst: obs.you.thirst, energy: obs.you.energy, x: obs.you.x, z: obs.you.z, inWater: obs.you.inWater, drowning: obs.you.drowning, ghost: obs.you.ghost }, verbs: obs.verbs.map((v) => v.verb) });
+  canonicalObs.push(canonicalObservation(obs));
   const wallMs = Date.now();
   writeSync(obsFd, JSON.stringify({ wallMs, tick: obs.tick, hour: obs.hour, isNight: obs.isNight, you: obs.you, verbs: obs.verbs.map((v) => v.verb), logTail: obs.logTail }) + "\n");
   trackWater(obs);
@@ -343,8 +344,8 @@ finally {
   // Replay-stable canonical trace (wall-clock excluded): sim-keyed vitals +
   // verb menu per observation, plus sim-keyed decision rows. The independent
   // replay card recomputes this hash from its own run with the same seed.
-  const canonicalDecisions = decisions.map((d) => ({ tick: d.observation?.tick, hour: d.observation?.hour, verb: d.row.verb, answer: d.row.answer, outcome: d.row.outcome ?? null }));
-  const traceHash = createHash("sha256").update(canonicalObs.map((o) => JSON.stringify(o)).join("\n") + "\n---decisions---\n" + canonicalDecisions.map((d) => JSON.stringify(d)).join("\n")).digest("hex");
+  const canonicalDecisions = decisions.map((d) => canonicalDecision({ tick: d.observation?.tick, hour: d.observation?.hour, verb: d.row.verb, answer: d.row.answer, outcome: d.row.outcome }));
+  const traceHash = computeTraceHash(canonicalObs, canonicalDecisions);
   const rawEvidenceHashes = {};
   for (const [name, p] of [["attempts", attemptPath], ["trace", join(rawDir, "trace.jsonl")], ["observations", join(rawDir, "observations.jsonl")], ["feed", join(rawDir, "feed.ndjson")], ["shardLog", join(rawDir, "shard.log")]]) {
     if (existsSync(p)) rawEvidenceHashes[name] = createHash("sha256").update(readFileSync(p)).digest("hex");
@@ -375,7 +376,7 @@ finally {
     counts: { observations: r.samples.length, decisions: decisions.length, attempts: calls.length, rejections: rejections.length, interventions: interventions.length, errors: errors.length },
     triggerCounts,
     traceHash,
-    traceHashBasis: "sha256 over JSON.stringify of each canonical observation {tick,hour,isNight,you:{hp,hunger,thirst,energy,x,z,inWater,drowning,ghost},verbs} joined by newline, then the literal separator line ---decisions---, then canonical decision rows {tick,hour,verb,answer,outcome} joined by newline; wall-clock fields excluded",
+    traceHashBasis: TRACE_HASH_BASIS,
     rawEvidenceHashes,
     cost: { totalUsd: 0, totalCostMicros, providerCalls: 0, usage: { promptTokens: 0, completionTokens: 0 }, price: ZERO_PRICE, cadence: { attempts: calls.length, wallSeconds, attemptsPerWallHour: wallSeconds > 0 ? calls.length / (wallSeconds / 3600) : null, observations: r.samples.length, simHours: last ? last.hour - first.hour : null }, projectionNote: "Zero-paid run. The paid wall-day projection is t_0d13c23d's scope; inputs recorded here are attempt cadence, observation count and the zero-tariff price table. The Phase 3.6 paid price record is untouched." },
     samples: hourlySamples, decisions: compactDecisions, calls, rejections, interventions, errors,
