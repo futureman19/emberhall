@@ -14,7 +14,11 @@
 //     safety divergence and never blesses the latter.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { compareRuns, recomputeHash } from "../../scripts/lib/replay-oracle.mjs";
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { gzipSync } from "node:zlib";
+import { compareRuns, recomputeHash, readEvidenceBytes } from "../../scripts/lib/replay-oracle.mjs";
 
 type Obs = { tick: number; hour: number; isNight: boolean; you: Record<string, number | boolean>; verbs: string[] };
 type Dec = { tick: number; hour: number; verb: string | null; answer: string | null; outcome: string | null };
@@ -37,6 +41,7 @@ function makeRun(seed = 20261124) {
     revision: "test-sha",
     initialConditions: { seed },
     scenario: "water-survival",
+    config: { scheduler: { riskGated: true, reflexCooldownTicks: 150 }, price: { tableId: "local-survival-zero", promptPerMTok: 0, completionPerMTok: 0 } },
     counts: { observations: obs.length, decisions: dec.length, attempts: dec.length, rejections: 0, interventions: 0, errors: 0 },
     triggerCounts: { boot: 1, "vitals.thirst_critical": 1 },
     cost: { providerCalls: 0, totalUsd: 0 },
@@ -109,6 +114,8 @@ const safetyCases: Array<[string, (r: ReturnType<typeof makeRun>) => void]> = [
   ["budget guard spend", (r) => { (r.report.budget as { final: { spentMicros: number } }).final.spentMicros = 12345; }],
   ["water exposure safety field", (r) => { (r.report.waterExposure as Record<string, number>).drowningTicks = 9; }],
   ["acceptance flag", (r) => { (r.report.acceptance as Record<string, boolean>).pass = false; }],
+  ["scheduler config", (r) => { (r.report.config as { scheduler: Record<string, unknown> }).scheduler.reflexCooldownTicks = 151; }],
+  ["zero-tariff price config", (r) => { (r.report.config as { price: Record<string, unknown> }).price.promptPerMTok = 1; }],
 ];
 for (const [name, fn] of safetyCases) {
   test(`real safety divergence fails loudly: ${name}`, () => {
@@ -143,4 +150,16 @@ test("purely ambient verb-offer multiplicity is classified harmless, still fails
   assert.equal(v.harmlessAmbientOnly, true, "classified as the sole harmless difference");
   assert.equal(v.pass, false, "strict oracle still fails (exact equality required)");
   assert.deepEqual((v.ambientVerbDelta as Record<string, { live: number; replay: number }>).talk, { live: 2, replay: 3 });
+});
+
+test("gzip-preserved evidence returns the exact original bytes", () => {
+  const dir = mkdtempSync(join(tmpdir(), "replay-oracle-gzip-"));
+  try {
+    const original = Buffer.from('{"tick":0,"verbs":["walk"]}\n', "utf8");
+    const path = join(dir, "observations.jsonl");
+    writeFileSync(`${path}.gz`, gzipSync(original));
+    assert.deepEqual(readEvidenceBytes(path), original);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
 });

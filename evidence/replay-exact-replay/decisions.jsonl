@@ -1,0 +1,6 @@
+{"attemptId":"amwwhc5u9-001-w4f","verb":null,"answer":"Till a plot [256,291]","tick":0,"hour":8,"thirst":80,"hp":40,"outcome":null}
+{"attemptId":"amwwhom5a-002-qfk","verb":null,"answer":"Walk to the water’s edge (252, 302)","tick":5250,"hour":22.583333333331403,"thirst":9.999999999994122,"hp":40,"outcome":null}
+{"attemptId":"amwwhoyyz-003-1","verb":"drink","answer":"Drink from the water (251, 302)","tick":5400,"hour":22.99999999999787,"thirst":7.999999999994076,"hp":40,"outcome":null}
+{"attemptId":"amwwhqua0-004-13hq","verb":"drink","answer":"Drink from the water (251, 302)","tick":6188,"hour":25.1888888888857,"thirst":37.493333333325765,"hp":40,"outcome":null}
+{"attemptId":"amwwhr71h-005-vub","verb":"eat","answer":"Eat Cabbage from pack","tick":6338,"hour":25.605555555552165,"thirst":75.49333333332545,"hp":40,"outcome":null}
+{"attemptId":"amwwhvqfy-006-abi","verb":"drink","answer":"Drink from the water (251, 302)","tick":8251,"hour":30.919444444438486,"thirst":49.9866666666548,"hp":40,"outcome":null}

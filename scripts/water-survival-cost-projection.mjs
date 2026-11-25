@@ -9,7 +9,7 @@
  *     [--phase36-report <path>] [--phase36-raw <path>] [--water-report <path>] \
  *     [--out evidence/water-survival-replay-check]
  */
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { resolve } from "node:path";
 
 const arg = (f, d) => { const i = process.argv.indexOf(f); return i >= 0 && process.argv[i + 1] ? process.argv[i + 1] : d; };

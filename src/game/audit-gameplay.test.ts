@@ -335,6 +335,7 @@ for (const { spell, effect } of HARMFUL) {
     }
     const wolf = creature("wolf", 60, 30);
     world.fauna.push(wolf);
+    const initialDistance = Math.hypot(wolf.x - player.x, wolf.z - player.z);
     assert.equal(commandCast(world, spell, { kind: "fauna", id: wolf.id }), null);
 
     withRandom(0.5, () => {
@@ -352,10 +353,13 @@ for (const { spell, effect } of HARMFUL) {
     });
     assert.equal(world.player.intent.kind, "none", `the cast completes (${ticks} ticks)`);
     assert.ok(effect(world, wolf), `${spell} took effect on the target`);
-    assert.ok(
-      Math.hypot(player.x - 30, player.z - 30) > 10,
-      `the caster truly closed ground (${Math.hypot(player.x - 30, player.z - 30).toFixed(2)} tiles)`,
-    );
+    // Ambient targets may move during the approach; a fixed player-displacement
+    // threshold incorrectly assumes a stationary target. Prove both actual caster
+    // movement and relative range closure instead of pinning the old random path.
+    const displacement = Math.hypot(player.x - 30, player.z - 30);
+    const finalDistance = Math.hypot(wolf.x - player.x, wolf.z - player.z);
+    assert.ok(displacement > 0, `the caster moved toward the cast (${displacement.toFixed(2)} tiles)`);
+    assert.ok(finalDistance < initialDistance, `the caster closed range (${initialDistance.toFixed(2)} -> ${finalDistance.toFixed(2)} tiles)`);
   });
 }
 

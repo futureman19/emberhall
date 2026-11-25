@@ -1,4 +1,3 @@
-// @ts-nocheck — plain-JS oracle utility shared by .mjs scripts and the .ts test.
 // Reusable strict replay oracle (t_5465ed80).
 //
 // compareRuns() is the field-by-field safety comparison shared by the CLI
@@ -18,7 +17,18 @@
 //    is the sole harmless difference. It is reported separately so a strict
 //    traceHash mismatch can be attributed precisely to ambient multiplicity
 //    rather than silently blessed.
+import { readFileSync, existsSync } from "node:fs";
+import { gunzipSync } from "node:zlib";
 import { canonicalObservation, canonicalDecisionFromRecord, traceHash, TRACE_HASH_BASIS } from "./replay-trace.mjs";
+
+/** Read raw evidence or its losslessly gzipped preservation; hashes still cover original bytes.
+ * @param {string} path
+ */
+export function readEvidenceBytes(path) {
+  if (existsSync(path)) return readFileSync(path);
+  if (existsSync(`${path}.gz`)) return gunzipSync(readFileSync(`${path}.gz`));
+  return readFileSync(path);
+}
 
 const VITALS = ["hp", "hunger", "thirst", "energy", "x", "z", "inWater", "drowning", "ghost"];
 // waterExposure fields that are SAFETY-relevant (must match exactly). The
@@ -31,27 +41,42 @@ const SAFETY_EXPOSURE = [
   "eatDecisions", "eatAckedOk", "nightObservations", "observationCount",
 ];
 const STRICT_CHECK = "STRICT traceHash live == replay (exact oracle)";
+/** @param {any} v */
+const verbName = (v) => (typeof v === "string" ? v : v.verb);
 
-/** Recompute the strict trace hash from raw observation rows + decision records. */
+/** Recompute the strict trace hash from raw observation rows + decision records.
+ * @param {any[]} obsRows
+ * @param {any[]} decisionRecords
+ */
 export function recomputeHash(obsRows, decisionRecords) {
   return traceHash(obsRows.map(canonicalObservation), decisionRecords.map(canonicalDecisionFromRecord));
 }
 
 /** Resolve decision records: prefer raw/decisions.jsonl rows, fall back to the
- *  report's compact rows (which carry the exact canonical fields). */
+ *  report's compact rows (which carry the exact canonical fields).
+ * @param {any[] | null} rawRows
+ * @param {any} report
+ */
 export function resolveDecisionRows(rawRows, report) {
   if (Array.isArray(rawRows) && rawRows.length) return rawRows;
   return report.decisions ?? [];
 }
 
+/**
+ * @param {{live:any,replay:any,liveObs:any[],replayObs:any[],liveDec:any[],replayDec:any[]}} input
+ */
 export function compareRuns({ live, replay, liveObs, replayObs, liveDec, replayDec }) {
+  /** @type {Array<{name:string,ok:boolean,detail:any,hard:boolean}>} */
   const checks = [];
+  /** @type {(name:string,ok:any,detail?:any,hard?:boolean)=>any} */
   const check = (name, ok, detail, hard = true) => { checks.push({ name, ok: !!ok, detail, hard }); return ok; };
 
   // --- identity -------------------------------------------------------------
   check("same seed", live.initialConditions?.seed === replay.initialConditions?.seed,
     { live: live.initialConditions?.seed, replay: replay.initialConditions?.seed });
   check("same scenario", live.scenario === replay.scenario, { live: live.scenario, replay: replay.scenario });
+  check("scheduler config identical", JSON.stringify(live.config?.scheduler) === JSON.stringify(replay.config?.scheduler));
+  check("zero-tariff price config identical", JSON.stringify(live.config?.price) === JSON.stringify(replay.config?.price));
 
   // --- observation counts ---------------------------------------------------
   check("observation count live == replay", liveObs.length === replayObs.length, { live: liveObs.length, replay: replayObs.length });
@@ -73,8 +98,8 @@ export function compareRuns({ live, replay, liveObs, replayObs, liveDec, replayD
         vitalsMismatch++; firstMismatch ??= { i, tick: a.tick, key: k, live: a.you?.[k], replay: b.you?.[k] };
       }
     }
-    const av = (a.verbs ?? []).map((v) => (typeof v === "string" ? v : v.verb)).slice().sort();
-    const bv = (b.verbs ?? []).map((v) => (typeof v === "string" ? v : v.verb)).slice().sort();
+    const av = (a.verbs ?? []).map(verbName).slice().sort();
+    const bv = (b.verbs ?? []).map(verbName).slice().sort();
     if (av.join(",") !== bv.join(",")) verbMultiplicityMismatch++;
   }
   check("vitals/position/water/day-night trajectory identical", vitalsMismatch === 0 && nightMismatch === 0,
@@ -124,6 +149,7 @@ export function compareRuns({ live, replay, liveObs, replayObs, liveDec, replayD
 
   // --- classified ambient multiplicity (NON-hard) ---------------------------
   const lv = le.verbsOffered ?? {}, rv = re.verbsOffered ?? {};
+  /** @type {Record<string,{live:any,replay:any}>} */
   const ambientVerbDelta = {};
   for (const verb of new Set([...Object.keys(lv), ...Object.keys(rv)])) {
     if ((lv[verb] ?? 0) !== (rv[verb] ?? 0)) ambientVerbDelta[verb] = { live: lv[verb] ?? 0, replay: rv[verb] ?? 0 };

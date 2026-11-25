@@ -115,6 +115,29 @@ per fresh shard boot and is not deterministic even at identical seed. This is re
 limitation of strict trace-hash equality, **not** a survival divergence and **not** folded into a
 false "exact match" claim. Wall-clock fields and agent/attempt ids are expected to differ.
 
+### 3c. Follow-up determinism repair — exact replay now PASS (`t_5465ed80`)
+
+The historical limitation above was reproduced before repair: all 46 survival-grounded checks matched,
+but the strict hash differed through ambient offer multiplicity. The repair derives ambient movement
+from stable per-tick/per-entity RNG keys and scopes fallback entity-ID allocation to each world so
+previously created worlds in the same process cannot perturb later IDs. Rollback, save/load, wildcard
+RNG, and legacy-save migration tests cover these paths.
+
+The controller then executed two fresh independent full-day runs of the repaired candidate on isolated
+ports and shard data. Both recorded 8,642 observations, six decisions/attempts, three acknowledged
+drinks, one acknowledged eat, and zero rejections/interventions/errors. Both acceptance reports passed.
+Their strict hashes are identical:
+`9699cf7d16358569a9081e61e974cec1f5f3a592aa9c8d1c1db900f232311ee3`.
+The fresh oracle verdict is `evidence/replay-exact-check/verdict.json`: **23/23 hard checks and 24/24
+total checks PASS**, with `strictExact=true`, `safetyIdentical=true`, and `harmlessAmbientOnly=false`.
+Scheduler and zero-tariff price configuration are hard-checked in addition to the original safety fields.
+
+All raw observations, decisions, attempts, trace events, and shard state are preserved losslessly as
+gzip with original-byte and stored-byte SHA-256 manifests; the oracle reads the compressed evidence and
+recomputes the same strict hash. See `evidence/replay-exact-check/README.md` for commands and integrity
+details. This follow-up does not relabel the historical pre-fix runs as exact and made no paid calls,
+credential changes, push, or deployment.
+
 ---
 
 ## 4. Cost-projection refresh (traceable)

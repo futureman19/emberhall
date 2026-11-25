@@ -24,7 +24,7 @@
 // multiplicity). Fresh runs on the determinism fix should match exactly.
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
-import { compareRuns, resolveDecisionRows } from "./lib/replay-oracle.mjs";
+import { compareRuns, resolveDecisionRows, readEvidenceBytes } from "./lib/replay-oracle.mjs";
 import { TRACE_HASH_BASIS } from "./lib/replay-trace.mjs";
 
 const argv = process.argv.slice(2);
@@ -36,12 +36,12 @@ const liveDir = arg("live", "evidence/water-survival-live");
 const replayDir = arg("replay", "evidence/water-survival-replay");
 const outPath = arg("out", "evidence/water-survival-replay-check/verdict.json");
 
-const readJsonl = (p) => readFileSync(p, "utf8").trim().split("\n").filter(Boolean).map((l) => JSON.parse(l));
+const readJsonl = (p) => readEvidenceBytes(p).toString("utf8").trim().split("\n").filter(Boolean).map((l) => JSON.parse(l));
 function load(dir) {
   const report = JSON.parse(readFileSync(join(dir, "report.json"), "utf8"));
   const obs = readJsonl(join(dir, "raw", "observations.jsonl"));
   const decPath = join(dir, "raw", "decisions.jsonl");
-  const rawDec = existsSync(decPath) ? readJsonl(decPath) : null;
+  const rawDec = existsSync(decPath) || existsSync(`${decPath}.gz`) ? readJsonl(decPath) : null;
   return { report, obs, dec: resolveDecisionRows(rawDec, report) };
 }
 const L = load(liveDir), R = load(replayDir);

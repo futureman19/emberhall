@@ -1,0 +1,70 @@
+{
+  "schema": "emberhall-replay-evidence-preservation-v1",
+  "lossless": true,
+  "hashBasis": "originalSha256 covers uncompressed bytes; gzipSha256 covers stored bytes",
+  "files": [
+    {
+      "path": "raw/attempts.ndjson.gz",
+      "originalPath": "raw/attempts.ndjson",
+      "encoding": "gzip",
+      "originalBytes": 57875,
+      "originalSha256": "c0189b41017a83afcc44b5d9b05c6c2f7b3885f50cac94b179f67bb76f06dad8",
+      "gzipBytes": 5529,
+      "gzipSha256": "68aa4f7d93c90c024b7371674723aed39500974ea59d9d887b9f068cbfc4ec6e"
+    },
+    {
+      "path": "raw/feed.ndjson.gz",
+      "originalPath": "raw/feed.ndjson",
+      "encoding": "gzip",
+      "originalBytes": 554,
+      "originalSha256": "195ce120fab7847908e8279d8a24377a596005b5329275ccfa4719dc9b54a452",
+      "gzipBytes": 232,
+      "gzipSha256": "4e7099e06cad711c33fb946b4788ebb128feedc03ce0bc2d4543545feb85cacb"
+    },
+    {
+      "path": "raw/observations.jsonl.gz",
+      "originalPath": "raw/observations.jsonl",
+      "encoding": "gzip",
+      "originalBytes": 29908373,
+      "originalSha256": "a520b6c9a695c3825c7ccf6ae68778788133070b4cfab620da7f4acec5a9f20c",
+      "gzipBytes": 518476,
+      "gzipSha256": "6fc0d6ff79d09bcabf47967e6604361a3b59768f19841210d75430cb9a74dc19"
+    },
+    {
+      "path": "raw/shard-data/characters.json.gz",
+      "originalPath": "raw/shard-data/characters.json",
+      "encoding": "gzip",
+      "originalBytes": 132,
+      "originalSha256": "349c4065a544ea9169daeb3a3fe2f035d93d6ce13f39c2d0e1d7cfeb4fdd1d2d",
+      "gzipBytes": 133,
+      "gzipSha256": "fbb78a410f6fa0da727c7605ae263a06f2b9062a2248e3066478e10ae56b3104"
+    },
+    {
+      "path": "raw/shard-data/shard-save.json.gz",
+      "originalPath": "raw/shard-data/shard-save.json",
+      "encoding": "gzip",
+      "originalBytes": 65830,
+      "originalSha256": "fd36f75785903448d51085a13f811cf2d6a011418e01b56c7e9eee41957e123b",
+      "gzipBytes": 11383,
+      "gzipSha256": "6cd0ece3a216cde11da1bd10ca1cc90c88fee177f84f582ab86c9960f2a46482"
+    },
+    {
+      "path": "raw/shard.log.gz",
+      "originalPath": "raw/shard.log",
+      "encoding": "gzip",
+      "originalBytes": 841,
+      "originalSha256": "0ad5acb7777c2b563ad46993b988917df25e89e75e216e39a5db484b946c0dd7",
+      "gzipBytes": 219,
+      "gzipSha256": "fa3351ce4879acf795c1c1bba1fffb2962f5b38fb4cc0009cad18cccec7249e9"
+    },
+    {
+      "path": "raw/trace.jsonl.gz",
+      "originalPath": "raw/trace.jsonl",
+      "encoding": "gzip",
+      "originalBytes": 196352560,
+      "originalSha256": "cb3f8515c6babdb04be4e4c2c3907db8592973eb0c63073eb09e7d9480a1a5d7",
+      "gzipBytes": 2949655,
+      "gzipSha256": "0dd19fe340fc8a56976933920e5d51c640d58cb343dca024cc04e45ae425683a"
+    }
+  ]
+}
